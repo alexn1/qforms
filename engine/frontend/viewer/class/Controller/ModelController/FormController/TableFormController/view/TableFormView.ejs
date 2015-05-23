@@ -1,0 +1,32 @@
+<div id="<%=model.page.id%>_<%=model.name%>" class="TableFormView full flex-rows">
+    <div class="flex-min">
+        <% if (model.data.newRowMode !== "disabled") {%>
+        <button class="btn btn-default btn-xs new">Создать</button>
+        <% } %>
+        <% if (model.data.deleteRowMode !== "disabled") {%>
+        <button class="btn btn-default btn-xs delete">Удалить</button>
+        <% } %>
+    </div>
+    <div id="<%=model.page.id%>_<%=model.name%>_GridWidget" class="GridWidget flex-max">
+        <div class="head">
+            <table>
+                <tr>
+                    <% for (var fieldName in model.data.fields) {
+                        var field = model.data.fields[fieldName];
+                        if (field.isVisible === "false") {
+                            continue;
+                        }
+                        var width = (field.width === "0") ? 100 : parseInt(field.width);
+                    %>
+                        <td data-column-name="<%=field.name%>" style="width:<%=width%>px;">
+                            <div><%=field.caption%></div>
+                            <span class="resize"></span>
+                        </td>
+                    <% } %>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="block"></div>
+    </div>
+</div>

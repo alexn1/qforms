@@ -1,0 +1,29 @@
+<div class="TableView">
+    <table>
+        <thead>
+            <th>COLUMN_NAME</th>
+            <th>COLUMN_TYPE</th>
+            <th>IS_NULLABLE</th>
+            <th>COLUMN_KEY</th>
+            <th>COLUMN_DEFAULT</th>
+            <th>EXTRA</th>
+            <th>COLUMN_COMMENT</th>
+        </thead>
+        <tbody>
+            <%for (var i=0;i < desc.length;i++) {
+                var row = desc[i];%>
+                <tr>
+                    <td><%=row["COLUMN_NAME"]%></td>
+                    <td><%=row["COLUMN_TYPE"]%></td>
+                    <td><%=row["IS_NULLABLE"]%></td>
+                    <td><%=row["COLUMN_KEY"]%></td>
+                    <td><%=row["COLUMN_DEFAULT"]%></td>
+                    <td><%=row["EXTRA"]%></td>
+                    <td><%=row["COLUMN_COMMENT"]%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+    <br>
+    <button class="btnCreateForm">Create Form</button>
+</div>

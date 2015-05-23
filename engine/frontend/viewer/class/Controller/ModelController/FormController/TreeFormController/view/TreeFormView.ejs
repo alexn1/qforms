@@ -1,0 +1,11 @@
+<div id="<%=model.page.id%>_<%=model.name%>" class="TreeFormView full flex-rows">
+    <div class="flex-min">
+        <button class="btn btn-default btn-xs newRoot">Создать в корне</button>
+        <button class="btn btn-default btn-xs new">Создать</button>
+        <button class="btn btn-default btn-xs delete">Удалить</button>
+    </div>
+    <div id="<%=model.page.id%>_<%=model.name%>_TreeWidget" class="TreeWidget flex-max" style="border:1px solid gray;box-sizing:border-box;">
+        <ul>
+        </ul>
+    </div>
+</div>

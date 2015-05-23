@@ -1,0 +1,8 @@
+"use strict"
+
+QForms.inherit(ImageField,Field);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function ImageField(name,form,data) {
+    Field.call(this,name,form,data);
+}

@@ -1,0 +1,13 @@
+"use strict"
+
+QForms.inherit(RefillDataSourceAction,Action);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function RefillDataSourceAction(parent,data) {
+    Action.call(this,parent,data);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+RefillDataSourceAction.prototype.exec = function(args,context) {
+    context.form.dataSources[this.data.dataSourceName].refill(context.form.page.params);
+}

@@ -1,0 +1,7 @@
+.RowFormTextBoxFieldView > input {
+  width: 100%;
+}
+.RowFormTextBoxFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  border-width: 1px;
+}

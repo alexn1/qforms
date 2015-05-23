@@ -1,0 +1,7 @@
+.RowFormTextAreaFieldView > textarea {
+  width: 100%;
+}
+.RowFormTextAreaFieldView > textarea[readonly] {
+  background-color: lightgoldenrodyellow;
+  border-width: 1px;
+}

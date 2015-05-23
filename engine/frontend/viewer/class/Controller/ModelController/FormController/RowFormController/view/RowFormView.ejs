@@ -1,0 +1,33 @@
+<div id="<%=model.page.id%>_<%=model.name%>" class="RowFormView">
+    <table>
+        <tbody>
+            <% for (var fieldName in model.fields) {
+                var field = model.fields[fieldName];
+                if (field.data.isVisible === "false") continue;
+                %>
+                <tr>
+                    <td>
+                        <div>
+                            <% echo(field.data.caption);
+                            if (field.data.notNull === "true") {
+                                %><span style='color:red;'>*</span><%
+                            } %>
+                        </div>
+                    </td>
+                    <td><%=QForms.render(field.data.view,{model:field})%></td>
+                </tr>
+            <% } %>
+            <% for (var name in model.controls) {
+                var control = model.controls[name];
+                if (control.data.isVisible === "false") {
+                    continue;
+                }
+            %>
+            <tr>
+                <td></td>
+                <td><%=QForms.render(control.data.view,{model:control})%></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,174 @@
+"use strict"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function Application(data) {
+    this.data              = data;
+    this.dataSources       = {};
+    this.tables            = {};       // таблицы для взаимоуведомлений об обновлении
+    this.pages             = {};        // открытые страницы, чтобы не открывтаь новую, когда страница с таким ключём уже открыта
+    this.lastPageId        = 0;
+    this.eventPageOpened   = new QForms.Event(this);// когда страница создаётся
+    this.eventPageClosed   = new QForms.Event(this);// когда страница закрыта
+    this.eventPageSelected = new QForms.Event(this);// когда нужно показать уже открытую страницу
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.init = function() {
+    // dataSources
+    for (var dsName in this.data.dataSources) {
+        this.dataSources[dsName] = new DataSource(dsName,this,this.data.dataSources[dsName]);
+        this.dataSources[dsName].init();
+    }
+    // pages
+    for (var name in this.data.pages) {
+        this.lastPageId++;
+        var page = new Page({
+            app:this,
+            data:this.data.pages[name]
+        });
+
+        page.init();
+        page.id = "p" + this.lastPageId;
+        // сообщаем подписчикам (view), что открыта страница
+        var e = new QForms.EventArg(this);
+        e.page = page;
+        e.track = false;
+        e.select = false;
+        this.eventPageOpened.fire(e);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.deinit = function() {
+    for (var name in this.dataSources) this.dataSources[name].deinit();
+    // TODO: добавить деинициализацию открытых страниц
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.subDsToTableUpdated = function(dataSource) {
+    if (!(dataSource.fullTableName in this.tables)) {
+        this.tables[dataSource.fullTableName] = new qfTable(dataSource.fullTableName);
+    }
+    this.tables[dataSource.fullTableName].eventUpdated.subscribe(dataSource,"onTableUpdated");
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.unsubDsFromTableUpdated = function(dataSource) {
+    this.tables[dataSource.fullTableName].eventUpdated.unsubscribe(dataSource,"onTableUpdated");
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.openPage = function(args) {
+    var name       = args.name;
+    var newMode    = (args.newMode === undefined) ? false : args.newMode;
+    var key        = args.key;
+    var parentPage = args.parentPage;
+    var params     = (params === undefined) ? {} : params;
+    //console.log("open " + name + " with key: " + key);
+    if (key !== undefined) {
+        var keyParams = QForms.keyToParams(key);
+        for (var keyName in keyParams) {
+            params[keyName] = keyParams[keyName];
+        }
+    }
+    // если такая страница с таким же ключём уже открыта, то показываем её
+    var page = this.getPage(name,key);
+    if (page !== null) {
+        // eventPageSelected
+        var ea = new QForms.EventArg(this);
+        ea.page = page;
+        this.eventPageSelected.fire(ea);
+    } else {
+        // если страницы нет, то создаём
+        var args = {
+            "action":"page",
+            "page":name,
+            "newMode":newMode,
+            "params":params
+        };
+        QForms.doHttpRequest(this,args,function(response) {
+            this.lastPageId++;
+            var page = new Page({
+                app:this,
+                data:response.data,
+                key:key,
+                newMode:newMode,
+                parentPage:parentPage,
+                params:params
+            });
+            page.init();
+            page.id = "p" + this.lastPageId;
+            // сообщаем подписчикам (view), что открыта страница
+            var ea = new QForms.EventArg(this);
+            ea.page = page;
+            ea.track = parentPage !== undefined;
+            ea.select = true;
+            this.eventPageOpened.fire(ea);
+        });
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.saveAndClosePage = function(page) {
+    page.deinit();
+    page.save();	// сохраняем после деинициализации, чтобы не получать события обновления
+    // eventPageClosed
+    var ea = new QForms.EventArg(this);
+    ea.page = page;
+    this.eventPageClosed.fire(ea);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.closePage = function(page) {
+    page.deinit();
+    // eventPageClosed
+    var ea = new QForms.EventArg(this);
+    ea.page = page;
+    this.eventPageClosed.fire(ea);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.trackPage = function(page) {
+    var pageName = page.name;
+    var pageKey = page.key;
+    //console.log("trackPage: ");console.log(page);
+    if (pageKey === undefined) {
+        pageKey = "";
+    }
+    if (this.pages[pageName] === undefined) {
+        this.pages[pageName] = {};
+    }
+    this.pages[pageName][pageKey] = page;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.untrackPage = function(page) {
+    //console.log("untrackPage: ");console.log(page);
+    var found = false;
+    for (var name in this.pages) {
+        for (var key in this.pages[name]) {
+            if (this.pages[name][key] === page) {
+                delete this.pages[name][key];
+                found = true;
+                break;
+            }
+        }
+        if (found) break;
+    }
+
+    // если страницу открыли и не сохраняли, значит её тут не должно быть
+    if (page.newMode && page.key === undefined) {
+    } else {
+        if (!found) throw new Error("страницы в списке нет");
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.getPage = function(pageName,pageKey) {
+    if (pageKey === undefined) pageKey = "";
+    if (this.pages[pageName] !== undefined && this.pages[pageName][pageKey] !== undefined) {
+        return this.pages[pageName][pageKey];
+    } else {
+        return null;
+    }
+}

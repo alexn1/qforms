@@ -1,0 +1,70 @@
+@activeColor: rgb(57,139,206);
+
+.TabWidget {
+    display: flex;
+    flex-direction: column;
+    /*background-color: lightcoral;*/
+    > ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        float:left;
+        width: 100%;
+        flex-shrink: 0;
+        > li {
+            float:left;
+            background-color: #eee;
+            margin-right: 1px;
+            /*border-radius: 3px 3px 0 0;*/
+            padding:5px 10px 0px 10px;
+            cursor: pointer;
+            > span {
+                display:inline-block;
+                max-width:200px;
+                overflow:hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -moz-user-select:none;
+            }
+            > span.close {
+                margin-left:10px;
+            }
+        }
+        > li.active {
+            background-color: white;
+        }
+    }
+    > div {
+        clear:left;                 // для тех, кто не поддерживает flexbox
+        flex:auto;
+        position: relative;         // чтобы работало в chrome
+        > div {
+            display: none;
+            height: 100%;
+            width: 100%;            // чтобы работало в chrome
+            position: absolute;     // чтобы работало в chrome
+            /*background: lightblue;*/
+        }
+        > div.active {
+            display: block;
+        }
+    }
+}
+
+.TabWidget.TabWidget-blue > ul {
+    > li {
+        border-radius: 3px 3px 0 0;
+    }
+    > li.active {
+        background-color: @activeColor;
+        > span {
+            color:white;
+        }
+    }
+}
+.TabWidget.TabWidget-blue > div {
+    > div {
+        box-sizing: border-box;
+        border-top: 3px solid @activeColor;
+    }
+}

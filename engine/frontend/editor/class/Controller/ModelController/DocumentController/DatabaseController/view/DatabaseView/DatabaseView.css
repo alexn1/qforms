@@ -1,0 +1,12 @@
+.DatabaseView {
+  height: 100%;
+  background-color: white;
+}
+.DatabaseView .tcTables {
+  background-color: lightgoldenrodyellow;
+  position: absolute;
+  width: 200px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}

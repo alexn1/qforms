@@ -1,0 +1,73 @@
+{
+    "@class": "Application",
+    "@attributes": {
+        "formatVer": "0.1",
+        "name": "application1",
+        "caption": "application1"
+    },
+    "databases": {
+        "default": {
+            "@class": "Database",
+            "@attributes": {
+                "name": "default"
+            },
+            "params": {
+                "connectionString": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "connectionString",
+                        "value": "mysql:host=localhost;dbname=samples;charset=utf8;"
+                    }
+                },
+                "host": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "localhost"
+                    }
+                },
+                "database": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "samples"
+                    }
+                },
+                "user": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "samples"
+                    }
+                },
+                "password": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "123qwe"
+                    }
+                }
+            }
+        }
+    },
+    "pageLinks": {
+        "employees": {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "employees",
+                "fileName": "employees/employees.json",
+                "menu": "Menu",
+                "startup": "true"
+            }
+        },
+        "employee": {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "employee",
+                "fileName": "employee/employee.json",
+                "menu": "",
+                "startup": "false"
+            }
+        }
+    }
+}

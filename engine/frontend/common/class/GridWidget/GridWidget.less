@@ -1,0 +1,121 @@
+@headHeight: 24px;
+@bodyHeight: 22px;
+@headBackgroundColor: rgb(124,124,139);
+@trSelBackgroundColor: rgb(200,226,254);
+@tdSelBackgroundColor: rgb(66,139,202);
+@trEvenBackgroundColor: rgb(243,246,250);
+
+.GridWidget {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    min-height: 100px;
+    position: relative;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: @headBackgroundColor;
+    border-width: 0 1px 1px 1px;
+    background-color: white;
+    -moz-user-select: none;
+    -webkit-user-select:none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor:default;
+    table {
+        width: 100%;
+        border-spacing:0;
+        border-collapse: collapse;
+        table-layout: fixed;
+        tr {
+            td {
+                padding:0;
+                cursor: default;
+                &:not(:last-child) {
+                    border-right: solid 1px white !important;
+                }
+                > div {
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+    > .head {
+        width:100%;
+        position: absolute;
+        top:0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        tr {
+            height: @headHeight;
+            td {
+                background-color: @headBackgroundColor;
+                color:white;
+                position: relative;
+                background-clip: padding-box; /* prevent hiding border when position: relative */
+                > div {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+                > span.resize {
+                    position: absolute;
+                    top:0;
+                    right: -4px;
+                    width: 7px;
+                    height: 100%;
+                    background-color: transparent;
+                    cursor: w-resize;
+                    z-index: 1000;
+                }
+            }
+        }
+    } // > .head {
+    > .body {
+        width: 100%;
+        position: absolute;
+        top: @headHeight;
+        bottom: 0;
+        overflow-y: scroll;
+        overflow-x: auto;
+        tr {
+            height: @bodyHeight;
+            &.active {
+                background-color: @trSelBackgroundColor !important;
+            }
+            &:nth-child(even) {
+                background-color: @trEvenBackgroundColor;
+            }
+            > td {
+                &.active {
+                    background-color: @tdSelBackgroundColor;
+                    > div {
+                        color:white !important;
+                        background-color: @tdSelBackgroundColor !important;
+                        > a {
+                            color:white;
+                        }
+                        > select {
+                            color:black;
+                        }
+                    }
+                }
+                &.edit {
+                    color:inherit;
+                    cursor:text;
+                    background-color: lightgreen;
+                }
+            }
+        }
+    } // > .body {
+    > .block {
+        position: absolute;
+        top:0;
+        right:0;
+        width:16px;
+        height: @headHeight;
+        background-color: @headBackgroundColor;
+        box-sizing: border-box;
+    }
+} // .GridWidget {
+

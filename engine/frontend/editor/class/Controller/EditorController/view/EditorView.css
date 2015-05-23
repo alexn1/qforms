@@ -1,0 +1,43 @@
+body {
+  font-size: small;
+  margin: 0;
+}
+#sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 350px;
+}
+#sidebar #tree-pad {
+  height: 50%;
+}
+#sidebar #tree-pad #tree-bar {
+  padding: 5px;
+  background-color: #f5f5f5;
+}
+#sidebar #tree-pad #tree .active .green {
+  color: white;
+}
+#sidebar #tree-pad #tree .green {
+  color: green;
+}
+#sidebar #tree-pad #tree .blue {
+  color: blue;
+}
+#sidebar #tree-pad #tree .active .blue {
+  color: white;
+}
+#sidebar #propsTab {
+  height: 50%;
+}
+#client {
+  position: fixed;
+  top: 0;
+  left: 350px;
+  right: 0;
+  bottom: 0;
+  background-color: #d3d3d3;
+}
+#client .cm-container > div {
+  height: 100%;
+}

@@ -1,0 +1,41 @@
+body {
+    font-size: small;
+    margin: 0;
+}
+
+#sidebar {
+    position:fixed;
+    top:0;
+    bottom: 0;
+    width: 350px;
+    #tree-pad {
+        height: 50%;
+        #tree-bar {
+            padding: 5px;
+            background-color: rgb(245,245,245);
+        }
+        #tree {
+            .active .green {color:white;}
+            .green {color:green;}
+            .blue {color:blue;}
+            .active .blue  {color:white;}
+        }
+    }
+    #propsTab {
+        height: 50%;
+    }
+}
+
+#client {
+    position: fixed;
+    top:0;
+    left:350px;
+    right: 0;
+    bottom: 0;
+    background-color: #d3d3d3;
+  .cm-container {
+    > div {
+      height: 100%;
+    }
+  }
+}

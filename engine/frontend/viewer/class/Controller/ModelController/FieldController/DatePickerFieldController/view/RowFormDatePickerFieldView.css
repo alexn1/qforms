@@ -1,0 +1,7 @@
+.RowFormDatePickerFieldView > input {
+  width: 100%;
+}
+.RowFormDatePickerFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  border-width: 1px;
+}
