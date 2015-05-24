@@ -1,8 +1,8 @@
-"use strict"
+'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.EventArg = function(source) {
-    this.source = source;// объект, который посылает уведомление
-    this.object = null; // объект, чье событие вызывали
-    this.inner = null;  // событие, которое привело к возникновению этого
-}
+    this.source = source;// object that emit event
+    this.object = null; // object - owner of event
+    this.inner = null;  // inner event
+};

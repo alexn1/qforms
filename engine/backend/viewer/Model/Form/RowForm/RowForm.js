@@ -1,13 +1,14 @@
-"use strict"
+'use strict';
+
+module.exports = RowForm;
 
 var util = require('util');
 var path = require('path');
+
 var Form = require('../Form');
-var app = require('../../../../qforms');
+var app  = require('../../../../qforms');
 
 util.inherits(RowForm, Form);
-
-module.exports = RowForm;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function RowForm(data, parent) {

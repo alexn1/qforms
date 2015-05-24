@@ -7,7 +7,7 @@ function DataTreeWidget(el,controller) {
     TreeWidget.call(this,el);
     this.controller = controller;
     this.dataSource = null;
-    this.keyToItem = {};		// чтобы по ключу найти элемент дерева
+    this.keyToItem = {};		// to fast item search by key
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,14 +43,14 @@ DataTreeWidget.prototype.fill = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataTreeWidget.prototype.addRow = function(parent,row,i) {
-    // добавляем строку
+    // adding row
     var caption = this.makeRowCaption(row);
     var item = parent.addItem(caption,undefined,i);
     item.qRow = row;
-    // записываем, чтобы её можно было найти по ключу
+    // save to be able to find by key
     var key = this.dataSource.getRowKey(row);
     this.keyToItem[key] = item;
-    // добавляем дочерние строки
+    // adding child rows
     var rows = this.dataSource.getRows(key);
     for (var i=0;i< rows.length;i++) {
         this.addRow(item,rows[i]);

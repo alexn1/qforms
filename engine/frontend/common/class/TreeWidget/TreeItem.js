@@ -144,9 +144,9 @@ TreeItem.prototype.remove = function(item) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.changeParent = function(newParent,newIndex) {
-    this.parent.ul.removeChild(this.li);				// удаляем себя из списка старого родителя
+    this.parent.ul.removeChild(this.li);				// removing themselves from list of old parent
     if (this.parent.node && this.parent.ul.childElementCount === 0) this.parent.node.className = "leaf";
-    QForms.insertNewNodeAt(newParent.ul,this.li,newIndex);	// добавляемся к новому родителю под указанным индексом
+    QForms.insertNewNodeAt(newParent.ul,this.li,newIndex);	// adding to new parent with specified index
     if (newParent.node) newParent.node.className = "node";
     this.parent = newParent;
     this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + "px";

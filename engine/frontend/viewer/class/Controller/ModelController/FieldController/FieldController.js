@@ -6,8 +6,8 @@ QForms.inherit(FieldController,ModelController);
 function FieldController(model,parent) {
     ModelController.call(this,model);
     this.parent = parent;
-    this.html = null;
-    this.views = {};    // список всех view которые которые контролирует это поле
+    this.html   = null;
+    this.views  = {};    // list of all views that controlled by this field
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

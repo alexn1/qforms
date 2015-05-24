@@ -1,11 +1,14 @@
-"use strict"
+'use strict';
+
+module.exports = DatePickerField;
 
 var util = require('util');
 var path = require('path');
+
 var Field = require('../Field');
-var app = require('../../../../qforms');
+var app   = require('../../../../qforms');
+
 util.inherits(DatePickerField, Field);
-module.exports = DatePickerField;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DatePickerField(data, parent) {

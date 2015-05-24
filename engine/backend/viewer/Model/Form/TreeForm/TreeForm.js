@@ -1,9 +1,13 @@
-"use strict"
+'use strict';
+
 module.exports = TreeForm;
+
 var util = require('util');
 var path = require('path');
+
 var Form = require('../Form');
-var app = require('../../../../qforms');
+var app  = require('../../../../qforms');
+
 util.inherits(TreeForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

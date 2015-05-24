@@ -99,7 +99,7 @@ TreeWidget.prototype.removeItem = function(item) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// рекурсивно открывает все родительские элементы
+// recursively opens all the parent elements
 TreeWidget.prototype.makeOpened = function(item) {
     if (item.parent instanceof TreeItem) {
         item.parent.open();

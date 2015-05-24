@@ -89,7 +89,7 @@ Form.prototype.onDataSourceUpdated = function(eventArgs) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.update = function() {
     var self = this;
-    // при создании новой строки, устанавливаем её ключ странице если она еще открыта
+    // during new row creation, set row key to page if is not opened yet
     this.dataSources["default"].update(function(newKey) {
         if (!self.page.deinited) self.page.setKey(newKey);
     });

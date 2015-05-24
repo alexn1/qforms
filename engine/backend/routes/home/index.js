@@ -3,8 +3,8 @@
 var path = require('path');
 var fs   = require('fs');
 
-var qforms = require('../../qforms');
-var helper = require('../../common/helper');
+var qforms          = require('../../qforms');
+var helper          = require('../../common/helper');
 var ApplicationFile = require('../../editor/JsonFile/ApplicationFile/ApplicationFile');
 
 qforms.set('home_class_css', helper.getFilePathsSync(path.join(qforms.get('public')), 'home/class', 'css'));
@@ -12,7 +12,6 @@ qforms.set('home_class_js' , helper.getFilePathsSync(path.join(qforms.get('publi
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
-
     if (req.method === 'GET') {
         helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
             res.render('home/view', {

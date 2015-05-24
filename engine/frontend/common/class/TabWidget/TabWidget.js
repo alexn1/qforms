@@ -28,12 +28,12 @@ TabWidget.prototype.init = function() {
     this.pageList   = $(this.el).children("div").get(0);
     this.activeTab  = $(this.tabList).children("li.active").get(0);
     this.activePage = $(this.pageList).children("div.active").get(0);
-    // читаем дочерние элементы и добавляет табы
+    // read child elements and init tabs
     var self = this;
     $(this.el).children("ul").children("li").each(function() {
         self.initTab(this);
     });
-    // если активный таб не назначен, то выбираем первый
+    // if active tab is not set then first tab is selected
     if ($(this.tabList).children("li").length > 0 && this.activeTab === undefined) {
         this.selectTab($(this.tabList).children("li").get(0))
     }
@@ -76,12 +76,12 @@ TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
     // div
     var div = document.createElement("div");
     div.appendChild(el);
-    // добавляем
+    // append
     this.tabList.appendChild(li);
     this.pageList.appendChild(div);
-    // готовый таб
+    // tab is done
     this.initTab(li);
-    // если активного таба нет, то первый сразу становится активным
+    // if active tab is not defined then select this tab
     if (this.activeTab === undefined) {
         this.selectTab(li);
     }
@@ -95,16 +95,16 @@ TabWidget.prototype.selectTab = function(tab,track) {
     }
     var index = $(this.tabList).children("li").index(tab);
     if (index === -1 ) {
-        throw new Error("Такого таба нет.");
+        throw new Error("Tab doesn't exists.");
     }
     var oldTab = this.activeTab;
     tab.classList.add("active");
     if (this.activeTab) {
         this.activeTab.classList.remove("active");
     }
-    // опция track чтобы помнить предыдущий таб во время открытия нового, и переключится
-    // на старый, если новый закрыли, в остальных случаях предыдущий не помним
-    // данная опция используется только при создании нового таба
+    // track option is used to store prev tab during opening new one
+    // if new tab is closed then select prev tab
+    // this option is used during new tab creation
     if (track !== undefined && track && $(this.tabList).children("li").index(this.activeTab) !== -1) {
         this.prevActiveTab = this.activeTab;
     } else {
@@ -141,7 +141,7 @@ TabWidget.prototype.closeTab = function(tab) {
     if (tab.onCloseCallback) {
         tab.onCloseCallback(tab);
     }
-    // если закрытый таб был выделеным, значит надо выделить другой
+    // if closed tab is selected, we need to make active another tab
     if (this.activeTab === tab) {
         if (this.prevActiveTab !== null) {
             this.selectTab(this.prevActiveTab);

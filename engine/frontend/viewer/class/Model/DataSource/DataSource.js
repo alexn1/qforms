@@ -10,17 +10,17 @@ function DataSource(name,parent,data) {
     this.fullTableName = this.data.database + "." + this.data.table;
     this.insertRow = null;
     this.updateRow = null;
-    this.rowsByKey = {};						// для быстрого поиска строки по ключу
-    this.childs    = {};						// для поиска дочерних строк по ключу
-    this.params    = {};   						// параметры перезаполнения строки
-    this.eventChanged = new QForms.Event(this);
-    this.eventUpdated = new QForms.Event(this);
-    this.eventNewRow = new QForms.Event(this);		// создана строка
-    this.eventRemoveRow = new QForms.Event(this);	// строка удалена
-    this.eventRefillRow = new QForms.Event(this);	// строка перезаполнена
-    this.eventMoveRow = new QForms.Event(this);		// переместить строку в пределах списка
-    this.eventGoneRow = new QForms.Event(this);		// строка ушла из текущего списка
-    this.eventComeRow = new QForms.Event(this);		// строка пришла в текущий список
+    this.rowsByKey = {};						// for row search by key
+    this.childs    = {};						// for child row search by key
+    this.params    = {};   						// refill params of row
+    this.eventChanged   = new QForms.Event(this);
+    this.eventUpdated   = new QForms.Event(this);
+    this.eventNewRow    = new QForms.Event(this);
+    this.eventRemoveRow = new QForms.Event(this);
+    this.eventRefillRow = new QForms.Event(this);
+    this.eventMoveRow   = new QForms.Event(this);		// row has been moved within list
+    this.eventGoneRow   = new QForms.Event(this);		// row gone from current tree item list
+    this.eventComeRow   = new QForms.Event(this);		// row come to current tree item list
 
 }
 
@@ -43,8 +43,7 @@ DataSource.prototype.deinit = function() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// заполняет массивы чтобы для каждой строки можно было по ключу определить её индекс и
-// дочерние строки
+// fill lists to find row index and child rows by row key
 //
 DataSource.prototype.getKeysAndChilds = function(rows) {
     var rowsByKey = {};
@@ -53,7 +52,7 @@ DataSource.prototype.getKeysAndChilds = function(rows) {
         var row = rows[i];
         var key = this.getRowKey(row);
         var parentKey = this.getRowParentKey(row);
-        // заполняем
+        // filling
         rowsByKey[key] = row;
         if (!childs[parentKey]) childs[parentKey] = {
             rowsByIndex:[],
@@ -167,24 +166,28 @@ DataSource.prototype.refill = function(params) {
         if (!(rows instanceof Array)) throw new Error("rows должна быть массивом.");
         if (this.data.dumpFirstRowToParams === "true") this.dumpFirstRowToParams(rows);
         var _old = this;
-        var _new = this.getKeysAndChilds(rows);		// генерируем хэш таблицу с новыми ключами
+        var _new = this.getKeysAndChilds(rows);		// generate hash table with new keys
         this.sync(_old,_new,"[null]");
         //console.log(this.childs);
-        // источник данных обновлён
+        // data source has been updated
         this.eventUpdated.fire(new QForms.EventArg(this));
     });
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+// copy new values to data source row
+//
 DataSource.prototype.copyNewValues = function(oldRow,newRow) {
-    for (var columnName in newRow) { // записываем новые значения в строку источника данных
+
+    for (var columnName in newRow) {
         oldRow[columnName] = newRow[columnName];
     }
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// убирает строку из текущего списка и перемещает в тот, в котором она сейчас
+// remove row from current tree item list and move it ot it's new tree item list
+//
 DataSource.prototype._goneRow = function(_old,_new,parentKey,i,key) {
     var newRow = _new.rowsByKey[key];
     var oldRow = _old.rowsByKey[key];
@@ -195,7 +198,7 @@ DataSource.prototype._goneRow = function(_old,_new,parentKey,i,key) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// добавляет строку в текущий список, перед этим удалив её из того списка в котором она была
+// add row to new tree item list after deleting from it old tree item list
 DataSource.prototype._comeRow = function(_old,_new,parentKey,i,key) {
     var oldRow = _old.rowsByKey[key];
     var oldParentKey = this.getRowParentKey(oldRow);
@@ -209,7 +212,7 @@ DataSource.prototype.removeFromChilds = function(childs,parentKey,i,key) {
     childs[parentKey].rowsByIndex.splice(i,1);
     childs[parentKey].keysByIndex.splice(i,1);
     delete childs[parentKey].rowsByKey[key];
-    // чтобы не оставался список пустой
+    // remove empty list
     if (childs[parentKey].rowsByIndex.length === 0) {
         delete childs[parentKey];
     }
@@ -236,10 +239,9 @@ DataSource.prototype.moveChilds = function(childs,oldIndex,newIndex) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// алгоритм синхронизации деревьев
-// алгоритм сравнивает старый и новый список, меняет их и посылает сообщения какие строки изменились,
-// какие добавились, какие удалились, какие переместились, какие пришли и какие ушли, чтобы элементы
-// управления могли обновить своё представление
+// tree sync algorithm
+// compare old and new list, change it and send notification to every row that has been changed
+// add, remove, move, come, gone for widgets to be able update it's view
 //
 DataSource.prototype.sync = function(_old,_new,parentKey) {
     var oldChilds = _old.childs[parentKey];
@@ -259,15 +261,15 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
         } else {
             var oKey = null;
         }
-        if (nKey !== null && oKey !== null) { // если не достигли конца ни одного списка
+        if (nKey !== null && oKey !== null) { // if not reached the end of each list
             if (nKey === oKey) {
                 this.copyNewValues(oldChilds.rowsByIndex[i],newChilds.rowsByIndex[i]);
-                this.sync(_old,_new,oKey);// для дочерних строк
+                this.sync(_old,_new,oKey);// for the child rows
                 this.fireRefillRow(oKey,i);
                 i++;
             } else { // если ключи не равны, то
-                if (!(oKey in newChilds.rowsByKey)) { // если старого ключа в новом локальном списке нет, то...
-                    if (!(oKey in _new.rowsByKey)) { // если старого ключа в новом глобальном списке нет, значит строка удалена
+                if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
+                    if (!(oKey in _new.rowsByKey)) {  // if the old key in a new global list does not exists, then the row is removed
                         this.sync(_old,_new,oKey);
                         this.removeFromChilds(_old.childs,parentKey,i,oKey);
                         delete _old.rowsByKey[oKey];
@@ -280,8 +282,8 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
                         var newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
                         this.fireGoneRow(parentKey,oKey,newParentKey,newIndex);
                     }
-                } else if (!(nKey in oldChilds.rowsByKey)) {  // если нового ключа в старом локальном списке нет, то ...
-                    // если нового ключа в старом глобальном списке нет, то строка добавлена
+                } else if (!(nKey in oldChilds.rowsByKey)) {  // If the new key in the old local list is not listed, then ...
+                    // if the new key in the old global list does not listed, the row is added
                     if (!(nKey in _old.rowsByKey)) {
                         this.addToChilds(_old.childs,parentKey,i,nKey,newChilds.rowsByIndex[i]);
                         _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
@@ -296,7 +298,7 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
                         this.fireComeRow(parentKey,nKey,oldParentKey,i);
                     }
                     i++;
-                } else { // если ключ в обоих локальных списках, значит строка перемещена
+                } else { // if the key is in both of local lists, then the row moved
                     var oldIndexOfNewKey = oldChilds.keysByIndex.indexOf(nKey);
                     var newIndexOfOldKey = newChilds.keysByIndex.indexOf(oKey);
                     if (Math.abs(newIndexOfOldKey - i) > Math.abs(oldIndexOfNewKey - i)) {
@@ -314,9 +316,9 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
                     }
                 }
             }
-        } else { // если один из списков уже кончился
-            if (nKey === null && oKey !== null) { // если удалилил последний элемент
-                if (!(oKey in _new.rowsByKey)) { // если старого ключа в новом глобальном списке нет, значит строка удалена
+        } else { // if one of the lists has ended
+            if (nKey === null && oKey !== null) { // if last element has been removed
+                if (!(oKey in _new.rowsByKey)) { // if the old key in a new global list does not listed, then the row is removed
                     this.sync(_old,_new,oKey);
                     this.removeFromChilds(_old.childs,parentKey,i,oKey);
                     delete _old.rowsByKey[oKey];
@@ -330,8 +332,8 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
                     this.fireGoneRow(parentKey,oKey,newParentKey,newIndex);
                 }
             }
-            if (nKey !== null && oKey === null) { // если появился последний элемент
-                if (!(nKey in _old.rowsByKey)) { // если нового ключа в старом глобальном списке нет, то строка добавлена
+            if (nKey !== null && oKey === null) { // if last element appeared
+                if (!(nKey in _old.rowsByKey)) { // if the new key in the old global list does not listed, the row is added
                     this.addToChilds(_old.childs,parentKey,i,nKey,newChilds.rowsByIndex[i]);
                     _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
                     this.sync(_old,_new,nKey);
@@ -425,7 +427,8 @@ DataSource.prototype.insert = function(row,callback) {
         if (row === this.insertRow) {
             this.setRowKey(this.insertRow,data.key);
             var params = QForms.keyToParams(data.key);
-            for (var name in params) { // записываем параметры ключа для refill
+            // save key params for refill
+            for (var name in params) {
                 this.params[name] = params[name];
             }
             this.insertRow = null;
@@ -441,10 +444,10 @@ DataSource.prototype.delete = function(key) {
     if (this.data.table === "") {
         return;
     }
-    // надо проверить, что у удаляемой записи нет дочерних строк
+    // check if removed row has child rows
     if (this.childs[key] !== undefined) {
         //console.log(this.childs[key]);
-        alert("Строка не может быть удалена, так как содержит дочерние строки.");
+        alert("Row can't be removed as it contains child rows.");
         return;
     }
     var args = {
@@ -462,7 +465,7 @@ DataSource.prototype.delete = function(key) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newRow = function(row) {
     if (this.data.rows.length > 0) {
-        throw new Error("Строки можно добавлять только в пустой источник данных в режиме добавления строки.");
+        throw new Error("Rows can be added to empty data sources only in new mode.");
     }
     this.insertRow = row;
 }

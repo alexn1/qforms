@@ -1,9 +1,10 @@
 "use strict"
 
 var path = require('path');
-var fs = require('fs');
+var fs   = require('fs');
+
 var helper = require('../../common/helper');
-var app = require('../../qforms');
+var app    = require('../../qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {

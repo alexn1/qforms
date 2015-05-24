@@ -8,7 +8,8 @@ function TreeForm(name,page,data) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// иерархическая форма обновляется сразу после модификации ячейки таблицы
+// tree form is updated immediately after the modification of the table cell
+//
 TreeForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
     if (dataSource.name !== "default") return;

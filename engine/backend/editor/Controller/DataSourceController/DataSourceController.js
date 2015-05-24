@@ -10,7 +10,6 @@ var _    = require('underscore');
 var qforms            = require('../../../qforms');
 var Controller        = require('../Controller');
 var ApplicationFile   = require('../../JsonFile/ApplicationFile/ApplicationFile');
-var ApplicationEditor = require('../../../editor/Editor/ApplicationEditor/ApplicationEditor');
 
 util.inherits(DataSourceController, Controller);
 

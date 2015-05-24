@@ -5,16 +5,16 @@ QForms.inherit(ApplicationController,ModelController);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationController(model,view) {
     ModelController.call(this,model);
-    this.view = view;
+    this.view  = view;
     this.appTC = null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(model,view) {
-    var customClassName = "{app}Controller".replace("{app}",model.name);
+    var customClassName   = "{app}Controller".replace("{app}",model.name);
     var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}",customClassName);
-    var custom =  "new {customClassName}(model,view)".replace("{customClassName}",customClassName);
-    var general = "new {class}Controller(model,view)".replace("{class}",model.data.class);
+    var custom            =  "new {customClassName}(model,view)".replace("{customClassName}",customClassName);
+    var general           = "new {class}Controller(model,view)".replace("{class}",model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === "function") {
@@ -57,9 +57,6 @@ ApplicationController.prototype.deinit = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageOpened = function(e) {
-    // надо смотреть, есть ли таб старницы уже в документе, или нет
-    // если есть, то просто инициализируем его, если нет, то надо добавить
-    // новый таб
     var html = QForms.render(e.page.data.view,{model:e.page});
     var view = $(html).get(0);
     var tab = this.appTC.createTab(view);

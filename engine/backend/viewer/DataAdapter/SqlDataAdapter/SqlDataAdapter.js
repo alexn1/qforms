@@ -1,17 +1,20 @@
-"use strict"
+'use strict';
+
 module.exports = SqlDataAdapter;
 
-var util = require('util');
-var mysql = require('mysql');
+var util   = require('util');
+var mysql  = require('mysql');
 var sqlish = require("sqlish");
-var helper = require('../../../common/helper');
+
+var helper      = require('../../../common/helper');
 var DataAdapter = require('../DataAdapter');
+
 util.inherits(SqlDataAdapter, DataAdapter);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function SqlDataAdapter(dataSource) {
     SqlDataAdapter.super_.prototype.constructor.call(this, dataSource);
-    this.desc = null;
+    this.desc        = null;
     this.aiFieldName = null;
 };
 

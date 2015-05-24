@@ -1,11 +1,14 @@
-"use strict"
+'use strict';
+
+module.exports = CheckBoxField;
 
 var util = require('util');
 var path = require('path');
+
 var Field = require('../Field');
-var app = require('../../../../qforms');
+var app   = require('../../../../qforms');
+
 util.inherits(CheckBoxField, Field);
-module.exports = CheckBoxField;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function CheckBoxField(data, parent) {

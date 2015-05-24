@@ -7,7 +7,7 @@ function DataGridWidget(el,formController) {
     GridWidget.call(this,el);
     this.formController = formController;
     this.dataSource = null;
-    this.keyToBodyRow = {}; // чтобы по ключу быстро найти строку
+    this.keyToBodyRow = {}; // to fast row search by key
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

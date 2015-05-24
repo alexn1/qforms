@@ -20,8 +20,10 @@ function Page(args) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.init = function() {
-    // у страниц в режиме создания строки ключ еще не известен
-    if (!this.newMode) this.app.trackPage(this);
+    // in new mode key is unknown so we can't track it in app pages list
+    if (!this.newMode) {
+        this.app.trackPage(this);
+    }
     this.initParams();
     for (var dsName in this.data.dataSources) {
         this.dataSources[dsName] = new DataSource(dsName,this,this.data.dataSources[dsName]);
@@ -52,9 +54,9 @@ Page.prototype.deinit = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.initParams = function() {
-    // параметры определяются во время выборки источников данных на сервере
+    // params defined during data source filling on the server
     if (this.data.params !== undefined) for (var name in this.data.params) this.params[name] = this.data.params[name];
-    // чтобы иметь возможность ссылатся на параметры родительской страницы
+    // to make possible refer to parent page params
     if (this.parentPage !== undefined) for (var name in this.parentPage.params) this.params[name] = this.parentPage.params[name];
 }
 
@@ -101,7 +103,6 @@ Page.prototype.setKey = function(key) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.openPage = function(params) {
-
     params.parentPage = this;
     this.app.openPage(params);
 }

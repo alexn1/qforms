@@ -4,12 +4,12 @@
 function Application(data) {
     this.data              = data;
     this.dataSources       = {};
-    this.tables            = {};       // таблицы для взаимоуведомлений об обновлении
-    this.pages             = {};        // открытые страницы, чтобы не открывтаь новую, когда страница с таким ключём уже открыта
+    this.tables            = {};        // db table models for exchanging by update info between forms
+    this.pages             = {};        // opened pages
     this.lastPageId        = 0;
-    this.eventPageOpened   = new QForms.Event(this);// когда страница создаётся
-    this.eventPageClosed   = new QForms.Event(this);// когда страница закрыта
-    this.eventPageSelected = new QForms.Event(this);// когда нужно показать уже открытую страницу
+    this.eventPageOpened   = new QForms.Event(this);
+    this.eventPageClosed   = new QForms.Event(this);
+    this.eventPageSelected = new QForms.Event(this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,8 @@ Application.prototype.init = function() {
 
         page.init();
         page.id = "p" + this.lastPageId;
-        // сообщаем подписчикам (view), что открыта страница
+
+        // notify subscribers (view), that page is opened
         var e = new QForms.EventArg(this);
         e.page = page;
         e.track = false;
@@ -40,8 +41,10 @@ Application.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.deinit = function() {
-    for (var name in this.dataSources) this.dataSources[name].deinit();
-    // TODO: добавить деинициализацию открытых страниц
+    for (var name in this.dataSources) {
+        this.dataSources[name].deinit();
+    }
+    // TODO: add deinit on opened pages
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +74,7 @@ Application.prototype.openPage = function(args) {
             params[keyName] = keyParams[keyName];
         }
     }
-    // если такая страница с таким же ключём уже открыта, то показываем её
+    // if this page with this key is already opened, then show it
     var page = this.getPage(name,key);
     if (page !== null) {
         // eventPageSelected
@@ -111,7 +114,7 @@ Application.prototype.openPage = function(args) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.saveAndClosePage = function(page) {
     page.deinit();
-    page.save();	// сохраняем после деинициализации, чтобы не получать события обновления
+    page.save();	// saving page after deinit not to receive update notifications
     // eventPageClosed
     var ea = new QForms.EventArg(this);
     ea.page = page;
@@ -155,11 +158,12 @@ Application.prototype.untrackPage = function(page) {
         }
         if (found) break;
     }
-
-    // если страницу открыли и не сохраняли, значит её тут не должно быть
+    // if page has been opened and has not been saved, then it should not be here
     if (page.newMode && page.key === undefined) {
     } else {
-        if (!found) throw new Error("страницы в списке нет");
+        if (!found) {
+            throw new Error("The page is not in list.");
+        }
     }
 }
 

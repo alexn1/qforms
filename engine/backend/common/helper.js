@@ -43,15 +43,15 @@ function getFilePathsSync(publicDirPath, subDirPath, ext) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePaths(dirPath, ext, filePaths, callback) {
-    // берём все файлы из директории
+    // all files from directory
     glob(path.join(dirPath,'*.' + ext), function(err, items) {
-        // помещаем их в выходной массив
+        // pushing files to output array
         items.forEach(function(item) {
             filePaths.push(item);
         });
-        // берём все директории из директории
+        // all directories from directory
         glob(path.join(dirPath,'*/'), function(err, items) {
-            // и для каждой директории получаем список файлов
+            // get all files for each directory
             async.eachSeries(items, function(subDirPath, next) {
                 _getFilePaths(subDirPath, ext, filePaths, next);
             }, function() {
