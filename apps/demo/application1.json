@@ -30,14 +30,14 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "database",
-                        "value": "samples"
+                        "value": "demo"
                     }
                 },
                 "user": {
                     "@class": "Param",
                     "@attributes": {
                         "name": "user",
-                        "value": "samples"
+                        "value": "demo"
                     }
                 },
                 "password": {
