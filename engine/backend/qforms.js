@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var _          = require('underscore');
 var async      = require('async');
 
-var p      = require('./package');
+var p      = require('../package');
 var helper = require('./common/helper');
 
 var qforms = module.exports = express();
