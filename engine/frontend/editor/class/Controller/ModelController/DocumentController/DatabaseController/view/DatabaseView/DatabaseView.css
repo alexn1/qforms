@@ -2,7 +2,14 @@
   height: 100%;
   background-color: white;
 }
-.DatabaseView .tcTables {
+.DatabaseView .client {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 200px;
+}
+.DatabaseView .sidebar {
   background-color: lightgoldenrodyellow;
   position: absolute;
   width: 200px;
