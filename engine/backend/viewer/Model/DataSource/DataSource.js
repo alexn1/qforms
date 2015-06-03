@@ -23,6 +23,9 @@ function DataSource(data, parent) {
 DataSource.prototype.init = function(callback) {
     var self = this;
     DataSource.super_.prototype.init.call(this, function() {
+        if (self.data.keyColumns === undefined || Object.keys(self.data.keyColumns).length === 0) {
+            throw new Error('[' + self.getLocation() + ']: Data Source must have at least one key column.');
+        }
         self.keyColumns = Object.keys(self.data.keyColumns);
         if (self.data.parentKeyColumns) {
             self.parentKeyColumns = Object.keys(self.data.parentKeyColumns);
@@ -129,4 +132,11 @@ DataSource.prototype.getRowNonKeyValues = function(row) {
         }
     }
     return values;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.getLocation = function() {
+    var pageName = this.getPage() !== null ? this.getPage().name : '';
+    var formName = this.getForm() !== null ? this.getForm().name : '';
+    return pageName + '.' + formName + '.' + this.name;
 };
