@@ -39,6 +39,25 @@ function Application(data, appInfo) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.create = function(data, appInfo, callback) {
+    var customClassNameJS = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
+    fs.exists(customClassNameJS, function(exists) {
+        if (exists) {
+            fs.readFile(customClassNameJS, 'utf8', function (err, content) {
+                if (err) {
+                    throw err;
+                } else {
+                    var customClass = eval(content);
+                    callback(new customClass(data, appInfo));
+                }
+            });
+        } else {
+            callback(new Application(data, appInfo));
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.init = function(callback) {
     var self = this;
     Application.super_.prototype.init.call(this, function() {
@@ -184,4 +203,14 @@ Application.prototype.getPool = function(database) {
     }
     console.log('mysql pool connections count: ' + this.pools[database]._allConnections.length);
     return this.pools[database];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.authenticate = function(username, password, callback) {
+    callback(username === 'admin' && password === 'admin');
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.authentication = function(username, password) {
+    return false;
 };

@@ -36,13 +36,14 @@ module.exports = function(req, res, next) {
                                 throw err;
                             } else {
                                 var appData = JSON.parse(content);
-                                var application = new Application(appData, appInfo);
-                                application.init(function() {
-                                    applications[route] = application;
-                                    var d = domain.create();
-                                    d.on('error', next);
-                                    d.run(function() {
-                                        handle(req, res, next, application);
+                                Application.create(appData, appInfo, function(application) {
+                                    application.init(function() {
+                                        applications[route] = application;
+                                        var d = domain.create();
+                                        d.on('error', next);
+                                        d.run(function() {
+                                            handle(req, res, next, application);
+                                        });
                                     });
                                 });
                             }
@@ -61,28 +62,57 @@ module.exports = function(req, res, next) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function handle(req, res, next, application) {
     if (req.method === 'GET') {
-        index(req, res, next, application);
+        if (application.authentication() && !req.session.username) {
+            login(req, res, next, application);
+        } else {
+            index(req, res, next, application);
+        }
     }
     if (req.method === 'POST') {
-        switch (req.body.action) {
-            case 'page':
-                page(req, res, next, application);
-                break;
-            case 'update':
-                update(req, res, next, application);
-                break;
-            case 'refill':
-                refill(req, res, next, application);
-                break;
-            case 'insert':
-                insert(req, res, next, application);
-                break;
-            case 'delete':
-                _delete(req, res, next, application);
-                break;
-            default:
-                res.end('not implemented');
+        if (req.body.action === 'login') {
+            login(req, res, next, application);
+        } else {
+            if (application.authentication() && !req.session.username) {
+                throw new Error('not authorized');
+            } else {
+                eval('{action}(req, res, next, application)'.replace('{action}', req.body.action));
+            }
         }
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function login(req, res, next, application) {
+    if (req.method === 'GET') {
+        application.fill(null, null, function(data) {
+            res.render('viewer/login', {
+                version       : req.app.get('version'),
+                caption       : application.data['@attributes'].caption,
+                commonStyleCss: req.app.get('commonStyleCss'),
+                REQUEST_URI   : req.url,
+                errMsg        : null,
+                username      : null
+            });
+        });
+    }
+    if (req.method === 'POST') {
+        application.authenticate(req.body.username, req.body.password, function(authenticate) {
+            if (authenticate) {
+                req.session.username = req.body.username;
+                res.redirect(req.path);
+            } else {
+                application.fill(null, null, function(data) {
+                    res.render('viewer/login', {
+                        version       : req.app.get('version'),
+                        caption       : application.data['@attributes'].caption,
+                        commonStyleCss: req.app.get('commonStyleCss'),
+                        REQUEST_URI   : req.url,
+                        errMsg        : 'Wrong username or password',
+                        username      : req.body.username
+                    });
+                });
+            }
+        });
     }
 };
 
