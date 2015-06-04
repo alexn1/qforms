@@ -5,6 +5,7 @@ var path       = require('path');
 var fs         = require('fs');
 var morgan     = require('morgan');
 var bodyParser = require('body-parser');
+var session    = require('express-session');
 var _          = require('underscore');
 var async      = require('async');
 
@@ -34,6 +35,12 @@ qforms.set('commonClassJs' , helper.getFilePathsSync(path.join(qforms.get('publi
 //qforms.use(morgan('dev'));
 qforms.use(bodyParser.json());
 qforms.use(bodyParser.urlencoded({ extended: false }));
+qforms.use(session({
+    secret            : 'qforms',
+    key               : 'sid',
+    resave            : false,
+    saveUninitialized : true
+}));
 qforms.use(express.static(qforms.get('public')));
 
 // routes

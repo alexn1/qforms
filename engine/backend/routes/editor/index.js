@@ -1,5 +1,6 @@
 'use strict';
 
+var config = require('config');
 var path   = require('path');
 var fs     = require('fs');
 var helper = require('../../common/helper');
@@ -52,22 +53,26 @@ var actions = [
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
-    if (req.params.appDirName && req.params.appFileName) {
-        // var route = req.params.appDirName + '/' + req.params.appFileName;
-        var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-        fs.exists(appFilePath, function(exists) {
-            if (exists) {
-                helper.getAppInfo(appFilePath, function(appInfo) {
-                    var d = domain.create();
-                    d.on('error', next);
-                    d.run(function() {
-                        handle(req, res, next, appInfo);
+    if (config.get('editor')) {
+        if (req.params.appDirName && req.params.appFileName) {
+            // var route = req.params.appDirName + '/' + req.params.appFileName;
+            var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
+            fs.exists(appFilePath, function(exists) {
+                if (exists) {
+                    helper.getAppInfo(appFilePath, function(appInfo) {
+                        var d = domain.create();
+                        d.on('error', next);
+                        d.run(function() {
+                            handle(req, res, next, appInfo);
+                        });
                     });
-                });
-            } else {
-                next();
-            }
-        });
+                } else {
+                    next();
+                }
+            });
+        } else {
+            next();
+        }
     } else {
         next();
     }
