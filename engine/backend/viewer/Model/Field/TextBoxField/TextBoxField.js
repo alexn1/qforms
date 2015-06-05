@@ -12,7 +12,7 @@ util.inherits(TextBoxField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TextBoxField(data, parent) {
-    TextBoxField.super_.prototype.constructor.call(this, data, parent);
+    TextBoxField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/FieldController/TextBoxFieldController/view',

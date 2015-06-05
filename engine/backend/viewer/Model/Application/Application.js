@@ -21,7 +21,7 @@ util.inherits(Application, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Application(data, appInfo) {
-    Application.super_.prototype.constructor.call(this, data);
+    Application.super_.call(this, data);
     this.appInfo            = appInfo;
     this.dirPath            = this.appInfo.dirPath;
     this.viewFilePath       = path.join(
@@ -166,9 +166,9 @@ Application.prototype._createStartupPages = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.fill = function(params, newMode, callback) {
+Application.prototype.fill = function(args, callback) {
     var self = this;
-    Application.super_.prototype.fill.call(this, params, newMode, function(response) {
+    Application.super_.prototype.fill.call(this, args, function(response) {
         response.menu = self.menu;
         var startupPageNames = _.filter(self.data.pageLinks, function (pageLink) {
             return pageLink['@attributes'].startup === 'true';
@@ -178,7 +178,7 @@ Application.prototype.fill = function(params, newMode, callback) {
         response.pages = {};
         async.eachSeries(startupPageNames, function(pageName, next) {
             self.getPage(pageName, function(page) {
-                page.fill(params, newMode, function(_response) {
+                page.fill(args, function(_response) {
                     response.pages[pageName] = _response;
                     next();
                 });

@@ -12,7 +12,7 @@ util.inherits(TableFormEditor, FormEditor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function TableFormEditor(pageEditor, name) {
-    TableFormEditor.super_.prototype.constructor.call(this, pageEditor, name);
+    TableFormEditor.super_.call(this, pageEditor, name);
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.ejs'

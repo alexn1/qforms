@@ -16,7 +16,7 @@ util.inherits(DatabaseController, Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DatabaseController(appInfo) {
-    DatabaseController.super_.prototype.constructor.call(this, appInfo);
+    DatabaseController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/DocumentController/DatabaseController/view'

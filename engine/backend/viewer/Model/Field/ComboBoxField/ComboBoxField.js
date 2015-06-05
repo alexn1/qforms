@@ -12,7 +12,7 @@ util.inherits(ComboBoxField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ComboBoxField(data, parent) {
-    ComboBoxField.super_.prototype.constructor.call(this, data, parent);
+    ComboBoxField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ComboBoxFieldController/view',

@@ -15,7 +15,7 @@ util.inherits(DataSourceController, Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSourceController(appInfo) {
-    DataSourceController.super_.prototype.constructor.call(this, appInfo);
+    DataSourceController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/DataSourceController'

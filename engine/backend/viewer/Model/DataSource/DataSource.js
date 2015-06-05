@@ -8,12 +8,16 @@ var Model       = require('../Model');
 var Application = require('../Application/Application');
 var Page        = require('../Page/Page');
 var Form        = require('../Form/Form');
+var RowForm     = require('../Form/RowForm/RowForm');
 
 util.inherits(DataSource, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSource(data, parent) {
-    DataSource.super_.prototype.constructor.call(this, data, parent);
+    DataSource.super_.call(this, data, parent);
+    this.application      = parent instanceof Application ? parent : null;
+    this.page             = parent instanceof Page        ? parent : null;
+    this.form             = parent instanceof Form        ? parent : null;
     this.keyColumns       = [];
     this.parentKeyColumns = [];
     this.dataAdapter      = null;
@@ -35,19 +39,22 @@ DataSource.prototype.init = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fill = function(params, newMode, callback) {
+DataSource.prototype.fill = function(args, callback) {
     var self = this;
-    DataSource.super_.prototype.fill.call(this, params, newMode, function(response) {
+    DataSource.super_.prototype.fill.call(this, args, function(response) {
         response.keyColumns = self.keyColumns;
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;
         }
-        if (newMode) {
+        if (args.newMode) {
             response.rows = [];
             callback(response);
         } else {
-            self.dataAdapter.select(params, function(rows) {
+            self.dataAdapter.select(args.params, function(rows) {
                 response.rows = rows;
+                if (self.form && self.form instanceof RowForm && rows[0]) {
+                    self.form.dumpRowToPageParams(rows[0]);
+                }
                 callback(response);
             });
         }
@@ -95,18 +102,13 @@ DataSource.prototype.getApp = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getPage = function() {
-    if (this.parent instanceof Page) {
-        return this.parent;
-    } else if (this.parent instanceof Form) {
-        return this.parent.parent;
+    if (this.page) {
+        return this.page;
+    } else if (this.form) {
+        return this.form.page;
     } else {
         return null;
     }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getForm = function() {
-    return this.parent instanceof Form ? this.parent : null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +138,7 @@ DataSource.prototype.getRowNonKeyValues = function(row) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getLocation = function() {
-    var pageName = this.getPage() !== null ? this.getPage().name : '';
-    var formName = this.getForm() !== null ? this.getForm().name : '';
+    var pageName = this.page !== null ? this.page.name : '';
+    var formName = this.form !== null ? this.form.name : '';
     return pageName + '.' + formName + '.' + this.name;
 };

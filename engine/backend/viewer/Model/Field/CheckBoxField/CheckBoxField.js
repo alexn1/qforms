@@ -12,7 +12,7 @@ util.inherits(CheckBoxField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function CheckBoxField(data, parent) {
-    CheckBoxField.super_.prototype.constructor.call(this, data, parent);
+    CheckBoxField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/CheckBoxFieldController/view',

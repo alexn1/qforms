@@ -12,7 +12,7 @@ util.inherits(TreeFormEditor, FormEditor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function TreeFormEditor(pageEditor, name) {
-    TreeFormEditor.super_.prototype.constructor.call(this, pageEditor, name);
+    TreeFormEditor.super_.call(this, pageEditor, name);
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.ejs'

@@ -1,2 +1,2 @@
 # QForms
-Platform for building Web UI for databases
+A platform for building Web UI for databases.

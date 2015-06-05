@@ -12,7 +12,7 @@ util.inherits(TextAreaField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TextAreaField(data, parent) {
-    TextAreaField.super_.prototype.constructor.call(this, data, parent);
+    TextAreaField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view',

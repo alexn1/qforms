@@ -12,7 +12,7 @@ util.inherits(RowForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function RowForm(data, parent) {
-    RowForm.super_.prototype.constructor.call(this, data, parent);
+    RowForm.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view',

@@ -14,7 +14,7 @@ util.inherits(PageController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageController(appInfo) {
-    PageController.super_.prototype.constructor.call(this, appInfo);
+    PageController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/PageController'

@@ -13,7 +13,7 @@ util.inherits(SqlDataAdapter, DataAdapter);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function SqlDataAdapter(dataSource) {
-    SqlDataAdapter.super_.prototype.constructor.call(this, dataSource);
+    SqlDataAdapter.super_.call(this, dataSource);
     this.desc        = null;
     this.aiFieldName = null;
 };
@@ -73,7 +73,7 @@ SqlDataAdapter.prototype.delete = function(row, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataAdapter.prototype._query = function(query, params, callback) {
-    //console.log({query:query,params:params});
+    console.log({query:query,params:params});
     this.dataSource.getPool().getConnection(function(err, cnn) {
         if (err) {
             throw err;

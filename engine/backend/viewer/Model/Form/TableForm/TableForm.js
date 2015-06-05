@@ -12,7 +12,7 @@ util.inherits(TableForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TableForm(data, parent) {
-    TableForm.super_.prototype.constructor.call(this, data, parent);
+    TableForm.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view',

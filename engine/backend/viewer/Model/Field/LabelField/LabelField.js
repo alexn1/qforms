@@ -12,7 +12,7 @@ util.inherits(LabelField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function LabelField(data, parent) {
-    LabelField.super_.prototype.constructor.call(this, data, parent);
+    LabelField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',

@@ -15,7 +15,7 @@ util.inherits(KeyColumnController, Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function KeyColumnController(appInfo) {
-    KeyColumnController.super_.prototype.constructor.call(this, appInfo);
+    KeyColumnController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/KeyColumnController'

@@ -14,17 +14,18 @@ util.inherits(Form, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Form(data, parent) {
-    Form.super_.prototype.constructor.call(this, data, parent);
+    Form.super_.call(this, data, parent);
+    this.page               = parent;
     this.dirPath            = path.join(this.parent.dirPath, this.name);
-    this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+    this.customViewFilePath = path.join(this.dirPath,        this.name + '.ejs');
     this.createCollections  = ['dataSources', 'fields', 'controls'];
     this.fillCollections    = ['dataSources', 'fields', 'controls'];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.fill = function(params, newMode, callback) {
+Form.prototype.fill = function(args, callback) {
     var self = this;
-    Form.super_.prototype.fill.call(this, params, newMode, function(response) {
+    Form.super_.prototype.fill.call(this, args, function(response) {
         if (self.dataSources.default === undefined) {
             response.dataSources.default = self._getSurrogateDataSource();
         }
@@ -40,6 +41,7 @@ Form.prototype._getSurrogateDataSource = function() {
     for (var name in this.fields) {
         this.fields[name].fillDefaultValue(row);
     }
+    this.dumpRowToPageParams(row);
     return {
         class                : 'DataSource',
         database             : '',
@@ -58,4 +60,12 @@ Form.prototype.getExpValue = function(value) {
         value = helper.currentTime();
     }
     return value;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Form.prototype.dumpRowToPageParams = function(row) {
+    for (var name in this.fields) {
+        this.fields[name].dumpRowValueToParams(row, this.page.params);
+    }
+    console.log(this.page.params);
 };

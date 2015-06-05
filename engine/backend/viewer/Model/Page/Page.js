@@ -12,7 +12,7 @@ util.inherits(Page, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Page(data, parent) {
-    Page.super_.prototype.constructor.call(this,data, parent);
+    Page.super_.call(this,data, parent);
     this.dirPath            = path.join(this.parent.dirPath, this.name);
     this.viewFilePath       = path.join(
         qforms.get('public'),

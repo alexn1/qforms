@@ -15,7 +15,7 @@ util.inherits(ParentKeyColumnController, Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ParentKeyColumnController(appInfo) {
-    ParentKeyColumnController.super_.prototype.constructor.call(this, appInfo);
+    ParentKeyColumnController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/ParentKeyColumnController'

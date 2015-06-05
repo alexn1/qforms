@@ -13,7 +13,7 @@ util.inherits(ApplicationFile, JsonFile);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationFile(appInfo) {
-    ApplicationFile.super_.prototype.constructor.call(this, appInfo.filePath);
+    ApplicationFile.super_.call(this, appInfo.filePath);
     this.appInfo = appInfo;
 };
 

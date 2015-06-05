@@ -12,7 +12,7 @@ util.inherits(DatePickerField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DatePickerField(data, parent) {
-    DatePickerField.super_.prototype.constructor.call(this, data, parent);
+    DatePickerField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view',

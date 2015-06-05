@@ -84,7 +84,7 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     if (req.method === 'GET') {
-        application.fill(null, null, function(data) {
+        application.fill({}, function(data) {
             res.render('viewer/login', {
                 version       : req.app.get('version'),
                 caption       : application.data['@attributes'].caption,
@@ -101,7 +101,7 @@ function login(req, res, next, application) {
                 req.session.username = req.body.username;
                 res.redirect(req.path);
             } else {
-                application.fill(null, null, function(data) {
+                application.fill({}, function(data) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
                         caption       : application.data['@attributes'].caption,
@@ -118,7 +118,7 @@ function login(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
-    application.fill(null, null, function(data) {
+    application.fill({}, function(data) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -137,7 +137,7 @@ function index(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
-        page.fill(req.body.params, req.body.newMode, function(data) {
+        page.fill({params: req.body.params, newMode: req.body.newMode}, function(data) {
             res.json({
                 data:data
             });

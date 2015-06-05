@@ -12,7 +12,7 @@ util.inherits(LinkField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function LinkField(data, parent) {
-    LinkField.super_.prototype.constructor.call(this, data, parent);
+    LinkField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LinkFieldController/view',

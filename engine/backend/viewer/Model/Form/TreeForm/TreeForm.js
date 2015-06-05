@@ -12,7 +12,7 @@ util.inherits(TreeForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TreeForm(data, parent) {
-    TreeForm.super_.prototype.constructor.call(this, data, parent);
+    TreeForm.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FormController/TreeFormController/view',

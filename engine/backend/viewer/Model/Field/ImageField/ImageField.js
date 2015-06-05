@@ -12,7 +12,7 @@ util.inherits(ImageField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ImageField(data, parent) {
-    ImageField.super_.prototype.constructor.call(this, data, parent);
+    ImageField.super_.call(this, data, parent);
     this.viewFilePath = path.join(
         app.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view',

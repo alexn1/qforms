@@ -61,7 +61,7 @@ Model.prototype.init = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Model.prototype.fill = function(params, newMode, callback) {
+Model.prototype.fill = function(args, callback) {
     var response = {
         class : this.data['@class'],
         view  : this.view,
@@ -70,19 +70,19 @@ Model.prototype.fill = function(params, newMode, callback) {
     for (var name in this.data['@attributes']) {
         response[name] = this.data['@attributes'][name];
     }
-    this._fillCollections(response, params, newMode, function() {
+    this._fillCollections(response, args, function() {
         callback(response);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Model.prototype._fillCollections = function(response, params, newMode, callback) {
+Model.prototype._fillCollections = function(response, args, callback) {
     var self = this;
     async.eachSeries(this.fillCollections, function(colName, next) {
         if (colName === 'dataSources') {
-            self.fillCollectionDefaultFirst(response, colName, params, newMode, next);
+            self.fillCollectionDefaultFirst(response, colName, args, next);
         } else {
-            self.fillCollection(response, colName, params, newMode, next);
+            self.fillCollection(response, colName, args, next);
         }
     }, callback);
 };
@@ -101,11 +101,11 @@ Model.prototype.createCollection = function(colName, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Model.prototype.fillCollection = function(response, colName, params, newMode, callback) {
+Model.prototype.fillCollection = function(response, colName, args, callback) {
     response[colName] = {};
     var tasks = _.map(this[colName], function(collection, itemName) {
         return function(next) {
-            collection.fill(params, newMode, function(_response) {
+            collection.fill(args, function(_response) {
                 response[colName][itemName] = _response;
                 next();
             });
@@ -115,7 +115,7 @@ Model.prototype.fillCollection = function(response, colName, params, newMode, ca
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Model.prototype.fillCollectionDefaultFirst = function(response, colName, params, newMode, callback) {
+Model.prototype.fillCollectionDefaultFirst = function(response, colName, args, callback) {
     var self = this;
     response[colName] = {};
     var defaultArr = Object.keys(this[colName]).filter(function(itemName) {
@@ -126,7 +126,7 @@ Model.prototype.fillCollectionDefaultFirst = function(response, colName, params,
     });
     var tasks1 = _.map(defaultArr, function(itemName) {
         return function(next) {
-            self[colName][itemName].fill(params, newMode, function(_response) {
+            self[colName][itemName].fill(args, function(_response) {
                 response[colName][itemName] = _response;
                 next();
             });
@@ -134,7 +134,7 @@ Model.prototype.fillCollectionDefaultFirst = function(response, colName, params,
     });
     var tasks2 = _.map(noDefaultArr, function(itemName) {
         return function(next) {
-            self[colName][itemName].fill(params, newMode, function(_response) {
+            self[colName][itemName].fill(args, function(_response) {
                 response[colName][itemName] = _response;
                 next();
             });

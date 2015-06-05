@@ -15,7 +15,7 @@ util.inherits(ParamController, Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ParamController(appInfo) {
-    ParamController.super_.prototype.constructor.call(this, appInfo);
+    ParamController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/ParamController'

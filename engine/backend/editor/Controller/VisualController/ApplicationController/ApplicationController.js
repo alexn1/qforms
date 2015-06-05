@@ -13,7 +13,7 @@ util.inherits(ApplicationController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationController(appInfo) {
-    ApplicationController.super_.prototype.constructor.call(this, appInfo);
+    ApplicationController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/ApplicationController'

@@ -14,7 +14,7 @@ util.inherits(FieldController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FieldController(appInfo) {
-    FieldController.super_.prototype.constructor.call(this, appInfo);
+    FieldController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/FieldController'

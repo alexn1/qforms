@@ -11,6 +11,6 @@ util.inherits(SqlDataSource, DataSource);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function SqlDataSource(data, parent) {
-    SqlDataSource.super_.prototype.constructor.call(this, data, parent);
+    SqlDataSource.super_.call(this, data, parent);
     this.dataAdapter = new SqlDataAdapter(this);
 };
