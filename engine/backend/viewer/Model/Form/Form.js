@@ -27,21 +27,22 @@ Form.prototype.fill = function(args, callback) {
     var self = this;
     Form.super_.prototype.fill.call(this, args, function(response) {
         if (self.dataSources.default === undefined) {
-            response.dataSources.default = self._getSurrogateDataSource();
+            var dataSourceResponse = self._getSurrogateDataSourceResponse();
+            this.dumpRowToParams(dataSourceResponse.rows[0], args.queryTime.params);
+            response.dataSources.default = dataSourceResponse;
         }
         callback(response);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype._getSurrogateDataSource = function() {
+Form.prototype._getSurrogateDataSourceResponse = function() {
     var row = {
         id: 1
     };
     for (var name in this.fields) {
         this.fields[name].fillDefaultValue(row);
     }
-    this.dumpRowToPageParams(row);
     return {
         class                : 'DataSource',
         database             : '',
@@ -63,9 +64,9 @@ Form.prototype.getExpValue = function(value) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.dumpRowToPageParams = function(row) {
+Form.prototype.dumpRowToParams = function(row, params) {
     for (var name in this.fields) {
-        this.fields[name].dumpRowValueToParams(row, this.page.params);
+        this.fields[name].dumpRowValueToParams(row, params);
     }
-    console.log(this.page.params);
+    //console.log(params);
 };

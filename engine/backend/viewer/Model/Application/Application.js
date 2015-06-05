@@ -201,7 +201,7 @@ Application.prototype.getPool = function(database) {
             queryFormat : helper.queryFormat
         });
     }
-    console.log('mysql pool connections count: ' + this.pools[database]._allConnections.length);
+    //console.log('mysql pool connections count: ' + this.pools[database]._allConnections.length);
     return this.pools[database];
 };
 

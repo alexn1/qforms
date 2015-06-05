@@ -3,6 +3,7 @@
 module.exports = DataSource;
 
 var util = require('util');
+var _    = require('underscore');
 
 var Model       = require('../Model');
 var Application = require('../Application/Application');
@@ -50,10 +51,13 @@ DataSource.prototype.fill = function(args, callback) {
             response.rows = [];
             callback(response);
         } else {
-            self.dataAdapter.select(args.params, function(rows) {
+            var params = {};
+            _.extend(params, args.params);
+            _.extend(params, args.queryTime.params);
+            self.dataAdapter.select(params, function(rows) {
                 response.rows = rows;
                 if (self.form && self.form instanceof RowForm && rows[0]) {
-                    self.form.dumpRowToPageParams(rows[0]);
+                    self.form.dumpRowToParams(rows[0], args.queryTime.params);
                 }
                 callback(response);
             });

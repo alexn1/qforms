@@ -155,7 +155,7 @@ function queryFormat(query, params) {
     } else {
         sql = query;
     }
-    console.log('real db query: ' + sql);
+    console.log('real db sql: ' + sql);
     return sql;
 };
 

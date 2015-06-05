@@ -19,14 +19,14 @@ module.exports = function(req, res, next) {
         var applications = req.app.get('applications');
         var route = req.params.appDirName + '/' + req.params.appFileName;
         if (req.query.debug !== '1' && applications[route]) {
-            console.log('old app: ' + route);
+            //console.log('old app: ' + route);
             var d = domain.create();
             d.on('error', next);
             d.run(function() {
                 handle(req, res, next, applications[route]);
             });
         } else {
-            console.log('new app: ' + route);
+            //console.log('new app: ' + route);
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
             fs.exists(appFilePath, function(exists) {
                 if (exists) {
@@ -84,7 +84,12 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     if (req.method === 'GET') {
-        application.fill({}, function(data) {
+        var args = {
+            queryTime : {
+                params : {}
+            }
+        };
+        application.fill(args, function(data) {
             res.render('viewer/login', {
                 version       : req.app.get('version'),
                 caption       : application.data['@attributes'].caption,
@@ -101,7 +106,12 @@ function login(req, res, next, application) {
                 req.session.username = req.body.username;
                 res.redirect(req.path);
             } else {
-                application.fill({}, function(data) {
+                var args = {
+                    queryTime : {
+                        params : {}
+                    }
+                };
+                application.fill(args, function(data) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
                         caption       : application.data['@attributes'].caption,
@@ -118,7 +128,12 @@ function login(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
-    application.fill({}, function(data) {
+    var args = {
+        queryTime : {
+            params : {}
+        }
+    };
+    application.fill(args, function(data) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -137,7 +152,14 @@ function index(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
-        page.fill({params: req.body.params, newMode: req.body.newMode}, function(data) {
+        var args = {
+            params    : req.body.params,
+            newMode   : req.body.newMode,
+            queryTime : {
+                params : {}
+            }
+        };
+        page.fill(args, function(data) {
             res.json({
                 data:data
             });
