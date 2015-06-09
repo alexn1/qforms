@@ -56,13 +56,6 @@ Form.prototype.deinit = function() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.fillParams = function(row) {
-    for (var name in this.fields) {
-        this.fields[name].valueToParams(row);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.defaultValuesToRow = function(row) {
     for (var name in this.fields) {
         var field = this.fields[name];

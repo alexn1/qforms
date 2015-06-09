@@ -7,7 +7,6 @@ function RowForm(name,page,data) {
     Form.call(this,name,page,data);
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.init = function() {
     Form.prototype.init.call(this);
@@ -16,7 +15,16 @@ RowForm.prototype.init = function() {
         this.defaultValuesToRow(row);
         this.dataSource.newRow(row);
     }
+    // dump row values to page params
+    this.fillParams(this.dataSource.data.rows[0]);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Form.prototype.fillParams = function(row) {
+    for (var name in this.fields) {
+        this.fields[name].valueToParams(row);
+    }
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.onDataSourceChanged = function(eventArgs) {

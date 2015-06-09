@@ -149,7 +149,7 @@ function replaceThis(query, page, form) {
 function queryFormat(query, params) {
     var sql;
     if (params) {
-        var sql = query.replace(/@([\w\.]+)/g, function (text, name) {
+        var sql = query.replace(/\{([\w\.]+)\}/g, function (text, name) {
             return params.hasOwnProperty(name) ? this.escape(params[name]) : 'NULL';
         }.bind(this));
     } else {

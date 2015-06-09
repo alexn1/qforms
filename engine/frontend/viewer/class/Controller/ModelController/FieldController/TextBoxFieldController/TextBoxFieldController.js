@@ -38,7 +38,7 @@ TextBoxFieldController.prototype.isValid = function(view) {
 TextBoxFieldController.prototype.onChange = function (el) {
     var view = el.parentNode;
     if (this.isValid(view)) {
-        this.model.save(view.dbRow,this.getValue(view));
+        this.model.save(view.dbRow, this.getValue(view));
         // event
         var ea = new QForms.EventArg(this);
         ea.view  = view;
