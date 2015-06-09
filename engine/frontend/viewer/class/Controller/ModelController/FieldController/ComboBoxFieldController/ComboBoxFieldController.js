@@ -32,7 +32,7 @@ ComboBoxFieldController.prototype.deinit = function() {
 ComboBoxFieldController.prototype.fill = function(row,view) {
     view.keyToOption = {};
     this.fillList(view);
-    ComboBoxFieldController.__base__.fill.call(this,row,view);
+    ComboBoxFieldController.super_.prototype.fill.call(this,row,view);
     var self = this;
     $(view).children().change(function() {
         self.onChange(this);

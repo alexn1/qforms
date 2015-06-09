@@ -4,7 +4,7 @@ QForms.inherit(DataGridColumn,GridColumn);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataGridColumn(gridWidget,fieldName,headerCell,fieldController) {
-    DataGridColumn.__base__.constructor.call(this,gridWidget,fieldName,headerCell);
+    DataGridColumn.super_.call(this,gridWidget,fieldName,headerCell);
     this.fieldController = fieldController;
 }
 

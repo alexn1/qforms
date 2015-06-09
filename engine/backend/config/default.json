@@ -1,5 +1,6 @@
 {
-    "editor": true,
-    "host": "localhost",
-    "port": 3000
+    "editor"      : true,
+    "host"        : "localhost",
+    "port"        : 3000,
+    "appsDirPath" : "../../apps"
 }

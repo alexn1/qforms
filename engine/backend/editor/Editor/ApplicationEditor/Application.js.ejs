@@ -2,10 +2,10 @@ QForms.inherit(<%=application%>Controller, <%=_class%>Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function <%=application%>Controller(model, view) {
-    <%=application%>Controller.__base__.constructor.call(this, model, view);
+    <%=application%>Controller.super_.call(this, model, view);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 <%=application%>Controller.prototype.init = function() {
-    <%=application%>Controller.__base__.init.call(this);
+    <%=application%>Controller.super_.prototype.init.call(this);
 };

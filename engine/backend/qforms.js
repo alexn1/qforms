@@ -16,7 +16,7 @@ var helper = require('./common/helper');
 var qforms = module.exports = express();
 
 // environment
-qforms.set('appsDirPath', helper.getParams().appsDirPath || '../../apps');
+qforms.set('appsDirPath', helper.getParams().appsDirPath || config.get('appsDirPath'));
 if (!fs.existsSync(qforms.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(qforms.get('appsDirPath')) + "' doesn't exists");
     process.exit(1);

@@ -2,12 +2,12 @@ QForms.inherit(<%=page%><%=form%><%=field%>Controller, <%=_class%>Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function <%=page%><%=form%><%=field%>Controller(model) {
-    <%=page%><%=form%><%=field%>Controller.__base__.constructor.call(this,model);
+    <%=page%><%=form%><%=field%>Controller.super_.call(this,model);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 <%=page%><%=form%><%=field%>Controller.prototype.init = function() {
-    <%=page%><%=form%><%=field%>Controller.__base__.init.call(this);
+    <%=page%><%=form%><%=field%>Controller.super_.prototype.init.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -28,7 +28,7 @@ Form.prototype.fill = function(args, callback) {
     Form.super_.prototype.fill.call(this, args, function(response) {
         if (self.dataSources.default === undefined) {
             var dataSourceResponse = self._getSurrogateDataSourceResponse();
-            this.dumpRowToParams(dataSourceResponse.rows[0], args.queryTime.params);
+            self.dumpRowToParams(dataSourceResponse.rows[0], args.queryTime.params);
             response.dataSources.default = dataSourceResponse;
         }
         callback(response);

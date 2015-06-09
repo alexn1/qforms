@@ -4,13 +4,13 @@ QForms.inherit(TextBoxFieldController,FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TextBoxFieldController(model,parent) {
-    TextBoxFieldController.__base__.constructor.call(this,model,parent);
+    TextBoxFieldController.super_.call(this,model,parent);
     this.eventChange = new QForms.Event(this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.fill = function(row,view) {
-    TextBoxFieldController.__base__.fill.call(this,row,view);
+    TextBoxFieldController.super_.prototype.fill.call(this,row,view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;
         $(view).children().change(function() {

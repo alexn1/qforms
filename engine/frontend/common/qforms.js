@@ -71,7 +71,7 @@ QForms.moveNode = function(parent,child,oldIndex,newIndex) {
 QForms.inherit = function(className,baseClassName) {
     className.prototype = Object.create(baseClassName.prototype);
     className.prototype.constructor = className;
-    className.__base__ = baseClassName.prototype;
+    className.super_   = baseClassName;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

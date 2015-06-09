@@ -20,7 +20,7 @@ CheckBoxFieldController.prototype.setValue = function (value,view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.fill = function(row,view) {
-    CheckBoxFieldController.__base__.fill.call(this,row,view);
+    CheckBoxFieldController.super_.prototype.fill.call(this,row,view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;
         $(view).children().change(function() {
