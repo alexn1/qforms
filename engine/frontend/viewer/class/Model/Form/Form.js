@@ -1,18 +1,20 @@
 "use strict"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function Form(name,page,data) {
-    this.name = name;
-    this.page = page;
-    this.data = data;
+function Form(name, parent, data) {
+    this.name          = name;
+    this.page          = parent;
+    this.data          = data;
+    this.parent        = parent;
     this.dataSource    = null;
     this.changed       = false;
     this.dataSources   = {};
     this.fields        = {};
-    this.controls        = {};
+    this.controls      = {};
     this.eventHandlers = {};
-    this.eventChanged = new QForms.Event(this);
-    this.eventUpdated = new QForms.Event(this);
+    // event
+    this.eventChanged  = new QForms.Event(this);
+    this.eventUpdated  = new QForms.Event(this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

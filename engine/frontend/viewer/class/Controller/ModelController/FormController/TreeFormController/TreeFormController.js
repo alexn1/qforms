@@ -3,8 +3,8 @@
 QForms.inherit(TreeFormController,FormController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TreeFormController(model,view) {
-    FormController.call(this,model,view);
+function TreeFormController(model, view, parent) {
+    FormController.call(this, model, view, parent);
     this.tree = null;
 }
 

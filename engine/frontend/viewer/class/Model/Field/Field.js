@@ -1,11 +1,12 @@
 "use strict"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function Field(name,form,data) {
-    this.name = name;
-    this.form = form;
-    this.data = data;
-    this.eventHandlers = {};
+function Field(name, parent, data) {
+    this.name   = name;
+    this.form   = parent;
+    this.data   = data;
+    this.parent = parent;
+    //this.eventHandlers = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

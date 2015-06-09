@@ -3,8 +3,8 @@
 QForms.inherit(TableFormController,FormController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TableFormController(model,view) {
-    FormController.call(this,model,view);
+function TableFormController(model, view, parent) {
+    FormController.call(this,model,view, parent);
     this.grid = null;
 }
 

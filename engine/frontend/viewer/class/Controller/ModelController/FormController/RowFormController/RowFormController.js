@@ -3,8 +3,8 @@
 QForms.inherit(RowFormController,FormController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowFormController(model,view) {
-    FormController.call(this,model,view);
+function RowFormController(model, view, parent) {
+    FormController.call(this, model, view, parent);
     this.row          = null;
     this.key          = null;
     this.fieldViews   = {};

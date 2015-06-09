@@ -3,8 +3,8 @@
 QForms.inherit(FieldController,ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function FieldController(model,parent) {
-    ModelController.call(this,model);
+function FieldController(model, parent) {
+    ModelController.call(this, model);
     this.parent = parent;
     this.views  = {};    // list of all views that controlled by this field
     this.html   = null;

@@ -3,22 +3,22 @@
 QForms.inherit(FormController,ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormController(model,view,parent) {
-    ModelController.call(this,model);
-    this.view   = view;
-    this.parent = parent;
+function FormController(model, view, parent) {
+    ModelController.call(this, model);
+    this.view     = view;
+    this.parent   = parent;
     this.fields   = {};
     this.controls = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.create = function(model,view,parent) {
+FormController.create = function(model, view, parent) {
     var customClassName = "{page}{form}Controller"
-        .replace("{page}",model.page.name)
-        .replace("{form}",model.name);
+        .replace("{page}", model.page.name)
+        .replace("{form}", model.name);
     var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}",customClassName);
-    var custom =  "new {customClassName}(model,view,parent)".replace("{customClassName}",customClassName);
-    var general = "new {class}Controller(model,view,parent)".replace("{class}",model.data.class);
+    var custom =  "new {customClassName}(model, view, parent)".replace("{customClassName}",customClassName);
+    var general = "new {class}Controller(model, view, parent)".replace("{class}",model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === "function") {

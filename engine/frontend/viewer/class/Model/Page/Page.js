@@ -2,18 +2,19 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Page(args) {
-    this.app = args.app;
-    this.data = args.data;
-    this.key = args.key;
-    this.newMode = args.newMode === undefined ? false : args.newMode;
-    this.parentPage = args.parentPage;
-    this.name = args.data.name;
+    this.parent      = args.app;
+    this.app         = args.app;
+    this.data        = args.data;
+    this.key         = args.key;
+    this.newMode     = args.newMode === undefined ? false : args.newMode;
+    this.parentPage  = args.parentPage;
+    this.name        = args.data.name;
     this.dataSources = {};
-    this.forms = {};
-    this.params = (args.params !== undefined) ? args.params : {};
+    this.forms       = {};
+    this.params      = (args.params !== undefined) ? args.params : {};
     // events
-    this.eventShow = new QForms.Event(this);
-    this.eventHide = new QForms.Event(this);
+    this.eventShow    = new QForms.Event(this);
+    this.eventHide    = new QForms.Event(this);
     this.eventChanged = new QForms.Event(this);
     this.eventUpdated = new QForms.Event(this);
 }

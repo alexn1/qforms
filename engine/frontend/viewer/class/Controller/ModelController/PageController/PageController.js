@@ -3,13 +3,13 @@
 QForms.inherit(PageController,ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageController(model,view,parent) {
+function PageController(model, view, parent) {
     //console.log(model);
     ModelController.call(this,model);
-    this.view = view;
-    this.parent = parent;
+    this.view       = view;
+    this.parent     = parent;
     this.captionEls = null;
-    this.forms = {};
+    this.forms      = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ PageController.prototype.init = function() {
     this.model.eventUpdated.subscribe(this,"onPageUpdated");
     for (var formName in this.model.forms) {
         var view = this.view.querySelector("#{pageId}_{formName}".replace("{pageId}",this.model.id).replace("{formName}",formName));
-        this.forms[formName] = FormController.create(this.model.forms[formName],view);
+        this.forms[formName] = FormController.create(this.model.forms[formName], view, this);
         this.forms[formName].init();
     }
 }
