@@ -1,6 +1,7 @@
 'use strict';
 
 var express    = require('express');
+var config     = require('config');
 var path       = require('path');
 var fs         = require('fs');
 var morgan     = require('morgan');
@@ -21,8 +22,8 @@ if (!fs.existsSync(qforms.get('appsDirPath'))) {
     process.exit(1);
 }
 qforms.set('version'       , p.version);
-qforms.set('host'          , helper.getParams().host || 'localhost');
-qforms.set('port'          , helper.getParams().port || 3000);
+qforms.set('host'          , helper.getParams().host || config.get('host'));
+qforms.set('port'          , helper.getParams().port || config.get('port'));
 qforms.set('view engine'   , 'ejs');
 qforms.set('views'         , './routes');
 qforms.set('public'        , '../frontend');
