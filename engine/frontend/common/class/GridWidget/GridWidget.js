@@ -80,7 +80,7 @@ GridWidget.prototype.createBodyRow = function(i) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.createBodyCell = function(name) {
     var self = this;
-    var view = this.gridColumns[name].getView();
+    var view = this.gridColumns[name].renderView();
     // bodyCell
     var bodyCell = window.document.createElement("td");
     bodyCell.style.width = this.gridColumns[name].headerCell.style.width;

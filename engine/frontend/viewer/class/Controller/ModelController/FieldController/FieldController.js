@@ -6,8 +6,8 @@ QForms.inherit(FieldController,ModelController);
 function FieldController(model,parent) {
     ModelController.call(this,model);
     this.parent = parent;
-    this.html   = null;
     this.views  = {};    // list of all views that controlled by this field
+    this.html   = null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ FieldController.prototype.deinit = function() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.getView = function() {
+FieldController.prototype.renderView = function() {
     if (this.html === null) {
         this.html = QForms.render(this.model.data.view,{model:this.model});
     }

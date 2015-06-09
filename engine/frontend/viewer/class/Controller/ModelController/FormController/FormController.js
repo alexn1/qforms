@@ -5,9 +5,10 @@ QForms.inherit(FormController,ModelController);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FormController(model,view,parent) {
     ModelController.call(this,model);
-    this.view = view;
+    this.view   = view;
     this.parent = parent;
-    this.fields = {};
+    this.fields   = {};
+    this.controls = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +40,12 @@ FormController.prototype.init = function() {
         var field = this.model.fields[name];
         this.fields[name] = FieldController.create(field,this);
         this.fields[name].init();
+    }
+    // controls
+    for (var name in this.model.controls) {
+        var control = this.model.controls[name];
+        this.controls[name] = ControlController.create(control, this);
+        this.controls[name].init();
     }
 }
 

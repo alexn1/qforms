@@ -5,10 +5,10 @@ QForms.inherit(RowFormController,FormController);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function RowFormController(model,view) {
     FormController.call(this,model,view);
-    this.row = null;
-    this.key = null;
-    this.fieldViews = {};
-    this.controls = {};
+    this.row          = null;
+    this.key          = null;
+    this.fieldViews   = {};
+    this.controlViews = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,27 +20,26 @@ RowFormController.prototype.init = function() {
     // row field views
     for (var name in this.model.fields) {
         var selector = ".{page}_{form}_{field}"
-                .replace("{page}",this.model.page.id)
-                .replace("{form}",this.model.name)
-                .replace("{field}",name);
+            .replace("{page}" ,this.model.page.id)
+            .replace("{form}" ,this.model.name)
+            .replace("{field}",name);
         var view = this.view.querySelector(selector);
         if (view === null) {
             continue;
         }
         this.fieldViews[name] = view;
     }
-    // controls
+    // row controls views
     for (var name in this.model.controls) {
         var selector = ".{page}_{form}_{control}"
-            .replace("{page}",this.model.page.id)
-            .replace("{form}",this.model.name)
+            .replace("{page}"   ,this.model.page.id)
+            .replace("{form}"   ,this.model.name)
             .replace("{control}",name);
-        if (this.view.querySelector(selector) === null) {
+        var view = this.view.querySelector(selector);
+        if (view === null) {
             continue;
         }
-        var control = this.model.controls[name];
-        this.controls[name] = eval("new {class}Controller(control)".replace("{class}",control.data.class));
-        this.controls[name].init();
+        this.controlViews[name] = view;
     }
 }
 
@@ -51,15 +50,26 @@ RowFormController.prototype.deinit = function() {
     for (var name in this.fields) {
         this.fields[name].deinit();
     }
+    for (var name in this.controls) {
+        this.controls[name].deinit();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.fill = function() {
     FormController.prototype.fill.call(this);
+    // fields
     for (var name in this.fields) {
         var view = this.fieldViews[name];
         if (view) {
-            this.fields[name].fill(this.row,view);
+            this.fields[name].fill(this.row, view);
+        }
+    }
+    // controls
+    for (var name in this.controls) {
+        var view = this.controlViews[name];
+        if (view) {
+            this.controls[name].fill(this.row, view);
         }
     }
 }

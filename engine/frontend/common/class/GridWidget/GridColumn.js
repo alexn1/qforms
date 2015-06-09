@@ -27,7 +27,7 @@ GridColumn.prototype.initResize = function(headerCell,fieldName) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.getView = function() {
+GridColumn.prototype.renderView = function() {
     return $('<div><span></span></div>').get(0);
 }
 

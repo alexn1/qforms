@@ -10,7 +10,7 @@ function TextBoxFieldController(model,parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.fill = function(row,view) {
-    TextBoxFieldController.super_.prototype.fill.call(this,row,view);
+    TextBoxFieldController.super_.prototype.fill.call(this, row, view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;
         $(view).children().change(function() {
@@ -41,9 +41,9 @@ TextBoxFieldController.prototype.onChange = function (el) {
         this.model.save(view.dbRow,this.getValue(view));
         // event
         var ea = new QForms.EventArg(this);
-        ea.view = view;
-        ea.row = view.dbRow;
-        ea.el = el;
+        ea.view  = view;
+        ea.row   = view.dbRow;
+        ea.el    = el;
         ea.field = this;
         this.eventChange.fire(ea);
     }

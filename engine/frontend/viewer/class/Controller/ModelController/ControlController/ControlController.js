@@ -3,27 +3,49 @@
 QForms.inherit(ControlController,ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ControlController(model) {
-    ModelController.call(this,model);
-    this.$el = null;
-    this.eventClick = new QForms.Event(this);
-}
+function ControlController(model, parent) {
+    ModelController.call(this, model);
+    this.parent = parent;
+    this.views  = {};    // list of all views that controlled by this control
+    //this.html   = null;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ControlController.create = function(model, parent) {
+    var general = "new {class}Controller(model, parent)".replace("{class}", model.data.class);
+    var obj = eval(general);
+    return obj;
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.init = function() {
-    this.$el = $("#{page}_{form}_{control}"
-        .replace("{page}",this.model.form.page.id)
-        .replace("{form}",this.model.form.name)
-        .replace("{control}",this.model.name)
-    );
 
-    var self = this;
-    this.$el.children().click(function() {
-        self.onClick(this);
-    });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlController.prototype.onClick = function(el) {
-    this.eventClick.fire(new QForms.EventArg(this));
-}
+ControlController.prototype.deinit = function() {
+    this.views = null;
+};
+
+/*
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ControlController.prototype.renderView = function() {
+    if (this.html === null) {
+        this.html = QForms.render(this.model.data.view, {model:this.model});
+    }
+    return $(this.html).get(0);
+};
+*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ControlController.prototype.fill = function(row, view) {
+    var key = this.model.form.dataSource.getRowKey(row);
+    this.views[key] = view;
+    view.dbRow = row;
+    this.setViewStyle(view, row);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ControlController.prototype.setViewStyle = function(view, row) {
+
+};
