@@ -19,3 +19,8 @@ function DatePickerField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatePickerField.create = function(data, parent, callback) {
+    callback(new DatePickerField(data, parent));
+};

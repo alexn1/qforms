@@ -19,3 +19,8 @@ function LinkField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+LinkField.create = function(data, parent, callback) {
+    callback(new LinkField(data, parent));
+};

@@ -19,3 +19,8 @@ function TextAreaField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TextAreaField.create = function(data, parent, callback) {
+    callback(new TextAreaField(data, parent));
+};

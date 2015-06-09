@@ -7,19 +7,21 @@ var async = require('async');
 var fs    = require('fs');
 var _     = require('underscore');
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
-    getFilePathsSync: getFilePathsSync,
-    getFilePaths    : getFilePaths,
-    getAppInfo      : getAppInfo,
-    getAppInfos     : getAppInfos,
-    currentTime     : currentTime,
-    currentDate     : currentDate,
-    replaceThis     : replaceThis,
-    queryFormat     : queryFormat,
-    typeCast        : typeCast,
-    getParams       : getParams,
-    replaceKey      : replaceKey
+    getFilePathsSync : getFilePathsSync,
+    getFilePaths     : getFilePaths,
+    getAppInfo       : getAppInfo,
+    getAppInfos      : getAppInfos,
+    currentTime      : currentTime,
+    currentDate      : currentDate,
+    replaceThis      : replaceThis,
+    queryFormat      : queryFormat,
+    typeCast         : typeCast,
+    getParams        : getParams,
+    replaceKey       : replaceKey,
+    getFileContent   : getFileContent
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,8 +152,8 @@ function queryFormat(query, params) {
     var sql;
     if (params) {
         var sql = query.replace(/\{([\w\.]+)\}/g, function (text, name) {
-            return params.hasOwnProperty(name) ? this.escape(params[name]) : 'NULL';
-        }.bind(this));
+            return params.hasOwnProperty(name) ? params[name] : 'NULL';
+        });
     } else {
         sql = query;
     }
@@ -202,4 +204,21 @@ function replaceKey(obj, key1, key2) {
         obj = _.object(keys, values);
     }
     return obj;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function getFileContent(filePath, callback) {
+    fs.exists(filePath, function(exists) {
+        if (exists) {
+            fs.readFile(filePath, 'utf8', function (err, content) {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(content);
+                }
+            });
+        } else {
+            callback(null);
+        }
+    });
 };

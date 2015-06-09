@@ -19,3 +19,8 @@ function ComboBoxField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ComboBoxField.create = function(data, parent, callback) {
+    callback(new ComboBoxField(data, parent));
+};

@@ -25,6 +25,11 @@ function DataSource(data, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.create = function(data, parent, callback) {
+    callback(new DataSource(data, parent));
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.init = function(callback) {
     var self = this;
     DataSource.super_.prototype.init.call(this, function() {
@@ -145,4 +150,9 @@ DataSource.prototype.getLocation = function() {
     var pageName = this.page !== null ? this.page.name : '';
     var formName = this.form !== null ? this.form.name : '';
     return pageName + '.' + formName + '.' + this.name;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.getQuery = function(params) {
+    return this.data['@attributes'].query;
 };

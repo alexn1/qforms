@@ -40,17 +40,11 @@ function Application(data, appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.create = function(data, appInfo, callback) {
-    var customClassNameJS = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-    fs.exists(customClassNameJS, function(exists) {
-        if (exists) {
-            fs.readFile(customClassNameJS, 'utf8', function (err, content) {
-                if (err) {
-                    throw err;
-                } else {
-                    var customClass = eval(content);
-                    callback(new customClass(data, appInfo));
-                }
-            });
+    var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
+    helper.getFileContent(customClassFilePath, function(content) {
+        if (content) {
+            var customClass = eval(content);
+            callback(new customClass(data, appInfo));
         } else {
             callback(new Application(data, appInfo));
         }
@@ -123,9 +117,10 @@ Application.prototype._createPage = function(pageName, callback) {
             throw err;
         } else {
             var data = JSON.parse(content);
-            var page = new Page(data, self);
-            page.init(function() {
-                callback(page);
+            Page.create(data, self, function(page) {
+                page.init(function() {
+                    callback(page);
+                });
             });
         }
     });

@@ -93,8 +93,11 @@ Model.prototype.createCollection = function(colName, callback) {
     this[colName] = {};
     var tasks = _.map(this.data[colName], function(itemData, itemName) {
         return function(next) {
-            self[colName][itemName] = eval('new {class}(itemData, self)'.replace('{class}', itemData['@class']));
-            self[colName][itemName].init(next);
+            var _callback = function(obj) {
+                self[colName][itemName] = obj;
+                self[colName][itemName].init(next);
+            };
+            eval('{class}.create(itemData, self, _callback)'.replace('{class}', itemData['@class']));
         };
     });
     async.series(tasks, callback);

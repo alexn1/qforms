@@ -18,6 +18,11 @@ function Field(data, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.create = function(data, parent, callback) {
+    callback(new Field(data, parent));
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.fillDefaultValue = function(row) {
     row[this.data['@attributes'].column] = this.parent.getExpValue(this.data['@attributes'].defaultValue);
 };

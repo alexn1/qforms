@@ -19,3 +19,8 @@ function TableForm(data, parent) {
         this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TableForm.create = function(data, parent, callback) {
+    callback(new TableForm(data, parent));
+};

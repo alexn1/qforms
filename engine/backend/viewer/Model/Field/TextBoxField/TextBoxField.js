@@ -19,3 +19,8 @@ function TextBoxField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TextBoxField.create = function(data, parent, callback) {
+    callback(new TextBoxField(data, parent));
+};

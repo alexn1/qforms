@@ -19,3 +19,8 @@ function RowForm(data, parent) {
         this.constructor.name + 'View.ejs'
     );
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+RowForm.create = function(data, parent, callback) {
+    callback(new RowForm(data, parent));
+};

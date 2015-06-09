@@ -19,3 +19,8 @@ function ButtonControl(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ButtonControl.create = function(data, parent, callback) {
+    callback(new ButtonControl(data, parent));
+};

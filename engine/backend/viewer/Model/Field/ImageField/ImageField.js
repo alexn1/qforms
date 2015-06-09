@@ -19,3 +19,8 @@ function ImageField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ImageField.create = function(data, parent, callback) {
+    callback(new ImageField(data, parent));
+};

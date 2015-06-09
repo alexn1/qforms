@@ -15,3 +15,8 @@ function Control(data, parent) {
     this.dirPath            = path.join(parent.dirPath, this.name);
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Control.create = function(data, parent, callback) {
+    callback(new Control(data, parent));
+};

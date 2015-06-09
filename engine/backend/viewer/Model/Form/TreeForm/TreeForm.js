@@ -19,3 +19,8 @@ function TreeForm(data, parent) {
         this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TreeForm.create = function(data, parent, callback) {
+    callback(new TreeForm(data, parent));
+};

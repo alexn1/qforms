@@ -19,3 +19,8 @@ function LabelField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+LabelField.create = function(data, parent, callback) {
+    callback(new LabelField(data, parent));
+};

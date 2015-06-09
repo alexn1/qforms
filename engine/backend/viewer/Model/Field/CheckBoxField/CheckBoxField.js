@@ -19,3 +19,8 @@ function CheckBoxField(data, parent) {
         this.parent.constructor.name + this.constructor.name + 'View.ejs'
     );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+CheckBoxField.create = function(data, parent, callback) {
+    callback(new CheckBoxField(data, parent));
+};
