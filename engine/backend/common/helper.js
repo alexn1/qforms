@@ -21,7 +21,8 @@ module.exports = {
     typeCast         : typeCast,
     getParams        : getParams,
     replaceKey       : replaceKey,
-    getFileContent   : getFileContent
+    getFileContent   : getFileContent,
+    createDirIfNotExists: createDirIfNotExists
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,6 +220,24 @@ function getFileContent(filePath, callback) {
             });
         } else {
             callback(null);
+        }
+    });
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function createDirIfNotExists(dirPath, callback) {
+    fs.exists(dirPath, function(exists) {
+        if (exists) {
+            callback();
+        } else {
+            fs.mkdir(dirPath, function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    callback();
+                }
+            });
         }
     });
 };

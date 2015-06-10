@@ -42,7 +42,7 @@ FormWizard.prototype.getQuery = function() {
                 .replace("{columns}",columns.toString());
             break;
         case "RowForm":
-            query = "select {columns} from `{table}` where id = @key"
+            query = "select {columns} from `{table}` where id = {key}"
                 .replace("{table}",this.params.tableName)
                 .replace("{columns}",columns.toString());
             break;

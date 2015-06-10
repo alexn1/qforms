@@ -6,6 +6,7 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
+var helper = require('../../../common/helper');
 var Editor = require('../Editor');
 
 util.inherits(FieldEditor, Editor);
@@ -52,43 +53,23 @@ FieldEditor.prototype.changeClass = function(newClassName, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldEditor.prototype.createFieldDirIfNotExists = function(params, callback) {
-    var fieldDirPath   = path.join(
-        this.formEditor.pageEditor.appEditor.appFile.appInfo.dirPath,
-        params.page,
-        params.form,
-        params.field
-    );
-    fs.exists(fieldDirPath, function(exists) {
-        if (exists) {
-            callback();
-        } else {
-            fs.mkdir(fieldDirPath, function(err) {
-                if (err) {
-                    throw err;
-                } else {
-                    callback();
-                }
-            });
-        }
+FieldEditor.prototype.createCustomDirIfNotExists = function(params, callback) {
+    var fieldsDirPath  = this.getCollectionPath(params);
+    var fieldDirPath   = this.getCustomDirPath(params);
+    helper.createDirIfNotExists(fieldsDirPath, function() {
+        helper.createDirIfNotExists(fieldDirPath, callback);
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.createEjs = function(params, callback) {
     var self = this;
-    var formData = this.formEditor.getData();
+    var formData           = this.formEditor.getData();
     var defaultEjsFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.ejs');
-    var customEjsFilePath  = path.join(
-        this.formEditor.pageEditor.appEditor.appFile.appInfo.dirPath,
-        params.page,
-        params.form,
-        params.field,
-        params.field + '.ejs'
-    );
-    var replaceFrom = formData['@class'] + this.getViewName();
-    var replaceTo   = params.page + '-' + params.form + '-' + params.field;
-    this.createFieldDirIfNotExists(params, function() {
+    var customEjsFilePath  = this.getCustomFilePath(params, 'ejs');
+    var replaceFrom        = formData['@class'] + this.getViewName();
+    var replaceTo          = params.page + '-' + params.form + '-' + params.field;
+    this.createCustomDirIfNotExists(params, function() {
         self.createFile(customEjsFilePath, defaultEjsFilePath, replaceFrom, replaceTo, null, function(ejs) {
             callback(ejs);
         });
@@ -100,16 +81,10 @@ FieldEditor.prototype.createCss = function(params, callback) {
     var self = this;
     var formData = this.formEditor.getData();
     var defaultCssFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.css');
-    var customCssFilePath  = path.join(
-        this.formEditor.pageEditor.appEditor.appFile.appInfo.dirPath,
-        params.page,
-        params.form,
-        params.field,
-        params.field + '.css'
-    );
+    var customCssFilePath  = this.getCustomFilePath(params, 'css');
     var replaceFrom = formData['@class'] + this.getViewName();
     var replaceTo   = params.page + '-' + params.form + '-' + params.field;
-    this.createFieldDirIfNotExists(params, function() {
+    this.createCustomDirIfNotExists(params, function() {
         self.createFile(customCssFilePath, defaultCssFilePath, replaceFrom, replaceTo, null, function(ejs) {
             callback(ejs);
         });
@@ -119,16 +94,9 @@ FieldEditor.prototype.createCss = function(params, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.createJs = function(params, callback) {
     var self = this;
-    var customJsFilePath  = path.join(
-        this.formEditor.pageEditor.appEditor.appFile.appInfo.dirPath,
-        params.page,
-        params.form,
-        params.field,
-        params.field + '.js'
-    );
+    var customJsFilePath  = this.getCustomFilePath(params, 'js');
     var templateFilePath = path.join(__dirname, 'Field.js.ejs');
-
-    this.createFieldDirIfNotExists(params, function() {
+    this.createCustomDirIfNotExists(params, function() {
         self.createFile2(customJsFilePath, templateFilePath, {
             page  : self.formEditor.pageEditor.pageFile.getAttr('name'),
             form  : self.formEditor.name,
@@ -141,12 +109,23 @@ FieldEditor.prototype.createJs = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldEditor.prototype.getCustomFilePath = function(params, ext, callback) {
+FieldEditor.prototype.getCollectionPath = function(params) {
     return path.join(
         this.formEditor.pageEditor.appEditor.appFile.appInfo.dirPath,
+        'pages',
         params.page,
+        'forms',
         params.form,
-        params.field,
-        params.field + '.' + ext
+        'fields'
     );
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldEditor.prototype.getCustomDirPath = function(params) {
+    return path.join(this.getCollectionPath(params), params.field);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldEditor.prototype.getCustomFilePath = function(params, ext) {
+    return path.join(this.getCustomDirPath(params), params.field + '.' + ext);
 };

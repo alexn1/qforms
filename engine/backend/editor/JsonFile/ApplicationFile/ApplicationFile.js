@@ -117,7 +117,7 @@ ApplicationFile.prototype.newPageLink = function(params) {
         '@class' : 'PageLink',
         '@attributes' : {
             'name' : name,
-            'fileName' : "{name}/{name}.json".replace(/\{name\}/g, name),
+            'fileName' : "pages/{name}/{name}.json".replace(/\{name\}/g, name),
             'menu' : menu,
             'startup' : startup
         }

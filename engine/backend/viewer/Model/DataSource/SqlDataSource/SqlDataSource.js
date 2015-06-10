@@ -25,6 +25,7 @@ SqlDataSource.create = function(data, parent, callback) {
         var customClassFilePath = path.join(
             form.page.application.dirPath,
             form.page.name,
+            'forms',
             form.name,
             'dataSources',
             data['@attributes'].name + '.backend.js'

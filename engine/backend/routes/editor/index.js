@@ -61,7 +61,7 @@ module.exports = function(req, res, next) {
                 if (exists) {
                     helper.getAppInfo(appFilePath, function(appInfo) {
                         var d = domain.create();
-                        d.on('error', next);
+                        //d.on('error', next);
                         d.run(function() {
                             handle(req, res, next, appInfo);
                         });

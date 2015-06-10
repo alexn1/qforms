@@ -6,7 +6,9 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
+
 var qforms          = require('../../../qforms');
+var helper          = require('../../../common/helper');
 var Editor          = require('../Editor');
 var PageEditor      = require('../PageEditor/PageEditor');
 var PageLinkEditor  = require('../PageLinkEditor/PageLinkEditor');
@@ -31,8 +33,9 @@ function ApplicationEditor(appFile) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage = function(params, callback) {
     var self           = this;
-    var pageDirPath    = path.join(this.appFile.appInfo.dirPath, params.name);
-    var pageFilePath   = path.join(this.appFile.appInfo.dirPath, params.name, params.name + '.json');
+    var pagesDirPath   = path.join(this.appFile.appInfo.dirPath, 'pages');
+    var pageDirPath    = path.join(pagesDirPath, params.name);
+    var pageFilePath   = path.join(pageDirPath , params.name + '.json');
     var pageData       = PageEditor.createData(params);
     var content        = JSON.stringify(pageData, null, 4);
     var createPageFile = function(_callback) {
@@ -61,22 +64,23 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
             });
         });
     };
-
-    fs.exists(pageDirPath, function(exists) {
-        if (!exists) {
-            fs.mkdir(pageDirPath, function(err) {
-                if (err) {
-                    throw err;
-                }
+    helper.createDirIfNotExists(pagesDirPath, function() {
+        fs.exists(pageDirPath, function(exists) {
+            if (!exists) {
+                fs.mkdir(pageDirPath, function(err) {
+                    if (err) {
+                        throw err;
+                    }
+                    createPageEditor(function(pageEditor) {
+                        callback(pageEditor);
+                    });
+                });
+            } else {
                 createPageEditor(function(pageEditor) {
                     callback(pageEditor);
                 });
-            });
-        } else {
-            createPageEditor(function(pageEditor) {
-                callback(pageEditor);
-            });
-        }
+            }
+        });
     });
 };
 
@@ -118,7 +122,7 @@ ApplicationEditor.prototype.getPage = function(name, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createEjs = function(params, callback) {
-    var customEjsFilePath = path.join(this.appFile.appInfo.dirPath, params.app + '.ejs');
+    var customEjsFilePath = this.getCustomFilePath(params, 'ejs');
     this.createFile(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.app, null, function(ejs) {
         callback(ejs);
     });
@@ -126,7 +130,7 @@ ApplicationEditor.prototype.createEjs = function(params, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createCss = function(params, callback) {
-    var customCssFilePath = path.join(this.appFile.appInfo.dirPath, params.app + '.css');
+    var customCssFilePath = this.getCustomFilePath(params, 'css');
     var emptyTemplate = '.' + params.app + ' {\n}';
     this.createFile(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.app, emptyTemplate, function(css) {
         callback(css);
@@ -136,7 +140,7 @@ ApplicationEditor.prototype.createCss = function(params, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createJs = function(params, callback) {
-    var customJsFilePath = path.join(this.appFile.appInfo.dirPath, params.app + '.js');
+    var customJsFilePath = this.getCustomFilePath(params, 'js');
     var tempalteFilePath = path.join(__dirname, 'Application.js.ejs');
     this.createFile2(customJsFilePath, tempalteFilePath, {
         application: this.appFile.getAttr('name'),
