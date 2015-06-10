@@ -42,7 +42,11 @@ Field.prototype.delete = function(callback) {
             field       :this.data["@attributes"].name
         }
     };
-    QForms.doHttpRequest(this,args, callback);
+    QForms.doHttpRequest(this,args, function(data) {
+        if (callback) {
+            callback(data);
+        }
+    });
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

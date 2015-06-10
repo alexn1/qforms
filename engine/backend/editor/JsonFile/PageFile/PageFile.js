@@ -318,6 +318,17 @@ PageFile.prototype.deleteFormDataSourceParentKeyColumn = function(form,dataSourc
     delete this.data.forms[form].dataSources[dataSource].parentKeyColumns[parentKeyColumn];
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageFile.prototype.getForms = function() {
+    return this.data.forms;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageFile.prototype.setForms = function(forms) {
+    this.data.forms = forms;
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageFile.prototype.getFormData = function(name) {
     return this.data.forms[name];

@@ -56,6 +56,29 @@ FormController.prototype.delete = function(params, callback) {
     });
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormController.prototype.moveUp = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
+            pageEditor.moveFormUp(params, function(result) {
+                callback(result);
+            });
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormController.prototype.moveDown = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
+            pageEditor.moveFormDown(params, function(result) {
+                callback(result);
+            });
+        });
+    });
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.createView = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {

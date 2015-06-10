@@ -1,14 +1,14 @@
 "use strict"
 
-QForms.inherit(FormController,VisualController);
+QForms.inherit(FormController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormController(model,item) {
-    VisualController.call(this,model);
-    this.item = item;
+function FormController(model, item) {
+    VisualController.call(this, model);
+    this.item            = item;
     this.itemDataSources = null;
-    this.itemFields = null;
-    this.itemControls = null;
+    this.itemFields      = null;
+    this.itemControls    = null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,12 +74,16 @@ FormController.prototype.getActions = function() {
         {"action":"newField","caption":"New Field"},
         {"action":"newControl","caption":"New Control"},
         {"action":"","caption":"-"},
+        {"action":"moveUp","caption":"Move Up"},
+        {"action":"moveDown","caption":"Move Down"},
+        {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.doAction = function(action) {
+    var self = this;
     switch (action) {
         case "newDataSource":
             this.actionNewDataSource();
@@ -92,6 +96,16 @@ FormController.prototype.doAction = function(action) {
             break;
         case "delete":
             this.delete();
+            break;
+        case 'moveUp':
+            this.model.moveUp(function(data) {
+                self.item.move(-1);
+            });
+            break;
+        case 'moveDown':
+            this.model.moveDown(function(data) {
+                self.item.move(1);
+            });
             break;
     }
 }

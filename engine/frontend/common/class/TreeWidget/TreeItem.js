@@ -156,5 +156,5 @@ TreeItem.prototype.changeParent = function(newParent,newIndex) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.move = function(offset) {
     var index = Array.prototype.indexOf.call(this.parent.ul.childNodes, this.li);
-    QForms.insertNewNodeAt(this.parent.ul, this.li, index + offset);
+    QForms.moveNode(this.parent.ul, this.li, index, index + offset);
 };

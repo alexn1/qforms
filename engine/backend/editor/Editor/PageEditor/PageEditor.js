@@ -7,6 +7,7 @@ var path = require('path');
 var _    = require('underscore');
 
 var qforms          = require('../../../qforms');
+var helper          = require('../../../common/helper');
 var Editor          = require('../Editor');
 var TableFormEditor = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
 var RowFormEditor   = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
@@ -65,6 +66,27 @@ PageEditor.prototype.setAttr = function(name, value, callback) {
     } else {
         setPageAttr(callback);
     }
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PageEditor.prototype.moveFormUp = function(params, callback) {
+    var forms = this.pageFile.getForms();
+    forms = helper.moveObjProp(forms, params.form, -1);
+    this.pageFile.setForms(forms);
+    this.pageFile.save(function() {
+        callback('ok');
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PageEditor.prototype.moveFormDown = function(params, callback) {
+    var forms = this.pageFile.getForms();
+    forms = helper.moveObjProp(forms, params.form, 1);
+    this.pageFile.setForms(forms);
+    this.pageFile.save(function() {
+        callback('ok');
+    });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

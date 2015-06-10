@@ -39,12 +39,38 @@ Form.prototype.delete = function(callback) {
             form:this.data["@attributes"].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data){
         if (callback) {
             callback(data);
         }
     });
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Form.prototype.moveUp = function(callback) {
+    var args = {
+        controller: 'Form',
+        action    : 'moveUp',
+        params    : {
+            pageFileName: this.page.pageLink.data["@attributes"].fileName,
+            form        : this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Form.prototype.moveDown = function(callback) {
+    var args = {
+        controller: 'Form',
+        action    : 'moveDown',
+        params    : {
+            pageFileName: this.page.pageLink.data["@attributes"].fileName,
+            form        : this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, callback);
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.newField = function(params,callback) {
