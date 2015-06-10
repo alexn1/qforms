@@ -125,9 +125,11 @@ Form.prototype.getExpValue = function(exp) {
         if (this.page.params[name] !== undefined) {
             value = this.page.params[name];
         }
+    } else if (value === '') {
+        value = null;
     }
     return value;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.openPage = function(params) {
