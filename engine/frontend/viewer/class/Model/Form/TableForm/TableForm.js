@@ -5,7 +5,7 @@ QForms.inherit(TableForm,Form);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TableForm(name,page,data) {
     Form.call(this,name,page,data);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // табличная форма обновляется сразу после модификации ячейки таблицы
@@ -13,7 +13,7 @@ TableForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
     if (dataSource.name !== "default") return;
     this.dataSources["default"].update();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.new = function() {
@@ -47,12 +47,12 @@ TableForm.prototype.new = function() {
             });
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.delete = function(key) {
     this.dataSources["default"].delete(key);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.edit = function(key) {
@@ -60,4 +60,4 @@ TableForm.prototype.edit = function(key) {
         name:this.data.itemEditPage,
         key:key
     });
-}
+};

@@ -7,7 +7,7 @@ function EditorController(appData) {
     this.docs = null;
     this.props = null;
     EditorController.editorController = this;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.init = function() {
@@ -30,7 +30,7 @@ EditorController.prototype.init = function() {
     var app = new Application(this.appData);
     appItem.ctrl = new ApplicationController(app,appItem,this);
     appItem.ctrl.createTree();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.deinit = function() {
@@ -40,14 +40,14 @@ EditorController.prototype.deinit = function() {
     this.tree.eventDelete.unsubscribe(this,"onItemDelete");
     this.docs.eventTabClosingByUser.unsubscribe(this,"onTabClosingByUser");
     this.props.eventChanged.unsubscribe(this,"onObjChange");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onItemOpen = function(e) {
     if (e.item.ctrl instanceof PageLinkController) {
         this.pageLinkToPage(e.item);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onItemSelect = function(e) {
@@ -65,19 +65,19 @@ EditorController.prototype.onItemSelect = function(e) {
         $("#treeActionsList").append("<li class='disabled'><a href='#'>none</a></li>");
         this.props.endEdit();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillActionsAndGrid = function(ctrl) {
     this.fillActions(ctrl);
     this.fillGrid(ctrl);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillGrid = function(ctrl) {
     var propList = ctrl.getPropList();
     this.props.beginEdit(propList["list"],propList["options"]);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.pageLinkToPage = function(item,callback) {
@@ -97,7 +97,7 @@ EditorController.prototype.pageLinkToPage = function(item,callback) {
             callback();
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onItemDelete = function(e) {
@@ -107,7 +107,7 @@ EditorController.prototype.onItemDelete = function(e) {
     $("#treeActionsList").children().remove();
     $("#treeActionsList").append("<li class='disabled'><a href='#'>none</a></li>");
     this.props.endEdit();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillActions = function(ctrl) {
@@ -126,12 +126,12 @@ EditorController.prototype.fillActions = function(ctrl) {
             $("#treeActionsList").append(li);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onObjChange = function(e) {
     this.tree.active.ctrl.setProperty(e.name,e.value);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onItemDoubleClick = function(e) {
@@ -148,10 +148,10 @@ EditorController.prototype.onItemDoubleClick = function(e) {
             e.item.ctrl.createTab(this.docs);
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onTabClosingByUser = function(e) {
     this.docs.closeTab(e.tab);
-}
+};
 

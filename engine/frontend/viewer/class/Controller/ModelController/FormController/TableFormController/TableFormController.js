@@ -6,7 +6,7 @@ QForms.inherit(TableFormController,FormController);
 function TableFormController(model, view, parent) {
     FormController.call(this,model,view, parent);
     this.grid = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.init = function() {
@@ -20,7 +20,7 @@ TableFormController.prototype.init = function() {
     this.model.page.eventHide.subscribe(this,"onHidePage");
     this.model.page.eventShow.subscribe(this,"onShowPage");
     this.grid.eventBodyCellDblClick.subscribe(this,"onGridCellDblClick");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.deinit = function() {
@@ -29,18 +29,18 @@ TableFormController.prototype.deinit = function() {
     this.model.page.eventShow.unsubscribe(this,"onShowPage");
     this.grid.eventBodyCellDblClick.unsubscribe(this,"onGridCellDblClick");
     this.grid.deinit();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.fill = function() {
     FormController.prototype.fill.call(this);
     this.grid.fill();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onNewClick = function(ctrl) {
     this.model.new();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onDeleteClick = function(ctrl) {
@@ -65,14 +65,14 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
         break;
     }
     this.model.handleEvent("DoubleClick",{"key":key});
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onHidePage = function() {
     this.grid.saveScroll();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onShowPage = function() {
     this.grid.restoreScroll();
-}
+};

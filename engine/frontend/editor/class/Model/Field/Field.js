@@ -6,7 +6,7 @@ QForms.inherit(Field,Model);
 function Field(data,form) {
     Model.call(this,data);
     this.form = form;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.setValue = function(name,value,callback) {
@@ -22,14 +22,13 @@ Field.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-
     QForms.doHttpRequest(this,args,function(data){
         this.data["@attributes"][name] = value;
         if (callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.delete = function(callback) {
@@ -47,7 +46,7 @@ Field.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.getView = function(view,callback) {
@@ -64,7 +63,7 @@ Field.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.saveView = function(text,view) {
@@ -80,7 +79,7 @@ Field.prototype.saveView = function(text,view) {
         }
     };
     QForms.doHttpRequest(this,args,function(data){});
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.saveController = function(text) {
@@ -95,7 +94,7 @@ Field.prototype.saveController = function(text) {
         }
     };
     QForms.doHttpRequest(this,args,function(data){});
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +112,7 @@ Field.prototype.createView = function(callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.createController = function(callback) {
@@ -130,7 +129,7 @@ Field.prototype.createController = function(callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.changeClass = function(params,callback) {
@@ -147,7 +146,7 @@ Field.prototype.changeClass = function(params,callback) {
         this.data = data;
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.moveUp = function(callback) {

@@ -6,7 +6,7 @@ QForms.inherit(SwitchAction,Action);
 function SwitchAction(parent,data) {
     Action.call(this,parent,data);
     this.cases = {};
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 SwitchAction.prototype.exec = function(args,context) {
@@ -22,4 +22,4 @@ SwitchAction.prototype.exec = function(args,context) {
             }
         }
     }
-}
+};

@@ -12,7 +12,7 @@ function TreeWidget_createObject(el) {
     el._obj = new TreeWidget(el);
     el._obj.init();
     return el._obj;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TreeWidget(el) {
@@ -26,7 +26,7 @@ function TreeWidget(el) {
     this.eventSelect = new QForms.Event(this);
     this.eventOpen = new QForms.Event(this);
     this.eventDelete = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeWidget.prototype.init = function() {
@@ -60,11 +60,11 @@ TreeWidget.prototype.init = function() {
             self.onDoubleClick(this);
         });
     });*/
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeWidget.prototype.deinit = function() {
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeWidget.prototype.addItem = function(caption,className,i) {
@@ -76,7 +76,7 @@ TreeWidget.prototype.addItem = function(caption,className,i) {
     }
     this.items.push(item);
     return item;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeWidget.prototype.removeItem = function(item) {
@@ -96,7 +96,7 @@ TreeWidget.prototype.removeItem = function(item) {
     var e = new QForms.EventArg(this);
     e.item = item;
     this.eventDelete.fire(e);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // recursively opens all the parent elements
@@ -105,4 +105,4 @@ TreeWidget.prototype.makeOpened = function(item) {
         item.parent.open();
         this.makeOpened(item.parent);
     }
-}
+};

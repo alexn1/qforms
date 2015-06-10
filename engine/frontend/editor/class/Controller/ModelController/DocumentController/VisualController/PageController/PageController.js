@@ -8,7 +8,7 @@ function PageController(model,item,pageLink) {
     this.item = item;
     this.pageLink = pageLink;
     this.itemForms = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.createTree = function(callback) {
@@ -20,9 +20,7 @@ PageController.prototype.createTree = function(callback) {
             this.addFormItem(formData);
         };
     }
-}
-
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.addFormItem = function(formData) {
@@ -32,7 +30,7 @@ PageController.prototype.addFormItem = function(formData) {
     itemForm.ctrl = new FormController(form,itemForm);
     itemForm.ctrl.createTree();
     return itemForm;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getActions = function() {
@@ -42,7 +40,7 @@ PageController.prototype.getActions = function() {
         {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.doAction = function(action) {
@@ -56,7 +54,7 @@ PageController.prototype.doAction = function(action) {
         default:
             console.log(action);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.actionNewForm = function() {
@@ -78,7 +76,7 @@ PageController.prototype.actionNewForm = function() {
         $("#myModal").modal("show");
         $("#myModal input[id='name']").focus();
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getPropList = function() {
@@ -92,7 +90,7 @@ PageController.prototype.getPropList = function() {
     list["startup"] = this.pageLink.data["@attributes"]["startup"];
     options[["startup"]] = ["true","false"];
     return {list:list,options:options};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.setProperty = function(name,value) {
@@ -101,5 +99,5 @@ PageController.prototype.setProperty = function(name,value) {
     } else  {
         ModelController.prototype.setProperty.call(this,name,value);
     }
-}
+};
 

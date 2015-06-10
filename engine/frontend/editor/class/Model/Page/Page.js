@@ -6,7 +6,7 @@ QForms.inherit(Page,Model);
 function Page(data,pageLink) {
     Model.call(this,data);
     this.pageLink = pageLink;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.setValue = function(name,value,callback) {
@@ -26,7 +26,7 @@ Page.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ Page.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.newForm = function(params,callback) {
@@ -58,7 +58,7 @@ Page.prototype.newForm = function(params,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.getView = function(view,callback) {
@@ -73,7 +73,7 @@ Page.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.saveView = function(text,view) {
@@ -89,7 +89,7 @@ Page.prototype.saveView = function(text,view) {
     QForms.doHttpRequest(this,args,function(data){
 
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.saveController = function(text) {
@@ -104,7 +104,7 @@ Page.prototype.saveController = function(text) {
     QForms.doHttpRequest(this,args,function(data){
 
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.createView = function(callback) {
@@ -118,7 +118,7 @@ Page.prototype.createView = function(callback) {
     QForms.doHttpRequest(this,args,function(data) {
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.createController = function(callback) {
@@ -132,4 +132,4 @@ Page.prototype.createController = function(callback) {
     QForms.doHttpRequest(this,args,function(data) {
         callback(data);
     });
-}
+};

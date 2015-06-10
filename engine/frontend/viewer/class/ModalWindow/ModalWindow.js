@@ -8,7 +8,7 @@ function ModalWindow(app,pageName,newMode,params) {
     this.params = params;
     this.overlay = null;
     this.page = null;
-}
+};
 */
 
 /*
@@ -34,7 +34,7 @@ ModalWindow.prototype.show = function() {
         this.page.init();
         this.page.fill(this.newMode);
     });
-}
+};
 */
 
 /*
@@ -42,5 +42,5 @@ ModalWindow.prototype.show = function() {
 ModalWindow.prototype.close = function() {
     this.page.deinit();
     document.body.removeChild(this.overlay);
-}
+};
 */

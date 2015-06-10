@@ -7,7 +7,7 @@ function ApplicationController(model,view) {
     ModelController.call(this,model);
     this.view  = view;
     this.appTC = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(model,view) {
@@ -27,7 +27,7 @@ ApplicationController.create = function(model,view) {
         obj = eval(general);
     }
     return obj;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.init = function() {
@@ -41,7 +41,7 @@ ApplicationController.prototype.init = function() {
     this.model.eventPageOpened.subscribe(this,"onPageOpened");
     this.model.eventPageClosed.subscribe(this,"onPageClosed");
     this.model.eventPageSelected.subscribe(this,"onPageSelected");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.deinit = function() {
@@ -53,7 +53,7 @@ ApplicationController.prototype.deinit = function() {
     this.appTC.eventTabClosingByUser.unsubscribe(this,"onTabClosingByUser");
     this.appTC.eventTabShow.unsubscribe(this,"onTabShow");
     this.appTC.eventTabHide.unsubscribe(this,"onTabHide");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageOpened = function(e) {
@@ -69,30 +69,30 @@ ApplicationController.prototype.onPageOpened = function(e) {
     tab.pageController = PageController.create(e.page,view,this);
     tab.pageController.init();
     tab.pageController.fill();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageClosed = function(ea) {
     this.appTC.closeTab(ea.page.qTab);
     ea.page.qTab.pageController.deinit();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageSelected = function(ea) {
     this.appTC.selectTab(ea.page.qTab);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onTabClosingByUser = function(e) {
     e.tab.qPage.close();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onTabShow = function(e) {
     if (e.tab.qPage) e.tab.qPage.eventShow.fire(new QForms.EventArg(this));
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onTabHide = function(e) {
     if (e.tab.qPage) e.tab.qPage.eventHide.fire(new QForms.EventArg(this));
-}
+};

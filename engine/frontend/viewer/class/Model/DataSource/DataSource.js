@@ -21,7 +21,7 @@ function DataSource(name,parent,data) {
     this.eventMoveRow   = new QForms.Event(this);		// row has been moved within list
     this.eventGoneRow   = new QForms.Event(this);		// row gone from current tree item list
     this.eventComeRow   = new QForms.Event(this);		// row come to current tree item list
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.init = function() {
@@ -32,14 +32,14 @@ DataSource.prototype.init = function() {
     if (this.data.table !== "") {
         this.getApp().subDsToTableUpdated(this);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.deinit = function() {
     if (this.data.table !== "") {
         this.getApp().unsubDsFromTableUpdated(this);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // fill lists to find row index and child rows by row key
@@ -63,7 +63,7 @@ DataSource.prototype.getKeysAndChilds = function(rows) {
         childs[parentKey].rowsByKey[key] = row;
     }
     return {"childs":childs,"rowsByKey":rowsByKey};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setValue = function(row,column,value) {
@@ -74,7 +74,7 @@ DataSource.prototype.setValue = function(row,column,value) {
         }
         this.eventChanged.fire(new QForms.EventArg(this));
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRowKey = function(row) {
@@ -83,7 +83,7 @@ DataSource.prototype.getRowKey = function(row) {
         key.push(row[this.data.keyColumns[i]]);
     }
     return JSON.stringify(key);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRowParentKey = function(row) {
@@ -96,7 +96,7 @@ DataSource.prototype.getRowParentKey = function(row) {
         key.push(null);
     }
     return JSON.stringify(key);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setRowKey = function(row,key) {
@@ -105,7 +105,7 @@ DataSource.prototype.setRowKey = function(row,key) {
         row[name] = values[name];
     }
     this.rowsByKey[key] = row;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.splitKey = function(key) {
@@ -116,7 +116,7 @@ DataSource.prototype.splitKey = function(key) {
         values[columnName] = arr[i];
     }
     return values;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.update = function(callbak) {
@@ -140,14 +140,14 @@ DataSource.prototype.update = function(callbak) {
         this.updateRow = null;
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.onTableUpdated = function(eventArg) {
     var page = this.getPage();
     var params = (page !== null) ? page.params : {};
     this.refill(params);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.refill = function(params) {
@@ -171,17 +171,16 @@ DataSource.prototype.refill = function(params) {
         // data source has been updated
         this.eventUpdated.fire(new QForms.EventArg(this));
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // copy new values to data source row
 //
 DataSource.prototype.copyNewValues = function(oldRow,newRow) {
-
     for (var columnName in newRow) {
         oldRow[columnName] = newRow[columnName];
     }
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +193,7 @@ DataSource.prototype._goneRow = function(_old,_new,parentKey,i,key) {
     var index = _new.childs[newParentKey].keysByIndex.indexOf(key);
     this.removeFromChilds(_old.childs,parentKey,i,key);
     this.addToChilds(_old.childs,newParentKey,index,key,oldRow);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // add row to new tree item list after deleting from it old tree item list
@@ -204,7 +203,7 @@ DataSource.prototype._comeRow = function(_old,_new,parentKey,i,key) {
     var index = _old.childs[oldParentKey].keysByIndex.indexOf(key);
     this.removeFromChilds(_old.childs,oldParentKey,index,key);
     this.addToChilds(_old.childs,parentKey,i,key,oldRow);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.removeFromChilds = function(childs,parentKey,i,key) {
@@ -215,7 +214,7 @@ DataSource.prototype.removeFromChilds = function(childs,parentKey,i,key) {
     if (childs[parentKey].rowsByIndex.length === 0) {
         delete childs[parentKey];
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.addToChilds = function(childs,parentKey,i,key,row) {
@@ -229,13 +228,13 @@ DataSource.prototype.addToChilds = function(childs,parentKey,i,key,row) {
     childs[parentKey].rowsByIndex.splice(i,0,row);
     childs[parentKey].keysByIndex.splice(i,0,key);
     childs[parentKey].rowsByKey[key] = row;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.moveChilds = function(childs,oldIndex,newIndex) {
     QForms.moveArrayElement(childs.rowsByIndex,oldIndex,newIndex);
     QForms.moveArrayElement(childs.keysByIndex,oldIndex,newIndex);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // tree sync algorithm
@@ -349,8 +348,7 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
             }
         }
     } while (nKey !== null || oKey !== null);
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireRefillRow = function(key,i) {
@@ -358,14 +356,14 @@ DataSource.prototype.fireRefillRow = function(key,i) {
     ea.key = key;
     ea.i = i;
     this.eventRefillRow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireRemoveRow = function(key) {
     var ea = new QForms.EventArg(this);
     ea.key = key;
     this.eventRemoveRow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireNewRow = function(i,parentKey,key) {
@@ -375,7 +373,7 @@ DataSource.prototype.fireNewRow = function(i,parentKey,key) {
     ea.parentKey = parentKey;
     ea.key = key;
     this.eventNewRow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireMoveRow = function(oldIndex,newIndex,key,parentKey) {
@@ -385,7 +383,7 @@ DataSource.prototype.fireMoveRow = function(oldIndex,newIndex,key,parentKey) {
     ea.key = key;
     ea.parentKey = parentKey;
     this.eventMoveRow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex) {
@@ -396,7 +394,7 @@ DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex)
     ea.newParentKey = newParentKey;
     ea.newIndex = newIndex;
     this.eventGoneRow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex) {
@@ -407,7 +405,7 @@ DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex)
     ea.oldParentKey = oldParentKey;
     ea.newIndex = newIndex;
     this.eventComeRow.fire(ea);
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -436,7 +434,7 @@ DataSource.prototype.insert = function(row,callback) {
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
         if (callback) callback(data.key);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(key) {
@@ -459,7 +457,7 @@ DataSource.prototype.delete = function(key) {
     QForms.doHttpRequest(this,args,function(data) {
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newRow = function(row) {
@@ -467,7 +465,7 @@ DataSource.prototype.newRow = function(row) {
         throw new Error("Rows can be added to empty data sources only in new mode.");
     }
     this.insertRow = row;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getForm = function() {
@@ -476,7 +474,7 @@ DataSource.prototype.getForm = function() {
     } else {
         return null;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getPage = function() {
@@ -487,7 +485,7 @@ DataSource.prototype.getPage = function() {
     } else {
         return null;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getApp = function() {
@@ -498,7 +496,7 @@ DataSource.prototype.getApp = function() {
     } else if (this.parent instanceof Application) {
         return this.parent;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.dumpFirstRowToParams = function(rows) {
@@ -512,7 +510,7 @@ DataSource.prototype.dumpFirstRowToParams = function(rows) {
             page.params[name] = value;
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getNamespace = function() {
@@ -525,18 +523,18 @@ DataSource.prototype.getNamespace = function() {
     } else {
         this.name;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRow = function(key) {
     return this.rowsByKey[key];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRows = function(parentKey) {
     if (parentKey === undefined) parentKey = "[null]";
     return (this.childs[parentKey] !== undefined) ? this.childs[parentKey].rowsByIndex : [];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRowByIndex = function(i) {
@@ -545,4 +543,4 @@ DataSource.prototype.getRowByIndex = function(i) {
     } else {
         return this.childs["[null]"].rowsByIndex[i];
     }
-}
+};

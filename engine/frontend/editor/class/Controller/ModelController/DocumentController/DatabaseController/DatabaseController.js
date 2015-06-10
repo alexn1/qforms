@@ -15,7 +15,7 @@ function DatabaseController(model,item,applicationController) {
     this.$btnCreateForm = null;
     this.tables = null;
     this.tableName = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createTree = function() {
@@ -27,7 +27,7 @@ DatabaseController.prototype.createTree = function() {
             this.addParamItem(paramData);
         };
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.addParamItem = function(paramData) {
@@ -36,7 +36,7 @@ DatabaseController.prototype.addParamItem = function(paramData) {
     var param = new Param(paramData,this.model);
     paramItem.ctrl = new ParamController(param,paramItem);
     return paramItem;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.getActions = function() {
@@ -45,7 +45,7 @@ DatabaseController.prototype.getActions = function() {
         //{"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.doAction = function(action) {
@@ -57,7 +57,7 @@ DatabaseController.prototype.doAction = function(action) {
             this.delete();
             break;
     }
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ DatabaseController.prototype.actionNewParam = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ DatabaseController.prototype.createTab = function(docs) {
         self.tab.ctrl = self;
         docs.selectTab(self.tab);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.initView = function($div,data) {
@@ -104,7 +104,7 @@ DatabaseController.prototype.initView = function($div,data) {
         var row = data.tables[i];
         this.treeTables.addItem(row[0]);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.onTableSelect = function(e) {
@@ -120,7 +120,7 @@ DatabaseController.prototype.onTableSelect = function(e) {
             self.createForm();
         });
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createForm = function() {
@@ -166,4 +166,4 @@ DatabaseController.prototype.createForm = function() {
         });
         $("#modal").modal("show");
     });
-}
+};

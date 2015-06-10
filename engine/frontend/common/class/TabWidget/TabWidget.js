@@ -10,17 +10,16 @@ $(document).ready(function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TabWidget(el) {
-    this.el = el;
-    this.activeTab = null;
-    this.activePage = null;
-    this.tabList = null;
-    this.pageList = null;
-
-    this.prevActiveTab = null;
-    this.eventTabShow = new QForms.Event(this);
-    this.eventTabHide = new QForms.Event(this);
+    this.el                    = el;
+    this.activeTab             = null;
+    this.activePage            = null;
+    this.tabList               = null;
+    this.pageList              = null;
+    this.prevActiveTab         = null;
+    this.eventTabShow          = new QForms.Event(this);
+    this.eventTabHide          = new QForms.Event(this);
     this.eventTabClosingByUser = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.init = function() {
@@ -37,7 +36,7 @@ TabWidget.prototype.init = function() {
     if ($(this.tabList).children("li").length > 0 && this.activeTab === undefined) {
         this.selectTab($(this.tabList).children("li").get(0))
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // добавляет таб по существующему элементу
@@ -57,15 +56,14 @@ TabWidget.prototype.initTab = function(li) {
             e.stopPropagation();
         });
     });
-
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.onTabClosing = function(tab) {
     var ea = new QForms.EventArg(this);
     ea.tab = tab;
     this.eventTabClosingByUser.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
@@ -86,7 +84,7 @@ TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
         this.selectTab(li);
     }
     return li;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.selectTab = function(tab,track) {
@@ -127,7 +125,7 @@ TabWidget.prototype.selectTab = function(tab,track) {
     var ea = new QForms.EventArg(this);
     ea.tab = tab;
     this.eventTabShow.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.closeTab = function(tab) {
@@ -151,4 +149,4 @@ TabWidget.prototype.closeTab = function(tab) {
             }
         }
     }
-}
+};

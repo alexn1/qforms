@@ -9,7 +9,7 @@ function FormController(model, item) {
     this.itemDataSources = null;
     this.itemFields      = null;
     this.itemControls    = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.createTree = function() {
@@ -36,8 +36,7 @@ FormController.prototype.createTree = function() {
             this.addControlItem(controlData);
         }
     }
-
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.addDataSourceItem = function(dataSourceData) {
@@ -47,7 +46,7 @@ FormController.prototype.addDataSourceItem = function(dataSourceData) {
     itemDataSource.ctrl = new DataSourceController(dataSource,itemDataSource);
     itemDataSource.ctrl.createTree();
     return itemDataSource;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.addFieldItem = function(fieldData) {
@@ -56,7 +55,7 @@ FormController.prototype.addFieldItem = function(fieldData) {
     var field = new Field(fieldData,this.model);
     itemField.ctrl = new FieldController(field,itemField);
     return itemField;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.addControlItem = function(controlData) {
@@ -65,7 +64,7 @@ FormController.prototype.addControlItem = function(controlData) {
     var control = new Control(controlData,this.model);
     itemControl.ctrl = new ControlController(control,itemControl);
     return itemControl;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getActions = function() {
@@ -79,7 +78,7 @@ FormController.prototype.getActions = function() {
         {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.doAction = function(action) {
@@ -108,7 +107,7 @@ FormController.prototype.doAction = function(action) {
             });
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewDataSource = function() {
@@ -130,7 +129,7 @@ FormController.prototype.actionNewDataSource = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewField = function() {
@@ -155,7 +154,7 @@ FormController.prototype.actionNewField = function() {
         $("#myModal").modal("show");
         $("#myModal input[id='name']").focus();
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewControl = function() {
@@ -177,7 +176,7 @@ FormController.prototype.actionNewControl = function() {
         $("#modal").modal("show");
         $("#modal input[id='name']").focus();
     });
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +187,7 @@ FormController.prototype.getPropList = function() {
     options["newRowMode"] = ["disabled","oneclick","editform","createform","oneclick editform"];
     options["deleteRowMode"] = ["disabled","enabled"];
     return {list:list,options:options};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.setProperty = function(name,value) {
@@ -198,8 +197,7 @@ FormController.prototype.setProperty = function(name,value) {
             self.item.text.innerHTML = self.getCaption(self.model.data);
         }
     });
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getCaption = function(data) {
@@ -207,4 +205,4 @@ FormController.prototype.getCaption = function(data) {
         .replace("{name}",data["@attributes"].name)
         .replace("{class}",data["@class"]);
     return caption;
-}
+};

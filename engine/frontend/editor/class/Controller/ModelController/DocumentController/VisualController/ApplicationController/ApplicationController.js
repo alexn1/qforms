@@ -10,7 +10,7 @@ function ApplicationController(model,item,editorController) {
     this.databasesItem = null;
     this.pagesItem = null;
     this.pageItems = {};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.createTree = function() {
@@ -22,7 +22,6 @@ ApplicationController.prototype.createTree = function() {
             this.addDatabase(databaseData);
         }
     }
-
     // page links
     this.pagesItem = this.item.addItem("Pages","opened");
     if (this.model.data.pageLinks) {
@@ -31,7 +30,7 @@ ApplicationController.prototype.createTree = function() {
             this.pageItems[name] = this.addPageLinkItem(pageLinkData);
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.addDatabase = function(databaseData) {
@@ -41,7 +40,7 @@ ApplicationController.prototype.addDatabase = function(databaseData) {
     databaseItem.ctrl = new DatabaseController(database,databaseItem,this);
     databaseItem.ctrl.createTree();
     return databaseItem;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
@@ -51,7 +50,7 @@ ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
     var pageLink = new PageLink(pageLinkData)
     pageLinkItem.ctrl = new PageLinkController(pageLink,pageLinkItem);
     return pageLinkItem;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
@@ -63,7 +62,7 @@ ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
     pageItem.ctrl = new PageController(page,pageItem,pageLink);
     pageItem.ctrl.createTree();
     return pageItem;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getActions = function() {
@@ -71,7 +70,7 @@ ApplicationController.prototype.getActions = function() {
         {"action":"newDatabase","caption":"New Database"},
         {"action":"newPage","caption":"New Page"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.doAction = function(action) {
@@ -85,7 +84,7 @@ ApplicationController.prototype.doAction = function(action) {
         default:
             console.log(action);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.newPageAction = function() {
@@ -111,7 +110,7 @@ ApplicationController.prototype.newPageAction = function() {
         $("#myModal").modal("show");
         $("#myModal input[id='name']").focus();
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.newDatabaseAction = function() {
@@ -155,4 +154,4 @@ ApplicationController.prototype.newDatabaseAction = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};

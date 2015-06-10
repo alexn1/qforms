@@ -6,7 +6,7 @@ QForms.inherit(LinkFieldController,FieldController);
 function LinkFieldController(model,parent) {
     LinkFieldController.super_.call(this,model,parent);
     this.eventClick = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.prototype.fill = function(row,view) {
@@ -15,17 +15,17 @@ LinkFieldController.prototype.fill = function(row,view) {
     $(view).children().click(function() {
         self.onClick(this);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.prototype.getValue = function (view) {
     return view.firstElementChild.innerHTML;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.prototype.setValue = function (value,view) {
     view.firstElementChild.innerHTML = value;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.prototype.onClick = function (el) {
@@ -37,4 +37,4 @@ LinkFieldController.prototype.onClick = function (el) {
     ea.el = el;
     ea.field = this;
     this.eventClick.fire(ea);
-}
+};

@@ -18,7 +18,7 @@ function GridWidget(el) {
     this.selectedColumnName = null; // имя поля выделенной колонки
     this.scrollTop = 0;
     this.eventBodyCellDblClick = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.init = function() {
@@ -38,28 +38,26 @@ GridWidget.prototype.init = function() {
             self.gridColumns[columnName] = self.createColumn(columnName,this);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.deinit = function() {
     for (var columnName in this.gridColumns) {
         this.gridColumns[columnName].deinit();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onBodyScroll = function(el) {
     el.parentElement.querySelector('.head').scrollLeft = el.scrollLeft;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.createColumn = function(fieldName,headerCell) {
     var gridColumn = new GridColumn(this,fieldName,headerCell);
     gridColumn.init();
     return gridColumn;
-}
-
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.createBodyRow = function(i) {
@@ -75,7 +73,7 @@ GridWidget.prototype.createBodyRow = function(i) {
     bodyRow.appendChild(document.createElement("td"));
     QForms.insertNewNodeAt(this.bodyTable,bodyRow,i);
     return bodyRow;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.createBodyCell = function(name) {
@@ -108,7 +106,7 @@ GridWidget.prototype.createBodyCell = function(name) {
     }
     */
     return bodyCell;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onBodyCellMouseDown = function(bodyCell) {
@@ -118,14 +116,14 @@ GridWidget.prototype.onBodyCellMouseDown = function(bodyCell) {
     }
     this.selectBodyRow(bodyCell.bodyRow);
     this.selectBodyCell(bodyCell);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onBodyCellDblClick = function(bodyCell) {
     var ea = new QForms.EventArg(this);
     ea.bodyCell = bodyCell;
     this.eventBodyCellDblClick.fire(ea);
-}
+};
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +145,7 @@ GridWidget.prototype.selectBodyCell = function(bodyCell) {
     bodyCell.classList.add("active");
     this.selectedBodyCell = bodyCell;
     this.selectedColumnName = bodyCell.qFieldName;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.unselectBodyCellIfSelected = function() {
@@ -156,7 +154,7 @@ GridWidget.prototype.unselectBodyCellIfSelected = function() {
         this.selectedBodyCell.classList.remove("active");
         this.selectedBodyCell = null;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.selectBodyRow = function(bodyRow) {
@@ -173,7 +171,7 @@ GridWidget.prototype.selectBodyRow = function(bodyRow) {
         var bodyCellToSelect = this.selectedBodyRow.bodyCells[this.selectedColumnName];
         this.selectBodyCell(bodyCellToSelect);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.unselectBodyRowIfSelected = function() {
@@ -181,17 +179,17 @@ GridWidget.prototype.unselectBodyRowIfSelected = function() {
         this.selectedBodyRow.classList.remove("active");
         this.selectedBodyRow = null;
     }
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.saveScroll = function() {
     this.scrollTop = this.bodyTable.scrollTop;
     //console.log("hide scrollTop: " + this.scrollTop);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.restoreScroll = function() {
     this.bodyTable.scrollTop = this.scrollTop;
     //console.log("show scrollTop: " + this.scrollTop);
-}
+};

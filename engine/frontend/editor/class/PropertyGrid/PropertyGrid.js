@@ -8,19 +8,19 @@ function PropertyGrid(el) {
     this.obj          = null;
     this.options      = null;
     this.eventChanged = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.init = function() {
     this.tbody = $(this.el).children("table").children("tbody").get(0);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.beginEdit = function(obj,options) {
     this.obj = obj;
     this.options = options;
     this.fill();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.fill = function() {
@@ -55,16 +55,16 @@ PropertyGrid.prototype.fill = function() {
         tr.appendChild(td2);
         this.tbody.appendChild(tr);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.clear = function() {
     this.tbody.innerHTML = "";
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.endEdit = function() {
     this.obj = null;
     this.options = null;
     this.clear();
-}
+};

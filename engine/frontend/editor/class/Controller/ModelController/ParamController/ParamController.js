@@ -6,14 +6,14 @@ QForms.inherit(ParamController,ModelController);
 function ParamController(model,item) {
     ModelController.call(this,model);
     this.item = item;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamController.prototype.getActions = function() {
     return [
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamController.prototype.doAction = function(action) {
@@ -22,4 +22,4 @@ ParamController.prototype.doAction = function(action) {
             this.delete();
             break;
     }
-}
+};

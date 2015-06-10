@@ -6,17 +6,17 @@ QForms.inherit(CheckBoxFieldController,FieldController);
 function CheckBoxFieldController(model,parent) {
     FieldController.call(this,model,parent);
     this.eventChange = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.getValue = function (view) {
     return view.firstElementChild.checked ? 1 : 0;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.setValue = function (value,view) {
     view.firstElementChild.checked = (value === 1) ? true : false;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.fill = function(row,view) {
@@ -27,7 +27,7 @@ CheckBoxFieldController.prototype.fill = function(row,view) {
             self.onChange(this);
         });
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.onChange = function (el) {
@@ -42,4 +42,4 @@ CheckBoxFieldController.prototype.onChange = function (el) {
         ea.field = this;
         this.eventChange.fire(ea);
     }
-}
+};

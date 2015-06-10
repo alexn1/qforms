@@ -8,7 +8,7 @@ function FieldController(model, parent) {
     this.parent = parent;
     this.views  = {};    // list of all views that controlled by this field
     this.html   = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.create = function(model,parent) {
@@ -31,16 +31,16 @@ FieldController.create = function(model,parent) {
         obj = eval(general);
     }
     return obj;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.init = function() {
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.deinit = function() {
     this.views = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.renderView = function() {
@@ -48,7 +48,7 @@ FieldController.prototype.renderView = function() {
         this.html = QForms.render(this.model.data.view,{model:this.model});
     }
     return $(this.html).get(0);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.fill = function(row,view) {
@@ -57,13 +57,13 @@ FieldController.prototype.fill = function(row,view) {
     view.dbRow = row;
     this.setValue(row[this.model.data.column], view);
     this.setViewStyle(view, row);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.refill = function(row,view) {
     this.setValue(row[this.model.data.column],view);
     this.setViewStyle(view,row);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getValue = function (view) {
@@ -75,7 +75,7 @@ FieldController.prototype.getValue = function (view) {
             return view.firstElementChild.innerHTML;
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.setValue = function (value,view) {
@@ -91,15 +91,14 @@ FieldController.prototype.setValue = function (value,view) {
             }
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.isValid = function(view) {
     return true;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.setViewStyle = function(view,row) {
 
-}
-
+};

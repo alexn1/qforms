@@ -6,7 +6,7 @@ QForms.inherit(TextBoxFieldController,FieldController);
 function TextBoxFieldController(model,parent) {
     TextBoxFieldController.super_.call(this,model,parent);
     this.eventChange = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.fill = function(row,view) {
@@ -17,7 +17,7 @@ TextBoxFieldController.prototype.fill = function(row,view) {
             self.onChange(this);
         });
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.isValid = function(view) {
@@ -31,8 +31,7 @@ TextBoxFieldController.prototype.isValid = function(view) {
         view.firstElementChild.classList.remove("error");
     }
     return isValid;
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.onChange = function (el) {
@@ -47,4 +46,4 @@ TextBoxFieldController.prototype.onChange = function (el) {
         ea.field = this;
         this.eventChange.fire(ea);
     }
-}
+};

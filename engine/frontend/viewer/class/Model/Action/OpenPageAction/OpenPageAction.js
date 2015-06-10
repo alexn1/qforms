@@ -5,7 +5,7 @@ QForms.inherit(OpenPageAction,Action);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function OpenPageAction(parent,data) {
     Action.call(this,parent,data);
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OpenPageAction.prototype.exec = function(args,context) {
@@ -14,4 +14,4 @@ OpenPageAction.prototype.exec = function(args,context) {
         newMode: this.data.rowMode === "edit" ? false : true,
         key:args.key
     });
-}
+};

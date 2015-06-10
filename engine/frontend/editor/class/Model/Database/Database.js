@@ -5,7 +5,7 @@ QForms.inherit(Database,Model);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Database(data) {
     Model.call(this,data);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.setValue = function(name,value,callback) {
@@ -25,7 +25,7 @@ Database.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ Database.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.newParam = function(name,callback) {
@@ -59,7 +59,7 @@ Database.prototype.newParam = function(name,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getView = function(view,callback) {
@@ -74,7 +74,7 @@ Database.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getTableInfo = function(table,callback) {
@@ -89,4 +89,4 @@ Database.prototype.getTableInfo = function(table,callback) {
     QForms.doHttpRequest(this,args,function(result){
         callback(result);
     });
-}
+};

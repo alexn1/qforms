@@ -10,7 +10,7 @@ function Application(data) {
     this.eventPageOpened   = new QForms.Event(this);
     this.eventPageClosed   = new QForms.Event(this);
     this.eventPageSelected = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.init = function() {
@@ -37,7 +37,7 @@ Application.prototype.init = function() {
         e.select = false;
         this.eventPageOpened.fire(e);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.deinit = function() {
@@ -45,7 +45,7 @@ Application.prototype.deinit = function() {
         this.dataSources[name].deinit();
     }
     // TODO: add deinit on opened pages
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.subDsToTableUpdated = function(dataSource) {
@@ -53,12 +53,12 @@ Application.prototype.subDsToTableUpdated = function(dataSource) {
         this.tables[dataSource.fullTableName] = new qfTable(dataSource.fullTableName);
     }
     this.tables[dataSource.fullTableName].eventUpdated.subscribe(dataSource,"onTableUpdated");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.unsubDsFromTableUpdated = function(dataSource) {
     this.tables[dataSource.fullTableName].eventUpdated.unsubscribe(dataSource,"onTableUpdated");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.openPage = function(args) {
@@ -109,7 +109,7 @@ Application.prototype.openPage = function(args) {
             this.eventPageOpened.fire(ea);
         });
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.saveAndClosePage = function(page) {
@@ -119,7 +119,7 @@ Application.prototype.saveAndClosePage = function(page) {
     var ea = new QForms.EventArg(this);
     ea.page = page;
     this.eventPageClosed.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.closePage = function(page) {
@@ -128,7 +128,7 @@ Application.prototype.closePage = function(page) {
     var ea = new QForms.EventArg(this);
     ea.page = page;
     this.eventPageClosed.fire(ea);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.trackPage = function(page) {
@@ -142,7 +142,7 @@ Application.prototype.trackPage = function(page) {
         this.pages[pageName] = {};
     }
     this.pages[pageName][pageKey] = page;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.untrackPage = function(page) {
@@ -165,7 +165,7 @@ Application.prototype.untrackPage = function(page) {
             throw new Error("The page is not in list.");
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.getPage = function(pageName,pageKey) {
@@ -175,4 +175,4 @@ Application.prototype.getPage = function(pageName,pageKey) {
     } else {
         return null;
     }
-}
+};

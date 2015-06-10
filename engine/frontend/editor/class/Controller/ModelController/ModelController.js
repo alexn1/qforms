@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ModelController(model) {
     this.model = model;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.getPropList = function() {
@@ -11,7 +11,7 @@ ModelController.prototype.getPropList = function() {
         list:this.model.data["@attributes"],
         options:{}
     };
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.setProperty = function(name,value) {
@@ -21,12 +21,12 @@ ModelController.prototype.setProperty = function(name,value) {
             self.item.text.innerHTML = self.getCaption(self.model.data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.getCaption = function(data) {
     return "<span class='green'>{name}</span>".replace("{name}",data["@attributes"].name);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.delete = function() {
@@ -34,4 +34,4 @@ ModelController.prototype.delete = function() {
     this.model.delete(function () {
         self.item.parent.removeItem(self.item);
     });
-}
+};

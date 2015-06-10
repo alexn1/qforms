@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FormWizard(params) {
     this.params = params;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getKeyColumns = function() {
@@ -17,7 +17,7 @@ FormWizard.prototype.getKeyColumns = function() {
         }
     }
     return keyColumns;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getColumns = function() {
@@ -27,7 +27,7 @@ FormWizard.prototype.getColumns = function() {
         columns.push(column.COLUMN_NAME);
     }
     return columns;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getQuery = function() {
@@ -48,7 +48,7 @@ FormWizard.prototype.getQuery = function() {
             break;
     }
     return query;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getDataSources = function() {
@@ -62,7 +62,7 @@ FormWizard.prototype.getDataSources = function() {
             keyColumns: this.getKeyColumns()
         }
     };
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getField = function(column) {
@@ -77,7 +77,7 @@ FormWizard.prototype.getField = function(column) {
         field.readOnly = "true";
     }
     return field;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getFields = function() {
@@ -87,7 +87,7 @@ FormWizard.prototype.getFields = function() {
         fields[column.COLUMN_NAME] = this.getField(column);
     }
     return fields;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getFormParams = function() {
@@ -98,4 +98,4 @@ FormWizard.prototype.getFormParams = function() {
         dataSources:this.getDataSources(),
         fields:this.getFields()
     };
-}
+};

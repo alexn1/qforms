@@ -6,7 +6,7 @@ function ViewerController(data) {
     this.data = data;
     this.application = null;
     this.applicationController = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ViewerController.prototype.init = function() {
@@ -18,10 +18,10 @@ ViewerController.prototype.init = function() {
     this.application.init();
     window.application = this.application;
     $("#client").append($view);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ViewerController.prototype.deinit = function() {
     this.applicationController.deinit();
     this.application.deinit();
-}
+};

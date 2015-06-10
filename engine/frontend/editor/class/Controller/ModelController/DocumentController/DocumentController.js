@@ -1,12 +1,12 @@
 "use strict"
 
-QForms.inherit(DocumentController,ModelController);
+QForms.inherit(DocumentController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DocumentController(model) {
     ModelController.call(this,model);
     this.tab = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DocumentController.prototype.createTab = function(docs) {
@@ -17,4 +17,4 @@ DocumentController.prototype.createTab = function(docs) {
     });
     this.tab.ctrl = this;
     docs.selectTab(this.tab);
-}
+};

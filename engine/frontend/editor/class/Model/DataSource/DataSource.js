@@ -6,7 +6,7 @@ QForms.inherit(DataSource,Model);
 function DataSource(data,parent) {
     Model.call(this,data);
     this.parent = parent;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setValue = function(name,value,callback) {
@@ -28,7 +28,7 @@ DataSource.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(callback) {
@@ -46,7 +46,7 @@ DataSource.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newKeyColumn = function(name,callback) {
@@ -65,7 +65,7 @@ DataSource.prototype.newKeyColumn = function(name,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newParentKeyColumn = function(name,callback) {
@@ -84,7 +84,7 @@ DataSource.prototype.newParentKeyColumn = function(name,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getView = function(view,callback) {
@@ -98,4 +98,4 @@ DataSource.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};

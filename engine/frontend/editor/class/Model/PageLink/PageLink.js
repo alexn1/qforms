@@ -5,7 +5,7 @@ QForms.inherit(PageLink,Model);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageLink(data) {
     Model.call(this,data);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLink.prototype.setValue = function(name,value,callback) {
@@ -25,4 +25,4 @@ PageLink.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};

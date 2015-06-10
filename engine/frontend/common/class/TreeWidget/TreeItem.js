@@ -13,7 +13,7 @@ function TreeItem(parent,caption,className) {
     this.ul        = null;
     this.items     = [];
     this.init();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.init = function() {
@@ -43,25 +43,25 @@ TreeItem.prototype.init = function() {
     // li child
     this.li.appendChild(this.div);
     this.li.appendChild(this.ul);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.setCaption = function(caption) {
     this.caption = caption;
     this.text.innerHTML = this.caption;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.onDivDoubleClick = function(div) {
     var e = new QForms.EventArg(this);
     e.item = this;
     this.tree.eventDoubleClick.fire(e);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.onDivMouseDown = function(div) {
     this.select(true);
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,17 +82,17 @@ TreeItem.prototype.select = function(noscroll) {
     var e = new QForms.EventArg(this);
     e.item = this;
     this.tree.eventSelect.fire(e);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.makeOpened = function(item) {
 
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.open = function() {
     this.li.classList.add("opened");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.onNodeMouseDown = function(e,node) {
@@ -101,7 +101,7 @@ TreeItem.prototype.onNodeMouseDown = function(e,node) {
     var e = new QForms.EventArg(this);
     e.item = this;
     this.tree.eventOpen.fire(e);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.addItem = function(caption,className,i) {
@@ -114,7 +114,7 @@ TreeItem.prototype.addItem = function(caption,className,i) {
     this.node.className = "node";
     this.items.push(item);
     return item;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.removeItem = function(item) {
@@ -134,13 +134,12 @@ TreeItem.prototype.removeItem = function(item) {
     var e = new QForms.EventArg(this);
     e.item = item;
     this.tree.eventDelete.fire(e);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.remove = function(item) {
     this.parent.removeItem(this);
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.changeParent = function(newParent,newIndex) {
@@ -151,7 +150,7 @@ TreeItem.prototype.changeParent = function(newParent,newIndex) {
     this.parent = newParent;
     this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + "px";
     this.ul.level = this.parent.ul.level + 1;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.move = function(offset) {

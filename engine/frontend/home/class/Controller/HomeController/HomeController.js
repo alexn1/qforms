@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function HomeController() {
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.init = function() {
@@ -11,21 +11,21 @@ HomeController.prototype.init = function() {
     $('#btnEdit').click(function() {self.btnEdit_Click();});
     $('#btnCreate').click(function() {self.btnCreate_Click();});
     $('#lbApp').dblclick(function() {self.btnRun_Click();});
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.btnRun_Click = function() {
     if ($('#lbApp').val()) {
         window.location.href = "viewer.php?app={app}".replace("{app}",$('#lbApp').val());
     }
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.btnEdit_Click = function() {
     if ($('#lbApp').val()) {
         window.location.href = "editor.php?app={app}".replace("{app}",$('#lbApp').val());
     }
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.btnCreate_Click = function() {
@@ -41,7 +41,7 @@ HomeController.prototype.btnCreate_Click = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.createApp = function(folderName,appName) {
@@ -68,4 +68,4 @@ HomeController.prototype.createApp = function(folderName,appName) {
             });
         }
     });
-}
+};

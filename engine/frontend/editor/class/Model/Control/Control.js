@@ -6,7 +6,7 @@ QForms.inherit(Control,Model);
 function Control(data,form) {
     Model.call(this,data);
     this.form = form;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Control.prototype.getView = function(view,callback) {
@@ -23,7 +23,7 @@ Control.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Control.prototype.setValue = function(name,value,callback) {
@@ -45,7 +45,7 @@ Control.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Control.prototype.delete = function(callback) {
@@ -63,4 +63,4 @@ Control.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};

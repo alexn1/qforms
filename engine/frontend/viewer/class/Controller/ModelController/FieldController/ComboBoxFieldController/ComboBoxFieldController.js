@@ -7,7 +7,7 @@ function ComboBoxFieldController(model,parent) {
     FieldController.call(this,model,parent);
     this.dataSource = null;
     this.eventChange = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.init = function() {
@@ -17,7 +17,7 @@ ComboBoxFieldController.prototype.init = function() {
     this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.subscribe(this,"onNewRow");
     this.dataSource.eventMoveRow.subscribe(this,"onMoveRow");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.deinit = function() {
@@ -26,7 +26,7 @@ ComboBoxFieldController.prototype.deinit = function() {
     this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
     this.dataSource.eventMoveRow.unsubscribe(this,"onMoveRow");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.fill = function(row, view) {
@@ -57,7 +57,7 @@ ComboBoxFieldController.prototype.getValue = function (view) {
             return view.firstElementChild.value;
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.setValue = function (value, view) {
@@ -85,7 +85,7 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     for (var i=0; i<rows.length; i++) {
         this.createOption(view, i);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.createOption = function(view,i) {
@@ -98,7 +98,7 @@ ComboBoxFieldController.prototype.createOption = function(view,i) {
     QForms.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
     view.keyToOption[key] = option;
     return option;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onRefillRow = function(ea) {
@@ -109,12 +109,13 @@ ComboBoxFieldController.prototype.onRefillRow = function(ea) {
         var option = view.keyToOption[key];
         this.refillRow(option);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.refillRow = function(option) {
     option.innerHTML = option.dbRow[this.model.data.displayColumn];
-}
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onRemoveRow = function(ea) {
     var key = ea.key;
@@ -124,14 +125,14 @@ ComboBoxFieldController.prototype.onRemoveRow = function(ea) {
         view.firstElementChild.removeChild(option);
         delete view.keyToOption[key];
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onNewRow = function(ea) {
     //console.log("ComboBoxFieldController.prototype.onNewRow");
     //console.log(ea);
     this.createOption(ea.i);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onMoveRow = function(ea) {
@@ -144,7 +145,7 @@ ComboBoxFieldController.prototype.onMoveRow = function(ea) {
         QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
         this.refillRow(option);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.getDataSource = function(name) {
@@ -156,7 +157,7 @@ ComboBoxFieldController.prototype.getDataSource = function(name) {
         return this.model.form.page.app.dataSources[name];
     }
     return null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onChange = function (el) {
@@ -171,7 +172,7 @@ ComboBoxFieldController.prototype.onChange = function (el) {
         ea.field = this;
         this.eventChange.fire(ea);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.isValid = function(view) {
@@ -185,4 +186,4 @@ ComboBoxFieldController.prototype.isValid = function(view) {
         view.firstElementChild.classList.remove("error");
     }
     return isValid;
-}
+};

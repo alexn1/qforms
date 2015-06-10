@@ -6,8 +6,7 @@ QForms.inherit(ParentKeyColumn,Model);
 function ParentKeyColumn(data,dataSource) {
     Model.call(this,data);
     this.dataSource = dataSource;
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumn.prototype.setValue = function(name,value,callback) {
@@ -30,7 +29,7 @@ ParentKeyColumn.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumn.prototype.delete = function(callback) {
@@ -49,7 +48,7 @@ ParentKeyColumn.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumn.prototype.getView = function(view,callback) {
@@ -63,4 +62,4 @@ ParentKeyColumn.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};

@@ -10,7 +10,7 @@ function PageController(model, view, parent) {
     this.parent     = parent;
     this.captionEls = null;
     this.forms      = {};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.create = function(model,view,parent) {
@@ -30,7 +30,7 @@ PageController.create = function(model,view,parent) {
         obj = eval(general);
     }
     return obj;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.init = function() {
@@ -47,7 +47,7 @@ PageController.prototype.init = function() {
         this.forms[formName] = FormController.create(this.model.forms[formName], view, this);
         this.forms[formName].init();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.deinit = function() {
@@ -56,7 +56,7 @@ PageController.prototype.deinit = function() {
     }
     this.model.eventChanged.unsubscribe(this,"onPageChanged");
     this.model.eventUpdated.unsubscribe(this,"onPageUpdated");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.fill = function() {
@@ -64,59 +64,59 @@ PageController.prototype.fill = function() {
     for (var formName in this.forms) {
         this.forms[formName].fill();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onSaveClick = function(el) {
     if (this.isValid()) this.model.update();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onSaveAndCloseClick = function(el) {
     if (this.isValid()) this.model.saveAndClose();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onClosePageClick = function(e) {
     this.model.close();
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.changedCaption = function() {
     this.setCaption(this.getCaption() + " *");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.unchangedCaption = function() {
     this.setCaption(this.getCaption());
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.setCaption = function(caption) {
     for (var i=0;i<this.captionEls.length;i++) {
         this.captionEls[i].innerHTML = caption;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getCaption = function() {
     return this.model.data.caption;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.isValid = function() {
     var isValid = true;
     for (var name in this.forms) if (!this.forms[name].isValid()) isValid = false;
     return isValid;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onPageChanged = function(ea) {
     this.changedCaption();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onPageUpdated = function(ea) {
     this.unchangedCaption();
-}
+};

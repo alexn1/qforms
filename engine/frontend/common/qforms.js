@@ -4,7 +4,7 @@
 function QForms() {
     window.onerror = QForms.errorHandler;
     //window.onbeforeunload = QForms.exit;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.exit = function (evt) {
@@ -16,7 +16,7 @@ QForms.exit = function (evt) {
         evt.returnValue = message;
     }
     return message;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.errorHandler = function(errorMsg) {
@@ -25,7 +25,7 @@ QForms.errorHandler = function(errorMsg) {
         msg += "\n\nstack:\n" + arguments[4].stack;
     }
     alert(msg);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.doHttpRequest = function(self,params,callback) {
@@ -41,7 +41,7 @@ QForms.doHttpRequest = function(self,params,callback) {
         }
     };
     request.send(JSON.stringify(params));
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.insertNewNodeAt = function(parent,child,i) {
@@ -52,7 +52,7 @@ QForms.insertNewNodeAt = function(parent,child,i) {
     } else {
         parent.insertBefore(child,parent.children[i]);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.moveNode = function(parent,child,oldIndex,newIndex) {
@@ -65,20 +65,20 @@ QForms.moveNode = function(parent,child,oldIndex,newIndex) {
             parent.insertBefore(child,parent.children[newIndex+1]);
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.inherit = function(className,baseClassName) {
     className.prototype = Object.create(baseClassName.prototype);
     className.prototype.constructor = className;
     className.super_   = baseClassName;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.moveArrayElement = function(arr,oldIndex, newIndex) {
     arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     return arr;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.merge = function(o1,o2) {
@@ -90,7 +90,7 @@ QForms.merge = function(o1,o2) {
         oN[name] = o2[name];
     }
     return oN;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.keyToParams = function(key,paramName) {
@@ -108,8 +108,7 @@ QForms.keyToParams = function(key,paramName) {
         throw new Error("невалидный ключ");
     }
     return params;
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.currentTime = function() {
@@ -118,7 +117,7 @@ QForms.currentTime = function() {
     var mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
     var ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
     return [hh,mm,ss].join(":");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.currentDate = function() {
@@ -127,9 +126,9 @@ QForms.currentDate = function() {
     var mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /*January is 0!*/
     var yyyy = now.getFullYear();
     return [yyyy,mm,dd].join("-");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.render = function(view,data) {
     return new EJS({text:view}).render(data);
-}
+};

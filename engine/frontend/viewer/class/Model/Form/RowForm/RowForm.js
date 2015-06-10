@@ -5,7 +5,7 @@ QForms.inherit(RowForm,Form);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function RowForm(name,page,data) {
     Form.call(this,name,page,data);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.init = function() {
@@ -17,7 +17,7 @@ RowForm.prototype.init = function() {
     }
     // dump row values to page params
     this.fillParams(this.dataSource.data.rows[0]);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.fillParams = function(row) {
@@ -33,11 +33,11 @@ RowForm.prototype.onDataSourceChanged = function(eventArgs) {
     if (dataSource.name === "default") {
         this.eventChanged.fire(new QForms.Event(this));
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.onDataSourceUpdated = function(eventArgs) {
     Form.prototype.onDataSourceUpdated.call(this,eventArgs);
     this.fillParams(this.dataSource.data.rows[0]);
     this.eventUpdated.fire(new QForms.Event(this));
-}
+};

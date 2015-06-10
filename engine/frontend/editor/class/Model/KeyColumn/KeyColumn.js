@@ -6,7 +6,7 @@ QForms.inherit(KeyColumn,Model);
 function KeyColumn(data,dataSource) {
     Model.call(this,data);
     this.dataSource = dataSource;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.setValue = function(name,value,callback) {
@@ -29,7 +29,7 @@ KeyColumn.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.delete = function(callback) {
@@ -48,7 +48,7 @@ KeyColumn.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.getView = function(view,callback) {
@@ -62,4 +62,4 @@ KeyColumn.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};

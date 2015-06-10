@@ -6,7 +6,7 @@ QForms.inherit(ControlController,VisualController);
 function ControlController(model,item) {
     VisualController.call(this,model);
     this.item = item;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.getCaption = function(controlData) {
@@ -14,14 +14,14 @@ ControlController.prototype.getCaption = function(controlData) {
         .replace("{name}",controlData["@attributes"].name)
         .replace("{class}",controlData["@class"]);
     return caption;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.getActions = function() {
     return [
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.getPropList = function() {
@@ -31,7 +31,7 @@ ControlController.prototype.getPropList = function() {
     options["readOnly"] = ["true","false"];
     options["notNull"] = ["true","false"];
     return {list:list,options:options};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.doAction = function(action) {
@@ -40,4 +40,4 @@ ControlController.prototype.doAction = function(action) {
             this.delete();
             break;
     }
-}
+};

@@ -7,7 +7,7 @@ function Field(name, parent, data) {
     this.data   = data;
     this.parent = parent;
     //this.eventHandlers = {};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.init = function() {
@@ -18,12 +18,12 @@ Field.prototype.init = function() {
             this.eventHandlers[event].init();
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.getDefaultValue = function() {
     return this.form.getExpValue(this.data.defaultValue);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.handleEvent = function(event) {
@@ -32,7 +32,7 @@ Field.prototype.handleEvent = function(event) {
             this.eventHandlers[name].handleEvent();
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.valueToParams = function(row) {
@@ -40,16 +40,15 @@ Field.prototype.valueToParams = function(row) {
         var fullName = this.form.page.name + "." + this.form.name + "." + this.name;
         this.form.page.params[fullName] = row[this.data.column];
     }
-}
-
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.save = function (row,value) {
     this.form.dataSource.setValue(row,this.data.column,value);
     this.valueToParams(row);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.getValue = function (row) {
     return row[this.data.column];
-}
+};

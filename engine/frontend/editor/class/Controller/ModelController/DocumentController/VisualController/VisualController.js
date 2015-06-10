@@ -1,11 +1,11 @@
 "use strict"
 
-QForms.inherit(VisualController,DocumentController);
+QForms.inherit(VisualController, DocumentController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function VisualController(model) {
     DocumentController.call(this,model);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.createTab = function(docs) {
@@ -52,7 +52,7 @@ VisualController.prototype.createTab = function(docs) {
             self.$view.find(".btnSaveController").css("display","none");
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.tabWidget_TabShow = function(ea) {
@@ -64,7 +64,7 @@ VisualController.prototype.tabWidget_TabShow = function(ea) {
             }
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.showCustomController = function() {
@@ -76,7 +76,7 @@ VisualController.prototype.showCustomController = function() {
     this.$view.find(".btnSaveController").click(function() {self.btnSaveController_Click();});
     this.$view.find(".btnCreateController").css("display","none");
     this.$view.find(".btnSaveController").css("display","inline-block");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.showCustomView = function() {
@@ -88,28 +88,28 @@ VisualController.prototype.showCustomView = function() {
     this.$view.find(".btnCss").click(function() {self.btnCss_Click();});
     this.$view.find(".btnCreateView").css("display","none");
     this.$view.find(".btnSaveView").css("display","inline-block");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.initCmTemplateHtml = function() {
     this.cmTemplateHtml = CodeMirror.fromTextArea(this.$view.find(".cmHtmlView").get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
     this.cmTemplateHtml.setOption("theme", "cobalt");
     this.cmTemplateHtml.setValue(this.data.ejs);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.initCmTemplateCss = function() {
     this.cmTemplateCss = CodeMirror.fromTextArea(this.$view.find(".cmCssView").get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
     this.cmTemplateCss.setOption("theme", "cobalt");
     this.cmTemplateCss.setValue(this.data.css);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.initCmTemplateJs = function() {
     this.cmTemplateJs = CodeMirror.fromTextArea(this.$view.find(".cmJsCode").get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
     this.cmTemplateJs.setOption("theme", "cobalt");
     this.cmTemplateJs.setValue(this.data.js);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnSaveView_Click = function() {
@@ -123,14 +123,14 @@ VisualController.prototype.btnSaveView_Click = function() {
             break;
     }
     this.model.saveView(text,this.save);
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnSaveController_Click = function() {
     var text  = this.cmTemplateJs.getValue();
     this.model.saveController(text);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnHtml_Click = function() {
@@ -141,7 +141,7 @@ VisualController.prototype.btnHtml_Click = function() {
     this.$view.find(".btnCss").removeClass("btn-primary");
     this.$view.find(".btnCss").addClass("btn-default");
     this.save = "ejs";
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnCss_Click = function() {
@@ -155,7 +155,7 @@ VisualController.prototype.btnCss_Click = function() {
     this.$view.find(".btnHtml").removeClass("btn-primary");
     this.$view.find(".btnHtml").addClass("btn-default");
     this.save = "css";
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnCreateView_Click = function() {
@@ -165,7 +165,7 @@ VisualController.prototype.btnCreateView_Click = function() {
         self.data.css = data.css;
         self.showCustomView();
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 VisualController.prototype.btnCreateController_Click = function() {
@@ -174,4 +174,4 @@ VisualController.prototype.btnCreateController_Click = function() {
         self.data.js = data.js;
         self.showCustomController();
     });
-}
+};

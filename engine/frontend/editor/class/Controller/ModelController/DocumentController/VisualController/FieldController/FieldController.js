@@ -6,7 +6,7 @@ QForms.inherit(FieldController,VisualController);
 function FieldController(model,item) {
     VisualController.call(this,model);
     this.item = item;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getActions = function() {
@@ -18,7 +18,7 @@ FieldController.prototype.getActions = function() {
         {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.doAction = function(action) {
@@ -41,7 +41,7 @@ FieldController.prototype.doAction = function(action) {
             });
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.actionChangeClass = function() {
@@ -64,7 +64,7 @@ FieldController.prototype.actionChangeClass = function() {
         });
         $("#modal").modal("show");
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getCaption = function(fieldData) {
@@ -72,7 +72,7 @@ FieldController.prototype.getCaption = function(fieldData) {
         .replace("{name}",fieldData["@attributes"].name)
         .replace("{class}",fieldData["@class"]);
     return caption;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getPropList = function() {
@@ -83,4 +83,4 @@ FieldController.prototype.getPropList = function() {
     options["notNull"] = ["true","false"];
     options["align"] = ["left","right"];
     return {list:list,options:options};
-}
+};

@@ -4,8 +4,8 @@
 function Action(parent,data) {
     this.parent = parent;
     this.data = data;
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Action.prototype.exec = function(args,context) {
-}
+};

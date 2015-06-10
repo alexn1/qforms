@@ -5,7 +5,7 @@ QForms.inherit(ImageFieldController,FieldController);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ImageFieldController(model,parent) {
     FieldController.call(this,model,parent);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ImageFieldController.prototype.getValue = function (view) {
@@ -17,7 +17,7 @@ ImageFieldController.prototype.getValue = function (view) {
             return view.firstElementChild.innerHTML;
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ImageFieldController.prototype.setValue = function (value,view) {
@@ -33,4 +33,4 @@ ImageFieldController.prototype.setValue = function (value,view) {
             }
             break;
     }
-}
+};

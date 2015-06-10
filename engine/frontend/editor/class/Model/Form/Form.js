@@ -6,7 +6,7 @@ QForms.inherit(Form,Model);
 function Form(data,page) {
     Model.call(this,data);
     this.page = page;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.setValue = function(name,value,callback) {
@@ -27,7 +27,7 @@ Form.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.delete = function(callback) {
@@ -44,7 +44,7 @@ Form.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.moveUp = function(callback) {
@@ -86,7 +86,7 @@ Form.prototype.newField = function(params,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.newControl = function(params,callback) {
@@ -102,7 +102,7 @@ Form.prototype.newControl = function(params,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.newDataSource = function(params,callback) {
@@ -118,7 +118,7 @@ Form.prototype.newDataSource = function(params,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.getView = function(view,callback) {
@@ -134,7 +134,7 @@ Form.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.saveView = function(text,view) {
@@ -151,7 +151,7 @@ Form.prototype.saveView = function(text,view) {
     QForms.doHttpRequest(this,args,function(data){
 
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.saveController = function(text) {
@@ -167,7 +167,7 @@ Form.prototype.saveController = function(text) {
     QForms.doHttpRequest(this,args,function(data) {
 
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.createView = function(callback) {
@@ -183,7 +183,7 @@ Form.prototype.createView = function(callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.createController = function(callback) {
@@ -199,4 +199,4 @@ Form.prototype.createController = function(callback) {
     QForms.doHttpRequest(this,args,function(data){
         callback(data);
     });
-}
+};

@@ -8,7 +8,7 @@ function DataGridWidget(el,formController) {
     this.formController = formController;
     this.dataSource = null;
     this.keyToBodyRow = {}; // to fast row search by key
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.init = function() {
@@ -18,7 +18,7 @@ DataGridWidget.prototype.init = function() {
     this.dataSource.eventNewRow.subscribe(this,"onNewRow");
     this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
     this.dataSource.eventMoveRow.subscribe(this,"onMoveRow");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.createColumn = function(fieldName,headerCell) {
@@ -26,7 +26,7 @@ DataGridWidget.prototype.createColumn = function(fieldName,headerCell) {
     var gridColumn = new DataGridColumn(this,fieldName,headerCell,fieldController);
     gridColumn.init();
     return gridColumn;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.deinit = function() {
@@ -35,7 +35,7 @@ DataGridWidget.prototype.deinit = function() {
     this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
     this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
     this.dataSource.eventMoveRow.unsubscribe(this,"onMoveRow");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.fill = function () {
@@ -53,12 +53,12 @@ DataGridWidget.prototype.fill = function () {
         this.setRowStyle(bodyRow);
         this.keyToBodyRow[key] = bodyRow;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.setRowStyle = function(bodyRow) {
     this.formController.setRowStyle(bodyRow,bodyRow.dbRow);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.save = function(bodyCell) {
@@ -70,7 +70,7 @@ DataGridWidget.prototype.save = function(bodyCell) {
         field.data.column,
         value
     );
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.refillRow = function(bodyRow,newIndex) {
@@ -80,7 +80,7 @@ DataGridWidget.prototype.refillRow = function(bodyRow,newIndex) {
         this.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow,bodyCell.firstElementChild);
     }
     this.setRowStyle(bodyRow);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.onRefillRow = function(ea) {
@@ -89,7 +89,7 @@ DataGridWidget.prototype.onRefillRow = function(ea) {
     //console.log("onRefillRow: " + key + " " + i);
     var bodyRow = this.keyToBodyRow[key];
     this.refillRow(bodyRow,i);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.onNewRow = function(ea) {
@@ -108,7 +108,7 @@ DataGridWidget.prototype.onNewRow = function(ea) {
     this.keyToBodyRow[key] = bodyRow;
     this.selectBodyRow(bodyRow);
     bodyRow.scrollIntoView();
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.onRemoveRow = function(ea) {
@@ -127,7 +127,7 @@ DataGridWidget.prototype.onRemoveRow = function(ea) {
     }
     this.bodyTable.removeChild(bodyRow);
     delete this.keyToBodyRow[key];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.onMoveRow = function(ea) {
@@ -139,9 +139,9 @@ DataGridWidget.prototype.onMoveRow = function(ea) {
     var bodyRow = this.keyToBodyRow[key];
     QForms.moveNode(this.bodyTable,bodyRow,oldIndex,newIndex);
     this.refillRow(bodyRow,newIndex);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.getSelectedKey = function() {
     return (this.selectedBodyRow !== null) ? this.selectedBodyRow.qKey : null;
-}
+};

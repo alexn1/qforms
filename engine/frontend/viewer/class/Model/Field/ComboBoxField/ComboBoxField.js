@@ -5,7 +5,7 @@ QForms.inherit(ComboBoxField,Field);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ComboBoxField(name,form,data) {
     Field.call(this,name,form,data);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxField.prototype.templateValue = function(row) {
@@ -19,7 +19,7 @@ ComboBoxField.prototype.templateValue = function(row) {
         });
     }
     return value;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxField.prototype.getUsedColumns = function(title) {
@@ -30,4 +30,4 @@ ComboBoxField.prototype.getUsedColumns = function(title) {
         columns[column] = true;
     }
     return Object.keys(columns);
-}
+};

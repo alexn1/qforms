@@ -5,16 +5,16 @@ function GridColumn(gridWidget,name,headerCell) {
     this.gridWidget = gridWidget;
     this.name = name;
     this.headerCell = headerCell;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.init = function() {
     this.initResize(this.headerCell,this.name);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.deinit = function() {
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,32 +24,32 @@ GridColumn.prototype.initResize = function(headerCell,fieldName) {
     resize.qFieldName = fieldName;
     resize.addEventListener("mousedown",function(event) {return self.beginResize(event,this);});
     resize.addEventListener("dblclick",function(event) {return self.setOptimalWidth(event,this);});
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.renderView = function() {
     return $('<div><span></span></div>').get(0);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.setViewStyle = function(view,row) {
 
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.setValue = function(view,value) {
     view.firstElementChild.innerHTML = value;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.getValue = function(view) {
     return view.firstElementChild.innerHTML;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.getOptimalWidth = function(view) {
     return view.firstElementChild.offsetWidth;
-}
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,14 +97,14 @@ GridColumn.prototype.setOptimalWidth = function(e,resize) {
         if (bodyTd) bodyTd.style.width = maxWidth + "px";
     }
     return false;
-}
+};
 
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.focus = function(bodyCell) {
     bodyCell.firstElementChild.firstElementChild.focus();
-}
+};
 */
 
 /*
@@ -115,7 +115,7 @@ GridColumn.prototype.unselected = function(bodyCell) {
         this.restoreValue(bodyCell);
         this.endEdit(bodyCell);
     }
-}
+};
 */
 
 
@@ -124,7 +124,7 @@ GridColumn.prototype.unselected = function(bodyCell) {
 GridColumn.prototype.doubleClick = function(bodyCell) {
     this.beginEdit(bodyCell);
     this.focus(bodyCell);
-}
+};
 */
 
 /*
@@ -136,7 +136,7 @@ GridColumn.prototype.enterPress = function(bodyCell) {
         }
         this.endEdit(bodyCell);
     }
-}
+};
 */
 
 /*
@@ -146,7 +146,7 @@ GridColumn.prototype.escPress = function(bodyCell) {
         this.restoreValue(bodyCell);
         this.endEdit(bodyCell);
     }
-}
+};
 */
 
 /*
@@ -158,7 +158,7 @@ GridColumn.prototype.beginEdit = function(bodyCell) {
     bodyCell.firstElementChild.firstElementChild.contentEditable = true;
     this.selectContent(bodyCell);
     bodyCell.isEdited = true;
-}
+};
 */
 
 /*
@@ -169,7 +169,7 @@ GridColumn.prototype.endEdit = function(bodyCell) {
     bodyCell.oldValue = null;
     bodyCell.isEdited = false;
     bodyCell.classList.remove("edit");
-}
+};
 */
 
 /*
@@ -179,12 +179,12 @@ GridColumn.prototype.selectContent = function(bodyCell) {
     range.selectNodeContents(bodyCell.firstElementChild.firstElementChild);
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
-}
+};
 */
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.restoreValue = function(bodyCell) {
     this.setValue(bodyCell,bodyCell.oldValue);
-}
+};
 */

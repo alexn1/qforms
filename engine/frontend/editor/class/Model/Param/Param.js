@@ -6,7 +6,7 @@ QForms.inherit(Param,Model);
 function Param(data,database) {
     Model.call(this,data);
     this.database = database;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Param.prototype.setValue = function(name,value,callback) {
@@ -27,7 +27,7 @@ Param.prototype.setValue = function(name,value,callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Param.prototype.delete = function(callback) {
@@ -44,7 +44,7 @@ Param.prototype.delete = function(callback) {
             callback(data);
         }
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Param.prototype.getView = function(view,callback) {
@@ -58,4 +58,4 @@ Param.prototype.getView = function(view,callback) {
     QForms.doHttpRequest(this,args,function(data) {
         callback(data);
     });
-}
+};

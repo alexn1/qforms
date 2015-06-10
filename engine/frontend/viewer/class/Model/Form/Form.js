@@ -15,7 +15,7 @@ function Form(name, parent, data) {
     // event
     this.eventChanged  = new QForms.Event(this);
     this.eventUpdated  = new QForms.Event(this);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.init = function() {
@@ -44,7 +44,7 @@ Form.prototype.init = function() {
     this.dataSource = this.dataSources["default"];
     this.dataSource.eventChanged.subscribe(this,"onDataSourceChanged");
     this.dataSource.eventUpdated.subscribe(this,"onDataSourceUpdated");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.deinit = function() {
@@ -53,7 +53,7 @@ Form.prototype.deinit = function() {
     for (var dsName in this.dataSources) {
         this.dataSources[dsName].deinit();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.defaultValuesToRow = function(row) {
@@ -63,7 +63,7 @@ Form.prototype.defaultValuesToRow = function(row) {
             row[field.data.column] = field.getDefaultValue();
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.onDataSourceChanged = function(eventArgs) {
@@ -71,7 +71,7 @@ Form.prototype.onDataSourceChanged = function(eventArgs) {
     if (dataSource.name === "default") {
         this.changed = true;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.onDataSourceUpdated = function(eventArgs) {
@@ -79,7 +79,7 @@ Form.prototype.onDataSourceUpdated = function(eventArgs) {
     if (dataSource.name === "default") {
         this.changed = false;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.update = function() {
@@ -88,17 +88,17 @@ Form.prototype.update = function() {
     this.dataSources["default"].update(function(newKey) {
         if (!self.page.deinited) self.page.setKey(newKey);
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.refill = function() {
     this.dataSources["default"].refill(this.page.params);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.executeAction = function(action,args) {
     action.exec(args,{"form":this});
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.handleEvent = function(event,args) {
@@ -106,7 +106,7 @@ Form.prototype.handleEvent = function(event,args) {
     if (this.eventHandlers && this.eventHandlers[event]) {
         this.eventHandlers[event].handleEvent(args);
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.getExpValue = function(exp) {
@@ -134,4 +134,4 @@ Form.prototype.getExpValue = function(exp) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.openPage = function(params) {
     this.page.openPage(params);
-}
+};

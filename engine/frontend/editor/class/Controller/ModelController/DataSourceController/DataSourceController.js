@@ -8,7 +8,7 @@ function DataSourceController(model,item) {
     this.item = item;
     this.itemKeys = null;
     this.itemParentKeyColumns = null;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.createTree = function() {
@@ -27,7 +27,7 @@ DataSourceController.prototype.createTree = function() {
         var pkcData = this.model.data.parentKeyColumns[name];
         this.addParentKeyColumn(pkcData);
     };
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.addKeyColumn = function(itemData) {
@@ -36,7 +36,7 @@ DataSourceController.prototype.addKeyColumn = function(itemData) {
     var keyColumn = new KeyColumn(itemData,this.model);
     keyColumnItem.ctrl = new KeyColumnController(keyColumn,keyColumnItem);
     return keyColumnItem;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.addParentKeyColumn = function(pkcData) {
@@ -45,7 +45,7 @@ DataSourceController.prototype.addParentKeyColumn = function(pkcData) {
     var parentKeyColumn = new ParentKeyColumn(pkcData,this.model);
     itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn,itemParentKeyColumn);
     return itemParentKeyColumn;
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getActions = function() {
@@ -67,7 +67,7 @@ DataSourceController.prototype.getActions = function() {
             "caption":"Delete"
         }
     ];
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.doAction = function(action) {
@@ -82,7 +82,7 @@ DataSourceController.prototype.doAction = function(action) {
             this.delete();
             break;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.actionNewKeyColumn = function() {
@@ -99,7 +99,7 @@ DataSourceController.prototype.actionNewKeyColumn = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.actionNewParentKeyColumn = function() {
@@ -116,7 +116,7 @@ DataSourceController.prototype.actionNewParentKeyColumn = function() {
         });
         $("#myModal").modal("show");
     });
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getPropList = function() {
@@ -125,7 +125,7 @@ DataSourceController.prototype.getPropList = function() {
     options["insertNewKey"] = ["true","false"];
     options["dumpFirstRowToParams"] = ["true","false"];
     return {list:list,options:options};
-}
+};
 
 
 

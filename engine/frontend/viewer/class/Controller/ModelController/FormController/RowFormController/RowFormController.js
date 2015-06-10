@@ -9,7 +9,7 @@ function RowFormController(model, view, parent) {
     this.key          = null;
     this.fieldViews   = {};
     this.controlViews = {};
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.init = function() {
@@ -41,7 +41,7 @@ RowFormController.prototype.init = function() {
         }
         this.controlViews[name] = view;
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.deinit = function() {
@@ -53,7 +53,7 @@ RowFormController.prototype.deinit = function() {
     for (var name in this.controls) {
         this.controls[name].deinit();
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.fill = function() {
@@ -72,7 +72,7 @@ RowFormController.prototype.fill = function() {
             this.controls[name].fill(this.row, view);
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.onRefillRow = function (ea) {
@@ -83,7 +83,7 @@ RowFormController.prototype.onRefillRow = function (ea) {
             this.fields[name].refill(this.row,view);
         }
     }
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.isValid = function() {
@@ -100,4 +100,4 @@ RowFormController.prototype.isValid = function() {
         }
     }
     return isValid;
-}
+};
