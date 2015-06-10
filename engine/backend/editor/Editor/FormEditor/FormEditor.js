@@ -49,6 +49,26 @@ FormEditor.prototype.createField = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.moveFieldUp = function(params, callback) {
+    var fields = this.pageEditor.pageFile.getFormFields(params.form);
+    fields = helper.moveObjProp(fields, params.field, -1);
+    this.pageEditor.pageFile.setFormFields(params.form, fields);
+    this.pageEditor.pageFile.save(function() {
+        callback('ok');
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.moveFieldDown = function(params, callback) {
+    var fields = this.pageEditor.pageFile.getFormFields(params.form);
+    fields = helper.moveObjProp(fields, params.field, 1);
+    this.pageEditor.pageFile.setFormFields(params.form, fields);
+    this.pageEditor.pageFile.save(function() {
+        callback('ok');
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getField = function(name) {
     var fieldData = this.pageEditor.pageFile.getFormFieldData(this.name, name);
     return eval('new {class}Editor(this, name)'.replace('{class}', fieldData['@class']));

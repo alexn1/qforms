@@ -152,3 +152,9 @@ TreeItem.prototype.changeParent = function(newParent,newIndex) {
     this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + "px";
     this.ul.level = this.parent.ul.level + 1;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TreeItem.prototype.move = function(offset) {
+    var index = Array.prototype.indexOf.call(this.parent.ul.childNodes, this.li);
+    QForms.insertNewNodeAt(this.parent.ul, this.li, index + offset);
+};

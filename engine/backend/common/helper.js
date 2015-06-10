@@ -10,19 +10,20 @@ var _     = require('underscore');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
-    getFilePathsSync : getFilePathsSync,
-    getFilePaths     : getFilePaths,
-    getAppInfo       : getAppInfo,
-    getAppInfos      : getAppInfos,
-    currentTime      : currentTime,
-    currentDate      : currentDate,
-    replaceThis      : replaceThis,
-    queryFormat      : queryFormat,
-    typeCast         : typeCast,
-    getParams        : getParams,
-    replaceKey       : replaceKey,
-    getFileContent   : getFileContent,
-    createDirIfNotExists: createDirIfNotExists
+    getFilePathsSync    : getFilePathsSync,
+    getFilePaths        : getFilePaths,
+    getAppInfo          : getAppInfo,
+    getAppInfos         : getAppInfos,
+    currentTime         : currentTime,
+    currentDate         : currentDate,
+    replaceThis         : replaceThis,
+    queryFormat         : queryFormat,
+    typeCast            : typeCast,
+    getParams           : getParams,
+    replaceKey          : replaceKey,
+    getFileContent      : getFileContent,
+    createDirIfNotExists: createDirIfNotExists,
+    moveObjProp         : moveObjProp
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,4 +241,24 @@ function createDirIfNotExists(dirPath, callback) {
             });
         }
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function moveObjProp(obj, prop, offset) {
+    var keys     = _.keys(obj);
+    var values   = _.values(obj);
+    var oldIndex = keys.indexOf(prop);
+    if (oldIndex === -1) {
+        throw new Error('cannot find element');
+    }
+    var newIndex = oldIndex + offset;
+    if (newIndex < 0) {
+        throw new Error('cannot up top element');
+    }
+    if (newIndex > values.length - 1) {
+        throw new Error('cannot down bottom element');
+    }
+    keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
+    values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
+    return _.object(keys, values);
 };

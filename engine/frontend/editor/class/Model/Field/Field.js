@@ -34,20 +34,15 @@ Field.prototype.setValue = function(name,value,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.delete = function(callback) {
     var args = {
-        controller:"Field",
-        action:"delete",
-        params:{
+        controller : 'Field',
+        action     : 'delete',
+        params     : {
             pageFileName:this.form.page.pageLink.data["@attributes"].fileName,
-            form:this.form.data["@attributes"].name,
-            field:this.data["@attributes"].name
+            form        :this.form.data["@attributes"].name,
+            field       :this.data["@attributes"].name
         }
-
     };
-    QForms.doHttpRequest(this,args,function(data){
-        if (callback) {
-            callback(data);
-        }
-    });
+    QForms.doHttpRequest(this,args, callback);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,3 +144,31 @@ Field.prototype.changeClass = function(params,callback) {
         callback(data);
     });
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.moveUp = function(callback) {
+    var args = {
+        controller : 'Field',
+        action     : 'moveUp',
+        params     : {
+            pageFileName:this.form.page.pageLink.data["@attributes"].fileName,
+            form        :this.form.data["@attributes"].name,
+            field       :this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.moveDown = function(callback) {
+    var args = {
+        controller : 'Field',
+        action     : 'moveDown',
+        params     : {
+            pageFileName:this.form.page.pageLink.data["@attributes"].fileName,
+            form        :this.form.data["@attributes"].name,
+            field       :this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, callback);
+};

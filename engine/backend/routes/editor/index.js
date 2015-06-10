@@ -48,7 +48,9 @@ var actions = [
     'createController',
     'get',
     'getTableInfo',
-    'changeClass'
+    'changeClass',
+    'moveUp',
+    'moveDown'
 ];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -169,3 +169,27 @@ FieldController.prototype.saveController = function(params, callback) {
         });
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldController.prototype.moveUp = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
+            var formEditor = pageEditor.getForm(params.form);
+            formEditor.moveFieldUp(params, function(result) {
+                callback(result);
+            });
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldController.prototype.moveDown = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
+            var formEditor = pageEditor.getForm(params.form);
+            formEditor.moveFieldDown(params, function(result) {
+                callback(result);
+            });
+        });
+    });
+};
