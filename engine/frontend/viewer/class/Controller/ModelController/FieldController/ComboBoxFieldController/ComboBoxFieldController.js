@@ -29,36 +29,61 @@ ComboBoxFieldController.prototype.deinit = function() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.fill = function(row,view) {
-    view.keyToOption = {};
-    this.fillList(view);
-    ComboBoxFieldController.super_.prototype.fill.call(this,row,view);
-    var self = this;
-    $(view).children().change(function() {
-        self.onChange(this);
-    });
-}
+ComboBoxFieldController.prototype.fill = function(row, view) {
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            view.keyToOption = {};
+            this._fillSelectOptions(view);
+            ComboBoxFieldController.super_.prototype.fill.call(this, row, view);
+            var self = this;
+            $(view).children().change(function() {
+                self.onChange(this);
+            });
+            break;
+        case 'TableForm':
+            ComboBoxFieldController.super_.prototype.fill.call(this, row, view);
+            break;
+    }
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.getValue = function (view) {
-    return view.firstElementChild.value;
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            return view.firstElementChild.value;
+            break;
+        case 'TableForm':
+            return view.firstElementChild.value;
+            break;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.setValue = function (value,view) {
-    view.firstElementChild.value = value;
-}
-
+ComboBoxFieldController.prototype.setValue = function (value, view) {
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            view.firstElementChild.value = value;
+            break;
+        case 'TableForm':
+            view.firstElementChild.value = value;
+            if (value !== "" && value !== null) {
+                var key = JSON.stringify([value]);
+                var row = this.dataSource.getRow(key);
+                view.firstElementChild.innerHTML = this.model.templateValue(row);
+            }
+            break;
+    }
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.fillList = function(view) {
+ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     var nullOption = document.createElement("option");
     nullOption.selected = true;
     view.firstElementChild.appendChild(nullOption);
     var rows = this.dataSource.getRows();
-    for (var i=0;i<rows.length;i++) {
-        this.createOption(view,i);
+    for (var i=0; i<rows.length; i++) {
+        this.createOption(view, i);
     }
 }
 
@@ -68,9 +93,9 @@ ComboBoxFieldController.prototype.createOption = function(view,i) {
     var key = this.dataSource.getRowKey(row);
     var option = document.createElement("option");
     option.innerHTML = this.model.templateValue(row);
-    option.dbRow = row;
-    option.value = JSON.parse(key)[0];
-    QForms.insertNewNodeAt(view.firstElementChild,option,i+1); // на 0 позиции всегда (null) значение
+    option.dbRow     = row;
+    option.value     = JSON.parse(key)[0];
+    QForms.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
     view.keyToOption[key] = option;
     return option;
 }

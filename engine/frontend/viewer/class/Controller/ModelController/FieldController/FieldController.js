@@ -55,8 +55,8 @@ FieldController.prototype.fill = function(row,view) {
     var key = this.model.form.dataSource.getRowKey(row);
     this.views[key] = view;
     view.dbRow = row;
-    this.setValue(row[this.model.data.column],view);
-    this.setViewStyle(view,row);
+    this.setValue(row[this.model.data.column], view);
+    this.setViewStyle(view, row);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
