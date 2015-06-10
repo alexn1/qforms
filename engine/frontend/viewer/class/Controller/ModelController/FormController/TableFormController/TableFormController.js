@@ -45,8 +45,10 @@ TableFormController.prototype.onNewClick = function(ctrl) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onDeleteClick = function(ctrl) {
     var key = this.grid.getSelectedKey();
-    if (key !== null) this.model.delete(key);
-}
+    if (key !== null) {
+        this.model.delete(key);
+    }
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onGridCellDblClick = function(ea) {

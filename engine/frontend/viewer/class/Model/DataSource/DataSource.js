@@ -21,7 +21,6 @@ function DataSource(name,parent,data) {
     this.eventMoveRow   = new QForms.Event(this);		// row has been moved within list
     this.eventGoneRow   = new QForms.Event(this);		// row gone from current tree item list
     this.eventComeRow   = new QForms.Event(this);		// row come to current tree item list
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -451,7 +450,7 @@ DataSource.prototype.delete = function(key) {
         return;
     }
     var args = {
-        action:"delete",
+        action:"_delete",
         page:this.form.page.name,
         form:this.form.name,
         ds:this.name,

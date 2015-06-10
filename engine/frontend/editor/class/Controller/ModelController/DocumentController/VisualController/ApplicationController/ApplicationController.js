@@ -130,10 +130,6 @@ ApplicationController.prototype.newDatabaseAction = function() {
             var params = {
                 name:name,
                 params:{
-                    connectionString:{
-                        name:"connectionString",
-                        value:"mysql:host=" + host +";dbname=" + dbname + ";charset=utf8;"
-                    },
                     host:{
                         name:"host",
                         value:host
