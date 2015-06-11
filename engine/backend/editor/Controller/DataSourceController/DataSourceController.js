@@ -49,25 +49,54 @@ DataSourceController.prototype._new = function(params, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.save = function(params, callback) {
+DataSourceController.prototype.delete = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.getPageByFileName(params.pageFileName,function(pageEditor) {
-            pageEditor.pageFile.setFormDataSourceAttr(params["form"], params['dataSource'], params["attr"], params["value"]);
-            pageEditor.pageFile.save(function() {
+        if (params.page) {
+            appEditor.getPageByFileName(params.page,function(pageEditor) {
+                if (params.form) {
+                    // form data source
+                    pageEditor.pageFile.deleteFormDataSource(params["form"], params["dataSource"]);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                } else {
+                    // page data source
+                    callback();
+                }
+
+            });
+        } else {
+            // app data source
+            appEditor.appFile.deleteDataSource(params.dataSource);
+            appEditor.appFile.save(function() {
                 callback(null);
             });
-        });
+        }
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.delete = function(params, callback) {
+DataSourceController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.getPageByFileName(params.page,function(pageEditor) {
-            pageEditor.pageFile.deleteFormDataSource(params["form"], params["dataSource"]);
-            pageEditor.pageFile.save(function() {
+        if (params.page) {
+            appEditor.getPageByFileName(params.pageFileName,function(pageEditor) {
+                if (params.form) {
+                    // form data source
+                    pageEditor.pageFile.setFormDataSourceAttr(params["form"], params['dataSource'], params["attr"], params["value"]);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                } else {
+                    // page data source
+                    callback();
+                }
+            });
+        } else {
+            // app data source
+            appEditor.appFile.setDataSourceAttr(params.dataSource, params.attr, params.value);
+            appEditor.appFile.save(function() {
                 callback(null);
             });
-        });
+        }
     });
 };

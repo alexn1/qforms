@@ -3,8 +3,8 @@
 QForms.inherit(DataSource,Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSource(data,parent) {
-    Model.call(this,data);
+function DataSource(data, parent) {
+    Model.call(this, data);
     this.parent = parent;
 };
 
@@ -15,13 +15,18 @@ DataSource.prototype.setValue = function(name,value,callback) {
         controller:"DataSource",
         action:"save",
         params:{
-            form:this.parent.data["@attributes"].name,
-            pageFileName:this.parent.page.pageLink.data["@attributes"].fileName,
             dataSource:this.data["@attributes"].name,
             attr:name,
             value:value
         }
     };
+    if (this.parent instanceof Page) {
+        args.params.pageFileName = this.parent.data["@attributes"].fileName;
+    }
+    if (this.parent instanceof Form) {
+        args.params.form = this.parent.data["@attributes"].name;
+        args.params.pageFileName = this.parent.page.pageLink.data["@attributes"].fileName;
+    }
     QForms.doHttpRequest(this,args,function(data){
         this.data["@attributes"][name] = value;
         if (callback) {
@@ -36,12 +41,17 @@ DataSource.prototype.delete = function(callback) {
         controller:"DataSource",
         action:"delete",
         params:{
-            page:this.parent.page.pageLink.data["@attributes"].fileName,
-            form:this.parent.data["@attributes"].name,
             dataSource:this.data["@attributes"].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    if (this.parent instanceof Page) {
+        args.params.page = this.parent.data["@attributes"].fileName;
+    }
+    if (this.parent instanceof Form) {
+        args.params.form = this.parent.data["@attributes"].name;
+        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+    }
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }

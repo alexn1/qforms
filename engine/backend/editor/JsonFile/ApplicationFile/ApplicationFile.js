@@ -182,3 +182,19 @@ ApplicationFile.prototype.newDataSource = function(params) {
     }
     return this.data.dataSources[name] = data;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationFile.prototype.deleteDataSource = function(dataSource) {
+    delete this.data.dataSources[dataSource];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationFile.prototype.setDataSourceAttr = function(dataSource, name, value) {
+    this.data.dataSources[dataSource]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources = Helper.replaceKey(
+            this.data.dataSources,
+            dataSource,
+            value);
+    }
+};

@@ -31,7 +31,7 @@ ApplicationController.prototype.createTree = function() {
             this.addDataSourceItem(dataSourceData);
         }
     }
-    // page links
+    // pages
     this.pagesItem = this.item.addItem("Pages","opened");
     if (this.model.data.pageLinks) {
         for (var name in this.model.data.pageLinks) {
@@ -55,7 +55,7 @@ ApplicationController.prototype.addDatabaseItem = function(databaseData) {
 ApplicationController.prototype.addDataSourceItem = function(dataSourceData) {
     var caption = DataSourceController.prototype.getCaption(dataSourceData);
     var dataSourceItem = this.dataSourcesItem.addItem(caption);
-    var dataSource = new DataSource(dataSourceData);
+    var dataSource = new DataSource(dataSourceData, this.model);
     dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
     dataSourceItem.ctrl.createTree();
     return dataSourceItem;
