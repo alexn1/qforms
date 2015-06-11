@@ -6,7 +6,6 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-
 var qforms          = require('../../../qforms');
 var helper          = require('../../../common/helper');
 var Editor          = require('../Editor');
@@ -151,6 +150,7 @@ ApplicationEditor.prototype.createJs = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.prototype.getCustomFilePath = function(params, ext, callback) {
+ApplicationEditor.prototype.getCustomFilePath = function(params, ext) {
     return path.join(this.appFile.appInfo.dirPath, params.app + '.' + ext);
 };
+

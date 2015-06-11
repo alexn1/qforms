@@ -25,12 +25,26 @@ function DataSourceController(appInfo) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype._new = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.getPageByFileName(params.page,function(pageEditor) {
-            var dataSourceData = pageEditor.pageFile.newFormDataSource(params);
-            pageEditor.pageFile.save(function() {
+        if (params.page) {
+            appEditor.getPageByFileName(params.page, function(pageEditor) {
+                if (params.form) {
+                    // form data source
+                    var dataSourceData = pageEditor.pageFile.newFormDataSource(params);
+                    pageEditor.pageFile.save(function() {
+                        callback(dataSourceData);
+                    });
+                } else {
+                    // page data source
+                    callback();
+                }
+            });
+        } else {
+            // app data source
+            var dataSourceData = appEditor.appFile.newDataSource(params);
+            appEditor.appFile.save(function() {
                 callback(dataSourceData);
             });
-        });
+        }
     });
 };
 

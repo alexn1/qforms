@@ -21,16 +21,17 @@ if (!fs.existsSync(qforms.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(qforms.get('appsDirPath')) + "' doesn't exists");
     process.exit(1);
 }
-qforms.set('version'       , p.version);
-qforms.set('host'          , helper.getParams().host || config.get('host'));
-qforms.set('port'          , helper.getParams().port || config.get('port'));
-qforms.set('view engine'   , 'ejs');
-qforms.set('views'         , './routes');
-qforms.set('public'        , '../frontend');
-qforms.set('applications'  , {});
-qforms.set('commonStyleCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'common/style', 'css'));
-qforms.set('commonClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'css'));
-qforms.set('commonClassJs' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'js'));
+qforms.set('version'        , p.version);
+qforms.set('host'           , helper.getParams().host            || config.get('host'));
+qforms.set('port'           , helper.getParams().port            || config.get('port'));
+qforms.set('handleException', helper.getParams().handleException || 'true');
+qforms.set('view engine'    , 'ejs');
+qforms.set('views'          , './routes');
+qforms.set('public'         , '../frontend');
+qforms.set('applications'   , {});
+qforms.set('commonStyleCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/style', 'css'));
+qforms.set('commonClassCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'css'));
+qforms.set('commonClassJs'  , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'js'));
 
 // middlewares
 //qforms.use(morgan('dev'));

@@ -4,13 +4,14 @@ var path   = require('path');
 var fs     = require('fs');
 var util   = require('util');
 var domain = require('domain');
+var config = require('config');
 
-var app         = require('../../qforms');
+var qforms      = require('../../qforms');
 var helper      = require('../../common/helper');
 var Application = require('../../viewer/Model/Application/Application');
 
-app.set('viewerClassCss', helper.getFilePathsSync(path.join(app.get('public')), 'viewer/class', 'css'));
-app.set('viewerClassJs' , helper.getFilePathsSync(path.join(app.get('public')), 'viewer/class', 'js'));
+qforms.set('viewerClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'css'));
+qforms.set('viewerClassJs' , helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'js'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
@@ -21,7 +22,9 @@ module.exports = function(req, res, next) {
         if (req.query.debug !== '1' && applications[route]) {
             //console.log('old app: ' + route);
             var d = domain.create();
-            d.on('error', next);
+            if (qforms.get('handleException') === 'true') {
+                d.on('error', next);
+            }
             d.run(function() {
                 handle(req, res, next, applications[route]);
             });
@@ -40,7 +43,9 @@ module.exports = function(req, res, next) {
                                     application.init(function() {
                                         applications[route] = application;
                                         var d = domain.create();
-                                        d.on('error', next);
+                                        if (qforms.get('handleException') === 'true') {
+                                            d.on('error', next);
+                                        }
                                         d.run(function() {
                                             handle(req, res, next, application);
                                         });

@@ -124,3 +124,17 @@ Application.prototype.createController = function(callback) {
         callback(data);
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.newDataSource = function(params, callback) {
+    var args = {
+        controller:"DataSource",
+        action:"_new",
+        params:params
+    };
+    QForms.doHttpRequest(this,args,function(data){
+        if (callback) {
+            callback(data);
+        }
+    });
+};

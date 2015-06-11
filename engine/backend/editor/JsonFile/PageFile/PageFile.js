@@ -15,6 +15,7 @@ var LabelFieldEditor        = require('../../Editor/FieldEditor/LabelFieldEditor
 var LinkFieldEditor         = require('../../Editor/FieldEditor/LinkFieldEditor/LinkFieldEditor');
 var TextAreaFieldEditor     = require('../../Editor/FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor      = require('../../Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
+var SqlDataSourceEditor     = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(PageFile, JsonFile);
 
@@ -232,17 +233,7 @@ PageFile.prototype.newFormDataSource = function(params) {
     var data;
     switch (_class) {
         case "SqlDataSource":
-            data = {
-                "@class":"SqlDataSource",
-                "@attributes": {
-                    'name':name,
-                    'database' : params['database'] ? params['database'] : 'default',
-                    'table' : params['table'] ? params['table'] : '',
-                    'query' : params['query'] ? params['query'] : '',
-                    'insertNewKey':"false",
-                    'dumpFirstRowToParams':"false"
-                }
-            };
+            data = SqlDataSourceEditor.create(params);
             break;
         default:
             throw new Error('Unknown data source class.');

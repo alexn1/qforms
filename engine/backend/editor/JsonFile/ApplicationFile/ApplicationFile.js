@@ -6,8 +6,9 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var JsonFile = require('../JsonFile');
-var Helper   = require('../../../common/helper');
+var JsonFile            = require('../JsonFile');
+var Helper              = require('../../../common/helper');
+var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(ApplicationFile, JsonFile);
 
@@ -159,4 +160,25 @@ ApplicationFile.prototype.getDatabaseData = function(database) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationFile.prototype.getPageLinkData = function(name) {
     return this.data.pageLinks[name];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationFile.prototype.newDataSource = function(params) {
+    var name   = params['name'];
+    var _class = params['class'];
+    if (!this.data.dataSources) {
+        this.data.dataSources = {};
+    }
+    if (this.data.dataSources[name]) {
+        throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+    }
+    var data;
+    switch (_class) {
+        case "SqlDataSource":
+            data = SqlDataSourceEditor.create(params);
+            break;
+        default:
+            throw new Error('Unknown data source class.');
+    }
+    return this.data.dataSources[name] = data;
 };
