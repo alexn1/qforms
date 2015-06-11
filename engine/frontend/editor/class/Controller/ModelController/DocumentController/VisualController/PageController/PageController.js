@@ -20,6 +20,14 @@ PageController.prototype.createTree = function(callback) {
             this.addFormItem(formData);
         };
     }
+    // data sources
+    this.dataSourcesItem = this.item.addItem("Data Sources");
+    if (this.model.data.dataSources) {
+        for (var name in this.model.data.dataSources) {
+            var dataSourceData = this.model.data.dataSources[name];
+            this.addDataSourceItem(dataSourceData);
+        }
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,10 +41,20 @@ PageController.prototype.addFormItem = function(formData) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+PageController.prototype.addDataSourceItem = function(dataSourceData) {
+    var caption = DataSourceController.prototype.getCaption(dataSourceData);
+    var dataSourceItem = this.dataSourcesItem.addItem(caption);
+    var dataSource = new DataSource(dataSourceData, this.model);
+    dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
+    dataSourceItem.ctrl.createTree();
+    return dataSourceItem;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getActions = function() {
     return [
         {"action":"newForm","caption":"New Form"},
-        //{"action":"newDataSource","caption":"New Data Source"},
+        {"action":"newDataSource","caption":"New Data Source"},
         {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
@@ -47,6 +65,9 @@ PageController.prototype.doAction = function(action) {
     switch (action) {
         case "newForm":
             this.actionNewForm();
+            break;
+        case 'newDataSource':
+            this.newDataSourceAction();
             break;
         case "delete":
             this.delete();
@@ -75,6 +96,28 @@ PageController.prototype.actionNewForm = function() {
         });
         $("#myModal").modal("show");
         $("#myModal input[id='name']").focus();
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageController.prototype.newDataSourceAction = function() {
+    var self = this;
+    DataSource.prototype.getView("new.html", function(result) {
+        $(document.body).append(result.view);
+        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $("#myModal button[name='create']").click(function() {
+            var dsName = $("#myModal input[id='dsName']").val();
+            var dsClass = $("#myModal select[id='dsClass']").val();
+            var params = {
+                name :dsName,
+                class:dsClass
+            };
+            DataSource.create(self.model, params, function(dataSourceData) {
+                self.addDataSourceItem(dataSourceData).select();
+            });
+            $("#myModal").modal("hide");
+        });
+        $("#myModal").modal("show");
     });
 };
 

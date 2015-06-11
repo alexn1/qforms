@@ -8,6 +8,31 @@ function DataSource(data, parent) {
     this.parent = parent;
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.create = function(parent, params, callback) {
+    console.log(parent);
+    if (parent instanceof Form) {
+        var form = parent;
+        params["page"]  = form.page.pageLink.data["@attributes"].fileName;
+        params["form"]  = form.data["@attributes"].name;
+    }
+    if (parent instanceof Page) {
+        var page = parent;
+        params["page"]  = page.pageLink.data["@attributes"].fileName;
+    }
+    var args = {
+        controller:"DataSource",
+        action:"_new",
+        params:params
+    };
+    QForms.doHttpRequest(this, args, function(data) {
+        if (callback) {
+            callback(data);
+        }
+    });
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setValue = function(name,value,callback) {
     //console.log(name + " = " + value);
@@ -21,7 +46,7 @@ DataSource.prototype.setValue = function(name,value,callback) {
         }
     };
     if (this.parent instanceof Page) {
-        args.params.pageFileName = this.parent.data["@attributes"].fileName;
+        args.params.pageFileName = this.parent.pageLink.data["@attributes"].fileName;
     }
     if (this.parent instanceof Form) {
         args.params.form = this.parent.data["@attributes"].name;
@@ -37,6 +62,9 @@ DataSource.prototype.setValue = function(name,value,callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(callback) {
+
+    console.log(this.parent);
+
     var args = {
         controller:"DataSource",
         action:"delete",
@@ -45,7 +73,8 @@ DataSource.prototype.delete = function(callback) {
         }
     };
     if (this.parent instanceof Page) {
-        args.params.page = this.parent.data["@attributes"].fileName;
+        console.log('instance of page');
+        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
     }
     if (this.parent instanceof Form) {
         args.params.form = this.parent.data["@attributes"].name;

@@ -35,7 +35,10 @@ DataSourceController.prototype._new = function(params, callback) {
                     });
                 } else {
                     // page data source
-                    callback();
+                    var dataSourceData = pageEditor.pageFile.newDataSource(params);
+                    pageEditor.pageFile.save(function() {
+                        callback(dataSourceData);
+                    });
                 }
             });
         } else {
@@ -61,9 +64,11 @@ DataSourceController.prototype.delete = function(params, callback) {
                     });
                 } else {
                     // page data source
-                    callback();
+                    pageEditor.pageFile.deleteDataSource(params["dataSource"]);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
                 }
-
             });
         } else {
             // app data source
@@ -78,7 +83,7 @@ DataSourceController.prototype.delete = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        if (params.page) {
+        if (params.pageFileName) {
             appEditor.getPageByFileName(params.pageFileName,function(pageEditor) {
                 if (params.form) {
                     // form data source
@@ -88,7 +93,10 @@ DataSourceController.prototype.save = function(params, callback) {
                     });
                 } else {
                     // page data source
-                    callback();
+                    pageEditor.pageFile.setDataSourceAttr(params['dataSource'], params["attr"], params["value"]);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
                 }
             });
         } else {

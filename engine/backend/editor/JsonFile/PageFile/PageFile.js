@@ -46,6 +46,17 @@ PageFile.prototype.setFormDataSourceAttr = function(form,dataSource,name,value) 
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+PageFile.prototype.setDataSourceAttr = function(dataSource, name, value) {
+    this.data.dataSources[dataSource]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources = Helper.replaceKey(
+            this.data.dataSources,
+            dataSource,
+            value);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 PageFile.prototype.setFormDataSourceKeyColumnAttr = function(form,dataSource,keyColumn,name,value) {
     this.data.forms[form].dataSources[dataSource].keyColumns[keyColumn]['@attributes'][name] = value;
     if (name === 'name') {
@@ -220,6 +231,27 @@ PageFile.prototype.newFormField = function(params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+PageFile.prototype.newDataSource = function(params) {
+    var name   = params['name'];
+    var _class = params['class'];
+    if (!this.data.dataSources) {
+        this.data.dataSources = {};
+    }
+    if (this.data.dataSources[name]) {
+        throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+    }
+    var data;
+    switch (_class) {
+        case "SqlDataSource":
+            data = SqlDataSourceEditor.create(params);
+            break;
+        default:
+            throw new Error('Unknown data source class.');
+    }
+    return this.data.dataSources[name] = data;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 PageFile.prototype.newFormDataSource = function(params) {
     var form   = params['form'];
     var name   = params['name'];
@@ -297,6 +329,11 @@ PageFile.prototype.deleteFormControl = function(form,name) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageFile.prototype.deleteFormDataSource = function(form,dataSource) {
     delete this.data.forms[form].dataSources[dataSource];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageFile.prototype.deleteDataSource = function(dataSource) {
+    delete this.data.dataSources[dataSource];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
