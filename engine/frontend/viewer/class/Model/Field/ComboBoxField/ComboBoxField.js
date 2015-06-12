@@ -31,3 +31,15 @@ ComboBoxField.prototype.getUsedColumns = function(title) {
     }
     return Object.keys(columns);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ComboBoxField.prototype.getDataSource = function(name) {
+    if (this.form.dataSources[name]) {
+        return this.form.dataSources[name];
+    } else if (this.form.page.dataSources[name]) {
+        return this.form.page.dataSources[name];
+    } else if (this.form.page.app.dataSources[name]) {
+        return this.form.page.app.dataSources[name];
+    }
+    return null;
+};

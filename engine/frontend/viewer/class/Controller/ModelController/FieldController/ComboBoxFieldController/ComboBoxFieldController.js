@@ -12,7 +12,7 @@ function ComboBoxFieldController(model,parent) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.init = function() {
     FieldController.prototype.init.call(this);
-    this.dataSource = this.getDataSource(this.model.data.dataSourceName);
+    this.dataSource = this.model.getDataSource(this.model.data.dataSourceName);
     this.dataSource.eventRefillRow.subscribe(this,"onRefillRow");
     this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.subscribe(this,"onNewRow");
@@ -70,7 +70,11 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
             if (value !== "" && value !== null) {
                 var key = JSON.stringify([value]);
                 var row = this.dataSource.getRow(key);
-                view.firstElementChild.innerHTML = this.model.templateValue(row);
+                if (row) {
+                    view.firstElementChild.innerHTML = this.model.templateValue(row);
+                } else {
+                    view.firstElementChild.innerHTML = '{id: ' + value + '}';
+                }
             }
             break;
     }
@@ -145,18 +149,6 @@ ComboBoxFieldController.prototype.onMoveRow = function(ea) {
         QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
         this.refillRow(option);
     }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.getDataSource = function(name) {
-    if (this.model.form.dataSources[name]) {
-        return this.model.form.dataSources[name];
-    } else if (this.model.form.page.dataSources[name]) {
-        return this.model.form.page.dataSources[name];
-    } else if (this.model.form.page.app.dataSources[name]) {
-        return this.model.form.page.app.dataSources[name];
-    }
-    return null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -386,8 +386,3 @@ PageFile.prototype.setFormFieldData = function(form,name,data) {
 PageFile.prototype.getFormControlData = function(form,name) {
     return this.data.forms[form].controls[name];
 };
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.getData = function() {
-    return this.data;
-};

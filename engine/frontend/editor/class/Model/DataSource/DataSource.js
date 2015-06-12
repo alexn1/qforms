@@ -83,17 +83,22 @@ DataSource.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.newKeyColumn = function(name,callback) {
+DataSource.prototype.newKeyColumn = function(name, callback) {
     var args = {
         controller:"KeyColumn",
         action:"_new",
         params:{
-            page:this.parent.page.pageLink.data["@attributes"].fileName,
-            form:this.parent.data["@attributes"].name,
             dataSource:this.data["@attributes"].name,
             name:name
         }
     };
+    if (this.parent instanceof Form) {
+        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+        args.params.form = this.parent.data["@attributes"].name;
+    }
+    if (this.parent instanceof Page) {
+        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+    }
     QForms.doHttpRequest(this,args,function(data){
         if (callback) {
             callback(data);

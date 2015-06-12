@@ -9,8 +9,8 @@ var DataSourceEditor = require('../DataSourceEditor');
 util.inherits(SqlDataSourceEditor, DataSourceEditor);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function SqlDataSourceEditor(parent, name) {
-    SqlDataSourceEditor.super_.call(this, parent, name);
+function SqlDataSourceEditor(parent, name, data) {
+    SqlDataSourceEditor.super_.call(this, parent, name, data);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

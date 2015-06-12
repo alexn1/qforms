@@ -46,3 +46,8 @@ JsonFile.prototype.save = function(callback) {
         }
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+JsonFile.prototype.getData = function() {
+    return this.data;
+};

@@ -22,7 +22,7 @@ function Page(data, parent) {
     );
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     this.createCollections  = ['dataSources', 'forms'];
-    this.fillCollections    = ['forms'];
+    this.fillCollections    = ['dataSources', 'forms'];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

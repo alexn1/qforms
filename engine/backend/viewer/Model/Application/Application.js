@@ -31,7 +31,7 @@ function Application(data, appInfo) {
     );
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     this.createCollections  = ['pageLinks', 'dataSources'];
-    this.fillCollections    = ['pageLinks'];
+    this.fillCollections    = ['pageLinks', 'dataSources'];
     this.menu               = {};
     this.pages              = {};
     this.css                = [];

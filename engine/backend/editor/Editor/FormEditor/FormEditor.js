@@ -22,9 +22,10 @@ var ButtonControlEditor      = require('../ControlEditor/ButtonControlEditor/But
 util.inherits(FormEditor, Editor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormEditor(pageEditor, name) {
+function FormEditor(pageEditor, name, data) {
     this.pageEditor = pageEditor;
-    this.name = name;
+    this.name       = name;
+    this.data       = data;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +67,12 @@ FormEditor.prototype.moveFieldDown = function(params, callback) {
     this.pageEditor.pageFile.save(function() {
         callback('ok');
     });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.getDataSource = function(name) {
+    var dataSourceData  = this.data.dataSources[name];
+    return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

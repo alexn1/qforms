@@ -6,19 +6,21 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var qforms          = require('../../../qforms');
-var helper          = require('../../../common/helper');
-var Editor          = require('../Editor');
-var PageEditor      = require('../PageEditor/PageEditor');
-var PageLinkEditor  = require('../PageLinkEditor/PageLinkEditor');
-var ApplicationFile = require('../../JsonFile/ApplicationFile/ApplicationFile');
-var PageFile        = require('../../JsonFile/PageFile/PageFile');
+var qforms              = require('../../../qforms');
+var helper              = require('../../../common/helper');
+var Editor              = require('../Editor');
+var PageEditor          = require('../PageEditor/PageEditor');
+var PageLinkEditor      = require('../PageLinkEditor/PageLinkEditor');
+var ApplicationFile     = require('../../JsonFile/ApplicationFile/ApplicationFile');
+var PageFile            = require('../../JsonFile/PageFile/PageFile');
+var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(ApplicationEditor, Editor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationEditor(appFile) {
     this.appFile            = appFile;
+    this.data               = appFile.getData();
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
@@ -154,3 +156,8 @@ ApplicationEditor.prototype.getCustomFilePath = function(params, ext) {
     return path.join(this.appFile.appInfo.dirPath, params.app + '.' + ext);
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.getDataSource = function(name) {
+    var dataSourceData  = this.data.dataSources[name];
+    return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+};

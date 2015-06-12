@@ -12,6 +12,7 @@ var Editor          = require('../Editor');
 var TableFormEditor = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
 var RowFormEditor   = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
 var TreeFormEditor  = require('../../Editor/FormEditor/TreeFormEditor/TreeFormEditor');
+var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(PageEditor, Editor);
 
@@ -19,6 +20,7 @@ util.inherits(PageEditor, Editor);
 function PageEditor(appEditor, pageFile) {
     this.appEditor          = appEditor;
     this.pageFile           = pageFile;
+    this.data               = this.getData();
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
@@ -138,7 +140,13 @@ PageEditor.prototype.createForm = function(params, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.getForm = function(name) {
     var formData = this.pageFile.getFormData(name);
-    return eval('new {class}Editor(this, name)'.replace('{class}', formData['@class']));
+    return eval('new {class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PageEditor.prototype.getDataSource = function(name) {
+    var dataSourceData  = this.data.dataSources[name];
+    return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

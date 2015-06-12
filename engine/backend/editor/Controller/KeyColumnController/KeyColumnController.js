@@ -25,12 +25,28 @@ function KeyColumnController(appInfo) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumnController.prototype._new = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.getPageByFileName(params.page, function(pageEditor) {
-            var keyColumnData = pageEditor.pageFile.newFormDataSouceKeyColumn(params);
-            pageEditor.pageFile.save(function() {
+        if (params.page) {
+            appEditor.getPageByFileName(params.page, function(pageEditor) {
+                if (params.form) {
+                    var keyColumnData = pageEditor.pageFile.newFormDataSouceKeyColumn(params);
+                    pageEditor.pageFile.save(function() {
+                        callback(keyColumnData);
+                    });
+                } else {
+                    var dataSourceEditor = pageEditor.getDataSource(params.dataSource);
+                    var keyColumnData = dataSourceEditor.newKeyColumn(params);
+                    pageEditor.pageFile.save(function() {
+                        callback(keyColumnData);
+                    });
+                }
+            });
+        } else {
+            var dataSourceEditor = appEditor.getDataSource(params.dataSource);
+            var keyColumnData = dataSourceEditor.newKeyColumn(params);
+            appEditor.appFile.save(function() {
                 callback(keyColumnData);
             });
-        });
+        }
     });
 };
 
