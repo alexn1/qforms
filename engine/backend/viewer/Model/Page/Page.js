@@ -14,7 +14,7 @@ util.inherits(Page, Model);
 function Page(data, parent) {
     Page.super_.call(this,data, parent);
     this.application        = parent;
-    this.dirPath            = path.join(this.parent.dirPath, this.name);
+    this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
     this.viewFilePath       = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/PageController/view',

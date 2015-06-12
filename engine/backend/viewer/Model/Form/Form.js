@@ -16,7 +16,7 @@ util.inherits(Form, Model);
 function Form(data, parent) {
     Form.super_.call(this, data, parent);
     this.page               = parent;
-    this.dirPath            = path.join(this.parent.dirPath, this.name);
+    this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
     this.customViewFilePath = path.join(this.dirPath,        this.name + '.ejs');
     this.createCollections  = ['dataSources', 'fields', 'controls'];
     this.fillCollections    = ['dataSources', 'fields', 'controls'];

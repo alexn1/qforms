@@ -13,7 +13,7 @@ util.inherits(Field, Model);
 function Field(data, parent) {
     Field.super_.call(this, data, parent);
     this.form               = parent;
-    this.dirPath            = path.join(parent.dirPath, this.name);
+    this.dirPath            = path.join(parent.dirPath, 'fields', this.name);
     this.customViewFilePath = path.join(this.dirPath,   this.name + '.ejs');
 };
 

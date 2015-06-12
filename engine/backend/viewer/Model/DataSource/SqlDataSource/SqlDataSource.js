@@ -24,6 +24,7 @@ SqlDataSource.create = function(data, parent, callback) {
         var form = parent;
         var customClassFilePath = path.join(
             form.page.application.dirPath,
+            'pages',
             form.page.name,
             'forms',
             form.name,

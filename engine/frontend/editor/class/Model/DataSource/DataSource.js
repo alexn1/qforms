@@ -11,7 +11,6 @@ function DataSource(data, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.create = function(parent, params, callback) {
-    console.log(parent);
     if (parent instanceof Form) {
         var form = parent;
         params["page"]  = form.page.pageLink.data["@attributes"].fileName;
@@ -62,9 +61,6 @@ DataSource.prototype.setValue = function(name,value,callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(callback) {
-
-    console.log(this.parent);
-
     var args = {
         controller:"DataSource",
         action:"delete",
@@ -73,7 +69,6 @@ DataSource.prototype.delete = function(callback) {
         }
     };
     if (this.parent instanceof Page) {
-        console.log('instance of page');
         args.params.page = this.parent.pageLink.data["@attributes"].fileName;
     }
     if (this.parent instanceof Form) {
