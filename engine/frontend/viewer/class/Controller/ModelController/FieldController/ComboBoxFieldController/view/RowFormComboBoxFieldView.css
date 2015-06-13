@@ -3,3 +3,7 @@
   padding-bottom: 3px;
   width: 100%;
 }
+.RowFormComboBoxFieldView > select[disabled] {
+  background-color: lightgoldenrodyellow;
+  border-width: 1px;
+}

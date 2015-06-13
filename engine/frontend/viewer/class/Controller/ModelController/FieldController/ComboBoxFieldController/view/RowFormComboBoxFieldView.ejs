@@ -1,3 +1,4 @@
+<% var _readOnly = (model.data.readOnly === "true") ? "disabled" : ""; %>
 <div class="RowFormComboBoxFieldView <%=model.form.page.id%>_<%=model.form.name%>_<%=model.name%>">
-    <select></select>
+    <select <%=_readOnly%>></select>
 </div>
