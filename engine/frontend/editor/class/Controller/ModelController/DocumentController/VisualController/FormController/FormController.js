@@ -128,6 +128,7 @@ FormController.prototype.actionNewDataSource = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='dsName']").focus();
     });
 };
 

@@ -98,6 +98,7 @@ DataSourceController.prototype.actionNewKeyColumn = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='itemName']").focus();
     });
 };
 
@@ -115,6 +116,7 @@ DataSourceController.prototype.actionNewParentKeyColumn = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='pkcName']").focus();
     });
 };
 

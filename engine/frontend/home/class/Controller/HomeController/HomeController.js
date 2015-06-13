@@ -40,6 +40,7 @@ HomeController.prototype.btnCreate_Click = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='folderName']").focus();
     });
 };
 

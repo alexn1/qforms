@@ -63,6 +63,7 @@ FieldController.prototype.actionChangeClass = function() {
             $("#modal").modal("hide");
         });
         $("#modal").modal("show");
+        $("#modal input[id='fieldClass']").focus();
     });
 };
 

@@ -37,7 +37,7 @@ Field.prototype.handleEvent = function(event) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.valueToParams = function(row) {
     if (this.data.column !== undefined) {
-        var fullName = this.form.page.name + "." + this.form.name + "." + this.name;
+        var fullName = this.getFullName();
         this.form.page.params[fullName] = row[this.data.column];
     }
 };
@@ -51,4 +51,13 @@ Field.prototype.save = function (row,value) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.getValue = function (row) {
     return row[this.data.column];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.getFullName = function () {
+    return [
+        this.form.page.name,
+        this.form.name,
+        this.name
+    ].join('.');
 };

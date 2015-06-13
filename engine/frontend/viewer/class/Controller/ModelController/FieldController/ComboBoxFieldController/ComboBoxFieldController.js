@@ -13,6 +13,9 @@ function ComboBoxFieldController(model,parent) {
 ComboBoxFieldController.prototype.init = function() {
     FieldController.prototype.init.call(this);
     this.dataSource = this.model.getDataSource(this.model.data.dataSourceName);
+    if (!this.dataSource) {
+        throw new Error('[' + this.model.getFullName() + '] cannot find data source \'' + this.model.data.dataSourceName + '\'');
+    }
     this.dataSource.eventRefillRow.subscribe(this,"onRefillRow");
     this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.subscribe(this,"onNewRow");

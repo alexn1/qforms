@@ -118,6 +118,7 @@ PageController.prototype.newDataSourceAction = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='dsName']").focus();
     });
 };
 

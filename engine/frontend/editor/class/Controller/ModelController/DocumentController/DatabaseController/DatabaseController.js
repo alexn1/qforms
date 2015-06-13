@@ -74,6 +74,7 @@ DatabaseController.prototype.actionNewParam = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='paramName']").focus();
     });
 };
 
@@ -165,5 +166,6 @@ DatabaseController.prototype.createForm = function() {
             }
         });
         $("#modal").modal("show");
+        $("#modal input[id='formPage']").focus();
     });
 };

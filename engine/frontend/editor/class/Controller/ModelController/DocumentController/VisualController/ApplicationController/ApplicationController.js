@@ -154,6 +154,7 @@ ApplicationController.prototype.newDataSourceAction = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='dsName']").focus();
     });
 };
 
@@ -198,5 +199,6 @@ ApplicationController.prototype.newDatabaseAction = function() {
             $("#myModal").modal("hide");
         });
         $("#myModal").modal("show");
+        $("#myModal input[id='name']").focus();
     });
 };
