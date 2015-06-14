@@ -34,7 +34,7 @@ DataSource.prototype.init = function(callback) {
     var self = this;
     DataSource.super_.prototype.init.call(this, function() {
         if (self.data.keyColumns === undefined || Object.keys(self.data.keyColumns).length === 0) {
-            throw new Error('[' + self.getLocation() + ']: Data Source must have at least one key column.');
+            throw new Error('[' + self.getFullName() + ']: Data Source must have at least one key column.');
         }
         self.keyColumns = Object.keys(self.data.keyColumns);
         if (self.data.parentKeyColumns) {
@@ -110,17 +110,6 @@ DataSource.prototype.getApp = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getPage = function() {
-    if (this.page) {
-        return this.page;
-    } else if (this.form) {
-        return this.form.page;
-    } else {
-        return null;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getPool = function() {
     return this.getApp().getPool(this.data['@attributes'].database);
 };
@@ -146,13 +135,34 @@ DataSource.prototype.getRowNonKeyValues = function(row) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getLocation = function() {
-    var pageName = this.page !== null ? this.page.name : '';
-    var formName = this.form !== null ? this.form.name : '';
-    return pageName + '.' + formName + '.' + this.name;
+DataSource.prototype.getFullName = function() {
+    if (this.form) {
+        return [this.form.page.name, this.form.name, this.name].join('.');
+    } else if (this.page) {
+        return [this.page.name, this.name].join('.');
+    } else {
+        return this.name;
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getQuery = function(params) {
-    return this.data['@attributes'].query;
+    return this.replaceThis(this.data['@attributes'].query);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.replaceThis = function(query) {
+    // for form data sources only
+    if (this.form) {
+        var self = this;
+        return query.replace(/\{([\w\.]+)\}/g, function (text, name) {
+            var arr = name.split('.');
+            if (arr[0] === 'this') {
+                arr[0] = self.form.page.name;
+            }
+            return '{' + arr.join('.') + '}';
+        });
+    } else {
+        return query;
+    }
 };
