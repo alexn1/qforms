@@ -198,7 +198,7 @@ function refill(req, res, next, application) {
     };
     getDataSource(function(dataSource) {
         dataSource.refill(req.body.params, function(response) {
-            res.json(response.rows);
+            res.json(response);
         });
     });
 };

@@ -161,8 +161,11 @@ DataSource.prototype.refill = function(params) {
         "ds":this.name,
         "params":refillParams
     };
-    QForms.doHttpRequest(this,args,function(rows) {
-        if (!(rows instanceof Array)) throw new Error("rows должна быть массивом.");
+    QForms.doHttpRequest(this, args, function(data) {
+        var rows = data.rows;
+        if (!(rows instanceof Array)) {
+            throw new Error("rows must be array.");
+        }
         if (this.data.dumpFirstRowToParams === "true") this.dumpFirstRowToParams(rows);
         var _old = this;
         var _new = this.getKeysAndChilds(rows);		// generate hash table with new keys

@@ -155,12 +155,18 @@ DataSource.prototype.replaceThis = function(query) {
     // for form data sources only
     if (this.form) {
         var self = this;
-        return query.replace(/\{([\w\.]+)\}/g, function (text, name) {
-            var arr = name.split('.');
-            if (arr[0] === 'this') {
-                arr[0] = self.form.page.name;
+        return query.replace(/\{([@\w\.]+)\}/g, function (text, name) {
+            if (name === '@offset') {
+                return '0';
+            } else if (name === '@limit') {
+                return '100';
+            } else {
+                var arr = name.split('.');
+                if (arr[0] === 'this') {
+                    arr[0] = self.form.page.name;
+                }
+                return '{' + arr.join('.') + '}';
             }
-            return '{' + arr.join('.') + '}';
         });
     } else {
         return query;
