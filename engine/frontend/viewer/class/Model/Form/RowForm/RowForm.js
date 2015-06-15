@@ -15,6 +15,9 @@ RowForm.prototype.init = function() {
         this.defaultValuesToRow(row);
         this.dataSource.newRow(row);
     }
+    if (!this.dataSource.data.rows[0]) {
+        throw new Error('[' + this.getFullName() + '] no row in RowForm');
+    }
     // dump row values to page params
     this.fillParams(this.dataSource.data.rows[0]);
 };
@@ -40,4 +43,9 @@ RowForm.prototype.onDataSourceUpdated = function(eventArgs) {
     Form.prototype.onDataSourceUpdated.call(this,eventArgs);
     this.fillParams(this.dataSource.data.rows[0]);
     this.eventUpdated.fire(new QForms.Event(this));
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+RowForm.prototype.getFullName = function() {
+    return [this.page.name, this.name].join('.');
 };
