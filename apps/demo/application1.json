@@ -55,7 +55,7 @@
             "@class": "PageLink",
             "@attributes": {
                 "name": "employees",
-                "fileName": "employees/employees.json",
+                "fileName": "pages/employees/employees.json",
                 "menu": "Menu",
                 "startup": "true"
             }
@@ -64,7 +64,7 @@
             "@class": "PageLink",
             "@attributes": {
                 "name": "employee",
-                "fileName": "employee/employee.json",
+                "fileName": "pages/employee/employee.json",
                 "menu": "",
                 "startup": "false"
             }
