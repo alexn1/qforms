@@ -7,6 +7,7 @@ function FormController(model, view, parent) {
     ModelController.call(this, model);
     this.view     = view;
     this.parent   = parent;
+    this.page     = parent;
     this.fields   = {};
     this.controls = {};
 };

@@ -80,7 +80,20 @@ function handle(req, res, next, application) {
             if (application.authentication() && !req.session.username) {
                 throw new Error('not authorized');
             } else {
-                eval('{action}(req, res, next, application)'.replace('{action}', req.body.action));
+                var actions = [
+                    'page',
+                    'update',
+                    'refill',
+                    'insert',
+                    '_delete',
+                    '_call'
+                ];
+
+                if (actions.indexOf(req.body.action) !== -1) {
+                    eval('{action}(req, res, next, application)'.replace('{action}', req.body.action));
+                } else {
+                    throw new Error('unknown action: ' + req.body.action);
+                }
             }
         }
     }
@@ -219,6 +232,15 @@ function _delete(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].delete(req.body.row, function() {
             res.json(null);
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function _call(req, res, next, application) {
+    application.getPage(req.body.page, function(page) {
+        page._call(req.body.args, function(result) {
+            res.json(result);
         });
     });
 };

@@ -29,3 +29,10 @@ function Page(data, parent) {
 Page.create = function(data, parent, callback) {
     callback(new Page(data, parent));
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Page.prototype._call = function(args, callback) {
+    callback({
+        result:'ok'
+    });
+};
