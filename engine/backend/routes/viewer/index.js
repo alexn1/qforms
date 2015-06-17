@@ -6,9 +6,9 @@ var util   = require('util');
 var domain = require('domain');
 var config = require('config');
 
-var qforms      = require('../../qforms');
-var helper      = require('../../common/helper');
-var Application = require('../../viewer/Model/Application/Application');
+var qforms                = require('../../qforms');
+var helper                = require('../../common/helper');
+var ApplicationController = require('../../viewer/ModelController/ApplicationController/ApplicationController');
 
 qforms.set('viewerClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'css'));
 qforms.set('viewerClassJs' , helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'js'));
@@ -39,7 +39,7 @@ module.exports = function(req, res, next) {
                                 throw err;
                             } else {
                                 var appData = JSON.parse(content);
-                                Application.create(appData, appInfo, function(application) {
+                                ApplicationController.create(appData, appInfo, function(application) {
                                     application.init(function() {
                                         applications[route] = application;
                                         var d = domain.create();

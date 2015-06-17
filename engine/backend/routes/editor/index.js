@@ -7,17 +7,17 @@ var helper = require('../../common/helper');
 var qforms = require('../../qforms');
 var domain = require('domain');
 
-var ApplicationController       = require('../../editor/Controller/VisualController/ApplicationController/ApplicationController');
-var ParamController             = require('../../editor/Controller/ParamController/ParamController');
-var DatabaseController          = require('../../editor/Controller/DatabaseController/DatabaseController');
-var PageController              = require('../../editor/Controller/VisualController/PageController/PageController');
-var FormController              = require('../../editor/Controller/VisualController/FormController/FormController');
-var PageLinkController          = require('../../editor/Controller/PageLinkController/PageLinkController');
-var DataSourceController        = require('../../editor/Controller/DataSourceController/DataSourceController');
-var KeyColumnController         = require('../../editor/Controller/KeyColumnController/KeyColumnController');
-var ParentKeyColumnController   = require('../../editor/Controller/ParentKeyColumnController/ParentKeyColumnController');
-var FieldController             = require('../../editor/Controller/VisualController/FieldController/FieldController');
-var ControlController           = require('../../editor/Controller/VisualController/ControlController/ControlController');
+var ApplicationEditorController       = require('../../editor/EditorController/VisualEditorController/ApplicationEditorController/ApplicationEditorController');
+var ParamEditorController             = require('../../editor/EditorController/ParamEditorController/ParamEditorController');
+var DatabaseEditorController          = require('../../editor/EditorController/DatabaseEditorController/DatabaseEditorController');
+var PageEditorController              = require('../../editor/EditorController/VisualEditorController/PageEditorController/PageEditorController');
+var FormEditorController              = require('../../editor/EditorController/VisualEditorController/FormEditorController/FormEditorController');
+var PageLinkEditorController          = require('../../editor/EditorController/PageLinkEditorController/PageLinkEditorController');
+var DataSourceEditorController        = require('../../editor/EditorController/DataSourceEditorController/DataSourceEditorController');
+var KeyColumnEditorController         = require('../../editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
+var ParentKeyColumnEditorController   = require('../../editor/EditorController/ParentKeyColumnEditorController/ParentKeyColumnEditorController');
+var FieldEditorController             = require('../../editor/EditorController/VisualEditorController/FieldEditorController/FieldEditorController');
+var ControlEditorController           = require('../../editor/EditorController/VisualEditorController/ControlEditorController/ControlEditorController');
 var ApplicationFile             = require('../../editor/JsonFile/ApplicationFile/ApplicationFile');
 
 qforms.set('editorClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'editor/class', 'css'));
@@ -119,7 +119,7 @@ function index(req, res, next, appInfo) {
 function action(req, res, next, appInfo) {
     if (controllers.indexOf(req.body.controller) !== -1) {
         if (actions.indexOf(req.body.action) !== -1) {
-            var code = 'var ctrl = new {controller}Controller(appInfo);\
+            var code = 'var ctrl = new {controller}EditorController(appInfo);\
                             ctrl.{action}(req.body.params, function(result) {\
                                 res.json(result);\
                             });'

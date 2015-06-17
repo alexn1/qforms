@@ -1,0 +1,26 @@
+'use strict';
+
+module.exports = LabelFieldController;
+
+var util = require('util');
+var path = require('path');
+
+var FieldController = require('../FieldController');
+var app             = require('../../../../qforms');
+
+util.inherits(LabelFieldController, FieldController);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function LabelFieldController(data, parent) {
+    LabelFieldController.super_.call(this, data, parent);
+    this.viewFilePath = path.join(
+        app.get('public'),
+        'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',
+        this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
+    );
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+LabelFieldController.create = function(data, parent, callback) {
+    callback(new LabelFieldController(data, parent));
+};
