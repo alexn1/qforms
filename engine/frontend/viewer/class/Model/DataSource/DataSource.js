@@ -46,18 +46,23 @@ DataSource.prototype.deinit = function() {
 //
 DataSource.prototype.getKeysAndChilds = function(rows) {
     var rowsByKey = {};
-    var childs = {};
-    for (var i=0;i<rows.length;i++) {
+    var childs    = {};
+    for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
         var key = this.getRowKey(row);
         var parentKey = this.getRowParentKey(row);
         // filling
+        if (rowsByKey[key]) {
+            throw new Error('Dublicate key in the result set, i = ' + i + ', key = ' + key);
+        }
         rowsByKey[key] = row;
-        if (!childs[parentKey]) childs[parentKey] = {
-            rowsByIndex:[],
-            keysByIndex:[],
-            rowsByKey:{}
-        };
+        if (!childs[parentKey]) {
+            childs[parentKey] = {
+                rowsByIndex:[],
+                keysByIndex:[],
+                rowsByKey  :{}
+            };
+        }
         childs[parentKey].rowsByIndex.push(row);
         childs[parentKey].keysByIndex.push(key);
         childs[parentKey].rowsByKey[key] = row;
@@ -166,7 +171,9 @@ DataSource.prototype.refill = function(params) {
         if (!(rows instanceof Array)) {
             throw new Error("rows must be array.");
         }
-        if (this.data.dumpFirstRowToParams === "true") this.dumpFirstRowToParams(rows);
+        if (this.data.dumpFirstRowToParams === "true") {
+            this.dumpFirstRowToParams(rows);
+        }
         var _old = this;
         var _new = this.getKeysAndChilds(rows);		// generate hash table with new keys
         this.sync(_old,_new,"[null]");
