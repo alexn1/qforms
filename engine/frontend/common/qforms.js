@@ -44,6 +44,21 @@ QForms.doHttpRequest = function(self,params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+QForms.go = function(url, method, params) {
+    var inputs = '';
+    for (var name in params) {
+        inputs += '<input type="hidden" name="{name}" value="{value}">'
+            .replace('{name}',  name)
+            .replace('{value}', params[name]);
+    }
+    var form =  '<form action="{url}" method="{method}">{inputs}</form>'
+        .replace('{url}',    url)
+        .replace('{method}', method)
+        .replace('{inputs}', inputs);
+    $(form).appendTo('body').submit().remove();
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.insertNewNodeAt = function(parent,child,i) {
     if (i < 0 || i > parent.children.length) {
         throw new Error("invalid index i = " + i + ", length = " + parent.childNodes.length);

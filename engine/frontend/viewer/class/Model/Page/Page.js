@@ -107,17 +107,3 @@ Page.prototype.openPage = function(params) {
     params.parentPage = this;
     this.app.openPage(params);
 };
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.call = function(args, callback) {
-    var _args = {
-        action:'_call',
-        page  :this.name,
-        args  :args
-    };
-    QForms.doHttpRequest(this, _args, function(result) {
-        if (callback) {
-            callback(result);
-        }
-    });
-};

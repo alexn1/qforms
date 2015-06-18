@@ -4,6 +4,7 @@ module.exports = PageController;
 
 var util = require('util');
 var path = require('path');
+var fs   = require('fs');
 
 var helper           = require('../../../common/helper');
 var qforms           = require('../../../qforms');
@@ -45,8 +46,8 @@ PageController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype._call = function(args, callback) {
-    callback({
+PageController.prototype._call = function(args) {
+    args.res.json({
         result:'ok'
     });
 };

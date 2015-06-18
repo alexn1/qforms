@@ -22,6 +22,7 @@ module.exports = {
     getParams           : getParams,
     replaceKey          : replaceKey,
     getFileContent      : getFileContent,
+    putFileContent      : putFileContent,
     createDirIfNotExists: createDirIfNotExists,
     moveObjProp         : moveObjProp
 };
@@ -221,6 +222,17 @@ function getFileContent(filePath, callback) {
             });
         } else {
             callback(null);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function putFileContent(filePath, content, callback) {
+    fs.writeFile(filePath, content, 'utf8', function(err) {
+        if (err) {
+            throw err;
+        } else {
+            callback();
         }
     });
 };

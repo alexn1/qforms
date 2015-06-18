@@ -239,8 +239,10 @@ function _delete(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _call(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
-        page._call(req.body.args, function(result) {
-            res.json(result);
+        page._call({
+            req: req,
+            res: res,
+            args: req.body.args
         });
     });
 };
