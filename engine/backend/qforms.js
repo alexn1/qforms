@@ -28,10 +28,15 @@ qforms.set('handleException', helper.getParams().handleException || 'true');
 qforms.set('view engine'    , 'ejs');
 qforms.set('views'          , './routes');
 qforms.set('public'         , '../frontend');
+qforms.set('runtime'         , '../runtime');
+qforms.set('temp'         , '../runtime/temp');
 qforms.set('applications'   , {});
 qforms.set('commonStyleCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/style', 'css'));
 qforms.set('commonClassCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'css'));
 qforms.set('commonClassJs'  , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'js'));
+
+helper.createDirIfNotExistsSync(qforms.get('runtime'));
+helper.createDirIfNotExistsSync(qforms.get('temp'));
 
 // middlewares
 //qforms.use(morgan('dev'));

@@ -7,7 +7,6 @@ var async = require('async');
 var fs    = require('fs');
 var _     = require('underscore');
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
     getFilePathsSync    : getFilePathsSync,
@@ -23,8 +22,11 @@ module.exports = {
     replaceKey          : replaceKey,
     getFileContent      : getFileContent,
     putFileContent      : putFileContent,
-    createDirIfNotExists: createDirIfNotExists,
-    moveObjProp         : moveObjProp
+    moveObjProp         : moveObjProp,
+    createDirIfNotExists    : createDirIfNotExists,
+    createDirIfNotExistsSync: createDirIfNotExistsSync,
+    getTempSubDirPath       : getTempSubDirPath,
+    copyFile: copyFile
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,6 +258,13 @@ function createDirIfNotExists(dirPath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+function createDirIfNotExistsSync(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 function moveObjProp(obj, prop, offset) {
     var keys     = _.keys(obj);
     var values   = _.values(obj);
@@ -274,3 +283,50 @@ function moveObjProp(obj, prop, offset) {
     values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
     return _.object(keys, values);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function getRandomString(length) {
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+        var index = getRandomInt(0, chars.length - 1);
+        result += chars.substr(index, 1);
+    }
+    return result;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function getTempSubDirPath(tempDirPath, callback) {
+    var subDirName     = getRandomString(8);
+    var tempSubSirPath = path.join(tempDirPath, subDirName);
+    fs.exists(tempSubSirPath, function(exists) {
+        if (!exists) {
+            fs.mkdir(tempSubSirPath, function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(tempSubSirPath);
+                }
+            });
+        } else {
+            getTempSubDirPath(tempDirPath, callback);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function copyFile(source, target, callback) {
+    var rd = fs.createReadStream(source);
+    rd.on("error", function(err) {
+        throw err;
+    });
+    var wr = fs.createWriteStream(target);
+    wr.on("error", function(err) {
+        throw err;
+    });
+    wr.on("close", callback);
+    rd.pipe(wr);
+}

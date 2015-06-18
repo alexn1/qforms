@@ -2,9 +2,10 @@
 
 module.exports = PageController;
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+var util          = require('util');
+var path          = require('path');
+var fs            = require('fs');
+var child_process = require('child_process');
 
 var helper           = require('../../../common/helper');
 var qforms           = require('../../../qforms');
