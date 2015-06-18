@@ -3,7 +3,10 @@
     "@attributes": {
         "formatVer": "0.1",
         "name": "application1",
-        "caption": "application1"
+        "caption": "application1",
+        "authentication": "false",
+        "user": "admin",
+        "password": "admin"
     },
     "databases": {
         "default": {

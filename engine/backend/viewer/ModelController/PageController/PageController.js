@@ -5,14 +5,15 @@ module.exports = PageController;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../qforms');
+var helper           = require('../../../common/helper');
+var qforms           = require('../../../qforms');
 var ModelController  = require('../ModelController');
 
 util.inherits(PageController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageController(data, parent) {
-    PageController.super_.call(this,data, parent);
+    PageController.super_.call(this, data, parent);
     this.application        = parent;
     this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
     this.viewFilePath       = path.join(
@@ -27,7 +28,20 @@ function PageController(data, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.create = function(data, parent, callback) {
-    callback(new PageController(data, parent));
+    var customClassFilePath = path.join(
+        parent.dirPath,
+        'pages',
+        data['@attributes'].name,
+        data['@attributes'].name + '.backend.js'
+    );
+    helper.getFileContent(customClassFilePath, function(content) {
+        if (content) {
+            var customClass = eval(content);
+            callback(new customClass(data, parent));
+        } else {
+            callback(new PageController(data, parent));
+        }
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
