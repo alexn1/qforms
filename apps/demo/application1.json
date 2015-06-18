@@ -12,13 +12,6 @@
                 "name": "default"
             },
             "params": {
-                "connectionString": {
-                    "@class": "Param",
-                    "@attributes": {
-                        "name": "connectionString",
-                        "value": "mysql:host=localhost;dbname=samples;charset=utf8;"
-                    }
-                },
                 "host": {
                     "@class": "Param",
                     "@attributes": {

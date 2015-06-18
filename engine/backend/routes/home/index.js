@@ -3,9 +3,9 @@
 var path = require('path');
 var fs   = require('fs');
 
-var qforms          = require('../../qforms');
-var helper          = require('../../common/helper');
-var ApplicationFile = require('../../editor/JsonFile/ApplicationFile/ApplicationFile');
+var qforms            = require('../../qforms');
+var helper            = require('../../common/helper');
+var ApplicationEditor = require('../../editor/Editor/ApplicationEditor/ApplicationEditor');
 
 qforms.set('home_class_css', helper.getFilePathsSync(path.join(qforms.get('public')), 'home/class', 'css'));
 qforms.set('home_class_js' , helper.getFilePathsSync(path.join(qforms.get('public')), 'home/class', 'js'));
@@ -30,7 +30,7 @@ module.exports = function(req, res, next) {
                 if (exists) {
                     throw new Error('Application {name} aready exists'.replace('{name}', req.body.name));
                 } else {
-                    var appData = ApplicationFile.createAppData({name: req.body.name});
+                    var appData = ApplicationEditor.createData({name: req.body.name});
                     var content = JSON.stringify(appData, null, 4);
                     fs.writeFile(appFilePath, content,'utf8', function(err) {
                         if (err) {

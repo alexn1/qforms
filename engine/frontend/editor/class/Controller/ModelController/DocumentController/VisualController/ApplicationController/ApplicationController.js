@@ -202,3 +202,10 @@ ApplicationController.prototype.newDatabaseAction = function() {
         $("#myModal input[id='name']").focus();
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.getPropList = function() {
+    var propList = ApplicationController.super_.prototype.getPropList.call(this);
+    propList.options['authentication'] = ["true","false"];
+    return propList;
+};

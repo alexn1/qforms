@@ -31,6 +31,23 @@ function ApplicationEditor(appFile) {
     );
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.createData = function(params) {
+    return {
+        '@class': 'Application',
+        '@attributes': {
+            formatVer: '0.1',
+            name          : params.name,
+            caption       : params.name,
+            authentication: 'false',
+            user          : 'admin',
+            password      : 'admin'
+        },
+        databases: {},
+        pageLinks: {}
+    };
+};
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage = function(params, callback) {
     var self           = this;

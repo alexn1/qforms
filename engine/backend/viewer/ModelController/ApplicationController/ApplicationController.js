@@ -202,10 +202,10 @@ ApplicationController.prototype.getPool = function(database) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.authenticate = function(username, password, callback) {
-    callback(username === 'admin' && password === 'admin');
+    callback(username === this.data['@attributes'].user && password === this.data['@attributes'].password);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.authentication = function(username, password) {
-    return false;
+ApplicationController.prototype.authentication = function() {
+    return this.data['@attributes'].authentication === 'true';
 };

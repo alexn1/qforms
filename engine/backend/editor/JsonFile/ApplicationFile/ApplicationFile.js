@@ -19,20 +19,6 @@ function ApplicationFile(appInfo) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationFile.createAppData = function(params) {
-    return {
-        '@class' : 'Application',
-        '@attributes' : {
-            formatVer : "0.1",
-            name : params['name'],
-            caption : params['name']
-        },
-        databases : {},
-        pageLinks : {}
-    };
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationFile.prototype.setDatabaseAttr = function(database,name,value) {
     this.data.databases[database]['@attributes'][name] = value;
     if (name === 'name') {

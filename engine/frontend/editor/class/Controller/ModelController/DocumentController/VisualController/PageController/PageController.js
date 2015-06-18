@@ -124,16 +124,11 @@ PageController.prototype.newDataSourceAction = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getPropList = function() {
-    var list = {};
-    var options = {};
-    for (var name in this.model.data["@attributes"]) {
-        var value = this.model.data["@attributes"][name];
-        list[name] = value;
-    }
-    list["menu"]    = this.pageLink.data["@attributes"]["menu"];
-    list["startup"] = this.pageLink.data["@attributes"]["startup"];
-    options[["startup"]] = ["true","false"];
-    return {list:list,options:options};
+    var propList = PageController.super_.prototype.getPropList.call(this);
+    propList.list['menu']    = this.pageLink.data['@attributes']['menu'];
+    propList.list["startup"] = this.pageLink.data['@attributes']['startup'];
+    propList.options['startup'] = ['true', 'false'];
+    return propList;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
