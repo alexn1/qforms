@@ -242,7 +242,7 @@ function _call(req, res, next, application) {
         page._call({
             req: req,
             res: res,
-            args: req.body.args
+            params: req.body.params
         });
     });
 };
