@@ -103,7 +103,7 @@ function handle(req, res, next, application) {
 function login(req, res, next, application) {
     if (req.method === 'GET') {
         var args = {
-            queryTime : {
+            querytime : {
                 params : {}
             }
         };
@@ -125,7 +125,7 @@ function login(req, res, next, application) {
                 res.redirect(req.path);
             } else {
                 var args = {
-                    queryTime : {
+                    querytime : {
                         params : {}
                     }
                 };
@@ -147,7 +147,7 @@ function login(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
     var args = {
-        queryTime : {
+        querytime : {
             params : {}
         }
     };
@@ -173,7 +173,7 @@ function page(req, res, next, application) {
         var args = {
             params    : req.body.params,
             newMode   : req.body.newMode,
-            queryTime : {
+            querytime : {
                 params : {}
             }
         };

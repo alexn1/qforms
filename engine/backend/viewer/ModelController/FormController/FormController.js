@@ -30,14 +30,16 @@ FormController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.fill = function(args, callback) {
     var self = this;
-    FormController.super_.prototype.fill.call(this, args, function(response) {
-        if (self.dataSources.default === undefined) {
-            var dataSourceResponse = self._getSurrogateDataSourceResponse();
-            self.dumpRowToParams(dataSourceResponse.rows[0], args.queryTime.params);
+    if (this.data.dataSources.default) {
+        FormController.super_.prototype.fill.call(this, args, callback);
+    } else {
+        var dataSourceResponse = self._getSurrogateDataSourceResponse();
+        self.dumpRowToParams(dataSourceResponse.rows[0], args.querytime.params);
+        FormController.super_.prototype.fill.call(this, args, function(response) {
             response.dataSources.default = dataSourceResponse;
-        }
-        callback(response);
-    });
+            callback(response);
+        });
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

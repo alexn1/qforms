@@ -23,10 +23,11 @@ module.exports = {
     getFileContent      : getFileContent,
     putFileContent      : putFileContent,
     moveObjProp         : moveObjProp,
+    copyFile            : copyFile,
     createDirIfNotExists    : createDirIfNotExists,
     createDirIfNotExistsSync: createDirIfNotExistsSync,
     getTempSubDirPath       : getTempSubDirPath,
-    copyFile: copyFile
+    getXmlObjectFromDataSet : getXmlObjectFromDataSet
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -329,4 +330,26 @@ function copyFile(source, target, callback) {
     });
     wr.on("close", callback);
     rd.pipe(wr);
-}
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function getXmlObjectFromDataSet(dataSet) {
+    var dsName = dataSet['@attributes'].name;
+    var xmlObject = {};
+    xmlObject[dsName] = [];
+    for (var tableName in dataSet.tables) {
+        var table = dataSet.tables[tableName];
+        for (var i = 0; i < table.rows.length; i++) {
+            var row = table.rows[i];
+            var rowElement = {};
+            rowElement[tableName] = [];
+            for (var columnName in row) {
+                var attrElement = {};
+                attrElement[columnName] = row[columnName];
+                rowElement[tableName].push(attrElement);
+            }
+            xmlObject[dsName].push(rowElement);
+        }
+    }
+    return xmlObject;
+};
