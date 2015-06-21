@@ -1,8 +1,8 @@
 QForms.inherit(<%=page%><%=form%>Controller, <%=_class%>Controller);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=page%><%=form%>Controller(model,view,parent) {
-    <%=page%><%=form%>Controller.super_.call(this,model,view,parent);
+function <%=page%><%=form%>Controller() {
+    <%=page%><%=form%>Controller.super_.apply(this, arguments);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

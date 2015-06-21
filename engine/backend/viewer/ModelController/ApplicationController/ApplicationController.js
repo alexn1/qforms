@@ -2,14 +2,16 @@
 
 module.exports = ApplicationController;
 
-var util  = require('util');
-var path  = require('path');
-var fs    = require('fs');
-var _     = require('underscore');
-var async = require('async');
-var mysql = require('mysql');
+var util          = require('util');
+var path          = require('path');
+var fs            = require('fs');
+var _             = require('underscore');
+var async         = require('async');
+var mysql         = require('mysql');
+var child_process = require('child_process');
+var xml           = require('xml');
 
-var app                  = require('../../../qforms');
+var qforms                  = require('../../../qforms');
 var helper               = require('../../../common/helper');
 var ModelController      = require('../ModelController');
 var PageLinkController   = require('../PageLinkController/PageLinkController');
@@ -25,7 +27,7 @@ function ApplicationController(data, appInfo) {
     this.appInfo            = appInfo;
     this.dirPath            = this.appInfo.dirPath;
     this.viewFilePath       = path.join(
-        app.get('public'),
+        qforms.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view',
         'ApplicationView.ejs'
     );
