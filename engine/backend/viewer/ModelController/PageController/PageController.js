@@ -7,6 +7,7 @@ var path          = require('path');
 var fs            = require('fs');
 var child_process = require('child_process');
 var xml           = require('xml');
+var async         = require('async');
 
 var helper           = require('../../../common/helper');
 var qforms           = require('../../../qforms');
