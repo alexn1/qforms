@@ -61,7 +61,7 @@ DataSourceController.prototype.fill = function(args, callback) {
             _.extend(params, args.querytime.params);
             self.dataAdapter.select(params, function(rows) {
                 response.rows = rows;
-                if (self.form && self.form instanceof RowFormController && rows[0]) {
+                if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], args.querytime.params);
                 }
                 callback(response);

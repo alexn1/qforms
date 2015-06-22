@@ -74,7 +74,7 @@ SqlDataAdapter.prototype.delete = function(row, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataAdapter.prototype._query = function(query, params, callback, select) {
     select = select !== undefined ? select : false;
-    console.log({query:query,params:params});
+    console.log({dsName: this.dataSource.name, query: query, params: params});
     this.dataSource.getPool().getConnection(function(err, cnn) {
         if (err) {
             throw err;

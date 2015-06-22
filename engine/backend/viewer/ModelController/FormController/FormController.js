@@ -66,6 +66,8 @@ FormController.prototype.getExpValue = function(value) {
         value = helper.currentDate();
     } else if (value === "CurrentTime()") {
         value = helper.currentTime();
+    } else if (value === '') {
+        return null;
     }
     return value;
 };
