@@ -353,3 +353,10 @@ function getXmlObjectFromDataSet(dataSet) {
     }
     return xmlObject;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+String.prototype.template = function (values) {
+    return this.replace(/\{([\w]+)\}/g, function (text, name) {
+        return values.hasOwnProperty(name) ? values[name] : text;
+    });
+};
