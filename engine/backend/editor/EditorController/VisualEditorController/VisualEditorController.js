@@ -23,7 +23,7 @@ VisualEditorController.prototype.getView = function(params, callback) {
             case 'VisualView.html':
                 var viewFilePath = path.join(
                     qforms.get('public'),
-                    'editor/class/Controller/ModelController/DocumentController/VisualController/VisualView.html'
+                    'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
                 );
                 fs.readFile(viewFilePath, 'utf8', function(err, content) {
                     result.view = content;

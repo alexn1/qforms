@@ -5,9 +5,11 @@ QForms.inherit(DataSourceController, DocumentController);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSourceController(model, item) {
     DataSourceController.super_.call(this, model);
-    this.item = item;
-    this.itemKeys = null;
+    this.item                 = item;
+    this.itemKeys             = null;
     this.itemParentKeyColumns = null;
+    this.$view                = null;
+    this.cmQuery              = null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,12 +124,52 @@ DataSourceController.prototype.actionNewParentKeyColumn = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getPropList = function() {
-    var list = this.model.data["@attributes"];
-    var options = {};
-    options["insertNewKey"] = ["true","false"];
-    options["dumpFirstRowToParams"] = ["true","false"];
-    return {list:list,options:options};
+    var progList = {
+        list   : {},
+        options: {}
+    };
+    
+    // list
+    for (var name in this.model.data["@attributes"]) {
+        if (name !== 'query') {
+            progList.list[name] = this.model.data["@attributes"][name];
+        }
+    }
+
+    // options
+    progList.options["insertNewKey"]         = ["true","false"];
+    progList.options["dumpFirstRowToParams"] = ["true","false"];
+    return progList;
 };
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.createTab = function(docs) {
+    var self = this;
+    var name = this.model.data["@attributes"].name;
+    this.model.getView("QueryView.html",function(result) {
+        self.$view = $(result.view);
+        self.tab = docs.createTab(self.$view.get(0), name, function(tab) {
+            tab.ctrl.tab = undefined;
+        });
+        self.tab.ctrl = self;
+        docs.selectTab(self.tab);
+
+        // cmQuery
+        self.$view.find(".btnSave").click(function() {
+            self.btnSave_Click();
+        });
+
+        // cmQuery
+        self.cmQuery = CodeMirror.fromTextArea(self.$view.find(".cmQuery").get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
+        self.cmQuery.setOption("theme", "cobalt");
+        self.cmQuery.setValue(self.model.data['@attributes'].query);
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.btnSave_Click = function() {
+    var value = this.cmQuery.getValue();
+    this.model.setValue('query', value);
+};

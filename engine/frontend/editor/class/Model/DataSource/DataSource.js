@@ -33,7 +33,7 @@ DataSource.create = function(parent, params, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setValue = function(name,value,callback) {
+DataSource.prototype.setValue = function(name, value, callback) {
     //console.log(name + " = " + value);
     var args = {
         controller:"DataSource",

@@ -18,7 +18,7 @@ function DataSourceEditorController(appInfo) {
     DataSourceEditorController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
         qforms.get('public'),
-        'editor/class/Controller/ModelController/DataSourceController'
+        'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
     );
 };
 
