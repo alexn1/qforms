@@ -138,3 +138,21 @@ DataSource.prototype.getView = function(view,callback) {
         callback(data);
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.getFullName = function() {
+    if (this.parent instanceof Form) {
+        return [
+            this.parent.parent.name,
+            this.parent.name,
+            this.name
+        ].join('.');
+    } else if (this.parent instanceof Page) {
+        return [
+            this.parent.name,
+            this.name
+        ].join('.');
+    } else if (this.parent instanceof Application) {
+        return this.name;
+    }
+};

@@ -21,7 +21,7 @@
 }
 .TabWidget > ul > li > span {
   display: inline-block;
-  max-width: 200px;
+  max-width: 300px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

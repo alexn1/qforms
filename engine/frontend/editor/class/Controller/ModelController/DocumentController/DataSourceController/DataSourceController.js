@@ -128,7 +128,7 @@ DataSourceController.prototype.getPropList = function() {
         list   : {},
         options: {}
     };
-    
+
     // list
     for (var name in this.model.data["@attributes"]) {
         if (name !== 'query') {
@@ -147,7 +147,7 @@ DataSourceController.prototype.getPropList = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.createTab = function(docs) {
     var self = this;
-    var name = this.model.data["@attributes"].name;
+    var name = this.model.getFullName();
     this.model.getView("QueryView.html",function(result) {
         self.$view = $(result.view);
         self.tab = docs.createTab(self.$view.get(0), name, function(tab) {

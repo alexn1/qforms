@@ -90,8 +90,8 @@ EditorController.prototype.pageLinkToPage = function(item,callback) {
         }
     };
     QForms.doHttpRequest(this,args,function(pageData){
-        var page = new Page(pageData,pageLink);
-        item.ctrl = new PageController(page,item,pageLink);
+        var page = new Page(pageData, pageLink.parent, pageLink);
+        item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();
         if (callback) {
             callback();

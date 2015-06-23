@@ -66,7 +66,7 @@ ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
     var caption = PageLinkController.prototype.getCaption(pageLinkData);
     var pageLinkItem = this.pagesItem.addItem(caption);
     pageLinkItem.node.className = "node";
-    var pageLink = new PageLink(pageLinkData)
+    var pageLink = new PageLink(pageLinkData, this.model)
     pageLinkItem.ctrl = new PageLinkController(pageLink,pageLinkItem);
     return pageLinkItem;
 };
@@ -76,8 +76,8 @@ ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
     var caption = PageController.prototype.getCaption(pageData);
     var pageItem = this.pagesItem.addItem(caption);
     pageItem.node.className = "node";
-    var pageLink = new PageLink(pageLinkData);
-    var page = new Page(pageData,pageLink);
+    var pageLink = new PageLink(pageLinkData, this.model);
+    var page = new Page(pageData, this.model, pageLink);
     pageItem.ctrl = new PageController(page,pageItem,pageLink);
     pageItem.ctrl.createTree();
     return pageItem;

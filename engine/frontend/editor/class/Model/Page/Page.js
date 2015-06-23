@@ -1,11 +1,13 @@
 'use strict';
 
-QForms.inherit(Page,Model);
+QForms.inherit(Page, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function Page(data,pageLink) {
-    Model.call(this,data);
-    this.pageLink = pageLink;
+function Page(data, parent, pageLink) {
+    Model.call(this, data);
+    this.parent      = parent;
+    this.pageLink    = pageLink;
+    this.application = parent;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
