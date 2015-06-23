@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 QForms.inherit(DataTreeWidget,TreeWidget);
 

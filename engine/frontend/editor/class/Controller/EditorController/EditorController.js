@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function EditorController(appData) {
@@ -139,7 +139,8 @@ EditorController.prototype.onItemDoubleClick = function(e) {
         e.item.ctrl instanceof DatabaseController ||
         e.item.ctrl instanceof PageController ||
         e.item.ctrl instanceof FormController ||
-        (e.item.ctrl instanceof FieldController)
+        e.item.ctrl instanceof FieldController ||
+        e.item.ctrl instanceof DataSourceController
         )
     {
         if (e.item.ctrl.tab) {

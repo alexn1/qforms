@@ -1,10 +1,10 @@
-"use strict"
+'use strict';
 
-QForms.inherit(DataSourceController,ModelController);
+QForms.inherit(DataSourceController, DocumentController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSourceController(model,item) {
-    ModelController.call(this,model);
+function DataSourceController(model, item) {
+    DataSourceController.super_.call(this, model);
     this.item = item;
     this.itemKeys = null;
     this.itemParentKeyColumns = null;

@@ -1,20 +1,20 @@
-"use strict"
+'use strict';
 
-QForms.inherit(DatabaseController,DocumentController);
+QForms.inherit(DatabaseController, DocumentController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function DatabaseController(model,item,applicationController) {
-    DocumentController.call(this,model);
-    this.item = item;
+function DatabaseController(model, item, applicationController) {
+    DatabaseController.super_.call(this, model);
+    this.item                  = item;
     this.applicationController = applicationController;
-    this.paramsItem = null;
-    this.treeTables = null;
-    this.$divTableInfo = null;
-    this.tableView = null;
-    this.tableInfo = null;
-    this.$btnCreateForm = null;
-    this.tables = null;
-    this.tableName = null;
+    this.paramsItem            = null;
+    this.treeTables            = null;
+    this.$divTableInfo         = null;
+    this.tableView             = null;
+    this.tableInfo             = null;
+    this.$btnCreateForm        = null;
+    this.tables                = null;
+    this.tableName             = null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
