@@ -59,7 +59,7 @@ DataSourceController.prototype.fill = function(args, callback) {
             var params = {};
             _.extend(params, args.params);
             _.extend(params, args.querytime.params);
-            self.dataAdapter.select(params, function(rows) {
+            self.select(params, function(rows) {
                 response.rows = rows;
                 if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], args.querytime.params);
@@ -72,10 +72,19 @@ DataSourceController.prototype.fill = function(args, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.refill = function(params, callback) {
-    this.dataAdapter.select(params, function(rows) {
+    this.select(params, function(rows) {
         callback({
             rows:rows
         });
+    });
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.select = function(params, callback) {
+    var query = this._replaceThis(this.data['@attributes'].query);
+    this.dataAdapter.select(query, params, function(rows) {
+        callback(rows);
     });
 };
 
@@ -146,12 +155,7 @@ DataSourceController.prototype.getFullName = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getQuery = function(params) {
-    return this.replaceThis(this.data['@attributes'].query);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.replaceThis = function(query) {
+DataSourceController.prototype._replaceThis = function(query) {
     // for form data sources only
     if (this.form) {
         var self = this;

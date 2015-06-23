@@ -12,14 +12,6 @@ function PageController(model,item,pageLink) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.createTree = function(callback) {
-    // forms
-    this.itemForms = this.item.addItem("Forms");
-    if (this.model.data.forms) {
-        for (var name in this.model.data.forms) {
-            var formData = this.model.data.forms[name];
-            this.addFormItem(formData);
-        };
-    }
     // data sources
     this.dataSourcesItem = this.item.addItem("Data Sources");
     if (this.model.data.dataSources) {
@@ -27,6 +19,14 @@ PageController.prototype.createTree = function(callback) {
             var dataSourceData = this.model.data.dataSources[name];
             this.addDataSourceItem(dataSourceData);
         }
+    }
+    // forms
+    this.itemForms = this.item.addItem("Forms");
+    if (this.model.data.forms) {
+        for (var name in this.model.data.forms) {
+            var formData = this.model.data.forms[name];
+            this.addFormItem(formData);
+        };
     }
 };
 

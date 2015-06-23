@@ -15,7 +15,6 @@ module.exports = {
     getAppInfos         : getAppInfos,
     currentTime         : currentTime,
     currentDate         : currentDate,
-    replaceThis         : replaceThis,
     queryFormat         : queryFormat,
     typeCast            : typeCast,
     getParams           : getParams,
@@ -141,16 +140,6 @@ function currentDate() {
     var mm = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
     var yyyy = now.getFullYear();
     return [yyyy,mm,dd].join("-");
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function replaceThis(query, page, form) {
-    //var matches = query.match(/@([\w]+\.[\w]+\.[\w]+)/g);
-    //var matches = query.match(/@([\w]+)([^\w\.]|$)/g);
-    var params = getUsedParams(query);
-    console.log(query);
-    console.log('replaceThis');
-    console.log(params);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

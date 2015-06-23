@@ -19,8 +19,7 @@ function SqlDataAdapter(dataSource) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataAdapter.prototype.select = function(params, callback) {
-    var query = this.dataSource.getQuery(params);
+SqlDataAdapter.prototype.select = function(query, params, callback) {
     this._query(query, params, function(rows) {
         callback(rows);
     }, true);
