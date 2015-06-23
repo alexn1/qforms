@@ -11,8 +11,8 @@ var FormEditor = require('../FormEditor');
 util.inherits(TableFormEditor, FormEditor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function TableFormEditor(pageEditor, name) {
-    TableFormEditor.super_.call(this, pageEditor, name);
+function TableFormEditor(pageEditor, name, data) {
+    TableFormEditor.super_.call(this, pageEditor, name, data);
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.ejs'

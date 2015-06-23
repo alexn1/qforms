@@ -32,17 +32,20 @@ PageLinkEditorController.prototype.save = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditorController.prototype.moveUp = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.movePageLinkUp(params, function(result) {
-            callback(result);
+        appEditor.movePageLinkUp(params.page);
+        appEditor.appFile.save(function() {
+            callback('ok');
         });
+
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditorController.prototype.moveDown = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
-        appEditor.movePageLinkDown(params, function(result) {
-            callback(result);
+        appEditor.movePageLinkDown(params.page);
+        appEditor.appFile.save(function() {
+            callback('ok');
         });
     });
 };

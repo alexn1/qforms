@@ -82,6 +82,53 @@ DataSource.prototype.delete = function(callback) {
     });
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.moveUp = function(callback) {
+    var args = {
+        controller:"DataSource",
+        action:"moveUp",
+        params:{
+            dataSource:this.data["@attributes"].name
+        }
+    };
+    if (this.parent instanceof Page) {
+        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+    }
+    if (this.parent instanceof Form) {
+        args.params.form = this.parent.data["@attributes"].name;
+        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+    }
+    QForms.doHttpRequest(this, args, function(data) {
+        if (callback) {
+            callback(data);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.moveDown = function(callback) {
+    var args = {
+        controller:"DataSource",
+        action:"moveDown",
+        params:{
+            dataSource:this.data["@attributes"].name
+        }
+    };
+    if (this.parent instanceof Page) {
+        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+    }
+    if (this.parent instanceof Form) {
+        args.params.form = this.parent.data["@attributes"].name;
+        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+    }
+    QForms.doHttpRequest(this, args, function(data) {
+        if (callback) {
+            callback(data);
+        }
+    });
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newKeyColumn = function(name, callback) {
     var args = {

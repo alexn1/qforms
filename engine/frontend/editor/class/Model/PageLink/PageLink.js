@@ -4,7 +4,6 @@ QForms.inherit(PageLink, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageLink(data, parent) {
-    console.log(parent);
     Model.call(this, data);
     this.parent      = parent;
     this.application = parent;

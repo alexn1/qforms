@@ -180,17 +180,11 @@ ApplicationEditor.prototype.getDataSource = function(name) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.prototype.movePageLinkUp = function(params, callback) {
-    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, params.page, -1);
-    this.appFile.save(function() {
-        callback('ok');
-    });
+ApplicationEditor.prototype.movePageLinkUp = function(name) {
+    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, name, -1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.prototype.movePageLinkDown = function(params, callback) {
-    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, params.page, 1);
-    this.appFile.save(function() {
-        callback('ok');
-    });
+ApplicationEditor.prototype.movePageLinkDown = function(name) {
+    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, name, 1);
 };

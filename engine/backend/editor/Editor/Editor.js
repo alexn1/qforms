@@ -6,6 +6,8 @@ var path = require('path');
 var fs   = require('fs');
 var ejs  = require('ejs');
 
+var helper = require('../../common/helper');
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Editor() {
 
@@ -112,4 +114,15 @@ Editor.prototype.getCustomFile = function(params, ext, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.saveCustomFile = function(params, ext, callback) {
     this.saveFile(this.getCustomFilePath(params, ext), params.text, callback);
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Editor.prototype.moveDataSourceUp = function(name) {
+    this.data.dataSources = helper.moveObjProp(this.data.dataSources, name, -1);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Editor.prototype.moveDataSourceDown = function(name) {
+    this.data.dataSources = helper.moveObjProp(this.data.dataSources, name, 1);
 };

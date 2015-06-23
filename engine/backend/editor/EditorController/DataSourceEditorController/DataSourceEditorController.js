@@ -80,6 +80,68 @@ DataSourceEditorController.prototype.delete = function(params, callback) {
     });
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.moveUp = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        if (params.page) {
+            appEditor.getPageByFileName(params.page,function(pageEditor) {
+                if (params.form) {
+                    // form data source
+                    var formEditor = pageEditor.getForm(params.form);
+                    formEditor.moveDataSourceUp(params.dataSource);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                } else {
+                    // page data source
+                    pageEditor.moveDataSourceUp(params.dataSource);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                }
+            });
+        } else {
+            // app data source
+            appEditor.moveDataSourceUp(params.dataSource);
+            appEditor.appFile.save(function() {
+                callback(null);
+            });
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.moveDown = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        if (params.page) {
+            appEditor.getPageByFileName(params.page,function(pageEditor) {
+                if (params.form) {
+                    // form data source
+                    var formEditor = pageEditor.getForm(params.form);
+                    formEditor.moveDataSourceDown(params.dataSource);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                } else {
+                    // page data source
+                    pageEditor.moveDataSourceDown(params.dataSource);
+                    pageEditor.pageFile.save(function() {
+                        callback(null);
+                    });
+                }
+            });
+        } else {
+            // app data source
+            appEditor.moveDataSourceDown(params.dataSource);
+            appEditor.appFile.save(function() {
+                callback(null);
+            });
+        }
+    });
+};
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {

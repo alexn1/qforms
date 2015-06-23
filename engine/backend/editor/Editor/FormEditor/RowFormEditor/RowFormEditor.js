@@ -11,8 +11,8 @@ var FormEditor = require('../FormEditor');
 util.inherits(RowFormEditor, FormEditor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowFormEditor(pageEditor, name) {
-    RowFormEditor.super_.call(this, pageEditor, name);
+function RowFormEditor(pageEditor, name, data) {
+    RowFormEditor.super_.call(this, pageEditor, name, data);
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.ejs'

@@ -60,6 +60,9 @@ DataSourceController.prototype.getActions = function() {
             "action":"newParentKeyColumn",
             "caption":"New Parent Key Column"
         },
+        {"action":"","caption":"-"},
+        {"action":"moveUp","caption":"Move Up"},
+        {"action":"moveDown","caption":"Move Down"},
         {
             "action":"",
             "caption":"-"
@@ -73,6 +76,7 @@ DataSourceController.prototype.getActions = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.doAction = function(action) {
+    var self = this;
     switch (action) {
         case "newItem":
             this.actionNewKeyColumn();
@@ -82,6 +86,16 @@ DataSourceController.prototype.doAction = function(action) {
             break;
         case "delete":
             this.delete();
+            break;
+        case 'moveUp':
+            this.model.moveUp(function(data) {
+                self.item.move(-1);
+            });
+            break;
+        case 'moveDown':
+            this.model.moveDown(function(data) {
+                self.item.move(1);
+            });
             break;
     }
 };
