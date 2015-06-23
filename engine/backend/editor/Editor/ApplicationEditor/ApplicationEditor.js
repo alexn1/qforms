@@ -178,3 +178,19 @@ ApplicationEditor.prototype.getDataSource = function(name) {
     var dataSourceData  = this.data.dataSources[name];
     return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.movePageLinkUp = function(params, callback) {
+    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, params.page, -1);
+    this.appFile.save(function() {
+        callback('ok');
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.movePageLinkDown = function(params, callback) {
+    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, params.page, 1);
+    this.appFile.save(function() {
+        callback('ok');
+    });
+};

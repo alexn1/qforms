@@ -6,12 +6,12 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
-var qforms          = require('../../../qforms');
-var helper          = require('../../../common/helper');
-var Editor          = require('../Editor');
-var TableFormEditor = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
-var RowFormEditor   = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
-var TreeFormEditor  = require('../../Editor/FormEditor/TreeFormEditor/TreeFormEditor');
+var qforms              = require('../../../qforms');
+var helper              = require('../../../common/helper');
+var Editor              = require('../Editor');
+var TableFormEditor     = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
+var RowFormEditor       = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
+var TreeFormEditor      = require('../../Editor/FormEditor/TreeFormEditor/TreeFormEditor');
 var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(PageEditor, Editor);

@@ -56,12 +56,16 @@ PageController.prototype.getActions = function() {
         {"action":"newDataSource","caption":"New Data Source"},
         {"action":"newForm","caption":"New Form"},
         {"action":"","caption":"-"},
+        {"action":"moveUp","caption":"Move Up"},
+        {"action":"moveDown","caption":"Move Down"},
+        {"action":"","caption":"-"},
         {"action":"delete","caption":"Delete"}
     ];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.doAction = function(action) {
+    var self = this;
     switch (action) {
         case "newForm":
             this.actionNewForm();
@@ -71,6 +75,16 @@ PageController.prototype.doAction = function(action) {
             break;
         case "delete":
             this.delete();
+            break;
+        case 'moveUp':
+            this.model.pageLink.moveUp(function(data) {
+                self.item.move(-1);
+            });
+            break;
+        case 'moveDown':
+            this.model.pageLink.moveDown(function(data) {
+                self.item.move(1);
+            });
             break;
         default:
             console.log(action);

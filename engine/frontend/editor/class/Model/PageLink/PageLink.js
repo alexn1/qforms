@@ -26,3 +26,35 @@ PageLink.prototype.setValue = function(name,value,callback) {
         }
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageLink.prototype.moveUp = function(callback) {
+    var args = {
+        controller: 'PageLink',
+        action    : 'moveUp',
+        params    : {
+            page:this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, function(data){
+        if (callback) {
+            callback(data);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageLink.prototype.moveDown = function(callback) {
+    var args = {
+        controller: 'PageLink',
+        action    : 'moveDown',
+        params    : {
+            page:this.data["@attributes"].name
+        }
+    };
+    QForms.doHttpRequest(this, args, function(data){
+        if (callback) {
+            callback(data);
+        }
+    });
+};

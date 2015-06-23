@@ -28,3 +28,21 @@ PageLinkEditorController.prototype.save = function(params, callback) {
         });
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageLinkEditorController.prototype.moveUp = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.movePageLinkUp(params, function(result) {
+            callback(result);
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PageLinkEditorController.prototype.moveDown = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        appEditor.movePageLinkDown(params, function(result) {
+            callback(result);
+        });
+    });
+};
