@@ -5,11 +5,11 @@ module.exports = SqlDataSourceController;
 var util   = require('util');
 var path   = require('path');
 var sqlish = require("sqlish");
+var mysql  = require('mysql');
 
 var helper               = require('../../../../common/helper');
 var DataSourceController = require('../DataSourceController');
 var FormController       = require('../../FormController/FormController');
-var SqlDataAdapter       = require('../../../DataAdapter/SqlDataAdapter/SqlDataAdapter');
 
 util.inherits(SqlDataSourceController, DataSourceController);
 
@@ -18,7 +18,6 @@ function SqlDataSourceController(data, parent) {
     SqlDataSourceController.super_.call(this, data, parent);
     this.desc        = null;
     this.aiFieldName = null;
-    this.dataAdapter = new SqlDataAdapter(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,11 +47,56 @@ SqlDataSourceController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+SqlDataSourceController.prototype._query = function(query, params, callback, select) {
+    select = select !== undefined ? select : false;
+    console.log({dsName: this.name, query: query, params: params});
+    this.getPool().getConnection(function(err, cnn) {
+        if (err) {
+            throw err;
+        } else {
+            cnn.query({sql:query,typeCast:helper.typeCast,nestTables: true}, params, function(err, result, fields) {
+                cnn.release();
+                if (err) {
+                    throw err;
+                } else {
+                    if (select) {
+                        // for dublicate column names
+                        var fieldCount = {};
+                        for (var j=0;j<fields.length;j++) {
+                            var f = fields[j];
+                            if (!fieldCount[f.name]) {
+                                fieldCount[f.name] = 0;
+                            }
+                            fieldCount[f.name]++;
+                            f.numb = fieldCount[f.name] - 1;
+                        }
+                        var rows = [];
+                        for (var i=0; i<result.length; i++) {
+                            var r = result[i];
+                            var row = {};
+                            for (var j=0; j<fields.length; j++) {
+                                var f = fields[j];
+                                var column = f.name + (f.numb > 0 ? f.numb : '');
+                                row[column] = r[f.table][f.name];
+                            }
+                            rows.push(row);
+                        }
+                        callback(rows);
+                    } else {
+                        callback(result);
+                    }
+                }
+            });
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype._desc = function(callback) {
     var self = this;
     this.desc = {};
     var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
-    this.dataAdapter._query(query, null, function(rows) {
+    this._query(query, null, function(rows) {
         rows.forEach(function(info) {
             self.desc[info.Field] = info;
             if (info.Extra === 'auto_increment') {
@@ -66,7 +110,7 @@ SqlDataSourceController.prototype._desc = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.select = function(params, callback) {
     var query = this._replaceThis(this.data['@attributes'].query);
-    this.dataAdapter._query(query, params, function(rows) {
+    this._query(query, params, function(rows) {
         callback(rows);
     }, true);
 };
@@ -78,7 +122,7 @@ SqlDataSourceController.prototype.update = function(row, callback) {
         .set(this.getRowNonKeyValues(row))
         .where(this.getRowKeyValues(row))
         .toString();
-    this.dataAdapter._query(query, null, callback);
+    this._query(query, null, callback);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +136,7 @@ SqlDataSourceController.prototype.insert = function(row, callback) {
             }
         }
         var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, row).toString();
-        self.dataAdapter._query(query,  null, function(result) {
+        self._query(query,  null, function(result) {
             var key = JSON.stringify([result.insertId]);
             callback(key);
         });
@@ -110,5 +154,5 @@ SqlDataSourceController.prototype.delete = function(row, callback) {
         .deleteFrom(this.data['@attributes'].table)
         .where(this.getRowKeyValues(row))
         .toString();
-    this.dataAdapter._query(query, null, callback);
+    this._query(query, null, callback);
 };
