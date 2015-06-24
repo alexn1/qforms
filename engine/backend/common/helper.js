@@ -136,10 +136,10 @@ function currentTime() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function currentDate() {
     var now = new Date();
-    var dd = now.getDate();      if (dd < 10) dd = '0' + dd;
-    var mm = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
+    var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
+    var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
     var yyyy = now.getFullYear();
-    return [yyyy,mm,dd].join("-");
+    return [yyyy, mm, dd].join("-");
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

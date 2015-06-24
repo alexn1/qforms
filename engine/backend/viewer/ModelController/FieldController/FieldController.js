@@ -36,5 +36,9 @@ FieldController.prototype.dumpRowValueToParams = function(row, params) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getFullName = function() {
-    return this.form.page.name + '.' + this.form.name + '.' + this.name;
+    return [
+        this.form.page.name,
+        this.form.name,
+        this.name
+    ].join('.');
 };

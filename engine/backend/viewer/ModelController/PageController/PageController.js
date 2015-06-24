@@ -51,6 +51,6 @@ PageController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype._call = function(args) {
     args.res.json({
-        result:'ok'
+        result: 'ok'
     });
 };

@@ -171,15 +171,15 @@ function index(req, res, next, application) {
 function page(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
         var args = {
-            params    : req.body.params,
-            newMode   : req.body.newMode,
-            querytime : {
+            params   : req.body.params,
+            newMode  : req.body.newMode,
+            querytime: {
                 params : {}
             }
         };
         page.fill(args, function(data) {
             res.json({
-                data:data
+                data: data
             });
         });
     });
@@ -221,7 +221,7 @@ function insert(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].insert(req.body.row, function(key) {
             res.json({
-                key:key
+                key: key
             });
         });
     });
@@ -240,8 +240,8 @@ function _delete(req, res, next, application) {
 function _call(req, res, next, application) {
     application.getPage(req.body.page, function(page) {
         page._call({
-            req: req,
-            res: res,
+            req   : req,
+            res   : res,
             params: req.body.params
         });
     });

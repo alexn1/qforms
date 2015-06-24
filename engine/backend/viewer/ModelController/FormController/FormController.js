@@ -51,12 +51,12 @@ FormController.prototype._getSurrogateDataSourceResponse = function() {
         this.fields[name].fillDefaultValue(row);
     }
     return {
-        class                : 'DataSource',
-        database             : '',
-        table                : '',
-        keyColumns           : ['id'],
-        dumpFirstRowToParams : 'false',
-        rows                 : [row]
+        class               : 'DataSource',
+        database            : '',
+        table               : '',
+        keyColumns          : ['id'],
+        dumpFirstRowToParams: 'false',
+        rows                : [row]
     };
 };
 

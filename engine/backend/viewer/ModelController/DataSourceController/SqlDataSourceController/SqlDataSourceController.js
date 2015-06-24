@@ -48,6 +48,22 @@ SqlDataSourceController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+SqlDataSourceController.prototype._desc = function(callback) {
+    var self = this;
+    this.desc = {};
+    var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
+    this.dataAdapter._query(query, null, function(rows) {
+        rows.forEach(function(info) {
+            self.desc[info.Field] = info;
+            if (info.Extra === 'auto_increment') {
+                self.aiFieldName = info.Field;
+            }
+        });
+        callback();
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.select = function(params, callback) {
     var query = this._replaceThis(this.data['@attributes'].query);
     this.dataAdapter._query(query, params, function(rows) {
@@ -95,20 +111,4 @@ SqlDataSourceController.prototype.delete = function(row, callback) {
         .where(this.getRowKeyValues(row))
         .toString();
     this.dataAdapter._query(query, null, callback);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype._desc = function(callback) {
-    var self = this;
-    this.desc = {};
-    var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
-    this.dataAdapter._query(query, null, function(rows) {
-        rows.forEach(function(info) {
-            self.desc[info.Field] = info;
-            if (info.Extra === 'auto_increment') {
-                self.aiFieldName = info.Field;
-            }
-        });
-        callback();
-    });
 };
