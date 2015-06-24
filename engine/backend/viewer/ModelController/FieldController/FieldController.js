@@ -5,6 +5,7 @@ module.exports = FieldController;
 var util = require('util');
 var path = require('path');
 
+var helper          = require('../../../common/helper');
 var ModelController = require('../ModelController');
 
 util.inherits(FieldController, ModelController);
@@ -24,7 +25,12 @@ FieldController.create = function(data, parent, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.fillDefaultValue = function(row) {
-    row[this.data['@attributes'].column] = this.parent.getExpValue(this.data['@attributes'].defaultValue);
+    var column = this.data['@attributes'].column;
+    var value  = eval(this.data['@attributes'].defaultValue);
+    if (value === undefined) {
+        value = null;
+    }
+    row[column] = value;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

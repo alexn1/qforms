@@ -6,6 +6,7 @@ var slash = require('slash');
 var async = require('async');
 var fs    = require('fs');
 var _     = require('underscore');
+var mysql = require('mysql');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
@@ -147,7 +148,11 @@ function queryFormat(query, params) {
     var sql;
     if (params) {
         var sql = query.replace(/\{([\w\.]+)\}/g, function (text, name) {
-            return params.hasOwnProperty(name) ? params[name] : 'NULL';
+            if (params.hasOwnProperty(name)) {
+                return mysql.escape(params[name]);
+            } else {
+                return 'NULL';
+            }
         });
     } else {
         sql = query;

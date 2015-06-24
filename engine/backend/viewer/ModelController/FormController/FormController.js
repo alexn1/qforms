@@ -61,18 +61,6 @@ FormController.prototype._getSurrogateDataSourceResponse = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.getExpValue = function(value) {
-    if (value === "CurrentDate()") {
-        value = helper.currentDate();
-    } else if (value === "CurrentTime()") {
-        value = helper.currentTime();
-    } else if (value === '') {
-        return null;
-    }
-    return value;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.dumpRowToParams = function(row, params) {
     for (var name in this.fields) {
         this.fields[name].dumpRowValueToParams(row, params);
