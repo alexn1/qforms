@@ -21,7 +21,6 @@ function DataSourceController(data, parent) {
     this.form             = parent instanceof FormController        ? parent : null;
     this.keyColumns       = [];
     this.parentKeyColumns = [];
-    this.dataAdapter      = null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,27 +81,22 @@ DataSourceController.prototype.refill = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.select = function(params, callback) {
-    var query = this._replaceThis(this.data['@attributes'].query);
-    this.dataAdapter.select(query, params, function(rows) {
-        callback(rows);
-    });
+    callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.update = function(row, callback) {
-    this.dataAdapter.update(row, callback);
+    callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.insert = function(row, callback) {
-    this.dataAdapter.insert(row, function(key) {
-        callback(key);
-    });
+    callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.delete = function(row, callback) {
-    this.dataAdapter.delete(row, callback);
+    callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

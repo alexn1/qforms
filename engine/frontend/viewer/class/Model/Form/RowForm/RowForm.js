@@ -14,12 +14,13 @@ RowForm.prototype.init = function() {
         var row = {};
         this.defaultValuesToRow(row);
         this.dataSource.newRow(row);
+    } else {
+        if (!this.dataSource.data.rows[0]) {
+            throw new Error('[' + this.getFullName() + '] no row in RowForm');
+        }
+        // dump row values to page params
+        this.fillParams(this.dataSource.data.rows[0]);
     }
-    if (!this.dataSource.data.rows[0]) {
-        throw new Error('[' + this.getFullName() + '] no row in RowForm');
-    }
-    // dump row values to page params
-    this.fillParams(this.dataSource.data.rows[0]);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
