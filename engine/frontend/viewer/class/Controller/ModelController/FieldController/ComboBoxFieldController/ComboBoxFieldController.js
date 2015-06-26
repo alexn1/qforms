@@ -11,6 +11,7 @@ function ComboBoxFieldController(model,parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.init = function() {
+    //console.log('ComboBoxFieldController.prototype.init: ' + this.model.name);
     FieldController.prototype.init.call(this);
     this.dataSource = this.model.getDataSource(this.model.data.dataSourceName);
     if (!this.dataSource) {
@@ -24,12 +25,12 @@ ComboBoxFieldController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.deinit = function() {
-    FieldController.prototype.deinit.call(this);
     //console.log('ComboBoxFieldController.prototype.deinit: ' + this.model.name);
     this.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
     this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
     this.dataSource.eventMoveRow.unsubscribe(this,"onMoveRow");
+    FieldController.prototype.deinit.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

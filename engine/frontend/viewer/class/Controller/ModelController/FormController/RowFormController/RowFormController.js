@@ -45,14 +45,8 @@ RowFormController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.deinit = function() {
-    FormController.prototype.deinit.call(this);
     this.model.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
-    for (var name in this.fields) {
-        this.fields[name].deinit();
-    }
-    for (var name in this.controls) {
-        this.controls[name].deinit();
-    }
+    FormController.prototype.deinit.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
