@@ -23,7 +23,7 @@ Application.prototype.init = function() {
     for (var name in this.data.pages) {
         this.lastPageId++;
         var page = new Page({
-            app:this,
+            app :this,
             data:this.data.pages[name]
         });
 
@@ -92,19 +92,19 @@ Application.prototype.openPage = function(args) {
         QForms.doHttpRequest(this,args,function(response) {
             this.lastPageId++;
             var page = new Page({
-                app:this,
-                data:response.data,
-                key:key,
-                newMode:newMode,
-                parentPage:parentPage,
-                params:params
+                app       : this,
+                data      : response.data,
+                key       : key,
+                newMode   : newMode,
+                parentPage: parentPage,
+                params    : params
             });
             page.init();
             page.id = "p" + this.lastPageId;
             // сообщаем подписчикам (view), что открыта страница
             var ea = new QForms.EventArg(this);
-            ea.page = page;
-            ea.track = parentPage !== undefined;
+            ea.page   = page;
+            ea.track  = parentPage !== undefined;
             ea.select = true;
             this.eventPageOpened.fire(ea);
         });
@@ -113,21 +113,23 @@ Application.prototype.openPage = function(args) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.saveAndClosePage = function(page) {
-    page.deinit();
-    page.save();	// saving page after deinit not to receive update notifications
     // eventPageClosed
     var ea = new QForms.EventArg(this);
     ea.page = page;
     this.eventPageClosed.fire(ea);
+    // deinit page
+    page.deinit();
+    page.save();	// saving page after deinit not to receive update notifications
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.closePage = function(page) {
-    page.deinit();
     // eventPageClosed
     var ea = new QForms.EventArg(this);
     ea.page = page;
     this.eventPageClosed.fire(ea);
+    // page deinit
+    page.deinit();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

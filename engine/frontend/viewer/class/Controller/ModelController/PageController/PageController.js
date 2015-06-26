@@ -51,6 +51,7 @@ PageController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.deinit = function() {
+    //console.log('PageController.prototype.deinit: ' + this.model.name);
     for (var formName in this.forms) {
         this.forms[formName].deinit();
     }

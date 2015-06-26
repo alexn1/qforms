@@ -39,6 +39,7 @@ FieldController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.deinit = function() {
+    //console.log('FieldController.prototype.deinit: ' + this.model.name);
     this.views = null;
 };
 

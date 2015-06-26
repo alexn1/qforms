@@ -25,6 +25,7 @@ ComboBoxFieldController.prototype.init = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.deinit = function() {
     FieldController.prototype.deinit.call(this);
+    //console.log('ComboBoxFieldController.prototype.deinit: ' + this.model.name);
     this.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
     this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
     this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
@@ -109,12 +110,18 @@ ComboBoxFieldController.prototype.createOption = function(view,i) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onRefillRow = function(ea) {
+    //console.log('ComboBoxFieldController.prototype.onRefillRow');
+    //console.log(ea);
     var key = ea.key;
     //i = ea.i;
-    for (var k in this.views) {
-        var view = this.views[k];
-        var option = view.keyToOption[key];
-        this.refillRow(option);
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            for (var k in this.views) {
+                var view = this.views[k];
+                var option = view.keyToOption[key];
+                this.refillRow(option);
+            }
+            break;
     }
 };
 
@@ -126,11 +133,15 @@ ComboBoxFieldController.prototype.refillRow = function(option) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onRemoveRow = function(ea) {
     var key = ea.key;
-    for (var k in this.views) {
-        var view = this.views[k];
-        var option = view.keyToOption[key];
-        view.firstElementChild.removeChild(option);
-        delete view.keyToOption[key];
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            for (var k in this.views) {
+                var view = this.views[k];
+                var option = view.keyToOption[key];
+                view.firstElementChild.removeChild(option);
+                delete view.keyToOption[key];
+            }
+            break;
     }
 };
 
@@ -138,19 +149,27 @@ ComboBoxFieldController.prototype.onRemoveRow = function(ea) {
 ComboBoxFieldController.prototype.onNewRow = function(ea) {
     //console.log("ComboBoxFieldController.prototype.onNewRow");
     //console.log(ea);
-    this.createOption(ea.i);
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            this.createOption(ea.i);
+            break;
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onMoveRow = function(ea) {
     var newIndex = ea.newIndex;
     var oldIndex = ea.oldIndex;
-    var key = ea.key;
-    for (var k in this.views) {
-        var view = this.views[k];
-        var option = view.keyToOption[key];
-        QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
-        this.refillRow(option);
+    var key      = ea.key;
+    switch (this.model.form.data.class) {
+        case 'RowForm':
+            for (var k in this.views) {
+                var view = this.views[k];
+                var option = view.keyToOption[key];
+                QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
+                this.refillRow(option);
+            }
+            break;
     }
 };
 

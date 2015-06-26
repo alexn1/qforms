@@ -11,6 +11,7 @@ function Field(name, parent, data) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.init = function() {
+    /*
     if (this.data.eventHandlers) {
         for (var event in this.data.eventHandlers) {
             var eventHandler = this.data.eventHandlers[event];
@@ -18,6 +19,12 @@ Field.prototype.init = function() {
             this.eventHandlers[event].init();
         }
     }
+    */
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.deinit = function() {
+    //console.log('Field.prototype.deinit: ' + this.name);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

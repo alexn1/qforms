@@ -41,9 +41,13 @@ Page.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.deinit = function() {
-    //console.log("deinit: " + this.name);
-    if (this.deinited) return;
-    for (var dsName in this.dataSources) this.dataSources[dsName].deinit();
+    //console.log("Page.prototype.deinit: " + this.name);
+    if (this.deinited) {
+        return;
+    }
+    for (var dsName in this.dataSources) {
+        this.dataSources[dsName].deinit();
+    }
     for (var formName in this.forms) {
         this.forms[formName].eventChanged.unsubscribe(this,"onFormChanged");
         this.forms[formName].eventUpdated.unsubscribe(this,"onFormUpdated");

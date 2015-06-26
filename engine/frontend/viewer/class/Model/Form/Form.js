@@ -11,7 +11,7 @@ function Form(name, parent, data) {
     this.dataSources   = {};
     this.fields        = {};
     this.controls      = {};
-    this.eventHandlers = {};
+    //this.eventHandlers = {};
     // event
     this.eventChanged  = new QForms.Event(this);
     this.eventUpdated  = new QForms.Event(this);
@@ -36,11 +36,13 @@ Form.prototype.init = function() {
         this.controls[name] = eval("new {class}(data,this)".replace("{class}",data.class));
         this.controls[name].init();
     }
+    /*
     // eventHandlers
     for (var name in this.data.eventHandlers) {
         this.eventHandlers[name] = new EventHandler(this,this.data.eventHandlers[name]);
         this.eventHandlers[name].init();
     }
+    */
     this.dataSource = this.dataSources["default"];
     this.dataSource.eventChanged.subscribe(this,"onDataSourceChanged");
     this.dataSource.eventUpdated.subscribe(this,"onDataSourceUpdated");
@@ -48,10 +50,17 @@ Form.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.deinit = function() {
+    //console.log('Form.prototype.deinit: ' + this.name);
     this.dataSource.eventChanged.unsubscribe(this,"onDataSourceChanged");
     this.dataSource.eventUpdated.unsubscribe(this,"onDataSourceUpdated");
     for (var dsName in this.dataSources) {
         this.dataSources[dsName].deinit();
+    }
+    for (var name in this.fields) {
+        this.fields[name].deinit();
+    }
+    for (var name in this.controls) {
+        this.controls[name].deinit();
     }
 };
 

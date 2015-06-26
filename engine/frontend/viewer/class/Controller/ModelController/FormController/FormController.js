@@ -52,7 +52,13 @@ FormController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.deinit = function() {
-
+    //console.log('FormController.prototype.deinit: ' + this.model.name);
+    for (var name in this.fields) {
+        this.fields[name].deinit();
+    }
+    for (var name in this.controls) {
+        this.controls[name].deinit();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
