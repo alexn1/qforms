@@ -92,12 +92,12 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     view.firstElementChild.appendChild(nullOption);
     var rows = this.dataSource.getRows();
     for (var i=0; i<rows.length; i++) {
-        this.createOption(view, i);
+        this._createOption(view, i);
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.createOption = function(view,i) {
+ComboBoxFieldController.prototype._createOption = function(view,i) {
     var row =  this.dataSource.getRowByIndex(i);
     var key = this.dataSource.getRowKey(row);
     var option = document.createElement("option");
@@ -120,14 +120,14 @@ ComboBoxFieldController.prototype.onRefillRow = function(ea) {
             for (var k in this.views) {
                 var view = this.views[k];
                 var option = view.keyToOption[key];
-                this.refillRow(option);
+                this._refillRow(option);
             }
             break;
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype.refillRow = function(option) {
+ComboBoxFieldController.prototype._refillRow = function(option) {
     option.innerHTML = option.dbRow[this.model.data.displayColumn];
 };
 
@@ -152,7 +152,7 @@ ComboBoxFieldController.prototype.onNewRow = function(ea) {
     //console.log(ea);
     switch (this.model.form.data.class) {
         case 'RowForm':
-            this.createOption(ea.i);
+            this._createOption(ea.i);
             break;
     }
 };
@@ -168,7 +168,7 @@ ComboBoxFieldController.prototype.onMoveRow = function(ea) {
                 var view = this.views[k];
                 var option = view.keyToOption[key];
                 QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
-                this.refillRow(option);
+                this._refillRow(option);
             }
             break;
     }
