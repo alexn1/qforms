@@ -26,7 +26,11 @@ FieldController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.fillDefaultValue = function(row) {
     var column = this.data['@attributes'].column;
-    var value  = eval(this.data['@attributes'].defaultValue);
+    try {
+        var value  = eval(this.data['@attributes'].defaultValue);
+    } catch (e) {
+        throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
+    }
     if (value === undefined) {
         value = null;
     }

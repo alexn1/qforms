@@ -47,3 +47,21 @@ TextBoxFieldController.prototype.onChange = function (el) {
         this.eventChange.fire(ea);
     }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TextBoxFieldController.prototype.beginEdit = function(view) {
+    view.firstElementChild.style.MozUserSelect = "text";
+    view.firstElementChild.contentEditable = true;
+    var range = document.createRange();
+    range.selectNodeContents(view.firstElementChild);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    view.firstElementChild.focus();
+    return true;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TextBoxFieldController.prototype.endEdit = function(view) {
+    view.firstElementChild.style.MozUserSelect = "none";
+    view.firstElementChild.contentEditable = false;
+};

@@ -79,7 +79,7 @@ FieldController.prototype.getValue = function (view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.setValue = function (value,view) {
+FieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
         case "RowForm":
             if (value !== "") {
@@ -87,7 +87,7 @@ FieldController.prototype.setValue = function (value,view) {
             }
             break;
         case "TableForm":
-            if (value !== "") {
+            if (value !== '') {
                 view.firstElementChild.innerHTML = value;
             }
             break;
@@ -101,5 +101,15 @@ FieldController.prototype.isValid = function(view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.setViewStyle = function(view,row) {
+
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldController.prototype.beginEdit = function(view) {
+
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FieldController.prototype.endEdit = function(view) {
 
 };

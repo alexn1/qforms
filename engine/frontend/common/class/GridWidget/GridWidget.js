@@ -92,7 +92,6 @@ GridWidget.prototype.createBodyCell = function(name) {
     bodyCell.ondblclick = function() {
         self.onBodyCellDblClick(this);
     };
-    /*
     bodyCell.onkeypress = function(e) {
         if (e.which === 13) {
             self.onEnterPress(this);
@@ -104,7 +103,6 @@ GridWidget.prototype.createBodyCell = function(name) {
             self.onEscPress(this);
         }
     }
-    */
     return bodyCell;
 };
 
@@ -125,19 +123,19 @@ GridWidget.prototype.onBodyCellDblClick = function(bodyCell) {
     this.eventBodyCellDblClick.fire(ea);
 };
 
-/*
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onEnterPress = function(bodyCell) {
     this.gridColumns[bodyCell.qFieldName].enterPress(bodyCell);
 }
-*/
 
-/*
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onEscPress = function(bodyCell) {
     this.gridColumns[bodyCell.qFieldName].escPress(bodyCell);
 }
-*/
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.selectBodyCell = function(bodyCell) {
@@ -150,7 +148,7 @@ GridWidget.prototype.selectBodyCell = function(bodyCell) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.unselectBodyCellIfSelected = function() {
     if (this.selectedBodyCell !== null) {
-        //this.gridColumns[this.selectedBodyCell.qFieldName].unselected(this.selectedBodyCell);
+        this.gridColumns[this.selectedBodyCell.qFieldName].unselected(this.selectedBodyCell);
         this.selectedBodyCell.classList.remove("active");
         this.selectedBodyCell = null;
     }

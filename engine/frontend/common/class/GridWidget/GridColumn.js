@@ -1,9 +1,9 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function GridColumn(gridWidget,name,headerCell) {
+function GridColumn(gridWidget, name, headerCell) {
     this.gridWidget = gridWidget;
-    this.name = name;
+    this.name       = name;
     this.headerCell = headerCell;
 };
 
@@ -15,7 +15,6 @@ GridColumn.prototype.init = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.deinit = function() {
 };
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.initResize = function(headerCell,fieldName) {
@@ -100,34 +99,18 @@ GridColumn.prototype.setOptimalWidth = function(e,resize) {
 };
 
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.focus = function(bodyCell) {
-    bodyCell.firstElementChild.firstElementChild.focus();
-};
-*/
 
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.unselected = function(bodyCell) {
-    if (bodyCell.isEdited) { // если редактировалась, то отменяем редактирование
+    if (bodyCell.isEdited) {
         window.getSelection().removeAllRanges();
         this.restoreValue(bodyCell);
         this.endEdit(bodyCell);
     }
 };
-*/
 
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.doubleClick = function(bodyCell) {
-    this.beginEdit(bodyCell);
-    this.focus(bodyCell);
-};
-*/
 
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.enterPress = function(bodyCell) {
     if (bodyCell.isEdited) {
@@ -135,56 +118,37 @@ GridColumn.prototype.enterPress = function(bodyCell) {
             this.gridWidget.save(bodyCell);
         }
         this.endEdit(bodyCell);
+        bodyCell.classList.add('active');
     }
 };
-*/
 
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.escPress = function(bodyCell) {
     if (bodyCell.isEdited) {
         this.restoreValue(bodyCell);
         this.endEdit(bodyCell);
+        bodyCell.classList.add('active');
     }
 };
-*/
 
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.beginEdit = function(bodyCell) {
-    bodyCell.classList.add("edit");
-    bodyCell.oldValue = this.getValue(bodyCell.firstElementChild);
-    bodyCell.firstElementChild.firstElementChild.style.MozUserSelect = "text";
-    bodyCell.firstElementChild.firstElementChild.contentEditable = true;
-    this.selectContent(bodyCell);
     bodyCell.isEdited = true;
+    bodyCell.classList.remove('active');
+    bodyCell.classList.add('edit');
+    bodyCell.oldValue = this.getValue(bodyCell.firstElementChild);
 };
-*/
 
-/*
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.endEdit = function(bodyCell) {
-    bodyCell.firstElementChild.firstElementChild.style.MozUserSelect = "none";
-    bodyCell.firstElementChild.firstElementChild.contentEditable = false;
     bodyCell.oldValue = null;
     bodyCell.isEdited = false;
     bodyCell.classList.remove("edit");
 };
-*/
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.selectContent = function(bodyCell) {
-    var range = document.createRange();
-    range.selectNodeContents(bodyCell.firstElementChild.firstElementChild);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-};
-*/
-
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.restoreValue = function(bodyCell) {
-    this.setValue(bodyCell,bodyCell.oldValue);
+    this.setValue(bodyCell.firstElementChild, bodyCell.oldValue);
 };
-*/

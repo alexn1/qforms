@@ -24,11 +24,11 @@ TableFormController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.deinit = function() {
-    FormController.prototype.deinit.call(this);
     this.model.page.eventHide.unsubscribe(this,"onHidePage");
     this.model.page.eventShow.unsubscribe(this,"onShowPage");
     this.grid.eventBodyCellDblClick.unsubscribe(this,"onGridCellDblClick");
     this.grid.deinit();
+    FormController.prototype.deinit.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
     var key = bodyCell.bodyRow.qKey;
     switch (this.model.data.editMethod) {
         case "table":
-            this.grid.controls[bodyCell.qFieldName].doubleClick(bodyCell);
+            this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
         break;
         case "form":
             this.model.edit(key);
