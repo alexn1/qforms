@@ -68,9 +68,7 @@ Form.prototype.deinit = function() {
 Form.prototype.defaultValuesToRow = function(row) {
     for (var name in this.fields) {
         var field = this.fields[name];
-        if (field.data.column !== undefined) {
-            row[field.data.column] = field.getDefaultValue();
-        }
+        field.fillDefaultValue(row);
     }
 };
 
@@ -115,29 +113,6 @@ Form.prototype.handleEvent = function(event,args) {
     if (this.eventHandlers && this.eventHandlers[event]) {
         this.eventHandlers[event].handleEvent(args);
     }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.getExpValue = function(exp) {
-    //console.log(exp);
-    var value = exp;
-    if (value === "CurrentDate()") {
-        value = QForms.currentDate();
-    } else if (value === "CurrentTime()") {
-        value = QForms.currentTime();
-    } else if (value.substr(0,1) === "@") {
-        var name = value.substr(1,value.length-1);
-        var arr = name.split(".");
-        if (arr[0] === "this") arr[0] = this.page.name;
-        if (arr[1] === "this") arr[1] = this.name;
-        name = arr.join(".");
-        if (this.page.params[name] !== undefined) {
-            value = this.page.params[name];
-        }
-    } else if (value === '') {
-        value = null;
-    }
-    return value;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

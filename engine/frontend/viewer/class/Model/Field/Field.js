@@ -28,8 +28,19 @@ Field.prototype.deinit = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.getDefaultValue = function() {
-    return this.form.getExpValue(this.data.defaultValue);
+Field.prototype.fillDefaultValue = function(row) {
+    if (this.data.column !== undefined) {
+        var column = this.data.column;
+        try {
+            var value = eval(this.data.defaultValue);
+        } catch (e) {
+            throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
+        }
+        if (value === undefined) {
+            value = null;
+        }
+        row[column] = value;
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -82,14 +82,12 @@ FieldController.prototype.getValue = function (view) {
 FieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
         case "RowForm":
-            if (value !== "") {
+            if (value !== '') {
                 view.firstElementChild.value = value;
             }
             break;
         case "TableForm":
-            if (value !== '') {
-                view.firstElementChild.innerHTML = value;
-            }
+            view.firstElementChild.innerHTML = value;
             break;
     }
 };
