@@ -89,6 +89,9 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
 ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     var nullOption = document.createElement("option");
     nullOption.selected = true;
+    if (this.model.data.notNull === 'true') {
+        nullOption.innerHTML = '-- select value --';
+    }
     view.firstElementChild.appendChild(nullOption);
     var rows = this.dataSource.getRows();
     for (var i=0; i<rows.length; i++) {

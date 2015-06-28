@@ -81,9 +81,6 @@ RowFormController.prototype.onRefillRow = function (ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.isValid = function() {
-    if (this.model.changed === false) {
-        return true;// if form is not changed then is is valid
-    }
     var isValid = true;
     for (var name in this.fields) {
         var view = this.fieldViews[name];
