@@ -6,6 +6,7 @@ var util   = require('util');
 var path   = require('path');
 var sqlish = require("sqlish");
 var mysql  = require('mysql');
+var _      = require('underscore');
 
 var helper               = require('../../../../common/helper');
 var DataSourceController = require('../DataSourceController');
@@ -108,7 +109,10 @@ SqlDataSourceController.prototype._desc = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.select = function(params, callback) {
+SqlDataSourceController.prototype.select = function(args, callback) {
+    var params = {};
+    _.extend(params, args.params);
+    _.extend(params, args.querytime.params);
     var query = this._replaceThis(this.data['@attributes'].query);
     this._query(query, params, function(rows) {
         callback(rows);
@@ -116,7 +120,8 @@ SqlDataSourceController.prototype.select = function(params, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.update = function(row, callback) {
+SqlDataSourceController.prototype.update = function(args, callback) {
+    var row = args.row;
     var query = new sqlish.Sqlish()
         .update(this.data['@attributes'].table)
         .set(this.getRowNonKeyValues(row))
@@ -126,7 +131,8 @@ SqlDataSourceController.prototype.update = function(row, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.insert = function(row, callback) {
+SqlDataSourceController.prototype.insert = function(args, callback) {
+    var row = args.row;
     var self = this;
     var insertRow = function() {
         for (var column in row) {
@@ -149,7 +155,8 @@ SqlDataSourceController.prototype.insert = function(row, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.delete = function(row, callback) {
+SqlDataSourceController.prototype.delete = function(args, callback) {
+    var row = args.row;
     var query = new sqlish.Sqlish()
         .deleteFrom(this.data['@attributes'].table)
         .where(this.getRowKeyValues(row))

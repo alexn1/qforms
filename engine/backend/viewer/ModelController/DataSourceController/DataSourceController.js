@@ -55,10 +55,7 @@ DataSourceController.prototype.fill = function(args, callback) {
             response.rows = [];
             callback(response);
         } else {
-            var params = {};
-            _.extend(params, args.params);
-            _.extend(params, args.querytime.params);
-            self.select(params, function(rows) {
+            self.select(args, function(rows) {
                 response.rows = rows;
                 if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], args.querytime.params);
@@ -70,32 +67,31 @@ DataSourceController.prototype.fill = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.refill = function(params, callback) {
-    this.select(params, function(rows) {
+DataSourceController.prototype.refill = function(args, callback) {
+    this.select(args, function(rows) {
         callback({
             rows:rows
         });
     });
 };
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.select = function(params, callback) {
+DataSourceController.prototype.select = function(args, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.update = function(row, callback) {
+DataSourceController.prototype.update = function(args, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.insert = function(row, callback) {
+DataSourceController.prototype.insert = function(args, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.delete = function(row, callback) {
+DataSourceController.prototype.delete = function(args, callback) {
     callback();
 };
 

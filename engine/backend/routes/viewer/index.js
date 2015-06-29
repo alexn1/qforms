@@ -102,20 +102,13 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     if (req.method === 'GET') {
-        var args = {
-            querytime : {
-                params : {}
-            }
-        };
-        application.fill(args, function(data) {
-            res.render('viewer/login', {
-                version       : req.app.get('version'),
-                caption       : application.data['@attributes'].caption,
-                commonStyleCss: req.app.get('commonStyleCss'),
-                REQUEST_URI   : req.url,
-                errMsg        : null,
-                username      : null
-            });
+        res.render('viewer/login', {
+            version       : req.app.get('version'),
+            caption       : application.data['@attributes'].caption,
+            commonStyleCss: req.app.get('commonStyleCss'),
+            REQUEST_URI   : req.url,
+            errMsg        : null,
+            username      : null
         });
     }
     if (req.method === 'POST') {
@@ -129,6 +122,9 @@ function login(req, res, next, application) {
                         params : {}
                     }
                 };
+                if (req.session.username) {
+                    args.querytime.params['@username'] = req.session.username;
+                }
                 application.fill(args, function(data) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
@@ -151,6 +147,9 @@ function index(req, res, next, application) {
             params : {}
         }
     };
+    if (req.session.username) {
+        args.querytime.params['@username'] = req.session.username;
+    }
     application.fill(args, function(data) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
@@ -177,6 +176,9 @@ function page(req, res, next, application) {
                 params : {}
             }
         };
+        if (req.session.username) {
+            args.querytime.params['@username'] = req.session.username;
+        }
         page.fill(args, function(data) {
             res.json({
                 data: data
@@ -187,8 +189,17 @@ function page(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
+    var args = {
+        row   : req.body.row,
+        querytime : {
+            params : {}
+        }
+    };
+    if (req.session.username) {
+        args.querytime.params['@username'] = req.session.username;
+    }
     application.getPage(req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].update(req.body.row, function() {
+        page.forms[req.body.form].dataSources[req.body.ds].update(args, function() {
             res.json(null);
         });
     });
@@ -196,6 +207,15 @@ function update(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function refill(req, res, next, application) {
+    var args = {
+        params   : req.body.params,
+        querytime : {
+            params : {}
+        }
+    };
+    if (req.session.username) {
+        args.querytime.params['@username'] = req.session.username;
+    }
     var getDataSource = function(callback) {
         if (req.body.page) {
             application.getPage(req.body.page, function(page) {
@@ -210,7 +230,7 @@ function refill(req, res, next, application) {
         }
     };
     getDataSource(function(dataSource) {
-        dataSource.refill(req.body.params, function(response) {
+        dataSource.refill(args, function(response) {
             res.json(response);
         });
     });
@@ -218,8 +238,17 @@ function refill(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
+    var args = {
+        row   : req.body.row,
+        querytime : {
+            params : {}
+        }
+    };
+    if (req.session.username) {
+        args.querytime.params['@username'] = req.session.username;
+    }
     application.getPage(req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].insert(req.body.row, function(key) {
+        page.forms[req.body.form].dataSources[req.body.ds].insert(args, function(key) {
             res.json({
                 key: key
             });
@@ -229,8 +258,17 @@ function insert(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
+    var args = {
+        row   : req.body.row,
+        querytime : {
+            params : {}
+        }
+    };
+    if (req.session.username) {
+        args.querytime.params['@username'] = req.session.username;
+    }
     application.getPage(req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].delete(req.body.row, function() {
+        page.forms[req.body.form].dataSources[req.body.ds].delete(args, function() {
             res.json(null);
         });
     });
