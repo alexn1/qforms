@@ -55,7 +55,7 @@ SqlDataSourceController.prototype._query = function(query, params, callback, sel
         if (err) {
             throw err;
         } else {
-            cnn.query({sql:query,typeCast:helper.typeCast,nestTables: true}, params, function(err, result, fields) {
+            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: true}, params, function(err, result, fields) {
                 cnn.release();
                 if (err) {
                     throw err;

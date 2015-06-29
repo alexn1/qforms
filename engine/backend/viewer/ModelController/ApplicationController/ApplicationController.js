@@ -203,6 +203,24 @@ ApplicationController.prototype.getPool = function(database) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.query = function(query, params, callback) {
+    this.getPool('default').getConnection(function(err, cnn) {
+        if (err) {
+            throw err;
+        } else {
+            cnn.query({sql: query, typeCast: helper.typeCast}, params, function(err, result) {
+                cnn.release();
+                if (err) {
+                    throw err;
+                } else {
+                    callback(result);
+                }
+            });
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.authenticate = function(username, password, callback) {
     callback(username === this.data['@attributes'].user && password === this.data['@attributes'].password);
 };
@@ -210,4 +228,10 @@ ApplicationController.prototype.authenticate = function(username, password, call
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.authentication = function() {
     return this.data['@attributes'].authentication === 'true';
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.getUsers = function(callback) {
+    callback(null);
 };

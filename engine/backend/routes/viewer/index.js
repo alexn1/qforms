@@ -102,13 +102,16 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     if (req.method === 'GET') {
-        res.render('viewer/login', {
-            version       : req.app.get('version'),
-            caption       : application.data['@attributes'].caption,
-            commonStyleCss: req.app.get('commonStyleCss'),
-            REQUEST_URI   : req.url,
-            errMsg        : null,
-            username      : null
+        application.getUsers(function(users) {
+            res.render('viewer/login', {
+                version       : req.app.get('version'),
+                caption       : application.data['@attributes'].caption,
+                commonStyleCss: req.app.get('commonStyleCss'),
+                REQUEST_URI   : req.url,
+                errMsg        : null,
+                username      : null,
+                users         : users
+            });
         });
     }
     if (req.method === 'POST') {
@@ -125,14 +128,15 @@ function login(req, res, next, application) {
                 if (req.session.username) {
                     args.querytime.params['@username'] = req.session.username;
                 }
-                application.fill(args, function(data) {
+                application.getUsers(function(users) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
                         caption       : application.data['@attributes'].caption,
                         commonStyleCss: req.app.get('commonStyleCss'),
                         REQUEST_URI   : req.url,
                         errMsg        : 'Wrong username or password',
-                        username      : req.body.username
+                        username      : req.body.username,
+                        users         : users
                     });
                 });
             }
