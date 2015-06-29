@@ -47,6 +47,7 @@ DataSourceController.prototype.init = function(callback) {
 DataSourceController.prototype.fill = function(args, callback) {
     var self = this;
     DataSourceController.super_.prototype.fill.call(this, args, function(response) {
+        delete response.query;
         response.keyColumns = self.keyColumns;
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;

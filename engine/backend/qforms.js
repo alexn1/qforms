@@ -46,7 +46,7 @@ qforms.use(session({
     secret            : 'qforms',
     key               : 'sid',
     resave            : false,
-    saveUninitialized : true
+    saveUninitialized : false
 }));
 qforms.use(express.static(qforms.get('public')));
 

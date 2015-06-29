@@ -166,6 +166,12 @@ ApplicationController.prototype._createStartupPages = function(callback) {
 ApplicationController.prototype.fill = function(args, callback) {
     var self = this;
     ApplicationController.super_.prototype.fill.call(this, args, function(response) {
+        delete response.user;
+        delete response.password;
+        delete response.authentication;
+        if (args.querytime.params['@username']) {
+            response.username = args.querytime.params['@username'];
+        }
         response.menu = self.menu;
         var startupPageNames = _.filter(self.data.pageLinks, function (pageLink) {
             return pageLink['@attributes'].startup === 'true';
