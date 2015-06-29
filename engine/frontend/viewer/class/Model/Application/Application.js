@@ -10,6 +10,7 @@ function Application(data) {
     this.eventPageOpened   = new QForms.Event(this);
     this.eventPageClosed   = new QForms.Event(this);
     this.eventPageSelected = new QForms.Event(this);
+    this.eventLogout       = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,4 +178,14 @@ Application.prototype.getPage = function(pageName,pageKey) {
     } else {
         return null;
     }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Application.prototype.logout = function() {
+    var args = {
+        "action":"logout"
+    };
+    QForms.doHttpRequest(this, args, function(data) {
+        this.eventLogout.fire(new QForms.EventArg(this));
+    });
 };

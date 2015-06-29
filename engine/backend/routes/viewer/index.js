@@ -87,7 +87,8 @@ function handle(req, res, next, application) {
                     'refill',
                     'insert',
                     '_delete',
-                    '_call'
+                    '_call',
+                    'logout'
                 ];
 
                 if (actions.indexOf(req.body.action) !== -1) {
@@ -147,6 +148,15 @@ function login(req, res, next, application) {
             }
         });
     }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function logout(req, res, next, application) {
+    var route = [req.params.appDirName, req.params.appFileName].join('/');
+    if (req.session.username && req.session.username[route]) {
+        delete req.session.username[route];
+    }
+    res.json(null);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

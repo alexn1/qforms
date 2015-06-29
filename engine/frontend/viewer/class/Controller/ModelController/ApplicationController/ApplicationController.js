@@ -41,6 +41,7 @@ ApplicationController.prototype.init = function() {
     this.model.eventPageOpened.subscribe(this,"onPageOpened");
     this.model.eventPageClosed.subscribe(this,"onPageClosed");
     this.model.eventPageSelected.subscribe(this,"onPageSelected");
+    this.model.eventLogout.subscribe(this,"onLogout");
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,4 +96,9 @@ ApplicationController.prototype.onTabShow = function(e) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onTabHide = function(e) {
     if (e.tab.qPage) e.tab.qPage.eventHide.fire(new QForms.EventArg(this));
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.onLogout = function(ea) {
+    location.reload();
 };
