@@ -12,9 +12,9 @@ function ApplicationController(model,view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(model,view) {
     var customClassName   = "{app}Controller".replace("{app}",model.name);
-    var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}",customClassName);
-    var custom            =  "new {customClassName}(model,view)".replace("{customClassName}",customClassName);
-    var general           = "new {class}Controller(model,view)".replace("{class}",model.data.class);
+    var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}", customClassName);
+    var custom            = "new {customClassName}(model,view)".replace("{customClassName}", customClassName);
+    var general           = "new {class}Controller(model,view)".replace("{class}", model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === "function") {

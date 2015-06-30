@@ -112,7 +112,9 @@ SqlDataSourceController.prototype._desc = function(callback) {
 SqlDataSourceController.prototype.select = function(args, callback) {
     var params = {};
     _.extend(params, args.params);
-    _.extend(params, args.querytime.params);
+    if (args.querytime) {
+        _.extend(params, args.querytime.params);
+    }
     var query = this._replaceThis(this.data['@attributes'].query);
     this._query(query, params, function(rows) {
         callback(rows);
