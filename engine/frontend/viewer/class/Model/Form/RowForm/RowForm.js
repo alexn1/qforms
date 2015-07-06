@@ -5,6 +5,7 @@ QForms.inherit(RowForm,Form);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function RowForm(name,page,data) {
     Form.call(this,name,page,data);
+    this.row = null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,8 +19,9 @@ RowForm.prototype.init = function() {
         if (!this.dataSource.data.rows[0]) {
             throw new Error('[' + this.getFullName() + '] no row in RowForm');
         }
+        this.row = this.dataSource.data.rows[0];
         // dump row values to page params
-        this.fillParams(this.dataSource.data.rows[0]);
+        this.fillParams(this.row);
     }
 };
 
@@ -42,11 +44,16 @@ RowForm.prototype.onDataSourceChanged = function(eventArgs) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.onDataSourceUpdated = function(eventArgs) {
     Form.prototype.onDataSourceUpdated.call(this,eventArgs);
-    this.fillParams(this.dataSource.data.rows[0]);
+    this.fillParams(this.row);
     this.eventUpdated.fire(new QForms.Event(this));
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.getFullName = function() {
     return [this.page.name, this.name].join('.');
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+RowForm.prototype.getFieldValue = function(fieldName) {
+    return this.fields[fieldName].getValue(this.row);
 };

@@ -92,3 +92,8 @@ RowFormController.prototype.isValid = function() {
     }
     return isValid;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+RowFormController.prototype.getFieldValue = function(fieldName) {
+    return this.model.getFieldValue(fieldName);
+};
