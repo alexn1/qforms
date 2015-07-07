@@ -15,10 +15,11 @@ module.exports = function(req, res, next) {
     if (req.method === 'GET') {
         helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
             res.render('home/view', {
-                version: req.app.get('version'),
-                home_class_css:req.app.get('home_class_css'),
-                home_class_js:req.app.get('home_class_js'),
-                appInfos:appInfos
+                req           : req,
+                version       : req.app.get('version'),
+                home_class_css: req.app.get('home_class_css'),
+                home_class_js : req.app.get('home_class_js'),
+                appInfos      : appInfos
             });
         });
     }

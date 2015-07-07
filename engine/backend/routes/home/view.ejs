@@ -58,8 +58,10 @@
                     col-sm-3
                     col-xs-4">
             <button id="btnRun" class="btn btn-primary btn-block">Run</button>
-            <button id="btnEdit" class="btn btn-default btn-block">Edit</button>
-            <button id="btnCreate" class="btn btn-default btn-block">New...</button>
+            <% if (req.app.get('env') === 'development') { %>
+                <button id="btnEdit" class="btn btn-default btn-block">Edit</button>
+                <button id="btnCreate" class="btn btn-default btn-block">New...</button>
+            <% } %>
         </div>
     </div>
 </div>
