@@ -131,7 +131,7 @@ function login(req, res, next, application) {
                         params : {}
                     }
                 };
-                if (req.session.username[route]) {
+                if (req.session.username && req.session.username[route]) {
                     args.querytime.params['@username'] = req.session.username[route];
                 }
                 application.getUsers(function(users) {
@@ -167,7 +167,7 @@ function index(req, res, next, application) {
             params : {}
         }
     };
-    if (req.session.username[route]) {
+    if (req.session.username && req.session.username[route]) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     application.fill(args, function(data) {
@@ -197,7 +197,7 @@ function page(req, res, next, application) {
                 params : {}
             }
         };
-        if (req.session.username[route]) {
+        if (req.session.username && req.session.username[route]) {
             args.querytime.params['@username'] = req.session.username[route];
         }
         page.fill(args, function(data) {
@@ -217,7 +217,7 @@ function update(req, res, next, application) {
             params : {}
         }
     };
-    if (req.session.username[route]) {
+    if (req.session.username && req.session.username[route]) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     application.getPage(req.body.page, function(page) {
@@ -236,7 +236,7 @@ function refill(req, res, next, application) {
             params : {}
         }
     };
-    if (req.session.username[route]) {
+    if (req.session.username && req.session.username[route]) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     var getDataSource = function(callback) {
@@ -268,7 +268,7 @@ function insert(req, res, next, application) {
             params : {}
         }
     };
-    if (req.session.username[route]) {
+    if (req.session.username && req.session.username[route]) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     application.getPage(req.body.page, function(page) {
@@ -289,7 +289,7 @@ function _delete(req, res, next, application) {
             params : {}
         }
     };
-    if (req.session.username[route]) {
+    if (req.session.username && req.session.username[route]) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     application.getPage(req.body.page, function(page) {
