@@ -33,18 +33,17 @@ FormWizard.prototype.getColumns = function() {
 FormWizard.prototype.getQuery = function() {
     var query;
     var columns = this.getColumns();
-
     switch (this.params.className) {
         case "TableForm":
         case "TreeForm":
-            query = "select {columns} from `{table}`"
+            query = "select\n{columns}\nfrom `{table}`"
                 .replace("{table}",   this.params.tableName)
-                .replace("{columns}", columns.join(', '));
+                .replace("{columns}", columns.map(function (column) {return '    ' + column;}).join(',\n'));
             break;
         case "RowForm":
-            query = "select {columns} from `{table}` where id = {key}"
+            query = "select\n{columns}\nfrom `{table}`\nwhere id = {key}"
                 .replace("{table}",   this.params.tableName)
-                .replace("{columns}", columns.join(', '));
+                .replace("{columns}", columns.map(function (column) {return '    ' + column;}).join(',\n'));
             break;
     }
     return query;

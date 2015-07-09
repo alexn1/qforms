@@ -147,3 +147,10 @@ QForms.currentDate = function() {
 QForms.render = function(view,data) {
     return new EJS({text:view}).render(data);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+String.prototype.template = function (values) {
+    return this.replace(/\{([\w]+)\}/g, function (text, name) {
+        return values.hasOwnProperty(name) ? values[name] : text;
+    });
+};

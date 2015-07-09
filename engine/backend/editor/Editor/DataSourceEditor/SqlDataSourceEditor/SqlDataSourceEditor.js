@@ -22,6 +22,8 @@ SqlDataSourceEditor.create = function(params) {
             database            : params['database'] ? params['database'] : 'default',
             table               : params['table']    ? params['table'] : '',
             query               : params['query']    ? params['query'] : '',
+            limit               : '',
+            countQuery          : '',
             insertNewKey        :'false',
             dumpFirstRowToParams:'false'
         }

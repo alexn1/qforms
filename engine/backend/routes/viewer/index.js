@@ -88,7 +88,8 @@ function handle(req, res, next, application) {
                     'insert',
                     '_delete',
                     '_call',
-                    'logout'
+                    'logout',
+                    'frame'
                 ];
 
                 if (actions.indexOf(req.body.action) !== -1) {
@@ -163,8 +164,9 @@ function logout(req, res, next, application) {
 function index(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var args = {
-        querytime : {
-            params : {}
+        params   : {},
+        querytime: {
+            params: {}
         }
     };
     if (req.session.username && req.session.username[route]) {
@@ -194,7 +196,7 @@ function page(req, res, next, application) {
             params   : req.body.params,
             newMode  : req.body.newMode,
             querytime: {
-                params : {}
+                params: {}
             }
         };
         if (req.session.username && req.session.username[route]) {
@@ -213,6 +215,7 @@ function update(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var args = {
         row   : req.body.row,
+        params: {},
         querytime : {
             params : {}
         }
@@ -260,10 +263,43 @@ function refill(req, res, next, application) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+function frame(req, res, next, application) {
+    var route = [req.params.appDirName, req.params.appFileName].join('/');
+    var args = {
+        params   : req.body.params,
+        querytime : {
+            params : {}
+        }
+    };
+    if (req.session.username && req.session.username[route]) {
+        args.querytime.params['@username'] = req.session.username[route];
+    }
+    var getDataSource = function(callback) {
+        if (req.body.page) {
+            application.getPage(req.body.page, function(page) {
+                if (req.body.form) {
+                    callback(page.forms[req.body.form].dataSources[req.body.ds]);
+                } else {
+                    callback(page.dataSources[req.body.ds]);
+                }
+            });
+        } else {
+            callback(application.dataSources[req.body.ds]);
+        }
+    };
+    getDataSource(function(dataSource) {
+        dataSource.frame(args, function(response) {
+            res.json(response);
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var args = {
         row   : req.body.row,
+        params: {},
         querytime : {
             params : {}
         }
@@ -285,6 +321,7 @@ function _delete(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var args = {
         row   : req.body.row,
+        params: {},
         querytime : {
             params : {}
         }

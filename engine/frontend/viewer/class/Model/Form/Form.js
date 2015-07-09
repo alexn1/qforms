@@ -43,7 +43,7 @@ Form.prototype.init = function() {
         this.eventHandlers[name].init();
     }
     */
-    this.dataSource = this.dataSources["default"];
+    this.dataSource = this.dataSources.default;
     this.dataSource.eventChanged.subscribe(this,"onDataSourceChanged");
     this.dataSource.eventUpdated.subscribe(this,"onDataSourceUpdated");
 };
@@ -99,7 +99,7 @@ Form.prototype.update = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.refill = function() {
-    this.dataSources["default"].refill(this.page.params);
+    this.dataSources.default.refill(this.page.params);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

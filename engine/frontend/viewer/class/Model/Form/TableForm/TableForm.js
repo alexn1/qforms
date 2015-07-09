@@ -1,18 +1,20 @@
 'use strict';
 
-QForms.inherit(TableForm,Form);
+QForms.inherit(TableForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TableForm(name,page,data) {
-    Form.call(this,name,page,data);
+function TableForm(name, page, data) {
+    Form.call(this, name, page, data);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // табличная форма обновляется сразу после модификации ячейки таблицы
 TableForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
-    if (dataSource.name !== "default") return;
-    this.dataSources["default"].update();
+    if (dataSource.name !== "default") {
+        return;
+    }
+    this.dataSources.default.update();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +53,7 @@ TableForm.prototype.new = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.delete = function(key) {
-    this.dataSources["default"].delete(key);
+    this.dataSources.default.delete(key);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,4 +62,9 @@ TableForm.prototype.edit = function(key) {
         name:this.data.itemEditPage,
         key:key
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TableForm.prototype.frame = function(frame) {
+    this.dataSources.default.frame(this.page.params, frame);
 };

@@ -1,10 +1,10 @@
 <div id="<%=model.page.id%>_<%=model.name%>" class="TableFormView full flex-rows">
     <div class="flex-min">
         <% if (model.data.newRowMode !== "disabled") {%>
-        <button class="btn btn-default btn-xs new">New</button>
+            <button class="btn btn-default btn-xs new">New</button>
         <% } %>
         <% if (model.data.deleteRowMode !== "disabled") {%>
-        <button class="btn btn-default btn-xs delete">Delete</button>
+            <button class="btn btn-default btn-xs delete">Delete</button>
         <% } %>
     </div>
     <div id="<%=model.page.id%>_<%=model.name%>_GridWidget" class="GridWidget flex-max">
@@ -28,5 +28,10 @@
             </table>
         </div>
         <div class="block"></div>
+    </div>
+    <div class="flex-min paging" style="text-align: right; display: none;">
+        <button class="btn btn-default btn-xs previous">Previous</button>
+        <select class="goto"></select>
+        <button class="btn btn-default btn-xs next">Next</button>
     </div>
 </div>

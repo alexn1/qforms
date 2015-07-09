@@ -48,6 +48,7 @@ DataSourceController.prototype.fill = function(args, callback) {
     var self = this;
     DataSourceController.super_.prototype.fill.call(this, args, function(response) {
         delete response.query;
+        delete response.limit;
         response.keyColumns = self.keyColumns;
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;
@@ -56,12 +57,26 @@ DataSourceController.prototype.fill = function(args, callback) {
             response.rows = [];
             callback(response);
         } else {
+            if (self.data['@attributes'].limit) {
+                args.params['@offset'] = 0;
+                args.params['@limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
+            }
             self.select(args, function(rows) {
                 response.rows = rows;
                 if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], args.querytime.params);
                 }
-                callback(response);
+                if (self.data['@attributes'].limit) {
+                    if (!self.data['@attributes'].countQuery) {
+                        throw new Error('[' + self.getFullName() + ']: countQuery empty.');
+                    }
+                    self.selectCount(args, function(count) {
+                        response.count = parseInt(count);
+                        callback(response);
+                    });
+                } else {
+                    callback(response);
+                }
             });
         }
     });
@@ -71,7 +86,19 @@ DataSourceController.prototype.fill = function(args, callback) {
 DataSourceController.prototype.refill = function(args, callback) {
     this.select(args, function(rows) {
         callback({
-            rows:rows
+            rows: rows
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.frame = function(args, callback) {
+    if (this.data['@attributes'].limit) {
+        args.params['@limit'] = parseInt(this.data['@attributes'].limit);
+    }
+    this.select(args, function(rows) {
+        callback({
+            rows: rows
         });
     });
 };
@@ -151,16 +178,14 @@ DataSourceController.prototype._replaceThis = function(query) {
     if (this.form) {
         var self = this;
         return query.replace(/\{([@\w\.]+)\}/g, function (text, name) {
-            if (name === '@offset') {
-                return '0';
-            } else if (name === '@limit') {
-                return '100';
-            } else {
+            if (name.indexOf('.') !== -1) {
                 var arr = name.split('.');
                 if (arr[0] === 'this') {
                     arr[0] = self.form.page.name;
                 }
                 return '{' + arr.join('.') + '}';
+            } else {
+                return text;
             }
         });
     } else {

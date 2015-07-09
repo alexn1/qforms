@@ -1,6 +1,11 @@
 .TableFormView > div > .btn {
   margin-top: 5px;
 }
+.TableFormView > div > select {
+  margin-top: 5px;
+  vertical-align: middle;
+  padding: 2px;
+}
 .TableFormView > .GridWidget {
   margin-top: 5px;
 }

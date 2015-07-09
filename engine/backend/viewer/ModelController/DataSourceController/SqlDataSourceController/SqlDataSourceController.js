@@ -122,6 +122,21 @@ SqlDataSourceController.prototype.select = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+SqlDataSourceController.prototype.selectCount = function(args, callback) {
+    var params = {};
+    _.extend(params, args.params);
+    if (args.querytime) {
+        _.extend(params, args.querytime.params);
+    }
+    var query = this._replaceThis(this.data['@attributes'].countQuery);
+    this._query(query, params, function(rows) {
+        var row = rows[0];
+        var count = row[Object.keys(row)[0]];
+        callback(count);
+    }, true);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.update = function(args, callback) {
     var row = args.row;
     var query = new sqlish.Sqlish()

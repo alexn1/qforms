@@ -10,32 +10,36 @@ $(document).ready(function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function GridWidget(el) {
-    this.el = el;
-    this.gridColumns = {};
-    this.bodyTable = null;
-    this.selectedBodyRow = null;
-    this.selectedBodyCell = null;
-    this.selectedColumnName = null; // имя поля выделенной колонки
-    this.scrollTop = 0;
+    this.el                 = el;
+    this.gridColumns        = {};
+    this.bodyTable          = null;
+    this.selectedBodyRow    = null;
+    this.selectedBodyCell   = null;
+    this.selectedColumnName = null; // field name of selected column
+    this.scrollTop          = 0;
     this.eventBodyCellDblClick = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.init = function() {
     var self = this;
-    var bodyDiv = document.createElement("div");
-    bodyDiv.className = "body";
-    bodyDiv.addEventListener("scroll",function() {
+
+    // bodyDiv
+    var bodyDiv = document.createElement('div');
+    bodyDiv.className = 'body';
+    bodyDiv.addEventListener('scroll', function() {
         self.onBodyScroll(this);
     });
-    var table = document.createElement("table");
+
+    // table
+    var table = document.createElement('table');
     bodyDiv.appendChild(table);
     this.el.appendChild(bodyDiv);
     this.bodyTable = table;
     $(this.el).children("div.head").children("table").children("tbody").children("tr").children("td").each(function() {
         var columnName = $(this).attr('data-column-name');
         if (columnName !== undefined) {
-            self.gridColumns[columnName] = self.createColumn(columnName,this);
+            self.gridColumns[columnName] = self.createColumn(columnName, this);
         }
     });
 };
@@ -61,8 +65,8 @@ GridWidget.prototype.createColumn = function(fieldName,headerCell) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.createBodyRow = function(i) {
-    var bodyRow = document.createElement("tr");
-    bodyRow.qI = i;
+    var bodyRow = document.createElement('tr');
+    bodyRow.qI        = i;
     bodyRow.bodyCells = {};
     for (var columnName in this.gridColumns) {
         var bodyCell = this.createBodyCell(columnName);
@@ -70,9 +74,17 @@ GridWidget.prototype.createBodyRow = function(i) {
         bodyRow.appendChild(bodyCell);
         bodyRow.bodyCells[columnName] = bodyCell;
     }
-    bodyRow.appendChild(document.createElement("td"));
-    QForms.insertNewNodeAt(this.bodyTable,bodyRow,i);
+    bodyRow.appendChild(document.createElement('td'));
+    QForms.insertNewNodeAt(this.bodyTable, bodyRow, i);
     return bodyRow;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+GridWidget.prototype.removeBodyRows = function() {
+    this.selectedBodyRow  = null;
+    this.selectedBodyCell = null;
+    $(this.bodyTable).empty();
+    this.bodyTable.scrollTop = 0;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +153,7 @@ GridWidget.prototype.onEscPress = function(bodyCell) {
 GridWidget.prototype.selectBodyCell = function(bodyCell) {
     this.unselectBodyCellIfSelected();
     bodyCell.classList.add("active");
-    this.selectedBodyCell = bodyCell;
+    this.selectedBodyCell   = bodyCell;
     this.selectedColumnName = bodyCell.qFieldName;
 };
 
