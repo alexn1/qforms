@@ -84,12 +84,11 @@ function handle(req, res, next, application) {
                 var actions = [
                     'page',
                     'update',
-                    'refill',
                     'insert',
+                    'frame',
                     '_delete',
                     '_call',
-                    'logout',
-                    'frame'
+                    'logout'
                 ];
 
                 if (actions.indexOf(req.body.action) !== -1) {
@@ -231,44 +230,12 @@ function update(req, res, next, application) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function refill(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
-        params   : req.body.params,
-        querytime : {
-            params : {}
-        }
-    };
-    if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
-    }
-    var getDataSource = function(callback) {
-        if (req.body.page) {
-            application.getPage(req.body.page, function(page) {
-                if (req.body.form) {
-                    callback(page.forms[req.body.form].dataSources[req.body.ds]);
-                } else {
-                    callback(page.dataSources[req.body.ds]);
-                }
-            });
-        } else {
-            callback(application.dataSources[req.body.ds]);
-        }
-    };
-    getDataSource(function(dataSource) {
-        dataSource.refill(args, function(response) {
-            res.json(response);
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var args = {
         params   : req.body.params,
-        querytime : {
-            params : {}
+        querytime: {
+            params: {}
         }
     };
     if (req.session.username && req.session.username[route]) {

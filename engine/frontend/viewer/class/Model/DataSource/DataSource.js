@@ -167,6 +167,16 @@ DataSource.prototype.onTableUpdated = function(eventArg) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.refill = function(params) {
+    // if on first frame, just refresh, else change frame to first
+    if (this.offset === 0) {
+        this.refresh(params);
+    } else {
+        this.frame(params, 1);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.refresh = function(params) {
     var page = this.getPage();
     var form = this.getForm();
@@ -175,7 +185,7 @@ DataSource.prototype.refresh = function(params) {
         _params['@offset'] = this.offset;
     }
     var args = {
-        action: 'refill',
+        action: 'frame',
         page  : (page !== null ? page.name : ''),
         form  : (form !== null ? form.name : ''),
         ds    : this.name,
@@ -198,14 +208,7 @@ DataSource.prototype.refresh = function(params) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refill = function(params) {
-    if (this.offset === 0) {
-        this.refresh(params);
-    } else {
-        this.frame(params, 1);
-    }
-};
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.frame = function(params, frame) {
@@ -213,7 +216,9 @@ DataSource.prototype.frame = function(params, frame) {
     var page = this.getPage();
     var form = this.getForm();
     var _params = QForms.merge(params, this.params);
-    _params['@offset'] = this.offset;
+    if (this.limit) {
+        _params['@offset'] = this.offset;
+    }
     var args = {
         action: 'frame',
         page  : (page !== null ? page.name : ''),
@@ -223,7 +228,7 @@ DataSource.prototype.frame = function(params, frame) {
     };
     var self = this;
     QForms.doHttpRequest(this, args, function(data) {
-        var vals = this.getKeysAndChilds(data.rows);
+        var vals = self.getKeysAndChilds(data.rows);
         self.rowsByKey = vals.rowsByKey;
         self.childs    = vals.childs;
         self.eventNewFrame.fire(new QForms.EventArg(this));

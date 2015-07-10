@@ -83,15 +83,6 @@ DataSourceController.prototype.fill = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.refill = function(args, callback) {
-    this.select(args, function(rows) {
-        callback({
-            rows: rows
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.frame = function(args, callback) {
     if (this.data['@attributes'].limit) {
         args.params['@limit'] = parseInt(this.data['@attributes'].limit);

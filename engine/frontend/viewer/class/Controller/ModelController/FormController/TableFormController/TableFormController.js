@@ -104,7 +104,6 @@ TableFormController.prototype.onPreviousClick = function(ctrl) {
 TableFormController.prototype.onGotoChange = function(ctrl) {
     var frame = parseInt(ctrl.value)
     this.model.frame(frame);
-    console.log(ctrl.value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
