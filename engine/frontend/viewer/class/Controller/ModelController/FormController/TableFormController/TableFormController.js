@@ -12,7 +12,10 @@ function TableFormController(model, view, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.init = function() {
-    FormController.prototype.init.call(this);
+    TableFormController.super_.prototype.init.call(this);
+
+    this.model.eventRefilled.subscribe(this, 'onRefilled');
+
     var self = this;
     $(this.view).find("button.new").click(function() {
         self.onNewClick(this);
@@ -20,26 +23,20 @@ TableFormController.prototype.init = function() {
     $(this.view).find("button.delete").click(function() {
         self.onDeleteClick(this);
     });
-    this.framesCount = this.model.dataSource.getFramesCount();
-    if (this.framesCount) {
-        $(this.view).find("button.next").click(function() {
-            self.onNextClick(this);
-        });
-        $(this.view).find("button.previous").click(function() {
-            self.onPreviousClick(this);
-        });
-        this.$goto = $(this.view).find("select.goto");
-        this.$goto.change(function() {
-            self.onGotoChange(this);
-        });
-        for (var i = 1; i <= this.framesCount; i++) {
-            var option = $('<option></option>');
-            option.val(i);
-            option.html(i);
-            this.$goto.append(option);
-        }
-        $(this.view).find(".paging").css('display', 'block');
-    }
+
+    $(this.view).find("button.next").click(function() {
+        self.onNextClick(this);
+    });
+    $(this.view).find("button.previous").click(function() {
+        self.onPreviousClick(this);
+    });
+    this.$goto = $(this.view).find("select.goto");
+    this.$goto.change(function() {
+        self.onGotoChange(this);
+    });
+
+
+
 
     var gridSelector = '#{pageId}_{formName}_GridWidget'.template({
         pageId  : this.model.page.id,
@@ -58,12 +55,39 @@ TableFormController.prototype.deinit = function() {
     this.model.page.eventShow.unsubscribe(this,"onShowPage");
     this.grid.eventBodyCellDblClick.unsubscribe(this,"onGridCellDblClick");
     this.grid.deinit();
-    FormController.prototype.deinit.call(this);
+    this.model.eventRefilled.unsubscribe(this, 'onRefilled');
+    TableFormController.super_.prototype.deinit.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.fill = function() {
-    FormController.prototype.fill.call(this);
+    TableFormController.super_.prototype.fill.call(this);
+    this.framesCount = this.model.dataSource.getFramesCount();
+    if (this.framesCount) {
+        for (var i = 1; i <= this.framesCount; i++) {
+            var option = $('<option></option>');
+            option.val(i);
+            option.html(i);
+            this.$goto.append(option);
+        }
+        $(this.view).find(".paging").css('display', 'block');
+    }
+    this.grid.fill();
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TableFormController.prototype.onRefilled = function(ea) {
+    this.grid.clear();
+    this.framesCount = this.model.dataSource.getFramesCount();
+    if (this.framesCount) {
+        this.$goto.empty();
+        for (var i = 1; i <= this.framesCount; i++) {
+            var option = $('<option></option>');
+            option.val(i);
+            option.html(i);
+            this.$goto.append(option);
+        }
+    }
     this.grid.fill();
 };
 

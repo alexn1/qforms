@@ -10,7 +10,7 @@ function DataSource(name, parent, data) {
     this.offset = 0;
     this.limit  = data.limit;
     this.count  = data.count;
-    this.fullTableName = this.data.database + "." + this.data.table;
+    this.fullTableName = this.data.database + '.' + this.data.table;
     this.insertRow = null;
     this.updateRow = null;
     this.rowsByKey = {};						// for row search by key
@@ -40,7 +40,7 @@ DataSource.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.deinit = function() {
-    if (this.data.table !== "") {
+    if (this.data.table !== '') {
         this.getApp().unsubDsFromTableUpdated(this);
     }
 };
@@ -85,7 +85,7 @@ DataSource.prototype.getFramesCount = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setValue = function(row,column,value) {
     row[column] = value;
-    if (this.data.table !== "") {
+    if (this.data.table !== '') {
         if (this.insertRow === null) {
             this.updateRow = row;
         }
@@ -137,7 +137,7 @@ DataSource.prototype.splitKey = function(key) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.update = function(callbak) {
-    if (this.data.table === "") {
+    if (this.data.table === '') {
         return;
     }
     if (this.insertRow !== null) {
@@ -147,7 +147,7 @@ DataSource.prototype.update = function(callbak) {
         return;
     }
     var params = {
-        action:"update",
+        action:'update',
         page:this.form.page.name,
         form:this.form.name,
         ds:this.name,
@@ -167,17 +167,43 @@ DataSource.prototype.onTableUpdated = function(eventArg) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refill = function(params) {
-    // if on first frame, just refresh, else change frame to first
-    if (this.offset === 0) {
-        this.refresh(params);
-    } else {
-        this.frame(params, 1);
-    }
+DataSource.prototype.refill = function(params, callback) {
+    //this.frame(params, 1);
+
+    this.offset = 0;
+    var self = this;
+    this._getData(params, function(data) {
+        self.count = data.count;
+        var vals = self.getKeysAndChilds(data.rows);
+        self.rowsByKey = vals.rowsByKey;
+        self.childs    = vals.childs;
+        callback();
+    });
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.refresh = function(params) {
+    var self = this;
+    this._getData(params, function(data) {
+        var rows = data.rows;
+        if (!(rows instanceof Array)) {
+            throw new Error('rows must be array.');
+        }
+        if (self.data.dumpFirstRowToParams === 'true') {
+            self.dumpFirstRowToParams(rows);
+        }
+        var _old = self;
+        var _new = self.getKeysAndChilds(rows);		// generate hash table with new keys
+        self.sync(_old, _new, '[null]');
+        //console.log(self.childs);
+        // data source has been updated
+        self.eventUpdated.fire(new QForms.EventArg(self));
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype._getData = function(params, callback) {
     var page = this.getPage();
     var form = this.getForm();
     var _params = QForms.merge(params, this.params);
@@ -192,42 +218,15 @@ DataSource.prototype.refresh = function(params) {
         params: _params
     };
     QForms.doHttpRequest(this, args, function(data) {
-        var rows = data.rows;
-        if (!(rows instanceof Array)) {
-            throw new Error("rows must be array.");
-        }
-        if (this.data.dumpFirstRowToParams === "true") {
-            this.dumpFirstRowToParams(rows);
-        }
-        var _old = this;
-        var _new = this.getKeysAndChilds(rows);		// generate hash table with new keys
-        this.sync(_old, _new, '[null]');
-        //console.log(this.childs);
-        // data source has been updated
-        this.eventUpdated.fire(new QForms.EventArg(this));
+        callback(data);
     });
 };
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.frame = function(params, frame) {
     this.offset = (frame - 1) * this.limit;
-    var page = this.getPage();
-    var form = this.getForm();
-    var _params = QForms.merge(params, this.params);
-    if (this.limit) {
-        _params['@offset'] = this.offset;
-    }
-    var args = {
-        action: 'frame',
-        page  : (page !== null ? page.name : ''),
-        form  : (form !== null ? form.name : ''),
-        ds    : this.name,
-        params: _params
-    };
     var self = this;
-    QForms.doHttpRequest(this, args, function(data) {
+    this._getData(params, function(data) {
         var vals = self.getKeysAndChilds(data.rows);
         self.rowsByKey = vals.rowsByKey;
         self.childs    = vals.childs;
@@ -429,7 +428,7 @@ DataSource.prototype.fireRemoveRow = function(key) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireNewRow = function(i,parentKey,key) {
-    //console.log("fireNewRow: " + i);
+    //console.log('fireNewRow: ' + i);
     var ea = new QForms.EventArg(this);
     ea.i = i;
     ea.parentKey = parentKey;
@@ -449,7 +448,7 @@ DataSource.prototype.fireMoveRow = function(oldIndex,newIndex,key,parentKey) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex) {
-    //console.log("fireGoneRow");
+    //console.log('fireGoneRow');
     var ea = new QForms.EventArg(this);
     ea.parentKey = parentKey;
     ea.key = key;
@@ -460,7 +459,7 @@ DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex) {
-    //console.log("fireComeRow");
+    //console.log('fireComeRow');
     var ea = new QForms.EventArg(this);
     ea.parentKey = parentKey;
     ea.key = key;
@@ -472,11 +471,11 @@ DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.insert = function(row,callback) {
-    if (this.data.table === "") {
+    if (this.data.table === '') {
         return;
     }
     var args = {
-        action:"insert",
+        action:'insert',
         page:this.form.page.name,
         form:this.form.name,
         ds:this.name,
@@ -500,7 +499,7 @@ DataSource.prototype.insert = function(row,callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(key) {
-    if (this.data.table === "") {
+    if (this.data.table === '') {
         return;
     }
     // check if removed row has child rows
@@ -510,7 +509,7 @@ DataSource.prototype.delete = function(key) {
         return;
     }
     var args = {
-        action:"_delete",
+        action:'_delete',
         page:this.form.page.name,
         form:this.form.name,
         ds:this.name,
@@ -524,7 +523,7 @@ DataSource.prototype.delete = function(key) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newRow = function(row) {
     if (this.data.rows.length > 0) {
-        throw new Error("Rows can be added to empty data sources only in new mode.");
+        throw new Error('Rows can be added to empty data sources only in new mode.');
     }
     this.insertRow = row;
 };
@@ -567,7 +566,7 @@ DataSource.prototype.dumpFirstRowToParams = function(rows) {
         var row = rows[0];
         var ns = this.getNamespace();
         for (var column in row) {
-            var name = ns + "." + column;
+            var name = ns + '.' + column;
             var value = row[column];
             page.params[name] = value;
         }
@@ -579,9 +578,9 @@ DataSource.prototype.getNamespace = function() {
     var form = this.getForm();
     var page = this.getPage();
     if (form !== null) {
-        return this.form.page.name + "." + this.form.name + "." + this.name;
+        return this.form.page.name + '.' + this.form.name + '.' + this.name;
     } else if (page !== null) {
-        return this.page.name + "." + this.name;
+        return this.page.name + '.' + this.name;
     } else {
         this.name;
     }

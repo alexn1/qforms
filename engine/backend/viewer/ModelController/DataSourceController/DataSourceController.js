@@ -87,10 +87,23 @@ DataSourceController.prototype.frame = function(args, callback) {
     if (this.data['@attributes'].limit) {
         args.params['@limit'] = parseInt(this.data['@attributes'].limit);
     }
+    var self = this;
     this.select(args, function(rows) {
-        callback({
-            rows: rows
-        });
+        if (self.data['@attributes'].limit) {
+            if (!self.data['@attributes'].countQuery) {
+                throw new Error('[' + self.getFullName() + ']: countQuery empty.');
+            }
+            self.selectCount(args, function(count) {
+                callback({
+                    rows : rows,
+                    count: parseInt(count)
+                });
+            });
+        } else {
+            callback({
+                rows: rows
+            });
+        }
     });
 };
 

@@ -15,6 +15,7 @@ function Form(name, parent, data) {
     // event
     this.eventChanged  = new QForms.Event(this);
     this.eventUpdated  = new QForms.Event(this);
+    this.eventRefilled = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +100,10 @@ Form.prototype.update = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.refill = function() {
-    this.dataSources.default.refill(this.page.params);
+    var self = this;
+    this.dataSources.default.refill(this.page.params, function() {
+        self.eventRefilled.fire(new QForms.EventArg(self));
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
