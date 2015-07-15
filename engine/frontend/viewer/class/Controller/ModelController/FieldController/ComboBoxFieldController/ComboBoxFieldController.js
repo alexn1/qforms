@@ -56,7 +56,7 @@ ComboBoxFieldController.prototype.fill = function(row, view) {
 ComboBoxFieldController.prototype.getValue = function (view) {
     switch (this.model.form.data.class) {
         case 'RowForm':
-            return view.firstElementChild.value;
+            return (view.firstElementChild.selectedIndex === 0) ? null : view.firstElementChild.value;
             break;
         case 'TableForm':
             return view.firstElementChild.value;
