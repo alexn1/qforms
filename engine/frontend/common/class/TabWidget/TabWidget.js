@@ -23,18 +23,18 @@ function TabWidget(el) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.init = function() {
-    this.tabList    = $(this.el).children("ul").get(0);
-    this.pageList   = $(this.el).children("div").get(0);
-    this.activeTab  = $(this.tabList).children("li.active").get(0);
-    this.activePage = $(this.pageList).children("div.active").get(0);
+    this.tabList    = $(this.el).children('ul').get(0);
+    this.pageList   = $(this.el).children('div').get(0);
+    this.activeTab  = $(this.tabList).children('li.active').get(0);
+    this.activePage = $(this.pageList).children('div.active').get(0);
     // read child elements and init tabs
     var self = this;
-    $(this.el).children("ul").children("li").each(function() {
+    $(this.el).children('ul').children('li').each(function() {
         self.initTab(this);
     });
     // if active tab is not set then first tab is selected
-    if ($(this.tabList).children("li").length > 0 && this.activeTab === undefined) {
-        this.selectTab($(this.tabList).children("li").get(0))
+    if ($(this.tabList).children('li').length > 0 && this.activeTab === undefined) {
+        this.selectTab($(this.tabList).children('li').get(0))
     }
 };
 
@@ -47,7 +47,7 @@ TabWidget.prototype.initTab = function(li) {
             self.selectTab(this);
         }
     });
-    $(li).children("span.close").each(function() {
+    $(li).children('span.close').each(function() {
         $(this).click(function(e) {
             self.onTabClosing(this.parentNode);
             e.stopPropagation();
@@ -67,12 +67,12 @@ TabWidget.prototype.onTabClosing = function(tab) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
-    caption = caption !== undefined ? caption : "";
+    caption = caption !== undefined ? caption : '';
     // li
-    var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace("{caption}",caption)).get(0);
+    var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}',caption)).get(0);
     li.onCloseCallback = onCloseCallback;
     // div
-    var div = document.createElement("div");
+    var div = document.createElement('div');
     div.appendChild(el);
     // append
     this.tabList.appendChild(li);
@@ -91,29 +91,29 @@ TabWidget.prototype.selectTab = function(tab,track) {
     if (this.activeTab === tab) {
         return;
     }
-    var index = $(this.tabList).children("li").index(tab);
+    var index = $(this.tabList).children('li').index(tab);
     if (index === -1 ) {
         throw new Error("Tab doesn't exists.");
     }
     var oldTab = this.activeTab;
-    tab.classList.add("active");
+    tab.classList.add('active');
     if (this.activeTab) {
-        this.activeTab.classList.remove("active");
+        this.activeTab.classList.remove('active');
     }
     // track option is used to store prev tab during opening new one
     // if new tab is closed then select prev tab
     // this option is used during new tab creation
-    if (track !== undefined && track && $(this.tabList).children("li").index(this.activeTab) !== -1) {
+    if (track !== undefined && track && $(this.tabList).children('li').index(this.activeTab) !== -1) {
         this.prevActiveTab = this.activeTab;
     } else {
         this.prevActiveTab = null;
     }
     this.activeTab = tab;
     // page
-    var page = $(this.pageList).children("div").get(index);
-    page.classList.add("active");
+    var page = $(this.pageList).children('div').get(index);
+    page.classList.add('active');
     if (this.activePage) {
-        this.activePage.classList.remove("active");
+        this.activePage.classList.remove('active');
     }
     this.activePage = page;
     // events
@@ -129,8 +129,8 @@ TabWidget.prototype.selectTab = function(tab,track) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.closeTab = function(tab) {
-    var index = $(this.tabList).children("li").index(tab);
-    var page = $(this.pageList).children("div").get(index);
+    var index = $(this.tabList).children('li').index(tab);
+    var page = $(this.pageList).children('div').get(index);
     this.tabList.removeChild(tab);
     if (tab === this.prevActiveTab) {
         this.prevActiveTab = null;
@@ -144,8 +144,8 @@ TabWidget.prototype.closeTab = function(tab) {
         if (this.prevActiveTab !== null) {
             this.selectTab(this.prevActiveTab);
         } else {
-            if ($(this.tabList).children("li").length > 0) {
-                this.selectTab($(this.tabList).children("li").last().get(0));
+            if ($(this.tabList).children('li').length > 0) {
+                this.selectTab($(this.tabList).children('li').last().get(0));
             }
         }
     }

@@ -13,16 +13,16 @@ function DataSource(data, parent) {
 DataSource.create = function(parent, params, callback) {
     if (parent instanceof Form) {
         var form = parent;
-        params["page"]  = form.page.pageLink.data["@attributes"].fileName;
-        params["form"]  = form.data["@attributes"].name;
+        params['page']  = form.page.pageLink.data['@attributes'].fileName;
+        params['form']  = form.data['@attributes'].name;
     }
     if (parent instanceof Page) {
         var page = parent;
-        params["page"]  = page.pageLink.data["@attributes"].fileName;
+        params['page']  = page.pageLink.data['@attributes'].fileName;
     }
     var args = {
-        controller:"DataSource",
-        action:"_new",
+        controller:'DataSource',
+        action:'_new',
         params:params
     };
     QForms.doHttpRequest(this, args, function(data) {
@@ -34,25 +34,25 @@ DataSource.create = function(parent, params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.setValue = function(name, value, callback) {
-    //console.log(name + " = " + value);
+    //console.log(name + ' = ' + value);
     var args = {
-        controller:"DataSource",
-        action:"save",
+        controller:'DataSource',
+        action:'save',
         params:{
-            dataSource:this.data["@attributes"].name,
+            dataSource:this.data['@attributes'].name,
             attr:name,
             value:value
         }
     };
     if (this.parent instanceof Page) {
-        args.params.pageFileName = this.parent.pageLink.data["@attributes"].fileName;
+        args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
     }
     if (this.parent instanceof Form) {
-        args.params.form = this.parent.data["@attributes"].name;
-        args.params.pageFileName = this.parent.page.pageLink.data["@attributes"].fileName;
+        args.params.form = this.parent.data['@attributes'].name;
+        args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
     }
     QForms.doHttpRequest(this,args,function(data){
-        this.data["@attributes"][name] = value;
+        this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
         }
@@ -62,18 +62,18 @@ DataSource.prototype.setValue = function(name, value, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(callback) {
     var args = {
-        controller:"DataSource",
-        action:"delete",
+        controller:'DataSource',
+        action:'delete',
         params:{
-            dataSource:this.data["@attributes"].name
+            dataSource:this.data['@attributes'].name
         }
     };
     if (this.parent instanceof Page) {
-        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+        args.params.page = this.parent.pageLink.data['@attributes'].fileName;
     }
     if (this.parent instanceof Form) {
-        args.params.form = this.parent.data["@attributes"].name;
-        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+        args.params.form = this.parent.data['@attributes'].name;
+        args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
     }
     QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
@@ -86,18 +86,18 @@ DataSource.prototype.delete = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.moveUp = function(callback) {
     var args = {
-        controller:"DataSource",
-        action:"moveUp",
+        controller:'DataSource',
+        action:'moveUp',
         params:{
-            dataSource:this.data["@attributes"].name
+            dataSource:this.data['@attributes'].name
         }
     };
     if (this.parent instanceof Page) {
-        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+        args.params.page = this.parent.pageLink.data['@attributes'].fileName;
     }
     if (this.parent instanceof Form) {
-        args.params.form = this.parent.data["@attributes"].name;
-        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+        args.params.form = this.parent.data['@attributes'].name;
+        args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
     }
     QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
@@ -109,18 +109,18 @@ DataSource.prototype.moveUp = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.moveDown = function(callback) {
     var args = {
-        controller:"DataSource",
-        action:"moveDown",
+        controller:'DataSource',
+        action:'moveDown',
         params:{
-            dataSource:this.data["@attributes"].name
+            dataSource:this.data['@attributes'].name
         }
     };
     if (this.parent instanceof Page) {
-        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+        args.params.page = this.parent.pageLink.data['@attributes'].fileName;
     }
     if (this.parent instanceof Form) {
-        args.params.form = this.parent.data["@attributes"].name;
-        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
+        args.params.form = this.parent.data['@attributes'].name;
+        args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
     }
     QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
@@ -132,19 +132,19 @@ DataSource.prototype.moveDown = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newKeyColumn = function(name, callback) {
     var args = {
-        controller:"KeyColumn",
-        action:"_new",
+        controller:'KeyColumn',
+        action:'_new',
         params:{
-            dataSource:this.data["@attributes"].name,
+            dataSource:this.data['@attributes'].name,
             name:name
         }
     };
     if (this.parent instanceof Form) {
-        args.params.page = this.parent.page.pageLink.data["@attributes"].fileName;
-        args.params.form = this.parent.data["@attributes"].name;
+        args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+        args.params.form = this.parent.data['@attributes'].name;
     }
     if (this.parent instanceof Page) {
-        args.params.page = this.parent.pageLink.data["@attributes"].fileName;
+        args.params.page = this.parent.pageLink.data['@attributes'].fileName;
     }
     QForms.doHttpRequest(this,args,function(data){
         if (callback) {
@@ -156,12 +156,12 @@ DataSource.prototype.newKeyColumn = function(name, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.newParentKeyColumn = function(name,callback) {
     var args = {
-        controller:"ParentKeyColumn",
-        action:"_new",
+        controller:'ParentKeyColumn',
+        action:'_new',
         params:{
-            page:this.parent.page.pageLink.data["@attributes"].fileName,
-            form:this.parent.data["@attributes"].name,
-            dataSource:this.data["@attributes"].name,
+            page:this.parent.page.pageLink.data['@attributes'].fileName,
+            form:this.parent.data['@attributes'].name,
+            dataSource:this.data['@attributes'].name,
             name:name
         }
     };
@@ -175,8 +175,8 @@ DataSource.prototype.newParentKeyColumn = function(name,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getView = function(view,callback) {
     var args = {
-        controller:"DataSource",
-        action:"getView",
+        controller:'DataSource',
+        action:'getView',
         params:{
             view:view
         }

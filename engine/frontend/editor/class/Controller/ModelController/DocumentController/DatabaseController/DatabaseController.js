@@ -20,7 +20,7 @@ function DatabaseController(model, item, applicationController) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createTree = function() {
     // params
-    this.paramsItem = this.item.addItem("Params");
+    this.paramsItem = this.item.addItem('Params');
     if (this.model.data.params) {
         for (var name in this.model.data.params) {
             var paramData = this.model.data.params[name];
@@ -41,19 +41,19 @@ DatabaseController.prototype.addParamItem = function(paramData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.getActions = function() {
     return [
-        {"action":"newParam","caption":"New Param"},
-        //{"action":"","caption":"-"},
-        {"action":"delete","caption":"Delete"}
+        {'action':'newParam','caption':'New Param'},
+        //{'action':'','caption':'-'},
+        {'action':'delete','caption':'Delete'}
     ];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.doAction = function(action) {
     switch (action) {
-        case "newParam":
+        case 'newParam':
             this.actionNewParam();
             break;
-        case "delete":
+        case 'delete':
             this.delete();
             break;
     }
@@ -63,7 +63,7 @@ DatabaseController.prototype.doAction = function(action) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.actionNewParam = function() {
     var self = this;
-    Param.prototype.getView("new.html",function(result){
+    Param.prototype.getView('new.html',function(result){
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -71,9 +71,9 @@ DatabaseController.prototype.actionNewParam = function() {
             self.model.newParam(paramName,function(paramData) {
                 self.addParamItem(paramData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='paramName']").focus();
     });
 };
@@ -81,9 +81,9 @@ DatabaseController.prototype.actionNewParam = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createTab = function(docs) {
-    var name = this.model.data["@attributes"].name;
+    var name = this.model.data['@attributes'].name;
     var self = this;
-    this.model.getView("DatabaseView/DatabaseView.html",function(result) {
+    this.model.getView('DatabaseView/DatabaseView.html',function(result) {
         var $div = $(result.view);
         self.initView($div,result.data);
         self.tab = docs.createTab($div.get(0), name, function(tab) {
@@ -98,9 +98,9 @@ DatabaseController.prototype.createTab = function(docs) {
 DatabaseController.prototype.initView = function($div,data) {
     this.tables = data.tables;
     this.tableView = data.tableView;
-    this.treeTables = TreeWidget_createObject($div.find(".tcTables").get(0));
-    this.$divTableInfo = $div.find(".divTableInfo");
-    this.treeTables.eventSelect.subscribe(this,"onTableSelect");
+    this.treeTables = TreeWidget_createObject($div.find('.tcTables').get(0));
+    this.$divTableInfo = $div.find('.divTableInfo');
+    this.treeTables.eventSelect.subscribe(this,'onTableSelect');
     for (var i=0;i<data.tables.length;i++) {
         var row = data.tables[i];
         this.treeTables.addItem(row[0]);
@@ -116,7 +116,7 @@ DatabaseController.prototype.onTableSelect = function(e) {
         var html = QForms.render(self.tableView,data);
         self.$divTableInfo.empty();
         self.$divTableInfo.append(html);
-        self.$btnCreateForm = self.$divTableInfo.find(".btnCreateForm");
+        self.$btnCreateForm = self.$divTableInfo.find('.btnCreateForm');
         self.$btnCreateForm.click(function() {
             self.createForm();
         });
@@ -126,7 +126,7 @@ DatabaseController.prototype.onTableSelect = function(e) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createForm = function() {
     var self = this;
-    this.model.getView("newForm.ejs",function(result){
+    this.model.getView('newForm.ejs',function(result){
         var html = QForms.render(result.view,{
             tables:self.tables,
             tableName:self.tableName,
@@ -147,7 +147,7 @@ DatabaseController.prototype.createForm = function() {
                     className:formClass,
                     formName:formName,
                     formCaption:formCaption,
-                    databaseName:self.model.data["@attributes"].name,
+                    databaseName:self.model.data['@attributes'].name,
                     tableName:self.tableName,
                     tableColumns:self.tableInfo
                 }
@@ -156,7 +156,7 @@ DatabaseController.prototype.createForm = function() {
                 var params = formWizard.getFormParams();
                 pageItem.ctrl.model.newForm(params,function(formData) {
                     pageItem.ctrl.addFormItem(formData).select();
-                    $("#modal").modal("hide");
+                    $('#modal').modal('hide');
                 });
             };
             if (pageItem.ctrl instanceof PageLinkController) {
@@ -165,7 +165,7 @@ DatabaseController.prototype.createForm = function() {
                 todo();
             }
         });
-        $("#modal").modal("show");
+        $('#modal').modal('show');
         $("#modal input[id='formPage']").focus();
     });
 };

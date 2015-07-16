@@ -14,7 +14,7 @@ function FormController(model, item) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.createTree = function() {
     // dataSoruces
-    this.itemDataSources = this.item.addItem("Data Sources");
+    this.itemDataSources = this.item.addItem('Data Sources');
     if (this.model.data.dataSources) {
         for (var name in this.model.data.dataSources) {
             var dataSourceData = this.model.data.dataSources[name];
@@ -22,14 +22,14 @@ FormController.prototype.createTree = function() {
         }
     }
     // fields
-    this.itemFields = this.item.addItem("Fields");
+    this.itemFields = this.item.addItem('Fields');
     if (this.model.data.fields) {
         for (var name in this.model.data.fields) {
             var fieldData = this.model.data.fields[name];
             this.addFieldItem(fieldData);
         }
     }
-    this.itemControls = this.item.addItem("Controls");
+    this.itemControls = this.item.addItem('Controls');
     if (this.model.data.controls) {
         for (var name in this.model.data.controls) {
             var controlData = this.model.data.controls[name];
@@ -69,14 +69,14 @@ FormController.prototype.addControlItem = function(controlData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getActions = function() {
     return [
-        {"action":"newDataSource","caption":"New Data Source"},
-        {"action":"newField","caption":"New Field"},
-        {"action":"newControl","caption":"New Control"},
-        {"action":"","caption":"-"},
-        {"action":"moveUp","caption":"Move Up"},
-        {"action":"moveDown","caption":"Move Down"},
-        {"action":"","caption":"-"},
-        {"action":"delete","caption":"Delete"}
+        {'action':'newDataSource','caption':'New Data Source'},
+        {'action':'newField','caption':'New Field'},
+        {'action':'newControl','caption':'New Control'},
+        {'action':'','caption':'-'},
+        {'action':'moveUp','caption':'Move Up'},
+        {'action':'moveDown','caption':'Move Down'},
+        {'action':'','caption':'-'},
+        {'action':'delete','caption':'Delete'}
     ];
 };
 
@@ -84,16 +84,16 @@ FormController.prototype.getActions = function() {
 FormController.prototype.doAction = function(action) {
     var self = this;
     switch (action) {
-        case "newDataSource":
+        case 'newDataSource':
             this.actionNewDataSource();
             break;
-        case "newField":
+        case 'newField':
             this.actionNewField();
             break;
-        case "newControl":
+        case 'newControl':
             this.actionNewControl();
             break;
-        case "delete":
+        case 'delete':
             this.delete();
             break;
         case 'moveUp':
@@ -112,7 +112,7 @@ FormController.prototype.doAction = function(action) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewDataSource = function() {
     var self = this;
-    DataSource.prototype.getView("new.html", function(result) {
+    DataSource.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -125,9 +125,9 @@ FormController.prototype.actionNewDataSource = function() {
             self.model.newDataSource(params,function(dataSourceData) {
                 self.addDataSourceItem(dataSourceData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
     });
 };
@@ -135,7 +135,7 @@ FormController.prototype.actionNewDataSource = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewField = function() {
     var self = this;
-    Field.prototype.getView("new.html", function(result) {
+    Field.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -150,9 +150,9 @@ FormController.prototype.actionNewField = function() {
             self.model.newField(params,function(fieldData) {
                 self.addFieldItem(fieldData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
     });
 };
@@ -160,7 +160,7 @@ FormController.prototype.actionNewField = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.actionNewControl = function() {
     var self = this;
-    Control.prototype.getView("new.html", function(result) {
+    Control.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#modal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#modal button[name='create']").click(function() {
@@ -172,9 +172,9 @@ FormController.prototype.actionNewControl = function() {
             self.model.newControl(params,function(controlData) {
                 self.addControlItem(controlData).select();
             });
-            $("#modal").modal("hide");
+            $('#modal').modal('hide');
         });
-        $("#modal").modal("show");
+        $('#modal').modal('show');
         $("#modal input[id='name']").focus();
     });
 };
@@ -182,11 +182,11 @@ FormController.prototype.actionNewControl = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getPropList = function() {
-    var list = this.model.data["@attributes"];
+    var list = this.model.data['@attributes'];
     var options = {};
-    options["editMethod"] = ["disabled","table","form"];
-    options["newRowMode"] = ["disabled","oneclick","editform","createform","oneclick editform"];
-    options["deleteRowMode"] = ["disabled","enabled"];
+    options['editMethod'] = ['disabled','table','form'];
+    options['newRowMode'] = ['disabled','oneclick','editform','createform','oneclick editform'];
+    options['deleteRowMode'] = ['disabled','enabled'];
     return {list:list,options:options};
 };
 
@@ -194,7 +194,7 @@ FormController.prototype.getPropList = function() {
 FormController.prototype.setProperty = function(name,value) {
     var self = this;
     this.model.setValue(name,value,function() {
-        if (name === "name") {
+        if (name === 'name') {
             self.item.text.innerHTML = self.getCaption(self.model.data);
         }
     });
@@ -203,7 +203,7 @@ FormController.prototype.setProperty = function(name,value) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getCaption = function(data) {
     var caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
-        .replace("{name}",data["@attributes"].name)
-        .replace("{class}",data["@class"]);
+        .replace('{name}',data['@attributes'].name)
+        .replace('{class}',data['@class']);
     return caption;
 };

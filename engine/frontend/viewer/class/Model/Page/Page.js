@@ -32,16 +32,16 @@ Page.prototype.init = function() {
     }
     for (var formName in this.data.forms) {
         var form = this.data.forms[formName];
-        this.forms[formName] = eval("new " + form.class + "(formName,this,form)");
+        this.forms[formName] = eval('new ' + form.class + '(formName,this,form)');
         this.forms[formName].init();
-        this.forms[formName].eventChanged.subscribe(this,"onFormChanged");
-        this.forms[formName].eventUpdated.subscribe(this,"onFormUpdated");
+        this.forms[formName].eventChanged.subscribe(this,'onFormChanged');
+        this.forms[formName].eventUpdated.subscribe(this,'onFormUpdated');
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.deinit = function() {
-    //console.log("Page.prototype.deinit: " + this.name);
+    //console.log('Page.prototype.deinit: ' + this.name);
     if (this.deinited) {
         return;
     }
@@ -49,8 +49,8 @@ Page.prototype.deinit = function() {
         this.dataSources[dsName].deinit();
     }
     for (var formName in this.forms) {
-        this.forms[formName].eventChanged.unsubscribe(this,"onFormChanged");
-        this.forms[formName].eventUpdated.unsubscribe(this,"onFormUpdated");
+        this.forms[formName].eventChanged.unsubscribe(this,'onFormChanged');
+        this.forms[formName].eventUpdated.unsubscribe(this,'onFormUpdated');
         this.forms[formName].deinit();
     }
     this.app.untrackPage(this);

@@ -116,8 +116,8 @@ PageFile.prototype.newForm = function(params) {
     switch (_class) {
         case 'TableForm':
             data = {
-                "@class"        : 'TableForm',
-                "@attributes"   : {
+                '@class'        : 'TableForm',
+                '@attributes'   : {
                     name              : name,
                     caption           : params.caption ? params.caption : name,
                     editMethod        : 'disabled',
@@ -133,23 +133,23 @@ PageFile.prototype.newForm = function(params) {
             break;
         case 'RowForm':
             data = {
-                "@class":'RowForm',
-                "@attributes": {
-                    "name":name,
-                    "caption":params.caption ? params.caption : name
+                '@class':'RowForm',
+                '@attributes': {
+                    'name':name,
+                    'caption':params.caption ? params.caption : name
                 },
                 'dataSources' : {},
                 'fields' : {},
                 'controls' : {}
             };
             break;
-        case "TreeForm":
+        case 'TreeForm':
             data = {
-                "@class":"TreeForm",
-                "@attributes": {
-                    "name":name,
-                    "caption":(params.caption) && params.caption ? params.caption : name,
-                    "itemEditPage":''
+                '@class':'TreeForm',
+                '@attributes': {
+                    'name':name,
+                    'caption':(params.caption) && params.caption ? params.caption : name,
+                    'itemEditPage':''
                 },
                 'dataSources' : {},
                 'fields' : {},
@@ -173,14 +173,14 @@ PageFile.prototype.newFormControl = function(params) {
     }
     var data;
     switch (_class) {
-        case "ButtonControl":
+        case 'ButtonControl':
             data = {
-                "@class":"ButtonControl",
-                "@attributes": {
+                '@class':'ButtonControl',
+                '@attributes': {
             'name':name,
             'caption' : (params.caption) && params.caption ? params.caption : name,
-            'isVisible':"true",
-            'width':"0"
+            'isVisible':'true',
+            'width':'0'
                 }
             };
             break;
@@ -202,28 +202,28 @@ PageFile.prototype.newFormField = function(params) {
     }
     var data;
     switch (_class) {
-        case "TextBoxField":
+        case 'TextBoxField':
             data = TextBoxFieldEditor.createData(params);
             break;
-        case "LinkField":
+        case 'LinkField':
             data = LinkFieldEditor.createData(params);
             break;
-        case "ComboBoxField":
+        case 'ComboBoxField':
             data = ComboBoxFieldEditor.createData(params);
             break;
-        case "TextAreaField":
+        case 'TextAreaField':
             data = TextAreaFieldEditor.createData(params);
             break;
-        case "ImageField":
+        case 'ImageField':
             data = ImageFieldEditor.createData(params);
             break;
-        case "LabelField":
+        case 'LabelField':
             data = LabelFieldEditor.createData(params);
             break;
-        case "DatePickerField":
+        case 'DatePickerField':
             data = DatePickerFieldEditor.createData(params);
             break;
-        case "CheckBoxField":
+        case 'CheckBoxField':
             data = CheckBoxFieldEditor.createData(params);
             break;
     }
@@ -242,7 +242,7 @@ PageFile.prototype.newDataSource = function(params) {
     }
     var data;
     switch (_class) {
-        case "SqlDataSource":
+        case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;
         default:
@@ -264,7 +264,7 @@ PageFile.prototype.newFormDataSource = function(params) {
     }
     var data;
     switch (_class) {
-        case "SqlDataSource":
+        case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;
         default:
@@ -285,8 +285,8 @@ PageFile.prototype.newFormDataSouceKeyColumn = function(params) {
         throw  new Error('Key Column {name} already exist.'.replace('{name}', name));
     }
     return this.data.forms[form].dataSources[dataSource].keyColumns[name] = {
-        "@class":"KeyColumn",
-        "@attributes": {
+        '@class':'KeyColumn',
+        '@attributes': {
             'name':name
         }
     };
@@ -304,8 +304,8 @@ PageFile.prototype.newFormDataSouceParentKeyColumn = function(params) {
         throw new Error('Parent Key Column {name} already exist.'.replace('{name}', name));
     }
     return this.data.forms[form].dataSources[dataSource].parentKeyColumns[name] = {
-        "@class" : "ParentKeyColumn",
-        "@attributes" : {
+        '@class' : 'ParentKeyColumn',
+        '@attributes' : {
         'name' : name
         }
     };

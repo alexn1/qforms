@@ -13,7 +13,7 @@ function PageController(model,item,pageLink) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.createTree = function(callback) {
     // data sources
-    this.dataSourcesItem = this.item.addItem("Data Sources");
+    this.dataSourcesItem = this.item.addItem('Data Sources');
     if (this.model.data.dataSources) {
         for (var name in this.model.data.dataSources) {
             var dataSourceData = this.model.data.dataSources[name];
@@ -21,7 +21,7 @@ PageController.prototype.createTree = function(callback) {
         }
     }
     // forms
-    this.itemForms = this.item.addItem("Forms");
+    this.itemForms = this.item.addItem('Forms');
     if (this.model.data.forms) {
         for (var name in this.model.data.forms) {
             var formData = this.model.data.forms[name];
@@ -53,13 +53,13 @@ PageController.prototype.addDataSourceItem = function(dataSourceData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getActions = function() {
     return [
-        {"action":"newDataSource","caption":"New Data Source"},
-        {"action":"newForm","caption":"New Form"},
-        {"action":"","caption":"-"},
-        {"action":"moveUp","caption":"Move Up"},
-        {"action":"moveDown","caption":"Move Down"},
-        {"action":"","caption":"-"},
-        {"action":"delete","caption":"Delete"}
+        {'action':'newDataSource','caption':'New Data Source'},
+        {'action':'newForm','caption':'New Form'},
+        {'action':'','caption':'-'},
+        {'action':'moveUp','caption':'Move Up'},
+        {'action':'moveDown','caption':'Move Down'},
+        {'action':'','caption':'-'},
+        {'action':'delete','caption':'Delete'}
     ];
 };
 
@@ -67,13 +67,13 @@ PageController.prototype.getActions = function() {
 PageController.prototype.doAction = function(action) {
     var self = this;
     switch (action) {
-        case "newForm":
+        case 'newForm':
             this.actionNewForm();
             break;
         case 'newDataSource':
             this.newDataSourceAction();
             break;
-        case "delete":
+        case 'delete':
             this.delete();
             break;
         case 'moveUp':
@@ -94,7 +94,7 @@ PageController.prototype.doAction = function(action) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.actionNewForm = function() {
     var self = this;
-    Form.prototype.getView("new.html", function(result) {
+    Form.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -105,10 +105,10 @@ PageController.prototype.actionNewForm = function() {
             };
             self.model.newForm(params,function(formData) {
                 self.addFormItem(formData).select();
-                $("#myModal").modal("hide");
+                $('#myModal').modal('hide');
             });
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
     });
 };
@@ -116,7 +116,7 @@ PageController.prototype.actionNewForm = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.newDataSourceAction = function() {
     var self = this;
-    DataSource.prototype.getView("new.html", function(result) {
+    DataSource.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -129,9 +129,9 @@ PageController.prototype.newDataSourceAction = function() {
             DataSource.create(self.model, params, function(dataSourceData) {
                 self.addDataSourceItem(dataSourceData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
     });
 };
@@ -140,14 +140,14 @@ PageController.prototype.newDataSourceAction = function() {
 PageController.prototype.getPropList = function() {
     var propList = PageController.super_.prototype.getPropList.call(this);
     propList.list['menu']    = this.pageLink.data['@attributes']['menu'];
-    propList.list["startup"] = this.pageLink.data['@attributes']['startup'];
+    propList.list['startup'] = this.pageLink.data['@attributes']['startup'];
     propList.options['startup'] = ['true', 'false'];
     return propList;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.setProperty = function(name,value) {
-    if (name === "startup" || name === "menu") {
+    if (name === 'startup' || name === 'menu') {
         this.pageLink.setValue(name,value);
     } else  {
         ModelController.prototype.setProperty.call(this,name,value);

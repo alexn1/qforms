@@ -28,13 +28,13 @@ Form.prototype.init = function() {
     // fields
     for (var name in this.data.fields) {
         var field = this.data.fields[name];
-        this.fields[name] = eval("new {class}(name,this,field)".replace("{class}",field.class));
+        this.fields[name] = eval('new {class}(name,this,field)'.replace('{class}',field.class));
         this.fields[name].init();
     }
     // controls
     for (var name in this.data.controls) {
         var data = this.data.controls[name];
-        this.controls[name] = eval("new {class}(data,this)".replace("{class}",data.class));
+        this.controls[name] = eval('new {class}(data,this)'.replace('{class}',data.class));
         this.controls[name].init();
     }
     /*
@@ -45,15 +45,15 @@ Form.prototype.init = function() {
     }
     */
     this.dataSource = this.dataSources.default;
-    this.dataSource.eventChanged.subscribe(this,"onDataSourceChanged");
-    this.dataSource.eventUpdated.subscribe(this,"onDataSourceUpdated");
+    this.dataSource.eventChanged.subscribe(this,'onDataSourceChanged');
+    this.dataSource.eventUpdated.subscribe(this,'onDataSourceUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.deinit = function() {
     //console.log('Form.prototype.deinit: ' + this.name);
-    this.dataSource.eventChanged.unsubscribe(this,"onDataSourceChanged");
-    this.dataSource.eventUpdated.unsubscribe(this,"onDataSourceUpdated");
+    this.dataSource.eventChanged.unsubscribe(this,'onDataSourceChanged');
+    this.dataSource.eventUpdated.unsubscribe(this,'onDataSourceUpdated');
     for (var dsName in this.dataSources) {
         this.dataSources[dsName].deinit();
     }
@@ -76,7 +76,7 @@ Form.prototype.defaultValuesToRow = function(row) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
-    if (dataSource.name === "default") {
+    if (dataSource.name === 'default') {
         this.changed = true;
     }
 };
@@ -84,7 +84,7 @@ Form.prototype.onDataSourceChanged = function(eventArgs) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.onDataSourceUpdated = function(eventArgs) {
     var dataSource = eventArgs.object;
-    if (dataSource.name === "default") {
+    if (dataSource.name === 'default') {
         this.changed = false;
     }
 };
@@ -93,7 +93,7 @@ Form.prototype.onDataSourceUpdated = function(eventArgs) {
 Form.prototype.update = function() {
     var self = this;
     // during new row creation, set row key to page if is not opened yet
-    this.dataSources["default"].update(function(newKey) {
+    this.dataSources['default'].update(function(newKey) {
         if (!self.page.deinited) self.page.setKey(newKey);
     });
 };
@@ -108,7 +108,7 @@ Form.prototype.refill = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.executeAction = function(action,args) {
-    action.exec(args,{"form":this});
+    action.exec(args,{'form':this});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

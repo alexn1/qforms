@@ -12,8 +12,8 @@ function TreeForm(name,page,data) {
 //
 TreeForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
-    if (dataSource.name !== "default") return;
-    this.dataSources["default"].update();
+    if (dataSource.name !== 'default') return;
+    this.dataSources['default'].update();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ TreeForm.prototype.edit = function(row) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeForm.prototype.delete = function(row) {
     var key = this.dataSource.getRowKey(row);
-    this.dataSources["default"].delete(key);
+    this.dataSources['default'].delete(key);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ TreeForm.prototype.new = function(row) {
     this.openPage({
         name:this.data.itemEditPage,
         newMode:true,
-        params:QForms.keyToParams(key,"parentKey")
+        params:QForms.keyToParams(key,'parentKey')
     });
 };
 
@@ -46,6 +46,6 @@ TreeForm.prototype.newRoot = function() {
     this.openPage({
         name:this.data.itemEditPage,
         newMode:true,
-        params:{"parentKey":""}
+        params:{'parentKey':''}
     });
 };

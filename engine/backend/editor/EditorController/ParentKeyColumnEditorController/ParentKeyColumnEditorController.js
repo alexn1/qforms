@@ -38,7 +38,7 @@ ParentKeyColumnEditorController.prototype._new = function(params, callback) {
 ParentKeyColumnEditorController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
-            pageEditor.pageFile.setFormDataSourceParentKeyColumnAttr(params["form"], params['dataSource'], params["parentKeyColumn"], params["attr"], params["value"]);
+            pageEditor.pageFile.setFormDataSourceParentKeyColumnAttr(params['form'], params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
             pageEditor.pageFile.save(function() {
                 callback(null);
             });
@@ -50,7 +50,7 @@ ParentKeyColumnEditorController.prototype.save = function(params, callback) {
 ParentKeyColumnEditorController.prototype.delete = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
-            pageEditor.pageFile.deleteFormDataSourceParentKeyColumn(params["form"], params["dataSource"], params['parentKeyColumn']);
+            pageEditor.pageFile.deleteFormDataSourceParentKeyColumn(params['form'], params['dataSource'], params['parentKeyColumn']);
             pageEditor.pageFile.save(function() {
                 callback(null);
             });

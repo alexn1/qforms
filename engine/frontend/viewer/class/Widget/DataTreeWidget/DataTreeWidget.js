@@ -14,27 +14,27 @@ function DataTreeWidget(el,controller) {
 DataTreeWidget.prototype.init = function() {
     TreeWidget.prototype.init.call(this);
     this.dataSource = this.controller.model.dataSource;
-    this.dataSource.eventRefillRow.subscribe(this,"onRefillRow");
-    this.dataSource.eventNewRow.subscribe(this,"onNewRow");
-    this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
-    this.dataSource.eventMoveRow.subscribe(this,"onMoveRow");
-    this.dataSource.eventGoneRow.subscribe(this,"onGoneRow");
-    this.dataSource.eventComeRow.subscribe(this,"onComeRow");
+    this.dataSource.eventRefillRow.subscribe(this,'onRefillRow');
+    this.dataSource.eventNewRow.subscribe(this,'onNewRow');
+    this.dataSource.eventRemoveRow.subscribe(this,'onRemoveRow');
+    this.dataSource.eventMoveRow.subscribe(this,'onMoveRow');
+    this.dataSource.eventGoneRow.subscribe(this,'onGoneRow');
+    this.dataSource.eventComeRow.subscribe(this,'onComeRow');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataTreeWidget.prototype.deinit = function() {
-    this.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
-    this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
-    this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
-    this.dataSource.eventMoveRow.unsubscribe(this,"onMoveRow");
-    this.dataSource.eventGoneRow.unsubscribe(this,"onGoneRow");
-    this.dataSource.eventComeRow.unsubscribe(this,"onComeRow");
+    this.dataSource.eventRefillRow.unsubscribe(this,'onRefillRow');
+    this.dataSource.eventNewRow.unsubscribe(this,'onNewRow');
+    this.dataSource.eventRemoveRow.unsubscribe(this,'onRemoveRow');
+    this.dataSource.eventMoveRow.unsubscribe(this,'onMoveRow');
+    this.dataSource.eventGoneRow.unsubscribe(this,'onGoneRow');
+    this.dataSource.eventComeRow.unsubscribe(this,'onComeRow');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataTreeWidget.prototype.fill = function() {
-    this.keyToItem["[null]"] = this.tree;
+    this.keyToItem['[null]'] = this.tree;
     var rows = this.dataSource.getRows();
     for (var i=0;i<rows.length;i++) {
         this.addRow(this.tree,rows[i]);
@@ -60,11 +60,11 @@ DataTreeWidget.prototype.addRow = function(parent,row,i) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataTreeWidget.prototype.makeRowCaption = function(row) {
-    var caption = "";
+    var caption = '';
     for (var fieldName in this.controller.model.fields) {
         var field = this.controller.model.fields[fieldName];
-        if (field.data.isVisible === "false") continue;
-        caption += row[field.data.column] + " ";
+        if (field.data.isVisible === 'false') continue;
+        caption += row[field.data.column] + ' ';
     }
     return caption;
 };

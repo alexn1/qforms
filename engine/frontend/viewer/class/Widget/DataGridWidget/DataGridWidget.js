@@ -95,7 +95,7 @@ DataGridWidget.prototype.refillRow = function(bodyRow,newIndex) {
 DataGridWidget.prototype.onRefillRow = function(ea) {
     var key = ea.key;
     var i = ea.i;
-    //console.log("onRefillRow: " + key + " " + i);
+    //console.log('onRefillRow: ' + key + ' ' + i);
     var bodyRow = this.keyToBodyRow[key];
     this.refillRow(bodyRow,i);
 };
@@ -103,8 +103,8 @@ DataGridWidget.prototype.onRefillRow = function(ea) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.onNewRow = function(ea) {
     var i = ea.i;
-    //console.log("onNewRow: " + i);
-    var row = this.dataSource.childs["[null]"].rowsByIndex[i];
+    //console.log('onNewRow: ' + i);
+    var row = this.dataSource.childs['[null]'].rowsByIndex[i];
     var key = this.dataSource.getRowKey(row);
     var bodyRow = this.createBodyRow(i);
     bodyRow.dbRow = row;
@@ -123,7 +123,7 @@ DataGridWidget.prototype.onNewRow = function(ea) {
 DataGridWidget.prototype.onRemoveRow = function(ea) {
     var key = ea.key;
     var bodyRow = this.keyToBodyRow[key];
-    //console.log("onRemoveRow: " + key);
+    //console.log('onRemoveRow: ' + key);
     if (this.selectedBodyRow === bodyRow) {
         if (this.selectedBodyRow.nextSibling) {
             this.selectBodyRow(this.selectedBodyRow.nextSibling);
@@ -146,7 +146,7 @@ DataGridWidget.prototype.onMoveRow = function(ea) {
     var oldIndex = ea.oldIndex;
     var newIndex = ea.newIndex;
     var key      = ea.key;
-    //console.log("onMoveRow: " + key + " " + newIndex);
+    //console.log('onMoveRow: ' + key + ' ' + newIndex);
     var bodyRow = this.keyToBodyRow[key];
     QForms.moveNode(this.bodyTable,bodyRow,oldIndex,newIndex);
     this.refillRow(bodyRow,newIndex);

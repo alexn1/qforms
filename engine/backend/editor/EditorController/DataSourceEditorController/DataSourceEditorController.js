@@ -58,13 +58,13 @@ DataSourceEditorController.prototype.delete = function(params, callback) {
             appEditor.getPageByFileName(params.page,function(pageEditor) {
                 if (params.form) {
                     // form data source
-                    pageEditor.pageFile.deleteFormDataSource(params["form"], params["dataSource"]);
+                    pageEditor.pageFile.deleteFormDataSource(params['form'], params['dataSource']);
                     pageEditor.pageFile.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
-                    pageEditor.pageFile.deleteDataSource(params["dataSource"]);
+                    pageEditor.pageFile.deleteDataSource(params['dataSource']);
                     pageEditor.pageFile.save(function() {
                         callback(null);
                     });
@@ -149,13 +149,13 @@ DataSourceEditorController.prototype.save = function(params, callback) {
             appEditor.getPageByFileName(params.pageFileName,function(pageEditor) {
                 if (params.form) {
                     // form data source
-                    pageEditor.pageFile.setFormDataSourceAttr(params["form"], params['dataSource'], params["attr"], params["value"]);
+                    pageEditor.pageFile.setFormDataSourceAttr(params['form'], params['dataSource'], params['attr'], params['value']);
                     pageEditor.pageFile.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
-                    pageEditor.pageFile.setDataSourceAttr(params['dataSource'], params["attr"], params["value"]);
+                    pageEditor.pageFile.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
                     pageEditor.pageFile.save(function() {
                         callback(null);
                     });

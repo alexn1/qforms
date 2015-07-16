@@ -11,14 +11,14 @@ function ParamController(model,item) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamController.prototype.getActions = function() {
     return [
-        {"action":"delete","caption":"Delete"}
+        {'action':'delete','caption':'Delete'}
     ];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamController.prototype.doAction = function(action) {
     switch (action) {
-        case "delete":
+        case 'delete':
             this.delete();
             break;
     }

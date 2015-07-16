@@ -19,26 +19,26 @@ function TreeItem(parent,caption,className) {
 TreeItem.prototype.init = function() {
     var self = this;
     // li
-    this.li = document.createElement("li");
+    this.li = document.createElement('li');
     if (this.className !== undefined) this.li.className = this.className;
     // div
-    this.div = document.createElement("div");
-    this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + "px";
+    this.div = document.createElement('div');
+    this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + 'px';
     $(this.div).mousedown(function() {self.onDivMouseDown(this);});
     $(this.div).dblclick(function() {self.onDivDoubleClick(this);});
     // node
-    this.node = document.createElement("span");
-    this.node.className = "leaf";
+    this.node = document.createElement('span');
+    this.node.className = 'leaf';
     $(this.node).mousedown(function(e) {self.onNodeMouseDown(e,this);});
     // text
-    this.text = document.createElement("span");
+    this.text = document.createElement('span');
     this.text.innerHTML = this.caption;
     // ul
-    this.ul = document.createElement("ul");
+    this.ul = document.createElement('ul');
     this.ul.level = this.parent.ul.level + 1;
     // div child
     this.div.appendChild(this.node);
-    this.div.appendChild(document.createTextNode(" "));
+    this.div.appendChild(document.createTextNode(' '));
     this.div.appendChild(this.text);
     // li child
     this.li.appendChild(this.div);
@@ -71,9 +71,9 @@ TreeItem.prototype.select = function(noscroll) {
     }
 
     if (this.tree.active !== null) {
-        this.tree.active.div.classList.remove("active");
+        this.tree.active.div.classList.remove('active');
     }
-    this.div.classList.add("active");
+    this.div.classList.add('active');
     this.tree.active = this;
     this.tree.makeOpened(this);
     if (!noscroll) {
@@ -91,12 +91,12 @@ TreeItem.prototype.makeOpened = function(item) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.open = function() {
-    this.li.classList.add("opened");
+    this.li.classList.add('opened');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.onNodeMouseDown = function(e,node) {
-    node.parentNode.parentNode.classList.toggle("opened");
+    node.parentNode.parentNode.classList.toggle('opened');
     e.stopPropagation();
     var e = new QForms.EventArg(this);
     e.item = this;
@@ -111,7 +111,7 @@ TreeItem.prototype.addItem = function(caption,className,i) {
     } else {
         QForms.insertNewNodeAt(this.ul,item.li,i);
     }
-    this.node.className = "node";
+    this.node.className = 'node';
     this.items.push(item);
     return item;
 };
@@ -120,7 +120,7 @@ TreeItem.prototype.addItem = function(caption,className,i) {
 TreeItem.prototype.removeItem = function(item) {
     this.ul.removeChild(item.li);
     if (this.ul.childElementCount === 0) {
-        this.node.className = "leaf";
+        this.node.className = 'leaf';
     }
     if (this.tree.active === item) {
         this.tree.active = null;
@@ -144,11 +144,11 @@ TreeItem.prototype.remove = function(item) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.changeParent = function(newParent,newIndex) {
     this.parent.ul.removeChild(this.li);				// removing themselves from list of old parent
-    if (this.parent.node && this.parent.ul.childElementCount === 0) this.parent.node.className = "leaf";
+    if (this.parent.node && this.parent.ul.childElementCount === 0) this.parent.node.className = 'leaf';
     QForms.insertNewNodeAt(newParent.ul,this.li,newIndex);	// adding to new parent with specified index
-    if (newParent.node) newParent.node.className = "node";
+    if (newParent.node) newParent.node.className = 'node';
     this.parent = newParent;
-    this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + "px";
+    this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + 'px';
     this.ul.level = this.parent.ul.level + 1;
 };
 

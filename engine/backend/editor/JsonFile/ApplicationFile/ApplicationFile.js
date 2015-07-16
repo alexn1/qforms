@@ -80,8 +80,8 @@ ApplicationFile.prototype.newDatabaseParam = function(params) {
         throw new Error('Param {name} already exist.'.replace('{name}', name));
     }
     return this.data.databases[database].params[name] = {
-        "@class" : "Param",
-        "@attributes" : {
+        '@class' : 'Param',
+        '@attributes' : {
             'name' : name,
             'value' : value
         }
@@ -104,7 +104,7 @@ ApplicationFile.prototype.newPageLink = function(params) {
         '@class' : 'PageLink',
         '@attributes' : {
             'name' : name,
-            'fileName' : "pages/{name}/{name}.json".replace(/\{name\}/g, name),
+            'fileName' : 'pages/{name}/{name}.json'.replace(/\{name\}/g, name),
             'menu' : menu,
             'startup' : startup
         }
@@ -160,7 +160,7 @@ ApplicationFile.prototype.newDataSource = function(params) {
     }
     var data;
     switch (_class) {
-        case "SqlDataSource":
+        case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;
         default:

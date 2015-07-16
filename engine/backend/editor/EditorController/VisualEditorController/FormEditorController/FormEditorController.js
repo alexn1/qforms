@@ -38,7 +38,7 @@ FormEditorController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params['pageFileName'], function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
-            formEditor.setAttr(params["attr"], params["value"], function() {
+            formEditor.setAttr(params['attr'], params['value'], function() {
                 callback(null);
             });
         });
@@ -49,7 +49,7 @@ FormEditorController.prototype.save = function(params, callback) {
 FormEditorController.prototype.delete = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params['pageFileName'], function(pageEditor) {
-            pageEditor.removeForm(params["form"], function() {
+            pageEditor.removeForm(params['form'], function() {
                 callback(null);
             });
         });

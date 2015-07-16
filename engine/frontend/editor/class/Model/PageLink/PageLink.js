@@ -11,18 +11,18 @@ function PageLink(data, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLink.prototype.setValue = function(name,value,callback) {
-    //console.log(name + " = " + value);
+    //console.log(name + ' = ' + value);
     var args = {
-        controller:"PageLink",
-        action:"save",
+        controller:'PageLink',
+        action:'save',
         params:{
-            pageLink:this.data["@attributes"].name,
+            pageLink:this.data['@attributes'].name,
             attr:name,
             value:value
         }
     };
     QForms.doHttpRequest(this,args,function(data) {
-        this.data["@attributes"][name] = value;
+        this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
         }
@@ -35,7 +35,7 @@ PageLink.prototype.moveUp = function(callback) {
         controller: 'PageLink',
         action    : 'moveUp',
         params    : {
-            page:this.data["@attributes"].name
+            page:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this, args, function(data){
@@ -51,7 +51,7 @@ PageLink.prototype.moveDown = function(callback) {
         controller: 'PageLink',
         action    : 'moveDown',
         params    : {
-            page:this.data["@attributes"].name
+            page:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this, args, function(data){

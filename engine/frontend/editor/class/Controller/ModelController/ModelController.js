@@ -8,7 +8,7 @@ function ModelController(model) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.getPropList = function() {
     return {
-        list:this.model.data["@attributes"],
+        list:this.model.data['@attributes'],
         options:{}
     };
 };
@@ -17,7 +17,7 @@ ModelController.prototype.getPropList = function() {
 ModelController.prototype.setProperty = function(name,value) {
     var self = this;
     this.model.setValue(name, value, function() {
-        if (name === "name") {
+        if (name === 'name') {
             self.item.text.innerHTML = self.getCaption(self.model.data);
         }
     });
@@ -25,7 +25,7 @@ ModelController.prototype.setProperty = function(name,value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.getCaption = function(data) {
-    return "<span class='green'>{name}</span>".replace("{name}",data["@attributes"].name);
+    return "<span class='green'>{name}</span>".replace('{name}',data['@attributes'].name);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

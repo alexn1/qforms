@@ -17,7 +17,7 @@ ViewerController.prototype.init = function() {
     this.applicationController.init();
     this.application.init();
     window.application = this.application;
-    $("#client").append($view);
+    $('#client').append($view);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

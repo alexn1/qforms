@@ -34,16 +34,16 @@ FormWizard.prototype.getQuery = function() {
     var query;
     var columns = this.getColumns();
     switch (this.params.className) {
-        case "TableForm":
-        case "TreeForm":
-            query = "select\n{columns}\nfrom `{table}`"
-                .replace("{table}",   this.params.tableName)
-                .replace("{columns}", columns.map(function (column) {return '    ' + column;}).join(',\n'));
+        case 'TableForm':
+        case 'TreeForm':
+            query = 'select\n{columns}\nfrom `{table}`'
+                .replace('{table}',   this.params.tableName)
+                .replace('{columns}', columns.map(function (column) {return '    ' + column;}).join(',\n'));
             break;
-        case "RowForm":
-            query = "select\n{columns}\nfrom `{table}`\nwhere id = {key}"
-                .replace("{table}",   this.params.tableName)
-                .replace("{columns}", columns.map(function (column) {return '    ' + column;}).join(',\n'));
+        case 'RowForm':
+            query = 'select\n{columns}\nfrom `{table}`\nwhere id = {key}'
+                .replace('{table}',   this.params.tableName)
+                .replace('{columns}', columns.map(function (column) {return '    ' + column;}).join(',\n'));
             break;
     }
     return query;
@@ -53,8 +53,8 @@ FormWizard.prototype.getQuery = function() {
 FormWizard.prototype.getDataSources = function() {
     return {
         default:{
-            class:"SqlDataSource",
-            name:"default",
+            class:'SqlDataSource',
+            name:'default',
             database:this.params.databaseName,
             table:this.params.tableName,
             query:this.getQuery(),
@@ -66,14 +66,14 @@ FormWizard.prototype.getDataSources = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormWizard.prototype.getField = function(column) {
     var field = {
-        class:"TextBoxField",
+        class:'TextBoxField',
         name:column.COLUMN_NAME
     };
     if (column.COLUMN_COMMENT) {
         field.caption = column.COLUMN_COMMENT;
     }
     if (column.COLUMN_KEY === 'PRI') {
-        field.readOnly = "true";
+        field.readOnly = 'true';
     }
     return field;
 };

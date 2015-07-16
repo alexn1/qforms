@@ -12,18 +12,18 @@ function Page(data, parent, pageLink) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.setValue = function(name,value,callback) {
-    //console.log(name + " = " + value);
+    //console.log(name + ' = ' + value);
     var args = {
-        controller:"Page",
-        action:"save",
+        controller:'Page',
+        action:'save',
         params:{
-            fileName:this.pageLink.data["@attributes"].fileName,
+            fileName:this.pageLink.data['@attributes'].fileName,
             attr:name,
             value:value
         }
     };
     QForms.doHttpRequest(this,args,function(data){
-        this.data["@attributes"][name] = value;
+        this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
         }
@@ -34,10 +34,10 @@ Page.prototype.setValue = function(name,value,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.delete = function(callback) {
     var args = {
-        controller:"Page",
-        action:"delete",
+        controller:'Page',
+        action:'delete',
         params:{
-            page:this.data["@attributes"].name
+            page:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -49,10 +49,10 @@ Page.prototype.delete = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.newForm = function(params,callback) {
-    params["pageFileName"] = this.pageLink.data["@attributes"].fileName;
+    params['pageFileName'] = this.pageLink.data['@attributes'].fileName;
     var args = {
-        controller:"Form",
-        action:"_new",
+        controller:'Form',
+        action:'_new',
         params:params
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -65,11 +65,11 @@ Page.prototype.newForm = function(params,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.getView = function(view,callback) {
     var args = {
-        controller:"Page",
-        action:"getView",
+        controller:'Page',
+        action:'getView',
         params:{
             view:view,
-            page: this.data !== undefined ? this.data["@attributes"].name : null
+            page: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -80,10 +80,10 @@ Page.prototype.getView = function(view,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.saveView = function(text,view) {
     var args = {
-        controller:"Page",
-        action:"saveView",
+        controller:'Page',
+        action:'saveView',
         params:{
-            page:this.data["@attributes"].name,
+            page:this.data['@attributes'].name,
             view:view,
             text:text
         }
@@ -96,10 +96,10 @@ Page.prototype.saveView = function(text,view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.saveController = function(text) {
     var args = {
-        controller:"Page",
-        action:"saveController",
+        controller:'Page',
+        action:'saveController',
         params:{
-            page:this.data["@attributes"].name,
+            page:this.data['@attributes'].name,
             text:text
         }
     };
@@ -111,10 +111,10 @@ Page.prototype.saveController = function(text) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.createView = function(callback) {
     var args = {
-        controller:"Page",
-        action:"createView",
+        controller:'Page',
+        action:'createView',
         params:{
-            page:this.data["@attributes"].name
+            page:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this,args,function(data) {
@@ -125,10 +125,10 @@ Page.prototype.createView = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.createController = function(callback) {
     var args = {
-        controller:"Page",
-        action:"createController",
+        controller:'Page',
+        action:'createController',
         params:{
-            page:this.data["@attributes"].name
+            page:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this,args,function(data) {

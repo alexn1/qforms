@@ -11,7 +11,7 @@ function EventHandler(parent,data) {
 EventHandler.prototype.init = function() {
     for (var name in this.data.actions) {
         var action = this.data.actions[name];
-        this.actions[name] = eval("new "+ action.class + "(this,action)");
+        this.actions[name] = eval('new ' + action.class + '(this,action)');
     }
 };
 

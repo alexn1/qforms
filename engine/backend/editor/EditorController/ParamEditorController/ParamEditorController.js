@@ -37,7 +37,7 @@ ParamEditorController.prototype._new = function(params, callback) {
 ParamEditorController.prototype.save = function(params, callback) {
     var appFile = new ApplicationFile(this.appInfo);
     appFile.init(function() {
-        appFile.setDatabaseParamAttr(params["database"], params["param"], params["attr"], params["value"]);
+        appFile.setDatabaseParamAttr(params['database'], params['param'], params['attr'], params['value']);
         appFile.save(function() {
             callback(null);
         });
@@ -48,7 +48,7 @@ ParamEditorController.prototype.save = function(params, callback) {
 ParamEditorController.prototype.delete = function(params, callback) {
     var appFile = new ApplicationFile(this.appInfo);
     appFile.init(function() {
-        appFile.deleteDatabaseParam(params["database"], params["param"]);
+        appFile.deleteDatabaseParam(params['database'], params['param']);
         appFile.save(function() {
             callback(null);
         });

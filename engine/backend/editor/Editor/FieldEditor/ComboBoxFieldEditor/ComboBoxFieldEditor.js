@@ -22,19 +22,19 @@ function ComboBoxFieldEditor(formEditor, name) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldEditor.createData = function(params) {
     return {
-        "@class":"ComboBoxField",
-        "@attributes": {
+        '@class':'ComboBoxField',
+        '@attributes': {
             'name':params['name'],
             'caption':params['caption'] ? params['caption'] : params['name'],
-            'isVisible':params['isVisible'] ? params['isVisible'] : "true",
-            'width':params['width'] ? params['width'] : "0",
-            'defaultValue':params['defaultValue'] ? params['defaultValue'] : "",
+            'isVisible':params['isVisible'] ? params['isVisible'] : 'true',
+            'width':params['width'] ? params['width'] : '0',
+            'defaultValue':params['defaultValue'] ? params['defaultValue'] : '',
             'column':params['column'] ? params['column'] : params['name'],
-            'readOnly':params['readOnly'] ? params['readOnly'] : "false",
-            'notNull':params['notNull'] ? params['notNull'] : "false",
-            'dataSourceName':params['dataSourceName'] ? params['dataSourceName'] : "",
-            'valueColumn':params['valueColumn'] ? params['valueColumn'] : "",
-            'displayColumn':params['displayColumn'] ? params['displayColumn'] : ""
+            'readOnly':params['readOnly'] ? params['readOnly'] : 'false',
+            'notNull':params['notNull'] ? params['notNull'] : 'false',
+            'dataSourceName':params['dataSourceName'] ? params['dataSourceName'] : '',
+            'valueColumn':params['valueColumn'] ? params['valueColumn'] : '',
+            'displayColumn':params['displayColumn'] ? params['displayColumn'] : ''
         }
     };
 };

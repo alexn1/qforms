@@ -4,7 +4,7 @@ module.exports = SqlDataSourceController;
 
 var util   = require('util');
 var path   = require('path');
-var sqlish = require("sqlish");
+var sqlish = require('sqlish');
 var mysql  = require('mysql');
 var _      = require('underscore');
 
@@ -144,7 +144,7 @@ SqlDataSourceController.prototype.update = function(args, callback) {
     var updateRow = function() {
         var values = {};
         for (var column in row) {
-            // if exists in table and not key column 
+            // if exists in table and not key column
             if (self.desc[column] !== undefined && self.keyColumns.indexOf(column)) {
                 values[column] = row[column];
             }

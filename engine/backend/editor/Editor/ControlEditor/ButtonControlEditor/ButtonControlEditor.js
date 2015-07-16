@@ -17,8 +17,8 @@ function ButtonControlEditor(formEditor, name) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ButtonControlEditor.createData = function(params) {
     return {
-        "@class":"CheckBoxField",
-        "@attributes": {
+        '@class':'CheckBoxField',
+        '@attributes': {
             'name' : params['name'],
             'caption' : params['caption'] ? params['caption'] : params['name'],
             'isVisible': params['isVisible'] ? params['isVisible'] : 'true',

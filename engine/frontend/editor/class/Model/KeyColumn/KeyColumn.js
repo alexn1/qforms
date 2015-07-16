@@ -10,21 +10,21 @@ function KeyColumn(data,dataSource) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.setValue = function(name,value,callback) {
-    //console.log(name + " = " + value);
+    //console.log(name + ' = ' + value);
     var args = {
-        controller:"KeyColumn",
-        action:"save",
+        controller:'KeyColumn',
+        action:'save',
         params:{
-            form:this.dataSource.parent.data["@attributes"].name,
-            pageFileName:this.dataSource.parent.page.pageLink.data["@attributes"].fileName,
-            dataSource:this.dataSource.data["@attributes"].name,
-            keyColumn:this.data["@attributes"].name,
+            form:this.dataSource.parent.data['@attributes'].name,
+            pageFileName:this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
+            dataSource:this.dataSource.data['@attributes'].name,
+            keyColumn:this.data['@attributes'].name,
             attr:name,
             value:value
         }
     };
     QForms.doHttpRequest(this,args,function(data){
-        this.data["@attributes"][name] = value;
+        this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
         }
@@ -34,13 +34,13 @@ KeyColumn.prototype.setValue = function(name,value,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.delete = function(callback) {
     var args = {
-        controller:"KeyColumn",
-        action:"delete",
+        controller:'KeyColumn',
+        action:'delete',
         params:{
-            page:this.dataSource.parent.page.pageLink.data["@attributes"].fileName,
-            form:this.dataSource.parent.data["@attributes"].name,
-            dataSource:this.dataSource.data["@attributes"].name,
-            keyColumn:this.data["@attributes"].name
+            page:this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
+            form:this.dataSource.parent.data['@attributes'].name,
+            dataSource:this.dataSource.data['@attributes'].name,
+            keyColumn:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -53,8 +53,8 @@ KeyColumn.prototype.delete = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumn.prototype.getView = function(view,callback) {
     var args = {
-        controller:"KeyColumn",
-        action:"getView",
+        controller:'KeyColumn',
+        action:'getView',
         params:{
             view:view
         }

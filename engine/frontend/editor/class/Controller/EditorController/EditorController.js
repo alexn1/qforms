@@ -12,21 +12,21 @@ function EditorController(appData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.init = function() {
     // tree
-    this.tree = document.getElementById("tree")._obj;
-    this.tree.eventDoubleClick.subscribe(this,"onItemDoubleClick");
-    this.tree.eventSelect.subscribe(this,"onItemSelect");
-    this.tree.eventOpen.subscribe(this,"onItemOpen");
-    this.tree.eventDelete.subscribe(this,"onItemDelete");
+    this.tree = document.getElementById('tree')._obj;
+    this.tree.eventDoubleClick.subscribe(this,'onItemDoubleClick');
+    this.tree.eventSelect.subscribe(this,'onItemSelect');
+    this.tree.eventOpen.subscribe(this,'onItemOpen');
+    this.tree.eventDelete.subscribe(this,'onItemDelete');
     // docs
-    this.docs = document.getElementById("docs")._obj;
-    this.docs.eventTabClosingByUser.subscribe(this,"onTabClosingByUser");
+    this.docs = document.getElementById('docs')._obj;
+    this.docs.eventTabClosingByUser.subscribe(this,'onTabClosingByUser');
     // props
-    this.props = new PropertyGrid(document.getElementById(("props")));
-    this.props.eventChanged.subscribe(this,"onObjChange");
+    this.props = new PropertyGrid(document.getElementById(('props')));
+    this.props.eventChanged.subscribe(this,'onObjChange');
     this.props.init();
     // root
     var caption = ApplicationController.prototype.getCaption(this.appData);
-    var appItem = this.tree.addItem(caption,"opened");
+    var appItem = this.tree.addItem(caption,'opened');
     var app = new Application(this.appData);
     appItem.ctrl = new ApplicationController(app,appItem,this);
     appItem.ctrl.createTree();
@@ -34,12 +34,12 @@ EditorController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.deinit = function() {
-    this.tree.eventDoubleClick.unsubscribe(this,"onItemDoubleClick");
-    this.tree.eventSelect.unsubscribe(this,"onItemSelect");
-    this.tree.eventOpen.unsubscribe(this,"onItemOpen");
-    this.tree.eventDelete.unsubscribe(this,"onItemDelete");
-    this.docs.eventTabClosingByUser.unsubscribe(this,"onTabClosingByUser");
-    this.props.eventChanged.unsubscribe(this,"onObjChange");
+    this.tree.eventDoubleClick.unsubscribe(this,'onItemDoubleClick');
+    this.tree.eventSelect.unsubscribe(this,'onItemSelect');
+    this.tree.eventOpen.unsubscribe(this,'onItemOpen');
+    this.tree.eventDelete.unsubscribe(this,'onItemDelete');
+    this.docs.eventTabClosingByUser.unsubscribe(this,'onTabClosingByUser');
+    this.props.eventChanged.unsubscribe(this,'onObjChange');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,8 +61,8 @@ EditorController.prototype.onItemSelect = function(e) {
             this.fillActionsAndGrid(e.item.ctrl);
         }
     } else {
-        $("#treeActionsList").children().remove();
-        $("#treeActionsList").append("<li class='disabled'><a href='#'>none</a></li>");
+        $('#treeActionsList').children().remove();
+        $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
         this.props.endEdit();
     }
 };
@@ -76,17 +76,17 @@ EditorController.prototype.fillActionsAndGrid = function(ctrl) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillGrid = function(ctrl) {
     var propList = ctrl.getPropList();
-    this.props.beginEdit(propList["list"],propList["options"]);
+    this.props.beginEdit(propList['list'],propList['options']);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.pageLinkToPage = function(item,callback) {
     var pageLink = item.ctrl.model;
     var args = {
-        controller:"Page",
-        action:"get",
+        controller:'Page',
+        action:'get',
         params:{
-            fileName:pageLink.data["@attributes"].fileName
+            fileName:pageLink.data['@attributes'].fileName
         }
     };
     QForms.doHttpRequest(this,args,function(pageData){
@@ -104,26 +104,26 @@ EditorController.prototype.onItemDelete = function(e) {
     if (e.item.ctrl.tab) {
         this.docs.closeTab(e.item.ctrl.tab);
     }
-    $("#treeActionsList").children().remove();
-    $("#treeActionsList").append("<li class='disabled'><a href='#'>none</a></li>");
+    $('#treeActionsList').children().remove();
+    $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
     this.props.endEdit();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillActions = function(ctrl) {
-    $("#treeActionsList").children().remove();
+    $('#treeActionsList').children().remove();
     ctrl.getActions().forEach(function (action) {
-        if (action.caption === "-") {
-            $("#treeActionsList").append("<li class='divider'></li>");
+        if (action.caption === '-') {
+            $('#treeActionsList').append("<li class='divider'></li>");
         } else {
-            var li = document.createElement("li");
+            var li = document.createElement('li');
             li.miAction = action.action;
             li.ctrl = ctrl;
             $(li).click(function() {
                 this.ctrl.doAction(this.miAction);
             });
-            li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace("{caption}",action.caption);
-            $("#treeActionsList").append(li);
+            li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}',action.caption);
+            $('#treeActionsList').append(li);
         }
     });
 };

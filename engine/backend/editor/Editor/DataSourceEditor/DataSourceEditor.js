@@ -26,9 +26,9 @@ DataSourceEditor.prototype.newKeyColumn = function(params) {
         throw  new Error('Key Column {name} already exist.'.replace('{name}', name));
     }
     return this.data.keyColumns[name] = {
-        "@class":"KeyColumn",
-        "@attributes": {
-            'name':name
+        '@class'     : 'KeyColumn',
+        '@attributes': {
+            'name' :name
         }
     };
 };

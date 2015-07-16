@@ -240,11 +240,11 @@ DataSourceController.prototype.btnCountQuery_Click = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.btnQuery_Click = function() {
-    this.$view.find(".wndQuery").css("display","block");
-    this.$view.find(".wndCountQuery").css("display","none");
-    this.$view.find(".btnQuery").removeClass("btn-default");
-    this.$view.find(".btnQuery").addClass("btn-primary");
-    this.$view.find(".btnCountQuery").removeClass("btn-primary");
-    this.$view.find(".btnCountQuery").addClass("btn-default");
+    this.$view.find('.wndQuery').css('display','block');
+    this.$view.find('.wndCountQuery').css('display','none');
+    this.$view.find('.btnQuery').removeClass('btn-default');
+    this.$view.find('.btnQuery').addClass('btn-primary');
+    this.$view.find('.btnCountQuery').removeClass('btn-primary');
+    this.$view.find('.btnCountQuery').addClass('btn-default');
     this.save = 'count';
 };

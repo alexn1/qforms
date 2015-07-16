@@ -12,7 +12,7 @@ function PropertyGrid(el) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.init = function() {
-    this.tbody = $(this.el).children("table").children("tbody").get(0);
+    this.tbody = $(this.el).children('table').children('tbody').get(0);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,19 +26,19 @@ PropertyGrid.prototype.beginEdit = function(obj,options) {
 PropertyGrid.prototype.fill = function() {
     this.clear();
     for (var name in this.obj) {
-        var tr = document.createElement("tr");
-        var td1 = document.createElement("td");
+        var tr = document.createElement('tr');
+        var td1 = document.createElement('td');
         td1.innerHTML = name;
-        var td2 = document.createElement("td");
+        var td2 = document.createElement('td');
         if (this.options && this.options[name] !== undefined) {
-            var input = document.createElement("select");
+            var input = document.createElement('select');
             this.options[name].forEach(function(value) {
-                var option = document.createElement("option");
+                var option = document.createElement('option');
                 option.innerHTML = value;
                 input.appendChild(option);
             });
         } else {
-            var input = document.createElement("input");
+            var input = document.createElement('input');
         }
         input.name = name;
         input.spellcheck = false;
@@ -59,7 +59,7 @@ PropertyGrid.prototype.fill = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.clear = function() {
-    this.tbody.innerHTML = "";
+    this.tbody.innerHTML = '';
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -40,7 +40,7 @@ ControlEditorController.prototype.save = function(params, callback) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var controlEditor = formEditor.getControl(params.control);
-            controlEditor.setAttr(params["attr"], params["value"], function() {
+            controlEditor.setAttr(params['attr'], params['value'], function() {
                 callback(null);
             });
         });

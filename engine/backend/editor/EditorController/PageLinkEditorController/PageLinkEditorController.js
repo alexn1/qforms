@@ -22,7 +22,7 @@ function PageLinkEditorController(appInfo) {
 PageLinkEditorController.prototype.save = function(params, callback) {
     var appFile = new ApplicationFile(this.appInfo);
     appFile.init(function() {
-        appFile.setPageLinkAttr(params["pageLink"], params["attr"], params["value"]);
+        appFile.setPageLinkAttr(params['pageLink'], params['attr'], params['value']);
         appFile.save(function() {
             callback(null);
         });

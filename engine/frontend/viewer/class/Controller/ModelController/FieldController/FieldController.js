@@ -12,20 +12,20 @@ function FieldController(model, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.create = function(model,parent) {
-    var customClassName = "{page}{form}{field}Controller"
-        .replace("{page}",model.form.page.name)
-        .replace("{form}",model.form.name)
-        .replace("{field}",model.name);
-    var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}",customClassName);
-    var custom =  "new {customClassName}(model,parent)".replace("{customClassName}",customClassName);
-    var general = "new {class}Controller(model,parent)".replace("{class}",model.data.class);
+    var customClassName = '{page}{form}{field}Controller'
+        .replace('{page}',model.form.page.name)
+        .replace('{form}',model.form.name)
+        .replace('{field}',model.name);
+    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}',customClassName);
+    var custom =  'new {customClassName}(model,parent)'.replace('{customClassName}',customClassName);
+    var general = 'new {class}Controller(model,parent)'.replace('{class}',model.data.class);
     var obj;
     if (model.data.js !== undefined) {
-        if (eval(typeOfCustomClass) === "function") {
+        if (eval(typeOfCustomClass) === 'function') {
             obj = eval(custom);
         } else {
             $.globalEval(model.data.js);
-            obj = (eval(typeOfCustomClass) === "function") ? eval(custom) : eval(general);
+            obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
         }
     } else {
         obj = eval(general);
@@ -69,10 +69,10 @@ FieldController.prototype.refill = function(row,view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getValue = function (view) {
     switch (this.model.form.data.class) {
-        case "RowForm":
+        case 'RowForm':
             return view.firstElementChild.value;
             break;
-        case "TableForm":
+        case 'TableForm':
             return view.firstElementChild.innerHTML;
             break;
     }
@@ -81,12 +81,12 @@ FieldController.prototype.getValue = function (view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
-        case "RowForm":
+        case 'RowForm':
             if (value !== '') {
                 view.firstElementChild.value = value;
             }
             break;
-        case "TableForm":
+        case 'TableForm':
             view.firstElementChild.innerHTML = value;
             break;
     }

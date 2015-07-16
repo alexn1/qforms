@@ -16,13 +16,13 @@ RowFormController.prototype.init = function() {
     FormController.prototype.init.call(this);
     this.row = this.model.dataSource.getRowByIndex(0);
     this.key = this.model.dataSource.getRowKey(this.row);
-    this.model.dataSource.eventRefillRow.subscribe(this,"onRefillRow");
+    this.model.dataSource.eventRefillRow.subscribe(this,'onRefillRow');
     // row field views
     for (var name in this.model.fields) {
-        var selector = ".{page}_{form}_{field}"
-            .replace("{page}" ,this.model.page.id)
-            .replace("{form}" ,this.model.name)
-            .replace("{field}",name);
+        var selector = '.{page}_{form}_{field}'
+            .replace('{page}' ,this.model.page.id)
+            .replace('{form}' ,this.model.name)
+            .replace('{field}',name);
         var view = this.view.querySelector(selector);
         if (view === null) {
             continue;
@@ -31,10 +31,10 @@ RowFormController.prototype.init = function() {
     }
     // row controls views
     for (var name in this.model.controls) {
-        var selector = ".{page}_{form}_{control}"
-            .replace("{page}"   ,this.model.page.id)
-            .replace("{form}"   ,this.model.name)
-            .replace("{control}",name);
+        var selector = '.{page}_{form}_{control}'
+            .replace('{page}'   ,this.model.page.id)
+            .replace('{form}'   ,this.model.name)
+            .replace('{control}',name);
         var view = this.view.querySelector(selector);
         if (view === null) {
             continue;
@@ -45,7 +45,7 @@ RowFormController.prototype.init = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.deinit = function() {
-    this.model.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
+    this.model.dataSource.eventRefillRow.unsubscribe(this,'onRefillRow');
     FormController.prototype.deinit.call(this);
 };
 

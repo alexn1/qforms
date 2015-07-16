@@ -22,13 +22,13 @@ TextBoxFieldController.prototype.fill = function(row,view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.isValid = function(view) {
     var isValid = true;
-    if (this.model.data.notNull === "true") {
-        isValid = view.firstElementChild.value !== undefined && view.firstElementChild.value !== null && view.firstElementChild.value !== "";
+    if (this.model.data.notNull === 'true') {
+        isValid = view.firstElementChild.value !== undefined && view.firstElementChild.value !== null && view.firstElementChild.value !== '';
     }
     if (!isValid) {
-        view.firstElementChild.classList.add("error");
+        view.firstElementChild.classList.add('error');
     } else {
-        view.firstElementChild.classList.remove("error");
+        view.firstElementChild.classList.remove('error');
     }
     return isValid;
 };
@@ -50,7 +50,7 @@ TextBoxFieldController.prototype.onChange = function (el) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.beginEdit = function(view) {
-    view.firstElementChild.style.MozUserSelect = "text";
+    view.firstElementChild.style.MozUserSelect = 'text';
     view.firstElementChild.contentEditable = true;
     var range = document.createRange();
     range.selectNodeContents(view.firstElementChild);
@@ -62,6 +62,6 @@ TextBoxFieldController.prototype.beginEdit = function(view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.endEdit = function(view) {
-    view.firstElementChild.style.MozUserSelect = "none";
+    view.firstElementChild.style.MozUserSelect = 'none';
     view.firstElementChild.contentEditable = false;
 };

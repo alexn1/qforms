@@ -16,7 +16,7 @@ function ApplicationController(model, item, editorController) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.createTree = function() {
     // databases
-    this.databasesItem = this.item.addItem("Databases");
+    this.databasesItem = this.item.addItem('Databases');
     if (this.model.data.databases) {
         for (var name in this.model.data.databases) {
             var databaseData = this.model.data.databases[name];
@@ -24,7 +24,7 @@ ApplicationController.prototype.createTree = function() {
         }
     }
     // data sources
-    this.dataSourcesItem = this.item.addItem("Data Sources");
+    this.dataSourcesItem = this.item.addItem('Data Sources');
     if (this.model.data.dataSources) {
         for (var name in this.model.data.dataSources) {
             var dataSourceData = this.model.data.dataSources[name];
@@ -32,7 +32,7 @@ ApplicationController.prototype.createTree = function() {
         }
     }
     // pages
-    this.pagesItem = this.item.addItem("Pages","opened");
+    this.pagesItem = this.item.addItem('Pages','opened');
     if (this.model.data.pageLinks) {
         for (var name in this.model.data.pageLinks) {
             var pageLinkData = this.model.data.pageLinks[name];
@@ -65,7 +65,7 @@ ApplicationController.prototype.addDataSourceItem = function(dataSourceData) {
 ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
     var caption = PageLinkController.prototype.getCaption(pageLinkData);
     var pageLinkItem = this.pagesItem.addItem(caption);
-    pageLinkItem.node.className = "node";
+    pageLinkItem.node.className = 'node';
     var pageLink = new PageLink(pageLinkData, this.model)
     pageLinkItem.ctrl = new PageLinkController(pageLink,pageLinkItem);
     return pageLinkItem;
@@ -75,7 +75,7 @@ ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
 ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
     var caption = PageController.prototype.getCaption(pageData);
     var pageItem = this.pagesItem.addItem(caption);
-    pageItem.node.className = "node";
+    pageItem.node.className = 'node';
     var pageLink = new PageLink(pageLinkData, this.model);
     var page = new Page(pageData, this.model, pageLink);
     pageItem.ctrl = new PageController(page,pageItem,pageLink);
@@ -86,22 +86,22 @@ ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getActions = function() {
     return [
-        {"action":"newDatabase","caption":"New Database"},
-        {"action":"newDataSource","caption":"New Data Source"},
-        {"action":"newPage","caption":"New Page"}
+        {'action':'newDatabase','caption':'New Database'},
+        {'action':'newDataSource','caption':'New Data Source'},
+        {'action':'newPage','caption':'New Page'}
     ];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.doAction = function(action) {
     switch (action) {
-        case "newDatabase":
+        case 'newDatabase':
             this.newDatabaseAction();
             break;
         case 'newDataSource':
             this.newDataSourceAction();
             break;
-        case "newPage":
+        case 'newPage':
             this.newPageAction();
             break;
         default:
@@ -112,7 +112,7 @@ ApplicationController.prototype.doAction = function(action) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.newPageAction = function() {
     var self = this;
-    Page.prototype.getView("new.html", function(result) {
+    Page.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -128,9 +128,9 @@ ApplicationController.prototype.newPageAction = function() {
                 self.pageItems[name] = self.addPageItem(pageData,pageLinkData);
                 self.pageItems[name].select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
     });
 };
@@ -138,7 +138,7 @@ ApplicationController.prototype.newPageAction = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.newDataSourceAction = function() {
     var self = this;
-    DataSource.prototype.getView("new.html", function(result) {
+    DataSource.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -151,9 +151,9 @@ ApplicationController.prototype.newDataSourceAction = function() {
             self.model.newDataSource(params, function(dataSourceData) {
                 self.addDataSourceItem(dataSourceData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
     });
 };
@@ -161,7 +161,7 @@ ApplicationController.prototype.newDataSourceAction = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.newDatabaseAction = function() {
     var self = this;
-    Database.prototype.getView("new.html", function(result) {
+    Database.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
@@ -176,19 +176,19 @@ ApplicationController.prototype.newDatabaseAction = function() {
                 name:name,
                 params:{
                     host:{
-                        name:"host",
+                        name:'host',
                         value:host
                     },
                     database:{
-                        name:"database",
+                        name:'database',
                         value:dbname
                     },
                     user:{
-                        name:"user",
+                        name:'user',
                         value:user
                     },
                     password:{
-                        name:"password",
+                        name:'password',
                         value:password
                     }
                 }
@@ -196,9 +196,9 @@ ApplicationController.prototype.newDatabaseAction = function() {
             self.model.newDatabase(params,function(databaseData) {
                 self.addDatabaseItem(databaseData).select();
             });
-            $("#myModal").modal("hide");
+            $('#myModal').modal('hide');
         });
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
     });
 };
@@ -206,6 +206,6 @@ ApplicationController.prototype.newDatabaseAction = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getPropList = function() {
     var propList = ApplicationController.super_.prototype.getPropList.call(this);
-    propList.options['authentication'] = ["true","false"];
+    propList.options['authentication'] = ['true','false'];
     return propList;
 };

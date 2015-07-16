@@ -22,13 +22,13 @@ DatePickerFieldController.prototype.fill = function(row,view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldController.prototype.isValid = function(view) {
     var isValid = true;
-    if (this.model.data.notNull === "true") {
-        isValid = view.firstElementChild.value !== undefined && view.firstElementChild.value !== null && view.firstElementChild.value !== "";
+    if (this.model.data.notNull === 'true') {
+        isValid = view.firstElementChild.value !== undefined && view.firstElementChild.value !== null && view.firstElementChild.value !== '';
     }
     if (!isValid) {
-        view.firstElementChild.classList.add("error");
+        view.firstElementChild.classList.add('error');
     } else {
-        view.firstElementChild.classList.remove("error");
+        view.firstElementChild.classList.remove('error');
     }
     return isValid;
 };

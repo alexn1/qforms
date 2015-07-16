@@ -14,19 +14,19 @@ function FormController(model, view, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.create = function(model, view, parent) {
-    var customClassName = "{page}{form}Controller"
-        .replace("{page}", model.page.name)
-        .replace("{form}", model.name);
-    var typeOfCustomClass = "typeof({customClassName})".replace("{customClassName}",customClassName);
-    var custom =  "new {customClassName}(model, view, parent)".replace("{customClassName}",customClassName);
-    var general = "new {class}Controller(model, view, parent)".replace("{class}",model.data.class);
+    var customClassName = '{page}{form}Controller'
+        .replace('{page}', model.page.name)
+        .replace('{form}', model.name);
+    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}',customClassName);
+    var custom =  'new {customClassName}(model, view, parent)'.replace('{customClassName}',customClassName);
+    var general = 'new {class}Controller(model, view, parent)'.replace('{class}',model.data.class);
     var obj;
     if (model.data.js !== undefined) {
-        if (eval(typeOfCustomClass) === "function") {
+        if (eval(typeOfCustomClass) === 'function') {
             obj = eval(custom);
         } else {
             $.globalEval(model.data.js);
-            obj = (eval(typeOfCustomClass) === "function") ? eval(custom) : eval(general);
+            obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
         }
     } else {
         obj = eval(general);

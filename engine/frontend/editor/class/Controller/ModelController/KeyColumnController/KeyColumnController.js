@@ -11,14 +11,14 @@ function KeyColumnController(model,item) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumnController.prototype.getActions = function() {
     return [
-        {"action":"delete","caption":"Delete"}
+        {'action':'delete','caption':'Delete'}
     ];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumnController.prototype.doAction = function(action) {
     switch (action) {
-        case "delete":
+        case 'delete':
             this.delete();
             break;
     }

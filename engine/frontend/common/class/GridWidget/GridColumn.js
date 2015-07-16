@@ -19,10 +19,10 @@ GridColumn.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.initResize = function(headerCell,fieldName) {
     var self = this;
-    var resize = headerCell.querySelector("td > span");
+    var resize = headerCell.querySelector('td > span');
     resize.qFieldName = fieldName;
-    resize.addEventListener("mousedown",function(event) {return self.beginResize(event,this);});
-    resize.addEventListener("dblclick",function(event) {return self.setOptimalWidth(event,this);});
+    resize.addEventListener('mousedown',function(event) {return self.beginResize(event,this);});
+    resize.addEventListener('dblclick',function(event) {return self.setOptimalWidth(event,this);});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,8 +53,8 @@ GridColumn.prototype.getOptimalWidth = function(view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.beginResize = function(e,resize) {
-    //console.log("onmousedown");
-    var bodyTable = this.gridWidget.el.querySelector(".body > table");
+    //console.log('onmousedown');
+    var bodyTable = this.gridWidget.el.querySelector('.body > table');
     var headTd = resize.parentElement;
     headTd.originX = e.clientX;
     headTd.originWidth = headTd.offsetWidth;
@@ -65,12 +65,12 @@ GridColumn.prototype.beginResize = function(e,resize) {
         if (width < 10) {
             width = 10;
         }
-        headTd.style.width = width + "px";
-        if (bodyTd) bodyTd.style.width = width + "px";
+        headTd.style.width = width + 'px';
+        if (bodyTd) bodyTd.style.width = width + 'px';
         return false;
     };
     document.onmouseup = function (e) {
-        //console.log("onmouseup");
+        //console.log('onmouseup');
         document.onmousemove = null;
         document.onmouseup = null;
         return false;
@@ -80,7 +80,7 @@ GridColumn.prototype.beginResize = function(e,resize) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.setOptimalWidth = function(e,resize) {
-    var bodyTable = this.gridWidget.el.querySelector(".body > table");
+    var bodyTable = this.gridWidget.el.querySelector('.body > table');
     var headTd = resize.parentElement;
     if (bodyTable.rows[0]) var bodyTd = bodyTable.rows[0].cells[headTd.cellIndex];
     var maxWidth = 0;
@@ -89,11 +89,11 @@ GridColumn.prototype.setOptimalWidth = function(e,resize) {
         var width = this.gridWidget.gridColumns[resize.qFieldName].getOptimalWidth(bodyRow.bodyCells[resize.qFieldName].firstElementChild);
         if (width > maxWidth) maxWidth = width;
     }
-    //console.log(resize.qFieldName + ": " + maxWidth);
+    //console.log(resize.qFieldName + ': ' + maxWidth);
     if (maxWidth !== 0) {
         maxWidth += 11;
-        headTd.style.width = maxWidth + "px";
-        if (bodyTd) bodyTd.style.width = maxWidth + "px";
+        headTd.style.width = maxWidth + 'px';
+        if (bodyTd) bodyTd.style.width = maxWidth + 'px';
     }
     return false;
 };
@@ -145,7 +145,7 @@ GridColumn.prototype.beginEdit = function(bodyCell) {
 GridColumn.prototype.endEdit = function(bodyCell) {
     bodyCell.oldValue = null;
     bodyCell.isEdited = false;
-    bodyCell.classList.remove("edit");
+    bodyCell.classList.remove('edit');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

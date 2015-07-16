@@ -36,7 +36,7 @@ Form.prototype.fillParams = function(row) {
 RowForm.prototype.onDataSourceChanged = function(eventArgs) {
     Form.prototype.onDataSourceChanged.call(this,eventArgs);
     var dataSource = eventArgs.object;
-    if (dataSource.name === "default") {
+    if (dataSource.name === 'default') {
         this.eventChanged.fire(new QForms.Event(this));
     }
 };

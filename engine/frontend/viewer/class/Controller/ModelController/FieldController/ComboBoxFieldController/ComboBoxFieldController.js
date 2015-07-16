@@ -17,19 +17,19 @@ ComboBoxFieldController.prototype.init = function() {
     if (!this.dataSource) {
         throw new Error('[' + this.model.getFullName() + '] cannot find data source \'' + this.model.data.dataSourceName + '\'');
     }
-    this.dataSource.eventRefillRow.subscribe(this,"onRefillRow");
-    this.dataSource.eventRemoveRow.subscribe(this,"onRemoveRow");
-    this.dataSource.eventNewRow.subscribe(this,"onNewRow");
-    this.dataSource.eventMoveRow.subscribe(this,"onMoveRow");
+    this.dataSource.eventRefillRow.subscribe(this,'onRefillRow');
+    this.dataSource.eventRemoveRow.subscribe(this,'onRemoveRow');
+    this.dataSource.eventNewRow.subscribe(this,'onNewRow');
+    this.dataSource.eventMoveRow.subscribe(this,'onMoveRow');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.deinit = function() {
     //console.log('ComboBoxFieldController.prototype.deinit: ' + this.model.name);
-    this.dataSource.eventRefillRow.unsubscribe(this,"onRefillRow");
-    this.dataSource.eventRemoveRow.unsubscribe(this,"onRemoveRow");
-    this.dataSource.eventNewRow.unsubscribe(this,"onNewRow");
-    this.dataSource.eventMoveRow.unsubscribe(this,"onMoveRow");
+    this.dataSource.eventRefillRow.unsubscribe(this,'onRefillRow');
+    this.dataSource.eventRemoveRow.unsubscribe(this,'onRemoveRow');
+    this.dataSource.eventNewRow.unsubscribe(this,'onNewRow');
+    this.dataSource.eventMoveRow.unsubscribe(this,'onMoveRow');
     FieldController.prototype.deinit.call(this);
 };
 
@@ -72,7 +72,7 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
             break;
         case 'TableForm':
             view.firstElementChild.value = value;
-            if (value !== "" && value !== null) {
+            if (value !== '' && value !== null) {
                 var key = JSON.stringify([value]);
                 var row = this.dataSource.getRow(key);
                 if (row) {
@@ -87,7 +87,7 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
-    var nullOption = document.createElement("option");
+    var nullOption = document.createElement('option');
     nullOption.selected = true;
     if (this.model.data.notNull === 'true') {
         nullOption.innerHTML = '-- select value --';
@@ -103,7 +103,7 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
 ComboBoxFieldController.prototype._createOption = function(view,i) {
     var row =  this.dataSource.getRowByIndex(i);
     var key = this.dataSource.getRowKey(row);
-    var option = document.createElement("option");
+    var option = document.createElement('option');
     option.innerHTML = this.model.templateValue(row);
     option.dbRow     = row;
     option.value     = JSON.parse(key)[0];
@@ -151,7 +151,7 @@ ComboBoxFieldController.prototype.onRemoveRow = function(ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.onNewRow = function(ea) {
-    //console.log("ComboBoxFieldController.prototype.onNewRow");
+    //console.log('ComboBoxFieldController.prototype.onNewRow');
     //console.log(ea);
     switch (this.model.form.data.class) {
         case 'RowForm':
@@ -195,13 +195,13 @@ ComboBoxFieldController.prototype.onChange = function (el) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.isValid = function(view) {
     var isValid = true;
-    if (this.model.data.notNull === "true") {
-        isValid = view.firstElementChild.selectedOptions[0].value !== "";
+    if (this.model.data.notNull === 'true') {
+        isValid = view.firstElementChild.selectedOptions[0].value !== '';
     }
     if (!isValid) {
-        view.firstElementChild.classList.add("error");
+        view.firstElementChild.classList.add('error');
     } else {
-        view.firstElementChild.classList.remove("error");
+        view.firstElementChild.classList.remove('error');
     }
     return isValid;
 };

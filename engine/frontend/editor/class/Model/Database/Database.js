@@ -9,18 +9,18 @@ function Database(data) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.setValue = function(name,value,callback) {
-    //console.log(name + " = " + value);
+    //console.log(name + ' = ' + value);
     var args = {
-        controller:"Database",
-        action:"save",
+        controller:'Database',
+        action:'save',
         params:{
-            database:this.data["@attributes"].name,
+            database:this.data['@attributes'].name,
             attr:name,
             value:value
         }
     };
     QForms.doHttpRequest(this,args,function(data){
-        this.data["@attributes"][name] = value;
+        this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
         }
@@ -31,10 +31,10 @@ Database.prototype.setValue = function(name,value,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.delete = function(callback) {
     var args = {
-        controller:"Database",
-        action:"delete",
+        controller:'Database',
+        action:'delete',
         params:{
-            database:this.data["@attributes"].name
+            database:this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -47,10 +47,10 @@ Database.prototype.delete = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.newParam = function(name,callback) {
     var args = {
-        controller:"Param",
-        action:"_new",
+        controller:'Param',
+        action:'_new',
         params:{
-            database:this.data["@attributes"].name,
+            database:this.data['@attributes'].name,
             name:name
         }
     };
@@ -64,11 +64,11 @@ Database.prototype.newParam = function(name,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getView = function(view,callback) {
     var args = {
-        controller:"Database",
-        action:"getView",
+        controller:'Database',
+        action:'getView',
         params:{
             view:view,
-            database: this.data !== undefined ? this.data["@attributes"].name : null
+            database: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
     QForms.doHttpRequest(this,args,function(data){
@@ -79,10 +79,10 @@ Database.prototype.getView = function(view,callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getTableInfo = function(table,callback) {
     var args = {
-        controller:"Database",
-        action:"getTableInfo",
+        controller:'Database',
+        action:'getTableInfo',
         params:{
-            database: this.data !== undefined ? this.data["@attributes"].name : null,
+            database: this.data !== undefined ? this.data['@attributes'].name : null,
             table:table
         }
     };

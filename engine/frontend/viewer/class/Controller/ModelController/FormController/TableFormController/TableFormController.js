@@ -17,20 +17,20 @@ TableFormController.prototype.init = function() {
     this.model.eventRefilled.subscribe(this, 'onRefilled');
 
     var self = this;
-    $(this.view).find("button.new").click(function() {
+    $(this.view).find('button.new').click(function() {
         self.onNewClick(this);
     });
-    $(this.view).find("button.delete").click(function() {
+    $(this.view).find('button.delete').click(function() {
         self.onDeleteClick(this);
     });
 
-    $(this.view).find("button.next").click(function() {
+    $(this.view).find('button.next').click(function() {
         self.onNextClick(this);
     });
-    $(this.view).find("button.previous").click(function() {
+    $(this.view).find('button.previous').click(function() {
         self.onPreviousClick(this);
     });
-    this.$goto = $(this.view).find("select.goto");
+    this.$goto = $(this.view).find('select.goto');
     this.$goto.change(function() {
         self.onGotoChange(this);
     });
@@ -44,16 +44,16 @@ TableFormController.prototype.init = function() {
     });
     this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
     this.grid.init();
-    this.model.page.eventHide.subscribe(this,"onHidePage");
-    this.model.page.eventShow.subscribe(this,"onShowPage");
-    this.grid.eventBodyCellDblClick.subscribe(this,"onGridCellDblClick");
+    this.model.page.eventHide.subscribe(this,'onHidePage');
+    this.model.page.eventShow.subscribe(this,'onShowPage');
+    this.grid.eventBodyCellDblClick.subscribe(this,'onGridCellDblClick');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.deinit = function() {
-    this.model.page.eventHide.unsubscribe(this,"onHidePage");
-    this.model.page.eventShow.unsubscribe(this,"onShowPage");
-    this.grid.eventBodyCellDblClick.unsubscribe(this,"onGridCellDblClick");
+    this.model.page.eventHide.unsubscribe(this,'onHidePage');
+    this.model.page.eventShow.unsubscribe(this,'onShowPage');
+    this.grid.eventBodyCellDblClick.unsubscribe(this,'onGridCellDblClick');
     this.grid.deinit();
     this.model.eventRefilled.unsubscribe(this, 'onRefilled');
     TableFormController.super_.prototype.deinit.call(this);
@@ -70,7 +70,7 @@ TableFormController.prototype.fill = function() {
             option.html(i);
             this.$goto.append(option);
         }
-        $(this.view).find(".paging").css('display', 'block');
+        $(this.view).find('.paging').css('display', 'block');
     }
     this.grid.fill();
 };
@@ -135,14 +135,14 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
     var bodyCell = ea.bodyCell
     var key = bodyCell.bodyRow.qKey;
     switch (this.model.data.editMethod) {
-        case "table":
+        case 'table':
             this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
         break;
-        case "form":
+        case 'form':
             this.model.edit(key);
         break;
     }
-    this.model.handleEvent("DoubleClick",{"key":key});
+    this.model.handleEvent('DoubleClick',{'key':key});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -31,29 +31,29 @@ function TreeWidget(el) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeWidget.prototype.init = function() {
     var self = this;
-    if ($(this.el).children("ul").length === 0) {
+    if ($(this.el).children('ul').length === 0) {
         $(this.el).append('<ul></ul>');
     }
-    this.ul = $(this.el).children("ul").get(0);
+    this.ul = $(this.el).children('ul').get(0);
     this.ul.level = 0;
 
     /*
-    $(this.el).find(".node").mousedown(function() {
-        this.parentNode.parentNode.classList.toggle("opened");
+    $(this.el).find('.node').mousedown(function() {
+        this.parentNode.parentNode.classList.toggle('opened');
     });
-    $(this.el).find("ul").each(function() {
-        if ($(this).parents(".TreeWidget ul").get(0)) {
-            this.level = $(this).parents("ul").get(0).level + 1;
+    $(this.el).find('ul').each(function() {
+        if ($(this).parents('.TreeWidget ul').get(0)) {
+            this.level = $(this).parents('ul').get(0).level + 1;
         } else {
             this.level = 0;
         }
     });
-    $(this.el).find("li > div").each(function() {
-        var level = $(this).parents(".TreeWidget ul").get(0).level;
-        this.style.paddingLeft = ((level * 15) + 5) + "px";
+    $(this.el).find('li > div').each(function() {
+        var level = $(this).parents('.TreeWidget ul').get(0).level;
+        this.style.paddingLeft = ((level * 15) + 5) + 'px';
         $(this).mousedown(function() {
-            if (self.active !== null) self.active.classList.remove("active");
-            this.classList.add("active");
+            if (self.active !== null) self.active.classList.remove('active');
+            this.classList.add('active');
             self.active = this;
         });
         $(this).dblclick(function() {
@@ -82,7 +82,7 @@ TreeWidget.prototype.addItem = function(caption,className,i) {
 TreeWidget.prototype.removeItem = function(item) {
     this.ul.removeChild(item.li);
     if (this.ul.childElementCount === 0) {
-        this.node.className = "leaf";
+        this.node.className = 'leaf';
     }
     if (this.active === item) {
         this.active = null;

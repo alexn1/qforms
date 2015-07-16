@@ -12,7 +12,7 @@ function ControlController(model, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.create = function(model, parent) {
-    var general = "new {class}Controller(model, parent)".replace("{class}", model.data.class);
+    var general = 'new {class}Controller(model, parent)'.replace('{class}', model.data.class);
     var obj = eval(general);
     return obj;
 };

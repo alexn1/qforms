@@ -8,8 +8,8 @@ function QForms() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.exit = function (evt) {
-    var message = "После обновления или закрытия страницы, все открытые формы и несохраненные данные будут потеряны.";
-    if (typeof evt === "undefined") {
+    var message = 'After refreshing or closing of page, all opened pages and unsaved data will be lost.';
+    if (typeof evt === 'undefined') {
         evt = window.event;
     }
     if (evt) {
@@ -20,9 +20,9 @@ QForms.exit = function (evt) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.errorHandler = function(errorMsg) {
-    var msg = "QForms Error Handler:\n" + errorMsg;
+    var msg = 'QForms Error Handler:\n' + errorMsg;
     if (arguments[4] !== undefined && arguments[4].stack !== undefined) {
-        msg += "\n\nstack:\n" + arguments[4].stack;
+        msg += '\n\nstack:\n' + arguments[4].stack;
     }
     alert(msg);
 };
@@ -30,12 +30,12 @@ QForms.errorHandler = function(errorMsg) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.doHttpRequest = function(self,params,callback) {
     var request = new XMLHttpRequest();
-    request.open("POST", window.location.href);
+    request.open('POST', window.location.href);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.onreadystatechange = function() {
         if (request.readyState === 4) {
             if (request.status !== 200) {
-                throw new Error(request.statusText + ", " + request.responseText);
+                throw new Error(request.statusText + ', ' + request.responseText);
             }
             callback.call(self,JSON.parse(request.responseText));
         }
@@ -61,7 +61,7 @@ QForms.go = function(url, method, params) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.insertNewNodeAt = function(parent,child,i) {
     if (i < 0 || i > parent.children.length) {
-        throw new Error("invalid index i = " + i + ", length = " + parent.childNodes.length);
+        throw new Error('invalid index i = ' + i + ', length = ' + parent.childNodes.length);
     } else if (i === parent.children.length) {
         parent.appendChild(child);
     } else {
@@ -72,7 +72,7 @@ QForms.insertNewNodeAt = function(parent,child,i) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.moveNode = function(parent,child,oldIndex,newIndex) {
     if (oldIndex < 0 || oldIndex >= parent.children.length || newIndex < 0 || newIndex >= parent.children.length) {
-        throw new Error("invalid index");
+        throw new Error('invalid index');
     } else {
         if (newIndex < oldIndex) {
             parent.insertBefore(child,parent.children[newIndex]);
@@ -109,7 +109,7 @@ QForms.merge = function(o1,o2) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.keyToParams = function(key,paramName) {
-    var paramName = (paramName !== undefined) ? paramName : "key";
+    var paramName = (paramName !== undefined) ? paramName : 'key';
     var params = {};
     var arr = JSON.parse(key);
     if (arr.length == 1) {
@@ -120,7 +120,7 @@ QForms.keyToParams = function(key,paramName) {
             params[paramName + n] = arr[i];
         }
     } else {
-        throw new Error("невалидный ключ");
+        throw new Error('invalid key');
     }
     return params;
 };
@@ -131,7 +131,7 @@ QForms.currentTime = function() {
     var hh = now.getHours();if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
     var ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-    return [hh,mm,ss].join(":");
+    return [hh,mm,ss].join(':');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +140,7 @@ QForms.currentDate = function() {
     var dd = now.getDate();if (dd < 10) dd = '0' + dd;
     var mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /*January is 0!*/
     var yyyy = now.getFullYear();
-    return [yyyy,mm,dd].join("-");
+    return [yyyy,mm,dd].join('-');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

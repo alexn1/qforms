@@ -10,7 +10,7 @@ var app    = require('../../qforms');
 module.exports = function(req, res, next) {
     var appFilePath = path.join(app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
     helper.getAppInfo(appFilePath, function(appInfo) {
-        var relFilePath = req.params["0"];
+        var relFilePath = req.params['0'];
         var filePath = path.join(appInfo.dirPath, relFilePath);
         if (path.extname(filePath) === '.css') {
             fs.exists(filePath, function(exists) {

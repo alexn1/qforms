@@ -36,7 +36,7 @@ GridWidget.prototype.init = function() {
     bodyDiv.appendChild(table);
     this.el.appendChild(bodyDiv);
     this.bodyTable = table;
-    $(this.el).children("div.head").children("table").children("tbody").children("tr").children("td").each(function() {
+    $(this.el).children('div.head').children('table').children('tbody').children('tr').children('td').each(function() {
         var columnName = $(this).attr('data-column-name');
         if (columnName !== undefined) {
             self.gridColumns[columnName] = self.createColumn(columnName, this);
@@ -92,7 +92,7 @@ GridWidget.prototype.createBodyCell = function(name) {
     var self = this;
     var view = this.gridColumns[name].renderView();
     // bodyCell
-    var bodyCell = window.document.createElement("td");
+    var bodyCell = window.document.createElement('td');
     bodyCell.style.width = this.gridColumns[name].headerCell.style.width;
     bodyCell.qFieldName = name;
     bodyCell.appendChild(view);
@@ -152,7 +152,7 @@ GridWidget.prototype.onEscPress = function(bodyCell) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.selectBodyCell = function(bodyCell) {
     this.unselectBodyCellIfSelected();
-    bodyCell.classList.add("active");
+    bodyCell.classList.add('active');
     this.selectedBodyCell   = bodyCell;
     this.selectedColumnName = bodyCell.qFieldName;
 };
@@ -161,7 +161,7 @@ GridWidget.prototype.selectBodyCell = function(bodyCell) {
 GridWidget.prototype.unselectBodyCellIfSelected = function() {
     if (this.selectedBodyCell !== null) {
         this.gridColumns[this.selectedBodyCell.qFieldName].unselected(this.selectedBodyCell);
-        this.selectedBodyCell.classList.remove("active");
+        this.selectedBodyCell.classList.remove('active');
         this.selectedBodyCell = null;
     }
 };
@@ -175,7 +175,7 @@ GridWidget.prototype.selectBodyRow = function(bodyRow) {
         this.unselectBodyCellIfSelected();
         this.unselectBodyRowIfSelected();
     }
-    bodyRow.classList.add("active");
+    bodyRow.classList.add('active');
     this.selectedBodyRow = bodyRow;
     if (this.selectedBodyCell === null && this.selectedColumnName !== null) {
         var bodyCellToSelect = this.selectedBodyRow.bodyCells[this.selectedColumnName];
@@ -186,7 +186,7 @@ GridWidget.prototype.selectBodyRow = function(bodyRow) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.unselectBodyRowIfSelected = function() {
     if (this.selectedBodyRow !== null) {
-        this.selectedBodyRow.classList.remove("active");
+        this.selectedBodyRow.classList.remove('active');
         this.selectedBodyRow = null;
     }
 };
@@ -195,11 +195,11 @@ GridWidget.prototype.unselectBodyRowIfSelected = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.saveScroll = function() {
     this.scrollTop = this.bodyTable.scrollTop;
-    //console.log("hide scrollTop: " + this.scrollTop);
+    //console.log('hide scrollTop: ' + this.scrollTop);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.restoreScroll = function() {
     this.bodyTable.scrollTop = this.scrollTop;
-    //console.log("show scrollTop: " + this.scrollTop);
+    //console.log('show scrollTop: ' + this.scrollTop);
 };

@@ -36,14 +36,14 @@ PageEditor.createData = function(params) {
     return {
         '@class'      :'Page',
         '@attributes' : {
-            'formatVer' : "0.1",
-            'name'      : params['name'],
-            'caption'   : params['caption'] ? params['caption'] : params['name'],
-            'width'     : params['width']   ? params['width']   : '640',
-            'height'    : params['height']  ? params['height']  : '480'
+            formatVer : '0.1',
+            name      : params['name'],
+            caption   : params['caption'] ? params['caption'] : params['name'],
+            width     : params['width']   ? params['width']   : '640',
+            height    : params['height']  ? params['height']  : '480'
         },
-        'dataSources' : {},
-        'forms'       : {}
+        dataSources : {},
+        forms       : {}
     };
 };
 

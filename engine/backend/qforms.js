@@ -72,13 +72,13 @@ qforms.post('/edit/:appDirName/:appFileName', editor);
 qforms.use(error.e404);
 qforms.use(error.page);
 
-process.on("SIGINT", function () {
+process.on('SIGINT', function () {
     console.log('process.SIGINT');
     process.exit();
 });
 
-process.on("exit", function () {
-    console.log("process.exit");
+process.on('exit', function () {
+    console.log('process.exit');
     var apps = _.map(qforms.get('applications'), function(app) {return app;});
     async.eachSeries(apps, function(app, next) {
         app.deinit(next);
