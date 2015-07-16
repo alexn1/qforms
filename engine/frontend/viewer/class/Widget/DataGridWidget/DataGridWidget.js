@@ -19,6 +19,8 @@ DataGridWidget.prototype.init = function() {
     this.dataSource.eventRemoveRow.subscribe(this, 'onRemoveRow');
     this.dataSource.eventMoveRow.subscribe(this, 'onMoveRow');
     this.dataSource.eventNewFrame.subscribe(this, 'onNewFrame');
+    this.dataSource.eventInsert.subscribe(this, 'onInsert');
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +39,7 @@ DataGridWidget.prototype.deinit = function() {
     this.dataSource.eventRemoveRow.unsubscribe(this, 'onRemoveRow');
     this.dataSource.eventMoveRow.unsubscribe(this, 'onMoveRow');
     this.dataSource.eventNewFrame.unsubscribe(this, 'onNewFrame');
+    this.dataSource.eventInsert.unsubscribe(this, 'onInsert');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,10 +118,13 @@ DataGridWidget.prototype.onNewRow = function(ea) {
     }
     this.setRowStyle(bodyRow);
     this.keyToBodyRow[key] = bodyRow;
-    /*
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataGridWidget.prototype.onInsert = function(ea) {
+    var bodyRow = this.keyToBodyRow[ea.key];
     this.selectBodyRow(bodyRow);
     bodyRow.scrollIntoView();
-    */
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +146,6 @@ DataGridWidget.prototype.onRemoveRow = function(ea) {
         }
         */
     }
-
     this.bodyTable.removeChild(bodyRow);
     delete this.keyToBodyRow[key];
 };

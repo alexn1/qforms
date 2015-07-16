@@ -18,6 +18,7 @@ function DataSource(name, parent, data) {
     this.params    = {};   						// refill params of row
     this.eventChanged   = new QForms.Event(this);
     this.eventUpdated   = new QForms.Event(this);
+    this.eventInsert    = new QForms.Event(this);
     this.eventNewRow    = new QForms.Event(this);
     this.eventRemoveRow = new QForms.Event(this);
     this.eventRefillRow = new QForms.Event(this);
@@ -34,14 +35,20 @@ DataSource.prototype.init = function() {
     this.rowsByKey = vals.rowsByKey;
     this.childs    = vals.childs;
     if (this.data.table !== '') {
-        this.getApp().getTable(this.fullTableName).eventUpdated.subscribe(this, 'onTableUpdated');
+        var table = this.getApp().getTable(this.fullTableName);
+        table.eventUpdated.subscribe(this, 'onTableUpdated');
+        table.eventInsert.subscribe(this, 'onTableInsert');
+        table.eventDelete.subscribe(this, 'onTableDelete');
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.deinit = function() {
     if (this.data.table !== '') {
-        this.getApp().getTable(this.fullTableName).eventUpdated.unsubscribe(this, 'onTableUpdated');
+        var table = this.getApp().getTable(this.fullTableName);
+        table.eventUpdated.unsubscribe(this, 'onTableUpdated');
+        table.eventInsert.unsubscribe(this, 'onTableInsert');
+        table.eventDelete.unsubscribe(this, 'onTableDelete');
     }
 };
 
@@ -161,15 +168,37 @@ DataSource.prototype.update = function(callbak) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.onTableUpdated = function(ea) {
-    var page = this.getPage();
-    var params = (page !== null) ? page.params : {};
-    this.refresh(params);
+    var self = this;
+    this.refresh(function() {
+        // data source has been updated
+        self.eventUpdated.fire(new QForms.EventArg(self));
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.onTableInsert = function(ea) {
+    console.log('DataSource.prototype.onTableInsert');
+    console.log(ea.key);
+    var self = this;
+    this.refresh(function() {
+        if (self.rowsByKey[ea.key]) {
+            var _ea = new QForms.EventArg(this);
+            _ea.key = ea.key;
+            self.eventInsert.fire(_ea);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.onTableDelete = function(ea) {
+    var self = this;
+    this.refresh(function() {
+
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.refill = function(params, callback) {
-    //this.frame(params, 1);
-
     this.offset = 0;
     var self = this;
     this._getData(params, function(data) {
@@ -179,11 +208,12 @@ DataSource.prototype.refill = function(params, callback) {
         self.childs    = vals.childs;
         callback();
     });
-
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refresh = function(params) {
+DataSource.prototype.refresh = function(callback) {
+    var page = this.getPage();
+    var params = (page !== null) ? page.params : {};
     var self = this;
     this._getData(params, function(data) {
         var rows = data.rows;
@@ -197,8 +227,7 @@ DataSource.prototype.refresh = function(params) {
         var _new = self.getKeysAndChilds(rows);		// generate hash table with new keys
         self.sync(_old, _new, '[null]');
         //console.log(self.childs);
-        // data source has been updated
-        self.eventUpdated.fire(new QForms.EventArg(self));
+        callback();
     });
 };
 
@@ -490,9 +519,10 @@ DataSource.prototype.insert = function(row, callback) {
                 this.params[name] = params[name];
             }
             this.insertRow = null;
-
         }
-        this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
+        var ea = new QForms.EventArg(this);
+        ea.key = data.key;
+        this.form.page.app.tables[this.fullTableName].fireInsert(ea);
         if (callback) {
             callback(data.key);
         }
@@ -511,14 +541,16 @@ DataSource.prototype.delete = function(key) {
         return;
     }
     var args = {
-        action:'_delete',
-        page:this.form.page.name,
-        form:this.form.name,
-        ds:this.name,
-        row:this.rowsByKey[key]
+        action: '_delete',
+        page  : this.form.page.name,
+        form  : this.form.name,
+        ds    : this.name,
+        row   : this.rowsByKey[key]
     };
     QForms.doHttpRequest(this, args, function(data) {
-        this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
+        var ea = new QForms.EventArg(this);
+        ea.key = key;
+        this.form.page.app.tables[this.fullTableName].fireDelete(ea);
     });
 };
 
