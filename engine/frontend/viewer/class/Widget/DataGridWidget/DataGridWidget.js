@@ -115,8 +115,10 @@ DataGridWidget.prototype.onNewRow = function(ea) {
     }
     this.setRowStyle(bodyRow);
     this.keyToBodyRow[key] = bodyRow;
+    /*
     this.selectBodyRow(bodyRow);
     bodyRow.scrollIntoView();
+    */
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +127,9 @@ DataGridWidget.prototype.onRemoveRow = function(ea) {
     var bodyRow = this.keyToBodyRow[key];
     //console.log('onRemoveRow: ' + key);
     if (this.selectedBodyRow === bodyRow) {
+        this.selectedBodyRow  = null;
+        this.selectedBodyCell = null;
+        /*
         if (this.selectedBodyRow.nextSibling) {
             this.selectBodyRow(this.selectedBodyRow.nextSibling);
         } else if (bodyRow === this.bodyTable.lastElementChild && this.bodyTable.lastElementChild.previousSibling) {
@@ -133,7 +138,9 @@ DataGridWidget.prototype.onRemoveRow = function(ea) {
             this.unselectBodyCellIfSelected();
             this.unselectBodyRowIfSelected();
         }
+        */
     }
+
     this.bodyTable.removeChild(bodyRow);
     delete this.keyToBodyRow[key];
 };

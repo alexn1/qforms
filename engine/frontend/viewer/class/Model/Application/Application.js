@@ -49,16 +49,11 @@ Application.prototype.deinit = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.subDsToTableUpdated = function(dataSource) {
-    if (!(dataSource.fullTableName in this.tables)) {
-        this.tables[dataSource.fullTableName] = new qfTable(dataSource.fullTableName);
+Application.prototype.getTable = function(fullTableName) {
+    if (!(fullTableName in this.tables)) {
+        this.tables[fullTableName] = new qfTable(fullTableName);
     }
-    this.tables[dataSource.fullTableName].eventUpdated.subscribe(dataSource, 'onTableUpdated');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.unsubDsFromTableUpdated = function(dataSource) {
-    this.tables[dataSource.fullTableName].eventUpdated.unsubscribe(dataSource, 'onTableUpdated');
+    return this.tables[fullTableName];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

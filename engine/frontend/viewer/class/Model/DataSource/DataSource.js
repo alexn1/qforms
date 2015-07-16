@@ -34,14 +34,14 @@ DataSource.prototype.init = function() {
     this.rowsByKey = vals.rowsByKey;
     this.childs    = vals.childs;
     if (this.data.table !== '') {
-        this.getApp().subDsToTableUpdated(this);
+        this.getApp().getTable(this.fullTableName).eventUpdated.subscribe(this, 'onTableUpdated');
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.deinit = function() {
     if (this.data.table !== '') {
-        this.getApp().unsubDsFromTableUpdated(this);
+        this.getApp().getTable(this.fullTableName).eventUpdated.unsubscribe(this, 'onTableUpdated');
     }
 };
 
@@ -160,7 +160,7 @@ DataSource.prototype.update = function(callbak) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.onTableUpdated = function(eventArg) {
+DataSource.prototype.onTableUpdated = function(ea) {
     var page = this.getPage();
     var params = (page !== null) ? page.params : {};
     this.refresh(params);
@@ -475,11 +475,11 @@ DataSource.prototype.insert = function(row, callback) {
         return;
     }
     var args = {
-        action:'insert',
-        page:this.form.page.name,
-        form:this.form.name,
-        ds:this.name,
-        row:row
+        action: 'insert',
+        page  : this.form.page.name,
+        form  : this.form.name,
+        ds    : this.name,
+        row   : row
     };
     QForms.doHttpRequest(this, args, function(data) {
         if (row === this.insertRow) {
@@ -493,7 +493,9 @@ DataSource.prototype.insert = function(row, callback) {
 
         }
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
-        if (callback) callback(data.key);
+        if (callback) {
+            callback(data.key);
+        }
     });
 };
 
