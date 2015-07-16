@@ -155,17 +155,6 @@ DataSourceController.prototype.getRowKeyValues = function(row) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getRowNonKeyValues = function(row) {
-    var values = {};
-    for (var column in row) {
-        if (this.keyColumns.indexOf(column) === -1) {
-            values[column] = row[column];
-        }
-    }
-    return values;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getFullName = function() {
     if (this.form) {
         return [this.form.page.name, this.form.name, this.name].join('.');

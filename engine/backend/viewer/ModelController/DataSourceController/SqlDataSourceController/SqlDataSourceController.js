@@ -99,9 +99,9 @@ SqlDataSourceController.prototype._desc = function(callback) {
     var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
     this._query(query, null, function(rows) {
         rows.forEach(function(info) {
-            self.desc[info.Field] = info;
-            if (info.Extra === 'auto_increment') {
-                self.aiFieldName = info.Field;
+            self.desc[info.COLUMNS.Field] = info.COLUMNS;
+            if (info.COLUMNS.Extra === 'auto_increment') {
+                self.aiFieldName = info.COLUMNS.Field;
             }
         });
         callback();
@@ -139,12 +139,28 @@ SqlDataSourceController.prototype.selectCount = function(args, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.update = function(args, callback) {
     var row = args.row;
-    var query = new sqlish.Sqlish()
-        .update(this.data['@attributes'].table)
-        .set(this.getRowNonKeyValues(row))
-        .where(this.getRowKeyValues(row))
-        .toString();
-    this._query(query, null, callback);
+    var self = this;
+
+    var updateRow = function() {
+        var values = {};
+        for (var column in row) {
+            // if exists in table and not key column 
+            if (self.desc[column] !== undefined && self.keyColumns.indexOf(column)) {
+                values[column] = row[column];
+            }
+        }
+        var query = new sqlish.Sqlish()
+            .update(self.data['@attributes'].table)
+            .set(values)
+            .where(self.getRowKeyValues(row))
+            .toString();
+        self._query(query, null, callback);
+    };
+    if (!this.desc) {
+        this._desc(updateRow);
+    } else {
+        updateRow();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
