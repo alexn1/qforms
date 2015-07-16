@@ -85,7 +85,7 @@ DataSourceEditorController.prototype.delete = function(params, callback) {
 DataSourceEditorController.prototype.moveUp = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         if (params.page) {
-            appEditor.getPageByFileName(params.page,function(pageEditor) {
+            appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
                     // form data source
                     var formEditor = pageEditor.getForm(params.form);
@@ -115,7 +115,7 @@ DataSourceEditorController.prototype.moveUp = function(params, callback) {
 DataSourceEditorController.prototype.moveDown = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         if (params.page) {
-            appEditor.getPageByFileName(params.page,function(pageEditor) {
+            appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
                     // form data source
                     var formEditor = pageEditor.getForm(params.form);
@@ -146,7 +146,7 @@ DataSourceEditorController.prototype.moveDown = function(params, callback) {
 DataSourceEditorController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         if (params.pageFileName) {
-            appEditor.getPageByFileName(params.pageFileName,function(pageEditor) {
+            appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
                 if (params.form) {
                     // form data source
                     pageEditor.pageFile.setFormDataSourceAttr(params['form'], params['dataSource'], params['attr'], params['value']);

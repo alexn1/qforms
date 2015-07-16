@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(TreeForm,Form);
+QForms.inherit(TreeForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TreeForm(name,page,data) {
-    Form.call(this,name,page,data);
+function TreeForm(name, page, data) {
+    Form.call(this, name, page, data);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ TreeForm.prototype.new = function(row) {
     this.openPage({
         name:this.data.itemEditPage,
         newMode:true,
-        params:QForms.keyToParams(key,'parentKey')
+        params:QForms.keyToParams(key, 'parentKey')
     });
 };
 

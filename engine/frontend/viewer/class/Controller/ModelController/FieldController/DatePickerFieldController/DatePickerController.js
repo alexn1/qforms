@@ -1,15 +1,15 @@
 'use strict';
 
-QForms.inherit(DatePickerFieldController,FieldController);
+QForms.inherit(DatePickerFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function DatePickerFieldController(model,parent) {
-    DatePickerFieldController.super_.call(this,model,parent);
+function DatePickerFieldController(model, parent) {
+    DatePickerFieldController.super_.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatePickerFieldController.prototype.fill = function(row,view) {
+DatePickerFieldController.prototype.fill = function(row, view) {
     DatePickerFieldController.super_.prototype.fill.call(this, row, view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;

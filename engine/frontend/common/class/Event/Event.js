@@ -8,16 +8,16 @@ QForms.Event = function(parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.Event.prototype.subscribe = function(obj, method) {
-    this.list.push({'obj':obj,'method':method});
+    this.list.push({'obj':obj, 'method':method});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.Event.prototype.unsubscribe = function(obj, method) {
-    var index = this.getIndex(obj,method);
+    var index = this.getIndex(obj, method);
     if (index == -1) {
         throw new Error('Subscriber not found.');
     }
-    this.list.splice(index,1);
+    this.list.splice(index, 1);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

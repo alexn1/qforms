@@ -83,7 +83,7 @@ DataSource.prototype.getFramesCount = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setValue = function(row,column,value) {
+DataSource.prototype.setValue = function(row, column, value) {
     row[column] = value;
     if (this.data.table !== '') {
         if (this.insertRow === null) {
@@ -116,7 +116,7 @@ DataSource.prototype.getRowParentKey = function(row) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setRowKey = function(row,key) {
+DataSource.prototype.setRowKey = function(row, key) {
     var values = this.splitKey(key);
     for (var name in values) {
         row[name] = values[name];
@@ -141,7 +141,7 @@ DataSource.prototype.update = function(callbak) {
         return;
     }
     if (this.insertRow !== null) {
-        return this.insert(this.insertRow,callbak);
+        return this.insert(this.insertRow, callbak);
     }
     if (this.updateRow === null) {
         return;
@@ -153,7 +153,7 @@ DataSource.prototype.update = function(callbak) {
         ds:this.name,
         row:this.updateRow
     };
-    QForms.doHttpRequest(this,params,function(data) {
+    QForms.doHttpRequest(this, params, function(data) {
         this.updateRow = null;
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
     });
@@ -237,7 +237,7 @@ DataSource.prototype.frame = function(params, frame) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // copy new values to data source row
 //
-DataSource.prototype.copyNewValues = function(oldRow,newRow) {
+DataSource.prototype.copyNewValues = function(oldRow, newRow) {
     for (var columnName in newRow) {
         oldRow[columnName] = newRow[columnName];
     }
@@ -247,29 +247,29 @@ DataSource.prototype.copyNewValues = function(oldRow,newRow) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // remove row from current tree item list and move it ot it's new tree item list
 //
-DataSource.prototype._goneRow = function(_old,_new,parentKey,i,key) {
+DataSource.prototype._goneRow = function(_old, _new, parentKey, i, key) {
     var newRow = _new.rowsByKey[key];
     var oldRow = _old.rowsByKey[key];
     var newParentKey = this.getRowParentKey(newRow);
     var index = _new.childs[newParentKey].keysByIndex.indexOf(key);
-    this.removeFromChilds(_old.childs,parentKey,i,key);
-    this.addToChilds(_old.childs,newParentKey,index,key,oldRow);
+    this.removeFromChilds(_old.childs, parentKey, i, key);
+    this.addToChilds(_old.childs, newParentKey, index, key, oldRow);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // add row to new tree item list after deleting from it old tree item list
-DataSource.prototype._comeRow = function(_old,_new,parentKey,i,key) {
+DataSource.prototype._comeRow = function(_old, _new, parentKey, i, key) {
     var oldRow = _old.rowsByKey[key];
     var oldParentKey = this.getRowParentKey(oldRow);
     var index = _old.childs[oldParentKey].keysByIndex.indexOf(key);
-    this.removeFromChilds(_old.childs,oldParentKey,index,key);
-    this.addToChilds(_old.childs,parentKey,i,key,oldRow);
+    this.removeFromChilds(_old.childs, oldParentKey, index, key);
+    this.addToChilds(_old.childs, parentKey, i, key, oldRow);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.removeFromChilds = function(childs,parentKey,i,key) {
-    childs[parentKey].rowsByIndex.splice(i,1);
-    childs[parentKey].keysByIndex.splice(i,1);
+DataSource.prototype.removeFromChilds = function(childs, parentKey, i, key) {
+    childs[parentKey].rowsByIndex.splice(i, 1);
+    childs[parentKey].keysByIndex.splice(i, 1);
     delete childs[parentKey].rowsByKey[key];
     // remove empty list
     if (childs[parentKey].rowsByIndex.length === 0) {
@@ -278,7 +278,7 @@ DataSource.prototype.removeFromChilds = function(childs,parentKey,i,key) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.addToChilds = function(childs,parentKey,i,key,row) {
+DataSource.prototype.addToChilds = function(childs, parentKey, i, key, row) {
     if (childs[parentKey] === undefined) {
         childs[parentKey] = {
             rowsByIndex:[],
@@ -286,15 +286,15 @@ DataSource.prototype.addToChilds = function(childs,parentKey,i,key,row) {
             rowsByKey:{}
         };
     }
-    childs[parentKey].rowsByIndex.splice(i,0,row);
-    childs[parentKey].keysByIndex.splice(i,0,key);
+    childs[parentKey].rowsByIndex.splice(i, 0, row);
+    childs[parentKey].keysByIndex.splice(i, 0, key);
     childs[parentKey].rowsByKey[key] = row;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.moveChilds = function(childs,oldIndex,newIndex) {
-    QForms.moveArrayElement(childs.rowsByIndex,oldIndex,newIndex);
-    QForms.moveArrayElement(childs.keysByIndex,oldIndex,newIndex);
+DataSource.prototype.moveChilds = function(childs, oldIndex, newIndex) {
+    QForms.moveArrayElement(childs.rowsByIndex, oldIndex, newIndex);
+    QForms.moveArrayElement(childs.keysByIndex, oldIndex, newIndex);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -302,7 +302,7 @@ DataSource.prototype.moveChilds = function(childs,oldIndex,newIndex) {
 // compare old and new list, change it and send notification to every row that has been changed
 // add, remove, move, come, gone for widgets to be able update it's view
 //
-DataSource.prototype.sync = function(_old,_new,parentKey) {
+DataSource.prototype.sync = function(_old, _new, parentKey) {
     var oldChilds = _old.childs[parentKey];
     var newChilds = _new.childs[parentKey];
     if (oldChilds === undefined && newChilds === undefined) {
@@ -322,55 +322,55 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
         }
         if (nKey !== null && oKey !== null) { // if not reached the end of each list
             if (nKey === oKey) {
-                this.copyNewValues(oldChilds.rowsByIndex[i],newChilds.rowsByIndex[i]);
-                this.sync(_old,_new,oKey);// for the child rows
-                this.fireRefillRow(oKey,i);
+                this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                this.sync(_old, _new, oKey);// for the child rows
+                this.fireRefillRow(oKey, i);
                 i++;
             } else { // если ключи не равны, то
                 if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
                     if (!(oKey in _new.rowsByKey)) {  // if the old key in a new global list does not exists, then the row is removed
-                        this.sync(_old,_new,oKey);
-                        this.removeFromChilds(_old.childs,parentKey,i,oKey);
+                        this.sync(_old, _new, oKey);
+                        this.removeFromChilds(_old.childs, parentKey, i, oKey);
                         delete _old.rowsByKey[oKey];
                         this.fireRemoveRow(oKey);
                     } else {
-                        this._goneRow(_old,_new,parentKey,i,oKey);
-                        this.copyNewValues(_old.rowsByKey[oKey],_new.rowsByKey[oKey]);
+                        this._goneRow(_old, _new, parentKey, i, oKey);
+                        this.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
                         var newRow = _new.rowsByKey[oKey];
                         var newParentKey = this.getRowParentKey(newRow);
                         var newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
-                        this.fireGoneRow(parentKey,oKey,newParentKey,newIndex);
+                        this.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
                     }
                 } else if (!(nKey in oldChilds.rowsByKey)) {  // If the new key in the old local list is not listed, then ...
                     // if the new key in the old global list does not listed, the row is added
                     if (!(nKey in _old.rowsByKey)) {
-                        this.addToChilds(_old.childs,parentKey,i,nKey,newChilds.rowsByIndex[i]);
+                        this.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
                         _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
-                        this.sync(_old,_new,nKey);
-                        this.fireNewRow(i,parentKey,nKey);
+                        this.sync(_old, _new, nKey);
+                        this.fireNewRow(i, parentKey, nKey);
                     } else {
-                        this._comeRow(_old,_new,parentKey,i,nKey);
-                        this.copyNewValues(_old.rowsByKey[nKey],_new.rowsByKey[nKey]);
-                        this.sync(_old,_new,nKey);
+                        this._comeRow(_old, _new, parentKey, i, nKey);
+                        this.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
+                        this.sync(_old, _new, nKey);
                         var oldRow = _old.rowsByKey[nKey];
                         var oldParentKey = this.getRowParentKey(oldRow);
-                        this.fireComeRow(parentKey,nKey,oldParentKey,i);
+                        this.fireComeRow(parentKey, nKey, oldParentKey, i);
                     }
                     i++;
                 } else { // if the key is in both of local lists, then the row moved
                     var oldIndexOfNewKey = oldChilds.keysByIndex.indexOf(nKey);
                     var newIndexOfOldKey = newChilds.keysByIndex.indexOf(oKey);
                     if (Math.abs(newIndexOfOldKey - i) > Math.abs(oldIndexOfNewKey - i)) {
-                        this.moveChilds(oldChilds,i,newIndexOfOldKey);
-                        this.copyNewValues(oldChilds.rowsByIndex[i],newChilds.rowsByIndex[i]);
-                        this.sync(_old,_new,oldChilds.keysByIndex[i]);
-                        this.fireMoveRow(i,newIndexOfOldKey,oKey,parentKey);
+                        this.moveChilds(oldChilds, i, newIndexOfOldKey);
+                        this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                        this.sync(_old, _new, oldChilds.keysByIndex[i]);
+                        this.fireMoveRow(i, newIndexOfOldKey, oKey, parentKey);
                         i++;
                     } else {
-                        this.moveChilds(oldChilds,oldIndexOfNewKey,i);
-                        this.copyNewValues(oldChilds.rowsByIndex[i],newChilds.rowsByIndex[i]);
-                        this.sync(_old,_new,oldChilds.keysByIndex[i]);
-                        this.fireMoveRow(oldIndexOfNewKey,i,nKey,parentKey);
+                        this.moveChilds(oldChilds, oldIndexOfNewKey, i);
+                        this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                        this.sync(_old, _new, oldChilds.keysByIndex[i]);
+                        this.fireMoveRow(oldIndexOfNewKey, i, nKey, parentKey);
                         i++;
                     }
                 }
@@ -378,32 +378,32 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
         } else { // if one of the lists has ended
             if (nKey === null && oKey !== null) { // if last element has been removed
                 if (!(oKey in _new.rowsByKey)) { // if the old key in a new global list does not listed, then the row is removed
-                    this.sync(_old,_new,oKey);
-                    this.removeFromChilds(_old.childs,parentKey,i,oKey);
+                    this.sync(_old, _new, oKey);
+                    this.removeFromChilds(_old.childs, parentKey, i, oKey);
                     delete _old.rowsByKey[oKey];
                     this.fireRemoveRow(oKey);
                 } else {
-                    this._goneRow(_old,_new,parentKey,i,oKey);
-                    this.copyNewValues(_old.rowsByKey[oKey],_new.rowsByKey[oKey]);
+                    this._goneRow(_old, _new, parentKey, i, oKey);
+                    this.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
                     var newRow = _new.rowsByKey[oKey];
                     var newParentKey = this.getRowParentKey(newRow);
                     var newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
-                    this.fireGoneRow(parentKey,oKey,newParentKey,newIndex);
+                    this.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
                 }
             }
             if (nKey !== null && oKey === null) { // if last element appeared
                 if (!(nKey in _old.rowsByKey)) { // if the new key in the old global list does not listed, the row is added
-                    this.addToChilds(_old.childs,parentKey,i,nKey,newChilds.rowsByIndex[i]);
+                    this.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
                     _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
-                    this.sync(_old,_new,nKey);
-                    this.fireNewRow(i,parentKey,nKey);
+                    this.sync(_old, _new, nKey);
+                    this.fireNewRow(i, parentKey, nKey);
                 } else {
-                    this._comeRow(_old,_new,parentKey,i,nKey);
-                    this.copyNewValues(_old.rowsByKey[nKey],_new.rowsByKey[nKey]);
-                    this.sync(_old,_new,nKey);
+                    this._comeRow(_old, _new, parentKey, i, nKey);
+                    this.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
+                    this.sync(_old, _new, nKey);
                     var oldRow = _old.rowsByKey[nKey];
                     var oldParentKey = this.getRowParentKey(oldRow);
-                    this.fireComeRow(parentKey,nKey,oldParentKey,i);
+                    this.fireComeRow(parentKey, nKey, oldParentKey, i);
                 }
                 i++;
             }
@@ -412,7 +412,7 @@ DataSource.prototype.sync = function(_old,_new,parentKey) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireRefillRow = function(key,i) {
+DataSource.prototype.fireRefillRow = function(key, i) {
     var ea = new QForms.EventArg(this);
     ea.key = key;
     ea.i = i;
@@ -427,7 +427,7 @@ DataSource.prototype.fireRemoveRow = function(key) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireNewRow = function(i,parentKey,key) {
+DataSource.prototype.fireNewRow = function(i, parentKey, key) {
     //console.log('fireNewRow: ' + i);
     var ea = new QForms.EventArg(this);
     ea.i = i;
@@ -437,7 +437,7 @@ DataSource.prototype.fireNewRow = function(i,parentKey,key) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireMoveRow = function(oldIndex,newIndex,key,parentKey) {
+DataSource.prototype.fireMoveRow = function(oldIndex, newIndex, key, parentKey) {
     var ea = new QForms.EventArg(this);
     ea.oldIndex = oldIndex;
     ea.newIndex = newIndex;
@@ -447,7 +447,7 @@ DataSource.prototype.fireMoveRow = function(oldIndex,newIndex,key,parentKey) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex) {
+DataSource.prototype.fireGoneRow = function(parentKey, key, newParentKey, newIndex) {
     //console.log('fireGoneRow');
     var ea = new QForms.EventArg(this);
     ea.parentKey = parentKey;
@@ -458,7 +458,7 @@ DataSource.prototype.fireGoneRow = function(parentKey,key,newParentKey,newIndex)
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex) {
+DataSource.prototype.fireComeRow = function(parentKey, key, oldParentKey, newIndex) {
     //console.log('fireComeRow');
     var ea = new QForms.EventArg(this);
     ea.parentKey = parentKey;
@@ -470,7 +470,7 @@ DataSource.prototype.fireComeRow = function(parentKey,key,oldParentKey,newIndex)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.insert = function(row,callback) {
+DataSource.prototype.insert = function(row, callback) {
     if (this.data.table === '') {
         return;
     }
@@ -481,9 +481,9 @@ DataSource.prototype.insert = function(row,callback) {
         ds:this.name,
         row:row
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         if (row === this.insertRow) {
-            this.setRowKey(this.insertRow,data.key);
+            this.setRowKey(this.insertRow, data.key);
             var params = QForms.keyToParams(data.key);
             // save key params for refill
             for (var name in params) {
@@ -515,7 +515,7 @@ DataSource.prototype.delete = function(key) {
         ds:this.name,
         row:this.rowsByKey[key]
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         this.form.page.app.tables[this.fullTableName].fireUpdated(new QForms.EventArg(this));
     });
 };

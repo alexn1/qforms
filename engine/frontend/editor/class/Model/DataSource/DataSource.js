@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(DataSource,Model);
+QForms.inherit(DataSource, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSource(data, parent) {
@@ -51,7 +51,7 @@ DataSource.prototype.setValue = function(name, value, callback) {
         args.params.form = this.parent.data['@attributes'].name;
         args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
     }
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -146,7 +146,7 @@ DataSource.prototype.newKeyColumn = function(name, callback) {
     if (this.parent instanceof Page) {
         args.params.page = this.parent.pageLink.data['@attributes'].fileName;
     }
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -154,7 +154,7 @@ DataSource.prototype.newKeyColumn = function(name, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.newParentKeyColumn = function(name,callback) {
+DataSource.prototype.newParentKeyColumn = function(name, callback) {
     var args = {
         controller:'ParentKeyColumn',
         action:'_new',
@@ -165,7 +165,7 @@ DataSource.prototype.newParentKeyColumn = function(name,callback) {
             name:name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -173,7 +173,7 @@ DataSource.prototype.newParentKeyColumn = function(name,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getView = function(view,callback) {
+DataSource.prototype.getView = function(view, callback) {
     var args = {
         controller:'DataSource',
         action:'getView',
@@ -181,7 +181,7 @@ DataSource.prototype.getView = function(view,callback) {
             view:view
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

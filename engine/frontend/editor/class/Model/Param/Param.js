@@ -1,15 +1,15 @@
 'use strict';
 
-QForms.inherit(Param,Model);
+QForms.inherit(Param, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function Param(data,database) {
-    Model.call(this,data);
+function Param(data, database) {
+    Model.call(this, data);
     this.database = database;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Param.prototype.setValue = function(name,value,callback) {
+Param.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Param',
@@ -21,7 +21,7 @@ Param.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -39,7 +39,7 @@ Param.prototype.delete = function(callback) {
             param:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -47,7 +47,7 @@ Param.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Param.prototype.getView = function(view,callback) {
+Param.prototype.getView = function(view, callback) {
     var args = {
         controller:'Param',
         action:'getView',
@@ -55,7 +55,7 @@ Param.prototype.getView = function(view,callback) {
             view:view
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

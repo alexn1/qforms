@@ -1,8 +1,8 @@
 'use strict';
 
-QForms.inherit(DatePickerField,Field);
+QForms.inherit(DatePickerField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function DatePickerField(name,form,data) {
-    Field.call(this,name,form,data);
+function DatePickerField(name, form, data) {
+    Field.call(this, name, form, data);
 };

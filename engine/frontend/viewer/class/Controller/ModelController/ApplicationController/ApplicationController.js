@@ -1,20 +1,20 @@
 'use strict';
 
-QForms.inherit(ApplicationController,ModelController);
+QForms.inherit(ApplicationController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ApplicationController(model,view) {
-    ModelController.call(this,model);
+function ApplicationController(model, view) {
+    ModelController.call(this, model);
     this.view  = view;
     this.appTC = null;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.create = function(model,view) {
-    var customClassName   = '{app}Controller'.replace('{app}',model.name);
+ApplicationController.create = function(model, view) {
+    var customClassName   = '{app}Controller'.replace('{app}', model.name);
     var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
-    var custom            = 'new {customClassName}(model,view)'.replace('{customClassName}', customClassName);
-    var general           = 'new {class}Controller(model,view)'.replace('{class}', model.data.class);
+    var custom            = 'new {customClassName}(model, view)'.replace('{customClassName}', customClassName);
+    var general           = 'new {class}Controller(model, view)'.replace('{class}', model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === 'function') {
@@ -34,40 +34,40 @@ ApplicationController.prototype.init = function() {
     // appTC
     this.appTC = new TabWidget(this.view.querySelector('#appTC'));
     this.appTC.init();
-    this.appTC.eventTabClosingByUser.subscribe(this,'onTabClosingByUser');
-    this.appTC.eventTabShow.subscribe(this,'onTabShow');
-    this.appTC.eventTabHide.subscribe(this,'onTabHide');
+    this.appTC.eventTabClosingByUser.subscribe(this, 'onTabClosingByUser');
+    this.appTC.eventTabShow.subscribe(this, 'onTabShow');
+    this.appTC.eventTabHide.subscribe(this, 'onTabHide');
     // app
-    this.model.eventPageOpened.subscribe(this,'onPageOpened');
-    this.model.eventPageClosed.subscribe(this,'onPageClosed');
-    this.model.eventPageSelected.subscribe(this,'onPageSelected');
-    this.model.eventLogout.subscribe(this,'onLogout');
+    this.model.eventPageOpened.subscribe(this, 'onPageOpened');
+    this.model.eventPageClosed.subscribe(this, 'onPageClosed');
+    this.model.eventPageSelected.subscribe(this, 'onPageSelected');
+    this.model.eventLogout.subscribe(this, 'onLogout');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.deinit = function() {
     // app
-    this.model.eventPageOpened.unsubscribe(this,'onPageOpened');
-    this.model.eventPageClosed.unsubscribe(this,'onPageClosed');
-    this.model.eventPageSelected.unsubscribe(this,'onPageSelected');
+    this.model.eventPageOpened.unsubscribe(this, 'onPageOpened');
+    this.model.eventPageClosed.unsubscribe(this, 'onPageClosed');
+    this.model.eventPageSelected.unsubscribe(this, 'onPageSelected');
     // TabWidget
-    this.appTC.eventTabClosingByUser.unsubscribe(this,'onTabClosingByUser');
-    this.appTC.eventTabShow.unsubscribe(this,'onTabShow');
-    this.appTC.eventTabHide.unsubscribe(this,'onTabHide');
+    this.appTC.eventTabClosingByUser.unsubscribe(this, 'onTabClosingByUser');
+    this.appTC.eventTabShow.unsubscribe(this, 'onTabShow');
+    this.appTC.eventTabHide.unsubscribe(this, 'onTabHide');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageOpened = function(e) {
-    var html = QForms.render(e.page.data.view,{model:e.page});
+    var html = QForms.render(e.page.data.view, {model:e.page});
     var view = $(html).get(0);
     var tab = this.appTC.createTab(view);
-    $(tab).children('span').get(0).className = '{id}_caption'.replace('{id}',view.id);
+    $(tab).children('span').get(0).className = '{id}_caption'.replace('{id}', view.id);
     if (e.select) {
         this.appTC.selectTab(tab, e.track);
     }
     tab.qPage = e.page;
     e.page.qTab = tab;
-    tab.pageController = PageController.create(e.page,view,this);
+    tab.pageController = PageController.create(e.page, view, this);
     tab.pageController.init();
     tab.pageController.fill();
 };

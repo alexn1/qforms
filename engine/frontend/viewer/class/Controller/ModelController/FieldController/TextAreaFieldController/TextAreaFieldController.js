@@ -1,8 +1,8 @@
 'use strict';
 
-QForms.inherit(TextAreaFieldController,FieldController);
+QForms.inherit(TextAreaFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TextAreaFieldController(model,parent) {
-    FieldController.call(this,model,parent);
+function TextAreaFieldController(model, parent) {
+    FieldController.call(this, model, parent);
 };

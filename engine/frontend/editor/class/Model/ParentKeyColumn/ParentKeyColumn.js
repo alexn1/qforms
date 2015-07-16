@@ -1,15 +1,15 @@
 'use strict';
 
-QForms.inherit(ParentKeyColumn,Model);
+QForms.inherit(ParentKeyColumn, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ParentKeyColumn(data,dataSource) {
-    Model.call(this,data);
+function ParentKeyColumn(data, dataSource) {
+    Model.call(this, data);
     this.dataSource = dataSource;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ParentKeyColumn.prototype.setValue = function(name,value,callback) {
+ParentKeyColumn.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'ParentKeyColumn',
@@ -23,7 +23,7 @@ ParentKeyColumn.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -43,7 +43,7 @@ ParentKeyColumn.prototype.delete = function(callback) {
             parentKeyColumn:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -51,7 +51,7 @@ ParentKeyColumn.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ParentKeyColumn.prototype.getView = function(view,callback) {
+ParentKeyColumn.prototype.getView = function(view, callback) {
     var args = {
         controller:'ParentKeyColumn',
         action:'getView',
@@ -59,7 +59,7 @@ ParentKeyColumn.prototype.getView = function(view,callback) {
             view:view
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

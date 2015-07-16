@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(ControlController,ModelController);
+QForms.inherit(ControlController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ControlController(model, parent) {

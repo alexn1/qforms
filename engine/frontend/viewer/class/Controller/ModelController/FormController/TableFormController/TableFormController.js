@@ -44,16 +44,16 @@ TableFormController.prototype.init = function() {
     });
     this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
     this.grid.init();
-    this.model.page.eventHide.subscribe(this,'onHidePage');
-    this.model.page.eventShow.subscribe(this,'onShowPage');
-    this.grid.eventBodyCellDblClick.subscribe(this,'onGridCellDblClick');
+    this.model.page.eventHide.subscribe(this, 'onHidePage');
+    this.model.page.eventShow.subscribe(this, 'onShowPage');
+    this.grid.eventBodyCellDblClick.subscribe(this, 'onGridCellDblClick');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.deinit = function() {
-    this.model.page.eventHide.unsubscribe(this,'onHidePage');
-    this.model.page.eventShow.unsubscribe(this,'onShowPage');
-    this.grid.eventBodyCellDblClick.unsubscribe(this,'onGridCellDblClick');
+    this.model.page.eventHide.unsubscribe(this, 'onHidePage');
+    this.model.page.eventShow.unsubscribe(this, 'onShowPage');
+    this.grid.eventBodyCellDblClick.unsubscribe(this, 'onGridCellDblClick');
     this.grid.deinit();
     this.model.eventRefilled.unsubscribe(this, 'onRefilled');
     TableFormController.super_.prototype.deinit.call(this);
@@ -142,7 +142,7 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
             this.model.edit(key);
         break;
     }
-    this.model.handleEvent('DoubleClick',{'key':key});
+    this.model.handleEvent('DoubleClick', {'key':key});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

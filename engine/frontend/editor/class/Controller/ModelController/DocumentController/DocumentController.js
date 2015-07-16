@@ -4,7 +4,7 @@ QForms.inherit(DocumentController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DocumentController(model) {
-    ModelController.call(this,model);
+    ModelController.call(this, model);
     this.tab = null;
 };
 

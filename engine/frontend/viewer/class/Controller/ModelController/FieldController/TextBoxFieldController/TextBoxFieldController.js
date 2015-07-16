@@ -1,15 +1,15 @@
 'use strict';
 
-QForms.inherit(TextBoxFieldController,FieldController);
+QForms.inherit(TextBoxFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TextBoxFieldController(model,parent) {
-    TextBoxFieldController.super_.call(this,model,parent);
+function TextBoxFieldController(model, parent) {
+    TextBoxFieldController.super_.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.fill = function(row,view) {
+TextBoxFieldController.prototype.fill = function(row, view) {
     TextBoxFieldController.super_.prototype.fill.call(this, row, view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;

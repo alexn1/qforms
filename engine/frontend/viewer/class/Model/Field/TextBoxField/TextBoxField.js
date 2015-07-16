@@ -1,8 +1,8 @@
 'use strict';
 
-QForms.inherit(TextBoxField,Field);
+QForms.inherit(TextBoxField, Field);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TextBoxField(name,form,data) {
-    Field.call(this,name,form,data);
+function TextBoxField(name, form, data) {
+    Field.call(this, name, form, data);
 };

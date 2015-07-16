@@ -32,11 +32,11 @@ DataGridWidget.prototype.createColumn = function(fieldName, headerCell) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.deinit = function() {
     GridWidget.prototype.deinit.call(this);
-    this.dataSource.eventRefillRow.unsubscribe(this,'onRefillRow');
-    this.dataSource.eventNewRow.unsubscribe(this,'onNewRow');
-    this.dataSource.eventRemoveRow.unsubscribe(this,'onRemoveRow');
-    this.dataSource.eventMoveRow.unsubscribe(this,'onMoveRow');
-    this.dataSource.eventNewFrame.unsubscribe(this,'onNewFrame');
+    this.dataSource.eventRefillRow.unsubscribe(this, 'onRefillRow');
+    this.dataSource.eventNewRow.unsubscribe(this, 'onNewRow');
+    this.dataSource.eventRemoveRow.unsubscribe(this, 'onRemoveRow');
+    this.dataSource.eventMoveRow.unsubscribe(this, 'onMoveRow');
+    this.dataSource.eventNewFrame.unsubscribe(this, 'onNewFrame');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ DataGridWidget.prototype.clear = function () {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.setRowStyle = function(bodyRow) {
-    this.formController.setRowStyle(bodyRow,bodyRow.dbRow);
+    this.formController.setRowStyle(bodyRow, bodyRow.dbRow);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,11 +82,11 @@ DataGridWidget.prototype.save = function(bodyCell) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.refillRow = function(bodyRow,newIndex) {
+DataGridWidget.prototype.refillRow = function(bodyRow, newIndex) {
     bodyRow.qI = newIndex;
     for (var fieldName in this.gridColumns) {
         var bodyCell = bodyRow.bodyCells[fieldName];
-        this.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow,bodyCell.firstElementChild);
+        this.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow, bodyCell.firstElementChild);
     }
     this.setRowStyle(bodyRow);
 };
@@ -97,7 +97,7 @@ DataGridWidget.prototype.onRefillRow = function(ea) {
     var i = ea.i;
     //console.log('onRefillRow: ' + key + ' ' + i);
     var bodyRow = this.keyToBodyRow[key];
-    this.refillRow(bodyRow,i);
+    this.refillRow(bodyRow, i);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ DataGridWidget.prototype.onNewRow = function(ea) {
     bodyRow.qKey = key;
     for (var fieldName in this.gridColumns) {
         var bodyCell = bodyRow.bodyCells[fieldName];
-        this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow,bodyCell.firstElementChild);
+        this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
     }
     this.setRowStyle(bodyRow);
     this.keyToBodyRow[key] = bodyRow;
@@ -148,8 +148,8 @@ DataGridWidget.prototype.onMoveRow = function(ea) {
     var key      = ea.key;
     //console.log('onMoveRow: ' + key + ' ' + newIndex);
     var bodyRow = this.keyToBodyRow[key];
-    QForms.moveNode(this.bodyTable,bodyRow,oldIndex,newIndex);
-    this.refillRow(bodyRow,newIndex);
+    QForms.moveNode(this.bodyTable, bodyRow, oldIndex, newIndex);
+    this.refillRow(bodyRow, newIndex);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -155,7 +155,7 @@ FormEditor.prototype.createJs = function(params, callback) {
         self.createFile2(customJsFilePath, templateFilePath, {
             page : self.pageEditor.pageFile.getAttr('name'),
             form : self.name,
-            _class : self.constructor.name.replace('Editor','')
+            _class : self.constructor.name.replace('Editor', '')
         }, function(js) {
             callback(js);
         });

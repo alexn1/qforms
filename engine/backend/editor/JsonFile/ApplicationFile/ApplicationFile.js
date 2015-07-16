@@ -19,7 +19,7 @@ function ApplicationFile(appInfo) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationFile.prototype.setDatabaseAttr = function(database,name,value) {
+ApplicationFile.prototype.setDatabaseAttr = function(database, name, value) {
     this.data.databases[database]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.databases = Helper.replaceKey(this.data.databases,
@@ -42,7 +42,7 @@ ApplicationFile.prototype.setDatabaseParamAttr = function(database, param, name,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationFile.prototype.setPageLinkAttr = function(pageLink,name,value) {
+ApplicationFile.prototype.setPageLinkAttr = function(pageLink, name, value) {
     this.data.pageLinks[pageLink]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.pageLinks = Helper.replaceKey(this.data.pageLinks, pageLink, value);
@@ -56,7 +56,7 @@ ApplicationFile.prototype.newDatabase = function(params) {
         this.data.databases = {};
     }
     if (this.data.databases[name]) {
-        throw new Error('Database {name} already exist.'.replace('{name}',name));
+        throw new Error('Database {name} already exist.'.replace('{name}', name));
     }
     var data = {
         '@class' : 'Database',
@@ -117,7 +117,7 @@ ApplicationFile.prototype.deleteDatabase = function(name) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationFile.prototype.deleteDatabaseParam = function($database,$param) {
+ApplicationFile.prototype.deleteDatabaseParam = function($database, $param) {
     delete this.data.databases[$database].params[$param];
 };
 

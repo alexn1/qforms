@@ -16,7 +16,7 @@ PropertyGrid.prototype.init = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PropertyGrid.prototype.beginEdit = function(obj,options) {
+PropertyGrid.prototype.beginEdit = function(obj, options) {
     this.obj = obj;
     this.options = options;
     this.fill();

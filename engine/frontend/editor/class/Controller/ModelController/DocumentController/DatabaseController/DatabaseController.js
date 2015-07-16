@@ -33,8 +33,8 @@ DatabaseController.prototype.createTree = function() {
 DatabaseController.prototype.addParamItem = function(paramData) {
     var caption = ParamController.prototype.getCaption(paramData);
     var paramItem = this.paramsItem.addItem(caption);
-    var param = new Param(paramData,this.model);
-    paramItem.ctrl = new ParamController(param,paramItem);
+    var param = new Param(paramData, this.model);
+    paramItem.ctrl = new ParamController(param, paramItem);
     return paramItem;
 };
 
@@ -63,12 +63,12 @@ DatabaseController.prototype.doAction = function(action) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.actionNewParam = function() {
     var self = this;
-    Param.prototype.getView('new.html',function(result){
+    Param.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var paramName = $("#myModal input[id='paramName']").val();
-            self.model.newParam(paramName,function(paramData) {
+            self.model.newParam(paramName, function(paramData) {
                 self.addParamItem(paramData).select();
             });
             $('#myModal').modal('hide');
@@ -83,9 +83,9 @@ DatabaseController.prototype.actionNewParam = function() {
 DatabaseController.prototype.createTab = function(docs) {
     var name = this.model.data['@attributes'].name;
     var self = this;
-    this.model.getView('DatabaseView/DatabaseView.html',function(result) {
+    this.model.getView('DatabaseView/DatabaseView.html', function(result) {
         var $div = $(result.view);
-        self.initView($div,result.data);
+        self.initView($div, result.data);
         self.tab = docs.createTab($div.get(0), name, function(tab) {
             tab.ctrl.tab = undefined;
         });
@@ -95,12 +95,12 @@ DatabaseController.prototype.createTab = function(docs) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.initView = function($div,data) {
+DatabaseController.prototype.initView = function($div, data) {
     this.tables = data.tables;
     this.tableView = data.tableView;
     this.treeTables = TreeWidget_createObject($div.find('.tcTables').get(0));
     this.$divTableInfo = $div.find('.divTableInfo');
-    this.treeTables.eventSelect.subscribe(this,'onTableSelect');
+    this.treeTables.eventSelect.subscribe(this, 'onTableSelect');
     for (var i=0;i<data.tables.length;i++) {
         var row = data.tables[i];
         this.treeTables.addItem(row[0]);
@@ -111,9 +111,9 @@ DatabaseController.prototype.initView = function($div,data) {
 DatabaseController.prototype.onTableSelect = function(e) {
     var self = this;
     this.tableName = e.item.caption;
-    this.model.getTableInfo(this.tableName,function(data){
+    this.model.getTableInfo(this.tableName, function(data) {
         self.tableInfo = data.desc;
-        var html = QForms.render(self.tableView,data);
+        var html = QForms.render(self.tableView, data);
         self.$divTableInfo.empty();
         self.$divTableInfo.append(html);
         self.$btnCreateForm = self.$divTableInfo.find('.btnCreateForm');
@@ -126,14 +126,14 @@ DatabaseController.prototype.onTableSelect = function(e) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createForm = function() {
     var self = this;
-    this.model.getView('newForm.ejs',function(result){
-        var html = QForms.render(result.view,{
+    this.model.getView('newForm.ejs', function(result) {
+        var html = QForms.render(result.view, {
             tables:self.tables,
             tableName:self.tableName,
             pages:Object.keys(self.applicationController.pageItems)
         });
         $(document.body).append(html);
-        $('#modal').on('hidden.bs.modal',function(e){
+        $('#modal').on('hidden.bs.modal', function(e) {
             $(this).remove();
         });
         $("#modal button[name='create']").click(function() {
@@ -154,13 +154,13 @@ DatabaseController.prototype.createForm = function() {
             );
             var todo = function() {
                 var params = formWizard.getFormParams();
-                pageItem.ctrl.model.newForm(params,function(formData) {
+                pageItem.ctrl.model.newForm(params, function(formData) {
                     pageItem.ctrl.addFormItem(formData).select();
                     $('#modal').modal('hide');
                 });
             };
             if (pageItem.ctrl instanceof PageLinkController) {
-                self.applicationController.editorController.pageLinkToPage(pageItem,todo);
+                self.applicationController.editorController.pageLinkToPage(pageItem, todo);
             } else {
                 todo();
             }

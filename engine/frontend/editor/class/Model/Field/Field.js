@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(Field,Model);
+QForms.inherit(Field, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Field(data, parent) {
@@ -10,7 +10,7 @@ function Field(data, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.setValue = function(name,value,callback) {
+Field.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Field',
@@ -23,7 +23,7 @@ Field.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -42,7 +42,7 @@ Field.prototype.delete = function(callback) {
             field       :this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args, function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -50,24 +50,24 @@ Field.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.getView = function(view,callback) {
+Field.prototype.getView = function(view, callback) {
     var args = {
         controller:'Field',
         action:'getView',
         params:{
-            view:view,
+            view: view,
             page: this.data !== undefined ? this.form.page.data['@attributes'].name : null,
             form: this.data !== undefined ? this.form.data['@attributes'].name : null,
             field: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.saveView = function(text,view) {
+Field.prototype.saveView = function(text, view) {
     var args = {
         controller:'Field',
         action:'saveView',
@@ -79,7 +79,7 @@ Field.prototype.saveView = function(text,view) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){});
+    QForms.doHttpRequest(this, args, function(data){});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ Field.prototype.saveController = function(text) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){});
+    QForms.doHttpRequest(this, args, function(data){});
 };
 
 
@@ -110,7 +110,7 @@ Field.prototype.createView = function(callback) {
             class:this.data['@class']
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
@@ -127,13 +127,13 @@ Field.prototype.createController = function(callback) {
             class:this.data['@class']
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.changeClass = function(params,callback) {
+Field.prototype.changeClass = function(params, callback) {
     params['page'] = this.form.page.data['@attributes'].name;
     params['form'] = this.form.data['@attributes'].name;
     params['field'] = this.data['@attributes'].name;
@@ -143,7 +143,7 @@ Field.prototype.changeClass = function(params,callback) {
         params:params
     };
     var self = this;
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         this.data = data;
         callback(data);
     });

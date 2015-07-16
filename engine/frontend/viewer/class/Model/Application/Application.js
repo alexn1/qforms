@@ -17,7 +17,7 @@ function Application(data) {
 Application.prototype.init = function() {
     // dataSources
     for (var dsName in this.data.dataSources) {
-        this.dataSources[dsName] = new DataSource(dsName,this,this.data.dataSources[dsName]);
+        this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
         this.dataSources[dsName].init();
     }
     // pages
@@ -53,12 +53,12 @@ Application.prototype.subDsToTableUpdated = function(dataSource) {
     if (!(dataSource.fullTableName in this.tables)) {
         this.tables[dataSource.fullTableName] = new qfTable(dataSource.fullTableName);
     }
-    this.tables[dataSource.fullTableName].eventUpdated.subscribe(dataSource,'onTableUpdated');
+    this.tables[dataSource.fullTableName].eventUpdated.subscribe(dataSource, 'onTableUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.unsubDsFromTableUpdated = function(dataSource) {
-    this.tables[dataSource.fullTableName].eventUpdated.unsubscribe(dataSource,'onTableUpdated');
+    this.tables[dataSource.fullTableName].eventUpdated.unsubscribe(dataSource, 'onTableUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ Application.prototype.openPage = function(args) {
         }
     }
     // if this page with this key is already opened, then show it
-    var page = this.getPage(name,key);
+    var page = this.getPage(name, key);
     if (page !== null) {
         // eventPageSelected
         var ea = new QForms.EventArg(this);
@@ -90,7 +90,7 @@ Application.prototype.openPage = function(args) {
             'newMode':newMode,
             'params':params
         };
-        QForms.doHttpRequest(this,args,function(response) {
+        QForms.doHttpRequest(this, args, function(response) {
             this.lastPageId++;
             var page = new Page({
                 app       : this,
@@ -171,7 +171,7 @@ Application.prototype.untrackPage = function(page) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getPage = function(pageName,pageKey) {
+Application.prototype.getPage = function(pageName, pageKey) {
     if (pageKey === undefined) pageKey = '';
     if (this.pages[pageName] !== undefined && this.pages[pageName][pageKey] !== undefined) {
         return this.pages[pageName][pageKey];

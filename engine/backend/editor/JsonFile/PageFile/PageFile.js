@@ -25,7 +25,7 @@ function PageFile(filePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormAttr = function(form,name,value) {
+PageFile.prototype.setFormAttr = function(form, name, value) {
     this.data.forms[form]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms = Helper.replaceKey(this.data.forms,
@@ -35,7 +35,7 @@ PageFile.prototype.setFormAttr = function(form,name,value) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormDataSourceAttr = function(form,dataSource,name,value) {
+PageFile.prototype.setFormDataSourceAttr = function(form, dataSource, name, value) {
     this.data.forms[form].dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms[form].dataSources = Helper.replaceKey(
@@ -57,7 +57,7 @@ PageFile.prototype.setDataSourceAttr = function(dataSource, name, value) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormDataSourceKeyColumnAttr = function(form,dataSource,keyColumn,name,value) {
+PageFile.prototype.setFormDataSourceKeyColumnAttr = function(form, dataSource, keyColumn, name, value) {
     this.data.forms[form].dataSources[dataSource].keyColumns[keyColumn]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms[form].dataSources[dataSource].keyColumns = Helper.replaceKey(
@@ -68,7 +68,7 @@ PageFile.prototype.setFormDataSourceKeyColumnAttr = function(form,dataSource,key
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormDataSourceParentKeyColumnAttr = function(form,dataSource,parentKeyColumn,name,value) {
+PageFile.prototype.setFormDataSourceParentKeyColumnAttr = function(form, dataSource, parentKeyColumn, name, value) {
     this.data.forms[form].dataSources[dataSource].parentKeyColumns[parentKeyColumn]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms[form].dataSources[dataSource].parentKeyColumns = Helper.replaceKey(
@@ -79,7 +79,7 @@ PageFile.prototype.setFormDataSourceParentKeyColumnAttr = function(form,dataSour
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormFieldAttr = function(form,field,name,value) {
+PageFile.prototype.setFormFieldAttr = function(form, field, name, value) {
     this.data.forms[form].fields[field]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms[form].fields = Helper.replaceKey(
@@ -91,7 +91,7 @@ PageFile.prototype.setFormFieldAttr = function(form,field,name,value) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormControlAttr = function(form,control,name,value) {
+PageFile.prototype.setFormControlAttr = function(form, control, name, value) {
     this.data.forms[form].controls[control]['@attributes'][name] = value;
     if (name === 'name') {
         this.data.forms[form].controls = Helper.replaceKey(
@@ -110,7 +110,7 @@ PageFile.prototype.newForm = function(params) {
         this.data.forms = {};
     }
     if (this.data.forms[name]) {
-        throw new Error('Form {name} already exist.'.replace('{name}',name));
+        throw new Error('Form {name} already exist.'.replace('{name}', name));
     }
     var data;
     switch (_class) {
@@ -317,17 +317,17 @@ PageFile.prototype.deleteForm = function(name) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.deleteFormField = function(form,field) {
+PageFile.prototype.deleteFormField = function(form, field) {
     delete this.data.forms[form].fields[field];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.deleteFormControl = function(form,name) {
+PageFile.prototype.deleteFormControl = function(form, name) {
     delete this.data.forms[form].controls[name];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.deleteFormDataSource = function(form,dataSource) {
+PageFile.prototype.deleteFormDataSource = function(form, dataSource) {
     delete this.data.forms[form].dataSources[dataSource];
 };
 
@@ -337,12 +337,12 @@ PageFile.prototype.deleteDataSource = function(dataSource) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.deleteFormDataSourceKeyColumn = function(form,dataSource,keyColumn) {
+PageFile.prototype.deleteFormDataSourceKeyColumn = function(form, dataSource, keyColumn) {
     delete this.data.forms[form].dataSources[dataSource].keyColumns[keyColumn];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.deleteFormDataSourceParentKeyColumn = function(form,dataSource,parentKeyColumn) {
+PageFile.prototype.deleteFormDataSourceParentKeyColumn = function(form, dataSource, parentKeyColumn) {
     delete this.data.forms[form].dataSources[dataSource].parentKeyColumns[parentKeyColumn];
 };
 
@@ -373,16 +373,16 @@ PageFile.prototype.setFormFields = function(name, fields) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.getFormFieldData = function(form,name) {
+PageFile.prototype.getFormFieldData = function(form, name) {
     return this.data.forms[form].fields[name];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.setFormFieldData = function(form,name,data) {
+PageFile.prototype.setFormFieldData = function(form, name, data) {
     this.data.forms[form].fields[name] = data;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageFile.prototype.getFormControlData = function(form,name) {
+PageFile.prototype.getFormControlData = function(form, name) {
     return this.data.forms[form].controls[name];
 };

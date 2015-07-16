@@ -57,8 +57,8 @@ GridWidget.prototype.onBodyScroll = function(el) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridWidget.prototype.createColumn = function(fieldName,headerCell) {
-    var gridColumn = new GridColumn(this,fieldName,headerCell);
+GridWidget.prototype.createColumn = function(fieldName, headerCell) {
+    var gridColumn = new GridColumn(this, fieldName, headerCell);
     gridColumn.init();
     return gridColumn;
 };

@@ -11,7 +11,7 @@ function Page(data, parent, pageLink) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.setValue = function(name,value,callback) {
+Page.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Page',
@@ -22,7 +22,7 @@ Page.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -40,7 +40,7 @@ Page.prototype.delete = function(callback) {
             page:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -48,14 +48,14 @@ Page.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.newForm = function(params,callback) {
+Page.prototype.newForm = function(params, callback) {
     params['pageFileName'] = this.pageLink.data['@attributes'].fileName;
     var args = {
         controller:'Form',
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -63,7 +63,7 @@ Page.prototype.newForm = function(params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.getView = function(view,callback) {
+Page.prototype.getView = function(view, callback) {
     var args = {
         controller:'Page',
         action:'getView',
@@ -72,13 +72,13 @@ Page.prototype.getView = function(view,callback) {
             page: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.saveView = function(text,view) {
+Page.prototype.saveView = function(text, view) {
     var args = {
         controller:'Page',
         action:'saveView',
@@ -88,7 +88,7 @@ Page.prototype.saveView = function(text,view) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
 
     });
 };
@@ -103,7 +103,7 @@ Page.prototype.saveController = function(text) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
 
     });
 };
@@ -117,7 +117,7 @@ Page.prototype.createView = function(callback) {
             page:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
@@ -131,7 +131,7 @@ Page.prototype.createController = function(callback) {
             page:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

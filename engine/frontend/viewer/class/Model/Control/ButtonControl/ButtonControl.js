@@ -1,8 +1,8 @@
 'use strict';
 
-QForms.inherit(ButtonControl,Control);
+QForms.inherit(ButtonControl, Control);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ButtonControl(data,form) {
-    Control.call(this,data,form);
+function ButtonControl(data, form) {
+    Control.call(this, data, form);
 };

@@ -1,17 +1,17 @@
 'use strict';
 
-QForms.inherit(ParentKeyColumnController,ModelController);
+QForms.inherit(ParentKeyColumnController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ParentKeyColumnController(model,item) {
-    ModelController.call(this,model);
+function ParentKeyColumnController(model, item) {
+    ModelController.call(this, model);
     this.item = item;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnController.prototype.getActions = function() {
     return [
-        {'action':'delete','caption':'Delete'}
+        {'action':'delete', 'caption':'Delete'}
     ];
 };
 

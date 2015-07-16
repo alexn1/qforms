@@ -28,7 +28,7 @@ QForms.errorHandler = function(errorMsg) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.doHttpRequest = function(self,params,callback) {
+QForms.doHttpRequest = function(self, params, callback) {
     var request = new XMLHttpRequest();
     request.open('POST', window.location.href);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -37,7 +37,7 @@ QForms.doHttpRequest = function(self,params,callback) {
             if (request.status !== 200) {
                 throw new Error(request.statusText + ', ' + request.responseText);
             }
-            callback.call(self,JSON.parse(request.responseText));
+            callback.call(self, JSON.parse(request.responseText));
         }
     };
     request.send(JSON.stringify(params));
@@ -59,44 +59,44 @@ QForms.go = function(url, method, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.insertNewNodeAt = function(parent,child,i) {
+QForms.insertNewNodeAt = function(parent, child, i) {
     if (i < 0 || i > parent.children.length) {
         throw new Error('invalid index i = ' + i + ', length = ' + parent.childNodes.length);
     } else if (i === parent.children.length) {
         parent.appendChild(child);
     } else {
-        parent.insertBefore(child,parent.children[i]);
+        parent.insertBefore(child, parent.children[i]);
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.moveNode = function(parent,child,oldIndex,newIndex) {
+QForms.moveNode = function(parent, child, oldIndex, newIndex) {
     if (oldIndex < 0 || oldIndex >= parent.children.length || newIndex < 0 || newIndex >= parent.children.length) {
         throw new Error('invalid index');
     } else {
         if (newIndex < oldIndex) {
-            parent.insertBefore(child,parent.children[newIndex]);
+            parent.insertBefore(child, parent.children[newIndex]);
         } else {
-            parent.insertBefore(child,parent.children[newIndex+1]);
+            parent.insertBefore(child, parent.children[newIndex+1]);
         }
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.inherit = function(className,baseClassName) {
+QForms.inherit = function(className, baseClassName) {
     className.prototype = Object.create(baseClassName.prototype);
     className.prototype.constructor = className;
     className.super_   = baseClassName;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.moveArrayElement = function(arr,oldIndex, newIndex) {
+QForms.moveArrayElement = function(arr, oldIndex, newIndex) {
     arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     return arr;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.merge = function(o1,o2) {
+QForms.merge = function(o1, o2) {
     var oN = {};
     for (var name in o1) {
         oN[name] = o1[name];
@@ -108,7 +108,7 @@ QForms.merge = function(o1,o2) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.keyToParams = function(key,paramName) {
+QForms.keyToParams = function(key, paramName) {
     var paramName = (paramName !== undefined) ? paramName : 'key';
     var params = {};
     var arr = JSON.parse(key);
@@ -131,7 +131,7 @@ QForms.currentTime = function() {
     var hh = now.getHours();if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
     var ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-    return [hh,mm,ss].join(':');
+    return [hh, mm, ss].join(':');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,11 +140,11 @@ QForms.currentDate = function() {
     var dd = now.getDate();if (dd < 10) dd = '0' + dd;
     var mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /*January is 0!*/
     var yyyy = now.getFullYear();
-    return [yyyy,mm,dd].join('-');
+    return [yyyy, mm, dd].join('-');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.render = function(view,data) {
+QForms.render = function(view, data) {
     return new EJS({text:view}).render(data);
 };
 

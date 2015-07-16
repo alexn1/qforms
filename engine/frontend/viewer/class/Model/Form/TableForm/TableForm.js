@@ -41,7 +41,7 @@ TableForm.prototype.new = function() {
             var row = {};
             this.defaultValuesToRow(row);
             var self = this;
-            this.dataSource.insert(row,function(key) {
+            this.dataSource.insert(row, function(key) {
                 self.openPage({
                     name:self.data.itemEditPage,
                     key:key

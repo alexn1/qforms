@@ -1,14 +1,14 @@
 'use strict';
 
-QForms.inherit(Database,Model);
+QForms.inherit(Database, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Database(data) {
-    Model.call(this,data);
+    Model.call(this, data);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Database.prototype.setValue = function(name,value,callback) {
+Database.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Database',
@@ -19,7 +19,7 @@ Database.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -37,7 +37,7 @@ Database.prototype.delete = function(callback) {
             database:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -45,7 +45,7 @@ Database.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Database.prototype.newParam = function(name,callback) {
+Database.prototype.newParam = function(name, callback) {
     var args = {
         controller:'Param',
         action:'_new',
@@ -54,7 +54,7 @@ Database.prototype.newParam = function(name,callback) {
             name:name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -62,7 +62,7 @@ Database.prototype.newParam = function(name,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Database.prototype.getView = function(view,callback) {
+Database.prototype.getView = function(view, callback) {
     var args = {
         controller:'Database',
         action:'getView',
@@ -71,13 +71,13 @@ Database.prototype.getView = function(view,callback) {
             database: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Database.prototype.getTableInfo = function(table,callback) {
+Database.prototype.getTableInfo = function(table, callback) {
     var args = {
         controller:'Database',
         action:'getTableInfo',
@@ -86,7 +86,7 @@ Database.prototype.getTableInfo = function(table,callback) {
             table:table
         }
     };
-    QForms.doHttpRequest(this,args,function(result){
+    QForms.doHttpRequest(this, args, function(result) {
         callback(result);
     });
 };

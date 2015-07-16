@@ -1,7 +1,7 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function TreeItem(parent,caption,className) {
+function TreeItem(parent, caption, className) {
     this.parent    = parent;
     this.tree      = parent.tree;
     this.caption   = caption;
@@ -29,7 +29,7 @@ TreeItem.prototype.init = function() {
     // node
     this.node = document.createElement('span');
     this.node.className = 'leaf';
-    $(this.node).mousedown(function(e) {self.onNodeMouseDown(e,this);});
+    $(this.node).mousedown(function(e) {self.onNodeMouseDown(e, this);});
     // text
     this.text = document.createElement('span');
     this.text.innerHTML = this.caption;
@@ -95,7 +95,7 @@ TreeItem.prototype.open = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeItem.prototype.onNodeMouseDown = function(e,node) {
+TreeItem.prototype.onNodeMouseDown = function(e, node) {
     node.parentNode.parentNode.classList.toggle('opened');
     e.stopPropagation();
     var e = new QForms.EventArg(this);
@@ -104,12 +104,12 @@ TreeItem.prototype.onNodeMouseDown = function(e,node) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeItem.prototype.addItem = function(caption,className,i) {
-    var item = new TreeItem(this,caption,className);
+TreeItem.prototype.addItem = function(caption, className, i) {
+    var item = new TreeItem(this, caption, className);
     if (i === undefined) {
         this.ul.appendChild(item.li);
     } else {
-        QForms.insertNewNodeAt(this.ul,item.li,i);
+        QForms.insertNewNodeAt(this.ul, item.li, i);
     }
     this.node.className = 'node';
     this.items.push(item);
@@ -142,10 +142,10 @@ TreeItem.prototype.remove = function(item) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeItem.prototype.changeParent = function(newParent,newIndex) {
+TreeItem.prototype.changeParent = function(newParent, newIndex) {
     this.parent.ul.removeChild(this.li);				// removing themselves from list of old parent
     if (this.parent.node && this.parent.ul.childElementCount === 0) this.parent.node.className = 'leaf';
-    QForms.insertNewNodeAt(newParent.ul,this.li,newIndex);	// adding to new parent with specified index
+    QForms.insertNewNodeAt(newParent.ul, this.li, newIndex);	// adding to new parent with specified index
     if (newParent.node) newParent.node.className = 'node';
     this.parent = newParent;
     this.div.style.paddingLeft = ((this.parent.ul.level * 15) + 5) + 'px';

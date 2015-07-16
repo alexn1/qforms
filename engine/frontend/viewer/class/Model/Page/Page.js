@@ -27,15 +27,15 @@ Page.prototype.init = function() {
     }
     this.initParams();
     for (var dsName in this.data.dataSources) {
-        this.dataSources[dsName] = new DataSource(dsName,this,this.data.dataSources[dsName]);
+        this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
         this.dataSources[dsName].init();
     }
     for (var formName in this.data.forms) {
         var form = this.data.forms[formName];
-        this.forms[formName] = eval('new ' + form.class + '(formName,this,form)');
+        this.forms[formName] = eval('new ' + form.class + '(formName, this, form)');
         this.forms[formName].init();
-        this.forms[formName].eventChanged.subscribe(this,'onFormChanged');
-        this.forms[formName].eventUpdated.subscribe(this,'onFormUpdated');
+        this.forms[formName].eventChanged.subscribe(this, 'onFormChanged');
+        this.forms[formName].eventUpdated.subscribe(this, 'onFormUpdated');
     }
 };
 
@@ -49,8 +49,8 @@ Page.prototype.deinit = function() {
         this.dataSources[dsName].deinit();
     }
     for (var formName in this.forms) {
-        this.forms[formName].eventChanged.unsubscribe(this,'onFormChanged');
-        this.forms[formName].eventUpdated.unsubscribe(this,'onFormUpdated');
+        this.forms[formName].eventChanged.unsubscribe(this, 'onFormChanged');
+        this.forms[formName].eventUpdated.unsubscribe(this, 'onFormUpdated');
         this.forms[formName].deinit();
     }
     this.app.untrackPage(this);

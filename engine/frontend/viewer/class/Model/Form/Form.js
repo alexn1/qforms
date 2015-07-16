@@ -22,38 +22,38 @@ function Form(name, parent, data) {
 Form.prototype.init = function() {
     // dataSources
     for (var dsName in this.data.dataSources) {
-        this.dataSources[dsName] = new DataSource(dsName,this,this.data.dataSources[dsName]);
+        this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
         this.dataSources[dsName].init();
     }
     // fields
     for (var name in this.data.fields) {
         var field = this.data.fields[name];
-        this.fields[name] = eval('new {class}(name,this,field)'.replace('{class}',field.class));
+        this.fields[name] = eval('new {class}(name, this, field)'.replace('{class}', field.class));
         this.fields[name].init();
     }
     // controls
     for (var name in this.data.controls) {
         var data = this.data.controls[name];
-        this.controls[name] = eval('new {class}(data,this)'.replace('{class}',data.class));
+        this.controls[name] = eval('new {class}(data, this)'.replace('{class}', data.class));
         this.controls[name].init();
     }
     /*
     // eventHandlers
     for (var name in this.data.eventHandlers) {
-        this.eventHandlers[name] = new EventHandler(this,this.data.eventHandlers[name]);
+        this.eventHandlers[name] = new EventHandler(this, this.data.eventHandlers[name]);
         this.eventHandlers[name].init();
     }
     */
     this.dataSource = this.dataSources.default;
-    this.dataSource.eventChanged.subscribe(this,'onDataSourceChanged');
-    this.dataSource.eventUpdated.subscribe(this,'onDataSourceUpdated');
+    this.dataSource.eventChanged.subscribe(this, 'onDataSourceChanged');
+    this.dataSource.eventUpdated.subscribe(this, 'onDataSourceUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.deinit = function() {
     //console.log('Form.prototype.deinit: ' + this.name);
-    this.dataSource.eventChanged.unsubscribe(this,'onDataSourceChanged');
-    this.dataSource.eventUpdated.unsubscribe(this,'onDataSourceUpdated');
+    this.dataSource.eventChanged.unsubscribe(this, 'onDataSourceChanged');
+    this.dataSource.eventUpdated.unsubscribe(this, 'onDataSourceUpdated');
     for (var dsName in this.dataSources) {
         this.dataSources[dsName].deinit();
     }
@@ -107,12 +107,12 @@ Form.prototype.refill = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.executeAction = function(action,args) {
-    action.exec(args,{'form':this});
+Form.prototype.executeAction = function(action, args) {
+    action.exec(args, {'form':this});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.handleEvent = function(event,args) {
+Form.prototype.handleEvent = function(event, args) {
     //console.log(event);
     if (this.eventHandlers && this.eventHandlers[event]) {
         this.eventHandlers[event].handleEvent(args);

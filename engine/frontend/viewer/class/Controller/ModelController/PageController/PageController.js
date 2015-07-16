@@ -1,11 +1,11 @@
 'use strict';
 
-QForms.inherit(PageController,ModelController);
+QForms.inherit(PageController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageController(model, view, parent) {
     //console.log(model);
-    ModelController.call(this,model);
+    ModelController.call(this, model);
     this.view       = view;
     this.parent     = parent;
     this.captionEls = null;
@@ -13,11 +13,11 @@ function PageController(model, view, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.create = function(model,view,parent) {
-    var customClassName = '{page}Controller'.replace('{page}',model.name);
-    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}',customClassName);
-    var custom =  'new {customClassName}(model,view,parent)'.replace('{customClassName}',customClassName);
-    var general = 'new {class}Controller(model,view,parent)'.replace('{class}',model.data.class);
+PageController.create = function(model, view, parent) {
+    var customClassName = '{page}Controller'.replace('{page}', model.name);
+    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
+    var custom =  'new {customClassName}(model, view, parent)'.replace('{customClassName}', customClassName);
+    var general = 'new {class}Controller(model, view, parent)'.replace('{class}', model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === 'function') {
@@ -35,15 +35,15 @@ PageController.create = function(model,view,parent) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.init = function() {
     var self = this;
-    this.captionEls = this.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}',this.model.id));
-    $(this.view).find('#{pageId}_TabWidget'.replace('{pageId}',this.model.id)).each(function() {new TabWidget(this).init();});
+    this.captionEls = this.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}', this.model.id));
+    $(this.view).find('#{pageId}_TabWidget'.replace('{pageId}', this.model.id)).each(function() {new TabWidget(this).init();});
     $(this.view).find('button.save').click(function() {self.onSaveClick(this);});
     $(this.view).find('button.saveAndClose').click(function() {self.onSaveAndCloseClick(this);});
     $(this.view).find('button.closePage').click(function() {self.onClosePageClick(this);});
-    this.model.eventChanged.subscribe(this,'onPageChanged');
-    this.model.eventUpdated.subscribe(this,'onPageUpdated');
+    this.model.eventChanged.subscribe(this, 'onPageChanged');
+    this.model.eventUpdated.subscribe(this, 'onPageUpdated');
     for (var formName in this.model.forms) {
-        var view = this.view.querySelector('#{pageId}_{formName}'.replace('{pageId}',this.model.id).replace('{formName}',formName));
+        var view = this.view.querySelector('#{pageId}_{formName}'.replace('{pageId}', this.model.id).replace('{formName}', formName));
         this.forms[formName] = FormController.create(this.model.forms[formName], view, this);
         this.forms[formName].init();
     }
@@ -55,8 +55,8 @@ PageController.prototype.deinit = function() {
     for (var formName in this.forms) {
         this.forms[formName].deinit();
     }
-    this.model.eventChanged.unsubscribe(this,'onPageChanged');
-    this.model.eventUpdated.unsubscribe(this,'onPageUpdated');
+    this.model.eventChanged.unsubscribe(this, 'onPageChanged');
+    this.model.eventUpdated.unsubscribe(this, 'onPageUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

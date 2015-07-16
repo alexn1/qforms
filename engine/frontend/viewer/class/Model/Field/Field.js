@@ -15,7 +15,7 @@ Field.prototype.init = function() {
     if (this.data.eventHandlers) {
         for (var event in this.data.eventHandlers) {
             var eventHandler = this.data.eventHandlers[event];
-            this.eventHandlers[event] = new EventHandler(this,eventHandler);
+            this.eventHandlers[event] = new EventHandler(this, eventHandler);
             this.eventHandlers[event].init();
         }
     }
@@ -61,8 +61,8 @@ Field.prototype.valueToParams = function(row) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.save = function (row,value) {
-    this.form.dataSource.setValue(row,this.data.column,value);
+Field.prototype.save = function (row, value) {
+    this.form.dataSource.setValue(row, this.data.column, value);
     this.valueToParams(row);
 };
 

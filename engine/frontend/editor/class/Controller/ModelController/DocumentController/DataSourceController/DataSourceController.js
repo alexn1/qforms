@@ -35,8 +35,8 @@ DataSourceController.prototype.createTree = function() {
 DataSourceController.prototype.addKeyColumn = function(itemData) {
     var caption = KeyColumnController.prototype.getCaption(itemData);
     var keyColumnItem = this.itemKeys.addItem(caption);
-    var keyColumn = new KeyColumn(itemData,this.model);
-    keyColumnItem.ctrl = new KeyColumnController(keyColumn,keyColumnItem);
+    var keyColumn = new KeyColumn(itemData, this.model);
+    keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
     return keyColumnItem;
 };
 
@@ -44,8 +44,8 @@ DataSourceController.prototype.addKeyColumn = function(itemData) {
 DataSourceController.prototype.addParentKeyColumn = function(pkcData) {
     var caption = ParentKeyColumnController.prototype.getCaption(pkcData);
     var itemParentKeyColumn = this.itemParentKeyColumns.addItem(caption);
-    var parentKeyColumn = new ParentKeyColumn(pkcData,this.model);
-    itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn,itemParentKeyColumn);
+    var parentKeyColumn = new ParentKeyColumn(pkcData, this.model);
+    itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn, itemParentKeyColumn);
     return itemParentKeyColumn;
 };
 
@@ -105,10 +105,10 @@ DataSourceController.prototype.actionNewKeyColumn = function() {
     var self = this;
     KeyColumn.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var itemName = $("#myModal input[id='itemName']").val();
-            self.model.newKeyColumn(itemName,function(itemData) {
+            self.model.newKeyColumn(itemName, function(itemData) {
                 self.addKeyColumn(itemData).select();
             });
             $('#myModal').modal('hide');
@@ -123,10 +123,10 @@ DataSourceController.prototype.actionNewParentKeyColumn = function() {
     var self = this;
     ParentKeyColumn.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var pkcName = $("#myModal input[id='pkcName']").val();
-            self.model.newParentKeyColumn(pkcName,function(parentKeyColumnData) {
+            self.model.newParentKeyColumn(pkcName, function(parentKeyColumnData) {
                 self.addParentKeyColumn(parentKeyColumnData).select();
             });
             $('#myModal').modal('hide');
@@ -151,8 +151,8 @@ DataSourceController.prototype.getPropList = function() {
     }
 
     // options
-    progList.options['insertNewKey']         = ['true','false'];
-    progList.options['dumpFirstRowToParams'] = ['true','false'];
+    progList.options['insertNewKey']         = ['true', 'false'];
+    progList.options['dumpFirstRowToParams'] = ['true', 'false'];
     return progList;
 };
 
@@ -162,7 +162,7 @@ DataSourceController.prototype.getPropList = function() {
 DataSourceController.prototype.createTab = function(docs) {
     var self = this;
     var name = this.model.getFullName();
-    this.model.getView('QueryView.html',function(result) {
+    this.model.getView('QueryView.html', function(result) {
         self.$view        = $(result.view);
         self.cmQuery      = null;
         self.cmCountQuery = null;
@@ -198,14 +198,14 @@ DataSourceController.prototype.createTab = function(docs) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.initCmQuery = function() {
-    this.cmQuery = CodeMirror.fromTextArea(this.$view.find('.cmQuery').get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
+    this.cmQuery = CodeMirror.fromTextArea(this.$view.find('.cmQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
     this.cmQuery.setOption('theme', 'cobalt');
     this.cmQuery.setValue(this.model.data['@attributes'].query);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.initCmCountQuery = function() {
-    this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true,styleActiveLine: true,matchBrackets: true});
+    this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
     this.cmCountQuery.setOption('theme', 'cobalt');
     this.cmCountQuery.setValue(this.model.data['@attributes'].countQuery);
 };
@@ -226,8 +226,8 @@ DataSourceController.prototype.btnSave_Click = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.btnCountQuery_Click = function() {
-    this.$view.find('.wndCountQuery').css('display','block');
-    this.$view.find('.wndQuery').css('display','none');
+    this.$view.find('.wndCountQuery').css('display', 'block');
+    this.$view.find('.wndQuery').css('display', 'none');
     if (this.cmCountQuery === null) {
         this.initCmCountQuery();
     }
@@ -240,8 +240,8 @@ DataSourceController.prototype.btnCountQuery_Click = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.btnQuery_Click = function() {
-    this.$view.find('.wndQuery').css('display','block');
-    this.$view.find('.wndCountQuery').css('display','none');
+    this.$view.find('.wndQuery').css('display', 'block');
+    this.$view.find('.wndCountQuery').css('display', 'none');
     this.$view.find('.btnQuery').removeClass('btn-default');
     this.$view.find('.btnQuery').addClass('btn-primary');
     this.$view.find('.btnCountQuery').removeClass('btn-primary');

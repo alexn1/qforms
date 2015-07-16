@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(FieldController,ModelController);
+QForms.inherit(FieldController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FieldController(model, parent) {
@@ -11,14 +11,14 @@ function FieldController(model, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.create = function(model,parent) {
+FieldController.create = function(model, parent) {
     var customClassName = '{page}{form}{field}Controller'
-        .replace('{page}',model.form.page.name)
-        .replace('{form}',model.form.name)
-        .replace('{field}',model.name);
-    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}',customClassName);
-    var custom =  'new {customClassName}(model,parent)'.replace('{customClassName}',customClassName);
-    var general = 'new {class}Controller(model,parent)'.replace('{class}',model.data.class);
+        .replace('{page}' , model.form.page.name)
+        .replace('{form}' , model.form.name)
+        .replace('{field}', model.name);
+    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
+    var custom =  'new {customClassName}(model, parent)'.replace('{customClassName}', customClassName);
+    var general = 'new {class}Controller(model, parent)'.replace('{class}', model.data.class);
     var obj;
     if (model.data.js !== undefined) {
         if (eval(typeOfCustomClass) === 'function') {
@@ -46,13 +46,13 @@ FieldController.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.renderView = function() {
     if (this.html === null) {
-        this.html = QForms.render(this.model.data.view,{model:this.model});
+        this.html = QForms.render(this.model.data.view, {model:this.model});
     }
     return $(this.html).get(0);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.fill = function(row,view) {
+FieldController.prototype.fill = function(row, view) {
     var key = this.model.form.dataSource.getRowKey(row);
     this.views[key] = view;
     view.dbRow = row;
@@ -61,9 +61,9 @@ FieldController.prototype.fill = function(row,view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.refill = function(row,view) {
-    this.setValue(row[this.model.data.column],view);
-    this.setViewStyle(view,row);
+FieldController.prototype.refill = function(row, view) {
+    this.setValue(row[this.model.data.column], view);
+    this.setViewStyle(view, row);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ FieldController.prototype.isValid = function(view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.setViewStyle = function(view,row) {
+FieldController.prototype.setViewStyle = function(view, row) {
 
 };
 

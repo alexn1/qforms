@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(CheckBoxFieldController,FieldController);
+QForms.inherit(CheckBoxFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function CheckBoxFieldController(model,parent) {
-    FieldController.call(this,model,parent);
+function CheckBoxFieldController(model, parent) {
+    FieldController.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
 };
 
@@ -14,13 +14,13 @@ CheckBoxFieldController.prototype.getValue = function (view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-CheckBoxFieldController.prototype.setValue = function (value,view) {
+CheckBoxFieldController.prototype.setValue = function (value, view) {
     view.firstElementChild.checked = (value === 1) ? true : false;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-CheckBoxFieldController.prototype.fill = function(row,view) {
-    CheckBoxFieldController.super_.prototype.fill.call(this,row,view);
+CheckBoxFieldController.prototype.fill = function(row, view) {
+    CheckBoxFieldController.super_.prototype.fill.call(this, row, view);
     if (this.model.form.data.class === 'RowForm') {
         var self = this;
         $(view).children().change(function() {
@@ -33,7 +33,7 @@ CheckBoxFieldController.prototype.fill = function(row,view) {
 CheckBoxFieldController.prototype.onChange = function (el) {
     var view = el.parentNode;
     if (this.isValid(view)) {
-        this.model.save(view.dbRow,this.getValue(view));
+        this.model.save(view.dbRow, this.getValue(view));
         // event
         var ea = new QForms.EventArg(this);
         ea.view = view;

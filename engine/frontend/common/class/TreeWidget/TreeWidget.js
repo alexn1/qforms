@@ -67,12 +67,12 @@ TreeWidget.prototype.deinit = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeWidget.prototype.addItem = function(caption,className,i) {
-    var item = new TreeItem(this,caption,className);
+TreeWidget.prototype.addItem = function(caption, className, i) {
+    var item = new TreeItem(this, caption, className);
     if (i === undefined) {
         this.ul.appendChild(item.li);
     } else {
-        QForms.insertNewNodeAt(this.ul,item.li,i);
+        QForms.insertNewNodeAt(this.ul, item.li, i);
     }
     this.items.push(item);
     return item;

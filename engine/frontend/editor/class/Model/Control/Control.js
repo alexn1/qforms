@@ -1,32 +1,32 @@
 'use strict';
 
-QForms.inherit(Control,Model);
+QForms.inherit(Control, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function Control(data,form) {
-    Model.call(this,data);
+function Control(data, form) {
+    Model.call(this, data);
     this.form = form;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Control.prototype.getView = function(view,callback) {
+Control.prototype.getView = function(view, callback) {
     var args = {
         controller:'Control',
         action:'getView',
         params:{
-            view:view,
-            page: this.data !== undefined ? this.form.page.data['@attributes'].name : null,
-            form: this.data !== undefined ? this.form.data['@attributes'].name : null,
+            view : view,
+            page : this.data !== undefined ? this.form.page.data['@attributes'].name : null,
+            form : this.data !== undefined ? this.form.data['@attributes'].name : null,
             field: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Control.prototype.setValue = function(name,value,callback) {
+Control.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Control',
@@ -39,7 +39,7 @@ Control.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -58,7 +58,7 @@ Control.prototype.delete = function(callback) {
             control:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }

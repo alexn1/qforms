@@ -1,14 +1,14 @@
 'use strict';
 
-QForms.inherit(Application,Model);
+QForms.inherit(Application, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Application(data) {
-    Model.call(this,data);
+    Model.call(this, data);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.setValue = function(name,value,callback) {
+Application.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Application',
@@ -18,7 +18,7 @@ Application.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -27,28 +27,28 @@ Application.prototype.setValue = function(name,value,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.newPage = function(params,callback) {
+Application.prototype.newPage = function(params, callback) {
     params['menu'] = (params['startup'] === 'true') ? 'Menu' : '';
     var args = {
         controller:'Page',
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
-            callback(data.page,data.pageLink);
+            callback(data.page, data.pageLink);
         }
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.newDatabase = function(params,callback) {
+Application.prototype.newDatabase = function(params, callback) {
     var args = {
         controller:'Database',
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -56,7 +56,7 @@ Application.prototype.newDatabase = function(params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getView = function(view,callback) {
+Application.prototype.getView = function(view, callback) {
     var args = {
         controller:'Application',
         action:'getView',
@@ -65,13 +65,13 @@ Application.prototype.getView = function(view,callback) {
             view:view
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this,args,function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.saveView = function(text,view) {
+Application.prototype.saveView = function(text, view) {
     var args = {
         controller:'Application',
         action:'saveView',
@@ -81,7 +81,7 @@ Application.prototype.saveView = function(text,view) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){});
+    QForms.doHttpRequest(this, args, function(data){});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ Application.prototype.saveController = function(text) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){});
+    QForms.doHttpRequest(this, args, function(data){});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@ Application.prototype.createView = function(callback) {
             app:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
@@ -120,7 +120,7 @@ Application.prototype.createController = function(callback) {
             app:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
@@ -132,7 +132,7 @@ Application.prototype.newDataSource = function(params, callback) {
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }

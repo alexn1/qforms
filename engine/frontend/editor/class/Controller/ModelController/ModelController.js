@@ -14,7 +14,7 @@ ModelController.prototype.getPropList = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.setProperty = function(name,value) {
+ModelController.prototype.setProperty = function(name, value) {
     var self = this;
     this.model.setValue(name, value, function() {
         if (name === 'name') {
@@ -25,7 +25,7 @@ ModelController.prototype.setProperty = function(name,value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.getCaption = function(data) {
-    return "<span class='green'>{name}</span>".replace('{name}',data['@attributes'].name);
+    return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

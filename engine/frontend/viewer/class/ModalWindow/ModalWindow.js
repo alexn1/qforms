@@ -1,7 +1,7 @@
 'use strict';
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ModalWindow(app,pageName,newMode,params) {
+function ModalWindow(app, pageName, newMode, params) {
     this.app = app;
     this.pageName = pageName;
     this.newMode = newMode;
@@ -20,7 +20,7 @@ ModalWindow.prototype.show = function() {
         'newMode':this.newMode,
         'params':this.params
     };
-    QForms.doHttpRequest(this,args,function(response) {
+    QForms.doHttpRequest(this, args, function(response) {
         var data = response.data;
         var html = response.html;
         var self = this;
@@ -30,7 +30,7 @@ ModalWindow.prototype.show = function() {
         content.style.height = data.height + 'px';
         content.querySelector('button.close').onclick = function() {self.close();}
         document.body.appendChild(this.overlay);
-        this.page = new Page(this.app,data,this);
+        this.page = new Page(this.app, data, this);
         this.page.init();
         this.page.fill(this.newMode);
     });

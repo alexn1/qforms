@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(RowForm,Form);
+QForms.inherit(RowForm, Form);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowForm(name,page,data) {
-    Form.call(this,name,page,data);
+function RowForm(name, page, data) {
+    Form.call(this, name, page, data);
     this.row = null;
 };
 
@@ -34,7 +34,7 @@ Form.prototype.fillParams = function(row) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.onDataSourceChanged = function(eventArgs) {
-    Form.prototype.onDataSourceChanged.call(this,eventArgs);
+    Form.prototype.onDataSourceChanged.call(this, eventArgs);
     var dataSource = eventArgs.object;
     if (dataSource.name === 'default') {
         this.eventChanged.fire(new QForms.Event(this));
@@ -43,7 +43,7 @@ RowForm.prototype.onDataSourceChanged = function(eventArgs) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.onDataSourceUpdated = function(eventArgs) {
-    Form.prototype.onDataSourceUpdated.call(this,eventArgs);
+    Form.prototype.onDataSourceUpdated.call(this, eventArgs);
     this.fillParams(this.row);
     this.eventUpdated.fire(new QForms.Event(this));
 };

@@ -1,15 +1,15 @@
 'use strict';
 
-QForms.inherit(KeyColumn,Model);
+QForms.inherit(KeyColumn, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function KeyColumn(data,dataSource) {
-    Model.call(this,data);
+function KeyColumn(data, dataSource) {
+    Model.call(this, data);
     this.dataSource = dataSource;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumn.prototype.setValue = function(name,value,callback) {
+KeyColumn.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'KeyColumn',
@@ -23,7 +23,7 @@ KeyColumn.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -43,7 +43,7 @@ KeyColumn.prototype.delete = function(callback) {
             keyColumn:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -51,7 +51,7 @@ KeyColumn.prototype.delete = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumn.prototype.getView = function(view,callback) {
+KeyColumn.prototype.getView = function(view, callback) {
     var args = {
         controller:'KeyColumn',
         action:'getView',
@@ -59,7 +59,7 @@ KeyColumn.prototype.getView = function(view,callback) {
             view:view
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

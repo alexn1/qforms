@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(ImageFieldController,FieldController);
+QForms.inherit(ImageFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ImageFieldController(model,parent) {
-    FieldController.call(this,model,parent);
+function ImageFieldController(model, parent) {
+    FieldController.call(this, model, parent);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@ ImageFieldController.prototype.getValue = function (view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ImageFieldController.prototype.setValue = function (value,view) {
+ImageFieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
         case 'RowForm':
             if (value !== '') {

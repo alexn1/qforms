@@ -13,33 +13,33 @@ function EditorController(appData) {
 EditorController.prototype.init = function() {
     // tree
     this.tree = document.getElementById('tree')._obj;
-    this.tree.eventDoubleClick.subscribe(this,'onItemDoubleClick');
-    this.tree.eventSelect.subscribe(this,'onItemSelect');
-    this.tree.eventOpen.subscribe(this,'onItemOpen');
-    this.tree.eventDelete.subscribe(this,'onItemDelete');
+    this.tree.eventDoubleClick.subscribe(this, 'onItemDoubleClick');
+    this.tree.eventSelect.subscribe(this, 'onItemSelect');
+    this.tree.eventOpen.subscribe(this, 'onItemOpen');
+    this.tree.eventDelete.subscribe(this, 'onItemDelete');
     // docs
     this.docs = document.getElementById('docs')._obj;
-    this.docs.eventTabClosingByUser.subscribe(this,'onTabClosingByUser');
+    this.docs.eventTabClosingByUser.subscribe(this, 'onTabClosingByUser');
     // props
     this.props = new PropertyGrid(document.getElementById(('props')));
-    this.props.eventChanged.subscribe(this,'onObjChange');
+    this.props.eventChanged.subscribe(this, 'onObjChange');
     this.props.init();
     // root
     var caption = ApplicationController.prototype.getCaption(this.appData);
-    var appItem = this.tree.addItem(caption,'opened');
+    var appItem = this.tree.addItem(caption, 'opened');
     var app = new Application(this.appData);
-    appItem.ctrl = new ApplicationController(app,appItem,this);
+    appItem.ctrl = new ApplicationController(app, appItem, this);
     appItem.ctrl.createTree();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.deinit = function() {
-    this.tree.eventDoubleClick.unsubscribe(this,'onItemDoubleClick');
-    this.tree.eventSelect.unsubscribe(this,'onItemSelect');
-    this.tree.eventOpen.unsubscribe(this,'onItemOpen');
-    this.tree.eventDelete.unsubscribe(this,'onItemDelete');
-    this.docs.eventTabClosingByUser.unsubscribe(this,'onTabClosingByUser');
-    this.props.eventChanged.unsubscribe(this,'onObjChange');
+    this.tree.eventDoubleClick.unsubscribe(this, 'onItemDoubleClick');
+    this.tree.eventSelect.unsubscribe(this, 'onItemSelect');
+    this.tree.eventOpen.unsubscribe(this, 'onItemOpen');
+    this.tree.eventDelete.unsubscribe(this, 'onItemDelete');
+    this.docs.eventTabClosingByUser.unsubscribe(this, 'onTabClosingByUser');
+    this.props.eventChanged.unsubscribe(this, 'onObjChange');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ EditorController.prototype.onItemSelect = function(e) {
     var self = this;
     if (e.item.ctrl) {
         if (e.item.ctrl instanceof PageLinkController) {
-            this.pageLinkToPage(e.item,function() {
+            this.pageLinkToPage(e.item, function() {
                 self.fillActionsAndGrid(e.item.ctrl);
             });
         } else {
@@ -76,11 +76,11 @@ EditorController.prototype.fillActionsAndGrid = function(ctrl) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.fillGrid = function(ctrl) {
     var propList = ctrl.getPropList();
-    this.props.beginEdit(propList['list'],propList['options']);
+    this.props.beginEdit(propList['list'], propList['options']);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.pageLinkToPage = function(item,callback) {
+EditorController.prototype.pageLinkToPage = function(item, callback) {
     var pageLink = item.ctrl.model;
     var args = {
         controller:'Page',
@@ -89,7 +89,7 @@ EditorController.prototype.pageLinkToPage = function(item,callback) {
             fileName:pageLink.data['@attributes'].fileName
         }
     };
-    QForms.doHttpRequest(this,args,function(pageData){
+    QForms.doHttpRequest(this, args, function(pageData) {
         var page = new Page(pageData, pageLink.parent, pageLink);
         item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();
@@ -122,7 +122,7 @@ EditorController.prototype.fillActions = function(ctrl) {
             $(li).click(function() {
                 this.ctrl.doAction(this.miAction);
             });
-            li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}',action.caption);
+            li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}', action.caption);
             $('#treeActionsList').append(li);
         }
     });
@@ -130,7 +130,7 @@ EditorController.prototype.fillActions = function(ctrl) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.onObjChange = function(e) {
-    this.tree.active.ctrl.setProperty(e.name,e.value);
+    this.tree.active.ctrl.setProperty(e.name, e.value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

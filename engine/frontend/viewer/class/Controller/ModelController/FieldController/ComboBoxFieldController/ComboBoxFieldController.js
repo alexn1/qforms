@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(ComboBoxFieldController,FieldController);
+QForms.inherit(ComboBoxFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function ComboBoxFieldController(model,parent) {
-    FieldController.call(this,model,parent);
+function ComboBoxFieldController(model, parent) {
+    FieldController.call(this, model, parent);
     this.dataSource = null;
     this.eventChange = new QForms.Event(this);
 };
@@ -17,19 +17,19 @@ ComboBoxFieldController.prototype.init = function() {
     if (!this.dataSource) {
         throw new Error('[' + this.model.getFullName() + '] cannot find data source \'' + this.model.data.dataSourceName + '\'');
     }
-    this.dataSource.eventRefillRow.subscribe(this,'onRefillRow');
-    this.dataSource.eventRemoveRow.subscribe(this,'onRemoveRow');
-    this.dataSource.eventNewRow.subscribe(this,'onNewRow');
-    this.dataSource.eventMoveRow.subscribe(this,'onMoveRow');
+    this.dataSource.eventRefillRow.subscribe(this, 'onRefillRow');
+    this.dataSource.eventRemoveRow.subscribe(this, 'onRemoveRow');
+    this.dataSource.eventNewRow.subscribe(this, 'onNewRow');
+    this.dataSource.eventMoveRow.subscribe(this, 'onMoveRow');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.deinit = function() {
     //console.log('ComboBoxFieldController.prototype.deinit: ' + this.model.name);
-    this.dataSource.eventRefillRow.unsubscribe(this,'onRefillRow');
-    this.dataSource.eventRemoveRow.unsubscribe(this,'onRemoveRow');
-    this.dataSource.eventNewRow.unsubscribe(this,'onNewRow');
-    this.dataSource.eventMoveRow.unsubscribe(this,'onMoveRow');
+    this.dataSource.eventRefillRow.unsubscribe(this, 'onRefillRow');
+    this.dataSource.eventRemoveRow.unsubscribe(this, 'onRemoveRow');
+    this.dataSource.eventNewRow.unsubscribe(this, 'onNewRow');
+    this.dataSource.eventMoveRow.unsubscribe(this, 'onMoveRow');
     FieldController.prototype.deinit.call(this);
 };
 
@@ -100,7 +100,7 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxFieldController.prototype._createOption = function(view,i) {
+ComboBoxFieldController.prototype._createOption = function(view, i) {
     var row =  this.dataSource.getRowByIndex(i);
     var key = this.dataSource.getRowKey(row);
     var option = document.createElement('option');
@@ -170,7 +170,7 @@ ComboBoxFieldController.prototype.onMoveRow = function(ea) {
             for (var k in this.views) {
                 var view = this.views[k];
                 var option = view.keyToOption[key];
-                QForms.moveNode(view.firstElementChild,option,oldIndex,newIndex+1);
+                QForms.moveNode(view.firstElementChild, option, oldIndex, newIndex + 1);
                 this._refillRow(option);
             }
             break;
@@ -181,7 +181,7 @@ ComboBoxFieldController.prototype.onMoveRow = function(ea) {
 ComboBoxFieldController.prototype.onChange = function (el) {
     var view = el.parentNode;
     if (this.isValid(view)) {
-        this.model.save(view.dbRow,this.getValue(view));
+        this.model.save(view.dbRow, this.getValue(view));
         // event
         var ea = new QForms.EventArg(this);
         ea.view = view;

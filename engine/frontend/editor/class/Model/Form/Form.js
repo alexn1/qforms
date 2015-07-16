@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(Form,Model);
+QForms.inherit(Form, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Form(data, page) {
@@ -10,7 +10,7 @@ function Form(data, page) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.setValue = function(name,value,callback) {
+Form.prototype.setValue = function(name, value, callback) {
     //console.log(name + ' = ' + value);
     var args = {
         controller:'Form',
@@ -22,7 +22,7 @@ Form.prototype.setValue = function(name,value,callback) {
             value:value
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         this.data['@attributes'][name] = value;
         if (callback) {
             callback(data);
@@ -40,7 +40,7 @@ Form.prototype.delete = function(callback) {
             form:this.data['@attributes'].name
         }
     };
-    QForms.doHttpRequest(this, args, function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -74,7 +74,7 @@ Form.prototype.moveDown = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.newField = function(params,callback) {
+Form.prototype.newField = function(params, callback) {
     params['pageFileName'] = this.page.pageLink.data['@attributes'].fileName;
     params['form'] = this.data['@attributes'].name;
     var args = {
@@ -82,7 +82,7 @@ Form.prototype.newField = function(params,callback) {
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -90,7 +90,7 @@ Form.prototype.newField = function(params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.newControl = function(params,callback) {
+Form.prototype.newControl = function(params, callback) {
     params['pageFileName'] = this.page.pageLink.data['@attributes'].fileName;
     params['form'] = this.data['@attributes'].name;
     var args = {
@@ -98,7 +98,7 @@ Form.prototype.newControl = function(params,callback) {
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -106,7 +106,7 @@ Form.prototype.newControl = function(params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.newDataSource = function(params,callback) {
+Form.prototype.newDataSource = function(params, callback) {
     params['page']  = this.page.pageLink.data['@attributes'].fileName;
     params['form']  = this.data['@attributes'].name;
     var args = {
@@ -114,7 +114,7 @@ Form.prototype.newDataSource = function(params,callback) {
         action:'_new',
         params:params
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback(data);
         }
@@ -122,23 +122,23 @@ Form.prototype.newDataSource = function(params,callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.getView = function(view,callback) {
+Form.prototype.getView = function(view, callback) {
     var args = {
         controller:'Form',
         action:'getView',
         params:{
-            view:view,
+            view: view,
             page: this.data !== undefined ? this.page.data['@attributes'].name : null,
             form: this.data !== undefined ? this.data['@attributes'].name : null
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.saveView = function(text,view) {
+Form.prototype.saveView = function(text, view) {
     var args = {
         controller:'Form',
         action:'saveView',
@@ -149,7 +149,7 @@ Form.prototype.saveView = function(text,view) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
 
     });
 };
@@ -165,7 +165,7 @@ Form.prototype.saveController = function(text) {
             text:text
         }
     };
-    QForms.doHttpRequest(this,args,function(data) {
+    QForms.doHttpRequest(this, args, function(data) {
 
     });
 };
@@ -181,7 +181,7 @@ Form.prototype.createView = function(callback) {
             class:this.data['@class']
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };
@@ -197,7 +197,7 @@ Form.prototype.createController = function(callback) {
             class:this.data['@class']
         }
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
 };

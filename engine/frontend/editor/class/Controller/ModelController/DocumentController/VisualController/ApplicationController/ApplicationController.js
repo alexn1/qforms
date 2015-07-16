@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(ApplicationController,VisualController);
+QForms.inherit(ApplicationController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationController(model, item, editorController) {
@@ -32,7 +32,7 @@ ApplicationController.prototype.createTree = function() {
         }
     }
     // pages
-    this.pagesItem = this.item.addItem('Pages','opened');
+    this.pagesItem = this.item.addItem('Pages', 'opened');
     if (this.model.data.pageLinks) {
         for (var name in this.model.data.pageLinks) {
             var pageLinkData = this.model.data.pageLinks[name];
@@ -46,7 +46,7 @@ ApplicationController.prototype.addDatabaseItem = function(databaseData) {
     var caption = DatabaseController.prototype.getCaption(databaseData);
     var databaseItem = this.databasesItem.addItem(caption);
     var database = new Database(databaseData);
-    databaseItem.ctrl = new DatabaseController(database,databaseItem,this);
+    databaseItem.ctrl = new DatabaseController(database, databaseItem, this);
     databaseItem.ctrl.createTree();
     return databaseItem;
 };
@@ -67,18 +67,18 @@ ApplicationController.prototype.addPageLinkItem = function(pageLinkData) {
     var pageLinkItem = this.pagesItem.addItem(caption);
     pageLinkItem.node.className = 'node';
     var pageLink = new PageLink(pageLinkData, this.model)
-    pageLinkItem.ctrl = new PageLinkController(pageLink,pageLinkItem);
+    pageLinkItem.ctrl = new PageLinkController(pageLink, pageLinkItem);
     return pageLinkItem;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
+ApplicationController.prototype.addPageItem = function(pageData, pageLinkData) {
     var caption = PageController.prototype.getCaption(pageData);
     var pageItem = this.pagesItem.addItem(caption);
     pageItem.node.className = 'node';
     var pageLink = new PageLink(pageLinkData, this.model);
     var page = new Page(pageData, this.model, pageLink);
-    pageItem.ctrl = new PageController(page,pageItem,pageLink);
+    pageItem.ctrl = new PageController(page, pageItem, pageLink);
     pageItem.ctrl.createTree();
     return pageItem;
 };
@@ -86,9 +86,9 @@ ApplicationController.prototype.addPageItem = function(pageData,pageLinkData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getActions = function() {
     return [
-        {'action':'newDatabase','caption':'New Database'},
-        {'action':'newDataSource','caption':'New Data Source'},
-        {'action':'newPage','caption':'New Page'}
+        {'action':'newDatabase', 'caption':'New Database'},
+        {'action':'newDataSource', 'caption':'New Data Source'},
+        {'action':'newPage', 'caption':'New Page'}
     ];
 };
 
@@ -114,7 +114,7 @@ ApplicationController.prototype.newPageAction = function() {
     var self = this;
     Page.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var name = $("#myModal input[id='name']").val();
             var caption = $("#myModal input[id='caption']").val();
@@ -124,8 +124,8 @@ ApplicationController.prototype.newPageAction = function() {
                 caption:caption,
                 startup:startup
             };
-            self.model.newPage(params,function (pageData,pageLinkData) {
-                self.pageItems[name] = self.addPageItem(pageData,pageLinkData);
+            self.model.newPage(params, function (pageData, pageLinkData) {
+                self.pageItems[name] = self.addPageItem(pageData, pageLinkData);
                 self.pageItems[name].select();
             });
             $('#myModal').modal('hide');
@@ -140,7 +140,7 @@ ApplicationController.prototype.newDataSourceAction = function() {
     var self = this;
     DataSource.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var dsName = $("#myModal input[id='dsName']").val();
             var dsClass = $("#myModal select[id='dsClass']").val();
@@ -163,7 +163,7 @@ ApplicationController.prototype.newDatabaseAction = function() {
     var self = this;
     Database.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
 
             var name = $("#myModal input[id='name']").val();
@@ -193,7 +193,7 @@ ApplicationController.prototype.newDatabaseAction = function() {
                     }
                 }
             };
-            self.model.newDatabase(params,function(databaseData) {
+            self.model.newDatabase(params, function(databaseData) {
                 self.addDatabaseItem(databaseData).select();
             });
             $('#myModal').modal('hide');
@@ -206,6 +206,6 @@ ApplicationController.prototype.newDatabaseAction = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getPropList = function() {
     var propList = ApplicationController.super_.prototype.getPropList.call(this);
-    propList.options['authentication'] = ['true','false'];
+    propList.options['authentication'] = ['true', 'false'];
     return propList;
 };

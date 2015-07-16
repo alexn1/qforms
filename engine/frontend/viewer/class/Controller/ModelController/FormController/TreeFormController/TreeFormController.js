@@ -1,6 +1,6 @@
 'use strict';
 
-QForms.inherit(TreeFormController,FormController);
+QForms.inherit(TreeFormController, FormController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function TreeFormController(model, view, parent) {
@@ -15,19 +15,19 @@ TreeFormController.prototype.init = function() {
     $(this.view).find('button.newRoot').click(function() {self.onNewRootClick(this);});
     $(this.view).find('button.new').click(function() {self.onNewClick(this);});
     $(this.view).find('button.delete').click(function() {self.onDeleteClick(this);});
-    var treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}',this.model.page.id).replace('{formName}',this.model.name);
+    var treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}', this.model.page.id).replace('{formName}', this.model.name);
     var tree = this.view.querySelector(treeSelector);
-    this.tree = new DataTreeWidget(tree,this);
+    this.tree = new DataTreeWidget(tree, this);
     this.tree.init();
-    this.tree.eventSelect.subscribe(this,'onTreeItemSelect');
-    this.tree.eventDoubleClick.subscribe(this,'onTreeItemDoubleClick');
+    this.tree.eventSelect.subscribe(this, 'onTreeItemSelect');
+    this.tree.eventDoubleClick.subscribe(this, 'onTreeItemDoubleClick');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeFormController.prototype.deinit = function() {
     FormController.prototype.deinit.call(this);
-    this.tree.eventSelect.unsubscribe(this,'onTreeItemSelect');
-    this.tree.eventDoubleClick.unsubscribe(this,'onTreeItemDoubleClick');
+    this.tree.eventSelect.unsubscribe(this, 'onTreeItemSelect');
+    this.tree.eventDoubleClick.unsubscribe(this, 'onTreeItemDoubleClick');
     this.tree.deinit();
 };
 

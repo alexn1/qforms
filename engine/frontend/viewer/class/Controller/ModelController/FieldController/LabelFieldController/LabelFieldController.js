@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(LabelFieldController,FieldController);
+QForms.inherit(LabelFieldController, FieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function LabelFieldController(model,parent) {
-    LabelFieldController.super_.call(this,model,parent);
+function LabelFieldController(model, parent) {
+    LabelFieldController.super_.call(this, model, parent);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,6 +13,6 @@ LabelFieldController.prototype.getValue = function (view) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-LabelFieldController.prototype.setValue = function (value,view) {
+LabelFieldController.prototype.setValue = function (value, view) {
     view.firstElementChild.innerHTML = value;
 };

@@ -66,10 +66,10 @@ TabWidget.prototype.onTabClosing = function(tab) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
+TabWidget.prototype.createTab = function(el, caption, onCloseCallback) {
     caption = caption !== undefined ? caption : '';
     // li
-    var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}',caption)).get(0);
+    var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}', caption)).get(0);
     li.onCloseCallback = onCloseCallback;
     // div
     var div = document.createElement('div');
@@ -87,7 +87,7 @@ TabWidget.prototype.createTab = function(el,caption,onCloseCallback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.selectTab = function(tab,track) {
+TabWidget.prototype.selectTab = function(tab, track) {
     if (this.activeTab === tab) {
         return;
     }

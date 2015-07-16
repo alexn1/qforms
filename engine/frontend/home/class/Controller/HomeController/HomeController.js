@@ -14,11 +14,11 @@ HomeController.prototype.btnCreate_Click = function() {
     var self = this;
     $.get('home/html/newapp.html', function(html) {
         $(document.body).append(html);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var folderName = $("#myModal input[id='folderName']").val();
             var appName = $("#myModal input[id='appName']").val();
-            self.createApp(folderName,appName);
+            self.createApp(folderName, appName);
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
@@ -27,13 +27,13 @@ HomeController.prototype.btnCreate_Click = function() {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.createApp = function(folderName,appName) {
+HomeController.prototype.createApp = function(folderName, appName) {
     var args = {
         action:'new',
         folder:folderName,
         name:appName
     };
-    QForms.doHttpRequest(this,args,function(data){
+    QForms.doHttpRequest(this, args, function(data) {
         if (data.appList) {
             var lbApp = document.getElementById('lbApp');
             lbApp.innerHTML = '';

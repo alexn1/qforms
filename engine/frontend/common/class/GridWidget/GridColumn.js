@@ -9,7 +9,7 @@ function GridColumn(gridWidget, name, headerCell) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.init = function() {
-    this.initResize(this.headerCell,this.name);
+    this.initResize(this.headerCell, this.name);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,12 +17,12 @@ GridColumn.prototype.deinit = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.initResize = function(headerCell,fieldName) {
+GridColumn.prototype.initResize = function(headerCell, fieldName) {
     var self = this;
     var resize = headerCell.querySelector('td > span');
     resize.qFieldName = fieldName;
-    resize.addEventListener('mousedown',function(event) {return self.beginResize(event,this);});
-    resize.addEventListener('dblclick',function(event) {return self.setOptimalWidth(event,this);});
+    resize.addEventListener('mousedown', function(event) {return self.beginResize(event, this);});
+    resize.addEventListener('dblclick', function(event) {return self.setOptimalWidth(event, this);});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,12 +31,12 @@ GridColumn.prototype.renderView = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.setViewStyle = function(view,row) {
+GridColumn.prototype.setViewStyle = function(view, row) {
 
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.setValue = function(view,value) {
+GridColumn.prototype.setValue = function(view, value) {
     view.firstElementChild.innerHTML = value;
 };
 
@@ -52,7 +52,7 @@ GridColumn.prototype.getOptimalWidth = function(view) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.beginResize = function(e,resize) {
+GridColumn.prototype.beginResize = function(e, resize) {
     //console.log('onmousedown');
     var bodyTable = this.gridWidget.el.querySelector('.body > table');
     var headTd = resize.parentElement;
@@ -79,7 +79,7 @@ GridColumn.prototype.beginResize = function(e,resize) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-GridColumn.prototype.setOptimalWidth = function(e,resize) {
+GridColumn.prototype.setOptimalWidth = function(e, resize) {
     var bodyTable = this.gridWidget.el.querySelector('.body > table');
     var headTd = resize.parentElement;
     if (bodyTable.rows[0]) var bodyTd = bodyTable.rows[0].cells[headTd.cellIndex];

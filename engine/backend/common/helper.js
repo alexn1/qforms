@@ -32,9 +32,9 @@ module.exports = {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
-    var filePaths = glob.sync(path.join(dirPath,'*.' + ext));
-    glob.sync(path.join(dirPath,'*/')).forEach(function(subDirPath) {
-        _getFilePathsSync(subDirPath,ext).forEach(function(fileName) {
+    var filePaths = glob.sync(path.join(dirPath, '*.' + ext));
+    glob.sync(path.join(dirPath, '*/')).forEach(function(subDirPath) {
+        _getFilePathsSync(subDirPath, ext).forEach(function(fileName) {
             filePaths.push(fileName);
         });
     });
@@ -52,13 +52,13 @@ function getFilePathsSync(publicDirPath, subDirPath, ext) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePaths(dirPath, ext, filePaths, callback) {
     // all files from directory
-    glob(path.join(dirPath,'*.' + ext), function(err, items) {
+    glob(path.join(dirPath, '*.' + ext), function(err, items) {
         // pushing files to output array
         items.forEach(function(item) {
             filePaths.push(item);
         });
         // all directories from directory
-        glob(path.join(dirPath,'*/'), function(err, items) {
+        glob(path.join(dirPath, '*/'), function(err, items) {
             // get all files for each directory
             async.eachSeries(items, function(subDirPath, next) {
                 _getFilePaths(subDirPath, ext, filePaths, next);
@@ -131,7 +131,7 @@ function currentTime() {
     var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
     var ss = now.getSeconds(); if (ss < 10) ss = '0' + ss;
-    return [hh,mm,ss].join(':');
+    return [hh, mm, ss].join(':');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

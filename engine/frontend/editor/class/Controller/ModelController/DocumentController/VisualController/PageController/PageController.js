@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherit(PageController,VisualController);
+QForms.inherit(PageController, VisualController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageController(model,item,pageLink) {
-    VisualController.call(this,model);
+function PageController(model, item, pageLink) {
+    VisualController.call(this, model);
     this.item = item;
     this.pageLink = pageLink;
     this.itemForms = null;
@@ -34,8 +34,8 @@ PageController.prototype.createTree = function(callback) {
 PageController.prototype.addFormItem = function(formData) {
     var caption = FormController.prototype.getCaption(formData);
     var itemForm = this.itemForms.addItem(caption);
-    var form = new Form(formData,this.model);
-    itemForm.ctrl = new FormController(form,itemForm);
+    var form = new Form(formData, this.model);
+    itemForm.ctrl = new FormController(form, itemForm);
     itemForm.ctrl.createTree();
     return itemForm;
 };
@@ -53,13 +53,13 @@ PageController.prototype.addDataSourceItem = function(dataSourceData) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.getActions = function() {
     return [
-        {'action':'newDataSource','caption':'New Data Source'},
-        {'action':'newForm','caption':'New Form'},
-        {'action':'','caption':'-'},
-        {'action':'moveUp','caption':'Move Up'},
-        {'action':'moveDown','caption':'Move Down'},
-        {'action':'','caption':'-'},
-        {'action':'delete','caption':'Delete'}
+        {'action':'newDataSource', 'caption':'New Data Source'},
+        {'action':'newForm', 'caption':'New Form'},
+        {'action':'', 'caption':'-'},
+        {'action':'moveUp', 'caption':'Move Up'},
+        {'action':'moveDown', 'caption':'Move Down'},
+        {'action':'', 'caption':'-'},
+        {'action':'delete', 'caption':'Delete'}
     ];
 };
 
@@ -96,14 +96,14 @@ PageController.prototype.actionNewForm = function() {
     var self = this;
     Form.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var params = {
                 name:$("#myModal input[id='name']").val(),
                 caption:$("#myModal input[id='caption']").val(),
                 class:$("#myModal select[id='formClass']").val()
             };
-            self.model.newForm(params,function(formData) {
+            self.model.newForm(params, function(formData) {
                 self.addFormItem(formData).select();
                 $('#myModal').modal('hide');
             });
@@ -118,7 +118,7 @@ PageController.prototype.newDataSourceAction = function() {
     var self = this;
     DataSource.prototype.getView('new.html', function(result) {
         $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal',function(e){$(this).remove();});
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
             var dsName = $("#myModal input[id='dsName']").val();
             var dsClass = $("#myModal select[id='dsClass']").val();
@@ -146,11 +146,11 @@ PageController.prototype.getPropList = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.setProperty = function(name,value) {
+PageController.prototype.setProperty = function(name, value) {
     if (name === 'startup' || name === 'menu') {
-        this.pageLink.setValue(name,value);
+        this.pageLink.setValue(name, value);
     } else  {
-        ModelController.prototype.setProperty.call(this,name,value);
+        ModelController.prototype.setProperty.call(this, name, value);
     }
 };
 
