@@ -19,49 +19,61 @@ module.exports = function(req, res, next) {
     if (req.params.appDirName && req.params.appFileName) {
         var applications = req.app.get('applications');
         var route = [req.params.appDirName, req.params.appFileName].join('/');
-        if (req.query.debug !== '1' && applications[route]) {
-            //console.log('old app: ' + route);
-            var d = domain.create();
-            if (qforms.get('handleException') === 'true') {
-                d.on('error', next);
-            }
-            d.run(function() {
-                handle(req, res, next, applications[route]);
-            });
-        } else {
-            //console.log('new app: ' + route);
-            var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-            fs.exists(appFilePath, function(exists) {
-                if (exists) {
-                    helper.getAppInfo(appFilePath, function(appInfo) {
-                        fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
-                            if (err) {
-                                throw err;
-                            } else {
-                                var appData = JSON.parse(content);
-                                ApplicationController.create(appData, appInfo, function(application) {
-                                    application.init(function() {
-                                        applications[route] = application;
-                                        var d = domain.create();
-                                        if (qforms.get('handleException') === 'true') {
-                                            d.on('error', next);
-                                        }
-                                        d.run(function() {
-                                            handle(req, res, next, application);
-                                        });
-                                    });
-                                });
-                            }
-                        });
-                    });
-                } else {
-                    next();
+        if (applications[route]) {
+            if (req.query.debug === '1' && req.method === 'GET') {
+                applications[route].deinit(function() {
+                    createApplication(req, res, next, route);
+                });
+            } else {
+                //console.log('old app: ' + route);
+                var d = domain.create();
+                if (qforms.get('handleException') === 'true') {
+                    d.on('error', next);
                 }
-            });
+                d.run(function() {
+                    handle(req, res, next, applications[route]);
+                });
+            }
+        } else {
+            createApplication(req, res, next, route);
         }
     } else {
         next();
     }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function createApplication(req, res, next, route) {
+    //console.log('new app: ' + route);
+    var applications = req.app.get('applications');
+    var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
+    fs.exists(appFilePath, function(exists) {
+        if (exists) {
+            helper.getAppInfo(appFilePath, function(appInfo) {
+                fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        var appData = JSON.parse(content);
+                        ApplicationController.create(appData, appInfo, function(application) {
+                            application.init(function() {
+                                applications[route] = application;
+                                var d = domain.create();
+                                if (qforms.get('handleException') === 'true') {
+                                    d.on('error', next);
+                                }
+                                d.run(function() {
+                                    handle(req, res, next, application);
+                                });
+                            });
+                        });
+                    }
+                });
+            });
+        } else {
+            next();
+        }
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
