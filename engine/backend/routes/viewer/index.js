@@ -124,7 +124,7 @@ function login(req, res, next, application) {
                     req.session.username = {};
                 }
                 req.session.username[route] = req.body.username;
-                res.redirect(req.path);
+                res.redirect(req.url);
             } else {
                 var args = {
                     querytime : {
