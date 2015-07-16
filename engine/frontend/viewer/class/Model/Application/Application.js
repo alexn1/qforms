@@ -51,7 +51,7 @@ Application.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.getTable = function(fullTableName) {
     if (!(fullTableName in this.tables)) {
-        this.tables[fullTableName] = new qfTable(fullTableName);
+        this.tables[fullTableName] = new QForms.Table(fullTableName);
     }
     return this.tables[fullTableName];
 };

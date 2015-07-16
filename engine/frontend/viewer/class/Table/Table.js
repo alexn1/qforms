@@ -1,12 +1,14 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function qfTable(name) {
-    this.name = name;
+QForms.Table = function (name) {
+    this.name         = name;
+    this.eventInsert = new QForms.Event(this);
+    this.eventDelete = new QForms.Event(this);
     this.eventUpdated = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-qfTable.prototype.fireUpdated = function(eventArg) {
+QForms.Table.prototype.fireUpdated = function(eventArg) {
     this.eventUpdated.fire(eventArg);
 };
