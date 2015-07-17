@@ -177,8 +177,8 @@ DataSource.prototype.onTableUpdated = function(ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.onTableInsert = function(ea) {
-    console.log('DataSource.prototype.onTableInsert');
-    console.log(ea.key);
+    //console.log('DataSource.prototype.onTableInsert');
+    //console.log(ea.key);
     var self = this;
     this.refresh(function() {
         if (self.rowsByKey[ea.key]) {

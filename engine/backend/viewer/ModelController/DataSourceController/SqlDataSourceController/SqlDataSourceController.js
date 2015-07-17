@@ -63,7 +63,7 @@ SqlDataSourceController.prototype._query = function(query, params, callback, sel
                     if (select) {
                         // for dublicate column names
                         var fieldCount = {};
-                        for (var j=0;j<fields.length;j++) {
+                        for (var j = 0; j < fields.length; j++) {
                             var f = fields[j];
                             if (!fieldCount[f.name]) {
                                 fieldCount[f.name] = 0;
@@ -72,7 +72,7 @@ SqlDataSourceController.prototype._query = function(query, params, callback, sel
                             f.numb = fieldCount[f.name] - 1;
                         }
                         var rows = [];
-                        for (var i=0; i<result.length; i++) {
+                        for (var i = 0; i < result.length; i++) {
                             var r = result[i];
                             var row = {};
                             for (var j=0; j<fields.length; j++) {
@@ -110,12 +110,8 @@ SqlDataSourceController.prototype._desc = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.select = function(args, callback) {
-    var params = {};
-    _.extend(params, args.params);
-    if (args.querytime) {
-        _.extend(params, args.querytime.params);
-    }
-    var query = this._replaceThis(this.data['@attributes'].query);
+    var query  = this._replaceThis(this.data['@attributes'].query);
+    var params = this.getParams(args);
     this._query(query, params, function(rows) {
         callback(rows);
     }, true);
@@ -123,12 +119,8 @@ SqlDataSourceController.prototype.select = function(args, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.selectCount = function(args, callback) {
-    var params = {};
-    _.extend(params, args.params);
-    if (args.querytime) {
-        _.extend(params, args.querytime.params);
-    }
-    var query = this._replaceThis(this.data['@attributes'].countQuery);
+    var query  = this._replaceThis(this.data['@attributes'].countQuery);
+    var params = this.getParams(args);
     this._query(query, params, function(rows) {
         var row = rows[0];
         var count = row[Object.keys(row)[0]];
@@ -168,13 +160,16 @@ SqlDataSourceController.prototype.insert = function(args, callback) {
     var row = args.row;
     var self = this;
     var insertRow = function() {
+        // removing auto increment field
         for (var column in row) {
             if (column === self.aiFieldName) {
                 delete row[column];
                 break;
             }
         }
-        var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, row).toString();
+        var query = new sqlish.Sqlish()
+            .insert(self.data['@attributes'].table, row)
+            .toString();
         self._query(query,  null, function(result) {
             var key = JSON.stringify([result.insertId]);
             callback(key);

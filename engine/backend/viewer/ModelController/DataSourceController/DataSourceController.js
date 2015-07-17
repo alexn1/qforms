@@ -185,3 +185,13 @@ DataSourceController.prototype._replaceThis = function(query) {
         return query;
     }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.getParams = function(args) {
+    var params = {};
+    _.extend(params, args.params);
+    if (args.querytime) {
+        _.extend(params, args.querytime.params);
+    }
+    return params;
+};
