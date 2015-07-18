@@ -124,12 +124,6 @@ ApplicationController.prototype.deinit = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype._createPage = function(args, pageName, callback) {
-    if (args.querytime.params['@username']) {
-        var userName = args.querytime.params['@username'];
-        if (this.authorizePage(userName, pageName) === false) {
-            throw new Error('Authorization error.');
-        }
-    }
     var self         = this;
     var relFilePath  = this.data.pageLinks[pageName]['@attributes'].fileName;
     var pageFilePath = path.join(this.dirPath, relFilePath);
@@ -154,6 +148,12 @@ ApplicationController.prototype.authorizePage = function(userName, pageName) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getPage = function(args, pageName, callback) {
+    if (args.querytime.params['@username']) {
+        var userName = args.querytime.params['@username'];
+        if (this.authorizePage(userName, pageName) === false) {
+            throw new Error('Authorization error.');
+        }
+    }
     var self = this;
     if (this.pages[pageName]) {
         callback(self.pages[pageName]);
@@ -193,6 +193,7 @@ ApplicationController.prototype.fill = function(args, callback) {
         delete response.user;
         delete response.password;
         delete response.authentication;
+
         // username
         if (args.querytime.params['@username']) {
             response.username = args.querytime.params['@username'];
