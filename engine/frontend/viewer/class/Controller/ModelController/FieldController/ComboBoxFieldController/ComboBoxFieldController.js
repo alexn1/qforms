@@ -94,7 +94,7 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     }
     view.firstElementChild.appendChild(nullOption);
     var rows = this.dataSource.getRows();
-    for (var i=0; i<rows.length; i++) {
+    for (var i=0; i < rows.length; i++) {
         this._createOption(view, i);
     }
 };
@@ -196,7 +196,7 @@ ComboBoxFieldController.prototype.onChange = function (el) {
 ComboBoxFieldController.prototype.isValid = function(view) {
     var isValid = true;
     if (this.model.data.notNull === 'true') {
-        isValid = view.firstElementChild.selectedOptions[0].value !== '';
+        isValid = view.firstElementChild.selectedIndex !== 0;
     }
     if (!isValid) {
         view.firstElementChild.classList.add('error');

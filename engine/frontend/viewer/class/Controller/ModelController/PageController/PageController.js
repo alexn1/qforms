@@ -69,12 +69,16 @@ PageController.prototype.fill = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onSaveClick = function(el) {
-    if (this.isValid()) this.model.update();
+    if (this.isValid()) {
+        this.model.update();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onSaveAndCloseClick = function(el) {
-    if (this.isValid()) this.model.saveAndClose();
+    if (this.isValid()) {
+        this.model.saveAndClose();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +112,11 @@ PageController.prototype.getCaption = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.isValid = function() {
     var isValid = true;
-    for (var name in this.forms) if (!this.forms[name].isValid()) isValid = false;
+    for (var name in this.forms) {
+        if (!this.forms[name].isValid()) {
+            isValid = false;
+        }
+    }
     return isValid;
 };
 
