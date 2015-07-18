@@ -50,7 +50,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype._query = function(query, params, callback, select) {
-    select = select !== undefined ? select : false;
+    select = (select !== undefined) ? select : true;
     console.log({dsName: this.name, query: query, params: params});
     this.getPool().getConnection(function(err, cnn) {
         if (err) {
@@ -76,7 +76,7 @@ SqlDataSourceController.prototype._query = function(query, params, callback, sel
                         for (var i = 0; i < result.length; i++) {
                             var r = result[i];
                             var row = {};
-                            for (var j=0; j<fields.length; j++) {
+                            for (var j=0; j < fields.length; j++) {
                                 var f = fields[j];
                                 var column = f.name + (f.numb > 0 ? f.numb : '');
                                 row[column] = r[f.table][f.name];
@@ -100,13 +100,13 @@ SqlDataSourceController.prototype._desc = function(callback) {
     var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
     this._query(query, null, function(rows) {
         rows.forEach(function(info) {
-            self.desc[info.COLUMNS.Field] = info.COLUMNS;
-            if (info.COLUMNS.Extra === 'auto_increment') {
-                self.aiFieldName = info.COLUMNS.Field;
+            self.desc[info.Field] = info;
+            if (info.Extra === 'auto_increment') {
+                self.aiFieldName = info.Field;
             }
         });
         callback();
-    });
+    }, true);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +147,7 @@ SqlDataSourceController.prototype.update = function(context, callback) {
             .set(values)
             .where(self.getRowKeyValues(row))
             .toString();
-        self._query(query, null, callback);
+        self._query(query, null, callback, false);
     };
     if (!this.desc) {
         this._desc(updateRow);
@@ -174,7 +174,7 @@ SqlDataSourceController.prototype.insert = function(context, callback) {
         self._query(query,  null, function(result) {
             var key = JSON.stringify([result.insertId]);
             callback(key);
-        });
+        }, false);
     };
     if (!this.desc) {
         this._desc(insertRow);
@@ -190,5 +190,5 @@ SqlDataSourceController.prototype.delete = function(context, callback) {
         .deleteFrom(this.data['@attributes'].table)
         .where(this.getRowKeyValues(row))
         .toString();
-    this._query(query, null, callback);
+    this._query(query, null, callback, false);
 };
