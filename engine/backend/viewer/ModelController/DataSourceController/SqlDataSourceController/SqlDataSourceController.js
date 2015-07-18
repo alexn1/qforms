@@ -32,6 +32,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
             'forms',
             form.name,
             'dataSources',
+            data['@attributes'].name,
             data['@attributes'].name + '.backend.js'
         );
         helper.getFileContent(customClassFilePath, function(content) {

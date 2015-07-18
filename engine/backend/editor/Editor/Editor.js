@@ -105,15 +105,21 @@ Editor.prototype.createFile2 = function(newFilePath, templateFilePath, params, c
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.getCustomFile = function(params, ext, callback) {
-    this.getFile(this.getCustomFilePath(params, ext), function(content) {
-        callback(content);
+Editor.prototype.getCustomFile = function(ext, callback) {
+    var self = this;
+    this.getCustomFilePath(ext, function(customFilePath) {
+        self.getFile(customFilePath, function(content) {
+            callback(content);
+        });
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.saveCustomFile = function(params, ext, callback) {
-    this.saveFile(this.getCustomFilePath(params, ext), params.text, callback);
+Editor.prototype.saveCustomFile = function(ext, text, callback) {
+    var self = this;
+    this.getCustomFilePath(ext, function(customFilePath) {
+        self.saveFile(customFilePath, text, callback);
+    });
 };
 
 

@@ -21,6 +21,7 @@ util.inherits(ApplicationEditor, Editor);
 function ApplicationEditor(appFile) {
     this.appFile            = appFile;
     this.data               = appFile.getData();
+    this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
@@ -140,37 +141,50 @@ ApplicationEditor.prototype.getPage = function(name, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createEjs = function(params, callback) {
-    var customEjsFilePath = this.getCustomFilePath(params, 'ejs');
-    this.createFile(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.app, null, function(ejs) {
-        callback(ejs);
+    var self = this;
+    this.getCustomFilePath('ejs', function(customEjsFilePath) {
+        self.createFile(customEjsFilePath, self.defaultEjsFilePath, self.getViewName(), self.name, null, function(ejs) {
+            callback(ejs);
+        });
     });
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createCss = function(params, callback) {
-    var customCssFilePath = this.getCustomFilePath(params, 'css');
-    var emptyTemplate = '.' + params.app + ' {\n}';
-    this.createFile(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.app, emptyTemplate, function(css) {
-        callback(css);
+    var self = this;
+    this.getCustomFilePath('css', function(customCssFilePath) {
+        var emptyTemplate = '.' + self.name + ' {\n}';
+        self.createFile(customCssFilePath, self.defaultCssFilePath, self.getViewName(), self.name, emptyTemplate, function(css) {
+            callback(css);
+        });
     });
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createJs = function(params, callback) {
-    var customJsFilePath = this.getCustomFilePath(params, 'js');
-    var tempalteFilePath = path.join(__dirname, 'Application.js.ejs');
-    this.createFile2(customJsFilePath, tempalteFilePath, {
-        application: this.appFile.getAttr('name'),
-        _class: this.constructor.name.replace('Editor', '')
-    }, function(js) {
-        callback(js);
+    var self = this;
+    this.getCustomFilePath('js', function(customJsFilePath) {
+        var tempalteFilePath = path.join(__dirname, 'Application.js.ejs');
+        self.createFile2(customJsFilePath, tempalteFilePath, {
+            application: self.appFile.getAttr('name'),
+            _class: self.constructor.name.replace('Editor', '')
+        }, function(js) {
+            callback(js);
+        });
     });
 };
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.prototype.getCustomFilePath = function(params, ext) {
-    return path.join(this.appFile.appInfo.dirPath, params.app + '.' + ext);
+ApplicationEditor.prototype.getCustomDirPath = function(callback) {
+    callback(this.appFile.appInfo.dirPath);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.getCustomFilePath = function(ext, callback) {
+    callback(path.join(this.appFile.appInfo.dirPath, this.name + '.' + ext));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

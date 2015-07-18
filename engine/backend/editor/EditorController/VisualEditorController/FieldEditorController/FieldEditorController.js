@@ -100,11 +100,11 @@ FieldEditorController.prototype.getView = function(params, callback) {
                     appEditor.getPage(params.page, function(pageEditor) {
                         var formEditor  = pageEditor.getForm(params.form);
                         var fieldEditor = formEditor.getField(params.field);
-                        fieldEditor.getCustomFile(params, 'ejs', function(ejs) {
+                        fieldEditor.getCustomFile('ejs', function(ejs) {
                             result.data.ejs = ejs;
-                            fieldEditor.getCustomFile(params, 'css', function(css) {
+                            fieldEditor.getCustomFile('css', function(css) {
                                 result.data.css = css;
-                                fieldEditor.getCustomFile(params, 'js', function(js) {
+                                fieldEditor.getCustomFile('js', function(js) {
                                     result.data.js = js;
                                     callback(result);
                                 });
@@ -128,12 +128,12 @@ FieldEditorController.prototype.saveView = function(params, callback) {
             var fieldEditor = formEditor.getField(params.field);
             switch (params.view) {
                 case 'ejs':
-                    fieldEditor.saveCustomFile(params, 'ejs', function() {
+                    fieldEditor.saveCustomFile('ejs', params.text, function() {
                         callback(null);
                     });
                     break;
                 case 'css':
-                    fieldEditor.saveCustomFileaveFile(params, 'css', function() {
+                    fieldEditor.saveCustomFileaveFile('css', params.text, function() {
                         callback(null);
                     });
                     break;
@@ -163,7 +163,7 @@ FieldEditorController.prototype.saveController = function(params, callback) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
-            fieldEditor.saveCustomFile(params, 'js', function() {
+            fieldEditor.saveCustomFile('js', params.text, function() {
                 callback(null);
             });
         });

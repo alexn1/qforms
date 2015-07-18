@@ -175,10 +175,50 @@ DataSource.prototype.newParentKeyColumn = function(name, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getView = function(view, callback) {
     var args = {
-        controller:'DataSource',
-        action:'getView',
-        params:{
-            view:view
+        controller: 'DataSource',
+        action    : 'getView',
+        params    : {
+            pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
+            form        : this.parent.data['@attributes'].name,
+            dataSource  : this.data['@attributes'].name,
+            view        : view
+        }
+    };
+    QForms.doHttpRequest(this, args, function(data) {
+        callback(data);
+    });
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.saveController = function(text, callback) {
+    var args = {
+        controller: 'DataSource',
+        action    : 'saveController',
+        params    : {
+            pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
+            form        : this.parent.data['@attributes'].name,
+            dataSource  : this.data['@attributes'].name,
+            text        : text
+        }
+    };
+    QForms.doHttpRequest(this, args, function(data) {
+        if (callback) {
+            callback();
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.createController = function(callback) {
+    var args = {
+        controller: 'DataSource',
+        action    : 'createController',
+        params    : {
+            page        : this.parent.page.data['@attributes'].name,
+            pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
+            form        : this.parent.data['@attributes'].name,
+            dataSource  : this.data['@attributes'].name
         }
     };
     QForms.doHttpRequest(this, args, function(data) {

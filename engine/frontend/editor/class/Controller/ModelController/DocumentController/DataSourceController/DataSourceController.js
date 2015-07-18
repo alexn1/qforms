@@ -164,8 +164,10 @@ DataSourceController.prototype.createTab = function(docs) {
     var name = this.model.getFullName();
     this.model.getView('QueryView.html', function(result) {
         self.$view        = $(result.view);
+        self.data         = result.data;
         self.cmQuery      = null;
         self.cmCountQuery = null;
+        self.cmBackendJs  = null;
         self.save         = 'query';
 
         // tab
@@ -175,24 +177,38 @@ DataSourceController.prototype.createTab = function(docs) {
         self.tab.ctrl = self;
         docs.selectTab(self.tab);
 
-        // btnSave
+        // prop/backend tab
+        self.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
+        self.tabWidget = new TabWidget(self.$view.children('.TabWidget').get(0));
+        self.tabWidget.init();
+        self.tabWidget.eventTabShow.subscribe(self, 'tabWidget_TabShow');
+
+        // buttons
         self.$view.find('.btnSave').click(function() {
-            self.btnSave_Click();
+            self.btnSave_Click(this);
         });
-
-        // btnQuery
         self.$view.find('.btnQuery').click(function() {
-            self.btnQuery_Click();
+            self.btnQuery_Click(this);
         });
-
-        // btnCountQuery
         self.$view.find('.btnCountQuery').click(function() {
-            self.btnCountQuery_Click();
+            self.btnCountQuery_Click(this);
+        });
+        self.$view.find('.btnSaveController').click(function() {
+            self.btnSaveController_Click(this);
+        });
+        self.$view.find('.btnCreateController').click(function() {
+            self.btnCreateController_Click(this);
         });
 
-        // cmQuery
+        // properties
         self.$view.find('.wndQuery').css('display', 'block');
         self.initCmQuery();
+
+        if (self.data.backendJs) {
+            self.showCustomController();
+        } else {
+            self.$view.find('.btnSaveController').css('display', 'none');
+        }
     });
 };
 
@@ -211,7 +227,14 @@ DataSourceController.prototype.initCmCountQuery = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnSave_Click = function() {
+DataSourceController.prototype.initCmBackendJs = function() {
+    this.cmBackendJs = CodeMirror.fromTextArea(this.$view.find('.cmBackendJs').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+    this.cmBackendJs.setOption('theme', 'cobalt');
+    this.cmBackendJs.setValue(this.data.backendJs);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.btnSave_Click = function(ctrl) {
     switch (this.save) {
         case 'query':
             var value = this.cmQuery.getValue();
@@ -225,7 +248,7 @@ DataSourceController.prototype.btnSave_Click = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnCountQuery_Click = function() {
+DataSourceController.prototype.btnCountQuery_Click = function(ctrl) {
     this.$view.find('.wndCountQuery').css('display', 'block');
     this.$view.find('.wndQuery').css('display', 'none');
     if (this.cmCountQuery === null) {
@@ -239,7 +262,7 @@ DataSourceController.prototype.btnCountQuery_Click = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnQuery_Click = function() {
+DataSourceController.prototype.btnQuery_Click = function(ctrl) {
     this.$view.find('.wndQuery').css('display', 'block');
     this.$view.find('.wndCountQuery').css('display', 'none');
     this.$view.find('.btnQuery').removeClass('btn-default');
@@ -247,4 +270,42 @@ DataSourceController.prototype.btnQuery_Click = function() {
     this.$view.find('.btnCountQuery').removeClass('btn-primary');
     this.$view.find('.btnCountQuery').addClass('btn-default');
     this.save = 'count';
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.tabWidget_TabShow = function(ea) {
+    var self = this;
+    if ($(ea.tab).hasClass('tabController')) {
+        if (self.data.backendJs) {
+            if (this.cmBackendJs === null) {
+                this.initCmBackendJs();
+            }
+        }
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.showCustomController = function() {
+    this.$view.find('.wndBackendJs').css('display', 'block');
+    if ($(this.tabWidget.activeTab).hasClass('tabController')) {
+        this.initCmBackendJs();
+    }
+    this.$view.find('.btnCreateController').css('display', 'none');
+    this.$view.find('.btnSaveController').css('display', 'inline-block');
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.btnSaveController_Click = function(ctrl) {
+    var text  = this.cmBackendJs.getValue();
+    this.model.saveController(text);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.btnCreateController_Click = function() {
+    var self = this;
+    this.model.createController(function(data) {
+        self.data.backendJs = data.backendJs;
+        self.showCustomController();
+    });
 };

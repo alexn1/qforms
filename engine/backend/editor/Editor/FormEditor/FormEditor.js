@@ -18,12 +18,14 @@ var LinkFieldEditor          = require('../FieldEditor/LinkFieldEditor/LinkField
 var TextAreaFieldEditor      = require('../FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor       = require('../FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
 var ButtonControlEditor      = require('../ControlEditor/ButtonControlEditor/ButtonControlEditor');
+var SqlDataSourceEditor      = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(FormEditor, Editor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function FormEditor(pageEditor, name, data) {
     this.pageEditor = pageEditor;
+    this.parent     = pageEditor;
     this.name       = name;
     this.data       = data;
 };
@@ -109,36 +111,25 @@ FormEditor.prototype.removeControl = function(name, callback) {
     this.pageEditor.pageFile.save(callback);
 };
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditor.prototype.createCustomDirIfNotExists = function(params, callback) {
-    var formsDirPath  = this.getCollectionDirPath(params);
-    var formDirPath   = this.getCustomDirPath(params);
-    helper.createDirIfNotExists(formsDirPath, function() {
-        helper.createDirIfNotExists(formDirPath, callback);
-    });
-};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.createEjs = function(params, callback) {
     var self = this;
-    var customEjsFilePath = this.getCustomFilePath(params, 'ejs');
-    var replaceTo         = params.page + '-' + params.form;
-    var emptyTemplate     = params.form;
-    this.createCustomDirIfNotExists(params, function() {
+    this.getCustomFilePath('ejs', function(customEjsFilePath) {
+        var replaceTo         = params.page + '-' + params.form;
+        var emptyTemplate     = params.form;
         self.createFile(customEjsFilePath, self.defaultEjsFilePath, self.getViewName(), replaceTo, emptyTemplate, function(ejs) {
             callback(ejs);
         });
     });
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.createCss = function(params, callback) {
     var self = this;
-    var customCssFilePath = this.getCustomFilePath(params, 'css');
-    var replaceTo         =       params.page + '-' + params.form;
-    var emptyTemplate     = '.' + params.page + '-' + params.form;
-    this.createCustomDirIfNotExists(params, function() {
+    this.getCustomFilePath('css', function(customCssFilePath) {
+        var replaceTo         =       params.page + '-' + params.form;
+        var emptyTemplate     = '.' + params.page + '-' + params.form;
         self.createFile(customCssFilePath, self.defaultCssFilePath, self.getViewName(), replaceTo, emptyTemplate, function(css) {
             callback(css);
         });
@@ -149,9 +140,8 @@ FormEditor.prototype.createCss = function(params, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.createJs = function(params, callback) {
     var self = this;
-    var customJsFilePath = this.getCustomFilePath(params, 'js');
     var templateFilePath = path.join(__dirname, 'Form.js.ejs');
-    this.createCustomDirIfNotExists(params, function() {
+    this.getCustomFilePath('js', function(customJsFilePath) {
         self.createFile2(customJsFilePath, templateFilePath, {
             page : self.pageEditor.pageFile.getAttr('name'),
             form : self.name,
@@ -163,21 +153,30 @@ FormEditor.prototype.createJs = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditor.prototype.getCollectionDirPath = function(params) {
-    return path.join(
-        this.pageEditor.appEditor.appFile.appInfo.dirPath,
-        'pages',
-        params.page,
-        'forms'
-    );
+FormEditor.prototype.getCollectionDirPath = function(callback) {
+    this.parent.getCustomDirPath(function(customDirPath) {
+        var dirPath = path.join(customDirPath, 'forms');
+        helper.createDirIfNotExists(dirPath, function() {
+            callback(dirPath);
+        });
+    });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditor.prototype.getCustomDirPath = function(params) {
-    return path.join( this.getCollectionDirPath(params), params.form);
+FormEditor.prototype.getCustomDirPath = function(callback) {
+    var self = this;
+    this.getCollectionDirPath(function(collectionDirPath) {
+        var dirPath = path.join(collectionDirPath, self.name);
+        helper.createDirIfNotExists(dirPath, function() {
+            callback(dirPath);
+        });
+    });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditor.prototype.getCustomFilePath = function(params, ext) {
-    return path.join(this.getCustomDirPath(params), params.form + '.' + ext);
+FormEditor.prototype.getCustomFilePath = function(ext, callback) {
+    var self = this;
+    this.getCustomDirPath(function(customDirPath) {
+        callback(path.join(customDirPath, self.name + '.' + ext));
+    });
 };

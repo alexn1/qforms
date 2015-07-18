@@ -3,7 +3,9 @@
 module.exports = DataSourceEditor;
 
 var util = require('util');
+var path = require('path');
 
+var helper = require('../../../common/helper');
 var Editor = require('../Editor');
 
 util.inherits(DataSourceEditor, Editor);
@@ -23,12 +25,58 @@ DataSourceEditor.prototype.newKeyColumn = function(params) {
         this.data.keyColumns = {};
     }
     if (this.data.keyColumns[name]) {
-        throw  new Error('Key Column {name} already exist.'.replace('{name}', name));
+        throw new Error('Key Column {name} already exist.'.replace('{name}', name));
     }
     return this.data.keyColumns[name] = {
         '@class'     : 'KeyColumn',
         '@attributes': {
-            'name' :name
+            'name': name
         }
     };
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditor.prototype.getCollectionDirPath = function(callback) {
+    this.parent.getCustomDirPath(function(customDirPath) {
+        var dirPath = path.join(customDirPath, 'dataSources');
+        helper.createDirIfNotExists(dirPath, function() {
+            callback(dirPath);
+        });
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditor.prototype.getCustomDirPath = function(callback) {
+    var self = this;
+    this.getCollectionDirPath(function(collectionDirPath) {
+        var dirPath = path.join(collectionDirPath, self.name);
+        helper.createDirIfNotExists(dirPath, function() {
+            callback(dirPath);
+        });
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditor.prototype.getCustomFilePath = function(ext, callback) {
+    var self = this;
+    this.getCustomDirPath(function(customDirPath) {
+        callback(path.join(customDirPath, self.name + '.' + ext));
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditor.prototype.createBackendJs = function(params, callback) {
+    var self = this;
+    var templateFilePath = path.join(__dirname, 'DataSource.backend.js.ejs');
+    this.getCustomFilePath('backend.js', function(customJsFilePath) {
+        self.createFile2(customJsFilePath, templateFilePath, {
+            page      : params.page ? params.page : '',
+            form      : params.form ? params.form : '',
+            dataSource: self.name,
+            _class    : self.constructor.name.replace('Editor', '')
+        }, function(backendJs) {
+            callback(backendJs);
+        });
+    });
+
 };

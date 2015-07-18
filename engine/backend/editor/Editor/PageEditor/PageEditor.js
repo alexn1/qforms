@@ -19,8 +19,10 @@ util.inherits(PageEditor, Editor);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageEditor(appEditor, pageFile) {
     this.appEditor          = appEditor;
+    this.parent             = appEditor;
     this.pageFile           = pageFile;
     this.data               = this.getData();
+    this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
         'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
@@ -157,49 +159,55 @@ PageEditor.prototype.removeForm = function(name, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.createEjs = function(params, callback) {
-    var customEjsFilePath = this.getCustomFilePath(params, 'ejs');
-    //path.join(this.appEditor.appFile.appInfo.dirPath, params.page, params.page + '.ejs');
-    this.createFile(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.page, null, function(ejs) {
-        callback(ejs);
+    var self = this;
+    this.getCustomFilePath('ejs', function(customEjsFilePath) {
+        self.createFile(customEjsFilePath, self.defaultEjsFilePath, self.getViewName(), params.page, null, function(ejs) {
+            callback(ejs);
+        });
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.createCss = function(params, callback) {
-    var customCssFilePath = this.getCustomFilePath(params, 'css');
-    //path.join(this.appEditor.appFile.appInfo.dirPath, params.page, params.page + '.css');
-    var emptyTemplate = '.' + params.page + ' \n';
-    this.createFile(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.page, emptyTemplate, function(css) {
-        callback(css);
+    var self = this;
+    this.getCustomFilePath('css', function(customCssFilePath) {
+        var emptyTemplate = '.' + params.page + ' \n';
+        self.createFile(customCssFilePath, self.defaultCssFilePath, self.getViewName(), params.page, emptyTemplate, function(css) {
+            callback(css);
+        });
     });
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.createJs = function(params, callback) {
+    var self = this;
     var templateFilePath = path.join(__dirname, 'Page.js.ejs');
-    var customJsFilePath = this.getCustomFilePath(params, 'js') ;
-    //path.join(this.appEditor.appFile.appInfo.dirPath, params.page, params.page + '.js');
-    this.createFile2(customJsFilePath, templateFilePath, {
-        page: this.pageFile.getAttr('name'),
-        _class: this.constructor.name.replace('Editor', '')
-    }, function(js) {
-        callback(js);
+    this.getCustomFilePath('js', function(customJsFilePath) {
+        self.createFile2(customJsFilePath, templateFilePath, {
+            page  : self.pageFile.getAttr('name'),
+            _class: self.constructor.name.replace('Editor', '')
+        }, function(js) {
+            callback(js);
+        });
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getCustomDirPath = function(params) {
-    return path.join(
-        this.appEditor.appFile.appInfo.dirPath,
-        'pages',
-        params.page
-    );
+PageEditor.prototype.getCustomDirPath = function(callback) {
+    var self = this;
+    this.parent.getCustomDirPath(function(customDirPath) {
+        var dirPath = path.join(customDirPath, 'pages', self.name);
+        helper.createDirIfNotExists(dirPath, function() {
+            callback(dirPath);
+        });
+    });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getCustomFilePath = function(params, ext) {
-    return path.join(
-        this.getCustomDirPath(params),
-        params.page + '.' + ext
-    );
+PageEditor.prototype.getCustomFilePath = function(ext, callback) {
+    var self = this;
+    this.getCustomDirPath(function(customDirPath) {
+        callback(path.join(customDirPath, self.name + '.' + ext));
+    });
 };

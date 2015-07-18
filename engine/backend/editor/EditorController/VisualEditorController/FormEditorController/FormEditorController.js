@@ -105,11 +105,11 @@ FormEditorController.prototype.getView = function(params, callback) {
                 self.getApplicationEditor(function(appEditor) {
                     appEditor.getPage(params.page, function(pageEditor) {
                         var formEditor = pageEditor.getForm(params.form);
-                        formEditor.getCustomFile(params, 'ejs', function(ejs) {
+                        formEditor.getCustomFile('ejs', function(ejs) {
                             result.data.ejs = ejs;
-                            formEditor.getCustomFile(params, 'css', function(css) {
+                            formEditor.getCustomFile('css', function(css) {
                                 result.data.css = css;
-                                formEditor.getCustomFile(params, 'js', function(js) {
+                                formEditor.getCustomFile('js', function(js) {
                                     result.data.js = js;
                                     callback(result);
                                 });
@@ -132,12 +132,12 @@ FormEditorController.prototype.saveView = function(params, callback) {
             var formEditor = pageEditor.getForm(params.form);
             switch (params.view) {
                 case 'ejs':
-                    formEditor.saveCustomFile(params, 'ejs', function() {
+                    formEditor.saveCustomFile('ejs', params.text, function() {
                         callback(null);
                     });
                     break;
                 case 'css':
-                    formEditor.saveCustomFile(params, 'css', function() {
+                    formEditor.saveCustomFile('css', params.text, function() {
                         callback(null);
                     });
                     break;
@@ -166,7 +166,7 @@ FormEditorController.prototype.saveController = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
-            formEditor.saveCustomFile(params, 'js' , function() {
+            formEditor.saveCustomFile('js', params.text, function() {
                 callback(null);
             });
         });

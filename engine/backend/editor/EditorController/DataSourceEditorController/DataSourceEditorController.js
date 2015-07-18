@@ -170,3 +170,64 @@ DataSourceEditorController.prototype.save = function(params, callback) {
         }
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.getDataSourceEditor = function(params, callback) {
+    this.getApplicationEditor(function(appEditor) {
+        if (params.pageFileName) {
+            appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
+                if (params.form) {
+                    var formEditor = pageEditor.getForm(params.form);
+                    var dataSourceEditor = formEditor.getDataSource(params.dataSource);
+                    callback(dataSourceEditor);
+                } else {
+                    var dataSourceEditor = pageEditor.getDataSource(params.dataSource);
+                    callback(dataSourceEditor);
+                }
+            });
+        } else {
+            var dataSourceEditor = appEditor.getDataSource(params.dataSource);
+            callback(dataSourceEditor);
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.getView = function(params, callback) {
+    var self = this;
+    DataSourceEditorController.super_.prototype.getView.call(this, params, function(result) {
+        switch (params.view) {
+            case 'QueryView.html':
+                self.getDataSourceEditor(params, function(dataSourceEditor) {
+                    dataSourceEditor.getCustomFile('backend.js', function(backendJs) {
+                        result.data.backendJs = backendJs;
+                        callback(result);
+                    });
+                });
+                break;
+            default:
+                callback(result);
+                break;
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.saveController = function(params, callback) {
+    this.getDataSourceEditor(params, function(dataSourceEditor) {
+        dataSourceEditor.saveCustomFile('backend.js', params.text, function() {
+            callback(null);
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditorController.prototype.createController = function(params, callback) {
+    this.getDataSourceEditor(params, function(dataSourceEditor) {
+        dataSourceEditor.createBackendJs(params, function(backendJs) {
+            callback({
+                backendJs: backendJs
+            });
+        });
+    });
+};

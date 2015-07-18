@@ -17,7 +17,7 @@ function EditorController(appInfo) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.getView = function(params, callback) {
     var result = {
-        view:  '',
+        view: '',
         data: {}
     };
     var viewFilePath = path.join(this.viewDirPath, params.view);

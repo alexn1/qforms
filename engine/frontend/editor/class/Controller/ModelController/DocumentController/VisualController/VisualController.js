@@ -28,7 +28,7 @@ VisualController.prototype.createTab = function(docs) {
         self.tab = tab;
         // view/code tab
         self.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
-        self.tabWidget = new TabWidget(self.$view.children('.TabWidget').get(0))
+        self.tabWidget = new TabWidget(self.$view.children('.TabWidget').get(0));
         self.tabWidget.init();
         self.tabWidget.eventTabShow.subscribe(self, 'tabWidget_TabShow');
 

@@ -50,11 +50,11 @@ ApplicationEditorController.prototype.getView = function(params, callback) {
         switch (params.view) {
             case 'VisualView.html':
                 self.getApplicationEditor(function(appEditor) {
-                    appEditor.getCustomFile(params, 'ejs', function(ejs) {
+                    appEditor.getCustomFile('ejs', function(ejs) {
                         result.data.ejs = ejs;
-                        appEditor.getCustomFile(params, 'css', function(css) {
+                        appEditor.getCustomFile('css', function(css) {
                             result.data.css = css;
-                            appEditor.getCustomFile(params, 'js', function(js) {
+                            appEditor.getCustomFile('js', function(js) {
                                 result.data.js = js;
                                 callback(result);
                             });
@@ -74,12 +74,12 @@ ApplicationEditorController.prototype.saveView = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         switch (params.view) {
             case 'ejs':
-                appEditor.saveCustomFile(params, 'ejs', function() {
+                appEditor.saveCustomFile('ejs', params.text, function() {
                     callback(null);
                 });
                 break;
             case 'css':
-                appEditor.saveCustomFile(params, 'css', function() {
+                appEditor.saveCustomFile('css', params.text, function() {
                     callback(null);
                 });
                 break;

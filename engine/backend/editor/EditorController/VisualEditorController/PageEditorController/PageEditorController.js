@@ -86,11 +86,11 @@ PageEditorController.prototype.getView = function(params, callback) {
             case 'VisualView.html':
                 self.getApplicationEditor(function(appEditor) {
                     appEditor.getPage(params.page, function(pageEditor) {
-                        pageEditor.getCustomFile(params, 'ejs', function(ejs) {
+                        pageEditor.getCustomFile('ejs', function(ejs) {
                             result.data.ejs = ejs;
-                            pageEditor.getCustomFile(params, 'css', function(css) {
+                            pageEditor.getCustomFile('css', function(css) {
                                 result.data.css = css;
-                                pageEditor.getCustomFile(params, 'js', function(js) {
+                                pageEditor.getCustomFile('js', function(js) {
                                     result.data.js = js;
                                     callback(result);
                                 });
@@ -112,12 +112,12 @@ PageEditorController.prototype.saveView = function(params, callback) {
         appEditor.getPage(params.page, function(pageEditor) {
             switch (params.view) {
                 case 'ejs':
-                    pageEditor.saveCustomFile(params, 'ejs', function() {
+                    pageEditor.saveCustomFile('ejs', params.text, function() {
                         callback(null);
                     });
                     break;
                 case 'css':
-                    pageEditor.saveCustomFile(params, 'css', function() {
+                    pageEditor.saveCustomFile('css', params.text, function() {
                         callback(null);
                     });
                     break;
@@ -143,7 +143,7 @@ PageEditorController.prototype.createController = function(params, callback) {
 PageEditorController.prototype.saveController = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
-            pageEditor.saveCustomFile(params, 'js', function() {
+            pageEditor.saveCustomFile('js', params.text, function() {
                 callback(null);
             });
         });

@@ -235,6 +235,11 @@ function update(req, res, next, application) {
         args.querytime.params['@username'] = req.session.username[route];
     }
     application.getPage(req.body.page, function(page) {
+
+        var ds = page.forms[req.body.form].dataSources[req.body.ds];
+        console.log('data source class:');
+        console.log(ds.constructor.name);
+
         page.forms[req.body.form].dataSources[req.body.ds].update(args, function() {
             res.json(null);
         });

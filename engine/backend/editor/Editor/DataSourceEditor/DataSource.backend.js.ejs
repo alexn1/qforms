@@ -1,0 +1,26 @@
+'use strict';
+
+util.inherits(<%=page%><%=form%><%=dataSource%>Controller, <%=_class%>Controller);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function <%=page%><%=form%><%=dataSource%>Controller() {
+    <%=page%><%=form%><%=dataSource%>Controller.super_.apply(this, arguments);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller.prototype.insert = function(args, callback) {
+    <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.insert.call(this, args, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller.prototype.update = function(args, callback) {
+    <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.update.call(this, args, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller.prototype.delete = function(args, callback) {
+    <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.delete.call(this, args, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller;
