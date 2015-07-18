@@ -110,18 +110,18 @@ SqlDataSourceController.prototype._desc = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.select = function(args, callback) {
+SqlDataSourceController.prototype.select = function(context, callback) {
     var query  = this._replaceThis(this.data['@attributes'].query);
-    var params = this.getParams(args);
+    var params = this.getParams(context);
     this._query(query, params, function(rows) {
         callback(rows);
     }, true);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.selectCount = function(args, callback) {
+SqlDataSourceController.prototype.selectCount = function(context, callback) {
     var query  = this._replaceThis(this.data['@attributes'].countQuery);
-    var params = this.getParams(args);
+    var params = this.getParams(context);
     this._query(query, params, function(rows) {
         var row = rows[0];
         var count = row[Object.keys(row)[0]];
@@ -130,8 +130,8 @@ SqlDataSourceController.prototype.selectCount = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.update = function(args, callback) {
-    var row = args.row;
+SqlDataSourceController.prototype.update = function(context, callback) {
+    var row = context.row;
     var self = this;
 
     var updateRow = function() {
@@ -157,8 +157,8 @@ SqlDataSourceController.prototype.update = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.insert = function(args, callback) {
-    var row = args.row;
+SqlDataSourceController.prototype.insert = function(context, callback) {
+    var row = context.row;
     var self = this;
     var insertRow = function() {
         // removing auto increment field
@@ -184,8 +184,8 @@ SqlDataSourceController.prototype.insert = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.delete = function(args, callback) {
-    var row = args.row;
+SqlDataSourceController.prototype.delete = function(context, callback) {
+    var row = context.row;
     var query = new sqlish.Sqlish()
         .deleteFrom(this.data['@attributes'].table)
         .where(this.getRowKeyValues(row))

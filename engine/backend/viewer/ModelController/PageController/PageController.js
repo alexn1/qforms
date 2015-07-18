@@ -49,8 +49,8 @@ PageController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype._call = function(args) {
-    args.res.json({
+PageController.prototype._call = function(context) {
+    context.res.json({
         result: 'ok'
     });
 };

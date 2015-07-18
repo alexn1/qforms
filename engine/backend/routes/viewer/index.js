@@ -45,15 +45,6 @@ module.exports = function(req, res, next) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function createApplication(req, res, next, route) {
     //console.log('new app: ' + route);
-    var args = {
-        params   : {},
-        querytime: {
-            params: {}
-        }
-    };
-    if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
-    }
     var applications = req.app.get('applications');
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
     fs.exists(appFilePath, function(exists) {
@@ -65,7 +56,7 @@ function createApplication(req, res, next, route) {
                     } else {
                         var appData = JSON.parse(content);
                         ApplicationController.create(appData, appInfo, function(application) {
-                            application.init(args, function() {
+                            application.init(function() {
                                 applications[route] = application;
                                 var d = domain.create();
                                 if (qforms.get('handleException') === 'true') {
@@ -100,7 +91,7 @@ function handle(req, res, next, application) {
             login(req, res, next, application);
         } else {
             if (application.authentication() && !(req.session.username && req.session.username[route])) {
-                throw new Error('not authorized');
+                throw new Error('not authenticated');
             } else {
                 var actions = [
                     'page',
@@ -147,14 +138,6 @@ function login(req, res, next, application) {
                 req.session.username[route] = req.body.username;
                 res.redirect(req.url);
             } else {
-                var args = {
-                    querytime : {
-                        params : {}
-                    }
-                };
-                if (req.session.username && req.session.username[route]) {
-                    args.querytime.params['@username'] = req.session.username[route];
-                }
                 application.getUsers(function(users) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
@@ -183,16 +166,14 @@ function logout(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
+    var context = {
         params   : {},
-        querytime: {
-            params: {}
-        }
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.fill(args, function(data) {
+    application.fill(context, function(data) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -211,18 +192,16 @@ function index(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
+    var context = {
         params   : req.body.params,
         newMode  : req.body.newMode,
-        querytime: {
-            params: {}
-        }
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.getPage(args, req.body.page, function(page) {
-        page.fill(args, function(data) {
+    application.getPage(context, req.body.page, function(page) {
+        page.fill(context, function(data) {
             res.json({
                 data: data
             });
@@ -233,18 +212,16 @@ function page(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
-        row   : req.body.row,
-        params: {},
-        querytime : {
-            params : {}
-        }
+    var context = {
+        params   : {},
+        row      : req.body.row,
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.getPage(args, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].update(args, function() {
+    application.getPage(context, req.body.page, function(page) {
+        page.forms[req.body.form].dataSources[req.body.ds].update(context, function() {
             res.json(null);
         });
     });
@@ -253,18 +230,16 @@ function update(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
+    var context = {
         params   : req.body.params,
-        querytime: {
-            params: {}
-        }
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
     var getDataSource = function(callback) {
         if (req.body.page) {
-            application.getPage(args, req.body.page, function(page) {
+            application.getPage(context, req.body.page, function(page) {
                 if (req.body.form) {
                     callback(page.forms[req.body.form].dataSources[req.body.ds]);
                 } else {
@@ -276,7 +251,7 @@ function frame(req, res, next, application) {
         }
     };
     getDataSource(function(dataSource) {
-        dataSource.frame(args, function(response) {
+        dataSource.frame(context, function(response) {
             res.json(response);
         });
     });
@@ -285,18 +260,16 @@ function frame(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
-        row   : req.body.row,
-        params: {},
-        querytime : {
-            params : {}
-        }
+    var context = {
+        row      : req.body.row,
+        params   : {},
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.getPage(args, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].insert(args, function(key) {
+    application.getPage(context, req.body.page, function(page) {
+        page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
             res.json({
                 key: key
             });
@@ -307,18 +280,16 @@ function insert(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
-        row   : req.body.row,
-        params: {},
-        querytime : {
-            params : {}
-        }
+    var context = {
+        row      : req.body.row,
+        params   : {},
+        querytime: {params : {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.getPage(args, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].delete(args, function() {
+    application.getPage(context, req.body.page, function(page) {
+        page.forms[req.body.form].dataSources[req.body.ds].delete(context, function() {
             res.json(null);
         });
     });
@@ -327,20 +298,16 @@ function _delete(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _call(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var args = {
-        params: {},
-        querytime : {
-            params : {}
-        }
+    var context = {
+        params   : req.body.params,
+        req      : req,
+        res      : res,
+        querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        args.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['@username'] = req.session.username[route];
     }
-    application.getPage(args, req.body.page, function(page) {
-        page._call({
-            req   : req,
-            res   : res,
-            params: req.body.params
-        });
+    application.getPage(context, req.body.page, function(page) {
+        page._call(context);
     });
 };

@@ -53,12 +53,12 @@ ApplicationController.create = function(data, appInfo, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype._buildMenu = function(args, callback) {
+ApplicationController.prototype._buildMenu = function(context, callback) {
     var menu = {};
     var self = this;
     var tasks = _.filter(self.data.pageLinks, function (pageLink) {
-        if (args.querytime.params['@username']) {
-            var userName = args.querytime.params['@username'];
+        if (context.querytime.params['@username']) {
+            var userName = context.querytime.params['@username'];
             var pageName = pageLink['@attributes'].name;
             return self.authorizePage(userName, pageName);
         } else {
@@ -94,12 +94,12 @@ ApplicationController.prototype._buildMenu = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.init = function(args, callback) {
+ApplicationController.prototype.init = function(callback) {
     var self = this;
     ApplicationController.super_.prototype.init.call(this, function() {
         async.series([
             function(next) {
-                self._createStartupPages(args, next);
+                self._createStartupPages(next);
             },
             function(next) {
                 helper.getFilePaths(self.appInfo.dirPath, '', 'css', function(filePaths) {
@@ -123,7 +123,7 @@ ApplicationController.prototype.deinit = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype._createPage = function(args, pageName, callback) {
+ApplicationController.prototype._createPage = function(pageName, callback) {
     var self         = this;
     var relFilePath  = this.data.pageLinks[pageName]['@attributes'].fileName;
     var pageFilePath = path.join(this.dirPath, relFilePath);
@@ -147,9 +147,9 @@ ApplicationController.prototype.authorizePage = function(userName, pageName) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.getPage = function(args, pageName, callback) {
-    if (args.querytime.params['@username']) {
-        var userName = args.querytime.params['@username'];
+ApplicationController.prototype.getPage = function(context, pageName, callback) {
+    if (context.querytime.params['@username']) {
+        var userName = context.querytime.params['@username'];
         if (this.authorizePage(userName, pageName) === false) {
             throw new Error('Authorization error.');
         }
@@ -158,7 +158,7 @@ ApplicationController.prototype.getPage = function(args, pageName, callback) {
     if (this.pages[pageName]) {
         callback(self.pages[pageName]);
     } else {
-        this._createPage(args, pageName, function(page) {
+        this._createPage(pageName, function(page) {
             self.pages[pageName] = page;
             callback(page);
         })
@@ -166,7 +166,7 @@ ApplicationController.prototype.getPage = function(args, pageName, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype._createStartupPages = function(args, callback) {
+ApplicationController.prototype._createStartupPages = function(callback) {
     var self = this;
     if (this.data.pageLinks) {
         var tasks = _.filter(this.data.pageLinks, function (pageLink) {
@@ -174,7 +174,7 @@ ApplicationController.prototype._createStartupPages = function(args, callback) {
         }).map(function(pageLink) {
             return function(next) {
                 var pageName = pageLink['@attributes'].name;
-                self._createPage(args, pageName, function(page) {
+                self._createPage(pageName, function(page) {
                     self.pages[pageName] = page;
                     next();
                 })
@@ -187,20 +187,20 @@ ApplicationController.prototype._createStartupPages = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.fill = function(args, callback) {
+ApplicationController.prototype.fill = function(context, callback) {
     var self = this;
-    ApplicationController.super_.prototype.fill.call(this, args, function(response) {
+    ApplicationController.super_.prototype.fill.call(this, context, function(response) {
         delete response.user;
         delete response.password;
         delete response.authentication;
 
         // username
-        if (args.querytime.params['@username']) {
-            response.username = args.querytime.params['@username'];
+        if (context.querytime.params['@username']) {
+            response.username = context.querytime.params['@username'];
         }
 
         // menu
-        self._buildMenu(args, function(menu) {
+        self._buildMenu(context, function(menu) {
             response.menu = menu;
             var startupPageNames = _.filter(self.data.pageLinks, function (pageLink) {
                 return pageLink['@attributes'].startup === 'true';
@@ -211,8 +211,8 @@ ApplicationController.prototype.fill = function(args, callback) {
             // pages
             response.pages = {};
             async.eachSeries(startupPageNames, function(pageName, next) {
-                self.getPage(args, pageName, function(page) {
-                    page.fill(args, function(_response) {
+                self.getPage(context, pageName, function(page) {
+                    page.fill(context, function(_response) {
                         response.pages[pageName] = _response;
                         next();
                     });

@@ -44,33 +44,33 @@ DataSourceController.prototype.init = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.fill = function(args, callback) {
+DataSourceController.prototype.fill = function(context, callback) {
     var self = this;
-    DataSourceController.super_.prototype.fill.call(this, args, function(response) {
+    DataSourceController.super_.prototype.fill.call(this, context, function(response) {
         delete response.query;
         delete response.limit;
         response.keyColumns = self.keyColumns;
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;
         }
-        if (args.newMode) {
+        if (context.newMode) {
             response.rows = [];
             callback(response);
         } else {
             if (self.data['@attributes'].limit) {
-                args.params['@offset'] = 0;
-                args.params['@limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
+                context.params['@offset'] = 0;
+                context.params['@limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
             }
-            self.select(args, function(rows) {
+            self.select(context, function(rows) {
                 response.rows = rows;
                 if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
-                    self.form.dumpRowToParams(rows[0], args.querytime.params);
+                    self.form.dumpRowToParams(rows[0], context.querytime.params);
                 }
                 if (self.data['@attributes'].limit) {
                     if (!self.data['@attributes'].countQuery) {
                         throw new Error('[' + self.getFullName() + ']: countQuery empty.');
                     }
-                    self.selectCount(args, function(count) {
+                    self.selectCount(context, function(count) {
                         response.count = parseInt(count);
                         callback(response);
                     });
@@ -83,17 +83,17 @@ DataSourceController.prototype.fill = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.frame = function(args, callback) {
+DataSourceController.prototype.frame = function(context, callback) {
     if (this.data['@attributes'].limit) {
-        args.params['@limit'] = parseInt(this.data['@attributes'].limit);
+        context.params['@limit'] = parseInt(this.data['@attributes'].limit);
     }
     var self = this;
-    this.select(args, function(rows) {
+    this.select(context, function(rows) {
         if (self.data['@attributes'].limit) {
             if (!self.data['@attributes'].countQuery) {
                 throw new Error('[' + self.getFullName() + ']: countQuery empty.');
             }
-            self.selectCount(args, function(count) {
+            self.selectCount(context, function(count) {
                 callback({
                     rows : rows,
                     count: parseInt(count)
@@ -108,22 +108,22 @@ DataSourceController.prototype.frame = function(args, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.select = function(args, callback) {
+DataSourceController.prototype.select = function(context, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.update = function(args, callback) {
+DataSourceController.prototype.update = function(context, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.insert = function(args, callback) {
+DataSourceController.prototype.insert = function(context, callback) {
     callback();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.delete = function(args, callback) {
+DataSourceController.prototype.delete = function(context, callback) {
     callback();
 };
 
@@ -187,11 +187,11 @@ DataSourceController.prototype._replaceThis = function(query) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getParams = function(args) {
+DataSourceController.prototype.getParams = function(context) {
     var params = {};
-    _.extend(params, args.params);
-    if (args.querytime) {
-        _.extend(params, args.querytime.params);
+    _.extend(params, context.params);
+    if (context.querytime) {
+        _.extend(params, context.querytime.params);
     }
     return params;
 };
