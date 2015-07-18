@@ -32,9 +32,8 @@ function ApplicationController(data, appInfo) {
         'ApplicationView.ejs'
     );
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
-    this.createCollections  = ['pageLinks', 'dataSources'];
-    this.fillCollections    = ['pageLinks', 'dataSources'];
-    this.menu               = {};
+    this.createCollections  = ['dataSources'];
+    this.fillCollections    = ['dataSources'];
     this.pages              = {};
     this.css                = [];
     this.pools              = {};
@@ -54,39 +53,53 @@ ApplicationController.create = function(data, appInfo, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.init = function(callback) {
+ApplicationController.prototype._buildMenu = function(args, callback) {
+    var menu = {};
+    var self = this;
+    var tasks = _.filter(self.data.pageLinks, function (pageLink) {
+        if (args.querytime.params['@username']) {
+            var userName = args.querytime.params['@username'];
+            var pageName = pageLink['@attributes'].name;
+            return self.authorizePage(userName, pageName);
+        } else {
+            return true;
+        }
+    }).map(function(pageLink) {
+        var pageLinkName = pageLink['@attributes'].name;
+        var pageLinkMenu = pageLink['@attributes'].menu;
+        return function(_next) {
+            if (pageLinkMenu) {
+                var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
+                var pageFile     = new PageFile(pageFilePath);
+                pageFile.init(function() {
+                    var pageData    = pageFile.getData();
+                    var pageCaption = pageData['@attributes'].caption;
+                    if (!menu[pageLinkMenu]) {
+                        menu[pageLinkMenu] = [];
+                    }
+                    menu[pageLinkMenu].push({
+                        caption: pageCaption,
+                        page: pageLinkName
+                    });
+                    _next();
+                });
+            } else {
+                _next();
+            }
+        };
+    });
+    async.series(tasks, function() {
+        callback(menu);
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.init = function(args, callback) {
     var self = this;
     ApplicationController.super_.prototype.init.call(this, function() {
         async.series([
             function(next) {
-                var tasks = _.map(self.data.pageLinks, function(pageLink) {
-                    var pageLinkName = pageLink['@attributes'].name;
-                    var pageLinkMenu = pageLink['@attributes'].menu;
-                    return function(_next) {
-                        if (pageLinkMenu) {
-                            var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
-                            var pageFile     = new PageFile(pageFilePath);
-                            pageFile.init(function() {
-                                var pageData    = pageFile.getData();
-                                var pageCaption = pageData['@attributes'].caption;
-                                if (!self.menu[pageLinkMenu]) {
-                                    self.menu[pageLinkMenu] = [];
-                                }
-                                self.menu[pageLinkMenu].push({
-                                    caption: pageCaption,
-                                    page: pageLinkName
-                                });
-                                _next();
-                            });
-                        } else {
-                            _next();
-                        }
-                    };
-                });
-                async.series(tasks, next);
-            },
-            function(next) {
-                self._createStartupPages(next);
+                self._createStartupPages(args, next);
             },
             function(next) {
                 helper.getFilePaths(self.appInfo.dirPath, '', 'css', function(filePaths) {
@@ -110,7 +123,13 @@ ApplicationController.prototype.deinit = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype._createPage = function(pageName, callback) {
+ApplicationController.prototype._createPage = function(args, pageName, callback) {
+    if (args.querytime.params['@username']) {
+        var userName = args.querytime.params['@username'];
+        if (this.authorizePage(userName, pageName) === false) {
+            throw new Error('Authorization error.');
+        }
+    }
     var self         = this;
     var relFilePath  = this.data.pageLinks[pageName]['@attributes'].fileName;
     var pageFilePath = path.join(this.dirPath, relFilePath);
@@ -129,12 +148,17 @@ ApplicationController.prototype._createPage = function(pageName, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.getPage = function(pageName, callback) {
+ApplicationController.prototype.authorizePage = function(userName, pageName) {
+    return true;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.getPage = function(args, pageName, callback) {
     var self = this;
     if (this.pages[pageName]) {
         callback(self.pages[pageName]);
     } else {
-        this._createPage(pageName, function(page) {
+        this._createPage(args, pageName, function(page) {
             self.pages[pageName] = page;
             callback(page);
         })
@@ -142,7 +166,7 @@ ApplicationController.prototype.getPage = function(pageName, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype._createStartupPages = function(callback) {
+ApplicationController.prototype._createStartupPages = function(args, callback) {
     var self = this;
     if (this.data.pageLinks) {
         var tasks = _.filter(this.data.pageLinks, function (pageLink) {
@@ -150,7 +174,7 @@ ApplicationController.prototype._createStartupPages = function(callback) {
         }).map(function(pageLink) {
             return function(next) {
                 var pageName = pageLink['@attributes'].name;
-                self._createPage(pageName, function(page) {
+                self._createPage(args, pageName, function(page) {
                     self.pages[pageName] = page;
                     next();
                 })
@@ -169,25 +193,32 @@ ApplicationController.prototype.fill = function(args, callback) {
         delete response.user;
         delete response.password;
         delete response.authentication;
+        // username
         if (args.querytime.params['@username']) {
             response.username = args.querytime.params['@username'];
         }
-        response.menu = self.menu;
-        var startupPageNames = _.filter(self.data.pageLinks, function (pageLink) {
-            return pageLink['@attributes'].startup === 'true';
-        }).map(function(pageLink) {
-            return pageLink['@attributes'].name;
-        });
-        response.pages = {};
-        async.eachSeries(startupPageNames, function(pageName, next) {
-            self.getPage(pageName, function(page) {
-                page.fill(args, function(_response) {
-                    response.pages[pageName] = _response;
-                    next();
-                });
+
+        // menu
+        self._buildMenu(args, function(menu) {
+            response.menu = menu;
+            var startupPageNames = _.filter(self.data.pageLinks, function (pageLink) {
+                return pageLink['@attributes'].startup === 'true';
+            }).map(function(pageLink) {
+                return pageLink['@attributes'].name;
             });
-        }, function() {
-            callback(response);
+
+            // pages
+            response.pages = {};
+            async.eachSeries(startupPageNames, function(pageName, next) {
+                self.getPage(args, pageName, function(page) {
+                    page.fill(args, function(_response) {
+                        response.pages[pageName] = _response;
+                        next();
+                    });
+                });
+            }, function() {
+                callback(response);
+            });
         });
     });
 };

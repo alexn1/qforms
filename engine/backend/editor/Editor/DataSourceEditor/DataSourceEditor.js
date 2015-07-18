@@ -78,5 +78,4 @@ DataSourceEditor.prototype.createBackendJs = function(params, callback) {
             callback(backendJs);
         });
     });
-
 };

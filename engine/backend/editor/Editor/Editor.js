@@ -122,7 +122,6 @@ Editor.prototype.saveCustomFile = function(ext, text, callback) {
     });
 };
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.moveDataSourceUp = function(name) {
     this.data.dataSources = helper.moveObjProp(this.data.dataSources, name, -1);
