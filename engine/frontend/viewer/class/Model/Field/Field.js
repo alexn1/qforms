@@ -28,11 +28,42 @@ Field.prototype.deinit = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.replaceThis = function(value) {
+    var self = this;
+    return value.replace(/\{([@\w\.]+)\}/g, function (text, name) {
+        if (name.indexOf('.') !== -1) {
+            var arr = name.split('.');
+            if (arr[0] === 'this') {
+                arr[0] = self.form.page.name;
+            }
+            return '{' + arr.join('.') + '}';
+        } else {
+            return text;
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Field.prototype.templateValue = function(value) {
+    var params = this.form.page.params;
+    value  = this.replaceThis(value);
+    return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        if (params.hasOwnProperty(name)) {
+            return params[name];
+        } else {
+            return text;
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.fillDefaultValue = function(row) {
     if (this.data.column !== undefined) {
         var column = this.data.column;
         try {
-            var value = eval(this.data.defaultValue);
+            var code = this.templateValue(this.data.defaultValue);
+            //console.log('eval: ' + code);
+            var value = eval(code);
         } catch (e) {
             throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
         }

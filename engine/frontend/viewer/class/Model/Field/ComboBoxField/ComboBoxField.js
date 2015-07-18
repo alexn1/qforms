@@ -8,7 +8,7 @@ function ComboBoxField(name, form, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ComboBoxField.prototype.templateValue = function(row) {
+ComboBoxField.prototype.getDisplayValue = function(row) {
     var value = null;
     if (row[this.data.displayColumn]) {
         value = row[this.data.displayColumn];

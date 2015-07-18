@@ -76,7 +76,7 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
                 var key = JSON.stringify([value]);
                 var row = this.dataSource.getRow(key);
                 if (row) {
-                    view.firstElementChild.innerHTML = this.model.templateValue(row);
+                    view.firstElementChild.innerHTML = this.model.getDisplayValue(row);
                 } else {
                     view.firstElementChild.innerHTML = '{id: ' + value + '}';
                 }
@@ -104,7 +104,7 @@ ComboBoxFieldController.prototype._createOption = function(view, i) {
     var row =  this.dataSource.getRowByIndex(i);
     var key = this.dataSource.getRowKey(row);
     var option = document.createElement('option');
-    option.innerHTML = this.model.templateValue(row);
+    option.innerHTML = this.model.getDisplayValue(row);
     option.dbRow     = row;
     option.value     = JSON.parse(key)[0];
     QForms.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
