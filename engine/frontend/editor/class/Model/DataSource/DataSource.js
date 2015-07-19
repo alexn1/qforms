@@ -178,9 +178,9 @@ DataSource.prototype.getView = function(view, callback) {
         controller: 'DataSource',
         action    : 'getView',
         params    : {
-            pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
-            form        : this.parent.data['@attributes'].name,
-            dataSource  : this.data['@attributes'].name,
+            pageFileName: (this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined,
+            form        : (this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined,
+            dataSource  : (this instanceof DataSource) ? this.data['@attributes'].name                          : undefined,
             view        : view
         }
     };
