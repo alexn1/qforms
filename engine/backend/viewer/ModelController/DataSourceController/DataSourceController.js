@@ -53,7 +53,7 @@ DataSourceController.prototype.fill = function(context, callback) {
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;
         }
-        if (context.newMode) {
+        if (self.name === 'default' && context.newMode) {
             response.rows = [];
             callback(response);
         } else {

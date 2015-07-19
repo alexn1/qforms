@@ -30,7 +30,7 @@ function DataSource(name, parent, data) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.init = function() {
-    // делаем индексы
+    // creating index
     var vals = this.getKeysAndChilds(this.data.rows);
     this.rowsByKey = vals.rowsByKey;
     this.childs    = vals.childs;
@@ -103,7 +103,7 @@ DataSource.prototype.setValue = function(row, column, value) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.getRowKey = function(row) {
     var key = [];
-    for (var i=0;i<this.data.keyColumns.length;i++) {
+    for (var i = 0; i < this.data.keyColumns.length; i++) {
         key.push(row[this.data.keyColumns[i]]);
     }
     return JSON.stringify(key);
@@ -143,22 +143,22 @@ DataSource.prototype.splitKey = function(key) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.update = function(callbak) {
+DataSource.prototype.update = function(callback) {
     if (this.data.table === '') {
         return;
     }
     if (this.insertRow !== null) {
-        return this.insert(this.insertRow, callbak);
+        return this.insert(callback);
     }
     if (this.updateRow === null) {
         return;
     }
     var params = {
-        action:'update',
-        page:this.form.page.name,
-        form:this.form.name,
-        ds:this.name,
-        row:this.updateRow
+        action: 'update',
+        page  : this.form.page.name,
+        form  : this.form.name,
+        ds    : this.name,
+        row   : this.updateRow
     };
     QForms.doHttpRequest(this, params, function(data) {
         this.updateRow = null;
@@ -168,6 +168,7 @@ DataSource.prototype.update = function(callbak) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.onTableUpdated = function(ea) {
+    //console.log('DataSource.prototype.onTableUpdated');
     var self = this;
     this.refresh(function() {
         // data source has been updated
@@ -508,21 +509,31 @@ DataSource.prototype.insert = function(row, callback) {
         page  : this.form.page.name,
         form  : this.form.name,
         ds    : this.name,
-        row   : row
+        row   : this.insertRow
     };
     QForms.doHttpRequest(this, args, function(data) {
-        if (row === this.insertRow) {
-            this.setRowKey(this.insertRow, data.key);
-            var params = QForms.keyToParams(data.key);
-            // save key params for refill
-            for (var name in params) {
-                this.params[name] = params[name];
-            }
-            this.insertRow = null;
+        // set row key and add inserted row to rows
+        this.setRowKey(this.insertRow, data.key);
+        this.data.rows.push(this.insertRow);
+        this.insertRow = null;
+
+        // creating index with for rows
+        var vals = this.getKeysAndChilds(this.data.rows);
+        this.rowsByKey = vals.rowsByKey;
+        this.childs    = vals.childs;
+
+        // save key params for refill
+        var params = QForms.keyToParams(data.key);
+        for (var name in params) {
+            this.params[name] = params[name];
         }
+
+        // fire insert event
         var ea = new QForms.EventArg(this);
         ea.key = data.key;
         this.form.page.app.tables[this.fullTableName].fireInsert(ea);
+
+        // callback
         if (callback) {
             callback(data.key);
         }
