@@ -148,7 +148,7 @@ DataSource.prototype.update = function(callback) {
         return;
     }
     if (this.insertRow !== null) {
-        return this.insert(callback);
+        return this.insert(this.insertRow, callback);
     }
     if (this.updateRow === null) {
         return;
@@ -509,23 +509,26 @@ DataSource.prototype.insert = function(row, callback) {
         page  : this.form.page.name,
         form  : this.form.name,
         ds    : this.name,
-        row   : this.insertRow
+        row   : row
     };
     QForms.doHttpRequest(this, args, function(data) {
-        // set row key and add inserted row to rows
-        this.setRowKey(this.insertRow, data.key);
-        this.data.rows.push(this.insertRow);
-        this.insertRow = null;
+        // this code is actual only in new mode for row form
+        if (row === this.insertRow) {
+            // set row key and add inserted row to rows
+            this.setRowKey(this.insertRow, data.key);
+            this.data.rows.push(this.insertRow);
+            this.insertRow = null;
 
-        // creating index with for rows
-        var vals = this.getKeysAndChilds(this.data.rows);
-        this.rowsByKey = vals.rowsByKey;
-        this.childs    = vals.childs;
+            // creating index with for rows
+            var vals = this.getKeysAndChilds(this.data.rows);
+            this.rowsByKey = vals.rowsByKey;
+            this.childs    = vals.childs;
 
-        // save key params for refill
-        var params = QForms.keyToParams(data.key);
-        for (var name in params) {
-            this.params[name] = params[name];
+            // save key params for refill
+            var params = QForms.keyToParams(data.key);
+            for (var name in params) {
+                this.params[name] = params[name];
+            }
         }
 
         // fire insert event

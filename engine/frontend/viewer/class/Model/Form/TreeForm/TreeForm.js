@@ -12,7 +12,9 @@ function TreeForm(name, page, data) {
 //
 TreeForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
-    if (dataSource.name !== 'default') return;
+    if (dataSource.name !== 'default') {
+        return;
+    }
     this.dataSources['default'].update();
 };
 

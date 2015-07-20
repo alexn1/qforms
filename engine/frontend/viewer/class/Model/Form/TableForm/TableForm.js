@@ -43,8 +43,8 @@ TableForm.prototype.new = function() {
             var self = this;
             this.dataSource.insert(row, function(key) {
                 self.openPage({
-                    name:self.data.itemEditPage,
-                    key:key
+                    name: self.data.itemEditPage,
+                    key : key
                 });
             });
             break;

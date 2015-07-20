@@ -67,7 +67,9 @@ Page.prototype.initParams = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.update = function() {
-    for (var formName in this.forms) this.forms[formName].update();
+    for (var name in this.forms) {
+        this.forms[name].update();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,7 +103,9 @@ Page.prototype.onFormUpdated = function(ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.setKey = function(key) {
-    if (this.deinited) return;
+    if (this.deinited) {
+        return;
+    }
     this.key = key;
     this.app.trackPage(this);
 };
