@@ -15,14 +15,15 @@ RowForm.prototype.init = function() {
         var row = {};
         this.defaultValuesToRow(row);
         this.dataSource.newRow(row);
+        this.row = row;
     } else {
         if (!this.dataSource.data.rows[0]) {
             throw new Error('[' + this.getFullName() + '] no row in RowForm');
         }
         this.row = this.dataSource.data.rows[0];
-        // dump row values to page params
-        this.fillParams(this.row);
     }
+    // dump row values to page params
+    this.fillParams(this.row);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

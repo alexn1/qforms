@@ -47,6 +47,7 @@ Form.prototype.init = function() {
     this.dataSource = this.dataSources.default;
     this.dataSource.eventChanged.subscribe(this, 'onDataSourceChanged');
     this.dataSource.eventUpdated.subscribe(this, 'onDataSourceUpdated');
+    this.dataSource.eventInsert.subscribe(this, 'onDataSourceUpdated');
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +55,7 @@ Form.prototype.deinit = function() {
     //console.log('Form.prototype.deinit: ' + this.name);
     this.dataSource.eventChanged.unsubscribe(this, 'onDataSourceChanged');
     this.dataSource.eventUpdated.unsubscribe(this, 'onDataSourceUpdated');
+    this.dataSource.eventInsert.unsubscribe(this, 'onDataSourceUpdated');
     for (var dsName in this.dataSources) {
         this.dataSources[dsName].deinit();
     }
@@ -68,8 +70,7 @@ Form.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.defaultValuesToRow = function(row) {
     for (var name in this.fields) {
-        var field = this.fields[name];
-        field.fillDefaultValue(row);
+        this.fields[name].fillDefaultValue(row);
     }
 };
 

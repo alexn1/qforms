@@ -127,5 +127,6 @@ PageController.prototype.onPageChanged = function(ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.onPageUpdated = function(ea) {
+    //console.log('PageController.prototype.onPageUpdated');
     this.unchangedCaption();
 };
