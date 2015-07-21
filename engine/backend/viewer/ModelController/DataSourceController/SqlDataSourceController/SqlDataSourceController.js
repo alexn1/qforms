@@ -192,3 +192,8 @@ SqlDataSourceController.prototype.delete = function(context, callback) {
         .toString();
     this._query(query, null, callback, false);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+SqlDataSourceController.prototype.getPool = function() {
+    return this.getApp().getPool(this.data['@attributes'].database);
+};

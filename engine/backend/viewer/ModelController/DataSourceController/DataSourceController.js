@@ -171,11 +171,6 @@ DataSourceController.prototype.getApp = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getPool = function() {
-    return this.getApp().getPool(this.data['@attributes'].database);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getRowKeyValues = function(row) {
     var values = {};
     this.keyColumns.forEach(function(column) {

@@ -8,6 +8,11 @@ function <%=page%><%=form%><%=dataSource%>Controller() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller.prototype.select = function(context, callback) {
+    <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.select.call(this, context, callback);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 <%=page%><%=form%><%=dataSource%>Controller.prototype.insert = function(context, callback) {
     <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.insert.call(this, context, callback);
 };
