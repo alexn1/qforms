@@ -44,6 +44,35 @@ DataSourceController.prototype.init = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.checkColumn = function(row, column) {
+    if (!row.hasOwnProperty(column)) {
+        throw new Error('[{fullName}]: No column \'{column}\' in result set.'.template({
+            fullName : this.getFullName(),
+            column   : column
+        }));
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.checkColumns = function(row) {
+    var self = this;
+    this.keyColumns.forEach(function(column) {
+        self.checkColumn(row, column);
+    });
+    this.parentKeyColumns.forEach(function(column) {
+        self.checkColumn(row, column);
+    });
+    if ((this.parent instanceof FormController) && this.name === 'default') {
+        for (var name in this.parent.fields) {
+            var field = this.parent.fields[name];
+            if (field.data['@attributes'].column) {
+                this.checkColumn(row, field.data['@attributes'].column);
+            }
+        }
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.fill = function(context, callback) {
     var self = this;
     DataSourceController.super_.prototype.fill.call(this, context, function(response) {
@@ -62,6 +91,9 @@ DataSourceController.prototype.fill = function(context, callback) {
                 context.params['limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
             }
             self.select(context, function(rows) {
+                if (rows[0]) {
+                    self.checkColumns(rows[0]);
+                }
                 response.rows = rows;
                 if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], context.querytime.params);
