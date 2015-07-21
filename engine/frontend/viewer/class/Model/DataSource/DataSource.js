@@ -238,7 +238,7 @@ DataSource.prototype._getData = function(params, callback) {
     var form = this.getForm();
     var _params = QForms.merge(params, this.params);
     if (this.limit) {
-        _params['@offset'] = this.offset;
+        _params['offset'] = this.offset;
     }
     var args = {
         action: 'frame',

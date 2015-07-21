@@ -58,8 +58,8 @@ DataSourceController.prototype.fill = function(context, callback) {
             callback(response);
         } else {
             if (self.data['@attributes'].limit) {
-                context.params['@offset'] = 0;
-                context.params['@limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
+                context.params['offset'] = 0;
+                context.params['limit']  = response.limit  = parseInt(self.data['@attributes'].limit);
             }
             self.select(context, function(rows) {
                 response.rows = rows;
@@ -85,7 +85,7 @@ DataSourceController.prototype.fill = function(context, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.frame = function(context, callback) {
     if (this.data['@attributes'].limit) {
-        context.params['@limit'] = parseInt(this.data['@attributes'].limit);
+        context.params['limit'] = parseInt(this.data['@attributes'].limit);
     }
     var self = this;
     this.select(context, function(rows) {

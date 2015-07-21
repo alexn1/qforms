@@ -171,7 +171,7 @@ function index(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.fill(context, function(data) {
         res.render('viewer/view', {
@@ -198,7 +198,7 @@ function page(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.getPage(context, req.body.page, function(page) {
         page.fill(context, function(data) {
@@ -218,7 +218,7 @@ function update(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].update(context, function() {
@@ -235,7 +235,7 @@ function frame(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     var getDataSource = function(callback) {
         if (req.body.page) {
@@ -266,7 +266,7 @@ function insert(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
@@ -286,7 +286,7 @@ function _delete(req, res, next, application) {
         querytime: {params : {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].delete(context, function() {
@@ -305,7 +305,7 @@ function _call(req, res, next, application) {
         querytime: {params: {}}
     };
     if (req.session.username && req.session.username[route]) {
-        context.querytime.params['@username'] = req.session.username[route];
+        context.querytime.params['username'] = req.session.username[route];
     }
     application.getPage(context, req.body.page, function(page) {
         page._call(context);

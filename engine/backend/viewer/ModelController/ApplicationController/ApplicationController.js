@@ -57,8 +57,8 @@ ApplicationController.prototype._buildMenu = function(context, callback) {
     var menu = {};
     var self = this;
     var tasks = _.filter(self.data.pageLinks, function (pageLink) {
-        if (context.querytime.params['@username']) {
-            var userName = context.querytime.params['@username'];
+        if (context.querytime.params['username']) {
+            var userName = context.querytime.params['username'];
             var pageName = pageLink['@attributes'].name;
             return self.authorizePage(userName, pageName);
         } else {
@@ -148,8 +148,8 @@ ApplicationController.prototype.authorizePage = function(userName, pageName) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getPage = function(context, pageName, callback) {
-    if (context.querytime.params['@username']) {
-        var userName = context.querytime.params['@username'];
+    if (context.querytime.params['username']) {
+        var userName = context.querytime.params['username'];
         if (this.authorizePage(userName, pageName) === false) {
             throw new Error('Authorization error.');
         }
@@ -195,8 +195,8 @@ ApplicationController.prototype.fill = function(context, callback) {
         delete response.authentication;
 
         // username
-        if (context.querytime.params['@username']) {
-            response.username = context.querytime.params['@username'];
+        if (context.querytime.params['username']) {
+            response.username = context.querytime.params['username'];
         }
 
         // menu
