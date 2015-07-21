@@ -142,7 +142,6 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
             this.model.edit(key);
         break;
     }
-    this.model.handleEvent('DoubleClick', {'key':key});
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
