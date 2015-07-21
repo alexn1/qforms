@@ -65,9 +65,7 @@ DataSourceController.prototype.checkColumns = function(row) {
     if ((this.parent instanceof FormController) && this.name === 'default') {
         for (var name in this.parent.fields) {
             var field = this.parent.fields[name];
-            if (field.data['@attributes'].column) {
-                this.checkColumn(row, field.data['@attributes'].column);
-            }
+            this.checkColumn(row, field.data['@attributes'].column);
         }
     }
 };

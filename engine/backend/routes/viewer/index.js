@@ -80,7 +80,7 @@ function createApplication(req, res, next, route) {
 function handle(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     if (req.method === 'GET') {
-        if (application.authentication() && !(req.session.username && req.session.username[route])) {
+        if (application.authentication() && !(req.session.user && req.session.user[route])) {
             login(req, res, next, application);
         } else {
             index(req, res, next, application);
@@ -90,7 +90,7 @@ function handle(req, res, next, application) {
         if (req.body.action === 'login') {
             login(req, res, next, application);
         } else {
-            if (application.authentication() && !(req.session.username && req.session.username[route])) {
+            if (application.authentication() && !(req.session.user && req.session.user[route])) {
                 throw new Error('not authenticated');
             } else {
                 var actions = [
@@ -130,12 +130,16 @@ function login(req, res, next, application) {
         });
     }
     if (req.method === 'POST') {
-        application.authenticate(req.body.username, req.body.password, function(authenticate) {
+        application.authenticate(req.body.username, req.body.password, function(authenticate, user) {
             if (authenticate) {
-                if (!req.session.username) {
-                    req.session.username = {};
+                if (!req.session.user) {
+                    req.session.user = {};
                 }
-                req.session.username[route] = req.body.username;
+                if (user) {
+                    req.session.user[route] = user;
+                } else {
+                    req.session.user[route] = {name: req.body.username};
+                }
                 res.redirect(req.url);
             } else {
                 application.getUsers(function(users) {
@@ -157,8 +161,8 @@ function login(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function logout(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    if (req.session.username && req.session.username[route]) {
-        delete req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        delete req.session.user[route];
     }
     res.json(null);
 };
@@ -170,8 +174,8 @@ function index(req, res, next, application) {
         params   : {},
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.fill(context, function(data) {
         res.render('viewer/view', {
@@ -197,8 +201,8 @@ function page(req, res, next, application) {
         newMode  : req.body.newMode,
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
         page.fill(context, function(data) {
@@ -217,8 +221,8 @@ function update(req, res, next, application) {
         row      : req.body.row,
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].update(context, function() {
@@ -234,8 +238,8 @@ function frame(req, res, next, application) {
         params   : req.body.params,
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     var getDataSource = function(callback) {
         if (req.body.page) {
@@ -265,8 +269,8 @@ function insert(req, res, next, application) {
         params   : {},
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
@@ -285,8 +289,8 @@ function _delete(req, res, next, application) {
         params   : {},
         querytime: {params : {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].delete(context, function() {
@@ -304,8 +308,8 @@ function _call(req, res, next, application) {
         res      : res,
         querytime: {params: {}}
     };
-    if (req.session.username && req.session.username[route]) {
-        context.querytime.params['username'] = req.session.username[route];
+    if (req.session.user && req.session.user[route]) {
+        context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
         page._call(context);
