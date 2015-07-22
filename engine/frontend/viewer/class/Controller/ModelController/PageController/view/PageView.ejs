@@ -1,95 +1,58 @@
-<%
-var isThereARowFormWithDefaultDs = function() {
-    var result = false;
-    for (var formName in model.forms) {
-        var form = model.forms[formName].data;
-        if (form.class === "RowForm") {
-            if (form.dataSources["default"]["table"] !== "") {
-                result = true;
-                break;
-            }
-        }
-    }
-    return result;
-}
-var isThereARowForm = function() {
-    var result = false;
-    for (var formName in model.forms) {
-        var form = model.forms[formName].data;
-        if (form.class === "RowForm") {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-var isThereATableFormOrTreeForm = function() {
-    var result = false;
-    for (var formName in model.forms) {
-        var form = model.forms[formName].data;
-        if (form.class === "TableForm" || form.class === "TreeForm") {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-%>
 <div id="<%=model.id%>" class="PageView full place">
     <div class="frame flex-rows">
         <!-- caption -->
         <h3 class="<%=model.id%>_caption flex-min"><%=model.data.caption%></h3>
         <!-- buttons -->
-        <% if (isThereARowFormWithDefaultDs.call(this)) { %>
-        <div class="buttons flex-min">
-            <button class="btn btn-primary btn-sm saveAndClose">Save and close</button>
-            <button class="btn btn-default btn-sm save">Save</button>
-            <button class="btn btn-default btn-sm closePage">Close</button>
-        </div>
-        <div class="splitter flex-min">&nbsp;</div>
+        <% if (model.isThereARowFormWithDefaultDs()) { %>
+            <div class="buttons flex-min">
+                <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.saveAndClose%></button>
+                <button class="btn btn-default btn-sm save"><%=model.app.data.text.save%></button>
+                <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.close%></button>
+            </div>
+            <div class="splitter flex-min">&nbsp;</div>
         <%}%>
         <!-- row forms -->
-        <% if (isThereARowForm.call(this)) { %>
-        <div class="row-forms flex-min">
-        <% for (var formName in model.forms) {
-            var form = model.forms[formName];
-            if (form.data.class === "RowForm") {%>
-                <%=QForms.render(form.data.view,{model:form})%>
-            <%}
-        }
-        %>
-        </div>
-        <div class="splitter flex-min">&nbsp;</div>
+        <% if (model.isThereARowForm()) { %>
+            <div class="row-forms flex-min">
+            <% for (var name in model.forms) {
+                var form = model.forms[name];
+                if (form.data.class === 'RowForm') {%>
+                    <%=QForms.render(form.data.view,{model:form})%>
+                <%}
+            }
+            %>
+            </div>
+            <div class="splitter flex-min">&nbsp;</div>
         <%}%>
         <!-- table forms -->
-        <% if (isThereATableFormOrTreeForm.call(this)) { %>
-        <div class="table-forms flex-max place">
-            <div class="frame">
-                <div id="<%=model.id%>_TabWidget" class="TabWidget TabWidget-blue full">
-                    <ul>
-                        <% for (var formName in model.forms) {
-                            var form = model.forms[formName].data;
-                            if (form.class === "TableForm" || form.class === "TreeForm") {
-                                %><li>
-                                    <span id="<%=model.id%>_<%=form.name%>_caption"><%=form.caption%></span>
-                                </li><%
-                            }
-                        } %>
-                    </ul>
-                    <div>
-                        <% for (var formName in model.forms) {
-                            var form = model.forms[formName];
-                            if (form.data.class === "TableForm" || form.data.class === "TreeForm") {
-                                %><div>
-                                    <%=QForms.render(form.data.view,{model:form})%>
-                                </div><%
-                            }
-                        } %>
+        <% if (model.isThereATableFormOrTreeForm(this)) { %>
+            <div class="table-forms flex-max place">
+                <div class="frame">
+                    <div id="<%=model.id%>_TabWidget" class="TabWidget TabWidget-blue full">
+                        <ul>
+                            <% for (var name in model.forms) {
+                                var form = model.forms[name].data;
+                                if (form.class === 'TableForm' || form.class === 'TreeForm') {
+                                    %><li>
+                                        <span id="<%=model.id%>_<%=form.name%>_caption"><%=form.caption%></span>
+                                    </li><%
+                                }
+                            } %>
+                        </ul>
+                        <div>
+                            <% for (var name in model.forms) {
+                                var form = model.forms[name];
+                                if (form.data.class === 'TableForm' || form.data.class === 'TreeForm') {
+                                    %><div>
+                                        <%=QForms.render(form.data.view,{model:form})%>
+                                    </div><%
+                                }
+                            } %>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="splitter flex-min"></div>
+            <div class="splitter flex-min"></div>
         <%}%>
     </div>
 </div>

@@ -17,6 +17,24 @@ var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEd
 
 util.inherits(ApplicationEditor, Editor);
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.createData = function(params) {
+    return {
+        '@class': 'Application',
+        '@attributes': {
+            formatVer: '0.1',
+            name          : params.name,
+            caption       : params.name,
+            authentication: 'false',
+            user          : 'admin',
+            password      : 'admin',
+            lang          : 'en'
+        },
+        databases: {},
+        pageLinks: {}
+    };
+};
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationEditor(appFile) {
     this.appFile            = appFile;
@@ -30,23 +48,6 @@ function ApplicationEditor(appFile) {
         qforms.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
     );
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.createData = function(params) {
-    return {
-        '@class': 'Application',
-        '@attributes': {
-            formatVer: '0.1',
-            name          : params.name,
-            caption       : params.name,
-            authentication: 'false',
-            user          : 'admin',
-            password      : 'admin'
-        },
-        databases: {},
-        pageLinks: {}
-    };
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

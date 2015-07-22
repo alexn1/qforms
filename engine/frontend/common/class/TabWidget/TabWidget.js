@@ -67,7 +67,10 @@ TabWidget.prototype.onTabClosing = function(tab) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.createTab = function(el, caption, onCloseCallback) {
-    caption = caption !== undefined ? caption : '';
+    if (caption === undefined) {
+        caption = '';
+    }
+
     // li
     var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}', caption)).get(0);
     li.onCloseCallback = onCloseCallback;

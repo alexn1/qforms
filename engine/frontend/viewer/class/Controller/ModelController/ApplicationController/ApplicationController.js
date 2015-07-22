@@ -58,16 +58,17 @@ ApplicationController.prototype.deinit = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageOpened = function(e) {
-    var html = QForms.render(e.page.data.view, {model:e.page});
+    var page = e.page;
+    var html = QForms.render(page.data.view, {model:page});
     var view = $(html).get(0);
     var tab = this.appTC.createTab(view);
     $(tab).children('span').get(0).className = '{id}_caption'.replace('{id}', view.id);
     if (e.select) {
         this.appTC.selectTab(tab, e.track);
     }
-    tab.qPage = e.page;
-    e.page.qTab = tab;
-    tab.pageController = PageController.create(e.page, view, this);
+    tab.qPage = page;
+    page.qTab = tab;
+    tab.pageController = PageController.create(page, view, this);
     tab.pageController.init();
     tab.pageController.fill();
 };

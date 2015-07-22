@@ -2,17 +2,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Page(args) {
-    this.name        = args.data.name;
-    this.parent      = args.app;
-    this.data        = args.data;
-    this.app         = args.app;
-    this.key         = args.key;
-    this.newMode     = args.newMode === undefined ? false : args.newMode;
-    this.parentPage  = args.parentPage;
-    this.dataSources = {};
-    this.forms       = {};
-    this.params      = (args.params !== undefined) ? args.params : {};
-    // events
+    this.name         = args.data.name;
+    this.parent       = args.app;
+    this.data         = args.data;
+    this.app          = args.app;
+    this.key          = args.key;
+    this.newMode      = args.newMode === undefined ? false : args.newMode;
+    this.parentPage   = args.parentPage;
+    this.dataSources  = {};
+    this.forms        = {};
+    this.params       = (args.params !== undefined) ? args.params : {};
     this.eventShow    = new QForms.Event(this);
     this.eventHide    = new QForms.Event(this);
     this.eventChanged = new QForms.Event(this);
@@ -114,4 +113,45 @@ Page.prototype.setKey = function(key) {
 Page.prototype.openPage = function(params) {
     params.parentPage = this;
     this.app.openPage(params);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Page.prototype.isThereARowFormWithDefaultDs = function() {
+    var result = false;
+    for (var formName in this.forms) {
+        var form = this.forms[formName].data;
+        if (form.class === 'RowForm') {
+            if (form.dataSources['default']['table'] !== '') {
+                result = true;
+                break;
+            }
+        }
+    }
+    return result;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Page.prototype.isThereARowForm = function() {
+    var result = false;
+    for (var formName in this.forms) {
+        var form = this.forms[formName].data;
+        if (form.class === 'RowForm') {
+            result = true;
+            break;
+        }
+    }
+    return result;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Page.prototype.isThereATableFormOrTreeForm = function() {
+    var result = false;
+    for (var formName in this.forms) {
+        var form = this.forms[formName].data;
+        if (form.class === 'TableForm' || form.class === 'TreeForm') {
+            result = true;
+            break;
+        }
+    }
+    return result;
 };

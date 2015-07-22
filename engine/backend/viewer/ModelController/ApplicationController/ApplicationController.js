@@ -11,13 +11,17 @@ var mysql         = require('mysql');
 var child_process = require('child_process');
 var xml           = require('xml');
 
-var qforms                  = require('../../../qforms');
+var qforms               = require('../../../qforms');
 var helper               = require('../../../common/helper');
 var ModelController      = require('../ModelController');
 var PageLinkController   = require('../PageLinkController/PageLinkController');
 var PageController       = require('../PageController/PageController');
 var DataSourceController = require('../DataSourceController/DataSourceController');
 var PageFile             = require('../../../editor/JsonFile/PageFile/PageFile');
+var text                 = {
+    en:require('../../../common/text/en'),
+    ru:require('../../../common/text/ru')
+};
 
 util.inherits(ApplicationController, ModelController);
 
@@ -193,6 +197,10 @@ ApplicationController.prototype.fill = function(context, callback) {
         delete response.user;
         delete response.password;
         delete response.authentication;
+
+        // text
+        var lang = self.data['@attributes'].lang || 'en';
+        response.text = text[lang];
 
         // username
         if (context.querytime.params['username']) {
