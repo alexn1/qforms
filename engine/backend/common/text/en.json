@@ -1,7 +1,24 @@
 {
-    "saveAndClose": "Save and close",
-    "save": "Save",
-    "close": "Close",
-    "new": "New",
-    "delete": "Delete"
+    "login": {
+        "login": "Login",
+        "username": "Username",
+        "password": "Password",
+        "signIn": "Sign in",
+        "WrongUsernameOrPassword": "Wrong username or password"
+    },
+    "application": {
+        "logout": "Logout"
+    },
+    "page": {
+        "saveAndClose": "Save and close",
+        "save": "Save",
+        "close": "Close"
+    },
+    "form": {
+        "new": "New",
+        "delete": "Delete",
+        "areYouSure": "Are you sure?",
+        "previous": "Previous",
+        "next": "Next"
+    }
 }

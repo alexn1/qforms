@@ -120,6 +120,7 @@ function login(req, res, next, application) {
         application.getUsers(function(users) {
             res.render('viewer/login', {
                 version       : req.app.get('version'),
+                application   : application,
                 caption       : application.data['@attributes'].caption,
                 commonStyleCss: req.app.get('commonStyleCss'),
                 REQUEST_URI   : req.url,
@@ -145,10 +146,11 @@ function login(req, res, next, application) {
                 application.getUsers(function(users) {
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
+                        application   : application,
                         caption       : application.data['@attributes'].caption,
                         commonStyleCss: req.app.get('commonStyleCss'),
                         REQUEST_URI   : req.url,
-                        errMsg        : 'Wrong username or password',
+                        errMsg        : application.text.login.WrongUsernameOrPassword,
                         username      : req.body.username,
                         users         : users
                     });

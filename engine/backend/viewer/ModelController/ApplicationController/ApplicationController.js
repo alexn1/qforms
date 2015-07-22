@@ -41,6 +41,7 @@ function ApplicationController(data, appInfo) {
     this.pages              = {};
     this.css                = [];
     this.pools              = {};
+    this.text               = text[this.data['@attributes'].lang || 'en'];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,8 +200,7 @@ ApplicationController.prototype.fill = function(context, callback) {
         delete response.authentication;
 
         // text
-        var lang = self.data['@attributes'].lang || 'en';
-        response.text = text[lang];
+        response.text = self.text;
 
         // username
         if (context.querytime.params['username']) {

@@ -1,7 +1,24 @@
 {
-    "saveAndClose": "Сохранить и закрыть",
-    "save": "Сохранить",
-    "close": "Закрыть",
-    "new": "Создать",
-    "delete": "Удалить"
+    "login": {
+        "login": "Вход",
+        "signIn": "Войти",
+        "username": "Логин",
+        "password": "Пароль",
+        "WrongUsernameOrPassword": "Неверное имя пользователя или пароль"
+    },
+    "application": {
+        "logout": "Выйти"
+    },
+    "page": {
+        "saveAndClose": "Сохранить и закрыть",
+        "save": "Сохранить",
+        "close": "Закрыть"
+    },
+    "form": {
+        "new": "Создать",
+        "delete": "Удалить",
+        "areYouSure": "Вы уверены?",
+        "previous": "Предыдущая",
+        "next": "Следуюущая"
+    }
 }

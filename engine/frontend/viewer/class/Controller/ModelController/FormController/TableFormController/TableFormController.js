@@ -98,7 +98,7 @@ TableFormController.prototype.onNewClick = function(ctrl) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onDeleteClick = function(ctrl) {
-    if (confirm('Are you sure?')) {
+    if (confirm(this.model.page.app.data.text.form.areYouSure)) {
         var key = this.grid.getSelectedKey();
         if (key !== null) {
             this.model.delete(key);

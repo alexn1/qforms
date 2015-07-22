@@ -3,7 +3,7 @@
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
-    <title><%=caption%> - Login - QForms</title>
+    <title><%=caption%> - <%=application.text.login.login%> - QForms</title>
     <!-- jquery -->
     <script src="/common/lib/jquery/jquery-1.11.1.min.js"></script>
     <!-- bootstrap -->
@@ -59,7 +59,6 @@
 <body>
     <div class="container">
         <form class="form-signin" action="<%=REQUEST_URI%>" method="post">
-            <h2 class="form-signin-heading">Please sign in</h2>
             <% if (errMsg !== null) { %>
                 <div class="alert alert-danger">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -75,10 +74,10 @@
                     <% }); %>
                 </select>
             <% } else { %>
-                <input name="username" class="form-control" placeholder="Username" required autofocus value="<%=username%>">
+                <input name="username" class="form-control" placeholder="<%=application.text.login.username%>" required autofocus value="<%=username%>">
             <% } %>
-            <input name="password" type="password" class="form-control" placeholder="Password">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <input name="password" type="password" class="form-control" placeholder="<%=application.text.login.password%>">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%=application.text.login.signIn%></button>
         </form>
     </div>
 </body>
