@@ -20,5 +20,8 @@
         "areYouSure": "Are you sure?",
         "previous": "Previous",
         "next": "Next"
+    },
+    "field": {
+        "selectValue": "select value"
     }
 }

@@ -90,7 +90,9 @@ ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     var nullOption = document.createElement('option');
     nullOption.selected = true;
     if (this.model.data.notNull === 'true') {
-        nullOption.innerHTML = '-- select value --';
+        nullOption.innerHTML = '-- {selectValue} --'.template({
+            selectValue: this.model.form.page.app.data.text.field.selectValue
+        });
     }
     view.firstElementChild.appendChild(nullOption);
     var rows = this.dataSource.getRows();
