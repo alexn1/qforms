@@ -1,5 +1,6 @@
 'use strict';
 
+var http       = require('http')
 var express    = require('express');
 var config     = require('config');
 var path       = require('path');
@@ -74,19 +75,19 @@ qforms.use(error.page);
 
 process.on('SIGINT', function () {
     console.log('process.SIGINT');
-    process.exit();
+    var apps = _.map(qforms.get('applications'), function(app) {return app;});
+    async.eachSeries(apps, function(app, next) {
+        app.deinit(next);
+    }, function() {
+        process.exit();
+    });
 });
 
 process.on('exit', function () {
     console.log('process.exit');
-    var apps = _.map(qforms.get('applications'), function(app) {return app;});
-    async.eachSeries(apps, function(app, next) {
-        app.deinit(next);
-    });
 });
 
-// start
-qforms.listen(qforms.get('port'), qforms.get('host'), function() {
+var server = http.createServer(qforms).listen(qforms.get('port'), qforms.get('host'), function() {
     console.log('QForms server listening on http://' + qforms.get('host') + ':' + qforms.get('port'));
     console.log('apps from [' + path.resolve(qforms.get('appsDirPath')) + ']');
 });
