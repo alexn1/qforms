@@ -112,3 +112,11 @@ Form.prototype.executeAction = function(action, args) {
 Form.prototype.openPage = function(args) {
     this.page.openPage(args);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Form.prototype.getFullName = function () {
+    return [
+        this.page.name,
+        this.name
+    ].join('.');
+};

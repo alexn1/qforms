@@ -26,18 +26,27 @@ TableForm.prototype.new = function() {
             this.dataSource.insert(row);
             break;
         case 'editform':
+            if (!this.data.itemEditPage) {
+                throw new Error('[' + this.getFullName() + '] itemEditPage is empty.');
+            }
             this.openPage({
                 name   : this.data.itemEditPage,
                 newMode: true
             });
             break;
         case 'createform':
+            if (!this.data.itemCreatePage) {
+                throw new Error('[' + this.getFullName() + '] itemCreatePage is empty.');
+            }
             this.openPage({
                 name   : this.data.itemCreatePage,
                 newMode: true
             });
             break;
         case 'oneclick editform':
+            if (!this.data.itemEditPage) {
+                throw new Error('[' + this.getFullName() + '] itemEditPage is empty.');
+            }
             var row = {};
             this.defaultValuesToRow(row);
             var self = this;
@@ -60,7 +69,7 @@ TableForm.prototype.delete = function(key) {
 TableForm.prototype.edit = function(key) {
     //console.log('TableForm.prototype.edit');
     if (!this.data.itemEditPage) {
-        throw new Error
+        throw new Error('[' + this.getFullName() + '] itemEditPage is empty.');
     }
     this.openPage({
         name: this.data.itemEditPage,
