@@ -27,6 +27,9 @@ Field.prototype.replaceThis = function(value) {
             if (arr[0] === 'this') {
                 arr[0] = self.form.page.name;
             }
+            if (arr[0] === 'parent' && self.form.page.parentPageName) {
+                arr[0] = self.form.page.parentPageName;
+            }
             return '{' + arr.join('.') + '}';
         } else {
             return text;

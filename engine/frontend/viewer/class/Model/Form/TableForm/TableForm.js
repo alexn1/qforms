@@ -27,14 +27,14 @@ TableForm.prototype.new = function() {
             break;
         case 'editform':
             this.openPage({
-                name:this.data.itemEditPage,
-                newMode:true
+                name   : this.data.itemEditPage,
+                newMode: true
             });
             break;
         case 'createform':
             this.openPage({
-                name:this.data.itemCreatePage,
-                newMode:true
+                name   : this.data.itemCreatePage,
+                newMode: true
             });
             break;
         case 'oneclick editform':
@@ -58,9 +58,10 @@ TableForm.prototype.delete = function(key) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.edit = function(key) {
+    //console.log('TableForm.prototype.edit');
     this.openPage({
-        name:this.data.itemEditPage,
-        key:key
+        name: this.data.itemEditPage,
+        key : key
     });
 };
 

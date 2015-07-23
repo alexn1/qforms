@@ -24,8 +24,8 @@ Application.prototype.init = function() {
     for (var name in this.data.pages) {
         this.lastPageId++;
         var page = new Page({
-            app :this,
-            data:this.data.pages[name]
+            app : this,
+            data: this.data.pages[name]
         });
 
         page.init();
@@ -80,20 +80,27 @@ Application.prototype.openPage = function(args) {
     } else {
         // если страницы нет, то создаём
         var args = {
-            'action':'page',
-            'page':name,
-            'newMode':newMode,
-            'params':params
+            action : 'page',
+            page   : name,
+            newMode: newMode,
+            params : params
         };
         QForms.doHttpRequest(this, args, function(response) {
             this.lastPageId++;
+            // to make possible refer to parent page params
+            if (parentPage !== undefined) {
+                for (var name in parentPage.params) {
+                    params[name] = parentPage.params[name];
+                }
+            }
             var page = new Page({
-                app       : this,
-                data      : response.data,
-                key       : key,
-                newMode   : newMode,
-                parentPage: parentPage,
-                params    : params
+                app           : this,
+                data          : response.data,
+                key           : key,
+                newMode       : newMode,
+                parentPage    : parentPage,
+                params        : params,
+                parentPageName: parentPage ? parentPage.name : undefined
             });
             page.init();
             page.id = 'p' + this.lastPageId;

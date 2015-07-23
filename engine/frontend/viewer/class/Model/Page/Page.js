@@ -2,20 +2,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Page(args) {
-    this.name         = args.data.name;
-    this.parent       = args.app;
-    this.data         = args.data;
-    this.app          = args.app;
-    this.key          = args.key;
-    this.newMode      = args.newMode === undefined ? false : args.newMode;
-    this.parentPage   = args.parentPage;
-    this.dataSources  = {};
-    this.forms        = {};
-    this.params       = (args.params !== undefined) ? args.params : {};
-    this.eventShow    = new QForms.Event(this);
-    this.eventHide    = new QForms.Event(this);
-    this.eventChanged = new QForms.Event(this);
-    this.eventUpdated = new QForms.Event(this);
+    this.data           = args.data;
+    this.name           = this.data.name;
+    this.parent         = args.app;
+    this.app            = args.app;
+    this.key            = args.key;
+    this.parentPageName = args.parentPageName;
+    this.newMode        = (args.newMode === undefined) ? false       : args.newMode;
+    this.params         = (args.params  !== undefined) ? args.params : {};
+    this.dataSources    = {};
+    this.forms          = {};
+    this.eventShow      = new QForms.Event(this);
+    this.eventHide      = new QForms.Event(this);
+    this.eventChanged   = new QForms.Event(this);
+    this.eventUpdated   = new QForms.Event(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,9 +59,11 @@ Page.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.initParams = function() {
     // params defined during data source filling on the server
-    if (this.data.params !== undefined) for (var name in this.data.params) this.params[name] = this.data.params[name];
-    // to make possible refer to parent page params
-    if (this.parentPage !== undefined) for (var name in this.parentPage.params) this.params[name] = this.parentPage.params[name];
+    if (this.data.params !== undefined) {
+        for (var name in this.data.params) {
+            this.params[name] = this.data.params[name];
+        }
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,9 +112,9 @@ Page.prototype.setKey = function(key) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.openPage = function(params) {
-    params.parentPage = this;
-    this.app.openPage(params);
+Page.prototype.openPage = function(args) {
+    args.parentPage = this;
+    this.app.openPage(args);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

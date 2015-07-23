@@ -109,6 +109,6 @@ Form.prototype.executeAction = function(action, args) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.openPage = function(params) {
-    this.page.openPage(params);
+Form.prototype.openPage = function(args) {
+    this.page.openPage(args);
 };
