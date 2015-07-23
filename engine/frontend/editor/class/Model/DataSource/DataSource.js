@@ -178,12 +178,17 @@ DataSource.prototype.getView = function(view, callback) {
         controller: 'DataSource',
         action    : 'getView',
         params    : {
-            pageFileName: (this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined,
-            form        : (this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined,
-            dataSource  : (this instanceof DataSource) ? this.data['@attributes'].name                          : undefined,
+            dataSource  : (this instanceof DataSource) ? this.data['@attributes'].name : undefined,
             view        : view
         }
     };
+    if (this.parent instanceof Page) {
+        args.params.pageFileName = (this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined;
+    }
+    if (this.parent instanceof Form) {
+        args.params.pageFileName = (this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined;
+        args.params.form         = (this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined;
+    }
     QForms.doHttpRequest(this, args, function(data) {
         callback(data);
     });
@@ -196,12 +201,17 @@ DataSource.prototype.saveController = function(text, callback) {
         controller: 'DataSource',
         action    : 'saveController',
         params    : {
-            pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
-            form        : this.parent.data['@attributes'].name,
             dataSource  : this.data['@attributes'].name,
             text        : text
         }
     };
+    if (this.parent instanceof Page) {
+        args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
+    }
+    if (this.parent instanceof Form) {
+        args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
+        args.params.form         = this.parent.data['@attributes'].name;
+    }
     QForms.doHttpRequest(this, args, function(data) {
         if (callback) {
             callback();

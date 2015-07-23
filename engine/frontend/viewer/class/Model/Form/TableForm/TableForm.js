@@ -59,6 +59,9 @@ TableForm.prototype.delete = function(key) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableForm.prototype.edit = function(key) {
     //console.log('TableForm.prototype.edit');
+    if (!this.data.itemEditPage) {
+        throw new Error
+    }
     this.openPage({
         name: this.data.itemEditPage,
         key : key
