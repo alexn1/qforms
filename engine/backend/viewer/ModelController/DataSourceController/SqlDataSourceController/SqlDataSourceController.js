@@ -49,7 +49,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype._query = function(query, params, callback, select) {
+SqlDataSourceController.prototype.query = function(query, params, callback, select) {
     select = (select !== undefined) ? select : true;
     console.log({dsName: this.name, query: query, params: params});
     this.getPool().getConnection(function(err, cnn) {
@@ -98,7 +98,7 @@ SqlDataSourceController.prototype._desc = function(callback) {
     var self = this;
     this.desc = {};
     var query = 'desc `{table}`'.replace('{table}',this.data['@attributes'].table);
-    this._query(query, null, function(rows) {
+    this.query(query, null, function(rows) {
         rows.forEach(function(info) {
             self.desc[info.Field] = info;
             if (info.Extra === 'auto_increment') {
@@ -111,18 +111,18 @@ SqlDataSourceController.prototype._desc = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.select = function(context, callback) {
-    var query  = this._replaceThis(context, this.data['@attributes'].query);
+    var query  = this.replaceThis(context, this.data['@attributes'].query);
     var params = this.getParams(context);
-    this._query(query, params, function(rows) {
+    this.query(query, params, function(rows) {
         callback(rows);
     }, true);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.selectCount = function(context, callback) {
-    var query  = this._replaceThis(context, this.data['@attributes'].countQuery);
+    var query  = this.replaceThis(context, this.data['@attributes'].countQuery);
     var params = this.getParams(context);
-    this._query(query, params, function(rows) {
+    this.query(query, params, function(rows) {
         var row = rows[0];
         var count = row[Object.keys(row)[0]];
         callback(count);
@@ -147,7 +147,7 @@ SqlDataSourceController.prototype.update = function(context, callback) {
             .set(values)
             .where(self.getRowKeyValues(row))
             .toString();
-        self._query(query, null, callback, false);
+        self.query(query, null, callback, false);
     };
     if (!this.desc) {
         this._desc(updateRow);
@@ -171,7 +171,7 @@ SqlDataSourceController.prototype.insert = function(context, callback) {
         var query = new sqlish.Sqlish()
             .insert(self.data['@attributes'].table, row)
             .toString();
-        self._query(query,  null, function(result) {
+        self.query(query,  null, function(result) {
             var key = JSON.stringify([result.insertId]);
             callback(key);
         }, false);
@@ -190,7 +190,7 @@ SqlDataSourceController.prototype.delete = function(context, callback) {
         .deleteFrom(this.data['@attributes'].table)
         .where(this.getRowKeyValues(row))
         .toString();
-    this._query(query, null, callback, false);
+    this.query(query, null, callback, false);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

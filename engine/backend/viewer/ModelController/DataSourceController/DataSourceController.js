@@ -191,7 +191,7 @@ DataSourceController.prototype.getFullName = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype._replaceThis = function(context, query) {
+DataSourceController.prototype.replaceThis = function(context, query) {
     // for form data sources only
     if (this.form) {
         var self = this;
