@@ -76,7 +76,7 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
             break;
         case 'TableForm':
             view.firstElementChild.value = value;
-            if (value !== '' && value !== null) {
+            if (value) {
                 var key = JSON.stringify([value]);
                 var row = this.dataSource.getRow(key);
                 if (row) {

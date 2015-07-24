@@ -144,6 +144,7 @@ DataSource.prototype.splitKey = function(key) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.update = function(callback) {
+    var page = this.getPage();
     if (this.data.table === '') {
         return;
     }
@@ -154,11 +155,12 @@ DataSource.prototype.update = function(callback) {
         return;
     }
     var params = {
-        action: 'update',
-        page  : this.form.page.name,
-        form  : this.form.name,
-        ds    : this.name,
-        row   : this.updateRow
+        action        : 'update',
+        page          : this.form.page.name,
+        form          : this.form.name,
+        ds            : this.name,
+        row           : this.updateRow,
+        parentPageName: page ? page.parentPageName : undefined
     };
     QForms.doHttpRequest(this, params, function(data) {
         this.updateRow = null;
@@ -242,10 +244,11 @@ DataSource.prototype._getData = function(params, callback) {
     }
     var args = {
         action: 'frame',
-        page  : (page !== null ? page.name : ''),
-        form  : (form !== null ? form.name : ''),
-        ds    : this.name,
-        params: _params
+        page          : (page !== null ? page.name : ''),
+        form          : (form !== null ? form.name : ''),
+        ds            : this.name,
+        params        : _params,
+        parentPageName: page ? page.parentPageName : undefined
     };
     QForms.doHttpRequest(this, args, function(data) {
         callback(data);
@@ -501,15 +504,17 @@ DataSource.prototype.fireComeRow = function(parentKey, key, oldParentKey, newInd
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.insert = function(row, callback) {
+    var page = this.getPage();
     if (this.data.table === '') {
         return;
     }
     var args = {
-        action: 'insert',
-        page  : this.form.page.name,
-        form  : this.form.name,
-        ds    : this.name,
-        row   : row
+        action        : 'insert',
+        page          : this.form.page.name,
+        form          : this.form.name,
+        ds            : this.name,
+        row           : row,
+        parentPageName: page ? page.parentPageName : undefined
     };
     QForms.doHttpRequest(this, args, function(data) {
         // this code is actual only in new mode for row form
@@ -545,6 +550,7 @@ DataSource.prototype.insert = function(row, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.delete = function(key) {
+    var page = this.getPage();
     if (this.data.table === '') {
         return;
     }
@@ -555,11 +561,12 @@ DataSource.prototype.delete = function(key) {
         return;
     }
     var args = {
-        action: '_delete',
-        page  : this.form.page.name,
-        form  : this.form.name,
-        ds    : this.name,
-        row   : this.rowsByKey[key]
+        action        : '_delete',
+        page          : this.form.page.name,
+        form          : this.form.name,
+        ds            : this.name,
+        row           : this.rowsByKey[key],
+        parentPageName: page ? page.parentPageName : undefined
     };
     QForms.doHttpRequest(this, args, function(data) {
         var ea = new QForms.EventArg(this);

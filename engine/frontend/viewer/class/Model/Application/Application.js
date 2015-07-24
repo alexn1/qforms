@@ -58,10 +58,12 @@ Application.prototype.getTable = function(fullTableName) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.openPage = function(args) {
-    var name       = args.name;
-    var newMode    = (args.newMode === undefined) ? false : args.newMode;
-    var key        = args.key;
-    var parentPage = args.parentPage;
+    var name            = args.name;
+    var newMode         = (args.newMode === undefined) ? false : args.newMode;
+    var key             = args.key;
+    var parentPage      = args.parentPage;
+    var parentPageName  = parentPage ? parentPage.name : undefined;
+
     var params     = (params === undefined) ? {} : params;
     //console.log('open ' + name + ' with key: ' + key);
     if (key !== undefined) {
@@ -80,10 +82,11 @@ Application.prototype.openPage = function(args) {
     } else {
         // если страницы нет, то создаём
         var args = {
-            action : 'page',
-            page   : name,
-            newMode: newMode,
-            params : params
+            action        : 'page',
+            page          : name,
+            newMode       : newMode,
+            parentPageName: parentPageName,
+            params        : params
         };
         QForms.doHttpRequest(this, args, function(response) {
             this.lastPageId++;
@@ -98,9 +101,8 @@ Application.prototype.openPage = function(args) {
                 data          : response.data,
                 key           : key,
                 newMode       : newMode,
-                parentPage    : parentPage,
                 params        : params,
-                parentPageName: parentPage ? parentPage.name : undefined
+                parentPageName: parentPageName
             });
             page.init();
             page.id = 'p' + this.lastPageId;

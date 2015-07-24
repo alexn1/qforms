@@ -191,7 +191,7 @@ DataSourceController.prototype.getFullName = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype._replaceThis = function(query) {
+DataSourceController.prototype._replaceThis = function(context, query) {
     // for form data sources only
     if (this.form) {
         var self = this;
@@ -200,6 +200,9 @@ DataSourceController.prototype._replaceThis = function(query) {
                 var arr = name.split('.');
                 if (arr[0] === 'this') {
                     arr[0] = self.form.page.name;
+                }
+                if (arr[0] === 'parent' && context.parentPageName) {
+                    arr[0] = context.parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
             } else {

@@ -199,9 +199,10 @@ function index(req, res, next, application) {
 function page(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
-        params   : req.body.params,
-        newMode  : req.body.newMode,
-        querytime: {params: {}}
+        params        : req.body.params,
+        newMode       : req.body.newMode,
+        parentPageName: req.body.parentPageName,
+        querytime     : {params: {}}
     };
     if (req.session.user && req.session.user[route]) {
         context.querytime.params['username'] = req.session.user[route].name;
@@ -219,9 +220,10 @@ function page(req, res, next, application) {
 function update(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
-        params   : {},
-        row      : req.body.row,
-        querytime: {params: {}}
+        params        : {},
+        row           : req.body.row,
+        parentPageName: req.body.parentPageName,
+        querytime     : {params: {}}
     };
     if (req.session.user && req.session.user[route]) {
         context.querytime.params['username'] = req.session.user[route].name;
@@ -237,8 +239,9 @@ function update(req, res, next, application) {
 function frame(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
-        params   : req.body.params,
-        querytime: {params: {}}
+        parentPageName: req.body.parentPageName,
+        params        : req.body.params,
+        querytime     : {params: {}}
     };
     if (req.session.user && req.session.user[route]) {
         context.querytime.params['username'] = req.session.user[route].name;
@@ -267,9 +270,10 @@ function frame(req, res, next, application) {
 function insert(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
-        row      : req.body.row,
-        params   : {},
-        querytime: {params: {}}
+        row           : req.body.row,
+        parentPageName: req.body.parentPageName,
+        params        : {},
+        querytime     : {params: {}}
     };
     if (req.session.user && req.session.user[route]) {
         context.querytime.params['username'] = req.session.user[route].name;
@@ -287,9 +291,10 @@ function insert(req, res, next, application) {
 function _delete(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
-        row      : req.body.row,
-        params   : {},
-        querytime: {params : {}}
+        row           : req.body.row,
+        parentPageName: req.body.parentPageName,
+        params        : {},
+        querytime     : {params : {}}
     };
     if (req.session.user && req.session.user[route]) {
         context.querytime.params['username'] = req.session.user[route].name;
