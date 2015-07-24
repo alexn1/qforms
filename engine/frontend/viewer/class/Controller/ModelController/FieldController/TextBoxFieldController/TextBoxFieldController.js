@@ -16,6 +16,11 @@ TextBoxFieldController.prototype.fill = function(row, view) {
         $(view).children().change(function() {
             self.onChange(this);
         });
+        if (this.model.data.notNull === 'true') {
+            view.firstElementChild.placeholder = '-- {fillValue} --'.template({
+                fillValue: this.model.form.page.app.data.text.field.fillValue
+            });
+        }
     }
 };
 

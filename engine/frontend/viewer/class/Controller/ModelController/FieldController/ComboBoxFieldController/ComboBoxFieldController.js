@@ -68,7 +68,11 @@ ComboBoxFieldController.prototype.getValue = function (view) {
 ComboBoxFieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
         case 'RowForm':
-            view.firstElementChild.value = value;
+            if (value === null) {
+                view.firstElementChild.selectedIndex = 0;
+            } else {
+                view.firstElementChild.value = value;
+            }
             break;
         case 'TableForm':
             view.firstElementChild.value = value;
@@ -88,7 +92,6 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype._fillSelectOptions = function(view) {
     var nullOption = document.createElement('option');
-    nullOption.selected = true;
     if (this.model.data.notNull === 'true') {
         nullOption.innerHTML = '-- {selectValue} --'.template({
             selectValue: this.model.form.page.app.data.text.field.selectValue
