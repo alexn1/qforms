@@ -57,6 +57,20 @@ TableForm.prototype.new = function() {
                 });
             });
             break;
+        case 'oneclick createform':
+            if (!this.data.itemCreatePage) {
+                throw new Error('[' + this.getFullName() + '] itemCreatePage is empty.');
+            }
+            var row = {};
+            this.defaultValuesToRow(row);
+            var self = this;
+            this.dataSource.insert(row, function(key) {
+                self.openPage({
+                    name: self.data.itemCreatePage,
+                    key : key
+                });
+            });
+            break;
     }
 };
 

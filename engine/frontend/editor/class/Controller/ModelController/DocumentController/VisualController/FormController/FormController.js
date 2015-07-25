@@ -185,7 +185,7 @@ FormController.prototype.getPropList = function() {
     var list = this.model.data['@attributes'];
     var options = {};
     options['editMethod'] = ['disabled', 'table', 'form'];
-    options['newRowMode'] = ['disabled', 'oneclick', 'editform', 'createform', 'oneclick editform'];
+    options['newRowMode'] = ['disabled', 'oneclick', 'editform', 'createform', 'oneclick editform', 'oneclick createform'];
     options['deleteRowMode'] = ['disabled', 'enabled'];
     return {list:list, options:options};
 };
