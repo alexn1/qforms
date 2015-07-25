@@ -99,7 +99,7 @@ function handle(req, res, next, application) {
                     'insert',
                     'frame',
                     '_delete',
-                    '_call',
+                    'rpc',
                     'logout'
                 ];
 
@@ -307,7 +307,7 @@ function _delete(req, res, next, application) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function _call(req, res, next, application) {
+function rpc(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = {
         params   : req.body.params,
@@ -319,6 +319,6 @@ function _call(req, res, next, application) {
         context.querytime.params['username'] = req.session.user[route].name;
     }
     application.getPage(context, req.body.page, function(page) {
-        page._call(context);
+        page.rpc(context);
     });
 };

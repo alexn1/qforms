@@ -5,9 +5,10 @@ module.exports = PageController;
 var util          = require('util');
 var path          = require('path');
 var fs            = require('fs');
-var child_process = require('child_process');
 var xml           = require('xml');
 var async         = require('async');
+var child_process = require('child_process');
+var stream        = require('stream');
 
 var helper           = require('../../../common/helper');
 var qforms           = require('../../../qforms');
@@ -49,7 +50,7 @@ PageController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype._call = function(context) {
+PageController.prototype.rpc = function(context) {
     context.res.json({
         result: 'ok'
     });
