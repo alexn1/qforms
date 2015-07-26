@@ -59,7 +59,10 @@ ApplicationController.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.onPageOpened = function(e) {
     var page = e.page;
-    var html = QForms.render(page.data.view, {model:page});
+    var html = QForms.render(page.data.view, {
+        model  : page,
+        newMode: e.newMode
+    });
     var view = $(html).get(0);
     var tab = this.appTC.createTab(view);
     $(tab).children('span').get(0).className = '{id}_caption'.replace('{id}', view.id);

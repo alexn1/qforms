@@ -108,9 +108,10 @@ Application.prototype.openPage = function(args) {
             page.id = 'p' + this.lastPageId;
             // сообщаем подписчикам (view), что открыта страница
             var ea = new QForms.EventArg(this);
-            ea.page   = page;
-            ea.track  = parentPage !== undefined;
-            ea.select = true;
+            ea.page    = page;
+            ea.track   = parentPage !== undefined;
+            ea.select  = true;
+            ea.newMode = newMode;
             this.eventPageOpened.fire(ea);
         });
     }

@@ -5,9 +5,14 @@
         <!-- buttons -->
         <% if (model.isThereARowFormWithDefaultDs()) { %>
             <div class="buttons flex-min">
-                <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.saveAndClose%></button>
-                <button class="btn btn-default btn-sm save"><%=model.app.data.text.page.save%></button>
-                <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.close%></button>
+                <% if (newMode) { %>
+                    <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.create%></button>
+                    <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.cancel%></button>
+                <%} else {%>
+                    <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.saveAndClose%></button>
+                    <button class="btn btn-default btn-sm save"><%=model.app.data.text.page.save%></button>
+                    <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.close%></button>
+                <%}%>
             </div>
             <div class="splitter flex-min">&nbsp;</div>
         <%}%>
