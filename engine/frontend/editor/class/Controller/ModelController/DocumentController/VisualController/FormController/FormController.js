@@ -182,12 +182,28 @@ FormController.prototype.actionNewControl = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getPropList = function() {
-    var list = this.model.data['@attributes'];
-    var options = {};
-    options['editMethod'] = ['disabled', 'table', 'form'];
-    options['newRowMode'] = ['disabled', 'oneclick', 'editform', 'createform', 'oneclick editform', 'oneclick createform'];
-    options['deleteRowMode'] = ['disabled', 'enabled'];
-    return {list:list, options:options};
+    return {
+        list   : this.model.data['@attributes'],
+        options: {
+            editMethod: [
+                'disabled',
+                'table',
+                'form'
+            ],
+            newRowMode: [
+                'disabled',
+                'oneclick',
+                'editform',
+                'createform',
+                'oneclick editform',
+                'oneclick createform'
+            ],
+            deleteRowMode: [
+                'disabled',
+                'enabled'
+            ]
+        }
+    };
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -203,7 +219,7 @@ FormController.prototype.setProperty = function(name, value) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.getCaption = function(data) {
     var caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
-        .replace('{name}', data['@attributes'].name)
+        .replace('{name}' , data['@attributes'].name)
         .replace('{class}', data['@class']);
     return caption;
 };
