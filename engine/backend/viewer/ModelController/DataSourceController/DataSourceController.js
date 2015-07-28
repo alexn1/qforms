@@ -14,6 +14,11 @@ var RowFormController     = require('../FormController/RowFormController/RowForm
 util.inherits(DataSourceController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.create = function(data, parent, callback) {
+    callback(new DataSourceController(data, parent));
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSourceController(data, parent) {
     DataSourceController.super_.call(this, data, parent);
     this.application      = parent instanceof ApplicationController ? parent : null;
@@ -21,11 +26,6 @@ function DataSourceController(data, parent) {
     this.form             = parent instanceof FormController        ? parent : null;
     this.keyColumns       = [];
     this.parentKeyColumns = [];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.create = function(data, parent, callback) {
-    callback(new DataSourceController(data, parent));
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

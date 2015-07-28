@@ -8,6 +8,7 @@ var _     = require('underscore');
 var async = require('async');
 
 var app                               = require('../../qforms');
+var DatabaseController                = require('./DatabaseController/DatabaseController');
 var PageLinkController                = require('./PageLinkController/PageLinkController');
 var PageController                    = require('./PageController/PageController');
 var TableFormController               = require('./FormController/TableFormController/TableFormController');
@@ -90,7 +91,6 @@ ModelController.prototype._fillCollections = function(response, context, callbac
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.createCollection = function(colName, callback) {
     var self = this;
-    this[colName] = {};
     var tasks = _.map(this.data[colName], function(itemData, itemName) {
         return function(next) {
             var _callback = function(obj) {

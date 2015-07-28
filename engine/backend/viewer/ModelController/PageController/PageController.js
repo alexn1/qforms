@@ -29,6 +29,8 @@ function PageController(data, parent) {
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     this.createCollections  = ['dataSources', 'forms'];
     this.fillCollections    = ['dataSources', 'forms'];
+    this.dataSources        = {};
+    this.forms              = {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

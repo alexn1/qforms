@@ -7,7 +7,6 @@ var path          = require('path');
 var fs            = require('fs');
 var _             = require('underscore');
 var async         = require('async');
-var mysql         = require('mysql');
 var child_process = require('child_process');
 var xml           = require('xml');
 
@@ -36,12 +35,14 @@ function ApplicationController(data, appInfo) {
         'ApplicationView.ejs'
     );
     this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
-    this.createCollections  = ['dataSources'];
+    this.createCollections  = ['databases', 'dataSources'];
     this.fillCollections    = ['dataSources'];
     this.pages              = {};
     this.css                = [];
     this.pools              = {};
     this.text               = text[this.data['@attributes'].lang || 'en'];
+    this.databases          = {};
+    this.dataSources        = {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,40 +234,6 @@ ApplicationController.prototype.fill = function(context, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.getPool = function(database) {
-    if (!this.pools[database]) {
-        //console.log('creating connection pool for: ' + database);
-        this.pools[database] = mysql.createPool({
-            host        : this.data.databases[database].params.host['@attributes'].value,
-            user        : this.data.databases[database].params.user['@attributes'].value,
-            database    : this.data.databases[database].params.database['@attributes'].value,
-            password    : this.data.databases[database].params.password['@attributes'].value,
-            queryFormat : helper.queryFormat
-        });
-    }
-    //console.log('mysql pool connections count: ' + this.pools[database]._allConnections.length);
-    return this.pools[database];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.query = function(query, params, callback) {
-    this.getPool('default').getConnection(function(err, cnn) {
-        if (err) {
-            throw err;
-        } else {
-            cnn.query({sql: query, typeCast: helper.typeCast}, params, function(err, result) {
-                cnn.release();
-                if (err) {
-                    throw err;
-                } else {
-                    callback(result);
-                }
-            });
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.authenticate = function(username, password, callback) {
     callback(username === this.data['@attributes'].user && password === this.data['@attributes'].password);
 };
@@ -275,7 +242,6 @@ ApplicationController.prototype.authenticate = function(username, password, call
 ApplicationController.prototype.authentication = function() {
     return this.data['@attributes'].authentication === 'true';
 };
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.getUsers = function(callback) {

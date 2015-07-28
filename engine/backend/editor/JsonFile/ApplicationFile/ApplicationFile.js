@@ -8,6 +8,7 @@ var fs   = require('fs');
 
 var JsonFile            = require('../JsonFile');
 var Helper              = require('../../../common/helper');
+var DataSourceEditor    = require('../../Editor/DataSourceEditor/DataSourceEditor');
 var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(ApplicationFile, JsonFile);
@@ -160,6 +161,9 @@ ApplicationFile.prototype.newDataSource = function(params) {
     }
     var data;
     switch (_class) {
+        case 'DataSource':
+            data = DataSourceEditor.create(params);
+            break;
         case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;

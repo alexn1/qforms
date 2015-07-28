@@ -15,6 +15,7 @@ var LabelFieldEditor        = require('../../Editor/FieldEditor/LabelFieldEditor
 var LinkFieldEditor         = require('../../Editor/FieldEditor/LinkFieldEditor/LinkFieldEditor');
 var TextAreaFieldEditor     = require('../../Editor/FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor      = require('../../Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
+var DataSourceEditor        = require('../../Editor/DataSourceEditor/DataSourceEditor');
 var SqlDataSourceEditor     = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(PageFile, JsonFile);
@@ -242,6 +243,9 @@ PageFile.prototype.newDataSource = function(params) {
     }
     var data;
     switch (_class) {
+        case 'DataSource':
+            data = DataSourceEditor.create(params);
+            break;
         case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;
@@ -264,6 +268,9 @@ PageFile.prototype.newFormDataSource = function(params) {
     }
     var data;
     switch (_class) {
+        case 'DataSource':
+            data = DataSourceEditor.create(params);
+            break;
         case 'SqlDataSource':
             data = SqlDataSourceEditor.create(params);
             break;

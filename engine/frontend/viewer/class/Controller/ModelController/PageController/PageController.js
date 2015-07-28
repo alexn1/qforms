@@ -36,16 +36,29 @@ PageController.create = function(model, view, parent) {
 PageController.prototype.init = function() {
     var self = this;
     this.captionEls = this.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}', this.model.id));
-    $(this.view).find('#{pageId}_TabWidget'.replace('{pageId}', this.model.id)).each(function() {new TabWidget(this).init();});
-    $(this.view).find('button.save').click(function() {self.onSaveClick(this);});
-    $(this.view).find('button.saveAndClose').click(function() {self.onSaveAndCloseClick(this);});
-    $(this.view).find('button.closePage').click(function() {self.onClosePageClick(this);});
+    $(this.view).find('#{pageId}_TabWidget'.replace('{pageId}', this.model.id)).each(function() {
+        new TabWidget(this).init();
+    });
+    $(this.view).find('button.save').click(function() {
+        self.onSaveClick(this);
+    });
+    $(this.view).find('button.saveAndClose').click(function() {
+        self.onSaveAndCloseClick(this);
+    });
+    $(this.view).find('button.closePage').click(function() {
+        self.onClosePageClick(this);
+    });
     this.model.eventChanged.subscribe(this, 'onPageChanged');
     this.model.eventUpdated.subscribe(this, 'onPageUpdated');
-    for (var formName in this.model.forms) {
-        var view = this.view.querySelector('#{pageId}_{formName}'.replace('{pageId}', this.model.id).replace('{formName}', formName));
-        this.forms[formName] = FormController.create(this.model.forms[formName], view, this);
-        this.forms[formName].init();
+    for (var name in this.model.forms) {
+        var form = this.model.forms[name];
+        var viewId = '#{pageId}_{name}'.template({
+            pageId: this.model.id,
+            name  : name
+        });
+        var view = $(this.view).find(viewId).get(0);
+        this.forms[name] = FormController.create(form, view, this);
+        this.forms[name].init();
     }
 };
 

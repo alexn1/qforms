@@ -50,47 +50,8 @@ SqlDataSourceController.create = function(data, parent, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.query = function(query, params, callback, select) {
-    select = (select !== undefined) ? select : true;
     console.log({dsName: this.name, query: query, params: params});
-    this.getPool().getConnection(function(err, cnn) {
-        if (err) {
-            throw err;
-        } else {
-            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: true}, params, function(err, result, fields) {
-                cnn.release();
-                if (err) {
-                    throw err;
-                } else {
-                    if (select) {
-                        // for dublicate column names
-                        var fieldCount = {};
-                        for (var j = 0; j < fields.length; j++) {
-                            var f = fields[j];
-                            if (!fieldCount[f.name]) {
-                                fieldCount[f.name] = 0;
-                            }
-                            fieldCount[f.name]++;
-                            f.numb = fieldCount[f.name] - 1;
-                        }
-                        var rows = [];
-                        for (var i = 0; i < result.length; i++) {
-                            var r = result[i];
-                            var row = {};
-                            for (var j=0; j < fields.length; j++) {
-                                var f = fields[j];
-                                var column = f.name + (f.numb > 0 ? f.numb : '');
-                                row[column] = r[f.table][f.name];
-                            }
-                            rows.push(row);
-                        }
-                        callback(rows);
-                    } else {
-                        callback(result);
-                    }
-                }
-            });
-        }
-    });
+    this.getApp().databases[this.data['@attributes'].database].query(query, params, callback, select);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +94,6 @@ SqlDataSourceController.prototype.selectCount = function(context, callback) {
 SqlDataSourceController.prototype.update = function(context, callback) {
     var row = context.row;
     var self = this;
-
     var updateRow = function() {
         var values = {};
         for (var column in row) {
@@ -191,9 +151,4 @@ SqlDataSourceController.prototype.delete = function(context, callback) {
         .where(this.getRowKeyValues(row))
         .toString();
     this.query(query, null, callback, false);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceController.prototype.getPool = function() {
-    return this.getApp().getPool(this.data['@attributes'].database);
 };

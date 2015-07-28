@@ -20,6 +20,9 @@ function FormController(data, parent) {
     this.customViewFilePath = path.join(this.dirPath,        this.name + '.ejs');
     this.createCollections  = ['dataSources', 'fields', 'controls'];
     this.fillCollections    = ['dataSources', 'fields', 'controls'];
+    this.dataSources        = {};
+    this.fields             = {};
+    this.controls           = {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
