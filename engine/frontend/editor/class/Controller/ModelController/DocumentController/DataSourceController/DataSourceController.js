@@ -314,3 +314,11 @@ DataSourceController.prototype.btnCreateController_Click = function() {
         self.showCustomController();
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.getCaption = function(data) {
+    var caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
+        .replace('{name}' , data['@attributes'].name)
+        .replace('{class}', data['@class']);
+    return caption;
+};

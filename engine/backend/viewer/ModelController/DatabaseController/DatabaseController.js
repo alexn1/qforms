@@ -22,6 +22,15 @@ function DatabaseController(data, parent) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseController.prototype.deinit = function(callback) {
+    if (this.pool !== null) {
+        this.pool.end(callback);
+    } else {
+        callback();
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype._getPool = function() {
     if (this.pool === null) {
         //console.log('creating connection pool for: ' + database);

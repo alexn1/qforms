@@ -39,7 +39,6 @@ function ApplicationController(data, appInfo) {
     this.fillCollections    = ['dataSources'];
     this.pages              = {};
     this.css                = [];
-    this.pools              = {};
     this.text               = text[this.data['@attributes'].lang || 'en'];
     this.databases          = {};
     this.dataSources        = {};
@@ -122,9 +121,8 @@ ApplicationController.prototype.init = function(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.deinit = function(callback) {
     console.log('deinit: ' + this.name);
-    var pools = _.map(this.pools, function(pool) {return pool;});
-    async.eachSeries(pools, function(pool, next) {
-        pool.end(next);
+    async.eachSeries(this.databases, function(database, next) {
+        database.deinit(next);
     }, callback);
 };
 

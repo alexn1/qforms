@@ -3,8 +3,10 @@
 module.exports = DataSourceController;
 
 var util = require('util');
+var path = require('path');
 var _    = require('underscore');
 
+var helper                = require('../../../common/helper');
 var ModelController       = require('../ModelController');
 var ApplicationController = require('../ApplicationController/ApplicationController');
 var PageController        = require('../PageController/PageController');
@@ -15,7 +17,29 @@ util.inherits(DataSourceController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.create = function(data, parent, callback) {
-    callback(new DataSourceController(data, parent));
+    if (parent instanceof FormController) {
+        var form = parent;
+        var customClassFilePath = path.join(
+            form.page.application.dirPath,
+            'pages',
+            form.page.name,
+            'forms',
+            form.name,
+            'dataSources',
+            data['@attributes'].name,
+            data['@attributes'].name + '.backend.js'
+        );
+        helper.getFileContent(customClassFilePath, function(content) {
+            if (content) {
+                var customClass = eval(content);
+                callback(new customClass(data, parent));
+            } else {
+                callback(new SqlDataSourceController(data, parent));
+            }
+        });
+    } else {
+        callback(new DataSourceController(data, parent));
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
