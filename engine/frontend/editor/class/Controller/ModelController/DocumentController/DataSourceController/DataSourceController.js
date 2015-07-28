@@ -162,8 +162,11 @@ DataSourceController.prototype.getPropList = function() {
 DataSourceController.prototype.createTab = function(docs) {
     var self = this;
     var name = this.model.getFullName();
-    this.model.getView('QueryView.html', function(result) {
-        self.$view        = $(result.view);
+    this.model.getView('QueryView.ejs', function(result) {
+        var html = QForms.render(result.view, {
+            model: self.model
+        });
+        self.$view        = $(html);
         self.data         = result.data;
         self.cmQuery      = null;
         self.cmCountQuery = null;
@@ -201,8 +204,10 @@ DataSourceController.prototype.createTab = function(docs) {
         });
 
         // properties
-        self.$view.find('.wndQuery').css('display', 'block');
-        self.initCmQuery();
+        if (self.model.data['@class'] === 'SqlDataSource') {
+            self.$view.find('.wndQuery').css('display', 'block');
+            self.initCmQuery();
+        }
 
         if (self.data.backendJs) {
             self.showCustomController();

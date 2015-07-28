@@ -23,6 +23,8 @@
                         "database": "default",
                         "table": "employee",
                         "query": "select id,first_name,last_name from `employee` where id = {key}",
+                        "limit": "",
+                        "countQuery": "",
                         "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
                     },

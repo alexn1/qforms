@@ -18,6 +18,7 @@ var LinkFieldEditor          = require('../FieldEditor/LinkFieldEditor/LinkField
 var TextAreaFieldEditor      = require('../FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor       = require('../FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
 var ButtonControlEditor      = require('../ControlEditor/ButtonControlEditor/ButtonControlEditor');
+var DataSourceEditor         = require('../DataSourceEditor/DataSourceEditor');
 var SqlDataSourceEditor      = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(FormEditor, Editor);

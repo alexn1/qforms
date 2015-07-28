@@ -197,7 +197,7 @@ DataSourceEditorController.prototype.getView = function(params, callback) {
     var self = this;
     DataSourceEditorController.super_.prototype.getView.call(this, params, function(result) {
         switch (params.view) {
-            case 'QueryView.html':
+            case 'QueryView.ejs':
                 self.getDataSourceEditor(params, function(dataSourceEditor) {
                     dataSourceEditor.getCustomFile('backend.js', function(backendJs) {
                         result.data.backendJs = backendJs;

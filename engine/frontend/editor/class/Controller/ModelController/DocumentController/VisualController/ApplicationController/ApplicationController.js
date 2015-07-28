@@ -207,5 +207,6 @@ ApplicationController.prototype.newDatabaseAction = function() {
 ApplicationController.prototype.getPropList = function() {
     var propList = ApplicationController.super_.prototype.getPropList.call(this);
     propList.options['authentication'] = ['true', 'false'];
+    propList.options['lang']           = ['en', 'ru'];
     return propList;
 };

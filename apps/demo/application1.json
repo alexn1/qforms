@@ -6,7 +6,8 @@
         "caption": "application1",
         "authentication": "false",
         "user": "admin",
-        "password": "admin"
+        "password": "admin",
+        "lang": "en"
     },
     "databases": {
         "default": {
