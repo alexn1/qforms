@@ -91,7 +91,8 @@ function handle(req, res, next, application) {
             login(req, res, next, application);
         } else {
             if (application.authentication() && !(req.session.user && req.session.user[route])) {
-                throw new Error('not authenticated');
+                res.status(500);
+                res.end('not authenticated');
             } else {
                 var actions = [
                     'page',
@@ -102,7 +103,6 @@ function handle(req, res, next, application) {
                     'rpc',
                     'logout'
                 ];
-
                 if (actions.indexOf(req.body.action) !== -1) {
                     eval('{action}(req, res, next, application)'.replace('{action}', req.body.action));
                 } else {
@@ -268,7 +268,7 @@ function frame(req, res, next, application) {
 function insert(req, res, next, application) {
     var context = createContext(req, {
         row           : req.body.row,
-        parentPageName: req.body.parentPageName,
+        parentPageName: req.body.parentPageName
     });
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
