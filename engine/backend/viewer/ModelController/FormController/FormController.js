@@ -57,6 +57,12 @@ FormController.prototype._getSurrogateDataSourceResponse = function() {
         class               : 'DataSource',
         database            : '',
         table               : '',
+        access              : {
+            select: true,
+            insert: true,
+            update: true,
+            delete: true
+        },
         keyColumns          : ['id'],
         dumpFirstRowToParams: 'false',
         rows                : [row]

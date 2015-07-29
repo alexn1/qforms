@@ -47,39 +47,21 @@ DatabaseController.prototype._getPool = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.query = function(query, params, callback, select) {
-    select = (select !== undefined) ? select : true;
+DatabaseController.prototype.query = function(query, params, callback, nested) {
+    nested = (nested !== undefined) ? nested : true;
+    var self = this;
     this._getPool().getConnection(function(err, cnn) {
         if (err) {
             throw err;
         } else {
-            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: true}, params, function(err, result, fields) {
+            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nested}, params, function(err, result, fields) {
                 cnn.release();
                 if (err) {
                     throw err;
                 } else {
-                    if (select) {
+                    if (nested) {
                         // for dublicate column names
-                        var fieldCount = {};
-                        for (var j = 0; j < fields.length; j++) {
-                            var f = fields[j];
-                            if (!fieldCount[f.name]) {
-                                fieldCount[f.name] = 0;
-                            }
-                            fieldCount[f.name]++;
-                            f.numb = fieldCount[f.name] - 1;
-                        }
-                        var rows = [];
-                        for (var i = 0; i < result.length; i++) {
-                            var r = result[i];
-                            var row = {};
-                            for (var j=0; j < fields.length; j++) {
-                                var f = fields[j];
-                                var column = f.name + (f.numb > 0 ? f.numb : '');
-                                row[column] = r[f.table][f.name];
-                            }
-                            rows.push(row);
-                        }
+                        var rows = self._getRows(result, fields);
                         callback(rows);
                     } else {
                         callback(result);
@@ -88,4 +70,29 @@ DatabaseController.prototype.query = function(query, params, callback, select) {
             });
         }
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseController.prototype._getRows = function(result, fields) {
+    var fieldCount = {};
+    for (var j = 0; j < fields.length; j++) {
+        var f = fields[j];
+        if (!fieldCount[f.name]) {
+            fieldCount[f.name] = 0;
+        }
+        fieldCount[f.name]++;
+        f.numb = fieldCount[f.name] - 1;
+    }
+    var rows = [];
+    for (var i = 0; i < result.length; i++) {
+        var r = result[i];
+        var row = {};
+        for (var j=0; j < fields.length; j++) {
+            var f = fields[j];
+            var column = f.name + (f.numb > 0 ? f.numb : '');
+            row[column] = r[f.table][f.name];
+        }
+        rows.push(row);
+    }
+    return rows;
 };
