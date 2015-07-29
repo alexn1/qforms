@@ -170,16 +170,30 @@ function logout(req, res, next, application) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function index(req, res, next, application) {
+function createContext(req, context) {
+    if (context === undefined) {
+        context = {};
+    }
+    if (context.params === undefined) {
+        context.params = {};
+    }
+    if (context.querytime === undefined) {
+        context.querytime = {};
+    }
+    if (context.querytime.params === undefined) {
+        context.querytime.params = {};
+    }
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
-        params   : {},
-        querytime: {params: {}}
-    };
     if (req.session.user && req.session.user[route]) {
         context.user = req.session.user[route];
     }
-    application.fill(context, function(data) {
+    return context;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function index(req, res, next, application) {
+    var context = createContext(req);
+    application.fill(context, function(response) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -190,23 +204,18 @@ function index(req, res, next, application) {
             viewerClassJs : req.app.get('viewerClassJs'),
             links         : application.css,
             caption       : application.data['@attributes'].caption,
-            data          : data
+            data          : response
         });
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
+    var context = createContext(req, {
         params        : req.body.params,
         newMode       : req.body.newMode,
-        parentPageName: req.body.parentPageName,
-        querytime     : {params: {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+        parentPageName: req.body.parentPageName
+    });
     application.getPage(context, req.body.page, function(page) {
         page.fill(context, function(data) {
             res.json({
@@ -218,16 +227,10 @@ function page(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
-        params        : {},
+    var context = createContext(req, {
         row           : req.body.row,
-        parentPageName: req.body.parentPageName,
-        querytime     : {params: {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+        parentPageName: req.body.parentPageName
+    });
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].update(context, function() {
             res.json(null);
@@ -237,15 +240,10 @@ function update(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
+    var context = createContext(req, {
         parentPageName: req.body.parentPageName,
-        params        : req.body.params,
-        querytime     : {params: {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+        params        : req.body.params
+    });
     var getDataSource = function(callback) {
         if (req.body.page) {
             application.getPage(context, req.body.page, function(page) {
@@ -268,16 +266,10 @@ function frame(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
+    var context = createContext(req, {
         row           : req.body.row,
         parentPageName: req.body.parentPageName,
-        params        : {},
-        querytime     : {params: {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+    });
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
             res.json({
@@ -289,16 +281,10 @@ function insert(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
+    var context = createContext(req, {
         row           : req.body.row,
-        parentPageName: req.body.parentPageName,
-        params        : {},
-        querytime     : {params : {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+        parentPageName: req.body.parentPageName
+    });
     application.getPage(context, req.body.page, function(page) {
         page.forms[req.body.form].dataSources[req.body.ds].delete(context, function() {
             res.json(null);
@@ -308,16 +294,11 @@ function _delete(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function rpc(req, res, next, application) {
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = {
+    var context = createContext(req, {
         params   : req.body.params,
         req      : req,
-        res      : res,
-        querytime: {params: {}}
-    };
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
+        res      : res
+    });
     application.getPage(context, req.body.page, function(page) {
         page.rpc(context);
     });
