@@ -93,7 +93,9 @@ Application.prototype.openPage = function(args) {
             // to make possible refer to parent page params
             if (parentPage !== undefined) {
                 for (var name in parentPage.params) {
-                    params[name] = parentPage.params[name];
+                    if (keyParams[name] === undefined) {
+                        params[name] = parentPage.params[name];
+                    }
                 }
             }
             var page = new Page({

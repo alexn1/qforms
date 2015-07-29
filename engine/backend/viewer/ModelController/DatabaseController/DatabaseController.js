@@ -82,18 +82,6 @@ DatabaseController.prototype.query = function(context, query, params, callback, 
             }
         });
     });
-
-
-
-    /*
-    this._getPool().getConnection(function(err, cnn) {
-        if (err) {
-            throw err;
-        } else {
-
-        }
-    });
-    */
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
