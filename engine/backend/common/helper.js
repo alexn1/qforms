@@ -102,7 +102,7 @@ function getAppInfo(appFilePath, callback) {
                     dirPath     : path.resolve(path.dirname(appFilePath))
                 });
             } else {
-                throw new Error('not application');
+                callback(null);
             }
         }
     });
