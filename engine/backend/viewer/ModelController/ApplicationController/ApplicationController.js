@@ -230,7 +230,7 @@ ApplicationController.prototype.fill = function(context, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.authenticate = function(username, password, callback) {
+ApplicationController.prototype.authenticate = function(context, username, password, callback) {
     callback(username === this.data['@attributes'].user && password === this.data['@attributes'].password);
 };
 
@@ -240,6 +240,6 @@ ApplicationController.prototype.authentication = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.prototype.getUsers = function(callback) {
+ApplicationController.prototype.getUsers = function(context, callback) {
     callback(null);
 };

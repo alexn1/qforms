@@ -47,29 +47,53 @@ DatabaseController.prototype._getPool = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.query = function(query, params, callback, nest) {
+DatabaseController.prototype.getConnection = function(context, callback) {
+    var self = this;
+    if (context.connections[self.name] === undefined) {
+        self._getPool().getConnection(function(err, cnn) {
+            if (err) {
+                throw err;
+            } else {
+                context.connections[self.name] = cnn;
+                callback(context.connections[self.name]);
+            }
+        });
+    } else {
+        callback(context.connections[self.name]);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseController.prototype.query = function(context, query, params, callback, nest) {
     nest = (nest !== undefined) ? nest : true;
     var self = this;
+    this.getConnection(context, function(cnn) {
+        cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
+            if (err) {
+                throw err;
+            } else {
+                if (nest) {
+                    // for dublicate column names
+                    var rows = self._getRows(result, fields);
+                    callback(rows);
+                } else {
+                    callback(result);
+                }
+            }
+        });
+    });
+
+
+
+    /*
     this._getPool().getConnection(function(err, cnn) {
         if (err) {
             throw err;
         } else {
-            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
-                cnn.release();
-                if (err) {
-                    throw err;
-                } else {
-                    if (nest) {
-                        // for dublicate column names
-                        var rows = self._getRows(result, fields);
-                        callback(rows);
-                    } else {
-                        callback(result);
-                    }
-                }
-            });
+
         }
     });
+    */
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

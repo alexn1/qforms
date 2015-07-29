@@ -116,8 +116,10 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
+    var context = createContext(req);
     if (req.method === 'GET') {
-        application.getUsers(function(users) {
+        application.getUsers(context, function(users) {
+            destroyContext(context);
             res.render('viewer/login', {
                 version       : req.app.get('version'),
                 application   : application,
@@ -131,19 +133,23 @@ function login(req, res, next, application) {
         });
     }
     if (req.method === 'POST') {
-        application.authenticate(req.body.username, req.body.password, function(authenticate, user) {
+        application.authenticate(context, req.body.username, req.body.password, function(authenticate, user) {
             if (authenticate) {
-                if (!req.session.user) {
+                if (req.session.user === undefined) {
                     req.session.user = {};
                 }
                 if (user) {
                     req.session.user[route] = user;
                 } else {
-                    req.session.user[route] = {name: req.body.username};
+                    req.session.user[route] = {
+                        name: req.body.username
+                    };
                 }
+                destroyContext(context);
                 res.redirect(req.url);
             } else {
-                application.getUsers(function(users) {
+                application.getUsers(context, function(users) {
+                    destroyContext(context);
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
                         application   : application,
@@ -187,13 +193,25 @@ function createContext(req, context) {
     if (req.session.user && req.session.user[route]) {
         context.user = req.session.user[route];
     }
+    if (context.connections === undefined) {
+        context.connections = {};
+    }
     return context;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function destroyContext(context) {
+    for (var name in context.connections) {
+        console.log('release: ' + name);
+        context.connections[name].release();
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
     var context = createContext(req);
     application.fill(context, function(response) {
+        destroyContext(context);
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -218,6 +236,7 @@ function page(req, res, next, application) {
     });
     application.getPage(context, req.body.page, function(page) {
         page.fill(context, function(data) {
+            destroyContext(context);
             res.json({
                 data: data
             });
@@ -232,8 +251,28 @@ function update(req, res, next, application) {
         parentPageName: req.body.parentPageName
     });
     application.getPage(context, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].update(context, function() {
-            res.json(null);
+        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+        dataSource.database.getConnection(context, function(cnn) {
+            cnn.beginTransaction(function(err) {
+                if (err) {
+                    throw err;
+                }
+                try {
+                    dataSource.update(context, function() {
+                        cnn.commit(function(err) {
+                            if (err) {
+                                throw err;
+                            }
+                            destroyContext(context);
+                            res.json(null);
+                        });
+                    });
+                } catch(err) {
+                    cnn.rollback(function() {
+                        throw err;
+                    });
+                }
+            });
         });
     });
 };
@@ -259,6 +298,7 @@ function frame(req, res, next, application) {
     };
     getDataSource(function(dataSource) {
         dataSource.frame(context, function(response) {
+            destroyContext(context);
             res.json(response);
         });
     });
@@ -271,9 +311,29 @@ function insert(req, res, next, application) {
         parentPageName: req.body.parentPageName
     });
     application.getPage(context, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].insert(context, function(key) {
-            res.json({
-                key: key
+        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+        dataSource.database.getConnection(context, function(cnn) {
+            cnn.beginTransaction(function(err) {
+                if (err) {
+                    throw err;
+                }
+                try {
+                    dataSource.insert(context, function(key) {
+                        cnn.commit(function() {
+                            if (err) {
+                                throw err;
+                            }
+                            destroyContext(context);
+                            res.json({
+                                key: key
+                            });
+                        });
+                    });
+                } catch(err) {
+                    cnn.rollback(function() {
+                        throw err;
+                    });
+                }
             });
         });
     });
@@ -286,8 +346,28 @@ function _delete(req, res, next, application) {
         parentPageName: req.body.parentPageName
     });
     application.getPage(context, req.body.page, function(page) {
-        page.forms[req.body.form].dataSources[req.body.ds].delete(context, function() {
-            res.json(null);
+        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+        dataSource.database.getConnection(context, function(cnn) {
+            cnn.beginTransaction(function(err) {
+                if (err) {
+                    throw err;
+                }
+                try {
+                    dataSource.delete(context, function() {
+                        cnn.commit(function(err) {
+                            if (err) {
+                                throw err;
+                            }
+                            destroyContext(context);
+                            res.json(null);
+                        });
+                    });
+                } catch (err) {
+                    cnn.rollback(function() {
+                        throw err;
+                    });
+                }
+            });
         });
     });
 };
