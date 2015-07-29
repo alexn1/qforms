@@ -28,4 +28,10 @@ function <%=page%><%=form%><%=dataSource%>Controller() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+<%=page%><%=form%><%=dataSource%>Controller.prototype.getAccessToken = function(context) {
+    var access = <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.getAccessToken.call(this, context);
+    return access;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 <%=page%><%=form%><%=dataSource%>Controller;

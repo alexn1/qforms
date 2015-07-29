@@ -104,6 +104,7 @@ DataSourceController.prototype.fill = function(context, callback) {
         if (self.parentKeyColumns.length > 0) {
             response.parentKeyColumns = self.parentKeyColumns;
         }
+        response.access = self.getAccessToken(context);
         if (self.name === 'default' && context.newMode) {
             response.rows = [];
             callback(response);
@@ -246,4 +247,14 @@ DataSourceController.prototype.getParams = function(context) {
         _.extend(params, context.querytime.params);
     }
     return params;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.getAccessToken = function(context) {
+    return {
+        select: true,
+        insert: true,
+        update: true,
+        delete: true
+    };
 };

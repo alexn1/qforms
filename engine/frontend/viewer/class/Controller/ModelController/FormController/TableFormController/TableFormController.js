@@ -13,9 +13,7 @@ function TableFormController(model, view, parent) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.init = function() {
     TableFormController.super_.prototype.init.call(this);
-
     this.model.eventRefilled.subscribe(this, 'onRefilled');
-
     var self = this;
     $(this.view).find('button.new').click(function() {
         self.onNewClick(this);
@@ -23,7 +21,6 @@ TableFormController.prototype.init = function() {
     $(this.view).find('button.delete').click(function() {
         self.onDeleteClick(this);
     });
-
     $(this.view).find('button.next').click(function() {
         self.onNextClick(this);
     });
@@ -34,10 +31,6 @@ TableFormController.prototype.init = function() {
     this.$goto.change(function() {
         self.onGotoChange(this);
     });
-
-
-
-
     var gridSelector = '#{pageId}_{formName}_GridWidget'.template({
         pageId  : this.model.page.id,
         formName: this.model.name
@@ -136,7 +129,9 @@ TableFormController.prototype.onGridCellDblClick = function(ea) {
     var key = bodyCell.bodyRow.qKey;
     switch (this.model.data.editMethod) {
         case 'table':
-            this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
+            if (this.model.dataSource.data.access.update === true) {
+                this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
+            }
         break;
         case 'form':
             this.model.edit(key);

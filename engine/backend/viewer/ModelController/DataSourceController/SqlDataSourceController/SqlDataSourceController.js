@@ -19,6 +19,7 @@ function SqlDataSourceController(data, parent) {
     SqlDataSourceController.super_.call(this, data, parent);
     this.desc        = null;
     this.aiFieldName = null;
+    this.database    = this.getApp().databases[this.data['@attributes'].database];
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.query = function(query, params, callback, select) {
     console.log({dsName: this.name, query: query, params: params});
-    this.getApp().databases[this.data['@attributes'].database].query(query, params, callback, select);
+    this.database.query(query, params, callback, select);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +73,12 @@ SqlDataSourceController.prototype._desc = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.select = function(context, callback) {
+    var access = this.getAccessToken(context);
+    if (access.select === false) {
+        throw new Error('[{fullName}]: access denied.'.template({
+            fullName: this.getFullName()
+        }));
+    }
     var query  = this.replaceThis(context, this.data['@attributes'].query);
     var params = this.getParams(context);
     this.query(query, params, function(rows) {
@@ -81,6 +88,12 @@ SqlDataSourceController.prototype.select = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.selectCount = function(context, callback) {
+    var access = this.getAccessToken(context);
+    if (access.select === false) {
+        throw new Error('[{fullName}]: access denied.'.template({
+            fullName: this.getFullName()
+        }));
+    }
     var query  = this.replaceThis(context, this.data['@attributes'].countQuery);
     var params = this.getParams(context);
     this.query(query, params, function(rows) {
@@ -92,6 +105,12 @@ SqlDataSourceController.prototype.selectCount = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.update = function(context, callback) {
+    var access = this.getAccessToken(context);
+    if (access.update === false) {
+        throw new Error('[{fullName}]: access denied.'.template({
+            fullName: this.getFullName()
+        }));
+    }
     var row = context.row;
     var self = this;
     var updateRow = function() {
@@ -118,6 +137,12 @@ SqlDataSourceController.prototype.update = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.insert = function(context, callback) {
+    var access = this.getAccessToken(context);
+    if (access.insert === false) {
+        throw new Error('[{fullName}]: access denied.'.template({
+            fullName: this.getFullName()
+        }));
+    }
     var row = context.row;
     var self = this;
     var insertRow = function() {
@@ -145,6 +170,12 @@ SqlDataSourceController.prototype.insert = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.delete = function(context, callback) {
+    var access = this.getAccessToken(context);
+    if (access.delete === false) {
+        throw new Error('[{fullName}]: access denied.'.template({
+            fullName: this.getFullName()
+        }));
+    }
     var row = context.row;
     var query = new sqlish.Sqlish()
         .deleteFrom(this.data['@attributes'].table)

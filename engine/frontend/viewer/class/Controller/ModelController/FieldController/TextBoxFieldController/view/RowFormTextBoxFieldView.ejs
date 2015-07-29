@@ -1,4 +1,4 @@
-<% var _readOnly = (model.data.readOnly === "true") ? "readonly" : ""; %>
+<% var _readOnly = (model.data.readOnly === 'true' || (!newMode && model.form.dataSource.data.access.update === false)) ? 'readonly' : ''; %>
 <div class="RowFormTextBoxFieldView <%=model.form.page.id%>_<%=model.form.name%>_<%=model.name%>">
     <input style="text-align:<%=model.data.align%>" <%=_readOnly%>>
 </div>
