@@ -246,6 +246,9 @@ DataSourceController.prototype.getParams = function(context) {
     if (context.querytime) {
         _.extend(params, context.querytime.params);
     }
+    if (context.user) {
+        params['username'] = context.user.name;
+    }
     return params;
 };
 
