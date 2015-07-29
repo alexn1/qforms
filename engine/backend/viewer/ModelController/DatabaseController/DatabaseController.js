@@ -47,19 +47,19 @@ DatabaseController.prototype._getPool = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.query = function(query, params, callback, nested) {
-    nested = (nested !== undefined) ? nested : true;
+DatabaseController.prototype.query = function(query, params, callback, nest) {
+    nest = (nest !== undefined) ? nest : true;
     var self = this;
     this._getPool().getConnection(function(err, cnn) {
         if (err) {
             throw err;
         } else {
-            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nested}, params, function(err, result, fields) {
+            cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
                 cnn.release();
                 if (err) {
                     throw err;
                 } else {
-                    if (nested) {
+                    if (nest) {
                         // for dublicate column names
                         var rows = self._getRows(result, fields);
                         callback(rows);
