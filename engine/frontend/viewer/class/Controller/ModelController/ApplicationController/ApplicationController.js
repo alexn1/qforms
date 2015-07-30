@@ -4,7 +4,7 @@ QForms.inherit(ApplicationController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationController(model, view) {
-    ModelController.call(this, model);
+    ApplicationController.super_.call(this, model);
     this.view  = view;
     this.appTC = null;
 };
@@ -31,6 +31,8 @@ ApplicationController.create = function(model, view) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.init = function() {
+    var self = this;
+
     // appTC
     this.appTC = new TabWidget(this.view.querySelector('#appTC'));
     this.appTC.init();
@@ -42,6 +44,23 @@ ApplicationController.prototype.init = function() {
     this.model.eventPageClosed.subscribe(this, 'onPageClosed');
     this.model.eventPageSelected.subscribe(this, 'onPageSelected');
     this.model.eventLogout.subscribe(this, 'onLogout');
+
+    // menu
+    for (var name in self.model.data.menu) {
+        var menu = self.model.data.menu[name];
+        menu.forEach(function(submenu) {
+            $(self.view).find('#' + self.model.data.name + '-' + submenu.page).click(function() {
+                self.model.openPage({
+                    name: submenu.page
+                });
+            });
+        });
+    }
+
+    // logout
+    $(this.view).find('#menu-logout').click(function() {
+        self.model.logout();
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

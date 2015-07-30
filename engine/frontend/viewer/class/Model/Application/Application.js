@@ -108,7 +108,7 @@ Application.prototype.openPage = function(args) {
             });
             page.init();
             page.id = 'p' + this.lastPageId;
-            // сообщаем подписчикам (view), что открыта страница
+            // notify subscribers (controller), that page has been opened
             var ea = new QForms.EventArg(this);
             ea.page    = page;
             ea.track   = parentPage !== undefined;
