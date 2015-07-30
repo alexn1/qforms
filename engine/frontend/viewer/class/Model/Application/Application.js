@@ -63,11 +63,11 @@ Application.prototype.openPage = function(args) {
     var key             = args.key;
     var parentPage      = args.parentPage;
     var parentPageName  = parentPage ? parentPage.name : undefined;
-
-    var params     = (params === undefined) ? {} : params;
+    var keyParams       = {};
+    var params          = (params === undefined) ? {} : params;
     //console.log('open ' + name + ' with key: ' + key);
     if (key !== undefined) {
-        var keyParams = QForms.keyToParams(key);
+        keyParams = QForms.keyToParams(key);
         for (var keyName in keyParams) {
             params[keyName] = keyParams[keyName];
         }

@@ -36,9 +36,9 @@ CheckBoxFieldController.prototype.onChange = function (el) {
         this.model.save(view.dbRow, this.getValue(view));
         // event
         var ea = new QForms.EventArg(this);
-        ea.view = view;
-        ea.row = view.dbRow;
-        ea.el = el;
+        ea.view  = view;
+        ea.row   = view.dbRow;
+        ea.el    = el;
         ea.field = this;
         this.eventChange.fire(ea);
     }
