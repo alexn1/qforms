@@ -23,21 +23,6 @@
         $(document).ready(function() {
             QForms();
             new HomeController().init();
-            $('#btnRun').click(function() {
-                if ($('#lbApp').val()) {
-                    window.location.href = "/view/{app}".replace("{app}",$('#lbApp').val());
-                }
-            });
-            $('#lbApp').dblclick(function() {
-                if ($('#lbApp').val()) {
-                    window.location.href = "/view/{app}".replace("{app}",$('#lbApp').val());
-                }
-            });
-            $('#btnEdit').click(function() {
-                if ($('#lbApp').val()) {
-                    window.location.href = "/edit/{app}".replace("{app}",$('#lbApp').val());
-                }
-            });
         });
     </script>
 </head>

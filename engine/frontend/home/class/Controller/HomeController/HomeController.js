@@ -6,7 +6,40 @@ function HomeController() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HomeController.prototype.init = function() {
+    var self = this;
+    $('#btnRun').click(function() {
+        self.btnRun_Click();
+    });
+    $('#lbApp').dblclick(function() {
+        self.lbApp_dblclick();
+    });
+    $('#btnEdit').click(function() {
+        self.btnEdit_Click();
+    });
+    $('#btnCreate').click(function() {
+        self.btnCreate_Click();
+    });
+};
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+HomeController.prototype.lbApp_dblclick = function() {
+    if ($('#lbApp').val()) {
+        window.location.href = "/view/{app}".replace("{app}",$('#lbApp').val());
+    }
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+HomeController.prototype.btnRun_Click = function() {
+    if ($('#lbApp').val()) {
+        window.location.href = "/view/{app}".replace("{app}",$('#lbApp').val());
+    }
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+HomeController.prototype.btnEdit_Click = function() {
+    if ($('#lbApp').val()) {
+        window.location.href = "/edit/{app}".replace("{app}",$('#lbApp').val());
+    }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
