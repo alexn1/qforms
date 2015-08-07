@@ -15,6 +15,9 @@ TableFormController.prototype.init = function() {
     TableFormController.super_.prototype.init.call(this);
     this.model.eventRefilled.subscribe(this, 'onRefilled');
     var self = this;
+    $(this.view).find('button.refresh').click(function() {
+        self.onRefreshClick(this);
+    });
     $(this.view).find('button.new').click(function() {
         self.onNewClick(this);
     });
@@ -87,6 +90,11 @@ TableFormController.prototype.onRefilled = function(ea) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onNewClick = function(ctrl) {
     this.model.new();
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TableFormController.prototype.onRefreshClick = function(ctrl) {
+    this.model.refresh();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

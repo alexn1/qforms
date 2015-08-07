@@ -6,6 +6,7 @@
         <% if (model.dataSource.data.access.delete === true && model.data.deleteRowMode !== 'disabled') {%>
             <button class="btn btn-default btn-xs delete"><%=model.page.app.data.text.form.delete%></button>
         <% } %>
+        <button class="btn btn-default btn-xs refresh"><%=model.page.app.data.text.form.refresh%></button>
     </div>
     <div id="<%=model.page.id%>_<%=model.name%>_GridWidget" class="GridWidget flex-max">
         <div class="head">

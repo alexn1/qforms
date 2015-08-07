@@ -1,6 +1,6 @@
 'use strict';
 
-var http       = require('http')
+var http       = require('http');
 var express    = require('express');
 var config     = require('config');
 var path       = require('path');
@@ -29,8 +29,8 @@ qforms.set('handleException', helper.getParams().handleException || 'true');
 qforms.set('view engine'    , 'ejs');
 qforms.set('views'          , './routes');
 qforms.set('public'         , '../frontend');
-qforms.set('runtime'         , '../runtime');
-qforms.set('temp'         , '../runtime/temp');
+qforms.set('runtime'        , '../runtime');
+qforms.set('temp'           , '../runtime/temp');
 qforms.set('applications'   , {});
 qforms.set('commonStyleCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/style', 'css'));
 qforms.set('commonClassCss' , helper.getFilePathsSync(path.join(qforms.get('public')), 'common/class', 'css'));

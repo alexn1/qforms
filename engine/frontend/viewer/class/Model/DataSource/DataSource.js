@@ -172,7 +172,16 @@ DataSource.prototype.update = function(callback) {
 DataSource.prototype.onTableUpdated = function(ea) {
     //console.log('DataSource.prototype.onTableUpdated');
     var self = this;
-    this.refresh(function() {
+    this._refresh(function() {
+        // data source has been updated
+        self.eventUpdated.fire(new QForms.EventArg(self));
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSource.prototype.refresh = function() {
+    var self = this;
+    this._refresh(function() {
         // data source has been updated
         self.eventUpdated.fire(new QForms.EventArg(self));
     });
@@ -183,7 +192,7 @@ DataSource.prototype.onTableInsert = function(ea) {
     //console.log('DataSource.prototype.onTableInsert');
     //console.log(ea.key);
     var self = this;
-    this.refresh(function() {
+    this._refresh(function() {
         if (self.rowsByKey[ea.key]) {
             var _ea = new QForms.EventArg(this);
             _ea.key = ea.key;
@@ -195,7 +204,7 @@ DataSource.prototype.onTableInsert = function(ea) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.onTableDelete = function(ea) {
     var self = this;
-    this.refresh(function() {
+    this._refresh(function() {
 
     });
 };
@@ -214,7 +223,7 @@ DataSource.prototype.refill = function(params, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refresh = function(callback) {
+DataSource.prototype._refresh = function(callback) {
     var page = this.getPage();
     var params = (page !== null) ? page.params : {};
     var self = this;

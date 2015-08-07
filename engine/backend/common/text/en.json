@@ -17,6 +17,7 @@
         "close": "Close"
     },
     "form": {
+        "refresh": "Refresh",
         "new": "New",
         "delete": "Delete",
         "areYouSure": "Are you sure?",
