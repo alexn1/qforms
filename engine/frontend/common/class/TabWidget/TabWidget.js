@@ -39,7 +39,7 @@ TabWidget.prototype.init = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// добавляет таб по существующему элементу
+// add tab based on existing element
 TabWidget.prototype.initTab = function(li) {
     var self = this;
     $(li).mousedown(function() {

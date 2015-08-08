@@ -120,7 +120,7 @@ GridWidget.prototype.createBodyCell = function(name) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.onBodyCellMouseDown = function(bodyCell) {
-    // если кликнули по выделенной, то ничего не делаем
+    // if clicked on selected, then do nothing
     if (this.selectedBodyCell && this.selectedBodyCell === bodyCell) {
         return;
     }

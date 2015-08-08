@@ -12,7 +12,7 @@ VisualController.prototype.createTab = function(docs) {
     var name = this.model.getFullName('_');
     var caption = this.model.getFullName('/');
     var self = this;
-    // берём с сервера всё необходимое для отображаения окна редактирования
+    // get from server all needed to display edit window
     this.model.getView('VisualView.html', function(result) {
         self.$view          = $(result.view);
         self.$view.attr('id', name);

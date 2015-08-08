@@ -80,7 +80,7 @@ Application.prototype.openPage = function(args) {
         ea.page = page;
         this.eventPageSelected.fire(ea);
     } else {
-        // если страницы нет, то создаём
+        // if page doesn't exist, create it
         var args = {
             action        : 'page',
             page          : name,

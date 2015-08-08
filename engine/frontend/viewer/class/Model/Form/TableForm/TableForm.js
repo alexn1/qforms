@@ -8,7 +8,7 @@ function TableForm(name, page, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// табличная форма обновляется сразу после модификации ячейки таблицы
+// table form updated immediately after cell modification
 TableForm.prototype.onDataSourceChanged = function(eventArgs) {
     var dataSource = eventArgs.object;
     if (dataSource.name !== 'default') {

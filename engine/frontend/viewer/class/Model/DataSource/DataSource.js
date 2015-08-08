@@ -368,7 +368,7 @@ DataSource.prototype.sync = function(_old, _new, parentKey) {
                 this.sync(_old, _new, oKey);// for the child rows
                 this.fireRefillRow(oKey, i);
                 i++;
-            } else { // если ключи не равны, то
+            } else { // if keys not equal then
                 if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
                     if (!(oKey in _new.rowsByKey)) {  // if the old key in a new global list does not exists, then the row is removed
                         this.sync(_old, _new, oKey);
