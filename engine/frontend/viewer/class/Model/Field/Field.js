@@ -45,7 +45,7 @@ Field.prototype.templateValue = function(value) {
         if (params.hasOwnProperty(name)) {
             return params[name];
         } else {
-            return text;
+            return null;
         }
     });
 };
