@@ -74,44 +74,65 @@ DatePickerFieldController.prototype.onChange = function (el) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldController.prototype.setValue = function (value, view) {
-    var date = '';
+    var text = value;
     if (value) {
         if (this.model.form.page.app.data.lang === 'ru') {
             var arr = value.split('-');
-            date = [arr[2], arr[1], arr[0]].join('.');
+            text = [arr[2], arr[1], arr[0]].join('.');
         } else {
-            date = value;
+            text = value;
         }
     }
     switch (this.model.form.data.class) {
         case 'RowForm':
-            view.firstElementChild.value = date;
+            view.firstElementChild.value = text;
             break;
         case 'TableForm':
-            view.firstElementChild.innerHTML = date;
+            view.firstElementChild.innerHTML = text;
             break;
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldController.prototype.getValue = function (view) {
+    var text;
     switch (this.model.form.data.class) {
         case 'RowForm':
-            if (view.firstElementChild.value) {
-                var value;
-                if (this.model.form.page.app.data.lang === 'ru') {
-                    var arr = view.firstElementChild.value.split('.');
-                    value = [arr[2], arr[1], arr[0]].join('-');
-                } else {
-                    value = view.firstElementChild.value;
-                }
-                return value;
-            } else {
-                return null;
-            }
+            text = view.firstElementChild.value;
             break;
         case 'TableForm':
-            return view.firstElementChild.innerHTML;
+            text = view.firstElementChild.innerHTML;
             break;
     }
+    if (text) {
+        var value;
+        if (this.model.form.page.app.data.lang === 'ru') {
+            var arr = text.split('.');
+            value = [arr[2], arr[1], arr[0]].join('-');
+        } else {
+            value = text;
+        }
+        return value;
+    } else {
+        return null;
+    }
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatePickerFieldController.prototype.beginEdit = function(view) {
+    view.firstElementChild.style.MozUserSelect = 'text';
+    view.firstElementChild.contentEditable = true;
+    var range = document.createRange();
+    range.selectNodeContents(view.firstElementChild);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    view.firstElementChild.focus();
+    return true;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatePickerFieldController.prototype.endEdit = function(view) {
+    view.firstElementChild.style.MozUserSelect = 'none';
+    view.firstElementChild.contentEditable = false;
 };
