@@ -7,6 +7,10 @@ var util = require('util');
 var JsonFile = require('../JsonFile');
 var Helper   = require('../../../common/helper');
 
+
+var RowFormEditor           = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
+var TableFormEditor         = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
+var TreeFormEditor          = require('../../Editor/FormEditor/TreeFormEditor/TreeFormEditor');
 var CheckBoxFieldEditor     = require('../../Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
 var ComboBoxFieldEditor     = require('../../Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
 var DatePickerFieldEditor   = require('../../Editor/FieldEditor/DatePickerFieldEditor/DatePickerFieldEditor');
@@ -116,46 +120,13 @@ PageFile.prototype.newForm = function(params) {
     var data;
     switch (_class) {
         case 'TableForm':
-            data = {
-                '@class'        : 'TableForm',
-                '@attributes'   : {
-                    name              : name,
-                    caption           : params.caption ? params.caption : name,
-                    editMethod        : 'disabled',
-                    itemEditPage      : '',
-                    itemCreatePage    : '',
-                    newRowMode        : 'disabled',
-                    deleteRowMode     : 'disabled'
-                },
-                dataSources   : {},
-                fields        : {},
-                controls      : {}
-            };
+            data = TableFormEditor.createData(params);
             break;
         case 'RowForm':
-            data = {
-                '@class':'RowForm',
-                '@attributes': {
-                    'name':name,
-                    'caption':params.caption ? params.caption : name
-                },
-                'dataSources' : {},
-                'fields' : {},
-                'controls' : {}
-            };
+            data = RowFormEditor.createData(params);
             break;
         case 'TreeForm':
-            data = {
-                '@class':'TreeForm',
-                '@attributes': {
-                    'name':name,
-                    'caption':(params.caption) && params.caption ? params.caption : name,
-                    'itemEditPage':''
-                },
-                'dataSources' : {},
-                'fields' : {},
-                'controls' : {}
-            };
+            data = TreeFormEditor.createData(params);
             break;
     }
     return this.data.forms[name] = data;

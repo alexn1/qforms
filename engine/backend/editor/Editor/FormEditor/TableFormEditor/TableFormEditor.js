@@ -22,3 +22,23 @@ function TableFormEditor(pageEditor, name, data) {
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.css'
     );
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+TableFormEditor.createData = function(params) {
+    return {
+        '@class'        : 'TableForm',
+        '@attributes'   : {
+            name              : params.name,
+            caption           : params.caption ? params.caption : params.name,
+            editMethod        : 'disabled',
+            itemEditPage      : '',
+            itemCreatePage    : '',
+            newRowMode        : 'disabled',
+            deleteRowMode     : 'disabled',
+            refreshButton     : 'false'
+        },
+        dataSources   : {},
+        fields        : {},
+        controls      : {}
+    };
+};

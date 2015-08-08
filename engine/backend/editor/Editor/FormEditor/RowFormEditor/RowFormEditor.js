@@ -22,3 +22,17 @@ function RowFormEditor(pageEditor, name, data) {
         'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
     );
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+RowFormEditor.createData = function(params) {
+    return {
+        '@class': 'RowForm',
+        '@attributes': {
+            'name'    :params.name,
+            'caption' :params.caption ? params.caption : params.name
+        },
+        'dataSources' : {},
+        'fields'      : {},
+        'controls'    : {}
+    };
+};

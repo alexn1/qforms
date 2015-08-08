@@ -201,6 +201,10 @@ FormController.prototype.getPropList = function() {
             deleteRowMode: [
                 'disabled',
                 'enabled'
+            ],
+            refreshButton: [
+                'true',
+                'false'
             ]
         }
     };

@@ -22,3 +22,18 @@ function TreeFormEditor(pageEditor, name, data) {
         'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.css'
     );
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+TreeFormEditor.createData = function(params) {
+    return {
+        '@class':'TreeForm',
+        '@attributes': {
+            'name'        : params.name,
+            'caption'     : (params.caption) && params.caption ? params.caption : params.name,
+            'itemEditPage': ''
+        },
+        'dataSources' : {},
+        'fields'      : {},
+        'controls'    : {}
+    };
+};
