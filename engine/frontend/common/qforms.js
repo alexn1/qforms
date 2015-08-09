@@ -29,18 +29,20 @@ QForms.errorHandler = function(errorMsg) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.doHttpRequest = function(self, params, callback) {
-    var request = new XMLHttpRequest();
-    request.open('POST', window.location.href);
-    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-            if (request.status !== 200) {
-                throw new Error(request.statusText + ', ' + request.responseText);
-            }
-            callback.call(self, JSON.parse(request.responseText));
+    $.ajax({
+        url        : window.location.href,
+        type       : 'POST',
+        data       : JSON.stringify(params),
+        cache      : false,
+        processData: false,
+        contentType: 'application/json; charset=UTF-8',
+        success: function(data, textStatus, jqXHR) {
+            callback.call(self, data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            throw new Error(jqXHR.statusText + ', ' + jqXHR.responseText);
         }
-    };
-    request.send(JSON.stringify(params));
+    });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
