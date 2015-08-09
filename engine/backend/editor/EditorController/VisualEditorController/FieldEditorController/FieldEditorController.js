@@ -8,7 +8,6 @@ var fs   = require('fs');
 
 var qforms                 = require('../../../../qforms');
 var VisualEditorController = require('../VisualEditorController');
-var ApplicationFile        = require('../../../JsonFile/ApplicationFile/ApplicationFile');
 
 util.inherits(FieldEditorController, VisualEditorController);
 
@@ -26,10 +25,17 @@ FieldEditorController.prototype._new = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
+            var fieldData = formEditor.newField(params);
+            pageEditor.save(function() {
+                callback(fieldData);
+            });
+
+            /*
             formEditor.createField(params, function(fieldEditor) {
                 var fieldData = fieldEditor.getData();
                 callback(fieldData);
             });
+            */
         });
     });
 };

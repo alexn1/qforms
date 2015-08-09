@@ -11,8 +11,7 @@ var helper              = require('../../../common/helper');
 var Editor              = require('../Editor');
 var PageEditor          = require('../PageEditor/PageEditor');
 var PageLinkEditor      = require('../PageLinkEditor/PageLinkEditor');
-var ApplicationFile     = require('../../JsonFile/ApplicationFile/ApplicationFile');
-var PageFile            = require('../../JsonFile/PageFile/PageFile');
+var JsonFile            = require('../../JsonFile/JsonFile');
 var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 util.inherits(ApplicationEditor, Editor);
@@ -36,8 +35,9 @@ ApplicationEditor.createData = function(params) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function ApplicationEditor(appFile) {
+function ApplicationEditor(appFile, appInfo) {
     this.appFile            = appFile;
+    this.appInfo            = appInfo;
     this.data               = appFile.getData();
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
@@ -53,7 +53,7 @@ function ApplicationEditor(appFile) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage = function(params, callback) {
     var self           = this;
-    var pagesDirPath   = path.join(this.appFile.appInfo.dirPath, 'pages');
+    var pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
     var pageDirPath    = path.join(pagesDirPath, params.name);
     var pageFilePath   = path.join(pageDirPath , params.name + '.json');
     var pageData       = PageEditor.createData(params);
@@ -75,9 +75,9 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
     };
     var createPageEditor = function(_callback) {
         createPageFile(function() {
-            self.appFile.newPageLink(params);
-            self.appFile.save(function() {
-                var pageFile = new PageFile(pageFilePath);
+            self.newPageLink(params);
+            self.save(function() {
+                var pageFile = new JsonFile(pageFilePath);
                 pageFile.init(function() {
                     _callback(new PageEditor(this, pageFile));
                 });
@@ -105,6 +105,11 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.save = function(callback) {
+    this.appFile.save(callback);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getPageLink = function(name) {
     return new PageLinkEditor(this, name);
 };
@@ -118,16 +123,16 @@ ApplicationEditor.prototype.setAttr = function(name, value, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.removePage = function(name, callback) {
     var self = this;
-    this.appFile.deletePage(name, function() {
-        self.appFile.save(callback);
+    this.deletePage(name, function() {
+        self.save(callback);
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getPageByFileName = function(relFilePath, callback) {
     var self         = this;
-    var pageFilePath = path.join(this.appFile.appInfo.dirPath, relFilePath);
-    var pageFile     = new PageFile(pageFilePath);
+    var pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
+    var pageFile     = new JsonFile(pageFilePath);
     pageFile.init(function() {
         callback(new PageEditor(self, pageFile));
     });
@@ -135,7 +140,7 @@ ApplicationEditor.prototype.getPageByFileName = function(relFilePath, callback) 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getPage = function(name, callback) {
-    var pageLinkData = this.appFile.getPageLinkData(name);
+    var pageLinkData = this.getPageLinkData(name);
     var relFilePath  = pageLinkData['@attributes'].fileName;
     this.getPageByFileName(relFilePath, callback);
 };
@@ -180,12 +185,12 @@ ApplicationEditor.prototype.createJs = function(params, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getCustomDirPath = function(callback) {
-    callback(this.appFile.appInfo.dirPath);
+    callback(this.appInfo.dirPath);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getCustomFilePath = function(ext, callback) {
-    callback(path.join(this.appFile.appInfo.dirPath, this.name + '.' + ext));
+    callback(path.join(this.appInfo.dirPath, this.name + '.' + ext));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,4 +207,178 @@ ApplicationEditor.prototype.movePageLinkUp = function(name) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.movePageLinkDown = function(name) {
     this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, name, 1);
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.setDatabaseAttr = function(database, name, value) {
+    this.data.databases[database]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.databases = helper.replaceKey(this.data.databases,
+            database,
+            value
+        );
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.setDatabaseParamAttr = function(database, param, name, value) {
+    this.data.databases[database].params[param]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.databases[database].params = helper.replaceKey(
+            this.data.databases[database].params,
+            param,
+            value
+        );
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.setPageLinkAttr = function(pageLink, name, value) {
+    this.data.pageLinks[pageLink]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.pageLinks = helper.replaceKey(this.data.pageLinks, pageLink, value);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.newDatabase = function(params) {
+    var name = params['name'];
+    if (!this.data.databases) {
+        this.data.databases = {};
+    }
+    if (this.data.databases[name]) {
+        throw new Error('Database {name} already exist.'.replace('{name}', name));
+    }
+    var data = {
+        '@class' : 'Database',
+        '@attributes' : {
+            'name' : name
+        }
+    };
+    return this.data.databases[name] = data;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.newDatabaseParam = function(params) {
+    var database = params['database'];
+    var name     = params['name'];
+    var value    = params['value'];
+
+    if (!this.data.databases[database].params) {
+        this.data.databases[database].params = {};
+    }
+    if (this.data.databases[database].params[name]) {
+        throw new Error('Param {name} already exist.'.replace('{name}', name));
+    }
+    return this.data.databases[database].params[name] = {
+        '@class' : 'Param',
+        '@attributes' : {
+            'name' : name,
+            'value' : value
+        }
+    };
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.newPageLink = function(params) {
+    var name    = params.name;
+    var menu    = params.menu;
+    var startup = params.startup;
+
+    if (!this.data.pageLinks) {
+        this.data.pageLinks = {};
+    }
+    if (this.data.pageLinks[name]) {
+        throw new Error('Page Link {name} already exist.'.replace('{name}', name));
+    }
+    return this.data.pageLinks[name] = {
+        '@class' : 'PageLink',
+        '@attributes' : {
+            'name' : name,
+            'fileName' : 'pages/{name}/{name}.json'.replace(/\{name\}/g, name),
+            'menu' : menu,
+            'startup' : startup
+        }
+    };
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.deleteDatabase = function(name) {
+    delete this.data.databases[name];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.deleteDatabaseParam = function($database, $param) {
+    delete this.data.databases[$database].params[$param];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.deletePage = function(name, callback) {
+    var self = this;
+    var pageFilePath = path.join(
+        this.appInfo.dirPath,
+        this.data.pageLinks[name]['@attributes'].fileName
+    );
+    fs.unlink(pageFilePath, function(err) {
+        if (err) {
+            throw err;
+        } else {
+            delete self.data.pageLinks[name];
+            callback();
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.getDatabaseData = function(database) {
+    return this.data.databases[database];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.getPageLinkData = function(name) {
+    return this.data.pageLinks[name];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.newDataSource = function(params) {
+    var name   = params['name'];
+    var _class = params['class'];
+    if (!this.data.dataSources) {
+        this.data.dataSources = {};
+    }
+    if (this.data.dataSources[name]) {
+        throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+    }
+    var data;
+    switch (_class) {
+        case 'DataSource':
+            data = DataSourceEditor.create(params);
+            break;
+        case 'SqlDataSource':
+            data = SqlDataSourceEditor.create(params);
+            break;
+        default:
+            throw new Error('Unknown data source class.');
+    }
+    return this.data.dataSources[name] = data;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.deleteDataSource = function(dataSource) {
+    delete this.data.dataSources[dataSource];
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
+    this.data.dataSources[dataSource]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources = helper.replaceKey(
+            this.data.dataSources,
+            dataSource,
+            value);
+    }
 };

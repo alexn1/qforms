@@ -9,7 +9,8 @@ var _    = require('underscore');
 
 var qforms           = require('../../../qforms');
 var EditorController = require('../EditorController');
-var ApplicationFile  = require('../../JsonFile/ApplicationFile/ApplicationFile');
+var ApplicationEditor = require('../../Editor/ApplicationEditor/ApplicationEditor');
+var JsonFile  = require('../../JsonFile/JsonFile');
 
 util.inherits(PageLinkEditorController, EditorController);
 
@@ -20,10 +21,12 @@ function PageLinkEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditorController.prototype.save = function(params, callback) {
-    var appFile = new ApplicationFile(this.appInfo);
+    var self = this;
+    var appFile = new JsonFile(this.appInfo.filePath);
     appFile.init(function() {
-        appFile.setPageLinkAttr(params['pageLink'], params['attr'], params['value']);
-        appFile.save(function() {
+        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        appEditor.setPageLinkAttr(params['pageLink'], params['attr'], params['value']);
+        appEditor.save(function() {
             callback(null);
         });
     });

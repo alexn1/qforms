@@ -7,9 +7,10 @@ var path = require('path');
 var fs   = require('fs');
 var _    = require('underscore');
 
-var qforms           = require('../../../qforms');
-var EditorController = require('../EditorController');
-var ApplicationFile  = require('../../JsonFile/ApplicationFile/ApplicationFile');
+var qforms            = require('../../../qforms');
+var EditorController  = require('../EditorController');
+var ApplicationEditor = require('../../Editor/ApplicationEditor/ApplicationEditor');
+var JsonFile          = require('../../JsonFile/JsonFile');
 
 util.inherits(ParamEditorController, EditorController);
 
@@ -24,10 +25,12 @@ function ParamEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamEditorController.prototype._new = function(params, callback) {
-    var appFile = new ApplicationFile(this.appInfo);
+    var self = this;
+    var appFile = new JsonFile(this.appInfo.filePath);
     appFile.init(function() {
-        var param = appFile.newDatabaseParam(params);
-        appFile.save(function() {
+        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var param = appEditor.newDatabaseParam(params);
+        appEditor.save(function() {
             callback(param);
         });
     });
@@ -35,10 +38,12 @@ ParamEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamEditorController.prototype.save = function(params, callback) {
-    var appFile = new ApplicationFile(this.appInfo);
+    var self = this;
+    var appFile = new JsonFile(this.appInfo.filePath);
     appFile.init(function() {
-        appFile.setDatabaseParamAttr(params['database'], params['param'], params['attr'], params['value']);
-        appFile.save(function() {
+        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        appEditor.setDatabaseParamAttr(params['database'], params['param'], params['attr'], params['value']);
+        appEditor.save(function() {
             callback(null);
         });
     });
@@ -46,10 +51,12 @@ ParamEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamEditorController.prototype.delete = function(params, callback) {
-    var appFile = new ApplicationFile(this.appInfo);
+    var self = this;
+    var appFile = new JsonFile(this.appInfo.filePath);
     appFile.init(function() {
-        appFile.deleteDatabaseParam(params['database'], params['param']);
-        appFile.save(function() {
+        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        appEditor.deleteDatabaseParam(params['database'], params['param']);
+        appEditor.save(function() {
             callback(null);
         });
     });

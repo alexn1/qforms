@@ -5,7 +5,7 @@ module.exports = EditorController;
 var path = require('path');
 var fs   = require('fs');
 
-var ApplicationFile   = require('../JsonFile/ApplicationFile/ApplicationFile');
+var JsonFile   = require('../JsonFile/JsonFile');
 var ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,9 +35,10 @@ EditorController.prototype.getView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.getApplicationEditor = function(callback) {
-    var appFile = new ApplicationFile(this.appInfo);
+    var self = this;
+    var appFile = new JsonFile(this.appInfo.filePath);
     appFile.init(function() {
-        var appEditor = new ApplicationEditor(appFile);
+        var appEditor = new ApplicationEditor(appFile, self.appInfo);
         callback(appEditor);
     });
 };

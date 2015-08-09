@@ -29,19 +29,19 @@ function FieldEditor(formEditor, name) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.getData = function() {
-    return this.formEditor.pageEditor.pageFile.getFormFieldData(this.formEditor.name, this.name);
+    return this.parent.data.fields[this.name];
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.setData = function(data, callback) {
-    this.formEditor.pageEditor.pageFile.setFormFieldData(this.formEditor.name, this.name, data);
-    this.formEditor.pageEditor.pageFile.save(callback);
+    this.parent.data.fields[this.name] = data;
+    this.formEditor.pageEditor.save(callback);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.setAttr = function(name, value, callback) {
-    this.formEditor.pageEditor.pageFile.setFormFieldAttr(this.formEditor.name, this.name, name, value);
-    this.formEditor.pageEditor.pageFile.save(callback);
+    this.formEditor.setFieldAttr(this.name, name, value);
+    this.formEditor.pageEditor.save(callback);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

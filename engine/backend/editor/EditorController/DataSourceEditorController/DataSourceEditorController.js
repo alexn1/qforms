@@ -9,7 +9,6 @@ var _    = require('underscore');
 
 var qforms           = require('../../../qforms');
 var EditorController = require('../EditorController');
-var ApplicationFile  = require('../../JsonFile/ApplicationFile/ApplicationFile');
 
 util.inherits(DataSourceEditorController, EditorController);
 
@@ -29,22 +28,23 @@ DataSourceEditorController.prototype._new = function(params, callback) {
             appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
                     // form data source
-                    var dataSourceData = pageEditor.pageFile.newFormDataSource(params);
-                    pageEditor.pageFile.save(function() {
-                        callback(dataSourceData);
+                    var formEditor = pageEditor.getForm(params.form);
+                    var dataSourceEditor = formEditor.newDataSource(params);
+                    pageEditor.save(function() {
+                        callback(dataSourceEditor.getData());
                     });
                 } else {
                     // page data source
-                    var dataSourceData = pageEditor.pageFile.newDataSource(params);
-                    pageEditor.pageFile.save(function() {
+                    var dataSourceData = pageEditor.newDataSource(params);
+                    pageEditor.save(function() {
                         callback(dataSourceData);
                     });
                 }
             });
         } else {
             // app data source
-            var dataSourceData = appEditor.appFile.newDataSource(params);
-            appEditor.appFile.save(function() {
+            var dataSourceData = appEditor.newDataSource(params);
+            appEditor.save(function() {
                 callback(dataSourceData);
             });
         }
@@ -58,22 +58,23 @@ DataSourceEditorController.prototype.delete = function(params, callback) {
             appEditor.getPageByFileName(params.page,function(pageEditor) {
                 if (params.form) {
                     // form data source
-                    pageEditor.pageFile.deleteFormDataSource(params['form'], params['dataSource']);
-                    pageEditor.pageFile.save(function() {
+                    var formEditor = pageEditor.getForm(params['form']);
+                    formEditor.deleteFormDataSource(params['dataSource']);
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
-                    pageEditor.pageFile.deleteDataSource(params['dataSource']);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.deleteDataSource(params['dataSource']);
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 }
             });
         } else {
             // app data source
-            appEditor.appFile.deleteDataSource(params.dataSource);
-            appEditor.appFile.save(function() {
+            appEditor.deleteDataSource(params.dataSource);
+            appEditor.save(function() {
                 callback(null);
             });
         }
@@ -90,13 +91,13 @@ DataSourceEditorController.prototype.moveUp = function(params, callback) {
                     // form data source
                     var formEditor = pageEditor.getForm(params.form);
                     formEditor.moveDataSourceUp(params.dataSource);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
                     pageEditor.moveDataSourceUp(params.dataSource);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 }
@@ -120,13 +121,13 @@ DataSourceEditorController.prototype.moveDown = function(params, callback) {
                     // form data source
                     var formEditor = pageEditor.getForm(params.form);
                     formEditor.moveDataSourceDown(params.dataSource);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
                     pageEditor.moveDataSourceDown(params.dataSource);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 }
@@ -149,22 +150,23 @@ DataSourceEditorController.prototype.save = function(params, callback) {
             appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
                 if (params.form) {
                     // form data source
-                    pageEditor.pageFile.setFormDataSourceAttr(params['form'], params['dataSource'], params['attr'], params['value']);
-                    pageEditor.pageFile.save(function() {
+                    var formEditor = pageEditor.getForm(params.form);
+                    formEditor.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 } else {
                     // page data source
-                    pageEditor.pageFile.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
-                    pageEditor.pageFile.save(function() {
+                    pageEditor.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
+                    pageEditor.save(function() {
                         callback(null);
                     });
                 }
             });
         } else {
             // app data source
-            appEditor.appFile.setDataSourceAttr(params.dataSource, params.attr, params.value);
-            appEditor.appFile.save(function() {
+            appEditor.setDataSourceAttr(params.dataSource, params.attr, params.value);
+            appEditor.save(function() {
                 callback(null);
             });
         }

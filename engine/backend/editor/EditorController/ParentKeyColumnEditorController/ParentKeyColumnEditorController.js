@@ -9,7 +9,6 @@ var _    = require('underscore');
 
 var qforms           = require('../../../qforms');
 var EditorController = require('../EditorController');
-var ApplicationFile  = require('../../JsonFile/ApplicationFile/ApplicationFile');
 
 util.inherits(ParentKeyColumnEditorController, EditorController);
 
@@ -26,8 +25,10 @@ function ParentKeyColumnEditorController(appInfo) {
 ParentKeyColumnEditorController.prototype._new = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
-            var parentKeyColumnData = pageEditor.pageFile.newFormDataSouceParentKeyColumn(params);
-            pageEditor.pageFile.save(function() {
+
+            var formEditor = pageEditor.getForm(params.form);
+            var parentKeyColumnData = formEditor.newDataSouceParentKeyColumn(params);
+            pageEditor.save(function() {
                 callback(parentKeyColumnData);
             });
         });
@@ -38,8 +39,9 @@ ParentKeyColumnEditorController.prototype._new = function(params, callback) {
 ParentKeyColumnEditorController.prototype.save = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
-            pageEditor.pageFile.setFormDataSourceParentKeyColumnAttr(params['form'], params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
-            pageEditor.pageFile.save(function() {
+            var formEditor = pageEditor.getForm(params['form']);
+            formEditor.setDataSourceParentKeyColumnAttr(params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
+            pageEditor.save(function() {
                 callback(null);
             });
         });
@@ -50,8 +52,9 @@ ParentKeyColumnEditorController.prototype.save = function(params, callback) {
 ParentKeyColumnEditorController.prototype.delete = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
-            pageEditor.pageFile.deleteFormDataSourceParentKeyColumn(params['form'], params['dataSource'], params['parentKeyColumn']);
-            pageEditor.pageFile.save(function() {
+            var formEditor = pageEditor.getForm(params['form']);
+            formEditor.deleteFormDataSourceParentKeyColumn(params['dataSource'], params['parentKeyColumn']);
+            pageEditor.save(function() {
                 callback(null);
             });
         });

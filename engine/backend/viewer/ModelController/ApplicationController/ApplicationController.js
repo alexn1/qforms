@@ -16,7 +16,8 @@ var ModelController      = require('../ModelController');
 var PageLinkController   = require('../PageLinkController/PageLinkController');
 var PageController       = require('../PageController/PageController');
 var DataSourceController = require('../DataSourceController/DataSourceController');
-var PageFile             = require('../../../editor/JsonFile/PageFile/PageFile');
+var JsonFile             = require('../../../editor/JsonFile/JsonFile');
+
 var text                 = {
     en:require('../../../common/text/en'),
     ru:require('../../../common/text/ru')
@@ -74,7 +75,7 @@ ApplicationController.prototype._buildMenu = function(context, callback) {
         return function(_next) {
             if (pageLinkMenu) {
                 var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
-                var pageFile     = new PageFile(pageFilePath);
+                var pageFile     = new JsonFile(pageFilePath);
                 pageFile.init(function() {
                     var pageData    = pageFile.getData();
                     var pageCaption = pageData['@attributes'].caption;

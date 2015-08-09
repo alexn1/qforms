@@ -18,7 +18,7 @@ var KeyColumnEditorController         = require('../../editor/EditorController/K
 var ParentKeyColumnEditorController   = require('../../editor/EditorController/ParentKeyColumnEditorController/ParentKeyColumnEditorController');
 var FieldEditorController             = require('../../editor/EditorController/VisualEditorController/FieldEditorController/FieldEditorController');
 var ControlEditorController           = require('../../editor/EditorController/VisualEditorController/ControlEditorController/ControlEditorController');
-var ApplicationFile             = require('../../editor/JsonFile/ApplicationFile/ApplicationFile');
+var JsonFile             = require('../../editor/JsonFile/JsonFile');
 
 qforms.set('editorClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'editor/class', 'css'));
 qforms.set('editorClassJs',  helper.getFilePathsSync(path.join(qforms.get('public')), 'editor/class', 'js'));
@@ -98,7 +98,7 @@ function handle(req, res, next, appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, appInfo) {
-    var appFile = new ApplicationFile(appInfo);
+    var appFile = new JsonFile(appInfo.filePath);
     appFile.init(function() {
         res.render('editor/view', {
             version        : req.app.get('version'),

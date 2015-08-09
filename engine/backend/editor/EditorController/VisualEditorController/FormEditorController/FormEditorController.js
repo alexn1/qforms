@@ -8,7 +8,6 @@ var fs   = require('fs');
 
 var qforms                 = require('../../../../qforms');
 var VisualEditorController = require('../VisualEditorController');
-var ApplicationFile        = require('../../../JsonFile/ApplicationFile/ApplicationFile');
 
 util.inherits(FormEditorController, VisualEditorController);
 

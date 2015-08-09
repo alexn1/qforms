@@ -33,41 +33,81 @@ function FormEditor(pageEditor, name, data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getData = function() {
-    return this.pageEditor.pageFile.getFormData(this.name);
+    return this.data;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.setAttr = function(name, value, callback) {
-    this.pageEditor.pageFile.setFormAttr(this.name, name, value);
-    this.pageEditor.pageFile.save(callback);
+    this._setAttr(name, value);
+    this.pageEditor.save(callback);
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditor.prototype.createField = function(params, callback) {
-    var self = this;
-    var formFieldData = this.pageEditor.pageFile.newFormField(params);
-    this.pageEditor.pageFile.save(function() {
-        var fieldEditor = self.getField(params.name);
-        callback(fieldEditor);
-    });
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype._setAttr = function(name, value) {
+    this.data['@attributes'][name] = value;
+    if (name === 'name') {
+        this.parent.data.forms = helper.replaceKey(this.parent.data.forms,
+            this.name,
+            value);
+    }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.newField = function(params) {
+    var name = params['name'];
+
+    if (!this.data.fields) {
+        this.data.fields = {};
+    }
+    if (this.data.fields[name]) {
+        throw new Error('Field {name} already exist.'.replace('{name}', name));
+    }
+    var data;
+    switch (params['class']) {
+        case 'TextBoxField':
+            data = TextBoxFieldEditor.createData(params);
+            break;
+        case 'LinkField':
+            data = LinkFieldEditor.createData(params);
+            break;
+        case 'ComboBoxField':
+            data = ComboBoxFieldEditor.createData(params);
+            break;
+        case 'TextAreaField':
+            data = TextAreaFieldEditor.createData(params);
+            break;
+        case 'ImageField':
+            data = ImageFieldEditor.createData(params);
+            break;
+        case 'LabelField':
+            data = LabelFieldEditor.createData(params);
+            break;
+        case 'DatePickerField':
+            data = DatePickerFieldEditor.createData(params);
+            break;
+        case 'CheckBoxField':
+            data = CheckBoxFieldEditor.createData(params);
+            break;
+        default:
+            throw new Error('Unknown field class: ' + params['class']);
+            break;
+    }
+    return this.data.fields[name] = data;
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldUp = function(params, callback) {
-    var fields = this.pageEditor.pageFile.getFormFields(params.form);
-    fields = helper.moveObjProp(fields, params.field, -1);
-    this.pageEditor.pageFile.setFormFields(params.form, fields);
-    this.pageEditor.pageFile.save(function() {
+    this.data.fields = helper.moveObjProp(this.data.fields, params.field, -1);
+    this.pageEditor.save(function() {
         callback('ok');
     });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldDown = function(params, callback) {
-    var fields = this.pageEditor.pageFile.getFormFields(params.form);
-    fields = helper.moveObjProp(fields, params.field, 1);
-    this.pageEditor.pageFile.setFormFields(params.form, fields);
-    this.pageEditor.pageFile.save(function() {
+    this.data.fields = helper.moveObjProp(this.data.fields, params.field, 1);
+    this.pageEditor.save(function() {
         callback('ok');
     });
 };
@@ -80,36 +120,63 @@ FormEditor.prototype.getDataSource = function(name) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getField = function(name) {
-    var fieldData = this.pageEditor.pageFile.getFormFieldData(this.name, name);
+    var fieldData = this.data.fields[name];
     return eval('new {class}Editor(this, name)'.replace('{class}', fieldData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getControl = function(name) {
-    var controlData = this.pageEditor.pageFile.getFormControlData(this.name, name);
+    var controlData = this.data.controls[name];
     return eval('new {class}Editor(this, name)'.replace('{class}', controlData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.removeField = function(name, callback) {
-    this.pageEditor.pageFile.deleteFormField(this.name, name);
-    this.pageEditor.pageFile.save(callback);
+    delete this.data.fields[name];
+    this.pageEditor.save(callback);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.createControl = function(params, callback) {
     var self = this;
-    this.pageEditor.pageFile.newFormControl(params);
-    this.pageEditor.pageFile.save(function() {
+    this.newControl(params);
+    this.pageEditor.save(function() {
         var controlEditor = self.getControl(params.name);
         callback(controlEditor);
     });
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.newControl = function(params) {
+    var name   = params['name'];
+    var _class = params['class'];
+    if (!this.data.controls) {
+        this.data.controls = {};
+    }
+    if (this.data.controls[name]) {
+        throw new Error('Control {name} already exist.'.repalce('{name}', name));
+    }
+    var data;
+    switch (_class) {
+        case 'ButtonControl':
+            data = {
+                '@class':'ButtonControl',
+                '@attributes': {
+                    'name':name,
+                    'caption' : (params.caption) && params.caption ? params.caption : name,
+                    'isVisible':'true',
+                    'width':'0'
+                }
+            };
+            break;
+    }
+    return this.data.controls[name] = data;
+};
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.removeControl = function(name, callback) {
-    this.pageEditor.pageFile.deleteFormControl(this.name, name);
-    this.pageEditor.pageFile.save(callback);
+    delete this.data.controls[name];
+    this.pageEditor.save(callback);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,3 +247,137 @@ FormEditor.prototype.getCustomFilePath = function(ext, callback) {
         callback(path.join(customDirPath, self.name + '.' + ext));
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.newDataSource = function(params) {
+    var name   = params['name'];
+    var _class = params['class'];
+    if (!this.data.dataSources) {
+        this.data.dataSources = {};
+    }
+    if (this.data.dataSources[name]) {
+        throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+    }
+    var data;
+    switch (_class) {
+        case 'DataSource':
+            data = DataSourceEditor.create(params);
+            break;
+        case 'SqlDataSource':
+            data = SqlDataSourceEditor.create(params);
+            break;
+        default:
+            throw new Error('Unknown data source class.');
+    }
+    this.data.dataSources[name] = data;
+    return this.getDataSource(name);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.newDataSouceKeyColumn = function(params) {
+    var dataSource = params['dataSource'];
+    var name       = params['name'];
+    if (!this.data.dataSources[dataSource].keyColumns) {
+        this.data.dataSources[dataSource].keyColumns = {};
+    }
+    if (this.data.dataSources[dataSource].keyColumns[name]) {
+        throw  new Error('Key Column {name} already exist.'.replace('{name}', name));
+    }
+    return this.data.dataSources[dataSource].keyColumns[name] = {
+        '@class':'KeyColumn',
+        '@attributes': {
+            'name':name
+        }
+    };
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.newDataSouceParentKeyColumn = function(params) {
+    var dataSource = params['dataSource'];
+    var name       = params['name'];
+    if (!(this.data.dataSources[dataSource].parentKeyColumns)) {
+        this.data.dataSources[dataSource].parentKeyColumns = {};
+    }
+    if ((this.data.dataSources[dataSource].parentKeyColumns[name])) {
+        throw new Error('Parent Key Column {name} already exist.'.replace('{name}', name));
+    }
+    return this.data.dataSources[dataSource].parentKeyColumns[name] = {
+        '@class' : 'ParentKeyColumn',
+        '@attributes' : {
+            'name' : name
+        }
+    };
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
+    this.data.dataSources[dataSource]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources = helper.replaceKey(
+            this.data.dataSources,
+            dataSource,
+            value);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.setDataSourceKeyColumnAttr = function(dataSource, keyColumn, name, value) {
+    this.data.dataSources[dataSource].keyColumns[keyColumn]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources[dataSource].keyColumns = helper.replaceKey(
+            this.data.dataSources[dataSource].keyColumns,
+            keyColumn,
+            value);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.setDataSourceParentKeyColumnAttr = function(dataSource, parentKeyColumn, name, value) {
+    this.data.dataSources[dataSource].parentKeyColumns[parentKeyColumn]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.dataSources[dataSource].parentKeyColumns = helper.replaceKey(
+            this.data.dataSources[dataSource].parentKeyColumns,
+            parentKeyColumn,
+            value);
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.setFieldAttr = function(field, name, value) {
+    this.data.fields[field]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.fields = helper.replaceKey(
+            this.data.fields,
+            field,
+            value
+        );
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.setControlAttr = function(control, name, value) {
+    this.data.controls[control]['@attributes'][name] = value;
+    if (name === 'name') {
+        this.data.controls = helper.replaceKey(
+            this.data.controls,
+            control,
+            value
+        );
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.deleteFormDataSource = function(dataSource) {
+    delete this.data.dataSources[dataSource];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.deleteFormDataSourceKeyColumn = function(dataSource, keyColumn) {
+    delete this.data.dataSources[dataSource].keyColumns[keyColumn];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormEditor.prototype.deleteFormDataSourceParentKeyColumn = function(dataSource, parentKeyColumn) {
+    delete this.data.dataSources[dataSource].parentKeyColumns[parentKeyColumn];
+};
+

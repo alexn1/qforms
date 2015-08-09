@@ -16,11 +16,11 @@ function PageLinkEditor(appEditor, name) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditor.prototype.getData = function() {
-    return this.appEditor.appFile.getPageLinkData(this.name);
+    return this.appEditor.getPageLinkData(this.name);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditor.prototype.setAttr = function(name, value, callback) {
-    this.appEditor.appFile.setPageLinkAttr(this.name, name, value);
-    this.appEditor.appFile.save(callback);
+    this.appEditor.setPageLinkAttr(this.name, name, value);
+    this.appEditor.save(callback);
 };

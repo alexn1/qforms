@@ -97,3 +97,8 @@ DataSourceEditor.create = function(params) {
     };
     return data;
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceEditor.prototype.getData = function() {
+    return this.data;
+};
