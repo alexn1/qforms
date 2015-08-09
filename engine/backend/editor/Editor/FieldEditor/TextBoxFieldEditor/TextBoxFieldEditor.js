@@ -5,7 +5,7 @@ module.exports = TextBoxFieldEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var qforms      = require('../../../../qforms');
 var FieldEditor = require('../FieldEditor');
 
 util.inherits(TextBoxFieldEditor, FieldEditor);

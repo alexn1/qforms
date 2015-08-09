@@ -17,6 +17,7 @@ var LabelFieldEditor         = require('../FieldEditor/LabelFieldEditor/LabelFie
 var LinkFieldEditor          = require('../FieldEditor/LinkFieldEditor/LinkFieldEditor');
 var TextAreaFieldEditor      = require('../FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor       = require('../FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
+var FileFieldEditor          = require('../FieldEditor/FileFieldEditor/FileFieldEditor');
 var ButtonControlEditor      = require('../ControlEditor/ButtonControlEditor/ButtonControlEditor');
 var DataSourceEditor         = require('../DataSourceEditor/DataSourceEditor');
 var SqlDataSourceEditor      = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
@@ -55,44 +56,13 @@ FormEditor.prototype._setAttr = function(name, value) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.newField = function(params) {
     var name = params['name'];
-
     if (!this.data.fields) {
         this.data.fields = {};
     }
     if (this.data.fields[name]) {
         throw new Error('Field {name} already exist.'.replace('{name}', name));
     }
-    var data;
-    switch (params['class']) {
-        case 'TextBoxField':
-            data = TextBoxFieldEditor.createData(params);
-            break;
-        case 'LinkField':
-            data = LinkFieldEditor.createData(params);
-            break;
-        case 'ComboBoxField':
-            data = ComboBoxFieldEditor.createData(params);
-            break;
-        case 'TextAreaField':
-            data = TextAreaFieldEditor.createData(params);
-            break;
-        case 'ImageField':
-            data = ImageFieldEditor.createData(params);
-            break;
-        case 'LabelField':
-            data = LabelFieldEditor.createData(params);
-            break;
-        case 'DatePickerField':
-            data = DatePickerFieldEditor.createData(params);
-            break;
-        case 'CheckBoxField':
-            data = CheckBoxFieldEditor.createData(params);
-            break;
-        default:
-            throw new Error('Unknown field class: ' + params['class']);
-            break;
-    }
-    return this.data.fields[name] = data;
+    return this.data.fields[name] = eval('{class}Editor.createData(params);'.replace('{class}', params['class']));
 };
 
 
@@ -148,29 +118,14 @@ FormEditor.prototype.createControl = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.newControl = function(params) {
-    var name   = params['name'];
-    var _class = params['class'];
+    var name   = params.name;
     if (!this.data.controls) {
         this.data.controls = {};
     }
     if (this.data.controls[name]) {
         throw new Error('Control {name} already exist.'.repalce('{name}', name));
     }
-    var data;
-    switch (_class) {
-        case 'ButtonControl':
-            data = {
-                '@class':'ButtonControl',
-                '@attributes': {
-                    'name':name,
-                    'caption' : (params.caption) && params.caption ? params.caption : name,
-                    'isVisible':'true',
-                    'width':'0'
-                }
-            };
-            break;
-    }
-    return this.data.controls[name] = data;
+    return this.data.controls[name] = eval('{class}Editor.createData(params);'.replace('{class}', params['class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

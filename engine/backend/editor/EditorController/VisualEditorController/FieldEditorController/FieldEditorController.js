@@ -29,13 +29,6 @@ FieldEditorController.prototype._new = function(params, callback) {
             pageEditor.save(function() {
                 callback(fieldData);
             });
-
-            /*
-            formEditor.createField(params, function(fieldEditor) {
-                var fieldData = fieldEditor.getData();
-                callback(fieldData);
-            });
-            */
         });
     });
 };

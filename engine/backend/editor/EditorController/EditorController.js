@@ -5,7 +5,7 @@ module.exports = EditorController;
 var path = require('path');
 var fs   = require('fs');
 
-var JsonFile   = require('../JsonFile/JsonFile');
+var JsonFile          = require('../JsonFile/JsonFile');
 var ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

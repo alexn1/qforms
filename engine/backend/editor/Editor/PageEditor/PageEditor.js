@@ -121,51 +121,6 @@ PageEditor.prototype.newForm = function(params) {
     return this.getForm(name);
 };
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.newFormField = function(params) {
-    var form   = params['form'];
-    var name   = params['name'];
-    var _class = params['class'];
-
-    if (!this.data.forms[form].fields) {
-        this.data.forms[form].fields = {};
-    }
-    if (this.data.forms[form].fields[name]) {
-        throw new Error('Field {name} already exist.'.replace('{name}', name));
-    }
-    var data;
-    switch (_class) {
-        case 'TextBoxField':
-            data = TextBoxFieldEditor.createData(params);
-            break;
-        case 'LinkField':
-            data = LinkFieldEditor.createData(params);
-            break;
-        case 'ComboBoxField':
-            data = ComboBoxFieldEditor.createData(params);
-            break;
-        case 'TextAreaField':
-            data = TextAreaFieldEditor.createData(params);
-            break;
-        case 'ImageField':
-            data = ImageFieldEditor.createData(params);
-            break;
-        case 'LabelField':
-            data = LabelFieldEditor.createData(params);
-            break;
-        case 'DatePickerField':
-            data = DatePickerFieldEditor.createData(params);
-            break;
-        case 'CheckBoxField':
-            data = CheckBoxFieldEditor.createData(params);
-            break;
-    }
-    return this.data.forms[form].fields[name] = data;
-};
-*/
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.createForm = function(params, callback) {
     var self = this;
