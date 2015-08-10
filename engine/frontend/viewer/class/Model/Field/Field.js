@@ -37,25 +37,15 @@ Field.prototype.replaceThis = function(value) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.templateValue = function(value) {
-    var params = this.form.page.params;
-    value  = this.replaceThis(value);
-    return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
-        if (params.hasOwnProperty(name)) {
-            return params[name];
-        } else {
-            return null;
-        }
-    });
-};
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.fillDefaultValue = function(row) {
     if (this.data.column !== undefined) {
         var column = this.data.column;
+        var defaultValue = this.replaceThis(this.data.defaultValue);
+        var code = QForms.templateValue(defaultValue, this.form.page.params);
         try {
-            var code = this.templateValue(this.data.defaultValue);
             //console.log('eval: ' + code);
             var value = eval(code);
         } catch (e) {

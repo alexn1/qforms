@@ -24,10 +24,13 @@ FieldController.create = function(data, parent, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.fillDefaultValue = function(row) {
+FieldController.prototype.fillDefaultValue = function(context, row) {
     var column = this.data['@attributes'].column;
+    var defaultValue = this.form.replaceThis(context, this.data['@attributes'].defaultValue);
+    var params = this.form.page.application.getParams(context);
+    var code = helper.templateValue(defaultValue, params);
     try {
-        var value  = eval(this.data['@attributes'].defaultValue);
+        var value  = eval(code);
     } catch (e) {
         throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
     }

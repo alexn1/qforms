@@ -244,3 +244,16 @@ ApplicationController.prototype.authentication = function() {
 ApplicationController.prototype.getUsers = function(context, callback) {
     callback(null);
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.getParams = function(context) {
+    var params = {};
+    _.extend(params, context.params);
+    if (context.querytime) {
+        _.extend(params, context.querytime.params);
+    }
+    if (context.user) {
+        params['username'] = context.user.name;
+    }
+    return params;
+};

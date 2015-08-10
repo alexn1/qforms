@@ -151,6 +151,17 @@ QForms.render = function(view, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+QForms.templateValue = function(value, params) {
+    return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        if (params.hasOwnProperty(name)) {
+            return params[name];
+        } else {
+            return null;
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 String.prototype.template = function (values) {
     return this.replace(/\{([\w]+)\}/g, function (text, name) {
         return values.hasOwnProperty(name) ? values[name] : text;

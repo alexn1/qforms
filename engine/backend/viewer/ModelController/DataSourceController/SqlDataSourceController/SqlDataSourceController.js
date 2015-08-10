@@ -79,7 +79,7 @@ SqlDataSourceController.prototype.select = function(context, callback) {
             fullName: this.getFullName()
         }));
     }
-    var query  = this.replaceThis(context, this.data['@attributes'].query);
+    var query  = this.form ? this.form.replaceThis(context, this.data['@attributes'].query) : this.data['@attributes'].query;
     var params = this.getParams(context);
     this.query(context, query, params, function(rows) {
         callback(rows);
@@ -94,7 +94,7 @@ SqlDataSourceController.prototype.selectCount = function(context, callback) {
             fullName: this.getFullName()
         }));
     }
-    var query  = this.replaceThis(context, this.data['@attributes'].countQuery);
+    var query  = this.form ? this.form.replaceThis(context, this.data['@attributes'].countQuery) : this.data['@attributes'].countQuery;
     var params = this.getParams(context);
     this.query(context, query, params, function(rows) {
         var row = rows[0];

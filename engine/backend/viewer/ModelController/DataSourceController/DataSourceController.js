@@ -216,40 +216,8 @@ DataSourceController.prototype.getFullName = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.replaceThis = function(context, query) {
-    // for form data sources only
-    if (this.form) {
-        var self = this;
-        return query.replace(/\{([@\w\.]+)\}/g, function (text, name) {
-            if (name.indexOf('.') !== -1) {
-                var arr = name.split('.');
-                if (arr[0] === 'this') {
-                    arr[0] = self.form.page.name;
-                }
-                if (arr[0] === 'parent' && context.parentPageName) {
-                    arr[0] = context.parentPageName;
-                }
-                return '{' + arr.join('.') + '}';
-            } else {
-                return text;
-            }
-        });
-    } else {
-        return query;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getParams = function(context) {
-    var params = {};
-    _.extend(params, context.params);
-    if (context.querytime) {
-        _.extend(params, context.querytime.params);
-    }
-    if (context.user) {
-        params['username'] = context.user.name;
-    }
-    return params;
+    return this.getApp().getParams(context);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

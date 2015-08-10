@@ -162,6 +162,17 @@ function queryFormat(query, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+module.exports.templateValue = function(value, params) {
+    return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        if (params.hasOwnProperty(name)) {
+            return params[name];
+        } else {
+            return null;
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 function typeCast(field, next) {
     if (
         field.type === 'DATE'      ||

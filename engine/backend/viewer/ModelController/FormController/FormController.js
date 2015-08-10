@@ -36,7 +36,7 @@ FormController.prototype.fill = function(context, callback) {
     if (this.data.dataSources.default) {
         FormController.super_.prototype.fill.call(this, context, callback);
     } else {
-        var dataSourceResponse = self._getSurrogateDataSourceResponse();
+        var dataSourceResponse = self._getSurrogateDataSourceResponse(context);
         self.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
         FormController.super_.prototype.fill.call(this, context, function(response) {
             response.dataSources.default = dataSourceResponse;
@@ -46,12 +46,12 @@ FormController.prototype.fill = function(context, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype._getSurrogateDataSourceResponse = function() {
+FormController.prototype._getSurrogateDataSourceResponse = function(context) {
     var row = {
         id: 1
     };
     for (var name in this.fields) {
-        this.fields[name].fillDefaultValue(row);
+        this.fields[name].fillDefaultValue(context, row);
     }
     return {
         class               : 'DataSource',
@@ -75,4 +75,24 @@ FormController.prototype.dumpRowToParams = function(row, params) {
         this.fields[name].dumpRowValueToParams(row, params);
     }
     //console.log(params);
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FormController.prototype.replaceThis = function(context, query) {
+    var self = this;
+    return query.replace(/\{([@\w\.]+)\}/g, function (text, name) {
+        if (name.indexOf('.') !== -1) {
+            var arr = name.split('.');
+            if (arr[0] === 'this') {
+                arr[0] = self.page.name;
+            }
+            if (arr[0] === 'parent' && context.parentPageName) {
+                arr[0] = context.parentPageName;
+            }
+            return '{' + arr.join('.') + '}';
+        } else {
+            return text;
+        }
+    });
 };
