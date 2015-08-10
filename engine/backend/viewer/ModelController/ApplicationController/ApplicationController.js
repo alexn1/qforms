@@ -197,11 +197,9 @@ ApplicationController.prototype.fill = function(context, callback) {
         delete response.password;
         delete response.authentication;
 
-        // text
-        response.text = self.text;
-
-        // params
-        response.params = self.getParams(context);
+        response.env    = qforms.get('env');
+        response.text   = self.text;              // text
+        response.params = self.getParams(context);// params
 
         // menu
         self._buildMenu(context, function(menu) {

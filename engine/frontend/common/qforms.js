@@ -1,7 +1,8 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function QForms() {
+function QForms(data) {
+    QForms.env = data.env;
     window.onerror = QForms.errorHandler;
     //window.onbeforeunload = QForms.exit;
 };
@@ -20,9 +21,14 @@ QForms.exit = function (evt) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.errorHandler = function(errorMsg) {
-    var msg = 'QForms Error Handler:\n' + errorMsg;
-    if (arguments[4] !== undefined && arguments[4].stack !== undefined) {
-        msg += '\n\nstack:\n' + arguments[4].stack;
+    var msg;
+    if (QForms.env === 'development') {
+        msg = 'QForms Error Handler:\n' + errorMsg;
+        if (arguments[4] !== undefined && arguments[4].stack !== undefined) {
+            msg += '\n\nstack:\n' + arguments[4].stack;
+        }
+    } else {
+        msg = errorMsg;
     }
     alert(msg);
 };
@@ -40,7 +46,11 @@ QForms.doHttpRequest = function(self, params, callback) {
             callback.call(self, data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            throw new Error(jqXHR.statusText + ', ' + jqXHR.responseText);
+            if (QForms.env === 'development') {
+                throw new Error(jqXHR.statusText + ', ' + jqXHR.responseText);
+            } else {
+                throw new Error(jqXHR.responseText);
+            }
         }
     });
 };

@@ -12,7 +12,7 @@ module.exports.page = function(err, req, res, next) {
     res.status(err.status || 500);
     if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
         var message = (typeof err === 'string') ? err : err.message;
-        res.end('Error message: ' + message);
+        res.end(message);
     } else {
         res.render('error/view', {
             message: err.message,
