@@ -54,15 +54,15 @@ function createApplication(req, res, next, route) {
                     if (err) {
                         throw err;
                     } else {
-                        var appData = JSON.parse(content);
-                        ApplicationController.create(appData, appInfo, function(application) {
-                            application.init(function() {
-                                applications[route] = application;
-                                var d = domain.create();
-                                if (qforms.get('handleException') === 'true') {
-                                    d.on('error', next);
-                                }
-                                d.run(function() {
+                        var d = domain.create();
+                        if (qforms.get('handleException') === 'true') {
+                            d.on('error', next);
+                        }
+                        d.run(function() {
+                            var appData = JSON.parse(content);
+                            ApplicationController.create(appData, appInfo, function(application) {
+                                application.init(function() {
+                                    applications[route] = application;
                                     handle(req, res, next, application);
                                 });
                             });
