@@ -2,7 +2,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function QForms(data) {
-    QForms.env = data.env;
+    if (data) {
+        QForms.env = data.env;
+    }
     window.onerror = QForms.errorHandler;
     //window.onbeforeunload = QForms.exit;
 };
