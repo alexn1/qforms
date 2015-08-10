@@ -11,8 +11,10 @@ var session    = require('express-session');
 var _          = require('underscore');
 var async      = require('async');
 
-var p      = require('../package');
-var helper = require('./common/helper');
+
+var p         = require('../package');
+var helper    = require('./common/helper');
+var multipart = require('./common/multipart');
 
 var qforms = module.exports = express();
 
@@ -43,6 +45,8 @@ helper.createDirIfNotExistsSync(qforms.get('temp'));
 //qforms.use(morgan('dev'));
 qforms.use(bodyParser.json());
 qforms.use(bodyParser.urlencoded({ extended: false }));
+qforms.use(multipart);
+
 qforms.use(session({
     secret            : 'qforms',
     key               : 'sid',

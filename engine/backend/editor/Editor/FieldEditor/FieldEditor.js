@@ -19,6 +19,7 @@ var LabelFieldEditor         = require('./LabelFieldEditor/LabelFieldEditor');
 var LinkFieldEditor          = require('./LinkFieldEditor/LinkFieldEditor');
 var TextAreaFieldEditor      = require('./TextAreaFieldEditor/TextAreaFieldEditor');
 var TextBoxFieldEditor       = require('./TextBoxFieldEditor/TextBoxFieldEditor');
+var FileFieldEditor          = require('./FileFieldEditor/FileFieldEditor');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FieldEditor(formEditor, name) {

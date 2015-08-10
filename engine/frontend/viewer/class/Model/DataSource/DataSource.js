@@ -517,15 +517,33 @@ DataSource.prototype.insert = function(row, callback) {
     if (this.data.table === '') {
         return;
     }
-    var args = {
+    var data = {
         action        : 'insert',
         page          : this.form.page.name,
         form          : this.form.name,
         ds            : this.name,
         row           : row,
-        parentPageName: page ? page.parentPageName : undefined
+        parentPageName: page ? page.parentPageName : null
     };
-    QForms.doHttpRequest(this, args, function(data) {
+
+    var fileColumns = [];
+    for (var column in row) {
+        if (row[column] instanceof File) {
+            fileColumns.push(column);
+        }
+    }
+
+    if (fileColumns.length > 0) {
+        var formData = new FormData();
+        fileColumns.forEach(function(column) {
+            formData.append(column, row[column]);
+            delete row[column];
+        });
+        formData.append('__data', JSON.stringify(data));
+        data = formData;
+    }
+
+    QForms.doHttpRequest(this, data, function(data) {
         // this code is actual only in new mode for row form
         if (row === this.insertRow) {
             // set row key and add inserted row to rows

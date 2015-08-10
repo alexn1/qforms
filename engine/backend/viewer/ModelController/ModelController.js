@@ -24,6 +24,7 @@ var ImageFieldController              = require('./FieldController/ImageFieldCon
 var LabelFieldController              = require('./FieldController/LabelFieldController/LabelFieldController');
 var LinkFieldController               = require('./FieldController/LinkFieldController/LinkFieldController');
 var TextAreaFieldController           = require('./FieldController/TextAreaFieldController/TextAreaFieldController');
+var FileFieldController               = require('./FieldController/FileFieldController/FileFieldController');
 var ButtonControlController           = require('./ControlController/ButtonControlController/ButtonControlController');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

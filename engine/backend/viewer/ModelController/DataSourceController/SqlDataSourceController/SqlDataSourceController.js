@@ -146,15 +146,15 @@ SqlDataSourceController.prototype.insert = function(context, callback) {
     var row = context.row;
     var self = this;
     var insertRow = function() {
-        // removing auto increment field
+        var _row = {};
         for (var column in row) {
-            if (column === self.aiFieldName) {
-                delete row[column];
-                break;
+            if (!(row[column] instanceof Object) && column !== self.aiFieldName) {
+                _row[column] = row[column];
             }
         }
+
         var query = new sqlish.Sqlish()
-            .insert(self.data['@attributes'].table, row)
+            .insert(self.data['@attributes'].table, _row)
             .toString();
         self.query(context, query,  null, function(result) {
             var key = JSON.stringify([result.insertId]);

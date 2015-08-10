@@ -36,14 +36,16 @@ QForms.errorHandler = function(errorMsg) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-QForms.doHttpRequest = function(self, params, callback) {
+QForms.doHttpRequest = function(self, data, callback) {
+    var contentType = data instanceof FormData ? false : 'application/json; charset=UTF-8';
+    var _data       = data instanceof FormData ? data  : JSON.stringify(data);
     $.ajax({
         url        : window.location.href,
         type       : 'POST',
-        data       : JSON.stringify(params),
-        cache      : false,
+        data       : _data,
+        contentType: contentType,
         processData: false,
-        contentType: 'application/json; charset=UTF-8',
+        cache      : false,
         success: function(data, textStatus, jqXHR) {
             callback.call(self, data);
         },
