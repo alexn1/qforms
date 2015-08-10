@@ -200,10 +200,8 @@ ApplicationController.prototype.fill = function(context, callback) {
         // text
         response.text = self.text;
 
-        // username
-        if (context.user) {
-            response.username = context.user.name;
-        }
+        // params
+        response.params = self.getParams(context);
 
         // menu
         self._buildMenu(context, function(menu) {

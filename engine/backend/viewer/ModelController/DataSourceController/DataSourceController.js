@@ -105,7 +105,8 @@ DataSourceController.prototype.fill = function(context, callback) {
             response.parentKeyColumns = self.parentKeyColumns;
         }
         response.access = self.getAccessToken(context);
-        if (self.name === 'default' && context.newMode) {
+        // if form data source named default then check mode
+        if (self.form && self.name === 'default' && context.newMode) {
             response.rows = [];
             callback(response);
         } else {

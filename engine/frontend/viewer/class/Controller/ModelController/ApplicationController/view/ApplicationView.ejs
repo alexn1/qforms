@@ -22,10 +22,10 @@
                 </li><%
                 } %>
             </ul>
-            <% if (model.data.username) { %>
+            <% if (model.data.params.username) { %>
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;"><%=model.data.username%></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;"><%=model.data.params.username%></a>
                         <ul class="dropdown-menu pull-right">
                             <li><a id="menu-logout" style="cursor:pointer;"><%=model.data.text.application.logout%></a></li>
                         </ul>

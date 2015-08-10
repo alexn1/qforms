@@ -44,7 +44,10 @@ Field.prototype.fillDefaultValue = function(row) {
     if (this.data.column !== undefined) {
         var column = this.data.column;
         var defaultValue = this.replaceThis(this.data.defaultValue);
-        var code = QForms.templateValue(defaultValue, this.form.page.params);
+        var params = {};
+        $.extend(params, this.form.page.params);
+        $.extend(params, this.form.page.app.data.params);
+        var code = QForms.templateValue(defaultValue, params);
         try {
             //console.log('eval: ' + code);
             var value = eval(code);
