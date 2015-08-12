@@ -145,18 +145,14 @@ function currentDate() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function queryFormat(query, params) {
-    var sql;
-    if (params) {
-        var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
-            if (params.hasOwnProperty(name)) {
-                return mysql.escape(params[name]);
-            } else {
-                return 'NULL';
-            }
-        });
-    } else {
-        sql = query;
-    }
+    params = params || {};
+    var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        if (params.hasOwnProperty(name)) {
+            return mysql.escape(params[name]);
+        } else {
+            return 'NULL';
+        }
+    });
     console.log('real db sql: ' + sql);
     return sql;
 };

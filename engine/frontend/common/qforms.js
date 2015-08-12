@@ -67,7 +67,7 @@ QForms.go = function(url, method, params) {
             .replace('{name}',  name)
             .replace('{value}', params[name]);
     }
-    var form =  '<form action="{url}" method="{method}">{inputs}</form>'
+    var form =  '<form action="{url}" method="{method}" target="_blank">{inputs}</form>'
         .replace('{url}',    url)
         .replace('{method}', method)
         .replace('{inputs}', inputs);

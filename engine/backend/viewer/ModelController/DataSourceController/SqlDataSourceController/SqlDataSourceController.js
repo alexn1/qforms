@@ -7,6 +7,7 @@ var path   = require('path');
 var sqlish = require('sqlish');
 var mysql  = require('mysql');
 var _      = require('underscore');
+var async  = require('async');
 
 var helper               = require('../../../../common/helper');
 var DataSourceController = require('../DataSourceController');
@@ -136,6 +137,11 @@ SqlDataSourceController.prototype.update = function(context, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+SqlDataSourceController.prototype.getBuffer = function(context, file, callback) {
+    callback(file.data);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.insert = function(context, callback) {
     var access = this.getAccessToken(context);
     if (access.insert === false) {
@@ -145,26 +151,42 @@ SqlDataSourceController.prototype.insert = function(context, callback) {
     }
     var row = context.row;
     var self = this;
-    var insertRow = function() {
+    var insertRow = function(_callback) {
         var _row = {};
+        var files = {};
         for (var column in row) {
-            if (!(row[column] instanceof Object) && column !== self.aiFieldName) {
+            if (row[column] instanceof Object) {
+                _row[column] = '{' + column + '}';
+                files[column] = row[column];
+                console.error(row[column]);
+            } else if (column === self.aiFieldName) {
+            } else {
                 _row[column] = row[column];
             }
         }
-
-        var query = new sqlish.Sqlish()
-            .insert(self.data['@attributes'].table, _row)
-            .toString();
-        self.query(context, query,  null, function(result) {
-            var key = JSON.stringify([result.insertId]);
-            callback(key);
-        }, false);
+        var buffers = {};
+        var tasks = _.map(files, function(file, name) {
+            return function(next) {
+                self.getBuffer(context, file, function(buffer) {
+                    buffers[name] = buffer;
+                    next();
+                });
+            };
+        });
+        async.series(tasks, function() {
+            var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, _row).toString().replace(/"{/g,'{').replace(/}"/g,'}');
+            self.query(context, query,  buffers, function(result) {
+                var key = JSON.stringify([result.insertId]);
+                _callback(key);
+            }, false);
+        });
     };
     if (!this.desc) {
-        this._desc(context, insertRow);
+        this._desc(context, function() {
+            insertRow(callback);
+        });
     } else {
-        insertRow();
+        insertRow(callback);
     }
 };
 

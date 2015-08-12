@@ -8,6 +8,21 @@ function FileFieldController(model, parent) {
     this.eventChange = new QForms.Event(this);
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+FileFieldController.prototype.isValid = function(view) {
+    var isValid = true;
+    if (this.model.data.notNull === 'true') {
+        isValid = view.firstElementChild.files[0];
+    }
+    if (!isValid) {
+        view.firstElementChild.classList.add('error');
+    } else {
+        view.firstElementChild.classList.remove('error');
+    }
+    return isValid;
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FileFieldController.prototype.getValue = function (view) {
     return view.firstElementChild.files[0];

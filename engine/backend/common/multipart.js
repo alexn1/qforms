@@ -1,6 +1,9 @@
 'use strict';
 
 var multipart = require('connect-multiparty')();
+var _         = require('underscore');
+var async     = require('async');
+var fs        = require('fs');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
@@ -18,8 +21,21 @@ module.exports = function(req, res, next) {
                     req.body.row[name] = req.files[name];
                 }
             }
-            console.error(req.body);
-            next();
+            // loading file content to req.files[n].data
+            var tasks = _.map(req.files, function(file) {
+                return function(next) {
+                    fs.readFile(file.path, function(err, data) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            file.data = data;
+                            next();
+                        }
+                    })
+
+                }
+            });
+            async.series(tasks, next);
         });
     } else {
         next();
