@@ -84,6 +84,8 @@ ComboBoxFieldController.prototype.setValue = function (value, view) {
                 } else {
                     view.firstElementChild.innerHTML = '{id: ' + value + '}';
                 }
+            } else {
+                view.firstElementChild.innerHTML = '';
             }
             break;
     }
