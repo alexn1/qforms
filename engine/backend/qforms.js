@@ -11,7 +11,6 @@ var session    = require('express-session');
 var _          = require('underscore');
 var async      = require('async');
 
-
 var p         = require('../package');
 var helper    = require('./common/helper');
 var multipart = require('./common/multipart');
@@ -21,7 +20,7 @@ var qforms = module.exports = express();
 // environment
 qforms.set('appsDirPath', helper.getParams().appsDirPath || config.get('appsDirPath'));
 if (!fs.existsSync(qforms.get('appsDirPath'))) {
-    console.log("Application folder '" + path.resolve(qforms.get('appsDirPath')) + "' doesn't exists");
+    console.log("Application folder '" + path.resolve(qforms.get('appsDirPath')) + "' doesn't exist");
     process.exit(1);
 }
 qforms.set('version'        , p.version);
