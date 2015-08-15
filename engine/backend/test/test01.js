@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require('fs');
+
+var should = require('should');
 
 var helper                = require('../common/helper');
 var ApplicationController = require('../viewer/ModelController/ApplicationController/ApplicationController');
@@ -17,6 +18,9 @@ describe('test01', function() {
             });
         });
     });
+    after(function(done) {
+        application.deinit(done);
+    });
     it('insert row with RowForm', function(done) {
         var context = application.createContext({
             row: {
@@ -27,20 +31,27 @@ describe('test01', function() {
         application.getPage(context, 'employee', function(page) {
             page.forms.employee.dataSources.default.insert(context, function(_key) {
                 key = _key;
-                console.log('key: ', JSON.stringify(_key));
+                var row = page.forms.employee.dataSources.default.getKeyValues(_key);
+                application.databases.default.query(context, 'select * from employee where id = {id}', row, function(rows) {
+                    should.exist(rows[0]);
+                    rows[0].should.be.type('object').and.have.properties({
+                        first_name: 'test a',
+                        last_name : 'test b'
+                    });
+                });
                 done();
             });
         });
     });
     it('delete row with RowForm', function(done) {
-        var context = application.createContext({
-            row: {
-                id: JSON.parse(key)[0]
-            }
-        });
+        var context = application.createContext();
         application.getPage(context, 'employee', function(page) {
+            context.row = page.forms.employee.dataSources.default.getKeyValues(key);
             page.forms.employee.dataSources.default.delete(context, function() {
-                done();
+                application.databases.default.query(context, 'select * from employee where id = {id}', context.row, function(rows) {
+                    should.not.exist(rows[0]);
+                    done();
+                });
             });
         });
     });

@@ -206,6 +206,17 @@ DataSourceController.prototype.getRowKeyValues = function(row) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+DataSourceController.prototype.getKeyValues = function(key) {
+    var arr = JSON.parse(key);
+    var row = {};
+    for (var i = 0; i < this.keyColumns.length; i++) {
+        var column = this.keyColumns[i];
+        row[column] = arr[i];
+    }
+    return row;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getFullName = function() {
     if (this.form) {
         return [this.form.page.name, this.form.name, this.name].join('.');
