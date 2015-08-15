@@ -46,15 +46,24 @@ function ApplicationController(data, appInfo) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationController.create = function(data, appInfo, callback) {
-    var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-    helper.getFileContent(customClassFilePath, function(content) {
-        if (content) {
-            var customClass = eval(content);
-            callback(new customClass(data, appInfo));
-        } else {
-            callback(new ApplicationController(data, appInfo));
-        }
+ApplicationController.create = function(appFilePath, callback) {
+    helper.getAppInfo(appFilePath, function(appInfo) {
+        fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
+            if (err) {
+                throw err;
+            } else {
+                var data = JSON.parse(content);
+                var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
+                helper.getFileContent(customClassFilePath, function(content) {
+                    if (content) {
+                        var customClass = eval(content);
+                        callback(new customClass(data, appInfo));
+                    } else {
+                        callback(new ApplicationController(data, appInfo));
+                    }
+                });
+            }
+        });
     });
 };
 
@@ -252,4 +261,38 @@ ApplicationController.prototype.getParams = function(context) {
         params['username'] = context.user.name;
     }
     return params;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.createContext = function(context) {
+    if (context === undefined) {
+        context = {};
+    }
+    if (context.params === undefined) {
+        context.params = {};
+    }
+    if (context.querytime === undefined) {
+        context.querytime = {};
+    }
+    if (context.querytime.params === undefined) {
+        context.querytime.params = {};
+    }
+    if (context.req) {
+        var route = [context.req.params.appDirName, context.req.params.appFileName].join('/');
+        if (context.req.session.user && context.req.session.user[route]) {
+            context.user = context.req.session.user[route];
+        }
+    }
+    if (context.connections === undefined) {
+        context.connections = {};
+    }
+    return context;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationController.prototype.destroyContext = function(context) {
+    for (var name in context.connections) {
+        console.log('release: ' + name);
+        context.connections[name].release();
+    }
 };

@@ -47,32 +47,18 @@ function createApplication(req, res, next, route) {
     //console.log('new app: ' + route);
     var applications = req.app.get('applications');
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-    fs.exists(appFilePath, function(exists) {
-        if (exists) {
-            helper.getAppInfo(appFilePath, function(appInfo) {
-                fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        var d = domain.create();
-                        if (qforms.get('handleException') === 'true') {
-                            d.on('error', next);
-                        }
-                        d.run(function() {
-                            var appData = JSON.parse(content);
-                            ApplicationController.create(appData, appInfo, function(application) {
-                                application.init(function() {
-                                    applications[route] = application;
-                                    handle(req, res, next, application);
-                                });
-                            });
-                        });
-                    }
-                });
+
+    var d = domain.create();
+    if (qforms.get('handleException') === 'true') {
+        d.on('error', next);
+    }
+    d.run(function() {
+        ApplicationController.create(appFilePath, function(application) {
+            application.init(function() {
+                applications[route] = application;
+                handle(req, res, next, application);
             });
-        } else {
-            next();
-        }
+        });
     });
 };
 
@@ -116,10 +102,12 @@ function handle(req, res, next, application) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
     var route = [req.params.appDirName, req.params.appFileName].join('/');
-    var context = createContext(req);
+    var context = application.createContext({
+        req: req
+    });
     if (req.method === 'GET') {
         application.getUsers(context, function(users) {
-            destroyContext(context);
+            application.destroyContext(context);
             res.render('viewer/login', {
                 version       : req.app.get('version'),
                 application   : application,
@@ -145,11 +133,11 @@ function login(req, res, next, application) {
                         name: req.body.username
                     };
                 }
-                destroyContext(context);
+                application.destroyContext(context);
                 res.redirect(req.url);
             } else {
                 application.getUsers(context, function(users) {
-                    destroyContext(context);
+                    application.destroyContext(context);
                     res.render('viewer/login', {
                         version       : req.app.get('version'),
                         application   : application,
@@ -175,43 +163,14 @@ function logout(req, res, next, application) {
     res.json(null);
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function createContext(req, context) {
-    if (context === undefined) {
-        context = {};
-    }
-    if (context.params === undefined) {
-        context.params = {};
-    }
-    if (context.querytime === undefined) {
-        context.querytime = {};
-    }
-    if (context.querytime.params === undefined) {
-        context.querytime.params = {};
-    }
-    var route = [req.params.appDirName, req.params.appFileName].join('/');
-    if (req.session.user && req.session.user[route]) {
-        context.user = req.session.user[route];
-    }
-    if (context.connections === undefined) {
-        context.connections = {};
-    }
-    return context;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function destroyContext(context) {
-    for (var name in context.connections) {
-        console.log('release: ' + name);
-        context.connections[name].release();
-    }
-};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
-    var context = createContext(req);
+    var context = application.createContext({
+        req: req
+    });
     application.fill(context, function(response) {
-        destroyContext(context);
+        application.destroyContext(context);
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
@@ -229,14 +188,15 @@ function index(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
-    var context = createContext(req, {
+    var context = application.createContext({
+        req           : req,
         params        : req.body.params,
         newMode       : req.body.newMode,
         parentPageName: req.body.parentPageName
     });
     application.getPage(context, req.body.page, function(page) {
         page.fill(context, function(data) {
-            destroyContext(context);
+            application.destroyContext(context);
             res.json({
                 data: data
             });
@@ -246,7 +206,8 @@ function page(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
-    var context = createContext(req, {
+    var context = application.createContext({
+        req           : req,
         row           : req.body.row,
         parentPageName: req.body.parentPageName
     });
@@ -263,7 +224,7 @@ function update(req, res, next, application) {
                             if (err) {
                                 throw err;
                             }
-                            destroyContext(context);
+                            application.destroyContext(context);
                             res.json(null);
                         });
                     });
@@ -279,7 +240,8 @@ function update(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
-    var context = createContext(req, {
+    var context = application.createContext({
+        req           : req,
         parentPageName: req.body.parentPageName,
         params        : req.body.params
     });
@@ -298,7 +260,7 @@ function frame(req, res, next, application) {
     };
     getDataSource(function(dataSource) {
         dataSource.frame(context, function(response) {
-            destroyContext(context);
+            application.destroyContext(context);
             res.json(response);
         });
     });
@@ -306,7 +268,8 @@ function frame(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
-    var context = createContext(req, {
+    var context = application.createContext({
+        req           : req,
         row           : req.body.row,
         parentPageName: req.body.parentPageName
     });
@@ -323,7 +286,7 @@ function insert(req, res, next, application) {
                             if (err) {
                                 throw err;
                             }
-                            destroyContext(context);
+                            application.destroyContext(context);
                             res.json({
                                 key: key
                             });
@@ -341,7 +304,8 @@ function insert(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
-    var context = createContext(req, {
+    var context = application.createContext({
+        req           : req,
         row           : req.body.row,
         parentPageName: req.body.parentPageName
     });
@@ -358,7 +322,7 @@ function _delete(req, res, next, application) {
                             if (err) {
                                 throw err;
                             }
-                            destroyContext(context);
+                            application.destroyContext(context);
                             res.json(null);
                         });
                     });
@@ -374,10 +338,10 @@ function _delete(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function rpc(req, res, next, application) {
-    var context = createContext(req, {
-        params   : req.body.params,
+    var context = application.createContext({
         req      : req,
-        res      : res
+        res      : res,
+        params   : req.body.params
     });
     application.getPage(context, req.body.page, function(page) {
         page.rpc(context);

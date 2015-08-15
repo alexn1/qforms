@@ -1,0 +1,1 @@
+mysql -u demo -p123qwe demo < data.sql
