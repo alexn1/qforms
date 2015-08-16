@@ -9,28 +9,6 @@ var _     = require('underscore');
 var mysql = require('mysql');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = {
-    getFilePathsSync    : getFilePathsSync,
-    getFilePaths        : getFilePaths,
-    getAppInfo          : getAppInfo,
-    getAppInfos         : getAppInfos,
-    currentTime         : currentTime,
-    currentDate         : currentDate,
-    queryFormat         : queryFormat,
-    typeCast            : typeCast,
-    getParams           : getParams,
-    replaceKey          : replaceKey,
-    getFileContent      : getFileContent,
-    putFileContent      : putFileContent,
-    moveObjProp         : moveObjProp,
-    copyFile            : copyFile,
-    createDirIfNotExists    : createDirIfNotExists,
-    createDirIfNotExistsSync: createDirIfNotExistsSync,
-    getTempSubDirPath       : getTempSubDirPath,
-    getXmlObjectFromDataSet : getXmlObjectFromDataSet
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
     var filePaths = glob.sync(path.join(dirPath, '*.' + ext));
     glob.sync(path.join(dirPath, '*/')).forEach(function(subDirPath) {
@@ -42,7 +20,7 @@ function _getFilePathsSync(dirPath, ext) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getFilePathsSync(publicDirPath, subDirPath, ext) {
+module.exports.getFilePathsSync = function getFilePathsSync(publicDirPath, subDirPath, ext) {
     return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
         return slash(path.relative(publicDirPath, filePath));
     });
@@ -70,7 +48,7 @@ function _getFilePaths(dirPath, ext, filePaths, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getFilePaths(publicDirPath, subDirPath, ext, callback) {
+module.exports.getFilePaths = function getFilePaths(publicDirPath, subDirPath, ext, callback) {
     var filePaths = [];
     _getFilePaths(path.join(publicDirPath, subDirPath), ext, filePaths, function() {
         var relativeFilePaths = filePaths.map(function(filePath) {
@@ -81,7 +59,7 @@ function getFilePaths(publicDirPath, subDirPath, ext, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getAppInfo(appFilePath, callback) {
+module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
     fs.readFile(appFilePath, 'utf8', function(err, content) {
         if (err) {
             throw err;
@@ -115,7 +93,7 @@ module.exports.getAppInfo2 = function(appFilePath, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getAppInfos(appsDirPath, callback) {
+module.exports.getAppInfos = function getAppInfos(appsDirPath, callback) {
     var appInfos = [];
     glob(path.join(appsDirPath, '*/*.json'), function(err, appFilesPaths) {
         async.eachSeries(appFilesPaths, function(appFilePath, next) {
@@ -132,7 +110,7 @@ function getAppInfos(appsDirPath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function currentTime() {
+module.exports.currentTime = function currentTime() {
     var now = new Date();
     var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
@@ -141,7 +119,7 @@ function currentTime() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function currentDate() {
+module.exports.currentDate = function currentDate() {
     var now = new Date();
     var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
     var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
@@ -150,7 +128,7 @@ function currentDate() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function queryFormat(query, params) {
+module.exports.queryFormat = function queryFormat(query, params) {
     params = params || {};
     var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
         if (params.hasOwnProperty(name)) {
@@ -175,7 +153,7 @@ module.exports.templateValue = function(value, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function typeCast(field, next) {
+module.exports.typeCast = function typeCast(field, next) {
     if (
         field.type === 'DATE'      ||
         field.type === 'DATETIME'  ||
@@ -189,7 +167,7 @@ function typeCast(field, next) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getParams() {
+module.exports.getParams = function getParams() {
     var params = process.argv.map(function(arg) {
         var param = arg.split('=');
         return {
@@ -208,7 +186,7 @@ function getParams() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function replaceKey(obj, key1, key2) {
+module.exports.replaceKey = function replaceKey(obj, key1, key2) {
     var keys   = Object.keys(obj);
     var values = _.filter(obj, function () {return true;});
     var index  = keys.indexOf(key1);
@@ -220,7 +198,7 @@ function replaceKey(obj, key1, key2) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getFileContent(filePath, callback) {
+module.exports.getFileContent = function getFileContent(filePath, callback) {
     fs.exists(filePath, function(exists) {
         if (exists) {
             fs.readFile(filePath, 'utf8', function (err, content) {
@@ -237,7 +215,7 @@ function getFileContent(filePath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function putFileContent(filePath, content, callback) {
+module.exports.putFileContent = function putFileContent(filePath, content, callback) {
     fs.writeFile(filePath, content, 'utf8', function(err) {
         if (err) {
             throw err;
@@ -249,7 +227,7 @@ function putFileContent(filePath, content, callback) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function createDirIfNotExists(dirPath, callback) {
+module.exports.createDirIfNotExists = function createDirIfNotExists(dirPath, callback) {
     fs.exists(dirPath, function(exists) {
         if (exists) {
             callback();
@@ -266,14 +244,14 @@ function createDirIfNotExists(dirPath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function createDirIfNotExistsSync(dirPath) {
+module.exports.createDirIfNotExistsSync = function createDirIfNotExistsSync(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function moveObjProp(obj, prop, offset) {
+module.exports.moveObjProp = function moveObjProp(obj, prop, offset) {
     var keys     = _.keys(obj);
     var values   = _.values(obj);
     var oldIndex = keys.indexOf(prop);
@@ -307,7 +285,7 @@ function getRandomString(length) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getTempSubDirPath(tempDirPath, callback) {
+module.exports.getTempSubDirPath = function getTempSubDirPath(tempDirPath, callback) {
     var subDirName     = getRandomString(8);
     var tempSubSirPath = path.join(tempDirPath, subDirName);
     fs.exists(tempSubSirPath, function(exists) {
@@ -326,7 +304,7 @@ function getTempSubDirPath(tempDirPath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function copyFile(source, target, callback) {
+module.exports.copyFile = function copyFile(source, target, callback) {
     var rd = fs.createReadStream(source);
     rd.on('error', function(err) {
         throw err;
@@ -340,7 +318,7 @@ function copyFile(source, target, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function getXmlObjectFromDataSet(dataSet) {
+module.exports.getXmlObjectFromDataSet = function getXmlObjectFromDataSet(dataSet) {
     var dsName = dataSet['@attributes'].name;
     var xmlObject = {};
     xmlObject[dsName] = [];
