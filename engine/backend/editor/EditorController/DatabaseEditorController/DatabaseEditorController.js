@@ -29,7 +29,7 @@ DatabaseEditorController.prototype._new = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var appEditor = new ApplicationEditor(appFile);
         appEditor.newDatabase(params);
         if (params.params) {
             for (var name in params.params) {
@@ -52,7 +52,7 @@ DatabaseEditorController.prototype.save = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var appEditor = new ApplicationEditor(appFile);
         appEditor.setDatabaseAttr(params.database, params.attr, params.value);
         appEditor.save(function() {
             callback(null);
@@ -65,7 +65,7 @@ DatabaseEditorController.prototype.delete = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var appEditor = new ApplicationEditor(appFile);
         appEditor.deleteDatabase(params.database);
         appEditor.save(function() {
             callback(null);
@@ -81,7 +81,7 @@ DatabaseEditorController.prototype.getView = function(params, callback) {
             case 'DatabaseView/DatabaseView.html':
                 var appFile = new JsonFile(self.appInfo.filePath);
                 appFile.read(function() {
-                    var appEditor = new ApplicationEditor(appFile, self.appInfo);
+                    var appEditor = new ApplicationEditor(appFile);
                     var databaseData = appEditor.getDatabaseData(params.database);
                     var cnn = mysql.createConnection({
                         host        : databaseData.params.host['@attributes'].value,
@@ -124,7 +124,7 @@ DatabaseEditorController.prototype.getTableInfo = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var appEditor = new ApplicationEditor(appFile);
         var databaseData = appEditor.getDatabaseData(params.database);
         var cnn = mysql.createConnection({
             host        : databaseData.params.host['@attributes'].value,

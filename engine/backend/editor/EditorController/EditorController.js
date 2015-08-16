@@ -38,7 +38,7 @@ EditorController.prototype.getApplicationEditor = function(callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile, self.appInfo);
+        var appEditor = new ApplicationEditor(appFile);
         callback(appEditor);
     });
 };

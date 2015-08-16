@@ -88,24 +88,30 @@ function getAppInfo(appFilePath, callback) {
         } else {
             var data = JSON.parse(content);
             if (data['@class'] && data['@class'] === 'Application') {
-                var fileName = path.basename(appFilePath, path.extname(appFilePath));
-                var dirName  = path.basename(path.dirname(appFilePath));
-                callback({
-                    name        : data['@attributes'].name,
-                    caption     : data['@attributes'].caption,
-                    route       : dirName + '/' + fileName,
-                    fileName    : fileName,
-                    dirName     : dirName,
-                    filePath    : path.resolve(appFilePath),
-                    fileNameExt : path.basename(appFilePath),
-                    extName     : path.extname(appFilePath),
-                    dirPath     : path.resolve(path.dirname(appFilePath))
-                });
+                var appInfo = module.exports.getAppInfo2(appFilePath, data);
+                callback(appInfo);
             } else {
                 callback(null);
             }
         }
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+module.exports.getAppInfo2 = function(appFilePath, data) {
+    var fileName = path.basename(appFilePath, path.extname(appFilePath));
+    var dirName  = path.basename(path.dirname(appFilePath));
+    return {
+        name        : data['@attributes'].name,
+        caption     : data['@attributes'].caption,
+        route       : [dirName, fileName].join('/'),
+        fileName    : fileName,
+        dirName     : dirName,
+        filePath    : path.resolve(appFilePath),
+        fileNameExt : path.basename(appFilePath),
+        extName     : path.extname(appFilePath),
+        dirPath     : path.resolve(path.dirname(appFilePath))
+    };
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

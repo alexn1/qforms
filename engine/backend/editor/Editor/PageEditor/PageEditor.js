@@ -103,7 +103,7 @@ PageEditor.prototype.newForm = function(params) {
         this.data.forms = {};
     }
     if (this.data.forms[name]) {
-        throw new Error('Form {name} already exist.'.replace('{name}', name));
+        throw new Error('Form {name} already exists.'.replace('{name}', name));
     }
     var data;
     switch (_class) {
@@ -116,6 +116,8 @@ PageEditor.prototype.newForm = function(params) {
         case 'TreeForm':
             data = TreeFormEditor.createData(params);
             break;
+        default:
+            throw new Error('unknown form class');
     }
     this.data.forms[name] = data;
     return this.getForm(name);
@@ -124,7 +126,7 @@ PageEditor.prototype.newForm = function(params) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.createForm = function(params, callback) {
     var self = this;
-    var name = params['name'];
+    var name = params.name;
     var formEditor = this.newForm(params);
     // fields
     if (params.fields) {

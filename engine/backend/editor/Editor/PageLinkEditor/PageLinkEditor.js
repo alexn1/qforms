@@ -9,6 +9,19 @@ var Editor = require('../Editor');
 util.inherits(PageLinkEditor, Editor);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PageLinkEditor.createData = function(params) {
+    return {
+        '@class' : 'PageLink',
+        '@attributes' : {
+            name    : params.name,
+            fileName: 'pages/{name}/{name}.json'.replace(/{name}/g, params.name),
+            menu    : params.menu || (params.startup === 'true' ? 'Menu' : ''),
+            startup : params.startup || 'false'
+        }
+    }
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function PageLinkEditor(appEditor, name) {
     this.appEditor = appEditor;
     this.name      = name;

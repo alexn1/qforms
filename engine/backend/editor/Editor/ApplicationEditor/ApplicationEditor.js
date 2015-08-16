@@ -35,16 +35,18 @@ ApplicationEditor.createData = function(params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ApplicationEditor.create = function(appFilePath, name, callback) {
+ApplicationEditor.createAppFile = function(appFilePath, params, callback) {
     var appFile = new JsonFile(appFilePath);
-    appFile.data = ApplicationEditor.createData({name: name});
-    appFile.create(callback);
+    appFile.data = ApplicationEditor.createData(params);
+    appFile.create(function() {
+        callback(appFile);
+    });
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function ApplicationEditor(appFile, appInfo) {
+function ApplicationEditor(appFile) {
     this.appFile            = appFile;
-    this.appInfo            = appInfo;
+    this.appInfo            = helper.getAppInfo2(appFile.filePath, appFile.data);
     this.data               = appFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
@@ -256,25 +258,14 @@ ApplicationEditor.prototype.newDatabaseParam = function(params) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.newPageLink = function(params) {
-    var name    = params.name;
-    var menu    = params.menu;
-    var startup = params.startup;
-
+    var name = params.name;
     if (!this.data.pageLinks) {
         this.data.pageLinks = {};
     }
     if (this.data.pageLinks[name]) {
-        throw new Error('Page Link {name} already exist.'.replace('{name}', name));
+        throw new Error('Page Link {name} already exists.'.replace('{name}', name));
     }
-    return this.data.pageLinks[name] = {
-        '@class' : 'PageLink',
-        '@attributes' : {
-            'name' : name,
-            'fileName' : 'pages/{name}/{name}.json'.replace(/\{name\}/g, name),
-            'menu' : menu,
-            'startup' : startup
-        }
-    };
+    return this.data.pageLinks[params.name] = PageLinkEditor.createData(params);
 };
 
 

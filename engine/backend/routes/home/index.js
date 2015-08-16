@@ -27,7 +27,7 @@ module.exports = function(req, res, next) {
         var appDirPath    = path.join(req.app.get('appsDirPath'), req.body.folder);
         var appFilePath   = path.join(appDirPath,                 req.body.name + '.json');
         helper.createDirIfNotExists(appDirPath, function() {
-            ApplicationEditor.create(appFilePath, req.body.name, function() {
+            ApplicationEditor.createAppFile(appFilePath, {name: req.body.name}, function(appFile) {
                 helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
                     res.json({
                         appList: appInfos
