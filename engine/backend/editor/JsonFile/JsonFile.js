@@ -16,7 +16,7 @@ JsonFile.prototype.create = function(callback) {
     var self = this;
     fs.exists(this.filePath, function(exists) {
         if (exists) {
-            throw new Error('File {filePath} already exists'.replace('{filePath}', this.filePath));
+            throw new Error('File {filePath} already exists'.replace('{filePath}', self.filePath));
         } else {
             if (self.data) {
             } else if (self.content) {

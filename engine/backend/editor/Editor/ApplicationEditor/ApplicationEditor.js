@@ -63,50 +63,16 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
     var pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
     var pageDirPath    = path.join(pagesDirPath, params.name);
     var pageFilePath   = path.join(pageDirPath , params.name + '.json');
-    var pageData       = PageEditor.createData(params);
-    var content        = JSON.stringify(pageData, null, 4);
-    var createPageFile = function(_callback) {
-        fs.exists(pageFilePath, function(exists) {
-            if (exists) {
-                throw new Error('Page {name} already exist.'.replace('{name}', params.name));
-            } else {
-                fs.writeFile(pageFilePath, content, 'utf8', function(err) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        _callback();
-                    }
-                });
-            }
-        });
-    };
-    var createPageEditor = function(_callback) {
-        createPageFile(function() {
-            self.newPageLink(params);
-            self.save(function() {
-                var pageFile = new JsonFile(pageFilePath);
-                pageFile.read(function() {
-                    _callback(new PageEditor(this, pageFile));
+    helper.createDirIfNotExists(pagesDirPath, function() {
+        helper.createDirIfNotExists(pageDirPath, function() {
+            var pageFile = new JsonFile(pageFilePath);
+            pageFile.data = PageEditor.createData(params);
+            pageFile.create(function() {
+                self.newPageLink(params);
+                self.save(function() {
+                    callback(new PageEditor(this, pageFile));
                 });
             });
-        });
-    };
-    helper.createDirIfNotExists(pagesDirPath, function() {
-        fs.exists(pageDirPath, function(exists) {
-            if (!exists) {
-                fs.mkdir(pageDirPath, function(err) {
-                    if (err) {
-                        throw err;
-                    }
-                    createPageEditor(function(pageEditor) {
-                        callback(pageEditor);
-                    });
-                });
-            } else {
-                createPageEditor(function(pageEditor) {
-                    callback(pageEditor);
-                });
-            }
         });
     });
 };
