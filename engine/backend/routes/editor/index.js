@@ -99,7 +99,7 @@ function handle(req, res, next, appInfo) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, appInfo) {
     var appFile = new JsonFile(appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         res.render('editor/view', {
             version        : req.app.get('version'),
             debug          : req.query.debug,

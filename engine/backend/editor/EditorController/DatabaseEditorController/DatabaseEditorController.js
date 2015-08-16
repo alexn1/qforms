@@ -28,7 +28,7 @@ function DatabaseEditorController(appInfo) {
 DatabaseEditorController.prototype._new = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         appEditor.newDatabase(params);
         if (params.params) {
@@ -51,7 +51,7 @@ DatabaseEditorController.prototype._new = function(params, callback) {
 DatabaseEditorController.prototype.save = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         appEditor.setDatabaseAttr(params.database, params.attr, params.value);
         appEditor.save(function() {
@@ -64,7 +64,7 @@ DatabaseEditorController.prototype.save = function(params, callback) {
 DatabaseEditorController.prototype.delete = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         appEditor.deleteDatabase(params.database);
         appEditor.save(function() {
@@ -80,7 +80,7 @@ DatabaseEditorController.prototype.getView = function(params, callback) {
         switch (params.view) {
             case 'DatabaseView/DatabaseView.html':
                 var appFile = new JsonFile(self.appInfo.filePath);
-                appFile.init(function() {
+                appFile.read(function() {
                     var appEditor = new ApplicationEditor(appFile, self.appInfo);
                     var databaseData = appEditor.getDatabaseData(params.database);
                     var cnn = mysql.createConnection({
@@ -123,7 +123,7 @@ DatabaseEditorController.prototype.getView = function(params, callback) {
 DatabaseEditorController.prototype.getTableInfo = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         var databaseData = appEditor.getDatabaseData(params.database);
         var cnn = mysql.createConnection({

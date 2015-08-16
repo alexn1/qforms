@@ -34,11 +34,18 @@ ApplicationEditor.createData = function(params) {
     };
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.create = function(appFilePath, name, callback) {
+    var appFile = new JsonFile(appFilePath);
+    appFile.data = ApplicationEditor.createData({name: name});
+    appFile.create(callback);
+};
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationEditor(appFile, appInfo) {
     this.appFile            = appFile;
     this.appInfo            = appInfo;
-    this.data               = appFile.getData();
+    this.data               = appFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),
@@ -78,7 +85,7 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
             self.newPageLink(params);
             self.save(function() {
                 var pageFile = new JsonFile(pageFilePath);
-                pageFile.init(function() {
+                pageFile.read(function() {
                     _callback(new PageEditor(this, pageFile));
                 });
             });
@@ -133,7 +140,7 @@ ApplicationEditor.prototype.getPageByFileName = function(relFilePath, callback) 
     var self         = this;
     var pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
     var pageFile     = new JsonFile(pageFilePath);
-    pageFile.init(function() {
+    pageFile.read(function() {
         callback(new PageEditor(self, pageFile));
     });
 };

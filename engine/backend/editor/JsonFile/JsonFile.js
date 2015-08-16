@@ -12,7 +12,32 @@ function JsonFile(filePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-JsonFile.prototype.init = function(callback) {
+JsonFile.prototype.create = function(callback) {
+    var self = this;
+    fs.exists(this.filePath, function(exists) {
+        if (exists) {
+            throw new Error('File {filePath} already exists'.replace('{filePath}', this.filePath));
+        } else {
+            if (self.data) {
+            } else if (self.content) {
+                self.data = JSON.parse(self.content);
+            } else {
+                self.data = {};
+            }
+            self.content = JSON.stringify(self.data, null, 4);
+            fs.writeFile(self.filePath, self.content,'utf8', function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    callback();
+                }
+            });
+        }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+JsonFile.prototype.read = function(callback) {
     var self = this;
     fs.readFile(this.filePath, 'utf8', function(err, content) {
         if (err) {

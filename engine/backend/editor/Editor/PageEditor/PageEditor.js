@@ -21,7 +21,7 @@ function PageEditor(appEditor, pageFile) {
     this.appEditor          = appEditor;
     this.parent             = appEditor;
     this.pageFile           = pageFile;
-    this.data               = pageFile.getData();
+    this.data               = pageFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
         qforms.get('public'),

@@ -27,7 +27,7 @@ function ParamEditorController(appInfo) {
 ParamEditorController.prototype._new = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         var param = appEditor.newDatabaseParam(params);
         appEditor.save(function() {
@@ -40,7 +40,7 @@ ParamEditorController.prototype._new = function(params, callback) {
 ParamEditorController.prototype.save = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         appEditor.setDatabaseParamAttr(params['database'], params['param'], params['attr'], params['value']);
         appEditor.save(function() {
@@ -53,7 +53,7 @@ ParamEditorController.prototype.save = function(params, callback) {
 ParamEditorController.prototype.delete = function(params, callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         appEditor.deleteDatabaseParam(params['database'], params['param']);
         appEditor.save(function() {

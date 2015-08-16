@@ -37,7 +37,7 @@ EditorController.prototype.getView = function(params, callback) {
 EditorController.prototype.getApplicationEditor = function(callback) {
     var self = this;
     var appFile = new JsonFile(this.appInfo.filePath);
-    appFile.init(function() {
+    appFile.read(function() {
         var appEditor = new ApplicationEditor(appFile, self.appInfo);
         callback(appEditor);
     });

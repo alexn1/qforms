@@ -85,8 +85,8 @@ ApplicationController.prototype._buildMenu = function(context, callback) {
             if (pageLinkMenu) {
                 var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
                 var pageFile     = new JsonFile(pageFilePath);
-                pageFile.init(function() {
-                    var pageData    = pageFile.getData();
+                pageFile.read(function() {
+                    var pageData    = pageFile.data;
                     var pageCaption = pageData['@attributes'].caption;
                     if (!menu[pageLinkMenu]) {
                         menu[pageLinkMenu] = [];

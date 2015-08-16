@@ -1,9 +1,7 @@
 'use strict';
 
-
 var should = require('should');
 
-var helper                = require('../common/helper');
 var ApplicationController = require('../viewer/ModelController/ApplicationController/ApplicationController');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
