@@ -1,12 +1,13 @@
 'use strict';
 
-var glob  = require('glob');
-var path  = require('path');
-var slash = require('slash');
-var async = require('async');
-var fs    = require('fs');
-var _     = require('underscore');
-var mysql = require('mysql');
+var glob     = require('glob');
+var path     = require('path');
+var slash    = require('slash');
+var async    = require('async');
+var fs       = require('fs');
+var _        = require('underscore');
+var mysql    = require('mysql');
+var Promise  = require('bluebird');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
@@ -240,6 +241,25 @@ module.exports.createDirIfNotExists = function createDirIfNotExists(dirPath, cal
                 }
             });
         }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+module.exports.createDirIfNotExists2 = function createDirIfNotExists2(dirPath) {
+    return new Promise(function(resolve, reject) {
+        fs.exists(dirPath, function(exists) {
+            if (exists) {
+                resolve();
+            } else {
+                fs.mkdir(dirPath, function(err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+        });
     });
 };
 

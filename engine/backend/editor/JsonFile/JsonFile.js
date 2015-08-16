@@ -2,7 +2,8 @@
 
 module.exports = JsonFile;
 
-var fs = require('fs');
+var fs      = require('fs');
+var Promise = require('bluebird');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function JsonFile(filePath) {
@@ -37,6 +38,34 @@ JsonFile.prototype.create = function(callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+JsonFile.prototype.create2 = function() {
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        fs.exists(self.filePath, function(exists) {
+            if (exists) {
+                reject(new Error('File {filePath} already exists'.replace('{filePath}', self.filePath)));
+            } else {
+                if (self.data) {
+                } else if (self.content) {
+                    self.data = JSON.parse(self.content);
+                } else {
+                    self.data = {};
+                }
+                self.content = JSON.stringify(self.data, null, 4);
+                fs.writeFile(self.filePath, self.content,'utf8', function(err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+        });
+    });
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 JsonFile.prototype.read = function(callback) {
     var self = this;
     fs.readFile(this.filePath, 'utf8', function(err, content) {
@@ -69,6 +98,21 @@ JsonFile.prototype.save = function(callback) {
         } else {
             callback();
         }
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+JsonFile.prototype.save2 = function() {
+    var self = this;
+    this.content = JSON.stringify(this.data, null, 4);
+    return new Promise(function(resolve, reject) {
+        fs.writeFile(self.filePath, self.content, function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
     });
 };
 

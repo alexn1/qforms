@@ -2,9 +2,10 @@
 
 module.exports = ApplicationEditor;
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+var util    = require('util');
+var path    = require('path');
+var fs      = require('fs');
+var Promise = require('bluebird');
 
 var qforms              = require('../../../qforms');
 var helper              = require('../../../common/helper');
@@ -40,6 +41,17 @@ ApplicationEditor.createAppFile = function(appFilePath, params, callback) {
     appFile.data = ApplicationEditor.createData(params);
     appFile.create(function() {
         callback(appFile);
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.createAppFile2 = function(appFilePath, params) {
+    return new Promise(function(resolve, reject) {
+        var appFile = new JsonFile(appFilePath);
+        appFile.data = ApplicationEditor.createData(params);
+        appFile.create(function() {
+            resolve(appFile);
+        });
     });
 };
 
@@ -80,8 +92,34 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.createPage2 = function(params) {
+    var self           = this;
+    var pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
+    var pageDirPath    = path.join(pagesDirPath, params.name);
+    var pageFilePath   = path.join(pageDirPath , params.name + '.json');
+    var pageFile;
+    return helper.createDirIfNotExists2(pagesDirPath).then(function() {
+        return helper.createDirIfNotExists2(pageDirPath);
+    }).then(function() {
+        pageFile = new JsonFile(pageFilePath);
+        pageFile.data = PageEditor.createData(params);
+        return pageFile.create2();
+    }).then(function() {
+        self.newPageLink(params);
+        return self.save2();
+    }).then(function() {
+        return new PageEditor(self, pageFile);
+    });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.save = function(callback) {
     this.appFile.save(callback);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ApplicationEditor.prototype.save2 = function() {
+    return this.appFile.save2();
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
