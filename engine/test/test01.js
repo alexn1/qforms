@@ -2,14 +2,14 @@
 
 var should = require('should');
 
-var ApplicationController = require('../viewer/ModelController/ApplicationController/ApplicationController');
+var QForms = require('../backend/QForms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test01', function() {
     var application;
     var key;
     before(function(done) {
-        ApplicationController.create('../../apps/demo/application1.json', function(_application) {
+        QForms.ApplicationController.create('../app/demo/application1.json', function(_application) {
             _application.init(function() {
                 application = _application;
                 done();

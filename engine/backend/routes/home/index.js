@@ -3,12 +3,12 @@
 var path = require('path');
 var fs   = require('fs');
 
-var qforms            = require('../../qforms');
+var server            = require('../../server');
 var helper            = require('../../common/helper');
 var ApplicationEditor = require('../../editor/Editor/ApplicationEditor/ApplicationEditor');
 
-qforms.set('home_class_css', helper.getFilePathsSync(path.join(qforms.get('public')), 'home/class', 'css'));
-qforms.set('home_class_js' , helper.getFilePathsSync(path.join(qforms.get('public')), 'home/class', 'js'));
+server.set('home_class_css', helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'css'));
+server.set('home_class_js' , helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'js'));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {

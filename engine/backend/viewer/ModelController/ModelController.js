@@ -7,25 +7,10 @@ var fs    = require('fs');
 var _     = require('underscore');
 var async = require('async');
 
-var app                               = require('../../qforms');
-var DatabaseController                = require('./DatabaseController/DatabaseController');
-var PageLinkController                = require('./PageLinkController/PageLinkController');
-var PageController                    = require('./PageController/PageController');
-var TableFormController               = require('./FormController/TableFormController/TableFormController');
-var TreeFormController                = require('./FormController/TreeFormController/TreeFormController');
-var RowFormController                 = require('./FormController/RowFormController/RowFormController');
-var DataSourceController              = require('./DataSourceController/DataSourceController');
-var SqlDataSourceController           = require('./DataSourceController/SqlDataSourceController/SqlDataSourceController');
-var TextBoxFieldController            = require('./FieldController/TextBoxFieldController/TextBoxFieldController');
-var ComboBoxFieldController           = require('./FieldController/ComboBoxFieldController/ComboBoxFieldController');
-var DatePickerFieldController         = require('./FieldController/DatePickerFieldController/DatePickerFieldController');
-var CheckBoxFieldController           = require('./FieldController/CheckBoxFieldController/CheckBoxFieldController');
-var ImageFieldController              = require('./FieldController/ImageFieldController/ImageFieldController');
-var LabelFieldController              = require('./FieldController/LabelFieldController/LabelFieldController');
-var LinkFieldController               = require('./FieldController/LinkFieldController/LinkFieldController');
-var TextAreaFieldController           = require('./FieldController/TextAreaFieldController/TextAreaFieldController');
-var FileFieldController               = require('./FieldController/FileFieldController/FileFieldController');
-var ButtonControlController           = require('./ControlController/ButtonControlController/ButtonControlController');
+var server  = require('../../server');
+var QForms  = require('../../QForms');
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ModelController(data, parent) {
@@ -98,7 +83,7 @@ ModelController.prototype.createCollection = function(colName, callback) {
                 self[colName][itemName] = obj;
                 self[colName][itemName].init(next);
             };
-            eval('{class}Controller.create(itemData, self, _callback)'.replace('{class}', itemData['@class']));
+            eval('QForms.{class}Controller.create(itemData, self, _callback)'.replace('{class}', itemData['@class']));
         };
     });
     async.series(tasks, callback);

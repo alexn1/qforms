@@ -8,10 +8,10 @@ var fs    = require('fs');
 var _     = require('underscore');
 var mysql = require('mysql');
 
-var qforms           = require('../../../qforms');
+var QForms = require('../../../QForms');
+var server = require('../../../server');
+
 var EditorController = require('../EditorController');
-var ApplicationEditor = require('../../Editor/ApplicationEditor/ApplicationEditor');
-var JsonFile  = require('../../JsonFile/JsonFile');
 
 util.inherits(DatabaseEditorController, EditorController);
 
@@ -19,7 +19,7 @@ util.inherits(DatabaseEditorController, EditorController);
 function DatabaseEditorController(appInfo) {
     DatabaseEditorController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/DatabaseController/view'
     );
 };
@@ -27,9 +27,9 @@ function DatabaseEditorController(appInfo) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype._new = function(params, callback) {
     var self = this;
-    var appFile = new JsonFile(this.appInfo.filePath);
+    var appFile = new QForms.JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile);
+        var appEditor = new QForms.ApplicationEditor(appFile);
         appEditor.newDatabase(params);
         if (params.params) {
             for (var name in params.params) {
@@ -50,9 +50,9 @@ DatabaseEditorController.prototype._new = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.save = function(params, callback) {
     var self = this;
-    var appFile = new JsonFile(this.appInfo.filePath);
+    var appFile = new QForms.JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile);
+        var appEditor = new QForms.ApplicationEditor(appFile);
         appEditor.setDatabaseAttr(params.database, params.attr, params.value);
         appEditor.save(function() {
             callback(null);
@@ -63,9 +63,9 @@ DatabaseEditorController.prototype.save = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.delete = function(params, callback) {
     var self = this;
-    var appFile = new JsonFile(this.appInfo.filePath);
+    var appFile = new QForms.JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile);
+        var appEditor = new QForms.ApplicationEditor(appFile);
         appEditor.deleteDatabase(params.database);
         appEditor.save(function() {
             callback(null);
@@ -79,9 +79,9 @@ DatabaseEditorController.prototype.getView = function(params, callback) {
     DatabaseEditorController.super_.prototype.getView.call(this, params, function(result) {
         switch (params.view) {
             case 'DatabaseView/DatabaseView.html':
-                var appFile = new JsonFile(self.appInfo.filePath);
+                var appFile = new QForms.JsonFile(self.appInfo.filePath);
                 appFile.read(function() {
-                    var appEditor = new ApplicationEditor(appFile);
+                    var appEditor = new QForms.ApplicationEditor(appFile);
                     var databaseData = appEditor.getDatabaseData(params.database);
                     var cnn = mysql.createConnection({
                         host        : databaseData.params.host['@attributes'].value,
@@ -122,9 +122,9 @@ DatabaseEditorController.prototype.getView = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.getTableInfo = function(params, callback) {
     var self = this;
-    var appFile = new JsonFile(this.appInfo.filePath);
+    var appFile = new QForms.JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new ApplicationEditor(appFile);
+        var appEditor = new QForms.ApplicationEditor(appFile);
         var databaseData = appEditor.getDatabaseData(params.database);
         var cnn = mysql.createConnection({
             host        : databaseData.params.host['@attributes'].value,

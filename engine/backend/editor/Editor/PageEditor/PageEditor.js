@@ -6,13 +6,10 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
-var qforms              = require('../../../qforms');
-var helper              = require('../../../common/helper');
-var Editor              = require('../Editor');
-var TableFormEditor     = require('../../Editor/FormEditor/TableFormEditor/TableFormEditor');
-var RowFormEditor       = require('../../Editor/FormEditor/RowFormEditor/RowFormEditor');
-var TreeFormEditor      = require('../../Editor/FormEditor/TreeFormEditor/TreeFormEditor');
-var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
+var QForms = require('../../../QForms');
+var server              = require('../../../server');
+
+var Editor = require('../Editor');
 
 util.inherits(PageEditor, Editor);
 
@@ -24,11 +21,11 @@ function PageEditor(appEditor, pageFile) {
     this.data               = pageFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
     );
     this.defaultCssFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/PageController/view/PageView.css'
     );
 };
@@ -75,7 +72,7 @@ PageEditor.prototype.setAttr = function(name, value, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.moveFormUp = function(params, callback) {
-    this.data.forms = helper.moveObjProp(this.data.forms, params.form, -1);
+    this.data.forms = QForms.helper.moveObjProp(this.data.forms, params.form, -1);
     this.save(function() {
         callback('ok');
     });
@@ -89,7 +86,7 @@ PageEditor.prototype.save = function(callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.moveFormDown = function(params, callback) {
-    this.data.forms = helper.moveObjProp(this.data.forms, params.form, 1);
+    this.data.forms = QForms.helper.moveObjProp(this.data.forms, params.form, 1);
     this.save(function() {
         callback('ok');
     });
@@ -108,13 +105,13 @@ PageEditor.prototype.newForm = function(params) {
     var data;
     switch (_class) {
         case 'TableForm':
-            data = TableFormEditor.createData(params);
+            data = QForms.TableFormEditor.createData(params);
             break;
         case 'RowForm':
-            data = RowFormEditor.createData(params);
+            data = QForms.RowFormEditor.createData(params);
             break;
         case 'TreeForm':
-            data = TreeFormEditor.createData(params);
+            data = QForms.TreeFormEditor.createData(params);
             break;
         default:
             throw new Error('unknown form class');
@@ -170,7 +167,7 @@ PageEditor.prototype.createForm = function(params, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.getForm = function(name) {
     var formData = this.data.forms[name];
-    return eval('new {class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
+    return eval('new QForms.{class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +223,7 @@ PageEditor.prototype.getCustomDirPath = function(callback) {
     var self = this;
     this.parent.getCustomDirPath(function(customDirPath) {
         var dirPath = path.join(customDirPath, 'pages', self.name);
-        helper.createDirIfNotExists(dirPath, function() {
+        QForms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -253,10 +250,10 @@ PageEditor.prototype.newDataSource = function(params) {
     var data;
     switch (_class) {
         case 'DataSource':
-            data = DataSourceEditor.create(params);
+            data = QForms.DataSourceEditor.create(params);
             break;
         case 'SqlDataSource':
-            data = SqlDataSourceEditor.create(params);
+            data = QForms.SqlDataSourceEditor.create(params);
             break;
         default:
             throw new Error('Unknown data source class.');
@@ -268,7 +265,7 @@ PageEditor.prototype.newDataSource = function(params) {
 PageEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
     this.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.dataSources = helper.replaceKey(
+        this.data.dataSources = QForms.helper.replaceKey(
             this.data.dataSources,
             dataSource,
             value);

@@ -10,12 +10,12 @@ var async         = require('async');
 var child_process = require('child_process');
 var xml           = require('xml');
 
-var qforms               = require('../../../qforms');
+
+var server               = require('../../../server');
 var helper               = require('../../../common/helper');
 var ModelController      = require('../ModelController');
 var PageLinkController   = require('../PageLinkController/PageLinkController');
 var PageController       = require('../PageController/PageController');
-var DataSourceController = require('../DataSourceController/DataSourceController');
 var JsonFile             = require('../../../editor/JsonFile/JsonFile');
 
 var text                 = {
@@ -31,7 +31,7 @@ function ApplicationController(data, appInfo) {
     this.appInfo            = appInfo;
     this.dirPath            = this.appInfo.dirPath;
     this.viewFilePath       = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view',
         'ApplicationView.ejs'
     );
@@ -206,7 +206,7 @@ ApplicationController.prototype.fill = function(context, callback) {
         delete response.password;
         delete response.authentication;
 
-        response.env    = qforms.get('env');
+        response.env    = server.get('env');
         response.text   = self.text;              // text
         response.params = self.getParams(context);// params
 

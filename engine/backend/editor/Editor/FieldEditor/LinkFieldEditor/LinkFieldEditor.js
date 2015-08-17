@@ -5,8 +5,11 @@ module.exports = LinkFieldEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
 var FieldEditor = require('../FieldEditor');
+
 
 util.inherits(LinkFieldEditor, FieldEditor);
 
@@ -14,7 +17,7 @@ util.inherits(LinkFieldEditor, FieldEditor);
 function LinkFieldEditor(formEditor, name) {
     LinkFieldEditor.super_.call(this, formEditor, name);
     this.defaultViewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LinkFieldController/view'
     );
 };

@@ -3,18 +3,20 @@
 module.exports = DatePickerFieldEditor;
 
 var util = require('util');
-
-var FieldEditor = require('../FieldEditor');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
+var FieldEditor = require('../FieldEditor');
+
 util.inherits(DatePickerFieldEditor, FieldEditor);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DatePickerFieldEditor(formEditor, name) {
     DatePickerFieldEditor.super_.call(this, formEditor, name);
     this.defaultViewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view'
     );
 };

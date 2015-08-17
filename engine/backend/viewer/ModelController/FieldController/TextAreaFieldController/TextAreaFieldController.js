@@ -5,8 +5,10 @@ module.exports = TextAreaFieldController;
 var util = require('util');
 var path = require('path');
 
+var QForms = require('../../../../QForms');
+var server             = require('../../../../server');
+
 var FieldController = require('../FieldController');
-var app             = require('../../../../qforms');
 
 util.inherits(TextAreaFieldController, FieldController);
 
@@ -14,7 +16,7 @@ util.inherits(TextAreaFieldController, FieldController);
 function TextAreaFieldController(data, parent) {
     TextAreaFieldController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        app.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );

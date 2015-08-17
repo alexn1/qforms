@@ -7,8 +7,10 @@ var path = require('path');
 var fs   = require('fs');
 var _    = require('underscore');
 
-var qforms            = require('../../../qforms');
-var EditorController  = require('../EditorController');
+var QForms = require('../../../QForms');
+var server = require('../../../server');
+
+var EditorController = require('../EditorController');
 
 util.inherits(KeyColumnEditorController, EditorController);
 
@@ -16,7 +18,7 @@ util.inherits(KeyColumnEditorController, EditorController);
 function KeyColumnEditorController(appInfo) {
     KeyColumnEditorController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'editor/class/Controller/ModelController/KeyColumnController'
     );
 };

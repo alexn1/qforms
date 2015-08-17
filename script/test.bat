@@ -1,5 +1,5 @@
 cd script
 call restore.bat
-cd ../engine/backend
+cd ../engine
 call mocha
-cd ../..
+cd ..

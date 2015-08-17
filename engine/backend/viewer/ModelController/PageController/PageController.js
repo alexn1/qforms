@@ -11,7 +11,7 @@ var child_process = require('child_process');
 var stream        = require('stream');
 
 var helper           = require('../../../common/helper');
-var qforms           = require('../../../qforms');
+var server           = require('../../../server');
 var ModelController  = require('../ModelController');
 
 util.inherits(PageController, ModelController);
@@ -22,7 +22,7 @@ function PageController(data, parent) {
     this.application        = parent;
     this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
     this.viewFilePath       = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/PageController/view',
         this.data['@class'] + 'View.ejs'
     );

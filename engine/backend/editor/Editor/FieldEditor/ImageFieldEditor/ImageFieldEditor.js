@@ -5,8 +5,11 @@ module.exports = ImageFieldEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
 var FieldEditor = require('../FieldEditor');
+
 
 util.inherits(ImageFieldEditor, FieldEditor);
 
@@ -15,7 +18,7 @@ function ImageFieldEditor(formEditor, name) {
     ImageFieldEditor.super_.call(this, formEditor, name);
     LabelFieldEditor.super_.call(this, formEditor, name);
     this.defaultViewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view'
     );
 };

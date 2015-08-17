@@ -6,7 +6,9 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var qforms           = require('../../../qforms');
+var QForms = require('../../../Qforms');
+var server = require('../../../server');
+
 var EditorController = require('../EditorController');
 
 util.inherits(VisualEditorController, EditorController);
@@ -22,7 +24,7 @@ VisualEditorController.prototype.getView = function(params, callback) {
         switch (params.view) {
             case 'VisualView.html':
                 var viewFilePath = path.join(
-                    qforms.get('public'),
+                    server.get('public'),
                     'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
                 );
                 fs.readFile(viewFilePath, 'utf8', function(err, content) {

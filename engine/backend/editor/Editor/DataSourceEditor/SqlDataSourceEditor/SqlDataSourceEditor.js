@@ -4,6 +4,8 @@ module.exports = SqlDataSourceEditor;
 
 var util = require('util');
 
+var QForms = require('../../../../QForms');
+
 var DataSourceEditor = require('../DataSourceEditor');
 
 util.inherits(SqlDataSourceEditor, DataSourceEditor);

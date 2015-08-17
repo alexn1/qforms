@@ -4,11 +4,11 @@ module.exports = ControlEditor;
 
 var util = require('util');
 
+var QForms = require('../../../QForms');
+
 var Editor = require('../Editor');
 
 util.inherits(ControlEditor, Editor);
-
-var ButtonControlEditor = require('./ButtonControlEditor/ButtonControlEditor');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ControlEditor(formEditor, name) {

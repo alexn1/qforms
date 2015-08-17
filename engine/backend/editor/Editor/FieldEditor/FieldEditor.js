@@ -6,20 +6,11 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var helper = require('../../../common/helper');
+var QForms = require('../../../QForms');
+
 var Editor = require('../Editor');
 
 util.inherits(FieldEditor, Editor);
-
-var CheckBoxFieldEditor      = require('./CheckBoxFieldEditor/CheckBoxFieldEditor');
-var ComboBoxFieldEditor      = require('./ComboBoxFieldEditor/ComboBoxFieldEditor');
-var DatePickerFieldEditor    = require('./DatePickerFieldEditor/DatePickerFieldEditor');
-var ImageFieldEditor         = require('./ImageFieldEditor/ImageFieldEditor');
-var LabelFieldEditor         = require('./LabelFieldEditor/LabelFieldEditor');
-var LinkFieldEditor          = require('./LinkFieldEditor/LinkFieldEditor');
-var TextAreaFieldEditor      = require('./TextAreaFieldEditor/TextAreaFieldEditor');
-var TextBoxFieldEditor       = require('./TextBoxFieldEditor/TextBoxFieldEditor');
-var FileFieldEditor          = require('./FileFieldEditor/FileFieldEditor');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function FieldEditor(formEditor, name) {
@@ -48,7 +39,7 @@ FieldEditor.prototype.setAttr = function(name, value, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.changeClass = function(newClassName, callback) {
     var data = this.getData();
-    var newData = eval("{newClassName}Editor.createData(data['@attributes'])".replace('{newClassName}', newClassName));
+    var newData = eval("QForms.{newClassName}Editor.createData(data['@attributes'])".replace('{newClassName}', newClassName));
     this.setData(newData, function() {
         callback(newData);
     });
@@ -102,7 +93,7 @@ FieldEditor.prototype.createJs = function(params, callback) {
 FieldEditor.prototype.getCollectionDirPath = function(callback) {
     this.parent.getCustomDirPath(function(customDirPath) {
         var dirPath = path.join(customDirPath, 'fields');
-        helper.createDirIfNotExists(dirPath, function() {
+        QForms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -113,7 +104,7 @@ FieldEditor.prototype.getCustomDirPath = function(callback) {
     var self = this;
     this.getCollectionDirPath(function(collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        helper.createDirIfNotExists(dirPath, function() {
+        QForms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });

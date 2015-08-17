@@ -6,7 +6,7 @@ var util = require('util');
 var path = require('path');
 
 var FormController = require('../FormController');
-var app            = require('../../../../qforms');
+var server            = require('../../../../server');
 
 util.inherits(RowFormController, FormController);
 
@@ -14,7 +14,7 @@ util.inherits(RowFormController, FormController);
 function RowFormController(data, parent) {
     RowFormController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        app.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view',
         this.data['@class'] + 'View.ejs'
     );

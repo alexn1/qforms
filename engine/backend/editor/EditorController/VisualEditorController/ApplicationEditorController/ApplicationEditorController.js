@@ -6,7 +6,9 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var qforms                 = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
 var VisualEditorController = require('../VisualEditorController');
 
 util.inherits(ApplicationEditorController, VisualEditorController);
@@ -15,7 +17,7 @@ util.inherits(ApplicationEditorController, VisualEditorController);
 function ApplicationEditorController(appInfo) {
     ApplicationEditorController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/ApplicationController'
     );
 };

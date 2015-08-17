@@ -7,7 +7,10 @@ var path = require('path');
 var fs   = require('fs');
 var _    = require('underscore');
 
-var qforms           = require('../../../qforms');
+var QForms = require('../../../QForms');
+var server = require('../../../server');
+
+
 var EditorController = require('../EditorController');
 
 util.inherits(DataSourceEditorController, EditorController);
@@ -16,7 +19,7 @@ util.inherits(DataSourceEditorController, EditorController);
 function DataSourceEditorController(appInfo) {
     DataSourceEditorController.super_.call(this, appInfo);
     this.viewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
     );
 };

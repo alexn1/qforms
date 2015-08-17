@@ -4,7 +4,7 @@ var config = require('config');
 var path   = require('path');
 var fs     = require('fs');
 var helper = require('../../common/helper');
-var qforms = require('../../qforms');
+var server = require('../../server');
 var domain = require('domain');
 
 var ApplicationEditorController       = require('../../editor/EditorController/VisualEditorController/ApplicationEditorController/ApplicationEditorController');
@@ -20,8 +20,8 @@ var FieldEditorController             = require('../../editor/EditorController/V
 var ControlEditorController           = require('../../editor/EditorController/VisualEditorController/ControlEditorController/ControlEditorController');
 var JsonFile             = require('../../editor/JsonFile/JsonFile');
 
-qforms.set('editorClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'editor/class', 'css'));
-qforms.set('editorClassJs',  helper.getFilePathsSync(path.join(qforms.get('public')), 'editor/class', 'js'));
+server.set('editorClassCss', helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'css'));
+server.set('editorClassJs',  helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'js'));
 
 var controllers = [
     'Application',
@@ -63,7 +63,7 @@ module.exports = function(req, res, next) {
                 if (exists) {
                     helper.getAppInfo(appFilePath, function(appInfo) {
                         var d = domain.create();
-                        if (qforms.get('handleException') === 'true') {
+                        if (server.get('handleException') === 'true') {
                             d.on('error', next);
                         }
                         d.run(function() {

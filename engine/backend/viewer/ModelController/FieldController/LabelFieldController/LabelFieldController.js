@@ -5,8 +5,10 @@ module.exports = LabelFieldController;
 var util = require('util');
 var path = require('path');
 
+var QForms = require('../../../../QForms');
+var server             = require('../../../../server');
+
 var FieldController = require('../FieldController');
-var app             = require('../../../../qforms');
 
 util.inherits(LabelFieldController, FieldController);
 
@@ -14,7 +16,7 @@ util.inherits(LabelFieldController, FieldController);
 function LabelFieldController(data, parent) {
     LabelFieldController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        app.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );

@@ -3,18 +3,20 @@
 module.exports = ComboBoxFieldEditor;
 
 var util = require('util');
-
-var FieldEditor = require('../FieldEditor');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
+var FieldEditor = require('../FieldEditor');
+
 util.inherits(ComboBoxFieldEditor, FieldEditor);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ComboBoxFieldEditor(formEditor, name) {
     ComboBoxFieldEditor.super_.call(this, formEditor, name);
     this.defaultViewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ComboBoxFieldController/view'
     );
 };

@@ -5,8 +5,10 @@ module.exports = ButtonControlController;
 var util = require('util');
 var path = require('path');
 
+var QForms = require('../../../../QForms');
+var server  = require('../../../../server');
+
 var ControlController = require('../ControlController');
-var qforms  = require('../../../../qforms');
 
 util.inherits(ButtonControlController, ControlController);
 
@@ -14,7 +16,7 @@ util.inherits(ButtonControlController, ControlController);
 function ButtonControlController(data, parent) {
     ButtonControlController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/ControlController/ButtonControlController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );

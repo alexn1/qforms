@@ -5,8 +5,10 @@ module.exports = FileFieldController;
 var util = require('util');
 var path = require('path');
 
-var FieldController  = require('../FieldController');
-var qforms           = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server           = require('../../../../server');
+
+var FieldController = require('../FieldController');
 
 util.inherits(FileFieldController, FieldController);
 
@@ -14,7 +16,7 @@ util.inherits(FileFieldController, FieldController);
 function FileFieldController(data, parent) {
     FileFieldController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/FileFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );

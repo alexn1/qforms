@@ -4,6 +4,8 @@ module.exports = PageLinkEditor;
 
 var util = require('util');
 
+var QForms =require('../../../QForms');
+
 var Editor = require('../Editor');
 
 util.inherits(PageLinkEditor, Editor);

@@ -98,7 +98,7 @@ module.exports.getAppInfos = function getAppInfos(appsDirPath, callback) {
     var appInfos = [];
     glob(path.join(appsDirPath, '*/*.json'), function(err, appFilesPaths) {
         async.eachSeries(appFilesPaths, function(appFilePath, next) {
-            getAppInfo(appFilePath, function(appInfo) {
+            module.exports.getAppInfo(appFilePath, function(appInfo) {
                 if (appInfo) {
                     appInfos.push(appInfo);
                 }

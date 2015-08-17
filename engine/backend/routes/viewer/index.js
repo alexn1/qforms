@@ -6,12 +6,13 @@ var util   = require('util');
 var domain = require('domain');
 var config = require('config');
 
-var qforms                = require('../../qforms');
-var helper                = require('../../common/helper');
-var ApplicationController = require('../../viewer/ModelController/ApplicationController/ApplicationController');
+var QForms = require('../../QForms');
 
-qforms.set('viewerClassCss', helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'css'));
-qforms.set('viewerClassJs' , helper.getFilePathsSync(path.join(qforms.get('public')), 'viewer/class', 'js'));
+var server                = require('../../server');
+var helper                = require('../../common/helper');
+
+server.set('viewerClassCss', helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'css'));
+server.set('viewerClassJs' , helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'js'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
@@ -27,7 +28,7 @@ module.exports = function(req, res, next) {
             } else {
                 //console.log('old app: ' + route);
                 var d = domain.create();
-                if (qforms.get('handleException') === 'true') {
+                if (server.get('handleException') === 'true') {
                     d.on('error', next);
                 }
                 d.run(function() {
@@ -49,18 +50,18 @@ function createApplication(req, res, next, route) {
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
 
     var d = domain.create();
-    if (qforms.get('handleException') === 'true') {
+    if (server.get('handleException') === 'true') {
         d.on('error', next);
     }
     d.run(function() {
-        ApplicationController.create(appFilePath, function(application) {
+        QForms.ApplicationController.create(appFilePath, function(application) {
             application.init(function() {
                 applications[route] = application;
                 handle(req, res, next, application);
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function handle(req, res, next, application) {
@@ -97,7 +98,7 @@ function handle(req, res, next, application) {
             }
         }
     }
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
@@ -152,7 +153,7 @@ function login(req, res, next, application) {
             }
         });
     }
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function logout(req, res, next, application) {
@@ -161,7 +162,7 @@ function logout(req, res, next, application) {
         delete req.session.user[route];
     }
     res.json(null);
-};
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +185,7 @@ function index(req, res, next, application) {
             data          : response
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
@@ -202,7 +203,7 @@ function page(req, res, next, application) {
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
@@ -236,7 +237,7 @@ function update(req, res, next, application) {
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
@@ -264,7 +265,7 @@ function frame(req, res, next, application) {
             res.json(response);
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
@@ -300,7 +301,7 @@ function insert(req, res, next, application) {
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
@@ -334,7 +335,7 @@ function _delete(req, res, next, application) {
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function rpc(req, res, next, application) {
@@ -346,4 +347,4 @@ function rpc(req, res, next, application) {
     application.getPage(context, req.body.page, function(page) {
         page.rpc(context);
     });
-};
+}

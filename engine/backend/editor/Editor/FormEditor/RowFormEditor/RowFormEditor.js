@@ -5,7 +5,9 @@ module.exports = RowFormEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server = require('../../../../server');
+
 var FormEditor = require('../FormEditor');
 
 util.inherits(RowFormEditor, FormEditor);
@@ -14,11 +16,11 @@ util.inherits(RowFormEditor, FormEditor);
 function RowFormEditor(pageEditor, name, data) {
     RowFormEditor.super_.call(this, pageEditor, name, data);
     this.defaultEjsFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.ejs'
     );
     this.defaultCssFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
     );
 };

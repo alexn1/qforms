@@ -5,7 +5,9 @@ module.exports = FileFieldEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms      = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server      = require('../../../../server');
+
 var FieldEditor = require('../FieldEditor');
 
 util.inherits(FileFieldEditor, FieldEditor);
@@ -14,7 +16,7 @@ util.inherits(FileFieldEditor, FieldEditor);
 function FileFieldEditor(formEditor, name) {
     FileFieldEditor.super_.call(this, formEditor, name);
     this.defaultViewDirPath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/FileFieldController/view'
     );
 };

@@ -7,13 +7,10 @@ var path    = require('path');
 var fs      = require('fs');
 var Promise = require('bluebird');
 
-var qforms              = require('../../../qforms');
-var helper              = require('../../../common/helper');
-var Editor              = require('../Editor');
-var PageEditor          = require('../PageEditor/PageEditor');
-var PageLinkEditor      = require('../PageLinkEditor/PageLinkEditor');
-var JsonFile            = require('../../JsonFile/JsonFile');
-var SqlDataSourceEditor = require('../../Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
+var QForms = require('../../../QForms');
+var server = require('../../../server');
+
+var Editor = require('../Editor');
 
 util.inherits(ApplicationEditor, Editor);
 
@@ -37,7 +34,7 @@ ApplicationEditor.createData = function(params) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.createAppFile = function(appFilePath, params, callback) {
-    var appFile = new JsonFile(appFilePath);
+    var appFile = new QForms.JsonFile(appFilePath);
     appFile.data = ApplicationEditor.createData(params);
     appFile.create(function() {
         callback(appFile);
@@ -47,7 +44,7 @@ ApplicationEditor.createAppFile = function(appFilePath, params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.createAppFile2 = function(appFilePath, params) {
     return new Promise(function(resolve, reject) {
-        var appFile = new JsonFile(appFilePath);
+        var appFile = new QForms.JsonFile(appFilePath);
         appFile.data = ApplicationEditor.createData(params);
         appFile.create(function() {
             resolve(appFile);
@@ -58,15 +55,15 @@ ApplicationEditor.createAppFile2 = function(appFilePath, params) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationEditor(appFile) {
     this.appFile            = appFile;
-    this.appInfo            = helper.getAppInfoFromData(appFile.filePath, appFile.data);
+    this.appInfo            = QForms.helper.getAppInfoFromData(appFile.filePath, appFile.data);
     this.data               = appFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
     );
     this.defaultCssFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
     );
 };
@@ -77,14 +74,14 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
     var pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
     var pageDirPath    = path.join(pagesDirPath, params.name);
     var pageFilePath   = path.join(pageDirPath , params.name + '.json');
-    helper.createDirIfNotExists(pagesDirPath, function() {
-        helper.createDirIfNotExists(pageDirPath, function() {
-            var pageFile = new JsonFile(pageFilePath);
-            pageFile.data = PageEditor.createData(params);
+    QForms.helper.createDirIfNotExists(pagesDirPath, function() {
+        QForms.helper.createDirIfNotExists(pageDirPath, function() {
+            var pageFile = new QForms.JsonFile(pageFilePath);
+            pageFile.data = QForms.PageEditor.createData(params);
             pageFile.create(function() {
                 self.newPageLink(params);
                 self.save(function() {
-                    callback(new PageEditor(this, pageFile));
+                    callback(new QForms.PageEditor(this, pageFile));
                 });
             });
         });
@@ -98,17 +95,17 @@ ApplicationEditor.prototype.createPage2 = function(params) {
     var pageDirPath    = path.join(pagesDirPath, params.name);
     var pageFilePath   = path.join(pageDirPath , params.name + '.json');
     var pageFile;
-    return helper.createDirIfNotExists2(pagesDirPath).then(function() {
-        return helper.createDirIfNotExists2(pageDirPath);
+    return QForms.helper.createDirIfNotExists2(pagesDirPath).then(function() {
+        return QForms.helper.createDirIfNotExists2(pageDirPath);
     }).then(function() {
-        pageFile = new JsonFile(pageFilePath);
-        pageFile.data = PageEditor.createData(params);
+        pageFile = new QForms.JsonFile(pageFilePath);
+        pageFile.data = QForms.PageEditor.createData(params);
         return pageFile.create2();
     }).then(function() {
         self.newPageLink(params);
         return self.save2();
     }).then(function() {
-        return new PageEditor(self, pageFile);
+        return new QForms.PageEditor(self, pageFile);
     });
 };
 
@@ -124,7 +121,7 @@ ApplicationEditor.prototype.save2 = function() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.getPageLink = function(name) {
-    return new PageLinkEditor(this, name);
+    return new QForms.PageLinkEditor(this, name);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,9 +142,9 @@ ApplicationEditor.prototype.removePage = function(name, callback) {
 ApplicationEditor.prototype.getPageByFileName = function(relFilePath, callback) {
     var self         = this;
     var pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
-    var pageFile     = new JsonFile(pageFilePath);
+    var pageFile     = new QForms.JsonFile(pageFilePath);
     pageFile.read(function() {
-        callback(new PageEditor(self, pageFile));
+        callback(new QForms.PageEditor(self, pageFile));
     });
 };
 
@@ -214,12 +211,12 @@ ApplicationEditor.prototype.getDataSource = function(name) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.movePageLinkUp = function(name) {
-    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, name, -1);
+    this.data.pageLinks = QForms.helper.moveObjProp(this.data.pageLinks, name, -1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.movePageLinkDown = function(name) {
-    this.data.pageLinks = helper.moveObjProp(this.data.pageLinks, name, 1);
+    this.data.pageLinks = QForms.helper.moveObjProp(this.data.pageLinks, name, 1);
 };
 
 
@@ -227,7 +224,7 @@ ApplicationEditor.prototype.movePageLinkDown = function(name) {
 ApplicationEditor.prototype.setDatabaseAttr = function(database, name, value) {
     this.data.databases[database]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.databases = helper.replaceKey(this.data.databases,
+        this.data.databases = QForms.helper.replaceKey(this.data.databases,
             database,
             value
         );
@@ -238,7 +235,7 @@ ApplicationEditor.prototype.setDatabaseAttr = function(database, name, value) {
 ApplicationEditor.prototype.setDatabaseParamAttr = function(database, param, name, value) {
     this.data.databases[database].params[param]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.databases[database].params = helper.replaceKey(
+        this.data.databases[database].params = QForms.helper.replaceKey(
             this.data.databases[database].params,
             param,
             value
@@ -250,7 +247,7 @@ ApplicationEditor.prototype.setDatabaseParamAttr = function(database, param, nam
 ApplicationEditor.prototype.setPageLinkAttr = function(pageLink, name, value) {
     this.data.pageLinks[pageLink]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.pageLinks = helper.replaceKey(this.data.pageLinks, pageLink, value);
+        this.data.pageLinks = QForms.helper.replaceKey(this.data.pageLinks, pageLink, value);
     }
 };
 
@@ -303,7 +300,7 @@ ApplicationEditor.prototype.newPageLink = function(params) {
     if (this.data.pageLinks[name]) {
         throw new Error('Page Link {name} already exists.'.replace('{name}', name));
     }
-    return this.data.pageLinks[params.name] = PageLinkEditor.createData(params);
+    return this.data.pageLinks[params.name] = QForms.PageLinkEditor.createData(params);
 };
 
 
@@ -360,7 +357,7 @@ ApplicationEditor.prototype.newDataSource = function(params) {
             data = DataSourceEditor.create(params);
             break;
         case 'SqlDataSource':
-            data = SqlDataSourceEditor.create(params);
+            data = QForms.SqlDataSourceEditor.create(params);
             break;
         default:
             throw new Error('Unknown data source class.');
@@ -378,7 +375,7 @@ ApplicationEditor.prototype.deleteDataSource = function(dataSource) {
 ApplicationEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
     this.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.dataSources = helper.replaceKey(
+        this.data.dataSources = QForms.helper.replaceKey(
             this.data.dataSources,
             dataSource,
             value);

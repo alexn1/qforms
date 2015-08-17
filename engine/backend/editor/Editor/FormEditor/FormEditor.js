@@ -6,21 +6,9 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var helper = require('../../../common/helper');
-var Editor = require('../Editor');
+var QForms = require('../../../QForms');
 
-var CheckBoxFieldEditor      = require('../FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
-var ComboBoxFieldEditor      = require('../FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
-var DatePickerFieldEditor    = require('../FieldEditor/DatePickerFieldEditor/DatePickerFieldEditor');
-var ImageFieldEditor         = require('../FieldEditor/ImageFieldEditor/ImageFieldEditor');
-var LabelFieldEditor         = require('../FieldEditor/LabelFieldEditor/LabelFieldEditor');
-var LinkFieldEditor          = require('../FieldEditor/LinkFieldEditor/LinkFieldEditor');
-var TextAreaFieldEditor      = require('../FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
-var TextBoxFieldEditor       = require('../FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
-var FileFieldEditor          = require('../FieldEditor/FileFieldEditor/FileFieldEditor');
-var ButtonControlEditor      = require('../ControlEditor/ButtonControlEditor/ButtonControlEditor');
-var DataSourceEditor         = require('../DataSourceEditor/DataSourceEditor');
-var SqlDataSourceEditor      = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
+var Editor = require('../Editor');
 
 util.inherits(FormEditor, Editor);
 
@@ -47,7 +35,7 @@ FormEditor.prototype.setAttr = function(name, value, callback) {
 FormEditor.prototype._setAttr = function(name, value) {
     this.data['@attributes'][name] = value;
     if (name === 'name') {
-        this.parent.data.forms = helper.replaceKey(this.parent.data.forms,
+        this.parent.data.forms = QForms.helper.replaceKey(this.parent.data.forms,
             this.name,
             value);
     }
@@ -62,13 +50,13 @@ FormEditor.prototype.newField = function(params) {
     if (this.data.fields[name]) {
         throw new Error('Field {name} already exist.'.replace('{name}', name));
     }
-    return this.data.fields[name] = eval('{class}Editor.createData(params);'.replace('{class}', params['class']));
+    return this.data.fields[name] = eval('QForms.{class}Editor.createData(params);'.replace('{class}', params['class']));
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldUp = function(params, callback) {
-    this.data.fields = helper.moveObjProp(this.data.fields, params.field, -1);
+    this.data.fields = QForms.helper.moveObjProp(this.data.fields, params.field, -1);
     this.pageEditor.save(function() {
         callback('ok');
     });
@@ -76,7 +64,7 @@ FormEditor.prototype.moveFieldUp = function(params, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldDown = function(params, callback) {
-    this.data.fields = helper.moveObjProp(this.data.fields, params.field, 1);
+    this.data.fields = QForms.helper.moveObjProp(this.data.fields, params.field, 1);
     this.pageEditor.save(function() {
         callback('ok');
     });
@@ -178,7 +166,7 @@ FormEditor.prototype.createJs = function(params, callback) {
 FormEditor.prototype.getCollectionDirPath = function(callback) {
     this.parent.getCustomDirPath(function(customDirPath) {
         var dirPath = path.join(customDirPath, 'forms');
-        helper.createDirIfNotExists(dirPath, function() {
+        QForms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -189,7 +177,7 @@ FormEditor.prototype.getCustomDirPath = function(callback) {
     var self = this;
     this.getCollectionDirPath(function(collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        helper.createDirIfNotExists(dirPath, function() {
+        QForms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -268,7 +256,7 @@ FormEditor.prototype.newDataSouceParentKeyColumn = function(params) {
 FormEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
     this.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.dataSources = helper.replaceKey(
+        this.data.dataSources = QForms.helper.replaceKey(
             this.data.dataSources,
             dataSource,
             value);
@@ -279,7 +267,7 @@ FormEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
 FormEditor.prototype.setDataSourceKeyColumnAttr = function(dataSource, keyColumn, name, value) {
     this.data.dataSources[dataSource].keyColumns[keyColumn]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.dataSources[dataSource].keyColumns = helper.replaceKey(
+        this.data.dataSources[dataSource].keyColumns = QForms.helper.replaceKey(
             this.data.dataSources[dataSource].keyColumns,
             keyColumn,
             value);
@@ -290,7 +278,7 @@ FormEditor.prototype.setDataSourceKeyColumnAttr = function(dataSource, keyColumn
 FormEditor.prototype.setDataSourceParentKeyColumnAttr = function(dataSource, parentKeyColumn, name, value) {
     this.data.dataSources[dataSource].parentKeyColumns[parentKeyColumn]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.dataSources[dataSource].parentKeyColumns = helper.replaceKey(
+        this.data.dataSources[dataSource].parentKeyColumns = QForms.helper.replaceKey(
             this.data.dataSources[dataSource].parentKeyColumns,
             parentKeyColumn,
             value);
@@ -301,7 +289,7 @@ FormEditor.prototype.setDataSourceParentKeyColumnAttr = function(dataSource, par
 FormEditor.prototype.setFieldAttr = function(field, name, value) {
     this.data.fields[field]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.fields = helper.replaceKey(
+        this.data.fields = QForms.helper.replaceKey(
             this.data.fields,
             field,
             value
@@ -313,7 +301,7 @@ FormEditor.prototype.setFieldAttr = function(field, name, value) {
 FormEditor.prototype.setControlAttr = function(control, name, value) {
     this.data.controls[control]['@attributes'][name] = value;
     if (name === 'name') {
-        this.data.controls = helper.replaceKey(
+        this.data.controls = QForms.helper.replaceKey(
             this.data.controls,
             control,
             value

@@ -6,9 +6,11 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
+var QForms = require('../../../QForms');
+
 var helper                = require('../../../common/helper');
 var ModelController       = require('../ModelController');
-var ApplicationController = require('../ApplicationController/ApplicationController');
+
 var PageController        = require('../PageController/PageController');
 var FormController        = require('../FormController/FormController');
 var RowFormController     = require('../FormController/RowFormController/RowFormController');
@@ -34,7 +36,7 @@ DataSourceController.create = function(data, parent, callback) {
                 var customClass = eval(content);
                 callback(new customClass(data, parent));
             } else {
-                callback(new SqlDataSourceController(data, parent));
+                callback(new QForms.SqlDataSourceController(data, parent));
             }
         });
     } else {
@@ -45,7 +47,7 @@ DataSourceController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSourceController(data, parent) {
     DataSourceController.super_.call(this, data, parent);
-    this.application      = parent instanceof ApplicationController ? parent : null;
+    this.application      = parent instanceof QForms.ApplicationController ? parent : null;
     this.page             = parent instanceof PageController        ? parent : null;
     this.form             = parent instanceof FormController        ? parent : null;
     this.keyColumns       = [];
@@ -185,7 +187,7 @@ DataSourceController.prototype.delete = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getApp = function() {
-    if (this.parent instanceof ApplicationController) {
+    if (this.parent instanceof QForms.ApplicationController) {
         return this.parent;
     } else if (this.parent instanceof PageController) {
         return this.parent.parent;

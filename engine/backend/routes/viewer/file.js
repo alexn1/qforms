@@ -4,11 +4,11 @@ var path = require('path');
 var fs   = require('fs');
 
 var helper = require('../../common/helper');
-var app    = require('../../qforms');
+var server    = require('../../server');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
-    var appFilePath = path.join(app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
+    var appFilePath = path.join(server.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
     helper.getAppInfo(appFilePath, function(appInfo) {
         var relFilePath = req.params['0'];
         var filePath = path.join(appInfo.dirPath, relFilePath);

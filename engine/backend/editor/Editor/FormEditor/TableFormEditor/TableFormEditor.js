@@ -5,7 +5,9 @@ module.exports = TableFormEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms     = require('../../../../qforms');
+var QForms = require('../../../../QForms');
+var server     = require('../../../../server');
+
 var FormEditor = require('../FormEditor');
 
 util.inherits(TableFormEditor, FormEditor);
@@ -14,11 +16,11 @@ util.inherits(TableFormEditor, FormEditor);
 function TableFormEditor(pageEditor, name, data) {
     TableFormEditor.super_.call(this, pageEditor, name, data);
     this.defaultEjsFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.ejs'
     );
     this.defaultCssFilePath = path.join(
-        qforms.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.css'
     );
 };

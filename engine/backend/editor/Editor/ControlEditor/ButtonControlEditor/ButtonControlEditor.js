@@ -4,6 +4,8 @@ module.exports = ButtonControlEditor;
 
 var util = require('util');
 
+var QForms = require('../../../../QForms');
+
 var ControlEditor = require('../ControlEditor');
 
 util.inherits(ButtonControlEditor, ControlEditor);

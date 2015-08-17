@@ -5,8 +5,10 @@ module.exports = LinkFieldController;
 var util = require('util');
 var path = require('path');
 
+var QForms = require('../../../../QForms');
+var server             = require('../../../../server');
+
 var FieldController = require('../FieldController');
-var app             = require('../../../../qforms');
 
 util.inherits(LinkFieldController, FieldController);
 
@@ -14,7 +16,7 @@ util.inherits(LinkFieldController, FieldController);
 function LinkFieldController(data, parent) {
     LinkFieldController.super_.call(this, data, parent);
     this.viewFilePath = path.join(
-        app.get('public'),
+        server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LinkFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
