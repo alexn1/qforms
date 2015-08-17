@@ -67,7 +67,7 @@ module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
         } else {
             var data = JSON.parse(content);
             if (data['@class'] && data['@class'] === 'Application') {
-                var appInfo = module.exports.getAppInfo2(appFilePath, data);
+                var appInfo = module.exports.getAppInfoFromData(appFilePath, data);
                 callback(appInfo);
             } else {
                 callback(null);
@@ -77,7 +77,7 @@ module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getAppInfo2 = function(appFilePath, data) {
+module.exports.getAppInfoFromData = function(appFilePath, data) {
     var fileName = path.basename(appFilePath, path.extname(appFilePath));
     var dirName  = path.basename(path.dirname(appFilePath));
     return {

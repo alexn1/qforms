@@ -58,7 +58,7 @@ ApplicationEditor.createAppFile2 = function(appFilePath, params) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ApplicationEditor(appFile) {
     this.appFile            = appFile;
-    this.appInfo            = helper.getAppInfo2(appFile.filePath, appFile.data);
+    this.appInfo            = helper.getAppInfoFromData(appFile.filePath, appFile.data);
     this.data               = appFile.data;
     this.name               = this.data['@attributes'].name;
     this.defaultEjsFilePath = path.join(
