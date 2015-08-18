@@ -8,7 +8,7 @@ var fs    = require('fs');
 var _     = require('underscore');
 var mysql = require('mysql');
 
-var QForms = require('../../../QForms');
+var QForms = require('../../../qforms');
 var server = require('../../../server');
 
 var EditorController = require('../EditorController');

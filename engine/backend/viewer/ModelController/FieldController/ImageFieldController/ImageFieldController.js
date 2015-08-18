@@ -5,7 +5,7 @@ module.exports = ImageFieldController;
 var util = require('util');
 var path = require('path');
 
-var QForms = require('../../../../QForms');
+var QForms = require('../../../../qforms');
 var server             = require('../../../../server');
 
 var FieldController = require('../FieldController');

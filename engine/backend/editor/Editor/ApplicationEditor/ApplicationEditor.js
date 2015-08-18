@@ -7,7 +7,7 @@ var path    = require('path');
 var fs      = require('fs');
 var Promise = require('bluebird');
 
-var QForms = require('../../../QForms');
+var QForms = require('../../../qforms');
 var server = require('../../../server');
 
 var Editor = require('../Editor');

@@ -5,7 +5,7 @@ module.exports = TextBoxFieldEditor;
 var util = require('util');
 var path = require('path');
 
-var QForms = require('../../../../QForms');
+var QForms = require('../../../../qforms');
 var server      = require('../../../../server');
 
 var FieldEditor = require('../FieldEditor');

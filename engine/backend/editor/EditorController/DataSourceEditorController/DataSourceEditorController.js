@@ -7,7 +7,7 @@ var path = require('path');
 var fs   = require('fs');
 var _    = require('underscore');
 
-var QForms = require('../../../QForms');
+var QForms = require('../../../qforms');
 var server = require('../../../server');
 
 

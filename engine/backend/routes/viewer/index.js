@@ -6,7 +6,7 @@ var util   = require('util');
 var domain = require('domain');
 var config = require('config');
 
-var QForms = require('../../QForms');
+var QForms = require('../../qforms');
 
 var server                = require('../../server');
 var helper                = require('../../common/helper');

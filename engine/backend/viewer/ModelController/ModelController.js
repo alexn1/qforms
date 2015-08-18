@@ -8,7 +8,7 @@ var _     = require('underscore');
 var async = require('async');
 
 var server  = require('../../server');
-var QForms  = require('../../QForms');
+var QForms  = require('../../qforms');
 
 
 

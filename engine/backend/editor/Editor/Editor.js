@@ -6,7 +6,7 @@ var path = require('path');
 var fs   = require('fs');
 var ejs  = require('ejs');
 
-var QForms = require('../../QForms');
+var QForms = require('../../qforms');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Editor() {

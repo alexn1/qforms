@@ -4,7 +4,7 @@ module.exports = SqlDataSourceEditor;
 
 var util = require('util');
 
-var QForms = require('../../../../QForms');
+var QForms = require('../../../../qforms');
 
 var DataSourceEditor = require('../DataSourceEditor');
 

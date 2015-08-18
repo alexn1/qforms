@@ -2,7 +2,7 @@
 
 var should = require('should');
 
-var QForms = require('../backend/QForms');
+var QForms = require('../backend/qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test01', function() {
