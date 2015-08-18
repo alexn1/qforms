@@ -3,25 +3,13 @@
 var config = require('config');
 var path   = require('path');
 var fs     = require('fs');
-var helper = require('../../common/helper');
-var server = require('../../server');
 var domain = require('domain');
 
-var ApplicationEditorController       = require('../../editor/EditorController/VisualEditorController/ApplicationEditorController/ApplicationEditorController');
-var ParamEditorController             = require('../../editor/EditorController/ParamEditorController/ParamEditorController');
-var DatabaseEditorController          = require('../../editor/EditorController/DatabaseEditorController/DatabaseEditorController');
-var PageEditorController              = require('../../editor/EditorController/VisualEditorController/PageEditorController/PageEditorController');
-var FormEditorController              = require('../../editor/EditorController/VisualEditorController/FormEditorController/FormEditorController');
-var PageLinkEditorController          = require('../../editor/EditorController/PageLinkEditorController/PageLinkEditorController');
-var DataSourceEditorController        = require('../../editor/EditorController/DataSourceEditorController/DataSourceEditorController');
-var KeyColumnEditorController         = require('../../editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
-var ParentKeyColumnEditorController   = require('../../editor/EditorController/ParentKeyColumnEditorController/ParentKeyColumnEditorController');
-var FieldEditorController             = require('../../editor/EditorController/VisualEditorController/FieldEditorController/FieldEditorController');
-var ControlEditorController           = require('../../editor/EditorController/VisualEditorController/ControlEditorController/ControlEditorController');
-var JsonFile             = require('../../editor/JsonFile/JsonFile');
+var qforms = require('../../qforms');
+var server = require('../../server');
 
-server.set('editorClassCss', helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'css'));
-server.set('editorClassJs',  helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'js'));
+server.set('editorClassCss', qforms.helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'css'));
+server.set('editorClassJs',  qforms.helper.getFilePathsSync(path.join(server.get('public')), 'editor/class', 'js'));
 
 var controllers = [
     'Application',
@@ -61,7 +49,7 @@ module.exports = function(req, res, next) {
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
             fs.exists(appFilePath, function(exists) {
                 if (exists) {
-                    helper.getAppInfo(appFilePath, function(appInfo) {
+                    qforms.helper.getAppInfo(appFilePath, function(appInfo) {
                         var d = domain.create();
                         if (server.get('handleException') === 'true') {
                             d.on('error', next);
@@ -94,11 +82,11 @@ function handle(req, res, next, appInfo) {
         default:
             next();
     }
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, appInfo) {
-    var appFile = new JsonFile(appInfo.filePath);
+    var appFile = new qforms.JsonFile(appInfo.filePath);
     appFile.read(function() {
         res.render('editor/view', {
             version        : req.app.get('version'),
@@ -113,13 +101,13 @@ function index(req, res, next, appInfo) {
             appName        : appFile.getAttr('name')
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function action(req, res, next, appInfo) {
     if (controllers.indexOf(req.body.controller) !== -1) {
         if (actions.indexOf(req.body.action) !== -1) {
-            var code = 'var ctrl = new {controller}EditorController(appInfo);\
+            var code = 'var ctrl = new qforms.{controller}EditorController(appInfo);\
                             ctrl.{action}(req.body.params, function(result) {\
                                 res.json(result);\
                             });'
@@ -132,4 +120,4 @@ function action(req, res, next, appInfo) {
     } else {
         res.end('Unknown controller {controller}'.replace('{controller}', req.body.controller));
     }
-};
+}

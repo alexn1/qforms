@@ -7,12 +7,10 @@ var domain = require('domain');
 var config = require('config');
 
 var qforms = require('../../qforms');
+var server = require('../../server');
 
-var server                = require('../../server');
-var helper                = require('../../common/helper');
-
-server.set('viewerClassCss', helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'css'));
-server.set('viewerClassJs' , helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'js'));
+server.set('viewerClassCss', qforms.helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'css'));
+server.set('viewerClassJs' , qforms.helper.getFilePathsSync(path.join(server.get('public')), 'viewer/class', 'js'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {

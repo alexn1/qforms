@@ -17,15 +17,15 @@ var multipart = require('./common/multipart');
 var server = module.exports = express();
 
 // environment
-server.set('appsDirPath', helper.getParams().appsDirPath || config.get('appsDirPath'));
+server.set('appsDirPath', helper.getCommandLineParams().appsDirPath || config.get('appsDirPath'));
 if (!fs.existsSync(server.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(server.get('appsDirPath')) + "' doesn't exist");
     process.exit(1);
 }
 server.set('version'        , p.version);
-server.set('host'           , helper.getParams().host            || config.get('host'));
-server.set('port'           , helper.getParams().port            || config.get('port'));
-server.set('handleException', helper.getParams().handleException || 'true');
+server.set('host'           , helper.getCommandLineParams().host            || config.get('host'));
+server.set('port'           , helper.getCommandLineParams().port            || config.get('port'));
+server.set('handleException', helper.getCommandLineParams().handleException || 'true');
 server.set('view engine'    , 'ejs');
 server.set('views'          , './backend/routes');
 server.set('public'         , './frontend');
@@ -46,7 +46,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(multipart);
 
 server.use(session({
-    secret            : 'server',
+    secret            : 'qforms',
     key               : 'sid',
     resave            : false,
     saveUninitialized : false

@@ -2,10 +2,10 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.e404 = function(req, res, next) {
-    var err = new Error('not found');
+    var err = new Error('page not found');
     err.status = 404;
     next(err);
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.page = function(err, req, res, next) {
@@ -16,7 +16,7 @@ module.exports.page = function(err, req, res, next) {
     } else {
         res.render('error/view', {
             message: err.message,
-            error: req.app.get('env') === 'development' ? err : {}
+            error  : req.app.get('env') === 'development' ? err : {}
         });
     }
 };

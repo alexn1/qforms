@@ -168,7 +168,7 @@ module.exports.typeCast = function typeCast(field, next) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getParams = function getParams() {
+module.exports.getCommandLineParams = function() {
     var params = process.argv.map(function(arg) {
         var param = arg.split('=');
         return {

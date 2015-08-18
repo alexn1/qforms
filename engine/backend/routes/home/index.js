@@ -3,17 +3,16 @@
 var path = require('path');
 var fs   = require('fs');
 
-var server            = require('../../server');
-var helper            = require('../../common/helper');
-var ApplicationEditor = require('../../editor/Editor/ApplicationEditor/ApplicationEditor');
+var qforms = require('../../qforms');
+var server = require('../../server');
 
-server.set('home_class_css', helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'css'));
-server.set('home_class_js' , helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'js'));
+server.set('home_class_css', qforms.helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'css'));
+server.set('home_class_js' , qforms.helper.getFilePathsSync(path.join(server.get('public')), 'home/class', 'js'));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     if (req.method === 'GET') {
-        helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
+        qforms.helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
             res.render('home/view', {
                 req           : req,
                 version       : req.app.get('version'),
@@ -26,9 +25,9 @@ module.exports = function(req, res, next) {
     if (req.method === 'POST') {
         var appDirPath    = path.join(req.app.get('appsDirPath'), req.body.folder);
         var appFilePath   = path.join(appDirPath,                 req.body.name + '.json');
-        helper.createDirIfNotExists(appDirPath, function() {
-            ApplicationEditor.createAppFile(appFilePath, {name: req.body.name}, function(appFile) {
-                helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
+        qforms.helper.createDirIfNotExists(appDirPath, function() {
+            qforms.ApplicationEditor.createAppFile(appFilePath, {name: req.body.name}, function(appFile) {
+                qforms.helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
                     res.json({
                         appList: appInfos
                     });

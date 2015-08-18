@@ -3,13 +3,13 @@
 var path = require('path');
 var fs   = require('fs');
 
-var helper = require('../../common/helper');
-var server    = require('../../server');
+var qforms = require('../../qforms');
+var server = require('../../server');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     var appFilePath = path.join(server.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-    helper.getAppInfo(appFilePath, function(appInfo) {
+    qforms.helper.getAppInfo(appFilePath, function(appInfo) {
         var relFilePath = req.params['0'];
         var filePath = path.join(appInfo.dirPath, relFilePath);
         if (path.extname(filePath) === '.css') {

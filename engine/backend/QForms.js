@@ -1,8 +1,6 @@
 'use strict';
-
 module.exports.helper                  = require('./common/helper');
 module.exports.multipart               = require('./common/multipart');
-
 module.exports.Editor = require('./editor/Editor/Editor');
 module.exports.ApplicationEditor = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 module.exports.ControlEditor = require('./editor/Editor/ControlEditor/ControlEditor');
