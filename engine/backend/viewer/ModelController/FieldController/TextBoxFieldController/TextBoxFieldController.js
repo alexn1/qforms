@@ -5,7 +5,6 @@ module.exports = TextBoxFieldController;
 var util = require('util');
 var path = require('path');
 
-var QForms = require('../../../../qforms');
 var server           = require('../../../../server');
 
 var FieldController = require('../FieldController');

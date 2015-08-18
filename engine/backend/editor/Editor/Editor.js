@@ -6,7 +6,7 @@ var path = require('path');
 var fs   = require('fs');
 var ejs  = require('ejs');
 
-var QForms = require('../../qforms');
+var qforms = require('../../qforms');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Editor() {
@@ -124,10 +124,10 @@ Editor.prototype.saveCustomFile = function(ext, text, callback) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.moveDataSourceUp = function(name) {
-    this.data.dataSources = QForms.helper.moveObjProp(this.data.dataSources, name, -1);
+    this.data.dataSources = qforms.helper.moveObjProp(this.data.dataSources, name, -1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.moveDataSourceDown = function(name) {
-    this.data.dataSources = QForms.helper.moveObjProp(this.data.dataSources, name, 1);
+    this.data.dataSources = qforms.helper.moveObjProp(this.data.dataSources, name, 1);
 };

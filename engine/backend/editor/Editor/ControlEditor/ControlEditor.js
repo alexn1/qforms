@@ -4,7 +4,6 @@ module.exports = ControlEditor;
 
 var util = require('util');
 
-var QForms = require('../../../qforms');
 
 var Editor = require('../Editor');
 

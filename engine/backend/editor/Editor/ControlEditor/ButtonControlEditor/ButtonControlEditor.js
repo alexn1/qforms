@@ -4,7 +4,6 @@ module.exports = ButtonControlEditor;
 
 var util = require('util');
 
-var QForms = require('../../../../qforms');
 
 var ControlEditor = require('../ControlEditor');
 
