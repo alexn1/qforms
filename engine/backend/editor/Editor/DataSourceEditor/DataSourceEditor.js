@@ -5,7 +5,7 @@ module.exports = DataSourceEditor;
 var util = require('util');
 var path = require('path');
 
-var QForms = require('../../../qforms');
+var qforms = require('../../../qforms');
 
 var Editor = require('../Editor');
 
@@ -40,7 +40,7 @@ DataSourceEditor.prototype.newKeyColumn = function(params) {
 DataSourceEditor.prototype.getCollectionDirPath = function(callback) {
     this.parent.getCustomDirPath(function(customDirPath) {
         var dirPath = path.join(customDirPath, 'dataSources');
-        QForms.helper.createDirIfNotExists(dirPath, function() {
+        qforms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -51,7 +51,7 @@ DataSourceEditor.prototype.getCustomDirPath = function(callback) {
     var self = this;
     this.getCollectionDirPath(function(collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        QForms.helper.createDirIfNotExists(dirPath, function() {
+        qforms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });

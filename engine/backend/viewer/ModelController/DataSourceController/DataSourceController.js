@@ -6,7 +6,7 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
-var QForms = require('../../../qforms');
+var qforms = require('../../../qforms');
 
 var helper                = require('../../../common/helper');
 var ModelController       = require('../ModelController');
@@ -36,7 +36,7 @@ DataSourceController.create = function(data, parent, callback) {
                 var customClass = eval(content);
                 callback(new customClass(data, parent));
             } else {
-                callback(new QForms.SqlDataSourceController(data, parent));
+                callback(new qforms.SqlDataSourceController(data, parent));
             }
         });
     } else {
@@ -47,7 +47,7 @@ DataSourceController.create = function(data, parent, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function DataSourceController(data, parent) {
     DataSourceController.super_.call(this, data, parent);
-    this.application      = parent instanceof QForms.ApplicationController ? parent : null;
+    this.application      = parent instanceof qforms.ApplicationController ? parent : null;
     this.page             = parent instanceof PageController        ? parent : null;
     this.form             = parent instanceof FormController        ? parent : null;
     this.keyColumns       = [];
@@ -187,7 +187,7 @@ DataSourceController.prototype.delete = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.getApp = function() {
-    if (this.parent instanceof QForms.ApplicationController) {
+    if (this.parent instanceof qforms.ApplicationController) {
         return this.parent;
     } else if (this.parent instanceof PageController) {
         return this.parent.parent;

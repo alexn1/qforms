@@ -6,7 +6,7 @@ var util   = require('util');
 var domain = require('domain');
 var config = require('config');
 
-var QForms = require('../../qforms');
+var qforms = require('../../qforms');
 
 var server                = require('../../server');
 var helper                = require('../../common/helper');
@@ -54,7 +54,7 @@ function createApplication(req, res, next, route) {
         d.on('error', next);
     }
     d.run(function() {
-        QForms.ApplicationController.create(appFilePath, function(application) {
+        qforms.ApplicationController.create(appFilePath, function(application) {
             application.init(function() {
                 applications[route] = application;
                 handle(req, res, next, application);

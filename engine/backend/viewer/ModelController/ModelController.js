@@ -8,7 +8,7 @@ var _     = require('underscore');
 var async = require('async');
 
 var server  = require('../../server');
-var QForms  = require('../../qforms');
+var qforms  = require('../../qforms');
 
 
 
@@ -83,7 +83,7 @@ ModelController.prototype.createCollection = function(colName, callback) {
                 self[colName][itemName] = obj;
                 self[colName][itemName].init(next);
             };
-            eval('QForms.{class}Controller.create(itemData, self, _callback)'.replace('{class}', itemData['@class']));
+            eval('qforms.{class}Controller.create(itemData, self, _callback)'.replace('{class}', itemData['@class']));
         };
     });
     async.series(tasks, callback);

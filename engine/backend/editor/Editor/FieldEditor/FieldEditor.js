@@ -6,7 +6,7 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var QForms = require('../../../qforms');
+var qforms = require('../../../qforms');
 
 var Editor = require('../Editor');
 
@@ -39,7 +39,7 @@ FieldEditor.prototype.setAttr = function(name, value, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.changeClass = function(newClassName, callback) {
     var data = this.getData();
-    var newData = eval("QForms.{newClassName}Editor.createData(data['@attributes'])".replace('{newClassName}', newClassName));
+    var newData = eval("qforms.{newClassName}Editor.createData(data['@attributes'])".replace('{newClassName}', newClassName));
     this.setData(newData, function() {
         callback(newData);
     });
@@ -93,7 +93,7 @@ FieldEditor.prototype.createJs = function(params, callback) {
 FieldEditor.prototype.getCollectionDirPath = function(callback) {
     this.parent.getCustomDirPath(function(customDirPath) {
         var dirPath = path.join(customDirPath, 'fields');
-        QForms.helper.createDirIfNotExists(dirPath, function() {
+        qforms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });
@@ -104,7 +104,7 @@ FieldEditor.prototype.getCustomDirPath = function(callback) {
     var self = this;
     this.getCollectionDirPath(function(collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        QForms.helper.createDirIfNotExists(dirPath, function() {
+        qforms.helper.createDirIfNotExists(dirPath, function() {
             callback(dirPath);
         });
     });

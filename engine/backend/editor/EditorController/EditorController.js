@@ -5,7 +5,7 @@ module.exports = EditorController;
 var path = require('path');
 var fs   = require('fs');
 
-var QForms = require('../../Qforms');
+var qforms = require('../../Qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function EditorController(appInfo) {
@@ -35,9 +35,9 @@ EditorController.prototype.getView = function(params, callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.getApplicationEditor = function(callback) {
     var self = this;
-    var appFile = new QForms.JsonFile(this.appInfo.filePath);
+    var appFile = new qforms.JsonFile(this.appInfo.filePath);
     appFile.read(function() {
-        var appEditor = new QForms.ApplicationEditor(appFile);
+        var appEditor = new qforms.ApplicationEditor(appFile);
         callback(appEditor);
     });
 };
