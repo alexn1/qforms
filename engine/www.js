@@ -3,8 +3,8 @@
 var http = require('http');
 var path = require('path');
 
-var server = require('./backend/server');
-var qforms = require('./backend/qforms');
+var server = require('./server');
+var qforms = require('./qforms');
 
 var port = qforms.helper.getCommandLineParams().port || 3000;
 var host = qforms.helper.getCommandLineParams().host || 'localhost';

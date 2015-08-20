@@ -1,6 +1,6 @@
 'use strict';
 
-var qforms = require('../engine/backend/qforms');
+var qforms = require('../engine/qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test02', function() {

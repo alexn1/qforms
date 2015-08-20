@@ -10,18 +10,10 @@ var async         = require('async');
 var child_process = require('child_process');
 var xml           = require('xml');
 
+var qforms = require('../../../../qforms');
+var server = require('../../../../server');
 
-var server               = require('../../../server');
-var helper               = require('../../../common/helper');
-var ModelController      = require('../ModelController');
-var PageLinkController   = require('../PageLinkController/PageLinkController');
-var PageController       = require('../PageController/PageController');
-var JsonFile             = require('../../../editor/JsonFile/JsonFile');
-
-var text                 = {
-    en:require('../../../common/text/en'),
-    ru:require('../../../common/text/ru')
-};
+var ModelController = require('../ModelController');
 
 util.inherits(ApplicationController, ModelController);
 
@@ -40,21 +32,21 @@ function ApplicationController(data, appInfo) {
     this.fillCollections    = ['dataSources'];
     this.pages              = {};
     this.css                = [];
-    this.text               = text[this.data['@attributes'].lang || 'en'];
+    this.text               = qforms.text[this.data['@attributes'].lang || 'en'];
     this.databases          = {};
     this.dataSources        = {};
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(appFilePath, callback) {
-    helper.getAppInfo(appFilePath, function(appInfo) {
+    qforms.helper.getAppInfo(appFilePath, function(appInfo) {
         fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
             if (err) {
                 throw err;
             } else {
                 var data = JSON.parse(content);
                 var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-                helper.getFileContent(customClassFilePath, function(content) {
+                qforms.helper.getFileContent(customClassFilePath, function(content) {
                     if (content) {
                         var customClass = eval(content);
                         callback(new customClass(data, appInfo));
@@ -84,7 +76,7 @@ ApplicationController.prototype._buildMenu = function(context, callback) {
         return function(_next) {
             if (pageLinkMenu) {
                 var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
-                var pageFile     = new JsonFile(pageFilePath);
+                var pageFile     = new qforms.JsonFile(pageFilePath);
                 pageFile.read(function() {
                     var pageData    = pageFile.data;
                     var pageCaption = pageData['@attributes'].caption;
@@ -116,7 +108,7 @@ ApplicationController.prototype.init = function(callback) {
                 self._createStartupPages(next);
             },
             function(next) {
-                helper.getFilePaths(self.appInfo.dirPath, '', 'css', function(filePaths) {
+                qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css', function(filePaths) {
                     self.css = filePaths.map(function(filePath) {
                         return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
                     });
@@ -145,7 +137,7 @@ ApplicationController.prototype._createPage = function(pageName, callback) {
             throw err;
         } else {
             var data = JSON.parse(content);
-            PageController.create(data, self, function(page) {
+            qforms.PageController.create(data, self, function(page) {
                 page.init(function() {
                     callback(page);
                 });

@@ -5,7 +5,7 @@ module.exports = ButtonControlController;
 var util = require('util');
 var path = require('path');
 
-var server  = require('../../../../server');
+var server = require('../../../../../server');
 
 var ControlController = require('../ControlController');
 

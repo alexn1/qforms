@@ -3,8 +3,8 @@
 var path = require('path');
 var fs   = require('fs');
 
-var qforms = require('../../qforms');
-var server = require('../../server');
+var qforms = require('../../../qforms');
+var server = require('../../../server');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {

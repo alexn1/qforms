@@ -3,8 +3,8 @@
 var path = require('path');
 var fs   = require('fs');
 
-var qforms = require('../../qforms');
-var server = require('../../server');
+var qforms = require('../../../qforms');
+var server = require('../../../server');
 
 server.set('home_class_css', qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'css'));
 server.set('home_class_js' , qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'js'));

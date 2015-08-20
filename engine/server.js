@@ -9,14 +9,14 @@ var session    = require('express-session');
 var _          = require('underscore');
 var async      = require('async');
 
-var p         = require('../package');
-var helper    = require('./common/helper');
-var multipart = require('./common/multipart');
+var pkg       = require('./package.json');
+var helper    = require('./backend/common/helper');
+var multipart = require('./backend/common/multipart');
 
 var server = module.exports = express();
 
-var engineDirPath  = path.join(__dirname, '..');
-var backendDirPath = __dirname;
+var engineDirPath  = __dirname;
+var backendDirPath = path.join(__dirname, 'backend');
 
 // environment
 server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || '../app'));
@@ -24,7 +24,7 @@ if (!fs.existsSync(server.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(server.get('appsDirPath')) + "' doesn't exist");
     process.exit(1);
 }
-server.set('version'        , p.version);
+server.set('version'        , pkg.version);
 server.set('handleException', helper.getCommandLineParams().handleException || true);
 server.set('view engine'    , 'ejs');
 server.set('views'          , path.join(backendDirPath, 'routes'));
@@ -35,9 +35,6 @@ server.set('applications'   , {});
 server.set('commonStyleCss' , helper.getFilePathsSync(server.get('public'), 'common/style', 'css'));
 server.set('commonClassCss' , helper.getFilePathsSync(server.get('public'), 'common/class', 'css'));
 server.set('commonClassJs'  , helper.getFilePathsSync(server.get('public'), 'common/class', 'js'));
-
-helper.createDirIfNotExistsSync(server.get('runtime'));
-helper.createDirIfNotExistsSync(server.get('temp'));
 
 // middlewares
 //server.use(morgan('dev'));
@@ -88,3 +85,6 @@ process.on('SIGINT', function () {
 process.on('exit', function () {
     console.log('process.exit');
 });
+
+helper.createDirIfNotExistsSync(server.get('runtime'));
+helper.createDirIfNotExistsSync(server.get('temp'));

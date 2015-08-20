@@ -6,7 +6,7 @@ var util = require('util');
 var path = require('path');
 var fs   = require('fs');
 
-var server                 = require('../../../../server');
+var server = require('../../../../../server');
 
 var VisualEditorController = require('../VisualEditorController');
 

@@ -5,8 +5,8 @@ var fs     = require('fs');
 var util   = require('util');
 var domain = require('domain');
 
-var qforms = require('../../qforms');
-var server = require('../../server');
+var qforms = require('../../../qforms');
+var server = require('../../../server');
 
 server.set('viewerClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'viewer/class', 'css'));
 server.set('viewerClassJs' , qforms.helper.getFilePathsSync(server.get('public'), 'viewer/class', 'js'));

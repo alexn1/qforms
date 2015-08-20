@@ -4,8 +4,8 @@ var path   = require('path');
 var fs     = require('fs');
 var domain = require('domain');
 
-var qforms = require('../../qforms');
-var server = require('../../server');
+var qforms = require('../../../qforms');
+var server = require('../../../server');
 
 server.set('editorClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'editor/class', 'css'));
 server.set('editorClassJs',  qforms.helper.getFilePathsSync(server.get('public'), 'editor/class', 'js'));

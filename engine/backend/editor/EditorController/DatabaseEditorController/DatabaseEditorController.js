@@ -8,8 +8,8 @@ var fs    = require('fs');
 var _     = require('underscore');
 var mysql = require('mysql');
 
-var qforms = require('../../../qforms');
-var server = require('../../../server');
+var qforms = require('../../../../qforms');
+var server = require('../../../../server');
 
 var EditorController = require('../EditorController');
 

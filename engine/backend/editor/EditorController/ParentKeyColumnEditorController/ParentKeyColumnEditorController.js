@@ -7,7 +7,7 @@ var path = require('path');
 var fs   = require('fs');
 var _    = require('underscore');
 
-var server           = require('../../../server');
+var server = require('../../../../server');
 
 var EditorController = require('../EditorController');
 

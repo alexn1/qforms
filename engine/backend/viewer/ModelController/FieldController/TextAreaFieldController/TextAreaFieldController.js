@@ -5,7 +5,7 @@ module.exports = TextAreaFieldController;
 var util = require('util');
 var path = require('path');
 
-var server             = require('../../../../server');
+var server = require('../../../../../server');
 
 var FieldController = require('../FieldController');
 

@@ -10,8 +10,9 @@ var async         = require('async');
 var child_process = require('child_process');
 var stream        = require('stream');
 
-var helper           = require('../../../common/helper');
-var server           = require('../../../server');
+var helper = require('../../../common/helper');
+var server = require('../../../../server');
+
 var ModelController  = require('../ModelController');
 
 util.inherits(PageController, ModelController);

@@ -5,7 +5,7 @@ module.exports = DataSourceEditor;
 var util = require('util');
 var path = require('path');
 
-var qforms = require('../../../qforms');
+var qforms = require('../../../../qforms');
 
 var Editor = require('../Editor');
 

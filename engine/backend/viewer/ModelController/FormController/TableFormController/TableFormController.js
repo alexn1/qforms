@@ -5,8 +5,10 @@ module.exports = TableFormController;
 var util = require('util');
 var path = require('path');
 
+
+var server = require('../../../../../server');
+
 var FormController = require('../FormController');
-var server            = require('../../../../server');
 
 util.inherits(TableFormController, FormController);
 

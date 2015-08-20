@@ -5,7 +5,7 @@ module.exports = EditorController;
 var path = require('path');
 var fs   = require('fs');
 
-var qforms = require('../../Qforms');
+var qforms = require('../../../qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function EditorController(appInfo) {

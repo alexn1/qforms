@@ -6,8 +6,8 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
-var qforms = require('../../../qforms');
-var server              = require('../../../server');
+var qforms = require('../../../../qforms');
+var server = require('../../../../server');
 
 var Editor = require('../Editor');
 

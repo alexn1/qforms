@@ -6,7 +6,7 @@ var util = require('util');
 var path = require('path');
 var _    = require('underscore');
 
-var qforms = require('../../../qforms');
+var qforms = require('../../../../qforms');
 
 var helper                = require('../../../common/helper');
 var ModelController       = require('../ModelController');
