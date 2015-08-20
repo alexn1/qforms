@@ -1,4 +1,4 @@
 cd script
-call restore.bat
+call restore.cmd
 cd ..
 call mocha

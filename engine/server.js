@@ -83,7 +83,7 @@ process.on('SIGINT', function () {
 });
 
 process.on('exit', function () {
-    console.log('process.exit');
+    //console.log('process.exit');
 });
 
 helper.createDirIfNotExistsSync(server.get('runtime'));

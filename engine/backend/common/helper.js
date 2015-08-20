@@ -138,7 +138,7 @@ module.exports.queryFormat = function queryFormat(query, params) {
             return 'NULL';
         }
     });
-    console.log('real db sql: ' + sql);
+    //console.log('real db sql: ' + sql);
     return sql;
 };
 

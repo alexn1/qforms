@@ -121,7 +121,7 @@ ApplicationController.prototype.init = function(callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.deinit = function(callback) {
-    console.log('deinit: ' + this.name);
+    //console.log('deinit: ' + this.name);
     async.eachSeries(this.databases, function(database, next) {
         database.deinit(next);
     }, callback);

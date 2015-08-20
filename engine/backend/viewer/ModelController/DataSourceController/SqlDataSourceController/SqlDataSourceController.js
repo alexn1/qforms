@@ -52,7 +52,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.query = function(context, query, params, callback, select) {
-    console.log({dsName: this.name, query: query, params: params});
+    //console.log({dsName: this.name, query: query, params: params});
     this.database.query(context, query, params, callback, select);
 };
 
