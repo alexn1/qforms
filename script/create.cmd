@@ -1,1 +1,1 @@
-mysql -u root -p < cmd.sql
+mysql -u root -p < create.sql
