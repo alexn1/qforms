@@ -21,5 +21,9 @@
   },
   "scripts": {
     "start": "node www.js"
+  },
+  "config": {
+    "host": "localhost",
+    "port": "3000"
   }
 }
