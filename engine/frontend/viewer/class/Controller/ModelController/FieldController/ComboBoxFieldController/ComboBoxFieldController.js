@@ -138,7 +138,7 @@ ComboBoxFieldController.prototype.onRefillRow = function(ea) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype._refillRow = function(option) {
-    option.innerHTML = option.dbRow[this.model.data.displayColumn];
+    option.innerHTML = this.model.getDisplayValue(option.dbRow);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,7 +162,9 @@ ComboBoxFieldController.prototype.onNewRow = function(ea) {
     //console.log(ea);
     switch (this.model.form.data.class) {
         case 'RowForm':
-            this._createOption(ea.i);
+            var key = this.model.form.dataSource.getRowKey(this.model.form.row);
+            var view = this.views[key];
+            this._createOption(view, ea.i);
             break;
     }
 };

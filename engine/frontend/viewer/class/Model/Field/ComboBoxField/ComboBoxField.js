@@ -15,7 +15,7 @@ ComboBoxField.prototype.getDisplayValue = function(row) {
     } else {
         value = this.data.displayColumn;
         value = value.replace(/\{([\w\.]+)\}/g, function (text, name) {
-            return row.hasOwnProperty(name) ? row[name] : text;
+            return row.hasOwnProperty(name) ? (row[name] || '') : text;
         });
     }
     return value;
