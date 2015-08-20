@@ -1,11 +1,11 @@
 'use strict';
 
-var qforms = require('../backend/qforms');
+var qforms = require('../engine/backend/qforms');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test02', function() {
-    var appFileDir  = '../app/test';
-    var appFilePath = '../app/test/application1.json';
+    var appFileDir  = 'app/test';
+    var appFilePath = 'app/test/application1.json';
     it('create new application', function(done) {
         qforms.helper.createDirIfNotExists2(appFileDir).then(function() {
             return qforms.ApplicationEditor.createAppFile2(appFilePath, {name: 'application1'});

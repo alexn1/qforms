@@ -32,9 +32,9 @@ server.set('public'         , path.join(engineDirPath,  'frontend'));
 server.set('runtime'        , path.join(engineDirPath,  'runtime'));
 server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
 server.set('applications'   , {});
-server.set('commonStyleCss' , helper.getFilePathsSync(path.join(server.get('public')), 'common/style', 'css'));
-server.set('commonClassCss' , helper.getFilePathsSync(path.join(server.get('public')), 'common/class', 'css'));
-server.set('commonClassJs'  , helper.getFilePathsSync(path.join(server.get('public')), 'common/class', 'js'));
+server.set('commonStyleCss' , helper.getFilePathsSync(server.get('public'), 'common/style', 'css'));
+server.set('commonClassCss' , helper.getFilePathsSync(server.get('public'), 'common/class', 'css'));
+server.set('commonClassJs'  , helper.getFilePathsSync(server.get('public'), 'common/class', 'js'));
 
 helper.createDirIfNotExistsSync(server.get('runtime'));
 helper.createDirIfNotExistsSync(server.get('temp'));

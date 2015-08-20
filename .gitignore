@@ -1,4 +1,4 @@
 .idea/
-engine/backend/node_modules/
 engine/node_modules/
 engine/runtime/
+test/node_modules/
