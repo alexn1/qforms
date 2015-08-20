@@ -10,7 +10,7 @@ var async         = require('async');
 var child_process = require('child_process');
 var stream        = require('stream');
 
-var helper = require('../../../common/helper');
+var qforms = require('../../../../qforms');
 var server = require('../../../../server');
 
 var ModelController  = require('../ModelController');
@@ -42,7 +42,7 @@ PageController.create = function(data, parent, callback) {
         data['@attributes'].name,
         data['@attributes'].name + '.backend.js'
     );
-    helper.getFileContent(customClassFilePath, function(content) {
+    qforms.helper.getFileContent(customClassFilePath, function(content) {
         if (content) {
             var customClass = eval(content);
             callback(new customClass(data, parent));

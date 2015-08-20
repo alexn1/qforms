@@ -8,18 +8,13 @@ var _    = require('underscore');
 
 var qforms = require('../../../../qforms');
 
-var helper                = require('../../../common/helper');
-var ModelController       = require('../ModelController');
-
-var PageController        = require('../PageController/PageController');
-var FormController        = require('../FormController/FormController');
-var RowFormController     = require('../FormController/RowFormController/RowFormController');
+var ModelController = require('../ModelController');
 
 util.inherits(DataSourceController, ModelController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.create = function(data, parent, callback) {
-    if (parent instanceof FormController) {
+    if (parent instanceof qforms.FormController) {
         var form = parent;
         var customClassFilePath = path.join(
             form.page.application.dirPath,
@@ -31,7 +26,7 @@ DataSourceController.create = function(data, parent, callback) {
             data['@attributes'].name,
             data['@attributes'].name + '.backend.js'
         );
-        helper.getFileContent(customClassFilePath, function(content) {
+        qforms.helper.getFileContent(customClassFilePath, function(content) {
             if (content) {
                 var customClass = eval(content);
                 callback(new customClass(data, parent));
@@ -48,8 +43,8 @@ DataSourceController.create = function(data, parent, callback) {
 function DataSourceController(data, parent) {
     DataSourceController.super_.call(this, data, parent);
     this.application      = parent instanceof qforms.ApplicationController ? parent : null;
-    this.page             = parent instanceof PageController        ? parent : null;
-    this.form             = parent instanceof FormController        ? parent : null;
+    this.page             = parent instanceof qforms.PageController        ? parent : null;
+    this.form             = parent instanceof qforms.FormController        ? parent : null;
     this.keyColumns       = [];
     this.parentKeyColumns = [];
 };
@@ -88,7 +83,7 @@ DataSourceController.prototype.checkColumns = function(row) {
     this.parentKeyColumns.forEach(function(column) {
         self.checkColumn(row, column);
     });
-    if ((this.parent instanceof FormController) && this.name === 'default') {
+    if ((this.parent instanceof qforms.FormController) && this.name === 'default') {
         for (var name in this.parent.fields) {
             var field = this.parent.fields[name];
             this.checkColumn(row, field.data['@attributes'].column);
@@ -121,7 +116,7 @@ DataSourceController.prototype.fill = function(context, callback) {
                     self.checkColumns(rows[0]);
                 }
                 response.rows = rows;
-                if (self.name === 'default' && self.form && self.form instanceof RowFormController && rows[0]) {
+                if (self.name === 'default' && self.form && self.form instanceof qforms.RowFormController && rows[0]) {
                     self.form.dumpRowToParams(rows[0], context.querytime.params);
                 }
                 if (self.data['@attributes'].limit) {
@@ -189,9 +184,9 @@ DataSourceController.prototype.delete = function(context, callback) {
 DataSourceController.prototype.getApp = function() {
     if (this.parent instanceof qforms.ApplicationController) {
         return this.parent;
-    } else if (this.parent instanceof PageController) {
+    } else if (this.parent instanceof qforms.PageController) {
         return this.parent.parent;
-    } else if (this.parent instanceof FormController) {
+    } else if (this.parent instanceof qforms.FormController) {
         return this.parent.parent.parent;
     } else {
         throw new Error('wrong parent');

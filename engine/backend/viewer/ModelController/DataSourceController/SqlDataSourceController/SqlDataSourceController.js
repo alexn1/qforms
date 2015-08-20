@@ -9,9 +9,9 @@ var mysql  = require('mysql');
 var _      = require('underscore');
 var async  = require('async');
 
-var helper               = require('../../../../common/helper');
+var qforms = require('../../../../../qforms');
+
 var DataSourceController = require('../DataSourceController');
-var FormController       = require('../../FormController/FormController');
 
 util.inherits(SqlDataSourceController, DataSourceController);
 
@@ -25,7 +25,7 @@ function SqlDataSourceController(data, parent) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.create = function(data, parent, callback) {
-    if (parent instanceof FormController) {
+    if (parent instanceof qforms.FormController) {
         var form = parent;
         var customClassFilePath = path.join(
             form.page.application.dirPath,
@@ -37,7 +37,7 @@ SqlDataSourceController.create = function(data, parent, callback) {
             data['@attributes'].name,
             data['@attributes'].name + '.backend.js'
         );
-        helper.getFileContent(customClassFilePath, function(content) {
+        qforms.helper.getFileContent(customClassFilePath, function(content) {
             if (content) {
                 var customClass = eval(content);
                 callback(new customClass(data, parent));

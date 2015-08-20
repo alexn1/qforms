@@ -7,7 +7,6 @@ var path  = require('path');
 var fs    = require('fs');
 var async = require('async');
 
-var helper           = require('../../../common/helper');
 var ModelController  = require('../ModelController');
 
 util.inherits(FormController, ModelController);

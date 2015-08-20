@@ -173,7 +173,7 @@ PageEditor.prototype.getForm = function(name) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.getDataSource = function(name) {
     var dataSourceData  = this.data.dataSources[name];
-    return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+    return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

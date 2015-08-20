@@ -5,7 +5,8 @@ module.exports = FieldController;
 var util = require('util');
 var path = require('path');
 
-var helper          = require('../../../common/helper');
+var qforms = require('../../../../qforms');
+
 var ModelController = require('../ModelController');
 
 util.inherits(FieldController, ModelController);
@@ -28,7 +29,7 @@ FieldController.prototype.fillDefaultValue = function(context, row) {
     var column = this.data['@attributes'].column;
     var defaultValue = this.form.replaceThis(context, this.data['@attributes'].defaultValue);
     var params = this.form.page.application.getParams(context);
-    var code = helper.templateValue(defaultValue, params);
+    var code = qforms.helper.templateValue(defaultValue, params);
     try {
         var value  = eval(code);
     } catch (e) {

@@ -73,19 +73,19 @@ FormEditor.prototype.moveFieldDown = function(params, callback) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getDataSource = function(name) {
     var dataSourceData  = this.data.dataSources[name];
-    return eval('new {class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+    return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getField = function(name) {
     var fieldData = this.data.fields[name];
-    return eval('new {class}Editor(this, name)'.replace('{class}', fieldData['@class']));
+    return eval('new qforms.{class}Editor(this, name)'.replace('{class}', fieldData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getControl = function(name) {
     var controlData = this.data.controls[name];
-    return eval('new {class}Editor(this, name)'.replace('{class}', controlData['@class']));
+    return eval('new qforms.{class}Editor(this, name)'.replace('{class}', controlData['@class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ FormEditor.prototype.newControl = function(params) {
     if (this.data.controls[name]) {
         throw new Error('Control {name} already exist.'.repalce('{name}', name));
     }
-    return this.data.controls[name] = eval('{class}Editor.createData(params);'.replace('{class}', params['class']));
+    return this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,8 @@ module.exports = DatabaseController;
 var util  = require('util');
 var mysql = require('mysql');
 
-var helper          = require('../../../common/helper');
+var qforms = require('../../../../qforms');
+
 var ModelController = require('../ModelController');
 
 util.inherits(DatabaseController, ModelController);
@@ -39,7 +40,7 @@ DatabaseController.prototype._getPool = function() {
             user        : this.data.params.user['@attributes'].value,
             database    : this.data.params.database['@attributes'].value,
             password    : this.data.params.password['@attributes'].value,
-            queryFormat : helper.queryFormat
+            queryFormat : qforms.helper.queryFormat
         });
     }
     //console.log('mysql pool connections count: ' + this.pool._allConnections.length);
@@ -68,7 +69,7 @@ DatabaseController.prototype.query = function(context, query, params, callback, 
     nest = (nest !== undefined) ? nest : true;
     var self = this;
     this.getConnection(context, function(cnn) {
-        cnn.query({sql: query, typeCast: helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
+        cnn.query({sql: query, typeCast: qforms.helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
             if (err) {
                 throw err;
             } else {
