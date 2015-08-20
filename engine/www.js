@@ -4,8 +4,8 @@ var http = require('http');
 var path = require('path');
 
 var pkg    = require('./package.json');
-var server = require('./server');
 var qforms = require('./qforms');
+var server = require('./server');
 
 var port = qforms.helper.getCommandLineParams().port || pkg.config.port;
 var host = qforms.helper.getCommandLineParams().host || pkg.config.host;

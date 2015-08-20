@@ -19,7 +19,7 @@ var engineDirPath  = __dirname;
 var backendDirPath = path.join(__dirname, 'backend');
 
 // environment
-server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || '../app'));
+server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath));
 if (!fs.existsSync(server.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(server.get('appsDirPath')) + "' doesn't exist");
     process.exit(1);

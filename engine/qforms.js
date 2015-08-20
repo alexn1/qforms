@@ -2,8 +2,8 @@
 module.exports.helper                            = require('./backend/common/helper');
 module.exports.multipart                         = require('./backend/common/multipart');
 module.exports.text                              = {
-    en:require('./backend/common/text/en'),
-    ru:require('./backend/common/text/ru')
+                                                en:require('./backend/common/text/en'),
+                                                ru:require('./backend/common/text/ru')
 };
 module.exports.Editor                            = require('./backend/editor/Editor/Editor');
 module.exports.ApplicationEditor                 = require('./backend/editor/Editor/ApplicationEditor/ApplicationEditor');
