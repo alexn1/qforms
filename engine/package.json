@@ -1,6 +1,7 @@
 {
   "name": "qforms",
   "version": "0.1.0-dev",
+  "main": "qforms.js",
   "private": true,
   "dependencies": {
     "async": "^0.9.0",
