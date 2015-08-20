@@ -1,7 +1,6 @@
 'use strict';
 
 var express    = require('express');
-var config     = require('config');
 var path       = require('path');
 var fs         = require('fs');
 var morgan     = require('morgan');
@@ -16,21 +15,22 @@ var multipart = require('./common/multipart');
 
 var server = module.exports = express();
 
+var engineDirPath  = path.join(__dirname, '..');
+var backendDirPath = __dirname;
+
 // environment
-server.set('appsDirPath', helper.getCommandLineParams().appsDirPath || config.get('appsDirPath'));
+server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || '../app'));
 if (!fs.existsSync(server.get('appsDirPath'))) {
     console.log("Application folder '" + path.resolve(server.get('appsDirPath')) + "' doesn't exist");
     process.exit(1);
 }
 server.set('version'        , p.version);
-server.set('host'           , helper.getCommandLineParams().host            || config.get('host'));
-server.set('port'           , helper.getCommandLineParams().port            || config.get('port'));
-server.set('handleException', helper.getCommandLineParams().handleException || 'true');
+server.set('handleException', helper.getCommandLineParams().handleException || true);
 server.set('view engine'    , 'ejs');
-server.set('views'          , './backend/routes');
-server.set('public'         , './frontend');
-server.set('runtime'        , './runtime');
-server.set('temp'           , './runtime/temp');
+server.set('views'          , path.join(backendDirPath, 'routes'));
+server.set('public'         , path.join(engineDirPath,  'frontend'));
+server.set('runtime'        , path.join(engineDirPath,  'runtime'));
+server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
 server.set('applications'   , {});
 server.set('commonStyleCss' , helper.getFilePathsSync(path.join(server.get('public')), 'common/style', 'css'));
 server.set('commonClassCss' , helper.getFilePathsSync(path.join(server.get('public')), 'common/class', 'css'));
@@ -54,11 +54,11 @@ server.use(session({
 server.use(express.static(server.get('public')));
 
 // routes
-var home   = require('./routes/home');
-var viewer = require('./routes/viewer');
-var editor = require('./routes/editor');
-var file   = require('./routes/viewer/file');
-var error  = require('./routes/error');
+var home   = require(path.join(backendDirPath, 'routes/home'));
+var viewer = require(path.join(backendDirPath, 'routes/viewer'));
+var editor = require(path.join(backendDirPath, 'routes/editor'));
+var file   = require(path.join(backendDirPath, 'routes/viewer/file'));
+var error  = require(path.join(backendDirPath, 'routes/error'));
 
 // get
 server.get('/'                               , home);

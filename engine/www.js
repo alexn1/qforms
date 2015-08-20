@@ -4,11 +4,15 @@ var http = require('http');
 var path = require('path');
 
 var server = require('./backend/server');
+var qforms = require('./backend/qforms');
 
-var www = http.createServer(server).listen(server.get('port'), server.get('host'), function() {
+var port = qforms.helper.getCommandLineParams().port || 3000;
+var host = qforms.helper.getCommandLineParams().host || 'localhost';
+
+var www = http.createServer(server).listen(port, host, function() {
     console.log('QForms server listening on http://{host}:{port}, applications from {appsDirPath}'.template({
-        host       : server.get('host'),
-        port       : server.get('port'),
+        host       : host,
+        port       : port,
         appsDirPath: path.resolve(server.get('appsDirPath'))
     }));
 });

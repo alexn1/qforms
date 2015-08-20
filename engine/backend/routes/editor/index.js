@@ -1,6 +1,5 @@
 'use strict';
 
-var config = require('config');
 var path   = require('path');
 var fs     = require('fs');
 var domain = require('domain');
@@ -43,7 +42,7 @@ var actions = [
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
-    if (config.get('editor')) {
+    if (req.app.get('env') === 'development') {
         if (req.params.appDirName && req.params.appFileName) {
             // var route = req.params.appDirName + '/' + req.params.appFileName;
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
@@ -51,7 +50,7 @@ module.exports = function(req, res, next) {
                 if (exists) {
                     qforms.helper.getAppInfo(appFilePath, function(appInfo) {
                         var d = domain.create();
-                        if (server.get('handleException') === 'true') {
+                        if (server.get('handleException') === true) {
                             d.on('error', next);
                         }
                         d.run(function() {

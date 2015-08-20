@@ -4,7 +4,6 @@ var path   = require('path');
 var fs     = require('fs');
 var util   = require('util');
 var domain = require('domain');
-var config = require('config');
 
 var qforms = require('../../qforms');
 var server = require('../../server');
@@ -26,7 +25,7 @@ module.exports = function(req, res, next) {
             } else {
                 //console.log('old app: ' + route);
                 var d = domain.create();
-                if (server.get('handleException') === 'true') {
+                if (server.get('handleException') === true) {
                     d.on('error', next);
                 }
                 d.run(function() {
@@ -48,7 +47,7 @@ function createApplication(req, res, next, route) {
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
 
     var d = domain.create();
-    if (server.get('handleException') === 'true') {
+    if (server.get('handleException') === true) {
         d.on('error', next);
     }
     d.run(function() {
