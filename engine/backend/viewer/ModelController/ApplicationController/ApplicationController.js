@@ -284,7 +284,7 @@ ApplicationController.prototype.createContext = function(context) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.destroyContext = function(context) {
     for (var name in context.connections) {
-        console.log('release: ' + name);
+        //console.log('release: ' + name);
         context.connections[name].release();
     }
 };
