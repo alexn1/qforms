@@ -15,15 +15,18 @@ var multipart = require('./backend/common/multipart');
 
 var server = module.exports = express();
 
-var engineDirPath  = __dirname;
+var engineDirPath  =           __dirname;
 var backendDirPath = path.join(__dirname, 'backend');
 
 // environment
 server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath));
 if (!fs.existsSync(server.get('appsDirPath'))) {
-    console.log("Application folder '" + path.resolve(server.get('appsDirPath')) + "' doesn't exist");
+    console.log("Application folder '{appsDirPath}' doesn't exist".template({
+        appsDirPath: path.resolve(server.get('appsDirPath'))
+    }));
     process.exit(1);
 }
+
 server.set('version'        , pkg.version);
 server.set('handleException', helper.getCommandLineParams().handleException || true);
 server.set('view engine'    , 'ejs');
@@ -41,7 +44,6 @@ server.set('commonClassJs'  , helper.getFilePathsSync(server.get('public'), 'com
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(multipart);
-
 server.use(session({
     secret            : 'qforms',
     key               : 'sid',
