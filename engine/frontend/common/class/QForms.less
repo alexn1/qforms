@@ -1,32 +1,38 @@
+hr {
+  margin: 10px 0;
+}
+nav {
+  margin:0 !important;
+}
+.error,
+.error:focus {
+  box-shadow: 0 0 2px red  !important;
+}
+*:focus {
+  outline: 0 !important;
+}
 .full {
   height: 100%;
   width:100%;
 }
-
 .flex-rows {
   display:flex;
   flex-direction:column;
 }
-
 .flex-cols {
   display:flex;
   flex-direction:row;
 }
-
 .flex-min {
   flex-shrink: 0;
 }
-
 .flex-max {
   flex:auto;
 }
-
-
 .place {
   position: relative;
   overflow:hidden;
 }
-
 .frame  {
   position: absolute;
   overflow: auto;
@@ -35,12 +41,9 @@
   bottom:0;
   right:0;
 }
-
 .layout {
   table-layout:fixed;
 }
-
-
 .overlay {
   background-color:rgba(0,0,0,0.3);
   position: absolute;
@@ -60,5 +63,3 @@
     }
   }
 }
-
-

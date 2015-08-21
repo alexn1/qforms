@@ -18,16 +18,12 @@
     <!-- ejs -->
     <script src="/common/lib/ejs/ejs_production.js"></script>
     <!-- qforms -->
-    <%commonStyleCss.forEach(function (filePath) {
-        %><link rel="stylesheet" href="/<%=filePath%>"/><%='\n'%><%
-    });%>
     <%commonClassCss.forEach(function (filePath) {
         %><link rel="stylesheet" href="/<%=filePath%>"/><%='\n'%><%
     });%>
     <%editorClassCss.forEach(function (filePath) {
         %><link rel="stylesheet" href="/<%=filePath%>"/><%='\n'%><%
     });%>
-    <script src="/common/qforms.js"></script>
     <%commonClassJs.forEach(function (filePath) {
         %><script src="/<%=filePath%>"></script><%='\n'%><%
     });%>

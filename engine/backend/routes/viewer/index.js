@@ -110,7 +110,6 @@ function login(req, res, next, application) {
                 version       : req.app.get('version'),
                 application   : application,
                 caption       : application.data['@attributes'].caption,
-                commonStyleCss: req.app.get('commonStyleCss'),
                 REQUEST_URI   : req.url,
                 errMsg        : null,
                 username      : null,
@@ -140,7 +139,6 @@ function login(req, res, next, application) {
                         version       : req.app.get('version'),
                         application   : application,
                         caption       : application.data['@attributes'].caption,
-                        commonStyleCss: req.app.get('commonStyleCss'),
                         REQUEST_URI   : req.url,
                         errMsg        : application.text.login.WrongUsernameOrPassword,
                         username      : req.body.username,
@@ -172,7 +170,6 @@ function index(req, res, next, application) {
         res.render('viewer/view', {
             version       : req.app.get('version'),
             debug         : req.query.debug,
-            commonStyleCss: req.app.get('commonStyleCss'),
             commonClassCss: req.app.get('commonClassCss'),
             commonClassJs : req.app.get('commonClassJs'),
             viewerClassCss: req.app.get('viewerClassCss'),
