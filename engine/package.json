@@ -29,5 +29,8 @@
     "user": "admin",
     "password": "admin",
     "authentication": "false"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
   }
 }
