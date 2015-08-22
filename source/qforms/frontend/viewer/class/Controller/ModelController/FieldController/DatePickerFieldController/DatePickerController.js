@@ -75,6 +75,10 @@ DatePickerFieldController.prototype.onChange = function (el) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldController.prototype.setValue = function (value, view) {
     var text = value;
+    var placeholder = 'YYYY-MM-DD';
+    if (this.model.form.page.app.data.lang === 'ru') {
+        placeholder = 'ДД.ММ.ГГГГ';
+    }
     if (value) {
         if (this.model.form.page.app.data.lang === 'ru') {
             var arr = value.split('-');
@@ -86,6 +90,7 @@ DatePickerFieldController.prototype.setValue = function (value, view) {
     switch (this.model.form.data.class) {
         case 'RowForm':
             view.firstElementChild.value = text;
+            view.firstElementChild.placeholder = placeholder;
             break;
         case 'TableForm':
             view.firstElementChild.innerHTML = text;
