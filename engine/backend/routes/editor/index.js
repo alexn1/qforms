@@ -89,7 +89,6 @@ function index(req, res, next, appInfo) {
     appFile.read(function() {
         res.render('editor/view', {
             version        : req.app.get('version'),
-            debug          : req.query.debug,
             commonClassCss : req.app.get('commonClassCss'),
             commonClassJs  : req.app.get('commonClassJs'),
             editorClassCss : req.app.get('editorClassCss'),

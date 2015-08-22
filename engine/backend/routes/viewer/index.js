@@ -169,7 +169,7 @@ function index(req, res, next, application) {
         application.destroyContext(context);
         res.render('viewer/view', {
             version       : req.app.get('version'),
-            debug         : req.query.debug,
+            debugApp      : req.query.debug,
             commonClassCss: req.app.get('commonClassCss'),
             commonClassJs : req.app.get('commonClassJs'),
             viewerClassCss: req.app.get('viewerClassCss'),
