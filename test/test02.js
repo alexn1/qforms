@@ -14,9 +14,6 @@ describe('test02', function() {
     before(function(done) {
         del('app/test', done);
     });
-    after(function(done) {
-        del('app/test', done);
-    });
     it('create new application', function(done) {
         qforms.helper.createDirIfNotExists2(appFileDir).then(function() {
             return qforms.ApplicationEditor.createAppFile2(appFilePath, {name: 'application1'});

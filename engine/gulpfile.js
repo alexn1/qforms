@@ -1,9 +1,10 @@
 'use strict';
 
-var gulp   = require('gulp');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var path   = require('path');
+var gulp      = require('gulp');
+var uglify    = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
+var concat    = require('gulp-concat');
+var path      = require('path');
 
 var pkg = require('./package.json');
 
@@ -50,6 +51,8 @@ gulp.task('frontend_common_class_js', function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_class_css', function() {
     return gulp.src('frontend/common/class/**/*.css')
+        .pipe(concat('bundle.css'))
+        .pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'frontend/common/class')));
 });
 
