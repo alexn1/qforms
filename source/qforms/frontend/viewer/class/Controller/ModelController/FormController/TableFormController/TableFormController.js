@@ -30,6 +30,7 @@ TableFormController.prototype.init = function() {
     $(this.view).find('button.previous').click(function() {
         self.onPreviousClick(this);
     });
+    this.$count = $(this.view).find('span.count');
     this.$goto = $(this.view).find('select.goto');
     this.$goto.change(function() {
         self.onGotoChange(this);
@@ -60,6 +61,7 @@ TableFormController.prototype.fill = function() {
     TableFormController.super_.prototype.fill.call(this);
     this.framesCount = this.model.dataSource.getFramesCount();
     if (this.framesCount) {
+        this.$count.text(this.model.dataSource.count);
         for (var i = 1; i <= this.framesCount; i++) {
             var option = $('<option></option>');
             option.val(i);
@@ -76,6 +78,7 @@ TableFormController.prototype.onRefilled = function(ea) {
     this.grid.clear();
     this.framesCount = this.model.dataSource.getFramesCount();
     if (this.framesCount) {
+        this.$count.text(this.model.dataSource.count);
         this.$goto.empty();
         for (var i = 1; i <= this.framesCount; i++) {
             var option = $('<option></option>');

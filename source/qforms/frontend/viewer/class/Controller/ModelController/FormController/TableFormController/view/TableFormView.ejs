@@ -32,7 +32,11 @@
         </div>
         <div class="block"></div>
     </div>
-    <div class="flex-min paging" style="text-align: right; display: none;">
+    <div class="flex-min paging">
+        <div class="countBlock">
+            <span><%=model.page.app.data.text.form.count%></span>
+            <span class="count"></span>
+        </div>
         <button class="btn btn-default btn-xs previous"><%=model.page.app.data.text.form.previous%></button>
         <select class="goto"></select>
         <button class="btn btn-default btn-xs next"><%=model.page.app.data.text.form.next%></button>
