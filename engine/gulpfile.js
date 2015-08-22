@@ -112,8 +112,8 @@ gulp.task('frontend_viewer_class_js', function() {
 });
 gulp.task('frontend_viewer_class_css', function() {
     return gulp.src('frontend/viewer/class/**/*.css')
-        .pipe(concat('bundle.css'))
-        .pipe(minifyCss())
+        //.pipe(concat('bundle.css'))
+        //.pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'frontend/viewer/class')));
 });
 gulp.task('frontend_viewer_class_ejs', function() {
