@@ -81,11 +81,41 @@ gulp.task('frontend_editor_lib', function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('frontend_home', function() {
-    return gulp.src('frontend/home/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/home')));
+gulp.task('frontend_home', ['frontend_home_class', 'frontend_home_html']);
+gulp.task('frontend_home_class', ['frontend_home_class_js', 'frontend_home_class_css']);
+gulp.task('frontend_home_class_js', function() {
+    return gulp.src('frontend/home/class/**/*.js')
+        .pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/home/class')));
+});
+gulp.task('frontend_home_class_css', function() {
+    return gulp.src('frontend/home/class/**/*.css')
+        .pipe(concat('bundle.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/home/class')));
+});
+gulp.task('frontend_home_html', function() {
+    return gulp.src('frontend/home/html/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/home/html')));
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('frontend_viewer', function() {
-    return gulp.src('frontend/viewer/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/viewer')));
+gulp.task('frontend_viewer', ['frontend_viewer_class']);
+
+gulp.task('frontend_viewer_class', ['frontend_viewer_class_js', 'frontend_viewer_class_css', 'frontend_viewer_class_ejs']);
+
+gulp.task('frontend_viewer_class_js', function() {
+    return gulp.src('frontend/viewer/class/**/*.js')
+        .pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/viewer/class')));
+});
+gulp.task('frontend_viewer_class_css', function() {
+    return gulp.src('frontend/viewer/class/**/*.css')
+        .pipe(concat('bundle.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/viewer/class')));
+});
+gulp.task('frontend_viewer_class_ejs', function() {
+    return gulp.src('frontend/viewer/class/**/*.ejs').pipe(gulp.dest(path.join(buildPath, 'frontend/viewer/class')));
 });
