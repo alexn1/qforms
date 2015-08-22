@@ -1,8 +1,10 @@
 'use strict';
 
+var path   = require('path');
 var should = require('should');
 
-var qforms = require('../engine');
+var pkg    = require('../engine/package.json');
+var qforms = require(path.join('../build', pkg.version));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test01', function() {
