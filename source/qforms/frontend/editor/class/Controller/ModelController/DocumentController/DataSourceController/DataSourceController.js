@@ -274,7 +274,7 @@ DataSourceController.prototype.btnQuery_Click = function(ctrl) {
     this.$view.find('.btnQuery').addClass('btn-primary');
     this.$view.find('.btnCountQuery').removeClass('btn-primary');
     this.$view.find('.btnCountQuery').addClass('btn-default');
-    this.save = 'count';
+    this.save = 'query';
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
