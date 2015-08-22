@@ -6,8 +6,8 @@ var fs   = require('fs');
 var qforms = require('../../../qforms');
 var server = require('../../../server');
 
-server.set('home_class_css', qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'css'));
-server.set('home_class_js' , qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'js'));
+server.set('homeClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'css'));
+server.set('homeClassJs' , qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'js'));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
@@ -16,8 +16,10 @@ module.exports = function(req, res, next) {
             res.render('home/view', {
                 req           : req,
                 version       : req.app.get('version'),
-                home_class_css: req.app.get('home_class_css'),
-                home_class_js : req.app.get('home_class_js'),
+                commonClassCss: req.app.get('commonClassCss'),
+                commonClassJs : req.app.get('commonClassJs'),
+                homeClassCss  : req.app.get('homeClassCss'),
+                homeClassJs   : req.app.get('homeClassJs'),
                 appInfos      : appInfos
             });
         });
