@@ -35,40 +35,49 @@ gulp.task('frontend', ['frontend_common', 'frontend_editor', 'frontend_home', 'f
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common', ['frontend_common_class', 'frontend_common_img', 'frontend_common_lib']);
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_class', ['frontend_common_class_js', 'frontend_common_class_css']);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_class_js', function() {
     return gulp.src('frontend/common/class/**/*.js')
         .pipe(concat('bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest(path.join(buildPath, 'frontend/common/class')));
 });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_class_css', function() {
     return gulp.src('frontend/common/class/**/*.css')
         .pipe(concat('bundle.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'frontend/common/class')));
 });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_img', function() {
     return gulp.src('frontend/common/img/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/common/img')));
 });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_lib', function() {
     return gulp.src('frontend/common/lib/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/common/lib')));
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('frontend_editor', function() {
-    return gulp.src('frontend/editor/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/editor')));
+gulp.task('frontend_editor', ['frontend_editor_class', 'frontend_editor_lib']);
+gulp.task('frontend_editor_class', ['frontend_editor_class_js', 'frontend_editor_class_css', 'frontend_editor_class_ejs', 'frontend_editor_class_html']);
+gulp.task('frontend_editor_class_js', function() {
+    return gulp.src('frontend/editor/class/**/*.js')
+        .pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/editor/class')));
+});
+gulp.task('frontend_editor_class_css', function() {
+    return gulp.src('frontend/editor/class/**/*.css')
+        .pipe(concat('bundle.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest(path.join(buildPath, 'frontend/editor/class')));
+});
+gulp.task('frontend_editor_class_ejs', function() {
+    return gulp.src('frontend/editor/class/**/*.ejs').pipe(gulp.dest(path.join(buildPath, 'frontend/editor/class')));
+});
+gulp.task('frontend_editor_class_html', function() {
+    return gulp.src('frontend/editor/class/**/*.html').pipe(gulp.dest(path.join(buildPath, 'frontend/editor/class')));
+});
+gulp.task('frontend_editor_lib', function() {
+    return gulp.src('frontend/editor/lib/**/*').pipe(gulp.dest(path.join(buildPath, 'frontend/editor/lib')));
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
