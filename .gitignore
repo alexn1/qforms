@@ -1,6 +1,4 @@
 .idea/
-engine/node_modules/
-engine/runtime/
 source/qforms/node_modules/
 source/qforms/runtime/
 test/node_modules/

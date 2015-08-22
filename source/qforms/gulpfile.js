@@ -8,7 +8,7 @@ var path      = require('path');
 
 var pkg = require('./package.json');
 
-var buildPath = path.join('../build', pkg.version);
+var buildPath = path.join('../../build', pkg.version);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('default', ['root', 'backend', 'frontend']);

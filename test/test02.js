@@ -3,7 +3,7 @@
 var path   = require('path');
 var del    = require('del');
 
-var pkg    = require('../engine/package.json');
+var pkg    = require('../source/qforms/package.json');
 var qforms = require(path.join('../build', pkg.version));
 
 
