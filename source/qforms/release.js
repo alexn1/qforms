@@ -87,7 +87,7 @@ function incPatch(version) {
     var major = ver[0];
     var minor = ver[1];
     var patch = ver[2];
-    minor = parseInt(patch) + 1;
+    patch = parseInt(patch) + 1;
     return [major, minor, patch].join('.');
 }
 
