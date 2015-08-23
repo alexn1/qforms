@@ -41,7 +41,7 @@ function main() {
         return exec('git push origin master');
     })*/.then(function() {
         return getJsonFileData('package.json').then(function(data) {
-            version = data.version = versionWithDev(incMinor(data.version));
+            version = data.version = versionWithDev(incPatch(data.version));
             return putJsonFileData('package.json', data);
         });
     }).then(function() {
@@ -78,6 +78,16 @@ function incMinor(version) {
     var minor = ver[1];
     var patch = ver[2];
     minor = parseInt(minor) + 1;
+    return [major, minor, patch].join('.');
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function incPatch(version) {
+    var ver = version.split('.');
+    var major = ver[0];
+    var minor = ver[1];
+    var patch = ver[2];
+    minor = parseInt(patch) + 1;
     return [major, minor, patch].join('.');
 }
 
