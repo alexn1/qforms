@@ -8,7 +8,6 @@ var fs            = require('fs');
 var _             = require('underscore');
 var async         = require('async');
 var child_process = require('child_process');
-var xml           = require('xml');
 
 var qforms = require('../../../../qforms');
 var server = require('../../../../server');

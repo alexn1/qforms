@@ -5,7 +5,6 @@ module.exports = PageController;
 var util          = require('util');
 var path          = require('path');
 var fs            = require('fs');
-var xml           = require('xml');
 var async         = require('async');
 var child_process = require('child_process');
 var stream        = require('stream');

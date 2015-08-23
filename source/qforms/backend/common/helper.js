@@ -18,7 +18,7 @@ function _getFilePathsSync(dirPath, ext) {
         });
     });
     return filePaths;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.getFilePathsSync = function getFilePathsSync(publicDirPath, subDirPath, ext) {
@@ -302,7 +302,7 @@ function getRandomString(length) {
         result += chars.substr(index, 1);
     }
     return result;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.getTempSubDirPath = function getTempSubDirPath(tempDirPath, callback) {
@@ -335,28 +335,6 @@ module.exports.copyFile = function copyFile(source, target, callback) {
     });
     wr.on('close', callback);
     rd.pipe(wr);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getXmlObjectFromDataSet = function getXmlObjectFromDataSet(dataSet) {
-    var dsName = dataSet['@attributes'].name;
-    var xmlObject = {};
-    xmlObject[dsName] = [];
-    for (var tableName in dataSet.tables) {
-        var table = dataSet.tables[tableName];
-        for (var i = 0; i < table.rows.length; i++) {
-            var row = table.rows[i];
-            var rowElement = {};
-            rowElement[tableName] = [];
-            for (var columnName in row) {
-                var attrElement = {};
-                attrElement[columnName] = row[columnName];
-                rowElement[tableName].push(attrElement);
-            }
-            xmlObject[dsName].push(rowElement);
-        }
-    }
-    return xmlObject;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
