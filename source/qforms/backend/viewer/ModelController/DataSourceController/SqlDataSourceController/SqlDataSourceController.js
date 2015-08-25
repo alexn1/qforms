@@ -89,6 +89,7 @@ SqlDataSourceController.prototype.select = function(context, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.prototype.selectCount = function(context, callback) {
+    var self = this;
     var access = this.getAccessToken(context);
     if (access.select === false) {
         throw new Error('[{fullName}]: access denied.'.template({
@@ -99,6 +100,11 @@ SqlDataSourceController.prototype.selectCount = function(context, callback) {
     var params = this.getParams(context);
     this.query(context, query, params, function(rows) {
         var row = rows[0];
+        if (row === undefined) {
+            throw new Error('[{fullName}]: countQuery must return one row.'.template({
+                fullName: self.getFullName()
+            }));
+        }
         var count = row[Object.keys(row)[0]];
         callback(count);
     }, true);
