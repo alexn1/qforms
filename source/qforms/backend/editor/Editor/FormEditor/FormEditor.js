@@ -204,10 +204,10 @@ FormEditor.prototype.newDataSource = function(params) {
     var data;
     switch (_class) {
         case 'DataSource':
-            data = DataSourceEditor.create(params);
+            data = qforms.DataSourceEditor.create(params);
             break;
         case 'SqlDataSource':
-            data = SqlDataSourceEditor.create(params);
+            data = qforms.SqlDataSourceEditor.create(params);
             break;
         default:
             throw new Error('Unknown data source class.');
