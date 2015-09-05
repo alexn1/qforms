@@ -166,10 +166,11 @@ ApplicationController.prototype.newDatabaseAction = function() {
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
 
-            var name = $("#myModal input[id='name']").val();
-            var host = $("#myModal input[id='host']").val();
-            var dbname = $("#myModal input[id='dbname']").val();
-            var user = $("#myModal input[id='user']").val();
+            var name     = $("#myModal input[id='name']").val();
+            var host     = $("#myModal input[id='host']").val();
+            var port     = $("#myModal input[id='port']").val();
+            var dbname   = $("#myModal input[id='dbname']").val();
+            var user     = $("#myModal input[id='user']").val();
             var password = $("#myModal input[id='password']").val();
 
             var params = {
@@ -178,6 +179,10 @@ ApplicationController.prototype.newDatabaseAction = function() {
                     host:{
                         name:'host',
                         value:host
+                    },
+                    port:{
+                        name:'port',
+                        value:port
                     },
                     database:{
                         name:'database',

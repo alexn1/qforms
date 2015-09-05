@@ -37,6 +37,7 @@ DatabaseController.prototype._getPool = function() {
         //console.log('creating connection pool for: ' + database);
         this.pool = mysql.createPool({
             host        : this.data.params.host['@attributes'].value,
+            port        : this.data.params.port ? this.data.params.port['@attributes'].value : 3306,
             user        : this.data.params.user['@attributes'].value,
             database    : this.data.params.database['@attributes'].value,
             password    : this.data.params.password['@attributes'].value,
