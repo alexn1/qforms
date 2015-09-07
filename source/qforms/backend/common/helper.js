@@ -129,6 +129,11 @@ module.exports.currentDate = function currentDate() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+module.exports.currentDateTime = function currentDateTime() {
+    return currentDate() + ' ' + currentTime();
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.queryFormat = function queryFormat(query, params) {
     params = params || {};
     var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
