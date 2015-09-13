@@ -19,7 +19,8 @@ www.on('error', function(err) {
     }
 });
 www.listen(port, host, function() {
-    console.log('QForms server listening on http://{host}:{port}, applications from {appsDirPath}'.template({
+    console.log('QForms server v{version} listening on http://{host}:{port}, applications from {appsDirPath}'.template({
+        version    : pkg.version,
         host       : host,
         port       : port,
         appsDirPath: path.resolve(server.get('appsDirPath'))
