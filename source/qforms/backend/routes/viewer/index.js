@@ -14,6 +14,7 @@ server.set('viewerClassJs' , qforms.helper.getFilePathsSync(server.get('public')
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     //console.log(util.inspect(req,{depth:0}));
+    console.log('viewer.index');
     if (req.params.appDirName && req.params.appFileName) {
         var applications = req.app.get('applications');
         var route = [req.params.appDirName, req.params.appFileName].join('/');
@@ -42,7 +43,7 @@ module.exports = function(req, res, next) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function createApplication(req, res, next, route) {
-    //console.log('new app: ' + route);
+    console.log('createApplication: ' + route);
     var applications = req.app.get('applications');
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
 
@@ -62,6 +63,7 @@ function createApplication(req, res, next, route) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function handle(req, res, next, application) {
+    console.log('handle: ', req.method);
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     if (req.method === 'GET') {
         if (application.authentication() && !(req.session.user && req.session.user[route])) {
@@ -99,6 +101,7 @@ function handle(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function login(req, res, next, application) {
+    console.log('login');
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     var context = application.createContext({
         req: req
@@ -152,6 +155,7 @@ function login(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function logout(req, res, next, application) {
+    console.log('logout');
     var route = [req.params.appDirName, req.params.appFileName].join('/');
     if (req.session.user && req.session.user[route]) {
         delete req.session.user[route];
@@ -162,6 +166,7 @@ function logout(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, next, application) {
+    console.log('index');
     var context = application.createContext({
         req: req
     });
@@ -183,6 +188,7 @@ function index(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function page(req, res, next, application) {
+    console.log('page');
     var context = application.createContext({
         req           : req,
         params        : req.body.params,
@@ -201,6 +207,7 @@ function page(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function update(req, res, next, application) {
+    console.log('update');
     var context = application.createContext({
         req           : req,
         row           : req.body.row,
@@ -235,6 +242,7 @@ function update(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function frame(req, res, next, application) {
+    console.log('frame');
     var context = application.createContext({
         req           : req,
         parentPageName: req.body.parentPageName,
@@ -263,6 +271,7 @@ function frame(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function insert(req, res, next, application) {
+    console.log('insert');
     var context = application.createContext({
         req           : req,
         row           : req.body.row,
@@ -299,6 +308,7 @@ function insert(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _delete(req, res, next, application) {
+    console.log('_delete');
     var context = application.createContext({
         req           : req,
         row           : req.body.row,
@@ -333,6 +343,7 @@ function _delete(req, res, next, application) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function rpc(req, res, next, application) {
+    console.log('rpc');
     var context = application.createContext({
         req      : req,
         res      : res,
