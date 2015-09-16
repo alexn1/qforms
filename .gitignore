@@ -3,5 +3,5 @@ source/qforms/node_modules/
 source/qforms/runtime/
 test/node_modules/
 build/
-app/*
-!app/demo
+apps/*
+!apps/demo

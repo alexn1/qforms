@@ -50,7 +50,7 @@
   "config": {
     "host": "localhost",
     "port": "3000",
-    "appsDirPath": "../../app",
+    "appsDirPath": "../../apps",
     "user": "admin",
     "password": "admin",
     "authentication": "false"
