@@ -9,16 +9,17 @@
     },
     "dataSources": {},
     "forms": {
-        "employee": {
+        "employees": {
             "@class": "TableForm",
             "@attributes": {
-                "name": "employee",
-                "caption": "Employee",
+                "name": "employees",
+                "caption": "Employees",
                 "editMethod": "form",
                 "itemEditPage": "employee",
                 "itemCreatePage": "",
                 "newRowMode": "editform",
-                "deleteRowMode": "enabled"
+                "deleteRowMode": "enabled",
+                "refreshButton": "true"
             },
             "dataSources": {
                 "default": {
@@ -27,7 +28,7 @@
                         "name": "default",
                         "database": "default",
                         "table": "employee",
-                        "query": "select id,first_name,last_name from `employee`",
+                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom `employee`",
                         "limit": "",
                         "countQuery": "",
                         "insertNewKey": "false",

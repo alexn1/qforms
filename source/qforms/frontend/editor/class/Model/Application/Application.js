@@ -28,7 +28,7 @@ Application.prototype.setValue = function(name, value, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.newPage = function(params, callback) {
-    params['menu'] = (params['startup'] === 'true') ? 'Menu' : '';
+    params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
     var args = {
         controller:'Page',
         action:'_new',

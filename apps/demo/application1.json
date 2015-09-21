@@ -53,7 +53,7 @@
             "@attributes": {
                 "name": "employees",
                 "fileName": "pages/employees/employees.json",
-                "menu": "Menu",
+                "menu": "Pages",
                 "startup": "true"
             }
         },
