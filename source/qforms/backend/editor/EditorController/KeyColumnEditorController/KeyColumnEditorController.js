@@ -69,7 +69,7 @@ KeyColumnEditorController.prototype.delete = function(params, callback) {
     this.getApplicationEditor(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params['form']);
-            pageEditor.pageFile.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
+            formEditor.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
             pageEditor.save(function() {
                 callback(null);
             });
