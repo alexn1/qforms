@@ -9,10 +9,10 @@ var qforms = require(path.join('../build', pkg.version));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test02', function() {
-    var appFileDir  = 'app/test';
-    var appFilePath = 'app/test/application1.json';
+    var appFileDir  = 'apps/test';
+    var appFilePath = 'apps/test/application1.json';
     before(function(done) {
-        del('app/test', done);
+        del('apps/test', done);
     });
     it('create new application', function(done) {
         qforms.helper.createDirIfNotExists2(appFileDir).then(function() {
