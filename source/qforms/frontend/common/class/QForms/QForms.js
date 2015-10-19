@@ -39,7 +39,7 @@ QForms.errorHandler = function(errorMsg) {
 QForms.doHttpRequest = function(self, data, callback) {
     var contentType = data instanceof FormData ? false : 'application/json; charset=UTF-8';
     var _data       = data instanceof FormData ? data  : JSON.stringify(data);
-    $('#client').css('cursor', 'wait');
+    $('html').addClass("wait");
     $.ajax({
         url        : window.location.href,
         type       : 'POST',
@@ -48,11 +48,11 @@ QForms.doHttpRequest = function(self, data, callback) {
         processData: false,
         cache      : false,
         success: function(data, textStatus, jqXHR) {
-            $('#client').css('cursor', 'default');
+            $('html').removeClass("wait");
             callback.call(self, data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $('#client').css('cursor', 'default');
+            $('html').removeClass("wait");
             if (QForms.env === 'development') {
                 throw new Error(jqXHR.statusText + ', ' + jqXHR.responseText);
             } else {

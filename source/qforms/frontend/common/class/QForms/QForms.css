@@ -63,3 +63,7 @@ nav {
 .overlay > div > div > div {
   padding: 5px;
 }
+html.wait,
+html.wait * {
+  cursor: wait !important;
+}
