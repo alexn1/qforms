@@ -21,7 +21,7 @@ function SqlDataSourceController(data, parent) {
     this.desc        = null;
     this.aiFieldName = null;
     this.database    = this.getApp().databases[this.data['@attributes'].database];
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSourceController.create = function(data, parent, callback) {

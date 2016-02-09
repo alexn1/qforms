@@ -19,7 +19,7 @@ function DatePickerFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldController.create = function(data, parent, callback) {

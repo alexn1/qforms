@@ -19,7 +19,7 @@ function TextBoxFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/TextBoxFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.create = function(data, parent, callback) {

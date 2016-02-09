@@ -19,7 +19,7 @@ function LabelFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LabelFieldController.create = function(data, parent, callback) {

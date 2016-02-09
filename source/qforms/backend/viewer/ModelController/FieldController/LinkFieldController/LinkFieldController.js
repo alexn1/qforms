@@ -19,7 +19,7 @@ function LinkFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/LinkFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.create = function(data, parent, callback) {

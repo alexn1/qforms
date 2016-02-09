@@ -19,7 +19,7 @@ function ImageFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ImageFieldController.create = function(data, parent, callback) {

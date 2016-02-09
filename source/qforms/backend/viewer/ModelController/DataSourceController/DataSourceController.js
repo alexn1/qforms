@@ -47,7 +47,7 @@ function DataSourceController(data, parent) {
     this.form             = parent instanceof qforms.FormController        ? parent : null;
     this.keyColumns       = [];
     this.parentKeyColumns = [];
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.init = function(callback) {

@@ -31,7 +31,7 @@ function PageController(data, parent) {
     this.fillCollections    = ['dataSources', 'forms'];
     this.dataSources        = {};
     this.forms              = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.create = function(data, parent, callback) {

@@ -19,7 +19,7 @@ function ButtonControlController(data, parent) {
         'viewer/class/Controller/ModelController/ControlController/ButtonControlController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ButtonControlController.create = function(data, parent, callback) {

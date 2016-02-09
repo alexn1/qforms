@@ -19,7 +19,7 @@ function TreeFormController(data, parent) {
         'viewer/class/Controller/ModelController/FormController/TreeFormController/view',
         this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeFormController.create = function(data, parent, callback) {

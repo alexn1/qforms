@@ -19,7 +19,7 @@ function TextAreaFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextAreaFieldController.create = function(data, parent, callback) {

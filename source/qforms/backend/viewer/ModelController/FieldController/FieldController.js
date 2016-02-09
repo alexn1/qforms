@@ -17,7 +17,7 @@ function FieldController(data, parent) {
     this.form               = parent;
     this.dirPath            = path.join(parent.dirPath, 'fields', this.name);
     this.customViewFilePath = path.join(this.dirPath,   this.name + '.ejs');
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.create = function(data, parent, callback) {

@@ -22,7 +22,7 @@ function FormController(data, parent) {
     this.dataSources        = {};
     this.fields             = {};
     this.controls           = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.create = function(data, parent, callback) {

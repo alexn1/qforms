@@ -19,7 +19,7 @@ function CheckBoxFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/CheckBoxFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.create = function(data, parent, callback) {

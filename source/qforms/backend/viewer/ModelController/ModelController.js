@@ -10,8 +10,6 @@ var async = require('async');
 var server  = require('../../../server');
 var qforms  = require('../../../qforms');
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ModelController(data, parent) {
     this.name              = data['@attributes'].name;
@@ -21,7 +19,7 @@ function ModelController(data, parent) {
     this.js                = undefined;
     this.createCollections = [];
     this.fillCollections   = [];
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ModelController.prototype.init = function(callback) {

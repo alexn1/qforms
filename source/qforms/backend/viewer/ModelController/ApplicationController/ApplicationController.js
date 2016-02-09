@@ -34,7 +34,7 @@ function ApplicationController(data, appInfo) {
     this.text               = qforms.text[this.data['@attributes'].lang || 'en'];
     this.databases          = {};
     this.dataSources        = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(appFilePath, callback) {

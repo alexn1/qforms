@@ -19,7 +19,7 @@ function ComboBoxFieldController(data, parent) {
         'viewer/class/Controller/ModelController/FieldController/ComboBoxFieldController/view',
         this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.create = function(data, parent, callback) {

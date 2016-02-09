@@ -20,7 +20,7 @@ function TableFormController(data, parent) {
         'viewer/class/Controller/ModelController/FormController/TableFormController/view',
         this.data['@class'] + 'View.ejs'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.create = function(data, parent, callback) {

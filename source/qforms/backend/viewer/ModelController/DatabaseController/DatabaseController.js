@@ -20,7 +20,7 @@ DatabaseController.create = function(data, parent, callback) {
 function DatabaseController(data, parent) {
     DatabaseController.super_.call(this, data, parent);
     this.pool = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.deinit = function(callback) {
