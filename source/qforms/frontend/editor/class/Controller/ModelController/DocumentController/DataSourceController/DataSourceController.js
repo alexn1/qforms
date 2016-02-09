@@ -10,7 +10,7 @@ function DataSourceController(model, item) {
     this.itemParentKeyColumns = null;
     this.$view                = null;
     this.cmQuery              = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceController.prototype.createTree = function() {

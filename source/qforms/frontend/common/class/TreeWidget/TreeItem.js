@@ -13,7 +13,7 @@ function TreeItem(parent, caption, className) {
     this.ul        = null;
     this.items     = [];
     this.init();
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeItem.prototype.init = function() {

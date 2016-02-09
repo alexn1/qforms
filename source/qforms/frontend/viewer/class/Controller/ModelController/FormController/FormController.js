@@ -10,7 +10,7 @@ function FormController(model, view, parent) {
     this.page     = parent;
     this.fields   = {};
     this.controls = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.create = function(model, view, parent) {

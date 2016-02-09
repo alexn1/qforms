@@ -6,8 +6,7 @@ QForms.inherit(DataSource, Model);
 function DataSource(data, parent) {
     Model.call(this, data);
     this.parent = parent;
-};
-
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.create = function(parent, params, callback) {

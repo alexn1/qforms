@@ -4,7 +4,7 @@
 function Model(data) {
     this.data = data;
     this.name = data['@attributes'].name;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Model.prototype.getFullName = function(splitter) {

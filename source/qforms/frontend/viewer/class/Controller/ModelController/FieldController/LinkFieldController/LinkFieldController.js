@@ -6,7 +6,7 @@ QForms.inherit(LinkFieldController, FieldController);
 function LinkFieldController(model, parent) {
     LinkFieldController.super_.call(this, model, parent);
     this.eventClick = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldController.prototype.fill = function(row, view) {

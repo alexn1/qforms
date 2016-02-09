@@ -26,7 +26,7 @@ function DataSource(name, parent, data) {
     this.eventGoneRow   = new QForms.Event(this);		// row gone from current tree item list
     this.eventComeRow   = new QForms.Event(this);		// row come to current tree item list
     this.eventNewFrame  = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.init = function() {

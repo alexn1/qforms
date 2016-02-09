@@ -7,7 +7,7 @@ function QForms(data) {
     }
     window.onerror = QForms.errorHandler;
     //window.onbeforeunload = QForms.exit;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.exit = function (evt) {

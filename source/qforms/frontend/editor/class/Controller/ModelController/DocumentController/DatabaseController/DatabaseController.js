@@ -15,7 +15,7 @@ function DatabaseController(model, item, applicationController) {
     this.$btnCreateForm        = null;
     this.tables                = null;
     this.tableName             = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseController.prototype.createTree = function() {

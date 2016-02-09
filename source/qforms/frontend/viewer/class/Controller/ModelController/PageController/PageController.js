@@ -10,7 +10,7 @@ function PageController(model, view, parent) {
     this.parent     = parent;
     this.captionEls = null;
     this.forms      = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.create = function(model, view, parent) {

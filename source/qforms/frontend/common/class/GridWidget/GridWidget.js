@@ -18,7 +18,7 @@ function GridWidget(el) {
     this.selectedColumnName = null; // field name of selected column
     this.scrollTop          = 0;
     this.eventBodyCellDblClick = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridWidget.prototype.init = function() {

@@ -6,7 +6,7 @@ QForms.inherit(CheckBoxFieldController, FieldController);
 function CheckBoxFieldController(model, parent) {
     FieldController.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldController.prototype.getValue = function (view) {

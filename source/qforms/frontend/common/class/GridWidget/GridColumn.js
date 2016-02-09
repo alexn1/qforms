@@ -5,7 +5,7 @@ function GridColumn(gridWidget, name, headerCell) {
     this.gridWidget = gridWidget;
     this.name       = name;
     this.headerCell = headerCell;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 GridColumn.prototype.init = function() {

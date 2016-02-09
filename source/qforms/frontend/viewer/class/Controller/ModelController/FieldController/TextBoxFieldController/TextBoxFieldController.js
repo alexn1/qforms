@@ -6,7 +6,7 @@ QForms.inherit(TextBoxFieldController, FieldController);
 function TextBoxFieldController(model, parent) {
     TextBoxFieldController.super_.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldController.prototype.fill = function(row, view) {

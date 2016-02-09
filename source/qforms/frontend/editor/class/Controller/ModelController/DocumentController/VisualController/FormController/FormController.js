@@ -9,7 +9,7 @@ function FormController(model, item) {
     this.itemDataSources = null;
     this.itemFields      = null;
     this.itemControls    = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FormController.prototype.createTree = function() {

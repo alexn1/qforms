@@ -16,7 +16,7 @@ function Form(name, parent, data) {
     this.eventChanged  = new QForms.Event(this);
     this.eventUpdated  = new QForms.Event(this);
     this.eventRefilled = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.init = function() {

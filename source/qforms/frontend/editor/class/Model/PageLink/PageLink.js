@@ -7,7 +7,7 @@ function PageLink(data, parent) {
     Model.call(this, data);
     this.parent      = parent;
     this.application = parent;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLink.prototype.setValue = function(name, value, callback) {

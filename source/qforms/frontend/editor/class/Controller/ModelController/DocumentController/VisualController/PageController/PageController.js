@@ -8,7 +8,7 @@ function PageController(model, item, pageLink) {
     this.item = item;
     this.pageLink = pageLink;
     this.itemForms = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageController.prototype.createTree = function(callback) {

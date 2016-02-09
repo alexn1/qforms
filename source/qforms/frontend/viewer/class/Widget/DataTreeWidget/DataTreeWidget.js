@@ -8,7 +8,7 @@ function DataTreeWidget(el, controller) {
     this.controller = controller;
     this.dataSource = null;
     this.keyToItem  = {};		// to fast item search by key
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataTreeWidget.prototype.init = function() {

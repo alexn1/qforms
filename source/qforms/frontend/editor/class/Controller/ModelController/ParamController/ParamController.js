@@ -6,7 +6,7 @@ QForms.inherit(ParamController, ModelController);
 function ParamController(model, item) {
     ModelController.call(this, model);
     this.item = item;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamController.prototype.getActions = function() {

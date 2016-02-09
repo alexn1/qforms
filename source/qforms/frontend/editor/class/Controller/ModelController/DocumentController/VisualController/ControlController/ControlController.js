@@ -6,7 +6,7 @@ QForms.inherit(ControlController, VisualController);
 function ControlController(model, item) {
     VisualController.call(this, model);
     this.item = item;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.prototype.getCaption = function(controlData) {

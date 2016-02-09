@@ -6,7 +6,7 @@ QForms.inherit(ParentKeyColumnController, ModelController);
 function ParentKeyColumnController(model, item) {
     ModelController.call(this, model);
     this.item = item;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnController.prototype.getActions = function() {

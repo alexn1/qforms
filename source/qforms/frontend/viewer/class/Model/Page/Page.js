@@ -16,7 +16,7 @@ function Page(args) {
     this.eventHide      = new QForms.Event(this);
     this.eventChanged   = new QForms.Event(this);
     this.eventUpdated   = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.init = function() {

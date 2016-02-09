@@ -6,7 +6,7 @@ QForms.inherit(ParentKeyColumn, Model);
 function ParentKeyColumn(data, dataSource) {
     Model.call(this, data);
     this.dataSource = dataSource;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumn.prototype.setValue = function(name, value, callback) {

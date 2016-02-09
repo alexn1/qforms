@@ -19,7 +19,7 @@ function TabWidget(el) {
     this.eventTabShow          = new QForms.Event(this);
     this.eventTabHide          = new QForms.Event(this);
     this.eventTabClosingByUser = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TabWidget.prototype.init = function() {

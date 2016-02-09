@@ -7,7 +7,7 @@ function EditorController(appData) {
     this.docs = null;
     this.props = null;
     EditorController.editorController = this;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.init = function() {

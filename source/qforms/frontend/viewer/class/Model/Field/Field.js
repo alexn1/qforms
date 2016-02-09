@@ -6,7 +6,7 @@ function Field(name, parent, data) {
     this.form   = parent;
     this.data   = data;
     this.parent = parent;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.init = function() {

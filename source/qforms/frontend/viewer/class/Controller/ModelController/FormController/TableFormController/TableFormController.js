@@ -8,7 +8,7 @@ function TableFormController(model, view, parent) {
     this.grid        = null;
     this.framesCount = null;
     this.$goto       = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.init = function() {

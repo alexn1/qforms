@@ -11,7 +11,7 @@ function Application(data) {
     this.eventPageClosed   = new QForms.Event(this);
     this.eventPageSelected = new QForms.Event(this);
     this.eventLogout       = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.init = function() {

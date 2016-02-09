@@ -9,7 +9,7 @@ function RowFormController(model, view, parent) {
     this.key          = null;
     this.fieldViews   = {};
     this.controlViews = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormController.prototype.init = function() {

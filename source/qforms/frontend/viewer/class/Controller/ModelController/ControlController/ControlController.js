@@ -8,7 +8,7 @@ function ControlController(model, parent) {
     this.parent = parent;
     this.views  = {};    // list of all views that controlled by this control
     //this.html   = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlController.create = function(model, parent) {

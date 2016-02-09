@@ -6,7 +6,7 @@ QForms.inherit(RowForm, Form);
 function RowForm(name, page, data) {
     Form.call(this, name, page, data);
     this.row = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 RowForm.prototype.init = function() {

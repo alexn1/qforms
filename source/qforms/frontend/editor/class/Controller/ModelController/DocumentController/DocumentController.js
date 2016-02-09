@@ -6,7 +6,7 @@ QForms.inherit(DocumentController, ModelController);
 function DocumentController(model) {
     ModelController.call(this, model);
     this.tab = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DocumentController.prototype.createTab = function(docs) {

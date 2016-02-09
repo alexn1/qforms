@@ -8,7 +8,7 @@ function DataGridWidget(el, formController) {
     this.formController = formController;
     this.dataSource     = null;
     this.keyToBodyRow   = {}; // to fast row search by key
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataGridWidget.prototype.init = function() {

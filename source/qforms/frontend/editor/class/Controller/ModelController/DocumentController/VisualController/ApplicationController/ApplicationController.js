@@ -11,7 +11,7 @@ function ApplicationController(model, item, editorController) {
     this.dataSourcesItem  = null;
     this.pagesItem        = null;
     this.pageItems        = {};
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.prototype.createTree = function() {

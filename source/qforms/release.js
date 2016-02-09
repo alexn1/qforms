@@ -4,10 +4,8 @@ var fs            = require('fs');
 var Promise       = require('bluebird');
 var child_process = require('child_process');
 
-main();
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function main() {
+main(); function main() {
     var version;
     return exec('git checkout master').then(function() {
         return exec('git pull origin master');

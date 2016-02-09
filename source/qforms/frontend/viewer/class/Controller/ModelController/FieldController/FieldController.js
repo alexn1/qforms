@@ -8,7 +8,7 @@ function FieldController(model, parent) {
     this.parent = parent;
     this.views  = {};    // list of all views that controlled by this field
     this.html   = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.create = function(model, parent) {

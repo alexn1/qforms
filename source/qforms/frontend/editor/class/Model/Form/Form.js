@@ -7,7 +7,7 @@ function Form(data, page) {
     Model.call(this, data);
     this.parent = page;
     this.page   = page;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.setValue = function(name, value, callback) {

@@ -7,7 +7,7 @@ function Field(data, parent) {
     Model.call(this, data);
     this.parent = parent;
     this.form = parent;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Field.prototype.setValue = function(name, value, callback) {

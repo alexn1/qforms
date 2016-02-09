@@ -8,7 +8,7 @@ function ModalWindow(app, pageName, newMode, params) {
     this.params = params;
     this.overlay = null;
     this.page = null;
-};
+}
 */
 
 /*

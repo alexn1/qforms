@@ -6,7 +6,7 @@ function ViewerController(data) {
     this.data = data;
     this.application = null;
     this.applicationController = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ViewerController.prototype.init = function() {

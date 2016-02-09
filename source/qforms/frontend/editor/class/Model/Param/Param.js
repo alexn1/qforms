@@ -6,7 +6,7 @@ QForms.inherit(Param, Model);
 function Param(data, database) {
     Model.call(this, data);
     this.database = database;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Param.prototype.setValue = function(name, value, callback) {

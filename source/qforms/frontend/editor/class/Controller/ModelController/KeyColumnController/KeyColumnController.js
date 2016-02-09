@@ -6,7 +6,7 @@ QForms.inherit(KeyColumnController, ModelController);
 function KeyColumnController(model, item) {
     ModelController.call(this, model);
     this.item = item;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumnController.prototype.getActions = function() {

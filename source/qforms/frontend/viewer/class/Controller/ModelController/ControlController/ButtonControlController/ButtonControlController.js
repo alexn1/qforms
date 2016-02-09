@@ -6,7 +6,7 @@ QForms.inherit(ButtonControlController, ControlController);
 function ButtonControlController(model, parent) {
     ButtonControlController.super_.call(this, model, parent);
     this.eventClick = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ButtonControlController.prototype.fill = function(row, view) {

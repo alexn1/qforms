@@ -8,7 +8,7 @@ function Page(data, parent, pageLink) {
     this.parent      = parent;
     this.pageLink    = pageLink;
     this.application = parent;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Page.prototype.setValue = function(name, value, callback) {

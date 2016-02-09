@@ -6,7 +6,7 @@ QForms.inherit(Control, Model);
 function Control(data, form) {
     Model.call(this, data);
     this.form = form;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Control.prototype.getView = function(view, callback) {

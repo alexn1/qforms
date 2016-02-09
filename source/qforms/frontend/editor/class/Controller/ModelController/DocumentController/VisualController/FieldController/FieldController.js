@@ -6,7 +6,7 @@ QForms.inherit(FieldController, VisualController);
 function FieldController(model, item) {
     VisualController.call(this, model);
     this.item = item;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldController.prototype.getActions = function() {

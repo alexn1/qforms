@@ -6,8 +6,7 @@ QForms.inherit(FileFieldController, FieldController);
 function FileFieldController(model, parent) {
     FileFieldController.super_.call(this, model, parent);
     this.eventChange = new QForms.Event(this);
-};
-
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FileFieldController.prototype.isValid = function(view) {

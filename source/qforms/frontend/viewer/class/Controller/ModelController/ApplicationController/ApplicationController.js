@@ -7,7 +7,7 @@ function ApplicationController(model, view) {
     ApplicationController.super_.call(this, model);
     this.view  = view;
     this.appTC = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(model, view) {

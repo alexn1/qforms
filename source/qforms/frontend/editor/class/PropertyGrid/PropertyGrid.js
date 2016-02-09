@@ -8,7 +8,7 @@ function PropertyGrid(el) {
     this.obj          = null;
     this.options      = null;
     this.eventChanged = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PropertyGrid.prototype.init = function() {

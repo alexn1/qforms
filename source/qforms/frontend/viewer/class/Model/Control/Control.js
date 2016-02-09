@@ -6,7 +6,7 @@ function Control(data, parent) {
     this.form   = parent;
     this.data   = data;
     this.parent = parent;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Control.prototype.init = function() {

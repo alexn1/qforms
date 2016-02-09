@@ -7,7 +7,7 @@ function ComboBoxFieldController(model, parent) {
     FieldController.call(this, model, parent);
     this.dataSource = null;
     this.eventChange = new QForms.Event(this);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldController.prototype.init = function() {
