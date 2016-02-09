@@ -22,7 +22,7 @@ function RowFormEditor(pageEditor, name, data) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
     );
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RowFormEditor.createData = function(params) {

@@ -20,7 +20,7 @@ function KeyColumnEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/KeyColumnController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 KeyColumnEditorController.prototype._new = function(params, callback) {

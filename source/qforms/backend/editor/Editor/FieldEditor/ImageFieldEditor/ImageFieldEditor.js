@@ -9,7 +9,6 @@ var server = require('../../../../../server');
 
 var FieldEditor = require('../FieldEditor');
 
-
 util.inherits(ImageFieldEditor, FieldEditor);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +19,7 @@ function ImageFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ImageFieldEditor.createData = function(params) {

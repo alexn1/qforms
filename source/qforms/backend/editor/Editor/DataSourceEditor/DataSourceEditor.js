@@ -17,7 +17,7 @@ function DataSourceEditor(parent, name, data) {
     this.parent = parent;
     this.name   = name;
     this.data   = data;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditor.prototype.newKeyColumn = function(params) {

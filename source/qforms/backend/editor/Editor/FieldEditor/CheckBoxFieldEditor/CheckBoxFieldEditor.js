@@ -18,7 +18,7 @@ function CheckBoxFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/CheckBoxFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CheckBoxFieldEditor.createData = function(params) {

@@ -17,7 +17,7 @@ function FieldEditor(formEditor, name) {
     this.formEditor = formEditor;
     this.parent     = formEditor;
     this.name       = name;
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditor.prototype.getData = function() {

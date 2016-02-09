@@ -66,7 +66,7 @@ function ApplicationEditor(appFile) {
         server.get('public'),
         'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
     );
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage = function(params, callback) {

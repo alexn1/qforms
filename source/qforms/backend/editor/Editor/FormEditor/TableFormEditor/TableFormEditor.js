@@ -22,7 +22,7 @@ function TableFormEditor(pageEditor, name, data) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.css'
     );
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormEditor.createData = function(params) {

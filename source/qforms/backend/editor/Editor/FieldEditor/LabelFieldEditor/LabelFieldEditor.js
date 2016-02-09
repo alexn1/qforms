@@ -18,7 +18,7 @@ function LabelFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LabelFieldEditor.createData = function(params) {

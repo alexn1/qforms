@@ -18,7 +18,7 @@ function DatePickerFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatePickerFieldEditor.createData = function(params) {

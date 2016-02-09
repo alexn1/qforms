@@ -19,7 +19,7 @@ function ControlEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/ControlController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlEditorController.prototype._new = function(params, callback) {

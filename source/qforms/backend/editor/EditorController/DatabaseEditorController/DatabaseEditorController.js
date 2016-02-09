@@ -22,7 +22,7 @@ function DatabaseEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/DatabaseController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype._new = function(params, callback) {

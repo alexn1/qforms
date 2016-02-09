@@ -19,7 +19,7 @@ function ApplicationEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/ApplicationController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.save = function(params, callback) {

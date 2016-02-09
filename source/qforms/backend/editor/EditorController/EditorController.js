@@ -11,7 +11,7 @@ var qforms = require('../../../qforms');
 function EditorController(appInfo) {
     this.appInfo     = appInfo;
     this.viewDirPath = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 EditorController.prototype.getView = function(params, callback) {

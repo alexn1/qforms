@@ -4,7 +4,6 @@ module.exports = ControlEditor;
 
 var util = require('util');
 
-
 var Editor = require('../Editor');
 
 util.inherits(ControlEditor, Editor);
@@ -14,7 +13,7 @@ function ControlEditor(formEditor, name) {
     this.formEditor = formEditor;
     this.parent     = formEditor;
     this.name = name;
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlEditor.prototype.getData = function() {

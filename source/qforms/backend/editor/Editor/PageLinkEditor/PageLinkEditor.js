@@ -25,7 +25,7 @@ PageLinkEditor.createData = function(params) {
 function PageLinkEditor(appEditor, name) {
     this.appEditor = appEditor;
     this.name      = name;
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditor.prototype.getData = function() {

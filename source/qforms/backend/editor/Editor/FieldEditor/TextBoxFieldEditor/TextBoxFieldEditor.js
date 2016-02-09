@@ -18,7 +18,7 @@ function TextBoxFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/TextBoxFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextBoxFieldEditor.createData = function(params) {

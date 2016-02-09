@@ -21,7 +21,7 @@ function DataSourceEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype._new = function(params, callback) {

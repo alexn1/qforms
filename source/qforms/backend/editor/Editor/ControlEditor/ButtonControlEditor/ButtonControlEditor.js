@@ -4,7 +4,6 @@ module.exports = ButtonControlEditor;
 
 var util = require('util');
 
-
 var ControlEditor = require('../ControlEditor');
 
 util.inherits(ButtonControlEditor, ControlEditor);
@@ -12,7 +11,7 @@ util.inherits(ButtonControlEditor, ControlEditor);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ButtonControlEditor(formEditor, name) {
     ButtonControlEditor.super_.call(this, formEditor, name);
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ButtonControlEditor.createData = function(params) {

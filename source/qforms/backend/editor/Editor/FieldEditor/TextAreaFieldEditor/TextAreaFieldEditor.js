@@ -18,7 +18,7 @@ function TextAreaFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TextAreaFieldEditor.createData = function(params) {

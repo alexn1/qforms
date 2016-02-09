@@ -20,7 +20,7 @@ function ParentKeyColumnEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/ParentKeyColumnController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnEditorController.prototype._new = function(params, callback) {

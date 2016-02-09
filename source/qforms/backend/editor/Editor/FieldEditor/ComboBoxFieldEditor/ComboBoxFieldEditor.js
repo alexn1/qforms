@@ -18,7 +18,7 @@ function ComboBoxFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/ComboBoxFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ComboBoxFieldEditor.createData = function(params) {

@@ -21,7 +21,7 @@ function ParamEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/ParamController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParamEditorController.prototype._new = function(params, callback) {

@@ -28,7 +28,7 @@ function PageEditor(appEditor, pageFile) {
         server.get('public'),
         'viewer/class/Controller/ModelController/PageController/view/PageView.css'
     );
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.createData = function(params) {

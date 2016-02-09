@@ -46,7 +46,7 @@ function _getFilePaths(dirPath, ext, filePaths, callback) {
             });
         });
     });
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.getFilePaths = function getFilePaths(publicDirPath, subDirPath, ext, callback) {

@@ -18,7 +18,7 @@ function FormEditor(pageEditor, name, data) {
     this.parent     = pageEditor;
     this.name       = name;
     this.data       = data;
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.getData = function() {

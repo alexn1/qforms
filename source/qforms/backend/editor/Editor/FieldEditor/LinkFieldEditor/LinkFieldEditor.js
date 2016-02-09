@@ -9,7 +9,6 @@ var server = require('../../../../../server');
 
 var FieldEditor = require('../FieldEditor');
 
-
 util.inherits(LinkFieldEditor, FieldEditor);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +18,7 @@ function LinkFieldEditor(formEditor, name) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FieldController/LinkFieldController/view'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 LinkFieldEditor.createData = function(params) {

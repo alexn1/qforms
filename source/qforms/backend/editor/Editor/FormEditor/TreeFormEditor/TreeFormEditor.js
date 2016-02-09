@@ -22,7 +22,7 @@ function TreeFormEditor(pageEditor, name, data) {
         server.get('public'),
         'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.css'
     );
-};
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 TreeFormEditor.createData = function(params) {

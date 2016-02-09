@@ -10,7 +10,7 @@ function JsonFile(filePath) {
     this.filePath = filePath;
     this.content  = null;
     this.data     = null;
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 JsonFile.prototype.create = function(callback) {

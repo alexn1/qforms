@@ -19,7 +19,7 @@ function FieldEditorController(appInfo) {
         server.get('public'),
         'editor/class/Controller/ModelController/DocumentController/VisualController/FieldController'
     );
-};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype._new = function(params, callback) {
