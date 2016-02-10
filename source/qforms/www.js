@@ -13,9 +13,9 @@ var host = qforms.helper.getCommandLineParams().host || pkg.config.host;
 var www = http.createServer(server);
 www.on('error', function(err) {
     if (err.code === 'EADDRINUSE') {
-        console.log('Error: address in use.');
+        console.error('Address {host}:{port} in use.'.template({host: host, port: port}));
     } else {
-        console.log(err);
+        console.error(err);
     }
 });
 www.listen(port, host, function() {
