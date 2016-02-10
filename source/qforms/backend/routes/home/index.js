@@ -6,9 +6,6 @@ var fs   = require('fs');
 var qforms = require('../../../qforms');
 var server = require('../../../server');
 
-server.set('homeClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'css'));
-server.set('homeClassJs' , qforms.helper.getFilePathsSync(server.get('public'), 'home/class', 'js'));
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     if (req.method === 'GET') {

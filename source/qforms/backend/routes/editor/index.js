@@ -7,9 +7,6 @@ var domain = require('domain');
 var qforms = require('../../../qforms');
 var server = require('../../../server');
 
-server.set('editorClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'editor/class', 'css'));
-server.set('editorClassJs',  qforms.helper.getFilePathsSync(server.get('public'), 'editor/class', 'js'));
-
 var controllers = [
     'Application',
     'Database',

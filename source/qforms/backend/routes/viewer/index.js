@@ -8,9 +8,6 @@ var domain = require('domain');
 var qforms = require('../../../qforms');
 var server = require('../../../server');
 
-server.set('viewerClassCss', qforms.helper.getFilePathsSync(server.get('public'), 'viewer/class', 'css'));
-server.set('viewerClassJs' , qforms.helper.getFilePathsSync(server.get('public'), 'viewer/class', 'js'));
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     //console.log(util.inspect(req,{depth:0}));
