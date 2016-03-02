@@ -274,6 +274,7 @@ helper.replaceKey = function(obj, key1, key2) {
     return obj;
 };
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.getFileContent = function(filePath, callback) {
     fs.exists(filePath, function(exists) {
@@ -288,6 +289,26 @@ helper.getFileContent = function(filePath, callback) {
         } else {
             callback(null);
         }
+    });
+};
+*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+helper.getFileContent2 = function(filePath) {
+    return new Promise(function(resolve, reject) {
+        fs.exists(filePath, function(exists) {
+            if (exists) {
+                fs.readFile(filePath, 'utf8', function (err, content) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(content);
+                    }
+                });
+            } else {
+                resolve(null);
+            }
+        });
     });
 };
 

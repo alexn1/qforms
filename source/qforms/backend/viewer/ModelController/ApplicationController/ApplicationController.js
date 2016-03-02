@@ -45,7 +45,7 @@ ApplicationController.create = function(appFilePath, callback) {
             } else {
                 var data = JSON.parse(content);
                 var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-                qforms.helper.getFileContent(customClassFilePath, function(content) {
+                qforms.helper.getFileContent2(customClassFilePath).then(function(content) {
                     if (content) {
                         var customClass = eval(content);
                         callback(new customClass(data, appInfo));
