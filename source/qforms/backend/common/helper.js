@@ -1,5 +1,7 @@
 'use strict';
 
+module.exports = helper;
+
 var glob     = require('glob');
 var path     = require('path');
 var slash    = require('slash');
@@ -8,6 +10,8 @@ var fs       = require('fs');
 var _        = require('underscore');
 var mysql    = require('mysql');
 var Promise  = require('bluebird');
+
+function helper() {}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
@@ -21,7 +25,7 @@ function _getFilePathsSync(dirPath, ext) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getFilePathsSync = function getFilePathsSync(publicDirPath, subDirPath, ext) {
+helper.getFilePathsSync = function(publicDirPath, subDirPath, ext) {
     return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
         return slash(path.relative(publicDirPath, filePath));
     });
@@ -49,7 +53,7 @@ function _getFilePaths(dirPath, ext, filePaths, callback) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getFilePaths = function getFilePaths(publicDirPath, subDirPath, ext, callback) {
+helper.getFilePaths = function(publicDirPath, subDirPath, ext, callback) {
     var filePaths = [];
     _getFilePaths(path.join(publicDirPath, subDirPath), ext, filePaths, function() {
         var relativeFilePaths = filePaths.map(function(filePath) {
@@ -61,14 +65,14 @@ module.exports.getFilePaths = function getFilePaths(publicDirPath, subDirPath, e
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
+helper.getAppInfo = function(appFilePath, callback) {
     fs.readFile(appFilePath, 'utf8', function(err, content) {
         if (err) {
             throw err;
         } else {
             var data = JSON.parse(content);
             if (data['@class'] && data['@class'] === 'Application') {
-                var appInfo = module.exports.getAppInfoFromData(appFilePath, data);
+                var appInfo = helper.getAppInfoFromData(appFilePath, data);
                 callback(appInfo);
             } else {
                 callback(null);
@@ -79,7 +83,7 @@ module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
 */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getAppInfo2 = function getAppInfo2(appFilePath) {
+helper.getAppInfo2 = function(appFilePath) {
     return new Promise(function(resolve, reject) {
         fs.readFile(appFilePath, 'utf8', function(err, content) {
             if (err) {
@@ -87,7 +91,7 @@ module.exports.getAppInfo2 = function getAppInfo2(appFilePath) {
             } else {
                 var data = JSON.parse(content);
                 if (data['@class'] && data['@class'] === 'Application') {
-                    var appInfo = module.exports.getAppInfoFromData(appFilePath, data);
+                    var appInfo = helper.getAppInfoFromData(appFilePath, data);
                     resolve(appInfo);
                 } else {
                     resolve(null);
@@ -98,7 +102,7 @@ module.exports.getAppInfo2 = function getAppInfo2(appFilePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getAppInfoFromData = function(appFilePath, data) {
+helper.getAppInfoFromData = function(appFilePath, data) {
     var fileName = path.basename(appFilePath, path.extname(appFilePath));
     var dirName  = path.basename(path.dirname(appFilePath));
     return {
@@ -115,11 +119,11 @@ module.exports.getAppInfoFromData = function(appFilePath, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getAppInfos = function getAppInfos(appsDirPath, callback) {
+helper.getAppInfos = function(appsDirPath, callback) {
     var appInfos = [];
     glob(path.join(appsDirPath, '*/*.json'), function(err, appFilesPaths) {
         async.eachSeries(appFilesPaths, function(appFilePath, next) {
-            module.exports.getAppInfo2(appFilePath).then(function(appInfo) {
+            helper.getAppInfo2(appFilePath).then(function(appInfo) {
                 if (appInfo) {
                     appInfos.push(appInfo);
                 }
@@ -132,7 +136,7 @@ module.exports.getAppInfos = function getAppInfos(appsDirPath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.currentTime = function currentTime() {
+helper.currentTime = function() {
     var now = new Date();
     var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
@@ -141,7 +145,7 @@ module.exports.currentTime = function currentTime() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.currentDate = function currentDate() {
+helper.currentDate = function() {
     var now = new Date();
     var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
     var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
@@ -150,12 +154,12 @@ module.exports.currentDate = function currentDate() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.currentDateTime = function currentDateTime() {
-    return currentDate() + ' ' + currentTime();
+helper.currentDateTime = function() {
+    return helper.currentDate() + ' ' + helper.currentTime();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.queryFormat = function queryFormat(query, params) {
+helper.queryFormat = function(query, params) {
     params = params || {};
     var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
         if (params.hasOwnProperty(name)) {
@@ -169,7 +173,7 @@ module.exports.queryFormat = function queryFormat(query, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.templateValue = function(value, params) {
+helper.templateValue = function(value, params) {
     return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
         if (params.hasOwnProperty(name)) {
             return params[name];
@@ -180,7 +184,7 @@ module.exports.templateValue = function(value, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.typeCast = function typeCast(field, next) {
+helper.typeCast = function(field, next) {
     if (
         field.type === 'DATE'      ||
         field.type === 'DATETIME'  ||
@@ -194,7 +198,7 @@ module.exports.typeCast = function typeCast(field, next) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getCommandLineParams = function() {
+helper.getCommandLineParams = function() {
     var params = process.argv.map(function(arg) {
         var param = arg.split('=');
         return {
@@ -213,7 +217,7 @@ module.exports.getCommandLineParams = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.replaceKey = function replaceKey(obj, key1, key2) {
+helper.replaceKey = function(obj, key1, key2) {
     var keys   = Object.keys(obj);
     var values = _.filter(obj, function () {return true;});
     var index  = keys.indexOf(key1);
@@ -225,7 +229,7 @@ module.exports.replaceKey = function replaceKey(obj, key1, key2) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getFileContent = function getFileContent(filePath, callback) {
+helper.getFileContent = function(filePath, callback) {
     fs.exists(filePath, function(exists) {
         if (exists) {
             fs.readFile(filePath, 'utf8', function (err, content) {
@@ -242,7 +246,7 @@ module.exports.getFileContent = function getFileContent(filePath, callback) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.putFileContent = function putFileContent(filePath, content, callback) {
+helper.putFileContent = function(filePath, content, callback) {
     fs.writeFile(filePath, content, 'utf8', function(err) {
         if (err) {
             throw err;
@@ -254,7 +258,7 @@ module.exports.putFileContent = function putFileContent(filePath, content, callb
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.createDirIfNotExists = function createDirIfNotExists(dirPath, callback) {
+helper.createDirIfNotExists = function(dirPath, callback) {
     fs.exists(dirPath, function(exists) {
         if (exists) {
             callback();
@@ -271,7 +275,7 @@ module.exports.createDirIfNotExists = function createDirIfNotExists(dirPath, cal
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.createDirIfNotExists2 = function createDirIfNotExists2(dirPath) {
+helper.createDirIfNotExists2 = function(dirPath) {
     return new Promise(function(resolve, reject) {
         fs.exists(dirPath, function(exists) {
             if (exists) {
@@ -290,14 +294,14 @@ module.exports.createDirIfNotExists2 = function createDirIfNotExists2(dirPath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.createDirIfNotExistsSync = function createDirIfNotExistsSync(dirPath) {
+helper.createDirIfNotExistsSync = function(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.moveObjProp = function moveObjProp(obj, prop, offset) {
+helper.moveObjProp = function(obj, prop, offset) {
     var keys     = _.keys(obj);
     var values   = _.values(obj);
     var oldIndex = keys.indexOf(prop);
@@ -331,7 +335,7 @@ function getRandomString(length) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.getTempSubDirPath = function getTempSubDirPath(tempDirPath, callback) {
+helper.getTempSubDirPath = function(tempDirPath, callback) {
     var subDirName     = getRandomString(8);
     var tempSubSirPath = path.join(tempDirPath, subDirName);
     fs.exists(tempSubSirPath, function(exists) {
@@ -344,13 +348,13 @@ module.exports.getTempSubDirPath = function getTempSubDirPath(tempDirPath, callb
                 }
             });
         } else {
-            getTempSubDirPath(tempDirPath, callback);
+            helper.getTempSubDirPath(tempDirPath, callback);
         }
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.copyFile = function copyFile(source, target, callback) {
+helper.copyFile = function(source, target, callback) {
     var rd = fs.createReadStream(source);
     rd.on('error', function(err) {
         throw err;
