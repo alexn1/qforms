@@ -166,18 +166,17 @@ helper.getAppInfoFromData = function(appFilePath, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getAppInfos = function(appsDirPath, callback) {
-    var appInfos = [];
-    glob(path.join(appsDirPath, '*/*.json'), function(err, appFilesPaths) {
-        async.eachSeries(appFilesPaths, function(appFilePath, next) {
-            helper.getAppInfo2(appFilePath).then(function(appInfo) {
+helper.getAppInfos = function(appsDirPath) {
+    return helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
+        var appInfos = [];
+        return Promise.each(appFilesPaths, function(appFilePath) {
+            return helper.getAppInfo2(appFilePath).then(function(appInfo) {
                 if (appInfo) {
                     appInfos.push(appInfo);
                 }
-                next();
             });
-        }, function() {
-            callback(appInfos);
+        }).then(function() {
+            return appInfos;
         });
     });
 };

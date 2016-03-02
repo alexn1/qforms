@@ -9,7 +9,7 @@ var server = require('../../../server');
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function(req, res, next) {
     if (req.method === 'GET') {
-        qforms.helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
+        qforms.helper.getAppInfos(req.app.get('appsDirPath')).then(function(appInfos) {
             res.render('home/view', {
                 req           : req,
                 version       : req.app.get('version'),
@@ -26,7 +26,7 @@ module.exports = function(req, res, next) {
         var appFilePath   = path.join(appDirPath,                 req.body.name + '.json');
         qforms.helper.createDirIfNotExists(appDirPath, function() {
             qforms.ApplicationEditor.createAppFile(appFilePath, {name: req.body.name}, function(appFile) {
-                qforms.helper.getAppInfos(req.app.get('appsDirPath'), function(appInfos) {
+                qforms.helper.getAppInfos(req.app.get('appsDirPath')).then(function(appInfos) {
                     res.json({
                         appList: appInfos
                     });
