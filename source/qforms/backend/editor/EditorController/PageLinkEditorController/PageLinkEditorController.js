@@ -34,18 +34,19 @@ PageLinkEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditorController.prototype.moveUp = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.movePageLinkUp(params.page);
         appEditor.appFile.save(function() {
             callback('ok');
         });
-
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageLinkEditorController.prototype.moveDown = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.movePageLinkDown(params.page);
         appEditor.appFile.save(function() {
             callback('ok');

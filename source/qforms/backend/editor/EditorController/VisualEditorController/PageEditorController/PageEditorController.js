@@ -31,7 +31,8 @@ PageEditorController.prototype.get = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.fileName, function(pageEditor) {
             pageEditor.setAttr(params.attr, params.value, function() {
                 callback(null);
@@ -42,8 +43,9 @@ PageEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype._new = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
-        appEditor.createPage(params, function(pageEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
+        appEditor.createPage2(params).then(function(pageEditor) {
             var pageLinkEditor = appEditor.getPageLink(params.name);
             callback({
                 page: pageEditor.getData(),
@@ -55,7 +57,8 @@ PageEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.delete = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.removePage(params.page, function() {
             callback(null);
         });
@@ -64,7 +67,8 @@ PageEditorController.prototype.delete = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.createView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             pageEditor.createEjs(params, function(ejs) {
                 pageEditor.createCss(params, function(css) {
@@ -84,7 +88,7 @@ PageEditorController.prototype.getView = function(params, callback) {
     PageEditorController.super_.prototype.getView.call(this, params, function(result) {
         switch (params.view) {
             case 'VisualView.html':
-                self.getApplicationEditor(function(appEditor) {
+                self.getApplicationEditor2().then(function(appEditor) {
                     appEditor.getPage(params.page, function(pageEditor) {
                         pageEditor.getCustomFile('ejs', function(ejs) {
                             result.data.ejs = ejs;
@@ -108,7 +112,8 @@ PageEditorController.prototype.getView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.saveView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             switch (params.view) {
                 case 'ejs':
@@ -128,7 +133,8 @@ PageEditorController.prototype.saveView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.createController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             pageEditor.createJs(params, function(js) {
                 callback({
@@ -141,7 +147,8 @@ PageEditorController.prototype.createController = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditorController.prototype.saveController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             pageEditor.saveCustomFile('js', params.text, function() {
                 callback(null);

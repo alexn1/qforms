@@ -23,7 +23,8 @@ function FieldEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype._new = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldData = formEditor.newField(params);
@@ -36,7 +37,8 @@ FieldEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -49,7 +51,8 @@ FieldEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.delete = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             formEditor.removeField(params.field, function() {
@@ -61,7 +64,8 @@ FieldEditorController.prototype.delete = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.changeClass = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -74,7 +78,8 @@ FieldEditorController.prototype.changeClass = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.createView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -96,7 +101,7 @@ FieldEditorController.prototype.getView = function(params, callback) {
     FieldEditorController.super_.prototype.getView.call(this, params, function(result) {
         switch (params.view) {
             case 'VisualView.html':
-                self.getApplicationEditor(function(appEditor) {
+                self.getApplicationEditor2().then(function(appEditor) {
                     appEditor.getPage(params.page, function(pageEditor) {
                         var formEditor  = pageEditor.getForm(params.form);
                         var fieldEditor = formEditor.getField(params.field);
@@ -122,7 +127,8 @@ FieldEditorController.prototype.getView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.saveView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor  = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -144,7 +150,8 @@ FieldEditorController.prototype.saveView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.createController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor  = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -159,7 +166,8 @@ FieldEditorController.prototype.createController = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.saveController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPage(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var fieldEditor = formEditor.getField(params.field);
@@ -172,7 +180,8 @@ FieldEditorController.prototype.saveController = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.moveUp = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             formEditor.moveFieldUp(params, function(result) {
@@ -184,7 +193,8 @@ FieldEditorController.prototype.moveUp = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 FieldEditorController.prototype.moveDown = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             formEditor.moveFieldDown(params, function(result) {

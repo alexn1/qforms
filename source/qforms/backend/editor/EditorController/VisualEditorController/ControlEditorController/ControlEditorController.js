@@ -23,7 +23,8 @@ function ControlEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlEditorController.prototype._new = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             formEditor.createControl(params, function(controlEditor) {
@@ -36,7 +37,8 @@ ControlEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             var controlEditor = formEditor.getControl(params.control);
@@ -49,7 +51,8 @@ ControlEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ControlEditorController.prototype.delete = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params.form);
             formEditor.removeControl(params.control, function() {

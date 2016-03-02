@@ -25,7 +25,8 @@ function DataSourceEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype._new = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.page) {
             appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
@@ -55,7 +56,8 @@ DataSourceEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.delete = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.page) {
             appEditor.getPageByFileName(params.page,function(pageEditor) {
                 if (params.form) {
@@ -86,7 +88,8 @@ DataSourceEditorController.prototype.delete = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.moveUp = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.page) {
             appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
@@ -116,7 +119,8 @@ DataSourceEditorController.prototype.moveUp = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.moveDown = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.page) {
             appEditor.getPageByFileName(params.page, function(pageEditor) {
                 if (params.form) {
@@ -147,7 +151,8 @@ DataSourceEditorController.prototype.moveDown = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.pageFileName) {
             appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
                 if (params.form) {
@@ -177,7 +182,8 @@ DataSourceEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSourceEditorController.prototype.getDataSourceEditor = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         if (params.pageFileName) {
             appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
                 if (params.form) {

@@ -68,6 +68,7 @@ function ApplicationEditor(appFile) {
     );
 }
 
+/*
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage = function(params, callback) {
     var self           = this;
@@ -87,6 +88,7 @@ ApplicationEditor.prototype.createPage = function(params, callback) {
         });
     });
 };
+*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.createPage2 = function(params) {

@@ -24,9 +24,9 @@ function ParentKeyColumnEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnEditorController.prototype._new = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
-
             var formEditor = pageEditor.getForm(params.form);
             var parentKeyColumnData = formEditor.newDataSouceParentKeyColumn(params);
             pageEditor.save(function() {
@@ -38,7 +38,8 @@ ParentKeyColumnEditorController.prototype._new = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.pageFileName, function(pageEditor) {
             var formEditor = pageEditor.getForm(params['form']);
             formEditor.setDataSourceParentKeyColumnAttr(params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
@@ -51,7 +52,8 @@ ParentKeyColumnEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ParentKeyColumnEditorController.prototype.delete = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.getPageByFileName(params.page, function(pageEditor) {
             var formEditor = pageEditor.getForm(params['form']);
             formEditor.deleteFormDataSourceParentKeyColumn(params['dataSource'], params['parentKeyColumn']);

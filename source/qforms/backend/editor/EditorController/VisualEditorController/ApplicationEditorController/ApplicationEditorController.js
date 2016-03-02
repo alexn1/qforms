@@ -23,7 +23,8 @@ function ApplicationEditorController(appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.save = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.setAttr(params.attr, params.value, function() {
             callback(null);
         });
@@ -32,7 +33,8 @@ ApplicationEditorController.prototype.save = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.createView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.createEjs(params, function(ejs) {
             appEditor.createCss(params, function(css) {
                 callback({
@@ -50,7 +52,7 @@ ApplicationEditorController.prototype.getView = function(params, callback) {
     ApplicationEditorController.super_.prototype.getView.call(this, params, function(result) {
         switch (params.view) {
             case 'VisualView.html':
-                self.getApplicationEditor(function(appEditor) {
+                self.getApplicationEditor2().then(function(appEditor) {
                     appEditor.getCustomFile('ejs', function(ejs) {
                         result.data.ejs = ejs;
                         appEditor.getCustomFile('css', function(css) {
@@ -72,7 +74,8 @@ ApplicationEditorController.prototype.getView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.saveView = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         switch (params.view) {
             case 'ejs':
                 appEditor.saveCustomFile('ejs', params.text, function() {
@@ -90,7 +93,8 @@ ApplicationEditorController.prototype.saveView = function(params, callback) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.createController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.createJs(params, function(js) {
             callback({
                 js: js
@@ -101,7 +105,8 @@ ApplicationEditorController.prototype.createController = function(params, callba
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditorController.prototype.saveController = function(params, callback) {
-    this.getApplicationEditor(function(appEditor) {
+    var self = this;
+    self.getApplicationEditor2().then(function(appEditor) {
         appEditor.saveJs(params, function() {
             callback(null);
         });
