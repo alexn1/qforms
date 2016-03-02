@@ -107,7 +107,7 @@ ApplicationController.prototype.init = function(callback) {
                 self._createStartupPages(next);
             },
             function(next) {
-                qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css', function(filePaths) {
+                qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css').then(function(filePaths) {
                     self.css = filePaths.map(function(filePath) {
                         return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
                     });

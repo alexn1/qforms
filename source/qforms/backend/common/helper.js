@@ -80,6 +80,8 @@ function _getFilePaths2(dirPath, ext, filePaths) {
 
         // all directories from directory
         return helper._glob(path.join(dirPath, '*/')).then(function(dirs) {
+
+            // for each dir push files to output array
             return Promise.each(dirs, function(subDirPath) {
                 return _getFilePaths2(subDirPath, ext, filePaths);
             });
@@ -88,7 +90,7 @@ function _getFilePaths2(dirPath, ext, filePaths) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getFilePaths = function(publicDirPath, subDirPath, ext, callback) {
+helper.getFilePaths = function(publicDirPath, subDirPath, ext) {
     var filePaths = [];
 
     /*
@@ -100,11 +102,11 @@ helper.getFilePaths = function(publicDirPath, subDirPath, ext, callback) {
     });
     */
 
-    _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
+    return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
         var relativeFilePaths = filePaths.map(function(filePath) {
             return slash(path.relative(publicDirPath, filePath));
         });
-        callback(relativeFilePaths);
+        return relativeFilePaths;
     });
 };
 
