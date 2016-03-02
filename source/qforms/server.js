@@ -13,11 +13,12 @@ var pkg       = require('./package.json');
 var helper    = require('./backend/common/helper');
 var multipart = require('./backend/common/multipart');
 
-module.exports = createExpressServer();
+var server = module.exports = express();
+initExpressServer(server);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function createExpressServer() {
-    var server = express();
+function initExpressServer(server) {
+    //console.log('initExpressServer');
     var engineDirPath  =           __dirname;
     var backendDirPath = path.join(__dirname, 'backend');
 
@@ -100,5 +101,4 @@ function createExpressServer() {
     // runtime & temp
     helper.createDirIfNotExistsSync(server.get('runtime'));
     helper.createDirIfNotExistsSync(server.get('temp'));
-    return server;
 }
