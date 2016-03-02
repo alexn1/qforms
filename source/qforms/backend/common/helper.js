@@ -313,16 +313,17 @@ helper.getFileContent2 = function(filePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.putFileContent = function(filePath, content, callback) {
-    fs.writeFile(filePath, content, 'utf8', function(err) {
-        if (err) {
-            throw err;
-        } else {
-            callback();
-        }
+helper.putFileContent = function(filePath, content) {
+    return new Promise(function(resolve, reject) {
+        fs.writeFile(filePath, content, 'utf8', function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
     });
 };
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.createDirIfNotExists = function(dirPath, callback) {
