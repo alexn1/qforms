@@ -59,6 +59,7 @@ module.exports.getFilePaths = function getFilePaths(publicDirPath, subDirPath, e
     });
 };
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
     fs.readFile(appFilePath, 'utf8', function(err, content) {
@@ -73,6 +74,26 @@ module.exports.getAppInfo = function getAppInfo(appFilePath, callback) {
                 callback(null);
             }
         }
+    });
+};
+*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+module.exports.getAppInfo2 = function getAppInfo2(appFilePath) {
+    return new Promise(function(resolve, reject) {
+        fs.readFile(appFilePath, 'utf8', function(err, content) {
+            if (err) {
+                reject(err);
+            } else {
+                var data = JSON.parse(content);
+                if (data['@class'] && data['@class'] === 'Application') {
+                    var appInfo = module.exports.getAppInfoFromData(appFilePath, data);
+                    resolve(appInfo);
+                } else {
+                    resolve(null);
+                }
+            }
+        });
     });
 };
 
@@ -98,7 +119,7 @@ module.exports.getAppInfos = function getAppInfos(appsDirPath, callback) {
     var appInfos = [];
     glob(path.join(appsDirPath, '*/*.json'), function(err, appFilesPaths) {
         async.eachSeries(appFilesPaths, function(appFilePath, next) {
-            module.exports.getAppInfo(appFilePath, function(appInfo) {
+            module.exports.getAppInfo2(appFilePath).then(function(appInfo) {
                 if (appInfo) {
                     appInfos.push(appInfo);
                 }

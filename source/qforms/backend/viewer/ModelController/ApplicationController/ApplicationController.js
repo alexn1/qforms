@@ -38,7 +38,7 @@ function ApplicationController(data, appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationController.create = function(appFilePath, callback) {
-    qforms.helper.getAppInfo(appFilePath, function(appInfo) {
+    qforms.helper.getAppInfo2(appFilePath).then(function(appInfo) {
         fs.readFile(appInfo.filePath, 'utf8', function(err, content) {
             if (err) {
                 throw err;

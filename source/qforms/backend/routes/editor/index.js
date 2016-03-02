@@ -45,7 +45,7 @@ module.exports = function(req, res, next) {
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
             fs.exists(appFilePath, function(exists) {
                 if (exists) {
-                    qforms.helper.getAppInfo(appFilePath, function(appInfo) {
+                    qforms.helper.getAppInfo2(appFilePath).then(function(appInfo) {
                         var d = domain.create();
                         if (server.get('handleException') === true) {
                             d.on('error', next);
