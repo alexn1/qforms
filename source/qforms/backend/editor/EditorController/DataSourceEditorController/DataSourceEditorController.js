@@ -9,7 +9,6 @@ var _    = require('underscore');
 
 var server = require('../../../../server');
 
-
 var EditorController = require('../EditorController');
 
 util.inherits(DataSourceEditorController, EditorController);
