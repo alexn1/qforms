@@ -2,25 +2,36 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function ViewerController(data) {
-    //console.log(data);
-    this.data = data;
-    this.application = null;
-    this.applicationController = null;
+    var self = this;
+    //console.log('ViewerController', data);
+    self.data                  = data;
+    self.application           = null;
+    self.applicationController = null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ViewerController.prototype.init = function() {
-    this.application = new Application(this.data);
-    var html = QForms.render(this.application.data.view, {model:this.application});
+    var self = this;
+
+    // application
+    self.application = new Application(self.data);
+    var html = QForms.render(self.application.data.view, {
+        model:self.application
+    });
     var $view = $(html);
-    this.applicationController = ApplicationController.create(this.application, $view.get(0));
-    this.applicationController.init();
-    this.application.init();
+
+    // applicationController
+    self.applicationController = ApplicationController.create(self.application, $view.get(0));
+    self.applicationController.init();
+    self.application.init();
+
+    // show view
     $('#client').append($view);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ViewerController.prototype.deinit = function() {
-    this.applicationController.deinit();
-    this.application.deinit();
+    var self = this;
+    self.applicationController.deinit();
+    self.application.deinit();
 };
