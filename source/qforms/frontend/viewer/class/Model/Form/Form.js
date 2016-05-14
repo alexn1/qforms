@@ -78,6 +78,8 @@ Form.prototype.onDataSourceChanged = function(eventArgs) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.onDataSourceUpdated = function(eventArgs) {
+    var self = this;
+    console.log('Form.prototype.onDataSourceUpdated', self.name);
     var dataSource = eventArgs.object;
     if (dataSource.name === 'default') {
         this.changed = false;
@@ -98,6 +100,7 @@ Form.prototype.update = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Form.prototype.refill = function() {
     var self = this;
+    //console.log('Form.prototype.refill', self.name);
     this.dataSources.default.refill(this.page.params, function() {
         self.eventRefilled.fire(new QForms.EventArg(self));
     });

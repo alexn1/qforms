@@ -26,11 +26,17 @@ function DataSource(name, parent, data) {
     this.eventGoneRow   = new QForms.Event(this);		// row gone from current tree item list
     this.eventComeRow   = new QForms.Event(this);		// row come to current tree item list
     this.eventNewFrame  = new QForms.Event(this);
+    this.length = null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.init = function() {
+    var self = this;
+    //console.log('DataSource.prototype.init', self.name);
+    //console.log('limit', self.limit);
+    //console.log('count', self.count);
     // creating index
+    self.length = this.data.rows.length;
     var vals = this.getKeysAndChilds(this.data.rows);
     this.rowsByKey = vals.rowsByKey;
     this.childs    = vals.childs;
@@ -64,7 +70,7 @@ DataSource.prototype.getKeysAndChilds = function(rows) {
         var parentKey = this.getRowParentKey(row);
         // filling
         if (rowsByKey[key]) {
-            throw new Error('Dublicate key in the result set, i = ' + i + ', key = ' + key);
+            throw new Error('Duplicate key in the result set, i = ' + i + ', key = ' + key);
         }
         rowsByKey[key] = row;
         if (!childs[parentKey]) {
@@ -181,6 +187,7 @@ DataSource.prototype.onTableUpdated = function(ea) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.refresh = function() {
     var self = this;
+    console.log('DataSource.prototype.refresh', self.name);
     this._refresh(function() {
         // data source has been updated
         self.eventUpdated.fire(new QForms.EventArg(self));
@@ -215,6 +222,7 @@ DataSource.prototype.refill = function(params, callback) {
     var self = this;
     this._getData(params, function(data) {
         self.count = data.count;
+        self.length = data.rows.length;
         var vals = self.getKeysAndChilds(data.rows);
         self.rowsByKey = vals.rowsByKey;
         self.childs    = vals.childs;
@@ -228,6 +236,7 @@ DataSource.prototype._refresh = function(callback) {
     var params = (page !== null) ? page.params : {};
     var self = this;
     this._getData(params, function(data) {
+        self.length = data.rows.length;
         var rows = data.rows;
         if (!(rows instanceof Array)) {
             throw new Error('rows must be array.');
@@ -252,7 +261,7 @@ DataSource.prototype._getData = function(params, callback) {
         _params['offset'] = this.offset;
     }
     var args = {
-        action: 'frame',
+        action        : 'frame',
         page          : (page !== null ? page.name : ''),
         form          : (form !== null ? form.name : ''),
         ds            : this.name,
@@ -269,6 +278,7 @@ DataSource.prototype.frame = function(params, frame) {
     this.offset = (frame - 1) * this.limit;
     var self = this;
     this._getData(params, function(data) {
+        self.length = data.rows.length;
         var vals = self.getKeysAndChilds(data.rows);
         self.rowsByKey = vals.rowsByKey;
         self.childs    = vals.childs;

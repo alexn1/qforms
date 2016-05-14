@@ -58,27 +58,44 @@ TableFormController.prototype.deinit = function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.fill = function() {
-    TableFormController.super_.prototype.fill.call(this);
-    this.framesCount = this.model.dataSource.getFramesCount();
-    if (this.framesCount) {
-        this.$count.text(this.model.dataSource.count);
-        for (var i = 1; i <= this.framesCount; i++) {
+    var self = this;
+    TableFormController.super_.prototype.fill.call(self);
+    if (self.model.dataSource.limit) {
+        $(self.view).find('.paging').css('display', 'block');
+        self.setCountText();
+    }
+    self.framesCount = self.model.dataSource.getFramesCount();
+    if (self.framesCount) {
+        for (var i = 1; i <= self.framesCount; i++) {
             var option = $('<option></option>');
             option.val(i);
             option.html(i);
-            this.$goto.append(option);
+            self.$goto.append(option);
         }
-        $(this.view).find('.paging').css('display', 'block');
     }
-    this.grid.fill();
+    self.grid.fill();
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+TableFormController.prototype.setCountText = function() {
+    var self = this;
+    var count = '{rowsCount} of {count}'.template({
+        rowsCount: self.model.dataSource.length,
+        count    : self.model.dataSource.count
+    });
+    self.$count.text(count);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onRefilled = function(ea) {
+    var self = this;
+    //console.log('TableFormController.prototype.onRefilled');
     this.grid.clear();
+    if (self.model.dataSource.limit) {
+        self.setCountText();
+    }
     this.framesCount = this.model.dataSource.getFramesCount();
     if (this.framesCount) {
-        this.$count.text(this.model.dataSource.count);
         this.$goto.empty();
         for (var i = 1; i <= this.framesCount; i++) {
             var option = $('<option></option>');
@@ -97,7 +114,9 @@ TableFormController.prototype.onNewClick = function(ctrl) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onRefreshClick = function(ctrl) {
-    this.model.refresh();
+    //console.log('TableFormController.prototype.onRefreshClick', self.name);
+    //this.model.refresh();
+    this.model.refill();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
