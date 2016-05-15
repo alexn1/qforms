@@ -115,8 +115,7 @@ TableFormController.prototype.onNewClick = function(ctrl) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 TableFormController.prototype.onRefreshClick = function(ctrl) {
     //console.log('TableFormController.prototype.onRefreshClick', self.name);
-    //this.model.refresh();
-    this.model.refill();
+    this.model.refresh();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
