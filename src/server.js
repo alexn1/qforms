@@ -14,16 +14,15 @@ var helper    = require('./backend/common/helper');
 var multipart = require('./backend/common/multipart');
 
 var server = module.exports = express();
-initExpressServer(server);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function initExpressServer(server) {
+initExpressServer(server); function initExpressServer(server) {
     //console.log('initExpressServer');
     var engineDirPath  =           __dirname;
     var backendDirPath = path.join(engineDirPath, 'backend');
 
     // environment
-    server.set('appsDirPath', path.join(/*engineDirPath,*/ helper.getCommandLineParams().appsDirPath || './apps'));
+    server.set('appsDirPath', path.join(/*engineDirPath, */helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath));
     if (!fs.existsSync(server.get('appsDirPath'))) {
         console.log("Application folder '{appsDirPath}' doesn't exist".template({
             appsDirPath: path.resolve(server.get('appsDirPath'))
