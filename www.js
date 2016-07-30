@@ -3,8 +3,8 @@
 var http = require('http');
 var path = require('path');
 
-var qforms = require('./src/qforms');
-var server = require('./src/server');
+var qforms = require('./lib/qforms');
+var server = require('./lib/server');
 var pkg    = require('./package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
