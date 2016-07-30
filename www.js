@@ -3,9 +3,9 @@
 var http = require('http');
 var path = require('path');
 
-var pkg    = require('../package.json');
-var qforms = require('./qforms');
-var server = require('./server');
+var qforms = require('./src/qforms');
+var server = require('./src/server');
+var pkg    = require('./package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 main(); function main() {
