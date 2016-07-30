@@ -3,9 +3,8 @@
 var path   = require('path');
 var del    = require('del');
 
-var pkg    = require('../source/qforms/package.json');
-var qforms = require(path.join('../build', pkg.version));
-
+var pkg    = require('../package.json');
+var qforms = require(path.join('../build', pkg.version, 'lib/qforms'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('test02', function() {
