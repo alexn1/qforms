@@ -9,7 +9,7 @@ var session    = require('express-session');
 var _          = require('underscore');
 var async      = require('async');
 
-var pkg       = require('./package.json');
+var pkg       = require('../package.json');
 var helper    = require('./backend/common/helper');
 var multipart = require('./backend/common/multipart');
 
@@ -20,10 +20,10 @@ initExpressServer(server);
 function initExpressServer(server) {
     //console.log('initExpressServer');
     var engineDirPath  =           __dirname;
-    var backendDirPath = path.join(__dirname, 'backend');
+    var backendDirPath = path.join(engineDirPath, 'backend');
 
     // environment
-    server.set('appsDirPath', path.join(engineDirPath, helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath));
+    server.set('appsDirPath', path.join(/*engineDirPath,*/ helper.getCommandLineParams().appsDirPath || './apps'));
     if (!fs.existsSync(server.get('appsDirPath'))) {
         console.log("Application folder '{appsDirPath}' doesn't exist".template({
             appsDirPath: path.resolve(server.get('appsDirPath'))
