@@ -8,7 +8,7 @@ var concat    = require('gulp-concat');
 
 var pkg = require('./package.json');
 
-var buildPath = path.join('../../build', pkg.version);
+var buildPath = path.join('./build', pkg.version);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('default', ['readme', 'root', 'backend', 'frontend']);
