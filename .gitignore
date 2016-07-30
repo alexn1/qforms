@@ -1,6 +1,6 @@
-node_modules
 .idea/
-source/qforms/runtime/
+node_modules
 build/
+lib/runtime/
 apps/*
 !apps/demo
