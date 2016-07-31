@@ -1,1 +1,1 @@
-node source/qforms/www.js
+node www.js
