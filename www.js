@@ -1,7 +1,8 @@
 'use strict';
 
-var http = require('http');
-var path = require('path');
+var http    = require('http');
+var path    = require('path');
+var Promise = require('bluebird');
 
 var qforms = require('./lib/qforms');
 var server = require('./lib/server');
@@ -9,6 +10,27 @@ var pkg    = require('./package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 main(); function main() {
+    process.on('message', function(message) {
+        if (message === 'shutdown') {
+            shutdown().then(function () {
+                process.exit(0);
+            });
+        }
+    });
+    process.on('SIGINT', function () {
+        console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        shutdown().then(function () {
+            process.exit(0);
+        });
+    });
+    process.on('SIGTERM', function () {
+        self.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        process.exit(1);
+    });
+    process.on('exit', function (code) {
+        console.log('process.exit:', code);
+    });
+
     var port = qforms.helper.getCommandLineParams().port || pkg.config.port;
     var host = qforms.helper.getCommandLineParams().host || pkg.config.host;
     var www = http.createServer(server);
@@ -20,11 +42,27 @@ main(); function main() {
         }
     });
     www.listen(port, host, function() {
+        if (process.send) {
+            process.send('online');
+        }
         console.log('QForms server v{version} listening on http://{host}:{port}, applications from {appsDirPath}'.template({
             version    : pkg.version,
             host       : host,
             port       : port,
             appsDirPath: path.resolve(server.get('appsDirPath'))
         }));
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function shutdown() {
+    console.log('shutdown');
+    return Promise.try(function () {
+        var applications = server.get('applications');
+        var appNames = Object.keys(applications);
+        return Promise.each(appNames, function (appName) {
+            var application = applications[appName];
+            return application.deinit2();
+        });
     });
 }
