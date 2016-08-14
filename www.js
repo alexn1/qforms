@@ -10,7 +10,7 @@ var pkg    = require('./package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 main(); function main() {
-    process.on('message', function(message) {
+    process.on('message', function (message) {
         if (message === 'shutdown') {
             shutdown().then(function () {
                 process.exit(0);
