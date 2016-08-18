@@ -28,11 +28,11 @@ describe('test01', function() {
                 last_name : 'test b'
             }
         });
-        application.getPage(context, 'employee', function(page) {
+        application.getPage2(context, 'employee').then(function(page) {
             page.forms.employee.dataSources.default.insert(context, function(_key) {
                 key = _key;
                 var row = page.forms.employee.dataSources.default.getKeyValues(_key);
-                application.databases.default.query(context, 'select * from employee where id = {id}', row, function(rows) {
+                application.databases.default.query2(context, 'select * from employee where id = {id}', row).then(function (rows) {
                     should.exist(rows[0]);
                     rows[0].should.be.type('object').and.have.properties({
                         first_name: 'test a',
@@ -45,10 +45,10 @@ describe('test01', function() {
     });
     it('delete row with RowForm', function(done) {
         var context = application.createContext();
-        application.getPage(context, 'employee', function(page) {
+        application.getPage2(context, 'employee').then(function (page) {
             context.row = page.forms.employee.dataSources.default.getKeyValues(key);
             page.forms.employee.dataSources.default.delete(context, function() {
-                application.databases.default.query(context, 'select * from employee where id = {id}', context.row, function(rows) {
+                application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
                     should.not.exist(rows[0]);
                     done();
                 });
