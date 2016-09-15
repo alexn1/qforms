@@ -4,6 +4,19 @@
             <div class="active">
                 <div class="full flex-rows" style="background-color: #bbb;">
                     <div class="flex-min" style="background-color: white;padding: 5px;">
+                        <button class="btn btn-default btn-xs btnCreateController">Create Custom Controller</button>
+                        <button class="btn btn-default btn-xs btnSaveController">Save</button>
+                    </div>
+                    <div class="flex-max full" style="overflow: auto;">
+                        <div class="cm-container full wndJs" style="display: none;">
+                            <textarea class="cmJsCode"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="full flex-rows" style="background-color: #bbb;">
+                    <div class="flex-min" style="background-color: white;padding: 5px;">
                         <button class="btn btn-default btn-xs btnCreateView">Create Custom View</button>
                         <button class="btn btn-default btn-xs btnSaveView">Save</button>
                         <div class="btn-group" role="group">
@@ -21,26 +34,13 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="full flex-rows" style="background-color: #bbb;">
-                    <div class="flex-min" style="background-color: white;padding: 5px;">
-                        <button class="btn btn-default btn-xs btnCreateController">Create Custom Controller</button>
-                        <button class="btn btn-default btn-xs btnSaveController">Save</button>
-                    </div>
-                    <div class="flex-max full" style="overflow: auto;">
-                        <div class="cm-container full wndJs" style="display: none;">
-                            <textarea class="cmJsCode"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <ul>
-            <li class="tabView active">
-                <span>View</span>
-            </li>
-            <li class="tabController">
+            <li class="tabController active">
                 <span>Controller</span>
+            </li>
+            <li class="tabView">
+                <span>View</span>
             </li>
         </ul>
     </div>
