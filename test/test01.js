@@ -11,15 +11,17 @@ describe('test01', function() {
     var application;
     var key;
     before(function(done) {
-        qforms.ApplicationController.create('apps/demo/application1.json', function(_application) {
-            _application.init(function() {
+        qforms.ApplicationController.create2('apps/demo/application1.json').then(function (_application) {
+            _application.init2().then(function () {
                 application = _application;
                 done();
             });
         });
     });
     after(function(done) {
-        application.deinit(done);
+        application.deinit2().then(function () {
+            done();
+        });
     });
     it('insert row with RowForm', function(done) {
         var context = application.createContext({
@@ -29,7 +31,7 @@ describe('test01', function() {
             }
         });
         application.getPage2(context, 'employee').then(function(page) {
-            page.forms.employee.dataSources.default.insert(context, function(_key) {
+            page.forms.employee.dataSources.default.insert2(context).then(function(_key) {
                 key = _key;
                 var row = page.forms.employee.dataSources.default.getKeyValues(_key);
                 application.databases.default.query2(context, 'select * from employee where id = {id}', row).then(function (rows) {
@@ -47,8 +49,8 @@ describe('test01', function() {
         var context = application.createContext();
         application.getPage2(context, 'employee').then(function (page) {
             context.row = page.forms.employee.dataSources.default.getKeyValues(key);
-            page.forms.employee.dataSources.default.delete(context, function() {
-                application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
+            return page.forms.employee.dataSources.default.delete2(context).then(function () {
+                return application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
                     should.not.exist(rows[0]);
                     done();
                 });
