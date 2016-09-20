@@ -11,7 +11,7 @@ describe('test01', function() {
     var application;
     var key;
     before(function(done) {
-        qforms.ApplicationController.create2('apps/demo/application1.json').then(function (_application) {
+        qforms.Application.create2('apps/demo/application1.json').then(function (_application) {
             _application.init2().then(function () {
                 application = _application;
                 done();
@@ -24,7 +24,7 @@ describe('test01', function() {
         });
     });
     it('insert row with RowForm', function(done) {
-        var context = qforms.ApplicationController.createContext({
+        var context = qforms.Application.createContext({
             row: {
                 first_name: 'test a',
                 last_name : 'test b'
@@ -46,7 +46,7 @@ describe('test01', function() {
         });
     });
     it('delete row with RowForm', function(done) {
-        var context = qforms.ApplicationController.createContext();
+        var context = qforms.Application.createContext();
         application.getPage2(context, 'employee').then(function (page) {
             context.row = page.forms.employee.dataSources.default.getKeyValues(key);
             return page.forms.employee.dataSources.default.delete2(context).then(function () {
