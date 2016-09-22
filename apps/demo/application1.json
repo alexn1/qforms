@@ -2,8 +2,8 @@
     "@class": "Application",
     "@attributes": {
         "formatVer": "0.1",
-        "name": "application1",
-        "caption": "application1",
+        "name": "Application1",
+        "caption": "Application1",
         "authentication": "false",
         "user": "admin",
         "password": "admin",
@@ -48,19 +48,19 @@
         }
     },
     "pageLinks": {
-        "employees": {
+        "Employees": {
             "@class": "PageLink",
             "@attributes": {
-                "name": "employees",
+                "name": "Employees",
                 "fileName": "pages/employees/employees.json",
                 "menu": "Pages",
                 "startup": "true"
             }
         },
-        "employee": {
+        "Employee": {
             "@class": "PageLink",
             "@attributes": {
-                "name": "employee",
+                "name": "Employee",
                 "fileName": "pages/employee/employee.json",
                 "menu": "",
                 "startup": "false"

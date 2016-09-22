@@ -2,17 +2,17 @@
     "@class": "Page",
     "@attributes": {
         "formatVer": "0.1",
-        "name": "employee",
+        "name": "Employee",
         "caption": "Employee",
         "width": "640",
         "height": "480"
     },
     "dataSources": {},
     "forms": {
-        "employee": {
+        "Employee": {
             "@class": "RowForm",
             "@attributes": {
-                "name": "employee",
+                "name": "Employee",
                 "caption": "Employee"
             },
             "dataSources": {

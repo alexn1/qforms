@@ -2,20 +2,20 @@
     "@class": "Page",
     "@attributes": {
         "formatVer": "0.1",
-        "name": "employees",
+        "name": "Employees",
         "caption": "Employees",
         "width": "640",
         "height": "480"
     },
     "dataSources": {},
     "forms": {
-        "employees": {
+        "Employees": {
             "@class": "TableForm",
             "@attributes": {
-                "name": "employees",
+                "name": "Employees",
                 "caption": "Employees",
                 "editMethod": "form",
-                "itemEditPage": "employee",
+                "itemEditPage": "Employee",
                 "itemCreatePage": "",
                 "newRowMode": "editform",
                 "deleteRowMode": "enabled",
