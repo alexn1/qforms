@@ -40,7 +40,7 @@
             },
             "fields": {
                 "id": {
-                    "@class": "TextBoxField",
+                    "@class": "LinkField",
                     "@attributes": {
                         "name": "id",
                         "caption": "ID",
@@ -49,8 +49,7 @@
                         "defaultValue": "",
                         "column": "id",
                         "readOnly": "true",
-                        "notNull": "false",
-                        "align": "left"
+                        "notNull": "false"
                     }
                 },
                 "first_name": {
