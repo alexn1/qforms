@@ -12,7 +12,7 @@ describe('test01', function() {
     var key;
     before(function(done) {
         qforms.Application.create2('apps/demo/Application1.json').then(function (_application) {
-            _application.init2().then(function () {
+            return _application.init2().then(function () {
                 application = _application;
                 done();
             });
