@@ -6,9 +6,7 @@ var uglify    = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var concat    = require('gulp-concat');
 
-var pkg = require('./package.json');
-
-var buildPath = path.join('./build'/*, pkg.version*/);
+var buildPath = path.join('./build');
 var libPath   = path.join(buildPath, 'lib');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,8 +15,7 @@ gulp.task('default', ['readme', 'root', 'lib', 'backend', 'frontend']);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('root', function() {
     return gulp.src([
-            './package.json',
-            './www.js'
+            './package.json'
     ]).pipe(gulp.dest(buildPath));
 });
 
@@ -26,7 +23,8 @@ gulp.task('root', function() {
 gulp.task('lib', function() {
     return gulp.src([
         './lib/qforms.js',
-        './lib/server.js'
+        './lib/server.js',
+        './lib/www.js'
     ]).pipe(gulp.dest(libPath));
 });
 
