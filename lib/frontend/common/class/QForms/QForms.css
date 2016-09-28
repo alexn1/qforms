@@ -67,3 +67,8 @@ html.wait,
 html.wait * {
   cursor: wait !important;
 }
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
