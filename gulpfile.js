@@ -52,7 +52,7 @@ gulp.task('frontend_common_class', ['frontend_common_class_js', 'frontend_common
 gulp.task('frontend_common_class_js', function() {
     return gulp.src('./lib/frontend/common/class/**/*.js')
         .pipe(concat('all.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/common/class')));
 });
 gulp.task('frontend_common_class_css', function() {
