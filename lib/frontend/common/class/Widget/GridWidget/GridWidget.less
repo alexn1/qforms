@@ -1,18 +1,26 @@
-@headHeight           : 24px;
-@bodyHeight           : 22px;
-@headBackgroundColor  : rgb(124,124,139);
-@trSelBackgroundColor : rgb(200,226,254);
+// grid
 
-@trEvenBackgroundColor: rgb(243,246,250);
+@gridBorderColor    : rgb(124,124,139);
+@gridBackgroundColor: white;
 
-@tdBorderColor        : white;
-@gridBackgroundColor  : white;
+// table
+@tdBorderColor: white;
 
+// head
+@headTrHeight         : 24px;
 @headTdColor          : white;
+@headTdBackgroundColor: rgb(124,124,139);
 
+// block
+@blockBackgroundColor: rgb(124,124,139);
 
-@bodyTdActiveColor           : white;
-@bodyTdActiveBackgroundColor : rgb(66,139,202);
+// body
+@bodyTrHeight               : 22px;
+@bodyTrActiveBackgroundColor: rgb(200,226,254);
+@bodyTrEvenBackgroundColor  : rgb(243,246,250);
+@bodyTdActiveColor          : white;
+@bodyTdActiveBackgroundColor: rgb(66,139,202);
+@bodyTdEditBackgroundColor  : lightgreen;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .GridWidget {
@@ -22,7 +30,7 @@
     position           : relative;
     box-sizing         : border-box;
     border-style       : solid;
-    border-color       : @headBackgroundColor;
+    border-color       : @gridBorderColor;
     border-width       : 0 1px 1px 1px;
     background-color   : @gridBackgroundColor;
     cursor             : default;
@@ -60,9 +68,9 @@
         overflow-y: scroll;
         overflow-x: hidden;
         tr {
-            height: @headHeight;
+            height: @headTrHeight;
             td {
-                background-color: @headBackgroundColor;
+                background-color: @headTdBackgroundColor;
                 color           : @headTdColor;
                 position        : relative;
                 background-clip : padding-box; /* prevent hiding border when position: relative */
@@ -92,8 +100,8 @@
         top             : 0;
         right           : 0;
         width           : 16px;
-        height          : @headHeight;
-        background-color: @headBackgroundColor;
+        height          : @headTrHeight;
+        background-color: @blockBackgroundColor;
         box-sizing      : border-box;
     }
 
@@ -101,17 +109,17 @@
     > .body {
         width     : 100%;
         position  : absolute;
-        top       : @headHeight;
+        top       : @headTrHeight;
         bottom    : 0;
         overflow-y: scroll;
         overflow-x: auto;
         tr {
-            height: @bodyHeight;
+            height: @bodyTrHeight;
             &.active {
-                background-color: @trSelBackgroundColor !important;
+                background-color: @bodyTrActiveBackgroundColor !important;
             }
             &:nth-child(even) {
-                background-color: @trEvenBackgroundColor;
+                background-color: @bodyTrEvenBackgroundColor;
             }
             > td {
                 &.active {
@@ -130,11 +138,10 @@
                 &.edit {
                     color           : inherit;
                     cursor          : text;
-                    background-color: lightgreen;
+                    background-color: @bodyTdEditBackgroundColor;
                 }
             }
         }
     }
 
 }
-
