@@ -37,6 +37,7 @@ head
     link(rel='stylesheet', href='/qforms/build/lib/frontend/viewer/class/Controller/ModelController/PageController/view/PageView.css')
     link(rel='stylesheet', href='/qforms/build/lib/frontend/viewer/class/Controller/ViewerController/view/ViewerView.css')
     script(src='/qforms/build/lib/frontend/viewer/class/all.js')
+    script(src='/qforms/gui/page.js')
 body
     .TabWidget.full
         ul
@@ -48,7 +49,7 @@ body
                 span.close ×
         div
             div(style='background-color: beige;')
-                .GridWidget.full
+                #grid.GridWidget.full
                     .head
                         table: tbody: tr
                             td(data-column-name='id', style='width: 100px;')
