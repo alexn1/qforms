@@ -21,12 +21,15 @@
   border-collapse: collapse;
   table-layout: fixed;
 }
+.GridWidget table tr {
+  border-bottom: 0px solid white;
+}
 .GridWidget table tr td {
   padding: 0;
   cursor: default;
 }
 .GridWidget table tr td:not(:last-child) {
-  border-right: solid 1px white !important;
+  border-right: 1px solid white !important;
 }
 .GridWidget table tr td > div {
   overflow: hidden;
@@ -76,7 +79,7 @@
 .GridWidget > .body {
   width: 100%;
   position: absolute;
-  top: 24px;
+  top: 25px;
   bottom: 0;
   overflow-y: scroll;
   overflow-x: auto;

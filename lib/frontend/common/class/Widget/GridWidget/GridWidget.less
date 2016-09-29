@@ -1,10 +1,11 @@
 // grid
-
 @gridBorderColor    : rgb(124,124,139);
+@gridBorderWidth    : 0 1px 1px 1px;
 @gridBackgroundColor: white;
 
 // table
-@tdBorderColor: white;
+@trBorderBottom: 0px solid white;
+@tdBorderRight : 1px solid white;
 
 // head
 @headTrHeight         : 24px;
@@ -15,9 +16,10 @@
 @blockBackgroundColor: rgb(124,124,139);
 
 // body
+@bodyTop                    : 25px;
 @bodyTrHeight               : 22px;
+@bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
-@bodyTrEvenBackgroundColor  : rgb(243,246,250);
 @bodyTdActiveColor          : white;
 @bodyTdActiveBackgroundColor: rgb(66,139,202);
 @bodyTdEditBackgroundColor  : lightgreen;
@@ -31,7 +33,7 @@
     box-sizing         : border-box;
     border-style       : solid;
     border-color       : @gridBorderColor;
-    border-width       : 0 1px 1px 1px;
+    border-width       : @gridBorderWidth;
     background-color   : @gridBackgroundColor;
     cursor             : default;
     user-select        : none;
@@ -47,11 +49,12 @@
         border-collapse: collapse;
         table-layout   : fixed;
         tr {
+            border-bottom: @trBorderBottom;
             td {
                 padding: 0;
                 cursor : default;
                 &:not(:last-child) {
-                    border-right: solid 1px @tdBorderColor !important;
+                    border-right: @tdBorderRight !important;
                 }
                 > div {
                     overflow: hidden;
@@ -109,7 +112,7 @@
     > .body {
         width     : 100%;
         position  : absolute;
-        top       : @headTrHeight;
+        top       : @bodyTop;
         bottom    : 0;
         overflow-y: scroll;
         overflow-x: auto;
