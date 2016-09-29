@@ -31,9 +31,6 @@
 .GridWidget table tr td:not(:last-child) {
   border-right: 1px solid white !important;
 }
-.GridWidget table tr td > div {
-  overflow: hidden;
-}
 .GridWidget > .head {
   width: 100%;
   position: absolute;
@@ -99,12 +96,6 @@
 .GridWidget > .body tr > td.active > div {
   color: white !important;
   background-color: #428bca !important;
-}
-.GridWidget > .body tr > td.active > div > a {
-  color: white;
-}
-.GridWidget > .body tr > td.active > div > select {
-  color: black;
 }
 .GridWidget > .body tr > td.edit {
   color: inherit;
