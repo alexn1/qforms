@@ -38,7 +38,7 @@ head
     link(rel='stylesheet', href='/qforms/build/lib/frontend/viewer/class/Controller/ViewerController/view/ViewerView.css')
     script(src='/qforms/build/lib/frontend/viewer/class/all.js')
 body
-    div.TabWidget.full
+    .TabWidget.full
         ul
             li
                 span Tab1
@@ -48,6 +48,25 @@ body
                 span.close ×
         div
             div(style='background-color: beige;')
-                h1 tab1
+                .GridWidget.full
+                    .head
+                        table: tbody: tr
+                            td(data-column-name='id', style='width: 100px;')
+                                div ID
+                                span.resize
+                            td(data-column-name='first_name', style='width: 100px;')
+                                div FirstName
+                                span.resize
+                            td(data-column-name='last_name', style='width: 100px;')
+                                div LastName
+                                span.resize
+                            td
+                    .block
+                    .body
+                        table: tbody
+                            tr
+                                td(style='width: 100px')
+                                    .TableFormTextBoxFieldView
+                                        span 1
             div
                 h1 tab2
