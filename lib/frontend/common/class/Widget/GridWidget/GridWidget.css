@@ -64,6 +64,15 @@
   cursor: w-resize;
   z-index: 1000;
 }
+.GridWidget > .block {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 24px;
+  background-color: #7c7c8b;
+  box-sizing: border-box;
+}
 .GridWidget > .body {
   width: 100%;
   position: absolute;
@@ -98,13 +107,4 @@
   color: inherit;
   cursor: text;
   background-color: lightgreen;
-}
-.GridWidget > .block {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 16px;
-  height: 24px;
-  background-color: #7c7c8b;
-  box-sizing: border-box;
 }
