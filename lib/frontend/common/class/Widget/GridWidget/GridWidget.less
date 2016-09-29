@@ -2,8 +2,17 @@
 @bodyHeight           : 22px;
 @headBackgroundColor  : rgb(124,124,139);
 @trSelBackgroundColor : rgb(200,226,254);
-@tdSelBackgroundColor : rgb(66,139,202);
+
 @trEvenBackgroundColor: rgb(243,246,250);
+
+@tdBorderColor        : white;
+@gridBackgroundColor  : white;
+
+@headTdColor          : white;
+
+
+@bodyTdActiveColor           : white;
+@bodyTdActiveBackgroundColor : rgb(66,139,202);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .GridWidget {
@@ -15,13 +24,13 @@
     border-style       : solid;
     border-color       : @headBackgroundColor;
     border-width       : 0 1px 1px 1px;
-    background-color   : white;
+    background-color   : @gridBackgroundColor;
+    cursor             : default;
+    user-select        : none;
     -moz-user-select   : none;
     -webkit-user-select: none;
     -ms-user-select    : none;
     -khtml-user-select : none;
-    user-select        : none;
-    cursor             : default;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     table {
@@ -34,7 +43,7 @@
                 padding: 0;
                 cursor : default;
                 &:not(:last-child) {
-                    border-right: solid 1px white !important;
+                    border-right: solid 1px @tdBorderColor !important;
                 }
                 > div {
                     overflow: hidden;
@@ -54,7 +63,7 @@
             height: @headHeight;
             td {
                 background-color: @headBackgroundColor;
-                color           : white;
+                color           : @headTdColor;
                 position        : relative;
                 background-clip : padding-box; /* prevent hiding border when position: relative */
                 > div {
@@ -106,10 +115,10 @@
             }
             > td {
                 &.active {
-                    background-color: @tdSelBackgroundColor;
+                    background-color: @bodyTdActiveBackgroundColor;
                     > div {
-                        color:white !important;
-                        background-color: @tdSelBackgroundColor !important;
+                        color           : @bodyTdActiveColor           !important;
+                        background-color: @bodyTdActiveBackgroundColor !important;
                         > a {
                             color: white;
                         }
