@@ -23,16 +23,19 @@
     border-color: #c6d0ce;
     border-style: solid;
     height: 20px;
+    color: black;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .input1 {
     background-color: #ffef9c;
-    padding: 0;
+    padding: 0 5px 0 5px;
     border-width: 0 0 1px 0;
     border-color: #c6d0ce;
     border-style: solid;
     height: 20px;
     text-align: right;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .button1 {
@@ -43,4 +46,5 @@
     border-radius: 3px;
     border-color: #c6d0ce;
     background: linear-gradient(to top, #bdbdb5, #ffffef);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }

@@ -49,6 +49,8 @@
         tr {
             height: @headTrHeight;
             td {
+                background      : @headTdBackground;
+                text-shadow     : @headTdTextShadow;
                 background-color: @headTdBackgroundColor;
                 color           : @headTdColor;
                 position        : relative;
@@ -101,7 +103,9 @@
                 background-color: @bodyTrEvenBackgroundColor;
             }
             > td {
+                text-shadow: @bodyTdTextShadow;
                 &.active {
+                    text-shadow     : @bodyTdActiveTextShadow;
                     background-color: @bodyTdActiveBackgroundColor;
                     > div {
                         color           : @bodyTdActiveColor           !important;
