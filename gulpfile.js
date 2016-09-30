@@ -130,7 +130,8 @@ gulp.task('frontend_viewer_class_js', function() {
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/viewer/class')));
 });
 gulp.task('frontend_viewer_class_css', function() {
-    return gulp.src('./lib/frontend/viewer/class/**/*.css')
+    return gulp.src('./lib/frontend/viewer/class/**/*.less')
+        .pipe(less())
         //.pipe(concat('all.css'))
         //.pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/viewer/class')));
