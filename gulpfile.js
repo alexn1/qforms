@@ -82,7 +82,8 @@ gulp.task('frontend_editor_class_js', function() {
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/editor/class')));
 });
 gulp.task('frontend_editor_class_css', function() {
-    return gulp.src('./lib/frontend/editor/class/**/*.css')
+    return gulp.src('./lib/frontend/editor/class/**/*.less')
+        .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/editor/class')));
@@ -110,7 +111,8 @@ gulp.task('frontend_home_class_js', function() {
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/home/class')));
 });
 gulp.task('frontend_home_class_css', function() {
-    return gulp.src('./lib/frontend/home/class/**/*.css')
+    return gulp.src('./lib/frontend/home/class/**/*.less')
+        .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/home/class')));
