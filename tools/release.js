@@ -9,9 +9,9 @@ main(); function main() {
     var version;
     return exec('git checkout master').then(function() {
         return exec('git pull origin master');
-    })/*.then(function() {
+    }).then(function() {
         return exec('git push origin master');
-    })*/.then(function() {
+    }).then(function() {
         return getJsonFileData('package.json').then(function(data) {
             version = data.version = versionWithoutDev(data.version);
             return putJsonFileData('package.json', data);
@@ -29,24 +29,24 @@ main(); function main() {
             .replace('{version}', version)
             .replace('{version}', version)
         );
-    })/*.then(function() {
+    }).then(function() {
         return exec('git push origin release');
     }).then(function() {
         return exec('git push origin --tags');
-    })*/.then(function() {
+    }).then(function() {
         return exec('git checkout master');
-    })/*.then(function() {
+    }).then(function() {
         return exec('git push origin master');
-    })*/.then(function() {
+    }).then(function() {
         return getJsonFileData('package.json').then(function(data) {
             version = data.version = versionWithDev(incPatch(data.version));
             return putJsonFileData('package.json', data);
         });
     }).then(function() {
         return exec('git commit -am "begin v{version}"'.replace('{version}', versionWithoutDev(version)));
-    })/*.then(function() {
+    }).then(function() {
         return exec('git push origin master');
-    })*/.catch(function(err) {
+    }).catch(function(err) {
         console.error(err);
     });
 }
