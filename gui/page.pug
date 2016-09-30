@@ -38,6 +38,7 @@ head
     link(rel='stylesheet', href='/qforms/build/lib/frontend/viewer/class/Controller/ViewerController/view/ViewerView.css')
     script(src='/qforms/build/lib/frontend/viewer/class/all.js')
     script(src='/qforms/gui/page.js')
+    link(rel='stylesheet', href='/qforms/gui/style.css')
 body
     .TabWidget.full
         ul
@@ -48,20 +49,39 @@ body
                 span Tab2
                 span.close ×
         div
-            div(style='background-color: beige;')
-                #grid.GridWidget.full
-                    .head
-                        table: tbody: tr
-                            td(data-column-name='id', style='width: 100px;')
-                                div ID
-                                span.resize
-                            td(data-column-name='first_name', data-view-class='TableFormTextBoxFieldView' style='width: 100px;')
-                                div FirstName
-                                span.resize
-                            td(data-column-name='last_name', style='width: 100px;')
-                                div LastName
-                                span.resize
-                            td
-                    .block
+            div(style='background-color: #94b5c6;')
+                br
+                br
+                div#div1
+                    table#form1
+                        tbody
+                            tr
+                                td(style='width: 100px;'): div.label1 Field1
+                                td: input.input1(value='value1')
+                            tr
+                                td(style='width: 100px;'): div.label1 Field2
+                                td: input.input1(value='value2')
+                            tr
+                                td
+                                td: button.button1 Button1
+
+                br
+                br
+                div(style='height: 200px;padding:10px;')
+                    #grid.GridWidget.full
+                        .head
+                            table: tbody: tr
+                                td(data-column-name='id', style='width: 100px;')
+                                    div ID
+                                    span.resize
+                                td(data-column-name='first_name', data-view-class='TableFormTextBoxFieldView' style='width: 100px;')
+                                    div FirstName
+                                    span.resize
+                                td(data-column-name='last_name', style='width: 100px;')
+                                    div LastName
+                                    span.resize
+                                td
+
             div
-                h1 tab2
+
+                    .block

@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="/qforms/build/lib/frontend/viewer/class/Controller/ViewerController/view/ViewerView.css">
   <script src="/qforms/build/lib/frontend/viewer/class/all.js"></script>
   <script src="/qforms/gui/page.js"></script>
+  <link rel="stylesheet" href="/qforms/gui/style.css">
 </head>
 <body>
   <div class="TabWidget full">
@@ -46,31 +47,60 @@
       <li><span>Tab2</span><span class="close">×</span></li>
     </ul>
     <div>
-      <div style="background-color: beige">
-        <div class="GridWidget full" id="grid">
-          <div class="head">
-            <table>
-              <tbody>
-                <tr>
-                  <td data-column-name="id" style="width: 100px">
-                    <div>ID</div><span class="resize"></span>
-                  </td>
-                  <td data-column-name="first_name" data-view-class="TableFormTextBoxFieldView" style="width: 100px">
-                    <div>FirstName</div><span class="resize"></span>
-                  </td>
-                  <td data-column-name="last_name" style="width: 100px">
-                    <div>LastName</div><span class="resize"></span>
-                  </td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+      <div style="background-color: #94b5c6"><br><br>
+        <div id="div1">
+          <table id="form1">
+            <tbody>
+              <tr>
+                <td style="width: 100px">
+                  <div class="label1">Field1</div>
+                </td>
+                <td>
+                  <input class="input1" value="value1">
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 100px">
+                  <div class="label1">Field2</div>
+                </td>
+                <td>
+                  <input class="input1" value="value2">
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <button class="button1">Button1</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div><br><br>
+        <div style="height: 200px;padding:10px">
+          <div class="GridWidget full" id="grid">
+            <div class="head">
+              <table>
+                <tbody>
+                  <tr>
+                    <td data-column-name="id" style="width: 100px">
+                      <div>ID</div><span class="resize"></span>
+                    </td>
+                    <td data-column-name="first_name" data-view-class="TableFormTextBoxFieldView" style="width: 100px">
+                      <div>FirstName</div><span class="resize"></span>
+                    </td>
+                    <td data-column-name="last_name" style="width: 100px">
+                      <div>LastName</div><span class="resize"></span>
+                    </td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="block"></div>
         </div>
       </div>
       <div>
-        <h1>tab2</h1>
+        <div class="block"></div>
       </div>
     </div>
   </div>
