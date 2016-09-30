@@ -5,6 +5,7 @@ var gulp      = require('gulp');
 var uglify    = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var concat    = require('gulp-concat');
+var less      = require('gulp-less');
 
 var buildPath = path.join('./build');
 var libPath   = path.join(buildPath, 'lib');
@@ -56,7 +57,8 @@ gulp.task('frontend_common_class_js', function() {
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/common/class')));
 });
 gulp.task('frontend_common_class_css', function() {
-    return gulp.src('./lib/frontend/common/class/**/*.css')
+    return gulp.src('./lib/frontend/common/class/**/*.less')
+        .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest(path.join(buildPath, 'lib/frontend/common/class')));
