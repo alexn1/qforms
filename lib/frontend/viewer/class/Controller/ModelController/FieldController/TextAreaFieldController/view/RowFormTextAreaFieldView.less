@@ -1,9 +1,12 @@
 .RowFormTextAreaFieldView {
     > textarea {
-        width:100%;
+        display     : block;
+        width       : 100%;
+        border-width: 0;
+        padding     : 0 5px 0 5px;
+        //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
     }
     > textarea[readonly] {
-        background-color:lightgoldenrodyellow;
-        border-width:1px;
+        background-color: lightgoldenrodyellow;
     }
 }

@@ -2,34 +2,18 @@
     background-color: rgb(238,238,238);
     padding         : 10px;
     > table > tbody > tr > td {
-        padding: 5px 0 0 0;
+        padding       : 5px 0 0 0;
         vertical-align: bottom;
-        .lbl {
+        &.line {
             border-width: 0 0 1px 0;
             border-color: #c6d0ce;
             border-style: solid;
-            text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
-            height      : 20px;
-            padding     : 0 10px 0 0;
-            text-align  : right;
         }
-        input, textarea {
-            display     : block;
-            padding     : 0 5px 0 5px;
-            border-width: 0 0 1px 0 !important;
-            border-color: #c6d0ce;
-            border-style: solid;
-            height      : 20px;
-            text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
-        }
-        button {
-            height       : 20px;
-            padding      : 0 10px 0 10px;
-            border-width : 1px;
-            border-radius: 3px;
-            border-color : #c6d0ce;
-            background   : linear-gradient(to top, rgb(226, 226, 226), rgb(255,255,255));
-            text-shadow  : 1px 1px 1px rgba(255, 255, 255, 0.5);
+        div.lbl {
+            height     : 20px;
+            padding    : 0 10px 0 0;
+            text-align : right;
+            //text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
         }
     }
 }
