@@ -1,4 +1,4 @@
-QForms.inherit(EmployeesEmployeesfirst_nameController, TextBoxFieldController);
+QForms.inherits(EmployeesEmployeesfirst_nameController, TextBoxFieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function EmployeesEmployeesfirst_nameController() {

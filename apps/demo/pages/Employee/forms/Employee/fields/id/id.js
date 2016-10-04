@@ -1,4 +1,4 @@
-QForms.inherit(EmployeeEmployeeidController, LinkFieldController);
+QForms.inherits(EmployeeEmployeeidController, LinkFieldController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function EmployeeEmployeeidController() {
