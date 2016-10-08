@@ -1,31 +1,29 @@
-QForms.inherits(<%=page%><%=form%>Controller, <%=_class%>Controller);
+QForms.inherits(EmployeeEmployeeController, RowFormController);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=page%><%=form%>Controller() {
-    <%=page%><%=form%>Controller.super_.apply(this, arguments);
+function EmployeeEmployeeController() {
+    EmployeeEmployeeController.super_.apply(this, arguments);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%>Controller.prototype.init = function() {
-    <%=page%><%=form%>Controller.super_.prototype.init.call(this);
+EmployeeEmployeeController.prototype.init = function() {
+    EmployeeEmployeeController.super_.prototype.init.call(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%>Controller.prototype.deinit = function() {
-    <%=page%><%=form%>Controller.super_.prototype.deinit.call(this);
+EmployeeEmployeeController.prototype.deinit = function() {
+    EmployeeEmployeeController.super_.prototype.deinit.call(this);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+EmployeeEmployeeController.prototype.getCaption = function() {
+    console.log('EmployeeEmployeeController.prototype.getCaption', this.row);
+    return this.model.data.caption + ': ' + this.row.first_name + ' ' + this.row.last_name;
 };
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%>Controller.prototype.getCaption = function() {
-    // this.row  // for RowForm
-    return this.model.data.caption;
-};
-*/
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%>Controller.prototype.setRowStyle = function(bodyRow, row) {
+EmployeeEmployeeController.prototype.setRowStyle = function(bodyRow, row) {
     //var fieldView = this.fields.field.views[bodyRow.qKey];
     //if (row.column === 'value') {
     //    $(fieldView).css('color', 'red');
