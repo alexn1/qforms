@@ -19,7 +19,7 @@ describe('test02', function() {
             var appEditor = new qforms.ApplicationEditor(appFile);
             return appEditor.createPage({name: 'Page1', startup: 'true'});
         }).then(function(pageEditor) {
-            pageEditor.createForm2({name: 'Form1', class: 'TableForm'});
+            pageEditor.createForm({name: 'Form1', class: 'TableForm'});
         }).then(function (formEditor) {
             done();
         });
