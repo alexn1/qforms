@@ -17,7 +17,7 @@ describe('test02', function() {
             return qforms.ApplicationEditor.createAppFile(appFilePath, {name: 'Application1'});
         }).then(function(appFile) {
             var appEditor = new qforms.ApplicationEditor(appFile);
-            return appEditor.createPage2({name: 'Page1', startup: 'true'});
+            return appEditor.createPage({name: 'Page1', startup: 'true'});
         }).then(function(pageEditor) {
             pageEditor.createForm2({name: 'Form1', class: 'TableForm'});
         }).then(function (formEditor) {
