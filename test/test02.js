@@ -14,7 +14,7 @@ describe('test02', function() {
     });
     it('create new application', function(done) {
         qforms.helper.createDirIfNotExists(appFileDir).then(function() {
-            return qforms.ApplicationEditor.createAppFile2(appFilePath, {name: 'Application1'});
+            return qforms.ApplicationEditor.createAppFile(appFilePath, {name: 'Application1'});
         }).then(function(appFile) {
             var appEditor = new qforms.ApplicationEditor(appFile);
             return appEditor.createPage2({name: 'Page1', startup: 'true'});
