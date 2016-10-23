@@ -33,7 +33,7 @@ describe('test01', function() {
             return page.forms.Employee.dataSources.default.insert(context).then(function(_key) {
                 key = _key;
                 var row = page.forms.Employee.dataSources.default.getKeyValues(_key);
-                return application.databases.default.query2(context, 'select * from employee where id = {id}', row).then(function (rows) {
+                return application.databases.default.query(context, 'select * from employee where id = {id}', row).then(function (rows) {
                     should.exist(rows[0]);
                     rows[0].should.be.type('object').and.have.properties({
                         first_name: 'test a',
@@ -49,7 +49,7 @@ describe('test01', function() {
         application.getPage(context, 'Employee').then(function (page) {
             context.row = page.forms.Employee.dataSources.default.getKeyValues(key);
             return page.forms.Employee.dataSources.default.delete(context).then(function () {
-                return application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
+                return application.databases.default.query(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
                     should.not.exist(rows[0]);
                     done();
                 });
