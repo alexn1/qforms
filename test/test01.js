@@ -48,7 +48,7 @@ describe('test01', function() {
         var context = qforms.Application.createContext();
         application.getPage(context, 'Employee').then(function (page) {
             context.row = page.forms.Employee.dataSources.default.getKeyValues(key);
-            return page.forms.Employee.dataSources.default.delete2(context).then(function () {
+            return page.forms.Employee.dataSources.default.delete(context).then(function () {
                 return application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
                     should.not.exist(rows[0]);
                     done();
