@@ -13,7 +13,7 @@ describe('test02', function() {
         del('apps/test', done);
     });
     it('create new application', function(done) {
-        qforms.helper.createDirIfNotExists2(appFileDir).then(function() {
+        qforms.helper.createDirIfNotExists(appFileDir).then(function() {
             return qforms.ApplicationEditor.createAppFile2(appFilePath, {name: 'Application1'});
         }).then(function(appFile) {
             var appEditor = new qforms.ApplicationEditor(appFile);
