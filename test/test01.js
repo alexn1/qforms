@@ -29,7 +29,7 @@ describe('test01', function() {
                 last_name : 'test b'
             }
         });
-        application.getPage2(context, 'Employee').then(function(page) {
+        application.getPage(context, 'Employee').then(function(page) {
             return page.forms.Employee.dataSources.default.insert2(context).then(function(_key) {
                 key = _key;
                 var row = page.forms.Employee.dataSources.default.getKeyValues(_key);
@@ -46,7 +46,7 @@ describe('test01', function() {
     });
     it('delete row with RowForm', function(done) {
         var context = qforms.Application.createContext();
-        application.getPage2(context, 'Employee').then(function (page) {
+        application.getPage(context, 'Employee').then(function (page) {
             context.row = page.forms.Employee.dataSources.default.getKeyValues(key);
             return page.forms.Employee.dataSources.default.delete2(context).then(function () {
                 return application.databases.default.query2(context, 'select * from employee where id = {id}', context.row).then(function(rows) {
