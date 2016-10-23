@@ -11,7 +11,7 @@ describe('test01', function() {
     var key;
     before(function(done) {
         qforms.Application.create('apps/demo/Application1.json').then(function (_application) {
-            return _application.init2().then(function () {
+            return _application.init().then(function () {
                 application = _application;
                 done();
             });
