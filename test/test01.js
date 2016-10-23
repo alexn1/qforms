@@ -18,7 +18,7 @@ describe('test01', function() {
         });
     });
     after(function(done) {
-        application.deinit2().then(function () {
+        application.deinit().then(function () {
             done();
         });
     });
