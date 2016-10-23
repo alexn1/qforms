@@ -30,7 +30,7 @@ describe('test01', function() {
             }
         });
         application.getPage(context, 'Employee').then(function(page) {
-            return page.forms.Employee.dataSources.default.insert2(context).then(function(_key) {
+            return page.forms.Employee.dataSources.default.insert(context).then(function(_key) {
                 key = _key;
                 var row = page.forms.Employee.dataSources.default.getKeyValues(_key);
                 return application.databases.default.query2(context, 'select * from employee where id = {id}', row).then(function (rows) {
