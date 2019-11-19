@@ -8,35 +8,11 @@ var concat    = require('gulp-concat');
 var less      = require('gulp-less');
 
 var BUILD_PATH = path.join('./build');
-var LIB_PATH   = path.join(BUILD_PATH, 'lib');
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('root', function() {
-    return gulp.src([
-            './package.json'
-    ]).pipe(gulp.dest(BUILD_PATH));
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('lib', function() {
-    return gulp.src([
-        './lib/qforms.js',
-        './lib/server.js',
-        './lib/www.js'
-    ]).pipe(gulp.dest(LIB_PATH));
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('readme', function() {
-    return gulp.src(['./README.md', './LICENSE'])
-        .pipe(gulp.dest(path.join(BUILD_PATH)));
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('backend', function() {
-    return gulp.src('./lib/backend/**/*')
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend')));
-});
+const root   = require("./task/root");
+const lib    = require("./task/lib");
+const readme = require("./task/readme");
+const backend = require("./task/backend");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 gulp.task('frontend_common_class_js', function() {
@@ -135,11 +111,11 @@ gulp.task('frontend_viewer_class', gulp.series('frontend_viewer_class_js', 'fron
 gulp.task('frontend_viewer', gulp.series('frontend_viewer_class'));
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('frontend', gulp.series('frontend_common', 'frontend_editor', 'frontend_home', 'frontend_viewer'), function() {
+exports.frontend = gulp.series('frontend_common', 'frontend_editor', 'frontend_home', 'frontend_viewer', function() {
     return gulp.src('./lib/frontend/*.*')
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-gulp.task('default', gulp.series('readme', 'root', 'lib', 'backend', 'frontend'));
+
+
+module.exports.default = gulp.series(readme, root, lib, backend, exports.frontend);
