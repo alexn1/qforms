@@ -7,59 +7,124 @@
         body {
             margin: 0;
             font-family: monospace;
-            background-color: rgb(203, 219, 234);
+            background-color: rgb(234, 241, 247);
             /*font-size: small;*/
         }
-        input {
+        input, button, select {
             font-family: monospace;
+            outline: none;
         }
-        button {
-            font-family: monospace;
-        }
-        #grid {
+
+
+
+
+        .grid {
             display: grid;
+            grid-row-gap: 3px;
+            /*grid-column-gap: 3px;*/
+            margin: 10px;
             grid-template-columns: 150px 300px /*150px 300px*/ /*auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr*/;
             /*grid-template-rows   : 1fr 1fr 1fr;*/
-            grid-row-gap: 3px;
-            margin: 10px;
         }
-        #grid > div {
-            /*background-color: gold;*/
-            padding: 2px;
 
-            border-bottom: 1px dotted gray;
+        .grid > div.label {
+            /*border-bottom: 1px solid #aaa;*/
         }
-        #grid > input {
-            /*padding: 2px;*/
-            padding:2px;
-            margin:0;
-            border: 1px solid gray;
-            background-color: rgb(255, 239, 156);
+
+
+        .grid label {
+            padding: 2px;
+            /*display: block;*/
+            border-bottom: 1px solid #aaa;
         }
-        #grid > button {
+        .grid input {
+            padding: 2px;
+            margin: 0;
+            border: 1px solid #aaa;
+            /*background-color: rgb(255, 239, 156);*/
+            background-color: rgb(223, 236, 245);
+
+        }
+        .grid button {
             grid-column-start: 2;
+            background: linear-gradient(180deg, rgba(255,246,195,1) 0%, rgba(252,234,157,1) 100%);
         }
+
+        #sales {
+            grid-template-columns: 150px 200px 150px 200px;
+        }
+
+        h2 {
+            background: linear-gradient(180deg, rgba(206,222,237,1) 0%, rgba(174,196,219,1) 100%);
+            padding: 2px 10px 2px 10px;
+            margin: 0;
+            border-top: 1px solid rgb(203, 215, 227);
+            font-style: italic;
+
+        }
+
+        .toolbar {
+            background-color: rgb(207, 221, 232);
+            height: 30px;
+            border-top: 1px solid rgb(231, 235, 241);
+            border-bottom: 1px solid rgb(175, 188, 202);
+        }
+
+        input.date {
+            width: 80px;
+        }
+        label.disabled {
+            color: #999;
+        }
+
     </style>
 </head>
 <body>
-    <h2>Form1</h2>
-    <div id="grid">
-        <div>label1</div><input value="input1">
-        <div>label2</div><input value="input2">
-        <div>label3</div><input value="input3">
-        <div>label4</div><input value="input4">
-        <div>label5</div><input value="input5">
-        <div>label6</div><input value="input6">
-        <div>label7</div><input value="input7">
-        <div>label8</div><input value="input8">
-        <div>label9</div><input value="input9">
-        <div>label10</div><input value="input10">
-        <div>label11</div><input value="input11">
-        <div>label12</div><input value="input12">
-        <div>label13</div><input value="input13">
-        <div>label14</div><input value="input14">
-        <div>label15</div><input value="input15">
+
+<!--    <h2>Form1</h2>
+    <div class="toolbar"></div>
+    <div class="grid">
+        <label>label1</label>
+        <input value="input1">
+        <label>label2</label><input value="input2">
+        <label>label3</label><input value="input3">
+        <label>label4</label><input value="input4">
+        <label>label5</label><input value="input5">
+        <label>label6</label><input value="input6">
+        <label>label7</label><input value="input7">
+        <label>label8</label><input value="input8">
+        <label>label9</label><input value="input9">
+        <label>label10</label><input value="input10">
+        <label>label11</label><input value="input11">
+        <label>label12</label><input value="input12">
+        <label>label13</label><input value="input13">
+        <label>label14</label><input value="input14">
+        <label>label15</label><input value="input15">
         <button>button</button>
+    </div>-->
+
+    <h2>Display Internet Quotation 201203215: Overview</h2>
+    <div class="toolbar"></div>
+    <div class="grid" id="sales">
+        <label>Req. deliv.date</label><input value="26.08.2013" class="date">
+        <label>Deliver.Plant</label><input>
+        <label>Valid from</label><input value="24.02.2012" class="date">
+        <label>Valid to</label><input value="10.10.2013" class="date">
+        <label class="disabled">Complete dlv.</label><input type="checkbox">
+        <label>Total Weight</label><input value="27,280 KG">
+        <label style="grid-column-start: 3;">Pricing date</label><input value="24.02.2012">
+        <label>Total amount</label><input value="1.566,25">
+        <label>Doc. Currency</label><input value="USD/1,00000">
+        <label>Payment terms</label><input value="Y15D">
+        <label>Incoterms</label><input value="FCA/Shipping Point">
+        <label>Order reason</label>
+        <select style="grid-column-start: 2; grid-column-end: 5">
+            <option></option>
+            <option>purchase</option>
+        </select>
+        <label>Sales area</label><input style="grid-column-start: 2; grid-column-end: 5" value="US00/10/10 USA, Metso Minerals, Metso Minerals">
+
+
     </div>
 </body>
 </html>
