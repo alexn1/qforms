@@ -7,11 +7,12 @@ const minifyCss = require('gulp-minify-css');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_css() {
-    return gulp.src('./lib/frontend/editor/class/**/*.less')
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.less'))
         .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
@@ -20,26 +21,26 @@ function frontend_editor_class_css() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_ejs() {
-    return gulp.src('./lib/frontend/editor/class/**/*.ejs')
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.ejs'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_html() {
-    return gulp.src('./lib/frontend/editor/class/**/*.html')
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.html'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_js() {
-    return gulp.src('./lib/frontend/editor/class/**/*.js')
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.js'))
         .pipe(concat('all.js'))
         //.pipe(uglify())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
 function frontend_editor_lib() {
-    return gulp.src('./lib/frontend/editor/lib/**/*')
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/lib/**/*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/lib')));
 }
 

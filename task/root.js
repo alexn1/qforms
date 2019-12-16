@@ -1,9 +1,8 @@
 'use strict';
 
-const path = require('path');
 const gulp = require('gulp');
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function root() {

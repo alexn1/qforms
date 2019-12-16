@@ -3,16 +3,16 @@
 const path = require('path');
 const gulp = require('gulp');
 
-const BUILD_PATH = path.join('./build');
-var LIB_PATH   = path.join(BUILD_PATH, 'lib');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function lib() {
     return gulp.src([
-        './lib/qforms.js',
-        './lib/server.js',
-        './lib/www.js'
-    ]).pipe(gulp.dest(LIB_PATH));
+        path.join(SRC_PATH, 'qforms.js'),
+        path.join(SRC_PATH, 'server.js'),
+        path.join(SRC_PATH, 'www.js')
+    ]).pipe(gulp.dest(path.join(BUILD_PATH, 'lib')));
 }
 
 module.exports = lib;

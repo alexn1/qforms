@@ -3,11 +3,12 @@
 const path = require('path');
 const gulp = require('gulp');
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function backend() {
-    return gulp.src('./lib/backend/**/*')
+    return gulp.src(path.join(SRC_PATH, 'backend/**/*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend')));
 }
 

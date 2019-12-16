@@ -8,11 +8,12 @@ const frontend_editor = require("./frontend_editor");
 const frontend_home   = require("./frontend_home");
 const frontend_viewer = require("./frontend_viewer");
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_root() {
-    return gulp.src('./lib/frontend/*.*')
+    return gulp.src(path.join(SRC_PATH, 'frontend/*.*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 

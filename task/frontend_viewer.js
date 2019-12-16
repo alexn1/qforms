@@ -7,11 +7,12 @@ const minifyCss = require('gulp-minify-css');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_css() {
-    return gulp.src('./lib/frontend/viewer/class/**/*.less')
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.less'))
         .pipe(less())
         //.pipe(concat('all.css'))
         //.pipe(minifyCss())
@@ -20,13 +21,13 @@ function frontend_viewer_class_css() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_ejs() {
-    return gulp.src('./lib/frontend/viewer/class/**/*.ejs')
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.ejs'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_js() {
-    return gulp.src('./lib/frontend/viewer/class/**/*.js')
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.js'))
         .pipe(concat('all.js'))
         //.pipe(uglify())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));

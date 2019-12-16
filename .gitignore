@@ -5,3 +5,4 @@ lib/runtime/
 apps/*
 !apps/demo
 doc/todo.txt
+dist/

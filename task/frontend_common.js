@@ -7,11 +7,12 @@ const minifyCss = require('gulp-minify-css');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 
-const BUILD_PATH = path.join('./build');
+const BUILD_PATH = './build';
+const SRC_PATH   = "./lib";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_common_class_css() {
-    return gulp.src('./lib/frontend/common/class/**/*.less')
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/class/**/*.less'))
         .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
@@ -20,7 +21,7 @@ function frontend_common_class_css() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_common_class_js() {
-    return gulp.src('./lib/frontend/common/class/**/*.js')
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/class/**/*.js'))
         .pipe(concat('all.js'))
         //.pipe(uglify())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/class')));
@@ -28,13 +29,13 @@ function frontend_common_class_js() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_common_img() {
-    return gulp.src('./lib/frontend/common/img/**/*')
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/img/**/*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/img')));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_common_lib() {
-    return gulp.src('./lib/frontend/common/lib/**/*')
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/lib/**/*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/lib')));
 }
 
