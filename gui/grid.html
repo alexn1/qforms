@@ -7,12 +7,16 @@
         body {
             margin: 0;
             font-family: monospace;
-            background-color: rgb(234, 241, 247);
+            background-color: rgb(234, 241, 246);
             /*font-size: small;*/
         }
         input, button, select {
             font-family: monospace;
             outline: none;
+        }
+
+        input {
+            box-shadow: inset 1px 1px 2px #ccc;
         }
 
 
@@ -35,19 +39,21 @@
         .grid label {
             padding: 2px;
             /*display: block;*/
-            border-bottom: 1px solid #aaa;
+            border-bottom: 1px solid #bbb;
         }
         .grid input {
             padding: 2px;
             margin: 0;
             border: 1px solid #aaa;
-            /*background-color: rgb(255, 239, 156);*/
             background-color: rgb(223, 236, 245);
-
         }
         .grid button {
             grid-column-start: 2;
             background: linear-gradient(180deg, rgba(255,246,195,1) 0%, rgba(252,234,157,1) 100%);
+        }
+
+        #form1 {
+            grid-template-columns: 170px 100px 200px 150px 200px;
         }
 
         #sales {
@@ -70,61 +76,94 @@
             border-bottom: 1px solid rgb(175, 188, 202);
         }
 
+
         input.date {
-            width: 80px;
+            width: 85px;
         }
+
         label.disabled {
             color: #999;
         }
+        .tab {
+            margin-left: 2px;
+            padding: 2px;
+            float: left;
+            background-color: rgb(203, 221, 238);
+            cursor: pointer;
+            border: 1px solid rgb(169, 190, 212);
+            outline: 1px solid rgb(221, 233, 244);
+            outline-offset: -2px;
+        }
+
+        .panel {
+            clear: both;
+            background-color: rgb(223, 235, 245);
+            border: 1px solid rgb(147, 178, 208);
+
+            margin: 10px;
+            border-width: 4px 1px 1px 1px;
+        }
+
+        /*
+        .edit {
+            width: 180px;
+        }
+        */
 
     </style>
 </head>
 <body>
 
-<!--    <h2>Form1</h2>
-    <div class="toolbar"></div>
-    <div class="grid">
-        <label>label1</label>
-        <input value="input1">
-        <label>label2</label><input value="input2">
-        <label>label3</label><input value="input3">
-        <label>label4</label><input value="input4">
-        <label>label5</label><input value="input5">
-        <label>label6</label><input value="input6">
-        <label>label7</label><input value="input7">
-        <label>label8</label><input value="input8">
-        <label>label9</label><input value="input9">
-        <label>label10</label><input value="input10">
-        <label>label11</label><input value="input11">
-        <label>label12</label><input value="input12">
-        <label>label13</label><input value="input13">
-        <label>label14</label><input value="input14">
-        <label>label15</label><input value="input15">
-        <button>button</button>
-    </div>-->
+
+
+
 
     <h2>Display Internet Quotation 201203215: Overview</h2>
     <div class="toolbar"></div>
-    <div class="grid" id="sales">
-        <label>Req. deliv.date</label><input value="26.08.2013" class="date">
-        <label>Deliver.Plant</label><input>
-        <label>Valid from</label><input value="24.02.2012" class="date">
-        <label>Valid to</label><input value="10.10.2013" class="date">
-        <label class="disabled">Complete dlv.</label><input type="checkbox">
-        <label>Total Weight</label><input value="27,280 KG">
-        <label style="grid-column-start: 3;">Pricing date</label><input value="24.02.2012">
-        <label>Total amount</label><input value="1.566,25">
-        <label>Doc. Currency</label><input value="USD/1,00000">
-        <label>Payment terms</label><input value="Y15D">
-        <label>Incoterms</label><input value="FCA/Shipping Point">
-        <label>Order reason</label>
-        <select style="grid-column-start: 2; grid-column-end: 5">
-            <option></option>
-            <option>purchase</option>
-        </select>
-        <label>Sales area</label><input style="grid-column-start: 2; grid-column-end: 5" value="US00/10/10 USA, Metso Minerals, Metso Minerals">
+
+
+
+    <div class="grid" id="form1">
+        <label>Internet Quotation</label><input class="edit" value="201203615">
+        <label style="grid-column-start: 4">Net value</label><input value="1.566,25 USD" class="edit">
+        <label>Sold-To Party</label><input value="178890 Cleveland Brothers Equipment Co./ P.O. Box 2535 / HARRISB" class="edit" style="grid-column-start: 2; grid-column-end:6">
+        <label>Ship-To Party</label><input value="20015679 CLEVELAND BROTHERS / 5210 Paxton Street / Harrisburg PA" class="edit" style="grid-column-start: 2; grid-column-end:6">
+        <label>PO Number</label><input value="ISA-08/26/2013" class="edit">
+        <label style="grid-column-start: 4">PO date</label><input value="26.08.2013" class="edit">
+
+        <!--<button>button</button>-->
+    </div>
+
+    <!--<div>-->
+        <!--<div class="tab">Sales</div>-->
+        <!--<div class="tab">Item overview</div>-->
+    <!--</div>-->
+
+    <div class="panel">
+        <div class="grid" id="sales">
+            <label>Req. deliv.date</label><input value="26.08.2013" class="date">
+            <label>Deliver.Plant</label><input class="edit">
+            <label>Valid from</label><input value="24.02.2012" class="date">
+            <label>Valid to</label><input value="10.10.2013" class="date">
+            <label class="disabled">Complete dlv.</label><input type="checkbox">
+            <label>Total Weight</label><input value="27,280 KG" class="edit">
+            <label style="grid-column-start: 3;">Pricing date</label><input value="24.02.2012" class="edit">
+            <label>Total amount</label><input value="1.566,25" class="edit">
+            <label>Doc. Currency</label><input value="USD/1,00000" class="edit">
+            <label>Payment terms</label><input value="Y15D" class="edit">
+            <label>Incoterms</label><input value="FCA/Shipping Point" class="edit">
+            <label>Order reason</label>
+            <select style="grid-column-start: 2; grid-column-end: 5">
+                <option></option>
+                <option>purchase</option>
+            </select>
+            <label>Sales area</label><input style="grid-column-start: 2; grid-column-end: 5" value="US00/10/10 USA, Metso Minerals, Metso Minerals">
+        </div>
 
 
     </div>
+
+
+
 </body>
 </html>
