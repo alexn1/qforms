@@ -4,7 +4,7 @@ const path = require('path');
 const gulp = require('gulp');
 
 const BUILD_PATH = './build';
-const SRC_PATH   = "./lib";
+const SRC_PATH   = "./src";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function backend() {

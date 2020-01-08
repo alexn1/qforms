@@ -8,7 +8,7 @@ const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 
 const BUILD_PATH = './build';
-const SRC_PATH   = "./lib";
+const SRC_PATH   = "./src";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_css() {
