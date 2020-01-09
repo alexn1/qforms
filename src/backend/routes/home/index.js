@@ -22,6 +22,12 @@ module.exports = function(req, res, next) {
         });
     }
     if (req.method === 'POST') {
+        if (!req.body.folder) {
+            throw new Error("folder required: " + req.body.folder);
+        }
+        if (!req.body.name) {
+            throw new Error("name required: " + req.body.name);
+        }
         var appDirPath  = path.join(req.app.get('appsDirPath'), req.body.folder);
         var appFilePath = path.join(appDirPath,                 req.body.name + '.json');
         qforms.helper.createDirIfNotExists(appDirPath).then(function() {
