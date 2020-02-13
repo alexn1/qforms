@@ -13,12 +13,14 @@ util.inherits(Database, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.create = function(data, parent) {
+    console.log('Database.create');
     return Promise.resolve(new Database(data, parent));
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Database(data, parent) {
     var self = this;
+    console.log('new Database');
     Database.super_.call(self, data, parent);
     self.pool = null;
 }
@@ -41,6 +43,7 @@ Database.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype._getPool = function() {
     var self = this;
+    console.log('Database.prototype._getPool');
     if (self.pool === null) {
         //console.log('creating connection pool for: ' + database);
         self.pool = mysql.createPool({
@@ -59,6 +62,7 @@ Database.prototype._getPool = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getConnection = function(context) {
     var self = this;
+    console.log('Database.prototype.getConnection');
     return new Promise(function (resolve, reject) {
         if (context.connections[self.name] === undefined) {
             self._getPool().getConnection(function(err, cnn) {
@@ -78,6 +82,7 @@ Database.prototype.getConnection = function(context) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.query = function(context, query, params, nest) {
     var self = this;
+    console.log('Database.prototype.query');
     if (process.env.NODE_ENV === 'development') {
         console.log('Database.prototype.query', query, params);
     }
@@ -103,6 +108,7 @@ Database.prototype.query = function(context, query, params, nest) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype._getRows = function(result, fields) {
     var self = this;
+    console.log('Database.prototype._getRows');
     var fieldCount = {};
     for (var j = 0; j < fields.length; j++) {
         var f = fields[j];
@@ -124,4 +130,42 @@ Database.prototype._getRows = function(result, fields) {
         rows.push(row);
     }
     return rows;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.beginTransaction = function(cnn) {
+    console.log('Database.prototype.beginTransaction');
+    return new Promise(function (resolve, reject) {
+        cnn.beginTransaction(function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.commit = function (cnn) {
+    console.log('Database.prototype.commit');
+    return new Promise(function (resolve, reject) {
+        cnn.commit(function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.rollback = function (cnn, err) {
+    console.log('Database.prototype.rollback');
+    return new Promise(function (resolve, reject) {
+        cnn.rollback(function() {
+            reject(err);
+        });
+    });
 };

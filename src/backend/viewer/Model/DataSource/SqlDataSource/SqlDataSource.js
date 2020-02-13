@@ -5,7 +5,6 @@ module.exports = SqlDataSource;
 var util    = require('util');
 var path    = require('path');
 var sqlish  = require('sqlish');
-var mysql   = require('mysql');
 var _       = require('underscore');
 var Promise = require('bluebird');
 

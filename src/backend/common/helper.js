@@ -396,6 +396,7 @@ String.prototype.template = function (values) {
     });
 };
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.beginTransaction = function (cnn) {
     return new Promise(function (resolve, reject) {
@@ -408,7 +409,9 @@ helper.beginTransaction = function (cnn) {
         });
     });
 };
+*/
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.commit = function (cnn) {
     return new Promise(function (resolve, reject) {
@@ -421,7 +424,9 @@ helper.commit = function (cnn) {
         });
     });
 };
+*/
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.rollback = function (cnn, err) {
     return new Promise(function (resolve, reject) {
@@ -430,6 +435,7 @@ helper.rollback = function (cnn, err) {
         });
     });
 };
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 var entityMap = {

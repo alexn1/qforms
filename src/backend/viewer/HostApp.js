@@ -227,12 +227,12 @@ HostApp.prototype.update = function (req, res, next) {
     self.application.getPage(context, req.body.page).then(function (page) {
         var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         return dataSource.database.getConnection(context).then(function (cnn) {
-            return helper.beginTransaction(cnn).then(function () {
+            return dataSource.database.beginTransaction(cnn).then(function () {
                 return dataSource.update(context);
             }).then(function () {
-                return helper.commit(cnn);
+                return dataSource.database.commit(cnn);
             }).catch(function (err) {
-                return helper.rollback(cnn, err);
+                return dataSource.database.rollback(cnn, err);
             });
         });
     }).then(function () {
@@ -290,14 +290,14 @@ HostApp.prototype.insert = function (req, res, next) {
     self.application.getPage(context, req.body.page).then(function (page) {
         var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         return dataSource.database.getConnection(context).then(function(cnn) {
-            return helper.beginTransaction(cnn).then(function () {
+            return dataSource.database.beginTransaction(cnn).then(function () {
                 return dataSource.insert(context).then(function (key) {
-                    return helper.commit(cnn).then(function () {
+                    return dataSource.database.commit(cnn).then(function () {
                         return key;
                     });
                 });
             }).catch(function (err) {
-                return helper.rollback(cnn, err);
+                return dataSource.database.rollback(cnn, err);
             });
         });
     }).then(function (key) {
@@ -322,12 +322,12 @@ HostApp.prototype._delete = function (req, res, next) {
     self.application.getPage(context, req.body.page).then(function (page) {
         var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         return dataSource.database.getConnection(context).then(function (cnn) {
-            return helper.beginTransaction(cnn).then(function () {
+            return dataSource.database.beginTransaction(cnn).then(function () {
                 return dataSource.delete(context);
             }).then(function () {
-                helper.commit(cnn);
+                return dataSource.database.commit(cnn);
             }).catch(function (err) {
-                return helper.rollback(cnn, err);
+                return dataSource.database.rollback(cnn, err);
             });
         });
     }).then(function () {
