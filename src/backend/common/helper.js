@@ -7,7 +7,7 @@ var path     = require('path');
 var slash    = require('slash');
 var fs       = require('fs');
 var _        = require('underscore');
-var mysql    = require('mysql');
+//var mysql    = require('mysql');
 var Promise  = require('bluebird');
 
 function helper() {}
@@ -147,6 +147,7 @@ helper.currentDateTime = function() {
     return helper.currentDate() + ' ' + helper.currentTime();
 };
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.queryFormat = function(query, params) {
     params = params || {};
@@ -160,6 +161,7 @@ helper.queryFormat = function(query, params) {
     //console.log('real db sql: ' + sql);
     return sql;
 };
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.templateValue = function(value, params) {
