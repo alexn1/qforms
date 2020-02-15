@@ -1,0 +1,94 @@
+{
+    "@class": "Page",
+    "@attributes": {
+        "formatVer": "0.1",
+        "name": "Employees",
+        "caption": "Employees",
+        "width": "640",
+        "height": "480"
+    },
+    "dataSources": {},
+    "forms": {
+        "Employees": {
+            "@class": "TableForm",
+            "@attributes": {
+                "name": "Employees",
+                "caption": "Employees",
+                "editMethod": "form",
+                "itemEditPage": "Employee",
+                "itemCreatePage": "",
+                "newRowMode": "editform",
+                "deleteRowMode": "enabled",
+                "refreshButton": "true"
+            },
+            "dataSources": {
+                "default": {
+                    "@class": "SqlDataSource",
+                    "@attributes": {
+                        "name": "default",
+                        "database": "default",
+                        "table": "employee",
+                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom `employee`",
+                        "limit": "",
+                        "countQuery": "",
+                        "insertNewKey": "false",
+                        "dumpFirstRowToParams": "false"
+                    },
+                    "keyColumns": {
+                        "id": {
+                            "@class": "KeyColumn",
+                            "@attributes": {
+                                "name": "id"
+                            }
+                        }
+                    }
+                }
+            },
+            "fields": {
+                "id": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "id",
+                        "caption": "ID",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "column": "id",
+                        "readOnly": "true",
+                        "notNull": "false",
+                        "align": "left"
+                    }
+                },
+                "first_name": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "first_name",
+                        "caption": "First Name",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "column": "first_name",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "align": "left"
+                    }
+                },
+                "last_name": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "last_name",
+                        "caption": "Last Name",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "column": "last_name",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "align": "left"
+                    }
+                }
+            },
+            "controls": {}
+        }
+    }
+}

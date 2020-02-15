@@ -1,0 +1,70 @@
+{
+    "@class": "Application",
+    "@attributes": {
+        "formatVer": "0.1",
+        "name": "Application1",
+        "caption": "Application1",
+        "authentication": "false",
+        "user": "admin",
+        "password": "admin",
+        "lang": "en"
+    },
+    "databases": {
+        "default": {
+            "@class": "MySqlDatabase",
+            "@attributes": {
+                "name": "default"
+            },
+            "params": {
+                "host": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "localhost"
+                    }
+                },
+                "database": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "demo"
+                    }
+                },
+                "user": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "demo"
+                    }
+                },
+                "password": {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "123qwe"
+                    }
+                }
+            }
+        }
+    },
+    "pageLinks": {
+        "Employees": {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Employees",
+                "fileName": "pages/Employees/Employees.json",
+                "menu": "Pages",
+                "startup": "true"
+            }
+        },
+        "Employee": {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Employee",
+                "fileName": "pages/Employee/Employee.json",
+                "menu": "",
+                "startup": "false"
+            }
+        }
+    }
+}
