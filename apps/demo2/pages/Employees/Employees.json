@@ -28,7 +28,7 @@
                         "name": "default",
                         "database": "default",
                         "table": "employee",
-                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom `employee`",
+                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom employee",
                         "limit": "",
                         "countQuery": "",
                         "insertNewKey": "false",

@@ -55,7 +55,7 @@ MySqlDatabase.prototype._getPool = function() {
             queryFormat: MySqlDatabase.queryFormat
         });
     }
-    //console.log('mysql pool connections count: ' + this.pool._allConnections.length);
+    //console.log('pool connections count: ' + this.pool._allConnections.length);
     return self.pool;
 };
 

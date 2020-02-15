@@ -11,7 +11,7 @@
     },
     "databases": {
         "default": {
-            "@class": "MySqlDatabase",
+            "@class": "PostgreSqlDatabase",
             "@attributes": {
                 "name": "default"
             },
@@ -34,14 +34,14 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "user",
-                        "value": "demo"
+                        "value": "postgres"
                     }
                 },
                 "password": {
                     "@class": "Param",
                     "@attributes": {
                         "name": "password",
-                        "value": "123qwe"
+                        "value": "example"
                     }
                 }
             }

@@ -47,6 +47,7 @@ module.exports.Control                           = require('./backend/viewer/Mod
 module.exports.ButtonControl                     = require('./backend/viewer/Model/Control/ButtonControl/ButtonControl');
 module.exports.Database                          = require('./backend/viewer/Model/Database/Database');
 module.exports.MySqlDatabase                     = require('./backend/viewer/Model/Database/MySqlDatabase/MySqlDatabase');
+module.exports.PostgreSqlDatabase                = require('./backend/viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 module.exports.DataSource                        = require('./backend/viewer/Model/DataSource/DataSource');
 module.exports.SqlDataSource                     = require('./backend/viewer/Model/DataSource/SqlDataSource/SqlDataSource');
 module.exports.Field                             = require('./backend/viewer/Model/Field/Field');
