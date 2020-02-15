@@ -71,12 +71,17 @@ PostgreSqlDatabase.prototype.getConnection = function(context) {
 PostgreSqlDatabase.prototype.query = function(context, query, params, nest) {
     var self = this;
     console.log('PostgreSqlDatabase.prototype.query');
-    if (process.env.NODE_ENV === 'development') {
-        console.log('PostgreSqlDatabase.prototype.query', query, params);
-    }
+    console.log('query:', query);
+    console.log('params:', params);
+    // if (process.env.NODE_ENV === 'development') {
+    //     console.log('PostgreSqlDatabase.prototype.query', query, params);
+    // }
     nest = (nest !== undefined) ? nest : true;
     return self.getConnection(context).then(function (cnn) {
-        return cnn.query(query).then(function (result) {
+        const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
+        console.log('sql:', sql);
+        console.log('values:', values);
+        return cnn.query(sql, values).then(function (result) {
             return result.rows;
         });
     });
@@ -101,4 +106,19 @@ PostgreSqlDatabase.prototype.rollback = function (cnn, err) {
     console.log('PostgreSqlDatabase.prototype.rollback');
     return Promise.try(function () {
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PostgreSqlDatabase.formatQuery = function (query, params) {
+    console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
+    console.log('params:', params);
+    const keys = Object.keys(params);
+    const values = keys.map(key => params[key]);
+    const sql =  query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
+        if (keys.indexOf(name) > -1) {
+            return `$${keys.indexOf(name) + 1}`;
+        }
+        return `{${name}}`;
+    });
+    return {sql, values};
 };

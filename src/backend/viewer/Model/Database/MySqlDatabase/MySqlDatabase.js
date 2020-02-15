@@ -6,7 +6,6 @@ var util    = require('util');
 var Promise = require('bluebird');
 var mysql   = require('mysql');
 
-var qforms    = require('../../../../../qforms');
 var Database  = require('../Database');
 
 util.inherits(MySqlDatabase, Database);
@@ -89,7 +88,7 @@ MySqlDatabase.prototype.query = function(context, query, params, nest) {
     nest = (nest !== undefined) ? nest : true;
     return self.getConnection(context).then(function (cnn) {
         return new Promise(function (resolve, reject) {
-            cnn.query({sql: query, typeCast: qforms.helper.typeCast, nestTables: nest}, params, function(err, result, fields) {
+            cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, function(err, result, fields) {
                 if (err) {
                     reject(err);
                 } else {
@@ -182,4 +181,18 @@ MySqlDatabase.queryFormat = function(query, params) {
     });
     //console.log('real db sql: ' + sql);
     return sql;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+MySqlDatabase.typeCast = function(field, next) {
+    if (
+        field.type === 'DATE'      ||
+        field.type === 'DATETIME'  ||
+        field.type === 'TIME'      ||
+        field.type === 'TIMESTAMP'
+    ) {
+        return field.string();
+    } else {
+        return next();
+    }
 };

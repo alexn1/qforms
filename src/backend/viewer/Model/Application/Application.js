@@ -259,10 +259,11 @@ Application.prototype.createContext = Application.createContext =  function(cont
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.destroyContext = Application.destroyContext = function(context) {
     var self = this;
-    for (var name in context.connections) {
+    console.log('Application.prototype.destroyContext');
+    /*for (var name in context.connections) {
         //console.log('release connection: ' + name);
         context.connections[name].release();
-    }
+    }*/
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

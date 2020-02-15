@@ -232,6 +232,7 @@ HostApp.prototype.update = function (req, res, next) {
             }).then(function () {
                 return dataSource.database.commit(cnn);
             }).catch(function (err) {
+                console.error(err);
                 return dataSource.database.rollback(cnn, err);
             });
         });
@@ -297,6 +298,7 @@ HostApp.prototype.insert = function (req, res, next) {
                     });
                 });
             }).catch(function (err) {
+                console.error(err);
                 return dataSource.database.rollback(cnn, err);
             });
         });
@@ -327,6 +329,7 @@ HostApp.prototype._delete = function (req, res, next) {
             }).then(function () {
                 return dataSource.database.commit(cnn);
             }).catch(function (err) {
+                console.error(err);
                 return dataSource.database.rollback(cnn, err);
             });
         });
