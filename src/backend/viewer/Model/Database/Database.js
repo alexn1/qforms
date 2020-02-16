@@ -50,3 +50,8 @@ Database.prototype.commit = function (cnn) {
 Database.prototype.rollback = function (cnn, err) {
     throw new Error('Database.prototype.rollback not implemented');
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.desc = function(context, table) {
+    throw new Error('Database.prototype.desc not implemented');
+};

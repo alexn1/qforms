@@ -126,3 +126,25 @@ PostgreSqlDatabase.formatQuery = function (query, params) {
     });
     return {sql, values};
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PostgreSqlDatabase.prototype.desc = function(context, table) {
+    var self = this;
+    console.log('PostgreSqlDatabase.prototype.desc', table);
+    return Promise.try(function () {
+        var desc = {};
+        var aiFieldName = 'id';
+        var query = `select column_name from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}';`;
+        return self.query(context, query, null, true).then(function(rows) {
+            rows.forEach(function(info) {
+                desc[info.column_name] = info;
+                // if (info.Extra === 'auto_increment') {
+                //     aiFieldName = info.Field;
+                // }
+            });
+            console.log('desc:', desc);
+            console.log('aiFieldName:', aiFieldName);
+            return [desc, aiFieldName];
+        });
+    });
+};
