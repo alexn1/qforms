@@ -4,7 +4,7 @@ module.exports = Database;
 
 var util    = require('util');
 var Promise = require('bluebird');
-var sqlish  = require('sqlish');
+//var sqlish  = require('sqlish');
 
 var Model  = require('../Model');
 
@@ -82,4 +82,18 @@ Database.prototype.getInsertQuery = function (tableName, values) {
     console.log('myQuery:', myQuery);
 
     return myQuery;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.getDeleteQuery = function (tableName, rowKeyValues) {
+    console.log('Database.prototype.getDeleteQuery');
+    //var query = new sqlish.Sqlish().deleteFrom(tableName).where(rowKeyValues).toString();
+    //console.log('query:', query);
+
+    const columns = Object.keys(rowKeyValues);
+    const whereString = columns.map(column => `${column} = {${column}}`).join(' and ');
+    var query2 = `delete from ${tableName} where ${whereString}`;
+    console.log('query2:', query2);
+
+    return query2;
 };

@@ -4,7 +4,7 @@ module.exports = SqlDataSource;
 
 var util    = require('util');
 var path    = require('path');
-var sqlish  = require('sqlish');
+//var sqlish  = require('sqlish');
 var _       = require('underscore');
 var Promise = require('bluebird');
 
@@ -187,7 +187,6 @@ SqlDataSource.prototype.insert = function(context) {
                 buffers[name] = buffer;
             });
         }).then(function () {
-            //var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, _row).toString().replace(/"{/g,'{').replace(/}"/g,'}');
             var query = self.database.getInsertQuery(self.data['@attributes'].table, _row);
             return self.query(context, query,  row, false).then(function(result) {
                 var key = JSON.stringify([result.insertId]);
@@ -208,7 +207,9 @@ SqlDataSource.prototype.delete = function(context) {
             }));
         }
         var row = context.row;
-        var query = new sqlish.Sqlish().deleteFrom(self.data['@attributes'].table).where(self.getRowKeyValues(row)).toString();
-        return self.query(context, query, null, false);
+        //var query = new sqlish.Sqlish().deleteFrom(self.data['@attributes'].table).where(self.getRowKeyValues(row)).toString();
+        const rowKeyValues = self.getRowKeyValues(row);
+        var query = self.database.getDeleteQuery(self.data['@attributes'].table, rowKeyValues);
+        return self.query(context, query, row, false);
     });
 };
