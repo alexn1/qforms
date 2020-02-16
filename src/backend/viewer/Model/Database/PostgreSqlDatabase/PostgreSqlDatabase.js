@@ -105,6 +105,7 @@ PostgreSqlDatabase.prototype.commit = function (cnn) {
 PostgreSqlDatabase.prototype.rollback = function (cnn, err) {
     console.log('PostgreSqlDatabase.prototype.rollback');
     return Promise.try(function () {
+        throw err;
     });
 };
 
@@ -112,6 +113,9 @@ PostgreSqlDatabase.prototype.rollback = function (cnn, err) {
 PostgreSqlDatabase.formatQuery = function (query, params) {
     console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
     console.log('params:', params);
+    if (!params) {
+        return {sql: query, values: null};
+    }
     const keys = Object.keys(params);
     const values = keys.map(key => params[key]);
     const sql =  query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
