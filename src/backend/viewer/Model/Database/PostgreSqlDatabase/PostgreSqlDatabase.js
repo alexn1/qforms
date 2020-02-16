@@ -148,3 +148,12 @@ PostgreSqlDatabase.prototype.desc = function(context, table) {
         });
     });
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PostgreSqlDatabase.prototype.valueToString = function (value) {
+    if (typeof value === 'string') {
+        return `'${value}'`;
+    } else {
+        return value;
+    }
+};
