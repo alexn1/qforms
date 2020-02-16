@@ -5,7 +5,6 @@ module.exports = MySqlDatabase;
 var util    = require('util');
 var Promise = require('bluebird');
 var mysql   = require('mysql');
-var sqlish  = require('sqlish');
 
 var Database  = require('../Database');
 
