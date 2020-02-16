@@ -196,3 +196,25 @@ MySqlDatabase.typeCast = function(field, next) {
         return next();
     }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+MySqlDatabase.prototype.desc = function(context, table) {
+    var self = this;
+    console.log('MySqlDatabase.prototype.desc', table);
+    return Promise.try(function () {
+        var desc = {};
+        var aiFieldName;
+        var query = 'desc `{table}`'.replace('{table}', table);
+        return self.query(context, query, null, true).then(function(rows) {
+            rows.forEach(function(info) {
+                desc[info.Field] = info;
+                if (info.Extra === 'auto_increment') {
+                    aiFieldName = info.Field;
+                }
+            });
+            console.log('desc:', desc);
+            console.log('aiFieldName:', aiFieldName);
+            return [desc, aiFieldName];
+        });
+    });
+};

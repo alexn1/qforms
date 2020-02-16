@@ -62,17 +62,9 @@ SqlDataSource.prototype.query = function(context, query, params, select) {
 SqlDataSource.prototype._desc = function(context) {
     var self = this;
     console.log('SqlDataSource.prototype._desc', self.data['@attributes'].table);
-    return Promise.try(function () {
-        self.desc = {};
-        var query = 'desc `{table}`'.replace('{table}', self.data['@attributes'].table);
-        return self.query(context, query, null, true).then(function(rows) {
-            rows.forEach(function(info) {
-                self.desc[info.Field] = info;
-                if (info.Extra === 'auto_increment') {
-                    self.aiFieldName = info.Field;
-                }
-            });
-        });
+    return this.database.desc(context, self.data['@attributes'].table).then(function (arr) {
+        self.desc = arr[0];
+        self.aiFieldName = arr[1];
     });
 };
 
