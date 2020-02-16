@@ -4,6 +4,7 @@ module.exports = Database;
 
 var util    = require('util');
 var Promise = require('bluebird');
+var sqlish  = require('sqlish');
 
 var Model  = require('../Model');
 
@@ -60,7 +61,25 @@ Database.prototype.desc = function(context, table) {
 Database.prototype.getUpdateQuery = function(tableName, values, where) {
     console.log('Database.prototype.getUpdateQuery', tableName);
     var self = this;
-    var valuesString = Object.keys(values).map(name => `${name} = {${name}}`).join(', ');
-    var whereString = Object.keys(where).map(name => `${name} = {${name}}`).join(' and ');
+    var columns = Object.keys(values);
+    var valuesString = columns.map(name => `${name} = {${name}}`).join(', ');
+    var whereString = columns.map(name => `${name} = {${name}}`).join(' and ');
     return `UPDATE ${tableName} set ${valuesString} where ${whereString}`;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.getInsertQuery = function (tableName, values) {
+    console.log('Database.prototype.getInsertQuery');
+    //const query = new sqlish.Sqlish().insert(tableName, values).toString();
+    //console.log('query:', query);
+    //const query2 = query.replace(/"{/g,'{').replace(/}"/g,'}');
+    //console.log('query2:', query2);
+
+    var columns = Object.keys(values);
+    const columnsString = columns.join(', ');
+    const valuesString = columns.map(column => `{${column}}`).join(', ');
+    const myQuery = `insert into ${tableName}(${columnsString}) values (${valuesString})`;
+    console.log('myQuery:', myQuery);
+
+    return myQuery;
 };

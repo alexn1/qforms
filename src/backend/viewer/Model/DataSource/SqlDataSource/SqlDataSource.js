@@ -65,6 +65,8 @@ SqlDataSource.prototype._desc = function(context) {
     return this.database.desc(context, self.data['@attributes'].table).then(function (arr) {
         self.desc = arr[0];
         self.aiFieldName = arr[1];
+        console.log('self.desc:', self.desc);
+        console.log('self.aiFieldName:', self.aiFieldName);
     });
 };
 
@@ -161,7 +163,7 @@ SqlDataSource.prototype.insert = function(context) {
         }
     }).then(function () {
         if (!self.desc) {
-            self._desc(context);
+            return self._desc(context);
         }
     }).then(function () {
         var row = context.row;
@@ -177,6 +179,7 @@ SqlDataSource.prototype.insert = function(context) {
                 _row[column] = row[column];
             }
         }
+        console.log('_row:', _row);
         var buffers = {};
         return Promise.each(Object.keys(files), function (name) {
             var file = files[name];
@@ -184,8 +187,9 @@ SqlDataSource.prototype.insert = function(context) {
                 buffers[name] = buffer;
             });
         }).then(function () {
-            var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, _row).toString().replace(/"{/g,'{').replace(/}"/g,'}');
-            return self.query(context, query,  buffers, false).then(function(result) {
+            //var query = new sqlish.Sqlish().insert(self.data['@attributes'].table, _row).toString().replace(/"{/g,'{').replace(/}"/g,'}');
+            var query = self.database.getInsertQuery(self.data['@attributes'].table, _row);
+            return self.query(context, query,  row, false).then(function(result) {
                 var key = JSON.stringify([result.insertId]);
                 return key;
             });
@@ -204,10 +208,7 @@ SqlDataSource.prototype.delete = function(context) {
             }));
         }
         var row = context.row;
-        var query = new sqlish.Sqlish()
-            .deleteFrom(self.data['@attributes'].table)
-            .where(self.getRowKeyValues(row))
-            .toString();
+        var query = new sqlish.Sqlish().deleteFrom(self.data['@attributes'].table).where(self.getRowKeyValues(row)).toString();
         return self.query(context, query, null, false);
     });
 };

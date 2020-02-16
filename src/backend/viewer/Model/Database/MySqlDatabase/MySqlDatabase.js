@@ -212,8 +212,8 @@ MySqlDatabase.prototype.desc = function(context, table) {
                     aiFieldName = info.Field;
                 }
             });
-            console.log('desc:', desc);
-            console.log('aiFieldName:', aiFieldName);
+            //console.log('desc:', desc);
+            //console.log('aiFieldName:', aiFieldName);
             return [desc, aiFieldName];
         });
     });
