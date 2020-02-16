@@ -57,11 +57,6 @@ Database.prototype.desc = function(context, table) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Database.prototype.getUpdateQuery = function(table, values, where) {
-    throw new Error('Database.prototype.getUpdateQuery not implemented');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getUpdateQuery = function(tableName, values, where) {
     console.log('Database.prototype.getUpdateQuery', tableName);
     var self = this;
