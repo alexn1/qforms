@@ -135,33 +135,12 @@ SqlDataSource.prototype.update = function(context) {
         var where = self.getRowKeyValues(row);
         //console.log('update values:', values);
         //console.log('update where:', where);
-        var query = new sqlish.Sqlish()
-            .update(self.data['@attributes'].table)
-            .set(values)
-            .where(where)
-            .toString();
-
-        // fixed update with multiple key columns
-        if (Object.keys(where).length > 1) {
-            query = SqlDataSource.createUpdateQuery(self.data['@attributes'].table, values, where);
-        }
+        var query = self.database.getUpdateQuery(self.data['@attributes'].table, values, where);
         return self.query(context, query, null, false);
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSource.createUpdateQuery = function (tableName, values, where) {
-    var valuesString = Object.keys(values).map(function (name) {
-        return '{name} = {value}'.replace('{name}', name).replace('{value}', JSON.stringify(values[name]));
-    }).join(', ');
-    var whereString = Object.keys(where).map(function (name) {
-        return '{name} = {value}'.replace('{name}', name).replace('{value}', JSON.stringify(where[name]));
-    }).join(' and ');
-    return 'UPDATE {tableName} set {valuesString} where {whereString}'
-        .replace('{tableName}'   , tableName)
-        .replace('{valuesString}', valuesString)
-        .replace('{whereString}' , whereString);
-};
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSource.prototype.getBuffer = function(context, file) {

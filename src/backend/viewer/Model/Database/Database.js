@@ -55,3 +55,29 @@ Database.prototype.rollback = function (cnn, err) {
 Database.prototype.desc = function(context, table) {
     throw new Error('Database.prototype.desc not implemented');
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.getUpdateQuery = function(table, values, where) {
+    throw new Error('Database.prototype.getUpdateQuery not implemented');
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.getUpdateQuery = function(tableName, values, where) {
+    console.log('Database.prototype.getUpdateQuery', tableName);
+    var self = this;
+    var valuesString = Object.keys(values).map(function (name) {
+        return '{name} = {value}'.replace('{name}', name).replace('{value}', self.valueToString(values[name]));
+    }).join(', ');
+    var whereString = Object.keys(where).map(function (name) {
+        return '{name} = {value}'.replace('{name}', name).replace('{value}', self.valueToString(where[name]));
+    }).join(' and ');
+    return 'UPDATE {tableName} set {valuesString} where {whereString}'
+        .replace('{tableName}'   , tableName)
+        .replace('{valuesString}', valuesString)
+        .replace('{whereString}' , whereString);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Database.prototype.valueToString = function (value) {
+    throw new Error('Database.prototype.valueToString not implemented');
+};
