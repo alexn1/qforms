@@ -218,12 +218,3 @@ MySqlDatabase.prototype.desc = function(context, table) {
         });
     });
 };
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-MySqlDatabase.prototype.valueToString = function (value) {
-    if (typeof value === 'string') {
-        return `"${value}"`;
-    } else {
-        return value;
-    }
-};

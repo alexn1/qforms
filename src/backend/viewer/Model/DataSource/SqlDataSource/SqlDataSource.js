@@ -136,7 +136,7 @@ SqlDataSource.prototype.update = function(context) {
         //console.log('update values:', values);
         //console.log('update where:', where);
         var query = self.database.getUpdateQuery(self.data['@attributes'].table, values, where);
-        return self.query(context, query, null, false);
+        return self.query(context, query, row, false);
     });
 };
 
