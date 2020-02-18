@@ -116,7 +116,15 @@ PostgreSqlDatabase.formatQuery = function (query, params) {
     if (!params) {
         return {sql: query, values: null};
     }
-    const keys = Object.keys(params);
+    const items = query.match(/\{([\w\.@]+)\}/g);
+    if (!items) {
+        return {sql: query, values: null};
+    }
+    // console.log('items:', items);
+    const usedValues = items.map(str => str.substr(1, str.length-2));
+    // console.log('usedValues:', usedValues);
+    const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
+    // console.log('keys:', keys);
     const values = keys.map(key => params[key]);
     const sql =  query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
         if (keys.indexOf(name) > -1) {
