@@ -82,9 +82,23 @@ PostgreSqlDatabase.prototype.query = function(context, query, params, nest) {
         console.log('sql:', sql);
         console.log('values:', values);
         return cnn.query(sql, values).then(function (result) {
+            for (let i = 0; i < result.rows.length; i++) {
+                PostgreSqlDatabase.checkRow(result.rows[i]);
+            }
+            // console.log('rows:', result.rows);
             return result.rows;
         });
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+PostgreSqlDatabase.checkRow = function (row) {
+    // console.log('PostgreSqlDatabase.checkRow', row);
+    for (const column in row) {
+        if (row[column] !== null && /*!Array.isArray(row[column]) &&*/ typeof row[column] === 'object' && !(row[column] instanceof Date)) {
+            row[column] = JSON.stringify(row[column], null, 4);
+        }
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
