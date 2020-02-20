@@ -61,10 +61,11 @@ Database.prototype.desc = function(context, table) {
 Database.prototype.getUpdateQuery = function(tableName, values, where) {
     console.log('Database.prototype.getUpdateQuery', tableName);
     var self = this;
-    var columns = Object.keys(values);
-    var valuesString = columns.map(name => `${name} = {${name}}`).join(', ');
-    var whereString = columns.map(name => `${name} = {${name}}`).join(' and ');
-    return `UPDATE ${tableName} set ${valuesString} where ${whereString}`;
+    var valueKeys = Object.keys(values);
+    var whereKeys = Object.keys(where);
+    var valuesString = valueKeys.map(name => `${name} = {${name}}`).join(', ');
+    var whereString = whereKeys.map(name => `${name} = {${name}}`).join(' and ');
+    return `update ${tableName} set ${valuesString} where ${whereString}`;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
