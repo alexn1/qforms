@@ -10,7 +10,7 @@ var pkg    = require('../package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 main(); function main() {
-    console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+    console.log('www.main');
     process.on('message', function (message) {
         if (message === 'shutdown') {
             shutdown().then(function () {
@@ -46,13 +46,8 @@ main(); function main() {
         if (process.send) {
             process.send('online');
         }
-        console.log('QForms server v{version} listening on http://{host}:{port}, env: {env}, applications from {appsDirPath}'.template({
-            version    : pkg.version,
-            host       : host,
-            port       : port,
-            appsDirPath: path.resolve(server.get('appsDirPath')),
-            env        : server.get('env')
-        }));
+        const appsDirPath = path.resolve(server.get('appsDirPath'));
+        console.log(`QForms server v${pkg.version} listening on http://${host}:${port}, process.env.NODE_ENV: ${server.get('env')}, applications from ${appsDirPath}`);
     });
 }
 

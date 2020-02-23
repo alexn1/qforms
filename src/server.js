@@ -15,20 +15,19 @@ var server = module.exports = express();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 initExpressServer(server); function initExpressServer(server) {
-    //console.log('initExpressServer');
+    console.log('server.initExpressServer');
     var engineDirPath  = __dirname;
     var backendDirPath = path.join(engineDirPath, 'backend');
 
     // environment
-    server.set('appsDirPath', path.join(helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath));
-    if (!fs.existsSync(server.get('appsDirPath'))) {
-        console.log("Application folder '{appsDirPath}' doesn't exist".template({
-            appsDirPath: path.resolve(server.get('appsDirPath'))
-        }));
+    const appsDirPath = helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath;
+    if (!fs.existsSync(appsDirPath)) {
+        console.error(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`);
         process.exit(1);
     }
 
     // vars
+    server.set('appsDirPath', appsDirPath);
     server.set('version'        , pkg.version);
     server.set('handleException', helper.getCommandLineParams().handleException || true);
     server.set('view engine'    , 'ejs');
