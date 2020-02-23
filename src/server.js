@@ -1,5 +1,5 @@
 'use strict';
-
+console.log('server.js');
 var express    = require('express');
 var path       = require('path');
 var fs         = require('fs');
@@ -12,6 +12,13 @@ var helper    = require('./backend/common/helper');
 var multipart = require('./backend/common/multipart');
 
 var server = module.exports = express();
+
+// routes
+const home    = require('./backend/routes/home');
+const viewer  = require('./backend/routes/viewer');
+var editor    = require('./backend/routes/editor');
+var file      = require('./backend/routes/viewer/file');
+var error     = require('./backend/routes/error');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 initExpressServer(server); function initExpressServer(server) {
@@ -69,46 +76,22 @@ initExpressServer(server); function initExpressServer(server) {
     }));
 
 
-    // routes
-    var home   = require(path.join(backendDirPath, 'routes/home'));
-    var viewer = require(path.join(backendDirPath, 'routes/viewer'));
-    var editor = require(path.join(backendDirPath, 'routes/editor'));
-    var file   = require(path.join(backendDirPath, 'routes/viewer/file'));
-    var error  = require(path.join(backendDirPath, 'routes/error'));
-
     // home
     server.get('/' , home);
     server.post('/', home);
 
     // view
     server.get('/view/:appDirName/:appFileName/' , viewer);
-    server.get('/view/:appDirName/:appFileName/*', function (req, res, next) {
-        file(req, res, function () {
-            //console.log('file not found: ', req.originalUrl);
-            var uri = req.originalUrl.replace('/view/' + req.params.appDirName + '/' + req.params.appFileName, '');
-            var filePath = path.join(server.get('public'), uri);
-            res.sendFile(filePath);
-        });
-    });
+    server.get('/view/:appDirName/:appFileName/*', viewer_file);
     server.post('/view/:appDirName/:appFileName/', viewer);
 
     // editor
     server.get('/edit/:appDirName/:appFileName/' , editor);
-    server.get('/edit/:appDirName/:appFileName/*', function (req, res, next) {
-        file(req, res, function () {
-            //console.log('file not found: ', req.originalUrl);
-            var uri = req.originalUrl.replace('/edit/' + req.params.appDirName + '/' + req.params.appFileName, '');
-            var filePath = path.join(server.get('public'), uri);
-            res.sendFile(filePath);
-        });
-    });
+    server.get('/edit/:appDirName/:appFileName/*', editor_file);
     server.post('/edit/:appDirName/:appFileName/', editor);
 
     // /favicon.ico
-    server.get('/favicon.ico', function (req, res, next) {
-        console.log('/favicon.ico');
-        res.end();
-    });
+    server.get('/favicon.ico', favicon);
     server.use(express.static(server.get('public')));
 
     // catch 404 and forward to error handler
@@ -118,4 +101,32 @@ initExpressServer(server); function initExpressServer(server) {
     // runtime & temp
     helper.createDirIfNotExistsSync(server.get('runtime'));
     helper.createDirIfNotExistsSync(server.get('temp'));
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function viewer_file(req, res, next) {
+    file(req, res, function () {
+        //console.log('file not found: ', req.originalUrl);
+        const pth = `/view/${req.params.appDirName}/${req.params.appFileName}`;
+        var uri = req.originalUrl.replace(pth, '');
+        var filePath = path.join(server.get('public'), uri);
+        res.sendFile(filePath);
+    });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function editor_file(req, res, next) {
+    file(req, res, function () {
+        //console.log('file not found: ', req.originalUrl);
+        const pth = `/edit/${req.params.appDirName}/${req.params.appFileName}`;
+        var uri = req.originalUrl.replace(pth, '');
+        var filePath = path.join(server.get('public'), uri);
+        res.sendFile(filePath);
+    });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function favicon(req, res, next) {
+    console.log('/favicon.ico');
+    res.end();
 }

@@ -1,5 +1,5 @@
 'use strict';
-
+console.log('www.js');
 var http    = require('http');
 var path    = require('path');
 var Promise = require('bluebird');
