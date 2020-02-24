@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = Model;
+
 
 var path    = require('path');
 var fs      = require('fs');
@@ -8,6 +8,22 @@ var Promise = require('bluebird');
 
 var server  = require('../../../server');
 var qforms  = require('../../../qforms');
+
+/*
+class Model {
+    constructor(data, parent) {
+
+        var self = this;
+        self.name              = data['@attributes'].name;
+        self.data              = data;
+        self.parent            = parent;
+        self.view              = undefined;
+        self.js                = undefined;
+        self.createCollections = [];
+        self.fillCollections   = [];
+    }
+}
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Model(data, parent) {
@@ -166,3 +182,5 @@ Model.prototype.getClassName = function() {
     var self = this;
     return self.constructor.name;
 };
+
+module.exports = Model;

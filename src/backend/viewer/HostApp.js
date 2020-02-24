@@ -13,10 +13,10 @@ var helper  = require('../common/helper');
 
 var ACTIONS = [
     'page',
-    'update',
-    'insert',
-    'frame',
-    '_delete',
+    'frame',        // select
+    'insert',       // insert
+    'update',       // update
+    '_delete',      // delete
     'rpc',
     'logout'
 ];

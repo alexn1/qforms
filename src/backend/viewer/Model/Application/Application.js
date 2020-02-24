@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = Application;
-
 var util          = require('util');
 var path          = require('path');
 var fs            = require('fs');
@@ -13,47 +11,97 @@ var qforms  = require('../../../../qforms');
 var server  = require('../../../../server');
 var Model   = require('../Model');
 
-util.inherits(Application, Model);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Application(data, appInfo) {
-    var self = this;
-    Application.super_.call(this, data);
-    self.appInfo            = appInfo;
-    self.dirPath            = self.appInfo.dirPath;
-    self.viewFilePath       = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/ApplicationController/view',
-        'ApplicationView.ejs'
-    );
-    self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
-    self.createCollections  = ['databases', 'dataSources'];
-    self.fillCollections    = ['dataSources'];
-    self.pages              = {};
-    self.css                = [];
-    self.text               = qforms.text[self.data['@attributes'].lang || 'en'];
-    self.databases          = {};
-    self.dataSources        = {};
-}
+class Application extends Model {
+    constructor(data, appInfo) {
+        super(data, appInfo);
+        var self = this;
+        self.appInfo            = appInfo;
+        self.dirPath            = self.appInfo.dirPath;
+        self.viewFilePath       = path.join(
+            server.get('public'),
+            'viewer/class/Controller/ModelController/ApplicationController/view',
+            'ApplicationView.ejs'
+        );
+        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
+        self.createCollections  = ['databases', 'dataSources'];
+        self.fillCollections    = ['dataSources'];
+        self.pages              = {};
+        self.css                = [];
+        self.text               = qforms.text[self.data['@attributes'].lang || 'en'];
+        self.databases          = {};
+        self.dataSources        = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.create = function(appFilePath) {
-    return qforms.helper.getAppInfo(appFilePath).then(function(appInfo) {
-        return qforms.helper.readFile(appInfo.filePath).then(function (content) {
-            var data = JSON.parse(content);
-            var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-            //console.log('customClassFilePath:', customClassFilePath);
-            return qforms.helper.getFileContent(customClassFilePath).then(function (content) {
-                if (content) {
-                    var customClass = eval(content);
-                    return new customClass(data, appInfo);
-                } else {
-                    return new Application(data, appInfo);
-                }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    init() {
+        var self = this;
+        return super.init().then(function () {
+            return self._createStartupPages().then(function () {
+                return qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css');
+            }).then(function(filePaths) {
+                self.css = filePaths.map(function(filePath) {
+                    return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
+                });
             });
         });
-    });
-};
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    fill(context) {
+        var self = this;
+        console.log('Application.prototype.fill');
+        return super.fill(context).then(function (response) {
+            delete response.user;
+            delete response.password;
+            delete response.authentication;
+            response.env    = server.get('env');
+            response.text   = self.text;
+            response.params = self.getParams(context);
+            return self._buildMenu(context).then(function (menu) {
+                response.menu  = menu;
+                response.pages = {};
+                var startupPageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
+                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+                });
+                return Promise.each(startupPageNames, function (pageName) {
+                    return self.getPage(context, pageName).then(function (page) {
+                        return page.fill(context).then(function (_response) {
+                            response.pages[pageName] = _response;
+                        });
+                    });
+                });
+            }).then(function () {
+                return response;
+            });
+        });
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static create(appFilePath) {
+        return qforms.helper.getAppInfo(appFilePath).then(function(appInfo) {
+            return qforms.helper.readFile(appInfo.filePath).then(function (content) {
+                var data = JSON.parse(content);
+                var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
+                //console.log('customClassFilePath:', customClassFilePath);
+                return qforms.helper.getFileContent(customClassFilePath).then(function (content) {
+                    if (content) {
+                        var customClass = eval(content);
+                        return new customClass(data, appInfo);
+                    } else {
+                        return new Application(data, appInfo);
+                    }
+                });
+            });
+        });
+    }
+
+
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype._buildMenu = function(context) {
@@ -81,20 +129,6 @@ Application.prototype._buildMenu = function(context) {
             }
         }).then(function () {
             return menu;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.init = function() {
-    var self = this;
-    return Application.super_.prototype.init.call(self).then(function () {
-        return self._createStartupPages().then(function () {
-            return qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css');
-        }).then(function(filePaths) {
-            self.css = filePaths.map(function(filePath) {
-                return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
-            });
         });
     });
 };
@@ -166,36 +200,6 @@ Application.prototype._createStartupPages = function() {
                 });
             });
         }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.fill = function(context) {
-    var self = this;
-    console.log('Application.prototype.fill');
-    return Application.super_.prototype.fill.call(self, context).then(function (response) {
-        delete response.user;
-        delete response.password;
-        delete response.authentication;
-        response.env    = server.get('env');
-        response.text   = self.text;
-        response.params = self.getParams(context);
-        return self._buildMenu(context).then(function (menu) {
-            response.menu  = menu;
-            response.pages = {};
-            var startupPageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
-            });
-            return Promise.each(startupPageNames, function (pageName) {
-                return self.getPage(context, pageName).then(function (page) {
-                    return page.fill(context).then(function (_response) {
-                        response.pages[pageName] = _response;
-                    });
-                });
-            });
-        }).then(function () {
-            return response;
-        });
     });
 };
 
@@ -277,3 +281,5 @@ Application.prototype.rpc = function(context) {
         };
     });
 };
+
+module.exports = Application;
