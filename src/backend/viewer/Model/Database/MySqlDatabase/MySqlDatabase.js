@@ -82,7 +82,7 @@ MySqlDatabase.prototype.getConnection = function(context) {
 MySqlDatabase.prototype.query = function(context, query, params, nest) {
     var self = this;
     //if (process.env.NODE_ENV === 'development') {
-        console.log('MySqlDatabase.prototype.query', query, params);
+    //    console.log('MySqlDatabase.prototype.query', query, params);
     //}
     nest = (nest !== undefined) ? nest : true;
     return self.getConnection(context).then(function (cnn) {
