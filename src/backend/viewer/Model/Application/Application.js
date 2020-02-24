@@ -18,33 +18,31 @@ class Application extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, appInfo) {
         super(data, appInfo);
-        var self = this;
-        self.appInfo            = appInfo;
-        self.dirPath            = self.appInfo.dirPath;
-        self.viewFilePath       = path.join(
+        this.appInfo            = appInfo;
+        this.dirPath            = this.appInfo.dirPath;
+        this.viewFilePath       = path.join(
             server.get('public'),
             'viewer/class/Controller/ModelController/ApplicationController/view',
             'ApplicationView.ejs'
         );
-        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
-        self.createCollections  = ['databases', 'dataSources'];
-        self.fillCollections    = ['dataSources'];
-        self.pages              = {};
-        self.css                = [];
-        self.text               = qforms.text[self.data['@attributes'].lang || 'en'];
-        self.databases          = {};
-        self.dataSources        = {};
+        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        this.createCollections  = ['databases', 'dataSources'];
+        this.fillCollections    = ['dataSources'];
+        this.pages              = {};
+        this.css                = [];
+        this.text               = qforms.text[this.data['@attributes'].lang || 'en'];
+        this.databases          = {};
+        this.dataSources        = {};
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     init() {
-        var self = this;
-        return super.init().then(function () {
-            return self._createStartupPages().then(function () {
-                return qforms.Helper.getFilePaths(self.appInfo.dirPath, '', 'css');
-            }).then(function(filePaths) {
-                self.css = filePaths.map(function(filePath) {
-                    return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
+        return super.init().then(() => {
+            return this._createStartupPages().then(() => {
+                return qforms.Helper.getFilePaths(this.appInfo.dirPath, '', 'css');
+            }).then(filePaths => {
+                this.css = filePaths.map(filePath => {
+                    return 'view/' + this.appInfo.dirName + '/' + this.appInfo.fileName + '/' + filePath;
                 });
             });
         });
@@ -52,29 +50,28 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fill(context) {
-        var self = this;
         console.log('Application.prototype.fill');
-        return super.fill(context).then(function (response) {
+        return super.fill(context).then(response => {
             delete response.user;
             delete response.password;
             delete response.authentication;
             response.env    = server.get('env');
-            response.text   = self.text;
-            response.params = self.getParams(context);
-            return self._buildMenu(context).then(function (menu) {
+            response.text   = this.text;
+            response.params = this.getParams(context);
+            return this._buildMenu(context).then(menu => {
                 response.menu  = menu;
                 response.pages = {};
-                var startupPageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+                var startupPageNames = Object.keys(this.data.pageLinks).filter(pageName => {
+                    return this.data.pageLinks[pageName]['@attributes'].startup === 'true';
                 });
-                return Promise.each(startupPageNames, function (pageName) {
-                    return self.getPage(context, pageName).then(function (page) {
-                        return page.fill(context).then(function (_response) {
+                return Promise.each(startupPageNames, pageName => {
+                    return this.getPage(context, pageName).then(page => {
+                        return page.fill(context).then(_response => {
                             response.pages[pageName] = _response;
                         });
                     });
                 });
-            }).then(function () {
+            }).then(() => {
                 return response;
             });
         });
@@ -98,18 +95,17 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async _buildMenu(context) {
-        var self = this;
         var menu = {};
-        var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-            return context.user ? self.authorizePage(context.user, pageName) : true;
+        var pageNames = Object.keys(this.data.pageLinks).filter(pageName => {
+            return context.user ? this.authorizePage(context.user, pageName) : true;
         });
-        return Promise.each(pageNames, function(pageName) {
-            var pageLink = self.data.pageLinks[pageName];
+        return Promise.each(pageNames, pageName => {
+            var pageLink = this.data.pageLinks[pageName];
             var pageLinkMenu = pageLink['@attributes'].menu;
             if (pageLinkMenu) {
-                var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
+                var pageFilePath = path.join(this.appInfo.dirPath, pageLink['@attributes'].fileName);
                 var pageFile = new qforms.JsonFile(pageFilePath);
-                return pageFile.read().then(function() {
+                return pageFile.read().then(() => {
                     if (!menu[pageLinkMenu]) {
                         menu[pageLinkMenu] = [];
                     }
@@ -119,33 +115,31 @@ class Application extends Model {
                     });
                 });
             }
-        }).then(function () {
+        }).then(() => {
             return menu;
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     deinit() {
-        var self = this;
-        console.log('Application.prototype.deinit: ' + self.name);
-        return Promise.each(Object.keys(self.databases), function (name) {
-            var database = self.databases[name];
+        console.log('Application.prototype.deinit: ' + this.name);
+        return Promise.each(Object.keys(this.databases), name => {
+            var database = this.databases[name];
             return database.deinit();
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _createPage(pageName) {
-        var self = this;
-        return Promise.try(function () {
-            var relFilePath  = self.data.pageLinks[pageName]['@attributes'].fileName;
-            var pageFilePath = path.join(self.dirPath, relFilePath);
+        return Promise.try(() => {
+            var relFilePath  = this.data.pageLinks[pageName]['@attributes'].fileName;
+            var pageFilePath = path.join(this.dirPath, relFilePath);
             return qforms.Helper.readFile(pageFilePath);
-        }).then(function (content) {
+        }).then(content => {
             var data = JSON.parse(content);
-            return qforms.Page.create(data, self);
-        }).then(function (page) {
-            return page.init().then(function () {
+            return qforms.Page.create(data, this);
+        }).then(page => {
+            return page.init().then(() => {
                 return page;
             });
         });
@@ -154,68 +148,58 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     authorizePage(user, pageName) {
-        var self = this;
         return true;
     }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getPage(context, pageName) {
-        var self = this;
-        return Promise.try(function () {
-            if (context.user && self.authorizePage(context.user, pageName) === false) {
-                throw new Error('Authorization error');
-            }
-            if (self.pages[pageName]) {
-                return self.pages[pageName];
-            } else {
-                return self._createPage(pageName).then(function (page) {
-                    self.pages[pageName] = page;
-                    return page;
-                });
-            }
-        });
+    async getPage(context, pageName) {
+        if (context.user && this.authorizePage(context.user, pageName) === false) {
+            throw new Error('Authorization error');
+        }
+        if (this.pages[pageName]) {
+            return this.pages[pageName];
+        } else {
+            return this._createPage(pageName).then(page => {
+                this.pages[pageName] = page;
+                return page;
+            });
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createStartupPages() {
-        var self = this;
-        return Promise.try(function () {
-            if (self.data.pageLinks) {
-                var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+    async createStartupPages() {
+        if (this.data.pageLinks) {
+            var pageNames = Object.keys(this.data.pageLinks).filter(pageName => {
+                return this.data.pageLinks[pageName]['@attributes'].startup === 'true';
+            });
+            return Promise.each(pageNames, pageName => {
+                var pageLink = this.data.pageLinks[pageName];
+                var pageName = pageLink['@attributes'].name;
+                return this._createPage(pageName).then(page => {
+                    this.pages[pageName] = page;
                 });
-                return Promise.each(pageNames, function(pageName) {
-                    var pageLink = self.data.pageLinks[pageName];
-                    var pageName = pageLink['@attributes'].name;
-                    return self._createPage(pageName).then(function (page) {
-                        self.pages[pageName] = page;
-                    });
-                });
-            }
-        });
+            });
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    authenticate(context, username, password) {
-        var self = this;
-        return Promise.resolve(username === self.data['@attributes'].user && password === self.data['@attributes'].password);
+    async authenticate(context, username, password) {
+        return username === this.data['@attributes'].user && password === this.data['@attributes'].password;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     authentication() {
-        var self = this;
-        return self.data['@attributes'].authentication === 'true';
+        return this.data['@attributes'].authentication === 'true';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getUsers(context) {
-        return Promise.resolve(null);
+    async getUsers(context) {
+        return null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getParams(context) {
-        var self = this;
         var params = {};
         _.extend(params, context.params);
         if (context.querytime) {
@@ -255,14 +239,12 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     createContext(context) {
-        var self = this;
         console.log('Application.prototype.createContext');
         return Application.createContext(context);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static destroyContext(context) {
-        var self = this;
         /*for (var name in context.connections) {
             //console.log('release connection: ' + name);
             context.connections[name].release();
@@ -271,38 +253,31 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     destroyContext(context) {
-        var self = this;
         console.log('Application.prototype.destroyContext');
         return Application.destroyContext(context);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    rpc(context) {
-        var self = this;
-        return Promise.try(function () {
-            return {
-                result: 'ok'
-            };
-        });
+    async rpc(context) {
+        return {
+            result: 'ok'
+        };
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    _createStartupPages() {
-        var self = this;
-        return Promise.try(function () {
-            if (self.data.pageLinks) {
-                var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+    async _createStartupPages() {
+        if (this.data.pageLinks) {
+            var pageNames = Object.keys(this.data.pageLinks).filter(pageName => {
+                return this.data.pageLinks[pageName]['@attributes'].startup === 'true';
+            });
+            return Promise.each(pageNames, pageName => {
+                var pageLink = this.data.pageLinks[pageName];
+                var pageName = pageLink['@attributes'].name;
+                return this._createPage(pageName).then(page => {
+                    this.pages[pageName] = page;
                 });
-                return Promise.each(pageNames, function(pageName) {
-                    var pageLink = self.data.pageLinks[pageName];
-                    var pageName = pageLink['@attributes'].name;
-                    return self._createPage(pageName).then(function (page) {
-                        self.pages[pageName] = page;
-                    });
-                });
-            }
-        });
+            });
+        }
     }
 
 }
