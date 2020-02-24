@@ -148,15 +148,15 @@ Model.prototype.getView = function() {
     return Promise.try(function () {
         if (self.viewFilePath) {
             if (self.customViewFilePath) {
-                return qforms.helper.exists(self.customViewFilePath).then(function(exists) {
+                return qforms.Helper.exists(self.customViewFilePath).then(function(exists) {
                     if (exists) {
-                        return qforms.helper.readFile(self.customViewFilePath);
+                        return qforms.Helper.readFile(self.customViewFilePath);
                     } else {
-                        return qforms.helper.readFile(self.viewFilePath);
+                        return qforms.Helper.readFile(self.viewFilePath);
                     }
                 });
             } else {
-                return qforms.helper.readFile(self.viewFilePath);
+                return qforms.Helper.readFile(self.viewFilePath);
             }
         }
     });
@@ -168,9 +168,9 @@ Model.prototype.getJs = function() {
     return Promise.try(function () {
         if (self.dirPath) {
             var jsFilePath = path.join(self.dirPath, self.name + '.js');
-            return qforms.helper.exists(jsFilePath).then(function (exists) {
+            return qforms.Helper.exists(jsFilePath).then(function (exists) {
                 if (exists) {
-                    return qforms.helper.readFile(jsFilePath);
+                    return qforms.Helper.readFile(jsFilePath);
                 }
             });
         }

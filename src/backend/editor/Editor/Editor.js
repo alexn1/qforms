@@ -18,16 +18,16 @@ Editor.prototype.createFileByReplace = function(newFilePath, templateFilePath, r
     var self = this;
     console.log('Editor.prototype.createFileByReplace');
     emptyTemplate = emptyTemplate || '';
-    return qforms.helper.exists(newFilePath).then(function (exists) {
+    return qforms.Helper.exists(newFilePath).then(function (exists) {
         if (exists) {
             throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
         } else {
-            return qforms.helper.readFile(templateFilePath).then(function (template) {
+            return qforms.Helper.readFile(templateFilePath).then(function (template) {
                 var text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
                 if (text === '') {
                     text = emptyTemplate;
                 }
-                return qforms.helper.writeFile(newFilePath, text).then(function () {
+                return qforms.Helper.writeFile(newFilePath, text).then(function () {
                     return text;
                 });
             });
@@ -38,11 +38,11 @@ Editor.prototype.createFileByReplace = function(newFilePath, templateFilePath, r
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.createFileByParams = function(newFilePath, templateFilePath, params) {
     var self = this;
-    return qforms.helper.exists(newFilePath).then(function(exists) {
+    return qforms.Helper.exists(newFilePath).then(function(exists) {
         if (!exists) {
-            return qforms.helper.readFile(templateFilePath).then(function(template) {
+            return qforms.Helper.readFile(templateFilePath).then(function(template) {
                 var content = ejs.render(template, params);
-                return qforms.helper.writeFile(newFilePath, content).then(function () {
+                return qforms.Helper.writeFile(newFilePath, content).then(function () {
                     return content;
                 });
             });
@@ -62,9 +62,9 @@ Editor.prototype.getViewName = function() {
 Editor.prototype.getFile = function(filePath) {
     var self = this;
     console.log('Editor.prototype.getFile');
-    return qforms.helper.exists(filePath).then(function (exists) {
+    return qforms.Helper.exists(filePath).then(function (exists) {
         if (exists) {
-            return qforms.helper.readFile(filePath);
+            return qforms.Helper.readFile(filePath);
         }
     });
 };
@@ -72,9 +72,9 @@ Editor.prototype.getFile = function(filePath) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.saveFile = function(filePath, content) {
     var self = this;
-    return qforms.helper.exists(filePath).then(function (exists) {
+    return qforms.Helper.exists(filePath).then(function (exists) {
         if (exists) {
-            return qforms.helper.writeFile(filePath, content);
+            return qforms.Helper.writeFile(filePath, content);
         } else {
             throw new Error("File {fileName} doesn't exist.".replace('{fileName}', path.basename(filePath)));
         }
@@ -101,11 +101,11 @@ Editor.prototype.saveCustomFile = function(ext, text) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.moveDataSourceUp = function(name) {
     var self = this;
-    self.data.dataSources = qforms.helper.moveObjProp(self.data.dataSources, name, -1);
+    self.data.dataSources = qforms.Helper.moveObjProp(self.data.dataSources, name, -1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Editor.prototype.moveDataSourceDown = function(name) {
     var self = this;
-    self.data.dataSources = qforms.helper.moveObjProp(self.data.dataSources, name, 1);
+    self.data.dataSources = qforms.Helper.moveObjProp(self.data.dataSources, name, 1);
 };

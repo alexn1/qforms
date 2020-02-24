@@ -38,7 +38,7 @@ FormEditor.prototype._setAttr = function(name, value) {
     var self = this;
     self.data['@attributes'][name] = value;
     if (name === 'name') {
-        self.parent.data.forms = qforms.helper.replaceKey(self.parent.data.forms, self.name, value);
+        self.parent.data.forms = qforms.Helper.replaceKey(self.parent.data.forms, self.name, value);
     }
 };
 
@@ -58,7 +58,7 @@ FormEditor.prototype.newField = function(params) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldUp = function(params) {
     var self = this;
-    self.data.fields = qforms.helper.moveObjProp(self.data.fields, params.field, -1);
+    self.data.fields = qforms.Helper.moveObjProp(self.data.fields, params.field, -1);
     return self.pageEditor.save().then(function () {
         return 'ok';
     });
@@ -67,7 +67,7 @@ FormEditor.prototype.moveFieldUp = function(params) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FormEditor.prototype.moveFieldDown = function(params) {
     var self = this;
-    self.data.fields = qforms.helper.moveObjProp(self.data.fields, params.field, 1);
+    self.data.fields = qforms.Helper.moveObjProp(self.data.fields, params.field, 1);
     return self.pageEditor.save().then(function () {
         return 'ok';
     });
@@ -175,7 +175,7 @@ FormEditor.prototype.getCollectionDirPath = function() {
     var self = this;
     return self.parent.getCustomDirPath().then(function (customDirPath) {
         var dirPath = path.join(customDirPath, 'forms');
-        return qforms.helper.createDirIfNotExists(dirPath).then(function () {
+        return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
             return dirPath;
         });
     });
@@ -186,7 +186,7 @@ FormEditor.prototype.getCustomDirPath = function() {
     var self = this;
     return self.getCollectionDirPath().then(function (collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        return qforms.helper.createDirIfNotExists(dirPath).then(function() {
+        return qforms.Helper.createDirIfNotExists(dirPath).then(function() {
             return dirPath;
         });
     });
@@ -269,7 +269,7 @@ FormEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
     var self = this;
     self.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.dataSources = qforms.helper.replaceKey(self.data.dataSources, dataSource, value);
+        self.data.dataSources = qforms.Helper.replaceKey(self.data.dataSources, dataSource, value);
     }
 };
 
@@ -278,7 +278,7 @@ FormEditor.prototype.setDataSourceKeyColumnAttr = function(dataSource, keyColumn
     var self = this;
     self.data.dataSources[dataSource].keyColumns[keyColumn]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.dataSources[dataSource].keyColumns = qforms.helper.replaceKey(
+        self.data.dataSources[dataSource].keyColumns = qforms.Helper.replaceKey(
             self.data.dataSources[dataSource].keyColumns,
             keyColumn,
             value
@@ -291,7 +291,7 @@ FormEditor.prototype.setDataSourceParentKeyColumnAttr = function(dataSource, par
     var self = this;
     self.data.dataSources[dataSource].parentKeyColumns[parentKeyColumn]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.dataSources[dataSource].parentKeyColumns = qforms.helper.replaceKey(
+        self.data.dataSources[dataSource].parentKeyColumns = qforms.Helper.replaceKey(
             self.data.dataSources[dataSource].parentKeyColumns,
             parentKeyColumn,
             value
@@ -304,7 +304,7 @@ FormEditor.prototype.setFieldAttr = function(field, name, value) {
     var self = this;
     self.data.fields[field]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.fields = qforms.helper.replaceKey(self.data.fields, field, value);
+        self.data.fields = qforms.Helper.replaceKey(self.data.fields, field, value);
     }
 };
 
@@ -313,7 +313,7 @@ FormEditor.prototype.setControlAttr = function(control, name, value) {
     var self = this;
     self.data.controls[control]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.controls = qforms.helper.replaceKey(self.data.controls, control, value);
+        self.data.controls = qforms.Helper.replaceKey(self.data.controls, control, value);
     }
 };
 

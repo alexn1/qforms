@@ -31,7 +31,7 @@ Field.prototype.fillDefaultValue = function(context, row) {
     var column = self.data['@attributes'].column;
     var defaultValue = self.form.replaceThis(context, self.data['@attributes'].defaultValue);
     var params = self.form.page.application.getParams(context);
-    var code = qforms.helper.templateValue(defaultValue, params);
+    var code = qforms.Helper.templateValue(defaultValue, params);
     try {
         var value = eval(code);
     } catch (e) {

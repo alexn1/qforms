@@ -28,7 +28,7 @@ VisualEditorController.prototype.getView = function(params) {
                     server.get('public'),
                     'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
                 );
-                return qforms.helper.readFile(viewFilePath).then(function (content) {
+                return qforms.Helper.readFile(viewFilePath).then(function (content) {
                     result.view = content;
                     return result;
                 });

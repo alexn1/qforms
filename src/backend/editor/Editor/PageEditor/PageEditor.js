@@ -71,7 +71,7 @@ PageEditor.prototype.setAttr = function(name, value) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.moveFormUp = function(params) {
     var self = this;
-    self.data.forms = qforms.helper.moveObjProp(self.data.forms, params.form, -1);
+    self.data.forms = qforms.Helper.moveObjProp(self.data.forms, params.form, -1);
     return self.save().then(function () {
         return 'ok';
     });
@@ -86,7 +86,7 @@ PageEditor.prototype.save = function() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PageEditor.prototype.moveFormDown = function(params) {
     var self = this;
-    self.data.forms = qforms.helper.moveObjProp(self.data.forms, params.form, 1);
+    self.data.forms = qforms.Helper.moveObjProp(self.data.forms, params.form, 1);
     return self.save().then(function () {
         return 'ok';
     });
@@ -227,7 +227,7 @@ PageEditor.prototype.getCustomDirPath = function() {
     console.log('PageEditor.prototype.getCustomDirPath');
     return self.parent.getCustomDirPath().then(function (customDirPath) {
         var dirPath = path.join(customDirPath, 'pages', self.name);
-        return qforms.helper.createDirIfNotExists(dirPath).then(function () {
+        return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
             return dirPath;
         });
     });
@@ -271,7 +271,7 @@ PageEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
     var self = this;
     self.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.dataSources = qforms.helper.replaceKey(self.data.dataSources, dataSource, value);
+        self.data.dataSources = qforms.Helper.replaceKey(self.data.dataSources, dataSource, value);
     }
 };
 

@@ -27,7 +27,7 @@ DataSource.create = function(data, parent) {
                 data['@attributes'].name,
                 data['@attributes'].name + '.backend.js'
             );
-            return qforms.helper.getFileContent(customClassFilePath).then(function(content) {
+            return qforms.Helper.getFileContent(customClassFilePath).then(function(content) {
                 if (content) {
                     var customClass = eval(content);
                     return new customClass(data, parent);
@@ -96,7 +96,7 @@ DataSource.prototype.checkAndCalcColumns = function(row) {
                 var columnName = field.data['@attributes'].column;
                 if (row.hasOwnProperty(columnName)) {
                     if (self.parent instanceof qforms.TableForm && row[columnName] !== null) {
-                        row[columnName] = qforms.helper.escapeHtml(row[columnName]);
+                        row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
                     }
                 } else if (field.data['@attributes'].value) {
                     return field.calcValue(row);

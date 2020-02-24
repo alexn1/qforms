@@ -46,7 +46,7 @@ ApplicationEditor.createAppFile = function(appFilePath, params) {
 function ApplicationEditor(appFile) {
     var self = this;
     self.appFile            = appFile;
-    self.appInfo            = qforms.helper.getAppInfoFromData(appFile.filePath, appFile.data);
+    self.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data);
     self.data               = appFile.data;
     self.name               = self.data['@attributes'].name;
     self.defaultEjsFilePath = path.join(
@@ -66,8 +66,8 @@ ApplicationEditor.prototype.createPage = function(params) {
     var pageDirPath    = path.join(pagesDirPath, params.name);
     var pageFilePath   = path.join(pageDirPath , params.name + '.json');
     var pageFile;
-    return qforms.helper.createDirIfNotExists(pagesDirPath).then(function() {
-        return qforms.helper.createDirIfNotExists(pageDirPath);
+    return qforms.Helper.createDirIfNotExists(pagesDirPath).then(function() {
+        return qforms.Helper.createDirIfNotExists(pageDirPath);
     }).then(function() {
         pageFile = new qforms.JsonFile(pageFilePath);
         pageFile.data = qforms.PageEditor.createData(params);
@@ -183,13 +183,13 @@ ApplicationEditor.prototype.getDataSource = function(name) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.movePageLinkUp = function(name) {
     var self = this;
-    self.data.pageLinks = qforms.helper.moveObjProp(self.data.pageLinks, name, -1);
+    self.data.pageLinks = qforms.Helper.moveObjProp(self.data.pageLinks, name, -1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ApplicationEditor.prototype.movePageLinkDown = function(name) {
     var self = this;
-    self.data.pageLinks = qforms.helper.moveObjProp(self.data.pageLinks, name, 1);
+    self.data.pageLinks = qforms.Helper.moveObjProp(self.data.pageLinks, name, 1);
 };
 
 
@@ -198,7 +198,7 @@ ApplicationEditor.prototype.setDatabaseAttr = function(database, name, value) {
     var self = this;
     self.data.databases[database]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.databases = qforms.helper.replaceKey(self.data.databases, database, value);
+        self.data.databases = qforms.Helper.replaceKey(self.data.databases, database, value);
     }
 };
 
@@ -207,7 +207,7 @@ ApplicationEditor.prototype.setDatabaseParamAttr = function(database, param, nam
     var self = this;
     self.data.databases[database].params[param]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.databases[database].params = qforms.helper.replaceKey(self.data.databases[database].params, param, value);
+        self.data.databases[database].params = qforms.Helper.replaceKey(self.data.databases[database].params, param, value);
     }
 };
 
@@ -216,7 +216,7 @@ ApplicationEditor.prototype.setPageLinkAttr = function(pageLink, name, value) {
     var self = this;
     self.data.pageLinks[pageLink]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.pageLinks = qforms.helper.replaceKey(self.data.pageLinks, pageLink, value);
+        self.data.pageLinks = qforms.Helper.replaceKey(self.data.pageLinks, pageLink, value);
     }
 };
 
@@ -352,6 +352,6 @@ ApplicationEditor.prototype.setDataSourceAttr = function(dataSource, name, value
     var self = this;
     self.data.dataSources[dataSource]['@attributes'][name] = value;
     if (name === 'name') {
-        self.data.dataSources = qforms.helper.replaceKey(self.data.dataSources, dataSource, value);
+        self.data.dataSources = qforms.Helper.replaceKey(self.data.dataSources, dataSource, value);
     }
 };

@@ -42,7 +42,7 @@ DataSourceEditor.prototype.getCollectionDirPath = function() {
     var self = this;
     return self.parent.getCustomDirPath().then(function (customDirPath) {
         var dirPath = path.join(customDirPath, 'dataSources');
-        return qforms.helper.createDirIfNotExists(dirPath).then(function() {
+        return qforms.Helper.createDirIfNotExists(dirPath).then(function() {
             return dirPath;
         });
     });
@@ -53,7 +53,7 @@ DataSourceEditor.prototype.getCustomDirPath = function() {
     var self = this;
     return self.getCollectionDirPath().then(function (collectionDirPath) {
         var dirPath = path.join(collectionDirPath, self.name);
-        return qforms.helper.createDirIfNotExists(dirPath).then(function () {
+        return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
             return dirPath;
         });
     });

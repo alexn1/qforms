@@ -36,7 +36,7 @@ SqlDataSource.create = function(data, parent) {
                 data['@attributes'].name,
                 data['@attributes'].name + '.backend.js'
             );
-            return qforms.helper.getFileContent(customClassFilePath).then(function(content) {
+            return qforms.Helper.getFileContent(customClassFilePath).then(function(content) {
                 if (content) {
                     var customClass = eval(content);
                     return new customClass(data, parent);

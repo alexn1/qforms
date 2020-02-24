@@ -103,7 +103,7 @@ DatabaseEditorController.prototype.getView = function(params) {
                                 });
                                 result.data.tables = tables;
                                 var filePath = path.join(self.viewDirPath, 'TableView', 'TableView.ejs');
-                                qforms.helper.readFile(filePath).then(function (content) {
+                                qforms.Helper.readFile(filePath).then(function (content) {
                                     result.data.tableView = content;
                                     resolve(result);
                                 });

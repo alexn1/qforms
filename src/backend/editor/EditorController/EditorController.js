@@ -22,9 +22,9 @@ EditorController.prototype.getView = function(params) {
         data: {}
     };
     var viewFilePath = path.join(self.viewDirPath, params.view);
-    return qforms.helper.exists(viewFilePath).then(function (exists) {
+    return qforms.Helper.exists(viewFilePath).then(function (exists) {
         if (exists) {
-            return qforms.helper.readFile(viewFilePath).then(function (content) {
+            return qforms.Helper.readFile(viewFilePath).then(function (content) {
                 result.view = content;
                 return result;
             });

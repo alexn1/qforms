@@ -26,7 +26,7 @@ function PageEditorController(appInfo) {
 PageEditorController.prototype.get = function(params) {
     var self = this;
     var pageFilePath = path.join(self.appInfo.dirPath, params.fileName);
-    return qforms.helper.readFile(pageFilePath).then(function (content) {
+    return qforms.Helper.readFile(pageFilePath).then(function (content) {
         return JSON.parse(content);
     });
 };

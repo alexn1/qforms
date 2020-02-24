@@ -45,7 +45,7 @@ module.exports = function(req, res, next) {
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
             fs.exists(appFilePath, function(exists) {
                 if (exists) {
-                    qforms.helper.getAppInfo(appFilePath).then(function(appInfo) {
+                    qforms.Helper.getAppInfo(appFilePath).then(function(appInfo) {
                         handle(req, res, appInfo, next);
                     });
                 } else {

@@ -32,8 +32,8 @@ main(); function main() {
         console.log('process.exit:', code);
     });
 
-    var port = qforms.helper.getCommandLineParams().port || pkg.config.port;
-    var host = qforms.helper.getCommandLineParams().host || pkg.config.host;
+    var port = qforms.Helper.getCommandLineParams().port || pkg.config.port;
+    var host = qforms.Helper.getCommandLineParams().host || pkg.config.host;
     var www = http.createServer(server);
     www.on('error', function(err) {
         if (err.code === 'EADDRINUSE') {

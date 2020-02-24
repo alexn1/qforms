@@ -41,7 +41,7 @@ class Application extends Model {
         var self = this;
         return super.init().then(function () {
             return self._createStartupPages().then(function () {
-                return qforms.helper.getFilePaths(self.appInfo.dirPath, '', 'css');
+                return qforms.Helper.getFilePaths(self.appInfo.dirPath, '', 'css');
             }).then(function(filePaths) {
                 self.css = filePaths.map(function(filePath) {
                     return 'view/' + self.appInfo.dirName + '/' + self.appInfo.fileName + '/' + filePath;
@@ -82,12 +82,12 @@ class Application extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static create(appFilePath) {
-        return qforms.helper.getAppInfo(appFilePath).then(function(appInfo) {
-            return qforms.helper.readFile(appInfo.filePath).then(function (content) {
+        return qforms.Helper.getAppInfo(appFilePath).then(function(appInfo) {
+            return qforms.Helper.readFile(appInfo.filePath).then(function (content) {
                 var data = JSON.parse(content);
                 var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
                 //console.log('customClassFilePath:', customClassFilePath);
-                return qforms.helper.getFileContent(customClassFilePath).then(function (content) {
+                return qforms.Helper.getFileContent(customClassFilePath).then(function (content) {
                     if (content) {
                         var customClass = eval(content);
                         return new customClass(data, appInfo);
@@ -145,7 +145,7 @@ class Application extends Model {
         return Promise.try(function () {
             var relFilePath  = self.data.pageLinks[pageName]['@attributes'].fileName;
             var pageFilePath = path.join(self.dirPath, relFilePath);
-            return qforms.helper.readFile(pageFilePath);
+            return qforms.Helper.readFile(pageFilePath);
         }).then(function (content) {
             var data = JSON.parse(content);
             return qforms.Page.create(data, self);

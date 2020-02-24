@@ -16,7 +16,7 @@ function JsonFile(filePath) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 JsonFile.prototype.create = function() {
     var self = this;
-    return qforms.helper.exists(self.filePath).then(function (exists) {
+    return qforms.Helper.exists(self.filePath).then(function (exists) {
         if (exists) {
             throw new Error('File {filePath} already exists'.replace('{filePath}', self.filePath));
         } else {
@@ -27,7 +27,7 @@ JsonFile.prototype.create = function() {
                 self.data = {};
             }
             self.content = JSON.stringify(self.data, null, 4);
-            return qforms.helper.writeFile(self.filePath, self.content);
+            return qforms.Helper.writeFile(self.filePath, self.content);
         }
     });
 };
@@ -35,7 +35,7 @@ JsonFile.prototype.create = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 JsonFile.prototype.read = function() {
     var self = this;
-    return qforms.helper.readFile(self.filePath).then(function (content) {
+    return qforms.Helper.readFile(self.filePath).then(function (content) {
         self.content = content;
         self.data    = JSON.parse(content);
     });
@@ -58,7 +58,7 @@ JsonFile.prototype.save = function() {
     var self = this;
     console.log('JsonFile.prototype.save');
     self.content = JSON.stringify(self.data, null, 4);
-    return qforms.helper.writeFile(self.filePath, self.content);
+    return qforms.Helper.writeFile(self.filePath, self.content);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
