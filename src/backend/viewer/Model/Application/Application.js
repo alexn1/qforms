@@ -14,6 +14,8 @@ var Model   = require('../Model');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Application extends Model {
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, appInfo) {
         super(data, appInfo);
         var self = this;
@@ -99,187 +101,223 @@ class Application extends Model {
     }
 
 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype._buildMenu = function(context) {
-    var self = this;
-    return Promise.try(function() {
-        var menu = {};
-        var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-            return context.user ? self.authorizePage(context.user, pageName) : true;
-        });
-        return Promise.each(pageNames, function(pageName) {
-            var pageLink = self.data.pageLinks[pageName];
-            var pageLinkMenu = pageLink['@attributes'].menu;
-            if (pageLinkMenu) {
-                var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
-                var pageFile = new qforms.JsonFile(pageFilePath);
-                return pageFile.read().then(function() {
-                    if (!menu[pageLinkMenu]) {
-                        menu[pageLinkMenu] = [];
-                    }
-                    menu[pageLinkMenu].push({
-                        page   : pageLink['@attributes'].name,
-                        caption: pageFile.data['@attributes'].caption
-                    });
-                });
-            }
-        }).then(function () {
-            return menu;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.deinit = function() {
-    var self = this;
-    console.log('Application.prototype.deinit: ' + self.name);
-    return Promise.each(Object.keys(self.databases), function (name) {
-        var database = self.databases[name];
-        return database.deinit();
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype._createPage = function(pageName) {
-    var self = this;
-    return Promise.try(function () {
-        var relFilePath  = self.data.pageLinks[pageName]['@attributes'].fileName;
-        var pageFilePath = path.join(self.dirPath, relFilePath);
-        return qforms.helper.readFile(pageFilePath);
-    }).then(function (content) {
-        var data = JSON.parse(content);
-        return qforms.Page.create(data, self);
-    }).then(function (page) {
-        return page.init().then(function () {
-            return page;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.authorizePage = function(user, pageName) {
-    var self = this;
-    return true;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getPage = function(context, pageName) {
-    var self = this;
-    return Promise.try(function () {
-        if (context.user && self.authorizePage(context.user, pageName) === false) {
-            throw new Error('Authorization error');
-        }
-        if (self.pages[pageName]) {
-            return self.pages[pageName];
-        } else {
-            return self._createPage(pageName).then(function (page) {
-                self.pages[pageName] = page;
-                return page;
-            });
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype._createStartupPages = function() {
-    var self = this;
-    return Promise.try(function () {
-        if (self.data.pageLinks) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _buildMenu(context) {
+        var self = this;
+        return Promise.try(function() {
+            var menu = {};
             var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+                return context.user ? self.authorizePage(context.user, pageName) : true;
             });
             return Promise.each(pageNames, function(pageName) {
                 var pageLink = self.data.pageLinks[pageName];
-                var pageName = pageLink['@attributes'].name;
+                var pageLinkMenu = pageLink['@attributes'].menu;
+                if (pageLinkMenu) {
+                    var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
+                    var pageFile = new qforms.JsonFile(pageFilePath);
+                    return pageFile.read().then(function() {
+                        if (!menu[pageLinkMenu]) {
+                            menu[pageLinkMenu] = [];
+                        }
+                        menu[pageLinkMenu].push({
+                            page   : pageLink['@attributes'].name,
+                            caption: pageFile.data['@attributes'].caption
+                        });
+                    });
+                }
+            }).then(function () {
+                return menu;
+            });
+        });
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    deinit() {
+        var self = this;
+        console.log('Application.prototype.deinit: ' + self.name);
+        return Promise.each(Object.keys(self.databases), function (name) {
+            var database = self.databases[name];
+            return database.deinit();
+        });
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _createPage(pageName) {
+        var self = this;
+        return Promise.try(function () {
+            var relFilePath  = self.data.pageLinks[pageName]['@attributes'].fileName;
+            var pageFilePath = path.join(self.dirPath, relFilePath);
+            return qforms.helper.readFile(pageFilePath);
+        }).then(function (content) {
+            var data = JSON.parse(content);
+            return qforms.Page.create(data, self);
+        }).then(function (page) {
+            return page.init().then(function () {
+                return page;
+            });
+        });
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    authorizePage(user, pageName) {
+        var self = this;
+        return true;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getPage(context, pageName) {
+        var self = this;
+        return Promise.try(function () {
+            if (context.user && self.authorizePage(context.user, pageName) === false) {
+                throw new Error('Authorization error');
+            }
+            if (self.pages[pageName]) {
+                return self.pages[pageName];
+            } else {
                 return self._createPage(pageName).then(function (page) {
                     self.pages[pageName] = page;
+                    return page;
                 });
-            });
+            }
+        });
+    }
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    createStartupPages() {
+        var self = this;
+        return Promise.try(function () {
+            if (self.data.pageLinks) {
+                var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
+                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+                });
+                return Promise.each(pageNames, function(pageName) {
+                    var pageLink = self.data.pageLinks[pageName];
+                    var pageName = pageLink['@attributes'].name;
+                    return self._createPage(pageName).then(function (page) {
+                        self.pages[pageName] = page;
+                    });
+                });
+            }
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    authenticate(context, username, password) {
+        var self = this;
+        return Promise.resolve(username === self.data['@attributes'].user && password === self.data['@attributes'].password);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    authentication() {
+        var self = this;
+        return self.data['@attributes'].authentication === 'true';
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getUsers(context) {
+        return Promise.resolve(null);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getParams(context) {
+        var self = this;
+        var params = {};
+        _.extend(params, context.params);
+        if (context.querytime) {
+            _.extend(params, context.querytime.params);
         }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.authenticate = function(context, username, password) {
-    var self = this;
-    return Promise.resolve(username === self.data['@attributes'].user && password === self.data['@attributes'].password);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.authentication = function() {
-    var self = this;
-    return self.data['@attributes'].authentication === 'true';
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getUsers = function(context) {
-    return Promise.resolve(null);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getParams = function(context) {
-    var self = this;
-    var params = {};
-    _.extend(params, context.params);
-    if (context.querytime) {
-        _.extend(params, context.querytime.params);
-    }
-    if (context.user) {
-        params['username'] = context.user.name;
-    }
-    return params;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.createContext = Application.createContext =  function(context) {
-    var self = this;
-    console.log('Application.prototype.createContext');
-    if (context === undefined) {
-        context = {};
-    }
-    if (context.params === undefined) {
-        context.params = {};
-    }
-    if (context.querytime === undefined) {
-        context.querytime = {};
-    }
-    if (context.querytime.params === undefined) {
-        context.querytime.params = {};
-    }
-    if (context.req) {
-        var route = [context.req.params.appDirName, context.req.params.appFileName].join('/');
-        if (context.req.session.user && context.req.session.user[route]) {
-            context.user = context.req.session.user[route];
+        if (context.user) {
+            params['username'] = context.user.name;
         }
+        return params;
     }
-    if (context.connections === undefined) {
-        context.connections = {};
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createContext(context) {
+        if (context === undefined) {
+            context = {};
+        }
+        if (context.params === undefined) {
+            context.params = {};
+        }
+        if (context.querytime === undefined) {
+            context.querytime = {};
+        }
+        if (context.querytime.params === undefined) {
+            context.querytime.params = {};
+        }
+        if (context.req) {
+            var route = [context.req.params.appDirName, context.req.params.appFileName].join('/');
+            if (context.req.session.user && context.req.session.user[route]) {
+                context.user = context.req.session.user[route];
+            }
+        }
+        if (context.connections === undefined) {
+            context.connections = {};
+        }
+        return context;
     }
-    return context;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.destroyContext = Application.destroyContext = function(context) {
-    var self = this;
-    console.log('Application.prototype.destroyContext');
-    /*for (var name in context.connections) {
-        //console.log('release connection: ' + name);
-        context.connections[name].release();
-    }*/
-};
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    createContext(context) {
+        var self = this;
+        console.log('Application.prototype.createContext');
+        return Application.createContext(context);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.rpc = function(context) {
-    var self = this;
-    return Promise.try(function () {
-        return {
-            result: 'ok'
-        };
-    });
-};
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static destroyContext(context) {
+        var self = this;
+        /*for (var name in context.connections) {
+            //console.log('release connection: ' + name);
+            context.connections[name].release();
+        }*/
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    destroyContext(context) {
+        var self = this;
+        console.log('Application.prototype.destroyContext');
+        return Application.destroyContext(context);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    rpc(context) {
+        var self = this;
+        return Promise.try(function () {
+            return {
+                result: 'ok'
+            };
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _createStartupPages() {
+        var self = this;
+        return Promise.try(function () {
+            if (self.data.pageLinks) {
+                var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
+                    return self.data.pageLinks[pageName]['@attributes'].startup === 'true';
+                });
+                return Promise.each(pageNames, function(pageName) {
+                    var pageLink = self.data.pageLinks[pageName];
+                    var pageName = pageLink['@attributes'].name;
+                    return self._createPage(pageName).then(function (page) {
+                        self.pages[pageName] = page;
+                    });
+                });
+            }
+        });
+    }
+
+}
 
 module.exports = Application;
