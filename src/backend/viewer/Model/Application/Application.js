@@ -81,51 +81,46 @@ class Application extends Model {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    static create(appFilePath) {
-        return qforms.Helper.getAppInfo(appFilePath).then(function(appInfo) {
-            return qforms.Helper.readFile(appInfo.filePath).then(function (content) {
-                var data = JSON.parse(content);
-                var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
-                //console.log('customClassFilePath:', customClassFilePath);
-                return qforms.Helper.getFileContent(customClassFilePath).then(function (content) {
-                    if (content) {
-                        var customClass = eval(content);
-                        return new customClass(data, appInfo);
-                    } else {
-                        return new Application(data, appInfo);
-                    }
-                });
-            });
-        });
+    static async create(appFilePath) {
+        const appInfo = await qforms.Helper.getAppInfo(appFilePath);
+        const json = await qforms.Helper.readFile(appInfo.filePath);
+        var data = JSON.parse(json);
+        var customClassFilePath = path.join(appInfo.dirPath, appInfo.name + '.backend.js');
+        //console.log('customClassFilePath:', customClassFilePath);
+        const js = await qforms.Helper.getFileContent(customClassFilePath);
+        if (js) {
+            var customClass = eval(js);
+            return new customClass(data, appInfo);
+        } else {
+            return new Application(data, appInfo);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    _buildMenu(context) {
+    async _buildMenu(context) {
         var self = this;
-        return Promise.try(function() {
-            var menu = {};
-            var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
-                return context.user ? self.authorizePage(context.user, pageName) : true;
-            });
-            return Promise.each(pageNames, function(pageName) {
-                var pageLink = self.data.pageLinks[pageName];
-                var pageLinkMenu = pageLink['@attributes'].menu;
-                if (pageLinkMenu) {
-                    var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
-                    var pageFile = new qforms.JsonFile(pageFilePath);
-                    return pageFile.read().then(function() {
-                        if (!menu[pageLinkMenu]) {
-                            menu[pageLinkMenu] = [];
-                        }
-                        menu[pageLinkMenu].push({
-                            page   : pageLink['@attributes'].name,
-                            caption: pageFile.data['@attributes'].caption
-                        });
+        var menu = {};
+        var pageNames = Object.keys(self.data.pageLinks).filter(function (pageName) {
+            return context.user ? self.authorizePage(context.user, pageName) : true;
+        });
+        return Promise.each(pageNames, function(pageName) {
+            var pageLink = self.data.pageLinks[pageName];
+            var pageLinkMenu = pageLink['@attributes'].menu;
+            if (pageLinkMenu) {
+                var pageFilePath = path.join(self.appInfo.dirPath, pageLink['@attributes'].fileName);
+                var pageFile = new qforms.JsonFile(pageFilePath);
+                return pageFile.read().then(function() {
+                    if (!menu[pageLinkMenu]) {
+                        menu[pageLinkMenu] = [];
+                    }
+                    menu[pageLinkMenu].push({
+                        page   : pageLink['@attributes'].name,
+                        caption: pageFile.data['@attributes'].caption
                     });
-                }
-            }).then(function () {
-                return menu;
-            });
+                });
+            }
+        }).then(function () {
+            return menu;
         });
     }
 

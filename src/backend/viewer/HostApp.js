@@ -72,15 +72,13 @@ class HostApp {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createApplication(req, res) {
+    async createApplication(req, res) {
         var self = this;
         console.log(`HostApp.prototype.createApplication ${req.params.appDirName}/${req.params.appFileName}`);
         var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-        return qforms.Application.create(appFilePath).then(function (application) {
-            return application.init().then(function () {
-                return application;
-            });
-        });
+        const application = await qforms.Application.create(appFilePath);
+        await application.init();
+        return application;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
