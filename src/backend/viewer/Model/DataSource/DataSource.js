@@ -111,6 +111,7 @@ DataSource.prototype.checkAndCalcColumns = function(row) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 DataSource.prototype.fill = function(context) {
     var self = this;
+    //console.log('DataSource.prototype.fill', this.name);
     var start;
     return DataSource.super_.prototype.fill.call(self, context).then(function (response) {
         delete response.query;

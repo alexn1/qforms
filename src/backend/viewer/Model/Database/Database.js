@@ -18,7 +18,7 @@ Database.create = function(data, parent) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function Database(data, parent) {
     var self = this;
-    console.log('new Database');
+    //console.log('new Database');
     Database.super_.call(self, data, parent);
 }
 

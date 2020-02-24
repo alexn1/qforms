@@ -4,7 +4,6 @@ module.exports = SqlDataSource;
 
 var util    = require('util');
 var path    = require('path');
-//var sqlish  = require('sqlish');
 var _       = require('underscore');
 var Promise = require('bluebird');
 
@@ -54,7 +53,7 @@ SqlDataSource.create = function(data, parent) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSource.prototype.query = function(context, query, params, select) {
     var self = this;
-    //console.log('SqlDataSource.prototype.query', {dsName: this.name, query: query, params: params});
+    console.log('SqlDataSource.prototype.query', {dsName: this.name, query: query, params: params});
     return self.database.query(context, query, params, select);
 };
 
@@ -73,6 +72,7 @@ SqlDataSource.prototype._desc = function(context) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 SqlDataSource.prototype.select = function(context) {
     var self = this;
+    console.log('SqlDataSource.prototype.select', this.name);
     return Promise.try(function () {
         var access = self.getAccessToken(context);
         if (access.select === false) {
@@ -207,7 +207,6 @@ SqlDataSource.prototype.delete = function(context) {
             }));
         }
         var row = context.row;
-        //var query = new sqlish.Sqlish().deleteFrom(self.data['@attributes'].table).where(self.getRowKeyValues(row)).toString();
         const rowKeyValues = self.getRowKeyValues(row);
         var query = self.database.getDeleteQuery(self.data['@attributes'].table, rowKeyValues);
         return self.query(context, query, row, false);

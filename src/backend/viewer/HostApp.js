@@ -39,23 +39,24 @@ HostApp.prototype.init = function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 HostApp.prototype.actionViewer = function (req, res, next) {
     var self = this;
-    //console.log('HostApp.prototype.actionViewer');
+    console.log('HostApp.prototype.actionViewer');
     if (req.params.appDirName && req.params.appFileName) {
         Promise.try(function () {
-            self.route = [req.params.appDirName, req.params.appFileName].join('/');
-            if (self.applications[self.route]) {
+            const route = self.route = [req.params.appDirName, req.params.appFileName].join('/');
+            const application = self.applications[route];
+            if (application) {
                 if (req.query.debug === '1' && req.method === 'GET') {
-                    return self.applications[self.route].deinit().then(function () {
+                    return application.deinit().then(function () {
                         return self.createApplication(req, res).then(function (application) {
-                            return self.applications[self.route] = application;
+                            return self.applications[route] = application;
                         });
                     });
                 } else {
-                    return self.applications[self.route];
+                    return application;
                 }
             } else {
                 return self.createApplication(req, res).then(function (application) {
-                    return self.applications[self.route] = application;
+                    return self.applications[route] = application;
                 });
             }
         }).then(function (application) {
@@ -73,7 +74,7 @@ HostApp.prototype.actionViewer = function (req, res, next) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 HostApp.prototype.createApplication = function (req, res) {
     var self = this;
-    console.log('HostApp.prototype.createApplication', req.params.appDirName, req.params.appFileName);
+    console.log(`HostApp.prototype.createApplication ${req.params.appDirName}/${req.params.appFileName}`);
     var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
     return qforms.Application.create(appFilePath).then(function (application) {
         return application.init().then(function () {

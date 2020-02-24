@@ -53,7 +53,7 @@ QForms.errorHandler = function(errorMsg) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.doHttpRequest = function(data) {
-    console.log('QForms.doHttpRequest', 'POST', window.location.href, data);
+    console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
     return new Promise(function (resolve, reject) {
         var contentType = data instanceof FormData ? false : 'application/json; charset=UTF-8';
         var _data       = data instanceof FormData ? data  : JSON.stringify(data);

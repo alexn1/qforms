@@ -172,6 +172,7 @@ Application.prototype._createStartupPages = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.fill = function(context) {
     var self = this;
+    console.log('Application.prototype.fill');
     return Application.super_.prototype.fill.call(self, context).then(function (response) {
         delete response.user;
         delete response.password;
@@ -232,6 +233,7 @@ Application.prototype.getParams = function(context) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Application.prototype.createContext = Application.createContext =  function(context) {
     var self = this;
+    console.log('Application.prototype.createContext');
     if (context === undefined) {
         context = {};
     }

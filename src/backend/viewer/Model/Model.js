@@ -39,6 +39,7 @@ Model.prototype.init = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Model.prototype.fill = function(context) {
     var self = this;
+    console.log('Model.prototype.fill', this.constructor.name, this.name);
     return Promise.try(function () {
         var response = {
             class: self.data['@class'],

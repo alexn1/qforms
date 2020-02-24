@@ -12,14 +12,14 @@ util.inherits(MySqlDatabase, Database);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MySqlDatabase.create = function(data, parent) {
-    console.log('MySqlDatabase.create');
+    //console.log('MySqlDatabase.create');
     return Promise.resolve(new MySqlDatabase(data, parent));
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function MySqlDatabase(data, parent) {
     var self = this;
-    console.log('new MySqlDatabase');
+    //console.log('new MySqlDatabase');
     MySqlDatabase.super_.call(self, data, parent);
     self.pool = null;
 }
@@ -42,7 +42,7 @@ MySqlDatabase.prototype.deinit = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MySqlDatabase.prototype._getPool = function() {
     var self = this;
-    console.log('MySqlDatabase.prototype._getPool');
+    //console.log('MySqlDatabase.prototype._getPool');
     if (self.pool === null) {
         //console.log('creating connection pool for: ' + database);
         self.pool = mysql.createPool({
@@ -61,7 +61,7 @@ MySqlDatabase.prototype._getPool = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MySqlDatabase.prototype.getConnection = function(context) {
     var self = this;
-    console.log('MySqlDatabase.prototype.getConnection');
+    //console.log('MySqlDatabase.prototype.getConnection');
     return new Promise(function (resolve, reject) {
         if (context.connections[self.name] === undefined) {
             self._getPool().getConnection(function(err, cnn) {
@@ -81,10 +81,9 @@ MySqlDatabase.prototype.getConnection = function(context) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MySqlDatabase.prototype.query = function(context, query, params, nest) {
     var self = this;
-    console.log('MySqlDatabase.prototype.query');
-    if (process.env.NODE_ENV === 'development') {
+    //if (process.env.NODE_ENV === 'development') {
         console.log('MySqlDatabase.prototype.query', query, params);
-    }
+    //}
     nest = (nest !== undefined) ? nest : true;
     return self.getConnection(context).then(function (cnn) {
         return new Promise(function (resolve, reject) {
@@ -107,7 +106,7 @@ MySqlDatabase.prototype.query = function(context, query, params, nest) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MySqlDatabase.prototype._getRows = function(result, fields) {
     var self = this;
-    console.log('MySqlDatabase.prototype._getRows');
+    //console.log('MySqlDatabase.prototype._getRows');
     var fieldCount = {};
     for (var j = 0; j < fields.length; j++) {
         var f = fields[j];
