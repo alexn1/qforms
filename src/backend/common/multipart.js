@@ -6,9 +6,9 @@ var async     = require('async');
 var fs        = require('fs');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     if (req.is('multipart/form-data')) {
-        multipart(req, res, function() {
+        multipart(req, res, () => {
             if (req.body.__data) {
                 var body = JSON.parse(req.body.__data);
                 delete req.body.__data;
@@ -22,9 +22,9 @@ module.exports = function(req, res, next) {
                 }
             }
             // loading file content to req.files[n].data
-            var tasks = _.map(req.files, function(file) {
-                return function(next) {
-                    fs.readFile(file.path, function(err, data) {
+            var tasks = _.map(req.files, file => {
+                return next => {
+                    fs.readFile(file.path, (err, data) => {
                         if (err) {
                             throw err;
                         } else {
