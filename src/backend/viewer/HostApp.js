@@ -7,7 +7,6 @@ var Promise = require('bluebird');
 
 var server  = require('../../server');
 var qforms  = require('../../qforms');
-var helper  = require('../common/helper');
 
 var ACTIONS = [
     'page',

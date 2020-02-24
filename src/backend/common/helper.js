@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = helper;
+module.exports = Helper;
 
 var glob     = require('glob');
 var path     = require('path');
@@ -9,7 +9,7 @@ var fs       = require('fs');
 var _        = require('underscore');
 var Promise  = require('bluebird');
 
-function helper() {}
+function Helper() {}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
@@ -23,14 +23,14 @@ function _getFilePathsSync(dirPath, ext) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getFilePathsSync = function(publicDirPath, subDirPath, ext) {
+Helper.getFilePathsSync = function(publicDirPath, subDirPath, ext) {
     return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
         return slash(path.relative(publicDirPath, filePath));
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper._glob = function(path) {
+Helper._glob = function(path) {
     return new Promise(function(resolve, reject) {
         glob(path, function(err, items) {
             if (err) {
@@ -45,13 +45,13 @@ helper._glob = function(path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePaths2(dirPath, ext, filePaths) {
     // all files from directory
-    return helper._glob(path.join(dirPath, '*.' + ext)).then(function(files) {
+    return Helper._glob(path.join(dirPath, '*.' + ext)).then(function(files) {
         // pushing files to output array
         files.forEach(function(item) {
             filePaths.push(item);
         });
         // all directories from directory
-        return helper._glob(path.join(dirPath, '*/')).then(function(dirs) {
+        return Helper._glob(path.join(dirPath, '*/')).then(function(dirs) {
             // for each dir push files to output array
             return Promise.each(dirs, function(subDirPath) {
                 return _getFilePaths2(subDirPath, ext, filePaths);
@@ -61,7 +61,7 @@ function _getFilePaths2(dirPath, ext, filePaths) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getFilePaths = function(publicDirPath, subDirPath, ext) {
+Helper.getFilePaths = function(publicDirPath, subDirPath, ext) {
     var filePaths = [];
     return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
         var relativeFilePaths = filePaths.map(function(filePath) {
@@ -72,7 +72,7 @@ helper.getFilePaths = function(publicDirPath, subDirPath, ext) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getAppInfo = function(appFilePath) {
+Helper.getAppInfo = function(appFilePath) {
     return new Promise(function(resolve, reject) {
         fs.readFile(appFilePath, 'utf8', function(err, content) {
             if (err) {
@@ -80,7 +80,7 @@ helper.getAppInfo = function(appFilePath) {
             } else {
                 var data = JSON.parse(content);
                 if (data['@class'] && data['@class'] === 'Application') {
-                    var appInfo = helper.getAppInfoFromData(appFilePath, data);
+                    var appInfo = Helper.getAppInfoFromData(appFilePath, data);
                     resolve(appInfo);
                 } else {
                     resolve(null);
@@ -91,7 +91,7 @@ helper.getAppInfo = function(appFilePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getAppInfoFromData = function(appFilePath, data) {
+Helper.getAppInfoFromData = function(appFilePath, data) {
     var fileName = path.basename(appFilePath, path.extname(appFilePath));
     var dirName  = path.basename(path.dirname(appFilePath));
     return {
@@ -108,11 +108,11 @@ helper.getAppInfoFromData = function(appFilePath, data) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getAppInfos = function(appsDirPath) {
-    return helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
+Helper.getAppInfos = function(appsDirPath) {
+    return Helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
         var appInfos = [];
         return Promise.each(appFilesPaths, function(appFilePath) {
-            return helper.getAppInfo(appFilePath).then(function(appInfo) {
+            return Helper.getAppInfo(appFilePath).then(function(appInfo) {
                 if (appInfo) {
                     appInfos.push(appInfo);
                 }
@@ -124,7 +124,7 @@ helper.getAppInfos = function(appsDirPath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.currentTime = function() {
+Helper.currentTime = function() {
     var now = new Date();
     var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
     var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
@@ -133,7 +133,7 @@ helper.currentTime = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.currentDate = function() {
+Helper.currentDate = function() {
     var now = new Date();
     var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
     var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
@@ -142,12 +142,12 @@ helper.currentDate = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.currentDateTime = function() {
-    return helper.currentDate() + ' ' + helper.currentTime();
+Helper.currentDateTime = function() {
+    return Helper.currentDate() + ' ' + Helper.currentTime();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.templateValue = function(value, params) {
+Helper.templateValue = function(value, params) {
     return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
         if (params.hasOwnProperty(name)) {
             return params[name];
@@ -158,7 +158,7 @@ helper.templateValue = function(value, params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getCommandLineParams = function() {
+Helper.getCommandLineParams = function() {
     var params = process.argv.map(function(arg) {
         var param = arg.split('=');
         return {
@@ -177,7 +177,7 @@ helper.getCommandLineParams = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.replaceKey = function(obj, key1, key2) {
+Helper.replaceKey = function(obj, key1, key2) {
     var keys   = Object.keys(obj);
     var values = _.filter(obj, function () {return true;});
     var index  = keys.indexOf(key1);
@@ -189,7 +189,7 @@ helper.replaceKey = function(obj, key1, key2) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getFileContent = function(filePath) {
+Helper.getFileContent = function(filePath) {
     return new Promise(function(resolve, reject) {
         fs.exists(filePath, function(exists) {
             if (exists) {
@@ -208,7 +208,7 @@ helper.getFileContent = function(filePath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.putFileContent = function(filePath, content) {
+Helper.putFileContent = function(filePath, content) {
     return new Promise(function(resolve, reject) {
         fs.writeFile(filePath, content, 'utf8', function(err) {
             if (err) {
@@ -221,7 +221,7 @@ helper.putFileContent = function(filePath, content) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.createDirIfNotExists = function(dirPath) {
+Helper.createDirIfNotExists = function(dirPath) {
     return new Promise(function(resolve, reject) {
         fs.exists(dirPath, function(exists) {
             if (exists) {
@@ -240,14 +240,14 @@ helper.createDirIfNotExists = function(dirPath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.createDirIfNotExistsSync = function(dirPath) {
+Helper.createDirIfNotExistsSync = function(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
     }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.moveObjProp = function(obj, prop, offset) {
+Helper.moveObjProp = function(obj, prop, offset) {
     var keys     = _.keys(obj);
     var values   = _.values(obj);
     var oldIndex = keys.indexOf(prop);
@@ -281,7 +281,7 @@ function getRandomString(length) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.getTempSubDirPath3 = function(tempDirPath) {
+Helper.getTempSubDirPath3 = function(tempDirPath) {
     return new Promise(function (resolve, reject) {
         var subDirName = getRandomString(8);
         var tempSubSirPath = path.join(tempDirPath, subDirName);
@@ -295,7 +295,7 @@ helper.getTempSubDirPath3 = function(tempDirPath) {
                     }
                 });
             } else {
-                helper.getTempSubDirPath(tempDirPath, function () {
+                Helper.getTempSubDirPath(tempDirPath, function () {
                     resolve();
                 });
             }
@@ -304,7 +304,7 @@ helper.getTempSubDirPath3 = function(tempDirPath) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.copyFile3 = function(source, target) {
+Helper.copyFile3 = function(source, target) {
     return new Promise(function (resolve, reject) {
         var rd = fs.createReadStream(source);
         rd.on('error', function(err) {
@@ -322,8 +322,8 @@ helper.copyFile3 = function(source, target) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.exists = function(path) {
-    //console.log('helper.exists');
+Helper.exists = function(path) {
+    //console.log('Helper.exists');
     return new Promise(function (resolve) {
         fs.exists(path, function (exists) {
             resolve(exists);
@@ -332,8 +332,8 @@ helper.exists = function(path) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.readFile = function(path) {
-    //console.log('helper.readFile');
+Helper.readFile = function(path) {
+    //console.log('Helper.readFile');
     return new Promise(function (resolve, reject) {
         fs.readFile(path, 'utf8', function(err, content) {
             if (err) {
@@ -346,8 +346,8 @@ helper.readFile = function(path) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.writeFile = function(path, content) {
-    //console.log('helper.writeFile');
+Helper.writeFile = function(path, content) {
+    //console.log('Helper.writeFile');
     return new Promise(function (resolve, reject) {
         fs.writeFile(path, content, 'utf8', function(err) {
             if (err) {
@@ -380,7 +380,7 @@ var entityMap = {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.escapeHtml = function (string) {
+Helper.escapeHtml = function (string) {
     return String(string).replace(/[&<>"'`=\/]/g, function (s) {
         return entityMap[s];
     });
