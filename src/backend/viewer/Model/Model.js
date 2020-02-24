@@ -12,45 +12,42 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
-        var self = this;
-        self.name              = data['@attributes'].name;
-        self.data              = data;
-        self.parent            = parent;
-        self.view              = undefined;
-        self.js                = undefined;
-        self.createCollections = [];
-        self.fillCollections   = [];
+        this.name              = data['@attributes'].name;
+        this.data              = data;
+        this.parent            = parent;
+        this.view              = undefined;
+        this.js                = undefined;
+        this.createCollections = [];
+        this.fillCollections   = [];
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     init() {
-        var self = this;
-        return Promise.each(self.createCollections, function (colName) {
-            return self.createCollection(colName);
-        }).then(function () {
-            return self.getView();
-        }).then(function (view) {
-            self.view = view;
-            return self.getJs();
-        }).then(function (js) {
-            self.js = js;
+        return Promise.each(this.createCollections, colName => {
+            return this.createCollection(colName);
+        }).then(() => {
+            return this.getView();
+        }).then(view => {
+            this.view = view;
+            return this.getJs();
+        }).then(js => {
+            this.js = js;
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fill(context) {
-        var self = this;
         console.log('Model.prototype.fill', this.constructor.name, this.name);
-        return Promise.try(function () {
+        return Promise.try(() => {
             var response = {
-                class: self.data['@class'],
-                view : self.view,
-                js   : self.js
+                class: this.data['@class'],
+                view : this.view,
+                js   : this.js
             };
-            for (var name in self.data['@attributes']) {
-                response[name] = self.data['@attributes'][name];
+            for (var name in this.data['@attributes']) {
+                response[name] = this.data['@attributes'][name];
             }
-            return self._fillCollections(response, context).then(function () {
+            return this._fillCollections(response, context).then(() => {
                 return response;
             });
         });
@@ -58,29 +55,27 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _fillCollections(response, context) {
-        var self = this;
-        return Promise.each(self.fillCollections, function (colName) {
+        return Promise.each(this.fillCollections, colName => {
             if (colName === 'dataSources') {
-                return self.fillCollectionDefaultFirst(response, colName, context);
+                return this.fillCollectionDefaultFirst(response, colName, context);
             } else {
-                return self.fillCollection(response, colName, context);
+                return this.fillCollection(response, colName, context);
             }
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     createCollection(colName) {
-        var self = this;
         //console.log('Model.prototype.createCollection', colName);
-        return Promise.try(function () {
-            if (self.data[colName]) {
-                return Promise.each(Object.keys(self.data[colName]), function (itemName) {
-                    var itemData = self.data[colName][itemName];
+        return Promise.try(() => {
+            if (this.data[colName]) {
+                return Promise.each(Object.keys(this.data[colName]), itemName => {
+                    var itemData = this.data[colName][itemName];
                     var className1 = '{class}Controller'.replace('{class}', itemData['@class']);
                     var className2 =                                        itemData['@class'];
                     var className = qforms[className1] ? className1 : className2;
-                    return qforms[className].create(itemData, self).then(function (obj) {
-                        self[colName][itemName] = obj;
+                    return qforms[className].create(itemData, this).then(obj => {
+                        this[colName][itemName] = obj;
                         return obj.init();
                     });
                 });
@@ -90,13 +85,12 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fillCollection(response, colName, context) {
-        var self = this;
-        return Promise.try(function () {
-            if (self[colName]) {
+        return Promise.try(() => {
+            if (this[colName]) {
                 response[colName] = {};
-                return Promise.each(Object.keys(self[colName]), function (itemName) {
-                    var collectionItem = self[colName][itemName];
-                    return collectionItem.fill(context).then(function (_response) {
+                return Promise.each(Object.keys(this[colName]), itemName => {
+                    var collectionItem = this[colName][itemName];
+                    return collectionItem.fill(context).then(_response => {
                         response[colName][itemName] = _response;
                     });
                 });
@@ -106,20 +100,19 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fillCollectionDefaultFirst(response, colName, context) {
-        var self = this;
         //console.log('Model.prototype.fillCollectionDefaultFirst', colName);
-        return Promise.try(function () {
+        return Promise.try(() => {
             response[colName] = {};
-            var defaultArr = Object.keys(self[colName]).filter(function(itemName) {return itemName === 'default';});
-            return Promise.each(defaultArr, function (itemName) {
-                return self[colName][itemName].fill(context).then(function (_response) {
+            var defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
+            return Promise.each(defaultArr, itemName => {
+                return this[colName][itemName].fill(context).then(_response => {
                     response[colName][itemName] = _response;
                 });
             });
-        }).then(function () {
-            var noDefaultArr = Object.keys(self[colName]).filter(function(itemName) {return itemName !== 'default';});
-            return Promise.each(noDefaultArr, function (itemName) {
-                return self[colName][itemName].fill(context).then(function (_response) {
+        }).then(() => {
+            var noDefaultArr = Object.keys(this[colName]).filter(itemName => {return itemName !== 'default';});
+            return Promise.each(noDefaultArr, itemName => {
+                return this[colName][itemName].fill(context).then(_response => {
                     response[colName][itemName] = _response;
                 });
             });
@@ -128,19 +121,18 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getView() {
-        var self = this;
-        return Promise.try(function () {
-            if (self.viewFilePath) {
-                if (self.customViewFilePath) {
-                    return qforms.Helper.exists(self.customViewFilePath).then(function(exists) {
+        return Promise.try(() => {
+            if (this.viewFilePath) {
+                if (this.customViewFilePath) {
+                    return qforms.Helper.exists(this.customViewFilePath).then(exists => {
                         if (exists) {
-                            return qforms.Helper.readFile(self.customViewFilePath);
+                            return qforms.Helper.readFile(this.customViewFilePath);
                         } else {
-                            return qforms.Helper.readFile(self.viewFilePath);
+                            return qforms.Helper.readFile(this.viewFilePath);
                         }
                     });
                 } else {
-                    return qforms.Helper.readFile(self.viewFilePath);
+                    return qforms.Helper.readFile(this.viewFilePath);
                 }
             }
         });
@@ -148,11 +140,10 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getJs() {
-        var self = this;
-        return Promise.try(function () {
-            if (self.dirPath) {
-                var jsFilePath = path.join(self.dirPath, self.name + '.js');
-                return qforms.Helper.exists(jsFilePath).then(function (exists) {
+        return Promise.try(() => {
+            if (this.dirPath) {
+                var jsFilePath = path.join(this.dirPath, this.name + '.js');
+                return qforms.Helper.exists(jsFilePath).then(exists => {
                     if (exists) {
                         return qforms.Helper.readFile(jsFilePath);
                     }
@@ -163,8 +154,7 @@ class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getClassName() {
-        var self = this;
-        return self.constructor.name;
+        return this.constructor.name;
     }
 
 }
