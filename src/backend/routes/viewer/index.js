@@ -3,7 +3,7 @@
 var HostApp = require('../../viewer/HostApp');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     console.log('routes/viewer');
     var hostApp = new HostApp();
     hostApp.init();

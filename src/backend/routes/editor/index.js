@@ -38,14 +38,14 @@ var ACTIONS = [
 ];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     if (req.app.get('env') === 'development') {
         if (req.params.appDirName && req.params.appFileName) {
             // var route = req.params.appDirName + '/' + req.params.appFileName;
             var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-            fs.exists(appFilePath, function(exists) {
+            fs.exists(appFilePath, exists => {
                 if (exists) {
-                    qforms.Helper.getAppInfo(appFilePath).then(function(appInfo) {
+                    qforms.Helper.getAppInfo(appFilePath).then(appInfo => {
                         handle(req, res, appInfo, next);
                     });
                 } else {
@@ -64,16 +64,16 @@ module.exports = function(req, res, next) {
 function handle(req, res, appInfo, next) {
     switch (req.method) {
         case 'GET':
-            index(req, res, appInfo).then(function (options) {
+            index(req, res, appInfo).then(options => {
                 res.render('editor/view', options);
-            }).catch(function (err) {
+            }).catch(err => {
                 next(err);
             });
             break;
         case 'POST':
-            action(req, res, appInfo).then(function (result) {
+            action(req, res, appInfo).then(result => {
                 res.json(result);
-            }).catch(function (err) {
+            }).catch(err => {
                 next(err);
             });
             break;
@@ -85,7 +85,7 @@ function handle(req, res, appInfo, next) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, appInfo) {
     var appFile = new qforms.JsonFile(appInfo.filePath);
-    return appFile.read().then(function () {
+    return appFile.read().then(() => {
         return {
             version        : req.app.get('version'),
             commonClassCss : req.app.get('commonClassCss'),
@@ -100,21 +100,19 @@ function index(req, res, appInfo) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function action(req, res, appInfo) {
+async function action(req, res, appInfo) {
     console.log('action:', req.body.controller, req.body.action);
-    return Promise.try(function () {
-        if (CONTROLLERS.indexOf(req.body.controller) === -1) {
-            throw new Error('Unknown controller {controller}'.replace('{controller}', req.body.controller));
-        }
-        if (ACTIONS.indexOf(req.body.action) === -1) {
-            throw new Error('Unknown action {action}'.replace('{action}', req.body.action));
-        }
-        var ControllerClassName = 'qforms.{controller}EditorController'.replace('{controller}', req.body.controller);
-        var ControllerClass = eval(ControllerClassName);
-        var method = req.body.action;
-        var ctrl = new ControllerClass(appInfo);
-        return ctrl[method](req.body.params).then(function (result) {
-            return result;
-        });
+    if (CONTROLLERS.indexOf(req.body.controller) === -1) {
+        throw new Error('Unknown controller {controller}'.replace('{controller}', req.body.controller));
+    }
+    if (ACTIONS.indexOf(req.body.action) === -1) {
+        throw new Error('Unknown action {action}'.replace('{action}', req.body.action));
+    }
+    var ControllerClassName = 'qforms.{controller}EditorController'.replace('{controller}', req.body.controller);
+    var ControllerClass = eval(ControllerClassName);
+    var method = req.body.action;
+    var ctrl = new ControllerClass(appInfo);
+    return ctrl[method](req.body.params).then(result => {
+        return result;
     });
 }

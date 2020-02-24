@@ -7,9 +7,9 @@ var qforms = require('../../../qforms');
 var server = require('../../../server');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
     if (req.method === 'GET') {
-        qforms.Helper.getAppInfos(req.app.get('appsDirPath')).then(function(appInfos) {
+        qforms.Helper.getAppInfos(req.app.get('appsDirPath')).then(appInfos => {
             res.render('home/view', {
                 req           : req,
                 version       : req.app.get('version'),
@@ -30,13 +30,13 @@ module.exports = function(req, res, next) {
         }
         var appDirPath  = path.join(req.app.get('appsDirPath'), req.body.folder);
         var appFilePath = path.join(appDirPath,                 req.body.name + '.json');
-        qforms.Helper.createDirIfNotExists(appDirPath).then(function() {
+        qforms.Helper.createDirIfNotExists(appDirPath).then(() => {
             return qforms.ApplicationEditor.createAppFile(appFilePath, {
                 name: req.body.name
             });
-        }).then(function(appFile) {
+        }).then(appFile => {
             return qforms.Helper.getAppInfos(req.app.get('appsDirPath'));
-        }).then(function(appInfos) {
+        }).then(appInfos => {
             res.json({
                 appList: appInfos
             });
