@@ -20,32 +20,30 @@ class SqlDataSource extends DataSource {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    static create(data, parent) {
-        return Promise.try(() => {
-            if (parent instanceof qforms.Form) {
-                var form = parent;
-                var customClassFilePath = path.join(
-                    form.page.application.dirPath,
-                    'pages',
-                    form.page.name,
-                    'forms',
-                    form.name,
-                    'dataSources',
-                    data['@attributes'].name,
-                    data['@attributes'].name + '.backend.js'
-                );
-                return qforms.Helper.getFileContent(customClassFilePath).then(content => {
-                    if (content) {
-                        var customClass = eval(content);
-                        return new customClass(data, parent);
-                    } else {
-                        return new SqlDataSource(data, parent);
-                    }
-                });
-            } else {
-                return new SqlDataSource(data, parent);
-            }
-        });
+    static async create(data, parent) {
+        if (parent instanceof qforms.Form) {
+            var form = parent;
+            var customClassFilePath = path.join(
+                form.page.application.dirPath,
+                'pages',
+                form.page.name,
+                'forms',
+                form.name,
+                'dataSources',
+                data['@attributes'].name,
+                data['@attributes'].name + '.backend.js'
+            );
+            return qforms.Helper.getFileContent(customClassFilePath).then(content => {
+                if (content) {
+                    var customClass = eval(content);
+                    return new customClass(data, parent);
+                } else {
+                    return new SqlDataSource(data, parent);
+                }
+            });
+        } else {
+            return new SqlDataSource(data, parent);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,42 +64,38 @@ class SqlDataSource extends DataSource {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    select(context) {
+    async select(context) {
         console.log('SqlDataSource.prototype.select', this.name);
-        return Promise.try(() => {
-            var access = this.getAccessToken(context);
-            if (access.select === false) {
-                throw new Error('[{fullName}]: access denied.'.template({
-                    fullName: this.getFullName()
-                }));
-            }
-            var query  = this.form ? this.form.replaceThis(context, this.data['@attributes'].query) : this.data['@attributes'].query;
-            var params = this.getParams(context);
-            return this.query(context, query, params, true).then(rows => {
-                return rows;
-            });
+        var access = this.getAccessToken(context);
+        if (access.select === false) {
+            throw new Error('[{fullName}]: access denied.'.template({
+                fullName: this.getFullName()
+            }));
+        }
+        var query  = this.form ? this.form.replaceThis(context, this.data['@attributes'].query) : this.data['@attributes'].query;
+        var params = this.getParams(context);
+        return this.query(context, query, params, true).then(rows => {
+            return rows;
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    selectCount(context) {
-        return Promise.try(() => {
-            var access = this.getAccessToken(context);
-            if (access.select === false) {
-                throw new Error('[{fullName}]: access denied.'.template({fullName: this.getFullName()}));
+    async selectCount(context) {
+        var access = this.getAccessToken(context);
+        if (access.select === false) {
+            throw new Error('[{fullName}]: access denied.'.template({fullName: this.getFullName()}));
+        }
+        var query = this.form ? this.form.replaceThis(context, this.data['@attributes'].countQuery) : this.data['@attributes'].countQuery;
+        var params = this.getParams(context);
+        return this.query(context, query, params, true).then(rows => {
+            var row = rows[0];
+            if (row === undefined) {
+                throw new Error('[{fullName}]: countQuery must return one row.'.template({
+                    fullName: this.getFullName()
+                }));
             }
-            var query = this.form ? this.form.replaceThis(context, this.data['@attributes'].countQuery) : this.data['@attributes'].countQuery;
-            var params = this.getParams(context);
-            return this.query(context, query, params, true).then(rows => {
-                var row = rows[0];
-                if (row === undefined) {
-                    throw new Error('[{fullName}]: countQuery must return one row.'.template({
-                        fullName: this.getFullName()
-                    }));
-                }
-                var count = row[Object.keys(row)[0]];
-                return count;
-            });
+            var count = row[Object.keys(row)[0]];
+            return count;
         });
     }
 
@@ -188,19 +182,17 @@ class SqlDataSource extends DataSource {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    delete(context) {
-        return Promise.try(() => {
-            var access = this.getAccessToken(context);
-            if (access.delete === false) {
-                throw new Error('[{fullName}]: access denied.'.template({
-                    fullName: this.getFullName()
-                }));
-            }
-            var row = context.row;
-            const rowKeyValues = this.getRowKeyValues(row);
-            var query = this.database.getDeleteQuery(this.data['@attributes'].table, rowKeyValues);
-            return this.query(context, query, row, false);
-        });
+    async delete(context) {
+        var access = this.getAccessToken(context);
+        if (access.delete === false) {
+            throw new Error('[{fullName}]: access denied.'.template({
+                fullName: this.getFullName()
+            }));
+        }
+        var row = context.row;
+        const rowKeyValues = this.getRowKeyValues(row);
+        var query = this.database.getDeleteQuery(this.data['@attributes'].table, rowKeyValues);
+        return this.query(context, query, row, false);
     }
 
 }
