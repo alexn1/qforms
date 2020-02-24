@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = HostApp;
-
 var path    = require('path');
 var fs      = require('fs');
 var util    = require('util');
@@ -22,357 +20,364 @@ var ACTIONS = [
 ];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function HostApp(options) {
-    var self = this;
-    self.options      = options || {};
-    self.applications = null;
-    self.route        = null;
-    self.application  = null;
-}
+class HostApp {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.init = function () {
-    var self = this;
-    self.applications = server.get('applications');
-};
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(options) {
+        var self = this;
+        self.options      = options || {};
+        self.applications = null;
+        self.route        = null;
+        self.application  = null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.actionViewer = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.actionViewer');
-    if (req.params.appDirName && req.params.appFileName) {
-        Promise.try(function () {
-            const route = self.route = [req.params.appDirName, req.params.appFileName].join('/');
-            const application = self.applications[route];
-            if (application) {
-                if (req.query.debug === '1' && req.method === 'GET') {
-                    return application.deinit().then(function () {
-                        return self.createApplication(req, res).then(function (application) {
-                            return self.applications[route] = application;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    init() {
+        var self = this;
+        self.applications = server.get('applications');
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    actionViewer(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.actionViewer');
+        if (req.params.appDirName && req.params.appFileName) {
+            Promise.try(function () {
+                const route = self.route = [req.params.appDirName, req.params.appFileName].join('/');
+                const application = self.applications[route];
+                if (application) {
+                    if (req.query.debug === '1' && req.method === 'GET') {
+                        return application.deinit().then(function () {
+                            return self.createApplication(req, res).then(function (application) {
+                                return self.applications[route] = application;
+                            });
+                        });
+                    } else {
+                        return application;
+                    }
+                } else {
+                    return self.createApplication(req, res).then(function (application) {
+                        return self.applications[route] = application;
+                    });
+                }
+            }).then(function (application) {
+                self.application = application;
+                self.handle(req, res, next);
+                return null;
+            }).catch(function (err) {
+                next(err);
+            });
+        } else {
+            next();
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    createApplication(req, res) {
+        var self = this;
+        console.log(`HostApp.prototype.createApplication ${req.params.appDirName}/${req.params.appFileName}`);
+        var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
+        return qforms.Application.create(appFilePath).then(function (application) {
+            return application.init().then(function () {
+                return application;
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    handle(req, res, next) {
+        var self = this;
+        //console.log('HostApp.prototype.handle', req.method);
+        if (req.method === 'GET') {
+            if (self.application.authentication() && !(req.session.user && req.session.user[self.route])) {
+                self.login(req, res, next);
+            } else {
+                self.index(req, res, next);
+            }
+        } else if (req.method === 'POST') {
+            if (req.body.action === 'login') {
+                self.login(req, res);
+            } else {
+                if (self.application.authentication() && !(req.session.user && req.session.user[self.route])) {
+                    //res.status(500);
+                    //res.end('not authenticated');
+                    next(new Error('not authenticated'));
+                } else {
+                    if (ACTIONS.indexOf(req.body.action) !== -1) {
+                        eval('self.{action}(req, res, next)'.replace('{action}', req.body.action));
+                    } else {
+                        throw new Error('unknown action: ' + req.body.action);
+                    }
+                }
+            }
+        } else {
+            next();
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    login(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.login');
+        var context = qforms.Application.createContext({req: req});
+        if (req.method === 'GET') {
+            self.application.getUsers(context).then(function (users) {
+                self.application.destroyContext(context);
+                res.render('viewer/login', {
+                    version       : req.app.get('version'),
+                    application   : self.application,
+                    caption       : self.application.data['@attributes'].caption,
+                    REQUEST_URI   : req.url,
+                    errMsg        : null,
+                    username      : null,
+                    users         : users
+                });
+            }).catch(function (err) {
+                next(err);
+            });
+        } else if (req.method === 'POST') {
+            self.application.authenticate(context, req.body.username, req.body.password).then(function (authenticate, user) {
+                if (authenticate) {
+                    if (req.session.user === undefined) {
+                        req.session.user = {};
+                    }
+                    if (user) {
+                        req.session.user[self.route] = user;
+                    } else {
+                        req.session.user[self.route] = {name: req.body.username};
+                    }
+                    self.application.destroyContext(context);
+                    res.redirect(req.url);
+                } else {
+                    self.application.getUsers(context).then(function (users) {
+                        self.application.destroyContext(context);
+                        res.render('viewer/login', {
+                            version    : req.app.get('version'),
+                            application: self.application,
+                            caption    : self.application.data['@attributes'].caption,
+                            REQUEST_URI: req.url,
+                            errMsg     : self.application.text.login.WrongUsernameOrPassword,
+                            username   : req.body.username,
+                            users      : users
                         });
                     });
-                } else {
-                    return application;
                 }
-            } else {
-                return self.createApplication(req, res).then(function (application) {
-                    return self.applications[route] = application;
-                });
-            }
-        }).then(function (application) {
-            self.application = application;
-            self.handle(req, res, next);
+            }).catch(function (err) {
+                next(err);
+            });
+        } else {
+            next();
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    index(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.index', self.application.name);
+        var context = qforms.Application.createContext({req: req});
+        self.application.fill(context).then(function (response) {
+            self.application.destroyContext(context);
+            res.render('viewer/view', {
+                version       : req.app.get('version'),
+                debugApp      : req.query.debug,
+                commonClassCss: req.app.get('commonClassCss'),
+                commonClassJs : req.app.get('commonClassJs'),
+                viewerClassCss: req.app.get('viewerClassCss'),
+                viewerClassJs : req.app.get('viewerClassJs'),
+                links         : self.application.css,
+                caption       : self.application.data['@attributes'].caption,
+                data          : response
+            });
             return null;
         }).catch(function (err) {
             next(err);
         });
-    } else {
-        next();
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.createApplication = function (req, res) {
-    var self = this;
-    console.log(`HostApp.prototype.createApplication ${req.params.appDirName}/${req.params.appFileName}`);
-    var appFilePath = path.join(req.app.get('appsDirPath'), req.params.appDirName, req.params.appFileName + '.json');
-    return qforms.Application.create(appFilePath).then(function (application) {
-        return application.init().then(function () {
-            return application;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    page(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.page', req.body.page);
+        var context = qforms.Application.createContext({
+            req           : req,
+            params        : req.body.params,
+            newMode       : req.body.newMode,
+            parentPageName: req.body.parentPageName
         });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.handle = function (req, res, next) {
-    var self = this;
-    //console.log('HostApp.prototype.handle', req.method);
-    if (req.method === 'GET') {
-        if (self.application.authentication() && !(req.session.user && req.session.user[self.route])) {
-            self.login(req, res, next);
-        } else {
-            self.index(req, res, next);
-        }
-    } else if (req.method === 'POST') {
-        if (req.body.action === 'login') {
-            self.login(req, res);
-        } else {
-            if (self.application.authentication() && !(req.session.user && req.session.user[self.route])) {
-                //res.status(500);
-                //res.end('not authenticated');
-                next(new Error('not authenticated'));
-            } else {
-                if (ACTIONS.indexOf(req.body.action) !== -1) {
-                    eval('self.{action}(req, res, next)'.replace('{action}', req.body.action));
-                } else {
-                    throw new Error('unknown action: ' + req.body.action);
-                }
-            }
-        }
-    } else {
-        next();
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.login = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.login');
-    var context = qforms.Application.createContext({req: req});
-    if (req.method === 'GET') {
-        self.application.getUsers(context).then(function (users) {
-            self.application.destroyContext(context);
-            res.render('viewer/login', {
-                version       : req.app.get('version'),
-                application   : self.application,
-                caption       : self.application.data['@attributes'].caption,
-                REQUEST_URI   : req.url,
-                errMsg        : null,
-                username      : null,
-                users         : users
+        self.application.getPage(context, req.body.page).then(function (page) {
+            return page.fill(context).then(function (data) {
+                self.application.destroyContext(context);
+                res.json({
+                    data: data
+                });
+                return null;
             });
         }).catch(function (err) {
             next(err);
         });
-    } else if (req.method === 'POST') {
-        self.application.authenticate(context, req.body.username, req.body.password).then(function (authenticate, user) {
-            if (authenticate) {
-                if (req.session.user === undefined) {
-                    req.session.user = {};
-                }
-                if (user) {
-                    req.session.user[self.route] = user;
-                } else {
-                    req.session.user[self.route] = {name: req.body.username};
-                }
-                self.application.destroyContext(context);
-                res.redirect(req.url);
-            } else {
-                self.application.getUsers(context).then(function (users) {
-                    self.application.destroyContext(context);
-                    res.render('viewer/login', {
-                        version    : req.app.get('version'),
-                        application: self.application,
-                        caption    : self.application.data['@attributes'].caption,
-                        REQUEST_URI: req.url,
-                        errMsg     : self.application.text.login.WrongUsernameOrPassword,
-                        username   : req.body.username,
-                        users      : users
-                    });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    update(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.update', req.body.page);
+        var context = qforms.Application.createContext({
+            req           : req,
+            row           : req.body.row,
+            parentPageName: req.body.parentPageName
+        });
+        self.application.getPage(context, req.body.page).then(function (page) {
+            var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+            return dataSource.database.getConnection(context).then(function (cnn) {
+                return dataSource.database.beginTransaction(cnn).then(function () {
+                    return dataSource.update(context);
+                }).then(function () {
+                    return dataSource.database.commit(cnn);
+                }).catch(function (err) {
+                    console.error(err);
+                    return dataSource.database.rollback(cnn, err);
                 });
-            }
+            });
+        }).then(function () {
+            self.application.destroyContext(context);
+            res.json(null);
         }).catch(function (err) {
             next(err);
         });
-    } else {
-        next();
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.index = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.index', self.application.name);
-    var context = qforms.Application.createContext({req: req});
-    self.application.fill(context).then(function (response) {
-        self.application.destroyContext(context);
-        res.render('viewer/view', {
-            version       : req.app.get('version'),
-            debugApp      : req.query.debug,
-            commonClassCss: req.app.get('commonClassCss'),
-            commonClassJs : req.app.get('commonClassJs'),
-            viewerClassCss: req.app.get('viewerClassCss'),
-            viewerClassJs : req.app.get('viewerClassJs'),
-            links         : self.application.css,
-            caption       : self.application.data['@attributes'].caption,
-            data          : response
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    frame(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.frame', req.body.page);
+        var start = Date.now();
+        var context = qforms.Application.createContext({
+            req           : req,
+            parentPageName: req.body.parentPageName,
+            params        : req.body.params
         });
-        return null;
-    }).catch(function (err) {
-        next(err);
-    });
-};
+        Promise.try(function () {
+            if (req.body.page) {
+                return self.application.getPage(context, req.body.page).then(function (page) {
+                    if (req.body.form) {
+                        return page.forms[req.body.form].dataSources[req.body.ds];
+                    } else {
+                        return page.dataSources[req.body.ds];
+                    }
+                });
+            } else {
+                return self.application.dataSources[req.body.ds];
+            }
+        }).then(function (dataSource) {
+            return dataSource.frame(context).then(function (response) {
+                self.application.destroyContext(context);
+                var time = Date.now() - start;
+                console.log('frame time:', time);
+                response.time = time;
+                res.json(response);
+            });
+        }).catch(function (err) {
+            next(err);
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.page = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.page', req.body.page);
-    var context = qforms.Application.createContext({
-        req           : req,
-        params        : req.body.params,
-        newMode       : req.body.newMode,
-        parentPageName: req.body.parentPageName
-    });
-    self.application.getPage(context, req.body.page).then(function (page) {
-        return page.fill(context).then(function (data) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    insert(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.insert', req.body.page);
+        var context = qforms.Application.createContext({
+            req           : req,
+            row           : req.body.row,
+            parentPageName: req.body.parentPageName
+        });
+        self.application.getPage(context, req.body.page).then(function (page) {
+            var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+            return dataSource.database.getConnection(context).then(function(cnn) {
+                return dataSource.database.beginTransaction(cnn).then(function () {
+                    return dataSource.insert(context).then(function (key) {
+                        return dataSource.database.commit(cnn).then(function () {
+                            return key;
+                        });
+                    });
+                }).catch(function (err) {
+                    console.error(err);
+                    return dataSource.database.rollback(cnn, err);
+                });
+            });
+        }).then(function (key) {
             self.application.destroyContext(context);
             res.json({
-                data: data
+                key: key
             });
-            return null;
+        }).catch(function (err) {
+            next(err);
         });
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.update = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.update', req.body.page);
-    var context = qforms.Application.createContext({
-        req           : req,
-        row           : req.body.row,
-        parentPageName: req.body.parentPageName
-    });
-    self.application.getPage(context, req.body.page).then(function (page) {
-        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-        return dataSource.database.getConnection(context).then(function (cnn) {
-            return dataSource.database.beginTransaction(cnn).then(function () {
-                return dataSource.update(context);
-            }).then(function () {
-                return dataSource.database.commit(cnn);
-            }).catch(function (err) {
-                console.error(err);
-                return dataSource.database.rollback(cnn, err);
-            });
-        });
-    }).then(function () {
-        self.application.destroyContext(context);
-        res.json(null);
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.frame = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.frame', req.body.page);
-    var start = Date.now();
-    var context = qforms.Application.createContext({
-        req           : req,
-        parentPageName: req.body.parentPageName,
-        params        : req.body.params
-    });
-    Promise.try(function () {
-        if (req.body.page) {
-            return self.application.getPage(context, req.body.page).then(function (page) {
-                if (req.body.form) {
-                    return page.forms[req.body.form].dataSources[req.body.ds];
-                } else {
-                    return page.dataSources[req.body.ds];
-                }
-            });
-        } else {
-            return self.application.dataSources[req.body.ds];
-        }
-    }).then(function (dataSource) {
-        return dataSource.frame(context).then(function (response) {
-            self.application.destroyContext(context);
-            var time = Date.now() - start;
-            console.log('frame time:', time);
-            response.time = time;
-            res.json(response);
-        });
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.insert = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.insert', req.body.page);
-    var context = qforms.Application.createContext({
-        req           : req,
-        row           : req.body.row,
-        parentPageName: req.body.parentPageName
-    });
-    self.application.getPage(context, req.body.page).then(function (page) {
-        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-        return dataSource.database.getConnection(context).then(function(cnn) {
-            return dataSource.database.beginTransaction(cnn).then(function () {
-                return dataSource.insert(context).then(function (key) {
-                    return dataSource.database.commit(cnn).then(function () {
-                        return key;
-                    });
-                });
-            }).catch(function (err) {
-                console.error(err);
-                return dataSource.database.rollback(cnn, err);
-            });
-        });
-    }).then(function (key) {
-        self.application.destroyContext(context);
-        res.json({
-            key: key
-        });
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype._delete = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype._delete', req.body.page);
-    var context = qforms.Application.createContext({
-        req           : req,
-        row           : req.body.row,
-        parentPageName: req.body.parentPageName
-    });
-    self.application.getPage(context, req.body.page).then(function (page) {
-        var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-        return dataSource.database.getConnection(context).then(function (cnn) {
-            return dataSource.database.beginTransaction(cnn).then(function () {
-                return dataSource.delete(context);
-            }).then(function () {
-                return dataSource.database.commit(cnn);
-            }).catch(function (err) {
-                console.error(err);
-                return dataSource.database.rollback(cnn, err);
-            });
-        });
-    }).then(function () {
-        self.application.destroyContext(context);
-        res.json(null);
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.rpc = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.rpc', req.body);
-    var context = qforms.Application.createContext({
-        req   : req,
-        res   : res,
-        params: req.body.params
-    });
-    Promise.try(function () {
-        if (req.body.page) {
-            return self.application.getPage(context, req.body.page);
-        } else {
-            return self.application;
-        }
-    }).then(function (model) {
-        return model.rpc(context);
-    }).then(function (result) {
-        self.application.destroyContext(context);
-        res.json(result);
-    }).catch(function (err) {
-        next(err);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-HostApp.prototype.logout = function (req, res, next) {
-    var self = this;
-    console.log('HostApp.prototype.logout');
-    if (req.session.user && req.session.user[self.route]) {
-        delete req.session.user[self.route];
     }
-    res.json(null);
-};
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _delete(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype._delete', req.body.page);
+        var context = qforms.Application.createContext({
+            req           : req,
+            row           : req.body.row,
+            parentPageName: req.body.parentPageName
+        });
+        self.application.getPage(context, req.body.page).then(function (page) {
+            var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+            return dataSource.database.getConnection(context).then(function (cnn) {
+                return dataSource.database.beginTransaction(cnn).then(function () {
+                    return dataSource.delete(context);
+                }).then(function () {
+                    return dataSource.database.commit(cnn);
+                }).catch(function (err) {
+                    console.error(err);
+                    return dataSource.database.rollback(cnn, err);
+                });
+            });
+        }).then(function () {
+            self.application.destroyContext(context);
+            res.json(null);
+        }).catch(function (err) {
+            next(err);
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    rpc(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.rpc', req.body);
+        var context = qforms.Application.createContext({
+            req   : req,
+            res   : res,
+            params: req.body.params
+        });
+        Promise.try(function () {
+            if (req.body.page) {
+                return self.application.getPage(context, req.body.page);
+            } else {
+                return self.application;
+            }
+        }).then(function (model) {
+            return model.rpc(context);
+        }).then(function (result) {
+            self.application.destroyContext(context);
+            res.json(result);
+        }).catch(function (err) {
+            next(err);
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    logout(req, res, next) {
+        var self = this;
+        console.log('HostApp.prototype.logout');
+        if (req.session.user && req.session.user[self.route]) {
+            delete req.session.user[self.route];
+        }
+        res.json(null);
+    }
+
+}
+
+module.exports = HostApp;
