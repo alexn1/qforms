@@ -91,7 +91,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    checkRow(row) {
+    static checkRow(row) {
         // console.log('PostgreSqlDatabase.checkRow', row);
         for (const column in row) {
             if (row[column] !== null && /*!Array.isArray(row[column]) &&*/ typeof row[column] === 'object' && !(row[column] instanceof Date)) {
