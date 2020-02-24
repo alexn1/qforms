@@ -28,8 +28,8 @@ class MySqlDatabase extends Database {
         var self = this;
         console.log('MySqlDatabase.prototype.deinit: ' + self.name);
         if (self.pool !== null) {
-            return new Promise(function (resolve) {
-                self.pool.end(function () {
+            return new Promise(resolve => {
+                self.pool.end(() => {
                     resolve();
                 });
             });
@@ -59,9 +59,9 @@ class MySqlDatabase extends Database {
     getConnection(context) {
         var self = this;
         //console.log('MySqlDatabase.prototype.getConnection');
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             if (context.connections[self.name] === undefined) {
-                self._getPool().getConnection(function(err, cnn) {
+                self._getPool().getConnection((err, cnn) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -82,9 +82,9 @@ class MySqlDatabase extends Database {
         //    console.log('MySqlDatabase.prototype.query', query, params);
         //}
         nest = (nest !== undefined) ? nest : true;
-        return self.getConnection(context).then(function (cnn) {
-            return new Promise(function (resolve, reject) {
-                cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, function(err, result, fields) {
+        return self.getConnection(context).then(cnn => {
+            return new Promise((resolve, reject) => {
+                cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -130,8 +130,8 @@ class MySqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     beginTransaction(cnn) {
         console.log('MySqlDatabase.prototype.beginTransaction');
-        return new Promise(function (resolve, reject) {
-            cnn.beginTransaction(function(err) {
+        return new Promise((resolve, reject) => {
+            cnn.beginTransaction(err => {
                 if (err) {
                     reject(err);
                 } else {
@@ -144,8 +144,8 @@ class MySqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     commit(cnn) {
         console.log('MySqlDatabase.prototype.commit');
-        return new Promise(function (resolve, reject) {
-            cnn.commit(function(err) {
+        return new Promise((resolve, reject) => {
+            cnn.commit(err => {
                 if (err) {
                     reject(err);
                 } else {
@@ -158,8 +158,8 @@ class MySqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     rollback(cnn, err) {
         console.log('MySqlDatabase.prototype.rollback');
-        return new Promise(function (resolve, reject) {
-            cnn.rollback(function() {
+        return new Promise((resolve, reject) => {
+            cnn.rollback(() => {
                 reject(err);
             });
         });
@@ -168,7 +168,7 @@ class MySqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static queryFormat(query, params) {
         params = params || {};
-        var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        var sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return mysql.escape(params[name]);
             } else {
@@ -200,8 +200,8 @@ class MySqlDatabase extends Database {
         var desc = {};
         var aiFieldName;
         var query = 'desc `{table}`'.replace('{table}', table);
-        return self.query(context, query, null, true).then(function(rows) {
-            rows.forEach(function(info) {
+        return self.query(context, query, null, true).then(rows => {
+            rows.forEach(info => {
                 desc[info.Field] = info;
                 if (info.Extra === 'auto_increment') {
                     aiFieldName = info.Field;

@@ -25,14 +25,12 @@ class PostgreSqlDatabase extends Database {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    deinit() {
+    async deinit() {
         var self = this;
         console.log('PostgreSqlDatabase.prototype.deinit: ' + self.name);
-        return Promise.try(function () {
-            if (self.pool !== null) {
-                return self.pool.end();
-            }
-        });
+        if (self.pool !== null) {
+            return self.pool.end();
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +55,7 @@ class PostgreSqlDatabase extends Database {
     getConnection(context) {
         var self = this;
         console.log('PostgreSqlDatabase.prototype.getConnection');
-        return Promise.try(function () {
+        return Promise.try(() => {
             if (context.connections[self.name]) {
                 return context.connections[self.name];
             } else {
@@ -76,11 +74,11 @@ class PostgreSqlDatabase extends Database {
         //     console.log('PostgreSqlDatabase.prototype.query', query, params);
         // }
         nest = (nest !== undefined) ? nest : true;
-        return self.getConnection(context).then(function (cnn) {
+        return self.getConnection(context).then(cnn => {
             const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
             console.log('sql:', sql);
             console.log('values:', values);
-            return cnn.query(sql, values).then(function (result) {
+            return cnn.query(sql, values).then(result => {
                 for (let i = 0; i < result.rows.length; i++) {
                     PostgreSqlDatabase.checkRow(result.rows[i]);
                 }
@@ -101,25 +99,19 @@ class PostgreSqlDatabase extends Database {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    beginTransaction(cnn) {
+    async beginTransaction(cnn) {
         console.log('PostgreSqlDatabase.prototype.beginTransaction');
-        return Promise.try(function () {
-        });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    commit(cnn) {
+    async commit(cnn) {
         console.log('PostgreSqlDatabase.prototype.commit');
-        return Promise.try(function () {
-        });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    rollback(cnn, err) {
+    async rollback(cnn, err) {
         console.log('PostgreSqlDatabase.prototype.rollback');
-        return Promise.try(function () {
-            throw err;
-        });
+        throw err;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,24 +141,22 @@ class PostgreSqlDatabase extends Database {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    desc(context, table) {
+    async desc(context, table) {
         var self = this;
         console.log('PostgreSqlDatabase.prototype.desc', table);
-        return Promise.try(function () {
-            var desc = {};
-            var aiFieldName = 'id';
-            var query = `select column_name from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}';`;
-            return self.query(context, query, null, true).then(function(rows) {
-                rows.forEach(function(info) {
-                    desc[info.column_name] = info;
-                    // if (info.Extra === 'auto_increment') {
-                    //     aiFieldName = info.Field;
-                    // }
-                });
-                console.log('desc:', desc);
-                console.log('aiFieldName:', aiFieldName);
-                return [desc, aiFieldName];
+        var desc = {};
+        var aiFieldName = 'id';
+        var query = `select column_name from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}';`;
+        return self.query(context, query, null, true).then(rows => {
+            rows.forEach(info => {
+                desc[info.column_name] = info;
+                // if (info.Extra === 'auto_increment') {
+                //     aiFieldName = info.Field;
+                // }
             });
+            console.log('desc:', desc);
+            console.log('aiFieldName:', aiFieldName);
+            return [desc, aiFieldName];
         });
     }
 

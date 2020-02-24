@@ -13,11 +13,10 @@ class ButtonControl extends Control {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.viewFilePath = path.join(
+        this.viewFilePath = path.join(
             server.get('public'),
             'viewer/class/Controller/ModelController/ControlController/ButtonControlController/view',
-            self.parent.data['@class'] + this.data['@class'] + 'View.ejs'
+            this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
     }
 
