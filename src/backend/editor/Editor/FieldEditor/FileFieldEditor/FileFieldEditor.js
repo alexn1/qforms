@@ -1,39 +1,42 @@
 'use strict';
 
-module.exports = FileFieldEditor;
-
 var util = require('util');
 var path = require('path');
 
 var server      = require('../../../../../server');
 var FieldEditor = require('../FieldEditor');
 
-util.inherits(FileFieldEditor, FieldEditor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class FileFieldEditor extends FieldEditor {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function FileFieldEditor(formEditor, name) {
-    var self = this;
-    FileFieldEditor.super_.call(self, formEditor, name);
-    self.defaultViewDirPath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FieldController/FileFieldController/view'
-    );
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(formEditor, name) {
+        super(formEditor, name);
+        var self = this;
+        self.defaultViewDirPath = path.join(
+            server.get('public'),
+            'viewer/class/Controller/ModelController/FieldController/FileFieldController/view'
+        );
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createData(params) {
+        return {
+            '@class'     : 'FileField',
+            '@attributes': {
+                name          : params['name'],
+                caption       : params['caption']      ? params['caption']      : params['name'],
+                isVisible     : params['isVisible']    ? params['isVisible']    :         'true',
+                width         : params['width']        ? params['width']        :            '0',
+                defaultValue  : params['defaultValue'] ? params['defaultValue'] :             '',
+                column        : params['column']       ? params['column']       : params['name'],
+                readOnly      : params['readOnly']     ? params['readOnly']     :        'true',
+                notNull       : params['notNull']      ? params['notNull']      :        'false',
+                align         : params['align']        ? params['align']        :         'left'
+            }
+        };
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FileFieldEditor.createData = function(params) {
-    return {
-        '@class'     : 'FileField',
-        '@attributes': {
-            name          : params['name'],
-            caption       : params['caption']      ? params['caption']      : params['name'],
-            isVisible     : params['isVisible']    ? params['isVisible']    :         'true',
-            width         : params['width']        ? params['width']        :            '0',
-            defaultValue  : params['defaultValue'] ? params['defaultValue'] :             '',
-            column        : params['column']       ? params['column']       : params['name'],
-            readOnly      : params['readOnly']     ? params['readOnly']     :        'true',
-            notNull       : params['notNull']      ? params['notNull']      :        'false',
-            align         : params['align']        ? params['align']        :         'left'
-        }
-    };
-};
+module.exports = FileFieldEditor;
