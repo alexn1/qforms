@@ -9,40 +9,40 @@ var server = require('./server');
 var pkg    = require('../package.json');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-main(); function main() {
+main(); async function main() {
     console.log('www.main');
-    process.on('message', function (message) {
+    process.on('message', message => {
         if (message === 'shutdown') {
-            shutdown().then(function () {
+            shutdown().then(() => {
                 process.exit(0);
             });
         }
     });
-    process.on('SIGINT', function () {
+    process.on('SIGINT', () => {
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
-        shutdown().then(function () {
+        shutdown().then(() => {
             process.exit(0);
         });
     });
-    process.on('SIGTERM', function () {
+    process.on('SIGTERM', () => {
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         process.exit(1);
     });
-    process.on('exit', function (code) {
+    process.on('exit', code => {
         console.log('process.exit:', code);
     });
 
     var port = qforms.Helper.getCommandLineParams().port || pkg.config.port;
     var host = qforms.Helper.getCommandLineParams().host || pkg.config.host;
     var www = http.createServer(server);
-    www.on('error', function(err) {
+    www.on('error', err => {
         if (err.code === 'EADDRINUSE') {
             console.error('Address {host}:{port} in use.'.template({host: host, port: port}));
         } else {
             console.error(err);
         }
     });
-    www.listen(port, host, function() {
+    www.listen(port, host, () => {
         if (process.send) {
             process.send('online');
         }
@@ -52,14 +52,12 @@ main(); function main() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function shutdown() {
+async function shutdown() {
     console.log('shutdown');
-    return Promise.try(function () {
-        var applications = server.get('applications');
-        var appNames = Object.keys(applications);
-        return Promise.each(appNames, function (appName) {
-            var application = applications[appName];
-            return application.deinit();
-        });
+    var applications = server.get('applications');
+    var appNames = Object.keys(applications);
+    return Promise.each(appNames, appName => {
+        var application = applications[appName];
+        return application.deinit();
     });
 }
