@@ -1,28 +1,31 @@
 'use strict';
 
-module.exports = ButtonControlEditor;
-
 var util = require('util');
 
 var ControlEditor = require('../ControlEditor');
 
-util.inherits(ButtonControlEditor, ControlEditor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ButtonControlEditor extends ControlEditor {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ButtonControlEditor(formEditor, name) {
-    var self = this;
-    ButtonControlEditor.super_.call(self, formEditor, name);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(formEditor, name) {
+        super(formEditor, name);
+        var self = this;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createData(params) {
+        return {
+            '@class'     :'ButtonControl',
+            '@attributes': {
+                name     : params.name,
+                caption  : (params.caption) && params.caption ? params.caption : params.name,
+                isVisible: 'true',
+                width    : '0'
+            }
+        };
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ButtonControlEditor.createData = function(params) {
-    return {
-        '@class'     :'ButtonControl',
-        '@attributes': {
-            name     : params.name,
-            caption  : (params.caption) && params.caption ? params.caption : params.name,
-            isVisible: 'true',
-            width    : '0'
-        }
-    };
-};
+module.exports = ButtonControlEditor;
