@@ -7,7 +7,6 @@ var path     = require('path');
 var slash    = require('slash');
 var fs       = require('fs');
 var _        = require('underscore');
-//var mysql    = require('mysql');
 var Promise  = require('bluebird');
 
 function helper() {}
@@ -147,22 +146,6 @@ helper.currentDateTime = function() {
     return helper.currentDate() + ' ' + helper.currentTime();
 };
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.queryFormat = function(query, params) {
-    params = params || {};
-    var sql = query.replace(/\{([\w\.@]+)\}/g, function (text, name) {
-        if (params.hasOwnProperty(name)) {
-            return mysql.escape(params[name]);
-        } else {
-            return 'NULL';
-        }
-    });
-    //console.log('real db sql: ' + sql);
-    return sql;
-};
-*/
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.templateValue = function(value, params) {
     return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
@@ -173,22 +156,6 @@ helper.templateValue = function(value, params) {
         }
     });
 };
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.typeCast = function(field, next) {
-    if (
-        field.type === 'DATE'      ||
-        field.type === 'DATETIME'  ||
-        field.type === 'TIME'      ||
-        field.type === 'TIMESTAMP'
-    ) {
-        return field.string();
-    } else {
-        return next();
-    }
-};
-*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.getCommandLineParams = function() {
@@ -400,47 +367,6 @@ String.prototype.template = function (values) {
     });
 };
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.beginTransaction = function (cnn) {
-    return new Promise(function (resolve, reject) {
-        cnn.beginTransaction(function(err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-};
-*/
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.commit = function (cnn) {
-    return new Promise(function (resolve, reject) {
-        cnn.commit(function(err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-};
-*/
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-helper.rollback = function (cnn, err) {
-    return new Promise(function (resolve, reject) {
-        cnn.rollback(function() {
-            reject(err);
-        });
-    });
-};
-*/
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 var entityMap = {
     '&': '&amp;',
@@ -453,6 +379,7 @@ var entityMap = {
     '=': '&#x3D;'
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 helper.escapeHtml = function (string) {
     return String(string).replace(/[&<>"'`=\/]/g, function (s) {
         return entityMap[s];
