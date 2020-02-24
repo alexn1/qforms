@@ -41,7 +41,7 @@ class Page extends Model {
             data['@attributes'].name,
             data['@attributes'].name + '.backend.js'
         );
-        return qforms.Helper.getFileContent(customClassFilePath).then(function(content) {
+        return qforms.Helper.getFileContent(customClassFilePath).then(content => {
             if (content) {
                 var customClass = eval(content);
                 return new customClass(data, parent);
@@ -52,13 +52,10 @@ class Page extends Model {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    rpc(context) {
-        var self = this;
-        return Promise.try(function () {
-            return {
-                result: 'ok'
-            };
-        });
+    async rpc(context) {
+        return {
+            result: 'ok'
+        };
     }
 
 }

@@ -13,9 +13,8 @@ class PostgreSqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
         console.log('new PostgreSqlDatabase');
-        self.pool = null;
+        this.pool = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,47 +25,43 @@ class PostgreSqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async deinit() {
-        var self = this;
-        console.log('PostgreSqlDatabase.prototype.deinit: ' + self.name);
-        if (self.pool !== null) {
-            return self.pool.end();
+        console.log('PostgreSqlDatabase.prototype.deinit: ' + this.name);
+        if (this.pool !== null) {
+            return this.pool.end();
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getPool(databaseName) {
-        var self = this;
         console.log('PostgreSqlDatabase.prototype._getPool');
-        if (self.pool === null) {
+        if (this.pool === null) {
             const config = {
-                host       : self.data.params.host['@attributes'].value,
-                port       : self.data.params.port ? self.data.params.port['@attributes'].value : 5432,
-                user       : self.data.params.user['@attributes'].value,
-                database   : self.data.params.database['@attributes'].value,
-                password   : self.data.params.password['@attributes'].value,
+                host       : this.data.params.host['@attributes'].value,
+                port       : this.data.params.port ? this.data.params.port['@attributes'].value : 5432,
+                user       : this.data.params.user['@attributes'].value,
+                database   : this.data.params.database['@attributes'].value,
+                password   : this.data.params.password['@attributes'].value,
             };
             console.log('creating connection pool for: ' + databaseName, config);
-            self.pool = new Pool(config);
+            this.pool = new Pool(config);
         }
-        return self.pool;
+        return this.pool;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getConnection(context) {
-        var self = this;
         console.log('PostgreSqlDatabase.prototype.getConnection');
         return Promise.try(() => {
-            if (context.connections[self.name]) {
-                return context.connections[self.name];
+            if (context.connections[this.name]) {
+                return context.connections[this.name];
             } else {
-                return context.connections[self.name] = self._getPool(self.name);
+                return context.connections[this.name] = this._getPool(this.name);
             }
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     query(context, query, params, nest) {
-        var self = this;
         console.log('PostgreSqlDatabase.prototype.query');
         console.log('query:', query);
         console.log('params:', params);
@@ -74,7 +69,7 @@ class PostgreSqlDatabase extends Database {
         //     console.log('PostgreSqlDatabase.prototype.query', query, params);
         // }
         nest = (nest !== undefined) ? nest : true;
-        return self.getConnection(context).then(cnn => {
+        return this.getConnection(context).then(cnn => {
             const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
             console.log('sql:', sql);
             console.log('values:', values);
@@ -142,12 +137,11 @@ class PostgreSqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async desc(context, table) {
-        var self = this;
         console.log('PostgreSqlDatabase.prototype.desc', table);
         var desc = {};
         var aiFieldName = 'id';
         var query = `select column_name from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}';`;
-        return self.query(context, query, null, true).then(rows => {
+        return this.query(context, query, null, true).then(rows => {
             rows.forEach(info => {
                 desc[info.column_name] = info;
                 // if (info.Extra === 'auto_increment') {

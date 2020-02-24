@@ -63,9 +63,9 @@ class Field extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     calcValue(row) {
         var self = this;
-        return Promise.try(function () {
+        return Promise.try(() => {
             return eval(self.data['@attributes'].value);
-        }).then(function (value) {
+        }).then(value => {
             row[self.data['@attributes'].column] = value;
         });
     }

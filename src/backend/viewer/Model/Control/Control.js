@@ -12,9 +12,8 @@ class Control extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.dirPath            = path.join(parent.dirPath, self.name);
-        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
+        this.dirPath            = path.join(parent.dirPath, this.name);
+        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

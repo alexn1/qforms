@@ -37,7 +37,7 @@ class Form extends Model {
         } else {
             var dataSourceResponse = self._getSurrogateDataSourceResponse(context);
             self.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
-            return super.fill(context).then(function (response) {
+            return super.fill(context).then(response => {
                 response.dataSources.default = dataSourceResponse;
                 return response;
             });
@@ -81,7 +81,7 @@ class Form extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     replaceThis(context, query) {
         var self = this;
-        return query.replace(/\{([@\w\.]+)\}/g, function (text, name) {
+        return query.replace(/\{([@\w\.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 var arr = name.split('.');
                 if (arr[0] === 'this') {

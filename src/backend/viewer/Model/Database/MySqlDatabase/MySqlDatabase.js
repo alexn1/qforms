@@ -12,9 +12,8 @@ class MySqlDatabase extends Database {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
         //console.log('new MySqlDatabase');
-        self.pool = null;
+        this.pool = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,11 +24,10 @@ class MySqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async deinit() {
-        var self = this;
-        console.log('MySqlDatabase.prototype.deinit: ' + self.name);
-        if (self.pool !== null) {
+        console.log('MySqlDatabase.prototype.deinit: ' + this.name);
+        if (this.pool !== null) {
             return new Promise(resolve => {
-                self.pool.end(() => {
+                this.pool.end(() => {
                     resolve();
                 });
             });
@@ -38,58 +36,55 @@ class MySqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getPool() {
-        var self = this;
         //console.log('MySqlDatabase.prototype._getPool');
-        if (self.pool === null) {
+        if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
-            self.pool = mysql.createPool({
-                host       : self.data.params.host['@attributes'].value,
-                port       : self.data.params.port ? self.data.params.port['@attributes'].value : 3306,
-                user       : self.data.params.user['@attributes'].value,
-                database   : self.data.params.database['@attributes'].value,
-                password   : self.data.params.password['@attributes'].value,
+            this.pool = mysql.createPool({
+                host       : this.data.params.host['@attributes'].value,
+                port       : this.data.params.port ? this.data.params.port['@attributes'].value : 3306,
+                user       : this.data.params.user['@attributes'].value,
+                database   : this.data.params.database['@attributes'].value,
+                password   : this.data.params.password['@attributes'].value,
                 queryFormat: MySqlDatabase.queryFormat
             });
         }
         //console.log('pool connections count: ' + this.pool._allConnections.length);
-        return self.pool;
+        return this.pool;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getConnection(context) {
-        var self = this;
         //console.log('MySqlDatabase.prototype.getConnection');
         return new Promise((resolve, reject) => {
-            if (context.connections[self.name] === undefined) {
-                self._getPool().getConnection((err, cnn) => {
+            if (context.connections[this.name] === undefined) {
+                this._getPool().getConnection((err, cnn) => {
                     if (err) {
                         reject(err);
                     } else {
-                        context.connections[self.name] = cnn;
-                        resolve(context.connections[self.name]);
+                        context.connections[this.name] = cnn;
+                        resolve(context.connections[this.name]);
                     }
                 });
             } else {
-                resolve(context.connections[self.name]);
+                resolve(context.connections[this.name]);
             }
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     query(context, query, params, nest) {
-        var self = this;
         //if (process.env.NODE_ENV === 'development') {
         //    console.log('MySqlDatabase.prototype.query', query, params);
         //}
         nest = (nest !== undefined) ? nest : true;
-        return self.getConnection(context).then(cnn => {
+        return this.getConnection(context).then(cnn => {
             return new Promise((resolve, reject) => {
                 cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
                     if (err) {
                         reject(err);
                     } else {
                         if (nest) {
-                            var rows = self._getRows(result, fields);   // for duplicate column names
+                            var rows = this._getRows(result, fields);   // for duplicate column names
                             resolve(rows);
                         } else {
                             resolve(result);
@@ -102,7 +97,6 @@ class MySqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getRows(result, fields) {
-        var self = this;
         //console.log('MySqlDatabase.prototype._getRows');
         var fieldCount = {};
         for (var j = 0; j < fields.length; j++) {
@@ -195,12 +189,11 @@ class MySqlDatabase extends Database {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async desc(context, table) {
-        var self = this;
         console.log('MySqlDatabase.prototype.desc', table);
         var desc = {};
         var aiFieldName;
         var query = 'desc `{table}`'.replace('{table}', table);
-        return self.query(context, query, null, true).then(rows => {
+        return this.query(context, query, null, true).then(rows => {
             rows.forEach(info => {
                 desc[info.Field] = info;
                 if (info.Extra === 'auto_increment') {
