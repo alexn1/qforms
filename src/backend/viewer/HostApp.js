@@ -23,17 +23,15 @@ class HostApp {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(options) {
-        var self = this;
-        self.options      = options || {};
-        self.applications = null;
-        self.route        = null;
-        self.application  = null;
+        this.options      = options || {};
+        this.applications = null;
+        this.route        = null;
+        this.application  = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     init() {
-        var self = this;
-        self.applications = server.get('applications');
+        this.applications = server.get('applications');
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,13 +39,13 @@ class HostApp {
         var self = this;
         console.log('HostApp.prototype.actionViewer');
         if (req.params.appDirName && req.params.appFileName) {
-            Promise.try(function () {
+            Promise.try(() => {
                 const route = self.route = [req.params.appDirName, req.params.appFileName].join('/');
                 const application = self.applications[route];
                 if (application) {
                     if (req.query.debug === '1' && req.method === 'GET') {
-                        return application.deinit().then(function () {
-                            return self.createApplication(req, res).then(function (application) {
+                        return application.deinit().then(() => {
+                            return self.createApplication(req, res).then((application) => {
                                 return self.applications[route] = application;
                             });
                         });
@@ -55,15 +53,15 @@ class HostApp {
                         return application;
                     }
                 } else {
-                    return self.createApplication(req, res).then(function (application) {
+                    return self.createApplication(req, res).then((application) => {
                         return self.applications[route] = application;
                     });
                 }
-            }).then(function (application) {
+            }).then((application) => {
                 self.application = application;
                 self.handle(req, res, next);
                 return null;
-            }).catch(function (err) {
+            }).catch((err) => {
                 next(err);
             });
         } else {
@@ -118,7 +116,7 @@ class HostApp {
         console.log('HostApp.prototype.login');
         var context = qforms.Application.createContext({req: req});
         if (req.method === 'GET') {
-            self.application.getUsers(context).then(function (users) {
+            self.application.getUsers(context).then(users => {
                 self.application.destroyContext(context);
                 res.render('viewer/login', {
                     version       : req.app.get('version'),
@@ -129,11 +127,11 @@ class HostApp {
                     username      : null,
                     users         : users
                 });
-            }).catch(function (err) {
+            }).catch(err => {
                 next(err);
             });
         } else if (req.method === 'POST') {
-            self.application.authenticate(context, req.body.username, req.body.password).then(function (authenticate, user) {
+            self.application.authenticate(context, req.body.username, req.body.password).then((authenticate, user) => {
                 if (authenticate) {
                     if (req.session.user === undefined) {
                         req.session.user = {};
@@ -146,7 +144,7 @@ class HostApp {
                     self.application.destroyContext(context);
                     res.redirect(req.url);
                 } else {
-                    self.application.getUsers(context).then(function (users) {
+                    self.application.getUsers(context).then(users => {
                         self.application.destroyContext(context);
                         res.render('viewer/login', {
                             version    : req.app.get('version'),
@@ -159,7 +157,7 @@ class HostApp {
                         });
                     });
                 }
-            }).catch(function (err) {
+            }).catch(err => {
                 next(err);
             });
         } else {
@@ -172,7 +170,7 @@ class HostApp {
         var self = this;
         console.log('HostApp.prototype.index', self.application.name);
         var context = qforms.Application.createContext({req: req});
-        self.application.fill(context).then(function (response) {
+        self.application.fill(context).then(response => {
             self.application.destroyContext(context);
             res.render('viewer/view', {
                 version       : req.app.get('version'),
@@ -186,7 +184,7 @@ class HostApp {
                 data          : response
             });
             return null;
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
@@ -201,15 +199,15 @@ class HostApp {
             newMode       : req.body.newMode,
             parentPageName: req.body.parentPageName
         });
-        self.application.getPage(context, req.body.page).then(function (page) {
-            return page.fill(context).then(function (data) {
+        self.application.getPage(context, req.body.page).then(page => {
+            return page.fill(context).then(data => {
                 self.application.destroyContext(context);
                 res.json({
                     data: data
                 });
                 return null;
             });
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
@@ -223,22 +221,22 @@ class HostApp {
             row           : req.body.row,
             parentPageName: req.body.parentPageName
         });
-        self.application.getPage(context, req.body.page).then(function (page) {
+        self.application.getPage(context, req.body.page).then(page => {
             var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-            return dataSource.database.getConnection(context).then(function (cnn) {
-                return dataSource.database.beginTransaction(cnn).then(function () {
+            return dataSource.database.getConnection(context).then(cnn => {
+                return dataSource.database.beginTransaction(cnn).then(() => {
                     return dataSource.update(context);
-                }).then(function () {
+                }).then(() => {
                     return dataSource.database.commit(cnn);
-                }).catch(function (err) {
+                }).catch((err) => {
                     console.error(err);
                     return dataSource.database.rollback(cnn, err);
                 });
             });
-        }).then(function () {
+        }).then(() => {
             self.application.destroyContext(context);
             res.json(null);
-        }).catch(function (err) {
+        }).catch((err) => {
             next(err);
         });
     }
@@ -253,9 +251,9 @@ class HostApp {
             parentPageName: req.body.parentPageName,
             params        : req.body.params
         });
-        Promise.try(function () {
+        Promise.try(() => {
             if (req.body.page) {
-                return self.application.getPage(context, req.body.page).then(function (page) {
+                return self.application.getPage(context, req.body.page).then(page => {
                     if (req.body.form) {
                         return page.forms[req.body.form].dataSources[req.body.ds];
                     } else {
@@ -265,15 +263,15 @@ class HostApp {
             } else {
                 return self.application.dataSources[req.body.ds];
             }
-        }).then(function (dataSource) {
-            return dataSource.frame(context).then(function (response) {
+        }).then(dataSource => {
+            return dataSource.frame(context).then(response => {
                 self.application.destroyContext(context);
                 var time = Date.now() - start;
                 console.log('frame time:', time);
                 response.time = time;
                 res.json(response);
             });
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
@@ -287,26 +285,26 @@ class HostApp {
             row           : req.body.row,
             parentPageName: req.body.parentPageName
         });
-        self.application.getPage(context, req.body.page).then(function (page) {
+        self.application.getPage(context, req.body.page).then(page => {
             var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-            return dataSource.database.getConnection(context).then(function(cnn) {
-                return dataSource.database.beginTransaction(cnn).then(function () {
-                    return dataSource.insert(context).then(function (key) {
-                        return dataSource.database.commit(cnn).then(function () {
+            return dataSource.database.getConnection(context).then(cnn => {
+                return dataSource.database.beginTransaction(cnn).then(() => {
+                    return dataSource.insert(context).then(key => {
+                        return dataSource.database.commit(cnn).then(() => {
                             return key;
                         });
                     });
-                }).catch(function (err) {
+                }).catch(err => {
                     console.error(err);
                     return dataSource.database.rollback(cnn, err);
                 });
             });
-        }).then(function (key) {
+        }).then(key => {
             self.application.destroyContext(context);
             res.json({
                 key: key
             });
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
@@ -320,22 +318,22 @@ class HostApp {
             row           : req.body.row,
             parentPageName: req.body.parentPageName
         });
-        self.application.getPage(context, req.body.page).then(function (page) {
+        self.application.getPage(context, req.body.page).then(page => {
             var dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-            return dataSource.database.getConnection(context).then(function (cnn) {
-                return dataSource.database.beginTransaction(cnn).then(function () {
+            return dataSource.database.getConnection(context).then(cnn => {
+                return dataSource.database.beginTransaction(cnn).then(() => {
                     return dataSource.delete(context);
-                }).then(function () {
+                }).then(() => {
                     return dataSource.database.commit(cnn);
-                }).catch(function (err) {
+                }).catch(err => {
                     console.error(err);
                     return dataSource.database.rollback(cnn, err);
                 });
             });
-        }).then(function () {
+        }).then(() => {
             self.application.destroyContext(context);
             res.json(null);
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
@@ -349,18 +347,18 @@ class HostApp {
             res   : res,
             params: req.body.params
         });
-        Promise.try(function () {
+        Promise.try(() => {
             if (req.body.page) {
                 return self.application.getPage(context, req.body.page);
             } else {
                 return self.application;
             }
-        }).then(function (model) {
+        }).then(model => {
             return model.rpc(context);
-        }).then(function (result) {
+        }).then(result => {
             self.application.destroyContext(context);
             res.json(result);
-        }).catch(function (err) {
+        }).catch(err => {
             next(err);
         });
     }
