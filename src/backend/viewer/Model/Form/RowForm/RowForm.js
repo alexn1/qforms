@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = RowForm;
-
 var util    = require('util');
 var path    = require('path');
 var Promise = require('bluebird');
@@ -9,20 +7,25 @@ var Promise = require('bluebird');
 var server = require('../../../../../server');
 var Form   = require('../Form');
 
-util.inherits(RowForm, Form);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class RowForm extends Form {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowForm(data, parent) {
-    var self = this;
-    RowForm.super_.call(self, data, parent);
-    self.viewFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FormController/RowFormController/view',
-        self.data['@class'] + 'View.ejs'
-    );
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(data, parent) {
+        super(data, parent);
+        var self = this;
+        self.viewFilePath = path.join(
+            server.get('public'),
+            'viewer/class/Controller/ModelController/FormController/RowFormController/view',
+            self.data['@class'] + 'View.ejs'
+        );
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static async create(data, parent) {
+        return new RowForm(data, parent);
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.create = function(data, parent) {
-    return Promise.resolve(new RowForm(data, parent));
-};
+module.exports = RowForm;
