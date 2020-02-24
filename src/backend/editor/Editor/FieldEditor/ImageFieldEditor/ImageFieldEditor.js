@@ -1,39 +1,42 @@
 'use strict';
 
-module.exports = ImageFieldEditor;
-
 var util = require('util');
 var path = require('path');
 
 var server      = require('../../../../../server');
 var FieldEditor = require('../FieldEditor');
 
-util.inherits(ImageFieldEditor, FieldEditor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ImageFieldEditor extends FieldEditor {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ImageFieldEditor(formEditor, name) {
-    var self = this;
-    ImageFieldEditor.super_.call(self, formEditor, name);
-    //LabelFieldEditor.super_.call(this, formEditor, name);
-    self.defaultViewDirPath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view'
-    );
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(formEditor, name) {
+        super(formEditor, name);
+        var self = this;
+        //LabelFieldEditor.super_.call(this, formEditor, name);
+        self.defaultViewDirPath = path.join(
+            server.get('public'),
+            'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view'
+        );
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createData(params) {
+        return {
+            '@class':'ImageField',
+            '@attributes': {
+                'name'        : params['name'],
+                'caption'     : params['caption']      ? params['caption']      : params['name'],
+                'isVisible'   : params['isVisible']    ? params['isVisible']    :         'true',
+                'width'       : params['width']        ? params['width']        :            '0',
+                'defaultValue': params['defaultValue'] ? params['defaultValue'] :             '',
+                'column'      : params['column']       ? params['column']       : params['name'],
+                'readOnly'    : params['readOnly']     ? params['readOnly']     :        'true',
+                'notNull'     : params['notNull']      ? params['notNull']      :        'false'
+            }
+        };
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ImageFieldEditor.createData = function(params) {
-    return {
-        '@class':'ImageField',
-        '@attributes': {
-            'name'        : params['name'],
-            'caption'     : params['caption']      ? params['caption']      : params['name'],
-            'isVisible'   : params['isVisible']    ? params['isVisible']    :         'true',
-            'width'       : params['width']        ? params['width']        :            '0',
-            'defaultValue': params['defaultValue'] ? params['defaultValue'] :             '',
-            'column'      : params['column']       ? params['column']       : params['name'],
-            'readOnly'    : params['readOnly']     ? params['readOnly']     :        'true',
-            'notNull'     : params['notNull']      ? params['notNull']      :        'false'
-        }
-    };
-};
+module.exports = ImageFieldEditor;
