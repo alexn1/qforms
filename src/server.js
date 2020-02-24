@@ -16,9 +16,9 @@ var server = module.exports = express();
 // routes
 const home    = require('./backend/routes/home');
 const viewer  = require('./backend/routes/viewer');
-var editor    = require('./backend/routes/editor');
-var file      = require('./backend/routes/viewer/file');
-var error     = require('./backend/routes/error');
+const editor  = require('./backend/routes/editor');
+const file    = require('./backend/routes/viewer/file');
+const error   = require('./backend/routes/error');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 initExpressServer(server); function initExpressServer(server) {
@@ -34,7 +34,7 @@ initExpressServer(server); function initExpressServer(server) {
     }
 
     // vars
-    server.set('appsDirPath', appsDirPath);
+    server.set('appsDirPath'    , appsDirPath);
     server.set('version'        , pkg.version);
     server.set('handleException', helper.getCommandLineParams().handleException || true);
     server.set('view engine'    , 'ejs');
@@ -61,10 +61,7 @@ initExpressServer(server); function initExpressServer(server) {
 
     // middlewares
     //server.use(morgan('dev'));
-    server.use(function (req, res, next) {
-        //console.log(req.originalUrl);
-        next();
-    });
+    server.use(server_request);
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: false }));
     server.use(multipart);
@@ -101,6 +98,12 @@ initExpressServer(server); function initExpressServer(server) {
     // runtime & temp
     helper.createDirIfNotExistsSync(server.get('runtime'));
     helper.createDirIfNotExistsSync(server.get('temp'));
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function server_request(req, res, next) {
+    //console.log(req.originalUrl);
+    next();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
