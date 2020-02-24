@@ -1,33 +1,36 @@
 'use strict';
 
-module.exports = SqlDataSourceEditor;
-
 var util = require('util');
 
 var DataSourceEditor = require('../DataSourceEditor');
 
-util.inherits(SqlDataSourceEditor, DataSourceEditor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class SqlDataSourceEditor extends DataSourceEditor {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function SqlDataSourceEditor(parent, name, data) {
-    var self = this;
-    SqlDataSourceEditor.super_.call(self, parent, name, data);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(parent, name, data) {
+        super(parent, name, data);
+        var self = this;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static create(params) {
+        var data = {
+            '@class'     : 'SqlDataSource',
+            '@attributes': {
+                name                : params.name,
+                database            : params['database']   ? params['database']   : 'default',
+                table               : params['table']      ? params['table']      :        '',
+                query               : params['query']      ? params['query']      :        '',
+                limit               : params['limit']      ? params['limit']      :        '',
+                countQuery          : params['countQuery'] ? params['countQuery'] :        '',
+                insertNewKey        :'false',
+                dumpFirstRowToParams:'false'
+            }
+        };
+        return data;
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-SqlDataSourceEditor.create = function(params) {
-    var data = {
-        '@class'     : 'SqlDataSource',
-        '@attributes': {
-            name                : params.name,
-            database            : params['database']   ? params['database']   : 'default',
-            table               : params['table']      ? params['table']      :        '',
-            query               : params['query']      ? params['query']      :        '',
-            limit               : params['limit']      ? params['limit']      :        '',
-            countQuery          : params['countQuery'] ? params['countQuery'] :        '',
-            insertNewKey        :'false',
-            dumpFirstRowToParams:'false'
-        }
-    };
-    return data; 
-};
+module.exports = SqlDataSourceEditor;
