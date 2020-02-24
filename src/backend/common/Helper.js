@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = Helper;
-
 var glob     = require('glob');
 var path     = require('path');
 var slash    = require('slash');
@@ -9,7 +7,17 @@ var fs       = require('fs');
 var _        = require('underscore');
 var Promise  = require('bluebird');
 
-function Helper() {}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+var entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
@@ -21,26 +29,6 @@ function _getFilePathsSync(dirPath, ext) {
     });
     return filePaths;
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getFilePathsSync = function(publicDirPath, subDirPath, ext) {
-    return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
-        return slash(path.relative(publicDirPath, filePath));
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper._glob = function(path) {
-    return new Promise(function(resolve, reject) {
-        glob(path, function(err, items) {
-            if (err) {
-               reject(err);
-            } else {
-                resolve(items);
-            }
-        });
-    });
-};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePaths2(dirPath, ext, filePaths) {
@@ -61,212 +49,6 @@ function _getFilePaths2(dirPath, ext, filePaths) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getFilePaths = function(publicDirPath, subDirPath, ext) {
-    var filePaths = [];
-    return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
-        var relativeFilePaths = filePaths.map(function(filePath) {
-            return slash(path.relative(publicDirPath, filePath));
-        });
-        return relativeFilePaths;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getAppInfo = function(appFilePath) {
-    return new Promise(function(resolve, reject) {
-        fs.readFile(appFilePath, 'utf8', function(err, content) {
-            if (err) {
-                reject(err);
-            } else {
-                var data = JSON.parse(content);
-                if (data['@class'] && data['@class'] === 'Application') {
-                    var appInfo = Helper.getAppInfoFromData(appFilePath, data);
-                    resolve(appInfo);
-                } else {
-                    resolve(null);
-                }
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getAppInfoFromData = function(appFilePath, data) {
-    var fileName = path.basename(appFilePath, path.extname(appFilePath));
-    var dirName  = path.basename(path.dirname(appFilePath));
-    return {
-        name        : data['@attributes'].name,
-        caption     : data['@attributes'].caption,
-        route       : [dirName, fileName].join('/'),
-        fileName    : fileName,
-        dirName     : dirName,
-        filePath    : path.resolve(appFilePath),
-        fileNameExt : path.basename(appFilePath),
-        extName     : path.extname(appFilePath),
-        dirPath     : path.resolve(path.dirname(appFilePath))
-    };
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getAppInfos = function(appsDirPath) {
-    return Helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
-        var appInfos = [];
-        return Promise.each(appFilesPaths, function(appFilePath) {
-            return Helper.getAppInfo(appFilePath).then(function(appInfo) {
-                if (appInfo) {
-                    appInfos.push(appInfo);
-                }
-            });
-        }).then(function() {
-            return appInfos;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.currentTime = function() {
-    var now = new Date();
-    var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
-    var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
-    var ss = now.getSeconds(); if (ss < 10) ss = '0' + ss;
-    return [hh, mm, ss].join(':');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.currentDate = function() {
-    var now = new Date();
-    var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
-    var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
-    var yyyy = now.getFullYear();
-    return [yyyy, mm, dd].join('-');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.currentDateTime = function() {
-    return Helper.currentDate() + ' ' + Helper.currentTime();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.templateValue = function(value, params) {
-    return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
-        if (params.hasOwnProperty(name)) {
-            return params[name];
-        } else {
-            return null;
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getCommandLineParams = function() {
-    var params = process.argv.map(function(arg) {
-        var param = arg.split('=');
-        return {
-            name  : param[0],
-            value : param[1]
-        }
-    });
-    return _.object(
-        params.map(function(param) {
-            return param.name;
-        }),
-        params.map(function(param) {
-            return param.value;
-        })
-    );
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.replaceKey = function(obj, key1, key2) {
-    var keys   = Object.keys(obj);
-    var values = _.filter(obj, function () {return true;});
-    var index  = keys.indexOf(key1);
-    if (index !== -1) {
-        keys[index] = key2;
-        obj = _.object(keys, values);
-    }
-    return obj;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getFileContent = function(filePath) {
-    return new Promise(function(resolve, reject) {
-        fs.exists(filePath, function(exists) {
-            if (exists) {
-                fs.readFile(filePath, 'utf8', function (err, content) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(content);
-                    }
-                });
-            } else {
-                resolve(null);
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.putFileContent = function(filePath, content) {
-    return new Promise(function(resolve, reject) {
-        fs.writeFile(filePath, content, 'utf8', function(err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.createDirIfNotExists = function(dirPath) {
-    return new Promise(function(resolve, reject) {
-        fs.exists(dirPath, function(exists) {
-            if (exists) {
-                resolve();
-            } else {
-                fs.mkdir(dirPath, function(err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
-                });
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.createDirIfNotExistsSync = function(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.moveObjProp = function(obj, prop, offset) {
-    var keys     = _.keys(obj);
-    var values   = _.values(obj);
-    var oldIndex = keys.indexOf(prop);
-    if (oldIndex === -1) {
-        throw new Error('cannot find element');
-    }
-    var newIndex = oldIndex + offset;
-    if (newIndex < 0) {
-        throw new Error('cannot up top element');
-    }
-    if (newIndex > values.length - 1) {
-        throw new Error('cannot down bottom element');
-    }
-    keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
-    values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
-    return _.object(keys, values);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function getRandomString(length) {
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -281,85 +63,6 @@ function getRandomString(length) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.getTempSubDirPath3 = function(tempDirPath) {
-    return new Promise(function (resolve, reject) {
-        var subDirName = getRandomString(8);
-        var tempSubSirPath = path.join(tempDirPath, subDirName);
-        fs.exists(tempSubSirPath, function(exists) {
-            if (!exists) {
-                fs.mkdir(tempSubSirPath, function(err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(tempSubSirPath);
-                    }
-                });
-            } else {
-                Helper.getTempSubDirPath(tempDirPath, function () {
-                    resolve();
-                });
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.copyFile3 = function(source, target) {
-    return new Promise(function (resolve, reject) {
-        var rd = fs.createReadStream(source);
-        rd.on('error', function(err) {
-            reject(err);
-        });
-        var wr = fs.createWriteStream(target);
-        wr.on('error', function(err) {
-            reject(err);
-        });
-        wr.on('close', function () {
-            resolve();
-        });
-        rd.pipe(wr);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.exists = function(path) {
-    //console.log('Helper.exists');
-    return new Promise(function (resolve) {
-        fs.exists(path, function (exists) {
-            resolve(exists);
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.readFile = function(path) {
-    //console.log('Helper.readFile');
-    return new Promise(function (resolve, reject) {
-        fs.readFile(path, 'utf8', function(err, content) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(content);
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.writeFile = function(path, content) {
-    //console.log('Helper.writeFile');
-    return new Promise(function (resolve, reject) {
-        fs.writeFile(path, content, 'utf8', function(err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 String.prototype.template = function (values) {
     var self = this;
     return self.replace(/\{([\w]+)\}/g, function (text, name) {
@@ -367,21 +70,323 @@ String.prototype.template = function (values) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-var entityMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '/': '&#x2F;',
-    '`': '&#x60;',
-    '=': '&#x3D;'
-};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Helper {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Helper.escapeHtml = function (string) {
-    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-        return entityMap[s];
-    });
-};
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getFilePathsSync(publicDirPath, subDirPath, ext) {
+        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
+            return slash(path.relative(publicDirPath, filePath));
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static _glob(path) {
+        return new Promise(function(resolve, reject) {
+            glob(path, function(err, items) {
+                if (err) {
+                   reject(err);
+                } else {
+                    resolve(items);
+                }
+            });
+        });
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getFilePaths(publicDirPath, subDirPath, ext) {
+        var filePaths = [];
+        return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
+            var relativeFilePaths = filePaths.map(function(filePath) {
+                return slash(path.relative(publicDirPath, filePath));
+            });
+            return relativeFilePaths;
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getAppInfo(appFilePath) {
+        return new Promise(function(resolve, reject) {
+            fs.readFile(appFilePath, 'utf8', function(err, content) {
+                if (err) {
+                    reject(err);
+                } else {
+                    var data = JSON.parse(content);
+                    if (data['@class'] && data['@class'] === 'Application') {
+                        var appInfo = Helper.getAppInfoFromData(appFilePath, data);
+                        resolve(appInfo);
+                    } else {
+                        resolve(null);
+                    }
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getAppInfoFromData(appFilePath, data) {
+        var fileName = path.basename(appFilePath, path.extname(appFilePath));
+        var dirName  = path.basename(path.dirname(appFilePath));
+        return {
+            name        : data['@attributes'].name,
+            caption     : data['@attributes'].caption,
+            route       : [dirName, fileName].join('/'),
+            fileName    : fileName,
+            dirName     : dirName,
+            filePath    : path.resolve(appFilePath),
+            fileNameExt : path.basename(appFilePath),
+            extName     : path.extname(appFilePath),
+            dirPath     : path.resolve(path.dirname(appFilePath))
+        };
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getAppInfos(appsDirPath) {
+        return Helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
+            var appInfos = [];
+            return Promise.each(appFilesPaths, function(appFilePath) {
+                return Helper.getAppInfo(appFilePath).then(function(appInfo) {
+                    if (appInfo) {
+                        appInfos.push(appInfo);
+                    }
+                });
+            }).then(function() {
+                return appInfos;
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static currentTime() {
+        var now = new Date();
+        var hh = now.getHours();   if (hh < 10) hh = '0' + hh;
+        var mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
+        var ss = now.getSeconds(); if (ss < 10) ss = '0' + ss;
+        return [hh, mm, ss].join(':');
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static currentDate() {
+        var now = new Date();
+        var dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
+        var mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
+        var yyyy = now.getFullYear();
+        return [yyyy, mm, dd].join('-');
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static currentDateTime() {
+        return Helper.currentDate() + ' ' + Helper.currentTime();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static templateValue(value, params) {
+        return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+            if (params.hasOwnProperty(name)) {
+                return params[name];
+            } else {
+                return null;
+            }
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getCommandLineParams () {
+        var params = process.argv.map(function(arg) {
+            var param = arg.split('=');
+            return {
+                name  : param[0],
+                value : param[1]
+            }
+        });
+        return _.object(
+            params.map(function(param) {
+                return param.name;
+            }),
+            params.map(function(param) {
+                return param.value;
+            })
+        );
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static replaceKey(obj, key1, key2) {
+        var keys   = Object.keys(obj);
+        var values = _.filter(obj, function () {return true;});
+        var index  = keys.indexOf(key1);
+        if (index !== -1) {
+            keys[index] = key2;
+            obj = _.object(keys, values);
+        }
+        return obj;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getFileContent(filePath) {
+        return new Promise(function(resolve, reject) {
+            fs.exists(filePath, function(exists) {
+                if (exists) {
+                    fs.readFile(filePath, 'utf8', function (err, content) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(content);
+                        }
+                    });
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static putFileContent(filePath, content) {
+        return new Promise(function(resolve, reject) {
+            fs.writeFile(filePath, content, 'utf8', function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createDirIfNotExists(dirPath) {
+        return new Promise(function(resolve, reject) {
+            fs.exists(dirPath, function(exists) {
+                if (exists) {
+                    resolve();
+                } else {
+                    fs.mkdir(dirPath, function(err) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve();
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static createDirIfNotExistsSync(dirPath) {
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static moveObjProp(obj, prop, offset) {
+        var keys     = _.keys(obj);
+        var values   = _.values(obj);
+        var oldIndex = keys.indexOf(prop);
+        if (oldIndex === -1) {
+            throw new Error('cannot find element');
+        }
+        var newIndex = oldIndex + offset;
+        if (newIndex < 0) {
+            throw new Error('cannot up top element');
+        }
+        if (newIndex > values.length - 1) {
+            throw new Error('cannot down bottom element');
+        }
+        keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
+        values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
+        return _.object(keys, values);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static getTempSubDirPath3(tempDirPath) {
+        return new Promise(function (resolve, reject) {
+            var subDirName = getRandomString(8);
+            var tempSubSirPath = path.join(tempDirPath, subDirName);
+            fs.exists(tempSubSirPath, function(exists) {
+                if (!exists) {
+                    fs.mkdir(tempSubSirPath, function(err) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(tempSubSirPath);
+                        }
+                    });
+                } else {
+                    Helper.getTempSubDirPath(tempDirPath, function () {
+                        resolve();
+                    });
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static copyFile3(source, target) {
+        return new Promise(function (resolve, reject) {
+            var rd = fs.createReadStream(source);
+            rd.on('error', function(err) {
+                reject(err);
+            });
+            var wr = fs.createWriteStream(target);
+            wr.on('error', function(err) {
+                reject(err);
+            });
+            wr.on('close', function () {
+                resolve();
+            });
+            rd.pipe(wr);
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static exists(path) {
+        //console.log('Helper.exists');
+        return new Promise(function (resolve) {
+            fs.exists(path, function (exists) {
+                resolve(exists);
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static readFile(path) {
+        //console.log('Helper.readFile');
+        return new Promise(function (resolve, reject) {
+            fs.readFile(path, 'utf8', function(err, content) {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(content);
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static writeFile(path, content) {
+        //console.log('Helper.writeFile');
+        return new Promise(function (resolve, reject) {
+            fs.writeFile(path, content, 'utf8', function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    static escapeHtml(string) {
+        return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+            return entityMap[s];
+        });
+    }
+
+}
+
+module.exports = Helper;
