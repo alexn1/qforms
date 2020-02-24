@@ -108,7 +108,7 @@ function server_request(req, res, next) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function viewer_file(req, res, next) {
-    file(req, res, function () {
+    file(req, res, () => {
         //console.log('file not found: ', req.originalUrl);
         const pth = `/view/${req.params.appDirName}/${req.params.appFileName}`;
         var uri = req.originalUrl.replace(pth, '');
@@ -119,7 +119,7 @@ function viewer_file(req, res, next) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function editor_file(req, res, next) {
-    file(req, res, function () {
+    file(req, res, () => {
         //console.log('file not found: ', req.originalUrl);
         const pth = `/edit/${req.params.appDirName}/${req.params.appFileName}`;
         var uri = req.originalUrl.replace(pth, '');

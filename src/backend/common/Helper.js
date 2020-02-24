@@ -22,8 +22,8 @@ var entityMap = {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePathsSync(dirPath, ext) {
     var filePaths = glob.sync(path.join(dirPath, '*.' + ext));
-    glob.sync(path.join(dirPath, '*/')).forEach(function(subDirPath) {
-        _getFilePathsSync(subDirPath, ext).forEach(function(fileName) {
+    glob.sync(path.join(dirPath, '*/')).forEach(subDirPath => {
+        _getFilePathsSync(subDirPath, ext).forEach(fileName => {
             filePaths.push(fileName);
         });
     });
@@ -33,15 +33,15 @@ function _getFilePathsSync(dirPath, ext) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function _getFilePaths2(dirPath, ext, filePaths) {
     // all files from directory
-    return Helper._glob(path.join(dirPath, '*.' + ext)).then(function(files) {
+    return Helper._glob(path.join(dirPath, '*.' + ext)).then(files => {
         // pushing files to output array
-        files.forEach(function(item) {
+        files.forEach(item => {
             filePaths.push(item);
         });
         // all directories from directory
-        return Helper._glob(path.join(dirPath, '*/')).then(function(dirs) {
+        return Helper._glob(path.join(dirPath, '*/')).then(dirs => {
             // for each dir push files to output array
-            return Promise.each(dirs, function(subDirPath) {
+            return Promise.each(dirs, subDirPath => {
                 return _getFilePaths2(subDirPath, ext, filePaths);
             });
         });
@@ -65,7 +65,7 @@ function getRandomString(length) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 String.prototype.template = function (values) {
     var self = this;
-    return self.replace(/\{([\w]+)\}/g, function (text, name) {
+    return self.replace(/\{([\w]+)\}/g, (text, name) => {
         return values.hasOwnProperty(name) ? values[name] : text;
     });
 };
@@ -75,15 +75,15 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(function(filePath) {
+        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(filePath => {
             return slash(path.relative(publicDirPath, filePath));
         });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static _glob(path) {
-        return new Promise(function(resolve, reject) {
-            glob(path, function(err, items) {
+        return new Promise((resolve, reject) => {
+            glob(path, (err, items) => {
                 if (err) {
                    reject(err);
                 } else {
@@ -98,8 +98,8 @@ class Helper {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getFilePaths(publicDirPath, subDirPath, ext) {
         var filePaths = [];
-        return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(function() {
-            var relativeFilePaths = filePaths.map(function(filePath) {
+        return _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths).then(() => {
+            var relativeFilePaths = filePaths.map(filePath => {
                 return slash(path.relative(publicDirPath, filePath));
             });
             return relativeFilePaths;
@@ -108,8 +108,8 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getAppInfo(appFilePath) {
-        return new Promise(function(resolve, reject) {
-            fs.readFile(appFilePath, 'utf8', function(err, content) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(appFilePath, 'utf8', (err, content) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -144,15 +144,15 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getAppInfos(appsDirPath) {
-        return Helper._glob(path.join(appsDirPath, '*/*.json')).then(function(appFilesPaths) {
+        return Helper._glob(path.join(appsDirPath, '*/*.json')).then(appFilesPaths => {
             var appInfos = [];
-            return Promise.each(appFilesPaths, function(appFilePath) {
-                return Helper.getAppInfo(appFilePath).then(function(appInfo) {
+            return Promise.each(appFilesPaths, appFilePath => {
+                return Helper.getAppInfo(appFilePath).then(appInfo => {
                     if (appInfo) {
                         appInfos.push(appInfo);
                     }
                 });
-            }).then(function() {
+            }).then(() => {
                 return appInfos;
             });
         });
@@ -183,7 +183,7 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static templateValue(value, params) {
-        return value.replace(/\{([\w\.@]+)\}/g, function (text, name) {
+        return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return params[name];
             } else {
@@ -194,7 +194,7 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getCommandLineParams () {
-        var params = process.argv.map(function(arg) {
+        var params = process.argv.map(arg => {
             var param = arg.split('=');
             return {
                 name  : param[0],
@@ -202,10 +202,10 @@ class Helper {
             }
         });
         return _.object(
-            params.map(function(param) {
+            params.map(param => {
                 return param.name;
             }),
-            params.map(function(param) {
+            params.map(param => {
                 return param.value;
             })
         );
@@ -214,7 +214,7 @@ class Helper {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static replaceKey(obj, key1, key2) {
         var keys   = Object.keys(obj);
-        var values = _.filter(obj, function () {return true;});
+        var values = _.filter(obj, () => {return true;});
         var index  = keys.indexOf(key1);
         if (index !== -1) {
             keys[index] = key2;
@@ -225,10 +225,10 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getFileContent(filePath) {
-        return new Promise(function(resolve, reject) {
-            fs.exists(filePath, function(exists) {
+        return new Promise((resolve, reject) => {
+            fs.exists(filePath, exists => {
                 if (exists) {
-                    fs.readFile(filePath, 'utf8', function (err, content) {
+                    fs.readFile(filePath, 'utf8', (err, content) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -244,8 +244,8 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static putFileContent(filePath, content) {
-        return new Promise(function(resolve, reject) {
-            fs.writeFile(filePath, content, 'utf8', function(err) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -257,12 +257,12 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static createDirIfNotExists(dirPath) {
-        return new Promise(function(resolve, reject) {
-            fs.exists(dirPath, function(exists) {
+        return new Promise((resolve, reject) => {
+            fs.exists(dirPath, exists => {
                 if (exists) {
                     resolve();
                 } else {
-                    fs.mkdir(dirPath, function(err) {
+                    fs.mkdir(dirPath, err => {
                         if (err) {
                             reject(err);
                         } else {
@@ -303,12 +303,12 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static getTempSubDirPath3(tempDirPath) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var subDirName = getRandomString(8);
             var tempSubSirPath = path.join(tempDirPath, subDirName);
-            fs.exists(tempSubSirPath, function(exists) {
+            fs.exists(tempSubSirPath, exists => {
                 if (!exists) {
-                    fs.mkdir(tempSubSirPath, function(err) {
+                    fs.mkdir(tempSubSirPath, err => {
                         if (err) {
                             reject(err);
                         } else {
@@ -316,7 +316,7 @@ class Helper {
                         }
                     });
                 } else {
-                    Helper.getTempSubDirPath(tempDirPath, function () {
+                    Helper.getTempSubDirPath(tempDirPath, () => {
                         resolve();
                     });
                 }
@@ -326,16 +326,16 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static copyFile3(source, target) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var rd = fs.createReadStream(source);
-            rd.on('error', function(err) {
+            rd.on('error', err => {
                 reject(err);
             });
             var wr = fs.createWriteStream(target);
-            wr.on('error', function(err) {
+            wr.on('error', err => {
                 reject(err);
             });
-            wr.on('close', function () {
+            wr.on('close', () => {
                 resolve();
             });
             rd.pipe(wr);
@@ -345,8 +345,8 @@ class Helper {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static exists(path) {
         //console.log('Helper.exists');
-        return new Promise(function (resolve) {
-            fs.exists(path, function (exists) {
+        return new Promise(resolve => {
+            fs.exists(path, exists => {
                 resolve(exists);
             });
         });
@@ -355,8 +355,8 @@ class Helper {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static readFile(path) {
         //console.log('Helper.readFile');
-        return new Promise(function (resolve, reject) {
-            fs.readFile(path, 'utf8', function(err, content) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -369,8 +369,8 @@ class Helper {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static writeFile(path, content) {
         //console.log('Helper.writeFile');
-        return new Promise(function (resolve, reject) {
-            fs.writeFile(path, content, 'utf8', function(err) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(path, content, 'utf8', err => {
                 if (err) {
                     reject(err);
                 } else {
@@ -382,7 +382,7 @@ class Helper {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     static escapeHtml(string) {
-        return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return String(string).replace(/[&<>"'`=\/]/g, s => {
             return entityMap[s];
         });
     }
