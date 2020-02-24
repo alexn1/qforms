@@ -17,20 +17,19 @@ class Page extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.application        = parent;
-        self.app                = parent;
-        self.dirPath            = path.join(self.parent.dirPath, 'pages', self.name);
-        self.viewFilePath       = path.join(
+        this.application        = parent;
+        this.app                = parent;
+        this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
+        this.viewFilePath       = path.join(
             server.get('public'),
             'viewer/class/Controller/ModelController/PageController/view',
-            self.data['@class'] + 'View.ejs'
+            this.data['@class'] + 'View.ejs'
         );
-        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
-        self.createCollections  = ['dataSources', 'forms'];
-        self.fillCollections    = ['dataSources', 'forms'];
-        self.dataSources        = {};
-        self.forms              = {};
+        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        this.createCollections  = ['dataSources', 'forms'];
+        this.fillCollections    = ['dataSources', 'forms'];
+        this.dataSources        = {};
+        this.forms              = {};
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

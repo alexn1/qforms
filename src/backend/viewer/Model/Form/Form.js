@@ -13,15 +13,14 @@ class Form extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.page               = parent;
-        self.dirPath            = path.join(self.parent.dirPath, 'forms', self.name);
-        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
-        self.createCollections  = ['dataSources', 'fields', 'controls'];
-        self.fillCollections    = ['dataSources', 'fields', 'controls'];
-        self.dataSources        = {};
-        self.fields             = {};
-        self.controls           = {};
+        this.page               = parent;
+        this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
+        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        this.createCollections  = ['dataSources', 'fields', 'controls'];
+        this.fillCollections    = ['dataSources', 'fields', 'controls'];
+        this.dataSources        = {};
+        this.fields             = {};
+        this.controls           = {};
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,12 +30,11 @@ class Form extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fill(context) {
-        var self = this;
-        if (self.data.dataSources.default) {
+        if (this.data.dataSources.default) {
             return super.fill(context);
         } else {
-            var dataSourceResponse = self._getSurrogateDataSourceResponse(context);
-            self.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
+            var dataSourceResponse = this._getSurrogateDataSourceResponse(context);
+            this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
             return super.fill(context).then(response => {
                 response.dataSources.default = dataSourceResponse;
                 return response;
@@ -46,12 +44,11 @@ class Form extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getSurrogateDataSourceResponse(context) {
-        var self = this;
         var row = {
             id: 1
         };
-        for (var name in self.fields) {
-            self.fields[name].fillDefaultValue(context, row);
+        for (var name in this.fields) {
+            this.fields[name].fillDefaultValue(context, row);
         }
         return {
             class               : 'DataSource',
@@ -71,21 +68,19 @@ class Form extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     dumpRowToParams(row, params) {
-        var self = this;
-        for (var name in self.fields) {
-            self.fields[name].dumpRowValueToParams(row, params);
+        for (var name in this.fields) {
+            this.fields[name].dumpRowValueToParams(row, params);
         }
         //console.log(params);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     replaceThis(context, query) {
-        var self = this;
         return query.replace(/\{([@\w\.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 var arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = self.page.name;
+                    arr[0] = this.page.name;
                 }
                 if (arr[0] === 'parent' && context.parentPageName) {
                     arr[0] = context.parentPageName;

@@ -13,10 +13,9 @@ class Field extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.form               = parent;
-        self.dirPath            = path.join(parent.dirPath, 'fields', self.name);
-        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
+        this.form               = parent;
+        this.dirPath            = path.join(parent.dirPath, 'fields', this.name);
+        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,15 +25,14 @@ class Field extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fillDefaultValue(context, row) {
-        var self = this;
-        var column = self.data['@attributes'].column;
-        var defaultValue = self.form.replaceThis(context, self.data['@attributes'].defaultValue);
-        var params = self.form.page.application.getParams(context);
+        var column = this.data['@attributes'].column;
+        var defaultValue = this.form.replaceThis(context, this.data['@attributes'].defaultValue);
+        var params = this.form.page.application.getParams(context);
         var code = qforms.Helper.templateValue(defaultValue, params);
         try {
             var value = eval(code);
         } catch (e) {
-            throw new Error('[' + self.getFullName() + '] default value error: ' + e.toString());
+            throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
         }
         if (value === undefined) {
             value = null;
@@ -44,29 +42,26 @@ class Field extends Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     dumpRowValueToParams(row, params) {
-        var self = this;
-        var name  = self.getFullName();
-        var value = row[self.data['@attributes'].column];
+        var name  = this.getFullName();
+        var value = row[this.data['@attributes'].column];
         params[name] = value;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getFullName() {
-        var self = this;
         return [
-            self.form.page.name,
-            self.form.name,
-            self.name
+            this.form.page.name,
+            this.form.name,
+            this.name
         ].join('.');
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     calcValue(row) {
-        var self = this;
         return Promise.try(() => {
-            return eval(self.data['@attributes'].value);
+            return eval(this.data['@attributes'].value);
         }).then(value => {
-            row[self.data['@attributes'].column] = value;
+            row[this.data['@attributes'].column] = value;
         });
     }
 

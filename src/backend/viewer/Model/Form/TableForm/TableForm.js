@@ -13,11 +13,10 @@ class TableForm extends Form {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.viewFilePath = path.join(
+        this.viewFilePath = path.join(
             server.get('public'),
             'viewer/class/Controller/ModelController/FormController/TableFormController/view',
-            self.data['@class'] + 'View.ejs'
+            this.data['@class'] + 'View.ejs'
         );
     }
 

@@ -13,11 +13,10 @@ class LabelField extends Field {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
-        var self = this;
-        self.viewFilePath = path.join(
+        this.viewFilePath = path.join(
             server.get('public'),
             'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',
-            self.parent.data['@class'] + self.data['@class'] + 'View.ejs'
+            this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
     }
 
