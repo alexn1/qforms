@@ -1,5 +1,5 @@
 'use strict';
-module.exports.helper                            = require('./backend/common/helper');
+module.exports.helper                            = require('./backend/common/Helper');
 module.exports.multipart                         = require('./backend/common/multipart');
 module.exports.text                              = {
                                                 en:require('./backend/common/text/en'),
