@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = Page;
-
 var util          = require('util');
 var path          = require('path');
 var fs            = require('fs');
@@ -13,30 +11,30 @@ var qforms = require('../../../../qforms');
 var server = require('../../../../server');
 var Model  = require('../Model');
 
-util.inherits(Page, Model);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Page extends Model {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Page(data, parent) {
-    var self = this;
-    Page.super_.call(self, data, parent);
-    self.application        = parent;
-    self.app                = parent;
-    self.dirPath            = path.join(self.parent.dirPath, 'pages', self.name);
-    self.viewFilePath       = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/PageController/view',
-        self.data['@class'] + 'View.ejs'
-    );
-    self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
-    self.createCollections  = ['dataSources', 'forms'];
-    self.fillCollections    = ['dataSources', 'forms'];
-    self.dataSources        = {};
-    self.forms              = {};
-}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(data, parent) {
+        super(data, parent);
+        var self = this;
+        self.application        = parent;
+        self.app                = parent;
+        self.dirPath            = path.join(self.parent.dirPath, 'pages', self.name);
+        self.viewFilePath       = path.join(
+            server.get('public'),
+            'viewer/class/Controller/ModelController/PageController/view',
+            self.data['@class'] + 'View.ejs'
+        );
+        self.customViewFilePath = path.join(self.dirPath, self.name + '.ejs');
+        self.createCollections  = ['dataSources', 'forms'];
+        self.fillCollections    = ['dataSources', 'forms'];
+        self.dataSources        = {};
+        self.forms              = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.create = function(data, parent) {
-    return Promise.try(function () {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    static async create(data, parent) {
         var customClassFilePath = path.join(
             parent.dirPath,
             'pages',
@@ -51,15 +49,18 @@ Page.create = function(data, parent) {
                 return new Page(data, parent);
             }
         });
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Page.prototype.rpc = function(context) {
-    var self = this;
-    return Promise.try(function () {
-        return {
-            result: 'ok'
-        };
-    });
-};
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    rpc(context) {
+        var self = this;
+        return Promise.try(function () {
+            return {
+                result: 'ok'
+            };
+        });
+    }
+
+}
+
+module.exports = Page;
