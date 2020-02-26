@@ -78,11 +78,11 @@ class Database extends Model {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getDeleteQuery(tableName, rowKeyValues) {
         console.log('Database.prototype.getDeleteQuery');
-        const columns = Object.keys(rowKeyValues);
-        const whereString = columns.map(column => `${column} = {${column}}`).join(' and ');
-        var query2 = `delete from ${tableName} where ${whereString}`;
-        console.log('query2:', query2);
-        return query2;
+        const keyColumns = Object.keys(rowKeyValues);
+        const whereString = keyColumns.map(keyColumn => `${keyColumn} = {${keyColumn}}`).join(' and ');
+        const query = `delete from ${tableName} where ${whereString}`;
+        console.log('query:', query);
+        return query;
     }
 
 }

@@ -154,6 +154,16 @@ class PostgreSqlDatabase extends Database {
         });
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getDeleteQuery(tableName, rowKeyValues) {
+        console.log('PostgreSqlDatabase.prototype.getDeleteQuery');
+        const keyColumns = Object.keys(rowKeyValues);
+        const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
+        const query = `delete from "${tableName}" where ${whereString}`;
+        console.log('query:', query);
+        return query;
+    }
+
 }
 
 module.exports = PostgreSqlDatabase;
