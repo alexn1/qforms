@@ -130,6 +130,6 @@ function editor_file(req, res, next) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function favicon(req, res, next) {
-    console.log('/favicon.ico');
+    //console.log('/favicon.ico');
     res.end();
 }

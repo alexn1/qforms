@@ -67,6 +67,7 @@ QForms.doHttpRequest = function(data) {
             cache      : false,
             success    : function(data, textStatus, jqXHR) {
                 $('html').removeClass("wait");
+                console.warn('data:', data);
                 resolve(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {

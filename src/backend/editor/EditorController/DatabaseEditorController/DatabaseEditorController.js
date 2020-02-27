@@ -84,32 +84,19 @@ DatabaseEditorController.prototype.getView = function(params) {
                 return appFile.read().then(function () {
                     var appEditor = new qforms.ApplicationEditor(appFile);
                     var databaseData = appEditor.getDatabaseData(params.database);
-                    return new Promise(function (resolve, reject) {
-                        var cnn = mysql.createConnection({
-                            host    : databaseData.params.host['@attributes'].value,
-                            user    : databaseData.params.user['@attributes'].value,
-                            database: databaseData.params.database['@attributes'].value,
-                            password: databaseData.params.password['@attributes'].value
+                    return DatabaseEditorController.getTableList({
+                        host    : databaseData.params.host['@attributes'].value,
+                        user    : databaseData.params.user['@attributes'].value,
+                        database: databaseData.params.database['@attributes'].value,
+                        password: databaseData.params.password['@attributes'].value
+                    }).then(function (tables) {
+                        console.log('tables:', tables);
+                        result.data.tables = tables;
+                        var filePath = path.join(self.viewDirPath, 'TableView', 'TableView.ejs');
+                        return qforms.Helper.readFile(filePath).then(function (content) {
+                            result.data.tableView = content;
+                            return result;
                         });
-                        cnn.connect();
-                        cnn.query('show tables', function(err, rows, fields) {
-                            if (err) {
-                                reject(err);
-                            } else {
-                                var tables = rows.map(function(row) {
-                                    return {
-                                        0: row[fields[0].name]
-                                    }
-                                });
-                                result.data.tables = tables;
-                                var filePath = path.join(self.viewDirPath, 'TableView', 'TableView.ejs');
-                                qforms.Helper.readFile(filePath).then(function (content) {
-                                    result.data.tableView = content;
-                                    resolve(result);
-                                });
-                            }
-                        });
-                        cnn.end();
                     });
                 });
                 break;
@@ -151,4 +138,32 @@ DatabaseEditorController.prototype.getTableInfo = function(params) {
             cnn.end();
         });
     });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.getTableList = function(config) {
+    console.log('DatabaseEditorController.getTableList');
+    return new Promise(function (resolve, reject) {
+        var cnn = mysql.createConnection(config);
+        cnn.connect();
+        cnn.query('show tables', function(err, rows, fields) {
+            if (err) {
+                reject(err);
+            } else {
+                console.log('rows:', rows);
+                var tables = rows.map(function(row) {
+                    return {
+                        0: row[fields[0].name]
+                    };
+                });
+                resolve(tables);
+            }
+        });
+        cnn.end();
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.getTableInfo = function(config) {
+
 };

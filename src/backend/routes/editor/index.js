@@ -84,6 +84,7 @@ function handle(req, res, appInfo, next) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, appInfo) {
+    console.warn('routes/editor index');
     var appFile = new qforms.JsonFile(appInfo.filePath);
     return appFile.read().then(() => {
         return {
@@ -101,7 +102,7 @@ function index(req, res, appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 async function action(req, res, appInfo) {
-    console.log('action:', req.body.controller, req.body.action);
+    console.warn('routes/editor', req.body.controller, req.body.action, req.body.params);
     if (CONTROLLERS.indexOf(req.body.controller) === -1) {
         throw new Error('Unknown controller {controller}'.replace('{controller}', req.body.controller));
     }
