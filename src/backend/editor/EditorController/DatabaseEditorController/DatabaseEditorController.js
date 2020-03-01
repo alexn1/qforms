@@ -15,7 +15,7 @@ var EditorController = require('../EditorController');
 
 util.inherits(DatabaseEditorController, EditorController);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function DatabaseEditorController(appInfo) {
     var self = this;
     DatabaseEditorController.super_.call(self, appInfo);
@@ -25,7 +25,7 @@ function DatabaseEditorController(appInfo) {
     );
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype._new = function(params) {
     var self = this;
     var appFile = new qforms.JsonFile(self.appInfo.filePath);
@@ -48,7 +48,7 @@ DatabaseEditorController.prototype._new = function(params) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.save = function(params) {
     var self = this;
     var appFile = new qforms.JsonFile(self.appInfo.filePath);
@@ -61,7 +61,7 @@ DatabaseEditorController.prototype.save = function(params) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.delete = function(params) {
     var self = this;
     var appFile = new qforms.JsonFile(self.appInfo.filePath);
@@ -74,7 +74,7 @@ DatabaseEditorController.prototype.delete = function(params) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.prototype.getView = function(params) {
     var self = this;
     return DatabaseEditorController.super_.prototype.getView.call(self, params).then(function (result) {
@@ -84,12 +84,8 @@ DatabaseEditorController.prototype.getView = function(params) {
                 return appFile.read().then(function () {
                     var appEditor = new qforms.ApplicationEditor(appFile);
                     var databaseData = appEditor.getDatabaseData(params.database);
-                    return DatabaseEditorController.getTableList({
-                        host    : databaseData.params.host['@attributes'].value,
-                        user    : databaseData.params.user['@attributes'].value,
-                        database: databaseData.params.database['@attributes'].value,
-                        password: databaseData.params.password['@attributes'].value
-                    }).then(function (tables) {
+                    console.log('databaseData:', databaseData);
+                    return DatabaseEditorController.getTableList(databaseData).then(function (tables) {
                         console.log('tables:', tables);
                         result.data.tables = tables;
                         var filePath = path.join(self.viewDirPath, 'TableView', 'TableView.ejs');
@@ -106,9 +102,29 @@ DatabaseEditorController.prototype.getView = function(params) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseEditorController.getTableList = function(config) {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.prototype.getTableInfo = function(params) {
+    var self = this;
+    var appFile = new qforms.JsonFile(self.appInfo.filePath);
+    return appFile.read().then(function () {
+        var appEditor = new qforms.ApplicationEditor(appFile);
+        var databaseData = appEditor.getDatabaseData(params.database);
+        console.log('databaseData:', databaseData);
+        return DatabaseEditorController.getTableInfo(params, databaseData).then(function (rows) {
+            return {desc: rows};
+        });
+    });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.getTableList = function(databaseData) {
     console.log('DatabaseEditorController.getTableList');
+    const config = {
+        host    : databaseData.params.host['@attributes'].value,
+        user    : databaseData.params.user['@attributes'].value,
+        database: databaseData.params.database['@attributes'].value,
+        password: databaseData.params.password['@attributes'].value
+    };
     return new Promise(function (resolve, reject) {
         var cnn = mysql.createConnection(config);
         cnn.connect();
@@ -129,28 +145,15 @@ DatabaseEditorController.getTableList = function(config) {
     });
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseEditorController.prototype.getTableInfo = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        var databaseData = appEditor.getDatabaseData(params.database);
-        return DatabaseEditorController.getTableInfo(params, {
-            host    : databaseData.params.host['@attributes'].value,
-            user    : databaseData.params.user['@attributes'].value,
-            database: databaseData.params.database['@attributes'].value,
-            password: databaseData.params.password['@attributes'].value
-        }).then(function (rows) {
-            return {desc: rows};
-        });
-    });
-};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.getTableInfo = function(params, databaseData) {
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseEditorController.getTableInfo = function(params, config) {
+    const config = {
+        host    : databaseData.params.host['@attributes'].value,
+        user    : databaseData.params.user['@attributes'].value,
+        database: databaseData.params.database['@attributes'].value,
+        password: databaseData.params.password['@attributes'].value
+    };
     return new Promise(function (resolve, reject) {
         var cnn = mysql.createConnection(config);
         cnn.connect();
@@ -168,3 +171,4 @@ WHERE table_schema = '${config.database}' and table_name = '${params.table}'`;
         });
     });
 };
+
