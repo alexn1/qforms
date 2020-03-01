@@ -40,9 +40,9 @@ var ACTIONS = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = (req, res, next) => {
     if (req.method === 'GET') {
-        console.warn(req.method, 'routes/editor');
+        console.warn(req.method, 'routes/editor', req.params);
     } else if (req.method === 'POST') {
-        console.warn(req.method, 'routes/editor', req.method, req.body.controller, req.body.action, req.body.params);
+        console.warn(req.method, 'routes/editor', req.params, req.body.controller, req.body.action, req.body.params);
     }
     if (req.app.get('env') === 'development') {
         if (req.params.appDirName && req.params.appFileName) {

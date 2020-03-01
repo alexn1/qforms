@@ -8,7 +8,7 @@ var server = require('../../../server');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = (req, res, next) => {
-    console.warn(req.method, 'routes/home');
+    console.warn(req.method, 'routes/home', req.params);
     if (req.method === 'GET') {
         qforms.Helper.getAppInfos(req.app.get('appsDirPath')).then(appInfos => {
             res.render('home/view', {
