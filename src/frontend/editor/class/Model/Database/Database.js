@@ -61,6 +61,7 @@ Database.prototype.newParam = function(name) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 Database.prototype.getView = function(view) {
     var self = this;
+    console.log('Database.prototype.getView', view);
     var args = {
         controller: 'Database',
         action    : 'getView',
@@ -71,7 +72,10 @@ Database.prototype.getView = function(view) {
     };
     return QForms.doHttpRequest(args).then(function (data) {
         return data;
-    });
+    })/*.catch(function (err) {
+        console.error('error handler for getView:', err);
+        throw err;
+    })*/;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -3,26 +3,28 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function QForms(data) {
     var self = this;
+    console.log('QForms', data);
     if (data) {
         QForms.env = data.env;
     }
     window.onerror = QForms.errorHandler;
     window.onunhandledrejection = function (e) {
-        //console.log('window.onunhandledrejection', typeof e, e);
+        console.warn('window.onunhandledrejection');
+        //console.log('typeof e:', typeof e);
+        //console.log('e:', e);
         if (e instanceof Error) {
             var err = e;
-            console.error(err.message, err.stack);
+            console.error(err.message, ', stack:' ,err.stack);
             alert(err.message);
         } else {
-            var promise = e.promise ? e.promise : e.detail.promise;
+            //var promise = e.promise ? e.promise : e.detail.promise;
             var err     = e.reason  ? e.reason  : e.detail.reason;
-            err.message = 'unhandled promise error: ' + err.message;
-            console.error(err.message, err.stack);
+            err.message = 'unhandledrejection: ' + err.message;
+            console.error(err.message, ', stack:' , err.stack);
             alert(err.message);
         }
     };
     //window.onbeforeunload = QForms.exit;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +41,7 @@ QForms.exit = function (evt) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 QForms.errorHandler = function(errorMsg) {
+    console.log('QForms.errorHandler:', errorMsg);
     var msg;
     if (QForms.env === 'development') {
         msg = 'QForms Error Handler:\n' + errorMsg;
@@ -70,18 +73,12 @@ QForms.doHttpRequest = function(data) {
                 console.warn('data:', data);
                 resolve(data);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function(jqXHR, statusText, errorThrown) {
                 //console.log('jqXHR:'      , jqXHR);
-                //console.log('textStatus:' , textStatus);
+                //console.log('statusText:' , statusText);
                 //console.log('errorThrown:', errorThrown);
                 $('html').removeClass("wait");
-                var err;
-                if (QForms.env === 'development') {
-                    err = new Error(jqXHR.statusText + ', ' + jqXHR.responseText);
-                } else {
-                    err = new Error(jqXHR.responseText);
-                }
-                reject(err);
+                reject(new Error(jqXHR.statusText + ', ' + jqXHR.responseText));
             }
         });
     });

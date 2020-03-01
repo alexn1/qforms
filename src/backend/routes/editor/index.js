@@ -91,6 +91,9 @@ function handle(req, res, appInfo, next) {
 function index(req, res, appInfo) {
     var appFile = new qforms.JsonFile(appInfo.filePath);
     return appFile.read().then(() => {
+        const app = JSON.parse(appFile.content);
+        app.env = server.get('env');
+        const appFileContent = JSON.stringify(app, null, 4);
         return {
             version        : req.app.get('version'),
             commonClassCss : req.app.get('commonClassCss'),
@@ -98,7 +101,7 @@ function index(req, res, appInfo) {
             editorClassCss : req.app.get('editorClassCss'),
             editorClassJs  : req.app.get('editorClassJs'),
             runAppLink     : '/view/' + appInfo.route + '/?debug=1',
-            appFileContent : appFile.content,
+            appFileContent : appFileContent,
             appName        : appFile.getAttr('name')
         };
     });
