@@ -6,12 +6,12 @@ var util    = require('util');
 var path    = require('path');
 var fs      = require('fs');
 var _       = require('underscore');
-var mysql   = require('mysql');
 var Promise = require('bluebird');
 
 var qforms           = require('../../../../qforms');
 var server           = require('../../../../server');
 var EditorController = require('../EditorController');
+var MySql = require('../../../common/MySql');
 
 util.inherits(DatabaseEditorController, EditorController);
 
@@ -125,50 +125,19 @@ DatabaseEditorController.getTableList = function(databaseData) {
         database: databaseData.params.database['@attributes'].value,
         password: databaseData.params.password['@attributes'].value
     };
-    return new Promise(function (resolve, reject) {
-        var cnn = mysql.createConnection(config);
-        cnn.connect();
-        cnn.query('show tables', function(err, rows, fields) {
-            cnn.end();
-            if (err) {
-                reject(err);
-            } else {
-                console.log('rows:', rows);
-                var tables = rows.map(function(row) {
-                    return {
-                        0: row[fields[0].name]
-                    };
-                });
-                resolve(tables);
-            }
-        });
-    });
+    const mySql = new MySql(config);
+    return mySql.getTableList();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.getTableInfo = function(params, databaseData) {
-
     const config = {
         host    : databaseData.params.host['@attributes'].value,
         user    : databaseData.params.user['@attributes'].value,
         database: databaseData.params.database['@attributes'].value,
         password: databaseData.params.password['@attributes'].value
     };
-    return new Promise(function (resolve, reject) {
-        var cnn = mysql.createConnection(config);
-        cnn.connect();
-        var query =
-`SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
-FROM information_schema.columns \
-WHERE table_schema = '${config.database}' and table_name = '${params.table}'`;
-        cnn.query(query, function(err, rows) {
-            cnn.end();
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
+    const mySql = new MySql(config);
+    return mySql.getTableInfo(params.table);
 };
 
