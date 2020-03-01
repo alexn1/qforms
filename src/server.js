@@ -87,7 +87,7 @@ initExpressServer(server); function initExpressServer(server) {
     server.get('/edit/:appDirName/:appFileName/*', editor_file);
     server.post('/edit/:appDirName/:appFileName/', editor);
 
-    // /favicon.ico
+    // favicon.ico
     server.get('/favicon.ico', favicon);
     server.use(express.static(server.get('public')));
 

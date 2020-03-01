@@ -39,6 +39,11 @@ var ACTIONS = [
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = (req, res, next) => {
+    if (req.method === 'GET') {
+        console.warn(req.method, 'routes/editor');
+    } else if (req.method === 'POST') {
+        console.warn(req.method, 'routes/editor', req.method, req.body.controller, req.body.action, req.body.params);
+    }
     if (req.app.get('env') === 'development') {
         if (req.params.appDirName && req.params.appFileName) {
             // var route = req.params.appDirName + '/' + req.params.appFileName;
@@ -84,7 +89,6 @@ function handle(req, res, appInfo, next) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function index(req, res, appInfo) {
-    console.warn('routes/editor index');
     var appFile = new qforms.JsonFile(appInfo.filePath);
     return appFile.read().then(() => {
         return {
@@ -102,7 +106,6 @@ function index(req, res, appInfo) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 async function action(req, res, appInfo) {
-    console.warn('routes/editor', req.body.controller, req.body.action, req.body.params);
     if (CONTROLLERS.indexOf(req.body.controller) === -1) {
         throw new Error('Unknown controller {controller}'.replace('{controller}', req.body.controller));
     }

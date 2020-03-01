@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.e404 = (req, res, next) => {
-    //console.log('module.exports.e404');
+    console.warn(req.method, 'routes/error/404');
     var err = new Error('page not found');
     err.status = 404;
     next(err);
@@ -10,6 +10,7 @@ module.exports.e404 = (req, res, next) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.e500 = (err, req, res, next) => {
+    console.warn(req.method, 'routes/error/500');
     var message = (typeof err === 'string') ? err : err.message;
     console.error('module.exports.e500:', message, req.originalUrl, err.stack);
     res.status(err.status || 500);
