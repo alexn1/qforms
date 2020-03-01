@@ -107,46 +107,13 @@ DatabaseEditorController.prototype.getView = function(params) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseEditorController.prototype.getTableInfo = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        var databaseData = appEditor.getDatabaseData(params.database);
-        return new Promise(function (resolve, reject) {
-            var cnn = mysql.createConnection({
-                host    : databaseData.params.host['@attributes'].value,
-                user    : databaseData.params.user['@attributes'].value,
-                database: databaseData.params.database['@attributes'].value,
-                password: databaseData.params.password['@attributes'].value
-            });
-            cnn.connect();
-            var query = "SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT\
-                    FROM information_schema.columns\
-                    WHERE table_schema = '{database}' and table_name = '{table}'"
-                .replace('{database}', databaseData.params.database['@attributes'].value)
-                .replace('{table}'   , params.table);
-            cnn.query(query, function(err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve({
-                        desc: rows
-                    });
-                }
-            });
-            cnn.end();
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 DatabaseEditorController.getTableList = function(config) {
     console.log('DatabaseEditorController.getTableList');
     return new Promise(function (resolve, reject) {
         var cnn = mysql.createConnection(config);
         cnn.connect();
         cnn.query('show tables', function(err, rows, fields) {
+            cnn.end();
             if (err) {
                 reject(err);
             } else {
@@ -159,11 +126,45 @@ DatabaseEditorController.getTableList = function(config) {
                 resolve(tables);
             }
         });
-        cnn.end();
     });
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseEditorController.getTableInfo = function(config) {
+DatabaseEditorController.prototype.getTableInfo = function(params) {
+    var self = this;
+    var appFile = new qforms.JsonFile(self.appInfo.filePath);
+    return appFile.read().then(function () {
+        var appEditor = new qforms.ApplicationEditor(appFile);
+        var databaseData = appEditor.getDatabaseData(params.database);
+        return DatabaseEditorController.getTableInfo(params, {
+            host    : databaseData.params.host['@attributes'].value,
+            user    : databaseData.params.user['@attributes'].value,
+            database: databaseData.params.database['@attributes'].value,
+            password: databaseData.params.password['@attributes'].value
+        }).then(function (rows) {
+            return {desc: rows};
+        });
+    });
+};
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DatabaseEditorController.getTableInfo = function(params, config) {
+    return new Promise(function (resolve, reject) {
+        var cnn = mysql.createConnection(config);
+        cnn.connect();
+        var query =
+`SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
+FROM information_schema.columns \
+WHERE table_schema = '${config.database}' and table_name = '${params.table}'`;
+        cnn.query(query, function(err, rows) {
+            cnn.end();
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
 };
