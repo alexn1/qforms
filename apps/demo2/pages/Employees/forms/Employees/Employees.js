@@ -1,11 +1,11 @@
-QForms.inherits(EmployeesEmployeesController, TableFormController);
+class EmployeesEmployeesController extends TableFormController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EmployeesEmployeesController() {
-    EmployeesEmployeesController.super_.apply(this, arguments);
+    constructor() {
+        super(arguments);
+    }
+
+    init() {
+        super.init();
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeesEmployeesController.prototype.init = function() {
-    EmployeesEmployeesController.super_.prototype.init.call(this);
-};

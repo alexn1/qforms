@@ -1,7 +1,7 @@
 {
     "@class": "Page",
     "@attributes": {
-        "formatVer": "0.1",
+        "formatVersion": "0.1",
         "name": "Employees",
         "caption": "Employees",
         "width": "640",
@@ -31,17 +31,12 @@
                         "query": "select\n    id,\n    first_name,\n    last_name\nfrom `employee`",
                         "limit": "",
                         "countQuery": "",
+                        "singleQuery": "",
+                        "multipleQuery": "select\n    id,\n    first_name,\n    last_name\nfrom `employee`",
                         "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
                     },
-                    "keyColumns": {
-                        "id": {
-                            "@class": "KeyColumn",
-                            "@attributes": {
-                                "name": "id"
-                            }
-                        }
-                    }
+                    "keyColumns": {}
                 }
             },
             "fields": {

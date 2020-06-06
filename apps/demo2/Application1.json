@@ -1,7 +1,7 @@
 {
     "@class": "Application",
     "@attributes": {
-        "formatVer": "0.1",
+        "formatVersion": "0.1",
         "name": "Application1",
         "caption": "Application1",
         "authentication": "false",
@@ -42,6 +42,43 @@
                     "@attributes": {
                         "name": "password",
                         "value": "example"
+                    }
+                }
+            },
+            "tables": {
+                "employee": {
+                    "@class": "Table",
+                    "@attributes": {
+                        "name": "employee"
+                    },
+                    "columns": {
+                        "id": {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "id",
+                                "caption": "id",
+                                "key": "true",
+                                "auto": "true"
+                            }
+                        },
+                        "first_name": {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "first_name",
+                                "caption": "first_name",
+                                "key": "false",
+                                "auto": "false"
+                            }
+                        },
+                        "last_name": {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "last_name",
+                                "caption": "last_name",
+                                "key": "false",
+                                "auto": "false"
+                            }
+                        }
                     }
                 }
             }

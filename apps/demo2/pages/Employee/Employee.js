@@ -1,21 +1,19 @@
-QForms.inherits(EmployeeController, PageController);
+class EmployeeController extends PageController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EmployeeController() {
-    EmployeeController.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+    }
+
+    deinit() {
+        super.deinit();
+    }
+
+    getCaption() {
+        return this.forms.Employee.getCaption();
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeController.prototype.init = function() {
-    EmployeeController.super_.prototype.init.call(this);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeController.prototype.deinit = function() {
-    EmployeeController.super_.prototype.deinit.call(this);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeController.prototype.getCaption = function() {
-    return this.forms.Employee.getCaption();
-};

@@ -1,7 +1,7 @@
 {
     "@class": "Page",
     "@attributes": {
-        "formatVer": "0.1",
+        "formatVersion": "0.1",
         "name": "Employee",
         "caption": "Employee",
         "width": "640",

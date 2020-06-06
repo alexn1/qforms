@@ -1,24 +1,21 @@
-QForms.inherits(EmployeeEmployeeidController, LinkFieldController);
+class EmployeeEmployeeidController extends LinkFieldController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EmployeeEmployeeidController() {
-    EmployeeEmployeeidController.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+        this.on('click', this.listeners.on_click = this.on_click.bind(this));
+    }
+
+    setViewStyle(view, row) {
+
+    }
+
+    on_click(e) {
+        console.log('EmployeeEmployeeidController.on_click', e);
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeEmployeeidController.prototype.init = function() {
-    var self = this;
-    EmployeeEmployeeidController.super_.prototype.init.call(this);    
-    self.on('click', self.listeners.on_click = self.on_click.bind(self));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeEmployeeidController.prototype.setViewStyle = function(view, row) {
-
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeeEmployeeidController.prototype.on_click = function(e) {
-    var self = this;
-    console.log('EmployeeEmployeeidController.prototype.on_click', e);
-};
+EmployeeEmployeeidController;

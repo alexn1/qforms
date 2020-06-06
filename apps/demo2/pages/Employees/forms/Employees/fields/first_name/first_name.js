@@ -1,20 +1,19 @@
-QForms.inherits(EmployeesEmployeesfirst_nameController, TextBoxFieldController);
+class EmployeesEmployeesfirst_nameController extends TextBoxFieldController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EmployeesEmployeesfirst_nameController() {
-    EmployeesEmployeesfirst_nameController.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+    }
+
+    setViewStyle(view, row) {
+        if (row.first_name === 'John') {
+            $(view).css('color', 'red');
+        } else {
+            $(view).css('color', '');
+        }
+    }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeesEmployeesfirst_nameController.prototype.init = function() {
-    EmployeesEmployeesfirst_nameController.super_.prototype.init.call(this);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EmployeesEmployeesfirst_nameController.prototype.setViewStyle = function(view, row) {
-    if (row.first_name === 'John') {
-        $(view).css('color', 'red');
-    } else {
-        $(view).css('color', '');
-    }    
-};
+EmployeesEmployeesfirst_nameController;

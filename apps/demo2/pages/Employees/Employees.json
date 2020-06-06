@@ -1,7 +1,7 @@
 {
     "@class": "Page",
     "@attributes": {
-        "formatVer": "0.1",
+        "formatVersion": "0.1",
         "name": "Employees",
         "caption": "Employees",
         "width": "640",
@@ -28,7 +28,7 @@
                         "name": "default",
                         "database": "default",
                         "table": "employee",
-                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom employee",
+                        "query": "select\n    id,\n    first_name,\n    last_name\nfrom employee\norder by id",
                         "limit": "",
                         "countQuery": "",
                         "insertNewKey": "false",
