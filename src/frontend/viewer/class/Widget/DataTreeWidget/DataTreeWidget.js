@@ -1,135 +1,111 @@
 'use strict';
 
-QForms.inherits(DataTreeWidget, TreeWidget);
+class DataTreeWidget extends TreeWidget {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataTreeWidget(el, controller) {
-    var self = this;
-    TreeWidget.call(self, el);
-    self.controller = controller;
-    self.dataSource = null;
-    self.keyToItem  = {};		// to fast item search by key
+    constructor(el, controller) {
+        super(el);
+        this.controller = controller;
+        this.dataSource = null;
+        this.keyToItem  = {};		// to fast item search by key
+    }
+
+    init() {
+        super.init();
+        this.dataSource = this.controller.model.dataSource;
+        this.dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        this.dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
+        this.dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
+        this.dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
+        this.dataSource.on('goneRow', this.listeners.goneRow = this.onGoneRow.bind(this));
+        this.dataSource.on('comeRow', this.listeners.comeRow = this.onComeRow.bind(this));
+    }
+
+    deinit() {
+        this.dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        this.dataSource.off('newRow', this.listeners.newRow);
+        this.dataSource.off('removeRow', this.listeners.removeRow);
+        this.dataSource.off('moveRow', this.listeners.moveRow);
+        this.dataSource.off('goneRow', this.listeners.goneRow);
+        this.dataSource.off('comeRow', this.listeners.comeRow);
+    }
+
+    fill() {
+        this.keyToItem['[null]'] = this.tree;
+        const rows = this.dataSource.getRows();
+        for (let i = 0; i < rows.length; i++) {
+            this.addRow(this.tree, rows[i]);
+        }
+    }
+
+    addRow(parent, row, i) {
+        // adding row
+        const caption = this.makeRowCaption(row);
+        const item = parent.addItem(caption, undefined, i);
+        item.qRow = row;
+        // save to be able to find by key
+        const key = this.dataSource.getRowKey(row);
+        this.keyToItem[key] = item;
+        // adding child rows
+        const rows = this.dataSource.getRows(key);
+        for (let i = 0; i < rows.length; i++) {
+            this.addRow(item, rows[i]);
+        }
+        return item;
+    }
+
+    makeRowCaption(row) {
+        let caption = '';
+        for (const fieldName in this.controller.model.fields) {
+            const field = this.controller.model.fields[fieldName];
+            if (field.data.isVisible === 'false') continue;
+            caption += row[field.data.column] + ' ';
+        }
+        return caption;
+    }
+
+    onRowUpdate(ea) {
+        const item = this.keyToItem[ea.key];
+        this.refillItem(item);
+    }
+
+    refillItem(item) {
+        const caption = this.makeRowCaption(item.qRow);
+        item.setCaption(caption);
+    }
+
+    onNewRow(ea) {
+        const row = this.dataSource.getRow(ea.key);
+        const parentItem = this.keyToItem[ea.parentKey];
+        const item = this.addRow(parentItem, row, ea.i);
+        item.select();
+    }
+
+    onRemoveRow(ea) {
+        const item = this.keyToItem[ea.key];
+        item.remove();
+    }
+
+    onMoveRow(ea) {
+        const parentItem = this.keyToItem[ea.parentKey];
+        const item = this.keyToItem[ea.key];
+        QForms.moveNode(parentItem.ul, item.li, ea.oldIndex, ea.newIndex);
+        this.refillItem(item);
+    }
+
+    onGoneRow(ea) {
+        const item = this.keyToItem[ea.key];
+        const newParent = this.keyToItem[ea.newParentKey];
+        item.changeParent(newParent, ea.newIndex);
+        item.select();
+        this.refillItem(item);
+    }
+
+    onComeRow(ea) {
+        const item = this.keyToItem[ea.key];
+        const newParent = this.keyToItem[ea.parentKey];
+        item.changeParent(newParent, ea.newIndex);
+        item.select();
+        this.refillItem(item);
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.init = function() {
-    var self = this;
-    TreeWidget.prototype.init.call(self);
-    self.dataSource = self.controller.model.dataSource;
-    self.dataSource.on('refillRow', self.listeners.refillRow = self.onRefillRow.bind(self));
-    self.dataSource.on('newRow', self.listeners.newRow = self.onNewRow.bind(self));
-    self.dataSource.on('removeRow', self.listeners.removeRow = self.onRemoveRow.bind(self));
-    self.dataSource.on('moveRow', self.listeners.moveRow = self.onMoveRow.bind(self));
-    self.dataSource.on('goneRow', self.listeners.goneRow = self.onGoneRow.bind(self));
-    self.dataSource.on('comeRow', self.listeners.comeRow = self.onComeRow.bind(self));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.deinit = function() {
-    var self = this;
-    self.dataSource.off('refillRow', self.listeners.refillRow);
-    self.dataSource.off('newRow', self.listeners.newRow);
-    self.dataSource.off('removeRow', self.listeners.removeRow);
-    self.dataSource.off('moveRow', self.listeners.moveRow);
-    self.dataSource.off('goneRow', self.listeners.goneRow);
-    self.dataSource.off('comeRow', self.listeners.comeRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.fill = function() {
-    var self = this;
-    self.keyToItem['[null]'] = self.tree;
-    var rows = self.dataSource.getRows();
-    for (var i = 0; i < rows.length; i++) {
-        self.addRow(self.tree, rows[i]);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.addRow = function(parent, row, i) {
-    var self = this;
-    // adding row
-    var caption = self.makeRowCaption(row);
-    var item = parent.addItem(caption, undefined, i);
-    item.qRow = row;
-    // save to be able to find by key
-    var key = self.dataSource.getRowKey(row);
-    self.keyToItem[key] = item;
-    // adding child rows
-    var rows = self.dataSource.getRows(key);
-    for (var i = 0; i < rows.length; i++) {
-        self.addRow(item, rows[i]);
-    }
-    return item;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.makeRowCaption = function(row) {
-    var self = this;
-    var caption = '';
-    for (var fieldName in self.controller.model.fields) {
-        var field = self.controller.model.fields[fieldName];
-        if (field.data.isVisible === 'false') continue;
-        caption += row[field.data.column] + ' ';
-    }
-    return caption;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onRefillRow = function(ea) {
-    var self = this;
-    var item = self.keyToItem[ea.key];
-    self.refillItem(item);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.refillItem = function(item) {
-    var self = this;
-    var caption = self.makeRowCaption(item.qRow);
-    item.setCaption(caption);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onNewRow = function(ea) {
-    var self = this;
-    var row = self.dataSource.getRow(ea.key);
-    var parentItem = self.keyToItem[ea.parentKey];
-    var item = self.addRow(parentItem, row, ea.i);
-    item.select();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onRemoveRow = function(ea) {
-    var self = this;
-    var item = self.keyToItem[ea.key];
-    item.remove();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onMoveRow = function(ea) {
-    var self = this;
-    var parentItem = self.keyToItem[ea.parentKey];
-    var item = self.keyToItem[ea.key];
-    QForms.moveNode(parentItem.ul, item.li, ea.oldIndex, ea.newIndex);
-    self.refillItem(item);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onGoneRow = function(ea) {
-    var self = this;
-    var item = self.keyToItem[ea.key];
-    var newParent = self.keyToItem[ea.newParentKey];
-    item.changeParent(newParent, ea.newIndex);
-    item.select();
-    self.refillItem(item);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataTreeWidget.prototype.onComeRow = function(ea) {
-    var self = this;
-    var item = self.keyToItem[ea.key];
-    var newParent = self.keyToItem[ea.parentKey];
-    item.changeParent(newParent, ea.newIndex);
-    item.select();
-    self.refillItem(item);
-};

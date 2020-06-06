@@ -1,43 +1,35 @@
 'use strict';
 
-QForms.inherits(ModelController, EventEmitter);
+class ModelController extends EventEmitter {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ModelController(model) {
-    var self = this;
-    self.model     = model;
-    self.listeners = {};
-}
+    constructor(model) {
+        super();
+        this.model     = model;
+        this.listeners = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.getPropList = function() {
-    var self = this;
-    return {
-        list   : self.model.data['@attributes'],
-        options: {}
-    };
-};
+    getPropList() {
+        return {
+            list   : this.model.data['@attributes'],
+            options: {}
+        };
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.setProperty = function(name, value) {
-    var self = this;
-    self.model.setValue(name, value).then(function () {
+    async setProperty(name, value) {
+        await this.model.setValue(name, value);
         if (name === 'name') {
-            self.item.text.innerHTML = self.getCaption(self.model.data);
+            this.item.text.innerHTML = this.getCaption(this.model.data);
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.getCaption = function(data) {
-    var self = this;
-    return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
-};
+    getCaption(data) {
+        return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.delete = function() {
-    var self = this;
-    self.model.delete().then(function () {
-        self.item.parent.removeItem(self.item);
-    });
-};
+    async delete() {
+        console.log('ModelController.delete', this.name);
+        await this.model.delete();
+        this.item.parent.removeItem(this.item);
+    }
+
+}

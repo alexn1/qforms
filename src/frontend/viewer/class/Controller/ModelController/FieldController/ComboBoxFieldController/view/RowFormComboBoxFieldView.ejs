@@ -1,4 +1,4 @@
-<% var _readOnly = (model.data.readOnly === "true") ? "disabled" : ""; %>
-<div class="RowFormComboBoxFieldView <%=model.form.page.id%>_<%=model.form.name%>_<%=model.name%>">
+<% const _readOnly = (model.data.readOnly === "true") ? "disabled" : ""; %>
+<div id="<%=model.form.page.id%>_<%=model.form.name%>_<%=model.name%>" class="RowFormComboBoxFieldView <%=model.name%>">
     <select <%=_readOnly%>></select>
 </div>

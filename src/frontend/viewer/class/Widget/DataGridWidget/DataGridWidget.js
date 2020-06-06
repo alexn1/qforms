@@ -1,192 +1,174 @@
 'use strict';
 
-QForms.inherits(DataGridWidget, GridWidget);
+class DataGridWidget extends GridWidget {
+    constructor(el, formController) {
+        super(el);
+        this.formController = formController;
+        // this.dataSource     = null;
+        this.keyToBodyRow   = {}; // to fast row search by key
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataGridWidget(el, formController) {
-    var self = this;
-    DataGridWidget.super_.call(self, el);
-    self.formController = formController;
-    self.dataSource     = null;
-    self.keyToBodyRow   = {}; // to fast row search by key
+    init() {
+        super.init();
+        // self.dataSource = self.formController.model.dataSource;
+        this.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        this.getDataSource().on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
+        this.getDataSource().on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
+        this.getDataSource().on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
+        this.getDataSource().on('newFrame' , this.listeners.newFrame  = this.onNewFrame.bind(this));
+        this.getDataSource().on('insert'   , this.listeners.insert    = this.onInsert.bind(this));
+    }
+
+    createColumn(fieldName, headerCell) {
+        const fieldController = this.formController.fields[fieldName];
+        const gridColumn = new DataGridColumn(this, fieldName, headerCell, fieldController);
+        gridColumn.init();
+        return gridColumn;
+    }
+
+    deinit() {
+        super.deinit();
+        this.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
+        this.getDataSource().off('newRow', this.listeners.newRow);
+        this.getDataSource().off('removeRow', this.listeners.removeRow);
+        this.getDataSource().off('moveRow', this.listeners.moveRow);
+        this.getDataSource().off('newFrame', this.listeners.newFrame);
+        this.getDataSource().off('insert', this.listeners.insert);
+    }
+
+    fill () {
+        //console.log('DataGridWidget.fill');
+        const rows = this.getDataSource().getRows();
+        for (let i = 0; i < rows.length; i++) {
+            //const row = this.getDataSource().childs['[null]'].rowsByIndex[i];
+            const row = rows[i];
+            const key = this.getDataSource().getRowKey(row);
+            const bodyRow = this.createBodyRow(i);
+            bodyRow.dbRow = row;
+            bodyRow.qKey  = key;
+            for (const fieldName in this.gridColumns) {
+                const bodyCell = bodyRow.bodyCells[fieldName];
+                this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
+            }
+            this.setRowStyle(bodyRow);
+            this.keyToBodyRow[key] = bodyRow;
+        }
+    }
+
+    clear() {
+        this.removeBodyRows();
+        this.keyToBodyRow = {};
+    }
+
+    setRowStyle(bodyRow) {
+        this.formController.setRowStyle(bodyRow, bodyRow.dbRow);
+    }
+
+    save(bodyCell) {
+        const field = this.formController.model.fields[bodyCell.qFieldName];
+        const row = bodyCell.bodyRow.dbRow;
+        const value = this.gridColumns[bodyCell.qFieldName].getValue(bodyCell.firstElementChild);
+        this.getDataSource().setValue(
+            row,
+            field.data.column,
+            value
+        );
+    }
+
+    refillRow(bodyRow, newIndex) {
+        bodyRow.qI = newIndex;
+        for (const fieldName in this.gridColumns) {
+            const bodyCell = bodyRow.bodyCells[fieldName];
+            this.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow, bodyCell.firstElementChild);
+        }
+        this.setRowStyle(bodyRow);
+    }
+
+    onRowUpdate(event) {
+        console.log('DataGridWidget.onRowUpdate:', event);
+        const key = event.key;
+        const i   = event.i;
+        const bodyRow = this.keyToBodyRow[key];
+        if (!bodyRow) throw new Error(`no row with key: ${key}`);
+        const row = bodyRow.dbRow;
+        const newKey = this.getDataSource().getRowKey(row);
+        console.log('row:', row);
+        console.log(`key: ${key} to ${newKey}`);
+        if (key !== newKey) {   // update index if needed
+            delete this.keyToBodyRow[key];
+            this.keyToBodyRow[newKey] = bodyRow;
+        }
+        this.refillRow(bodyRow, i);
+    }
+
+    onNewRow(ea) {
+        const i = ea.i;
+        //console.log('onNewRow: ' + i);
+        const row = this.getDataSource().childs['[null]'].rowsByIndex[i];
+        const key = this.getDataSource().getRowKey(row);
+        const bodyRow = this.createBodyRow(i);
+        bodyRow.dbRow = row;
+        bodyRow.qKey = key;
+        for (const fieldName in this.gridColumns) {
+            const bodyCell = bodyRow.bodyCells[fieldName];
+            this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
+        }
+        this.setRowStyle(bodyRow);
+        this.keyToBodyRow[key] = bodyRow;
+    }
+
+    onInsert(ea) {
+        const bodyRow = this.keyToBodyRow[ea.key];
+        this.selectBodyRow(bodyRow);
+        bodyRow.scrollIntoView();
+    }
+
+    onRemoveRow(ea) {
+        const key = ea.key;
+        const bodyRow = this.keyToBodyRow[key];
+        //console.log('onRemoveRow: ' + key);
+        if (this.selectedBodyRow === bodyRow) {
+            this.selectedBodyRow  = null;
+            this.selectedBodyCell = null;
+            /*
+            if (this.selectedBodyRow.nextSibling) {
+                this.selectBodyRow(this.selectedBodyRow.nextSibling);
+            } else if (bodyRow === this.bodyTable.lastElementChild && this.bodyTable.lastElementChild.previousSibling) {
+                this.selectBodyRow(this.bodyTable.lastElementChild.previousSibling);
+            } else {
+                this.unselectBodyCellIfSelected();
+                this.unselectBodyRowIfSelected();
+            }
+            */
+        }
+        this.bodyTable.removeChild(bodyRow);
+        delete this.keyToBodyRow[key];
+    }
+
+    onMoveRow(ea) {
+        if (ea.parentKey !== '[null]') {
+            return;
+        }
+        const oldIndex = ea.oldIndex;
+        const newIndex = ea.newIndex;
+        const key      = ea.key;
+        //console.log('onMoveRow: ' + key + ' ' + newIndex);
+        const bodyRow = this.keyToBodyRow[key];
+        QForms.moveNode(this.bodyTable, bodyRow, oldIndex, newIndex);
+        this.refillRow(bodyRow, newIndex);
+    }
+
+    onNewFrame(ea) {
+        this.clear();
+        this.fill();
+    }
+
+    getSelectedKey() {
+        return (this.selectedBodyRow !== null) ? this.selectedBodyRow.qKey : null;
+    }
+
+    getDataSource() {
+        return this.formController.model.dataSource;
+    }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.init = function() {
-    var self = this;
-    DataGridWidget.super_.prototype.init.call(self);
-    self.dataSource = self.formController.model.dataSource;
-    self.dataSource.on('refillRow', self.listeners.refillRow = self.onRefillRow.bind(self));
-    self.dataSource.on('newRow', self.listeners.newRow = self.onNewRow.bind(self));
-    self.dataSource.on('removeRow', self.listeners.removeRow = self.onRemoveRow.bind(self));
-    self.dataSource.on('moveRow', self.listeners.moveRow = self.onMoveRow.bind(self));
-    self.dataSource.on('newFrame', self.listeners.newFrame = self.onNewFrame.bind(self));
-    self.dataSource.on('insert', self.listeners.insert = self.onInsert.bind(self));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.createColumn = function(fieldName, headerCell) {
-    var self = this;
-    var fieldController = self.formController.fields[fieldName];
-    var gridColumn = new DataGridColumn(self, fieldName, headerCell, fieldController);
-    gridColumn.init();
-    return gridColumn;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.deinit = function() {
-    var self = this;
-    GridWidget.prototype.deinit.call(self);
-    self.dataSource.off('refillRow', self.listeners.refillRow);
-    self.dataSource.off('newRow', self.listeners.newRow);
-    self.dataSource.off('removeRow', self.listeners.removeRow);
-    self.dataSource.off('moveRow', self.listeners.moveRow);
-    self.dataSource.off('newFrame', self.listeners.newFrame);
-    self.dataSource.off('insert', self.listeners.insert);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.fill = function () {
-    var self = this;
-    //console.log('DataGridWidget.prototype.fill');
-    var rows = self.formController.model.dataSource.getRows();
-    for (var i = 0; i < rows.length; i++) {
-        //var row = this.dataSource.childs['[null]'].rowsByIndex[i];
-        var row = rows[i];
-        var key = self.dataSource.getRowKey(row);
-        var bodyRow = self.createBodyRow(i);
-        bodyRow.dbRow = row;
-        bodyRow.qKey  = key;
-        for (var fieldName in self.gridColumns) {
-            var bodyCell = bodyRow.bodyCells[fieldName];
-            self.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
-        }
-        self.setRowStyle(bodyRow);
-        self.keyToBodyRow[key] = bodyRow;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.clear = function () {
-    var self = this;
-    self.removeBodyRows();
-    self.keyToBodyRow = {};
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-GridWidget.prototype.setRowStyle = function(bodyRow) {
-    var self = this;
-    self.formController.setRowStyle(bodyRow, bodyRow.dbRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.save = function(bodyCell) {
-    var self = this;
-    var field = self.formController.model.fields[bodyCell.qFieldName];
-    var row = bodyCell.bodyRow.dbRow;
-    var value = self.gridColumns[bodyCell.qFieldName].getValue(bodyCell.firstElementChild);
-    self.dataSource.setValue(
-        row,
-        field.data.column,
-        value
-    );
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.refillRow = function(bodyRow, newIndex) {
-    var self = this;
-    bodyRow.qI = newIndex;
-    for (var fieldName in self.gridColumns) {
-        var bodyCell = bodyRow.bodyCells[fieldName];
-        self.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow, bodyCell.firstElementChild);
-    }
-    self.setRowStyle(bodyRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onRefillRow = function(ea) {
-    var self = this;
-    var key = ea.key;
-    var i   = ea.i;
-    //console.log('onRefillRow: ' + key + ' ' + i);
-    var bodyRow = self.keyToBodyRow[key];
-    self.refillRow(bodyRow, i);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onNewRow = function(ea) {
-    var self = this;
-    var i = ea.i;
-    //console.log('onNewRow: ' + i);
-    var row = self.dataSource.childs['[null]'].rowsByIndex[i];
-    var key = self.dataSource.getRowKey(row);
-    var bodyRow = self.createBodyRow(i);
-    bodyRow.dbRow = row;
-    bodyRow.qKey = key;
-    for (var fieldName in self.gridColumns) {
-        var bodyCell = bodyRow.bodyCells[fieldName];
-        self.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
-    }
-    self.setRowStyle(bodyRow);
-    self.keyToBodyRow[key] = bodyRow;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onInsert = function(ea) {
-    var self = this;
-    var bodyRow = self.keyToBodyRow[ea.key];
-    self.selectBodyRow(bodyRow);
-    bodyRow.scrollIntoView();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onRemoveRow = function(ea) {
-    var self = this;
-    var key = ea.key;
-    var bodyRow = self.keyToBodyRow[key];
-    //console.log('onRemoveRow: ' + key);
-    if (self.selectedBodyRow === bodyRow) {
-        self.selectedBodyRow  = null;
-        self.selectedBodyCell = null;
-        /*
-        if (this.selectedBodyRow.nextSibling) {
-            this.selectBodyRow(this.selectedBodyRow.nextSibling);
-        } else if (bodyRow === this.bodyTable.lastElementChild && this.bodyTable.lastElementChild.previousSibling) {
-            this.selectBodyRow(this.bodyTable.lastElementChild.previousSibling);
-        } else {
-            this.unselectBodyCellIfSelected();
-            this.unselectBodyRowIfSelected();
-        }
-        */
-    }
-    self.bodyTable.removeChild(bodyRow);
-    delete self.keyToBodyRow[key];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onMoveRow = function(ea) {
-    var self = this;
-    if (ea.parentKey !== '[null]') {
-        return;
-    }
-    var oldIndex = ea.oldIndex;
-    var newIndex = ea.newIndex;
-    var key      = ea.key;
-    //console.log('onMoveRow: ' + key + ' ' + newIndex);
-    var bodyRow = self.keyToBodyRow[key];
-    QForms.moveNode(self.bodyTable, bodyRow, oldIndex, newIndex);
-    self.refillRow(bodyRow, newIndex);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.onNewFrame = function(ea) {
-    var self = this;
-    self.clear();
-    self.fill();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataGridWidget.prototype.getSelectedKey = function() {
-    var self = this;
-    return (self.selectedBodyRow !== null) ? self.selectedBodyRow.qKey : null;
-};

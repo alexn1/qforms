@@ -1,10 +1,11 @@
 'use strict';
 
-QForms.inherits(Widget, EventEmitter);
+class Widget extends EventEmitter {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Widget(el) {
-    var self = this;
-    self.el        = el;
-    self.listeners = {};
+    constructor(el) {
+        super();
+        this.el        = el;
+        this.listeners = {};
+    }
+
 }

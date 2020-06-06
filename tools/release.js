@@ -4,7 +4,6 @@ var fs            = require('fs');
 var Promise       = require('bluebird');
 var child_process = require('child_process');
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 main(); function main() {
     var version;
     return exec('git checkout master').then(function() {
@@ -51,7 +50,6 @@ main(); function main() {
     });
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function versionWithoutDev(version) {
     var ver = version.split('.');
     var major = ver[0];
@@ -60,7 +58,6 @@ function versionWithoutDev(version) {
     return [major, minor, patch[0]].join('.');
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function versionWithDev(version) {
     var ver = version.split('.');
     var major = ver[0];
@@ -69,7 +66,6 @@ function versionWithDev(version) {
     return [major, minor, [patch[0], 'dev'].join('-')].join('.');
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function incMinor(version) {
     var ver = version.split('.');
     var major = ver[0];
@@ -79,7 +75,6 @@ function incMinor(version) {
     return [major, minor, patch].join('.');
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function incPatch(version) {
     var ver = version.split('.');
     var major = ver[0];
@@ -89,7 +84,6 @@ function incPatch(version) {
     return [major, minor, patch].join('.');
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function getJsonFileData(filePath) {
     return new Promise(function(resolve, reject) {
         fs.readFile(filePath, 'utf8', function(err, text) {
@@ -107,7 +101,6 @@ function getJsonFileData(filePath) {
     });
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function putJsonFileData(filePath, data) {
     return new Promise(function(resolve, reject) {
         try {
@@ -125,7 +118,6 @@ function putJsonFileData(filePath, data) {
     });
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 function exec(cmd) {
     console.log(cmd);
     return new Promise(function(resolve, reject) {

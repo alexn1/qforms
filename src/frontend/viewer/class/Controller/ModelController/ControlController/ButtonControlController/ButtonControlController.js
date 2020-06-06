@@ -1,29 +1,24 @@
 'use strict';
 
-QForms.inherits(ButtonControlController, ControlController);
+class ButtonControlController extends ControlController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ButtonControlController(model, parent) {
-    var self = this;
-    ButtonControlController.super_.call(self, model, parent);
-    //self.eventClick = new QForms.Event(self);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ButtonControlController.prototype.fill = function(row, view) {
-    var self = this;
-    ButtonControlController.super_.prototype.fill.call(self, row, view);
-    if (self.model.form.data.class === 'RowForm') {
-        $(view).children().click(function() {
-            self._onClick(this);
-        });
+    constructor(model, parent) {
+        super(model, parent);
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ButtonControlController.prototype._onClick = function(el) {
-    var self = this;
-    var view = el.parentNode;
-    // event
-    self.emit('click', {source: self, view: view, row: view.dbRow, el: el, control: self});
-};
+    fill(row, view) {
+        const self = this;
+        super.fill(row, view);
+        if (self.model.form.data.class === 'RowForm') {
+            $(view).children().click(function() {
+                self._onClick(this);
+            });
+        }
+    }
+
+    _onClick(el) {
+        const view = el.parentNode;
+        this.emit('click', {source: this, view: view, row: view.dbRow, el: el, control: this});
+    }
+
+}

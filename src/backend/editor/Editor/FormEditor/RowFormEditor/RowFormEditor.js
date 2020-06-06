@@ -1,39 +1,35 @@
 'use strict';
 
-module.exports = RowFormEditor;
+const path = require('path');
+const FormEditor = require('../FormEditor');
 
-var util = require('util');
-var path = require('path');
+class RowFormEditor extends FormEditor {
 
-var server     = require('../../../../../server');
-var FormEditor = require('../FormEditor');
+    constructor(pageEditor, name, data) {
+        super(pageEditor, name, data);
+        this.defaultEjsFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.ejs'
+        );
+        this.defaultCssFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
+        );
+    }
 
-util.inherits(RowFormEditor, FormEditor);
+    static createData(params) {
+        return {
+            '@class'     : 'RowForm',
+            '@attributes': {
+                'name'    :params.name,
+                'caption' :params.caption ? params.caption : params.name
+            },
+            'dataSources': {},
+            'fields'     : {},
+            'controls'   : {}
+        };
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowFormEditor(pageEditor, name, data) {
-    var self = this;
-    RowFormEditor.super_.call(self, pageEditor, name, data);
-    self.defaultEjsFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.ejs'
-    );
-    self.defaultCssFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
-    );
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RowFormEditor.createData = function(params) {
-    return {
-        '@class'     : 'RowForm',
-        '@attributes': {
-            'name'    :params.name,
-            'caption' :params.caption ? params.caption : params.name
-        },
-        'dataSources': {},
-        'fields'     : {},
-        'controls'   : {}
-    };
-};
+module.exports = RowFormEditor;

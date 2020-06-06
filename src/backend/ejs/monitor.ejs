@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>QForms monitor v<%=version%>></title>
+</head>
+<body>
+<%  const keys = Object.keys(applications);  %>
+applications: <%=keys.length%>,
+<%=keys.join(',')%>
+</body>
+</html>

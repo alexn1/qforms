@@ -1,146 +1,104 @@
 'use strict';
 
-QForms.inherits(Application, Model);
+class Application extends Model {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Application(data) {
-    var self = this;
-    Model.call(self, data);
-}
+    constructor(data) {
+        super(data);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.setValue = function(name, value) {
-    var self = this;
-    //console.log(name + ' = ' + value);
-    var args = {
-        controller: 'Application',
-        action    : 'save',
-        params    : {
-            attr : name,
-            value: value
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        self.data['@attributes'][name] = value;
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'save',
+            params    : {
+                attr : name,
+                value: value
+            }
+        });
+        this.data['@attributes'][name] = value;
         return data;
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.newPage = function(params) {
-    var self = this;
-    params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-    var args = {
-        controller: 'Page',
-        action    : '_new',
-        params    : params
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
+    async newPage(params) {
+        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
+        const data = await QForms.doHttpRequest({
+            controller: 'Page',
+            action    : '_new',
+            params    : params
+        });
         return [data.page, data.pageLink];
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.newDatabase = function(params) {
-    var self = this;
-    var args = {
-        controller: 'Database',
-        action    : '_new',
-        params    : params
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
+    async newDatabase(params) {
+        const data = await QForms.doHttpRequest({
+            controller: 'Database',
+            action    : '_new',
+            params    : params
+        });
         return data;
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.getView = function(view) {
-    var self = this;
-    var args = {
-        controller: 'Application',
-        action    : 'getView',
-        params    : {
-            app : self.data['@attributes'].name,
-            view: view
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async getView(view) {
+        return await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'getView',
+            params    : {
+                app : this.data['@attributes'].name,
+                view: view
+            }
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.saveView = function(text, view) {
-    var self = this;
-    var args = {
-        controller: 'Application',
-        action    : 'saveView',
-        params    : {
-            app : self.data['@attributes'].name,
-            view: view,
-            text: text
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async saveView(text, view) {
+        return await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'saveView',
+            params    : {
+                app : this.data['@attributes'].name,
+                view: view,
+                text: text
+            }
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.saveController = function(text) {
-    var self = this;
-    var args = {
-        controller: 'Application',
-        action    : 'saveController',
-        params    : {
-            app : self.data['@attributes'].name,
-            text: text
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async saveController(text) {
+        return await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'saveController',
+            params    : {
+                app : this.data['@attributes'].name,
+                text: text
+            }
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.createView = function() {
-    var self = this;
-    var args = {
-        controller: 'Application',
-        action    : 'createView',
-        params    : {
-            app: self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async createView() {
+        return await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'createView',
+            params    : {
+                app: this.data['@attributes'].name
+            }
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.createController = function() {
-    var self = this;
-    var args = {
-        controller: 'Application',
-        action    : 'createController',
-        params    : {
-            app: self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async createController() {
+        return await QForms.doHttpRequest({
+            controller: 'Application',
+            action    : 'createController',
+            params    : {
+                app: this.data['@attributes'].name
+            }
+        });
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Application.prototype.newDataSource = function(params) {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : '_new',
-        params    : params
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
+    async newDataSource(params) {
+        return await QForms.doHttpRequest({
+            controller: 'DataSource',
+            action    : '_new',
+            params    : params
+        });
+    }
+
+}

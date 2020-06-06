@@ -1,42 +1,27 @@
 'use strict';
 
-module.exports = PageLinkEditor;
+const Editor = require('../Editor');
 
-var util = require('util');
+class PageLinkEditor extends Editor {
 
-var Editor = require('../Editor');
+    constructor(appEditor, name, data) {
+        super(data, appEditor);
+        this.appEditor = appEditor;
+        this.name      = name;
+        this.colName = 'pageLinks';
+    }
 
-util.inherits(PageLinkEditor, Editor);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditor.createData = function(params) {
-    return {
-        '@class'     : 'PageLink',
-        '@attributes': {
-            name    : params.name,
-            fileName: 'pages/{name}/{name}.json'.replace(/{name}/g, params.name),
-            menu    : params.menu || (params.startup === 'true' ? 'Menu' : ''),
-            startup : params.startup || 'false'
+    static createData(params) {
+        return {
+            '@class'     : 'PageLink',
+            '@attributes': {
+                name    : params.name,
+                fileName: 'pages/{name}/{name}.json'.replace(/{name}/g, params.name),
+                menu    : params.menu || (params.startup === 'true' ? 'Menu' : ''),
+                startup : params.startup || 'false'
+            }
         }
     }
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageLinkEditor(appEditor, name) {
-    var self = this;
-    self.appEditor = appEditor;
-    self.name      = name;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditor.prototype.getData = function() {
-    var self = this;
-    return self.appEditor.getPageLinkData(self.name);
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditor.prototype.setAttr = function(name, value) {
-    var self = this;
-    self.appEditor.setPageLinkAttr(self.name, name, value);
-    return self.appEditor.save();
-};
+module.exports = PageLinkEditor;

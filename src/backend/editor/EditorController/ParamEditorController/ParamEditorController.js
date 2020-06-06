@@ -1,63 +1,45 @@
 'use strict';
 
-module.exports = ParamEditorController;
+const path = require('path');
+const _    = require('underscore');
+const EditorController = require('../EditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
-var _    = require('underscore');
+class ParamEditorController extends EditorController {
 
-var qforms           = require('../../../../qforms');
-var server           = require('../../../../server');
-var EditorController = require('../EditorController');
+    constructor(...args) {
+        console.log('ParamEditorController.constructor');
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/ParamController'
+        );
+    }
 
-util.inherits(ParamEditorController, EditorController);
+    async _new(params) {
+        console.log('ParamEditorController._new');
+        const appEditor = await this.createApplicationEditor();
+        const param = appEditor.createDatabaseEditor(params.database).newParam(params);
+        await appEditor.save();
+        return param;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ParamEditorController(appInfo) {
-    var self = this;
-    ParamEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/ParamController'
-    );
+    async save(params) {
+        console.log('ParamEditorController.save');
+        const appEditor = await this.createApplicationEditor();
+        const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        const paramEditor = databaseEditor.getParamEditor(params.param);
+        await paramEditor.setAttr(params.attr, params.value);
+        return null;
+    }
+
+    async delete(params) {
+        console.log('ParamEditorController.delete');
+        const appEditor = await this.createApplicationEditor();
+        appEditor.createDatabaseEditor(params.database).deleteParam(params.param)
+        await appEditor.save();
+        return null;
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParamEditorController.prototype._new = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        var param = appEditor.newDatabaseParam(params);
-        return appEditor.save().then(function() {
-            return param;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParamEditorController.prototype.save = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        appEditor.setDatabaseParamAttr(params['database'], params['param'], params['attr'], params['value']);
-        return appEditor.save().then(function() {
-            return null;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParamEditorController.prototype.delete = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        appEditor.deleteDatabaseParam(params['database'], params['param']);
-        appEditor.save().then(function () {
-            return null;
-        });
-    });
-};
+module.exports = ParamEditorController;

@@ -1,28 +1,34 @@
 'use strict';
 
-QForms.inherits(KeyColumnController, ModelController);
+class KeyColumnController extends ModelController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function KeyColumnController(model, item) {
-    var self = this;
-    ModelController.call(self, model);
-    self.item = item;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumnController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {'action':'delete', 'caption':'Delete'}
-    ];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumnController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'delete':
-            self.delete();
-            break;
+    constructor(model, item) {
+        super(model);
+        this.item = item;
     }
-};
+
+    getActions() {
+        return [
+            {'action':'delete', 'caption':'Delete'}
+        ];
+    }
+
+    doAction(action) {
+        switch (action) {
+            case 'delete':
+                this.delete();
+                break;
+        }
+    }
+
+    static async getView(view) {
+        return await QForms.doHttpRequest({
+            controller: 'KeyColumn',
+            action    : 'getView',
+            params    : {
+                view: view
+            }
+        });
+    }
+
+}

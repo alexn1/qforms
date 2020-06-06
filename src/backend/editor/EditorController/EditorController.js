@@ -1,46 +1,42 @@
 'use strict';
 
-module.exports = EditorController;
+const path = require('path');
+const qforms = require('../../qforms');
 
-var path = require('path');
-var fs   = require('fs');
+class EditorController {
+    constructor(appInfo, hostApp, application) {
+        if (!hostApp) throw new Error(`no hostApp for ${this.constructor.name}`);
+        if (!application) throw new Error(`no application for ${this.constructor.name}`);
+        this.appInfo     = appInfo;
+        this.hostApp     = hostApp;
+        this.application = application;
+        this.viewDirPath = null;
+    }
 
-var qforms = require('../../../qforms');
+    async getView(params) {
+        console.log('EditorController.getView');
+        if (!this.viewDirPath) throw new Error('viewDirPath is null');
+        const viewFilePath = path.join(this.viewDirPath, params.view);
+        const exists = await qforms.Helper.exists(viewFilePath);
+        let view = null;
+        if (exists) {
+            console.log(`view file exists: ${viewFilePath}`);
+        } else {
+            console.warn(`view file does not exist: ${viewFilePath}`);
+        }
+        if (exists) view = await qforms.Helper.readFile(viewFilePath);
+        return {
+            view,
+            data: {}
+        };
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EditorController(appInfo) {
-    var self = this;
-    self.appInfo     = appInfo;
-    self.viewDirPath = null;
+    async createApplicationEditor() {
+        console.log('EditorController.createApplicationEditor');
+        const appFile = new qforms.JsonFile(this.appInfo.filePath);
+        await appFile.read();
+        return new qforms.ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
+    }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.getView = function(params) {
-    var self = this;
-    var result = {
-        view: '',
-        data: {}
-    };
-    var viewFilePath = path.join(self.viewDirPath, params.view);
-    return qforms.Helper.exists(viewFilePath).then(function (exists) {
-        if (exists) {
-            return qforms.Helper.readFile(viewFilePath).then(function (content) {
-                result.view = content;
-                return result;
-            });
-        } else {
-            return result;
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.getApplicationEditor = function() {
-    var self = this;
-    console.log('EditorController.prototype.getApplicationEditor');
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        return appEditor;
-    });
-};
+module.exports = EditorController;

@@ -1,41 +1,38 @@
-QForms.inherits(<%=page%><%=form%><%=field%>Controller, <%=_class%>Controller);
+class <%=page%><%=form%><%=field%>Controller extends <%=_class%>Controller {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=page%><%=form%><%=field%>Controller() {
-    <%=page%><%=form%><%=field%>Controller.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+        //this.on('click', this.listeners.click = this.onClick.bind(this));
+    }
+
+    deinit() {
+        //this.off('click', this.listeners.click);
+        super.deinit();
+    }
+
+    /*
+    onClick(e) {
+        this.model.parent.openPage({
+            name: 'PageName',
+            key : JSON.stringify([e.row.<%=field%>])
+        });
+    }
+    */
+
+    /*
+    setViewStyle(view, row) {
+        //const bodyCell = view.parentNode;               // td element
+        //const bodyRow  = bodyCell.parentNode;           // tr element
+        //if (row.<%=field%> === 'value') {
+        //    $(view).css('color', 'green');
+        //} else {
+        //    $(view).css('color', '');
+        //}
+    }
+    */
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=field%>Controller.prototype.init = function() {
-    <%=page%><%=form%><%=field%>Controller.super_.prototype.init.call(this);
-    //this.on('click', this.listeners.click = this.onClick.bind(this));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=field%>Controller.prototype.deinit = function() {
-    //this.off('click', this.listeners.click);
-    <%=page%><%=form%><%=field%>Controller.super_.prototype.deinit.call(this);
-};
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=field%>Controller.prototype.onClick = function(e) {
-    this.model.parent.openPage({
-        name: 'PageName',
-        key : JSON.stringify([e.row.<%=field%>])
-    });
-};
-*/
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=field%>Controller.prototype.setViewStyle = function(view, row) {
-    //var bodyCell = view.parentNode;               // td element
-    //var bodyRow  = bodyCell.parentNode;           // tr element
-    //if (row.<%=field%> === 'value') {
-    //    $(view).css('color', 'green');
-    //} else {
-    //    $(view).css('color', '');
-    //}
-};
-*/
+<%=page%><%=form%><%=field%>Controller;

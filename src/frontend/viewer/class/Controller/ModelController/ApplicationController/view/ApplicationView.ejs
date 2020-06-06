@@ -1,5 +1,5 @@
-<div id="<%=model.data.name%>" class="ApplicationView full flex-rows">
-    <nav class="navbar navbar-default navbar-static-top navbar-inverse flex-min" role="navigation">
+<div id="<%=model.data.name%>" class="ApplicationView <%=model.data.theme%>">
+    <nav id="menu" class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -10,8 +10,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <% for (var menuName in model.data.menu) {
-                    var items = model.data.menu[menuName];
+                <% for (const menuName in model.data.menu) {
+                    const items = model.data.menu[menuName];
                     %><li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;"><%=menuName%></a>
                     <ul class="dropdown-menu" ><%
@@ -34,8 +34,11 @@
             <% } %>
         </div>
     </nav>
-    <div id="appTC" class="TabWidget flex-max">
+    <div id="appTC" class="TabWidget">
         <ul></ul>
         <div></div>
+    </div>
+    <div id="statusbar">
+        <div id="lastQueryTime">Last query time: -</div>
     </div>
 </div>

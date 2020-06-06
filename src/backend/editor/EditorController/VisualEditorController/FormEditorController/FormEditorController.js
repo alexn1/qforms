@@ -1,183 +1,111 @@
 'use strict';
 
-module.exports = FormEditorController;
+const path = require('path');
+const VisualEditorController = require('../VisualEditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+class FormEditorController extends VisualEditorController {
 
-var server                 = require('../../../../../server');
-var VisualEditorController = require('../VisualEditorController');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/DocumentController/VisualController/FormController'
+        );
+    }
 
-util.inherits(FormEditorController, VisualEditorController);
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
+        const formEditor = await pageEditor.createForm(params);
+        const formData = formEditor.getData();
+        return formData;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormEditorController(appInfo) {
-    var self = this;
-    FormEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/DocumentController/VisualController/FormController'
-    );
-}
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
+        const formEditor = pageEditor.getForm(params.form);
+        await formEditor.setAttr(params['attr'], params['value']);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params['pageFileName']).then(function (pageEditor) {
-            return pageEditor.createForm(params).then(function (formEditor) {
-                var formData = formEditor.getData();
-                return formData;
-            });
-        });
-    });
-};
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
+        await pageEditor.removeForm(params['form']);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params['pageFileName']).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.setAttr(params['attr'], params['value']).then(function () {
-                return null;
-            });
-        });
-    });
-};
+    async moveUp(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const result = await pageEditor.moveFormUp(params);
+        return result;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params['pageFileName']).then(function (pageEditor) {
-            return pageEditor.removeForm(params['form']).then(function () {
-                return null;
-            });
-        });
-    });
-};
+    async moveDown(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const result = await pageEditor.moveFormDown(params);
+        return result;
+    }
 
+    async createView(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.getForm(params.form);
+        const ejs = await formEditor.createEjs(params);
+        const css = await formEditor.createCss(params);
+        return {ejs, css};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.moveUp = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            return pageEditor.moveFormUp(params).then(function (result) {
-                return result;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.moveDown = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            return pageEditor.moveFormDown(params).then(function (result) {
-                return result;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.createView = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.createEjs(params).then(function (ejs) {
-                return formEditor.createCss(params).then(function (css) {
-                    return {
-                        ejs: ejs,
-                        css: css
-                    };
-                });
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.getView = function(params) {
-    var self = this;
-    return FormEditorController.super_.prototype.getView.call(this, params).then(function (result) {
+    async getView(params) {
+        console.log('FormEditorController.getView');
+        const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':
-                return self.getApplicationEditor().then(function(appEditor) {
-                    return appEditor.getPage(params.page).then(function (pageEditor) {
-                        var formEditor = pageEditor.getForm(params.form);
-                        return formEditor.getCustomFile('ejs').then(function (ejs) {
-                            result.data.ejs = ejs;
-                            return formEditor.getCustomFile('css').then(function (css) {
-                                result.data.css = css;
-                                return formEditor.getCustomFile('js').then(function (js) {
-                                    result.data.js = js;
-                                    return result;
-                                });
-                            });
-                        });
-                    });
-                });
-                break;
+                const appEditor = await this.createApplicationEditor();
+                const pageEditor = await appEditor.getPage(params.page);
+                const formEditor = pageEditor.getForm(params.form);
+                result.data.ejs = await formEditor.getCustomFile('ejs');
+                result.data.css = await formEditor.getCustomFile('css');
+                result.data.js = await formEditor.getCustomFile('js');
+                return result;
             default:
                 return result;
-                break;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.saveView = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            switch (params.view) {
-                case 'ejs':
-                    formEditor.saveCustomFile('ejs', params.text).then(function () {
-                        return null;
-                    });
-                    break;
-                case 'css':
-                    formEditor.saveCustomFile('css', params.text).then(function () {
-                        return null;
-                    });
-                    break;
-            }
-        });
-    });
-};
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.createController = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.createJs(params).then(function (js) {
-                return {
-                    js: js
-                };
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormEditorController.prototype.saveController = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.saveCustomFile('js', params.text).then(function () {
+    async saveView(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.getForm(params.form);
+        switch (params.view) {
+            case 'ejs':
+                await formEditor.saveCustomFile('ejs', params.text);
                 return null;
-            });
-        });
-    });
-};
+            case 'css':
+                await formEditor.saveCustomFile('css', params.text);
+                return null;
+        }
+    }
+
+    async createController(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.getForm(params.form);
+        const js = await formEditor.createJs(params);
+        return {js};
+    }
+
+    async saveController(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.getForm(params.form);
+        await formEditor.saveCustomFile('js', params.text);
+        return null;
+    }
+
+}
+
+module.exports = FormEditorController;

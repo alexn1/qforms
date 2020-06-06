@@ -1,241 +1,198 @@
 'use strict';
 
-QForms.inherits(DataSource, Model);
+class DataSource extends Model {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSource(data, parent) {
-    var self = this;
-    Model.call(self, data);
-    self.parent = parent;
+    constructor(data, parent) {
+        super(data);
+        this.parent = parent;
+    }
+
+    static async create(parent, params) {
+        if (parent instanceof Form) {
+            const form = parent;
+            params['page']  = form.page.pageLink.data['@attributes'].fileName;
+            params['form']  = form.data['@attributes'].name;
+        }
+        if (parent instanceof Page) {
+            const page = parent;
+            params['page']  = page.pageLink.data['@attributes'].fileName;
+        }
+        return await QForms.doHttpRequest({
+            controller: 'DataSource',
+            action    : '_new',
+            params    : params
+        });
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const args = {
+            controller: 'DataSource',
+            action    : 'save',
+            params    : {
+                dataSource: this.data['@attributes'].name,
+                attr      : name,
+                value     : value
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        if (this.parent instanceof Form) {
+            args.params.form         = this.parent.data['@attributes'].name;
+            args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
+        }
+        const data = await QForms.doHttpRequest(args);
+        this.data['@attributes'][name] = value;
+        return data;
+    }
+
+    async delete() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'delete',
+            params    : {
+                dataSource: this.data['@attributes'].name
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = this.parent.data['@attributes'].name;
+            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async moveUp() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'moveUp',
+            params    : {
+                dataSource: this.data['@attributes'].name
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = this.parent.data['@attributes'].name;
+            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async moveDown() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'moveDown',
+            params    : {
+                dataSource: this.data['@attributes'].name
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = this.parent.data['@attributes'].name;
+            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async newKeyColumn(name) {
+        const args = {
+            controller: 'KeyColumn',
+            action    : '_new',
+            params    : {
+                dataSource: this.data['@attributes'].name,
+                name      : name
+            }
+        };
+        if (this.parent instanceof Form) {
+            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form = this.parent.data['@attributes'].name;
+        }
+        if (this.parent instanceof Page) {
+            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async newParentKeyColumn(name) {
+        return await QForms.doHttpRequest({
+            controller: 'ParentKeyColumn',
+            action    : '_new',
+            params    : {
+                page      : this.parent.page.pageLink.data['@attributes'].fileName,
+                form      : this.parent.data['@attributes'].name,
+                dataSource: this.data['@attributes'].name,
+                name      : name
+            }
+        });
+    }
+
+    async getView(view) {
+        const args = {
+            controller: 'DataSource',
+            action    : 'getView',
+            params    : {
+                dataSource: (this instanceof DataSource) ? this.data['@attributes'].name : undefined,
+                view      : view
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.pageFileName = (this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined;
+        }
+        if (this.parent instanceof Form) {
+            args.params.pageFileName = (this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined;
+            args.params.form         = (this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async saveController(text) {
+        const args = {
+            controller: 'DataSource',
+            action    : 'saveController',
+            params    : {
+                dataSource: this.data['@attributes'].name,
+                text      : text
+            }
+        };
+        if (this.parent instanceof Page) {
+            args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
+        }
+        if (this.parent instanceof Form) {
+            args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form         = this.parent.data['@attributes'].name;
+        }
+        return await QForms.doHttpRequest(args);
+    }
+
+    async createController() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'createController',
+            params    : {
+                page        : this.parent.page.data['@attributes'].name,
+                pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
+                form        : this.parent.data['@attributes'].name,
+                dataSource  : this.data['@attributes'].name
+            }
+        };
+        return await QForms.doHttpRequest(args);
+    }
+
+    getFullName() {
+        if (this.parent instanceof Form) {
+            return [this.parent.parent.name, this.parent.name, this.name].join('.');
+        } else if (this.parent instanceof Page) {
+            return [this.parent.name, this.name].join('.');
+        } else if (this.parent instanceof Application) {
+            return this.name;
+        }
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.create = function(parent, params) {
-    var self = this;
-    if (parent instanceof Form) {
-        var form = parent;
-        params['page']  = form.page.pageLink.data['@attributes'].fileName;
-        params['form']  = form.data['@attributes'].name;
-    }
-    if (parent instanceof Page) {
-        var page = parent;
-        params['page']  = page.pageLink.data['@attributes'].fileName;
-    }
-    var args = {
-        controller: 'DataSource',
-        action    : '_new',
-        params    : params
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setValue = function(name, value) {
-    var self = this;
-    //console.log(name + ' = ' + value);
-    var args = {
-        controller: 'DataSource',
-        action    : 'save',
-        params    : {
-            dataSource: self.data['@attributes'].name,
-            attr      : name,
-            value     : value
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.pageFileName = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    if (self.parent instanceof Form) {
-        args.params.form         = self.parent.data['@attributes'].name;
-        args.params.pageFileName = self.parent.page.pageLink.data['@attributes'].fileName;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        self.data['@attributes'][name] = value;
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.delete = function() {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'delete',
-        params    : {
-            dataSource: self.data['@attributes'].name
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.page = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    if (self.parent instanceof Form) {
-        args.params.form = self.parent.data['@attributes'].name;
-        args.params.page = self.parent.page.pageLink.data['@attributes'].fileName;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.moveUp = function() {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'moveUp',
-        params    : {
-            dataSource: self.data['@attributes'].name
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.page = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    if (self.parent instanceof Form) {
-        args.params.form = self.parent.data['@attributes'].name;
-        args.params.page = self.parent.page.pageLink.data['@attributes'].fileName;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.moveDown = function() {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'moveDown',
-        params    : {
-            dataSource: self.data['@attributes'].name
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.page = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    if (self.parent instanceof Form) {
-        args.params.form = self.parent.data['@attributes'].name;
-        args.params.page = self.parent.page.pageLink.data['@attributes'].fileName;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.newKeyColumn = function(name) {
-    var self = this;
-    var args = {
-        controller: 'KeyColumn',
-        action    : '_new',
-        params    : {
-            dataSource: self.data['@attributes'].name,
-            name      : name
-        }
-    };
-    if (self.parent instanceof Form) {
-        args.params.page = self.parent.page.pageLink.data['@attributes'].fileName;
-        args.params.form = self.parent.data['@attributes'].name;
-    }
-    if (self.parent instanceof Page) {
-        args.params.page = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.newParentKeyColumn = function(name) {
-    var self = this;
-    var args = {
-        controller: 'ParentKeyColumn',
-        action    : '_new',
-        params    : {
-            page      : self.parent.page.pageLink.data['@attributes'].fileName,
-            form      : self.parent.data['@attributes'].name,
-            dataSource: self.data['@attributes'].name,
-            name      : name
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getView = function(view) {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'getView',
-        params    : {
-            dataSource: (self instanceof DataSource) ? self.data['@attributes'].name : undefined,
-            view      : view
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.pageFileName = (self instanceof DataSource) ? self.parent.pageLink.data['@attributes'].fileName : undefined;
-    }
-    if (self.parent instanceof Form) {
-        args.params.pageFileName = (self instanceof DataSource) ? self.parent.page.pageLink.data['@attributes'].fileName : undefined;
-        args.params.form         = (self instanceof DataSource) ? self.parent.data['@attributes'].name                   : undefined;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.saveController = function(text) {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'saveController',
-        params    : {
-            dataSource: self.data['@attributes'].name,
-            text      : text
-        }
-    };
-    if (self.parent instanceof Page) {
-        args.params.pageFileName = self.parent.pageLink.data['@attributes'].fileName;
-    }
-    if (self.parent instanceof Form) {
-        args.params.pageFileName = self.parent.page.pageLink.data['@attributes'].fileName;
-        args.params.form         = self.parent.data['@attributes'].name;
-    }
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.createController = function() {
-    var self = this;
-    var args = {
-        controller: 'DataSource',
-        action    : 'createController',
-        params    : {
-            page        : self.parent.page.data['@attributes'].name,
-            pageFileName: self.parent.page.pageLink.data['@attributes'].fileName,
-            form        : self.parent.data['@attributes'].name,
-            dataSource  : self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getFullName = function() {
-    var self = this;
-    if (self.parent instanceof Form) {
-        return [self.parent.parent.name, self.parent.name, self.name].join('.');
-    } else if (self.parent instanceof Page) {
-        return [self.parent.name, self.name].join('.');
-    } else if (self.parent instanceof Application) {
-        return self.name;
-    }
-};

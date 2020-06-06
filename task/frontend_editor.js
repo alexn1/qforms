@@ -10,7 +10,6 @@ const less      = require('gulp-less');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_css() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.less'))
         .pipe(less())
@@ -19,19 +18,16 @@ function frontend_editor_class_css() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_ejs() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.ejs'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_html() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.html'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_editor_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.js'))
         .pipe(concat('all.js'))

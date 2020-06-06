@@ -1,82 +1,68 @@
 'use strict';
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function HomeController() {
-    var self = this;
-}
+class HomeController {
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.init = function() {
-    var self = this;
-    $('#btnRun').click(function() {
-        self.btnRun_Click();
-    });
-    $('#lbApp').dblclick(function() {
-        self.lbApp_dblclick();
-    });
-    $('#btnEdit').click(function() {
-        self.btnEdit_Click();
-    });
-    $('#btnCreate').click(function() {
-        self.btnCreate_Click();
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.lbApp_dblclick = function() {
-    var self = this;
-    if ($('#lbApp').val()) {
-        window.location.href = "view/{app}/".replace("{app}",$('#lbApp').val());
-    }
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.btnRun_Click = function() {
-    var self = this;
-    if ($('#lbApp').val()) {
-        window.location.href = "view/{app}/".replace("{app}",$('#lbApp').val());
-    }
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.btnEdit_Click = function() {
-    var self = this;
-    if ($('#lbApp').val()) {
-        window.location.href = "edit/{app}/".replace("{app}",$('#lbApp').val());
-    }
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.btnCreate_Click = function() {
-    var self = this;
-    $.get('home/html/newapp.html', function(html) {
-        $(document.body).append(html);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
-            var folderName = $("#myModal input[id='folderName']").val();
-            var appName = $("#myModal input[id='appName']").val();
-            self.createApp(folderName, appName);
-            $('#myModal').modal('hide');
+    init() {
+        $('#btnRun').click(() => {
+            this.btnRun_Click();
         });
-        $('#myModal').modal('show');
-        $("#myModal input[id='folderName']").focus();
-    });
-};
+        $('#lbApp').dblclick(() => {
+            this.lbApp_dblclick();
+        });
+        $('#btnEdit').click(() => {
+            this.btnEdit_Click();
+        });
+        $('#btnCreate').click(() => {
+            this.btnCreate_Click();
+        });
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-HomeController.prototype.createApp = function(folderName, appName) {
-    var self = this;
-    var args = {
-        action: 'new',
-        folder: folderName,
-        name  : appName
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
+    lbApp_dblclick() {
+        if ($('#lbApp').val()) {
+            window.location.href = "view/{app}/".replace("{app}",$('#lbApp').val());
+        }
+    }
+
+    btnRun_Click() {
+        if ($('#lbApp').val()) {
+            window.location.href = "view/{app}/".replace("{app}",$('#lbApp').val());
+        }
+    }
+
+    btnEdit_Click() {
+        if ($('#lbApp').val()) {
+            window.location.href = "edit/{app}/".replace("{app}",$('#lbApp').val());
+        }
+    }
+
+    btnCreate_Click() {
+        const self = this;
+        $.get('home/html/newapp.html', function(html) {
+            $(document.body).append(html);
+            $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+            $("#myModal button[name='create']").click(function() {
+                const folderName = $("#myModal input[id='folderName']").val();
+                const appName = $("#myModal input[id='appName']").val();
+                self.createApp(folderName, appName);
+                $('#myModal').modal('hide');
+            });
+            $('#myModal').modal('show');
+            $("#myModal input[id='folderName']").focus();
+        });
+    }
+
+    async createApp(folderName, appName) {
+        const args = {
+            action: 'new',
+            folder: folderName,
+            name  : appName
+        };
+        const data = await QForms.doHttpRequest(args);
         if (data.appList) {
-            var lbApp = document.getElementById('lbApp');
+            const lbApp = document.getElementById('lbApp');
             lbApp.innerHTML = '';
             data.appList.forEach(function(app) {
-                var option = document.createElement('option');
+                const option = document.createElement('option');
                 if (app.route) {
                     option.innerHTML = option.value = app.route;
                 } else {
@@ -88,5 +74,6 @@ HomeController.prototype.createApp = function(folderName, appName) {
                 lbApp.appendChild(option);
             });
         }
-    });
-};
+    }
+
+}

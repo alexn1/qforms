@@ -1,64 +1,44 @@
 'use strict';
 
-module.exports = ControlEditorController;
+const path = require('path');
+const VisualEditorController = require('../VisualEditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+class ControlEditorController extends VisualEditorController {
 
-var server = require('../../../../../server');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/DocumentController/VisualController/ControlController'
+        );
+    }
 
-var VisualEditorController = require('../VisualEditorController');
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.getForm(params.form);
+        const controlEditor = await formEditor.createControl(params);
+        const controlData = controlEditor.getData();
+        return controlData;
+    }
 
-util.inherits(ControlEditorController, VisualEditorController);
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.getForm(params.form);
+        const controlEditor = formEditor.getControl(params.control);
+        await controlEditor.setAttr(params['attr'], params['value']);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ControlEditorController(appInfo) {
-    var self = this;
-    ControlEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/DocumentController/VisualController/ControlController'
-    );
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.getForm(params.form);
+        await formEditor.removeControl(params.control);
+        return null;
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function(pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.createControl(params).then(function (controlEditor) {
-                var controlData = controlEditor.getData();
-                return controlData;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            var formEditor    = pageEditor.getForm(params.form);
-            var controlEditor = formEditor.getControl(params.control);
-            return controlEditor.setAttr(params['attr'], params['value']).then(function () {
-                return null;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            return formEditor.removeControl(params.control).then(function () {
-                return null;
-            });
-        });
-    });
-};
+module.exports = ControlEditorController;

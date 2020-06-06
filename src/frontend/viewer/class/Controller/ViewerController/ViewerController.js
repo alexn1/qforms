@@ -1,37 +1,33 @@
 'use strict';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ViewerController(data) {
-    var self = this;
-    //console.log('ViewerController', data);
-    self.data                  = data;
-    self.application           = null;
-    self.applicationController = null;
+class ViewerController {
+    constructor(data) {
+        //console.log('ViewerController', data);
+        this.data                  = data;
+        this.application           = null;
+        this.applicationController = null;
+    }
+
+    init() {
+        console.log('ViewerController.init');
+
+        // application
+        this.application = new Application(this.data);
+        this.application.init();
+
+        // applicationController
+        const html = QForms.render(this.application.data.view, {model: this.application});
+        const $view = $(html);
+        this.applicationController = ApplicationController.create(this.application, $view.get(0));
+        this.applicationController.init();
+
+        // show view
+        $('#client').append($view);
+    }
+
+    deinit() {
+        this.applicationController.deinit();
+        this.application.deinit();
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ViewerController.prototype.init = function() {
-    var self = this;
-
-    // application
-    self.application = new Application(self.data);
-    var html = QForms.render(self.application.data.view, {
-        model:self.application
-    });
-    var $view = $(html);
-
-    // applicationController
-    self.applicationController = ApplicationController.create(self.application, $view.get(0));
-    self.applicationController.init();
-    self.application.init();
-
-    // show view
-    $('#client').append($view);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ViewerController.prototype.deinit = function() {
-    var self = this;
-    self.applicationController.deinit();
-    self.application.deinit();
-};

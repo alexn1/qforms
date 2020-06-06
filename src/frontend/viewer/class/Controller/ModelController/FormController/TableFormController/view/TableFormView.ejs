@@ -1,4 +1,4 @@
-<div id="<%=model.page.id%>_<%=model.name%>" class="TableFormView full flex-rows">
+<div id="<%=model.page.id%>_<%=model.name%>" class="TableFormView <%=model.name%> full flex-rows">
     <div class="flex-min">
         <% if (model.data.refreshButton && model.data.refreshButton === 'true') {%>
             <button class="btn btn-default btn-xs refresh"><%=model.page.app.data.text.form.refresh%></button>
@@ -10,16 +10,16 @@
             <button class="btn btn-default btn-xs delete"><%=model.page.app.data.text.form.delete%></button>
         <% } %>
     </div>
-    <div id="<%=model.page.id%>_<%=model.name%>_GridWidget" class="GridWidget flex-max">
+    <div id="<%=model.page.id%>_<%=model.name%>_GridWidget" class="GridWidget flex-max" tabindex="0">
         <div class="head">
             <table>
                 <tr>
-                    <% for (var fieldName in model.data.fields) {
-                        var field = model.data.fields[fieldName];
+                    <% for (const fieldName in model.data.fields) {
+                        const field = model.data.fields[fieldName];
                         if (field.isVisible === 'false') {
                             continue;
                         }
-                        var width = (field.width === '0') ? 100 : parseInt(field.width);
+                        const width = (field.width === '0') ? 100 : parseInt(field.width);
                     %>
                         <td data-column-name="<%=field.name%>" style="width:<%=width%>px;">
                             <div><%=field.caption%></div>

@@ -1,16 +1,12 @@
 'use strict';
 
-var util    = require('util');
-var path    = require('path');
-var Promise = require('bluebird');
+const path    = require('path');
+const qforms = require('../../../qforms');
+const Helper = require('../../../common/Helper');
+const Model  = require('../Model');
 
-var qforms = require('../../../../qforms');
-var Model  = require('../Model');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Field extends Model {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         this.form               = parent;
@@ -18,19 +14,18 @@ class Field extends Model {
         this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static async create(data, parent) {
         return new Field(data, parent);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fillDefaultValue(context, row) {
-        var column = this.data['@attributes'].column;
-        var defaultValue = this.form.replaceThis(context, this.data['@attributes'].defaultValue);
-        var params = this.form.page.application.getParams(context);
-        var code = qforms.Helper.templateValue(defaultValue, params);
+        const column = this.getAttr('column');
+        const defaultValue = this.form.replaceThis(context, this.getAttr('defaultValue'));
+        const params = this.form.page.application.getParams(context);
+        const code = qforms.Helper.templateValue(defaultValue, params);
+        let value;
         try {
-            var value = eval(code);
+            value = eval(code);
         } catch (e) {
             throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
         }
@@ -40,14 +35,12 @@ class Field extends Model {
         row[column] = value;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     dumpRowValueToParams(row, params) {
-        var name  = this.getFullName();
-        var value = row[this.data['@attributes'].column];
+        const name  = this.getFullName();
+        const value = row[this.getAttr('column')];
         params[name] = value;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     getFullName() {
         return [
             this.form.page.name,
@@ -56,13 +49,12 @@ class Field extends Model {
         ].join('.');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     calcValue(row) {
-        return Promise.try(() => {
-            return eval(this.data['@attributes'].value);
-        }).then(value => {
-            row[this.data['@attributes'].column] = value;
-        });
+        row[this.getAttr('column')] = eval(this.getAttr('value'));
+    }
+
+    getApp() {
+        return this.parent.parent.parent;
     }
 
 }

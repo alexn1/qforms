@@ -1,23 +1,15 @@
 'use strict';
 
-QForms.inherits(Control, Model);
+class Control extends Model {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Control(data, parent) {
-    var self = this;
-    Control.super_.call(self);
-    self.name   = data.name;
-    self.form   = parent;
-    self.data   = data;
-    self.parent = parent;
+    constructor(data, parent) {
+        super(data, parent);
+        this.form = parent;
+    }
+
+    init() {
+    }
+
+    deinit() {
+    }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Control.prototype.init = function() {
-    var self = this;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Control.prototype.deinit = function() {
-    var self = this;
-};

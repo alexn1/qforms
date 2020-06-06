@@ -1,16 +1,10 @@
 'use strict';
 
-var util    = require('util');
-var path    = require('path');
-var fs      = require('fs');
-var Promise = require('bluebird');
+const path    = require('path');
+const Model = require('../Model');
 
-var Model = require('../Model');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Form extends Model {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         this.page               = parent;
@@ -23,31 +17,27 @@ class Form extends Model {
         this.controls           = {};
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static async create(data, parent) {
-        return new Form(data, parent);
+        throw new Error('Form is abstract');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    fill(context) {
+    async fill(context) {
+        console.log('Form.fill', this.constructor.name, this.name);
         if (this.data.dataSources.default) {
             return super.fill(context);
-        } else {
-            var dataSourceResponse = this._getSurrogateDataSourceResponse(context);
-            this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
-            return super.fill(context).then(response => {
-                response.dataSources.default = dataSourceResponse;
-                return response;
-            });
         }
+        const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
+        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
+        const data = await super.fill(context);
+        data.dataSources.default = dataSourceResponse;
+        return data;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getSurrogateDataSourceResponse(context) {
-        var row = {
+        const row = {
             id: 1
         };
-        for (var name in this.fields) {
+        for (const name in this.fields) {
             this.fields[name].fillDefaultValue(context, row);
         }
         return {
@@ -66,30 +56,52 @@ class Form extends Model {
         };
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     dumpRowToParams(row, params) {
-        for (var name in this.fields) {
+        for (const name in this.fields) {
             this.fields[name].dumpRowValueToParams(row, params);
         }
         //console.log(params);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     replaceThis(context, query) {
         return query.replace(/\{([@\w\.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
-                var arr = name.split('.');
+                const arr = name.split('.');
                 if (arr[0] === 'this') {
                     arr[0] = this.page.name;
-                }
-                if (arr[0] === 'parent' && context.parentPageName) {
+                } else if (arr[0] === 'parent' && context.parentPageName) {
                     arr[0] = context.parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
-            } else {
-                return text;
             }
+            return text;
         });
+    }
+
+    async update(context, ds) {
+        console.log('Form.update', this.name);
+        const dataSource = this.dataSources[ds];
+        const cnn = await dataSource.database.getConnection(context);
+        try {
+            await dataSource.database.beginTransaction(cnn);
+            const result = await dataSource.update(context);
+            await dataSource.database.commit(cnn);
+            return result;
+        } catch (err) {
+            console.error(err);
+            await dataSource.database.rollback(cnn, err);
+            throw err;
+        }
+    }
+
+    async rpc(context, name, params) {
+        console.log('Form.rpc', name, params);
+        if (this[name]) return this[name](params);
+        return {errorMessage: `no rpc ${name}`};
+    }
+
+    getApp() {
+        return this.parent.parent;
     }
 
 }

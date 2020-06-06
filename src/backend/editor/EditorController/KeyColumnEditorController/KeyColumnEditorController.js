@@ -1,81 +1,61 @@
 'use strict';
 
-module.exports = KeyColumnEditorController;
+const path = require('path');
+const fs   = require('fs');
+const _    = require('underscore');
+const EditorController = require('../EditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
-var _    = require('underscore');
+class KeyColumnEditorController extends EditorController {
 
-var server           = require('../../../../server');
-var EditorController = require('../EditorController');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/KeyColumnController'
+        );
+    }
 
-util.inherits(KeyColumnEditorController, EditorController);
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
+        if (params.page) {
+            const pageEditor = await appEditor.getPageByFileName(params.page);
+            if (params.form) {
+                const formEditor = pageEditor.getForm(params.form);
+                const keyColumnData = formEditor.newDataSourceKeyColumn(params);
+                await pageEditor.save();
+                return keyColumnData;
+            } else {
+                const dataSourceEditor = pageEditor.createDataSourceEditor(params.dataSource);
+                const keyColumnData = dataSourceEditor.newKeyColumn(params);
+                await pageEditor.save();
+                return keyColumnData;
+            }
+        } else {
+            const dataSourceEditor = appEditor.createDataSourceEditor(params.dataSource);
+            const keyColumnData = dataSourceEditor.newKeyColumn(params);
+            await appEditor.appFile.save();
+            return keyColumnData;
+        }
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function KeyColumnEditorController(appInfo) {
-    var self = this;
-    KeyColumnEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/KeyColumnController'
-    );
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.getForm(params.form);
+        formEditor.setDataSourceKeyColumnAttr(params['dataSource'], params['keyColumn'], params['attr'], params['value']);
+        await pageEditor.save();
+        return null;
+    }
+
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.page);
+        const formEditor = pageEditor.getForm(params['form']);
+        formEditor.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
+        await pageEditor.save();
+        return null;
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumnEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        if (params.page) {
-            return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-                if (params.form) {
-                    var formEditor = pageEditor.getForm(params.form);
-                    var keyColumnData = formEditor.newDataSouceKeyColumn(params);
-                    return pageEditor.save().then(function () {
-                        return keyColumnData;
-                    });
-                } else {
-                    var dataSourceEditor = pageEditor.getDataSource(params.dataSource);
-                    var keyColumnData = dataSourceEditor.newKeyColumn(params);
-                    return pageEditor.save().then(function () {
-                        return keyColumnData;
-                    });
-                }
-            });
-        } else {
-            var dataSourceEditor = appEditor.getDataSource(params.dataSource);
-            var keyColumnData = dataSourceEditor.newKeyColumn(params);
-            return appEditor.appFile.save().then(function () {
-                return keyColumnData;
-            });
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumnEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            formEditor.setDataSourceKeyColumnAttr(params['dataSource'], params['keyColumn'], params['attr'], params['value']);
-            return pageEditor.save().then(function () {
-                return null;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-KeyColumnEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params['form']);
-            formEditor.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
-            return pageEditor.save().then(function() {
-                return null;
-            });
-        });
-    });
-};
+module.exports = KeyColumnEditorController;

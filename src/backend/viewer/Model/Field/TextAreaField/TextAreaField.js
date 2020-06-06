@@ -1,26 +1,19 @@
 'use strict';
 
-var util    = require('util');
-var path    = require('path');
-var Promise = require('bluebird');
+const path    = require('path');
+const Field  = require('../Field');
 
-var server = require('../../../../../server');
-var Field  = require('../Field');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class TextAreaField extends Field {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         this.viewFilePath = path.join(
-            server.get('public'),
+            this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static async create(data, parent) {
         return new TextAreaField(data, parent);
     }

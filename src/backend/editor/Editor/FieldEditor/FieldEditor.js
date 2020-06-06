@@ -1,127 +1,84 @@
 'use strict';
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+const util = require('util');
+const path = require('path');
+const fs   = require('fs');
+const qforms = require('../../../qforms');
+const Editor = require('../Editor');
 
-var qforms = require('../../../../qforms');
-var Editor = require('../Editor');
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FieldEditor extends Editor {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(formEditor, name) {
-        super();
-        var self = this;
-        self.formEditor = formEditor;
-        self.parent     = formEditor;
-        self.name       = name;
+    constructor(formEditor, name, data) {
+        super(data, formEditor);
+        this.formEditor = formEditor;
+        this.name       = name;
+        this.colName = 'fields';
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getData() {
-        var self = this;
-        return self.parent.data.fields[self.name];
+    async setData(data) {
+        this.parent.data.fields[this.name] = data;
+        return await this.parent.parent.save();
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setData(data) {
-        var self = this;
-        self.parent.data.fields[self.name] = data;
-        return self.formEditor.pageEditor.save();
+    async changeClass(newClassName) {
+        const newData = eval(`qforms.${newClassName}Editor.createData(this.attributes())`);
+        await this.setData(newData);
+        return newData;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setAttr(name, value) {
-        var self = this;
-        self.formEditor.setFieldAttr(self.name, name, value);
-        return self.formEditor.pageEditor.save();
+    async createEjs(params) {
+        const formData = this.parent.getData();
+        const defaultEjsFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.ejs');
+        const customEjsFilePath = await this.getCustomFilePath('ejs');
+        const replaceFrom = formData['@class'] + this.getViewName();
+        const replaceTo = params.page + '-' + params.form + '-' + params.field;
+        const ejs = await this.createFileByReplace(customEjsFilePath, defaultEjsFilePath, replaceFrom, replaceTo, null);
+        return ejs;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    changeClass(newClassName) {
-        var self = this;
-        var data = this.getData();
-        var newData = eval("qforms.{newClassName}Editor.createData(data['@attributes'])".replace('{newClassName}', newClassName));
-        return self.setData(newData).then(function () {
-            return newData;
+    async createCss(params) {
+        const formData = this.parent.getData();
+        const defaultCssFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.css');
+        const customCssFilePath = await this.getCustomFilePath('css');
+        const replaceFrom = formData['@class'] + this.getViewName();
+        const replaceTo   = params.page + '-' + params.form + '-' + params.field;
+        const ejs = await this.createFileByReplace(customCssFilePath, defaultCssFilePath, replaceFrom, replaceTo, null);
+        return ejs;
+    }
+
+    async createJs(params) {
+        const templateFilePath = path.join(__dirname, 'Field.js.ejs');
+        const customJsFilePath = await this.getCustomFilePath('js');
+        const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
+            page  : this.parent.parent.getAttr('name'),
+            form  : this.parent.name,
+            field : this.name,
+            _class: this.constructor.name.replace('Editor', '')
         });
+        return js;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createEjs(params) {
-        var self = this;
-        var formData = self.formEditor.getData();
-        var defaultEjsFilePath = path.join(self.defaultViewDirPath, formData['@class'] + self.getViewName() + '.ejs');
-        return self.getCustomFilePath('ejs').then(function (customEjsFilePath) {
-            var replaceFrom = formData['@class'] + self.getViewName();
-            var replaceTo = params.page + '-' + params.form + '-' + params.field;
-            return self.createFileByReplace(customEjsFilePath, defaultEjsFilePath, replaceFrom, replaceTo, null).then(function (ejs) {
-                return ejs;
-            });
-        });
+    async getCollectionDirPath() {
+        const customDirPath = await this.parent.getCustomDirPath();
+        const dirPath = path.join(customDirPath, 'fields');
+        await qforms.Helper.createDirIfNotExists(dirPath);
+        return dirPath;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createCss(params) {
-        var self = this;
-        var formData = this.formEditor.getData();
-        var defaultCssFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.css');
-        return self.getCustomFilePath('css').then(function (customCssFilePath) {
-            var replaceFrom = formData['@class'] + self.getViewName();
-            var replaceTo   = params.page + '-' + params.form + '-' + params.field;
-            return self.createFileByReplace(customCssFilePath, defaultCssFilePath, replaceFrom, replaceTo, null).then(function (ejs) {
-                return ejs;
-            });
-        });
+    async getCustomDirPath() {
+        const collectionDirPath = await this.getCollectionDirPath();
+        const dirPath = path.join(collectionDirPath, this.name);
+        await qforms.Helper.createDirIfNotExists(dirPath);
+        return dirPath;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createJs(params) {
-        var self = this;
-        var templateFilePath = path.join(__dirname, 'Field.js.ejs');
-        return self.getCustomFilePath('js').then(function (customJsFilePath) {
-            return self.createFileByParams(customJsFilePath, templateFilePath, {
-                page  : self.formEditor.pageEditor.pageFile.getAttr('name'),
-                form  : self.formEditor.name,
-                field : self.name,
-                _class: self.constructor.name.replace('Editor', '')
-            }).then(function (js) {
-                return js;
-            });
-        });
+    async getCustomFilePath(ext) {
+        const customDirPath = await this.getCustomDirPath();
+        return path.join(customDirPath, this.name + '.' + ext);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCollectionDirPath() {
-        var self = this;
-        return self.parent.getCustomDirPath().then(function (customDirPath) {
-            var dirPath = path.join(customDirPath, 'fields');
-            return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
-                return dirPath;
-            });
-        });
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomDirPath() {
-        var self = this;
-        return self.getCollectionDirPath().then(function (collectionDirPath) {
-            var dirPath = path.join(collectionDirPath, self.name);
-            return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
-                return dirPath;
-            });
-        });
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomFilePath(ext) {
-        var self = this;
-        return self.getCustomDirPath().then(function (customDirPath) {
-            return path.join(customDirPath, self.name + '.' + ext);
-        });
+    getAppEditor() {
+        return this.parent.getAppEditor();
     }
 
 }

@@ -1,242 +1,165 @@
 'use strict';
 
-module.exports = DataSourceEditorController;
+const path = require('path');
+const _    = require('underscore');
+const EditorController = require('../EditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
-var _    = require('underscore');
+class DataSourceEditorController extends EditorController {
 
-var server           = require('../../../../server');
-var EditorController = require('../EditorController');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
+        );
+    }
 
-util.inherits(DataSourceEditorController, EditorController);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSourceEditorController(appInfo) {
-    var self = this;
-    DataSourceEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
-    );
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-                if (params.form) {
-                    // form data source
-                    var formEditor = pageEditor.getForm(params.form);
-                    var dataSourceEditor = formEditor.newDataSource(params);
-                    return pageEditor.save().then(function () {
-                        return dataSourceEditor.getData();
-                    });
-                } else {
-                    // page data source
-                    var dataSourceData = pageEditor.newDataSource(params);
-                    return pageEditor.save().then(function () {
-                        return dataSourceData;
-                    });
-                }
-            });
+            const pageEditor = await appEditor.getPageByFileName(params.page);
+            if (params.form) {
+                // form data source
+                const formEditor = pageEditor.getForm(params.form);
+                const dataSourceEditor = formEditor.newDataSource(params);
+                await pageEditor.save();
+                return dataSourceEditor.getData();
+            } else {
+                // page data source
+                const dataSourceData = pageEditor.newDataSource(params);
+                await pageEditor.save();
+                return dataSourceData;
+            }
         } else {
             // app data source
-            var dataSourceData = appEditor.newDataSource(params);
-            return appEditor.save().then(function () {
-                return dataSourceData;
-            });
+            const dataSourceData = appEditor.newDataSource(params);
+            await appEditor.save();
+            return dataSourceData;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-                if (params.form) {
-                    // form data source
-                    var formEditor = pageEditor.getForm(params['form']);
-                    formEditor.deleteFormDataSource(params['dataSource']);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                } else {
-                    // page data source
-                    pageEditor.deleteDataSource(params['dataSource']);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                }
-            });
+            const pageEditor = await appEditor.getPageByFileName(params.page);
+            if (params.form) {
+                // form data source
+                const formEditor = pageEditor.getForm(params['form']);
+                formEditor.deleteFormDataSource(params['dataSource']);
+                await pageEditor.save();
+                return null;
+            } else {
+                // page data source
+                pageEditor.deleteDataSource(params['dataSource']);
+                await pageEditor.save();
+                return null;
+            }
         } else {
             // app data source
             appEditor.deleteDataSource(params.dataSource);
-            return appEditor.save().then(function () {
-                return null;
-            });
+            await appEditor.save();
+            return null;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.moveUp = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async moveUp(params) {
+        const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-                if (params.form) {
-                    // form data source
-                    var formEditor = pageEditor.getForm(params.form);
-                    formEditor.moveDataSourceUp(params.dataSource);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                } else {
-                    // page data source
-                    pageEditor.moveDataSourceUp(params.dataSource);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                }
-            });
+            const pageEditor = await appEditor.getPageByFileName(params.page);
+            if (params.form) {
+                // form data source
+                const formEditor = pageEditor.getForm(params.form);
+                formEditor.moveDataSourceUp(params.dataSource);
+                await pageEditor.save();
+                return null;
+            } else {
+                // page data source
+                pageEditor.moveDataSourceUp(params.dataSource);
+                await pageEditor.save();
+                return null;
+            }
         } else {
             // app data source
             appEditor.moveDataSourceUp(params.dataSource);
-            return appEditor.appFile.save().then(function () {
-                return null;
-            });
+            await appEditor.appFile.save();
+            return null;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.moveDown = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async moveDown(params) {
+        const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-                if (params.form) {
-                    // form data source
-                    var formEditor = pageEditor.getForm(params.form);
-                    formEditor.moveDataSourceDown(params.dataSource);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                } else {
-                    // page data source
-                    pageEditor.moveDataSourceDown(params.dataSource);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                }
-            });
+            const pageEditor = await appEditor.getPageByFileName(params.page);
+            if (params.form) {
+                // form data source
+                const formEditor = pageEditor.getForm(params.form);
+                formEditor.moveDataSourceDown(params.dataSource);
+                await pageEditor.save();
+                return null;
+            } else {
+                // page data source
+                pageEditor.moveDataSourceDown(params.dataSource);
+                await pageEditor.save();
+                return null;
+            }
         } else {
             // app data source
             appEditor.moveDataSourceDown(params.dataSource);
-            return appEditor.appFile.save().then(function () {
-                return null;
-            });
+            await appEditor.appFile.save();
+            return null;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async save(params) {
+        console.log('DataSourceEditorController.save');
+        let editor = await this.createApplicationEditor();
         if (params.pageFileName) {
-            return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-                if (params.form) {
-                    // form data source
-                    var formEditor = pageEditor.getForm(params.form);
-                    formEditor.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                } else {
-                    // page data source
-                    pageEditor.setDataSourceAttr(params['dataSource'], params['attr'], params['value']);
-                    return pageEditor.save().then(function () {
-                        return null;
-                    });
-                }
-            });
-        } else {
-            // app data source
-            appEditor.setDataSourceAttr(params.dataSource, params.attr, params.value);
-            return appEditor.save().then(function () {
-                return null;
-            });
+            editor = await editor.getPageByFileName(params.pageFileName);
+            if (params.form) {
+                editor = editor.getForm(params.form);
+            }
         }
-    });
-};
+        const dataSourceEditor = editor.createDataSourceEditor(params.dataSource);
+        await dataSourceEditor.setAttr(params.attr, params.value);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.getDataSourceEditor = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
+    async createDataSourceEditor(params) {
+        let editor = await this.createApplicationEditor();
         if (params.pageFileName) {
-            return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-                if (params.form) {
-                    var formEditor = pageEditor.getForm(params.form);
-                    var dataSourceEditor = formEditor.getDataSource(params.dataSource);
-                    return dataSourceEditor;
-                } else {
-                    var dataSourceEditor = pageEditor.getDataSource(params.dataSource);
-                    return dataSourceEditor;
-                }
-            });
-        } else {
-            var dataSourceEditor = appEditor.getDataSource(params.dataSource);
-            return dataSourceEditor;
+            editor = await editor.getPageByFileName(params.pageFileName);
+            if (params.form) {
+                editor = editor.getForm(params.form);
+            }
         }
-    });
-};
+        return editor.createDataSourceEditor(params.dataSource);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.getView = function(params) {
-    var self = this;
-    return DataSourceEditorController.super_.prototype.getView.call(this, params).then(function(result) {
+    async getView(params) {
+        const result = await super.getView(params);
         switch (params.view) {
             case 'QueryView.ejs':
-                return self.getDataSourceEditor(params).then(function (dataSourceEditor) {
-                    return dataSourceEditor.getCustomFile('backend.js').then(function (backendJs) {
-                        result.data.backendJs = backendJs;
-                        return result;
-                    });
-                });
-                break;
+                const dataSourceEditor = await this.createDataSourceEditor(params);
+                const backendJs = await dataSourceEditor.getCustomFile('backend.js');
+                result.data.backendJs = backendJs;
+                return result;
             default:
                 return result;
-                break;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.saveController = function(params) {
-    var self = this;
-    return self.getDataSourceEditor(params).then(function (dataSourceEditor) {
-        return dataSourceEditor.saveCustomFile('backend.js', params.text).then(function () {
-            return null;
-        });
-    });
-};
+    async saveController(params) {
+        const dataSourceEditor = await this.createDataSourceEditor(params);
+        await dataSourceEditor.saveCustomFile('backend.js', params.text);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceEditorController.prototype.createController = function(params) {
-    var self = this;
-    return self.getDataSourceEditor(params).then(function (dataSourceEditor) {
-        return dataSourceEditor.createBackendJs(params).then(function (backendJs) {
-            return {
-                backendJs: backendJs
-            };
-        });
-    });
-};
+    async createController(params) {
+        const dataSourceEditor = await this.createDataSourceEditor(params);
+        const backendJs = await dataSourceEditor.createBackendJs(params);
+        return {backendJs};
+    }
+
+}
+
+module.exports = DataSourceEditorController;

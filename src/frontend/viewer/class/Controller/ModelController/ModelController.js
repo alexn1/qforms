@@ -1,15 +1,12 @@
 'use strict';
 
-QForms.inherits(ModelController, EventEmitter);
+class ModelController extends EventEmitter {
+    constructor(model) {
+        super();
+        this.model = model;
+        this.listeners = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ModelController(model) {
-    var self = this;
-    self.model     = model;
-    self.listeners = {};
+    init() {
+    }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ModelController.prototype.init = function() {
-    var self = this;
-};

@@ -1,156 +1,151 @@
 'use strict';
 
-QForms.inherits(TabWidget, Widget);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).ready(function() {
+$(document).ready(() => {
     $('div.TabWidget').each(function() {
         this._obj = new TabWidget(this);
         this._obj.init();
     });
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function TabWidget(el) {
-    var self = this;
-    TabWidget.super_.call(self, el);
-    self.activeTab             = null;
-    self.activePage            = null;
-    self.tabList               = null;
-    self.pageList              = null;
-    self.prevActiveTab         = null;
-    //this.eventTabShow          = new QForms.Event(this);
-    //this.eventTabHide          = new QForms.Event(this);
-    //this.eventTabClosingByUser = new QForms.Event(this);
-}
+class TabWidget extends Widget {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.init = function() {
-    var self = this;
-    //console.log('TabWidget.prototype.init', self.el);
-    self.tabList    = $(self.el).children('ul').get(0);
-    self.pageList   = $(self.el).children('div').get(0);
-    self.activeTab  = $(self.tabList).children('li.active').get(0);
-    self.activePage = $(self.pageList).children('div.active').get(0);
-    // read child elements and init tabs
-    $(self.el).children('ul').children('li').each(function() {
-        self.initTab(this);
-    });
-    // if active tab is not set then first tab is selected
-    if ($(self.tabList).children('li').length > 0 && self.activeTab === undefined) {
-        self.selectTab($(self.tabList).children('li').get(0));
+    constructor(el) {
+        super(el);
+        this.activeTab             = null;
+        this.activePage            = null;
+        this.tabList               = null;
+        this.pageList              = null;
+        this.prevActiveTab         = null;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// add tab based on existing element
-TabWidget.prototype.initTab = function(li) {
-    var self = this;
-    $(li).mousedown(function() {
-        if (self.activeTab !== this) {
-            self.selectTab(this);
+    init() {
+        const self = this;
+        //console.log('TabWidget.init', self.el);
+        this.tabList    = $(this.el).children('ul').get(0);
+        this.pageList   = $(this.el).children('div').get(0);
+        this.activeTab  = $(this.tabList).children('li.active').get(0);
+        this.activePage = $(this.pageList).children('div.active').get(0);
+        // read child elements and init tabs
+        $(self.el).children('ul').children('li').each(function() {
+            self.initTab(this);
+        });
+        // if active tab is not set then first tab is selected
+        if ($(this.tabList).children('li').length > 0 && this.activeTab === undefined) {
+            self.selectTab($(self.tabList).children('li').get(0));
         }
-    });
-    $(li).children('span.close').each(function() {
-        $(this).click(function(e) {
-            self.onTabClosing(this.parentNode);
-            e.stopPropagation();
+    }
+
+    // add tab based on existing element
+    initTab(li) {
+        const self = this;
+        $(li).mousedown(function() {
+            if (self.activeTab !== this) {
+                self.selectTab(this);
+            }
         });
-        $(this).mousedown(function(e) {
-            e.stopPropagation();
+        $(li).children('span.close').each(function() {
+            $(this).click(function(e) {
+                self.onTabClosing(this.parentNode);
+                e.stopPropagation();
+            });
+            $(this).mousedown(function(e) {
+                e.stopPropagation();
+            });
         });
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.onTabClosing = function(tab) {
-    var self = this;
-    self.emit('tabClosingByUser', {source: self, tab: tab});
-};
+    onTabClosing(tab) {
+        this.emit('tabClosingByUser', {source: this, tab: tab});
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.createTab = function(el, caption, onCloseCallback) {
-    var self = this;
-    if (caption === undefined) {
-        caption = '';
+    createTab(el, caption, onCloseCallback) {
+        if (caption === undefined) {
+            caption = '';
+        }
+        // li
+        const li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}', caption)).get(0);
+        li.onCloseCallback = onCloseCallback;
+        // div
+        const div = document.createElement('div');
+        div.appendChild(el);
+        // append
+        this.tabList.appendChild(li);
+        this.pageList.appendChild(div);
+        // tab is done
+        this.initTab(li);
+        // if active tab is not defined then select this tab
+        if (this.activeTab === undefined) {
+            this.selectTab(li);
+        }
+        return li;
     }
-    // li
-    var li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}', caption)).get(0);
-    li.onCloseCallback = onCloseCallback;
-    // div
-    var div = document.createElement('div');
-    div.appendChild(el);
-    // append
-    self.tabList.appendChild(li);
-    self.pageList.appendChild(div);
-    // tab is done
-    self.initTab(li);
-    // if active tab is not defined then select this tab
-    if (self.activeTab === undefined) {
-        self.selectTab(li);
-    }
-    return li;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.selectTab = function(tab, track) {
-    var self = this;
-    if (self.activeTab === tab) {
-        return;
-    }
-    var index = $(self.tabList).children('li').index(tab);
-    if (index === -1 ) {
-        throw new Error("Tab doesn't exists.");
-    }
-    var oldTab = self.activeTab;
-    tab.classList.add('active');
-    if (self.activeTab) {
-        self.activeTab.classList.remove('active');
-    }
-    // track option is used to store prev tab during opening new one
-    // if new tab is closed then select prev tab
-    // this option is used during new tab creation
-    if (track !== undefined && track && $(self.tabList).children('li').index(self.activeTab) !== -1) {
-        self.prevActiveTab = self.activeTab;
-    } else {
-        self.prevActiveTab = null;
-    }
-    self.activeTab = tab;
-    // page
-    var page = $(self.pageList).children('div').get(index);
-    page.classList.add('active');
-    if (self.activePage) {
-        self.activePage.classList.remove('active');
-    }
-    self.activePage = page;
-    // events
-    if (oldTab) {
-        self.emit('tabHide', {source: self, tab: oldTab});
-    }
-    self.emit('tabShow', {source: self, tab: tab});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TabWidget.prototype.closeTab = function(tab) {
-    var self = this;
-    var index = $(self.tabList).children('li').index(tab);
-    var page = $(self.pageList).children('div').get(index);
-    self.tabList.removeChild(tab);
-    if (tab === self.prevActiveTab) {
-        self.prevActiveTab = null;
-    }
-    self.pageList.removeChild(page);
-    if (tab.onCloseCallback) {
-        tab.onCloseCallback(tab);
-    }
-    // if closed tab is selected, we need to make active another tab
-    if (self.activeTab === tab) {
-        if (self.prevActiveTab !== null) {
-            self.selectTab(self.prevActiveTab);
+    selectTab(tab, track) {
+        // console.log('TabWidget.selectTab', tab);
+        if (this.activeTab === tab) {
+            return;
+        }
+        const index = $(this.tabList).children('li').index(tab);
+        if (index === -1 ) {
+            throw new Error("Tab doesn't exists.");
+        }
+        const oldTab = this.activeTab;
+        tab.classList.add('active');
+        if (this.activeTab) {
+            this.activeTab.classList.remove('active');
+        }
+        // track option is used to store prev tab during opening new one
+        // if new tab is closed then select prev tab
+        // this option is used during new tab creation
+        if (track !== undefined && track && $(this.tabList).children('li').index(this.activeTab) !== -1) {
+            this.prevActiveTab = this.activeTab;
         } else {
-            if ($(self.tabList).children('li').length > 0) {
-                self.selectTab($(self.tabList).children('li').last().get(0));
+            this.prevActiveTab = null;
+        }
+        this.activeTab = tab;
+        // page
+        const page = $(this.pageList).children('div').get(index);
+        page.classList.add('active');
+        if (this.activePage) {
+            this.activePage.classList.remove('active');
+        }
+        this.activePage = page;
+        // console.log('activePage:', self.activePage);
+        // events
+        if (oldTab) {
+            this.emit('tabHide', {source: this, tab: oldTab});
+        }
+        this.emit('tabShow', {source: this, tab: tab});
+    }
+
+    closeTab(tab) {
+        console.log('TabWidget.closeTab');
+        if (!tab) throw new Error('no tab');
+        const index = $(this.tabList).children('li').index(tab);
+        const page = $(this.pageList).children('div').get(index);
+        this.tabList.removeChild(tab);
+        if (tab === this.prevActiveTab) {
+            this.prevActiveTab = null;
+        }
+        this.pageList.removeChild(page);
+        if (tab.onCloseCallback) {
+            tab.onCloseCallback(tab);
+        }
+        // if closed tab is selected, we need to make active another tab
+        if (this.activeTab === tab) {
+            if (this.prevActiveTab !== null) {
+                this.selectTab(this.prevActiveTab);
+            } else {
+                if ($(this.tabList).children('li').length > 0) {
+                    this.selectTab($(this.tabList).children('li').last().get(0));
+                }
             }
         }
     }
-};
+
+    static setTabCaption(tab, caption) {
+        console.log('TabWidget.setTabCaption', caption);
+        $(tab).children('span').get(0).innerHTML = caption;
+    }
+
+}

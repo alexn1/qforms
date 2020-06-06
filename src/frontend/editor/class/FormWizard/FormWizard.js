@@ -1,126 +1,75 @@
 'use strict';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormWizard(params) {
-    var self = this;
-    self.params = params;
+class FormWizard {
+
+    constructor(params) {
+        console.log('FormWizard.constructor', params);
+        this.params        = params;
+        this.model         = params.model;
+        this.databaseName  = this.model.database.name;
+        this.tableName     = this.model.name;
+        this.tableColumns  = Object.keys(this.model.data.columns).map(name => this.model.data.columns[name]['@attributes']);
+    }
+
+    static create(params) {
+        console.log('FormWizard.create', params);
+        switch (params.model.database.getClassName()) {
+            case 'MySqlDatabase': return new MySqlFormWizard(params);
+            case 'PostgreSqlDatabase': return new PostgreSqlFormWizard(params);
+            default: throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
+        }
+    }
+
+    getDataSources() {
+        return {
+            default: {
+                class     : 'SqlDataSource',
+                name      : 'default',
+                database  : this.databaseName,
+                table     : this.tableName,
+                limit     : this.params.className === 'TableForm' || this.params.className === 'TreeForm' ? '100' : '',
+                // query     : this.getQuery(),
+                countQuery: this.getCountQuery(),
+                singleQuery: this.getSingleQuery(),
+                multipleQuery: this.getMultipleQuery()
+            }
+        };
+    }
+
+    getField(column) {
+        console.log('FormWizard.getField', column);
+        let field = {
+            class: 'TextBoxField',
+            name : column.name
+        };
+        if (column.caption) {
+            field.caption = column.caption;
+        }
+        if (column.key === 'true') {
+            field.readOnly = 'true';
+        }
+        if (column.nullable === 'false') {
+            field.notNull = 'true';
+        }
+        return field;
+    }
+
+    getFields() {
+        let fields = {};
+        for (let i = 0; i < this.tableColumns.length; i++) {
+            const column = this.tableColumns[i];
+            fields[column.name] = this.getField(column);
+        }
+        return fields;
+    }
+
+    getFormParams() {
+        return {
+            name       : this.params.formName,
+            caption    : this.params.formCaption,
+            class      : this.params.className,
+            dataSources: this.getDataSources(),
+            fields     : this.getFields()
+        };
+    }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getKeyColumns = function() {
-    var self = this;
-    var keyColumns = {};
-    for (var i = 0; i < self.params.tableColumns.length; i++) {
-        var column = self.params.tableColumns[i];
-        if (column.COLUMN_KEY === 'PRI') {
-            keyColumns[column.COLUMN_NAME] = {
-                name: column.COLUMN_NAME
-            };
-        }
-    }
-    return keyColumns;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getColumns = function() {
-    var self = this;
-    var columns = [];
-    for (var i = 0; i < self.params.tableColumns.length; i++) {
-        var column = self.params.tableColumns[i];
-        columns.push(column.COLUMN_NAME);
-    }
-    return columns;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getQuery = function() {
-    var self = this;
-    var query;
-    var columns = self.getColumns();
-    switch (self.params.className) {
-        case 'TableForm':
-        case 'TreeForm':
-            query = 'select\n{columns}\nfrom `{table}`\nlimit {offset}, {limit}'
-                .replace('{table}',   self.params.tableName)
-                .replace('{columns}', columns.map(function (column) {return '    `' + column + '`';}).join(',\n'));
-            break;
-        case 'RowForm':
-            query = 'select\n{columns}\nfrom `{table}`\nwhere id = {key}'
-                .replace('{table}',   self.params.tableName)
-                .replace('{columns}', columns.map(function (column) {return '    `' + column + '`';}).join(',\n'));
-            break;
-    }
-    return query;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getCountQuery = function() {
-    var self = this;
-    var countQuery;
-    switch (self.params.className) {
-        case 'TableForm':
-        case 'TreeForm':
-            countQuery = 'select count(*) from `{table}`'.replace('{table}', self.params.tableName);
-            break;
-        case 'RowForm':
-            countQuery = '';
-            break;
-    }
-    return countQuery;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getDataSources = function() {
-    var self = this;
-    return {
-        default:{
-            class     : 'SqlDataSource',
-            name      : 'default',
-            database  : self.params.databaseName,
-            table     : self.params.tableName,
-            query     : self.getQuery(),
-            limit     : self.params.className === 'TableForm' || self.params.className === 'TreeForm' ? '100' : '',
-            countQuery: self.getCountQuery(),
-            keyColumns: self.getKeyColumns()
-        }
-    };
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getField = function(column) {
-    var self = this;
-    var field = {
-        class: 'TextBoxField',
-        name : column.COLUMN_NAME
-    };
-    if (column.COLUMN_COMMENT) {
-        field.caption = column.COLUMN_COMMENT;
-    }
-    if (column.COLUMN_KEY === 'PRI') {
-        field.readOnly = 'true';
-    }
-    return field;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getFields = function() {
-    var self = this;
-    var fields = {};
-    for (var i = 0; i < self.params.tableColumns.length; i++) {
-        var column = self.params.tableColumns[i];
-        fields[column.COLUMN_NAME] = self.getField(column);
-    }
-    return fields;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormWizard.prototype.getFormParams = function() {
-    var self = this;
-    return {
-        name       : self.params.formName,
-        caption    : self.params.formCaption,
-        class      : self.params.className,
-        dataSources: self.getDataSources(),
-        fields     : self.getFields()
-    };
-};

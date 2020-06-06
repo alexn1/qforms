@@ -1,24 +1,22 @@
-QForms.inherits(<%=page%>Controller, <%=_class%>Controller);
+class <%=page%>Controller extends <%=_class%>Controller {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=page%>Controller() {
-    <%=page%>Controller.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+    }
+
+    deinit() {
+        super.deinit();
+    }
+
+    /*
+    getCaption() {
+        //const formCaption = this.forms.formName.getCaption();
+        return this.model.data.caption;
+    }
+    */
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%>Controller.prototype.init = function() {
-    <%=page%>Controller.super_.prototype.init.call(this);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%>Controller.prototype.deinit = function() {
-    <%=page%>Controller.super_.prototype.deinit.call(this);
-};
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%>Controller.prototype.getCaption = function() {
-    //var formCaption = this.forms.formName.getCaption();
-    return this.model.data.caption;
-};
-*/
+<%=page%>Controller;

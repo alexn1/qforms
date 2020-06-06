@@ -1,34 +1,26 @@
 'use strict';
 
-var util = require('util');
-var path = require('path');
+const path = require('path');
+const qforms = require('../../../qforms');
+const Editor = require('../Editor');
 
-var qforms = require('../../../../qforms');
-var Editor = require('../Editor');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DataSourceEditor extends Editor {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(parent, name, data) {
-        super();
-        var self = this;
-        self.parent = parent;
-        self.name   = name;
-        self.data   = data;
+        super(data, parent);
+        this.name = this.getAttr('name');
+        this.colName = 'dataSources';
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     newKeyColumn(params) {
-        var self = this;
-        var name = params.name;
-        if (!self.data.keyColumns) {
-            self.data.keyColumns = {};
+        const name = params.name;
+        if (!this.data.keyColumns) {
+            this.data.keyColumns = {};
         }
-        if (self.data.keyColumns[name]) {
+        if (this.data.keyColumns[name]) {
             throw new Error('Key Column {name} already exist.'.replace('{name}', name));
         }
-        return self.data.keyColumns[name] = {
+        return this.data.keyColumns[name] = {
             '@class'     : 'KeyColumn',
             '@attributes': {
                 'name': name
@@ -36,55 +28,39 @@ class DataSourceEditor extends Editor {
         };
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCollectionDirPath() {
-        var self = this;
-        return self.parent.getCustomDirPath().then(function (customDirPath) {
-            var dirPath = path.join(customDirPath, 'dataSources');
-            return qforms.Helper.createDirIfNotExists(dirPath).then(function() {
-                return dirPath;
-            });
-        });
+    async getCollectionDirPath() {
+        const customDirPath = await this.parent.getCustomDirPath();
+        const dirPath = path.join(customDirPath, 'dataSources');
+        await qforms.Helper.createDirIfNotExists(dirPath);
+        return dirPath;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomDirPath() {
-        var self = this;
-        return self.getCollectionDirPath().then(function (collectionDirPath) {
-            var dirPath = path.join(collectionDirPath, self.name);
-            return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
-                return dirPath;
-            });
-        });
+    async getCustomDirPath() {
+        const collectionDirPath = await this.getCollectionDirPath();
+        const dirPath = path.join(collectionDirPath, this.name);
+        await qforms.Helper.createDirIfNotExists(dirPath);
+        return dirPath;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomFilePath(ext) {
-        var self = this;
-        return self.getCustomDirPath().then(function(customDirPath) {
-            return path.join(customDirPath, self.name + '.' + ext);
-        });
+    async getCustomFilePath(ext) {
+        const customDirPath = await this.getCustomDirPath();
+        return path.join(customDirPath, this.name + '.' + ext);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createBackendJs(params) {
-        var self = this;
-        var templateFilePath = path.join(__dirname, 'DataSource.backend.js.ejs');
-        return self.getCustomFilePath('backend.js').then(function (customJsFilePath) {
-            return self.createFileByParams(customJsFilePath, templateFilePath, {
-                page      : params.page ? params.page : '',
-                form      : params.form ? params.form : '',
-                dataSource: self.name,
-                _class    : self.constructor.name.replace('Editor', '')
-            }).then(function (backendJs) {
-                return backendJs;
-            });
+    async createBackendJs(params) {
+        const templateFilePath = path.join(__dirname, 'DataSource.backend.js.ejs');
+        const customJsFilePath = await this.getCustomFilePath('backend.js');
+        const backendJs = await this.createFileByParams(customJsFilePath, templateFilePath, {
+            page      : params.page ? params.page : '',
+            form      : params.form ? params.form : '',
+            dataSource: this.name,
+            _class    : this.constructor.name.replace('Editor', '')
         });
+        return backendJs;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static create(params) {
-        var data = {
+        const data = {
             '@class'     : 'DataSource',
             '@attributes': {
                 name                : params.name,
@@ -98,12 +74,6 @@ class DataSourceEditor extends Editor {
             }
         };
         return data;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getData() {
-        var self = this;
-        return self.data;
     }
 
 }

@@ -1,358 +1,218 @@
 'use strict';
 
-var util    = require('util');
-var path    = require('path');
-var fs      = require('fs');
-var Promise = require('bluebird');
+const path    = require('path');
+const qforms = require('../../../qforms');
+const Editor = require('../Editor');
+const DatabaseEditor = require('../DatabaseEditor/DatabaseEditor');
 
-var qforms = require('../../../../qforms');
-var server = require('../../../../server');
-var Editor = require('../Editor');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ApplicationEditor extends Editor {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(appFile) {
-        super();
-        var self = this;
-        self.appFile            = appFile;
-        self.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data);
-        self.data               = appFile.data;
-        self.name               = self.data['@attributes'].name;
-        self.defaultEjsFilePath = path.join(
-            server.get('public'),
+    constructor(appFile, hostApp, env) {
+        if (!hostApp) throw new Error('no hostApp');
+        if (!env) throw new Error('ApplicationEditor.constructor: no env');
+        super(appFile.data);
+        this.appFile            = appFile;
+        this.hostApp            = hostApp;
+        this.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
+        this.name               = this.getAttr('name');
+        this.defaultEjsFilePath = path.join(
+            this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
         );
-        self.defaultCssFilePath = path.join(
-            server.get('public'),
+        this.defaultCssFilePath = path.join(
+            this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
         );
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static createData(params) {
         return {
             '@class'     : 'Application',
             '@attributes': {
-                formatVer: '0.1',
+                formatVersion : '0.1',
                 name          : params.name,
                 caption       : params.name,
                 authentication: 'false',
                 user          : 'admin',
                 password      : 'admin',
-                lang          : 'en'
+                lang          : 'en',
+                theme         : 'standard'
             },
             databases: {},
             pageLinks: {}
         };
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    static createAppFile(appFilePath, params) {
-        return Promise.try(function () {
-            var appFile = new qforms.JsonFile(appFilePath);
-            appFile.data = ApplicationEditor.createData(params);
-            return appFile.create().then(function() {
-                return appFile;
-            });
+    static async createAppFile(appFilePath, params) {
+        const data = ApplicationEditor.createData(params);
+        const appFile = new qforms.JsonFile(appFilePath, data);
+        await appFile.create();
+        return appFile;
+    }
+
+    async createPage(params) {
+        const pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
+        const pageDirPath    = path.join(pagesDirPath, params.name);
+        const pageFilePath   = path.join(pageDirPath , params.name + '.json');
+        await qforms.Helper.createDirIfNotExists(pagesDirPath);
+        await qforms.Helper.createDirIfNotExists(pageDirPath);
+        const pageFile = new qforms.JsonFile(pageFilePath, qforms.PageEditor.createData(params));
+        await pageFile.create();
+        this.newPageLink(params);
+        await this.save();
+        return new qforms.PageEditor(this, pageFile);
+    }
+
+    async save() {
+        console.log('ApplicationEditor.save');
+        await this.appFile.save();
+    }
+
+    createPageLinkEditor(name) {
+        return new qforms.PageLinkEditor(this, name, this.getData('pageLinks', name));
+    }
+
+    async setAttr(name, value) {
+        console.log('ApplicationEditor.setAttr');
+        super.setAttr(name, value);
+        await this.appFile.save();
+    }
+
+    async removePage(name) {
+        await this.deletePage(name);
+        await this.save();
+    }
+
+    async getPageByFileName(relFilePath) {
+        const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
+        const pageFile = new qforms.JsonFile(pageFilePath);
+        await pageFile.read();
+        return new qforms.PageEditor(this, pageFile);
+    }
+
+    async getPage(name) {
+        const pageLinkEditor = this.createPageLinkEditor(name);
+        const relFilePath = pageLinkEditor.getAttr('fileName');
+        return await this.getPageByFileName(relFilePath);
+    }
+
+    async createEjs(params) {
+        console.log('ApplicationEditor.createEjs');
+        const customEjsFilePath = await this.getCustomFilePath('ejs');
+        return this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), this.name, null);
+    }
+
+    async createCss(params) {
+        console.log('ApplicationEditor.createCss');
+        const customCssFilePath = await this.getCustomFilePath('css');
+        const emptyTemplate = '.' + this.name + ' {\n}';
+        return this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), this.name, emptyTemplate);
+    }
+
+    async createJs(params) {
+        const customJsFilePath = await this.getCustomFilePath('js');
+        const templateFilePath = path.join(__dirname, 'Application.js.ejs');
+        const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
+            application: this.getAttr('name'),
+            _class     : this.constructor.name.replace('Editor', '')
         });
+        return js;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createPage(params) {
-        var self = this;
-        var pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
-        var pageDirPath    = path.join(pagesDirPath, params.name);
-        var pageFilePath   = path.join(pageDirPath , params.name + '.json');
-        var pageFile;
-        return qforms.Helper.createDirIfNotExists(pagesDirPath).then(function() {
-            return qforms.Helper.createDirIfNotExists(pageDirPath);
-        }).then(function() {
-            pageFile = new qforms.JsonFile(pageFilePath);
-            pageFile.data = qforms.PageEditor.createData(params);
-            return pageFile.create();
-        }).then(function() {
-            self.newPageLink(params);
-            return self.save();
-        }).then(function() {
-            return new qforms.PageEditor(self, pageFile);
-        });
+    async getCustomDirPath() {
+        return this.appInfo.dirPath;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    save() {
-        var self = this;
-        console.log('ApplicationEditor.prototype.save');
-        return self.appFile.save();
+    async getCustomFilePath(ext) {
+        console.log('ApplicationEditor.getCustomFilePath');
+        return path.join(this.appInfo.dirPath, this.name + '.' + ext);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getPageLink(name) {
-        var self = this;
-        return new qforms.PageLinkEditor(self, name);
+    createDataSourceEditor(name) {
+        const dataSourceData = this.getData('dataSources', 'name');
+        const className = dataSourceData['@class'];
+        const DataSourceClass = qforms[`${className}Editor`];
+        return new DataSourceClass(this, name, dataSourceData);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setAttr(name, value) {
-        var self = this;
-        console.log('ApplicationEditor.prototype.setAttr');
-        self.appFile.setAttr(name, value);
-        return self.appFile.save();
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    removePage(name) {
-        var self = this;
-        return self.deletePage(name).then(function () {
-            return self.save();
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getPageByFileName(relFilePath) {
-        var self = this;
-        var pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
-        var pageFile = new qforms.JsonFile(pageFilePath);
-        return pageFile.read().then(function () {
-            return new qforms.PageEditor(self, pageFile);
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getPage(name) {
-        var self = this;
-        var pageLinkData = self.getPageLinkData(name);
-        var relFilePath = pageLinkData['@attributes'].fileName;
-        return self.getPageByFileName(relFilePath);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createEjs(params) {
-        var self = this;
-        console.log('ApplicationEditor.prototype.createEjs');
-        return self.getCustomFilePath('ejs').then(function (customEjsFilePath) {
-            return self.createFileByReplace(customEjsFilePath, self.defaultEjsFilePath, self.getViewName(), self.name, null);
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createCss(params) {
-        var self = this;
-        console.log('ApplicationEditor.prototype.createCss');
-        return self.getCustomFilePath('css').then(function(customCssFilePath) {
-            var emptyTemplate = '.' + self.name + ' {\n}';
-            return self.createFileByReplace(customCssFilePath, self.defaultCssFilePath, self.getViewName(), self.name, emptyTemplate);
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createJs(params) {
-        var self = this;
-        return self.getCustomFilePath('js').then(function (customJsFilePath) {
-            var tempalteFilePath = path.join(__dirname, 'Application.js.ejs');
-            return self.createFileByParams(customJsFilePath, tempalteFilePath, {
-                application: self.appFile.getAttr('name'),
-                _class     : self.constructor.name.replace('Editor', '')
-            }).then(function (js) {
-                return js;
-            });
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomDirPath() {
-        var self = this;
-        return Promise.resolve(self.appInfo.dirPath);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getCustomFilePath(ext) {
-        var self = this;
-        console.log('ApplicationEditor.prototype.getCustomFilePath');
-        return Promise.resolve(path.join(self.appInfo.dirPath, self.name + '.' + ext));
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getDataSource(name) {
-        var self = this;
-        var dataSourceData  = self.data.dataSources[name];
-        return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     movePageLinkUp(name) {
-        var self = this;
-        self.data.pageLinks = qforms.Helper.moveObjProp(self.data.pageLinks, name, -1);
+        this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, -1);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     movePageLinkDown(name) {
-        var self = this;
-        self.data.pageLinks = qforms.Helper.moveObjProp(self.data.pageLinks, name, 1);
+        this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, 1);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setDatabaseAttr(database, name, value) {
-        var self = this;
-        self.data.databases[database]['@attributes'][name] = value;
-        if (name === 'name') {
-            self.data.databases = qforms.Helper.replaceKey(self.data.databases, database, value);
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setDatabaseParamAttr(database, param, name, value) {
-        var self = this;
-        self.data.databases[database].params[param]['@attributes'][name] = value;
-        if (name === 'name') {
-            self.data.databases[database].params = qforms.Helper.replaceKey(self.data.databases[database].params, param, value);
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setPageLinkAttr(pageLink, name, value) {
-        var self = this;
-        self.data.pageLinks[pageLink]['@attributes'][name] = value;
-        if (name === 'name') {
-            self.data.pageLinks = qforms.Helper.replaceKey(self.data.pageLinks, pageLink, value);
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     newDatabase(params) {
-        var self = this;
-        var name = params['name'];
-        if (!self.data.databases) {
-            self.data.databases = {};
+        const name = params['name'];
+        if (!this.data.databases) {
+            this.data.databases = {};
         }
-        if (self.data.databases[name]) {
-            throw new Error('Database {name} already exist.'.replace('{name}', name));
+        if (this.data.databases[name]) {
+            throw new Error(`Database ${name} already exists.`);
         }
-        var data = {
-            '@class'      : 'Database',
-            '@attributes' : {
-                'name' : name
-            }
-        };
-        return self.data.databases[name] = data;
+        return this.data.databases[name] = DatabaseEditor.createData(params);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    newDatabaseParam(params) {
-        var self = this;
-        var database = params['database'];
-        var name     = params['name'];
-        var value    = params['value'];
-        if (!self.data.databases[database].params) {
-            self.data.databases[database].params = {};
-        }
-        if (self.data.databases[database].params[name]) {
-            throw new Error('Param {name} already exist.'.replace('{name}', name));
-        }
-        return self.data.databases[database].params[name] = {
-            '@class'      : 'Param',
-            '@attributes' : {
-                'name' : name,
-                'value': value
-            }
-        };
+    getDatabaseData(name) {
+        if (!this.data.databases[name]) throw new Error(`no database: ${name}`);
+        return this.data.databases[name];
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    createDatabaseEditor(name) {
+        return new DatabaseEditor(this.getDatabaseData(name), this);
+    }
+
     newPageLink(params) {
-        var self = this;
-        var name = params.name;
-        if (!self.data.pageLinks) {
-            self.data.pageLinks = {};
+        const name = params.name;
+        if (!this.data.pageLinks) {
+            this.data.pageLinks = {};
         }
-        if (self.data.pageLinks[name]) {
+        if (this.data.pageLinks[name]) {
             throw new Error('Page Link {name} already exists.'.replace('{name}', name));
         }
-        return self.data.pageLinks[params.name] = qforms.PageLinkEditor.createData(params);
+        return this.data.pageLinks[params.name] = qforms.PageLinkEditor.createData(params);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     deleteDatabase(name) {
-        var self = this;
-        delete self.data.databases[name];
+        if (!name) throw new Error('no name');
+        delete this.data.databases[name];
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    deleteDatabaseParam($database, $param) {
-        var self = this;
-        delete self.data.databases[$database].params[$param];
+    async deletePage(name) {
+        const pageFilePath = path.join(
+            this.appInfo.dirPath,
+            this.createPageLinkEditor(name).getAttr('fileName')
+        );
+        await qforms.Helper.fsUnlink(pageFilePath);
+        delete this.data.pageLinks[name];
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    deletePage(name) {
-        var self = this;
-        return new Promise(function (resolve, reject) {
-            var pageFilePath = path.join(
-                self.appInfo.dirPath,
-                self.data.pageLinks[name]['@attributes'].fileName
-            );
-            fs.unlink(pageFilePath, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    delete self.data.pageLinks[name];
-                    resolve();
-                }
-            });
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getDatabaseData(database) {
-        var self = this;
-        return self.data.databases[database];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getPageLinkData(name) {
-        var self = this;
-        return self.data.pageLinks[name];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     newDataSource(params) {
-        var self = this;
-        var name   = params['name'];
-        var _class = params['class'];
-        if (!self.data.dataSources) {
-            self.data.dataSources = {};
+        const name   = params['name'];
+        const _class = params['class'];
+        if (!this.data.dataSources) {
+            this.data.dataSources = {};
         }
-        if (self.data.dataSources[name]) {
+        if (this.data.dataSources[name]) {
             throw new Error('Data Source {name} already exist.'.replace('{name}', name));
         }
-        var data;
+        let data;
         switch (_class) {
             case 'DataSource':
-                data = DataSourceEditor.create(params);
+                data = qforms.DataSourceEditor.create(params);
                 break;
             case 'SqlDataSource':
                 data = qforms.SqlDataSourceEditor.create(params);
                 break;
             default:
-                throw new Error('Unknown data source class.');
+                throw new Error(`unknown data source class: ${_class}`);
         }
-        return self.data.dataSources[name] = data;
+        return this.data.dataSources[name] = data;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     deleteDataSource(dataSource) {
-        var self = this;
-        delete self.data.dataSources[dataSource];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setDataSourceAttr(dataSource, name, value) {
-        var self = this;
-        self.data.dataSources[dataSource]['@attributes'][name] = value;
-        if (name === 'name') {
-            self.data.dataSources = qforms.Helper.replaceKey(self.data.dataSources, dataSource, value);
-        }
+        delete this.data.dataSources[dataSource];
     }
 
 }

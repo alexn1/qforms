@@ -1,156 +1,117 @@
 'use strict';
 
-QForms.inherits(Form, Model);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Form(name, parent, data) {
-    var self = this;
-    Form.super_.call(self);
-    self.name          = name;
-    self.page          = parent;
-    self.data          = data;
-    self.parent        = parent;
-    self.dataSource    = null;
-    self.changed       = false;
-    self.dataSources   = {};
-    self.fields        = {};
-    self.controls      = {};
-
-    // event
-    //self.eventChanged   = new QForms.Event(this);
-    //self.eventUpdated   = new QForms.Event(this);
-    //self.eventRefilled  = new QForms.Event(this);
-    //self.eventRefreshed = new QForms.Event(this);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.init = function() {
-    var self = this;
-    // dataSources
-    for (var dsName in self.data.dataSources) {
-        self.dataSources[dsName] = new DataSource(dsName, self, self.data.dataSources[dsName]);
-        self.dataSources[dsName].init();
-    }
-    // fields
-    for (var name in self.data.fields) {
-        var field = self.data.fields[name];
-        self.fields[name] = eval('new {class}(name, this, field)'.replace('{class}', field.class));
-        self.fields[name].init();
-    }
-    // controls
-    for (var name in self.data.controls) {
-        var data = self.data.controls[name];
-        self.controls[name] = eval('new {class}(data, this)'.replace('{class}', data.class));
-        self.controls[name].init();
+class Form extends Model {
+    constructor(name, parent, data) {
+        super(data, parent);
+        this.page          = parent;
+        this.dataSource    = null;
+        this.dataSources   = {};
+        this.fields        = {};
+        this.controls      = {};
     }
 
-    self.dataSource = self.dataSources.default;
-    self.dataSource.on('changed', self.listeners.changed = self.onDataSourceChanged.bind(self));
-    self.dataSource.on('updated', self.listeners.updated = self.onDataSourceUpdated.bind(self));
-    self.dataSource.on('insert', self.listeners.insert = self.onDataSourceUpdated.bind(self));
-    self.dataSource.on('refreshed', self.listeners.refreshed = self.onDataSourceRefreshed.bind(self));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.deinit = function() {
-    var self = this;
-    //console.log('Form.prototype.deinit: ' + this.name);
-    self.dataSource.off('changed', self.listeners.changed);
-    self.dataSource.off('updated', self.listeners.updated);
-    self.dataSource.off('insert', self.listeners.insert);
-    self.dataSource.off('refreshed', self.listeners.refreshed);
-
-    for (var dsName in self.dataSources) {
-        self.dataSources[dsName].deinit();
-    }
-    for (var name in self.fields) {
-        self.fields[name].deinit();
-    }
-    for (var name in self.controls) {
-        self.controls[name].deinit();
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.defaultValuesToRow = function(row) {
-    var self = this;
-    for (var name in self.fields) {
-        self.fields[name].fillDefaultValue(row);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.onDataSourceChanged = function(e) {
-    var self = this;
-    var dataSource = e.source;
-    if (dataSource.name === 'default') {
-        self.changed = true;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.onDataSourceUpdated = function(e) {
-    var self = this;
-    console.log('Form.prototype.onDataSourceUpdated', self.name);
-    var dataSource = e.source;
-    if (dataSource.name === 'default') {
-        self.changed = false;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.onDataSourceRefreshed = function(e) {
-    var self = this;
-    console.log('Form.prototype.onDataSourceRefreshed', self.name);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.update = function() {
-    var self = this;
-    // during new row creation, set row key to page if is not opened yet
-    self.dataSources.default.update().then(function (newKey) {
-        if (!self.page.deinited) {
-            self.page.setKey(newKey);
+    init() {
+        // dataSources
+        for (const dsName in this.data.dataSources) {
+            this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
+            this.dataSources[dsName].init();
         }
-    });
-};
+        // fields
+        for (const name in this.data.fields) {
+            const field = this.data.fields[name];
+            this.fields[name] = eval('new {class}(name, this, field)'.replace('{class}', field.class));
+            this.fields[name].init();
+        }
+        // controls
+        for (const name in this.data.controls) {
+            const data = this.data.controls[name];
+            this.controls[name] = eval('new {class}(data, this)'.replace('{class}', data.class));
+            this.controls[name].init();
+        }
+        this.dataSource = this.dataSources.default;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.refill = function() {
-    var self = this;
-    console.log('Form.prototype.refill', self.name);
-    self.dataSources.default.refill(self.page.params).then(function () {
-        self.emit('refilled', {source: self});
-    });
-};
+    deinit() {
+        //console.log('Form.deinit: ' + this.name);
+        for (const dsName in this.dataSources) {
+            this.dataSources[dsName].deinit();
+        }
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        for (const name in this.controls) {
+            this.controls[name].deinit();
+        }
+    }
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.executeAction = function(action, args) {
-    action.exec(args, {'form':this});
-};
-*/
+    defaultValuesToRow(row) {
+        for (const name in this.fields) {
+            this.fields[name].fillDefaultValue(row);
+        }
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.openPage = function(args) {
-    var self = this;
-    return self.page.openPage(args);
-};
+    onDataSourceUpdate(e) {
+        console.log('Form.onDataSourceUpdate', this.getFullName());
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.getFullName = function () {
-    var self = this;
-    return [
-        self.page.name,
-        self.name
-    ].join('.');
-};
+    async update() {
+        console.log('Form.update', this.getFullName(), this.isChanged());
+        if (this.page.deinited) throw new Error('page already deinited');
+        if (!this.isChanged()) throw new Error(`form not changed: ${this.getFullName()}`);
+        await this.dataSources.default.update();
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.refresh = function() {
-    var self = this;
-    console.log('Form.prototype.refresh', self.name);
-    return self.dataSource.refresh().then(function () {
-        self.emit('refreshed', {source: self});
-    });
-};
+    // discard() {
+    //     console.log('Form.discard', this.getFullName());
+    //     return this.dataSources.default.discard();
+    // }
+
+    async refill() {
+        console.log('Form.refill', this.getFullName());
+        await this.dataSources.default.refill(this.page.params);
+        this.emit('refilled', {source: this});
+    }
+
+    // executeAction(action, args) {
+    //     action.exec(args, {'form':this});
+    // }
+
+    getFullName() {
+        return [
+            this.page.name,
+            this.name
+        ].join('.');
+    }
+
+    async refresh() {
+        console.log('Form.refresh', this.getFullName());
+        await this.dataSource.refresh();
+        this.emit('refresh', {source: this});
+    }
+
+    isChanged() {
+        // console.log('Form.isChanged', this.getFullName());
+        return this.dataSource.isChanged();
+    }
+
+    async rpc(name, params) {
+        console.log('Form.rpc', this.getFullName(), name, params);
+        if (!name) throw new Error('no name');
+        return await this.page.app.request({
+            action: 'rpc',
+            page: this.page.name,
+            form: this.name,
+            name: name,
+            params: params
+        });
+    }
+
+    getKey() {
+        return null;
+    }
+
+    getDataSource() {
+        if (!this.dataSources.default) throw new Error(`${this.getFullName()}: no default data source`);
+        return this.dataSources.default;
+    }
+}

@@ -1,74 +1,36 @@
 'use strict';
 
-QForms.inherits(TextBoxFieldController, FieldController);
+class TextBoxFieldController extends FieldController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function TextBoxFieldController(model, parent) {
-    var self = this;
-    TextBoxFieldController.super_.call(self, model, parent);
-    //this.eventChange = new QForms.Event(this);
-}
+    constructor(model, parent) {
+        // console.log('new TextBoxFieldController', model.name);
+        super(model, parent);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.fill = function(row, view) {
-    var self = this;
-    TextBoxFieldController.super_.prototype.fill.call(self, row, view);
-    if (self.model.form.data.class === 'RowForm') {
-        $(view).children().change(function() {
-            self.onChange(this);
-        });
-        if (self.model.data.notNull === 'true') {
-            view.firstElementChild.placeholder = '-- {fillValue} --'.template({
-                fillValue: self.model.form.page.app.data.text.field.fillValue
+    fill(row, view) {
+        const self = this;
+        super.fill(row, view);
+        if (this.model.form.data.class === 'RowForm') {
+            $(view).children().on('input', function() {
+                self.onChange(this);
             });
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.isValid = function(view) {
-    var self = this;
-    var isValid = true;
-    if (self.model.data.notNull === 'true') {
-        var value = self.getValue(view);
-        isValid = value !== undefined && value !== null && value !== '';
+    beginEdit(view) {
+        view.firstElementChild.style.MozUserSelect = 'text';
+        view.firstElementChild.contentEditable = true;
+        const range = document.createRange();
+        range.selectNodeContents(view.firstElementChild);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        view.firstElementChild.focus();
+        return true;
     }
-    if (!isValid) {
-        view.firstElementChild.classList.add('error');
-    } else {
-        view.firstElementChild.classList.remove('error');
+
+    endEdit(view) {
+        view.firstElementChild.style.MozUserSelect = 'none';
+        view.firstElementChild.contentEditable = false;
     }
-    return isValid;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.onChange = function (el) {
-    var self = this;
-    var view = el.parentNode;
-    if (self.isValid(view)) {
-        self.model.save(view.dbRow, self.getValue(view));
-
-        // event
-        self.emit('change', {source: self, view: view, row: view.dbRow, el: el, field: self});
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.beginEdit = function(view) {
-    var self = this;
-    view.firstElementChild.style.MozUserSelect = 'text';
-    view.firstElementChild.contentEditable = true;
-    var range = document.createRange();
-    range.selectNodeContents(view.firstElementChild);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    view.firstElementChild.focus();
-    return true;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TextBoxFieldController.prototype.endEdit = function(view) {
-    var self = this;
-    view.firstElementChild.style.MozUserSelect = 'none';
-    view.firstElementChild.contentEditable = false;
-};
+}

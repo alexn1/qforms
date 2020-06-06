@@ -1,32 +1,13 @@
 'use strict';
 
-var util = require('util');
+const Editor = require('../Editor');
 
-var Editor = require('../Editor');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ControlEditor extends Editor {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(formEditor, name) {
-        super();
-        var self = this;
-        self.formEditor = formEditor;
-        self.parent     = formEditor;
-        self.name       = name;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getData() {
-        var self = this;
-        return self.parent.data.controls[self.name];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setAttr(name, value) {
-        var self = this;
-        self.formEditor.setControlAttr(self.name, name, value);
-        return self.formEditor.pageEditor.save();
+    constructor(formEditor, name, data) {
+        super(data, formEditor);
+        this.name       = name;
+        this.colName = 'controls';
     }
 
 }

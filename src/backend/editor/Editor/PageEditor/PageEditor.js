@@ -1,288 +1,221 @@
 'use strict';
 
-module.exports = PageEditor;
+const path = require('path');
+const _    = require('underscore');
+const qforms = require('../../../qforms');
+const Editor = require('../Editor');
 
-var util = require('util');
-var path = require('path');
-var _    = require('underscore');
+class PageEditor extends Editor {
 
-var qforms = require('../../../../qforms');
-var server = require('../../../../server');
-var Editor = require('../Editor');
-
-util.inherits(PageEditor, Editor);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageEditor(appEditor, pageFile) {
-    var self = this;
-    self.appEditor          = appEditor;
-    self.parent             = appEditor;
-    self.pageFile           = pageFile;
-    self.data               = pageFile.data;
-    self.name               = self.data['@attributes'].name;
-    self.defaultEjsFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
-    );
-    self.defaultCssFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/PageController/view/PageView.css'
-    );
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.createData = function(params) {
-    return {
-        '@class'     :'Page',
-        '@attributes': {
-            formatVer: '0.1',
-            name     : params['name'],
-            caption  : params['caption'] ? params['caption'] : params['name'],
-            width    : params['width']   ? params['width']   : '640',
-            height   : params['height']  ? params['height']  : '480'
-        },
-        dataSources: {},
-        forms      : {}
-    };
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getData = function() {
-    var self = this;
-    return self.data;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.setAttr = function(name, value) {
-    var self = this;
-    if (name === 'name') {
-        var pageName = self.pageFile.getAttr('name');
-        var pageLinkEditor = self.appEditor.getPageLink(pageName);
-        return pageLinkEditor.setAttr(name, value).then(function () {
-            self.pageFile.setAttr(name, value);
-            return self.save();
-        });
-    } else {
-        self.pageFile.setAttr(name, value);
-        return self.save();
+    constructor(appEditor, pageFile) {
+        super(pageFile.data, appEditor);
+        this.appEditor          = appEditor;
+        this.pageFile           = pageFile;
+        this.name               = this.getAttr('name');
+        this.defaultEjsFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
+        );
+        this.defaultCssFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/PageController/view/PageView.css'
+        );
     }
-};
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.moveFormUp = function(params) {
-    var self = this;
-    self.data.forms = qforms.Helper.moveObjProp(self.data.forms, params.form, -1);
-    return self.save().then(function () {
-        return 'ok';
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.save = function() {
-    var self = this;
-    return self.pageFile.save();
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.moveFormDown = function(params) {
-    var self = this;
-    self.data.forms = qforms.Helper.moveObjProp(self.data.forms, params.form, 1);
-    return self.save().then(function () {
-        return 'ok';
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.newForm = function(params) {
-    var self = this;
-    var name   = params['name'];
-    var _class = params['class'];
-    if (!self.data.forms) {
-        self.data.forms = {};
+    static createData(params) {
+        return {
+            '@class'     :'Page',
+            '@attributes': {
+                formatVersion: '0.1',
+                name     : params['name'],
+                caption  : params['caption'] ? params['caption'] : params['name'],
+                width    : params['width']   ? params['width']   : '640',
+                height   : params['height']  ? params['height']  : '480'
+            },
+            dataSources: {},
+            forms      : {}
+        };
     }
-    if (self.data.forms[name]) {
-        throw new Error('Form {name} already exists.'.replace('{name}', name));
-    }
-    var data;
-    switch (_class) {
-        case 'TableForm':
-            data = qforms.TableFormEditor.createData(params);
-            break;
-        case 'RowForm':
-            data = qforms.RowFormEditor.createData(params);
-            break;
-        case 'TreeForm':
-            data = qforms.TreeFormEditor.createData(params);
-            break;
-        default:
-            throw new Error('unknown form class');
-    }
-    self.data.forms[name] = data;
-    return self.getForm(name);
-};
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.createForm = function(params) {
-    var self = this;
-    var name = params.name;
-    var formEditor = self.newForm(params);
-    // fields
-    if (params.fields) {
-        for (var fieldName in params.fields) {
-            formEditor.newField(_.extend(
-                {form: name},
-                params.fields[fieldName]
-            ));
+    async setAttr(name, value) {
+        console.log('PageEditor.setAttr', name, value);
+        if (name === 'name') {
+            const pageLinkEditor = this.appEditor.createPageLinkEditor(this.name);
+            await pageLinkEditor.setAttr(name, value);
         }
+        await super.setAttr(name, value);
     }
-    // dataSources
-    if (params.dataSources) {
-        for (var dataSourceName in params.dataSources) {
-            var dataSource = params.dataSources[dataSourceName];
-            formEditor.newDataSource(
-                _.extend(
-                    {form:name},
-                    dataSource
-                )
-            );
-            // keyColumns
-            if (dataSource.keyColumns) {
-                for (var keyColumnName in dataSource.keyColumns) {
-                    var keyColumn = dataSource.keyColumns[keyColumnName];
-                    formEditor.newDataSouceKeyColumn(
-                        _.extend(
-                            {'form':name, 'dataSource':dataSourceName},
-                            keyColumn
-                        )
-                    );
+
+    async moveFormUp(params) {
+        this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, -1);
+        await this.save();
+        return 'ok';
+    }
+
+    async save() {
+        return await this.pageFile.save();
+    }
+
+    async moveFormDown(params) {
+        this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, 1);
+        await this.save();
+        return 'ok';
+    }
+
+    newForm(params) {
+        const name   = params['name'];
+        const _class = params['class'];
+        if (!this.data.forms) {
+            this.data.forms = {};
+        }
+        if (this.data.forms[name]) {
+            throw new Error('Form {name} already exists.'.replace('{name}', name));
+        }
+        let data;
+        switch (_class) {
+            case 'TableForm':
+                data = qforms.TableFormEditor.createData(params);
+                break;
+            case 'RowForm':
+                data = qforms.RowFormEditor.createData(params);
+                break;
+            case 'TreeForm':
+                data = qforms.TreeFormEditor.createData(params);
+                break;
+            default:
+                throw new Error('unknown form class');
+        }
+        this.data.forms[name] = data;
+        return this.getForm(name);
+    }
+
+    async createForm(params) {
+        const name = params.name;
+        const formEditor = this.newForm(params);
+        // fields
+        if (params.fields) {
+            for (const fieldName in params.fields) {
+                formEditor.newField(_.extend(
+                    {form: name},
+                    params.fields[fieldName]
+                ));
+            }
+        }
+        // dataSources
+        if (params.dataSources) {
+            for (const dataSourceName in params.dataSources) {
+                const dataSource = params.dataSources[dataSourceName];
+                formEditor.newDataSource(
+                    _.extend(
+                        {form:name},
+                        dataSource
+                    )
+                );
+                // keyColumns
+                if (dataSource.keyColumns) {
+                    for (const keyColumnName in dataSource.keyColumns) {
+                        const keyColumn = dataSource.keyColumns[keyColumnName];
+                        formEditor.newDataSourceKeyColumn(
+                            _.extend(
+                                {'form':name, 'dataSource':dataSourceName},
+                                keyColumn
+                            )
+                        );
+                    }
                 }
             }
         }
+        await this.save();
+        const formEditor2 = this.getForm(name);
+        return formEditor2;
     }
-    return self.save().then(function () {
-        var formEditor = self.getForm(name);
-        return formEditor;
-    });
-};
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getForm = function(name) {
-    var self = this;
-    var formData = self.data.forms[name];
-    return eval('new qforms.{class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
-};
+    getForm(name) {
+        const formData = this.data.forms[name];
+        return eval('new qforms.{class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getDataSource = function(name) {
-    var self = this;
-    var dataSourceData = self.data.dataSources[name];
-    return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
-};
+    createDataSourceEditor(name) {
+        const dataSourceData = this.data.dataSources[name];
+        return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.removeForm = function(name) {
-    var self = this;
-    self.deleteForm(name);
-    return self.save();
-};
+    removeForm(name) {
+        this.deleteForm(name);
+        return this.save();
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.createEjs = function(params) {
-    var self = this;
-    return self.getCustomFilePath('ejs').then(function (customEjsFilePath) {
-        return self.createFileByReplace(customEjsFilePath, self.defaultEjsFilePath, self.getViewName(), params.page, null).then(function (ejs) {
-            return ejs;
+    async createEjs(params) {
+        const customEjsFilePath = await this.getCustomFilePath('ejs');
+        const ejs = await this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.page, null);
+        return ejs;
+    }
+
+    async createCss(params) {
+        const customCssFilePath = await this.getCustomFilePath('css');
+        const emptyTemplate = '.' + params.page + ' \n';
+        const css = await this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.page, emptyTemplate);
+        return css;
+    }
+
+    async createJs(params) {
+        const templateFilePath = path.join(__dirname, 'Page.js.ejs');
+        const customJsFilePath = await this.getCustomFilePath('js');
+        const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
+            page  : this.getAttr('name'),
+            _class: this.constructor.name.replace('Editor', '')
         });
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.createCss = function(params) {
-    var self = this;
-    return self.getCustomFilePath('css').then(function (customCssFilePath) {
-        var emptyTemplate = '.' + params.page + ' \n';
-        return self.createFileByReplace(customCssFilePath, self.defaultCssFilePath, self.getViewName(), params.page, emptyTemplate).then(function (css) {
-            return css;
-        });
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.createJs = function(params) {
-    var self = this;
-    var templateFilePath = path.join(__dirname, 'Page.js.ejs');
-    return self.getCustomFilePath('js').then(function (customJsFilePath) {
-        return self.createFileByParams(customJsFilePath, templateFilePath, {
-            page  : self.pageFile.getAttr('name'),
-            _class: self.constructor.name.replace('Editor', '')
-        }).then(function (js) {
-            return js;
-        });
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getCustomDirPath = function() {
-    var self = this;
-    console.log('PageEditor.prototype.getCustomDirPath');
-    return self.parent.getCustomDirPath().then(function (customDirPath) {
-        var dirPath = path.join(customDirPath, 'pages', self.name);
-        return qforms.Helper.createDirIfNotExists(dirPath).then(function () {
-            return dirPath;
-        });
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.getCustomFilePath = function(ext) {
-    var self = this;
-    return self.getCustomDirPath().then(function (customDirPath) {
-        return path.join(customDirPath, self.name + '.' + ext);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.newDataSource = function(params) {
-    var self = this;
-    var name   = params['name'];
-    var _class = params['class'];
-    if (!self.data.dataSources) {
-        self.data.dataSources = {};
+        return js;
     }
-    if (self.data.dataSources[name]) {
-        throw new Error('Data Source {name} already exist.'.replace('{name}', name));
-    }
-    var data;
-    switch (_class) {
-        case 'DataSource':
-            data = qforms.DataSourceEditor.create(params);
-            break;
-        case 'SqlDataSource':
-            data = qforms.SqlDataSourceEditor.create(params);
-            break;
-        default:
-            throw new Error('Unknown data source class.');
-    }
-    return self.data.dataSources[name] = data;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.setDataSourceAttr = function(dataSource, name, value) {
-    var self = this;
-    self.data.dataSources[dataSource]['@attributes'][name] = value;
-    if (name === 'name') {
-        self.data.dataSources = qforms.Helper.replaceKey(self.data.dataSources, dataSource, value);
+    async getCustomDirPath() {
+        console.log('PageEditor.getCustomDirPath');
+        const customDirPath = await this.parent.getCustomDirPath();
+        const dirPath = path.join(customDirPath, 'pages', this.name);
+        await qforms.Helper.createDirIfNotExists(dirPath);
+        return dirPath;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.deleteForm = function(name) {
-    var self = this;
-    delete self.data.forms[name];
-};
+    async getCustomFilePath(ext) {
+        const customDirPath = await this.getCustomDirPath();
+        return path.join(customDirPath, this.name + '.' + ext);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditor.prototype.deleteDataSource = function(dataSource) {
-    var self = this;
-    delete self.data.dataSources[dataSource];
-};
+    newDataSource(params) {
+        const name   = params['name'];
+        const _class = params['class'];
+        if (!this.data.dataSources) {
+            this.data.dataSources = {};
+        }
+        if (this.data.dataSources[name]) {
+            throw new Error(`DataSource ${name} already exist`);
+        }
+        let data;
+        switch (_class) {
+            case 'DataSource':
+                data = qforms.DataSourceEditor.create(params);
+                break;
+            case 'SqlDataSource':
+                data = qforms.SqlDataSourceEditor.create(params);
+                break;
+            default:
+                throw new Error(`Unknown data source class: ${_class}`);
+        }
+        return this.data.dataSources[name] = data;
+    }
+
+    deleteForm(name) {
+        delete this.data.forms[name];
+    }
+
+    deleteDataSource(dataSource) {
+        delete this.data.dataSources[dataSource];
+    }
+
+    getAppEditor() {
+        return this.appEditor;
+    }
+
+}
+
+module.exports = PageEditor;

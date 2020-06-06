@@ -1,9 +1,19 @@
 'use strict';
 
-QForms.inherits(Model, EventEmitter);
+class Model extends EventEmitter {
+    constructor(data, parent) {
+        super();
+        this.data = data;
+        this.parent = parent;
+        this.name = data.name;
+        this.listeners = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Model() {
-    var self = this;
-    self.listeners = {};
+    getClassName() {
+        return this.data.class;
+    }
+
+    getName() {
+        return this.data.name;
+    }
 }

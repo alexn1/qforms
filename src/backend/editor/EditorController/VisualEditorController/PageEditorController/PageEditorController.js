@@ -1,160 +1,98 @@
 'use strict';
 
-module.exports = PageEditorController;
+const path = require('path');
+const qforms                 = require('../../../../qforms');
+const VisualEditorController = require('../VisualEditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
+class PageEditorController extends VisualEditorController {
 
-var qforms                 = require('../../../../../qforms');
-var server                 = require('../../../../../server');
-var VisualEditorController = require('../VisualEditorController');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/DocumentController/VisualController/PageController'
+        );
+    }
 
-util.inherits(PageEditorController, VisualEditorController);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageEditorController(appInfo) {
-    var self = this;
-    PageEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/DocumentController/VisualController/PageController'
-    );
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.get = function(params) {
-    var self = this;
-    var pageFilePath = path.join(self.appInfo.dirPath, params.fileName);
-    return qforms.Helper.readFile(pageFilePath).then(function (content) {
+    async get(params) {
+        const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
+        const content = await qforms.Helper.readFile(pageFilePath);
         return JSON.parse(content);
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.fileName).then(function (pageEditor) {
-            return pageEditor.setAttr(params.attr, params.value).then(function () {
-                return null;
-            });
-        });
-    });
-};
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.fileName);
+        await pageEditor.setAttr(params.attr, params.value);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.createPage(params).then(function(pageEditor) {
-            var pageLinkEditor = appEditor.getPageLink(params.name);
-            return {
-                page    : pageEditor.getData(),
-                pageLink: pageLinkEditor.getData()
-            };
-        });
-    });
-};
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.createPage(params);
+        const pageLinkEditor = appEditor.createPageLinkEditor(params.name);
+        return {
+            page    : pageEditor.getData(),
+            pageLink: pageLinkEditor.getData()
+        };
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.removePage(params.page).then(function () {
-            return null;
-        });
-    });
-};
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        await appEditor.removePage(params.page);
+        return null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.createView = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            return pageEditor.createEjs(params).then(function (ejs) {
-                return pageEditor.createCss(params).then(function (css) {
-                    return {
-                        ejs: ejs,
-                        css: css
-                    };
-                });
-            });
-        });
-    });
-};
+    async createView(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const ejs = await pageEditor.createEjs(params);
+        const css = await pageEditor.createCss(params);
+        return {ejs, css};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.getView = function(params) {
-    var self = this;
-    return PageEditorController.super_.prototype.getView.call(this, params).then(function (result) {
+    async getView(params) {
+        const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':
-                return self.getApplicationEditor().then(function(appEditor) {
-                    return appEditor.getPage(params.page).then(function (pageEditor) {
-                        return pageEditor.getCustomFile('ejs').then(function (ejs) {
-                            result.data.ejs = ejs;
-                            return pageEditor.getCustomFile('css').then(function (css) {
-                                result.data.css = css;
-                                return pageEditor.getCustomFile('js').then(function (js) {
-                                    result.data.js = js;
-                                    return result;
-                                });
-                            });
-                        });
-                    });
-                });
-                break;
+                const appEditor = await this.createApplicationEditor();
+                const pageEditor = await appEditor.getPage(params.page);
+                result.data.ejs = await pageEditor.getCustomFile('ejs');
+                result.data.css = await pageEditor.getCustomFile('css');
+                result.data.js = await pageEditor.getCustomFile('js');
+                return result;
             default:
                 return result;
-                break;
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.saveView = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            switch (params.view) {
-                case 'ejs':
-                    pageEditor.saveCustomFile('ejs', params.text).then(function () {
-                        return null;
-                    });
-                    break;
-                case 'css':
-                    pageEditor.saveCustomFile('css', params.text).then(function () {
-                        return null;
-                    });
-                    break;
-            }
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.createController = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            return pageEditor.createJs(params).then(function (js) {
-                return {
-                    js: js
-                };
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageEditorController.prototype.saveController = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPage(params.page).then(function (pageEditor) {
-            return pageEditor.saveCustomFile('js', params.text).then(function () {
+    async saveView(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        switch (params.view) {
+            case 'ejs':
+                await pageEditor.saveCustomFile('ejs', params.text);
                 return null;
-            });
-        });
-    });
-};
+            case 'css':
+                await pageEditor.saveCustomFile('css', params.text);
+                return null;
+        }
+    }
+
+    async createController(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const js = await pageEditor.createJs(params);
+        return {js};
+    }
+
+    async saveController(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        await pageEditor.saveCustomFile('js', params.text);
+        return null;
+    }
+
+}
+
+module.exports = PageEditorController;

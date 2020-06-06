@@ -1,16 +1,15 @@
-QForms.inherits(<%=application%>Controller, <%=_class%>Controller);
+class <%=application%>Controller extends <%=_class%>Controller {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=application%>Controller() {
-    <%=application%>Controller.super_.apply(this, arguments);
+    constructor(...args) {
+        super(...args);
+    }
+
+    init() {
+        super.init();
+    }
+
+    deinit() {
+        super.deinit();
+    }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=application%>Controller.prototype.init = function() {
-    <%=application%>Controller.super_.prototype.init.call(this);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=application%>Controller.prototype.deinit = function() {
-    <%=application%>Controller.super_.prototype.deinit.call(this);
-};
+<%=application%>Controller;

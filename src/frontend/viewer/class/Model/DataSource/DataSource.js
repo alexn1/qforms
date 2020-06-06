@@ -1,713 +1,746 @@
 'use strict';
 
-QForms.inherits(DataSource, Model);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSource(name, parent, data) {
-    var self = this;
-    DataSource.super_.call(self);
-    self.name   = name;
-    self.parent = parent;
-    self.page   = parent instanceof Page ? parent : null;
-    self.form   = parent instanceof RowForm || parent instanceof TableForm || parent instanceof TreeForm ? parent : null;
-    self.data   = data;
-    self.offset = 0;
-    self.limit  = data.limit;
-    self.count  = data.count;
-    self.length = null;
-    self.fullTableName = self.data.database + '.' + self.data.table;
-    self.insertRow = null;
-    self.updateRow = null;
-    self.rowsByKey = {};						// for row search by key
-    self.childs    = {};						// for child row search by key
-    self.params    = {};   						// refill params of row
-    //self.eventChanged   = new QForms.Event(self);
-    //self.eventUpdated   = new QForms.Event(self);
-    //self.eventRefreshed = new QForms.Event(self);
-    //self.eventInsert    = new QForms.Event(self);
-    //self.eventNewRow    = new QForms.Event(self);
-    //self.eventRemoveRow = new QForms.Event(self);
-    //self.eventRefillRow = new QForms.Event(self);
-    //self.eventMoveRow   = new QForms.Event(self);		// row has been moved within list
-    //self.eventGoneRow   = new QForms.Event(self);		// row gone from current tree item list
-    //self.eventComeRow   = new QForms.Event(self);		// row come to current tree item list
-    //self.eventNewFrame  = new QForms.Event(self);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.init = function() {
-    var self = this;
-    //console.log('DataSource.prototype.init', self.name);
-    //console.log('limit', self.limit);
-    //console.log('count', self.count);
-    // creating index
-    self.length = self.data.rows.length;
-    var vals = self.getKeysAndChilds(self.data.rows);
-    self.rowsByKey = vals.rowsByKey;
-    self.childs    = vals.childs;
-    if (self.data.table !== '') {
-        var table = self.getApp().getTable(self.fullTableName);
-        table.on('updated', self.listeners.tableUpdated = self.onTableUpdated.bind(self));
-        table.on('insert' , self.listeners.tableInsert  = self.onTableInsert.bind(self));
-        table.on('delete' , self.listeners.tableDelete  = self.onTableDelete.bind(self));
+class DataSource extends Model {
+    constructor(name, parent, data) {
+        super(data, parent);
+        this.page   = parent instanceof Page ? parent : null;
+        this.form   = parent instanceof RowForm || parent instanceof TableForm || parent instanceof TreeForm ? parent : null;
+        this.offset = 0;
+        this.limit  = data.limit;
+        this.count  = data.count;
+        this.length = null;
+        this.insertRow = null;
+        this.rowsByKey = {};						// for row search by key
+        this.childs    = {};						// for child row search by key
+        this.params    = {};   						// refill params of row
+        this.changes   = {};                        // changed rows
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.deinit = function() {
-    var self = this;
-    if (self.data.table !== '') {
-        var table = self.getApp().getTable(self.fullTableName);
-        table.removeListener('updated', self.listeners.tableUpdated);
-        table.removeListener('insert' , self.listeners.tableInsert);
-        table.removeListener('delete' , self.listeners.tableDelete);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// fill lists to find row index and child rows by row key
-//
-DataSource.prototype.getKeysAndChilds = function(rows) {
-    var self = this;
-    var rowsByKey = {};
-    var childs    = {};
-    for (var i = 0; i < rows.length; i++) {
-        var row       = rows[i];
-        var key       = self.getRowKey(row);
-        var parentKey = self.getRowParentKey(row);
-        // filling
-        if (rowsByKey[key]) {
-            throw new Error('Duplicate key in the result set, i = ' + i + ', key = ' + key);
+    init() {
+        console.log('DataSource.init', this.getFullName(), this.data.class);
+        //console.log('limit', this.limit);
+        //console.log('count', this.count);
+        // creating index
+        this.length = this.data.rows.length;
+        const vals = this.getKeysAndChilds(this.data.rows);
+        this.rowsByKey = vals.rowsByKey;
+        this.childs    = vals.childs;
+        if (this.data.table !== '') {
+            const table = this.getTable();
+            table.on('update', this.listeners.tableUpdated = this.onTableUpdated.bind(this));
+            table.on('insert', this.listeners.tableInsert  = this.onTableInsert.bind(this));
+            table.on('delete', this.listeners.tableDelete  = this.onTableDelete.bind(this));
         }
-        rowsByKey[key] = row;
-        if (!childs[parentKey]) {
+    }
+
+    deinit() {
+        if (this.data.table !== '') {
+            const table = this.getTable();
+            table.removeListener('update', this.listeners.tableUpdated);
+            table.removeListener('insert', this.listeners.tableInsert);
+            table.removeListener('delete', this.listeners.tableDelete);
+        }
+    }
+
+    // fill lists to find row index and child rows by row key
+    getKeysAndChilds(rows) {
+        const rowsByKey = {};
+        const childs    = {};
+        for (let i = 0; i < rows.length; i++) {
+            const row       = rows[i];
+            const key       = this.getRowKey(row);
+            const parentKey = this.getRowParentKey(row);
+            // filling
+            if (rowsByKey[key]) {
+                throw new Error('Duplicate key in the result set, i = ' + i + ', key = ' + key);
+            }
+            rowsByKey[key] = row;
+            if (!childs[parentKey]) {
+                childs[parentKey] = {
+                    rowsByIndex: [],
+                    keysByIndex: [],
+                    rowsByKey  : {}
+                };
+            }
+            childs[parentKey].rowsByIndex.push(row);
+            childs[parentKey].keysByIndex.push(key);
+            childs[parentKey].rowsByKey[key] = row;
+        }
+        return {
+            childs   : childs,
+            rowsByKey: rowsByKey
+        };
+    }
+
+    getFramesCount() {
+        return this.limit ? Math.ceil(this.count / this.limit) : null;
+    }
+
+    getColumnType(column) {
+        // console.log('DataSource.getColumnType', column);
+        const type = this.getTable().getColumn(column).getType();
+        // console.log('type:', type);
+        return type;
+    }
+
+    getNewValue(row, column, value) {
+        if (typeof value === 'string' && value.trim() === '') return null;
+        if (this.getColumnType(column) === 'number' && !isNaN(Number(value))) return Number(value);
+        return value;
+    }
+
+    setValue(row, column, value) {
+        console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
+        const newValue = this.getNewValue(row, column, value);
+        console.log('newValue:', newValue, typeof newValue);
+        if (this.insertRow) {
+            if (this.insertRow !== row) throw new Error('wrong insert row');
+            row[column] = newValue;
+            console.log('row:', row);
+        } else {
+            const key = this.getRowKey(row);
+            if (!this.compareValue(row, column, newValue)) {
+                if (!this.changes[key]) this.changes[key] = {};
+                this.changes[key][column] = newValue;
+            } else {
+                if (this.changes[key] && this.changes[key][column]) {
+                    delete this.changes[key][column];
+                }
+            }
+            if (this.changes[key] && !Object.keys(this.changes[key]).length) delete this.changes[key];
+            console.log('changes:', Object.keys(this.changes).length, this.changes);
+        }
+        return newValue;
+    }
+
+    compareValue(row, column, newValue) {
+        const type = this.getColumnType(column);
+        if (type === 'object') {
+            return JSON.stringify(row[column]) === JSON.stringify(newValue);
+        }
+        return row[column] === newValue;
+    }
+
+    isChanged() {
+        // console.log('DataSource.isChanged', this.getFullName());
+        if (this.insertRow) return true;
+        return !!Object.keys(this.changes).length;
+    }
+
+    isRowColumnChanged(row, column) {
+        // console.log('DataSource.isRowColumnChanged', this.name);
+        return row[column] !== this.getValue(row, column);
+    }
+
+    getValue(row, column) {
+        // console.log('DataSource.getValue', column);
+        const key = this.getRowKey(row);
+        if (this.changes[key] && this.changes[key][column]) {
+            return this.changes[key][column];
+        }
+        const value = row[column];
+        // console.log('DataSource.getValue:', value);
+        return value;
+    }
+
+    getKeyValues(row) {
+        return this.data.keyColumns.reduce((key, column) => {
+            key[column] = row[column];
+            return key;
+        }, {});
+    }
+
+    getRowKey(row) {
+        // console.log('DataSource.getRowKey', row);
+        const arr = [];
+        for (let i = 0; i < this.data.keyColumns.length; i++) {
+            const column = this.data.keyColumns[i];
+            const value = row[column];
+            if (value === null || value === undefined) return null;
+            arr.push(value);
+        }
+        return JSON.stringify(arr);
+    }
+
+    getRowParentKey(row) {
+        const key = [];
+        if (this.data.parentKeyColumns) {
+            for (let i = 0; i < this.data.parentKeyColumns.length; i++) {
+                key.push(row[this.data.parentKeyColumns[i]]);
+            }
+        } else {
+            key.push(null);
+        }
+        return JSON.stringify(key);
+    }
+
+    setRowKey(row, key) {
+        const values = this.splitKey(key);
+        for (const name in values) {
+            row[name] = values[name];
+        }
+        this.rowsByKey[key] = row;
+    }
+
+    splitKey(key) {
+        const values = {};
+        const arr = JSON.parse(key);
+        for (let i = 0; i < arr.length; i++) {
+            const columnName = this.data.keyColumns[i];
+            values[columnName] = arr[i];
+        }
+        return values;
+    }
+
+    async update() {
+        console.log('DataSource.update', this.getFullName());
+        if (this.data.table === '') throw new Error(`data source has no table: ${this.name}`);
+        if (this.insertRow !== null) return this.insert(this.insertRow);
+        if (!Object.keys(this.changes).length) throw new Error(`no changes: ${this.getFullName()}`);
+        const data = await this.getApp().request({
+            action        : 'update',
+            page          : this.form.page.name,
+            form          : this.form.name,
+            ds            : this.name,
+            changes       : this.changes,
+        });
+        const [key] = Object.keys(data);
+        if (!key) throw new Error('no updated row');
+        this.changes = {};
+        const newValues = data[key];
+        const newKey = this.getRowKey(newValues);
+        const event = this.updateRow(key, newValues);
+        this.parent.onDataSourceUpdate(event);
+        this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
+        return newKey;
+    }
+
+    updateRow(key, newValues) {
+        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
+        const row = this.rowsByKey[key];
+        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
+        const i = this.data.rows.indexOf(row);
+        if (i === -1) throw new Error(`cannot find row: ${key}`);
+        const newKey = this.getRowKey(newValues);
+
+        // copy new values to original row object
+        for (const column in row) row[column] = newValues[column];
+        if (key !== newKey) {
+            delete this.rowsByKey[key];
+            this.rowsByKey[newKey] = row;
+        }
+        console.log(`key: ${key} to ${newKey}`);
+        // console.log('this.rowsByKey:', this.rowsByKey);
+        // console.log('this.data.rows:', this.data.rows);
+
+        const event = {source: this, key, i};
+        this.emit('rowUpdate', event);
+        return event;
+    }
+
+    getTable() {
+        if (!this.data.database) throw new Error('no database');
+        if (!this.data.table) throw new Error('no table');
+        return this.getApp().databases[this.data.database].tables[this.data.table];
+    }
+
+    async onTableUpdated(e) {
+        console.log('DataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
+        if (e.source === this) return;
+        console.log('changes:', e.changes);
+        if (!Object.keys(e.changes).length) throw new Error('no changes');
+        const key = Object.keys(e.changes)[0];
+        const newKey = e.changes[key];
+        console.log(`key: ${key} to ${newKey}`);
+        const params = DataSource.keyToParams(newKey);
+        const data = await this.selectSingle(params);
+        this.updateRow(key, data.row);
+    }
+
+    async refresh() {
+        console.log('DataSource.refresh', this.getFullName());
+        if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
+        await this._refresh();
+        this.emit('refresh', {source: this});
+    }
+
+    async onTableInsert(e) {
+        console.log('DataSource.onTableInsert', e);
+        await this._refresh();
+        if (this.rowsByKey[e.key]) {
+            this.parent.onDataSourceUpdate({source: this, key: e.key});
+            this.emit('insert', {source: this, key: e.key});
+        }
+    }
+
+    async onTableDelete(e) {
+        console.log('DataSource.onTableDelete', e);
+        await this._refresh();
+    }
+
+    async refill(params) {
+        this.offset = 0;
+        const data = await this.select(params);
+        const _new = this.getKeysAndChilds(data.rows);
+        const _old = this;
+        _old.rowsByKey = _new.rowsByKey;
+        _old.childs    = _new.childs;
+    }
+
+    async _refresh() {
+        console.log('DataSource._refresh');
+        const page = this.getPage();
+        const params = page ? page.params : {};
+        const data = await this.select(params);
+        if (this.data.dumpFirstRowToParams === 'true') {
+            this.dumpFirstRowToParams(data.rows);
+        }
+        const _old = this;
+        const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
+        this.sync(_old, _new, '[null]');
+    }
+
+    async frame(params, frame) {
+        this.offset = (frame - 1) * this.limit;
+        const data = await this.select(params);
+        const _new = this.getKeysAndChilds(data.rows);
+        const _old = this;
+        _old.rowsByKey = _new.rowsByKey;
+        _old.childs    = _new.childs;
+        this.emit('newFrame', {source: this});
+    }
+
+    async select(params) {
+        console.log('DataSource.select', this.getFullName());
+        const page = this.getPage();
+        const form = this.getForm();
+        // const _params = QForms.merge(params, this.params);
+        const _params = {...params, ...this.params};
+        if (this.limit) _params.offset = this.offset;
+        const data = await this.getApp().request({
+            action        : 'select',
+            page          : page ? page.name : null,
+            form          : form ? form.name : null,
+            ds            : this.name,
+            params        : _params,
+            parentPageName: page ? page.parentPageName : null
+        });
+        if (!(data.rows instanceof Array)) throw new Error('rows must be array');
+        if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+        this.count  = data.count;
+        this.length = data.rows.length;
+        return data;
+    }
+
+    async selectSingle(params) {
+        console.log('DataSource.selectSingle', this.getFullName());
+        const page = this.getPage();
+        const form = this.getForm();
+        const _params = {...params, ...this.params};
+        if (this.limit) _params.offset = this.offset;
+        const data = await this.getApp().request({
+            action        : 'selectSingle',
+            page          : page ? page.name : null,
+            form          : form ? form.name : null,
+            ds            : this.name,
+            params        : _params,
+            parentPageName: page ? page.parentPageName : null
+        });
+        if (!data.row) throw new Error('no row');
+        if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
+        return data;
+    }
+
+    // copy new values to data source row
+    copyNewValues(oldRow, newRow) {
+        for (const columnName in newRow) {
+            oldRow[columnName] = newRow[columnName];
+        }
+    }
+
+    // remove row from current tree item list and move it ot it's new tree item list
+    _goneRow(_old, _new, parentKey, i, key) {
+        const newRow = _new.rowsByKey[key];
+        const oldRow = _old.rowsByKey[key];
+        const newParentKey = this.getRowParentKey(newRow);
+        const index = _new.childs[newParentKey].keysByIndex.indexOf(key);
+        this.removeFromChilds(_old.childs, parentKey, i, key);
+        this.addToChilds(_old.childs, newParentKey, index, key, oldRow);
+    }
+
+    // add row to new tree item list after deleting from it old tree item list
+    _comeRow(_old, _new, parentKey, i, key) {
+        const oldRow = _old.rowsByKey[key];
+        const oldParentKey = this.getRowParentKey(oldRow);
+        const index = _old.childs[oldParentKey].keysByIndex.indexOf(key);
+        this.removeFromChilds(_old.childs, oldParentKey, index, key);
+        this.addToChilds(_old.childs, parentKey, i, key, oldRow);
+    }
+
+    removeFromChilds(childs, parentKey, i, key) {
+        childs[parentKey].rowsByIndex.splice(i, 1);
+        childs[parentKey].keysByIndex.splice(i, 1);
+        delete childs[parentKey].rowsByKey[key];
+        // remove empty list
+        if (childs[parentKey].rowsByIndex.length === 0) {
+            delete childs[parentKey];
+        }
+    }
+
+    addToChilds(childs, parentKey, i, key, row) {
+        if (childs[parentKey] === undefined) {
             childs[parentKey] = {
-                rowsByIndex: [],
-                keysByIndex: [],
-                rowsByKey  : {}
+                rowsByIndex:[],
+                keysByIndex:[],
+                rowsByKey:{}
             };
         }
-        childs[parentKey].rowsByIndex.push(row);
-        childs[parentKey].keysByIndex.push(key);
+        childs[parentKey].rowsByIndex.splice(i, 0, row);
+        childs[parentKey].keysByIndex.splice(i, 0, key);
         childs[parentKey].rowsByKey[key] = row;
     }
-    return {
-        childs   : childs,
-        rowsByKey: rowsByKey
-    };
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getFramesCount = function() {
-    var self = this;
-    return self.limit ? Math.ceil(self.count / self.limit) : null;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setValue = function(row, column, value) {
-    var self = this;
-    console.log('DataSource.prototype.setValue', self.name, column, value, typeof value);
-    row[column] = value !== '' ? value : null;
-    if (self.data.table !== '') {
-        if (self.insertRow === null) {
-            self.updateRow = row;
-        }
-        self.emit('changed', {source: self});
+    moveChilds(childs, oldIndex, newIndex) {
+        QForms.moveArrayElement(childs.rowsByIndex, oldIndex, newIndex);
+        QForms.moveArrayElement(childs.keysByIndex, oldIndex, newIndex);
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getRowKey = function(row) {
-    var self = this;
-    var key = [];
-    for (var i = 0; i < self.data.keyColumns.length; i++) {
-        key.push(row[self.data.keyColumns[i]]);
-    }
-    return JSON.stringify(key);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getRowParentKey = function(row) {
-    var self = this;
-    var key = [];
-    if (self.data.parentKeyColumns) {
-        for (var i=0;i<self.data.parentKeyColumns.length;i++) {
-            key.push(row[self.data.parentKeyColumns[i]]);
-        }
-    } else {
-        key.push(null);
-    }
-    return JSON.stringify(key);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.setRowKey = function(row, key) {
-    var self = this;
-    var values = self.splitKey(key);
-    for (var name in values) {
-        row[name] = values[name];
-    }
-    self.rowsByKey[key] = row;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.splitKey = function(key) {
-    var self = this;
-    var values = {};
-    var arr = JSON.parse(key);
-    for (var i = 0; i < arr.length; i++) {
-        var columnName = self.data.keyColumns[i];
-        values[columnName] = arr[i];
-    }
-    return values;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.update = function() {
-    var self = this;
-    return Promise.try(function () {
-        var page = self.getPage();
-        if (self.data.table === '') {
-            return null;
-        }
-        if (self.insertRow !== null) {
-            return self.insert(self.insertRow);
-        }
-        if (self.updateRow === null) {
-            return null;
-        }
-        var params = {
-            action        : 'update',
-            page          : self.form.page.name,
-            form          : self.form.name,
-            ds            : self.name,
-            row           : self.updateRow,
-            parentPageName: page ? page.parentPageName : undefined
-        };
-        return QForms.doHttpRequest(params).then(function (data) {
-            self.updateRow = null;
-            self.form.page.app.tables[self.fullTableName].emit('updated', {source: self});
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.onTableUpdated = function(ea) {
-    var self = this;
-    console.log('DataSource.prototype.onTableUpdated', self.getNamespace(), self.fullTableName);
-    self._refresh().then(function () {
-        self.emit('updated', {source: self});
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refresh = function() {
-    var self = this;
-    console.log('DataSource.prototype.refresh', self.name);
-    return self._refresh().then(function () {
-        self.emit('refreshed', {source: self});
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.onTableInsert = function(e) {
-    var self = this;
-    console.log('DataSource.prototype.onTableInsert', e);
-    self._refresh().then(function () {
-        if (self.rowsByKey[e.key]) {
-            self.emit('insert', {source: self, key: e.key});
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.onTableDelete = function(e) {
-    var self = this;
-    console.log('DataSource.prototype.onTableDelete', e);
-    self._refresh();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.refill = function(params) {
-    var self = this;
-    return Promise.try(function () {
-        self.offset = 0;
-        return self._getData(params).then(function (data) {
-            var _new = self.getKeysAndChilds(data.rows);
-            var _old = self;
-            _old.rowsByKey = _new.rowsByKey;
-            _old.childs    = _new.childs;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.frame = function(params, frame) {
-    var self = this;
-    return Promise.try(function () {
-        self.offset = (frame - 1) * self.limit;
-        self._getData(params).then(function (data) {
-            var _new = self.getKeysAndChilds(data.rows);
-            var _old = self;
-            _old.rowsByKey = _new.rowsByKey;
-            _old.childs    = _new.childs;
-            self.emit('newFrame', {source: self});
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype._refresh = function() {
-    var self = this;
-    return Promise.try(function () {
-        var page = self.getPage();
-        var params = (page !== null) ? page.params : {};
-        return self._getData(params).then(function (data) {
-            if (self.data.dumpFirstRowToParams === 'true') {
-                self.dumpFirstRowToParams(data.rows);
-            }
-            var _old = self;
-            var _new = self.getKeysAndChilds(data.rows);		// generate hash table with new keys
-            self.sync(_old, _new, '[null]');
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype._getData = function(params) {
-    var self = this;
-    console.log('DataSource.prototype._getData', params);
-    return Promise.try(function () {
-        var page = self.getPage();
-        var form = self.getForm();
-        var _params = QForms.merge(params, self.params);
-        if (self.limit) {
-            _params['offset'] = self.offset;
-        }
-        var args = {
-            action        : 'frame',
-            page          : (page !== null ? page.name : ''),
-            form          : (form !== null ? form.name : ''),
-            ds            : self.name,
-            params        : _params,
-            parentPageName: page ? page.parentPageName : undefined
-        };
-        return QForms.doHttpRequest(args).then(function (data) {
-            console.log('data:', data);
-            if (data.time) {
-                console.log('_getData time:', data.time);
-            }
-            if (!(data.rows instanceof Array)) {
-                throw new Error('rows must be array.');
-            }
-            self.count  = data.count;
-            self.length = data.rows.length;
-            return data;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// copy new values to data source row
-//
-DataSource.prototype.copyNewValues = function(oldRow, newRow) {
-    var self = this;
-    for (var columnName in newRow) {
-        oldRow[columnName] = newRow[columnName];
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// remove row from current tree item list and move it ot it's new tree item list
-//
-DataSource.prototype._goneRow = function(_old, _new, parentKey, i, key) {
-    var self = this;
-    var newRow = _new.rowsByKey[key];
-    var oldRow = _old.rowsByKey[key];
-    var newParentKey = self.getRowParentKey(newRow);
-    var index = _new.childs[newParentKey].keysByIndex.indexOf(key);
-    self.removeFromChilds(_old.childs, parentKey, i, key);
-    self.addToChilds(_old.childs, newParentKey, index, key, oldRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// add row to new tree item list after deleting from it old tree item list
-DataSource.prototype._comeRow = function(_old, _new, parentKey, i, key) {
-    var self = this;
-    var oldRow = _old.rowsByKey[key];
-    var oldParentKey = self.getRowParentKey(oldRow);
-    var index = _old.childs[oldParentKey].keysByIndex.indexOf(key);
-    self.removeFromChilds(_old.childs, oldParentKey, index, key);
-    self.addToChilds(_old.childs, parentKey, i, key, oldRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.removeFromChilds = function(childs, parentKey, i, key) {
-    var self = this;
-    childs[parentKey].rowsByIndex.splice(i, 1);
-    childs[parentKey].keysByIndex.splice(i, 1);
-    delete childs[parentKey].rowsByKey[key];
-    // remove empty list
-    if (childs[parentKey].rowsByIndex.length === 0) {
-        delete childs[parentKey];
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.addToChilds = function(childs, parentKey, i, key, row) {
-    var self = this;
-    if (childs[parentKey] === undefined) {
-        childs[parentKey] = {
-            rowsByIndex:[],
-            keysByIndex:[],
-            rowsByKey:{}
-        };
-    }
-    childs[parentKey].rowsByIndex.splice(i, 0, row);
-    childs[parentKey].keysByIndex.splice(i, 0, key);
-    childs[parentKey].rowsByKey[key] = row;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.moveChilds = function(childs, oldIndex, newIndex) {
-    var self = this;
-    QForms.moveArrayElement(childs.rowsByIndex, oldIndex, newIndex);
-    QForms.moveArrayElement(childs.keysByIndex, oldIndex, newIndex);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// tree sync algorithm
-// compare old and new list, change it and send notification to every row that has been changed
-// add, remove, move, come, gone for widgets to be able update it's view
-//
-DataSource.prototype.sync = function(_old, _new, parentKey) {
-    var self = this;
-    var oldChilds = _old.childs[parentKey];
-    var newChilds = _new.childs[parentKey];
-    if (oldChilds === undefined && newChilds === undefined) {
-        return;
-    }
-    var nKey = oKey = null, i = 0;
-    do {
-        if (newChilds !== undefined) {
-            var nKey = i < newChilds.rowsByIndex.length ? newChilds.keysByIndex[i] : null;
-        } else {
-            var nKey = null;
-        }
-        if (oldChilds !== undefined) {
-            var oKey = i < oldChilds.rowsByIndex.length ? oldChilds.keysByIndex[i] : null;
-        } else {
-            var oKey = null;
-        }
-        if (nKey !== null && oKey !== null) { // if not reached the end of each list
-            if (nKey === oKey) {
-                self.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
-                self.sync(_old, _new, oKey);// for the child rows
-                self.fireRefillRow(oKey, i);
-                i++;
-            } else { // if keys not equal then
-                if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
-                    if (!(oKey in _new.rowsByKey)) {  // if the old key in a new global list does not exists, then the row is removed
-                        self.sync(_old, _new, oKey);
-                        self.removeFromChilds(_old.childs, parentKey, i, oKey);
-                        delete _old.rowsByKey[oKey];
-                        self.fireRemoveRow(oKey);
-                    } else {
-                        self._goneRow(_old, _new, parentKey, i, oKey);
-                        self.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
-                        var newRow = _new.rowsByKey[oKey];
-                        var newParentKey = self.getRowParentKey(newRow);
-                        var newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
-                        self.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
-                    }
-                } else if (!(nKey in oldChilds.rowsByKey)) {  // If the new key in the old local list is not listed, then ...
-                    // if the new key in the old global list does not listed, the row is added
-                    if (!(nKey in _old.rowsByKey)) {
-                        self.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
-                        _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
-                        self.sync(_old, _new, nKey);
-                        self.fireNewRow(i, parentKey, nKey);
-                    } else {
-                        self._comeRow(_old, _new, parentKey, i, nKey);
-                        self.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
-                        self.sync(_old, _new, nKey);
-                        var oldRow = _old.rowsByKey[nKey];
-                        var oldParentKey = self.getRowParentKey(oldRow);
-                        self.fireComeRow(parentKey, nKey, oldParentKey, i);
-                    }
-                    i++;
-                } else { // if the key is in both of local lists, then the row moved
-                    var oldIndexOfNewKey = oldChilds.keysByIndex.indexOf(nKey);
-                    var newIndexOfOldKey = newChilds.keysByIndex.indexOf(oKey);
-                    if (Math.abs(newIndexOfOldKey - i) > Math.abs(oldIndexOfNewKey - i)) {
-                        self.moveChilds(oldChilds, i, newIndexOfOldKey);
-                        self.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
-                        self.sync(_old, _new, oldChilds.keysByIndex[i]);
-                        self.fireMoveRow(i, newIndexOfOldKey, oKey, parentKey);
-                        i++;
-                    } else {
-                        self.moveChilds(oldChilds, oldIndexOfNewKey, i);
-                        self.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
-                        self.sync(_old, _new, oldChilds.keysByIndex[i]);
-                        self.fireMoveRow(oldIndexOfNewKey, i, nKey, parentKey);
-                        i++;
-                    }
-                }
-            }
-        } else { // if one of the lists has ended
-            if (nKey === null && oKey !== null) { // if last element has been removed
-                if (!(oKey in _new.rowsByKey)) { // if the old key in a new global list does not listed, then the row is removed
-                    self.sync(_old, _new, oKey);
-                    self.removeFromChilds(_old.childs, parentKey, i, oKey);
-                    delete _old.rowsByKey[oKey];
-                    self.fireRemoveRow(oKey);
-                } else {
-                    self._goneRow(_old, _new, parentKey, i, oKey);
-                    self.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
-                    var newRow = _new.rowsByKey[oKey];
-                    var newParentKey = self.getRowParentKey(newRow);
-                    var newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
-                    self.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
-                }
-            }
-            if (nKey !== null && oKey === null) { // if last element appeared
-                if (!(nKey in _old.rowsByKey)) { // if the new key in the old global list does not listed, the row is added
-                    self.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
-                    _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
-                    self.sync(_old, _new, nKey);
-                    self.fireNewRow(i, parentKey, nKey);
-                } else {
-                    self._comeRow(_old, _new, parentKey, i, nKey);
-                    self.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
-                    self.sync(_old, _new, nKey);
-                    var oldRow = _old.rowsByKey[nKey];
-                    var oldParentKey = self.getRowParentKey(oldRow);
-                    self.fireComeRow(parentKey, nKey, oldParentKey, i);
-                }
-                i++;
-            }
-        }
-    } while (nKey !== null || oKey !== null);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireRefillRow = function(key, i) {
-    var self = this;
-    self.emit('refillRow', {source: self, key: key, i: i});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireRemoveRow = function(key) {
-    var self = this;
-    self.emit('removeRow', {source: self, key: key});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireNewRow = function(i, parentKey, key) {
-    var self = this;
-    //console.log('fireNewRow: ' + i);
-    self.emit('newRow', {source: self, i: i, parentKey: parentKey, key: key});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireMoveRow = function(oldIndex, newIndex, key, parentKey) {
-    var self = this;
-    self.emit('moveRow', {source: self, oldIndex: oldIndex, newIndex: newIndex, key: key, parentKey: parentKey});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireGoneRow = function(parentKey, key, newParentKey, newIndex) {
-    var self = this;
-    //console.log('fireGoneRow');
-    self.emit('goneRow', {source: self, parentKey: parentKey, key: key, newParentKey: newParentKey, newIndex: newIndex});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.fireComeRow = function(parentKey, key, oldParentKey, newIndex) {
-    var self = this;
-    //console.log('fireComeRow');
-    self.emit('comeRow', {source: self, parentKey: parentKey, key: key, oldParentKey: oldParentKey, newIndex: newIndex});
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.insert = function(row) {
-    var self = this;
-    return Promise.try(function () {
-        var page = self.getPage();
-        if (self.data.table === '') {
+    // tree sync algorithm
+    // compare old and new list, change it and send notification to every row that has been changed
+    // add, remove, move, come, gone for widgets to be able update it's view
+    //
+    sync(_old, _new, parentKey) {
+        const oldChilds = _old.childs[parentKey];
+        const newChilds = _new.childs[parentKey];
+        if (oldChilds === undefined && newChilds === undefined) {
             return;
         }
-        var data = {
+        var nKey = oKey = null, i = 0;
+        do {
+            if (newChilds !== undefined) {
+                var nKey = i < newChilds.rowsByIndex.length ? newChilds.keysByIndex[i] : null;
+            } else {
+                var nKey = null;
+            }
+            if (oldChilds !== undefined) {
+                var oKey = i < oldChilds.rowsByIndex.length ? oldChilds.keysByIndex[i] : null;
+            } else {
+                var oKey = null;
+            }
+            if (nKey !== null && oKey !== null) { // if not reached the end of each list
+                if (nKey === oKey) {
+                    this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                    this.sync(_old, _new, oKey);// for the child rows
+                    this.fireRefillRow(oKey, i);
+                    i++;
+                } else { // if keys not equal then
+                    if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
+                        if (!(oKey in _new.rowsByKey)) {  // if the old key in a new global list does not exists, then the row is removed
+                            this.sync(_old, _new, oKey);
+                            this.removeFromChilds(_old.childs, parentKey, i, oKey);
+                            delete _old.rowsByKey[oKey];
+                            this.fireRemoveRow(oKey);
+                        } else {
+                            this._goneRow(_old, _new, parentKey, i, oKey);
+                            this.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
+                            const newRow = _new.rowsByKey[oKey];
+                            const newParentKey = this.getRowParentKey(newRow);
+                            const newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
+                            this.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
+                        }
+                    } else if (!(nKey in oldChilds.rowsByKey)) {  // If the new key in the old local list is not listed, then ...
+                        // if the new key in the old global list does not listed, the row is added
+                        if (!(nKey in _old.rowsByKey)) {
+                            this.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
+                            _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
+                            this.sync(_old, _new, nKey);
+                            this.fireNewRow(i, parentKey, nKey);
+                        } else {
+                            this._comeRow(_old, _new, parentKey, i, nKey);
+                            this.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
+                            this.sync(_old, _new, nKey);
+                            const oldRow = _old.rowsByKey[nKey];
+                            const oldParentKey = this.getRowParentKey(oldRow);
+                            this.fireComeRow(parentKey, nKey, oldParentKey, i);
+                        }
+                        i++;
+                    } else { // if the key is in both of local lists, then the row moved
+                        const oldIndexOfNewKey = oldChilds.keysByIndex.indexOf(nKey);
+                        const newIndexOfOldKey = newChilds.keysByIndex.indexOf(oKey);
+                        if (Math.abs(newIndexOfOldKey - i) > Math.abs(oldIndexOfNewKey - i)) {
+                            this.moveChilds(oldChilds, i, newIndexOfOldKey);
+                            this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                            this.sync(_old, _new, oldChilds.keysByIndex[i]);
+                            this.fireMoveRow(i, newIndexOfOldKey, oKey, parentKey);
+                            i++;
+                        } else {
+                            this.moveChilds(oldChilds, oldIndexOfNewKey, i);
+                            this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
+                            this.sync(_old, _new, oldChilds.keysByIndex[i]);
+                            this.fireMoveRow(oldIndexOfNewKey, i, nKey, parentKey);
+                            i++;
+                        }
+                    }
+                }
+            } else { // if one of the lists has ended
+                if (nKey === null && oKey !== null) { // if last element has been removed
+                    if (!(oKey in _new.rowsByKey)) { // if the old key in a new global list does not listed, then the row is removed
+                        this.sync(_old, _new, oKey);
+                        this.removeFromChilds(_old.childs, parentKey, i, oKey);
+                        delete _old.rowsByKey[oKey];
+                        this.fireRemoveRow(oKey);
+                    } else {
+                        this._goneRow(_old, _new, parentKey, i, oKey);
+                        this.copyNewValues(_old.rowsByKey[oKey], _new.rowsByKey[oKey]);
+                        const newRow = _new.rowsByKey[oKey];
+                        const newParentKey = this.getRowParentKey(newRow);
+                        const newIndex = _new.childs[newParentKey].keysByIndex.indexOf(oKey);
+                        this.fireGoneRow(parentKey, oKey, newParentKey, newIndex);
+                    }
+                }
+                if (nKey !== null && oKey === null) { // if last element appeared
+                    if (!(nKey in _old.rowsByKey)) { // if the new key in the old global list does not listed, the row is added
+                        this.addToChilds(_old.childs, parentKey, i, nKey, newChilds.rowsByIndex[i]);
+                        _old.rowsByKey[nKey] = newChilds.rowsByIndex[i];
+                        this.sync(_old, _new, nKey);
+                        this.fireNewRow(i, parentKey, nKey);
+                    } else {
+                        this._comeRow(_old, _new, parentKey, i, nKey);
+                        this.copyNewValues(_old.rowsByKey[nKey], _new.rowsByKey[nKey]);
+                        this.sync(_old, _new, nKey);
+                        const oldRow = _old.rowsByKey[nKey];
+                        const oldParentKey = this.getRowParentKey(oldRow);
+                        this.fireComeRow(parentKey, nKey, oldParentKey, i);
+                    }
+                    i++;
+                }
+            }
+        } while (nKey !== null || oKey !== null);
+    }
+
+    fireRefillRow(key, i) {
+        this.emit('rowUpdate', {source: this, key: key, i: i});
+    }
+
+    fireRemoveRow(key) {
+        this.emit('removeRow', {source: this, key: key});
+    }
+
+    fireNewRow(i, parentKey, key) {
+        //console.log('fireNewRow: ' + i);
+        this.emit('newRow', {source: this, i: i, parentKey: parentKey, key: key});
+    }
+
+    fireMoveRow(oldIndex, newIndex, key, parentKey) {
+        this.emit('moveRow', {source: this, oldIndex: oldIndex, newIndex: newIndex, key: key, parentKey: parentKey});
+    }
+
+    fireGoneRow(parentKey, key, newParentKey, newIndex) {
+        //console.log('fireGoneRow');
+        this.emit('goneRow', {source: this, parentKey: parentKey, key: key, newParentKey: newParentKey, newIndex: newIndex});
+    }
+
+    fireComeRow(parentKey, key, oldParentKey, newIndex) {
+        //console.log('fireComeRow');
+        this.emit('comeRow', {source: this, parentKey: parentKey, key: key, oldParentKey: oldParentKey, newIndex: newIndex});
+    }
+
+    async insert(row) {
+        console.log('DataSource.insert', row);
+        if (this.data.table === '') throw new Error('no data source table to insert');
+        const page = this.getPage();
+        let data = {
             action        : 'insert',
-            page          : self.form.page.name,
-            form          : self.form.name,
-            ds            : self.name,
+            page          : this.form.page.name,
+            form          : this.form.name,
+            ds            : this.name,
             row           : row,
-            parentPageName: page ? page.parentPageName : null
+            parentPageName: page.parentPageName || null
         };
-        var fileColumns = [];
-        for (var column in row) {
+        /*
+        const fileColumns = [];
+        for (const column in row) {
             if (row[column] instanceof File) {
                 fileColumns.push(column);
             }
         }
         if (fileColumns.length > 0) {
-            var formData = new FormData();
-            fileColumns.forEach(function(column) {
+            const formData = new FormData();
+            fileColumns.forEach((column) => {
                 formData.append(column, row[column]);
                 delete row[column];
             });
             formData.append('__data', JSON.stringify(data));
             data = formData;
         }
-        return QForms.doHttpRequest(data).then(function (data) {
+        */
+        const data2 = await this.getApp().request(data);
 
-            // this code is actual only in new mode for row form
-            if (row === self.insertRow) {
+        /*
+        // this code is actual only in new mode for row form
+        if (row === this.insertRow) {
 
-                // set row key and add inserted row to rows
-                self.setRowKey(self.insertRow, data.key);
-                self.data.rows.push(self.insertRow);
-                self.insertRow = null;
+            // set row key and add inserted row to rows
+            this.setRowKey(this.insertRow, data2.key);
+            this.data.rows.push(this.insertRow);
+            this.insertRow = null;
 
-                // creating index with for rows
-                var vals = self.getKeysAndChilds(self.data.rows);
-                self.rowsByKey = vals.rowsByKey;
-                self.childs    = vals.childs;
+            // creating index with for rows
+            const vals = this.getKeysAndChilds(this.data.rows);
+            this.rowsByKey = vals.rowsByKey;
+            this.childs    = vals.childs;
 
-                // save key params for refill
-                var params = QForms.keyToParams(data.key);
-                for (var name in params) {
-                    self.params[name] = params[name];
-                }
+            // save key params for refill
+            const params = QForms.keyToParams(data2.key);
+            for (const name in params) {
+                this.params[name] = params[name];
             }
+        }*/
 
-            // fire insert event
-            self.form.page.app.tables[self.fullTableName].emit('insert', {source: self, key: data.key});
-            return data.key;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.delete = function(key) {
-    var self = this;
-    var page = self.getPage();
-    if (self.data.table === '') {
-        return;
+        // fire insert event
+        // this.getTable().emit('insert', {source: this, key: data2.key});
+        return data2.key;
     }
-    // check if removed row has child rows
-    if (self.childs[key] !== undefined) {
-        //console.log(self.childs[key]);
-        alert("Row can't be removed as it contains child rows.");
-        return;
-    }
-    var args = {
-        action        : '_delete',
-        page          : self.form.page.name,
-        form          : self.form.name,
-        ds            : self.name,
-        row           : self.rowsByKey[key],
-        parentPageName: page ? page.parentPageName : undefined
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        self.form.page.app.tables[self.fullTableName].emit('delete', {source: self, key: key});
-    });
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.newRow = function(row) {
-    var self = this;
-    if (self.data.rows.length > 0) {
-        throw new Error('Rows can be added to empty data sources only in new mode.');
+    async delete(key) {
+        console.log('DataSource.delete:', key);
+        const page = this.getPage();
+        if (!this.data.table) {
+            throw new Error(`no table in data source: ${this.name}`);
+        }
+        // check if removed row has child rows
+        if (this.childs[key] !== undefined) {
+            //console.log(this.childs[key]);
+            alert("Row can't be removed as it contains child rows.");
+            return;
+        }
+        const args = {
+            action        : '_delete',
+            page          : this.form.page.name,
+            form          : this.form.name,
+            ds            : this.name,
+            row           : this.rowsByKey[key],
+            parentPageName: page ? page.parentPageName : undefined
+        };
+        const data = await this.getApp().request(args);
+        this.getTable().emit('delete', {source: this, key: key});
     }
-    self.insertRow = row;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getForm = function() {
-    var self = this;
-    if (self.form !== null) {
-        return self.form;
-    } else {
-        return null;
+    newRow(row) {
+        console.log('DataSource.newRow', row);
+        if (this.data.rows.length > 0) {
+            throw new Error('Rows can be added to empty data sources only in new mode.');
+        }
+        this.insertRow = row;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getPage = function() {
-    var self = this;
-    if (self.page !== null) {
-        return self.page;
-    } else if (self.form !== null) {
-        return self.form.page;
-    } else {
-        return null;
+    getSingleRow() {
+        if (this.insertRow) return this.insertRow;
+        if (this.data.rows.length > 0) return this.data.rows[0];
+        throw new Error('no single row');
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getApp = function() {
-    var self = this;
-    if (self.form !== null) {
-        return self.form.page.app;
-    } else if (self.page !== null) {
-        return self.page.app;
-    } else if (self.parent instanceof Application) {
-        return self.parent;
+    getForm() {
+        return this.form;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.dumpFirstRowToParams = function(rows) {
-    var self = this;
-    var page = self.getPage();
-    if (page !== null && rows[0] !== undefined) {
-        var row = rows[0];
-        var ns = self.getNamespace();
-        for (var column in row) {
-            var name = ns + '.' + column;
-            var value = row[column];
-            page.params[name] = value;
+    getPage() {
+        if (this.page !== null) {
+            return this.page;
+        } else if (this.form !== null) {
+            return this.form.page;
+        } else {
+            return null;
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getNamespace = function() {
-    var self = this;
-    var form = self.getForm();
-    var page = self.getPage();
-    if (form !== null) {
-        return self.form.page.name + '.' + self.form.name + '.' + self.name;
-    } else if (page !== null) {
-        return self.page.name + '.' + self.name;
-    } else {
-        return self.name;
+    getApp() {
+        if (this.form !== null) {
+            return this.form.page.app;
+        } else if (this.page !== null) {
+            return this.page.app;
+        } else if (this.parent instanceof Application) {
+            return this.parent;
+        }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getRow = function(key) {
-    var self = this;
-    return self.rowsByKey[key];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getRows = function(parentKey) {
-    var self = this;
-    if (parentKey === undefined) {
-        parentKey = '[null]';
+    dumpFirstRowToParams(rows) {
+        const page = this.getPage();
+        if (page !== null && rows[0] !== undefined) {
+            const row = rows[0];
+            const ns = this.getNamespace();
+            for (const column in row) {
+                const name = ns + '.' + column;
+                page.params[name] = row[column];
+            }
+        }
     }
-    return (self.childs[parentKey] !== undefined) ? self.childs[parentKey].rowsByIndex : [];
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSource.prototype.getRowByIndex = function(i) {
-    var self = this;
-    if (i === 0 && self.insertRow !== null) {
-        return self.insertRow;
-    } else {
-        return self.childs['[null]'].rowsByIndex[i];
+    getNamespace() {
+        const form = this.getForm();
+        const page = this.getPage();
+        if (form !== null) {
+            return this.form.page.name + '.' + this.form.name + '.' + this.name;
+        } else if (page !== null) {
+            return this.page.name + '.' + this.name;
+        } else {
+            return this.name;
+        }
     }
-};
+
+    getRow(key) {
+        return this.rowsByKey[key];
+    }
+
+    getRows(parentKey) {
+        if (parentKey === undefined) {
+            parentKey = '[null]';
+        }
+        return (this.childs[parentKey] !== undefined) ? this.childs[parentKey].rowsByIndex : [];
+    }
+
+    getRowByIndex(i) {
+        if (i === 0 && this.insertRow !== null) {
+            return this.insertRow;
+        } else {
+            return this.childs['[null]'].rowsByIndex[i];
+        }
+    }
+
+    getFullName() {
+        return `${this.parent.getFullName()}.${this.name}`;
+    }
+
+    discard() {
+        console.log('DataSource.discard', this.getFullName());
+        if (this.insertRow) throw new Error('discard not allowed in insert mode');
+        if (!this.isChanged()) throw new Error(`no changes in data source ${this.getFullName()}`);
+        const key = Object.keys(this.changes)[0];
+        const columns = Object.keys(this.changes[key]);
+        this.changes = {};
+        // this.emit('discard', {source: this, columns});
+        return columns;
+    }
+
+    static keyToParams(key, paramName = 'key') {
+        if (typeof key !== 'string') throw new Error('key not string');
+        const params = {};
+        const arr = JSON.parse(key);
+        if (arr.length === 1) {
+            params[paramName] = arr[0];
+        } else  if (arr.length > 1) {
+            for (let i = 0; i < arr.length; i++) {
+                params[`${paramName}${i + 1}`] = arr[i];
+            }
+        } else {
+            throw new Error(`invalid key: ${key}`);
+        }
+        return params;
+    }
+
+    getFullTableName() {
+        if (!this.data.database) throw new Error('no database');
+        if (!this.data.table) throw new Error('no table');
+        return `${this.data.database}.${this.data.table}`;
+    }
+}

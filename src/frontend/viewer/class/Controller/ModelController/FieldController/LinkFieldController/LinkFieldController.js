@@ -1,39 +1,35 @@
 'use strict';
 
-QForms.inherits(LinkFieldController, FieldController);
+class LinkFieldController extends FieldController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function LinkFieldController(model, parent) {
-    var self = this;
-    LinkFieldController.super_.call(self, model, parent);
-    //this.eventClick = new QForms.Event(this);
+    constructor(model, parent) {
+        super(model, parent);
+    }
+
+    fill(row, view) {
+        const self = this;
+        super.fill(row, view);
+        $(view).children().click(function() {
+            self._onClick(this);
+        });
+    }
+
+    getStringValue(view) {
+        // console.log('LinkFieldController.getStringValue', view.firstElementChild);
+        return view.firstElementChild.innerHTML;
+    }
+
+    setStringValue(stringValue, view) {
+        view.firstElementChild.innerHTML = stringValue;
+    }
+
+    setValue(value, view) {
+        this.setStringValue(this.valueToString(value), view);
+    }
+
+    _onClick(el) {
+        const view = el.parentNode;
+        this.emit('click', {source: this, view: view, row: view.dbRow, el: el, field: this});
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-LinkFieldController.prototype.fill = function(row, view) {
-    var self = this;
-    LinkFieldController.super_.prototype.fill.call(self, row, view);
-    $(view).children().click(function() {
-        self._onClick(this);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-LinkFieldController.prototype.getValue = function (view) {
-    var self = this;
-    return view.firstElementChild.innerHTML;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-LinkFieldController.prototype.setValue = function (value, view) {
-    var self = this;
-    view.firstElementChild.innerHTML = value;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-LinkFieldController.prototype._onClick = function (el) {
-    var self = this;
-    var view = el.parentNode;
-    // event
-    self.emit('click', {source: self, view: view, row: view.dbRow, el: el, field: self});
-};

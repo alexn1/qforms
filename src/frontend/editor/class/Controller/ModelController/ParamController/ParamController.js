@@ -1,28 +1,34 @@
 'use strict';
 
-QForms.inherits(ParamController, ModelController);
+class ParamController extends ModelController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ParamController(model, item) {
-    var self = this;
-    ModelController.call(self, model);
-    self.item = item;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParamController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {'action': 'delete', 'caption': 'Delete'}
-    ];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParamController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'delete':
-            self.delete();
-            break;
+    constructor(model, item) {
+        super(model);
+        this.item = item;
     }
-};
+
+    getActions() {
+        return [
+            {'action': 'delete', 'caption': 'Delete'}
+        ];
+    }
+
+    doAction(name) {
+        switch (name) {
+            case 'delete':
+                this.delete();
+                break;
+        }
+    }
+
+    static async getView(view) {
+        return await QForms.doHttpRequest({
+            controller: 'Param',
+            action    : 'getView',
+            params    : {
+                view: view
+            }
+        });
+    }
+
+}

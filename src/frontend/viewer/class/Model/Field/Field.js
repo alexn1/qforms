@@ -1,97 +1,108 @@
 'use strict';
 
-QForms.inherits(Field, Model);
+class Field extends Model {
+    constructor(name, parent, data) {
+        super(data, parent);
+        this.form = parent;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Field(name, parent, data) {
-    var self = this;
-    Field.super_.call(self);
-    self.name   = name;
-    self.form   = parent;
-    self.data   = data;
-    self.parent = parent;
-}
+    init() {
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.init = function() {
+    deinit() {
+        //console.log('Field.deinit: ' + this.name);
+    }
 
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.deinit = function() {
-    //console.log('Field.prototype.deinit: ' + this.name);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.replaceThis = function(value) {
-    var self = this;
-    return value.replace(/\{([@\w\.]+)\}/g, function (text, name) {
-        if (name.indexOf('.') !== -1) {
-            var arr = name.split('.');
-            if (arr[0] === 'this') {
-                arr[0] = self.form.page.name;
+    replaceThis(value) {
+        return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {
+            if (name.indexOf('.') !== -1) {
+                let arr = name.split('.');
+                if (arr[0] === 'this') {
+                    arr[0] = this.form.page.name;
+                }
+                if (arr[0] === 'parent' && this.form.page.parentPageName) {
+                    arr[0] = this.form.page.parentPageName;
+                }
+                return '{' + arr.join('.') + '}';
+            } else {
+                return text;
             }
-            if (arr[0] === 'parent' && self.form.page.parentPageName) {
-                arr[0] = self.form.page.parentPageName;
+        });
+    }
+
+    fillDefaultValue(row) {
+        // console.log('Field.fillDefaultValue', this.getFullName());
+        if (this.data.column) {
+            const defaultValue = this.replaceThis(this.data.defaultValue);
+            const params = {
+                ...this.form.page.params,
+                ...this.form.page.app.data.params
+            };
+            const code = QForms.templateValue(defaultValue, params);
+            let value;
+            try {
+                //console.log('eval: ' + code);
+                value = eval(code);
+                if (value !== undefined) {
+                    row[this.data.column] = value;
+                }
+            } catch (err) {
+                throw new Error(`[${this.getFullName()}] default value error: ${err.toString()}`);
             }
-            return '{' + arr.join('.') + '}';
+        }
+    }
+
+    valueToParams(row) {
+        // console.log('Field.valueToParams', this.name);
+        if (this.data.column) {
+            const fullName = this.getFullName();
+            this.form.page.params[fullName] = this.getValue(row);
+        }
+    }
+
+    setValue(row, value) {
+        console.log('Field.setValue', this.name);
+        if (!this.data.column) throw new Error(`field has no column: ${this.name}`);
+        const newValue = this.form.dataSource.setValue(row, this.data.column, value);
+        this.valueToParams(row);
+        return newValue;
+    }
+
+    isChanged(row) {
+        // console.log('Field.isChanged', this.name);
+        if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
+        return this.getDataSource().isRowColumnChanged(row, this.data.column);
+    }
+
+    getValue(row) {
+        // console.log('Field.getValue', this.getFullName());
+        let value;
+        if (this.data.column) {
+            value = this.form.dataSource.getValue(row, this.data.column);
+        } else if (this.data.value) {
+            value = eval(this.data.value);
         } else {
-            return text;
+            throw new Error(`no column and no value in field: ${this.getFullName()}`);
         }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.fillDefaultValue = function(row) {
-    var self = this;
-    if (self.data.column !== undefined) {
-        var column = self.data.column;
-        var defaultValue = self.replaceThis(self.data.defaultValue);
-        var params = {};
-        $.extend(params, self.form.page.params);
-        $.extend(params, self.form.page.app.data.params);
-        var code = QForms.templateValue(defaultValue, params);
-        try {
-            //console.log('eval: ' + code);
-            var value = eval(code);
-        } catch (e) {
-            throw new Error('[' + self.getFullName() + '] default value error: ' + e.toString());
-        }
-        if (value === undefined) {
-            value = null;
-        }
-        row[column] = value;
+        return value;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.valueToParams = function(row) {
-    var self = this;
-    if (self.data.column !== undefined) {
-        var fullName = self.getFullName();
-        self.form.page.params[fullName] = row[self.data.column];
+    getFullName() {
+        return [
+            this.form.page.name,
+            this.form.name,
+            this.name
+        ].join('.');
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.save = function (row, value) {
-    var self = this;
-    self.form.dataSource.setValue(row, self.data.column, value);
-    self.valueToParams(row);
-};
+    getDataSource() {
+        return this.form.getDataSource();
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.getValue = function (row) {
-    var self = this;
-    return row[self.data.column];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.getFullName = function () {
-    var self = this;
-    return [
-        self.form.page.name,
-        self.form.name,
-        self.name
-    ].join('.');
-};
+    getColumnType() {
+        if (this.data.column) {
+            return this.getDataSource().getColumnType(this.data.column);
+        }
+        return null;
+    }
+}

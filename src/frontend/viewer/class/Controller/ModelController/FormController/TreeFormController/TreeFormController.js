@@ -1,71 +1,73 @@
 'use strict';
 
-QForms.inherits(TreeFormController, FormController);
+class TreeFormController extends FormController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function TreeFormController(model, view, parent) {
-    var self = this;
-    FormController.call(self, model, view, parent);
-    self.tree = null;
+    constructor(model, view, parent) {
+        super(model, view, parent);
+        this.tree = null;
+    }
+
+    init() {
+        const self = this;
+        super.init();
+        $(this.view).find('button.newRoot').click(function() {self.onNewRootClick(this);});
+        $(this.view).find('button.new').click(function()     {self.onNewClick(this);    });
+        $(this.view).find('button.delete').click(function()  {self.onDeleteClick(this); });
+        const treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}', this.model.page.id).replace('{formName}', this.model.name);
+        const tree = this.view.querySelector(treeSelector);
+        this.tree = new DataTreeWidget(tree, this);
+        this.tree.init();
+        this.tree.on('select', this.listeners.select = this.onTreeItemSelect.bind(this));
+        this.tree.on('doubleClick', this.listeners.doubleClick = this.onTreeItemDoubleClick.bind(this));
+    }
+
+    deinit() {
+        super.deinit();
+        this.tree.off('select', this.listeners.select);
+        this.tree.off('doubleClick', this.listeners.doubleClick);
+        this.tree.deinit();
+    }
+
+    fill() {
+        super.fill();
+        this.tree.fill();
+    }
+
+    onTreeItemSelect(e) {
+        //console.log(this.tree.active);
+    }
+
+    onTreeItemDoubleClick(e) {
+        this.edit(e.item.qRow);
+    }
+
+    onNewRootClick(ctrl) {
+        this.model.newRoot();
+    }
+
+    onNewClick(ctrl) {
+        this.new(this.tree.active.qRow);
+    }
+
+    onDeleteClick(ctrl) {
+        this.model.delete(this.tree.active.qRow);
+    }
+
+    new(row) {
+        const key = this.model.dataSource.getRowKey(row);
+        this.openPage({
+            name   : this.model.data.itemEditPage,
+            newMode: true,
+            params : QForms.keyToParams(key, 'parentKey')
+        });
+    }
+
+    edit(row) {
+        const key = this.model.dataSource.getRowKey(row);
+        this.openPage({
+            name: this.model.data.itemEditPage,
+            key : key
+        });
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.init = function() {
-    var self = this;
-    FormController.prototype.init.call(self);
-    $(self.view).find('button.newRoot').click(function() {self.onNewRootClick(this);});
-    $(self.view).find('button.new').click(function()     {self.onNewClick(this);    });
-    $(self.view).find('button.delete').click(function()  {self.onDeleteClick(this); });
-    var treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}', self.model.page.id).replace('{formName}', self.model.name);
-    var tree = self.view.querySelector(treeSelector);
-    self.tree = new DataTreeWidget(tree, self);
-    self.tree.init();
-    self.tree.on('select', self.listeners.select = self.onTreeItemSelect.bind(self));
-    self.tree.on('doubleClick', self.listeners.doubleClick = self.onTreeItemDoubleClick.bind(self));
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.deinit = function() {
-    var self = this;
-    FormController.prototype.deinit.call(this);
-    self.tree.off('select', self.listeners.select);
-    self.tree.off('doubleClick', self.listeners.doubleClick);
-    self.tree.deinit();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.fill = function() {
-    var self = this;
-    FormController.prototype.fill.call(self);
-    self.tree.fill();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.onTreeItemSelect = function(e) {
-    var self = this;
-    //console.log(this.tree.active);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.onTreeItemDoubleClick = function(e) {
-    var self = this;
-    self.model.edit(e.item.qRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.onNewRootClick = function(ctrl) {
-    var self = this;
-    self.model.newRoot();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.onNewClick = function(ctrl) {
-    var self = this;
-    self.model.new(self.tree.active.qRow);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormController.prototype.onDeleteClick = function(ctrl) {
-    var self = this;
-    self.model.delete(self.tree.active.qRow);
-};

@@ -1,188 +1,168 @@
 'use strict';
 
-QForms.inherits(DatabaseController, DocumentController);
+class DatabaseController extends DocumentController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DatabaseController(model, item, applicationController) {
-    var self = this;
-    DatabaseController.super_.call(self, model);
-    self.item                  = item;
-    self.applicationController = applicationController;
-    self.paramsItem            = null;
-    self.treeTables            = null;
-    self.$divTableInfo         = null;
-    self.tableView             = null;
-    self.tableInfo             = null;
-    self.$btnCreateForm        = null;
-    self.tables                = null;
-    self.tableName             = null;
-}
+    constructor(model, item, applicationController) {
+        super(model);
+        this.item                  = item;
+        this.parent                = applicationController;
+        this.applicationController = applicationController;
+        this.paramsItem            = null;
+        this.tablesItem            = null;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.createTree = function() {
-    var self = this;
-    // params
-    self.paramsItem = self.item.addItem('Params');
-    if (self.model.data.params) {
-        for (var name in self.model.data.params) {
-            var paramData = self.model.data.params[name];
-            self.addParamItem(paramData);
+        // document view
+        this.treeTables            = null;
+        this.$divTableInfo         = null;
+        this.tableView             = null;
+        this.tableInfo             = null;
+        this.tables                = null;
+        this.tableName             = null;
+    }
+
+    createTree() {
+        // params
+        this.paramsItem = this.item.addItem('Params');
+        if (this.model.data.params) {
+            for (const name in this.model.data.params) {
+                const paramData = this.model.data.params[name];
+                this.addParamItem(paramData);
+            }
+        }
+
+        // tables
+        this.tablesItem = this.item.addItem('Tables');
+        if (this.model.data.tables) {
+            for (const name in this.model.data.tables) {
+                const tableData = this.model.data.tables[name];
+                this.addTableItem(tableData);
+            }
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.addParamItem = function(paramData) {
-    var self = this;
-    var caption = ParamController.prototype.getCaption(paramData);
-    var paramItem = self.paramsItem.addItem(caption);
-    var param = new Param(paramData, self.model);
-    paramItem.ctrl = new ParamController(param, paramItem);
-    return paramItem;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {'action':'newParam','caption':'New Param'},
-        //{'action':'','caption':'-'},
-        {'action':'delete','caption':'Delete'}
-    ];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'newParam':
-            self.actionNewParam();
-            break;
-        case 'delete':
-            self.delete();
-            break;
+    addParamItem(data) {
+        const caption = ParamController.prototype.getCaption(data);
+        const item = this.paramsItem.addItem(caption);
+        const param = new Param(data, this.model);
+        item.ctrl = new ParamController(param, item);
+        return item;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.actionNewParam = function() {
-    var self = this;
-    Param.prototype.getView('new.html').then(function (result) {
+    addTableItem(data) {
+        const caption = TableController.prototype.getCaption(data);
+        const item = this.tablesItem.addItem(caption);
+        const table = new Table(data, this.model);
+        item.ctrl = new TableController(table, item, this);
+        item.ctrl.createTree();
+        return item;
+    }
+
+    getActions() {
+        return [
+            {'action':'newParam','caption':'New Param'},
+            {'action':'newTable','caption':'New Table'},
+            {'action':'','caption':'-'},
+            {'action':'delete','caption':'Delete'}
+        ];
+    }
+
+    doAction(action) {
+        switch (action) {
+            case 'newParam':
+                this.actionNewParam();
+                break;
+            case 'newTable':
+                this.actionNewTable();
+                break;
+            case 'delete':
+                this.delete();
+                break;
+        }
+    }
+
+    async actionNewParam() {
+        const self = this;
+        const result = await ParamController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
-            var paramName = $("#myModal input[id='paramName']").val();
-            self.model.newParam(paramName).then(function (paramData) {
+            const paramName = $("#myModal input[id='paramName']").val();
+            self.model.newParam(paramName).then((paramData) => {
                 self.addParamItem(paramData).select();
             });
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='paramName']").focus();
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.createTab = function(docs) {
-    var self = this;
-    var name = self.model.data['@attributes'].name;
-    self.model.getView('DatabaseView/DatabaseView.html').then(function (result) {
-        var $div = $(result.view);
-        self.initView($div, result.data);
-        self.tab = docs.createTab($div.get(0), name, function(tab) {
-            tab.ctrl.tab = undefined;
-        });
-        self.tab.ctrl = self;
-        docs.selectTab(self.tab);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.initView = function($div, data) {
-    var self = this;
-    self.tables        = data.tables;
-    self.tableView     = data.tableView;
-    self.treeTables    = TreeWidget_createObject($div.find('.tcTables').get(0));
-    self.$divTableInfo = $div.find('.divTableInfo');
-    self.treeTables.on('select', self.listeners.select = self.onTableSelect.bind(self));
-    for (var i = 0; i < data.tables.length; i++) {
-        var row = data.tables[i];
-        self.treeTables.addItem(row[0]);
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.onTableSelect = function(e) {
-    var self = this;
-    self.tableName = e.item.caption;
-    self.model.getTableInfo(self.tableName).then(function (data) {
-        self.tableInfo = data.desc;
-        var html = QForms.render(self.tableView, data);
-        self.$divTableInfo.empty();
-        self.$divTableInfo.append(html);
-        self.$btnCreateForm = self.$divTableInfo.find('.btnCreateForm');
-        self.$btnCreateForm.click(function() {
-            self.createForm();
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DatabaseController.prototype.createForm = function() {
-    var self = this;
-    self.model.getView('newForm.ejs').then(function (result) {
-        var html = QForms.render(result.view, {
-            tables:self.tables,
-            tableName:self.tableName,
-            pages:Object.keys(self.applicationController.pageItems)
-        });
-        $(document.body).append(html);
-        $('#modal').on('hidden.bs.modal', function(e) {
-            $(this).remove();
-        });
-        $("#modal button[name='create']").click(function() {
-            var formPage    = $("#modal select[id='formPage']").val();
-            var formClass   = $("#modal select[id='formClass']").val();
-            var formName    = $("#modal input[id='formName']").val();
-            var formCaption = $("#modal input[id='formCaption']").val();
-            var pageItem = self.applicationController.pageItems[formPage];
-            var formWizard = new FormWizard({
-                    pageName    : formPage,
-                    className   : formClass,
-                    formName    : formName,
-                    formCaption : formCaption,
-                    databaseName: self.model.data['@attributes'].name,
-                    tableName   : self.tableName,
-                    tableColumns: self.tableInfo
-                }
-            );
-            /*
-            var todo = function() {
-                var params = formWizard.getFormParams();
-                pageItem.ctrl.model.newForm(params, function(formData) {
-                    pageItem.ctrl.addFormItem(formData).select();
-                    $('#modal').modal('hide');
+    actionNewTable() {
+        const self = this;
+        TableController.getView('new.html').then((result) => {
+            if (!result.view) throw new Error('actionNewTable: no view');
+            $(document.body).append(result.view);
+            $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+            $("#myModal button[name='create']").click(function() {
+                const tableName = $("#myModal input[id='tableName']").val();
+                self.model.newTable({name: tableName}).then((tableData) => {
+                    self.addTableItem(tableData).select();
                 });
-            };
-            if (pageItem.ctrl instanceof PageLinkController) {
-                self.applicationController.editorController.pageLinkToPage(pageItem).then(todo);
-            } else {
-                todo();
-            }
-            */
-            Promise.try(function () {
-                if (pageItem.ctrl instanceof PageLinkController) {
-                    return self.applicationController.editorController.pageLinkToPage(pageItem);
-                }
-            }).then(function () {
-                var params = formWizard.getFormParams();
-                pageItem.ctrl.model.newForm(params).then(function (formData) {
-                    pageItem.ctrl.addFormItem(formData).select();
-                    $('#modal').modal('hide');
-                });
+                $('#myModal').modal('hide');
             });
+            $('#myModal').modal('show');
+            $("#myModal input[id='tableName']").focus();
         });
-        $('#modal').modal('show');
-        $("#modal input[id='formPage']").focus();
-    });
-};
+    }
+
+    async createTab(docs) {
+        console.log('DatabaseController.createTab');
+        const result = await this.model.getView('DatabaseView/DatabaseView.html');
+        const $div = $(result.view);
+        this.initView($div, result.data);
+        super.createTab(docs, $div.get(0));
+    }
+
+    initView($div, data) {
+        this.tables        = data.tables;
+        this.tableView     = data.tableView;
+        this.treeTables    = TreeWidget_createObject($div.find('.tcTables').get(0));
+        this.$divTableInfo = $div.find('.divTableInfo');
+        this.treeTables.on('select', this.listeners.select = this.onTableSelect.bind(this));
+        for (let i = 0; i < data.tables.length; i++) {
+            //const row = data.tables[i];
+            //self.treeTables.addItem(row[0]);
+            const tableName = data.tables[i];
+            this.treeTables.addItem(tableName);
+        }
+    }
+
+    async onTableSelect(e) {
+        console.log('DatabaseController.onTableSelect');
+        this.tableName = e.item.caption;
+        const data = await this.model.getTableInfo(this.tableName);
+        this.tableInfo = data.tableInfo;
+        const html = QForms.render(this.tableView, data);
+        this.$divTableInfo.empty();
+        this.$divTableInfo.append(html);
+        this.$divTableInfo.find('.btnCreateTable').click(() => {
+            this.createTable();
+        });
+    }
+
+    async createTable() {
+        console.log('DatabaseController.createTable', this.tableInfo);
+        const params = {
+            name: this.tableName,
+            columns: this.tableInfo.map(column => ({
+                name    : column.name,
+                caption : column.name,
+                type    : column.type,
+                key     : column.key,
+                auto    : column.auto,
+                nullable: column.nullable
+            }))
+        };
+        const tableData = await this.model.newTable(params);
+        this.addTableItem(tableData).select();
+    }
+
+}

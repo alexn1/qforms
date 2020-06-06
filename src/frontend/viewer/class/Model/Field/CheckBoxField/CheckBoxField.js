@@ -1,9 +1,5 @@
 'use strict';
 
-QForms.inherits(CheckBoxField, Field);
+class CheckBoxField extends Field {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function CheckBoxField(name, form, data) {
-    var self = this;
-    Field.call(self, name, form, data);
 }

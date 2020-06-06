@@ -1,29 +1,29 @@
 <div class="TableView">
     <table>
         <thead>
-            <th>COLUMN_NAME</th>
-            <th>COLUMN_TYPE</th>
-            <th>IS_NULLABLE</th>
-            <th>COLUMN_KEY</th>
-            <th>COLUMN_DEFAULT</th>
-            <th>EXTRA</th>
-            <th>COLUMN_COMMENT</th>
+            <th>name</th>
+            <th>type</th>
+            <th>key</th>
+            <th>auto</th>
+            <th>nullable</th>
+            <th>comment</th>
+            <th>dbType</th>
         </thead>
         <tbody>
-            <%for (var i=0;i < desc.length;i++) {
-                var row = desc[i];%>
+            <%for (let i=0;i < tableInfo.length;i++) {
+                const row = tableInfo[i];%>
                 <tr>
-                    <td><%=row["COLUMN_NAME"]%></td>
-                    <td><%=row["COLUMN_TYPE"]%></td>
-                    <td><%=row["IS_NULLABLE"]%></td>
-                    <td><%=row["COLUMN_KEY"]%></td>
-                    <td><%=row["COLUMN_DEFAULT"]%></td>
-                    <td><%=row["EXTRA"]%></td>
-                    <td><%=row["COLUMN_COMMENT"]%></td>
+                    <td><%=row.name%></td>
+                    <td><%=row.type%></td>
+                    <td><%=row.key%></td>
+                    <td><%=row.auto%></td>
+                    <td><%=row.nullable%></td>
+                    <td><%=row.comment%></td>
+                    <td><%=row.dbType%></td>
                 </tr>
             <%}%>
         </tbody>
     </table>
     <br>
-    <button class="btnCreateForm">Create Form</button>
+    <button class="btnCreateTable">Create Table</button>
 </div>

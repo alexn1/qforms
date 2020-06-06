@@ -1,65 +1,46 @@
 'use strict';
 
-module.exports = ParentKeyColumnEditorController;
+const path = require('path');
+const _    = require('underscore');
+const EditorController = require('../EditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
-var _    = require('underscore');
+class ParentKeyColumnEditorController extends EditorController {
 
-var server           = require('../../../../server');
-var EditorController = require('../EditorController');
+    constructor(...args) {
+        super(...args);
+        this.viewDirPath = path.join(
+            this.hostApp.publicDirPath,
+            'editor/class/Controller/ModelController/ParentKeyColumnController'
+        );
+    }
 
-util.inherits(ParentKeyColumnEditorController, EditorController);
+    async _new(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.page);
+        const formEditor = pageEditor.getForm(params.form);
+        const parentKeyColumnData = formEditor.newDataSourceParentKeyColumn(params);
+        await pageEditor.save();
+        return parentKeyColumnData;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ParentKeyColumnEditorController(appInfo) {
-    var self = this;
-    ParentKeyColumnEditorController.super_.call(self, appInfo);
-    self.viewDirPath = path.join(
-        server.get('public'),
-        'editor/class/Controller/ModelController/ParentKeyColumnController'
-    );
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.getForm(params['form']);
+        formEditor.setDataSourceParentKeyColumnAttr(params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
+        await pageEditor.save();
+        return null;
+    }
+
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.page);
+        const formEditor = pageEditor.getForm(params['form']);
+        formEditor.deleteFormDataSourceParentKeyColumn(params['dataSource'], params['parentKeyColumn']);
+        await pageEditor.save();
+        return null;
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParentKeyColumnEditorController.prototype._new = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        return appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params.form);
-            var parentKeyColumnData = formEditor.newDataSouceParentKeyColumn(params);
-            return pageEditor.save().then(function () {
-                return parentKeyColumnData;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParentKeyColumnEditorController.prototype.save = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function (appEditor) {
-        return appEditor.getPageByFileName(params.pageFileName).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params['form']);
-            formEditor.setDataSourceParentKeyColumnAttr(params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
-            return pageEditor.save().then(function () {
-                return null;
-            });
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ParentKeyColumnEditorController.prototype.delete = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        appEditor.getPageByFileName(params.page).then(function (pageEditor) {
-            var formEditor = pageEditor.getForm(params['form']);
-            formEditor.deleteFormDataSourceParentKeyColumn(params['dataSource'], params['parentKeyColumn']);
-            return pageEditor.save().then(function() {
-                return null;
-            });
-        });
-    });
-};
+module.exports = ParentKeyColumnEditorController;

@@ -1,30 +1,24 @@
 'use strict';
 
-var util    = require('util');
-var Promise = require('bluebird');
-var mysql   = require('mysql');
+const Promise = require('bluebird');
+const mysql   = require('mysql');
+const Database  = require('../Database');
 
-var Database  = require('../Database');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class MySqlDatabase extends Database {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         //console.log('new MySqlDatabase');
         this.pool = null;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static async create(data, parent) {
         //console.log('MySqlDatabase.create');
         return new MySqlDatabase(data, parent);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async deinit() {
-        console.log('MySqlDatabase.prototype.deinit: ' + this.name);
+        console.log('MySqlDatabase.deinit: ' + this.name);
         if (this.pool !== null) {
             return new Promise(resolve => {
                 this.pool.end(() => {
@@ -34,27 +28,30 @@ class MySqlDatabase extends Database {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     _getPool() {
-        //console.log('MySqlDatabase.prototype._getPool');
+        //console.log('MySqlDatabase._getPool');
         if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
-            this.pool = mysql.createPool({
-                host       : this.data.params.host['@attributes'].value,
-                port       : this.data.params.port ? this.data.params.port['@attributes'].value : 3306,
-                user       : this.data.params.user['@attributes'].value,
-                database   : this.data.params.database['@attributes'].value,
-                password   : this.data.params.password['@attributes'].value,
-                queryFormat: MySqlDatabase.queryFormat
-            });
+            this.pool = mysql.createPool(this.getConfig());
         }
         //console.log('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    getConfig() {
+        console.log('MySqlDatabase.getConfig');
+        return {
+            ...super.getConfig(),
+            queryFormat: MySqlDatabase.queryFormat
+        };
+    }
+
+    getDefaultPort() {
+        return 3306;
+    }
+
     getConnection(context) {
-        //console.log('MySqlDatabase.prototype.getConnection');
+        //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
             if (context.connections[this.name] === undefined) {
                 this._getPool().getConnection((err, cnn) => {
@@ -71,49 +68,63 @@ class MySqlDatabase extends Database {
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    query(context, query, params, nest) {
+    async queryRows(context, query, params) {
         //if (process.env.NODE_ENV === 'development') {
-        //    console.log('MySqlDatabase.prototype.query', query, params);
+        //    console.log('MySqlDatabase.queryRows', query, params);
         //}
-        nest = (nest !== undefined) ? nest : true;
-        return this.getConnection(context).then(cnn => {
-            return new Promise((resolve, reject) => {
-                cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
-                    if (err) {
-                        reject(err);
+        const nest = true;
+        const cnn = await this.getConnection(context);
+        return new Promise((resolve, reject) => {
+            cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (nest) {
+                        const rows = this._getRows(result, fields);   // for duplicate column names
+                        resolve(rows);
                     } else {
-                        if (nest) {
-                            var rows = this._getRows(result, fields);   // for duplicate column names
-                            resolve(rows);
-                        } else {
-                            resolve(result);
-                        }
+                        resolve(result);
                     }
-                });
+                }
             });
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async queryResult(context, query, params) {
+        //if (process.env.NODE_ENV === 'development') {
+        //    console.log('MySqlDatabase.queryResult', query, params);
+        //}
+        const nest = false;
+        const cnn = await this.getConnection(context);
+        return new Promise((resolve, reject) => {
+            cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     _getRows(result, fields) {
-        //console.log('MySqlDatabase.prototype._getRows');
-        var fieldCount = {};
-        for (var j = 0; j < fields.length; j++) {
-            var f = fields[j];
+        //console.log('MySqlDatabase._getRows');
+        const fieldCount = {};
+        for (let j = 0; j < fields.length; j++) {
+            const f = fields[j];
             if (!fieldCount[f.name]) {
                 fieldCount[f.name] = 0;
             }
             fieldCount[f.name]++;
             f.numb = fieldCount[f.name] - 1;
         }
-        var rows = [];
-        for (var i = 0; i < result.length; i++) {
-            var r = result[i];
-            var row = {};
-            for (var j=0; j < fields.length; j++) {
-                var f = fields[j];
-                var column = f.name + (f.numb > 0 ? f.numb : '');
+        const rows = [];
+        for (let i = 0; i < result.length; i++) {
+            const r = result[i];
+            const row = {};
+            for (let j=0; j < fields.length; j++) {
+                const f = fields[j];
+                const column = f.name + (f.numb > 0 ? f.numb : '');
                 row[column] = r[f.table][f.name];
             }
             rows.push(row);
@@ -121,9 +132,8 @@ class MySqlDatabase extends Database {
         return rows;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     beginTransaction(cnn) {
-        console.log('MySqlDatabase.prototype.beginTransaction');
+        console.log('MySqlDatabase.beginTransaction');
         return new Promise((resolve, reject) => {
             cnn.beginTransaction(err => {
                 if (err) {
@@ -135,9 +145,8 @@ class MySqlDatabase extends Database {
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     commit(cnn) {
-        console.log('MySqlDatabase.prototype.commit');
+        console.log('MySqlDatabase.commit');
         return new Promise((resolve, reject) => {
             cnn.commit(err => {
                 if (err) {
@@ -149,9 +158,8 @@ class MySqlDatabase extends Database {
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     rollback(cnn, err) {
-        console.log('MySqlDatabase.prototype.rollback');
+        console.log('MySqlDatabase.rollback');
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
                 reject(err);
@@ -159,21 +167,17 @@ class MySqlDatabase extends Database {
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    static queryFormat(query, params) {
-        params = params || {};
-        var sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
+    static queryFormat(query, params = {}) {
+        const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return mysql.escape(params[name]);
-            } else {
-                return 'NULL';
             }
+            return 'NULL';
         });
         //console.log('real db sql: ' + sql);
         return sql;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static typeCast(field, next) {
         if (
             field.type === 'DATE'      ||
@@ -187,25 +191,60 @@ class MySqlDatabase extends Database {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    async desc(context, table) {
-        console.log('MySqlDatabase.prototype.desc', table);
-        var desc = {};
-        var aiFieldName;
-        var query = 'desc `{table}`'.replace('{table}', table);
-        return this.query(context, query, null, true).then(rows => {
-            rows.forEach(info => {
-                desc[info.Field] = info;
-                if (info.Extra === 'auto_increment') {
-                    aiFieldName = info.Field;
+    async getTableList() {
+        console.log('MySqlDatabase.getTableList');
+        const config = this.getConfig();
+        return new Promise((resolve, reject) => {
+            const cnn = mysql.createConnection(config);
+            cnn.connect();
+            cnn.query('show tables', (err, rows, fields) => {
+                cnn.end();
+                if (err) {
+                    reject(err);
+                } else {
+                    //console.log('rows:', rows);
+                    const tables = rows.map(row => row[fields[0].name]);
+                    console.log('tables:', tables);
+                    resolve(tables);
                 }
             });
-            //console.log('desc:', desc);
-            //console.log('aiFieldName:', aiFieldName);
-            return [desc, aiFieldName];
         });
     }
 
+    async getTableInfo(table) {
+        console.log('MySqlDatabase.getTableInfo:', table);
+        const config = this.getConfig();
+        return new Promise((resolve, reject) => {
+            const cnn = mysql.createConnection(config);
+            cnn.connect();
+            const query =
+                `SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
+FROM information_schema.columns \
+WHERE table_schema = '${config.database}' and table_name = '${table}'`;
+            cnn.query(query, (err, rows) => {
+                cnn.end();
+                if (err) {
+                    reject(err);
+                } else {
+                    const tableInfo = rows.map(row => {
+                        // console.log('row:', row);
+                        return {
+                            name    : row.COLUMN_NAME,
+                            key     : row.COLUMN_KEY === 'PRI',
+                            auto    : row.EXTRA === 'auto_increment',
+                            nullable: row.IS_NULLABLE === 'YES',
+                            comment : row.COLUMN_COMMENT,
+                            // COLUMN_TYPE   : row.COLUMN_TYPE,
+                            // COLUMN_DEFAULT: row.COLUMN_DEFAULT,
+                            // EXTRA         : row.EXTRA,
+                        };
+                    });
+                    console.log('tableInfo:', tableInfo);
+                    resolve(tableInfo);
+                }
+            });
+        });
+    }
 }
 
 module.exports = MySqlDatabase;

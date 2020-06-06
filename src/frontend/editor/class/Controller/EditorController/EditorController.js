@@ -1,167 +1,139 @@
 'use strict';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function EditorController(appData) {
-    var self = this;
-    self.appData = appData;
-    self.tree      = null;
-    self.docs      = null;
-    self.props     = null;
-    self.listeners = {};
-    EditorController.editorController = self;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.init = function() {
-    var self = this;
-    // tree
-    self.tree = document.getElementById('tree')._obj;
-    self.tree.on('doubleClick', self.listeners.doubleClick = self.onItemDoubleClick.bind(self));
-    self.tree.on('select', self.listeners.select = self.onItemSelect.bind(self));
-    self.tree.on('open', self.listeners.open = self.onItemOpen.bind(self));
-    self.tree.on('delete', self.listeners.delete = self.onItemDelete.bind(self));
-    // docs
-    self.docs = document.getElementById('docs')._obj;
-    self.docs.on('tabClosingByUser', self.listeners.tabClosingByUser = self.onTabClosingByUser.bind(self));
-    // props
-    self.props = new PropertyGrid(document.getElementById(('props')));
-    self.props.on('changed', self.listeners.changed = self.onObjChange.bind(self));
-    self.props.init();
-    // root
-    var caption = ApplicationController.prototype.getCaption(self.appData);
-    var appItem = self.tree.addItem(caption, 'opened');
-    var app = new Application(self.appData);
-    appItem.ctrl = new ApplicationController(app, appItem, self);
-    appItem.ctrl.createTree();
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.deinit = function() {
-    var self = this;
-    self.tree.off('doubleClick', self.listeners.doubleClick);
-    self.tree.off('select', self.listeners.select);
-    self.tree.off('open', self.listeners.open);
-    self.tree.off('delete', self.listeners.delete);
-    self.docs.off('tabClosingByUser', self.listeners.tabClosingByUser);
-    self.props.off('changed', self.listeners.changed);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onItemOpen = function(e) {
-    var self = this;
-    if (e.item.ctrl instanceof PageLinkController) {
-        self.pageLinkToPage(e.item);
+class EditorController {
+    constructor(appData) {
+        this.appData = appData;
+        this.tree      = null;
+        this.docs      = null;
+        this.props     = null;
+        this.listeners = {};
+        EditorController.editorController = this;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onItemSelect = function(e) {
-    var self = this;
-    if (e.item.ctrl) {
+    init() {
+        // tree
+        this.tree = document.getElementById('tree')._obj;
+        this.tree.on('doubleClick', this.listeners.doubleClick = this.onItemDoubleClick.bind(this));
+        this.tree.on('select', this.listeners.select = this.onItemSelect.bind(this));
+        this.tree.on('open', this.listeners.open = this.onItemOpen.bind(this));
+        this.tree.on('delete', this.listeners.delete = this.onItemDelete.bind(this));
+        // docs
+        this.docs = document.getElementById('docs')._obj;
+        this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
+        // props
+        this.props = new PropertyGrid(document.getElementById(('props')));
+        this.props.on('changed', this.listeners.changed = this.onObjChange.bind(this));
+        this.props.init();
+        // root
+        const caption = ApplicationController.prototype.getCaption(this.appData);
+        const appItem = this.tree.addItem(caption, 'opened');
+        const app = new Application(this.appData);
+        appItem.ctrl = new ApplicationController(app, appItem, this);
+        appItem.ctrl.createTree();
+    }
+
+    deinit() {
+        this.tree.off('doubleClick', this.listeners.doubleClick);
+        this.tree.off('select', this.listeners.select);
+        this.tree.off('open', this.listeners.open);
+        this.tree.off('delete', this.listeners.delete);
+        this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
+        this.props.off('changed', this.listeners.changed);
+    }
+
+    onItemOpen(e) {
         if (e.item.ctrl instanceof PageLinkController) {
-            self.pageLinkToPage(e.item).then(function() {
-                self.fillActionsAndGrid(e.item.ctrl);
-            });
-        } else {
-            self.fillActionsAndGrid(e.item.ctrl);
+            this.pageLinkToPage(e.item);
         }
-    } else {
-        $('#treeActionsList').children().remove();
-        $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
-        self.props.endEdit();
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.fillActionsAndGrid = function(ctrl) {
-    var self = this;
-    self.fillActions(ctrl);
-    self.fillGrid(ctrl);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.fillGrid = function(ctrl) {
-    var self = this;
-    var propList = ctrl.getPropList();
-    self.props.beginEdit(propList['list'], propList['options']);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.pageLinkToPage = function(item) {
-    var self = this;
-    var pageLink = item.ctrl.model;
-    var args = {
-        controller: 'Page',
-        action    : 'get',
-        params    : {
-            fileName: pageLink.data['@attributes'].fileName
+    async onItemSelect(e) {
+        console.log('EditorController.onItemSelect');
+        if (e.item.ctrl) {
+            if (e.item.ctrl instanceof PageLinkController) {
+                await this.pageLinkToPage(e.item);
+            }
+            this.fillActionsAndGrid(e.item.ctrl);
+        } else {
+            $('#treeActionsList').children().remove();
+            $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
+            this.props.endEdit();
         }
-    };
-    return QForms.doHttpRequest(args).then(function (pageData) {
-        var page = new Page(pageData, pageLink.parent, pageLink);
+    }
+
+    fillActionsAndGrid(ctrl) {
+        this.fillActions(ctrl);
+        this.fillGrid(ctrl);
+    }
+
+    fillGrid(ctrl) {
+        const propList = ctrl.getPropList();
+        this.props.beginEdit(propList['list'], propList['options']);
+    }
+
+    async pageLinkToPage(item) {
+        console.log('EditorController.pageLinkToPage');
+        const pageLink = item.ctrl.model;
+        const args = {
+            controller: 'Page',
+            action    : 'get',
+            params    : {
+                fileName: pageLink.data['@attributes'].fileName
+            }
+        };
+        const pageData = await QForms.doHttpRequest(args);
+        const page = new Page(pageData, pageLink.parent, pageLink);
         item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onItemDelete = function(e) {
-    var self = this;
-    if (e.item.ctrl.tab) {
-        self.docs.closeTab(e.item.ctrl.tab);
     }
-    $('#treeActionsList').children().remove();
-    $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
-    self.props.endEdit();
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.fillActions = function(ctrl) {
-    var self = this;
-    $('#treeActionsList').children().remove();
-    ctrl.getActions().forEach(function (action) {
-        if (action.caption === '-') {
-            $('#treeActionsList').append("<li class='divider'></li>");
-        } else {
-            var li = document.createElement('li');
-            li.miAction = action.action;
-            li.ctrl = ctrl;
-            $(li).click(function() {
-                this.ctrl.doAction(this.miAction);
-            });
-            li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}', action.caption);
-            $('#treeActionsList').append(li);
-        }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onObjChange = function(e) {
-    var self = this;
-    self.tree.active.ctrl.setProperty(e.name, e.value);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onItemDoubleClick = function(e) {
-    var self = this;
-    if (e.item.ctrl instanceof ApplicationController ||
-        e.item.ctrl instanceof DatabaseController ||
-        e.item.ctrl instanceof PageController ||
-        e.item.ctrl instanceof FormController ||
-        e.item.ctrl instanceof FieldController ||
-        e.item.ctrl instanceof DataSourceController
-        )
-    {
+    onItemDelete(e) {
         if (e.item.ctrl.tab) {
-            self.docs.selectTab(e.item.ctrl.tab);
+            this.docs.closeTab(e.item.ctrl.tab);
+        }
+        $('#treeActionsList').children().remove();
+        $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
+        this.props.endEdit();
+    }
+
+    fillActions(ctrl) {
+        $('#treeActionsList').children().remove();
+        ctrl.getActions().forEach((action) => {
+            if (action.caption === '-') {
+                $('#treeActionsList').append("<li class='divider'></li>");
+            } else {
+                const li = document.createElement('li');
+                li.miAction = action.action;
+                li.ctrl = ctrl;
+                $(li).click(function() {
+                    this.ctrl.doAction(this.miAction);
+                });
+                li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}', action.caption);
+                $('#treeActionsList').append(li);
+            }
+        });
+    }
+
+    onObjChange(e) {
+        this.tree.active.ctrl.setProperty(e.name, e.value);
+    }
+
+    onItemDoubleClick(e) {
+        console.log('EditorController.onItemDoubleClick', e.item);
+        const controller = e.item.ctrl;
+        if (!controller instanceof DocumentController) {
+            console.log('item controller does not have view');
+            return;
+        }
+        if (controller.tab) {
+            this.docs.selectTab(controller.tab);
         } else {
-            e.item.ctrl.createTab(self.docs);
+            controller.createTab(this.docs);
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-EditorController.prototype.onTabClosingByUser = function(e) {
-    var self = this;
-    self.docs.closeTab(e.tab);
-};
+    onTabClosingByUser(e) {
+        this.docs.closeTab(e.tab);
+    }
+
+}

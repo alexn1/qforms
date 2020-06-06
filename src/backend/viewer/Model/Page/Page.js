@@ -1,27 +1,21 @@
 'use strict';
 
-var util          = require('util');
-var path          = require('path');
-var fs            = require('fs');
-var child_process = require('child_process');
-var stream        = require('stream');
-var Promise       = require('bluebird');
+const path          = require('path');
+const fs            = require('fs');
+const child_process = require('child_process');
+const stream        = require('stream');
+const qforms = require('../../../qforms');
+const Model  = require('../Model');
 
-var qforms = require('../../../../qforms');
-var server = require('../../../../server');
-var Model  = require('../Model');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Page extends Model {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         this.application        = parent;
         this.app                = parent;
         this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
         this.viewFilePath       = path.join(
-            server.get('public'),
+            this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/PageController/view',
             this.data['@class'] + 'View.ejs'
         );
@@ -32,29 +26,37 @@ class Page extends Model {
         this.forms              = {};
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static async create(data, parent) {
-        var customClassFilePath = path.join(
+        const name = data['@attributes'].name;
+        const customClassFilePath = path.join(
             parent.dirPath,
             'pages',
-            data['@attributes'].name,
-            data['@attributes'].name + '.backend.js'
+            name,
+            `${name}.backend.js`
         );
-        return qforms.Helper.getFileContent(customClassFilePath).then(content => {
-            if (content) {
-                var customClass = eval(content);
-                return new customClass(data, parent);
-            } else {
-                return new Page(data, parent);
-            }
-        });
+        const content = await qforms.Helper.getFileContent(customClassFilePath);
+        if (content) {
+            const customClass = eval(content);
+            return new customClass(data, parent);
+        } else {
+            return new Page(data, parent);
+        }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async fill(context) {
+        console.log('Page.fill', this.constructor.name, this.name);
+        return super.fill(context);
+    }
+
     async rpc(context) {
+        console.log('Page.rpc');
         return {
-            result: 'ok'
+            result: 'Page.rpc'
         };
+    }
+
+    getApp() {
+        return this.parent;
     }
 
 }

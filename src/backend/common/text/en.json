@@ -14,7 +14,9 @@
         "cancel": "Cancel",
         "saveAndClose": "Save and close",
         "save": "Save",
-        "close": "Close"
+        "close": "Close",
+        "refresh": "Refresh",
+        "discard": "Discard"
     },
     "form": {
         "refresh": "Refresh",

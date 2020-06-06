@@ -1,134 +1,210 @@
 'use strict';
 
-QForms.inherits(FieldController, ModelController);
+class FieldController extends ModelController {
+    constructor(model, parent) {
+        super(model);
+        this.parent = parent;
+        this.form   = parent;
+        this.views  = new Map();    // list of all views that controlled by this field
+        this.html   = null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function FieldController(model, parent) {
-    var self = this;
-    ModelController.call(self, model);
-    self.parent = parent;
-    self.form   = parent;
-    self.views  = {};    // list of all views that controlled by this field
-    self.html   = null;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.create = function(model, parent) {
-    var customClassName = '{page}{form}{field}Controller'
-        .replace('{page}' , model.form.page.name)
-        .replace('{form}' , model.form.name)
-        .replace('{field}', model.name);
-    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
-    var custom =  'new {customClassName}(model, parent)'.replace('{customClassName}', customClassName);
-    var general = 'new {class}Controller(model, parent)'.replace('{class}', model.data.class);
-    var obj;
-    if (model.data.js !== undefined) {
-        if (eval(typeOfCustomClass) === 'function') {
-            obj = eval(custom);
+    static create(model, parent) {
+        // console.log('FieldController.create', model.getFullName());
+        let obj;
+        if (model.data.js) {
+            const CustomClass = eval(model.data.js);
+            if (!CustomClass) throw new Error(`custom class of "${model.name}" field does not return type`);
+            obj = new CustomClass(model, parent);
         } else {
-            $.globalEval(model.data.js);
-            obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
+            obj = eval(`new ${model.data.class}Controller(model, parent);`);
         }
-    } else {
-        obj = eval(general);
+        return obj;
     }
-    return obj;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.init = function() {
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.deinit = function() {
-    var self = this;
-    //console.log('FieldController.prototype.deinit: ' + this.model.name);
-    self.views = null;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.renderView = function() {
-    var self = this;
-    if (self.html === null) {
-        self.html = QForms.render(self.model.data.view, {model: self.model});
+    init() {
     }
-    return $(self.html).get(0);
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.fill = function(row, view) {
-    var self = this;
-    var key = self.model.form.dataSource.getRowKey(row);
-    self.views[key] = view;
-    view.dbRow = row;
-    var value;
-    if (self.model.data.column) {
-        value = row[self.model.data.column];
-    } else if (self.model.data.value) {
-        value = eval(self.model.data.value);
+    deinit() {
+        //console.log('FieldController.deinit: ' + this.model.name);
+        this.views = null;
     }
-    self.setValue(value, view);
-    self.setViewStyle(view, row);
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.refill = function(row, view) {
-    var self = this;
-    var value;
-    if (self.model.data.column) {
-        value = row[self.model.data.column];
-    } else if (self.model.data.value) {
-        value = eval(self.model.data.value);
+    renderView() {
+        if (this.html === null) {
+            this.html = QForms.render(this.model.data.view, {model: this.model});
+        }
+        return $(this.html).get(0);
     }
-    self.setValue(value, view);
-    self.setViewStyle(view, row);
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.getValue = function (view) {
-    var self = this;
-    switch (self.model.form.data.class) {
-        case 'RowForm':
-            return view.firstElementChild.value;
-            break;
-        case 'TableForm':
-            return view.firstElementChild.innerHTML;
-            break;
+    fill(row, view) {
+        // console.log('FieldController.fill', this.model.getFullName());
+        this.views.set(row, view);
+        view.dbRow = row;
+        const value = this.model.getValue(row);
+        this.setValue(value, view);
+        this.setViewStyle(view, row);
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.setValue = function (value, view) {
-    var self = this;
-    switch (self.model.form.data.class) {
-        case 'RowForm':
-            if (value !== '') {
-                view.firstElementChild.value = value;
+    refill(row, view) {
+        // console.log('FieldController.refill', this.model.getFullName());
+        const value = this.model.getValue(row);
+        this.setValue(value, view);
+        this.setViewStyle(view, row);
+        this.updateChangedClass(row, view);
+        view.firstElementChild.classList.remove('error');
+    }
+
+    updateChangedClass(row, view) {
+        // console.log('FieldController.updateChangedClass', this.model.getFullName(), this.isChanged(row, view));
+        if (this.isChanged(row, view)) {
+            $(view).addClass('changed');
+        } else {
+            $(view).removeClass('changed');
+        }
+    }
+
+    getValue(view) {
+        // console.log('FieldController.getValue', this.model.getFullName());
+        const getStringValue = this.getStringValue(view);
+        if (this.model.getColumnType() === 'object') return this.parseValue(getStringValue);
+        return getStringValue;
+    }
+
+    getStringValue(view) {
+        switch (this.model.form.getClassName()) {
+            case 'RowForm': return view.firstElementChild.value;
+            case 'TableForm': return view.firstElementChild.innerHTML;
+            default: throw new Error(`unknown form class: ${this.model.form.getClassName()}`);
+        }
+    }
+
+    setStringValue(stringValue, view) {
+        switch (this.model.form.getClassName()) {
+            case 'RowForm':view.firstElementChild.value = stringValue;break;
+            case 'TableForm':view.firstElementChild.innerHTML = stringValue;break;
+            default: throw new Error(`unknown form class: ${this.model.form.getClassName()}`);
+        }
+    }
+
+    parseValue(value) {
+        // console.log('FieldController.parseValue', this.model.getFullName());
+        if (value.trim() === '') return null;
+        return JSON.parse(value);
+    }
+
+    setPlaceHolder(value, view) {
+        // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
+        if (this.model.form.getClassName() === 'RowForm') {
+            if (value === undefined) {
+                view.firstElementChild.placeholder = 'undefined';
+            } else if (value === null) {
+                view.firstElementChild.placeholder = 'null';
+            } else if (value === '') {
+                view.firstElementChild.placeholder = 'empty string';
             }
-            break;
-        case 'TableForm':
-            view.firstElementChild.innerHTML = value;
-            break;
+        }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.isValid = function(view) {
-    var self = this;
-    return true;
-};
+    valueToString(value) {
+        switch (typeof value) {
+            case 'string': return value;
+            case 'object':
+                if (value === null) return '';
+                return JSON.stringify(value, null, 4);
+            case 'number':
+            case 'boolean':
+                return value.toString();
+            case 'undefined':
+                return '';
+            default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+        }
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.setViewStyle = function(view, row) {
-    var self = this;
-};
+    setValue(value, view) {
+        // console.log('FieldController.setValue', this.model.getFullName());
+        this.setPlaceHolder(value, view);
+        this.setStringValue(this.valueToString(value), view);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.beginEdit = function(view) {
-    var self = this;
-};
+    setViewStyle(view, row) {
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FieldController.prototype.endEdit = function(view) {
-    var self = this;
-};
+    beginEdit(view) {
+    }
+
+    endEdit(view) {
+    }
+
+    isValid(view) {
+        try {
+            const value = this.getValue(view);
+
+            // null check
+            let isValid = true;
+            if (this.model.data.notNull === 'true') {
+                isValid = !this.isEmpty(value);
+                if (!isValid) console.error('null');
+            }
+
+            // type check
+            let isValid2 = true;
+            if (this.model.getColumnType() === 'number') {
+                isValid2 = !isNaN(Number(value));
+                if (!isValid2) console.error('not number');
+            }
+
+            if (!isValid || !isValid2) {
+                console.error(`${this.model.getFullName()}: not valid`);
+            }
+            return isValid && isValid2;
+        } catch (err) {
+            console.error('not valid: ', err.message);
+            return false;
+        }
+    }
+
+    onChange(el) {
+        console.log('FieldController.onChange', this.model.name);
+        const view = el.parentNode;
+        const row = view.dbRow;
+        if (this.isValid(view)) {
+            view.firstElementChild.classList.remove('error');
+            const value = this.getValue(view);
+            const newValue = this.model.setValue(row, value);
+            // this.setValue(newValue, view);
+            this.setPlaceHolder(newValue, view);
+        } else {
+            view.firstElementChild.classList.add('error');
+        }
+
+        // event
+        this.updateChangedClass(row, view);
+        this.parent.onFieldChange({source: this, view, row, el, field: this});
+    }
+
+    isEmpty(value) {
+        return value === undefined || value === null || (typeof value === 'string' && value.trim() === '');
+    }
+
+    isChanged(row, view) {
+        if (!row) throw new Error('FieldController: no row');
+        if (!view) throw new Error('FieldController: no view');
+        // console.log('FieldController.isChanged', this.model.getFullName());
+        const fieldChanged = this.valueToString(this.model.getValue(row)) !== this.getStringValue(view);
+        if (fieldChanged) {
+            console.log(`FIELD CHANGED ${this.model.getFullName()}:`);
+            console.log('this.getStringValue(view):', this.getStringValue(view));
+            console.log('this.model.getValue(row):', this.model.getValue(row));
+            console.log('this.valueToString(this.model.getValue(row)):', this.valueToString(this.model.getValue(row)));
+            console.log('row:', row);
+        }
+        const rowChanged = this.model.isChanged(row);
+        if (rowChanged) {
+            console.log(`ROW CHANGED ${this.model.getFullName()}:`, row[this.model.data.column]);
+            console.log('changes:', this.model.getDataSource().changes);
+        }
+        return rowChanged || fieldChanged;
+    }
+
+}

@@ -1,0 +1,59 @@
+class BaseModel {
+    constructor(data, parent) {
+        this.data = data;
+        this.parent = parent;
+    }
+
+    getClassName() {
+        return this.data['@class'];
+    }
+
+    static getClassName(data) {
+        return data['@class'];
+    }
+
+    getName() {
+        return BaseModel.getName(this.data);
+    }
+
+    static getName(data) {
+        return BaseModel.getAttr(data, 'name');
+    }
+
+    static getAttr(data, name) {
+        return data['@attributes'][name];
+    }
+
+    attributes() {
+        return this.data['@attributes'];
+    }
+
+    getAttr(name) {
+        if (this.data['@attributes'][name] === undefined) throw new Error(`no attribute: ${name}`);
+        return this.data['@attributes'][name];
+    }
+
+    isData(colName, name) {
+        if (colName && name && this.data[colName] && this.data[colName][name]) {
+            return true;
+        }
+        return false;
+    }
+
+    getData(colName, name) {
+        if (!this.data) throw new Error('no data');
+        if (colName && name) {
+            if (!this.data[colName][name]) throw new Error(`no ${colName}: ${name}`);
+            return this.data[colName][name];
+        }
+        if (colName) {
+            return this.data[colName];
+        }
+        return this.data;
+    }
+
+    getApp() {
+        throw new Error('getApp: not implemented');
+    }
+}
+module.exports = BaseModel;

@@ -1,20 +1,17 @@
 'use strict';
 
-QForms.inherits(VisualController, DocumentController);
+class VisualController extends DocumentController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function VisualController(model) {
-    var self = this;
-    DocumentController.call(self, model);
-}
+    constructor(model) {
+        super(model);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.createTab = function(docs) {
-    var self = this;
-    var name = self.model.getFullName('_');
-    var caption = self.model.getFullName('/');
-    // get from server all needed to display edit window
-    self.model.getView('VisualView.html').then(function (result) {
+    async createTab(docs) {
+        const self = this;
+        const name = self.model.getFullName('_');
+        const caption = self.model.getFullName('/');
+        // get from server all needed to display edit window
+        const result = await self.model.getView('VisualView.html');
         self.$view          = $(result.view);
         self.$view.attr('id', name);
         self.data           = result.data;
@@ -23,7 +20,7 @@ VisualController.prototype.createTab = function(docs) {
         self.cmTemplateJs   = null;
         self.save           = 'ejs';
         // document tab
-        var tab = docs.createTab(self.$view.get(0), caption, function(tab) {tab.ctrl.tab = undefined;});
+        const tab = docs.createTab(self.$view.get(0), caption, function(tab) {tab.ctrl.tab = undefined;});
         tab.ctrl = self;
         docs.selectTab(tab);
         self.tab = tab;
@@ -52,133 +49,110 @@ VisualController.prototype.createTab = function(docs) {
             });
             self.$view.find('.btnSaveController').css('display', 'none');
         }
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.tabWidget_TabShow = function(ea) {
-    var self = this;
-    if ($(ea.tab).hasClass('tabController')) {
-        if (self.data.js) {
-            if (self.cmTemplateJs === null) {
-                self.initCmTemplateJs();
+    tabWidget_TabShow(ea) {
+        if ($(ea.tab).hasClass('tabController')) {
+            if (this.data.js) {
+                if (this.cmTemplateJs === null) {
+                    this.initCmTemplateJs();
+                }
             }
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.showCustomController = function() {
-    var self = this;
-    self.$view.find('.wndJs').css('display', 'block');
-    if ($(self.tabWidget.activeTab).hasClass('tabController')) {
-        self.initCmTemplateJs();
+    showCustomController() {
+        const self = this;
+        this.$view.find('.wndJs').css('display', 'block');
+        if ($(this.tabWidget.activeTab).hasClass('tabController')) {
+            this.initCmTemplateJs();
+        }
+        this.$view.find('.btnSaveController').click(function() {self.btnSaveController_Click();});
+        this.$view.find('.btnCreateController').css('display', 'none');
+        this.$view.find('.btnSaveController').css('display', 'inline-block');
     }
-    self.$view.find('.btnSaveController').click(function() {self.btnSaveController_Click();});
-    self.$view.find('.btnCreateController').css('display', 'none');
-    self.$view.find('.btnSaveController').css('display', 'inline-block');
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.showCustomView = function() {
-    var self = this;
-    self.$view.find('.wndHtml').css('display', 'block');
-    self.initCmTemplateHtml();
-    self.$view.find('.btnSaveView').click(function() {self.btnSaveView_Click();});
-    self.$view.find('.btnHtml').click(function() {self.btnHtml_Click();});
-    self.$view.find('.btnCss').click(function() {self.btnCss_Click();});
-    self.$view.find('.btnCreateView').css('display', 'none');
-    self.$view.find('.btnSaveView').css('display', 'inline-block');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.initCmTemplateHtml = function() {
-    var self = this;
-    self.cmTemplateHtml = CodeMirror.fromTextArea(self.$view.find('.cmHtmlView').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmTemplateHtml.setOption('theme', 'cobalt');
-    self.cmTemplateHtml.setValue(self.data.ejs);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.initCmTemplateCss = function() {
-    var self = this;
-    self.cmTemplateCss = CodeMirror.fromTextArea(self.$view.find('.cmCssView').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmTemplateCss.setOption('theme', 'cobalt');
-    self.cmTemplateCss.setValue(self.data.css);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.initCmTemplateJs = function() {
-    var self = this;
-    self.cmTemplateJs = CodeMirror.fromTextArea(self.$view.find('.cmJsCode').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmTemplateJs.setOption('theme', 'cobalt');
-    self.cmTemplateJs.setValue(self.data.js);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnSaveView_Click = function() {
-    var self = this;
-    var text;
-    switch (self.save) {
-        case 'ejs':
-            text = self.cmTemplateHtml.getValue();
-            break;
-        case 'css':
-            text = self.cmTemplateCss.getValue();
-            break;
+    showCustomView() {
+        const self = this;
+        this.$view.find('.wndHtml').css('display', 'block');
+        this.initCmTemplateHtml();
+        this.$view.find('.btnSaveView').click(function() {self.btnSaveView_Click();});
+        this.$view.find('.btnHtml').click(function() {self.btnHtml_Click();});
+        this.$view.find('.btnCss').click(function() {self.btnCss_Click();});
+        this.$view.find('.btnCreateView').css('display', 'none');
+        this.$view.find('.btnSaveView').css('display', 'inline-block');
     }
-    self.model.saveView(text, self.save);
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnSaveController_Click = function() {
-    var self = this;
-    var text  = self.cmTemplateJs.getValue();
-    self.model.saveController(text);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnHtml_Click = function() {
-    var self = this;
-    self.$view.find('.wndHtml').css('display', 'block');
-    self.$view.find('.wndCss').css('display', 'none');
-    self.$view.find('.btnHtml').removeClass('btn-default');
-    self.$view.find('.btnHtml').addClass('btn-primary');
-    self.$view.find('.btnCss').removeClass('btn-primary');
-    self.$view.find('.btnCss').addClass('btn-default');
-    self.save = 'ejs';
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnCss_Click = function() {
-    var self = this;
-    self.$view.find('.wndCss').css('display', 'block');
-    self.$view.find('.wndHtml').css('display', 'none');
-    if (self.cmTemplateCss === null) {
-        self.initCmTemplateCss();
+    initCmTemplateHtml() {
+        this.cmTemplateHtml = CodeMirror.fromTextArea(this.$view.find('.cmHtmlView').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmTemplateHtml.setOption('theme', 'cobalt');
+        this.cmTemplateHtml.setValue(this.data.ejs);
     }
-    self.$view.find('.btnCss').removeClass('btn-default');
-    self.$view.find('.btnCss').addClass('btn-primary');
-    self.$view.find('.btnHtml').removeClass('btn-primary');
-    self.$view.find('.btnHtml').addClass('btn-default');
-    self.save = 'css';
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnCreateView_Click = function() {
-    var self = this;
-    self.model.createView().then(function (data) {
-        self.data.ejs = data.ejs;
-        self.data.css = data.css;
-        self.showCustomView();
-    });
-};
+    initCmTemplateCss() {
+        this.cmTemplateCss = CodeMirror.fromTextArea(this.$view.find('.cmCssView').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmTemplateCss.setOption('theme', 'cobalt');
+        this.cmTemplateCss.setValue(this.data.css);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-VisualController.prototype.btnCreateController_Click = function() {
-    var self = this;
-    self.model.createController().then(function (data) {
-        self.data.js = data.js;
-        self.showCustomController();
-    });
-};
+    initCmTemplateJs() {
+        this.cmTemplateJs = CodeMirror.fromTextArea(this.$view.find('.cmJsCode').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmTemplateJs.setOption('theme', 'cobalt');
+        this.cmTemplateJs.setValue(this.data.js);
+    }
+
+    btnSaveView_Click() {
+        let text;
+        switch (this.save) {
+            case 'ejs':
+                text = this.cmTemplateHtml.getValue();
+                break;
+            case 'css':
+                text = this.cmTemplateCss.getValue();
+                break;
+        }
+        this.model.saveView(text, this.save);
+    }
+
+    btnSaveController_Click() {
+        const text  = this.cmTemplateJs.getValue();
+        this.model.saveController(text);
+    }
+
+    btnHtml_Click() {
+        this.$view.find('.wndHtml').css('display', 'block');
+        this.$view.find('.wndCss').css('display', 'none');
+        this.$view.find('.btnHtml').removeClass('btn-default');
+        this.$view.find('.btnHtml').addClass('btn-primary');
+        this.$view.find('.btnCss').removeClass('btn-primary');
+        this.$view.find('.btnCss').addClass('btn-default');
+        this.save = 'ejs';
+    }
+
+    btnCss_Click() {
+        this.$view.find('.wndCss').css('display', 'block');
+        this.$view.find('.wndHtml').css('display', 'none');
+        if (this.cmTemplateCss === null) {
+            this.initCmTemplateCss();
+        }
+        this.$view.find('.btnCss').removeClass('btn-default');
+        this.$view.find('.btnCss').addClass('btn-primary');
+        this.$view.find('.btnHtml').removeClass('btn-primary');
+        this.$view.find('.btnHtml').addClass('btn-default');
+        this.save = 'css';
+    }
+
+    async btnCreateView_Click() {
+        const data = await this.model.createView();
+        this.data.ejs = data.ejs;
+        this.data.css = data.css;
+        this.showCustomView();
+    }
+
+    async btnCreateController_Click() {
+        const data = await this.model.createController();
+        this.data.js = data.js;
+        this.showCustomController();
+    }
+
+}

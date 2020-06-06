@@ -1,162 +1,142 @@
 'use strict';
 
-QForms.inherits(PageController, VisualController);
+class PageController extends VisualController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageController(model, item, pageLink) {
-    var self = this;
-    VisualController.call(self, model);
-    self.item      = item;
-    self.pageLink  = pageLink;
-    self.itemForms = null;
-}
+    constructor(model, item, pageLink) {
+        super(model);
+        this.item      = item;
+        this.pageLink  = pageLink;
+        this.itemForms = null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.createTree = function() {
-    var self = this;
-    // data sources
-    self.dataSourcesItem = self.item.addItem('Data Sources');
-    if (self.model.data.dataSources) {
-        for (var name in self.model.data.dataSources) {
-            var dataSourceData = self.model.data.dataSources[name];
-            self.addDataSourceItem(dataSourceData);
+    createTree() {
+        // data sources
+        this.dataSourcesItem = this.item.addItem('Data Sources');
+        if (this.model.data.dataSources) {
+            for (const name in this.model.data.dataSources) {
+                const dataSourceData = this.model.data.dataSources[name];
+                this.addDataSourceItem(dataSourceData);
+            }
+        }
+        // forms
+        this.itemForms = this.item.addItem('Forms');
+        if (this.model.data.forms) {
+            for (const name in this.model.data.forms) {
+                const formData = this.model.data.forms[name];
+                this.addFormItem(formData);
+            }
         }
     }
-    // forms
-    self.itemForms = self.item.addItem('Forms');
-    if (self.model.data.forms) {
-        for (var name in self.model.data.forms) {
-            var formData = self.model.data.forms[name];
-            self.addFormItem(formData);
+
+    addFormItem(formData) {
+        const caption = FormController.prototype.getCaption(formData);
+        const itemForm = this.itemForms.addItem(caption);
+        const form = new Form(formData, this.model);
+        itemForm.ctrl = new FormController(form, itemForm);
+        itemForm.ctrl.createTree();
+        return itemForm;
+    }
+
+    addDataSourceItem(dataSourceData) {
+        const caption = DataSourceController.prototype.getCaption(dataSourceData);
+        const dataSourceItem = this.dataSourcesItem.addItem(caption);
+        const dataSource = new DataSource(dataSourceData, this.model);
+        dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
+        dataSourceItem.ctrl.createTree();
+        return dataSourceItem;
+    }
+
+    getActions() {
+        return [
+            {'action': 'newDataSource', 'caption': 'New Data Source'},
+            {'action': 'newForm'      , 'caption': 'New Form'       },
+            {'action': ''             , 'caption': '-'              },
+            {'action': 'moveUp'       , 'caption': 'Move Up'        },
+            {'action': 'moveDown'     , 'caption': 'Move Down'      },
+            {'action': ''             , 'caption': '-'              },
+            {'action': 'delete'       , 'caption': 'Delete'         }
+        ];
+    }
+
+    async doAction(action) {
+        switch (action) {
+            case 'newForm':
+                this.actionNewForm();
+                break;
+            case 'newDataSource':
+                this.newDataSourceAction();
+                break;
+            case 'delete':
+                this.delete();
+                break;
+            case 'moveUp':
+                await this.model.pageLink.moveUp();
+                this.item.move(-1);
+                break;
+            case 'moveDown':
+                await this.model.pageLink.moveDown();
+                this.item.move(1);
+                break;
+            default:
+                console.log(action);
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.addFormItem = function(formData) {
-    var self = this;
-    var caption = FormController.prototype.getCaption(formData);
-    var itemForm = self.itemForms.addItem(caption);
-    var form = new Form(formData, self.model);
-    itemForm.ctrl = new FormController(form, itemForm);
-    itemForm.ctrl.createTree();
-    return itemForm;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.addDataSourceItem = function(dataSourceData) {
-    var self = this;
-    var caption = DataSourceController.prototype.getCaption(dataSourceData);
-    var dataSourceItem = self.dataSourcesItem.addItem(caption);
-    var dataSource = new DataSource(dataSourceData, self.model);
-    dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, self);
-    dataSourceItem.ctrl.createTree();
-    return dataSourceItem;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {'action': 'newDataSource', 'caption': 'New Data Source'},
-        {'action': 'newForm'      , 'caption': 'New Form'       },
-        {'action': ''             , 'caption': '-'              },
-        {'action': 'moveUp'       , 'caption': 'Move Up'        },
-        {'action': 'moveDown'     , 'caption': 'Move Down'      },
-        {'action': ''             , 'caption': '-'              },
-        {'action': 'delete'       , 'caption': 'Delete'         }
-    ];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'newForm':
-            self.actionNewForm();
-            break;
-        case 'newDataSource':
-            self.newDataSourceAction();
-            break;
-        case 'delete':
-            self.delete();
-            break;
-        case 'moveUp':
-            self.model.pageLink.moveUp().then(function (data) {
-                self.item.move(-1);
-            });
-            break;
-        case 'moveDown':
-            self.model.pageLink.moveDown().then(function (data) {
-                self.item.move(1);
-            });
-            break;
-        default:
-            console.log(action);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.actionNewForm = function() {
-    var self = this;
-    Form.prototype.getView('new.html').then(function (result) {
+    async actionNewForm() {
+        const self = this;
+        const result = await Form.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
-            var params = {
+            const params = {
                 name:$("#myModal input[id='name']").val(),
                 caption:$("#myModal input[id='caption']").val(),
                 class:$("#myModal select[id='formClass']").val()
             };
-            self.model.newForm(params).then(function (formData) {
+            self.model.newForm(params).then((formData) => {
                 self.addFormItem(formData).select();
                 $('#myModal').modal('hide');
             });
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.newDataSourceAction = function() {
-    var self = this;
-    DataSource.prototype.getView('new.html').then(function (result) {
+    async newDataSourceAction() {
+        const self = this;
+        const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
-            var dsName = $("#myModal input[id='dsName']").val();
-            var dsClass = $("#myModal select[id='dsClass']").val();
-            var params = {
+            const dsName = $("#myModal input[id='dsName']").val();
+            const dsClass = $("#myModal select[id='dsClass']").val();
+            const params = {
                 name :dsName,
                 class:dsClass
             };
-            DataSource.create(self.model, params).then(function (dataSourceData) {
+            DataSource.create(self.model, params).then((dataSourceData) => {
                 self.addDataSourceItem(dataSourceData).select();
             });
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.getPropList = function() {
-    var self = this;
-    var propList = PageController.super_.prototype.getPropList.call(self);
-    propList.list['menu']    = self.pageLink.data['@attributes']['menu'];
-    propList.list['startup'] = self.pageLink.data['@attributes']['startup'];
-    propList.options['startup'] = ['true', 'false'];
-    return propList;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.setProperty = function(name, value) {
-    var self = this;
-    if (name === 'startup' || name === 'menu') {
-        self.pageLink.setValue(name, value);
-    } else  {
-        ModelController.prototype.setProperty.call(self, name, value);
     }
-};
+
+    getPropList() {
+        const propList = super.getPropList();
+        propList.list['menu']    = this.pageLink.data['@attributes']['menu'];
+        propList.list['startup'] = this.pageLink.data['@attributes']['startup'];
+        propList.options['startup'] = ['true', 'false'];
+        return propList;
+    }
+
+    setProperty(name, value) {
+        if (name === 'startup' || name === 'menu') {
+            this.pageLink.setValue(name, value);
+        } else  {
+            ModelController.prototype.setProperty.call(this, name, value);
+        }
+    }
+
+}

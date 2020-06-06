@@ -1,22 +1,21 @@
 'use strict';
 
-QForms.inherits(DocumentController, ModelController);
+class DocumentController extends ModelController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DocumentController(model) {
-    var self = this;
-    ModelController.call(self, model);
-    self.tab = null;
+    constructor(model) {
+        super(model);
+        this.tab = null;
+    }
+
+    createTab(docs, element) {
+        if (!element) throw new Error('no element');
+        // const $div = $('<div style="height:100%;background-color:lightgoldenrodyellow;">sample tab</div>');
+        const name = this.model.data['@attributes'].name;
+        this.tab = docs.createTab(element, name, function(tab) {
+            tab.ctrl.tab = undefined;
+        });
+        this.tab.ctrl = this;
+        docs.selectTab(this.tab);
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DocumentController.prototype.createTab = function(docs) {
-    var self = this;
-    var name = self.model.data['@attributes'].name;
-    var $div = $('<div style="height:100%;background-color:lightgoldenrodyellow;">sample tab</div>');
-    self.tab = docs.createTab($div.get(0), name, function(tab) {
-        tab.ctrl.tab = undefined;
-    });
-    self.tab.ctrl = self;
-    docs.selectTab(self.tab);
-};

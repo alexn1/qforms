@@ -1,55 +1,33 @@
 'use strict';
 
-module.exports = PageLinkEditorController;
+const path = require('path');
+const fs   = require('fs');
+const _    = require('underscore');
+const EditorController = require('../EditorController');
 
-var util = require('util');
-var path = require('path');
-var fs   = require('fs');
-var _    = require('underscore');
+class PageLinkEditorController extends EditorController {
 
-var qforms           = require('../../../../qforms');
-var server           = require('../../../../server');
-var EditorController = require('../EditorController');
+    async save(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageLinkEditor = appEditor.createPageLinkEditor(params.pageLink);
+        await pageLinkEditor.setAttr(params.attr, params.value);
+        return null;
+    }
 
-util.inherits(PageLinkEditorController, EditorController);
+    async moveUp(params) {
+        const appEditor = await this.createApplicationEditor();
+        appEditor.movePageLinkUp(params.page);
+        await appEditor.appFile.save();
+        return 'ok';
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageLinkEditorController(appInfo) {
-    var self = this;
-    PageLinkEditorController.super_.call(self, appInfo);
+    async moveDown(params) {
+        const appEditor = await this.createApplicationEditor();
+        appEditor.movePageLinkDown(params.page);
+        await appEditor.appFile.save();
+        return 'ok';
+    }
+
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditorController.prototype.save = function(params) {
-    var self = this;
-    var appFile = new qforms.JsonFile(self.appInfo.filePath);
-    return appFile.read().then(function () {
-        var appEditor = new qforms.ApplicationEditor(appFile);
-        appEditor.setPageLinkAttr(params['pageLink'], params['attr'], params['value']);
-        return appEditor.save().then(function () {
-            return null;
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditorController.prototype.moveUp = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        appEditor.movePageLinkUp(params.page);
-        return appEditor.appFile.save().then(function () {
-            return 'ok';
-        });
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageLinkEditorController.prototype.moveDown = function(params) {
-    var self = this;
-    return self.getApplicationEditor().then(function(appEditor) {
-        appEditor.movePageLinkDown(params.page);
-        return appEditor.appFile.save().then(function () {
-            return 'ok';
-        });
-    });
-};
+module.exports = PageLinkEditorController;

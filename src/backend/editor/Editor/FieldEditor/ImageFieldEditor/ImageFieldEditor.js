@@ -1,26 +1,18 @@
 'use strict';
 
-var util = require('util');
-var path = require('path');
+const path = require('path');
+const FieldEditor = require('../FieldEditor');
 
-var server      = require('../../../../../server');
-var FieldEditor = require('../FieldEditor');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ImageFieldEditor extends FieldEditor {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(formEditor, name) {
-        super(formEditor, name);
-        var self = this;
-        //LabelFieldEditor.super_.call(this, formEditor, name);
-        self.defaultViewDirPath = path.join(
-            server.get('public'),
+    constructor(...args) {
+        super(...args);
+        this.defaultViewDirPath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view'
         );
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     static createData(params) {
         return {
             '@class':'ImageField',

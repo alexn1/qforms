@@ -1,40 +1,36 @@
 'use strict';
 
-module.exports = TreeFormEditor;
+const path = require('path');
+const FormEditor = require('../FormEditor');
 
-var util = require('util');
-var path = require('path');
+class TreeFormEditor extends FormEditor {
 
-var server     = require('../../../../../server');
-var FormEditor = require('../FormEditor');
+    constructor(pageEditor, name, data) {
+        super(pageEditor, name, data);
+        this.defaultEjsFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.ejs'
+        );
+        this.defaultCssFilePath = path.join(
+            this.getAppEditor().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.css'
+        );
+    }
 
-util.inherits(TreeFormEditor, FormEditor);
+    static createData(params) {
+        return {
+            '@class'     : 'TreeForm',
+            '@attributes': {
+                'name'        : params.name,
+                'caption'     : (params.caption) && params.caption ? params.caption : params.name,
+                'itemEditPage': ''
+            },
+            'dataSources': {},
+            'fields'     : {},
+            'controls'   : {}
+        };
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function TreeFormEditor(pageEditor, name, data) {
-    var self = this;
-    TreeFormEditor.super_.call(self, pageEditor, name, data);
-    self.defaultEjsFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.ejs'
-    );
-    self.defaultCssFilePath = path.join(
-        server.get('public'),
-        'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.css'
-    );
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-TreeFormEditor.createData = function(params) {
-    return {
-        '@class'     : 'TreeForm',
-        '@attributes': {
-            'name'        : params.name,
-            'caption'     : (params.caption) && params.caption ? params.caption : params.name,
-            'itemEditPage': ''
-        },
-        'dataSources': {},
-        'fields'     : {},
-        'controls'   : {}
-    };
-};
+module.exports = TreeFormEditor;

@@ -1,48 +1,40 @@
 'use strict';
 
-QForms.inherits(ControlController, VisualController);
+class ControlController extends VisualController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function ControlController(model, item) {
-    var self = this;
-    VisualController.call(self, model);
-    self.item = item;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlController.prototype.getCaption = function(controlData) {
-    var self = this;
-    var caption = "<span class='blue'>{class}:</span> <span class='green'>{name}</span>"
-        .replace('{name}', controlData['@attributes'].name)
-        .replace('{class}', controlData['@class']);
-    return caption;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {'action': 'delete', 'caption': 'Delete'}
-    ];
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlController.prototype.getPropList = function() {
-    var self = this;
-    var list = self.model.data['@attributes'];
-    var options = {};
-    options['isVisible'] = ['true', 'false'];
-    options['readOnly']  = ['true', 'false'];
-    options['notNull']   = ['true', 'false'];
-    return {list: list, options: options};
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-ControlController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'delete':
-            self.delete();
-            break;
+    constructor(model, item) {
+        super(model);
+        this.item = item;
     }
-};
+
+    getCaption(controlData) {
+        const caption = "<span class='blue'>{class}:</span> <span class='green'>{name}</span>"
+            .replace('{name}', controlData['@attributes'].name)
+            .replace('{class}', controlData['@class']);
+        return caption;
+    }
+
+    getActions() {
+        return [
+            {'action': 'delete', 'caption': 'Delete'}
+        ];
+    }
+
+    getPropList() {
+        const list = this.model.data['@attributes'];
+        const options = {};
+        options['isVisible'] = ['true', 'false'];
+        options['readOnly']  = ['true', 'false'];
+        options['notNull']   = ['true', 'false'];
+        return {list: list, options: options};
+    }
+
+    doAction(action) {
+        switch (action) {
+            case 'delete':
+                this.delete();
+                break;
+        }
+    }
+
+}

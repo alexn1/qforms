@@ -1,111 +1,110 @@
 'use strict';
 
-module.exports = Editor;
+const path    = require('path');
+const ejs     = require('ejs');
+const qforms = require('../../qforms');
+const BaseModel = require('../../common/BaseModel');
 
-var path    = require('path');
-var fs      = require('fs');
-var ejs     = require('ejs');
+class Editor extends BaseModel{
+    constructor(data, parent) {
+        super(data, parent);
+        this.colName = null;
+    }
 
-var qforms = require('../../../qforms');
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Editor() {
-
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.createFileByReplace = function(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-    var self = this;
-    console.log('Editor.prototype.createFileByReplace');
-    emptyTemplate = emptyTemplate || '';
-    return qforms.Helper.exists(newFilePath).then(function (exists) {
+    async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
+        console.log('Editor.createFileByReplace');
+        emptyTemplate = emptyTemplate || '';
+        const exists = await qforms.Helper.exists(newFilePath);
         if (exists) {
             throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
-        } else {
-            return qforms.Helper.readFile(templateFilePath).then(function (template) {
-                var text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
-                if (text === '') {
-                    text = emptyTemplate;
-                }
-                return qforms.Helper.writeFile(newFilePath, text).then(function () {
-                    return text;
-                });
-            });
         }
-    });
-};
+        const template = await qforms.Helper.readFile(templateFilePath);
+        let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
+        if (text === '') {
+            text = emptyTemplate;
+        }
+        await qforms.Helper.writeFile(newFilePath, text);
+        return text;
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.createFileByParams = function(newFilePath, templateFilePath, params) {
-    var self = this;
-    return qforms.Helper.exists(newFilePath).then(function(exists) {
+    async createFileByParams(newFilePath, templateFilePath, params) {
+        const exists = await qforms.Helper.exists(newFilePath);
+        if (exists) {
+            throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
+        }
+        const template = await qforms.Helper.readFile(templateFilePath);
+        const content = ejs.render(template, params);
+        await qforms.Helper.writeFile(newFilePath, content);
+        return content;
+    }
+
+    getViewName() {
+        return this.constructor.name.replace('Editor', '') + 'View';
+    }
+
+    async getFile(filePath) {
+        console.log('Editor.getFile');
+        const exists = await qforms.Helper.exists(filePath);
+        if (exists) {
+            return await qforms.Helper.readFile(filePath);
+        }
+    }
+
+    async saveFile(filePath, content) {
+        const exists = await qforms.Helper.exists(filePath);
         if (!exists) {
-            return qforms.Helper.readFile(templateFilePath).then(function(template) {
-                var content = ejs.render(template, params);
-                return qforms.Helper.writeFile(newFilePath, content).then(function () {
-                    return content;
-                });
-            });
-        } else {
-            throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
-        }
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.getViewName = function() {
-    var self = this;
-    return self.constructor.name.replace('Editor', '') + 'View';
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.getFile = function(filePath) {
-    var self = this;
-    console.log('Editor.prototype.getFile');
-    return qforms.Helper.exists(filePath).then(function (exists) {
-        if (exists) {
-            return qforms.Helper.readFile(filePath);
-        }
-    });
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.saveFile = function(filePath, content) {
-    var self = this;
-    return qforms.Helper.exists(filePath).then(function (exists) {
-        if (exists) {
-            return qforms.Helper.writeFile(filePath, content);
-        } else {
             throw new Error("File {fileName} doesn't exist.".replace('{fileName}', path.basename(filePath)));
         }
-    });
-};
+        return await qforms.Helper.writeFile(filePath, content);
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.getCustomFile = function(ext) {
-    var self = this;
-    console.log('Editor.prototype.getCustomFile');
-    return self.getCustomFilePath(ext).then(function(customFilePath) {
-        return self.getFile(customFilePath);
-    });
-};
+    async getCustomFile(ext) {
+        console.log('Editor.getCustomFile');
+        const customFilePath = await this.getCustomFilePath(ext);
+        return this.getFile(customFilePath);
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.saveCustomFile = function(ext, text) {
-    var self = this;
-    return self.getCustomFilePath(ext).then(function (customFilePath) {
-        return self.saveFile(customFilePath, text);
-    });
-};
+    async saveCustomFile(ext, text) {
+        const customFilePath = await this.getCustomFilePath(ext);
+        return await this.saveFile(customFilePath, text);
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.moveDataSourceUp = function(name) {
-    var self = this;
-    self.data.dataSources = qforms.Helper.moveObjProp(self.data.dataSources, name, -1);
-};
+    moveDataSourceUp(name) {
+        this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, -1);
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Editor.prototype.moveDataSourceDown = function(name) {
-    var self = this;
-    self.data.dataSources = qforms.Helper.moveObjProp(self.data.dataSources, name, 1);
-};
+    moveDataSourceDown(name) {
+        this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
+    }
+
+    renameObjField(objName, oldName, newName) {
+        console.log(`Editor(${this.constructor.name}).renameObjField`, objName, oldName, newName);
+        this.data[objName] = qforms.Helper.replaceKey(this.data[objName], oldName, newName);
+    }
+
+    async setAttr(name, value) {
+        console.log(`Editor(${this.constructor.name}).setAttr`, name, value);
+        const oldValue = this.getAttr(name);
+        this.data['@attributes'][name] = value;
+        if (name === 'name' && this.colName) {
+            if (!this.parent) throw new Error('no parent editor');
+            this.parent.renameObjField(this.colName, oldValue, value);
+        }
+        return await this.save();
+    }
+
+    async save() {
+        console.log(`Editor(${this.constructor.name}).save`);
+        if (this.parent) {
+            return await this.parent.save();
+        } else {
+            console.error(`Editor(${this.constructor.name}).save: no parent`);
+        }
+    }
+
+    getAppEditor() {
+        return null;
+    }
+}
+
+module.exports = Editor;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8">
+    <title><%=appName%>[<%=env%>] - QForms Editor</title>
+    <!-- EventEmitter -->
+    <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
+    <!-- bluebird -->
+    <script src="common/lib/bluebird/bluebird.min.js"></script>
+    <!-- jquery -->
+    <script src="common/lib/jquery/jquery-2.1.4.min.js"></script>
+    <!-- bootstrap -->
+    <link href="common/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="common/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="common/lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- codemirror -->
+    <link href="editor/lib/codemirror-4.8/lib/codemirror.css" rel="stylesheet" >
+    <link href="editor/lib/codemirror-4.8/theme/cobalt.css" rel="stylesheet" >
+    <script src="editor/lib/codemirror-4.8/lib/codemirror.js"></script>
+    <script src="editor/lib/codemirror-4.8/mode/javascript/javascript.js"></script>
+    <!-- ejs -->
+    <script src="common/lib/ejs/ejs_production.js"></script>
+    <!-- qforms -->
+    <%commonClassCss.forEach((filePath) => {
+        %><link rel="stylesheet" href="<%=filePath%>"/><%='\n'%><%
+    });%>
+    <%editorClassCss.forEach((filePath) => {
+        %><link rel="stylesheet" href="<%=filePath%>"/><%='\n'%><%
+    });%>
+    <%commonClassJs.forEach((filePath) => {
+        %><script src="<%=filePath%>"></script><%='\n'%><%
+    });%>
+    <%editorClassJs.forEach((filePath) => {
+        %><script src="<%=filePath%>"></script><%='\n'%><%
+    });%>
+    <script>
+        $(document).ready(() => {
+            const data = <%-appFileContent%>;
+            new QForms(data);
+            new EditorController(data).init();
+        });
+    </script>
+</head>
+<body>
+<div id="sidebar">
+    <div id="tree-pad" class="flex-rows">
+        <div id="tree-bar" class="flex-min">
+            <div id="treeActions" class="dropdown">
+                <a class="btn btn-large btn-primary"  target="_blank" href="<%=runAppLink%>" style="float:right;">Run Application</a>
+                <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown">
+                    <span>Actions</span> <span class="caret"></span>
+                </button>
+                <ul id="treeActionsList" class="dropdown-menu">
+                    <li class="disabled"><a>none</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="tree" class="flex-max TreeWidget">
+            <ul></ul>
+        </div>
+    </div>
+    <div id="propsTab" class="TabWidget TabWidget-blue" style="background-color: #eee;">
+        <ul>
+            <li class="active">
+                <span>Properties</span>
+            </li>
+        </ul>
+        <div>
+            <div class="active">
+                <div id="props" class="PropertyGrid" style="height: 100%">
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="client">
+    <div id="docs" class="TabWidget full">
+        <ul></ul>
+        <div></div>
+    </div>
+</div>
+</body>
+</html>

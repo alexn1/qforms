@@ -1,160 +1,115 @@
 'use strict';
 
-var path    = require('path');
-var fs      = require('fs');
-var Promise = require('bluebird');
+const path    = require('path');
+const qforms  = require('../../qforms');
 
-var server  = require('../../../server');
-var qforms  = require('../../../qforms');
+const BaseModel = require('../../common/BaseModel');
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Model {
+class Model extends BaseModel {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
-        this.name              = data['@attributes'].name;
-        this.data              = data;
-        this.parent            = parent;
+        super(data, parent);
+        this.name              = this.getAttr('name');
         this.view              = undefined;
         this.js                = undefined;
         this.createCollections = [];
         this.fillCollections   = [];
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    init() {
-        return Promise.each(this.createCollections, colName => {
-            return this.createCollection(colName);
-        }).then(() => {
-            return this.getView();
-        }).then(view => {
-            this.view = view;
-            return this.getJs();
-        }).then(js => {
-            this.js = js;
-        });
+    async init() {
+        for (let i = 0; i < this.createCollections.length; i++) {
+            const colName = this.createCollections[i];
+            await this.createCollection(colName);
+        }
+        this.view = await this.getView();
+        this.js   = await this.getJs();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    fill(context) {
-        console.log('Model.prototype.fill', this.constructor.name, this.name);
-        return Promise.try(() => {
-            var response = {
-                class: this.data['@class'],
-                view : this.view,
-                js   : this.js
-            };
-            for (var name in this.data['@attributes']) {
-                response[name] = this.data['@attributes'][name];
-            }
-            return this._fillCollections(response, context).then(() => {
-                return response;
-            });
-        });
+    async fill(context) {
+        // console.log('Model.fill', this.constructor.name, this.name);
+        const data = {
+            class: this.getClassName(),
+            view : this.view,
+            js   : this.js
+        };
+        for (const name in this.attributes()) {
+            data[name] = this.getAttr(name);
+        }
+        await this._fillCollections(data, context);
+        return data;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    _fillCollections(response, context) {
-        return Promise.each(this.fillCollections, colName => {
+    async _fillCollections(data, context) {
+        for (let i = 0; i < this.fillCollections.length; i++) {
+            const colName = this.fillCollections[i];
             if (colName === 'dataSources') {
-                return this.fillCollectionDefaultFirst(response, colName, context);
+                await this.fillCollectionDefaultFirst(data, colName, context);
             } else {
-                return this.fillCollection(response, colName, context);
+                await this.fillCollection(data, colName, context);
             }
-        });
+        }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    createCollection(colName) {
-        //console.log('Model.prototype.createCollection', colName);
-        return Promise.try(() => {
-            if (this.data[colName]) {
-                return Promise.each(Object.keys(this.data[colName]), itemName => {
-                    var itemData = this.data[colName][itemName];
-                    var className1 = '{class}Controller'.replace('{class}', itemData['@class']);
-                    var className2 =                                        itemData['@class'];
-                    var className = qforms[className1] ? className1 : className2;
-                    return qforms[className].create(itemData, this).then(obj => {
-                        this[colName][itemName] = obj;
-                        return obj.init();
-                    });
-                });
+    async createCollection(colName) {
+        console.log(`Model.createCollection ${this.name}.${colName}`);
+        if (this.data[colName]) {
+            const items = Object.keys(this.data[colName]);
+            for (let i = 0; i < items.length; i++) {
+                const itemName = items[i];
+                const itemData = this.getData(colName, itemName);
+                const className1 = `${itemData['@class']}Controller`;
+                const className2 = itemData['@class'];
+                const className = qforms[className1] ? className1 : className2;
+                const obj = await qforms[className].create(itemData, this);
+                this[colName][itemName] = obj;
+                await obj.init();
             }
-        });
+        }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    fillCollection(response, colName, context) {
-        return Promise.try(() => {
-            if (this[colName]) {
-                response[colName] = {};
-                return Promise.each(Object.keys(this[colName]), itemName => {
-                    var collectionItem = this[colName][itemName];
-                    return collectionItem.fill(context).then(_response => {
-                        response[colName][itemName] = _response;
-                    });
-                });
+    async fillCollection(data, colName, context) {
+        if (!this[colName]) throw new Error(`collection ${colName} not created`);
+        data[colName] = {};
+        const items = Object.keys(this[colName]);
+        for (let i = 0; i < items.length; i++) {
+            const itemName = items[i];
+            data[colName][itemName] = await this[colName][itemName].fill(context);
+        }
+    }
+
+    async fillCollectionDefaultFirst(data, colName, context) {
+        //console.log('Model.fillCollectionDefaultFirst', colName);
+        data[colName] = {};
+        const defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
+        for (let i = 0; i < defaultArr.length; i++) {
+            const itemName = defaultArr[i];
+            data[colName][itemName] = await this[colName][itemName].fill(context);
+        }
+        const noDefaultArr = Object.keys(this[colName]).filter(itemName => {return itemName !== 'default';});
+        for (let i = 0; i < noDefaultArr.length; i++) {
+            const itemName = noDefaultArr[i];
+            data[colName][itemName] = await this[colName][itemName].fill(context);
+        }
+    }
+
+    async getView() {
+        if (!this.viewFilePath) return null;
+        if (this.customViewFilePath) {
+            const exists = await qforms.Helper.exists(this.customViewFilePath);
+            if (exists) {
+                return qforms.Helper.readFile(this.customViewFilePath);
             }
-        });
+            return qforms.Helper.readFile(this.viewFilePath);
+        }
+        return await qforms.Helper.readFile(this.viewFilePath);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    fillCollectionDefaultFirst(response, colName, context) {
-        //console.log('Model.prototype.fillCollectionDefaultFirst', colName);
-        return Promise.try(() => {
-            response[colName] = {};
-            var defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
-            return Promise.each(defaultArr, itemName => {
-                return this[colName][itemName].fill(context).then(_response => {
-                    response[colName][itemName] = _response;
-                });
-            });
-        }).then(() => {
-            var noDefaultArr = Object.keys(this[colName]).filter(itemName => {return itemName !== 'default';});
-            return Promise.each(noDefaultArr, itemName => {
-                return this[colName][itemName].fill(context).then(_response => {
-                    response[colName][itemName] = _response;
-                });
-            });
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getView() {
-        return Promise.try(() => {
-            if (this.viewFilePath) {
-                if (this.customViewFilePath) {
-                    return qforms.Helper.exists(this.customViewFilePath).then(exists => {
-                        if (exists) {
-                            return qforms.Helper.readFile(this.customViewFilePath);
-                        } else {
-                            return qforms.Helper.readFile(this.viewFilePath);
-                        }
-                    });
-                } else {
-                    return qforms.Helper.readFile(this.viewFilePath);
-                }
-            }
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getJs() {
-        return Promise.try(() => {
-            if (this.dirPath) {
-                var jsFilePath = path.join(this.dirPath, this.name + '.js');
-                return qforms.Helper.exists(jsFilePath).then(exists => {
-                    if (exists) {
-                        return qforms.Helper.readFile(jsFilePath);
-                    }
-                });
-            }
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    getClassName() {
-        return this.constructor.name;
+    async getJs() {
+        if (!this.dirPath) return null;
+        const jsFilePath = path.join(this.dirPath, this.name + '.js');
+        const exists = await qforms.Helper.exists(jsFilePath);
+        if (exists) return qforms.Helper.readFile(jsFilePath);
+        return null;
     }
 
 }

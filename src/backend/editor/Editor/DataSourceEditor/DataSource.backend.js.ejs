@@ -1,37 +1,32 @@
 'use strict';
 
-util.inherits(<%=page%><%=form%><%=dataSource%>Controller, <%=_class%>Controller);
+class <%=page%><%=form%><%=dataSource%>Controller extends <%=_class%>Controller {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function <%=page%><%=form%><%=dataSource%>Controller() {
-    <%=page%><%=form%><%=dataSource%>Controller.super_.apply(this, arguments);
-};
+    constructor() {
+        super(arguments);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=dataSource%>Controller.prototype.select = function(context) {
-    return <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.select.call(this, context);
-};
+    select(context) {
+        return super.select(context);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=dataSource%>Controller.prototype.insert = function(context) {
-    return <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.insert.call(this, context);
-};
+    insert(context) {
+        return super.insert(this, context);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=dataSource%>Controller.prototype.update = function(context) {
-    return <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.update.call(this, context);
-};
+    update(context) {
+        return super.update(this, context);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=dataSource%>Controller.prototype.delete = function(context) {
-    return <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.delete.call(this, context);
-};
+    delete(context) {
+        return super.delete(this, context);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-<%=page%><%=form%><%=dataSource%>Controller.prototype.getAccessToken = function(context) {
-    var access = <%=page%><%=form%><%=dataSource%>Controller.super_.prototype.getAccessToken.call(this, context);
-    return access;
-};
+    getAccess(context) {
+        const access = super.getAccess(this, context);
+        return access;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
 <%=page%><%=form%><%=dataSource%>Controller;

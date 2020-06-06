@@ -10,7 +10,6 @@ const less      = require('gulp-less');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_css() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.less'))
         .pipe(less())
@@ -19,13 +18,11 @@ function frontend_viewer_class_css() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_ejs() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.ejs'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_viewer_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.js'))
         .pipe(concat('all.js'))

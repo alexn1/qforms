@@ -11,7 +11,6 @@ const frontend_viewer = require("./frontend_viewer");
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function frontend_root() {
     return gulp.src(path.join(SRC_PATH, 'frontend/*.*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));

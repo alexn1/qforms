@@ -1,187 +1,144 @@
 'use strict';
 
-QForms.inherits(Field, Model);
+class Field extends Model {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function Field(data, parent) {
-    var self = this;
-    Model.call(self, data);
-    self.parent = parent;
-    self.form   = parent;
+    constructor(data, parent) {
+        super(data);
+        this.parent = parent;
+        this.form   = parent;
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'save',
+            params    : {
+                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                form        : this.form.data['@attributes'].name,
+                field       : this.data['@attributes'].name,
+                attr        : name,
+                value       : value
+            }
+        });
+        this.data['@attributes'][name] = value;
+        return data;
+    }
+
+    async delete() {
+        return await QForms.doHttpRequest({
+            controller : 'Field',
+            action     : 'delete',
+            params     : {
+                pageFileName:this.form.page.pageLink.data['@attributes'].fileName,
+                form        :this.form.data['@attributes'].name,
+                field       :this.data['@attributes'].name
+            }
+        });
+    }
+
+    async getView(view) {
+        return await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'getView',
+            params    : {
+                view : view,
+                page : this.data !== undefined ? this.form.page.data['@attributes'].name : null,
+                form : this.data !== undefined ? this.form.data['@attributes'].name      : null,
+                field: this.data !== undefined ? this.data['@attributes'].name           : null
+            }
+        });
+    }
+
+    async saveView(text, view) {
+        return await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'saveView',
+            params    : {
+                page : this.form.page.data['@attributes'].name,
+                form : this.form.data['@attributes'].name,
+                field: this.data['@attributes'].name,
+                view : view,
+                text : text
+            }
+        });
+    }
+
+    async saveController(text) {
+        return await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'saveController',
+            params    : {
+                page : this.form.page.data['@attributes'].name,
+                form : this.form.data['@attributes'].name,
+                field: this.data['@attributes'].name,
+                text : text
+            }
+        });
+    }
+
+    async createView() {
+        return await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'createView',
+            params    : {
+                page : this.form.page.data['@attributes'].name,
+                form : this.form.data['@attributes'].name,
+                field: this.data['@attributes'].name,
+                class: this.data['@class']
+            }
+        });
+    }
+
+    async createController() {
+        return await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'createController',
+            params    : {
+                page : this.form.page.data['@attributes'].name,
+                form : this.form.data['@attributes'].name,
+                field: this.data['@attributes'].name,
+                class: this.data['@class']
+            }
+        });
+    }
+
+    async changeClass(params) {
+        params['page']  = this.form.page.data['@attributes'].name;
+        params['form']  = this.form.data['@attributes'].name;
+        params['field'] = this.data['@attributes'].name;
+        const data = await QForms.doHttpRequest({
+            controller: 'Field',
+            action    : 'changeClass',
+            params    : params
+        });
+        return this.data = data;
+    }
+
+    moveUp() {
+        const args = {
+            controller : 'Field',
+            action     : 'moveUp',
+            params     : {
+                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                form        : this.form.data['@attributes'].name,
+                field       : this.data['@attributes'].name
+            }
+        };
+        return QForms.doHttpRequest(args);
+    }
+
+    moveDown() {
+        const args = {
+            controller : 'Field',
+            action     : 'moveDown',
+            params     : {
+                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                form        : this.form.data['@attributes'].name,
+                field       : this.data['@attributes'].name
+            }
+        };
+        return QForms.doHttpRequest(args);
+    }
+
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.setValue = function(name, value) {
-    var self = this;
-    //console.log(name + ' = ' + value);
-    var args = {
-        controller: 'Field',
-        action    : 'save',
-        params    : {
-            pageFileName: self.form.page.pageLink.data['@attributes'].fileName,
-            form        : self.form.data['@attributes'].name,
-            field       : self.data['@attributes'].name,
-            attr        : name,
-            value       : value
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        self.data['@attributes'][name] = value;
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.delete = function() {
-    var self = this;
-    var args = {
-        controller : 'Field',
-        action     : 'delete',
-        params     : {
-            pageFileName:self.form.page.pageLink.data['@attributes'].fileName,
-            form        :self.form.data['@attributes'].name,
-            field       :self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return (data);
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.getView = function(view) {
-    var self = this;
-    var args = {
-        controller: 'Field',
-        action    : 'getView',
-        params    : {
-            view : view,
-            page : self.data !== undefined ? self.form.page.data['@attributes'].name : null,
-            form : self.data !== undefined ? self.form.data['@attributes'].name      : null,
-            field: self.data !== undefined ? self.data['@attributes'].name           : null
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.saveView = function(text, view) {
-    var self = this;
-    var args = {
-        controller: 'Field',
-        action    : 'saveView',
-        params    : {
-            page : self.form.page.data['@attributes'].name,
-            form : self.form.data['@attributes'].name,
-            field: self.data['@attributes'].name,
-            view : view,
-            text : text
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.saveController = function(text) {
-    var self = this;
-    var args = {
-        controller: 'Field',
-        action    : 'saveController',
-        params    : {
-            page : self.form.page.data['@attributes'].name,
-            form : self.form.data['@attributes'].name,
-            field: self.data['@attributes'].name,
-            text : text
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.createView = function() {
-    var self = this;
-    var args = {
-        controller: 'Field',
-        action    : 'createView',
-        params    : {
-            page : self.form.page.data['@attributes'].name,
-            form : self.form.data['@attributes'].name,
-            field: self.data['@attributes'].name,
-            class: self.data['@class']
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.createController = function() {
-    var self = this;
-    var args = {
-        controller: 'Field',
-        action    : 'createController',
-        params    : {
-            page : self.form.page.data['@attributes'].name,
-            form : self.form.data['@attributes'].name,
-            field: self.data['@attributes'].name,
-            class: self.data['@class']
-        }
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.changeClass = function(params) {
-    var self = this;
-    params['page']  = self.form.page.data['@attributes'].name;
-    params['form']  = self.form.data['@attributes'].name;
-    params['field'] = self.data['@attributes'].name;
-    var args = {
-        controller: 'Field',
-        action    : 'changeClass',
-        params    : params
-    };
-    return QForms.doHttpRequest(args).then(function (data) {
-        self.data = data;
-        return data;
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.moveUp = function() {
-    var self = this;
-    var args = {
-        controller : 'Field',
-        action     : 'moveUp',
-        params     : {
-            pageFileName: self.form.page.pageLink.data['@attributes'].fileName,
-            form        : self.form.data['@attributes'].name,
-            field       : self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Field.prototype.moveDown = function() {
-    var self = this;
-    var args = {
-        controller : 'Field',
-        action     : 'moveDown',
-        params     : {
-            pageFileName: self.form.page.pageLink.data['@attributes'].fileName,
-            form        : self.form.data['@attributes'].name,
-            field       : self.data['@attributes'].name
-        }
-    };
-    return QForms.doHttpRequest(args);
-};

@@ -1,67 +1,46 @@
 'use strict';
 
-QForms.inherits(RowForm, Form);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function RowForm(name, page, data) {
-    var self = this;
-    Form.call(self, name, page, data);
-    self.row = null;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.prototype.init = function() {
-    var self = this;
-    Form.prototype.init.call(this);
-    if (self.page.newMode) {
-        var row = {};
-        self.defaultValuesToRow(row);
-        self.dataSource.newRow(row);
-        self.row = row;
-    } else {
-        if (!self.dataSource.data.rows[0]) {
-            throw new Error('[' + self.getFullName() + '] no row in RowForm');
+class RowForm extends Form {
+    init() {
+        super.init();
+        if (this.page.newMode) {
+            const row = {};
+            this.defaultValuesToRow(row);
+            this.dataSource.newRow(row);
         }
-        self.row = self.dataSource.data.rows[0];
+
+        // dump row values to page params
+        this.fillParams(this.getRow());
     }
-    // dump row values to page params
-    self.fillParams(self.row);
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-Form.prototype.fillParams = function(row) {
-    var self = this;
-    for (var name in self.fields) {
-        self.fields[name].valueToParams(row);
+    fillParams(row) {
+        for (const name in this.fields) {
+            this.fields[name].valueToParams(row);
+        }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.prototype.onDataSourceChanged = function(e) {
-    var self = this;
-    Form.prototype.onDataSourceChanged.call(self, e);
-    var dataSource = e.source;
-    if (dataSource.name === 'default') {
-        self.emit('changed', {source: self});
+    onDataSourceUpdate(e) {
+        super.onDataSourceUpdate(e);
+        this.fillParams(this.getRow());
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.prototype.onDataSourceUpdated = function(e) {
-    var self = this;
-    Form.prototype.onDataSourceUpdated.call(self, e);
-    self.fillParams(self.row);
-    self.emit('updated', {source: self});
-};
+    getFullName() {
+        return [this.page.name, this.name].join('.');
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.prototype.getFullName = function() {
-    var self = this;
-    return [self.page.name, self.name].join('.');
-};
+    getFieldValue(name) {
+        return this.fields[name].getValue(this.getRow());
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-RowForm.prototype.getFieldValue = function(fieldName) {
-    var self = this;
-    return self.fields[fieldName].getValue(self.row);
-};
+    getRow() {
+        return this.dataSource.getSingleRow();
+    }
+
+    getKey() {
+        // console.log('RowForm.getKey', this.getFullName());
+        if (this.dataSource.getClassName() === 'SqlDataSource') {
+            return this.dataSource.getRowKey(this.getRow());
+        }
+        return null;
+    }
+}

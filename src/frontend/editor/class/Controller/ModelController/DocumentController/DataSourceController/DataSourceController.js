@@ -1,181 +1,160 @@
 'use strict';
 
-QForms.inherits(DataSourceController, DocumentController);
+class DataSourceController extends DocumentController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function DataSourceController(model, item) {
-    var self = this;
-    DataSourceController.super_.call(self, model);
-    self.item                 = item;
-    self.itemKeys             = null;
-    self.itemParentKeyColumns = null;
-    self.$view                = null;
-    self.cmQuery              = null;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.createTree = function() {
-    var self = this;
-    // keys
-    self.itemKeys = self.item.addItem('Key Columns');
-    if (self.model.data.keyColumns)
-    for (var name in self.model.data.keyColumns) {
-        var keyColumnData = self.model.data.keyColumns[name];
-        self.addKeyColumn(keyColumnData);
+    constructor(model, item) {
+        super(model);
+        this.item                 = item;
+        this.itemKeys             = null;
+        this.itemParentKeyColumns = null;
+        this.$view                = null;
+        this.cmQuery              = null;
     }
 
-    // parent key columns
-    self.itemParentKeyColumns = self.item.addItem('Parent Key Columns');
-    if (self.model.data.parentKeyColumns)
-    for (var name in self.model.data.parentKeyColumns) {
-        var pkcData = self.model.data.parentKeyColumns[name];
-        self.addParentKeyColumn(pkcData);
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.addKeyColumn = function(itemData) {
-    var self = this;
-    var caption = KeyColumnController.prototype.getCaption(itemData);
-    var keyColumnItem = self.itemKeys.addItem(caption);
-    var keyColumn = new KeyColumn(itemData, self.model);
-    keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
-    return keyColumnItem;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.addParentKeyColumn = function(pkcData) {
-    var self = this;
-    var caption = ParentKeyColumnController.prototype.getCaption(pkcData);
-    var itemParentKeyColumn = self.itemParentKeyColumns.addItem(caption);
-    var parentKeyColumn = new ParentKeyColumn(pkcData, self.model);
-    itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn, itemParentKeyColumn);
-    return itemParentKeyColumn;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getActions = function() {
-    var self = this;
-    return [
-        {
-            'action' : 'newItem',
-            'caption': 'New Key Column'
-        },
-        {
-            'action' : 'newParentKeyColumn',
-            'caption': 'New Parent Key Column'
-        },
-        {'action':        '', 'caption':         '-'},
-        {'action':  'moveUp', 'caption':   'Move Up'},
-        {'action':'moveDown', 'caption': 'Move Down'},
-        {
-            'action' : '',
-            'caption': '-'
-        },
-        {
-            'action' : 'delete',
-            'caption': 'Delete'
+    createTree() {
+        // keys
+        this.itemKeys = this.item.addItem('Key Columns');
+        if (this.model.data.keyColumns)
+        for (const name in this.model.data.keyColumns) {
+            const keyColumnData = this.model.data.keyColumns[name];
+            this.addKeyColumn(keyColumnData);
         }
-    ];
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.doAction = function(action) {
-    var self = this;
-    switch (action) {
-        case 'newItem':
-            self.actionNewKeyColumn();
-            break;
-        case 'newParentKeyColumn':
-            self.actionNewParentKeyColumn();
-            break;
-        case 'delete':
-            self.delete();
-            break;
-        case 'moveUp':
-            self.model.moveUp().then(function (data) {
-                self.item.move(-1);
-            });
-            break;
-        case 'moveDown':
-            self.model.moveDown().then(function (data) {
-                self.item.move(1);
-            });
-            break;
+        // parent key columns
+        this.itemParentKeyColumns = this.item.addItem('Parent Key Columns');
+        if (this.model.data.parentKeyColumns)
+        for (const name in this.model.data.parentKeyColumns) {
+            const pkcData = this.model.data.parentKeyColumns[name];
+            this.addParentKeyColumn(pkcData);
+        }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.actionNewKeyColumn = function() {
-    var self = this;
-    KeyColumn.prototype.getView('new.html').then(function (result) {
+    addKeyColumn(itemData) {
+        const caption = KeyColumnController.prototype.getCaption(itemData);
+        const keyColumnItem = this.itemKeys.addItem(caption);
+        const keyColumn = new KeyColumn(itemData, this.model);
+        keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
+        return keyColumnItem;
+    }
+
+    addParentKeyColumn(pkcData) {
+        const caption = ParentKeyColumnController.prototype.getCaption(pkcData);
+        const itemParentKeyColumn = this.itemParentKeyColumns.addItem(caption);
+        const parentKeyColumn = new ParentKeyColumn(pkcData, this.model);
+        itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn, itemParentKeyColumn);
+        return itemParentKeyColumn;
+    }
+
+    getActions() {
+        return [
+            {
+                'action' : 'newItem',
+                'caption': 'New Key Column'
+            },
+            {
+                'action' : 'newParentKeyColumn',
+                'caption': 'New Parent Key Column'
+            },
+            {'action':        '', 'caption':         '-'},
+            {'action':  'moveUp', 'caption':   'Move Up'},
+            {'action':'moveDown', 'caption': 'Move Down'},
+            {
+                'action' : '',
+                'caption': '-'
+            },
+            {
+                'action' : 'delete',
+                'caption': 'Delete'
+            }
+        ];
+    }
+
+    async doAction(action) {
+        switch (action) {
+            case 'newItem':
+                this.actionNewKeyColumn();
+                break;
+            case 'newParentKeyColumn':
+                this.actionNewParentKeyColumn();
+                break;
+            case 'delete':
+                this.delete();
+                break;
+            case 'moveUp':
+                await this.model.moveUp();
+                this.item.move(-1);
+                break;
+            case 'moveDown':
+                await this.model.moveDown();
+                this.item.move(1);
+                break;
+        }
+    }
+
+    async actionNewKeyColumn() {
+        const self = this;
+        const result = await KeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
-            var itemName = $("#myModal input[id='itemName']").val();
-            self.model.newKeyColumn(itemName).then(function (itemData) {
+            const itemName = $("#myModal input[id='itemName']").val();
+            self.model.newKeyColumn(itemName).then((itemData) => {
                 self.addKeyColumn(itemData).select();
             });
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='itemName']").focus();
-    });
-};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.actionNewParentKeyColumn = function() {
-    var self = this;
-    ParentKeyColumn.prototype.getView('new.html').then(function (result) {
+    async actionNewParentKeyColumn() {
+        const self = this;
+        const result = await ParentKeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(function() {
-            var pkcName = $("#myModal input[id='pkcName']").val();
-            self.model.newParentKeyColumn(pkcName).then(function (parentKeyColumnData) {
+            const pkcName = $("#myModal input[id='pkcName']").val();
+            self.model.newParentKeyColumn(pkcName).then((parentKeyColumnData) => {
                 self.addParentKeyColumn(parentKeyColumnData).select();
             });
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='pkcName']").focus();
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getPropList = function() {
-    var self = this;
-    var progList = {
-        list   : {},
-        options: {}
-    };
-
-    // list
-    for (var name in self.model.data['@attributes']) {
-        if (name !== 'query' && name !== 'countQuery') {
-            progList.list[name] = self.model.data['@attributes'][name];
-        }
     }
 
-    // options
-    progList.options['insertNewKey']         = ['true', 'false'];
-    progList.options['dumpFirstRowToParams'] = ['true', 'false'];
-    return progList;
-};
+    getPropList() {
+        const propList = {
+            list   : {},
+            options: {}
+        };
+
+        // list
+        for (const name in this.model.data['@attributes']) {
+            if (!['query', 'countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
+                propList.list[name] = this.model.data['@attributes'][name];
+            }
+        }
+
+        // options
+        propList.options['insertNewKey']         = ['true', 'false'];
+        propList.options['dumpFirstRowToParams'] = ['true', 'false'];
+        return propList;
+    }
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.createTab = function(docs) {
-    var self = this;
-    var name = self.model.getFullName();
-    self.model.getView('QueryView.ejs').then(function (result) {
-        var html = QForms.render(result.view, {
-            model: self.model
-        });
+    async createTab(docs) {
+        const self = this;
+        const name = self.model.getFullName();
+        const result = await self.model.getView('QueryView.ejs');
+        const html = QForms.render(result.view, {model: self.model});
         self.$view        = $(html);
         self.data         = result.data;
-        self.cmQuery      = null;
+        // self.cmQuery      = null;
         self.cmCountQuery = null;
+        self.cmSingleQuery = null;
+        self.cmMultipleQuery = null;
         self.cmBackendJs  = null;
         self.save         = 'query';
 
@@ -192,15 +171,21 @@ DataSourceController.prototype.createTab = function(docs) {
         self.tabWidget.init();
         self.tabWidget.on('tabShow', self.listeners.tabShow = self.tabWidget_TabShow.bind(self));
 
-        // buttons
+        // toolbar
         self.$view.find('.btnSave').click(function() {
             self.btnSave_Click(this);
         });
-        self.$view.find('.btnQuery').click(function() {
+        /*self.$view.find('.btnQuery').click(function() {
             self.btnQuery_Click(this);
-        });
+        });*/
         self.$view.find('.btnCountQuery').click(function() {
             self.btnCountQuery_Click(this);
+        });
+        self.$view.find('.btnSingleQuery').click(function() {
+            self.btnSingleQuery_Click(this);
+        });
+        self.$view.find('.btnMultipleQuery').click(function() {
+            self.btnMultipleQuery_Click(this);
         });
         self.$view.find('.btnSaveController').click(function() {
             self.btnSaveController_Click(this);
@@ -211,8 +196,8 @@ DataSourceController.prototype.createTab = function(docs) {
 
         // properties
         if (self.model.data['@class'] === 'SqlDataSource') {
-            self.$view.find('.wndQuery').css('display', 'block');
-            self.initCmQuery();
+            self.$view.find('.wndSingleQuery').css('display', 'block');
+            self.initCmSingleQuery();
         }
 
         if (self.data.backendJs) {
@@ -220,120 +205,161 @@ DataSourceController.prototype.createTab = function(docs) {
         } else {
             self.$view.find('.btnSaveController').css('display', 'none');
         }
-    });
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.initCmQuery = function() {
-    var self = this;
-    self.cmQuery = CodeMirror.fromTextArea(self.$view.find('.cmQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmQuery.setOption('theme', 'cobalt');
-    self.cmQuery.setValue(self.model.data['@attributes'].query);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.initCmCountQuery = function() {
-    var self = this;
-    self.cmCountQuery = CodeMirror.fromTextArea(self.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmCountQuery.setOption('theme', 'cobalt');
-    self.cmCountQuery.setValue(self.model.data['@attributes'].countQuery);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.initCmBackendJs = function() {
-    var self = this;
-    self.cmBackendJs = CodeMirror.fromTextArea(self.$view.find('.cmBackendJs').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    self.cmBackendJs.setOption('theme', 'cobalt');
-    self.cmBackendJs.setValue(self.data.backendJs);
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnSave_Click = function(ctrl) {
-    var self = this;
-    switch (self.save) {
-        case 'query':
-            var value = self.cmQuery.getValue();
-            self.model.setValue('query', value);
-            break;
-        case 'countQuery':
-            var value = self.cmCountQuery.getValue();
-            self.model.setValue('countQuery', value);
-            break;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnCountQuery_Click = function(ctrl) {
-    var self = this;
-    self.$view.find('.wndCountQuery').css('display', 'block');
-    self.$view.find('.wndQuery').css('display', 'none');
-    if (self.cmCountQuery === null) {
-        self.initCmCountQuery();
+    // initCmQuery() {
+    //     this.cmQuery = CodeMirror.fromTextArea(this.$view.find('.cmQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+    //     this.cmQuery.setOption('theme', 'cobalt');
+    //     this.cmQuery.setValue(this.model.data['@attributes'].query);
+    // }
+
+    initCmCountQuery() {
+        this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmCountQuery.setOption('theme', 'cobalt');
+        this.cmCountQuery.setValue(this.model.data['@attributes'].countQuery);
     }
-    self.$view.find('.btnCountQuery').removeClass('btn-default');
-    self.$view.find('.btnCountQuery').addClass('btn-primary');
-    self.$view.find('.btnQuery').removeClass('btn-primary');
-    self.$view.find('.btnQuery').addClass('btn-default');
-    self.save = 'countQuery';
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnQuery_Click = function(ctrl) {
-    var self = this;
-    self.$view.find('.wndQuery').css('display', 'block');
-    self.$view.find('.wndCountQuery').css('display', 'none');
-    self.$view.find('.btnQuery').removeClass('btn-default');
-    self.$view.find('.btnQuery').addClass('btn-primary');
-    self.$view.find('.btnCountQuery').removeClass('btn-primary');
-    self.$view.find('.btnCountQuery').addClass('btn-default');
-    self.save = 'query';
-};
+    initCmSingleQuery() {
+        this.cmSingleQuery = CodeMirror.fromTextArea(this.$view.find('.cmSingleQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmSingleQuery.setOption('theme', 'cobalt');
+        this.cmSingleQuery.setValue(this.model.data['@attributes'].singleQuery);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.tabWidget_TabShow = function(ea) {
-    var self = this;
-    if ($(ea.tab).hasClass('tabController')) {
-        if (self.data.backendJs) {
-            if (self.cmBackendJs === null) {
-                self.initCmBackendJs();
+    initCmMultipleQuery() {
+        this.cmMultipleQuery = CodeMirror.fromTextArea(this.$view.find('.cmMultipleQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmMultipleQuery.setOption('theme', 'cobalt');
+        this.cmMultipleQuery.setValue(this.model.data['@attributes'].multipleQuery);
+    }
+
+    initCmBackendJs() {
+        this.cmBackendJs = CodeMirror.fromTextArea(this.$view.find('.cmBackendJs').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+        this.cmBackendJs.setOption('theme', 'cobalt');
+        this.cmBackendJs.setValue(this.data.backendJs);
+    }
+
+    btnSave_Click(ctrl) {
+        switch (this.save) {
+            // case 'query': this.model.setValue('query', this.cmQuery.getValue()); break;
+            case 'countQuery': this.model.setValue('countQuery', this.cmCountQuery.getValue()); break;
+            case 'singleQuery': this.model.setValue('singleQuery', this.cmSingleQuery.getValue()); break;
+            case 'multipleQuery': this.model.setValue('multipleQuery', this.cmMultipleQuery.getValue()); break;
+        }
+    }
+
+    // btnQuery_Click(ctrl) {
+    //     console.log('btnQuery_Click');
+    //     this.$view.find('.wndQuery').css('display', 'block');
+    //     this.$view.find('.wndCountQuery').css('display', 'none');
+    //     this.$view.find('.wndSingleQuery').css('display', 'none');
+    //     this.$view.find('.wndMultipleQuery').css('display', 'none');
+    //
+    //     this.$view.find('.btnQuery').removeClass('btn-default');
+    //     this.$view.find('.btnQuery').addClass('btn-primary');
+    //     this.$view.find('.btnCountQuery').removeClass('btn-primary');
+    //     this.$view.find('.btnCountQuery').addClass('btn-default');
+    //     this.$view.find('.btnSingleQuery').removeClass('btn-primary');
+    //     this.$view.find('.btnSingleQuery').addClass('btn-default');
+    //     this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
+    //     this.$view.find('.btnMultipleQuery').addClass('btn-default');
+    //     this.save = 'query';
+    // }
+
+    btnCountQuery_Click(ctrl) {
+        console.log('btnCountQuery_Click');
+        this.$view.find('.wndQuery').css('display', 'none');
+        this.$view.find('.wndCountQuery').css('display', 'block');
+        this.$view.find('.wndSingleQuery').css('display', 'none');
+        this.$view.find('.wndMultipleQuery').css('display', 'none');
+        if (this.cmCountQuery === null) {
+            this.initCmCountQuery();
+        }
+        this.$view.find('.btnCountQuery').removeClass('btn-default');
+        this.$view.find('.btnCountQuery').addClass('btn-primary');
+        this.$view.find('.btnQuery').removeClass('btn-primary');
+        this.$view.find('.btnQuery').addClass('btn-default');
+        this.$view.find('.btnSingleQuery').removeClass('btn-primary');
+        this.$view.find('.btnSingleQuery').addClass('btn-default');
+        this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
+        this.$view.find('.btnMultipleQuery').addClass('btn-default');
+        this.save = 'countQuery';
+    }
+
+    btnSingleQuery_Click(ctrl) {
+        console.log('btnSingleQuery_Click');
+        this.$view.find('.wndQuery').css('display', 'none');
+        this.$view.find('.wndCountQuery').css('display', 'none');
+        this.$view.find('.wndSingleQuery').css('display', 'block');
+        this.$view.find('.wndMultipleQuery').css('display', 'none');
+        if (this.cmSingleQuery === null) {
+            this.initCmSingleQuery();
+        }
+        this.$view.find('.btnQuery').removeClass('btn-primary');
+        this.$view.find('.btnQuery').addClass('btn-default');
+        this.$view.find('.btnCountQuery').removeClass('btn-primary');
+        this.$view.find('.btnCountQuery').addClass('btn-default');
+        this.$view.find('.btnSingleQuery').removeClass('btn-default');
+        this.$view.find('.btnSingleQuery').addClass('btn-primary');
+        this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
+        this.$view.find('.btnMultipleQuery').addClass('btn-default');
+        this.save = 'singleQuery';
+    }
+
+    btnMultipleQuery_Click(ctrl) {
+        console.log('btnMultipleQuery_Click');
+        this.$view.find('.wndQuery').css('display', 'none');
+        this.$view.find('.wndCountQuery').css('display', 'none');
+        this.$view.find('.wndSingleQuery').css('display', 'none');
+        this.$view.find('.wndMultipleQuery').css('display', 'block');
+        if (this.cmMultipleQuery === null) {
+            this.initCmMultipleQuery();
+        }
+        this.$view.find('.btnQuery').removeClass('btn-primary');
+        this.$view.find('.btnQuery').addClass('btn-default');
+        this.$view.find('.btnCountQuery').removeClass('btn-primary');
+        this.$view.find('.btnCountQuery').addClass('btn-default');
+        this.$view.find('.btnSingleQuery').removeClass('btn-primary');
+        this.$view.find('.btnSingleQuery').addClass('btn-default');
+        this.$view.find('.btnMultipleQuery').removeClass('btn-default');
+        this.$view.find('.btnMultipleQuery').addClass('btn-primary');
+        this.save = 'multipleQuery';
+    }
+
+    tabWidget_TabShow(ea) {
+        if ($(ea.tab).hasClass('tabController')) {
+            if (this.data.backendJs) {
+                if (this.cmBackendJs === null) {
+                    this.initCmBackendJs();
+                }
             }
         }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.showCustomController = function() {
-    var self = this;
-    self.$view.find('.wndBackendJs').css('display', 'block');
-    if ($(self.tabWidget.activeTab).hasClass('tabController')) {
-        self.initCmBackendJs();
+    showCustomController() {
+        this.$view.find('.wndBackendJs').css('display', 'block');
+        if ($(this.tabWidget.activeTab).hasClass('tabController')) {
+            this.initCmBackendJs();
+        }
+        this.$view.find('.btnCreateController').css('display', 'none');
+        this.$view.find('.btnSaveController').css('display', 'inline-block');
     }
-    self.$view.find('.btnCreateController').css('display', 'none');
-    self.$view.find('.btnSaveController').css('display', 'inline-block');
-};
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnSaveController_Click = function(ctrl) {
-    var self = this;
-    var text = self.cmBackendJs.getValue();
-    self.model.saveController(text);
-};
+    btnSaveController_Click(ctrl) {
+        const text = this.cmBackendJs.getValue();
+        this.model.saveController(text);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.btnCreateController_Click = function() {
-    var self = this;
-    self.model.createController().then(function (data) {
-        self.data.backendJs = data.backendJs;
-        self.showCustomController();
-    });
-};
+    async btnCreateController_Click() {
+        const data = await this.model.createController();
+        this.data.backendJs = data.backendJs;
+        this.showCustomController();
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-DataSourceController.prototype.getCaption = function(data) {
-    var self = this;
-    var caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
-        .replace('{name}' , data['@attributes'].name)
-        .replace('{class}', data['@class']);
-    return caption;
-};
+    getCaption(data) {
+        const caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
+            .replace('{name}' , data['@attributes'].name)
+            .replace('{class}', data['@class']);
+        return caption;
+    }
+
+}

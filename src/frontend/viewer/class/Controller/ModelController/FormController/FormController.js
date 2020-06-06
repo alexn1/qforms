@@ -1,87 +1,78 @@
 'use strict';
 
-QForms.inherits(FormController, ModelController);
+class FormController extends ModelController {
+    constructor(model, view, parent) {
+        super(model);
+        this.view     = view;
+        this.parent   = parent;
+        this.page     = parent;
+        this.fields   = {};
+        this.controls = {};
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function FormController(model, view, parent) {
-    var self = this;
-    ModelController.call(self, model);
-    self.view     = view;
-    self.parent   = parent;
-    self.page     = parent;
-    self.fields   = {};
-    self.controls = {};
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.create = function(model, view, parent) {
-    var customClassName = '{page}{form}Controller'
-        .replace('{page}', model.page.name)
-        .replace('{form}', model.name);
-    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
-    var custom =  'new {customClassName}(model, view, parent)'.replace('{customClassName}', customClassName);
-    var general = 'new {class}Controller(model, view, parent)'.replace('{class}', model.data.class);
-    var obj;
-    if (model.data.js !== undefined) {
-        if (eval(typeOfCustomClass) === 'function') {
-            obj = eval(custom);
+    static create(model, view, parent) {
+        console.log('FormController.create', model.getFullName());
+        let obj;
+        if (model.data.js) {
+            const CustomClass = eval(model.data.js);
+            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
+            obj = new CustomClass(model, view, parent);
         } else {
-            $.globalEval(model.data.js);
-            obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
+            obj = eval(`new ${model.data.class}Controller(model, view, parent);`);
         }
-    } else {
-        obj = eval(general);
+        return obj;
     }
-    return obj;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.init = function() {
-    var self = this;
-    // fields
-    for (var name in self.model.fields) {
-        var field = self.model.fields[name];
-        self.fields[name] = FieldController.create(field, self);
-        self.fields[name].init();
+    init() {
+        // fields
+        for (const name in this.model.fields) {
+            const field = this.model.fields[name];
+            this.fields[name] = FieldController.create(field, this);
+            this.fields[name].init();
+        }
+        // controls
+        for (const name in this.model.controls) {
+            const control = this.model.controls[name];
+            this.controls[name] = ControlController.create(control, this);
+            this.controls[name].init();
+        }
     }
-    // controls
-    for (var name in self.model.controls) {
-        var control = self.model.controls[name];
-        self.controls[name] = ControlController.create(control, self);
-        self.controls[name].init();
+
+    deinit() {
+        //console.log('FormController.deinit: ' + this.model.name);
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        for (const name in this.controls) {
+            this.controls[name].deinit();
+        }
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.deinit = function() {
-    var self = this;
-    //console.log('FormController.prototype.deinit: ' + this.model.name);
-    for (var name in self.fields) {
-        self.fields[name].deinit();
+    fill() {
     }
-    for (var name in self.controls) {
-        self.controls[name].deinit();
+
+    isValid() {
+        return true;
     }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.fill = function() {
-    var self = this;
-};
+    setRowStyle(bodyRow, row) {
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.isValid = function() {
-    var self = this;
-    return true;
-};
+    getCaption() {
+        return this.model.data.caption;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.setRowStyle = function(bodyRow, row) {
-    var self = this;
-};
+    async openPage(args) {
+        return this.parent.openPage(args);
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-FormController.prototype.getCaption = function() {
-    var self = this;
-    return self.model.data.caption;
-};
+    isChanged() {
+        return false;
+    }
+
+    onFieldChange(e) {
+        console.log('FormController.onFieldChange', this.model.getFullName());
+        this.parent.onFormChange(e);
+    }
+
+}

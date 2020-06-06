@@ -1,159 +1,180 @@
 'use strict';
 
-QForms.inherits(PageController, ModelController);
+class PageController extends ModelController {
+    constructor(model, view, parent) {
+        //console.log('PageController.constructor', model);
+        super(model);
+        this.view       = view;
+        this.parent     = parent;
+        this.app        = parent;
+        this.captionEls = null;
+        this.forms      = {};
+        this.tab        = null;
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageController(model, view, parent) {
-    var self = this;
-    //console.log(model);
-    ModelController.call(self, model);
-    self.view       = view;
-    self.parent     = parent;
-    self.app        = parent;
-    self.captionEls = null;
-    self.forms      = {};
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.create = function(model, view, parent) {
-    var customClassName = '{page}Controller'.replace('{page}', model.name);
-    var typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
-    var custom =  'new {customClassName}(model, view, parent)'.replace('{customClassName}', customClassName);
-    var general = 'new {class}Controller(model, view, parent)'.replace('{class}', model.data.class);
-    var obj;
-    if (model.data.js !== undefined) {
-        if (eval(typeOfCustomClass) === 'function') {
-            obj = eval(custom);
+    static create(model, view, parent) {
+        console.log('PageController.create', model.name);
+        const customClassName = `${model.name}Controller`;
+        const typeOfCustomClass = `typeof ${customClassName}`;
+        const custom =  `new ${customClassName}(model, view, parent)`;
+        const general = `new ${model.data.class}Controller(model, view, parent)`;
+        let obj;
+        if (model.data.js !== undefined) {
+            if (eval(typeOfCustomClass) === 'function') {
+                obj = eval(custom);
+            } else {
+                $.globalEval(model.data.js);
+                obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
+            }
         } else {
-            $.globalEval(model.data.js);
-            obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
+            obj = eval(general);
         }
-    } else {
-        obj = eval(general);
+        return obj;
     }
-    return obj;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.init = function() {
-    var self = this;
-    self.captionEls = self.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}', self.model.id));
-    $(self.view).find('#{pageId}_TabWidget'.replace('{pageId}', self.model.id)).each(function() {
-        new TabWidget(this).init();
-    });
-    $(self.view).find('button.save').click(function() {
-        self.onSaveClick(this);
-    });
-    $(self.view).find('button.saveAndClose').click(function() {
-        self.onSaveAndCloseClick(this);
-    });
-    $(self.view).find('button.closePage').click(function() {
-        self.onClosePageClick(this);
-    });
-    self.model.on('changed', self.listeners.changed = self.onPageChanged.bind(self));
-    self.model.on('updated', self.listeners.updated = self.onPageUpdated.bind(self));
-    for (var name in self.model.forms) {
-        var form = self.model.forms[name];
-        var viewId = '#{pageId}_{name}'.template({
-            pageId: self.model.id,
-            name  : name
+    init() {
+        const self = this;
+        self.captionEls = self.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}', self.model.id));
+        $(self.view).find('#{pageId}_TabWidget'.replace('{pageId}', self.model.id)).each(function() {
+            new TabWidget(this).init();
         });
-        var view = $(self.view).find(viewId).get(0);
-        self.forms[name] = FormController.create(form, view, self);
-        self.forms[name].init();
-    }
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.deinit = function() {
-    var self = this;
-    //console.log('PageController.prototype.deinit: ' + this.model.name);
-    for (var formName in self.forms) {
-        self.forms[formName].deinit();
-    }
-    self.model.off('changed', self.listeners.changed);
-    self.model.off('updated', self.listeners.updated);
-};
+        // disable buttons
+        $(self.view).find('button.saveAndClose').prop('disabled', true);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.fill = function() {
-    var self = this;
-    self.setCaption(self.getCaption());
-    for (var formName in self.forms) {
-        self.forms[formName].fill();
-    }
-};
+        // button click
+        $(self.view).find('button.saveAndClose').click(function() {
+            self.onSaveAndCloseClick(this);
+        });
+        $(self.view).find('button.closePage').click(function() {
+            self.onClosePageClick(this);
+        });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.onSaveClick = function(el) {
-    var self = this;
-    if (self.isValid()) {
-        self.model.update();
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.onSaveAndCloseClick = function(el) {
-    var self = this;
-    if (self.isValid()) {
-        self.model.saveAndClose();
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.onClosePageClick = function(e) {
-    var self = this;
-    self.model.close();
-};
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.changedCaption = function() {
-    var self = this;
-    self.setCaption(self.getCaption() + ' *');
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.unchangedCaption = function() {
-    var self = this;
-    self.setCaption(self.getCaption());
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.setCaption = function(caption) {
-    var self = this;
-    for (var i = 0; i < self.captionEls.length; i++) {
-        self.captionEls[i].innerHTML = caption;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.getCaption = function() {
-    var self = this;
-    return self.model.data.caption;
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.isValid = function() {
-    var self = this;
-    var isValid = true;
-    for (var name in self.forms) {
-        if (!self.forms[name].isValid()) {
-            isValid = false;
+        // forms
+        for (const name in self.model.forms) {
+            const form = self.model.forms[name];
+            const viewId = `#${self.model.id}_${name}`;
+            const view = $(self.view).find(viewId).get(0);
+            self.forms[name] = FormController.create(form, view, self);
+            self.forms[name].init();
         }
     }
-    return isValid;
-};
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.onPageChanged = function(ea) {
-    var self = this;
-    self.changedCaption();
-};
+    deinit() {
+        console.log('PageController.deinit: ' + this.model.name);
+        for (const name in this.forms) {
+            this.forms[name].deinit();
+        }
+    }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-PageController.prototype.onPageUpdated = function(ea) {
-    var self = this;
-    //console.log('PageController.prototype.onPageUpdated');
-    self.unchangedCaption();
-};
+    fill() {
+        for (const formName in this.forms) {
+            this.forms[formName].fill();
+        }
+        this.setCaption(this.getCaption());
+    }
+
+    async onSaveAndCloseClick(el) {
+        console.log('PageController.onSaveAndCloseClick');
+        if (this.isValid()) {
+            await this.app.saveAndClosePage(this);
+        }
+    }
+
+    onClosePageClick(e) {
+        console.log('PageController.onClosePageClick');
+        this.close();
+    }
+
+    enableSave() {
+        $(this.view).find('button.saveAndClose').prop('disabled', false);
+    }
+
+    disableSave() {
+        $(this.view).find('button.saveAndClose').prop('disabled', true);
+    }
+
+    setCaption(caption) {
+        for (let i = 0; i < this.captionEls.length; i++) {
+            this.captionEls[i].innerHTML = caption;
+        }
+        TabWidget.setTabCaption(this.tab, caption);
+    }
+
+    getCaption() {
+        console.log('PageController.getCaption', this.model.name);
+        const key = this.model.getKey();
+        let caption;
+        if (key) {
+            caption = this.model.data.caption + ' ' + key;
+        } else {
+            caption = this.model.data.caption;
+        }
+        if (this.isChanged()) {
+            caption += ' *';
+        }
+        return caption;
+    }
+
+    isValid() {
+        let isValid = true;
+        for (const name in this.forms) {
+            if (!this.forms[name].isValid()) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+
+    onFormChange(e) {
+        console.log('PageController.onFormChange');
+        this.setCaption(this.getCaption());
+        if (this.isChanged()) {
+            if (this.isValid()) {
+                this.enableSave();
+            } else {
+                this.disableSave();
+            }
+        } else {
+            this.disableSave();
+        }
+    }
+
+    onFormDiscard(formController) {
+        console.log('PageController.onFormDiscard', this.model.name);
+        this.setCaption(this.getCaption());
+        if (this.isChanged()) {
+            this.enableSave();
+        } else {
+            this.disableSave();
+        }
+    }
+
+    onFormUpdate(e) {
+        console.log('PageController.onFormUpdate');
+        this.setCaption(this.getCaption());
+        this.disableSave();
+    }
+
+    close() {
+        console.log('PageController.close');
+        if (this.isChanged() && !confirm(this.model.app.data.text.form.areYouSure)) return;
+        this.app.closePage(this);
+    }
+
+    async openPage(args) {
+        args.parentPage = this.model;
+        return await this.parent.openPage(args);
+    }
+
+    isChanged() {
+        for (const name in this.forms) {
+            const form = this.forms[name];
+            if (form.isChanged()) {
+                console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+                return true;
+            }
+        }
+        return false;
+    }
+}

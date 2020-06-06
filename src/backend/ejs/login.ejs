@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8"/>
+    <title><%=caption%> - <%=application.text.login.login%> - QForms</title>
+    <!-- EventEmitter -->
+    <script src="/common/lib/EventEmitter/EventEmitter.min.js"></script>
+    <!-- bluebird -->
+    <script src="/common/lib/bluebird/bluebird.min.js"></script>
+    <!-- jquery -->
+    <script src="/common/lib/jquery/jquery-2.1.4.min.js"></script>
+    <!-- bootstrap -->
+    <link href="/common/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/common/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="/common/lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- end -->
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signin .form-signin-heading {
+            font-weight: normal;
+        }
+        .form-signin .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[name="username"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form class="form-signin" action="<%=REQUEST_URI%>" method="post">
+            <% if (errMsg !== null) { %>
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span><%=errMsg%></span>
+                </div>
+            <% } %>
+            <input name="action" type="hidden" value="login">
+            <% if (users) { %>
+                <select name="username" class="form-control" required autofocus>
+                    <option value=""></option>
+                    <% users.forEach((user) => { %>
+                        <option value="<%=user.username%>" <%=user.username === username ? 'selected' : ''%>><%=user.title%></option>
+                    <% }); %>
+                </select>
+            <% } else { %>
+                <input name="username" class="form-control" placeholder="<%=application.text.login.username%>" required autofocus value="<%=username%>">
+            <% } %>
+            <input name="password" type="password" class="form-control" placeholder="<%=application.text.login.password%>">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%=application.text.login.signIn%></button>
+        </form>
+    </div>
+</body>
+</html>

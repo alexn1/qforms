@@ -1,39 +1,23 @@
-<div class="RowFormView" id="<%=model.page.id%>_<%=model.name%>">
-    <table>
-        <tbody>
-            <% for (var fieldName in model.fields) {
-                var field = model.fields[fieldName];
-                if (field.data.isVisible === 'false') {
-                    continue;
-                }
-                %>
-                <tr>
-                    <td class="line">
-                        <div class="lbl">
-                            <% echo(field.data.caption + ':');
-                            if (field.data.notNull === 'true') {
-                                %><span style='color:red;'>&nbsp;*</span><%
-                            } %>
-                        </div>
-                    </td>
-                    <td class="line">
-                        <%=QForms.render(field.data.view, {model: field, newMode: newMode})%>
-                    </td>
-                </tr>
-            <% } %>
-            <% for (var name in model.controls) {
-                var control = model.controls[name];
-                if (control.data.isVisible === 'false') {
-                    continue;
-                }
-                %>
-                <tr>
-                    <td></td>
-                    <td>
-                        <%=QForms.render(control.data.view, {model: control, newMode: newMode})%>
-                    </td>
-                </tr>
-            <% } %>
-        </tbody>
-    </table>
+<div id="<%=model.page.id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
+    <% if (model.dataSource.data.class === 'SqlDataSource') { %>
+    <div class="toolbar">
+        <button class="btn btn-default btn-xs saveForm">Save</button>
+        <button class="btn btn-default btn-xs discardForm">Discard</button>
+        <button class="btn btn-default btn-xs refreshForm">Refresh</button>
+    </div>
+    <% } %>
+    <div class="Grid">
+        <% for (const fieldName in model.fields) {
+            const field = model.fields[fieldName];
+            if (field.data.isVisible === 'false') continue;
+        %>
+            <div class="Label <%=field.name%>Label">
+                <% echo(field.data.caption + ':');
+                if (field.data.notNull === 'true') {
+                %><span style='color:red;'>&nbsp;*</span><%
+                } %>
+            </div>
+            <%=QForms.render(field.data.view, {model: field, newMode: newMode})%>
+        <% } %>
+    </div>
 </div>

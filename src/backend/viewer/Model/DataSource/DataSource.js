@@ -1,247 +1,149 @@
 'use strict';
 
-var util    = require('util');
-var path    = require('path');
-var _       = require('underscore');
-var Promise = require('bluebird');
+const path    = require('path');
+const qforms = require('../../../qforms');
+const Model  = require('../Model');
 
-var qforms = require('../../../../qforms');
-var Model  = require('../Model');
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DataSource extends Model {
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(data, parent) {
         super(data, parent);
         this.application      = parent instanceof qforms.Application ? parent : null;
         this.page             = parent instanceof qforms.Page        ? parent : null;
         this.form             = parent instanceof qforms.Form        ? parent : null;
-        this.keyColumns       = [];
-        this.parentKeyColumns = [];
+        this.keyColumns       = null;
+        this.parentKeyColumns = null;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    static create(data, parent) {
-        return Promise.try(() => {
-            if (parent instanceof qforms.Form) {
-                var form = parent;
-                var customClassFilePath = path.join(
-                    form.page.application.dirPath,
-                    'pages',
-                    form.page.name,
-                    'forms',
-                    form.name,
-                    'dataSources',
-                    data['@attributes'].name,
-                    data['@attributes'].name + '.backend.js'
-                );
-                return qforms.Helper.getFileContent(customClassFilePath).then(content => {
-                    if (content) {
-                        var customClass = eval(content);
-                        return new customClass(data, parent);
-                    } else {
-                        return new qforms.SqlDataSource(data, parent);
-                    }
-                });
-            } else {
-                return new DataSource(data, parent);
+    static async create(data, parent) {
+        if (parent instanceof qforms.Form) {
+            const form = parent;
+            const name = data['@attributes'].name;
+            const customClassFilePath = path.join(
+                form.page.application.dirPath,
+                'pages', form.page.name,
+                'forms', form.name,
+                'dataSources', name,
+                `${name}.backend.js`
+            );
+            const content = await qforms.Helper.getFileContent(customClassFilePath);
+            if (content) {
+                const CustomClass = eval(content);
+                return new CustomClass(data, parent);
             }
-        });
-    }
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    init() {
-        return super.init().then(() => {
-            if (this.data.keyColumns === undefined || Object.keys(this.data.keyColumns).length === 0) {
-                throw new Error('[' + this.getFullName() + ']: Data Source must have at least one key column.');
-            }
-            this.keyColumns = Object.keys(this.data.keyColumns);
-            if (this.data.parentKeyColumns) {
-                this.parentKeyColumns = Object.keys(this.data.parentKeyColumns);
-            }
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    checkColumn(row, column) {
-        if (!row.hasOwnProperty(column)) {
-            throw new Error('[{fullName}]: No column \'{column}\' in result set.'.template({
-                fullName : this.getFullName(),
-                column   : column
-            }));
+            return new qforms.SqlDataSource(data, parent);
+        } else {
+            return new DataSource(data, parent);
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    async checkAndCalcColumns(row) {
+    async init() {
+        console.log('DataSource.init', this.name);
+        await super.init();
+        this.keyColumns       = this.getKeyColumns();
+        this.parentKeyColumns = this.getParentKeyColumns();
+    }
+
+    getKeyColumns() {
+        if (this.data.keyColumns === undefined || Object.keys(this.data.keyColumns).length === 0) {
+            throw new Error('[' + this.getFullName() + ']: Data Source must have at least one key column.');
+        }
+        return Object.keys(this.data.keyColumns);
+    }
+
+    getParentKeyColumns() {
+        return this.data.parentKeyColumns ? Object.keys(this.data.parentKeyColumns) : [];
+    }
+
+    checkColumn(row, column) {
+        if (!row.hasOwnProperty(column)) {
+            throw new Error(`[${this.getFullName()}]: No column '${column}' in result set`);
+        }
+    }
+
+    checkAndCalcColumns(row) {
+        // console.log('DataSource.checkAndCalcColumns', this.getFullName());
         this.keyColumns.forEach(column => {
             this.checkColumn(row, column);
         });
         this.parentKeyColumns.forEach(column => {
             this.checkColumn(row, column);
         });
-        if ((this.parent instanceof qforms.Form) && this.name === 'default') {
-            return Promise.each(Object.keys(this.parent.fields), name => {
-                var field = this.parent.fields[name];
-                if (!field.data['@attributes'].column) {
-                    throw new Error('[{fullName}]: no column name'.template({fullName : this.getFullName()}));
-                }
-                var columnName = field.data['@attributes'].column;
-                if (row.hasOwnProperty(columnName)) {
-                    if (this.parent instanceof qforms.TableForm && row[columnName] !== null) {
-                        row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
-                    }
-                } else if (field.data['@attributes'].value) {
-                    return field.calcValue(row);
-                } else {
-                    throw new Error('[{fullName}]: need column or value.'.template({fullName : this.getFullName()}));
-                }
-            });
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    fill(context) {
-        //console.log('DataSource.prototype.fill', this.name);
-        var start;
-        return super.fill(context).then(response => {
-            delete response.query;
-            delete response.limit;
-            response.keyColumns = this.keyColumns;
-            if (this.parentKeyColumns.length > 0) {
-                response.parentKeyColumns = this.parentKeyColumns;
+        if (!(this.parent instanceof qforms.Form) || this.name !== 'default') return;
+        Object.keys(this.parent.fields).forEach(name => {
+            const field = this.parent.fields[name];
+            const columnName = field.getAttr('column');
+            if (!columnName) {
+                throw new Error(`[${this.getFullName()}]: no column name`);
             }
-            response.access = this.getAccessToken(context);
-            // if form data source named default then check mode
-            if (this.form && this.name === 'default' && context.newMode) {
-                response.rows = [];
-                return response;
+            if (row.hasOwnProperty(columnName)) {
+                if (this.parent instanceof qforms.TableForm && row[columnName] !== null && typeof row[columnName] === 'string') {
+                    row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
+                }
+            } else if (field.getAttr('value')) {
+                field.calcValue(row);
             } else {
-                if (this.data['@attributes'].limit) {
-                    context.params['offset'] = 0;
-                    context.params['limit']  = response.limit = parseInt(this.data['@attributes'].limit);
-                }
-                start = Date.now();
-                return this.select(context).then(rows => {
-                    console.log('DataSource.prototype.fill', this.getFullName(), 'select:', Date.now() - start, 'ms');
-                    response.rows = rows;
-                    return Promise.each(response.rows, row => {
-                        return this.checkAndCalcColumns(row);
-                    });
-                }).then(() => {
-                    if (this.name === 'default' && this.form && this.form instanceof qforms.RowForm && response.rows[0]) {
-                        this.form.dumpRowToParams(response.rows[0], context.querytime.params);
-                    }
-                    if (this.data['@attributes'].limit) {
-                        if (!this.data['@attributes'].countQuery) {
-                            throw new Error('[' + this.getFullName() + ']: countQuery empty.');
-                        }
-                        start = Date.now();
-                        return this.selectCount(context).then(count => {
-                            console.log('DataSource.prototype.fill', this.getFullName(),'selectCount:', Date.now() - start, 'ms');
-                            response.count = parseInt(count);
-                            return response;
-                        });
-                    } else {
-                        return response;
-                    }
-                });
+                throw new Error(`[${this.getFullName()}]: need column or value.`);
             }
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    frame(context) {
-        var start;
-        if (this.data['@attributes'].limit) {
-            context.params['limit'] = parseInt(this.data['@attributes'].limit);
-        }
-        start = Date.now();
-        return this.select(context).then(rows => {
-            console.log('DataSource.prototype.frame', this.getFullName(), 'select:', Date.now() - start, 'ms');
-            return Promise.each(rows, row => {
-                return this.checkAndCalcColumns(row);
-            }).then(() => {
-                var response = {
-                    rows: rows
-                };
-                return Promise.try(() => {
-                    if (this.data['@attributes'].limit) {
-                        if (!this.data['@attributes'].countQuery) {
-                            throw new Error('[' + this.getFullName() + ']: countQuery empty.');
-                        }
-                        start = Date.now();
-                        return this.selectCount(context).then(count => {
-                            console.log('DataSource.prototype.frame', this.getFullName(), 'selectCount:', Date.now() - start, 'ms');
-                            response.count = parseInt(count);
-                        });
-                    }
-                }).then(() => {
-                    return response;
-                });
-            });
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    async selectCount(context) {
-        return [];
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     async select(context) {
-        return [];
+        throw new Error('DataSource.select: not implemented');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    async selectSingle(context) {
+        throw new Error('DataSource.selectSingle: not implemented');
+    }
+
+    async selectMultiple(context) {
+        throw new Error('DataSource.selectMultiple: not implemented');
+    }
+
     async update(context) {
+        throw new Error('DataSource.update: not implemented');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     async insert(context) {
+        throw new Error('DataSource.insert: not implemented');
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     async delete(context) {
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     getApp() {
-        if (this.parent instanceof qforms.Application) {
-            return this.parent;
-        } else if (this.parent instanceof qforms.Page) {
-            return this.parent.parent;
-        } else if (this.parent instanceof qforms.Form) {
-            return this.parent.parent.parent;
-        } else {
-            throw new Error('getApp: wrong parent');
-        }
+        return this.parent.getApp();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    getRowKeyValues(row) {
-        var values = {};
+    getKeyValuesFromRow(row) {
+        const values = {};
         this.keyColumns.forEach(column => {
             values[column] = row[column];
         });
         return values;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    getKeyValues(key) {
-        var arr = JSON.parse(key);
-        var row = {};
-        for (var i = 0; i < this.keyColumns.length; i++) {
-            var column = this.keyColumns[i];
-            row[column] = arr[i];
+    getKeyValuesFromKey(key) {
+        const arr = JSON.parse(key);
+        if (arr.length !== this.keyColumns.length) throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
+        const values = {};
+        for (let i = 0; i < this.keyColumns.length; i++) {
+            const column = this.keyColumns[i];
+            values[column] = arr[i];
         }
-        return row;
+        return values;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    getKeyFromValues(values) {
+        const arr = [];
+        for (let i = 0; i < this.keyColumns.length; i++) {
+            const column = this.keyColumns[i];
+            const value = values[column];
+            if (value === null || value === undefined) return null;
+            arr.push(value);
+        }
+        return JSON.stringify(arr);
+    }
+
     getFullName() {
         if (this.form) {
             return [this.form.page.name, this.form.name, this.name].join('.');
@@ -252,13 +154,11 @@ class DataSource extends Model {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     getParams(context) {
         return this.getApp().getParams(context);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    getAccessToken(context) {
+    getAccess(context) {
         return {
             select: true,
             insert: true,
@@ -267,6 +167,36 @@ class DataSource extends Model {
         };
     }
 
+    static keyToParams(key, paramName = 'key') {
+        if (typeof key !== 'string') throw new Error('key not string');
+        const params = {};
+        const arr = JSON.parse(key);
+        if (arr.length === 1) {
+            params[paramName] = arr[0];
+        } else  if (arr.length > 1) {
+            for (let i = 0; i < arr.length; i++) {
+                params[`${paramName}${i + 1}`] = arr[i];
+            }
+        } else {
+            throw new Error(`invalid key: ${key}`);
+        }
+        return params;
+    }
+
+    calcNewKeyValues(originalKeyValues, values) {
+        const newKeyValues = this.keyColumns.reduce((acc, name) => {
+            if (originalKeyValues[name] === undefined) throw new Error(`no key column in values: ${name}`);
+            acc[name] = values[name] !== undefined ? values[name] : originalKeyValues[name];
+            return acc;
+        }, {});
+        return newKeyValues;
+    }
+
+    calcNewKey(key, values) {
+        const keyValues = this.getKeyValuesFromKey(key);
+        const newKeyValues = this.calcNewKeyValues(keyValues, values);
+        return this.getKeyFromValues(newKeyValues);
+    }
 }
 
 module.exports = DataSource;

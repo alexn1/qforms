@@ -1,10 +1,10 @@
 'use strict';
 
-QForms.inherits(PageLinkController, ModelController);
+class PageLinkController extends ModelController {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function PageLinkController(model, item) {
-    var self = this;
-    ModelController.call(self, model);
-    self.item = item;
+    constructor(model, item) {
+        super(model);
+        this.item = item;
+    }
+
 }

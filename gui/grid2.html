@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>grid2</title>
+    <style>
+        html {
+            margin: 0;
+            height: 100%;
+            font-family: sans-serif;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+        }
+        .grid {
+            display: grid;
+            grid-template-rows: min-content 1fr min-content;
+        }
+        #client {
+            background-color: lightgrey;
+            height: 100%;
+        }
+        #menu {
+            background-color: red;
+        }
+        #content {
+            background-color: pink;
+        }
+        #status {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+<div id="client" class="grid">
+    <div id="menu">menu</div>
+    <div id="content">content</div>
+    <div id="status">status</div>
+</div>
+
+</body>
+</html>
