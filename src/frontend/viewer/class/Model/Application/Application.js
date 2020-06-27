@@ -9,6 +9,8 @@ class Application extends Model {
 
     init() {
         console.log('Application.init');
+        if (!this.data.theme) throw new Error('no theme attr');
+
         // databases
         for (const name in this.data.databases) {
             this.databases[name] = new Database(this.data.databases[name], this);
@@ -17,7 +19,7 @@ class Application extends Model {
 
         // dataSources
         for (const name in this.data.dataSources) {
-            this.dataSources[name] = new DataSource(name, this, this.data.dataSources[name]);
+            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
             this.dataSources[name].init();
         }
     }
@@ -29,15 +31,6 @@ class Application extends Model {
         // TODO: add deinit on opened pages
     }
 
-    // getTable(fullTableName) {
-    //     if (!(fullTableName in this.tables)) {
-    //         const table = new EventEmitter();
-    //         table.name = fullTableName;
-    //         this.tables[fullTableName] = table;
-    //     }
-    //     return this.tables[fullTableName];
-    // }
-
     async logout() {
         const data = await this.request({
             'action':'logout'
@@ -45,13 +38,17 @@ class Application extends Model {
         this.emit('logout', {source: this});
     }
 
-    async request(data) {
+    async request(options) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const response = await QForms.doHttpRequest(data);
-        const time = Date.now() - start;
-        // console.warn('response:', response);
-        this.emit('request', {time});
-        return response;
+        const data = await QForms.doHttpRequest(options);
+        // console.warn('data:', data);
+        this.emit('request', {time: Date.now() - start});
+        return data;
+    }
+
+    getDatabase(name) {
+        if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
+        return this.databases[name];
     }
 }

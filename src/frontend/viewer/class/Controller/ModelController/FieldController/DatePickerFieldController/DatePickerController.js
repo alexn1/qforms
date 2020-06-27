@@ -9,7 +9,7 @@ class DatePickerFieldController extends FieldController {
     fill(row, view) {
         const self = this;
         super.fill(row, view);
-        if (this.model.form.data.class === 'RowForm') {
+        if (this.model.form.getClassName() === 'RowForm') {
             $(view).children().change(function() {
                 self.onChange(this);
             });
@@ -75,7 +75,7 @@ class DatePickerFieldController extends FieldController {
                 text = value;
             }
         }
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 view.firstElementChild.value       = text;
                 view.firstElementChild.placeholder = placeholder;
@@ -88,7 +88,7 @@ class DatePickerFieldController extends FieldController {
 
     getValue(view) {
         let text;
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 text = view.firstElementChild.value;
                 break;

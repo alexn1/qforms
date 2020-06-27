@@ -37,7 +37,7 @@ class DataSource extends Model {
     }
 
     async init() {
-        console.log('DataSource.init', this.name);
+        // console.log('DataSource.init', this.name);
         await super.init();
         this.keyColumns       = this.getKeyColumns();
         this.parentKeyColumns = this.getParentKeyColumns();
@@ -45,7 +45,7 @@ class DataSource extends Model {
 
     getKeyColumns() {
         if (this.data.keyColumns === undefined || Object.keys(this.data.keyColumns).length === 0) {
-            throw new Error('[' + this.getFullName() + ']: Data Source must have at least one key column.');
+            throw new Error(`${this.getFullName()}: data Source must have at least one key column`);
         }
         return Object.keys(this.data.keyColumns);
     }
@@ -56,7 +56,7 @@ class DataSource extends Model {
 
     checkColumn(row, column) {
         if (!row.hasOwnProperty(column)) {
-            throw new Error(`[${this.getFullName()}]: No column '${column}' in result set`);
+            throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
         }
     }
 

@@ -45,7 +45,6 @@ class DataGridWidget extends GridWidget {
             const key = this.getDataSource().getRowKey(row);
             const bodyRow = this.createBodyRow(i);
             bodyRow.dbRow = row;
-            bodyRow.qKey  = key;
             for (const fieldName in this.gridColumns) {
                 const bodyCell = bodyRow.bodyCells[fieldName];
                 this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
@@ -85,15 +84,15 @@ class DataGridWidget extends GridWidget {
     }
 
     onRowUpdate(event) {
-        console.log('DataGridWidget.onRowUpdate:', event);
+        // console.log('DataGridWidget.onRowUpdate:', event);
         const key = event.key;
         const i   = event.i;
         const bodyRow = this.keyToBodyRow[key];
         if (!bodyRow) throw new Error(`no row with key: ${key}`);
         const row = bodyRow.dbRow;
         const newKey = this.getDataSource().getRowKey(row);
-        console.log('row:', row);
-        console.log(`key: ${key} to ${newKey}`);
+        // console.log('row:', row);
+        // console.log(`key: ${key} to ${newKey}`);
         if (key !== newKey) {   // update index if needed
             delete this.keyToBodyRow[key];
             this.keyToBodyRow[newKey] = bodyRow;
@@ -108,7 +107,6 @@ class DataGridWidget extends GridWidget {
         const key = this.getDataSource().getRowKey(row);
         const bodyRow = this.createBodyRow(i);
         bodyRow.dbRow = row;
-        bodyRow.qKey = key;
         for (const fieldName in this.gridColumns) {
             const bodyCell = bodyRow.bodyCells[fieldName];
             this.gridColumns[fieldName].fieldController.fill(bodyRow.dbRow, bodyCell.firstElementChild);
@@ -164,7 +162,10 @@ class DataGridWidget extends GridWidget {
     }
 
     getSelectedKey() {
-        return (this.selectedBodyRow !== null) ? this.selectedBodyRow.qKey : null;
+        if (this.selectedBodyRow) {
+            return this.getDataSource().getRowKey(this.selectedBodyRow.dbRow);
+        }
+        return null;
     }
 
     getDataSource() {

@@ -17,7 +17,7 @@ class ParentKeyColumnEditorController extends EditorController {
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.page);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         const parentKeyColumnData = formEditor.newDataSourceParentKeyColumn(params);
         await pageEditor.save();
         return parentKeyColumnData;
@@ -26,7 +26,7 @@ class ParentKeyColumnEditorController extends EditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        const formEditor = pageEditor.getForm(params['form']);
+        const formEditor = pageEditor.createFormEditor(params['form']);
         formEditor.setDataSourceParentKeyColumnAttr(params['dataSource'], params['parentKeyColumn'], params['attr'], params['value']);
         await pageEditor.save();
         return null;
@@ -35,7 +35,7 @@ class ParentKeyColumnEditorController extends EditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.page);
-        const formEditor = pageEditor.getForm(params['form']);
+        const formEditor = pageEditor.createFormEditor(params['form']);
         formEditor.deleteFormDataSourceParentKeyColumn(params['dataSource'], params['parentKeyColumn']);
         await pageEditor.save();
         return null;

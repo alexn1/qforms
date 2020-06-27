@@ -11,7 +11,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     static async create(data, parent) {
-        console.log('PostgreSqlDatabase.create');
+        // console.log('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
     }
 
@@ -41,13 +41,8 @@ class PostgreSqlDatabase extends Database {
         }
     }
 
-    async queryRows(context, query, params) {
-        // console.log('PostgreSqlDatabase.queryRows');
-        // console.log('query:', query);
-        // console.log('params:', params);
-        if (process.env.NODE_ENV === 'development') {
-            console.log('PostgreSqlDatabase.queryRows', query, params);
-        }
+    async queryRows(context, query, params = null) {
+        console.log('PostgreSqlDatabase.queryRows', query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -57,7 +52,7 @@ class PostgreSqlDatabase extends Database {
         return result.rows;
     }
 
-    async queryResult(context, query, params) {
+    async queryResult(context, query, params = null) {
         console.log('PostgreSqlDatabase.queryResult', query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
@@ -77,8 +72,8 @@ class PostgreSqlDatabase extends Database {
     }
 
     async rollback(cnn, err) {
-        console.log('PostgreSqlDatabase.rollback');
-        throw err;
+        console.log('PostgreSqlDatabase.rollback: ', err.message);
+        // throw err;
     }
 
     static formatQuery(query, params) {
@@ -119,21 +114,6 @@ class PostgreSqlDatabase extends Database {
         return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
 
-    // getUpdateQuery2(tableName, values, where) {
-    //     return PostgreSqlDatabase.getUpdateQuery2(tableName, values, where);
-    // }
-
-    // static getUpdateQuery(tableName, values, where) {
-    //     console.log('PostgreSqlDatabase.getUpdateQuery', tableName);
-    //     const valueKeys = Object.keys(values);
-    //     const whereKeys = Object.keys(where);
-    //     if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
-    //     if (whereKeys.length === 0) throw new Error('getUpdateQuery: no where');
-    //     const valuesString = valueKeys.map(name => `"${name}" = {${name}}`).join(', ');
-    //     const whereString = whereKeys.map(name => `"${name}" = {${name}}`).join(' and ');
-    //     return `update "${tableName}" set ${valuesString} where ${whereString}`;
-    // }
-
     static getUpdateQuery(tableName, values, where) {
         console.log('PostgreSqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
@@ -148,6 +128,7 @@ class PostgreSqlDatabase extends Database {
     getInsertQuery(tableName, values) {
         // console.log('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
+        if (!columns.length) return `insert into "${tableName}" default values`;
         const columnsString = columns.map(column => `"${column}"`).join(', ');
         const valuesString = columns.map(column => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
@@ -171,7 +152,7 @@ class PostgreSqlDatabase extends Database {
         console.log('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
         console.log('keyColumns:', keyColumns);
-        const rows = await this.query2(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
+        const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
         console.log('getTableInfo rows:', rows);
         const tableInfo = rows.map(row => ({
             name    : row.column_name,
@@ -209,7 +190,7 @@ class PostgreSqlDatabase extends Database {
 
     async getTableKeyColumns(table) {
         console.log('PostgreSqlDatabase.getTableKeyColumns');
-        const rows = await this.query2(
+        const rows = await this.query(
             `SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
 JOIN   pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
@@ -218,7 +199,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return rows;
     }
 
-    async query2(query) {
+    async query(query) {
         const config = this.getConfig();
         const client = new Client(config);
         await client.connect();
@@ -229,6 +210,49 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
 
     getDefaultPort() {
         return 5432;
+    }
+
+    async queryAutoValues(context, table, columns) {
+        console.log('PostgreSqlDatabase.queryAutoValues', columns);
+        if (!columns.length) throw new Error('no auto columns');
+        const queries = columns.map(column => `select currval('"${table}_${column}_seq"')`);
+        const query = queries.join('; ');
+        // console.log('query:', query);
+        const result = await this.queryResult(context, query);
+        if (result instanceof Array) {
+            return columns.reduce((acc, column, i) => {
+                // console.log('column:', column);
+                const r = result[i];
+                const [{currval: val}] = r.rows;
+                acc[column] = val;
+                return acc;
+            }, {});
+        } else {
+            const [{currval: val}] = result.rows;
+            return {[columns[0]]: val};
+        }
+    }
+
+    async insertRow(context, table, autoColumns, values) {
+        console.log(`PostgreSqlDatabase.insertRow ${table}`, autoColumns, values);
+        const query = this.getInsertQuery(table, values);
+        // console.log('insert query:', query, values);
+
+        const result = await this.queryResult(context, query,  values);
+        // console.log('insert result:', result);
+
+        // auto
+        if (autoColumns.length > 0) {
+            const auto = await this.queryAutoValues(context, table, autoColumns);
+            // console.log('auto:', auto);
+            return {
+                ...auto,
+                ...values
+            };
+        }
+        return {
+            ...values
+        };
     }
 }
 

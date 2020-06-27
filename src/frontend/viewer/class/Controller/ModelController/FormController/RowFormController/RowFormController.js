@@ -44,8 +44,21 @@ class RowFormController extends FormController {
         });
 
         // disable buttons
-        $(this.view).find('button.saveForm').prop('disabled', true);
+        $(this.view).find('button.saveForm').prop('disabled', !this.model.page.isNewMode());
         $(this.view).find('button.discardForm').prop('disabled', true);
+        $(this.view).find('button.refreshForm').prop('disabled', this.model.page.getKey() === null);
+
+        // action click
+        for (const name in this.model.data.actions) {
+            const action = this.model.data.actions[name];
+            $(this.view).find(`li.${action.name}`).click(() => {
+                setTimeout(async () => {
+                    const result = await this.onActionClick(action, this.model.getRow());
+                    if (!result) alert(`no handler for ${action.name}`);
+                }, 0);
+            });
+        }
+
     }
 
     deinit() {
@@ -54,7 +67,7 @@ class RowFormController extends FormController {
     }
 
     fill() {
-        console.log('RowFormController.fill');
+        // console.log('RowFormController.fill');
         super.fill();
 
         const row = this.model.getRow();
@@ -93,11 +106,10 @@ class RowFormController extends FormController {
     isValid() {
         let isValid = true;
         for (const name in this.fields) {
+            const field = this.fields[name];
             const view = this.fieldViews[name];
             if (view) {
-                if (!this.fields[name].isValid(view)) {
-                    isValid = false;
-                }
+                if (!field.isValid(view)) isValid = false;
             }
         }
         return isValid;
@@ -107,9 +119,21 @@ class RowFormController extends FormController {
         return this.model.getFieldValue(name);
     }
 
+    updateErrorClasses() {
+        for (const name in this.fields) {
+            const field = this.fields[name];
+            const view = this.fieldViews[name];
+            if (view) {
+                field.updateErrorClass(view, field.isValid(view));
+            }
+        }
+    }
+
     async onSaveClick(el) {
         console.log('RowFormController.onSaveClick');
-        if (this.isValid()) {
+        const valid = this.isValid();
+        this.updateErrorClasses();
+        if (valid) {
             await this.model.update();
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
@@ -118,7 +142,6 @@ class RowFormController extends FormController {
 
     onDiscardClick(el) {
         console.log('RowFormController.onDiscardClick');
-        if (this.isInNewMode()) throw new Error('no changes to discard in insert mode');
 
         if (this.model.getDataSource().isChanged()) {
             this.model.getDataSource().discard();
@@ -129,15 +152,15 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             const field = this.fields[name];
             const view = this.fieldViews[name];
-            if (view && field.isChanged(row, view)) {
+            if (view) {
                 field.refill(row, view);
             }
         }
 
         // ui
-        $(this.view).find('button.saveForm').prop('disabled', true);
+        $(this.view).find('button.saveForm').prop('disabled', !this.model.page.isNewMode());
         $(this.view).find('button.discardForm').prop('disabled', true);
-        $(this.view).find('button.refreshForm').prop('disabled', false);
+        $(this.view).find('button.refreshForm').prop('disabled', this.model.page.getKey() === null);
 
         // event
         this.parent.onFormDiscard(this);
@@ -152,7 +175,7 @@ class RowFormController extends FormController {
     }
 
     isChanged() {
-        if (this.model.getDataSource().insertRow) return true;
+        if (this.model.isChanged()) return true;
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
@@ -164,24 +187,22 @@ class RowFormController extends FormController {
 
     onFieldChange(e) {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
-        if (this.isChanged()) {
+        const changed = this.isChanged();
+        if (changed) {
             if (this.isValid()) {
                 $(this.view).find('button.saveForm').prop('disabled', false);
             } else {
                 $(this.view).find('button.saveForm').prop('disabled', true);
             }
-            $(this.view).find('button.discardForm').prop('disabled', false);
-            $(this.view).find('button.refreshForm').prop('disabled', true);
         } else {
             $(this.view).find('button.saveForm').prop('disabled', true);
-            $(this.view).find('button.discardForm').prop('disabled', true);
-            $(this.view).find('button.refreshForm').prop('disabled', false);
         }
+        $(this.view).find('button.discardForm').prop('disabled', !changed);
+        $(this.view).find('button.refreshForm').prop('disabled', changed);
         super.onFieldChange(e);
     }
 
-    isInNewMode() {
-        return !!this.model.getDataSource().insertRow;
+    async onActionClick(action, row) {
+        console.log('RowFormController.onActionClick', action, row);
     }
-
 }

@@ -5,6 +5,9 @@ const qforms = require('../../../qforms');
 const Editor = require('../Editor');
 const DatabaseEditor = require('../DatabaseEditor/DatabaseEditor');
 
+const MySqlDatabaseEditor = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
+const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
+
 class ApplicationEditor extends Editor {
 
     constructor(appFile, hostApp, env) {
@@ -38,6 +41,7 @@ class ApplicationEditor extends Editor {
                 lang          : 'en',
                 theme         : 'standard'
             },
+            env      : {},
             databases: {},
             pageLinks: {}
         };
@@ -149,9 +153,15 @@ class ApplicationEditor extends Editor {
             this.data.databases = {};
         }
         if (this.data.databases[name]) {
-            throw new Error(`Database ${name} already exists.`);
+            throw new Error(`database ${name} already exists`);
         }
-        return this.data.databases[name] = DatabaseEditor.createData(params);
+        if (params._class === 'MySqlDatabase') {
+            return this.data.databases[name] = MySqlDatabaseEditor.createData(params);
+        } else if (params._class === 'PostgreSqlDatabase') {
+            return this.data.databases[name] = PostgreSqlDatabaseEditor.createData(params);
+        } else {
+            throw new Error(`unknown database class ${params._class}`);
+        }
     }
 
     getDatabaseData(name) {
@@ -199,11 +209,11 @@ class ApplicationEditor extends Editor {
         }
         let data;
         switch (_class) {
-            case 'DataSource':
-                data = qforms.DataSourceEditor.create(params);
-                break;
+            // case 'DataSource':
+            //     data = qforms.DataSourceEditor.createData(params);
+            //     break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.create(params);
+                data = qforms.SqlDataSourceEditor.createData(params);
                 break;
             default:
                 throw new Error(`unknown data source class: ${_class}`);

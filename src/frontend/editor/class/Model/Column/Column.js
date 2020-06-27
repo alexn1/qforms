@@ -8,7 +8,7 @@ class Column extends Model {
     }
 
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.log('Column.setValue', name + ' = ' + value);
         const data = await QForms.doHttpRequest({
             controller: 'Column',
             action    : 'save',
@@ -20,7 +20,7 @@ class Column extends Model {
                 value   : value
             }
         });
-        this.data['@attributes'][name] = value;
+        this.setAttr(name, value);
         return data;
     }
 

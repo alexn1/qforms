@@ -14,7 +14,7 @@ class TableEditor extends Editor {
         return {
             '@class'      : 'Table',
             '@attributes' : {
-                'name' : params.name
+                name : params.name
             }
         };
     }

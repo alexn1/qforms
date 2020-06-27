@@ -8,6 +8,7 @@ class FormController extends VisualController {
         this.itemDataSources = null;
         this.itemFields      = null;
         this.itemControls    = null;
+        this.itemActions     = null;
     }
 
     createTree() {
@@ -27,11 +28,22 @@ class FormController extends VisualController {
                 this.addFieldItem(fieldData);
             }
         }
+
+        // controls
         this.itemControls = this.item.addItem('Controls');
         if (this.model.data.controls) {
             for (const name in this.model.data.controls) {
                 const controlData = this.model.data.controls[name];
                 this.addControlItem(controlData);
+            }
+        }
+
+        // actions
+        this.itemActions =  this.item.addItem('Actions');
+        if (this.model.data.actions) {
+            for (const name in this.model.data.actions) {
+                const data = this.model.data.actions[name];
+                this.addActionItem(data);
             }
         }
     }
@@ -61,11 +73,20 @@ class FormController extends VisualController {
         return itemControl;
     }
 
+    addActionItem(actionData) {
+        const caption = ActionController.prototype.getCaption(actionData);
+        const itemAction = this.itemActions.addItem(caption);
+        const control = new Action(actionData, this.model);
+        itemAction.ctrl = new ActionController(control, itemAction);
+        return itemAction;
+    }
+
     getActions() {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},
             {'action': 'newField'     , 'caption': 'New Field'      },
             {'action': 'newControl'   , 'caption': 'New Control'    },
+            {'action': 'newAction'    , 'caption': 'New Action'     },
             {'action': ''             , 'caption': '-'              },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
@@ -84,6 +105,9 @@ class FormController extends VisualController {
                 break;
             case 'newControl':
                 this.actionNewControl();
+                break;
+            case 'newAction':
+                this.actionNewAction();
                 break;
             case 'delete':
                 this.delete();
@@ -144,19 +168,35 @@ class FormController extends VisualController {
     }
 
     async actionNewControl() {
-        const self = this;
         const result = await Control.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#modal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#modal button[name='create']").click(function() {
+        $("#modal button[name='create']").click(async () => {
             const params = {
-                name:$("#modal input[id='name']").val(),
-                class:$("#modal select[id='class']").val(),
-                caption:$("#modal input[id='caption']").val()
+                name   : $("#modal input[id='name']").val(),
+                class  : $("#modal select[id='class']").val(),
+                caption: $("#modal input[id='caption']").val()
             };
-            self.model.newControl(params).then((controlData) => {
-                self.addControlItem(controlData).select();
-            });
+            const data = await this.model.newControl(params);
+            this.addControlItem(data).select();
+            $('#modal').modal('hide');
+        });
+        $('#modal').modal('show');
+        $("#modal input[id='name']").focus();
+    }
+
+    async actionNewAction() {
+        console.log('FormController.actionNewAction');
+        const result = await Action.prototype.getView('new.html');
+        $(document.body).append(result.view);
+        $('#modal').on('hidden.bs.modal', function(e){$(this).remove();});
+        $("#modal button[name='create']").click(async () => {
+            const params = {
+                name   : $("#modal input[id='name']").val(),
+                caption: $("#modal input[id='caption']").val()
+            };
+            const data = await this.model.newAction(params);
+            this.addActionItem(data).select();
             $('#modal').modal('hide');
         });
         $('#modal').modal('show');

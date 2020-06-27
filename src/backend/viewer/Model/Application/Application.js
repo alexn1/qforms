@@ -14,7 +14,7 @@ const Database = require('../Database/Database');
 class Application extends Model {
 
     static async create(appFilePath, hostApp, env) {
-        console.log('Application.create', appFilePath);
+        // console.log('Application.create', appFilePath);
         const appInfo = await qforms.Helper.getAppInfo(appFilePath, env);
         const json = await qforms.Helper.readFile(appInfo.filePath);
         const data = JSON.parse(json);
@@ -59,7 +59,7 @@ class Application extends Model {
     }
 
     async fill(context) {
-        console.log('Application.fill');
+        // console.log('Application.fill');
         const data = await super.fill(context);
         delete data.user;
         delete data.password;
@@ -135,7 +135,7 @@ class Application extends Model {
     }
 
     async _createPage(pageName) {
-        console.log('Application._createPage', pageName);
+        // console.log('Application._createPage', pageName);
         const relFilePath  = this.createPageLink(pageName).getAttr('fileName');
         const pageFilePath = path.join(this.dirPath, relFilePath);
         const content = await qforms.Helper.readFile(pageFilePath);
@@ -149,16 +149,15 @@ class Application extends Model {
         return true;
     }
 
-    async getPage(context, pageName) {
-        if (context.user && this.authorizePage(context.user, pageName) === false) {
-            throw new Error('Authorization error');
+    async getPage(context, name) {
+        // console.log('Application.getPage', name);
+        if (context.user && this.authorizePage(context.user, name) === false) {
+            throw new Error('authorization error');
         }
-        if (this.pages[pageName]) {
-            return this.pages[pageName];
+        if (this.pages[name]) {
+            return this.pages[name];
         }
-        const page = await this._createPage(pageName);
-        this.pages[pageName] = page;
-        return page;
+        return this.pages[name] = await this._createPage(name);
     }
 
     getPageLinkNameList() {
@@ -220,16 +219,23 @@ class Application extends Model {
     }
 
     getEnvVarValue(name) {
-        console.log(`Application.getEnvVarValue: ${name}`);
+        // console.log(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
         const obj = this.data.env[env];
+        if (!obj) throw new Error(`no env ${env}`);
         if (obj[name]) return obj[name];
         throw new Error(`no env ${name} in ${env}`);
     }
 
     getApp() {
         return this;
+    }
+
+    getDatabase(name) {
+        if (!name) throw new Error('getDatabase: no name');
+        if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
+        return this.databases[name];
     }
 
 }

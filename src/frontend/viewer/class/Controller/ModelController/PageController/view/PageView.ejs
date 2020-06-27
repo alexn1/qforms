@@ -5,16 +5,11 @@
         <!-- toolbar -->
         <% if (model.isThereARowFormWithDefaultDs()) { %>
             <div class="toolbar flex-min">
-                <% if (newMode) { %>
-                    <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.create%></button>
-                    <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.cancel%></button>
+                <% if (model.isThereARowFormWithDefaultDsAndTable()) { %>
+                    <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.saveAndClose%></button>
+                    <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.close%></button>
                 <%} else {%>
-                    <% if (model.isThereARowFormWithDefaultDsAndTable()) { %>
-                        <button class="btn btn-primary btn-sm saveAndClose"><%=model.app.data.text.page.saveAndClose%></button>
-                        <button class="btn btn-default btn-sm closePage"><%=model.app.data.text.page.close%></button>
-                    <%} else {%>
-                        <button class="btn btn-primary btn-sm closePage"><%=model.app.data.text.page.close%></button>
-                    <%}%>
+                    <button class="btn btn-primary btn-sm closePage"><%=model.app.data.text.page.close%></button>
                 <%}%>
             </div>
             <div class="splitter flex-min">&nbsp;</div>
@@ -24,11 +19,8 @@
             <div class="row-forms flex-min">
             <% for (const name in model.forms) {
                 const form = model.forms[name];
-                if (form.data.class === 'RowForm') {%>
-                    <%=QForms.render(form.data.view,{
-                                model  : form,
-                                newMode: newMode
-                            })%>
+                if (form.getClassName() === 'RowForm') {%>
+                    <%=QForms.render(form.data.view,{model: form})%>
                 <%}
             }
             %>
@@ -53,12 +45,9 @@
                         <div>
                             <% for (const name in model.forms) {
                                 const form = model.forms[name];
-                                if (form.data.class === 'TableForm' || form.data.class === 'TreeForm') {
+                                if (form.getClassName() === 'TableForm' || form.getClassName() === 'TreeForm') {
                                     %><div>
-                                        <%=QForms.render(form.data.view, {
-                                                    model  : form,
-                                                    newMode: newMode
-                                           })
+                                        <%=QForms.render(form.data.view, {model: form})
                                         %>
                                     </div><%
                                 }

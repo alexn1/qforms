@@ -59,11 +59,8 @@ class FieldController extends VisualController {
         $("#modal input[id='fieldClass']").focus();
     }
 
-    getCaption(fieldData) {
-        const caption = "<span class='blue'>{class}:</span> <span class='green'>{name}</span>"
-            .replace('{name}', fieldData['@attributes'].name)
-            .replace('{class}', fieldData['@class']);
-        return caption;
+    getCaption(data) {
+        return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
     }
 
     getPropList() {

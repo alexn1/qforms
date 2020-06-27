@@ -1,45 +1,35 @@
 'use strict';
 
 class DataSource extends Model {
-    constructor(name, parent, data) {
+    static create(data, parent) {
+        // console.log('DataSource.create', data.class, data.name);
+        return eval(`new ${data.class}(data, parent)`);
+    }
+
+    constructor(data, parent) {
         super(data, parent);
         this.page   = parent instanceof Page ? parent : null;
         this.form   = parent instanceof RowForm || parent instanceof TableForm || parent instanceof TreeForm ? parent : null;
-        this.offset = 0;
-        this.limit  = data.limit;
-        this.count  = data.count;
-        this.length = null;
-        this.insertRow = null;
+
         this.rowsByKey = {};						// for row search by key
         this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row
-        this.changes   = {};                        // changed rows
+        this.news      = [];                        // new rows
+        this.changes  = new Map();
     }
 
     init() {
-        console.log('DataSource.init', this.getFullName(), this.data.class);
-        //console.log('limit', this.limit);
+        // console.log('DataSource.init', this.getFullName(), this.getClassName());
+        //console.log('limit', this.getLimit());
         //console.log('count', this.count);
         // creating index
         this.length = this.data.rows.length;
         const vals = this.getKeysAndChilds(this.data.rows);
         this.rowsByKey = vals.rowsByKey;
         this.childs    = vals.childs;
-        if (this.data.table !== '') {
-            const table = this.getTable();
-            table.on('update', this.listeners.tableUpdated = this.onTableUpdated.bind(this));
-            table.on('insert', this.listeners.tableInsert  = this.onTableInsert.bind(this));
-            table.on('delete', this.listeners.tableDelete  = this.onTableDelete.bind(this));
-        }
     }
 
     deinit() {
-        if (this.data.table !== '') {
-            const table = this.getTable();
-            table.removeListener('update', this.listeners.tableUpdated);
-            table.removeListener('insert', this.listeners.tableInsert);
-            table.removeListener('delete', this.listeners.tableDelete);
-        }
     }
 
     // fill lists to find row index and child rows by row key
@@ -72,15 +62,9 @@ class DataSource extends Model {
         };
     }
 
-    getFramesCount() {
-        return this.limit ? Math.ceil(this.count / this.limit) : null;
-    }
-
     getColumnType(column) {
-        // console.log('DataSource.getColumnType', column);
-        const type = this.getTable().getColumn(column).getType();
-        // console.log('type:', type);
-        return type;
+        // console.log('DataSource.getColumnType', this.getClassName(), column);
+        return 'string';
     }
 
     getNewValue(row, column, value) {
@@ -89,27 +73,35 @@ class DataSource extends Model {
         return value;
     }
 
+    discardRowColumn(row, column) {
+        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+            delete this.changes.get(row)[column];
+        }
+    }
+
+    changeRowColumn(row, column, newValue) {
+        if (!this.changes.has(row)) this.changes.set(row, {});
+        this.changes.get(row)[column] = newValue;
+    }
+
     setValue(row, column, value) {
         console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
-        const newValue = this.getNewValue(row, column, value);
+        let newValue = this.getNewValue(row, column, value);
         console.log('newValue:', newValue, typeof newValue);
-        if (this.insertRow) {
-            if (this.insertRow !== row) throw new Error('wrong insert row');
-            row[column] = newValue;
-            console.log('row:', row);
-        } else {
-            const key = this.getRowKey(row);
-            if (!this.compareValue(row, column, newValue)) {
-                if (!this.changes[key]) this.changes[key] = {};
-                this.changes[key][column] = newValue;
-            } else {
-                if (this.changes[key] && this.changes[key][column]) {
-                    delete this.changes[key][column];
-                }
+
+        if (!this.compareValue(row, column, newValue)) {
+            this.changeRowColumn(row, column, newValue);
+
+            // workaround for new rows
+            if (row[column] === undefined && newValue === null) {
+                this.discardRowColumn(row, column);
+                newValue = undefined;
             }
-            if (this.changes[key] && !Object.keys(this.changes[key]).length) delete this.changes[key];
-            console.log('changes:', Object.keys(this.changes).length, this.changes);
+        } else {
+            this.discardRowColumn(row, column);
         }
+        if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length) this.changes.delete(row);
+        console.log('changes:', this.changes);
         return newValue;
     }
 
@@ -123,8 +115,7 @@ class DataSource extends Model {
 
     isChanged() {
         // console.log('DataSource.isChanged', this.getFullName());
-        if (this.insertRow) return true;
-        return !!Object.keys(this.changes).length;
+        return !!this.changes.size;
     }
 
     isRowColumnChanged(row, column) {
@@ -134,9 +125,8 @@ class DataSource extends Model {
 
     getValue(row, column) {
         // console.log('DataSource.getValue', column);
-        const key = this.getRowKey(row);
-        if (this.changes[key] && this.changes[key][column]) {
-            return this.changes[key][column];
+        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+            return this.changes.get(row)[column];
         }
         const value = row[column];
         // console.log('DataSource.getValue:', value);
@@ -174,182 +164,15 @@ class DataSource extends Model {
         return JSON.stringify(key);
     }
 
-    setRowKey(row, key) {
-        const values = this.splitKey(key);
-        for (const name in values) {
-            row[name] = values[name];
-        }
-        this.rowsByKey[key] = row;
-    }
-
-    splitKey(key) {
-        const values = {};
-        const arr = JSON.parse(key);
-        for (let i = 0; i < arr.length; i++) {
-            const columnName = this.data.keyColumns[i];
-            values[columnName] = arr[i];
-        }
-        return values;
-    }
-
-    async update() {
-        console.log('DataSource.update', this.getFullName());
-        if (this.data.table === '') throw new Error(`data source has no table: ${this.name}`);
-        if (this.insertRow !== null) return this.insert(this.insertRow);
-        if (!Object.keys(this.changes).length) throw new Error(`no changes: ${this.getFullName()}`);
-        const data = await this.getApp().request({
-            action        : 'update',
-            page          : this.form.page.name,
-            form          : this.form.name,
-            ds            : this.name,
-            changes       : this.changes,
-        });
-        const [key] = Object.keys(data);
-        if (!key) throw new Error('no updated row');
-        this.changes = {};
-        const newValues = data[key];
-        const newKey = this.getRowKey(newValues);
-        const event = this.updateRow(key, newValues);
-        this.parent.onDataSourceUpdate(event);
-        this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
-        return newKey;
-    }
-
-    updateRow(key, newValues) {
-        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
-        const row = this.rowsByKey[key];
-        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        const i = this.data.rows.indexOf(row);
-        if (i === -1) throw new Error(`cannot find row: ${key}`);
-        const newKey = this.getRowKey(newValues);
-
-        // copy new values to original row object
-        for (const column in row) row[column] = newValues[column];
-        if (key !== newKey) {
-            delete this.rowsByKey[key];
-            this.rowsByKey[newKey] = row;
-        }
-        console.log(`key: ${key} to ${newKey}`);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.data.rows:', this.data.rows);
-
-        const event = {source: this, key, i};
-        this.emit('rowUpdate', event);
-        return event;
-    }
-
-    getTable() {
-        if (!this.data.database) throw new Error('no database');
-        if (!this.data.table) throw new Error('no table');
-        return this.getApp().databases[this.data.database].tables[this.data.table];
-    }
-
-    async onTableUpdated(e) {
-        console.log('DataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
-        if (e.source === this) return;
-        console.log('changes:', e.changes);
-        if (!Object.keys(e.changes).length) throw new Error('no changes');
-        const key = Object.keys(e.changes)[0];
-        const newKey = e.changes[key];
-        console.log(`key: ${key} to ${newKey}`);
-        const params = DataSource.keyToParams(newKey);
-        const data = await this.selectSingle(params);
-        this.updateRow(key, data.row);
-    }
-
-    async refresh() {
-        console.log('DataSource.refresh', this.getFullName());
-        if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
-        await this._refresh();
-        this.emit('refresh', {source: this});
-    }
-
-    async onTableInsert(e) {
-        console.log('DataSource.onTableInsert', e);
-        await this._refresh();
-        if (this.rowsByKey[e.key]) {
-            this.parent.onDataSourceUpdate({source: this, key: e.key});
-            this.emit('insert', {source: this, key: e.key});
-        }
-    }
-
-    async onTableDelete(e) {
-        console.log('DataSource.onTableDelete', e);
-        await this._refresh();
-    }
-
-    async refill(params) {
-        this.offset = 0;
-        const data = await this.select(params);
-        const _new = this.getKeysAndChilds(data.rows);
-        const _old = this;
-        _old.rowsByKey = _new.rowsByKey;
-        _old.childs    = _new.childs;
-    }
-
-    async _refresh() {
-        console.log('DataSource._refresh');
-        const page = this.getPage();
-        const params = page ? page.params : {};
-        const data = await this.select(params);
-        if (this.data.dumpFirstRowToParams === 'true') {
-            this.dumpFirstRowToParams(data.rows);
-        }
-        const _old = this;
-        const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
-        this.sync(_old, _new, '[null]');
-    }
-
-    async frame(params, frame) {
-        this.offset = (frame - 1) * this.limit;
-        const data = await this.select(params);
-        const _new = this.getKeysAndChilds(data.rows);
-        const _old = this;
-        _old.rowsByKey = _new.rowsByKey;
-        _old.childs    = _new.childs;
-        this.emit('newFrame', {source: this});
-    }
-
-    async select(params) {
-        console.log('DataSource.select', this.getFullName());
-        const page = this.getPage();
-        const form = this.getForm();
-        // const _params = QForms.merge(params, this.params);
-        const _params = {...params, ...this.params};
-        if (this.limit) _params.offset = this.offset;
-        const data = await this.getApp().request({
-            action        : 'select',
-            page          : page ? page.name : null,
-            form          : form ? form.name : null,
-            ds            : this.name,
-            params        : _params,
-            parentPageName: page ? page.parentPageName : null
-        });
-        if (!(data.rows instanceof Array)) throw new Error('rows must be array');
-        if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
-        this.count  = data.count;
-        this.length = data.rows.length;
-        return data;
-    }
-
-    async selectSingle(params) {
-        console.log('DataSource.selectSingle', this.getFullName());
-        const page = this.getPage();
-        const form = this.getForm();
-        const _params = {...params, ...this.params};
-        if (this.limit) _params.offset = this.offset;
-        const data = await this.getApp().request({
-            action        : 'selectSingle',
-            page          : page ? page.name : null,
-            form          : form ? form.name : null,
-            ds            : this.name,
-            params        : _params,
-            parentPageName: page ? page.parentPageName : null
-        });
-        if (!data.row) throw new Error('no row');
-        if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
-        return data;
-    }
+    // splitKey(key) {
+    //     const values = {};
+    //     const arr = JSON.parse(key);
+    //     for (let i = 0; i < arr.length; i++) {
+    //         const columnName = this.data.keyColumns[i];
+    //         values[columnName] = arr[i];
+    //     }
+    //     return values;
+    // }
 
     // copy new values to data source row
     copyNewValues(oldRow, newRow) {
@@ -545,97 +368,16 @@ class DataSource extends Model {
         this.emit('comeRow', {source: this, parentKey: parentKey, key: key, oldParentKey: oldParentKey, newIndex: newIndex});
     }
 
-    async insert(row) {
-        console.log('DataSource.insert', row);
-        if (this.data.table === '') throw new Error('no data source table to insert');
-        const page = this.getPage();
-        let data = {
-            action        : 'insert',
-            page          : this.form.page.name,
-            form          : this.form.name,
-            ds            : this.name,
-            row           : row,
-            parentPageName: page.parentPageName || null
-        };
-        /*
-        const fileColumns = [];
-        for (const column in row) {
-            if (row[column] instanceof File) {
-                fileColumns.push(column);
-            }
-        }
-        if (fileColumns.length > 0) {
-            const formData = new FormData();
-            fileColumns.forEach((column) => {
-                formData.append(column, row[column]);
-                delete row[column];
-            });
-            formData.append('__data', JSON.stringify(data));
-            data = formData;
-        }
-        */
-        const data2 = await this.getApp().request(data);
-
-        /*
-        // this code is actual only in new mode for row form
-        if (row === this.insertRow) {
-
-            // set row key and add inserted row to rows
-            this.setRowKey(this.insertRow, data2.key);
-            this.data.rows.push(this.insertRow);
-            this.insertRow = null;
-
-            // creating index with for rows
-            const vals = this.getKeysAndChilds(this.data.rows);
-            this.rowsByKey = vals.rowsByKey;
-            this.childs    = vals.childs;
-
-            // save key params for refill
-            const params = QForms.keyToParams(data2.key);
-            for (const name in params) {
-                this.params[name] = params[name];
-            }
-        }*/
-
-        // fire insert event
-        // this.getTable().emit('insert', {source: this, key: data2.key});
-        return data2.key;
-    }
-
-    async delete(key) {
-        console.log('DataSource.delete:', key);
-        const page = this.getPage();
-        if (!this.data.table) {
-            throw new Error(`no table in data source: ${this.name}`);
-        }
-        // check if removed row has child rows
-        if (this.childs[key] !== undefined) {
-            //console.log(this.childs[key]);
-            alert("Row can't be removed as it contains child rows.");
-            return;
-        }
-        const args = {
-            action        : '_delete',
-            page          : this.form.page.name,
-            form          : this.form.name,
-            ds            : this.name,
-            row           : this.rowsByKey[key],
-            parentPageName: page ? page.parentPageName : undefined
-        };
-        const data = await this.getApp().request(args);
-        this.getTable().emit('delete', {source: this, key: key});
-    }
-
     newRow(row) {
         console.log('DataSource.newRow', row);
         if (this.data.rows.length > 0) {
-            throw new Error('Rows can be added to empty data sources only in new mode.');
+            throw new Error('rows can be added to empty data sources only in new mode');
         }
-        this.insertRow = row;
+        this.data.rows.push(row);
+        this.news.push(row);
     }
 
     getSingleRow() {
-        if (this.insertRow) return this.insertRow;
         if (this.data.rows.length > 0) return this.data.rows[0];
         throw new Error('no single row');
     }
@@ -700,11 +442,7 @@ class DataSource extends Model {
     }
 
     getRowByIndex(i) {
-        if (i === 0 && this.insertRow !== null) {
-            return this.insertRow;
-        } else {
-            return this.childs['[null]'].rowsByIndex[i];
-        }
+        return this.childs['[null]'].rowsByIndex[i];
     }
 
     getFullName() {
@@ -713,13 +451,8 @@ class DataSource extends Model {
 
     discard() {
         console.log('DataSource.discard', this.getFullName());
-        if (this.insertRow) throw new Error('discard not allowed in insert mode');
         if (!this.isChanged()) throw new Error(`no changes in data source ${this.getFullName()}`);
-        const key = Object.keys(this.changes)[0];
-        const columns = Object.keys(this.changes[key]);
-        this.changes = {};
-        // this.emit('discard', {source: this, columns});
-        return columns;
+        this.changes.clear();
     }
 
     static keyToParams(key, paramName = 'key') {
@@ -738,9 +471,23 @@ class DataSource extends Model {
         return params;
     }
 
-    getFullTableName() {
-        if (!this.data.database) throw new Error('no database');
-        if (!this.data.table) throw new Error('no table');
-        return `${this.data.database}.${this.data.table}`;
+    getChangesByKey() {
+        const changes = {};
+        for (const row of this.changes.keys()) {
+            changes[this.getRowKey(row)] = this.changes.get(row);
+        }
+        return changes;
     }
+
+    getRowValuesWithChanges(row) {
+        if (this.changes.has(row)) {
+            return {...row, ...this.changes.get(row)};
+        }
+        return {...row};
+    }
+
+    hasNewRows() {
+        return this.news.length > 0;
+    }
+
 }

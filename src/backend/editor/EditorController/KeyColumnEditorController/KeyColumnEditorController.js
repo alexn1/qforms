@@ -20,7 +20,7 @@ class KeyColumnEditorController extends EditorController {
         if (params.page) {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
-                const formEditor = pageEditor.getForm(params.form);
+                const formEditor = pageEditor.createFormEditor(params.form);
                 const keyColumnData = formEditor.newDataSourceKeyColumn(params);
                 await pageEditor.save();
                 return keyColumnData;
@@ -41,7 +41,7 @@ class KeyColumnEditorController extends EditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         formEditor.setDataSourceKeyColumnAttr(params['dataSource'], params['keyColumn'], params['attr'], params['value']);
         await pageEditor.save();
         return null;
@@ -50,7 +50,7 @@ class KeyColumnEditorController extends EditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.page);
-        const formEditor = pageEditor.getForm(params['form']);
+        const formEditor = pageEditor.createFormEditor(params['form']);
         formEditor.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
         await pageEditor.save();
         return null;

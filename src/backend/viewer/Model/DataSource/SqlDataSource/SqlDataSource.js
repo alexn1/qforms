@@ -1,22 +1,19 @@
 'use strict';
 
-const path    = require('path');
-const qforms      = require('../../../../qforms');
-const DataSource  = require('../DataSource');
+const path       = require('path');
+const qforms     = require('../../../../qforms');
+const DataSource = require('../DataSource');
 
 class SqlDataSource extends DataSource {
+
     constructor(data, parent) {
         super(data, parent);
 
         // database
-        this.database = this.getApp().databases[this.getAttr('database')];
+        this.database = this.getDatabase();
 
         // table
-        const tableName = this.getAttr('table');
-        if (tableName && !this.database.tables[tableName]) {
-            throw new Error(`no database table description: ${tableName}`);
-        }
-        this.table = tableName ? this.database.tables[tableName] : null;
+        this.table = this.getAttr('table') ? this.database.getTable(this.getAttr('table')) : null;
     }
 
     static async create(data, parent) {
@@ -49,12 +46,6 @@ class SqlDataSource extends DataSource {
         // console.log('SqlDataSource.getKeyColumns', this.name);
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
-
-    // getQuery(context) {
-    //     const query = this.getAttr('query');
-    //     if (!query) throw new Error(`no query: ${this.getFullName()}`);
-    //     return this.form ? this.form.replaceThis(context, query) : query;
-    // }
 
     getCountQuery(context) {
         const countQuery = this.getAttr('countQuery');
@@ -101,7 +92,7 @@ class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.database.selectScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.database.queryScalar(context, this.getCountQuery(context), this.getParams(context));
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -128,7 +119,7 @@ class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.database.selectScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.database.queryScalar(context, this.getCountQuery(context), this.getParams(context));
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -175,64 +166,37 @@ class SqlDataSource extends DataSource {
 
     async insert(context) {
         console.log('SqlDataSource.insert');
-        if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert === false) throw new Error(`[${this.getFullName()}]: access denied.`);
-        const values = context.row;
+
+        // autoColumns
+        const autoColumns = this.getAutoColumns();
+        console.log('autoColumns:', autoColumns);
+
+        const values = await this.database.insertRow(context, this.getAttr('table'), autoColumns, context.row);
+        console.log('values:', values);
+
         const key = this.getKeyFromValues(values);
         if (!key) throw new Error('insert: cannot calc row key');
         console.log('key:', key);
 
-        /*
-        const _row = {};
-        const files = {};
-        for (const column in row) {
-            if (row[column] instanceof Object) {
-                _row[column] = '{' + column + '}';
-                files[column] = row[column];
-                console.error(row[column]);
-            } else if (this.table.columns[column] && !this.table.columns[column].isAuto()) {
-                _row[column] = row[column];
-            }
-        }
-        console.log('_row:', _row);
-        */
-
-        /*
-        const buffers = {};
-        const names = Object.keys(files);
-        for (let i = 0; i < names.length; i++) {
-            const name = names[i];
-            const file = files[name];
-            const buffer = await this.getBuffer(context, file);
-            buffers[name] = buffer;
-        }
-        */
-        const query = this.database.getInsertQuery(this.getAttr('table'), values);
-        // console.log('insert query:', query, row);
-
-
-        const result = await this.database.queryResult(context, query,  values);
-        // console.log('insert result:', result);
-
         const keyParams = DataSource.keyToParams(key);
-        console.log('keyParams:', keyParams);
+        // console.log('keyParams:', keyParams);
 
         const singleQuery = this.getSingleQuery(context);
-        console.log('singleQuery:', singleQuery);
+        // console.log('singleQuery:', singleQuery);
 
-
+        // row
         const [row] = await this.database.queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
         this.checkAndCalcColumns(row);
         // console.log('row:', row);
-        return {[key]: row};
 
-        // const key = JSON.stringify([result.insertId]);
-        // return key;
+        return {[key]: row};
     }
 
     async delete(context) {
-        if (this.getAccess(context).delete === false) throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (this.getAccess(context).delete === false) throw new Error(`${this.getFullName()}: access denied`);
         const row = context.row;
         const keyValues = this.getKeyValuesFromRow(row);
         const query = this.database.getDeleteQuery(this.getAttr('table'), keyValues);
@@ -260,11 +224,17 @@ class SqlDataSource extends DataSource {
         }
         if (this.isDefaultOnRowForm()) {
             const row = await this.selectSingle(context);
+            if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
             data.rows = [row];
         } else {
-            const [rows, count] = await this.selectMultiple(context);
-            data.rows = rows;
-            data.count = count;
+            try {
+                const [rows, count] = await this.selectMultiple(context);
+                data.rows = rows;
+                data.count = count;
+            } catch (err) {
+                err.message = `selectMultiple error of ${this.getFullName()}: ${err.message}`;
+                throw err;
+            }
         }
 
         if (this.isDefaultOnRowForm() && data.rows[0]) {
@@ -284,6 +254,21 @@ class SqlDataSource extends DataSource {
         return this.form && this.form instanceof qforms.TableForm && this.name === 'default';
     }
 
+    getDatabase() {
+        const databaseName = this.getAttr('database');
+        if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
+        return this.getApp().getDatabase(databaseName);
+    }
+
+    getTable() {
+        const tableName = this.getAttr('table');
+        if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
+        return this.database.getTable(tableName);
+    }
+
+    getAutoColumns() {
+        return this.keyColumns.filter(name => this.table.columns[name].isAuto());
+    }
 }
 
 module.exports = SqlDataSource;

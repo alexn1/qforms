@@ -6,7 +6,6 @@ class Page extends Model {
         this.app            = options.app;
         this.parentPageName = options.parentPageName;
         this.id             = null;
-        this.newMode        = (options.newMode === undefined) ? false          : options.newMode;
         this.params         = (options.params  !== undefined) ? options.params : {};
         this.dataSources    = {};
         this.forms          = {};
@@ -14,9 +13,9 @@ class Page extends Model {
 
     init() {
         this.initParams();
-        for (const dsName in this.data.dataSources) {
-            this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
-            this.dataSources[dsName].init();
+        for (const name in this.data.dataSources) {
+            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
+            this.dataSources[name].init();
         }
         for (const formName in this.data.forms) {
             const form = this.data.forms[formName];
@@ -49,7 +48,8 @@ class Page extends Model {
     async update() {
         console.log('Page.update', this.name);
         for (const name in this.forms) {
-            await this.forms[name].update();
+            const form = this.forms[name];
+            if (form.isChanged()) await form.update();
         }
     }
 
@@ -63,7 +63,7 @@ class Page extends Model {
     getKey() {
         for (const name in this.forms) {
             const form = this.forms[name];
-            if (form.data.class === 'RowForm') {
+            if (form.getClassName() === 'RowForm') {
                 return form.getKey();
             }
         }
@@ -120,6 +120,10 @@ class Page extends Model {
             }
         }
         return result;
+    }
+
+    isNewMode() {
+        return this.data.newMode;
     }
 
 }

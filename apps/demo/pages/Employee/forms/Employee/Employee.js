@@ -29,3 +29,4 @@ class EmployeeEmployeeController extends RowFormController {
     */
 
 }
+EmployeeEmployeeController;

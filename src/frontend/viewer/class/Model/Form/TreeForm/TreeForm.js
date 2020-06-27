@@ -9,7 +9,7 @@ class TreeForm extends Form {
     //     if (dataSource.name !== 'default') {
     //         return;
     //     }
-    //     this.dataSources.default.update();
+    //     this.getDataSource().update();
     // }
 
     delete(row) {

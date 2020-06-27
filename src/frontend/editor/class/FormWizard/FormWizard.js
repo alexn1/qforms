@@ -46,10 +46,17 @@ class FormWizard {
             field.caption = column.caption;
         }
         if (column.key === 'true') {
-            field.readOnly = 'true';
+            if (column.auto === 'false') {
+                field.notNull = 'true';
+            }
+        } else {
+            if (column.nullable === 'false') {
+                field.notNull = 'true';
+                field.readOnly = 'false';
+            }
         }
-        if (column.nullable === 'false') {
-            field.notNull = 'true';
+        if (column.auto === 'true') {
+            field.readOnly = 'true';
         }
         return field;
     }

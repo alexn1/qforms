@@ -14,12 +14,12 @@ class ColumnEditor extends Editor {
         return {
             '@class'      : 'Column',
             '@attributes' : {
-                'name'    : params.name,
-                'caption' : params.caption || params.name,
-                'type'    : params.type || '',
-                'key'     : params.key ? 'true' : 'false',
-                'auto'    : params.auto ? 'true' : 'false',
-                'nullable': params.nullable ? 'true' : 'false',
+                name    : params.name,
+                caption : params.caption || params.name,
+                type    : params.type || '',
+                key     : params.key ? 'true' : 'false',
+                auto    : params.auto ? 'true' : 'false',
+                nullable: params.nullable ? 'true' : 'false',
             }
         };
     }

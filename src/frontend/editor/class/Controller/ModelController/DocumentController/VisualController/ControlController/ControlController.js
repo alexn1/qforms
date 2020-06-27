@@ -7,10 +7,10 @@ class ControlController extends VisualController {
         this.item = item;
     }
 
-    getCaption(controlData) {
+    getCaption(data) {
         const caption = "<span class='blue'>{class}:</span> <span class='green'>{name}</span>"
-            .replace('{name}', controlData['@attributes'].name)
-            .replace('{class}', controlData['@class']);
+            .replace('{name}', data['@attributes'].name)
+            .replace('{class}', data['@class']);
         return caption;
     }
 

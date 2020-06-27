@@ -8,20 +8,10 @@ class QForms {
         }
         window.onerror = QForms.errorHandler;
         window.onunhandledrejection = (e) => {
-            console.warn('window.onunhandledrejection', e.constructor.name);
-            //console.log('typeof e:', typeof e);
-            //console.log('e:', e);
-            if (e instanceof Error) {
-                const err = e;
-                console.error(err.message, ', stack:' ,err.stack);
-                alert(err.message);
-            } else {
-                //const promise = e.promise ? e.promise : e.detail.promise;
-                const err     = e.reason  ? e.reason  : e.detail.reason;
-                err.message = 'unhandledrejection: ' + err.message;
-                console.error(err.message, ', stack:' , err.stack);
-                // alert(err.message);
-            }
+            // console.log('window.onunhandledrejection', e.constructor.name);
+            const err = e instanceof Error ? e : e.reason || e.detail.reason;
+            console.error('unhandled rejection:', err);
+            alert(err.message);
         };
         //window.onbeforeunload = QForms.exit;
     }
@@ -53,9 +43,9 @@ class QForms {
         alert(msg);
     }
 
-    static doHttpRequest(data) {
+    static async doHttpRequest(data) {
         console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
-        return new Promise((resolve, reject) => {
+        /*return new Promise((resolve, reject) => {
             const contentType = data instanceof FormData ? false : 'application/json; charset=UTF-8';
             const _data       = data instanceof FormData ? data  : JSON.stringify(data);
             $('html').addClass("wait");
@@ -76,10 +66,27 @@ class QForms {
                     //console.log('statusText:' , statusText);
                     //console.log('errorThrown:', errorThrown);
                     $('html').removeClass("wait");
-                    reject(new Error(jqXHR.statusText + ': ' + jqXHR.responseText));
+                    reject(new Error(`${jqXHR.statusText}: ${jqXHR.responseText}`));
                 }
             });
-        });
+        });*/
+        try {
+            $('html').addClass("wait");
+            const response = await fetch(window.location.href, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json;charset=utf-8'},
+                body: JSON.stringify(data)
+            });
+            // console.warn('response:', response);
+            if (response.ok) {
+                const result = await response.json();
+                console.warn('result:', result);
+                return result;
+            }
+            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+        } finally {
+            $('html').removeClass("wait");
+        }
     }
 
     static go(url, method, params) {

@@ -7,6 +7,7 @@
                 <th>caption</th>
                 <th>key</th>
                 <th>auto</th>
+                <th>nullable</th>
                 </thead>
                 <tbody>
                 <% for (const name in model.data.columns) {
@@ -16,6 +17,7 @@
                     <td><%=column['@attributes'].caption%></td>
                     <td><%=column['@attributes'].key%></td>
                     <td><%=column['@attributes'].auto%></td>
+                    <td><%=column['@attributes'].nullable%></td>
                 </tr>
                 <%}%>
                 </tbody>

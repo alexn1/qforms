@@ -20,7 +20,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.getForm(params.form);
+                const formEditor = pageEditor.createFormEditor(params.form);
                 const dataSourceEditor = formEditor.newDataSource(params);
                 await pageEditor.save();
                 return dataSourceEditor.getData();
@@ -44,7 +44,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.getForm(params['form']);
+                const formEditor = pageEditor.createFormEditor(params['form']);
                 formEditor.deleteFormDataSource(params['dataSource']);
                 await pageEditor.save();
                 return null;
@@ -68,7 +68,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.getForm(params.form);
+                const formEditor = pageEditor.createFormEditor(params.form);
                 formEditor.moveDataSourceUp(params.dataSource);
                 await pageEditor.save();
                 return null;
@@ -92,7 +92,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.getForm(params.form);
+                const formEditor = pageEditor.createFormEditor(params.form);
                 formEditor.moveDataSourceDown(params.dataSource);
                 await pageEditor.save();
                 return null;
@@ -116,7 +116,7 @@ class DataSourceEditorController extends EditorController {
         if (params.pageFileName) {
             editor = await editor.getPageByFileName(params.pageFileName);
             if (params.form) {
-                editor = editor.getForm(params.form);
+                editor = editor.createFormEditor(params.form);
             }
         }
         const dataSourceEditor = editor.createDataSourceEditor(params.dataSource);
@@ -129,7 +129,7 @@ class DataSourceEditorController extends EditorController {
         if (params.pageFileName) {
             editor = await editor.getPageByFileName(params.pageFileName);
             if (params.form) {
-                editor = editor.getForm(params.form);
+                editor = editor.createFormEditor(params.form);
             }
         }
         return editor.createDataSourceEditor(params.dataSource);

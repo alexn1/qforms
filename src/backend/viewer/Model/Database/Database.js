@@ -33,10 +33,12 @@ class Database extends Model {
         throw new Error('Database.queryRows not implemented');
     }
 
-    async selectScalar(context, query, params) {
+    async queryScalar(context, query, params) {
         const [row] = await this.queryRows(context, query, params);
-        if (!row) throw new Error(`selectScalar must return one row`);
-        const value = row[Object.keys(row)[0]];
+        if (!row) throw new Error(`queryScalar must return one row`);
+        const [column] = Object.keys(row);
+        if (!column) throw new Error('no column in result set');
+        const value = row[column];
         if (value === undefined) throw new Error('scalar value undefined');
         return value;
     }
@@ -61,8 +63,10 @@ class Database extends Model {
         console.log('Database.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
-        const valuesString = valueKeys.map(name => `${name} = {${name}}`).join(', ');
-        const whereString = whereKeys.map(name => `${name} = {${name}}`).join(' and ');
+        if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
+        if (whereKeys.length === 0) throw new Error('getUpdateQuery: no where');
+        const valuesString = valueKeys.map(name => `${name} = {val_${name}}`).join(', ');
+        const whereString = whereKeys.map(name => `${name} = {key_${name}}`).join(' and ');
         return `update ${tableName} set ${valuesString} where ${whereString}`;
     }
 
@@ -106,6 +110,12 @@ class Database extends Model {
 
     getApp() {
         return this.parent;
+    }
+
+    getTable(name) {
+        if (!name) throw new Error('getTable: no name');
+        if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
+        return this.tables[name];
     }
 }
 

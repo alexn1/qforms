@@ -74,7 +74,7 @@ function serverRequest(req, res, next) {
 }
 
 async function viewerFile(req, res, next) {
-    console.warn('viewerFile', req.originalUrl);
+    // console.warn('viewerFile', req.originalUrl);
     try {
         await server.get('hostApp').viewerFile(req, res);
     } catch (err) {
@@ -83,7 +83,7 @@ async function viewerFile(req, res, next) {
 }
 
 async function editorFile(req, res, next) {
-    console.warn('editorFile', req.originalUrl);
+    // console.warn('editorFile', req.originalUrl);
     try {
         await server.get('hostApp').editorFile(req, res);
     } catch (err) {
@@ -152,7 +152,7 @@ async function homePost(req, res, next) {
 }
 
 async function homeGet(req, res) {
-    console.log('homeGet');
+    console.warn('homeGet');
     try {
         await server.get('hostApp').homeGet(req, res);
     } catch (err) {
@@ -161,7 +161,7 @@ async function homeGet(req, res) {
 }
 
 async function monitorGet(req, res, next) {
-    console.log('monitorGet');
+    console.warn('monitorGet');
     try {
         const hostApp = server.get('hostApp');
         if (hostApp.nodeEnv === 'development') {
@@ -182,12 +182,11 @@ function e404(req, res, next) {
 }
 
 function e500(err, req, res, next) {
-    console.warn(req.method, 'error/500');
-    const message = (typeof err === 'string') ? err : err.message;
-    console.error('module.exports.e500:', message, req.originalUrl, err.stack);
+    console.warn('module.exports.e500:', req.method, req.originalUrl);
+    console.error(err);
     res.status(err.status || 500);
     if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
-        res.end(message);
+        res.end(typeof err === 'string' ? err : err.message);
     } else {
         res.render('error', {
             message: err.message,

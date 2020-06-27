@@ -3,10 +3,8 @@
 class RowForm extends Form {
     init() {
         super.init();
-        if (this.page.newMode) {
-            const row = {};
-            this.defaultValuesToRow(row);
-            this.dataSource.newRow(row);
+        if (this.page.isNewMode()) {
+            this.dataSource.newRow(this.createRow());
         }
 
         // dump row values to page params
@@ -39,8 +37,18 @@ class RowForm extends Form {
     getKey() {
         // console.log('RowForm.getKey', this.getFullName());
         if (this.dataSource.getClassName() === 'SqlDataSource') {
-            return this.dataSource.getRowKey(this.getRow());
+            const row = this.getRow();
+            if (this.getDataSource().data.rows.indexOf(row) !== -1) {
+                return this.dataSource.getRowKey(row);
+            }
         }
         return null;
     }
+
+    createRow() {
+        const row = {};
+        this.fillDefaultValues(row);
+        return row;
+    }
+
 }

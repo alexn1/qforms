@@ -86,7 +86,7 @@ class PageEditor extends Editor {
                 throw new Error('unknown form class');
         }
         this.data.forms[name] = data;
-        return this.getForm(name);
+        return this.createFormEditor(name);
     }
 
     async createForm(params) {
@@ -126,13 +126,13 @@ class PageEditor extends Editor {
             }
         }
         await this.save();
-        const formEditor2 = this.getForm(name);
+        const formEditor2 = this.createFormEditor(name);
         return formEditor2;
     }
 
-    getForm(name) {
+    createFormEditor(name) {
         const formData = this.data.forms[name];
-        return eval('new qforms.{class}Editor(this, name, formData)'.replace('{class}', formData['@class']));
+        return eval(`new qforms.${formData['@class']}Editor(this, name, formData)`);
     }
 
     createDataSourceEditor(name) {
@@ -192,14 +192,14 @@ class PageEditor extends Editor {
         }
         let data;
         switch (_class) {
-            case 'DataSource':
-                data = qforms.DataSourceEditor.create(params);
-                break;
+            // case 'DataSource':
+            //     data = qforms.DataSourceEditor.createData(params);
+            //     break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.create(params);
+                data = qforms.SqlDataSourceEditor.createData(params);
                 break;
             default:
-                throw new Error(`Unknown data source class: ${_class}`);
+                throw new Error(`unknown data source class: ${_class}`);
         }
         return this.data.dataSources[name] = data;
     }

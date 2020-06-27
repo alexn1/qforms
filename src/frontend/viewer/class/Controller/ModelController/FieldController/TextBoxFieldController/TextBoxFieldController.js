@@ -10,7 +10,7 @@ class TextBoxFieldController extends FieldController {
     fill(row, view) {
         const self = this;
         super.fill(row, view);
-        if (this.model.form.data.class === 'RowForm') {
+        if (this.model.form.getClassName() === 'RowForm') {
             $(view).children().on('input', function() {
                 self.onChange(this);
             });

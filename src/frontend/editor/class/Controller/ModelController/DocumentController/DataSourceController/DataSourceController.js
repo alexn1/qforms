@@ -131,7 +131,7 @@ class DataSourceController extends DocumentController {
 
         // list
         for (const name in this.model.data['@attributes']) {
-            if (!['query', 'countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
+            if (!['countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
                 propList.list[name] = this.model.data['@attributes'][name];
             }
         }
@@ -142,8 +142,6 @@ class DataSourceController extends DocumentController {
         return propList;
     }
 
-
-
     async createTab(docs) {
         const self = this;
         const name = self.model.getFullName();
@@ -151,12 +149,11 @@ class DataSourceController extends DocumentController {
         const html = QForms.render(result.view, {model: self.model});
         self.$view        = $(html);
         self.data         = result.data;
-        // self.cmQuery      = null;
         self.cmCountQuery = null;
         self.cmSingleQuery = null;
         self.cmMultipleQuery = null;
         self.cmBackendJs  = null;
-        self.save         = 'query';
+        self.save         = 'singleQuery';
 
         // tab
         self.tab = docs.createTab(self.$view.get(0), name, function(tab) {
@@ -175,9 +172,6 @@ class DataSourceController extends DocumentController {
         self.$view.find('.btnSave').click(function() {
             self.btnSave_Click(this);
         });
-        /*self.$view.find('.btnQuery').click(function() {
-            self.btnQuery_Click(this);
-        });*/
         self.$view.find('.btnCountQuery').click(function() {
             self.btnCountQuery_Click(this);
         });
@@ -207,12 +201,6 @@ class DataSourceController extends DocumentController {
         }
     }
 
-    // initCmQuery() {
-    //     this.cmQuery = CodeMirror.fromTextArea(this.$view.find('.cmQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-    //     this.cmQuery.setOption('theme', 'cobalt');
-    //     this.cmQuery.setValue(this.model.data['@attributes'].query);
-    // }
-
     initCmCountQuery() {
         this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmCountQuery.setOption('theme', 'cobalt');
@@ -239,30 +227,11 @@ class DataSourceController extends DocumentController {
 
     btnSave_Click(ctrl) {
         switch (this.save) {
-            // case 'query': this.model.setValue('query', this.cmQuery.getValue()); break;
             case 'countQuery': this.model.setValue('countQuery', this.cmCountQuery.getValue()); break;
             case 'singleQuery': this.model.setValue('singleQuery', this.cmSingleQuery.getValue()); break;
             case 'multipleQuery': this.model.setValue('multipleQuery', this.cmMultipleQuery.getValue()); break;
         }
     }
-
-    // btnQuery_Click(ctrl) {
-    //     console.log('btnQuery_Click');
-    //     this.$view.find('.wndQuery').css('display', 'block');
-    //     this.$view.find('.wndCountQuery').css('display', 'none');
-    //     this.$view.find('.wndSingleQuery').css('display', 'none');
-    //     this.$view.find('.wndMultipleQuery').css('display', 'none');
-    //
-    //     this.$view.find('.btnQuery').removeClass('btn-default');
-    //     this.$view.find('.btnQuery').addClass('btn-primary');
-    //     this.$view.find('.btnCountQuery').removeClass('btn-primary');
-    //     this.$view.find('.btnCountQuery').addClass('btn-default');
-    //     this.$view.find('.btnSingleQuery').removeClass('btn-primary');
-    //     this.$view.find('.btnSingleQuery').addClass('btn-default');
-    //     this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
-    //     this.$view.find('.btnMultipleQuery').addClass('btn-default');
-    //     this.save = 'query';
-    // }
 
     btnCountQuery_Click(ctrl) {
         console.log('btnCountQuery_Click');

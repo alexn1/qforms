@@ -51,24 +51,23 @@ class Model extends BaseModel {
     }
 
     async createCollection(colName) {
-        console.log(`Model.createCollection ${this.name}.${colName}`);
-        if (this.data[colName]) {
-            const items = Object.keys(this.data[colName]);
-            for (let i = 0; i < items.length; i++) {
-                const itemName = items[i];
-                const itemData = this.getData(colName, itemName);
-                const className1 = `${itemData['@class']}Controller`;
-                const className2 = itemData['@class'];
-                const className = qforms[className1] ? className1 : className2;
-                const obj = await qforms[className].create(itemData, this);
-                this[colName][itemName] = obj;
-                await obj.init();
-            }
+        // console.log(`Model.createCollection ${this.name}.${colName}`);
+        if (!this.data[colName]) return;
+        const items = Object.keys(this.data[colName]);
+        for (let i = 0; i < items.length; i++) {
+            const itemName = items[i];
+            const itemData = this.getData(colName, itemName);
+            const className1 = `${itemData['@class']}Controller`;
+            const className2 = itemData['@class'];
+            const className = qforms[className1] ? className1 : className2;
+            const obj = await qforms[className].create(itemData, this);
+            this[colName][itemName] = obj;
+            await obj.init();
         }
     }
 
     async fillCollection(data, colName, context) {
-        if (!this[colName]) throw new Error(`collection ${colName} not created`);
+        if (!this[colName]) return;
         data[colName] = {};
         const items = Object.keys(this[colName]);
         for (let i = 0; i < items.length; i++) {

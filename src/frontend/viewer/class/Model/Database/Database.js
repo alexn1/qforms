@@ -13,4 +13,9 @@ class Database extends Model {
             this.tables[name].init();
         }
     }
+
+    getTable(name) {
+        if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
+        return this.tables[name];
+    }
 }

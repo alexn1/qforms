@@ -5,7 +5,7 @@ const ejs     = require('ejs');
 const qforms = require('../../qforms');
 const BaseModel = require('../../common/BaseModel');
 
-class Editor extends BaseModel{
+class Editor extends BaseModel {
     constructor(data, parent) {
         super(data, parent);
         this.colName = null;

@@ -10,11 +10,12 @@ class Form extends Model {
         this.page               = parent;
         this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
         this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
-        this.createCollections  = ['dataSources', 'fields', 'controls'];
-        this.fillCollections    = ['dataSources', 'fields', 'controls'];
+        this.createCollections  = ['dataSources', 'fields', 'controls', 'actions'];
+        this.fillCollections    = ['dataSources', 'fields', 'controls', 'actions'];
         this.dataSources        = {};
         this.fields             = {};
         this.controls           = {};
+        this.actions            = {};
     }
 
     static async create(data, parent) {
@@ -22,7 +23,7 @@ class Form extends Model {
     }
 
     async fill(context) {
-        console.log('Form.fill', this.constructor.name, this.name);
+        // console.log('Form.fill', this.constructor.name, this.name);
         if (this.data.dataSources.default) {
             return super.fill(context);
         }
@@ -42,6 +43,7 @@ class Form extends Model {
         }
         return {
             class               : 'DataSource',
+            name                : 'default',
             database            : '',
             table               : '',
             access              : {
@@ -88,7 +90,6 @@ class Form extends Model {
             await dataSource.database.commit(cnn);
             return result;
         } catch (err) {
-            console.error(err);
             await dataSource.database.rollback(cnn, err);
             throw err;
         }

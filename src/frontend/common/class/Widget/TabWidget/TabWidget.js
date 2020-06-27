@@ -144,7 +144,7 @@ class TabWidget extends Widget {
     }
 
     static setTabCaption(tab, caption) {
-        console.log('TabWidget.setTabCaption', caption);
+        // console.log('TabWidget.setTabCaption', caption);
         $(tab).children('span').get(0).innerHTML = caption;
     }
 

@@ -24,7 +24,7 @@ class FormEditorController extends VisualEditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         await formEditor.setAttr(params['attr'], params['value']);
         return null;
     }
@@ -53,7 +53,7 @@ class FormEditorController extends VisualEditorController {
     async createView(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         const ejs = await formEditor.createEjs(params);
         const css = await formEditor.createCss(params);
         return {ejs, css};
@@ -66,7 +66,7 @@ class FormEditorController extends VisualEditorController {
             case 'VisualView.html':
                 const appEditor = await this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
-                const formEditor = pageEditor.getForm(params.form);
+                const formEditor = pageEditor.createFormEditor(params.form);
                 result.data.ejs = await formEditor.getCustomFile('ejs');
                 result.data.css = await formEditor.getCustomFile('css');
                 result.data.js = await formEditor.getCustomFile('js');
@@ -79,7 +79,7 @@ class FormEditorController extends VisualEditorController {
     async saveView(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         switch (params.view) {
             case 'ejs':
                 await formEditor.saveCustomFile('ejs', params.text);
@@ -93,7 +93,7 @@ class FormEditorController extends VisualEditorController {
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         const js = await formEditor.createJs(params);
         return {js};
     }
@@ -101,7 +101,7 @@ class FormEditorController extends VisualEditorController {
     async saveController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         await formEditor.saveCustomFile('js', params.text);
         return null;
     }

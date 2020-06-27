@@ -12,9 +12,9 @@ class Form extends Model {
 
     init() {
         // dataSources
-        for (const dsName in this.data.dataSources) {
-            this.dataSources[dsName] = new DataSource(dsName, this, this.data.dataSources[dsName]);
-            this.dataSources[dsName].init();
+        for (const name in this.data.dataSources) {
+            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
+            this.dataSources[name].init();
         }
         // fields
         for (const name in this.data.fields) {
@@ -44,7 +44,7 @@ class Form extends Model {
         }
     }
 
-    defaultValuesToRow(row) {
+    fillDefaultValues(row) {
         for (const name in this.fields) {
             this.fields[name].fillDefaultValue(row);
         }
@@ -57,18 +57,13 @@ class Form extends Model {
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
         if (this.page.deinited) throw new Error('page already deinited');
-        if (!this.isChanged()) throw new Error(`form not changed: ${this.getFullName()}`);
-        await this.dataSources.default.update();
+        if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form not changed or does not have new rows: ${this.getFullName()}`);
+        await this.getDataSource().update();
     }
-
-    // discard() {
-    //     console.log('Form.discard', this.getFullName());
-    //     return this.dataSources.default.discard();
-    // }
 
     async refill() {
         console.log('Form.refill', this.getFullName());
-        await this.dataSources.default.refill(this.page.params);
+        await this.getDataSource().refill(this.page.params);
         this.emit('refilled', {source: this});
     }
 

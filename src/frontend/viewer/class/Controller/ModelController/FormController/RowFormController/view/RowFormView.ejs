@@ -1,11 +1,24 @@
 <div id="<%=model.page.id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
-    <% if (model.dataSource.data.class === 'SqlDataSource') { %>
     <div class="toolbar">
+    <% if (model.dataSource.getClassName() === 'SqlDataSource') { %>
         <button class="btn btn-default btn-xs saveForm">Save</button>
         <button class="btn btn-default btn-xs discardForm">Discard</button>
         <button class="btn btn-default btn-xs refreshForm">Refresh</button>
-    </div>
     <% } %>
+    <% if (Object.keys(model.data.actions).length > 0) { %>
+        <div class="dropdown" style="display: inline-block">
+            <button class="btn btn-default btn-xs dropdown-toggle" type="button"  data-toggle="dropdown">
+                <span>Actions</span> <span class="caret"></span>
+            </button>
+            <ul id="treeActionsList" class="dropdown-menu">
+                <% for (const name in model.data.actions) {
+                    const action = model.data.actions[name]; %>
+                    <li class="<%=action.name%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
+                <% } %>
+            </ul>
+        </div>
+    <% } %>
+    </div>
     <div class="Grid">
         <% for (const fieldName in model.fields) {
             const field = model.fields[fieldName];
@@ -17,7 +30,7 @@
                 %><span style='color:red;'>&nbsp;*</span><%
                 } %>
             </div>
-            <%=QForms.render(field.data.view, {model: field, newMode: newMode})%>
+            <%=QForms.render(field.data.view, {model: field})%>
         <% } %>
     </div>
 </div>

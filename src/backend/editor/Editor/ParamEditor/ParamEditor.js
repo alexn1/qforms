@@ -16,8 +16,8 @@ class ParamEditor extends Editor {
         return {
             '@class'      : 'Param',
             '@attributes' : {
-                'name' : name,
-                'value': value
+                name : name,
+                value: value
             }
         };
     }

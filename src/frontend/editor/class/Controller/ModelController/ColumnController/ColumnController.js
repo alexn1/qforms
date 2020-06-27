@@ -13,10 +13,10 @@ class ColumnController extends ModelController {
         ];
     }
 
-    doAction(name) {
+    async doAction(name) {
         switch (name) {
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
         }
     }

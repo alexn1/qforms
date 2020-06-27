@@ -17,3 +17,4 @@ class EmployeeController extends PageController {
     }
 
 }
+EmployeeController;

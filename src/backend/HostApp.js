@@ -1,11 +1,11 @@
 'use strict';
 
-const fs     = require('fs');
+const fs      = require('fs');
 const path    = require('path');
 const qforms  = require('./qforms');
 const Context = require('./Context');
 const Test    = require('./Test');
-const pkg       = require('../../package.json');
+const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
 
 const ACTIONS = [
@@ -13,7 +13,6 @@ const ACTIONS = [
     'select',        // select
     'selectSingle',
     'selectMultiple',
-    'select',        // select
     'insert',       // insert
     'update',       // update
     '_delete',      // delete
@@ -35,7 +34,8 @@ const EDITOR_CONTROLLERS = [
     'Param'      ,
     'ParentKeyColumn',
     'Table',
-    'Column'
+    'Column',
+    'Action'
 ];
 
 const EDITOR_ACTIONS = [
@@ -113,7 +113,7 @@ class HostApp {
         const route = HostApp.getRoute(req);
         const application = this.applications[route];
         if (application) {
-            if (req.method === 'GET' && req.query.debug === '1') {
+            if (req.method === 'GET' && (req.query.debug === '1' || HostApp.isEditor(req))) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(req), req.params.env);
             }
@@ -134,6 +134,14 @@ class HostApp {
 
     static getRoute(req) {
         return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
+    }
+
+    static isEditor(req) {
+        return req.url.substr(0, 6) === '/edit/';
+    }
+
+    static isViewer(req) {
+        return req.url.substr(0, 6) === '/view/';
     }
 
     async createApplication(appFilePath, env) {
@@ -160,7 +168,7 @@ class HostApp {
                 viewerClassCss: this.viewerClassCss,
                 viewerClassJs : this.viewerClassJs,
                 links         : application.css,
-                caption       : application.getAttr('caption'),
+                caption       : `${req.params.appDirName}/${application.getAttr('caption')}`,
                 data          : data,
                 env           : application.getEnv()
             });
@@ -255,7 +263,7 @@ class HostApp {
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const data = await page.fill(context);
         Context.destroy(context);
-        res.json({data});
+        await res.json({page: data});
     }
 
     // action
@@ -271,7 +279,7 @@ class HostApp {
         const result = await form.update(context, req.body.ds);
         Context.destroy(context);
         if (result === undefined) throw new Error('action update: result is undefined');
-        res.json(result);
+        await res.json(result);
     }
 
     // action
@@ -299,7 +307,7 @@ class HostApp {
         Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
-        res.json({rows, count, time});
+        await res.json({rows, count, time});
     }
 
     // action
@@ -327,7 +335,7 @@ class HostApp {
         Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
-        res.json({row, time});
+        await res.json({row, time});
     }
 
     // action
@@ -355,7 +363,7 @@ class HostApp {
         Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
-        res.json({rows, count, time});
+        await res.json({rows, count, time});
     }
 
     // action
@@ -375,9 +383,8 @@ class HostApp {
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.database.commit(cnn);
             Context.destroy(context);
-            res.json(result);
+            await res.json(result);
         } catch (err) {
-            console.error(err);
             await dataSource.database.rollback(cnn, err);
             throw err;
         }
@@ -399,9 +406,8 @@ class HostApp {
             await dataSource.delete(context);
             await dataSource.database.commit(cnn);
             Context.destroy(context);
-            res.json(null);
+            await res.json(null);
         } catch (err) {
-            console.error(err);
             await dataSource.database.rollback(cnn, err);
             throw err;
         }
@@ -429,32 +435,32 @@ class HostApp {
         }
         const result = await model.rpc(context, req.body.name, req.body.params);
         Context.destroy(context);
-        res.json(result);
+        await res.json(result);
     }
 
     // action
-    logout(req, res) {
+    async logout(req, res) {
         console.log('HostApp.logout');
         const route = HostApp.getRoute(req);
         if (req.session.user && req.session.user[route]) {
             delete req.session.user[route];
         }
-        res.json(null);
+        await res.json(null);
     }
 
     // action
-    test(req, res) {
+    async test(req, res) {
         console.log('HostApp.test', req.body);
         const response = Test[req.body.name]();
-        res.json({
+        await res.json({
             action: 'test',
             name: req.body.name,
             response
         });
     }
 
-    async appCssFile2(req, application) {
-        console.log('HostApp.appCssFile2');
+    async appCssFile(req, application) {
+        // console.log('HostApp.appCssFile');
         const relFilePath = req.params['0'];
         const filePath = path.join(application.appInfo.dirPath, relFilePath);
         if (path.extname(filePath) === '.css') {
@@ -467,9 +473,9 @@ class HostApp {
     }
 
     async viewerFile(req, res) {
-        console.log('HostApp.viewerFile');
+        // console.log('HostApp.viewerFile');
         const application = this.getApplication(req);
-        const content = await this.appCssFile2(req, application);
+        const content = await this.appCssFile(req, application);
         if (content !== null) {
             res.setHeader('content-type', 'text/css');
             res.send(content);
@@ -483,9 +489,9 @@ class HostApp {
     }
 
     async editorFile(req, res) {
-        console.log('HostApp.editorFile');
+        // console.log('HostApp.editorFile', req.originalUrl);
         const application = this.getApplication(req);
-        const content = await this.appCssFile2(req, application);
+        const content = await this.appCssFile(req, application);
         if (content !== null) {
             res.setHeader('content-type', 'text/css');
             res.send(content);
@@ -514,6 +520,7 @@ class HostApp {
             editorClassJs  : this.editorClassJs,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
             appFileContent : appFileContent,
+            appDirName     : req.params.appDirName,
             appName        : appFile.getAttr('name'),
             env            : application.getEnv()
         });
@@ -524,27 +531,27 @@ class HostApp {
         const application = await this.createApplicationIfNotExists(req);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
-            throw new Error('Unknown controller {controller}'.replace('{controller}', req.body.controller));
+            throw new Error(`unknown controller: ${req.body.controller}`);
         }
         if (EDITOR_ACTIONS.indexOf(req.body.action) === -1) {
-            throw new Error('Unknown action {action}'.replace('{action}', req.body.action));
+            throw new Error(`unknown action ${req.body.action}`);
         }
-        const ControllerClassName = `qforms.${req.body.controller}EditorController`;
-        const ControllerClass = eval(ControllerClassName);
-        if (!ControllerClass) throw new Error(`no class with name ${ControllerClassName}`);
+        const controllerClassName = `qforms.${req.body.controller}EditorController`;
+        const ControllerClass = eval(controllerClassName);
+        if (!ControllerClass) throw new Error(`no class with name ${controllerClassName}`);
         const method = req.body.action;
         const ctrl = new ControllerClass(appInfo, this, application);
-        if (!ctrl[method]) throw new Error(`no method: ${ControllerClassName}.${method}`);
+        if (!ctrl[method]) throw new Error(`no method: ${controllerClassName}.${method}`);
         const result = await ctrl[method](req.body.params);
         // console.log('json result:', result);
         if (result === undefined) throw new Error('result is undefined');
-        res.json(result);
+        await res.json(result);
     }
 
     async homePost(req, res) {
         console.log('HostApp.homePost');
         const appList = await this.createApp(req);
-        res.json({appList});
+        await res.json({appList});
     }
 
     async createApp(req) {

@@ -13,7 +13,7 @@ class PageController extends ModelController {
     }
 
     static create(model, view, parent) {
-        console.log('PageController.create', model.name);
+        // console.log('PageController.create', model.name);
         const customClassName = `${model.name}Controller`;
         const typeOfCustomClass = `typeof ${customClassName}`;
         const custom =  `new ${customClassName}(model, view, parent)`;
@@ -40,7 +40,7 @@ class PageController extends ModelController {
         });
 
         // disable buttons
-        $(self.view).find('button.saveAndClose').prop('disabled', true);
+        $(self.view).find('button.saveAndClose').prop('disabled', !this.model.isNewMode());
 
         // button click
         $(self.view).find('button.saveAndClose').click(function() {
@@ -68,8 +68,8 @@ class PageController extends ModelController {
     }
 
     fill() {
-        for (const formName in this.forms) {
-            this.forms[formName].fill();
+        for (const name in this.forms) {
+            this.forms[name].fill();
         }
         this.setCaption(this.getCaption());
     }
@@ -77,7 +77,16 @@ class PageController extends ModelController {
     async onSaveAndCloseClick(el) {
         console.log('PageController.onSaveAndCloseClick');
         if (this.isValid()) {
-            await this.app.saveAndClosePage(this);
+            await this.model.update();
+            console.log('page model updated');
+            this.app.onPageClosed({source: this, pageController: this});
+        } else {
+            for (const name in this.forms) {
+                const form = this.forms[name];
+                if (form.model.getClassName() === 'RowForm') {
+                    form.updateErrorClasses();
+                }
+            }
         }
     }
 
@@ -102,7 +111,7 @@ class PageController extends ModelController {
     }
 
     getCaption() {
-        console.log('PageController.getCaption', this.model.name);
+        // console.log('PageController.getCaption', this.model.name);
         const key = this.model.getKey();
         let caption;
         if (key) {

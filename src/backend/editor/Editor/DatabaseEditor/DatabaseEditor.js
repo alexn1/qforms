@@ -12,13 +12,7 @@ class DatabaseEditor extends Editor {
     }
 
     static createData(params) {
-        if (!params.name) throw new Error('no name');
-        return {
-            '@class'      : 'Database',
-            '@attributes' : {
-                'name' : params.name
-            }
-        };
+        throw new Error('DatabaseEditor.createData not implemented');
     }
 
     newTable(params) {
@@ -47,7 +41,7 @@ class DatabaseEditor extends Editor {
         const name = params.name;
         if (!name) throw new Error('need param name');
         if (!this.data.params) this.data.params = {};
-        if (this.data.params[name]) throw new Error(`Param ${name} already exists.`);
+        if (this.data.params[name]) throw new Error(`param ${name} already exists`);
         return this.data.params[name] = ParamEditor.createData(params);
     }
 

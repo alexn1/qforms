@@ -7,7 +7,7 @@ class ImageFieldController extends FieldController {
     }
 
     getValue(view) {
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 return view.firstElementChild.src;
             case 'TableForm':
@@ -16,7 +16,7 @@ class ImageFieldController extends FieldController {
     }
 
     setValue(value, view) {
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 if (value !== '') {
                     view.firstElementChild.src = this.model.data.defaultValue + value;

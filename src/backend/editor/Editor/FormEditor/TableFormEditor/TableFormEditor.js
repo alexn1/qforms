@@ -32,7 +32,8 @@ class TableFormEditor extends FormEditor {
             },
             dataSources   : {},
             fields        : {},
-            controls      : {}
+            controls      : {},
+            actions       : {}
         };
     }
 

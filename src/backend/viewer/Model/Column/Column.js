@@ -6,7 +6,7 @@ class Column extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        console.log('Column.constructor', this.name);
+        // console.log('Column.constructor', this.name);
     }
 
     static async create(data, parent) {

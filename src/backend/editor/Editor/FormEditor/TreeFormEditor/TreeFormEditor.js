@@ -21,13 +21,14 @@ class TreeFormEditor extends FormEditor {
         return {
             '@class'     : 'TreeForm',
             '@attributes': {
-                'name'        : params.name,
-                'caption'     : (params.caption) && params.caption ? params.caption : params.name,
-                'itemEditPage': ''
+                name        : params.name,
+                caption     : (params.caption) && params.caption ? params.caption : params.name,
+                itemEditPage: ''
             },
-            'dataSources': {},
-            'fields'     : {},
-            'controls'   : {}
+            dataSources: {},
+            fields     : {},
+            controls   : {},
+            actions    : {}
         };
     }
 

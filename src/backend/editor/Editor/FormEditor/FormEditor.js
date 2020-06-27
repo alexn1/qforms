@@ -50,14 +50,23 @@ class FormEditor extends Editor {
         return this.data.controls[name];
     }
 
+    getActionData(name) {
+        if (!this.data.actions[name]) throw new Error(`no action: ${name}`);
+        return this.data.actions[name];
+    }
+
     getField(name) {
         const fieldData = this.getFieldData(name);
         return eval(`new qforms.${fieldData['@class']}Editor(this, name, fieldData)`);
     }
 
-    getControl(name) {
+    createControlEditor(name) {
         const controlData = this.getControlData(name);
         return eval(`new qforms.${controlData['@class']}Editor(this, name, controlData)`);
+    }
+
+    createActionEditor(name) {
+        return new qforms.ActionEditor(this.getActionData(name), this);
     }
 
     async removeField(name) {
@@ -66,13 +75,6 @@ class FormEditor extends Editor {
     }
 
     async createControl(params) {
-        this.newControl(params);
-        await this.parent.save();
-        const controlEditor = this.getControl(params.name);
-        return controlEditor;
-    }
-
-    newControl(params) {
         const name = params.name;
         if (!this.data.controls) {
             this.data.controls = {};
@@ -80,8 +82,35 @@ class FormEditor extends Editor {
         if (this.data.controls[name]) {
             throw new Error('Control {name} already exist.'.repalce('{name}', name));
         }
-        return this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
+        const controlData = this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
+        await this.parent.save();
+        return controlData;
     }
+
+    async createAction(params) {
+        if (!params.name) throw new Error('no name');
+        const name = params.name;
+        if (!this.data.actions) {
+            this.data.actions = {};
+        }
+        if (this.data.actions[name]) {
+            throw new Error(`action ${name} already exist`);
+        }
+        const data = this.data.actions[name] = qforms.ActionEditor.createData(params);
+        await this.parent.save();
+        return data;
+    }
+
+    // newControl(params) {
+    //     const name = params.name;
+    //     if (!this.data.controls) {
+    //         this.data.controls = {};
+    //     }
+    //     if (this.data.controls[name]) {
+    //         throw new Error('Control {name} already exist.'.repalce('{name}', name));
+    //     }
+    //     return this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
+    // }
 
     async removeControl(name) {
         delete this.data.controls[name];
@@ -147,11 +176,11 @@ class FormEditor extends Editor {
         }
         let data;
         switch (_class) {
-            case 'DataSource':
-                data = qforms.DataSourceEditor.create(params);
-                break;
+            // case 'DataSource':
+            //     data = qforms.DataSourceEditor.createData(params);
+            //     break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.create(params);
+                data = qforms.SqlDataSourceEditor.createData(params);
                 break;
             default:
                 throw new Error('Unknown data source class.');

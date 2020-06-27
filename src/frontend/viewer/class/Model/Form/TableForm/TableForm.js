@@ -6,16 +6,16 @@ class TableForm extends Form {
     // onDataSourceChanged(e) {
     //     const dataSource = e.source;
     //     if (dataSource.name !== 'default') return;
-    //     this.dataSources.default.update();
+    //     this.getDataSource().update();
     // }
 
     delete(key) {
         console.log('TableForm.delete:', key);
-        this.dataSources.default.delete(key);
+        this.getDataSource().delete(key);
     }
 
     frame(frame) {
-        this.dataSources.default.frame(this.page.params, frame);
+        this.getDataSource().frame(this.page.params, frame);
     }
 
 }

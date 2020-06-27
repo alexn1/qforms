@@ -165,4 +165,8 @@ class DatabaseController extends DocumentController {
         this.addTableItem(tableData).select();
     }
 
+    getCaption(data) {
+        return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
+    }
+
 }

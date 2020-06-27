@@ -9,7 +9,7 @@ class TextAreaFieldController extends FieldController {
     fill(row, view) {
         super.fill(row, view);
         const self = this;
-        if (this.model.form.data.class === 'RowForm') {
+        if (this.model.form.getClassName() === 'RowForm') {
             $(view).children().on('input', function() {
                 self.onChange(this);
             });

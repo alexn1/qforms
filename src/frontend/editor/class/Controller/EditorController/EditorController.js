@@ -108,7 +108,7 @@ class EditorController {
                 $(li).click(function() {
                     this.ctrl.doAction(this.miAction);
                 });
-                li.innerHTML = "<a style='cursor: pointer;'>{caption}</a>".replace('{caption}', action.caption);
+                li.innerHTML = `<a style='cursor: pointer;'>${action.caption}</a>`;
                 $('#treeActionsList').append(li);
             }
         });
@@ -121,10 +121,7 @@ class EditorController {
     onItemDoubleClick(e) {
         console.log('EditorController.onItemDoubleClick', e.item);
         const controller = e.item.ctrl;
-        if (!controller instanceof DocumentController) {
-            console.log('item controller does not have view');
-            return;
-        }
+        if (!controller || !controller instanceof DocumentController) return;
         if (controller.tab) {
             this.docs.selectTab(controller.tab);
         } else {

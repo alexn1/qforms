@@ -43,4 +43,8 @@ class PageLink extends Model {
         });
     }
 
+    getFileName() {
+        return this.data['@attributes'].fileName;
+    }
+
 }

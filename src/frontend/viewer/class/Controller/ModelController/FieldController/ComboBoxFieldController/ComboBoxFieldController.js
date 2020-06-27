@@ -31,7 +31,7 @@ class ComboBoxFieldController extends FieldController {
 
     fill(row, view) {
         const self = this;
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 view.keyToOption = {};
                 this._fillSelectOptions(view);
@@ -47,7 +47,7 @@ class ComboBoxFieldController extends FieldController {
     }
 
     getValue(view) {
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 return (view.firstElementChild.selectedIndex === 0) ? null : view.firstElementChild.value;
             case 'TableForm':
@@ -56,7 +56,7 @@ class ComboBoxFieldController extends FieldController {
     }
 
     setValue(value, view) {
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 if (value === null) {
                     view.firstElementChild.selectedIndex = 0;
@@ -110,7 +110,7 @@ class ComboBoxFieldController extends FieldController {
         //console.log(ea);
         const key = ea.key;
         //i = ea.i;
-        if (this.model.form.data.class === 'RowForm') {
+        if (this.model.form.getClassName() === 'RowForm') {
             for (const view in this.views.values()) {
                 const option = view.keyToOption[key];
                 this._refillRow(option);
@@ -124,7 +124,7 @@ class ComboBoxFieldController extends FieldController {
 
     onRemoveRow(ea) {
         const key = ea.key;
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 for (const k in this.views) {
                     const view = this.views[k];
@@ -139,7 +139,7 @@ class ComboBoxFieldController extends FieldController {
     onNewRow(ea) {
         //console.log('ComboBoxFieldController.onNewRow');
         //console.log(ea);
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 const key = this.model.form.dataSource.getRowKey(this.model.form.row);
                 const view = this.views[key];
@@ -152,7 +152,7 @@ class ComboBoxFieldController extends FieldController {
         const newIndex = ea.newIndex;
         const oldIndex = ea.oldIndex;
         const key      = ea.key;
-        switch (this.model.form.data.class) {
+        switch (this.model.form.getClassName()) {
             case 'RowForm':
                 for (const k in this.views) {
                     const view = this.views[k];

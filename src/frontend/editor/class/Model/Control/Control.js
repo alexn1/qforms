@@ -33,7 +33,7 @@ class Control extends Model {
                 value       : value
             }
         });
-        this.data['@attributes'][name] = value;
+        this.setAttr(name, value);
         return data;
     }
 

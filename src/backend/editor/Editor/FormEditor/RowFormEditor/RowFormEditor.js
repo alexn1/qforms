@@ -21,12 +21,13 @@ class RowFormEditor extends FormEditor {
         return {
             '@class'     : 'RowForm',
             '@attributes': {
-                'name'    :params.name,
-                'caption' :params.caption ? params.caption : params.name
+                name    :params.name,
+                caption :params.caption ? params.caption : params.name
             },
-            'dataSources': {},
-            'fields'     : {},
-            'controls'   : {}
+            dataSources: {},
+            fields     : {},
+            controls   : {},
+            actions    : {}
         };
     }
 

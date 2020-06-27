@@ -69,9 +69,7 @@ class MySqlDatabase extends Database {
     }
 
     async queryRows(context, query, params) {
-        //if (process.env.NODE_ENV === 'development') {
-        //    console.log('MySqlDatabase.queryRows', query, params);
-        //}
+        console.log('MySqlDatabase.queryRows', query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -91,9 +89,7 @@ class MySqlDatabase extends Database {
     }
 
     async queryResult(context, query, params) {
-        //if (process.env.NODE_ENV === 'development') {
-        //    console.log('MySqlDatabase.queryResult', query, params);
-        //}
+        console.log('MySqlDatabase.queryResult', query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -159,22 +155,24 @@ class MySqlDatabase extends Database {
     }
 
     rollback(cnn, err) {
-        console.log('MySqlDatabase.rollback');
+        console.log('MySqlDatabase.rollback:', err.message);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
-                reject(err);
+                // reject(err);
+                resolve();
             });
         });
     }
 
     static queryFormat(query, params = {}) {
+        console.log('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return mysql.escape(params[name]);
             }
-            return 'NULL';
+            throw new Error(`no query param: ${name}`);
         });
-        //console.log('real db sql: ' + sql);
+        console.log('real db sql: ' + sql);
         return sql;
     }
 
@@ -230,10 +228,12 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                         // console.log('row:', row);
                         return {
                             name    : row.COLUMN_NAME,
+                            type    : this.getColumnTypeByDataType(row.COLUMN_TYPE),
                             key     : row.COLUMN_KEY === 'PRI',
                             auto    : row.EXTRA === 'auto_increment',
                             nullable: row.IS_NULLABLE === 'YES',
                             comment : row.COLUMN_COMMENT,
+                            dbType  : row.COLUMN_TYPE
                             // COLUMN_TYPE   : row.COLUMN_TYPE,
                             // COLUMN_DEFAULT: row.COLUMN_DEFAULT,
                             // EXTRA         : row.EXTRA,
@@ -244,6 +244,65 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 }
             });
         });
+    }
+
+    getColumnTypeByDataType(dataType) {
+        switch (dataType) {
+            case 'int(10) unsigned':
+                return 'number';
+            case 'varchar(255)':
+                return 'string';
+            default:
+                return null;
+        }
+    }
+
+    async insertRow(context, table, autoColumns, values) {
+        console.log(`MySqlDatabase.insertRow ${table}`, autoColumns, values);
+        if (autoColumns.length > 1) throw new Error('mysql does not support more than one auto increment column');
+
+        const query = this.getInsertQuery(table, values);
+        // console.log('insert query:', query, values);
+
+        const result = await this.queryResult(context, query,  values);
+        // console.log('insert result:', result);
+        if (autoColumns.length === 1) {
+            if (!result.insertId) throw new Error('no insertId');
+            return {
+                [autoColumns[0]]: result.insertId,
+                ...values
+            };
+        }
+        return {
+            ...values
+        };
+        /*const key = JSON.stringify([result.insertId]);
+        return key;*/
+        /*
+        const _row = {};
+        const files = {};
+        for (const column in row) {
+            if (row[column] instanceof Object) {
+                _row[column] = '{' + column + '}';
+                files[column] = row[column];
+                console.error(row[column]);
+            } else if (this.table.columns[column] && !this.table.columns[column].isAuto()) {
+                _row[column] = row[column];
+            }
+        }
+        console.log('_row:', _row);
+        */
+
+        /*
+        const buffers = {};
+        const names = Object.keys(files);
+        for (let i = 0; i < names.length; i++) {
+            const name = names[i];
+            const file = files[name];
+            const buffer = await this.getBuffer(context, file);
+            buffers[name] = buffer;
+        }
+        */
     }
 }
 

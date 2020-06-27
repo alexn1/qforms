@@ -5,6 +5,7 @@ module.exports.text                              = {
                                                 ru:require('./common/text/ru')
 };
 module.exports.Editor                            = require('./editor/Editor/Editor');
+module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 module.exports.ControlEditor                     = require('./editor/Editor/ControlEditor/ControlEditor');
 module.exports.ButtonControlEditor               = require('./editor/Editor/ControlEditor/ButtonControlEditor/ButtonControlEditor');
@@ -27,6 +28,7 @@ module.exports.TreeFormEditor                    = require('./editor/Editor/Form
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 module.exports.EditorController                  = require('./editor/EditorController/EditorController');
+module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
 module.exports.DatabaseEditorController          = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
 module.exports.DataSourceEditorController        = require('./editor/EditorController/DataSourceEditorController/DataSourceEditorController');
 module.exports.KeyColumnEditorController         = require('./editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
@@ -69,3 +71,4 @@ module.exports.Page                              = require('./viewer/Model/Page/
 module.exports.PageLink                          = require('./viewer/Model/PageLink/PageLink');
 module.exports.Column                            = require('./viewer/Model/Column/Column');
 module.exports.Table                             = require('./viewer/Model/Table/Table');
+module.exports.Action                            = require('./viewer/Model/Action/Action');

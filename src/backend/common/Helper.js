@@ -30,7 +30,7 @@ function _getFilePathsSync(dirPath, ext) {
 }
 
 async function _getFilePaths2(dirPath, ext, filePaths) {
-    console.log('_getFilePaths2', dirPath);
+    // console.log('_getFilePaths2', dirPath);
     // all files from directory
     const files = await Helper._glob(path.join(dirPath, '*.' + ext));
 
@@ -87,7 +87,7 @@ class Helper {
     }
 
     static async getFilePaths(publicDirPath, subDirPath, ext) {
-        console.log('Helper.getFilePaths');
+        // console.log('Helper.getFilePaths');
         const filePaths = [];
         await _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths);
         const relativeFilePaths = filePaths.map(filePath => {
@@ -98,7 +98,7 @@ class Helper {
 
 
     static async getAppInfo(appFilePath, env) {
-        console.log('Helper.getAppInfo', appFilePath);
+        // console.log('Helper.getAppInfo', appFilePath);
         const content = await fsPromises.readFile(appFilePath, 'utf8');
         const data = JSON.parse(content);
         if (data['@class'] && data['@class'] === 'Application') {

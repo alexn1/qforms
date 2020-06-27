@@ -59,21 +59,15 @@ class DataSourceEditor extends Editor {
         return backendJs;
     }
 
-    static create(params) {
-        const data = {
+    static createData(params) {
+        throw new Error('DataSourceEditor.createData not implemented');
+        /*return {
             '@class'     : 'DataSource',
             '@attributes': {
                 name                : params.name,
-                database            : params['database'] ? params['database'] : 'default',
-                //table               : params['table']    ? params['table'] : '',
-                //query               : params['query']    ? params['query'] : '',
-                //limit               : '',
-                //countQuery          : '',
-                //insertNewKey        :'false',
                 dumpFirstRowToParams: 'false'
             }
-        };
-        return data;
+        };*/
     }
 
 }

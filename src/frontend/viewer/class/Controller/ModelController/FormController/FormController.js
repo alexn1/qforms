@@ -11,7 +11,7 @@ class FormController extends ModelController {
     }
 
     static create(model, view, parent) {
-        console.log('FormController.create', model.getFullName());
+        // console.log('FormController.create', model.getFullName());
         let obj;
         if (model.data.js) {
             const CustomClass = eval(model.data.js);

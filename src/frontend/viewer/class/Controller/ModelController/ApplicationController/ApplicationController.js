@@ -96,8 +96,7 @@ class ApplicationController extends ModelController {
         const model = e.page;
         model.id = `p${this.getNextPageId()}`;
         const html = QForms.render(model.data.view, {
-            model  : model,
-            newMode: e.newMode
+            model  : model
         });
         const view = $(html).get(0);
 
@@ -152,13 +151,6 @@ class ApplicationController extends ModelController {
         this.statusbar.innerHTML = `Last query time: ${e.time} ms`;
     }
 
-    async saveAndClosePage(pageController) {
-        console.log('ApplicationController.saveAndClosePage');
-        await pageController.model.update();
-        console.log('page model updated');
-        this.onPageClosed({source: this, pageController: pageController});
-    }
-
     closePage(pageController) {
         console.log('ApplicationController.closePage');
         this.onPageClosed({source: this, pageController: pageController});
@@ -166,7 +158,7 @@ class ApplicationController extends ModelController {
     }
 
     findPageControllerByPageNameAndKey(pageName, key) {
-        console.log('ApplicationController.findPageControllerByPageNameAndKey', pageName, key);
+        // console.log('ApplicationController.findPageControllerByPageNameAndKey', pageName, key);
         for (let i = 0; i < this.appTC.tabList.childNodes.length; i++) {
             const tab = this.appTC.tabList.childNodes[i];
             if (tab.pageController.model.name === pageName && tab.pageController.model.getKey() === key) {
@@ -177,7 +169,7 @@ class ApplicationController extends ModelController {
     }
 
     findTabByPageController(pageController) {
-        console.log('ApplicationController.findTabByPageController');
+        // console.log('ApplicationController.findTabByPageController');
         for (let i = 0; i < this.appTC.tabList.childNodes.length; i++) {
             const tab = this.appTC.tabList.childNodes[i];
             if (tab.pageController === pageController) {
@@ -190,7 +182,6 @@ class ApplicationController extends ModelController {
     async openPage(args) {
         console.log('ApplicationController.openPage', args.name);
         const name            = args.name;
-        const newMode         = (args.newMode === undefined) ? false : args.newMode;
         const key             = args.key || null;
         const parentPage      = args.parentPage;
         const parentPageName  = parentPage ? parentPage.name : undefined;
@@ -203,6 +194,7 @@ class ApplicationController extends ModelController {
                 params[keyName] = keyParams[keyName];
             }
         }
+
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
         // console.log('pageController:', pageController);
@@ -215,11 +207,10 @@ class ApplicationController extends ModelController {
         const response = await this.model.request({
             action        : 'page',
             page          : name,
-            newMode       : newMode,
+            newMode       : !!args.newMode,
             parentPageName: parentPageName,
             params        : params
         });
-
 
         // copy params from parent page to make possible refer to parent page params
         if (parentPage !== undefined) {
@@ -231,9 +222,7 @@ class ApplicationController extends ModelController {
         }
         const page = new Page({
             app           : this.model,
-            data          : response.data,
-            key           : key,
-            newMode       : newMode,
+            data          : response.page,
             params        : params,
             parentPageName: parentPageName
         });
@@ -244,8 +233,7 @@ class ApplicationController extends ModelController {
             source : this,
             page   : page,
             track  : parentPage !== undefined,
-            select : true,
-            newMode: newMode
+            select : true
         });
     }
 

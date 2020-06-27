@@ -16,17 +16,16 @@ class ControlEditorController extends VisualEditorController {
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        const formEditor = pageEditor.getForm(params.form);
-        const controlEditor = await formEditor.createControl(params);
-        const controlData = controlEditor.getData();
+        const formEditor = pageEditor.createFormEditor(params.form);
+        const controlData = await formEditor.createControl(params);
         return controlData;
     }
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        const formEditor = pageEditor.getForm(params.form);
-        const controlEditor = formEditor.getControl(params.control);
+        const formEditor = pageEditor.createFormEditor(params.form);
+        const controlEditor = formEditor.createControlEditor(params.control);
         await controlEditor.setAttr(params['attr'], params['value']);
         return null;
     }
@@ -34,7 +33,7 @@ class ControlEditorController extends VisualEditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        const formEditor = pageEditor.getForm(params.form);
+        const formEditor = pageEditor.createFormEditor(params.form);
         await formEditor.removeControl(params.control);
         return null;
     }

@@ -115,7 +115,7 @@ class ApplicationController extends VisualController {
                 caption:caption,
                 startup:startup
             };
-            self.model.newPage(params).spread((pageData, pageLinkData) => {
+            self.model.newPage(params).then(([pageData, pageLinkData]) => {
                 self.pageItems[name] = self.addPageItem(pageData, pageLinkData);
                 self.pageItems[name].select();
             });
@@ -151,42 +151,26 @@ class ApplicationController extends VisualController {
         const result = await Database.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(async () => {
+            const _class = $("#myModal select[id='class']").val();
             const name     = $("#myModal input[id='name']").val();
             const host     = $("#myModal input[id='host']").val();
-            const port     = $("#myModal input[id='port']").val();
             const dbname   = $("#myModal input[id='dbname']").val();
             const user     = $("#myModal input[id='user']").val();
             const password = $("#myModal input[id='password']").val();
-
             const params = {
-                name:name,
-                params:{
-                    host:{
-                        name:'host',
-                        value:host
-                    },
-                    port:{
-                        name:'port',
-                        value:port
-                    },
-                    database:{
-                        name:'database',
-                        value:dbname
-                    },
-                    user:{
-                        name:'user',
-                        value:user
-                    },
-                    password:{
-                        name:'password',
-                        value:password
-                    }
+                _class: _class,
+                name  : name,
+                params: {
+                    host    : {name: 'host'    , value: host    },
+                    database: {name: 'database', value: dbname  },
+                    user    : {name: 'user'    , value: user    },
+                    password: {name: 'password', value: password}
                 }
             };
-            self.model.newDatabase(params).then((databaseData) => {
-                self.addDatabaseItem(databaseData).select();
-            });
+            // console.log('params:', params);
+            const databaseData = await self.model.newDatabase(params);
+            self.addDatabaseItem(databaseData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');

@@ -52,9 +52,9 @@ class TableFormController extends FormController {
     }
 
     fill() {
-        console.log('TableFormController.fill', this.model.name);
+        // console.log('TableFormController.fill', this.model.name);
         super.fill();
-        if (this.model.dataSource.limit) {
+        if (this.model.dataSource.getLimit()) {
             $(this.view).find('.paging').css('display', 'block');
             this.setCountText();
         }
@@ -76,7 +76,7 @@ class TableFormController extends FormController {
     }
 
     updateCountAndGoTo() {
-        if (this.model.dataSource.limit) {
+        if (this.model.dataSource.getLimit()) {
             this.setCountText();
         }
         this.framesCount = this.model.dataSource.getFramesCount();
@@ -115,7 +115,7 @@ class TableFormController extends FormController {
     }
 
     onDeleteClick(ctrl) {
-        console.log('TableFormController.onDeleteClick');
+        console.log('TableFormController.onDeleteClick', this.grid.getSelectedKey());
         if (confirm(this.model.page.app.data.text.form.areYouSure)) {
             const key = this.grid.getSelectedKey();
             if (key !== null) {
@@ -145,9 +145,13 @@ class TableFormController extends FormController {
         this.model.frame(frame);
     }
 
-    onGridCellDblClick(ea) {
-        const bodyCell = ea.bodyCell;
-        const key = bodyCell.bodyRow.qKey;
+    async onGridCellDblClick(e) {
+        console.log('TableFormController.onGridCellDblClick', e.bodyCell.bodyRow.dbRow);
+        const bodyCell = e.bodyCell;
+        const row = bodyCell.bodyRow.dbRow;
+        // console.log('row:', row);
+        const key = this.model.getDataSource().getRowKey(row);
+        // console.log('key:', key);
         switch (this.model.data.editMethod) {
             case 'table':
                 if (this.model.dataSource.data.access.update === true) {
@@ -155,7 +159,7 @@ class TableFormController extends FormController {
                 }
             break;
             case 'form':
-                this.edit(key);
+                await this.edit(key);
             break;
         }
     }
@@ -176,7 +180,7 @@ class TableFormController extends FormController {
     async new() {
         if (this.model.data.newRowMode === 'oneclick') {
             const row = {};
-            this.model.defaultValuesToRow(row);
+            this.model.fillDefaultValues(row);
             this.model.dataSource.insert(row);
         } else if (this.model.data.newRowMode === 'editform') {
             if (!this.model.data.itemEditPage) {
@@ -199,7 +203,7 @@ class TableFormController extends FormController {
                 throw new Error('[' + this.model.getFullName() + '] itemEditPage is empty.');
             }
             const row = {};
-            this.model.defaultValuesToRow(row);
+            this.model.fillDefaultValues(row);
             const key = await this.model.dataSource.insert(row);
             await this.openPage({
                 name: this.model.data.itemEditPage,
@@ -210,7 +214,7 @@ class TableFormController extends FormController {
                 throw new Error('[' + this.model.getFullName() + '] itemCreatePage is empty.');
             }
             const row = {};
-            this.model.defaultValuesToRow(row);
+            this.model.fillDefaultValues(row);
             const key2 = await this.model.dataSource.insert(row);
             await this.openPage({
                 name: this.model.data.itemCreatePage,
@@ -227,9 +231,9 @@ class TableFormController extends FormController {
     }
 
     async edit(key) {
-        console.log('TableForm.edit', this.model.getFullName());
+        console.log('TableForm.edit', this.model.getFullName(), key);
         if (!this.model.data.itemEditPage) {
-            throw new Error('[' + this.model.getFullName() + '] itemEditPage is empty.');
+            throw new Error(`${this.model.getFullName()}: itemEditPage is empty`);
         }
         try {
             await this.openPage({
@@ -237,7 +241,7 @@ class TableFormController extends FormController {
                 key : key
             });
         } catch (err) {
-            console.error('edit form error handler:', err.message, err.stack);
+            console.error(`${this.model.getFullName()}: edit form error handler:`, err);
             alert(err.message);
         }
     }

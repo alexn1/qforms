@@ -1,0 +1,84 @@
+{
+    "@class": "Page",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "Test",
+        "caption": "Test",
+        "width": "640",
+        "height": "480"
+    },
+    "dataSources": {},
+    "forms": {
+        "employee": {
+            "@class": "RowForm",
+            "@attributes": {
+                "name": "employee",
+                "caption": "employee"
+            },
+            "dataSources": {
+                "default": {
+                    "@class": "SqlDataSource",
+                    "@attributes": {
+                        "name": "default",
+                        "database": "default",
+                        "table": "employee",
+                        "singleQuery": "select\n    `id`,\n    `first_name`,\n    `last_name`\nfrom `employee`\nwhere id = {key}",
+                        "multipleQuery": "select\n    `id`,\n    `first_name`,\n    `last_name`\nfrom `employee`\nlimit {offset}, {limit}",
+                        "countQuery": "select count(*) from `employee`",
+                        "limit": "",
+                        "insertNewKey": "false",
+                        "dumpFirstRowToParams": "false"
+                    }
+                }
+            },
+            "fields": {
+                "id": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "id",
+                        "caption": "id",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "value": "",
+                        "column": "id",
+                        "readOnly": "true",
+                        "notNull": "false",
+                        "align": "left"
+                    }
+                },
+                "first_name": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "first_name",
+                        "caption": "first_name",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "value": "",
+                        "column": "first_name",
+                        "readOnly": "false",
+                        "notNull": "true",
+                        "align": "left"
+                    }
+                },
+                "last_name": {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "last_name",
+                        "caption": "last_name",
+                        "isVisible": "true",
+                        "width": "0",
+                        "defaultValue": "",
+                        "value": "",
+                        "column": "last_name",
+                        "readOnly": "false",
+                        "notNull": "true",
+                        "align": "left"
+                    }
+                }
+            },
+            "controls": {}
+        }
+    }
+}

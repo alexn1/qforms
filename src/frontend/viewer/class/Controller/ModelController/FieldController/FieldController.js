@@ -102,6 +102,8 @@ class FieldController extends ModelController {
                 view.firstElementChild.placeholder = 'null';
             } else if (value === '') {
                 view.firstElementChild.placeholder = 'empty string';
+            } else {
+                view.firstElementChild.placeholder = this.valueToString(value);
             }
         }
     }
@@ -144,7 +146,7 @@ class FieldController extends ModelController {
             let isValid = true;
             if (this.model.data.notNull === 'true') {
                 isValid = !this.isEmpty(value);
-                if (!isValid) console.error('null');
+                if (!isValid) console.error(`${this.model.getFullName()}: null`);
             }
 
             // type check
@@ -168,19 +170,26 @@ class FieldController extends ModelController {
         console.log('FieldController.onChange', this.model.name);
         const view = el.parentNode;
         const row = view.dbRow;
-        if (this.isValid(view)) {
-            view.firstElementChild.classList.remove('error');
+        const valid = this.isValid(view);
+        if (valid) {
             const value = this.getValue(view);
             const newValue = this.model.setValue(row, value);
             // this.setValue(newValue, view);
             this.setPlaceHolder(newValue, view);
-        } else {
-            view.firstElementChild.classList.add('error');
         }
+        this.updateErrorClass(view, valid);
 
         // event
         this.updateChangedClass(row, view);
         this.parent.onFieldChange({source: this, view, row, el, field: this});
+    }
+
+    updateErrorClass(view, valid) {
+        if (valid) {
+            view.firstElementChild.classList.remove('error');
+        } else {
+            view.firstElementChild.classList.add('error');
+        }
     }
 
     isEmpty(value) {
@@ -201,8 +210,7 @@ class FieldController extends ModelController {
         }
         const rowChanged = this.model.isChanged(row);
         if (rowChanged) {
-            console.log(`ROW CHANGED ${this.model.getFullName()}:`, row[this.model.data.column]);
-            console.log('changes:', this.model.getDataSource().changes);
+            console.log(`ROW CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
         }
         return rowChanged || fieldChanged;
     }

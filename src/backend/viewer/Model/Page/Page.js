@@ -44,8 +44,10 @@ class Page extends Model {
     }
 
     async fill(context) {
-        console.log('Page.fill', this.constructor.name, this.name);
-        return super.fill(context);
+        // console.log('Page.fill', this.constructor.name, this.name);
+        const data = await super.fill(context);
+        data.newMode = !!context.newMode;
+        return data;
     }
 
     async rpc(context) {

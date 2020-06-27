@@ -22,10 +22,9 @@
                         "name": "default",
                         "database": "default",
                         "table": "employee",
-                        "query": "select id,first_name,last_name from `employee` where id = {key}",
                         "limit": "",
                         "countQuery": "",
-                        "singleQuery": "",
+                        "singleQuery": "select id,first_name,last_name from `employee` where id = {key}",
                         "multipleQuery": "",
                         "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
@@ -64,7 +63,7 @@
                         "defaultValue": "",
                         "column": "first_name",
                         "readOnly": "false",
-                        "notNull": "false",
+                        "notNull": "true",
                         "align": "left"
                     }
                 },
@@ -78,7 +77,7 @@
                         "defaultValue": "",
                         "column": "last_name",
                         "readOnly": "false",
-                        "notNull": "false",
+                        "notNull": "true",
                         "align": "left"
                     }
                 }
