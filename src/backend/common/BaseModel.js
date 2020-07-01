@@ -1,4 +1,22 @@
 class BaseModel {
+
+    static getClassName(data) {
+        return data['@class'];
+    }
+
+    static getName(data) {
+        return BaseModel.getAttr(data, 'name');
+    }
+
+    static getAttr(data, name) {
+        return data['@attributes'][name];
+    }
+
+    static getEnvList(data) {
+        const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
+        return ['local', ...list];
+    }
+
     constructor(data, parent) {
         this.data = data;
         this.parent = parent;
@@ -8,20 +26,8 @@ class BaseModel {
         return this.data['@class'];
     }
 
-    static getClassName(data) {
-        return data['@class'];
-    }
-
     getName() {
         return BaseModel.getName(this.data);
-    }
-
-    static getName(data) {
-        return BaseModel.getAttr(data, 'name');
-    }
-
-    static getAttr(data, name) {
-        return data['@attributes'][name];
     }
 
     attributes() {

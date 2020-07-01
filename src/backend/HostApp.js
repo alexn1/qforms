@@ -571,6 +571,7 @@ class HostApp {
     async homeGet(req, res) {
         console.log('HostApp.homeGet');
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
+        console.log('appInfos:', appInfos);
         res.render('home', {
             req           : req,
             hostApp       : this,

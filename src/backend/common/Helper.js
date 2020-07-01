@@ -7,6 +7,7 @@ const fs         = require('fs');
 const fsPromises = require('fs').promises;
 const _          = require('underscore');
 const Promise    = require('bluebird');
+const BaseModel = require('./BaseModel');
 
 const entityMap = {
     '&': '&amp;',
@@ -109,12 +110,15 @@ class Helper {
     }
 
     static getAppInfoFromData(appFilePath, data, env) {
+        // console.log('getAppInfoFromData:', appFilePath, data);
         if (!env) throw new Error('no env');
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName  = path.basename(path.dirname(appFilePath));
         return {
-            name        : data['@attributes'].name,
-            caption     : data['@attributes'].caption,
+            name        : BaseModel.getAttr(data, 'name'),
+            caption     : BaseModel.getAttr(data, 'caption'),
+            fullName    : [dirName, fileName].join('/'),
+            envs        : BaseModel.getEnvList(data),
             route       : [dirName, fileName, env].join('/'),
             fileName    : fileName,
             dirName     : dirName,

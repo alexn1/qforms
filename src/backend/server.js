@@ -1,12 +1,10 @@
 'use strict';
 console.log('server.js');
 const express    = require('express');
-// const path       = require('path');
 const fs         = require('fs');
 // const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const session    = require('express-session');
-// const pkg       = require('../../package.json');
 const Helper    = require('./common/Helper');
 const multipart = require('connect-multiparty')();
 const _         = require('underscore');

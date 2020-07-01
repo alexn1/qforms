@@ -19,7 +19,11 @@
     <script src="home/class/all.js"></script>
     <script>
         $(document).ready(() => {
-            new HomeController().init();
+            const data = <%-JSON.stringify(appInfos.map(appInfo => ({
+                fullName: appInfo.fullName,
+                envs: appInfo.envs
+            })), null, 4)%>;
+            new HomeController(data).init();
         });
     </script>
 </head>
@@ -31,13 +35,18 @@
                     col-xs-8">
             <select id="lbApp"  size="15" style="width: 100%;">
                 <% appInfos.forEach((appInfo) => {
-                    %><option value="<%=appInfo.route%>"><%=appInfo.route%></option><%='\n'%><%
+                    %><option value="<%=appInfo.fullName%>"><%=appInfo.fullName%></option><%='\n'%><%
                 }); %>
             </select>
         </div>
         <div class="col-md-2
                     col-sm-3
                     col-xs-4">
+            <div class="form-group">
+                <select id="ddEnv" class="form-control">
+                    <option value="local">local</option>
+                </select>
+            </div>
             <button id="btnRun" class="btn btn-primary btn-block">Run</button>
             <% if (hostApp.nodeEnv === 'development') { %>
                 <button id="btnEdit" class="btn btn-default btn-block">Edit</button>
