@@ -173,7 +173,7 @@ class Helper {
         });
     }
 
-    static getCommandLineParams () {
+    static getCommandLineParams() {
         const params = process.argv.map(arg => {
             const param = arg.split('=');
             return {
