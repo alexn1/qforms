@@ -149,7 +149,7 @@ async function homePost(req, res, next) {
     }
 }
 
-async function homeGet(req, res) {
+async function homeGet(req, res, next) {
     console.warn('homeGet');
     try {
         await server.get('hostApp').homeGet(req, res);
