@@ -32,8 +32,7 @@
     "should": "^7.0.4"
   },
   "scripts": {
-    "start": "node lib/www.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/lib/backend/www.js"
   },
   "repository": {
     "type": "git",
