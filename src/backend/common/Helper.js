@@ -4,7 +4,7 @@ const glob       = require('glob');
 const path       = require('path');
 const slash      = require('slash');
 const fs         = require('fs');
-const fsPromises = require('fs').promises;
+// const fsPromises = require('fs').promises;       // node v12
 const _          = require('underscore');
 const Promise    = require('bluebird');
 const BaseModel = require('./BaseModel');
@@ -100,7 +100,7 @@ class Helper {
 
     static async getAppInfo(appFilePath, env) {
         // console.log('Helper.getAppInfo', appFilePath);
-        const content = await fsPromises.readFile(appFilePath, 'utf8');
+        const content = await Helper.readFile(appFilePath);
         const data = JSON.parse(content);
         if (data['@class'] && data['@class'] === 'Application') {
             const appInfo = Helper.getAppInfoFromData(appFilePath, data, env);
