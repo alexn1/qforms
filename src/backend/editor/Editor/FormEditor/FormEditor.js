@@ -172,7 +172,7 @@ class FormEditor extends Editor {
             this.data.dataSources = {};
         }
         if (this.data.dataSources[name]) {
-            throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+            throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
         switch (_class) {
@@ -183,7 +183,7 @@ class FormEditor extends Editor {
                 data = qforms.SqlDataSourceEditor.createData(params);
                 break;
             default:
-                throw new Error('Unknown data source class.');
+                throw new Error(`unknown data source class: ${_class}`);
         }
         this.data.dataSources[name] = data;
         return this.createDataSourceEditor(name);
