@@ -12,7 +12,7 @@ class ComboBoxFieldController extends FieldController {
         super.init();
         this.dataSource = this.model.getDataSource(this.model.data.dataSourceName);
         if (!this.dataSource) {
-            throw new Error('[' + this.model.getFullName() + '] cannot find data source \'' + this.model.data.dataSourceName + '\'');
+            throw new Error(`[${this.model.getFullName()}] cannot find data source '${this.model.data.dataSourceName}'`);
         }
         this.dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         this.dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
