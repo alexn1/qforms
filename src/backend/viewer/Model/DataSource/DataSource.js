@@ -76,7 +76,11 @@ class DataSource extends Model {
                 throw new Error(`[${this.getFullName()}]: no column name`);
             }
             if (row.hasOwnProperty(columnName)) {
-                if (this.parent instanceof qforms.TableForm && row[columnName] !== null && typeof row[columnName] === 'string') {
+                if (
+                    this.parent instanceof qforms.TableForm &&
+                    row[columnName] !== null &&
+                    typeof row[columnName] === 'string'
+                ) {
                     row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
                 }
             } else if (field.getAttr('value')) {
@@ -124,7 +128,9 @@ class DataSource extends Model {
 
     getKeyValuesFromKey(key) {
         const arr = JSON.parse(key);
-        if (arr.length !== this.keyColumns.length) throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
+        if (arr.length !== this.keyColumns.length) {
+            throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
+        }
         const values = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
