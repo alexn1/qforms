@@ -164,14 +164,7 @@ class DataSource extends Model {
         return this.getApp().getParams(context);
     }
 
-    getAccess(context) {
-        return {
-            select: true,
-            insert: true,
-            update: true,
-            delete: true
-        };
-    }
+
 
     static keyToParams(key, paramName = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');

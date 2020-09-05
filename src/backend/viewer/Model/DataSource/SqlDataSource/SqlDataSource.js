@@ -269,6 +269,15 @@ class SqlDataSource extends DataSource {
     getAutoColumns() {
         return this.keyColumns.filter(name => this.table.columns[name].isAuto());
     }
+
+    getAccess(context) {
+        return {
+            select: true,
+            insert: true,
+            update: true,
+            delete: true
+        };
+    }
 }
 
 module.exports = SqlDataSource;

@@ -45,16 +45,10 @@ class Form extends Model {
             class               : 'DataSource',
             name                : 'default',
             dumpFirstRowToParams: 'false',
-            database            : '',
-            table               : '',
-            access              : {
-                select: true,
-                insert: true,
-                update: true,
-                delete: true
-            },
             keyColumns          : ['id'],
-            rows                : [row]
+            rows                : [row],
+            // database            : '',
+            // table               : '',
         };
     }
 
