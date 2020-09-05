@@ -294,6 +294,7 @@ class DataSourceController extends DocumentController {
     }
 
     tabWidget_TabShow(ea) {
+        console.log('DataSourceController.tabWidget_TabShow');
         if ($(ea.tab).hasClass('tabController')) {
             if (this.data.backendJs) {
                 if (this.cmBackendJs === null) {
