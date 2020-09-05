@@ -17,9 +17,9 @@ class SqlDataSource extends DataSource {
     }
 
     static async create(data, parent) {
-        const name = data['@attributes'].name;
         if (parent instanceof qforms.Form) {
             const form = parent;
+            const name = data['@attributes'].name;
             const customClassFilePath = path.join(
                 form.page.application.dirPath,
                 'pages',
