@@ -154,9 +154,7 @@ class TableFormController extends FormController {
         // console.log('key:', key);
         switch (this.model.data.editMethod) {
             case 'table':
-                if (this.model.dataSource.data.access.update === true) {
-                    this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
-                }
+                this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             break;
             case 'form':
                 await this.edit(key);

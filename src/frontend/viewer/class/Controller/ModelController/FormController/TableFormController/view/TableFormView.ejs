@@ -3,10 +3,10 @@
         <% if (model.data.refreshButton && model.data.refreshButton === 'true') {%>
             <button class="btn btn-default btn-xs refresh"><%=model.page.app.data.text.form.refresh%></button>
         <% } %>
-        <% if (model.dataSource.data.access.insert === true && model.data.newRowMode !== 'disabled') {%>
+        <% if (model.data.newRowMode !== 'disabled') {%>
             <button class="btn btn-default btn-xs new"><%=model.page.app.data.text.form.new%></button>
         <% } %>
-        <% if (model.dataSource.data.access.delete === true && model.data.deleteRowMode !== 'disabled') {%>
+        <% if (model.data.deleteRowMode !== 'disabled') {%>
             <button class="btn btn-default btn-xs delete"><%=model.page.app.data.text.form.delete%></button>
         <% } %>
     </div>
