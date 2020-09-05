@@ -91,29 +91,6 @@ class DataSource extends Model {
         });
     }
 
-    async select(context) {
-        throw new Error('DataSource.select: not implemented');
-    }
-
-    async selectSingle(context) {
-        throw new Error('DataSource.selectSingle: not implemented');
-    }
-
-    async selectMultiple(context) {
-        throw new Error('DataSource.selectMultiple: not implemented');
-    }
-
-    async update(context) {
-        throw new Error('DataSource.update: not implemented');
-    }
-
-    async insert(context) {
-        throw new Error('DataSource.insert: not implemented');
-    }
-
-    async delete(context) {
-    }
-
     getApp() {
         return this.parent.getApp();
     }
