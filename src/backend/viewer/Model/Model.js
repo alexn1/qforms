@@ -9,11 +9,13 @@ class Model extends BaseModel {
 
     constructor(data, parent) {
         super(data, parent);
-        this.name              = this.getAttr('name');
-        this.view              = undefined;
-        this.js                = undefined;
-        this.createCollections = [];
-        this.fillCollections   = [];
+        this.name               = this.getAttr('name');
+        this.createCollections  = [];
+        this.fillCollections    = [];
+        this.viewFilePath       = null;
+        this.customViewFilePath = null;
+        this.view               = null;
+        this.js                 = null;
     }
 
     async init() {
