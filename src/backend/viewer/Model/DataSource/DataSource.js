@@ -173,6 +173,34 @@ class DataSource extends Model {
         const newKeyValues = this.calcNewKeyValues(keyValues, values);
         return this.getKeyFromValues(newKeyValues);
     }
+
+    async fill(context) {
+        //console.log('DataSource.fill', this.name);
+        let data = await super.fill(context);
+
+        // keyColumns
+        data.keyColumns = this.keyColumns;
+
+        // parentKeyColumns
+        if (this.parentKeyColumns.length > 0) {
+            data.parentKeyColumns = this.parentKeyColumns;
+        }
+
+        // rows from JSON file
+        data.rows = await this.getRows();
+        return data;
+    }
+
+    async getRows() {
+        // console.log('DataSource.getRows');
+        if (!this.dataFilePath) throw new Error('no dataFilePath');
+        const exists = await qforms.Helper.exists(this.dataFilePath);
+        if (exists) {
+            const content = await qforms.Helper.readFile(this.dataFilePath);
+            return JSON.parse(content);
+        }
+        return null;
+    }
 }
 
 module.exports = DataSource;
