@@ -131,7 +131,7 @@ class SqlDataSource extends DataSource {
 
     async update(context) {
         console.log('SqlDataSource.update');
-        if (this.getAccess(context).update === false) throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const { changes } = context.body;
         // console.log('changes:', changes);
@@ -167,7 +167,7 @@ class SqlDataSource extends DataSource {
     async insert(context) {
         console.log('SqlDataSource.insert');
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
-        if (this.getAccess(context).insert === false) throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
 
         // autoColumns
         const autoColumns = this.getAutoColumns();
@@ -196,7 +196,7 @@ class SqlDataSource extends DataSource {
     }
 
     async delete(context) {
-        if (this.getAccess(context).delete === false) throw new Error(`${this.getFullName()}: access denied`);
+        if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
         const row = context.row;
         const keyValues = this.getKeyValuesFromRow(row);
         const query = this.database.getDeleteQuery(this.getAttr('table'), keyValues);
@@ -212,7 +212,6 @@ class SqlDataSource extends DataSource {
         if (this.parentKeyColumns.length > 0) {
             data.parentKeyColumns = this.parentKeyColumns;
         }
-        data.access = this.getAccess(context);
 
         // if form data source named default then check mode
         if (this.form && this.name === 'default' && context.newMode) {
