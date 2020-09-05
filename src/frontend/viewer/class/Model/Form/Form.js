@@ -14,8 +14,13 @@ class Form extends Model {
         // dataSources
         for (const name in this.data.dataSources) {
             const data = this.data.dataSources[name];
-            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
-            this.dataSources[name].init();
+            try {
+                this.dataSources[name] = eval(`new ${data.class}(data, this)`);
+                this.dataSources[name].init();
+            } catch (err) {
+                err.message = `${this.getFullName()}.${name}: ${err.message}`;
+                throw err;
+            }
         }
 
         // fields
