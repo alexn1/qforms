@@ -209,9 +209,9 @@ class ApplicationEditor extends Editor {
         }
         let data;
         switch (_class) {
-            // case 'DataSource':
-            //     data = qforms.DataSourceEditor.createData(params);
-            //     break;
+            case 'DataSource':
+                data = qforms.DataSourceEditor.createData(params);
+                break;
             case 'SqlDataSource':
                 data = qforms.SqlDataSourceEditor.createData(params);
                 break;

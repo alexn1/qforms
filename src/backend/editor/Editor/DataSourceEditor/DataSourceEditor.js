@@ -6,6 +6,17 @@ const Editor = require('../Editor');
 
 class DataSourceEditor extends Editor {
 
+    static createData(params) {
+        // throw new Error('DataSourceEditor.createData not implemented');
+        return {
+            '@class'     : 'DataSource',
+            '@attributes': {
+                name                : params.name,
+                dumpFirstRowToParams: 'false'
+            }
+        };
+    }
+
     constructor(parent, name, data) {
         super(data, parent);
         this.name = this.getAttr('name');
@@ -59,16 +70,7 @@ class DataSourceEditor extends Editor {
         return backendJs;
     }
 
-    static createData(params) {
-        throw new Error('DataSourceEditor.createData not implemented');
-        /*return {
-            '@class'     : 'DataSource',
-            '@attributes': {
-                name                : params.name,
-                dumpFirstRowToParams: 'false'
-            }
-        };*/
-    }
+
 
 }
 
