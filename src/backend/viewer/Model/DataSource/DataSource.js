@@ -30,7 +30,7 @@ class DataSource extends Model {
                 const CustomClass = eval(content);
                 return new CustomClass(data, parent);
             }
-            return new qforms.SqlDataSource(data, parent);
+            return new DataSource(data, parent);
         } else {
             return new DataSource(data, parent);
         }
@@ -45,7 +45,7 @@ class DataSource extends Model {
 
     getKeyColumns() {
         if (this.data.keyColumns === undefined || Object.keys(this.data.keyColumns).length === 0) {
-            throw new Error(`${this.getFullName()}: data Source must have at least one key column`);
+            throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
         }
         return Object.keys(this.data.keyColumns);
     }
