@@ -35,7 +35,7 @@ class JsonFile {
     }
 
     getAttr(name) {
-        if (this.data['@attributes'][name] === undefined) throw new Error(`no attribute: ${name}`);
+        if (this.data['@attributes'][name] === undefined) throw new Error(`no attribute '${name}'`);
         return this.data['@attributes'][name];
     }
 }

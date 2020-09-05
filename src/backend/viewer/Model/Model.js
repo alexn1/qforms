@@ -60,9 +60,14 @@ class Model extends BaseModel {
             const className1 = `${itemData['@class']}Controller`;
             const className2 = itemData['@class'];
             const className = qforms[className1] ? className1 : className2;
-            const obj = await qforms[className].create(itemData, this);
-            this[colName][itemName] = obj;
-            await obj.init();
+            try {
+                const obj = await qforms[className].create(itemData, this);
+                this[colName][itemName] = obj;
+                await obj.init();
+            } catch (err) {
+                err.message = `${className}[${itemName}]: ${err.message}`;
+                throw err;
+            }
         }
     }
 
