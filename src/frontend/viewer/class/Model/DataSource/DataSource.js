@@ -1,10 +1,10 @@
 'use strict';
 
 class DataSource extends Model {
-    static create(data, parent) {
+    /*static create(data, parent) {
         // console.log('DataSource.create', data.class, data.name);
         return eval(`new ${data.class}(data, parent)`);
-    }
+    }*/
 
     constructor(data, parent) {
         super(data, parent);

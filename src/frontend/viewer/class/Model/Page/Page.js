@@ -14,7 +14,8 @@ class Page extends Model {
     init() {
         this.initParams();
         for (const name in this.data.dataSources) {
-            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
+            const data = this.data.dataSources[name];
+            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
         for (const formName in this.data.forms) {

@@ -19,7 +19,8 @@ class Application extends Model {
 
         // dataSources
         for (const name in this.data.dataSources) {
-            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
+            const data = this.data.dataSources[name];
+            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
     }
