@@ -13,15 +13,18 @@ class Form extends Model {
     init() {
         // dataSources
         for (const name in this.data.dataSources) {
-            this.dataSources[name] = DataSource.create(this.data.dataSources[name], this);
+            const data = this.data.dataSources[name];
+            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
+
         // fields
         for (const name in this.data.fields) {
-            const field = this.data.fields[name];
-            this.fields[name] = eval('new {class}(name, this, field)'.replace('{class}', field.class));
+            const data = this.data.fields[name];
+            this.fields[name] = eval(`new ${data.class}(name, this, data)`);
             this.fields[name].init();
         }
+
         // controls
         for (const name in this.data.controls) {
             const data = this.data.controls[name];
