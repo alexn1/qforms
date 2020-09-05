@@ -44,6 +44,7 @@ class Form extends Model {
         return {
             class               : 'DataSource',
             name                : 'default',
+            dumpFirstRowToParams: 'false',
             database            : '',
             table               : '',
             access              : {
@@ -53,7 +54,6 @@ class Form extends Model {
                 delete: true
             },
             keyColumns          : ['id'],
-            dumpFirstRowToParams: 'false',
             rows                : [row]
         };
     }
