@@ -133,7 +133,7 @@ class ApplicationEditor extends Editor {
     }
 
     createDataSourceEditor(name) {
-        const dataSourceData = this.getData('dataSources', 'name');
+        const dataSourceData = this.getData('dataSources', name);
         const className = dataSourceData['@class'];
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(this, name, dataSourceData);
