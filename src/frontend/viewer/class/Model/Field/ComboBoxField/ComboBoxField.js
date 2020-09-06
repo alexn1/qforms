@@ -15,7 +15,8 @@ class ComboBoxField extends Field {
         return value;
     }
 
-    getDataSource(name) {
+    getComboBoxDataSource() {
+        const name = this.data.dataSourceName;
         if (this.form.dataSources[name]) {
             return this.form.dataSources[name];
         } else if (this.form.page.dataSources[name]) {
@@ -25,5 +26,4 @@ class ComboBoxField extends Field {
         }
         return null;
     }
-
 }

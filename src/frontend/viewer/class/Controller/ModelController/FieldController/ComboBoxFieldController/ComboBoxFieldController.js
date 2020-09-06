@@ -13,7 +13,7 @@ class ComboBoxFieldController extends FieldController {
         if (!this.model.data.dataSourceName) {
             throw new Error(`[${this.model.getFullName()}] no dataSourceName`);
         }
-        this.dataSource = this.model.getDataSource(this.model.data.dataSourceName);
+        this.dataSource = this.model.getComboBoxDataSource();
         if (!this.dataSource) {
             throw new Error(`[${this.model.getFullName()}] cannot find data source '${this.model.data.dataSourceName}'`);
         }
