@@ -26,7 +26,6 @@
                         "countQuery": "",
                         "singleQuery": "select id,first_name,last_name from `employee` where id = {key}",
                         "multipleQuery": "",
-                        "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
                     },
                     "keyColumns": {

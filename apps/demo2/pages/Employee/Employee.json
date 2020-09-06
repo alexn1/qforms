@@ -26,7 +26,6 @@
                         "multipleQuery": "select id,first_name,last_name from employee",
                         "limit": "",
                         "countQuery": "",
-                        "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
                     },
                     "keyColumns": {

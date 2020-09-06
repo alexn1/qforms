@@ -26,7 +26,6 @@
                         "multipleQuery": "select\n    `id`,\n    `first_name`,\n    `last_name`\nfrom `employee`\nlimit {offset}, {limit}",
                         "countQuery": "select count(*) from `employee`",
                         "limit": "",
-                        "insertNewKey": "false",
                         "dumpFirstRowToParams": "false"
                     }
                 }
