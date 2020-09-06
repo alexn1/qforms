@@ -136,9 +136,9 @@ class SqlDataSource extends DataSource {
         const page = this.getPage();
         const params = page ? page.params : {};
         const data = await this.select(params);
-        if (this.data.dumpFirstRowToParams === 'true') {
-            this.dumpFirstRowToParams(data.rows);
-        }
+        // if (this.data.dumpFirstRowToParams === 'true') {
+        //     this.dumpFirstRowToParams(data.rows);
+        // }
         const _old = this;
         const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
         this.sync(_old, _new, '[null]');

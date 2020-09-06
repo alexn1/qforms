@@ -25,8 +25,7 @@
                         "singleQuery": "select id,first_name,last_name from employee where id = {key}",
                         "multipleQuery": "select id,first_name,last_name from employee",
                         "limit": "",
-                        "countQuery": "",
-                        "dumpFirstRowToParams": "false"
+                        "countQuery": ""
                     },
                     "keyColumns": {
                         "id": {

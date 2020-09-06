@@ -31,8 +31,7 @@
                         "singleQuery": "select\n    id,\n    first_name,\n    last_name\nfrom employee\nwhere id = {key}",
                         "multipleQuery": "select\n    id,\n    first_name,\n    last_name\nfrom employee\norder by id",
                         "limit": "",
-                        "countQuery": "",
-                        "dumpFirstRowToParams": "false"
+                        "countQuery": ""
                     },
                     "keyColumns": {
                         "id": {

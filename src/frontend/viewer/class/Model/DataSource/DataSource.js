@@ -406,17 +406,17 @@ class DataSource extends Model {
         }
     }
 
-    dumpFirstRowToParams(rows) {
-        const page = this.getPage();
-        if (page !== null && rows[0] !== undefined) {
-            const row = rows[0];
-            const ns = this.getNamespace();
-            for (const column in row) {
-                const name = ns + '.' + column;
-                page.params[name] = row[column];
-            }
-        }
-    }
+    // dumpFirstRowToParams(rows) {
+    //     const page = this.getPage();
+    //     if (page !== null && rows[0] !== undefined) {
+    //         const row = rows[0];
+    //         const ns = this.getNamespace();
+    //         for (const column in row) {
+    //             const name = ns + '.' + column;
+    //             page.params[name] = row[column];
+    //         }
+    //     }
+    // }
 
     getNamespace() {
         const form = this.getForm();

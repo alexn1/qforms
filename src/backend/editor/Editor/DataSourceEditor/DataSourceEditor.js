@@ -12,7 +12,7 @@ class DataSourceEditor extends Editor {
             '@class'     : 'DataSource',
             '@attributes': {
                 name                : params.name,
-                dumpFirstRowToParams: 'false'
+                // dumpFirstRowToParams: 'false'
             }
         };
     }
