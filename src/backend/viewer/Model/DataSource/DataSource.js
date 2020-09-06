@@ -199,7 +199,7 @@ class DataSource extends Model {
             const content = await qforms.Helper.readFile(this.dataFilePath);
             return JSON.parse(content);
         }
-        return null;
+        return [];
     }
 }
 

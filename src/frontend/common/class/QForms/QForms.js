@@ -2,7 +2,7 @@
 
 class QForms {
     constructor(data) {
-        console.log('QForms.constructor'/*, data*/);
+        console.log('QForms.constructor', data);
         if (data) {
             QForms.env = data.env;
         }
