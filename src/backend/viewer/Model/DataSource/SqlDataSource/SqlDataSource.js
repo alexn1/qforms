@@ -206,6 +206,10 @@ class SqlDataSource extends DataSource {
     async fill(context) {
         //console.log('SqlDataSource.fill', this.name);
         let data = await super.fill(context);
+        delete data.singleQuery;
+        delete data.multipleQuery;
+        delete data.countQuery;
+        delete data.limit;
 
         // if form data source named default then check mode
         if (this.form && this.name === 'default' && context.newMode) {
@@ -236,9 +240,6 @@ class SqlDataSource extends DataSource {
         if (this.getAttr('limit')) {
             data.limit = context.params.limit;
         }
-
-        delete data.query;
-        delete data.limit;
         return data;
     }
 

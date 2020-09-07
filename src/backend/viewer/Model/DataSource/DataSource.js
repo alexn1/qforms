@@ -177,6 +177,8 @@ class DataSource extends Model {
     async fill(context) {
         //console.log('DataSource.fill', this.name);
         let data = await super.fill(context);
+        delete data.view;
+        delete data.js;
 
         // keyColumns
         data.keyColumns = this.keyColumns;
