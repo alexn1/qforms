@@ -29,6 +29,10 @@ class Database extends Model {
         throw new Error('Database.getConnection not implemented');
     }
 
+    async queryResult(context, query, params) {
+        throw new Error('Database.queryResult not implemented');
+    }
+
     async queryRows(context, query, params) {
         throw new Error('Database.queryRows not implemented');
     }
@@ -41,10 +45,6 @@ class Database extends Model {
         const value = row[column];
         if (value === undefined) throw new Error('scalar value undefined');
         return value;
-    }
-
-    async queryResult(context, query, params) {
-        throw new Error('Database.queryResult not implemented');
     }
 
     async beginTransaction(cnn) {

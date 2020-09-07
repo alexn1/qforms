@@ -41,17 +41,6 @@ class PostgreSqlDatabase extends Database {
         }
     }
 
-    async queryRows(context, query, params = null) {
-        console.log('PostgreSqlDatabase.queryRows', query, params);
-        const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
-        // console.log('sql:', sql);
-        // console.log('values:', values);
-        const cnn = await this.getConnection(context);
-        const result = await cnn.query(sql, values);
-        // console.log('cnn.query result:', result);
-        return result.rows;
-    }
-
     async queryResult(context, query, params = null) {
         console.log('PostgreSqlDatabase.queryResult', query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
@@ -61,6 +50,12 @@ class PostgreSqlDatabase extends Database {
         const result = await cnn.query(sql, values);
         // console.log('cnn.query result:', result);
         return result;
+    }
+
+    async queryRows(context, query, params = null) {
+        console.log('PostgreSqlDatabase.queryRows', query, params);
+        const result = await this.queryResult(context, query, params);
+        return result.rows;
     }
 
     async beginTransaction(cnn) {
