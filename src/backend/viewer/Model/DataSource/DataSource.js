@@ -33,12 +33,15 @@ class DataSource extends Model {
         this.page             = parent instanceof qforms.Page        ? parent : null;
         this.form             = parent instanceof qforms.Form        ? parent : null;
         this.keyColumns       = null;
-        this.dataFilePath     = path.join(this.getDirPath(), this.name + '.json');
         this.parentKeyColumns = null;
     }
 
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'dataSources', this.name);
+    }
+
+    getJsonFilePath() {
+        return path.join(this.getDirPath(), `${this.name}.json`);
     }
 
     async init() {
@@ -198,10 +201,10 @@ class DataSource extends Model {
 
     async getRows() {
         // console.log('DataSource.getRows');
-        if (!this.dataFilePath) throw new Error('no dataFilePath');
-        const exists = await qforms.Helper.exists(this.dataFilePath);
+        const jsonFilePath = this.getJsonFilePath();
+        const exists = await qforms.Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await qforms.Helper.readFile(this.dataFilePath);
+            const content = await qforms.Helper.readFile(jsonFilePath);
             return JSON.parse(content);
         }
         return [];
