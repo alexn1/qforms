@@ -5,11 +5,6 @@ const Field   = require('../Field');
 
 class CheckBoxField extends Field {
 
-    constructor(data, parent) {
-        super(data, parent);
-        this.viewFilePath = this.getViewFilePath();
-    }
-
     static async create(data, parent) {
         return new CheckBoxField(data, parent);
     }

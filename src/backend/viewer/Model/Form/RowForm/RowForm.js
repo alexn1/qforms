@@ -9,7 +9,6 @@ class RowForm extends Form {
     constructor(data, parent) {
         super(data, parent);
         // console.log('RowForm.constructor', this.name);
-        this.viewFilePath = this.getViewFilePath();
     }
 
     getViewFilePath() {

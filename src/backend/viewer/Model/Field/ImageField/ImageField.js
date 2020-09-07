@@ -5,11 +5,6 @@ const Field  = require('../Field');
 
 class ImageField extends Field {
 
-    constructor(data, parent) {
-        super(data, parent);
-        this.viewFilePath = this.getViewFilePath();
-    }
-
     static async create(data, parent) {
         return new ImageField(data, parent);
     }

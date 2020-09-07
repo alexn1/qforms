@@ -36,7 +36,6 @@ class Application extends Model {
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
         this.env                = env;
-        this.viewFilePath       = this.getViewFilePath();
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];

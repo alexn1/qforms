@@ -12,7 +12,6 @@ class Model extends BaseModel {
         this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
-        this.viewFilePath       = null;
         this.customViewFilePath = null;
         this.view               = null;
         this.js                 = null;
@@ -124,7 +123,7 @@ class Model extends BaseModel {
     }
 
     getViewFilePath() {
-        return this.viewFilePath;
+        return null;
     }
 
 }

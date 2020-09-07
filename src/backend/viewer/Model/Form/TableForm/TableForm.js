@@ -5,11 +5,6 @@ const Form   = require('../Form');
 
 class TableForm extends Form {
 
-    constructor(data, parent) {
-        super(data, parent);
-        this.viewFilePath = this.getViewFilePath();
-    }
-
     static async create(data, parent) {
         return new TableForm(data, parent);
     }

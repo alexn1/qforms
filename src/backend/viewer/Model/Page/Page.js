@@ -30,7 +30,6 @@ class Page extends Model {
         super(data, parent);
         this.application        = parent;
         this.app                = parent;
-        this.viewFilePath       = this.getViewFilePath();
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['dataSources', 'forms'];
         this.fillCollections    = ['dataSources', 'forms'];

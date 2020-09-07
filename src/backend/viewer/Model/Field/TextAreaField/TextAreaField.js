@@ -5,11 +5,6 @@ const Field  = require('../Field');
 
 class TextAreaField extends Field {
 
-    constructor(data, parent) {
-        super(data, parent);
-        this.viewFilePath = this.getViewFilePath();
-    }
-
     static async create(data, parent) {
         return new TextAreaField(data, parent);
     }
