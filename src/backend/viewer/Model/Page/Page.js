@@ -30,16 +30,20 @@ class Page extends Model {
         super(data, parent);
         this.application        = parent;
         this.app                = parent;
-        this.viewFilePath       = path.join(
-            this.getApp().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/PageController/view',
-            this.data['@class'] + 'View.ejs'
-        );
+        this.viewFilePath       = this.getViewFilePath();
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['dataSources', 'forms'];
         this.fillCollections    = ['dataSources', 'forms'];
         this.dataSources        = {};
         this.forms              = {};
+    }
+
+    getViewFilePath() {
+        return path.join(
+            this.getApp().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/PageController/view',
+            this.data['@class'] + 'View.ejs'
+        );
     }
 
     getDirPath() {

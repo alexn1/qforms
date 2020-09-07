@@ -9,7 +9,11 @@ class RowForm extends Form {
     constructor(data, parent) {
         super(data, parent);
         // console.log('RowForm.constructor', this.name);
-        this.viewFilePath = path.join(
+        this.viewFilePath = this.getViewFilePath();
+    }
+
+    getViewFilePath() {
+        return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FormController/RowFormController/view',
             this.data['@class'] + 'View.ejs'
