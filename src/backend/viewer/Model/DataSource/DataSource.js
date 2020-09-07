@@ -30,9 +30,6 @@ class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.application      = parent instanceof qforms.Application ? parent : null;
-        this.page             = parent instanceof qforms.Page        ? parent : null;
-        // this.form             = parent instanceof qforms.Form        ? parent : null;
         this.keyColumns       = null;
         this.parentKeyColumns = null;
     }
@@ -139,8 +136,8 @@ class DataSource extends Model {
     getFullName() {
         if (this.parent instanceof qforms.Form) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
-        } else if (this.page) {
-            return [this.page.getName(), this.getName()].join('.');
+        } else if (this.parent instanceof qforms.Page) {
+            return [this.parent.getName(), this.getName()].join('.');
         } else {
             return this.getName();
         }
