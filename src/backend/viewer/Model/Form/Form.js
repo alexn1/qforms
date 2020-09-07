@@ -69,7 +69,7 @@ class Form extends Model {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.page.name;
+                    arr[0] = this.getPage().name;
                 } else if (arr[0] === 'parent' && context.parentPageName) {
                     arr[0] = context.parentPageName;
                 }
@@ -102,6 +102,10 @@ class Form extends Model {
 
     getApp() {
         return this.parent.parent;
+    }
+
+    getPage() {
+        return this.parent;
     }
 
 }

@@ -10,8 +10,8 @@ class DataSource extends Model {
             const form = parent;
             const name = data['@attributes'].name;
             const customBackendJsFilePath = path.join(
-                form.page.application.getDirPath(),
-                'pages', form.page.name,
+                form.getPage().getApp().getDirPath(),
+                'pages', form.getPage().name,
                 'forms', form.name,
                 'dataSources', name,
                 `${name}.backend.js`

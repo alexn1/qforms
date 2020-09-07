@@ -26,7 +26,7 @@ class Field extends Model {
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');
         const defaultValue = this.form.replaceThis(context, this.getAttr('defaultValue'));
-        const params = this.form.page.application.getParams(context);
+        const params = this.getForm().getPage().getApp().getParams(context);
         const code = qforms.Helper.templateValue(defaultValue, params);
         let value;
         try {
@@ -48,8 +48,8 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.form.page.name,
-            this.form.name,
+            this.getForm().getPage().name,
+            this.getForm().name,
             this.name
         ].join('.');
     }
@@ -60,6 +60,10 @@ class Field extends Model {
 
     getApp() {
         return this.parent.parent.parent;
+    }
+
+    getForm() {
+        return this.parent;
     }
 
 }

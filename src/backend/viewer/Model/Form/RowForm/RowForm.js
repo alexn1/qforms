@@ -23,7 +23,7 @@ class RowForm extends Form {
         const name = data['@attributes'].name;
         // console.log('RowForm.create', name);
         const customClassFilePath = path.join(
-            page.app.getDirPath(),
+            page.getApp().getDirPath(),
             'pages',
             page.name,
             'forms',
