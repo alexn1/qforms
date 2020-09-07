@@ -36,11 +36,7 @@ class Application extends Model {
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
         this.env                = env;
-        this.viewFilePath       = path.join(
-            this.hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/ApplicationController/view',
-            'ApplicationView.ejs'
-        );
+        this.viewFilePath       = this.getViewFilePath();
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];
@@ -49,6 +45,14 @@ class Application extends Model {
         this.text               = qforms.text[this.getAttr('lang') || 'en'];
         this.databases          = {};
         this.dataSources        = {};
+    }
+
+    getViewFilePath() {
+        return path.join(
+            this.hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/ApplicationController/view',
+            'ApplicationView.ejs'
+        );
     }
 
     getDirPath() {

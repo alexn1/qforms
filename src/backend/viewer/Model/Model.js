@@ -99,15 +99,16 @@ class Model extends BaseModel {
     }
 
     async getView() {
-        if (!this.viewFilePath) return null;
+        const viewFilePath = this.getViewFilePath();
+        if (!viewFilePath) return null;
         if (this.customViewFilePath) {
             const exists = await qforms.Helper.exists(this.customViewFilePath);
             if (exists) {
                 return qforms.Helper.readFile(this.customViewFilePath);
             }
-            return qforms.Helper.readFile(this.viewFilePath);
+            return qforms.Helper.readFile(viewFilePath);
         }
-        return await qforms.Helper.readFile(this.viewFilePath);
+        return await qforms.Helper.readFile(viewFilePath);
     }
 
     async getJs() {
@@ -120,6 +121,10 @@ class Model extends BaseModel {
 
     getDirPath() {
         return null;
+    }
+
+    getViewFilePath() {
+        return this.viewFilePath;
     }
 
 }
