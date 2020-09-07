@@ -36,13 +36,13 @@ class Application extends Model {
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
         this.env                = env;
-        this.dirPath            = this.appInfo.dirPath;
+        this.dirPath            = this.getDirPath();
         this.viewFilePath       = path.join(
             this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view',
             'ApplicationView.ejs'
         );
-        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];
         this.pages              = {};
@@ -52,10 +52,14 @@ class Application extends Model {
         this.dataSources        = {};
     }
 
+    getDirPath() {
+        return this.appInfo.dirPath;
+    }
+
     async init() {
         await super.init();
         await this.createStartupPages();
-        this.css = await qforms.Helper.getFilePaths(this.appInfo.dirPath, '', 'css');
+        this.css = await qforms.Helper.getFilePaths(this.getDirPath(), '', 'css');
     }
 
     async fill(context) {
@@ -101,7 +105,7 @@ class Application extends Model {
             const pageLink = this.createPageLink(pageName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
-                const pageFilePath = path.join(this.appInfo.dirPath, pageLink.getAttr('fileName'));
+                const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
                 const pageFile = new qforms.JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
@@ -137,7 +141,7 @@ class Application extends Model {
     async _createPage(pageName) {
         // console.log('Application._createPage', pageName);
         const relFilePath  = this.createPageLink(pageName).getAttr('fileName');
-        const pageFilePath = path.join(this.dirPath, relFilePath);
+        const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await qforms.Helper.readFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await qforms.Page.create(data, this);

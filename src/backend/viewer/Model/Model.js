@@ -119,6 +119,10 @@ class Model extends BaseModel {
         return null;
     }
 
+    getDirPath() {
+        return null;
+    }
+
 }
 
 module.exports = Model;

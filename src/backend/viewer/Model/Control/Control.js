@@ -7,8 +7,8 @@ class Control extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.dirPath            = path.join(parent.dirPath, this.name);
-        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        // this.dirPath            = path.join(parent.dirPath, this.name);
+        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
     }
 
     static async create(data, parent) {
@@ -17,6 +17,10 @@ class Control extends Model {
 
     getApp() {
         return this.parent.parent.parent;   // control > form > page > application
+    }
+
+    getDirPath() {
+        return this.parent.dirPath;
     }
 
 }
