@@ -82,12 +82,7 @@ class PostgreSqlDatabase extends Database {
         if (!params) {
             return {sql: query, values: null};
         }
-        const items = query.match(/\{([\w\.@]+)\}/g);
-        if (!items) {
-            return {sql: query, values: null};
-        }
-        // console.log('items:', items);
-        const usedValues = items.map(str => str.substr(1, str.length-2));
+        const usedValues = Database.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);

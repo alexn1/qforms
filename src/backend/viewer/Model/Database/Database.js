@@ -117,6 +117,12 @@ class Database extends Model {
         if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
         return this.tables[name];
     }
+
+    static getUsedParams(query) {
+        const items = query.match(/\{([\w\.@]+)\}/g);
+        if (!items) return [];
+        return items.map(str => str.substr(1, str.length-2));
+    }
 }
 
 module.exports = Database;
