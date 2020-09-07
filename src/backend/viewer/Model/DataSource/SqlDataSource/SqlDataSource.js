@@ -21,7 +21,7 @@ class SqlDataSource extends DataSource {
             const form = parent;
             const name = data['@attributes'].name;
             const customClassFilePath = path.join(
-                form.page.application.dirPath,
+                form.page.application.getDirPath(),
                 'pages',
                 form.page.name,
                 'forms',

@@ -9,14 +9,14 @@ class DataSource extends Model {
         if (parent instanceof qforms.Form) {
             const form = parent;
             const name = data['@attributes'].name;
-            const customClassFilePath = path.join(
-                form.page.application.dirPath,
+            const customBackendJsFilePath = path.join(
+                form.page.application.getDirPath(),
                 'pages', form.page.name,
                 'forms', form.name,
                 'dataSources', name,
                 `${name}.backend.js`
             );
-            const content = await qforms.Helper.getFileContent(customClassFilePath);
+            const content = await qforms.Helper.getFileContent(customBackendJsFilePath);
             if (content) {
                 const CustomClass = eval(content);
                 return new CustomClass(data, parent);

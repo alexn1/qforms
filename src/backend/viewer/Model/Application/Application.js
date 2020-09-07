@@ -36,7 +36,7 @@ class Application extends Model {
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
         this.env                = env;
-        this.dirPath            = this.getDirPath();
+        // this.dirPath            = this.getDirPath();
         this.viewFilePath       = path.join(
             this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view',

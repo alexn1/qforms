@@ -12,7 +12,7 @@ class Page extends Model {
     static async create(data, parent) {
         const name = data['@attributes'].name;
         const customClassFilePath = path.join(
-            parent.dirPath,
+            parent.getDirPath(),
             'pages',
             name,
             `${name}.backend.js`
