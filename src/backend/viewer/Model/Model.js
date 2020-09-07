@@ -12,8 +12,6 @@ class Model extends BaseModel {
         this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
-        this.view               = null;
-        this.js                 = null;
     }
 
     async init() {
@@ -21,16 +19,14 @@ class Model extends BaseModel {
             const colName = this.createCollections[i];
             await this.createCollection(colName);
         }
-        this.view = await this.getView();
-        this.js   = await this.getJs();
     }
 
     async fill(context) {
         // console.log('Model.fill', this.constructor.name, this.name);
         const data = {
             class: this.getClassName(),
-            view : this.view,
-            js   : this.js
+            view : await this.getView(),
+            js   : await this.getJs()
         };
         for (const name in this.attributes()) {
             data[name] = this.getAttr(name);
