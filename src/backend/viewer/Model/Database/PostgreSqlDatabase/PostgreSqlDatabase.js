@@ -132,7 +132,9 @@ class PostgreSqlDatabase extends Database {
         const config = this.getConfig();
         const client = new Client(config);
         await client.connect();
-        const results = await client.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
+        const results = await client.query(
+            `select "table_name" from information_schema.tables where table_schema = 'public'`
+        );
         await client.end();
         const tableList = results.rows.map(row => row.table_name);
         console.log('tableList:', tableList);
@@ -143,7 +145,9 @@ class PostgreSqlDatabase extends Database {
         console.log('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
         console.log('keyColumns:', keyColumns);
-        const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
+        const rows = await this.query(
+            `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`
+        );
         console.log('getTableInfo rows:', rows);
         const tableInfo = rows.map(row => ({
             name    : row.column_name,
