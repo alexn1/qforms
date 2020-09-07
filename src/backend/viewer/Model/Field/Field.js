@@ -12,7 +12,7 @@ class Field extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.form = parent;
+        // this.form = parent;
     }
 
     getCustomViewFilePath() {
@@ -25,7 +25,7 @@ class Field extends Model {
 
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');
-        const defaultValue = this.form.replaceThis(context, this.getAttr('defaultValue'));
+        const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = this.getForm().getPage().getApp().getParams(context);
         const code = qforms.Helper.templateValue(defaultValue, params);
         let value;
