@@ -10,10 +10,9 @@ class Field extends Model {
         return new Field(data, parent);
     }
 
-    constructor(data, parent) {
-        super(data, parent);
-        // this.form = parent;
-    }
+    // constructor(data, parent) {
+    //     super(data, parent);
+    // }
 
     getCustomViewFilePath() {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);

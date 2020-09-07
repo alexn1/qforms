@@ -138,7 +138,7 @@ class DataSource extends Model {
 
     getFullName() {
         if (this.form) {
-            return [this.form.page.getName(), this.form.getName(), this.getName()].join('.');
+            return [this.form.getPage().getName(), this.form.getName(), this.getName()].join('.');
         } else if (this.page) {
             return [this.page.getName(), this.getName()].join('.');
         } else {
