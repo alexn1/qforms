@@ -12,7 +12,6 @@ class Model extends BaseModel {
         this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
-        this.customViewFilePath = null;
         this.view               = null;
         this.js                 = null;
     }
@@ -100,10 +99,11 @@ class Model extends BaseModel {
     async getView() {
         const viewFilePath = this.getViewFilePath();
         if (!viewFilePath) return null;
-        if (this.customViewFilePath) {
-            const exists = await qforms.Helper.exists(this.customViewFilePath);
+        const customViewFilePath = this.getCustomViewFilePath();
+        if (customViewFilePath) {
+            const exists = await qforms.Helper.exists(customViewFilePath);
             if (exists) {
-                return qforms.Helper.readFile(this.customViewFilePath);
+                return qforms.Helper.readFile(customViewFilePath);
             }
             return qforms.Helper.readFile(viewFilePath);
         }
@@ -123,6 +123,10 @@ class Model extends BaseModel {
     }
 
     getViewFilePath() {
+        return null;
+    }
+
+    getCustomViewFilePath() {
         return null;
     }
 

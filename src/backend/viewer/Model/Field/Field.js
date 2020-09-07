@@ -12,8 +12,11 @@ class Field extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.form               = parent;
-        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
+        this.form = parent;
+    }
+
+    getCustomViewFilePath() {
+        return path.join(this.getDirPath(), `${this.name}.ejs`);
     }
 
     getDirPath() {

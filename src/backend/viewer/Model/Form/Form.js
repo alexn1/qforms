@@ -11,13 +11,16 @@ class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.page               = parent;
-        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['dataSources', 'fields', 'controls', 'actions'];
         this.fillCollections    = ['dataSources', 'fields', 'controls', 'actions'];
         this.dataSources        = {};
         this.fields             = {};
         this.controls           = {};
         this.actions            = {};
+    }
+
+    getCustomViewFilePath() {
+        return path.join(this.getDirPath(),  `${this.name}.ejs`);
     }
 
     getDirPath() {
