@@ -6,11 +6,12 @@ const child_process = require('child_process');
 const stream        = require('stream');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
+const BaseModel = require('../../../common/BaseModel');
 
 class Page extends Model {
 
     static async create(data, parent) {
-        const name = data['@attributes'].name;
+        const name = BaseModel.getName(data);
         const customClassFilePath = path.join(
             parent.getDirPath(),
             'pages',
@@ -37,7 +38,7 @@ class Page extends Model {
     }
 
     getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.name}.ejs`);
+        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
     getViewFilePath() {
@@ -49,11 +50,11 @@ class Page extends Model {
     }
 
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'pages', this.name);
+        return path.join(this.parent.getDirPath(), 'pages', this.getName());
     }
 
     async fill(context) {
-        // console.log('Page.fill', this.constructor.name, this.name);
+        // console.log('Page.fill', this.constructor.name, this.getFullName());
         const data = await super.fill(context);
         data.newMode = !!context.newMode;
         return data;

@@ -20,15 +20,15 @@ class Form extends Model {
     }
 
     getCustomViewFilePath() {
-        return path.join(this.getDirPath(),  `${this.name}.ejs`);
+        return path.join(this.getDirPath(),  `${this.getName()}.ejs`);
     }
 
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'forms', this.name);
+        return path.join(this.parent.getDirPath(), 'forms', this.getName());
     }
 
     async fill(context) {
-        // console.log('Form.fill', this.constructor.name, this.name);
+        // console.log('Form.fill', this.constructor.name, this.getFullName());
         if (this.data.dataSources.default) {
             return super.fill(context);
         }
@@ -69,7 +69,7 @@ class Form extends Model {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.getPage().name;
+                    arr[0] = this.getPage().getName();
                 } else if (arr[0] === 'parent' && context.parentPageName) {
                     arr[0] = context.parentPageName;
                 }
@@ -80,7 +80,7 @@ class Form extends Model {
     }
 
     async update(context, ds) {
-        console.log('Form.update', this.name);
+        console.log('Form.update', this.getFullName());
         const dataSource = this.dataSources[ds];
         const cnn = await dataSource.database.getConnection(context);
         try {

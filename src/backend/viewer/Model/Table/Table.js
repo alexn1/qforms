@@ -6,7 +6,7 @@ class Table extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        // console.log('Table.constructor', this.name);
+        // console.log('Table.constructor', this.getName());
         this.createCollections  = ['columns'];
         this.fillCollections    = ['columns'];
         this.columns = {};
@@ -19,7 +19,7 @@ class Table extends Model {
     getKeyColumns() {
         // console.log('Table.getKeyColumns');
         const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
-        if (keyColumns.length === 0) throw new Error(`no key columns in table: ${this.name}`);
+        if (keyColumns.length === 0) throw new Error(`no key columns in table: ${this.getName()}`);
         return keyColumns;
     }
 

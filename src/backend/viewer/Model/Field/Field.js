@@ -16,11 +16,11 @@ class Field extends Model {
     }
 
     getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.name}.ejs`);
+        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'fields', this.name);
+        return path.join(this.parent.getDirPath(), 'fields', this.getName());
     }
 
     fillDefaultValue(context, row) {
@@ -48,9 +48,9 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.getForm().getPage().name,
-            this.getForm().name,
-            this.name
+            this.getForm().getPage().getName(),
+            this.getForm().getName(),
+            this.getName()
         ].join('.');
     }
 

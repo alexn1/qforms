@@ -3,12 +3,13 @@
 const path    = require('path');
 const qforms = require('../../../../qforms');
 const Form   = require('../Form');
+const BaseModel = require('../../../../common/BaseModel');
 
 class RowForm extends Form {
 
     constructor(data, parent) {
         super(data, parent);
-        // console.log('RowForm.constructor', this.name);
+        // console.log('RowForm.constructor', this.getFullName());
     }
 
     getViewFilePath() {
@@ -20,12 +21,12 @@ class RowForm extends Form {
     }
 
     static async create(data, page) {
-        const name = data['@attributes'].name;
+        const name = BaseModel.getName(data);
         // console.log('RowForm.create', name);
         const customClassFilePath = path.join(
             page.getApp().getDirPath(),
             'pages',
-            page.name,
+            page.getName(),
             'forms',
             name,
             name + '.backend.js'
@@ -42,7 +43,7 @@ class RowForm extends Form {
     }
 
     // async fill(context) {
-    //     console.log('RowForm.fill', this.constructor.name, this.name);
+    //     console.log('RowForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
 

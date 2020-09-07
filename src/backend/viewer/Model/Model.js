@@ -9,7 +9,7 @@ class Model extends BaseModel {
 
     constructor(data, parent) {
         super(data, parent);
-        this.name               = this.getAttr('name');
+        // this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
     }
@@ -22,7 +22,7 @@ class Model extends BaseModel {
     }
 
     async fill(context) {
-        // console.log('Model.fill', this.constructor.name, this.name);
+        // console.log('Model.fill', this.constructor.name, this.getName());
         const data = {
             class: this.getClassName(),
             view : await this.getView(),
@@ -47,7 +47,7 @@ class Model extends BaseModel {
     }
 
     async createCollection(colName) {
-        // console.log(`Model.createCollection ${this.name}.${colName}`);
+        // console.log(`Model.createCollection ${this.getName()}.${colName}`);
         if (!this.data[colName]) return;
         const items = Object.keys(this.data[colName]);
         for (let i = 0; i < items.length; i++) {

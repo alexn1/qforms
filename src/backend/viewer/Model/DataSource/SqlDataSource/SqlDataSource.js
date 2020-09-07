@@ -3,6 +3,7 @@
 const path       = require('path');
 const qforms     = require('../../../../qforms');
 const DataSource = require('../DataSource');
+const BaseModel = require('../../../../common/BaseModel');
 
 class SqlDataSource extends DataSource {
 
@@ -19,13 +20,13 @@ class SqlDataSource extends DataSource {
     static async create(data, parent) {
         if (parent instanceof qforms.Form) {
             const form = parent;
-            const name = data['@attributes'].name;
+            const name = BaseModel.getName(data);
             const customClassFilePath = path.join(
                 form.getPage().getApp().getDirPath(),
                 'pages',
-                form.getPage().name,
+                form.getPage().getName(),
                 'forms',
-                form.name,
+                form.getName(),
                 'dataSources',
                 name,
                 `${name}.backend.js`
@@ -43,7 +44,7 @@ class SqlDataSource extends DataSource {
     }
 
     getKeyColumns() {
-        // console.log('SqlDataSource.getKeyColumns', this.name);
+        // console.log('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
 
@@ -204,7 +205,7 @@ class SqlDataSource extends DataSource {
     }
 
     async fill(context) {
-        //console.log('SqlDataSource.fill', this.name);
+        //console.log('SqlDataSource.fill', this.getFullName());
         let data = await super.fill(context);
         delete data.singleQuery;
         delete data.multipleQuery;
@@ -212,7 +213,7 @@ class SqlDataSource extends DataSource {
         delete data.limit;
 
         // if form data source named default then check mode
-        if (this.form && this.name === 'default' && context.newMode) {
+        if (this.form && this.getName() === 'default' && context.newMode) {
             data.rows = [];
             return data;
         }
@@ -248,11 +249,11 @@ class SqlDataSource extends DataSource {
     }
 
     isDefaultOnRowForm() {
-        return this.form && this.form instanceof qforms.RowForm && this.name === 'default';
+        return this.form && this.form instanceof qforms.RowForm && this.getName() === 'default';
     }
 
     isDefaultOnTableForm() {
-        return this.form && this.form instanceof qforms.TableForm && this.name === 'default';
+        return this.form && this.form instanceof qforms.TableForm && this.getName() === 'default';
     }
 
     getDatabase() {

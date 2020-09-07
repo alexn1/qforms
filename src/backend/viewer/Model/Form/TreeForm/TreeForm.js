@@ -18,7 +18,7 @@ class TreeForm extends Form {
     }
 
     async fill(context) {
-        console.log('TreeForm.fill', this.constructor.name, this.name);
+        console.log('TreeForm.fill', this.constructor.name, this.getName());
         return super.fill(context);
     }
 }

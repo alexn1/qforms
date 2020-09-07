@@ -18,7 +18,7 @@ class TableForm extends Form {
     }
 
     // async fill(context) {
-    //     console.log('TableForm.fill', this.constructor.name, this.name);
+    //     console.log('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
 

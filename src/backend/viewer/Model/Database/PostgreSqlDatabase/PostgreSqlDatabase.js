@@ -26,7 +26,7 @@ class PostgreSqlDatabase extends Database {
         // console.log('PostgreSqlDatabase._getPool');
         if (this.pool === null) {
             const config = this.getConfig();
-            // console.log('creating connection pool for: ' + this.name, config);
+            // console.log('creating connection pool for: ' + this.getName(), config);
             this.pool = new Pool(config);
         }
         return this.pool;

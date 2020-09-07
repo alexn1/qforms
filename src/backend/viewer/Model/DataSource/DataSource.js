@@ -3,12 +3,13 @@
 const path    = require('path');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
+const BaseModel = require('../../../common/BaseModel');
 
 class DataSource extends Model {
     static async create(data, parent) {
         if (parent instanceof qforms.Form) {
             const form = parent;
-            const name = data['@attributes'].name;
+            const name = BaseModel.getName(data);
             const customBackendJsFilePath = path.join(
                 form.getPage().getApp().getDirPath(),
                 'pages', form.getPage().getName(),
@@ -45,7 +46,7 @@ class DataSource extends Model {
     }
 
     async init() {
-        // console.log('DataSource.init', this.name);
+        // console.log('DataSource.init', this.getFullName());
         await super.init();
         this.keyColumns       = this.getKeyColumns();
         this.parentKeyColumns = this.getParentKeyColumns();
@@ -181,7 +182,7 @@ class DataSource extends Model {
     }
 
     async fill(context) {
-        //console.log('DataSource.fill', this.name);
+        //console.log('DataSource.fill', this.getFullName());
         let data = await super.fill(context);
         delete data.view;
         delete data.js;
