@@ -43,6 +43,7 @@ class PostgreSqlDatabase extends Database {
 
     async queryResult(context, query, params = null) {
         console.log('PostgreSqlDatabase.queryResult', query, params);
+        Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -53,7 +54,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async queryRows(context, query, params = null) {
-        console.log('PostgreSqlDatabase.queryRows', query, params);
+        console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
