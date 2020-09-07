@@ -51,19 +51,19 @@ class SqlDataSource extends DataSource {
     getCountQuery(context) {
         const countQuery = this.getAttr('countQuery');
         if (!countQuery) throw new Error(`no countQuery: ${this.getFullName()}`);
-        return this.form ? this.form.replaceThis(context, countQuery) : countQuery;
+        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, countQuery) : countQuery;
     }
 
     getSingleQuery(context) {
         const singleQuery = this.getAttr('singleQuery');
         if (!singleQuery) throw new Error(`no singleQuery: ${this.getFullName()}`);
-        return this.form ? this.form.replaceThis(context, singleQuery) : singleQuery;
+        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, singleQuery) : singleQuery;
     }
 
     getMultipleQuery(context) {
         const multipleQuery = this.getAttr('multipleQuery');
         if (!multipleQuery) throw new Error(`no multipleQuery: ${this.getFullName()}`);
-        return this.form ? this.form.replaceThis(context, multipleQuery) : multipleQuery;
+        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
     }
 
     async selectSingle(context) {
@@ -213,7 +213,7 @@ class SqlDataSource extends DataSource {
         delete data.limit;
 
         // if form data source named default then check mode
-        if (this.form && this.getName() === 'default' && context.newMode) {
+        if (this.parent instanceof qforms.Form && this.getName() === 'default' && context.newMode) {
             data.rows = [];
             return data;
         }
@@ -236,7 +236,7 @@ class SqlDataSource extends DataSource {
         }
 
         if (this.isDefaultOnRowForm() && data.rows[0]) {
-            this.form.dumpRowToParams(data.rows[0], context.querytime.params);
+            this.parent.dumpRowToParams(data.rows[0], context.querytime.params);
         }
         if (this.getAttr('limit')) {
             data.limit = context.params.limit;
@@ -249,11 +249,11 @@ class SqlDataSource extends DataSource {
     }
 
     isDefaultOnRowForm() {
-        return this.form && this.form instanceof qforms.RowForm && this.getName() === 'default';
+        return /*this.form && */this.parent instanceof qforms.RowForm && this.getName() === 'default';
     }
 
     isDefaultOnTableForm() {
-        return this.form && this.form instanceof qforms.TableForm && this.getName() === 'default';
+        return /*this.form && */this.parent instanceof qforms.TableForm && this.getName() === 'default';
     }
 
     getDatabase() {
