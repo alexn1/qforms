@@ -6,16 +6,19 @@ const Helper = require('../../../common/Helper');
 const Model  = require('../Model');
 
 class Field extends Model {
+    static async create(data, parent) {
+        return new Field(data, parent);
+    }
 
     constructor(data, parent) {
         super(data, parent);
         this.form               = parent;
-        this.dirPath            = path.join(parent.dirPath, 'fields', this.name);
-        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        // this.dirPath            = path.join(parent.dirPath, 'fields', this.name);
+        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
     }
 
-    static async create(data, parent) {
-        return new Field(data, parent);
+    getDirPath() {
+        return path.join(this.parent.getDirPath(), 'fields', this.name);
     }
 
     fillDefaultValue(context, row) {

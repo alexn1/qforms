@@ -9,23 +9,6 @@ const Model  = require('../Model');
 
 class Page extends Model {
 
-    constructor(data, parent) {
-        super(data, parent);
-        this.application        = parent;
-        this.app                = parent;
-        this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
-        this.viewFilePath       = path.join(
-            this.getApp().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/PageController/view',
-            this.data['@class'] + 'View.ejs'
-        );
-        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
-        this.createCollections  = ['dataSources', 'forms'];
-        this.fillCollections    = ['dataSources', 'forms'];
-        this.dataSources        = {};
-        this.forms              = {};
-    }
-
     static async create(data, parent) {
         const name = data['@attributes'].name;
         const customClassFilePath = path.join(
@@ -41,6 +24,27 @@ class Page extends Model {
         } else {
             return new Page(data, parent);
         }
+    }
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.application        = parent;
+        this.app                = parent;
+        // this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
+        this.viewFilePath       = path.join(
+            this.getApp().hostApp.publicDirPath,
+            'viewer/class/Controller/ModelController/PageController/view',
+            this.data['@class'] + 'View.ejs'
+        );
+        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
+        this.createCollections  = ['dataSources', 'forms'];
+        this.fillCollections    = ['dataSources', 'forms'];
+        this.dataSources        = {};
+        this.forms              = {};
+    }
+
+    getDirPath() {
+        return path.join(this.parent.getDirPath(), 'pages', this.name);
     }
 
     async fill(context) {

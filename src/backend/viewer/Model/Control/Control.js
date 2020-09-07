@@ -7,7 +7,6 @@ class Control extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.dirPath            = path.join(parent.dirPath, this.name);
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
     }
 
@@ -20,7 +19,7 @@ class Control extends Model {
     }
 
     getDirPath() {
-        return this.parent.dirPath;
+        return path.join(this.parent.getDirPath(), this.name);
     }
 
 }

@@ -4,12 +4,15 @@ const path    = require('path');
 const Model = require('../Model');
 
 class Form extends Model {
+    static async create(data, parent) {
+        throw new Error('Form is abstract');
+    }
 
     constructor(data, parent) {
         super(data, parent);
         this.page               = parent;
-        this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
-        this.customViewFilePath = path.join(this.dirPath, this.name + '.ejs');
+        // this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
+        this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['dataSources', 'fields', 'controls', 'actions'];
         this.fillCollections    = ['dataSources', 'fields', 'controls', 'actions'];
         this.dataSources        = {};
@@ -18,8 +21,8 @@ class Form extends Model {
         this.actions            = {};
     }
 
-    static async create(data, parent) {
-        throw new Error('Form is abstract');
+    getDirPath() {
+        return path.join(this.parent.getDirPath(), 'forms', this.name);
     }
 
     async fill(context) {

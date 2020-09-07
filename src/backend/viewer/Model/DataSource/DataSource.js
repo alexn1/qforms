@@ -5,17 +5,6 @@ const qforms = require('../../../qforms');
 const Model  = require('../Model');
 
 class DataSource extends Model {
-    constructor(data, parent) {
-        super(data, parent);
-        this.application      = parent instanceof qforms.Application ? parent : null;
-        this.page             = parent instanceof qforms.Page        ? parent : null;
-        this.form             = parent instanceof qforms.Form        ? parent : null;
-        this.keyColumns       = null;
-        this.dirPath          = path.join(this.parent.dirPath, 'dataSources', this.name);
-        this.dataFilePath     = path.join(this.dirPath, this.name + '.json');
-        this.parentKeyColumns = null;
-    }
-
     static async create(data, parent) {
         if (parent instanceof qforms.Form) {
             const form = parent;
@@ -36,6 +25,21 @@ class DataSource extends Model {
         } else {
             return new DataSource(data, parent);
         }
+    }
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.application      = parent instanceof qforms.Application ? parent : null;
+        this.page             = parent instanceof qforms.Page        ? parent : null;
+        this.form             = parent instanceof qforms.Form        ? parent : null;
+        this.keyColumns       = null;
+        // this.dirPath          = path.join(this.parent.dirPath, 'dataSources', this.name);
+        this.dataFilePath     = path.join(this.getDirPath(), this.name + '.json');
+        this.parentKeyColumns = null;
+    }
+
+    getDirPath() {
+        return path.join(this.parent.getDirPath(), 'dataSources', this.name);
     }
 
     async init() {
