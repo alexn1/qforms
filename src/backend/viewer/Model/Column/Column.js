@@ -4,10 +4,10 @@ const Model = require('../Model');
 
 class Column extends Model {
 
-    constructor(data, parent) {
-        super(data, parent);
-        // console.log('Column.constructor', this.getName());
-    }
+    // constructor(data, parent) {
+    //     super(data, parent);
+    //     // console.log('Column.constructor', this.getName());
+    // }
 
     static async create(data, parent) {
         return new Column(data, parent);

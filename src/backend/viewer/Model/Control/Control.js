@@ -5,9 +5,9 @@ const Model = require('../Model');
 
 class Control extends Model {
 
-    constructor(data, parent) {
-        super(data, parent);
-    }
+    // constructor(data, parent) {
+    //     super(data, parent);
+    // }
 
     getCustomViewFilePath() {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);

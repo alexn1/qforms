@@ -7,10 +7,10 @@ const BaseModel = require('../../../../common/BaseModel');
 
 class RowForm extends Form {
 
-    constructor(data, parent) {
-        super(data, parent);
-        // console.log('RowForm.constructor', this.getFullName());
-    }
+    // constructor(data, parent) {
+    //     super(data, parent);
+    //     // console.log('RowForm.constructor', this.getFullName());
+    // }
 
     getViewFilePath() {
         return path.join(

@@ -9,7 +9,6 @@ class Model extends BaseModel {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
     }
