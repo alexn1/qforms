@@ -18,7 +18,7 @@ class MySqlDatabase extends Database {
     }
 
     async deinit() {
-        console.log('MySqlDatabase.deinit: ' + this.name);
+        console.log('MySqlDatabase.deinit: ' + this.getName());
         if (this.pool !== null) {
             return new Promise(resolve => {
                 this.pool.end(() => {
@@ -53,17 +53,17 @@ class MySqlDatabase extends Database {
     getConnection(context) {
         //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
-            if (context.connections[this.name] === undefined) {
+            if (context.connections[this.getName()] === undefined) {
                 this._getPool().getConnection((err, cnn) => {
                     if (err) {
                         reject(err);
                     } else {
-                        context.connections[this.name] = cnn;
-                        resolve(context.connections[this.name]);
+                        context.connections[this.getName()] = cnn;
+                        resolve(context.connections[this.getName()]);
                     }
                 });
             } else {
-                resolve(context.connections[this.name]);
+                resolve(context.connections[this.getName()]);
             }
         });
     }

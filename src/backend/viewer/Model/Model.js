@@ -108,7 +108,7 @@ class Model extends BaseModel {
 
     async getJs() {
         if (!this.getDirPath()) return null;
-        const jsFilePath = path.join(this.getDirPath(), this.name + '.js');
+        const jsFilePath = path.join(this.getDirPath(), this.getName() + '.js');
         const exists = await qforms.Helper.exists(jsFilePath);
         if (exists) return qforms.Helper.readFile(jsFilePath);
         return null;

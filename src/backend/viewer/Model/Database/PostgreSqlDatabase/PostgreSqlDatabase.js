@@ -16,7 +16,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async deinit() {
-        console.log('PostgreSqlDatabase.deinit: ' + this.name);
+        console.log('PostgreSqlDatabase.deinit: ' + this.getName());
         if (this.pool !== null) {
             return this.pool.end();
         }
@@ -34,10 +34,10 @@ class PostgreSqlDatabase extends Database {
 
     async getConnection(context) {
         // console.log('PostgreSqlDatabase.getConnection');
-        if (context.connections[this.name]) {
-            return context.connections[this.name];
+        if (context.connections[this.getName()]) {
+            return context.connections[this.getName()];
         } else {
-            return context.connections[this.name] = this._getPool();
+            return context.connections[this.getName()] = this._getPool();
         }
     }
 

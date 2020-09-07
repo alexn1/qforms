@@ -11,8 +11,8 @@ class DataSource extends Model {
             const name = data['@attributes'].name;
             const customBackendJsFilePath = path.join(
                 form.getPage().getApp().getDirPath(),
-                'pages', form.getPage().name,
-                'forms', form.name,
+                'pages', form.getPage().getName(),
+                'forms', form.getName(),
                 'dataSources', name,
                 `${name}.backend.js`
             );
@@ -37,11 +37,11 @@ class DataSource extends Model {
     }
 
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'dataSources', this.name);
+        return path.join(this.parent.getDirPath(), 'dataSources', this.getName());
     }
 
     getJsonFilePath() {
-        return path.join(this.getDirPath(), `${this.name}.json`);
+        return path.join(this.getDirPath(), `${this.getName()}.json`);
     }
 
     async init() {
@@ -76,7 +76,7 @@ class DataSource extends Model {
         this.parentKeyColumns.forEach(column => {
             this.checkColumn(row, column);
         });
-        if (!(this.parent instanceof qforms.Form) || this.name !== 'default') return;
+        if (!(this.parent instanceof qforms.Form) || this.getName() !== 'default') return;
         Object.keys(this.parent.fields).forEach(name => {
             const field = this.parent.fields[name];
             const columnName = field.getAttr('column');
@@ -137,11 +137,11 @@ class DataSource extends Model {
 
     getFullName() {
         if (this.form) {
-            return [this.form.page.name, this.form.name, this.name].join('.');
+            return [this.form.page.getName(), this.form.getName(), this.getName()].join('.');
         } else if (this.page) {
-            return [this.page.name, this.name].join('.');
+            return [this.page.getName(), this.getName()].join('.');
         } else {
-            return this.name;
+            return this.getName();
         }
     }
 

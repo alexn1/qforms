@@ -46,7 +46,7 @@ class Application extends Model {
     }
 
     getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.name}.ejs`);
+        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
     getViewFilePath() {
@@ -126,7 +126,7 @@ class Application extends Model {
     }
 
     async deinit() {
-        console.log('Application.deinit: ' + this.name);
+        console.log('Application.deinit: ' + this.getName());
         const names = Object.keys(this.databases);
         for (let i = 0; i < names.length; i++) {
             await this.databases[names[i]].deinit();

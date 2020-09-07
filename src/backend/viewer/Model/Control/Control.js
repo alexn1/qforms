@@ -10,7 +10,7 @@ class Control extends Model {
     }
 
     getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.name}.ejs`);
+        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
     static async create(data, parent) {
@@ -22,7 +22,7 @@ class Control extends Model {
     }
 
     getDirPath() {
-        return path.join(this.parent.getDirPath(), this.name);
+        return path.join(this.parent.getDirPath(), this.getName());
     }
 
 }
