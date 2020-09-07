@@ -12,7 +12,6 @@ class Model extends BaseModel {
         this.name               = this.getAttr('name');
         this.createCollections  = [];
         this.fillCollections    = [];
-        // this.dirPath            = null;
         this.viewFilePath       = null;
         this.customViewFilePath = null;
         this.view               = null;

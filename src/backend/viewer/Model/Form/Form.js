@@ -11,7 +11,6 @@ class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.page               = parent;
-        // this.dirPath            = path.join(this.parent.dirPath, 'forms', this.name);
         this.customViewFilePath = path.join(this.getDirPath(), this.name + '.ejs');
         this.createCollections  = ['dataSources', 'fields', 'controls', 'actions'];
         this.fillCollections    = ['dataSources', 'fields', 'controls', 'actions'];

@@ -33,7 +33,6 @@ class DataSource extends Model {
         this.page             = parent instanceof qforms.Page        ? parent : null;
         this.form             = parent instanceof qforms.Form        ? parent : null;
         this.keyColumns       = null;
-        // this.dirPath          = path.join(this.parent.dirPath, 'dataSources', this.name);
         this.dataFilePath     = path.join(this.getDirPath(), this.name + '.json');
         this.parentKeyColumns = null;
     }

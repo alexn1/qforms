@@ -30,7 +30,6 @@ class Page extends Model {
         super(data, parent);
         this.application        = parent;
         this.app                = parent;
-        // this.dirPath            = path.join(this.parent.dirPath, 'pages', this.name);
         this.viewFilePath       = path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/PageController/view',
