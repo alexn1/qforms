@@ -4,7 +4,6 @@ class Form extends Model {
     constructor(name, parent, data) {
         super(data, parent);
         this.page          = parent;
-        // this.dataSource    = null;
         this.dataSources   = {};
         this.fields        = {};
         this.controls      = {};
@@ -116,5 +115,9 @@ class Form extends Model {
     getDataSource() {
         if (!this.dataSources.default) throw new Error(`${this.getFullName()}: no default data source`);
         return this.dataSources.default;
+    }
+
+    getPage() {
+        return this.parent;
     }
 }
