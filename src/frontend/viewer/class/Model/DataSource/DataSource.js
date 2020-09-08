@@ -422,11 +422,11 @@ class DataSource extends Model {
         // const form = this.getForm();
         // const page = this.getPage();
         if (this.parent instanceof Form !== null) {
-            return this.parent.getPage().name + '.' + this.parent.name + '.' + this.name;
+            return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
         } else if (this.parent instanceof Page) {
-            return this.parent.name + '.' + this.name;
+            return this.parent.getName() + '.' + this.getName();
         } else {
-            return this.name;
+            return this.getName();
         }
     }
 
@@ -446,7 +446,7 @@ class DataSource extends Model {
     }
 
     getFullName() {
-        return `${this.parent.getFullName()}.${this.name}`;
+        return `${this.parent.getFullName()}.${this.getName()}`;
     }
 
     discard() {

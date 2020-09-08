@@ -17,7 +17,7 @@ class Field extends Model {
             if (name.indexOf('.') !== -1) {
                 let arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.getForm().getPage().name;
+                    arr[0] = this.getForm().getPage().getName();
                 }
                 if (arr[0] === 'parent' && this.getForm().getPage().parentPageName) {
                     arr[0] = this.getForm().getPage().parentPageName;
@@ -60,8 +60,8 @@ class Field extends Model {
     }
 
     setValue(row, value) {
-        console.log('Field.setValue', this.name);
-        if (!this.data.column) throw new Error(`field has no column: ${this.name}`);
+        console.log('Field.setValue', this.getName());
+        if (!this.data.column) throw new Error(`field has no column: ${this.getName()}`);
         const newValue = this.getForm().getDataSource().setValue(row, this.data.column, value);
         this.valueToParams(row);
         return newValue;
@@ -88,9 +88,9 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.getForm().getPage().name,
-            this.getForm().name,
-            this.name
+            this.getForm().getPage().getName(),
+            this.getForm().getName(),
+            this.getName()
         ].join('.');
     }
 

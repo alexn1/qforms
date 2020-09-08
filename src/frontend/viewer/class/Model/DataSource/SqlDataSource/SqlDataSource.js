@@ -37,14 +37,14 @@ class SqlDataSource extends DataSource {
 
     async update() {
         console.log('DataSource.update', this.getFullName());
-        if (this.data.table === '') throw new Error(`data source has no table: ${this.name}`);
+        if (this.data.table === '') throw new Error(`data source has no table: ${this.getName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const data = await this.getApp().request({
             action        : 'update',
-            page          : this.getForm().getPage().name,
-            form          : this.getForm().name,
-            ds            : this.name,
+            page          : this.getForm().getPage().getName(),
+            form          : this.getForm().getName(),
+            ds            : this.getName(),
             changes       : this.getChangesByKey(),
         });
         const [key] = Object.keys(data);
@@ -163,9 +163,9 @@ class SqlDataSource extends DataSource {
         if (this.getLimit()) _params.offset = this.offset;
         const data = await this.getApp().request({
             action        : 'select',
-            page          : page ? page.name : null,
-            form          : form ? form.name : null,
-            ds            : this.name,
+            page          : page ? page.getName() : null,
+            form          : form ? form.getName() : null,
+            ds            : this.getName(),
             params        : _params,
             parentPageName: page ? page.parentPageName : null
         });
@@ -184,9 +184,9 @@ class SqlDataSource extends DataSource {
         if (this.getLimit()) _params.offset = this.offset;
         const data = await this.getApp().request({
             action        : 'selectSingle',
-            page          : page ? page.name : null,
-            form          : form ? form.name : null,
-            ds            : this.name,
+            page          : page ? page.getName() : null,
+            form          : form ? form.getName() : null,
+            ds            : this.getName(),
             params        : _params,
             parentPageName: page ? page.parentPageName : null
         });
@@ -201,9 +201,9 @@ class SqlDataSource extends DataSource {
         const page = this.getPage();
         let args = {
             action        : 'insert',
-            page          : this.getForm().getPage().name,
-            form          : this.getForm().name,
-            ds            : this.name,
+            page          : this.getForm().getPage().getName(),
+            form          : this.getForm().getName(),
+            ds            : this.getName(),
             row           : this.getRowValuesWithChanges(row),
             parentPageName: page.parentPageName || null
         };
@@ -264,7 +264,7 @@ class SqlDataSource extends DataSource {
         console.log('DataSource.delete:', key);
         const page = this.getPage();
         if (!this.data.table) {
-            throw new Error(`no table in data source: ${this.name}`);
+            throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         // check if removed row has child rows
         if (this.childs[key] !== undefined) {
@@ -274,9 +274,9 @@ class SqlDataSource extends DataSource {
         }
         const args = {
             action        : '_delete',
-            page          : this.getForm().getPage().name,
-            form          : this.getForm().name,
-            ds            : this.name,
+            page          : this.getForm().getPage().getName(),
+            form          : this.getForm().getName(),
+            ds            : this.getName(),
             row           : this.rowsByKey[key],
             parentPageName: page ? page.parentPageName : null
         };
