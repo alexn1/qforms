@@ -4,19 +4,18 @@ class DataGridWidget extends GridWidget {
     constructor(el, formController) {
         super(el);
         this.formController = formController;
-        // this.dataSource     = null;
         this.keyToBodyRow   = {}; // to fast row search by key
     }
 
     init() {
         super.init();
-        // self.dataSource = self.formController.model.dataSource;
-        this.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
-        this.getDataSource().on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
-        this.getDataSource().on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
-        this.getDataSource().on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
-        this.getDataSource().on('newFrame' , this.listeners.newFrame  = this.onNewFrame.bind(this));
-        this.getDataSource().on('insert'   , this.listeners.insert    = this.onInsert.bind(this));
+        const dataSource = this.getDataSource();
+        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
+        dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
+        dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
+        dataSource.on('newFrame' , this.listeners.newFrame  = this.onNewFrame.bind(this));
+        dataSource.on('insert'   , this.listeners.insert    = this.onInsert.bind(this));
     }
 
     createColumn(fieldName, headerCell) {
@@ -28,12 +27,13 @@ class DataGridWidget extends GridWidget {
 
     deinit() {
         super.deinit();
-        this.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
-        this.getDataSource().off('newRow', this.listeners.newRow);
-        this.getDataSource().off('removeRow', this.listeners.removeRow);
-        this.getDataSource().off('moveRow', this.listeners.moveRow);
-        this.getDataSource().off('newFrame', this.listeners.newFrame);
-        this.getDataSource().off('insert', this.listeners.insert);
+        const dataSource = this.getDataSource();
+        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('newRow', this.listeners.newRow);
+        dataSource.off('removeRow', this.listeners.removeRow);
+        dataSource.off('moveRow', this.listeners.moveRow);
+        dataSource.off('newFrame', this.listeners.newFrame);
+        dataSource.off('insert', this.listeners.insert);
     }
 
     fill () {
@@ -169,7 +169,7 @@ class DataGridWidget extends GridWidget {
     }
 
     getDataSource() {
-        return this.formController.model.dataSource;
+        return this.formController.model.getDataSource();
     }
 }
 

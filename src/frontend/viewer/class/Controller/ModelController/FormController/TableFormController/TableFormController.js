@@ -54,11 +54,12 @@ class TableFormController extends FormController {
     fill() {
         // console.log('TableFormController.fill', this.model.name);
         super.fill();
-        if (this.model.dataSource.getLimit()) {
+        const dataSource = this.model.getDataSource();
+        if (dataSource.getLimit()) {
             $(this.view).find('.paging').css('display', 'block');
             this.setCountText();
         }
-        this.framesCount = this.model.dataSource.getFramesCount();
+        this.framesCount = dataSource.getFramesCount();
         if (this.framesCount) {
             for (let i = 1; i <= this.framesCount; i++) {
                 const option = $('<option></option>');

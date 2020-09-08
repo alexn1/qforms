@@ -5,33 +5,34 @@ class DataTreeWidget extends TreeWidget {
     constructor(el, controller) {
         super(el);
         this.controller = controller;
-        this.dataSource = null;
+        // this.dataSource = null;
         this.keyToItem  = {};		// to fast item search by key
     }
 
     init() {
         super.init();
-        this.dataSource = this.controller.model.dataSource;
-        this.dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
-        this.dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
-        this.dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
-        this.dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
-        this.dataSource.on('goneRow', this.listeners.goneRow = this.onGoneRow.bind(this));
-        this.dataSource.on('comeRow', this.listeners.comeRow = this.onComeRow.bind(this));
+        const dataSource = this.controller.model.getDataSource();
+        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
+        dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
+        dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
+        dataSource.on('goneRow', this.listeners.goneRow = this.onGoneRow.bind(this));
+        dataSource.on('comeRow', this.listeners.comeRow = this.onComeRow.bind(this));
     }
 
     deinit() {
-        this.dataSource.off('rowUpdate', this.listeners.rowUpdate);
-        this.dataSource.off('newRow', this.listeners.newRow);
-        this.dataSource.off('removeRow', this.listeners.removeRow);
-        this.dataSource.off('moveRow', this.listeners.moveRow);
-        this.dataSource.off('goneRow', this.listeners.goneRow);
-        this.dataSource.off('comeRow', this.listeners.comeRow);
+        const dataSource = this.controller.model.getDataSource();
+        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('newRow', this.listeners.newRow);
+        dataSource.off('removeRow', this.listeners.removeRow);
+        dataSource.off('moveRow', this.listeners.moveRow);
+        dataSource.off('goneRow', this.listeners.goneRow);
+        dataSource.off('comeRow', this.listeners.comeRow);
     }
 
     fill() {
         this.keyToItem['[null]'] = this.tree;
-        const rows = this.dataSource.getRows();
+        const rows = this.controller.model.getDataSource().getRows();
         for (let i = 0; i < rows.length; i++) {
             this.addRow(this.tree, rows[i]);
         }
@@ -43,10 +44,10 @@ class DataTreeWidget extends TreeWidget {
         const item = parent.addItem(caption, undefined, i);
         item.qRow = row;
         // save to be able to find by key
-        const key = this.dataSource.getRowKey(row);
+        const key = this.controller.model.getDataSource().getRowKey(row);
         this.keyToItem[key] = item;
         // adding child rows
-        const rows = this.dataSource.getRows(key);
+        const rows = this.controller.model.getDataSource().getRows(key);
         for (let i = 0; i < rows.length; i++) {
             this.addRow(item, rows[i]);
         }
@@ -74,7 +75,7 @@ class DataTreeWidget extends TreeWidget {
     }
 
     onNewRow(ea) {
-        const row = this.dataSource.getRow(ea.key);
+        const row = this.controller.model.getDataSource().getRow(ea.key);
         const parentItem = this.keyToItem[ea.parentKey];
         const item = this.addRow(parentItem, row, ea.i);
         item.select();

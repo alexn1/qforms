@@ -88,13 +88,13 @@ class Form extends Model {
 
     async refresh() {
         console.log('Form.refresh', this.getFullName());
-        await this.dataSource.refresh();
+        await this.getDataSource().refresh();
         this.emit('refresh', {source: this});
     }
 
     isChanged() {
         // console.log('Form.isChanged', this.getFullName());
-        return this.dataSource.isChanged();
+        return this.getDataSource().isChanged();
     }
 
     async rpc(name, params) {

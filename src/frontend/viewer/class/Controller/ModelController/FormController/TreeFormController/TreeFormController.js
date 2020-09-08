@@ -54,7 +54,7 @@ class TreeFormController extends FormController {
     }
 
     new(row) {
-        const key = this.model.dataSource.getRowKey(row);
+        const key = this.model.getDataSource().getRowKey(row);
         this.openPage({
             name   : this.model.data.itemEditPage,
             newMode: true,
@@ -63,7 +63,7 @@ class TreeFormController extends FormController {
     }
 
     edit(row) {
-        const key = this.model.dataSource.getRowKey(row);
+        const key = this.model.getDataSource().getRowKey(row);
         this.openPage({
             name: this.model.data.itemEditPage,
             key : key

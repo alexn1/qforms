@@ -63,7 +63,7 @@ class Field extends Model {
     setValue(row, value) {
         console.log('Field.setValue', this.name);
         if (!this.data.column) throw new Error(`field has no column: ${this.name}`);
-        const newValue = this.form.dataSource.setValue(row, this.data.column, value);
+        const newValue = this.form.getDataSource().setValue(row, this.data.column, value);
         this.valueToParams(row);
         return newValue;
     }
@@ -78,7 +78,7 @@ class Field extends Model {
         // console.log('Field.getValue', this.getFullName());
         let value;
         if (this.data.column) {
-            value = this.form.dataSource.getValue(row, this.data.column);
+            value = this.form.getDataSource().getValue(row, this.data.column);
         } else if (this.data.value) {
             value = eval(this.data.value);
         } else {

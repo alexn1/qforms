@@ -4,7 +4,7 @@ class RowForm extends Form {
     init() {
         super.init();
         if (this.page.isNewMode()) {
-            this.dataSource.newRow(this.createRow());
+            this.getDataSource().newRow(this.createRow());
         }
 
         // dump row values to page params
@@ -31,15 +31,16 @@ class RowForm extends Form {
     }
 
     getRow() {
-        return this.dataSource.getSingleRow();
+        return this.getDataSource().getSingleRow();
     }
 
     getKey() {
         // console.log('RowForm.getKey', this.getFullName());
-        if (this.dataSource.getClassName() === 'SqlDataSource') {
+        const dataSource = this.getDataSource();
+        if (dataSource.getClassName() === 'SqlDataSource') {
             const row = this.getRow();
-            if (this.getDataSource().data.rows.indexOf(row) !== -1) {
-                return this.dataSource.getRowKey(row);
+            if (dataSource.data.rows.indexOf(row) !== -1) {
+                return dataSource.getRowKey(row);
             }
         }
         return null;

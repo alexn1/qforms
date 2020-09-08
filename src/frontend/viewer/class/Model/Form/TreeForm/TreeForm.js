@@ -13,7 +13,7 @@ class TreeForm extends Form {
     // }
 
     delete(row) {
-        const key = this.dataSource.getRowKey(row);
+        const key = this.getDataSource().getRowKey(row);
         this.dataSources['default'].delete(key);
     }
 
