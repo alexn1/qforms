@@ -4,7 +4,7 @@ class Form extends Model {
     constructor(name, parent, data) {
         super(data, parent);
         this.page          = parent;
-        this.dataSource    = null;
+        // this.dataSource    = null;
         this.dataSources   = {};
         this.fields        = {};
         this.controls      = {};
@@ -36,7 +36,7 @@ class Form extends Model {
             this.controls[name] = eval('new {class}(data, this)'.replace('{class}', data.class));
             this.controls[name].init();
         }
-        this.dataSource = this.dataSources.default;
+        // this.dataSource = this.dataSources.default;
     }
 
     deinit() {

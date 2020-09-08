@@ -5,7 +5,6 @@ class DataTreeWidget extends TreeWidget {
     constructor(el, controller) {
         super(el);
         this.controller = controller;
-        // this.dataSource = null;
         this.keyToItem  = {};		// to fast item search by key
     }
 

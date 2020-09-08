@@ -72,15 +72,17 @@ class TableFormController extends FormController {
     }
 
     setCountText() {
-        const count = `${this.model.dataSource.length} of ${this.model.dataSource.count}`;
+        const dataSource = this.model.getDataSource();
+        const count = `${dataSource.length} of ${dataSource.count}`;
         this.$count.text(count);
     }
 
     updateCountAndGoTo() {
-        if (this.model.dataSource.getLimit()) {
+        const dataSource = this.model.getDataSource();
+        if (dataSource.getLimit()) {
             this.setCountText();
         }
-        this.framesCount = this.model.dataSource.getFramesCount();
+        this.framesCount = dataSource.getFramesCount();
         if (this.framesCount) {
             this.$goto.empty();
             for (let i = 1; i <= this.framesCount; i++) {
@@ -180,7 +182,7 @@ class TableFormController extends FormController {
         if (this.model.data.newRowMode === 'oneclick') {
             const row = {};
             this.model.fillDefaultValues(row);
-            this.model.dataSource.insert(row);
+            this.model.getDataSource().insert(row);
         } else if (this.model.data.newRowMode === 'editform') {
             if (!this.model.data.itemEditPage) {
                 throw new Error('[' + this.model.getFullName() + '] itemEditPage is empty.');
@@ -203,7 +205,7 @@ class TableFormController extends FormController {
             }
             const row = {};
             this.model.fillDefaultValues(row);
-            const key = await this.model.dataSource.insert(row);
+            const key = await this.model.getDataSource().insert(row);
             await this.openPage({
                 name: this.model.data.itemEditPage,
                 key : key
@@ -214,7 +216,7 @@ class TableFormController extends FormController {
             }
             const row = {};
             this.model.fillDefaultValues(row);
-            const key2 = await this.model.dataSource.insert(row);
+            const key2 = await this.model.getDataSource().insert(row);
             await this.openPage({
                 name: this.model.data.itemCreatePage,
                 key : key2
