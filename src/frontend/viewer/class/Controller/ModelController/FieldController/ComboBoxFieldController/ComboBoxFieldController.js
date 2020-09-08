@@ -2,10 +2,9 @@
 
 class ComboBoxFieldController extends FieldController {
 
-    constructor(model, parent) {
-        super(model, parent);
-        this.dataSource = null;
-    }
+    // constructor(model, parent) {
+    //     super(model, parent);
+    // }
 
     init() {
         //console.log('ComboBoxFieldController.init: ' + this.model.name);
@@ -13,22 +12,23 @@ class ComboBoxFieldController extends FieldController {
         if (!this.model.data.dataSourceName) {
             throw new Error(`[${this.model.getFullName()}] no dataSourceName`);
         }
-        this.dataSource = this.model.getComboBoxDataSource();
-        if (!this.dataSource) {
+        const dataSource = this.model.getComboBoxDataSource();
+        if (!dataSource) {
             throw new Error(`[${this.model.getFullName()}] cannot find data source '${this.model.data.dataSourceName}'`);
         }
-        this.dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
-        this.dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
-        this.dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
-        this.dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
+        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
+        dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
+        dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
     }
 
     deinit() {
         //console.log('ComboBoxFieldController.deinit: ' + this.model.name);
-        this.dataSource.off('rowUpdate', this.listeners.rowUpdate);
-        this.dataSource.off('removeRow', this.listeners.removeRow);
-        this.dataSource.off('newRow', this.listeners.newRow);
-        this.dataSource.off('moveRow', this.listeners.moveRow);
+        const dataSource = this.model.getComboBoxDataSource();
+        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('removeRow', this.listeners.removeRow);
+        dataSource.off('newRow', this.listeners.newRow);
+        dataSource.off('moveRow', this.listeners.moveRow);
         super.deinit();
     }
 
@@ -71,7 +71,7 @@ class ComboBoxFieldController extends FieldController {
                 view.firstElementChild.value = value;
                 if (value) {
                     const key = JSON.stringify([value]);
-                    const row = this.dataSource.getRow(key);
+                    const row = this.model.getComboBoxDataSource().getRow(key);
                     if (row) {
                         view.firstElementChild.innerHTML = this.model.getDisplayValue(row);
                     } else {
@@ -90,15 +90,16 @@ class ComboBoxFieldController extends FieldController {
             nullOption.innerHTML = `-- ${this.model.form.page.app.data.text.field.selectValue} --`;
         }
         view.firstElementChild.appendChild(nullOption);
-        const rows = this.dataSource.getRows();
+        const rows = this.model.getComboBoxDataSource().getRows();
         for (let i = 0; i < rows.length; i++) {
             this._createOption(view, i);
         }
     }
 
     _createOption(view, i) {
-        const row = this.dataSource.getRowByIndex(i);
-        const key = this.dataSource.getRowKey(row);
+        const dataSource = this.model.getComboBoxDataSource();
+        const row = dataSource.getRowByIndex(i);
+        const key = dataSource.getRowKey(row);
         const option = document.createElement('option');
         option.innerHTML = this.model.getDisplayValue(row);
         option.dbRow     = row;
@@ -144,7 +145,7 @@ class ComboBoxFieldController extends FieldController {
         //console.log(ea);
         switch (this.model.form.getClassName()) {
             case 'RowForm':
-                const key = this.model.form.dataSource.getRowKey(this.model.form.row);
+                const key = this.model.form.getDataSource().getRowKey(this.model.form.row);
                 const view = this.views[key];
                 this._createOption(view, ea.i);
                 break;

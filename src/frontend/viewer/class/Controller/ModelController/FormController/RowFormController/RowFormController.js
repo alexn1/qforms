@@ -29,7 +29,7 @@ class RowFormController extends FormController {
         }
 
         // listeners
-        this.model.dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
         // click
         const self = this;
@@ -62,7 +62,7 @@ class RowFormController extends FormController {
     }
 
     deinit() {
-        this.model.dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
         super.deinit();
     }
 

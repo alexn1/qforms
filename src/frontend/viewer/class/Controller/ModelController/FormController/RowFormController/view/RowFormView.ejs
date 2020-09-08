@@ -1,6 +1,6 @@
 <div id="<%=model.page.id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
     <div class="toolbar">
-    <% if (model.dataSource.getClassName() === 'SqlDataSource') { %>
+    <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
         <button class="btn btn-default btn-xs saveForm">Save</button>
         <button class="btn btn-default btn-xs discardForm">Discard</button>
         <button class="btn btn-default btn-xs refreshForm">Refresh</button>
