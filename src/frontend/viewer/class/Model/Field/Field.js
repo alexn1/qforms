@@ -1,7 +1,7 @@
 'use strict';
 
 class Field extends Model {
-    constructor(name, parent, data) {
+    constructor(data, parent) {
         super(data, parent);
         this.form = parent;
     }

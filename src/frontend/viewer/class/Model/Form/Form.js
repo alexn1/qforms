@@ -25,7 +25,7 @@ class Form extends Model {
         // fields
         for (const name in this.data.fields) {
             const data = this.data.fields[name];
-            this.fields[name] = eval(`new ${data.class}(name, this, data)`);
+            this.fields[name] = eval(`new ${data.class}(data, this)`);
             this.fields[name].init();
         }
 
