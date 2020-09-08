@@ -12,4 +12,8 @@ class Control extends Model {
 
     deinit() {
     }
+
+    getForm() {
+        return this.parent;
+    }
 }

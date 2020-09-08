@@ -30,7 +30,7 @@ class FileFieldController extends FieldController {
     fill(row, view) {
         const self = this;
         super.fill(row, view);
-        if (this.model.form.getClassName() === 'RowForm') {
+        if (this.model.getForm().getClassName() === 'RowForm') {
             $(view).children().change(function() {
                 self.onChange(this);
             });

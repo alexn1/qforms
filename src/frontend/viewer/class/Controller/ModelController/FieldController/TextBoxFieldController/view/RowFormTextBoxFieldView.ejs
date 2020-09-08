@@ -1,4 +1,4 @@
-<% const _readOnly = (model.data.readOnly === 'true' /*|| !model.form.page.isNewMode()*/) ? 'readonly' : ''; %>
-<div id="<%=model.form.page.id%>_<%=model.form.name%>_<%=model.name%>" class="RowFormTextBoxFieldView <%=model.name%>">
+<% const _readOnly = (model.data.readOnly === 'true' /*|| !model.getForm().page.isNewMode()*/) ? 'readonly' : ''; %>
+<div id="<%=model.getForm().page.id%>_<%=model.getForm().name%>_<%=model.name%>" class="RowFormTextBoxFieldView <%=model.name%>">
     <input style="text-align:<%=model.data.align%>" <%=_readOnly%>>
 </div>

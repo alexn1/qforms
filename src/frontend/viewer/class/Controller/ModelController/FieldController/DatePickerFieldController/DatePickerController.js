@@ -9,7 +9,7 @@ class DatePickerFieldController extends FieldController {
     fill(row, view) {
         const self = this;
         super.fill(row, view);
-        if (this.model.form.getClassName() === 'RowForm') {
+        if (this.model.getForm().getClassName() === 'RowForm') {
             $(view).children().change(function() {
                 self.onChange(this);
             });
@@ -22,7 +22,7 @@ class DatePickerFieldController extends FieldController {
             isValid = view.firstElementChild.value !== undefined && view.firstElementChild.value !== null && view.firstElementChild.value !== '';
         }
         if (view.firstElementChild.value) {
-            if (this.model.form.page.app.data.lang === 'ru') {
+            if (this.model.getForm().page.app.data.lang === 'ru') {
                 const arr = view.firstElementChild.value.split('.');
                 if (arr.length === 3) {
                     const day    = parseInt(arr[0]);
@@ -64,18 +64,18 @@ class DatePickerFieldController extends FieldController {
     setValue(value, view) {
         let text = value;
         let placeholder = 'YYYY-MM-DD';
-        if (this.model.form.page.app.data.lang === 'ru') {
+        if (this.model.getForm().page.app.data.lang === 'ru') {
             placeholder = 'ДД.ММ.ГГГГ';
         }
         if (value) {
-            if (this.model.form.page.app.data.lang === 'ru') {
+            if (this.model.getForm().page.app.data.lang === 'ru') {
                 const arr = value.split('-');
                 text = [arr[2], arr[1], arr[0]].join('.');
             } else {
                 text = value;
             }
         }
-        switch (this.model.form.getClassName()) {
+        switch (this.model.getForm().getClassName()) {
             case 'RowForm':
                 view.firstElementChild.value       = text;
                 view.firstElementChild.placeholder = placeholder;
@@ -88,7 +88,7 @@ class DatePickerFieldController extends FieldController {
 
     getValue(view) {
         let text;
-        switch (this.model.form.getClassName()) {
+        switch (this.model.getForm().getClassName()) {
             case 'RowForm':
                 text = view.firstElementChild.value;
                 break;
@@ -98,7 +98,7 @@ class DatePickerFieldController extends FieldController {
         }
         if (text) {
             let value;
-            if (this.model.form.page.app.data.lang === 'ru') {
+            if (this.model.getForm().page.app.data.lang === 'ru') {
                 const arr = text.split('.');
                 value = [arr[2], arr[1], arr[0]].join('-');
             } else {

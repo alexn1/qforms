@@ -18,10 +18,10 @@ class Field extends Model {
             if (name.indexOf('.') !== -1) {
                 let arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.form.page.name;
+                    arr[0] = this.getForm().page.name;
                 }
-                if (arr[0] === 'parent' && this.form.page.parentPageName) {
-                    arr[0] = this.form.page.parentPageName;
+                if (arr[0] === 'parent' && this.getForm().page.parentPageName) {
+                    arr[0] = this.getForm().page.parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
             } else {
@@ -35,8 +35,8 @@ class Field extends Model {
         if (this.data.column) {
             const defaultValue = this.replaceThis(this.data.defaultValue);
             const params = {
-                ...this.form.page.params,
-                ...this.form.page.app.data.params
+                ...this.getForm().page.params,
+                ...this.getForm().page.app.data.params
             };
             const code = QForms.templateValue(defaultValue, params);
             let value;
@@ -56,14 +56,14 @@ class Field extends Model {
         // console.log('Field.valueToParams', this.name);
         if (this.data.column) {
             const fullName = this.getFullName();
-            this.form.page.params[fullName] = this.getValue(row);
+            this.getForm().page.params[fullName] = this.getValue(row);
         }
     }
 
     setValue(row, value) {
         console.log('Field.setValue', this.name);
         if (!this.data.column) throw new Error(`field has no column: ${this.name}`);
-        const newValue = this.form.getDataSource().setValue(row, this.data.column, value);
+        const newValue = this.getForm().getDataSource().setValue(row, this.data.column, value);
         this.valueToParams(row);
         return newValue;
     }
@@ -78,7 +78,7 @@ class Field extends Model {
         // console.log('Field.getValue', this.getFullName());
         let value;
         if (this.data.column) {
-            value = this.form.getDataSource().getValue(row, this.data.column);
+            value = this.getForm().getDataSource().getValue(row, this.data.column);
         } else if (this.data.value) {
             value = eval(this.data.value);
         } else {
@@ -89,14 +89,14 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.form.page.name,
-            this.form.name,
+            this.getForm().page.name,
+            this.getForm().name,
             this.name
         ].join('.');
     }
 
     getDataSource() {
-        return this.form.getDataSource();
+        return this.getForm().getDataSource();
     }
 
     getColumnType() {
