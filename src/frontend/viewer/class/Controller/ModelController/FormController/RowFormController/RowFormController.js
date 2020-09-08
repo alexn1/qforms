@@ -51,10 +51,10 @@ class RowFormController extends FormController {
         // action click
         for (const name in this.model.data.actions) {
             const action = this.model.data.actions[name];
-            $(this.view).find(`li.${action.getName()}`).click(() => {
+            $(this.view).find(`li.${action.name}`).click(() => {
                 setTimeout(async () => {
                     const result = await this.onActionClick(action, this.model.getRow());
-                    if (!result) alert(`no handler for ${action.getName()}`);
+                    if (!result) alert(`no handler for ${action.name}`);
                 }, 0);
             });
         }

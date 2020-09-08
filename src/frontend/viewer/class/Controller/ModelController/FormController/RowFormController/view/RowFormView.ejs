@@ -13,7 +13,7 @@
             <ul id="treeActionsList" class="dropdown-menu">
                 <% for (const name in model.data.actions) {
                     const action = model.data.actions[name]; %>
-                    <li class="<%=action.getName()%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
+                    <li class="<%=action.name%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
                 <% } %>
             </ul>
         </div>
