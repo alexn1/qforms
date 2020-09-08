@@ -6,7 +6,6 @@ class Model extends EventEmitter {
         super();
         this.data = data;
         this.parent = parent;
-        this.name = data.name;
         this.listeners = {};
     }
 
