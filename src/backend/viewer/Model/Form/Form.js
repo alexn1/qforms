@@ -4,6 +4,7 @@ const path    = require('path');
 const Model = require('../Model');
 
 class Form extends Model {
+
     static async create(data, parent) {
         throw new Error('Form is abstract');
     }
@@ -112,6 +113,5 @@ class Form extends Model {
     }
 
 }
-
 
 module.exports = Form;
