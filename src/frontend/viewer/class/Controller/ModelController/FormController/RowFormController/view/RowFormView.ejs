@@ -1,4 +1,4 @@
-<div id="<%=model.page.id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
+<div id="<%=model.getPage().id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
     <div class="toolbar">
     <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
         <button class="btn btn-default btn-xs saveForm">Save</button>

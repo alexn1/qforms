@@ -18,10 +18,10 @@ class Field extends Model {
             if (name.indexOf('.') !== -1) {
                 let arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.getForm().page.name;
+                    arr[0] = this.getForm().getPage().name;
                 }
-                if (arr[0] === 'parent' && this.getForm().page.parentPageName) {
-                    arr[0] = this.getForm().page.parentPageName;
+                if (arr[0] === 'parent' && this.getForm().getPage().parentPageName) {
+                    arr[0] = this.getForm().getPage().parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
             } else {
@@ -35,8 +35,8 @@ class Field extends Model {
         if (this.data.column) {
             const defaultValue = this.replaceThis(this.data.defaultValue);
             const params = {
-                ...this.getForm().page.params,
-                ...this.getForm().page.app.data.params
+                ...this.getForm().getPage().params,
+                ...this.getForm().getPage().app.data.params
             };
             const code = QForms.templateValue(defaultValue, params);
             let value;
@@ -56,7 +56,7 @@ class Field extends Model {
         // console.log('Field.valueToParams', this.name);
         if (this.data.column) {
             const fullName = this.getFullName();
-            this.getForm().page.params[fullName] = this.getValue(row);
+            this.getForm().getPage().params[fullName] = this.getValue(row);
         }
     }
 
@@ -89,7 +89,7 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.getForm().page.name,
+            this.getForm().getPage().name,
             this.getForm().name,
             this.name
         ].join('.');

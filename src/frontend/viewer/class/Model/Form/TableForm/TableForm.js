@@ -15,7 +15,7 @@ class TableForm extends Form {
     }
 
     frame(frame) {
-        this.getDataSource().frame(this.page.params, frame);
+        this.getDataSource().frame(this.getPage().params, frame);
     }
 
 }

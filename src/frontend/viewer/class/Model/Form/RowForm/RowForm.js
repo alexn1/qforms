@@ -3,7 +3,7 @@
 class RowForm extends Form {
     init() {
         super.init();
-        if (this.page.isNewMode()) {
+        if (this.getPage().isNewMode()) {
             this.getDataSource().newRow(this.createRow());
         }
 
@@ -23,7 +23,7 @@ class RowForm extends Form {
     }
 
     getFullName() {
-        return [this.page.name, this.name].join('.');
+        return [this.getPage().name, this.name].join('.');
     }
 
     getFieldValue(name) {

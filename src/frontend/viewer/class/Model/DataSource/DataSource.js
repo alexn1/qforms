@@ -423,7 +423,7 @@ class DataSource extends Model {
         const form = this.getForm();
         const page = this.getPage();
         if (form !== null) {
-            return this.form.page.name + '.' + this.form.name + '.' + this.name;
+            return this.form.getPage().name + '.' + this.form.name + '.' + this.name;
         } else if (page !== null) {
             return this.page.name + '.' + this.name;
         } else {

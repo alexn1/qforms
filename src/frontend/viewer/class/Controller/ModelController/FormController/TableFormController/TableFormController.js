@@ -33,7 +33,7 @@ class TableFormController extends FormController {
         this.$goto.change(function() {
             self.onGotoChange(this);
         });
-        const gridSelector = `#${this.model.page.id}_${this.model.name}_GridWidget`;
+        const gridSelector = `#${this.model.getPage().id}_${this.model.name}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
@@ -119,7 +119,7 @@ class TableFormController extends FormController {
 
     onDeleteClick(ctrl) {
         console.log('TableFormController.onDeleteClick', this.grid.getSelectedKey());
-        if (confirm(this.model.page.app.data.text.form.areYouSure)) {
+        if (confirm(this.model.getPage().app.data.text.form.areYouSure)) {
             const key = this.grid.getSelectedKey();
             if (key !== null) {
                 this.model.delete(key);

@@ -12,7 +12,7 @@ class RowFormController extends FormController {
 
         // fieldViews
         for (const name in this.model.fields) {
-            const view = this.view.querySelector(`#${this.model.page.id}_${this.model.name}_${name}`);
+            const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.name}_${name}`);
             if (view === null) {
                 continue;
             }
@@ -21,7 +21,7 @@ class RowFormController extends FormController {
 
         // controlViews
         for (const name in this.model.controls) {
-            const view = this.view.querySelector(`.${this.model.page.id}_${this.model.name}_${name}`);
+            const view = this.view.querySelector(`.${this.model.getPage().id}_${this.model.name}_${name}`);
             if (view === null) {
                 continue;
             }
@@ -44,9 +44,9 @@ class RowFormController extends FormController {
         });
 
         // disable buttons
-        $(this.view).find('button.saveForm').prop('disabled', !this.model.page.isNewMode());
+        $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().isNewMode());
         $(this.view).find('button.discardForm').prop('disabled', true);
-        $(this.view).find('button.refreshForm').prop('disabled', this.model.page.getKey() === null);
+        $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // action click
         for (const name in this.model.data.actions) {
@@ -158,9 +158,9 @@ class RowFormController extends FormController {
         }
 
         // ui
-        $(this.view).find('button.saveForm').prop('disabled', !this.model.page.isNewMode());
+        $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().isNewMode());
         $(this.view).find('button.discardForm').prop('disabled', true);
-        $(this.view).find('button.refreshForm').prop('disabled', this.model.page.getKey() === null);
+        $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // event
         this.parent.onFormDiscard(this);

@@ -63,14 +63,14 @@ class Form extends Model {
 
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
-        if (this.page.deinited) throw new Error('page already deinited');
+        if (this.getPage().deinited) throw new Error('page already deinited');
         if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form not changed or does not have new rows: ${this.getFullName()}`);
         await this.getDataSource().update();
     }
 
     async refill() {
         console.log('Form.refill', this.getFullName());
-        await this.getDataSource().refill(this.page.params);
+        await this.getDataSource().refill(this.getPage().params);
         this.emit('refilled', {source: this});
     }
 
@@ -80,7 +80,7 @@ class Form extends Model {
 
     getFullName() {
         return [
-            this.page.name,
+            this.getPage().name,
             this.name
         ].join('.');
     }
@@ -99,9 +99,9 @@ class Form extends Model {
     async rpc(name, params) {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        return await this.page.app.request({
+        return await this.getPage().app.request({
             action: 'rpc',
-            page: this.page.name,
+            page: this.getPage().name,
             form: this.name,
             name: name,
             params: params

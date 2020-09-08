@@ -42,7 +42,7 @@ class SqlDataSource extends DataSource {
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const data = await this.getApp().request({
             action        : 'update',
-            page          : this.form.page.name,
+            page          : this.form.getPage().name,
             form          : this.form.name,
             ds            : this.name,
             changes       : this.getChangesByKey(),
@@ -201,7 +201,7 @@ class SqlDataSource extends DataSource {
         const page = this.getPage();
         let args = {
             action        : 'insert',
-            page          : this.form.page.name,
+            page          : this.form.getPage().name,
             form          : this.form.name,
             ds            : this.name,
             row           : this.getRowValuesWithChanges(row),
@@ -274,7 +274,7 @@ class SqlDataSource extends DataSource {
         }
         const args = {
             action        : '_delete',
-            page          : this.form.page.name,
+            page          : this.form.getPage().name,
             form          : this.form.name,
             ds            : this.name,
             row           : this.rowsByKey[key],
