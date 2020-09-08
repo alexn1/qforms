@@ -15,4 +15,12 @@ class Control extends Model {
     getForm() {
         return this.parent;
     }
+
+    getPage() {
+        return this.parent.parent;
+    }
+
+    getApp() {
+        return this.parent.parent.parent;
+    }
 }

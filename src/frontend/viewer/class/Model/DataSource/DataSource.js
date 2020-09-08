@@ -395,12 +395,14 @@ class DataSource extends Model {
     }
 
     getApp() {
-        if (this.parent instanceof Form) {
+        /*if (this.parent instanceof Form) {
             return this.parent.getPage().getApp();
         } else if (this.parent instanceof Page) {
             return this.parent.getApp();
-        } else if (this.parent instanceof Application) {
+        } else*/ if (this.parent instanceof Application) {
             return this.parent;
+        } else {
+            return this.parent.getApp();
         }
     }
 

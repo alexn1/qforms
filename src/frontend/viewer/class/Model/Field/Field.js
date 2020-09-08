@@ -34,8 +34,8 @@ class Field extends Model {
         if (this.data.column) {
             const defaultValue = this.replaceThis(this.data.defaultValue);
             const params = {
-                ...this.getForm().getPage().params,
-                ...this.getForm().getPage().getApp().data.params
+                ...this.getPage().params,
+                ...this.getApp().data.params
             };
             const code = QForms.templateValue(defaultValue, params);
             let value;
@@ -107,5 +107,13 @@ class Field extends Model {
 
     getForm() {
         return this.parent;
+    }
+
+    getPage() {
+        return this.parent.parent;
+    }
+
+    getApp() {
+        return this.parent.parent.parent;
     }
 }

@@ -19,10 +19,10 @@ class ComboBoxField extends Field {
         const name = this.data.dataSourceName;
         if (this.getForm().dataSources[name]) {
             return this.getForm().dataSources[name];
-        } else if (this.getForm().getPage().dataSources[name]) {
-            return this.getForm().getPage().dataSources[name];
-        } else if (this.getForm().getPage().getApp().dataSources[name]) {
-            return this.getForm().getPage().getApp().dataSources[name];
+        } else if (this.getPage().dataSources[name]) {
+            return this.getPage().dataSources[name];
+        } else if (this.getApp().dataSources[name]) {
+            return this.getApp().dataSources[name];
         }
         return null;
     }

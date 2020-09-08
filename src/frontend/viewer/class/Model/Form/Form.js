@@ -119,4 +119,8 @@ class Form extends Model {
     getPage() {
         return this.parent;
     }
+
+    getApp() {
+        return this.parent.parent;
+    }
 }
