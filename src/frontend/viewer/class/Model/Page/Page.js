@@ -25,8 +25,8 @@ class Page extends Model {
     }
 
     deinit() {
-        console.log('Page.deinit', this.name);
-        if (this.deinited) throw new Error(`page ${this.name} is already deinited`);
+        console.log('Page.deinit', this.getName());
+        if (this.deinited) throw new Error(`page ${this.getName()} is already deinited`);
         for (const name in this.dataSources) {
             this.dataSources[name].deinit();
         }
@@ -46,7 +46,7 @@ class Page extends Model {
     }
 
     async update() {
-        console.log('Page.update', this.name);
+        console.log('Page.update', this.getName());
         for (const name in this.forms) {
             const form = this.forms[name];
             if (form.isChanged()) await form.update();
@@ -54,7 +54,7 @@ class Page extends Model {
     }
 
     discard() {
-        console.log('Page.discard', this.name);
+        console.log('Page.discard', this.getName());
         for (const name in this.forms) {
             this.forms[name].discard();
         }

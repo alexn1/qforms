@@ -117,7 +117,7 @@ class DataSource extends Model {
     }
 
     isRowColumnChanged(row, column) {
-        // console.log('DataSource.isRowColumnChanged', this.name);
+        // console.log('DataSource.isRowColumnChanged', this.getName());
         return row[column] !== this.getValue(row, column);
     }
 

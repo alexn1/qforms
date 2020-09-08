@@ -23,7 +23,7 @@ class RowForm extends Form {
     }
 
     getFullName() {
-        return [this.getPage().name, this.name].join('.');
+        return [this.getPage().getName(), this.getName()].join('.');
     }
 
     getFieldValue(name) {

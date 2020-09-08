@@ -38,7 +38,7 @@ class Form extends Model {
     }
 
     deinit() {
-        //console.log('Form.deinit: ' + this.name);
+        //console.log('Form.deinit: ' + this.getName());
         for (const dsName in this.dataSources) {
             this.dataSources[dsName].deinit();
         }
@@ -79,8 +79,8 @@ class Form extends Model {
 
     getFullName() {
         return [
-            this.getPage().name,
-            this.name
+            this.getPage().getName(),
+            this.getName()
         ].join('.');
     }
 
@@ -100,8 +100,8 @@ class Form extends Model {
         if (!name) throw new Error('no name');
         return await this.getPage().getApp().request({
             action: 'rpc',
-            page: this.getPage().name,
-            form: this.name,
+            page: this.getPage().getName(),
+            form: this.getName(),
             name: name,
             params: params
         });

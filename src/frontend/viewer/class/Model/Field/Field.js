@@ -9,7 +9,7 @@ class Field extends Model {
     }
 
     deinit() {
-        //console.log('Field.deinit: ' + this.name);
+        //console.log('Field.deinit: ' + this.getName());
     }
 
     replaceThis(value) {
@@ -52,7 +52,7 @@ class Field extends Model {
     }
 
     valueToParams(row) {
-        // console.log('Field.valueToParams', this.name);
+        // console.log('Field.valueToParams', this.getName());
         if (this.data.column) {
             const fullName = this.getFullName();
             this.getForm().getPage().params[fullName] = this.getValue(row);
@@ -68,7 +68,7 @@ class Field extends Model {
     }
 
     isChanged(row) {
-        // console.log('Field.isChanged', this.name);
+        // console.log('Field.isChanged', this.getName());
         if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDataSource().isRowColumnChanged(row, this.data.column);
     }

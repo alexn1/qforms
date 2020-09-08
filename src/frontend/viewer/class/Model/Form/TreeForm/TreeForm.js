@@ -6,7 +6,7 @@ class TreeForm extends Form {
     //
     // onDataSourceChanged(e) {
     //     const dataSource = e.source;
-    //     if (dataSource.name !== 'default') {
+    //     if (dataSource.getName() !== 'default') {
     //         return;
     //     }
     //     this.getDataSource().update();
