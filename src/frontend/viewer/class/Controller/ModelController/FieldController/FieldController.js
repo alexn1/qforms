@@ -72,18 +72,18 @@ class FieldController extends ModelController {
     }
 
     getStringValue(view) {
-        switch (this.model.form.getClassName()) {
+        switch (this.model.getForm().getClassName()) {
             case 'RowForm': return view.firstElementChild.value;
             case 'TableForm': return view.firstElementChild.innerHTML;
-            default: throw new Error(`unknown form class: ${this.model.form.getClassName()}`);
+            default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
 
     setStringValue(stringValue, view) {
-        switch (this.model.form.getClassName()) {
+        switch (this.model.getForm().getClassName()) {
             case 'RowForm':view.firstElementChild.value = stringValue;break;
             case 'TableForm':view.firstElementChild.innerHTML = stringValue;break;
-            default: throw new Error(`unknown form class: ${this.model.form.getClassName()}`);
+            default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
 
@@ -95,7 +95,7 @@ class FieldController extends ModelController {
 
     setPlaceHolder(value, view) {
         // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
-        if (this.model.form.getClassName() === 'RowForm') {
+        if (this.model.getForm().getClassName() === 'RowForm') {
             if (value === undefined) {
                 view.firstElementChild.placeholder = 'undefined';
             } else if (value === null) {

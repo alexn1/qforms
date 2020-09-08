@@ -9,7 +9,7 @@ class ButtonControlController extends ControlController {
     fill(row, view) {
         const self = this;
         super.fill(row, view);
-        if (self.model.form.getClassName() === 'RowForm') {
+        if (self.model.getForm().getClassName() === 'RowForm') {
             $(view).children().click(function() {
                 self._onClick(this);
             });

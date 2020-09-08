@@ -388,20 +388,20 @@ class DataSource extends Model {
     }
 
     getPage() {
-        if (this.page !== null) {
-            return this.page;
-        } else if (this.form !== null) {
-            return this.form.page;
+        if (this.parent instanceof Page) {
+            return this.parent;
+        } else if (this.parent instanceof Form) {
+            return this.parent.getPage();
         } else {
             return null;
         }
     }
 
     getApp() {
-        if (this.form !== null) {
-            return this.form.page.app;
-        } else if (this.page !== null) {
-            return this.page.app;
+        if (this.parent instanceof Form) {
+            return this.parent.getPage().getApp();
+        } else if (this.parent instanceof Page) {
+            return this.parent.getApp();
         } else if (this.parent instanceof Application) {
             return this.parent;
         }
