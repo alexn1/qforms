@@ -3,9 +3,9 @@
 class Page extends Model {
     constructor(options) {
         super(options.data, options.app);
-        this.parentPageName = options.parentPageName;
+        this.parentPageName = options.parentPageName || null;
         this.id             = null;
-        this.params         = (options.params  !== undefined) ? options.params : {};
+        this.params         = (options.params !== undefined) ? options.params : {};
         this.dataSources    = {};
         this.forms          = {};
     }
