@@ -13,7 +13,7 @@ class TreeFormController extends FormController {
         $(this.view).find('button.newRoot').click(function() {self.onNewRootClick(this);});
         $(this.view).find('button.new').click(function()     {self.onNewClick(this);    });
         $(this.view).find('button.delete').click(function()  {self.onDeleteClick(this); });
-        const treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}', this.model.getPage().id).replace('{formName}', this.model.name);
+        const treeSelector = '#{pageId}_{formName}_TreeWidget'.replace('{pageId}', this.model.getPage().id).replace('{formName}', this.model.getName());
         const tree = this.view.querySelector(treeSelector);
         this.tree = new DataTreeWidget(tree, this);
         this.tree.init();

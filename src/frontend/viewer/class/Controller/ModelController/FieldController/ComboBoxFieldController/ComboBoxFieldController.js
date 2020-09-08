@@ -7,7 +7,7 @@ class ComboBoxFieldController extends FieldController {
     // }
 
     init() {
-        //console.log('ComboBoxFieldController.init: ' + this.model.name);
+        //console.log('ComboBoxFieldController.init: ' + this.model.getName());
         super.init();
         if (!this.model.data.dataSourceName) {
             throw new Error(`[${this.model.getFullName()}] no dataSourceName`);
@@ -23,7 +23,7 @@ class ComboBoxFieldController extends FieldController {
     }
 
     deinit() {
-        //console.log('ComboBoxFieldController.deinit: ' + this.model.name);
+        //console.log('ComboBoxFieldController.deinit: ' + this.model.getName());
         const dataSource = this.model.getComboBoxDataSource();
         dataSource.off('rowUpdate', this.listeners.rowUpdate);
         dataSource.off('removeRow', this.listeners.removeRow);

@@ -33,7 +33,7 @@ class TableFormController extends FormController {
         this.$goto.change(function() {
             self.onGotoChange(this);
         });
-        const gridSelector = `#${this.model.getPage().id}_${this.model.name}_GridWidget`;
+        const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
@@ -52,7 +52,7 @@ class TableFormController extends FormController {
     }
 
     fill() {
-        // console.log('TableFormController.fill', this.model.name);
+        // console.log('TableFormController.fill', this.model.getName());
         super.fill();
         const dataSource = this.model.getDataSource();
         if (dataSource.getLimit()) {
@@ -95,7 +95,7 @@ class TableFormController extends FormController {
     }
 
     onRefilled(ea) {
-        console.log('TableFormController.onRefilled', this.model.name);
+        console.log('TableFormController.onRefilled', this.model.getName());
         this.grid.clear();
         this.updateCountAndGoTo();
         this.grid.fill();
@@ -170,7 +170,7 @@ class TableFormController extends FormController {
     }
 
     onShowPage() {
-        console.log('TableFormController.onShowPage', this.model.name);
+        console.log('TableFormController.onShowPage', this.model.getName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();

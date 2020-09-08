@@ -12,8 +12,8 @@ class PageController extends ModelController {
     }
 
     static create(model, view, parent) {
-        // console.log('PageController.create', model.name);
-        const customClassName = `${model.name}Controller`;
+        // console.log('PageController.create', model.getName());
+        const customClassName = `${model.getName()}Controller`;
         const typeOfCustomClass = `typeof ${customClassName}`;
         const custom =  `new ${customClassName}(model, view, parent)`;
         const general = `new ${model.data.class}Controller(model, view, parent)`;
@@ -60,7 +60,7 @@ class PageController extends ModelController {
     }
 
     deinit() {
-        console.log('PageController.deinit: ' + this.model.name);
+        console.log('PageController.deinit: ' + this.model.getName());
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
@@ -110,7 +110,7 @@ class PageController extends ModelController {
     }
 
     getCaption() {
-        // console.log('PageController.getCaption', this.model.name);
+        // console.log('PageController.getCaption', this.model.getName());
         const key = this.model.getKey();
         let caption;
         if (key) {
@@ -149,7 +149,7 @@ class PageController extends ModelController {
     }
 
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.model.name);
+        console.log('PageController.onFormDiscard', this.model.getName());
         this.setCaption(this.getCaption());
         if (this.isChanged()) {
             this.enableSave();
