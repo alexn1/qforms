@@ -5,17 +5,15 @@
     <title>Control</title>
     <style>
         .checkmark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 20px;
             height: 20px;
             background: #1dbd90;
             border: none;
-
             /*box-sizing: border-box !important;*/
-            /*margin-right: 8px;*/
             border-radius: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
     <script>
@@ -30,8 +28,10 @@
 
             // Если элементов будет много
             // "#form_error_message_frontend + div > div:last-child label"
-            console.log(document.querySelectorAll('.checkmark'));
-            Array.prototype.forEach.call(document.querySelectorAll('.checkmark'), function (e) {
+
+            const elements = document.querySelectorAll('.checkmark');
+            console.log('elements:', elements);
+            elements.forEach(e => {
                 e.classList.add('last');
             });
         });
