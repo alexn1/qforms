@@ -184,7 +184,7 @@ class ApplicationController extends ModelController {
         const name            = args.name;
         const key             = args.key || null;
         const parentPage      = args.parentPage;
-        const parentPageName  = parentPage ? parentPage.name : undefined;
+        const parentPageName  = parentPage ? parentPage.name : null;
         let keyParams       = {};
         const params = {};
         //console.log('open ' + name + ' with key: ' + key);

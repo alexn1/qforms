@@ -278,7 +278,7 @@ class SqlDataSource extends DataSource {
             form          : this.form.name,
             ds            : this.name,
             row           : this.rowsByKey[key],
-            parentPageName: page ? page.parentPageName : undefined
+            parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
         this.getTable().emit('delete', {source: this, key: key});

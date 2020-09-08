@@ -107,6 +107,10 @@ class Form extends Model {
         return this.parent;
     }
 
+    getFullName() {
+        return `${this.getPage().getName()}.${this.getName()}`;
+    }
+
 }
 
 

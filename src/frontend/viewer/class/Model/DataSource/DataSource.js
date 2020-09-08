@@ -68,6 +68,7 @@ class DataSource extends Model {
     }
 
     getNewValue(row, column, value) {
+        if (value === null) return null;
         if (typeof value === 'string' && value.trim() === '') return null;
         if (this.getColumnType(column) === 'number' && !isNaN(Number(value))) return Number(value);
         return value;
