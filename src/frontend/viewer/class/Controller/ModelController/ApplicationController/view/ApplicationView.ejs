@@ -1,4 +1,4 @@
-<div id="<%=model.data.name%>" class="ApplicationView <%=model.data.theme%>">
+<div id="<%=model.getName()%>" class="ApplicationView <%=model.data.theme%>">
     <nav id="menu" class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -16,7 +16,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;"><%=menuName%></a>
                     <ul class="dropdown-menu" ><%
                         items.forEach(function(item) {
-                            %><li><a id="<%=model.data.name%>-<%=item.page%>" style="cursor:pointer;" ><%=item.caption%></a></li><%
+                            %><li><a id="<%=model.getName()%>-<%=item.page%>" style="cursor:pointer;" ><%=item.caption%></a></li><%
                         });
                     %></ul>
                 </li><%

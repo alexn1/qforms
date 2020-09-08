@@ -10,10 +10,10 @@ class ApplicationController extends ModelController {
     }
 
     static create(model, view) {
-        const customClassName   = '{app}Controller'.replace('{app}', model.name);
+        const customClassName   = `${model.getName()}Controller`;
         const typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
         const custom            = 'new {customClassName}(model, view)'.replace('{customClassName}', customClassName);
-        const general           = 'new {class}Controller(model, view)'.replace('{class}', model.data.class);
+        const general           = 'new {class}Controller(model, view)'.replace('{class}', model.getClassName());
         let obj;
         if (model.data.js !== undefined) {
             if (eval(typeOfCustomClass) === 'function') {
@@ -49,7 +49,7 @@ class ApplicationController extends ModelController {
         for (const name in this.model.data.menu) {
             const menu = this.model.data.menu[name];
             menu.forEach(submenu => {
-                $(this.view).find(`#${this.model.data.name}-${submenu.page}`).click(async () => {
+                $(this.view).find(`#${this.model.getName()}-${submenu.page}`).click(async () => {
                     try {
                         await this.openPage({name: submenu.page});
                     } catch (err) {
@@ -161,7 +161,7 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.findPageControllerByPageNameAndKey', pageName, key);
         for (let i = 0; i < this.appTC.tabList.childNodes.length; i++) {
             const tab = this.appTC.tabList.childNodes[i];
-            if (tab.pageController.model.name === pageName && tab.pageController.model.getKey() === key) {
+            if (tab.pageController.model.getName() === pageName && tab.pageController.model.getKey() === key) {
                 return tab.pageController;
             }
         }

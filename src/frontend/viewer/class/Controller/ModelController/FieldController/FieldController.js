@@ -13,7 +13,7 @@ class FieldController extends ModelController {
         let obj;
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.name}" field does not return type`);
+            if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
             obj = new CustomClass(model, parent);
         } else {
             obj = eval(`new ${model.data.class}Controller(model, parent);`);
@@ -166,7 +166,7 @@ class FieldController extends ModelController {
     }
 
     onChange(el) {
-        console.log('FieldController.onChange', this.model.name);
+        console.log('FieldController.onChange', this.model.getName());
         const view = el.parentNode;
         const row = view.dbRow;
         const valid = this.isValid(view);
