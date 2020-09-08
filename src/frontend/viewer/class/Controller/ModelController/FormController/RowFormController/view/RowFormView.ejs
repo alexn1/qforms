@@ -1,4 +1,4 @@
-<div id="<%=model.getPage().id%>_<%=model.name%>" class="RowFormView <%=model.name%>">
+<div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
     <div class="toolbar">
     <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
         <button class="btn btn-default btn-xs saveForm">Save</button>
@@ -13,7 +13,7 @@
             <ul id="treeActionsList" class="dropdown-menu">
                 <% for (const name in model.data.actions) {
                     const action = model.data.actions[name]; %>
-                    <li class="<%=action.name%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
+                    <li class="<%=action.getName()%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
                 <% } %>
             </ul>
         </div>
@@ -24,7 +24,7 @@
             const field = model.fields[fieldName];
             if (field.data.isVisible === 'false') continue;
         %>
-            <div class="Label <%=field.name%>Label">
+            <div class="Label <%=field.getName()%>Label">
                 <% echo(field.data.caption + ':');
                 if (field.data.notNull === 'true') {
                 %><span style='color:red;'>&nbsp;*</span><%

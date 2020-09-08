@@ -12,7 +12,7 @@ class RowFormController extends FormController {
 
         // fieldViews
         for (const name in this.model.fields) {
-            const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.name}_${name}`);
+            const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.getName()}_${name}`);
             if (view === null) {
                 continue;
             }
@@ -21,7 +21,7 @@ class RowFormController extends FormController {
 
         // controlViews
         for (const name in this.model.controls) {
-            const view = this.view.querySelector(`.${this.model.getPage().id}_${this.model.name}_${name}`);
+            const view = this.view.querySelector(`.${this.model.getPage().id}_${this.model.getName()}_${name}`);
             if (view === null) {
                 continue;
             }
@@ -51,10 +51,10 @@ class RowFormController extends FormController {
         // action click
         for (const name in this.model.data.actions) {
             const action = this.model.data.actions[name];
-            $(this.view).find(`li.${action.name}`).click(() => {
+            $(this.view).find(`li.${action.getName()}`).click(() => {
                 setTimeout(async () => {
                     const result = await this.onActionClick(action, this.model.getRow());
-                    if (!result) alert(`no handler for ${action.name}`);
+                    if (!result) alert(`no handler for ${action.getName()}`);
                 }, 0);
             });
         }

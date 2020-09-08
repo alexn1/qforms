@@ -1,4 +1,4 @@
 <% const readOnly = (model.data.readOnly == "true") ? "readonly" : ""; %>
-<div id="<%=model.getForm().getPage().id%>_<%=model.getForm().name%>_<%=model.name%>" class="RowFormDatePickerFieldView <%=model.name%>">
+<div id="<%=model.getForm().getPage().id%>_<%=model.getForm().getName()%>_<%=model.getName()%>" class="RowFormDatePickerFieldView <%=model.getName()%>">
     <input <%=readOnly%>>
 </div>
