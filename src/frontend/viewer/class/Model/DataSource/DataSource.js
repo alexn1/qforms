@@ -8,9 +8,6 @@ class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.page   = parent instanceof Page ? parent : null;
-        // this.form   = parent instanceof Form ? parent : null;
-
         this.rowsByKey = {};						// for row search by key
         this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row

@@ -3,7 +3,6 @@
 class Form extends Model {
     constructor(name, parent, data) {
         super(data, parent);
-        // this.page          = parent;
         this.dataSources   = {};
         this.fields        = {};
         this.controls      = {};

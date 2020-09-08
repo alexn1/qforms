@@ -4,7 +4,6 @@ class FieldController extends ModelController {
     constructor(model, parent) {
         super(model);
         this.parent = parent;
-        // this.form   = parent;
         this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
     }

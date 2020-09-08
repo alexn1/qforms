@@ -5,7 +5,6 @@ class FormController extends ModelController {
         super(model);
         this.view     = view;
         this.parent   = parent;
-        // this.page     = parent;
         this.fields   = {};
         this.controls = {};
     }
