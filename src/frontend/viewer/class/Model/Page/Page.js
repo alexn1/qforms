@@ -3,7 +3,6 @@
 class Page extends Model {
     constructor(options) {
         super(options.data, options.app);
-        this.app            = options.app;
         this.parentPageName = options.parentPageName;
         this.id             = null;
         this.params         = (options.params  !== undefined) ? options.params : {};

@@ -6,7 +6,7 @@ class PageController extends ModelController {
         super(model);
         this.view       = view;
         this.parent     = parent;
-        this.app        = parent;
+        // this.app        = parent;
         this.captionEls = null;
         this.forms      = {};
         this.tab        = null;
@@ -79,7 +79,7 @@ class PageController extends ModelController {
         if (this.isValid()) {
             await this.model.update();
             console.log('page model updated');
-            this.app.onPageClosed({source: this, pageController: this});
+            this.getApplicationController().onPageClosed({source: this, pageController: this});
         } else {
             for (const name in this.forms) {
                 const form = this.forms[name];
@@ -168,7 +168,7 @@ class PageController extends ModelController {
     close() {
         console.log('PageController.close');
         if (this.isChanged() && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
-        this.app.closePage(this);
+        this.getApplicationController().closePage(this);
     }
 
     async openPage(args) {
@@ -185,5 +185,9 @@ class PageController extends ModelController {
             }
         }
         return false;
+    }
+
+    getApplicationController() {
+        return this.parent;
     }
 }
