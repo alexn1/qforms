@@ -30,7 +30,7 @@ class ControlController extends ModelController {
     */
 
     fill(row, view) {
-        const key = this.model.form.dataSource.getRowKey(row);
+        const key = this.model.form.getDataSource().getRowKey(row);
         this.views[key] = view;
         view.dbRow = row;
         this.setViewStyle(view, row);

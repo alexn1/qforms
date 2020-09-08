@@ -34,7 +34,7 @@ class Application extends Model {
 
     async logout() {
         const data = await this.request({
-            'action':'logout'
+            'action': 'logout'
         });
         this.emit('logout', {source: this});
     }
