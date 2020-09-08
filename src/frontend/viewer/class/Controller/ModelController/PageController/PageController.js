@@ -167,7 +167,7 @@ class PageController extends ModelController {
 
     close() {
         console.log('PageController.close');
-        if (this.isChanged() && !confirm(this.model.app.data.text.form.areYouSure)) return;
+        if (this.isChanged() && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
         this.app.closePage(this);
     }
 

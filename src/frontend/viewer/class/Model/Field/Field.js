@@ -36,7 +36,7 @@ class Field extends Model {
             const defaultValue = this.replaceThis(this.data.defaultValue);
             const params = {
                 ...this.getForm().getPage().params,
-                ...this.getForm().getPage().app.data.params
+                ...this.getForm().getPage().getApp().data.params
             };
             const code = QForms.templateValue(defaultValue, params);
             let value;
