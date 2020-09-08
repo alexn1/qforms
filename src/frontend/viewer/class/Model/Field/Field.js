@@ -105,4 +105,8 @@ class Field extends Model {
         }
         return null;
     }
+
+    getForm() {
+        return this.parent;
+    }
 }

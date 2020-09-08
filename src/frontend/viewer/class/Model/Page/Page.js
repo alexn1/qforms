@@ -127,4 +127,8 @@ class Page extends Model {
         return this.data.newMode;
     }
 
+    getApp() {
+        return this.parent;
+    }
+
 }
