@@ -17,12 +17,12 @@ class ComboBoxField extends Field {
 
     getComboBoxDataSource() {
         const name = this.data.dataSourceName;
-        if (this.form.dataSources[name]) {
-            return this.form.dataSources[name];
-        } else if (this.form.page.dataSources[name]) {
-            return this.form.page.dataSources[name];
-        } else if (this.form.page.app.dataSources[name]) {
-            return this.form.page.app.dataSources[name];
+        if (this.getForm().dataSources[name]) {
+            return this.getForm().dataSources[name];
+        } else if (this.getForm().getPage().dataSources[name]) {
+            return this.getForm().getPage().dataSources[name];
+        } else if (this.getForm().getPage().getApp().dataSources[name]) {
+            return this.getForm().getPage().getApp().dataSources[name];
         }
         return null;
     }
