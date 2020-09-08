@@ -6,7 +6,6 @@ class PageController extends ModelController {
         super(model);
         this.view       = view;
         this.parent     = parent;
-        // this.app        = parent;
         this.captionEls = null;
         this.forms      = {};
         this.tab        = null;

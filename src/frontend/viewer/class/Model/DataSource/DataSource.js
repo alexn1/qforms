@@ -8,7 +8,7 @@ class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.page   = parent instanceof Page ? parent : null;
+        // this.page   = parent instanceof Page ? parent : null;
         this.form   = parent instanceof RowForm || parent instanceof TableForm || parent instanceof TreeForm ? parent : null;
 
         this.rowsByKey = {};						// for row search by key
@@ -420,12 +420,12 @@ class DataSource extends Model {
     // }
 
     getNamespace() {
-        const form = this.getForm();
-        const page = this.getPage();
-        if (form !== null) {
-            return this.form.getPage().name + '.' + this.form.name + '.' + this.name;
-        } else if (page !== null) {
-            return this.page.name + '.' + this.name;
+        // const form = this.getForm();
+        // const page = this.getPage();
+        if (this.parent instanceof Form !== null) {
+            return this.parent.getPage().name + '.' + this.parent.name + '.' + this.name;
+        } else if (this.parent instanceof Page) {
+            return this.parent.name + '.' + this.name;
         } else {
             return this.name;
         }
