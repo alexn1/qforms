@@ -64,8 +64,30 @@ a:hover::after {
 }
 
 .radio:hover {
-    border: solid 6px #1dbd90;
-
+    border: solid 5px #1dbd90;
     background-color: white;
-
 }
+
+.circle {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: solid 2px #bbb;
+    border-radius: 50%;
+    display: flex;
+}
+.circle:hover {
+    border: solid 2px gray;
+}
+
+.circle:hover:after {
+    content: "";
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    background-color: green;
+    margin: auto;
+}
+
+
+
