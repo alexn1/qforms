@@ -3,135 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Control</title>
-    <style>
-        body {
-            /*background-color: gray;*/
-        }
-        .checkmark {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background: #1dbd90;
-            /*background-color: #eeeeee;*/
-            /*border: 1px solid #aaa;*/
-            /*box-sizing: border-box !important;*/
-            border-radius: 3px;
-        }
-
-        .checkmark svg {
-            /*display: none;*/
-        }
-
-        /*a:hover::before {
-            content: "Before -";
-        }
-        a:hover::after {
-            content: "-after";
-        }*/
-
-        .dropbtn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #f1f1f1}
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
-
-        .block {
-            position: relative;
-        }
-
-        .block::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            opacity: 0;
-         }
-
-        .block:hover::after {
-             opacity: 1;
-         }
-
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            console.log('DOMContentLoaded');
-
-            // Аналог $(document).ready(function(){
-            // Если должен быть найден один элемент
-            // if ((e = document.querySelector("#form_error_message_frontend + div > div:last-child label")) !== null) {
-            //     e.classList.add('last'); // Аналог выборки и присвоения класса
-            // }
-
-            // Если элементов будет много
-            // "#form_error_message_frontend + div > div:last-child label"
-
-            const elements = document.querySelectorAll('.checkmark');
-            console.log('elements:', elements);
-            elements.forEach(e => {
-                e.classList.add('last');
-                /*e.onmouseover = () => {
-                    console.log('onmouseover');
-                };*/
-            });
-        });
-    </script>
+    <link rel="stylesheet" href="control.css">
+    <script src="control.js"></script>
 </head>
 <body>
-
-<a href="#" > Hover here </a>
-
+    <a href="#" > Hover here </a>
     <span class="checkmark block">
         <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 3.14286L3.20838 5.3118C3.5974 5.69387 4.22078 5.69387 4.6098 5.3118L9 1" stroke="white" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
     </span>
-
-
     <div class="dropdown">
         <button class="dropbtn">Dropdown</button>
         <div class="dropdown-content">
@@ -140,8 +21,13 @@
             <a href="#">Link 3</a>
         </div>
     </div>
-
     <span class="block">abc</span>
+    <div class="box"></div>
+
+    <div>
+        <input type="checkbox" id="cb1">
+        <label for="cb1">Флажок 1</label>
+    </div>
 
 </body>
 </html>
