@@ -72,7 +72,7 @@ a:hover::after {
     width: 18px;
     height: 18px;
     box-sizing: border-box;
-    border: solid 2px #bbb;
+    border: solid 2px #ddd;
     border-radius: 50%;
     display: flex;
 }
