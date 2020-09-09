@@ -1,0 +1,47 @@
+label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: solid 1px #eee;
+    cursor: pointer;
+    position: relative;
+}
+
+label > input[type="radio"] {
+    display: none;
+}
+
+label > div {
+    width: 18px;
+    height: 18px;
+    border: solid 2px #eee;
+    position: absolute;
+    border-radius: 50%;
+}
+
+label > span {
+    margin-left: 30px;
+}
+
+
+
+
+input[type="radio"]:checked ~ span {
+    color:red;
+}
+
+input[type="radio"]:checked + div {
+    border: solid 2px gray;
+}
+
+input[type="radio"]:checked + div:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: forestgreen;
+    top: 4px;
+    left: 4px;
+    border-radius: 50%;
+}
+
