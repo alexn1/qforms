@@ -53,3 +53,19 @@ a:hover::after {
     height: 50px;
     background-color: gray;
 }
+
+.radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #eee;
+    border: solid 1px #bbb;
+    box-sizing: border-box;
+}
+
+.radio:hover {
+    border: solid 6px #1dbd90;
+
+    background-color: white;
+
+}
