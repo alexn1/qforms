@@ -1,0 +1,21 @@
+body {
+    font-family: sans-serif;
+}
+th.weekend {
+    color: red;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    background-color: #eee;
+}
+th {
+    cursor: default;
+}
+td {
+    cursor: pointer;
+}
+td:hover {
+    background-color: #ddd;
+}
