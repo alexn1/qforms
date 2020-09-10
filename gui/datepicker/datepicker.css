@@ -5,12 +5,23 @@ body {
 th.weekend {
     color: red;
 }
+td {
+    background-color: #eee;
+}
+th {
+    background-color: #b9def0;
+}
+caption {
+    background-color: #b9def0;
+}
 th, td, caption {
     padding: 6px;
     text-align: center;
-    background-color: #eee;
+
     cursor: default;
 }
+
+
 td.out {
     color: #bbb;
 }
@@ -19,7 +30,7 @@ td.today {
 }
 td.selectable {
     cursor: pointer;
-    background-color: #ddd;
+    background-color: #f7e1b5;
 }
 td.selectable:hover {
     background-color: #afd9ee;
