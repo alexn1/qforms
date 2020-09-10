@@ -6,8 +6,8 @@ th.weekend/*, td.weekend*/ {
     color: red;
 }
 
-th, td {
-    padding: 10px;
+th, td, caption {
+    padding: 6px;
     text-align: center;
     background-color: #eee;
 }
