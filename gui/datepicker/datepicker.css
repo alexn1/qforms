@@ -2,21 +2,25 @@ body {
     font-family: sans-serif;
     font-size: small;
 }
-th.weekend/*, td.weekend*/ {
+th.weekend {
     color: red;
 }
-
 th, td, caption {
     padding: 6px;
     text-align: center;
     background-color: #eee;
-}
-th {
     cursor: default;
 }
-td {
-    cursor: pointer;
+td.out {
+    color: #bbb;
 }
-td:hover {
+td.today {
+    border: solid 1px #2aabd2;
+}
+td.selectable {
+    cursor: pointer;
     background-color: #ddd;
+}
+td.selectable:hover {
+    background-color: #afd9ee;
 }
