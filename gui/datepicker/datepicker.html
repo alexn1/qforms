@@ -7,9 +7,12 @@
     <script src="datepicker.js"></script>
 </head>
 <body>
-    <table id="datepicker1" cellspacing="0">
-        <caption>month, year</caption>
-        <thead>
+
+    <div class="dropdown">
+        <div class="dropbtn">hover here</div>
+        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0">
+            <caption>month, year</caption>
+            <thead>
             <th>Пн</th>
             <th>Вт</th>
             <th>Ср</th>
@@ -17,8 +20,8 @@
             <th>Пт</th>
             <th class="weekend">Сб</th>
             <th class="weekend">Вс</th>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr>
                 <td></td>
                 <td></td>
@@ -73,8 +76,12 @@
                 <td class="weekend"></td>
                 <td class="weekend"></td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table cellpadding=0>
+    </div>
+
+
+
 
 </body>
 </html>
