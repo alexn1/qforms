@@ -5,11 +5,17 @@ body {
 th.weekend {
     color: red;
 }
+
+td, th, caption {
+    border: solid 1px white;
+}
 td {
     background-color: #eee;
+
 }
 th {
     background-color: #b9def0;
+    font-weight: normal;
 }
 caption {
     background-color: #b9def0;
