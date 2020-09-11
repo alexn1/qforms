@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>datepicker</title>
-    <link rel="stylesheet" href="DropdownDatePicker.css">
-    <link rel="stylesheet" href="DatePicker.css">
-    <script src="DatePicker.js"></script>
-    <script src="DropdownDatePicker.js"></script>
+    <link rel="stylesheet" href="DatePicker/DatePicker.css">
+    <link rel="stylesheet" href="DropdownDatePicker/DropdownDatePicker.css">
+    <script src="DatePicker/DatePicker.js"></script>
+    <script src="DropdownDatePicker/DropdownDatePicker.js"></script>
     <script src="datepicker.js"></script>
     <style>
         body {
@@ -17,9 +17,9 @@
     </style>
 </head>
 <body>
-    <div class="DropdownDatePicker">
-        <button onclick="onClick(event)" onblur="onBlur(event)">date</button>
-        <table id="datepicker1" class="DatePicker" cellspacing="0" cellpadding="0">
+    <div id="dropdownDatePicker1" class="DropdownDatePicker">
+        <input readonly>
+        <table class="DatePicker" cellspacing="0" cellpadding="0">
             <caption>
                 <div style="display: flex; justify-content: space-between; /*align-items: center;*/">
                     <a class="prev"> < </a>

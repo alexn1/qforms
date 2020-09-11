@@ -35,7 +35,6 @@ class DatePicker {
 
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset);
-        this.el.classList.remove('show');
         if (this.onDateSelected) {
             const date = new Date(parseInt(target.dataset.year), parseInt(target.dataset.month), parseInt(target.dataset.date));
             // console.log('date:', date);
