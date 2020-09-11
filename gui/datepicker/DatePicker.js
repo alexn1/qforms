@@ -38,7 +38,7 @@ class DatePicker {
         this.el.classList.remove('show');
         if (this.onDateSelected) {
             const date = new Date(parseInt(target.dataset.year), parseInt(target.dataset.month), parseInt(target.dataset.date));
-            console.log('date:', date);
+            // console.log('date:', date);
             this.onDateSelected(date);
         }
     }
@@ -73,6 +73,12 @@ class DatePicker {
         return this.el.querySelector('caption > div > a.prev');
     }
 
+    static getDay(date) {
+        let day = date.getDay() - 1;
+        if (day === -1) day = 6;
+        return day;
+    }
+
     setYearMonth(year, month) {
         console.log('DatePicker.setYearMonth', year, month);
         const now = new Date();
@@ -82,7 +88,14 @@ class DatePicker {
         this.year = year;
         this.month = month;
         const date = new Date(year, month, 1); // first day of month
-        date.setDate(2 - date.getDay());            // first day of table
+        console.log('first day of month:', date);
+        let day = DatePicker.getDay(date);
+        console.log('day of week', day);
+        if (day === 0) {
+            date.setDate(date.getDate() - 7);            // first day of table
+        } else {
+            date.setDate(date.getDate() - day);            // first day of table
+        }
 
         // caption
         this.getCaption().innerText = `${months[month]}, ${year}`;

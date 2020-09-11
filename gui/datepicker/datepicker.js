@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded');
     const datePicker = new DatePicker(document.getElementById('datepicker1'));
-    datePicker.setYearMonth();
+    datePicker.setYearMonth(/*2020, 10*/);
+    datePicker.onDateSelected = (date) => {
+        console.log('selected date:', date);
+    };
 });
 
 
