@@ -5,16 +5,19 @@
     <title>flex</title>
     <style>
         html {
-            height: 100%;
+            /*height: 100%;*/
         }
         body {
-            height: 100%;
-            margin: 0;
+            /*height: 100%;*/
+            /*margin: 0;*/
         }
         .flex {
             display: flex;
+            flex-wrap: wrap;
             /*align-content: center;*/
-            height: 100%;
+            /*height: 100%;*/
+            justify-content: space-around;
+            align-items: center;
         }
         .flex > div {
             /*padding: 20px;*/
@@ -36,11 +39,10 @@
 <body>
 
     <div class="flex">
-        <div class="a">hello</div>
-        <div class="b">abc<br>xyz</div>
-        <div class="c">world</div>
-        <div class="d">super</div>
-        <input>
+        <div class="a">CSS</div>
+        <div class="b">Is</div>
+        <div class="c">Awsome</div>
+<!--        <div class="d">super</div>-->
     </div>
 
 </body>

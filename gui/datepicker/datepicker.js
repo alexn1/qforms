@@ -8,16 +8,14 @@ const months = [
 
 function fillDatePicker(datepicker1, date) {
     console.log('fillDatePicker', date);
-
     const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    console.log('today:', today );
     const month = date.getMonth();
     const year = date.getFullYear();
     date.setDate(1);                     // first day of month
     date.setDate(2 - date.getDay());     // first day of table
 
     // caption
-    const caption = datepicker1.querySelector('caption');
+    const caption = datepicker1.querySelector('caption > div > span');
     caption.innerText = `${months[month]}, ${year}`;
 
     // tds
@@ -50,3 +48,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
     fillDatePicker(datepicker1, date);
 });
+
+
+function onClick() {
+    document.getElementById("datepicker1").classList.toggle("show");
+}
+
+/*
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn') && !event.target.matches('.dropinput')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}*/
+
+function next() {
+    console.log('next');
+}
+
+function prev() {
+    console.log('next');
+}
+
+function onDatepickerClick(e) {
+    console.log('onDatepickerClick', e);
+}

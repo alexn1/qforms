@@ -20,13 +20,21 @@ th {
     background-color: #b9def0;
     font-weight: normal;
 }
+
 caption {
     background-color: #b9def0;
+    padding: 6px;
+    cursor: default;
 }
-th, td, caption {
+
+caption a:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+th, td {
     padding: 6px;
     text-align: center;
-
     cursor: default;
 }
 
@@ -61,18 +69,19 @@ td.selectable:hover {
 }
 
 .dropdown-content {
-    display: none;
+    /*display: none;*/
     position: absolute;
-    /*min-width: 160px;*/
-    /*width: 100%;*/
-    /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);*/
     z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
+/*.dropdown:hover .dropdown-content {
     display: block;
-}
+}*/
 
 table {
     margin: 0;
+}
+
+.show {
+    display:block;
 }

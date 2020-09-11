@@ -7,77 +7,82 @@
     <script src="datepicker.js"></script>
 </head>
 <body>
-
     <div class="dropdown">
-        <div class="dropbtn">hover here</div>
-        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0">
-            <caption>month, year</caption>
+        <div class="dropbtn" onclick="onClick()" onblur="onBlur()">hover here</div>
+        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0" onclick="onDatepickerClick(event)">
+            <caption>
+                <div style="display: flex; justify-content: space-between; /*align-items: center;*/">
+                    <a class="prev" onclick="prev"> < </a>
+                    <span>caption</span>
+                    <a class="next" onclick="next()"> > </a>
+                </div>
+            </caption>
             <thead>
-            <th>Пн</th>
-            <th>Вт</th>
-            <th>Ср</th>
-            <th>Чт</th>
-            <th>Пт</th>
-            <th class="weekend">Сб</th>
-            <th class="weekend">Вс</th>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th class="weekend">Сб</th>
+                <th class="weekend">Вс</th>
             </thead>
             <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="weekend"></td>
-                <td class="weekend"></td>
-            </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="weekend"></td>
+                    <td class="weekend"></td>
+                </tr>
             </tbody>
-        </table cellpadding=0>
+        </table>
     </div>
 
 
