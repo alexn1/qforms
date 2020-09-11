@@ -66,7 +66,7 @@ class DropdownDatePicker {
         ie.dataset.year = year.toString();
         ie.dataset.month = month.toString();
         ie.dataset.date = date.toString();
-        this.getInputElement().value = `${year}-${month}-${date}`;
+        this.getInputElement().value = `${year}-${month+1}-${date}`;
     }
 
     getDate() {
