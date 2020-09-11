@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <title>datepicker</title>
     <link rel="stylesheet" href="datepicker.css">
+    <script src="DatePicker.js"></script>
     <script src="datepicker.js"></script>
 </head>
 <body>
     <div class="dropdown">
         <div class="dropbtn" onclick="onClick()" onblur="onBlur()">hover here</div>
-        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0" onclick="onDatepickerClick(event)">
+        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0">
             <caption>
                 <div style="display: flex; justify-content: space-between; /*align-items: center;*/">
-                    <a class="prev" onclick="prev"> < </a>
+                    <a class="prev"> < </a>
                     <span>caption</span>
-                    <a class="next" onclick="next()"> > </a>
+                    <a class="next"> > </a>
                 </div>
             </caption>
             <thead>
