@@ -11,7 +11,6 @@ class DropdownDatePicker {
         this.getInputElement().addEventListener('click', this.onInputClick.bind(this));
         this.getInputElement().addEventListener('blur', this.onButtonBlur.bind(this));
         this.datePicker.onDateSelected = this.onDateSelected.bind(this);
-
     }
 
     getInputElement() {
