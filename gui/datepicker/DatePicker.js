@@ -12,6 +12,7 @@ class DatePicker {
         this.el = el;
         this.year = null;
         this.month = null;
+        this.onDateSelected = null;
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
             console.log('mousedown', e);
@@ -28,13 +29,18 @@ class DatePicker {
         } else if (e.target === this.getPrev()) {
             return this.onPrev();
         } else if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
-            return this.onDayClick(e.target);
+            return this.onDateClick(e.target);
         }
     }
 
-    onDayClick(target) {
-        console.log('DatePicker.onDayClick', target.dataset);
+    onDateClick(target) {
+        console.log('DatePicker.onDateClick', target.dataset);
         this.el.classList.remove('show');
+        if (this.onDateSelected) {
+            const date = new Date(parseInt(target.dataset.year), parseInt(target.dataset.month), parseInt(target.dataset.date));
+            console.log('date:', date);
+            this.onDateSelected(date);
+        }
     }
 
     onNext() {
@@ -85,6 +91,7 @@ class DatePicker {
         const tds = this.el.querySelectorAll('td');
         for (let i = 0; i < 42; i++) {
             tds[i].innerText = date.getDate().toString();
+            tds[i].dataset.year = date.getFullYear();
             tds[i].dataset.month = date.getMonth();
             tds[i].dataset.date = date.getDate();
             if (date.getMonth() !== month) {

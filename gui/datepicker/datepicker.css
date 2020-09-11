@@ -9,7 +9,7 @@ th.weekend {
 
 
 
-td, th, caption {
+td, th, table > caption {
     border-bottom: solid 1px white;
     border-right: solid 1px white;
 }
@@ -21,7 +21,7 @@ th {
     font-weight: normal;
 }
 
-caption {
+table > caption {
     background-color: #b9def0;
     padding: 6px;
     cursor: default;
