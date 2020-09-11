@@ -88,6 +88,12 @@ class DatePicker {
         return this.selectedYear !== null && this.selectedMonth && this.selectedDate;
     }
 
+    setSelectedDate(year, month, date) {
+        this.selectedYear = year;
+        this.selectedMonth = month;
+        this.selectedDate = date;
+    }
+
     setYearMonth(year, month) {
         console.log('DatePicker.setYearMonth', year, month);
         const now = new Date();
