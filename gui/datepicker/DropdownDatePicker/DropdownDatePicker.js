@@ -23,13 +23,17 @@ class DropdownDatePicker {
     }
 
     onInputClick(event) {
-        console.log('DropdownDatePicker.onInputClick', event);
-        this.datePicker.setYearMonth();
-        this.toggleDatePicker();
+        // console.log('DropdownDatePicker.onInputClick', event);
+        if (this.isDatePickerVisible()) {
+            this.hideDatePicker();
+        } else {
+            this.datePicker.setYearMonth();
+            this.showDatePicker();
+        }
     }
 
     onButtonBlur(event) {
-        console.log('DropdownDatePicker.onButtonBlur', event);
+        // console.log('DropdownDatePicker.onButtonBlur', event);
         if (this.isDatePickerVisible()) {
             this.hideDatePicker();
         }
@@ -39,16 +43,20 @@ class DropdownDatePicker {
         return this.getDatePickerElement().classList.contains('show');
     }
 
-    toggleDatePicker() {
-        this.getDatePickerElement().classList.toggle('show');
-    }
+    // toggleDatePicker() {
+    //     this.getDatePickerElement().classList.toggle('show');
+    // }
 
     hideDatePicker() {
         this.getDatePickerElement().classList.remove('show');
     }
 
+    showDatePicker() {
+        this.getDatePickerElement().classList.add('show');
+    }
+
     onDateSelected(date) {
-        console.log('DropdownDatePicker.onDateSelected', date);
+        // console.log('DropdownDatePicker.onDateSelected', date);
         this.hideDatePicker();
         this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     }

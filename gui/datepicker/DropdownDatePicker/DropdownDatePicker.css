@@ -1,6 +1,6 @@
 .DropdownDatePicker {
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 .DropdownDatePicker > input {
     /*background-color: #3498DB;*/
