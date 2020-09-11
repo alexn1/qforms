@@ -13,7 +13,12 @@ class DatePicker {
         this.year = null;
         this.month = null;
         this.el.addEventListener('click', this.onClick.bind(this));
-
+        this.el.addEventListener('mousedown', (e) => {
+            console.log('mousedown', e);
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
     }
 
     onClick(e) {
@@ -29,6 +34,7 @@ class DatePicker {
 
     onDayClick(target) {
         console.log('DatePicker.onDayClick', target.dataset);
+        this.el.classList.remove('show');
     }
 
     onNext() {

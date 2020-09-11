@@ -5,8 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function onClick() {
-    document.getElementById("datepicker1").classList.toggle("show");
+function onClick(event) {
+    const dropdownContent = event.target.parentElement.querySelector('.dropdown-content');
+    if (dropdownContent) {
+        dropdownContent.classList.toggle("show");
+    }
+}
+
+function onBlur(event) {
+    console.log('onBlur', event);
+    const dropdownContent = event.target.parentElement.querySelector('.dropdown-content');
+    if (dropdownContent && dropdownContent.classList.contains('show')) {
+        dropdownContent.classList.remove('show');
+    }
 }
 
 /*
