@@ -15,7 +15,7 @@ class DatePicker {
         this.onDateSelected = null;
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
-            console.log('mousedown', e);
+            // console.log('mousedown', e);
             e.preventDefault();
             e.stopPropagation();
             return false;
@@ -23,7 +23,7 @@ class DatePicker {
     }
 
     onClick(e) {
-        console.log('DatePicker.onClick', e);
+        // console.log('DatePicker.onClick', e);
         if (e.target === this.getNext()) {
             return this.onNext();
         } else if (e.target === this.getPrev()) {
@@ -34,7 +34,7 @@ class DatePicker {
     }
 
     onDateClick(target) {
-        console.log('DatePicker.onDateClick', target.dataset);
+        // console.log('DatePicker.onDateClick', target.dataset);
         this.el.classList.remove('show');
         if (this.onDateSelected) {
             const date = new Date(parseInt(target.dataset.year), parseInt(target.dataset.month), parseInt(target.dataset.date));
@@ -44,7 +44,7 @@ class DatePicker {
     }
 
     onNext() {
-        console.log('DatePicker.onNext');
+        // console.log('DatePicker.onNext');
         if (this.year === null) throw new Error('no current year');
         if (this.month === null) throw new Error('no current month');
         const next = new Date(this.year, this.month);
@@ -53,7 +53,7 @@ class DatePicker {
     }
 
     onPrev() {
-        console.log('DatePicker.onPrev');
+        // console.log('DatePicker.onPrev');
         if (this.year === null) throw new Error('no current year');
         if (this.month === null) throw new Error('no current month');
         const next = new Date(this.year, this.month);
@@ -88,9 +88,7 @@ class DatePicker {
         this.year = year;
         this.month = month;
         const date = new Date(year, month, 1); // first day of month
-        console.log('first day of month:', date);
         let day = DatePicker.getDay(date);
-        console.log('day of week', day);
         if (day === 0) {
             date.setDate(date.getDate() - 7);            // first day of table
         } else {
