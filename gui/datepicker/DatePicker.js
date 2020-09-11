@@ -17,12 +17,18 @@ class DatePicker {
     }
 
     onClick(e) {
-        // console.log('DatePicker.onClick', e);
+        console.log('DatePicker.onClick', e);
         if (e.target === this.getNext()) {
             return this.onNext();
         } else if (e.target === this.getPrev()) {
             return this.onPrev();
+        } else if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+            return this.onDayClick(e.target);
         }
+    }
+
+    onDayClick(target) {
+        console.log('DatePicker.onDayClick', target.dataset);
     }
 
     onNext() {
@@ -57,6 +63,10 @@ class DatePicker {
 
     setYearMonth(year, month) {
         console.log('DatePicker.setYearMonth', year, month);
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        if (year === undefined) year = today.getFullYear();
+        if (month === undefined) month = today.getMonth();
         this.year = year;
         this.month = month;
         const date = new Date(year, month, 1); // first day of month
@@ -65,13 +75,12 @@ class DatePicker {
         // caption
         this.getCaption().innerText = `${months[month]}, ${year}`;
 
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-        // tds
+        // days
         const tds = this.el.querySelectorAll('td');
         for (let i = 0; i < 42; i++) {
             tds[i].innerText = date.getDate().toString();
+            tds[i].dataset.month = date.getMonth();
+            tds[i].dataset.date = date.getDate();
             if (date.getMonth() !== month) {
                 tds[i].classList.add('out');
             } else {

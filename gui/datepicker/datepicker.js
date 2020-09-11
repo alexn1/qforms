@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded');
     const datePicker = new DatePicker(document.getElementById('datepicker1'));
-    const now = new Date();
-    datePicker.setYearMonth(now.getFullYear(), now.getMonth());
+    datePicker.setYearMonth();
 });
 
 
@@ -24,15 +23,3 @@ window.onclick = function(event) {
         }
     }
 }*/
-
-function next() {
-    console.log('next');
-}
-
-function prev() {
-    console.log('next');
-}
-
-function onDatepickerClick(e) {
-    console.log('onDatepickerClick', e);
-}
