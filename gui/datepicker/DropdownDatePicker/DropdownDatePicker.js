@@ -28,7 +28,7 @@ class DropdownDatePicker {
             this.hideDatePicker();
         } else {
             const date = this.getDate();
-            console.log('date:', date);
+            // console.log('date:', date);
             if (date) {
                 this.datePicker.setYearMonth(date[0], date[1]);
             } else {
@@ -76,7 +76,7 @@ class DropdownDatePicker {
                 parseInt(ie.dataset.year),
                 parseInt(ie.dataset.month),
                 parseInt(ie.dataset.date)
-            ]
+            ];
         }
         return null;
     }
