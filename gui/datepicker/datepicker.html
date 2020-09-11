@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>datepicker</title>
-    <link rel="stylesheet" href="datepicker.css">
+    <link rel="stylesheet" href="DropdownDatePicker.css">
+    <link rel="stylesheet" href="DatePicker.css">
     <script src="DatePicker.js"></script>
+    <script src="DropdownDatePicker.js"></script>
     <script src="datepicker.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: small;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="dropdown">
-        <button class="dropbtn" onclick="onClick(event)" onblur="onBlur(event)">date</button>
-        <table id="datepicker1" class="dropdown-content" cellspacing="0" cellpadding="0">
+    <div class="DropdownDatePicker">
+        <button onclick="onClick(event)" onblur="onBlur(event)">date</button>
+        <table id="datepicker1" class="DatePicker" cellspacing="0" cellpadding="0">
             <caption>
                 <div style="display: flex; justify-content: space-between; /*align-items: center;*/">
                     <a class="prev"> < </a>

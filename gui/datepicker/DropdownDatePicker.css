@@ -1,0 +1,22 @@
+.DropdownDatePicker {
+    position: relative;
+    display: inline-block;
+}
+.DropdownDatePicker > button {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.DropdownDatePicker > table.DatePicker {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.DropdownDatePicker > table.DatePicker.show {
+    display: block;
+}
