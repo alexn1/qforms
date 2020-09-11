@@ -12,6 +12,9 @@ class DatePicker {
         this.el = el;
         this.year = null;
         this.month = null;
+        this.selectedYear = null;
+        this.selectedMonth = null;
+        this.selectedDate = null;
         this.onDateSelected = null;
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
@@ -36,7 +39,10 @@ class DatePicker {
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset);
         if (this.onDateSelected) {
-            const date = new Date(parseInt(target.dataset.year), parseInt(target.dataset.month), parseInt(target.dataset.date));
+            this.selectedYear = parseInt(target.dataset.year);
+            this.selectedMonth = parseInt(target.dataset.month);
+            this.selectedDate = parseInt(target.dataset.date);
+            const date = new Date(this.selectedYear, this.selectedMonth, this.selectedDate);
             // console.log('date:', date);
             this.onDateSelected(date);
         }
@@ -76,6 +82,10 @@ class DatePicker {
         let day = date.getDay() - 1;
         if (day === -1) day = 6;
         return day;
+    }
+
+    isDateSelected() {
+        return this.selectedYear !== null && this.selectedMonth && this.selectedDate;
     }
 
     setYearMonth(year, month) {
@@ -118,6 +128,11 @@ class DatePicker {
                 tds[i].classList.add('today');
             } else {
                 tds[i].classList.remove('today');
+            }
+            if (date.getFullYear() === this.selectedYear && date.getMonth() === this.selectedMonth && date.getDate() === this.selectedDate) {
+                tds[i].classList.add('selected');
+            } else {
+                tds[i].classList.remove('selected');
             }
             date.setDate(date.getDate() + 1);
         }

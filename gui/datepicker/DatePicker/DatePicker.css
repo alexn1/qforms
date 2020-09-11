@@ -36,6 +36,11 @@ td.selectable {
     cursor: pointer;
     background-color: #f7e1b5;
 }
+td.selected {
+    background-color: #eea236;
+}
+
 td.selectable:hover {
-    background-color: #afd9ee;
+    background-color: #ff9e59;
+
 }
