@@ -1,12 +1,6 @@
 'use strict';
 
 class FieldController extends ModelController {
-    constructor(model, parent) {
-        super(model);
-        this.parent = parent;
-        this.views  = new Map();    // list of all views that controlled by this field
-        this.html   = null;
-    }
 
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName());
@@ -19,6 +13,13 @@ class FieldController extends ModelController {
             obj = eval(`new ${model.data.class}Controller(model, parent);`);
         }
         return obj;
+    }
+
+    constructor(model, parent) {
+        super(model);
+        this.parent = parent;
+        this.views  = new Map();    // list of all views that controlled by this field
+        this.html   = null;
     }
 
     init() {
