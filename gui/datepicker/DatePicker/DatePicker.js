@@ -12,10 +12,8 @@ class DatePicker {
         this.el = el;
         this.year = null;
         this.month = null;
-        this.selectedYear = null;
-        this.selectedMonth = null;
-        this.selectedDate = null;
         this.onDateSelected = null;
+        this.selectedDate = null;
         this.minDate = null;
 
 
@@ -43,10 +41,7 @@ class DatePicker {
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset);
         if (this.onDateSelected) {
-            const year = parseInt(target.dataset.year);
-            const month = parseInt(target.dataset.month);
-            const date = parseInt(target.dataset.date);
-            this.setSelectedDate(year, month, date);
+            this.setSelectedDate(JSON.parse(target.dataset.date));
             this.onDateSelected(this.createSelectedDate());
         }
     }
@@ -88,25 +83,20 @@ class DatePicker {
     }
 
     isDateSelected() {
-        return this.selectedYear !== null && this.selectedMonth !== null && this.selectedDate !== null;
+        return this.selectedDate !== null;
     }
 
-    setSelectedDate(year, month, date) {
-        this.selectedYear = year;
-        this.selectedMonth = month;
-        this.selectedDate = date;
+    setSelectedDate(arr) {
+        this.selectedDate = arr;
     }
 
     getSelectedDate() {
-        if (this.isDateSelected()) {
-            return [this.selectedYear, this.selectedMonth, this.selectedDate];
-        }
-        return null;
+        return this.selectedDate;
     }
 
     createSelectedDate() {
         if (!this.isDateSelected()) throw new Error('date not selected');
-        return new Date(this.selectedYear, this.selectedMonth, this.selectedDate);
+        return new Date(this.selectedDate[0], this.selectedDate[1], this.selectedDate[2]);
     }
 
     setYearMonth(year, month) {
@@ -133,9 +123,7 @@ class DatePicker {
         const tds = this.el.querySelectorAll('td');
         for (let i = 0; i < 42; i++) {
             tds[i].innerText = date.getDate().toString();
-            tds[i].dataset.year = date.getFullYear();
-            tds[i].dataset.month = date.getMonth();
-            tds[i].dataset.date = date.getDate();
+            tds[i].dataset.date = JSON.stringify([date.getFullYear(), date.getMonth(), date.getDate()]);
             if (date.getMonth() !== month) {
                 tds[i].classList.add('out');
             } else {
