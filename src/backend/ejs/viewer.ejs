@@ -31,7 +31,7 @@
     });%>
     <!-- app links end -->
     <script>
-    $(document).ready(() => {
+    document.addEventListener('DOMContentLoaded', () => {
         const data = <%-JSON.stringify(data, null, 4)%>;
         new QForms(data);
         new ViewerController(data).init();
