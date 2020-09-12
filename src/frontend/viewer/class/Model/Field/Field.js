@@ -75,15 +75,18 @@ class Field extends Model {
 
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
-        let value;
         if (this.data.column) {
-            value = this.getForm().getDataSource().getValue(row, this.data.column);
+            let value = this.getForm().getDataSource().getValue(row, this.data.column);
+            const type = this.getColumnType();
+            if (type === 'date' && value !== null) {
+                value = new Date(value);
+            }
+            return value;
         } else if (this.data.value) {
-            value = eval(this.data.value);
+            return eval(this.data.value);
         } else {
             throw new Error(`no column and no value in field: ${this.getFullName()}`);
         }
-        return value;
     }
 
     getFullName() {
