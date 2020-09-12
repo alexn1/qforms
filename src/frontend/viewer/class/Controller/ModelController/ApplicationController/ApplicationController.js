@@ -15,30 +15,26 @@ class ApplicationController extends ModelController {
     constructor(model, view) {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
-        this.view      = view;
-        this.appTC     = null;
-        this.statusbar = null;
+        this.view       = view;
+        this.appTC      = null;
+        this.statusbar  = null;
         this.lastPageId = 0;
     }
 
     init() {
         console.log('ApplicationController.init');
 
-        // appTC
-        this.appTC = new TabWidget(this.view.querySelector('#appTC'));
-        this.appTC.init();
-        this.appTC.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-        this.appTC.on('tabShow', this.listeners.tabShow = this.onTabShow.bind(this));
-        this.appTC.on('tabHide', this.listeners.tabHide = this.onTabHide.bind(this));
-
         // app
         this.model.on('logout'      , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request'     , this.listeners.request = this.onRequest.bind(this));
 
-        // statusbar
-        this.statusbar = this.view.querySelector('#statusbar');
+        this.initMenu();
+        this.initStatusbar();
+        this.initTab();
+        this.createPages();
+    }
 
-        // menu
+    initMenu() {
         for (const name in this.model.data.menu) {
             const menu = this.model.data.menu[name];
             menu.forEach(submenu => {
@@ -57,8 +53,21 @@ class ApplicationController extends ModelController {
         $(this.view).find('#menu-logout').click(() => {
             this.model.logout();
         });
+    }
 
-        // pages
+    initStatusbar() {
+        this.statusbar = this.view.querySelector('#statusbar');
+    }
+
+    initTab() {
+        this.appTC = new TabWidget(this.view.querySelector('#appTC'));
+        this.appTC.init();
+        this.appTC.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
+        this.appTC.on('tabShow'         , this.listeners.tabShow = this.onTabShow.bind(this));
+        this.appTC.on('tabHide'         , this.listeners.tabHide = this.onTabHide.bind(this));
+    }
+
+    createPages() {
         for (const name in this.model.data.pages) {
             const page = new Page({
                 app : this.model,
@@ -69,7 +78,6 @@ class ApplicationController extends ModelController {
             // notify subscribers (view), that page is opened
             this.onPageOpened({source: this, page: page, track: false, select: false});
         }
-
     }
 
     deinit() {
@@ -140,7 +148,9 @@ class ApplicationController extends ModelController {
 
     onRequest(e) {
         // console.log('onRequest', e);
-        this.statusbar.innerHTML = `Last query time: ${e.time} ms`;
+        if (this.statusbar) {
+            this.statusbar.innerHTML = `Last query time: ${e.time} ms`;
+        }
     }
 
     closePage(pageController) {
