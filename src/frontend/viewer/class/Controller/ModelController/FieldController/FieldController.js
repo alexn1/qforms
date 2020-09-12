@@ -64,12 +64,6 @@ class FieldController extends ModelController {
         }
     }
 
-    getValue(view) {
-        // console.log('FieldController.getValue', this.model.getFullName());
-        const stringValue = this.getStringValue(view);
-        return this.stringToValue(stringValue);
-    }
-
     getStringValue(view) {
         switch (this.model.getForm().getClassName()) {
             case 'RowForm'  : return view.firstElementChild.value;
@@ -127,7 +121,14 @@ class FieldController extends ModelController {
     setValue(value, view) {
         console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         this.setPlaceHolder(value, view);
-        this.setStringValue(this.valueToString(value), view);
+        const stringValue = this.valueToString(value);
+        this.setStringValue(stringValue, view);
+    }
+
+    getValue(view) {
+        // console.log('FieldController.getValue', this.model.getFullName());
+        const stringValue = this.getStringValue(view);
+        return this.stringToValue(stringValue);
     }
 
     setViewStyle(view, row) {
