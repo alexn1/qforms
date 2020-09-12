@@ -27,7 +27,8 @@ class DropdownDatePicker {
             this.hideDatePicker();
         } else {
             if (this.datePicker.isDateSelected()) {
-                this.datePicker.setYearMonth(this.datePicker.selectedYear, this.datePicker.selectedMonth);
+                const d = this.datePicker.getSelectedDate();
+                this.datePicker.setYearMonth(d[0], d[1]);
             } else {
                 this.datePicker.setYearMonth();
             }

@@ -18,6 +18,7 @@ class DatePicker {
         this.onDateSelected = null;
         this.minDate = null;
 
+
         // events
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
@@ -42,12 +43,11 @@ class DatePicker {
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset);
         if (this.onDateSelected) {
-            this.selectedYear = parseInt(target.dataset.year);
-            this.selectedMonth = parseInt(target.dataset.month);
-            this.selectedDate = parseInt(target.dataset.date);
-            const date = new Date(this.selectedYear, this.selectedMonth, this.selectedDate);
-            // console.log('date:', date);
-            this.onDateSelected(date);
+            const year = parseInt(target.dataset.year);
+            const month = parseInt(target.dataset.month);
+            const date = parseInt(target.dataset.date);
+            this.setSelectedDate(year, month, date);
+            this.onDateSelected(this.createSelectedDate());
         }
     }
 
@@ -97,11 +97,23 @@ class DatePicker {
         this.selectedDate = date;
     }
 
+    getSelectedDate() {
+        if (this.isDateSelected()) {
+            return [this.selectedYear, this.selectedMonth, this.selectedDate];
+        }
+        return null;
+    }
+
+    createSelectedDate() {
+        if (!this.isDateSelected()) throw new Error('date not selected');
+        return new Date(this.selectedYear, this.selectedMonth, this.selectedDate);
+    }
+
     setYearMonth(year, month) {
         console.log('DatePicker.setYearMonth', year, month);
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const selectedDate = this.isDateSelected() ? new Date(this.selectedYear, this.selectedMonth, this.selectedDate) : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         if (year === undefined) year = today.getFullYear();
         if (month === undefined) month = today.getMonth();
         this.year = year;
