@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownDatePicker2.datePicker.setMinDate([date.getFullYear(), date.getMonth(), date.getDate() + 1]);
         if (dropdownDatePicker2.datePicker.isDateSelected()) {
             const secondDate = dropdownDatePicker2.datePicker.createSelectedDate();
-            if (secondDate.getTime() < date.getTime()) {
+            if (secondDate.getTime() <= date.getTime()) {
                 dropdownDatePicker2.clear();
             }
         }
