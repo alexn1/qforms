@@ -9,6 +9,10 @@ class Model extends EventEmitter {
         this.listeners = {};
     }
 
+    init() {
+
+    }
+
     getClassName() {
         return this.data.class;
     }

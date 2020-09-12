@@ -22,9 +22,10 @@ class ApplicationController extends ModelController {
     }
 
     constructor(model, view) {
+        // console.log('ApplicationController.constructor', model, view);
         super(model);
-        this.view  = view;
-        this.appTC = null;
+        this.view      = view;
+        this.appTC     = null;
         this.statusbar = null;
         this.lastPageId = 0;
     }
@@ -40,7 +41,7 @@ class ApplicationController extends ModelController {
         this.appTC.on('tabHide', this.listeners.tabHide = this.onTabHide.bind(this));
 
         // app
-        this.model.on('logout'      , this.listeners.logout = this.onLogout.bind(this));
+        this.model.on('logout'      , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request'     , this.listeners.request = this.onRequest.bind(this));
 
         // statusbar
@@ -68,7 +69,6 @@ class ApplicationController extends ModelController {
 
         // pages
         for (const name in this.model.data.pages) {
-
             const page = new Page({
                 app : this.model,
                 data: this.model.data.pages[name]
