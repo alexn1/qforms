@@ -8,7 +8,7 @@ const months = [
 
 class DatePicker {
     constructor(el) {
-        console.log('DatePicker.constructor', el);
+        // console.log('DatePicker.constructor', el);
         this.el = el;
         this.year = null;
         this.month = null;
@@ -100,7 +100,7 @@ class DatePicker {
     }
 
     setYearMonth(year, month) {
-        console.log('DatePicker.setYearMonth', year, month);
+        // console.log('DatePicker.setYearMonth', year, month);
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;

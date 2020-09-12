@@ -1,12 +1,13 @@
 class DropdownDatePicker {
     constructor(el) {
-        console.log('DropdownDatePicker.constructor', el);
+        // console.log('DropdownDatePicker.constructor', el);
         this.el = el;
         this.datePicker = null;
+        this.onChange = null;
     }
 
     init() {
-        console.log('DropdownDatePicker.init');
+        // console.log('DropdownDatePicker.init');
         this.datePicker = new DatePicker(this.getDatePickerElement());
         this.getInputElement().addEventListener('click', this.onInputClick.bind(this));
         this.getInputElement().addEventListener('blur', this.onButtonBlur.bind(this));
@@ -59,6 +60,14 @@ class DropdownDatePicker {
         // console.log('DropdownDatePicker.onDateSelected', date);
         this.hideDatePicker();
         this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        if (this.onChange) {
+            this.onChange(date);
+        }
+    }
+
+    clear() {
+        this.getInputElement().value = '';
+        this.datePicker.setSelectedDate(null);
     }
 
 }
