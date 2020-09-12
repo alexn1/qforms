@@ -1,0 +1,17 @@
+.test {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr 20px;
+}
+.test #statusbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.test.standard #appTC {
+  background-color: lightgray;
+}
+.test.standard #statusbar {
+  background-color: #eee;
+  padding-left: 5px;
+  font-size: small;
+}
