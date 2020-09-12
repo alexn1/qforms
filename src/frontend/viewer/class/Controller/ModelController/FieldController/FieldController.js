@@ -173,7 +173,6 @@ class FieldController extends ModelController {
         if (valid) {
             const value = this.getValue(view);
             const newValue = this.model.setValue(row, value);
-            // this.setValue(newValue, view);
             this.setPlaceHolder(newValue, view);
         }
         this.updateErrorClass(view, valid);

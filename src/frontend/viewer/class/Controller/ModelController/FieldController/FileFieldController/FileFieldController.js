@@ -37,12 +37,4 @@ class FileFieldController extends FieldController {
         }
     }
 
-    // onChange(el) {
-    //     const view = el.parentNode;
-    //     if (this.isValid(view)) {
-    //     }
-    //     this.model.setValue(view.dbRow, this.getValue(view));
-    //     this.emit('change', {source: this, view: view, row: view.dbRow, el: el, field: this});
-    // }
-
 }

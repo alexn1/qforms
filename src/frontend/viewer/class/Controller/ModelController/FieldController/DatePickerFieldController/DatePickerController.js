@@ -53,14 +53,6 @@ class DatePickerFieldController extends FieldController {
     //     return isValid;
     // }
 
-    // onChange(el) {
-    //     const view = el.parentNode;
-    //     if (this.isValid(view)) {
-    //         this.model.setValue(view.dbRow, this.getValue(view));
-    //         this.emit('change', {source: this, view: view, row: view.dbRow, el: el, field: this});
-    //     }
-    // }
-
     // setValue(value, view) {
     //     let text = value;
     //     let placeholder = 'YYYY-MM-DD';
