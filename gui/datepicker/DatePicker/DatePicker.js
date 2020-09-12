@@ -71,7 +71,27 @@ class DatePicker {
         const arr = this.getSelectedMonth();
         const prev = new Date(arr[0], arr[1]);
         prev.setMonth(prev.getMonth() - 1);
-        this.selectMonth(prev.getFullYear(), prev.getMonth());
+        if (this.isMonthAllowed(prev)) {
+            this.selectMonth(prev.getFullYear(), prev.getMonth());
+        } else {
+            console.error('month not allowed:', prev);
+        }
+    }
+
+    isPrevAllowed() {
+        if (!this.isMonthSelected()) throw new Error('month not selected');
+        const arr = this.getSelectedMonth();
+        const prev = new Date(arr[0], arr[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+    }
+
+    isMonthAllowed(month) {
+        if (this.minDate !== null) {
+            const minMonth = new Date(this.minDate[0], this.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return false;
     }
 
     getCaption() {
@@ -120,9 +140,17 @@ class DatePicker {
         const minDate = this.minDate !== null ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
 
+
         if (year === undefined) year = today.getFullYear();
         if (month === undefined) month = today.getMonth();
         this.setSelectedMonth([year, month]);
+
+        if (this.isPrevAllowed()) {
+            this.getPrev().classList.add('enabled');
+        } else {
+            this.getPrev().classList.remove('enabled');
+        }
+        this.getNext().classList.add('enabled');
 
         const date = new Date(year, month, 1); // first day of month
         let day = DatePicker.getDay(date);

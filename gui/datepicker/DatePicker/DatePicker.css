@@ -17,7 +17,14 @@ table > caption {
     padding: 6px;
     cursor: default;
 }
-caption a:hover {
+caption > div > a {
+    visibility: hidden;
+}
+caption > div > a.enabled {
+    visibility: visible;
+}
+
+caption > div > a:hover {
     background-color: #eee;
     cursor: pointer;
 }
@@ -39,8 +46,6 @@ td.selectable {
 td.selected {
     background-color: #eea236;
 }
-
 td.selectable:hover {
     background-color: #ff9e59;
-
 }
