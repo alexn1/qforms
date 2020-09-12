@@ -1,0 +1,16 @@
+{
+    "@class": "Application",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "test",
+        "caption": "test",
+        "authentication": "false",
+        "user": "admin",
+        "password": "admin",
+        "lang": "en",
+        "theme": "standard"
+    },
+    "env": {},
+    "databases": {},
+    "pageLinks": {}
+}
