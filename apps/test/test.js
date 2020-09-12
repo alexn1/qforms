@@ -9,6 +9,11 @@ class testController extends ApplicationController {
         super.init();
     }
 
+    initMenu() {}
+    initStatusbar() {}
+    initTab() {}
+    createPages() {}
+
     deinit() {
         super.deinit();
     }
