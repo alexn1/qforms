@@ -54,8 +54,7 @@ class Field extends Model {
     valueToParams(row) {
         // console.log('Field.valueToParams', this.getName());
         if (this.data.column) {
-            const fullName = this.getFullName();
-            this.getForm().getPage().params[fullName] = this.getValue(row);
+            this.getForm().getPage().params[this.getFullName()] = this.getValue(row);
         }
     }
 
