@@ -3,11 +3,11 @@
 class ApplicationController extends ModelController {
 
     static create(model, view) {
-        console.log('ApplicationController.create');
+        // console.log('ApplicationController.create');
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            new CustomClass(model, view);
+            return new CustomClass(model, view);
         }
         return eval(`new ${model.getClassName()}Controller(model, view)`);
     }
@@ -22,7 +22,7 @@ class ApplicationController extends ModelController {
     }
 
     init() {
-        console.log('ApplicationController.init');
+        // console.log('ApplicationController.init');
 
         // app
         this.model.on('logout'      , this.listeners.logout  = this.onLogout.bind(this));

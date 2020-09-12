@@ -1,11 +1,12 @@
 class testController extends ApplicationController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-    }
+    }*/
 
     init() {
+        console.log('testController.init');
         super.init();
     }
 
