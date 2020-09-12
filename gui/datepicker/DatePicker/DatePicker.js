@@ -1,11 +1,3 @@
-const months = [
-    'Январь', 'Февраль',
-    'Март', 'Апрель', 'Май',
-    'Июнь', 'Июль', 'Август',
-    'Сентябрь', 'Октябрь', 'Ноябрь',
-    'Декабрь'
-];
-
 class DatePicker {
     constructor(el) {
         // console.log('DatePicker.constructor', el);
@@ -14,6 +6,14 @@ class DatePicker {
         this.selectedDate = null;
         this.minDate = null;
         this.onDateSelected = null;         // event
+
+        this.MONTH = [
+            'Январь', 'Февраль',
+            'Март', 'Апрель', 'Май',
+            'Июнь', 'Июль', 'Август',
+            'Сентябрь', 'Октябрь', 'Ноябрь',
+            'Декабрь'
+        ];
 
         // events
         this.el.addEventListener('click', this.onClick.bind(this));
@@ -161,7 +161,7 @@ class DatePicker {
         }
 
         // caption
-        this.getCaption().innerText = `${months[month]}, ${year}`;
+        this.getCaption().innerText = `${this.MONTH[month]}, ${year}`;
 
         // days
         const tds = this.el.querySelectorAll('td');
