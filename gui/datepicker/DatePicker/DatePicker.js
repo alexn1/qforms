@@ -16,6 +16,9 @@ class DatePicker {
         this.selectedMonth = null;
         this.selectedDate = null;
         this.onDateSelected = null;
+        this.minDate = null;
+
+        // events
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
             // console.log('mousedown', e);
@@ -85,7 +88,7 @@ class DatePicker {
     }
 
     isDateSelected() {
-        return this.selectedYear !== null && this.selectedMonth && this.selectedDate;
+        return this.selectedYear !== null && this.selectedMonth !== null && this.selectedDate !== null;
     }
 
     setSelectedDate(year, month, date) {
@@ -98,6 +101,7 @@ class DatePicker {
         console.log('DatePicker.setYearMonth', year, month);
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const selectedDate = this.isDateSelected() ? new Date(this.selectedYear, this.selectedMonth, this.selectedDate) : null;
         if (year === undefined) year = today.getFullYear();
         if (month === undefined) month = today.getMonth();
         this.year = year;
@@ -125,7 +129,7 @@ class DatePicker {
             } else {
                 tds[i].classList.remove('out');
             }
-            if (date >= today) {
+            if (date.getTime() >= today.getTime()) {
                 tds[i].classList.add('selectable');
             } else {
                 tds[i].classList.remove('selectable');
@@ -135,12 +139,16 @@ class DatePicker {
             } else {
                 tds[i].classList.remove('today');
             }
-            if (date.getFullYear() === this.selectedYear && date.getMonth() === this.selectedMonth && date.getDate() === this.selectedDate) {
+            if (selectedDate !== null && date.getTime() === selectedDate.getTime()) {
                 tds[i].classList.add('selected');
             } else {
                 tds[i].classList.remove('selected');
             }
             date.setDate(date.getDate() + 1);
         }
+    }
+
+    setMinDate(year, month, date) {
+        this.minDate = [year, month, date];
     }
 }
