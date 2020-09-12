@@ -2,9 +2,9 @@
 
 class DatePickerFieldController extends FieldController {
 
-    constructor(model, parent) {
-        super(model, parent);
-    }
+    // constructor(model, parent) {
+    //     super(model, parent);
+    // }
 
     fill(row, view) {
         const self = this;

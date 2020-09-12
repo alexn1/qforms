@@ -1,9 +1,14 @@
 .standard .RowFormDatePickerFieldView {
     > input {
-        width: 100%;
+        width       : 100%;
+        height      : 20px;
+        border-width: 0;
+        padding     : 0 5px 0 5px;
+    }
+    &.changed > input {
+        color: blue;
     }
     > input[readonly] {
         background-color: lightgoldenrodyellow;
-        border-width: 1px;
     }
 }
