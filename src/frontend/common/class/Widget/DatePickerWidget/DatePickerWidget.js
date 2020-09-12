@@ -1,7 +1,9 @@
-class DatePicker {
+'use strict';
+
+class DatePickerWidget extends Widget{
     constructor(el) {
-        // console.log('DatePicker.constructor', el);
-        this.el = el;
+        console.log('DatePickerWidget.constructor', el);
+        super(el);
         this.selectedMonth = null;
         this.selectedDate = null;
         this.minDate = null;
@@ -26,7 +28,7 @@ class DatePicker {
     }
 
     onClick(e) {
-        // console.log('DatePicker.onClick', e);
+        // console.log('DatePickerWidget.onClick', e);
         if (e.target === this.getNext()) {
             return this.onNext();
         } else if (e.target === this.getPrev()) {
@@ -37,7 +39,7 @@ class DatePicker {
     }
 
     onDateClick(target) {
-        // console.log('DatePicker.onDateClick', target.dataset);
+        // console.log('DatePickerWidget.onDateClick', target.dataset);
         if (this.onDateSelected) {
             this.setSelectedDate(JSON.parse(target.dataset.date));
             this.onDateSelected(this.createSelectedDate());
@@ -57,7 +59,7 @@ class DatePicker {
     }
 
     onNext() {
-        // console.log('DatePicker.onNext');
+        // console.log('DatePickerWidget.onNext');
         if (!this.isMonthSelected()) throw new Error('month not selected');
         const arr = this.getSelectedMonth();
         const next = new Date(arr[0], arr[1]);
@@ -66,7 +68,7 @@ class DatePicker {
     }
 
     onPrev() {
-        // console.log('DatePicker.onPrev');
+        // console.log('DatePickerWidget.onPrev');
         if (!this.isMonthSelected()) throw new Error('month not selected');
         const arr = this.getSelectedMonth();
         const prev = new Date(arr[0], arr[1]);
@@ -135,8 +137,8 @@ class DatePicker {
     }
 
     selectMonth(year, month) {
-        // console.log('DatePicker.selectMonth', year, month);
-        const today = DatePicker.getToday();
+        // console.log('DatePickerWidget.selectMonth', year, month);
+        const today = DatePickerWidget.getToday();
         const minDate = this.minDate !== null ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
 
@@ -153,7 +155,7 @@ class DatePicker {
         this.getNext().classList.add('enabled');
 
         const date = new Date(year, month, 1); // first day of month
-        let day = DatePicker.getDay(date);
+        let day = DatePickerWidget.getDay(date);
         if (day === 0) {
             date.setDate(date.getDate() - 7);            // first day of table
         } else {
