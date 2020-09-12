@@ -1,7 +1,7 @@
 .test {
   height: 100%;
   display: grid;
-  grid-template-rows: min-content 1fr 20px;
+  grid-template-rows: min-content 1fr 1fr 20px;
 }
 .test #statusbar {
   display: grid;

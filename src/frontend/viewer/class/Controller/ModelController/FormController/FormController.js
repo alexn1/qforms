@@ -1,25 +1,23 @@
 'use strict';
 
 class FormController extends ModelController {
+
+    static create(model, view, parent) {
+        // console.log('FormController.create', model.getFullName());
+        if (model.data.js) {
+            const CustomClass = eval(model.data.js);
+            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
+            return new CustomClass(model, view, parent);
+        }
+        return eval(`new ${model.data.class}Controller(model, view, parent);`);
+    }
+
     constructor(model, view, parent) {
         super(model);
         this.view     = view;
         this.parent   = parent;
         this.fields   = {};
         this.controls = {};
-    }
-
-    static create(model, view, parent) {
-        // console.log('FormController.create', model.getFullName());
-        let obj;
-        if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            obj = new CustomClass(model, view, parent);
-        } else {
-            obj = eval(`new ${model.data.class}Controller(model, view, parent);`);
-        }
-        return obj;
     }
 
     init() {

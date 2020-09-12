@@ -1,6 +1,17 @@
 'use strict';
 
 class PageController extends ModelController {
+
+    static create(model, view, parent) {
+        // console.log('PageController.create', model.getName());
+        if (model.data.js) {
+            const CustomClass = eval(model.data.js);
+            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
+            return new CustomClass(model, view, parent);
+        }
+        return eval(`new ${model.data.class}Controller(model, view, parent)`);
+    }
+
     constructor(model, view, parent) {
         //console.log('PageController.constructor', model);
         super(model);
@@ -9,26 +20,6 @@ class PageController extends ModelController {
         this.captionEls = null;
         this.forms      = {};
         this.tab        = null;
-    }
-
-    static create(model, view, parent) {
-        // console.log('PageController.create', model.getName());
-        const general = `new ${model.data.class}Controller(model, view, parent)`;
-        let obj;
-        if (model.data.js) {
-            const customClassName = `${model.getName()}Controller`;
-            const typeOfCustomClass = `typeof ${customClassName}`;
-            const custom =  `new ${customClassName}(model, view, parent)`;
-            if (eval(typeOfCustomClass) === 'function') {
-                obj = eval(custom);
-            } else {
-                $.globalEval(model.data.js);
-                obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
-            }
-        } else {
-            obj = eval(general);
-        }
-        return obj;
     }
 
     init() {

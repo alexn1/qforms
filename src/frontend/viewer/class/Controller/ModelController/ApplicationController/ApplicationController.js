@@ -3,22 +3,13 @@
 class ApplicationController extends ModelController {
 
     static create(model, view) {
-        const general = `new ${model.getClassName()}Controller(model, view)`;
-        let obj;
+        console.log('ApplicationController.create');
         if (model.data.js) {
-            const customClassName   = `${model.getName()}Controller`;
-            const custom            = `new ${customClassName}(model, view)`;
-            const typeOfCustomClass = `typeof ${customClassName}`;
-            if (eval(typeOfCustomClass) === 'function') {
-                obj = eval(custom);
-            } else {
-                $.globalEval(model.data.js);
-                obj = (eval(typeOfCustomClass) === 'function') ? eval(custom) : eval(general);
-            }
-        } else {
-            obj = eval(general);
+            const CustomClass = eval(model.data.js);
+            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
+            new CustomClass(model, view);
         }
-        return obj;
+        return eval(`new ${model.getClassName()}Controller(model, view)`);
     }
 
     constructor(model, view) {
