@@ -102,8 +102,6 @@ class FieldController extends ModelController {
                 view.firstElementChild.placeholder = 'null';
             } else if (value === '') {
                 view.firstElementChild.placeholder = 'empty string';
-            } else {
-                view.firstElementChild.placeholder = this.valueToString(value);
             }
         }
     }
