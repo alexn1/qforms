@@ -73,7 +73,7 @@ class FieldController extends ModelController {
 
     getStringValue(view) {
         switch (this.model.getForm().getClassName()) {
-            case 'RowForm': return view.firstElementChild.value;
+            case 'RowForm'  : return view.firstElementChild.value;
             case 'TableForm': return view.firstElementChild.innerHTML;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
@@ -81,8 +81,8 @@ class FieldController extends ModelController {
 
     setStringValue(stringValue, view) {
         switch (this.model.getForm().getClassName()) {
-            case 'RowForm':view.firstElementChild.value = stringValue;break;
-            case 'TableForm':view.firstElementChild.innerHTML = stringValue;break;
+            case 'RowForm'  : view.firstElementChild.value     = stringValue; break;
+            case 'TableForm': view.firstElementChild.innerHTML = stringValue; break;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
