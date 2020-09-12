@@ -104,6 +104,8 @@ class DatePicker {
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        const minDate = this.minDate !== null ? this.createMinDate() : null;
+
         if (year === undefined) year = today.getFullYear();
         if (month === undefined) month = today.getMonth();
         this.year = year;
@@ -129,10 +131,10 @@ class DatePicker {
             } else {
                 tds[i].classList.remove('out');
             }
-            if (date.getTime() >= today.getTime()) {
-                tds[i].classList.add('selectable');
-            } else {
+            if (minDate !== null && date.getTime() < minDate.getTime()) {
                 tds[i].classList.remove('selectable');
+            } else {
+                tds[i].classList.add('selectable');
             }
             if (date.getTime() === today.getTime()) {
                 tds[i].classList.add('today');
@@ -148,7 +150,12 @@ class DatePicker {
         }
     }
 
-    setMinDate(year, month, date) {
-        this.minDate = [year, month, date];
+    setMinDate(arr) {
+        this.minDate = arr;
+    }
+
+    createMinDate() {
+        if (!this.minDate) throw new Error('no min date');
+        return new Date(this.minDate[0], this.minDate[1], this.minDate[2]);
     }
 }
