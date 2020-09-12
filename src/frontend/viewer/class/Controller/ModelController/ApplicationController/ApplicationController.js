@@ -1,21 +1,14 @@
 'use strict';
 
 class ApplicationController extends ModelController {
-    constructor(model, view) {
-        super(model);
-        this.view  = view;
-        this.appTC = null;
-        this.statusbar = null;
-        this.lastPageId = 0;
-    }
 
     static create(model, view) {
-        const customClassName   = `${model.getName()}Controller`;
-        const typeOfCustomClass = 'typeof({customClassName})'.replace('{customClassName}', customClassName);
-        const custom            = 'new {customClassName}(model, view)'.replace('{customClassName}', customClassName);
-        const general           = 'new {class}Controller(model, view)'.replace('{class}', model.getClassName());
+        const general = `new ${model.getClassName()}Controller(model, view)`;
         let obj;
-        if (model.data.js !== undefined) {
+        if (model.data.js) {
+            const customClassName   = `${model.getName()}Controller`;
+            const custom            = `new ${customClassName}(model, view)`;
+            const typeOfCustomClass = `typeof ${customClassName}`;
             if (eval(typeOfCustomClass) === 'function') {
                 obj = eval(custom);
             } else {
@@ -26,6 +19,14 @@ class ApplicationController extends ModelController {
             obj = eval(general);
         }
         return obj;
+    }
+
+    constructor(model, view) {
+        super(model);
+        this.view  = view;
+        this.appTC = null;
+        this.statusbar = null;
+        this.lastPageId = 0;
     }
 
     init() {

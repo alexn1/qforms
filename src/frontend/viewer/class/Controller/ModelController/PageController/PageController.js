@@ -13,12 +13,12 @@ class PageController extends ModelController {
 
     static create(model, view, parent) {
         // console.log('PageController.create', model.getName());
-        const customClassName = `${model.getName()}Controller`;
-        const typeOfCustomClass = `typeof ${customClassName}`;
-        const custom =  `new ${customClassName}(model, view, parent)`;
         const general = `new ${model.data.class}Controller(model, view, parent)`;
         let obj;
-        if (model.data.js !== undefined) {
+        if (model.data.js) {
+            const customClassName = `${model.getName()}Controller`;
+            const typeOfCustomClass = `typeof ${customClassName}`;
+            const custom =  `new ${customClassName}(model, view, parent)`;
             if (eval(typeOfCustomClass) === 'function') {
                 obj = eval(custom);
             } else {
