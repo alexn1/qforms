@@ -107,6 +107,7 @@ class FieldController extends ModelController {
     }
 
     valueToString(value) {
+        // console.log('FieldController.valueToString', this.model.getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string': return value;
             case 'object':
@@ -122,7 +123,7 @@ class FieldController extends ModelController {
     }
 
     setValue(value, view) {
-        // console.log('FieldController.setValue', this.model.getFullName());
+        console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         this.setPlaceHolder(value, view);
         this.setStringValue(this.valueToString(value), view);
     }

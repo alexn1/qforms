@@ -29,4 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
     box.onmouseup = () => {
         console.log('up');
     }
+
+    const isoString = '2020-09-04T17:00:00.000Z';
+    const date = new Date(isoString);
+    console.log('date:', date);
+
+    console.log('date.toString():', date.toString());
+    console.log('JSON.stringify(date):', JSON.stringify(date));
+
 });

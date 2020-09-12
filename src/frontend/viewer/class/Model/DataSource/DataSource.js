@@ -61,7 +61,7 @@ class DataSource extends Model {
 
     getColumnType(column) {
         // console.log('DataSource.getColumnType', this.getClassName(), column);
-        return 'string';
+        throw new Error('DataSource column type not implemented');
     }
 
     getNewValue(row, column, value) {
