@@ -66,9 +66,8 @@ class FieldController extends ModelController {
 
     getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
-        const getStringValue = this.getStringValue(view);
-        if (this.model.getColumnType() === 'object') return this.parseValue(getStringValue);
-        return getStringValue;
+        const stringValue = this.getStringValue(view);
+        return this.stringToValue(stringValue);
     }
 
     getStringValue(view) {
@@ -87,12 +86,6 @@ class FieldController extends ModelController {
         }
     }
 
-    parseValue(value) {
-        // console.log('FieldController.parseValue', this.model.getFullName());
-        if (value.trim() === '') return null;
-        return JSON.parse(value);
-    }
-
     setPlaceHolder(value, view) {
         // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
@@ -109,7 +102,8 @@ class FieldController extends ModelController {
     valueToString(value) {
         // console.log('FieldController.valueToString', this.model.getFullName(), typeof value, value);
         switch (typeof value) {
-            case 'string': return value;
+            case 'string':
+                return value;
             case 'object':
                 if (value === null) return '';
                 return JSON.stringify(value, null, 4);
@@ -120,6 +114,14 @@ class FieldController extends ModelController {
                 return '';
             default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
         }
+    }
+
+    stringToValue(stringValue) {
+        if (stringValue.trim() === '') return null;
+        if (this.model.getColumnType() === 'object') {
+            return JSON.parse(stringValue);
+        }
+        return stringValue;
     }
 
     setValue(value, view) {
