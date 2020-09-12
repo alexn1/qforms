@@ -10,12 +10,10 @@ class DatePicker {
     constructor(el) {
         // console.log('DatePicker.constructor', el);
         this.el = el;
-        this.year = null;
-        this.month = null;
-        this.onDateSelected = null;
+        this.selectedMonth = null;
         this.selectedDate = null;
         this.minDate = null;
-
+        this.onDateSelected = null;         // event
 
         // events
         this.el.addEventListener('click', this.onClick.bind(this));
@@ -46,22 +44,34 @@ class DatePicker {
         }
     }
 
+    isMonthSelected() {
+        return this.selectedMonth !== null;
+    }
+
+    getSelectedMonth() {
+        return this.selectedMonth;
+    }
+
+    setSelectedMonth(arr) {
+        this.selectedMonth = arr;
+    }
+
     onNext() {
         // console.log('DatePicker.onNext');
-        if (this.year === null) throw new Error('no current year');
-        if (this.month === null) throw new Error('no current month');
-        const next = new Date(this.year, this.month);
+        if (!this.isMonthSelected()) throw new Error('month not selected');
+        const arr = this.getSelectedMonth();
+        const next = new Date(arr[0], arr[1]);
         next.setMonth(next.getMonth() + 1);
-        this.setYearMonth(next.getFullYear(), next.getMonth());
+        this.selectMonth(next.getFullYear(), next.getMonth());
     }
 
     onPrev() {
         // console.log('DatePicker.onPrev');
-        if (this.year === null) throw new Error('no current year');
-        if (this.month === null) throw new Error('no current month');
-        const next = new Date(this.year, this.month);
-        next.setMonth(next.getMonth() - 1);
-        this.setYearMonth(next.getFullYear(), next.getMonth());
+        if (!this.isMonthSelected()) throw new Error('month not selected');
+        const arr = this.getSelectedMonth();
+        const prev = new Date(arr[0], arr[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        this.selectMonth(prev.getFullYear(), prev.getMonth());
     }
 
     getCaption() {
@@ -99,17 +109,21 @@ class DatePicker {
         return new Date(this.selectedDate[0], this.selectedDate[1], this.selectedDate[2]);
     }
 
-    setYearMonth(year, month) {
-        // console.log('DatePicker.setYearMonth', year, month);
+    static getToday() {
         const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
+    selectMonth(year, month) {
+        // console.log('DatePicker.selectMonth', year, month);
+        const today = DatePicker.getToday();
         const minDate = this.minDate !== null ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
 
         if (year === undefined) year = today.getFullYear();
         if (month === undefined) month = today.getMonth();
-        this.year = year;
-        this.month = month;
+        this.setSelectedMonth([year, month]);
+
         const date = new Date(year, month, 1); // first day of month
         let day = DatePicker.getDay(date);
         if (day === 0) {
