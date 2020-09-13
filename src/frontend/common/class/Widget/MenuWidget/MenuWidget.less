@@ -1,9 +1,9 @@
 .MenuWidget {
   overflow: hidden;
   background-color: #333;
+  display: flex;
 
   > a {
-    float: left;
     font-size: 16px;
     color: white;
     text-align: center;
@@ -16,13 +16,12 @@
   }
 
   > .dropdown {
-    float: left;
     overflow: hidden;
 
     &:hover {
-      > .dropdown-content {
+      /*> .dropdown-content {
         display: block;
-      }
+      }*/
       > .dropbtn {
         background-color: red;
       }
@@ -47,16 +46,19 @@
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
       z-index: 1;
       > a {
-        float: none;
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
         text-align: left;
+        cursor: pointer;
 
         &:hover {
           background-color: #ddd;
         }
+      }
+      &.show {
+        display: block;
       }
     }
   }

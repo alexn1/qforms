@@ -25,8 +25,8 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.init');
 
         // app
-        this.model.on('logout'      , this.listeners.logout  = this.onLogout.bind(this));
-        this.model.on('request'     , this.listeners.request = this.onRequest.bind(this));
+        this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
+        this.model.on('request', this.listeners.request = this.onRequest.bind(this));
 
         this.initMenu();
         this.initStatusbar();
