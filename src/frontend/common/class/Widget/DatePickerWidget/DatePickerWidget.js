@@ -4,10 +4,11 @@ class DatePickerWidget extends Widget{
     constructor(el) {
         console.log('DatePickerWidget.constructor', el);
         super(el);
-        this.selectedMonth = null;
-        this.selectedDate = null;
-        this.minDate = null;
+        this.selectedMonth  = null;
+        this.selectedDate   = null;
+        this.minDate        = null;
         this.onDateSelected = null;         // event
+        this.onMouseDown    = null;
 
         this.MONTH = [
             'Январь', 'Февраль',
@@ -21,9 +22,12 @@ class DatePickerWidget extends Widget{
         this.el.addEventListener('click', this.onClick.bind(this));
         this.el.addEventListener('mousedown', (e) => {
             // console.log('mousedown', e);
-            e.preventDefault();
+            if (this.onMouseDown) {
+                return this.onMouseDown(e);
+            }
+            /*e.preventDefault();
             e.stopPropagation();
-            return false;
+            return false;*/
         });
     }
 
