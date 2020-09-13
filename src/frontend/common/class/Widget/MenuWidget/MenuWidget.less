@@ -3,31 +3,19 @@
   background-color: #333;
   display: flex;
 
-  > a {
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-
-    &:hover {
-      background-color: red;
-    }
-  }
-
-  > .dropdown {
+  > div {
     overflow: hidden;
 
-    &:hover {
-      /*> .dropdown-content {
-        display: block;
-      }*/
-      > .dropbtn {
+    &.show {
+      > button {
         background-color: red;
+      }
+      > div {
+        display: block;
       }
     }
 
-    > .dropbtn {
+    > button {
       font-size: 16px;
       border: none;
       outline: none;
@@ -36,9 +24,10 @@
       background-color: inherit;
       font-family: inherit; /* Important for vertical align on mobile phones */
       margin: 0; /* Important for vertical align on mobile phones */
+      cursor: pointer;
     }
 
-    > .dropdown-content {
+    > div {
       display: none;
       position: absolute;
       background-color: #f9f9f9;
@@ -56,9 +45,6 @@
         &:hover {
           background-color: #ddd;
         }
-      }
-      &.show {
-        display: block;
       }
     }
   }

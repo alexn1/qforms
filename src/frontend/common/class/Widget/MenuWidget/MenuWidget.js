@@ -4,22 +4,38 @@ class MenuWidget extends Widget {
     constructor(el) {
         console.log('MenuWidget.constructor', el);
         super(el);
-        const buttons = this.el.querySelectorAll('.dropdown > button');
-        buttons.forEach(button => {
-            button.addEventListener('click', this.onDropdownButtonClick.bind(this));
-            button.addEventListener('blur', this.onDropdownButtonBlur.bind(this));
+
+        // menus
+        this.el.querySelectorAll('div > button').forEach(button => {
+            button.addEventListener('click', this.onMenuClick.bind(this));
+            button.addEventListener('blur', this.onMenuBlur.bind(this));
+        });
+
+        // menu items
+        this.el.querySelectorAll('div > div > a').forEach(a => {
+            a.addEventListener('mousedown', this.onMenuItemMouseDown.bind(this));
+            a.addEventListener('click', this.onMenuItemClick.bind(this));
         });
     }
 
-    onDropdownButtonClick(event) {
-        console.log('onDropdownButtonClick:', event.target);
-        const dropdownContent = event.target.parentElement.querySelector('.dropdown-content');
-        dropdownContent.classList.add('show');
+    onMenuItemMouseDown(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
     }
 
-    onDropdownButtonBlur(event) {
-        console.log('onDropdownButtonBlur:', event.target);
-        const dropdownContent = event.target.parentElement.querySelector('.dropdown-content');
-        dropdownContent.classList.remove('show');
+    onMenuItemClick(event) {
+        console.log('MenuWidget.onMenuItemClick', event);
+        event.target.parentElement.parentElement.classList.remove('show');
+    }
+
+    onMenuClick(event) {
+        console.log('MenuWidget.onMenuClick:', event.target);
+        event.target.parentElement.classList.toggle('show');
+    }
+
+    onMenuBlur(event) {
+        console.log('MenuWidget.onMenuBlur:', event.target);
+        event.target.parentElement.classList.remove('show');
     }
 }
