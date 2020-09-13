@@ -16,9 +16,10 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
         this.view       = view;
+        this.menuWidget = null;
         this.appTC      = null;
         this.statusbar  = null;
-        this.lastPageId = 0;
+        this.lastPageId =    0;
     }
 
     init() {
@@ -35,6 +36,19 @@ class ApplicationController extends ModelController {
     }
 
     initMenu() {
+        const menuWidgetElement = this.view.querySelector('.MenuWidget');
+        if (menuWidgetElement) {
+            this.menuWidget = new MenuWidget(menuWidgetElement);
+            this.menuWidget.onClick = async a => {
+                try {
+                    await this.openPage({name: a.dataset.page});
+                } catch (err) {
+                    console.error(err);
+                    alert(err.message);
+                }
+            };
+        }
+        /*
         for (const name in this.model.data.menu) {
             const menu = this.model.data.menu[name];
             menu.forEach(submenu => {
@@ -52,7 +66,7 @@ class ApplicationController extends ModelController {
         // logout
         $(this.view).find('#menu-logout').click(() => {
             this.model.logout();
-        });
+        });*/
     }
 
     initStatusbar() {
