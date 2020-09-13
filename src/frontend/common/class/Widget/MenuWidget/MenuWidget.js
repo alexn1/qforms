@@ -27,7 +27,7 @@ class MenuWidget extends Widget {
 
     onMenuItemClick(event) {
         console.log('MenuWidget.onMenuItemClick', event);
-        event.target.parentElement.parentElement.classList.remove('show');
+        event.target.parentElement.parentElement.classList.remove('active');
         if (this.onClick) {
             return this.onClick(event.target);
         }
@@ -35,11 +35,11 @@ class MenuWidget extends Widget {
 
     onMenuClick(event) {
         console.log('MenuWidget.onMenuClick:', event.target);
-        event.target.parentElement.classList.toggle('show');
+        event.target.parentElement.classList.toggle('active');
     }
 
     onMenuBlur(event) {
         console.log('MenuWidget.onMenuBlur:', event.target);
-        event.target.parentElement.classList.remove('show');
+        event.target.parentElement.classList.remove('active');
     }
 }

@@ -6,9 +6,10 @@
   > div {
     overflow: hidden;
 
-    &.show {
+    &.active {
       > button {
         background-color: black;
+        color: white;
       }
       > div {
         display: block;
@@ -19,12 +20,15 @@
       font-size: 16px;
       border: none;
       outline: none;
-      color: white;
+      color: #bbb;
       padding: 14px 16px;
       background-color: inherit;
       font-family: inherit; /* Important for vertical align on mobile phones */
       margin: 0; /* Important for vertical align on mobile phones */
       cursor: pointer;
+      &:hover {
+        color: white;
+      }
     }
 
     > div {
