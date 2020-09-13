@@ -4,6 +4,7 @@ class MenuWidget extends Widget {
     constructor(el) {
         console.log('MenuWidget.constructor', el);
         super(el);
+        this.onClick = null;
 
         // menus
         this.el.querySelectorAll('div > button').forEach(button => {
@@ -27,6 +28,9 @@ class MenuWidget extends Widget {
     onMenuItemClick(event) {
         console.log('MenuWidget.onMenuItemClick', event);
         event.target.parentElement.parentElement.classList.remove('show');
+        if (this.onClick) {
+            return this.onClick(event.target);
+        }
     }
 
     onMenuClick(event) {

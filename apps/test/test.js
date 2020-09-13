@@ -15,6 +15,9 @@ class testController extends ApplicationController {
         const menuElement = this.view.querySelector('.MenuWidget');
         if (menuElement) {
             this.menu = new MenuWidget(menuElement);
+            this.menu.onClick = (a) => {
+                console.log('on click:', a);
+            }
         }
 
         const datePickerElement = this.view.querySelector('.DatePickerWidget');
