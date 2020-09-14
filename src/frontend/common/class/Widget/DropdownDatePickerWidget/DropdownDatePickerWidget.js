@@ -63,7 +63,7 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     onButtonBlur(event) {
-        console.log('DropdownDatePickerWidget.onButtonBlur', event);
+        // console.log('DropdownDatePickerWidget.onButtonBlur', event);
         if (this.isDatePickerVisible()) {
             this.hideDatePicker();
         }
