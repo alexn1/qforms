@@ -42,6 +42,18 @@ class testController extends ApplicationController {
             this.dropdownDatePicker2.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()+1]);
         }
 
+        this.dropdownDatePicker1.onChange = date => {
+            console.log('dropdownDatePicker1.onChange', date);
+            this.dropdownDatePicker2.datePicker.setMinDate([date.getFullYear(), date.getMonth(), date.getDate() + 1]);
+            if (this.dropdownDatePicker2.datePicker.isDateSelected()) {
+                const secondDate = this.dropdownDatePicker2.datePicker.createSelectedDate();
+                if (secondDate.getTime() <= date.getTime()) {
+                    this.dropdownDatePicker2.clear();
+                }
+            }
+        };
+
+
     }
 
     initMenu() {}

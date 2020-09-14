@@ -52,6 +52,9 @@ class DropdownDatePickerWidget extends Widget {
             if (this.datePicker.isDateSelected()) {
                 const d = this.datePicker.getSelectedDate();
                 this.datePicker.selectMonth(d[0], d[1]);
+            } else if (this.datePicker.isMinDate()) {
+                const d = this.datePicker.getMinDate();
+                this.datePicker.selectMonth(d[0], d[1]);
             } else {
                 this.datePicker.selectMonth();
             }

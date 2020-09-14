@@ -203,4 +203,12 @@ class DatePickerWidget extends Widget{
         if (!this.minDate) throw new Error('no min date');
         return new Date(this.minDate[0], this.minDate[1], this.minDate[2]);
     }
+
+    isMinDate() {
+        return !!this.minDate;
+    }
+
+    getMinDate() {
+        return this.minDate;
+    }
 }
