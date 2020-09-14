@@ -39,7 +39,7 @@ class testController extends ApplicationController {
         if (dropdownDatePickerElement2) {
             this.dropdownDatePicker2 = new DropdownDatePickerWidget(dropdownDatePickerElement2);
             this.dropdownDatePicker2.init();
-            this.dropdownDatePicker2.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()+1]);
+            this.dropdownDatePicker2.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate() + 1]);
         }
 
         this.dropdownDatePicker1.onChange = date => {
