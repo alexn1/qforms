@@ -30,6 +30,7 @@ class testController extends ApplicationController {
         const dropdownDatePickerElement = this.view.querySelector('.DropdownDatePickerWidget');
         if (dropdownDatePickerElement) {
             this.dropdownDatePicker = new DropdownDatePickerWidget(dropdownDatePickerElement);
+            this.dropdownDatePicker.init();
         }
 
     }

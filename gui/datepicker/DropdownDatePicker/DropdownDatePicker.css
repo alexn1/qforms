@@ -10,7 +10,6 @@
     /*border: none;*/
     cursor: pointer;
 }
-
 .DropdownDatePicker > table.DatePicker {
     display: none;
     position: absolute;
