@@ -23,14 +23,14 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     onInputKeyDown(e) {
-        console.log('DropdownDatePickerWidget.InputKeyDown:', e);
+        // console.log('DropdownDatePickerWidget.InputKeyDown:', e);
         if (e.which === 27 && this.isDatePickerVisible()) {
             this.hideDatePicker();
         }
     }
 
     onDatePickerMouseDown(e) {
-        console.log('DropdownDatePickerWidget.onDatePickerMouseDown', e);
+        // console.log('DropdownDatePickerWidget.onDatePickerMouseDown', e);
         e.preventDefault();
         e.stopPropagation();
         return false;

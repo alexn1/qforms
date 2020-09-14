@@ -7,7 +7,7 @@ class testController extends ApplicationController {
         super(...args);
         this.menu               = null;
         this.datePicker         = null;
-        this.dropdownDatePicker = null;
+        this.dropdownDatePicker1 = null;
     }
 
     init() {
@@ -29,11 +29,17 @@ class testController extends ApplicationController {
         }
 
         const now = new Date();
-        const dropdownDatePickerElement = this.view.querySelector('.DropdownDatePickerWidget');
-        if (dropdownDatePickerElement) {
-            this.dropdownDatePicker = new DropdownDatePickerWidget(dropdownDatePickerElement);
-            this.dropdownDatePicker.init();
-            this.dropdownDatePicker.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()]);
+        const dropdownDatePickerElement1 = this.view.querySelector('#dp1');
+        if (dropdownDatePickerElement1) {
+            this.dropdownDatePicker1 = new DropdownDatePickerWidget(dropdownDatePickerElement1);
+            this.dropdownDatePicker1.init();
+            this.dropdownDatePicker1.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()]);
+        }
+        const dropdownDatePickerElement2 = this.view.querySelector('#dp2');
+        if (dropdownDatePickerElement2) {
+            this.dropdownDatePicker2 = new DropdownDatePickerWidget(dropdownDatePickerElement2);
+            this.dropdownDatePicker2.init();
+            this.dropdownDatePicker2.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()+1]);
         }
 
     }
