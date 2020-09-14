@@ -169,7 +169,7 @@ class FieldController extends ModelController {
     }
 
     onChange(el) {
-        console.log('FieldController.onChange', this.model.getName());
+        console.log('FieldController.onChange', this.model.getName(), el);
         const view = el.parentNode;
         const row = view.dbRow;
         const valid = this.isValid(view);

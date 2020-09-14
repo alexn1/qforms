@@ -8,10 +8,9 @@ class DatePickerFieldController extends FieldController {
 
     fill(row, view) {
         super.fill(row, view);
-        const self = this;
         if (this.model.getForm().getClassName() === 'RowForm') {
-            $(view).children().change(function() {
-                self.onChange(this);
+            view.firstElementChild.addEventListener('input', (event) => {
+                this.onChange(event.target);
             });
         }
     }
