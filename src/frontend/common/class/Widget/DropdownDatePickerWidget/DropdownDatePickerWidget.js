@@ -84,15 +84,33 @@ class DropdownDatePickerWidget extends Widget {
     onDateSelected(date) {
         // console.log('DropdownDatePickerWidget.onDateSelected', date);
         this.hideDatePicker();
-        this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        // this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        this.setStringValue(date);
         if (this.onChange) {
             this.onChange(date);
         }
     }
 
+    setStringValue(date) {
+        this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+    }
+
     clear() {
         this.getInputElement().value = '';
         this.datePicker.setSelectedDate(null);
+    }
+
+    setValue(date) {
+        this.setStringValue(date);
+        this.datePicker.setSelectedDate([date.getFullYear(), date.getMonth(), date.getDate()]);
+    }
+
+    getValue() {
+        const selectedDate = this.datePicker.getSelectedDate();
+        if (selectedDate !== null) {
+            return new Date(selectedDate[0], selectedDate[1], selectedDate[2]);
+        }
+        return null;
     }
 
 }
