@@ -3,8 +3,9 @@ class testController extends ApplicationController {
     constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-        this.menu       = null;
-        this.datePicker = null;
+        this.menu               = null;
+        this.datePicker         = null;
+        this.dropdownDatePicker = null;
 
     }
 
@@ -24,6 +25,11 @@ class testController extends ApplicationController {
         if (datePickerElement) {
             this.datePicker = new DatePickerWidget(datePickerElement);
             this.datePicker.selectMonth();
+        }
+
+        const dropdownDatePickerElement = this.view.querySelector('.DropdownDatePickerWidget');
+        if (dropdownDatePickerElement) {
+            this.dropdownDatePicker = new DropdownDatePickerWidget(dropdownDatePickerElement);
         }
 
     }
