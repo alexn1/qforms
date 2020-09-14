@@ -1,3 +1,5 @@
+'use strict';
+
 class testController extends ApplicationController {
 
     constructor(...args) {
@@ -6,7 +8,6 @@ class testController extends ApplicationController {
         this.menu               = null;
         this.datePicker         = null;
         this.dropdownDatePicker = null;
-
     }
 
     init() {
@@ -27,21 +28,23 @@ class testController extends ApplicationController {
             this.datePicker.selectMonth();
         }
 
+        const now = new Date();
         const dropdownDatePickerElement = this.view.querySelector('.DropdownDatePickerWidget');
         if (dropdownDatePickerElement) {
             this.dropdownDatePicker = new DropdownDatePickerWidget(dropdownDatePickerElement);
             this.dropdownDatePicker.init();
+            this.dropdownDatePicker.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()]);
         }
 
     }
 
     initMenu() {}
-    initStatusbar() {}
     initTab() {}
+    initStatusbar() {}
     createPages() {}
 
-    deinit() {
+    /*deinit() {
         super.deinit();
-    }
+    }*/
 }
 testController;
