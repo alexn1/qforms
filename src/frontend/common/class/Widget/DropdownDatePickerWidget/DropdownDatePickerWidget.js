@@ -6,15 +6,25 @@ class DropdownDatePickerWidget extends Widget {
         console.log('DropdownDatePickerWidget.constructor', el);
         super(el);
         this.datePicker = null;
-        this.onChange = null;
+        this.onChange   = null;
     }
 
     init() {
         // console.log('DropdownDatePickerWidget.init');
         this.datePicker = new DatePickerWidget(this.getDatePickerElement());
+        this.datePicker.onDateSelected = this.onDateSelected.bind(this);
+        this.datePicker.onMouseDown    = this.onDatePickerMouseDown.bind(this);
+
+        // events
         this.getInputElement().addEventListener('click', this.onInputClick.bind(this));
         this.getInputElement().addEventListener('blur', this.onButtonBlur.bind(this));
-        this.datePicker.onDateSelected = this.onDateSelected.bind(this);
+    }
+
+    onDatePickerMouseDown(e) {
+        console.log('DropdownDatePickerWidget.onDatePickerMouseDown', e);
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
     }
 
     getInputElement() {
@@ -41,7 +51,7 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     onButtonBlur(event) {
-        // console.log('DropdownDatePickerWidget.onButtonBlur', event);
+        console.log('DropdownDatePickerWidget.onButtonBlur', event);
         if (this.isDatePickerVisible()) {
             this.hideDatePicker();
         }

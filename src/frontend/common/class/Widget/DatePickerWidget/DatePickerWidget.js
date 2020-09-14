@@ -25,9 +25,6 @@ class DatePickerWidget extends Widget{
             if (this.onMouseDown) {
                 return this.onMouseDown(e);
             }
-            /*e.preventDefault();
-            e.stopPropagation();
-            return false;*/
         });
     }
 
