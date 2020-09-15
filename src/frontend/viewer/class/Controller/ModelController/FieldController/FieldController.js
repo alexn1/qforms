@@ -93,23 +93,6 @@ class FieldController extends ModelController {
         }
     }
 
-    valueToString(value) {
-        // console.log('FieldController.valueToString', this.model.getFullName(), typeof value, value);
-        switch (typeof value) {
-            case 'string':
-                return value;
-            case 'object':
-                if (value === null) return '';
-                return JSON.stringify(value, null, 4);
-            case 'number':
-            case 'boolean':
-                return value.toString();
-            case 'undefined':
-                return '';
-            default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
-        }
-    }
-
     stringToValue(stringValue) {
         if (stringValue.trim() === '') return null;
         if (this.model.getColumnType() === 'object') {
@@ -121,7 +104,7 @@ class FieldController extends ModelController {
     setValue(value, view) {
         console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         this.setPlaceHolder(value, view);
-        const stringValue = this.valueToString(value);
+        const stringValue = this.model.valueToString(value);
         this.setStringValue(stringValue, view);
     }
 
@@ -201,13 +184,13 @@ class FieldController extends ModelController {
         if (!row) throw new Error('FieldController: no row');
         if (!view) throw new Error('FieldController: no view');
         // console.log('FieldController.isChanged', this.model.getFullName());
-        const fieldChanged = this.valueToString(this.model.getValue(row)) !== this.getStringValue(view);
+        const fieldChanged = this.model.valueToString(this.model.getValue(row)) !== this.model.valueToString(this.getValue(view));
         if (fieldChanged) {
             console.log(`FIELD CHANGED ${this.model.getFullName()}:`);
-            console.log('this.getStringValue(view):', this.getStringValue(view));
-            console.log('this.model.getValue(row):', this.model.getValue(row));
-            console.log('this.valueToString(this.model.getValue(row)):', this.valueToString(this.model.getValue(row)));
-            console.log('row:', row);
+            // console.log('this.getStringValue(view):', this.getStringValue(view));
+            // console.log('this.model.getValue(row):', this.model.getValue(row));
+            // console.log('this.model.valueToString(this.model.getValue(row)):', this.model.valueToString(this.model.getValue(row)));
+            // console.log('row:', row);
         }
         const rowChanged = this.model.isChanged(row);
         if (rowChanged) {

@@ -9,9 +9,11 @@ class DatePickerFieldController extends FieldController {
     fill(row, view) {
         super.fill(row, view);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            view.firstElementChild.addEventListener('input', (event) => {
-                this.onChange(event.target);
-            });
+            if (view.firstElementChild) {
+                view.firstElementChild.addEventListener('input', (event) => {
+                    this.onChange(event.target);
+                });
+            }
         }
     }
 
@@ -52,54 +54,57 @@ class DatePickerFieldController extends FieldController {
     //     return isValid;
     // }
 
-    // setValue(value, view) {
-    //     let text = value;
-    //     let placeholder = 'YYYY-MM-DD';
-    //     if (this.model.getApp().data.lang === 'ru') {
-    //         placeholder = 'ДД.ММ.ГГГГ';
-    //     }
-    //     if (value) {
-    //         if (this.model.getApp().data.lang === 'ru') {
-    //             const arr = value.split('-');
-    //             text = [arr[2], arr[1], arr[0]].join('.');
-    //         } else {
-    //             text = value;
-    //         }
-    //     }
-    //     switch (this.model.getForm().getClassName()) {
-    //         case 'RowForm':
-    //             view.firstElementChild.value       = text;
-    //             view.firstElementChild.placeholder = placeholder;
-    //             break;
-    //         case 'TableForm':
-    //             view.firstElementChild.innerHTML = text;
-    //             break;
-    //     }
-    // }
+    setValue(value, view) {
+        console.log('DatePickerController.setValue', this.model.getFullName(), value);
 
-    // getValue(view) {
-    //     let text;
-    //     switch (this.model.getForm().getClassName()) {
-    //         case 'RowForm':
-    //             text = view.firstElementChild.value;
-    //             break;
-    //         case 'TableForm':
-    //             text = view.firstElementChild.innerHTML;
-    //             break;
-    //     }
-    //     if (text) {
-    //         let value;
-    //         if (this.model.getApp().data.lang === 'ru') {
-    //             const arr = text.split('.');
-    //             value = [arr[2], arr[1], arr[0]].join('-');
-    //         } else {
-    //             value = text;
-    //         }
-    //         return value;
-    //     } else {
-    //         return null;
-    //     }
-    // }
+        // let text = value;
+        // let placeholder = 'YYYY-MM-DD';
+        // if (this.model.getApp().data.lang === 'ru') {
+        //     placeholder = 'ДД.ММ.ГГГГ';
+        // }
+        // if (value) {
+        //     if (this.model.getApp().data.lang === 'ru') {
+        //         const arr = value.split('-');
+        //         text = [arr[2], arr[1], arr[0]].join('.');
+        //     } else {
+        //         text = value;
+        //     }
+        // }
+        // switch (this.model.getForm().getClassName()) {
+        //     case 'RowForm':
+        //         view.firstElementChild.value       = text;
+        //         view.firstElementChild.placeholder = placeholder;
+        //         break;
+        //     case 'TableForm':
+        //         view.firstElementChild.innerHTML = text;
+        //         break;
+        // }
+    }
+
+    getValue(view) {
+        console.log('DatePickerFieldController.getValue', this.model.getFullName());
+        // let text;
+        // switch (this.model.getForm().getClassName()) {
+        //     case 'RowForm':
+        //         text = view.firstElementChild.value;
+        //         break;
+        //     case 'TableForm':
+        //         text = view.firstElementChild.innerHTML;
+        //         break;
+        // }
+        // if (text) {
+        //     let value;
+        //     if (this.model.getApp().data.lang === 'ru') {
+        //         const arr = text.split('.');
+        //         value = [arr[2], arr[1], arr[0]].join('-');
+        //     } else {
+        //         value = text;
+        //     }
+        //     return value;
+        // } else {
+        //     return null;
+        // }
+    }
 
     // beginEdit(view) {
     //     view.firstElementChild.style.MozUserSelect = 'text';

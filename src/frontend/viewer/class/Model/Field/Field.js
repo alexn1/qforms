@@ -118,4 +118,21 @@ class Field extends Model {
     getApp() {
         return this.parent.parent.parent;
     }
+
+    valueToString(value) {
+        // console.log('Field.valueToString', this.getFullName(), typeof value, value);
+        switch (typeof value) {
+            case 'string':
+                return value;
+            case 'object':
+                if (value === null) return '';
+                return JSON.stringify(value, null, 4);
+            case 'number':
+            case 'boolean':
+                return value.toString();
+            case 'undefined':
+                return '';
+            default: throw new Error(`${this.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+        }
+    }
 }
