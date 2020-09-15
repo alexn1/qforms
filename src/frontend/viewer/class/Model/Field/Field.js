@@ -77,7 +77,7 @@ class Field extends Model {
         if (this.data.column) {
             let value = this.getForm().getDataSource().getValue(row, this.data.column);
             const type = this.getColumnType();
-            if (type === 'date' && value !== null) {
+            if (type === 'date' && typeof value === 'string') {
                 value = new Date(value);
             }
             return value;

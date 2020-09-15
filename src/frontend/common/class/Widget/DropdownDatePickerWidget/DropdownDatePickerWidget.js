@@ -124,8 +124,12 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     setValue(date) {
-        this.setStringValue(date);
-        this.datePicker.setSelectedDate([date.getFullYear(), date.getMonth(), date.getDate()]);
+        if (date) {
+            this.setStringValue(date);
+            this.datePicker.setSelectedDate([date.getFullYear(), date.getMonth(), date.getDate()]);
+        } else {
+            this.clear();
+        }
     }
 
     getValue() {
