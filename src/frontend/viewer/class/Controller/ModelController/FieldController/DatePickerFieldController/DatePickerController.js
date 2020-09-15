@@ -93,6 +93,11 @@ class DatePickerFieldController extends FieldController {
 
     getValue(view) {
         console.log('DatePickerFieldController.getValue', this.model.getFullName());
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            return this.dropdownDatePicker.getValue();
+        }
+        return null;
+
         // let text;
         // switch (this.model.getForm().getClassName()) {
         //     case 'RowForm':
