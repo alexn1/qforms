@@ -2,18 +2,24 @@
 
 class DatePickerFieldController extends FieldController {
 
-    // constructor(model, parent) {
-    //     super(model, parent);
-    // }
+    constructor(model, parent) {
+        super(model, parent);
+        this.dropdownDatePicker = null;
+    }
 
     fill(row, view) {
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            this.dropdownDatePicker = new DropdownDatePickerWidget(view.querySelector('.DropdownDatePickerWidget'));
+            this.dropdownDatePicker.init();
+        }
         super.fill(row, view);
         if (this.model.getForm().getClassName() === 'RowForm') {
+            /*
             if (view.firstElementChild) {
                 view.firstElementChild.addEventListener('input', (event) => {
                     this.onChange(event.target);
                 });
-            }
+            }*/
         }
     }
 
@@ -56,6 +62,10 @@ class DatePickerFieldController extends FieldController {
 
     setValue(value, view) {
         console.log('DatePickerController.setValue', this.model.getFullName(), value);
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            this.dropdownDatePicker.setValue(value);
+        }
+
 
         // let text = value;
         // let placeholder = 'YYYY-MM-DD';

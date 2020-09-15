@@ -1,4 +1,81 @@
 <% const readOnly = (model.data.readOnly == "true") ? "readonly" : ""; %>
 <div id="<%=model.getForm().getPage().id%>_<%=model.getForm().getName()%>_<%=model.getName()%>" class="RowFormDatePickerFieldView <%=model.getName()%>">
 <!--    <input <%=readOnly%>>-->
+    <div class="DropdownDatePickerWidget">
+        <input readonly>
+        <table class="DatePickerWidget" cellspacing="0" cellpadding="0">
+            <caption>
+                <div>
+                    <a class="prev"> < </a>
+                    <span></span>
+                    <a class="next"> > </a>
+                </div>
+            </caption>
+            <thead>
+            <th>Пн</th>
+            <th>Вт</th>
+            <th>Ср</th>
+            <th>Чт</th>
+            <th>Пт</th>
+            <th class="weekend">Сб</th>
+            <th class="weekend">Вс</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="weekend"></td>
+                <td class="weekend"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
