@@ -92,7 +92,13 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     setStringValue(date) {
-        this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        const year = date.getFullYear();
+        let month = date.getMonth()+1;
+        let day = date.getDate();
+        if (month < 10) month = `0${month}`;
+        if (day < 10) day = `0${day}`;
+        //this.getInputElement().value = `${year}-${month}-${day}`;
+        this.getInputElement().value = `${day}.${month}.${year}`;
     }
 
     clear() {
