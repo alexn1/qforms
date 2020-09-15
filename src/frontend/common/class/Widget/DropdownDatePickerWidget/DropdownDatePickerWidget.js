@@ -84,7 +84,6 @@ class DropdownDatePickerWidget extends Widget {
     onDateSelected(date) {
         // console.log('DropdownDatePickerWidget.onDateSelected', date);
         this.hideDatePicker();
-        // this.getInputElement().value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
         this.setStringValue(date);
         if (this.onChange) {
             this.onChange(date);
