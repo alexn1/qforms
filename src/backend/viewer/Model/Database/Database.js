@@ -126,7 +126,7 @@ class Database extends Model {
 
     static checkParams(query, params) {
         const usedParams = Database.getUsedParams(query);
-        const paramNames = Object.keys(params);
+        const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter(name => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);
         if (notPassedParams.length > 0) throw new Error(`not passed params: ${notPassedParams.join(',')}`);
