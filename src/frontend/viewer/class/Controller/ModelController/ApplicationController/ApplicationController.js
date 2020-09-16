@@ -126,13 +126,6 @@ class ApplicationController extends ModelController {
         pageController.fill();
     }
 
-    onPageClosed(e) {
-        console.log('ApplicationController.onPageClosed');
-        const tab = this.findTabByPageController(e.pageController);
-        this.appTC.closeTab(tab);
-        e.pageController.deinit();
-    }
-
     onPageSelected(e) {
         console.log('ApplicationController.onPageSelected');
         const tab = this.findTabByPageController(e.pageController);
@@ -169,7 +162,9 @@ class ApplicationController extends ModelController {
 
     closePage(pageController) {
         console.log('ApplicationController.closePage');
-        this.onPageClosed({source: this, pageController: pageController});
+        const tab = this.findTabByPageController(pageController);
+        this.appTC.closeTab(tab);
+        pageController.deinit();
         pageController.model.deinit();
     }
 
