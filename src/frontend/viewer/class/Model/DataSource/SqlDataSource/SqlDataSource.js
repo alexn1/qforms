@@ -91,6 +91,7 @@ class SqlDataSource extends DataSource {
 
     async onTableUpdated(e) {
         console.log('DataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
         if (e.source === this) return;
         console.log('changes:', e.changes);
         if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);

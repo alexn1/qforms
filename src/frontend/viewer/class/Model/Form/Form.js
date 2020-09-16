@@ -48,6 +48,7 @@ class Form extends Model {
         for (const name in this.controls) {
             this.controls[name].deinit();
         }
+        super.deinit();
     }
 
     fillDefaultValues(row) {

@@ -30,6 +30,7 @@ class Application extends Model {
             this.dataSources[name].deinit();
         }
         // TODO: add deinit on opened pages
+        super.deinit();
     }
 
     async logout() {

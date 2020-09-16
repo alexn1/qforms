@@ -33,7 +33,7 @@ class Page extends Model {
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
-        this.deinited = true;
+        super.deinit();
     }
 
     initParams() {

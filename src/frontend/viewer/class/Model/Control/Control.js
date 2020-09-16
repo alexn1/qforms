@@ -9,9 +9,6 @@ class Control extends Model {
     init() {
     }
 
-    deinit() {
-    }
-
     getForm() {
         return this.parent;
     }

@@ -26,9 +26,10 @@ class DataSource extends Model {
         this.childs    = vals.childs;
     }
 
-    deinit() {
-        console.log('DataSource.deinit', this.getFullName());
-    }
+    // deinit() {
+    //     console.log('DataSource.deinit', this.getFullName());
+    //     super.deinit();
+    // }
 
     // fill lists to find row index and child rows by row key
     getKeysAndChilds(rows) {

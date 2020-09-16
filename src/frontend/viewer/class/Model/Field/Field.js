@@ -10,6 +10,7 @@ class Field extends Model {
 
     deinit() {
         console.log('Field.deinit:', this.getFullName());
+        super.deinit();
     }
 
     replaceThis(value) {
