@@ -89,6 +89,11 @@ class Form extends Model {
         return this.getDataSource().isChanged();
     }
 
+    hasNew() {
+        // console.log('Form.hasNew', this.getFullName());
+        return this.getDataSource().hasNew();
+    }
+
     async rpc(name, params) {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');

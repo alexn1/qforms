@@ -49,7 +49,7 @@ class Page extends Model {
         console.log('Page.update', this.getFullName());
         for (const name in this.forms) {
             const form = this.forms[name];
-            if (form.isChanged()) await form.update();
+            if (form.isChanged() || form.hasNew()) await form.update();
         }
     }
 

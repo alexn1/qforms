@@ -116,7 +116,7 @@ class PageController extends ModelController {
         } else {
             caption = this.model.data.caption;
         }
-        if (this.isChanged()) {
+        if (this.isChanged() || this.model.isNewMode()) {
             caption += ' *';
         }
         return caption;
@@ -135,7 +135,7 @@ class PageController extends ModelController {
     onFormChange(e) {
         console.log('PageController.onFormChange', this.model.getFullName());
         this.setCaption(this.getCaption());
-        if (this.isChanged()) {
+        if (this.isChanged() || this.model.isNewMode()) {
             if (this.isValid()) {
                 this.enableSave();
             } else {
