@@ -69,7 +69,7 @@ class PageController extends ModelController {
         if (this.isValid()) {
             await this.model.update();
             console.log('page model updated');
-            this.getApplicationController().onPageClosed({source: this, pageController: this});
+            this.getApplicationController().closePage(this);
         } else {
             for (const name in this.forms) {
                 const form = this.forms[name];
@@ -83,6 +83,12 @@ class PageController extends ModelController {
     onClosePageClick(e) {
         console.log('PageController.onClosePageClick');
         this.close();
+    }
+
+    close() {
+        console.log('PageController.close');
+        if (this.isChanged() && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
+        this.getApplicationController().closePage(this);
     }
 
     enableSave() {
@@ -153,12 +159,6 @@ class PageController extends ModelController {
         console.log('PageController.onFormUpdate');
         this.setCaption(this.getCaption());
         this.disableSave();
-    }
-
-    close() {
-        console.log('PageController.close');
-        if (this.isChanged() && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
-        this.getApplicationController().closePage(this);
     }
 
     async openPage(args) {
