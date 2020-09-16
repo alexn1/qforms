@@ -99,10 +99,6 @@ class DatePickerFieldController extends FieldController {
         // }
     }
 
-    setPlaceHolder() {
-        console.log('DatePickerFieldController.setPlaceHolder', this.model.getFullName());
-    }
-
     getValue(view) {
         // console.log('DatePickerFieldController.getValue', this.model.getFullName());
         if (this.model.getForm().getClassName() === 'RowForm') {

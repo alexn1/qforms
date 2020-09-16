@@ -120,7 +120,7 @@ class SqlDataSource extends DataSource {
     }
 
     async onTableDelete(e) {
-        console.log('DataSource.onTableDelete', e);
+        console.log('DataSource.onTableDelete', this.getFullName(), this.getFullTableName(), e);
         await this._refresh();
     }
 
