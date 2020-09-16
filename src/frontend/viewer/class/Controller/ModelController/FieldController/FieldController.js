@@ -102,7 +102,7 @@ class FieldController extends ModelController {
     }
 
     setValue(value, view) {
-        console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
+        // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         this.setPlaceHolder(value, view);
         const stringValue = this.model.valueToString(value);
         this.setStringValue(stringValue, view);
