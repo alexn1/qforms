@@ -127,14 +127,12 @@ class Page extends Model {
     }
 
     hasNew() {
-        let hasNew = false;
         for (const name in this.forms) {
             if (this.forms[name].hasNew()) {
-                hasNew = true;
-                break;
+                return true;
             }
         }
-        return hasNew;
+        return false;
     }
 
     getApp() {
