@@ -61,10 +61,29 @@ class Field extends Model {
     setValue(row, value) {
         console.log('Field.setValue', this.getName());
         if (!this.data.column) throw new Error(`field has no column: ${this.getName()}`);
-        const valueForDataSource = typeof value === 'object' && value !== null ? JSON.stringify(value) : value;
+        const valueForDataSource = this.prepareValueForDataSource(value);
         const newValue = this.getForm().getDataSource().setValue(row, this.data.column, valueForDataSource);
         this.valueToParams(row);
         return newValue;
+    }
+
+    prepareValueForDataSource(value) {
+        if (value === undefined) throw new Error('undefined is wrong value for data source');
+        if (value !== null) {
+            const type = typeof value;
+            if (type === 'object') {
+                if (value instanceof Date) return value.toISOString();
+                return JSON.stringify(value);
+            } else if (type === 'string') {
+                if (value.trim() === '') return null;
+                if (this.getColumnType() === 'number') {
+                    const num = Number(value);
+                    if (isNaN(num)) throw new Error(`wrong number: ${value}`);
+                    return num;
+                }
+            }
+        }
+        return value;
     }
 
     isChanged(row) {
@@ -127,6 +146,7 @@ class Field extends Model {
                 return value;
             case 'object':
                 if (value === null) return '';
+                if (value instanceof Date) return value.toISOString();
                 return JSON.stringify(value, null, 4);
             case 'number':
             case 'boolean':

@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     box.onmouseup = () => {
         console.log('up');
     }
+    const textarea = document.querySelector('textarea');
 
     const isoString = '2020-09-04T17:00:00.000Z';
     const date = new Date(isoString);
@@ -36,5 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('date.toString():', date.toString());
     console.log('JSON.stringify(date):', JSON.stringify(date));
+    console.log('date.toISOString():', date.toISOString());
+    console.log('date instanceof Date', date instanceof Date);
+
+    // textarea.value = JSON.stringify({field: date});
+    textarea.value = date.toISOString();
 
 });
