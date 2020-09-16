@@ -110,6 +110,10 @@ class DataSource extends Model {
         return !!this.changes.size;
     }
 
+    hasNew() {
+        return !!this.news.length;
+    }
+
     isRowColumnChanged(row, column) {
         // console.log('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);

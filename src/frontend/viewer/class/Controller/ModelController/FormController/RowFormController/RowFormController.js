@@ -45,7 +45,7 @@ class RowFormController extends FormController {
 
         // disable buttons
         $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().isNewMode());
-        $(this.view).find('button.discardForm').prop('disabled', true);
+        $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // action click
@@ -159,7 +159,7 @@ class RowFormController extends FormController {
 
         // ui
         $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().isNewMode());
-        $(this.view).find('button.discardForm').prop('disabled', true);
+        $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // event
