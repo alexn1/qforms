@@ -8,10 +8,10 @@ class Field extends Model {
     init() {
     }
 
-    deinit() {
-        console.log('Field.deinit:', this.getFullName());
-        super.deinit();
-    }
+    // deinit() {
+    //     console.log('Field.deinit:', this.getFullName());
+    //     super.deinit();
+    // }
 
     replaceThis(value) {
         return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {

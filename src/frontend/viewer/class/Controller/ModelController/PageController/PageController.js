@@ -133,7 +133,7 @@ class PageController extends ModelController {
     }
 
     onFormChange(e) {
-        console.log('PageController.onFormChange');
+        console.log('PageController.onFormChange', this.model.getFullName());
         this.setCaption(this.getCaption());
         if (this.isChanged()) {
             if (this.isValid()) {
@@ -157,7 +157,7 @@ class PageController extends ModelController {
     }
 
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate');
+        console.log('PageController.onFormUpdate:', this.model.getFullName());
         this.setCaption(this.getCaption());
         this.disableSave();
     }
