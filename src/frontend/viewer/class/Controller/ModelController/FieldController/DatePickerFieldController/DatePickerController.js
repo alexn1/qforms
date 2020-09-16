@@ -11,18 +11,13 @@ class DatePickerFieldController extends FieldController {
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker = new DropdownDatePickerWidget(view.querySelector('.DropdownDatePickerWidget'));
             this.dropdownDatePicker.init();
+        }
+        super.fill(row, view);
+        if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker.onChange = event => {
                 this.onChange(this.dropdownDatePicker.el);
             };
         }
-        super.fill(row, view);
-        /*if (this.model.getForm().getClassName() === 'RowForm') {
-            if (view.firstElementChild) {
-                view.firstElementChild.addEventListener('input', (event) => {
-                    this.onChange(event.target);
-                });
-            }
-        }*/
     }
 
     // isValid(view) {

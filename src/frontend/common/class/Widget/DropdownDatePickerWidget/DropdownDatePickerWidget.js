@@ -31,9 +31,8 @@ class DropdownDatePickerWidget extends Widget {
     }
 
     onCloseClick() {
-        console.log('onCloseClick');
-        this.datePicker.setSelectedDate(null);
-        this.getInputElement().value = '';
+        // console.log('DropdownDatePickerWidget.onCloseClick');
+        this.clear();
     }
 
     getCloseElement() {
@@ -121,6 +120,9 @@ class DropdownDatePickerWidget extends Widget {
     clear() {
         this.getInputElement().value = '';
         this.datePicker.setSelectedDate(null);
+        if (this.onChange) {
+            this.onChange(null);
+        }
     }
 
     setValue(date) {
