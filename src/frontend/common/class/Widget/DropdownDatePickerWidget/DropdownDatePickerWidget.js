@@ -115,10 +115,12 @@ class DropdownDatePickerWidget extends Widget {
         if (day < 10) day = `0${day}`;
         //this.getInputElement().value = `${year}-${month}-${day}`;
         this.getInputElement().value = `${day}.${month}.${year}`;
+        this.getCloseElement().classList.add('visible');
     }
 
     clear() {
         this.getInputElement().value = '';
+        this.getCloseElement().classList.remove('visible');
         this.datePicker.setSelectedDate(null);
         if (this.onChange) {
             this.onChange(null);
