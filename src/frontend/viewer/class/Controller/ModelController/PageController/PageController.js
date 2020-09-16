@@ -149,7 +149,7 @@ class PageController extends ModelController {
     onFormDiscard(formController) {
         console.log('PageController.onFormDiscard', this.model.getFullName());
         this.setCaption(this.getCaption());
-        if (this.isChanged()) {
+        if (this.isChanged() || this.model.isNewMode()) {
             this.enableSave();
         } else {
             this.disableSave();
