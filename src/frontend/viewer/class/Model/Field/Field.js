@@ -111,8 +111,7 @@ class Field extends Model {
 
     getFullName() {
         return [
-            this.getForm().getPage().getName(),
-            this.getForm().getName(),
+            this.getForm().getFullName(),
             this.getName()
         ].join('.');
     }

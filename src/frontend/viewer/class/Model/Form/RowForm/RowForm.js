@@ -22,10 +22,6 @@ class RowForm extends Form {
         this.fillParams(this.getRow());
     }
 
-    getFullName() {
-        return [this.getPage().getName(), this.getName()].join('.');
-    }
-
     getFieldValue(name) {
         return this.fields[name].getValue(this.getRow());
     }

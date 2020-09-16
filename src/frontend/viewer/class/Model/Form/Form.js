@@ -80,7 +80,7 @@ class Form extends Model {
 
     getFullName() {
         return [
-            this.getPage().getName(),
+            this.getPage().getFullName(),
             this.getName()
         ].join('.');
     }
