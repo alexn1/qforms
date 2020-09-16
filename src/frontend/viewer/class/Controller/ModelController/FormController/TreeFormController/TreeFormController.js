@@ -22,10 +22,10 @@ class TreeFormController extends FormController {
     }
 
     deinit() {
-        super.deinit();
         this.tree.off('select', this.listeners.select);
         this.tree.off('doubleClick', this.listeners.doubleClick);
         this.tree.deinit();
+        super.deinit();
     }
 
     fill() {

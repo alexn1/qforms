@@ -36,7 +36,7 @@ class FormController extends ModelController {
     }
 
     deinit() {
-        //console.log('FormController.deinit: ' + this.model.getName());
+        console.log('FormController.deinit:', this.model.getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }

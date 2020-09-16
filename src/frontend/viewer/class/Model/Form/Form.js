@@ -38,7 +38,7 @@ class Form extends Model {
     }
 
     deinit() {
-        //console.log('Form.deinit: ' + this.getName());
+        console.log('Form.deinit:', this.getFullName());
         for (const dsName in this.dataSources) {
             this.dataSources[dsName].deinit();
         }

@@ -19,13 +19,14 @@ class SqlDataSource extends DataSource {
     }
 
     deinit() {
-        super.deinit();
+        console.log('SqlDataSource.deinit', this.getFullName(), this.getFullTableName());
         if (this.data.table !== '') {
             const table = this.getTable();
             table.removeListener('update', this.listeners.tableUpdated);
             table.removeListener('insert', this.listeners.tableInsert);
             table.removeListener('delete', this.listeners.tableDelete);
         }
+        super.deinit();
     }
 
     getColumnType(column) {

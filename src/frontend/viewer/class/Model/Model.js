@@ -7,10 +7,15 @@ class Model extends EventEmitter {
         this.data = data;
         this.parent = parent;
         this.listeners = {};
+        this.deinited = false;
     }
 
     init() {
+    }
 
+    deinit() {
+        if (this.deinited) throw new Error(`${this.getFullName()}: model already deinited`);
+        this.deinited = true;
     }
 
     getClassName() {
@@ -19,5 +24,9 @@ class Model extends EventEmitter {
 
     getName() {
         return this.data.name;
+    }
+
+    getFullName() {
+        return this.getName();
     }
 }

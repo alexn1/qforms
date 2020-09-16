@@ -27,6 +27,7 @@ class DataSource extends Model {
     }
 
     deinit() {
+        console.log('DataSource.deinit', this.getFullName());
     }
 
     // fill lists to find row index and child rows by row key
