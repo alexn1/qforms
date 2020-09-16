@@ -18,6 +18,7 @@ class ControlController extends ModelController {
 
     deinit() {
         this.views = null;
+        super.deinit();
     }
 
     /*

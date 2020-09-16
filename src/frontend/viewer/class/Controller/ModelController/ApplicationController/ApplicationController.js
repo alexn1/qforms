@@ -103,6 +103,7 @@ class ApplicationController extends ModelController {
         this.appTC.off('tabClosingByUser', this.listeners.tabClosingByUser);
         this.appTC.off('tabShow', this.listeners.tabShow);
         this.appTC.off('tabHide', this.listeners.tabHide);
+        super.deinit();
     }
 
     onPageOpened(e) {

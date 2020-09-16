@@ -43,6 +43,7 @@ class FormController extends ModelController {
         for (const name in this.controls) {
             this.controls[name].deinit();
         }
+        super.deinit();
     }
 
     fill() {

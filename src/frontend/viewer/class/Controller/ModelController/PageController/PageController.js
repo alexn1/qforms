@@ -55,6 +55,7 @@ class PageController extends ModelController {
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
+        super.deinit();
     }
 
     fill() {
