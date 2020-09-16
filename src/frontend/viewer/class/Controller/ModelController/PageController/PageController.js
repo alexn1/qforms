@@ -30,7 +30,7 @@ class PageController extends ModelController {
         });
 
         // disable buttons
-        $(self.view).find('button.saveAndClose').prop('disabled', !this.model.isNewMode());
+        $(self.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
 
         // button click
         $(self.view).find('button.saveAndClose').click(function() {
@@ -116,7 +116,7 @@ class PageController extends ModelController {
         } else {
             caption = this.model.data.caption;
         }
-        if (this.isChanged() || this.model.isNewMode()) {
+        if (this.isChanged() || this.model.hasNew()) {
             caption += ' *';
         }
         return caption;
@@ -135,7 +135,7 @@ class PageController extends ModelController {
     onFormChange(e) {
         console.log('PageController.onFormChange', this.model.getFullName());
         this.setCaption(this.getCaption());
-        if (this.isChanged() || this.model.isNewMode()) {
+        if (this.isChanged() || this.model.hasNew()) {
             if (this.isValid()) {
                 this.enableSave();
             } else {
@@ -149,7 +149,7 @@ class PageController extends ModelController {
     onFormDiscard(formController) {
         console.log('PageController.onFormDiscard', this.model.getFullName());
         this.setCaption(this.getCaption());
-        if (this.isChanged() || this.model.isNewMode()) {
+        if (this.isChanged() || this.model.hasNew()) {
             this.enableSave();
         } else {
             this.disableSave();

@@ -126,6 +126,17 @@ class Page extends Model {
         return this.data.newMode;
     }
 
+    hasNew() {
+        let hasNew = false;
+        for (const name in this.forms) {
+            if (this.forms[name].hasNew()) {
+                hasNew = true;
+                break;
+            }
+        }
+        return hasNew;
+    }
+
     getApp() {
         return this.parent;
     }
