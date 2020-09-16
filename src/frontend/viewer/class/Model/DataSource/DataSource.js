@@ -64,13 +64,6 @@ class DataSource extends Model {
         throw new Error('DataSource column type not implemented');
     }
 
-    getNewValue(row, column, value) {
-        if (value === null) return null;
-        if (typeof value === 'string' && value.trim() === '') return null;
-        if (this.getColumnType(column) === 'number' && !isNaN(Number(value))) return Number(value);
-        return value;
-    }
-
     discardRowColumn(row, column) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             delete this.changes.get(row)[column];
@@ -87,23 +80,18 @@ class DataSource extends Model {
         if (value !== null && typeof value === 'object') {
             throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
         }
-        let newValue = this.getNewValue(row, column, value);
-        console.log('newValue:', newValue, typeof newValue);
-
-        if (!this.compareValue(row, column, newValue)) {
-            this.changeRowColumn(row, column, newValue);
+        if (!this.compareValue(row, column, value)) {
+            this.changeRowColumn(row, column, value);
 
             // workaround for new rows
-            if (row[column] === undefined && newValue === null) {
+            if (row[column] === undefined && value === null) {
                 this.discardRowColumn(row, column);
-                newValue = undefined;
             }
         } else {
             this.discardRowColumn(row, column);
         }
         if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length) this.changes.delete(row);
         console.log('changes:', this.changes);
-        return newValue;
     }
 
     compareValue(row, column, newValue) {
