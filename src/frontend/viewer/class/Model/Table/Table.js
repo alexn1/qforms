@@ -13,10 +13,6 @@ class Table extends Model {
         }
     }
 
-    getFullName() {
-        return `${this.parent.getName()}.${this.getName()}`;
-    }
-
     getColumn(name) {
         if (!this.columns[name]) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return this.columns[name];

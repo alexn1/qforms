@@ -78,13 +78,6 @@ class Form extends Model {
     //     action.exec(args, {'form':this});
     // }
 
-    getFullName() {
-        return [
-            this.getPage().getFullName(),
-            this.getName()
-        ].join('.');
-    }
-
     async refresh() {
         console.log('Form.refresh', this.getFullName());
         await this.getDataSource().refresh();

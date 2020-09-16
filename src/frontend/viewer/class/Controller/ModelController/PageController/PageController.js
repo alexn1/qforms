@@ -51,7 +51,7 @@ class PageController extends ModelController {
     }
 
     deinit() {
-        console.log('PageController.deinit: ' + this.model.getName());
+        console.log('PageController.deinit: ' + this.model.getFullName());
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
@@ -108,7 +108,7 @@ class PageController extends ModelController {
     }
 
     getCaption() {
-        // console.log('PageController.getCaption', this.model.getName());
+        // console.log('PageController.getCaption', this.model.getFullName());
         const key = this.model.getKey();
         let caption;
         if (key) {
@@ -147,7 +147,7 @@ class PageController extends ModelController {
     }
 
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.model.getName());
+        console.log('PageController.onFormDiscard', this.model.getFullName());
         this.setCaption(this.getCaption());
         if (this.isChanged()) {
             this.enableSave();

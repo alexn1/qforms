@@ -131,7 +131,7 @@ class Page extends Model {
     }
 
     getFullName() {
-        return `${this.getName()}(${this.id})`;
+        return `${this.getName()}[${this.id}]`;
     }
 
 }

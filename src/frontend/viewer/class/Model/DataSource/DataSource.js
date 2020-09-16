@@ -111,7 +111,7 @@ class DataSource extends Model {
     }
 
     isRowColumnChanged(row, column) {
-        // console.log('DataSource.isRowColumnChanged', this.getName());
+        // console.log('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
 
@@ -442,10 +442,6 @@ class DataSource extends Model {
 
     getRowByIndex(i) {
         return this.childs['[null]'].rowsByIndex[i];
-    }
-
-    getFullName() {
-        return `${this.parent.getFullName()}.${this.getName()}`;
     }
 
     discard() {

@@ -27,6 +27,9 @@ class Model extends EventEmitter {
     }
 
     getFullName() {
+        if (this.parent) {
+            return `${this.parent.getFullName()}.${this.getName()}`;
+        }
         return this.getName();
     }
 }

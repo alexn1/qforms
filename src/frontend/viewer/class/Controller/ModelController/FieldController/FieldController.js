@@ -26,7 +26,7 @@ class FieldController extends ModelController {
     }
 
     deinit() {
-        console.log('FieldController.deinit:', this.model.getName());
+        console.log('FieldController.deinit:', this.model.getFullName());
         this.views = null;
         super.deinit();
     }
@@ -153,7 +153,7 @@ class FieldController extends ModelController {
     }
 
     onChange(el) {
-        console.log('FieldController.onChange', this.model.getName(), el);
+        console.log('FieldController.onChange', this.model.getFullName(), el);
         const view = el.parentNode;
         const row = view.dbRow;
         const valid = this.isValid(view);

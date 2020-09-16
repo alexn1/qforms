@@ -53,7 +53,7 @@ class Field extends Model {
     }
 
     valueToParams(row) {
-        // console.log('Field.valueToParams', this.getName());
+        // console.log('Field.valueToParams', this.getFullName());
         if (this.data.column) {
             this.getForm().getPage().params[this.getFullName()] = this.getValue(row);
         }
@@ -61,7 +61,7 @@ class Field extends Model {
 
     setValue(row, value) {
         console.log('Field.setValue', this.getName());
-        if (!this.data.column) throw new Error(`field has no column: ${this.getName()}`);
+        if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
         const valueForDataSource = this.prepareValueForDataSource(value);
         this.getForm().getDataSource().setValue(row, this.data.column, valueForDataSource);
         this.valueToParams(row);
@@ -88,7 +88,7 @@ class Field extends Model {
     }
 
     isChanged(row) {
-        // console.log('Field.isChanged', this.getName());
+        // console.log('Field.isChanged', this.getFullName());
         if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDataSource().isRowColumnChanged(row, this.data.column);
     }
@@ -107,13 +107,6 @@ class Field extends Model {
         } else {
             throw new Error(`no column and no value in field: ${this.getFullName()}`);
         }
-    }
-
-    getFullName() {
-        return [
-            this.getForm().getFullName(),
-            this.getName()
-        ].join('.');
     }
 
     getDataSource() {

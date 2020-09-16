@@ -52,7 +52,7 @@ class TableFormController extends FormController {
     }
 
     fill() {
-        // console.log('TableFormController.fill', this.model.getName());
+        // console.log('TableFormController.fill', this.model.getFullName());
         super.fill();
         const dataSource = this.model.getDataSource();
         if (dataSource.getLimit()) {
@@ -95,7 +95,7 @@ class TableFormController extends FormController {
     }
 
     onRefilled(ea) {
-        console.log('TableFormController.onRefilled', this.model.getName());
+        console.log('TableFormController.onRefilled', this.model.getFullName());
         this.grid.clear();
         this.updateCountAndGoTo();
         this.grid.fill();
@@ -170,7 +170,7 @@ class TableFormController extends FormController {
     }
 
     onShowPage() {
-        console.log('TableFormController.onShowPage', this.model.getName());
+        console.log('TableFormController.onShowPage', this.model.getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
