@@ -162,7 +162,7 @@ class ApplicationController extends ModelController {
     }
 
     closePage(pageController) {
-        console.log('ApplicationController.closePage');
+        console.log('ApplicationController.closePage', pageController.model.getFullName());
         const tab = this.findTabByPageController(pageController);
         this.appTC.closeTab(tab);
         pageController.deinit();

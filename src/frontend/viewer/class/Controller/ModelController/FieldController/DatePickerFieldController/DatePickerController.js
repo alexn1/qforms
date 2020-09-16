@@ -58,7 +58,7 @@ class DatePickerFieldController extends FieldController {
     // }
 
     setValue(value, view) {
-        console.log('DatePickerController.setValue', this.model.getFullName(), value);
+        // console.log('DatePickerController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker.setValue(value);
         }
@@ -93,7 +93,7 @@ class DatePickerFieldController extends FieldController {
     }
 
     getValue(view) {
-        console.log('DatePickerFieldController.getValue', this.model.getFullName());
+        // console.log('DatePickerFieldController.getValue', this.model.getFullName());
         if (this.model.getForm().getClassName() === 'RowForm') {
             return this.dropdownDatePicker.getValue();
         }

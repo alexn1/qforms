@@ -3,7 +3,7 @@
 class DropdownDatePickerWidget extends Widget {
 
     constructor(el) {
-        console.log('DropdownDatePickerWidget.constructor', el);
+        // console.log('DropdownDatePickerWidget.constructor', el);
         super(el);
         this.datePicker = null;
         this.onChange   = null;

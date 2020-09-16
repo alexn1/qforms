@@ -82,12 +82,12 @@ class PageController extends ModelController {
     }
 
     onClosePageClick(e) {
-        console.log('PageController.onClosePageClick');
+        // console.log('PageController.onClosePageClick', this.model.getFullName());
         this.close();
     }
 
     close() {
-        console.log('PageController.close');
+        console.log('PageController.close', this.model.getFullName());
         if (this.isChanged() && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
         this.getApplicationController().closePage(this);
     }

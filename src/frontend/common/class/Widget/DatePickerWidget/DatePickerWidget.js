@@ -2,7 +2,7 @@
 
 class DatePickerWidget extends Widget{
     constructor(el) {
-        console.log('DatePickerWidget.constructor', el);
+        // console.log('DatePickerWidget.constructor', el);
         super(el);
         this.selectedMonth  = null;
         this.selectedDate   = null;
