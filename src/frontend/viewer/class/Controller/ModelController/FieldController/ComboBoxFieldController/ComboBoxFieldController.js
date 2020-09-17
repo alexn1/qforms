@@ -49,14 +49,14 @@ class ComboBoxFieldController extends FieldController {
         }
     }
 
-    getValue(view) {
+    getStringValue(view) {
         switch (this.model.getForm().getClassName()) {
-            case 'RowForm':
-                return (view.firstElementChild.selectedIndex === 0) ? null : view.firstElementChild.value;
-            case 'TableForm':
-                return view.firstElementChild.value;
+            case 'RowForm'  : return view.firstElementChild.value;
+            case 'TableForm': return view.firstElementChild.innerHTML;
+            default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
+
 
     setValue(value, view) {
         switch (this.model.getForm().getClassName()) {
