@@ -111,7 +111,9 @@ class PageController extends ModelController {
         // console.log('PageController.getCaption', this.model.getFullName());
         const key = this.model.getKey();
         let caption = this.model.data.caption;
-        caption += `(${this.model.id})`;
+        if (ApplicationController.isInDebugMode()) {
+            caption += `(${this.model.id})`;
+        }
         if (key) {
             caption += ` ${key}`;
         }
