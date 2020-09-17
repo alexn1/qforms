@@ -61,7 +61,20 @@ class Field extends Model {
 
     setValue(row, value) {
         console.log('Field.setValue', this.getFullName(), value);
+        if (value === undefined) throw new Error('undefined is wrong value for field');
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
+
+        if (value !== null) {
+            const columnType = this.getColumnType();
+            const valueType = typeof value;
+            if (columnType === 'date') {
+                if (!(value instanceof Date)) {
+                    throw new Error(`${this.getFullName()}: value not instance of Date`);
+                }
+            } else if (columnType !== valueType) {
+                throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${columnType}`);
+            }
+        }
         const valueForDataSource = this.prepareValueForDataSource(value);
         this.getForm().getDataSource().setValue(row, this.data.column, valueForDataSource);
         this.valueToParams(row);
@@ -70,21 +83,20 @@ class Field extends Model {
 
     prepareValueForDataSource(value) {
         if (value === undefined) throw new Error('undefined is wrong value for data source');
-        if (value !== null) {
-            const type = typeof value;
-            if (type === 'object') {
-                if (value instanceof Date) return value.toISOString();
-                return JSON.stringify(value);
-            } else if (type === 'string') {
-                if (value.trim() === '') return null;
-                if (this.getColumnType() === 'number') {
-                    const num = Number(value);
-                    if (isNaN(num)) throw new Error(`wrong number: ${value}`);
-                    return num;
-                }
+        if (value === null) return null;
+
+        const type = typeof value;
+        if (type === 'object') {
+            if (value instanceof Date) return value.toISOString();
+            return JSON.stringify(value);
+        } else if (type === 'string') {
+            if (value.trim() === '') return null;
+            if (this.getColumnType() === 'number') {
+                const num = Number(value);
+                if (isNaN(num)) throw new Error(`wrong number: ${value}`);
+                return num;
             }
         }
-        return value;
     }
 
     isChanged(row) {
@@ -133,7 +145,7 @@ class Field extends Model {
     }
 
     valueToString(value) {
-        // console.log('Field.valueToString', this.getFullName(), typeof value, value);
+        console.log('Field.valueToString', this.getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
