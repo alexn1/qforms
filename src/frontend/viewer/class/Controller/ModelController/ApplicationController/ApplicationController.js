@@ -4,6 +4,7 @@ class ApplicationController extends ModelController {
 
     static create(model, view) {
         // console.log('ApplicationController.create');
+        console.log('debug:', ApplicationController.isInDebugMode());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
@@ -20,6 +21,20 @@ class ApplicationController extends ModelController {
         this.appTC      = null;
         this.statusbar  = null;
         this.lastPageId =    0;
+    }
+
+    static getSearchObj() {
+        // console.log('ApplicationController.getSearchObj:', window.location);
+        if (!window.location.search.split('?')[1]) return {};
+        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+            const kv = item.split('=');
+            acc[kv[0]] = kv[1];
+            return acc;
+        }, {});
+    }
+
+    static isInDebugMode() {
+        return ApplicationController.getSearchObj()['admin'] === '1';
     }
 
     init() {
