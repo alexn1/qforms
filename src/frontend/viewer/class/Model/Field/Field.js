@@ -84,19 +84,12 @@ class Field extends Model {
     prepareValueForDataSource(value) {
         if (value === undefined) throw new Error('undefined is wrong value for data source');
         if (value === null) return null;
-
         const type = typeof value;
         if (type === 'object') {
             if (value instanceof Date) return value.toISOString();
             return JSON.stringify(value);
-        } else if (type === 'string') {
-            if (value.trim() === '') return null;
-            if (this.getColumnType() === 'number') {
-                const num = Number(value);
-                if (isNaN(num)) throw new Error(`wrong number: ${value}`);
-                return num;
-            }
         }
+        return value;
     }
 
     isChanged(row) {

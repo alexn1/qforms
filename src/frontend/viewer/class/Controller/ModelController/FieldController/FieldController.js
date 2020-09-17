@@ -87,8 +87,17 @@ class FieldController extends ModelController {
 
     stringToValue(stringValue) {
         if (stringValue.trim() === '') return null;
-        if (this.model.getColumnType() === 'object') {
+        const columnType = this.model.getColumnType();
+        if (columnType === 'object' || columnType === 'boolean') {
             return JSON.parse(stringValue);
+        } else if (columnType === 'date') {
+            const date = new Date(stringValue);
+            if (date.toString() === 'Invalid Date') throw new Error('invalid date');
+            return date;
+        } else if (columnType === 'number') {
+            const num = Number(stringValue);
+            if (isNaN(num)) throw new Error('not a number');
+            return num;
         }
         return stringValue;
     }
