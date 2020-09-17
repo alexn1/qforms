@@ -110,11 +110,10 @@ class PageController extends ModelController {
     getCaption() {
         // console.log('PageController.getCaption', this.model.getFullName());
         const key = this.model.getKey();
-        let caption;
+        let caption = this.model.data.caption;
+        caption += `(${this.model.id})`;
         if (key) {
-            caption = this.model.data.caption + ' ' + key;
-        } else {
-            caption = this.model.data.caption;
+            caption += ` ${key}`;
         }
         if (this.isChanged() || this.model.hasNew()) {
             caption += ' *';
