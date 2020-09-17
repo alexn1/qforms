@@ -125,6 +125,7 @@ class FieldController extends ModelController {
     }
 
     isValid(view) {
+        // console.log('FieldController.isValid', this.model.getFullName());
         try {
             const value = this.getValue(view);
 
@@ -161,12 +162,12 @@ class FieldController extends ModelController {
             const value = this.getValue(view);
             const newValue = this.model.setValue(row, value);
             this.setPlaceHolder(newValue, view);
+
+            // event
+            this.updateChangedClass(row, view);
+            this.parent.onFieldChange({source: this, view, row, el, field: this});
         }
         this.updateErrorClass(view, valid);
-
-        // event
-        this.updateChangedClass(row, view);
-        this.parent.onFieldChange({source: this, view, row, el, field: this});
     }
 
     updateErrorClass(view, valid) {

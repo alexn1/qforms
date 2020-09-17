@@ -138,7 +138,7 @@ class Field extends Model {
     }
 
     valueToString(value) {
-        console.log('Field.valueToString', this.getFullName(), typeof value, value);
+        // console.log('Field.valueToString', this.getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
