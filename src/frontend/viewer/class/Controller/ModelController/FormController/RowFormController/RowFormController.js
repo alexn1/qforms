@@ -152,7 +152,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             const field = this.fields[name];
             const view = this.fieldViews[name];
-            if (view) {
+            if (view && field.isChanged(row, view)) {
                 field.refill(row, view);
             }
         }

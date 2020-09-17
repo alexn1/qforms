@@ -27,12 +27,15 @@ class DropdownDatePickerWidget extends Widget {
             e.stopPropagation();
             return false;
         });
-        close.addEventListener('click', this.onCloseClick.bind(this))
+        close.addEventListener('click', this.onCloseClick.bind(this));
     }
 
     onCloseClick() {
         // console.log('DropdownDatePickerWidget.onCloseClick');
         this.clear();
+        if (this.onChange) {
+            this.onChange(null);
+        }
     }
 
     getCloseElement() {
@@ -122,9 +125,6 @@ class DropdownDatePickerWidget extends Widget {
         this.getInputElement().value = '';
         this.getCloseElement().classList.remove('visible');
         this.datePicker.setSelectedDate(null);
-        if (this.onChange) {
-            this.onChange(null);
-        }
     }
 
     setValue(date) {

@@ -53,6 +53,7 @@ class FieldController extends ModelController {
         this.setValue(value, view);
         this.setViewStyle(view, row);
         this.updateChangedClass(row, view);
+        this.updateErrorClass(view, true);
         view.firstElementChild.classList.remove('error');
     }
 
@@ -92,7 +93,7 @@ class FieldController extends ModelController {
             return JSON.parse(stringValue);
         } else if (columnType === 'date') {
             const date = new Date(stringValue);
-            if (date.toString() === 'Invalid Date') throw new Error('invalid date');
+            if (date.toString() === 'Invalid Date') throw new Error(`invalid date: ${stringValue}`);
             return date;
         } else if (columnType === 'number') {
             const num = Number(stringValue);
