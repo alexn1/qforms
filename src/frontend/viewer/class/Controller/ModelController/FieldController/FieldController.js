@@ -163,18 +163,21 @@ class FieldController extends ModelController {
             const newValue = this.model.setValue(row, value);
             this.setPlaceHolder(newValue, view);
 
-            // event
-            this.updateChangedClass(row, view);
-            this.parent.onFieldChange({source: this, view, row, el, field: this});
+
         }
         this.updateErrorClass(view, valid);
+
+
+        // event
+        this.updateChangedClass(row, view);
+        this.parent.onFieldChange({source: this, view, row, el, field: this});
     }
 
     updateErrorClass(view, valid) {
         if (valid) {
-            view.firstElementChild.classList.remove('error');
+            view.classList.remove('error');
         } else {
-            view.firstElementChild.classList.add('error');
+            view.classList.add('error');
         }
     }
 
@@ -183,22 +186,15 @@ class FieldController extends ModelController {
     }
 
     isChanged(row, view) {
+        // console.log('FieldController.isChanged', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
         if (!view) throw new Error('FieldController: no view');
-        // console.log('FieldController.isChanged', this.model.getFullName());
-        const fieldChanged = this.model.valueToString(this.model.getValue(row)) !== this.model.valueToString(this.getValue(view));
-        if (fieldChanged) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}:`);
-            // console.log('this.getStringValue(view):', this.getStringValue(view));
-            // console.log('this.model.getValue(row):', this.model.getValue(row));
-            // console.log('this.model.valueToString(this.model.getValue(row)):', this.model.valueToString(this.model.getValue(row)));
-            // console.log('row:', row);
-        }
+        if (!this.isValid(view)) return true;
         const rowChanged = this.model.isChanged(row);
         if (rowChanged) {
             console.log(`ROW CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
         }
-        return rowChanged || fieldChanged;
+        return rowChanged;
     }
 
 }

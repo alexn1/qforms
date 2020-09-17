@@ -169,10 +169,11 @@ class PageController extends ModelController {
     }
 
     isChanged() {
+        console.log('PageController.isChanged', this.model.getFullName());
         for (const name in this.forms) {
             const form = this.forms[name];
             if (form.isChanged()) {
-                console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+                // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
                 return true;
             }
         }
