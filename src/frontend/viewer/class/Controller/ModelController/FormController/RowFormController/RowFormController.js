@@ -190,8 +190,8 @@ class RowFormController extends FormController {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
         const changed = this.isChanged();
         const hasNew = this.model.hasNew();
-        console.log('changed:', changed);
-        console.log('hasNew:', hasNew);
+        // console.log('changed:', changed);
+        // console.log('hasNew:', hasNew);
         if (changed || hasNew) {
             if (this.isValid()) {
                 $(this.view).find('button.saveForm').prop('disabled', !(changed || this.model.hasNew()));

@@ -149,7 +149,7 @@ class FieldController extends ModelController {
             }
             return isValid && isValid2;
         } catch (err) {
-            console.error('not valid: ', err.message);
+            console.error(`${this.model.getFullName()} not valid:`, err.message);
             return false;
         }
     }
