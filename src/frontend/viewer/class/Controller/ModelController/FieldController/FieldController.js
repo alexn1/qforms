@@ -170,8 +170,6 @@ class FieldController extends ModelController {
             this.model.setValue(row, value);
         }
         this.updateErrorClass(view, valid);
-
-        // event
         this.updateChangedClass(row, view);
         this.parent.onFieldChange({source: this, view, row, el, field: this});
     }
