@@ -1,0 +1,13 @@
+button {
+    border: none;
+    background-color: #aaa;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+button:hover:not(:active) {
+    background-color: #bbb;
+}
+button:active {
+    background-color: #999;
+}
