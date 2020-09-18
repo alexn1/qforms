@@ -86,22 +86,7 @@ class FieldController extends ModelController {
         // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
     }
 
-    stringToValue(stringValue) {
-        if (stringValue.trim() === '') return null;
-        const columnType = this.model.getColumnType();
-        if (columnType === 'object' || columnType === 'boolean') {
-            return JSON.parse(stringValue);
-        } else if (columnType === 'date') {
-            const date = new Date(stringValue);
-            if (date.toString() === 'Invalid Date') throw new Error(`invalid date: ${stringValue}`);
-            return date;
-        } else if (columnType === 'number') {
-            const num = Number(stringValue);
-            if (isNaN(num)) throw new Error('not a number');
-            return num;
-        }
-        return stringValue;
-    }
+
 
     setValue(value, view) {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
@@ -115,7 +100,7 @@ class FieldController extends ModelController {
     getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
         const stringValue = this.getStringValue(view);
-        const value = this.stringToValue(stringValue);
+        const value = this.model.stringToValue(stringValue);
         if (ApplicationController.isInDebugMode()) {
             this.setPlaceHolder(value, view);
         }
@@ -166,8 +151,7 @@ class FieldController extends ModelController {
         const row = view.dbRow;
         const valid = this.isValid(view);
         if (valid) {
-            const value = this.getValue(view);
-            this.model.setValue(row, value);
+            this.model.setValue(row, this.getValue(view));
         }
         this.updateErrorClass(view, valid);
         this.updateChangedClass(row, view);
