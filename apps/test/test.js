@@ -65,6 +65,14 @@ class testController extends ApplicationController {
             console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
              console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
         });
+
+        const openModalButton = this.view.querySelector('#openModalButton');
+        openModalButton.addEventListener('click', () => {
+            const modal = new ModalWidget(document.querySelector(".ModalWidget"));
+            modal.open();
+
+        })
+
     }
 
     initMenu() {}

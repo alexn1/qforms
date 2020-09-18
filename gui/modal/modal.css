@@ -38,7 +38,7 @@ button:active {
     float: right;
 }
 
-.close:hover, .close:focus {
+.close:hover {
     color: black;
     cursor: pointer;
 }
