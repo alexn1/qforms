@@ -105,15 +105,21 @@ class FieldController extends ModelController {
 
     setValue(value, view) {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
-        this.setPlaceHolder(value, view);
         const stringValue = this.model.valueToString(value);
         this.setStringValue(stringValue, view);
+        if (ApplicationController.isInDebugMode()) {
+            this.setPlaceHolder(value, view);
+        }
     }
 
     getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
         const stringValue = this.getStringValue(view);
-        return this.stringToValue(stringValue);
+        const value = this.stringToValue(stringValue);
+        if (ApplicationController.isInDebugMode()) {
+            this.setPlaceHolder(value, view);
+        }
+        return value;
     }
 
     setViewStyle(view, row) {
@@ -161,8 +167,7 @@ class FieldController extends ModelController {
         const valid = this.isValid(view);
         if (valid) {
             const value = this.getValue(view);
-            const newValue = this.model.setValue(row, value);
-            this.setPlaceHolder(value, view);
+            this.model.setValue(row, value);
         }
         this.updateErrorClass(view, valid);
 

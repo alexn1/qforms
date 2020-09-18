@@ -34,7 +34,7 @@ class TextBoxFieldController extends FieldController {
     }
 
     setPlaceHolder(value, view) {
-        // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
+        // console.log('TextBoxFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (value === undefined) {
                 view.firstElementChild.placeholder = 'undefined';
