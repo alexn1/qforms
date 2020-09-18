@@ -141,7 +141,7 @@ class RowFormController extends FormController {
     }
 
     onDiscardClick(el) {
-        console.log('RowFormController.onDiscardClick');
+        console.log('RowFormController.onDiscardClick', this.model.getFullName());
 
         if (this.model.getDataSource().isChanged()) {
             this.model.getDataSource().discard();

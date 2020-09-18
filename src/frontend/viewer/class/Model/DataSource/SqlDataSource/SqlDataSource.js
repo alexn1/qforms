@@ -172,7 +172,7 @@ class SqlDataSource extends DataSource {
             parentPageName: page ? page.parentPageName : null
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
-        if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         this.count  = data.count;
         this.length = data.rows.length;
         return data;
