@@ -33,7 +33,7 @@ class TextBoxFieldController extends FieldController {
         view.firstElementChild.contentEditable = false;
     }
 
-    setPlaceHolder(value, view) {
+    setPlaceHolder(view, value) {
         // console.log('TextBoxFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (value === undefined) {

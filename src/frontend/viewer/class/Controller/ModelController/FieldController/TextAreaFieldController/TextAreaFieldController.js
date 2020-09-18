@@ -29,7 +29,7 @@ class TextAreaFieldController extends FieldController {
     //     return isValid;
     // }
 
-    setPlaceHolder(value, view) {
+    setPlaceHolder(view, value) {
         // console.log('TextAreaFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (value === undefined) {

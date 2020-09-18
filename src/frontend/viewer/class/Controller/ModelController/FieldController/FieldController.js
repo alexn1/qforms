@@ -82,18 +82,16 @@ class FieldController extends ModelController {
         }
     }
 
-    setPlaceHolder(value, view) {
+    setPlaceHolder(view, value) {
         // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
     }
-
-
 
     setValue(value, view) {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         const stringValue = this.model.valueToString(value);
         this.setStringValue(stringValue, view);
         if (ApplicationController.isInDebugMode()) {
-            this.setPlaceHolder(value, view);
+            this.setPlaceHolder(view, value);
         }
     }
 
@@ -102,7 +100,7 @@ class FieldController extends ModelController {
         const stringValue = this.getStringValue(view);
         const value = this.model.stringToValue(stringValue);
         if (ApplicationController.isInDebugMode()) {
-            this.setPlaceHolder(value, view);
+            this.setPlaceHolder(view, value);
         }
         return value;
     }
