@@ -24,7 +24,7 @@ class LinkFieldController extends FieldController {
     }
 
     setValue(value, view) {
-        this.setStringValue(this.model.valueToString(value), view);
+        this.setStringValue(this.valueToString(value), view);
     }
 
     _onClick(el) {
