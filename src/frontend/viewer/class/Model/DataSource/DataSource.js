@@ -125,11 +125,9 @@ class DataSource extends Model {
             return this.changes.get(row)[column];
         }
         const value = row[column];
-
         if (value !== null && typeof value === 'object') {
             throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format`);
         }
-
         // console.log('DataSource.getValue:', value);
         return value;
     }

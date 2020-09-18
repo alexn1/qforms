@@ -102,9 +102,13 @@ class Field extends Model {
         // console.log('Field.getValue', this.getFullName());
         if (this.data.column) {
             let value = this.getForm().getDataSource().getValue(row, this.data.column);
-            const type = this.getColumnType();
-            if (type === 'date' && typeof value === 'string') {
-                value = new Date(value);
+            if (value === null) return null;
+            const columnType = this.getColumnType();
+            if (columnType === 'date') {
+                if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
+                return new Date(value);
+            } else if (columnType === 'object') {
+                return JSON.parse(value);
             }
             return value;
         } else if (this.data.value) {
