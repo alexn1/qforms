@@ -60,18 +60,15 @@ class testController extends ApplicationController {
         };
 
         // button
-        const button = this.view.querySelector('#testButton');
-        button.addEventListener('click', (e) => {
+        this.view.querySelector('#testButton').addEventListener('click', (e) => {
             console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
-             console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
+            console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
         });
 
-        const openModalButton = this.view.querySelector('#openModalButton');
-        openModalButton.addEventListener('click', () => {
+        this.view.querySelector('#openModalButton').addEventListener('click', () => {
             const modal = new ModalWidget(document.querySelector(".ModalWidget"));
             modal.open();
-
-        })
+        });
 
     }
 
