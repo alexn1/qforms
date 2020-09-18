@@ -18,10 +18,10 @@ class Field extends Model {
             if (name.indexOf('.') !== -1) {
                 let arr = name.split('.');
                 if (arr[0] === 'this') {
-                    arr[0] = this.getForm().getPage().getName();
+                    arr[0] = this.getPage().getName();
                 }
-                if (arr[0] === 'parent' && this.getForm().getPage().parentPageName) {
-                    arr[0] = this.getForm().getPage().parentPageName;
+                if (arr[0] === 'parent' && this.getPage().parentPageName) {
+                    arr[0] = this.getPage().parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
             } else {
@@ -55,7 +55,7 @@ class Field extends Model {
     valueToParams(row) {
         // console.log('Field.valueToParams', this.getFullName());
         if (this.data.column) {
-            this.getForm().getPage().params[this.getFullName()] = this.getValue(row);
+            this.getPage().params[this.getFullName()] = this.getValue(row);
         }
     }
 
