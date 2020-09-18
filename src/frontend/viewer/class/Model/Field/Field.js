@@ -78,7 +78,6 @@ class Field extends Model {
         const valueForDataSource = this.prepareValueForDataSource(value);
         this.getForm().getDataSource().setValue(row, this.data.column, valueForDataSource);
         this.valueToParams(row);
-        return valueForDataSource;
     }
 
     prepareValueForDataSource(value) {
