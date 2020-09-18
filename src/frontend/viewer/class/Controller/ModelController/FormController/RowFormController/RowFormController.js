@@ -142,20 +142,26 @@ class RowFormController extends FormController {
 
     onDiscardClick(el) {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
+        const changedFields = [];
+        const row = this.model.getRow();
+        for (const name in this.fields) {
+            const field = this.fields[name];
+            const view = this.fieldViews[name];
+            if (view && field.isChanged(row, view)) {
+                changedFields.push(field);
+            }
+        }
 
         if (this.model.getDataSource().isChanged()) {
             this.model.getDataSource().discard();
         }
 
         // refill changed fields
-        const row = this.model.getRow();
-        for (const name in this.fields) {
-            const field = this.fields[name];
+        changedFields.forEach(field => {
+            const name = field.model.getName();
             const view = this.fieldViews[name];
-            if (view && field.isChanged(row, view)) {
-                field.refill(row, view);
-            }
-        }
+            field.refill(row, view);
+        });
 
         // ui
         $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
