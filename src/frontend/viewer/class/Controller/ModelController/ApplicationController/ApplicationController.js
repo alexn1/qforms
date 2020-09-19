@@ -124,12 +124,7 @@ class ApplicationController extends ModelController {
 
     createPageController(model, select = false, track = false) {
         console.log('ApplicationController.createPageController', model);
-        // const model  = e.page;
-        // const select = e.select;
-        // const track  = e.track;
-        const html = QForms.render(model.data.view, {
-            model  : model
-        });
+        const html = QForms.render(model.data.view, {model});
         const view = $(html).get(0);
 
         // tab
