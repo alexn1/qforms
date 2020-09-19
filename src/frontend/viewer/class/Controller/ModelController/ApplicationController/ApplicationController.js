@@ -210,6 +210,17 @@ class ApplicationController extends ModelController {
         console.log('ApplicationController.openPage', args.name);
         const name            = args.name;
         const key             = args.key || null;
+
+
+
+        // if this page with this key is already opened, then show it
+        const pageController = this.findPageControllerByPageNameAndKey(name, key);
+        // console.log('pageController:', pageController);
+        if (pageController) {
+            this.onPageSelected({source: this, pageController: pageController});
+            return;
+        }
+
         const parentPage      = args.parentPage;
         const parentPageName  = parentPage ? parentPage.name : null;
         let keyParams       = {};
@@ -220,14 +231,6 @@ class ApplicationController extends ModelController {
             for (const keyName in keyParams) {
                 params[keyName] = keyParams[keyName];
             }
-        }
-
-        // if this page with this key is already opened, then show it
-        const pageController = this.findPageControllerByPageNameAndKey(name, key);
-        // console.log('pageController:', pageController);
-        if (pageController !== null) {
-            this.onPageSelected({source: this, pageController: pageController});
-            return;
         }
 
         // if page doesn't exist, create it

@@ -81,7 +81,7 @@ class TabWidget extends Widget {
     }
 
     selectTab(tab, track) {
-        // console.log('TabWidget.selectTab', tab);
+        // console.log('TabWidget.selectTab', tab, track);
         if (this.activeTab === tab) {
             return;
         }
