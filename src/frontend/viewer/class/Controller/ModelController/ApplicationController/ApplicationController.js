@@ -34,7 +34,7 @@ class ApplicationController extends ModelController {
     }
 
     static isInDebugMode() {
-        return ApplicationController.getSearchObj()['admin'] === '1';
+        return ApplicationController.getSearchObj()['debug'] === '1';
     }
 
     init() {
