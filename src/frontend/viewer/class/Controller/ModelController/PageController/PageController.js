@@ -100,7 +100,9 @@ class PageController extends ModelController {
 
     setCaption(caption) {
         this.getCaptionElements().forEach(el => el.innerHTML = caption);
-        TabWidget.setTabCaption(this.tab, caption);
+        if (this.tab) {
+            TabWidget.setTabCaption(this.tab, caption);
+        }
     }
 
     getCaption() {
