@@ -136,6 +136,22 @@ class ApplicationController extends ModelController {
         pageController.init();
         pageController.fill();
     }
+    createPageController2(model) {
+        console.log('ApplicationController.createPageController2', model);
+        const html = QForms.render(model.data.view, {model});
+        const view = $(html).get(0);
+
+        const el = ModalWidget.createElement(view);
+        this.view.appendChild(el);
+        const modal = new ModalWidget(el);
+
+        // pageController
+        const pageController = PageController.create(model, view, this);
+        pageController.modal = modal;
+        pageController.init();
+        pageController.fill();
+
+    }
 
     onPageSelected(e) {
         console.log('ApplicationController.onPageSelected');
@@ -173,8 +189,12 @@ class ApplicationController extends ModelController {
 
     closePage(pageController) {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
-        const tab = this.findTabByPageController(pageController);
-        this.appTC.closeTab(tab);
+        if (pageController.tab) {
+            // const tab = this.findTabByPageController(pageController);
+            this.appTC.closeTab(pageController.tab);
+        } else if (pageController.modal) {
+            pageController.modal.close();
+        }
         pageController.deinit();
         pageController.model.deinit();
     }
@@ -251,7 +271,7 @@ class ApplicationController extends ModelController {
             parentPageName: parentPageName,
         });
         page.init();
-        this.createPageController(page, true, parentPage !== undefined);
+        this.createPageController2(page, true, parentPage !== undefined);
     }
 
     getNextPageId() {
