@@ -17,37 +17,35 @@ class PageController extends ModelController {
         super(model);
         this.view       = view;
         this.parent     = parent;
-        this.captionEls = null;
         this.forms      = {};
         this.tab        = null;
     }
 
     init() {
         const self = this;
-        self.captionEls = self.parent.view.querySelectorAll('.{pageId}_caption'.replace('{pageId}', self.model.id));
-        $(self.view).find('#{pageId}_TabWidget'.replace('{pageId}', self.model.id)).each(function() {
+        $(this.view).find(`#${this.model.id}_TabWidget`).each(function() {
             new TabWidget(this).init();
         });
 
         // disable buttons
-        $(self.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
+        $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
 
         // button click
-        $(self.view).find('button.saveAndClose').click(function() {
-            self.onSaveAndCloseClick(this);
-        });
-        $(self.view).find('button.closePage').click(function() {
-            self.onClosePageClick(this);
-        });
+        $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick.bind(this));
+        $(this.view).find('button.closePage').click(this.onClosePageClick.bind(this));
 
         // forms
-        for (const name in self.model.forms) {
-            const form = self.model.forms[name];
-            const viewId = `#${self.model.id}_${name}`;
-            const view = $(self.view).find(viewId).get(0);
-            self.forms[name] = FormController.create(form, view, self);
-            self.forms[name].init();
+        for (const name in this.model.forms) {
+            const form = this.model.forms[name];
+            const viewId = `#${this.model.id}_${name}`;
+            const view = $(this.view).find(viewId).get(0);
+            this.forms[name] = FormController.create(form, view, this);
+            this.forms[name].init();
         }
+    }
+
+    getCaptionElements() {
+        return this.view.querySelectorAll(`.caption`);
     }
 
     deinit() {
@@ -65,7 +63,7 @@ class PageController extends ModelController {
         this.setCaption(this.getCaption());
     }
 
-    async onSaveAndCloseClick(el) {
+    async onSaveAndCloseClick() {
         console.log('PageController.onSaveAndCloseClick');
         if (this.isValid()) {
             await this.model.update();
@@ -81,7 +79,7 @@ class PageController extends ModelController {
         }
     }
 
-    onClosePageClick(e) {
+    onClosePageClick() {
         // console.log('PageController.onClosePageClick', this.model.getFullName());
         this.close();
     }
@@ -101,9 +99,7 @@ class PageController extends ModelController {
     }
 
     setCaption(caption) {
-        for (let i = 0; i < this.captionEls.length; i++) {
-            this.captionEls[i].innerHTML = caption;
-        }
+        this.getCaptionElements().forEach(el => el.innerHTML = caption);
         TabWidget.setTabCaption(this.tab, caption);
     }
 
