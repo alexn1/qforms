@@ -104,8 +104,6 @@ class ApplicationController extends ModelController {
                 id  : `p${this.getNextPageId()}`
             });
             page.init();
-
-            // notify subscribers (view), that page is opened
             this.createPageController(page);
         }
     }
@@ -208,13 +206,11 @@ class ApplicationController extends ModelController {
         const name            = args.name;
         const key             = args.key || null;
 
-
-
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
         // console.log('pageController:', pageController);
         if (pageController) {
-            this.onPageSelected({source: this, pageController: pageController});
+            this.onPageSelected({source: this, pageController});
             return;
         }
 
@@ -255,8 +251,6 @@ class ApplicationController extends ModelController {
             parentPageName: parentPageName,
         });
         page.init();
-
-        // notify subscribers (controller), that page has been opened
         this.createPageController(page, true, parentPage !== undefined);
     }
 
