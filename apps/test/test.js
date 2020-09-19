@@ -66,8 +66,9 @@ class testController extends ApplicationController {
         });
 
         this.view.querySelector('#openModalButton').addEventListener('click', () => {
-            const modal = new ModalWidget(document.querySelector(".ModalWidget"));
-            modal.open();
+            const el = ModalWidget.createElement();
+            this.view.appendChild(el);
+            new ModalWidget(el);
         });
 
     }
