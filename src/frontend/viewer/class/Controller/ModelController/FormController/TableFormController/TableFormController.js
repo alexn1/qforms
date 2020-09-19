@@ -243,7 +243,7 @@ class TableFormController extends FormController {
             });
         } catch (err) {
             console.error(`${this.model.getFullName()}: edit form error handler:`, err);
-            alert(err.message);
+            alert(`${this.model.getFullName()}: ${err.message}`);
         }
     }
 }
