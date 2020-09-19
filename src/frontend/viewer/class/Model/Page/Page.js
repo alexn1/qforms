@@ -2,9 +2,10 @@
 
 class Page extends Model {
     constructor(options) {
+        if (!options.id) throw new Error('no page id');
         super(options.data, options.app);
         this.parentPageName = options.parentPageName || null;
-        this.id             = null;
+        this.id             = options.id;
         this.params         = (options.params !== undefined) ? options.params : {};
         this.dataSources    = {};
         this.forms          = {};

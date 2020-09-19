@@ -100,7 +100,8 @@ class ApplicationController extends ModelController {
         for (const name in this.model.data.pages) {
             const page = new Page({
                 app : this.model,
-                data: this.model.data.pages[name]
+                data: this.model.data.pages[name],
+                id  : `p${this.getNextPageId()}`
             });
             page.init();
 
@@ -124,7 +125,6 @@ class ApplicationController extends ModelController {
     onPageOpened(e) {
         console.log('ApplicationController.onPageOpened', e.page);
         const model = e.page;
-        model.id = `p${this.getNextPageId()}`;
         const html = QForms.render(model.data.view, {
             model  : model
         });
@@ -253,8 +253,9 @@ class ApplicationController extends ModelController {
         const page = new Page({
             app           : this.model,
             data          : response.page,
+            id            : `p${this.getNextPageId()}`,
             params        : params,
-            parentPageName: parentPageName
+            parentPageName: parentPageName,
         });
         page.init();
 
