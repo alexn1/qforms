@@ -17,10 +17,10 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
         this.view       = view;
-        this.menuWidget = null;
-        this.appTC      = null;
-        this.statusbar  = null;
-        this.lastPageId =    0;
+        this.lastPageId = 0;
+        this.menuWidget       = null;
+        this.tabWidget        = null;
+        this.statusbarWidget  = null;
     }
 
     static getSearchObj() {
@@ -85,15 +85,15 @@ class ApplicationController extends ModelController {
     }
 
     initStatusbar() {
-        this.statusbar = this.view.querySelector('#statusbar');
+        this.statusbarWidget = this.view.querySelector('.ApplicationView > .StatusbarWidget');
     }
 
     initTab() {
-        this.appTC = new TabWidget(this.view.querySelector('#appTC'));
-        this.appTC.init();
-        this.appTC.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-        this.appTC.on('tabShow'         , this.listeners.tabShow = this.onTabShow.bind(this));
-        this.appTC.on('tabHide'         , this.listeners.tabHide = this.onTabHide.bind(this));
+        this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
+        this.tabWidget.init();
+        this.tabWidget.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
+        this.tabWidget.on('tabShow'         , this.listeners.tabShow = this.onTabShow.bind(this));
+        this.tabWidget.on('tabHide'         , this.listeners.tabHide = this.onTabHide.bind(this));
     }
 
     createPages() {
@@ -114,9 +114,9 @@ class ApplicationController extends ModelController {
         this.model.off('request', this.listeners.request);
 
         // TabWidget
-        this.appTC.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.appTC.off('tabShow', this.listeners.tabShow);
-        this.appTC.off('tabHide', this.listeners.tabHide);
+        this.tabWidget.off('tabClosingByUser', this.listeners.tabClosingByUser);
+        this.tabWidget.off('tabShow', this.listeners.tabShow);
+        this.tabWidget.off('tabHide', this.listeners.tabHide);
         super.deinit();
     }
 
@@ -126,8 +126,8 @@ class ApplicationController extends ModelController {
         const view = $(html).get(0);
 
         // tab
-        const tab = this.appTC.createTab(view);
-        if (select) this.appTC.selectTab(tab, track);
+        const tab = this.tabWidget.createTab(view);
+        if (select) this.tabWidget.selectTab(tab, track);
 
         // pageController
         const pageController = PageController.create(model, view, this);
@@ -156,7 +156,7 @@ class ApplicationController extends ModelController {
     onPageSelected(e) {
         console.log('ApplicationController.onPageSelected');
         const tab = this.findTabByPageController(e.pageController);
-        this.appTC.selectTab(tab);
+        this.tabWidget.selectTab(tab);
     }
 
     onTabClosingByUser(e) {
@@ -182,16 +182,15 @@ class ApplicationController extends ModelController {
 
     onRequest(e) {
         // console.log('onRequest', e);
-        if (this.statusbar) {
-            this.statusbar.innerHTML = `Last query time: ${e.time} ms`;
+        if (this.statusbarWidget) {
+            this.statusbarWidget.innerHTML = `Last query time: ${e.time} ms`;
         }
     }
 
     closePage(pageController) {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (pageController.tab) {
-            // const tab = this.findTabByPageController(pageController);
-            this.appTC.closeTab(pageController.tab);
+            this.tabWidget.closeTab(pageController.tab);
         } else if (pageController.modal) {
             pageController.modal.close();
         }
@@ -201,8 +200,8 @@ class ApplicationController extends ModelController {
 
     findPageControllerByPageNameAndKey(pageName, key) {
         // console.log('ApplicationController.findPageControllerByPageNameAndKey', pageName, key);
-        for (let i = 0; i < this.appTC.tabList.childNodes.length; i++) {
-            const tab = this.appTC.tabList.childNodes[i];
+        for (let i = 0; i < this.tabWidget.tabList.childNodes.length; i++) {
+            const tab = this.tabWidget.tabList.childNodes[i];
             if (tab.pageController.model.getName() === pageName && tab.pageController.model.getKey() === key) {
                 return tab.pageController;
             }
@@ -212,8 +211,8 @@ class ApplicationController extends ModelController {
 
     findTabByPageController(pageController) {
         // console.log('ApplicationController.findTabByPageController');
-        for (let i = 0; i < this.appTC.tabList.childNodes.length; i++) {
-            const tab = this.appTC.tabList.childNodes[i];
+        for (let i = 0; i < this.tabWidget.tabList.childNodes.length; i++) {
+            const tab = this.tabWidget.tabList.childNodes[i];
             if (tab.pageController === pageController) {
                 return tab;
             }
