@@ -106,7 +106,7 @@ class ApplicationController extends ModelController {
             page.init();
 
             // notify subscribers (view), that page is opened
-            this.onPageOpened({source: this, page: page, track: false, select: false});
+            this.createPageController(page);
         }
     }
 
@@ -122,9 +122,11 @@ class ApplicationController extends ModelController {
         super.deinit();
     }
 
-    onPageOpened(e) {
-        console.log('ApplicationController.onPageOpened', e.page);
-        const model = e.page;
+    createPageController(model, select = false, track = false) {
+        console.log('ApplicationController.createPageController', model);
+        // const model  = e.page;
+        // const select = e.select;
+        // const track  = e.track;
         const html = QForms.render(model.data.view, {
             model  : model
         });
@@ -132,7 +134,7 @@ class ApplicationController extends ModelController {
 
         // tab
         const tab = this.appTC.createTab(view);
-        if (e.select) this.appTC.selectTab(tab, e.track);
+        if (select) this.appTC.selectTab(tab, track);
 
         // pageController
         const pageController = PageController.create(model, view, this);
@@ -260,12 +262,7 @@ class ApplicationController extends ModelController {
         page.init();
 
         // notify subscribers (controller), that page has been opened
-        this.onPageOpened({
-            source : this,
-            page   : page,
-            track  : parentPage !== undefined,
-            select : true
-        });
+        this.createPageController(page, true, parentPage !== undefined);
     }
 
     getNextPageId() {
