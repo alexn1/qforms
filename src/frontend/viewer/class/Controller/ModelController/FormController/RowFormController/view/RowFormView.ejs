@@ -1,9 +1,9 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
     <div class="toolbar">
     <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
-        <button class="btn btn-default btn-xs saveForm">Save</button>
-        <button class="btn btn-default btn-xs discardForm">Discard</button>
-        <button class="btn btn-default btn-xs refreshForm">Refresh</button>
+        <button class="ButtonWidget saveForm">Save</button>
+        <button class="ButtonWidget discardForm">Discard</button>
+        <button class="ButtonWidget refreshForm">Refresh</button>
     <% } %>
     <% if (Object.keys(model.data.actions).length > 0) { %>
         <div class="dropdown" style="display: inline-block">

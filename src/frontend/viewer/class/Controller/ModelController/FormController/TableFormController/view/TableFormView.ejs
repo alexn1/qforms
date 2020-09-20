@@ -1,13 +1,13 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="TableFormView <%=model.getName()%> full flex-rows">
     <div class="flex-min">
         <% if (model.data.refreshButton && model.data.refreshButton === 'true') {%>
-            <button class="btn btn-default btn-xs refresh"><%=model.getApp().data.text.form.refresh%></button>
+            <button class="refresh"><%=model.getApp().data.text.form.refresh%></button>
         <% } %>
         <% if (model.data.newRowMode !== 'disabled') {%>
-            <button class="btn btn-default btn-xs new"><%=model.getApp().data.text.form.new%></button>
+            <button class="new"><%=model.getApp().data.text.form.new%></button>
         <% } %>
         <% if (model.data.deleteRowMode !== 'disabled') {%>
-            <button class="btn btn-default btn-xs delete"><%=model.getApp().data.text.form.delete%></button>
+            <button class="delete"><%=model.getApp().data.text.form.delete%></button>
         <% } %>
     </div>
     <div id="<%=model.getPage().id%>_<%=model.getName()%>_GridWidget" class="GridWidget flex-max" tabindex="0">
@@ -37,8 +37,8 @@
             <span><%=model.getApp().data.text.form.count%></span>
             <span class="count"></span>
         </div>
-        <button class="btn btn-default btn-xs previous"><%=model.getApp().data.text.form.previous%></button>
+        <button class="previous"><%=model.getApp().data.text.form.previous%></button>
         <select class="goto"></select>
-        <button class="btn btn-default btn-xs next"><%=model.getApp().data.text.form.next%></button>
+        <button class="next"><%=model.getApp().data.text.form.next%></button>
     </div>
 </div>

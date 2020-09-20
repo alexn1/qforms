@@ -1,0 +1,18 @@
+.standard button.ButtonWidget {
+  border: none;
+  background-color: #ccc;
+  color: white;
+  padding: 5px 20px;
+
+  &:hover:not(:active):not([disabled]) {
+    background-color: #ddd;
+  }
+  &:active:not([disabled]) {
+    background-color: #bbb;
+  }
+
+  &[disabled] {
+    color: gray;
+  }
+
+}

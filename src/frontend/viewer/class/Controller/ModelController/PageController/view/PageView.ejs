@@ -6,10 +6,10 @@
         <% if (model.isThereARowFormWithDefaultDs()) { %>
             <div class="toolbar flex-min">
                 <% if (model.isThereARowFormWithDefaultDsAndTable()) { %>
-                    <button class="btn btn-primary btn-sm saveAndClose"><%=model.getApp().data.text.page.saveAndClose%></button>
-                    <button class="btn btn-default btn-sm closePage"><%=model.getApp().data.text.page.close%></button>
+                    <button class="ButtonWidget saveAndClose"><%=model.getApp().data.text.page.saveAndClose%></button>
+                    <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
                 <%} else {%>
-                    <button class="btn btn-primary btn-sm closePage"><%=model.getApp().data.text.page.close%></button>
+                    <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
                 <%}%>
             </div>
             <div class="splitter flex-min">&nbsp;</div>
