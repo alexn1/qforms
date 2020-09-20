@@ -36,12 +36,14 @@ class TextBoxFieldController extends FieldController {
     setPlaceHolder(view, value) {
         // console.log('TextBoxFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            if (value === undefined) {
-                view.firstElementChild.placeholder = 'undefined';
-            } else if (value === null) {
-                view.firstElementChild.placeholder = 'null';
-            } else if (value === '') {
-                view.firstElementChild.placeholder = 'empty string';
+            if (ApplicationController.isInDebugMode()) {
+                if (value === undefined) {
+                    view.firstElementChild.placeholder = 'undefined';
+                } else if (value === null) {
+                    view.firstElementChild.placeholder = 'null';
+                } else if (value === '') {
+                    view.firstElementChild.placeholder = 'empty string';
+                }
             }
         }
     }

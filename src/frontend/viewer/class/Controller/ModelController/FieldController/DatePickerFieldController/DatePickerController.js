@@ -13,6 +13,7 @@ class DatePickerFieldController extends FieldController {
             this.dropdownDatePicker.init();
         }
         super.fill(row, view);
+        this.setPlaceHolder(view);
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker.onChange = event => {
                 this.onChange(this.dropdownDatePicker.el);
@@ -140,5 +141,12 @@ class DatePickerFieldController extends FieldController {
     //     view.firstElementChild.style.MozUserSelect = 'none';
     //     view.firstElementChild.contentEditable = false;
     // }
+
+    setPlaceHolder(view, value) {
+        // console.log('DatePickerFieldController.setPlaceHolder', this.model.getFullName(), value);
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            view.firstElementChild.firstElementChild.placeholder = 'ДД.ММ.ГГГГ';
+        }
+    }
 
 }

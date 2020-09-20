@@ -90,18 +90,14 @@ class FieldController extends ModelController {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         const stringValue = this.valueToString(value);
         this.setStringValue(stringValue, view);
-        if (ApplicationController.isInDebugMode()) {
-            this.setPlaceHolder(view, value);
-        }
+        this.setPlaceHolder(view, value);
     }
 
     getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
-        if (ApplicationController.isInDebugMode()) {
-            this.setPlaceHolder(view, value);
-        }
+        this.setPlaceHolder(view, value);
         return value;
     }
 
