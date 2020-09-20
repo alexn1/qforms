@@ -221,7 +221,7 @@ class ApplicationController extends ModelController {
     }
 
     async openPage(args) {
-        console.log('ApplicationController.openPage', args.name);
+        console.log('ApplicationController.openPage', args);
         const name            = args.name;
         const key             = args.key || null;
 
@@ -234,7 +234,7 @@ class ApplicationController extends ModelController {
         }
 
         const parentPage      = args.parentPage;
-        const parentPageName  = parentPage ? parentPage.name : null;
+        const parentPageName  = parentPage ? parentPage.getName() : null;
         let keyParams       = {};
         const params = {};
         //console.log('open ' + name + ' with key: ' + key);

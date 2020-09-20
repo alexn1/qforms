@@ -215,6 +215,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         const query = queries.join('; ');
         // console.log('query:', query);
         const result = await this.queryResult(context, query);
+        console.log('result:', result);
         if (result instanceof Array) {
             return columns.reduce((acc, column, i) => {
                 // console.log('column:', column);
@@ -240,7 +241,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         // auto
         if (autoColumns.length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumns);
-            // console.log('auto:', auto);
+            console.log('auto:', auto);
             return {
                 ...auto,
                 ...values
