@@ -85,7 +85,10 @@ class ApplicationController extends ModelController {
     }
 
     initStatusbar() {
-        this.statusbarWidget = this.view.querySelector('.ApplicationView > .StatusbarWidget');
+        const el = this.view.querySelector('.ApplicationView > .StatusbarWidget');
+        if (el) {
+            this.statusbarWidget = new StatusbarWidget(el);
+        }
     }
 
     initTab() {
@@ -183,7 +186,7 @@ class ApplicationController extends ModelController {
     onRequest(e) {
         // console.log('onRequest', e);
         if (this.statusbarWidget) {
-            this.statusbarWidget.innerHTML = `Last query time: ${e.time} ms`;
+            this.statusbarWidget.setMessage(`Last query time: ${e.time} ms`);
         }
     }
 
