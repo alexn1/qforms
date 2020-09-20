@@ -173,8 +173,10 @@ class SqlDataSource extends DataSource {
         // autoColumns
         const autoColumns = this.getAutoColumns();
         console.log('autoColumns:', autoColumns);
+        const autoTypes = this.getAutoTypes();
+        console.log('autoTypes:', autoTypes);
 
-        const values = await this.database.insertRow(context, this.getAttr('table'), autoColumns, context.row);
+        const values = await this.database.insertRow(context, this.getAttr('table'), autoColumns, context.row, autoTypes);
         console.log('values:', values);
 
         const key = this.getKeyFromValues(values);
@@ -270,6 +272,14 @@ class SqlDataSource extends DataSource {
 
     getAutoColumns() {
         return this.keyColumns.filter(name => this.table.columns[name].isAuto());
+    }
+
+    getAutoTypes() {
+        const columns = this.getAutoColumns();
+        return columns.reduce((acc, column) => {
+            acc[column] = this.table.columns[column].getAttr('type');
+            return acc;
+        }, {});
     }
 
     getAccess(context) {
