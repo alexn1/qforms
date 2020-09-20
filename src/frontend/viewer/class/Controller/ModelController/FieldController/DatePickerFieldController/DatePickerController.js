@@ -64,12 +64,8 @@ class DatePickerFieldController extends FieldController {
             this.dropdownDatePicker.setValue(value);
         } else if (this.model.getForm().getClassName() === 'TableForm') {
             if (value instanceof Date) {
-                let year = value.getFullYear();
-                let month = value.getMonth() + 1;
-                let date = value.getDate();
-                if (month < 10) month = `0${month}`;
-                if (date < 10) date = `0${date}`;
-                this.setStringValue(`${date}.${month}.${year}`, view);
+                const stringValue = Helper.formatDate(value, '{DD}.{MM}.{YYYY}')
+                this.setStringValue(stringValue, view);
             } else {
                 this.setStringValue('', view);
             }
