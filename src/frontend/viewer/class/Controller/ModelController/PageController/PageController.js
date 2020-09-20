@@ -116,7 +116,7 @@ class PageController extends ModelController {
             caption += ` ${key}`;
         }
         if (this.isChanged() || this.model.hasNew()) {
-            caption += ' *';
+            caption += ' <span class="star">*</span>';
         }
         return caption;
     }
