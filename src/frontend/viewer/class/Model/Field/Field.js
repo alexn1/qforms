@@ -104,6 +104,7 @@ class Field extends Model {
             if (value === null) return null;
             const columnType = this.getColumnType();
             if (columnType === 'date') {
+                if (value === undefined) return null; // workaround for new row
                 if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
                 return new Date(value);
             } else if (columnType === 'object') {

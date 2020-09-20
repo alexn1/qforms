@@ -79,14 +79,12 @@ class DataSource extends Model {
 
     setValue(row, column, value) {
         console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
-        if (value !== null && typeof value === 'object') {
+        if (typeof value === 'object' && value !== null) {
             throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
         }
-        if (!this.compareValue(row, column, value)) {
+        if (row[column] !== value) {
             this.changeRowColumn(row, column, value);
-
-            // workaround for new rows
-            if (row[column] === undefined && value === null) {
+            if (row[column] === undefined && value === null) {  // workaround for new rows
                 this.discardRowColumn(row, column);
             }
         } else {
@@ -94,15 +92,6 @@ class DataSource extends Model {
         }
         if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length) this.changes.delete(row);
         console.log('changes:', this.changes);
-    }
-
-    compareValue(row, column, newValue) {
-        // now we don't need to compare object as all object in DataSource must stored in JSON format
-        // const type = this.getColumnType(column);
-        // if (type === 'object') {
-        //     return JSON.stringify(row[column]) === JSON.stringify(newValue);
-        // }
-        return row[column] === newValue;
     }
 
     isChanged() {
