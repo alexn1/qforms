@@ -161,9 +161,9 @@ class PageController extends ModelController {
         this.disableSave();
     }
 
-    async openPage(args) {
-        args.parentPage = this.model;
-        return await this.parent.openPage(args);
+    async openPage(options) {
+        options.parentPage = this.model;
+        return await this.getApplicationController().openPage(options);
     }
 
     isChanged() {

@@ -41,8 +41,8 @@ class TreeFormController extends FormController {
         this.edit(e.item.qRow);
     }
 
-    onNewRootClick(ctrl) {
-        this.model.newRoot();
+    async onNewRootClick(ctrl) {
+        await this.newRoot();
     }
 
     onNewClick(ctrl) {
@@ -53,20 +53,28 @@ class TreeFormController extends FormController {
         this.model.delete(this.tree.active.qRow);
     }
 
-    new(row) {
+    async new(row) {
         const key = this.model.getDataSource().getRowKey(row);
-        this.openPage({
+        await this.openPage({
             name   : this.model.data.itemEditPage,
             newMode: true,
             params : QForms.keyToParams(key, 'parentKey')
         });
     }
 
-    edit(row) {
+    async edit(row) {
         const key = this.model.getDataSource().getRowKey(row);
-        this.openPage({
+        await this.openPage({
             name: this.model.data.itemEditPage,
             key : key
+        });
+    }
+
+    async newRoot() {
+        await this.openPage({
+            name   : this.data.itemEditPage,
+            newMode: true,
+            params : {'parentKey':''}
         });
     }
 

@@ -16,12 +16,4 @@ class TreeForm extends Form {
         const key = this.getDataSource().getRowKey(row);
         this.dataSources['default'].delete(key);
     }
-
-    newRoot() {
-        this.openPage({
-            name   : this.data.itemEditPage,
-            newMode: true,
-            params : {'parentKey':''}
-        });
-    }
 }

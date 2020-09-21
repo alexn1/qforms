@@ -60,8 +60,8 @@ class FormController extends ModelController {
         return this.model.data.caption;
     }
 
-    async openPage(args) {
-        return this.parent.openPage(args);
+    async openPage(options) {
+        return this.parent.openPage(options);
     }
 
     isChanged() {

@@ -56,25 +56,6 @@ class ApplicationController extends ModelController {
             this.menuWidget = new MenuWidget(menuWidgetElement);
             this.menuWidget.onClick = this.onMenuItemClick.bind(this);
         }
-        /*
-        for (const name in this.model.data.menu) {
-            const menu = this.model.data.menu[name];
-            menu.forEach(submenu => {
-                $(this.view).find(`#${this.model.getName()}-${submenu.page}`).click(async () => {
-                    try {
-                        await this.openPage({name: submenu.page});
-                    } catch (err) {
-                        console.error(err);
-                        alert(err.message);
-                    }
-                });
-            });
-        }
-
-        // logout
-        $(this.view).find('#menu-logout').click(() => {
-            this.model.logout();
-        });*/
     }
 
     initStatusbar() {
@@ -132,8 +113,8 @@ class ApplicationController extends ModelController {
         pageController.init();
         pageController.fill();
     }
-    createPageController2(model) {
-        console.log('ApplicationController.createPageController2', model);
+    createModalPageController(model) {
+        console.log('ApplicationController.createModalPageController', model);
         const html = QForms.render(model.data.view, {model});
         const view = $(html).get(0);
 
@@ -146,7 +127,6 @@ class ApplicationController extends ModelController {
         pageController.modal = modal;
         pageController.init();
         pageController.fill();
-
     }
 
     onPageSelected(e) {
@@ -216,10 +196,13 @@ class ApplicationController extends ModelController {
         return null;
     }
 
-    async openPage(args) {
-        console.log('ApplicationController.openPage', args);
-        const name            = args.name;
-        const key             = args.key || null;
+    async openPage(options) {
+        console.log('ApplicationController.openPage', options);
+        const name       = options.name;
+        const key        = options.key || null;
+        const parentPage = options.parentPage;
+        const newMode    = !!options.newMode;
+        const modal      = !!options.modal;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -229,9 +212,8 @@ class ApplicationController extends ModelController {
             return;
         }
 
-        const parentPage      = args.parentPage;
-        const parentPageName  = parentPage ? parentPage.getName() : null;
-        let keyParams       = {};
+        const parentPageName = parentPage ? parentPage.getName() : null;
+        let keyParams = {};
         const params = {};
         //console.log('open ' + name + ' with key: ' + key);
         if (key) {
@@ -245,7 +227,7 @@ class ApplicationController extends ModelController {
         const response = await this.model.request({
             action        : 'page',
             page          : name,
-            newMode       : !!args.newMode,
+            newMode       : newMode,
             parentPageName: parentPageName,
             params        : params
         });
@@ -266,7 +248,11 @@ class ApplicationController extends ModelController {
             parentPageName: parentPageName,
         });
         page.init();
-        this.createPageController2(page, true, parentPage !== undefined);
+        if (modal) {
+            this.createModalPageController(page);
+        } else {
+            this.createPageController(page, true, parentPage !== undefined);
+        }
     }
 
     getNextPageId() {
