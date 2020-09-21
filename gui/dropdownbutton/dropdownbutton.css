@@ -1,0 +1,30 @@
+.DropdownButton {
+    position: relative;
+    display: inline-block;
+}
+
+.DropdownButton > button {
+    /*border: none;*/
+    /*padding: 10px;*/
+}
+
+.DropdownButton > div {
+    position: absolute;
+    background-color: #eee;
+    width: 100%;
+    visibility: hidden;
+}
+
+.DropdownButton.show > div {
+    visibility: visible;
+}
+
+.DropdownButton > div > a {
+    display: block;
+    padding: 10px;
+}
+
+.DropdownButton > div > a:hover {
+    background-color: orange;
+    cursor: pointer;
+}

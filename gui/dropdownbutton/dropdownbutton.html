@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dropdownbutton</title>
+    <link rel="stylesheet" href="dropdownbutton.css">
+    <script src="dropdownbutton.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded');
+            const el = document.querySelector('.DropdownButton');
+            const dropdownButton = new DropdownButton(el);
+
+        });
+    </script>
+</head>
+<body>
+    <div class="DropdownButton">
+        <button>Actions</button>
+        <div>
+            <a>Action1</a>
+            <a>Action2</a>
+            <a>Action3</a>
+        </div>
+    </div>
+</body>
+</html>
