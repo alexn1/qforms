@@ -33,7 +33,7 @@ class DropdownButton {
     }
 
     onButtonClick() {
-        console.log('DropdownButton.onButtonClick');
+        // console.log('DropdownButton.onButtonClick');
         this.show();
     }
 
