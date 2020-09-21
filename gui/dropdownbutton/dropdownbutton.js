@@ -5,20 +5,20 @@ class DropdownButton {
         this.onClick = null;
         this.getButtonElement().addEventListener('click', this.onButtonClick.bind(this));
         this.getButtonElement().addEventListener('blur', this.onButtonBlur.bind(this));
-        this.getDivElement().addEventListener('mousedown', this.onDivMousedown.bind(this));
-        this.getDivElement().addEventListener('click', this.onDivClick.bind(this));
+        this.getUlElement().addEventListener('mousedown', this.onUlMousedown.bind(this));
+        this.getUlElement().addEventListener('click', this.onUlClick.bind(this));
     }
 
-    onDivClick(e) {
-        console.log('DropdownButton.onDivClick', e.target);
+    onUlClick(e) {
+        console.log('DropdownButton.onUlClick', e.target);
         this.hide();
         if (this.onClick) {
             this.onClick(e.target);
         }
     }
 
-    onDivMousedown(e) {
-        // console.log('DropdownButton.onDivMousedown');
+    onUlMousedown(e) {
+        // console.log('DropdownButton.onUlMousedown');
         e.preventDefault();
         e.stopPropagation();
         return false;
@@ -28,8 +28,8 @@ class DropdownButton {
         return this.el.querySelector('div.DropdownButton > button');
     }
 
-    getDivElement() {
-        return this.el.querySelector('div.DropdownButton > div');
+    getUlElement() {
+        return this.el.querySelector('div.DropdownButton > ul');
     }
 
     onButtonClick() {

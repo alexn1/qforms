@@ -8,23 +8,25 @@
     /*padding: 10px;*/
 }
 
-.DropdownButton > div {
+.DropdownButton > ul {
     position: absolute;
     background-color: #eee;
     width: 100%;
     visibility: hidden;
 }
 
-.DropdownButton.show > div {
+.DropdownButton.show > ul {
     visibility: visible;
+    padding: 0;
+    margin: 0;
 }
 
-.DropdownButton > div > a {
+.DropdownButton > ul > li {
     display: block;
     padding: 10px;
 }
 
-.DropdownButton > div > a:hover {
+.DropdownButton > ul > li:hover {
     background-color: #afd9ee;
     cursor: pointer;
 }
