@@ -16,7 +16,7 @@ class ApplicationController extends ModelController {
     constructor(model, view) {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
-        this.view       = view;
+        this.view = view;
         this.lastPageId = 0;
         this.menuWidget       = null;
         this.tabWidget        = null;
@@ -54,14 +54,7 @@ class ApplicationController extends ModelController {
         const menuWidgetElement = this.view.querySelector('.MenuWidget');
         if (menuWidgetElement) {
             this.menuWidget = new MenuWidget(menuWidgetElement);
-            this.menuWidget.onClick = async a => {
-                try {
-                    await this.openPage({name: a.dataset.page});
-                } catch (err) {
-                    console.error(err);
-                    alert(err.message);
-                }
-            };
+            this.menuWidget.onClick = this.onMenuItemClick.bind(this);
         }
         /*
         for (const name in this.model.data.menu) {
@@ -279,5 +272,15 @@ class ApplicationController extends ModelController {
     getNextPageId() {
         this.lastPageId++;
         return this.lastPageId;
+    }
+
+    async onMenuItemClick(a) {
+        console.log('ApplicationController.onMenuItemClick', a);
+        try {
+            await this.openPage({name: a.dataset.page});
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
     }
 }
