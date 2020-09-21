@@ -25,6 +25,6 @@
 }
 
 .DropdownButton > div > a:hover {
-    background-color: orange;
+    background-color: #afd9ee;
     cursor: pointer;
 }
