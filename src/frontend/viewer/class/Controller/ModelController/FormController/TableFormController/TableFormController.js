@@ -185,15 +185,16 @@ class TableFormController extends FormController {
             this.model.getDataSource().insert(row);
         } else if (this.model.data.newRowMode === 'editform') {
             if (!this.model.data.itemEditPage) {
-                throw new Error('[' + this.model.getFullName() + '] itemEditPage is empty.');
+                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
             await this.openPage({
                 name   : this.model.data.itemEditPage,
-                newMode: true
+                newMode: true,
+                modal  : true
             });
         } else if (this.model.data.newRowMode === 'createform') {
             if (!this.model.data.itemCreatePage) {
-                throw new Error('[' + this.model.getFullName() + '] itemCreatePage is empty.');
+                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
             await this.openPage({
                 name   : this.model.data.itemCreatePage,
@@ -201,7 +202,7 @@ class TableFormController extends FormController {
             });
         } else if (this.model.data.newRowMode === 'oneclick editform') {
             if (!this.model.data.itemEditPage) {
-                throw new Error('[' + this.model.getFullName() + '] itemEditPage is empty.');
+                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
             const row = {};
             this.model.fillDefaultValues(row);
@@ -212,7 +213,7 @@ class TableFormController extends FormController {
             });
         } else if (this.model.data.newRowMode === 'oneclick createform') {
             if (!this.model.data.itemCreatePage) {
-                throw new Error('[' + this.model.getFullName() + '] itemCreatePage is empty.');
+                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
             const row = {};
             this.model.fillDefaultValues(row);
@@ -238,8 +239,9 @@ class TableFormController extends FormController {
         }
         try {
             await this.openPage({
-                name: this.model.data.itemEditPage,
-                key : key
+                name : this.model.data.itemEditPage,
+                key  : key,
+                modal: true
             });
         } catch (err) {
             console.error(`${this.model.getFullName()}: edit form error handler:`, err);

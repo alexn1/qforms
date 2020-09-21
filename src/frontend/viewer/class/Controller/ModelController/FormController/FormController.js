@@ -61,7 +61,11 @@ class FormController extends ModelController {
     }
 
     async openPage(options) {
-        return this.parent.openPage(options);
+        return this.getPageController().openPage(options);
+    }
+
+    getPageController() {
+        return this.parent;
     }
 
     isChanged() {
