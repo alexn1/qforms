@@ -95,7 +95,10 @@ class SqlDataSource extends DataSource {
     async onTableUpdated(e) {
         console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
-        if (e.source === this) return;
+        if (e.source === this) {
+            console.error('stop self update', this.getFullName());
+            return;
+        }
         console.log('changes:', e.changes);
         if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);
         const key = Object.keys(e.changes)[0];
@@ -115,6 +118,11 @@ class SqlDataSource extends DataSource {
 
     async onTableInsert(e) {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
+        if (e.source === this) {
+            console.error('stop self insert', this.getFullName());
+            return;
+        }
         await this._refresh();
         if (this.rowsByKey[e.key]) {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
@@ -124,6 +132,11 @@ class SqlDataSource extends DataSource {
 
     async onTableDelete(e) {
         console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getFullTableName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (e.source === this) {
+            console.error('stop self delete', this.getFullName());
+            return;
+        }
         await this._refresh();
     }
 
@@ -256,8 +269,7 @@ class SqlDataSource extends DataSource {
         }
 
         const i = this.data.rows.indexOf(row);
-        const event = {source: this, key, i};
-        this.emit('rowUpdate', event);
+        this.emit('rowUpdate', {source: this, key, i});
 
         // fire insert event
         this.getTable().emit('insert', {source: this, key: key});
