@@ -37,7 +37,7 @@ class SqlDataSource extends DataSource {
     }
 
     async update() {
-        console.log('DataSource.update', this.getFullName());
+        console.log('SqlDataSource.update', this.getFullName());
         if (this.data.table === '') throw new Error(`data source has no table: ${this.getName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
@@ -60,7 +60,7 @@ class SqlDataSource extends DataSource {
     }
 
     updateRow(key, newValues) {
-        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
+        console.log('SqlDataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
@@ -93,7 +93,7 @@ class SqlDataSource extends DataSource {
     }
 
     async onTableUpdated(e) {
-        console.log('DataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
+        console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
         if (e.source === this) return;
         console.log('changes:', e.changes);
@@ -107,14 +107,14 @@ class SqlDataSource extends DataSource {
     }
 
     async refresh() {
-        console.log('DataSource.refresh', this.getFullName());
+        console.log('SqlDataSource.refresh', this.getFullName());
         if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
         await this._refresh();
         this.emit('refresh', {source: this});
     }
 
     async onTableInsert(e) {
-        console.log('DataSource.onTableInsert', e);
+        console.log('SqlDataSource.onTableInsert', e);
         await this._refresh();
         if (this.rowsByKey[e.key]) {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
@@ -123,7 +123,7 @@ class SqlDataSource extends DataSource {
     }
 
     async onTableDelete(e) {
-        console.log('DataSource.onTableDelete', this.getFullName(), this.getFullTableName(), e);
+        console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getFullTableName(), e);
         await this._refresh();
     }
 
@@ -137,7 +137,7 @@ class SqlDataSource extends DataSource {
     }
 
     async _refresh() {
-        console.log('DataSource._refresh');
+        console.log('SqlDataSource._refresh');
         const page = this.getPage();
         const params = page ? page.params : {};
         const data = await this.select(params);
@@ -160,7 +160,7 @@ class SqlDataSource extends DataSource {
     }
 
     async select(params) {
-        console.log('DataSource.select', this.getFullName());
+        console.log('SqlDataSource.select', this.getFullName());
         const page = this.getPage();
         const form = this.getForm();
         // const _params = QForms.merge(params, this.params);
@@ -182,7 +182,7 @@ class SqlDataSource extends DataSource {
     }
 
     async selectSingle(params) {
-        console.log('DataSource.selectSingle', this.getFullName());
+        console.log('SqlDataSource.selectSingle', this.getFullName());
         const page = this.getPage();
         const form = this.getForm();
         const _params = {...params, ...this.params};
@@ -201,7 +201,7 @@ class SqlDataSource extends DataSource {
     }
 
     async insert(row) {
-        console.log('DataSource.insert', row);
+        console.log('SqlDataSource.insert', this.getFullTableName(), row);
         if (this.data.table === '') throw new Error('no data source table to insert');
         const page = this.getPage();
         let args = {
@@ -266,7 +266,7 @@ class SqlDataSource extends DataSource {
     }
 
     async delete(key) {
-        console.log('DataSource.delete:', key);
+        console.log('SqlDataSource.delete:', key);
         const page = this.getPage();
         if (!this.data.table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
