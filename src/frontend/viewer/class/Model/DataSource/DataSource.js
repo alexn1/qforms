@@ -333,6 +333,15 @@ class DataSource extends Model {
         this.emit('rowUpdate', {source: this, key: key, i: i});
     }
 
+    removeRow(key) {
+        const row = this.rowsByKey[key];
+        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
+        const i = this.data.rows.indexOf(row);
+        if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
+        delete this.rowsByKey[key];
+        this.data.rows.splice(i, 1);
+    }
+
     fireRemoveRow(key) {
         this.emit('removeRow', {source: this, key: key});
     }

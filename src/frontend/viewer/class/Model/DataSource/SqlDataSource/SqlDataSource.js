@@ -137,7 +137,7 @@ class SqlDataSource extends DataSource {
             console.error('stop self delete', this.getFullName());
             return;
         }
-        await this._refresh();
+        throw new Error(`${this.getFullName()}: delete remove now implemented yet`);
     }
 
     async refill(params) {
@@ -298,6 +298,11 @@ class SqlDataSource extends DataSource {
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
+        this.removeRow(key);
+        this.fireRemoveRow(key);
+        // console.log('this.data.rows:', this.data.rows);
+        // console.log('this.rowsByKey:', this.rowsByKey);
+        // console.log('this.childs:', this.childs);
         this.getTable().emit('delete', {source: this, key: key});
     }
 
