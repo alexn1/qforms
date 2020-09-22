@@ -12,7 +12,7 @@ class DropdownButtonWidget extends Widget{
     }
 
     onUlClick(e) {
-        console.log('DropdownButtonWidget.onUlClick', e.target);
+        // console.log('DropdownButtonWidget.onUlClick', e.target);
         this.hide();
         if (this.onClick) {
             this.onClick(e.target);
