@@ -114,7 +114,7 @@ class SqlDataSource extends DataSource {
     }
 
     async onTableInsert(e) {
-        console.log('SqlDataSource.onTableInsert', e);
+        console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
         await this._refresh();
         if (this.rowsByKey[e.key]) {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
@@ -137,7 +137,7 @@ class SqlDataSource extends DataSource {
     }
 
     async _refresh() {
-        console.log('SqlDataSource._refresh');
+        console.log('SqlDataSource._refresh', this.getFullName());
         const page = this.getPage();
         const params = page ? page.params : {};
         const data = await this.select(params);
@@ -266,7 +266,7 @@ class SqlDataSource extends DataSource {
     }
 
     async delete(key) {
-        console.log('SqlDataSource.delete:', key);
+        console.log('SqlDataSource.delete:', this.getFullName(), key);
         const page = this.getPage();
         if (!this.data.table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);

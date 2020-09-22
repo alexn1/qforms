@@ -67,7 +67,7 @@ class PageController extends ModelController {
         console.log('PageController.onSaveAndCloseClick');
         if (this.isValid()) {
             await this.model.update();
-            console.log('page model updated');
+            console.log('page model updated', this.model.getFullName());
             this.getApplicationController().closePage(this);
         } else {
             for (const name in this.forms) {

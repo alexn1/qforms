@@ -118,7 +118,7 @@ class TableFormController extends FormController {
     }
 
     onDeleteClick(ctrl) {
-        console.log('TableFormController.onDeleteClick', this.grid.getSelectedKey());
+        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getSelectedKey());
         if (confirm(this.model.getApp().data.text.form.areYouSure)) {
             const key = this.grid.getSelectedKey();
             if (key !== null) {
