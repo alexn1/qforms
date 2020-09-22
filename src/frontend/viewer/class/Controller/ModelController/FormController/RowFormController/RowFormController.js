@@ -5,6 +5,7 @@ class RowFormController extends FormController {
         super(model, view, parent);
         this.fieldViews   = {};
         this.controlViews = {};
+        this.actionButton = null;
     }
 
     init() {
@@ -32,23 +33,16 @@ class RowFormController extends FormController {
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
         // click
-        const self = this;
-        $(this.view).find('button.saveForm').click(function() {
-            self.onSaveClick(this);
-        });
-        $(this.view).find('button.discardForm').click(function() {
-            self.onDiscardClick(this);
-        });
-        $(this.view).find('button.refreshForm').click(function() {
-            self.onRefresh(this);
-        });
+        $(this.view).find('button.saveForm').click(this.onSaveClick.bind(this));
+        $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
+        $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
 
         // disable buttons
         $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
         $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
-        // action click
+        /*// action click
         for (const name in this.model.data.actions) {
             const action = this.model.data.actions[name];
             $(this.view).find(`li.${action.name}`).click(() => {
@@ -57,7 +51,15 @@ class RowFormController extends FormController {
                     if (!result) alert(`no handler for ${action.name}`);
                 }, 0);
             });
-        }
+        }*/
+
+
+        this.actionButton = new DropdownButtonWidget(this.view.querySelector('.DropdownButtonWidget'));
+        this.actionButton.onClick = li => {
+            const actionName = li.dataset.action;
+            console.log('action:', actionName);
+        };
+
 
     }
 
@@ -129,7 +131,7 @@ class RowFormController extends FormController {
         }
     }
 
-    async onSaveClick(el) {
+    async onSaveClick() {
         console.log('RowFormController.onSaveClick');
         const valid = this.isValid();
         this.updateErrorClasses();
@@ -140,7 +142,7 @@ class RowFormController extends FormController {
         }
     }
 
-    onDiscardClick(el) {
+    onDiscardClick() {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
         const changedFields = [];
         const row = this.model.getRow();
@@ -172,7 +174,7 @@ class RowFormController extends FormController {
         this.parent.onFormDiscard(this);
     }
 
-    onRefresh(el) {
+    onRefresh() {
         console.log('RowFormController.onRefresh');
         this.model.refresh();
         // console.log('url data source value:', this.fields.url.model.getValue(this.model.getRow()));

@@ -6,14 +6,12 @@
         <button class="refreshForm">Refresh</button>
     <% } %>
     <% if (Object.keys(model.data.actions).length > 0) { %>
-        <div class="dropdown" style="display: inline-block">
-            <button class="btn btn-default btn-xs dropdown-toggle" type="button"  data-toggle="dropdown">
-                <span>Actions</span> <span class="caret"></span>
-            </button>
-            <ul id="treeActionsList" class="dropdown-menu">
+        <div class="DropdownButtonWidget">
+            <button>Actions</button>
+            <ul>
                 <% for (const name in model.data.actions) {
                     const action = model.data.actions[name]; %>
-                    <li class="<%=action.name%>"><a style='cursor: pointer;'><%=action.caption%></a></li>
+                    <li data-action="<%=action.name%>"><%=action.caption%></li>
                 <% } %>
             </ul>
         </div>
