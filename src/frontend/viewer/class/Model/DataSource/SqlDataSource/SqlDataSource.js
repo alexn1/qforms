@@ -65,7 +65,10 @@ class SqlDataSource extends DataSource {
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const i = this.data.rows.indexOf(row);
-        if (i === -1) throw new Error(`cannot find row: ${key}`);
+        if (i === -1) {
+            console.log('this.data.rows:', this.data.rows);
+            throw new Error(`${this.getFullName()}: cannot find row with key ${key}`);
+        }
         const newKey = this.getRowKey(newValues);
 
         // copy new values to original row object
