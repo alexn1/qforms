@@ -2,6 +2,7 @@
 
 class ModalWidget extends Widget {
     static createElement(content) {
+        // console.log('ModalWidget.createElement', content);
         const el = document.createElement('div');
         el.classList.add(ModalWidget.name);
         if (typeof content === 'string') {
