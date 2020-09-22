@@ -1,32 +1,32 @@
 .DropdownButtonWidget {
   position: relative;
   display: inline-block;
-}
 
-.DropdownButtonWidget > button {
-  /*border: none;*/
-  /*padding: 10px;*/
-}
+  > button {
+    /*border: none;*/
+    /*padding: 10px;*/
+  }
 
-.DropdownButtonWidget > ul {
-  position: absolute;
-  background-color: #eee;
-  width: 100%;
-  visibility: hidden;
-}
+  &.show > ul {
+    visibility: visible;
+    padding: 0;
+    margin: 0;
+  }
 
-.DropdownButtonWidget.show > ul {
-  visibility: visible;
-  padding: 0;
-  margin: 0;
-}
+  > ul {
+    position: absolute;
+    background-color: #eee;
+    width: 100%;
+    visibility: hidden;
 
-.DropdownButtonWidget > ul > li {
-  display: block;
-  padding: 10px;
-}
+    > li {
+      display: block;
+      padding: 10px;
+      &:hover {
+        background-color: #afd9ee;
+        cursor: pointer;
+      }
+    }
 
-.DropdownButtonWidget > ul > li:hover {
-  background-color: #afd9ee;
-  cursor: pointer;
+  }
 }
