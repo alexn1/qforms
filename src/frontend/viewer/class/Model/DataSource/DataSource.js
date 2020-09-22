@@ -340,6 +340,7 @@ class DataSource extends Model {
         if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
         delete this.rowsByKey[key];
         this.data.rows.splice(i, 1);
+        //TODO: implement removing from childs of parent row
     }
 
     fireRemoveRow(key) {
