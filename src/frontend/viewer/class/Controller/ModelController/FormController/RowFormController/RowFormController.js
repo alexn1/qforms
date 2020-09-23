@@ -167,9 +167,6 @@ class RowFormController extends FormController {
     onRefresh() {
         console.log('RowFormController.onRefresh');
         this.model.refresh();
-        // console.log('url data source value:', this.fields.url.model.getValue(this.model.getRow()));
-        // console.log('this.model.getDataSource().data.rows[0].url:', this.model.getDataSource().data.rows[0].url);
-
     }
 
     isChanged() {

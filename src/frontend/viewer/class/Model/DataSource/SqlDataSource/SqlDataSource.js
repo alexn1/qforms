@@ -124,8 +124,6 @@ class SqlDataSource extends DataSource {
             return;
         }
         await this._refresh();
-        console.log('this.data.rows:', this.data.rows);
-        console.log('this.rowsByKey:', this.rowsByKey);
         if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
         this.parent.onDataSourceUpdate({source: this, key: e.key});
         this.emit('insert', {source: this, key: e.key});
@@ -259,7 +257,8 @@ class SqlDataSource extends DataSource {
         // console.log('this.news:', this.news);
 
         // creating index with for rows
-        const vals = this.getKeysAndChilds(this.data.rows);
+        // const vals = this.getKeysAndChilds(this.data.rows);
+        const vals = this.getKeysAndChilds([row]);
         this.rowsByKey = vals.rowsByKey;
         this.childs    = vals.childs;
 

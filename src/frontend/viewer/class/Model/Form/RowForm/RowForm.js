@@ -35,9 +35,9 @@ class RowForm extends Form {
         const dataSource = this.getDataSource();
         if (dataSource.getClassName() === 'SqlDataSource') {
             const row = this.getRow();
-            if (dataSource.data.rows.indexOf(row) !== -1) {
+            // if (dataSource.data.rows.indexOf(row) !== -1) {
                 return dataSource.getRowKey(row);
-            }
+            // }
         }
         return null;
     }

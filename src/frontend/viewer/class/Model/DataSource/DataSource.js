@@ -336,10 +336,10 @@ class DataSource extends Model {
     removeRow(key) {
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
-        const i = this.data.rows.indexOf(row);
-        if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
         delete this.rowsByKey[key];
-        this.data.rows.splice(i, 1);
+        /*const i = this.data.rows.indexOf(row);
+        if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
+        this.data.rows.splice(i, 1);*/
         //TODO: implement removing from childs of parent row
     }
 
@@ -371,12 +371,16 @@ class DataSource extends Model {
         if (this.data.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
-        this.data.rows.push(row);
+        // this.data.rows.push(row);
         this.news.push(row);
     }
 
     getSingleRow() {
-        if (this.data.rows.length > 0) return this.data.rows[0];
+        // if (this.data.rows.length > 0) return this.data.rows[0];
+        // if (this.data.rows[0]) return this.data.rows[0];
+        if (this.news[0]) return this.news[0];
+        const keys = Object.keys(this.rowsByKey);
+        if (keys[0]) return this.rowsByKey[keys[0]];
         throw new Error('no single row');
     }
 
