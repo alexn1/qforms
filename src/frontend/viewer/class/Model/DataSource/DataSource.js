@@ -229,17 +229,19 @@ class DataSource extends Model {
         if (oldChilds === undefined && newChilds === undefined) {
             return;
         }
-        var nKey = oKey = null, i = 0;
+        let nKey = null;
+        let oKey = null;
+        let i = 0;
         do {
             if (newChilds !== undefined) {
-                var nKey = i < newChilds.rowsByIndex.length ? newChilds.keysByIndex[i] : null;
+                nKey = i < newChilds.rowsByIndex.length ? newChilds.keysByIndex[i] : null;
             } else {
-                var nKey = null;
+                nKey = null;
             }
             if (oldChilds !== undefined) {
-                var oKey = i < oldChilds.rowsByIndex.length ? oldChilds.keysByIndex[i] : null;
+                oKey = i < oldChilds.rowsByIndex.length ? oldChilds.keysByIndex[i] : null;
             } else {
-                var oKey = null;
+                oKey = null;
             }
             if (nKey !== null && oKey !== null) { // if not reached the end of each list
                 if (nKey === oKey) {
