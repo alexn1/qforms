@@ -64,11 +64,11 @@ class SqlDataSource extends DataSource {
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        const i = this.data.rows.indexOf(row);
+        /*const i = this.data.rows.indexOf(row);
         if (i === -1) {
             console.log('this.data.rows:', this.data.rows);
             throw new Error(`${this.getFullName()}: cannot find row with key ${key}`);
-        }
+        }*/
         const newKey = this.getRowKey(newValues);
 
         // copy new values to original row object
@@ -81,7 +81,7 @@ class SqlDataSource extends DataSource {
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
 
-        const event = {source: this, key, i};
+        const event = {source: this, key};
         this.emit('rowUpdate', event);
         return event;
     }
@@ -124,8 +124,9 @@ class SqlDataSource extends DataSource {
             return;
         }
         await this._refresh();
-        if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: `);
-
+        console.log('this.data.rows:', this.data.rows);
+        console.log('this.rowsByKey:', this.rowsByKey);
+        if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
         this.parent.onDataSourceUpdate({source: this, key: e.key});
         this.emit('insert', {source: this, key: e.key});
     }
@@ -268,8 +269,7 @@ class SqlDataSource extends DataSource {
             this.params[name] = params[name];
         }
 
-        const i = this.data.rows.indexOf(row);
-        this.emit('rowUpdate', {source: this, key, i});
+        this.emit('rowUpdate', {source: this, key});
 
         // fire insert event
         this.getTable().emit('insert', {source: this, key: key});

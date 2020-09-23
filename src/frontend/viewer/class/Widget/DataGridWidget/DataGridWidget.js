@@ -74,8 +74,7 @@ class DataGridWidget extends GridWidget {
         );
     }
 
-    refillRow(bodyRow, newIndex) {
-        bodyRow.qI = newIndex;
+    refillRow(bodyRow) {
         for (const fieldName in this.gridColumns) {
             const bodyCell = bodyRow.bodyCells[fieldName];
             this.gridColumns[fieldName].fieldController.refill(bodyRow.dbRow, bodyCell.firstElementChild);
@@ -86,7 +85,6 @@ class DataGridWidget extends GridWidget {
     onRowUpdate(event) {
         // console.log('DataGridWidget.onRowUpdate:', event);
         const key = event.key;
-        const i   = event.i;
         const bodyRow = this.keyToBodyRow[key];
         if (!bodyRow) throw new Error(`no row with key: ${key}`);
         const row = bodyRow.dbRow;
@@ -97,7 +95,7 @@ class DataGridWidget extends GridWidget {
             delete this.keyToBodyRow[key];
             this.keyToBodyRow[newKey] = bodyRow;
         }
-        this.refillRow(bodyRow, i);
+        this.refillRow(bodyRow);
     }
 
     onNewRow(ea) {
@@ -153,7 +151,7 @@ class DataGridWidget extends GridWidget {
         //console.log('onMoveRow: ' + key + ' ' + newIndex);
         const bodyRow = this.keyToBodyRow[key];
         QForms.moveNode(this.bodyTable, bodyRow, oldIndex, newIndex);
-        this.refillRow(bodyRow, newIndex);
+        this.refillRow(bodyRow);
     }
 
     onNewFrame(ea) {

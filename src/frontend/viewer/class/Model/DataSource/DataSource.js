@@ -242,7 +242,7 @@ class DataSource extends Model {
                 if (nKey === oKey) {
                     this.copyNewValues(oldChilds.rowsByIndex[i], newChilds.rowsByIndex[i]);
                     this.sync(_old, _new, oKey);// for the child rows
-                    this.fireRefillRow(oKey, i);
+                    this.fireRefillRow(oKey);
                     i++;
                 } else { // if keys not equal then
                     if (!(oKey in newChilds.rowsByKey)) { // if the old key in a new local is not listed, then ...
@@ -329,8 +329,8 @@ class DataSource extends Model {
         } while (nKey !== null || oKey !== null);
     }
 
-    fireRefillRow(key, i) {
-        this.emit('rowUpdate', {source: this, key: key, i: i});
+    fireRefillRow(key) {
+        this.emit('rowUpdate', {source: this, key});
     }
 
     removeRow(key) {

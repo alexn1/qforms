@@ -113,7 +113,6 @@ class ComboBoxFieldController extends FieldController {
         //console.log('ComboBoxFieldController.onRowUpdate');
         //console.log(ea);
         const key = ea.key;
-        //i = ea.i;
         if (this.model.getForm().getClassName() === 'RowForm') {
             for (const view in this.views.values()) {
                 const option = view.keyToOption[key];
