@@ -345,7 +345,15 @@ class DataSource extends Model {
         /*const i = this.data.rows.indexOf(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
         this.data.rows.splice(i, 1);*/
-        //TODO: implement removing from childs of parent row
+
+        // remove from childs
+        const parentKey = this.getRowParentKey(row);
+        const childs = this.childs[parentKey];
+        childs.keysByIndex.splice(childs.keysByIndex.indexOf(key), 1);
+        childs.rowsByIndex.splice(childs.rowsByIndex.indexOf(row), 1);
+        delete childs.rowsByKey[key];
+
+        this.fireRemoveRow(key);
     }
 
     fireRemoveRow(key) {
