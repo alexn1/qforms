@@ -299,9 +299,9 @@ class SqlDataSource extends DataSource {
         const data = await this.getApp().request(args);
         this.removeRow(key);
         this.fireRemoveRow(key);
-        // console.log('this.data.rows:', this.data.rows);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.childs:', this.childs);
+        console.log('this.data.rows:', this.data.rows);
+        console.log('this.rowsByKey:', this.rowsByKey);
+        console.log('this.childs:', this.childs);
         this.getTable().emit('delete', {source: this, key: key});
     }
 

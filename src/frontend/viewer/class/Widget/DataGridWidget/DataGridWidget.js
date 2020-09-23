@@ -120,9 +120,11 @@ class DataGridWidget extends GridWidget {
     }
 
     onRemoveRow(ea) {
+        console.log('DataGridWidget.onRemoveRow:', ea);
         const key = ea.key;
         const bodyRow = this.keyToBodyRow[key];
-        //console.log('onRemoveRow: ' + key);
+        // console.log('bodyRow', bodyRow);
+        if (!bodyRow) throw new Error(`no bodyRow with key ${key}`);
         if (this.selectedBodyRow === bodyRow) {
             this.selectedBodyRow  = null;
             this.selectedBodyCell = null;
