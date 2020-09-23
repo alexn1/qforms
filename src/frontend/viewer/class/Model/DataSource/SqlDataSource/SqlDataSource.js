@@ -19,7 +19,7 @@ class SqlDataSource extends DataSource {
     }
 
     deinit() {
-        console.log('SqlDataSource.deinit', this.getFullName(), this.getFullTableName());
+        console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         if (this.data.table !== '') {
             const table = this.getTable();
             table.removeListener('update', this.listeners.tableUpdated);
@@ -93,7 +93,7 @@ class SqlDataSource extends DataSource {
     }
 
     async onTableUpdated(e) {
-        console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getFullTableName(), e);
+        console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
         if (e.source === this) {
             console.error('stop self update', this.getFullName());
@@ -124,14 +124,14 @@ class SqlDataSource extends DataSource {
             return;
         }
         await this._refresh();
-        if (this.rowsByKey[e.key]) {
-            this.parent.onDataSourceUpdate({source: this, key: e.key});
-            this.emit('insert', {source: this, key: e.key});
-        }
+        if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: `);
+
+        this.parent.onDataSourceUpdate({source: this, key: e.key});
+        this.emit('insert', {source: this, key: e.key});
     }
 
     async onTableDelete(e) {
-        console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getFullTableName(), e);
+        console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
             console.error('stop self delete', this.getFullName());
@@ -214,7 +214,7 @@ class SqlDataSource extends DataSource {
     }
 
     async insert(row) {
-        console.log('SqlDataSource.insert', this.getFullTableName(), row);
+        console.log('SqlDataSource.insert', this.getTableName(), row);
         if (this.data.table === '') throw new Error('no data source table to insert');
         const page = this.getPage();
         let args = {
@@ -306,7 +306,7 @@ class SqlDataSource extends DataSource {
         this.getTable().emit('delete', {source: this, key: key});
     }
 
-    getFullTableName() {
+    getTableName() {
         if (!this.data.database) throw new Error('no database');
         if (!this.data.table) throw new Error('no table');
         return `${this.data.database}.${this.data.table}`;
