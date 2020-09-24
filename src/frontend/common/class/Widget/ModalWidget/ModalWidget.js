@@ -14,7 +14,7 @@ class ModalWidget extends Widget {
         return el;
     }
     constructor(el) {
-        console.log('ModalWidget.constructor', el);
+        // console.log('ModalWidget.constructor', el);
         super(el);
         const closeElement = this.getCloseElement();
         if (closeElement) {
