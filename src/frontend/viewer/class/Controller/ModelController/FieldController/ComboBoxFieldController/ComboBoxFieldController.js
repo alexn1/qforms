@@ -59,28 +59,26 @@ class ComboBoxFieldController extends FieldController {
 
 
     setValue(value, view) {
-        switch (this.model.getForm().getClassName()) {
-            case 'RowForm':
-                if (value === null) {
-                    view.firstElementChild.selectedIndex = 0;
-                } else {
-                    view.firstElementChild.value = value;
-                }
-                break;
-            case 'TableForm':
+        console.log('ComboBoxFieldController.setValue:', value);
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            if (value === null || value === undefined) {
+                view.firstElementChild.selectedIndex = 0;
+            } else {
                 view.firstElementChild.value = value;
-                if (value) {
-                    const key = JSON.stringify([value]);
-                    const row = this.model.getComboBoxDataSource().getRow(key);
-                    if (row) {
-                        view.firstElementChild.innerHTML = this.model.getDisplayValue(row);
-                    } else {
-                        view.firstElementChild.innerHTML = '{id: ' + value + '}';
-                    }
+            }
+        } else if (this.model.getForm().getClassName() === 'TableForm') {
+            view.firstElementChild.value = value;
+            if (value) {
+                const key = JSON.stringify([value]);
+                const row = this.model.getComboBoxDataSource().getRow(key);
+                if (row) {
+                    view.firstElementChild.innerHTML = this.model.getDisplayValue(row);
                 } else {
-                    view.firstElementChild.innerHTML = '';
+                    view.firstElementChild.innerHTML = '{id: ' + value + '}';
                 }
-                break;
+            } else {
+                view.firstElementChild.innerHTML = '';
+            }
         }
     }
 
@@ -168,6 +166,13 @@ class ComboBoxFieldController extends FieldController {
     }
 
     isValid(view) {
+        console.log('ComboBoxFieldController.isValid', this.model.getFullName());
+
+        const value = this.getValue(view);
+        console.log('combobox: value');
+
+        return true;
+        /*
         let isValid = true;
         if (this.model.data.notNull === 'true') {
             isValid = view.firstElementChild.selectedIndex !== 0;
@@ -177,7 +182,18 @@ class ComboBoxFieldController extends FieldController {
         } else {
             view.firstElementChild.classList.remove('error');
         }
-        return isValid;
+        return isValid;*/
+    }
+
+    onChange(el) {
+        console.log('ComboBoxFieldController.onChange', this.model.getFullName());
+        const view = el.parentNode;
+
+        console.log('selectedIndex', view.firstElementChild.selectedIndex);
+        const stringValue = this.getStringValue(view);
+        const value = this.getValue(view);
+        console.log('stringValue:', stringValue);
+        console.log('value:', value);
     }
 
 }
