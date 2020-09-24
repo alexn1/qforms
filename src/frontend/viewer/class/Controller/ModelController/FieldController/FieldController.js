@@ -178,7 +178,7 @@ class FieldController extends ModelController {
                 if (dsValue !== fieldValue) {
                     console.log(`dsValue ${this.model.getFullName()}`, dsValue);
                     console.log(`fieldValue ${this.model.getFullName()}`, fieldValue);
-                    return false;
+                    return true;
                 }
             }
         } catch (err) {
