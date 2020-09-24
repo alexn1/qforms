@@ -153,6 +153,7 @@ class FieldController extends ModelController {
     }
 
     updateErrorClass(view, valid) {
+        // console.log('FieldController.updateErrorClass', this.model.getFullName(), valid);
         if (valid) {
             view.classList.remove('error');
         } else {
