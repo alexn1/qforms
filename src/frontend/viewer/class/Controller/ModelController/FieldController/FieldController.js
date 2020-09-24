@@ -174,10 +174,8 @@ class FieldController extends ModelController {
             if (this.model.hasColumn()) {
                 const dsValue = this.model.getValueFromDataSource(row);
                 const fieldValue = this.model.getValueForDataSource(this.getValue(view));
-
                 if (dsValue !== fieldValue) {
-                    console.log(`dsValue ${this.model.getFullName()}`, dsValue);
-                    console.log(`fieldValue ${this.model.getFullName()}`, fieldValue);
+                    console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsValue, fieldValue);
                     return true;
                 }
             }
@@ -186,7 +184,7 @@ class FieldController extends ModelController {
         }
         const changed = this.model.isChanged(row);
         if (changed) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
+            console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
         }
         return changed;
     }

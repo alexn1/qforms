@@ -88,7 +88,12 @@ class PageController extends ModelController {
         console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
         console.log('changed:', changed);
-        if (changed && !confirm(this.model.getApp().data.text.form.areYouSure)) return;
+        const valid = this.isValid();
+        console.log('valid:', valid);
+        if (changed || !valid) {
+            const result = confirm(this.model.getApp().data.text.form.areYouSure);
+            if (!result) return;
+        }
         this.getApplicationController().closePage(this);
     }
 
