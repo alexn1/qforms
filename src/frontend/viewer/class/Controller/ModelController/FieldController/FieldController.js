@@ -171,8 +171,16 @@ class FieldController extends ModelController {
         if (!view) throw new Error('FieldController: no view');
         // if (!this.isValid(view)) return true;
         try {
-            const value = this.getValue(view);
-            console.log(`value ${this.model.getFullName()}`, value);
+            if (this.model.hasColumn()) {
+                const dsValue = this.model.getValueFromDataSource(row);
+                const fieldValue = this.model.getValueForDataSource(this.getValue(view));
+
+                if (dsValue !== fieldValue) {
+                    console.log(`dsValue ${this.model.getFullName()}`, dsValue);
+                    console.log(`fieldValue ${this.model.getFullName()}`, fieldValue);
+                    return false;
+                }
+            }
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
         }

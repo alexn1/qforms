@@ -101,7 +101,7 @@ class Field extends Model {
     }
 
     hasColumn() {
-        return !!!this.data.column;
+        return !!this.data.column;
     }
 
     getValue(row) {
