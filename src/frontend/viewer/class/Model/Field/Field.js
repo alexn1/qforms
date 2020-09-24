@@ -61,30 +61,28 @@ class Field extends Model {
 
     setValue(row, value) {
         console.log('Field.setValue', this.getFullName(), value);
-        if (value === undefined) throw new Error('undefined is wrong value for field');
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
-
-        if (value !== null) {
-            const columnType = this.getColumnType();
-            const valueType = typeof value;
-            if (columnType === 'date') {
-                if (!(value instanceof Date)) {
-                    throw new Error(`${this.getFullName()}: value not instance of Date`);
-                }
-            } else if (columnType !== valueType) {
-                throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${columnType}`);
-            }
-        }
-        const valueForDataSource = this.prepareValueForDataSource(value);
+        const valueForDataSource = this.getValueForDataSource(value);
         this.getForm().getDataSource().setValue(row, this.data.column, valueForDataSource);
         this.valueToParams(row);
     }
 
-    prepareValueForDataSource(value) {
+    getValueForDataSource(value) {
         if (value === undefined) throw new Error('undefined is wrong value for data source');
         if (value === null) return null;
-        const type = typeof value;
-        if (type === 'object') {
+
+        const columnType = this.getColumnType();
+        const valueType = typeof value;
+        if (columnType === 'date') {
+            if (!(value instanceof Date)) {
+                throw new Error(`${this.getFullName()}: value not instance of Date`);
+            }
+        } else if (columnType !== valueType) {
+            throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${columnType}`);
+        }
+
+
+        if (valueType === 'object') {
             if (value instanceof Date) return value.toISOString();
             return JSON.stringify(value);
         }
@@ -95,6 +93,15 @@ class Field extends Model {
         // console.log('Field.isChanged', this.getFullName());
         if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDataSource().isRowColumnChanged(row, this.data.column);
+    }
+
+    getValueFromDataSource(row) {
+        if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
+        return this.getForm().getDataSource().getValue(row, this.data.column);
+    }
+
+    hasColumn() {
+        return !!!this.data.column;
     }
 
     getValue(row) {
