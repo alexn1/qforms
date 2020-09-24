@@ -168,7 +168,7 @@ class FieldController extends ModelController {
         // console.log('FieldController.isChanged', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
         if (!view) throw new Error('FieldController: no view');
-        if (!this.isValid(view)) return true;
+        // if (!this.isValid(view)) return true;
         const changed = this.model.isChanged(row);
         if (changed) {
             console.log(`FIELD CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
