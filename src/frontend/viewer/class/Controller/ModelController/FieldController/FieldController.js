@@ -147,6 +147,7 @@ class FieldController extends ModelController {
         const row = view.dbRow;
         const valid = this.isValid(view);
         if (valid) {
+            this.isUndefined = false;
             const value = this.getValue(view);
             this.model.setValue(row, value);
             this.setPlaceHolder(view, value);
