@@ -169,7 +169,7 @@ class ComboBoxFieldController extends FieldController {
         console.log('ComboBoxFieldController.isValid', this.model.getFullName());
 
         const value = this.getValue(view);
-        console.log('combobox: value');
+        console.log('combobox:', value);
 
         return true;
         /*

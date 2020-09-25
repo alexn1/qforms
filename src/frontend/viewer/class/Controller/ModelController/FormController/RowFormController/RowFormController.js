@@ -43,14 +43,16 @@ class RowFormController extends FormController {
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // action click
-        this.actionButton = new DropdownButtonWidget(this.view.querySelector('.DropdownButtonWidget'));
-        this.actionButton.onClick = async li => {
-            const action = this.model.data.actions[li.dataset.action];
-            // console.log('action:', action);
-            const result = await this.onActionClick(action, this.model.getRow());
-            if (!result) alert(`no handler for ${action.name}`);
-        };
-
+        const el = this.view.querySelector('.DropdownButtonWidget');
+        if (el) {
+            this.actionButton = new DropdownButtonWidget(el);
+            this.actionButton.onClick = async li => {
+                const action = this.model.data.actions[li.dataset.action];
+                // console.log('action:', action);
+                const result = await this.onActionClick(action, this.model.getRow());
+                if (!result) alert(`no handler for ${action.name}`);
+            };
+        }
     }
 
     deinit() {
