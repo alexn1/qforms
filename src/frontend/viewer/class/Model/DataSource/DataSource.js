@@ -222,9 +222,9 @@ class DataSource extends Model {
     // add, remove, move, come, gone for widgets to be able update it's view
     //
     sync(_old, _new, parentKey) {
-        console.log('DataSource.sync', parentKey);
-        console.log('_old:', _old);
-        console.log('_new:', _new);
+        console.log('DataSource.sync', this.getFullName(), parentKey);
+        // console.log('_old:', _old);
+        // console.log('_new:', _new);
         const oldChilds = _old.childs[parentKey];
         const newChilds = _new.childs[parentKey];
         if (oldChilds === undefined && newChilds === undefined) {

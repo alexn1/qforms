@@ -168,7 +168,7 @@ class RowFormController extends FormController {
     }
 
     onRefresh() {
-        console.log('RowFormController.onRefresh');
+        console.log('RowFormController.onRefresh', this.model.getFullName());
         this.model.refresh();
     }
 
