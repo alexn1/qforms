@@ -59,7 +59,7 @@ class ComboBoxFieldController extends FieldController {
 
 
     setValue(value, view) {
-        console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
+        // console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.isUndefined = value === undefined;
             if (value === null || value === undefined) {

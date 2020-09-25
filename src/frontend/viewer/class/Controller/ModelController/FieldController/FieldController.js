@@ -88,7 +88,7 @@ class FieldController extends ModelController {
     }
 
     setValue(value, view) {
-        console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
+        // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.setStringValue(stringValue, view);
@@ -116,30 +116,14 @@ class FieldController extends ModelController {
         // console.log('FieldController.isValid', this.model.getFullName());
         try {
             const value = this.getValue(view);
-            console.log('value:', this.model.getFullName(), value);
+            // console.log('value:', this.model.getFullName(), value);
 
-            // null check
             let isValid = true;
-            if (this.model.data.notNull === 'true') {
-                // isValid = !this.isEmpty(value);
-                if (value === null) {
-                    isValid = false;
-                }
-                if (!isValid) console.error(`${this.model.getFullName()}: null`);
+            if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {
+                isValid = false;
+                console.error(`${this.model.getFullName()} is null`);
             }
-
-            /*
-            // type check
-            let isValid2 = true;
-            if (!this.isEmpty(value) && this.model.getColumnType() === 'number') {
-                isValid2 = !isNaN(Number(value));
-                if (!isValid2) console.error('not number');
-            }*/
-
-            if (!isValid) {
-                console.error(`${this.model.getFullName()}: not valid`);
-            }
-            return isValid/* && isValid2*/;
+            return isValid;
         } catch (err) {
             console.error(`${this.model.getFullName()} not valid:`, err.message);
             return false;
@@ -170,10 +154,6 @@ class FieldController extends ModelController {
         } else {
             view.classList.add('error');
         }
-    }
-
-    isEmpty(value) {
-        return value === undefined || value === null || (typeof value === 'string' && value.trim() === '');
     }
 
     isChanged(row, view) {

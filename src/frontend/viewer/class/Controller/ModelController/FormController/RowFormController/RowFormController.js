@@ -98,6 +98,7 @@ class RowFormController extends FormController {
     }
 
     isValid() {
+        console.log('RowFormController.isValid', this.model.getFullName());
         let isValid = true;
         for (const name in this.fields) {
             const field = this.fields[name];
