@@ -185,15 +185,23 @@ class ComboBoxFieldController extends FieldController {
         return isValid;*/
     }
 
+    getValue(view) {
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            if (view.firstElementChild.selectedIndex === 0) return null;
+            return super.getValue(view);
+        } else if (this.model.getForm().getClassName() === 'TableForm') {
+            return super.getValue(view);
+        }
+        return null;
+    }
+
     onChange(el) {
         console.log('ComboBoxFieldController.onChange', this.model.getFullName());
         const view = el.parentNode;
 
-        console.log('selectedIndex', view.firstElementChild.selectedIndex);
-        const stringValue = this.getStringValue(view);
-        const value = this.getValue(view);
-        console.log('stringValue:', stringValue);
-        console.log('value:', value);
+        // console.log('selectedIndex', view.firstElementChild.selectedIndex);
+        // console.log('stringValue:', this.getStringValue(view));
+        console.log('value:', this.getValue(view));
     }
 
 }

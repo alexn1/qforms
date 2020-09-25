@@ -208,10 +208,10 @@ class FieldController extends ModelController {
     }
 
     stringToValue(stringValue) {
-        console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+        // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
         if (stringValue.trim() === '') return null;
         const columnType = this.model.getColumnType();
-        console.log('columnType:', columnType);
+        // console.log('columnType:', columnType);
         if (columnType === 'object' || columnType === 'boolean') {
             return JSON.parse(stringValue);
         } else if (columnType === 'date') {
