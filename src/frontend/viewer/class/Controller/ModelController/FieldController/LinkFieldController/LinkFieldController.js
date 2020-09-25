@@ -23,11 +23,6 @@ class LinkFieldController extends FieldController {
         view.firstElementChild.innerHTML = stringValue;
     }
 
-    setValue(value, view) {
-        this.isUndefined = value === undefined;
-        this.setStringValue(this.valueToString(value), view);
-    }
-
     _onClick(el) {
         const view = el.parentNode;
         this.emit('click', {source: this, view: view, row: view.dbRow, el: el, field: this});

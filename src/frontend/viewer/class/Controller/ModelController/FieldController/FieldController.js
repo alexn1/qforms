@@ -116,25 +116,30 @@ class FieldController extends ModelController {
         // console.log('FieldController.isValid', this.model.getFullName());
         try {
             const value = this.getValue(view);
+            console.log('value:', this.model.getFullName(), value);
 
             // null check
             let isValid = true;
             if (this.model.data.notNull === 'true') {
-                isValid = !this.isEmpty(value);
+                // isValid = !this.isEmpty(value);
+                if (value === null) {
+                    isValid = false;
+                }
                 if (!isValid) console.error(`${this.model.getFullName()}: null`);
             }
 
+            /*
             // type check
             let isValid2 = true;
             if (!this.isEmpty(value) && this.model.getColumnType() === 'number') {
                 isValid2 = !isNaN(Number(value));
                 if (!isValid2) console.error('not number');
-            }
+            }*/
 
-            if (!isValid || !isValid2) {
+            if (!isValid) {
                 console.error(`${this.model.getFullName()}: not valid`);
             }
-            return isValid && isValid2;
+            return isValid/* && isValid2*/;
         } catch (err) {
             console.error(`${this.model.getFullName()} not valid:`, err.message);
             return false;
@@ -145,10 +150,11 @@ class FieldController extends ModelController {
         console.log('FieldController.onChange', this.model.getFullName());
         const view = el.parentNode;
         const row = view.dbRow;
+        this.isUndefined = false;
         const valid = this.isValid(view);
         if (valid) {
-            this.isUndefined = false;
             const value = this.getValue(view);
+            console.log('value:', this.model.getFullName(), value);
             this.model.setValue(row, value);
             this.setPlaceHolder(view, value);
         }

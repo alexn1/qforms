@@ -59,7 +59,7 @@ class ComboBoxFieldController extends FieldController {
 
 
     setValue(value, view) {
-        console.log('ComboBoxFieldController.setValue:', value);
+        console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.isUndefined = value === undefined;
             if (value === null || value === undefined) {
@@ -167,25 +167,25 @@ class ComboBoxFieldController extends FieldController {
         }
     }
 
-    isValid(view) {
-        console.log('ComboBoxFieldController.isValid', this.model.getFullName());
-
-        const value = this.getValue(view);
-        console.log('combobox:', value);
-
-        return true;
-        /*
-        let isValid = true;
-        if (this.model.data.notNull === 'true') {
-            isValid = view.firstElementChild.selectedIndex !== 0;
-        }
-        if (!isValid) {
-            view.firstElementChild.classList.add('error');
-        } else {
-            view.firstElementChild.classList.remove('error');
-        }
-        return isValid;*/
-    }
+    // isValid(view) {
+    //     console.log('ComboBoxFieldController.isValid', this.model.getFullName());
+    //
+    //     const value = this.getValue(view);
+    //     console.log('combobox:', value);
+    //
+    //     return true;
+    //     /*
+    //     let isValid = true;
+    //     if (this.model.data.notNull === 'true') {
+    //         isValid = view.firstElementChild.selectedIndex !== 0;
+    //     }
+    //     if (!isValid) {
+    //         view.firstElementChild.classList.add('error');
+    //     } else {
+    //         view.firstElementChild.classList.remove('error');
+    //     }
+    //     return isValid;*/
+    // }
 
     getValue(view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
