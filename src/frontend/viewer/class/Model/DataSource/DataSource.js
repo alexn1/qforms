@@ -79,6 +79,7 @@ class DataSource extends Model {
 
     setValue(row, column, value) {
         console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
+        if (value === undefined) throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
         if (typeof value === 'object' && value !== null) {
             throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
         }

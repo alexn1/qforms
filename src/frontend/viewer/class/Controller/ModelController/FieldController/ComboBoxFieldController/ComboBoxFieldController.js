@@ -61,8 +61,10 @@ class ComboBoxFieldController extends FieldController {
     setValue(value, view) {
         console.log('ComboBoxFieldController.setValue:', value);
         if (this.model.getForm().getClassName() === 'RowForm') {
+            this.isUndefined = value === undefined;
             if (value === null || value === undefined) {
                 view.firstElementChild.selectedIndex = 0;
+
             } else {
                 view.firstElementChild.value = value;
             }
@@ -187,6 +189,7 @@ class ComboBoxFieldController extends FieldController {
 
     getValue(view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
+            if (this.isUndefined) return undefined;
             if (view.firstElementChild.selectedIndex === 0) return null;
             return super.getValue(view);
         } else if (this.model.getForm().getClassName() === 'TableForm') {

@@ -68,9 +68,7 @@ class Field extends Model {
     }
 
     getValueForDataSource(value) {
-        if (value === undefined) throw new Error('undefined is wrong value for data source');
-        if (value === null) return null;
-
+        if (value === undefined || value === null) return value;
         const columnType = this.getColumnType();
         const valueType = typeof value;
         if (columnType === 'date') {
@@ -80,8 +78,6 @@ class Field extends Model {
         } else if (columnType !== valueType) {
             throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${columnType}`);
         }
-
-
         if (valueType === 'object') {
             if (value instanceof Date) return value.toISOString();
             return JSON.stringify(value);
@@ -109,9 +105,10 @@ class Field extends Model {
         if (this.data.column) {
             let value = this.getForm().getDataSource().getValue(row, this.data.column);
             if (value === null) return null;
+            if (value === undefined) return undefined;
             const columnType = this.getColumnType();
             if (columnType === 'date') {
-                if (value === undefined) return null; // workaround for new row
+                // if (value === undefined) return null; // workaround for new row
                 if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
                 return new Date(value);
             } else if (columnType === 'object') {

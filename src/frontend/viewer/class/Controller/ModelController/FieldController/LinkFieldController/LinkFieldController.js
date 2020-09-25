@@ -24,6 +24,7 @@ class LinkFieldController extends FieldController {
     }
 
     setValue(value, view) {
+        this.isUndefined = value === undefined;
         this.setStringValue(this.valueToString(value), view);
     }
 

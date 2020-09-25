@@ -60,8 +60,8 @@ class DatePickerFieldController extends FieldController {
 
     setValue(value, view) {
         // console.log('DatePickerController.setValue', this.model.getFullName(), value);
-
         if (this.model.getForm().getClassName() === 'RowForm') {
+            this.isUndefined = value === undefined;
             this.dropdownDatePicker.setValue(value);
         } else if (this.model.getForm().getClassName() === 'TableForm') {
             if (value instanceof Date) {
@@ -99,6 +99,7 @@ class DatePickerFieldController extends FieldController {
     getValue(view) {
         // console.log('DatePickerFieldController.getValue', this.model.getFullName());
         if (this.model.getForm().getClassName() === 'RowForm') {
+            if (this.isUndefined) return undefined;
             return this.dropdownDatePicker.getValue();
         }
         return null;
