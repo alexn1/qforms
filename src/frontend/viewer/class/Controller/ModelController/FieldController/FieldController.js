@@ -97,7 +97,6 @@ class FieldController extends ModelController {
         // console.log('FieldController.getValue', this.model.getFullName());
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
-        this.setPlaceHolder(view, value);
         return value;
     }
 
@@ -145,7 +144,9 @@ class FieldController extends ModelController {
         const row = view.dbRow;
         const valid = this.isValid(view);
         if (valid) {
-            this.model.setValue(row, this.getValue(view));
+            const value = this.getValue(view);
+            this.model.setValue(row, value);
+            this.setPlaceHolder(view, value);
         }
         this.updateErrorClass(view, valid);
         this.updateChangedClass(row, view);
