@@ -126,7 +126,7 @@ class FieldController extends ModelController {
 
             // type check
             let isValid2 = true;
-            if (this.model.getColumnType() === 'number') {
+            if (!this.isEmpty(value) && this.model.getColumnType() === 'number') {
                 isValid2 = !isNaN(Number(value));
                 if (!isValid2) console.error('not number');
             }
