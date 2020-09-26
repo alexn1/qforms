@@ -84,7 +84,7 @@ class RowFormController extends FormController {
     }
 
     onRowUpdate(e) {
-        console.log('RowFormController.onRowUpdate', this.model.getFullName());
+        console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
         $(this.view).find('button.saveForm').prop('disabled', true);
         $(this.view).find('button.discardForm').prop('disabled', true);
         $(this.view).find('button.refreshForm').prop('disabled', false);
