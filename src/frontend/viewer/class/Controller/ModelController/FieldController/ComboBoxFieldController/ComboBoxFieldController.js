@@ -85,9 +85,9 @@ class ComboBoxFieldController extends FieldController {
 
     _fillSelectOptions(view) {
         const nullOption = document.createElement('option');
-        if (this.model.data.notNull === 'true') {
+        /*if (this.model.data.notNull === 'true') {
             nullOption.innerHTML = `-- ${this.model.getApp().data.text.field.selectValue} --`;
-        }
+        }*/
         view.firstElementChild.appendChild(nullOption);
         const rows = this.model.getComboBoxDataSource().getRows();
         for (let i = 0; i < rows.length; i++) {

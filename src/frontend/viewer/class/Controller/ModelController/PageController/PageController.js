@@ -90,7 +90,7 @@ class PageController extends ModelController {
         console.log('changed:', changed);
         const valid = this.isValid();
         console.log('valid:', valid);
-        if (changed || !valid) {
+        if (changed/* || !valid*/) {
             const result = confirm(this.model.getApp().data.text.form.areYouSure);
             if (!result) return;
         }
