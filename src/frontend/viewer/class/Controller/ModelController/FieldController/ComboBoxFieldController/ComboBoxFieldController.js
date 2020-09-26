@@ -64,7 +64,6 @@ class ComboBoxFieldController extends FieldController {
             this.isUndefined = value === undefined;
             if (value === null || value === undefined) {
                 view.firstElementChild.selectedIndex = 0;
-
             } else {
                 view.firstElementChild.value = value;
             }
