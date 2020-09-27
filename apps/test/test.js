@@ -59,12 +59,6 @@ class testController extends ApplicationController {
             }
         };
 
-        // button
-        this.view.querySelector('#testButton').addEventListener('click', (e) => {
-            console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
-            console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
-        });
-
         // ModalWidget
         this.view.querySelector('#openModalButton').addEventListener('click', () => {
             const el = ModalWidget.createElement('<div style="background-color: white; height: 100%;">hello world</div>');
@@ -72,8 +66,23 @@ class testController extends ApplicationController {
             new ModalWidget(el);
         });
 
+        // DropdownButtonWidget
         const el = this.view.querySelector('.DropdownButtonWidget');
         const dropdownButtonWidget = new DropdownButtonWidget(el);
+
+        // tooltipWidget
+        const tooltipWidget = new TooltipWidget(this.view.querySelector('.TooltipWidget'));
+
+        // button
+        this.view.querySelector('#testButton').addEventListener('click', (e) => {
+            // console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
+            // console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
+            if (tooltipWidget.isHidden()) {
+                tooltipWidget.show();
+            } else {
+                tooltipWidget.hide();
+            }
+        });
 
     }
 
