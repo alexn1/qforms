@@ -1,7 +1,16 @@
 .TooltipWidget {
-  position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  position: relative;
+
+  &.alert {
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
 
   > span {
     visibility: hidden;
