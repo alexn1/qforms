@@ -29,7 +29,11 @@
                 } %>
             </div>
             <%=QForms.render(field.data.view, {model: field})%>
-            <div class="tooltip"></div>
+            <div class="tooltip">
+                <div class="TooltipWidget alert">
+                    <span class="left">Tooltip text</span>
+                </div>
+            </div>
         <% } %>
     </div>
 </div>
