@@ -22,13 +22,14 @@
             const field = model.fields[fieldName];
             if (field.data.isVisible === 'false') continue;
         %>
-            <div class="Label <%=field.getName()%>Label">
+            <div class="label <%=field.getName()%>Label">
                 <% echo(field.data.caption + ':');
                 if (field.data.notNull === 'true') {
                 %><span style='color:red;'>&nbsp;*</span><%
                 } %>
             </div>
             <%=QForms.render(field.data.view, {model: field})%>
+            <div class="tooltip"></div>
         <% } %>
     </div>
 </div>

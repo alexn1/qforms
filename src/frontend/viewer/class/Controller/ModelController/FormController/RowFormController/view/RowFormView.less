@@ -1,7 +1,7 @@
 .RowFormView {
     > div.Grid {
         display: grid;
-        grid-template-columns: 150px 1fr 150px 1fr;
+        grid-template-columns: 150px 1fr 30px 150px 1fr 30px;
         //grid-template-columns: 100px 1fr 100px 1fr 100px 1fr;
     }
 }
@@ -16,10 +16,20 @@
         grid-row-gap: 5px;
         //grid-column-gap: 5px;
         > div {
-            border-bottom: 1px dotted gray;
-            &.Label {
+            &.label {
                 margin-left: 5px;
+                border-bottom: 1px dotted gray;
             }
+            &.field {
+                border-bottom: 1px dotted gray;
+                &.changed {
+                    //border-bottom: 1px dotted #00ff00 !important;
+                }
+                &.error {
+                    //border-bottom: 1px dotted red !important;
+                }
+            }
+            &.tooltip {}
         }
     }
 }
