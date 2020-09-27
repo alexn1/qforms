@@ -17,4 +17,12 @@ class TooltipWidget extends Widget {
     isHidden() {
         return this.el.style.visibility === 'hidden';
     }
+
+    getSpanElement() {
+        return this.el.querySelector('div.TooltipWidget > span');
+    }
+
+    setTooltipText(text) {
+        this.getSpanElement().innerText =  text;
+    }
 }

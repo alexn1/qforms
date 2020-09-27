@@ -72,6 +72,7 @@ class testController extends ApplicationController {
 
         // tooltipWidget
         const tooltipWidget = new TooltipWidget(this.view.querySelector('.TooltipWidget'));
+        tooltipWidget.setTooltipText('abc');
 
         // button
         this.view.querySelector('#testButton').addEventListener('click', (e) => {
@@ -82,6 +83,8 @@ class testController extends ApplicationController {
             } else {
                 tooltipWidget.hide();
             }
+
+
         });
 
     }
