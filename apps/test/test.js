@@ -76,6 +76,7 @@ class testController extends ApplicationController {
 
         // button
         this.view.querySelector('#testButton').addEventListener('click', (e) => {
+            console.log('testButton click');
             // console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
             // console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
             if (tooltipWidget.isHidden()) {

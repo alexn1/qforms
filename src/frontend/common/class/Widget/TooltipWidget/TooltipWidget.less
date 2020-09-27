@@ -1,6 +1,9 @@
 .TooltipWidget {
   display: inline-block;
   position: relative;
+  &.hidden {
+    visibility: hidden;
+  }
 
   &.alert {
     &::before {

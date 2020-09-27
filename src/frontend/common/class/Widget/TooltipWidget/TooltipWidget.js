@@ -7,15 +7,19 @@ class TooltipWidget extends Widget {
     }
 
     hide() {
-        this.el.style.visibility = 'hidden';
+        console.log('TooltipWidget.hide');
+        // this.el.style.visibility = 'hidden';
+        this.el.classList.add('hidden');
     }
 
     show() {
-        this.el.style.visibility = 'visible';
+        console.log('TooltipWidget.show');
+        // this.el.style.visibility = 'visible';
+        this.el.classList.remove('hidden');
     }
 
     isHidden() {
-        return this.el.style.visibility === 'hidden';
+        return this.el.classList.contains('hidden');
     }
 
     getSpanElement() {
