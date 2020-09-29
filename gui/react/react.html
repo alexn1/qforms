@@ -8,7 +8,11 @@
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 <!--    <script src="like_button.js"></script>-->
     <style>
-
+        #myDiv {
+            background-color: blue;
+            height: 200px;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +50,49 @@
                 );
             }
         }
-        ReactDOM.render(<Checkbox/>, document.getElementById('react-container'));
+        class Box extends React.Component {
+            constructor(props) {
+                console.log('Box.constructor', props);
+                super(props);
+                this.state = {
+                    backgroundColor: 'purple'
+                };
+                this.update = this.update.bind(this);
+            }
+            componentWillMount() {
+                console.log('Box.componentWillMount');
+            }
+            componentDidMount() {
+                console.log('Box.componentDidMount');
+            }
+            update() {
+                console.log('Box.update');
+                this.setState({
+                    backgroundColor: 'green'
+                });
+            }
+            shouldComponentUpdate(nextProps, nextState) {
+                console.log('Box.shouldComponentUpdate', nextProps, nextState);
+                return true;
+            }
+            componentDidUpdate() {
+                console.log('Box.componentDidUpdate');
+            }
+            render() {
+                console.log('Box.render');
+                return (<div
+                    id="myDiv"
+                    style={this.state}
+                    onClick={this.update}
+                ></div>);
+            }
+        }
+        console.log('ReactDOM.render()');
+        ReactDOM.render(
+            <Box abc='xyz'></Box>,
+            document.getElementById('react-container')
+        );
+        console.log('after ReactDOM.render');
     </script>
 </body>
 </html>
