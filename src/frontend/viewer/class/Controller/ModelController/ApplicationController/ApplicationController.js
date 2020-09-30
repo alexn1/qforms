@@ -18,9 +18,9 @@ class ApplicationController extends ModelController {
         super(model);
         this.view = view;
         this.lastPageId = 0;
-        this.menu             = null;
-        this.tabWidget        = null;
-        this.statusbar        = null;
+        this.menu       = null;
+        this.tabWidget  = null;
+        this.statusbar  = null;
     }
 
     static getSearchObj() {
