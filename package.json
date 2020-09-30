@@ -35,7 +35,8 @@
   },
   "scripts": {
     "start": "node build/lib/backend/www.js",
-    "build-jsx": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod"
+    "build-jsx": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod",
+    "build-jsx-watch": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod --watch"
   },
   "repository": {
     "type": "git",
