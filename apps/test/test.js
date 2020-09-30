@@ -110,7 +110,10 @@ class testController extends ApplicationController {
                         {name: 'page6', title: 'Page 6'},
                     ]
                 }
-            ]
+            ],
+            onClick: pageName => {
+                console.log('pageName:', pageName);
+            }
         }), this.view.querySelector('#menu'));
     }
 

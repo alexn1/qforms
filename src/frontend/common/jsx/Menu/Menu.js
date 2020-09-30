@@ -3,17 +3,17 @@ class Menu extends React.Component {
         console.log('Menu.constructor', props);
         super(props);
         this.state = {};
-        this.onMenuClick = this.onMenuClick.bind(this);
-        this.onBlur  = this.onBlur.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMenuClick     = this.onMenuClick.bind(this);
+        this.onBlur          = this.onBlur.bind(this);
+        this.onMouseDown     = this.onMouseDown.bind(this);
         this.onMenuItemClick = this.onMenuItemClick.bind(this);
     }
     onMenuClick(e) {
-        console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+        // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
         this.toggleMenu(e.currentTarget.dataset.menu);
     }
     onBlur(e) {
-        console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+        // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
         this.closeMenu(e.currentTarget.dataset.menu);
     }
     toggleMenu(menu) {
@@ -23,16 +23,16 @@ class Menu extends React.Component {
         this.setState({[menu]: false});
     }
     onMouseDown(e) {
-        console.log('Menu.onMouseDown');
+        // console.log('Menu.onMouseDown');
         e.preventDefault();
         e.stopPropagation();
         return false;
     }
     onMenuItemClick(e) {
-        console.log('Menu.onMenuItemClick', e.currentTarget.dataset.menu, e.currentTarget.dataset.item);
+        // console.log('Menu.onMenuItemClick', e.currentTarget.dataset.menu, e.currentTarget.dataset.item);
         this.closeMenu(e.currentTarget.dataset.menu);
-        if (this.onClick) {
-            this.onClick(e.currentTarget.dataset.item);
+        if (this.props.onClick) {
+            this.props.onClick(e.currentTarget.dataset.item);
         }
     }
     render() {
