@@ -88,6 +88,30 @@ class testController extends ApplicationController {
 
         // box
         ReactDOM.render(React.createElement(Box, {abc: 'xyz'}), this.view.querySelector('#box'));
+
+        // menu
+        ReactDOM.render(React.createElement(Menu, {
+            items: [
+                {
+                    name: 'menu1',
+                    title: 'Menu1',
+                    items: [
+                        {name: 'page1', title: 'Page 1'},
+                        {name: 'page2', title: 'Page 2'},
+                        {name: 'page3', title: 'Page 3'},
+                    ]
+                },
+                {
+                    name: 'menu2',
+                    title: 'Menu2',
+                    items: [
+                        {name: 'page4', title: 'Page 4'},
+                        {name: 'page5', title: 'Page 5'},
+                        {name: 'page6', title: 'Page 6'},
+                    ]
+                }
+            ]
+        }), this.view.querySelector('#menu'));
     }
 
     initMenu() {}
