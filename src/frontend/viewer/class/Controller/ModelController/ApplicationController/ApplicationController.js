@@ -20,7 +20,7 @@ class ApplicationController extends ModelController {
         this.lastPageId = 0;
         this.menu             = null;
         this.tabWidget        = null;
-        this.statusbarWidget  = null;
+        this.statusbar        = null;
     }
 
     static getSearchObj() {
@@ -71,10 +71,9 @@ class ApplicationController extends ModelController {
     }
 
     initStatusbar() {
-        const el = this.view.querySelector('.ApplicationView > .StatusbarWidget');
-        if (el) {
-            this.statusbarWidget = new StatusbarWidget(el);
-        }
+        ReactDOM.render(React.createElement(Statusbar, {
+            cb: statusbar => this.statusbar = statusbar
+        }), this.view.querySelector('.Statusbar'));
     }
 
     initTab() {
@@ -170,8 +169,8 @@ class ApplicationController extends ModelController {
 
     onRequest(e) {
         // console.log('onRequest', e);
-        if (this.statusbarWidget) {
-            this.statusbarWidget.setMessage(`Last query time: ${e.time} ms`);
+        if (this.statusbar) {
+            this.statusbar.setLastQueryTime(e.time);
         }
     }
 
