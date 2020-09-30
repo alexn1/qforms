@@ -22,6 +22,7 @@ class ViewerController {
         this.applicationController.init();
 
         // show view
+        console.log('append app view to DOM');
         $('#client').append($view);
     }
 

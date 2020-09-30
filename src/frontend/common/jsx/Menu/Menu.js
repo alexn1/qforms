@@ -32,7 +32,7 @@ class Menu extends React.Component {
         // console.log('Menu.onMenuItemClick', e.currentTarget.dataset.menu, e.currentTarget.dataset.item);
         this.closeMenu(e.currentTarget.dataset.menu);
         if (this.props.onClick) {
-            this.props.onClick(e.currentTarget.dataset.item);
+            this.props.onClick(e.currentTarget.dataset.menu, e.currentTarget.dataset.item);
         }
     }
     render() {

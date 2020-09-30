@@ -86,10 +86,8 @@ class testController extends ApplicationController {
             }
         });
 
-        // // box
-        // ReactDOM.render(React.createElement(Box, {abc: 'xyz'}), this.view.querySelector('#box'));
-
         // menu
+        const div = document.createElement('div');
         ReactDOM.render(React.createElement(Menu, {
             items: [
                 {
@@ -111,10 +109,12 @@ class testController extends ApplicationController {
                     ]
                 }
             ],
-            onClick: pageName => {
-                console.log('pageName:', pageName);
+            onClick: (menu, item) => {
+                console.log('onClick:', menu, item);
             }
-        }), this.view.querySelector('#menu'));
+        }), div);
+        this.view.appendChild(div);
+
     }
 
     initMenu() {}
