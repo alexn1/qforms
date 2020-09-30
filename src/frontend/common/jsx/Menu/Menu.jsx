@@ -1,6 +1,6 @@
 class Menu extends React.Component {
     constructor(props) {
-        console.log('Menu.constructor', props);
+        // console.log('Menu.constructor', props);
         super(props);
         this.state = {};
         this.onMenuClick     = this.onMenuClick.bind(this);
@@ -36,20 +36,16 @@ class Menu extends React.Component {
         }
     }
     render() {
-        return (
-            <div className='Menu'>
-                {this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : ''}>
-                    <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
-                    <div>
-                        {menu.items.map(item =>
-                            <a key={item.name} data-menu={menu.name} data-item={item.name}
-                               onMouseDown={this.onMouseDown}
-                               onClick={this.onMenuItemClick}
-                            >{item.title}</a>
-                        )}
-                    </div>
-                </div>)}
+        return this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : ''}>
+            <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
+            <div>
+                {menu.items.map(item =>
+                    <a key={item.name} data-menu={menu.name} data-item={item.name}
+                       onMouseDown={this.onMouseDown}
+                       onClick={this.onMenuItemClick}
+                    >{item.title}</a>
+                )}
             </div>
-        );
+        </div>);
     }
 }

@@ -86,9 +86,7 @@ class testController extends ApplicationController {
             }
         });
 
-        // menu
-        const div = document.createElement('div');
-        ReactDOM.render(React.createElement(Menu, {
+        const props = {
             items: [
                 {
                     name: 'menu1',
@@ -112,10 +110,14 @@ class testController extends ApplicationController {
             onClick: (menu, item) => {
                 console.log('onClick:', menu, item);
             }
-        }), div);
-        this.view.appendChild(div);
+        };
 
+        // menu
+        const menu = ApplicationController.createReactComponent('Menu', props);
+        this.view.appendChild(menu);
     }
+
+
 
     initMenu() {}
     initTab() {}

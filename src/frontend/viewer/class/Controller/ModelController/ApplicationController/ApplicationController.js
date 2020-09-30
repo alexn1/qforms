@@ -269,4 +269,12 @@ class ApplicationController extends ModelController {
             alert(err.message);
         }
     }
+
+    static createReactComponent(name, props, children) {
+        console.log('ApplicationController.createReactComponent', name, props);
+        const div = document.createElement('div');
+        div.className = name;
+        ReactDOM.render(React.createElement(eval(name), props, children), div);
+        return div;
+    }
 }
