@@ -7,6 +7,9 @@ class Menu extends React.Component {
         this.onBlur          = this.onBlur.bind(this);
         this.onMouseDown     = this.onMouseDown.bind(this);
         this.onMenuItemClick = this.onMenuItemClick.bind(this);
+        if (this.props.cb) {
+            this.props.cb(this);
+        }
     }
     onMenuClick(e) {
         // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
@@ -17,6 +20,7 @@ class Menu extends React.Component {
         this.closeMenu(e.currentTarget.dataset.menu);
     }
     toggleMenu(menu) {
+
         this.setState({[menu]: !this.state[menu]});
     }
     closeMenu(menu) {

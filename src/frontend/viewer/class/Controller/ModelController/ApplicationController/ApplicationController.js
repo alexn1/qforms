@@ -18,7 +18,7 @@ class ApplicationController extends ModelController {
         super(model);
         this.view = view;
         this.lastPageId = 0;
-        this.menuWidget       = null;
+        this.menu             = null;
         this.tabWidget        = null;
         this.statusbarWidget  = null;
     }
@@ -50,10 +50,8 @@ class ApplicationController extends ModelController {
         this.createPages();
     }
 
-    initMenu() {
-        const menuElement = this.view.querySelector('.Menu');
-
-        const items = Object.keys(this.model.data.menu).map(key => ({
+    getMenuItemsProp() {
+        return Object.keys(this.model.data.menu).map(key => ({
             name: key,
             title: key,
             items: this.model.data.menu[key].map(item => ({
@@ -61,17 +59,15 @@ class ApplicationController extends ModelController {
                 title: item.caption
             }))
         }));
-        const props = {
-            items,
-            onClick: this.onMenuItemClick.bind(this)
-        };
-        ReactDOM.render(React.createElement(Menu, props), menuElement);
-        /*
-        const menuWidgetElement = this.view.querySelector('.MenuWidget');
-        if (menuWidgetElement) {
-            this.menuWidget = new MenuWidget(menuWidgetElement);
-            this.menuWidget.onClick = this.onMenuItemClick.bind(this);
-        }*/
+    }
+
+    initMenu() {
+        ReactDOM.render(React.createElement(Menu, {
+            items: this.getMenuItemsProp(),
+            onClick: this.onMenuItemClick.bind(this),
+            cb: menu => this.menu = menu
+        }), this.view.querySelector('.Menu'));
+        // setTimeout(() => this.menu.toggleMenu('Pages'), 1000);
     }
 
     initStatusbar() {
