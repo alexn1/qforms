@@ -1,19 +1,5 @@
 <div id="<%=model.getName()%>" class="ApplicationView <%=model.data.theme%>">
-    <div class="MenuWidget">
-        <% for (const menuName in model.data.menu) {
-            const items = model.data.menu[menuName];
-        %><div>
-            <button><%=menuName%></button>
-            <div>
-                <%
-                items.forEach(function(item) {
-                %><a data-page="<%=item.page%>"><%=item.caption%></a><%
-                });
-                %>
-            </div>
-        </div><%
-        } %>
-    </div>
+    <div class="Menu"/>
     <div class="TabWidget">
         <ul></ul>
         <div></div>

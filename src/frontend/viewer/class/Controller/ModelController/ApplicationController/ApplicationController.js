@@ -51,11 +51,27 @@ class ApplicationController extends ModelController {
     }
 
     initMenu() {
+        const menuElement = this.view.querySelector('.Menu');
+
+        const items = Object.keys(this.model.data.menu).map(key => ({
+            name: key,
+            title: key,
+            items: this.model.data.menu[key].map(item => ({
+                name: item.page,
+                title: item.caption
+            }))
+        }));
+        const props = {
+            items,
+            onClick: this.onMenuItemClick.bind(this)
+        };
+        ReactDOM.render(React.createElement(Menu, props), menuElement);
+        /*
         const menuWidgetElement = this.view.querySelector('.MenuWidget');
         if (menuWidgetElement) {
             this.menuWidget = new MenuWidget(menuWidgetElement);
             this.menuWidget.onClick = this.onMenuItemClick.bind(this);
-        }
+        }*/
     }
 
     initStatusbar() {
@@ -260,10 +276,10 @@ class ApplicationController extends ModelController {
         return this.lastPageId;
     }
 
-    async onMenuItemClick(a) {
-        console.log('ApplicationController.onMenuItemClick', a);
+    async onMenuItemClick(menu, item) {
+        console.log('ApplicationController.onMenuItemClick', menu, item);
         try {
-            await this.openPage({name: a.dataset.page});
+            await this.openPage({name: item});
         } catch (err) {
             console.error(err);
             alert(err.message);
