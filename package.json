@@ -22,6 +22,8 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "chai": "^3.2.0",
     "del": "^1.2.1",
     "gulp": "^4.0.2",
@@ -32,7 +34,8 @@
     "should": "^7.0.4"
   },
   "scripts": {
-    "start": "node build/lib/backend/www.js"
+    "start": "node build/lib/backend/www.js",
+    "build-jsx": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod"
   },
   "repository": {
     "type": "git",
