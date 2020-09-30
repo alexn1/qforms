@@ -16,9 +16,13 @@
     <!--<link href="common/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="common/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <script src="common/lib/bootstrap/js/bootstrap.min.js"></script>-->
+    <!-- react -->
+    <script src="common/lib/react/react.development.js"></script>
+    <script src="common/lib/react/react-dom.development.js"></script>
 
     <!-- qforms -->
     <link rel="stylesheet" href="common/class/all.css"/>
+    <link rel="stylesheet" href="common/jsx/all.css"/>
 
     <!-- viewerClassCss -->
 <%viewerClassCss.forEach((filePath) => {
@@ -26,6 +30,7 @@
     });%>
     <script src="common/class/all.js"></script>
     <script src="viewer/class/all.js"></script>
+    <script src="common/jsx/Box/Box.js"></script>
     <!-- app links begin -->
     <%links.forEach((link) => {
         %><link rel="stylesheet" href="<%=link%>"/><%

@@ -84,10 +84,10 @@ class testController extends ApplicationController {
             } else {
                 tooltipWidget.hide();
             }
-
-
         });
 
+        // box
+        ReactDOM.render(React.createElement(Box, {abc: 'xyz'}), this.view.querySelector('#box'));
     }
 
     initMenu() {}
