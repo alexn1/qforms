@@ -281,8 +281,8 @@ class ApplicationController extends ModelController {
         }
     }
 
-    static createReactComponent(name, props, children) {
-        console.log('ApplicationController.createReactComponent', name, props);
+    static createReactRoot(name, props, children) {
+        console.log('ApplicationController.createReactRoot', name, props);
         const div = document.createElement('div');
         div.className = name;
         ReactDOM.render(React.createElement(eval(name), props, children), div);

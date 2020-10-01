@@ -114,7 +114,7 @@ class testController extends ApplicationController {
         };
 
         // menu
-        const menu = ApplicationController.createReactComponent('Menu', props);
+        const menu = ApplicationController.createReactRoot('Menu', props);
         this.view.appendChild(menu);
 
         // statusbar
