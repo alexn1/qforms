@@ -114,12 +114,15 @@ class testController extends ApplicationController {
         };
 
         // menu
-        const menu = ApplicationController.createReactRoot('Menu', props);
-        this.view.appendChild(menu);
+        // const menu = ApplicationController.createReactRoot('Menu', props);
+        // this.view.appendChild(menu);
 
         // statusbar
         ReactDOM.render(React.createElement(Statusbar, {cb: statusbar => this.statusbar = statusbar}), this.view.querySelector('.Statusbar'));
         this.statusbar.setLastQueryTime(100);
+
+        // tooltip
+        ReactDOM.render(React.createElement(Tooltip), this.view.querySelector('#tooltip'));
     }
 
 
