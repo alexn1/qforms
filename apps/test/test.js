@@ -122,7 +122,10 @@ class testController extends ApplicationController {
         this.statusbar.setLastQueryTime(100);
 
         // tooltip
-        ReactDOM.render(React.createElement(Tooltip, {position: 'right', tip: 'abc', type: 'alert'}), this.view.querySelector('#tooltip'));
+        let tooltip;
+        ReactDOM.render(React.createElement(Tooltip, {position: 'right', type: 'alert', hidden: true, cb: c => tooltip = c}), this.view.querySelector('#tooltip'));
+        tooltip.setTipText('hello world');
+        tooltip.show();
     }
 
 
