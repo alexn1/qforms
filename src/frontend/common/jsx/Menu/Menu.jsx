@@ -20,8 +20,10 @@ class Menu extends React.Component {
         this.closeMenu(e.currentTarget.dataset.menu);
     }
     toggleMenu(menu) {
-
-        this.setState({[menu]: !this.state[menu]});
+        // console.log('Menu.toggleMenu', menu);
+        this.setState(state => ({
+            [menu]: !state[menu]
+        }));
     }
     closeMenu(menu) {
         this.setState({[menu]: false});
