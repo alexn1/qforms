@@ -125,7 +125,8 @@ class testController extends ApplicationController {
         let tooltip;
         ReactDOM.render(React.createElement(Tooltip, {position: 'right', type: 'alert', hidden: true, cb: c => tooltip = c}), this.view.querySelector('#tooltip'));
         tooltip.setTipText('hello world');
-        tooltip.show();
+        setTimeout(() => tooltip.show(), 1000);
+
     }
 
 

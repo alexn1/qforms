@@ -2,7 +2,10 @@ class Tooltip extends React.Component {
     constructor(props) {
         console.log('Tooltip.constructor', props);
         super(props);
-        this.state = {tip: props.tip, hidden: props.hidden};
+        this.state = {
+            tip   : props.tip,
+            hidden: props.hidden
+        };
         if (props.cb) props.cb(this);
     }
     setTipText(tip) {
