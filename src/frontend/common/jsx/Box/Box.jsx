@@ -13,6 +13,9 @@ class Box extends React.Component {
     componentDidMount() {
         console.log('Box.componentDidMount');
     }
+    componentWillUnmount() {
+        console.log('Box.componentWillUnmount');
+    }
     update() {
         console.log('Box.update');
         this.setState({
