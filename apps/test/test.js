@@ -5,7 +5,6 @@ class testController extends ApplicationController {
     constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-        // this.menu                = null;
         this.datePicker          = null;
         this.dropdownDatePicker1 = null;
         this.dropdownDatePicker2 = null;
@@ -14,14 +13,6 @@ class testController extends ApplicationController {
     init() {
         console.log('testController.init');
         super.init();
-
-        /*const menuElement = this.view.querySelector('.MenuWidget');
-        if (menuElement) {
-            this.menu = new MenuWidget(menuElement);
-            this.menu.onClick = (a) => {
-                console.log('on click:', a);
-            }
-        }*/
 
         const datePickerElement = this.view.querySelector('.DatePickerWidget');
         if (datePickerElement) {
@@ -86,7 +77,8 @@ class testController extends ApplicationController {
             }
         });
 
-        const props = {
+        // menu
+        ApplicationController.createReactComponent(this.view.querySelector('.Menu'), Menu, {
             items: [
                 {
                     name: 'menu1',
@@ -110,10 +102,7 @@ class testController extends ApplicationController {
             onClick: (menu, item) => {
                 console.log('onClick:', menu, item);
             }
-        };
-
-        // menu
-        ApplicationController.createReactComponent(this.view.querySelector('.Menu'), Menu, props);
+        });
 
 
         // statusbar
