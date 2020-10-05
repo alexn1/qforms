@@ -57,13 +57,8 @@ class testController extends ApplicationController {
             new ModalWidget(el);
         });
 
-        // DropdownButtonWidget
-        const el = this.view.querySelector('.DropdownButtonWidget');
-        const dropdownButtonWidget = new DropdownButtonWidget(el);
-
-        // tooltipWidget
-        const tooltipWidget = new TooltipWidget(this.view.querySelector('.TooltipWidget'));
-        tooltipWidget.setTooltipText('abc');
+        // dropdownButtonWidget
+        const dropdownButtonWidget = new DropdownButtonWidget(this.view.querySelector('.DropdownButtonWidget'));
 
         // button
         this.view.querySelector('#testButton').addEventListener('click', (e) => {
@@ -123,10 +118,7 @@ class testController extends ApplicationController {
                 console.log('onDateSelected:', date);
             }
         });
-
-        setTimeout(() => {
-            datepicker.setSelectedDate([2020, 9, 19])
-        }, 1000);
+        setTimeout(() => datepicker.setSelectedDate([2020, 9, 19]), 1000);
     }
 
 
