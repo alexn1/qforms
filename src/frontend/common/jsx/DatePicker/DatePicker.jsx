@@ -41,7 +41,6 @@ class DatePicker extends React.Component {
         } else {
             date.setDate(date.getDate() - day);            // first day of table
         }
-
         console.log('date:', date);
 
 
@@ -66,18 +65,18 @@ class DatePicker extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td className="weekend">6</td>
-                    <td className="weekend">7</td>
-                </tr>
+                    {[0, 1, 2, 3, 4, 5].map(i => (<tr>
+                        {[0, 1, 2, 3, 4, 5, 6].map(j => {
+                            const text = date.getDate().toString();
 
+                            const classes = ['selectable'];
+                            if (j >= 5 && j <= 6) classes.push('weekend');
+                            if (date.getMonth() !== this.state.month) classes.push('out');
 
-
+                            date.setDate(date.getDate() + 1);
+                            return <td className={classes.join(' ')}>{text}</td>;
+                        })}
+                    </tr>))}
                 </tbody>
             </table>
         );
