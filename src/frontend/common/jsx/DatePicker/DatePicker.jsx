@@ -83,7 +83,7 @@ class DatePicker extends React.Component {
                             const text = date.getDate().toString();
 
                             const classes = ['selectable'];
-                            if (j >= 5 && j <= 6) classes.push('weekend');
+                            if (j === 5 || j === 6) classes.push('weekend');
                             if (date.getMonth() !== this.state.month) classes.push('out');
                             if (date.getTime() === today.getTime()) classes.push('today');
                             if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
