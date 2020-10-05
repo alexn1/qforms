@@ -114,6 +114,9 @@ class testController extends ApplicationController {
         tooltipAlertTop.setTipText('hello world');
         // setTimeout(() => tooltip.show(), 1000);
 
+        // datepicker
+        const datepicker = ApplicationController.createReactComponent(this.view.querySelector('#datepicker'), DatePicker);
+
     }
 
 
