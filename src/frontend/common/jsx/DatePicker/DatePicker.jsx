@@ -74,6 +74,10 @@ class DatePicker extends React.Component {
         return this.isMonthAllowed(prev);
     }
 
+    setSelectedDate(arr) {
+        this.setState({selectedDate: arr});
+    }
+
     isMonthAllowed(month) {
         if (this.isMinDate()) {
             const minMonth = new Date(this.state.minDate[0], this.state.minDate[1]);
