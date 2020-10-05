@@ -288,4 +288,14 @@ class ApplicationController extends ModelController {
         ReactDOM.render(React.createElement(eval(name), props, children), div);
         return div;
     }
+
+    static createReactComponent(root, cls, props = {}, children) {
+        // console.log('ApplicationController.createReactComponent', root, cls);
+        let component;
+        props.cb = c => component = c;
+        const reactElement = React.createElement(cls, props, children);
+        ReactDOM.render(reactElement, root);
+        if (!component) throw new Error('component is null, check cb in component class');
+        return component;
+    }
 }

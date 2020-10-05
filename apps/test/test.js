@@ -9,7 +9,6 @@ class testController extends ApplicationController {
         this.datePicker          = null;
         this.dropdownDatePicker1 = null;
         this.dropdownDatePicker2 = null;
-        this.statusbar           = null;
     }
 
     init() {
@@ -118,8 +117,8 @@ class testController extends ApplicationController {
         // this.view.appendChild(menu);
 
         // statusbar
-        ReactDOM.render(React.createElement(Statusbar, {cb: statusbar => this.statusbar = statusbar}), this.view.querySelector('.Statusbar'));
-        this.statusbar.setLastQueryTime(100);
+        const statusbar = ApplicationController.createReactComponent(this.view.querySelector('.Statusbar'), Statusbar);
+        statusbar.setLastQueryTime(100);
 
         // tooltip
         let tooltip;
