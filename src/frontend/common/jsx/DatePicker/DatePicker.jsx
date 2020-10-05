@@ -58,22 +58,10 @@ class DatePicker extends React.Component {
         return !!this.props.minDate;
     }
 
-    setMinDate(arr) {
-        this.setState({minDate: arr});
-    }
-
-    getMinDate() {
-        return this.props.minDate || null;
-    }
-
     isPrevAllowed() {
         const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
         prev.setMonth(prev.getMonth() - 1);
         return this.isMonthAllowed(prev);
-    }
-
-    setSelectedDate(arr) {
-        this.setState({selectedDate: arr});
     }
 
     isMonthAllowed(month) {
@@ -109,7 +97,7 @@ class DatePicker extends React.Component {
     }
 
     next() {
-        console.log('DatePicker.next');
+        // console.log('DatePicker.next');
         this.setState(prevState => {
             const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             next.setMonth(next.getMonth() + 1);
@@ -120,7 +108,7 @@ class DatePicker extends React.Component {
     }
 
     prev() {
-        console.log('DatePicker.prev');
+        // console.log('DatePicker.prev');
         this.setState(prevState => {
             const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             prev.setMonth(prev.getMonth() - 1);
