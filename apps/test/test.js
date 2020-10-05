@@ -5,7 +5,7 @@ class testController extends ApplicationController {
     constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-        this.menu                = null;
+        // this.menu                = null;
         this.datePicker          = null;
         this.dropdownDatePicker1 = null;
         this.dropdownDatePicker2 = null;
@@ -15,13 +15,13 @@ class testController extends ApplicationController {
         console.log('testController.init');
         super.init();
 
-        const menuElement = this.view.querySelector('.MenuWidget');
+        /*const menuElement = this.view.querySelector('.MenuWidget');
         if (menuElement) {
             this.menu = new MenuWidget(menuElement);
             this.menu.onClick = (a) => {
                 console.log('on click:', a);
             }
-        }
+        }*/
 
         const datePickerElement = this.view.querySelector('.DatePickerWidget');
         if (datePickerElement) {
@@ -113,18 +113,17 @@ class testController extends ApplicationController {
         };
 
         // menu
-        // const menu = ApplicationController.createReactRoot('Menu', props);
-        // this.view.appendChild(menu);
+        ApplicationController.createReactComponent(this.view.querySelector('.Menu'), Menu, props);
+
 
         // statusbar
         const statusbar = ApplicationController.createReactComponent(this.view.querySelector('.Statusbar'), Statusbar);
         statusbar.setLastQueryTime(100);
 
-        // tooltip
-        let tooltip;
-        ReactDOM.render(React.createElement(Tooltip, {position: 'right', type: 'alert', hidden: true, cb: c => tooltip = c}), this.view.querySelector('#tooltip'));
-        tooltip.setTipText('hello world');
-        setTimeout(() => tooltip.show(), 1000);
+        // tooltipAlertTop
+        const tooltipAlertTop = ApplicationController.createReactComponent(this.view.querySelector('#tooltipAlertTop'), Tooltip, {position: 'top', type: 'alert', hidden: false});
+        tooltipAlertTop.setTipText('hello world');
+        // setTimeout(() => tooltip.show(), 1000);
 
     }
 

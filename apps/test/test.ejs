@@ -1,22 +1,5 @@
 <div id="<%=model.getName()%>" class="test <%=model.data.theme%>">
-    <div class="MenuWidget">
-        <div>
-            <button>Menu1</button>
-            <div>
-                <a data-page="page1">Page1</a>
-                <a data-page="page2">Page2</a>
-                <a data-page="page3">Page3</a>
-            </div>
-        </div>
-        <div>
-            <button>Menu2</button>
-            <div>
-                <a data-page="page4">Page4</a>
-                <a data-page="page5">Page5</a>
-                <a data-page="page6">Page6</a>
-            </div>
-        </div>
-    </div>
+    <div class="Menu"/>
     <table class="DatePickerWidget" cellspacing="0" cellpadding="0">
         <caption>
             <div>
@@ -278,9 +261,10 @@
     <br>
 
     <div style="display: flex; justify-content: space-around;">
-        <div class="TooltipWidget alert">
+        <!--<div class="TooltipWidget alert">
             <span class="top"/>
-        </div>
+        </div>-->
+        <div id="tooltipAlertTop"/>
         <div class="TooltipWidget">
             <div>Right</div>
             <span class="right">Tooltip text</span>
@@ -295,11 +279,9 @@
         </div>
     </div>
 
-    <div class="Statusbar">
-        <div id="lastQueryTime">Last query time: -</div>
-    </div>
 
     <br><br>
-    <div id="tooltip"></div>
+    <div class="Statusbar"/>
+
 
 </div>
