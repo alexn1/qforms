@@ -8,6 +8,9 @@ class DropdownDatePicker extends React.Component {
             open: false
         };
         this.onClick = this.onClick.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onDatePickerMouseDown    = this.onDatePickerMouseDown.bind(this);
+        this.onDatePickerDateSelected = this.onDatePickerDateSelected.bind(this);
     }
     onClick(e) {
         // console.log('DropdownDatePicker.onClick', e);
@@ -15,15 +18,31 @@ class DropdownDatePicker extends React.Component {
             open: !prevState.open
         }));
     }
+    onBlur(e) {
+        // console.log('DropdownDatePicker.onBlur');
+        if (this.state.open) {
+            this.setState({open: false});
+        }
+    }
+    onDatePickerMouseDown(e) {
+        // console.log('DropdownDatePicker.onDatePickerMouseDown');
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+    onDatePickerDateSelected(date) {
+        console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+        this.setState({open: false});
+    }
     onDatePickerCallback(datePicker) {
         console.log('DropdownDatePicker.onDatePickerCallback', datePicker);
         this.datePicker = datePicker;
     }
     render() {
-        console.log('DropdownDatePicker.render', this.state);
+        console.log('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className="DropdownDatePicker">
-                <input readOnly onClick={this.onClick}/>
+                <input readOnly onClick={this.onClick} onBlur={this.onBlur}/>
                 <div className="close">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
@@ -32,7 +51,10 @@ class DropdownDatePicker extends React.Component {
                               strokeMiterlimit="10"></line>
                     </svg>
                 </div>
-                <DatePicker visible={this.state.open}/>
+                <DatePicker visible={this.state.open}
+                            onMouseDown={this.onDatePickerMouseDown}
+                            onDateSelected={this.onDatePickerDateSelected}
+                />
             </div>
         );
     }

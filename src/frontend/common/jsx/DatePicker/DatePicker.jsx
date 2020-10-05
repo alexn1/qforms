@@ -17,7 +17,8 @@ class DatePicker extends React.Component {
             'Сентябрь', 'Октябрь', 'Ноябрь',
             'Декабрь'
         ];
-        this.onClick = this.onClick.bind(this);
+        this.onClick     = this.onClick.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
     }
 
     static getToday() {
@@ -96,6 +97,12 @@ class DatePicker extends React.Component {
             return this.onDateClick(e.target);
         }
     }
+    onMouseDown(e) {
+        // console.log('DatePicker.onMouseDown');
+        if (this.props.onMouseDown) {
+            return this.props.onMouseDown(e);
+        }
+    }
 
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset.date);
@@ -127,13 +134,19 @@ class DatePicker extends React.Component {
     }
 
     render() {
-        console.log('DatePicker.render', this.state);
+        console.log('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = DatePicker.getToday();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (
-            <table className="DatePicker" style={this.props.visible === false ? {display: 'none'} : {display: 'block'}} cellSpacing="0" cellPadding="0" onClick={this.onClick}>
+            <table className="DatePicker"
+                style={this.props.visible === false ? {display: 'none'} : {display: 'block'}}
+                   cellSpacing="0"
+                   cellPadding="0"
+                   onClick={this.onClick}
+                   onMouseDown={this.onMouseDown}
+            >
                 <caption>
                     <div>
                         <a className={`prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>

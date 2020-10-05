@@ -18,7 +18,7 @@ class DropdownDatePickerWidget extends Widget {
         // events
         const input = this.getInputElement();
         input.addEventListener('click'  , this.onInputClick.bind(this));
-        input.addEventListener('blur'   , this.onButtonBlur.bind(this));
+        input.addEventListener('blur'   , this.onInputBlur.bind(this));
         input.addEventListener('keydown', this.onInputKeyDown.bind(this));
 
         const close = this.getCloseElement();
@@ -82,8 +82,8 @@ class DropdownDatePickerWidget extends Widget {
         }
     }
 
-    onButtonBlur(event) {
-        // console.log('DropdownDatePickerWidget.onButtonBlur', event);
+    onInputBlur(event) {
+        // console.log('DropdownDatePickerWidget.onInputBlur', event);
         if (this.isDatePickerVisible()) {
             this.hideDatePicker();
         }
