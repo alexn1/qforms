@@ -23,6 +23,11 @@ class DatePicker extends React.Component {
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
     }
 
+    static getTodayArr() {
+        const now = new Date();
+        return [now.getFullYear(), now.getMonth(), now.getDate()];
+    }
+
     static getDay(date) {
         let day = date.getDay() - 1;
         if (day === -1) day = 6;

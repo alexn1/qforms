@@ -5,16 +5,22 @@ class DropdownDatePicker extends React.Component {
         if (props.cb) props.cb(this);
         this.state = {
             selectedDate: null,
-            open        : false
+            open        : false,
+            minDate     : props.oldDates === false ? DatePicker.getTodayArr() : null
         };
-        this.onClick                  = this.onClick.bind(this);
+        this.onInputClick             = this.onInputClick.bind(this);
+        this.onCloseClick             = this.onCloseClick.bind(this);
         this.onBlur                   = this.onBlur.bind(this);
         this.onDatePickerMouseDown    = this.onDatePickerMouseDown.bind(this);
         this.onDatePickerDateSelected = this.onDatePickerDateSelected.bind(this);
     }
-    onClick(e) {
-        // console.log('DropdownDatePicker.onClick', e);
+    onInputClick(e) {
+        // console.log('DropdownDatePicker.onInputClick', e);
         this.setState(prevState => ({open: !prevState.open}));
+    }
+    onCloseClick(e) {
+        console.log('DropdownDatePicker.onCloseClick', e);
+        this.setState({selectedDate: null});
     }
     onBlur(e) {
         // console.log('DropdownDatePicker.onBlur');
@@ -41,10 +47,13 @@ class DropdownDatePicker extends React.Component {
     }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);
+
+        const todayArr = DatePicker.getTodayArr();
+
         return (
             <div className="DropdownDatePicker">
-                <input readOnly onClick={this.onClick} onBlur={this.onBlur} value={this.getValue()}/>
-                <div className="close">
+                <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getValue()}/>
+                <div className={`close ${this.getValue() !== '' ? 'visible' : ''}`} onClick={this.onCloseClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
                               strokeMiterlimit="10"></line>
@@ -54,6 +63,7 @@ class DropdownDatePicker extends React.Component {
                 </div>
                 {this.state.open &&
                     <DatePicker
+                                minDate={this.state.minDate}
                                 selectedMonth={this.state.selectedDate ? [this.state.selectedDate[0], this.state.selectedDate[1]] : null}
                                 selectedDate={this.state.selectedDate}
                                 onMouseDown={this.onDatePickerMouseDown}
