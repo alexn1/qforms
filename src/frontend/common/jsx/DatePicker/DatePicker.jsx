@@ -7,8 +7,7 @@ class DatePicker extends React.Component {
         const today = DatePickerWidget.getToday();
 
         this.state = {
-            year: today.getFullYear(),
-            month: today.getMonth(),
+            selectedMonth: [today.getFullYear(), today.getMonth()],
             selectedDate: [2020, 9, 19],
             minDate: [2020, 9, 5]
         };
@@ -20,6 +19,7 @@ class DatePicker extends React.Component {
             'Сентябрь', 'Октябрь', 'Ноябрь',
             'Декабрь'
         ];
+        this.onClick = this.onClick.bind(this);
     }
 
     static getToday() {
@@ -43,7 +43,7 @@ class DatePicker extends React.Component {
     }
 
     getFirstDateOfTable() {
-        const date = new Date(this.state.year, this.state.month, 1); // first day of month
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
         let day = DatePickerWidget.getDay(date);
         if (day === 0) {
             date.setDate(date.getDate() - 7);            // first day of table
@@ -70,6 +70,50 @@ class DatePicker extends React.Component {
         return this.state.minDate || null;
     }
 
+    isPrevAllowed() {
+        if (!this.isMonthSelected()) throw new Error('month not selected');
+        const arr = this.getSelectedMonth();
+        const prev = new Date(arr[0], arr[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+
+    }
+
+
+
+    isMonthSelected() {
+        return !!this.state.selectedMonth;
+    }
+
+    getSelectedMonth() {
+        return this.state.selectedMonth || null;
+    }
+
+    isMonthAllowed(month) {
+        if (this.isMinDate()) {
+            const minMonth = new Date(this.state.minDate[0], this.state.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return true;
+    }
+
+    onClick(e) {
+        console.log('DatePicker.onClick', e.target);
+        if (e.target.classList.contains('next')) {
+            this.next();
+        } else if (e.target.classList.contains('prev')) {
+            this.prev();
+        }
+    }
+
+    next() {
+        console.log('DatePicker.next');
+    }
+
+    prev() {
+        console.log('DatePicker.prev');
+    }
+
     render() {
         console.log('DatePicker.render');
         const today = DatePicker.getToday();
@@ -77,12 +121,12 @@ class DatePicker extends React.Component {
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const date = this.getFirstDateOfTable();
         return (
-            <table className="DatePicker" cellSpacing="0" cellPadding="0">
+            <table className="DatePicker" cellSpacing="0" cellPadding="0" onClick={this.onClick}>
                 <caption>
                     <div>
-                        <a className="prev"> &lt; </a>
-                        <span>{`${this.MONTH[this.state.month]}, ${this.state.year}`}</span>
-                        <a className="next"> &gt; </a>
+                        <a className={`prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
+                        <span>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
+                        <a className={'next enabled'}> &gt; </a>
                     </div>
                 </caption>
                 <thead>
@@ -102,7 +146,7 @@ class DatePicker extends React.Component {
                             const classes = [];
                             if (j === 5 || j === 6) classes.push('weekend');
                             if (date.getTime() === today.getTime()) classes.push('today');
-                            if (date.getMonth() !== this.state.month) classes.push('out');
+                            if (date.getMonth() !== this.state.selectedMonth[1]) classes.push('out');
                             if (minDate && date.getTime() >= minDate.getTime()) classes.push('selectable');
                             if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
                             const text = date.getDate().toString();
