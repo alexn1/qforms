@@ -14,11 +14,11 @@ class testController extends ApplicationController {
         console.log('testController.init');
         super.init();
 
-        const datePickerElement = this.view.querySelector('.DatePickerWidget');
+        /*const datePickerElement = this.view.querySelector('.DatePickerWidget');
         if (datePickerElement) {
             this.datePicker = new DatePickerWidget(datePickerElement);
             this.datePicker.selectMonth();
-        }
+        }*/
 
         const now = new Date();
         const dropdownDatePickerElement1 = this.view.querySelector('#dp1');

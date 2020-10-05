@@ -129,13 +129,13 @@ class DatePicker extends React.Component {
     }
 
     render() {
-        // console.log('DatePicker.render', this.state);
+        console.log('DatePicker.render', this.state);
         const date = this.getFirstDateOfTable();
         const today = DatePicker.getToday();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (
-            <table className="DatePicker" cellSpacing="0" cellPadding="0" onClick={this.onClick}>
+            <table className="DatePicker" style={this.props.visible === false ? {display: 'none'} : {display: 'block'}} cellSpacing="0" cellPadding="0" onClick={this.onClick}>
                 <caption>
                     <div>
                         <a className={`prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
