@@ -9,7 +9,8 @@ class DatePicker extends React.Component {
         this.state = {
             year: today.getFullYear(),
             month: today.getMonth(),
-            selectedDate: [2020, 9, 1]
+            selectedDate: [2020, 9, 19],
+            minDate: [2020, 9, 5]
         };
 
         this.MONTH = [
@@ -52,10 +53,20 @@ class DatePicker extends React.Component {
         return date;
     }
 
+    createMinDate() {
+        if (!this.state.minDate) throw new Error('no min date');
+        return new Date(this.state.minDate[0], this.state.minDate[1], this.state.minDate[2]);
+    }
+
+    isMinDate() {
+        return !!this.state.minDate;
+    }
+
     render() {
         console.log('DatePicker.render');
         const today = DatePicker.getToday();
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
         const date = this.getFirstDateOfTable();
         return (
             <table className="DatePicker" cellSpacing="0" cellPadding="0">
@@ -80,14 +91,13 @@ class DatePicker extends React.Component {
                 <tbody>
                     {[0, 1, 2, 3, 4, 5].map(i => (<tr key={i}>
                         {[0, 1, 2, 3, 4, 5, 6].map(j => {
-                            const text = date.getDate().toString();
-
-                            const classes = ['selectable'];
+                            const classes = [];
                             if (j === 5 || j === 6) classes.push('weekend');
-                            if (date.getMonth() !== this.state.month) classes.push('out');
                             if (date.getTime() === today.getTime()) classes.push('today');
+                            if (date.getMonth() !== this.state.month) classes.push('out');
+                            if (minDate && date.getTime() >= minDate.getTime()) classes.push('selectable');
                             if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
-
+                            const text = date.getDate().toString();
                             date.setDate(date.getDate() + 1);
                             return (<td
                                 key={text}
