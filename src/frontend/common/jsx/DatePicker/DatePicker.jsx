@@ -62,6 +62,14 @@ class DatePicker extends React.Component {
         return !!this.state.minDate;
     }
 
+    setMinDate(arr) {
+        this.setState({minDate: arr});
+    }
+
+    getMinDate() {
+        return this.state.minDate || null;
+    }
+
     render() {
         console.log('DatePicker.render');
         const today = DatePicker.getToday();
