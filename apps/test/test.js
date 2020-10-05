@@ -124,6 +124,9 @@ class testController extends ApplicationController {
         const dropdowndatepicker1 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker1'), DropdownDatePicker, {
             oldDates: false
         });
+        const dropdowndatepicker2 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker2'), DropdownDatePicker, {
+            oldDates: false
+        });
     }
 
 
