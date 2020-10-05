@@ -8,8 +8,8 @@ class DatePicker extends React.Component {
 
         this.state = {
             selectedMonth: [today.getFullYear(), today.getMonth()],
-            selectedDate: [2020, 9, 19],
-            minDate: [2020, 9, 5]
+            // minDate: [2020, 9, 5],
+            // selectedDate: [2020, 9, 19]
         };
 
         this.MONTH = [
@@ -39,7 +39,7 @@ class DatePicker extends React.Component {
     }
 
     isDateSelected() {
-        return this.state.selectedDate !== null;
+        return !!this.state.selectedDate;
     }
 
     getFirstDateOfTable() {
@@ -85,12 +85,23 @@ class DatePicker extends React.Component {
     }
 
     onClick(e) {
-        console.log('DatePicker.onClick', e.target);
+        // console.log('DatePicker.onClick', e.target);
         if (e.target.classList.contains('next')) {
             this.next();
         } else if (e.target.classList.contains('prev')) {
             this.prev();
+        } else if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+            return this.onDateClick(e.target);
         }
+    }
+
+    onDateClick(target) {
+        // console.log('DatePicker.onDateClick', target.dataset.date);
+        this.setState({selectedDate: JSON.parse(target.dataset.date)}, () => {
+            if (this.props.onDateSelected) {
+                this.props.onDateSelected(this.createSelectedDate());
+            }
+        });
     }
 
     next() {
@@ -116,7 +127,7 @@ class DatePicker extends React.Component {
     }
 
     render() {
-        console.log('DatePicker.render');
+        console.log('DatePicker.render', this.state);
         const today = DatePicker.getToday();
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         const minDate = this.isMinDate() ? this.createMinDate() : null;
@@ -148,14 +159,15 @@ class DatePicker extends React.Component {
                             if (j === 5 || j === 6) classes.push('weekend');
                             if (date.getTime() === today.getTime()) classes.push('today');
                             if (date.getMonth() !== this.state.selectedMonth[1]) classes.push('out');
-                            if (minDate && date.getTime() >= minDate.getTime()) classes.push('selectable');
+                            if (!minDate) classes.push('selectable'); else if (date.getTime() >= minDate.getTime()) classes.push('selectable');
                             if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
                             const text = date.getDate().toString();
+                            const dataDate =  JSON.stringify([date.getFullYear(), date.getMonth(), date.getDate()]);
                             date.setDate(date.getDate() + 1);
                             return (<td
                                 key={text}
                                 className={classes.join(' ')}
-                                data-date={JSON.stringify([date.getFullYear(), date.getMonth(), date.getDay()])}
+                                data-date={dataDate}
                             >{text}</td>);
                         })}
                     </tr>))}

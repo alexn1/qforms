@@ -115,7 +115,11 @@ class testController extends ApplicationController {
         // setTimeout(() => tooltip.show(), 1000);
 
         // datepicker
-        const datepicker = ApplicationController.createReactComponent(this.view.querySelector('#datepicker'), DatePicker);
+        const datepicker = ApplicationController.createReactComponent(this.view.querySelector('#datepicker'), DatePicker, {
+            onDateSelected: date => {
+                console.log('onDateSelected:', date);
+            }
+        });
 
     }
 
