@@ -133,8 +133,6 @@ class testController extends ApplicationController {
         });
     }
 
-
-
     initMenu() {}
     initTab() {}
     initStatusbar() {}

@@ -5,9 +5,9 @@ class DropdownDatePicker extends React.Component {
         if (props.cb) props.cb(this);
         this.state = {
             selectedDate: null,
-            open        : false,
-            minDate     : props.oldDates === false ? DatePicker.getTodayArr() : null
+            open        : false
         };
+        this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null
         this.onInputClick             = this.onInputClick.bind(this);
         this.onCloseClick             = this.onCloseClick.bind(this);
         this.onBlur                   = this.onBlur.bind(this);
@@ -49,14 +49,14 @@ class DropdownDatePicker extends React.Component {
         }
         return '';
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        // console.log('DropdownDatePicker.shouldComponentUpdate', nextState);
-        const result =  this.state.open !== nextState.open || this.state.selectedDate !== nextState.selectedDate;
-        // console.log('result:', result);
-        return result;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // console.log('DropdownDatePicker.shouldComponentUpdate', nextState);
+    //     const result =  this.state.open !== nextState.open || this.state.selectedDate !== nextState.selectedDate;
+    //     // console.log('result:', result);
+    //     return result;
+    // }
     setMinDate(arr) {
-        this.setState({minDate: arr});
+        this.minDate = arr;
     }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);
@@ -73,7 +73,7 @@ class DropdownDatePicker extends React.Component {
                 </div>
                 {this.state.open &&
                     <DatePicker
-                                minDate={this.state.minDate}
+                                minDate={this.minDate}
                                 selectedMonth={this.state.selectedDate ? [this.state.selectedDate[0], this.state.selectedDate[1]] : null}
                                 selectedDate={this.state.selectedDate}
                                 onMouseDown={this.onDatePickerMouseDown}
