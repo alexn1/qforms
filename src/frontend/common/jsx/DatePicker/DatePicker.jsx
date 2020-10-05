@@ -7,8 +7,8 @@ class DatePicker extends React.Component {
         const today = DatePickerWidget.getToday();
         this.state = {
             selectedMonth: props.selectedMonth ? JSON.parse(JSON.stringify(props.selectedMonth)) : [today.getFullYear(), today.getMonth()],
-            minDate      : props.minDate ? JSON.parse(JSON.stringify(props.minDate)) : null,
-            selectedDate : props.selectedDate ? JSON.parse(JSON.stringify(props.selectedDate)) : null,
+            minDate      : props.minDate       ? JSON.parse(JSON.stringify(props.minDate))       :                                    null,
+            selectedDate : props.selectedDate  ? JSON.parse(JSON.stringify(props.selectedDate))  :                                    null,
         };
         this.MONTH = [
             'Январь', 'Февраль',
@@ -130,10 +130,10 @@ class DatePicker extends React.Component {
 
     render() {
         console.log('DatePicker.render', this.state);
-        const today = DatePicker.getToday();
-        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
-        const minDate = this.isMinDate() ? this.createMinDate() : null;
         const date = this.getFirstDateOfTable();
+        const today = DatePicker.getToday();
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (
             <table className="DatePicker" cellSpacing="0" cellPadding="0" onClick={this.onClick}>
                 <caption>
