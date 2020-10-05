@@ -21,8 +21,8 @@ class Menu extends React.Component {
     }
     toggleMenu(menu) {
         // console.log('Menu.toggleMenu', menu);
-        this.setState(state => ({
-            [menu]: !state[menu]
+        this.setState(prevState => ({
+            [menu]: !prevState[menu]
         }));
     }
     closeMenu(menu) {
