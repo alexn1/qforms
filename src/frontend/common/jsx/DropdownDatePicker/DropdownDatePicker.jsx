@@ -32,7 +32,7 @@ class DropdownDatePicker extends React.Component {
     }
     onDatePickerDateSelected(date) {
         console.log('DropdownDatePicker.onDatePickerDateSelected', date);
-        this.setState({open: false});
+        this.setState({open: false, selectedDate: date});
     }
     onDatePickerCallback(datePicker) {
         console.log('DropdownDatePicker.onDatePickerCallback', datePicker);
@@ -52,6 +52,7 @@ class DropdownDatePicker extends React.Component {
                     </svg>
                 </div>
                 <DatePicker visible={this.state.open}
+                            selectedDate={this.state.selectedDate}
                             onMouseDown={this.onDatePickerMouseDown}
                             onDateSelected={this.onDatePickerDateSelected}
                 />

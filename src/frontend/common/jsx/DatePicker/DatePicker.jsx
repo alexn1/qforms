@@ -3,12 +3,9 @@ class DatePicker extends React.Component {
         console.log('DatePicker.constructor', props);
         super(props);
         if (props.cb) props.cb(this);
-
         const today = DatePickerWidget.getToday();
         this.state = {
             selectedMonth: props.selectedMonth ? JSON.parse(JSON.stringify(props.selectedMonth)) : [today.getFullYear(), today.getMonth()],
-            minDate      : props.minDate       ? JSON.parse(JSON.stringify(props.minDate))       :                                    null,
-            selectedDate : props.selectedDate  ? JSON.parse(JSON.stringify(props.selectedDate))  :                                    null,
         };
         this.MONTH = [
             'Январь', 'Февраль',
@@ -34,11 +31,11 @@ class DatePicker extends React.Component {
 
     createSelectedDate() {
         if (!this.isDateSelected()) throw new Error('date not selected');
-        return new Date(this.state.selectedDate[0], this.state.selectedDate[1], this.state.selectedDate[2]);
+        return new Date(this.props.selectedDate[0], this.props.selectedDate[1], this.props.selectedDate[2]);
     }
 
     isDateSelected() {
-        return !!this.state.selectedDate;
+        return !!this.props.selectedDate;
     }
 
     getFirstDateOfTable() {
@@ -53,12 +50,12 @@ class DatePicker extends React.Component {
     }
 
     createMinDate() {
-        if (!this.state.minDate) throw new Error('no min date');
-        return new Date(this.state.minDate[0], this.state.minDate[1], this.state.minDate[2]);
+        if (!this.props.minDate) throw new Error('no min date');
+        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
     }
 
     isMinDate() {
-        return !!this.state.minDate;
+        return !!this.props.minDate;
     }
 
     setMinDate(arr) {
@@ -66,7 +63,7 @@ class DatePicker extends React.Component {
     }
 
     getMinDate() {
-        return this.state.minDate || null;
+        return this.props.minDate || null;
     }
 
     isPrevAllowed() {
@@ -81,7 +78,7 @@ class DatePicker extends React.Component {
 
     isMonthAllowed(month) {
         if (this.isMinDate()) {
-            const minMonth = new Date(this.state.minDate[0], this.state.minDate[1]);
+            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
             return month.getTime() >= minMonth.getTime();
         }
         return true;
