@@ -116,6 +116,9 @@ class testController extends ApplicationController {
 
         // datepicker
         const datepicker = ApplicationController.createReactComponent(this.view.querySelector('#datepicker'), DatePicker, {
+            selectedMonth: [2020, 10],
+            minDate: [2020, 9, 10],
+            selectedDate: [2020, 9, 19],
             onDateSelected: date => {
                 console.log('onDateSelected:', date);
             }

@@ -5,13 +5,11 @@ class DatePicker extends React.Component {
         if (props.cb) props.cb(this);
 
         const today = DatePickerWidget.getToday();
-
         this.state = {
-            selectedMonth: [today.getFullYear(), today.getMonth()],
-            // minDate: [2020, 9, 5],
-            // selectedDate: [2020, 9, 19]
+            selectedMonth: props.selectedMonth ? JSON.parse(JSON.stringify(props.selectedMonth)) : [today.getFullYear(), today.getMonth()],
+            minDate      : props.minDate ? JSON.parse(JSON.stringify(props.minDate)) : null,
+            selectedDate : props.selectedDate ? JSON.parse(JSON.stringify(props.selectedDate)) : null,
         };
-
         this.MONTH = [
             'Январь', 'Февраль',
             'Март', 'Апрель', 'Май',
