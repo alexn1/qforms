@@ -3,21 +3,18 @@ class DropdownDatePicker extends React.Component {
         console.log('DropdownDatePicker.constructor', props);
         super(props);
         if (props.cb) props.cb(this);
-        this.datePicker = null;
         this.state = {
-            open: false,
-            selectedDate: null
+            selectedDate: null,
+            open        : false
         };
-        this.onClick = this.onClick.bind(this);
-        this.onBlur = this.onBlur.bind(this);
+        this.onClick                  = this.onClick.bind(this);
+        this.onBlur                   = this.onBlur.bind(this);
         this.onDatePickerMouseDown    = this.onDatePickerMouseDown.bind(this);
         this.onDatePickerDateSelected = this.onDatePickerDateSelected.bind(this);
     }
     onClick(e) {
         // console.log('DropdownDatePicker.onClick', e);
-        this.setState(prevState => ({
-            open: !prevState.open
-        }));
+        this.setState(prevState => ({open: !prevState.open}));
     }
     onBlur(e) {
         // console.log('DropdownDatePicker.onBlur');
@@ -32,12 +29,8 @@ class DropdownDatePicker extends React.Component {
         return false;
     }
     onDatePickerDateSelected(date) {
-        console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+        // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         this.setState({open: false, selectedDate: date});
-    }
-    onDatePickerCallback(datePicker) {
-        console.log('DropdownDatePicker.onDatePickerCallback', datePicker);
-        this.datePicker = datePicker;
     }
     getValue() {
         if (this.state.selectedDate) {
