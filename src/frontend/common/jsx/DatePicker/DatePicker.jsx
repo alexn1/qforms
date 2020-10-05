@@ -34,6 +34,7 @@ class DatePicker extends React.Component {
     render() {
         console.log('DatePicker.render');
         const date = new Date(this.state.year, this.state.month, 1); // first day of month
+        const today = DatePicker.getToday();
 
         let day = DatePickerWidget.getDay(date);
         if (day === 0) {
@@ -65,16 +66,21 @@ class DatePicker extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {[0, 1, 2, 3, 4, 5].map(i => (<tr>
+                    {[0, 1, 2, 3, 4, 5].map(i => (<tr key={i}>
                         {[0, 1, 2, 3, 4, 5, 6].map(j => {
                             const text = date.getDate().toString();
 
                             const classes = ['selectable'];
                             if (j >= 5 && j <= 6) classes.push('weekend');
                             if (date.getMonth() !== this.state.month) classes.push('out');
+                            if (date.getTime() === today.getTime()) classes.push('today');
 
                             date.setDate(date.getDate() + 1);
-                            return <td className={classes.join(' ')}>{text}</td>;
+                            return (<td
+                                key={text}
+                                className={classes.join(' ')}
+                                data-date={JSON.stringify([date.getFullYear(), date.getMonth(), date.getDay()])}
+                            >{text}</td>);
                         })}
                     </tr>))}
                 </tbody>
