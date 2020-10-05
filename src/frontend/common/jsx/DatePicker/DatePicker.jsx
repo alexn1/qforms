@@ -99,11 +99,9 @@ class DatePicker extends React.Component {
 
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset.date);
-        this.setState({selectedDate: JSON.parse(target.dataset.date)}, () => {
-            if (this.props.onDateSelected) {
-                this.props.onDateSelected(this.createSelectedDate());
-            }
-        });
+        if (this.props.onDateSelected) {
+            this.props.onDateSelected(JSON.parse(target.dataset.date));
+        }
     }
 
     next() {
