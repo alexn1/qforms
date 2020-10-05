@@ -36,7 +36,11 @@ class DropdownDatePicker extends React.Component {
     }
     onDatePickerDateSelected(date) {
         // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
-        this.setState({open: false, selectedDate: date});
+        this.setState({open: false, selectedDate: date}, () => {
+            if (this.props.onChange) {
+                this.props.onChange(this.state.selectedDate);
+            }
+        });
     }
     getValue() {
         if (this.state.selectedDate) {
@@ -45,11 +49,17 @@ class DropdownDatePicker extends React.Component {
         }
         return '';
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('DropdownDatePicker.shouldComponentUpdate', nextState);
+        const result =  this.state.open !== nextState.open || this.state.selectedDate !== nextState.selectedDate;
+        // console.log('result:', result);
+        return result;
+    }
+    setMinDate(arr) {
+        this.setState({minDate: arr});
+    }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);
-
-        const todayArr = DatePicker.getTodayArr();
-
         return (
             <div className="DropdownDatePicker">
                 <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getValue()}/>

@@ -121,10 +121,14 @@ class testController extends ApplicationController {
         // setTimeout(() => datepicker.setSelectedDate([2020, 9, 19]), 1000);
 
         // dropdowndatepicker
-        const dropdowndatepicker1 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker1'), DropdownDatePicker, {
-            oldDates: false
+        this.dropdowndatepicker1 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker1'), DropdownDatePicker, {
+            oldDates: false,
+            onChange: date => {
+                console.log('dropdowndatepicker1.onChange', date);
+                this.dropdowndatepicker2.setMinDate(date);
+            }
         });
-        const dropdowndatepicker2 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker2'), DropdownDatePicker, {
+        this.dropdowndatepicker2 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker2'), DropdownDatePicker, {
             oldDates: false
         });
     }
