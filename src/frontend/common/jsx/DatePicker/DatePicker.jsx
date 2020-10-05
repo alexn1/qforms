@@ -8,7 +8,8 @@ class DatePicker extends React.Component {
 
         this.state = {
             year: today.getFullYear(),
-            month: today.getMonth()
+            month: today.getMonth(),
+            selectedDate: [2020, 9, 1]
         };
 
         this.MONTH = [
@@ -31,20 +32,31 @@ class DatePicker extends React.Component {
         return day;
     }
 
-    render() {
-        console.log('DatePicker.render');
-        const date = new Date(this.state.year, this.state.month, 1); // first day of month
-        const today = DatePicker.getToday();
+    createSelectedDate() {
+        if (!this.isDateSelected()) throw new Error('date not selected');
+        return new Date(this.state.selectedDate[0], this.state.selectedDate[1], this.state.selectedDate[2]);
+    }
 
+    isDateSelected() {
+        return this.state.selectedDate !== null;
+    }
+
+    getFirstDateOfTable() {
+        const date = new Date(this.state.year, this.state.month, 1); // first day of month
         let day = DatePickerWidget.getDay(date);
         if (day === 0) {
             date.setDate(date.getDate() - 7);            // first day of table
         } else {
             date.setDate(date.getDate() - day);            // first day of table
         }
-        console.log('date:', date);
+        return date;
+    }
 
-
+    render() {
+        console.log('DatePicker.render');
+        const today = DatePicker.getToday();
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        const date = this.getFirstDateOfTable();
         return (
             <table className="DatePicker" cellSpacing="0" cellPadding="0">
                 <caption>
@@ -74,6 +86,7 @@ class DatePicker extends React.Component {
                             if (j >= 5 && j <= 6) classes.push('weekend');
                             if (date.getMonth() !== this.state.month) classes.push('out');
                             if (date.getTime() === today.getTime()) classes.push('today');
+                            if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
 
                             date.setDate(date.getDate() + 1);
                             return (<td
