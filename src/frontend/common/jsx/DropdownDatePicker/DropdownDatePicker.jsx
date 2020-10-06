@@ -34,8 +34,8 @@ class DropdownDatePicker extends React.Component {
     onDatePickerMouseDown(e) {
         // console.log('DropdownDatePicker.onDatePickerMouseDown');
         e.preventDefault();
-        e.stopPropagation();
-        return false;
+        // e.stopPropagation();
+        // return false;
     }
     onDatePickerDateSelected(date) {
         console.log('DropdownDatePicker.onDatePickerDateSelected', date);

@@ -29,8 +29,8 @@ class Menu extends React.Component {
     onMouseDown(e) {
         // console.log('Menu.onMouseDown');
         e.preventDefault();
-        e.stopPropagation();
-        return false;
+        // e.stopPropagation();
+        // return false;
     }
     onMenuItemClick(e) {
         // console.log('Menu.onMenuItemClick', e.currentTarget.dataset.menu, e.currentTarget.dataset.item);
