@@ -35,7 +35,7 @@ class DropdownDatePicker extends React.Component {
         return false;
     }
     onDatePickerDateSelected(date) {
-        // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+        console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setState({open: false, value}, () => {
             if (this.props.onChange) {
@@ -74,7 +74,7 @@ class DropdownDatePicker extends React.Component {
         console.log('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className="DropdownDatePicker">
-                <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getStringValue()}/>
+                <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getStringValue()} placeholder={this.props.placeholder}/>
                 <div className={`close ${this.getStringValue() !== '' ? 'visible' : ''}`} onClick={this.onCloseClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"

@@ -19,7 +19,7 @@ class CheckBoxFieldController extends FieldController {
         super.fill(row, view);
         if (self.model.getForm().getClassName() === 'RowForm') {
             $(view).children().change(function() {
-                self.onChange(this);
+                self.onChange(view);
             });
         }
     }

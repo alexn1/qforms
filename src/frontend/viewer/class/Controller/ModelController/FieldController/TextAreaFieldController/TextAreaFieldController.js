@@ -11,7 +11,7 @@ class TextAreaFieldController extends FieldController {
         const self = this;
         if (this.model.getForm().getClassName() === 'RowForm') {
             $(view).children().on('input', function() {
-                self.onChange(this);
+                self.onChange(view);
             });
         }
     }

@@ -40,7 +40,7 @@ class ComboBoxFieldController extends FieldController {
                 this._fillSelectOptions(view);
                 super.fill(row, view);
                 $(view).children().change(function() {
-                    self.onChange(this);
+                    self.onChange(view);
                 });
                 break;
             case 'TableForm':

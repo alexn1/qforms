@@ -130,10 +130,12 @@ class FieldController extends ModelController {
         }
     }
 
-    onChange(el) {
+    onChange(view) {
         console.log('FieldController.onChange', this.model.getFullName());
-        const view = el.parentNode;
+        // const view = el.parentNode;
+        if (!view.dbRow) throw new Error('no view.dbRow');
         const row = view.dbRow;
+
         this.isUndefined = false;
         const valid = this.isValid(view);
         if (valid) {
@@ -144,7 +146,7 @@ class FieldController extends ModelController {
         }
         this.updateErrorClass(view, valid);
         this.updateChangedClass(row, view);
-        this.parent.onFieldChange({source: this, view, row, el, field: this});
+        this.parent.onFieldChange({source: this, view, row, field: this});
     }
 
     updateErrorClass(view, valid) {

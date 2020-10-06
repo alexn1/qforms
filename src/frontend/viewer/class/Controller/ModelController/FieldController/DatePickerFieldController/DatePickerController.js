@@ -9,16 +9,21 @@ class DatePickerFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-            this.dropdownDatePicker = new DropdownDatePickerWidget(view.querySelector('.DropdownDatePickerWidget'));
-            this.dropdownDatePicker.init();
+            this.dropdownDatePicker = ApplicationController.createReactComponent(view, DropdownDatePicker, {
+                oldDates: false,
+                placeholder: 'ДД.ММ.ГГГГ',
+                onChange: date => {
+                    this.onChange(view);
+                }
+            });
         }
         super.fill(row, view);
         this.setPlaceHolder(view);
-        if (this.model.getForm().getClassName() === 'RowForm') {
-            this.dropdownDatePicker.onChange = event => {
-                this.onChange(this.dropdownDatePicker.el);
+        /*if (this.model.getForm().getClassName() === 'RowForm') {
+            this.dropdownDatePicker.onChange = date => {
+                this.onChange(view);
             };
-        }
+        }*/
     }
 
     setValue(value, view) {
@@ -48,7 +53,7 @@ class DatePickerFieldController extends FieldController {
     setPlaceHolder(view, value) {
         // console.log('DatePickerFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            view.firstElementChild.firstElementChild.placeholder = 'ДД.ММ.ГГГГ';
+            // view.firstElementChild.firstElementChild.placeholder = 'ДД.ММ.ГГГГ';
         }
     }
 

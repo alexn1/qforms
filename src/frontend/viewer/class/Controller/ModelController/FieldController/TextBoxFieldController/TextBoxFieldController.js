@@ -12,7 +12,7 @@ class TextBoxFieldController extends FieldController {
         super.fill(row, view);
         if (this.model.getForm().getClassName() === 'RowForm') {
             $(view).children().on('input', function() {
-                self.onChange(this);
+                self.onChange(view);
             });
         }
     }
