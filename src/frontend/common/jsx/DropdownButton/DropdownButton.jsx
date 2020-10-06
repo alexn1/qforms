@@ -8,9 +8,7 @@ class DropdownButton extends React.Component{
             <div className="DropdownButton">
                 <button>Actions</button>
                 <ul>
-                    <li>Action1</li>
-                    <li>Action2</li>
-                    <li>Action3</li>
+                    {this.props.actions.map(action => <li key={action.name} data-action={action.name}>{action.title}</li>)}
                 </ul>
             </div>
         );

@@ -133,7 +133,15 @@ class testController extends ApplicationController {
             oldDates: false
         });
 
-        const dropdownbutton = ApplicationController.createReactComponent(this.view.querySelector('#dropdownbutton'), DropdownButton);
+        const dropdownbutton = ApplicationController.createReactComponent(this.view.querySelector('#dropdownbutton'), DropdownButton, {
+            actions: [
+                {name: 'action1', title: 'Action 1'},
+                {name: 'action2', title: 'Action 2'},
+                {name: 'action3', title: 'Action 3'},
+                {name: 'action4', title: 'Action 4'},
+                {name: 'action5', title: 'Action 5'},
+            ]
+        });
 
     }
 
