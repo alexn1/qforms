@@ -3,10 +3,7 @@ class DatePicker extends React.Component {
         console.log('DatePicker.constructor', props);
         super(props);
         if (props.cb) props.cb(this);
-        const today = DatePicker.getToday();
-        this.state = {
-            selectedMonth: props.selectedMonth ? JSON.parse(JSON.stringify(props.selectedMonth)) : [today.getFullYear(), today.getMonth()],
-        };
+        this.state = {selectedMonth: this.calcSelectedMonth()};
         this.MONTH = [
             'Январь', 'Февраль',
             'Март', 'Апрель', 'Май',
@@ -16,6 +13,22 @@ class DatePicker extends React.Component {
         ];
         this.onClick     = this.onClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
+    }
+
+    calcSelectedMonth() {
+        if (this.isMinDate()) {
+            if (this.props.selectedMonth) {
+                const firstDayOfMinDateMonth = new Date(this.props.minDate[0], this.props.minDate[1], 1);
+                const firstDayOfSelectedMonth = new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1);
+                if (firstDayOfMinDateMonth.getTime() > firstDayOfSelectedMonth.getTime()) {
+                    return [this.props.minDate[0], this.props.minDate[1]];
+                }
+                return JSON.parse(JSON.stringify(this.props.selectedMonth));
+            }
+            return [this.props.minDate[0], this.props.minDate[1]];
+        }
+        const today = DatePicker.getToday();
+        return this.props.selectedMonth ? JSON.parse(JSON.stringify(this.props.selectedMonth)) : [today.getFullYear(), today.getMonth()];
     }
 
     static getToday() {
