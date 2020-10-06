@@ -1,0 +1,33 @@
+.DropdownButton {
+  position: relative;
+  display: inline-block;
+
+  > button {
+    /*border: none;*/
+    /*padding: 10px;*/
+  }
+
+  &.show > ul {
+    visibility: visible;
+    padding: 0;
+    margin: 0;
+  }
+
+  > ul {
+    position: absolute;
+    background-color: #efefef;
+    width: 100%;
+    visibility: hidden;
+    z-index: 1;
+
+    > li {
+      display: block;
+      padding: 10px;
+      &:hover {
+        background-color: #afd9ee;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
