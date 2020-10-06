@@ -4,10 +4,10 @@ class DropdownDatePicker extends React.Component {
         super(props);
         if (props.cb) props.cb(this);
         this.state = {
-            selectedDate: null,
-            open        : false
+            open : false,
+            value: null
         };
-        this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null
+        this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null;
         this.onInputClick             = this.onInputClick.bind(this);
         this.onCloseClick             = this.onCloseClick.bind(this);
         this.onBlur                   = this.onBlur.bind(this);
@@ -19,8 +19,8 @@ class DropdownDatePicker extends React.Component {
         this.setState(prevState => ({open: !prevState.open}));
     }
     onCloseClick(e) {
-        console.log('DropdownDatePicker.onCloseClick', e);
-        this.setState({selectedDate: null});
+        // console.log('DropdownDatePicker.onCloseClick', e);
+        this.setValue(null);
     }
     onBlur(e) {
         // console.log('DropdownDatePicker.onBlur');
@@ -36,34 +36,46 @@ class DropdownDatePicker extends React.Component {
     }
     onDatePickerDateSelected(date) {
         // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
-        this.setState({open: false, selectedDate: date}, () => {
+        const value = new Date(date[0], date[1], date[2]);
+        this.setState({open: false, value}, () => {
             if (this.props.onChange) {
-                this.props.onChange(this.state.selectedDate);
+                this.props.onChange(value);
             }
         });
     }
-    getValue() {
-        if (this.state.selectedDate) {
-            const date = new Date(this.state.selectedDate[0], this.state.selectedDate[1], this.state.selectedDate[2]);
-            return Helper.formatDate(date, '{DD}.{MM}.{YYYY}');
+    getStringValue() {
+        if (this.state.value) {
+            return Helper.formatDate(this.state.value, '{DD}.{MM}.{YYYY}');
         }
         return '';
     }
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     // console.log('DropdownDatePicker.shouldComponentUpdate', nextState);
-    //     const result =  this.state.open !== nextState.open || this.state.selectedDate !== nextState.selectedDate;
-    //     // console.log('result:', result);
-    //     return result;
-    // }
     setMinDate(arr) {
         this.minDate = arr;
+    }
+    getSelectedMonth() {
+        if (this.state.value) {
+            return [this.state.value.getFullYear(), this.state.value.getMonth()];
+        }
+        return null;
+    }
+    getSelectedDate() {
+        if (this.state.value) {
+            return [this.state.value.getFullYear(), this.state.value.getMonth(), this.state.value.getDate()];
+        }
+        return null;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    setValue(value) {
+        this.setState({value});
     }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className="DropdownDatePicker">
-                <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getValue()}/>
-                <div className={`close ${this.getValue() !== '' ? 'visible' : ''}`} onClick={this.onCloseClick}>
+                <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getStringValue()}/>
+                <div className={`close ${this.getStringValue() !== '' ? 'visible' : ''}`} onClick={this.onCloseClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
                               strokeMiterlimit="10"></line>
@@ -74,8 +86,8 @@ class DropdownDatePicker extends React.Component {
                 {this.state.open &&
                     <DatePicker
                                 minDate={this.minDate}
-                                selectedMonth={this.state.selectedDate ? [this.state.selectedDate[0], this.state.selectedDate[1]] : null}
-                                selectedDate={this.state.selectedDate}
+                                selectedMonth={this.getSelectedMonth()}
+                                selectedDate={this.getSelectedDate()}
                                 onMouseDown={this.onDatePickerMouseDown}
                                 onDateSelected={this.onDatePickerDateSelected}
                 />

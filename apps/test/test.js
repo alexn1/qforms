@@ -125,7 +125,7 @@ class testController extends ApplicationController {
             oldDates: false,
             onChange: date => {
                 console.log('dropdowndatepicker1.onChange', date);
-                this.dropdowndatepicker2.setMinDate([date[0], date[1], date[2]+1]);
+                this.dropdowndatepicker2.setMinDate([date.getFullYear(), date.getMonth(), date.getDate()+1]);
             }
         });
         this.dropdowndatepicker2 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker2'), DropdownDatePicker, {
