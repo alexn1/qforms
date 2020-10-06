@@ -2,14 +2,12 @@ class Menu extends React.Component {
     constructor(props) {
         // console.log('Menu.constructor', props);
         super(props);
+        if (this.props.cb) this.props.cb(this);
         this.state = {};
         this.onMenuClick     = this.onMenuClick.bind(this);
         this.onBlur          = this.onBlur.bind(this);
         this.onMouseDown     = this.onMouseDown.bind(this);
         this.onMenuItemClick = this.onMenuItemClick.bind(this);
-        if (this.props.cb) {
-            this.props.cb(this);
-        }
     }
     onMenuClick(e) {
         // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
