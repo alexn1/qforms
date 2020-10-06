@@ -5,7 +5,7 @@ class DropdownDatePicker extends React.Component {
         if (props.cb) props.cb(this);
         this.state = {
             open : false,
-            value: null
+            value: props.value || null
         };
         this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null;
         this.onInputClick             = this.onInputClick.bind(this);

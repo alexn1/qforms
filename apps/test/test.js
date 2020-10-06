@@ -5,20 +5,15 @@ class testController extends ApplicationController {
     constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-        this.datePicker          = null;
         this.dropdownDatePicker1 = null;
         this.dropdownDatePicker2 = null;
+        this.dropdowndatepicker1 = null;
+        this.dropdowndatepicker2 = null;
     }
 
     init() {
         console.log('testController.init');
         super.init();
-
-        /*const datePickerElement = this.view.querySelector('.DatePickerWidget');
-        if (datePickerElement) {
-            this.datePicker = new DatePickerWidget(datePickerElement);
-            this.datePicker.selectMonth();
-        }*/
 
         const now = new Date();
         const dropdownDatePickerElement1 = this.view.querySelector('#dp1');
@@ -123,11 +118,13 @@ class testController extends ApplicationController {
         // dropdowndatepicker
         this.dropdowndatepicker1 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker1'), DropdownDatePicker, {
             oldDates: false,
+            value: new Date(2020, 8, 1),
             onChange: date => {
                 console.log('dropdowndatepicker1.onChange', date);
                 this.dropdowndatepicker2.setMinDate([date.getFullYear(), date.getMonth(), date.getDate()+1]);
             }
         });
+
         this.dropdowndatepicker2 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker2'), DropdownDatePicker, {
             oldDates: false
         });
