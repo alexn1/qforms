@@ -138,8 +138,6 @@ class testController extends ApplicationController {
                 {name: 'action1', title: 'Action 1'},
                 {name: 'action2', title: 'Action 2'},
                 {name: 'action3', title: 'Action 3'},
-                {name: 'action4', title: 'Action 4'},
-                {name: 'action5', title: 'Action 5'},
             ]
         });
 
