@@ -289,11 +289,11 @@ class ApplicationController extends ModelController {
         return div;
     }
 
-    static createReactComponent(root, cls, props = {}, children) {
-        // console.log('ApplicationController.createReactComponent', root, cls);
+    static createReactComponent(root, type, props = {}, children) {
+        // console.log('ApplicationController.createReactComponent', root, type);
         let component;
         props.cb = c => component = c;
-        const reactElement = React.createElement(cls, props, children);
+        const reactElement = React.createElement(type, props, children);
         ReactDOM.render(reactElement, root);
         return component;
     }
