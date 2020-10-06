@@ -3,7 +3,7 @@ class DatePicker extends React.Component {
         console.log('DatePicker.constructor', props);
         super(props);
         if (props.cb) props.cb(this);
-        const today = DatePickerWidget.getToday();
+        const today = DatePicker.getToday();
         this.state = {
             selectedMonth: props.selectedMonth ? JSON.parse(JSON.stringify(props.selectedMonth)) : [today.getFullYear(), today.getMonth()],
         };
@@ -31,6 +31,7 @@ class DatePicker extends React.Component {
     static getDay(date) {
         let day = date.getDay() - 1;
         if (day === -1) day = 6;
+        if (day === 0) day = 7;
         return day;
     }
 
@@ -45,12 +46,7 @@ class DatePicker extends React.Component {
 
     getFirstDateOfTable() {
         const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
-        let day = DatePickerWidget.getDay(date);
-        if (day === 0) {
-            date.setDate(date.getDate() - 7);            // first day of table
-        } else {
-            date.setDate(date.getDate() - day);            // first day of table
-        }
+        date.setDate(date.getDate() - DatePicker.getDay(date));            // first day of table
         return date;
     }
 
