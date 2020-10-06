@@ -10,7 +10,7 @@ class DatePickerFieldController extends FieldController {
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker = ApplicationController.createReactComponent(view, DropdownDatePicker, {
-                oldDates: false,
+                // oldDates: false,
                 placeholder: 'ДД.ММ.ГГГГ',
                 onChange: date => {
                     this.onChange(view);
