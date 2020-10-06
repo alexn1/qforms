@@ -38,7 +38,7 @@
   "scripts": {
     "start": "node build/lib/backend/www.js",
     "build-jsx": "babel --plugins=@babel/plugin-transform-react-jsx --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx",
-    "build-jsx-watch": "babel --plugins=@babel/plugin-transform-react-jsx --out-dir build/lib/frontend/common/jsx --watch src/frontend/common/jsx"
+    "build-jsx-watch": "babel --plugins=@babel/plugin-transform-react-jsx --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx --watch"
   },
   "repository": {
     "type": "git",
