@@ -18,13 +18,12 @@ class DropdownDatePicker extends React.Component {
         // console.log('DropdownDatePicker.onInputClick', e);
         this.setState(prevState => ({open: !prevState.open}));
     }
-    onCloseClick(e) {
+    async onCloseClick(e) {
         // console.log('DropdownDatePicker.onCloseClick', e);
-        this.setValue(null, () => {
-            if (this.props.onChange) {
-                this.props.onChange(this.state.value);
-            }
-        });
+        await this.setValue(null);
+        if (this.props.onChange) {
+            this.props.onChange(this.state.value);
+        }
     }
     onBlur(e) {
         // console.log('DropdownDatePicker.onBlur');
@@ -71,8 +70,10 @@ class DropdownDatePicker extends React.Component {
     getValue() {
         return this.state.value;
     }
-    setValue(value, cb) {
-        this.setState({value}, cb);
+    setValue(value) {
+        return new Promise(resolve => {
+            this.setState({value}, resolve);
+        });
     }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);

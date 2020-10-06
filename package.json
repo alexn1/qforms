@@ -22,7 +22,9 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
     "babel-preset-react-app": "^3.1.2",
     "chai": "^3.2.0",
     "del": "^1.2.1",
@@ -35,8 +37,8 @@
   },
   "scripts": {
     "start": "node build/lib/backend/www.js",
-    "build-jsx": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod",
-    "build-jsx-watch": "npx babel src/frontend/common/jsx --out-dir build/lib/frontend/common/jsx --presets react-app/prod --watch"
+    "build-jsx": "babel --plugins=@babel/plugin-transform-react-jsx --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx",
+    "build-jsx-watch": "babel --plugins=@babel/plugin-transform-react-jsx --out-dir build/lib/frontend/common/jsx --watch src/frontend/common/jsx"
   },
   "repository": {
     "type": "git",
