@@ -121,7 +121,11 @@ class testController extends ApplicationController {
             value: new Date(2020, 8, 1),
             onChange: date => {
                 console.log('dropdowndatepicker1.onChange', date);
-                this.dropdowndatepicker2.setMinDate([date.getFullYear(), date.getMonth(), date.getDate()+1]);
+                if (date) {
+                    this.dropdowndatepicker2.setMinDate([date.getFullYear(), date.getMonth(), date.getDate()+1]);
+                } else {
+                    this.dropdowndatepicker2.setMinDate(null);
+                }
             }
         });
 

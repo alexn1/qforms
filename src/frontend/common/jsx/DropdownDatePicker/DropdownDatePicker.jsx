@@ -8,36 +8,31 @@ class DropdownDatePicker extends React.Component {
             value: props.value || null
         };
         this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null;
-        this.onInputClick             = this.onInputClick.bind(this);
-        this.onCloseClick             = this.onCloseClick.bind(this);
-        this.onBlur                   = this.onBlur.bind(this);
-        this.onDatePickerMouseDown    = this.onDatePickerMouseDown.bind(this);
-        this.onDatePickerDateSelected = this.onDatePickerDateSelected.bind(this);
     }
-    onInputClick(e) {
+    onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
         this.setState(prevState => ({open: !prevState.open}));
     }
-    async onCloseClick(e) {
+    onCloseClick = async (e) => {
         // console.log('DropdownDatePicker.onCloseClick', e);
         await this.setValue(null);
         if (this.props.onChange) {
             this.props.onChange(this.state.value);
         }
     }
-    onBlur(e) {
+    onBlur = (e) => {
         // console.log('DropdownDatePicker.onBlur');
         if (this.state.open) {
             this.setState({open: false});
         }
     }
-    onDatePickerMouseDown(e) {
+    onDatePickerMouseDown = (e) => {
         // console.log('DropdownDatePicker.onDatePickerMouseDown');
         e.preventDefault();
         // e.stopPropagation();
         // return false;
     }
-    onDatePickerDateSelected(date) {
+    onDatePickerDateSelected = (date) => {
         console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setState({open: false, value}, () => {
