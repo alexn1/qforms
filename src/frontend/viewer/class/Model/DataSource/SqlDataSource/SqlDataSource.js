@@ -125,7 +125,9 @@ class SqlDataSource extends DataSource {
         }
         await this._refresh();
         if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
-        this.parent.onDataSourceUpdate({source: this, key: e.key});
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, key: e.key});
+        }
         this.emit('insert', {source: this, key: e.key});
     }
 
@@ -136,7 +138,7 @@ class SqlDataSource extends DataSource {
             console.error('stop self delete', this.getFullName());
             return;
         }
-        throw new Error(`${this.getFullName()}: delete remove now implemented yet`);
+        throw new Error(`${this.getFullName()}: delete remove not implemented yet`);
     }
 
     async refill(params) {
