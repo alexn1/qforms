@@ -42,26 +42,26 @@ class RowFormController extends FormController {
         $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
-        // action click
-        const el = this.view.querySelector('.DropdownButtonWidget');
-        if (el) {
-            this.actionButton = new DropdownButtonWidget(el);
-            this.actionButton.onClick = async li => {
-                const action = this.model.data.actions[li.dataset.action];
-                // console.log('action:', action);
-                const result = await this.onActionClick(action, this.model.getRow());
-                if (!result) alert(`no handler for ${action.name}`);
-            };
+        // actions
+        if (Object.keys(this.model.data.actions).length > 0) {
+            const actions = Object.keys(this.model.data.actions).map(name => {
+                const action = this.model.data.actions[name];
+                return {
+                    name: action.name,
+                    title: action.caption
+                };
+            });
+            ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
+                actions,
+                onClick: async li => {
+                    // console.log('li:', li);
+                    const action = this.model.data.actions[li.dataset.action];
+                    const result = await this.onActionClick(action, this.model.getRow());
+                    if (!result) alert(`no handler for ${action.name}`);
+                }
+            });
         }
 
-        const actions = Object.keys(this.model.data.actions).map(name => {
-            const action = this.model.data.actions[name];
-            return {
-                name: action.name,
-                title: action.caption
-            };
-        });
-        ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {actions});
     }
 
     deinit() {

@@ -1,21 +1,10 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
     <div class="toolbar">
-    <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
-        <button class="saveForm">Save</button>
-        <button class="discardForm">Discard</button>
-        <button class="refreshForm">Refresh</button>
-    <% } %>
-    <% if (Object.keys(model.data.actions).length > 0) { %>
-        <div class="DropdownButtonWidget">
-            <button>Actions</button>
-            <ul>
-                <% for (const name in model.data.actions) {
-                    const action = model.data.actions[name]; %>
-                    <li data-action="<%=action.name%>"><%=action.caption%></li>
-                <% } %>
-            </ul>
-        </div>
-    <% } %>
+        <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
+            <button class="saveForm">Save</button>
+            <button class="discardForm">Discard</button>
+            <button class="refreshForm">Refresh</button>
+        <% } %>
         <div class="actions" style="display: inline-block"/>
     </div>
     <div class="grid">
