@@ -4,10 +4,10 @@ class DropdownDatePicker extends React.Component {
         super(props);
         if (props.cb) props.cb(this, this.props.name);
         this.state = {
-            open : false,
-            value: props.value || null
+            open : false
         };
         this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null;
+        this.value = props.value || null;
     }
     onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
@@ -15,9 +15,9 @@ class DropdownDatePicker extends React.Component {
     }
     onCloseClick = async (e) => {
         // console.log('DropdownDatePicker.onCloseClick', e);
-        await this.setValue(null);
+        this.setValue(null);
         if (this.props.onChange) {
-            this.props.onChange(this.state.value);
+            this.props.onChange(this.getValue());
         }
     }
     onBlur = (e) => {
@@ -35,15 +35,16 @@ class DropdownDatePicker extends React.Component {
     onDatePickerDateSelected = (date) => {
         console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
-        this.setState({open: false, value}, () => {
+        this.setValue(value);
+        this.setState({open: false}, () => {
             if (this.props.onChange) {
                 this.props.onChange(value);
             }
         });
     }
     getStringValue() {
-        if (this.state.value) {
-            return Helper.formatDate(this.state.value, '{DD}.{MM}.{YYYY}');
+        if (this.getValue()) {
+            return Helper.formatDate(this.getValue(), '{DD}.{MM}.{YYYY}');
         }
         return '';
     }
@@ -51,23 +52,27 @@ class DropdownDatePicker extends React.Component {
         this.minDate = arr;
     }
     getSelectedMonth() {
-        if (this.state.value) {
-            return [this.state.value.getFullYear(), this.state.value.getMonth()];
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth()];
         }
         return null;
     }
     getSelectedDate() {
-        if (this.state.value) {
-            return [this.state.value.getFullYear(), this.state.value.getMonth(), this.state.value.getDate()];
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
         }
         return null;
     }
     getValue() {
-        return this.state.value;
+        return this.value;
     }
     setValue(value) {
+        this.value = value;
+        this.rerender();
+    }
+    rerender() {
         return new Promise(resolve => {
-            this.setState({value}, resolve);
+            this.setState({foo: 1}, resolve);
         });
     }
     render() {
