@@ -138,7 +138,10 @@ class testController extends ApplicationController {
                 {name: 'action1', title: 'Action 1'},
                 {name: 'action2', title: 'Action 2'},
                 {name: 'action3', title: 'Action 3'},
-            ]
+            ],
+            onClick: action => {
+                console.log('onClick:', action);
+            }
         });
 
     }
