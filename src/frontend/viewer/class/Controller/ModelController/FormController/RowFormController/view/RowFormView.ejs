@@ -1,7 +1,7 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
     <div class="toolbar">
         <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
-            <button class="saveForm">Save</button>
+            <button class="saveForm" name="saveForm">Save</button>
             <button class="discardForm">Discard</button>
             <button class="refreshForm">Refresh</button>
         <% } %>

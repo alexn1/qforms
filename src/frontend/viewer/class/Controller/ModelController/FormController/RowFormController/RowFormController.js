@@ -33,7 +33,7 @@ class RowFormController extends FormController {
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
         // click
-        $(this.view).find('button.saveForm').click(this.onSaveClick.bind(this));
+        $(this.view).find('button[name="saveForm"]').click(this.onSaveClick.bind(this));
         $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
         $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
 
