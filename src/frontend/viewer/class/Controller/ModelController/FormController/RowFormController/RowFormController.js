@@ -6,6 +6,7 @@ class RowFormController extends FormController {
         this.fieldViews   = {};
         this.controlViews = {};
         this.actionButton = null;
+        this.saveFormButton = null;
     }
 
     init() {
@@ -33,12 +34,12 @@ class RowFormController extends FormController {
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
         // click
-        $(this.view).find('button[name="saveForm"]').click(this.onSaveClick.bind(this));
+        // $(this.view).find('button[name="saveForm"]').click(this.onSaveClick.bind(this));
         $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
         $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
 
         // disable buttons
-        $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
+        // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
         $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
@@ -61,6 +62,14 @@ class RowFormController extends FormController {
                 }
             });
         }
+
+        // saveFormButton
+        this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveForm'), Button, {
+            name: 'saveForm',
+            title: 'Save',
+            onClick: this.onSaveClick.bind(this)
+        });
+        this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
 
     }
 
@@ -94,7 +103,8 @@ class RowFormController extends FormController {
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-        $(this.view).find('button.saveForm').prop('disabled', true);
+        // $(this.view).find('button.saveForm').prop('disabled', true);
+        this.saveFormButton.setDisabled(true);
         $(this.view).find('button.discardForm').prop('disabled', true);
         $(this.view).find('button.refreshForm').prop('disabled', false);
         for (const name in this.fields) {
@@ -168,7 +178,8 @@ class RowFormController extends FormController {
         });
 
         // ui
-        $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
+        // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
+        this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
         $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
@@ -201,12 +212,15 @@ class RowFormController extends FormController {
         // console.log('hasNew:', hasNew);
         if (changed || hasNew) {
             if (this.isValid()) {
-                $(this.view).find('button.saveForm').prop('disabled', !(changed || this.model.hasNew()));
+                // $(this.view).find('button.saveForm').prop('disabled', !(changed || this.model.hasNew()));
+                this.saveFormButton.setDisabled(!(changed || this.model.hasNew()));
             } else {
-                $(this.view).find('button.saveForm').prop('disabled', true);
+                // $(this.view).find('button.saveForm').prop('disabled', true);
+                this.saveFormButton.setDisabled(true);
             }
         } else {
-            $(this.view).find('button.saveForm').prop('disabled', true);
+            // $(this.view).find('button.saveForm').prop('disabled', true);
+            this.saveFormButton.setDisabled(true);
         }
         $(this.view).find('button.discardForm').prop('disabled', !changed);
         $(this.view).find('button.refreshForm').prop('disabled', changed || this.model.hasNew());
