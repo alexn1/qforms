@@ -9,15 +9,23 @@ class DatePickerFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
+            this.views.set(row, view);
+            view.dbRow = row;
+            const value = this.model.getValue(row);
+            this.isUndefined = value === undefined;
             this.dropdownDatePicker = ApplicationController.createReactComponent(view, DropdownDatePicker, {
                 // oldDates: false,
                 placeholder: 'ДД.ММ.ГГГГ',
+                value: value,
                 onChange: date => {
                     this.onChange(view);
                 }
             });
+            // this.setValue(value, view);
+            this.setViewStyle(view, row);
+        } else {
+            super.fill(row, view);
         }
-        super.fill(row, view);
         this.setPlaceHolder(view);
         /*if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker.onChange = date => {
