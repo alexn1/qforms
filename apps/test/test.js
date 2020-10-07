@@ -140,7 +140,7 @@ class testController extends ApplicationController {
                 {name: 'action3', title: 'Action 3'},
             ],
             onClick: action => {
-                console.log('onClick:', action);
+                console.log('onClick:', action.dataset.action);
             }
         });
 
