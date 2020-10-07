@@ -133,6 +133,7 @@ class testController extends ApplicationController {
             oldDates: false
         });
 
+        // dropdownbutton
         const dropdownbutton = ApplicationController.createReactComponent(this.view.querySelector('#dropdownbutton'), DropdownButton, {
             actions: [
                 {name: 'action1', title: 'Action 1'},
@@ -143,6 +144,26 @@ class testController extends ApplicationController {
                 console.log('onClick:', action.dataset.action);
             }
         });
+
+        // button
+        const button = ApplicationController.createReactComponent(this.view.querySelector('#button'), Button, {
+            title: 'Button',
+            name: 'test',
+            onClick: e => {
+                console.log('button.onClick');
+            },
+            isDisabled: name => {
+                console.log('button.isDisabled', name);
+                return true;
+            }
+        });
+        /*setTimeout(() => {
+            button.disable();
+        }, 1000);
+        setTimeout(() => {
+            button.enable();
+        }, 5000);*/
+
 
     }
 
