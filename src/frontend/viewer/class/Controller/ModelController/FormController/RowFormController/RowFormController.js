@@ -51,7 +51,7 @@ class RowFormController extends FormController {
                     title: action.caption
                 };
             });
-            ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
+            this.actionButton = ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
                 actions,
                 onClick: async li => {
                     // console.log('li:', li);

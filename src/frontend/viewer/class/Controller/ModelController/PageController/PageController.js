@@ -37,8 +37,7 @@ class PageController extends ModelController {
         // forms
         for (const name in this.model.forms) {
             const form = this.model.forms[name];
-            const viewId = `#${this.model.id}_${name}`;
-            const view = $(this.view).find(viewId).get(0);
+            const view = FormController.createView(form, this);
             this.forms[name] = FormController.create(form, view, this);
             this.forms[name].init();
         }
