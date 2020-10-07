@@ -5,8 +5,9 @@ class RowFormController extends FormController {
         super(model, view, parent);
         this.fieldViews   = {};
         this.controlViews = {};
-        this.actionButton = null;
         this.saveFormButton = null;
+        this.discardFormButton = null;
+        this.actionButton = null;
     }
 
     init() {
@@ -35,7 +36,7 @@ class RowFormController extends FormController {
 
         // click
         // $(this.view).find('button[name="saveForm"]').click(this.onSaveClick.bind(this));
-        $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
+        // $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
         $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
 
         // disable buttons
@@ -70,6 +71,14 @@ class RowFormController extends FormController {
             onClick: this.onSaveClick.bind(this)
         });
         this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
+
+        // discardFormButton
+        this.discardFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.discardFormButton'), Button, {
+            name: 'discardFormButton',
+            title: 'Discard',
+            onClick: this.onDiscardClick.bind(this)
+        });
+
 
     }
 
