@@ -8,9 +8,7 @@ class DropdownButton extends React.Component{
     }
     onButtonClick = e => {
         // console.log('DropdownButton.onButtonClick');
-        this.setState(state => ({
-            open: !state.open
-        }));
+        this.setState(state => ({open: !state.open}));
     }
     onButtonBlur = e => {
         // console.log('DropdownButton.onButtonBlur');
@@ -36,7 +34,9 @@ class DropdownButton extends React.Component{
             <div className={`DropdownButton ${this.state.open && 'show'}`}>
                 <button onClick={this.onButtonClick} onBlur={this.onButtonBlur}>Actions</button>
                 <ul onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
-                    {this.props.actions.map(action => <li key={action.name} data-action={action.name}>{action.title}</li>)}
+                    {this.props.actions && this.props.actions.map(action =>
+                        <li key={action.name} data-action={action.name}>{action.title}</li>
+                    )}
                 </ul>
             </div>
         );

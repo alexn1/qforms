@@ -53,6 +53,15 @@ class RowFormController extends FormController {
                 if (!result) alert(`no handler for ${action.name}`);
             };
         }
+
+        const actions = Object.keys(this.model.data.actions).map(name => {
+            const action = this.model.data.actions[name];
+            return {
+                name: action.name,
+                title: action.caption
+            };
+        });
+        ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {actions});
     }
 
     deinit() {
