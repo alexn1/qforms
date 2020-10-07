@@ -64,8 +64,8 @@ class RowFormController extends FormController {
         }
 
         // saveFormButton
-        this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveForm'), Button, {
-            name: 'saveForm',
+        this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveFormButton'), Button, {
+            name: 'saveFormButton',
             title: 'Save',
             onClick: this.onSaveClick.bind(this)
         });
