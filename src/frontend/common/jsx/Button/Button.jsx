@@ -19,7 +19,13 @@ class Button extends React.Component {
         return new Promise(resolve => this.setState({disabled: false}, resolve));
     }
     setDisabled(value) {
-        return new Promise(resolve => this.setState({disabled: value}, resolve));
+        return new Promise(resolve => {
+            if (this.state.disabled === value) {
+                resolve();
+            } else {
+                this.setState({disabled: value}, resolve)
+            }
+        });
     }
     onClick = e => {
         // console.log('Button.onClick', e);
