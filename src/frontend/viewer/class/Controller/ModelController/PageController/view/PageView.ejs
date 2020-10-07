@@ -20,7 +20,7 @@
             <% for (const name in model.forms) {
                 const form = model.forms[name];
                 if (form.getClassName() === 'RowForm') {%>
-                    <%=QForms.render(form.data.view,{model: form})%>
+                    <%=QForms.render(form.data.view, {model: form})%>
                 <%}
             }
             %>
