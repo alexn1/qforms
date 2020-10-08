@@ -52,12 +52,6 @@ class RowFormController extends FormController {
         });
     }
 
-
-    buttonIsDisabled(name) {
-        console.log('RowFormController.buttonIsDisabled', name);
-        return !this.state[name];
-    }
-
     deinit() {
         this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
         super.deinit();

@@ -15,7 +15,7 @@ class Toolbar extends ReactComponent {
                     <Button
                         name="saveFormButton"
                         title="Save"
-                        isDisabled={this.props.controller.buttonIsDisabled.bind(this.props.controller)}
+                        disabled={!this.props.controller.state.saveFormButton}
                         onClick={this.props.controller.onSaveClick.bind(this.props.controller)}
                     />
                 }
@@ -23,7 +23,7 @@ class Toolbar extends ReactComponent {
                     <Button
                         name="discardFormButton"
                         title="Discard"
-                        isDisabled={this.props.controller.buttonIsDisabled.bind(this.props.controller)}
+                        disabled={!this.props.controller.state.discardFormButton}
                         onClick={this.props.controller.onDiscardClick.bind(this.props.controller)}
                     />
                 }
@@ -31,7 +31,7 @@ class Toolbar extends ReactComponent {
                     <Button
                         name="refreshFormButton"
                         title="Refresh"
-                        isDisabled={this.props.controller.buttonIsDisabled.bind(this.props.controller)}
+                        disabled={!this.props.controller.state.refreshFormButton}
                         onClick={this.props.controller.onRefresh.bind(this.props.controller)}
                     />
                 }
