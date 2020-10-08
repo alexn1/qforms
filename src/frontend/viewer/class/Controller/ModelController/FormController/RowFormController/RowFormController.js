@@ -233,8 +233,8 @@ class RowFormController extends FormController {
         // console.log('hasNew:', hasNew);
         if (changed || hasNew) {
             if (this.isValid()) {
-                // $(this.view).find('button.saveForm').prop('disabled', !(changed || this.model.hasNew()));
-                this.saveFormButton.setDisabled(!(changed || this.model.hasNew()));
+                // $(this.view).find('button.saveForm').prop('disabled', !(changed || hasNew));
+                this.saveFormButton.setDisabled(!(changed || hasNew));
             } else {
                 // $(this.view).find('button.saveForm').prop('disabled', true);
                 this.saveFormButton.setDisabled(true);
@@ -245,8 +245,8 @@ class RowFormController extends FormController {
         }
         // $(this.view).find('button.discardForm').prop('disabled', !changed);
         this.discardFormButton.setDisabled(!changed);
-        // $(this.view).find('button.refreshForm').prop('disabled', changed || this.model.hasNew());
-        this.refreshFormButton.setDisabled(changed || this.model.hasNew());
+        // $(this.view).find('button.refreshForm').prop('disabled', changed || hasNew);
+        this.refreshFormButton.setDisabled(changed || hasNew);
         super.onFieldChange(e);
     }
 
