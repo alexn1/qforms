@@ -69,7 +69,8 @@ class RowFormController extends FormController {
         this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveFormButton'), Button, {
             name: 'saveFormButton',
             title: 'Save',
-            onClick: this.onSaveClick.bind(this)
+            onClick: this.onSaveClick.bind(this),
+            controller: this
         });
         this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
 
@@ -77,7 +78,8 @@ class RowFormController extends FormController {
         this.discardFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.discardFormButton'), Button, {
             name: 'discardFormButton',
             title: 'Discard',
-            onClick: this.onDiscardClick.bind(this)
+            onClick: this.onDiscardClick.bind(this),
+            controller: this
         });
         this.discardFormButton.setDisabled(!this.model.isChanged());
 
@@ -85,7 +87,8 @@ class RowFormController extends FormController {
         this.refreshFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.refreshFormButton'), Button, {
             name: 'refreshFormButton',
             title: 'Refresh',
-            onClick: this.onRefresh.bind(this)
+            onClick: this.onRefresh.bind(this),
+            controller: this
         });
         this.refreshFormButton.setDisabled(this.model.getPage().getKey() === null);
     }
