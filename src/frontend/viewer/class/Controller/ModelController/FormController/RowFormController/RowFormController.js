@@ -37,9 +37,9 @@ class RowFormController extends FormController {
         this.state.hasNew  = this.model.hasNew();
         this.state.valid   = true;
 
-        this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
-        this.state.discardFormButton = this.state.changed;
-        this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
+        // this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
+        // this.state.discardFormButton = this.state.changed;
+        // this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
 
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
             controller: this
@@ -53,9 +53,9 @@ class RowFormController extends FormController {
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
 
-        this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
-        this.state.discardFormButton = this.state.changed;
-        this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
+        // this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
+        // this.state.discardFormButton = this.state.changed;
+        // this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
     }
 
     getActions() {

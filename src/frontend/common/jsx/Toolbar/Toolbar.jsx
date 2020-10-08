@@ -9,35 +9,36 @@ class Toolbar extends ReactComponent {
         if (!result) alert(`no handler for ${action.name}`);
     }
     render() {
+        const controller = this.props.controller;
         return (
             <div className="Toolbar">
-                {this.props.controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         name="saveFormButton"
                         title="Save"
-                        disabled={!this.props.controller.state.saveFormButton}
-                        onClick={this.props.controller.onSaveClick.bind(this.props.controller)}
+                        disabled={!((controller.state.changed || controller.state.hasNew) && controller.state.valid)}
+                        onClick={controller.onSaveClick.bind(controller)}
                     />
                 }
-                {this.props.controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         name="discardFormButton"
                         title="Discard"
-                        disabled={!this.props.controller.state.discardFormButton}
-                        onClick={this.props.controller.onDiscardClick.bind(this.props.controller)}
+                        disabled={!(controller.state.changed)}
+                        onClick={controller.onDiscardClick.bind(controller)}
                     />
                 }
-                {this.props.controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         name="refreshFormButton"
                         title="Refresh"
-                        disabled={!this.props.controller.state.refreshFormButton}
-                        onClick={this.props.controller.onRefresh.bind(this.props.controller)}
+                        disabled={!(!controller.state.changed && !controller.state.hasNew)}
+                        onClick={controller.onRefresh.bind(controller)}
                     />
                 }
-                {Object.keys(this.props.controller.model.data.actions).length > 0 &&
+                {Object.keys(controller.model.data.actions).length > 0 &&
                     <DropdownButton
-                        actions={this.props.controller.getActions()}
+                        actions={controller.getActions()}
                         onClick={this.onActionsClick}
                     />
                 }
