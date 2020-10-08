@@ -26,7 +26,7 @@ class FieldController extends ModelController {
     init() {
     }
 
-    deinit() {
+    deinit(row, view) {
         // console.log('FieldController.deinit:', this.model.getFullName());
         this.views = null;
         super.deinit();

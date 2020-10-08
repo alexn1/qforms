@@ -25,6 +25,14 @@ class TreeFormController extends FormController {
         this.tree.off('select', this.listeners.select);
         this.tree.off('doubleClick', this.listeners.doubleClick);
         this.tree.deinit();
+
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        for (const name in this.controls) {
+            this.controls[name].deinit();
+        }
+
         super.deinit();
     }
 

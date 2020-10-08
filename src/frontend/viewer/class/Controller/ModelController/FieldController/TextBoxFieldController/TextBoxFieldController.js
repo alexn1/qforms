@@ -30,6 +30,11 @@ class TextBoxFieldController extends FieldController {
         }
     }
 
+    deinit(row, view) {
+        ReactDOM.unmountComponentAtNode(view);
+        super.deinit(row, view);
+    }
+
     beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
         view.firstElementChild.contentEditable = true;

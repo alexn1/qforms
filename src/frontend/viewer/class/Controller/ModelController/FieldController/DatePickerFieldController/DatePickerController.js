@@ -34,6 +34,11 @@ class DatePickerFieldController extends FieldController {
         }*/
     }
 
+    deinit(row, view) {
+        ReactDOM.unmountComponentAtNode(view);
+        super.deinit(row, view);
+    }
+
     setValue(value, view) {
         // console.log('DatePickerController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {

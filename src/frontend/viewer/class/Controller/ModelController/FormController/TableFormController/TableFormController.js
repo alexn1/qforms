@@ -48,6 +48,14 @@ class TableFormController extends FormController {
         this.grid.deinit();
         this.model.off('refilled', this.listeners.refilled);
         this.model.off('refresh', this.listeners.refreshed);
+
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        for (const name in this.controls) {
+            this.controls[name].deinit();
+        }
+
         super.deinit();
     }
 

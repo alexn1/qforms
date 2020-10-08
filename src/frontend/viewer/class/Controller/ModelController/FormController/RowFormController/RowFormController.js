@@ -51,6 +51,25 @@ class RowFormController extends FormController {
         });
     }
 
+    deinit() {
+        console.log('RowFormController.deinit', this.model.getFullName());
+        this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
+
+        const row = this.model.getRow();
+
+        for (const name in this.fields) {
+            const view = this.fieldViews[name];
+            this.fields[name].deinit(row, view);
+            ReactDOM.unmountComponentAtNode(this.view.querySelector(`.tooltip.${name}`));
+        }
+        for (const name in this.controls) {
+            this.controls[name].deinit();
+        }
+        ReactDOM.unmountComponentAtNode(this.view.querySelector('.toolbar'));
+        ReactDOM.unmountComponentAtNode(this.view.querySelector('.grid2'));
+        super.deinit();
+    }
+
     onActionsClick = async li => {
         // console.log('Toolbar.onActionsClick:', li);
         const action = this.model.data.actions[li.dataset.action];
@@ -76,10 +95,7 @@ class RowFormController extends FormController {
         });
     }
 
-    deinit() {
-        this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
-        super.deinit();
-    }
+
 
     fill() {
         // console.log('RowFormController.fill');
