@@ -5,8 +5,10 @@ class DropdownDatePicker extends ReactComponent {
         this.state = {
             open : false
         };
-        this.minDate = props.oldDates === false ? DatePicker.getTodayArr() : null;
-        this.value = props.value || null;
+        this._state = {
+            value : props.value || null,
+            minDate : props.oldDates === false ? DatePicker.getTodayArr() : null
+        };
     }
     onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
@@ -48,7 +50,10 @@ class DropdownDatePicker extends ReactComponent {
         return '';
     }
     setMinDate(arr) {
-        this.minDate = arr;
+        this._state.minDate = arr;
+    }
+    getMinDate() {
+        return this._state.minDate;
     }
     getSelectedMonth() {
         if (this.getValue()) {
@@ -63,16 +68,11 @@ class DropdownDatePicker extends ReactComponent {
         return null;
     }
     getValue() {
-        return this.value;
+        return this._state.value;
     }
     setValue(value) {
-        this.value = value;
+        this._state.value = value;
         this.rerender();
-    }
-    rerender() {
-        return new Promise(resolve => {
-            this.setState({foo: 1}, resolve);
-        });
     }
     render() {
         console.log('DropdownDatePicker.render', this.props, this.state);
@@ -89,7 +89,7 @@ class DropdownDatePicker extends ReactComponent {
                 </div>
                 {this.state.open &&
                     <DatePicker
-                        minDate={this.minDate}
+                        minDate={this.getMinDate()}
                         selectedMonth={this.getSelectedMonth()}
                         selectedDate={this.getSelectedDate()}
                         onMouseDown={this.onDatePickerMouseDown}
