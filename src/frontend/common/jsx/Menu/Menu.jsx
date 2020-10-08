@@ -1,8 +1,7 @@
-class Menu extends React.Component {
+class Menu extends ReactComponent {
     constructor(props) {
         // console.log('Menu.constructor', props);
         super(props);
-        if (this.props.cb) this.props.cb(this);
         this.state = {};
     }
     onMenuClick = async (e) => {

@@ -1,8 +1,7 @@
-class DatePicker extends React.Component {
+class DatePicker extends ReactComponent {
     constructor(props) {
         console.log('DatePicker.constructor', props);
         super(props);
-        if (props.cb) props.cb(this, this.props.name);
         this.state = {selectedMonth: this.calcSelectedMonth()};
         this.MONTH = [
             'Январь', 'Февраль',

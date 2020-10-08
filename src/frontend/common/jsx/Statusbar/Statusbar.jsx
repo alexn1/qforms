@@ -1,8 +1,7 @@
-class Statusbar extends React.Component {
+class Statusbar extends ReactComponent {
     constructor(props) {
         console.log('Statusbar.constructor', props);
         super(props);
-        if (props.cb) props.cb(this, this.props.name);
         this.state = {};
     }
     setLastQueryTime(lastQueryTime) {

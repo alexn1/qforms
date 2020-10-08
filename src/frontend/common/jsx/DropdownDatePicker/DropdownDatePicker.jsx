@@ -1,8 +1,7 @@
-class DropdownDatePicker extends React.Component {
+class DropdownDatePicker extends ReactComponent {
     constructor(props) {
         console.log('DropdownDatePicker.constructor', props);
         super(props);
-        if (props.cb) props.cb(this, this.props.name);
         this.state = {
             open : false
         };
