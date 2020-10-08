@@ -279,13 +279,13 @@ class ApplicationController extends ModelController {
         }
     }
 
-    static createReactRoot(name, props, children) {
-        console.log('ApplicationController.createReactRoot', name, props);
-        const div = document.createElement('div');
-        div.className = name;
-        ReactDOM.render(React.createElement(eval(name), props, children), div);
-        return div;
-    }
+    // static createReactRoot(name, props, children) {
+    //     console.log('ApplicationController.createReactRoot', name, props);
+    //     const div = document.createElement('div');
+    //     div.className = name;
+    //     ReactDOM.render(React.createElement(eval(name), props, children), div);
+    //     return div;
+    // }
 
     static createReactComponent(root, type, props = {}, children) {
         // console.log('ApplicationController.createReactComponent', root, type);
