@@ -20,10 +20,10 @@ class RowFormController extends FormController {
             if (view) {
                 this.fieldViews[name] = view;
             }
-            this.tooltip[name] = ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
+            /*this.tooltip[name] = ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
                 position: 'left',
                 type    : 'alert'
-            });
+            });*/
         }
 
         // controlViews
@@ -60,7 +60,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             const view = this.fieldViews[name];
             this.fields[name].deinit(row, view);
-            ReactDOM.unmountComponentAtNode(this.view.querySelector(`.tooltip.${name}`));
+            // ReactDOM.unmountComponentAtNode(this.view.querySelector(`.tooltip.${name}`));
         }
         for (const name in this.controls) {
             this.controls[name].deinit();
