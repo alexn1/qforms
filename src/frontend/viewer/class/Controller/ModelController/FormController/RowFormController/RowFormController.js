@@ -33,16 +33,29 @@ class RowFormController extends FormController {
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
-        const hasNew = this.model.hasNew();
-        const changed = this.model.isChanged();
+        this.state.changed = false;
+        this.state.hasNew  = this.model.hasNew();
+        this.state.valid   = true;
 
-        this.state.saveFormButton    = hasNew;
-        this.state.discardFormButton = changed;
-        this.state.refreshFormButton = !hasNew;
+        this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
+        this.state.discardFormButton = this.state.changed;
+        this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
 
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
             controller: this
         });
+    }
+
+    calcState() {
+        this.state.changed = this.isChanged();
+        this.state.hasNew  = this.model.hasNew();
+        this.state.valid   = this.isValid();
+        // console.log('changed:', changed);
+        // console.log('hasNew:', hasNew);
+
+        this.state.saveFormButton    = (this.state.changed || this.state.hasNew) && this.state.valid;
+        this.state.discardFormButton = this.state.changed;
+        this.state.refreshFormButton = !this.state.changed && !this.state.hasNew;
     }
 
     getActions() {
@@ -85,9 +98,8 @@ class RowFormController extends FormController {
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-        this.state.saveFormButton    = false;
-        this.state.discardFormButton = false;
-        this.state.refreshFormButton = true;
+
+        this.calcState();
         this.toolbar.rerender();
 
         for (const name in this.fields) {
@@ -160,12 +172,8 @@ class RowFormController extends FormController {
             field.refill(row, view);
         });
 
-        const hasNew = this.model.hasNew();
-
         // ui
-        this.state.saveFormButton    = hasNew;
-        this.state.discardFormButton = this.model.isChanged();
-        this.state.refreshFormButton = !hasNew;
+        this.calcState();
         this.toolbar.rerender();
 
         // event
@@ -191,14 +199,7 @@ class RowFormController extends FormController {
 
     onFieldChange(e) {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
-        const changed = this.isChanged();
-        const hasNew = this.model.hasNew();
-        // const valid = this.isValid();
-        // console.log('changed:', changed);
-        // console.log('hasNew:', hasNew);
-        this.state.saveFormButton    = (changed || hasNew) && this.isValid();
-        this.state.discardFormButton = changed;
-        this.state.refreshFormButton = !changed && !hasNew;
+        this.calcState();
         this.toolbar.rerender();
         super.onFieldChange(e);
     }
