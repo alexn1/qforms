@@ -1,21 +1,18 @@
 class RowFormFieldView extends ReactComponent {
-    // getFieldId(model) {
-    //     return `${model.getForm().getPage().id}_${model.getForm().getName()}_${model.getName()}`;
-    // }
-    getFieldViewContent(model, ctrl, row) {
+    renderFieldViewContent() {
+        const ctrl = this.props.ctrl;
+        const row = this.props.row;
         const value = ctrl.getValueForView(row);
         return (
-            <TextBox value={value} name={model.getName()} cb={ctrl.onFieldViewContentCreated}></TextBox>
+            <TextBox value={value} cb={ctrl.onFieldViewContentCreated}></TextBox>
         );
     }
     render() {
         const model = this.props.model;
-        const ctrl = this.props.ctrl;
-        const row = this.props.row;
         return (
             <div
                 className={`field ${model.getName()}`}>
-                {this.getFieldViewContent(model, ctrl, row)}
+                {this.renderFieldViewContent()}
             </div>
         );
     }
