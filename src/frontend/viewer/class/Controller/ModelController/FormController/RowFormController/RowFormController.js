@@ -7,6 +7,7 @@ class RowFormController extends FormController {
         this.controlViews = {};
         this.saveFormButton = null;
         this.discardFormButton = null;
+        this.refreshFormButton = null;
         this.actionButton = null;
     }
 
@@ -37,12 +38,12 @@ class RowFormController extends FormController {
         // click
         // $(this.view).find('button[name="saveForm"]').click(this.onSaveClick.bind(this));
         // $(this.view).find('button.discardForm').click(this.onDiscardClick.bind(this));
-        $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
+        // $(this.view).find('button.refreshForm').click(this.onRefresh.bind(this));
 
         // disable buttons
         // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
         // $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
-        $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
+        // $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // actions
         if (Object.keys(this.model.data.actions).length > 0) {
@@ -80,7 +81,13 @@ class RowFormController extends FormController {
         });
         this.discardFormButton.setDisabled(!this.model.isChanged());
 
-
+        // refreshFormButton
+        this.refreshFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.refreshFormButton'), Button, {
+            name: 'refreshFormButton',
+            title: 'Refresh',
+            onClick: this.onRefresh.bind(this)
+        });
+        this.refreshFormButton.setDisabled(this.model.getPage().getKey() === null);
     }
 
     deinit() {
@@ -117,7 +124,8 @@ class RowFormController extends FormController {
         this.saveFormButton.setDisabled(true);
         // $(this.view).find('button.discardForm').prop('disabled', true);
         this.discardFormButton.setDisabled(true);
-        $(this.view).find('button.refreshForm').prop('disabled', false);
+        // $(this.view).find('button.refreshForm').prop('disabled', false);
+        this.refreshFormButton.setDisabled(false);
         for (const name in this.fields) {
             const view = this.fieldViews[name];
             if (view) {
@@ -193,7 +201,8 @@ class RowFormController extends FormController {
         this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
         // $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         this.discardFormButton.setDisabled(!this.model.isChanged());
-        $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
+        // $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
+        this.refreshFormButton.setDisabled(this.model.getPage().getKey() === null);
 
         // event
         this.parent.onFormDiscard(this);
@@ -236,7 +245,8 @@ class RowFormController extends FormController {
         }
         // $(this.view).find('button.discardForm').prop('disabled', !changed);
         this.discardFormButton.setDisabled(!changed);
-        $(this.view).find('button.refreshForm').prop('disabled', changed || this.model.hasNew());
+        // $(this.view).find('button.refreshForm').prop('disabled', changed || this.model.hasNew());
+        this.refreshFormButton.setDisabled(changed || this.model.hasNew());
         super.onFieldChange(e);
     }
 
