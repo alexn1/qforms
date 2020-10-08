@@ -225,4 +225,8 @@ class FieldController extends ModelController {
         return stringValue;
     }
 
+    onFieldViewContentCreated = c => {
+        console.log('FieldController.onFieldViewContentCreated', c);
+    }
+
 }
