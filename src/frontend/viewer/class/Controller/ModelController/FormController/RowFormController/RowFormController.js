@@ -9,6 +9,9 @@ class RowFormController extends FormController {
         this.discardFormButton = null;
         this.refreshFormButton = null;
         this.actionButton = null;
+        this.state = {
+
+        };
     }
 
     init() {
@@ -72,7 +75,7 @@ class RowFormController extends FormController {
             onClick: this.onSaveClick.bind(this),
             controller: this
         });
-        this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
+        this.saveFormButton.setEnabled(this.model.getPage().hasNew());
 
         // discardFormButton
         this.discardFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.discardFormButton'), Button, {
@@ -81,7 +84,7 @@ class RowFormController extends FormController {
             onClick: this.onDiscardClick.bind(this),
             controller: this
         });
-        this.discardFormButton.setDisabled(!this.model.isChanged());
+        this.discardFormButton.setEnabled(this.model.isChanged());
 
         // refreshFormButton
         this.refreshFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.refreshFormButton'), Button, {
@@ -90,7 +93,7 @@ class RowFormController extends FormController {
             onClick: this.onRefresh.bind(this),
             controller: this
         });
-        this.refreshFormButton.setDisabled(this.model.getPage().getKey() === null);
+        this.refreshFormButton.setEnabled(this.model.getPage().getKey() !== null);
     }
 
     deinit() {
@@ -124,11 +127,9 @@ class RowFormController extends FormController {
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
         // $(this.view).find('button.saveForm').prop('disabled', true);
-        this.saveFormButton.setDisabled(true);
-        // $(this.view).find('button.discardForm').prop('disabled', true);
-        this.discardFormButton.setDisabled(true);
-        // $(this.view).find('button.refreshForm').prop('disabled', false);
-        this.refreshFormButton.setDisabled(false);
+        this.saveFormButton.setEnabled(false);
+        this.discardFormButton.setEnabled(false);
+        this.refreshFormButton.setEnabled(true);
         for (const name in this.fields) {
             const view = this.fieldViews[name];
             if (view) {
@@ -201,11 +202,11 @@ class RowFormController extends FormController {
 
         // ui
         // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
-        this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
+        this.saveFormButton.setEnabled(this.model.getPage().hasNew());
         // $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
-        this.discardFormButton.setDisabled(!this.model.isChanged());
+        this.discardFormButton.setEnabled(this.model.isChanged());
         // $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
-        this.refreshFormButton.setDisabled(this.model.getPage().getKey() === null);
+        this.refreshFormButton.setEnabled(this.model.getPage().getKey() !== null);
 
         // event
         this.parent.onFormDiscard(this);
@@ -236,15 +237,15 @@ class RowFormController extends FormController {
         // console.log('hasNew:', hasNew);
         if (changed || hasNew) {
             if (this.isValid()) {
-                this.saveFormButton.setDisabled(!(changed || hasNew));
+                this.saveFormButton.setEnabled(changed || hasNew);
             } else {
-                this.saveFormButton.setDisabled(true);
+                this.saveFormButton.setEnabled(false);
             }
         } else {
-            this.saveFormButton.setDisabled(true);
+            this.saveFormButton.setEnabled(false);
         }
-        this.discardFormButton.setDisabled(!changed);
-        this.refreshFormButton.setDisabled(changed || hasNew);
+        this.discardFormButton.setEnabled(changed);
+        this.refreshFormButton.setEnabled(!(changed || hasNew));
         super.onFieldChange(e);
     }
 

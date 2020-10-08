@@ -18,11 +18,22 @@ class Button extends ReactComponent {
         return new Promise(resolve => this.setState({disabled: false}, resolve));
     }
     setDisabled(value) {
+        if (typeof value !== 'boolean') throw new Error('value must be boolean');
         return new Promise(resolve => {
             if (this.state.disabled === value) {
                 resolve();
             } else {
                 this.setState({disabled: value}, resolve)
+            }
+        });
+    }
+    setEnabled(value) {
+        if (typeof value !== 'boolean') throw new Error('value must be boolean');
+        return new Promise(resolve => {
+            if (this.state.disabled === !value) {
+                resolve();
+            } else {
+                this.setState({disabled: !value}, resolve)
             }
         });
     }
