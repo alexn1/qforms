@@ -164,6 +164,19 @@ class testController extends ApplicationController {
             button.enable();
         }, 5000);*/
 
+        // combobox
+        const combobox = ApplicationController.createReactComponent(this.view.querySelector('#combobox'), ComboBox, {
+            items: [
+                {value: '1', title: 'one'},
+                {value: '2', title: 'two'},
+                {value: '3', title: 'three'},
+            ],
+            // value: '2',
+            onChange: value => {
+                console.log('onChange', value);
+            }
+        });
+
 
     }
 
