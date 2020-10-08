@@ -18,9 +18,10 @@ class RowFormController extends FormController {
             if (view) {
                 this.fieldViews[name] = view;
             }
-            const tooltip = this.view.querySelector(`.tooltip.${name}`);
-            console.log('tooltip:', tooltip);
-            ApplicationController.createReactComponent(tooltip, Tooltip, {position: 'left', type: 'alert'});
+            ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
+                position: 'left',
+                type    : 'alert'
+            });
         }
 
         // controlViews
