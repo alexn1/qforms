@@ -8,6 +8,7 @@ class RowFormController extends FormController {
         this.toolbar = null;
         this.state = {};
         this.tooltip = {};
+        this.formGrid = null;
     }
 
     init() {
@@ -42,6 +43,10 @@ class RowFormController extends FormController {
         this.state.valid   = true;
 
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
+            ctrl: this
+        });
+
+        this.formGrid = ApplicationController.createReactComponent(this.view.querySelector('.grid2'), FormGrid, {
             ctrl: this
         });
     }
