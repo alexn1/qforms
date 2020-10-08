@@ -7,6 +7,7 @@ class RowFormController extends FormController {
         this.controlViews = {};
         this.toolbar = null;
         this.state = {};
+        this.tooltip = {};
     }
 
     init() {
@@ -18,7 +19,7 @@ class RowFormController extends FormController {
             if (view) {
                 this.fieldViews[name] = view;
             }
-            ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
+            this.tooltip[name] = ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
                 position: 'left',
                 type    : 'alert'
             });
@@ -41,7 +42,7 @@ class RowFormController extends FormController {
         this.state.valid   = true;
 
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
-            controller: this
+            ctrl: this
         });
     }
 

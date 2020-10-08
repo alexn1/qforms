@@ -1,15 +1,16 @@
 class Toolbar extends ReactComponent {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     onActionsClick = async li => {
-        // console.log('li:', li);
-        const action = this.props.controller.model.data.actions[li.dataset.action];
-        const result = await this.props.controller.onActionClick(action, this.props.controller.model.getRow());
+        // console.log('Toolbar.onActionsClick:', li);
+        const ctrl = this.props.ctrl;
+        const action = ctrl.model.data.actions[li.dataset.action];
+        const result = await ctrl.onActionClick(action, ctrl.model.getRow());
         if (!result) alert(`no handler for ${action.name}`);
     }
     render() {
-        const ctrl = this.props.controller;
+        const ctrl = this.props.ctrl;
         return (
             <div className="Toolbar">
                 {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
