@@ -1,7 +1,6 @@
-class Button extends React.Component {
+class Button extends ReactComponent {
     constructor(props) {
         super(props);
-        if (props.cb) props.cb(this, this.props.name);
         this.state = {disabled: false};
     }
     isDisabled() {
