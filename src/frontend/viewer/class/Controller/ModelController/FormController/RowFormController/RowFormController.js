@@ -41,7 +41,7 @@ class RowFormController extends FormController {
 
         // disable buttons
         // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
-        $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
+        // $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // actions
@@ -78,6 +78,7 @@ class RowFormController extends FormController {
             title: 'Discard',
             onClick: this.onDiscardClick.bind(this)
         });
+        this.discardFormButton.setDisabled(!this.model.isChanged());
 
 
     }
@@ -114,7 +115,8 @@ class RowFormController extends FormController {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
         // $(this.view).find('button.saveForm').prop('disabled', true);
         this.saveFormButton.setDisabled(true);
-        $(this.view).find('button.discardForm').prop('disabled', true);
+        // $(this.view).find('button.discardForm').prop('disabled', true);
+        this.discardFormButton.setDisabled(true);
         $(this.view).find('button.refreshForm').prop('disabled', false);
         for (const name in this.fields) {
             const view = this.fieldViews[name];
@@ -189,7 +191,8 @@ class RowFormController extends FormController {
         // ui
         // $(this.view).find('button.saveForm').prop('disabled', !this.model.getPage().hasNew());
         this.saveFormButton.setDisabled(!this.model.getPage().hasNew());
-        $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
+        // $(this.view).find('button.discardForm').prop('disabled', !this.model.isChanged());
+        this.discardFormButton.setDisabled(!this.model.isChanged());
         $(this.view).find('button.refreshForm').prop('disabled', this.model.getPage().getKey() === null);
 
         // event
@@ -231,7 +234,8 @@ class RowFormController extends FormController {
             // $(this.view).find('button.saveForm').prop('disabled', true);
             this.saveFormButton.setDisabled(true);
         }
-        $(this.view).find('button.discardForm').prop('disabled', !changed);
+        // $(this.view).find('button.discardForm').prop('disabled', !changed);
+        this.discardFormButton.setDisabled(!changed);
         $(this.view).find('button.refreshForm').prop('disabled', changed || this.model.hasNew());
         super.onFieldChange(e);
     }
