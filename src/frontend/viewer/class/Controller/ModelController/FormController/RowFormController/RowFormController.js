@@ -159,16 +159,12 @@ class RowFormController extends FormController {
         }
     }
 
-    rerenderToolbar() {
-        this.toolbar2.rerender();
-    }
-
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
         this.state.saveFormButton = false;
         this.state.discardFormButton = false;
         this.state.refreshFormButton = true;
-        this.rerenderToolbar();
+        this.toolbar.rerender();
 
 
         for (const name in this.fields) {
@@ -245,7 +241,7 @@ class RowFormController extends FormController {
         this.state.saveFormButton    = this.model.getPage().hasNew();
         this.state.discardFormButton = this.model.isChanged();
         this.state.refreshFormButton = this.model.getPage().getKey() !== null;
-        this.rerenderToolbar();
+        this.toolbar.rerender();
 
         // event
         this.parent.onFormDiscard(this);
@@ -285,7 +281,7 @@ class RowFormController extends FormController {
         }
         this.state.discardFormButton = changed;
         this.state.refreshFormButton = !(changed || hasNew);
-        this.rerenderToolbar();
+        this.toolbar.rerender();
         super.onFieldChange(e);
     }
 
