@@ -4,8 +4,10 @@ class ReactComponent extends React.Component {
         if (props.cb) props.cb(this, this.props.name);
     }
     rerender() {
-        return new Promise(resolve => {
-            this.setState({foo: 1}, resolve);
-        });
+        console.log('ReactComponent.rerender');
+        return new Promise(resolve => this.forceUpdate(resolve));
+        // return new Promise(resolve => {
+        //     this.setState({foo: 1}, resolve);
+        // });
     }
 }
