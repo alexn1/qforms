@@ -6,8 +6,14 @@ class Button extends ReactComponent {
     }
     isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
-        if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return this.state.disabled;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.disabled !== undefined) {
+            return this.props.disabled !== nextProps.disabled;
+        }
+        return this.state.disabled !== nextState.disabled;
     }
     disable() {
         // console.log('Button.disable');
@@ -42,6 +48,7 @@ class Button extends ReactComponent {
         if (this.props.onClick) this.props.onClick(e);
     }
     render() {
+        console.log('Button.render', this.props);
         return (
             <button name={this.props.name} disabled={this.isDisabled()} onClick={this.onClick}>{this.props.title}</button>
         );
