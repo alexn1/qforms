@@ -6,8 +6,5 @@ class ReactComponent extends React.Component {
     rerender() {
         console.log('ReactComponent.rerender');
         return new Promise(resolve => this.forceUpdate(resolve));
-        // return new Promise(resolve => {
-        //     this.setState({foo: 1}, resolve);
-        // });
     }
 }
