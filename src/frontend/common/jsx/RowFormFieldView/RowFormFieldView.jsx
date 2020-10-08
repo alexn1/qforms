@@ -3,16 +3,29 @@ class RowFormFieldView extends ReactComponent {
         const model = this.props.model;
         const ctrl = this.props.ctrl;
         const row = this.props.row;
-        const value = ctrl.getValueForView(row);
+        const valueForView = ctrl.getValueForView(row);
 
         if (model.getClassName() === 'DatePickerField') {
             return (
-                <DropdownDatePicker value={value}/>
+                <DropdownDatePicker
+                    cb={ctrl.onFieldViewContentCreated}
+                    value={valueForView}
+                    readOnly={model.data.readOnly === 'true'}
+                    onChange={ctrl.onChange2}
+                    placeholder={ctrl.getPlaceHolder()}
+
+                />
             );
         }
 
         return (
-            <TextBox readOnly={model.data.readOnly === 'true'} value={value} cb={ctrl.onFieldViewContentCreated} onChange={ctrl.onChange2}></TextBox>
+            <TextBox
+                cb={ctrl.onFieldViewContentCreated}
+                value={valueForView}
+                readOnly={model.data.readOnly === 'true'}
+                onChange={ctrl.onChange2}
+                placeholder={ctrl.getPlaceHolder(model.getValue(row))}
+            />
         );
     }
     render() {

@@ -70,6 +70,10 @@ class DatePickerFieldController extends FieldController {
         }
     }
 
+    getPlaceHolder() {
+        return 'ДД.ММ.ГГГГ';
+    }
+
     getValueForView(row) {
         return this.model.getValue(row);
     }

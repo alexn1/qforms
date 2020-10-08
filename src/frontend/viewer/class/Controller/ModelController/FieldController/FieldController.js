@@ -236,4 +236,8 @@ class FieldController extends ModelController {
         console.log('component value:', this.fieldComponent.getValue());
     }
 
+    getPlaceHolder(value) {
+        return null;
+    }
+
 }
