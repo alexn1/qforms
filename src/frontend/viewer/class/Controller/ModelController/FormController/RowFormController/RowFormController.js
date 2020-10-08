@@ -46,6 +46,13 @@ class RowFormController extends FormController {
         });
     }
 
+    onActionsClick = async li => {
+        // console.log('Toolbar.onActionsClick:', li);
+        const action = this.model.data.actions[li.dataset.action];
+        const result = await this.onActionClick(action, this.model.getRow());
+        if (!result) alert(`no handler for ${action.name}`);
+    }
+
     calcState() {
         this.state.changed = this.isChanged();
         this.state.hasNew  = this.model.hasNew();
