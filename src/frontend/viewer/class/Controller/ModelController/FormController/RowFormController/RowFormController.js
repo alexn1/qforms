@@ -5,10 +5,7 @@ class RowFormController extends FormController {
         super(model, view, parent);
         this.fieldViews   = {};
         this.controlViews = {};
-        this.saveFormButton = null;
-        this.discardFormButton = null;
-        this.refreshFormButton = null;
-        this.actionButton = null;
+        this.toolbar = null;
         this.state = {};
     }
 
@@ -42,6 +39,7 @@ class RowFormController extends FormController {
         this.state.discardFormButton = this.model.isChanged();
         this.state.refreshFormButton = this.model.getPage().getKey() !== null;
 
+        /*
         // saveFormButton
         this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveFormButton'), Button, {
             name: 'saveFormButton',
@@ -68,7 +66,7 @@ class RowFormController extends FormController {
 
         // actions
         if (Object.keys(this.model.data.actions).length > 0) {
-            this.actionButton = ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
+            ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
                 actions: this.getActions(),
                 onClick: async li => {
                     // console.log('li:', li);
@@ -77,7 +75,44 @@ class RowFormController extends FormController {
                     if (!result) alert(`no handler for ${action.name}`);
                 }
             });
+        }*/
+
+        const buttons = [];
+        if (this.model.getDataSource().getClassName() === 'SqlDataSource') {
+            buttons.push({
+                type: Button,
+                props: {key: 'saveFormButton', name: 'saveFormButton', title: 'Save', isDisabled: this.buttonIsDisabled.bind(this), onClick: this.onSaveClick.bind(this)}
+            });
+            buttons.push({
+                type: Button,
+                props: {key: 'discardFormButton', name: 'discardFormButton', title: 'Discard', isDisabled: this.buttonIsDisabled.bind(this), onClick: this.onDiscardClick.bind(this)}
+            });
+            buttons.push({
+                type: Button,
+                props: {key: 'refreshFormButton', name: 'refreshFormButton', title: 'Refresh', isDisabled: this.buttonIsDisabled.bind(this), onClick: this.onRefresh.bind(this)}
+            });
         }
+
+        const dropdownButton = [];
+        if (Object.keys(this.model.data.actions).length > 0) {
+            dropdownButton.push({
+                type: DropdownButton,
+                props: {
+                    key: 'actions',
+                    actions: this.getActions(),
+                    onClick: async li => {
+                        // console.log('li:', li);
+                        const action = this.model.data.actions[li.dataset.action];
+                        const result = await this.onActionClick(action, this.model.getRow());
+                        if (!result) alert(`no handler for ${action.name}`);
+                    }
+                }
+            });
+        }
+
+        this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
+            elements: [...buttons, ...dropdownButton]
+        });
     }
 
     getActions() {
@@ -125,9 +160,7 @@ class RowFormController extends FormController {
     }
 
     rerenderToolbar() {
-        this.saveFormButton.rerender();
-        this.discardFormButton.rerender();
-        this.refreshFormButton.rerender();
+        this.toolbar2.rerender();
     }
 
     onRowUpdate(e) {

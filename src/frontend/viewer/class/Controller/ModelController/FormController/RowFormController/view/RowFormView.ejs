@@ -1,12 +1,5 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
-    <div class="toolbar">
-        <% if (model.getDataSource().getClassName() === 'SqlDataSource') { %>
-            <div class="saveFormButton" style="display: inline-block"/>
-            <div class="discardFormButton" style="display: inline-block"/>
-            <div class="refreshFormButton" style="display: inline-block"/>
-        <% } %>
-        <div class="actions" style="display: inline-block"/>
-    </div>
+    <div class="toolbar"/>
     <div class="grid">
         <% for (const fieldName in model.fields) {
             const field = model.fields[fieldName];

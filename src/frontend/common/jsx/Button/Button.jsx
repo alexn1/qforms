@@ -1,12 +1,12 @@
 class Button extends ReactComponent {
     constructor(props) {
+        console.log('Button.constructor', props);
         super(props);
         this.state = {disabled: false};
     }
     isDisabled() {
-        if (this.props.isDisabled) {
-            return this.props.isDisabled(this.props.name);
-        }
+        if (this.props.disabled !== undefined) return this.props.disabled;
+        if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return this.state.disabled;
     }
     disable() {
