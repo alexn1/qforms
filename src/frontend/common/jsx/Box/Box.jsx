@@ -32,11 +32,10 @@ class Box extends React.Component {
     render() {
         console.log('Box.render');
         return (
-            <div
-                className="Box"
-                style={this.state}
-                onClick={this.update}
-            >
+            <div className="Box">
+                <Button name="one"/>
+                <Button name="two"/>
+                <Button name="three"/>
             </div>
         );
     }

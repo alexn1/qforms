@@ -62,18 +62,16 @@ class ApplicationController extends ModelController {
     }
 
     initMenu() {
-        ReactDOM.render(React.createElement(Menu, {
+        this.menu = ApplicationController.createReactComponent(this.view.querySelector('.Menu'), Menu, {
             items: this.getMenuItemsProp(),
             onClick: this.onMenuItemClick.bind(this),
             cb: menu => this.menu = menu
-        }), this.view.querySelector('.Menu'));
+        });
         // setTimeout(() => this.menu.toggleMenu('Pages'), 1000);
     }
 
     initStatusbar() {
-        ReactDOM.render(React.createElement(Statusbar, {
-            cb: statusbar => this.statusbar = statusbar
-        }), this.view.querySelector('.Statusbar'));
+        this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.Statusbar'), Statusbar);
     }
 
     initTab() {
