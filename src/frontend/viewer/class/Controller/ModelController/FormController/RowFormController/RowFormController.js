@@ -36,25 +36,7 @@ class RowFormController extends FormController {
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
-        // actions
-        if (Object.keys(this.model.data.actions).length > 0) {
-            const actions = Object.keys(this.model.data.actions).map(name => {
-                const action = this.model.data.actions[name];
-                return {
-                    name: action.name,
-                    title: action.caption
-                };
-            });
-            this.actionButton = ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
-                actions,
-                onClick: async li => {
-                    // console.log('li:', li);
-                    const action = this.model.data.actions[li.dataset.action];
-                    const result = await this.onActionClick(action, this.model.getRow());
-                    if (!result) alert(`no handler for ${action.name}`);
-                }
-            });
-        }
+
 
         this.state.saveFormButton    = this.model.getPage().hasNew();
         this.state.discardFormButton = this.model.isChanged();
@@ -83,7 +65,31 @@ class RowFormController extends FormController {
             onClick: this.onRefresh.bind(this),
             isDisabled: this.buttonIsDisabled.bind(this)
         });
+
+        // actions
+        if (Object.keys(this.model.data.actions).length > 0) {
+            this.actionButton = ApplicationController.createReactComponent(this.view.querySelector('.actions'), DropdownButton, {
+                actions: this.getActions(),
+                onClick: async li => {
+                    // console.log('li:', li);
+                    const action = this.model.data.actions[li.dataset.action];
+                    const result = await this.onActionClick(action, this.model.getRow());
+                    if (!result) alert(`no handler for ${action.name}`);
+                }
+            });
+        }
     }
+
+    getActions() {
+        return Object.keys(this.model.data.actions).map(name => {
+            const action = this.model.data.actions[name];
+            return {
+                name : action.name,
+                title: action.caption
+            };
+        });
+    }
+
 
     buttonIsDisabled(name) {
         console.log('RowFormController.buttonIsDisabled', name);
