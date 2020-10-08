@@ -5,13 +5,13 @@ class Button extends ReactComponent {
         this.state = {disabled: false};
     }
     isDisabled() {
-        if (this.props.disabled !== undefined) return this.props.disabled;
+        if (this.props.enabled !== undefined) return !this.props.enabled;
         // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return this.state.disabled;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.disabled !== undefined) {
-            return this.props.disabled !== nextProps.disabled;
+        if (this.props.enabled !== undefined) {
+            return this.props.enabled !== nextProps.enabled;
         }
         return this.state.disabled !== nextState.disabled;
     }

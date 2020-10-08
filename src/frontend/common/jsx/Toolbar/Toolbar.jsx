@@ -9,36 +9,34 @@ class Toolbar extends ReactComponent {
         if (!result) alert(`no handler for ${action.name}`);
     }
     render() {
-        const controller = this.props.controller;
+        const ctrl = this.props.controller;
         return (
             <div className="Toolbar">
-                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
-                    <Button
-                        name="saveFormButton"
-                        title="Save"
-                        disabled={!((controller.state.changed || controller.state.hasNew) && controller.state.valid)}
-                        onClick={controller.onSaveClick.bind(controller)}
-                    />
+                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                    [
+                        <Button
+                            name="saveFormButton"
+                            title="Save"
+                            enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
+                            onClick={ctrl.onSaveClick.bind(ctrl)}
+                        />,
+                        <Button
+                            name="discardFormButton"
+                            title="Discard"
+                            enabled={ctrl.state.changed}
+                            onClick={ctrl.onDiscardClick.bind(ctrl)}
+                        />,
+                        <Button
+                            name="refreshFormButton"
+                            title="Refresh"
+                            enabled={!ctrl.state.changed && !ctrl.state.hasNew}
+                            onClick={ctrl.onRefresh.bind(ctrl)}
+                        />
+                    ]
                 }
-                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
-                    <Button
-                        name="discardFormButton"
-                        title="Discard"
-                        disabled={!(controller.state.changed)}
-                        onClick={controller.onDiscardClick.bind(controller)}
-                    />
-                }
-                {controller.model.getDataSource().getClassName() === 'SqlDataSource' &&
-                    <Button
-                        name="refreshFormButton"
-                        title="Refresh"
-                        disabled={!(!controller.state.changed && !controller.state.hasNew)}
-                        onClick={controller.onRefresh.bind(controller)}
-                    />
-                }
-                {Object.keys(controller.model.data.actions).length > 0 &&
+                {Object.keys(ctrl.model.data.actions).length > 0 &&
                     <DropdownButton
-                        actions={controller.getActions()}
+                        actions={ctrl.getActions()}
                         onClick={this.onActionsClick}
                     />
                 }
