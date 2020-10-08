@@ -83,10 +83,7 @@ class RowFormController extends FormController {
         this.state.saveFormButton    = this.model.getPage().hasNew();
         this.state.discardFormButton = this.model.isChanged();
         this.state.refreshFormButton = this.model.getPage().getKey() !== null;
-
-        this.saveFormButton.setEnabled(this.state.saveFormButton);
-        this.discardFormButton.setEnabled(this.state.discardFormButton);
-        this.refreshFormButton.setEnabled(this.state.refreshFormButton);
+        this.rerenderToolbar();
     }
 
     deinit() {
@@ -117,11 +114,20 @@ class RowFormController extends FormController {
         }
     }
 
+    rerenderToolbar() {
+        this.saveFormButton.setEnabled(this.state.saveFormButton);
+        this.discardFormButton.setEnabled(this.state.discardFormButton);
+        this.refreshFormButton.setEnabled(this.state.refreshFormButton);
+    }
+
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-        this.saveFormButton.setEnabled(false);
-        this.discardFormButton.setEnabled(false);
-        this.refreshFormButton.setEnabled(true);
+        this.state.saveFormButton = false;
+        this.state.discardFormButton = false;
+        this.state.refreshFormButton = true;
+        this.rerenderToolbar();
+
+
         for (const name in this.fields) {
             const view = this.fieldViews[name];
             if (view) {
@@ -193,9 +199,10 @@ class RowFormController extends FormController {
         });
 
         // ui
-        this.saveFormButton.setEnabled(this.model.getPage().hasNew());
-        this.discardFormButton.setEnabled(this.model.isChanged());
-        this.refreshFormButton.setEnabled(this.model.getPage().getKey() !== null);
+        this.state.saveFormButton    = this.model.getPage().hasNew();
+        this.state.discardFormButton = this.model.isChanged();
+        this.state.refreshFormButton = this.model.getPage().getKey() !== null;
+        this.rerenderToolbar();
 
         // event
         this.parent.onFormDiscard(this);
@@ -226,15 +233,16 @@ class RowFormController extends FormController {
         // console.log('hasNew:', hasNew);
         if (changed || hasNew) {
             if (this.isValid()) {
-                this.saveFormButton.setEnabled(changed || hasNew);
+                this.state.saveFormButton = changed || hasNew;
             } else {
-                this.saveFormButton.setEnabled(false);
+                this.state.saveFormButton = false;
             }
         } else {
-            this.saveFormButton.setEnabled(false);
+            this.state.saveFormButton = false;
         }
-        this.discardFormButton.setEnabled(changed);
-        this.refreshFormButton.setEnabled(!(changed || hasNew));
+        this.state.discardFormButton = changed;
+        this.state.refreshFormButton = !(changed || hasNew);
+        this.rerenderToolbar();
         super.onFieldChange(e);
     }
 
