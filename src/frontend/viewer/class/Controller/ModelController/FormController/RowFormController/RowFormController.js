@@ -82,11 +82,10 @@ class RowFormController extends FormController {
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-        this.state.saveFormButton = false;
+        this.state.saveFormButton    = false;
         this.state.discardFormButton = false;
         this.state.refreshFormButton = true;
         this.toolbar.rerender();
-
 
         for (const name in this.fields) {
             const view = this.fieldViews[name];
@@ -189,19 +188,12 @@ class RowFormController extends FormController {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
         const changed = this.isChanged();
         const hasNew = this.model.hasNew();
+        // const valid = this.isValid();
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
-        if (changed || hasNew) {
-            if (this.isValid()) {
-                this.state.saveFormButton = changed || hasNew;
-            } else {
-                this.state.saveFormButton = false;
-            }
-        } else {
-            this.state.saveFormButton = false;
-        }
+        this.state.saveFormButton    = (changed || hasNew) && this.isValid();
         this.state.discardFormButton = changed;
-        this.state.refreshFormButton = !(changed || hasNew);
+        this.state.refreshFormButton = !changed && !hasNew;
         this.toolbar.rerender();
         super.onFieldChange(e);
     }
