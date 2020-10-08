@@ -48,6 +48,12 @@ class FieldController extends ModelController {
         this.setViewStyle(view, row);
     }
 
+    getValueForView(row) {
+        const value = this.model.getValue(row);
+        const stringValue = this.valueToString(value);
+        return stringValue;
+    }
+
     refill(row, view) {
         // console.log('FieldController.refill', this.model.getFullName());
         const value = this.model.getValue(row);

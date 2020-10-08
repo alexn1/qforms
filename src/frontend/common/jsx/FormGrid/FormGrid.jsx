@@ -1,33 +1,37 @@
 class FormGrid extends ReactComponent {
-    getFieldId(field) {
-        return `${field.getForm().getPage().id}_${field.getForm().getName()}_${field.getName()}`;
+    getFieldId(model) {
+        return `${model.getForm().getPage().id}_${model.getForm().getName()}_${model.getName()}`;
     }
-    getFieldLabel(field) {
+    getFieldLabel(model) {
         return (
-            <div key={`label.${field.getName()}`} className={`label ${field.getName()}`}>
-                {field.data.caption}:
-                {field.data.notNull === 'true' && <span style={{color: 'red'}}>*</span>}
+            <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
+                {model.data.caption}:
+                {model.data.notNull === 'true' && <span style={{color: 'red'}}>*</span>}
             </div>
         );
     }
-    getFieldView(field) {
+    getFieldView(model, ctrl, row) {
         return (
             <div
-                key={`field.${field.getName()}`}
-                id={this.getFieldId(field)}
-                className={`field ${field.getName()}`}>
-                {this.getFieldViewContent(field)}
+                key={`field.${model.getName()}`}
+                id={this.getFieldId(model)}
+                className={`field ${model.getName()}`}>
+                {this.getFieldViewContent(model, ctrl, row)}
             </div>
         );
     }
-    getFieldViewContent(field) {
+    getFieldViewContent(model, ctrl, row) {
+        const value = ctrl.getValueForView(row);
         return (
-            <TextBox></TextBox>
+            <TextBox value={value} name={model.getName()} cb={this.onFieldViewContentCreated}></TextBox>
         );
     }
-    getFieldTooltip(field) {
+    onFieldViewContentCreated = c => {
+        console.log('FormGrid.onFieldViewContentCreated', c);
+    }
+    getFieldTooltip(model) {
         return (
-            <div key={`tooltip.${field.getName()}`} className={`tooltip ${field.getName()}`}>
+            <div key={`tooltip.${model.getName()}`} className={`tooltip ${model.getName()}`}>
                 <Tooltip position="left" type="alert" />
             </div>
         );
@@ -35,16 +39,18 @@ class FormGrid extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
+        const row = model.getRow();
         // console.log('model:', model);
         return (
             <div className="FormGrid">
                 {Object.keys(model.fields).map(name => {
-                    const field = model.fields[name];
-                    // console.log('field:', field);
+                    const fieldModel = model.fields[name];
+                    const fieldCtrl = ctrl.fields[name];
+                    // console.log('fieldModel:', fieldModel);
                     return [
-                        this.getFieldLabel(field),
-                        this.getFieldView(field),
-                        this.getFieldTooltip(field)
+                        this.getFieldLabel(fieldModel),
+                        this.getFieldView(fieldModel, fieldCtrl, row),
+                        this.getFieldTooltip(fieldModel)
                     ];
                 })}
             </div>
