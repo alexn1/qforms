@@ -15,10 +15,12 @@ class RowFormController extends FormController {
         // fieldViews
         for (const name in this.model.fields) {
             const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.getName()}_${name}`);
-            if (view === null) {
-                continue;
+            if (view) {
+                this.fieldViews[name] = view;
             }
-            this.fieldViews[name] = view;
+            const tooltip = this.view.querySelector(`.tooltip.${name}`);
+            console.log('tooltip:', tooltip);
+            ApplicationController.createReactComponent(tooltip, Tooltip, {position: 'left', type: 'alert'});
         }
 
         // controlViews
