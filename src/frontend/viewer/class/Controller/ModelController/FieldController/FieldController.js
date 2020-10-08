@@ -21,6 +21,7 @@ class FieldController extends ModelController {
         this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
         this.isUndefined = true;
+        this.fieldComponent = null;
     }
 
     init() {
@@ -227,6 +228,13 @@ class FieldController extends ModelController {
 
     onFieldViewContentCreated = c => {
         console.log('FieldController.onFieldViewContentCreated', c);
+        this.fieldComponent = c;
+
+    }
+
+    onChange2 = e => {
+        console.log('FieldController.onChange2', e);
+        console.log('component value:', this.fieldComponent.getValue());
     }
 
 }

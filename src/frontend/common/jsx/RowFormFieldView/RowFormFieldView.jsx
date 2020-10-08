@@ -4,7 +4,7 @@ class RowFormFieldView extends ReactComponent {
         const row = this.props.row;
         const value = ctrl.getValueForView(row);
         return (
-            <TextBox value={value} cb={ctrl.onFieldViewContentCreated}></TextBox>
+            <TextBox value={value} cb={ctrl.onFieldViewContentCreated} onChange={ctrl.onChange2}></TextBox>
         );
     }
     render() {

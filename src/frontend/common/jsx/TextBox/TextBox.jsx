@@ -1,5 +1,6 @@
 class TextBox extends ReactComponent {
     constructor(props) {
+        console.log('TextBox.constructor', props);
         super(props);
         this.state = {
             value: this.props.value || ''
