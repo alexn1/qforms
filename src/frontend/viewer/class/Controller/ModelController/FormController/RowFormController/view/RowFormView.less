@@ -1,5 +1,5 @@
 .RowFormView {
-    > div.grid {
+    > .grid, .FormGrid {
         display: grid;
         grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
         //grid-template-columns: 100px 1fr 100px 1fr 100px 1fr;
@@ -9,10 +9,10 @@
     background-color: rgb(238,238,238);
     padding         : 10px;
     font-size       : small;
-    > div.toolbar {
+    > .toolbar {
         margin-bottom: 10px;
     }
-    > div.grid {
+    > .grid, .FormGrid {
         grid-row-gap: 5px;
         //grid-column-gap: 5px;
         > div {

@@ -5,6 +5,9 @@ class DropdownDatePicker extends ReactComponent {
         this.state = {
             open : false
         };
+        if (props.value && !(props.value instanceof Date)) {
+            throw new Error('need date type');
+        }
         this._state = {
             value : props.value || null,
             minDate : props.oldDates === false ? DatePicker.getTodayArr() : null
