@@ -19,7 +19,7 @@ class ComboBox extends ReactComponent {
         }
     }
     render() {
-        console.log('ComboBox.render', this.state.value);
+        // console.log('ComboBox.render', this.state.value);
         return (
             <select onChange={this.onChange} value={this.state.value}>
                 <option value=""></option>
