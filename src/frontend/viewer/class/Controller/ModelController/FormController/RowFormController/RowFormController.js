@@ -56,12 +56,16 @@ class RowFormController extends FormController {
             });
         }
 
+        this.state.saveFormButton    = this.model.getPage().hasNew();
+        this.state.discardFormButton = this.model.isChanged();
+        this.state.refreshFormButton = this.model.getPage().getKey() !== null;
+
         // saveFormButton
         this.saveFormButton = ApplicationController.createReactComponent(this.view.querySelector('div.saveFormButton'), Button, {
             name: 'saveFormButton',
             title: 'Save',
             onClick: this.onSaveClick.bind(this),
-            controller: this
+            isDisabled: this.buttonIsDisabled.bind(this)
         });
 
         // discardFormButton
@@ -69,7 +73,7 @@ class RowFormController extends FormController {
             name: 'discardFormButton',
             title: 'Discard',
             onClick: this.onDiscardClick.bind(this),
-            controller: this
+            isDisabled: this.buttonIsDisabled.bind(this)
         });
 
         // refreshFormButton
@@ -77,13 +81,13 @@ class RowFormController extends FormController {
             name: 'refreshFormButton',
             title: 'Refresh',
             onClick: this.onRefresh.bind(this),
-            controller: this
+            isDisabled: this.buttonIsDisabled.bind(this)
         });
+    }
 
-        this.state.saveFormButton    = this.model.getPage().hasNew();
-        this.state.discardFormButton = this.model.isChanged();
-        this.state.refreshFormButton = this.model.getPage().getKey() !== null;
-        this.rerenderToolbar();
+    buttonIsDisabled(name) {
+        console.log('RowFormController.buttonIsDisabled', name);
+        return !this.state[name];
     }
 
     deinit() {
@@ -115,9 +119,9 @@ class RowFormController extends FormController {
     }
 
     rerenderToolbar() {
-        this.saveFormButton.setEnabled(this.state.saveFormButton);
-        this.discardFormButton.setEnabled(this.state.discardFormButton);
-        this.refreshFormButton.setEnabled(this.state.refreshFormButton);
+        this.saveFormButton.rerender();
+        this.discardFormButton.rerender();
+        this.refreshFormButton.rerender();
     }
 
     onRowUpdate(e) {
