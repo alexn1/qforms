@@ -16,13 +16,16 @@ class TextBox extends ReactComponent {
         this.setState({value});
     }
     onChange = e => {
-        console.log('TextBox.onChange', e.target.value);
+        // console.log('TextBox.onChange', e.target.value);
         this.setValue(e.target.value);
+        if (this.props.onChange) {
+            this.props.onChange(e);
+        }
     }
     render() {
-        console.log('TextBox.render');
+        // console.log('TextBox.render');
         return (
-            <input value={this.state.value} readOnly={this.props.readOnly} onChange={this.onChange}/>
+            <input value={this.state.value} readOnly={this.props.readOnly} onChange={this.onChange} placeholder={this.props.placeholder}/>
         );
     }
 }

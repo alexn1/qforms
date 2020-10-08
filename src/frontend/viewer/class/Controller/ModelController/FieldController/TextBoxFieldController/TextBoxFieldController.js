@@ -10,15 +10,23 @@ class TextBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
+            this.views.set(row, view);
+            view.dbRow = row;
+            const value = this.model.getValue(row);
+            this.isUndefined = value === undefined;
+            const stringValue = this.valueToString(value);
             this.textBox = ApplicationController.createReactComponent(view, TextBox, {
-                readOnly: this.model.data.readOnly === 'true'
+                readOnly: this.model.data.readOnly === 'true',
+                value: stringValue,
+                placeholder: this.getPlaceHolder(value),
+                onChange: e => {
+                    // console.log('TextBox.onChange');
+                    this.onChange(view);
+                }
             });
-        }
-        super.fill(row, view);
-        if (this.model.getForm().getClassName() === 'RowForm') {
-            // $(view).children().on('input', () => {
-            //     this.onChange(view);
-            // });
+            // this.setViewStyle(view, row);
+        } else {
+            super.fill(row, view);
         }
     }
 
@@ -40,9 +48,7 @@ class TextBoxFieldController extends FieldController {
 
     getStringValue(view) {
         switch (this.model.getForm().getClassName()) {
-            case 'RowForm'  :
-                // return view.firstElementChild.value;
-                return this.textBox.getValue();
+            case 'RowForm'  : return this.textBox.getValue();
             case 'TableForm': return view.firstElementChild.innerHTML;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
@@ -50,29 +56,25 @@ class TextBoxFieldController extends FieldController {
 
     setStringValue(stringValue, view) {
         switch (this.model.getForm().getClassName()) {
-            case 'RowForm'  :
-                // view.firstElementChild.value     = stringValue;
-                this.textBox.setValue(stringValue);
-                break;
+            case 'RowForm'  : this.textBox.setValue(stringValue); break;
             case 'TableForm': view.firstElementChild.innerHTML = stringValue; break;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
 
-    setPlaceHolder(view, value) {
-        /*
-        // console.log('TextBoxFieldController.setPlaceHolder', this.model.getFullName(), value);
+    getPlaceHolder(value) {
+        // console.log('TextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (ApplicationController.isInDebugMode()) {
                 if (value === undefined) {
-                    view.firstElementChild.placeholder = 'undefined';
+                    return 'undefined';
                 } else if (value === null) {
-                    view.firstElementChild.placeholder = 'null';
+                    return 'null';
                 } else if (value === '') {
-                    view.firstElementChild.placeholder = 'empty string';
+                    return 'empty string';
                 }
             }
-        }*/
+        }
     }
 
 }
