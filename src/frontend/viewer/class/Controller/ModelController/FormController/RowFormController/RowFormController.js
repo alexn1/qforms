@@ -33,9 +33,9 @@ class RowFormController extends FormController {
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
-        this.state.saveFormButton    = this.model.getPage().hasNew();
+        this.state.saveFormButton    = this.model.hasNew();
         this.state.discardFormButton = this.model.isChanged();
-        this.state.refreshFormButton = this.model.getPage().getKey() !== null;
+        this.state.refreshFormButton = this.model.getKey() !== null;
 
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
             controller: this
@@ -158,9 +158,9 @@ class RowFormController extends FormController {
         });
 
         // ui
-        this.state.saveFormButton    = this.model.getPage().hasNew();
+        this.state.saveFormButton    = this.model.hasNew();
         this.state.discardFormButton = this.model.isChanged();
-        this.state.refreshFormButton = this.model.getPage().getKey() !== null;
+        this.state.refreshFormButton = this.model.getKey() !== null;
         this.toolbar.rerender();
 
         // event
