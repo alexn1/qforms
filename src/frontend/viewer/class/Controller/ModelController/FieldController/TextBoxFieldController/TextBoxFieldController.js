@@ -2,10 +2,10 @@
 
 class TextBoxFieldController extends FieldController {
 
-    constructor(model, parent) {
-        // console.log('new TextBoxFieldController', model.getName());
-        super(model, parent);
-    }
+    // constructor(model, parent) {
+    //     console.log('new TextBoxFieldController', model.getName());
+    //     super(model, parent);
+    // }
 
     fill(row, view) {
         const self = this;

@@ -26,7 +26,7 @@ class DatePickerFieldController extends FieldController {
         } else {
             super.fill(row, view);
         }
-        this.setPlaceHolder(view);
+        // this.setPlaceHolder(view);
         /*if (this.model.getForm().getClassName() === 'RowForm') {
             this.dropdownDatePicker.onChange = date => {
                 this.onChange(view);
