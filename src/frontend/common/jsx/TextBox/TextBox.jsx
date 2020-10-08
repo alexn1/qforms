@@ -1,8 +1,11 @@
 class TextBox extends ReactComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            value: this.props.value || ''
+        }
         this._state = {
-            value: this.props.value
+            value: this.props.value || ''
         };
     }
     getValue() {
@@ -10,11 +13,16 @@ class TextBox extends ReactComponent {
     }
     setValue(value) {
         this._state.value = value;
-        this.rerender();
+        this.setState({value});
+    }
+    onChange = e => {
+        console.log('TextBox.onChange', e.target.value);
+        this.setValue(e.target.value);
     }
     render() {
+        console.log('TextBox.render');
         return (
-            <input value={this.getValue()} readOnly={this.props.readOnly}/>
+            <input value={this.state.value} readOnly={this.props.readOnly} onChange={this.onChange}/>
         );
     }
 }

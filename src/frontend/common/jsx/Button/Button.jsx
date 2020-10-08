@@ -48,7 +48,7 @@ class Button extends ReactComponent {
         if (this.props.onClick) this.props.onClick(e);
     }
     render() {
-        console.log('Button.render', this.props);
+        // console.log('Button.render', this.props);
         return (
             <button name={this.props.name} disabled={this.isDisabled()} onClick={this.onClick}>{this.props.title}</button>
         );
