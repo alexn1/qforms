@@ -1,6 +1,6 @@
 class DatePicker extends ReactComponent {
     constructor(props) {
-        console.log('DatePicker.constructor', props);
+        // console.log('DatePicker.constructor', props);
         super(props);
         this.state = {selectedMonth: this.calcSelectedMonth()};
         this.MONTH = [
@@ -145,7 +145,7 @@ class DatePicker extends ReactComponent {
     }
 
     render() {
-        console.log('DatePicker.render', this.props, this.state);
+        // console.log('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = DatePicker.getToday();
         const minDate = this.isMinDate() ? this.createMinDate() : null;

@@ -37,7 +37,7 @@ class DropdownDatePicker extends ReactComponent {
         // return false;
     }
     onDatePickerDateSelected = (date) => {
-        console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+        // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setValue(value);
         this.setState({open: false}, () => {
