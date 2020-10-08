@@ -1,6 +1,6 @@
 class DropdownDatePicker extends ReactComponent {
     constructor(props) {
-        console.log('DropdownDatePicker.constructor', props);
+        // console.log('DropdownDatePicker.constructor', props);
         super(props);
         this.state = {
             open : false
@@ -78,7 +78,7 @@ class DropdownDatePicker extends ReactComponent {
         this.rerender();
     }
     render() {
-        console.log('DropdownDatePicker.render', this.props, this.state);
+        // console.log('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className="DropdownDatePicker">
                 <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getStringValue()} placeholder={this.props.placeholder}/>

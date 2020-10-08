@@ -227,9 +227,8 @@ class FieldController extends ModelController {
     }
 
     onFieldViewContentCreated = c => {
-        console.log('FieldController.onFieldViewContentCreated', c);
+        // console.log('FieldController.onFieldViewContentCreated', c);
         this.fieldComponent = c;
-
     }
 
     onChange2 = e => {

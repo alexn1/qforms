@@ -16,7 +16,7 @@ class RowFormFieldView extends ReactComponent {
         );
     }
     render() {
-        console.log('RowFormFieldView.render', this.props.model.getClassName());
+        // console.log('RowFormFieldView.render', this.props.model.getClassName());
         const model = this.props.model;
         return (
             <div
