@@ -24,6 +24,11 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         if (this.isUndefined) return undefined;
         return this.stringToValue(this.state.value);
     }
+    setValue(value) {
+        this.isUndefined = value === undefined;
+        const stringValue = this.valueToString(value);
+        this.state.value = stringValue;
+    }
     getPlaceHolder(value) {
         // console.log('TextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
         if (ApplicationController.isInDebugMode()) {

@@ -37,6 +37,9 @@ class RowFormFieldController extends FieldController {
     getValue() {
         throw new Error('RowFormFieldController.getValue not implemented');
     }
+    setValue(value) {
+        throw new Error('RowFormFieldController.setValue not implemented');
+    }
     isChanged() {
         return this.state.changed;
     }
