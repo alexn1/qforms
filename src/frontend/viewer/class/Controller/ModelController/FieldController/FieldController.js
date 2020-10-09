@@ -57,6 +57,7 @@ class FieldController extends ModelController {
 
     getValueForView(row) {
         const value = this.model.getValue(row);
+        this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         return stringValue;
     }
