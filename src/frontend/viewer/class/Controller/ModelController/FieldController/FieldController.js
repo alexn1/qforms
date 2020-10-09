@@ -36,7 +36,6 @@ class FieldController extends ModelController {
         this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
         this.isUndefined = true;
-
     }
 
     deinit(row, view) {
