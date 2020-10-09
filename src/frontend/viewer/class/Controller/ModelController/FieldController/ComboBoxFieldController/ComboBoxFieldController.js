@@ -2,9 +2,10 @@
 
 class ComboBoxFieldController extends FieldController {
 
-    // constructor(model, parent) {
-    //     super(model, parent);
-    // }
+    constructor(model, parent) {
+        super(model, parent);
+        this.comboBox = null;
+    }
 
     init() {
         //console.log('ComboBoxFieldController.init: ' + this.model.getFullName());
@@ -35,15 +36,17 @@ class ComboBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-
             const value = this.model.getValue(row);
-            console.log('value:', value);
-            // const stringValue =
-            ApplicationController.createReactComponent(view, ComboBox, {
+            this.isUndefined = value === undefined;
+            this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
                 items: this.model.getComboBoxDataSource().getRows().map(row => ({
                     value: this.model.getValueValue(row),
                     title: this.model.getDisplayValue(row)
-                }))
+                })),
+                value: this.valueToString(value),
+                onChange: value => {
+                    console.log('onChange:', value);
+                }
             });
             // view.keyToOption = {};
             // this._fillSelectOptions(view);
@@ -59,10 +62,10 @@ class ComboBoxFieldController extends FieldController {
     }
 
     getStringValue(view) {
-        switch (this.model.getForm().getClassName()) {
-            case 'RowForm'  : return view.firstElementChild.value;
-            case 'TableForm': return view.firstElementChild.innerHTML;
-            default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            return this.comboBox.getValue();
+        } else {
+            return super.getStringValue(view);
         }
     }
 

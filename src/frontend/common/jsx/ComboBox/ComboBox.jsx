@@ -1,7 +1,7 @@
 class ComboBox extends ReactComponent {
     constructor(props) {
         super(props);
-        this.state = {value: props.value || ''};
+        this.state  = {value: props.value || ''};
         this._state = {value: props.value || ''};
     }
     setValue(value) {

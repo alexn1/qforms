@@ -20,7 +20,7 @@ class TextBox extends ReactComponent {
         // console.log('TextBox.onChange', e.target.value);
         this.setValue(e.target.value);
         if (this.props.onChange) {
-            this.props.onChange(e);
+            this.props.onChange(e.target.value);
         }
     }
     render() {
