@@ -2,27 +2,13 @@
 
 class DatePickerFieldController extends FieldController {
 
-    constructor(model, parent) {
-        super(model, parent);
-        this.dropdownDatePicker = null;
-    }
+    // constructor(model, parent) {
+    //     super(model, parent);
+    // }
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-            this.views.set(row, view);
-            view.dbRow = row;
-            const value = this.model.getValue(row);
-            this.isUndefined = value === undefined;
-            this.dropdownDatePicker = ApplicationController.createReactComponent(view, DropdownDatePicker, {
-                // oldDates: false,
-                placeholder: 'ДД.ММ.ГГГГ',
-                value: value,
-                onChange: date => {
-                    this.onChange(view);
-                }
-            });
-            // this.setValue(value, view);
-            this.setViewStyle(view, row);
+
         } else {
             super.fill(row, view);
         }
@@ -42,8 +28,7 @@ class DatePickerFieldController extends FieldController {
     setValue(value, view) {
         // console.log('DatePickerController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            this.isUndefined = value === undefined;
-            this.dropdownDatePicker.setValue(value);
+
         } else if (this.model.getForm().getClassName() === 'TableForm') {
             if (value instanceof Date) {
                 const stringValue = Helper.formatDate(value, '{DD}.{MM}.{YYYY}')
@@ -56,10 +41,7 @@ class DatePickerFieldController extends FieldController {
 
     getValue(view) {
         // console.log('DatePickerFieldController.getValue', this.model.getFullName());
-        if (this.model.getForm().getClassName() === 'RowForm') {
-            if (this.isUndefined) return undefined;
-            return this.dropdownDatePicker.getValue();
-        }
+
         return null;
     }
 
