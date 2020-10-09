@@ -18,7 +18,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
     //     super.deinit(row, view);
     // }
     setStringValue(stringValue, view) {
-        throw new Error('not implemented');
+        throw new Error('RowFormTextBoxFieldController.setStringValue not implemented');
     }
     getValue() {
         if (this.isUndefined) return undefined;

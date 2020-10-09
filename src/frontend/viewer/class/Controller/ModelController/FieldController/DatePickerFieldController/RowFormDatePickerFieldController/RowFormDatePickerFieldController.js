@@ -10,7 +10,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.state.value = value;
     }
     setValue(value) {
-        throw new Error('not implemented');
+        throw new Error('RowFormDatePickerFieldController.setValue not implemented');
         // this.isUndefined = value === undefined;
     }
     // getPlaceHolder() {

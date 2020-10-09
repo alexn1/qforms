@@ -163,7 +163,7 @@ class RowFormController extends FormController {
     async onSaveClick() {
         console.log('RowFormController.onSaveClick');
         const valid = this.isValid();
-        this.updateErrorClasses();
+        // this.updateErrorClasses();
         if (valid) {
             await this.model.update();
         } else {

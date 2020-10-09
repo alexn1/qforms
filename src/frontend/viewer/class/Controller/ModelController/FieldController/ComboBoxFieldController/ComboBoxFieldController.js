@@ -66,7 +66,7 @@ class ComboBoxFieldController extends FieldController {
     setValue(value, view) {
         // console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            throw new Error('not implemented');
+            throw new Error('ComboBoxFieldController.setValue not implemented');
             /*
             this.isUndefined = value === undefined;
             if (value === null || value === undefined) {
