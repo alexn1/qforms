@@ -1,10 +1,10 @@
 class Tooltip extends ReactComponent {
     constructor(props) {
-        console.log('Tooltip.constructor', props);
+        // console.log('Tooltip.constructor', props);
         super(props);
     }
     render() {
-        console.log('Tooltip.render', this.state, this.props);
+        // console.log('Tooltip.render', this.state, this.props);
         return (
             <div className={`TooltipWidget ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
                 {this.props.type !== 'alert' &&

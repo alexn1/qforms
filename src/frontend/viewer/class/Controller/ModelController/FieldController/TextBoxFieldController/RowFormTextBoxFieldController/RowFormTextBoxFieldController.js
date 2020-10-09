@@ -8,6 +8,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
+        this.state.value = stringValue;
         this.textBox = ApplicationController.createReactComponent(view, TextBox, {
             readOnly   : this.isReadOnly(),
             value      : stringValue,

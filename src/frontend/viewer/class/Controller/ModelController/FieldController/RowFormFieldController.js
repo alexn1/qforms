@@ -5,9 +5,11 @@ class RowFormFieldController extends FieldController {
         super(model, parent);
         this.component = null;
         this.state = {
+            value  : null,
             changed: false,
-            error: false
+            error  : false,
         };
+        console.log('this.state:', this.state);
     }
     onFieldViewContentCreated = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);

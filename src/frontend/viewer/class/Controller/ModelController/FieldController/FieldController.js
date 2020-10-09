@@ -117,7 +117,7 @@ class FieldController extends ModelController {
     }
 
     getValue(view) {
-        console.log('FieldController.getValue', this.model.getFullName());
+        // console.log('FieldController.getValue', this.model.getFullName());
         if (this.isUndefined) return undefined;
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
