@@ -22,8 +22,8 @@ class ComboBox extends ReactComponent {
         // console.log('ComboBox.render', this.state.value);
         return (
             <select onChange={this.onChange} value={this.state.value}>
-                <option value=""></option>
-                {this.props.items.map(item =>
+                <option value="">null</option>
+                {this.props.items && this.props.items.map(item =>
                     <option key={item.value} value={item.value}>{item.title}</option>
                 )}
             </select>

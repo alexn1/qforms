@@ -18,34 +18,34 @@ class ComboBoxFieldController extends FieldController {
         }
         dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
-        dataSource.on('newRow', this.listeners.newRow = this.onNewRow.bind(this));
-        dataSource.on('moveRow', this.listeners.moveRow = this.onMoveRow.bind(this));
+        dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
+        dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
     }
 
-    deinit() {
+    deinit(row, view) {
         //console.log('ComboBoxFieldController.deinit: ' + this.model.getFullName());
         const dataSource = this.model.getComboBoxDataSource();
         dataSource.off('rowUpdate', this.listeners.rowUpdate);
         dataSource.off('removeRow', this.listeners.removeRow);
-        dataSource.off('newRow', this.listeners.newRow);
-        dataSource.off('moveRow', this.listeners.moveRow);
+        dataSource.off('newRow'   , this.listeners.newRow);
+        dataSource.off('moveRow'  , this.listeners.moveRow);
+        ReactDOM.unmountComponentAtNode(view);
         super.deinit();
     }
 
     fill(row, view) {
-        const self = this;
-        switch (this.model.getForm().getClassName()) {
-            case 'RowForm':
-                view.keyToOption = {};
-                this._fillSelectOptions(view);
-                super.fill(row, view);
-                $(view).children().change(function() {
-                    self.onChange(view);
-                });
-                break;
-            case 'TableForm':
-                super.fill(row, view);
-                break;
+        if (this.model.getForm().getClassName() === 'RowForm') {
+            view.keyToOption = {};
+            ApplicationController.createReactComponent(view, ComboBox, {});
+            // this._fillSelectOptions(view);
+            // super.fill(row, view);
+            // $(view).children().change(function() {
+            //     self.onChange(view);
+            // });
+        } else if (this.model.getForm().getClassName() === 'TableForm') {
+            super.fill(row, view);
+        } else {
+            throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
 
@@ -56,7 +56,6 @@ class ComboBoxFieldController extends FieldController {
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
     }
-
 
     setValue(value, view) {
         // console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
@@ -166,26 +165,6 @@ class ComboBoxFieldController extends FieldController {
         }
     }
 
-    // isValid(view) {
-    //     console.log('ComboBoxFieldController.isValid', this.model.getFullName());
-    //
-    //     const value = this.getValue(view);
-    //     console.log('combobox:', value);
-    //
-    //     return true;
-    //     /*
-    //     let isValid = true;
-    //     if (this.model.data.notNull === 'true') {
-    //         isValid = view.firstElementChild.selectedIndex !== 0;
-    //     }
-    //     if (!isValid) {
-    //         view.firstElementChild.classList.add('error');
-    //     } else {
-    //         view.firstElementChild.classList.remove('error');
-    //     }
-    //     return isValid;*/
-    // }
-
     getValue(view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (this.isUndefined) return undefined;
@@ -196,14 +175,4 @@ class ComboBoxFieldController extends FieldController {
         }
         return null;
     }
-
-    // onChange(el) {
-    //     console.log('ComboBoxFieldController.onChange', this.model.getFullName());
-    //     const view = el.parentNode;
-    //
-    //     // console.log('selectedIndex', view.firstElementChild.selectedIndex);
-    //     // console.log('stringValue:', this.getStringValue(view));
-    //     console.log('value:', this.getValue(view));
-    // }
-
 }
