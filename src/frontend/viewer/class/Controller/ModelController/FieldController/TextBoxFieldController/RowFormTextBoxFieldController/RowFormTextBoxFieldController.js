@@ -4,23 +4,24 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         super(model, parent);
         this.textBox = null;
     }
-    // fill(row) {
-    //     console.log('RowFormTextBoxFieldController.fill', this.model.getFullName());
-    //     /*const value = this.model.getValue(row);
-    //     this.isUndefined = value === undefined;
-    //     const stringValue = this.valueToString(value);
-    //     this.state.value = stringValue;
-    //     this.textBox = ApplicationController.createReactComponent(view, TextBox, {
-    //         readOnly   : this.isReadOnly(),
-    //         value      : stringValue,
-    //         placeholder: this.getPlaceHolder(value),
-    //         onChange: e => {
-    //             // console.log('TextBox.onChange');
-    //             this.onChange(view);
-    //         }
-    //     });*/
-    //     // this.setViewStyle(view, row);
-    // }
+    fill(row) {
+        console.log('RowFormTextBoxFieldController.fill', this.model.getFullName(), this.model.getValue(row));
+        const value = this.model.getValue(row);
+        /*const value = this.model.getValue(row);
+        this.isUndefined = value === undefined;
+        const stringValue = this.valueToString(value);
+        this.state.value = stringValue;
+        this.textBox = ApplicationController.createReactComponent(view, TextBox, {
+            readOnly   : this.isReadOnly(),
+            value      : stringValue,
+            placeholder: this.getPlaceHolder(value),
+            onChange: e => {
+                // console.log('TextBox.onChange');
+                this.onChange(view);
+            }
+        });*/
+        // this.setViewStyle(view, row);
+    }
     isReadOnly() {
         return this.model.data.readOnly === 'true';
     }

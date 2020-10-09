@@ -54,7 +54,7 @@ class FieldController extends ModelController {
     }
 
     fill(row, view) {
-        console.log('FieldController.fill', this.model.getFullName());
+        // console.log('FieldController.fill', this.model.getFullName());
         this.views.set(row, view);
         view.dbRow = row;
         const value = this.model.getValue(row);
