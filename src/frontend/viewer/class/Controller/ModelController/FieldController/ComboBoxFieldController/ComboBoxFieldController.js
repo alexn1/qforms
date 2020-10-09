@@ -2,10 +2,9 @@
 
 class ComboBoxFieldController extends FieldController {
 
-    constructor(model, parent) {
-        super(model, parent);
-        this.comboBox = null;
-    }
+    // constructor(model, parent) {
+    //     super(model, parent);
+    // }
 
     init() {
         //console.log('ComboBoxFieldController.init: ' + this.model.getFullName());
@@ -36,15 +35,7 @@ class ComboBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-            const value = this.model.getValue(row);
-            this.isUndefined = value === undefined;
-            this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
-                items: this.getItems(),
-                value: this.valueToString(value),
-                onChange: value => {
-                    console.log('onChange:', value);
-                }
-            });
+
             // view.keyToOption = {};
             // this._fillSelectOptions(view);
             // super.fill(row, view);
