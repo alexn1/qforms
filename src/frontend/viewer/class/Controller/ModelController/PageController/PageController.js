@@ -9,7 +9,7 @@ class PageController extends ModelController {
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
             return new CustomClass(model, view, parent);
         }
-        return eval(`new ${model.data.class}Controller(model, view, parent)`);
+        return eval(`new ${model.getClassName()}Controller(model, view, parent)`);
     }
 
     constructor(model, view, parent) {

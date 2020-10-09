@@ -10,7 +10,7 @@ class ControlController extends ModelController {
     }
 
     static create(model, parent) {
-        return eval(`new ${model.data.class}Controller(model, parent)`);
+        return eval(`new ${model.getClassName()}Controller(model, parent)`);
     }
 
     init() {

@@ -3,14 +3,20 @@
 class FieldController extends ModelController {
 
     static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName());
+
+        console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         let obj;
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
             obj = new CustomClass(model, parent);
         } else {
-            obj = eval(`new ${model.data.class}Controller(model, parent);`);
+            let className = `${model.getClassName()}Controller`;
+            if (model.getClassName() === 'TextBoxField' && parent.model.getClassName() === 'RowForm') {
+                className = 'RowFormTextBoxFieldController';
+            }
+            console.log('className:', className);
+            obj = eval(`new ${className}(model, parent);`);
         }
         return obj;
     }
