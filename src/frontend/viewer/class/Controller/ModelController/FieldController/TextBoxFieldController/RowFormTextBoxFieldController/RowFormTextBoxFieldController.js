@@ -28,10 +28,12 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         super.deinit(row, view);
     }
     setStringValue(stringValue, view) {
-        this.textBox.setValue(stringValue);
+        throw new Error('not implemented');
+        // this.textBox.setValue(stringValue);
     }
     getStringValue(view) {
-        return this.textBox.getValue();
+        // return this.textBox.getValue();
+        return this.state.value;
     }
 
     getPlaceHolder(value) {
@@ -46,4 +48,6 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
             }
         }
     }
+
+
 }

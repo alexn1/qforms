@@ -8,6 +8,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         view.dbRow = row;
         const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
+        this.state.value = value;
         this.dropdownDatePicker = ApplicationController.createReactComponent(view, DropdownDatePicker, {
             // oldDates: false,
             placeholder: 'ДД.ММ.ГГГГ',
@@ -20,23 +21,21 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         //this.setViewStyle(view, row);
     }
     setValue(value) {
-        this.isUndefined = value === undefined;
-        this.dropdownDatePicker.setValue(value);
+        throw new Error('not implemented');
+        // this.isUndefined = value === undefined;
+        // this.dropdownDatePicker.setValue(value);
     }
     getValue() {
         // console.log('RowFormDatePickerFieldController.getValue');
         if (this.isUndefined) return undefined;
         // const value = this.dropdownDatePicker.getValue();
-        const value = this.component.getValue();
-        return value;
+        // const value = this.component.getValue();
+        // return value;
+        return this.state.value;
     }
 
     getPlaceHolder() {
         return 'ДД.ММ.ГГГГ';
-    }
-
-    getValueForView(row) {
-        return this.model.getValue(row);
     }
 
 }

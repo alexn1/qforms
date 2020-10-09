@@ -5,7 +5,7 @@ class RowFormFieldController extends FieldController {
         super(model, parent);
         this.component = null;
         this.state = {
-            value  : null,
+            value  : undefined,
             changed: false,
             error  : false,
         };
@@ -33,5 +33,9 @@ class RowFormFieldController extends FieldController {
             this.model.setValue(row, value);
         }
         this.parent.onFieldChange({source: this, row, field: this});
+    }
+
+    getValueForView(row) {
+        return this.state.value;
     }
 }
