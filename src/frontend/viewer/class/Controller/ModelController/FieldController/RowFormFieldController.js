@@ -10,7 +10,7 @@ class RowFormFieldController extends FieldController {
         };
     }
     fill(row) {
-        console.log('RowFormFieldController.fill', this.model.getFullName());
+        throw new Error('RowFormFieldController.fill not implemented');
     }
     onFieldViewContentCreated = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);
@@ -19,7 +19,6 @@ class RowFormFieldController extends FieldController {
         console.log('RowFormFieldController.onChange2', value);
         this.state.value = value;
 
-        /*
         const row = this.model.getForm().getRow();
         // console.log('row:', row);
 
@@ -31,7 +30,7 @@ class RowFormFieldController extends FieldController {
             const value = this.getValue();
             this.model.setValue(row, value);
         }
-        this.parent.onFieldChange({source: this, row, field: this});*/
+        this.parent.onFieldChange({source: this, row, field: this});
     }
     getValueForView() {
         return this.state.value;
