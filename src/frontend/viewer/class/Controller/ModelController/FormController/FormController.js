@@ -32,12 +32,12 @@ class FormController extends ModelController {
             this.fields[name] = FieldController.create(field, this);
             this.fields[name].init();
         }
-        // controls
+        /*// controls
         for (const name in this.model.controls) {
             const control = this.model.controls[name];
             this.controls[name] = ControlController.create(control, this);
             this.controls[name].init();
-        }
+        }*/
     }
 
     // deinit() {

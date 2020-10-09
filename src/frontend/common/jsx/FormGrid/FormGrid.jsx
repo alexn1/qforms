@@ -16,12 +16,13 @@ class FormGrid extends ReactComponent {
             </div>
         );
     }
-    isHidden() {
-        if (this.state) {
-
-        }
-    }
+    // isHidden() {
+    //     if (this.state) {
+    //
+    //     }
+    // }
     render() {
+        console.log('FormGrid.render');
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         const row = model.getRow();

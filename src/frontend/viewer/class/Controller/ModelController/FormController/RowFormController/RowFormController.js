@@ -93,21 +93,20 @@ class RowFormController extends FormController {
         });
     }
 
-
-
     fill() {
         console.log('RowFormController.fill', this.model.getFullName());
         super.fill();
 
-        const row = this.model.getRow();
+        // const row = this.model.getRow();
 
+        /*
         // fields
         for (const name in this.fields) {
             // const view = this.fieldViews[name];
             // if (view) {
             this.fields[name].fill(row);
             // }
-        }
+        }*/
 
         /*
         // controls
