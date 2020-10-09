@@ -35,8 +35,13 @@ class ComboBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-            view.keyToOption = {};
-            ApplicationController.createReactComponent(view, ComboBox, {});
+            ApplicationController.createReactComponent(view, ComboBox, {
+                items: this.model.getComboBoxDataSource().getRows().map(row => ({
+                    value: this.model.getValueValue(row),
+                    title: this.model.getDisplayValue(row)
+                }))
+            });
+            // view.keyToOption = {};
             // this._fillSelectOptions(view);
             // super.fill(row, view);
             // $(view).children().change(function() {

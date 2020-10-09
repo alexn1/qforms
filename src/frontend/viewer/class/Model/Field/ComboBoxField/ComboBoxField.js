@@ -15,6 +15,13 @@ class ComboBoxField extends Field {
         return value;
     }
 
+    getValueValue(row) {
+        if (row[this.data.valueColumn] !== undefined) {
+            return row[this.data.valueColumn];
+        }
+        throw new Error('no valueColumn in ComboBox data source');
+    }
+
     getComboBoxDataSource() {
         const name = this.data.dataSourceName;
         if (this.getForm().dataSources[name]) {
