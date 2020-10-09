@@ -3,8 +3,7 @@
 class FieldController extends ModelController {
 
     static create(model, parent) {
-
-        console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         let obj;
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
@@ -23,7 +22,7 @@ class FieldController extends ModelController {
                     className = 'RowFormDatePickerFieldController';
                 }
             }
-            console.log('className:', className);
+            // console.log('className:', className);
             obj = eval(`new ${className}(model, parent);`);
         }
         return obj;
@@ -118,7 +117,7 @@ class FieldController extends ModelController {
     }
 
     getValue(view) {
-        // console.log('FieldController.getValue', this.model.getFullName());
+        console.log('FieldController.getValue', this.model.getFullName());
         if (this.isUndefined) return undefined;
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
@@ -138,7 +137,7 @@ class FieldController extends ModelController {
         // console.log('FieldController.isValid', this.model.getFullName());
         try {
             const value = this.getValue(view);
-            // console.log('value:', this.model.getFullName(), value);
+            console.log('value:', this.model.getFullName(), value);
 
             let isValid = true;
             if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {

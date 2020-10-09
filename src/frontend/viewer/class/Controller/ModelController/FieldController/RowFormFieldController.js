@@ -9,8 +9,15 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);
         this.component = c;
     }
-    onChange2 = e => {
-        console.log('RowFormFieldController.onChange2', e);
-        console.log('component value:', this.component.getValue());
+    onChange2 = value => {
+        console.log('RowFormFieldController.onChange2', value);
+        // console.log('component value:', this.component.getValue());
+        const row = this.model.getForm().getRow();
+        console.log('row:', row);
+
+        this.isUndefined = false;
+        const valid = this.isValid();
+        console.log('valid:', valid);
+
     }
 }
