@@ -189,14 +189,15 @@ class RowFormController extends FormController {
 
         // refill changed fields
         changedFields.forEach(field => {
-            const name = field.model.getName();
-            // const view = this.fieldViews[name];
+            /*const name = field.model.getName();
+            const view = this.fieldViews[name];*/
             field.refill(row/*, view*/);
         });
 
         // ui
         this.calcState();
         this.toolbar.rerender();
+        this.formGrid.rerender();
 
         // event
         this.parent.onFormDiscard(this);
