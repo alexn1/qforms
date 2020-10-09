@@ -19,6 +19,9 @@ class FieldController extends ModelController {
                 if (model.getClassName() === 'ComboBoxField') {
                     className = 'RowFormComboBoxFieldController';
                 }
+                if (model.getClassName() === 'DatePickerField') {
+                    className = 'RowFormDatePickerFieldController';
+                }
             }
             console.log('className:', className);
             obj = eval(`new ${className}(model, parent);`);
