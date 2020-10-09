@@ -17,7 +17,17 @@ class RowFormFieldView extends ReactComponent {
                 />
             );
         }
-
+        if (model.getClassName() === 'ComboBoxField') {
+            return (
+                <ComboBox
+                    cb={ctrl.onFieldViewContentCreated}
+                    items={ctrl.getItems()}
+                    value={ctrl.valueToString(ctrl.model.getValue(row))}
+                    readOnly={model.data.readOnly === 'true'}
+                    onChange={ctrl.onChange2}
+                />
+            );
+        }
         return (
             <TextBox
                 cb={ctrl.onFieldViewContentCreated}

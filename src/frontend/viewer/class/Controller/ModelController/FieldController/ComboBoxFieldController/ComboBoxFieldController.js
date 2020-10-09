@@ -39,10 +39,7 @@ class ComboBoxFieldController extends FieldController {
             const value = this.model.getValue(row);
             this.isUndefined = value === undefined;
             this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
-                items: this.model.getComboBoxDataSource().getRows().map(row => ({
-                    value: this.model.getValueValue(row),
-                    title: this.model.getDisplayValue(row)
-                })),
+                items: this.getItems(),
                 value: this.valueToString(value),
                 onChange: value => {
                     console.log('onChange:', value);
@@ -59,6 +56,13 @@ class ComboBoxFieldController extends FieldController {
         } else {
             throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
+    }
+
+    getItems() {
+        return this.model.getComboBoxDataSource().getRows().map(row => ({
+            value: this.model.getValueValue(row),
+            title: this.model.getDisplayValue(row)
+        }));
     }
 
     getStringValue(view) {
