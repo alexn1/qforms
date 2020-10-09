@@ -225,6 +225,7 @@ class RowFormController extends FormController {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
         this.calcState();
         this.toolbar.rerender();
+        this.formGrid.rerender();
         super.onFieldChange(e);
     }
 
