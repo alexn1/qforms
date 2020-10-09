@@ -19,8 +19,8 @@ class RowFormFieldController extends FieldController {
     }
     onChange2 = value => {
         console.log('RowFormFieldController.onChange2', value);
-        // console.log('component value:', this.component.getValue());
 
+        /*
         const row = this.model.getForm().getRow();
         // console.log('row:', row);
 
@@ -32,7 +32,7 @@ class RowFormFieldController extends FieldController {
             const value = this.getValue();
             this.model.setValue(row, value);
         }
-        this.parent.onFieldChange({source: this, row, field: this});
+        this.parent.onFieldChange({source: this, row, field: this});*/
     }
     getValueForView() {
         return this.state.value;
