@@ -1,20 +1,4 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="RowFormView <%=model.getName()%>">
     <div class="toolbar"/>
-    <div class="grid">
-        <% for (const fieldName in model.fields) {
-            const field = model.fields[fieldName];
-            if (field.data.isVisible === 'false') continue;
-        %>
-            <div class="label <%=field.getName()%>Label">
-                <% echo(field.data.caption + ':');
-                if (field.data.notNull === 'true') {
-                %><span style='color:red;'>&nbsp;*</span><%
-                } %>
-            </div>
-            <%=QForms.render(field.data.view, {model: field})%>
-            <div class="tooltip <%=field.getName()%>"/>
-        <% } %>
-    </div>
-    <br>
     <div class="grid2"/>
 </div>

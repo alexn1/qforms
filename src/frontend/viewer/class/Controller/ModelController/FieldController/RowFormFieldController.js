@@ -9,7 +9,6 @@ class RowFormFieldController extends FieldController {
             changed: false,
             error  : false,
         };
-        console.log('this.state:', this.state);
     }
     onFieldViewContentCreated = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);
@@ -26,8 +25,6 @@ class RowFormFieldController extends FieldController {
         const valid = this.isValid();
         this.state.error   = !valid;
         this.state.changed = this.isChanged(row);
-        console.log('this.state:', this.state);
-
         if (valid) {
             const value = this.getValue();
             this.model.setValue(row, value);
