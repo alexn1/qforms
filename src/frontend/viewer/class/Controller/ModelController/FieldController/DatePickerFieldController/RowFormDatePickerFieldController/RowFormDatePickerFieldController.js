@@ -3,6 +3,9 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         super(model, parent);
         this.dropdownDatePicker = null;
     }
+    init() {
+        console.log('RowFormDatePickerFieldController.init', this.model.getFullName(), this.model.getValue(this.parent.model.getRow()));
+    }
     fill(row) {
         console.log('RowFormDatePickerFieldController.fill', this.model.getFullName(), this.model.getValue(row));
         /*this.views.set(row, view);

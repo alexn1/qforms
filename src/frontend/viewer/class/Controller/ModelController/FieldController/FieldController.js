@@ -27,6 +27,8 @@ class FieldController extends ModelController {
         }
         return obj;
     }
+    init() {
+    }
 
     constructor(model, parent) {
         super(model);
