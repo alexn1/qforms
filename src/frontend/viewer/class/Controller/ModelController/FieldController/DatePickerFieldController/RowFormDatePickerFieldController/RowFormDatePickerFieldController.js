@@ -26,14 +26,14 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         // this.isUndefined = value === undefined;
         // this.dropdownDatePicker.setValue(value);
     }
-    getValue() {
-        // console.log('RowFormDatePickerFieldController.getValue');
-        if (this.isUndefined) return undefined;
-        // const value = this.dropdownDatePicker.getValue();
-        // const value = this.component.getValue();
-        // return value;
-        return this.state.value;
-    }
+    // getValue() {
+    //     // console.log('RowFormDatePickerFieldController.getValue');
+    //     if (this.isUndefined) return undefined;
+    //     // const value = this.dropdownDatePicker.getValue();
+    //     // const value = this.component.getValue();
+    //     // return value;
+    //     return this.state.value;
+    // }
 
     getPlaceHolder() {
         return 'ДД.ММ.ГГГГ';

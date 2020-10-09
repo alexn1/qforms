@@ -12,7 +12,7 @@ class RowFormFieldView extends ReactComponent {
                     value={valueForView}
                     readOnly={model.data.readOnly === 'true'}
                     onChange={ctrl.onChange2}
-                    placeholder={ctrl.getPlaceHolder()}
+                    // placeholder={ctrl.getPlaceHolder()}
 
                 />
             );
@@ -22,7 +22,7 @@ class RowFormFieldView extends ReactComponent {
                 <ComboBox
                     cb={ctrl.onFieldViewContentCreated}
                     items={ctrl.getItems()}
-                    value={ctrl.valueToString(ctrl.model.getValue(row))}
+                    value={valueForView}
                     readOnly={model.data.readOnly === 'true'}
                     onChange={ctrl.onChange2}
                 />
@@ -34,7 +34,7 @@ class RowFormFieldView extends ReactComponent {
                 value={valueForView}
                 readOnly={model.data.readOnly === 'true'}
                 onChange={ctrl.onChange2}
-                placeholder={ctrl.getPlaceHolder(model.getValue(row))}
+                // placeholder={ctrl.getPlaceHolder(model.getValue(row))}
             />
         );
     }

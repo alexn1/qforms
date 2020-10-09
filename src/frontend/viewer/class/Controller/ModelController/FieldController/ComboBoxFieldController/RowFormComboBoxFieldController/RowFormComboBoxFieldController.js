@@ -21,7 +21,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             title: this.model.getDisplayValue(row)
         }));
     }
-    getStringValue(view) {
-        return this.comboBox.getValue();
-    }
+    // getStringValue(view) {
+    //     return this.comboBox.getValue();
+    // }
 }

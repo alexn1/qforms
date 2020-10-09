@@ -7,10 +7,13 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
     fill(row) {
         console.log('RowFormTextBoxFieldController.fill', this.model.getFullName(), this.model.getValue(row));
         const value = this.model.getValue(row);
-        /*const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.state.value = stringValue;
+        /*
+
+
+
         this.textBox = ApplicationController.createReactComponent(view, TextBox, {
             readOnly   : this.isReadOnly(),
             value      : stringValue,
@@ -33,10 +36,10 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         throw new Error('not implemented');
         // this.textBox.setValue(stringValue);
     }
-    getStringValue(view) {
-        // return this.textBox.getValue();
-        return this.state.value;
-    }
+    // getStringValue(view) {
+    //     // return this.textBox.getValue();
+    //     return this.state.value;
+    // }
 
     getPlaceHolder(value) {
         // console.log('TextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
