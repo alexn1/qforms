@@ -4,7 +4,11 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.dropdownDatePicker = null;
     }
     init() {
-        console.log('RowFormDatePickerFieldController.init', this.model.getFullName(), this.model.getValue(this.parent.model.getRow()));
+        console.log('RowFormDatePickerFieldController.init', this.model.getFullName());
+        const row = this.parent.model.getRow();
+        const value = this.model.getValue(row);
+        this.isUndefined = value === undefined;
+        this.state.value = value;
     }
     fill(row) {
         console.log('RowFormDatePickerFieldController.fill', this.model.getFullName(), this.model.getValue(row));

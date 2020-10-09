@@ -4,7 +4,12 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         this.comboBox = null;
     }
     init() {
-        console.log('RowFormComboBoxFieldController.init', this.model.getFullName(), this.model.getValue(this.parent.model.getRow()));
+        console.log('RowFormComboBoxFieldController.init', this.model.getFullName());
+        const row = this.parent.model.getRow();
+        const value = this.model.getValue(row);
+        this.isUndefined = value === undefined;
+        const stringValue = this.valueToString(value);
+        this.state.value = stringValue;
     }
     fill(row) {
         console.log('RowFormComboBoxFieldController.fill', this.model.getFullName(), this.model.getValue(row));

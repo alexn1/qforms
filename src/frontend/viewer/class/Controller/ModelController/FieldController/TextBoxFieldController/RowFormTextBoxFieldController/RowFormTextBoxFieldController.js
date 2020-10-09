@@ -2,17 +2,20 @@
 class RowFormTextBoxFieldController extends RowFormFieldController {
     constructor(model, parent) {
         super(model, parent);
-        this.textBox = null;
+        // this.textBox = null;
     }
     init() {
-        console.log('RowFormTextBoxFieldController.init', this.model.getFullName(), this.model.getValue(this.parent.model.getRow()));
-    }
-    fill(row) {
-        console.log('RowFormTextBoxFieldController.fill', this.model.getFullName(), this.model.getValue(row));
+        console.log('RowFormTextBoxFieldController.init', this.model.getFullName());
+        const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.state.value = stringValue;
+    }
+    fill(row) {
+        console.log('RowFormTextBoxFieldController.fill', this.model.getFullName(), this.model.getValue(row));
+
+
         /*
 
 
