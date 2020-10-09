@@ -19,13 +19,16 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         // this.setValue(value, view);
         //this.setViewStyle(view, row);
     }
-    setValue(value, view) {
+    setValue(value) {
         this.isUndefined = value === undefined;
         this.dropdownDatePicker.setValue(value);
     }
-    getValue(view) {
+    getValue() {
+        // console.log('RowFormDatePickerFieldController.getValue');
         if (this.isUndefined) return undefined;
-        return this.dropdownDatePicker.getValue();
+        // const value = this.dropdownDatePicker.getValue();
+        const value = this.component.getValue();
+        return value;
     }
 
     getPlaceHolder() {

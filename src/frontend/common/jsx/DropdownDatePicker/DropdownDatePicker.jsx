@@ -9,8 +9,8 @@ class DropdownDatePicker extends ReactComponent {
             throw new Error('need date type');
         }
         this._state = {
-            value : props.value || null,
-            minDate : props.oldDates === false ? DatePicker.getTodayArr() : null
+            value  : props.value || null,
+            minDate: props.oldDates === false ? DatePicker.getTodayArr() : null
         };
     }
     onInputClick = (e) => {
@@ -74,6 +74,7 @@ class DropdownDatePicker extends ReactComponent {
         return this._state.value;
     }
     setValue(value) {
+        // console.log('DropdownDatePicker.setValue', value);
         this._state.value = value;
         this.rerender();
     }

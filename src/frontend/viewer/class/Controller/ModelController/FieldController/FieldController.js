@@ -137,8 +137,7 @@ class FieldController extends ModelController {
         // console.log('FieldController.isValid', this.model.getFullName());
         try {
             const value = this.getValue(view);
-            console.log('value:', this.model.getFullName(), value);
-
+            // console.log('value:', this.model.getFullName(), value);
             let isValid = true;
             if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {
                 isValid = false;
