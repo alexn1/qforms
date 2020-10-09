@@ -18,6 +18,11 @@ class ComboBox extends ReactComponent {
             this.props.onChange(e.target.value);
         }
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        this.state.value = nextProps.value;
+        return true;
+    }
     render() {
         // console.log('ComboBox.render', this.state.value);
         return (

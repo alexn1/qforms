@@ -5,15 +5,15 @@ class TextBox extends ReactComponent {
         this.state = {
             value: this.props.value || ''
         }
-        this._state = {
+        /*this._state = {
             value: this.props.value || ''
-        };
+        };*/
     }
-    getValue() {
+    /*getValue() {
         return this._state.value;
-    }
+    }*/
     setValue(value) {
-        this._state.value = value;
+        // this._state.value = value;
         this.setState({value});
     }
     onChange = e => {
@@ -22,6 +22,11 @@ class TextBox extends ReactComponent {
         if (this.props.onChange) {
             this.props.onChange(e.target.value);
         }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        this.state.value = nextProps.value;
+        return true;
     }
     render() {
         // console.log('TextBox.render');
