@@ -3,8 +3,8 @@
 class RowFormController extends FormController {
     constructor(model, view, parent) {
         super(model, view, parent);
-        this.fieldViews   = {};
-        this.controlViews = {};
+        // this.fieldViews   = {};
+        // this.controlViews = {};
         this.toolbar = null;
         this.state = {};
         this.tooltip = {};
@@ -56,8 +56,8 @@ class RowFormController extends FormController {
         const row = this.model.getRow();
 
         for (const name in this.fields) {
-            const view = this.fieldViews[name];
-            this.fields[name].deinit(row, view);
+            // const view = this.fieldViews[name];
+            this.fields[name].deinit(row/*, view*/);
             // ReactDOM.unmountComponentAtNode(this.view.querySelector(`.tooltip.${name}`));
         }
         for (const name in this.controls) {
@@ -125,10 +125,10 @@ class RowFormController extends FormController {
         this.toolbar.rerender();
 
         for (const name in this.fields) {
-            const view = this.fieldViews[name];
-            if (view) {
-                this.fields[name].refill(this.model.getRow(), view);
-            }
+            // const view = this.fieldViews[name];
+            // if (view) {
+                this.fields[name].refill(this.model.getRow()/*, view*/);
+            // }
         }
         this.parent.onFormUpdate(e);
     }
@@ -138,10 +138,10 @@ class RowFormController extends FormController {
         let isValid = true;
         for (const name in this.fields) {
             const field = this.fields[name];
-            const view = this.fieldViews[name];
-            if (view) {
-                if (!field.isValid(view)) isValid = false;
-            }
+            // const view = this.fieldViews[name];
+            // if (view) {
+                if (!field.isValid(/*view*/)) isValid = false;
+            // }
         }
         return isValid;
     }
@@ -150,15 +150,15 @@ class RowFormController extends FormController {
         return this.model.getFieldValue(name);
     }
 
-    updateErrorClasses() {
-        for (const name in this.fields) {
-            const field = this.fields[name];
-            const view = this.fieldViews[name];
-            if (view) {
-                field.updateErrorClass(view, field.isValid(view));
-            }
-        }
-    }
+    // updateErrorClasses() {
+    //     for (const name in this.fields) {
+    //         const field = this.fields[name];
+    //         const view = this.fieldViews[name];
+    //         if (view) {
+    //             field.updateErrorClass(view, field.isValid(view));
+    //         }
+    //     }
+    // }
 
     async onSaveClick() {
         console.log('RowFormController.onSaveClick');
@@ -177,8 +177,8 @@ class RowFormController extends FormController {
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            const view = this.fieldViews[name];
-            if (view && field.isChanged(row, view)) {
+            // const view = this.fieldViews[name];
+            if (/*view && */field.isChanged(row/*, view*/)) {
                 changedFields.push(field);
             }
         }
@@ -190,8 +190,8 @@ class RowFormController extends FormController {
         // refill changed fields
         changedFields.forEach(field => {
             const name = field.model.getName();
-            const view = this.fieldViews[name];
-            field.refill(row, view);
+            // const view = this.fieldViews[name];
+            field.refill(row/*, view*/);
         });
 
         // ui
@@ -213,8 +213,8 @@ class RowFormController extends FormController {
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            const view = this.fieldViews[name];
-            if (field.isChanged(row, view)) return true;
+            // const view = this.fieldViews[name];
+            if (field.isChanged(row/*, view*/)) return true;
         }
         return false;
     }
