@@ -4,7 +4,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         this.comboBox = null;
     }
     init() {
-        console.log('RowFormComboBoxFieldController.init', this.model.getFullName());
+        // console.log('RowFormComboBoxFieldController.init', this.model.getFullName());
         const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
