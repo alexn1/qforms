@@ -181,7 +181,7 @@ class FieldController extends ModelController {
     isChanged(row, view) {
         // console.log('FieldController.isChanged', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        if (!view) throw new Error('FieldController: no view');
+        // if (!view) throw new Error('FieldController: no view');
         // if (!this.isValid(view)) return true;
         try {
             if (this.model.hasColumn()) {
