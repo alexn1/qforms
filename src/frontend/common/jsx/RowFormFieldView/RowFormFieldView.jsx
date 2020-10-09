@@ -2,18 +2,15 @@ class RowFormFieldView extends ReactComponent {
     renderFieldViewContent() {
         const model = this.props.model;
         const ctrl = this.props.ctrl;
-        const row = this.props.row;
-        const valueForView = ctrl.getValueForView(row);
 
         if (model.getClassName() === 'DatePickerField') {
             return (
                 <DropdownDatePicker
                     cb={ctrl.onFieldViewContentCreated}
-                    value={valueForView}
-                    readOnly={model.data.readOnly === 'true'}
+                    value={ctrl.getValueForView()}
+                    readOnly={ctrl.isReadOnly()}
                     onChange={ctrl.onChange2}
-                    // placeholder={ctrl.getPlaceHolder()}
-
+                    placeholder={ctrl.getPlaceHolder()}
                 />
             );
         }
@@ -21,20 +18,20 @@ class RowFormFieldView extends ReactComponent {
             return (
                 <ComboBox
                     cb={ctrl.onFieldViewContentCreated}
-                    items={ctrl.getItems()}
-                    value={valueForView}
-                    readOnly={model.data.readOnly === 'true'}
+                    value={ctrl.getValueForView()}
+                    readOnly={ctrl.isReadOnly()}
                     onChange={ctrl.onChange2}
+                    items={ctrl.getItems()}
                 />
             );
         }
         return (
             <TextBox
                 cb={ctrl.onFieldViewContentCreated}
-                value={valueForView}
-                readOnly={model.data.readOnly === 'true'}
+                value={ctrl.getValueForView()}
+                readOnly={ctrl.isReadOnly()}
                 onChange={ctrl.onChange2}
-                // placeholder={ctrl.getPlaceHolder(model.getValue(row))}
+                placeholder={ctrl.getPlaceHolder()}
             />
         );
     }

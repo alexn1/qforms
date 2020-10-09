@@ -59,4 +59,19 @@ class RowFormFieldController extends FieldController {
         this.validate();
         this.checkForChange(row);
     }
+
+    getPlaceHolder() {
+        // console.log('RowFormFieldController.getPlaceHolder', this.model.getFullName());
+        const row = this.model.getForm().getRow();
+        const value = this.model.getValue(row);
+        if (ApplicationController.isInDebugMode()) {
+            if (value === undefined) {
+                return 'undefined';
+            } else if (value === null) {
+                return 'null';
+            } else if (value === '') {
+                return 'empty string';
+            }
+        }
+    }
 }

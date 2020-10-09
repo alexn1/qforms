@@ -7,13 +7,12 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         // console.log('RowFormTextBoxFieldController.init', this.model.getFullName());
         const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
+        console.log(this.model.getFullName(), value);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.state.value = stringValue;
     }
-    isReadOnly() {
-        return this.model.data.readOnly === 'true';
-    }
+
     // deinit(row, view) {
     //     super.deinit(row, view);
     // }
@@ -29,18 +28,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         const stringValue = this.valueToString(value);
         this.state.value = stringValue;
     }
-    getPlaceHolder(value) {
-        // console.log('TextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
-        if (ApplicationController.isInDebugMode()) {
-            if (value === undefined) {
-                return 'undefined';
-            } else if (value === null) {
-                return 'null';
-            } else if (value === '') {
-                return 'empty string';
-            }
-        }
-    }
+
 
 
 }
