@@ -35,6 +35,10 @@ class ComboBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
+
+            const value = this.model.getValue(row);
+            console.log('value:', value);
+            // const stringValue =
             ApplicationController.createReactComponent(view, ComboBox, {
                 items: this.model.getComboBoxDataSource().getRows().map(row => ({
                     value: this.model.getValueValue(row),
