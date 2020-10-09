@@ -12,8 +12,13 @@ class FieldController extends ModelController {
             obj = new CustomClass(model, parent);
         } else {
             let className = `${model.getClassName()}Controller`;
-            if (model.getClassName() === 'TextBoxField' && parent.model.getClassName() === 'RowForm') {
-                className = 'RowFormTextBoxFieldController';
+            if (parent.model.getClassName() === 'RowForm') {
+                if (model.getClassName() === 'TextBoxField') {
+                    className = 'RowFormTextBoxFieldController';
+                }
+                if (model.getClassName() === 'ComboBoxField') {
+                    className = 'RowFormComboBoxFieldController';
+                }
             }
             console.log('className:', className);
             obj = eval(`new ${className}(model, parent);`);
@@ -27,7 +32,7 @@ class FieldController extends ModelController {
         this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
         this.isUndefined = true;
-        this.fieldComponent = null;
+
     }
 
     init() {
@@ -233,15 +238,9 @@ class FieldController extends ModelController {
         return stringValue;
     }
 
-    onFieldViewContentCreated = c => {
-        // console.log('FieldController.onFieldViewContentCreated', c);
-        this.fieldComponent = c;
-    }
 
-    onChange2 = e => {
-        console.log('FieldController.onChange2', e);
-        console.log('component value:', this.fieldComponent.getValue());
-    }
+
+
 
     getPlaceHolder(value) {
         return null;
