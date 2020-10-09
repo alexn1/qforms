@@ -64,20 +64,21 @@ class ComboBoxFieldController extends FieldController {
     getStringValue(view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
             return this.comboBox.getValue();
-        } else {
-            return super.getStringValue(view);
         }
+        return super.getStringValue(view);
     }
 
     setValue(value, view) {
         // console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
+            throw new Error('not implemented');
+            /*
             this.isUndefined = value === undefined;
             if (value === null || value === undefined) {
                 view.firstElementChild.selectedIndex = 0;
             } else {
                 view.firstElementChild.value = value;
-            }
+            }*/
         } else if (this.model.getForm().getClassName() === 'TableForm') {
             view.firstElementChild.value = value;
             if (value) {
@@ -175,16 +176,5 @@ class ComboBoxFieldController extends FieldController {
                 }
                 break;
         }
-    }
-
-    getValue(view) {
-        if (this.model.getForm().getClassName() === 'RowForm') {
-            if (this.isUndefined) return undefined;
-            if (view.firstElementChild.selectedIndex === 0) return null;
-            return super.getValue(view);
-        } else if (this.model.getForm().getClassName() === 'TableForm') {
-            return super.getValue(view);
-        }
-        return null;
     }
 }
