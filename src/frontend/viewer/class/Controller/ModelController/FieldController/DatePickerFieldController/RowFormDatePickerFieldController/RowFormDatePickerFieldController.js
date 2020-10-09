@@ -45,5 +45,9 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getPlaceHolder() {
         return 'ДД.ММ.ГГГГ';
     }
+    getValue() {
+        if (this.isUndefined) return undefined;
+        return this.state.value;
+    }
 
 }

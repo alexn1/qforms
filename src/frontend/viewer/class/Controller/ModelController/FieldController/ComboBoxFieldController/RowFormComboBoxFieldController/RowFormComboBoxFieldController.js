@@ -32,4 +32,8 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     // getStringValue(view) {
     //     return this.comboBox.getValue();
     // }
+    getValue() {
+        if (this.isUndefined) return undefined;
+        return this.stringToValue(this.state.value);
+    }
 }

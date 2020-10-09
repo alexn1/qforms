@@ -17,6 +17,7 @@ class RowFormFieldController extends FieldController {
     }
     onChange2 = value => {
         console.log('RowFormFieldController.onChange2', value);
+        this.state.value = value;
 
         /*
         const row = this.model.getForm().getRow();
