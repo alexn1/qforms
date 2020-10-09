@@ -4,7 +4,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.dropdownDatePicker = null;
     }
     fill(row, view) {
-        this.views.set(row, view);
+        /*this.views.set(row, view);
         view.dbRow = row;
         const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
@@ -16,7 +16,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
             onChange: date => {
                 this.onChange(view);
             }
-        });
+        });*/
         // this.setValue(value, view);
         //this.setViewStyle(view, row);
     }

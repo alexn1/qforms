@@ -29,7 +29,7 @@ class ComboBoxFieldController extends FieldController {
         dataSource.off('removeRow', this.listeners.removeRow);
         dataSource.off('newRow'   , this.listeners.newRow);
         dataSource.off('moveRow'  , this.listeners.moveRow);
-        ReactDOM.unmountComponentAtNode(view);
+        // ReactDOM.unmountComponentAtNode(view);
         super.deinit();
     }
 

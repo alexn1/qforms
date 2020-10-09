@@ -21,7 +21,7 @@ class DatePickerFieldController extends FieldController {
     }
 
     deinit(row, view) {
-        ReactDOM.unmountComponentAtNode(view);
+        // ReactDOM.unmountComponentAtNode(view);
         super.deinit(row, view);
     }
 

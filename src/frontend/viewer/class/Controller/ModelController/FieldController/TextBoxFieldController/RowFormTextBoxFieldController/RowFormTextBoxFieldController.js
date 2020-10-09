@@ -5,7 +5,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         this.textBox = null;
     }
     fill(row, view) {
-        const value = this.model.getValue(row);
+        /*const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.state.value = stringValue;
@@ -17,14 +17,14 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
                 // console.log('TextBox.onChange');
                 this.onChange(view);
             }
-        });
+        });*/
         // this.setViewStyle(view, row);
     }
     isReadOnly() {
         return this.model.data.readOnly === 'true';
     }
     deinit(row, view) {
-        ReactDOM.unmountComponentAtNode(view);
+        // ReactDOM.unmountComponentAtNode(view);
         super.deinit(row, view);
     }
     setStringValue(stringValue, view) {

@@ -10,7 +10,7 @@ class TextBoxFieldController extends FieldController {
 
     fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
-            this.views.set(row, view);
+/*            this.views.set(row, view);
             view.dbRow = row;
             const value = this.model.getValue(row);
             this.isUndefined = value === undefined;
@@ -24,14 +24,14 @@ class TextBoxFieldController extends FieldController {
                     this.onChange(view);
                 }
             });
-            // this.setViewStyle(view, row);
+            // this.setViewStyle(view, row);*/
         } else {
             super.fill(row, view);
         }
     }
 
     deinit(row, view) {
-        ReactDOM.unmountComponentAtNode(view);
+        // ReactDOM.unmountComponentAtNode(view);
         super.deinit(row, view);
     }
 

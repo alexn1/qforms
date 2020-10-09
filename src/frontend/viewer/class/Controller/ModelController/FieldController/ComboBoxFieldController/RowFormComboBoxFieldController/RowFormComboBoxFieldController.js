@@ -4,7 +4,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         this.comboBox = null;
     }
     fill(row, view) {
-        const value = this.model.getValue(row);
+        /*const value = this.model.getValue(row);
         this.isUndefined = value === undefined;
         this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
             items: this.getItems(),
@@ -12,7 +12,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             onChange: value => {
                 console.log('onChange:', value);
             }
-        });
+        });*/
     }
     getItems() {
         return this.model.getComboBoxDataSource().getRows().map(row => ({
