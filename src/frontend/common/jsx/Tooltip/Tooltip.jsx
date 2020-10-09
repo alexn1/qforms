@@ -1,28 +1,16 @@
 class Tooltip extends ReactComponent {
     constructor(props) {
-        // console.log('Tooltip.constructor', props);
+        console.log('Tooltip.constructor', props);
         super(props);
-        this.state = {
-            tip   : props.tip,
-            hidden: props.hidden
-        };
-    }
-    setTipText(tip) {
-        this.setState({tip});
-    }
-    show() {
-        this.setState({hidden: false});
-    }
-    hide() {
-        this.setState({hidden: true});
     }
     render() {
+        console.log('Tooltip.render', this.state, this.props);
         return (
-            <div className={`TooltipWidget ${this.props.type} ${this.state.hidden ? 'hidden' : ''}`}>
+            <div className={`TooltipWidget ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
                 {this.props.type !== 'alert' &&
                     <div>tooltip</div>
                 }
-                <span className={this.props.position}>{this.state.tip || 'tip'}</span>
+                <span className={this.props.position}>{this.props.tip || 'tip'}</span>
             </div>
         );
     }
