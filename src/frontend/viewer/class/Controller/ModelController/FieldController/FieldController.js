@@ -185,6 +185,7 @@ class FieldController extends ModelController {
             }
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
+            return true;
         }
         const changed = this.model.isChanged(row);
         if (changed) {
