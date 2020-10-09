@@ -41,7 +41,6 @@ class DatePickerFieldController extends FieldController {
 
     getValue(view) {
         // console.log('DatePickerFieldController.getValue', this.model.getFullName());
-
         return null;
     }
 
@@ -55,9 +54,5 @@ class DatePickerFieldController extends FieldController {
     getPlaceHolder() {
         return 'ДД.ММ.ГГГГ';
     }
-
-    /*getValueForView(row) {
-        return this.model.getValue(row);
-    }*/
 
 }

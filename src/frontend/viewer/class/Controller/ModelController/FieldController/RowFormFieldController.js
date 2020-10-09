@@ -34,7 +34,10 @@ class RowFormFieldController extends FieldController {
         }
         this.parent.onFieldChange({source: this, row, field: this});
     }
-    getValueForView(row) {
+    getValueForView() {
         return this.state.value;
+    }
+    getValue() {
+        throw new Error('RowFormFieldController.getValue not implemented');
     }
 }
