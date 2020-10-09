@@ -3,17 +3,18 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         super(model, parent);
         this.comboBox = null;
     }
-    fill(row, view) {
-        /*const value = this.model.getValue(row);
-        this.isUndefined = value === undefined;
-        this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
-            items: this.getItems(),
-            value: this.valueToString(value),
-            onChange: value => {
-                console.log('onChange:', value);
-            }
-        });*/
-    }
+    // fill(row) {
+    //     console.log('RowFormComboBoxFieldController.fill', this.model.getFullName());
+    //     /*const value = this.model.getValue(row);
+    //     this.isUndefined = value === undefined;
+    //     this.comboBox = ApplicationController.createReactComponent(view, ComboBox, {
+    //         items: this.getItems(),
+    //         value: this.valueToString(value),
+    //         onChange: value => {
+    //             console.log('onChange:', value);
+    //         }
+    //     });*/
+    // }
     getItems() {
         return this.model.getComboBoxDataSource().getRows().map(row => ({
             value: this.model.getValueValue(row),

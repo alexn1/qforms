@@ -14,18 +14,16 @@ class RowFormController extends FormController {
     init() {
         super.init();
 
+        /*
         // fieldViews
         for (const name in this.model.fields) {
             const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.getName()}_${name}`);
             if (view) {
                 this.fieldViews[name] = view;
             }
-            /*this.tooltip[name] = ApplicationController.createReactComponent(this.view.querySelector(`.tooltip.${name}`), Tooltip, {
-                position: 'left',
-                type    : 'alert'
-            });*/
-        }
+        }*/
 
+        /*
         // controlViews
         for (const name in this.model.controls) {
             const view = this.view.querySelector(`.${this.model.getPage().id}_${this.model.getName()}_${name}`);
@@ -33,7 +31,7 @@ class RowFormController extends FormController {
                 continue;
             }
             this.controlViews[name] = view;
-        }
+        }*/
 
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
@@ -98,26 +96,27 @@ class RowFormController extends FormController {
 
 
     fill() {
-        // console.log('RowFormController.fill');
+        console.log('RowFormController.fill', this.model.getFullName());
         super.fill();
 
         const row = this.model.getRow();
 
         // fields
         for (const name in this.fields) {
-            const view = this.fieldViews[name];
-            if (view) {
-                this.fields[name].fill(row, view);
-            }
+            // const view = this.fieldViews[name];
+            // if (view) {
+            this.fields[name].fill(row);
+            // }
         }
 
+        /*
         // controls
         for (const name in this.controls) {
             const view = this.controlViews[name];
             if (view) {
                 this.controls[name].fill(row, view);
             }
-        }
+        }*/
     }
 
     onRowUpdate(e) {

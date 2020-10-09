@@ -10,6 +10,9 @@ class RowFormFieldController extends FieldController {
             error  : false,
         };
     }
+    fill(row) {
+        console.log('RowFormFieldController.fill', this.model.getFullName());
+    }
     onFieldViewContentCreated = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);
         this.component = c;
@@ -31,7 +34,6 @@ class RowFormFieldController extends FieldController {
         }
         this.parent.onFieldChange({source: this, row, field: this});
     }
-
     getValueForView(row) {
         return this.state.value;
     }
