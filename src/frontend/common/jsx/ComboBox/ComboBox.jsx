@@ -27,7 +27,7 @@ class ComboBox extends ReactComponent {
         // console.log('ComboBox.render', this.state.value);
         return (
             <select onChange={this.onChange} value={this.state.value} disabled={this.props.readOnly}>
-                <option value="">null</option>
+                <option value="">{ApplicationController.isInDebugMode() ? 'null' : ''}</option>
                 {this.props.items && this.props.items.map(item =>
                     <option key={item.value} value={item.value}>{item.title}</option>
                 )}
