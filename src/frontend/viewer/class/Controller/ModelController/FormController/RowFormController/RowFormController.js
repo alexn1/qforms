@@ -118,10 +118,10 @@ class RowFormController extends FormController {
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-        this.calcState();
         for (const name in this.fields) {
             this.fields[name].refill();
         }
+        this.calcState();
         this.toolbar.rerender();
         this.formGrid.rerender();
         this.parent.onFormUpdate(e);
