@@ -35,7 +35,6 @@ class FieldController extends ModelController {
         this.parent = parent;
         this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
-        this.isUndefined = true;
     }
 
     deinit(row, view) {
@@ -101,7 +100,6 @@ class FieldController extends ModelController {
 
     setValue(value, view) {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
-        this.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         this.setStringValue(stringValue, view);
         this.setPlaceHolder(view, value);
@@ -109,7 +107,6 @@ class FieldController extends ModelController {
 
     getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
-        if (this.isUndefined) return undefined;
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
         return value;
@@ -146,8 +143,6 @@ class FieldController extends ModelController {
         // const view = el.parentNode;
         if (!view.dbRow) throw new Error('no view.dbRow');
         const row = view.dbRow;
-
-        this.isUndefined = false;
         const valid = this.isValid(view);
         if (valid) {
             const value = this.getValue(view);

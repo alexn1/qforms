@@ -8,9 +8,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
         console.log(this.model.getFullName(), value);
-        this.isUndefined = value === undefined;
-        const stringValue = this.valueToString(value);
-        this.state.value = stringValue;
+        this.setValue(value);
     }
 
     // deinit(row, view) {

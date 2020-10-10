@@ -4,11 +4,12 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            value  : undefined,
+            value  : null,
             changed: false,
             error  : false,
             valid  : true
         };
+        this.isUndefined = true;
     }
     fill(row) {
         throw new Error('RowFormFieldController.fill not implemented');

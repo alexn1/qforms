@@ -7,12 +7,11 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
         console.log(this.model.getFullName(), value);
-        this.isUndefined = value === undefined;
-        this.state.value = value;
+        this.setValue(value);
     }
     setValue(value) {
-        this.state.value = value;
         this.isUndefined = value === undefined;
+        this.state.value = value;
     }
     // getPlaceHolder() {
     //     return 'ДД.ММ.ГГГГ';
