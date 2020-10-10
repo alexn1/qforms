@@ -1,13 +1,13 @@
 class RowFormFieldView extends ReactComponent {
     renderFieldViewContent() {
-        const model = this.props.model;
         const ctrl = this.props.ctrl;
+        const model = ctrl.model;
         if (model.getClassName() === 'DatePickerField') {
             return (
                 <DropdownDatePicker
                     // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
-                    readOnly={ctrl.model.isReadOnly()}
+                    readOnly={model.isReadOnly()}
                     onChange={ctrl.onChange2}
                     placeholder={ctrl.getPlaceHolder()}
                 />
@@ -18,7 +18,7 @@ class RowFormFieldView extends ReactComponent {
                 <ComboBox
                     // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
-                    readOnly={ctrl.model.isReadOnly()}
+                    readOnly={model.isReadOnly()}
                     onChange={ctrl.onChange2}
                     items={ctrl.getItems()}
                 />
@@ -28,15 +28,15 @@ class RowFormFieldView extends ReactComponent {
             <TextBox
                 // cb={ctrl.onFieldViewContentCreated}
                 value={ctrl.getValueForView()}
-                readOnly={ctrl.model.isReadOnly()}
+                readOnly={model.isReadOnly()}
                 onChange={ctrl.onChange2}
                 placeholder={ctrl.getPlaceHolder()}
             />
         );
     }
     getClassName() {
-        const model = this.props.model;
         const ctrl = this.props.ctrl;
+        const model = ctrl.model;
         return [
             'field',
             `RowForm${model.getClassName()}View`,
@@ -46,7 +46,7 @@ class RowFormFieldView extends ReactComponent {
         ].join(' ');
     }
     render() {
-        // console.log('RowFormFieldView.render', this.props.model.getClassName());
+        // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
         return (
             <div className={this.getClassName()}>{this.renderFieldViewContent()}</div>
         );

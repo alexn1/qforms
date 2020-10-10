@@ -25,7 +25,6 @@ class FormGrid extends ReactComponent {
         console.log('FormGrid.render');
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-        const row = model.getRow();
         // console.log('model:', model);
         return (
             <div className="FormGrid">
@@ -35,7 +34,7 @@ class FormGrid extends ReactComponent {
                     // console.log('fieldModel:', fieldModel);
                     return [
                         this.getFieldLabel(fieldModel),
-                        <RowFormFieldView key={`field.${fieldModel.getName()}`} model={fieldModel} ctrl={fieldCtrl} row={row}/>,
+                        <RowFormFieldView key={`field.${fieldModel.getName()}`} ctrl={fieldCtrl}/>,
                         this.getFieldTooltip(fieldModel, fieldCtrl)
                     ];
                 })}
