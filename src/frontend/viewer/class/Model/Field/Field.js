@@ -145,5 +145,12 @@ class Field extends Model {
         return this.parent.parent.parent;
     }
 
+    isReadOnly() {
+        return this.data.readOnly === 'true';
+    }
+    isNotNull() {
+        return this.data.notNull === 'true';
+    }
+
 
 }

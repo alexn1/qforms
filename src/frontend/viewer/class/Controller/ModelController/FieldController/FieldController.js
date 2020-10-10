@@ -227,11 +227,6 @@ class FieldController extends ModelController {
     }
 
     getPlaceHolder(value) {
-        return 'null';
-    }
-
-    isReadOnly() {
-        return this.model.data.readOnly === 'true';
     }
 
 }

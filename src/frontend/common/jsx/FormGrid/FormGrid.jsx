@@ -12,7 +12,7 @@ class FormGrid extends ReactComponent {
         // console.log('getFieldTooltip:', ctrl.state, !ctrl.state.error);
         return (
             <div key={`tooltip.${model.getName()}`} className={`tooltip ${model.getName()}`}>
-                <Tooltip position="left" type="alert" hidden={!ctrl.state.error}/>
+                <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
             </div>
         );
     }

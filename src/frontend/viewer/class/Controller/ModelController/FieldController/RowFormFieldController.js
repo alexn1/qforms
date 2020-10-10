@@ -7,8 +7,7 @@ class RowFormFieldController extends FieldController {
             isUndefined: true,
             value      : null,
             changed    : false,
-            error      : false,
-            valid      : true
+            error      : null
         };
     }
     init() {
@@ -52,11 +51,10 @@ class RowFormFieldController extends FieldController {
         return this.state.changed;
     }
     isValid() {
-        return this.state.valid;
+        return this.state.error === null;
     }
     validate() {
-        this.state.valid = super.isValid();
-        this.state.error = !this.state.valid;
+        this.state.error = this.getError();
     }
     checkForChange() {
         this.state.changed = super.isChanged(this.getRow());
@@ -83,5 +81,17 @@ class RowFormFieldController extends FieldController {
             } catch (err) {
             }
         }
+    }
+    getError() {
+        // console.log('FieldController.getError', this.model.getFullName());
+        try {
+            if (this.model.isNotNull()) {
+                const value = this.getValue();
+                if (value === null || value === undefined) return `not null`;
+            }
+        } catch (err) {
+            return err.message;
+        }
+        return null;
     }
 }

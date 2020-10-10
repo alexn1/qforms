@@ -1,8 +1,8 @@
 class Tooltip extends ReactComponent {
-    constructor(props) {
-        // console.log('Tooltip.constructor', props);
-        super(props);
-    }
+    // constructor(props) {
+    //     console.log('Tooltip.constructor', props);
+    //     super(props);
+    // }
     render() {
         // console.log('Tooltip.render', this.state, this.props);
         return (
