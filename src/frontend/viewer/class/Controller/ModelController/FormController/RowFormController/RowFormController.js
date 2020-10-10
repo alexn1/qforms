@@ -118,16 +118,12 @@ class RowFormController extends FormController {
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
-
         this.calcState();
-        this.toolbar.rerender();
-
         for (const name in this.fields) {
-            // const view = this.fieldViews[name];
-            // if (view) {
-                this.fields[name].refill(this.model.getRow()/*, view*/);
-            // }
+            this.fields[name].refill();
         }
+        this.toolbar.rerender();
+        this.formGrid.rerender();
         this.parent.onFormUpdate(e);
     }
 
@@ -175,8 +171,7 @@ class RowFormController extends FormController {
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            // const view = this.fieldViews[name];
-            if (/*view && */field.isChanged(row/*, view*/)) {
+            if (field.isChanged(row)) {
                 changedFields.push(field);
             }
         }
@@ -187,9 +182,7 @@ class RowFormController extends FormController {
 
         // refill changed fields
         changedFields.forEach(field => {
-            /*const name = field.model.getName();
-            const view = this.fieldViews[name];*/
-            field.refill(row/*, view*/);
+            field.refill();
         });
 
         // ui

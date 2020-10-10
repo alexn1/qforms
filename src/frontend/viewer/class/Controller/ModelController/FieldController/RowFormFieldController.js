@@ -61,8 +61,8 @@ class RowFormFieldController extends FieldController {
     checkForChange() {
         this.state.changed = super.isChanged(this.getRow());
     }
-    refill(row) {
-        const value = this.model.getValue(row);
+    refill() {
+        const value = this.model.getValue(this.getRow());
         this.setValue(value);
         this.validate();
         this.checkForChange();
