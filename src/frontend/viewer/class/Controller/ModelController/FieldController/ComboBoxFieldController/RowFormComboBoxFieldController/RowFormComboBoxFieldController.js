@@ -1,14 +1,10 @@
 class RowFormComboBoxFieldController extends RowFormFieldController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.comboBox = null;
-    }
     init() {
         // console.log('RowFormComboBoxFieldController.init', this.model.getFullName());
         const row = this.parent.model.getRow();
         const value = this.model.getValue(row);
-        console.log(this.model.getFullName(), value);
         this.setValue(value);
+        console.log(this.model.getFullName(), value);
     }
     getItems() {
         return this.model.getComboBoxDataSource().getRows().map(row => ({
@@ -22,7 +18,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     setValue(value) {
         this.state.isUndefined = value === undefined;
-        const stringValue = this.valueToString(value);
-        this.state.value = stringValue;
+        this.state.value = this.valueToString(value);
     }
 }
