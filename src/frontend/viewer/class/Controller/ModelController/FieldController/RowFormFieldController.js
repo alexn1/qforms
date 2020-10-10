@@ -35,7 +35,7 @@ class RowFormFieldController extends FieldController {
             const value = this.getValue();
             this.model.setValue(row, value);
         }
-        this.checkForChange();
+        this.updateChanged();
         this.parent.onFieldChange({source: this});
     }
     getValueForView() {
@@ -56,14 +56,15 @@ class RowFormFieldController extends FieldController {
     validate() {
         this.state.error = this.getError();
     }
-    checkForChange() {
+    updateChanged() {
         this.state.changed = super.isChanged(this.getRow());
     }
     refill() {
         const value = this.model.getValue(this.getRow());
         this.setValue(value);
-        this.validate();
-        this.checkForChange();
+        // this.validate();
+        this.state.error = null;
+        this.updateChanged();
     }
 
     getPlaceHolder() {

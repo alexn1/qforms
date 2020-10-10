@@ -156,12 +156,15 @@ class RowFormController extends FormController {
 
     async onSaveClick() {
         console.log('RowFormController.onSaveClick');
-        const valid = this.isValid();
-        // this.updateErrorClasses();
-        if (valid) {
+        for (const name in this.fields) {
+            this.fields[name].validate();
+        }
+        if (this.isValid()) {
             await this.model.update();
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
+            this.toolbar.rerender();
+            this.formGrid.rerender();
         }
     }
 
@@ -171,7 +174,7 @@ class RowFormController extends FormController {
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(row)) {
+            if (field.isChanged(row) || !field.isValid()) {
                 changedFields.push(field);
             }
         }

@@ -16,7 +16,7 @@ class Toolbar extends ReactComponent {
                             key="discardFormButton"
                             name="discardFormButton"
                             title="Discard"
-                            enabled={ctrl.state.changed}
+                            enabled={ctrl.state.changed || !ctrl.isValid()}
                             onClick={ctrl.onDiscardClick.bind(ctrl)}
                         />,
                         <Button
