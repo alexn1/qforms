@@ -128,7 +128,7 @@ class PageController extends ModelController {
     }
 
     isValid() {
-        console.log('PageController.isValid', this.model.getFullName());
+        // console.log('PageController.isValid', this.model.getFullName());
         let isValid = true;
         for (const name in this.forms) {
             if (!this.forms[name].isValid()) {
