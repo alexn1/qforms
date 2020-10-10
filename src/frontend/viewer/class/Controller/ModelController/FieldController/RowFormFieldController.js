@@ -11,6 +11,12 @@ class RowFormFieldController extends FieldController {
             valid  : true
         };
     }
+    init() {
+        const row = this.getRow();
+        const value = this.model.getValue(row);
+        this.setValue(value);
+        console.log(this.model.getFullName(), value);
+    }
     getRow() {
         return this.model.getForm().getRow();
     }
