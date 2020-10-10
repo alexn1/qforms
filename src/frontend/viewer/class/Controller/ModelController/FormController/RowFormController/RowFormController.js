@@ -133,8 +133,6 @@ class RowFormController extends FormController {
             field.refill();
         });
 
-        this.state.mode = 'view';
-
         // ui
         this.calcState();
         this.rerender();
