@@ -21,7 +21,7 @@ class DropdownDatePicker extends ReactComponent {
         // console.log('DropdownDatePicker.onCloseClick', e);
         this.setValue(null);
         if (this.props.onChange) {
-            this.props.onChange(this.getValue());
+            this.props.onChange(null);
         }
     }
     onBlur = (e) => {
@@ -40,11 +40,10 @@ class DropdownDatePicker extends ReactComponent {
         // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setValue(value);
-        this.setState({open: false}, () => {
-            if (this.props.onChange) {
-                this.props.onChange(value);
-            }
-        });
+        this.setState({open: false});
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
     }
     getStringValue() {
         if (this.getValue()) {
