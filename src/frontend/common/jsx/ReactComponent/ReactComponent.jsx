@@ -4,7 +4,7 @@ class ReactComponent extends React.Component {
         if (props.cb) props.cb(this, this.props.name);
     }
     rerender() {
-        console.log('ReactComponent.rerender');
+        console.log(`${this.constructor.name}.rerender`);
         return new Promise(resolve => this.forceUpdate(resolve));
     }
 }
