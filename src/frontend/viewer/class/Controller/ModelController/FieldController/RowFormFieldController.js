@@ -31,12 +31,12 @@ class RowFormFieldController extends FieldController {
         this.state.isUndefined = false;
         this.state.value       = value;
         this.validate();
-        this.checkForChange();
         if (this.isValid()) {
             const row = this.getRow();
             const value = this.getValue();
             this.model.setValue(row, value);
         }
+        this.checkForChange();
         this.parent.onFieldChange({source: this, field: this});
     }
     getValueForView() {
