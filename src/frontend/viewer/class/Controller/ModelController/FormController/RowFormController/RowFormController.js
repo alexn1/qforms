@@ -55,6 +55,9 @@ class RowFormController extends FormController {
         this.state.hasNew  = this.model.hasNew();
         this.state.changed = this.isChanged();
         this.state.valid   = this.isValid();
+        if (this.model.hasNew()) {
+            this.state.mode = 'edit';
+        }
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
     }
@@ -130,6 +133,8 @@ class RowFormController extends FormController {
             field.refill();
         });
 
+        this.state.mode = 'view';
+
         // ui
         this.calcState();
         this.rerender();
@@ -169,4 +174,16 @@ class RowFormController extends FormController {
         this.toolbar.rerender();
         this.formGrid.rerender();
     }
+
+    onEditClick = e => {
+        console.log('RowFormController.onEditClick', this);
+        this.state.mode = 'edit';
+        this.rerender();
+    }
+    onCancelClick = e => {
+        console.log('RowFormController.onCancelClick', this);
+        this.state.mode = 'view';
+        this.rerender();
+    }
 }
+

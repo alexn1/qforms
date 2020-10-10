@@ -9,12 +9,12 @@ class Button extends ReactComponent {
         // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return this.state.disabled;
     }
-    shouldComponentUpdate(nextProps, nextState) {
+    /*shouldComponentUpdate(nextProps, nextState) {
         if (this.props.enabled !== undefined) {
             return this.props.enabled !== nextProps.enabled;
         }
         return this.state.disabled !== nextState.disabled;
-    }
+    }*/
     /*disable() {
         // console.log('Button.disable');
         return new Promise(resolve => this.setState({disabled: true}, resolve));
@@ -47,10 +47,18 @@ class Button extends ReactComponent {
         // console.log('Button.onClick', e);
         if (this.props.onClick) this.props.onClick(e);
     }
+    isVisible() {
+        return this.props.visible;
+    }
     render() {
-        // console.log('Button.render', this.props);
+        // console.log('Button.render', this.props.title, this.props);
         return (
-            <button name={this.props.name} disabled={this.isDisabled()} onClick={this.onClick}>{this.props.title}</button>
+            <button
+                name={this.props.name}
+                disabled={this.isDisabled()}
+                onClick={this.onClick}
+                style={{display: this.isVisible() === false ? 'none' : 'inline-block'}}
+            >{this.props.title}</button>
         );
     }
 }
