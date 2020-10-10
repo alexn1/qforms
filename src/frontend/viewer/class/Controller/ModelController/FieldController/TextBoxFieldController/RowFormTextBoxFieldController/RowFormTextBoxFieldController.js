@@ -10,21 +10,15 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         console.log(this.model.getFullName(), value);
         this.setValue(value);
     }
-
     // deinit(row, view) {
     //     super.deinit(row, view);
     // }
-    setStringValue(stringValue, view) {
-        throw new Error('RowFormTextBoxFieldController.setStringValue not implemented');
-    }
     getValue() {
         if (this.state.isUndefined) return undefined;
         return this.stringToValue(this.state.value);
     }
     setValue(value) {
         this.state.isUndefined = value === undefined;
-        const stringValue = this.valueToString(value);
-        this.state.value = stringValue;
+        this.state.value = this.valueToString(value);
     }
-
 }
