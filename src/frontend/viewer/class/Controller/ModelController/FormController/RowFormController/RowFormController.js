@@ -3,10 +3,13 @@
 class RowFormController extends FormController {
     constructor(model, view, parent) {
         super(model, view, parent);
-        // this.fieldViews   = {};
-        // this.controlViews = {};
         this.toolbar = null;
-        this.state = {};
+        this.state = {
+            mode   : 'view',
+            hasNew : false,
+            changed: false,
+            valid  : true
+        };
         this.tooltip = {};
         this.formGrid = null;
     }
@@ -14,36 +17,13 @@ class RowFormController extends FormController {
     init() {
         super.init();
 
-        /*
-        // fieldViews
-        for (const name in this.model.fields) {
-            const view = this.view.querySelector(`#${this.model.getPage().id}_${this.model.getName()}_${name}`);
-            if (view) {
-                this.fieldViews[name] = view;
-            }
-        }*/
-
-        /*
-        // controlViews
-        for (const name in this.model.controls) {
-            const view = this.view.querySelector(`.${this.model.getPage().id}_${this.model.getName()}_${name}`);
-            if (view === null) {
-                continue;
-            }
-            this.controlViews[name] = view;
-        }*/
-
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
 
-        this.state.changed = false;
-        this.state.hasNew  = this.model.hasNew();
-        this.state.valid   = true;
-
+        this.calcState();
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
             ctrl: this
         });
-
         this.formGrid = ApplicationController.createReactComponent(this.view.querySelector('.formgrid'), FormGrid, {
             ctrl: this
         });
@@ -52,17 +32,13 @@ class RowFormController extends FormController {
     deinit() {
         console.log('RowFormController.deinit', this.model.getFullName());
         this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
-
         const row = this.model.getRow();
-
         for (const name in this.fields) {
-            // const view = this.fieldViews[name];
-            this.fields[name].deinit(row/*, view*/);
-            // ReactDOM.unmountComponentAtNode(this.view.querySelector(`.tooltip.${name}`));
+            this.fields[name].deinit(row);
         }
-        for (const name in this.controls) {
+        /*for (const name in this.controls) {
             this.controls[name].deinit();
-        }
+        }*/
         ReactDOM.unmountComponentAtNode(this.view.querySelector('.toolbar'));
         ReactDOM.unmountComponentAtNode(this.view.querySelector('.formgrid'));
         super.deinit();
@@ -76,8 +52,8 @@ class RowFormController extends FormController {
     }
 
     calcState() {
-        this.state.changed = this.isChanged();
         this.state.hasNew  = this.model.hasNew();
+        this.state.changed = this.isChanged();
         this.state.valid   = this.isValid();
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
@@ -93,28 +69,10 @@ class RowFormController extends FormController {
         });
     }
 
-    fill() {
-        // console.log('RowFormController.fill', this.model.getFullName());
-        super.fill();
-        // const row = this.model.getRow();
-        /*
-        // fields
-        for (const name in this.fields) {
-            // const view = this.fieldViews[name];
-            // if (view) {
-            this.fields[name].fill(row);
-            // }
-        }*/
-
-        /*
-        // controls
-        for (const name in this.controls) {
-            const view = this.controlViews[name];
-            if (view) {
-                this.controls[name].fill(row, view);
-            }
-        }*/
-    }
+    // fill() {
+    //     console.log('RowFormController.fill', this.model.getFullName());
+    //     super.fill();
+    // }
 
     onRowUpdate(e) {
         console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
@@ -127,30 +85,16 @@ class RowFormController extends FormController {
     }
 
     isValid() {
-        console.log('RowFormController.isValid', this.model.getFullName());
-        let isValid = true;
+        // console.log('RowFormController.isValid', this.model.getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
-            // const view = this.fieldViews[name];
-            // if (view) {
-                if (!field.isValid(/*view*/)) isValid = false;
-            // }
+            if (!field.isValid()) return false;
         }
-        return isValid;
+        return true;
     }
 
-    getFieldValue(name) {
-        return this.model.getFieldValue(name);
-    }
-
-    // updateErrorClasses() {
-    //     for (const name in this.fields) {
-    //         const field = this.fields[name];
-    //         const view = this.fieldViews[name];
-    //         if (view) {
-    //             field.updateErrorClass(view, field.isValid(view));
-    //         }
-    //     }
+    // getFieldValue(name) {
+    //     return this.model.getFieldValue(name);
     // }
 
     async onSaveClick() {
@@ -200,13 +144,12 @@ class RowFormController extends FormController {
     }
 
     isChanged() {
-        console.log('RowFormController.isChanged', this.model.getFullName());
+        // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged()) return true;
         const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            // const view = this.fieldViews[name];
-            if (field.isChanged(row/*, view*/)) return true;
+            if (field.isChanged(row)) return true;
         }
         return false;
     }

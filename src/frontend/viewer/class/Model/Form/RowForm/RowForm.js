@@ -22,9 +22,9 @@ class RowForm extends Form {
         this.fillParams(this.getRow());
     }
 
-    getFieldValue(name) {
-        return this.fields[name].getValue(this.getRow());
-    }
+    // getFieldValue(name) {
+    //     return this.fields[name].getValue(this.getRow());
+    // }
 
     getRow() {
         return this.getDataSource().getSingleRow();

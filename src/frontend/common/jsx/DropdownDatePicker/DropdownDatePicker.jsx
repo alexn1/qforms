@@ -3,13 +3,13 @@ class DropdownDatePicker extends ReactComponent {
         // console.log('DropdownDatePicker.constructor', props);
         super(props);
         this.state = {
-            open : false
+            open : false,
+            value: props.value || null,
         };
         if (props.value && !(props.value instanceof Date)) {
             throw new Error('need date type');
         }
         this._state = {
-            value  : props.value || null,
             minDate: props.oldDates === false ? DatePicker.getTodayArr() : null
         };
     }
@@ -19,7 +19,7 @@ class DropdownDatePicker extends ReactComponent {
     }
     onCloseClick = async (e) => {
         // console.log('DropdownDatePicker.onCloseClick', e);
-        this.setValue(null);
+        this.setState({value: null});
         if (this.props.onChange) {
             this.props.onChange(null);
         }
@@ -39,8 +39,7 @@ class DropdownDatePicker extends ReactComponent {
     onDatePickerDateSelected = (date) => {
         // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
-        this.setValue(value);
-        this.setState({open: false});
+        this.setState({open: false, value});
         if (this.props.onChange) {
             this.props.onChange(value);
         }
@@ -70,16 +69,17 @@ class DropdownDatePicker extends ReactComponent {
         return null;
     }
     getValue() {
-        return this._state.value;
+        return this.state.value;
     }
-    setValue(value) {
+    /*setValue(value) {
         // console.log('DropdownDatePicker.setValue', value);
-        this._state.value = value;
-        this.rerender();
-    }
+        // this._state.value = value;
+        this.setState({value});
+        // this.rerender();
+    }*/
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        this._state.value = nextProps.value;
+        this.state.value = nextProps.value;
         return true;
     }
     render() {

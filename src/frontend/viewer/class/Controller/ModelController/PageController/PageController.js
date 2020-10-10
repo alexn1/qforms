@@ -86,10 +86,10 @@ class PageController extends ModelController {
     close() {
         console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
-        console.log('changed:', changed);
+        // console.log('changed:', changed);
         const valid = this.isValid();
-        console.log('valid:', valid);
-        if (changed/* || !valid*/) {
+        // console.log('valid:', valid);
+        if (changed) {
             const result = confirm(this.model.getApp().data.text.form.areYouSure);
             if (!result) return;
         }
@@ -174,7 +174,7 @@ class PageController extends ModelController {
     }
 
     isChanged() {
-        console.log('PageController.isChanged', this.model.getFullName());
+        // console.log('PageController.isChanged', this.model.getFullName());
         for (const name in this.forms) {
             const form = this.forms[name];
             if (form.isChanged()) {
