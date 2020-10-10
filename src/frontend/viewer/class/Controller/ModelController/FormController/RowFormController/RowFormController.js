@@ -19,7 +19,6 @@ class RowFormController extends FormController {
 
         // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
-
         this.calcState();
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
             ctrl: this
@@ -82,6 +81,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].refill();
         }
+        this.state.mode = 'view';
         this.calcState();
         this.rerender();
         this.parent.onFormUpdate(e);

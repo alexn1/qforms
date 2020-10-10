@@ -15,6 +15,14 @@ class Toolbar extends ReactComponent {
                             width={width}
                         />,
                         <Button
+                            key="save"
+                            title="Save"
+                            enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
+                            onClick={ctrl.onSaveClick.bind(ctrl)}
+                            visible={ctrl.state.mode === 'edit'}
+                            width={width}
+                        />,
+                        <Button
                             key="cancel"
                             title="Cancel"
                             visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
@@ -27,14 +35,6 @@ class Toolbar extends ReactComponent {
                             enabled={ctrl.state.changed || !ctrl.isValid()}
                             onClick={ctrl.onDiscardClick.bind(ctrl)}
                             visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
-                            width={width}
-                        />,
-                        <Button
-                            key="save"
-                            title="Save"
-                            enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
-                            onClick={ctrl.onSaveClick.bind(ctrl)}
-                            visible={ctrl.state.mode === 'edit'}
                             width={width}
                         />,
                         <Button
