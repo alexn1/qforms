@@ -15,15 +15,15 @@ class Button extends ReactComponent {
         }
         return this.state.disabled !== nextState.disabled;
     }
-    disable() {
+    /*disable() {
         // console.log('Button.disable');
         return new Promise(resolve => this.setState({disabled: true}, resolve));
-    }
-    enable() {
+    }*/
+    /*enable() {
         // console.log('Button.enable');
         return new Promise(resolve => this.setState({disabled: false}, resolve));
-    }
-    setDisabled(value) {
+    }*/
+    /*setDisabled(value) {
         if (typeof value !== 'boolean') throw new Error('value must be boolean');
         return new Promise(resolve => {
             if (this.state.disabled === value) {
@@ -32,8 +32,8 @@ class Button extends ReactComponent {
                 this.setState({disabled: value}, resolve)
             }
         });
-    }
-    setEnabled(value) {
+    }*/
+    /*setEnabled(value) {
         if (typeof value !== 'boolean') throw new Error('value must be boolean');
         return new Promise(resolve => {
             if (this.state.disabled === !value) {
@@ -42,7 +42,7 @@ class Button extends ReactComponent {
                 this.setState({disabled: !value}, resolve)
             }
         });
-    }
+    }*/
     onClick = e => {
         // console.log('Button.onClick', e);
         if (this.props.onClick) this.props.onClick(e);
