@@ -71,7 +71,7 @@ class RowFormFieldController extends FieldController {
     getPlaceHolder() {
         // console.log('RowFormFieldController.getPlaceHolder', this.model.getFullName());
         if (ApplicationController.isInDebugMode()) {
-            const value = this.model.getValue(this.getRow());
+            const value = this.getValue();
             if (value === undefined) {
                 return 'undefined';
             } else if (value === null) {
