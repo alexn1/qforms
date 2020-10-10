@@ -25,15 +25,14 @@ class RowFormFieldController extends FieldController {
         this.state.isUndefined = false;
         this.state.value = value;
 
-        const row = this.getRow();
         this.validate();
-        this.checkForChange(row);
-
+        this.checkForChange();
         if (this.isValid()) {
+            const row = this.getRow();
             const value = this.getValue();
             this.model.setValue(row, value);
         }
-        this.parent.onFieldChange({source: this, row, field: this});
+        this.parent.onFieldChange({source: this, field: this});
     }
     getValueForView() {
         return this.state.value;
@@ -54,14 +53,14 @@ class RowFormFieldController extends FieldController {
         this.state.valid = super.isValid();
         this.state.error = !this.state.valid;
     }
-    checkForChange(row) {
-        this.state.changed = super.isChanged(row);
+    checkForChange() {
+        this.state.changed = super.isChanged(this.getRow());
     }
     refill(row) {
         const value = this.model.getValue(row);
         this.setValue(value);
         this.validate();
-        this.checkForChange(row);
+        this.checkForChange();
     }
 
     getPlaceHolder() {
