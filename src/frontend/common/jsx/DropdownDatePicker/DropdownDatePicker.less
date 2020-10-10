@@ -1,6 +1,10 @@
 .DropdownDatePicker {
   position: relative;
   display: inline-block;
+  &.readOnly > input {
+    background-color: lightgoldenrodyellow;
+    color: gray;
+  }
   > input {
     /*background-color: #3498DB;*/
     /*color: white;*/

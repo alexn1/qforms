@@ -7,7 +7,7 @@ class RowFormField extends ReactComponent {
                 <DropdownDatePicker
                     // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
-                    readOnly={model.isReadOnly()}
+                    readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange2}
                     placeholder={ctrl.getPlaceHolder()}
                 />
@@ -18,7 +18,7 @@ class RowFormField extends ReactComponent {
                 <ComboBox
                     // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
-                    readOnly={model.isReadOnly()}
+                    readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange2}
                     items={ctrl.getItems()}
                 />
@@ -28,7 +28,7 @@ class RowFormField extends ReactComponent {
             <TextBox
                 // cb={ctrl.onFieldViewContentCreated}
                 value={ctrl.getValueForView()}
-                readOnly={model.isReadOnly()}
+                readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange2}
                 placeholder={ctrl.getPlaceHolder()}
             />

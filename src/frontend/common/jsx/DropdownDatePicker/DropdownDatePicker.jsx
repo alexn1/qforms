@@ -15,6 +15,7 @@ class DropdownDatePicker extends ReactComponent {
     }
     onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
+        if (this.props.readOnly) return;
         this.setState(prevState => ({open: !prevState.open}));
     }
     onCloseClick = async (e) => {
@@ -85,9 +86,9 @@ class DropdownDatePicker extends ReactComponent {
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
         return (
-            <div className="DropdownDatePicker">
+            <div className={`DropdownDatePicker ${this.props.readOnly ? 'readOnly' : ''}`}>
                 <input readOnly onClick={this.onInputClick} onBlur={this.onBlur} value={this.getStringValue()} placeholder={this.props.placeholder}/>
-                <div className={`close ${this.getStringValue() !== '' ? 'visible' : ''}`} onClick={this.onCloseClick}>
+                <div className={`close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onClick={this.onCloseClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
                               strokeMiterlimit="10"></line>

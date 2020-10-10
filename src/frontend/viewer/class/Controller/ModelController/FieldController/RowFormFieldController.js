@@ -95,4 +95,7 @@ class RowFormFieldController extends FieldController {
         }
         return null;
     }
+    isEditable() {
+        return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
+    }
 }
