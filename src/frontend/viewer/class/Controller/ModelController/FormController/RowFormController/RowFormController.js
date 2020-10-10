@@ -122,8 +122,7 @@ class RowFormController extends FormController {
             this.fields[name].refill();
         }
         this.calcState();
-        this.toolbar.rerender();
-        this.formGrid.rerender();
+        this.rerender();
         this.parent.onFormUpdate(e);
     }
 
@@ -163,8 +162,7 @@ class RowFormController extends FormController {
             await this.model.update();
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
-            this.toolbar.rerender();
-            this.formGrid.rerender();
+            this.rerender();
         }
     }
 
@@ -190,8 +188,7 @@ class RowFormController extends FormController {
 
         // ui
         this.calcState();
-        this.toolbar.rerender();
-        this.formGrid.rerender();
+        this.rerender();
 
         // event
         this.parent.onFormDiscard(this);
@@ -217,12 +214,16 @@ class RowFormController extends FormController {
     onFieldChange(e) {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
         this.calcState();
-        this.toolbar.rerender();
-        this.formGrid.rerender();
+        this.rerender();
         super.onFieldChange(e);
     }
 
     async onActionClick(action, row) {
         console.log('RowFormController.onActionClick', action, row);
+    }
+
+    rerender() {
+        this.toolbar.rerender();
+        this.formGrid.rerender();
     }
 }
