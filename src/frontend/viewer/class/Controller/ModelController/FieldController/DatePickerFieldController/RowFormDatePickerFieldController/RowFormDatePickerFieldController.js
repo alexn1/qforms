@@ -10,14 +10,14 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.setValue(value);
     }
     setValue(value) {
-        this.isUndefined = value === undefined;
+        this.state.isUndefined = value === undefined;
         this.state.value = value;
     }
     // getPlaceHolder() {
     //     return 'ДД.ММ.ГГГГ';
     // }
     getValue() {
-        if (this.isUndefined) return undefined;
+        if (this.state.isUndefined) return undefined;
         return this.state.value;
     }
 

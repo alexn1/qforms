@@ -4,12 +4,12 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
+            isUndefined: true,
             value  : null,
             changed: false,
             error  : false,
             valid  : true
         };
-        this.isUndefined = true;
     }
     fill(row) {
         throw new Error('RowFormFieldController.fill not implemented');
@@ -19,7 +19,7 @@ class RowFormFieldController extends FieldController {
     }
     onChange2 = value => {
         console.log('RowFormFieldController.onChange2', value);
-        this.isUndefined = false;
+        this.state.isUndefined = false;
         this.state.value = value;
 
         const row = this.model.getForm().getRow();
