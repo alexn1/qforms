@@ -1,5 +1,5 @@
-class RowFormFieldView extends ReactComponent {
-    renderFieldViewContent() {
+class RowFormField extends ReactComponent {
+    renderFieldView() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         if (model.getClassName() === 'DatePickerField') {
@@ -46,9 +46,9 @@ class RowFormFieldView extends ReactComponent {
         ].join(' ');
     }
     render() {
-        // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
+        // console.log('RowFormField.render', this.props.ctrl.model.getClassName());
         return (
-            <div className={this.getClassName()}>{this.renderFieldViewContent()}</div>
+            <div className={this.getClassName()}>{this.renderFieldView()}</div>
         );
     }
 }

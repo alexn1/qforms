@@ -29,7 +29,7 @@ class FormGrid extends ReactComponent {
                     // console.log('fieldModel:', fieldModel);
                     return [
                         this.getFieldLabel(fieldModel),
-                        <RowFormFieldView key={`field.${fieldModel.getName()}`} ctrl={fieldCtrl}/>,
+                        <RowFormField key={`field.${fieldModel.getName()}`} ctrl={fieldCtrl}/>,
                         this.getFieldTooltip(fieldModel, fieldCtrl)
                     ];
                 })}
