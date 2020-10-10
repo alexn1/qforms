@@ -2,6 +2,7 @@ class Toolbar extends ReactComponent {
     render() {
         console.log('Toolbar.render', this.props, this.props.ctrl.state.mode === 'view');
         const ctrl = this.props.ctrl;
+        const width = '90px';
         return (
             <div className="Toolbar">
                 {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
@@ -11,12 +12,14 @@ class Toolbar extends ReactComponent {
                             title="Edit"
                             onClick={ctrl.onEditClick}
                             visible={ctrl.state.mode === 'view'}
+                            width={width}
                         />,
                         <Button
                             key="cancel"
                             title="Cancel"
                             visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                             onClick={ctrl.onCancelClick}
+                            width={width}
                         />,
                         <Button
                             key="discard"
@@ -24,6 +27,7 @@ class Toolbar extends ReactComponent {
                             enabled={ctrl.state.changed || !ctrl.isValid()}
                             onClick={ctrl.onDiscardClick.bind(ctrl)}
                             visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
+                            width={width}
                         />,
                         <Button
                             key="save"
@@ -31,6 +35,7 @@ class Toolbar extends ReactComponent {
                             enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                             onClick={ctrl.onSaveClick.bind(ctrl)}
                             visible={ctrl.state.mode === 'edit'}
+                            width={width}
                         />,
                         <Button
                             key="refresh"
@@ -38,6 +43,7 @@ class Toolbar extends ReactComponent {
                             enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                             onClick={ctrl.onRefresh.bind(ctrl)}
                             visible={ctrl.state.mode === 'view'}
+                            width={width}
                         />
                     ]
                 }

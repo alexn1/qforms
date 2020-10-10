@@ -57,7 +57,10 @@ class Button extends ReactComponent {
                 name={this.props.name}
                 disabled={this.isDisabled()}
                 onClick={this.onClick}
-                style={{display: this.isVisible() === false ? 'none' : 'inline-block'}}
+                style={{
+                    display: this.isVisible() === false ? 'none' : 'inline-block',
+                    width: this.props.width
+                }}
             >{this.props.title}</button>
         );
     }
