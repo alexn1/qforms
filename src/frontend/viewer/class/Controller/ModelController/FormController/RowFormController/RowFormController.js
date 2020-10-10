@@ -44,7 +44,7 @@ class RowFormController extends FormController {
             ctrl: this
         });
 
-        this.formGrid = ApplicationController.createReactComponent(this.view.querySelector('.grid2'), FormGrid, {
+        this.formGrid = ApplicationController.createReactComponent(this.view.querySelector('.formgrid'), FormGrid, {
             ctrl: this
         });
     }
@@ -64,7 +64,7 @@ class RowFormController extends FormController {
             this.controls[name].deinit();
         }
         ReactDOM.unmountComponentAtNode(this.view.querySelector('.toolbar'));
-        ReactDOM.unmountComponentAtNode(this.view.querySelector('.grid2'));
+        ReactDOM.unmountComponentAtNode(this.view.querySelector('.formgrid'));
         super.deinit();
     }
 

@@ -1,5 +1,4 @@
 class FormGrid extends ReactComponent {
-
     getFieldLabel(model) {
         return (
             <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
@@ -25,7 +24,7 @@ class FormGrid extends ReactComponent {
             <div className="FormGrid">
                 {Object.keys(model.fields).map(name => {
                     const fieldModel = model.fields[name];
-                    const fieldCtrl = ctrl.fields[name];
+                    const fieldCtrl  = ctrl.fields[name];
                     // console.log('fieldModel:', fieldModel);
                     return [
                         this.getFieldLabel(fieldModel),
