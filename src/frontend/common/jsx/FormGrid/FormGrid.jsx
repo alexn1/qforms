@@ -4,23 +4,18 @@ class FormGrid extends ReactComponent {
         return (
             <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
                 {model.data.caption}:
-                {model.data.notNull === 'true' && <span style={{color: 'red'}}>*</span>}
+                {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
             </div>
         );
     }
     getFieldTooltip(model, ctrl) {
-        // console.log('getFieldTooltip:', ctrl.state, !ctrl.state.error);
+        // console.log('getFieldTooltip:', ctrl.state);
         return (
             <div key={`tooltip.${model.getName()}`} className={`tooltip ${model.getName()}`}>
                 <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
             </div>
         );
     }
-    // isHidden() {
-    //     if (this.state) {
-    //
-    //     }
-    // }
     render() {
         console.log('FormGrid.render');
         const ctrl = this.props.ctrl;
