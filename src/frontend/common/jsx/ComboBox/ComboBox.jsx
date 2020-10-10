@@ -2,15 +2,15 @@ class ComboBox extends ReactComponent {
     constructor(props) {
         super(props);
         this.state  = {value: props.value || ''};
-        this._state = {value: props.value || ''};
+        // this._state = {value: props.value || ''};
     }
     setValue(value) {
-        this._state.value = value;
+        // this._state.value = value;
         this.setState({value});
     }
-    getValue() {
+    /*getValue() {
         return this._state.value;
-    }
+    }*/
     onChange = e => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setValue(e.target.value);
