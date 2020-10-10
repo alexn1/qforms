@@ -85,9 +85,9 @@ class RowFormFieldController extends FieldController {
     getError() {
         // console.log('FieldController.getError', this.model.getFullName());
         try {
-            if (this.model.isNotNull()) {
-                const value = this.getValue();
-                if (value === null || value === undefined) return `not null`;
+            const value = this.getValue();      // try to get value
+            if (this.model.isNotNull() && (value === null || value === undefined)) {
+                return `not null`;
             }
         } catch (err) {
             return err.message;
