@@ -11,6 +11,9 @@ class RowFormFieldController extends FieldController {
             valid  : true
         };
     }
+    getRow() {
+        return this.model.getForm().getRow();
+    }
     fill(row) {
         throw new Error('RowFormFieldController.fill not implemented');
     }
@@ -22,7 +25,7 @@ class RowFormFieldController extends FieldController {
         this.state.isUndefined = false;
         this.state.value = value;
 
-        const row = this.model.getForm().getRow();
+        const row = this.getRow();
         this.validate();
         this.checkForChange(row);
 
