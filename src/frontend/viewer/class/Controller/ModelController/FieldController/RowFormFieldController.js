@@ -5,10 +5,10 @@ class RowFormFieldController extends FieldController {
         super(model, parent);
         this.state = {
             isUndefined: true,
-            value  : null,
-            changed: false,
-            error  : false,
-            valid  : true
+            value      : null,
+            changed    : false,
+            error      : false,
+            valid      : true
         };
     }
     init() {
@@ -30,7 +30,6 @@ class RowFormFieldController extends FieldController {
         console.log('RowFormFieldController.onChange2', value);
         this.state.isUndefined = false;
         this.state.value = value;
-
         this.validate();
         this.checkForChange();
         if (this.isValid()) {

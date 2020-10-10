@@ -2,11 +2,10 @@ class RowFormFieldView extends ReactComponent {
     renderFieldViewContent() {
         const model = this.props.model;
         const ctrl = this.props.ctrl;
-
         if (model.getClassName() === 'DatePickerField') {
             return (
                 <DropdownDatePicker
-                    cb={ctrl.onFieldViewContentCreated}
+                    // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
                     readOnly={ctrl.isReadOnly()}
                     onChange={ctrl.onChange2}
@@ -17,7 +16,7 @@ class RowFormFieldView extends ReactComponent {
         if (model.getClassName() === 'ComboBoxField') {
             return (
                 <ComboBox
-                    cb={ctrl.onFieldViewContentCreated}
+                    // cb={ctrl.onFieldViewContentCreated}
                     value={ctrl.getValueForView()}
                     readOnly={ctrl.isReadOnly()}
                     onChange={ctrl.onChange2}
@@ -27,7 +26,7 @@ class RowFormFieldView extends ReactComponent {
         }
         return (
             <TextBox
-                cb={ctrl.onFieldViewContentCreated}
+                // cb={ctrl.onFieldViewContentCreated}
                 value={ctrl.getValueForView()}
                 readOnly={ctrl.isReadOnly()}
                 onChange={ctrl.onChange2}
@@ -35,15 +34,21 @@ class RowFormFieldView extends ReactComponent {
             />
         );
     }
-    render() {
-        // console.log('RowFormFieldView.render', this.props.model.getClassName());
+    getClassName() {
         const model = this.props.model;
         const ctrl = this.props.ctrl;
+        return [
+            'field',
+            `RowForm${model.getClassName()}View`,
+            model.getName(),
+            ...(ctrl.state.changed ? ['changed'] : []),
+            ...(ctrl.state.error ? ['error'] : [])
+        ].join(' ');
+    }
+    render() {
+        // console.log('RowFormFieldView.render', this.props.model.getClassName());
         return (
-            <div
-                className={`field RowForm${model.getClassName()}View ${model.getName()} ${ctrl.state.changed ? 'changed' : ''} ${ctrl.state.error ? 'error' : ''}`}>
-                {this.renderFieldViewContent()}
-            </div>
+            <div className={this.getClassName()}>{this.renderFieldViewContent()}</div>
         );
     }
 }
