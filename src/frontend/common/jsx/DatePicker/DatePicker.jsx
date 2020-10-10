@@ -22,25 +22,8 @@ class DatePicker extends ReactComponent {
         if (this.props.minDate) dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
         if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
         if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
-
-        const ts = Math.min(...dates);
         const date = new Date(Math.min(...dates));
         return [date.getFullYear(), date.getMonth()];
-
-        /*
-        if (this.isMinDate()) {
-            if (this.props.selectedMonth) {
-                const firstDayOfMinDateMonth = new Date(this.props.minDate[0], this.props.minDate[1], 1);
-                const firstDayOfSelectedMonth = new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1);
-                if (firstDayOfMinDateMonth.getTime() > firstDayOfSelectedMonth.getTime()) {
-                    return [this.props.minDate[0], this.props.minDate[1]];
-                }
-                return JSON.parse(JSON.stringify(this.props.selectedMonth));
-            }
-            return [this.props.minDate[0], this.props.minDate[1]];
-        }
-        const today = DatePicker.getToday();
-        return this.props.selectedMonth ? JSON.parse(JSON.stringify(this.props.selectedMonth)) : [today.getFullYear(), today.getMonth()];*/
     }
 
     static getToday() {
