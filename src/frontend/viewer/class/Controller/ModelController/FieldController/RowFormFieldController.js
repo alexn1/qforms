@@ -15,7 +15,7 @@ class RowFormFieldController extends FieldController {
         const row = this.getRow();
         const value = this.model.getValue(row);
         this.setValue(value);
-        console.log(this.model.getFullName(), value);
+        // console.log(this.model.getFullName(), value);
     }
     getRow() {
         return this.model.getForm().getRow();
@@ -29,7 +29,7 @@ class RowFormFieldController extends FieldController {
     onChange2 = value => {
         console.log('RowFormFieldController.onChange2', value);
         this.state.isUndefined = false;
-        this.state.value = value;
+        this.state.value       = value;
         this.validate();
         this.checkForChange();
         if (this.isValid()) {
@@ -70,9 +70,8 @@ class RowFormFieldController extends FieldController {
 
     getPlaceHolder() {
         // console.log('RowFormFieldController.getPlaceHolder', this.model.getFullName());
-        const row = this.model.getForm().getRow();
-        const value = this.model.getValue(row);
         if (ApplicationController.isInDebugMode()) {
+            const value = this.model.getValue(this.getRow());
             if (value === undefined) {
                 return 'undefined';
             } else if (value === null) {
