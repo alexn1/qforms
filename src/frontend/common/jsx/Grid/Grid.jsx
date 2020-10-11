@@ -12,8 +12,8 @@ class Grid extends ReactComponent {
     isCellActive(i, j) {
         return i === this.state.row && j === this.state.column;
     }
-    onCellClick = e => {
-        // console.log('Grid.onCellClick', e.currentTarget.dataset);
+    onCellMouseDown = e => {
+        // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         this.setState({row: i, column: j});
     }
@@ -23,8 +23,8 @@ class Grid extends ReactComponent {
         const row = this.props.rows[i];
         console.log('row:', row);
     }
-    onRowClick = e => {
-        // console.log('Grid.onRowClick', e.currentTarget.dataset);
+    onRowMouseDown = e => {
+        // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
         const i = parseInt(e.currentTarget.dataset.r);
         this.setState({row: i});
     }
@@ -52,14 +52,16 @@ class Grid extends ReactComponent {
                         style={{width: `${column.width}px`}}
                         className={`${this.isCellActive(i, j) ? 'active' : ''}`}
                         data-rc={`[${i},${j}]`}
-                        onClick={this.onCellClick}
+                        onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <div>{row[column.name]}</div>
+                        <div className="TableFormTextBoxFieldView">
+                            <span>{row[column.name]}</span>
+                        </div>
                     </td>)}
                 <td
                     data-r={i}
-                    onClick={this.onRowClick}
+                    onMouseDown={this.onRowMouseDown}
                     onDoubleClick={this.onRowDoubleClick}
 
                 />

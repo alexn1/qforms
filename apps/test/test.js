@@ -190,6 +190,8 @@ class testController extends ApplicationController {
             rows: [
                 {id: 1, title: 'abc'},
                 {id: 2, title: 'xyz'},
+                {id: 3, title: '123'},
+                {id: 4, title: '098'},
             ]
         });
 
