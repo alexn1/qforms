@@ -40,17 +40,20 @@ class Grid extends ReactComponent {
             <span className="resize"></span>
         </td>);
     }
+    renderRows() {
+        return this.props.rows.map((row, i) => this.renderRow(row, i));
+    }
     renderRow(row, i) {
         return (
             <tr
                 key={row[this.props.options.keyColumn].toString()}
-                className={`${this.isRowActive(i) ? 'active' : ''}`}
+                className={this.isRowActive(i) ? 'active' : undefined}
             >
                 {this.props.columns.map((column, j) =>
                     <td
                         key={column.name}
                         style={{width: `${column.width}px`}}
-                        className={`${this.isCellActive(i, j) ? 'active' : ''}`}
+                        className={this.isCellActive(i, j) ? 'active' : undefined}
                         data-rc={`[${i},${j}]`}
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
@@ -63,7 +66,6 @@ class Grid extends ReactComponent {
                     data-r={i}
                     onMouseDown={this.onRowMouseDown}
                     onDoubleClick={this.onRowDoubleClick}
-
                 />
             </tr>
         );
@@ -85,7 +87,7 @@ class Grid extends ReactComponent {
                 <div className="body">
                     <table>
                         <tbody>
-                            {this.props.rows.map((row, i) => this.renderRow(row, i))}
+                            {this.renderRows()}
                         </tbody>
                     </table>
                 </div>
