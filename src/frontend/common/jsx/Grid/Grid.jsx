@@ -6,23 +6,39 @@ class Grid extends ReactComponent {
             row: 0
         };
     }
-    renderColumns() {
-        return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
-            <div>{column.title}</div>
-            <span className="resize"></span>
-        </td>);
-    }
     isRowActive(i) {
         return i === this.state.row;
     }
     isCellActive(i, j) {
         return i === this.state.row && j === this.state.column;
     }
+    onCellClick = e => {
+        console.log('Grid.onCellClick', e.currentTarget.dataset);
+        const rc = e.currentTarget.dataset.rc;
+        const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+        console.log(i, j);
+        this.setState({row: i, column: j});
+    }
+    renderColumns() {
+        return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
+            <div>{column.title}</div>
+            <span className="resize"></span>
+        </td>);
+    }
     renderRow(row, i) {
         return (
-            <tr key={row[this.props.options.keyColumn].toString()} className={`${this.isRowActive(i) ? 'active' : ''}`}>
+            <tr
+                key={row[this.props.options.keyColumn].toString()}
+                className={`${this.isRowActive(i) ? 'active' : ''}`}
+            >
                 {this.props.columns.map((column, j) =>
-                    <td key={column.name} style={{width: `${column.width}px`}} className={`${this.isCellActive(i, j) ? 'active' : ''}`}>
+                    <td
+                        key={column.name}
+                        style={{width: `${column.width}px`}}
+                        className={`${this.isCellActive(i, j) ? 'active' : ''}`}
+                        onClick={this.onCellClick}
+                        data-rc={`[${i},${j}]`}
+                    >
                         <div>{row[column.name]}</div>
                     </td>)}
                 <td></td>
