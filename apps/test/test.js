@@ -101,7 +101,7 @@ class testController extends ApplicationController {
 
         // tooltipAlertTop
         const tooltipAlertTop = ApplicationController.createReactComponent(this.view.querySelector('#tooltipAlertTop'), Tooltip, {position: 'top', type: 'alert', hidden: false});
-        tooltipAlertTop.setTipText('hello world');
+        // tooltipAlertTop.setTipText('hello world');
         // setTimeout(() => tooltip.show(), 1000);
 
         // datepicker
@@ -175,6 +175,10 @@ class testController extends ApplicationController {
             onChange: value => {
                 console.log('onChange', value);
             }
+        });
+
+        const grid = ApplicationController.createReactComponent(this.view.querySelector('#grid'), Grid, {
+
         });
 
 
