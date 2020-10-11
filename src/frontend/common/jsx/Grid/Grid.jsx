@@ -1,4 +1,34 @@
 class Grid extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            column: 1,
+            row: 0
+        };
+    }
+    renderColumns() {
+        return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
+            <div>{column.title}</div>
+            <span className="resize"></span>
+        </td>);
+    }
+    isRowActive(i) {
+        return i === this.state.row;
+    }
+    isCellActive(i, j) {
+        return i === this.state.row && j === this.state.column;
+    }
+    renderRow(row, i) {
+        return (
+            <tr key={row[this.props.options.keyColumn].toString()} className={`${this.isRowActive(i) ? 'active' : ''}`}>
+                {this.props.columns.map((column, j) =>
+                    <td key={column.name} style={{width: `${column.width}px`}} className={`${this.isCellActive(i, j) ? 'active' : ''}`}>
+                        <div>{row[column.name]}</div>
+                    </td>)}
+                <td></td>
+            </tr>
+        );
+    }
     render() {
         return (
             <div className="Grid">
@@ -6,77 +36,17 @@ class Grid extends ReactComponent {
                     <table>
                         <tbody>
                             <tr>
-                                <td style={{width: '100px'}}>
-                                    <div>id</div>
-                                    <span className="resize"></span>
-                                </td>
-                                <td style={{width: '100px'}}>
-                                    <div>created</div>
-                                    <span className="resize"></span>
-                                </td>
+                                {this.renderColumns()}
                                 <td></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div className="block"></div>
+                <div className="block"/>
                 <div className="body">
                     <table>
                         <tbody>
-                            <tr>
-                                <td style={{width: '100px'}}>
-                                    <div>1</div>
-                                </td>
-                                <td style={{width: '100px'}}>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr className="active">
-                                <td className="active">
-                                    <div>1</div>
-                                </td>
-                                <td>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>1</div>
-                                </td>
-                                <td>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>1</div>
-                                </td>
-                                <td>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>1</div>
-                                </td>
-                                <td>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>1</div>
-                                </td>
-                                <td>
-                                    <div>2</div>
-                                </td>
-                                <td></td>
-                            </tr>
+                            {this.props.rows.map((row, i) => this.renderRow(row, i))}
                         </tbody>
                     </table>
                 </div>
