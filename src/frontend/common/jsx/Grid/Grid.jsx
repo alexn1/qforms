@@ -13,11 +13,14 @@ class Grid extends ReactComponent {
         return i === this.state.row && j === this.state.column;
     }
     onCellClick = e => {
-        console.log('Grid.onCellClick', e.currentTarget.dataset);
-        const rc = e.currentTarget.dataset.rc;
+        // console.log('Grid.onCellClick', e.currentTarget.dataset);
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-        console.log(i, j);
         this.setState({row: i, column: j});
+    }
+    onRowClick = e => {
+        // console.log('Grid.onRowClick', e.currentTarget.dataset);
+        const i = parseInt(e.currentTarget.dataset.r);
+        this.setState({row: i});
     }
     renderColumns() {
         return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
@@ -41,7 +44,7 @@ class Grid extends ReactComponent {
                     >
                         <div>{row[column.name]}</div>
                     </td>)}
-                <td></td>
+                <td onClick={this.onRowClick} data-r={i}></td>
             </tr>
         );
     }
