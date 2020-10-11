@@ -17,10 +17,22 @@ class Grid extends ReactComponent {
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         this.setState({row: i, column: j});
     }
+    onCellDoubleClick = e => {
+        // console.log('Grid.onCellDoubleClick');
+        const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+        const row = this.props.rows[i];
+        console.log('row:', row);
+    }
     onRowClick = e => {
         // console.log('Grid.onRowClick', e.currentTarget.dataset);
         const i = parseInt(e.currentTarget.dataset.r);
         this.setState({row: i});
+    }
+    onRowDoubleClick = e => {
+        // console.log('Grid.onRowDoubleClick');
+        const i = parseInt(e.currentTarget.dataset.r);
+        const row = this.props.rows[i];
+        console.log('row:', row);
     }
     renderColumns() {
         return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
@@ -39,12 +51,18 @@ class Grid extends ReactComponent {
                         key={column.name}
                         style={{width: `${column.width}px`}}
                         className={`${this.isCellActive(i, j) ? 'active' : ''}`}
-                        onClick={this.onCellClick}
                         data-rc={`[${i},${j}]`}
+                        onClick={this.onCellClick}
+                        onDoubleClick={this.onCellDoubleClick}
                     >
                         <div>{row[column.name]}</div>
                     </td>)}
-                <td onClick={this.onRowClick} data-r={i}></td>
+                <td
+                    data-r={i}
+                    onClick={this.onRowClick}
+                    onDoubleClick={this.onRowDoubleClick}
+
+                />
             </tr>
         );
     }
