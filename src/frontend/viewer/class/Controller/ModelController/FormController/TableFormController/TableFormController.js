@@ -39,7 +39,10 @@ class TableFormController extends FormController {
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
         this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));
+
+        ApplicationController.createReactComponent(this.view.querySelector('.toolbar2'), Toolbar2, {ctrl: this});
     }
+
 
     deinit() {
         this.parent.off('hide', this.listeners.hide);
