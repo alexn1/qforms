@@ -15,7 +15,7 @@ class Grid extends ReactComponent {
     onCellMouseDown = e => {
         // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-        this.setState({row: i, column: j});
+        this.selectCell(i, j);
     }
     onCellDoubleClick = e => {
         // console.log('Grid.onCellDoubleClick');
@@ -26,13 +26,27 @@ class Grid extends ReactComponent {
     onRowMouseDown = e => {
         // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
         const i = parseInt(e.currentTarget.dataset.r);
-        this.setState({row: i});
+        this.selectRow(i);
     }
     onRowDoubleClick = e => {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
         const row = this.props.rows[i];
         console.log('row:', row);
+    }
+    selectCell(i, j) {
+        if (this.state.row === i && this.state.column === j) return;
+        const start = new Date().getTime();
+        this.setState({row: i, column: j}, () => {
+            console.log('selectCell time:', new Date().getTime() - start);
+        });
+    }
+    selectRow(i) {
+        if (this.state.row === i ) return;
+        const start = new Date().getTime();
+        this.setState({row: i}, () => {
+            console.log('selectRow time:', new Date().getTime() - start);
+        });
     }
     renderColumns() {
         return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
