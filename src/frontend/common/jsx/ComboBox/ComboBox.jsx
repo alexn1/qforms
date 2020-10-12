@@ -3,12 +3,9 @@ class ComboBox extends ReactComponent {
         super(props);
         this.state  = {value: props.value || ''};
     }
-    setValue(value) {
-        this.setState({value});
-    }
     onChange = e => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
-        this.setValue(e.target.value);
+        this.setState({value: e.target.value});
         if (this.props.onChange) {
             this.props.onChange(e.target.value);
         }
