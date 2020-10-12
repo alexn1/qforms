@@ -4,20 +4,17 @@ class RowFormController extends FormController {
     constructor(model, view, parent) {
         super(model, view, parent);
         this.toolbar = null;
+        this.formGrid = null;
         this.state = {
             mode   : 'view',
             hasNew : false,
             changed: false,
             valid  : true
         };
-        this.tooltip = {};
-        this.formGrid = null;
     }
 
     init() {
         super.init();
-
-        // listeners
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         this.calcState();
         this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
@@ -35,9 +32,6 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].deinit(row);
         }
-        /*for (const name in this.controls) {
-            this.controls[name].deinit();
-        }*/
         ReactDOM.unmountComponentAtNode(this.view.querySelector('.toolbar'));
         ReactDOM.unmountComponentAtNode(this.view.querySelector('.formgrid'));
         super.deinit();
@@ -54,7 +48,7 @@ class RowFormController extends FormController {
         this.state.hasNew  = this.model.hasNew();
         this.state.changed = this.isChanged();
         this.state.valid   = this.isValid();
-        if (this.model.hasNew()) {
+        if (this.state.hasNew) {
             this.state.mode = 'edit';
         }
         // console.log('changed:', changed);
