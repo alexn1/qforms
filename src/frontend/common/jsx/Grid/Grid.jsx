@@ -21,7 +21,8 @@ class Grid extends ReactComponent {
         // console.log('Grid.onCellDoubleClick');
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         const row = this.props.rows[i];
-        console.log('row:', row);
+        // console.log('row:', row);
+        if (this.props.onDoubleClick) this.props.onDoubleClick(row);
     }
     onRowMouseDown = e => {
         // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
@@ -32,7 +33,8 @@ class Grid extends ReactComponent {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
         const row = this.props.rows[i];
-        console.log('row:', row);
+        // console.log('row:', row);
+        if (this.props.onDoubleClick) this.props.onDoubleClick(row);
     }
     selectCell(i, j) {
         if (this.state.row === i && this.state.column === j) return;

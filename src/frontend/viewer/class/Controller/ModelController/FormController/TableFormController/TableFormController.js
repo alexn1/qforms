@@ -41,14 +41,15 @@ class TableFormController extends FormController {
                 };
             }),
             rows: this.model.getDataSource().getRows(),
-            getRowKey: row => this.model.getDataSource().getRowKey(row)
+            getRowKey: row => this.model.getDataSource().getRowKey(row),
+            onDoubleClick: this.onGridCellDblClick
         };
     }
     deinit() {
+        // this.grid.off('bodyCellDblClick', this.listeners.bodyCellDblClick);
+        // this.grid.deinit();
         this.parent.off('hide', this.listeners.hide);
         this.parent.off('show', this.listeners.show);
-        this.grid.off('bodyCellDblClick', this.listeners.bodyCellDblClick);
-        this.grid.deinit();
         this.model.off('refilled', this.listeners.refilled);
         this.model.off('refresh', this.listeners.refreshed);
 
@@ -58,7 +59,6 @@ class TableFormController extends FormController {
         for (const name in this.controls) {
             this.controls[name].deinit();
         }
-
         super.deinit();
     }
 
@@ -159,17 +159,17 @@ class TableFormController extends FormController {
         this.model.frame(frame);
     }
 
-    async onGridCellDblClick(e) {
-        console.log('TableFormController.onGridCellDblClick', e.bodyCell.bodyRow.dbRow);
-        const bodyCell = e.bodyCell;
-        const row = bodyCell.bodyRow.dbRow;
+    onGridCellDblClick = async (row) => {
+        console.log('TableFormController.onGridCellDblClick', row);
+        // const bodyCell = e.bodyCell;
+        // const row = bodyCell.bodyRow.dbRow;
         // console.log('row:', row);
         const key = this.model.getDataSource().getRowKey(row);
         // console.log('key:', key);
         switch (this.model.data.editMethod) {
-            case 'table':
-                this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
-            break;
+            // case 'table':
+            //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
+            // break;
             case 'form':
                 await this.edit(key);
             break;
@@ -177,16 +177,16 @@ class TableFormController extends FormController {
     }
 
     onHidePage() {
-        this.grid.saveScroll();
+        // this.grid.saveScroll();
     }
 
     onShowPage() {
         console.log('TableFormController.onShowPage', this.model.getFullName());
-        if (!this.grid.isHidden()) {
+        /*if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
             // console.log('document.activeElement:', document.activeElement);
-        }
+        }*/
     }
 
     async new() {
