@@ -180,9 +180,7 @@ class testController extends ApplicationController {
 
 
         const grid = ApplicationController.createReactComponent(this.view.querySelector('#grid'), Grid, {
-            options: {
-                keyColumn: 'id'
-            },
+            getRowKey: row => row.id.toString(),
             columns: [
                 {name: 'id', title: 'Id', width: 100},
                 {name: 'title', title: 'Title', width: 100},
