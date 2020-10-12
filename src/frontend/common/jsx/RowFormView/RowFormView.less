@@ -1,0 +1,37 @@
+.RowFormView {
+  > .grid, .FormGrid {
+    display: grid;
+    grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
+    //grid-template-columns: 100px 1fr 100px 1fr 100px 1fr;
+  }
+}
+.standard .RowFormView {
+  background-color: rgb(238,238,238);
+  padding         : 10px;
+  font-size       : small;
+  > .Toolbar {
+    margin-bottom: 10px;
+  }
+  > .grid, .FormGrid {
+    grid-row-gap: 5px;
+    //grid-column-gap: 5px;
+    > div {
+      &.label {
+        margin-left: 5px;
+        border-bottom: 1px dotted gray;
+      }
+      &.field {
+        border-bottom: 1px dotted gray;
+        &.changed {
+          //border-bottom: 1px dotted #00ff00 !important;
+        }
+        &.error {
+          //border-bottom: 1px dotted red !important;
+        }
+      }
+      &.tooltip {
+        margin-left: 5px;
+      }
+    }
+  }
+}
