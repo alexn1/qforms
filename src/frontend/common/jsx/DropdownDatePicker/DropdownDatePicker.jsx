@@ -9,9 +9,6 @@ class DropdownDatePicker extends ReactComponent {
         if (props.value && !(props.value instanceof Date)) {
             throw new Error('need date type');
         }
-        this._state = {
-            minDate: props.oldDates === false ? DatePicker.getTodayArr() : null
-        };
     }
     onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
@@ -51,11 +48,13 @@ class DropdownDatePicker extends ReactComponent {
         }
         return '';
     }
-    setMinDate(arr) {
-        this._state.minDate = arr;
-    }
     getMinDate() {
-        return this._state.minDate;
+        if (this.props.getMinDate) {
+            return this.props.getMinDate();
+        } else if (this.props.oldDates === false) {
+            return DatePicker.getTodayArr();
+        }
+        return null;
     }
     getSelectedMonth() {
         if (this.getValue()) {
