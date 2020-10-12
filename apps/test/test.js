@@ -146,7 +146,8 @@ class testController extends ApplicationController {
             tabs: [
                 {name: 'tab1', title: 'Tab1', content: 'content1'},
                 {name: 'tab2', title: 'tab2', content: 'content2'},
-            ]
+            ],
+            classList: ['Tab-blue']
         });
 
 

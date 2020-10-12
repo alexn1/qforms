@@ -14,6 +14,12 @@ class Tab extends ReactComponent {
         const start = new Date().getTime();
         this.setState({active: i}, () => console.log('selectTab time:', new Date().getTime() - start));
     }
+    getClassName() {
+        return [
+            'Tab',
+            ...[this.props.classList ? this.props.classList : []]
+        ].join(' ');
+    }
     renderTitles() {
         return this.props.tabs.map((tab, i) =>
         <li
@@ -33,7 +39,7 @@ class Tab extends ReactComponent {
     }
     render() {
         return (
-            <div className="Tab Tab-blue" style={{height: '120px'}}>
+            <div className={this.getClassName()} style={{height: '120px'}}>
                 <ul>
                     {this.props.tabs && this.renderTitles()}
                 </ul>
