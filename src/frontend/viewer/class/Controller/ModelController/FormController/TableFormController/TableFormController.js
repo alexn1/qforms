@@ -6,24 +6,31 @@ class TableFormController extends FormController {
         this.grid        = null;
         this.framesCount = null;
         this.$goto       = null;
+        this.grid2 = null;
     }
 
     init() {
         super.init();
         this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
         this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
+        this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
+        this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
+
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
         $(this.view).find('button.previous').click(this.onPreviousClick.bind(this));
         this.$count = $(this.view).find('span.count');
         this.$goto = $(this.view).find('select.goto');
         this.$goto.change(this.onGotoChange.bind(this));
-        const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
+
+
+        /*const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
-        this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
-        this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
-        this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));
+        this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));*/
         ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
+        this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), {
+
+        });
     }
     deinit() {
         this.parent.off('hide', this.listeners.hide);
@@ -60,7 +67,7 @@ class TableFormController extends FormController {
                 this.$goto.append(option);
             }
         }
-        this.grid.fill();
+        // this.grid.fill();
     }
 
     setCountText() {
