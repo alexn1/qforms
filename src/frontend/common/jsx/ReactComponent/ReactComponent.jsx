@@ -6,9 +6,8 @@ class ReactComponent extends React.Component {
     rerender() {
         console.log(`${this.constructor.name}.rerender`);
         const start = new Date().getTime();
-        return new Promise(resolve => this.forceUpdate(() => {
+        this.forceUpdate(() => {
             console.log(`${this.constructor.name}.rerender time:`, new Date().getTime() - start);
-            resolve();
-        }));
+        });
     }
 }
