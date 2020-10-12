@@ -87,9 +87,9 @@ class Grid extends ReactComponent {
     render() {
         return (
             <div className="Grid flex-max">
-                <div className="head"><table><tbody><tr>{this.renderColumns()}<td/></tr></tbody></table></div>
+                <div className="head"><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
                 <div className="block"/>
-                <div className="body"><table><tbody>{this.renderRows()}</tbody></table></div>
+                <div className="body"><table><tbody>{this.props.rows && this.renderRows()}</tbody></table></div>
             </div>
         );
     }

@@ -28,21 +28,24 @@ class TableFormController extends FormController {
         this.grid.init();
         this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));*/
         ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
-        this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), Grid, {
+        this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), Grid, this.getGridProps());
+    }
+    getGridProps() {
+        return {
             options: {
                 keyColumn: 'id'
             },
             columns: [
-                {name: 'id', title: 'Id', width: 100},
+                {name: 'id'   , title: 'Id'   , width: 100},
                 {name: 'title', title: 'Title', width: 100},
             ],
-            rows: [
+            /*rows: [
                 {id: 1, title: 'abc'},
                 {id: 2, title: 'xyz'},
                 {id: 3, title: '123'},
                 {id: 4, title: '098'},
-            ]
-        });
+            ]*/
+        };
     }
     deinit() {
         this.parent.off('hide', this.listeners.hide);
