@@ -72,12 +72,6 @@ class DropdownDatePicker extends ReactComponent {
     getValue() {
         return this.state.value;
     }
-    /*setValue(value) {
-        // console.log('DropdownDatePicker.setValue', value);
-        // this._state.value = value;
-        this.setState({value});
-        // this.rerender();
-    }*/
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         this.state.value = nextProps.value;
