@@ -16,7 +16,7 @@
         <%}%>
         <!-- row forms -->
         <% if (model.isThereARowForm()) { %>
-            <div class="row-forms flex-min">
+            <div id="<%=model.id%>_<%=Object.keys(model.forms)[0]%>_root" class="row-forms flex-min">
             <% for (const name in model.forms) {
                 const form = model.forms[name];
                 if (form.getClassName() === 'RowForm') {%>
@@ -46,7 +46,7 @@
                             <% for (const name in model.forms) {
                                 const form = model.forms[name];
                                 if (form.getClassName() === 'TableForm' || form.getClassName() === 'TreeForm') {
-                                    %><div>
+                                    %><div id="<%=model.id%>_<%=form.getName()%>_root">
                                         <%=QForms.render(form.data.view, {model: form})
                                         %>
                                     </div><%

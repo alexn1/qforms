@@ -4,7 +4,7 @@ class FormController extends ModelController {
 
     static createView(model, parent) {
         // console.log('FormController.createView', model, parent);
-        return parent.view.querySelector(`#${model.getPage().id}_${model.getName()}`);
+        return parent.view.querySelector(`#${model.getPage().id}_${model.getName()}_root`);
     }
 
     static create(model, view, parent) {
