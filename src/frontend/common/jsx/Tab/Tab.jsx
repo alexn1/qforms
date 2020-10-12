@@ -8,7 +8,11 @@ class Tab extends ReactComponent {
     onLiMouseDown = e => {
         // console.log('Tab.onLiMouseDown', e.currentTarget.dataset.i);
         const i = parseInt(e.currentTarget.dataset.i);
-        this.setState({active: i});
+        this.selectTab(i);
+    }
+    selectTab(i) {
+        const start = new Date().getTime();
+        this.setState({active: i}, () => console.log('selectTab time:', new Date().getTime() - start));
     }
     renderTitles() {
         return this.props.tabs.map((tab, i) =>
