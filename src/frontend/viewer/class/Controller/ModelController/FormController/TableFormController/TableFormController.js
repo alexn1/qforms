@@ -13,15 +13,10 @@ class TableFormController extends FormController {
         super.init();
         this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
         this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
-        $(this.view).find('button.refresh').click(function() {
-            self.onRefreshClick(this);
-        });
-        $(this.view).find('button.new').click(function() {
-            self.onNewClick(this);
-        });
-        $(this.view).find('button.delete').click(function() {
-            self.onDeleteClick(this);
-        });
+
+        // $(this.view).find('button.refresh').click(this.onRefreshClick);
+        // $(this.view).find('button.new').click(this.onNewClick.bind(this));
+        // $(this.view).find('button.delete').click(this.onDeleteClick.bind(this));
         $(this.view).find('button.next').click(function() {
             self.onNextClick(this);
         });
@@ -42,6 +37,9 @@ class TableFormController extends FormController {
 
         ApplicationController.createReactComponent(this.view.querySelector('.toolbar2'), Toolbar2, {ctrl: this});
     }
+    // onRefreshClick = e => {
+    //     console.log('TableFormController.onRefreshClick');
+    // }
 
 
     deinit() {
@@ -117,18 +115,18 @@ class TableFormController extends FormController {
         this.updateCountAndGoTo();
     }
 
-    async onNewClick(ctrl) {
+    onNewClick = async e => {
         await this.new();
     }
 
-    async onRefreshClick(ctrl) {
+    onRefreshClick = async e => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
         await this.model.refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     }
 
-    onDeleteClick(ctrl) {
+    onDeleteClick = e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getSelectedKey());
         if (confirm(this.model.getApp().data.text.form.areYouSure)) {
             const key = this.grid.getSelectedKey();
