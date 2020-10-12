@@ -9,39 +9,22 @@ class TableFormController extends FormController {
     }
 
     init() {
-        const self = this;
         super.init();
         this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
         this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
-
-        // $(this.view).find('button.refresh').click(this.onRefreshClick);
-        // $(this.view).find('button.new').click(this.onNewClick.bind(this));
-        // $(this.view).find('button.delete').click(this.onDeleteClick.bind(this));
-        $(this.view).find('button.next').click(function() {
-            self.onNextClick(this);
-        });
-        $(this.view).find('button.previous').click(function() {
-            self.onPreviousClick(this);
-        });
+        $(this.view).find('button.next').click(this.onNextClick.bind(this));
+        $(this.view).find('button.previous').click(this.onPreviousClick.bind(this));
         this.$count = $(this.view).find('span.count');
         this.$goto = $(this.view).find('select.goto');
-        this.$goto.change(function() {
-            self.onGotoChange(this);
-        });
+        this.$goto.change(this.onGotoChange.bind(this));
         const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
         this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));
-
-        ApplicationController.createReactComponent(this.view.querySelector('.toolbar2'), Toolbar2, {ctrl: this});
+        ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
     }
-    // onRefreshClick = e => {
-    //     console.log('TableFormController.onRefreshClick');
-    // }
-
-
     deinit() {
         this.parent.off('hide', this.listeners.hide);
         this.parent.off('show', this.listeners.show);
@@ -136,7 +119,7 @@ class TableFormController extends FormController {
         }
     }
 
-    onNextClick(ctrl) {
+    onNextClick() {
         const frame = parseInt(this.$goto.val()) + 1;
         if (frame <= this.framesCount) {
             this.$goto.val(frame);
@@ -144,7 +127,7 @@ class TableFormController extends FormController {
         }
     }
 
-    onPreviousClick(ctrl) {
+    onPreviousClick() {
         const frame = parseInt(this.$goto.val()) - 1;
         if (frame > 0) {
             this.$goto.val(frame);
@@ -152,8 +135,8 @@ class TableFormController extends FormController {
         }
     }
 
-    onGotoChange(ctrl) {
-        const frame = parseInt(ctrl.value);
+    onGotoChange() {
+        const frame = parseInt(this.value);
         this.model.frame(frame);
     }
 

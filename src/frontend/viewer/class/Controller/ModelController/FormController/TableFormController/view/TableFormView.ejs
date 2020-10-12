@@ -1,18 +1,5 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="TableFormView <%=model.getName()%> full flex-rows">
-    <div class="flex-min">
-        <div class="toolbar">
-            <% if (model.data.refreshButton === 'true') {%>
-            <button class="refresh"><%=model.getApp().getText().form.refresh%></button>
-            <% } %>
-            <% if (model.data.newRowMode !== 'disabled') {%>
-            <button class="new"><%=model.getApp().getText().form.new%></button>
-            <% } %>
-            <% if (model.data.deleteRowMode !== 'disabled') {%>
-            <button class="delete"><%=model.getApp().getText().form.delete%></button>
-            <% } %>
-        </div>
-        <div class="toolbar2"/>
-    </div>
+    <div class="toolbar flex-min"/>
     <div id="<%=model.getPage().id%>_<%=model.getName()%>_GridWidget" class="GridWidget flex-max" tabindex="0">
         <div class="head">
             <table>
