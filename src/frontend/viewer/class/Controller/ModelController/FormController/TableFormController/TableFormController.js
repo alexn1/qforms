@@ -29,7 +29,6 @@ class TableFormController extends FormController {
         this.$count = $(this.view).find('span.count');
         this.$goto = $(this.view).find('select.goto');
         this.$goto.change(this.onGotoChange.bind(this));
-
     }
     getGridProps() {
         return {

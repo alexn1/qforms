@@ -4,9 +4,6 @@ class TableFormView extends ReactComponent {
         const model = ctrl.model;
         return (
             <div className={`TableFormView full flex-rows ${model.getName()}`}>
-                <Toolbar2/>
-                <Grid/>
-                <Paging/>
             </div>
         );
     }
