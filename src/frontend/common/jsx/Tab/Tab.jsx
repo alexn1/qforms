@@ -6,7 +6,7 @@ class Tab extends ReactComponent {
         };
     }
     onLiMouseDown = e => {
-        console.log('Tab.onLiMouseDown', e.currentTarget.dataset.i);
+        // console.log('Tab.onLiMouseDown', e.currentTarget.dataset.i);
         const i = parseInt(e.currentTarget.dataset.i);
         this.setState({active: i});
     }
