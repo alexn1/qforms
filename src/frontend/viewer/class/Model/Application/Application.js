@@ -53,4 +53,8 @@ class Application extends Model {
         if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
         return this.databases[name];
     }
+
+    getText() {
+        return this.data.text;
+    }
 }

@@ -1,14 +1,16 @@
 <div id="<%=model.getPage().id%>_<%=model.getName()%>" class="TableFormView <%=model.getName()%> full flex-rows">
     <div class="flex-min">
-        <% if (model.data.refreshButton && model.data.refreshButton === 'true') {%>
-            <button class="refresh"><%=model.getApp().data.text.form.refresh%></button>
-        <% } %>
-        <% if (model.data.newRowMode !== 'disabled') {%>
-            <button class="new"><%=model.getApp().data.text.form.new%></button>
-        <% } %>
-        <% if (model.data.deleteRowMode !== 'disabled') {%>
-            <button class="delete"><%=model.getApp().data.text.form.delete%></button>
-        <% } %>
+        <div class="toolbar">
+            <% if (model.data.refreshButton === 'true') {%>
+            <button class="refresh"><%=model.getApp().getText().form.refresh%></button>
+            <% } %>
+            <% if (model.data.newRowMode !== 'disabled') {%>
+            <button class="new"><%=model.getApp().getText().form.new%></button>
+            <% } %>
+            <% if (model.data.deleteRowMode !== 'disabled') {%>
+            <button class="delete"><%=model.getApp().getText().form.delete%></button>
+            <% } %>
+        </div>
     </div>
     <div id="<%=model.getPage().id%>_<%=model.getName()%>_GridWidget" class="GridWidget flex-max" tabindex="0">
         <div class="head">
