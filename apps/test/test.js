@@ -5,8 +5,6 @@ class testController extends ApplicationController {
     constructor(...args) {
         console.log('testController.constructor');
         super(...args);
-        this.dropdownDatePicker1 = null;
-        this.dropdownDatePicker2 = null;
         this.dropdowndatepicker1 = null;
         this.dropdowndatepicker2 = null;
     }
@@ -15,56 +13,11 @@ class testController extends ApplicationController {
         console.log('testController.init');
         super.init();
 
-        const now = new Date();
-        const dropdownDatePickerElement1 = this.view.querySelector('#dp1');
-        if (dropdownDatePickerElement1) {
-            this.dropdownDatePicker1 = new DropdownDatePickerWidget(dropdownDatePickerElement1);
-            this.dropdownDatePicker1.init();
-            this.dropdownDatePicker1.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate()]);
-
-            this.dropdownDatePicker1.setValue(new Date(2020, 9, 20));
-
-        }
-        const dropdownDatePickerElement2 = this.view.querySelector('#dp2');
-        if (dropdownDatePickerElement2) {
-            this.dropdownDatePicker2 = new DropdownDatePickerWidget(dropdownDatePickerElement2);
-            this.dropdownDatePicker2.init();
-            this.dropdownDatePicker2.datePicker.setMinDate([now.getFullYear(), now.getMonth(), now.getDate() + 1]);
-        }
-
-        this.dropdownDatePicker1.onChange = date => {
-            console.log('dropdownDatePicker1.onChange', date);
-            if (date) {
-                this.dropdownDatePicker2.datePicker.setMinDate([date.getFullYear(), date.getMonth(), date.getDate() + 1]);
-                if (this.dropdownDatePicker2.datePicker.isDateSelected()) {
-                    const secondDate = this.dropdownDatePicker2.datePicker.createSelectedDate();
-                    if (secondDate.getTime() <= date.getTime()) {
-                        this.dropdownDatePicker2.clear();
-                    }
-                }
-            }
-        };
-
         // ModalWidget
         this.view.querySelector('#openModalButton').addEventListener('click', () => {
             const el = ModalWidget.createElement('<div style="background-color: white; height: 100%;">hello world</div>');
             this.view.appendChild(el);
             new ModalWidget(el);
-        });
-
-        // dropdownButtonWidget
-        const dropdownButtonWidget = new DropdownButtonWidget(this.view.querySelector('.DropdownButtonWidget'));
-
-        // button
-        this.view.querySelector('#testButton').addEventListener('click', (e) => {
-            console.log('testButton click');
-            // console.log('this.dropdownDatePicker1.getValue()', this.dropdownDatePicker1.getValue());
-            // console.log('this.dropdownDatePicker2.getValue()', this.dropdownDatePicker2.getValue());
-            if (tooltipWidget.isHidden()) {
-                tooltipWidget.show();
-            } else {
-                tooltipWidget.hide();
-            }
         });
 
         // menu
@@ -117,15 +70,12 @@ class testController extends ApplicationController {
 
         // dropdowndatepicker
         this.dropdowndatepicker1 = ApplicationController.createReactComponent(this.view.querySelector('#dropdowndatepicker1'), DropdownDatePicker, {
-            oldDates: false,
+            // oldDates: false,
             value: new Date(2020, 8, 1),
             onChange: date => {
                 console.log('dropdowndatepicker1.onChange', date);
-                if (date) {
-                    this.dropdowndatepicker2.setMinDate([date.getFullYear(), date.getMonth(), date.getDate()+1]);
-                } else {
-                    this.dropdowndatepicker2.setMinDate(null);
-                }
+                const minDate = date ? [date.getFullYear(), date.getMonth(), date.getDate()+1] : null;
+                this.dropdowndatepicker2.setMinDate(minDate);
             }
         });
 
