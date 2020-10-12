@@ -32,19 +32,16 @@ class TableFormController extends FormController {
     }
     getGridProps() {
         return {
-            options: {
-                keyColumn: 'id'
-            },
-            columns: [
-                {name: 'id'   , title: 'Id'   , width: 100},
-                {name: 'title', title: 'Title', width: 100},
-            ],
-            /*rows: [
-                {id: 1, title: 'abc'},
-                {id: 2, title: 'xyz'},
-                {id: 3, title: '123'},
-                {id: 4, title: '098'},
-            ]*/
+            columns: Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
+                const field = this.model.fields[name];
+                return {
+                    name : field.getName(),
+                    title: field.data.caption,
+                    width: field.data.width !== '0' ? parseInt(field.data.width) : undefined
+                };
+            }),
+            rows: this.model.getDataSource().getRows(),
+            getRowKey: row => this.model.getDataSource().getRowKey(row)
         };
     }
     deinit() {

@@ -57,16 +57,20 @@ class Grid extends ReactComponent {
     renderRows() {
         return this.props.rows.map((row, i) => this.renderRow(row, i));
     }
+    getRowKey(row) {
+        return this.props.getRowKey(row);
+    }
     renderRow(row, i) {
         return (
             <tr
-                key={row[this.props.options.keyColumn].toString()}
+                key={this.getRowKey(row)}
+                data-key={this.getRowKey(row)}
                 className={this.isRowActive(i) ? 'active' : undefined}
             >
                 {this.props.columns.map((column, j) =>
                     <td
                         key={column.name}
-                        style={{width: `${column.width}px`}}
+                        style={{width: column.width ? `${column.width}px` : undefined}}
                         className={this.isCellActive(i, j) ? 'active' : undefined}
                         data-rc={`[${i},${j}]`}
                         onMouseDown={this.onCellMouseDown}
