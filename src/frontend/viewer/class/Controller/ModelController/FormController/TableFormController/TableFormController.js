@@ -7,6 +7,7 @@ class TableFormController extends FormController {
         this.framesCount = null;
         this.$goto       = null;
         this.grid2 = null;
+        this.tableFormView = null;
     }
 
     init() {
@@ -20,9 +21,12 @@ class TableFormController extends FormController {
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
         this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));*/
-        ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
-        this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), Grid, this.getGridProps());
-        ApplicationController.createReactComponent(this.view.querySelector('.paging2'), Paging, {ctrl: this});
+
+        this.tableFormView = ApplicationController.createReactComponent(this.view, TableFormView, {ctrl: this});
+
+        // ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
+        // this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), Grid, this.getGridProps());
+        // ApplicationController.createReactComponent(this.view.querySelector('.paging2'), Paging, {ctrl: this});
 
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
         $(this.view).find('button.previous').click(this.onPreviousClick.bind(this));
@@ -30,21 +34,27 @@ class TableFormController extends FormController {
         this.$goto = $(this.view).find('select.goto');
         this.$goto.change(this.onGotoChange.bind(this));
     }
-    getGridProps() {
+    getGridColumns() {
+        return Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
+            const field = this.model.fields[name];
+            return {
+                name : field.getName(),
+                title: field.data.caption,
+                width: field.data.width !== '0' ? parseInt(field.data.width) : undefined
+            };
+        });
+    }
+    getGridRows() {
+        return this.model.getDataSource().getRows();
+    }
+    /*getGridProps() {
         return {
-            columns: Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
-                const field = this.model.fields[name];
-                return {
-                    name : field.getName(),
-                    title: field.data.caption,
-                    width: field.data.width !== '0' ? parseInt(field.data.width) : undefined
-                };
-            }),
-            rows: this.model.getDataSource().getRows(),
+            columns: this.getGridColumns(),
+            rows: this.getGridRows(),
             getRowKey: row => this.model.getDataSource().getRowKey(row),
             onDoubleClick: this.onGridCellDblClick
         };
-    }
+    }*/
     deinit() {
         // this.grid.off('bodyCellDblClick', this.listeners.bodyCellDblClick);
         // this.grid.deinit();
