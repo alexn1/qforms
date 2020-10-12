@@ -142,7 +142,12 @@ class testController extends ApplicationController {
             ]
         });
 
-        ApplicationController.createReactComponent(this.view.querySelector('#tab'), Tab, {});
+        ApplicationController.createReactComponent(this.view.querySelector('#tab'), Tab, {
+            tabs: [
+                {name: 'tab1', title: 'Tab1', content: 'content1'},
+                {name: 'tab2', title: 'tab2', content: 'content2'},
+            ]
+        });
 
 
     }
