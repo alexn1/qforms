@@ -63,6 +63,8 @@ class TableFormController extends FormController {
         this.model.off('refilled', this.listeners.refilled);
         this.model.off('refresh', this.listeners.refreshed);
 
+        ReactDOM.unmountComponentAtNode(this.view);
+
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
