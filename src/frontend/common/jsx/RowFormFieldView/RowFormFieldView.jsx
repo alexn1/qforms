@@ -1,4 +1,4 @@
-class RowFormField extends ReactComponent {
+class RowFormFieldView extends ReactComponent {
     renderFieldView() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -46,7 +46,7 @@ class RowFormField extends ReactComponent {
         ].join(' ');
     }
     render() {
-        // console.log('RowFormField.render', this.props.ctrl.model.getClassName());
+        // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
         return (
             <div className={this.getClassName()}>{this.renderFieldView()}</div>
         );
