@@ -1,4 +1,4 @@
-class TableForm extends ReactComponent {
+class TableFormView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
