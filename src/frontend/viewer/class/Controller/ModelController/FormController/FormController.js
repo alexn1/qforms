@@ -1,12 +1,10 @@
 'use strict';
 
 class FormController extends ModelController {
-
     /*static createView(model, parent) {
         // console.log('FormController.createView', model, parent);
         return parent.view.querySelector(`#${model.getPage().id}_${model.getName()}_root`);
     }*/
-
     static create(model, view, parent) {
         // console.log('FormController.create', model.getFullName());
         if (model.data.js) {
@@ -16,7 +14,6 @@ class FormController extends ModelController {
         }
         return eval(`new ${model.getClassName()}Controller(model, view, parent);`);
     }
-
     constructor(model, view, parent) {
         super(model);
         this.view     = view;
@@ -24,7 +21,6 @@ class FormController extends ModelController {
         this.fields   = {};
         // this.controls = {};
     }
-
     init() {
         // fields
         for (const name in this.model.fields) {
@@ -39,38 +35,29 @@ class FormController extends ModelController {
             this.controls[name].init();
         }*/
     }
-
     // deinit() {
     //     console.log('FormController.deinit:', this.model.getFullName());
     //     super.deinit();
     // }
-
     fill() {
     }
-
     isValid() {
         return true;
     }
-
-    setRowStyle(bodyRow, row) {
-    }
-
-    getCaption() {
+    /*setRowStyle(bodyRow, row) {
+    }*/
+    /*getCaption() {
         return this.model.data.caption;
-    }
-
+    }*/
     async openPage(options) {
         return this.getPageController().openPage(options);
     }
-
     getPageController() {
         return this.parent;
     }
-
     isChanged() {
         return false;
     }
-
     onFieldChange(e) {
         console.log('FormController.onFieldChange', this.model.getFullName());
         this.parent.onFormChange(e);
@@ -82,5 +69,4 @@ class FormController extends ModelController {
         // console.log('FormController.onViewCreated', view);
         this.view = view;
     }
-
 }
