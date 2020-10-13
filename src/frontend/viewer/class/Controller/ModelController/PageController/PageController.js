@@ -29,11 +29,11 @@ class PageController extends ModelController {
         });
 
         // disable buttons
-        $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
+        // $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
 
         // button click
-        $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick);
-        $(this.view).find('button.closePage').click(this.onClosePageClick);
+        // $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick);
+        // $(this.view).find('button.closePage').click(this.onClosePageClick);
 
         // forms
         for (const name in this.model.forms) {
@@ -108,11 +108,11 @@ class PageController extends ModelController {
     }
 
     enableSave() {
-        $(this.view).find('button.saveAndClose').prop('disabled', false);
+        // $(this.view).find('button.saveAndClose').prop('disabled', false);
     }
 
     disableSave() {
-        $(this.view).find('button.saveAndClose').prop('disabled', true);
+        // $(this.view).find('button.saveAndClose').prop('disabled', true);
     }
 
     setCaption(caption) {
@@ -161,6 +161,7 @@ class PageController extends ModelController {
         } else {
             this.disableSave();
         }
+        this.rerender();
     }
 
     onFormDiscard(formController) {
@@ -171,12 +172,14 @@ class PageController extends ModelController {
         } else {
             this.disableSave();
         }
+        this.rerender();
     }
 
     onFormUpdate(e) {
         console.log('PageController.onFormUpdate:', this.model.getFullName());
         this.setCaption(this.getCaption());
         this.disableSave();
+        this.rerender();
     }
 
     async openPage(options) {
