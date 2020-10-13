@@ -3,11 +3,9 @@
 class TableFormController extends FormController {
     constructor(model, view, parent) {
         super(model, view, parent);
-        this.grid        = null;
-        this.framesCount = null;
-        this.$goto       = null;
-        this.grid2 = null;
-        this.tableFormView = null;
+        // this.grid        = null;
+        // this.framesCount = null;
+        // this.$goto       = null;
     }
 
     init() {
@@ -21,12 +19,6 @@ class TableFormController extends FormController {
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
         this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));*/
-
-        // this.tableFormView = ApplicationController.createReactComponent(this.view, TableFormView, {ctrl: this});
-
-        // ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar2, {ctrl: this});
-        // this.grid2 = ApplicationController.createReactComponent(this.view.querySelector('.grid'), Grid, this.getGridProps());
-        // ApplicationController.createReactComponent(this.view.querySelector('.paging2'), Paging, {ctrl: this});
 
         /*
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
@@ -55,22 +47,12 @@ class TableFormController extends FormController {
         this.parent.off('show', this.listeners.show);
         this.model.off('refilled', this.listeners.refilled);
         this.model.off('refresh', this.listeners.refreshed);
-
-        // ReactDOM.unmountComponentAtNode(this.view);
-
-        for (const name in this.fields) {
-            this.fields[name].deinit();
-        }
-        for (const name in this.controls) {
-            this.controls[name].deinit();
-        }
         super.deinit();
     }
 
-    fill() {
+    /*fill() {
         // console.log('TableFormController.fill', this.model.getFullName());
         super.fill();
-        /*
         const dataSource = this.model.getDataSource();
         if (dataSource.getLimit()) {
             $(this.view).find('.paging').css('display', 'block');
@@ -84,17 +66,17 @@ class TableFormController extends FormController {
                 option.html(i);
                 this.$goto.append(option);
             }
-        }*/
-        // this.grid.fill();
-    }
+        }
+        this.grid.fill();
+    }*/
 
-    setCountText() {
+    /*setCountText() {
         const dataSource = this.model.getDataSource();
         const count = `${dataSource.length} of ${dataSource.count}`;
-        // this.$count.text(count);
-    }
+        this.$count.text(count);
+    }*/
 
-    updateCountAndGoTo() {
+    /*updateCountAndGoTo() {
         const dataSource = this.model.getDataSource();
         if (dataSource.getLimit()) {
             this.setCountText();
@@ -109,7 +91,7 @@ class TableFormController extends FormController {
                 this.$goto.append(option);
             }
         }
-    }
+    }*/
 
     onRefilled(ea) {
         console.log('TableFormController.onRefilled', this.model.getFullName());
@@ -240,13 +222,6 @@ class TableFormController extends FormController {
                 key : key2
             });
         }
-        /*switch (this.model.data.newRowMode) {
-            case 'oneclick': break;
-            case 'editform': break;
-            case 'createform': break;
-            case 'oneclick editform': break;
-            case 'oneclick createform': break;
-        }*/
     }
 
     async edit(key) {

@@ -35,10 +35,16 @@ class FormController extends ModelController {
             this.controls[name].init();
         }*/
     }
-    // deinit() {
-    //     console.log('FormController.deinit:', this.model.getFullName());
-    //     super.deinit();
-    // }
+    deinit() {
+        console.log('FormController.deinit:', this.model.getFullName());
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        /*for (const name in this.controls) {
+            this.controls[name].deinit();
+        }*/
+        super.deinit();
+    }
     fill() {
     }
     isValid() {

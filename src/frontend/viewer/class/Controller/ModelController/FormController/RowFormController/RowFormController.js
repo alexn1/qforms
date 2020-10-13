@@ -3,8 +3,6 @@
 class RowFormController extends FormController {
     constructor(model, view, parent) {
         super(model, view, parent);
-        this.toolbar = null;
-        this.formGrid = null;
         this.state = {
             mode   : 'view',
             hasNew : false,
@@ -17,17 +15,11 @@ class RowFormController extends FormController {
         super.init();
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         this.calcState();
-        // this.rowFormView = ApplicationController.createReactComponent(this.view, RowFormView, {ctrl: this});
     }
 
     deinit() {
         console.log('RowFormController.deinit', this.model.getFullName());
         this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
-        const row = this.model.getRow();
-        for (const name in this.fields) {
-            this.fields[name].deinit(row);
-        }
-        // ReactDOM.unmountComponentAtNode(this.view);
         super.deinit();
     }
 
@@ -83,10 +75,6 @@ class RowFormController extends FormController {
         }
         return true;
     }
-
-    // getFieldValue(name) {
-    //     return this.model.getFieldValue(name);
-    // }
 
     async onSaveClick() {
         console.log('RowFormController.onSaveClick');
