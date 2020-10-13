@@ -32,4 +32,7 @@ class Model extends EventEmitter {
         }
         return this.getName();
     }
+    getCaption() {
+        return this.data.caption;
+    }
 }

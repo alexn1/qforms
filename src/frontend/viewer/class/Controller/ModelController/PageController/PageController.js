@@ -15,12 +15,12 @@ class PageController extends ModelController {
     constructor(model, view, parent) {
         //console.log('PageController.constructor', model);
         super(model);
-        this.view       = view;
-        this.parent     = parent;
-        this.forms      = {};
-        this.tab        = null;
-        this.modal      = null;
-        this.root = null;
+        this.view   = view;
+        this.parent = parent;
+        this.forms  = {};
+        this.tab    = null;
+        this.modal  = null;
+        this.root   = null;
     }
 
     createView(root) {
@@ -63,9 +63,9 @@ class PageController extends ModelController {
         }*/
     }
 
-    getCaptionElements() {
+    /*getCaptionElements() {
         return this.view.querySelectorAll(`.caption`);
-    }
+    }*/
 
     deinit() {
         console.log('PageController.deinit: ' + this.model.getFullName());
@@ -76,19 +76,12 @@ class PageController extends ModelController {
         super.deinit();
     }
 
-    getTabs() {
-        return [
-            {name: 'tab1', title: 'Tab1', content: 'content1'},
-            {name: 'tab2', title: 'tab2', content: 'content2'},
-        ];
-    }
-
-    fill() {
+    /*fill() {
         for (const name in this.forms) {
             this.forms[name].fill();
         }
-        this.setCaption(this.getCaption());
-    }
+        // this.setCaption(this.getCaption());
+    }*/
 
     onSaveAndCloseClick = async () => {
         console.log('PageController.onSaveAndCloseClick');
@@ -97,12 +90,12 @@ class PageController extends ModelController {
             console.log('page model updated', this.model.getFullName());
             this.getApplicationController().closePage(this);
         } else {
-            for (const name in this.forms) {
+            /*for (const name in this.forms) {
                 const form = this.forms[name];
                 if (form.model.getClassName() === 'RowForm') {
-                    // form.updateErrorClasses();
+                    form.updateErrorClasses();
                 }
-            }
+            }*/
         }
     }
 
@@ -115,7 +108,7 @@ class PageController extends ModelController {
         console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
-        const valid = this.isValid();
+        // const valid = this.isValid();
         // console.log('valid:', valid);
         if (changed) {
             const result = confirm(this.model.getApp().data.text.form.areYouSure);
@@ -124,22 +117,22 @@ class PageController extends ModelController {
         this.getApplicationController().closePage(this);
     }
 
-    enableSave() {
+    /*enableSave() {
         // $(this.view).find('button.saveAndClose').prop('disabled', false);
-    }
+    }*/
 
-    disableSave() {
+    /*disableSave() {
         // $(this.view).find('button.saveAndClose').prop('disabled', true);
-    }
+    }*/
 
-    setCaption(caption) {
+    /*setCaption(caption) {
         // this.getCaptionElements().forEach(el => el.innerHTML = caption);
         if (this.tab) {
             TabWidget.setTabCaption(this.tab, caption);
         }
-    }
+    }*/
 
-    getCaption() {
+    /*getCaption() {
         // console.log('PageController.getCaption', this.model.getFullName());
         const key = this.model.getKey();
         let caption = this.model.data.caption;
@@ -153,21 +146,21 @@ class PageController extends ModelController {
             caption += ' <span class="star">*</span>';
         }
         return caption;
-    }
+    }*/
 
     isValid() {
         // console.log('PageController.isValid', this.model.getFullName());
-        let isValid = true;
         for (const name in this.forms) {
             if (!this.forms[name].isValid()) {
-                isValid = false;
+                return false;
             }
         }
-        return isValid;
+        return true;
     }
 
     onFormChange(e) {
         console.log('PageController.onFormChange', this.model.getFullName());
+        /*
         this.setCaption(this.getCaption());
         if (this.isChanged() || this.model.hasNew()) {
             if (this.isValid()) {
@@ -178,24 +171,27 @@ class PageController extends ModelController {
         } else {
             this.disableSave();
         }
+        */
         this.rerender();
     }
 
     onFormDiscard(formController) {
         console.log('PageController.onFormDiscard', this.model.getFullName());
+        /*
         this.setCaption(this.getCaption());
         if (this.isChanged() || this.model.hasNew()) {
             this.enableSave();
         } else {
             this.disableSave();
         }
+        */
         this.rerender();
     }
 
     onFormUpdate(e) {
         console.log('PageController.onFormUpdate:', this.model.getFullName());
-        this.setCaption(this.getCaption());
-        this.disableSave();
+        /*this.setCaption(this.getCaption());
+        this.disableSave();*/
         this.rerender();
     }
 

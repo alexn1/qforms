@@ -23,7 +23,19 @@ class PageView extends ReactComponent {
     renderCaption() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-        return model.data.caption
+
+        const key = model.getKey();
+        let caption = model.getCaption();
+        if (ApplicationController.isInDebugMode()) {
+            caption += `(${model.id})`;
+        }
+        if (key) {
+            caption += ` ${key}`;
+        }
+        if (ctrl.isChanged() || model.hasNew()) {
+            return [caption, ' ', <span className="star">*</span>];
+        }
+        return caption;
     }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());

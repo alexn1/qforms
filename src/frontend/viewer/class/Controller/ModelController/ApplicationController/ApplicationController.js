@@ -120,7 +120,7 @@ class ApplicationController extends ModelController {
         pageController.tab = tab;
         tab.pageController = pageController;
         pageController.init();
-        pageController.fill();
+        // pageController.fill();
         pageController.createView(root);
     }
     createModalPageController(model) {
@@ -136,7 +136,7 @@ class ApplicationController extends ModelController {
         const pageController = PageController.create(model, null, this);
         pageController.modal = modal;
         pageController.init();
-        pageController.fill();
+        // pageController.fill();
         pageController.createView(root);
     }
 

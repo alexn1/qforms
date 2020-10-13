@@ -37,7 +37,7 @@ class Menu extends ReactComponent {
         }
     }
     render() {
-        return this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : ''}>
+        return this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : null}>
             <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
             <div onMouseDown={this.onMouseDown} onClick={this.onMenuItemClick}>
                 {menu.items.map(item =>
