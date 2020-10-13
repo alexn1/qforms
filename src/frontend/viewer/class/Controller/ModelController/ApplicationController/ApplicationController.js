@@ -21,7 +21,7 @@ class ApplicationController extends ModelController {
         this.menu       = null;
         this.tabWidget  = null;
         this.statusbar  = null;
-        this.pages = [];
+        this.pages = null;
     }
 
     static getSearchObj() {
@@ -49,7 +49,9 @@ class ApplicationController extends ModelController {
         this.initStatusbar();
         this.initTab();
         this.createPages();
-        this.createPages2();
+        if (!this.view) {
+            this.pages = this.createPages2();
+        }
     }
 
     getMenuItemsProp() {
@@ -100,9 +102,7 @@ class ApplicationController extends ModelController {
         }
     }
     createPages2() {
-        if (this.view) return;
-        for (const name in this.model.data.pages) {
-
+        return Object.keys(this.model.data.pages).map(name => {
             // model
             const page = new Page({
                 app : this.model,
@@ -114,10 +114,8 @@ class ApplicationController extends ModelController {
             // controller
             const pageController = PageController.create(page, null, this);
             pageController.init();
-
-            this.pages.push(pageController);
-
-        }
+            return pageController;
+        });
     }
 
     deinit() {
