@@ -107,7 +107,7 @@ class ApplicationController extends ModelController {
     }
 
     createPageController(model, select = false, track = false) {
-        console.log('ApplicationController.createPageController', model);
+        console.log('ApplicationController.createPageController', model.getFullName());
         // const html = QForms.render(model.data.view, {model});
         // const view = $(html).get(0);
 
@@ -124,7 +124,7 @@ class ApplicationController extends ModelController {
         pageController.createView(root);
     }
     createModalPageController(model) {
-        console.log('ApplicationController.createModalPageController', model);
+        console.log('ApplicationController.createModalPageController', model.getFullName());
         // const html = QForms.render(model.data.view, {model});
         // const view = $(html).get(0);
 

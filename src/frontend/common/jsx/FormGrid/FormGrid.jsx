@@ -16,7 +16,7 @@ class FormGrid extends ReactComponent {
         );
     }
     render() {
-        console.log('FormGrid.render');
+        // console.log('FormGrid.render');
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         // console.log('model:', model);

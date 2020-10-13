@@ -157,12 +157,12 @@ class RowFormController extends FormController {
     }
 
     onEditClick = e => {
-        console.log('RowFormController.onEditClick', this);
+        // console.log('RowFormController.onEditClick', this);
         this.state.mode = 'edit';
         this.rerender();
     }
     onCancelClick = e => {
-        console.log('RowFormController.onCancelClick', this);
+        // console.log('RowFormController.onCancelClick', this);
         this.state.mode = 'view';
         this.rerender();
     }

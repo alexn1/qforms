@@ -8,7 +8,7 @@ class FormController extends ModelController {
     }*/
 
     static create(model, view, parent) {
-        console.log('FormController.create', model.getFullName());
+        // console.log('FormController.create', model.getFullName());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
@@ -79,7 +79,7 @@ class FormController extends ModelController {
         this.view.rerender();
     }
     onViewCreated = view => {
-        console.log('FormController.onViewCreated', view);
+        // console.log('FormController.onViewCreated', view);
         this.view = view;
     }
 

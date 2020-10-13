@@ -1,6 +1,6 @@
 class Toolbar extends ReactComponent {
     render() {
-        console.log('Toolbar.render', this.props, this.props.ctrl.state.mode === 'view');
+        // console.log('Toolbar.render');
         const ctrl = this.props.ctrl;
         const width = '90px';
         return (

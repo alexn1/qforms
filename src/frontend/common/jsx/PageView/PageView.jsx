@@ -26,6 +26,7 @@ class PageView extends ReactComponent {
         return model.data.caption
     }
     render() {
+        console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (

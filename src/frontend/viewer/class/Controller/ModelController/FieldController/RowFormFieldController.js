@@ -26,7 +26,7 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.onFieldViewContentCreated', c);
     }
     onChange2 = value => {
-        console.log('RowFormFieldController.onChange2', value);
+        // console.log('RowFormFieldController.onChange2', value);
         this.state.isUndefined = false;
         this.state.value       = value;
         this.validate();

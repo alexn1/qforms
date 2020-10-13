@@ -1,5 +1,6 @@
 class TableFormView extends ReactComponent {
     render() {
+        console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
