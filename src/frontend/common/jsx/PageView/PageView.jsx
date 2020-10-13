@@ -37,6 +37,30 @@ class PageView extends ReactComponent {
         }
         return caption;
     }
+    renderToolbar() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.model;
+        const width = '150px';
+        return (
+            <div>
+                {model.hasRowFormWithDefaultDsAndTable() &&
+                <Button
+                    key="saveAndClose"
+                    width={width}
+                    title={model.getApp().getText().page.saveAndClose}
+                    onClick={ctrl.onSaveAndCloseClick}
+                    enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
+                />
+                }
+                <Button
+                    key="close"
+                    width={width}
+                    title={model.getApp().getText().page.close}
+                    onClick={ctrl.onClosePageClick}
+                />
+            </div>
+        );
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -46,7 +70,7 @@ class PageView extends ReactComponent {
                 <div className="frame flex-rows">
                     <h3 className="caption flex-min">{this.renderCaption()}</h3>
                     {model.hasRowFormWithDefaultDs() &&
-                        [<Toolbar3 key="one" ctrl={ctrl}/>,
+                        [this.renderToolbar(),
                         <div key="two" className="splitter flex-min">&nbsp;</div>]
                     }
                     {model.hasRowForm() && this.renderRowForms()}
