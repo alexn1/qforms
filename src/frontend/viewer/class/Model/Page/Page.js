@@ -71,7 +71,7 @@ class Page extends Model {
         return null;
     }
 
-    hasARowFormWithDefaultDs() {
+    hasRowFormWithDefaultDs() {
         let result = false;
         for (const formName in this.forms) {
             const form = this.forms[formName].data;
@@ -85,7 +85,7 @@ class Page extends Model {
         return result;
     }
 
-    hasARowFormWithDefaultDsAndTable() {
+    hasRowFormWithDefaultDsAndTable() {
         let result = false;
         for (const formName in this.forms) {
             const form = this.forms[formName].data;
@@ -99,7 +99,7 @@ class Page extends Model {
         return result;
     }
 
-    isThereARowForm() {
+    hasRowForm() {
         let result = false;
         for (const formName in this.forms) {
             const form = this.forms[formName].data;
