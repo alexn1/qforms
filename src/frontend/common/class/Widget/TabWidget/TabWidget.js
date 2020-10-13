@@ -58,7 +58,7 @@ class TabWidget extends Widget {
         this.emit('tabClosingByUser', {source: this, tab: tab});
     }
 
-    createTab(el, caption, onCloseCallback) {
+    createTab(el, caption, onCloseCallback, id) {
         if (caption === undefined) {
             caption = '';
         }
@@ -67,6 +67,8 @@ class TabWidget extends Widget {
         li.onCloseCallback = onCloseCallback;
         // div
         const div = document.createElement('div');
+        if (id) div.id = id;
+
         div.appendChild(el);
         // append
         this.tabList.appendChild(li);
