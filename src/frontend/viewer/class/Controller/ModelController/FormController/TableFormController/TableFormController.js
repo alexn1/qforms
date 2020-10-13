@@ -95,14 +95,16 @@ class TableFormController extends FormController {
 
     onRefilled(ea) {
         console.log('TableFormController.onRefilled', this.model.getFullName());
-        this.grid.clear();
+        /*this.grid.clear();
         this.updateCountAndGoTo();
-        this.grid.fill();
+        this.grid.fill();*/
+        this.rerender();
     }
 
     onRefreshed(ea) {
         console.log('TableFormController.onRefreshed', this.model.getFullName());
-        this.updateCountAndGoTo();
+        // this.updateCountAndGoTo();
+        this.rerender();
     }
 
     onNewClick = async e => {
