@@ -43,12 +43,12 @@ class FieldController extends ModelController {
         super.deinit();
     }
 
-    renderView() {
+    /*renderView() {
         if (this.html === null) {
             this.html = QForms.render(this.model.data.view, {model: this.model});
         }
         return $(this.html).get(0);
-    }
+    }*/
 
     fill(row, view) {
         // console.log('FieldController.fill', this.model.getFullName());
