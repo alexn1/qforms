@@ -37,9 +37,18 @@ class PageController extends ModelController {
         // forms
         for (const name in this.model.forms) {
             const form = this.model.forms[name];
-            const view = FormController.createView(form, this);
-            this.forms[name] = FormController.create(form, view, this);
-            this.forms[name].init();
+            if (form.getClassName() === 'RowForm') {
+                const view = this.view.querySelector(`#${this.model.id}_${form.getName()}_root`);
+                const ctrl = this.forms[name] = FormController.create(form, view, this);
+                ctrl.init();
+                ctrl.rowFormView = ApplicationController.createReactComponent(view, RowFormView, {ctrl: ctrl});
+            } else {
+                const view = FormController.createView(form, this);
+                const ctrl = this.forms[name] = FormController.create(form, view, this);
+                ctrl.init();
+            }
+
+
         }
     }
 
@@ -187,5 +196,8 @@ class PageController extends ModelController {
 
     getApplicationController() {
         return this.parent;
+    }
+    rerender() {
+
     }
 }

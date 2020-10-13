@@ -38,9 +38,7 @@
                             <% for (const name in model.forms) {
                                 const form = model.forms[name];
                                 if (form.getClassName() === 'TableForm' || form.getClassName() === 'TreeForm') {
-                                    %><div id="<%=model.id%>_<%=form.getName()%>_root">
-
-                                    </div><%
+                                    %><div id="<%=model.id%>_<%=form.getName()%>_root"/><%
                                 }
                             } %>
                         </div>

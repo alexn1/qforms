@@ -18,16 +18,7 @@ class RowFormController extends FormController {
         super.init();
         this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         this.calcState();
-
-        this.rowFormView = ApplicationController.createReactComponent(this.view, RowFormView, {ctrl: this});
-
-        /*
-        this.toolbar = ApplicationController.createReactComponent(this.view.querySelector('.toolbar'), Toolbar, {
-            ctrl: this
-        });
-        this.formGrid = ApplicationController.createReactComponent(this.view.querySelector('.formgrid'), FormGrid, {
-            ctrl: this
-        });*/
+        // this.rowFormView = ApplicationController.createReactComponent(this.view, RowFormView, {ctrl: this});
     }
 
     deinit() {
@@ -37,9 +28,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].deinit(row);
         }
-        // ReactDOM.unmountComponentAtNode(this.view.querySelector('.toolbar'));
-        // ReactDOM.unmountComponentAtNode(this.view.querySelector('.formgrid'));
-        ReactDOM.unmountComponentAtNode(this.view);
+        // ReactDOM.unmountComponentAtNode(this.view);
         super.deinit();
     }
 
@@ -169,8 +158,6 @@ class RowFormController extends FormController {
     }
 
     rerender() {
-        // this.toolbar.rerender();
-        // this.formGrid.rerender();
         this.rowFormView.rerender();
     }
 
