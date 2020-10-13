@@ -31,8 +31,8 @@ class PageController extends ModelController {
         $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
 
         // button click
-        $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick.bind(this));
-        $(this.view).find('button.closePage').click(this.onClosePageClick.bind(this));
+        $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick);
+        $(this.view).find('button.closePage').click(this.onClosePageClick);
 
         // forms
         for (const name in this.model.forms) {
@@ -72,7 +72,7 @@ class PageController extends ModelController {
         this.setCaption(this.getCaption());
     }
 
-    async onSaveAndCloseClick() {
+    onSaveAndCloseClick = async () => {
         console.log('PageController.onSaveAndCloseClick');
         if (this.isValid()) {
             await this.model.update();
@@ -82,13 +82,13 @@ class PageController extends ModelController {
             for (const name in this.forms) {
                 const form = this.forms[name];
                 if (form.model.getClassName() === 'RowForm') {
-                    form.updateErrorClasses();
+                    // form.updateErrorClasses();
                 }
             }
         }
     }
 
-    onClosePageClick() {
+    onClosePageClick = () => {
         // console.log('PageController.onClosePageClick', this.model.getFullName());
         this.close();
     }
