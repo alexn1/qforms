@@ -17,13 +17,12 @@ class ViewerController {
         const application = this.application = new Application(this.data);
         application.init();
 
-        /*
-        // applicationController
-        const html = QForms.render(this.application.data.view, {model: this.application});
-        const view = $(html).get(0);*/
-        const view = null;
+        let view = null;
 
-        // const view = null;
+        // const html = QForms.render(this.application.data.view, {model: this.application});
+        // view = $(html).get(0);
+
+        // applicationController
         const ctrl = this.applicationController = ApplicationController.create(this.application, view);
         ctrl.init();
 

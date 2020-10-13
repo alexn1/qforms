@@ -29,6 +29,7 @@ class Tab extends ReactComponent {
             data-i={i}
         >
             <span>{tab.title}</span>
+            {this.props.canClose && <span className='close'>&times;</span>}
         </li>);
     }
     renderContents() {
