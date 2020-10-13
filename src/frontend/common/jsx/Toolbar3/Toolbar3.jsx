@@ -11,6 +11,7 @@ class Toolbar3 extends ReactComponent {
                     width={width}
                     title={model.getApp().getText().page.saveAndClose}
                     onClick={ctrl.onSaveAndCloseClick}
+                    enabled={model.hasNew()}
                 />
                 }
                 <Button
