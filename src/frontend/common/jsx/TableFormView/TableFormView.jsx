@@ -32,6 +32,20 @@ class TableFormView extends ReactComponent {
             </div>
         );
     }
+    renderPaging() {
+        const model = this.props.ctrl.model;
+        return (
+            <div className="Paging">
+                <div className="countBlock">
+                    <span>{model.getApp().getText().form.count}</span>
+                    <span className="count"/>
+                </div>
+                <button className="previous">{model.getApp().getText().form.previous}</button>
+                <select className="goto"/>
+                <button className="next">{model.getApp().getText().form.next}</button>
+            </div>
+        );
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -44,7 +58,7 @@ class TableFormView extends ReactComponent {
                       getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
                       onDoubleClick={ctrl.onGridCellDblClick}
                 />
-                <Paging ctrl={ctrl}/>
+                {this.renderPaging()}
             </div>
         );
     }
