@@ -73,6 +73,13 @@ class PageController extends ModelController {
         super.deinit();
     }
 
+    getTabs() {
+        return [
+            {name: 'tab1', title: 'Tab1', content: 'content1'},
+            {name: 'tab2', title: 'tab2', content: 'content2'},
+        ];
+    }
+
     fill() {
         for (const name in this.forms) {
             this.forms[name].fill();
