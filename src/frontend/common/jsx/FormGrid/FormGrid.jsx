@@ -1,5 +1,5 @@
 class FormGrid extends ReactComponent {
-    getFieldLabel(model) {
+    renderFieldLabel(model) {
         return (
             <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
                 {model.data.caption}:
@@ -7,8 +7,8 @@ class FormGrid extends ReactComponent {
             </div>
         );
     }
-    getFieldTooltip(model, ctrl) {
-        // console.log('getFieldTooltip:', ctrl.state);
+    renderFieldTooltip(model, ctrl) {
+        // console.log('renderFieldTooltip:', ctrl.state);
         return (
             <div key={`tooltip.${model.getName()}`} className={`tooltip ${model.getName()}`}>
                 <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
@@ -27,9 +27,9 @@ class FormGrid extends ReactComponent {
                     const fieldCtrl  = ctrl.fields[name];
                     // console.log('fieldModel:', fieldModel);
                     return [
-                        this.getFieldLabel(fieldModel),
+                        this.renderFieldLabel(fieldModel),
                         <RowFormFieldView key={`field.${fieldModel.getName()}`} ctrl={fieldCtrl}/>,
-                        this.getFieldTooltip(fieldModel, fieldCtrl)
+                        this.renderFieldTooltip(fieldModel, fieldCtrl)
                     ];
                 })}
             </div>
