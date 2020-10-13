@@ -39,7 +39,7 @@ class Tab extends ReactComponent {
     }
     render() {
         return (
-            <div className={this.getClassName()} style={{height: '120px'}}>
+            <div className={this.getClassName()}>
                 <ul>
                     {this.props.tabs && this.renderTitles()}
                 </ul>
