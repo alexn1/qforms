@@ -1,16 +1,12 @@
 <div id="<%=model.id%>" class="PageView <%=model.getName()%> full place">
     <div class="frame flex-rows">
-        <!-- caption -->
         <h3 class="caption flex-min"><%=model.data.caption%></h3>
-        <!-- toolbar -->
-        <% if (model.isThereARowFormWithDefaultDs()) { %>
+        <% if (model.hasARowFormWithDefaultDs()) { %>
             <div class="toolbar flex-min">
-                <% if (model.isThereARowFormWithDefaultDsAndTable()) { %>
+                <% if (model.hasARowFormWithDefaultDsAndTable()) { %>
                     <button class="ButtonWidget saveAndClose"><%=model.getApp().data.text.page.saveAndClose%></button>
-                    <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
-                <%} else {%>
-                    <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
                 <%}%>
+                <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
             </div>
             <div class="splitter flex-min">&nbsp;</div>
         <%}%>
