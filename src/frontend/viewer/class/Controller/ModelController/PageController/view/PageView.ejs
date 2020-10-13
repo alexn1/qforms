@@ -18,7 +18,7 @@
             <div class="splitter flex-min">&nbsp;</div>
         <%}%>
         <!-- table forms -->
-        <% if (model.isThereATableFormOrTreeForm(this)) { %>
+        <% if (model.hasTableFormOrTreeForm(this)) { %>
             <div class="table-forms flex-max place">
                 <div class="frame">
                     <div id="<%=model.id%>_TabWidget" class="TabWidget TabWidget-blue full">

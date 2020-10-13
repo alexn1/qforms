@@ -113,13 +113,10 @@ class ApplicationController extends ModelController {
 
         // tab
         const [tab, root] = this.tabWidget.createTab2(null, null, null, model.id);
-        const view = PageController
-
         if (select) this.tabWidget.selectTab(tab, track);
 
         // pageController
         const pageController = PageController.create(model, null, this);
-
         pageController.tab = tab;
         pageController.init();
         pageController.fill();

@@ -7,8 +7,16 @@ class PageView extends ReactComponent {
             return {
                 name: form.getName(),
                 title: form.data.caption,
-                content: <TableFormView ctrl={ctrl.forms[name]}/>
+                content: <TableFormView key={name} ctrl={ctrl.forms[name]}/>
             };
+        });
+    }
+    getRowForms() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.model;
+        return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
+            const formController = ctrl.forms[name];
+            return <RowFormView key={name} ctrl={formController}/>;
         });
     }
     render() {
@@ -21,16 +29,13 @@ class PageView extends ReactComponent {
                     {model.hasRowFormWithDefaultDs() &&
                         <Toolbar3 ctrl={ctrl}/>
                     }
-                    {model.hasRowForm() && Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
-                        const formController = ctrl.forms[name];
-                        return <RowFormView key={name} ctrl={formController}/>;
-                    })}
-                    {model.isThereATableFormOrTreeForm() &&
-                    [<div className="table-forms flex-max place">
+                    {model.hasRowForm() && this.getRowForms()}
+                    {model.hasTableFormOrTreeForm() &&
+                    [<div key="one" className="table-forms flex-max place">
                         <div className="frame">
                             <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                         </div>
-                    </div>, <div className="splitter flex-min"></div>]
+                    </div>, <div key="two" className="splitter flex-min"></div>]
                     }
                 </div>
             </div>

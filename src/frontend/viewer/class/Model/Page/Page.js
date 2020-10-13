@@ -111,7 +111,7 @@ class Page extends Model {
         return result;
     }
 
-    isThereATableFormOrTreeForm() {
+    hasTableFormOrTreeForm() {
         let result = false;
         for (const formName in this.forms) {
             const form = this.forms[formName].data;
