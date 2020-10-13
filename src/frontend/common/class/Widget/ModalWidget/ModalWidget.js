@@ -13,6 +13,13 @@ class ModalWidget extends Widget {
         }
         return el;
     }
+    static createElementAndRoot() {
+        const el = document.createElement('div');
+        el.classList.add(ModalWidget.name);
+        const root = document.createElement('div');
+        el.appendChild(root);
+        return [el, root];
+    }
     constructor(el) {
         // console.log('ModalWidget.constructor', el);
         super(el);

@@ -19,10 +19,12 @@ class PageController extends ModelController {
         this.parent     = parent;
         this.forms      = {};
         this.tab        = null;
-        this.toolbar3 = null;
+        this.modal      = null;
+        this.root = null;
     }
 
     createView(root) {
+        this.root = root;
         this.view = ApplicationController.createReactComponent(root, PageView, {ctrl: this});
     }
 
@@ -67,6 +69,7 @@ class PageController extends ModelController {
 
     deinit() {
         console.log('PageController.deinit: ' + this.model.getFullName());
+        if (this.root) ReactDOM.unmountComponentAtNode(this.root);
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
@@ -217,6 +220,6 @@ class PageController extends ModelController {
         return this.parent;
     }
     rerender() {
-        if (this.toolbar3) this.toolbar3.rerender();
+        this.view.rerender();
     }
 }

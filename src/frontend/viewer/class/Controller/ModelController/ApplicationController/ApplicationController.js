@@ -78,8 +78,8 @@ class ApplicationController extends ModelController {
         this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
         this.tabWidget.init();
         this.tabWidget.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-        this.tabWidget.on('tabShow'         , this.listeners.tabShow = this.onTabShow.bind(this));
-        this.tabWidget.on('tabHide'         , this.listeners.tabHide = this.onTabHide.bind(this));
+        this.tabWidget.on('tabShow'         , this.listeners.tabShow          = this.onTabShow.bind(this));
+        this.tabWidget.on('tabHide'         , this.listeners.tabHide          = this.onTabHide.bind(this));
     }
 
     createPages() {
@@ -118,28 +118,26 @@ class ApplicationController extends ModelController {
         // pageController
         const pageController = PageController.create(model, null, this);
         pageController.tab = tab;
+        tab.pageController = pageController;
         pageController.init();
         pageController.fill();
-
         pageController.createView(root);
-
-        tab.pageController = pageController;
-
     }
     createModalPageController(model) {
         console.log('ApplicationController.createModalPageController', model);
-        const html = QForms.render(model.data.view, {model});
-        const view = $(html).get(0);
+        // const html = QForms.render(model.data.view, {model});
+        // const view = $(html).get(0);
 
-        const el = ModalWidget.createElement(view);
+        const [el, root] = ModalWidget.createElementAndRoot();
         this.view.appendChild(el);
         const modal = new ModalWidget(el);
 
         // pageController
-        const pageController = PageController.create(model, view, this);
+        const pageController = PageController.create(model, null, this);
         pageController.modal = modal;
         pageController.init();
         pageController.fill();
+        pageController.createView(root);
     }
 
     onPageSelected(e) {
