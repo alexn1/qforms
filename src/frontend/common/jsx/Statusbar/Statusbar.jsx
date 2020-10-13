@@ -8,6 +8,10 @@ class Statusbar extends ReactComponent {
         this.setState({lastQueryTime});
     }
     render() {
-        return (<div >Last query time: {this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-' }</div>);
+        return (
+            <div className="Statusbar">
+                <div>Last query time: {this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-' }</div>
+            </div>
+        );
     }
 }

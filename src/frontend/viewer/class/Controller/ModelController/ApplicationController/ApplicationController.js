@@ -62,7 +62,7 @@ class ApplicationController extends ModelController {
     }
 
     initMenu() {
-        this.menu = ApplicationController.createReactComponent(this.view.querySelector('.Menu'), Menu, {
+        this.menu = ApplicationController.createReactComponent(this.view.querySelector('.menu'), Menu, {
             items: this.getMenuItemsProp(),
             onClick: this.onMenuItemClick.bind(this),
             cb: menu => this.menu = menu
@@ -71,7 +71,7 @@ class ApplicationController extends ModelController {
     }
 
     initStatusbar() {
-        this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.Statusbar'), Statusbar);
+        this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.statusbar'), Statusbar);
     }
 
     initTab() {
