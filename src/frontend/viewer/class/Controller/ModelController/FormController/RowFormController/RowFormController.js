@@ -11,7 +11,6 @@ class RowFormController extends FormController {
             changed: false,
             valid  : true
         };
-        this.rowFormView = null;
     }
 
     init() {
@@ -155,10 +154,6 @@ class RowFormController extends FormController {
 
     async onActionClick(action, row) {
         console.log('RowFormController.onActionClick', action, row);
-    }
-
-    rerender() {
-        this.rowFormView.rerender();
     }
 
     onEditClick = e => {

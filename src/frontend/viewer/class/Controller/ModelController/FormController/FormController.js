@@ -75,5 +75,8 @@ class FormController extends ModelController {
         console.log('FormController.onFieldChange', this.model.getFullName());
         this.parent.onFormChange(e);
     }
+    rerender() {
+        this.view.rerender();
+    }
 
 }
