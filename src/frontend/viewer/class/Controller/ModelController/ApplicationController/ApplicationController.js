@@ -62,19 +62,22 @@ class ApplicationController extends ModelController {
     }
 
     initMenu() {
+        if (!this.view) return;
         this.menu = ApplicationController.createReactComponent(this.view.querySelector('.menu'), Menu, {
             items: this.getMenuItemsProp(),
-            onClick: this.onMenuItemClick.bind(this),
+            onClick: this.onMenuItemClick,
             cb: menu => this.menu = menu
         });
         // setTimeout(() => this.menu.toggleMenu('Pages'), 1000);
     }
 
     initStatusbar() {
+        if (!this.view) return;
         this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.statusbar'), Statusbar);
     }
 
     initTab() {
+        if (!this.view) return;
         this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
         this.tabWidget.init();
         this.tabWidget.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
@@ -83,6 +86,7 @@ class ApplicationController extends ModelController {
     }
 
     createPages() {
+        if (!this.view) return;
         for (const name in this.model.data.pages) {
             const page = new Page({
                 app : this.model,
@@ -271,7 +275,7 @@ class ApplicationController extends ModelController {
         return this.lastPageId;
     }
 
-    async onMenuItemClick(menu, item) {
+    onMenuItemClick = async (menu, item) => {
         console.log('ApplicationController.onMenuItemClick', menu, item);
         try {
             await this.openPage({name: item});

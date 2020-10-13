@@ -38,16 +38,16 @@ class Menu extends ReactComponent {
     }
     render() {
         return (
-        <div className="Menu">
-            {this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : null}>
-                <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
-                <div onMouseDown={this.onMouseDown} onClick={this.onMenuItemClick}>
-                    {menu.items.map(item =>
-                        <a key={item.name} data-menu={menu.name} data-item={item.name}>{item.title}</a>
-                    )}
-                </div>
-            </div>)}
-        </div>
+            <div className="Menu">
+                {this.props.items && this.props.items.map(menu => <div key={menu.name} className={this.state[menu.name] ? 'active' : null}>
+                    <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
+                    <div onMouseDown={this.onMouseDown} onClick={this.onMenuItemClick}>
+                        {menu.items.map(item =>
+                            <a key={item.name} data-menu={menu.name} data-item={item.name}>{item.title}</a>
+                        )}
+                    </div>
+                </div>)}
+            </div>
         );
     }
 }

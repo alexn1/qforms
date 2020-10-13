@@ -11,19 +11,34 @@ class ViewerController {
     init() {
         console.log('ViewerController.init');
 
-        // application
-        this.application = new Application(this.data);
-        this.application.init();
+        const root = document.querySelector('#client');
 
+        // application
+        const application = this.application = new Application(this.data);
+        application.init();
+
+        /*
         // applicationController
         const html = QForms.render(this.application.data.view, {model: this.application});
-        const $view = $(html);
-        this.applicationController = ApplicationController.create(this.application, $view.get(0));
-        this.applicationController.init();
+        const view = $(html).get(0);*/
+        const view = null;
+
+        // const view = null;
+        const ctrl = this.applicationController = ApplicationController.create(this.application, view);
+        ctrl.init();
+
+
+
+
 
         // show view
         console.log('append app view to DOM');
-        $('#client').append($view);
+        if (view) {
+            root.appendChild(view);
+        } else {
+            ApplicationController.createReactComponent(root, ApplicationView, {ctrl});
+        }
+
     }
 
     deinit() {
