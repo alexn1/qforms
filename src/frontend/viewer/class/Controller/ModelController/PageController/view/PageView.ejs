@@ -4,13 +4,13 @@
         <% if (model.hasRowFormWithDefaultDs()) { %>
             <div class="toolbar flex-min">
                 <% if (model.hasRowFormWithDefaultDsAndTable()) { %>
-                    <button class="ButtonWidget saveAndClose"><%=model.getApp().data.text.page.saveAndClose%></button>
+                    <button class="ButtonWidget saveAndClose"><%=model.getApp().getText().page.saveAndClose%></button>
                 <%}%>
-                <button class="ButtonWidget closePage"><%=model.getApp().data.text.page.close%></button>
+                <button class="ButtonWidget closePage"><%=model.getApp().getText().page.close%></button>
             </div>
             <div class="splitter flex-min">&nbsp;</div>
+            <div class="toolbar3"/>
         <%}%>
-        <div class="toolbar3"/>
         <!-- row forms -->
         <% if (model.hasRowForm()) { %>
             <div id="<%=model.id%>_<%=Object.keys(model.forms)[0]%>_root" class="row-forms flex-min"/>

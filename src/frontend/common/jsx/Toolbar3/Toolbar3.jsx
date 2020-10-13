@@ -1,7 +1,21 @@
-function Toolbar3() {
+function Toolbar3(props) {
+    const ctrl = props.ctrl;
+    const model = ctrl.model;
+    const width = '150px';
     return (
         <div className="Toolbar3">
-            toolbar3
+            {model.hasRowFormWithDefaultDsAndTable() &&
+                <Button
+                    key="saveAndClose"
+                    width={width}
+                    title={model.getApp().getText().page.saveAndClose}
+                />
+            }
+            <Button
+                key="close"
+                width={width}
+                title={model.getApp().getText().page.close}
+            />
         </div>
     );
 }

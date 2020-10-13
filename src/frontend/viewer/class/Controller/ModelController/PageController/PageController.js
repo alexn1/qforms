@@ -47,7 +47,10 @@ class PageController extends ModelController {
                 ctrl.view = ApplicationController.createReactComponent(view, TableFormView, {ctrl});
             }
         }
-        ApplicationController.createReactComponent(this.view.querySelector('.toolbar3'), Toolbar3, {ctrl: this});
+        const toolbar3 = this.view.querySelector('.toolbar3');
+        if (toolbar3) {
+            ApplicationController.createReactComponent(toolbar3, Toolbar3, {ctrl: this});
+        }
     }
 
     getCaptionElements() {
