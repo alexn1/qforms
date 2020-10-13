@@ -22,11 +22,16 @@ class PageController extends ModelController {
         this.toolbar3 = null;
     }
 
+    createView(root) {
+        this.view = ApplicationController.createReactComponent(root, PageView, {ctrl: this});
+    }
+
     init() {
         const self = this;
+        /*
         $(this.view).find(`#${this.model.id}_TabWidget`).each(function() {
             new TabWidget(this).init();
-        });
+        });*/
 
         // disable buttons
         // $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
@@ -41,17 +46,19 @@ class PageController extends ModelController {
             const ctrl = this.forms[name] = FormController.create(form, null, this);
             ctrl.init();
 
+            /*
             const view = this.view.querySelector(`#${this.model.id}_${form.getName()}_root`);
             if (form.getClassName() === 'RowForm') {
                 ctrl.view = ApplicationController.createReactComponent(view, RowFormView, {ctrl});
             } else if (form.getClassName() === 'TableForm') {
                 ctrl.view = ApplicationController.createReactComponent(view, TableFormView, {ctrl});
-            }
+            }*/
         }
+        /*
         const toolbar3 = this.view.querySelector('.toolbar3');
         if (toolbar3) {
             this.toolbar3 = ApplicationController.createReactComponent(toolbar3, Toolbar3, {ctrl: this});
-        }
+        }*/
     }
 
     getCaptionElements() {
@@ -116,7 +123,7 @@ class PageController extends ModelController {
     }
 
     setCaption(caption) {
-        this.getCaptionElements().forEach(el => el.innerHTML = caption);
+        // this.getCaptionElements().forEach(el => el.innerHTML = caption);
         if (this.tab) {
             TabWidget.setTabCaption(this.tab, caption);
         }

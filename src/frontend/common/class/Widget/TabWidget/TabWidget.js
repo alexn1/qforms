@@ -82,6 +82,33 @@ class TabWidget extends Widget {
         return li;
     }
 
+    createTab2(el, caption, onCloseCallback, id) {
+        if (caption === undefined) {
+            caption = '';
+        }
+        // li
+        const li = $("<li><span>{caption}</span> <span class='close'>&times;</span></li>".replace('{caption}', caption)).get(0);
+        li.onCloseCallback = onCloseCallback;
+        // div
+        const div = document.createElement('div');
+        if (id) div.id = id;
+
+        if (el) {
+            div.appendChild(el);
+        }
+
+        // append
+        this.tabList.appendChild(li);
+        this.pageList.appendChild(div);
+        // tab is done
+        this.initTab(li);
+        // if active tab is not defined then select this tab
+        if (this.activeTab === undefined) {
+            this.selectTab(li);
+        }
+        return [li, div];
+    }
+
     selectTab(tab, track) {
         // console.log('TabWidget.selectTab', tab, track);
         if (this.activeTab === tab) {

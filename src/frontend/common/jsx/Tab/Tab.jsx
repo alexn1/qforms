@@ -17,7 +17,7 @@ class Tab extends ReactComponent {
     getClassName() {
         return [
             'Tab',
-            ...[this.props.classList ? this.props.classList : []]
+            ...(this.props.classList ? this.props.classList : [])
         ].join(' ');
     }
     renderTitles() {

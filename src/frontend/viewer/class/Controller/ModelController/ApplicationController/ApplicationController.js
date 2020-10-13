@@ -108,19 +108,26 @@ class ApplicationController extends ModelController {
 
     createPageController(model, select = false, track = false) {
         console.log('ApplicationController.createPageController', model);
-        const html = QForms.render(model.data.view, {model});
-        const view = $(html).get(0);
+        // const html = QForms.render(model.data.view, {model});
+        // const view = $(html).get(0);
 
         // tab
-        const tab = this.tabWidget.createTab(view, null, null, model.id);
+        const [tab, root] = this.tabWidget.createTab2(null, null, null, model.id);
+        const view = PageController
+
         if (select) this.tabWidget.selectTab(tab, track);
 
         // pageController
-        const pageController = PageController.create(model, view, this);
-        tab.pageController = pageController;
+        const pageController = PageController.create(model, null, this);
+
         pageController.tab = tab;
         pageController.init();
         pageController.fill();
+
+        pageController.createView(root);
+
+        tab.pageController = pageController;
+
     }
     createModalPageController(model) {
         console.log('ApplicationController.createModalPageController', model);
