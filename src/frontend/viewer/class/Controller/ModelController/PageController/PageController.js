@@ -19,6 +19,7 @@ class PageController extends ModelController {
         this.parent     = parent;
         this.forms      = {};
         this.tab        = null;
+        this.toolbar3 = null;
     }
 
     init() {
@@ -49,7 +50,7 @@ class PageController extends ModelController {
         }
         const toolbar3 = this.view.querySelector('.toolbar3');
         if (toolbar3) {
-            ApplicationController.createReactComponent(toolbar3, Toolbar3, {ctrl: this});
+            this.toolbar3 = ApplicationController.createReactComponent(toolbar3, Toolbar3, {ctrl: this});
         }
     }
 
@@ -199,6 +200,6 @@ class PageController extends ModelController {
         return this.parent;
     }
     rerender() {
-
+        if (this.toolbar3) this.toolbar3.rerender();
     }
 }
