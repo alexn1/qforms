@@ -2,8 +2,8 @@ class Grid extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            column: 1,
-            row: 0
+            column: null,
+            row   : null
         };
     }
     isRowActive(i) {

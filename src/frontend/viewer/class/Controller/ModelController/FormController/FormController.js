@@ -2,10 +2,10 @@
 
 class FormController extends ModelController {
 
-    static createView(model, parent) {
+    /*static createView(model, parent) {
         // console.log('FormController.createView', model, parent);
         return parent.view.querySelector(`#${model.getPage().id}_${model.getName()}_root`);
-    }
+    }*/
 
     static create(model, view, parent) {
         console.log('FormController.create', model.getFullName());
@@ -22,7 +22,7 @@ class FormController extends ModelController {
         this.view     = view;
         this.parent   = parent;
         this.fields   = {};
-        this.controls = {};
+        // this.controls = {};
     }
 
     init() {
@@ -77,6 +77,10 @@ class FormController extends ModelController {
     }
     rerender() {
         this.view.rerender();
+    }
+    onViewCreated = view => {
+        console.log('FormController.onViewCreated', view);
+        this.view = view;
     }
 
 }
