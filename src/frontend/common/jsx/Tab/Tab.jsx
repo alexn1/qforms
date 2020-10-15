@@ -6,11 +6,23 @@ class Tab extends ReactComponent {
         };
     }
     onLiMouseDown = e => {
-        // console.log('Tab.onLiMouseDown', e.currentTarget.dataset.i);
+        // console.log('Tab.onLiMouseDown', e.target);
+        if (e.target.classList.contains('close')) return;
         const i = parseInt(e.currentTarget.dataset.i);
-        this.selectTab(i);
+        if (i !== this.state.active) {
+            this.selectTab(i);
+        }
+    }
+    onLiClick = e => {
+        // console.log('Tab.onLiClick', e.target);
+        if (e.target.classList.contains('close')) {
+            const i = parseInt(e.currentTarget.dataset.i);
+            console.log('close tab:', i);
+            if (this.props.onTabClose) this.props.onTabClose(i);
+        }
     }
     selectTab(i) {
+        if (i === this.state.active) return;
         const start = new Date().getTime();
         this.setState({active: i}, () => console.log('selectTab time:', new Date().getTime() - start));
     }
@@ -26,10 +38,13 @@ class Tab extends ReactComponent {
             key={tab.name}
             className={i === this.state.active ? 'active' : null}
             onMouseDown={this.onLiMouseDown}
+            onClick={this.onLiClick}
             data-i={i}
         >
             <span>{tab.title}</span>
-            {this.props.canClose && <span className='close'>&times;</span>}
+            {this.props.canClose &&
+                <span className="close">&times;</span>
+            }
         </li>);
     }
     renderContents() {
