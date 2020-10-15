@@ -213,4 +213,8 @@ class PageController extends ModelController {
     rerender() {
         this.view.rerender();
     }
+    onViewCreated = view => {
+        // console.log('PageController.onViewCreated');
+        this.view = view;
+    }
 }
