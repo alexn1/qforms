@@ -12,7 +12,7 @@ class ViewerController {
         const root = document.querySelector('#client');
         const application = new Application(this.data);
         application.init();
-        const applicationController = this.applicationController = ApplicationController.create(application, null);
+        const applicationController = this.applicationController = ApplicationController.create(application);
         applicationController.init();
         applicationController.createView(root);
         // show view
