@@ -16,7 +16,7 @@ class ApplicationController extends ModelController {
     constructor(model, view) {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
-        this.view = view;
+        this.view       = view;
         this.lastPageId = 0;
         this.tab        = null;
         this.statusbar  = null;
@@ -43,10 +43,6 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.init');
         this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request', this.listeners.request = this.onRequest.bind(this));
-        //this.initMenu();
-        //this.initStatusbar();
-        //this.initTab();
-        //this.createPages();
         this.pages = this.createPages2();
         this.activePage = this.pages.length ? this.pages[0] : null;
     }
@@ -73,7 +69,7 @@ class ApplicationController extends ModelController {
         }));
     }
 
-    initMenu() {
+    /*initMenu() {
         if (!this.view) return;
         this.menu = ApplicationController.createReactComponent(this.view.querySelector('.menu'), Menu, {
             items: this.getMenuItemsProp(),
@@ -81,23 +77,23 @@ class ApplicationController extends ModelController {
             cb: menu => this.menu = menu
         });
         // setTimeout(() => this.menu.toggleMenu('Pages'), 1000);
-    }
+    }*/
 
-    initStatusbar() {
+    /*initStatusbar() {
         if (!this.view) return;
         this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.statusbar'), Statusbar);
-    }
+    }*/
 
-    initTab() {
+    /*initTab() {
         if (!this.view) return;
         this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
         this.tabWidget.init();
         this.tabWidget.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
         this.tabWidget.on('tabShow'         , this.listeners.tabShow          = this.onTabShow.bind(this));
         this.tabWidget.on('tabHide'         , this.listeners.tabHide          = this.onTabHide.bind(this));
-    }
+    }*/
 
-    createPages() {
+    /*createPages() {
         if (!this.view) return;
         for (const name in this.model.data.pages) {
             const page = new Page(this.model.data.pages[name], this.model, {
@@ -108,7 +104,7 @@ class ApplicationController extends ModelController {
             page.init();
             this.createPageController(page);
         }
-    }
+    }*/
     createPages2() {
         return Object.keys(this.model.data.pages).map(name => {
             // model
@@ -132,13 +128,13 @@ class ApplicationController extends ModelController {
         this.model.off('request', this.listeners.request);
 
         // TabWidget
-        this.tabWidget.off('tabClosingByUser', this.listeners.tabClosingByUser);
+        /*this.tabWidget.off('tabClosingByUser', this.listeners.tabClosingByUser);
         this.tabWidget.off('tabShow', this.listeners.tabShow);
-        this.tabWidget.off('tabHide', this.listeners.tabHide);
+        this.tabWidget.off('tabHide', this.listeners.tabHide);*/
         super.deinit();
     }
 
-    createPageController(model, select = false, track = false) {
+    /*createPageController(model, select = false, track = false) {
         console.log('ApplicationController.createPageController', model.getFullName());
         // const html = QForms.render(model.data.view, {model});
         // const view = $(html).get(0);
@@ -154,8 +150,8 @@ class ApplicationController extends ModelController {
         pageController.init();
         // pageController.fill();
         pageController.createView(root);
-    }
-    createModalPageController(model) {
+    }*/
+    /*createModalPageController(model) {
         console.log('ApplicationController.createModalPageController', model.getFullName());
         // const html = QForms.render(model.data.view, {model});
         // const view = $(html).get(0);
@@ -170,7 +166,7 @@ class ApplicationController extends ModelController {
         pageController.init();
         // pageController.fill();
         pageController.createView(root);
-    }
+    }*/
 
     onPageSelected(pc) {
         console.log('ApplicationController.onPageSelected', pc.model.getName());
@@ -182,22 +178,22 @@ class ApplicationController extends ModelController {
         // this.tabWidget.selectTab(tab);
     }
 
-    onTabClosingByUser(e) {
+    /*onTabClosingByUser(e) {
         e.tab.pageController.close();
-    }
+    }*/
 
-    onTabShow(e) {
+    /*onTabShow(e) {
         // console.log('ApplicationController.onTabShow', e.tab.pageController);
         if (e.tab.pageController) {
             e.tab.pageController.emit('show', {source: this});
         }
-    }
+    }*/
 
-    onTabHide(e) {
+    /*onTabHide(e) {
         if (e.tab.pageController) {
             e.tab.pageController.emit('hide', {source: this});
         }
-    }
+    }*/
 
     onLogout(ea) {
         location.reload();
@@ -230,7 +226,6 @@ class ApplicationController extends ModelController {
         } else {
             throw new Error('page not found');
         }
-
         this.view.rerender();
         pageController.deinit();
         pageController.model.deinit();
@@ -252,7 +247,7 @@ class ApplicationController extends ModelController {
         return this.pages.find(({model}) => model.getName() === pageName && model.getKey() === key);
     }
 
-    findTabByPageController(pageController) {
+    /*findTabByPageController(pageController) {
         // console.log('ApplicationController.findTabByPageController');
         for (let i = 0; i < this.tabWidget.tabList.childNodes.length; i++) {
             const tab = this.tabWidget.tabList.childNodes[i];
@@ -261,7 +256,7 @@ class ApplicationController extends ModelController {
             }
         }
         return null;
-    }
+    }*/
 
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
