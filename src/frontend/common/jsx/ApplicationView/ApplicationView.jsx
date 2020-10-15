@@ -3,7 +3,7 @@ class ApplicationView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return ctrl.pages.map(pageCtrl => {
             return {
-                name   : pageCtrl.model.getName(),
+                name   : pageCtrl.model.id,
                 title  : pageCtrl.model.getCaption(),
                 content: <PageView ctrl={pageCtrl}/>
             };
@@ -12,7 +12,7 @@ class ApplicationView extends ReactComponent {
     renderModal() {
         const ctrl = this.props.ctrl;
         //return <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
-        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.getName()} content={<PageView ctrl={pageCtrl}/>}/>);
+        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.id} content={<PageView ctrl={pageCtrl}/>}/>);
     }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
