@@ -29,7 +29,7 @@ class ApplicationView extends ReactComponent {
                     getActive={ctrl.getActivePageIndex}
                     onTabMouseDown={ctrl.onTabMouseDown}
                 />
-                <Statusbar/>
+                <Statusbar cb={ctrl.onStatusbarCreated}/>
                 {this.renderModal()}
             </div>
         );

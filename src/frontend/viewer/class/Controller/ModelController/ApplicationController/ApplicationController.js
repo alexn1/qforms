@@ -17,15 +17,12 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
         this.view = view;
-        this.view2 = null;
         this.lastPageId = 0;
-        this.menu       = null;
-        this.tabWidget  = null;
+        this.tab        = null;
         this.statusbar  = null;
-        this.pages = null;
-        this.modalPages = [];
+        this.pages      = null;
         this.activePage = null;
-        this.tab    = null;
+        this.modalPages = [];
     }
 
     static getSearchObj() {
@@ -44,19 +41,14 @@ class ApplicationController extends ModelController {
 
     init() {
         // console.log('ApplicationController.init');
-
-        // app
         this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request', this.listeners.request = this.onRequest.bind(this));
-
-        this.initMenu();
-        this.initStatusbar();
-        this.initTab();
-        this.createPages();
-        if (!this.view) {
-            this.pages = this.createPages2();
-            this.activePage = this.pages.length ? this.pages[0] : null;
-        }
+        //this.initMenu();
+        //this.initStatusbar();
+        //this.initTab();
+        //this.createPages();
+        this.pages = this.createPages2();
+        this.activePage = this.pages.length ? this.pages[0] : null;
     }
 
     getActivePageIndex = () => {
@@ -67,7 +59,7 @@ class ApplicationController extends ModelController {
 
     createView(root) {
         console.log('ApplicationController.createView');
-        this.view2 = ApplicationController.createReactComponent(root, ApplicationView, {ctrl: this});
+        this.view = ApplicationController.createReactComponent(root, ApplicationView, {ctrl: this});
     }
 
     getMenuItemsProp() {
@@ -239,7 +231,7 @@ class ApplicationController extends ModelController {
             throw new Error('page not found');
         }
 
-        this.view2.rerender();
+        this.view.rerender();
         pageController.deinit();
         pageController.model.deinit();
     }
@@ -332,7 +324,7 @@ class ApplicationController extends ModelController {
         } else {
             this.pages.push(this.activePage = pc);
         }
-        this.view2.rerender();
+        this.view.rerender();
         /*
         if (modal) {
             this.createModalPageController(page);
@@ -376,11 +368,14 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.onTabCreated', tab);
         this.tab = tab;
     }
+    onStatusbarCreated = statusbar => {
+        this.statusbar = statusbar;
+    }
     onTabMouseDown = i => {
         console.log('PageController.onTabMouseDown');
         if (this.activePage !== this.pages[i]) {
             this.activePage = this.pages[i];
-            this.view2.rerender();
+            this.view.rerender();
         }
     }
 }
