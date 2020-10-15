@@ -18,6 +18,7 @@ class ApplicationView extends ReactComponent {
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose} cb={ctrl.onTabCreated} getActive={ctrl.getActivePageIndex}/>
                 <Statusbar/>
+                <Modal/>
             </div>
         );
     }

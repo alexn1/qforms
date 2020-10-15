@@ -53,7 +53,7 @@
 <!--    <script src="common/jsx/Toolbar3/Toolbar3.js"></script>-->
     <script src="common/jsx/PageView/PageView.js"></script>
     <script src="common/jsx/ApplicationView/ApplicationView.js"></script>
-
+    <script src="common/jsx/Modal/Modal.js"></script>
     <!-- app links begin -->
     <%links.forEach((link) => {
         %><link rel="stylesheet" href="<%=link%>"/><%
@@ -70,7 +70,8 @@
 <body>
 <%
 if (debugApp === '1') {
-    %><div id="client" class="debug"></div><%
+    %><div id="client" class="debug"></div>
+<%
 } else {
     %><div id="client"></div><%
 }
