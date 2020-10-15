@@ -62,8 +62,8 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const data = <%-JSON.stringify(data, null, 4)%>;
-        new QForms(data);
-        new ViewerController(data).init();
+        const qforms = new QForms(data);
+        qforms.init();
     });
     </script>
 </head>

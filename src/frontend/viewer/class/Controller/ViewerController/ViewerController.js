@@ -4,41 +4,31 @@ class ViewerController {
     constructor(data) {
         //console.log('ViewerController', data);
         this.data                  = data;
-        this.application           = null;
         this.applicationController = null;
     }
 
     init() {
         console.log('ViewerController.init');
-
         const root = document.querySelector('#client');
-
-        // application
-        const application = this.application = new Application(this.data);
+        const application = new Application(this.data);
         application.init();
-
-        let view = null;
-
-        // const html = QForms.render(this.application.data.view, {model: this.application});
-        // view = $(html).get(0);
-
-        // applicationController
-        const ctrl = this.applicationController = ApplicationController.create(this.application, view);
-        ctrl.init();
-
+        const applicationController = this.applicationController = ApplicationController.create(application, null);
+        applicationController.init();
+        applicationController.createView(root);
         // show view
-        if (view) {
+        // const html = QForms.render(application.data.view, {model: application});
+        // view = $(html).get(0);
+        /*if (view) {
             console.log('append app view to DOM');
             root.appendChild(view);
         } else {
-            ctrl.createView(root);
-        }
 
+        }*/
     }
 
     deinit() {
         this.applicationController.deinit();
-        this.application.deinit();
+        this.applicationController.model.deinit();
     }
 
 }

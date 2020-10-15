@@ -3,6 +3,7 @@
 class QForms {
     constructor(data) {
         console.log('QForms.constructor', data);
+        this.data = data;
         if (data) {
             QForms.env = data.env;
         }
@@ -14,6 +15,15 @@ class QForms {
             alert(err.message);
         };
         //window.onbeforeunload = QForms.exit;
+    }
+    init() {
+        console.log('QForms.init');
+        const root = document.querySelector('#client');
+        const application = new Application(this.data);
+        application.init();
+        const applicationController = ApplicationController.create(application, null);
+        applicationController.init();
+        applicationController.createView(root);
     }
 
     static exit(evt) {
