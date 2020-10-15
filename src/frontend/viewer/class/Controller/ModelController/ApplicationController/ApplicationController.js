@@ -23,6 +23,7 @@ class ApplicationController extends ModelController {
         this.tabWidget  = null;
         this.statusbar  = null;
         this.pages = null;
+        this.tab    = null;
     }
 
     static getSearchObj() {
@@ -336,5 +337,9 @@ class ApplicationController extends ModelController {
         pageController.deinit();
         pageController.model.deinit();
 
+    }
+    onTabCreated = tab => {
+        // console.log('ApplicationController.onTabCreated', tab);
+        this.tab = tab;
     }
 }
