@@ -227,11 +227,9 @@ class ApplicationController extends ModelController {
         }
         pageController.deinit();
         pageController.model.deinit();*/
-        const i = this.pages.indexOf(pageController);
-        this.pages.splice(i, 1);
-        if (this.tab.state.active === i) {
-            this.tab.state.active = this.pages.length - 1;
-            console.log('this.tab.state.active:', this.tab.state.active);
+        this.pages.splice(this.pages.indexOf(pageController), 1);
+        if (this.activePage === pageController) {
+            this.activePage = this.pages[this.pages.length - 1];
         }
         this.view2.rerender();
         pageController.deinit();
@@ -240,7 +238,7 @@ class ApplicationController extends ModelController {
 
     onPageClose = i => {
         console.log('ApplicationController.onPageClose', this.pages[i].model.getFullName());
-        this.closePage(this.pages[i])
+        this.closePage(this.pages[i]);
     }
 
     findPageControllerByPageNameAndKey(pageName, key) {
