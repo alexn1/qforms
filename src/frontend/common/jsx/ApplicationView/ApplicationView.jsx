@@ -9,6 +9,9 @@ class ApplicationView extends ReactComponent {
             };
         });
     }
+    renderModal() {
+
+    }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -18,7 +21,7 @@ class ApplicationView extends ReactComponent {
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose} cb={ctrl.onTabCreated} getActive={ctrl.getActivePageIndex}/>
                 <Statusbar/>
-                <Modal/>
+                <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
             </div>
         );
     }
