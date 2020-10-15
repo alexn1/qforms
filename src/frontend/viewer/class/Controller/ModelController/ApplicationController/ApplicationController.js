@@ -327,4 +327,14 @@ class ApplicationController extends ModelController {
         ReactDOM.render(reactElement, root);
         return component;
     }
+
+    onPageClose = i => {
+        console.log('ApplicationController.onPageClose', this.pages[i].model.getFullName());
+        const pageController = this.pages[i];
+        this.pages.splice(i, 1);
+        this.view2.rerender();
+        pageController.deinit();
+        pageController.model.deinit();
+
+    }
 }

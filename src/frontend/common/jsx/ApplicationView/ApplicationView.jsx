@@ -10,12 +10,13 @@ class ApplicationView extends ReactComponent {
         });
     }
     render() {
+        console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
             <div className={`ApplicationView ${model.data.theme}`}>
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
-                <Tab tabs={this.getTabs()} canClose={true}/>
+                <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose}/>
                 <Statusbar/>
             </div>
         );

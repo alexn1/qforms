@@ -17,7 +17,7 @@ class Tab extends ReactComponent {
         // console.log('Tab.onLiClick', e.target);
         if (e.target.classList.contains('close')) {
             const i = parseInt(e.currentTarget.dataset.i);
-            console.log('close tab:', i);
+            // console.log('close tab:', i);
             if (this.props.onTabClose) this.props.onTabClose(i);
         }
     }
