@@ -13,8 +13,15 @@ class Tab extends ReactComponent {
         // console.log('Tab.onLiMouseDown', e.target);
         if (e.target.classList.contains('close')) return;
         const i = parseInt(e.currentTarget.dataset.i);
-        if (i !== this.getActive()) {
-            this.selectTab(i);
+
+        if (this.props.getActive) {
+            console.log('on tab mouse down');
+            if (this.props.onTabMouseDown) this.props.onTabMouseDown(i);
+        } else {
+
+            if (i !== this.getActive()) {
+                this.selectTab(i);
+            }
         }
     }
     onLiClick = e => {

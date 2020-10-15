@@ -376,4 +376,11 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.onTabCreated', tab);
         this.tab = tab;
     }
+    onTabMouseDown = i => {
+        console.log('PageController.onTabMouseDown');
+        if (this.activePage !== this.pages[i]) {
+            this.activePage = this.pages[i];
+            this.view2.rerender();
+        }
+    }
 }
