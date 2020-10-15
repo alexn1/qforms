@@ -228,10 +228,17 @@ class ApplicationController extends ModelController {
         }
         pageController.deinit();
         pageController.model.deinit();*/
-        this.pages.splice(this.pages.indexOf(pageController), 1);
-        if (this.activePage === pageController) {
-            this.activePage = this.pages[this.pages.length - 1];
+        if (this.pages.indexOf(pageController) > -1) {
+            this.pages.splice(this.pages.indexOf(pageController), 1);
+            if (this.activePage === pageController) {
+                this.activePage = this.pages[this.pages.length - 1];
+            }
+        } else if (this.modalPages.indexOf(pageController) > -1) {
+            this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
+        } else {
+            throw new Error('page not found');
         }
+
         this.view2.rerender();
         pageController.deinit();
         pageController.model.deinit();
