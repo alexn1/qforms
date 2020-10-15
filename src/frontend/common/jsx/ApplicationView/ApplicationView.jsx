@@ -16,7 +16,7 @@ class ApplicationView extends ReactComponent {
         return (
             <div className={`ApplicationView ${model.data.theme}`}>
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
-                <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose} cb={ctrl.onTabCreated}/>
+                <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose} cb={ctrl.onTabCreated} getActive={ctrl.getActivePageIndex}/>
                 <Statusbar/>
             </div>
         );

@@ -5,11 +5,15 @@ class Tab extends ReactComponent {
             active: 0
         };
     }
+    getActive() {
+        if (this.props.getActive) return this.props.getActive();
+        return this.state.active;
+    }
     onLiMouseDown = e => {
         // console.log('Tab.onLiMouseDown', e.target);
         if (e.target.classList.contains('close')) return;
         const i = parseInt(e.currentTarget.dataset.i);
-        if (i !== this.state.active) {
+        if (i !== this.getActive()) {
             this.selectTab(i);
         }
     }
@@ -22,7 +26,7 @@ class Tab extends ReactComponent {
         }
     }
     selectTab(i) {
-        if (i === this.state.active) return;
+        if (i === this.getActive()) return;
         const start = new Date().getTime();
         this.setState({active: i}, () => console.log('selectTab time:', new Date().getTime() - start));
     }
@@ -36,7 +40,7 @@ class Tab extends ReactComponent {
         return this.props.tabs.map((tab, i) =>
         <li
             key={tab.name}
-            className={i === this.state.active ? 'active' : null}
+            className={i === this.getActive() ? 'active' : null}
             onMouseDown={this.onLiMouseDown}
             onClick={this.onLiClick}
             data-i={i}
@@ -49,7 +53,7 @@ class Tab extends ReactComponent {
     }
     renderContents() {
         return this.props.tabs.map((tab, i) =>
-        <div key={tab.name} className={i === this.state.active ? 'active' : null}>
+        <div key={tab.name} className={i === this.getActive() ? 'active' : null}>
             {tab.content}
         </div>);
     }
