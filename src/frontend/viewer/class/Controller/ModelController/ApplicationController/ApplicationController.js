@@ -4,7 +4,7 @@ class ApplicationController extends ModelController {
 
     static create(model, view) {
         // console.log('ApplicationController.create');
-        console.log('debug:', ApplicationController.isInDebugMode());
+        // console.log('debug:', ApplicationController.isInDebugMode());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
@@ -17,6 +17,7 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.constructor', model, view);
         super(model);
         this.view = view;
+        this.view2 = null;
         this.lastPageId = 0;
         this.menu       = null;
         this.tabWidget  = null;
@@ -52,6 +53,11 @@ class ApplicationController extends ModelController {
         if (!this.view) {
             this.pages = this.createPages2();
         }
+    }
+
+    createView(root) {
+        console.log('ApplicationController.createView');
+        this.view2 = ApplicationController.createReactComponent(root, ApplicationView, {ctrl: this});
     }
 
     getMenuItemsProp() {

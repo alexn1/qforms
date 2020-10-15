@@ -26,16 +26,12 @@ class ViewerController {
         const ctrl = this.applicationController = ApplicationController.create(this.application, view);
         ctrl.init();
 
-
-
-
-
         // show view
-        console.log('append app view to DOM');
         if (view) {
+            console.log('append app view to DOM');
             root.appendChild(view);
         } else {
-            ApplicationController.createReactComponent(root, ApplicationView, {ctrl});
+            ctrl.createView(root);
         }
 
     }
