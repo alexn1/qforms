@@ -98,9 +98,9 @@ class ApplicationController extends ModelController {
     createPages() {
         if (!this.view) return;
         for (const name in this.model.data.pages) {
-            const page = new Page({
-                app : this.model,
-                data: this.model.data.pages[name],
+            const page = new Page(this.model.data.pages[name], this.model, {
+                // app : this.model,
+                // data: this.model.data.pages[name],
                 id  : `p${this.getNextPageId()}`
             });
             page.init();
@@ -110,9 +110,9 @@ class ApplicationController extends ModelController {
     createPages2() {
         return Object.keys(this.model.data.pages).map(name => {
             // model
-            const page = new Page({
-                app : this.model,
-                data: this.model.data.pages[name],
+            const page = new Page(this.model.data.pages[name], this.model, {
+                // app : this.model,
+                // data: this.model.data.pages[name],
                 id  : `p${this.getNextPageId()}`
             });
             page.init();
@@ -281,9 +281,9 @@ class ApplicationController extends ModelController {
                 }
             }
         }
-        const page = new Page({
-            app           : this.model,
-            data          : response.page,
+        const page = new Page(response.page, this.model, {
+            // app           : this.model,
+            // data          : response.page,
             id            : `p${this.getNextPageId()}`,
             params        : params,
             parentPageName: parentPageName,
