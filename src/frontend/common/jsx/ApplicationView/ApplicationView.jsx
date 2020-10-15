@@ -10,7 +10,9 @@ class ApplicationView extends ReactComponent {
         });
     }
     renderModal() {
-
+        const ctrl = this.props.ctrl;
+        //return <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
+        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.getName()} content={<PageView ctrl={pageCtrl}/>}/>);
     }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
@@ -21,7 +23,7 @@ class ApplicationView extends ReactComponent {
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 <Tab tabs={this.getTabs()} canClose={true} onTabClose={ctrl.onPageClose} cb={ctrl.onTabCreated} getActive={ctrl.getActivePageIndex}/>
                 <Statusbar/>
-                <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
+                {this.renderModal()}
             </div>
         );
     }

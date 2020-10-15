@@ -23,6 +23,7 @@ class ApplicationController extends ModelController {
         this.tabWidget  = null;
         this.statusbar  = null;
         this.pages = null;
+        this.modalPages = [];
         this.activePage = null;
         this.tab    = null;
     }
@@ -317,8 +318,13 @@ class ApplicationController extends ModelController {
         page.init();
         const pc = new PageController(page, null, this);
         pc.init();
-        this.pages.push(pc);
-        this.activePage = pc;
+
+
+        if (modal) {
+            this.modalPages.push(pc);
+        } else {
+            this.pages.push(this.activePage = pc);
+        }
         this.view2.rerender();
         /*
         if (modal) {
