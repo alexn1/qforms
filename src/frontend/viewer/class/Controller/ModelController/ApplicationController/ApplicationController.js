@@ -336,7 +336,6 @@ class ApplicationController extends ModelController {
         this.view2.rerender();
         pageController.deinit();
         pageController.model.deinit();
-
     }
     onTabCreated = tab => {
         // console.log('ApplicationController.onTabCreated', tab);
