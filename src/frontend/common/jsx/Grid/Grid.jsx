@@ -75,13 +75,13 @@ class Grid extends ReactComponent {
                 {this.props.columns.map((column, j) =>
                     <td
                         key={column.name}
-                        style={{width: column.width ? `${column.width}px` : undefined}}
-                        className={this.isCellActive(i, j) ? 'active' : undefined}
+                        style={{width: column.width ? `${column.width}px` : null}}
+                        className={this.isCellActive(i, j) ? 'active' : null}
                         data-rc={`[${i},${j}]`}
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <TableFormTextBoxFieldView row={row} columnName={column.name}/>
+                        <TableFormTextBoxFieldView row={row} column={column}/>
                     </td>)}
                 <td
                     data-r={i}
