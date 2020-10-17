@@ -109,10 +109,11 @@ class Grid extends ReactComponent {
         this.head.current.scrollLeft = e.target.scrollLeft;
     }
     renderRow(row, i) {
+        // console.log('Grid.renderRow', i);
+        const key = this.getRowKey(row);
         return (
             <tr
-                key={this.getRowKey(row)}
-                data-key={this.getRowKey(row)}
+                key={key}
                 className={this.isRowActive(i) ? 'active' : null}
             >
                 {this.props.columns.map((column, j) =>
