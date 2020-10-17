@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(() => {
+    console.log('TabWidget document ready');
     $('div.TabWidget').each(function() {
         this._obj = new TabWidget(this);
         this._obj.init();

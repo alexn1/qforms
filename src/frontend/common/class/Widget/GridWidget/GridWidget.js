@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(() => {
+    console.log('GridWidget document ready');
     $('div.GridWidget').each(function() {
         this._obj = new GridWidget(this);
         this._obj.init();

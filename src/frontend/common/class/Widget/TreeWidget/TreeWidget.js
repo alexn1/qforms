@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(() => {
+    console.log('TreeWidget document ready');
     $('div.TreeWidget').each(function() {
         TreeWidget_createObject(this);
     });
