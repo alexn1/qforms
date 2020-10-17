@@ -2,18 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('TreeWidget DOMContentLoaded');
-    $('div.TreeWidget').each(function() {
-        TreeWidget_createObject(this);
+    document.querySelectorAll('div.TreeWidget').forEach(el => {
+        TreeWidget_createObject(el);
     });
 });
-
-/*
-$(document).ready(() => {
-    console.log('TreeWidget document ready');
-    $('div.TreeWidget').each(function() {
-        TreeWidget_createObject(this);
-    });
-});*/
 
 function TreeWidget_createObject(el) {
     el._obj = new TreeWidget(el);
