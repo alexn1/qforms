@@ -4,7 +4,7 @@ class Grid extends ReactComponent {
         this.state = {
             column: null,
             row   : null,
-            columnWidth: []
+            columnWidth: {}
         };
         this.columns = {};
     }
@@ -56,11 +56,16 @@ class Grid extends ReactComponent {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
+        column.name
         const maxOffsetWidth = Math.max(...this.columns[column.name].map(fieldView => fieldView.span.current.offsetWidth));
         console.log('maxOffsetWidth:', maxOffsetWidth);
+        this.state.columnWidth[column.name] = maxOffsetWidth + 10;
+        this.rerender();
         // console.log('column:', this.columns[column.name]);
     }
     getColumnWidth(i) {
+        const columnName = this.props.columns[i].name;
+        if (this.state.columnWidth[columnName] !== undefined) return this.state.columnWidth[columnName];
         return this.props.columns[i].width ? `${this.props.columns[i].width}px` : null;
     }
     renderColumns() {
@@ -93,7 +98,7 @@ class Grid extends ReactComponent {
                 {this.props.columns.map((column, j) =>
                     <td
                         key={column.name}
-                        style={{width: column.width ? `${column.width}px` : null}}
+                        style={{width: this.getColumnWidth(j)}}
                         className={this.isCellActive(i, j) ? 'active' : null}
                         data-rc={`[${i},${j}]`}
                         onMouseDown={this.onCellMouseDown}
