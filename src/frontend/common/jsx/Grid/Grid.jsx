@@ -5,6 +5,7 @@ class Grid extends ReactComponent {
             column: null,
             row   : null
         };
+        this.columns = {};
     }
     isRowActive(i) {
         return i === this.state.row;
@@ -51,19 +52,32 @@ class Grid extends ReactComponent {
         });
     }
     onResizeDoubleClick = e => {
-        console.log('Grid.onResizeDoubleClick');
+        console.log('Grid.onResizeDoubleClick', e.target);
+        const i = parseInt(e.target.dataset.i);
+        const column = this.props.columns[i];
+        const maxOffsetWidth = Math.max(...this.columns[column.name].map(fieldView => fieldView.span.current.offsetWidth));
+        console.log('maxOffsetWidth:', maxOffsetWidth);
+        // console.log('column:', this.columns[column.name]);
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
-            <div>{column.title}</div>
-            <span className="resize" onDoubleClick={this.onResizeDoubleClick}></span>
-        </td>);
+        return this.props.columns.map((column, i) =>
+            <td key={column.name} style={{width: `${column.width}px`}}>
+                <div>{column.title}</div>
+                <span className="resize" data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
+            </td>
+        );
     }
     renderRows() {
         return this.props.rows.map((row, i) => this.renderRow(row, i));
     }
     getRowKey(row) {
         return this.props.getRowKey(row);
+    }
+    onFieldViewCreated = c => {
+        // console.log('Grid.onFieldViewCreated', c.props.column.name);
+        const columnName = c.props.column.name;
+        if (this.columns[columnName] === undefined) this.columns[columnName] = [];
+        this.columns[columnName].push(c);
     }
     renderRow(row, i) {
         return (
@@ -81,7 +95,7 @@ class Grid extends ReactComponent {
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <TableFormTextBoxFieldView row={row} column={column}/>
+                        <TableFormTextBoxFieldView row={row} column={column} cb={this.onFieldViewCreated}/>
                     </td>)}
                 <td
                     data-r={i}
