@@ -33,7 +33,7 @@ class PageView extends ReactComponent {
             caption += ` ${key}`;
         }
         if (ctrl.isChanged() || model.hasNew()) {
-            return [caption, ' ', <span className="star">*</span>];
+            return [caption, ' ', <span key={'star'} className="star">*</span>];
         }
         return caption;
     }

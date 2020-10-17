@@ -15,6 +15,15 @@ class TableFormController extends FormController {
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
 
+        // data source events
+        const dataSource = this.model.getDataSource();
+        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate);
+        dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow);
+        dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow);
+        dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow);
+        dataSource.on('newFrame' , this.listeners.newFrame  = this.onNewFrame);
+        dataSource.on('insert'   , this.listeners.insert    = this.onInsert);
+
         /*const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
         this.grid.init();
@@ -47,6 +56,16 @@ class TableFormController extends FormController {
         this.parent.off('show', this.listeners.show);
         this.model.off('refilled', this.listeners.refilled);
         this.model.off('refresh', this.listeners.refreshed);
+
+        // data source events
+        const dataSource = this.model.getDataSource();
+        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('newRow'   , this.listeners.newRow);
+        dataSource.off('removeRow', this.listeners.removeRow);
+        dataSource.off('moveRow'  , this.listeners.moveRow);
+        dataSource.off('newFrame' , this.listeners.newFrame);
+        dataSource.off('insert'   , this.listeners.insert);
+
         super.deinit();
     }
 
@@ -241,5 +260,23 @@ class TableFormController extends FormController {
             console.error(`${this.model.getFullName()}: edit form error handler:`, err);
             alert(`${this.model.getFullName()}: ${err.message}`);
         }
+    }
+    onRowUpdate = e => {
+        console.log('TableFormController.onRowUpdate', e);
+    }
+    onNewRow = e => {
+        console.log('TableFormController.onNewRow', e);
+    }
+    onRemoveRow = () => {
+        console.log('TableFormController.onRemoveRow');
+    }
+    onMoveRow = () => {
+        console.log('TableFormController.onMoveRow');
+    }
+    onNewFrame = () => {
+        console.log('TableFormController.onNewFrame');
+    }
+    onInsert = e => {
+        console.log('TableFormController.onInsert', e);
     }
 }
