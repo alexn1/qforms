@@ -3,7 +3,8 @@ class Grid extends ReactComponent {
         super(props);
         this.state = {
             column: null,
-            row   : null
+            row   : null,
+            columnWidth: []
         };
         this.columns = {};
     }
@@ -59,9 +60,12 @@ class Grid extends ReactComponent {
         console.log('maxOffsetWidth:', maxOffsetWidth);
         // console.log('column:', this.columns[column.name]);
     }
+    getColumnWidth(i) {
+        return this.props.columns[i].width ? `${this.props.columns[i].width}px` : null;
+    }
     renderColumns() {
         return this.props.columns.map((column, i) =>
-            <td key={column.name} style={{width: `${column.width}px`}}>
+            <td key={column.name} style={{width: this.getColumnWidth(i)}}>
                 <div>{column.title}</div>
                 <span className="resize" data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
             </td>
