@@ -7,6 +7,7 @@ class Grid extends ReactComponent {
             columnWidth: {}
         };
         this.columns = {};
+        this.head = React.createRef();
     }
     isRowActive(i) {
         return i === this.state.row;
@@ -87,6 +88,10 @@ class Grid extends ReactComponent {
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     }
+    onBodyScroll = e => {
+        // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+        this.head.current.scrollLeft = e.target.scrollLeft;
+    }
     renderRow(row, i) {
         return (
             <tr
@@ -116,9 +121,13 @@ class Grid extends ReactComponent {
     render() {
         return (
             <div className="Grid flex-max">
-                <div className="head"><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
+                <div className="head" ref={this.head}><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
                 <div className="block"/>
-                <div className="body"><table><tbody>{this.props.rows && this.renderRows()}</tbody></table></div>
+                <div className="body" onScroll={this.onBodyScroll}>
+                    <table>
+                        <tbody>{this.props.rows && this.renderRows()}</tbody>
+                    </table>
+                </div>
             </div>
         );
     }
