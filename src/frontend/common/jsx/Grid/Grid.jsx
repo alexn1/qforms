@@ -50,10 +50,13 @@ class Grid extends ReactComponent {
             console.log('selectRow time:', new Date().getTime() - start);
         });
     }
+    onResizeDoubleClick = e => {
+        console.log('Grid.onResizeDoubleClick');
+    }
     renderColumns() {
         return this.props.columns.map((column, i) => <td key={column.name} style={{width: `${column.width}px`}}>
             <div>{column.title}</div>
-            <span className="resize"></span>
+            <span className="resize" onDoubleClick={this.onResizeDoubleClick}></span>
         </td>);
     }
     renderRows() {
@@ -78,9 +81,7 @@ class Grid extends ReactComponent {
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <div className="TableFormTextBoxFieldView">
-                            <span>{row[column.name]}</span>
-                        </div>
+                        <TableFormTextBoxFieldView row={row} columnName={column.name}/>
                     </td>)}
                 <td
                     data-r={i}
