@@ -1,18 +1,16 @@
 'use strict';
 
 class DataSource extends Model {
-    /*static create(data, parent) {
-        // console.log('DataSource.create', data.class, data.name);
-        return eval(`new ${data.class}(data, parent)`);
-    }*/
 
     constructor(data, parent) {
         super(data, parent);
+        this.rows      = null;
+        this.length    = null;
         this.rowsByKey = {};						// for row search by key
-        this.childs    = {};						// for child row search by key
+        // this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row
         this.news      = [];                        // new rows
-        this.changes  = new Map();
+        this.changes   = new Map();
     }
 
     init() {
@@ -20,10 +18,11 @@ class DataSource extends Model {
         //console.log('limit', this.getLimit());
         //console.log('count', this.count);
         // creating index
+        this.rows   = this.data.rows;
         this.length = this.data.rows.length;
-        const vals = this.getKeysAndChilds(this.data.rows);
+        /*const vals = this.getKeysAndChilds(this.data.rows);
         this.rowsByKey = vals.rowsByKey;
-        this.childs    = vals.childs;
+        this.childs    = vals.childs;*/
     }
 
     // deinit() {
@@ -32,7 +31,7 @@ class DataSource extends Model {
     // }
 
     // fill lists to find row index and child rows by row key
-    getKeysAndChilds(rows) {
+    /*getKeysAndChilds(rows) {
         const rowsByKey = {};
         const childs    = {};
         for (let i = 0; i < rows.length; i++) {
@@ -59,7 +58,7 @@ class DataSource extends Model {
             childs   : childs,
             rowsByKey: rowsByKey
         };
-    }
+    }*/
 
     getColumnType(column) {
         // console.log('DataSource.getColumnType', this.getClassName(), column);
@@ -141,7 +140,7 @@ class DataSource extends Model {
         return JSON.stringify(arr);
     }
 
-    getRowParentKey(row) {
+    /*getRowParentKey(row) {
         const key = [];
         if (this.data.parentKeyColumns) {
             for (let i = 0; i < this.data.parentKeyColumns.length; i++) {
@@ -151,7 +150,7 @@ class DataSource extends Model {
             key.push(null);
         }
         return JSON.stringify(key);
-    }
+    }*/
 
     // splitKey(key) {
     //     const values = {};
@@ -171,25 +170,25 @@ class DataSource extends Model {
     }
 
     // remove row from current tree item list and move it ot it's new tree item list
-    _goneRow(_old, _new, parentKey, i, key) {
+    /*_goneRow(_old, _new, parentKey, i, key) {
         const newRow = _new.rowsByKey[key];
         const oldRow = _old.rowsByKey[key];
         const newParentKey = this.getRowParentKey(newRow);
         const index = _new.childs[newParentKey].keysByIndex.indexOf(key);
         this.removeFromChilds(_old.childs, parentKey, i, key);
         this.addToChilds(_old.childs, newParentKey, index, key, oldRow);
-    }
+    }*/
 
     // add row to new tree item list after deleting from it old tree item list
-    _comeRow(_old, _new, parentKey, i, key) {
+    /*_comeRow(_old, _new, parentKey, i, key) {
         const oldRow = _old.rowsByKey[key];
         const oldParentKey = this.getRowParentKey(oldRow);
         const index = _old.childs[oldParentKey].keysByIndex.indexOf(key);
         this.removeFromChilds(_old.childs, oldParentKey, index, key);
         this.addToChilds(_old.childs, parentKey, i, key, oldRow);
-    }
+    }*/
 
-    removeFromChilds(childs, parentKey, i, key) {
+    /*removeFromChilds(childs, parentKey, i, key) {
         childs[parentKey].rowsByIndex.splice(i, 1);
         childs[parentKey].keysByIndex.splice(i, 1);
         delete childs[parentKey].rowsByKey[key];
@@ -197,9 +196,9 @@ class DataSource extends Model {
         if (childs[parentKey].rowsByIndex.length === 0) {
             delete childs[parentKey];
         }
-    }
+    }*/
 
-    addToChilds(childs, parentKey, i, key, row) {
+    /*addToChilds(childs, parentKey, i, key, row) {
         if (childs[parentKey] === undefined) {
             childs[parentKey] = {
                 rowsByIndex:[],
@@ -210,18 +209,18 @@ class DataSource extends Model {
         childs[parentKey].rowsByIndex.splice(i, 0, row);
         childs[parentKey].keysByIndex.splice(i, 0, key);
         childs[parentKey].rowsByKey[key] = row;
-    }
+    }*/
 
-    moveChilds(childs, oldIndex, newIndex) {
+    /*moveChilds(childs, oldIndex, newIndex) {
         QForms.moveArrayElement(childs.rowsByIndex, oldIndex, newIndex);
         QForms.moveArrayElement(childs.keysByIndex, oldIndex, newIndex);
-    }
+    }*/
 
     // tree sync algorithm
     // compare old and new list, change it and send notification to every row that has been changed
     // add, remove, move, come, gone for widgets to be able update it's view
     //
-    sync(_old, _new, parentKey) {
+    /*sync(_old, _new, parentKey) {
         console.log('DataSource.sync', this.getFullName(), parentKey);
         // console.log('_old:', _old);
         // console.log('_new:', _new);
@@ -333,11 +332,11 @@ class DataSource extends Model {
                 }
             }
         } while (nKey !== null || oKey !== null);
-    }
+    }*/
 
-    fireRefillRow(key) {
+    /*fireRefillRow(key) {
         this.emit('rowUpdate', {source: this, key});
-    }
+    }*/
 
     removeRow(key) {
         const row = this.rowsByKey[key];
@@ -361,24 +360,24 @@ class DataSource extends Model {
         this.emit('removeRow', {source: this, key: key});
     }
 
-    fireNewRow(i, parentKey, key) {
+    /*fireNewRow(i, parentKey, key) {
         //console.log('fireNewRow: ' + i);
         this.emit('newRow', {source: this, i: i, parentKey: parentKey, key: key});
-    }
+    }*/
 
-    fireMoveRow(oldIndex, newIndex, key, parentKey) {
+    /*fireMoveRow(oldIndex, newIndex, key, parentKey) {
         this.emit('moveRow', {source: this, oldIndex: oldIndex, newIndex: newIndex, key: key, parentKey: parentKey});
-    }
+    }*/
 
-    fireGoneRow(parentKey, key, newParentKey, newIndex) {
+    /*fireGoneRow(parentKey, key, newParentKey, newIndex) {
         //console.log('fireGoneRow');
         this.emit('goneRow', {source: this, parentKey: parentKey, key: key, newParentKey: newParentKey, newIndex: newIndex});
-    }
+    }*/
 
-    fireComeRow(parentKey, key, oldParentKey, newIndex) {
+    /*fireComeRow(parentKey, key, oldParentKey, newIndex) {
         //console.log('fireComeRow');
         this.emit('comeRow', {source: this, parentKey: parentKey, key: key, oldParentKey: oldParentKey, newIndex: newIndex});
-    }
+    }*/
 
     newRow(row) {
         console.log('DataSource.newRow', row);
@@ -393,9 +392,10 @@ class DataSource extends Model {
         // if (this.data.rows.length > 0) return this.data.rows[0];
         // if (this.data.rows[0]) return this.data.rows[0];
         if (this.news[0]) return this.news[0];
-        const keys = Object.keys(this.rowsByKey);
+        /*const keys = Object.keys(this.rowsByKey);
         if (keys[0]) return this.rowsByKey[keys[0]];
-        throw new Error('no single row');
+        throw new Error('no single row');*/
+        return this.rows[0];
     }
 
     getForm() {
@@ -453,14 +453,16 @@ class DataSource extends Model {
     }
 
     getRows(parentKey) {
-        if (parentKey === undefined) {
+        /*if (parentKey === undefined) {
             parentKey = '[null]';
         }
-        return (this.childs[parentKey] !== undefined) ? this.childs[parentKey].rowsByIndex : [];
+        return (this.childs[parentKey] !== undefined) ? this.childs[parentKey].rowsByIndex : [];*/
+        return this.rows;
     }
 
     getRowByIndex(i) {
-        return this.childs['[null]'].rowsByIndex[i];
+        // return this.childs['[null]'].rowsByIndex[i];
+        return this.rows[i];
     }
 
     discard() {
