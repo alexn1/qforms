@@ -262,7 +262,7 @@ class TableFormController extends FormController {
         }
     }
     onRowUpdate = e => {
-        console.log('TableFormController.onRowUpdate', e);
+        console.log('TableFormController.onRowUpdate', e.key);
     }
     onNewRow = e => {
         console.log('TableFormController.onNewRow', e);

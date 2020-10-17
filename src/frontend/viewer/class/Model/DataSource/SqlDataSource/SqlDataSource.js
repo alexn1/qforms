@@ -77,7 +77,7 @@ class SqlDataSource extends DataSource {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
         }
-        console.log(`key: ${key} to ${newKey}`);
+        // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
 
@@ -103,7 +103,7 @@ class SqlDataSource extends DataSource {
         if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);
         const key = Object.keys(e.changes)[0];
         const newKey = e.changes[key];
-        console.log(`key: ${key} to ${newKey}`);
+        // console.log(`key: ${key} to ${newKey}`);
         const params = DataSource.keyToParams(newKey);
         const data = await this.selectSingle(params);
         this.updateRow(key, data.row);
