@@ -56,12 +56,11 @@ class Grid extends ReactComponent {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
-        column.name
         const maxOffsetWidth = Math.max(...this.columns[column.name].map(fieldView => fieldView.span.current.offsetWidth));
-        console.log('maxOffsetWidth:', maxOffsetWidth);
         this.state.columnWidth[column.name] = maxOffsetWidth + 10;
         this.rerender();
-        // console.log('column:', this.columns[column.name]);
+        // console.log('maxOffsetWidth:', maxOffsetWidth);
+        // console.log('this.state.columnWidth:', this.state.columnWidth);
     }
     getColumnWidth(i) {
         const columnName = this.props.columns[i].name;
