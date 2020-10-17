@@ -6,7 +6,7 @@ class DataSource extends Model {
         super(data, parent);
         this.rows      = null;
         this.length    = null;
-        this.rowsByKey = {};						// for row search by key
+        this.rowsByKey = null;						// for row search by key
         // this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row
         this.news      = [];                        // new rows
@@ -20,9 +20,19 @@ class DataSource extends Model {
         // creating index
         this.rows   = this.data.rows;
         this.length = this.data.rows.length;
+        this.fillRowsByKey();
         /*const vals = this.getKeysAndChilds(this.data.rows);
         this.rowsByKey = vals.rowsByKey;
         this.childs    = vals.childs;*/
+    }
+
+    fillRowsByKey() {
+        this.rowsByKey = {};
+        for (let i = 0; i < this.rows.length; i++) {
+            const row = this.rows[i];
+            const key = this.getRowKey(row);
+            this.rowsByKey[key] = row;
+        }
     }
 
     // deinit() {
