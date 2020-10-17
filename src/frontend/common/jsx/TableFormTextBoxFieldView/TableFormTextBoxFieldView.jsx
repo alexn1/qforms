@@ -7,6 +7,9 @@ class TableFormTextBoxFieldView extends ReactComponent {
         console.log('TableFormTextBoxFieldView.onClick', this.span.current);
         console.log('offsetWidth:', this.span.current.offsetWidth);
     }
+    getSpanOffsetWidth() {
+        return this.span.current.offsetWidth;
+    }
     render() {
         const row = this.props.row;
         const column = this.props.column;
