@@ -287,7 +287,7 @@ class TableFormController extends FormController {
         this.rerender();
     }
     onActiveRowChanged = i => {
-        console.log('TableFormController.onActiveRowChanged', i);
+        // console.log('TableFormController.onActiveRowChanged', i);
         const rows = this.model.getDataSource().getRows();
         const row = rows[i];
         const key = this.model.getDataSource().getRowKey(row);
@@ -295,7 +295,7 @@ class TableFormController extends FormController {
         // console.log('key:', key);
     }
     getActiveRow = () => {
-        console.log('TableFormController.getActiveRow', this.activeRowKey);
+        // console.log('TableFormController.getActiveRow', this.activeRowKey);
         if (this.activeRowKey) {
             const row = this.model.getDataSource().getRowByKey(this.activeRowKey);
             const rows = this.model.getDataSource().getRows();
