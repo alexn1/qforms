@@ -6,6 +6,7 @@ class TableFormController extends FormController {
         // this.grid        = null;
         // this.framesCount = null;
         // this.$goto       = null;
+        this.activeRowKey = null;
     }
 
     init() {
@@ -278,5 +279,13 @@ class TableFormController extends FormController {
     }
     onInsert = e => {
         console.log('TableFormController.onInsert', e);
+    }
+    onActiveRowChanged = i => {
+        console.log('TableFormController.onActiveRowChanged', i);
+        const rows = this.model.getDataSource().getRows();
+        const row = rows[i];
+        const key = this.model.getDataSource().getRowKey(row);
+        this.activeRowKey = key;
+        console.log('key:', key);
     }
 }

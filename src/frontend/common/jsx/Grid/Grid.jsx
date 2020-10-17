@@ -12,6 +12,10 @@ class Grid extends ReactComponent {
     getActiveRow() {
         return this.state.row;
     }
+    setActiveRow(i) {
+        this.state.row = i;
+        if (this.props.onActiveRowChanged) this.props.onActiveRowChanged(i);
+    }
     getActiveColumn() {
         return this.state.column;
     }
@@ -47,17 +51,22 @@ class Grid extends ReactComponent {
     }
     selectCell(i, j) {
         if (this.getActiveRow() === i && this.getActiveColumn() === j) return;
-        const start = new Date().getTime();
+        this.setActiveRow(i);
+        this.state.column = j;
+        this.rerender();
+        /*const start = new Date().getTime();
         this.setState({row: i, column: j}, () => {
             console.log('selectCell time:', new Date().getTime() - start);
-        });
+        });*/
     }
     selectRow(i) {
         if (this.getActiveRow() === i ) return;
-        const start = new Date().getTime();
+        this.setActiveRow(i);
+        this.rerender();
+        /*const start = new Date().getTime();
         this.setState({row: i}, () => {
             console.log('selectRow time:', new Date().getTime() - start);
-        });
+        });*/
     }
     onResizeDoubleClick = e => {
         console.log('Grid.onResizeDoubleClick', e.target);
