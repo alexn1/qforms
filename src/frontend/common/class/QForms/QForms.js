@@ -56,7 +56,7 @@ class QForms {
     static async doHttpRequest(data) {
         console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
         try {
-            $('html').addClass("wait");
+            document.querySelector('html').classList.add('wait');
             const response = await fetch(window.location.href, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -70,7 +70,7 @@ class QForms {
             }
             throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
         } finally {
-            $('html').removeClass("wait");
+            document.querySelector('html').classList.remove('wait');
         }
     }
 
