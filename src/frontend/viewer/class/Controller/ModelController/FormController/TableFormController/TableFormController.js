@@ -32,8 +32,8 @@ class TableFormController extends FormController {
             const field = this.model.fields[name];
             return {
                 name : field.getName(),
-                title: field.data.caption,
-                width: field.data.width !== '0' ? parseInt(field.data.width) : undefined
+                title: field.getCaption(),
+                width: field.getWidth()
             };
         });
     }
