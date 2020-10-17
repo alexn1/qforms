@@ -1,12 +1,21 @@
 'use strict';
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('TabWidget DOMContentLoaded');
+    $('div.TabWidget').each(function() {
+        this._obj = new TabWidget(this);
+        this._obj.init();
+    });
+});
+
+/*
 $(document).ready(() => {
     console.log('TabWidget document ready');
     $('div.TabWidget').each(function() {
         this._obj = new TabWidget(this);
         this._obj.init();
     });
-});
+});*/
 
 class TabWidget extends Widget {
 
