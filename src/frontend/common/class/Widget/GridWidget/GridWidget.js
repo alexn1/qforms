@@ -1,12 +1,21 @@
 'use strict';
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('GridWidget DOMContentLoaded');
+    $('div.GridWidget').each(function() {
+        this._obj = new GridWidget(this);
+        this._obj.init();
+    });
+});
+
+/*
 $(document).ready(() => {
     console.log('GridWidget document ready');
     $('div.GridWidget').each(function() {
         this._obj = new GridWidget(this);
         this._obj.init();
     });
-});
+});*/
 
 class GridWidget extends Widget {
 

@@ -35,11 +35,18 @@
         %><script src="<%=filePath%>"></script><%='\n'%><%
     });%>
     <script>
-        $(document).ready(() => {
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('editor.ejs DOMContentLoaded');
             const data = <%-appFileContent%>;
             new QForms(data);
             new EditorController(data).init();
         });
+        /*
+        $(document).ready(() => {
+            const data = <%-appFileContent%>;
+            new QForms(data);
+            new EditorController(data).init();
+        });*/
     </script>
 </head>
 <body>
