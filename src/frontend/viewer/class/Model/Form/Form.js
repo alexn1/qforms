@@ -81,7 +81,7 @@ class Form extends Model {
     async refresh() {
         console.log('Form.refresh', this.getFullName());
         await this.getDataSource().refresh();
-        this.emit('refresh', {source: this});
+        // this.emit('refresh', {source: this});
     }
 
     isChanged() {

@@ -27,6 +27,7 @@ class DataSource extends Model {
     }
 
     fillRowsByKey() {
+        console.log('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
         for (let i = 0; i < this.rows.length; i++) {
             const row = this.rows[i];
@@ -405,7 +406,9 @@ class DataSource extends Model {
         /*const keys = Object.keys(this.rowsByKey);
         if (keys[0]) return this.rowsByKey[keys[0]];
         throw new Error('no single row');*/
-        return this.rows[0];
+        const row = this.rows[0];
+        if (!row) throw new Error('no single row');
+        return row;
     }
 
     getForm() {

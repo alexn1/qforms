@@ -11,8 +11,8 @@ class TableFormController extends FormController {
 
     init() {
         super.init();
-        this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
-        this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
+        // this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
+        // this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
         this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
 
@@ -24,6 +24,7 @@ class TableFormController extends FormController {
         dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow);
         dataSource.on('newFrame' , this.listeners.newFrame  = this.onNewFrame);
         dataSource.on('insert'   , this.listeners.insert    = this.onInsert);
+        dataSource.on('refresh'  , this.listeners.refresh   = this.onRefresh);
 
         /*const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
         this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
@@ -55,8 +56,8 @@ class TableFormController extends FormController {
         // this.grid.deinit();
         this.parent.off('hide', this.listeners.hide);
         this.parent.off('show', this.listeners.show);
-        this.model.off('refilled', this.listeners.refilled);
-        this.model.off('refresh', this.listeners.refreshed);
+        // this.model.off('refilled', this.listeners.refilled);
+        // this.model.off('refresh', this.listeners.refreshed);
 
         // data source events
         const dataSource = this.model.getDataSource();
@@ -66,6 +67,7 @@ class TableFormController extends FormController {
         dataSource.off('moveRow'  , this.listeners.moveRow);
         dataSource.off('newFrame' , this.listeners.newFrame);
         dataSource.off('insert'   , this.listeners.insert);
+        dataSource.off('refresh'  , this.listeners.refresh);
 
         super.deinit();
     }
@@ -279,6 +281,10 @@ class TableFormController extends FormController {
     }
     onInsert = e => {
         console.log('TableFormController.onInsert', e);
+    }
+    onRefresh = e => {
+        console.log('TableFormController.onRefresh', e);
+        this.rerender();
     }
     onActiveRowChanged = i => {
         console.log('TableFormController.onActiveRowChanged', i);

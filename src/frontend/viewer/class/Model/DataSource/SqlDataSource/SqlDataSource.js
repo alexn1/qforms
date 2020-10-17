@@ -128,6 +128,9 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
         }
         this.emit('insert', {source: this, key: e.key});*/
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, key: e.key});
+        }
     }
 
     async onTableDelete(e) {
@@ -140,14 +143,14 @@ class SqlDataSource extends DataSource {
         throw new Error(`${this.getFullName()}: delete remove not implemented yet`);
     }
 
-    async refill(params) {
+    /*async refill(params) {
         this.offset = 0;
         const data = await this.select(params);
         const _new = this.getKeysAndChilds(data.rows);
         const _old = this;
         _old.rowsByKey = _new.rowsByKey;
         _old.childs    = _new.childs;
-    }
+    }*/
 
     async _refresh() {
         console.log('SqlDataSource._refresh', this.getFullName());
@@ -258,13 +261,15 @@ class SqlDataSource extends DataSource {
 
         this.news.splice(this.news.indexOf(row), 1);
         this.changes.clear();
+        this.rows.push(row);
         // console.log('this.news:', this.news);
 
         // creating index with for rows
         // const vals = this.getKeysAndChilds(this.data.rows);
-        const vals = this.getKeysAndChilds([row]);
+        /*const vals = this.getKeysAndChilds([row]);
         this.rowsByKey = vals.rowsByKey;
-        this.childs    = vals.childs;
+        this.childs    = vals.childs;*/
+        this.fillRowsByKey();
 
         // save key params for refill
         const params = QForms.keyToParams(key);
