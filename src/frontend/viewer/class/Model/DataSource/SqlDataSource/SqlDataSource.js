@@ -113,7 +113,6 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.refresh', this.getFullName());
         if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
         await this._refresh();
-        this.emit('refresh', {source: this});
     }
 
     async onTableInsert(e) {
@@ -124,11 +123,11 @@ class SqlDataSource extends DataSource {
             return;
         }
         await this._refresh();
-        if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
+        /*if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
         }
-        this.emit('insert', {source: this, key: e.key});
+        this.emit('insert', {source: this, key: e.key});*/
     }
 
     async onTableDelete(e) {
@@ -158,9 +157,12 @@ class SqlDataSource extends DataSource {
         // if (this.data.dumpFirstRowToParams === 'true') {
         //     this.dumpFirstRowToParams(data.rows);
         // }
-        const _old = this;
+        /*const _old = this;
         const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
-        this.sync(_old, _new, '[null]');
+        this.sync(_old, _new, '[null]');*/
+        this.rows = data.rows;
+        this.fillRowsByKey();
+        this.emit('refresh', {source: this});
     }
 
     async frame(params, frame) {
