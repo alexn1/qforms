@@ -16,7 +16,7 @@ class DropdownDatePicker extends ReactComponent {
         this.setState(prevState => ({open: !prevState.open}));
     }
     onInputKeyDown = e => {
-        console.log('DropdownDatePicker.onInputKeyDown', e.which);
+        // console.log('DropdownDatePicker.onInputKeyDown', e.which);
         if (e.which === 27 && this.state.open) {
             this.setState({open: false});
         }
