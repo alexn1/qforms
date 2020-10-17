@@ -10,6 +10,7 @@ class Grid extends ReactComponent {
         this.head = React.createRef();
     }
     getActiveRow() {
+        if (this.props.getActiveRow) return this.props.getActiveRow();
         return this.state.row;
     }
     setActiveRow(i) {
@@ -112,7 +113,7 @@ class Grid extends ReactComponent {
             <tr
                 key={this.getRowKey(row)}
                 data-key={this.getRowKey(row)}
-                className={this.isRowActive(i) ? 'active' : undefined}
+                className={this.isRowActive(i) ? 'active' : null}
             >
                 {this.props.columns.map((column, j) =>
                     <td

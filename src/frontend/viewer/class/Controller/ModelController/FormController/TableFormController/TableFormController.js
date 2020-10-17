@@ -286,6 +286,17 @@ class TableFormController extends FormController {
         const row = rows[i];
         const key = this.model.getDataSource().getRowKey(row);
         this.activeRowKey = key;
-        console.log('key:', key);
+        // console.log('key:', key);
+    }
+    getActiveRow = () => {
+        console.log('TableFormController.getActiveRow', this.activeRowKey);
+        if (this.activeRowKey) {
+            const row = this.model.getDataSource().getRowByKey(this.activeRowKey);
+            const rows = this.model.getDataSource().getRows();
+            const i = rows.indexOf(row);
+            if (i === -1) throw new Error('cannot find active row');
+            return i;
+        }
+        return null;
     }
 }

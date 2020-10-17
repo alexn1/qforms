@@ -475,6 +475,10 @@ class DataSource extends Model {
         return this.rows[i];
     }
 
+    getRowByKey(key) {
+        return this.rowsByKey[key] || null;
+    }
+
     discard() {
         console.log('DataSource.discard', this.getFullName());
         if (!this.isChanged()) throw new Error(`no changes in data source ${this.getFullName()}`);
