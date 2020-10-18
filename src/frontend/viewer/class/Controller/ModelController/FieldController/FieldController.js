@@ -22,9 +22,6 @@ class FieldController extends ModelController {
         this.parent = parent;
     }
 
-    init() {
-    }
-
     valueToString(value) {
         // console.log('Field.valueToString', this.getFullName(), typeof value, value);
         switch (typeof value) {

@@ -19,9 +19,6 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    /*fill(row) {
-        throw new Error('RowFormFieldController.fill not implemented');
-    }*/
     onFieldViewContentCreate = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreate', c);
     }
@@ -83,7 +80,7 @@ class RowFormFieldController extends FieldController {
         }
     }
     getError() {
-        // console.log('FieldController.getError', this.model.getFullName());
+        // console.log('RowFormFieldController.getError', this.model.getFullName());
         try {
             const value = this.getValue();      // try to get value
             if (this.model.isNotNull() && (value === null || value === undefined)) {
@@ -98,34 +95,13 @@ class RowFormFieldController extends FieldController {
         return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
     }
 
-    isValid() {
-        // console.log('RowFormFieldController.isValid', this.model.getFullName());
-        try {
-            const value = this.getValue();
-            // console.log('value:', this.model.getFullName(), value);
-            // let isValid = true;
-            if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {
-                // isValid = false;
-                console.error(`${this.model.getFullName()} is null`);
-                return false;
-            }
-            // return isValid;
-            return true;
-        } catch (err) {
-            console.error(`${this.model.getFullName()} not valid:`, err.message);
-            return false;
-        }
-    }
-
-    isChanged2(row, view) {
+    isChanged2(row) {
         // console.log('RowFormFieldController.isChanged2', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        // if (!view) throw new Error('FieldController: no view');
-        // if (!this.isValid(view)) return true;
         try {
             if (this.model.hasColumn()) {
                 const dsValue = this.model.getValueFromDataSource(row);
-                const fieldValue = this.model.getValueForDataSource(this.getValue(view));
+                const fieldValue = this.model.getValueForDataSource(this.getValue());
                 if (dsValue !== fieldValue) {
                     console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsValue, fieldValue);
                     return true;
