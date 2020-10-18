@@ -59,6 +59,13 @@ class TableFormView extends ReactComponent {
             onUnmount={onUnmount}
             ctrl={fieldCtrl}
         />;
+        if (fieldCtrl.model.getClassName() === 'DatePickerField') return <TableFormDatePickerFieldView
+            row={row}
+            column={column}
+            onCreate={onCreate}
+            onUnmount={onUnmount}
+            ctrl={fieldCtrl}
+        />;
         return null;
     }
     render() {
