@@ -9,4 +9,8 @@ class ReactComponent extends React.Component {
         const start = new Date().getTime();
         this.forceUpdate(() => console.log(`${this.constructor.name}.rerender time:`, new Date().getTime() - start));
     }
+    componentWillUnmount() {
+        // console.log('ReactComponent.componentWillUnmount');
+        if (this.props.onUnmount) this.props.onUnmount(this, this.props.name);
+    }
 }

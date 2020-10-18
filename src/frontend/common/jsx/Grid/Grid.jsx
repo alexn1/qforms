@@ -104,6 +104,13 @@ class Grid extends ReactComponent {
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     }
+    onFieldViewUnmount = c => {
+        // console.log('Grid.onFieldViewUnmount', c.props.column.name);
+        const columnName = c.props.column.name;
+        const i = this.columns[columnName].indexOf(c);
+        if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
+        this.columns[columnName].splice(i, 1);
+    }
     onBodyScroll = e => {
         // console.log('Grid.onBodyScroll', e.target.scrollLeft);
         this.head.current.scrollLeft = e.target.scrollLeft;
@@ -125,7 +132,12 @@ class Grid extends ReactComponent {
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <TableFormTextBoxFieldView row={row} column={column} onCreate={this.onFieldViewCreate}/>
+                        <TableFormTextBoxFieldView
+                            row={row}
+                            column={column}
+                            onCreate={this.onFieldViewCreate}
+                            onUnmount={this.onFieldViewUnmount}
+                        />
                     </td>)}
                 <td
                     data-r={i}
