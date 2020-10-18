@@ -5,7 +5,6 @@ class Form extends Model {
         super(data, parent);
         this.dataSources   = {};
         this.fields        = {};
-        // this.controls      = {};
     }
 
     init() {
@@ -27,13 +26,6 @@ class Form extends Model {
             this.fields[name] = eval(`new ${data.class}(data, this)`);
             this.fields[name].init();
         }
-
-        // controls
-        /*for (const name in this.data.controls) {
-            const data = this.data.controls[name];
-            this.controls[name] = eval('new {class}(data, this)'.replace('{class}', data.class));
-            this.controls[name].init();
-        }*/
     }
 
     deinit() {
@@ -44,9 +36,6 @@ class Form extends Model {
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
-        /*for (const name in this.controls) {
-            this.controls[name].deinit();
-        }*/
         super.deinit();
     }
 
@@ -57,7 +46,7 @@ class Form extends Model {
     }
 
     onDataSourceUpdate(e) {
-        console.log('Form.onDataSourceUpdate', this.getFullName());
+        // console.log('Form.onDataSourceUpdate', this.getFullName());
     }
 
     async update() {

@@ -419,25 +419,14 @@ class DataSource extends Model {
     }
 
     getPage() {
-        if (this.parent instanceof Page) {
-            return this.parent;
-        } else if (this.parent instanceof Form) {
-            return this.parent.getPage();
-        } else {
-            return null;
-        }
+        if (this.parent instanceof Page) return this.parent;
+        if (this.parent instanceof Form) return this.parent.getPage();
+        return null;
     }
 
     getApp() {
-        /*if (this.parent instanceof Form) {
-            return this.parent.getPage().getApp();
-        } else if (this.parent instanceof Page) {
-            return this.parent.getApp();
-        } else*/ if (this.parent instanceof Application) {
-            return this.parent;
-        } else {
-            return this.parent.getApp();
-        }
+        if (this.parent instanceof Application) return this.parent;
+        return this.parent.getApp();
     }
 
     // dumpFirstRowToParams(rows) {
@@ -453,15 +442,13 @@ class DataSource extends Model {
     // }
 
     getNamespace() {
-        // const form = this.getForm();
-        // const page = this.getPage();
-        if (this.parent instanceof Form !== null) {
+        if (this.parent instanceof Form) {
             return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
-        } else if (this.parent instanceof Page) {
-            return this.parent.getName() + '.' + this.getName();
-        } else {
-            return this.getName();
         }
+        if (this.parent instanceof Page) {
+            return this.parent.getName() + '.' + this.getName();
+        }
+        return this.getName();
     }
 
     getRow(key) {
