@@ -70,13 +70,12 @@ class Grid extends ReactComponent {
         const column = this.props.columns[i];
         this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
         this.rerender();
-        // console.log('maxOffsetWidth:', maxOffsetWidth);
-        // console.log('this.state.columnWidth:', this.state.columnWidth);
     }
     getColumnWidth(i) {
         const columnName = this.props.columns[i].name;
         if (this.state.columnWidth[columnName] !== undefined) return `${this.state.columnWidth[columnName]}px`;
-        return this.props.columns[i].width ? `${this.props.columns[i].width}px` : null;
+        if (this.props.columns[i].width) return `${this.props.columns[i].width}px`;
+        return null;
     }
     renderColumns() {
         return this.props.columns.map((column, i) =>
