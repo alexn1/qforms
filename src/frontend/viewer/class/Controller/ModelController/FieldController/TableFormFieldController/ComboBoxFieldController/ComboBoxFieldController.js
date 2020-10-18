@@ -1,13 +1,13 @@
 'use strict';
 
-class ComboBoxFieldController extends TableFormFieldController {
+class TableFormComboBoxFieldController extends TableFormFieldController {
 
     // constructor(model, parent) {
     //     super(model, parent);
     // }
 
     init() {
-        //console.log('ComboBoxFieldController.init: ' + this.model.getFullName());
+        //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());
         super.init();
         if (!this.model.data.dataSourceName) {
             throw new Error(`[${this.model.getFullName()}] no dataSourceName`);
@@ -23,7 +23,7 @@ class ComboBoxFieldController extends TableFormFieldController {
     }
 
     deinit(row, view) {
-        //console.log('ComboBoxFieldController.deinit: ' + this.model.getFullName());
+        //console.log('TableFormComboBoxFieldController.deinit: ' + this.model.getFullName());
         const dataSource = this.model.getComboBoxDataSource();
         dataSource.off('update', this.listeners.rowUpdate);
         dataSource.off('removeRow', this.listeners.removeRow);
@@ -64,9 +64,9 @@ class ComboBoxFieldController extends TableFormFieldController {
     }
 
     setValue(value, view) {
-        // console.log('ComboBoxFieldController.setValue', this.model.getFullName(), value);
+        // console.log('TableFormComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
-            throw new Error('ComboBoxFieldController.setValue not implemented');
+            throw new Error('TableFormComboBoxFieldController.setValue not implemented');
         } else if (this.model.getForm().getClassName() === 'TableForm') {
             view.firstElementChild.value = value;
             if (value) {
@@ -109,7 +109,7 @@ class ComboBoxFieldController extends TableFormFieldController {
     }
 
     onRowUpdate(ea) {
-        //console.log('ComboBoxFieldController.onRowUpdate');
+        //console.log('TableFormComboBoxFieldController.onRowUpdate');
         //console.log(ea);
         const key = ea.key;
         if (this.model.getForm().getClassName() === 'RowForm') {
@@ -139,7 +139,7 @@ class ComboBoxFieldController extends TableFormFieldController {
     }
 
     onNewRow(ea) {
-        //console.log('ComboBoxFieldController.onNewRow');
+        //console.log('TableFormComboBoxFieldController.onNewRow');
         //console.log(ea);
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
