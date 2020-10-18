@@ -6,7 +6,9 @@ class TableFormController extends FormController {
         // this.grid        = null;
         // this.framesCount = null;
         // this.$goto       = null;
-        this.activeRowKey = null;
+        this.state = {
+            activeRowKey: null
+        };
     }
 
     init() {
@@ -128,9 +130,9 @@ class TableFormController extends FormController {
     }
 
     onDeleteClick = e => {
-        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.activeRowKey);
+        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.state.activeRowKey);
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
-            this.model.getDataSource().delete(this.activeRowKey);
+            this.model.getDataSource().delete(this.state.activeRowKey);
         }
     }
 
@@ -258,25 +260,25 @@ class TableFormController extends FormController {
     }
     onDataSourceDelete = e => {
         console.log('TableFormController.onDataSourceDelete', e.key);
-        if (this.activeRowKey === e.key) {
-            this.activeRowKey = null;
+        if (this.state.activeRowKey === e.key) {
+            this.state.activeRowKey = null;
         }
         this.rerender();
     }
     onActiveRowChanged = i => {
         // console.log('TableFormController.onActiveRowChanged', i);
         const rows = this.model.getDataSource().getRows();
-        this.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
+        this.state.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
         this.rerender();
     }
     getActiveRow = () => {
-        // console.log('TableFormController.getActiveRow', this.activeRowKey);
-        if (this.activeRowKey) {
-            const row = this.model.getDataSource().getRowByKey(this.activeRowKey);
+        // console.log('TableFormController.getActiveRow', this.state.activeRowKey);
+        if (this.state.activeRowKey) {
+            const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
             const rows = this.model.getDataSource().getRows();
             if (!row) {
                 console.log('rows:', rows);
-                throw new Error(`no row with key: ${this.activeRowKey}`);
+                throw new Error(`no row with key: ${this.state.activeRowKey}`);
             }
             const i = rows.indexOf(row);
             if (i === -1) {
@@ -288,6 +290,6 @@ class TableFormController extends FormController {
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
-        return this.activeRowKey !== null;
+        return this.state.activeRowKey !== null;
     }
 }
