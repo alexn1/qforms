@@ -71,8 +71,8 @@ class FormController extends ModelController {
     rerender() {
         this.view.rerender();
     }
-    onViewCreated = view => {
-        // console.log('FormController.onViewCreated', view);
+    onViewCreate = view => {
+        // console.log('FormController.onViewCreate', view);
         this.view = view;
     }
 }

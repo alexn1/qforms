@@ -5,14 +5,14 @@ class ApplicationView extends ReactComponent {
             return {
                 name   : pageCtrl.model.id,
                 title  : pageCtrl.model.getCaption(),
-                content: <PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreated}/>
+                content: <PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreate}/>
             };
         });
     }
     renderModal() {
         const ctrl = this.props.ctrl;
         //return <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
-        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.id} content={<PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreated}/>}/>);
+        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.id} content={<PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreate}/>}/>);
     }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());

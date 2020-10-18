@@ -8,7 +8,7 @@ class PageView extends ReactComponent {
             return {
                 name: form.getName(),
                 title: form.data.caption,
-                content: <TableFormView key={name} ctrl={ctrl.forms[name]} cb={formController.onViewCreated}/>
+                content: <TableFormView key={name} ctrl={ctrl.forms[name]} cb={formController.onViewCreate}/>
             };
         });
     }
@@ -17,7 +17,7 @@ class PageView extends ReactComponent {
         const model = ctrl.model;
         return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
             const formController = ctrl.forms[name];
-            return <RowFormView key={name} ctrl={formController} cb={formController.onViewCreated}/>;
+            return <RowFormView key={name} ctrl={formController} cb={formController.onViewCreate}/>;
         });
     }
     renderCaption() {
