@@ -69,21 +69,6 @@ class ApplicationController extends ModelController {
         }));
     }
 
-    /*initMenu() {
-        if (!this.view) return;
-        this.menu = ApplicationController.createReactComponent(this.view.querySelector('.menu'), Menu, {
-            items: this.getMenuItemsProp(),
-            onClick: this.onMenuItemClick,
-            cb: menu => this.menu = menu
-        });
-        // setTimeout(() => this.menu.toggleMenu('Pages'), 1000);
-    }*/
-
-    /*initStatusbar() {
-        if (!this.view) return;
-        this.statusbar = ApplicationController.createReactComponent(this.view.querySelector('.statusbar'), Statusbar);
-    }*/
-
     /*initTab() {
         if (!this.view) return;
         this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
@@ -354,7 +339,7 @@ class ApplicationController extends ModelController {
     static createReactComponent(root, type, props = {}, children) {
         // console.log('ApplicationController.createReactComponent', root, type);
         let component;
-        props.cb = c => component = c;
+        props.onCreate = c => component = c;
         const reactElement = React.createElement(type, props, children);
         ReactDOM.render(reactElement, root);
         return component;

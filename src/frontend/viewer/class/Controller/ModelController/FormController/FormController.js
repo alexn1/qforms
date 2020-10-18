@@ -1,10 +1,7 @@
 'use strict';
 
 class FormController extends ModelController {
-    /*static createView(model, parent) {
-        // console.log('FormController.createView', model, parent);
-        return parent.view.querySelector(`#${model.getPage().id}_${model.getName()}_root`);
-    }*/
+
     static create(model, view, parent) {
         // console.log('FormController.create', model.getFullName());
         if (model.data.js) {
@@ -16,33 +13,22 @@ class FormController extends ModelController {
     }
     constructor(model, view, parent) {
         super(model);
-        this.view     = view;
-        this.parent   = parent;
-        this.fields   = {};
-        // this.controls = {};
+        this.view   = view;
+        this.parent = parent;
+        this.fields = {};
     }
     init() {
-        // fields
         for (const name in this.model.fields) {
             const field = this.model.fields[name];
             this.fields[name] = FieldController.create(field, this);
             this.fields[name].init();
         }
-        /*// controls
-        for (const name in this.model.controls) {
-            const control = this.model.controls[name];
-            this.controls[name] = ControlController.create(control, this);
-            this.controls[name].init();
-        }*/
     }
     deinit() {
         console.log('FormController.deinit:', this.model.getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
-        /*for (const name in this.controls) {
-            this.controls[name].deinit();
-        }*/
         super.deinit();
     }
     fill() {
@@ -51,9 +37,6 @@ class FormController extends ModelController {
         return true;
     }
     /*setRowStyle(bodyRow, row) {
-    }*/
-    /*getCaption() {
-        return this.model.data.caption;
     }*/
     async openPage(options) {
         return this.getPageController().openPage(options);

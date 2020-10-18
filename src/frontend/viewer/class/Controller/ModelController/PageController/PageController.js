@@ -23,11 +23,6 @@ class PageController extends ModelController {
         // this.root   = null;
     }
 
-    /*createView(root) {
-        this.root = root;
-        this.view = ApplicationController.createReactComponent(root, PageView, {ctrl: this});
-    }*/
-
     init() {
         const self = this;
         /*
@@ -47,14 +42,6 @@ class PageController extends ModelController {
             const form = this.model.forms[name];
             const ctrl = this.forms[name] = FormController.create(form, null, this);
             ctrl.init();
-
-            /*
-            const view = this.view.querySelector(`#${this.model.id}_${form.getName()}_root`);
-            if (form.getClassName() === 'RowForm') {
-                ctrl.view = ApplicationController.createReactComponent(view, RowFormView, {ctrl});
-            } else if (form.getClassName() === 'TableForm') {
-                ctrl.view = ApplicationController.createReactComponent(view, TableFormView, {ctrl});
-            }*/
         }
     }
 

@@ -5,14 +5,14 @@ class ApplicationView extends ReactComponent {
             return {
                 name   : pageCtrl.model.id,
                 title  : pageCtrl.model.getCaption(),
-                content: <PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreate}/>
+                content: <PageView ctrl={pageCtrl} onCreate={pageCtrl.onViewCreate}/>
             };
         });
     }
     renderModal() {
         const ctrl = this.props.ctrl;
         //return <Modal content={<div style={{backgroundColor: 'white'}}>content</div>}/>
-        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.id} content={<PageView ctrl={pageCtrl} cb={pageCtrl.onViewCreate}/>}/>);
+        return ctrl.modalPages.map(pageCtrl => <Modal key={pageCtrl.model.id} content={<PageView ctrl={pageCtrl} onCreate={pageCtrl.onViewCreate}/>}/>);
     }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
@@ -25,11 +25,11 @@ class ApplicationView extends ReactComponent {
                     tabs={this.getTabs()}
                     canClose={true}
                     onTabClose={ctrl.onPageClose}
-                    cb={ctrl.onTabCreated}
+                    onCreate={ctrl.onTabCreated}
                     getActive={ctrl.getActivePageIndex}
                     onTabMouseDown={ctrl.onTabMouseDown}
                 />
-                <Statusbar cb={ctrl.onStatusbarCreated}/>
+                <Statusbar onCreate={ctrl.onStatusbarCreated}/>
                 {this.renderModal()}
             </div>
         );
