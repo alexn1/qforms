@@ -27,7 +27,7 @@ class DataSource extends Model {
     }
 
     fillRowsByKey() {
-        console.log('DataSource.fillRowsByKey', this.getFullName())
+        // console.log('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
         for (let i = 0; i < this.rows.length; i++) {
             const row = this.rows[i];
