@@ -2,28 +2,26 @@
 
 class PageController extends Controller {
 
-    static create(model, view, parent) {
+    static create(model, parent) {
         // console.log('PageController.create', model.getName());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model, view, parent);
+            return new CustomClass(model, parent);
         }
-        return eval(`new ${model.getClassName()}Controller(model, view, parent)`);
+        return eval(`new ${model.getClassName()}Controller(model, parent)`);
     }
 
-    constructor(model, view, parent) {
+    constructor(model, parent) {
         //console.log('PageController.constructor', model);
-        super(model);
-        this.view   = view;
-        this.parent = parent;
-        this.forms  = {};
+        super(model, parent);
+        this.forms = {};
     }
 
     init() {
         for (const name in this.model.forms) {
             const form = this.model.forms[name];
-            const ctrl = this.forms[name] = FormController.create(form, null, this);
+            const ctrl = this.forms[name] = FormController.create(form, this);
             ctrl.init();
         }
     }
@@ -105,11 +103,5 @@ class PageController extends Controller {
     getApplicationController() {
         return this.parent;
     }
-    rerender() {
-        this.view.rerender();
-    }
-    onViewCreate = view => {
-        // console.log('PageController.onViewCreate');
-        this.view = view;
-    }
+
 }

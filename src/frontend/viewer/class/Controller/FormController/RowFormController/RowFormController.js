@@ -1,8 +1,8 @@
 'use strict';
 
 class RowFormController extends FormController {
-    constructor(model, view, parent) {
-        super(model, view, parent);
+    constructor(model, parent) {
+        super(model, parent);
         this.state = {
             mode   : 'view',
             hasNew : false,

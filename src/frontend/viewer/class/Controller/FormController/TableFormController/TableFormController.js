@@ -1,8 +1,8 @@
 'use strict';
 
 class TableFormController extends FormController {
-    constructor(model, view, parent) {
-        super(model, view, parent);
+    constructor(model, parent) {
+        super(model, parent);
         // this.grid        = null;
         // this.framesCount = null;
         // this.$goto       = null;

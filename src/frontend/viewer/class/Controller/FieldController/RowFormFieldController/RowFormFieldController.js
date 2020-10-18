@@ -19,9 +19,6 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    /*onViewCreate = c => {
-        console.log('RowFormFieldController.onViewCreate', c);
-    }*/
     onChange = value => {
         // console.log('RowFormFieldController.onChange', value);
         this.state.isUndefined = false;

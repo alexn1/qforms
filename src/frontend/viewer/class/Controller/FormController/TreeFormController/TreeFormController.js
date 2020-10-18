@@ -2,8 +2,8 @@
 
 class TreeFormController extends FormController {
 
-    constructor(model, view, parent) {
-        super(model, view, parent);
+    constructor(model, parent) {
+        super(model, parent);
         this.tree = null;
     }
 

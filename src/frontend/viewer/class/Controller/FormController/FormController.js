@@ -2,19 +2,17 @@
 
 class FormController extends Controller {
 
-    static create(model, view, parent) {
+    static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model, view, parent);
+            return new CustomClass(model, parent);
         }
-        return eval(`new ${model.getClassName()}Controller(model, view, parent);`);
+        return eval(`new ${model.getClassName()}Controller(model, parent);`);
     }
-    constructor(model, view, parent) {
-        super(model);
-        this.view   = view;
-        this.parent = parent;
+    constructor(model, parent) {
+        super(model, parent);
         this.fields = {};
     }
     init() {
@@ -46,12 +44,5 @@ class FormController extends Controller {
     onFieldChange(e) {
         console.log('FormController.onFieldChange', this.model.getFullName());
         this.parent.onFormChange(e);
-    }
-    rerender() {
-        this.view.rerender();
-    }
-    onViewCreate = view => {
-        // console.log('FormController.onViewCreate', view);
-        this.view = view;
     }
 }

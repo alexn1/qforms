@@ -2,21 +2,20 @@
 
 class ApplicationController extends Controller {
 
-    static create(model, view) {
+    static create(model) {
         // console.log('ApplicationController.create');
         // console.log('debug:', ApplicationController.isInDebugMode());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model, view);
+            return new CustomClass(model);
         }
-        return eval(`new ${model.getClassName()}Controller(model, view)`);
+        return eval(`new ${model.getClassName()}Controller(model)`);
     }
 
-    constructor(model, view) {
+    constructor(model) {
         // console.log('ApplicationController.constructor', model, view);
-        super(model);
-        this.view       = view;
+        super(model, null);
         this.lastPageId = 0;
         this.tab        = null;
         this.statusbar  = null;
@@ -101,7 +100,7 @@ class ApplicationController extends Controller {
             page.init();
 
             // controller
-            const pageController = PageController.create(page, null, this);
+            const pageController = PageController.create(page, this);
             pageController.init();
             return pageController;
         });
@@ -295,7 +294,7 @@ class ApplicationController extends Controller {
             parentPageName: parentPageName,
         });
         page.init();
-        const pc = new PageController(page, null, this);
+        const pc = PageController.create(page, this);
         pc.init();
 
 

@@ -17,10 +17,9 @@ class FieldController extends Controller {
         return obj;
     }
 
-    constructor(model, parent) {
-        super(model);
-        this.parent = parent;
-    }
+    /*constructor(model, parent) {
+        super(model, parent);
+    }*/
 
     valueToString(value) {
         // console.log('Field.valueToString', this.getFullName(), typeof value, value);

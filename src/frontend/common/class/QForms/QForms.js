@@ -21,7 +21,7 @@ class QForms {
         const root = document.querySelector('#root');
         const application = new Application(this.data);
         application.init();
-        const applicationController = ApplicationController.create(application, null);
+        const applicationController = ApplicationController.create(application);
         applicationController.init();
         applicationController.createView(root);
     }
