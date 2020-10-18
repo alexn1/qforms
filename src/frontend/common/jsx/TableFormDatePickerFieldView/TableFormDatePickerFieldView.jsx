@@ -1,4 +1,4 @@
-class TableFormTextBoxFieldView extends ReactComponent {
+class TableFormDatePickerFieldView extends ReactComponent {
     constructor(props) {
         super(props);
         this.span = React.createRef();
@@ -10,7 +10,7 @@ class TableFormTextBoxFieldView extends ReactComponent {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className="TableFormTextBoxFieldView">
+            <div className="TableFormDatePickerFieldView">
                 <span ref={this.span}>{ctrl.getValueForView(row)}</span>
             </div>
         );
