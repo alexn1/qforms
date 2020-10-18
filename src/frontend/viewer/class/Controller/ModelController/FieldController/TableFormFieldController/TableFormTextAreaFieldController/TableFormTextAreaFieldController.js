@@ -1,6 +1,6 @@
 'use strict';
 
-class TextAreaFieldController extends TableFormFieldController {
+class TableFormTextAreaFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
         super(model, parent);
@@ -30,7 +30,7 @@ class TextAreaFieldController extends TableFormFieldController {
     // }
 
     setPlaceHolder(view, value) {
-        // console.log('TextAreaFieldController.setPlaceHolder', this.model.getFullName(), value);
+        // console.log('TableFormTextAreaFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (ApplicationController.isInDebugMode()) {
                 if (value === undefined) {
