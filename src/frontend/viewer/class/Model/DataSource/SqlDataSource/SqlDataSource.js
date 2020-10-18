@@ -292,24 +292,25 @@ class SqlDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         // check if removed row has child rows
-        if (this.childs[key] !== undefined) {
+        /*if (this.childs[key] !== undefined) {
             //console.log(this.childs[key]);
             alert("Row can't be removed as it contains child rows.");
             return;
-        }
+        }*/
+        const row = this.getRowByKey(key);
         const args = {
             action        : '_delete',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : this.rowsByKey[key],
+            row           : row,
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
         this.removeRow(key);
-        console.log('this.data.rows:', this.data.rows);
+        /*console.log('this.data.rows:', this.data.rows);
         console.log('this.rowsByKey:', this.rowsByKey);
-        console.log('this.childs:', this.childs);
+        console.log('this.childs:', this.childs);*/
         this.getTable().emit('delete', {source: this, key: key});
     }
 

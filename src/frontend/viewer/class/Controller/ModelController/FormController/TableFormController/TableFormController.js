@@ -20,6 +20,7 @@ class TableFormController extends FormController {
         const dataSource = this.model.getDataSource();
         dataSource.on('refresh', this.listeners.refresh = this.onRefresh);
         dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
+        dataSource.on('delete' , this.listeners.delete  = this.onDataSourceDelete);
 
         /*
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
@@ -53,6 +54,7 @@ class TableFormController extends FormController {
         const dataSource = this.model.getDataSource();
         dataSource.off('refresh', this.listeners.refresh);
         dataSource.off('update' , this.listeners.update);
+        dataSource.off('delete' , this.listeners.delete);
 
         super.deinit();
     }
@@ -128,7 +130,7 @@ class TableFormController extends FormController {
     onDeleteClick = e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.activeRowKey);
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
-            this.model.delete(this.activeRowKey);
+            this.model.getDataSource().delete(this.activeRowKey);
         }
     }
 
@@ -254,22 +256,32 @@ class TableFormController extends FormController {
         console.log('TableFormController.onDataSourceUpdate', e.key);
         this.rerender();
     }
-    onActiveRowChanged = i => {
-        // console.log('TableFormController.onActiveRowChanged', i);
-        const rows = this.model.getDataSource().getRows();
-        const row = rows[i];
-        const key = this.model.getDataSource().getRowKey(row);
-        this.activeRowKey = key;
+    onDataSourceDelete = e => {
+        console.log('TableFormController.onDataSourceDelete', e.key);
+        if (this.activeRowKey === e.key) {
+            this.activeRowKey = null;
+        }
         this.rerender();
-        // console.log('key:', key);
+    }
+    onActiveRowChanged = i => {
+        console.log('TableFormController.onActiveRowChanged', i);
+        const rows = this.model.getDataSource().getRows();
+        this.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
+        this.rerender();
     }
     getActiveRow = () => {
-        // console.log('TableFormController.getActiveRow', this.activeRowKey);
+        console.log('TableFormController.getActiveRow', this.activeRowKey);
         if (this.activeRowKey) {
             const row = this.model.getDataSource().getRowByKey(this.activeRowKey);
             const rows = this.model.getDataSource().getRows();
+            if (!row) {
+                console.log('rows:', rows);
+                throw new Error(`no row with key: ${this.activeRowKey}`);
+            }
             const i = rows.indexOf(row);
-            if (i === -1) throw new Error('cannot find active row');
+            if (i === -1) {
+                throw new Error('cannot find active row')
+            }
             return i;
         }
         return null;

@@ -9,10 +9,10 @@ class TableForm extends Form {
     //     this.getDataSource().update();
     // }
 
-    delete(key) {
-        console.log('TableForm.delete:', key);
+    /*delete(key) {
+        console.log('TableForm.delete:', this.getFullName(), key);
         this.getDataSource().delete(key);
-    }
+    }*/
 
     frame(frame) {
         this.getDataSource().frame(this.getPage().params, frame);

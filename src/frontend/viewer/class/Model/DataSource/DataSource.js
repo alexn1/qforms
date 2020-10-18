@@ -352,24 +352,24 @@ class DataSource extends Model {
     removeRow(key) {
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
-        delete this.rowsByKey[key];
-        /*const i = this.data.rows.indexOf(row);
+        const i = this.rows.indexOf(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
-        this.data.rows.splice(i, 1);*/
+        this.rows.splice(i, 1);
+        delete this.rowsByKey[key];
 
         // remove from childs
-        const parentKey = this.getRowParentKey(row);
+        /*const parentKey = this.getRowParentKey(row);
         const childs = this.childs[parentKey];
         childs.keysByIndex.splice(childs.keysByIndex.indexOf(key), 1);
         childs.rowsByIndex.splice(childs.rowsByIndex.indexOf(row), 1);
         delete childs.rowsByKey[key];
-
-        this.fireRemoveRow(key);
+        this.fireRemoveRow(key);*/
+        this.emit('delete', {source: this, key: key});
     }
 
-    fireRemoveRow(key) {
+    /*fireRemoveRow(key) {
         this.emit('removeRow', {source: this, key: key});
-    }
+    }*/
 
     /*fireNewRow(i, parentKey, key) {
         //console.log('fireNewRow: ' + i);
