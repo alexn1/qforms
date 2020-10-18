@@ -10,7 +10,7 @@ class DataGridWidget extends GridWidget {
     init() {
         super.init();
         const dataSource = this.getDataSource();
-        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        dataSource.on('update', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
         dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
         dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
@@ -28,7 +28,7 @@ class DataGridWidget extends GridWidget {
     deinit() {
         super.deinit();
         const dataSource = this.getDataSource();
-        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('update', this.listeners.rowUpdate);
         dataSource.off('newRow', this.listeners.newRow);
         dataSource.off('removeRow', this.listeners.removeRow);
         dataSource.off('moveRow', this.listeners.moveRow);

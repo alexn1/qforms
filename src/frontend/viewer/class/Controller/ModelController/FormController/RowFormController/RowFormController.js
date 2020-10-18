@@ -13,13 +13,13 @@ class RowFormController extends FormController {
 
     init() {
         super.init();
-        this.model.getDataSource().on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        this.model.getDataSource().on('update', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         this.calcState();
     }
 
     deinit() {
         console.log('RowFormController.deinit', this.model.getFullName());
-        this.model.getDataSource().off('rowUpdate', this.listeners.rowUpdate);
+        this.model.getDataSource().off('update', this.listeners.rowUpdate);
         super.deinit();
     }
 

@@ -16,7 +16,7 @@ class ComboBoxFieldController extends FieldController {
         if (!dataSource) {
             throw new Error(`[${this.model.getFullName()}] cannot find data source '${this.model.data.dataSourceName}'`);
         }
-        dataSource.on('rowUpdate', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        dataSource.on('update', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
         dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
         dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
         dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
@@ -25,7 +25,7 @@ class ComboBoxFieldController extends FieldController {
     deinit(row, view) {
         //console.log('ComboBoxFieldController.deinit: ' + this.model.getFullName());
         const dataSource = this.model.getComboBoxDataSource();
-        dataSource.off('rowUpdate', this.listeners.rowUpdate);
+        dataSource.off('update', this.listeners.rowUpdate);
         dataSource.off('removeRow', this.listeners.removeRow);
         dataSource.off('newRow'   , this.listeners.newRow);
         dataSource.off('moveRow'  , this.listeners.moveRow);

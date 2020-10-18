@@ -346,7 +346,7 @@ class DataSource extends Model {
     }*/
 
     /*fireRefillRow(key) {
-        this.emit('rowUpdate', {source: this, key});
+        this.emit('update', {source: this, key});
     }*/
 
     removeRow(key) {

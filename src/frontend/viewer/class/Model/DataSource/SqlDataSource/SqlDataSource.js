@@ -82,7 +82,7 @@ class SqlDataSource extends DataSource {
         // console.log('this.data.rows:', this.data.rows);
 
         const event = {source: this, key};
-        this.emit('rowUpdate', event);
+        this.emit('update', event);
         return event;
     }
 
@@ -277,7 +277,7 @@ class SqlDataSource extends DataSource {
             this.params[name] = params[name];
         }
 
-        this.emit('rowUpdate', {source: this, key});
+        this.emit('update', {source: this, key});
 
         // fire insert event
         this.getTable().emit('insert', {source: this, key: key});
