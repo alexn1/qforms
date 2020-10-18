@@ -62,7 +62,7 @@ class Grid extends ReactComponent {
         this.rerender();
     }
     getMaxColumnWidth(column) {
-        return Math.max(...this.columns[column.name].map(fieldView => fieldView.getSpanOffsetWidth())) + 10;
+        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10;
     }
     onResizeDoubleClick = e => {
         console.log('Grid.onResizeDoubleClick', e.target);
@@ -91,14 +91,14 @@ class Grid extends ReactComponent {
     getRowKey(row) {
         return this.props.getRowKey(row);
     }
-    onFieldViewCreate = c => {
-        // console.log('Grid.onFieldViewCreate', c.props.column.name);
+    onCellViewCreate = c => {
+        // console.log('Grid.onCellViewCreate', c.props.column.name);
         const columnName = c.props.column.name;
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     }
-    onFieldViewUnmount = c => {
-        // console.log('Grid.onFieldViewUnmount', c.props.column.name);
+    onCellViewUnmount = c => {
+        // console.log('Grid.onCellViewUnmount', c.props.column.name);
         const columnName = c.props.column.name;
         const i = this.columns[columnName].indexOf(c);
         if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
@@ -107,6 +107,14 @@ class Grid extends ReactComponent {
     onBodyScroll = e => {
         // console.log('Grid.onBodyScroll', e.target.scrollLeft);
         this.head.current.scrollLeft = e.target.scrollLeft;
+    }
+    renderCell(row, column) {
+        return <GridCell
+            row={row}
+            column={column}
+            onCreate={this.onCellViewCreate}
+            onUnmount={this.onCellViewUnmount}
+        />;
     }
     renderRow(row, i) {
         // console.log('Grid.renderRow', i);
@@ -119,18 +127,13 @@ class Grid extends ReactComponent {
                 {this.props.columns.map((column, j) =>
                     <td
                         key={column.name}
-                        style={{width: this.getColumnWidth(j)}}
                         className={this.isCellActive(i, j) ? 'active' : null}
+                        style={{width: this.getColumnWidth(j)}}
                         data-rc={`[${i},${j}]`}
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <TableFormTextBoxFieldView
-                            row={row}
-                            column={column}
-                            onCreate={this.onFieldViewCreate}
-                            onUnmount={this.onFieldViewUnmount}
-                        />
+                        {this.renderCell(row, column)}
                     </td>)}
                 <td
                     data-r={i}
