@@ -2,8 +2,8 @@ class Grid extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            column: null,
-            row   : null,
+            column     : null,
+            row        : null,
             columnWidth: {}
         };
         this.columns = {};
@@ -55,26 +55,20 @@ class Grid extends ReactComponent {
         this.setActiveRow(i);
         this.state.column = j;
         this.rerender();
-        /*const start = new Date().getTime();
-        this.setState({row: i, column: j}, () => {
-            console.log('selectCell time:', new Date().getTime() - start);
-        });*/
     }
     selectRow(i) {
         if (this.getActiveRow() === i ) return;
         this.setActiveRow(i);
         this.rerender();
-        /*const start = new Date().getTime();
-        this.setState({row: i}, () => {
-            console.log('selectRow time:', new Date().getTime() - start);
-        });*/
+    }
+    getMaxColumnWidth(column) {
+        return Math.max(...this.columns[column.name].map(fieldView => fieldView.getSpanOffsetWidth())) + 10;
     }
     onResizeDoubleClick = e => {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
-        const maxOffsetWidth = Math.max(...this.columns[column.name].map(fieldView => fieldView.getSpanOffsetWidth()));
-        this.state.columnWidth[column.name] = maxOffsetWidth + 10;
+        this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
         this.rerender();
         // console.log('maxOffsetWidth:', maxOffsetWidth);
         // console.log('this.state.columnWidth:', this.state.columnWidth);
