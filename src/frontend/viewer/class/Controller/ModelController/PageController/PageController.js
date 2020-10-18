@@ -18,26 +18,9 @@ class PageController extends ModelController {
         this.view   = view;
         this.parent = parent;
         this.forms  = {};
-        // this.tab    = null;
-        // this.modal  = null;
-        // this.root   = null;
     }
 
     init() {
-        const self = this;
-        /*
-        $(this.view).find(`#${this.model.id}_TabWidget`).each(function() {
-            new TabWidget(this).init();
-        });*/
-
-        // disable buttons
-        // $(this.view).find('button.saveAndClose').prop('disabled', !this.model.hasNew());
-
-        // button click
-        // $(this.view).find('button.saveAndClose').click(this.onSaveAndCloseClick);
-        // $(this.view).find('button.closePage').click(this.onClosePageClick);
-
-        // forms
         for (const name in this.model.forms) {
             const form = this.model.forms[name];
             const ctrl = this.forms[name] = FormController.create(form, null, this);
@@ -45,25 +28,13 @@ class PageController extends ModelController {
         }
     }
 
-    /*getCaptionElements() {
-        return this.view.querySelectorAll(`.caption`);
-    }*/
-
     deinit() {
         console.log('PageController.deinit: ' + this.model.getFullName());
-        // if (this.root) ReactDOM.unmountComponentAtNode(this.root);
         for (const name in this.forms) {
             this.forms[name].deinit();
         }
         super.deinit();
     }
-
-    /*fill() {
-        for (const name in this.forms) {
-            this.forms[name].fill();
-        }
-        // this.setCaption(this.getCaption());
-    }*/
 
     onSaveAndCloseClick = async () => {
         console.log('PageController.onSaveAndCloseClick');
@@ -71,13 +42,6 @@ class PageController extends ModelController {
             await this.model.update();
             console.log('page model updated', this.model.getFullName());
             this.getApplicationController().closePage(this);
-        } else {
-            /*for (const name in this.forms) {
-                const form = this.forms[name];
-                if (form.model.getClassName() === 'RowForm') {
-                    form.updateErrorClasses();
-                }
-            }*/
         }
     }
 
@@ -98,38 +62,6 @@ class PageController extends ModelController {
         }
         this.getApplicationController().closePage(this);
     }
-
-    /*enableSave() {
-        // $(this.view).find('button.saveAndClose').prop('disabled', false);
-    }*/
-
-    /*disableSave() {
-        // $(this.view).find('button.saveAndClose').prop('disabled', true);
-    }*/
-
-    /*setCaption(caption) {
-        // this.getCaptionElements().forEach(el => el.innerHTML = caption);
-        if (this.tab) {
-            TabWidget.setTabCaption(this.tab, caption);
-        }
-    }*/
-
-    /*getCaption() {
-        // console.log('PageController.getCaption', this.model.getFullName());
-        const key = this.model.getKey();
-        let caption = this.model.data.caption;
-        if (ApplicationController.isInDebugMode()) {
-            caption += `(${this.model.id})`;
-        }
-        if (key) {
-            caption += ` ${key}`;
-        }
-        if (this.isChanged() || this.model.hasNew()) {
-            caption += ' <span class="star">*</span>';
-        }
-        return caption;
-    }*/
-
     isValid() {
         // console.log('PageController.isValid', this.model.getFullName());
         for (const name in this.forms) {
@@ -139,41 +71,17 @@ class PageController extends ModelController {
         }
         return true;
     }
-
     onFormChange(e) {
         console.log('PageController.onFormChange', this.model.getFullName());
-        /*
-        this.setCaption(this.getCaption());
-        if (this.isChanged() || this.model.hasNew()) {
-            if (this.isValid()) {
-                this.enableSave();
-            } else {
-                this.disableSave();
-            }
-        } else {
-            this.disableSave();
-        }
-        */
         this.rerender();
     }
-
     onFormDiscard(formController) {
         console.log('PageController.onFormDiscard', this.model.getFullName());
-        /*
-        this.setCaption(this.getCaption());
-        if (this.isChanged() || this.model.hasNew()) {
-            this.enableSave();
-        } else {
-            this.disableSave();
-        }
-        */
         this.rerender();
     }
 
     onFormUpdate(e) {
         console.log('PageController.onFormUpdate:', this.model.getFullName());
-        /*this.setCaption(this.getCaption());
-        this.disableSave();*/
         this.rerender();
     }
 

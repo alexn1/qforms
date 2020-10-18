@@ -32,7 +32,7 @@ class FieldController extends ModelController {
         super(model);
         this.parent = parent;
         // this.views  = new Map();    // list of all views that controlled by this field
-        this.html   = null;
+        // this.html   = null;
     }
 
     init() {
@@ -127,12 +127,14 @@ class FieldController extends ModelController {
         try {
             const value = this.getValue(view);
             // console.log('value:', this.model.getFullName(), value);
-            let isValid = true;
+            // let isValid = true;
             if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {
-                isValid = false;
+                // isValid = false;
                 console.error(`${this.model.getFullName()} is null`);
+                return false;
             }
-            return isValid;
+            // return isValid;
+            return true;
         } catch (err) {
             console.error(`${this.model.getFullName()} not valid:`, err.message);
             return false;
