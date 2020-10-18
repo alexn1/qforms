@@ -264,13 +264,13 @@ class TableFormController extends FormController {
         this.rerender();
     }
     onActiveRowChanged = i => {
-        console.log('TableFormController.onActiveRowChanged', i);
+        // console.log('TableFormController.onActiveRowChanged', i);
         const rows = this.model.getDataSource().getRows();
         this.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
         this.rerender();
     }
     getActiveRow = () => {
-        console.log('TableFormController.getActiveRow', this.activeRowKey);
+        // console.log('TableFormController.getActiveRow', this.activeRowKey);
         if (this.activeRowKey) {
             const row = this.model.getDataSource().getRowByKey(this.activeRowKey);
             const rows = this.model.getDataSource().getRows();
@@ -287,7 +287,7 @@ class TableFormController extends FormController {
         return null;
     }
     isRowSelected = () => {
-        console.log('TableFormController.isRowSelected');
+        // console.log('TableFormController.isRowSelected');
         return this.activeRowKey !== null;
     }
 }

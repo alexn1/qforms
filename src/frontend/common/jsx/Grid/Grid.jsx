@@ -98,8 +98,8 @@ class Grid extends ReactComponent {
     getRowKey(row) {
         return this.props.getRowKey(row);
     }
-    onFieldViewCreated = c => {
-        // console.log('Grid.onFieldViewCreated', c.props.column.name);
+    onFieldViewCreate = c => {
+        // console.log('Grid.onFieldViewCreate', c.props.column.name);
         const columnName = c.props.column.name;
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
@@ -125,7 +125,7 @@ class Grid extends ReactComponent {
                         onMouseDown={this.onCellMouseDown}
                         onDoubleClick={this.onCellDoubleClick}
                     >
-                        <TableFormTextBoxFieldView row={row} column={column} cb={this.onFieldViewCreated}/>
+                        <TableFormTextBoxFieldView row={row} column={column} onCreate={this.onFieldViewCreate}/>
                     </td>)}
                 <td
                     data-r={i}
