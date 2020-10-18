@@ -18,7 +18,7 @@ class QForms {
     }
     init() {
         console.log('QForms.init');
-        const root = document.querySelector('#client');
+        const root = document.querySelector('#root');
         const application = new Application(this.data);
         application.init();
         const applicationController = ApplicationController.create(application, null);
