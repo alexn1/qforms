@@ -22,8 +22,8 @@ class RowFormFieldController extends FieldController {
     fill(row) {
         throw new Error('RowFormFieldController.fill not implemented');
     }
-    onFieldViewContentCreated = c => {
-        // console.log('RowFormFieldController.onFieldViewContentCreated', c);
+    onFieldViewContentCreate = c => {
+        // console.log('RowFormFieldController.onFieldViewContentCreate', c);
     }
     onChange2 = value => {
         // console.log('RowFormFieldController.onChange2', value);
