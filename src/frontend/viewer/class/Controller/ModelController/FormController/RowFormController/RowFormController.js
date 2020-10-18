@@ -58,7 +58,6 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].refill();
         }
-        this.state.mode = 'view';
         this.calcState();
         this.parent.onFormUpdate(e);
     }
