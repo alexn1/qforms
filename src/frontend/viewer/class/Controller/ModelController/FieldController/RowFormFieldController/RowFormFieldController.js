@@ -57,7 +57,7 @@ class RowFormFieldController extends FieldController {
         this.state.error = this.getError();
     }
     updateChanged() {
-        this.state.changed = super.isChanged(this.getRow());
+        this.state.changed = this.isChanged2(this.getRow());
     }
     refill() {
         const value = this.model.getValue(this.getRow());
@@ -96,5 +96,49 @@ class RowFormFieldController extends FieldController {
     }
     isEditable() {
         return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
+    }
+
+    isValid() {
+        // console.log('RowFormFieldController.isValid', this.model.getFullName());
+        try {
+            const value = this.getValue();
+            // console.log('value:', this.model.getFullName(), value);
+            // let isValid = true;
+            if (this.model.data.notNull === 'true' && (value === null || value === undefined)) {
+                // isValid = false;
+                console.error(`${this.model.getFullName()} is null`);
+                return false;
+            }
+            // return isValid;
+            return true;
+        } catch (err) {
+            console.error(`${this.model.getFullName()} not valid:`, err.message);
+            return false;
+        }
+    }
+
+    isChanged2(row, view) {
+        // console.log('RowFormFieldController.isChanged2', this.model.getFullName());
+        if (!row) throw new Error('FieldController: no row');
+        // if (!view) throw new Error('FieldController: no view');
+        // if (!this.isValid(view)) return true;
+        try {
+            if (this.model.hasColumn()) {
+                const dsValue = this.model.getValueFromDataSource(row);
+                const fieldValue = this.model.getValueForDataSource(this.getValue(view));
+                if (dsValue !== fieldValue) {
+                    console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsValue, fieldValue);
+                    return true;
+                }
+            }
+        } catch (err) {
+            console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
+            return true;
+        }
+        const changed = this.model.isChanged(row);
+        if (changed) {
+            console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().changes.get(row)[this.model.data.column]);
+        }
+        return changed;
     }
 }
