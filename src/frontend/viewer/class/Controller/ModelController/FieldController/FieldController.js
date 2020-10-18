@@ -10,7 +10,8 @@ class FieldController extends ModelController {
             if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
             obj = new CustomClass(model, parent);
         } else {
-            let className = `${model.getClassName()}Controller`;
+            let className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+            /*
             if (parent.model.getClassName() === 'RowForm') {
                 if (model.getClassName() === 'TextBoxField') {
                     className = 'RowFormTextBoxFieldController';
@@ -21,7 +22,7 @@ class FieldController extends ModelController {
                 if (model.getClassName() === 'DatePickerField') {
                     className = 'RowFormDatePickerFieldController';
                 }
-            }
+            }*/
             // console.log('className:', className);
             obj = eval(`new ${className}(model, parent);`);
         }

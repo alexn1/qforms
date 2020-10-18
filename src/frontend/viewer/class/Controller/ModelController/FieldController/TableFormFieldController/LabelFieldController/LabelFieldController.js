@@ -1,6 +1,6 @@
 'use strict';
 
-class LabelFieldController extends FieldController {
+class LabelFieldController extends TableFormFieldController {
     constructor(model, parent) {
         super(model, parent);
     }

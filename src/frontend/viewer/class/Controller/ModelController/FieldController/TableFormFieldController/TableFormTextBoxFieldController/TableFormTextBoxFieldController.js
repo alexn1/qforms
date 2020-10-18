@@ -1,9 +1,9 @@
 'use strict';
 
-class TextBoxFieldController extends FieldController {
+class TableFormTextBoxFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
-        // console.log('new TextBoxFieldController', model.getName());
+        // console.log('new TableFormTextBoxFieldController', model.getName());
         super(model, parent);
         this.textBox = null;
     }
@@ -50,7 +50,7 @@ class TextBoxFieldController extends FieldController {
     }
 
     getPlaceHolder(value) {
-        // console.log('TextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
+        // console.log('TableFormTextBoxFieldController.getPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             if (ApplicationController.isInDebugMode()) {
                 if (value === undefined) {

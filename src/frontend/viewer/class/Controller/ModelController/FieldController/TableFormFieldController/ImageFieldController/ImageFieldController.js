@@ -1,6 +1,6 @@
 'use strict';
 
-class ImageFieldController extends FieldController {
+class ImageFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
         super(model, parent);

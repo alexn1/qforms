@@ -1,6 +1,6 @@
 'use strict';
 
-class ComboBoxFieldController extends FieldController {
+class ComboBoxFieldController extends TableFormFieldController {
 
     // constructor(model, parent) {
     //     super(model, parent);

@@ -1,6 +1,6 @@
 'use strict';
 
-class CheckBoxFieldController extends FieldController {
+class CheckBoxFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
         super(model, parent);

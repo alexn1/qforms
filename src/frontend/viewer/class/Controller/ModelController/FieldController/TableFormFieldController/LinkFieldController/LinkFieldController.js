@@ -1,6 +1,6 @@
 'use strict';
 
-class LinkFieldController extends FieldController {
+class LinkFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
         super(model, parent);

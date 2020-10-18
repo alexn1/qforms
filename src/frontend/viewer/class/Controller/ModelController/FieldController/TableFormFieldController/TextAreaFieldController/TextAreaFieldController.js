@@ -1,6 +1,6 @@
 'use strict';
 
-class TextAreaFieldController extends FieldController {
+class TextAreaFieldController extends TableFormFieldController {
 
     constructor(model, parent) {
         super(model, parent);

@@ -1,6 +1,6 @@
 'use strict';
 
-class DatePickerFieldController extends FieldController {
+class TableFormDatePickerFieldController extends TableFormFieldController {
 
     // constructor(model, parent) {
     //     super(model, parent);
@@ -26,7 +26,7 @@ class DatePickerFieldController extends FieldController {
     }
 
     setValue(value, view) {
-        // console.log('DatePickerController.setValue', this.model.getFullName(), value);
+        // console.log('TableFormDatePickerFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
 
         } else if (this.model.getForm().getClassName() === 'TableForm') {
@@ -40,12 +40,12 @@ class DatePickerFieldController extends FieldController {
     }
 
     getValue(view) {
-        // console.log('DatePickerFieldController.getValue', this.model.getFullName());
+        // console.log('TableFormDatePickerFieldController.getValue', this.model.getFullName());
         return null;
     }
 
     setPlaceHolder(view, value) {
-        // console.log('DatePickerFieldController.setPlaceHolder', this.model.getFullName(), value);
+        // console.log('TableFormDatePickerFieldController.setPlaceHolder', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             // view.firstElementChild.firstElementChild.placeholder = 'ДД.ММ.ГГГГ';
         }
