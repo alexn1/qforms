@@ -5,7 +5,7 @@ class DataSource extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.rows      = null;
-        this.length    = null;
+        // this.length    = null;
         this.rowsByKey = null;						// for row search by key
         // this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row
@@ -18,12 +18,16 @@ class DataSource extends Model {
         //console.log('limit', this.getLimit());
         //console.log('count', this.count);
         // creating index
-        this.rows   = this.data.rows;
-        this.length = this.data.rows.length;
-        this.fillRowsByKey();
+        // this.length = this.data.rows.length;
+        this.setRows(this.data.rows);
         /*const vals = this.getKeysAndChilds(this.data.rows);
         this.rowsByKey = vals.rowsByKey;
         this.childs    = vals.childs;*/
+    }
+
+    setRows(rows) {
+        this.rows = rows;
+        this.fillRowsByKey();
     }
 
     fillRowsByKey() {
@@ -364,7 +368,6 @@ class DataSource extends Model {
         childs.rowsByIndex.splice(childs.rowsByIndex.indexOf(row), 1);
         delete childs.rowsByKey[key];
         this.fireRemoveRow(key);*/
-        this.emit('delete', {source: this, key: key});
     }
 
     /*fireRemoveRow(key) {

@@ -124,9 +124,6 @@ class SqlDataSource extends DataSource {
         }
         await this._refresh();
         /*if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, key: e.key});
-        }
         this.emit('insert', {source: this, key: e.key});*/
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key: e.key});
@@ -163,8 +160,7 @@ class SqlDataSource extends DataSource {
         /*const _old = this;
         const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
         this.sync(_old, _new, '[null]');*/
-        this.rows = data.rows;
-        this.fillRowsByKey();
+        this.setRows(data.rows);
         this.emit('refresh', {source: this});
     }
 
@@ -261,7 +257,8 @@ class SqlDataSource extends DataSource {
 
         this.news.splice(this.news.indexOf(row), 1);
         this.changes.clear();
-        this.rows.push(row);
+        this.addRow(row);
+
         // console.log('this.news:', this.news);
 
         // creating index with for rows
@@ -269,7 +266,7 @@ class SqlDataSource extends DataSource {
         /*const vals = this.getKeysAndChilds([row]);
         this.rowsByKey = vals.rowsByKey;
         this.childs    = vals.childs;*/
-        this.fillRowsByKey();
+
 
         // save key params for refill
         const params = QForms.keyToParams(key);
@@ -283,6 +280,12 @@ class SqlDataSource extends DataSource {
         this.getTable().emit('insert', {source: this, key: key});
 
         return key;
+    }
+
+    addRow(row) {
+        this.rows.push(row);
+        const key = this.getRowKey(row);
+        this.rowsByKey[key] = row;
     }
 
     async delete(key) {
@@ -308,6 +311,7 @@ class SqlDataSource extends DataSource {
         };
         const data = await this.getApp().request(args);
         this.removeRow(key);
+        this.emit('delete', {source: this, key: key});
         /*console.log('this.data.rows:', this.data.rows);
         console.log('this.rowsByKey:', this.rowsByKey);
         console.log('this.childs:', this.childs);*/

@@ -251,15 +251,15 @@ class TableFormController extends FormController {
         }
     }
     onRefresh = e => {
-        console.log('TableFormController.onRefresh', e);
+        console.log('TableFormController.onRefresh', this.model.getFullName(), e);
         this.rerender();
     }
     onDataSourceUpdate = e => {
-        console.log('TableFormController.onDataSourceUpdate', e.key);
+        console.log('TableFormController.onDataSourceUpdate', this.model.getFullName(), e.key);
         this.rerender();
     }
     onDataSourceDelete = e => {
-        console.log('TableFormController.onDataSourceDelete', e.key);
+        console.log('TableFormController.onDataSourceDelete', this.model.getFullName(), e.key);
         if (this.state.activeRowKey === e.key) {
             this.state.activeRowKey = null;
         }
