@@ -47,6 +47,15 @@ class TableFormView extends ReactComponent {
             </div>
         );
     }
+    renderGridCellView(row, column, onCreate, onUnmount) {
+        console.log('TableFormView.renderGridCellView');
+        return <TableFormTextBoxFieldView
+            row={row}
+            column={column}
+            onCreate={onCreate}
+            onUnmount={onUnmount}
+        />;
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -60,6 +69,7 @@ class TableFormView extends ReactComponent {
                       onDoubleClick={ctrl.onGridCellDblClick}
                       onActiveRowChanged={ctrl.onActiveRowChanged}
                       getActiveRow={ctrl.getActiveRow}
+                      renderGridCellView={this.renderGridCellView}
                 />
                 {this.renderPaging()}
             </div>

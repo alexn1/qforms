@@ -109,6 +109,7 @@ class Grid extends ReactComponent {
         this.head.current.scrollLeft = e.target.scrollLeft;
     }
     renderCell(row, column) {
+        if (this.props.renderGridCellView) return this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
         return <GridCell
             row={row}
             column={column}
