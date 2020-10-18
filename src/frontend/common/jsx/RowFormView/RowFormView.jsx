@@ -53,7 +53,8 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldLabel(model) {
+    renderFieldLabel(ctrl) {
+        const model = ctrl.model;
         return (
             <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
                 {model.data.caption}:
@@ -61,29 +62,28 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldTooltip(model, ctrl) {
+    renderFieldView(ctrl) {
+        return <RowFormFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
+    }
+    renderFieldTooltip(ctrl) {
         // console.log('renderFieldTooltip:', ctrl.state);
         return (
-            <div key={`tooltip.${model.getName()}`} className={`tooltip ${model.getName()}`}>
+            <div key={`tooltip.${ctrl.model.getName()}`} className={`tooltip ${ctrl.model.getName()}`}>
                 <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
             </div>
         );
     }
     renderFormGrid() {
-        // console.log('FormGrid.render');
+        // console.log('RowFormView.renderFormGrid');
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        // console.log('model:', model);
         return (
-            <div className="FormGrid">
-                {Object.keys(model.fields).map(name => {
-                    const fieldModel = model.fields[name];
-                    const fieldCtrl  = ctrl.fields[name];
-                    // console.log('fieldModel:', fieldModel);
+            <div className="grid">
+                {Object.keys(ctrl.fields).map(name => {
+                    const fieldCtrl = ctrl.fields[name];
                     return [
-                        this.renderFieldLabel(fieldModel),
-                        <RowFormFieldView key={`field.${fieldModel.getName()}`} ctrl={fieldCtrl}/>,
-                        this.renderFieldTooltip(fieldModel, fieldCtrl)
+                        this.renderFieldLabel(fieldCtrl),
+                        this.renderFieldView(fieldCtrl),
+                        this.renderFieldTooltip(fieldCtrl)
                     ];
                 })}
             </div>
