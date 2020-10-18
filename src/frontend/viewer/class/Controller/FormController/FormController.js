@@ -31,13 +31,9 @@ class FormController extends Controller {
         }
         super.deinit();
     }
-    fill() {
-    }
     isValid() {
         return true;
     }
-    /*setRowStyle(bodyRow, row) {
-    }*/
     async openPage(options) {
         return this.getPageController().openPage(options);
     }
