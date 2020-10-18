@@ -6,7 +6,7 @@ class ButtonControlController extends ControlController {
         super(model, parent);
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         const self = this;
         super.fill(row, view);
         if (self.model.getForm().getClassName() === 'RowForm') {
@@ -14,7 +14,7 @@ class ButtonControlController extends ControlController {
                 self._onClick(this);
             });
         }
-    }
+    }*/
 
     _onClick(el) {
         const view = el.parentNode;

@@ -6,13 +6,13 @@ class LinkFieldController extends FieldController {
         super(model, parent);
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         const self = this;
         super.fill(row, view);
         $(view).children().click(function() {
             self._onClick(this);
         });
-    }
+    }*/
 
     getStringValue(view) {
         // console.log('LinkFieldController.getStringValue', view.firstElementChild);

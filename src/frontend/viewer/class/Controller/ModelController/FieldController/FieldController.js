@@ -27,19 +27,20 @@ class FieldController extends ModelController {
         }
         return obj;
     }
-    init() {
-    }
 
     constructor(model, parent) {
         super(model);
         this.parent = parent;
-        this.views  = new Map();    // list of all views that controlled by this field
+        // this.views  = new Map();    // list of all views that controlled by this field
         this.html   = null;
+    }
+
+    init() {
     }
 
     deinit(row, view) {
         // console.log('FieldController.deinit:', this.model.getFullName());
-        this.views = null;
+        // this.views = null;
         super.deinit();
     }
 
@@ -50,16 +51,16 @@ class FieldController extends ModelController {
         return $(this.html).get(0);
     }*/
 
-    fill(row, view) {
+    /*fill(row, view) {
         // console.log('FieldController.fill', this.model.getFullName());
         this.views.set(row, view);
         view.dbRow = row;
         const value = this.model.getValue(row);
         this.setValue(value, view);
         this.setViewStyle(view, row);
-    }
+    }*/
 
-    refill(row, view) {
+    /*refill(row, view) {
         // console.log('FieldController.refill', this.model.getFullName());
         const value = this.model.getValue(row);
         this.setValue(value, view);
@@ -67,59 +68,59 @@ class FieldController extends ModelController {
         this.updateChangedClass(row, view);
         this.updateErrorClass(view, true);
         view.firstElementChild.classList.remove('error');
-    }
+    }*/
 
-    updateChangedClass(row, view) {
+    /*updateChangedClass(row, view) {
         // console.log('FieldController.updateChangedClass', this.model.getFullName(), this.isChanged(row, view));
         if (this.isChanged(row, view)) {
             $(view).addClass('changed');
         } else {
             $(view).removeClass('changed');
         }
-    }
+    }*/
 
-    getStringValue(view) {
+    /*getStringValue(view) {
         switch (this.model.getForm().getClassName()) {
             case 'RowForm'  : return view.firstElementChild.value;
             case 'TableForm': return view.firstElementChild.innerHTML;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
-    }
+    }*/
 
-    setStringValue(stringValue, view) {
+    /*setStringValue(stringValue, view) {
         switch (this.model.getForm().getClassName()) {
             case 'RowForm'  : view.firstElementChild.value     = stringValue; break;
             case 'TableForm': view.firstElementChild.innerHTML = stringValue; break;
             default: throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
-    }
+    }*/
 
-    setPlaceHolder(view, value) {
+    /*setPlaceHolder(view, value) {
         // console.log('FieldController.setPlaceHolder', this.model.getFullName(), value);
-    }
+    }*/
 
-    setValue(value, view) {
+    /*setValue(value, view) {
         // console.log('FieldController.setValue', this.model.getFullName(), this.model.getColumnType(), typeof value, value);
         const stringValue = this.valueToString(value);
         this.setStringValue(stringValue, view);
         this.setPlaceHolder(view, value);
-    }
+    }*/
 
-    getValue(view) {
+    /*getValue(view) {
         // console.log('FieldController.getValue', this.model.getFullName());
         const stringValue = this.getStringValue(view);
         const value = this.stringToValue(stringValue);
         return value;
-    }
+    }*/
 
-    setViewStyle(view, row) {
-    }
+    /*setViewStyle(view, row) {
+    }*/
 
-    beginEdit(view) {
-    }
+    /*beginEdit(view) {
+    }*/
 
-    endEdit(view) {
-    }
+    /*endEdit(view) {
+    }*/
 
     isValid(view) {
         // console.log('FieldController.isValid', this.model.getFullName());
@@ -138,7 +139,7 @@ class FieldController extends ModelController {
         }
     }
 
-    onChange(view) {
+    /*onChange(view) {
         console.log('FieldController.onChange', this.model.getFullName());
         // const view = el.parentNode;
         if (!view.dbRow) throw new Error('no view.dbRow');
@@ -153,16 +154,16 @@ class FieldController extends ModelController {
         this.updateErrorClass(view, valid);
         this.updateChangedClass(row, view);
         this.parent.onFieldChange({source: this, view, row, field: this});
-    }
+    }*/
 
-    updateErrorClass(view, valid) {
+    /*updateErrorClass(view, valid) {
         // console.log('FieldController.updateErrorClass', this.model.getFullName(), valid);
         if (valid) {
             view.classList.remove('error');
         } else {
             view.classList.add('error');
         }
-    }
+    }*/
 
     isChanged(row, view) {
         // console.log('FieldController.isChanged', this.model.getFullName());
@@ -226,7 +227,7 @@ class FieldController extends ModelController {
         return stringValue;
     }
 
-    getPlaceHolder(value) {
-    }
+    /*getPlaceHolder(value) {
+    }*/
 
 }

@@ -33,7 +33,7 @@ class ComboBoxFieldController extends FieldController {
         super.deinit();
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
 
             // view.keyToOption = {};
@@ -47,7 +47,7 @@ class ComboBoxFieldController extends FieldController {
         } else {
             throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
         }
-    }
+    }*/
 
     getItems() {
         return this.model.getComboBoxDataSource().getRows().map(row => ({

@@ -36,10 +36,10 @@ class TreeFormController extends FormController {
         super.deinit();
     }
 
-    fill() {
+    /*fill() {
         super.fill();
         this.tree.fill();
-    }
+    }*/
 
     onTreeItemSelect(e) {
         //console.log(this.tree.active);

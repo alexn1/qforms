@@ -19,9 +19,9 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    fill(row) {
+    /*fill(row) {
         throw new Error('RowFormFieldController.fill not implemented');
-    }
+    }*/
     onFieldViewContentCreate = c => {
         // console.log('RowFormFieldController.onFieldViewContentCreate', c);
     }
@@ -62,7 +62,6 @@ class RowFormFieldController extends FieldController {
     refill() {
         const value = this.model.getValue(this.getRow());
         this.setValue(value);
-        // this.validate();
         this.state.error = null;
         this.updateChanged();
     }

@@ -14,7 +14,7 @@ class CheckBoxFieldController extends FieldController {
         view.firstElementChild.checked = (value === 1) ? true : false;
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         const self = this;
         super.fill(row, view);
         if (self.model.getForm().getClassName() === 'RowForm') {
@@ -22,6 +22,6 @@ class CheckBoxFieldController extends FieldController {
                 self.onChange(view);
             });
         }
-    }
+    }*/
 
 }

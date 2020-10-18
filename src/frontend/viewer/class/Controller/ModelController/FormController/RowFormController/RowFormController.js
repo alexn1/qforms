@@ -13,13 +13,15 @@ class RowFormController extends FormController {
 
     init() {
         super.init();
-        this.model.getDataSource().on('update', this.listeners.rowUpdate = this.onRowUpdate.bind(this));
+        const dataSource = this.model.getDataSource();
+        dataSource.on('update', this.listeners.update = this.onDataSourceUpdate);
         this.calcState();
     }
 
     deinit() {
         console.log('RowFormController.deinit', this.model.getFullName());
-        this.model.getDataSource().off('update', this.listeners.rowUpdate);
+        const dataSource = this.model.getDataSource();
+        dataSource.off('update', this.listeners.update);
         super.deinit();
     }
 
@@ -51,19 +53,13 @@ class RowFormController extends FormController {
         });
     }
 
-    // fill() {
-    //     console.log('RowFormController.fill', this.model.getFullName());
-    //     super.fill();
-    // }
-
-    onRowUpdate(e) {
-        console.log('RowFormController.onRowUpdate', this.model.getFullName(), e);
+    onDataSourceUpdate = e => {
+        console.log('RowFormController.onDataSourceUpdate', this.model.getFullName(), e);
         for (const name in this.fields) {
             this.fields[name].refill();
         }
         this.state.mode = 'view';
         this.calcState();
-        this.rerender();
         this.parent.onFormUpdate(e);
     }
 

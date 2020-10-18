@@ -27,7 +27,7 @@ class FileFieldController extends FieldController {
         //view.firstElementChild.files[0] = value;
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         const self = this;
         super.fill(row, view);
         if (this.model.getForm().getClassName() === 'RowForm') {
@@ -35,6 +35,6 @@ class FileFieldController extends FieldController {
                 self.onChange(view);
             });
         }
-    }
+    }*/
 
 }

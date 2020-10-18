@@ -6,19 +6,19 @@ class DatePickerFieldController extends FieldController {
     //     super(model, parent);
     // }
 
-    fill(row, view) {
-        if (this.model.getForm().getClassName() === 'RowForm') {
-
-        } else {
-            super.fill(row, view);
-        }
-        // this.setPlaceHolder(view);
-        /*if (this.model.getForm().getClassName() === 'RowForm') {
-            this.dropdownDatePicker.onChange = date => {
-                this.onChange(view);
-            };
-        }*/
-    }
+    // fill(row, view) {
+    //     if (this.model.getForm().getClassName() === 'RowForm') {
+    //
+    //     } else {
+    //         super.fill(row, view);
+    //     }
+    //     // this.setPlaceHolder(view);
+    //     /*if (this.model.getForm().getClassName() === 'RowForm') {
+    //         this.dropdownDatePicker.onChange = date => {
+    //             this.onChange(view);
+    //         };
+    //     }*/
+    // }
 
     deinit(row, view) {
         // ReactDOM.unmountComponentAtNode(view);

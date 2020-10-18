@@ -6,7 +6,7 @@ class TextAreaFieldController extends FieldController {
         super(model, parent);
     }
 
-    fill(row, view) {
+    /*fill(row, view) {
         super.fill(row, view);
         const self = this;
         if (this.model.getForm().getClassName() === 'RowForm') {
@@ -14,7 +14,7 @@ class TextAreaFieldController extends FieldController {
                 self.onChange(view);
             });
         }
-    }
+    }*/
 
     // isValid(view) {
     //     let isValid = true;
