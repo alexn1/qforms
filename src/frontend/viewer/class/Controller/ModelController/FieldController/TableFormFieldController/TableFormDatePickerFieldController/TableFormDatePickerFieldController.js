@@ -1,58 +1,9 @@
 'use strict';
 
 class TableFormDatePickerFieldController extends TableFormFieldController {
-
-    // constructor(model, parent) {
-    //     super(model, parent);
-    // }
-
-    // fill(row, view) {
-    //     if (this.model.getForm().getClassName() === 'RowForm') {
-    //
-    //     } else {
-    //         super.fill(row, view);
-    //     }
-    //     // this.setPlaceHolder(view);
-    //     /*if (this.model.getForm().getClassName() === 'RowForm') {
-    //         this.dropdownDatePicker.onChange = date => {
-    //             this.onChange(view);
-    //         };
-    //     }*/
-    // }
-
-    deinit(row, view) {
-        // ReactDOM.unmountComponentAtNode(view);
-        super.deinit(row, view);
+    getValueForView(row) {
+        const value = this.model.getValue(row);
+        if (value) return Helper.formatDate(this.model.getValue(row), '{DD}.{MM}.{YYYY}');
+        return '';
     }
-
-    setValue(value, view) {
-        // console.log('TableFormDatePickerFieldController.setValue', this.model.getFullName(), value);
-        if (this.model.getForm().getClassName() === 'RowForm') {
-
-        } else if (this.model.getForm().getClassName() === 'TableForm') {
-            if (value instanceof Date) {
-                const stringValue = Helper.formatDate(value, '{DD}.{MM}.{YYYY}')
-                this.setStringValue(stringValue, view);
-            } else {
-                this.setStringValue('', view);
-            }
-        }
-    }
-
-    getValue(view) {
-        // console.log('TableFormDatePickerFieldController.getValue', this.model.getFullName());
-        return null;
-    }
-
-    setPlaceHolder(view, value) {
-        // console.log('TableFormDatePickerFieldController.setPlaceHolder', this.model.getFullName(), value);
-        if (this.model.getForm().getClassName() === 'RowForm') {
-            // view.firstElementChild.firstElementChild.placeholder = 'ДД.ММ.ГГГГ';
-        }
-    }
-
-    getPlaceHolder() {
-        return 'ДД.ММ.ГГГГ';
-    }
-
 }
