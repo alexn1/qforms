@@ -13,13 +13,13 @@ class TableFormController extends FormController {
         super.init();
         // this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
         // this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
-        this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
-        this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
+        // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
+        // this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
 
         // data source events
         const dataSource = this.model.getDataSource();
-        dataSource.on('refresh'  , this.listeners.refresh   = this.onRefresh);
-        dataSource.on('update', this.listeners.rowUpdate = this.onRowUpdate);
+        dataSource.on('refresh', this.listeners.refresh = this.onRefresh);
+        dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
 
         /*
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
@@ -44,15 +44,15 @@ class TableFormController extends FormController {
     deinit() {
         // this.grid.off('bodyCellDblClick', this.listeners.bodyCellDblClick);
         // this.grid.deinit();
-        this.parent.off('hide', this.listeners.hide);
-        this.parent.off('show', this.listeners.show);
+        // this.parent.off('hide', this.listeners.hide);
+        // this.parent.off('show', this.listeners.show);
         // this.model.off('refilled', this.listeners.refilled);
         // this.model.off('refresh', this.listeners.refreshed);
 
         // data source events
         const dataSource = this.model.getDataSource();
-        dataSource.off('refresh'  , this.listeners.refresh);
-        dataSource.off('update', this.listeners.rowUpdate);
+        dataSource.off('refresh', this.listeners.refresh);
+        dataSource.off('update' , this.listeners.update);
 
         super.deinit();
     }
@@ -126,12 +126,9 @@ class TableFormController extends FormController {
     }
 
     onDeleteClick = e => {
-        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getSelectedKey());
-        if (confirm(this.model.getApp().data.text.form.areYouSure)) {
-            const key = this.grid.getSelectedKey();
-            if (key !== null) {
-                this.model.delete(key);
-            }
+        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.activeRowKey);
+        if (confirm(this.model.getApp().getText().form.areYouSure)) {
+            this.model.delete(this.activeRowKey);
         }
     }
 
@@ -253,8 +250,8 @@ class TableFormController extends FormController {
         console.log('TableFormController.onRefresh', e);
         this.rerender();
     }
-    onRowUpdate = e => {
-        console.log('TableFormController.onRowUpdate', e.key);
+    onDataSourceUpdate = e => {
+        console.log('TableFormController.onDataSourceUpdate', e.key);
         this.rerender();
     }
     onActiveRowChanged = i => {
