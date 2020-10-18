@@ -1,6 +1,6 @@
 'use strict';
 
-class FormController extends ModelController {
+class FormController extends Controller {
 
     static create(model, view, parent) {
         // console.log('FormController.create', model.getFullName());

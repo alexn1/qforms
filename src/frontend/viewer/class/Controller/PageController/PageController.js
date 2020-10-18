@@ -1,6 +1,6 @@
 'use strict';
 
-class PageController extends ModelController {
+class PageController extends Controller {
 
     static create(model, view, parent) {
         // console.log('PageController.create', model.getName());

@@ -1,6 +1,6 @@
 'use strict';
 
-class ApplicationController extends ModelController {
+class ApplicationController extends Controller {
 
     static create(model, view) {
         // console.log('ApplicationController.create');

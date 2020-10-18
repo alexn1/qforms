@@ -1,6 +1,6 @@
 'use strict';
 
-class FieldController extends ModelController {
+class FieldController extends Controller {
 
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
