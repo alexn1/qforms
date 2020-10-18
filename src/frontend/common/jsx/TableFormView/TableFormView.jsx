@@ -52,13 +52,14 @@ class TableFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const fieldCtrl = ctrl.fields[column.name];
         // console.log(column.name, fieldCtrl.constructor.name);
-        return <TableFormTextBoxFieldView
+        if (fieldCtrl.model.getClassName() === 'TextBoxField') return <TableFormTextBoxFieldView
             row={row}
             column={column}
             onCreate={onCreate}
             onUnmount={onUnmount}
             ctrl={fieldCtrl}
         />;
+        return null;
     }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
