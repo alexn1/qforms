@@ -48,7 +48,7 @@ class TableFormView extends ReactComponent {
         );
     }
     renderGridCellView(row, column, onCreate, onUnmount) {
-        console.log('TableFormView.renderGridCellView');
+        // console.log('TableFormView.renderGridCellView');
         return <TableFormTextBoxFieldView
             row={row}
             column={column}
