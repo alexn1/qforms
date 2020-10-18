@@ -27,6 +27,7 @@ class TableFormView extends ReactComponent {
                     width={width}
                     title={model.getApp().getText().form.delete}
                     onClick={ctrl.onDeleteClick}
+                    enabled={ctrl.isRowSelected()}
                 />
                 }
             </div>

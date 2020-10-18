@@ -21,11 +21,6 @@ class TableFormController extends FormController {
         dataSource.on('refresh'  , this.listeners.refresh   = this.onRefresh);
         dataSource.on('update', this.listeners.rowUpdate = this.onRowUpdate);
 
-        /*const gridSelector = `#${this.model.getPage().id}_${this.model.getName()}_GridWidget`;
-        this.grid = new DataGridWidget(this.view.querySelector(gridSelector), this);
-        this.grid.init();
-        this.grid.on('bodyCellDblClick', this.listeners.bodyCellDblClick = this.onGridCellDblClick.bind(this));*/
-
         /*
         $(this.view).find('button.next').click(this.onNextClick.bind(this));
         $(this.view).find('button.previous').click(this.onPreviousClick.bind(this));
@@ -105,19 +100,19 @@ class TableFormController extends FormController {
         }
     }*/
 
-    onRefilled(ea) {
+    /*onRefilled(ea) {
         console.log('TableFormController.onRefilled', this.model.getFullName());
-        /*this.grid.clear();
+        this.grid.clear();
         this.updateCountAndGoTo();
-        this.grid.fill();*/
+        this.grid.fill();
         this.rerender();
-    }
+    }*/
 
-    onRefreshed(ea) {
+    /*onRefreshed(ea) {
         console.log('TableFormController.onRefreshed', this.model.getFullName());
-        // this.updateCountAndGoTo();
+        this.updateCountAndGoTo();
         this.rerender();
-    }
+    }*/
 
     onNewClick = async e => {
         await this.new();
@@ -268,6 +263,7 @@ class TableFormController extends FormController {
         const row = rows[i];
         const key = this.model.getDataSource().getRowKey(row);
         this.activeRowKey = key;
+        this.rerender();
         // console.log('key:', key);
     }
     getActiveRow = () => {
@@ -280,5 +276,9 @@ class TableFormController extends FormController {
             return i;
         }
         return null;
+    }
+    isRowSelected = () => {
+        console.log('TableFormController.isRowSelected');
+        return this.activeRowKey !== null;
     }
 }
