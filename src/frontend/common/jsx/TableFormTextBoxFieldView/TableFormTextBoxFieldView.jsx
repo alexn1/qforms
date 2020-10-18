@@ -12,10 +12,10 @@ class TableFormTextBoxFieldView extends ReactComponent {
     }
     render() {
         const row = this.props.row;
-        const column = this.props.column;
+        const ctrl = this.props.ctrl;
         return (
             <div className="TableFormTextBoxFieldView" /*onClick={this.onClick}*/>
-                <span ref={this.span}>{row[column.name]}</span>
+                <span ref={this.span}>{ctrl.getValueForView(row)}</span>
             </div>
         );
     }
