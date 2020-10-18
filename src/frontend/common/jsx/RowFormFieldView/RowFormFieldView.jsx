@@ -5,10 +5,10 @@ class RowFormFieldView extends ReactComponent {
         if (model.getClassName() === 'DatePickerField') {
             return (
                 <DropdownDatePicker
-                    // onCreate={ctrl.onFieldViewContentCreate}
+                    // onCreate={ctrl.onViewCreate}
                     value={ctrl.getValueForView()}
                     readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange2}
+                    onChange={ctrl.onChange}
                     placeholder={ctrl.getPlaceHolder()}
                 />
             );
@@ -16,20 +16,20 @@ class RowFormFieldView extends ReactComponent {
         if (model.getClassName() === 'ComboBoxField') {
             return (
                 <ComboBox
-                    // onCreate={ctrl.onFieldViewContentCreate}
+                    // onCreate={ctrl.onViewCreate}
                     value={ctrl.getValueForView()}
                     readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange2}
+                    onChange={ctrl.onChange}
                     items={ctrl.getItems()}
                 />
             );
         }
         return (
             <TextBox
-                // onCreate={ctrl.onFieldViewContentCreate}
+                // onCreate={ctrl.onViewCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
-                onChange={ctrl.onChange2}
+                onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceHolder()}
             />
         );

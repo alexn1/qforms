@@ -19,11 +19,11 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    onFieldViewContentCreate = c => {
-        // console.log('RowFormFieldController.onFieldViewContentCreate', c);
-    }
-    onChange2 = value => {
-        // console.log('RowFormFieldController.onChange2', value);
+    /*onViewCreate = c => {
+        console.log('RowFormFieldController.onViewCreate', c);
+    }*/
+    onChange = value => {
+        // console.log('RowFormFieldController.onChange', value);
         this.state.isUndefined = false;
         this.state.value       = value;
         this.validate();
