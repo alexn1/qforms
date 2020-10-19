@@ -43,6 +43,6 @@ class FormController extends Controller {
     }
     onFieldChange(e) {
         console.log('FormController.onFieldChange', this.model.getFullName());
-        this.parent.onFormChange(e);
+        this.getPageController().onFormChange(e);
     }
 }
