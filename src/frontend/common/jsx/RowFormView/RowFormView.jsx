@@ -82,7 +82,7 @@ class RowFormView extends ReactComponent {
         const model = ctrl.model;
         if (model.getClassName() === 'DatePickerField') {
             return (
-                <div className={this.getClassName(ctrl)}>
+                <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
                     <DropdownDatePicker
                         // onCreate={ctrl.onViewCreate}
                         value={ctrl.getValueForView()}
@@ -95,7 +95,7 @@ class RowFormView extends ReactComponent {
         }
         if (model.getClassName() === 'ComboBoxField') {
             return (
-                <div className={this.getClassName(ctrl)}>
+                <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
                     <ComboBox
                         // onCreate={ctrl.onViewCreate}
                         value={ctrl.getValueForView()}
@@ -107,7 +107,7 @@ class RowFormView extends ReactComponent {
             );
         }
         return (
-            <div className={this.getClassName(ctrl)}>
+            <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
                 <TextBox
                     // onCreate={ctrl.onViewCreate}
                     value={ctrl.getValueForView()}
