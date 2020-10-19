@@ -1,39 +1,4 @@
 class RowFormFieldView extends ReactComponent {
-    renderFieldView() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        if (model.getClassName() === 'DatePickerField') {
-            return (
-                <DropdownDatePicker
-                    // onCreate={ctrl.onViewCreate}
-                    value={ctrl.getValueForView()}
-                    readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange}
-                    placeholder={ctrl.getPlaceHolder()}
-                />
-            );
-        }
-        if (model.getClassName() === 'ComboBoxField') {
-            return (
-                <ComboBox
-                    // onCreate={ctrl.onViewCreate}
-                    value={ctrl.getValueForView()}
-                    readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange}
-                    items={ctrl.getItems()}
-                />
-            );
-        }
-        return (
-            <TextBox
-                // onCreate={ctrl.onViewCreate}
-                value={ctrl.getValueForView()}
-                readOnly={!ctrl.isEditable()}
-                onChange={ctrl.onChange}
-                placeholder={ctrl.getPlaceHolder()}
-            />
-        );
-    }
     getClassName() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -47,8 +12,44 @@ class RowFormFieldView extends ReactComponent {
     }
     render() {
         // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
+        const ctrl = this.props.ctrl;
+        const model = ctrl.model;
+        if (model.getClassName() === 'DatePickerField') {
+            return (
+                <div className={this.getClassName()}>
+                    <DropdownDatePicker
+                        // onCreate={ctrl.onViewCreate}
+                        value={ctrl.getValueForView()}
+                        readOnly={!ctrl.isEditable()}
+                        onChange={ctrl.onChange}
+                        placeholder={ctrl.getPlaceHolder()}
+                    />
+                </div>
+            );
+        }
+        if (model.getClassName() === 'ComboBoxField') {
+            return (
+                <div className={this.getClassName()}>
+                    <ComboBox
+                        // onCreate={ctrl.onViewCreate}
+                        value={ctrl.getValueForView()}
+                        readOnly={!ctrl.isEditable()}
+                        onChange={ctrl.onChange}
+                        items={ctrl.getItems()}
+                    />
+                </div>
+            );
+        }
         return (
-            <div className={this.getClassName()}>{this.renderFieldView()}</div>
+            <div className={this.getClassName()}>
+                <TextBox
+                    // onCreate={ctrl.onViewCreate}
+                    value={ctrl.getValueForView()}
+                    readOnly={!ctrl.isEditable()}
+                    onChange={ctrl.onChange}
+                    placeholder={ctrl.getPlaceHolder()}
+                />
+            </div>
         );
     }
 }

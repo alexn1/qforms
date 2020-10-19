@@ -62,8 +62,61 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldView(ctrl) {
+    /*renderFieldView(ctrl) {
         return <RowFormFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
+    }*/
+    getClassName(ctrl) {
+        // const ctrl = this.props.ctrl;
+        const model = ctrl.model;
+        return [
+            'field',
+            `RowForm${model.getClassName()}View`,
+            model.getName(),
+            ...(ctrl.state.changed ? ['changed'] : []),
+            ...(ctrl.state.error !== null ? ['error'] : [])
+        ].join(' ');
+    }
+    renderFieldView2(ctrl) {
+        // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
+        // const ctrl = this.props.ctrl;
+        const model = ctrl.model;
+        if (model.getClassName() === 'DatePickerField') {
+            return (
+                <div className={this.getClassName(ctrl)}>
+                    <DropdownDatePicker
+                        // onCreate={ctrl.onViewCreate}
+                        value={ctrl.getValueForView()}
+                        readOnly={!ctrl.isEditable()}
+                        onChange={ctrl.onChange}
+                        placeholder={ctrl.getPlaceHolder()}
+                    />
+                </div>
+            );
+        }
+        if (model.getClassName() === 'ComboBoxField') {
+            return (
+                <div className={this.getClassName(ctrl)}>
+                    <ComboBox
+                        // onCreate={ctrl.onViewCreate}
+                        value={ctrl.getValueForView()}
+                        readOnly={!ctrl.isEditable()}
+                        onChange={ctrl.onChange}
+                        items={ctrl.getItems()}
+                    />
+                </div>
+            );
+        }
+        return (
+            <div className={this.getClassName(ctrl)}>
+                <TextBox
+                    // onCreate={ctrl.onViewCreate}
+                    value={ctrl.getValueForView()}
+                    readOnly={!ctrl.isEditable()}
+                    onChange={ctrl.onChange}
+                    placeholder={ctrl.getPlaceHolder()}
+                />
+            </div>
+        );
     }
     renderFieldTooltip(ctrl) {
         // console.log('renderFieldTooltip:', ctrl.state);
@@ -82,7 +135,7 @@ class RowFormView extends ReactComponent {
                     const fieldCtrl = ctrl.fields[name];
                     return [
                         this.renderFieldLabel(fieldCtrl),
-                        this.renderFieldView(fieldCtrl),
+                        this.renderFieldView2(fieldCtrl),
                         this.renderFieldTooltip(fieldCtrl)
                     ];
                 })}
