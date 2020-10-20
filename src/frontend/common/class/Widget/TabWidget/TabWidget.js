@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('TabWidget DOMContentLoaded');
     document.querySelectorAll('div.TabWidget').forEach(el => {
-        console.log('el', el);
         el._obj = new TabWidget(el);
         el._obj.init();
     });
