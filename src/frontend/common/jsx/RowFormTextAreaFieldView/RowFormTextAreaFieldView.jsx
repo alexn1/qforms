@@ -17,6 +17,8 @@ class RowFormTextAreaFieldView extends ReactComponent {
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceHolder()}
+                rows={ctrl.model.data.rows}
+                cols={ctrl.model.data.cols}
             />
         </div>;
     }

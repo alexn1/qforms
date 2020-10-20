@@ -26,6 +26,8 @@ class TextArea extends ReactComponent {
                 readOnly={this.props.readOnly}
                 onChange={this.onChange}
                 placeholder={this.props.placeholder}
+                rows={this.props.rows}
+                cols={this.props.cols}
             />
         );
     }

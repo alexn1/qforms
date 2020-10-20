@@ -9,11 +9,17 @@
         border-width: 0;
         padding     : 0 5px 0 5px;
         //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
+        box-sizing  : border-box;
     }
     &.changed > textarea {
-        color: blue;
+        background-color: rgb(238, 253, 234);
+        //color: blue;
+    }
+    &.error > textarea {
+        background-color: #f2dede;
     }
     > textarea[readonly] {
         background-color: lightgoldenrodyellow;
+        color: gray;
     }
 }
