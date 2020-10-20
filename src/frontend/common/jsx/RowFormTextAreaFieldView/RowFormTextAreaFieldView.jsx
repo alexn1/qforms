@@ -11,7 +11,7 @@ class RowFormTextAreaFieldView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
-            <TextBox
+            <TextArea
                 // onCreate={ctrl.onViewCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
