@@ -62,37 +62,16 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    getClassName(ctrl) {
-        // const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        return [
-            'field',
-            `RowForm${model.getClassName()}View`,
-            model.getName(),
-            ...(ctrl.state.changed ? ['changed'] : []),
-            ...(ctrl.state.error !== null ? ['error'] : [])
-        ].join(' ');
-    }
     renderFieldView(ctrl) {
         // console.log('RowFormView.renderFieldView', ctrl.model.getClassName());
         const model = ctrl.model;
         if (model.getClassName() === 'DatePickerField') {
-            return (
-                <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
-                    <DropdownDatePicker
-                        // onCreate={ctrl.onViewCreate}
-                        value={ctrl.getValueForView()}
-                        readOnly={!ctrl.isEditable()}
-                        onChange={ctrl.onChange}
-                        placeholder={ctrl.getPlaceHolder()}
-                    />
-                </div>
-            );
+            return <RowFormDatePickerFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
         }
         if (model.getClassName() === 'ComboBoxField') {
-            return <RowFormComboBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>
+            return <RowFormComboBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
         }
-        return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>
+        return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
     }
     renderFieldTooltip(ctrl) {
         // console.log('renderFieldTooltip:', ctrl.state);

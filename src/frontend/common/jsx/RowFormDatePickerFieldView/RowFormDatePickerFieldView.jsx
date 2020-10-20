@@ -1,9 +1,10 @@
-class RowFormTextBoxFieldView extends ReactComponent {
+class RowFormDatePickerFieldView extends ReactComponent {
     getClassName() {
         const ctrl = this.props.ctrl;
+        const model = ctrl.model;
         return [
             'field',
-            'RowFormTextBoxFieldView',
+            `RowForm${model.getClassName()}View`,
             ...(ctrl.state.changed ? ['changed'] : []),
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');
@@ -11,7 +12,7 @@ class RowFormTextBoxFieldView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
-            <TextBox
+            <DropdownDatePicker
                 // onCreate={ctrl.onViewCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}

@@ -5,7 +5,6 @@ class RowFormComboBoxFieldView extends ReactComponent {
         return [
             'field',
             `RowFormComboBoxFieldView`,
-            model.getName(),
             ...(ctrl.state.changed ? ['changed'] : []),
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');
