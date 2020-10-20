@@ -557,11 +557,18 @@ class HostApp {
     async logRequest(req, context) {
         try {
             const application = await this.createApplicationIfNotExists(req);
+            const message = [
+                application.getName(),
+                ...(req.body.page ? [req.body.page] : []),
+                ...(req.body.form ? [req.body.form] : []),
+                ...(req.body.ds   ? [req.body.ds  ] : []),
+                `${req.body.action}()`
+            ].join('.');
             await application.createLog(context, {
                 type   : 'log',
                 source : 'server',
                 ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                message: req.body.action,
+                message: message,
                 data   : JSON.stringify(req.body, null, 4)
             });
         } catch (err) {
