@@ -90,17 +90,7 @@ class RowFormView extends ReactComponent {
             );
         }
         if (model.getClassName() === 'ComboBoxField') {
-            return (
-                <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
-                    <ComboBox
-                        // onCreate={ctrl.onViewCreate}
-                        value={ctrl.getValueForView()}
-                        readOnly={!ctrl.isEditable()}
-                        onChange={ctrl.onChange}
-                        items={ctrl.getItems()}
-                    />
-                </div>
-            );
+            return <RowFormComboBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>
         }
         return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>
     }
