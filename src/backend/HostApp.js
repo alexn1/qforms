@@ -244,7 +244,7 @@ class HostApp {
 
     // action
     async fill(req) {
-        console.log('HostApp.fill', this.getApplication(req).name);
+        console.log('HostApp.fill', this.getApplication(req).getName());
         const context = Context.create({req: req});
         const data = await this.getApplication(req).fill(context);
         Context.destroy(context);
