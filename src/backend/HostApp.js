@@ -256,9 +256,9 @@ class HostApp {
         console.log('HostApp.page', req.body.page);
         const context = Context.create({
             req           : req,
-            params        : req.body.params,
-            newMode       : req.body.newMode,
-            parentPageName: req.body.parentPageName
+            // params        : req.body.params,
+            // newMode       : req.body.newMode,
+            // parentPageName: req.body.parentPageName
         });
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const data = await page.fill(context);
@@ -271,8 +271,8 @@ class HostApp {
         console.log('HostApp.update', req.body.page);
         const context = Context.create({
             req           : req,
-            body          : req.body,
-            parentPageName: req.body.parentPageName
+            // body          : req.body,
+            // parentPageName: req.body.parentPageName
         });
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const form = page.forms[req.body.form];
@@ -289,8 +289,8 @@ class HostApp {
         const application = this.getApplication(req);
         const context = Context.create({
             req           : req,
-            parentPageName: req.body.parentPageName,
-            params        : req.body.params
+            // parentPageName: req.body.parentPageName,
+            // params        : req.body.params
         });
         await application.createLog(context, {
             type: 'log',
@@ -324,8 +324,8 @@ class HostApp {
         const application = this.getApplication(req);
         const context = Context.create({
             req           : req,
-            parentPageName: req.body.parentPageName,
-            params        : req.body.params
+            // parentPageName: req.body.parentPageName,
+            // params        : req.body.params
         });
         let dataSource;
         if (req.body.page) {
@@ -352,8 +352,8 @@ class HostApp {
         const application = this.getApplication(req);
         const context = Context.create({
             req           : req,
-            parentPageName: req.body.parentPageName,
-            params        : req.body.params
+            // parentPageName: req.body.parentPageName,
+            // params        : req.body.params
         });
         let dataSource;
         if (req.body.page) {
@@ -378,8 +378,8 @@ class HostApp {
         console.log('HostApp.insert', req.body.page);
         const context = Context.create({
             req           : req,
-            row           : req.body.row,
-            parentPageName: req.body.parentPageName
+            // row           : req.body.row,
+            // parentPageName: req.body.parentPageName
         });
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
@@ -402,8 +402,8 @@ class HostApp {
         console.log('HostApp._delete', req.body.page);
         const context = Context.create({
             req           : req,
-            row           : req.body.row,
-            parentPageName: req.body.parentPageName
+            // row           : req.body.row,
+            // parentPageName: req.body.parentPageName
         });
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
@@ -427,7 +427,7 @@ class HostApp {
         const context = Context.create({
             req   : req,
             res   : res,
-            params: req.body.params
+            // params: req.body.params
         });
         let model;
         if (req.body.page) {

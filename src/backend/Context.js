@@ -3,23 +3,27 @@ class Context {
         if (context === undefined) {
             context = {};
         }
-        if (context.params === undefined) {
-            context.params = {};
+        const req = context.req;
+        if (req) {
+            const route = [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
+            if (req.session.user && req.session.user[route]) {
+                context.user = req.session.user[route];
+            }
+        }
+        if (context.body           === undefined) context.body           = req.body;
+        if (context.params         === undefined) context.params         = req.body.params ? req.body.params : {};
+        if (context.newMode        === undefined) context.newMode        = req.body.newMode;
+        if (context.parentPageName === undefined) context.parentPageName = req.body.parentPageName;
+        if (context.row            === undefined) context.row            = req.body.row;
+
+        if (context.connections === undefined) {
+            context.connections = {};
         }
         if (context.querytime === undefined) {
             context.querytime = {};
         }
         if (context.querytime.params === undefined) {
             context.querytime.params = {};
-        }
-        if (context.req) {
-            const route = [context.req.params.appDirName, context.req.params.appFileName, context.req.params.env].join('/');
-            if (context.req.session.user && context.req.session.user[route]) {
-                context.user = context.req.session.user[route];
-            }
-        }
-        if (context.connections === undefined) {
-            context.connections = {};
         }
         return context;
     }
