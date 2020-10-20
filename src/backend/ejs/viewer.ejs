@@ -6,30 +6,19 @@
     <title><%=caption%>[<%=env%>] - QForms</title>
     <!-- EventEmitter -->
     <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
-    <!-- ejs -->
-<!--    <script src="common/lib/ejs/ejs_production.js"></script>-->
-    <!-- bluebird -->
-<!--    <script src="common/lib/bluebird/bluebird.min.js"></script>-->
-    <!-- jquery -->
-<!--    <script src="common/lib/jquery/jquery-2.1.4.min.js"></script>-->
-    <!-- bootstrap -->
-    <!--<link href="common/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="common/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-    <script src="common/lib/bootstrap/js/bootstrap.min.js"></script>-->
     <!-- react -->
     <script src="common/lib/react/react.development.js"></script>
     <script src="common/lib/react/react-dom.development.js"></script>
-
     <!-- qforms -->
     <link rel="stylesheet" href="common/class/all.css"/>
     <link rel="stylesheet" href="common/jsx/all.css"/>
-
     <!-- viewerClassCss -->
 <%viewerClassCss.forEach((filePath) => {
         %>    <link rel="stylesheet" href="<%=filePath%>"/><%='\n'%><%
     });%>
     <script src="common/class/all.js"></script>
     <script src="viewer/class/all.js"></script>
+    <!-- jsx -->
     <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
     <script src="common/jsx/Box/Box.js"></script>
     <script src="common/jsx/Menu/Menu.js"></script>
@@ -40,7 +29,6 @@
     <script src="common/jsx/DropdownButton/DropdownButton.js"></script>
     <script src="common/jsx/Button/Button.js"></script>
     <script src="common/jsx/TextBox/TextBox.js"></script>
-<!--    <script src="common/jsx/RowFormFieldView/RowFormFieldView.js"></script>-->
     <script src="common/jsx/ComboBox/ComboBox.js"></script>
     <script src="common/jsx/Grid/Grid.js"></script>
     <script src="common/jsx/GridCell/GridCell.js"></script>
