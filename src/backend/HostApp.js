@@ -292,7 +292,7 @@ class HostApp {
             parentPageName: req.body.parentPageName,
             params        : req.body.params
         });
-        await application.log(context, {
+        await application.createLog(context, {
             type: 'log',
             source: 'server',
             ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,

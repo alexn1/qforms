@@ -247,8 +247,8 @@ class Application extends Model {
         return this.databases[name];
     }
 
-    async log(context, values) {
-        // console.log('Application.log', values);
+    async createLog(context, values) {
+        // console.log('Application.createLog', values);
         try {
             await this.getDatabase('default').queryResult(
                 context,
