@@ -557,12 +557,13 @@ class HostApp {
     async logRequest(req, context) {
         try {
             const application = await this.createApplicationIfNotExists(req);
+            const params = req.body.params ? Object.keys(req.body.params).map(name => `${name}: ${req.body.params[name]}`).join(', ') : '';
             const message = [
                 application.getName(),
                 ...(req.body.page ? [req.body.page] : []),
                 ...(req.body.form ? [req.body.form] : []),
                 ...(req.body.ds   ? [req.body.ds  ] : []),
-                `${req.body.action}()`
+                `${req.body.action}(${params})`
             ].join('.');
             await application.createLog(context, {
                 type   : 'log',
