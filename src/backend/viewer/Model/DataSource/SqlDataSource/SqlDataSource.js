@@ -9,12 +9,7 @@ class SqlDataSource extends DataSource {
 
     constructor(data, parent) {
         super(data, parent);
-
-        // database
-        this.database = this.getDatabase();
-
-        // table
-        this.table = this.getAttr('table') ? this.database.getTable(this.getAttr('table')) : null;
+        this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
     }
 
     static async create(data, parent) {
@@ -69,7 +64,7 @@ class SqlDataSource extends DataSource {
     async selectSingle(context) {
         console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
-        const rows = await this.database.queryRows(context, this.getSingleQuery(context), this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length > 1) throw new Error(`single query must return single row: ${this.getFullName()}`);
         const row = rows[0] || null;
         if (row) this.checkAndCalcColumns(row);
@@ -84,7 +79,7 @@ class SqlDataSource extends DataSource {
         if (this.getAttr('limit')) {
             context.params.limit = parseInt(this.getAttr('limit'));
         }
-        const rows = await this.database.queryRows(context, this.getMultipleQuery(context), this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
         for (let i = 0; i < rows.length; i++) {
             this.checkAndCalcColumns(rows[i]);
         }
@@ -93,7 +88,7 @@ class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.database.queryScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getParams(context));
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -111,7 +106,7 @@ class SqlDataSource extends DataSource {
             context.params.limit = parseInt(this.getAttr('limit'));
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
-        const rows = await this.database.queryRows(context, query, this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
         for (let i = 0; i < rows.length; i++) {
             this.checkAndCalcColumns(rows[i]);
         }
@@ -120,7 +115,7 @@ class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.database.queryScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getParams(context));
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -139,11 +134,11 @@ class SqlDataSource extends DataSource {
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
-        const query = this.database.getUpdateQuery(this.getAttr('table'), values, where);
+        const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
         const _values = qforms.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = qforms.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = {..._values, ..._where};
-        await this.database.queryResult(context, query, params);
+        await this.getDatabase().queryResult(context, query, params);
 
         // get updated row
         const newKey = this.calcNewKey(key, values);
@@ -154,7 +149,7 @@ class SqlDataSource extends DataSource {
 
         const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
-        const [row] = await this.database.queryRows(context, singleQuery, newKeyParams);
+        const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
         this.checkAndCalcColumns(row);
         // console.log('row:', row);
@@ -176,7 +171,7 @@ class SqlDataSource extends DataSource {
         const autoTypes = this.getAutoTypes();
         console.log('autoTypes:', autoTypes);
 
-        const values = await this.database.insertRow(context, this.getAttr('table'), autoColumns, context.row, autoTypes);
+        const values = await this.getDatabase().insertRow(context, this.getAttr('table'), autoColumns, context.row, autoTypes);
         console.log('values:', values);
 
         const key = this.getKeyFromValues(values);
@@ -190,7 +185,7 @@ class SqlDataSource extends DataSource {
         // console.log('singleQuery:', singleQuery);
 
         // row
-        const [row] = await this.database.queryRows(context, singleQuery, keyParams);
+        const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
         this.checkAndCalcColumns(row);
         // console.log('row:', row);
@@ -202,8 +197,8 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
         const row = context.row;
         const keyValues = this.getKeyValuesFromRow(row);
-        const query = this.database.getDeleteQuery(this.getAttr('table'), keyValues);
-        await this.database.queryResult(context, query, row);
+        const query = this.getDatabase().getDeleteQuery(this.getAttr('table'), keyValues);
+        await this.getDatabase().queryResult(context, query, row);
     }
 
     async fill(context) {
@@ -267,7 +262,7 @@ class SqlDataSource extends DataSource {
     getTable() {
         const tableName = this.getAttr('table');
         if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
-        return this.database.getTable(tableName);
+        return this.getDatabase().getTable(tableName);
     }
 
     getAutoColumns() {
