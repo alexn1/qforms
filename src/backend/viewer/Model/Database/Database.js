@@ -1,18 +1,18 @@
 'use strict';
 
-const Model = require('../Model');
-const Param = require('../Param/Param');
+const Model     = require('../Model');
+const Param     = require('../Param/Param');
 const BaseModel = require('../../../common/BaseModel');
-const qforms = require('../../../qforms');
+const qforms    = require('../../../qforms');
 
 class Database extends Model {
 
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);
-        this.createCollections  = ['tables'];
-        this.fillCollections    = ['tables'];
-        this.tables = {};
+        this.createCollections = ['tables'];
+        this.fillCollections   = ['tables'];
+        this.tables            = {};
     }
 
     static create(data, parent) {

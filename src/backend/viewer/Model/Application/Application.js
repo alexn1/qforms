@@ -247,6 +247,19 @@ class Application extends Model {
         return this.databases[name];
     }
 
+    async log(context, values) {
+        // console.log('Application.log', values);
+        try {
+            await this.getDatabase('default').queryResult(
+                context,
+                'insert into log(type, source, ip, message, data) values ({type}, {source}, {ip}, {message}, {data})',
+                values
+            );
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 }
 
 module.exports = Application;

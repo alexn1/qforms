@@ -292,6 +292,13 @@ class HostApp {
             parentPageName: req.body.parentPageName,
             params        : req.body.params
         });
+        await application.log(context, {
+            type: 'log',
+            source: 'server',
+            ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+            message: 'select',
+            data: JSON.stringify(req.body, null, 4)
+        });
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);

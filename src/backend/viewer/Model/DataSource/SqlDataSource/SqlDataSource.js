@@ -3,7 +3,7 @@
 const path       = require('path');
 const qforms     = require('../../../../qforms');
 const DataSource = require('../DataSource');
-const BaseModel = require('../../../../common/BaseModel');
+const BaseModel  = require('../../../../common/BaseModel');
 
 class SqlDataSource extends DataSource {
 
