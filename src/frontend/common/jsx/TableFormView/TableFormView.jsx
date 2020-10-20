@@ -6,29 +6,29 @@ class TableFormView extends ReactComponent {
         return (
             <div className="toolbar">
                 {model.data.refreshButton === 'true' &&
-                <Button
-                    key="refresh"
-                    width={width}
-                    title={model.getApp().getText().form.refresh}
-                    onClick={ctrl.onRefreshClick}
-                />
+                    <Button
+                        key="refresh"
+                        width={width}
+                        title={model.getApp().getText().form.refresh}
+                        onClick={ctrl.onRefreshClick}
+                    />
                 }
                 {model.data.newRowMode !== 'disabled' &&
-                <Button
-                    key="new"
-                    width={width}
-                    title={model.getApp().getText().form.new}
-                    onClick={ctrl.onNewClick}
-                />
+                    <Button
+                        key="new"
+                        width={width}
+                        title={model.getApp().getText().form.new}
+                        onClick={ctrl.onNewClick}
+                    />
                 }
                 {model.data.deleteRowMode !== 'disabled' &&
-                <Button
-                    key="delete"
-                    width={width}
-                    title={model.getApp().getText().form.delete}
-                    onClick={ctrl.onDeleteClick}
-                    enabled={ctrl.isRowSelected()}
-                />
+                    <Button
+                        key="delete"
+                        width={width}
+                        title={model.getApp().getText().form.delete}
+                        onClick={ctrl.onDeleteClick}
+                        enabled={ctrl.isRowSelected()}
+                    />
                 }
             </div>
         );
@@ -71,9 +71,8 @@ class TableFormView extends ReactComponent {
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
         return (
-            <div className={`TableFormView full flex-rows ${model.getName()}`}>
+            <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
                 <Grid columns={ctrl.getGridColumns()}
                       rows={ctrl.getGridRows()}

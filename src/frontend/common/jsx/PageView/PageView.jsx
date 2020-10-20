@@ -66,7 +66,7 @@ class PageView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
-            <div className={`PageView full place ${model.getName()}`}>
+            <div className="PageView full place">
                 <div className="frame flex-rows">
                     <h3 className="caption flex-min">{this.renderCaption()}</h3>
                     {model.hasRowFormWithDefaultDs() &&
@@ -76,12 +76,12 @@ class PageView extends ReactComponent {
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableFormOrTreeForm() &&
                         [
-                        <div key="one" className="table-forms flex-max place">
-                            <div className="frame">
-                                <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
-                            </div>
-                        </div>,
-                        <div key="two" className="splitter flex-min"></div>
+                            <div key="one" className="table-forms flex-max place">
+                                <div className="frame">
+                                    <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
+                                </div>
+                            </div>,
+                            <div key="two" className="splitter flex-min"></div>
                         ]
                     }
                 </div>
