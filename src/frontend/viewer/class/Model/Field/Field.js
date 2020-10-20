@@ -151,6 +151,9 @@ class Field extends Model {
     isNotNull() {
         return this.data.notNull === 'true';
     }
+    isNullable() {
+        return this.data.notNull === 'false';
+    }
     isVisible() {
         return this.data.isVisible === 'true';
     }
