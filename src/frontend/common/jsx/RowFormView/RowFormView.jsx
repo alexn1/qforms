@@ -4,7 +4,7 @@ class RowFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const width = '90px';
         return (
-            <div className="Toolbar">
+            <div className="toolbar">
                 {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
                 [
                     <Button
@@ -62,9 +62,6 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    /*renderFieldView(ctrl) {
-        return <RowFormFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
-    }*/
     getClassName(ctrl) {
         // const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -76,9 +73,8 @@ class RowFormView extends ReactComponent {
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');
     }
-    renderFieldView2(ctrl) {
-        // console.log('RowFormFieldView.render', this.props.ctrl.model.getClassName());
-        // const ctrl = this.props.ctrl;
+    renderFieldView(ctrl) {
+        // console.log('RowFormView.renderFieldView', ctrl.model.getClassName());
         const model = ctrl.model;
         if (model.getClassName() === 'DatePickerField') {
             return (
@@ -106,17 +102,7 @@ class RowFormView extends ReactComponent {
                 </div>
             );
         }
-        return (
-            <div key={`field.${ctrl.model.getName()}`} className={this.getClassName(ctrl)}>
-                <TextBox
-                    // onCreate={ctrl.onViewCreate}
-                    value={ctrl.getValueForView()}
-                    readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange}
-                    placeholder={ctrl.getPlaceHolder()}
-                />
-            </div>
-        );
+        return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>
     }
     renderFieldTooltip(ctrl) {
         // console.log('renderFieldTooltip:', ctrl.state);
@@ -135,7 +121,7 @@ class RowFormView extends ReactComponent {
                     const fieldCtrl = ctrl.fields[name];
                     return [
                         this.renderFieldLabel(fieldCtrl),
-                        this.renderFieldView2(fieldCtrl),
+                        this.renderFieldView(fieldCtrl),
                         this.renderFieldTooltip(fieldCtrl)
                     ];
                 })}
