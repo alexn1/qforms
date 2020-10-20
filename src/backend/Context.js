@@ -29,6 +29,7 @@ class Context {
     }
 
     static destroy(context) {
+        if (!context) return;
         /*for (const name in context.connections) {
             //console.log('release connection: ' + name);
             context.connections[name].release();

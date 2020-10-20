@@ -175,7 +175,7 @@ class HostApp {
         }
     }
 
-    async handleViewerPost(req, res) {
+    async handleViewerPost(req, res, context) {
         console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req);
         const route = HostApp.getRoute(req);
@@ -188,7 +188,7 @@ class HostApp {
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
-            await this[req.body.action](req, res);
+            await this[req.body.action](req, res, context);
         }
     }
 
@@ -242,7 +242,6 @@ class HostApp {
         }
     }
 
-    // action
     async fill(req) {
         console.log('HostApp.fill', this.getApplication(req).getName());
         const context = Context.create({req: req});
@@ -252,46 +251,46 @@ class HostApp {
     }
 
     // action
-    async page(req, res) {
+    async page(req, res, context) {
         console.log('HostApp.page', req.body.page);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // params        : req.body.params,
             // newMode       : req.body.newMode,
             // parentPageName: req.body.parentPageName
-        });
+        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const data = await page.fill(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         await res.json({page: data});
     }
 
     // action
-    async update(req, res) {
+    async update(req, res, context) {
         console.log('HostApp.update', req.body.page);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // body          : req.body,
             // parentPageName: req.body.parentPageName
-        });
+        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const form = page.forms[req.body.form];
         const result = await form.update(context, req.body.ds);
-        Context.destroy(context);
+        // Context.destroy(context);
         if (result === undefined) throw new Error('action update: result is undefined');
         await res.json(result);
     }
 
     // action
-    async select(req, res) {
+    async select(req, res, context) {
         console.log('HostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // parentPageName: req.body.parentPageName,
             // params        : req.body.params
-        });
+        });*/
         await application.createLog(context, {
             type: 'log',
             source: 'server',
@@ -311,22 +310,22 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.select(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
     }
 
     // action
-    async selectSingle(req, res) {
+    async selectSingle(req, res, context) {
         console.log('HostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // parentPageName: req.body.parentPageName,
             // params        : req.body.params
-        });
+        });*/
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -339,22 +338,22 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const row = await dataSource.selectSingle(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({row, time});
     }
 
     // action
-    async selectMultiple(req, res) {
+    async selectMultiple(req, res, context) {
         console.log('HostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // parentPageName: req.body.parentPageName,
             // params        : req.body.params
-        });
+        });*/
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -367,20 +366,20 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.selectMultiple(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
     }
 
     // action
-    async insert(req, res) {
+    async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // row           : req.body.row,
             // parentPageName: req.body.parentPageName
-        });
+        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         const cnn = await dataSource.database.getConnection(context);
@@ -389,7 +388,7 @@ class HostApp {
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.database.commit(cnn);
-            Context.destroy(context);
+            // Context.destroy(context);
             await res.json(result);
         } catch (err) {
             await dataSource.database.rollback(cnn, err);
@@ -398,13 +397,13 @@ class HostApp {
     }
 
     // action
-    async _delete(req, res) {
+    async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
-        const context = Context.create({
+        /*const context = Context.create({
             req           : req,
             // row           : req.body.row,
             // parentPageName: req.body.parentPageName
-        });
+        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         const cnn = await dataSource.database.getConnection(context);
@@ -412,7 +411,7 @@ class HostApp {
             await dataSource.database.beginTransaction(cnn);
             await dataSource.delete(context);
             await dataSource.database.commit(cnn);
-            Context.destroy(context);
+            // Context.destroy(context);
             await res.json(null);
         } catch (err) {
             await dataSource.database.rollback(cnn, err);
@@ -421,14 +420,14 @@ class HostApp {
     }
 
     // action
-    async rpc(req, res) {
+    async rpc(req, res, context) {
         console.log('HostApp.rpc', req.body);
         const application = this.getApplication(req);
-        const context = Context.create({
+        /*const context = Context.create({
             req   : req,
             res   : res,
             // params: req.body.params
-        });
+        });*/
         let model;
         if (req.body.page) {
             if (req.body.form) {
@@ -441,7 +440,7 @@ class HostApp {
             model = application;
         }
         const result = await model.rpc(context, req.body.name, req.body.params);
-        Context.destroy(context);
+        // Context.destroy(context);
         await res.json(result);
     }
 

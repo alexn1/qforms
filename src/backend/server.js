@@ -9,6 +9,7 @@ const Helper    = require('./common/Helper');
 const multipart = require('connect-multiparty')();
 const _         = require('underscore');
 const async     = require('async');
+const Context = require('./Context');
 
 const server = module.exports = express();
 // const qforms = require('./qforms');
@@ -105,10 +106,14 @@ async function viewerGet(req, res, next)  {
 
 async function viewerPost(req, res, next)  {
     console.warn('viewerPost', req.params, req.body);
+    let context = null;
     try {
-        await server.get('hostApp').handleViewerPost(req, res);
+        context = Context.create({req});
+        await server.get('hostApp').handleViewerPost(req, res, context);
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 
