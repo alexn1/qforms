@@ -151,15 +151,15 @@ class HostApp {
         return application;
     }
 
-    async handleViewerGet(req, res) {
+    async handleViewerGet(req, res, context) {
         console.log('HostApp.handleViewerGet');
         await this.createApplicationIfNotExists(req);
         const route = HostApp.getRoute(req);
         const application = this.getApplication(req);
         if (this.getApplication(req).authentication() && !(req.session.user && req.session.user[route])) {
-            this.loginGet(req, res);
+            this.loginGet(req, res, context);
         } else {
-            const data = await this.fill(req);
+            const data = await this.fill(req, context);
             res.render('viewer', {
                 version       : pkg.version,
                 debugApp      : req.query.debug,
@@ -180,7 +180,7 @@ class HostApp {
         await this.createApplicationIfNotExists(req);
         const route = HostApp.getRoute(req);
         if (req.body.action === 'login') {
-            this.loginPost(req, res);
+            this.loginPost(req, res, context);
         } else {
             if (this.getApplication(req).authentication() && !(req.session.user && req.session.user[route])) {
                 throw new Error('not authenticated');
@@ -192,12 +192,12 @@ class HostApp {
         }
     }
 
-    async loginGet(req, res) {
+    async loginGet(req, res, context) {
         console.log('HostApp.loginGet');
-        const context = Context.create({req: req});
+        // const context = Context.create({req: req});
         const application = this.getApplication(req);
         const users = await application.getUsers(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         res.render('login', {
             version       : pkg.version,
             application   : application,
@@ -209,9 +209,9 @@ class HostApp {
         });
     }
 
-    async loginPost(req, res) {
+    async loginPost(req, res, context) {
         console.log('HostApp.loginPost');
-        const context = Context.create({req: req});
+        // const context = Context.create({req: req});
         const route = HostApp.getRoute(req);
         const application = this.getApplication(req);
         const authenticate = await application.authenticate(context, req.body.username, req.body.password);
@@ -225,11 +225,11 @@ class HostApp {
             } else {
                 req.session.user[route] = {name: req.body.username};
             }
-            Context.destroy(context);
+            // Context.destroy(context);
             res.redirect(req.url);
         } else {
             const users = await application.getUsers(context);
-            Context.destroy(context);
+            // Context.destroy(context);
             res.render('login', {
                 version    : pkg.version,
                 application: application,
@@ -242,11 +242,11 @@ class HostApp {
         }
     }
 
-    async fill(req) {
+    async fill(req, context) {
         console.log('HostApp.fill', this.getApplication(req).getName());
-        const context = Context.create({req: req});
+        // const context = Context.create({req: req});
         const data = await this.getApplication(req).fill(context);
-        Context.destroy(context);
+        // Context.destroy(context);
         return data;
     }
 

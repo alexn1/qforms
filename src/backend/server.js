@@ -97,10 +97,14 @@ function favicon(req, res, next) {
 
 async function viewerGet(req, res, next)  {
     console.warn('viewerGet', req.params);
+    let context = null;
     try {
-        await server.get('hostApp').handleViewerGet(req, res);
+        const context = Context.create({req});
+        await server.get('hostApp').handleViewerGet(req, res, context);
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 
