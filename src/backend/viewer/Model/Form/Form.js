@@ -82,14 +82,14 @@ class Form extends Model {
     async update(context, ds) {
         console.log('Form.update', this.getFullName());
         const dataSource = this.dataSources[ds];
-        const cnn = await dataSource.database.getConnection(context);
+        const cnn = await dataSource.getDatabase().getConnection(context);
         try {
-            await dataSource.database.beginTransaction(cnn);
+            await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.update(context);
-            await dataSource.database.commit(cnn);
+            await dataSource.getDatabase().commit(cnn);
             return result;
         } catch (err) {
-            await dataSource.database.rollback(cnn, err);
+            await dataSource.getDatabase().rollback(cnn, err);
             throw err;
         }
     }

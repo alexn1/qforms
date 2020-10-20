@@ -336,15 +336,15 @@ class HostApp {
         console.log('HostApp.insert', req.body.page);
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-        const cnn = await dataSource.database.getConnection(context);
+        const cnn = await dataSource.getDatabase().getConnection(context);
         try {
-            await dataSource.database.beginTransaction(cnn);
+            await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert: no data');
-            await dataSource.database.commit(cnn);
+            await dataSource.getDatabase().commit(cnn);
             await res.json(result);
         } catch (err) {
-            await dataSource.database.rollback(cnn, err);
+            await dataSource.getDatabase().rollback(cnn, err);
             throw err;
         }
     }
@@ -354,14 +354,14 @@ class HostApp {
         console.log('HostApp._delete', req.body.page);
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
-        const cnn = await dataSource.database.getConnection(context);
+        const cnn = await dataSource.getDatabase().getConnection(context);
         try {
-            await dataSource.database.beginTransaction(cnn);
+            await dataSource.getDatabase().beginTransaction(cnn);
             await dataSource.delete(context);
-            await dataSource.database.commit(cnn);
+            await dataSource.getDatabase().commit(cnn);
             await res.json(null);
         } catch (err) {
-            await dataSource.database.rollback(cnn, err);
+            await dataSource.getDatabase().rollback(cnn, err);
             throw err;
         }
     }
@@ -542,12 +542,27 @@ class HostApp {
         try {
             const application = await this.createApplicationIfNotExists(req);
             await application.createLog(context, {
-                type: 'error',
-                source: 'server',
-                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                type   : 'error',
+                source : 'server',
+                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
                 message: err.message,
-                stack: err.stack.toString(),
-                data: JSON.stringify(req.body, null, 4)
+                stack  : err.stack.toString(),
+                data   : JSON.stringify(req.body, null, 4)
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async logRequest(req, context) {
+        try {
+            const application = await this.createApplicationIfNotExists(req);
+            await application.createLog(context, {
+                type   : 'log',
+                source : 'server',
+                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                message: req.body.action,
+                data   : JSON.stringify(req.body, null, 4)
             });
         } catch (err) {
             console.error(err);

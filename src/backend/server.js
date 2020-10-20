@@ -114,6 +114,7 @@ async function viewerPost(req, res, next)  {
     const hostApp = server.get('hostApp');
     try {
         context = Context.create({req});
+        await hostApp.logRequest(req, context);
         await hostApp.handleViewerPost(req, res, context);
     } catch (err) {
         await hostApp.logError(req, context, err);
