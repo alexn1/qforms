@@ -25,7 +25,7 @@ class TextBoxFieldEditor extends FieldEditor {
                 defaultValue  : params['defaultValue'] ? params['defaultValue'] :             '',
                 value         : params['value']        ? params['value']        :             '',
                 column        : params['column']       ? params['column']       : params['name'],
-                readOnly      : params['readOnly']     ? params['readOnly']     :        'true',
+                readOnly      : params['readOnly']     ? params['readOnly']     :        'false',
                 notNull       : params['notNull']      ? params['notNull']      :        'false',
                 align         : params['align']        ? params['align']        :         'left'
             }

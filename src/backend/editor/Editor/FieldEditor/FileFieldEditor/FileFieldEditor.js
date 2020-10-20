@@ -23,7 +23,7 @@ class FileFieldEditor extends FieldEditor {
                 width         : params['width']        ? params['width']        :            '0',
                 defaultValue  : params['defaultValue'] ? params['defaultValue'] :             '',
                 column        : params['column']       ? params['column']       : params['name'],
-                readOnly      : params['readOnly']     ? params['readOnly']     :        'true',
+                readOnly      : params['readOnly']     ? params['readOnly']     :        'false',
                 notNull       : params['notNull']      ? params['notNull']      :        'false',
                 align         : params['align']        ? params['align']        :         'left'
             }
