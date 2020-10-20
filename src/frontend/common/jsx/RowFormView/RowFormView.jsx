@@ -64,11 +64,10 @@ class RowFormView extends ReactComponent {
     }
     renderFieldView(ctrl) {
         // console.log('RowFormView.renderFieldView', ctrl.model.getClassName());
-        const model = ctrl.model;
-        if (model.getClassName() === 'DatePickerField') {
+        if (ctrl.model.getClassName() === 'DatePickerField') {
             return <RowFormDatePickerFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
         }
-        if (model.getClassName() === 'ComboBoxField') {
+        if (ctrl.model.getClassName() === 'ComboBoxField') {
             return <RowFormComboBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
         }
         return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
