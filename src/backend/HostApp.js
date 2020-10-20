@@ -189,7 +189,7 @@ class HostApp {
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
-            await this[req.body.action](req, res, context);
+            return await this[req.body.action](req, res, context);
         }
     }
 
@@ -285,6 +285,7 @@ class HostApp {
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
+        return time;
     }
 
     // action
@@ -307,6 +308,7 @@ class HostApp {
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({row, time});
+        return time;
     }
 
     // action
@@ -329,6 +331,7 @@ class HostApp {
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
+        return time;
     }
 
     // action
@@ -554,7 +557,7 @@ class HostApp {
         }
     }
 
-    async logRequest(req, context) {
+    async logRequest(req, context, time) {
         try {
             const application = await this.createApplicationIfNotExists(req);
             let args = '';
@@ -563,13 +566,16 @@ class HostApp {
             } else if (req.body.row) {
                 args = Object.keys(req.body.row).map(name => `${name}: ${req.body.row[name]}`).join(', ');
             }
-            const message = [
+            let message = [
                 application.getName(),
                 ...(req.body.page ? [req.body.page] : []),
                 ...(req.body.form ? [req.body.form] : []),
                 ...(req.body.ds   ? [req.body.ds  ] : []),
                 `${req.body.action}(${args})`
             ].join('.');
+            if (time) {
+                message += `, time: ${time}`;
+            }
             await application.createLog(context, {
                 type   : 'log',
                 source : 'server',
