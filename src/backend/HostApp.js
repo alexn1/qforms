@@ -8,6 +8,7 @@ const Test    = require('./Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
 
+// post actions
 const ACTIONS = [
     'page',
     'select',        // select
@@ -194,10 +195,8 @@ class HostApp {
 
     async loginGet(req, res, context) {
         console.log('HostApp.loginGet');
-        // const context = Context.create({req: req});
         const application = this.getApplication(req);
         const users = await application.getUsers(context);
-        // Context.destroy(context);
         res.render('login', {
             version       : pkg.version,
             application   : application,
@@ -211,7 +210,6 @@ class HostApp {
 
     async loginPost(req, res, context) {
         console.log('HostApp.loginPost');
-        // const context = Context.create({req: req});
         const route = HostApp.getRoute(req);
         const application = this.getApplication(req);
         const authenticate = await application.authenticate(context, req.body.username, req.body.password);
@@ -225,11 +223,9 @@ class HostApp {
             } else {
                 req.session.user[route] = {name: req.body.username};
             }
-            // Context.destroy(context);
             res.redirect(req.url);
         } else {
             const users = await application.getUsers(context);
-            // Context.destroy(context);
             res.render('login', {
                 version    : pkg.version,
                 application: application,
@@ -242,41 +238,29 @@ class HostApp {
         }
     }
 
+    // fill application
     async fill(req, context) {
         console.log('HostApp.fill', this.getApplication(req).getName());
-        // const context = Context.create({req: req});
-        const data = await this.getApplication(req).fill(context);
-        // Context.destroy(context);
+        const application = this.getApplication(req);
+        const data = await application.fill(context);
         return data;
     }
 
-    // action
+    // action (fill page)
     async page(req, res, context) {
         console.log('HostApp.page', req.body.page);
-        /*const context = Context.create({
-            req           : req,
-            // params        : req.body.params,
-            // newMode       : req.body.newMode,
-            // parentPageName: req.body.parentPageName
-        });*/
-        const page = await this.getApplication(req).getPage(context, req.body.page);
+        const application = this.getApplication(req);
+        const page = await application.getPage(context, req.body.page);
         const data = await page.fill(context);
-        // Context.destroy(context);
         await res.json({page: data});
     }
 
     // action
     async update(req, res, context) {
         console.log('HostApp.update', req.body.page);
-        /*const context = Context.create({
-            req           : req,
-            // body          : req.body,
-            // parentPageName: req.body.parentPageName
-        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const form = page.forms[req.body.form];
         const result = await form.update(context, req.body.ds);
-        // Context.destroy(context);
         if (result === undefined) throw new Error('action update: result is undefined');
         await res.json(result);
     }
@@ -286,11 +270,6 @@ class HostApp {
         console.log('HostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        /*const context = Context.create({
-            req           : req,
-            // parentPageName: req.body.parentPageName,
-            // params        : req.body.params
-        });*/
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -303,7 +282,6 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.select(context);
-        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
@@ -314,11 +292,6 @@ class HostApp {
         console.log('HostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        /*const context = Context.create({
-            req           : req,
-            // parentPageName: req.body.parentPageName,
-            // params        : req.body.params
-        });*/
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -331,7 +304,6 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const row = await dataSource.selectSingle(context);
-        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({row, time});
@@ -342,11 +314,6 @@ class HostApp {
         console.log('HostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(req);
-        /*const context = Context.create({
-            req           : req,
-            // parentPageName: req.body.parentPageName,
-            // params        : req.body.params
-        });*/
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -359,7 +326,6 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.selectMultiple(context);
-        // Context.destroy(context);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
@@ -368,11 +334,6 @@ class HostApp {
     // action
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
-        /*const context = Context.create({
-            req           : req,
-            // row           : req.body.row,
-            // parentPageName: req.body.parentPageName
-        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         const cnn = await dataSource.database.getConnection(context);
@@ -381,7 +342,6 @@ class HostApp {
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.database.commit(cnn);
-            // Context.destroy(context);
             await res.json(result);
         } catch (err) {
             await dataSource.database.rollback(cnn, err);
@@ -392,11 +352,6 @@ class HostApp {
     // action
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
-        /*const context = Context.create({
-            req           : req,
-            // row           : req.body.row,
-            // parentPageName: req.body.parentPageName
-        });*/
         const page = await this.getApplication(req).getPage(context, req.body.page);
         const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
         const cnn = await dataSource.database.getConnection(context);
@@ -404,7 +359,6 @@ class HostApp {
             await dataSource.database.beginTransaction(cnn);
             await dataSource.delete(context);
             await dataSource.database.commit(cnn);
-            // Context.destroy(context);
             await res.json(null);
         } catch (err) {
             await dataSource.database.rollback(cnn, err);
@@ -416,11 +370,6 @@ class HostApp {
     async rpc(req, res, context) {
         console.log('HostApp.rpc', req.body);
         const application = this.getApplication(req);
-        /*const context = Context.create({
-            req   : req,
-            res   : res,
-            // params: req.body.params
-        });*/
         let model;
         if (req.body.page) {
             if (req.body.form) {
@@ -433,7 +382,6 @@ class HostApp {
             model = application;
         }
         const result = await model.rpc(context, req.body.name, req.body.params);
-        // Context.destroy(context);
         await res.json(result);
     }
 
