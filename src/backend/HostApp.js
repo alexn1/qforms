@@ -291,13 +291,6 @@ class HostApp {
             // parentPageName: req.body.parentPageName,
             // params        : req.body.params
         });*/
-        await application.createLog(context, {
-            type: 'log',
-            source: 'server',
-            ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-            message: 'select',
-            data: JSON.stringify(req.body, null, 4)
-        });
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -596,6 +589,21 @@ class HostApp {
             version     : pkg.version,
             applications: this.applications
         });
+    }
+    async logError(req, context, err) {
+        try {
+            const application = await this.createApplicationIfNotExists(req);
+            await application.createLog(context, {
+                type: 'error',
+                source: 'server',
+                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                message: err.message,
+                stack: err.stack.toString(),
+                data: JSON.stringify(req.body, null, 4)
+            });
+        } catch (err) {
+            console.error(err);
+        }
     }
 
 }

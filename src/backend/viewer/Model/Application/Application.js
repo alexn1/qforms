@@ -249,15 +249,11 @@ class Application extends Model {
 
     async createLog(context, values) {
         // console.log('Application.createLog', values);
-        try {
-            await this.getDatabase('default').queryResult(
-                context,
-                'insert into log(type, source, ip, message, data) values ({type}, {source}, {ip}, {message}, {data})',
-                values
-            );
-        } catch (err) {
-            console.error(err);
-        }
+        await this.getDatabase('default').queryResult(
+            context,
+            'insert into log(type, source, ip, message, stack, data) values ({type}, {source}, {ip}, {message}, {stack}, {data})',
+            values
+        );
     }
 
 }

@@ -111,10 +111,12 @@ async function viewerGet(req, res, next)  {
 async function viewerPost(req, res, next)  {
     console.warn('viewerPost', req.params, req.body);
     let context = null;
+    const hostApp = server.get('hostApp');
     try {
         context = Context.create({req});
-        await server.get('hostApp').handleViewerPost(req, res, context);
+        await hostApp.handleViewerPost(req, res, context);
     } catch (err) {
+        await hostApp.logError(req, context, err);
         next(err);
     } finally {
         Context.destroy(context);
