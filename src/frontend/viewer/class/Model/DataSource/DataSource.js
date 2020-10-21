@@ -5,7 +5,6 @@ class DataSource extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.rows      = null;
-        // this.length    = null;
         this.rowsByKey = null;						// for row search by key
         // this.childs    = {};						// for child row search by key
         this.params    = {};   						// refill params of row

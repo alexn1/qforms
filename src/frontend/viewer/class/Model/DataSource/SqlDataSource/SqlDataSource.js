@@ -4,8 +4,7 @@ class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.offset = 0;
-        this.count  = data.count;
-        this.length = null;
+        this.count = data.count;
     }
 
     init() {
@@ -160,6 +159,7 @@ class SqlDataSource extends DataSource {
         /*const _old = this;
         const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
         this.sync(_old, _new, '[null]');*/
+        this.count = data.count;
         this.setRows(data.rows);
         this.emit('refresh', {source: this});
     }
@@ -191,8 +191,6 @@ class SqlDataSource extends DataSource {
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
-        this.count  = data.count;
-        this.length = data.rows.length;
         return data;
     }
 
@@ -330,5 +328,11 @@ class SqlDataSource extends DataSource {
 
     getLimit() {
         return this.data.limit;
+    }
+    getCount() {
+        return this.count;
+    }
+    getFrameLength() {
+        return this.rows.length;
     }
 }
