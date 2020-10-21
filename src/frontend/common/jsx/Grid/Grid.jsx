@@ -94,6 +94,7 @@ class Grid extends ReactComponent {
                 i={i}
                 active={this.isRowActive(i)}
                 activeColumn={this.getActiveColumn()}
+                updated={this.props.updated}
             />
         );
     }
@@ -130,44 +131,10 @@ class Grid extends ReactComponent {
             onUnmount={this.onCellViewUnmount}
         />;
     }
-    renderRow(row, i) {
-        // console.log('Grid.renderRow', i);
-        return <GridRow
-            key={this.getRowKey(row)}
-            grid={this}
-            row={row}
-            i={i}
-            active={this.isRowActive(i)}
-            activeColumn={this.getActiveColumn()}
-        />
-        /*return (
-            <tr
-                key={key}
-                className={this.isRowActive(i) ? 'active' : null}
-            >
-                {this.props.columns.map((column, j) =>
-                    <td
-                        key={column.name}
-                        className={this.isCellActive(i, j) ? 'active' : null}
-                        style={{width: this.getColumnWidth(j)}}
-                        data-rc={`[${i},${j}]`}
-                        onMouseDown={this.onCellMouseDown}
-                        onDoubleClick={this.onCellDoubleClick}
-                    >
-                        {this.renderCell(row, column)}
-                    </td>)}
-                <td
-                    data-r={i}
-                    onMouseDown={this.onRowMouseDown}
-                    onDoubleClick={this.onRowDoubleClick}
-                />
-            </tr>
-        );*/
-    }
     shouldComponentUpdate(nextProps, nextState) {
         console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
-        return nextProps.updated - this.props.updated;
-        // return true;
+        if (nextProps.updated - this.props.updated) return true;
+        return false;
     }
     render() {
         console.log('Grid.render', this.props.name);

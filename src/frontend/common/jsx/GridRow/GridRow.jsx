@@ -1,15 +1,16 @@
 class GridRow extends ReactComponent {
-    shouldComponentUpdate(nextProps, nextState) {
-        // console.log('GridRow.shouldComponentUpdate', this.props.active, nextProps.active);
-        // return this.props.active !== nextProps.active || (this.props.active && this.props.activeColumn !== nextProps.activeColumn);
-        return true;
-    }
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated);
+        if (nextProps.updated - this.props.updated) return true;
+        if (this.props.active !== nextProps.active) return true;
+        if (this.props.active && this.props.activeColumn !== nextProps.activeColumn) return true;
+        return false;
+    }
     render() {
-        console.log('GridRow.render', this.props.i);
-
+        // console.log('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
