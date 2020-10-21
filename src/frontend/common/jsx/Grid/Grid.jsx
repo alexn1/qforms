@@ -86,7 +86,16 @@ class Grid extends ReactComponent {
         );
     }
     renderRows() {
-        return this.props.rows.map((row, i) => this.renderRow(row, i));
+        return this.props.rows.map((row, i) =>
+            <GridRow
+                key={this.getRowKey(row)}
+                grid={this}
+                row={row}
+                i={i}
+                active={this.isRowActive(i)}
+                activeColumn={this.getActiveColumn()}
+            />
+        );
     }
     getRowKey(row) {
         return this.props.getRowKey(row);
@@ -123,8 +132,15 @@ class Grid extends ReactComponent {
     }
     renderRow(row, i) {
         // console.log('Grid.renderRow', i);
-        const key = this.getRowKey(row);
-        return (
+        return <GridRow
+            key={this.getRowKey(row)}
+            grid={this}
+            row={row}
+            i={i}
+            active={this.isRowActive(i)}
+            activeColumn={this.getActiveColumn()}
+        />
+        /*return (
             <tr
                 key={key}
                 className={this.isRowActive(i) ? 'active' : null}
@@ -146,7 +162,7 @@ class Grid extends ReactComponent {
                     onDoubleClick={this.onRowDoubleClick}
                 />
             </tr>
-        );
+        );*/
     }
     render() {
         return (

@@ -7,8 +7,17 @@ class TableFormController extends FormController {
         // this.framesCount = null;
         // this.$goto       = null;
         this.state = {
+            updated: Date.now(),
             activeRowKey: null
         };
+    }
+
+    getUpdated() {
+        return this.state.updated;
+    }
+
+    invalidate() {
+        this.state = Date.now();
     }
 
     init() {

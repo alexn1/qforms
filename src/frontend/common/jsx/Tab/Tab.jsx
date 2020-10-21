@@ -34,8 +34,8 @@ class Tab extends ReactComponent {
     }
     selectTab(i) {
         if (i === this.getActive()) return;
-        const start = new Date().getTime();
-        this.setState({active: i}, () => console.log('selectTab time:', new Date().getTime() - start));
+        const start = Date.now();
+        this.setState({active: i}, () => console.log('selectTab time:', Date.now() - start));
     }
     getClassName() {
         return [
