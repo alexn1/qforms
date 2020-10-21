@@ -160,7 +160,7 @@ class TableFormController extends FormController {
     }
 
     onGridCellDblClick = async (row) => {
-        console.log('TableFormController.onGridCellDblClick', row);
+        // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
         // console.log('row:', row);
