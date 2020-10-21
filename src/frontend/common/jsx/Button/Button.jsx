@@ -61,7 +61,7 @@ class Button extends ReactComponent {
                     display: this.isVisible() === false ? 'none' : 'inline-block',
                     width: this.props.width
                 }}
-            >{this.props.title}</button>
+            >{this.props.title || this.props.children}</button>
         );
     }
 }
