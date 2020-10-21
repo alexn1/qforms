@@ -296,4 +296,7 @@ class TableFormController extends FormController {
         // console.log('TableFormController.isRowSelected');
         return this.state.activeRowKey !== null;
     }
+    onFrameChanged = value => {
+        console.log('TableFormController.onFrameChanged', value);
+    }
 }

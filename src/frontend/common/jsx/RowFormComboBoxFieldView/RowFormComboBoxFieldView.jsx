@@ -15,6 +15,7 @@ class RowFormComboBoxFieldView extends ReactComponent {
             <div className={this.getClassName()}>
                 <ComboBox
                     // onCreate={ctrl.onViewCreate}
+                    nullable={true}
                     value={ctrl.getValueForView()}
                     readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange}

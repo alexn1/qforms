@@ -45,11 +45,11 @@ class TableFormView extends ReactComponent {
                 </div>
                 <div className="gotoBlock">
                     <Button onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
-                    <select>
-                        {new Array(dataSource.getFramesCount()).fill().map((val, i) =>
-                            <option key={i+1} value={i + 1}>{i + 1}</option>
-                        )}
-                    </select>
+                    <ComboBox
+                        onChange={ctrl.onFrameChanged}
+                        items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
+                        ({value: i+1, title: (i+1).toString()})
+                    )}/>
                     <Button onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
                 </div>
             </div>
