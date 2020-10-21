@@ -38,6 +38,7 @@ class TableFormView extends ReactComponent {
         const model = this.props.ctrl.model;
         const dataSource = model.getDataSource();
         const text = model.getApp().getText();
+
         return (
             <div className="paging">
                 <div className="countBlock">
@@ -45,7 +46,11 @@ class TableFormView extends ReactComponent {
                     <span className="count">{dataSource.getFrameLength()} of {dataSource.getCount()}</span>
                 </div>
                 <button className="previous">{text.form.previous}</button>
-                <select className="goto"/>
+                <select className="goto">
+                    {new Array(dataSource.getFramesCount()).fill().map((val, i) =>
+                        <option value={i + 1}>{i + 1}</option>
+                    )}
+                </select>
                 <button className="next">{text.form.next}</button>
             </div>
         );
