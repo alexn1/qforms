@@ -44,14 +44,14 @@ class TableFormView extends ReactComponent {
                     <span className="count">{dataSource.getFrameLength()} of {dataSource.getCount()}</span>
                 </div>
                 <div className="gotoBlock">
-                    <Button onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
+                    <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
                     <ComboBox
-                        onCreate={ctrl.onFrameComboBoxCreate}
+                        value={ctrl.model.getDataSource().getFrame().toString()}
                         onChange={ctrl.onFrameChanged}
                         items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
                         ({value: i+1, title: (i+1).toString()})
                     )}/>
-                    <Button onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
+                    <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
                 </div>
             </div>
         );

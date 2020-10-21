@@ -5,6 +5,7 @@ class SqlDataSource extends DataSource {
         super(data, parent);
         this.offset = 0;
         this.count = data.count;
+        this._frame = 1;
     }
 
     init() {
@@ -325,7 +326,6 @@ class SqlDataSource extends DataSource {
     getFramesCount() {
         return this.getLimit() ? Math.ceil(this.count / this.getLimit()) : null;
     }
-
     getLimit() {
         return this.data.limit;
     }
@@ -334,5 +334,11 @@ class SqlDataSource extends DataSource {
     }
     getFrameLength() {
         return this.rows.length;
+    }
+    getFrame() {
+        return this._frame;
+    }
+    setFrame(frame) {
+        this._frame = frame;
     }
 }

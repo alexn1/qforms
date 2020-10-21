@@ -3,13 +3,10 @@
 class TableFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
-        // this.framesCount = null;
-        // this.$goto       = null;
         this.state = {
             updated     : Date.now(),
             activeRowKey: null
         };
-        this.frameComboBox = null;
     }
 
     init() {
@@ -124,26 +121,6 @@ class TableFormController extends FormController {
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
             this.model.getDataSource().delete(this.state.activeRowKey);
         }
-    }
-
-    onNextClick = () => {
-        console.log('TableFormController.onNextClick');
-        /*const frame = parseInt(this.$goto.val()) + 1;
-        if (frame <= this.framesCount) {
-            this.$goto.val(frame);
-            this.model.frame(frame);
-        }*/
-        this.frameComboBox.setState({value: '2'});
-    }
-
-    onPreviousClick = () => {
-        console.log('TableFormController.onPreviousClick');
-        this.frameComboBox.setState({value: '1'});
-        /*const frame = parseInt(this.$goto.val()) - 1;
-        if (frame > 0) {
-            this.$goto.val(frame);
-            this.model.frame(frame);
-        }*/
     }
 
     /*onGotoChange() {
@@ -291,9 +268,37 @@ class TableFormController extends FormController {
     onFrameChanged = value => {
         console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
+        this.model.getDataSource().setFrame(frame);
+        this.rerender();
     }
-    onFrameComboBoxCreate = c => {
-        // console.log('TableFormController.onFrameComboBoxCreate');
-        this.frameComboBox = c;
+    onNextClick = () => {
+        console.log('TableFormController.onNextClick');
+        /*const frame = parseInt(this.$goto.val()) + 1;
+        if (frame <= this.framesCount) {
+            this.$goto.val(frame);
+            this.model.frame(frame);
+        }*/
+        const nextFrame = this.model.getDataSource().getFrame() + 1;
+        this.model.getDataSource().setFrame(nextFrame);
+        this.rerender();
+    }
+
+    onPreviousClick = () => {
+        console.log('TableFormController.onPreviousClick');
+        /*const frame = parseInt(this.$goto.val()) - 1;
+        if (frame > 0) {
+            this.$goto.val(frame);
+            this.model.frame(frame);
+        }*/
+        const prevFrame = this.model.getDataSource().getFrame() - 1;
+        this.model.getDataSource().setFrame(prevFrame);
+        this.rerender();
+    }
+    canPrev() {
+        return this.model.getDataSource().getFrame() > 1;
+    }
+    canNext() {
+        const ds = this.model.getDataSource();
+        return ds.getFrame() < ds.getFramesCount();
     }
 }
