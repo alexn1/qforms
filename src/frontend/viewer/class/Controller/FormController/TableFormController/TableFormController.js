@@ -136,20 +136,22 @@ class TableFormController extends FormController {
         }
     }
 
-    onNextClick() {
-        const frame = parseInt(this.$goto.val()) + 1;
+    onNextClick = () => {
+        console.log('TableFormController.onNextClick');
+        /*const frame = parseInt(this.$goto.val()) + 1;
         if (frame <= this.framesCount) {
             this.$goto.val(frame);
             this.model.frame(frame);
-        }
+        }*/
     }
 
-    onPreviousClick() {
-        const frame = parseInt(this.$goto.val()) - 1;
+    onPreviousClick = () => {
+        console.log('TableFormController.onPreviousClick');
+        /*const frame = parseInt(this.$goto.val()) - 1;
         if (frame > 0) {
             this.$goto.val(frame);
             this.model.frame(frame);
-        }
+        }*/
     }
 
     onGotoChange() {
