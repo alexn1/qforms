@@ -4,7 +4,8 @@ class Grid extends ReactComponent {
         this.state = {
             column     : null,
             row        : null,
-            columnWidth: {}
+            columnWidth: {},
+            resized    : Date.now()
         };
         this.columns = {};
         this.head = React.createRef();
@@ -68,7 +69,9 @@ class Grid extends ReactComponent {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
+        if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
         this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+        this.state.resized = Date.now();
         this.rerender();
     }
     getColumnWidth(i) {
@@ -95,6 +98,7 @@ class Grid extends ReactComponent {
                 active={this.isRowActive(i)}
                 activeColumn={this.getActiveColumn()}
                 updated={this.props.updated}
+                resized={this.state.resized}
             />
         );
     }

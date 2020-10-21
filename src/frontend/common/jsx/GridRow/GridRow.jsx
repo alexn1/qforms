@@ -3,8 +3,9 @@ class GridRow extends ReactComponent {
         return this.props.active && this.props.activeColumn === j;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated);
+        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (nextProps.updated - this.props.updated) return true;
+        if (nextProps.resized - this.props.resized) return true;
         if (this.props.active !== nextProps.active) return true;
         if (this.props.active && this.props.activeColumn !== nextProps.activeColumn) return true;
         return false;
