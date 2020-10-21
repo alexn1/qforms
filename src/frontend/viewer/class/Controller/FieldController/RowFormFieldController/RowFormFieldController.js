@@ -54,6 +54,7 @@ class RowFormFieldController extends FieldController {
         this.state.changed = this.isChanged2(this.getRow());
     }
     refill() {
+        // console.log('RowFormFieldController.refill', this.model.getFullName());
         const value = this.model.getValue(this.getRow());
         this.setValue(value);
         this.state.error = null;
