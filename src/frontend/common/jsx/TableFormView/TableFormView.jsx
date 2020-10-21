@@ -45,7 +45,7 @@ class TableFormView extends ReactComponent {
                 </div>
                 <div className="gotoBlock">
                     <Button onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
-                    <select className="goto" style={{border: 'none'}}>
+                    <select>
                         {new Array(dataSource.getFramesCount()).fill().map((val, i) =>
                             <option key={i+1} value={i + 1}>{i + 1}</option>
                         )}
