@@ -4,6 +4,7 @@ class RowFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
+            updated: Date.now(),
             mode   : 'view',
             hasNew : false,
             changed: false,

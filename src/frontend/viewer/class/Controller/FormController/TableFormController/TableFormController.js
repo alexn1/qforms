@@ -3,21 +3,12 @@
 class TableFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
-        // this.grid        = null;
         // this.framesCount = null;
         // this.$goto       = null;
         this.state = {
-            updated: Date.now(),
+            updated     : Date.now(),
             activeRowKey: null
         };
-    }
-
-    getUpdated() {
-        return this.state.updated;
-    }
-
-    invalidate() {
-        this.state.updated = Date.now();
     }
 
     init() {

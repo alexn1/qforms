@@ -45,4 +45,10 @@ class FormController extends Controller {
         console.log('FormController.onFieldChange', this.model.getFullName());
         this.getPageController().onFormChange(e);
     }
+    getUpdated() {
+        return this.state.updated;
+    }
+    invalidate() {
+        this.state.updated = Date.now();
+    }
 }
