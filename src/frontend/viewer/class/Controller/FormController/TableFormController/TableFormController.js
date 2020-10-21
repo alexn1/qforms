@@ -29,7 +29,7 @@ class TableFormController extends FormController {
 
         // data source events
         const dataSource = this.model.getDataSource();
-        dataSource.on('refresh', this.listeners.refresh = this.onRefresh);
+        dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
         dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
         dataSource.on('delete' , this.listeners.delete  = this.onDataSourceDelete);
 
@@ -259,13 +259,14 @@ class TableFormController extends FormController {
             alert(`${this.model.getFullName()}: ${err.message}`);
         }
     }
-    onRefresh = e => {
-        console.log('TableFormController.onRefresh', this.model.getFullName(), e);
+    onDataSourceRefresh = e => {
+        console.log('TableFormController.onDataSourceRefresh', this.model.getFullName(), e);
         this.invalidate();
         this.rerender();
     }
     onDataSourceUpdate = e => {
         console.log('TableFormController.onDataSourceUpdate', this.model.getFullName(), e.key);
+        this.invalidate();
         this.rerender();
     }
     onDataSourceDelete = e => {
@@ -273,13 +274,13 @@ class TableFormController extends FormController {
         if (this.state.activeRowKey === e.key) {
             this.state.activeRowKey = null;
         }
+        this.invalidate();
         this.rerender();
     }
     onActiveRowChanged = i => {
         // console.log('TableFormController.onActiveRowChanged', i);
         const rows = this.model.getDataSource().getRows();
         this.state.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
-        this.rerender();
     }
     getActiveRow = () => {
         // console.log('TableFormController.getActiveRow', this.state.activeRowKey);
