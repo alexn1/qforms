@@ -191,15 +191,7 @@ class ApplicationController extends Controller {
     }
 
     closePage(pageController) {
-        console.log('ApplicationController.closePage', pageController.model.getFullName());
-        /*
-        if (pageController.tab) {
-            this.tabWidget.closeTab(pageController.tab);
-        } else if (pageController.modal) {
-            pageController.modal.close();
-        }
-        pageController.deinit();
-        pageController.model.deinit();*/
+        // console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (this.pages.indexOf(pageController) > -1) {
             this.pages.splice(this.pages.indexOf(pageController), 1);
             if (this.activePage === pageController) {
@@ -210,7 +202,7 @@ class ApplicationController extends Controller {
         } else {
             throw new Error('page not found');
         }
-        this.view.rerender();
+        this.rerender();
         pageController.deinit();
         pageController.model.deinit();
     }
@@ -303,7 +295,7 @@ class ApplicationController extends Controller {
         } else {
             this.pages.push(this.activePage = pc);
         }
-        this.view.rerender();
+        this.rerender();
         /*
         if (modal) {
             this.createModalPageController(page);
@@ -354,7 +346,7 @@ class ApplicationController extends Controller {
         console.log('PageController.onTabMouseDown');
         if (this.activePage !== this.pages[i]) {
             this.activePage = this.pages[i];
-            this.view.rerender();
+            this.rerender();
         }
     }
 }

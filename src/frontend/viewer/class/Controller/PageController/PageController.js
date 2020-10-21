@@ -49,7 +49,7 @@ class PageController extends Controller {
     }
 
     close() {
-        console.log('PageController.close', this.model.getFullName());
+        // console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
         // const valid = this.isValid();
