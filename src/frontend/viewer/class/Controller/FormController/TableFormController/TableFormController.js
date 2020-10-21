@@ -9,6 +9,7 @@ class TableFormController extends FormController {
             updated     : Date.now(),
             activeRowKey: null
         };
+        this.frameComboBox = null;
     }
 
     init() {
@@ -132,10 +133,12 @@ class TableFormController extends FormController {
             this.$goto.val(frame);
             this.model.frame(frame);
         }*/
+        this.frameComboBox.setState({value: '2'});
     }
 
     onPreviousClick = () => {
         console.log('TableFormController.onPreviousClick');
+        this.frameComboBox.setState({value: '1'});
         /*const frame = parseInt(this.$goto.val()) - 1;
         if (frame > 0) {
             this.$goto.val(frame);
@@ -143,10 +146,10 @@ class TableFormController extends FormController {
         }*/
     }
 
-    onGotoChange() {
+    /*onGotoChange() {
         const frame = parseInt(this.value);
         this.model.frame(frame);
-    }
+    }*/
 
     onGridCellDblClick = async (row) => {
         // console.log('TableFormController.onGridCellDblClick', row);
@@ -286,6 +289,11 @@ class TableFormController extends FormController {
         return this.state.activeRowKey !== null;
     }
     onFrameChanged = value => {
-        console.log('TableFormController.onFrameChanged', value);
+        console.log('TableFormController.onFrameChanged', parseInt(value));
+        const frame = parseInt(value);
+    }
+    onFrameComboBoxCreate = c => {
+        // console.log('TableFormController.onFrameComboBoxCreate');
+        this.frameComboBox = c;
     }
 }

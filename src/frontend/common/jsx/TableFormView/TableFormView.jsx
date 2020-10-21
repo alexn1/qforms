@@ -46,6 +46,7 @@ class TableFormView extends ReactComponent {
                 <div className="gotoBlock">
                     <Button onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
                     <ComboBox
+                        onCreate={ctrl.onFrameComboBoxCreate}
                         onChange={ctrl.onFrameChanged}
                         items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
                         ({value: i+1, title: (i+1).toString()})
