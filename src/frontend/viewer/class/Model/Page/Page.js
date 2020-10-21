@@ -26,7 +26,7 @@ class Page extends Model {
     }
 
     deinit() {
-        console.log('Page.deinit', this.getFullName());
+        // console.log('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
         for (const name in this.dataSources) {
             this.dataSources[name].deinit();

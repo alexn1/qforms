@@ -99,6 +99,9 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
     render() {
         console.log('RowFormView.render', this.props.ctrl.model.getFullName());
         return (

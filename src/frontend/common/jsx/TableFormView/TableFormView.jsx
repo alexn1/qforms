@@ -76,6 +76,9 @@ class TableFormView extends ReactComponent {
         />;
         return null;
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;

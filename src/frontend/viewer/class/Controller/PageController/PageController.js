@@ -27,7 +27,7 @@ class PageController extends Controller {
     }
 
     deinit() {
-        console.log('PageController.deinit: ' + this.model.getFullName());
+        // console.log('PageController.deinit: ' + this.model.getFullName());
         for (const name in this.forms) {
             this.forms[name].deinit();
         }

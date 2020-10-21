@@ -18,7 +18,7 @@ class SqlDataSource extends DataSource {
     }
 
     deinit() {
-        console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
+        // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         if (this.data.table !== '') {
             const table = this.getTable();
             table.removeListener('update', this.listeners.tableUpdated);

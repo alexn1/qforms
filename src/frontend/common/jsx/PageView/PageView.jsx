@@ -65,6 +65,9 @@ class PageView extends ReactComponent {
             </div>
         );
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;

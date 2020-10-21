@@ -21,7 +21,7 @@ class RowFormController extends FormController {
     }
 
     deinit() {
-        console.log('RowFormController.deinit', this.model.getFullName());
+        // console.log('RowFormController.deinit', this.model.getFullName());
         const dataSource = this.model.getDataSource();
         dataSource.off('refresh', this.listeners.refresh);
         dataSource.off('update' , this.listeners.update);
