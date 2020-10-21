@@ -168,11 +168,11 @@ class SqlDataSource extends DataSource {
     async frame(params, frame) {
         this.offset = (frame - 1) * this.getLimit();
         const data = await this.select(params);
-        const _new = this.getKeysAndChilds(data.rows);
+        /*const _new = this.getKeysAndChilds(data.rows);
         const _old = this;
         _old.rowsByKey = _new.rowsByKey;
         _old.childs    = _new.childs;
-        this.emit('newFrame', {source: this});
+        this.emit('newFrame', {source: this});*/
     }
 
     async select(params) {
