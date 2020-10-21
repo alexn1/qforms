@@ -17,19 +17,10 @@ class TableFormController extends FormController {
         // this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
         // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         // this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
-
-        // data source events
         const dataSource = this.model.getDataSource();
         dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
         dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
         dataSource.on('delete' , this.listeners.delete  = this.onDataSourceDelete);
-
-        /*
-        $(this.view).find('button.next').click(this.onNextClick.bind(this));
-        $(this.view).find('button.previous').click(this.onPreviousClick.bind(this));
-        this.$count = $(this.view).find('span.count');
-        this.$goto = $(this.view).find('select.goto');
-        this.$goto.change(this.onGotoChange.bind(this));*/
     }
     getGridColumns() {
         return Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
@@ -45,8 +36,6 @@ class TableFormController extends FormController {
         return this.model.getDataSource().getRows();
     }
     deinit() {
-        // this.grid.off('bodyCellDblClick', this.listeners.bodyCellDblClick);
-        // this.grid.deinit();
         // this.parent.off('hide', this.listeners.hide);
         // this.parent.off('show', this.listeners.show);
         // this.model.off('refilled', this.listeners.refilled);
