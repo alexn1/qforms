@@ -164,7 +164,13 @@ class Grid extends ReactComponent {
             </tr>
         );*/
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        return nextProps.updated - this.props.updated;
+        // return true;
+    }
     render() {
+        console.log('Grid.render', this.props.name);
         return (
             <div className="Grid flex-max">
                 <div className="head" ref={this.head}><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>

@@ -74,13 +74,16 @@ class TableFormView extends ReactComponent {
         return (
             <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
-                <Grid columns={ctrl.getGridColumns()}
+                <Grid
+                      name={ctrl.model.getFullName()}
+                      columns={ctrl.getGridColumns()}
                       rows={ctrl.getGridRows()}
                       getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
                       onDoubleClick={ctrl.onGridCellDblClick}
                       onActiveRowChanged={ctrl.onActiveRowChanged}
                       getActiveRow={ctrl.getActiveRow}
                       renderGridCellView={this.renderGridCellView}
+                      updated={ctrl.getUpdated()}
                 />
                 {this.renderPaging()}
             </div>

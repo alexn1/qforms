@@ -17,7 +17,7 @@ class TableFormController extends FormController {
     }
 
     invalidate() {
-        this.state = Date.now();
+        this.state.updated = Date.now();
     }
 
     init() {
@@ -261,6 +261,7 @@ class TableFormController extends FormController {
     }
     onRefresh = e => {
         console.log('TableFormController.onRefresh', this.model.getFullName(), e);
+        this.invalidate();
         this.rerender();
     }
     onDataSourceUpdate = e => {
