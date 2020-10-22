@@ -43,6 +43,25 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('date:', formatDate(new Date(), '{YYYY}-{MM}-{DD}'));
     console.log('date:', formatDate(new Date(), '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}'));
 
+    dateTimeReviver = function (key, value) {
+        if (typeof value === 'string') {
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
+            if (a) return new Date(value);
+        }
+        return value;
+    }
+
+    const value = {abc: new Date()};
+    console.log('value:', value);
+    const json = JSON.stringify(value);
+    console.log('json:', json);
+
+    console.log("parsed:", JSON.parse(json, dateTimeReviver));
+
+    // console.log(JSON.parse("{\"abc\": \"2020-10-22T19:41:41.043Z\"}"));
+    //
+    // console.log(JSON.parse("{\"abc\": \"2020-10-22T19:41:41.043Z\"}", dateTimeReviver));
+
 });
 
 function formatDate(date, format) {
