@@ -50,7 +50,7 @@ class TableFormView extends ReactComponent {
                             value={ctrl.model.getDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                             items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
-                            ({value: i+1, title: (i+1).toString()})
+                            ({value: (i+1).toString(), title: (i+1).toString()})
                         )}/>
                         <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
                     </div>

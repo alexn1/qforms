@@ -39,6 +39,7 @@ class RowForm extends Form {
     createRow() {
         const row = {};
         this.fillDefaultValues(row);
+        console.log('row:', row);
         return row;
     }
 

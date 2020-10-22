@@ -1,6 +1,13 @@
 class ComboBox extends ReactComponent {
     constructor(props) {
         super(props);
+        if (props.value) {
+            const item = props.items.find(item => item.value === props.value);
+            if (!item) {
+                console.error(`no item for value: ${props.value}, ${typeof props.value}`);
+                console.log('items:', props.items);
+            }
+        }
         this.state  = {value: props.value || ''};
     }
     onChange = e => {
