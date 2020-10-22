@@ -44,7 +44,11 @@ class Field extends Model {
                 //console.log('eval: ' + code);
                 value = eval(code);
                 if (value !== undefined) {
-                    row[this.data.column] = value;
+                    if (value instanceof Date) {
+                        row[this.data.column] = value.toISOString();
+                    } else {
+                        row[this.data.column] = value;
+                    }
                 }
             } catch (err) {
                 throw new Error(`[${this.getFullName()}] default value error: ${err.toString()}`);
