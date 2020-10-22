@@ -174,27 +174,28 @@ class TableFormController extends FormController {
         // console.log('TableFormController.onActiveRowChanged', i);
         const rows = this.model.getDataSource().getRows();
         this.state.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
+        this.rerender();
     }
-    getActiveRow = () => {
-        // console.log('TableFormController.getActiveRow', this.state.activeRowKey);
+    getActiveRowIndex = () => {
+        // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);
         if (this.state.activeRowKey) {
             const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
-            const rows = this.model.getDataSource().getRows();
-            if (!row) {
-                console.log('rows:', rows);
-                throw new Error(`no row with key: ${this.state.activeRowKey}`);
+            if (row) {
+                const rows = this.model.getDataSource().getRows();
+                const i = rows.indexOf(row);
+                if (i === -1) throw new Error('cannot find active row')
+                return i;
             }
-            const i = rows.indexOf(row);
-            if (i === -1) {
-                throw new Error('cannot find active row')
-            }
-            return i;
         }
         return null;
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
-        return this.state.activeRowKey !== null;
+        if (this.state.activeRowKey !== null) {
+            const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
+            if (row) return true;
+        }
+        return false;
     }
     onFrameChanged = value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));

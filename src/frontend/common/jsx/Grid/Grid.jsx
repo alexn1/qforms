@@ -10,8 +10,8 @@ class Grid extends ReactComponent {
         this.columns = {};
         this.head = React.createRef();
     }
-    getActiveRow() {
-        if (this.props.getActiveRow) return this.props.getActiveRow();
+    getActiveRowIndex() {
+        if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
         return this.state.row;
     }
     setActiveRow(i) {
@@ -22,10 +22,10 @@ class Grid extends ReactComponent {
         return this.state.column;
     }
     isRowActive(i) {
-        return i === this.getActiveRow();
+        return i === this.getActiveRowIndex();
     }
     isCellActive(i, j) {
-        return i === this.getActiveRow() && j === this.getActiveColumn();
+        return i === this.getActiveRowIndex() && j === this.getActiveColumn();
     }
     onCellMouseDown = e => {
         // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
@@ -52,13 +52,13 @@ class Grid extends ReactComponent {
         if (this.props.onDoubleClick) this.props.onDoubleClick(row);
     }
     selectCell(i, j) {
-        if (this.getActiveRow() === i && this.getActiveColumn() === j) return;
+        if (this.getActiveRowIndex() === i && this.getActiveColumn() === j) return;
         this.setActiveRow(i);
         this.state.column = j;
         this.rerender();
     }
     selectRow(i) {
-        if (this.getActiveRow() === i ) return;
+        if (this.getActiveRowIndex() === i ) return;
         this.setActiveRow(i);
         this.rerender();
     }
