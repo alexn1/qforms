@@ -242,7 +242,9 @@ class HostApp {
     async fill(req, context) {
         console.log('HostApp.fill', this.getApplication(req).getName());
         const application = this.getApplication(req);
+        const start = Date.now();
         const data = await application.fill(context);
+        data.time = Date.now() - start;
         return data;
     }
 

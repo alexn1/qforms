@@ -55,6 +55,9 @@ class ApplicationController extends Controller {
     createView(root) {
         console.log('ApplicationController.createView');
         this.view = ApplicationController.createReactComponent(root, ApplicationView, {ctrl: this});
+        if (this.statusbar) {
+            this.statusbar.setLastQueryTime(this.model.data.time);
+        }
     }
 
     getMenuItemsProp() {
