@@ -250,9 +250,10 @@ class Application extends Model {
     async createLog(context, values) {
         // console.log('Application.createLog', values);
         if (values.stack === undefined) values.stack = null;
+        if (values.created === undefined) values.created = new Date();
         await this.getDatabase('default').queryResult(
             context,
-            'insert into log(type, source, ip, message, stack, data) values ({type}, {source}, {ip}, {message}, {stack}, {data})',
+            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
             values
         );
     }
