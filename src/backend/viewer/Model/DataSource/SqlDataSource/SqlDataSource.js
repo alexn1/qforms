@@ -77,7 +77,10 @@ class SqlDataSource extends DataSource {
 
         // rows
         if (this.getAttr('limit')) {
-            context.params.limit = parseInt(this.getAttr('limit'));
+            if (!context.params.frame) throw new Error('no frame param');
+            const limit = parseInt(this.getAttr('limit'));
+            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.limit = limit;
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
         for (let i = 0; i < rows.length; i++) {
@@ -103,7 +106,10 @@ class SqlDataSource extends DataSource {
 
         // rows
         if (this.getAttr('limit')) {
-            context.params.limit = parseInt(this.getAttr('limit'));
+            if (!context.params.frame) throw new Error('no frame param');
+            const limit = parseInt(this.getAttr('limit'));
+            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.limit = limit;
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
@@ -215,7 +221,7 @@ class SqlDataSource extends DataSource {
             return data;
         }
         if (this.getAttr('limit')) {
-            context.params.offset = 0;
+            context.params.frame = 1;
         }
         if (this.isDefaultOnRowForm()) {
             const row = await this.selectSingle(context);

@@ -4,7 +4,6 @@ class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.frame  = 1;
-        this.offset = 0;
         this.count  = data.count;
     }
 
@@ -163,7 +162,6 @@ class SqlDataSource extends DataSource {
                 ...this.getPageParams(),
                 ...(this.getLimit() ? {
                     frame : this.frame,
-                    offset: this.offset,
                 } : {}),
             }
         });
@@ -176,15 +174,17 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.selectSingle', this.getFullName());
         const page = this.getPage();
         const form = this.getForm();
-        const _params = {...params, ...this.params};
-        if (this.getLimit()) _params.offset = this.offset;
         const data = await this.getApp().request({
             action        : 'selectSingle',
-            page          : page ? page.getName() : null,
-            form          : form ? form.getName() : null,
+            parentPageName: page ? page.parentPageName : null,
+            page          : page ? page.getName()      : null,
+            form          : form ? form.getName()      : null,
             ds            : this.getName(),
-            params        : _params,
-            parentPageName: page ? page.parentPageName : null
+            params        : {
+                ...this.params,
+                ...this.getPageParams(),
+                ...params,
+            }
         });
         if (!data.row) throw new Error('no row');
         if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
@@ -318,8 +318,5 @@ class SqlDataSource extends DataSource {
     }
     setFrame(frame) {
         this.frame = frame;
-        if (this.getLimit()) {
-            this.offset = (frame - 1) * this.getLimit();
-        }
     }
 }
