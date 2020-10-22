@@ -373,6 +373,11 @@ class Helper {
             });
         });
     }
+
+    static today() {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
 }
 
 module.exports = Helper;
