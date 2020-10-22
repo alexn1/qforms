@@ -134,15 +134,6 @@ class SqlDataSource extends DataSource {
         throw new Error(`${this.getFullName()}: delete remove not implemented yet`);
     }
 
-    /*async refill(params) {
-        this.offset = 0;
-        const data = await this.select(params);
-        const _new = this.getKeysAndChilds(data.rows);
-        const _old = this;
-        _old.rowsByKey = _new.rowsByKey;
-        _old.childs    = _new.childs;
-    }*/
-
     getPageParams() {
         const page = this.getPage();
         return page ? page.params : {};
@@ -170,8 +161,10 @@ class SqlDataSource extends DataSource {
             params        : {
                 ...this.params,
                 ...this.getPageParams(),
-                offset: this.offset,
-                frame: this.frame
+                ...(this.getLimit() ? {
+                    frame : this.frame,
+                    offset: this.offset,
+                } : {}),
             }
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
@@ -311,7 +304,8 @@ class SqlDataSource extends DataSource {
         return this.getLimit() ? Math.ceil(this.count / this.getLimit()) : null;
     }
     getLimit() {
-        return this.data.limit;
+        if (this.data.limit) return parseInt(this.data.limit);
+        return null;
     }
     getCount() {
         return this.count;
@@ -323,7 +317,9 @@ class SqlDataSource extends DataSource {
         return this.frame;
     }
     setFrame(frame) {
-        this.frame  = frame;
-        this.offset = (frame - 1) * this.getLimit();
+        this.frame = frame;
+        if (this.getLimit()) {
+            this.offset = (frame - 1) * this.getLimit();
+        }
     }
 }
