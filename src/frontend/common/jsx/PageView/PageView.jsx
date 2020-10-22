@@ -47,14 +47,14 @@ class PageView extends ReactComponent {
         const width = '150px';
         return (
             <div className="toolbar">
-                {model.hasRowFormWithDefaultDsAndTable() &&
-                <Button
-                    key="saveAndClose"
-                    width={width}
-                    title={model.getApp().getText().page.saveAndClose}
-                    onClick={ctrl.onSaveAndCloseClick}
-                    enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
-                />
+                {model.hasRowFormWithDefaultSqlDataSource() &&
+                    <Button
+                        key="saveAndClose"
+                        width={width}
+                        title={model.getApp().getText().page.saveAndClose}
+                        onClick={ctrl.onSaveAndCloseClick}
+                        enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
+                    />
                 }
                 <Button
                     key="close"

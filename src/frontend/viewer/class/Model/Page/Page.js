@@ -85,18 +85,16 @@ class Page extends Model {
         return result;
     }
 
-    hasRowFormWithDefaultDsAndTable() {
-        let result = false;
-        for (const formName in this.forms) {
-            const form = this.forms[formName].data;
-            if (form.class === 'RowForm') {
-                if (form.dataSources['default']['table'] !== '') {
-                    result = true;
-                    break;
+    hasRowFormWithDefaultSqlDataSource() {
+        for (const name in this.forms) {
+            const form = this.forms[name];
+            if (form.getClassName() === 'RowForm') {
+                if (form.dataSources.default && form.dataSources.default.getClassName() === 'SqlDataSource') {
+                    return true;
                 }
             }
         }
-        return result;
+        return false;
     }
 
     hasRowForm() {
