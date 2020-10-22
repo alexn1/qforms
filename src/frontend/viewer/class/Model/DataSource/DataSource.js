@@ -14,14 +14,7 @@ class DataSource extends Model {
 
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
-        //console.log('limit', this.getLimit());
-        //console.log('count', this.count);
-        // creating index
-        // this.length = this.data.rows.length;
         this.setRows(this.data.rows);
-        /*const vals = this.getKeysAndChilds(this.data.rows);
-        this.rowsByKey = vals.rowsByKey;
-        this.childs    = vals.childs;*/
     }
 
     setRows(rows) {

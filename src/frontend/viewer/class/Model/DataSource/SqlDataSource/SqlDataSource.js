@@ -4,8 +4,8 @@ class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.offset = 0;
-        this.count = data.count;
         this._frame = 1;
+        this.count  = data.count;
     }
 
     init() {
@@ -109,12 +109,6 @@ class SqlDataSource extends DataSource {
         this.updateRow(key, data.row);
     }
 
-    async refresh() {
-        console.log('SqlDataSource.refresh', this.getFullName());
-        if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
-        await this._refresh();
-    }
-
     async onTableInsert(e) {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
@@ -122,7 +116,7 @@ class SqlDataSource extends DataSource {
             console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
-        await this._refresh();
+        await this.refresh();
         /*if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
         this.emit('insert', {source: this, key: e.key});*/
         if (this.parent.onDataSourceUpdate) {
@@ -149,35 +143,32 @@ class SqlDataSource extends DataSource {
         _old.childs    = _new.childs;
     }*/
 
-    async _refresh() {
-        console.log('SqlDataSource._refresh', this.getFullName());
+    getPageParams() {
         const page = this.getPage();
-        const params = page ? page.params : {};
-        const data = await this.select(params);
-        // if (this.data.dumpFirstRowToParams === 'true') {
-        //     this.dumpFirstRowToParams(data.rows);
-        // }
-        /*const _old = this;
-        const _new = this.getKeysAndChilds(data.rows);		// generate hash table with new keys
-        this.sync(_old, _new, '[null]');*/
+        return page ? page.params : {};
+    }
+
+    async refresh() {
+        console.log('SqlDataSource.refresh', this.getFullName());
+        if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
+        const data = await this.select();
         this.count = data.count;
         this.setRows(data.rows);
         this.emit('refresh', {source: this});
     }
 
-    async frame(params, frame) {
-        console.log('SqlDataSource.frame', params, frame);
-        this._frame = frame;
-        // this.offset = (frame - 1) * this.getLimit();
-        // const data = await this.select(params);
+    async frame(frame) {
+        console.log('SqlDataSource.frame', frame);
+        this.setFrame(frame);
+        await this.refresh();
     }
 
-    async select(params) {
+    async select() {
         console.log('SqlDataSource.select', this.getFullName());
         const page = this.getPage();
         const form = this.getForm();
         // const _params = QForms.merge(params, this.params);
-        const _params = {...params, ...this.params};
+        const _params = {...this.params, ...this.getPageParams()};
         if (this.getLimit()) _params.offset = this.offset;
         const data = await this.getApp().request({
             action        : 'select',
@@ -334,5 +325,9 @@ class SqlDataSource extends DataSource {
     }
     getFrame() {
         return this._frame;
+    }
+    setFrame(frame) {
+        this._frame = frame;
+        this.offset = (frame - 1) * this.getLimit();
     }
 }

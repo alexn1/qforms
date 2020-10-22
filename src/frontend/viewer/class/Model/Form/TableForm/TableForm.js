@@ -14,9 +14,9 @@ class TableForm extends Form {
         this.getDataSource().delete(key);
     }*/
 
-    frame(frame) {
+    /*frame(frame) {
         // console.log('TableForm.frame', frame);
-        this.getDataSource().frame(this.getPage().params, frame);
-    }
+        this.getDataSource().frame(frame);
+    }*/
 
 }
