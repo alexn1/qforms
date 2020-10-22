@@ -41,18 +41,20 @@ class TableFormView extends ReactComponent {
         return (
             <div className="paging">
                 <div className="countBlock">
-                    <span className="count">{dataSource.getFrameLength()} of {dataSource.getCount()}</span>
+                    <span className="count">{dataSource.getRowsLength()} {dataSource.getLimit() && `of ${dataSource.getCount()}`}</span>
                 </div>
-                <div className="gotoBlock">
-                    <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
-                    <ComboBox
-                        value={ctrl.model.getDataSource().getFrame().toString()}
-                        onChange={ctrl.onFrameChanged}
-                        items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
-                        ({value: i+1, title: (i+1).toString()})
-                    )}/>
-                    <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
-                </div>
+                {dataSource.getLimit() &&
+                    <div className="gotoBlock">
+                        <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
+                        <ComboBox
+                            value={ctrl.model.getDataSource().getFrame().toString()}
+                            onChange={ctrl.onFrameChanged}
+                            items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
+                            ({value: i+1, title: (i+1).toString()})
+                        )}/>
+                        <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
+                    </div>
+                }
             </div>
         );
     }

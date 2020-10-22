@@ -310,7 +310,7 @@ class SqlDataSource extends DataSource {
     getCount() {
         return this.count;
     }
-    getFrameLength() {
+    getRowsLength() {
         return this.rows.length;
     }
     getFrame() {
