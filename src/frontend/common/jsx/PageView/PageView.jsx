@@ -46,7 +46,7 @@ class PageView extends ReactComponent {
         const model = ctrl.model;
         const width = '150px';
         return (
-            <div key="one">
+            <div className="toolbar">
                 {model.hasRowFormWithDefaultDsAndTable() &&
                 <Button
                     key="saveAndClose"
@@ -76,20 +76,14 @@ class PageView extends ReactComponent {
             <div className="PageView full place">
                 <div className="frame flex-rows">
                     <h3 className="caption flex-min">{this.renderCaption()}</h3>
-                    {model.hasRowFormWithDefaultDs() &&
-                        [this.renderToolbar(),
-                        <div key="two" className="splitter flex-min">&nbsp;</div>]
-                    }
+                    {model.hasRowFormWithDefaultDs() && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableFormOrTreeForm() &&
-                        [
-                            <div key="one" className="table-forms flex-max place">
-                                <div className="frame">
-                                    <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
-                                </div>
-                            </div>,
-                            <div key="two" className="splitter flex-min"></div>
-                        ]
+                        <div className="table-forms flex-max place">
+                            <div className="frame">
+                                <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
