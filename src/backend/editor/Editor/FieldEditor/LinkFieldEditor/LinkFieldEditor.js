@@ -23,6 +23,7 @@ class LinkFieldEditor extends FieldEditor {
                 width       : params['width']        ? params['width']        :            '0',
                 defaultValue: params['defaultValue'] ? params['defaultValue'] :             '',
                 column      : params['column']       ? params['column']       : params['name'],
+                type        : params['type']         ? params['type']         :             '',
                 // readOnly    : params['readOnly']     ? params['readOnly']     :        'true',
                 notNull     : params['notNull']      ? params['notNull']      :        'false'
             }
