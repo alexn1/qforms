@@ -42,7 +42,7 @@ class ApplicationController extends Controller {
         // console.log('ApplicationController.init');
         this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request', this.listeners.request = this.onRequest.bind(this));
-        this.pages = this.createPages2();
+        this.pages = this.createPages();
         this.activePage = this.pages.length ? this.pages[0] : null;
     }
 
@@ -71,34 +71,12 @@ class ApplicationController extends Controller {
         }));
     }
 
-    /*initTab() {
-        if (!this.view) return;
-        this.tabWidget = new TabWidget(this.view.querySelector('.ApplicationView > .TabWidget'));
-        this.tabWidget.init();
-        this.tabWidget.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-        this.tabWidget.on('tabShow'         , this.listeners.tabShow          = this.onTabShow.bind(this));
-        this.tabWidget.on('tabHide'         , this.listeners.tabHide          = this.onTabHide.bind(this));
-    }*/
-
-    /*createPages() {
-        if (!this.view) return;
-        for (const name in this.model.data.pages) {
-            const page = new Page(this.model.data.pages[name], this.model, {
-                // app : this.model,
-                // data: this.model.data.pages[name],
-                id  : `p${this.getNextPageId()}`
-            });
-            page.init();
-            this.createPageController(page);
-        }
-    }*/
-    createPages2() {
+    createPages() {
         return Object.keys(this.model.data.pages).map(name => {
             // model
             const page = new Page(this.model.data.pages[name], this.model, {
-                // app : this.model,
-                // data: this.model.data.pages[name],
-                id  : `p${this.getNextPageId()}`
+                id   : `p${this.getNextPageId()}`,
+                modal: false
             });
             page.init();
 
@@ -121,40 +99,6 @@ class ApplicationController extends Controller {
         super.deinit();
     }
 
-    /*createPageController(model, select = false, track = false) {
-        console.log('ApplicationController.createPageController', model.getFullName());
-        // const html = QForms.render(model.data.view, {model});
-        // const view = $(html).get(0);
-
-        // tab
-        const [tab, root] = this.tabWidget.createTab2(null, null, null, model.id);
-        if (select) this.tabWidget.selectTab(tab, track);
-
-        // pageController
-        const pageController = PageController.create(model, null, this);
-        pageController.tab = tab;
-        tab.pageController = pageController;
-        pageController.init();
-        // pageController.fill();
-        pageController.createView(root);
-    }*/
-    /*createModalPageController(model) {
-        console.log('ApplicationController.createModalPageController', model.getFullName());
-        // const html = QForms.render(model.data.view, {model});
-        // const view = $(html).get(0);
-
-        const [el, root] = ModalWidget.createElementAndRoot();
-        this.view.appendChild(el);
-        const modal = new ModalWidget(el);
-
-        // pageController
-        const pageController = PageController.create(model, null, this);
-        pageController.modal = modal;
-        pageController.init();
-        // pageController.fill();
-        pageController.createView(root);
-    }*/
-
     onPageSelected(pc) {
         console.log('ApplicationController.onPageSelected', pc.model.getName());
         const i = this.pages.indexOf(pc);
@@ -164,10 +108,6 @@ class ApplicationController extends Controller {
         // const tab = this.findTabByPageController(pageController);
         // this.tabWidget.selectTab(tab);
     }
-
-    /*onTabClosingByUser(e) {
-        e.tab.pageController.close();
-    }*/
 
     /*onTabShow(e) {
         // console.log('ApplicationController.onTabShow', e.tab.pageController);
@@ -216,26 +156,8 @@ class ApplicationController extends Controller {
     }
 
     findPageControllerByPageNameAndKey(pageName, key) {
-        /*// console.log('ApplicationController.findPageControllerByPageNameAndKey', pageName, key);
-        for (let i = 0; i < this.tabWidget.tabList.childNodes.length; i++) {
-            const tab = this.tabWidget.tabList.childNodes[i];
-            if (tab.pageController.model.getName() === pageName && tab.pageController.model.getKey() === key) {
-                return tab.pageController;
-            }
-        }*/
         return this.pages.find(({model}) => model.getName() === pageName && model.getKey() === key);
     }
-
-    /*findTabByPageController(pageController) {
-        // console.log('ApplicationController.findTabByPageController');
-        for (let i = 0; i < this.tabWidget.tabList.childNodes.length; i++) {
-            const tab = this.tabWidget.tabList.childNodes[i];
-            if (tab.pageController === pageController) {
-                return tab;
-            }
-        }
-        return null;
-    }*/
 
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
@@ -282,16 +204,14 @@ class ApplicationController extends Controller {
             }
         }
         const page = new Page(response.page, this.model, {
-            // app           : this.model,
-            // data          : response.page,
             id            : `p${this.getNextPageId()}`,
             params        : params,
             parentPageName: parentPageName,
+            modal         : modal
         });
         page.init();
         const pc = PageController.create(page, this);
         pc.init();
-
 
         if (modal) {
             this.modalPages.push(pc);
@@ -299,12 +219,6 @@ class ApplicationController extends Controller {
             this.pages.push(this.activePage = pc);
         }
         this.rerender();
-        /*
-        if (modal) {
-            this.createModalPageController(page);
-        } else {
-            this.createPageController(page, true, parentPage !== undefined);
-        }*/
     }
 
     getNextPageId() {
@@ -321,14 +235,6 @@ class ApplicationController extends Controller {
             alert(err.message);
         }
     }
-
-    // static createReactRoot(name, props, children) {
-    //     console.log('ApplicationController.createReactRoot', name, props);
-    //     const div = document.createElement('div');
-    //     div.className = name;
-    //     ReactDOM.render(React.createElement(eval(name), props, children), div);
-    //     return div;
-    // }
 
     static createReactComponent(root, type, props = {}, children) {
         // console.log('ApplicationController.createReactComponent', root, type);

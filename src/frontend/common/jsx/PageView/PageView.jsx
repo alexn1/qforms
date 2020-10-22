@@ -56,12 +56,14 @@ class PageView extends ReactComponent {
                         enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
                     />
                 }
-                <Button
-                    key="close"
-                    width={width}
-                    title={model.getApp().getText().page.close}
-                    onClick={ctrl.onClosePageClick}
-                />
+                {model.isModal() &&
+                    <Button
+                        key="close"
+                        width={width}
+                        title={model.getApp().getText().page.close}
+                        onClick={ctrl.onClosePageClick}
+                    />
+                }
             </div>
         );
     }

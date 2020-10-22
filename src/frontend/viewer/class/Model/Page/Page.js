@@ -9,6 +9,7 @@ class Page extends Model {
         this.params         = (options.params !== undefined) ? options.params : {};
         this.dataSources    = {};
         this.forms          = {};
+        this.modal          = !!options.modal;
     }
 
     init() {
@@ -134,6 +135,10 @@ class Page extends Model {
 
     getFullName() {
         return `${this.getName()}(${this.id})`;
+    }
+
+    isModal() {
+        return this.modal;
     }
 
 }
