@@ -301,7 +301,9 @@ class SqlDataSource extends DataSource {
     }
 
     getFramesCount() {
-        return this.getLimit() ? Math.ceil(this.count / this.getLimit()) : null;
+        if (this.count === 0) return 1;
+        if (this.getLimit()) return Math.ceil(this.count / this.getLimit());
+        return 1;
     }
     getLimit() {
         if (this.data.limit) return parseInt(this.data.limit);
