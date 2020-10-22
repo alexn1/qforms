@@ -92,7 +92,7 @@ class TableFormView extends ReactComponent {
                       rows={ctrl.getGridRows()}
                       getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
                       onDoubleClick={ctrl.onGridCellDblClick}
-                      onActiveRowChanged={ctrl.onActiveRowChanged}
+                      onActiveRowChange={ctrl.onActiveRowChange}
                       getActiveRowIndex={ctrl.getActiveRowIndex}
                       renderGridCellView={this.renderGridCellView}
                       updated={ctrl.getUpdated()}

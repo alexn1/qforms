@@ -16,7 +16,7 @@ class Grid extends ReactComponent {
     }
     setActiveRow(i) {
         this.state.row = i;
-        if (this.props.onActiveRowChanged) this.props.onActiveRowChanged(i);
+        if (this.props.onActiveRowChange) this.props.onActiveRowChange(i);
     }
     getActiveColumn() {
         return this.state.column;

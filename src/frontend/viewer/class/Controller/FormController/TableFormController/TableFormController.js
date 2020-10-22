@@ -170,8 +170,8 @@ class TableFormController extends FormController {
         this.invalidate();
         this.rerender();
     }
-    onActiveRowChanged = i => {
-        // console.log('TableFormController.onActiveRowChanged', i);
+    onActiveRowChange = i => {
+        // console.log('TableFormController.onActiveRowChange', i);
         const rows = this.model.getDataSource().getRows();
         this.state.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
         this.rerender();
