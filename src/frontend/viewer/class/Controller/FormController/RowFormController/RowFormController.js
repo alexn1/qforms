@@ -5,7 +5,7 @@ class RowFormController extends FormController {
         super(model, parent);
         this.state = {
             updated: Date.now(),
-            mode   : 'view',
+            mode   : 'edit',
             hasNew : false,
             changed: false,
             valid  : true
@@ -17,6 +17,7 @@ class RowFormController extends FormController {
         const dataSource = this.model.getDataSource();
         dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
         dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
+        if (dataSource.getClassName() === 'SqlDataSource') this.state.mode = 'view';
         this.calcState();
     }
 

@@ -89,7 +89,7 @@ class Page extends Model {
         for (const name in this.forms) {
             const form = this.forms[name];
             if (form.getClassName() === 'RowForm') {
-                if (form.dataSources.default && form.dataSources.default.getClassName() === 'SqlDataSource') {
+                if (form.getDataSource().getClassName() === 'SqlDataSource') {
                     return true;
                 }
             }

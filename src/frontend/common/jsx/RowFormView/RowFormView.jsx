@@ -48,7 +48,7 @@ class RowFormView extends ReactComponent {
                 ]
                 }
                 {Object.keys(ctrl.model.data.actions).length > 0 &&
-                <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
+                    <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
                 }
             </div>
         );
