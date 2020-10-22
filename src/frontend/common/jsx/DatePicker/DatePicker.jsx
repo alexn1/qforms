@@ -18,7 +18,7 @@ class DatePicker extends ReactComponent {
     }
 
     calcSelectedMonth() {
-        const dates = [DatePicker.getToday().getTime()];
+        const dates = [Helper.today().getTime()];
         if (this.props.minDate) dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
         if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
         if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
@@ -26,10 +26,10 @@ class DatePicker extends ReactComponent {
         return [date.getFullYear(), date.getMonth()];
     }
 
-    static getToday() {
+    /*static getToday() {
         const now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    }
+    }*/
 
     static getTodayArr() {
         const now = new Date();
@@ -130,7 +130,7 @@ class DatePicker extends ReactComponent {
     render() {
         // console.log('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
-        const today = DatePicker.getToday();
+        const today = Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (

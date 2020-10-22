@@ -139,7 +139,7 @@ class DatePickerWidget extends Widget{
 
     selectMonth(year, month) {
         // console.log('DatePickerWidget.selectMonth', year, month);
-        const today = DatePickerWidget.getToday();
+        const today = Helper.today();
         const minDate = this.minDate !== null ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
 

@@ -37,4 +37,9 @@ class Helper {
         return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
 
+    static today() {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
 }
