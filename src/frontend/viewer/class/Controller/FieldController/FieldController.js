@@ -41,9 +41,9 @@ class FieldController extends Controller {
 
     stringToValue(stringValue) {
         // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
-        if (stringValue.trim() === '') return null;
         const fieldType = this.model.getType();
         // console.log('fieldType:', fieldType);
+        if (stringValue.trim() === '') return null;
         if (fieldType === 'object' || fieldType === 'boolean') {
             return JSON.parse(stringValue);
         } else if (fieldType === 'date') {
