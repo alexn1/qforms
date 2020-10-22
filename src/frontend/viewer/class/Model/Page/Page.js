@@ -98,27 +98,21 @@ class Page extends Model {
     }
 
     hasRowForm() {
-        let result = false;
         for (const formName in this.forms) {
-            const form = this.forms[formName].data;
-            if (form.class === 'RowForm') {
-                result = true;
-                break;
-            }
+            const form = this.forms[formName];
+            if (form.getClassName() === 'RowForm') return true;
         }
-        return result;
+        return false;
     }
 
     hasTableFormOrTreeForm() {
-        let result = false;
         for (const formName in this.forms) {
-            const form = this.forms[formName].data;
-            if (form.class === 'TableForm' || form.class === 'TreeForm') {
-                result = true;
-                break;
+            const form = this.forms[formName];
+            if (form.getClassName() === 'TableForm' || form.getClassName() === 'TreeForm') {
+                return true;
             }
         }
-        return result;
+        return false;
     }
 
     isNewMode() {
