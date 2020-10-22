@@ -199,20 +199,23 @@ class TableFormController extends FormController {
     onFrameChanged = value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
-        this.model.getDataSource().frame(frame);
+        this.model.getDataSource().setFrame(frame);
+        this.model.getDataSource().refresh();
         this.rerender();
     }
     onNextClick = () => {
         console.log('TableFormController.onNextClick');
-        const nextFrame = this.model.getDataSource().getFrame() + 1;
-        this.model.getDataSource().frame(nextFrame);
+        const frame = this.model.getDataSource().getFrame() + 1;
+        this.model.getDataSource().setFrame(frame);
+        this.model.getDataSource().refresh();
         this.rerender();
     }
 
     onPreviousClick = () => {
         console.log('TableFormController.onPreviousClick');
-        const prevFrame = this.model.getDataSource().getFrame() - 1;
-        this.model.getDataSource().frame(prevFrame);
+        const frame = this.model.getDataSource().getFrame() - 1;
+        this.model.getDataSource().setFrame(frame);
+        this.model.getDataSource().refresh();
         this.rerender();
     }
     canPrev() {

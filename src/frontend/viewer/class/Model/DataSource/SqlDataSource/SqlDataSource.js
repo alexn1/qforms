@@ -3,8 +3,8 @@
 class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
+        this.frame  = 1;
         this.offset = 0;
-        this._frame = 1;
         this.count  = data.count;
     }
 
@@ -157,26 +157,22 @@ class SqlDataSource extends DataSource {
         this.emit('refresh', {source: this});
     }
 
-    async frame(frame) {
-        console.log('SqlDataSource.frame', frame);
-        this.setFrame(frame);
-        await this.refresh();
-    }
-
     async select() {
         console.log('SqlDataSource.select', this.getFullName());
         const page = this.getPage();
         const form = this.getForm();
-        // const _params = QForms.merge(params, this.params);
-        const _params = {...this.params, ...this.getPageParams()};
-        if (this.getLimit()) _params.offset = this.offset;
         const data = await this.getApp().request({
             action        : 'select',
-            page          : page ? page.getName() : null,
-            form          : form ? form.getName() : null,
+            parentPageName: page ? page.parentPageName : null,
+            page          : page ? page.getName()      : null,
+            form          : form ? form.getName()      : null,
             ds            : this.getName(),
-            params        : _params,
-            parentPageName: page ? page.parentPageName : null
+            params        : {
+                ...this.params,
+                ...this.getPageParams(),
+                offset: this.offset,
+                frame: this.frame
+            }
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
@@ -324,10 +320,10 @@ class SqlDataSource extends DataSource {
         return this.rows.length;
     }
     getFrame() {
-        return this._frame;
+        return this.frame;
     }
     setFrame(frame) {
-        this._frame = frame;
+        this.frame  = frame;
         this.offset = (frame - 1) * this.getLimit();
     }
 }
