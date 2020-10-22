@@ -127,10 +127,12 @@ class Field extends Model {
     }
 
     getType() {
-        if (this.data.column) {
+        const dataSource = this.getDataSource();
+        if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
             return this.getDataSource().getType(this.data.column);
         }
-        return null;
+        if (this.data.type) return this.data.type;
+        throw new Error(`${this.getFullName()}: field type empty`);
     }
 
     getForm() {
