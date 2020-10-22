@@ -11,8 +11,6 @@ class TableFormController extends FormController {
 
     init() {
         super.init();
-        // this.model.on('refilled', this.listeners.refilled = this.onRefilled.bind(this));
-        // this.model.on('refresh', this.listeners.refreshed = this.onRefreshed.bind(this));
         // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         // this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
         const dataSource = this.model.getDataSource();
@@ -36,74 +34,12 @@ class TableFormController extends FormController {
     deinit() {
         // this.parent.off('hide', this.listeners.hide);
         // this.parent.off('show', this.listeners.show);
-        // this.model.off('refilled', this.listeners.refilled);
-        // this.model.off('refresh', this.listeners.refreshed);
-
-        // data source events
         const dataSource = this.model.getDataSource();
         dataSource.off('refresh', this.listeners.refresh);
         dataSource.off('update' , this.listeners.update);
         dataSource.off('delete' , this.listeners.delete);
-
         super.deinit();
     }
-
-    /*fill() {
-        // console.log('TableFormController.fill', this.model.getFullName());
-        super.fill();
-        const dataSource = this.model.getDataSource();
-        if (dataSource.getLimit()) {
-            $(this.view).find('.paging').css('display', 'block');
-            this.setCountText();
-        }
-        this.framesCount = dataSource.getFramesCount();
-        if (this.framesCount) {
-            for (let i = 1; i <= this.framesCount; i++) {
-                const option = $('<option></option>');
-                option.val(i);
-                option.html(i);
-                this.$goto.append(option);
-            }
-        }
-        this.grid.fill();
-    }*/
-
-    /*setCountText() {
-        const dataSource = this.model.getDataSource();
-        const count = `${dataSource.length} of ${dataSource.count}`;
-        this.$count.text(count);
-    }*/
-
-    /*updateCountAndGoTo() {
-        const dataSource = this.model.getDataSource();
-        if (dataSource.getLimit()) {
-            this.setCountText();
-        }
-        this.framesCount = dataSource.getFramesCount();
-        if (this.framesCount) {
-            this.$goto.empty();
-            for (let i = 1; i <= this.framesCount; i++) {
-                const option = $('<option></option>');
-                option.val(i);
-                option.html(i);
-                this.$goto.append(option);
-            }
-        }
-    }*/
-
-    /*onRefilled(ea) {
-        console.log('TableFormController.onRefilled', this.model.getFullName());
-        this.grid.clear();
-        this.updateCountAndGoTo();
-        this.grid.fill();
-        this.rerender();
-    }*/
-
-    /*onRefreshed(ea) {
-        console.log('TableFormController.onRefreshed', this.model.getFullName());
-        this.updateCountAndGoTo();
-        this.rerender();
-    }*/
 
     onNewClick = async e => {
         await this.new();
@@ -122,11 +58,6 @@ class TableFormController extends FormController {
             this.model.getDataSource().delete(this.state.activeRowKey);
         }
     }
-
-    /*onGotoChange() {
-        const frame = parseInt(this.value);
-        this.model.frame(frame);
-    }*/
 
     onGridCellDblClick = async (row) => {
         // console.log('TableFormController.onGridCellDblClick', row);
@@ -266,32 +197,22 @@ class TableFormController extends FormController {
         return this.state.activeRowKey !== null;
     }
     onFrameChanged = value => {
-        console.log('TableFormController.onFrameChanged', parseInt(value));
+        // console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
-        this.model.getDataSource().setFrame(frame);
+        this.model.frame(frame);
         this.rerender();
     }
     onNextClick = () => {
         console.log('TableFormController.onNextClick');
-        /*const frame = parseInt(this.$goto.val()) + 1;
-        if (frame <= this.framesCount) {
-            this.$goto.val(frame);
-            this.model.frame(frame);
-        }*/
         const nextFrame = this.model.getDataSource().getFrame() + 1;
-        this.model.getDataSource().setFrame(nextFrame);
+        this.model.frame(nextFrame);
         this.rerender();
     }
 
     onPreviousClick = () => {
         console.log('TableFormController.onPreviousClick');
-        /*const frame = parseInt(this.$goto.val()) - 1;
-        if (frame > 0) {
-            this.$goto.val(frame);
-            this.model.frame(frame);
-        }*/
         const prevFrame = this.model.getDataSource().getFrame() - 1;
-        this.model.getDataSource().setFrame(prevFrame);
+        this.model.frame(prevFrame);
         this.rerender();
     }
     canPrev() {

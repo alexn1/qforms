@@ -15,6 +15,7 @@ class TableForm extends Form {
     }*/
 
     frame(frame) {
+        // console.log('TableForm.frame', frame);
         this.getDataSource().frame(this.getPage().params, frame);
     }
 
