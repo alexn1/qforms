@@ -86,7 +86,7 @@ class SqlDataSource extends DataSource {
 
         // count
         let count;
-        if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
+        if (this.isDefaultOnTableForm() && this.getAttr('countQuery')) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getParams(context));
                 count = parseInt(count);
