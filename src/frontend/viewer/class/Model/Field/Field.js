@@ -59,7 +59,7 @@ class Field extends Model {
     valueToParams(row) {
         // console.log('Field.valueToParams', this.getFullName());
         if (this.data.column) {
-            this.getPage().params[this.getFullName()] = this.getValue(row);
+            this.getPage().params[this.getFullName()] = this.getValueFromDataSource(row);
         }
     }
 
@@ -107,7 +107,7 @@ class Field extends Model {
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
         if (this.data.column) {
-            let value = this.getForm().getDataSource().getValue(row, this.data.column);
+            let value = this.getValueFromDataSource(row);
             if (value === null) return null;
             if (value === undefined) return undefined;
             const fieldType = this.getType();
