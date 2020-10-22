@@ -51,12 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return value;
     }
 
-    const value = {abc: new Date()};
+    const value = [new Date(), 1, null];
     console.log('value:', value);
-    const json = JSON.stringify(value);
+    const json = JSON.stringify(value.map(val => JSON.stringify(val)));
     console.log('json:', json);
 
-    console.log("parsed:", JSON.parse(json, dateTimeReviver));
+    const value2 = JSON.parse(json);
+    console.log('value2:', value2);
+    console.log("parsed:", value2.map(val => JSON.parse(val, dateTimeReviver)));
 
     // console.log(JSON.parse("{\"abc\": \"2020-10-22T19:41:41.043Z\"}"));
     //
