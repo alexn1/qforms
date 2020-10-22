@@ -28,8 +28,8 @@ class SqlDataSource extends DataSource {
         super.deinit();
     }
 
-    getColumnType(column) {
-        // console.log('SqlDataSource.getColumnType', column);
+    getType(column) {
+        // console.log('SqlDataSource.getType', column);
         const type = this.getTable().getColumn(column).getType();
         // console.log('type:', type);
         return type;

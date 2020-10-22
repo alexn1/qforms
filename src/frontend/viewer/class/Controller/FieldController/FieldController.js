@@ -42,15 +42,15 @@ class FieldController extends Controller {
     stringToValue(stringValue) {
         // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
         if (stringValue.trim() === '') return null;
-        const columnType = this.model.getColumnType();
-        // console.log('columnType:', columnType);
-        if (columnType === 'object' || columnType === 'boolean') {
+        const fieldType = this.model.getType();
+        // console.log('fieldType:', fieldType);
+        if (fieldType === 'object' || fieldType === 'boolean') {
             return JSON.parse(stringValue);
-        } else if (columnType === 'date') {
+        } else if (fieldType === 'date') {
             const date = new Date(stringValue);
             if (date.toString() === 'Invalid Date') throw new Error(`invalid date: ${stringValue}`);
             return date;
-        } else if (columnType === 'number') {
+        } else if (fieldType === 'number') {
             const num = Number(stringValue);
             if (isNaN(num)) throw new Error('not a number');
             return num;

@@ -69,14 +69,14 @@ class Field extends Model {
 
     getValueForDataSource(value) {
         if (value === undefined || value === null) return value;
-        const columnType = this.getColumnType();
+        const fieldType = this.getType();
         const valueType = typeof value;
-        if (columnType === 'date') {
+        if (fieldType === 'date') {
             if (!(value instanceof Date)) {
                 throw new Error(`${this.getFullName()}: value not instance of Date`);
             }
-        } else if (columnType !== valueType) {
-            throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${columnType}`);
+        } else if (fieldType !== valueType) {
+            throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${fieldType}`);
         }
         if (valueType === 'object') {
             if (value instanceof Date) return value.toISOString();
@@ -106,12 +106,12 @@ class Field extends Model {
             let value = this.getForm().getDataSource().getValue(row, this.data.column);
             if (value === null) return null;
             if (value === undefined) return undefined;
-            const columnType = this.getColumnType();
-            if (columnType === 'date') {
+            const fieldType = this.getType();
+            if (fieldType === 'date') {
                 // if (value === undefined) return null; // workaround for new row
                 if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
                 return new Date(value);
-            } else if (columnType === 'object') {
+            } else if (fieldType === 'object') {
                 return JSON.parse(value);
             }
             return value;
@@ -126,9 +126,9 @@ class Field extends Model {
         return this.getForm().getDataSource();
     }
 
-    getColumnType() {
+    getType() {
         if (this.data.column) {
-            return this.getDataSource().getColumnType(this.data.column);
+            return this.getDataSource().getType(this.data.column);
         }
         return null;
     }
