@@ -162,4 +162,7 @@ class Field extends Model {
     getWidth() {
         return this.data.width !== '0' ? parseInt(this.data.width) : 100;
     }
+    getFullName() {
+        return `${this.getForm().getName()}.${this.getPage().getName()}.${this.getName()}`;
+    }
 }
