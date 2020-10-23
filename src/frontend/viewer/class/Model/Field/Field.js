@@ -107,18 +107,14 @@ class Field extends Model {
             if (value === undefined) return undefined;
             const fieldType = this.getType();
             if (fieldType === 'date') {
-                // if (value === undefined) return null; // workaround for new row
                 if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
                 return new Date(value);
-            } else if (fieldType === 'object') {
-                return JSON.parse(value);
             }
+            if (fieldType === 'object') return JSON.parse(value);
             return value;
-        } else if (this.data.value) {
-            return eval(this.data.value);
-        } else {
-            throw new Error(`no column and no value in field: ${this.getFullName()}`);
         }
+        if (this.data.value) return eval(this.data.value);
+        throw new Error(`no column and no value in field: ${this.getFullName()}`);
     }
 
     getDataSource() {
