@@ -90,7 +90,7 @@ class Form extends Model {
             page: this.getPage().getName(),
             form: this.getName(),
             name: name,
-            params: params
+            params: Helper.encodeObject(params)
         });
     }
 

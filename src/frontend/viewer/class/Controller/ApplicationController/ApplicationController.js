@@ -174,35 +174,22 @@ class ApplicationController extends Controller {
             this.onPageSelected(pageController);
             return;
         }
-
         const parentPageName = parentPage ? parentPage.getName() : null;
-        let keyParams = {};
-        const params = {};
-        //console.log('open ' + name + ' with key: ' + key);
-        if (key) {
-            keyParams = QForms.keyToParams(key);
-            for (const keyName in keyParams) {
-                params[keyName] = keyParams[keyName];
-            }
-        }
 
-        // if page doesn't exist, create it
+        const params = {
+            ...(key ? QForms.keyToParams(key) : {}),
+            ...(parentPage ? parentPage.params : {})
+        };
+        //console.log('open ' + name + ' with key: ' + key);
+
         const response = await this.model.request({
             action        : 'page',
             page          : name,
             newMode       : newMode,
             parentPageName: parentPageName,
-            params        : params
+            params        : Helper.encodeObject(params)
         });
 
-        // copy params from parent page to make possible refer to parent page params
-        if (parentPage !== undefined) {
-            for (const name in parentPage.params) {
-                if (keyParams[name] === undefined) {
-                    params[name] = parentPage.params[name];
-                }
-            }
-        }
         const page = new Page(response.page, this.model, {
             id            : `p${this.getNextPageId()}`,
             params        : params,
@@ -212,12 +199,7 @@ class ApplicationController extends Controller {
         page.init();
         const pc = PageController.create(page, this);
         pc.init();
-
-        if (modal) {
-            this.modalPages.push(pc);
-        } else {
-            this.pages.push(this.activePage = pc);
-        }
+        modal ? this.modalPages.push(pc) : this.pages.push(this.activePage = pc);
         this.rerender();
     }
 

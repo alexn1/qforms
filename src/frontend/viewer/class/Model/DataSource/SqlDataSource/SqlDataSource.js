@@ -180,11 +180,11 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()      : null,
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
-            params        : {
+            params        : Helper.encodeObject({
                 ...this.params,
                 ...this.getPageParams(),
                 ...params,
-            }
+            })
         });
         if (!data.row) throw new Error('no row');
         if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
