@@ -80,6 +80,8 @@ class TableFormView extends ReactComponent {
         return null;
     }
     shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TableFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
+        if (nextProps.updated - this.props.updated) return true;
         return false;
     }
     render() {

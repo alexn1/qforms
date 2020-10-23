@@ -74,6 +74,7 @@ class RowFormController extends FormController {
     onDataSourceUpdate = e => {
         console.log('RowFormController.onDataSourceUpdate', this.model.getFullName());
         this.refill();
+        this.invalidate();
         this.calcState();
         this.parent.onFormUpdate(e);
     }
@@ -147,7 +148,7 @@ class RowFormController extends FormController {
     onFieldChange(e) {
         console.log('RowFormController.onFieldChange', this.model.getFullName());
         this.calcState();
-        this.rerender();
+        this.invalidate();
         super.onFieldChange(e);
     }
 

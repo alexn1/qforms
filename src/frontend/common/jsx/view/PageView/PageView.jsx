@@ -8,7 +8,12 @@ class PageView extends ReactComponent {
             return {
                 name: form.getName(),
                 title: form.data.caption,
-                content: <TableFormView key={name} ctrl={ctrl.forms[name]} onCreate={formController.onViewCreate}/>
+                content: <TableFormView
+                    key={name}
+                    ctrl={ctrl.forms[name]}
+                    onCreate={formController.onViewCreate}
+                    updated={formController.getUpdated()}
+                />
             };
         });
     }
@@ -21,6 +26,7 @@ class PageView extends ReactComponent {
                 key={name}
                 ctrl={formController}
                 onCreate={formController.onViewCreate}
+                updated={formController.getUpdated()}
             />;
         });
     }

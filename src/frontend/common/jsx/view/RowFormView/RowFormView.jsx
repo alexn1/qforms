@@ -100,6 +100,8 @@ class RowFormView extends ReactComponent {
         );
     }
     shouldComponentUpdate(nextProps, nextState) {
+        // console.log('RowFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
+        if (nextProps.updated - this.props.updated) return true;
         return false;
     }
     render() {

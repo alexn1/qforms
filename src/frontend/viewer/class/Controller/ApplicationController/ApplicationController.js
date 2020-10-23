@@ -105,8 +105,6 @@ class ApplicationController extends Controller {
         if (i === -1) throw new Error(`no page controller ${pc.model.getName()} in pages`);
         this.activePage = pc;
         this.tab.rerender();
-        // const tab = this.findTabByPageController(pageController);
-        // this.tabWidget.selectTab(tab);
     }
 
     /*onTabShow(e) {
