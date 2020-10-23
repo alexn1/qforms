@@ -378,14 +378,6 @@ class Helper {
         const now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
     }
-
-    static encodeParams(params) {
-        const eParams = {};
-        for (const name in params) {
-            eParams[name] = JSON.stringify(params[name]);
-        }
-        return eParams;
-    }
 }
 
 module.exports = Helper;
