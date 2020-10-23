@@ -56,7 +56,7 @@
     <!-- app links end -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const data = <%-JSON.stringify(data, null, 4)%>;
+        const data = <%- JSON.stringify(data, null, 4).replace(/&quot;/g, '\\"')  %>;
         const qforms = new QForms(data);
         qforms.init();
     });
