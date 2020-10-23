@@ -135,7 +135,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const { changes } = context.body;
+        const changes = context.changes;
         // console.log('changes:', changes);
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
