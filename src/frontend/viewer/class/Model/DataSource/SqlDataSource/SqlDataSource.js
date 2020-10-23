@@ -35,6 +35,14 @@ class SqlDataSource extends DataSource {
         return type;
     }
 
+    static encodeChanges(changes) {
+        const eChanges = {};
+        for (const key in changes) {
+            eChanges[key] = Helper.encodeObject(changes[key]);
+        }
+        return eChanges;
+    }
+
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
         if (this.data.table === '') throw new Error(`data source has no table: ${this.getName()}`);
@@ -45,7 +53,7 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            changes       : this.getChangesByKey(),
+            changes       : SqlDataSource.encodeChanges(this.getChangesByKey()),
         });
         const [key] = Object.keys(data);
         if (!key) throw new Error('no updated row');
