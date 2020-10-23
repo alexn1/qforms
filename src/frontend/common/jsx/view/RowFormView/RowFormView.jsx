@@ -88,7 +88,7 @@ class RowFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return (
             <div className="grid">
-                {Object.keys(ctrl.fields).map(name => {
+                {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
                     const fieldCtrl = ctrl.fields[name];
                     return [
                         this.renderFieldLabel(fieldCtrl),
