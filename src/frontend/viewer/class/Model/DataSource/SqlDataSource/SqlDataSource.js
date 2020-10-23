@@ -200,7 +200,7 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : Helper.encodeObject(this.getRowValuesWithChanges(row)),
+            row           : Helper.encodeObject(this.getRowWithChanges(row)),
             parentPageName: page.parentPageName || null
         };
 

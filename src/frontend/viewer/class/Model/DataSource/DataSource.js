@@ -494,7 +494,7 @@ class DataSource extends Model {
         return changes;
     }
 
-    getRowValuesWithChanges(row) {
+    getRowWithChanges(row) {
         if (this.changes.has(row)) {
             return {...row, ...this.changes.get(row)};
         }
