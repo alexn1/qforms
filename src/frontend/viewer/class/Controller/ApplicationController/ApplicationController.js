@@ -175,8 +175,8 @@ class ApplicationController extends Controller {
         const parentPageName = parentPage ? parentPage.getName() : null;
 
         const params = {
-            ...(key ? QForms.keyToParams(key) : {}),
-            ...(parentPage ? parentPage.params : {})
+            ...(parentPage ? parentPage.params : {}),
+            ...(key ? QForms.keyToParams(key) : {})
         };
         //console.log('open ' + name + ' with key: ' + key);
 
