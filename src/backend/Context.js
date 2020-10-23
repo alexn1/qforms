@@ -10,21 +10,14 @@ class Context {
                 context.user = req.session.user[route];
             }
         }
-        if (context.body           === undefined) context.body           = req.body;
-        if (context.params         === undefined) context.params         = req.body.params ? req.body.params : {};
-        if (context.newMode        === undefined) context.newMode        = req.body.newMode;
-        if (context.parentPageName === undefined) context.parentPageName = req.body.parentPageName;
-        if (context.row            === undefined) context.row            = req.body.row;
-
-        if (context.connections === undefined) {
-            context.connections = {};
-        }
-        if (context.querytime === undefined) {
-            context.querytime = {};
-        }
-        if (context.querytime.params === undefined) {
-            context.querytime.params = {};
-        }
+        if (context.body             === undefined) context.body             = req.body;
+        if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
+        if (context.newMode          === undefined) context.newMode          = req.body.newMode;
+        if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
+        if (context.row              === undefined) context.row              = req.body.row;
+        if (context.connections      === undefined) context.connections      = {};
+        if (context.querytime        === undefined) context.querytime        = {};
+        if (context.querytime.params === undefined) context.querytime.params = {};
         return context;
     }
 
@@ -34,6 +27,20 @@ class Context {
             //console.log('release connection: ' + name);
             context.connections[name].release();
         }*/
+    }
+    static decodeObject(obj) {
+        const dObj = {};
+        for (const name in obj) {
+            dObj[name] = JSON.parse(obj[name], Context.dateTimeReviver);
+        }
+        return dObj;
+    }
+    static dateTimeReviver(key, value) {
+        if (typeof value === 'string') {
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
+            if (a) return new Date(value);
+        }
+        return value;
     }
 }
 

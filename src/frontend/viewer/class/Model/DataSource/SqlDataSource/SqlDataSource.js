@@ -157,7 +157,7 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()      : null,
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
-            params        : Helper.encodeParams({
+            params        : Helper.encodeObject({
                 ...this.params,
                 ...this.getPageParams(),
                 ...(this.getLimit() ? {

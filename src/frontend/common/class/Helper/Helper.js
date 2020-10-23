@@ -42,12 +42,12 @@ class Helper {
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
     }
 
-    static encodeParams(params) {
-        const eParams = {};
-        for (const name in params) {
-            eParams[name] = JSON.stringify(params[name]);
+    static encodeObject(obj) {
+        const eObj = {};
+        for (const name in obj) {
+            eObj[name] = JSON.stringify(obj[name]);
         }
-        return eParams;
+        return eObj;
     }
 
 }
