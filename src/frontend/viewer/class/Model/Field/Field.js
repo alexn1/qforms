@@ -8,11 +8,6 @@ class Field extends Model {
     init() {
     }
 
-    // deinit() {
-    //     console.log('Field.deinit:', this.getFullName());
-    //     super.deinit();
-    // }
-
     replaceThis(value) {
         return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
@@ -59,7 +54,7 @@ class Field extends Model {
     valueToParams(row) {
         // console.log('Field.valueToParams', this.getFullName());
         if (this.data.column) {
-            this.getPage().params[this.getFullName()] = this.getValueFromDataSource(row);
+            this.getPage().params[this.getFullName()] = this.getValue(row);
         }
     }
 

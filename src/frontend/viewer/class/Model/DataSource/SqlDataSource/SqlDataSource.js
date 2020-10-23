@@ -157,13 +157,13 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()      : null,
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
-            params        : {
+            params        : Helper.encodeParams({
                 ...this.params,
                 ...this.getPageParams(),
                 ...(this.getLimit() ? {
                     frame : this.frame,
                 } : {}),
-            }
+            })
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
