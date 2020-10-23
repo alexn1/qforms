@@ -11,7 +11,7 @@ class Context {
             }
         }
         // if (context.body             === undefined) context.body             = req.body;
-        if (context.changes          === undefined) context.changes          = req.body.changes;
+        if (context.changes          === undefined) context.changes          = Context.decodeChanges(req.body.changes);
         if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
@@ -35,6 +35,13 @@ class Context {
             dObj[name] = JSON.parse(obj[name], Context.dateTimeReviver);
         }
         return dObj;
+    }
+    static decodeChanges(changes) {
+        const dChanges = {};
+        for (const key in changes) {
+            dChanges[key] = Context.decodeObject(changes[key]);
+        }
+        return dChanges;
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {

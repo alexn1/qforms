@@ -106,7 +106,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     static getUpdateQuery(tableName, values, where) {
-        console.log('PostgreSqlDatabase.getUpdateQuery', tableName);
+        console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
