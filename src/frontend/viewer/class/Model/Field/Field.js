@@ -114,7 +114,7 @@ class Field extends Model {
             return value;
         }
         if (this.data.value) return eval(this.data.value);
-        throw new Error(`no column and no value in field: ${this.getFullName()}`);
+        throw new Error(`${this.getFullName()}: no column and no value in field`);
     }
 
     getDataSource() {

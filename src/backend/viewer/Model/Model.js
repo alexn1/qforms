@@ -24,7 +24,7 @@ class Model extends BaseModel {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const data = {
             class: this.getClassName(),
-            view : await this.getView(),
+            // view : await this.getView(),
             js   : await this.getJs()
         };
         for (const name in this.attributes()) {
