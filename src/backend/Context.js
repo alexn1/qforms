@@ -14,7 +14,7 @@ class Context {
         if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
-        if (context.row              === undefined) context.row              = req.body.row;
+        if (context.row              === undefined) context.row              = Context.decodeObject(req.body.row);
         if (context.connections      === undefined) context.connections      = {};
         if (context.querytime        === undefined) context.querytime        = {};
         if (context.querytime.params === undefined) context.querytime.params = {};

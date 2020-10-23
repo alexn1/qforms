@@ -200,9 +200,10 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : this.getRowValuesWithChanges(row),
+            row           : Helper.encodeObject(this.getRowValuesWithChanges(row)),
             parentPageName: page.parentPageName || null
         };
+
         /*
         const fileColumns = [];
         for (const column in row) {
@@ -282,7 +283,7 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : row,
+            row           : Helper.encodeObject(row),
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
