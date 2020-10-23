@@ -18,6 +18,7 @@ class RowFormDatePickerFieldView extends ReactComponent {
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceHolder()}
+                format={ctrl.model.getFormat()}
             />
         </div>;
     }
