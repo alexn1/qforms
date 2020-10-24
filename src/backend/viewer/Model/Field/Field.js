@@ -36,7 +36,7 @@ class Field extends Model {
         if (value === undefined) {
             value = null;
         }
-        row[column] = value;
+        row[column] = JSON.stringify(value);
     }
 
     dumpRowValueToParams(row, params) {

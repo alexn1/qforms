@@ -35,13 +35,13 @@ class SqlDataSource extends DataSource {
         return type;
     }
 
-    static encodeChanges(changes) {
+    /*static encodeChanges(changes) {
         const eChanges = {};
         for (const key in changes) {
             eChanges[key] = Helper.encodeObject(changes[key]);
         }
         return eChanges;
-    }
+    }*/
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
@@ -53,7 +53,8 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            changes       : SqlDataSource.encodeChanges(this.getChangesByKey()),
+            // changes       : SqlDataSource.encodeChanges(this.getChangesByKey()),
+            changes       : this.getChangesByKey(),
         });
         const [key] = Object.keys(data);
         if (!key) throw new Error('no updated row');
@@ -208,7 +209,8 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : Helper.encodeObject(this.getRowWithChanges(row)),
+            // row           : Helper.encodeObject(this.getRowWithChanges(row)),
+            row           : this.getRowWithChanges(row),
             parentPageName: page.parentPageName || null
         };
 
@@ -291,7 +293,8 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            row           : Helper.encodeObject(row),
+            // row           : Helper.encodeObject(row),
+            row           : row,
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
