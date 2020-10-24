@@ -547,8 +547,7 @@ class HostApp {
     }
     async logError(req, context, err) {
         try {
-            const application = await this.createApplicationIfNotExists(req);
-            await application.createLog(context, {
+            await this.getApplication(req).createLog(context, {
                 type   : 'error',
                 source : 'server',
                 ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -563,7 +562,7 @@ class HostApp {
 
     async logRequest(req, context, time) {
         try {
-            const application = await this.createApplicationIfNotExists(req);
+            const application = this.getApplication(req);
             let args = '';
             if (req.body.params) {
                 args = Object.keys(req.body.params).map(name => `${name}: ${req.body.params[name]}`).join(', ');
