@@ -61,6 +61,10 @@ class Field extends Model {
         return this.parent.parent.parent;
     }
 
+    getPage() {
+        return this.parent.parent;
+    }
+
     getForm() {
         return this.parent;
     }
