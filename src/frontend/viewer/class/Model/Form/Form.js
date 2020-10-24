@@ -45,9 +45,26 @@ class Form extends Model {
         }
     }
 
+    onDataSourceRefresh(e) {
+        // console.log('Form.onDataSourceRefresh', this.getFullName());
+        this.emit('refresh', e);
+    }
+
+    onDataSourceInsert(e) {
+        // console.log('Form.onDataSourceInsert', this.getFullName());
+        this.emit('insert', e);
+    }
+
     onDataSourceUpdate(e) {
         // console.log('Form.onDataSourceUpdate', this.getFullName());
+        this.emit('update', e);
     }
+
+    onDataSourceDelete(e) {
+        // console.log('Form.onDataSourceDelete', this.getFullName());
+        this.emit('delete', e);
+    }
+
 
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());

@@ -17,6 +17,7 @@ class TableFormController extends FormController {
         dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
         dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
         dataSource.on('delete' , this.listeners.delete  = this.onDataSourceDelete);
+        this.model.on('insert' , this.listeners.insert  = this.onModelInsert);
     }
     getGridColumns() {
         return Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
@@ -38,6 +39,7 @@ class TableFormController extends FormController {
         dataSource.off('refresh', this.listeners.refresh);
         dataSource.off('update' , this.listeners.update);
         dataSource.off('delete' , this.listeners.delete);
+        dataSource.off('insert' , this.listeners.insert);
         super.deinit();
     }
 
@@ -167,6 +169,11 @@ class TableFormController extends FormController {
         if (this.state.activeRowKey === e.key) {
             this.state.activeRowKey = null;
         }
+        this.invalidate();
+        this.rerender();
+    }
+    onModelInsert = e => {
+        console.log('TableFormController.onModelInsert', this.model.getFullName(), e.key);
         this.invalidate();
         this.rerender();
     }

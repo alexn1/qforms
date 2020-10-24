@@ -60,8 +60,10 @@ class SqlDataSource extends DataSource {
         this.changes.clear();
         const newValues = data[key];
         const newKey = this.getRowKey(newValues);
-        const event = this.updateRow(key, newValues);
-        this.parent.onDataSourceUpdate(event);
+        this.updateRow(key, newValues);
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, key: key});
+        }
         this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
         return newKey;
     }
@@ -88,9 +90,7 @@ class SqlDataSource extends DataSource {
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
 
-        const event = {source: this, key};
-        this.emit('update', event);
-        return event;
+        return {source: this, key};
     }
 
     getTable() {
@@ -123,11 +123,10 @@ class SqlDataSource extends DataSource {
             console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
-        await this.refresh();
-        /*if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
-        this.emit('insert', {source: this, key: e.key});*/
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, key: e.key});
+        await this.refill();
+        // if (!this.rowsByKey[e.key]) throw new Error(`${this.getFullName()}: no updated row in rowsByKey: ${e.key}`);
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert({source: this, key: e.key});
         }
     }
 
@@ -148,11 +147,17 @@ class SqlDataSource extends DataSource {
 
     async refresh() {
         console.log('SqlDataSource.refresh', this.getFullName());
-        if (this.isChanged()) throw new Error(`cannot refresh changed data source: ${this.getFullName()}`);
+        await this.refill();
+        if (this.parent.onDataSourceRefresh) {
+            this.parent.onDataSourceRefresh({source: this});
+        }
+    }
+
+    async refill() {
+        if (this.isChanged()) throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
         const data = await this.select();
         this.count = data.count;
         this.setRows(data.rows);
-        this.emit('refresh', {source: this});
     }
 
     async select() {
@@ -259,7 +264,9 @@ class SqlDataSource extends DataSource {
             this.params[name] = params[name];
         }
 
-        this.emit('update', {source: this, key});
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert({source: this, key: key});
+        }
 
         // fire insert event
         this.getTable().emit('insert', {source: this, key: key});
@@ -290,7 +297,9 @@ class SqlDataSource extends DataSource {
         };
         const data = await this.getApp().request(args);
         this.removeRow(key);
-        this.emit('delete', {source: this, key: key});
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete({source: this, key: key});
+        }
         this.getTable().emit('delete', {source: this, key: key});
     }
 
