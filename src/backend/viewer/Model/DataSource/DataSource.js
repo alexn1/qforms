@@ -31,7 +31,7 @@ class DataSource extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns       = null;
-        this.parentKeyColumns = null;
+        // this.parentKeyColumns = null;
     }
 
     getDirPath() {
@@ -46,7 +46,7 @@ class DataSource extends Model {
         // console.log('DataSource.init', this.getFullName());
         await super.init();
         this.keyColumns       = this.getKeyColumns();
-        this.parentKeyColumns = this.getParentKeyColumns();
+        // this.parentKeyColumns = this.getParentKeyColumns();
     }
 
     getKeyColumns() {
@@ -56,9 +56,9 @@ class DataSource extends Model {
         return Object.keys(this.data.keyColumns);
     }
 
-    getParentKeyColumns() {
+    /*getParentKeyColumns() {
         return this.data.parentKeyColumns ? Object.keys(this.data.parentKeyColumns) : [];
-    }
+    }*/
 
     checkColumn(row, column) {
         if (!row.hasOwnProperty(column)) {
@@ -71,9 +71,9 @@ class DataSource extends Model {
         this.keyColumns.forEach(column => {
             this.checkColumn(row, column);
         });
-        this.parentKeyColumns.forEach(column => {
+        /*this.parentKeyColumns.forEach(column => {
             this.checkColumn(row, column);
-        });
+        });*/
         if (!(this.parent instanceof qforms.Form) || this.getName() !== 'default') return;
         Object.keys(this.parent.fields).forEach(name => {
             const field = this.parent.fields[name];
@@ -188,9 +188,9 @@ class DataSource extends Model {
         data.keyColumns = this.keyColumns;
 
         // parentKeyColumns
-        if (this.parentKeyColumns.length > 0) {
+        /*if (this.parentKeyColumns.length > 0) {
             data.parentKeyColumns = this.parentKeyColumns;
-        }
+        }*/
 
         // rows from JSON file
         data.rows = await this.getRows();
