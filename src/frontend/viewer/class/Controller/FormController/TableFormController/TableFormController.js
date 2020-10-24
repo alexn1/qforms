@@ -172,6 +172,7 @@ class TableFormController extends FormController {
     }
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e.key);
+        this.state.activeRowKey = e.key;
         this.invalidate();
         this.rerender();
     }
@@ -184,12 +185,16 @@ class TableFormController extends FormController {
     getActiveRowIndex = () => {
         // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);
         if (this.state.activeRowKey) {
+            const rows = this.model.getDataSource().getRows();
             const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
             if (row) {
-                const rows = this.model.getDataSource().getRows();
                 const i = rows.indexOf(row);
                 if (i === -1) throw new Error('cannot find active row')
                 return i;
+            } else {
+                // console.log('rows:', rows);
+                // console.log('this.rowsByKey:', this.model.getDataSource().rowsByKey);
+                console.error('no active row in rows');
             }
         }
         return null;

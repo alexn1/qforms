@@ -30,6 +30,7 @@ class DataSource extends Model {
             const key = this.getRowKey(row);
             this.rowsByKey[key] = row;
         }
+        // console.log('this.rowsByKey:', this.getFullName(), this.rowsByKey);
     }
 
     // deinit() {
@@ -132,7 +133,7 @@ class DataSource extends Model {
 
     getKeyValues(row) {
         return this.data.keyColumns.reduce((key, column) => {
-            key[column] = row[column];
+            key[column] = JSON.parse(row[column]);
             return key;
         }, {});
     }
@@ -142,9 +143,15 @@ class DataSource extends Model {
         const arr = [];
         for (let i = 0; i < this.data.keyColumns.length; i++) {
             const column = this.data.keyColumns[i];
-            const value = row[column];
-            if (value === null || value === undefined) return null;
-            arr.push(value);
+            if (row[column] === undefined) return null;
+            if (row[column] === null) throw new Error('wrong value null for data source value');
+            try {
+                const value = JSON.parse(row[column]);
+                arr.push(value);
+            } catch (err) {
+                console.log('cannot parse: ', row[column]);
+                throw err;
+            }
         }
         return JSON.stringify(arr);
     }
