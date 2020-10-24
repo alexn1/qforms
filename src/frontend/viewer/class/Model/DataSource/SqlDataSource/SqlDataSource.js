@@ -299,7 +299,8 @@ class SqlDataSource extends DataSource {
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
-        this.removeRow(key);
+        // this.removeRow(key);
+        await this.refill();
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete({source: this, key: key});
         }
