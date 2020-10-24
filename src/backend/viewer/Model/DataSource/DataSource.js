@@ -71,6 +71,9 @@ class DataSource extends Model {
         this.keyColumns.forEach(column => {
             this.checkColumn(row, column);
         });
+        for (const name in row) {
+            row[name] = JSON.stringify(row[name]);
+        }
         /*this.parentKeyColumns.forEach(column => {
             this.checkColumn(row, column);
         });*/
@@ -89,7 +92,6 @@ class DataSource extends Model {
                 ) {
                     row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
                 }*/
-                row[columnName] = JSON.stringify(row[columnName]);
             } else if (field.getAttr('value')) {
                 field.calcValue(row);
             } else {
