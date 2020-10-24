@@ -114,6 +114,9 @@ class SqlDataSource extends DataSource {
         const params = DataSource.keyToParams(newKey);
         const data = await this.selectSingle(params);
         this.updateRow(key, data.row);
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, key: key});
+        }
     }
 
     async onTableInsert(e) {
