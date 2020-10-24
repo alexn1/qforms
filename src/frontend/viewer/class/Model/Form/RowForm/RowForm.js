@@ -18,8 +18,8 @@ class RowForm extends Form {
     }
 
     onDataSourceUpdate(e) {
-        super.onDataSourceUpdate(e);
         this.fillParams(this.getRow());
+        super.onDataSourceUpdate(e);
     }
 
     getRow() {

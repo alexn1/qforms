@@ -15,6 +15,7 @@ class RowFormController extends FormController {
     init() {
         super.init();
         this.model.on('refresh', this.listeners.refresh = this.onModelRefresh);
+        this.model.on('insert' , this.listeners.insert  = this.onModelInsert);
         this.model.on('update' , this.listeners.update  = this.onModelUpdate);
         if (this.model.getDataSource().getClassName() === 'SqlDataSource') this.state.mode = 'view';
         this.calcState();
@@ -23,6 +24,7 @@ class RowFormController extends FormController {
     deinit() {
         // console.log('RowFormController.deinit', this.model.getFullName());
         this.model.off('refresh', this.listeners.refresh);
+        this.model.off('insert' , this.listeners.insert);
         this.model.off('update' , this.listeners.update);
         super.deinit();
     }
@@ -67,6 +69,14 @@ class RowFormController extends FormController {
         this.refill();
         this.invalidate();
         this.rerender();
+    }
+
+    onModelInsert = e => {
+        console.log('RowFormController.onModelInsert', this.model.getFullName());
+        this.refill();
+        this.invalidate();
+        this.calcState();
+        this.parent.onFormInsert(e);
     }
 
     onModelUpdate = e => {

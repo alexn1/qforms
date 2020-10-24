@@ -83,6 +83,11 @@ class PageController extends Controller {
         this.rerender();
     }
 
+    onFormInsert(e) {
+        console.log('PageController.onFormInsert:', this.model.getFullName());
+        this.rerender();
+    }
+
     async openPage(options) {
         options.parentPage = this.model;
         return await this.getApplicationController().openPage(options);
