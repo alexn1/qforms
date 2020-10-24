@@ -14,18 +14,16 @@ class RowFormController extends FormController {
 
     init() {
         super.init();
-        const dataSource = this.model.getDataSource();
-        dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
-        dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
-        if (dataSource.getClassName() === 'SqlDataSource') this.state.mode = 'view';
+        this.model.on('refresh', this.listeners.refresh = this.onModelRefresh);
+        this.model.on('update' , this.listeners.update  = this.onModelUpdate);
+        if (this.model.getDataSource().getClassName() === 'SqlDataSource') this.state.mode = 'view';
         this.calcState();
     }
 
     deinit() {
         // console.log('RowFormController.deinit', this.model.getFullName());
-        const dataSource = this.model.getDataSource();
-        dataSource.off('refresh', this.listeners.refresh);
-        dataSource.off('update' , this.listeners.update);
+        this.model.off('refresh', this.listeners.refresh);
+        this.model.off('update' , this.listeners.update);
         super.deinit();
     }
 
@@ -64,15 +62,15 @@ class RowFormController extends FormController {
         }
     }
 
-    onDataSourceRefresh = e => {
-        console.log('RowFormController.onDataSourceRefresh', this.model.getFullName());
+    onModelRefresh = e => {
+        console.log('RowFormController.onModelRefresh', this.model.getFullName());
         this.refill();
         this.invalidate();
         this.rerender();
     }
 
-    onDataSourceUpdate = e => {
-        console.log('RowFormController.onDataSourceUpdate', this.model.getFullName());
+    onModelUpdate = e => {
+        console.log('RowFormController.onModelUpdate', this.model.getFullName());
         this.refill();
         this.invalidate();
         this.calcState();

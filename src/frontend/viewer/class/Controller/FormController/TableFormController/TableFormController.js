@@ -13,10 +13,9 @@ class TableFormController extends FormController {
         super.init();
         // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
         // this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
-        const dataSource = this.model.getDataSource();
-        dataSource.on('refresh', this.listeners.refresh = this.onDataSourceRefresh);
-        dataSource.on('update' , this.listeners.update  = this.onDataSourceUpdate);
-        dataSource.on('delete' , this.listeners.delete  = this.onDataSourceDelete);
+        this.model.on('refresh', this.listeners.refresh = this.onModelRefresh);
+        this.model.on('update' , this.listeners.update  = this.onModelUpdate);
+        this.model.on('delete' , this.listeners.delete  = this.onModelDelete);
         this.model.on('insert' , this.listeners.insert  = this.onModelInsert);
     }
     getGridColumns() {
@@ -35,11 +34,10 @@ class TableFormController extends FormController {
     deinit() {
         // this.parent.off('hide', this.listeners.hide);
         // this.parent.off('show', this.listeners.show);
-        const dataSource = this.model.getDataSource();
-        dataSource.off('refresh', this.listeners.refresh);
-        dataSource.off('update' , this.listeners.update);
-        dataSource.off('delete' , this.listeners.delete);
-        dataSource.off('insert' , this.listeners.insert);
+        this.model.off('refresh', this.listeners.refresh);
+        this.model.off('update' , this.listeners.update);
+        this.model.off('delete' , this.listeners.delete);
+        this.model.off('insert' , this.listeners.insert);
         super.deinit();
     }
 
@@ -154,18 +152,18 @@ class TableFormController extends FormController {
             alert(`${this.model.getFullName()}: ${err.message}`);
         }
     }
-    onDataSourceRefresh = e => {
-        console.log('TableFormController.onDataSourceRefresh', this.model.getFullName(), e);
+    onModelRefresh = e => {
+        console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
         this.invalidate();
         this.rerender();
     }
-    onDataSourceUpdate = e => {
-        console.log('TableFormController.onDataSourceUpdate', this.model.getFullName(), e.key);
+    onModelUpdate = e => {
+        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e.key);
         this.invalidate();
         this.rerender();
     }
-    onDataSourceDelete = e => {
-        console.log('TableFormController.onDataSourceDelete', this.model.getFullName(), e.key);
+    onModelDelete = e => {
+        console.log('TableFormController.onModelDelete', this.model.getFullName(), e.key);
         if (this.state.activeRowKey === e.key) {
             this.state.activeRowKey = null;
         }
