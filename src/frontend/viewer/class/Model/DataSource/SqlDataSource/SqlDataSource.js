@@ -53,7 +53,6 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            // changes       : SqlDataSource.encodeChanges(this.getChangesByKey()),
             changes       : this.getChangesByKey(),
         });
         const [key] = Object.keys(data);
@@ -209,7 +208,6 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            // row           : Helper.encodeObject(this.getRowWithChanges(row)),
             row           : this.getRowWithChanges(row),
             parentPageName: page.parentPageName || null
         };
@@ -277,32 +275,22 @@ class SqlDataSource extends DataSource {
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
-        const page = this.getPage();
         if (!this.data.table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        // check if removed row has child rows
-        /*if (this.childs[key] !== undefined) {
-            //console.log(this.childs[key]);
-            alert("Row can't be removed as it contains child rows.");
-            return;
-        }*/
-        const row = this.getRowByKey(key);
+        const page = this.getPage();
         const args = {
             action        : '_delete',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             ds            : this.getName(),
-            // row           : Helper.encodeObject(row),
-            row           : row,
+            // row           : this.getRowByKey(key),
+            params        : Helper.encodeObject({key}),
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
         this.removeRow(key);
         this.emit('delete', {source: this, key: key});
-        /*console.log('this.data.rows:', this.data.rows);
-        console.log('this.rowsByKey:', this.rowsByKey);
-        console.log('this.childs:', this.childs);*/
         this.getTable().emit('delete', {source: this, key: key});
     }
 

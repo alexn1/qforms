@@ -201,10 +201,11 @@ class SqlDataSource extends DataSource {
 
     async delete(context) {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
-        const row = context.row;
-        const keyValues = this.getKeyValuesFromRow(row);
+        // const keyValues = this.getKeyValuesFromRow(context.row);
+        const keyValues = this.getKeyValuesFromKey(context.params.key);
         const query = this.getDatabase().getDeleteQuery(this.getAttr('table'), keyValues);
-        await this.getDatabase().queryResult(context, query, row);
+        // await this.getDatabase().queryResult(context, query, row);
+        await this.getDatabase().queryResult(context, query, keyValues);
     }
 
     async fill(context) {

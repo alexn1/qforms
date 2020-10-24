@@ -42,7 +42,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async queryResult(context, query, params = null) {
-        console.log('PostgreSqlDatabase.queryResult', query, params, params ? Object.keys(params).map(name => typeof params[name]) : null);
+        console.log('PostgreSqlDatabase.queryResult', query, params/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
@@ -93,7 +93,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     getDeleteQuery(tableName, rowKeyValues) {
-        console.log('PostgreSqlDatabase.getDeleteQuery');
+        // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
@@ -106,7 +106,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     static getUpdateQuery(tableName, values, where) {
-        console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
+        // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
