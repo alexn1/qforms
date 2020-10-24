@@ -66,11 +66,11 @@ class Form extends Model {
     //     action.exec(args, {'form':this});
     // }
 
-    async refresh() {
+    /*async refresh() {
         console.log('Form.refresh', this.getFullName());
         await this.getDataSource().refresh();
         // this.emit('refresh', {source: this});
-    }
+    }*/
 
     isChanged() {
         // console.log('Form.isChanged', this.getFullName());

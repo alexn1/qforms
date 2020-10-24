@@ -129,9 +129,9 @@ class RowFormController extends FormController {
         this.parent.onFormDiscard(this);
     }
 
-    onRefreshClick = () => {
+    onRefreshClick = async () => {
         // console.log('RowFormController.onRefreshClick', this.model.getFullName());
-        this.model.refresh();
+        await this.model.getDataSource().refresh();
     }
 
     isChanged() {
