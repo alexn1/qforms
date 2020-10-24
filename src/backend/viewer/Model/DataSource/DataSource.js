@@ -82,13 +82,13 @@ class DataSource extends Model {
                 throw new Error(`[${this.getFullName()}]: no column name`);
             }
             if (row.hasOwnProperty(columnName)) {
-                if (
+                /*if (
                     this.parent instanceof qforms.TableForm &&
                     row[columnName] !== null &&
                     typeof row[columnName] === 'string'
                 ) {
                     row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
-                }
+                }*/
             } else if (field.getAttr('value')) {
                 field.calcValue(row);
             } else {

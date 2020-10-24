@@ -254,8 +254,7 @@ class HostApp {
         const application = this.getApplication(req);
         const page = await application.getPage(context, req.body.page);
         const data = await page.fill(context);
-        await res.end(JSON.stringify({page: data}).replace(/&quot;/g, '\\"'), 'application/json');
-        // await res.json({page: data});
+        await res.json({page: data});
     }
 
     // action
@@ -287,8 +286,7 @@ class HostApp {
         const [rows, count] = await dataSource.select(context);
         const time = Date.now() - start;
         console.log('select time:', time);
-        await res.end(JSON.stringify({rows, count, time}).replace(/&quot;/g, '\\"'), 'application/json');
-        // await res.json({rows, count, time});
+        await res.json({rows, count, time});
         return time;
     }
 
