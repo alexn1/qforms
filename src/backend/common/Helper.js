@@ -378,6 +378,14 @@ class Helper {
         const now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
     }
+
+    static dateTimeReviver(key, value) {
+        if (typeof value === 'string') {
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
+            if (a) return new Date(value);
+        }
+        return value;
+    }
 }
 
 module.exports = Helper;

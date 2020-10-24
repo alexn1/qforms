@@ -42,7 +42,7 @@ class Field extends Model {
     dumpRowValueToParams(row, params) {
         const name  = this.getFullName();
         const value = row[this.getAttr('column')];
-        params[name] = value;
+        params[name] = JSON.parse(value, Helper.dateTimeReviver);
     }
 
     getFullName() {
