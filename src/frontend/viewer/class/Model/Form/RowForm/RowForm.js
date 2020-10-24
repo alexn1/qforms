@@ -22,6 +22,11 @@ class RowForm extends Form {
         super.onDataSourceUpdate(e);
     }
 
+    onDataSourceInsert(e) {
+        this.fillParams(this.getRow());
+        super.onDataSourceInsert(e);
+    }
+
     getRow() {
         return this.getDataSource().getSingleRow();
     }
