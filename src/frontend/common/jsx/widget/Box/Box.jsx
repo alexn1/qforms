@@ -5,7 +5,6 @@ class Box extends React.Component {
         this.state = {
             backgroundColor: 'purple'
         };
-        this.update = this.update.bind(this);
     }
     // componentWillMount() {
     //     console.log('Box.componentWillMount');
@@ -16,7 +15,7 @@ class Box extends React.Component {
     componentWillUnmount() {
         console.log('Box.componentWillUnmount');
     }
-    update() {
+    update = () => {
         console.log('Box.update');
         this.setState({
             backgroundColor: 'green'

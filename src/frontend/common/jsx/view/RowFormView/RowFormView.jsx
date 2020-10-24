@@ -18,7 +18,7 @@ class RowFormView extends ReactComponent {
                         key="save"
                         title="Save"
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
-                        onClick={ctrl.onSaveClick.bind(ctrl)}
+                        onClick={ctrl.onSaveClick}
                         visible={ctrl.state.mode === 'edit'}
                         width={width}
                     />,
@@ -33,7 +33,7 @@ class RowFormView extends ReactComponent {
                         key="discard"
                         title="Discard"
                         enabled={ctrl.state.changed || !ctrl.isValid()}
-                        onClick={ctrl.onDiscardClick.bind(ctrl)}
+                        onClick={ctrl.onDiscardClick}
                         visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
                         width={width}
                     />,
@@ -41,7 +41,7 @@ class RowFormView extends ReactComponent {
                         key="refresh"
                         title="Refresh"
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
-                        onClick={ctrl.onRefresh.bind(ctrl)}
+                        onClick={ctrl.onRefreshClick}
                         visible={ctrl.state.mode === 'view'}
                         width={width}
                     />

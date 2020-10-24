@@ -88,7 +88,7 @@ class RowFormController extends FormController {
         return true;
     }
 
-    async onSaveClick() {
+    onSaveClick = async () => {
         console.log('RowFormController.onSaveClick');
         for (const name in this.fields) {
             this.fields[name].validate();
@@ -101,7 +101,7 @@ class RowFormController extends FormController {
         }
     }
 
-    onDiscardClick() {
+    onDiscardClick = () => {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
         const changedFields = [];
         const row = this.model.getRow();
@@ -129,8 +129,8 @@ class RowFormController extends FormController {
         this.parent.onFormDiscard(this);
     }
 
-    onRefresh() {
-        // console.log('RowFormController.onRefresh', this.model.getFullName());
+    onRefreshClick = () => {
+        // console.log('RowFormController.onRefreshClick', this.model.getFullName());
         this.model.refresh();
     }
 

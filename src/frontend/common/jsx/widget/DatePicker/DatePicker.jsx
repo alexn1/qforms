@@ -10,8 +10,6 @@ class DatePicker extends ReactComponent {
             'Сентябрь', 'Октябрь', 'Ноябрь',
             'Декабрь'
         ];
-        this.onClick     = this.onClick.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
     }
     static createDateFromArr(arr) {
         return new Date(arr[0], arr[1], arr[2]);
@@ -81,7 +79,7 @@ class DatePicker extends ReactComponent {
         return true;
     }
 
-    onClick(e) {
+    onClick = e => {
         // console.log('DatePicker.onClick', e.target);
         if (e.target.classList.contains('next')) {
             this.next();
@@ -91,7 +89,7 @@ class DatePicker extends ReactComponent {
             return this.onDateClick(e.target);
         }
     }
-    onMouseDown(e) {
+    onMouseDown = e => {
         // console.log('DatePicker.onMouseDown');
         if (this.props.onMouseDown) {
             return this.props.onMouseDown(e);
