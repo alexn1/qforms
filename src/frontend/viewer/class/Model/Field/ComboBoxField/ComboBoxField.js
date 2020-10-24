@@ -5,7 +5,12 @@ class ComboBoxField extends Field {
     getDisplayValue(row) {
         let value = null;
         if (row[this.data.displayColumn]) {
-            value = row[this.data.displayColumn];
+            try {
+                value = JSON.parse(row[this.data.displayColumn], Helper.dateTimeReviver);
+            } catch (err) {
+                console.log('cannot parse:', row[this.data.displayColumn]);
+                throw err;
+            }
         } else {
             value = this.data.displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
@@ -17,7 +22,7 @@ class ComboBoxField extends Field {
 
     getValueValue(row) {
         if (row[this.data.valueColumn] !== undefined) {
-            return row[this.data.valueColumn];
+            return JSON.parse(row[this.data.valueColumn], Helper.dateTimeReviver);
         }
         throw new Error('no valueColumn in ComboBox data source');
     }
