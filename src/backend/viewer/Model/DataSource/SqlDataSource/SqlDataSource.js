@@ -62,7 +62,7 @@ class SqlDataSource extends DataSource {
     }
 
     async selectSingle(context) {
-        console.log('SqlDataSource.selectSingle');
+        // console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length > 1) throw new Error(`single query must return single row: ${this.getFullName()}`);
@@ -72,7 +72,7 @@ class SqlDataSource extends DataSource {
     }
 
     async selectMultiple(context) {
-        console.log('SqlDataSource.selectMultiple');
+        // console.log('SqlDataSource.selectMultiple');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
         // rows

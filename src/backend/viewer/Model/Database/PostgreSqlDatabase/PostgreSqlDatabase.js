@@ -54,7 +54,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async queryRows(context, query, params = null) {
-        console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
+        // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
