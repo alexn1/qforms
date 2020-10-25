@@ -60,44 +60,54 @@ class DataSource extends Model {
         return this.data.parentKeyColumns ? Object.keys(this.data.parentKeyColumns) : [];
     }*/
 
-    checkColumn(row, column) {
+    /*checkColumn(row, column) {
         if (!row.hasOwnProperty(column)) {
             throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
         }
+    }*/
+
+    checkAndCalcColumns2(rows) {
+        if (rows[0]) {
+            this.keyColumns.forEach(column => {
+                /*this.checkColumn(rows[0], column);*/
+
+                if (!rows[0].hasOwnProperty(column)) {
+                    throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
+                }
+
+            });
+        }
+        if (this.parent instanceof qforms.Form && this.getName() === 'default') {
+            for (let i = 0; i < rows.length; i++) {
+                this.calcColumns(rows[i]);
+            }
+        }
+        for (let i = 0; i < rows.length; i++) {
+            this.encodeRow(rows[i]);
+        }
     }
 
-    checkAndCalcColumns(row) {
-        // console.log('DataSource.checkAndCalcColumns', this.getFullName());
-        this.keyColumns.forEach(column => {
-            this.checkColumn(row, column);
-        });
-        for (const name in row) {
-            row[name] = JSON.stringify(row[name]);
-        }
-        /*this.parentKeyColumns.forEach(column => {
-            this.checkColumn(row, column);
-        });*/
-        if (!(this.parent instanceof qforms.Form) || this.getName() !== 'default') return;
-        Object.keys(this.parent.fields).forEach(name => {
+    calcColumns(row) {
+        for (const name in this.parent.fields) {
             const field = this.parent.fields[name];
             const columnName = field.getAttr('column');
             if (!columnName) {
                 throw new Error(`[${this.getFullName()}]: no column name`);
             }
             if (row.hasOwnProperty(columnName)) {
-                /*if (
-                    this.parent instanceof qforms.TableForm &&
-                    row[columnName] !== null &&
-                    typeof row[columnName] === 'string'
-                ) {
-                    row[columnName] = qforms.Helper.escapeHtml(row[columnName]);
-                }*/
             } else if (field.getAttr('value')) {
                 field.calcValue(row);
             } else {
-                throw new Error(`[${this.getFullName()}]: need column or value.`);
+                throw new Error(`[${field.getFullName()}]: need column or value`);
             }
-        });
+        }
+    }
+
+    encodeRow(row) {
+        // console.log('DataSource.encodeRow', this.getFullName());
+        for (const name in row) {
+            row[name] = JSON.stringify(row[name]);
+        }
     }
 
     getApp() {

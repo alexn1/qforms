@@ -66,9 +66,8 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length > 1) throw new Error(`single query must return single row: ${this.getFullName()}`);
-        const row = rows[0] || null;
-        if (row) this.checkAndCalcColumns(row);
-        return row;
+        this.checkAndCalcColumns2(rows);
+        return rows[0] || null;
     }
 
     async selectMultiple(context) {
@@ -83,9 +82,7 @@ class SqlDataSource extends DataSource {
             context.params.limit = limit;
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
-        for (let i = 0; i < rows.length; i++) {
-            this.checkAndCalcColumns(rows[i]);
-        }
+        this.checkAndCalcColumns2(rows);
 
         // count
         let count;
@@ -113,9 +110,7 @@ class SqlDataSource extends DataSource {
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
-        for (let i = 0; i < rows.length; i++) {
-            this.checkAndCalcColumns(rows[i]);
-        }
+        this.checkAndCalcColumns2(rows);
 
         // count
         let count;
@@ -157,7 +152,7 @@ class SqlDataSource extends DataSource {
         // console.log('singleQuery:', singleQuery);
         const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.checkAndCalcColumns(row);
+        this.checkAndCalcColumns2([row]);
         // console.log('row:', row);
         return {[key]: row};
     }
@@ -193,7 +188,7 @@ class SqlDataSource extends DataSource {
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.checkAndCalcColumns(row);
+        this.checkAndCalcColumns2([row]);
         // console.log('row:', row);
 
         return {[key]: row};
