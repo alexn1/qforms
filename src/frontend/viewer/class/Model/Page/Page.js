@@ -142,4 +142,11 @@ class Page extends Model {
         return this.modal;
     }
 
+    onFormInsert(e) {
+        console.log('Page.onFormInsert', e);
+        for (const name in e.keyParams) {
+            this.params[name] = e.keyParams[name];
+        }
+    }
+
 }

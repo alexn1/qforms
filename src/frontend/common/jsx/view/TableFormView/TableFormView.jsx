@@ -11,6 +11,7 @@ class TableFormView extends ReactComponent {
                         width={width}
                         title={model.getApp().getText().form.refresh}
                         onClick={ctrl.onRefreshClick}
+                        enabled={!ctrl.parent.model.hasNew()}
                     />
                 }
                 {model.data.newRowMode !== 'disabled' &&

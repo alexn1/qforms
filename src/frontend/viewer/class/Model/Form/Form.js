@@ -52,6 +52,7 @@ class Form extends Model {
 
     onDataSourceInsert(e) {
         // console.log('Form.onDataSourceInsert', this.getFullName());
+        this.parent.onFormInsert(e);
         this.emit('insert', e);
     }
 

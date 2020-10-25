@@ -264,17 +264,16 @@ class SqlDataSource extends DataSource {
 
 
         // save key params for refill
-        const params = QForms.keyToParams(key);
-        for (const name in params) {
-            this.params[name] = params[name];
+        const keyParams = QForms.keyToParams(key);
+        for (const name in keyParams) {
+            this.params[name] = keyParams[name];
         }
 
+        const e = {source: this, key, keyParams};
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, key: key});
+            this.parent.onDataSourceInsert(e);
         }
-
-        // fire insert event
-        this.getTable().emit('insert', {source: this, key: key});
+        this.getTable().emit('insert', e);
 
         return key;
     }

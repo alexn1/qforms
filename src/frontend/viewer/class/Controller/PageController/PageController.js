@@ -85,6 +85,10 @@ class PageController extends Controller {
 
     onFormInsert(e) {
         console.log('PageController.onFormInsert:', this.model.getFullName());
+        // console.log('hasNew:', this.model.hasNew());
+        for (const name in this.forms) {
+            this.forms[name].invalidate();
+        }
         this.rerender();
     }
 
