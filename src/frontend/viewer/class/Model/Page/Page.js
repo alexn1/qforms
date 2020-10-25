@@ -24,7 +24,7 @@ class Page extends Model {
             this.forms[name] = eval(`new ${data.class}(data, this)`);
             this.forms[name].init();
         }
-        console.log('page params:', this.params);
+        // console.log('page params:', this.params);
     }
 
     deinit() {
