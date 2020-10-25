@@ -75,7 +75,7 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
         // rows
-        if (this.getAttr('limit')) {
+        if (this.getAttr('limit') !== '') {
             if (!context.params.frame) throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'));
             context.params.offset = (context.params.frame - 1) * limit;
@@ -102,7 +102,7 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
         // rows
-        if (this.getAttr('limit')) {
+        if (this.getAttr('limit') !== '') {
             if (!context.params.frame) throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'));
             context.params.offset = (context.params.frame - 1) * limit;
@@ -213,10 +213,14 @@ class SqlDataSource extends DataSource {
 
         // if form data source named default then check mode
         if (this.parent instanceof qforms.Form && this.getName() === 'default' && context.newMode) {
+            if (this.getAttr('limit') !== '') {
+                data.limit = parseInt(this.getAttr('limit'));
+            }
             data.rows = [];
+            data.count = 0;
             return data;
         }
-        if (this.getAttr('limit')) {
+        if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
         }
         if (this.isDefaultOnRowForm()) {
@@ -237,7 +241,7 @@ class SqlDataSource extends DataSource {
         if (this.isDefaultOnRowForm() && data.rows[0]) {
             this.parent.dumpRowToParams(data.rows[0], context.querytime.params);
         }
-        if (this.getAttr('limit')) {
+        if (this.getAttr('limit') !== '') {
             data.limit = context.params.limit;
         }
         return data;

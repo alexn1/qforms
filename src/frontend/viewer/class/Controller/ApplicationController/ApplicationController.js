@@ -199,6 +199,7 @@ class ApplicationController extends Controller {
         pc.init();
         modal ? this.modalPages.push(pc) : this.pages.push(this.activePage = pc);
         this.rerender();
+        // console.log('pc:', pc);
     }
 
     getNextPageId() {
