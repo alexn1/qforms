@@ -60,21 +60,12 @@ class DataSource extends Model {
         return this.data.parentKeyColumns ? Object.keys(this.data.parentKeyColumns) : [];
     }*/
 
-    /*checkColumn(row, column) {
-        if (!row.hasOwnProperty(column)) {
-            throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
-        }
-    }*/
-
-    checkAndCalcColumns2(rows) {
+    prepareRows(rows) {
         if (rows[0]) {
             this.keyColumns.forEach(column => {
-                /*this.checkColumn(rows[0], column);*/
-
                 if (!rows[0].hasOwnProperty(column)) {
                     throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
                 }
-
             });
         }
         if (this.parent instanceof qforms.Form && this.getName() === 'default') {

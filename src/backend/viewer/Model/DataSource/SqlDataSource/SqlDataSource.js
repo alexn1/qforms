@@ -66,7 +66,7 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length > 1) throw new Error(`single query must return single row: ${this.getFullName()}`);
-        this.checkAndCalcColumns2(rows);
+        this.prepareRows(rows);
         return rows[0] || null;
     }
 
@@ -82,7 +82,7 @@ class SqlDataSource extends DataSource {
             context.params.limit = limit;
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
-        this.checkAndCalcColumns2(rows);
+        this.prepareRows(rows);
 
         // count
         let count;
@@ -110,7 +110,7 @@ class SqlDataSource extends DataSource {
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
-        this.checkAndCalcColumns2(rows);
+        this.prepareRows(rows);
 
         // count
         let count;
@@ -152,7 +152,7 @@ class SqlDataSource extends DataSource {
         // console.log('singleQuery:', singleQuery);
         const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.checkAndCalcColumns2([row]);
+        this.prepareRows([row]);
         // console.log('row:', row);
         return {[key]: row};
     }
@@ -188,7 +188,7 @@ class SqlDataSource extends DataSource {
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.checkAndCalcColumns2([row]);
+        this.prepareRows([row]);
         // console.log('row:', row);
 
         return {[key]: row};
