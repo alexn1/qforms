@@ -9,9 +9,10 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     getValueForView(row) {
         const rawValue = this.model.getRawValue(row);
         const cbRow = this.model.findRowByRawValue(rawValue);
-        if (!cbRow) throw new Error(`${this.model.getFullName()}: cannot find ComboBox row for raw value: ${rawValue}`);
-        const value = this.model.getDisplayValue(cbRow);
-        return this.valueToString(value);
+        if (cbRow) {
+            return this.valueToString(this.model.getDisplayValue(cbRow));
+        }
+        return `[no row for id: ${rawValue}]`;
     }
 
     /*init() {
