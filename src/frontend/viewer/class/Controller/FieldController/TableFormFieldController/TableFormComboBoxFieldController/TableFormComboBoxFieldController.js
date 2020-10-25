@@ -6,6 +6,10 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     //     super(model, parent);
     // }
 
+    getValueForView(row) {
+        return this.valueToString(this.model.getValue(row));
+    }
+
 
     /*init() {
         //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());
@@ -123,7 +127,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
     }*/
 
-    onNewRow(ea) {
+    /*onNewRow(ea) {
         //console.log('TableFormComboBoxFieldController.onNewRow');
         //console.log(ea);
         switch (this.model.getForm().getClassName()) {
@@ -133,9 +137,9 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 this._createOption(view, ea.i);
                 break;
         }
-    }
+    }*/
 
-    onMoveRow(ea) {
+    /*onMoveRow(ea) {
         const newIndex = ea.newIndex;
         const oldIndex = ea.oldIndex;
         const key      = ea.key;
@@ -149,5 +153,5 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 }
                 break;
         }
-    }
+    }*/
 }
