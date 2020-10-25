@@ -6,14 +6,12 @@ class RowForm extends Form {
         if (this.getPage().isNewMode()) {
             this.getDataSource().newRow(this.createRow());
         }
-
-        // dump row values to page params
-        this.fillParams(this.getRow());
+        this.fillParams(this.getRow()); // dump row values to page params
     }
 
     fillParams(row) {
         for (const name in this.fields) {
-            this.fields[name].valueToParams(row);
+            this.fields[name].valueToPageParams(row);
         }
     }
 
@@ -44,7 +42,6 @@ class RowForm extends Form {
     createRow() {
         const row = {};
         this.fillDefaultValues(row);
-        console.log('row:', row);
         return row;
     }
 

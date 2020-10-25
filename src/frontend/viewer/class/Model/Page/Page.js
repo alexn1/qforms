@@ -19,11 +19,12 @@ class Page extends Model {
             this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
-        for (const formName in this.data.forms) {
-            const form = this.data.forms[formName];
-            this.forms[formName] = eval(`new ${form.class}(formName, this, form)`);
-            this.forms[formName].init();
+        for (const name in this.data.forms) {
+            const data = this.data.forms[name];
+            this.forms[name] = eval(`new ${data.class}(data, this)`);
+            this.forms[name].init();
         }
+        console.log('page params:', this.params);
     }
 
     deinit() {

@@ -1,10 +1,10 @@
 'use strict';
 
 class Form extends Model {
-    constructor(name, parent, data) {
+    constructor(data, parent) {
         super(data, parent);
-        this.dataSources   = {};
-        this.fields        = {};
+        this.dataSources = {};
+        this.fields      = {};
     }
 
     init() {
