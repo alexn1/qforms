@@ -54,7 +54,7 @@ class Field extends Model {
     }
 
     calcValue(row) {
-        row[this.getAttr('column')] = eval(this.getAttr('value'));
+        row[this.getAttr('column')] = JSON.stringify(eval(this.getAttr('value')));
     }
 
     getApp() {
