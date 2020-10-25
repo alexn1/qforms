@@ -103,7 +103,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
         if (e.source === this) {
-            console.error('onTableUpdated stop self update', this.getFullName());
+            // console.error('onTableUpdated stop self update', this.getFullName());
             return;
         }
         console.log('changes:', e.changes);
@@ -123,7 +123,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
         if (e.source === this) {
-            console.error('onTableInsert stop self insert', this.getFullName());
+            // console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
         await this.refill();
@@ -136,7 +136,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
-            console.error('onTableDelete stop self delete', this.getFullName());
+            // console.error('onTableDelete stop self delete', this.getFullName());
             return;
         }
         await this.refill();
