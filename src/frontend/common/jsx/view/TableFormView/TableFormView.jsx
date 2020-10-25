@@ -79,6 +79,13 @@ class TableFormView extends ReactComponent {
             onUnmount={onUnmount}
             ctrl={fieldCtrl}
         />;
+        if (fieldCtrl.model.getClassName() === 'ComboBoxField') return <TableFormComboBoxFieldView
+            row={row}
+            column={column}
+            onCreate={onCreate}
+            onUnmount={onUnmount}
+            ctrl={fieldCtrl}
+        />;
         return null;
     }
     shouldComponentUpdate(nextProps, nextState) {

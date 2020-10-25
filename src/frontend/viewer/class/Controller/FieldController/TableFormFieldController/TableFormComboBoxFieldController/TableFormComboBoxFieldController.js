@@ -6,7 +6,8 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     //     super(model, parent);
     // }
 
-    init() {
+
+    /*init() {
         //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());
         super.init();
         if (!this.model.data.dataSourceName) {
@@ -20,9 +21,9 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         dataSource.on('removeRow', this.listeners.removeRow = this.onRemoveRow.bind(this));
         dataSource.on('newRow'   , this.listeners.newRow    = this.onNewRow.bind(this));
         dataSource.on('moveRow'  , this.listeners.moveRow   = this.onMoveRow.bind(this));
-    }
+    }*/
 
-    deinit(row, view) {
+    /*deinit(row, view) {
         //console.log('TableFormComboBoxFieldController.deinit: ' + this.model.getFullName());
         const dataSource = this.model.getComboBoxDataSource();
         dataSource.off('update', this.listeners.rowUpdate);
@@ -31,39 +32,23 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         dataSource.off('moveRow'  , this.listeners.moveRow);
         // ReactDOM.unmountComponentAtNode(view);
         super.deinit();
-    }
-
-    /*fill(row, view) {
-        if (this.model.getForm().getClassName() === 'RowForm') {
-
-            // view.keyToOption = {};
-            // this._fillSelectOptions(view);
-            // super.fill(row, view);
-            // $(view).children().change(function() {
-            //     self.onChange(view);
-            // });
-        } else if (this.model.getForm().getClassName() === 'TableForm') {
-            super.fill(row, view);
-        } else {
-            throw new Error(`unknown form class: ${this.model.getForm().getClassName()}`);
-        }
     }*/
 
-    getItems() {
+    /*getItems() {
         return this.model.getComboBoxDataSource().getRows().map(row => ({
             value: this.model.getValueValue(row),
             title: this.model.getDisplayValue(row)
         }));
-    }
+    }*/
 
-    getStringValue(view) {
+    /*getStringValue(view) {
         if (this.model.getForm().getClassName() === 'RowForm') {
             return this.comboBox.getValue();
         }
         return super.getStringValue(view);
-    }
+    }*/
 
-    setValue(value, view) {
+    /*setValue(value, view) {
         // console.log('TableFormComboBoxFieldController.setValue', this.model.getFullName(), value);
         if (this.model.getForm().getClassName() === 'RowForm') {
             throw new Error('TableFormComboBoxFieldController.setValue not implemented');
@@ -81,21 +66,21 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 view.firstElementChild.innerHTML = '';
             }
         }
-    }
+    }*/
 
-    _fillSelectOptions(view) {
+    /*_fillSelectOptions(view) {
         const nullOption = document.createElement('option');
-        /*if (this.model.data.notNull === 'true') {
+        /!*if (this.model.data.notNull === 'true') {
             nullOption.innerHTML = `-- ${this.model.getApp().data.text.field.selectValue} --`;
-        }*/
+        }*!/
         view.firstElementChild.appendChild(nullOption);
         const rows = this.model.getComboBoxDataSource().getRows();
         for (let i = 0; i < rows.length; i++) {
             this._createOption(view, i);
         }
-    }
+    }*/
 
-    _createOption(view, i) {
+    /*_createOption(view, i) {
         const dataSource = this.model.getComboBoxDataSource();
         const row = dataSource.getRowByIndex(i);
         const key = dataSource.getRowKey(row);
@@ -106,9 +91,9 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         QForms.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
         view.keyToOption[key] = option;
         return option;
-    }
+    }*/
 
-    onRowUpdate(ea) {
+    /*onRowUpdate(ea) {
         //console.log('TableFormComboBoxFieldController.onRowUpdate');
         //console.log(ea);
         const key = ea.key;
@@ -118,13 +103,13 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 this._refillRow(option);
             }
         }
-    };
+    }*/
 
-    _refillRow(option) {
+    /*_refillRow(option) {
         option.innerHTML = this.model.getDisplayValue(option.dbRow);
-    }
+    }*/
 
-    onRemoveRow(ea) {
+    /*onRemoveRow(ea) {
         const key = ea.key;
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
@@ -136,7 +121,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 }
                 break;
         }
-    }
+    }*/
 
     onNewRow(ea) {
         //console.log('TableFormComboBoxFieldController.onNewRow');

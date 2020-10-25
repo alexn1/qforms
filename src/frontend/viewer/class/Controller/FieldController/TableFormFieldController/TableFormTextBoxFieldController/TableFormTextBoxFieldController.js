@@ -2,14 +2,7 @@
 
 class TableFormTextBoxFieldController extends TableFormFieldController {
 
-    /*constructor(model, parent) {
-        console.log('new TableFormTextBoxFieldController', model.getName());
-        super(model, parent);
-    }*/
 
-    /*deinit(row, view) {
-        super.deinit(row, view);
-    }*/
 
     /*beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
