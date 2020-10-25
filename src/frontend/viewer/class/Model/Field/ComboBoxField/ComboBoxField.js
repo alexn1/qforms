@@ -21,14 +21,15 @@ class ComboBoxField extends Field {
     }
 
     getValueValue(row) {
-        if (row[this.data.valueColumn] !== undefined) {
-            return JSON.parse(row[this.data.valueColumn], Helper.dateTimeReviver);
+        if (!row[this.data.valueColumn]) {
+            throw new Error('no valueColumn in ComboBox data source');
         }
-        throw new Error('no valueColumn in ComboBox data source');
+        return JSON.parse(row[this.data.valueColumn], Helper.dateTimeReviver);
     }
 
     getComboBoxDataSource() {
         const name = this.data.dataSourceName;
+        if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
         if (this.getForm().dataSources[name]) {
             return this.getForm().dataSources[name];
         } else if (this.getPage().dataSources[name]) {
@@ -37,5 +38,9 @@ class ComboBoxField extends Field {
             return this.getApp().dataSources[name];
         }
         return null;
+    }
+
+    findRowByRawValue(rawValue) {
+        return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }

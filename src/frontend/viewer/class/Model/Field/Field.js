@@ -79,7 +79,7 @@ class Field extends Model {
         return this.getDataSource().isRowColumnChanged(row, this.data.column);
     }
 
-    getValueFromDataSource(row) {
+    getRawValue(row) {
         if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
         return this.getForm().getDataSource().getValue(row, this.data.column);
     }
@@ -91,7 +91,7 @@ class Field extends Model {
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
         if (this.data.column) {
-            let value = this.getValueFromDataSource(row);
+            let rawValue = this.getRawValue(row);
             /*
             if (value === null) return null;
             if (value === undefined) return undefined;
@@ -102,12 +102,12 @@ class Field extends Model {
             }
             if (fieldType === 'object') return JSON.parse(value);
             return value;*/
-            if (value === undefined) return undefined;
-            if (value === null) throw new Error(`[${this.getFullName()}]: null is wrong value for data source`);
+            if (rawValue === undefined) return undefined;
+            if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
             try {
-                return JSON.parse(value, Helper.dateTimeReviver);
+                return JSON.parse(rawValue, Helper.dateTimeReviver);
             } catch (err) {
-                console.log('value:', this.getFullName(), value);
+                console.log('rawValue:', this.getFullName(), rawValue);
                 throw err;
             }
         }

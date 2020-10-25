@@ -94,7 +94,7 @@ class RowFormFieldController extends FieldController {
         if (!row) throw new Error('FieldController: no row');
         try {
             if (this.model.hasColumn()) {
-                const dsValue = this.model.getValueFromDataSource(row);
+                const dsValue = this.model.getRawValue(row);
                 const fieldValue = this.model.getValueForDataSource(this.getValue());
                 if (dsValue !== fieldValue) {
                     console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsValue, fieldValue);

@@ -7,9 +7,12 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     // }
 
     getValueForView(row) {
-        return this.valueToString(this.model.getValue(row));
+        const rawValue = this.model.getRawValue(row);
+        const cbRow = this.model.findRowByRawValue(rawValue);
+        if (!cbRow) throw new Error(`${this.model.getFullName()}: cannot find ComboBox row for raw value: ${rawValue}`);
+        const value = this.model.getDisplayValue(cbRow);
+        return this.valueToString(value);
     }
-
 
     /*init() {
         //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());
