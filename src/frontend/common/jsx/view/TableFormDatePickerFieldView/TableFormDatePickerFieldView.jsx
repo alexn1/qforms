@@ -11,7 +11,7 @@ class TableFormDatePickerFieldView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return (
             <div className="TableFormDatePickerFieldView">
-                <span ref={this.span}>{ctrl.getValueForView(row)}</span>
+                <span ref={this.span}>{ctrl.renderValueForView(row)}</span>
             </div>
         );
     }

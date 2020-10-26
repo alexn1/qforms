@@ -1,9 +1,6 @@
 'use strict';
 
 class TableFormTextBoxFieldController extends TableFormFieldController {
-
-
-
     /*beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
         view.firstElementChild.contentEditable = true;

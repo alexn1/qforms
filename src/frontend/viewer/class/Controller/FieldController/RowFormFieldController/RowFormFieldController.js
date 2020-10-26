@@ -32,7 +32,7 @@ class RowFormFieldController extends FieldController {
         this.updateChanged();
         this.parent.onFieldChange({source: this});
     }
-    getValueForView() {
+    renderValueForView() {
         return this.state.value;
     }
     getValue() {

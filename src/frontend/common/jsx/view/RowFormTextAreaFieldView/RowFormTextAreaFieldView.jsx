@@ -13,7 +13,7 @@ class RowFormTextAreaFieldView extends ReactComponent {
         return <div className={this.getClassName()}>
             <TextArea
                 // onCreate={ctrl.onViewCreate}
-                value={ctrl.getValueForView()}
+                value={ctrl.renderValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceHolder()}

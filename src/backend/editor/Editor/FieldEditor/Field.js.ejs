@@ -13,14 +13,13 @@ class <%=page%><%=form%><%=field%>Controller extends <%=_class%>Controller {
     }
 
     /*
-    setViewStyle(view, row) {
-        //const bodyCell = view.parentNode;               // td element
-        //const bodyRow  = bodyCell.parentNode;           // tr element
-        //if (row.<%=field%> === 'value') {
-        //    $(view).css('color', 'green');
-        //} else {
-        //    $(view).css('color', '');
-        //}
+    renderViewStyle(row) {
+        const value = this.model.getValue(row);
+        let color = null;
+        if (value === 'abc') {
+            color = 'green';
+        }
+        return {color};
     }
     */
 }
