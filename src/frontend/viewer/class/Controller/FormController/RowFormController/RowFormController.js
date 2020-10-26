@@ -179,4 +179,3 @@ class RowFormController extends FormController {
         return RowFormView;
     }
 }
-
