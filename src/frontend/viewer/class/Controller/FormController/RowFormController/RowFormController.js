@@ -174,5 +174,9 @@ class RowFormController extends FormController {
         this.state.mode = 'view';
         this.rerender();
     }
+    getViewClass() {
+        // console.log('RowFormController.getViewClass', this.model.getFullName());
+        return RowFormView;
+    }
 }
 

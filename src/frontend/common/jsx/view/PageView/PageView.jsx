@@ -22,12 +22,12 @@ class PageView extends ReactComponent {
         const model = ctrl.model;
         return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
             const formController = ctrl.forms[name];
-            return <RowFormView
-                key={name}
-                ctrl={formController}
-                onCreate={formController.onViewCreate}
-                updated={formController.getUpdated()}
-            />;
+            return React.createElement(formController.getViewClass(), {
+                key     : name,
+                ctrl    : formController,
+                onCreate: formController.onViewCreate,
+                updated : formController.getUpdated()
+            });
         });
     }
     renderCaption() {
