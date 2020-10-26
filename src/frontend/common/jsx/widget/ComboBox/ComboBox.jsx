@@ -17,6 +17,10 @@ class ComboBox extends ReactComponent {
             this.props.onChange(e.target.value);
         }
     }
+    renderNullTitle() {
+        //return ApplicationController.isInDebugMode() ? '[null]' : '';
+        return '';
+    }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         this.state.value = nextProps.value;
@@ -27,7 +31,7 @@ class ComboBox extends ReactComponent {
         return (
             <select onChange={this.onChange} value={this.state.value} disabled={this.props.readOnly}>
                 {this.props.nullable &&
-                    <option value="">{ApplicationController.isInDebugMode() ? '[null]' : ''}</option>
+                    <option value="">{this.renderNullTitle()}</option>
                 }
                 {this.props.items && this.props.items.map(item =>
                     <option key={item.value} value={item.value}>{item.title}</option>
