@@ -63,7 +63,10 @@ class FormController extends Controller {
     onActionsClick = async li => {
         // console.log('Toolbar.onActionsClick:', li);
         const action = this.model.data.actions[li.dataset.action];
-        const result = await this.onActionClick(action, this.model.getRow());
+        const result = await this.onActionClick(action, this.getActiveRow());
         if (!result) alert(`no handler for ${action.name}`);
+    }
+    async onActionClick(action, row) {
+        console.log('FormController.onActionClick', action, row);
     }
 }

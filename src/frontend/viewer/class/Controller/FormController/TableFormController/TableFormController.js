@@ -199,6 +199,10 @@ class TableFormController extends FormController {
         }
         return null;
     }
+    getActiveRow() {
+        if (!this.state.activeRowKey) throw new Error(`${this.model.getFullName()}: no active row key`);
+        return this.model.getDataSource().getRowByKey(this.state.activeRowKey);
+    }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
         if (this.state.activeRowKey !== null) {

@@ -147,10 +147,6 @@ class RowFormController extends FormController {
         super.onFieldChange(e);
     }
 
-    async onActionClick(action, row) {
-        console.log('RowFormController.onActionClick', action, row);
-    }
-
     onEditClick = e => {
         // console.log('RowFormController.onEditClick', this);
         this.state.mode = 'edit';
@@ -164,5 +160,8 @@ class RowFormController extends FormController {
     getViewClass() {
         // console.log('RowFormController.getViewClass', this.model.getFullName());
         return RowFormView;
+    }
+    getActiveRow() {
+        return this.model.getRow();
     }
 }
