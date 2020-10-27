@@ -92,7 +92,7 @@ class Helper {
         const filePaths = [];
         await _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths);
         const relativeFilePaths = filePaths.map(filePath => {
-            return slash(path.relative(publicDirPath, filePath));
+            return slash(path.relative(path.join(publicDirPath, subDirPath), filePath));
         });
         return relativeFilePaths;
     }

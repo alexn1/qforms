@@ -412,10 +412,11 @@ class HostApp {
     }
 
     async appCssFile(req, application) {
-        // console.log('HostApp.appCssFile');
+        // console.log('HostApp.appCssFile', req.params['0']);
         const relFilePath = req.params['0'];
-        const filePath = path.join(application.appInfo.dirPath, relFilePath);
-        if (path.extname(filePath) === '.css') {
+        const filePath = path.join(application.appInfo.dirPath, 'build', relFilePath);
+        // console.log('filePath:', filePath);
+        if (['.css', '.js'].includes(path.extname(filePath))) {
             const exists = await qforms.Helper.exists(filePath);
             if (exists) {
                 return await qforms.Helper.readFile(filePath);

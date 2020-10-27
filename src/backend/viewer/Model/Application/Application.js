@@ -64,7 +64,7 @@ class Application extends Model {
     async init() {
         await super.init();
         await this.createStartupPages();
-        this.css = await qforms.Helper.getFilePaths(this.getDirPath(), '', 'css');
+        this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
     }
 
     async fill(context) {
