@@ -33,7 +33,7 @@ class CheckBox extends ReactComponent {
                 style={{
                     width: '16px',
                     height: '16px',
-                    backgroundColor: 'yellow',
+                    // backgroundColor: 'yellow',
                     display: 'inline-block',
                     margin: '3px',
                     textAlign: 'center',
