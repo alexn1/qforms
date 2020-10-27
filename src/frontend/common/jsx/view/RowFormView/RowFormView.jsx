@@ -1,6 +1,6 @@
 class RowFormView extends ReactComponent {
     renderToolbar() {
-        // console.log('Toolbar.renderToolbar');
+        // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
         const width = '90px';
         return (
@@ -76,7 +76,7 @@ class RowFormView extends ReactComponent {
         return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
     }
     renderFieldTooltip(ctrl) {
-        // console.log('renderFieldTooltip:', ctrl.state);
+        // console.log('RowFormView.renderToolbar:', ctrl.state);
         return (
             <div key={`tooltip.${ctrl.model.getName()}`} className={`tooltip ${ctrl.model.getName()}`}>
                 <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
