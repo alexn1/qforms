@@ -90,7 +90,6 @@
     overflow-y: scroll;
     overflow-x: auto;
     tr {
-      height: @bodyTrHeight;
       &.active {
         background-color: @bodyTrActiveBackgroundColor !important;
       }
@@ -98,6 +97,7 @@
         background-color: @bodyTrEvenBackgroundColor;
       }
       > td {
+        height: @bodyTdHeight;
         text-shadow: @bodyTdTextShadow;
         &.active {
           text-shadow     : @bodyTdActiveTextShadow;
