@@ -9,6 +9,7 @@ class RowFormCheckBoxFieldView extends ReactComponent {
         ].join(' ');
     }
     render() {
+        // console.log('RowFormCheckBoxFieldView.render');
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <CheckBox
