@@ -12,11 +12,15 @@ class CheckBox extends ReactComponent {
         };
     };
     onChange = e => {
-        // console.log('CheckBox.onChange', e.target.checked);
-        this.setState(prevState => ({checked: !prevState.checked}));
+        // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+        if (!this.props.readOnly) {
+            this.setState(prevState => ({checked: !prevState.checked}));
+        }
     }
     onClick = e => {
-        this.setState({checked: true});
+        if (!this.props.readOnly) {
+            this.setState({checked: true});
+        }
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
@@ -42,6 +46,7 @@ class CheckBox extends ReactComponent {
             <input
                 type="checkbox"
                 checked={this.state.checked}
+                readOnly={this.props.readOnly}
                 onChange={this.onChange}
             />
         );

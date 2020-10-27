@@ -22,6 +22,7 @@ class TextBox extends ReactComponent {
         // console.log('TextBox.render');
         return (
             <input
+                type="text"
                 value={this.state.value}
                 readOnly={this.props.readOnly}
                 onChange={this.onChange}
