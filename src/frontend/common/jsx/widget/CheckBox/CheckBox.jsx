@@ -51,6 +51,7 @@ class CheckBox extends ReactComponent {
                 type="checkbox"
                 checked={this.state.checked}
                 readOnly={this.props.readOnly}
+                disabled={this.props.disabled}
                 onChange={this.onChange}
             />
         );

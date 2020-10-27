@@ -14,6 +14,7 @@ class TableFormCheckBoxFieldView extends ReactComponent {
                 <CheckBox
                     checked={ctrl.renderValueForView(row)}
                     readOnly={true}
+                    // disabled={true}
                 />
             </div>
         );
