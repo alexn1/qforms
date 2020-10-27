@@ -51,11 +51,15 @@
     <script src="common/jsx/view/TableFormComboBoxFieldView/TableFormComboBoxFieldView.js"></script>
 
 
-    <!-- app links begin -->
-    <%links.forEach((link) => {
+    <!-- app files begin -->
+    <%links.forEach(link => {
         %><link rel="stylesheet" href="<%=link%>"/><%
     });%>
-    <!-- app links end -->
+    <%scripts.forEach(script => {
+        %><script src="<%=script%>"></script><%
+    });%>
+    <!-- app files end -->
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const data = <%- JSON.stringify(data, null, 4) %>;

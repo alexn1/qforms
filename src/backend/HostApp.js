@@ -169,6 +169,7 @@ class HostApp {
                 viewerClassCss: this.viewerClassCss,
                 viewerClassJs : this.viewerClassJs,
                 links         : application.css,
+                scripts       : application.js,
                 caption       : `${req.params.appDirName}/${application.getAttr('caption')}`,
                 data          : data,
                 env           : application.getEnv()

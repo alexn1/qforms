@@ -40,6 +40,7 @@ class Application extends Model {
         this.fillCollections    = ['databases', 'dataSources'];
         this.pages              = {};
         this.css                = [];
+        this.js                 = [];
         this.text               = qforms.text[this.getAttr('lang') || 'en'];
         this.databases          = {};
         this.dataSources        = {};
@@ -65,6 +66,7 @@ class Application extends Model {
         await super.init();
         await this.createStartupPages();
         this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
+        this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
 
     async fill(context) {
