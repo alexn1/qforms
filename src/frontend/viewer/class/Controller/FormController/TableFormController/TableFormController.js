@@ -137,7 +137,7 @@ class TableFormController extends FormController {
     }
 
     async edit(key) {
-        console.log('TableForm.edit', this.model.getFullName(), key);
+        // console.log('TableForm.edit', this.model.getFullName(), key);
         if (!this.model.data.itemEditPage) {
             throw new Error(`${this.model.getFullName()}: itemEditPage is empty`);
         }
