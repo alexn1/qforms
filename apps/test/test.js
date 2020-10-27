@@ -11,5 +11,8 @@ class testController extends ApplicationController {
     /*deinit() {
         super.deinit();
     }*/
+    getViewClass() {
+        return testView;
+    }
 }
 testController;

@@ -54,7 +54,7 @@ class ApplicationController extends Controller {
 
     createView(root) {
         console.log('ApplicationController.createView');
-        this.view = ApplicationController.createReactComponent(root, ApplicationView, {ctrl: this});
+        this.view = ApplicationController.createReactComponent(root, this.getViewClass(), {ctrl: this});
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.data.time);
         }
@@ -238,5 +238,8 @@ class ApplicationController extends Controller {
             this.activePage = this.pages[i];
             this.rerender();
         }
+    }
+    getViewClass() {
+        return ApplicationView;
     }
 }
