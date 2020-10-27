@@ -8,7 +8,7 @@ class CheckBox extends ReactComponent {
             throw new Error(`wrong checked prop: ${this.props.checked}`);
         }
         this.state = {
-            checked: this.props.checked !== undefined ? this.props.checked : false
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
         };
     };
     onChange = e => {
