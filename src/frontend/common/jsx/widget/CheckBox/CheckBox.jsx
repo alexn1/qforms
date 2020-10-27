@@ -14,11 +14,15 @@ class CheckBox extends ReactComponent {
     onChange = e => {
         // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
         if (!this.props.readOnly) {
-            this.setState(prevState => ({checked: !prevState.checked}));
+            this.setState(prevState => {
+                if (this.props.onChange) this.props.onChange(!prevState.checked);
+                return {checked: !prevState.checked};
+            });
         }
     }
     onClick = e => {
         if (!this.props.readOnly) {
+            if (this.props.onChange) this.props.onChange(true);
             this.setState({checked: true});
         }
     }

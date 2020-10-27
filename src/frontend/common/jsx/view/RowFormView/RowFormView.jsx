@@ -73,6 +73,9 @@ class RowFormView extends ReactComponent {
         if (ctrl.model.getClassName() === 'TextAreaField') {
             return <RowFormTextAreaFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
         }
+        if (ctrl.model.getClassName() === 'CheckBoxField') {
+            return <RowFormCheckBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
+        }
         return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
     }
     renderFieldTooltip(ctrl) {

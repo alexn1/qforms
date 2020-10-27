@@ -1,6 +1,7 @@
 'use strict';
-class RowFormDatePickerFieldController extends RowFormFieldController {
+class RowFormCheckBoxFieldController extends RowFormFieldController {
     setValue(value) {
+        console.log('RowFormCheckBoxFieldController.setValue', value);
         this.state.isUndefined = value === undefined;
         this.state.value = value;
     }
