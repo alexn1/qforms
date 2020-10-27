@@ -7,7 +7,7 @@ class testView extends ApplicationView {
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <CheckBox></CheckBox>
+            <CheckBox checked={null}></CheckBox>
         );
     }
 }
