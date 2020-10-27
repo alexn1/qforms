@@ -4,7 +4,7 @@ class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.frame  = 1;
-        this.count  = data.count;
+        this.count  = data.count !== undefined data.count : null;
     }
 
     init() {
@@ -324,6 +324,7 @@ class SqlDataSource extends DataSource {
         return null;
     }
     getCount() {
+        if (this.count === 0) throw new Error('no count info');
         return this.count;
     }
     getRowsLength() {
