@@ -324,7 +324,7 @@ class SqlDataSource extends DataSource {
         return null;
     }
     getCount() {
-        if (this.count === 0) throw new Error('no count info');
+        if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         return this.count;
     }
     getRowsLength() {
