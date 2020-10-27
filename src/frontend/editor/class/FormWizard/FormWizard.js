@@ -36,10 +36,16 @@ class FormWizard {
         };
     }
 
+    getFieldClass(column) {
+        if (column.type === 'date') return 'DatePickerField';
+        if (this.params.className === 'RowForm' && column.dbType === 'text') return 'TextAreaField';
+        return 'TextBoxField';
+    }
+
     getField(column) {
         console.log('FormWizard.getField', column);
         let field = {
-            class: 'TextBoxField',
+            class: this.getFieldClass(column),
             name : column.name
         };
         if (column.caption) {

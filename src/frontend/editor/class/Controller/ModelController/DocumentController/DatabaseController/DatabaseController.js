@@ -156,9 +156,10 @@ class DatabaseController extends DocumentController {
                 name    : column.name,
                 caption : column.name,
                 type    : column.type,
+                dbType  : column.dbType,
                 key     : column.key,
                 auto    : column.auto,
-                nullable: column.nullable
+                nullable: column.nullable,
             }))
         };
         const tableData = await this.model.newTable(params);
