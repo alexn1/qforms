@@ -32,6 +32,13 @@ class TableFormView extends ReactComponent {
                         enabled={ctrl.isRowSelected()}
                     />
                 }
+                {Object.keys(ctrl.model.data.actions).length > 0 &&
+                    <DropdownButton
+                        actions={ctrl.getActions()}
+                        onClick={ctrl.onActionsClick}
+                        enabled={ctrl.isRowSelected()}
+                    />
+                }
             </div>
         );
     }

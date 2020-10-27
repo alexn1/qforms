@@ -29,12 +29,7 @@ class RowFormController extends FormController {
         super.deinit();
     }
 
-    onActionsClick = async li => {
-        // console.log('Toolbar.onActionsClick:', li);
-        const action = this.model.data.actions[li.dataset.action];
-        const result = await this.onActionClick(action, this.model.getRow());
-        if (!result) alert(`no handler for ${action.name}`);
-    }
+
 
     calcState() {
         this.state.hasNew  = this.model.hasNew();
@@ -47,15 +42,7 @@ class RowFormController extends FormController {
         // console.log('hasNew:', hasNew);
     }
 
-    getActions() {
-        return Object.keys(this.model.data.actions).map(name => {
-            const action = this.model.data.actions[name];
-            return {
-                name : action.name,
-                title: action.caption
-            };
-        });
-    }
+
 
     refill() {
         console.log('RowFormController.refill', this.model.getFullName());

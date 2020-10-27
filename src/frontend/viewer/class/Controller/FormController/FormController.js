@@ -51,4 +51,19 @@ class FormController extends Controller {
     invalidate() {
         this.state.updated = Date.now();
     }
+    getActions() {
+        return Object.keys(this.model.data.actions).map(name => {
+            const action = this.model.data.actions[name];
+            return {
+                name : action.name,
+                title: action.caption
+            };
+        });
+    }
+    onActionsClick = async li => {
+        // console.log('Toolbar.onActionsClick:', li);
+        const action = this.model.data.actions[li.dataset.action];
+        const result = await this.onActionClick(action, this.model.getRow());
+        if (!result) alert(`no handler for ${action.name}`);
+    }
 }

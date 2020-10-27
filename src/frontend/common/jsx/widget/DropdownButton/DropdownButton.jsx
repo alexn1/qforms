@@ -2,7 +2,8 @@ class DropdownButton extends ReactComponent{
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            disabled: false
         };
     }
     onButtonClick = e => {
@@ -28,10 +29,19 @@ class DropdownButton extends ReactComponent{
             }
         });
     }
+    isDisabled() {
+        if (this.props.enabled !== undefined) return !this.props.enabled;
+        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+        return this.state.disabled;
+    }
     render() {
         return (
             <div className={`DropdownButton ${this.state.open && 'show'}`}>
-                <button onClick={this.onButtonClick} onBlur={this.onButtonBlur}>Actions</button>
+                <button
+                    onClick={this.onButtonClick}
+                    onBlur={this.onButtonBlur}
+                    disabled={this.isDisabled()}
+                >Actions</button>
                 <ul onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
                     {this.props.actions && this.props.actions.map(action =>
                         <li key={action.name} data-action={action.name}>{action.title}</li>
