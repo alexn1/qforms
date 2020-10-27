@@ -233,7 +233,7 @@ class ApplicationController extends Controller {
         this.statusbar = statusbar;
     }
     onTabMouseDown = i => {
-        console.log('PageController.onTabMouseDown');
+        // console.log('PageController.onTabMouseDown');
         if (this.activePage !== this.pages[i]) {
             this.activePage = this.pages[i];
             this.rerender();
