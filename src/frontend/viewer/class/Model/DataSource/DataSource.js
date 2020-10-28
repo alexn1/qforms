@@ -507,7 +507,7 @@ class DataSource extends Model {
         if (this.changes.has(row)) {
             return {...row, ...this.changes.get(row)};
         }
-        return {...row};
+        return row;
     }
 
     hasNewRows() {
