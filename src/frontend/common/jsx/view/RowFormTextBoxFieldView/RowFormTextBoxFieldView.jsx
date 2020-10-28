@@ -10,7 +10,7 @@ class RowFormTextBoxFieldView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getClassName()} style={ctrl.renderViewStyle(row)}>
+        return <div className={this.getClassName()}>
             <TextBox
                 // onCreate={ctrl.onViewCreate}
                 value={ctrl.renderValueForView()}

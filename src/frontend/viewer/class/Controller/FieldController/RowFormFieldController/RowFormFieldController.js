@@ -111,7 +111,4 @@ class RowFormFieldController extends FieldController {
         }
         return changed;
     }
-    renderViewStyle(row) {
-        return null;
-    }
 }
