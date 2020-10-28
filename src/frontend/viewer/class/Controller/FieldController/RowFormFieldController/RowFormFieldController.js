@@ -36,8 +36,11 @@ class RowFormFieldController extends FieldController {
         return this.state.value;
     }
     setValue(value) {
+        // console.log('RowFormFieldController.setValue', this.model.getFullName(), value);
         this.state.isUndefined = value === undefined;
-        this.state.value = this.valueToString(value);
+        const stringValue = this.valueToString(value);
+        // console.log('stringValue:', stringValue);
+        this.state.value = stringValue;
     }
     getValue() {
         if (this.state.isUndefined) return undefined;
@@ -72,6 +75,7 @@ class RowFormFieldController extends FieldController {
                 if (value === null) return 'null';
                 if (value === '') return 'empty string';
             } catch (err) {
+                console.error(`${this.model.getFullName()}: getPlaceHolder: ${err.message}`);
             }
         }
     }
