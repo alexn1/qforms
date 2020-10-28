@@ -15,6 +15,9 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
         return `[no row for id: ${rawValue}]`;
     }
+    getViewClass() {
+        return TableFormComboBoxFieldView;
+    }
 
     /*init() {
         //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());

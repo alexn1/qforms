@@ -69,33 +69,16 @@ class TableFormView extends ReactComponent {
     }
     renderGridCellView = (row, column, onCreate, onUnmount) => {
         // console.log('TableFormView.renderGridCellView');
-        const ctrl = this.props.ctrl;
-        const fieldCtrl = ctrl.fields[column.name];
-        // console.log(column.name, fieldCtrl.constructor.name);
-        if (fieldCtrl.model.getClassName() === 'TextBoxField') return React.createElement(fieldCtrl.getViewClass(), {
-            row, column, onCreate, onUnmount, ctrl: fieldCtrl
-        });
-        if (fieldCtrl.model.getClassName() === 'DatePickerField') return <TableFormDatePickerFieldView
-            row={row}
-            column={column}
-            onCreate={onCreate}
-            onUnmount={onUnmount}
-            ctrl={fieldCtrl}
-        />;
-        if (fieldCtrl.model.getClassName() === 'ComboBoxField') return <TableFormComboBoxFieldView
-            row={row}
-            column={column}
-            onCreate={onCreate}
-            onUnmount={onUnmount}
-            ctrl={fieldCtrl}
-        />;
-        if (fieldCtrl.model.getClassName() === 'CheckBoxField') return <TableFormCheckBoxFieldView
-            row={row}
-            column={column}
-            onCreate={onCreate}
-            onUnmount={onUnmount}
-            ctrl={fieldCtrl}
-        />;
+        const ctrl = this.props.ctrl.fields[column.name];
+        // console.log(column.name, ctrl.constructor.name);
+        if ([
+            'TextBoxField',
+            'DatePickerField',
+            'ComboBoxField',
+            'CheckBoxField'
+        ].includes(ctrl.model.getClassName())) {
+            return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
+        }
         return null;
     }
     shouldComponentUpdate(nextProps, nextState) {

@@ -6,4 +6,7 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
         if (value) return Helper.formatDate(this.model.getValue(row), this.model.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
+    getViewClass() {
+        return TableFormDatePickerFieldView;
+    }
 }
