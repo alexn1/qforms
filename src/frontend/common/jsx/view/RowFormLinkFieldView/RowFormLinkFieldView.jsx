@@ -12,7 +12,7 @@ class RowFormLinkFieldView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getClassName()}>
-                <a href="#">{ctrl.renderValueForView()}</a>
+                <a href="#" onClick={ctrl.onClick}>{ctrl.renderValueForView()}</a>
             </div>
         );
     }
