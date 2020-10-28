@@ -14,4 +14,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (this.state.isUndefined) return undefined;
         return this.stringToValue(this.state.value);
     }
+    getViewClass() {
+        return RowFormComboBoxFieldView;
+    }
 }

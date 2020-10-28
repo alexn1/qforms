@@ -8,4 +8,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         if (this.state.isUndefined) return undefined;
         return this.state.value;
     }
+    getViewClass() {
+        return RowFormDatePickerFieldView;
+    }
 }
