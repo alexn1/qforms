@@ -3,7 +3,7 @@ class RowFormLinkFieldView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return [
             'field',
-            'RowFormTextBoxFieldView',
+            'RowFormLinkFieldView',
             ...(ctrl.state.changed ? ['changed'] : []),
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');
