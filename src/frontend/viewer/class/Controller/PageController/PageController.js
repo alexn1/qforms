@@ -112,5 +112,8 @@ class PageController extends Controller {
     getApplicationController() {
         return this.parent;
     }
+    getViewClass() {
+        return PageView;
+    }
 
 }

@@ -1,11 +1,13 @@
 class ApplicationView extends ReactComponent {
     getTabs() {
-        const ctrl = this.props.ctrl;
-        return ctrl.pages.map(pageCtrl => {
+        return this.props.ctrl.pages.map(pageCtrl => {
             return {
                 name   : pageCtrl.model.id,
                 title  : pageCtrl.model.getCaption(),
-                content: <PageView ctrl={pageCtrl} onCreate={pageCtrl.onViewCreate}/>
+                content: React.createElement(pageCtrl.getViewClass(), {
+                    ctrl    : pageCtrl,
+                    onCreate: pageCtrl.onViewCreate
+                })
             };
         });
     }
