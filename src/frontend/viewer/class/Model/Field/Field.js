@@ -47,7 +47,7 @@ class Field extends Model {
     }
 
     setValue(row, value) {
-        console.log('Field.setValue', this.getFullName(), value);
+        // console.log('Field.setValue', this.getFullName(), value);
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.encodeValue(value);
         this.getForm().getDataSource().setValue(row, this.data.column, rawValue);

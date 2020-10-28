@@ -42,7 +42,7 @@ class FormController extends Controller {
         return false;
     }
     onFieldChange(e) {
-        console.log('FormController.onFieldChange', this.model.getFullName());
+        // console.log('FormController.onFieldChange', this.model.getFullName());
         this.getPageController().onFormChange(e);
     }
     getUpdated() {

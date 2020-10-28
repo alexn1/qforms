@@ -141,7 +141,7 @@ class RowFormController extends FormController {
     }
 
     onFieldChange(e) {
-        console.log('RowFormController.onFieldChange', this.model.getFullName());
+        // console.log('RowFormController.onFieldChange', this.model.getFullName());
         this.calcState();
         this.invalidate();
         super.onFieldChange(e);

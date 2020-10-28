@@ -70,7 +70,7 @@ class PageController extends Controller {
         return true;
     }
     onFormChange(e) {
-        console.log('PageController.onFormChange', this.model.getFullName());
+        // console.log('PageController.onFormChange', this.model.getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
