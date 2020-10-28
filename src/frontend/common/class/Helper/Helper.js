@@ -57,5 +57,13 @@ class Helper {
         }
         return value;
     }
+    static createReactComponent(root, type, props = {}, children) {
+        // console.log('Helper.createReactComponent', root, type);
+        let component;
+        props.onCreate = c => component = c;
+        const reactElement = React.createElement(type, props, children);
+        ReactDOM.render(reactElement, root);
+        return component;
+    }
 
 }

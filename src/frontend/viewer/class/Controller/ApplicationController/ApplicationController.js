@@ -3,8 +3,7 @@
 class ApplicationController extends Controller {
 
     static create(model) {
-        // console.log('ApplicationController.create');
-        // console.log('debug:', ApplicationController.isInDebugMode());
+        // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
@@ -54,18 +53,20 @@ class ApplicationController extends Controller {
 
     createView(root) {
         console.log('ApplicationController.createView');
-        this.view = ApplicationController.createReactComponent(root, this.getViewClass(), {ctrl: this});
+        this.view = Helper.createReactComponent(root, this.getViewClass(), {ctrl: this});
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.data.time);
         }
     }
-
+    getViewClass() {
+        return ApplicationView;
+    }
     getMenuItemsProp() {
         return Object.keys(this.model.data.menu).map(key => ({
-            name: key,
+            name : key,
             title: key,
             items: this.model.data.menu[key].map(item => ({
-                name: item.page,
+                name : item.page,
                 title: item.caption
             }))
         }));
@@ -217,19 +218,11 @@ class ApplicationController extends Controller {
         }
     }
 
-    static createReactComponent(root, type, props = {}, children) {
-        // console.log('ApplicationController.createReactComponent', root, type);
-        let component;
-        props.onCreate = c => component = c;
-        const reactElement = React.createElement(type, props, children);
-        ReactDOM.render(reactElement, root);
-        return component;
-    }
-    onTabCreated = tab => {
-        // console.log('ApplicationController.onTabCreated', tab);
+    onTabCreate = tab => {
+        // console.log('ApplicationController.onTabCreate', tab);
         this.tab = tab;
     }
-    onStatusbarCreated = statusbar => {
+    onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
     }
     onTabMouseDown = i => {
@@ -239,7 +232,5 @@ class ApplicationController extends Controller {
             this.rerender();
         }
     }
-    getViewClass() {
-        return ApplicationView;
-    }
+
 }
