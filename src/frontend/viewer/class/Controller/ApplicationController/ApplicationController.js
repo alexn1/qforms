@@ -9,18 +9,17 @@ class ApplicationController extends Controller {
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
             return new CustomClass(model);
         }
-        return eval(`new ${model.getClassName()}Controller(model)`);
+        return new MdiApplicationController(model);
     }
 
     constructor(model) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
         this.lastPageId = 0;
-        this.tab        = null;
-        this.statusbar  = null;
         this.pages      = null;
-        this.activePage = null;
         this.modalPages = [];
+        this.activePage = null;
+        this.statusbar  = null;
     }
 
     static getSearchObj() {
@@ -89,37 +88,18 @@ class ApplicationController extends Controller {
     }
 
     deinit() {
-        // app
         this.model.off('logout', this.listeners.logout);
         this.model.off('request', this.listeners.request);
-
-        // TabWidget
-        /*this.tabWidget.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.tabWidget.off('tabShow', this.listeners.tabShow);
-        this.tabWidget.off('tabHide', this.listeners.tabHide);*/
         super.deinit();
     }
 
-    onPageSelected(pc) {
-        console.log('ApplicationController.onPageSelected', pc.model.getName());
+    onPageSelect(pc) {
+        console.log('ApplicationController.onPageSelect', pc.model.getName());
         const i = this.pages.indexOf(pc);
         if (i === -1) throw new Error(`no page controller ${pc.model.getName()} in pages`);
         this.activePage = pc;
         this.tab.rerender();
     }
-
-    /*onTabShow(e) {
-        // console.log('ApplicationController.onTabShow', e.tab.pageController);
-        if (e.tab.pageController) {
-            e.tab.pageController.emit('show', {source: this});
-        }
-    }*/
-
-    /*onTabHide(e) {
-        if (e.tab.pageController) {
-            e.tab.pageController.emit('hide', {source: this});
-        }
-    }*/
 
     onLogout(ea) {
         location.reload();
@@ -170,7 +150,7 @@ class ApplicationController extends Controller {
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
         // console.log('pageController:', pageController);
         if (pageController) {
-            this.onPageSelected(pageController);
+            this.onPageSelect(pageController);
             return;
         }
         const parentPageName = parentPage ? parentPage.getName() : null;
@@ -218,19 +198,7 @@ class ApplicationController extends Controller {
         }
     }
 
-    onTabCreate = tab => {
-        // console.log('ApplicationController.onTabCreate', tab);
-        this.tab = tab;
-    }
     onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
     }
-    onTabMouseDown = i => {
-        // console.log('PageController.onTabMouseDown');
-        if (this.activePage !== this.pages[i]) {
-            this.activePage = this.pages[i];
-            this.rerender();
-        }
-    }
-
 }
