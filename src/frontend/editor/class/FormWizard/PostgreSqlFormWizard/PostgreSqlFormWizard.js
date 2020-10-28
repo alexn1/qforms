@@ -14,16 +14,26 @@ class PostgreSqlFormWizard extends FormWizard {
     // }
 
     getSingleQuery() {
-        const columns = this.tableColumns.map(column => column.name);
         console.log('PostgreSqlFormWizard.getSingleQuery');
+        const columns = this.tableColumns.filter(column => {
+            if (this.params.className === 'TableForm' && column.dbType === 'text') {
+                return false;
+            }
+            return true;
+        }).map(column => column.name);
         return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'
             .replace('{table}',   this.tableName)
             .replace('{columns}', columns.map(column => `    "${column}"`).join(',\n'));
     }
 
     getMultipleQuery() {
-        const columns = this.tableColumns.map(column => column.name);
         console.log('PostgreSqlFormWizard.getMultipleQuery');
+        const columns = this.tableColumns.filter(column => {
+            if (this.params.className === 'TableForm' && column.dbType === 'text') {
+                return false;
+            }
+            return true;
+        }).map(column => column.name);
         const _columns = columns.map(column => `    "${column}"`).join(',\n');
         return `select\n${_columns}\nfrom "${this.tableName}"\nlimit {limit}\noffset {offset}`;
     }

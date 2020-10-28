@@ -70,10 +70,18 @@ class FormWizard {
 
     getFields() {
         let fields = {};
-        for (let i = 0; i < this.tableColumns.length; i++) {
+        this.tableColumns.filter(column => {
+            if (this.params.className === 'TableForm' && column.dbType === 'text') {
+                return false;
+            }
+            return true;
+        }).forEach(column => {
+            fields[column.name] = this.getField(column);
+        });
+        /*for (let i = 0; i < this.tableColumns.length; i++) {
             const column = this.tableColumns[i];
             fields[column.name] = this.getField(column);
-        }
+        }*/
         return fields;
     }
 
