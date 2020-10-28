@@ -72,13 +72,9 @@ class TableFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const fieldCtrl = ctrl.fields[column.name];
         // console.log(column.name, fieldCtrl.constructor.name);
-        if (fieldCtrl.model.getClassName() === 'TextBoxField') return <TableFormTextBoxFieldView
-            row={row}
-            column={column}
-            onCreate={onCreate}
-            onUnmount={onUnmount}
-            ctrl={fieldCtrl}
-        />;
+        if (fieldCtrl.model.getClassName() === 'TextBoxField') return React.createElement(fieldCtrl.getViewClass(), {
+            row, column, onCreate, onUnmount, ctrl: fieldCtrl
+        });
         if (fieldCtrl.model.getClassName() === 'DatePickerField') return <TableFormDatePickerFieldView
             row={row}
             column={column}
