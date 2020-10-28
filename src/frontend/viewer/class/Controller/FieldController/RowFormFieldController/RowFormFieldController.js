@@ -94,18 +94,20 @@ class RowFormFieldController extends FieldController {
     isChanged2(row) {
         // console.log('RowFormFieldController.isChanged2', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        try {
-            if (this.model.hasColumn()) {
-                const dsValue = this.model.getRawValue(row);
-                const fieldValue = this.model.getValueForDataSource(this.getValue());
-                if (dsValue !== fieldValue) {
-                    console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsValue, fieldValue);
-                    return true;
-                }
+        if (this.model.hasColumn()) {
+            let value;
+            try {
+                value = this.getValue();
+            } catch (err) {
+                console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
+                return true;
             }
-        } catch (err) {
-            console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
-            return true;
+            const fieldRawValue = this.model.encodeValue(value);
+            const dsRawValue = this.model.getRawValue(row);
+            if (fieldRawValue !== dsRawValue) {
+                console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsRawValue, fieldRawValue);
+                return true;
+            }
         }
         const changed = this.model.isChanged(row);
         if (changed) {
