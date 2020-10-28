@@ -49,9 +49,6 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.data.time);
         }
     }
-    getViewClass() {
-        return ApplicationView;
-    }
     getMenuItemsProp() {
         return Object.keys(this.model.data.menu).map(key => ({
             name : key,

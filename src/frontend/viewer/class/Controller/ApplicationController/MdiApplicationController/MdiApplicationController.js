@@ -17,6 +17,9 @@ class MdiApplicationController extends ApplicationController {
         this.tabWidget.off('tabHide', this.listeners.tabHide);*/
         super.deinit();
     }
+    getViewClass() {
+        return MdiApplicationView;
+    }
     /*onTabShow(e) {
         // console.log('ApplicationController.onTabShow', e.tab.pageController);
         if (e.tab.pageController) {
