@@ -5,51 +5,45 @@ class RowFormView extends ReactComponent {
         const width = '90px';
         return (
             <div className="toolbar">
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
-                    [
-                        <Button
-                            key="edit"
-                            title="Edit"
-                            onClick={ctrl.onEditClick}
-                            visible={ctrl.state.mode === 'view'}
-                            width={width}
-                        />,
-                        <Button
-                            key="save"
-                            title="Save"
-                            enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
-                            onClick={ctrl.onSaveClick}
-                            visible={ctrl.state.mode === 'edit'}
-                            width={width}
-                        />,
-                        <Button
-                            key="cancel"
-                            title="Cancel"
-                            visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
-                            onClick={ctrl.onCancelClick}
-                            width={width}
-                        />,
-                        <Button
-                            key="discard"
-                            title="Discard"
-                            enabled={ctrl.state.changed || !ctrl.isValid()}
-                            onClick={ctrl.onDiscardClick}
-                            visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
-                            width={width}
-                        />,
-                        <Button
-                            key="refresh"
-                            title="Refresh"
-                            enabled={!ctrl.state.changed && !ctrl.state.hasNew}
-                            onClick={ctrl.onRefreshClick}
-                            visible={ctrl.state.mode === 'view'}
-                            width={width}
-                        />
-                    ]
-                }
-                {Object.keys(ctrl.model.data.actions).length > 0 &&
-                    <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
-                }
+                <Button
+                    key="edit"
+                    title="Edit"
+                    onClick={ctrl.onEditClick}
+                    visible={ctrl.state.mode === 'view'}
+                    width={width}
+                />
+                <Button
+                    key="save"
+                    title="Save"
+                    enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
+                    onClick={ctrl.onSaveClick}
+                    visible={ctrl.state.mode === 'edit'}
+                    width={width}
+                />
+                <Button
+                    key="cancel"
+                    title="Cancel"
+                    visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
+                    onClick={ctrl.onCancelClick}
+                    width={width}
+                />
+                <Button
+                    key="discard"
+                    title="Discard"
+                    enabled={ctrl.state.changed || !ctrl.isValid()}
+                    onClick={ctrl.onDiscardClick}
+                    visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
+                    width={width}
+                />
+                <Button
+                    key="refresh"
+                    title="Refresh"
+                    enabled={!ctrl.state.changed && !ctrl.state.hasNew}
+                    onClick={ctrl.onRefreshClick}
+                    visible={ctrl.state.mode === 'view'}
+                    width={width}
+                />
+                <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
             </div>
         );
     }
@@ -106,9 +100,10 @@ class RowFormView extends ReactComponent {
     }
     render() {
         console.log('RowFormView.render', this.props.ctrl.model.getFullName());
+        const ctrl = this.props.ctrl;
         return (
             <div className="RowFormView">
-                {this.renderToolbar()}
+                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' && this.renderToolbar()}
                 {this.renderFormGrid()}
             </div>
         );
