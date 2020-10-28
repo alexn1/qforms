@@ -35,11 +35,13 @@ class RowFormFieldController extends FieldController {
     renderValueForView() {
         return this.state.value;
     }
-    getValue() {
-        throw new Error('RowFormFieldController.getValue not implemented');
-    }
     setValue(value) {
-        throw new Error('RowFormFieldController.setValue not implemented');
+        this.state.isUndefined = value === undefined;
+        this.state.value = this.valueToString(value);
+    }
+    getValue() {
+        if (this.state.isUndefined) return undefined;
+        return this.stringToValue(this.state.value);
     }
     isChanged() {
         return this.state.changed;
