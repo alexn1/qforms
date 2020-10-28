@@ -16,7 +16,6 @@ class ApplicationController extends Controller {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
         this.lastPageId = 0;
-        this.pages      = null;
         this.modalPages = [];
         this.activePage = null;
         this.statusbar  = null;
@@ -38,18 +37,11 @@ class ApplicationController extends Controller {
 
     init() {
         // console.log('ApplicationController.init');
+        super.init();
         this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request', this.listeners.request = this.onRequest.bind(this));
-        this.pages = this.createPages();
-        this.activePage = this.pages.length ? this.pages[0] : null;
-    }
 
-    getActivePageIndex = () => {
-        const i = this.activePage ? this.pages.indexOf(this.activePage) : null;
-        if (i === -1) throw new Error('active page not in list');
-        return i;
     }
-
     createView(root) {
         console.log('ApplicationController.createView');
         this.view = Helper.createReactComponent(root, this.getViewClass(), {ctrl: this});
@@ -71,35 +63,13 @@ class ApplicationController extends Controller {
         }));
     }
 
-    createPages() {
-        return Object.keys(this.model.data.pages).map(name => {
-            // model
-            const page = new Page(this.model.data.pages[name], this.model, {
-                id   : `p${this.getNextPageId()}`,
-                modal: false
-            });
-            page.init();
-
-            // controller
-            const pageController = PageController.create(page, this);
-            pageController.init();
-            return pageController;
-        });
-    }
-
     deinit() {
         this.model.off('logout', this.listeners.logout);
         this.model.off('request', this.listeners.request);
         super.deinit();
     }
 
-    onPageSelect(pc) {
-        console.log('ApplicationController.onPageSelect', pc.model.getName());
-        const i = this.pages.indexOf(pc);
-        if (i === -1) throw new Error(`no page controller ${pc.model.getName()} in pages`);
-        this.activePage = pc;
-        this.tab.rerender();
-    }
+
 
     onLogout(ea) {
         location.reload();
@@ -110,32 +80,6 @@ class ApplicationController extends Controller {
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
         }
-    }
-
-    closePage(pageController) {
-        // console.log('ApplicationController.closePage', pageController.model.getFullName());
-        if (this.pages.indexOf(pageController) > -1) {
-            this.pages.splice(this.pages.indexOf(pageController), 1);
-            if (this.activePage === pageController) {
-                this.activePage = this.pages[this.pages.length - 1];
-            }
-        } else if (this.modalPages.indexOf(pageController) > -1) {
-            this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
-        } else {
-            throw new Error('page not found');
-        }
-        this.rerender();
-        pageController.deinit();
-        pageController.model.deinit();
-    }
-
-    onPageClose = i => {
-        console.log('ApplicationController.onPageClose', this.pages[i].model.getFullName());
-        this.closePage(this.pages[i]);
-    }
-
-    findPageControllerByPageNameAndKey(pageName, key) {
-        return this.pages.find(({model}) => model.getName() === pageName && model.getKey() === key);
     }
 
     async openPage(options) {
@@ -153,7 +97,6 @@ class ApplicationController extends Controller {
             this.onPageSelect(pageController);
             return;
         }
-        const parentPageName = parentPage ? parentPage.getName() : null;
 
         const params = {
             ...(parentPage ? parentPage.params : {}),
@@ -161,7 +104,9 @@ class ApplicationController extends Controller {
         };
         //console.log('open ' + name + ' with key: ' + key);
 
-        const response = await this.model.request({
+        const parentPageName = parentPage ? parentPage.getName() : null;
+
+        const {page: pageData} = await this.model.request({
             action        : 'page',
             page          : name,
             newMode       : newMode,
@@ -169,16 +114,16 @@ class ApplicationController extends Controller {
             params        : Helper.encodeObject(params)
         });
 
-        const page = new Page(response.page, this.model, {
+        const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
             params        : params,
             parentPageName: parentPageName,
             modal         : modal
         });
-        page.init();
-        const pc = PageController.create(page, this);
+        pageModel.init();
+        const pc = PageController.create(pageModel, this);
         pc.init();
-        modal ? this.modalPages.push(pc) : this.pages.push(this.activePage = pc);
+        modal ? this.modalPages.push(pc) : this.onPageCreate(pc);
         this.rerender();
         // console.log('pc:', pc);
     }

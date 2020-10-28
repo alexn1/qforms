@@ -33,7 +33,7 @@ class ApplicationView extends ReactComponent {
                 <Tab
                     tabs={this.getTabs()}
                     canClose={true}
-                    onTabClose={ctrl.onPageClose}
+                    onTabClose={ctrl.onTabClose}
                     onCreate={ctrl.onTabCreate}
                     getActive={ctrl.getActivePageIndex}
                     onTabMouseDown={ctrl.onTabMouseDown}
