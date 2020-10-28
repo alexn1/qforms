@@ -1,10 +1,10 @@
 'use strict';
 
 class TableFormCheckBoxFieldController extends TableFormFieldController {
-    renderValueForView(row) {
-        return this.model.getValue(row);
-    }
     getViewClass() {
         return TableFormCheckBoxFieldView;
+    }
+    renderValueForView(row) {
+        return this.model.getValue(row);
     }
 }

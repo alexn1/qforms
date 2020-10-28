@@ -68,7 +68,8 @@ class RowFormView extends ReactComponent {
             'DatePickerField',
             'ComboBoxField',
             'TextAreaField',
-            'CheckBoxField'
+            'CheckBoxField',
+            'LinkField',
         ].includes(ctrl.model.getClassName())) {
             return React.createElement(ctrl.getViewClass(), {key: `field.${ctrl.model.getName()}`, ctrl});
         }

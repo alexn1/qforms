@@ -1,11 +1,9 @@
 'use strict';
 
 class TableFormComboBoxFieldController extends TableFormFieldController {
-
-    // constructor(model, parent) {
-    //     super(model, parent);
-    // }
-
+    getViewClass() {
+        return TableFormComboBoxFieldView;
+    }
     renderValueForView(row) {
         const rawValue = this.model.getRawValue(row);
         if (rawValue === undefined || rawValue === 'null') return '';
@@ -15,9 +13,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
         return `[no row for id: ${rawValue}]`;
     }
-    getViewClass() {
-        return TableFormComboBoxFieldView;
-    }
+
 
     /*init() {
         //console.log('TableFormComboBoxFieldController.init: ' + this.model.getFullName());

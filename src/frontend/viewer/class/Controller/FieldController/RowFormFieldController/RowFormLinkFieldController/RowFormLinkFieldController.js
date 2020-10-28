@@ -1,5 +1,4 @@
-'use strict';
-class RowFormTextBoxFieldController extends RowFormFieldController {
+class RowFormLinkFieldController extends  RowFormFieldController {
     setValue(value) {
         this.state.isUndefined = value === undefined;
         this.state.value = this.valueToString(value);
@@ -9,6 +8,6 @@ class RowFormTextBoxFieldController extends RowFormFieldController {
         return this.stringToValue(this.state.value);
     }
     getViewClass() {
-        return RowFormTextBoxFieldView;
+        return RowFormLinkFieldView;
     }
 }

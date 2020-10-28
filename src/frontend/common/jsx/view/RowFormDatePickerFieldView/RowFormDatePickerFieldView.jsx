@@ -4,7 +4,7 @@ class RowFormDatePickerFieldView extends ReactComponent {
         const model = ctrl.model;
         return [
             'field',
-            `RowForm${model.getClassName()}View`,
+            'RowFormDatePickerFieldView',
             ...(ctrl.state.changed ? ['changed'] : []),
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');

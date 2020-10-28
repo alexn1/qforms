@@ -1,15 +1,10 @@
 'use strict';
 
 class LabelFieldController extends TableFormFieldController {
-    constructor(model, parent) {
-        super(model, parent);
-    }
-
-    getValue(view) {
+    /*getValue(view) {
         return view.firstElementChild.innerHTML;
-    }
-
-    setValue(value, view) {
+    }*/
+    /*setValue(value, view) {
         view.firstElementChild.innerHTML = value;
-    }
+    }*/
 }
