@@ -16,7 +16,7 @@ class SdiApplicationView extends ApplicationView {
         return (
             <div className={`ApplicationView ${model.data.theme}`}>
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
-                <div>
+                <div className="sdi">
                     {this.renderActivePage()}
                 </div>
                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>

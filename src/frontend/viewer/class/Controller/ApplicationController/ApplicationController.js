@@ -1,7 +1,6 @@
 'use strict';
 
 class ApplicationController extends Controller {
-
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         if (model.data.js) {
@@ -11,16 +10,6 @@ class ApplicationController extends Controller {
         }
         return new SdiApplicationController(model);
     }
-
-    constructor(model) {
-        // console.log('ApplicationController.constructor', model, view);
-        super(model, null);
-        this.lastPageId = 0;
-        this.modalPages = [];
-        this.activePage = null;
-        this.statusbar  = null;
-    }
-
     static getSearchObj() {
         // console.log('ApplicationController.getSearchObj:', window.location);
         if (!window.location.search.split('?')[1]) return {};
@@ -30,17 +19,27 @@ class ApplicationController extends Controller {
             return acc;
         }, {});
     }
-
     static isInDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
     }
-
+    constructor(model) {
+        // console.log('ApplicationController.constructor', model, view);
+        super(model, null);
+        this.lastPageId = 0;
+        this.modalPages = [];
+        this.activePage = null;
+        this.statusbar  = null;
+    }
     init() {
         // console.log('ApplicationController.init');
         super.init();
-        this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
+        // this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
         this.model.on('request', this.listeners.request = this.onRequest.bind(this));
-
+    }
+    deinit() {
+        // this.model.off('logout', this.listeners.logout);
+        this.model.off('request', this.listeners.request);
+        super.deinit();
     }
     createView(root) {
         console.log('ApplicationController.createView');
@@ -59,26 +58,15 @@ class ApplicationController extends Controller {
             }))
         }));
     }
-
-    deinit() {
-        this.model.off('logout', this.listeners.logout);
-        this.model.off('request', this.listeners.request);
-        super.deinit();
-    }
-
-
-
-    onLogout(ea) {
+    /*onLogout(ea) {
         location.reload();
-    }
-
+    }*/
     onRequest(e) {
         // console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
         }
     }
-
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
