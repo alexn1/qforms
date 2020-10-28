@@ -9,7 +9,7 @@ class ApplicationController extends Controller {
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
             return new CustomClass(model);
         }
-        return new MdiApplicationController(model);
+        return new SdiApplicationController(model);
     }
 
     constructor(model) {
