@@ -1,16 +1,9 @@
-class TableFormDatePickerFieldView extends ReactComponent {
-    constructor(props) {
-        super(props);
-        this.span = React.createRef();
-    }
-    getSpanOffsetWidth() {
-        return this.span.current.offsetWidth;
-    }
+class TableFormDatePickerFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className="TableFormDatePickerFieldView">
+            <div className="TableFormDatePickerFieldView" style={ctrl.renderViewStyle(row)}>
                 <span ref={this.span}>{ctrl.renderValueForView(row)}</span>
             </div>
         );

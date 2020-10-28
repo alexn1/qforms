@@ -5,6 +5,6 @@ class TableFormFieldController extends FieldController {
         return this.valueToString(this.model.getValue(row));
     }
     renderViewStyle(row) {
-        return {};
+        return null;
     }
 }
