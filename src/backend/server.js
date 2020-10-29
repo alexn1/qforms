@@ -210,32 +210,40 @@ function e500(err, req, res, next) {
     }
 }
 
+function multipart2(req, res) {
+    return new Promise(resolve => multipart(req, res, resolve));
+}
+
 async function multipartHandler(req, res, next) {
     if (!req.is('multipart/form-data')) {
         next();
         return;
     }
     console.log('multipartHandler');
+    await multipart2(req, res);
+    if (req.body.json) {
+        const data = JSON.parse(req.body.json);
+        delete req.body.json;
+        for (const name in data) {
+            req.body[name] = data[name];
+        }
+    }
+    for (const _name in req.files) {
+        if (_name.substr(0, 1) !== '_') continue;
+        const name = _name.substr(1, _name.length - 1);
+        req.body[name] = await Helper.createBuffer(req.files[_name].path);
+    }
+
+    /*if (req.body.row) {
+        for (let name in req.files) {
+            req.body.row[name] = req.files[name];
+        }
+    }*/
+    next();
+
+    /*
     multipart(req, res, async () => {
-        for (const name in req.files) {
-            const file = req.files[name];
-            const data = await Helper.getBinData(file.path);
-            req.body[name] = {...file, data};
-        }
-        if (req.body.__data) {
-            const body = JSON.parse(req.body.__data);
-            delete req.body.__data;
-            for (const name in body) {
-                req.body[name] = body[name];
-            }
-        }
-        /*if (req.body.row) {
-            for (let name in req.files) {
-                req.body.row[name] = req.files[name];
-            }
-        }*/
-        next();
-    });
+    });*/
 }
 
 function getTest(req, res, next) {

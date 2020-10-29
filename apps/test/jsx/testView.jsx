@@ -8,7 +8,7 @@ class testView extends ApplicationView {
         return (
             <div>
                 <Button onClick={ctrl.onButtonClick}>Button</Button>
-                <input type="file" onChange={ctrl.onFileChange}/>
+                <input name="field2" type="file" onChange={ctrl.onFileChange}/>
             </div>
         );
     }

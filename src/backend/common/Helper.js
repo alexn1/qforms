@@ -220,7 +220,7 @@ class Helper {
         });
     }
 
-    static getBinData(filePath) {
+    static createBuffer(filePath) {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
                 if (err) {
