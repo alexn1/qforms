@@ -179,6 +179,8 @@ class PostgreSqlDatabase extends Database {
             case 'timestamp with time zone':
             case 'time without time zone':
                 return 'date';
+            case 'bytea':
+                return 'blob';
             default:
                 return null;
         }

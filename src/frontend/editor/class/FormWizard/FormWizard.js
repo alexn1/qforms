@@ -71,8 +71,9 @@ class FormWizard {
     getFields() {
         let fields = {};
         this.tableColumns.filter(column => {
-            if (this.params.className === 'TableForm' && column.dbType === 'text') {
-                return false;
+            if (this.params.className === 'TableForm') {
+                if (column.dbType === 'text') return false;
+                if (column.type === 'blob') return false;
             }
             return true;
         }).forEach(column => {
