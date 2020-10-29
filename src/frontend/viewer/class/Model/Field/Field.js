@@ -28,13 +28,13 @@ class Field extends Model {
             ...this.getApp().data.params,
             ...this.getPage().params,
         };
-        const code = QForms.templateValue(defaultValue, params);
-        let value;
+        const js = QForms.templateValue(defaultValue, params);
+        if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
+        // console.log('js', this.getFullName(), js);
         try {
-            //console.log('eval: ' + code);
-            value = eval(code);
+            const value = eval(js);
             if (value !== undefined) {
-                row[this.data.column] = JSON.stringify(value);
+                row[this.data.column] = Field.encodeValue(value);
             }
         } catch (err) {
             throw new Error(`[${this.getFullName()}] default value error: ${err.toString()}`);
@@ -49,12 +49,12 @@ class Field extends Model {
     setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
-        const rawValue = this.encodeValue(value);
+        const rawValue = Field.encodeValue(value);
         this.getForm().getDataSource().setValue(row, this.data.column, rawValue);
         this.valueToPageParams(row);
     }
 
-    encodeValue(value) {
+    static encodeValue(value) {
         return JSON.stringify(value);
     }
 

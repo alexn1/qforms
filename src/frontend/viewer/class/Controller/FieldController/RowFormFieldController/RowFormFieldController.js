@@ -106,7 +106,7 @@ class RowFormFieldController extends FieldController {
                 console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
                 return true;
             }
-            const fieldRawValue = this.model.encodeValue(value);
+            const fieldRawValue = Field.encodeValue(value);
             const dsRawValue = this.model.getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
                 console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsRawValue, fieldRawValue);

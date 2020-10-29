@@ -29,8 +29,6 @@ class RowFormController extends FormController {
         super.deinit();
     }
 
-
-
     calcState() {
         this.state.hasNew  = this.model.hasNew();
         this.state.changed = this.isChanged();
@@ -41,8 +39,6 @@ class RowFormController extends FormController {
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
     }
-
-
 
     refill() {
         console.log('RowFormController.refill', this.model.getFullName());

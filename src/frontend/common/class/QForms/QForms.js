@@ -159,7 +159,7 @@ class QForms {
     static templateValue(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) return params[name];
-            return null;
+            return '';
         });
     }
 }
