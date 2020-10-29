@@ -12,5 +12,10 @@ class testController extends ApplicationController {
         QForms.startWait();
         setTimeout(() => QForms.stopWait(), 1000);
     }
+    onFileChange = e => {
+        // console.log('testController.onFileChange', e.target.files);
+        const file = e.target.files[0];
+        console.log('file:', file instanceof File, file);
+    }
 }
 testController;
