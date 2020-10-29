@@ -4,19 +4,13 @@ class testController extends ApplicationController {
         console.log('testController.constructor');
         super(...args);
     }*/
-    /*init() {
-        console.log('testController.init');
-        super.init();
-    }*/
-    /*deinit() {
-        super.deinit();
-    }*/
     getViewClass() {
         return testView;
     }
     onButtonClick = e => {
         console.log('testController.onButtonClick');
-        document.querySelector('html').classList.add('wait');
+        QForms.startWait();
+        setTimeout(() => QForms.stopWait(), 1000);
     }
 }
 testController;
