@@ -98,12 +98,12 @@ class Helper {
         const fields = {};
         for (const name in body) {
             if (body[name] instanceof File) {
-                formData.append(`_${name}`, body[name]);
+                formData.append(name, body[name]);
             } else {
                 fields[name] = body[name];
             }
         }
-        formData.append('json', JSON.stringify(fields));
+        formData.append('__json', JSON.stringify(fields));
         return formData;
     }
 }

@@ -403,8 +403,7 @@ class HostApp {
 
     // action
     async test(req, res, context) {
-        console.log('HostApp.test', req.body);
-
+        console.log('HostApp.test', req.body, req.files);
         const result = await Test[req.body.name](req, res, context, this.getApplication(req));
         await res.json(result);
     }

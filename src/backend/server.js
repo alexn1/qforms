@@ -221,17 +221,15 @@ async function multipartHandler(req, res, next) {
     }
     console.log('multipartHandler');
     await multipart2(req, res);
-    if (req.body.json) {
-        const data = JSON.parse(req.body.json);
-        delete req.body.json;
+    if (req.body.__json) {
+        const data = JSON.parse(req.body.__json);
+        delete req.body.__json;
         for (const name in data) {
             req.body[name] = data[name];
         }
     }
-    for (const _name in req.files) {
-        if (_name.substr(0, 1) !== '_') continue;
-        const name = _name.substr(1, _name.length - 1);
-        req.body[name] = await Helper.createBuffer(req.files[_name].path);
+    for (const name in req.files) {
+        req.files[name].buffer = await Helper.createBuffer(req.files[name].path);
     }
 
     /*if (req.body.row) {

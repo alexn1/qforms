@@ -32,6 +32,7 @@ class Context {
     static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
+            if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
             dObj[name] = JSON.parse(obj[name], Context.dateTimeReviver);
         }
         return dObj;
