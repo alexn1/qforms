@@ -1,5 +1,5 @@
 'use strict';
-console.log('server.js');
+// console.log('server.js');
 const express    = require('express');
 const fs         = require('fs');
 // const morgan     = require('morgan');
@@ -16,13 +16,13 @@ const server = module.exports = express();
 const HostApp = require('./HostApp');
 
 initExpressServer(server); function initExpressServer(server) {
-    console.log('server.initExpressServer');
+    // console.log('server.initExpressServer');
     const hostApp = new HostApp(server);
     hostApp.init();
     server.set('hostApp', hostApp);
 
     // middlewares
-    //server.use(morgan('dev'));
+    // server.use(morgan('dev'));
     // server.use(serverRequest);
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: false }));

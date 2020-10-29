@@ -3,7 +3,7 @@
 const fs      = require('fs');
 const path    = require('path');
 const qforms  = require('./qforms');
-const Context = require('./Context');
+// const Context = require('./Context');
 const Test    = require('./Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
@@ -57,9 +57,9 @@ const EDITOR_ACTIONS = [
 
 class HostApp {
     constructor(server) {
-        console.log('HostApp.constructor');
+        // console.log('HostApp.constructor');
         this.server = server;
-        this.applications  = {};
+        this.applications = {};
     }
 
     init() {

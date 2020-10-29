@@ -1,14 +1,14 @@
 'use strict';
-console.log('www.js');
-const http    = require('http');
-const path    = require('path');
+// console.log('http.js');
+const http = require('http');
+const path = require('path');
 
 const qforms = require('./qforms');
 const server = require('./server');
 const pkg    = require('../../package.json');
 
 main(); function main() {
-    console.log('www.main');
+    // console.log('http.main');
     process.on('message', onMessage);
     process.on('SIGINT', onSIGINT);
     process.on('SIGTERM', onSIGTERM);
@@ -17,14 +17,14 @@ main(); function main() {
     const params = qforms.Helper.getCommandLineParams();
     const host = params.host || pkg.config.host;
     const port = params.port || pkg.config.port;
-    const www = http.createServer(server);
-    www.on('error', onError);
-    www.listen(port, host, () => {
+    const httpServer = http.createServer(server);
+    httpServer.on('error', onError);
+    httpServer.listen(port, host, () => {
         if (process.send) {
             process.send('online');
         }
         const appsDirPath = path.resolve(server.get('hostApp').appsDirPath);
-        console.log(`QForms server v${pkg.version} listening on http://${host}:${port}\nprocess.env.NODE_ENV: ${process.env.NODE_ENV}\napplications: ${appsDirPath}\nmonitor: http://${host}:${port}/monitor`);
+        console.log(`QForms server v${pkg.version} listening on http://${host}:${port}\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
     });
 }
 
@@ -41,7 +41,7 @@ async function shutdown() {
 }
 
 async function onMessage(message) {
-    console.log('www.onMessage');
+    console.log('http.onMessage');
     if (message === 'shutdown') {
         await shutdown();
         process.exit(0);

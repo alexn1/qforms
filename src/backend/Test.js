@@ -1,4 +1,4 @@
-const qforms  = require('./qforms');
+const qforms = require('./qforms');
 
 class Test {
     static getUpdateQuery() {
