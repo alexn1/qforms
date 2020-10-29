@@ -24,9 +24,10 @@ class Test {
     static async blob(req, res, context, application) {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
-        await db.queryResult(context, 'insert into file("contentType", content) values ({contentType}, {content})', {
-            contentType: req.files.field2.type,
-            content    : context.files.field2,
+        await db.queryResult(context, 'insert into file(type, size, content) values ({type}, {size}, {content})', {
+            type   : req.files.field2.type,
+            size   : req.files.field2.size,
+            content: context.files.field2,
         });
         return {abc: 'xyz'};
     }
@@ -34,11 +35,11 @@ class Test {
     static async blob2(req, res, context, application) {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
-        const [row] = await db.queryRows(context, 'select id, "contentType", content from file order by id desc limit 1');
+        const [row] = await db.queryRows(context, 'select id, type, size, content from file order by id desc limit 1');
         row.content     = row.content.toString('base64');
-        // row.contentType = JSON.stringify(row.contentType);
-        // row.content     = JSON.stringify(row.content);
-        console.log('row:', row);
+        // row.type    = JSON.stringify(row.type);
+        // row.content = JSON.stringify(row.content);
+        // console.log('row:', row);
         return {row};
     }
 
