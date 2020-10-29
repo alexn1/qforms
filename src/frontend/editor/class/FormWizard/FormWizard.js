@@ -73,7 +73,7 @@ class FormWizard {
         this.tableColumns.filter(column => {
             if (this.params.className === 'TableForm') {
                 if (column.dbType === 'text') return false;
-                if (column.type === 'blob') return false;
+                if (column.dbType === 'bytea') return false;
             }
             return true;
         }).forEach(column => {

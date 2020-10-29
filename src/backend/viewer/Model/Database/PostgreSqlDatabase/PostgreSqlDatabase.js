@@ -170,6 +170,7 @@ class PostgreSqlDatabase extends Database {
                 return 'number';
             case 'character varying':
             case 'text':
+            case 'bytea':
                 return 'string';
             case 'json':
             case 'ARRAY':
@@ -179,8 +180,6 @@ class PostgreSqlDatabase extends Database {
             case 'timestamp with time zone':
             case 'time without time zone':
                 return 'date';
-            case 'bytea':
-                return 'blob';
             default:
                 return null;
         }
