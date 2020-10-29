@@ -24,16 +24,17 @@ class Test {
     static async blob(req, res, context, application) {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
-        const contentType = req.files.field2.type;
-        console.log('contentType:', contentType);
-        await db.queryResult(context, 'insert into file(content) values ({field2})', context.files);
+        await db.queryResult(context, 'insert into file("contentType", content) values ({contentType}, {content})', {
+            contentType: req.files.field2.type,
+            content    : context.files.field2,
+        });
         return {abc: 'xyz'};
     }
 
     static async blob2(req, res, context, application) {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
-        const [row] = await db.queryRows(context, 'select id, content from file order by id desc limit 1');
+        const [row] = await db.queryRows(context, 'select id, "contentType", content from file order by id desc limit 1');
         row.content = row.content.toString('base64');
         console.log('row:', row);
         return {row};
