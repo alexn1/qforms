@@ -11,7 +11,7 @@ class RowFormImageFieldView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
-            <img/>
+            <Image src={ctrl.renderValueForView()}/>
         </div>;
     }
 }
