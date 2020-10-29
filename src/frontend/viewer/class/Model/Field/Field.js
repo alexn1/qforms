@@ -55,21 +55,6 @@ class Field extends Model {
     }
 
     encodeValue(value) {
-        /*
-        if (value === undefined || value === null) return value;
-        const fieldType = this.getType();
-        const valueType = typeof value;
-        if (fieldType === 'date') {
-            if (!(value instanceof Date)) {
-                throw new Error(`${this.getFullName()}: value not instance of Date`);
-            }
-        } else if (fieldType !== valueType) {
-            throw new Error(`${this.getFullName()}: wrong value type for column: ${valueType} instead of ${fieldType}`);
-        }
-        if (valueType === 'object') {
-            if (value instanceof Date) return value.toISOString();
-            return JSON.stringify(value);
-        }*/
         return JSON.stringify(value);
     }
 
@@ -92,16 +77,6 @@ class Field extends Model {
         // console.log('Field.getValue', this.getFullName());
         if (this.data.column) {
             let rawValue = this.getRawValue(row);
-            /*
-            if (value === null) return null;
-            if (value === undefined) return undefined;
-            const fieldType = this.getType();
-            if (fieldType === 'date') {
-                if (typeof value !== 'string') throw new Error(`${this.getFullName()}: wrong value for date column: ${value}`);
-                return new Date(value);
-            }
-            if (fieldType === 'object') return JSON.parse(value);
-            return value;*/
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
             try {

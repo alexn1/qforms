@@ -20,6 +20,7 @@ class RowFormComboBoxFieldView extends ReactComponent {
                     readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange}
                     items={ctrl.getItems()}
+                    placeholder={ctrl.getPlaceHolder()}
                 />
             </div>
         );
