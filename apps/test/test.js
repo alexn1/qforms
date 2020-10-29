@@ -32,11 +32,9 @@ class testController extends ApplicationController {
         const result = await QForms.post('/test', formData);
         console.warn('result:', result);*/
 
-        const buffer = await Helper.readFile(file);
-        const img = document.createElement('img')
-        img.src = `data:image/png;base64,${Helper.convertBufferToBase64string(buffer)}`;
+        const img = document.createElement('img');
+        img.src = await Helper.readImage(file);
         document.body.appendChild(img);
-
     }
 }
 testController;

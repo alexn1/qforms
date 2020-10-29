@@ -66,11 +66,12 @@ class Helper {
         return component;
     }
 
-    static readFile(file) {
+    static readImage(file) {
         return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
-            reader.readAsArrayBuffer(file);
+            // reader.readAsArrayBuffer(file);
+            reader.readAsDataURL(file);
         });
     }
 
@@ -79,10 +80,10 @@ class Helper {
         const binaryString = String.fromCharCode.apply(null, array);
         return window.btoa(binaryString);
     }
-    static convertBufferToImageUrl(buffer, type = 'image/png') {
+    /*static convertBufferToImageUrl(buffer, type = 'image/png') {
         const blob = new Blob([new Uint8Array(buffer)], {type});
         return  window.URL.createObjectURL(blob);
-    }
+    }*/
 }
 
 
