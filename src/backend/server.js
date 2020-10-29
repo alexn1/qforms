@@ -248,10 +248,11 @@ function multipartHandler(req, res, next) {
 
 function getTest(req, res, next) {
     console.log('getTest');
-    res.json('getTest');
+    res.setHeader('Content-Type', 'text/plain;charset=utf-8');
+    res.end('getTest');
 }
 
 function postTest(req, res, next) {
     console.log('postTest');
-    res.end('postTest');
+    res.json({foo: 'bar'});
 }

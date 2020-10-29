@@ -55,20 +55,35 @@ class QForms {
 
     static async doHttpRequest(data) {
         console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
+        /*const result = await QForms.post(
+            window.location.href,
+            JSON.stringify(data),
+            'application/json;charset=utf-8'
+        );*/
+        const result = await QForms.postJson(window.location.href, data);
+        console.warn(`result ${data.page}.${data.form}.${data.ds}.${data.action}:`, result);
+        return result;
+    }
+
+    static async postJson(url, data) {
+        return await QForms.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    }
+
+    static async post(url, body, contentType) {
         try {
             QForms.startWait();
-            const response = await fetch(window.location.href, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json;charset=utf-8'},
-                body: JSON.stringify(data)
+            const res = await fetch(url, {
+                method : 'POST',
+                ...(contentType ? {headers: {'Content-Type': contentType}} : {}),
+                body   : body
             });
-            // console.warn('response:', response);
-            if (response.ok) {
-                const result = await response.json();
-                console.warn(`result ${data.page}.${data.form}.${data.ds}.${data.action}:`, result);
+            // console.warn('res:', res);
+            if (res.ok) {
+                const result = await res.json();
+
                 return result;
             }
-            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+            throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
         } finally {
             QForms.stopWait();
         }

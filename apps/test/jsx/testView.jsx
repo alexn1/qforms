@@ -7,7 +7,7 @@ class testView extends ApplicationView {
         const ctrl = this.props.ctrl;
         return (
             <div>
-                <Button onClick={ctrl.onButtonClick}>abc</Button>
+                <Button onClick={ctrl.onButtonClick}>Button</Button>
                 <input type="file" onChange={ctrl.onFileChange}/>
             </div>
         );

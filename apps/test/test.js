@@ -1,16 +1,16 @@
 'use strict';
 class testController extends ApplicationController {
-    /*constructor(...args) {
-        console.log('testController.constructor');
-        super(...args);
-    }*/
     getViewClass() {
         return testView;
     }
-    onButtonClick = e => {
+    onButtonClick = async e => {
         console.log('testController.onButtonClick');
-        QForms.startWait();
-        setTimeout(() => QForms.stopWait(), 1000);
+        /*QForms.startWait();
+        setTimeout(() => QForms.stopWait(), 1000);*/
+        const data = {abc:'xyz'};
+        console.warn('QForms.postJson', data);
+        const result = await QForms.postJson('/test', data);
+        console.warn('result:', result);
     }
     onFileChange = e => {
         // console.log('testController.onFileChange', e.target.files);

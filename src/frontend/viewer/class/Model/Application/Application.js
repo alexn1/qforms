@@ -3,8 +3,8 @@
 class Application extends Model {
     constructor(data) {
         super(data);
-        this.databases    = {};
-        this.dataSources  = {};
+        this.databases   = {};
+        this.dataSources = {};
     }
 
     init() {
