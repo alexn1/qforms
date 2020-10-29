@@ -22,9 +22,13 @@ class Test {
     }
 
     static async blob(req, res, context, application) {
-        console.log('Test.blob');
+        console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
-        // const rows = await db.queryRows(context, 'select id, message from log order by id desc limit 1');
+        const contentType = req.files.field2.type;
+        console.log('contentType:', contentType);
+        const [row] = await db.queryRows(context, 'select id, content from file order by id desc limit 1');
+        console.log('row:', row);
+        // await db.queryResult(context, 'insert into file(content) values ({field2})', context.files);
         return {abc: 'xyz'};
     }
 
