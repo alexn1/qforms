@@ -48,6 +48,14 @@ class Application extends Model {
         return response;
     }
 
+    async request2(options) {
+        // console.warn('Application.request', data);
+        const start = Date.now();
+        const response = await QForms.doHttpRequest2(options);
+        this.emit('request', {time: Date.now() - start});
+        return response;
+    }
+
     getDatabase(name) {
         if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
         return this.databases[name];

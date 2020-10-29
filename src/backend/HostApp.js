@@ -402,10 +402,10 @@ class HostApp {
     }
 
     // action
-    async test(req, res) {
+    async test(req, res, context) {
         console.log('HostApp.test', req.body);
 
-        const result = await Test[req.body.name](this.getApplication(req));
+        const result = await Test[req.body.name](req, res, context, this.getApplication(req));
         await res.json(result);
     }
 

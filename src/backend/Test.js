@@ -21,8 +21,10 @@ class Test {
         };
     }
 
-    static async blob(applicatoin) {
-        console.log('Test.blob');
+    static async blob(req, res, context, application) {
+        console.log('Test.blob', req.body);
+        const db = application.getDatabase('default');
+        // const rows = await db.queryRows(context, 'select id, message from log order by id desc limit 1');
         return {abc: 'xyz'};
     }
 
