@@ -66,4 +66,23 @@ class Helper {
         return component;
     }
 
+    static readFile(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsArrayBuffer(file);
+        });
+    }
+
+    static convertBufferToBase64string(buffer) {
+        const array = new Uint8Array(buffer);
+        const binaryString = String.fromCharCode.apply(null, array);
+        return window.btoa(binaryString);
+    }
+    static convertBufferToImageUrl(buffer, type = 'image/png') {
+        const blob = new Blob([new Uint8Array(buffer)], {type});
+        return  window.URL.createObjectURL(blob);
+    }
 }
+
+
