@@ -220,6 +220,18 @@ class Helper {
         });
     }
 
+    static getBinData(filePath) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, (err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data);
+                }
+            })
+        });
+    }
+
     static putFileContent(filePath, content) {
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', (err) => {

@@ -8,7 +8,7 @@ const session    = require('express-session');
 const Helper    = require('./common/Helper');
 const multipart = require('connect-multiparty')();
 const _         = require('underscore');
-const async     = require('async');
+// const async     = require('async');
 const Context = require('./Context');
 
 const server = module.exports = express();
@@ -210,39 +210,31 @@ function e500(err, req, res, next) {
     }
 }
 
-function multipartHandler(req, res, next) {
+async function multipartHandler(req, res, next) {
     if (!req.is('multipart/form-data')) {
         next();
         return;
     }
-    multipart(req, res, () => {
+    console.log('multipartHandler');
+    multipart(req, res, async () => {
+        for (const name in req.files) {
+            const file = req.files[name];
+            const data = await Helper.getBinData(file.path);
+            req.body[name] = {...file, data};
+        }
         if (req.body.__data) {
             const body = JSON.parse(req.body.__data);
             delete req.body.__data;
-            for (let name in body) {
+            for (const name in body) {
                 req.body[name] = body[name];
             }
         }
-        if (req.body.row) {
+        /*if (req.body.row) {
             for (let name in req.files) {
                 req.body.row[name] = req.files[name];
             }
-        }
-        // loading file content to req.files[n].data
-        const tasks = _.map(req.files, file => {
-            return next => {
-                fs.readFile(file.path, (err, data) => {
-                    if (err) {
-                        throw err;
-                    } else {
-                        file.data = data;
-                        next();
-                    }
-                })
-
-            }
-        });
-        async.series(tasks, next);
+        }*/
+        next();
     });
 }
 
@@ -253,6 +245,6 @@ function getTest(req, res, next) {
 }
 
 function postTest(req, res, next) {
-    console.log('postTest');
+    console.log('postTest', req.body);
     res.json({foo: 'bar'});
 }

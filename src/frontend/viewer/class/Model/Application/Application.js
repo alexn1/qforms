@@ -43,10 +43,9 @@ class Application extends Model {
     async request(options) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const data = await QForms.doHttpRequest(options);
-        // console.warn('data:', data);
+        const response = await QForms.doHttpRequest(options);
         this.emit('request', {time: Date.now() - start});
-        return data;
+        return response;
     }
 
     getDatabase(name) {
