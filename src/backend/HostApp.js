@@ -404,12 +404,9 @@ class HostApp {
     // action
     async test(req, res) {
         console.log('HostApp.test', req.body);
-        const data = Test[req.body.name]();
-        await res.json({
-            action: 'test',
-            name  : req.body.name,
-            data  : data
-        });
+
+        const result = await Test[req.body.name](this.getApplication(req));
+        await res.json(result);
     }
 
     async appCssFile(req, application) {

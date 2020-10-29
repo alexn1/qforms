@@ -8,17 +8,11 @@ class testController extends ApplicationController {
         /*QForms.startWait();
         setTimeout(() => QForms.stopWait(), 1000);*/
 
-        const data = {abc:'xyz'};
+        /*const data = {abc:'xyz'};
         console.warn('QForms.postJson', data);
         const result = await QForms.postJson('/test', data);
-        console.warn('result:', result);
-    }
-    readFile(file) {
-        return new Promise(resolve => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsArrayBuffer(file);
-        });
+        console.warn('result:', result);*/
+        this.model.request({action: 'test', name: 'blob'});
     }
     onFileChange = async e => {
         // console.log('testController.onFileChange', e.target.files);

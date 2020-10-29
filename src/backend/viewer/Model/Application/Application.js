@@ -251,6 +251,7 @@ class Application extends Model {
 
     async createLog(context, values) {
         // console.log('Application.createLog', values);
+        if (!this.databases.default) return;
         if (values.stack === undefined) values.stack = null;
         if (values.created === undefined) values.created = new Date();
         if (values.message && values.message.length > 255) {

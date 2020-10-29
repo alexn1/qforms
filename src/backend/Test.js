@@ -1,14 +1,14 @@
 const qforms = require('./qforms');
 
 class Test {
-    static getUpdateQuery() {
+    static async getUpdateQuery() {
         console.log('Test.getUpdateQuery');
         const query = qforms.PostgreSqlDatabase.getUpdateQuery('tableName', {field1: 'value1'}, {id: 1});
         console.log('query:', query);
         return {query};
     }
 
-    static mapObject() {
+    static async mapObject() {
         console.log('Test.mapObject');
         const values = {
             field1: 'value1',
@@ -20,6 +20,12 @@ class Test {
             values2
         };
     }
+
+    static async blob(applicatoin) {
+        console.log('Test.blob', applicatoin);
+        return {abc: 'xyz'};
+    }
+
 }
 
 module.exports = Test;
