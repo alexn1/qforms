@@ -35,7 +35,9 @@ class Test {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
         const [row] = await db.queryRows(context, 'select id, "contentType", content from file order by id desc limit 1');
-        row.content = row.content.toString('base64');
+        row.content     = row.content.toString('base64');
+        // row.contentType = JSON.stringify(row.contentType);
+        // row.content     = JSON.stringify(row.content);
         console.log('row:', row);
         return {row};
     }
