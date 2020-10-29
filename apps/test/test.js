@@ -32,10 +32,10 @@ class testController extends ApplicationController {
         img.src = await Helper.readImage(file);
         document.body.appendChild(img);
 
-        const formData = new FormData();
-        formData.append('json', JSON.stringify({field1: 'abc'}));
-        formData.append(`_${name}`, file);
-        const result = await QForms.post('/test', formData);
+        const result = await QForms.post('/test', Helper.createFormData({
+            field1: 'abc',
+            field2: file,
+        }));
         console.warn('result:', result);
 
 

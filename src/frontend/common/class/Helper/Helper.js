@@ -84,6 +84,22 @@ class Helper {
         const blob = new Blob([new Uint8Array(buffer)], {type});
         return  window.URL.createObjectURL(blob);
     }*/
+
+    // append file as filed and all not file as json string
+    static createFormData(body) {
+        const formData = new FormData();
+        const fields = {};
+        for (const name in body) {
+            console.log(name, body[name]);
+            if (body[name] instanceof File) {
+                formData.append(`_${name}`, body[name]);
+            } else {
+                fields[name] = body[name];
+            }
+        }
+        formData.append('json', JSON.stringify(fields));
+        return formData;
+    }
 }
 
 
