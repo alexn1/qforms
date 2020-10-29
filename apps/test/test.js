@@ -21,7 +21,6 @@ class testController extends ApplicationController {
         const formData = new FormData();
         formData.append('field1', file);
         formData.append('__data', JSON.stringify({field2: 'abc'}));
-        console.log('formData', formData);
         const result = await QForms.post('/test', formData);
         console.warn('result:', result);
     }
