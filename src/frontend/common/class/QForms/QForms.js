@@ -73,16 +73,11 @@ class QForms {
         try {
             QForms.startWait();
             const res = await fetch(url, {
-                method : 'POST',
+                method: 'POST',
+                body  : body,
                 ...(contentType ? {headers: {'Content-Type': contentType}} : {}),
-                body   : body
             });
-            // console.warn('res:', res);
-            if (res.ok) {
-                const result = await res.json();
-
-                return result;
-            }
+            if (res.ok) return await res.json();
             throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
         } finally {
             QForms.stopWait();
