@@ -22,7 +22,7 @@ class Test {
     }
 
     static async blob(applicatoin) {
-        console.log('Test.blob', applicatoin);
+        console.log('Test.blob');
         return {abc: 'xyz'};
     }
 
