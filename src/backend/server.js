@@ -34,10 +34,15 @@ initExpressServer(server); function initExpressServer(server) {
         saveUninitialized : false
     }));
 
+    // test
+    server.get('/test', getTest);
+    server.post('/test', postTest);
+
     // home
     server.get('/' , homeGet);
     server.post('/', homePost);
 
+    // monitor
     server.get('/monitor', monitorGet);
 
     // view
@@ -67,10 +72,10 @@ initExpressServer(server); function initExpressServer(server) {
     Helper.createDirIfNotExistsSync(server.get('temp'));
 }
 
-function serverRequest(req, res, next) {
+/*function serverRequest(req, res, next) {
     console.log(`serverRequest: ${req.originalUrl}`);
     next();
-}
+}*/
 
 async function viewerFile(req, res, next) {
     // console.warn('viewerFile', req.originalUrl);
@@ -239,4 +244,14 @@ function multipartHandler(req, res, next) {
         });
         async.series(tasks, next);
     });
+}
+
+function getTest(req, res, next) {
+    console.log('getTest');
+    res.json('getTest');
+}
+
+function postTest(req, res, next) {
+    console.log('postTest');
+    res.end('postTest');
 }

@@ -404,11 +404,11 @@ class HostApp {
     // action
     async test(req, res) {
         console.log('HostApp.test', req.body);
-        const response = Test[req.body.name]();
+        const data = Test[req.body.name]();
         await res.json({
             action: 'test',
-            name: req.body.name,
-            response
+            name  : req.body.name,
+            data  : data
         });
     }
 
