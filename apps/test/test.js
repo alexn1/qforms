@@ -14,5 +14,9 @@ class testController extends ApplicationController {
     getViewClass() {
         return testView;
     }
+    onButtonClick = e => {
+        console.log('testController.onButtonClick');
+        document.querySelector('html').classList.add('wait');
+    }
 }
 testController;

@@ -3,11 +3,10 @@ class testView extends ApplicationView {
         console.log('testView.constructor');
         super(props);
     }
-    rend
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <CheckBox checked={null}></CheckBox>
+            <Button onClick={ctrl.onButtonClick}>abc</Button>
         );
     }
 }
