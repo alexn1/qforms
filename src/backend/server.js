@@ -253,6 +253,6 @@ function getTest(req, res, next) {
 }
 
 function postTest(req, res, next) {
-    console.log('postTest', req.body);
+    console.log('postTest', req.files, req.body);
     res.json({foo: 'bar'});
 }
