@@ -269,6 +269,21 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
             ...values
         };
     }
+
+    static async createLog(cnn, values) {
+        // console.log('PostgreSqlDatabase.createLog', values);
+        if (values.stack === undefined) values.stack = null;
+        if (values.created === undefined) values.created = new Date();
+        if (values.message && values.message.length > 255) {
+            // throw new Error(`message to long: ${values.message.length}`);
+            values.message = values.message.substr(0, 255);
+        }
+        await PostgreSqlDatabase.queryResult(
+            cnn,
+            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
+            values
+        );
+    }
 }
 
 module.exports = PostgreSqlDatabase;

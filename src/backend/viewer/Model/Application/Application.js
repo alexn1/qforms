@@ -10,7 +10,7 @@ const server  = require('../../../server');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
-const PostgreSqlDatabase = require('../Database/PostgreSqlDatabase/PostgreSqlDatabase');
+
 
 class Application extends Model {
 
@@ -250,22 +250,7 @@ class Application extends Model {
         return this.databases[name];
     }
 
-    async createLog(cnn, values) {
-        // console.log('Application.createLog', values);
-        if (values.stack === undefined) values.stack = null;
-        if (values.created === undefined) values.created = new Date();
-        if (values.message && values.message.length > 255) {
-            // throw new Error(`message to long: ${values.message.length}`);
-            values.message = values.message.substr(0, 255);
-        }
 
-        // const cnn = await this.getDatabase('default').getConnection(context);
-        await PostgreSqlDatabase.queryResult(
-            cnn,
-            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
-            values
-        );
-    }
 
 }
 

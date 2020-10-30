@@ -7,6 +7,7 @@ const qforms  = require('./qforms');
 const Test    = require('./Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
+const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 
 // post actions
 const ACTIONS = [
@@ -546,7 +547,7 @@ class HostApp {
             const application = this.getApplication(req);
             if (application.databases.default) {
                 const cnn = await application.getDatabase('default').getConnection(context);
-                await application.createLog(cnn, {
+                await PostgreSqlDatabase.createLog(cnn, {
                     type   : 'error',
                     source : 'server',
                     ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -581,7 +582,7 @@ class HostApp {
             }
             if (application.databases.default) {
                 const cnn = await application.getDatabase('default').getConnection(context);
-                await application.createLog(cnn, {
+                await PostgreSqlDatabase.createLog(cnn, {
                     type   : 'log',
                     source : 'server',
                     ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
