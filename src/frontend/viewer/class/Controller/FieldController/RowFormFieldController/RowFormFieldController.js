@@ -23,21 +23,18 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.onChange', value);
         // this.state.isUndefined = false;
         // this.state.value       = value;
-
         try {
             this.setValueFromView(viewValue);
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.state.error = err.message;
         }
-
         if (!this.state.error) {
             this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());
             }
         }
-
         this.refreshChanged();
         this.parent.onFieldChange({source: this});
     }
@@ -96,14 +93,14 @@ class RowFormFieldController extends FieldController {
     }
     getError() {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
-        try {
-            const value = this.getValue();
-            if (this.model.isNotNull() && (value === null || value === undefined)) {
-                return `not null`;
-            }
-        } catch (err) {
-            return err.message;
+        // try {
+        const value = this.getValue();
+        if (this.model.isNotNull() && (value === null || value === undefined)) {
+            return 'not null';
         }
+        // } catch (err) {
+        //     return err.message;
+        // }
         return null;
     }
     isEditable() {
