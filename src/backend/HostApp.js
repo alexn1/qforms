@@ -552,10 +552,10 @@ class HostApp {
             await HostApp.createLog(this.logCnn, {
                 type   : 'error',
                 source : 'server',
-                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                 message: err.message,
                 stack  : err.stack.toString(),
-                data   : JSON.stringify(req.body, null, 4)
+                data   : req ? JSON.stringify(req.body, null, 4) : null
             });
         } catch (err) {
             console.error(err);

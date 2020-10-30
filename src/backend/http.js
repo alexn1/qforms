@@ -13,6 +13,7 @@ main(); function main() {
     process.on('SIGINT', onSIGINT);
     process.on('SIGTERM', onSIGTERM);
     process.on('exit', onExit);
+    process.on('unhandledRejection', onUnhandledRejection );
 
     const params = qforms.Helper.getCommandLineParams();
     const host = params.host || pkg.config.host;
@@ -73,4 +74,13 @@ function onError(err) {
     } else {
         console.error(err);
     }*/
+}
+
+async function onUnhandledRejection(err) {
+    console.error('onUnhandledRejection', err);
+    err.message = `unhandledRejection: ${err.message}`;
+    const hostApp = server.get('hostApp');
+    if (hostApp) {
+        await server.get('hostApp').logError(null, err);
+    }
 }

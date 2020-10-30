@@ -102,6 +102,9 @@ function favicon(req, res, next) {
 
 async function viewerGet(req, res, next)  {
     console.warn('viewerGet', req.params);
+    /*new Promise((resolve, reject) => {
+        reject(new Error('sample error'));
+    });*/
     let context = null;
     try {
         const context = Context.create({req});
