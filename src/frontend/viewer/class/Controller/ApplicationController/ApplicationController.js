@@ -33,11 +33,11 @@ class ApplicationController extends Controller {
     init() {
         // console.log('ApplicationController.init');
         super.init();
-        // this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
+        // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
     }
     deinit() {
-        // this.model.off('logout', this.listeners.logout);
+        // this.model.off('logout', this.onLogout);
         this.model.off('request', this.onRequest);
         super.deinit();
     }
@@ -58,7 +58,7 @@ class ApplicationController extends Controller {
             }))
         }));
     }
-    /*onLogout(ea) {
+    /*onLogout = ea => {
         location.reload();
     }*/
     onRequest = e => {
