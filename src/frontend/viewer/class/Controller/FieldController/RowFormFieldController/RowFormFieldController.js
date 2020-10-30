@@ -115,7 +115,11 @@ class RowFormFieldController extends FieldController {
         }
         const changed = this.model.isChanged(row);
         if (changed) {
-            console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, row[this.model.data.column], this.model.getDataSource().getRowWithChanges(row)[this.model.data.column]);
+            let original = row[this.model.data.column];
+            let modified = this.model.getDataSource().getRowWithChanges(row)[this.model.data.column];
+            if (original) original = original.substr(0, 100);
+            if (modified) modified = modified.substr(0, 100);
+            console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
         }
         return changed;
     }
