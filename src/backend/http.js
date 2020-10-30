@@ -78,9 +78,9 @@ function onError(err) {
 
 async function onUnhandledRejection(err) {
     console.error('onUnhandledRejection', err);
-    err.message = `unhandledRejection: ${err.message}`;
     const hostApp = server.get('hostApp');
     if (hostApp) {
+        err.message = `unhandledRejection: ${err.message}`;
         await server.get('hostApp').logError(null, err);
     }
 }
