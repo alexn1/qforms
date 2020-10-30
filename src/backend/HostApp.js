@@ -8,6 +8,8 @@ const Test    = require('./Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
+const logConfig = require('./log.config.json');
+
 
 // post actions
 const ACTIONS = [
@@ -61,12 +63,14 @@ class HostApp {
         // console.log('HostApp.constructor');
         this.server = server;
         this.applications = {};
+        this.logCnn = null;
     }
 
     init() {
         const engineDirPath  = path.join(__dirname, '..');
         const backendDirPath = __dirname;
         const publicDirPath = path.join(engineDirPath,  'frontend');
+        this.logCnn = PostgreSqlDatabase.createPool(logConfig);
 
         // environment
         const appsDirPath = Helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath;
@@ -544,18 +548,14 @@ class HostApp {
     }
     async logError(req, context, err) {
         try {
-            const application = this.getApplication(req);
-            if (application.databases.default) {
-                const cnn = await application.getDatabase('default').getConnection(context);
-                await PostgreSqlDatabase.createLog(cnn, {
-                    type   : 'error',
-                    source : 'server',
-                    ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                    message: err.message,
-                    stack  : err.stack.toString(),
-                    data   : JSON.stringify(req.body, null, 4)
-                });
-            }
+            await HostApp.createLog(this.logCnn, {
+                type   : 'error',
+                source : 'server',
+                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                message: err.message,
+                stack  : err.stack.toString(),
+                data   : JSON.stringify(req.body, null, 4)
+            });
         } catch (err) {
             console.error(err);
         }
@@ -580,19 +580,31 @@ class HostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            if (application.databases.default) {
-                const cnn = await application.getDatabase('default').getConnection(context);
-                await PostgreSqlDatabase.createLog(cnn, {
-                    type   : 'log',
-                    source : 'server',
-                    ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                    message: message,
-                    data   : JSON.stringify(req.body, null, 4)
-                });
-            }
+            await HostApp.createLog(this.logCnn, {
+                type   : 'log',
+                source : 'server',
+                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                message: message,
+                data   : JSON.stringify(req.body, null, 4)
+            });
         } catch (err) {
             console.error(err);
         }
+    }
+
+    static async createLog(cnn, values) {
+        // console.log('HostApp.createLog', values);
+        if (values.stack === undefined) values.stack = null;
+        if (values.created === undefined) values.created = new Date();
+        if (values.message && values.message.length > 255) {
+            // throw new Error(`message to long: ${values.message.length}`);
+            values.message = values.message.substr(0, 255);
+        }
+        await PostgreSqlDatabase.queryResult(
+            cnn,
+            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
+            values
+        );
     }
 
 }

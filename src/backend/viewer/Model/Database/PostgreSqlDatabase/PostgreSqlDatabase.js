@@ -27,9 +27,13 @@ class PostgreSqlDatabase extends Database {
         if (this.pool === null) {
             const config = this.getConfig();
             // console.log('creating connection pool for: ' + this.getName(), config);
-            this.pool = new Pool(config);
+            this.pool = PostgreSqlDatabase.createPool(config)
         }
         return this.pool;
+    }
+
+    static createPool(config) {
+        return new Pool(config);
     }
 
     async getConnection(context) {
@@ -270,20 +274,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         };
     }
 
-    static async createLog(cnn, values) {
-        // console.log('PostgreSqlDatabase.createLog', values);
-        if (values.stack === undefined) values.stack = null;
-        if (values.created === undefined) values.created = new Date();
-        if (values.message && values.message.length > 255) {
-            // throw new Error(`message to long: ${values.message.length}`);
-            values.message = values.message.substr(0, 255);
-        }
-        await PostgreSqlDatabase.queryResult(
-            cnn,
-            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
-            values
-        );
-    }
+
 }
 
 module.exports = PostgreSqlDatabase;
