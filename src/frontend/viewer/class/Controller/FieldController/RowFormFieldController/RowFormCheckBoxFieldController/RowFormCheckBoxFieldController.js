@@ -9,7 +9,7 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
         if (this.state.isUndefined) return undefined;
         return this.state.value;
     }*/
-    renderValueForView() {
+    getValueForView() {
         return this.getValue();
     }
     setValueFromView(viewValue) {

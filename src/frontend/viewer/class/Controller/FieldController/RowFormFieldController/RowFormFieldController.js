@@ -45,7 +45,7 @@ class RowFormFieldController extends FieldController {
         this.refreshChanged();
         this.parent.onFieldChange({source: this});
     }
-    renderValueForView() {
+    getValueForView() {
         return this.valueToString(this.getValue());
     }
     setValueFromView(viewValue) {
