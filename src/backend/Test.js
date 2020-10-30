@@ -46,7 +46,7 @@ class Test {
     static async blob3(req, res, context, application) {
         console.log('Test.blob3', context.params);
         const db = application.getDatabase('default');
-        await db.queryResult(context, 'insert into file(type, size, content) values ({type}, {size}, {content})', context.params);
+        await db.queryResult(context, 'insert into file(created, type, size, content) values ({created}, {type}, {size}, {content})', context.params);
         return {abc: 'xyz'};
     }
 
