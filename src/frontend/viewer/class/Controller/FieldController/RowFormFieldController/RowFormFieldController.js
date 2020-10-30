@@ -49,20 +49,15 @@ class RowFormFieldController extends FieldController {
         return this.valueToString(this.getValue());
     }
     setValueFromView(viewValue) {
+        if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
         const value = this.stringToValue(viewValue);
         this.setValue(value);
     }
     setValue(value) {
         // console.log('RowFormFieldController.setValue', this.model.getFullName(), value);
-        /*this.state.isUndefined = value === undefined;
-        const stringValue = this.valueToString(value);
-        // console.log('stringValue:', stringValue);
-        this.state.value = stringValue;*/
         this.state.value = value;
     }
     getValue() {
-        // if (this.state.isUndefined) return undefined;
-        // return this.stringToValue(this.state.value);
         return this.state.value;
     }
     isChanged() {
