@@ -22,7 +22,7 @@ class RowFormView extends ReactComponent {
                 />
                 <Button
                     key="cancel"
-                    title="Cancel"
+                    title="Finish"
                     visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                     onClick={ctrl.onCancelClick}
                     width={width}

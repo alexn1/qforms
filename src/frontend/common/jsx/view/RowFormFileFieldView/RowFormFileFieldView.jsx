@@ -4,7 +4,7 @@ class RowFormFileFieldView extends RowFormFieldView {
         const value = ctrl.renderValueForView();
         return <div className={this.getClassName()} style={ctrl.renderViewStyle(ctrl.getRow())}>
             {!!value && <Image src={value}/>}
-            {!!value && <a href={value}>Download</a>}
+            {!!value && <a href={value} target="_blank">Download</a>}
             <input type="file" onChange={ctrl.onFileChange} disabled={!ctrl.isEditable()}/>
         </div>;
     }
