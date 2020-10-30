@@ -1,7 +1,7 @@
 'use strict';
 
 class TableFormFieldController extends FieldController {
-    renderValueForView(row) {
+    getValueForView(row) {
         return this.valueToString(this.model.getValue(row));
     }
     renderViewStyle(row) {

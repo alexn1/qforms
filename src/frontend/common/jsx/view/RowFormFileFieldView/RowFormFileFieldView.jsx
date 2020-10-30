@@ -1,7 +1,7 @@
 class RowFormFileFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;
-        const value = ctrl.renderValueForView();
+        const value = ctrl.getValueForView();
         return <div className={this.getClassName()} style={ctrl.renderViewStyle(ctrl.getRow())}>
             {!!value && <Image src={value}/>}
             {!!value && <a href={value} target="_blank">Download</a>}
