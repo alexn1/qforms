@@ -7,16 +7,15 @@ class testController extends ApplicationController {
         console.log('testController.onButtonClick');
         /*QForms.startWait();
         setTimeout(() => QForms.stopWait(), 1000);*/
-
         /*const data = {abc:'xyz'};
         console.warn('QForms.postJson', data);
         const result = await QForms.postJson('/test', data);
         console.warn('result:', result);*/
-        this.model.request({action: 'test', name: 'blob'});
+        // this.model.request({action: 'test', name: 'blob'});
     }
     onFileChange = async e => {
         // console.log('testController.onFileChange', e.target.files);
-        const name = e.target.name;
+        /*const name = e.target.name;
         const file = e.target.files[0];
         console.log('name:', name);
         console.log('file:', file instanceof File, file);
@@ -29,7 +28,7 @@ class testController extends ApplicationController {
             field1: 'abc',
             field2: file,
         }));
-        console.warn('result:', result);
+        console.warn('result:', result);*/
     }
 }
 testController;

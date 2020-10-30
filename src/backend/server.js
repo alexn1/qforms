@@ -26,7 +26,7 @@ initExpressServer(server); function initExpressServer(server) {
     // server.use(serverRequest);
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: false }));
-    server.use(multipartHandler);
+    // server.use(multipartHandler);
     server.use(session({
         secret            : 'qforms',
         key               : 'sid',
@@ -210,39 +210,34 @@ function e500(err, req, res, next) {
     }
 }
 
-function multipart2(req, res) {
+/*function multipart2(req, res) {
     return new Promise(resolve => multipart(req, res, resolve));
-}
+}*/
 
-async function multipartHandler(req, res, next) {
-    if (!req.is('multipart/form-data')) {
-        next();
-        return;
-    }
-    console.log('multipartHandler');
-    await multipart2(req, res);
-    if (req.body.__json) {
-        const data = JSON.parse(req.body.__json);
-        delete req.body.__json;
-        for (const name in data) {
-            req.body[name] = data[name];
-        }
-    }
-    for (const name in req.files) {
-        req.files[name].buffer = await Helper.createBuffer(req.files[name].path);
-    }
-
-    /*if (req.body.row) {
-        for (let name in req.files) {
-            req.body.row[name] = req.files[name];
-        }
-    }*/
-    next();
-
-    /*
-    multipart(req, res, async () => {
-    });*/
-}
+// async function multipartHandler(req, res, next) {
+//     if (!req.is('multipart/form-data')) {
+//         next();
+//         return;
+//     }
+//     console.log('multipartHandler');
+//     await multipart2(req, res);
+//     if (req.body.__json) {
+//         const data = JSON.parse(req.body.__json);
+//         delete req.body.__json;
+//         for (const name in data) {
+//             req.body[name] = data[name];
+//         }
+//     }
+//     for (const name in req.files) {
+//         req.files[name].buffer = await Helper.createBuffer(req.files[name].path);
+//     }
+//     /*if (req.body.row) {
+//         for (let name in req.files) {
+//             req.body.row[name] = req.files[name];
+//         }
+//     }*/
+//     next();
+// }
 
 function getTest(req, res, next) {
     console.log('getTest');
@@ -251,6 +246,6 @@ function getTest(req, res, next) {
 }
 
 function postTest(req, res, next) {
-    console.log('postTest', req.files, req.body);
+    console.log('postTest', req.body);
     res.json({foo: 'bar'});
 }

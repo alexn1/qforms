@@ -13,14 +13,12 @@ class Context {
         // if (context.body             === undefined) context.body             = req.body;
         if (context.changes          === undefined) context.changes          = Context.decodeChanges(req.body.changes);
         if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
-
-        context.files = {};
+        /*context.files = {};
         if (req.files) {
             for (const name in req.files) {
                 context.files[name] = req.files[name].buffer;
             }
-        }
-
+        }*/
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
         if (context.row              === undefined) context.row              = Context.decodeObject(req.body.row);

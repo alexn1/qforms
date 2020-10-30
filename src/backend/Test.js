@@ -21,7 +21,7 @@ class Test {
         };
     }
 
-    static async blob(req, res, context, application) {
+    /*static async blob(req, res, context, application) {
         console.log('Test.blob', context.params, context.files);
         const db = application.getDatabase('default');
         await db.queryResult(context, 'insert into file(type, size, content) values ({type}, {size}, {content})', {
@@ -30,9 +30,9 @@ class Test {
             content: context.files.field2,
         });
         return {abc: 'xyz'};
-    }
+    }*/
 
-    static async blob2(req, res, context, application) {
+    /*static async blob2(req, res, context, application) {
         console.log('Test.blob2', context.params, context.files);
         const db = application.getDatabase('default');
         const [row] = await db.queryRows(context, 'select id, type, size, content from file order by id desc limit 1');
@@ -41,7 +41,7 @@ class Test {
         // row.content = JSON.stringify(row.content);
         // console.log('row:', row);
         return {row};
-    }
+    }*/
 
     static async blob3(req, res, context, application) {
         console.log('Test.blob3', context.params);
