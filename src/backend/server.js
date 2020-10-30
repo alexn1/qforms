@@ -122,7 +122,7 @@ async function viewerPost(req, res, next)  {
         const time = await hostApp.handleViewerPost(req, res, context);
         await hostApp.logRequest(req, context, time);
     } catch (err) {
-        await hostApp.logError(req, context, err);
+        await hostApp.logError(req, err);
         next(err);
     } finally {
         Context.destroy(context);
@@ -189,14 +189,14 @@ async function monitorGet(req, res, next) {
     }
 }
 
-function e404(req, res, next) {
+async function e404(req, res, next) {
     console.warn(req.method, 'error/404');
-    const err = new Error('page not found');
+    const err = new Error(`${req.method} ${req.originalUrl} page not found`);
     err.status = 404;
     next(err);
 }
 
-function e500(err, req, res, next) {
+async function e500(err, req, res, next) {
     console.warn('module.exports.e500:', req.method, req.originalUrl);
     console.error(err);
     res.status(err.status || 500);
@@ -208,6 +208,7 @@ function e500(err, req, res, next) {
             error  : req.app.get('env') === 'development' ? err : {}
         });
     }
+    await server.get('hostApp').logError(req, err);
 }
 
 /*function multipart2(req, res) {

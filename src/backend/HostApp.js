@@ -546,7 +546,8 @@ class HostApp {
             applications: this.applications
         });
     }
-    async logError(req, context, err) {
+    async logError(req, err) {
+        console.log('HostApp.logError:', err.message);
         try {
             await HostApp.createLog(this.logCnn, {
                 type   : 'error',
