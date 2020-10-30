@@ -1,19 +1,19 @@
 'use strict';
 // console.log('server.js');
 const express    = require('express');
-const fs         = require('fs');
+// const fs         = require('fs');
 // const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const session    = require('express-session');
 const Helper    = require('./common/Helper');
-const multipart = require('connect-multiparty')();
-const _         = require('underscore');
+// const multipart = require('connect-multiparty')();
+// const _         = require('underscore');
 // const async     = require('async');
 const Context = require('./Context');
-
+const HostApp = require('./HostApp');
 const server = module.exports = express();
 // const qforms = require('./qforms');
-const HostApp = require('./HostApp');
+
 
 initExpressServer(server); function initExpressServer(server) {
     // console.log('server.initExpressServer');
@@ -35,7 +35,7 @@ initExpressServer(server); function initExpressServer(server) {
     }));
 
     // test
-    server.get('/test', getTest);
+    server.get('/test' , getTest);
     server.post('/test', postTest);
 
     // home
