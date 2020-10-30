@@ -1,5 +1,5 @@
-class RowFormTextAreaFieldView extends ReactComponent {
-    getClassName() {
+class RowFormTextAreaFieldView extends RowFormFieldView {
+    /*getClassName() {
         const ctrl = this.props.ctrl;
         return [
             'field',
@@ -7,7 +7,7 @@ class RowFormTextAreaFieldView extends ReactComponent {
             ...(ctrl.state.changed ? ['changed'] : []),
             ...(ctrl.state.error !== null ? ['error'] : [])
         ].join(' ');
-    }
+    }*/
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>

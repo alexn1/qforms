@@ -67,6 +67,7 @@ class RowFormView extends ReactComponent {
             'CheckBoxField',
             'LinkField',
             'ImageField',
+            'FileField',
         ].includes(ctrl.model.getClassName())) {
             return React.createElement(ctrl.getViewClass(), {key: `field.${ctrl.model.getName()}`, ctrl});
         }
