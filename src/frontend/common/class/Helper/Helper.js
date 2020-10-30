@@ -66,7 +66,7 @@ class Helper {
         return component;
     }
 
-    static readImage(file) {
+    static readFileAsDataURL(file) {
         return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);

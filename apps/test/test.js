@@ -21,7 +21,7 @@ class testController extends ApplicationController {
         console.log('name:', name);
         console.log('file:', file instanceof File, file);
         const url = Helper.createObjectUrl(await Helper.readFile(file));
-        // const url = await Helper.readImage(file);
+        // const url = await Helper.readFileAsDataURL(file);
         const img = document.createElement('img');
         img.src = url
         document.body.appendChild(img);
