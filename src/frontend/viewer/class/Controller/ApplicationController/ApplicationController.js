@@ -34,11 +34,11 @@ class ApplicationController extends Controller {
         // console.log('ApplicationController.init');
         super.init();
         // this.model.on('logout' , this.listeners.logout  = this.onLogout.bind(this));
-        this.model.on('request', this.listeners.request = this.onRequest.bind(this));
+        this.model.on('request', this.onRequest);
     }
     deinit() {
         // this.model.off('logout', this.listeners.logout);
-        this.model.off('request', this.listeners.request);
+        this.model.off('request', this.onRequest);
         super.deinit();
     }
     createView(root) {
@@ -61,7 +61,7 @@ class ApplicationController extends Controller {
     /*onLogout(ea) {
         location.reload();
     }*/
-    onRequest(e) {
+    onRequest = e => {
         // console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
