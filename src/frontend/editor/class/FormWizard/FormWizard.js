@@ -70,13 +70,7 @@ class FormWizard {
 
     getFields() {
         let fields = {};
-        this.tableColumns.filter(column => {
-            if (this.params.className === 'TableForm') {
-                if (column.dbType === 'text') return false;
-                if (column.dbType === 'bytea') return false;
-            }
-            return true;
-        }).forEach(column => {
+        this.getColumns().forEach(column => {
             fields[column.name] = this.getField(column);
         });
         /*for (let i = 0; i < this.tableColumns.length; i++) {
@@ -84,6 +78,16 @@ class FormWizard {
             fields[column.name] = this.getField(column);
         }*/
         return fields;
+    }
+
+    getColumns() {
+        return this.tableColumns.filter(column => {
+            if (this.params.className === 'TableForm') {
+                if (column.dbType === 'text') return false;
+                if (column.dbType === 'bytea') return false;
+            }
+            return true;
+        });
     }
 
     getFormParams() {
