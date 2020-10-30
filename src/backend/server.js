@@ -24,7 +24,7 @@ initExpressServer(server); function initExpressServer(server) {
     // middlewares
     // server.use(morgan('dev'));
     // server.use(serverRequest);
-    server.use(bodyParser.json());
+    server.use(bodyParser.json({limit: '10mb'}));
     server.use(bodyParser.urlencoded({ extended: false }));
     // server.use(multipartHandler);
     server.use(session({
