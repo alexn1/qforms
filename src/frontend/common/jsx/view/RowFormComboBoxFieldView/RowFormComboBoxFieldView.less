@@ -6,6 +6,10 @@
         padding         : 0;
         background-color: white;
         cursor          : pointer;
+        &[disabled] {
+            background-color: lightgoldenrodyellow;
+            cursor: default;
+        }
     }
     &.changed > select {
         background-color: rgb(238, 253, 234);
@@ -13,8 +17,5 @@
     }
     &.error > select {
         background-color: #f2dede;
-    }
-    > select[disabled] {
-        background-color: lightgoldenrodyellow;
     }
 }
