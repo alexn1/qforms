@@ -58,4 +58,8 @@ class FieldController extends Controller {
         return stringValue;
     }
 
+    renderViewStyle(row) {
+        return null;
+    }
+
 }
