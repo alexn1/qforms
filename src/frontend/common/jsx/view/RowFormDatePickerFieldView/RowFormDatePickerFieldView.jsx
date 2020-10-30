@@ -1,14 +1,4 @@
 class RowFormDatePickerFieldView extends RowFormFieldView {
-    /*getClassName() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        return [
-            'field',
-            'RowFormDatePickerFieldView',
-            ...(ctrl.state.changed ? ['changed'] : []),
-            ...(ctrl.state.error !== null ? ['error'] : [])
-        ].join(' ');
-    }*/
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
