@@ -16,6 +16,13 @@ class RowFormFieldController extends FieldController {
         this.setValue(value);
         // console.log(this.model.getFullName(), value);
     }
+    refill() {
+        // console.log('RowFormFieldController.refill', this.model.getFullName());
+        const value = this.model.getValue(this.getRow());
+        this.setValue(value);
+        this.state.error = null;
+        this.refreshChanged();
+    }
     getRow() {
         return this.model.getForm().getRow();
     }
@@ -68,27 +75,19 @@ class RowFormFieldController extends FieldController {
         this.state.error = this.getError();
     }
     refreshChanged() {
-        this.state.changed = this.isChanged2(this.getRow());
+        this.state.changed = this.calcChangedState(this.getRow());
     }
-    refill() {
-        // console.log('RowFormFieldController.refill', this.model.getFullName());
-        const value = this.model.getValue(this.getRow());
-        this.setValue(value);
-        this.state.error = null;
-        this.refreshChanged();
-    }
-
     getPlaceHolder() {
         // console.log('RowFormFieldController.getPlaceHolder', this.model.getFullName());
         if (ApplicationController.isInDebugMode()) {
-            try {
-                const value = this.getValue();
-                if (value === undefined) return 'undefined';
-                if (value === null) return 'null';
-                if (value === '') return 'empty string';
-            } catch (err) {
-                console.error(`${this.model.getFullName()}: getPlaceHolder: ${err.message}`);
-            }
+            // try {
+            const value = this.getValue();
+            if (value === undefined) return 'undefined';
+            if (value === null) return 'null';
+            if (value === '') return 'empty string';
+            // } catch (err) {
+            //     console.error(`${this.model.getFullName()}: getPlaceHolder: ${err.message}`);
+            // }
         }
     }
     getError() {
@@ -107,10 +106,10 @@ class RowFormFieldController extends FieldController {
         return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
     }
 
-    isChanged2(row) {
-        // console.log('RowFormFieldController.isChanged2', this.model.getFullName());
+    calcChangedState(row) {
+        // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        if (this.state.error) return true;
+        if (!this.isValid()) return true;
         if (this.model.hasColumn()) {
             const fieldRawValue = Field.encodeValue(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
