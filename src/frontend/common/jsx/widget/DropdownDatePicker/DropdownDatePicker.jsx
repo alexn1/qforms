@@ -7,7 +7,7 @@ class DropdownDatePicker extends ReactComponent {
             value: props.value || null,
         };
         if (props.value && !(props.value instanceof Date)) {
-            throw new Error('need date type');
+            throw new Error(`need Date type, got ${typeof props.value}`);
         }
     }
     onInputClick = (e) => {

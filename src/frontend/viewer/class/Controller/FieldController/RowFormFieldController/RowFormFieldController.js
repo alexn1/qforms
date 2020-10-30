@@ -4,7 +4,7 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            isUndefined: true,
+            // isUndefined: true,
             value      : null,
             changed    : false,
             error      : null
@@ -19,32 +19,47 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    onChange = value => {
+    onChange = viewValue => {
         // console.log('RowFormFieldController.onChange', value);
-        this.state.isUndefined = false;
-        this.state.value       = value;
-        this.validate();
-        if (this.isValid()) {
-            const row = this.getRow();
-            const value = this.getValue();
-            this.model.setValue(row, value);
+        // this.state.isUndefined = false;
+        // this.state.value       = value;
+
+        try {
+            this.setValueFromView(viewValue);
+        } catch (err) {
+            console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+            this.state.error = err.message;
         }
-        this.updateChanged();
+
+        if (!this.state.error) {
+            this.validate();
+            if (this.isValid()) {
+                this.model.setValue(this.getRow(), this.getValue());
+            }
+        }
+
+        this.refreshChanged();
         this.parent.onFieldChange({source: this});
     }
     renderValueForView() {
-        return this.state.value;
+        return this.valueToString(this.getValue());
+    }
+    setValueFromView(viewValue) {
+        const value = this.stringToValue(viewValue);
+        this.setValue(value);
     }
     setValue(value) {
         // console.log('RowFormFieldController.setValue', this.model.getFullName(), value);
-        this.state.isUndefined = value === undefined;
+        /*this.state.isUndefined = value === undefined;
         const stringValue = this.valueToString(value);
         // console.log('stringValue:', stringValue);
-        this.state.value = stringValue;
+        this.state.value = stringValue;*/
+        this.state.value = value;
     }
     getValue() {
-        if (this.state.isUndefined) return undefined;
-        return this.stringToValue(this.state.value);
+        // if (this.state.isUndefined) return undefined;
+        // return this.stringToValue(this.state.value);
+        return this.state.value;
     }
     isChanged() {
         return this.state.changed;
@@ -55,7 +70,7 @@ class RowFormFieldController extends FieldController {
     validate() {
         this.state.error = this.getError();
     }
-    updateChanged() {
+    refreshChanged() {
         this.state.changed = this.isChanged2(this.getRow());
     }
     refill() {
@@ -63,7 +78,7 @@ class RowFormFieldController extends FieldController {
         const value = this.model.getValue(this.getRow());
         this.setValue(value);
         this.state.error = null;
-        this.updateChanged();
+        this.refreshChanged();
     }
 
     getPlaceHolder() {
@@ -82,7 +97,7 @@ class RowFormFieldController extends FieldController {
     getError() {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
         try {
-            const value = this.getValue();      // try to get value
+            const value = this.getValue();
             if (this.model.isNotNull() && (value === null || value === undefined)) {
                 return `not null`;
             }
@@ -98,15 +113,9 @@ class RowFormFieldController extends FieldController {
     isChanged2(row) {
         // console.log('RowFormFieldController.isChanged2', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
+        if (this.state.error) return true;
         if (this.model.hasColumn()) {
-            let value;
-            try {
-                value = this.getValue();
-            } catch (err) {
-                console.error(`${this.model.getFullName()}: cannot get value: ${err.message}`);
-                return true;
-            }
-            const fieldRawValue = Field.encodeValue(value);
+            const fieldRawValue = Field.encodeValue(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
                 console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsRawValue, fieldRawValue);
