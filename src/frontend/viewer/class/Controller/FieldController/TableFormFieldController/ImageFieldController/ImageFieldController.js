@@ -2,20 +2,20 @@
 
 class ImageFieldController extends TableFormFieldController {
 
-    constructor(model, parent) {
+    /*constructor(model, parent) {
         super(model, parent);
-    }
+    }*/
 
-    getValue(view) {
+    /*getValue(view) {
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
                 return view.firstElementChild.src;
             case 'TableForm':
                 return view.firstElementChild.innerHTML;
         }
-    }
+    }*/
 
-    setValue(value, view) {
+    /*setValue(value, view) {
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
                 if (value !== '') {
@@ -28,6 +28,5 @@ class ImageFieldController extends TableFormFieldController {
                 }
                 break;
         }
-    }
-
+    }*/
 }
