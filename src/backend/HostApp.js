@@ -543,14 +543,18 @@ class HostApp {
     }
     async logError(req, context, err) {
         try {
-            await this.getApplication(req).createLog(context, {
-                type   : 'error',
-                source : 'server',
-                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                message: err.message,
-                stack  : err.stack.toString(),
-                data   : JSON.stringify(req.body, null, 4)
-            });
+            const application = this.getApplication(req);
+            if (application.databases.default) {
+                const cnn = await application.getDatabase('default').getConnection(context);
+                await application.createLog(cnn, {
+                    type   : 'error',
+                    source : 'server',
+                    ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                    message: err.message,
+                    stack  : err.stack.toString(),
+                    data   : JSON.stringify(req.body, null, 4)
+                });
+            }
         } catch (err) {
             console.error(err);
         }
@@ -575,13 +579,16 @@ class HostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await application.createLog(context, {
-                type   : 'log',
-                source : 'server',
-                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                message: message,
-                data   : JSON.stringify(req.body, null, 4)
-            });
+            if (application.databases.default) {
+                const cnn = await application.getDatabase('default').getConnection(context);
+                await application.createLog(cnn, {
+                    type   : 'log',
+                    source : 'server',
+                    ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                    message: message,
+                    data   : JSON.stringify(req.body, null, 4)
+                });
+            }
         } catch (err) {
             console.error(err);
         }

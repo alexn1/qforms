@@ -53,6 +53,17 @@ class PostgreSqlDatabase extends Database {
         return result;
     }
 
+    static async queryResult(cnn, query, params = null) {
+        console.log('PostgreSqlDatabase.queryResult', query, params/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        Database.checkParams(query, params);
+        const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
+        // console.log('sql:', sql);
+        // console.log('values:', values);
+        const result = await cnn.query(sql, values);
+        // console.log('cnn.query result:', result);
+        return result;
+    }
+
     async queryRows(context, query, params = null) {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
