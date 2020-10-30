@@ -125,7 +125,7 @@ async function viewerPost(req, res, next)  {
         const time = await hostApp.handleViewerPost(req, res, context);
         // await hostApp.logRequest(req, context, time);
     } catch (err) {
-        // await hostApp.logError(req, err);
+        await hostApp.logError(req, err);
         next(err);
     } finally {
         Context.destroy(context);
