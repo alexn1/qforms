@@ -97,11 +97,10 @@ class DataSource extends Model {
     encodeRow(row) {
         // console.log('DataSource.encodeRow', this.getFullName());
         for (const name in row) {
-            if (row[name] instanceof Buffer) {
+            /*if (row[name] instanceof Buffer) {
                 row[name] = JSON.stringify(row[name].toString('base64'));
-            } else {
-                row[name] = JSON.stringify(row[name]);
-            }
+            }*/
+            row[name] = JSON.stringify(row[name]);
         }
     }
 
