@@ -222,25 +222,6 @@ class SqlDataSource extends DataSource {
             parentPageName: page.parentPageName || null
         };
 
-        /*
-        const fileColumns = [];
-        for (const column in row) {
-            if (row[column] instanceof File) {
-                fileColumns.push(column);
-            }
-        }
-        if (fileColumns.length > 0) {
-            const formData = new FormData();
-            fileColumns.forEach((column) => {
-                formData.append(column, row[column]);
-                delete row[column];
-            });
-            formData.append('__data', JSON.stringify(data));
-            args = formData;
-        }
-        */
-
-
         const data = await this.getApp().request(args);
         const [key] = Object.keys(data);
         if (!key) throw new Error('no inserted row key');
