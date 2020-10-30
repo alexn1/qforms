@@ -27,20 +27,22 @@ class FieldController extends Controller {
             case 'string':
                 return value;
             case 'object':
-                if (value === null) return '';
+                if (value === null) return null;
                 if (value instanceof Date) return value.toISOString();
                 return JSON.stringify(value, null, 4);
             case 'number':
             case 'boolean':
                 return value.toString();
             case 'undefined':
-                return '';
+                return undefined;
             default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
         }
     }
 
     stringToValue(stringValue) {
         // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+        if (stringValue === undefined) return undefined;
+        if (stringValue === null) return null;
         const fieldType = this.model.getType();
         // console.log('fieldType:', fieldType);
         if (stringValue.trim() === '') return null;
