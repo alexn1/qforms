@@ -49,16 +49,7 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.data.time);
         }
     }
-    getMenuItemsProp() {
-        return Object.keys(this.model.data.menu).map(key => ({
-            name : key,
-            title: key,
-            items: this.model.data.menu[key].map(item => ({
-                name : item.page,
-                title: item.caption
-            }))
-        }));
-    }
+
     /*onLogout = ea => {
         location.reload();
     }*/
@@ -119,19 +110,7 @@ class ApplicationController extends Controller {
         return this.lastPageId;
     }
 
-    onMenuItemClick = async (menu, item) => {
-        // console.log('ApplicationController.onMenuItemClick', menu, item);
-        try {
-            await this.openPage({name: item});
-        } catch (err) {
-            console.error(err);
-            alert(err.message);
-        }
-    }
 
-    onStatusbarCreate = statusbar => {
-        this.statusbar = statusbar;
-    }
     createPage() {
         const name = Object.keys(this.model.data.pages).length ? Object.keys(this.model.data.pages)[0] : null;
         if (!name) return null;
