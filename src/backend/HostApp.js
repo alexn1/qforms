@@ -418,10 +418,11 @@ class HostApp {
         const relFilePath = req.params['0'];
         const filePath = path.join(application.appInfo.dirPath, 'build', relFilePath);
         // console.log('filePath:', filePath);
-        if (['.css', '.js'].includes(path.extname(filePath))) {
+        const ext = path.extname(filePath);
+        if (['.css', '.js'].includes(ext)) {
             const exists = await qforms.Helper.exists(filePath);
             if (exists) {
-                return await qforms.Helper.readFile(filePath);
+                return [await qforms.Helper.readFile(filePath), ext];
             }
         }
         return null;
@@ -432,8 +433,13 @@ class HostApp {
         const application = this.getApplication(req);
         const content = await this.appCssFile(req, application);
         if (content !== null) {
-            res.setHeader('content-type', 'text/css');
-            res.send(content);
+            if (content[1] === '.css') {
+                res.setHeader('content-type', 'text/css');
+            }
+            if (content[1] === '.js') {
+                res.setHeader('content-type', 'text/javascript');
+            }
+            res.send(content[0]);
         } else {
             // console.error('file not found: ', req.originalUrl);
             const base = `/view/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}`;
