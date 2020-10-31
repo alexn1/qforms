@@ -86,7 +86,7 @@ class PageView extends ReactComponent {
                     <h3 className="caption flex-min">{this.renderCaption()}</h3>
                     {model.hasRowFormWithDefaultDs() && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
-                    {model.hasTableFormOrTreeForm() &&
+                    {model.hasTableForm() &&
                         <div className="table-forms flex-max place">
                             <div className="frame">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>

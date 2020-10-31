@@ -107,10 +107,10 @@ class Page extends Model {
         return false;
     }
 
-    hasTableFormOrTreeForm() {
+    hasTableForm() {
         for (const formName in this.forms) {
             const form = this.forms[formName];
-            if (form.getClassName() === 'TableForm' || form.getClassName() === 'TreeForm') {
+            if (form.getClassName() === 'TableForm') {
                 return true;
             }
         }
