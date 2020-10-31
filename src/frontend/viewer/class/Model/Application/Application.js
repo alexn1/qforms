@@ -8,7 +8,7 @@ class Application extends Model {
     }
 
     init() {
-        console.log('Application.init');
+        // console.log('Application.init');
         if (!this.data.theme) throw new Error('no theme attr');
 
         // databases

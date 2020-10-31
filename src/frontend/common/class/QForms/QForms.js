@@ -17,7 +17,7 @@ class QForms {
         //window.onbeforeunload = QForms.exit;
     }
     init() {
-        console.log('QForms.init');
+        // console.log('QForms.init');
         const root = document.querySelector('#root');
         const application = new Application(this.data);
         application.init();
