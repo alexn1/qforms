@@ -1,32 +1,7 @@
-html {
-  height: 100%;
-  &.wait, &.wait * {
-    cursor: wait !important;
-  }
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  font-family: sans-serif;
-  //font-size: small;
-}
-
-#root {
-  height: 100%;
-}
-
 .ApplicationView {
   height: 100%;
   display: grid;
   grid-template-rows: min-content 1fr 20px;
-
-  /*hr {
-    margin: 10px 0;
-  }*/
-  /*nav {
-    margin:0 !important;
-  }*/
   *:focus {
     outline: 0 !important;
   }
@@ -60,34 +35,14 @@ body {
     bottom: 0;
     right: 0;
   }
-  .layout {
+  /*.layout {
     table-layout: fixed;
-  }
-  /*  .overlay {
-      background-color: rgba(0,0,0,0.3);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      > div {
-        margin: 200px auto;
-        border: solid 1px black;
-        background-color: lightblue;
-        > div {
-          padding: 27px 5px 5px 5px;
-          > div {
-            padding: 5px;
-          }
-        }
-      }
-    }*/
-
-  .clearfix:after {
+  }*/
+  /*.clearfix:after {
     content: "";
     display: table;
     clear: both;
-  }
+  }*/
   .sdi {
     background-color: gray;
   }
