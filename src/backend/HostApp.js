@@ -413,8 +413,8 @@ class HostApp {
         await res.json(result);
     }
 
-    async appCssFile(req, application) {
-        // console.log('HostApp.appCssFile', req.params['0']);
+    async appFile(req, application) {
+        // console.log('HostApp.appFile', req.params['0']);
         const relFilePath = req.params['0'];
         const filePath = path.join(application.appInfo.dirPath, 'build', relFilePath);
         // console.log('filePath:', filePath);
@@ -431,7 +431,7 @@ class HostApp {
     async viewerFile(req, res) {
         // console.log('HostApp.viewerFile');
         const application = this.getApplication(req);
-        const content = await this.appCssFile(req, application);
+        const content = await this.appFile(req, application);
         if (content !== null) {
             if (content[1] === '.css') {
                 res.setHeader('content-type', 'text/css');
@@ -452,7 +452,7 @@ class HostApp {
     async editorFile(req, res) {
         // console.log('HostApp.editorFile', req.originalUrl);
         const application = this.getApplication(req);
-        const content = await this.appCssFile(req, application);
+        const content = await this.appFile(req, application);
         if (content !== null) {
             res.setHeader('content-type', 'text/css');
             res.send(content);
