@@ -11,15 +11,10 @@ class ApplicationView extends ReactComponent {
     }
     renderModal() {
         return this.props.ctrl.modalPages.map(pageCtrl =>
-            <Modal
-                key={pageCtrl.model.id}
-                content={
-                    <PageView
-                        ctrl={pageCtrl}
-                        onCreate={pageCtrl.onViewCreate}
-                    />
-                }
-            />);
+            <Modal key={pageCtrl.model.id}>
+                <PageView ctrl={pageCtrl} onCreate={pageCtrl.onViewCreate}/>
+            </Modal>
+        );
     }
     render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
