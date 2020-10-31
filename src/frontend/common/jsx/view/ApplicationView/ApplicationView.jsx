@@ -6,13 +6,18 @@ class ApplicationView extends ReactComponent {
             return React.createElement(pageCtrl.getViewClass(), {
                 ctrl    : pageCtrl,
                 onCreate: pageCtrl.onViewCreate
-            })
+            });
         }
     }
     renderModal() {
         return this.props.ctrl.modalPages.map(pageCtrl =>
             <Modal key={pageCtrl.model.id}>
-                <PageView ctrl={pageCtrl} onCreate={pageCtrl.onViewCreate}/>
+                {
+                    React.createElement(pageCtrl.getViewClass(), {
+                        ctrl    : pageCtrl,
+                        onCreate: pageCtrl.onViewCreate
+                    })
+                }
             </Modal>
         );
     }
