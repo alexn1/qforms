@@ -9,18 +9,18 @@
     <!-- react -->
     <script src="common/lib/react/react.development.js"></script>
     <script src="common/lib/react/react-dom.development.js"></script>
-    <!-- qforms -->
+    <!-- qforms css -->
     <link rel="stylesheet" href="common/class/all.css"/>
     <link rel="stylesheet" href="common/jsx/all.css"/>
-    <!-- viewerClassCss -->
+    <!-- viewer css -->
 <%viewerClassCss.forEach((filePath) => {
         %>    <link rel="stylesheet" href="<%=filePath%>"/><%='\n'%><%
     });%>
+    <!-- qforms js -->
     <script src="common/class/all.js"></script>
     <script src="viewer/class/all.js"></script>
-    <!-- jsx -->
+    <!-- qforms react components -->
     <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
-
     <script src="common/jsx/widget/Box/Box.js"></script>
     <script src="common/jsx/widget/Menu/Menu.js"></script>
     <script src="common/jsx/widget/Statusbar/Statusbar.js"></script>
@@ -39,7 +39,6 @@
     <script src="common/jsx/widget/Tab/Tab.js"></script>
     <script src="common/jsx/widget/CheckBox/CheckBox.js"></script>
     <script src="common/jsx/widget/Image/Image.js"></script>
-
     <script src="common/jsx/view/ApplicationView/ApplicationView.js"></script>
     <script src="common/jsx/view/ApplicationView/MdiApplicationView/MdiApplicationView.js"></script>
     <script src="common/jsx/view/ApplicationView/SdiApplicationView/SdiApplicationView.js"></script>
@@ -61,15 +60,14 @@
     <script src="common/jsx/view/RowFormFieldView/RowFormLinkFieldView/RowFormLinkFieldView.js"></script>
     <script src="common/jsx/view/RowFormFieldView/RowFormImageFieldView/RowFormImageFieldView.js"></script>
     <script src="common/jsx/view/RowFormFieldView/RowFormFileFieldView/RowFormFileFieldView.js"></script>
-    <!-- app files begin -->
+    <!-- app css -->
     <%links.forEach(link => {
         %><link rel="stylesheet" href="<%=link%>"/><%
     });%>
+    <!-- app js -->
     <%scripts.forEach(script => {
         %><script src="<%=script%>"></script><%
     });%>
-    <!-- app files end -->
-
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const data = <%- JSON.stringify(data, null, 4) %>;
