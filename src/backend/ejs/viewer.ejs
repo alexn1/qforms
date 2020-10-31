@@ -62,11 +62,13 @@
     <script src="common/jsx/view/RowFormFieldView/RowFormFileFieldView/RowFormFileFieldView.js"></script>
     <!-- app css -->
     <%links.forEach(link => {
-        %><link rel="stylesheet" href="<%=link%>"/><%
+        %><link rel="stylesheet" href="<%=link%>"/>
+    <%
     });%>
     <!-- app js -->
     <%scripts.forEach(script => {
-        %><script src="<%=script%>"></script><%
+        %><script src="<%=script%>"></script>
+    <%
     });%>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
