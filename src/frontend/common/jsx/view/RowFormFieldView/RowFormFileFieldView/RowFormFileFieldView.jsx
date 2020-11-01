@@ -15,7 +15,7 @@ class RowFormFileFieldView extends RowFormFieldView {
                     <a href={value} target="_blank">
                         <Image ref={this.image} src={value}/>
                     </a>
-                    <div>{this.state.size ? JSON.stringify(this.state.size) : null}</div>
+                    <div>{this.state.size ? JSON.stringify([...this.state.size, ...([value.length])]) : null}</div>
                 </div>
             }
             {/*{!!value && <a href={value} target="_blank">Download</a>}*/}
