@@ -6,7 +6,7 @@ class Tooltip extends ReactComponent {
     render() {
         // console.log('Tooltip.render', this.state, this.props);
         return (
-            <div className={`TooltipWidget ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
+            <div className={`Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
                 {this.props.type !== 'alert' &&
                     <div>tooltip</div>
                 }
