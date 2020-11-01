@@ -35,6 +35,10 @@ class SqlDataSource extends DataSource {
         return type;
     }
 
+    getDbType(column) {
+        return this.getTable().getColumn(column).getDbType();
+    }
+
     /*static encodeChanges(changes) {
         const eChanges = {};
         for (const key in changes) {

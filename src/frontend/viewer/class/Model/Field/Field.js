@@ -42,7 +42,8 @@ class Field extends Model {
     }
 
     valueToPageParams(row) {
-        // console.log('Field.valueToPageParams', this.getFullName());
+        // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
+        if (this.getDbType() === 'text') return;
         this.getPage().params[this.getFullName()] = this.getValue(row);
     }
 
@@ -101,6 +102,14 @@ class Field extends Model {
         }
         if (this.data.type) return this.data.type;
         throw new Error(`${this.getFullName()}: field type empty`);
+    }
+
+    getDbType() {
+        const dataSource = this.getDataSource();
+        if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
+            return this.getDataSource().getDbType(this.data.column);
+        }
+        return null;
     }
 
     getForm() {
