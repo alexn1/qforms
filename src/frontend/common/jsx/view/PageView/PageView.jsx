@@ -6,14 +6,14 @@ class PageView extends ReactComponent {
             const form = model.forms[name];
             const formController = ctrl.forms[name];
             return {
-                name: form.getName(),
-                title: form.data.caption,
-                content: <TableFormView
-                    key={name}
-                    ctrl={ctrl.forms[name]}
-                    onCreate={formController.onViewCreate}
-                    updated={formController.getUpdated()}
-                />
+                name   : form.getName(),
+                title  : form.data.caption,
+                content: React.createElement(formController.getViewClass(),{
+                    key     : name,
+                    ctrl    : ctrl.forms[name],
+                    onCreate: formController.onViewCreate,
+                    updated : formController.getUpdated()
+                })
             };
         });
     }
@@ -33,7 +33,6 @@ class PageView extends ReactComponent {
     renderCaption() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-
         const key = model.getKey();
         let caption = model.getCaption();
         if (ApplicationController.isInDebugMode()) {

@@ -8,7 +8,9 @@ class TableFormController extends FormController {
             activeRowKey: null
         };
     }
-
+    getViewClass() {
+        return TableFormView;
+    }
     init() {
         super.init();
         // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
@@ -40,25 +42,21 @@ class TableFormController extends FormController {
         this.model.off('insert' , this.listeners.insert);
         super.deinit();
     }
-
     onNewClick = async e => {
         await this.new();
     }
-
     onRefreshClick = async e => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
         await this.model.getDataSource().refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     }
-
     onDeleteClick = e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.state.activeRowKey);
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
             this.model.getDataSource().delete(this.state.activeRowKey);
         }
     }
-
     onGridCellDblClick = async (row) => {
         // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
@@ -75,11 +73,9 @@ class TableFormController extends FormController {
             break;
         }
     }
-
     onHidePage() {
         // this.grid.saveScroll();
     }
-
     onShowPage() {
         console.log('TableFormController.onShowPage', this.model.getFullName());
         /*if (!this.grid.isHidden()) {
@@ -88,7 +84,6 @@ class TableFormController extends FormController {
             // console.log('document.activeElement:', document.activeElement);
         }*/
     }
-
     async new() {
         if (this.model.data.newRowMode === 'oneclick') {
             const row = {};
@@ -135,7 +130,6 @@ class TableFormController extends FormController {
             });
         }
     }
-
     async edit(key) {
         // console.log('TableForm.edit', this.model.getFullName(), key);
         if (!this.model.data.itemEditPage) {
