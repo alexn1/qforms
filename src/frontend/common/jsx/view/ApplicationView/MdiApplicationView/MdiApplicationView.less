@@ -1,20 +1,7 @@
-html.admin {
+.MdiApplicationView {
   height: 100%;
-  &.wait, &.wait * {
-    cursor: wait !important;
-  }
-  body {
-    margin: 0;
-    height: 100%;
-    font-family: sans-serif;
-  }
-  #root {
-    height: 100%;
-  }
-}
-
-.ApplicationView {
-  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr 20px;
   *:focus {
     outline: 0 !important;
   }
