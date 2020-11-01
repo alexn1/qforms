@@ -13,12 +13,21 @@ class TableFormController extends FormController {
     }
     init() {
         super.init();
-        // this.parent.on('hide', this.listeners.hide = this.onHidePage.bind(this));
-        // this.parent.on('show', this.listeners.show = this.onShowPage.bind(this));
-        this.model.on('refresh', this.listeners.refresh = this.onModelRefresh);
-        this.model.on('update' , this.listeners.update  = this.onModelUpdate);
-        this.model.on('delete' , this.listeners.delete  = this.onModelDelete);
-        this.model.on('insert' , this.listeners.insert  = this.onModelInsert);
+        // this.parent.on('hide', this.onHidePage);
+        // this.parent.on('show', this.onShowPage);
+        this.model.on('refresh', this.onModelRefresh);
+        this.model.on('update' , this.onModelUpdate);
+        this.model.on('delete' , this.onModelDelete);
+        this.model.on('insert' , this.onModelInsert);
+    }
+    deinit() {
+        // this.parent.off('hide', this.onHidePage);
+        // this.parent.off('show', this.onShowPage);
+        this.model.off('refresh', this.onModelRefresh);
+        this.model.off('update' , this.onModelUpdate);
+        this.model.off('delete' , this.onModelDelete);
+        this.model.off('insert' , this.onModelInsert);
+        super.deinit();
     }
     getGridColumns() {
         return Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
@@ -32,15 +41,6 @@ class TableFormController extends FormController {
     }
     getGridRows() {
         return this.model.getDataSource().getRows();
-    }
-    deinit() {
-        // this.parent.off('hide', this.listeners.hide);
-        // this.parent.off('show', this.listeners.show);
-        this.model.off('refresh', this.listeners.refresh);
-        this.model.off('update' , this.listeners.update);
-        this.model.off('delete' , this.listeners.delete);
-        this.model.off('insert' , this.listeners.insert);
-        super.deinit();
     }
     onNewClick = async e => {
         await this.new();
@@ -73,10 +73,10 @@ class TableFormController extends FormController {
             break;
         }
     }
-    onHidePage() {
+    onHidePage = () => {
         // this.grid.saveScroll();
     }
-    onShowPage() {
+    onShowPage = () => {
         console.log('TableFormController.onShowPage', this.model.getFullName());
         /*if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
