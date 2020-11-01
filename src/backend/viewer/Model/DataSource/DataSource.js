@@ -89,7 +89,7 @@ class DataSource extends Model {
             } else if (field.getAttr('value')) {
                 field.calcValue(row);
             } else {
-                throw new Error(`[${field.getFullName()}]: need column or value`);
+                throw new Error(`[${field.getFullName()}]: no column '${columnName}' in result set and no value property for calculation`);
             }
         }
     }

@@ -22,6 +22,7 @@ class FileFieldEditor extends FieldEditor {
                 isVisible   : params['isVisible']    ? params['isVisible']    :         'true',
                 width       : params['width']        ? params['width']        :            '0',
                 defaultValue: params['defaultValue'] ? params['defaultValue'] :             '',
+                value       : params['value']        ? params['value']        :             '',
                 column      : params['column']       ? params['column']       : params['name'],
                 type        : params['type']         ? params['type']         :             '',
                 readOnly    : params['readOnly']     ? params['readOnly']     :        'false',
