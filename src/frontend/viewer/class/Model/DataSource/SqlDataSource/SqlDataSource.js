@@ -11,9 +11,9 @@ class SqlDataSource extends DataSource {
         super.init();
         if (this.data.table !== '') {
             const table = this.getTable();
-            table.on('update', this.listeners.tableUpdated = this.onTableUpdated.bind(this));
-            table.on('insert', this.listeners.tableInsert  = this.onTableInsert.bind(this));
-            table.on('delete', this.listeners.tableDelete  = this.onTableDelete.bind(this));
+            table.on('update', this.onTableUpdated);
+            table.on('insert', this.onTableInsert);
+            table.on('delete', this.onTableDelete);
         }
     }
 
@@ -21,9 +21,9 @@ class SqlDataSource extends DataSource {
         // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         if (this.data.table !== '') {
             const table = this.getTable();
-            table.removeListener('update', this.listeners.tableUpdated);
-            table.removeListener('insert', this.listeners.tableInsert);
-            table.removeListener('delete', this.listeners.tableDelete);
+            table.removeListener('update', this.onTableUpdated);
+            table.removeListener('insert', this.onTableInsert);
+            table.removeListener('delete', this.onTableDelete);
         }
         super.deinit();
     }
@@ -99,7 +99,7 @@ class SqlDataSource extends DataSource {
         return this.getApp().getDatabase(this.data.database).getTable(this.data.table);
     }
 
-    async onTableUpdated(e) {
+    onTableUpdated = async (e) => {
         console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
         if (e.source === this) {
@@ -119,7 +119,7 @@ class SqlDataSource extends DataSource {
         }
     }
 
-    async onTableInsert(e) {
+    onTableInsert = async (e) => {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
         if (e.source === this) {
@@ -132,7 +132,7 @@ class SqlDataSource extends DataSource {
         }
     }
 
-    async onTableDelete(e) {
+    onTableDelete = async (e) => {
         console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
