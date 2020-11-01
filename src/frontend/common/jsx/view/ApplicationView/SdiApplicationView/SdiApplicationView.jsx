@@ -10,7 +10,7 @@ class SdiApplicationView extends ApplicationView {
                     {this.renderActivePage()}
                 </div>
                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>
-                {this.renderModal()}
+                {this.renderModalPages()}
             </div>
         );
     }

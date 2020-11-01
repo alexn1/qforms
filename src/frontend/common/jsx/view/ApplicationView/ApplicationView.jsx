@@ -11,7 +11,7 @@ class ApplicationView extends ReactComponent {
             onCreate: pageCtrl.onViewCreate
         });
     }
-    renderModal() {
+    renderModalPages() {
         return this.props.ctrl.modalPages.map(pageCtrl =>
             <Modal key={pageCtrl.model.id}>
                 {this.renderPage(pageCtrl)}
@@ -25,7 +25,7 @@ class ApplicationView extends ReactComponent {
         return (
             <div className={`ApplicationView ${model.data.theme}`}>
                 {this.renderActivePage()}
-                {this.renderModal()}
+                {this.renderModalPages()}
             </div>
         );
     }

@@ -27,7 +27,7 @@ class MdiApplicationView extends ApplicationView {
                     onTabMouseDown={ctrl.onTabMouseDown}
                 />
                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>
-                {this.renderModal()}
+                {this.renderModalPages()}
             </div>
         );
     }
