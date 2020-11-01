@@ -50,6 +50,14 @@ class Helper {
         return eObj;
     }
 
+    static decodeObject(eObj) {
+        const obj = {};
+        for (const name in eObj) {
+            obj[name] = JSON.parse(eObj[name], Helper.dateTimeReviver);
+        }
+        return obj;
+    }
+
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
             const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
