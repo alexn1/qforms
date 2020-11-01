@@ -24,9 +24,8 @@ class RowFormFileFieldView extends RowFormFieldView {
     }
     componentDidMount() {
         setTimeout(()=> {
-            console.log('this.image.current.getNaturalSize()', this.image.current.getNaturalSize());
+            // console.log('this.image.current.getNaturalSize()', this.image.current.getNaturalSize());
             this.setState({size: this.image.current.getNaturalSize()});
         }, 0);
-
     }
 }
