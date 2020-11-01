@@ -271,6 +271,10 @@ class SqlDataSource extends DataSource {
         return this.getDatabase().getTable(tableName);
     }
 
+    getDbType(column) {
+        return this.getTable().getColumn(column).getDbType();
+    }
+
     getAutoColumns() {
         return this.keyColumns.filter(name => this.table.columns[name].isAuto());
     }

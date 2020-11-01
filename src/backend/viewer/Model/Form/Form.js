@@ -39,6 +39,10 @@ class Form extends Model {
         return data;
     }
 
+    getDataSource() {
+        return this.dataSources.default;
+    }
+
     _getSurrogateDataSourceResponse(context) {
         const row = {
             id: 1

@@ -26,6 +26,10 @@ class Table extends Model {
     getApp() {
         return this.parent.parent;
     }
+
+    getColumn(name) {
+        return this.columns[name];
+    }
 }
 
 module.exports = Table;

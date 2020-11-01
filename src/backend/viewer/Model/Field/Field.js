@@ -40,8 +40,11 @@ class Field extends Model {
     }
 
     dumpRowValueToParams(row, params) {
+        // console.log('Field.dumpRowValueToParams', this.getFullName());
         const name  = this.getFullName();
-        const value = row[this.getAttr('column')];
+        const column = this.getAttr('column');
+        if (this.getForm().getDataSource().getDbType(column) === 'text') return;
+        const value = row[column];
         params[name] = JSON.parse(value, Helper.dateTimeReviver);
     }
 
