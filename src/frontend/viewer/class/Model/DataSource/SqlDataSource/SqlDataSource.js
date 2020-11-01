@@ -296,6 +296,7 @@ class SqlDataSource extends DataSource {
     }
 
     getFramesCount() {
+        if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         if (this.count === 0) return 1;
         if (this.getLimit()) return Math.ceil(this.count / this.getLimit());
         return 1;
