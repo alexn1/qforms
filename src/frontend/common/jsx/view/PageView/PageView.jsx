@@ -4,30 +4,28 @@ class PageView extends ReactComponent {
         const model = ctrl.model;
         return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'TableForm').map(name => {
             const form = model.forms[name];
-            const formController = ctrl.forms[name];
+            const formCtrl = ctrl.forms[name];
             return {
                 name   : form.getName(),
-                title  : form.data.caption,
-                content: React.createElement(formController.getViewClass(),{
-                    key     : name,
-                    ctrl    : ctrl.forms[name],
-                    onCreate: formController.onViewCreate,
-                    updated : formController.getUpdated()
-                })
+                title  : form.getCaption(),
+                content: this.renderForm(formCtrl)
             };
+        });
+    }
+    renderForm(formCtrl) {
+        return React.createElement(formCtrl.getViewClass(), {
+            key     : formCtrl.model.getName(),
+            ctrl    : formCtrl,
+            onCreate: formCtrl.onViewCreate,
+            updated : formCtrl.getUpdated()
         });
     }
     renderRowForms() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
-            const formController = ctrl.forms[name];
-            return React.createElement(formController.getViewClass(), {
-                key     : name,
-                ctrl    : formController,
-                onCreate: formController.onViewCreate,
-                updated : formController.getUpdated()
-            });
+            const formCtrl = ctrl.forms[name];
+            return this.renderForm(formCtrl);
         });
     }
     renderCaption() {
