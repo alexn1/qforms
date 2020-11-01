@@ -42,6 +42,9 @@ class ApplicationController extends Controller {
         this.model.off('request', this.onRequest);
         super.deinit();
     }
+    getViewClass() {
+        return ApplicationView;
+    }
     createView(root) {
         // console.log('ApplicationController.createView');
         this.view = Helper.createReactComponent(root, this.getViewClass(), {ctrl: this});
