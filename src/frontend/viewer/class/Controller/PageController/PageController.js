@@ -115,5 +115,8 @@ class PageController extends Controller {
     getViewClass() {
         return PageView;
     }
+    getCaption() {
+        return this.model.getCaption();
+    }
 
 }
