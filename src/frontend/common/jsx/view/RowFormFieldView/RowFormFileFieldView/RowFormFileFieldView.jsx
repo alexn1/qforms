@@ -11,8 +11,13 @@ class RowFormFileFieldView extends RowFormFieldView {
         return this.div.current;
     }
     updateSize() {
-        const ns = this.getImage().getNaturalSize();
-        this.getDiv().innerText = `${ns[0]}×${ns[1]}`;
+        if (this.getImage()) {
+            const ns = this.getImage().getNaturalSize();
+            this.getDiv().innerText = `${ns[0]}×${ns[1]}`;
+        }
+    }
+    onClearClick = e => {
+        this.props.ctrl.onChange('');
     }
     render() {
         const ctrl = this.props.ctrl;
@@ -27,8 +32,8 @@ class RowFormFileFieldView extends RowFormFieldView {
                     <span className="length">{value.length}</span>
                 </div>
             }
-            {!!value && <a href={value} target="_blank">Download</a>}
             <input type="file" onChange={ctrl.onFileChange} disabled={!ctrl.isEditable()}/>
+            {!!value && <Button onClick={this.onClearClick} enabled={ctrl.isEditable()}>Clear</Button>}
         </div>;
     }
     componentDidMount() {
