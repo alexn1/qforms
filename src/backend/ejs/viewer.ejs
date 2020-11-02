@@ -19,47 +19,11 @@
     <!-- qforms js -->
     <script src="common/class/all.js"></script>
     <script src="viewer/class/all.js"></script>
-    <!-- qforms react components -->
-    <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
-    <script src="common/jsx/widget/Box/Box.js"></script>
-    <script src="common/jsx/widget/Menu/Menu.js"></script>
-    <script src="common/jsx/widget/Statusbar/Statusbar.js"></script>
-    <script src="common/jsx/widget/Tooltip/Tooltip.js"></script>
-    <script src="common/jsx/widget/DatePicker/DatePicker.js"></script>
-    <script src="common/jsx/widget/DropdownDatePicker/DropdownDatePicker.js"></script>
-    <script src="common/jsx/widget/DropdownButton/DropdownButton.js"></script>
-    <script src="common/jsx/widget/Button/Button.js"></script>
-    <script src="common/jsx/widget/TextBox/TextBox.js"></script>
-    <script src="common/jsx/widget/ComboBox/ComboBox.js"></script>
-    <script src="common/jsx/widget/Grid/Grid.js"></script>
-    <script src="common/jsx/widget/GridRow/GridRow.js"></script>
-    <script src="common/jsx/widget/GridCell/GridCell.js"></script>
-    <script src="common/jsx/widget/Modal/Modal.js"></script>
-    <script src="common/jsx/widget/TextArea/TextArea.js"></script>
-    <script src="common/jsx/widget/Tab/Tab.js"></script>
-    <script src="common/jsx/widget/CheckBox/CheckBox.js"></script>
-    <script src="common/jsx/widget/Image/Image.js"></script>
-    <script src="common/jsx/view/ApplicationView/ApplicationView.js"></script>
-    <script src="common/jsx/view/ApplicationView/MdiApplicationView/MdiApplicationView.js"></script>
-    <script src="common/jsx/view/ApplicationView/SdiApplicationView/SdiApplicationView.js"></script>
-    <script src="common/jsx/view/PageView/PageView.js"></script>
-    <script src="common/jsx/view/TableFormView/TableFormView.js"></script>
-    <script src="common/jsx/view/RowFormView/RowFormView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormFieldView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormTextBoxFieldView/TableFormTextBoxFieldView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormDatePickerFieldView/TableFormDatePickerFieldView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormComboBoxFieldView/TableFormComboBoxFieldView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormCheckBoxFieldView/TableFormCheckBoxFieldView.js"></script>
-    <script src="common/jsx/view/TableFormFieldView/TableFormLinkFieldView/TableFormLinkFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormTextBoxFieldView/RowFormTextBoxFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormComboBoxFieldView/RowFormComboBoxFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormDatePickerFieldView/RowFormDatePickerFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormTextAreaFieldView/RowFormTextAreaFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormCheckBoxFieldView/RowFormCheckBoxFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormLinkFieldView/RowFormLinkFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormImageFieldView/RowFormImageFieldView.js"></script>
-    <script src="common/jsx/view/RowFormFieldView/RowFormFileFieldView/RowFormFileFieldView.js"></script>
+
+    <!-- components -->
+    <%components.forEach(filePath => {
+        %>  <script src="<%=filePath%>"></script><%='\n'%><%
+    });%>
     <!-- app css -->
     <%links.forEach(link => {
         %><link rel="stylesheet" href="<%=link%>"/>

@@ -10,6 +10,7 @@ const server  = require('../../../server');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
+const components = require('../../../components.json');
 
 
 class Application extends Model {
@@ -248,6 +249,10 @@ class Application extends Model {
         if (!name) throw new Error('getDatabase: no name');
         if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
         return this.databases[name];
+    }
+
+    getComponents() {
+        return components;
     }
 
 

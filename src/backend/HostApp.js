@@ -177,7 +177,8 @@ class HostApp {
                 scripts       : application.js,
                 caption       : `${req.params.appDirName}/${application.getAttr('caption')}`,
                 data          : data,
-                env           : application.getEnv()
+                env           : application.getEnv(),
+                components    : application.getComponents()
             });
         }
     }
