@@ -398,6 +398,10 @@ class Helper {
         }
         return value;
     }
+
+    static decodeValue(rawValue) {
+        return JSON.parse(rawValue, Helper.dateTimeReviver);
+    }
 }
 
 module.exports = Helper;

@@ -43,9 +43,10 @@ class Field extends Model {
         // console.log('Field.dumpRowValueToParams', this.getFullName());
         const name  = this.getFullName();
         const column = this.getAttr('column');
-        if (this.getForm().getDataSource() && this.getForm().getDataSource().getDbType(column) === 'text') return;
-        const value = row[column];
-        params[name] = JSON.parse(value, Helper.dateTimeReviver);
+        // if (this.getForm().getDataSource() && this.getForm().getDataSource().getDbType(column) === 'text') return;
+        if (this.isParam()) {
+            params[name] = Helper.decodeValue(row[column]);
+        }
     }
 
     getFullName() {
@@ -70,6 +71,9 @@ class Field extends Model {
 
     getForm() {
         return this.parent;
+    }
+    isParam() {
+        return this.isAttr('param') && this.getAttr('param') === 'true';
     }
 
 }
