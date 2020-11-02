@@ -70,6 +70,7 @@ class FieldController extends VisualController {
         options['readOnly']  = ['true', 'false'];
         options['notNull']   = ['true', 'false'];
         options['align']     = ['left', 'right'];
+        options['param']     = ['true', 'false'];
         return {list: list, options: options};
     }
 

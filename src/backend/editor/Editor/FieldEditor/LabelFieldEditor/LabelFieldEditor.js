@@ -24,7 +24,8 @@ class LabelFieldEditor extends FieldEditor {
                 defaultValue: params['defaultValue'] ? params['defaultValue'] :             '',
                 column      : params['column']       ? params['column']       : params['name'],
                 type        : params['type']         ? params['type']         :             '',
-                align       : params['align']        ? params['align']        :         'left'
+                align       : params['align']        ? params['align']        :         'left',
+                param       : params.param           ? params.param           :        'false',
             }
         };
     }

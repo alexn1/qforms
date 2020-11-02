@@ -29,7 +29,8 @@ class TextAreaFieldEditor extends FieldEditor {
                 notNull     : params['notNull']      ? params['notNull']      :        'false',
                 align       : params['align']        ? params['align']        :         'left',
                 rows        : params['rows']         ? params['rows']         :             '',
-                cols        : params['cols']         ? params['cols']         :             ''
+                cols        : params['cols']         ? params['cols']         :             '',
+                param       : params.param           ? params.param           :        'false',
             }
         };
     }

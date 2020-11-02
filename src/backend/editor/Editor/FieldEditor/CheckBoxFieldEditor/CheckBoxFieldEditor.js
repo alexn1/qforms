@@ -25,7 +25,8 @@ class CheckBoxFieldEditor extends FieldEditor {
                 column      : params['column']       ? params['column']       : params['name'],
                 type        : params['type']         ? params['type']         :             '',
                 readOnly    : params['readOnly']     ? params['readOnly']     :        'false',
-                notNull     : params['notNull']      ? params['notNull']      :        'false'
+                notNull     : params['notNull']      ? params['notNull']      :        'false',
+                param       : params.param           ? params.param           :        'false',
             }
         };
     }

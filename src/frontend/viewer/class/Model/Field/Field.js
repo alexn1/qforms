@@ -43,8 +43,10 @@ class Field extends Model {
 
     valueToPageParams(row) {
         // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
-        if (this.getDbType() === 'text') return;
-        this.getPage().params[this.getFullName()] = this.getValue(row);
+        // if (this.getDbType() === 'text') return;
+        if (this.isParam()) {
+            this.getPage().params[this.getFullName()] = this.getValue(row);
+        }
     }
 
     setValue(row, value) {
@@ -141,5 +143,8 @@ class Field extends Model {
     }
     getFullName() {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
+    }
+    isParam() {
+        return this.data.param === 'true';
     }
 }

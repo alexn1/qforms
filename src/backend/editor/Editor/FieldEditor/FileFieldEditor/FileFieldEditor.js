@@ -27,7 +27,8 @@ class FileFieldEditor extends FieldEditor {
                 type        : params['type']         ? params['type']         :             '',
                 readOnly    : params['readOnly']     ? params['readOnly']     :        'false',
                 notNull     : params['notNull']      ? params['notNull']      :        'false',
-                align       : params['align']        ? params['align']        :         'left'
+                align       : params['align']        ? params['align']        :         'left',
+                param       : params.param           ? params.param           :        'false',
             }
         };
     }
