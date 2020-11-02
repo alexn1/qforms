@@ -4,7 +4,6 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            // isUndefined: true,
             value      : null,
             changed    : false,
             error      : null
@@ -28,8 +27,6 @@ class RowFormFieldController extends FieldController {
     }
     onChange = viewValue => {
         // console.log('RowFormFieldController.onChange', viewValue);
-        // this.state.isUndefined = false;
-        // this.state.value       = value;
         try {
             this.setValueFromView(viewValue);
             this.state.error = null;
