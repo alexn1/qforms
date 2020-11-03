@@ -69,9 +69,17 @@ class RowFormView extends ReactComponent {
             'ImageField',
             'FileField',
         ].includes(ctrl.model.getClassName())) {
-            return React.createElement(ctrl.getViewClass(), {key: `field.${ctrl.model.getName()}`, ctrl});
+            return React.createElement(ctrl.getViewClass(), {
+                key : `field.${ctrl.model.getName()}`,
+                ctrl: ctrl,
+                classList: ['field']
+            });
         }
-        return <RowFormTextBoxFieldView key={`field.${ctrl.model.getName()}`} ctrl={ctrl}/>;
+        return <RowFormTextBoxFieldView
+            key={`field.${ctrl.model.getName()}`}
+            ctrl={ctrl}
+            classList={['field']}
+        />;
     }
     renderFieldTooltip(ctrl) {
         // console.log('RowFormView.renderToolbar:', ctrl.state);
