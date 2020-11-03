@@ -89,8 +89,8 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFormGrid() {
-        // console.log('RowFormView.renderFormGrid');
+    renderFields() {
+        // console.log('RowFormView.renderFields');
         const ctrl = this.props.ctrl;
         return (
             <div className="formGrid">
@@ -116,7 +116,7 @@ class RowFormView extends ReactComponent {
         return (
             <div className="RowFormView">
                 {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' && this.renderToolbar()}
-                {this.renderFormGrid()}
+                {this.renderFields()}
             </div>
         );
     }
