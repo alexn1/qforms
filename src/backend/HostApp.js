@@ -426,6 +426,12 @@ class HostApp {
                 return [await qforms.Helper.readFile(filePath), ext];
             }
         }
+        if (['.ttf', '.otf'].includes(ext)) {
+            const exists = await qforms.Helper.exists(filePath);
+            if (exists) {
+                return [await qforms.Helper.createBuffer(filePath), ext];
+            }
+        }
         return null;
     }
 
@@ -439,6 +445,12 @@ class HostApp {
             }
             if (content[1] === '.js') {
                 res.setHeader('content-type', 'text/javascript');
+            }
+            if (content[1] === '.ttf') {
+                res.setHeader('content-type', 'font/ttf');
+            }
+            if (content[1] === '.otf') {
+                res.setHeader('content-type', 'font/opentype');
             }
             res.send(content[0]);
         } else {
