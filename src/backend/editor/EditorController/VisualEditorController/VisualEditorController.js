@@ -14,7 +14,7 @@ class VisualEditorController extends EditorController {
                 this.hostApp.publicDirPath,
                 'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
             );
-            result.view = await qforms.Helper.readFile(viewFilePath);
+            result.view = await qforms.Helper.readTextFile(viewFilePath);
         }
         return result;
     }

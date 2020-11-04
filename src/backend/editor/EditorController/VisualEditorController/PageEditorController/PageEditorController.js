@@ -16,7 +16,7 @@ class PageEditorController extends VisualEditorController {
 
     async get(params) {
         const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
-        const content = await qforms.Helper.readFile(pageFilePath);
+        const content = await qforms.Helper.readTextFile(pageFilePath);
         return JSON.parse(content);
     }
 

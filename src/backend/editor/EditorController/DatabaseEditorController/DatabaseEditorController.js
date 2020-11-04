@@ -56,7 +56,7 @@ class DatabaseEditorController extends EditorController {
 
             // table view
             const filePath = path.join(this.viewDirPath, 'TableView/TableView.ejs');
-            result.data.tableView = await qforms.Helper.readFile(filePath);
+            result.data.tableView = await qforms.Helper.readTextFile(filePath);
         }
         return result;
     }

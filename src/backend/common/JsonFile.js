@@ -23,7 +23,7 @@ class JsonFile {
     }
 
     async read() {
-        const content = await qforms.Helper.readFile(this.filePath);
+        const content = await qforms.Helper.readTextFile(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
     }

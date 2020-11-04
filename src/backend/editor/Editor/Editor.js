@@ -18,7 +18,7 @@ class Editor extends BaseModel {
         if (exists) {
             throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
         }
-        const template = await qforms.Helper.readFile(templateFilePath);
+        const template = await qforms.Helper.readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
         if (text === '') {
             text = emptyTemplate;
@@ -32,7 +32,7 @@ class Editor extends BaseModel {
         if (exists) {
             throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
         }
-        const template = await qforms.Helper.readFile(templateFilePath);
+        const template = await qforms.Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
         await qforms.Helper.writeFile(newFilePath, content);
         return content;
@@ -46,7 +46,7 @@ class Editor extends BaseModel {
         console.log('Editor.getFile');
         const exists = await qforms.Helper.exists(filePath);
         if (exists) {
-            return await qforms.Helper.readFile(filePath);
+            return await qforms.Helper.readTextFile(filePath);
         }
     }
 

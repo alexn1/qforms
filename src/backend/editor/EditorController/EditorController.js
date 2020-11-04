@@ -24,7 +24,7 @@ class EditorController {
         } else {
             console.warn(`view file does not exist: ${viewFilePath}`);
         }
-        if (exists) view = await qforms.Helper.readFile(viewFilePath);
+        if (exists) view = await qforms.Helper.readTextFile(viewFilePath);
         return {
             view,
             data: {}

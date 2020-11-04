@@ -100,7 +100,7 @@ class Helper {
 
     static async getAppInfo(appFilePath, env) {
         // console.log('Helper.getAppInfo', appFilePath);
-        const content = await Helper.readFile(appFilePath);
+        const content = await Helper.readTextFile(appFilePath);
         const data = JSON.parse(content);
         if (data['@class'] && data['@class'] === 'Application') {
             const appInfo = Helper.getAppInfoFromData(appFilePath, data, env);
@@ -202,7 +202,7 @@ class Helper {
         return obj;
     }
 
-    static readFile(path) {
+    static readTextFile(path) {
         //console.log('Helper.readFile');
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
@@ -219,7 +219,7 @@ class Helper {
         return new Promise((resolve, reject) => {
             fs.exists(filePath, exists => {
                 if (exists) {
-                    Helper.readFile(filePath).then(resolve).catch(reject);
+                    Helper.readTextFile(filePath).then(resolve).catch(reject);
                     /*
                     fs.readFile(filePath, 'utf8', (err, content) => {
                         if (err) {

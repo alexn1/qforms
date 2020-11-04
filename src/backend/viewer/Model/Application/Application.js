@@ -18,7 +18,7 @@ class Application extends Model {
     static async create(appFilePath, hostApp, env) {
         // console.log('Application.create', appFilePath);
         const appInfo = await qforms.Helper.getAppInfo(appFilePath, env);
-        const json = await qforms.Helper.readFile(appInfo.filePath);
+        const json = await qforms.Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
         const customClassFilePath = path.join(appInfo.dirPath, `${appInfo.name}.backend.js`);
         //console.log('customClassFilePath:', customClassFilePath);
@@ -151,7 +151,7 @@ class Application extends Model {
         // console.log('Application._createPage', pageName);
         const relFilePath  = this.createPageLink(pageName).getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await qforms.Helper.readFile(pageFilePath);
+        const content = await qforms.Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await qforms.Page.create(data, this);
         await page.init();

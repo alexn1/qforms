@@ -209,7 +209,7 @@ class DataSource extends Model {
         const jsonFilePath = this.getJsonFilePath();
         const exists = await qforms.Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await qforms.Helper.readFile(jsonFilePath);
+            const content = await qforms.Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
         }
         return [];

@@ -423,7 +423,7 @@ class HostApp {
         if (['.css', '.js'].includes(ext)) {
             const exists = await qforms.Helper.exists(filePath);
             if (exists) {
-                return [await qforms.Helper.readFile(filePath), ext];
+                return [await qforms.Helper.readTextFile(filePath), ext];
             }
         }
         if (['.ttf', '.otf'].includes(ext)) {

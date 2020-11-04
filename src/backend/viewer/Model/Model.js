@@ -98,18 +98,18 @@ class Model extends BaseModel {
         if (customViewFilePath) {
             const exists = await qforms.Helper.exists(customViewFilePath);
             if (exists) {
-                return qforms.Helper.readFile(customViewFilePath);
+                return qforms.Helper.readTextFile(customViewFilePath);
             }
-            return qforms.Helper.readFile(viewFilePath);
+            return qforms.Helper.readTextFile(viewFilePath);
         }
-        return await qforms.Helper.readFile(viewFilePath);
+        return await qforms.Helper.readTextFile(viewFilePath);
     }
 
     async getJs() {
         if (!this.getDirPath()) return null;
         const jsFilePath = path.join(this.getDirPath(), this.getName() + '.js');
         const exists = await qforms.Helper.exists(jsFilePath);
-        if (exists) return qforms.Helper.readFile(jsFilePath);
+        if (exists) return qforms.Helper.readTextFile(jsFilePath);
         return null;
     }
 
