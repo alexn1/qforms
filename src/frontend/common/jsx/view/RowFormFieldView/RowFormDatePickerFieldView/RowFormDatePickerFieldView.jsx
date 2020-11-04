@@ -7,7 +7,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
-                placeholder={ctrl.getPlaceHolder()}
+                placeholder={ctrl.getPlaceholder()}
                 format={ctrl.model.getFormat()}
             />
         </div>;

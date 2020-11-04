@@ -9,4 +9,8 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormComboBoxFieldView;
     }
+    getPlaceholder() {
+        if (this.model.getPlaceholder()) return this.model.getPlaceholder();
+        return ApplicationController.isInDebugMode() ? '[null]' : null;
+    }
 }

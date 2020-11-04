@@ -10,7 +10,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                     readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange}
                     items={ctrl.getItems()}
-                    placeholder={ApplicationController.isInDebugMode() ? '[null]' : null}
+                    placeholder={ctrl.getPlaceholder()}
                 />
             </div>
         );

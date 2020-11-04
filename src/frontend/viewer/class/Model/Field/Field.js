@@ -147,4 +147,7 @@ class Field extends Model {
     isParam() {
         return this.data.param === 'true';
     }
+    getPlaceholder() {
+        return this.data.placeholder;
+    }
 }

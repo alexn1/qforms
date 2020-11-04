@@ -7,7 +7,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
-                placeholder={ctrl.getPlaceHolder()}
+                placeholder={ctrl.getPlaceholder()}
             />
         </div>;
     }

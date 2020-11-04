@@ -7,7 +7,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
-                placeholder={ctrl.getPlaceHolder()}
+                placeholder={ctrl.getPlaceholder()}
                 rows={ctrl.model.getRows()}
                 cols={ctrl.model.getCols()}
             />

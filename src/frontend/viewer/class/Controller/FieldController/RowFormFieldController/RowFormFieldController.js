@@ -70,8 +70,9 @@ class RowFormFieldController extends FieldController {
     refreshChanged() {
         this.state.changed = this.calcChangedState(this.getRow());
     }
-    getPlaceHolder() {
-        // console.log('RowFormFieldController.getPlaceHolder', this.model.getFullName());
+    getPlaceholder() {
+        // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName());
+        if (this.model.getPlaceholder()) return this.model.getPlaceholder();
         if (ApplicationController.isInDebugMode()) {
             // try {
             const value = this.getValue();
@@ -79,7 +80,7 @@ class RowFormFieldController extends FieldController {
             if (value === null) return 'null';
             if (value === '') return 'empty string';
             // } catch (err) {
-            //     console.error(`${this.model.getFullName()}: getPlaceHolder: ${err.message}`);
+            //     console.error(`${this.model.getFullName()}: getPlaceholder: ${err.message}`);
             // }
         }
     }
