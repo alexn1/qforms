@@ -29,6 +29,7 @@ class DatePickerFieldEditor extends FieldEditor {
                 notNull     : params['notNull']      ? params['notNull']      :                           'false',
                 align       : params['align']        ? params['align']        :                            'left',
                 param       : params.param           ? params.param           :                           'false',
+                placeholder : params.placeholder     ? params.placeholder     :                                '',
             }
         };
     }

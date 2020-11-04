@@ -31,6 +31,7 @@ class ComboBoxFieldEditor extends FieldEditor {
                 valueColumn   : params['valueColumn']    ? params['valueColumn']    :             '',
                 displayColumn : params['displayColumn']  ? params['displayColumn']  :             '',
                 param         : params.param             ? params.param             :        'false',
+                placeholder   : params.placeholder     ? params.placeholder     :                 '',
             }
         };
     }
