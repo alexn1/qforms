@@ -34,12 +34,7 @@ class Tab extends ReactComponent {
         const start = Date.now();
         this.setState({active: i}, () => console.log('selectTab time:', Date.now() - start));
     }
-    getClassName() {
-        return [
-            'Tab',
-            ...(this.props.classList ? this.props.classList : [])
-        ].join(' ');
-    }
+
     renderTitles() {
         return this.props.tabs.map((tab, i) =>
         <li
