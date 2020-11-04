@@ -49,17 +49,17 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldLabel(ctrl) {
-        const model = ctrl.model;
+    renderFieldLabel(fieldCtrl, key) {
+        const model = fieldCtrl.model;
         return (
-            <div key={`label.${model.getName()}`} className="label">
-                {model.data.caption}:
+            <div key={key} className="label">
+                {model.getCaption()}:
                 {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
             </div>
         );
     }
-    renderFieldView(ctrl) {
-        // console.log('RowFormView.renderFieldView', ctrl.model.getClassName());
+    renderFieldView(fieldCtrl, key) {
+        // console.log('RowFormView.renderFieldView', fieldCtrl.model.getClassName());
         if ([
             'DatePickerField',
             'ComboBoxField',
@@ -68,24 +68,24 @@ class RowFormView extends ReactComponent {
             'LinkField',
             'ImageField',
             'FileField',
-        ].includes(ctrl.model.getClassName())) {
-            return React.createElement(ctrl.getViewClass(), {
-                key : `field.${ctrl.model.getName()}`,
+        ].includes(fieldCtrl.model.getClassName())) {
+            return React.createElement(fieldCtrl.getViewClass(), {
+                key : key,
                 classList: ['field'],
-                ctrl: ctrl,
+                ctrl: fieldCtrl,
             });
         }
         return <RowFormTextBoxFieldView
-            key={`field.${ctrl.model.getName()}`}
+            key={key}
             classList={['field']}
-            ctrl={ctrl}
+            ctrl={fieldCtrl}
         />;
     }
-    renderFieldTooltip(ctrl) {
-        // console.log('RowFormView.renderToolbar:', ctrl.state);
+    renderFieldTooltip(fieldCtrl, key) {
+        // console.log('RowFormView.renderToolbar:', fieldCtrl.state);
         return (
-            <div key={`tooltip.${ctrl.model.getName()}`} className="tooltip">
-                <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
+            <div key={key} className="tooltip">
+                <Tooltip position="left" type="alert" hidden={fieldCtrl.state.error === null} tip={fieldCtrl.state.error}/>
             </div>
         );
     }
@@ -97,9 +97,9 @@ class RowFormView extends ReactComponent {
                 {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
                     const fieldCtrl = ctrl.fields[name];
                     return [
-                        this.renderFieldLabel(fieldCtrl),
-                        this.renderFieldView(fieldCtrl),
-                        this.renderFieldTooltip(fieldCtrl)
+                        this.renderFieldLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
+                        this.renderFieldView(fieldCtrl, `field.${fieldCtrl.model.getName()}`),
+                        this.renderFieldTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}
             </div>
