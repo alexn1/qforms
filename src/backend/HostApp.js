@@ -429,7 +429,7 @@ class HostApp {
         if (['.ttf', '.otf'].includes(ext)) {
             const exists = await qforms.Helper.exists(filePath);
             if (exists) {
-                return [await qforms.Helper.createBuffer(filePath), ext];
+                return [await qforms.Helper.readBinaryFile(filePath), ext];
             }
         }
         return null;

@@ -202,17 +202,32 @@ class Helper {
         return obj;
     }
 
+    static readFile(path) {
+        //console.log('Helper.readFile');
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, 'utf8', (err, content) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(content);
+                }
+            });
+        });
+    }
+
     static getFileContent(filePath) {
         return new Promise((resolve, reject) => {
             fs.exists(filePath, exists => {
                 if (exists) {
+                    Helper.readFile(filePath).then(resolve).catch(reject);
+                    /*
                     fs.readFile(filePath, 'utf8', (err, content) => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve(content);
                         }
-                    });
+                    });*/
                 } else {
                     resolve(null);
                 }
@@ -220,7 +235,7 @@ class Helper {
         });
     }
 
-    static createBuffer(filePath) {
+    static readBinaryFile(filePath) {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
                 if (err) {
@@ -331,19 +346,6 @@ class Helper {
         return new Promise(resolve => {
             fs.exists(path, exists => {
                 resolve(exists);
-            });
-        });
-    }
-
-    static readFile(path) {
-        //console.log('Helper.readFile');
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, 'utf8', (err, content) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(content);
-                }
             });
         });
     }

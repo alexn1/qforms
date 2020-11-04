@@ -233,7 +233,7 @@ async function e500(err, req, res, next) {
 //         }
 //     }
 //     for (const name in req.files) {
-//         req.files[name].buffer = await Helper.createBuffer(req.files[name].path);
+//         req.files[name].buffer = await Helper.readBinaryFile(req.files[name].path);
 //     }
 //     /*if (req.body.row) {
 //         for (let name in req.files) {
