@@ -52,7 +52,7 @@ class RowFormView extends ReactComponent {
     renderFieldLabel(ctrl) {
         const model = ctrl.model;
         return (
-            <div key={`label.${model.getName()}`} className={`label ${model.getName()}`}>
+            <div key={`label.${model.getName()}`} className="label">
                 {model.data.caption}:
                 {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
             </div>
@@ -84,7 +84,7 @@ class RowFormView extends ReactComponent {
     renderFieldTooltip(ctrl) {
         // console.log('RowFormView.renderToolbar:', ctrl.state);
         return (
-            <div key={`tooltip.${ctrl.model.getName()}`} className={`tooltip ${ctrl.model.getName()}`}>
+            <div key={`tooltip.${ctrl.model.getName()}`} className="tooltip">
                 <Tooltip position="left" type="alert" hidden={ctrl.state.error === null} tip={ctrl.state.error}/>
             </div>
         );
