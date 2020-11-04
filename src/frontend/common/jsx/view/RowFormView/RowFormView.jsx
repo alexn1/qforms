@@ -71,14 +71,14 @@ class RowFormView extends ReactComponent {
         ].includes(ctrl.model.getClassName())) {
             return React.createElement(ctrl.getViewClass(), {
                 key : `field.${ctrl.model.getName()}`,
+                classList: ['field'],
                 ctrl: ctrl,
-                classList: ['field']
             });
         }
         return <RowFormTextBoxFieldView
             key={`field.${ctrl.model.getName()}`}
-            ctrl={ctrl}
             classList={['field']}
+            ctrl={ctrl}
         />;
     }
     renderFieldTooltip(ctrl) {
