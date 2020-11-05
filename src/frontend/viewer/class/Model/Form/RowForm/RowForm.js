@@ -46,10 +46,11 @@ class RowForm extends Form {
     }
 
     discard(fields) {
+        console.log('RowForm.discard', fields);
         if (this.getDataSource().isChanged()) {
             this.getDataSource().discard();
             fields.forEach(name => {
-                this.fields[name].valueToPageParams(this.getRow());
+                this.fields[name].valueToPageParams(this.getRow())
             });
         }
     }
