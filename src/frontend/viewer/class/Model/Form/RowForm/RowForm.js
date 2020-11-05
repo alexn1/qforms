@@ -45,4 +45,13 @@ class RowForm extends Form {
         return row;
     }
 
+    discard(fields) {
+        if (this.getDataSource().isChanged()) {
+            this.getDataSource().discard();
+            fields.forEach(name => {
+                this.fields[name].valueToPageParams(this.getRow());
+            });
+        }
+    }
+
 }

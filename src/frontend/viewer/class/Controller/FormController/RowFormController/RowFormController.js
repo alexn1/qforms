@@ -99,17 +99,15 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             const field = this.fields[name];
             if (field.isChanged(row) || !field.isValid()) {
-                changedFields.push(field);
+                changedFields.push(name);
             }
         }
-
-        if (this.model.getDataSource().isChanged()) {
-            this.model.getDataSource().discard();
-        }
+        // console.log('changedFields:', changedFields);
+        this.model.discard(changedFields);
 
         // refill changed fields
-        changedFields.forEach(field => {
-            field.refill();
+        changedFields.forEach(name => {
+            this.fields[name].refill();
         });
 
         // ui
