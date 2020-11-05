@@ -6,7 +6,6 @@ class Controller extends EventEmitter {
         this.model     = model;
         this.parent    = parent;
         this.view      = null;
-        this.listeners = {};
         this.deinited  = false;
     }
 
