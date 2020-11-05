@@ -69,6 +69,12 @@ class Page extends Model {
         return this.parent;
     }
 
+    async respond(res, context) {
+        const data = await this.fill(context);
+        await res.json({page: data});
+    }
 }
+
+
 
 module.exports = Page;

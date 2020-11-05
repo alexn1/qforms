@@ -260,8 +260,7 @@ class HostApp {
         console.log('HostApp.page', req.body.page);
         const application = this.getApplication(req);
         const page = await application.getPage(context, req.body.page);
-        const data = await page.fill(context);
-        await res.json({page: data});
+        await page.respond(res, context);
     }
 
     // action
