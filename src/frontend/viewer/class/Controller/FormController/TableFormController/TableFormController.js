@@ -39,7 +39,7 @@ class TableFormController extends FormController {
             };
         });
     }
-    getGridRows() {
+    getRows() {
         return this.model.getDataSource().getRows();
     }
     onNewClick = async e => {
