@@ -11,6 +11,7 @@ class Context {
             context.env         = req.params.env;
             context.isEditor    = req.url.substr(0, 6) === '/edit/';
             context.isViewer    = req.url.substr(0, 6) === '/view/';
+            context.debug       = req.query.debug;
 
             const route = context.route = Context.getRoute(req);
             if (req.session.user && req.session.user[route]) {
