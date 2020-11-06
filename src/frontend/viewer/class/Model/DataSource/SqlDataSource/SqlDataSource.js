@@ -164,13 +164,13 @@ class SqlDataSource extends DataSource {
 
     async refill() {
         if (this.isChanged()) throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
-        const data = await this.select();
+        const data = await this.select(this.getLimit() ? {frame : this.frame} : {});
         this.count = data.count;
         this.setRows(data.rows);
     }
 
-    async select() {
-        console.log('SqlDataSource.select', this.getFullName());
+    async select(params = {}) {
+        console.log('SqlDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
@@ -180,11 +180,10 @@ class SqlDataSource extends DataSource {
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
-                ...this.params,
+                // ...this.params,
                 ...this.getPageParams(),
-                ...(this.getLimit() ? {
-                    frame : this.frame,
-                } : {}),
+                ...params,
+                // ...(this.getLimit() ? {frame : this.frame,} : {}),
             })
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
@@ -192,8 +191,8 @@ class SqlDataSource extends DataSource {
         return data;
     }
 
-    async selectSingle(params) {
-        console.log('SqlDataSource.selectSingle', this.getFullName());
+    async selectSingle(params = {}) {
+        console.log('SqlDataSource.selectSingle', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
@@ -203,13 +202,13 @@ class SqlDataSource extends DataSource {
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
-                ...this.params,
+                // ...this.params,
                 ...this.getPageParams(),
                 ...params,
             })
         });
         if (!data.row) throw new Error('no row');
-        if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
+        // if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
         return data;
     }
 
@@ -248,11 +247,17 @@ class SqlDataSource extends DataSource {
         this.childs    = vals.childs;*/
 
 
-        // save key params for refill
+
+
         const keyParams = QForms.keyToParams(key);
+
+        /*
+        // save key params for refill
         for (const name in keyParams) {
             this.params[name] = keyParams[name];
         }
+        console.log('this.params', this.params);
+        */
 
         const e = {source: this, key, keyParams};
         if (this.parent.onDataSourceInsert) {

@@ -7,7 +7,7 @@ class DataSource extends Model {
         this.rows      = null;
         this.rowsByKey = null;						// for row search by key
         // this.childs    = {};						// for child row search by key
-        this.params    = {};   						// refill params of row
+        // this.params    = {};   						// refill params of row
         this.news      = [];                        // new rows
         this.changes   = new Map();
     }
