@@ -13,11 +13,11 @@ class PageLink extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'PageLink',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 pageLink: this.data['@attributes'].name,
                 attr    : name,
                 value   : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -27,9 +27,9 @@ class PageLink extends Model {
         return await QForms.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveUp',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -37,9 +37,9 @@ class PageLink extends Model {
         return await QForms.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveDown',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
-            }
+            })
         });
     }
 

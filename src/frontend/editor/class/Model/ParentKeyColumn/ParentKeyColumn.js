@@ -12,14 +12,14 @@ class ParentKeyColumn extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'ParentKeyColumn',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 form           : this.dataSource.parent.data['@attributes'].name,
                 pageFileName   : this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
                 dataSource     : this.dataSource.data['@attributes'].name,
                 parentKeyColumn: this.data['@attributes'].name,
                 attr           : name,
                 value          : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -29,12 +29,12 @@ class ParentKeyColumn extends Model {
         return await QForms.doHttpRequest({
             controller: 'ParentKeyColumn',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 page           : this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
                 form           : this.dataSource.parent.data['@attributes'].name,
                 dataSource     : this.dataSource.data['@attributes'].name,
                 parentKeyColumn: this.data['@attributes'].name
-            }
+            })
         });
     }
 

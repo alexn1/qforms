@@ -12,13 +12,13 @@ class Column extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Column',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.table.database.data['@attributes'].name,
                 table   : this.table.data['@attributes'].name,
                 column  : this.data['@attributes'].name,
                 attr    : name,
                 value   : value
-            }
+            })
         });
         this.setAttr(name, value);
         return data;
@@ -28,11 +28,11 @@ class Column extends Model {
         return await QForms.doHttpRequest({
             controller: 'Column',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.table.database.data['@attributes'].name,
                 table   : this.table.data['@attributes'].name,
                 column  : this.data['@attributes'].name,
-            }
+            })
         });
     }
 

@@ -14,11 +14,11 @@ class Page extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 fileName: this.pageLink.data['@attributes'].fileName,
                 attr    : name,
                 value   : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -28,9 +28,9 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -39,7 +39,7 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Form',
             action    : '_new',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
     }
 
@@ -47,10 +47,10 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view: view,
                 page: this.data !== undefined ? this.data['@attributes'].name : null
-            }
+            })
         });
     }
 
@@ -58,11 +58,11 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'saveView',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name,
                 view: view,
                 text: text
-            }
+            })
         });
     }
 
@@ -70,10 +70,10 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'saveController',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name,
                 text: text
-            }
+            })
         });
     }
 
@@ -81,9 +81,9 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'createView',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -91,9 +91,9 @@ class Page extends Model {
         return await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'createController',
-            params    : {
+            params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
-            }
+            })
         });
     }
 

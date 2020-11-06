@@ -54,9 +54,9 @@ class TableController extends DocumentController {
         return await QForms.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view: view
-            }
+            })
         });
     }
 
@@ -95,7 +95,7 @@ class TableController extends DocumentController {
         return QForms.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : {view : view}
+            params    : Helper.encodeObject({view : view})
         });
     }
 

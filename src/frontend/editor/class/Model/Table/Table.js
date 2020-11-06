@@ -11,11 +11,11 @@ class Table extends Model {
         return await QForms.doHttpRequest({
             controller: 'Column',
             action    : '_new',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.database.data['@attributes'].name,
                 table   : this.data['@attributes'].name,
                 name    : name
-            }
+            })
         });
     }
 
@@ -23,10 +23,10 @@ class Table extends Model {
         return await QForms.doHttpRequest({
             controller: 'Table',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.database.data['@attributes'].name,
                 table   : this.data['@attributes'].name
-            }
+            })
         });
     }
 }

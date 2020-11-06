@@ -11,11 +11,11 @@ class Database extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Database',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.data['@attributes'].name,
                 attr    : name,
                 value   : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -25,9 +25,9 @@ class Database extends Model {
         return await QForms.doHttpRequest({
             controller: 'Database',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -35,10 +35,10 @@ class Database extends Model {
         return await QForms.doHttpRequest({
             controller: 'Param',
             action    : '_new',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.data['@attributes'].name,
                 name    : name
-            }
+            })
         });
     }
 
@@ -47,11 +47,11 @@ class Database extends Model {
         return await QForms.doHttpRequest({
             controller: 'Table',
             action    : '_new',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.data['@attributes'].name,
                 name    : params.name,
                 columns : params.columns
-            }
+            })
         });
     }
 
@@ -60,10 +60,10 @@ class Database extends Model {
         return await QForms.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view    : view,
                 database: this.data !== undefined ? this.data['@attributes'].name : null
-            }
+            })
         });
     }
 
@@ -71,10 +71,10 @@ class Database extends Model {
         return await QForms.doHttpRequest({
             controller: 'Database',
             action    : 'getTableInfo',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.data !== undefined ? this.data['@attributes'].name : null,
                 table   : table
-            }
+            })
         });
     }
 

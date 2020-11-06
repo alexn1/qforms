@@ -13,13 +13,13 @@ class Field extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
                 form        : this.form.data['@attributes'].name,
                 field       : this.data['@attributes'].name,
                 attr        : name,
                 value       : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -29,11 +29,11 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller : 'Field',
             action     : 'delete',
-            params     : {
+            params     : Helper.encodeObject({
                 pageFileName:this.form.page.pageLink.data['@attributes'].fileName,
                 form        :this.form.data['@attributes'].name,
                 field       :this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -41,12 +41,12 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view : view,
                 page : this.data !== undefined ? this.form.page.data['@attributes'].name : null,
                 form : this.data !== undefined ? this.form.data['@attributes'].name      : null,
                 field: this.data !== undefined ? this.data['@attributes'].name           : null
-            }
+            })
         });
     }
 
@@ -54,13 +54,13 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'saveView',
-            params    : {
+            params    : Helper.encodeObject({
                 page : this.form.page.data['@attributes'].name,
                 form : this.form.data['@attributes'].name,
                 field: this.data['@attributes'].name,
                 view : view,
                 text : text
-            }
+            })
         });
     }
 
@@ -68,12 +68,12 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'saveController',
-            params    : {
+            params    : Helper.encodeObject({
                 page : this.form.page.data['@attributes'].name,
                 form : this.form.data['@attributes'].name,
                 field: this.data['@attributes'].name,
                 text : text
-            }
+            })
         });
     }
 
@@ -81,12 +81,12 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'createView',
-            params    : {
+            params    : Helper.encodeObject({
                 page : this.form.page.data['@attributes'].name,
                 form : this.form.data['@attributes'].name,
                 field: this.data['@attributes'].name,
                 class: this.data['@class']
-            }
+            })
         });
     }
 
@@ -94,12 +94,12 @@ class Field extends Model {
         return await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'createController',
-            params    : {
+            params    : Helper.encodeObject({
                 page : this.form.page.data['@attributes'].name,
                 form : this.form.data['@attributes'].name,
                 field: this.data['@attributes'].name,
                 class: this.data['@class']
-            }
+            })
         });
     }
 
@@ -110,7 +110,7 @@ class Field extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'changeClass',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
         return this.data = data;
     }
@@ -119,11 +119,11 @@ class Field extends Model {
         const args = {
             controller : 'Field',
             action     : 'moveUp',
-            params     : {
+            params     : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
                 form        : this.form.data['@attributes'].name,
                 field       : this.data['@attributes'].name
-            }
+            })
         };
         return QForms.doHttpRequest(args);
     }
@@ -132,11 +132,11 @@ class Field extends Model {
         const args = {
             controller : 'Field',
             action     : 'moveDown',
-            params     : {
+            params     : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
                 form        : this.form.data['@attributes'].name,
                 field       : this.data['@attributes'].name
-            }
+            })
         };
         return QForms.doHttpRequest(args);
     }

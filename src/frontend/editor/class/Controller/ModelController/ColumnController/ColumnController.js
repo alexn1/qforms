@@ -25,9 +25,9 @@ class ColumnController extends ModelController {
         return await QForms.doHttpRequest({
             controller: 'Column',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view: view
-            }
+            })
         });
     }
 

@@ -12,12 +12,12 @@ class Param extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Param',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.database.data['@attributes'].name,
                 param   : this.data['@attributes'].name,
                 attr    : name,
                 value   : value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -27,10 +27,10 @@ class Param extends Model {
         return await QForms.doHttpRequest({
             controller: 'Param',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 database: this.database.data['@attributes'].name,
                 param   : this.data['@attributes'].name
-            }
+            })
         });
     }
 

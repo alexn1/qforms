@@ -74,14 +74,14 @@ class EditorController {
     async pageLinkToPage(item) {
         console.log('EditorController.pageLinkToPage');
         const pageLink = item.ctrl.model;
-        const args = {
+
+        const pageData = await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'get',
-            params    : {
+            params    : Helper.encodeObject({
                 fileName: pageLink.data['@attributes'].fileName
-            }
-        };
-        const pageData = await QForms.doHttpRequest(args);
+            })
+        });
         const page = new Page(pageData, pageLink.parent, pageLink);
         item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();

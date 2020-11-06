@@ -10,11 +10,11 @@ class Action extends Model {
         return await QForms.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view : view,
                 page : this.data !== undefined ? this.form.page.getName() : null,
                 form : this.data !== undefined ? this.form.getName()      : null,
-            }
+            })
         });
     }
 
@@ -23,13 +23,13 @@ class Action extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Action',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.getAttr('fileName'),
                 form        : this.form.getAttr('name'),
                 action      : this.getAttr('name'),
                 attr        : name,
                 value       : value
-            }
+            })
         });
         this.setAttr(name, value);
         return data;

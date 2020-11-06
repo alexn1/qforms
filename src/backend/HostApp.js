@@ -391,7 +391,7 @@ class HostApp {
         } else {
             model = application;
         }
-        const result = await model.rpc(context, req.body.name, req.body.params);
+        const result = await model.rpc(context, req.body.name, context.params);
         await res.json(result);
     }
 
@@ -501,7 +501,7 @@ class HostApp {
     }
 
     async handleEditorPost(req, res, context) {
-        console.log('HostApp.handleEditorPost');
+        console.log('HostApp.handleEditorPost', context.params);
         const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
@@ -516,7 +516,7 @@ class HostApp {
         const method = req.body.action;
         const ctrl = new ControllerClass(appInfo, this, application);
         if (!ctrl[method]) throw new Error(`no method: ${controllerClassName}.${method}`);
-        const result = await ctrl[method](req.body.params);
+        const result = await ctrl[method](context.params);
         // console.log('json result:', result);
         if (result === undefined) throw new Error('result is undefined');
         await res.json(result);

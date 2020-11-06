@@ -20,7 +20,7 @@ class DataSource extends Model {
         return await QForms.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
     }
 
@@ -29,11 +29,11 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name,
                 attr      : name,
                 value     : value
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
@@ -51,9 +51,9 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.page = this.parent.pageLink.data['@attributes'].fileName;
@@ -69,9 +69,9 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'moveUp',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.page = this.parent.pageLink.data['@attributes'].fileName;
@@ -87,9 +87,9 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'moveDown',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.page = this.parent.pageLink.data['@attributes'].fileName;
@@ -105,10 +105,10 @@ class DataSource extends Model {
         const args = {
             controller: 'KeyColumn',
             action    : '_new',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name,
                 name      : name
-            }
+            })
         };
         if (this.parent instanceof Form) {
             args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
@@ -124,12 +124,12 @@ class DataSource extends Model {
         return await QForms.doHttpRequest({
             controller: 'ParentKeyColumn',
             action    : '_new',
-            params    : {
+            params    : Helper.encodeObject({
                 page      : this.parent.page.pageLink.data['@attributes'].fileName,
                 form      : this.parent.data['@attributes'].name,
                 dataSource: this.data['@attributes'].name,
                 name      : name
-            }
+            })
         });
     }
 
@@ -137,10 +137,10 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: (this instanceof DataSource) ? this.data['@attributes'].name : undefined,
                 view      : view
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.pageFileName = (this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined;
@@ -156,10 +156,10 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'saveController',
-            params    : {
+            params    : Helper.encodeObject({
                 dataSource: this.data['@attributes'].name,
                 text      : text
-            }
+            })
         };
         if (this.parent instanceof Page) {
             args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
@@ -175,12 +175,12 @@ class DataSource extends Model {
         const args = {
             controller: 'DataSource',
             action    : 'createController',
-            params    : {
+            params    : Helper.encodeObject({
                 page        : this.parent.page.data['@attributes'].name,
                 pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
                 form        : this.parent.data['@attributes'].name,
                 dataSource  : this.data['@attributes'].name
-            }
+            })
         };
         return await QForms.doHttpRequest(args);
     }

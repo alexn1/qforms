@@ -11,12 +11,12 @@ class Control extends Model {
         return await QForms.doHttpRequest({
             controller: 'Control',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 view : view,
                 page : this.data !== undefined ? this.form.page.data['@attributes'].name : null,
                 form : this.data !== undefined ? this.form.data['@attributes'].name      : null,
                 field: this.data !== undefined ? this.data['@attributes'].name           : null
-            }
+            })
         });
     }
 
@@ -25,13 +25,13 @@ class Control extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Control',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
                 form        : this.form.data['@attributes'].name,
                 control     : this.data['@attributes'].name,
                 attr        : name,
                 value       : value
-            }
+            })
         });
         this.setAttr(name, value);
         return data;
@@ -41,11 +41,11 @@ class Control extends Model {
         return await QForms.doHttpRequest({
             controller: 'Control',
             action    : 'delete',
-            params    : {
+            params    : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
                 form        : this.form.data['@attributes'].name,
                 control     : this.data['@attributes'].name
-            }
+            })
         });
     }
 

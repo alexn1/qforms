@@ -11,10 +11,10 @@ class Application extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'save',
-            params    : {
+            params    : Helper.encodeObject({
                 attr : name,
                 value: value
-            }
+            })
         });
         this.data['@attributes'][name] = value;
         return data;
@@ -25,7 +25,7 @@ class Application extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Page',
             action    : '_new',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
         return [data.page, data.pageLink];
     }
@@ -34,7 +34,7 @@ class Application extends Model {
         const data = await QForms.doHttpRequest({
             controller: 'Database',
             action    : '_new',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
         return data;
     }
@@ -43,10 +43,10 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'getView',
-            params    : {
+            params    : Helper.encodeObject({
                 app : this.data['@attributes'].name,
                 view: view
-            }
+            })
         });
     }
 
@@ -54,11 +54,11 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'saveView',
-            params    : {
+            params    : Helper.encodeObject({
                 app : this.data['@attributes'].name,
                 view: view,
                 text: text
-            }
+            })
         });
     }
 
@@ -66,10 +66,10 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'saveController',
-            params    : {
+            params    : Helper.encodeObject({
                 app : this.data['@attributes'].name,
                 text: text
-            }
+            })
         });
     }
 
@@ -77,9 +77,9 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'createView',
-            params    : {
+            params    : Helper.encodeObject({
                 app: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -87,9 +87,9 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'Application',
             action    : 'createController',
-            params    : {
+            params    : Helper.encodeObject({
                 app: this.data['@attributes'].name
-            }
+            })
         });
     }
 
@@ -97,7 +97,7 @@ class Application extends Model {
         return await QForms.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : params
+            params    : Helper.encodeObject(params)
         });
     }
 
