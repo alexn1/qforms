@@ -91,7 +91,7 @@ class Application extends Model {
         data.params = this.getParams(context);
 
         // menu
-        data.menu = await this._buildMenu(context);
+        data.menu = await this.createMenu(context);
 
         // pages
         data.pages = {};
@@ -107,7 +107,7 @@ class Application extends Model {
         return data;
     }
 
-    async _buildMenu(context) {
+    async createMenu(context) {
         const menu = {};
         const pageNames = this.getPageLinkNameList().filter(pageName => {
             return context.user ? this.authorizePage(context.user, pageName) : true;
