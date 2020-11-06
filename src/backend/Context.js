@@ -5,6 +5,11 @@ class Context {
         }
         const req = context.req;
         if (req) {
+
+            context.appDirName  = req.params.appDirName;
+            context.appFileName = req.params.appFileName;
+            context.env         = req.params.env;
+
             const route = context.route = Context.getRoute(req);
             if (req.session.user && req.session.user[route]) {
                 context.user = req.session.user[route];

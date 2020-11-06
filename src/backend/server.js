@@ -79,19 +79,27 @@ initExpressServer(server); function initExpressServer(server) {
 
 async function viewerFile(req, res, next) {
     // console.warn('viewerFile', req.originalUrl);
+    let context = null;
     try {
-        await server.get('hostApp').viewerFile(req, res);
+        context = Context.create({req});
+        await server.get('hostApp').viewerFile(req, res, context);
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 
 async function editorFile(req, res, next) {
     // console.warn('editorFile', req.originalUrl);
+    let context = null;
     try {
-        await server.get('hostApp').editorFile(req, res);
+        context = Context.create({req});
+        await server.get('hostApp').editorFile(req, res, context);
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 
