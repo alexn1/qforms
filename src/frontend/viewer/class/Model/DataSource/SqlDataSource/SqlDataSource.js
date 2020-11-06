@@ -5,6 +5,7 @@ class SqlDataSource extends DataSource {
         super(data, parent);
         this.frame  = 1;
         this.count  = data.count !== undefined ? data.count : null;
+        this.lastFrame = 1;
     }
 
     init() {
@@ -167,6 +168,19 @@ class SqlDataSource extends DataSource {
         const data = await this.select(this.getLimit() ? {frame : this.frame} : {});
         this.count = data.count;
         this.setRows(data.rows);
+        this.lastFrame = 1;
+    }
+
+    async fill(frame) {
+        if (this.isChanged()) throw new Error(`cannot fill changed data source: ${this.getFullName()}`);
+        const data = await this.select(this.getLimit() ? {frame} : {});
+        this.count = data.count;
+        this.addRows(data.rows);
+    }
+
+    async more() {
+        this.lastFrame++;
+        await this.fill(this.lastFrame);
     }
 
     async select(params = {}) {
@@ -323,6 +337,9 @@ class SqlDataSource extends DataSource {
     }
     getFrame() {
         return this.frame;
+    }
+    getLastFrame() {
+        return this.lastFrame;
     }
     setFrame(frame) {
         this.frame = frame;
