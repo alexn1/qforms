@@ -137,27 +137,34 @@ async function editorGet(req, res, next)  {
     let context = null;
     try {
         const hostApp = server.get('hostApp');
+        context = Context.create({req});
         if (hostApp.nodeEnv === 'development') {
-            await hostApp.handleEditorGet(req, res);
+            await hostApp.handleEditorGet(req, res, context);
         } else {
             next();
         }
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 
 async function editorPost(req, res, next)  {
     console.warn('editorPost', req.params, req.body);
+    let context = null;
     try {
         const hostApp = server.get('hostApp');
+        context = Context.create({req});
         if (hostApp.nodeEnv === 'development') {
-            await hostApp.handleEditorPost(req, res);
+            await hostApp.handleEditorPost(req, res, context);
         } else {
             next();
         }
     } catch (err) {
         next(err);
+    } finally {
+        Context.destroy(context);
     }
 }
 

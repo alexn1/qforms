@@ -477,9 +477,9 @@ class HostApp {
         }
     }
 
-    async handleEditorGet(req, res) {
+    async handleEditorGet(req, res, context) {
         console.log('HostApp.handleEditorGet');
-        const application = await this.createApplicationIfNotExists(req);
+        const application = await this.createApplicationIfNotExists(req, context);
         const appFile = new qforms.JsonFile(application.appInfo.filePath);
         await appFile.read();
         const app = JSON.parse(appFile.content);
@@ -499,9 +499,9 @@ class HostApp {
         });
     }
 
-    async handleEditorPost(req, res) {
+    async handleEditorPost(req, res, context) {
         console.log('HostApp.handleEditorPost');
-        const application = await this.createApplicationIfNotExists(req);
+        const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
