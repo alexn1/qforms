@@ -115,7 +115,7 @@ class HostApp {
     }
 
     async createApplicationIfNotExists(req, context) {
-        console.log(`HostApp.createApplicationIfNotExists debug: ${context.debug}, env: ${req.params.env}`);
+        console.log(`HostApp.createApplicationIfNotExists debug: ${context.debug}, env: ${context.env}`);
         // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
@@ -123,11 +123,11 @@ class HostApp {
         if (application) {
             if (req.method === 'GET' && (context.debug === '1' || context.isEditor)) {
                 await application.deinit();
-                return this.applications[route] = await this.createApplication(this.getAppFilePath(req), req.params.env);
+                return this.applications[route] = await this.createApplication(this.getAppFilePath(req), context.env);
             }
             return application;
         }
-        return this.applications[route] = await this.createApplication(this.getAppFilePath(req), req.params.env);
+        return this.applications[route] = await this.createApplication(this.getAppFilePath(req), context.env);
     }
 
     getApplication(req, context) {
@@ -467,7 +467,7 @@ class HostApp {
             res.send(content[0]);
         } else {
             // console.error('file not found: ', req.originalUrl);
-            const base = `/view/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}`;
+            const base = `/view/${req.params.appDirName}/${req.params.appFileName}/${context.env}`;
             const uri = req.originalUrl.replace(base, '');
             const filePath = path.join(this.publicDirPath, uri);
             res.sendFile(filePath);
@@ -483,7 +483,7 @@ class HostApp {
             res.send(content);
         } else {
             //console.error('file not found: ', req.originalUrl);
-            const base = `/edit/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}`;
+            const base = `/edit/${req.params.appDirName}/${req.params.appFileName}/${context.env}`;
             const uri = req.originalUrl.replace(base, '');
             const filePath = path.join(this.publicDirPath, uri);
             res.sendFile(filePath);
