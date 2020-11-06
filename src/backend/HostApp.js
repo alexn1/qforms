@@ -143,18 +143,6 @@ class HostApp {
         return path.join(this.appsDirPath, context.appDirName, context.appFileName + '.json');
     }
 
-    /*static getRoute(req) {
-        return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
-    }*/
-
-    /*static isEditor(req, context) {
-        return req.url.substr(0, 6) === '/edit/';
-    }*/
-
-    /*static isViewer(req, context) {
-        return req.url.substr(0, 6) === '/view/';
-    }*/
-
     async createApplication(appFilePath, env) {
         console.log(`HostApp.createApplication: ${appFilePath}`);
         const application = await qforms.Application.create(appFilePath, this, env);
