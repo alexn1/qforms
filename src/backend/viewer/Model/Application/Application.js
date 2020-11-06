@@ -40,7 +40,7 @@ class Application extends Model {
         this.env                = env;
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];
-        // this.pages              = {};
+        this.pages              = {};
         this.css                = [];
         this.js                 = [];
         this.databases          = {};
@@ -162,10 +162,10 @@ class Application extends Model {
         if (context.user && this.authorizePage(context.user, name) === false) {
             throw new Error('authorization error');
         }
-        /*if (this.pages[name]) {
+        if (this.pages[name]) {
             return this.pages[name];
-        }*/
-        return /*this.pages[name] =*/ await this._createPage(name);
+        }
+        return this.pages[name] = await this._createPage(name);
     }
 
     getPageLinkNameList() {

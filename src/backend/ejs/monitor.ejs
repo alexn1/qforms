@@ -5,8 +5,19 @@
     <title>QForms monitor v<%=version%></title>
 </head>
 <body>
-<%  const keys = Object.keys(applications);  %>
-applications: <%=keys.length%>,
-<%=keys.join(',')%>
+<%  const routes = Object.keys(applications);  %>
+
+
+<%
+routes.forEach(route => {
+    const application = applications[route];
+    const pages = Object.keys(application.pages);
+%>
+<%=route%>
+(<%=pages.join(',')%>)
+    <%
+});
+
+ %>
 </body>
 </html>
