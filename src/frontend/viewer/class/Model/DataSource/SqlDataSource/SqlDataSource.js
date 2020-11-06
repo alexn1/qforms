@@ -179,6 +179,7 @@ class SqlDataSource extends DataSource {
     }
 
     async more() {
+        if (!this.hasMore()) throw new Error(`${this.getFullName()}: no more rows`);
         this.lastFrame++;
         await this.fill(this.lastFrame);
     }
