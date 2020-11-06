@@ -182,7 +182,7 @@ class HostApp {
                 viewerClassJs : this.viewerClassJs,
                 links         : application.css,
                 scripts       : application.js,
-                caption       : `${req.params.appDirName}/${application.getAttr('caption')}`,
+                caption       : `${context.appDirName}/${application.getAttr('caption')}`,
                 data          : data,
                 env           : application.getEnv(),
                 components    : application.getComponents()
@@ -467,7 +467,7 @@ class HostApp {
             res.send(content[0]);
         } else {
             // console.error('file not found: ', req.originalUrl);
-            const base = `/view/${req.params.appDirName}/${req.params.appFileName}/${context.env}`;
+            const base = `/view/${context.route}`;
             const uri = req.originalUrl.replace(base, '');
             const filePath = path.join(this.publicDirPath, uri);
             res.sendFile(filePath);
@@ -483,7 +483,7 @@ class HostApp {
             res.send(content);
         } else {
             //console.error('file not found: ', req.originalUrl);
-            const base = `/edit/${req.params.appDirName}/${req.params.appFileName}/${context.env}`;
+            const base = `/edit/${context.route}`;
             const uri = req.originalUrl.replace(base, '');
             const filePath = path.join(this.publicDirPath, uri);
             res.sendFile(filePath);
@@ -506,7 +506,7 @@ class HostApp {
             editorClassJs  : this.editorClassJs,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
             appFileContent : appFileContent,
-            appDirName     : req.params.appDirName,
+            appDirName     : context.appDirName,
             appName        : appFile.getAttr('name'),
             env            : application.getEnv()
         });
