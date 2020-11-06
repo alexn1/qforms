@@ -426,10 +426,9 @@ class HostApp {
         await res.json(result);
     }
 
-    async appFile(req, application) {
-        // console.log('HostApp.appFile', req.params['0']);
-        const relFilePath = req.params['0'];
-        const filePath = path.join(application.appInfo.dirPath, 'build', relFilePath);
+    async appFile(req, context, application) {
+        // console.log('HostApp.appFile', context.uri);
+        const filePath = path.join(application.appInfo.dirPath, 'build', context.uri);
         // console.log('filePath:', filePath);
         const ext = path.extname(filePath);
         if (['.css', '.js'].includes(ext)) {
@@ -450,7 +449,7 @@ class HostApp {
     async viewerFile(req, res, context) {
         // console.log('HostApp.viewerFile');
         const application = this.getApplication(req, context);
-        const content = await this.appFile(req, application);
+        const content = await this.appFile(req, context, application);
         if (content !== null) {
             if (content[1] === '.css') {
                 res.setHeader('content-type', 'text/css');
@@ -467,25 +466,26 @@ class HostApp {
             res.send(content[0]);
         } else {
             // console.error('file not found: ', req.originalUrl);
-            const base = `/view/${context.route}`;
-            const uri = req.originalUrl.replace(base, '');
-            const filePath = path.join(this.publicDirPath, uri);
+            // const base = `/view/${context.route}`;
+            // const uri = req.originalUrl.replace(base, '');
+            // console.log('uri', uri);
+            const filePath = path.join(this.publicDirPath, context.uri);
             res.sendFile(filePath);
         }
     }
 
     async editorFile(req, res, context) {
-        // console.log('HostApp.editorFile', req.originalUrl);
+        // console.log('HostApp.editorFile', context.uri);
         const application = this.getApplication(req, context);
-        const content = await this.appFile(req, application);
+        const content = await this.appFile(req, context, application);
         if (content !== null) {
             res.setHeader('content-type', 'text/css');
             res.send(content);
         } else {
             //console.error('file not found: ', req.originalUrl);
-            const base = `/edit/${context.route}`;
-            const uri = req.originalUrl.replace(base, '');
-            const filePath = path.join(this.publicDirPath, uri);
+            // const base = `/edit/${context.route}`;
+            // const uri = req.originalUrl.replace(base, '');
+            const filePath = path.join(this.publicDirPath, context.uri);
             res.sendFile(filePath);
         }
     }
