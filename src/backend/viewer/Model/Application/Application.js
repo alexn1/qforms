@@ -142,9 +142,9 @@ class Application extends Model {
         return Database.create(databaseData, this);
     }
 
-    async _createPage(pageName) {
-        // console.log('Application._createPage', pageName);
-        const relFilePath  = this.createPageLink(pageName).getAttr('fileName');
+    async _createPage(pageLinkName) {
+        // console.log('Application._createPage', pageLinkName);
+        const relFilePath  = this.createPageLink(pageLinkName).getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await qforms.Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
@@ -189,14 +189,23 @@ class Application extends Model {
     }*/
 
     async fillStartupPages(context) {
+        console.log('Application.fillStartupPages', context.page);
         const pages = [];
-        const startupPageNames = this.getStartupPageNames();
-        for (let i = 0; i < startupPageNames.length; i++) {
-            const pageLinkName = startupPageNames[i];
-            const page = await this.getPage(context, pageLinkName);
+        if (context.page) {
+            const page = await this.getPage(context, context.page);
             const pageData = await page.fill(context);
             pages.push(pageData);
+        } else {
+            const startupPageNames = this.getStartupPageNames();
+            for (let i = 0; i < startupPageNames.length; i++) {
+                const pageLinkName = startupPageNames[i];
+                const page = await this.getPage(context, pageLinkName);
+                const pageData = await page.fill(context);
+                pages.push(pageData);
+            }
         }
+
+
         return pages;
     }
 
