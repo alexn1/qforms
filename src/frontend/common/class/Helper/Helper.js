@@ -45,9 +45,13 @@ class Helper {
     static encodeObject(obj) {
         const eObj = {};
         for (const name in obj) {
-            eObj[name] = JSON.stringify(obj[name]);
+            eObj[name] = Helper.encodeValue(obj[name]);
         }
         return eObj;
+    }
+
+    static encodeValue(value) {
+        return JSON.stringify(value)
     }
 
     static decodeObject(eObj) {

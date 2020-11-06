@@ -36,11 +36,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         if (this.parent instanceof Form) {
-            args.params.form         = this.parent.data['@attributes'].name;
-            args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form         = Helper.encodeValue(this.parent.data['@attributes'].name);
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
         }
         const data = await QForms.doHttpRequest(args);
         this.data['@attributes'][name] = value;
@@ -56,11 +56,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         if (this.parent instanceof Form) {
-            args.params.form = this.parent.data['@attributes'].name;
-            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form = Helper.encodeValue(this.parent.data['@attributes'].name);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
         }
         return await QForms.doHttpRequest(args);
     }
@@ -74,11 +74,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         if (this.parent instanceof Form) {
-            args.params.form = this.parent.data['@attributes'].name;
-            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form = Helper.encodeValue(this.parent.data['@attributes'].name);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
         }
         return await QForms.doHttpRequest(args);
     }
@@ -92,11 +92,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         if (this.parent instanceof Form) {
-            args.params.form = this.parent.data['@attributes'].name;
-            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
+            args.params.form = Helper.encodeValue(this.parent.data['@attributes'].name);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
         }
         return await QForms.doHttpRequest(args);
     }
@@ -111,11 +111,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Form) {
-            args.params.page = this.parent.page.pageLink.data['@attributes'].fileName;
-            args.params.form = this.parent.data['@attributes'].name;
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.form = Helper.encodeValue(this.parent.data['@attributes'].name);
         }
         if (this.parent instanceof Page) {
-            args.params.page = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         return await QForms.doHttpRequest(args);
     }
@@ -143,11 +143,12 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.pageFileName = (this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined;
+
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined);
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = (this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined;
-            args.params.form         = (this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined;
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined);
+            args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.data['@attributes'].name                   : undefined);
         }
         return await QForms.doHttpRequest(args);
     }
@@ -162,11 +163,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.pageFileName = this.parent.pageLink.data['@attributes'].fileName;
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = this.parent.page.pageLink.data['@attributes'].fileName;
-            args.params.form         = this.parent.data['@attributes'].name;
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.form         = Helper.encodeValue(this.parent.data['@attributes'].name);
         }
         return await QForms.doHttpRequest(args);
     }
