@@ -137,7 +137,7 @@ async function editorGet(req, res, next)  {
     try {
         const hostApp = server.get('hostApp');
         if (hostApp.nodeEnv === 'development') {
-            await hostApp.editorIndexGet(req, res);
+            await hostApp.handleEditorGet(req, res);
         } else {
             next();
         }
@@ -151,7 +151,7 @@ async function editorPost(req, res, next)  {
     try {
         const hostApp = server.get('hostApp');
         if (hostApp.nodeEnv === 'development') {
-            await hostApp.editorPost(req, res);
+            await hostApp.handleEditorPost(req, res);
         } else {
             next();
         }

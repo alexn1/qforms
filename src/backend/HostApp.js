@@ -3,7 +3,6 @@
 const fs      = require('fs');
 const path    = require('path');
 const qforms  = require('./qforms');
-// const Context = require('./Context');
 const Test    = require('./Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
@@ -114,7 +113,7 @@ class HostApp {
         }
     }
 
-    async createApplicationIfNotExists(req) {
+    async createApplicationIfNotExists(req, context) {
         console.log(`HostApp.createApplicationIfNotExists debug: ${req.query.debug}, env: ${req.params.env}`);
         const route = HostApp.getRoute(req);
         const application = this.applications[route];
@@ -159,7 +158,7 @@ class HostApp {
 
     async handleViewerGet(req, res, context) {
         console.log('HostApp.handleViewerGet');
-        await this.createApplicationIfNotExists(req);
+        await this.createApplicationIfNotExists(req, context);
         const route = HostApp.getRoute(req);
         const application = this.getApplication(req);
         if (this.getApplication(req).authentication() && !(req.session.user && req.session.user[route])) {
@@ -185,7 +184,7 @@ class HostApp {
 
     async handleViewerPost(req, res, context) {
         console.log('HostApp.handleViewerPost');
-        await this.createApplicationIfNotExists(req);
+        await this.createApplicationIfNotExists(req, context);
         const route = HostApp.getRoute(req);
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
@@ -477,8 +476,8 @@ class HostApp {
         }
     }
 
-    async editorIndexGet(req, res) {
-        console.log('HostApp.editorIndexGet');
+    async handleEditorGet(req, res) {
+        console.log('HostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req);
         const appFile = new qforms.JsonFile(application.appInfo.filePath);
         await appFile.read();
@@ -499,8 +498,8 @@ class HostApp {
         });
     }
 
-    async editorPost(req, res) {
-        console.log('HostApp.editorPost');
+    async handleEditorPost(req, res) {
+        console.log('HostApp.handleEditorPost');
         const application = await this.createApplicationIfNotExists(req);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
