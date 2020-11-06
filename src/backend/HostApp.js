@@ -8,7 +8,7 @@ const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
-const Context = require('./Context');
+// const Context = require('./Context');
 
 
 // post actions
@@ -121,7 +121,7 @@ class HostApp {
         const route = context.route;
         const application = this.applications[route];
         if (application) {
-            if (req.method === 'GET' && (req.query.debug === '1' || HostApp.isEditor(req))) {
+            if (req.method === 'GET' && (req.query.debug === '1' || context.isEditor)) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(req), req.params.env);
             }
@@ -147,13 +147,13 @@ class HostApp {
         return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
     }*/
 
-    static isEditor(req) {
+    /*static isEditor(req, context) {
         return req.url.substr(0, 6) === '/edit/';
-    }
+    }*/
 
-    static isViewer(req) {
+    /*static isViewer(req, context) {
         return req.url.substr(0, 6) === '/view/';
-    }
+    }*/
 
     async createApplication(appFilePath, env) {
         console.log(`HostApp.createApplication: ${appFilePath}`);
