@@ -5,7 +5,7 @@ class Context {
         }
         const req = context.req;
         if (req) {
-            const route = [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
+            const route = context.route = Context.getRoute(req);
             if (req.session.user && req.session.user[route]) {
                 context.user = req.session.user[route];
             }
@@ -26,6 +26,11 @@ class Context {
         if (context.querytime        === undefined) context.querytime        = {};
         if (context.querytime.params === undefined) context.querytime.params = {};
         return context;
+    }
+
+    static getRoute(req) {
+        // const route = [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
+        return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
     }
 
     static destroy(context) {

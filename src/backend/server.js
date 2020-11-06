@@ -107,7 +107,7 @@ async function viewerGet(req, res, next)  {
     });*/
     let context = null;
     try {
-        const context = Context.create({req});
+        context = Context.create({req});
         await server.get('hostApp').handleViewerGet(req, res, context);
     } catch (err) {
         next(err);
@@ -119,8 +119,8 @@ async function viewerGet(req, res, next)  {
 async function viewerPost(req, res, next)  {
     console.warn('viewerPost', req.params, req.body);
     let context = null;
-    const hostApp = server.get('hostApp');
     try {
+        const hostApp = server.get('hostApp');
         context = Context.create({req});
         const time = await hostApp.handleViewerPost(req, res, context);
         // await hostApp.logRequest(req, context, time);
@@ -134,6 +134,7 @@ async function viewerPost(req, res, next)  {
 
 async function editorGet(req, res, next)  {
     console.warn('editorGet', req.params);
+    let context = null;
     try {
         const hostApp = server.get('hostApp');
         if (hostApp.nodeEnv === 'development') {

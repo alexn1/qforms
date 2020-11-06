@@ -8,6 +8,7 @@ const pkg     = require('../../package.json');
 const Helper  = require('./common/Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
+const Context = require('./Context');
 
 
 // post actions
@@ -115,7 +116,7 @@ class HostApp {
 
     async createApplicationIfNotExists(req, context) {
         console.log(`HostApp.createApplicationIfNotExists debug: ${req.query.debug}, env: ${req.params.env}`);
-        const route = HostApp.getRoute(req);
+        const route = Context.getRoute(req);
         const application = this.applications[route];
         if (application) {
             if (req.method === 'GET' && (req.query.debug === '1' || HostApp.isEditor(req))) {
@@ -128,7 +129,7 @@ class HostApp {
     }
 
     getApplication(req) {
-        const application = this.applications[HostApp.getRoute(req)];
+        const application = this.applications[Context.getRoute(req)];
         if (!application) throw new Error('no application');
         return application;
     }
@@ -137,9 +138,9 @@ class HostApp {
         return path.join(this.appsDirPath, req.params.appDirName, req.params.appFileName + '.json');
     }
 
-    static getRoute(req) {
+    /*static getRoute(req) {
         return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
-    }
+    }*/
 
     static isEditor(req) {
         return req.url.substr(0, 6) === '/edit/';
@@ -159,7 +160,7 @@ class HostApp {
     async handleViewerGet(req, res, context) {
         console.log('HostApp.handleViewerGet');
         await this.createApplicationIfNotExists(req, context);
-        const route = HostApp.getRoute(req);
+        const route = Context.getRoute(req);
         const application = this.getApplication(req);
         if (this.getApplication(req).authentication() && !(req.session.user && req.session.user[route])) {
             this.loginGet(req, res, context);
@@ -185,7 +186,7 @@ class HostApp {
     async handleViewerPost(req, res, context) {
         console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
-        const route = HostApp.getRoute(req);
+        const route = Context.getRoute(req);
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
         } else {
@@ -216,7 +217,7 @@ class HostApp {
 
     async loginPost(req, res, context) {
         console.log('HostApp.loginPost');
-        const route = HostApp.getRoute(req);
+        const route = Context.getRoute(req);
         const application = this.getApplication(req);
         const authenticate = await application.authenticate(context, req.body.username, req.body.password);
         const user = null;
@@ -398,7 +399,7 @@ class HostApp {
     // action
     async logout(req, res) {
         console.log('HostApp.logout');
-        const route = HostApp.getRoute(req);
+        const route = Context.getRoute(req);
         if (req.session.user && req.session.user[route]) {
             delete req.session.user[route];
         }
