@@ -36,7 +36,7 @@
     });%>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const data = <%- JSON.stringify(data, null, 4) %>;
+        const data = <%- data %>;
         const qforms = new QForms(data);
         qforms.init();
     });

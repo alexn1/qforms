@@ -43,7 +43,6 @@ class Application extends Model {
         this.pages              = {};
         this.css                = [];
         this.js                 = [];
-        this.text               = qforms.text[this.getAttr('lang') || 'en'];
         this.databases          = {};
         this.dataSources        = {};
     }
@@ -71,6 +70,10 @@ class Application extends Model {
         this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
 
+    getText() {
+        return qforms.text[this.getAttr('lang') || 'en'];
+    }
+
     async fill(context) {
         // console.log('Application.fill');
         const data = await super.fill(context);
@@ -82,7 +85,7 @@ class Application extends Model {
         data.env = this.hostApp.nodeEnv;
 
         // text
-        data.text   = this.text;
+        data.text = this.getText();
 
         // params
         data.params = this.getParams(context);

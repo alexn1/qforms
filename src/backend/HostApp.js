@@ -171,7 +171,7 @@ class HostApp {
                 links         : application.css,
                 scripts       : application.js,
                 caption       : `${context.appDirName}/${application.getAttr('caption')}`,
-                data          : data,
+                data          : JSON.stringify(data, null, 4),
                 env           : application.getEnv(),
                 components    : application.getComponents()
             });
