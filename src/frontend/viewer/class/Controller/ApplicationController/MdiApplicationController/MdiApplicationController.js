@@ -44,9 +44,8 @@ class MdiApplicationController extends ApplicationController {
         }
     }
     createPages() {
-        return Object.keys(this.model.data.pages).map(name => {
-            // model
-            const page = new Page(this.model.data.pages[name], this.model, {
+        return this.model.data.pages.map(pageData => {
+            const page = new Page(pageData, this.model, {
                 id   : `p${this.getNextPageId()}`,
                 modal: false
             });

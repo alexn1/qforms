@@ -115,11 +115,11 @@ class ApplicationController extends Controller {
 
 
     createPage() {
-        const name = Object.keys(this.model.data.pages).length ? Object.keys(this.model.data.pages)[0] : null;
-        if (!name) return null;
+        if (!this.model.data.pages[0]) return;
+        const pageData = this.model.data.pages[0];
 
         // model
-        const page = new Page(this.model.data.pages[name], this.model, {
+        const page = new Page(pageData, this.model, {
             id   : `p${this.getNextPageId()}`,
             modal: false
         });

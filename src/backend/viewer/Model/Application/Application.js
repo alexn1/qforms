@@ -94,14 +94,15 @@ class Application extends Model {
         data.menu = await this.createMenu(context);
 
         // pages
-        data.pages = {};
+        data.pages = [];
         const startupPageNames = Object.keys(this.getData('pageLinks')).filter(pageName => {
             return this.createPageLink(pageName).getAttr('startup') === 'true';
         });
         for (let i = 0; i < startupPageNames.length; i++) {
             const pageName = startupPageNames[i];
             const page = await this.getPage(context, pageName);
-            data.pages[pageName] = await page.fill(context);
+            const pageData = await page.fill(context);
+            data.pages.push(pageData);
         }
 
         return data;
