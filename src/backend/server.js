@@ -39,21 +39,21 @@ initExpressServer(server); function initExpressServer(server) {
     server.post('/test', postTest);
 
     // home
-    server.get('/' , homeGet);
+    server.get( '/', homeGet);
     server.post('/', homePost);
 
     // monitor
     server.get('/monitor', monitorGet);
 
     // view
-    server.get('/view/:appDirName/:appFileName/:env/' , viewerGet);
+    server.get( '/view/:appDirName/:appFileName/:env/', viewerGet);
     server.post('/view/:appDirName/:appFileName/:env/', viewerPost);
 
     // viewerFile
     server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
 
     // editor
-    server.get('/edit/:appDirName/:appFileName/:env/' , editorGet);
+    server.get( '/edit/:appDirName/:appFileName/:env/' , editorGet);
     server.post('/edit/:appDirName/:appFileName/:env/', editorPost);
 
     // editorFile
