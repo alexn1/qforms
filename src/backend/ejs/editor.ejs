@@ -37,16 +37,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log('editor.ejs DOMContentLoaded');
+            TreeWidget.register();
+            TabWidget.register();
             const data = <%-appFileContent%>;
             new QForms(data);
             new EditorController(data).init();
         });
-        /*
-        $(document).ready(() => {
-            const data = <%-appFileContent%>;
-            new QForms(data);
-            new EditorController(data).init();
-        });*/
     </script>
 </head>
 <body>

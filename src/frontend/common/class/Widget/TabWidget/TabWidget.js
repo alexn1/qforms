@@ -1,14 +1,19 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     console.log('TabWidget DOMContentLoaded');
-    document.querySelectorAll('div.TabWidget').forEach(el => {
-        el._obj = new TabWidget(el);
-        el._obj.init();
-    });
-});
+    TabWidget.register();
+});*/
 
 class TabWidget extends Widget {
+
+    static register() {
+        console.log('TabWidget.register');
+        document.querySelectorAll('div.TabWidget').forEach(el => {
+            el._obj = new TabWidget(el);
+            el._obj.init();
+        });
+    }
 
     constructor(el) {
         super(el);

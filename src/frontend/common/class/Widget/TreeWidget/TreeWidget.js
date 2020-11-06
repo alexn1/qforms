@@ -1,11 +1,9 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     console.log('TreeWidget DOMContentLoaded');
-    document.querySelectorAll('div.TreeWidget').forEach(el => {
-        TreeWidget_createObject(el);
-    });
-});
+    TreeWidget.register();
+});*/
 
 function TreeWidget_createObject(el) {
     el._obj = new TreeWidget(el);
@@ -14,6 +12,13 @@ function TreeWidget_createObject(el) {
 }
 
 class TreeWidget extends Widget {
+
+    static register() {
+        console.log('TreeWidget.register');
+        document.querySelectorAll('div.TreeWidget').forEach(el => {
+            TreeWidget_createObject(el);
+        });
+    }
 
     constructor(el) {
         super(el);
