@@ -40,7 +40,7 @@ class Application extends Model {
         this.env                = env;
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];
-        this.pages              = {};
+        // this.pages              = {};
         this.css                = [];
         this.js                 = [];
         this.databases          = {};
@@ -65,7 +65,7 @@ class Application extends Model {
 
     async init() {
         await super.init();
-        await this.createStartupPages();
+        // await this.createStartupPages();
         this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
@@ -94,16 +94,7 @@ class Application extends Model {
         data.menu = await this.createMenu(context);
 
         // pages
-        data.pages = [];
-        const startupPageNames = Object.keys(this.getData('pageLinks')).filter(pageName => {
-            return this.createPageLink(pageName).getAttr('startup') === 'true';
-        });
-        for (let i = 0; i < startupPageNames.length; i++) {
-            const pageName = startupPageNames[i];
-            const page = await this.getPage(context, pageName);
-            const pageData = await page.fill(context);
-            data.pages.push(pageData);
-        }
+        data.pages = await this.fillStartupPages(context);
 
         return data;
     }
@@ -171,26 +162,42 @@ class Application extends Model {
         if (context.user && this.authorizePage(context.user, name) === false) {
             throw new Error('authorization error');
         }
-        if (this.pages[name]) {
+        /*if (this.pages[name]) {
             return this.pages[name];
-        }
-        return this.pages[name] = await this._createPage(name);
+        }*/
+        return /*this.pages[name] =*/ await this._createPage(name);
     }
 
     getPageLinkNameList() {
-        return Object.keys(this.data.pageLinks);
+        return Object.keys(this.getData('pageLinks'));
     }
 
-    async createStartupPages() {
+    getStartupPageNames() {
+        return this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
+    }
+
+    /*async createStartupPages() {
         if (!this.data.pageLinks) return;
-        const pageLinkNames = this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
-        for (let i = 0; i < pageLinkNames.length; i++) {
-            const pageLinkName = pageLinkNames[i];
+        const startupPageNames = this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
+        for (let i = 0; i < startupPageNames.length; i++) {
+            const pageLinkName = startupPageNames[i];
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkName2 = pageLink.getAttr('name');
             const page = await this._createPage(pageLinkName2);
             this.pages[pageLinkName2] = page;
         }
+    }*/
+
+    async fillStartupPages(context) {
+        const pages = [];
+        const startupPageNames = this.getStartupPageNames();
+        for (let i = 0; i < startupPageNames.length; i++) {
+            const pageLinkName = startupPageNames[i];
+            const page = await this.getPage(context, pageLinkName);
+            const pageData = await page.fill(context);
+            pages.push(pageData);
+        }
+        return pages;
     }
 
     async authenticate(context, username, password) {
