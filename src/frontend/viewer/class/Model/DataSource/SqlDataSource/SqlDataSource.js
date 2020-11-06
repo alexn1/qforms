@@ -344,4 +344,7 @@ class SqlDataSource extends DataSource {
     setFrame(frame) {
         this.frame = frame;
     }
+    hasMore() {
+        return this.lastFrame < this.getFramesCount();
+    }
 }
