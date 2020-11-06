@@ -13,7 +13,7 @@ class Context {
             context.isViewer    = req.url.substr(0, 6) === '/view/';
             context.debug       = req.query.debug;
 
-            const route = context.route = Context.getRoute(req);
+            const route = context.route = Context.getRoute(context);
             if (req.session.user && req.session.user[route]) {
                 context.user = req.session.user[route];
             }
@@ -36,9 +36,8 @@ class Context {
         return context;
     }
 
-    static getRoute(req) {
-        // const route = [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
-        return [req.params.appDirName, req.params.appFileName, req.params.env].join('/');
+    static getRoute(context) {
+        return [context.appDirName, context.appFileName, context.env].join('/');
     }
 
     static destroy(context) {

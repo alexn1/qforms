@@ -123,11 +123,11 @@ class HostApp {
         if (application) {
             if (req.method === 'GET' && (context.debug === '1' || context.isEditor)) {
                 await application.deinit();
-                return this.applications[route] = await this.createApplication(this.getAppFilePath(req), context.env);
+                return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
             }
             return application;
         }
-        return this.applications[route] = await this.createApplication(this.getAppFilePath(req), context.env);
+        return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
     }
 
     getApplication(req, context) {
@@ -139,8 +139,8 @@ class HostApp {
         return application;
     }
 
-    getAppFilePath(req) {
-        return path.join(this.appsDirPath, req.params.appDirName, req.params.appFileName + '.json');
+    getAppFilePath(context) {
+        return path.join(this.appsDirPath, context.appDirName, context.appFileName + '.json');
     }
 
     /*static getRoute(req) {
