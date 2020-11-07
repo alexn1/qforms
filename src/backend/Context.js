@@ -12,8 +12,6 @@ class Context {
             context.appDirName  = req.params.appDirName;
             context.appFileName = req.params.appFileName;
             context.env         = req.params.env;
-            context.isEditor    = context.module === 'edit';
-            context.isViewer    = context.module === 'view';
             context.debug       = req.query.debug;
             context.page        = req.query.page;
 

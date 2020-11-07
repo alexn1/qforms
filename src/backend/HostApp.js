@@ -121,7 +121,7 @@ class HostApp {
         const route = context.route;
         const application = this.applications[route];
         if (application) {
-            if (req.method === 'GET' && (context.debug === '1' || context.isEditor)) {
+            if (req.method === 'GET' && (context.debug === '1' || context.module === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
             }
