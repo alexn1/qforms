@@ -52,12 +52,15 @@ initExpressServer(server); function initExpressServer(server) {
     server.get('/:module/:appDirName/:appFileName/:env/', moduleGet);
 
     // post
-    server.post('/view/:appDirName/:appFileName/:env/', viewerPost);
-    server.post('/edit/:appDirName/:appFileName/:env/', editorPost);
+    // server.post('/view/:appDirName/:appFileName/:env/', viewerPost);
+    // server.post('/edit/:appDirName/:appFileName/:env/', editorPost);
+    server.post('/:module/:appDirName/:appFileName/:env/', modulePost);
 
     // viewerFile/editorFile
-    server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
-    server.get('/edit/:appDirName/:appFileName/:env/*', editorFile);
+    // server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
+    // server.get('/edit/:appDirName/:appFileName/:env/*', editorFile);
+    server.get('/:module/:appDirName/:appFileName/:env/*', moduleFile);
+
 
     // favicon.ico
     server.get('/favicon.ico', favicon);
@@ -76,6 +79,23 @@ initExpressServer(server); function initExpressServer(server) {
     console.log(`serverRequest: ${req.originalUrl}`);
     next();
 }*/
+
+async function moduleFile(req, res, next) {
+    // console.warn('moduleFile', req.originalUrl);
+    let context = null;
+    try {
+        context = Context.create({req});
+        if (context.module === 'view') {
+            await server.get('hostApp').viewerFile(req, res, context);
+        } else if (context.module === 'edit') {
+            await server.get('hostApp').editorFile(req, res, context);
+        }
+    } catch (err) {
+        next(err);
+    } finally {
+        Context.destroy(context);
+    }
+}
 
 async function viewerFile(req, res, next) {
     // console.warn('viewerFile', req.originalUrl);
@@ -144,11 +164,32 @@ async function moduleGet(req, res, next) {
 //     }
 // }
 
-async function viewerPost(req, res, next)  {
+async function modulePost(req, res, next)  {
+    console.warn('modulePost', req.params, req.body);
+    let context = null;
+    const hostApp = server.get('hostApp');
+    try {
+        context = Context.create({req});
+        if (context.module === 'view') {
+            const time = await hostApp.handleViewerPost(req, res, context);
+            // await hostApp.logRequest(req, context, time);
+        } else if (context.module === 'edit') {
+            const time = await hostApp.handleEditorPost(req, res, context);
+            // await hostApp.logRequest(req, context, time);
+        }
+    } catch (err) {
+        await hostApp.logError(req, err);
+        next(err);
+    } finally {
+        Context.destroy(context);
+    }
+}
+
+/*async function viewerPost(req, res, next)  {
     console.warn('viewerPost', req.params, req.body);
     let context = null;
+    const hostApp = server.get('hostApp');
     try {
-        const hostApp = server.get('hostApp');
         context = Context.create({req});
         const time = await hostApp.handleViewerPost(req, res, context);
         // await hostApp.logRequest(req, context, time);
@@ -158,9 +199,9 @@ async function viewerPost(req, res, next)  {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
-async function editorGet(req, res, next)  {
+/*async function editorGet(req, res, next)  {
     console.warn('editorGet', req.params);
     let context = null;
     try {
@@ -176,9 +217,9 @@ async function editorGet(req, res, next)  {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
-async function editorPost(req, res, next)  {
+/*async function editorPost(req, res, next)  {
     console.warn('editorPost', req.params, req.body);
     let context = null;
     try {
@@ -194,7 +235,7 @@ async function editorPost(req, res, next)  {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
 async function homePost(req, res, next) {
     console.warn('homePost', req.params);
