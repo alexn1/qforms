@@ -45,18 +45,18 @@ initExpressServer(server); function initExpressServer(server) {
     // monitor
     server.get('/monitor', monitorGet);
 
-    // view
-    server.get( '/view/:appDirName/:appFileName/:env/', viewerGet);
+    // get
+    // server.get('/view/:appDirName/:appFileName/:env/', viewerGet);
+    // server.get('/edit/:appDirName/:appFileName/:env/', editorGet);
+
+    server.get('/:module/:appDirName/:appFileName/:env/', moduleGet);
+
+    // post
     server.post('/view/:appDirName/:appFileName/:env/', viewerPost);
-
-    // viewerFile
-    server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
-
-    // editor
-    server.get( '/edit/:appDirName/:appFileName/:env/' , editorGet);
     server.post('/edit/:appDirName/:appFileName/:env/', editorPost);
 
-    // editorFile
+    // viewerFile/editorFile
+    server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
     server.get('/edit/:appDirName/:appFileName/:env/*', editorFile);
 
     // favicon.ico
@@ -108,21 +108,41 @@ function favicon(req, res, next) {
     res.end();
 }
 
-async function viewerGet(req, res, next)  {
-    console.warn('viewerGet', req.params);
-    /*new Promise((resolve, reject) => {
-        reject(new Error('sample error'));
-    });*/
+async function moduleGet(req, res, next) {
+    console.warn('moduleGet', req.params);
     let context = null;
     try {
+        const hostApp = server.get('hostApp');
         context = Context.create({req});
-        await server.get('hostApp').handleViewerGet(req, res, context);
+        if (context.module === 'view') {
+            await hostApp.handleViewerGet(req, res, context);
+        } else if (context.module === 'edit') {
+            await hostApp.handleEditorGet(req, res, context);
+        } else {
+            throw new Error(`unknown module: ${context.module}`);
+        }
     } catch (err) {
         next(err);
     } finally {
         Context.destroy(context);
     }
 }
+
+// async function viewerGet(req, res, next)  {
+//     console.warn('viewerGet', req.params);
+//     /*new Promise((resolve, reject) => {
+//         reject(new Error('sample error'));
+//     });*/
+//     let context = null;
+//     try {
+//         context = Context.create({req});
+//         await server.get('hostApp').handleViewerGet(req, res, context);
+//     } catch (err) {
+//         next(err);
+//     } finally {
+//         Context.destroy(context);
+//     }
+// }
 
 async function viewerPost(req, res, next)  {
     console.warn('viewerPost', req.params, req.body);

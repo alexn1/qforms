@@ -8,6 +8,7 @@ class Context {
 
             // context.relFilePath = req.params['0'];
             context.uri         = req.params['0'];
+            context.module      = req.params.module;
             context.appDirName  = req.params.appDirName;
             context.appFileName = req.params.appFileName;
             context.env         = req.params.env;
