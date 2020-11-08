@@ -38,7 +38,7 @@ initExpressServer(server); function initExpressServer(server) {
     server.get('/test' , getTest);
     server.post('/test', postTest);
 
-    // home
+    // app
     server.get( '/app', appGet);
     server.post('/app', appPost);
 

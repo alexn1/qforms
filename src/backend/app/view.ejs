@@ -19,21 +19,13 @@
     <script src="home/class/all.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('home.ejs DOMContentLoaded');
+            console.log('app/view.ejs DOMContentLoaded');
             const data = <%-JSON.stringify(appInfos.map(appInfo => ({
                 fullName: appInfo.fullName,
                 envs: appInfo.envs
             })), null, 4)%>;
             new HomeController(data).init();
         });
-        /*
-        $(document).ready(() => {
-            const data = <%-JSON.stringify(appInfos.map(appInfo => ({
-                fullName: appInfo.fullName,
-                envs: appInfo.envs
-            })), null, 4)%>;
-            new HomeController(data).init();
-        });*/
     </script>
 </head>
 <body>
