@@ -3,7 +3,7 @@
 const path    = require('path');
 const qforms = require('../../../../qforms');
 const Form   = require('../Form');
-const BaseModel = require('../../../../common/BaseModel');
+const BaseModel = require('../../../../BaseModel');
 
 class RowForm extends Form {
 

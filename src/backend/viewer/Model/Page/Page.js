@@ -6,7 +6,7 @@ const child_process = require('child_process');
 const stream        = require('stream');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
-const BaseModel = require('../../../common/BaseModel');
+const BaseModel = require('../../../BaseModel');
 
 class Page extends Model {
 

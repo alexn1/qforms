@@ -3,7 +3,7 @@
 const path    = require('path');
 const qforms  = require('../../qforms');
 
-const BaseModel = require('../../common/BaseModel');
+const BaseModel = require('../../BaseModel');
 
 class Model extends BaseModel {
 

@@ -3,7 +3,7 @@
 const path    = require('path');
 const ejs     = require('ejs');
 const qforms = require('../../qforms');
-const BaseModel = require('../../common/BaseModel');
+const BaseModel = require('../../BaseModel');
 
 class Editor extends BaseModel {
     constructor(data, parent) {

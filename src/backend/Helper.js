@@ -7,7 +7,7 @@ const fs         = require('fs');
 // const fsPromises = require('fs').promises;       // node v12
 const _          = require('underscore');
 const Promise    = require('bluebird');
-const BaseModel = require('./common/BaseModel');
+const BaseModel = require('./BaseModel');
 
 const entityMap = {
     '&': '&amp;',

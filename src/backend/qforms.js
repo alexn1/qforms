@@ -1,6 +1,7 @@
 'use strict';
-module.exports.text                              = {en: require('./common/text/en'), ru: require('./common/text/ru')};
+module.exports.text                              = {en: require('./en'), ru: require('./ru')};
 module.exports.Helper                            = require('./Helper');
+module.exports.JsonFile                          = require('./JsonFile');
 module.exports.Editor                            = require('./editor/Editor/Editor');
 module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
@@ -40,7 +41,6 @@ module.exports.ControlEditorController           = require('./editor/EditorContr
 module.exports.FieldEditorController             = require('./editor/EditorController/VisualEditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./editor/EditorController/VisualEditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController              = require('./editor/EditorController/VisualEditorController/PageEditorController/PageEditorController');
-module.exports.JsonFile                          = require('./common/JsonFile');
 module.exports.Model                             = require('./viewer/Model/Model');
 module.exports.Application                       = require('./viewer/Model/Application/Application');
 module.exports.Control                           = require('./viewer/Model/Control/Control');

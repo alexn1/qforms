@@ -2,7 +2,7 @@
 
 const Model     = require('../Model');
 const Param     = require('../Param/Param');
-const BaseModel = require('../../../common/BaseModel');
+const BaseModel = require('../../../BaseModel');
 const qforms    = require('../../../qforms');
 
 class Database extends Model {

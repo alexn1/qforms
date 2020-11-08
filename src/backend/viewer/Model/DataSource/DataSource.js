@@ -3,7 +3,7 @@
 const path    = require('path');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
-const BaseModel = require('../../../common/BaseModel');
+const BaseModel = require('../../../BaseModel');
 
 class DataSource extends Model {
     static async create(data, parent) {

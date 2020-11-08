@@ -1,6 +1,6 @@
 'use strict';
 
-const qforms  = require('../qforms');
+const Helper = require('./Helper');
 
 class JsonFile {
     constructor(filePath, data) {
@@ -10,7 +10,7 @@ class JsonFile {
     }
 
     async create() {
-        const exists = await qforms.Helper.exists(this.filePath);
+        const exists = await Helper.exists(this.filePath);
         if (exists) throw new Error(`File ${this.filePath} already exists`);
         if (this.data) {
         } else if (this.content) {
@@ -19,11 +19,11 @@ class JsonFile {
             this.data = {};
         }
         this.content = JSON.stringify(this.data, null, 4);
-        await qforms.Helper.writeFile(this.filePath, this.content);
+        await Helper.writeFile(this.filePath, this.content);
     }
 
     async read() {
-        const content = await qforms.Helper.readTextFile(this.filePath);
+        const content = await Helper.readTextFile(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
     }
@@ -31,7 +31,7 @@ class JsonFile {
     async save() {
         console.log('JsonFile.save');
         this.content = JSON.stringify(this.data, null, 4);
-        await qforms.Helper.writeFile(this.filePath, this.content);
+        await Helper.writeFile(this.filePath, this.content);
     }
 
     getAttr(name) {
