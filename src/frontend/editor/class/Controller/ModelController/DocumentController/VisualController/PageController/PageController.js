@@ -138,5 +138,4 @@ class PageController extends VisualController {
             ModelController.prototype.setProperty.call(this, name, value);
         }
     }
-
 }

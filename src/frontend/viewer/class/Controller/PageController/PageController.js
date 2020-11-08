@@ -118,5 +118,14 @@ class PageController extends Controller {
     getCaption() {
         return this.model.getCaption();
     }
-
+    static createLink(params) {
+        const query = window.location.search.split('?')[1];
+        return [
+            window.location.pathname,
+            [
+                ...(query ? query.split('&') : []),
+                ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
+            ].join('&')
+        ].join('?');
+    }
 }
