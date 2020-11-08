@@ -40,25 +40,19 @@ initExpressServer(server); function initExpressServer(server) {
     // monitor
     server.get('/monitor', monitorGet);
 
-    // get
-    // server.get('/view/:appDirName/:appFileName/:env/', viewerGet);
-    // server.get('/edit/:appDirName/:appFileName/:env/', editorGet);
-
+    // moduleGet
     server.get('/:module/:appDirName/:appFileName/:env/', moduleGet);
 
-    // post
-    // server.post('/view/:appDirName/:appFileName/:env/', viewerPost);
-    // server.post('/edit/:appDirName/:appFileName/:env/', editorPost);
+    // modulePost
     server.post('/:module/:appDirName/:appFileName/:env/', modulePost);
 
-    // viewerFile/editorFile
-    // server.get('/view/:appDirName/:appFileName/:env/*', viewerFile);
-    // server.get('/edit/:appDirName/:appFileName/:env/*', editorFile);
+    // moduleFile
     server.get('/:module/:appDirName/:appFileName/:env/*', moduleFile);
-
 
     // favicon.ico
     server.get('/favicon.ico', favicon);
+
+    // static
     server.use(express.static(hostApp.publicDirPath));
 
     // catch 404 and forward to error handler
@@ -94,32 +88,6 @@ async function moduleFile(req, res, next) {
     }
 }
 
-async function viewerFile(req, res, next) {
-    // console.warn('viewerFile', req.originalUrl);
-    let context = null;
-    try {
-        context = Context.create({req});
-        await server.get('hostApp').viewerFile(req, res, context);
-    } catch (err) {
-        next(err);
-    } finally {
-        Context.destroy(context);
-    }
-}
-
-async function editorFile(req, res, next) {
-    // console.warn('editorFile', req.originalUrl);
-    let context = null;
-    try {
-        context = Context.create({req});
-        await server.get('hostApp').editorFile(req, res, context);
-    } catch (err) {
-        next(err);
-    } finally {
-        Context.destroy(context);
-    }
-}
-
 function favicon(req, res, next) {
     //console.log('/favicon.ico');
     res.end();
@@ -145,22 +113,6 @@ async function moduleGet(req, res, next) {
     }
 }
 
-// async function viewerGet(req, res, next)  {
-//     console.warn('viewerGet', req.params);
-//     /*new Promise((resolve, reject) => {
-//         reject(new Error('sample error'));
-//     });*/
-//     let context = null;
-//     try {
-//         context = Context.create({req});
-//         await server.get('hostApp').handleViewerGet(req, res, context);
-//     } catch (err) {
-//         next(err);
-//     } finally {
-//         Context.destroy(context);
-//     }
-// }
-
 async function modulePost(req, res, next)  {
     console.warn('modulePost', req.params, req.body);
     let context = null;
@@ -181,58 +133,6 @@ async function modulePost(req, res, next)  {
         Context.destroy(context);
     }
 }
-
-/*async function viewerPost(req, res, next)  {
-    console.warn('viewerPost', req.params, req.body);
-    let context = null;
-    const hostApp = server.get('hostApp');
-    try {
-        context = Context.create({req});
-        const time = await hostApp.handleViewerPost(req, res, context);
-        // await hostApp.logRequest(req, context, time);
-    } catch (err) {
-        await hostApp.logError(req, err);
-        next(err);
-    } finally {
-        Context.destroy(context);
-    }
-}*/
-
-/*async function editorGet(req, res, next)  {
-    console.warn('editorGet', req.params);
-    let context = null;
-    try {
-        const hostApp = server.get('hostApp');
-        context = Context.create({req});
-        if (hostApp.nodeEnv === 'development') {
-            await hostApp.handleEditorGet(req, res, context);
-        } else {
-            next();
-        }
-    } catch (err) {
-        next(err);
-    } finally {
-        Context.destroy(context);
-    }
-}*/
-
-/*async function editorPost(req, res, next)  {
-    console.warn('editorPost', req.params, req.body);
-    let context = null;
-    try {
-        const hostApp = server.get('hostApp');
-        context = Context.create({req});
-        if (hostApp.nodeEnv === 'development') {
-            await hostApp.handleEditorPost(req, res, context);
-        } else {
-            next();
-        }
-    } catch (err) {
-        next(err);
-    } finally {
-        Context.destroy(context);
-    }
-}*/
 
 async function appPost(req, res, next) {
     console.warn('appPost', req.params);
