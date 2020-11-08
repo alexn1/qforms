@@ -18,18 +18,12 @@
     <script src="common/jsx/view/MonitorView/MonitorView.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const data = <%- data %>;
+            const data = <%- dump %>;
             Helper.createReactComponent(document.querySelector('#root'), MonitorView, {data});
         });
     </script>
 </head>
 <body>
     <div id="root"></div>
-    <% const routes = Object.keys(applications); %>
-    <%routes.forEach(route => {
-        const application = applications[route];
-        const pages = Object.keys(application.pages);%>
-        <%=route%>(<%=pages.join(',')%>)
-    <%});%>
 </body>
 </html>

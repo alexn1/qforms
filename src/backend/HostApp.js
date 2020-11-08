@@ -9,6 +9,7 @@ const Helper  = require('./common/Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
 // const Context = require('./Context');
+const MonitorModel = require('./monitor/MonitorModel');
 
 
 // post actions
@@ -560,12 +561,11 @@ class HostApp {
 
     async monitorGet(req, res) {
         console.log('HostApp.monitorGet');
+        const model = new MonitorModel(this);
+        const dump = model.dump();
         res.render('monitor', {
             version     : pkg.version,
-            applications: this.applications,
-            data: JSON.stringify({
-                routes: Object.keys(this.applications)
-            }, null, 4)
+            dump        : JSON.stringify(dump, null, 4)
         });
     }
     async logError(req, err) {
