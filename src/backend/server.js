@@ -30,11 +30,11 @@ initExpressServer(server); function initExpressServer(server) {
     }));
 
     // test
-    server.get('/test' , getTest);
+    server.get( '/test', getTest );
     server.post('/test', postTest);
 
     // app
-    server.get( '/app', appGet);
+    server.get( '/app', appGet );
     server.post('/app', appPost);
 
     // monitor
