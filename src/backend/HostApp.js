@@ -84,7 +84,7 @@ class HostApp {
         // this.server.set('appsDirPath'    , appsDirPath);
         this.server.set('handleException', Helper.getCommandLineParams().handleException || true);
         this.server.set('view engine'    , 'ejs');
-        this.server.set('views'          , path.join(backendDirPath, 'ejs'));
+        this.server.set('views'          , backendDirPath);
         this.server.set('runtime'        , path.join(engineDirPath,  'runtime'));
         this.server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
         this.server.enable('strict routing');
@@ -162,7 +162,7 @@ class HostApp {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
-            res.render('viewer', {
+            res.render('viewer/view', {
                 version       : pkg.version,
                 debugApp      : context.debug,
                 commonClassCss: this.commonClassCss,
@@ -202,7 +202,7 @@ class HostApp {
         console.log('HostApp.loginGet');
         const application = this.getApplication(req, context);
         const users = await application.getUsers(context);
-        res.render('login', {
+        res.render('viewer/login', {
             version       : pkg.version,
             application   : application,
             caption       : application.getAttr('caption'),
@@ -233,7 +233,7 @@ class HostApp {
             res.redirect(req.url);
         } else {
             const users = await application.getUsers(context);
-            res.render('login', {
+            res.render('viewer/login', {
                 version    : pkg.version,
                 application: application,
                 caption    : application.getAttr('caption'),
@@ -487,7 +487,7 @@ class HostApp {
         const app = JSON.parse(appFile.content);
         app.env = this.nodeEnv;
         const appFileContent = JSON.stringify(app, null, 4);
-        res.render('editor', {
+        res.render('editor/view', {
             version        : pkg.version,
             commonClassCss : this.commonClassCss,
             commonClassJs  : this.commonClassJs,
@@ -547,7 +547,7 @@ class HostApp {
         console.log('HostApp.homeGet');
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
         console.log('appInfos:', appInfos);
-        res.render('home', {
+        res.render('home/view', {
             req           : req,
             hostApp       : this,
             version       : pkg.version,
@@ -563,7 +563,7 @@ class HostApp {
         console.log('HostApp.monitorGet');
         const model = new MonitorModel(this);
         const dump = model.dump();
-        res.render('monitor', {
+        res.render('monitor/view', {
             version     : pkg.version,
             dump        : JSON.stringify(dump, null, 4)
         });
