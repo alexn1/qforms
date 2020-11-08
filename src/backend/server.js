@@ -1,19 +1,14 @@
 'use strict';
 // console.log('server.js');
 const express    = require('express');
-// const fs         = require('fs');
 // const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const session    = require('express-session');
 const Helper    = require('./Helper');
 // const multipart = require('connect-multiparty')();
-// const _         = require('underscore');
-// const async     = require('async');
 const Context = require('./Context');
 const HostApp = require('./HostApp');
 const server = module.exports = express();
-// const qforms = require('./qforms');
-
 
 initExpressServer(server); function initExpressServer(server) {
     // console.log('server.initExpressServer');
