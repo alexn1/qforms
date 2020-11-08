@@ -523,8 +523,8 @@ class HostApp {
         await res.json(result);
     }
 
-    async homePost(req, res) {
-        console.log('HostApp.homePost');
+    async appPost(req, res) {
+        console.log('HostApp.appPost');
         const appList = await this.createApp(req);
         await res.json({appList});
     }
@@ -543,8 +543,8 @@ class HostApp {
         return appInfos;
     }
 
-    async homeGet(req, res) {
-        console.log('HostApp.homeGet');
+    async appGet(req, res) {
+        console.log('HostApp.appGet');
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
         console.log('appInfos:', appInfos);
         res.render('app/view', {

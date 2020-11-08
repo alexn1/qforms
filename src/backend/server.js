@@ -39,8 +39,8 @@ initExpressServer(server); function initExpressServer(server) {
     server.post('/test', postTest);
 
     // home
-    server.get( '/', homeGet);
-    server.post('/', homePost);
+    server.get( '/app', appGet);
+    server.post('/app', appPost);
 
     // monitor
     server.get('/monitor', monitorGet);
@@ -239,19 +239,19 @@ async function modulePost(req, res, next)  {
     }
 }*/
 
-async function homePost(req, res, next) {
-    console.warn('homePost', req.params);
+async function appPost(req, res, next) {
+    console.warn('appPost', req.params);
     try {
-        await server.get('hostApp').homePost(req, res);
+        await server.get('hostApp').appPost(req, res);
     } catch (err) {
         next(err);
     }
 }
 
-async function homeGet(req, res, next) {
-    console.warn('homeGet');
+async function appGet(req, res, next) {
+    console.warn('appGet');
     try {
-        await server.get('hostApp').homeGet(req, res);
+        await server.get('hostApp').appGet(req, res);
     } catch (err) {
         next(err);
     }

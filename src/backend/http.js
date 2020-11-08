@@ -25,7 +25,7 @@ main(); function main() {
             process.send('online');
         }
         const appsDirPath = path.resolve(server.get('hostApp').appsDirPath);
-        console.log(`QForms server v${pkg.version} listening on http://${host}:${port}\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
+        console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/app\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
     });
 }
 
