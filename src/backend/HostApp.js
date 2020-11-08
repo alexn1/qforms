@@ -562,7 +562,10 @@ class HostApp {
         console.log('HostApp.monitorGet');
         res.render('monitor', {
             version     : pkg.version,
-            applications: this.applications
+            applications: this.applications,
+            data: JSON.stringify({
+                routes: Object.keys(this.applications)
+            }, null, 4)
         });
     }
     async logError(req, err) {

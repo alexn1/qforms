@@ -203,7 +203,7 @@ class Helper {
     }
 
     static readTextFile(path) {
-        console.log('Helper.readTextFile', path);
+        // console.log('Helper.readTextFile', path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {

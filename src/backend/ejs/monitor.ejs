@@ -4,17 +4,23 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <title>QForms monitor v<%=version%></title>
+    <!-- EventEmitter -->
+    <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
     <script src="common/lib/react/react.development.js"></script>
     <script src="common/lib/react/react-dom.development.js"></script>
     <!-- qforms css -->
     <link rel="stylesheet" href="common/jsx/all.css"/>
+    <!-- qforms js -->
+    <script src="common/class/all.js"></script>
     <!-- jsx js -->
     <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
-    <script src="common/jsx/widget/Button/Button.js"></script>
+    <script src="common/jsx/view/MonitorView/MonitorView.js"></script>
     <script>
-        console.log('monitor');
-        const root = document.querySelector('#root');
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = <%- data %>;
+            Helper.createReactComponent(document.querySelector('#root'), MonitorView, {data});
+        });
     </script>
 </head>
 <body>
