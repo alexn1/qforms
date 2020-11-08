@@ -5,7 +5,7 @@ const path    = require('path');
 const qforms  = require('./qforms');
 const Test    = require('./Test');
 const pkg     = require('../../package.json');
-const Helper  = require('./common/Helper');
+const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
 // const Context = require('./Context');
@@ -547,7 +547,7 @@ class HostApp {
         console.log('HostApp.homeGet');
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
         console.log('appInfos:', appInfos);
-        res.render('home/view', {
+        res.render('app/view', {
             req           : req,
             hostApp       : this,
             version       : pkg.version,

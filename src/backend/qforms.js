@@ -1,6 +1,6 @@
 'use strict';
 module.exports.text                              = {en: require('./common/text/en'), ru: require('./common/text/ru')};
-module.exports.Helper                            = require('./common/Helper');
+module.exports.Helper                            = require('./Helper');
 module.exports.Editor                            = require('./editor/Editor/Editor');
 module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');

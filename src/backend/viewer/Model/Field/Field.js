@@ -2,7 +2,7 @@
 
 const path    = require('path');
 const qforms = require('../../../qforms');
-const Helper = require('../../../common/Helper');
+const Helper = require('../../../Helper');
 const Model  = require('../Model');
 
 class Field extends Model {
