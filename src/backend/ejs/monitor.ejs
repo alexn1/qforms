@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <title>QForms monitor v<%=version%></title>
+    <!-- react -->
+    <script src="common/lib/react/react.development.js"></script>
+    <script src="common/lib/react/react-dom.development.js"></script>
+    <!-- qforms css -->
+    <link rel="stylesheet" href="common/jsx/all.css"/>
+    <!-- jsx js -->
+    <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
+    <script src="common/jsx/widget/Button/Button.js"></script>
+    <script>
+        console.log('monitor');
+        const root = document.querySelector('#root');
+    </script>
 </head>
 <body>
-<%  const routes = Object.keys(applications);  %>
-
-
-<%
-routes.forEach(route => {
-    const application = applications[route];
-    const pages = Object.keys(application.pages);
-%>
-<%=route%>
-(<%=pages.join(',')%>)
-    <%
-});
-
- %>
+    <div id="root"></div>
+    <% const routes = Object.keys(applications); %>
+    <%routes.forEach(route => {
+        const application = applications[route];
+        const pages = Object.keys(application.pages);%>
+        <%=route%>(<%=pages.join(',')%>)
+    <%});%>
 </body>
 </html>

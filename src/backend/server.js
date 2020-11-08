@@ -89,6 +89,8 @@ async function moduleFile(req, res, next) {
             await server.get('hostApp').viewerFile(req, res, context);
         } else if (context.module === 'edit') {
             await server.get('hostApp').editorFile(req, res, context);
+        } else {
+            next();
         }
     } catch (err) {
         next(err);
