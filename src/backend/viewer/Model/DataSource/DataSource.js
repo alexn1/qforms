@@ -151,7 +151,7 @@ class DataSource extends Model {
     }
 
     getParams(context) {
-        return this.getApp().getParams(context);
+        return qforms.Application.getParams(context);
     }
 
     static keyToParams(key, paramName = 'key') {

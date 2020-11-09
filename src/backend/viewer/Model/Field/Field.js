@@ -25,7 +25,7 @@ class Field extends Model {
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
-        const params = this.getForm().getPage().getApp().getParams(context);
+        const params = qforms.Application.getParams(context);
         const code = qforms.Helper.templateValue(defaultValue, params);
         let value;
         try {

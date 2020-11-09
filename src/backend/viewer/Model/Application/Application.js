@@ -88,7 +88,7 @@ class Application extends Model {
         data.text = this.getText();
 
         // params
-        data.params = this.getParams(context);
+        data.params = Application.getParams(context);
 
         // menu
         data.menu = await this.createMenu(context);
@@ -221,20 +221,14 @@ class Application extends Model {
         return null;
     }
 
-    getParams(context) {
+    static getParams(context) {
         // console.log('Application.getParams:', context.query);
-        const params = {
+        return {
             ...context.query,
-            ...context.params
+            ...context.params,
+            ...(context.querytime ? context.querytime.params : {}),
+            ...(context.user ? {username: context.user.name} : {})
         };
-        // _.extend(params, context.params);
-        if (context.querytime) {
-            _.extend(params, context.querytime.params);
-        }
-        if (context.user) {
-            params.username = context.user.name;
-        }
-        return params;
     }
 
     async rpc(context) {
