@@ -116,7 +116,7 @@ class HostApp {
     }
 
     async createApplicationIfNotExists(req, context) {
-        console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
+        // console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
         // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
@@ -145,14 +145,14 @@ class HostApp {
     }
 
     async createApplication(appFilePath, env) {
-        console.log(`HostApp.createApplication: ${appFilePath}`);
+        // console.log(`HostApp.createApplication: ${appFilePath}`);
         const application = await qforms.Application.create(appFilePath, this, env);
         await application.init();
         return application;
     }
 
     async handleViewerGet(req, res, context) {
-        console.log('HostApp.handleViewerGet', context.query, Object.keys(context.query).map(name => typeof context.query[name]));
+        console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(req, context);
         if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
