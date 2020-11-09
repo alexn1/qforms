@@ -537,9 +537,9 @@ class HostApp {
     async appGet(req, res) {
         console.log('HostApp.appGet');
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
-        console.log('appInfos:', appInfos);
+        // console.log('appInfos:', appInfos);
         res.render('app/view', {
-            req           : req,
+            // req           : req,
             hostApp       : this,
             version       : pkg.version,
             // commonClassCss: this.commonClassCss,
