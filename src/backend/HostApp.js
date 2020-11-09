@@ -546,7 +546,8 @@ class HostApp {
             // commonClassJs : this.commonClassJs,
             // homeClassCss  : this.homeClassCss,
             // homeClassJs   : this.homeClassJs,
-            appInfos      : appInfos
+            appInfos      : appInfos,
+            appInfos2: appInfos.map(appInfo => ({fullName: appInfo.fullName}))
         });
     }
 

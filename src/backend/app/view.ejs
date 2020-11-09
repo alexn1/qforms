@@ -24,7 +24,7 @@
     <script src="home/class/all.js"></script>
     <!-- jsx js -->
     <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
-    <script src="common/jsx/widget/Button/Button.js"></script>
+    <script src="common/jsx/widget/ComboBox/ComboBox.js"></script>
     <script src="common/jsx/view/AppView/AppView.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -33,20 +33,18 @@
                 fullName: appInfo.fullName,
                 envs: appInfo.envs
             })), null, 4)%>;
+            const appInfos2 = <%-JSON.stringify(appInfos2, null,  4)%>;
 
-
-            Helper.createReactComponent(document.querySelector('#root'), AppView, {data});
-
-            new HomeController(data).init();
-
-
+            const ctrl = new HomeController(data, appInfos2);
+            Helper.createReactComponent(document.querySelector('#root'), AppView, {ctrl});
+            ctrl.init();
 
         });
     </script>
 </head>
 <body>
 <div id="root"></div>
-<div class="container" style="background-color: #eee;">
+<!--<div class="container" style="background-color: #eee;">
     <div class="row" style="margin: 50px 0;">
         <div class="col-md-offset-2 col-md-6
                     col-sm-offset-1 col-sm-6
@@ -72,6 +70,6 @@
             <% } %>
         </div>
     </div>
-</div>
+</div>-->
 </body>
 </html>

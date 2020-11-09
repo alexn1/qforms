@@ -25,7 +25,14 @@ class ComboBox extends ReactComponent {
     render() {
         // console.log('ComboBox.render', this.state.value);
         return (
-            <select onChange={this.onChange} value={this.state.value} disabled={this.props.readOnly}>
+            <select
+                onChange={this.onChange}
+                value={this.state.value}
+                disabled={this.props.readOnly}
+                size={this.props.size}
+                style={this.props.style}
+                id={this.props.id}
+            >
                 {this.props.nullable &&
                     <option value="">{this.props.placeholder}</option>
                 }

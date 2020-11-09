@@ -2,9 +2,10 @@
 
 class HomeController {
 
-    constructor(data) {
+    constructor(data, appInfos2) {
         console.log('HomeController.constructor', data);
         this.data = data;
+        this.appInfos2 = appInfos2;
     }
 
     init() {
@@ -22,6 +23,15 @@ class HomeController {
         });
         $('#btnCreate').click(() => {
             this.btnCreate_Click();
+        });
+    }
+
+    getItems() {
+        return this.appInfos2.map(appInfo2 => {
+            return {
+                value: appInfo2.fullName,
+                title: appInfo2.fullName
+            };
         });
     }
 
