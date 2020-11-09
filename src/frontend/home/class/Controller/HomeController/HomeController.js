@@ -15,13 +15,23 @@ class HomeController {
         this.lbApp = c;
     }
 
-    getItems() {
+    getAppItems() {
         return this.data.appInfos.map(appInfo => {
             return {
                 value: appInfo.fullName,
                 title: appInfo.fullName
             };
         });
+    }
+
+    getEnvItems(fullName) {
+        const app = this.getAppInfo(fullName);
+        if (app) return app.envs.map(env => ({value: env, title: env}));
+    }
+
+    getAppInfo(fullName) {
+        console.log('HomeController.getAppInfo', fullName);
+        return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
 
     onChange = fullName => {

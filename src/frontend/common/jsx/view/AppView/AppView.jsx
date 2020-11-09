@@ -2,17 +2,17 @@ class AppView extends ReactComponent {
     render() {
         console.log('AppView.render');
         const ctrl = this.props.ctrl;
-        const apps = ctrl.getItems();
+        const appInfo = ctrl.data.appInfos[0];
         return (
             <div className="AppView">
                 <div className="container" style={{backgroundColor: '#eee'}}>
                     <div className="row" style={{margin: '50px 0'}}>
                         <div className="col-md-offset-2 col-md-6 col-sm-offset-1 col-sm-6 col-xs-8">
                             <ComboBox
-                                value={apps[0] ? apps[0].value : undefined}
+                                value={appInfo ? appInfo.fullName : undefined}
                                 onCreate={ctrl.onLbAppCreate}
                                 id="lbApp"
-                                items={apps}
+                                items={ctrl.getAppItems()}
                                 size={15}
                                 style={{width: '100%'}}
                                 onDoubleClick={ctrl.run}
@@ -21,9 +21,11 @@ class AppView extends ReactComponent {
                         </div>
                         <div className="col-md-2 col-sm-3 col-xs-4">
                             <div className="form-group">
-                                <select id="ddEnv" className="form-control">
-                                    <option value="local">local</option>
-                                </select>
+                                <ComboBox
+                                    id="ddEnv"
+                                    classList={['form-control']}
+                                    items={appInfo ? ctrl.getEnvItems(appInfo.fullName) : undefined}
+                                />
                             </div>
                             <Button classList={['btn', 'btn-primary', 'btn-block']} onClick={ctrl.run}>Run</Button>
                             {ctrl.data.nodeEnv === 'development' &&
