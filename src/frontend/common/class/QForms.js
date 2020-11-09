@@ -118,11 +118,11 @@ class QForms {
         }
     }
 
-    static elementIndex(el) {
+    /*static elementIndex(el) {
         const children = el.parentNode.childNodes;
         for (let i = 0; i < children.length; i++) if (children[i] === el) return i;
         return -1;
-    }
+    }*/
 
     static moveNode(parent, child, oldIndex, newIndex) {
         if (oldIndex < 0 || oldIndex >= parent.children.length || newIndex < 0 || newIndex >= parent.children.length) {
@@ -141,7 +141,7 @@ class QForms {
         return arr;
     }
 
-    static merge(o1, o2) {
+    /*static merge(o1, o2) {
         const oN = {};
         for (const name in o1) {
             oN[name] = o1[name];
@@ -150,9 +150,9 @@ class QForms {
             oN[name] = o2[name];
         }
         return oN;
-    }
+    }*/
 
-    static keyToParams(key, paramName = 'key') {
+    /*static keyToParams(key, paramName = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);
@@ -166,15 +166,15 @@ class QForms {
             throw new Error(`invalid key: ${key}`);
         }
         return params;
-    }
+    }*/
 
-    static now() {
+    /*static now() {
       return new Date();
-    }
+    }*/
 
-    static render(view, data) {
+    /*static render(view, data) {
         return new EJS({text:view}).render(data);
-    }
+    }*/
 
     static templateValue(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {

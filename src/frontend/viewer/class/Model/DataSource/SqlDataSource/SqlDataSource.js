@@ -264,7 +264,7 @@ class SqlDataSource extends DataSource {
 
 
 
-        const keyParams = QForms.keyToParams(key);
+        const keyParams = DataSource.keyToParams(key);
 
         /*
         // save key params for refill

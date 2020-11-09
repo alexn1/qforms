@@ -80,7 +80,7 @@ class ApplicationController extends Controller {
 
         const params = {
             ...(parentPage ? parentPage.params : {}),
-            ...(key ? QForms.keyToParams(key) : {})
+            ...(key ? DataSource.keyToParams(key) : {})
         };
         //console.log('open ' + name + ' with key: ' + key);
 
