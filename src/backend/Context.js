@@ -16,7 +16,7 @@ class Context {
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
 
 
-        context.debug       = req.query.debug;
+        // context.debug       = req.query.debug;
         context.page        = req.query.page;
 
         if (context.query            === undefined) context.query            = req.query ? Context.decodeObject(req.query) : {};

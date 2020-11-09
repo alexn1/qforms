@@ -116,13 +116,13 @@ class HostApp {
     }
 
     async createApplicationIfNotExists(req, context) {
-        console.log(`HostApp.createApplicationIfNotExists debug: ${context.debug}, env: ${context.env}`);
+        console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
         // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.applications[route];
         if (application) {
-            if (req.method === 'GET' && (context.debug === '1' || context.module === 'edit')) {
+            if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
             }
@@ -152,7 +152,7 @@ class HostApp {
     }
 
     async handleViewerGet(req, res, context) {
-        console.log('HostApp.handleViewerGet', context.query);
+        console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(req, context);
         if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
@@ -161,7 +161,7 @@ class HostApp {
             const data = await this.fill(req, context);
             res.render('viewer/view', {
                 version       : pkg.version,
-                debugApp      : context.debug,
+                debug         : context.query.debug,
                 commonClassCss: this.commonClassCss,
                 commonClassJs : this.commonClassJs,
                 viewerClassCss: this.viewerClassCss,

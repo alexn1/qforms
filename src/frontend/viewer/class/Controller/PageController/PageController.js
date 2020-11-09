@@ -124,7 +124,7 @@ class PageController extends Controller {
             window.location.pathname,
             [
                 ...(query ? query.split('&') : []),
-                ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
+                ...Object.keys(params).map(name => `${name}=${encodeURI(Helper.encodeValue(params[name]))}`)
             ].join('&')
         ].join('?');
     }
