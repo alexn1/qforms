@@ -3,38 +3,37 @@ class Context {
         if (context === undefined) {
             context = {};
         }
+        if (!context.req) throw new Error('no req');
         const req = context.req;
-        if (req) {
 
-            // context.relFilePath = req.params['0'];
-            context.uri         = req.params['0'];
-            context.module      = req.params.module;
-            context.appDirName  = req.params.appDirName;
-            context.appFileName = req.params.appFileName;
-            context.env         = req.params.env;
-            context.debug       = req.query.debug;
-            context.page        = req.query.page;
+        context.uri         = req.params['0'];
+        context.module      = req.params.module;
+        context.appDirName  = req.params.appDirName;
+        context.appFileName = req.params.appFileName;
+        context.env         = req.params.env;
 
-            const route = context.route = Context.getRoute(context);
-            if (req.session.user && req.session.user[route]) {
-                context.user = req.session.user[route];
-            }
-        }
-        // if (context.body             === undefined) context.body             = req.body;
+        context.route       = Context.getRoute(context);
+        if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
+
+
+        context.debug       = req.query.debug;
+        context.page        = req.query.page;
+
+        if (context.query            === undefined) context.query            = req.query ? Context.decodeObject(req.query) : {};
         if (context.changes          === undefined) context.changes          = Context.decodeChanges(req.body.changes);
         if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
-        /*context.files = {};
-        if (req.files) {
-            for (const name in req.files) {
-                context.files[name] = req.files[name].buffer;
-            }
-        }*/
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
         if (context.row              === undefined) context.row              = Context.decodeObject(req.body.row);
         if (context.connections      === undefined) context.connections      = {};
         if (context.querytime        === undefined) context.querytime        = {};
         if (context.querytime.params === undefined) context.querytime.params = {};
+        /*context.files = {};
+        if (req.files) {
+            for (const name in req.files) {
+                context.files[name] = req.files[name].buffer;
+            }
+        }*/
         return context;
     }
 

@@ -3,7 +3,7 @@
 const fs      = require('fs');
 const path    = require('path');
 const qforms  = require('./qforms');
-const Test    = require('./Test');
+const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
@@ -152,13 +152,10 @@ class HostApp {
     }
 
     async handleViewerGet(req, res, context) {
-        console.log('HostApp.handleViewerGet');
+        console.log('HostApp.handleViewerGet', context.query);
         await this.createApplicationIfNotExists(req, context);
-        // const route = Context.getRoute(req);
-        if (!context.route) throw new Error('no context.route');
-        const route = context.route;
         const application = this.getApplication(req, context);
-        if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[route])) {
+        if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
@@ -182,13 +179,10 @@ class HostApp {
     async handleViewerPost(req, res, context) {
         console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
-        // const route = Context.getRoute(req);
-        if (!context.route) throw new Error('no context.route');
-        const route = context.route;
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
         } else {
-            if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[route])) {
+            if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
                 throw new Error('not authenticated');
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
@@ -215,7 +209,6 @@ class HostApp {
 
     async loginPost(req, res, context) {
         console.log('HostApp.loginPost');
-        // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.getApplication(req, context);
@@ -399,11 +392,9 @@ class HostApp {
     // action
     async logout(req, res, context) {
         console.log('HostApp.logout');
-        // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
-        const route = context.route;
-        if (req.session.user && req.session.user[route]) {
-            delete req.session.user[route];
+        if (req.session.user && req.session.user[context.route]) {
+            delete req.session.user[context.route];
         }
         await res.json(null);
     }
