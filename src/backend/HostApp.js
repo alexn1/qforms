@@ -542,10 +542,13 @@ class HostApp {
             // req           : req,
             hostApp       : this,
             version       : pkg.version,
-            appInfos      : appInfos.map(appInfo => ({
-                fullName: appInfo.fullName,
-                envs    : appInfo.envs
-            }))
+            data          : {
+                nodeEnv : this.nodeEnv,
+                appInfos: appInfos.map(appInfo => ({
+                    fullName: appInfo.fullName,
+                    envs    : appInfo.envs
+                }))
+            }
         });
     }
 

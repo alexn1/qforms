@@ -16,9 +16,12 @@ class AppView extends ReactComponent {
                                 </select>
                             </div>
                             <button id="btnRun" className="btn btn-primary btn-block">Run</button>
-
-                            <button id="btnEdit" className="btn btn-default btn-block">Edit</button>
-                            <button id="btnCreate" className="btn btn-default btn-block">New...</button>
+                            {ctrl.data.nodeEnv === 'development' &&
+                                <button id="btnEdit" className="btn btn-default btn-block">Edit</button>
+                            }
+                            {ctrl.data.nodeEnv === 'development' &&
+                                <button id="btnCreate" className="btn btn-default btn-block">New...</button>
+                            }
                         </div>
                     </div>
                 </div>

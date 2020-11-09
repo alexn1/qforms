@@ -29,44 +29,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('app/view.ejs DOMContentLoaded');
-            const appInfos = <%-JSON.stringify(appInfos, null, 4)%>;
-
-
-            const ctrl = new HomeController(appInfos);
+            const data = <%-JSON.stringify(data, null, 4)%>;
+            const ctrl = new HomeController(data);
             Helper.createReactComponent(document.querySelector('#root'), AppView, {ctrl});
             ctrl.init();
-
         });
     </script>
 </head>
 <body>
 <div id="root"></div>
-<!--<div class="container" style="background-color: #eee;">
-    <div class="row" style="margin: 50px 0;">
-        <div class="col-md-offset-2 col-md-6
-                    col-sm-offset-1 col-sm-6
-                    col-xs-8">
-            <select id="lbApp"  size="15" style="width: 100%;">
-                <% appInfos.forEach((appInfo) => {
-                    %><option value="<%=appInfo.fullName%>"><%=appInfo.fullName%></option><%='\n'%><%
-                }); %>
-            </select>
-        </div>
-        <div class="col-md-2
-                    col-sm-3
-                    col-xs-4">
-            <div class="form-group">
-                <select id="ddEnv" class="form-control">
-                    <option value="local">local</option>
-                </select>
-            </div>
-            <button id="btnRun" class="btn btn-primary btn-block">Run</button>
-            <% if (hostApp.nodeEnv === 'development') { %>
-                <button id="btnEdit" class="btn btn-default btn-block">Edit</button>
-                <button id="btnCreate" class="btn btn-default btn-block">New...</button>
-            <% } %>
-        </div>
-    </div>
-</div>-->
 </body>
 </html>
