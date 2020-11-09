@@ -8,12 +8,6 @@ class HomeController {
     }
 
     init() {
-        $('#lbApp').dblclick(() => {
-            this.run();
-        });
-        $('#lbApp').change(() => {
-            this.onChange();
-        });
     }
 
     getItems() {
@@ -25,9 +19,8 @@ class HomeController {
         });
     }
 
-    onChange() {
-        const fullName = $('#lbApp').val();
-        // console.log('selected', fullName, env);
+    onChange = fullName => {
+        console.log('HomeController.onChange', fullName);
         const app = this.data.appInfos.find(app => app.fullName === fullName);
         if (!app) throw new Error(`no app ${fullName}`);
         // console.log('app:', app);

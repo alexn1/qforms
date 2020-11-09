@@ -32,6 +32,7 @@ class ComboBox extends ReactComponent {
                 size={this.props.size}
                 style={this.props.style}
                 id={this.props.id}
+                onDoubleClick={this.props.onDoubleClick}
             >
                 {this.props.nullable &&
                     <option value="">{this.props.placeholder}</option>
