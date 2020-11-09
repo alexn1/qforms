@@ -8,9 +8,6 @@ class HomeController {
     }
 
     init() {
-        $('#btnRun').click(() => {
-            this.run();
-        });
         $('#lbApp').dblclick(() => {
             this.run();
         });
@@ -36,7 +33,6 @@ class HomeController {
 
     onChange() {
         const fullName = $('#lbApp').val();
-
         // console.log('selected', fullName, env);
         const app = this.data.appInfos.find(app => app.fullName === fullName);
         if (!app) throw new Error(`no app ${fullName}`);
@@ -44,13 +40,13 @@ class HomeController {
         HomeController.fillSelect('ddEnv', app.envs.map(env => ({value: env, innerHTML: env})));
     }
 
-    run() {
+    run = e => {
         if ($('#lbApp').val()) {
             const appFullName = $('#lbApp').val();
             const env = $('#ddEnv').val();
             const href = `view/${appFullName}/${env}/`;
-            console.log('href:', href);
-            window.location.href = href;
+            // console.log('href:', href);
+            window.open(href);
         }
     }
 
