@@ -1,15 +1,18 @@
 class AppView extends ReactComponent {
     render() {
-        console.log('AppView.render', this.props.ctrl);
+        console.log('AppView.render');
         const ctrl = this.props.ctrl;
+        const apps = ctrl.getItems();
         return (
             <div className="AppView">
                 <div className="container" style={{backgroundColor: '#eee'}}>
                     <div className="row" style={{margin: '50px 0'}}>
                         <div className="col-md-offset-2 col-md-6 col-sm-offset-1 col-sm-6 col-xs-8">
                             <ComboBox
+                                value={apps[0] ? apps[0].value : undefined}
+                                onCreate={ctrl.onLbAppCreate}
                                 id="lbApp"
-                                items={ctrl.getItems()}
+                                items={apps}
                                 size={15}
                                 style={{width: '100%'}}
                                 onDoubleClick={ctrl.run}

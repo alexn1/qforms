@@ -5,9 +5,14 @@ class HomeController {
     constructor(data) {
         console.log('HomeController.constructor', data);
         this.data = data;
+        this.lbApp = null;
     }
 
     init() {
+    }
+
+    onLbAppCreate = c => {
+        this.lbApp = c;
     }
 
     getItems() {
@@ -28,18 +33,19 @@ class HomeController {
     }
 
     run = e => {
-        if ($('#lbApp').val()) {
-            const appFullName = $('#lbApp').val();
+        console.log('this.lbApp.state.value', this.lbApp.state.value);
+        if (this.lbApp.state.value) {
+            const appFullName = this.lbApp.state.value;
             const env = $('#ddEnv').val();
             const href = `view/${appFullName}/${env}/`;
-            // console.log('href:', href);
-            window.open(href);
+            console.log('href:', href);
+            window.location.href = href;
         }
     }
 
     edit = e => {
-        if ($('#lbApp').val()) {
-            const appFullName = $('#lbApp').val();
+        if (this.lbApp.state.value) {
+            const appFullName = this.lbApp.state.value;
             const env = $('#ddEnv').val();
             const href = `edit/${appFullName}/${env}/`;
             console.log('href:', href);
