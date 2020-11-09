@@ -5,28 +5,36 @@ class HomeController {
     constructor(data) {
         console.log('HomeController.constructor', data);
         this.data = data;
-        this.lbApp = null;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
     }
 
     init() {
+        // console.log('HomeController.init');
+        const appInfo = this.data.appInfos[0];
+        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        console.log('this.currentAppEnv:', this.currentAppEnv);
     }
 
-    onLbAppCreate = c => {
-        this.lbApp = c;
+    createView(root) {
+        this.view = Helper.createReactComponent(root, AppView, {ctrl: this});
     }
 
     getAppItems() {
-        return this.data.appInfos.map(appInfo => {
-            return {
-                value: appInfo.fullName,
-                title: appInfo.fullName
-            };
-        });
+        return this.data.appInfos.map(appInfo => ({
+            value: appInfo.fullName,
+            title: appInfo.fullName
+        }));
     }
 
-    getEnvItems(fullName) {
-        const app = this.getAppInfo(fullName);
-        if (app) return app.envs.map(env => ({value: env, title: env}));
+    getEnvItems() {
+        console.log('HomeController.getEnvItems', this.currentAppFullName);
+        if (this.currentAppFullName) {
+            const appInfo = this.getAppInfo(this.currentAppFullName);
+            if (appInfo) return appInfo.envs.map(env => ({value: env, title: env}));
+        }
     }
 
     getAppInfo(fullName) {
@@ -34,30 +42,33 @@ class HomeController {
         return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
 
-    onChange = fullName => {
-        console.log('HomeController.onChange', fullName);
-        const app = this.data.appInfos.find(app => app.fullName === fullName);
-        if (!app) throw new Error(`no app ${fullName}`);
-        // console.log('app:', app);
-        HomeController.fillSelect('ddEnv', app.envs.map(env => ({value: env, innerHTML: env})));
+    onAppChange = fullName => {
+        console.log('HomeController.onAppChange', fullName);
+        this.currentAppFullName = fullName;
+        const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
+        if (!appInfo) throw new Error(`no appInfo ${fullName}`);
+        this.currentAppEnv = appInfo.envs[0];
+        // console.log('appInfo:', appInfo);
+        // HomeController.fillSelect('ddEnv', appInfo.envs.map(env => ({value: env, innerHTML: env})));
+        this.view.rerender();
+    }
+
+    onEnvChange = env => {
+        console.log('HomeController.onEnvChange', env);
+        this.currentAppEnv = env;
     }
 
     run = e => {
-        console.log('this.lbApp.state.value', this.lbApp.state.value);
-        if (this.lbApp.state.value) {
-            const appFullName = this.lbApp.state.value;
-            const env = $('#ddEnv').val();
-            const href = `view/${appFullName}/${env}/`;
+        if (this.currentAppFullName) {
+            const href = `view/${this.currentAppFullName}/${this.currentAppEnv}/`;
             console.log('href:', href);
             window.location.href = href;
         }
     }
 
     edit = e => {
-        if (this.lbApp.state.value) {
-            const appFullName = this.lbApp.state.value;
-            const env = $('#ddEnv').val();
-            const href = `edit/${appFullName}/${env}/`;
+        if (this.currentAppFullName) {
+            const href = `edit/${this.currentAppFullName}/${this.currentAppEnv}/`;
             console.log('href:', href);
             window.location.href = href;
         }
@@ -78,7 +89,7 @@ class HomeController {
         });
     }
 
-    static fillSelect(id, options) {
+    /*static fillSelect(id, options) {
         console.log('HomeController.fillSelect', id, options);
         const elSelect = document.getElementById(id);
         elSelect.innerHTML = '';
@@ -87,7 +98,7 @@ class HomeController {
             ({value: elOption.value, innerHTML: elOption.innerHTML} = option);
             elSelect.appendChild(elOption);
         });
-    }
+    }*/
 
     async createApp(folderName, appName) {
         const args = {

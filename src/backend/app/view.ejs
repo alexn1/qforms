@@ -32,8 +32,10 @@
             // console.log('app/view.ejs DOMContentLoaded');
             const data = <%-JSON.stringify(data, null, 4)%>;
             const ctrl = new HomeController(data);
-            Helper.createReactComponent(document.querySelector('#root'), AppView, {ctrl});
             ctrl.init();
+            ctrl.createView(document.querySelector('#root'));
+            // const view = Helper.createReactComponent(document.querySelector('#root'), AppView, {ctrl});
+
         });
     </script>
 </head>
