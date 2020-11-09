@@ -222,7 +222,9 @@ class Application extends Model {
     }
 
     getParams(context) {
+        // console.log('Application.getParams:', context.query);
         const params = {
+            ...context.query,
             ...context.params
         };
         // _.extend(params, context.params);
