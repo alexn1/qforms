@@ -17,10 +17,10 @@ class AppView extends ReactComponent {
                             </div>
                             <Button classList={['btn', 'btn-primary', 'btn-block']} onClick={ctrl.run}>Run</Button>
                             {ctrl.data.nodeEnv === 'development' &&
-                                <button id="btnEdit" className="btn btn-default btn-block">Edit</button>
+                                <Button classList={['btn', 'btn-default', 'btn-block']} onClick={ctrl.edit}>Edit</Button>
                             }
                             {ctrl.data.nodeEnv === 'development' &&
-                                <button id="btnCreate" className="btn btn-default btn-block">New...</button>
+                                <Button classList={['btn', 'btn-default', 'btn-block']} onClick={ctrl.btnCreate_Click}>New...</Button>
                             }
                         </div>
                     </div>

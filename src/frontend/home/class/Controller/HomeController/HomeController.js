@@ -14,12 +14,6 @@ class HomeController {
         $('#lbApp').change(() => {
             this.onChange();
         });
-        $('#btnEdit').click(() => {
-            this.edit();
-        });
-        $('#btnCreate').click(() => {
-            this.btnCreate_Click();
-        });
     }
 
     getItems() {
@@ -50,7 +44,7 @@ class HomeController {
         }
     }
 
-    edit() {
+    edit = e => {
         if ($('#lbApp').val()) {
             const appFullName = $('#lbApp').val();
             const env = $('#ddEnv').val();
@@ -60,7 +54,7 @@ class HomeController {
         }
     }
 
-    btnCreate_Click() {
+    btnCreate_Click = e => {
         $.get('home/html/newapp.html', (html) => {
             $(document.body).append(html);
             $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
