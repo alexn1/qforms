@@ -28,7 +28,7 @@ class Field extends Model {
             ...this.getApp().data.params,
             ...this.getPage().params,
         };
-        const js = QForms.templateValue(defaultValue, params);
+        const js = Helper.templateValue(defaultValue, params);
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
         // console.log('js', this.getFullName(), js);
         try {
