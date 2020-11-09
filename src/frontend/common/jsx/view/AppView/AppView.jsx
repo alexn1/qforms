@@ -2,7 +2,6 @@ class AppView extends ReactComponent {
     render() {
         console.log('AppView.render');
         const ctrl = this.props.ctrl;
-
         return (
             <div className="AppView">
                 <div className="container" style={{backgroundColor: '#eee'}}>
