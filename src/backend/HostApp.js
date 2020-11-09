@@ -542,10 +542,10 @@ class HostApp {
             req           : req,
             hostApp       : this,
             version       : pkg.version,
-            commonClassCss: this.commonClassCss,
-            commonClassJs : this.commonClassJs,
-            homeClassCss  : this.homeClassCss,
-            homeClassJs   : this.homeClassJs,
+            // commonClassCss: this.commonClassCss,
+            // commonClassJs : this.commonClassJs,
+            // homeClassCss  : this.homeClassCss,
+            // homeClassJs   : this.homeClassJs,
             appInfos      : appInfos
         });
     }
