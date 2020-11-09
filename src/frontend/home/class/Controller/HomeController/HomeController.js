@@ -2,10 +2,9 @@
 
 class HomeController {
 
-    constructor(data, appInfos2) {
-        console.log('HomeController.constructor', data);
-        this.data = data;
-        this.appInfos2 = appInfos2;
+    constructor(appInfos) {
+        console.log('HomeController.constructor', appInfos);
+        this.appInfos = appInfos;
     }
 
     init() {
@@ -27,10 +26,10 @@ class HomeController {
     }
 
     getItems() {
-        return this.appInfos2.map(appInfo2 => {
+        return this.appInfos.map(appInfo => {
             return {
-                value: appInfo2.fullName,
-                title: appInfo2.fullName
+                value: appInfo.fullName,
+                title: appInfo.fullName
             };
         });
     }
@@ -39,7 +38,7 @@ class HomeController {
         const fullName = $('#lbApp').val();
 
         // console.log('selected', fullName, env);
-        const app = this.data.find(app => app.fullName === fullName);
+        const app = this.appInfos.find(app => app.fullName === fullName);
         if (!app) throw new Error(`no app ${fullName}`);
         // console.log('app:', app);
         HomeController.fillSelect('ddEnv', app.envs.map(env => ({value: env, innerHTML: env})));

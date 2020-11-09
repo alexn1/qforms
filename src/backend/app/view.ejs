@@ -29,13 +29,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('app/view.ejs DOMContentLoaded');
-            const data = <%-JSON.stringify(appInfos.map(appInfo => ({
-                fullName: appInfo.fullName,
-                envs: appInfo.envs
-            })), null, 4)%>;
-            const appInfos2 = <%-JSON.stringify(appInfos2, null,  4)%>;
+            const appInfos = <%-JSON.stringify(appInfos, null, 4)%>;
 
-            const ctrl = new HomeController(data, appInfos2);
+
+            const ctrl = new HomeController(appInfos);
             Helper.createReactComponent(document.querySelector('#root'), AppView, {ctrl});
             ctrl.init();
 

@@ -542,12 +542,10 @@ class HostApp {
             // req           : req,
             hostApp       : this,
             version       : pkg.version,
-            // commonClassCss: this.commonClassCss,
-            // commonClassJs : this.commonClassJs,
-            // homeClassCss  : this.homeClassCss,
-            // homeClassJs   : this.homeClassJs,
-            appInfos      : appInfos,
-            appInfos2: appInfos.map(appInfo => ({fullName: appInfo.fullName}))
+            appInfos      : appInfos.map(appInfo => ({
+                fullName: appInfo.fullName,
+                envs    : appInfo.envs
+            }))
         });
     }
 
