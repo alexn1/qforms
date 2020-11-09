@@ -161,7 +161,7 @@ class HostApp {
             const data = await this.fill(req, context);
             res.render('viewer/view', {
                 version       : pkg.version,
-                debug         : context.query.debug,
+                debugApp      : context.query.debug,
                 commonClassCss: this.commonClassCss,
                 commonClassJs : this.commonClassJs,
                 viewerClassCss: this.viewerClassCss,
