@@ -152,7 +152,7 @@ class HostApp {
     }
 
     async handleViewerGet(req, res, context) {
-        console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        console.log('HostApp.handleViewerGet', context.query, Object.keys(context.query).map(name => typeof context.query[name]));
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(req, context);
         if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {

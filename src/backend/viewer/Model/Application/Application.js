@@ -189,10 +189,10 @@ class Application extends Model {
     }*/
 
     async fillStartupPages(context) {
-        console.log('Application.fillStartupPages', context.page);
+        console.log('Application.fillStartupPages', context.query.page);
         const pages = [];
-        if (context.page) {
-            const page = await this.getPage(context, context.page);
+        if (context.query.page) {
+            const page = await this.getPage(context, context.query.page);
             const pageData = await page.fill(context);
             pages.push(pageData);
         } else {

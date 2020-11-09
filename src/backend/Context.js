@@ -6,18 +6,18 @@ class Context {
         if (!context.req) throw new Error('no req');
         const req = context.req;
 
+        // req.params
         context.uri         = req.params['0'];
         context.module      = req.params.module;
         context.appDirName  = req.params.appDirName;
         context.appFileName = req.params.appFileName;
         context.env         = req.params.env;
 
+        // route
         context.route       = Context.getRoute(context);
+
+        // user
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
-
-
-        // context.debug       = req.query.debug;
-        context.page        = req.query.page;
 
         if (context.query            === undefined) context.query            = req.query ? Context.decodeObject(req.query) : {};
         if (context.changes          === undefined) context.changes          = Context.decodeChanges(req.body.changes);
