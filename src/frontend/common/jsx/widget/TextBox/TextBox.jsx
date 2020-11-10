@@ -22,6 +22,8 @@ class TextBox extends ReactComponent {
         // console.log('TextBox.render');
         return (
             <input
+                id={this.props.id}
+                className={this.getClassName()}
                 type="text"
                 value={this.state.value}
                 readOnly={this.props.readOnly}

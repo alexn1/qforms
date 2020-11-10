@@ -1,5 +1,3 @@
-'use strict';
-
 class HomeController {
 
     constructor(data) {
@@ -7,7 +5,7 @@ class HomeController {
         this.data = data;
         this.view = null;
         this.currentAppFullName = undefined;
-        this.currentAppEnv = undefined;
+        this.currentAppEnv      = undefined;
     }
 
     init() {
