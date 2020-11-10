@@ -1,4 +1,3 @@
-'use strict';
 class MySqlFormWizard extends FormWizard {
     // getQuery() {
     //     console.log('MySqlFormWizard.getQuery');

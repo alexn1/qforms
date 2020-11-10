@@ -1,5 +1,3 @@
-'use strict';
-
 class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);

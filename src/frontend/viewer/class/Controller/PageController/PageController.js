@@ -1,5 +1,3 @@
-'use strict';
-
 class PageController extends Controller {
 
     static create(model, parent) {

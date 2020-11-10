@@ -1,5 +1,3 @@
-'use strict';
-
 class Param extends Model {
 
     constructor(data, database) {

@@ -1,5 +1,3 @@
-'use strict';
-
 var fs            = require('fs');
 var Promise       = require('bluebird');
 var child_process = require('child_process');

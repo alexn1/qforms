@@ -1,4 +1,3 @@
-'use strict';
 class RowFormDatePickerFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormDatePickerFieldView;

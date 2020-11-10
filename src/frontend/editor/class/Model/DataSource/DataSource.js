@@ -1,5 +1,3 @@
-'use strict';
-
 class DataSource extends Model {
 
     constructor(data, parent) {

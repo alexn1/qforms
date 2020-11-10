@@ -1,5 +1,3 @@
-'use strict';
-
 class Column extends Model {
 
     constructor(data, table) {

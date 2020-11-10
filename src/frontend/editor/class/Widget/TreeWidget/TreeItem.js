@@ -1,5 +1,3 @@
-'use strict';
-
 class TreeItem {
     
     constructor(parent, caption, className) {

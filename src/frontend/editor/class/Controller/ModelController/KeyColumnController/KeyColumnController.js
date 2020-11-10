@@ -1,5 +1,3 @@
-'use strict';
-
 class KeyColumnController extends ModelController {
 
     constructor(model, item) {

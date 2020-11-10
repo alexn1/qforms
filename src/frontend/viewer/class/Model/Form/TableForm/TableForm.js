@@ -1,5 +1,3 @@
-'use strict';
-
 class TableForm extends Form {
 
     // table form updated immediately after cell modification

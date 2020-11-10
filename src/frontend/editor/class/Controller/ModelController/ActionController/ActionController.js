@@ -1,5 +1,3 @@
-'use strict';
-
 class ActionController extends ModelController {
     constructor(model, item) {
         super(model);

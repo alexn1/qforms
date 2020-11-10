@@ -1,5 +1,3 @@
-'use strict';
-
 class PageController extends VisualController {
 
     constructor(model, item, pageLink) {

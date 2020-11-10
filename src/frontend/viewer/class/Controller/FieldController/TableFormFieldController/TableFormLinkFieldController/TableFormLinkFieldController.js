@@ -1,5 +1,3 @@
-'use strict';
-
 class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormLinkFieldView;

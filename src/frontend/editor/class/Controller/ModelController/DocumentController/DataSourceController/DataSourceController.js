@@ -1,5 +1,3 @@
-'use strict';
-
 class DataSourceController extends DocumentController {
 
     constructor(model, item) {

@@ -1,10 +1,8 @@
-'use strict';
-
 class Application extends Model {
 
-    constructor(data) {
+    /*constructor(data) {
         super(data);
-    }
+    }*/
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);

@@ -1,5 +1,3 @@
-'use strict';
-
 class Application extends Model {
     constructor(data) {
         super(data);

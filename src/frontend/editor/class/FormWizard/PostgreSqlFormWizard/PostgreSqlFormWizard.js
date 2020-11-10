@@ -1,4 +1,3 @@
-'use strict';
 class PostgreSqlFormWizard extends FormWizard {
     // getQuery() {
     //     console.log('PostgreSqlFormWizard.getQuery');

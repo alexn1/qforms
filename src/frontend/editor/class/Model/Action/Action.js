@@ -1,5 +1,3 @@
-'use strict';
-
 class Action extends Model {
     constructor(data, form) {
         super(data);

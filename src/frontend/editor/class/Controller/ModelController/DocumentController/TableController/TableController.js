@@ -1,5 +1,3 @@
-'use strict';
-
 class TableController extends DocumentController {
 
     constructor(model, item, parent) {

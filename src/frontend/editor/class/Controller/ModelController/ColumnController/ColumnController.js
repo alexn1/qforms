@@ -1,5 +1,3 @@
-'use strict';
-
 class ColumnController extends ModelController {
 
     constructor(model, item) {

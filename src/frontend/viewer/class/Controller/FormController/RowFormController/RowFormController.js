@@ -1,5 +1,3 @@
-'use strict';
-
 class RowFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);

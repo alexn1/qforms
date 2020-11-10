@@ -1,5 +1,3 @@
-'use strict';
-
 class RowForm extends Form {
     init() {
         super.init();

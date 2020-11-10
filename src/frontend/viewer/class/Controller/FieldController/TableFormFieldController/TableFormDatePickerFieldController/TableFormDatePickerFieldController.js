@@ -1,5 +1,3 @@
-'use strict';
-
 class TableFormDatePickerFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormDatePickerFieldView;

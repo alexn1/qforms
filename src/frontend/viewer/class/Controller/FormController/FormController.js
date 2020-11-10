@@ -1,5 +1,3 @@
-'use strict';
-
 class FormController extends Controller {
 
     static create(model, parent) {

@@ -1,5 +1,3 @@
-'use strict';
-
 class Page extends Model {
     constructor(data, parent, options) {
         if (!options.id) throw new Error('no page id');

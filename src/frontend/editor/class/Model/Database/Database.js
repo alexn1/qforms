@@ -1,5 +1,3 @@
-'use strict';
-
 class Database extends Model {
 
     constructor(data) {

@@ -1,5 +1,3 @@
-'use strict';
-
 class ComboBoxField extends Field {
 
     getDisplayValue(row) {

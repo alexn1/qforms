@@ -1,5 +1,3 @@
-'use strict';
-
 class Page extends Model {
 
     constructor(data, parent, pageLink) {

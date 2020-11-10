@@ -1,5 +1,3 @@
-'use strict';
-
 class Form extends Model {
     constructor(data, parent) {
         super(data, parent);

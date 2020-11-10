@@ -1,5 +1,3 @@
-'use strict';
-
 class DatabaseController extends DocumentController {
 
     constructor(model, item, applicationController) {

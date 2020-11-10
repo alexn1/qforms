@@ -1,5 +1,3 @@
-'use strict';
-
 class Column  extends Model {
     init() {
         // console.log('Column.init', this.getFullName());

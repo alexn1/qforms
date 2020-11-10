@@ -1,4 +1,3 @@
-'use strict';
 class RowFormComboBoxFieldController extends RowFormFieldController {
     getItems() {
         return this.getRows().map(row => ({

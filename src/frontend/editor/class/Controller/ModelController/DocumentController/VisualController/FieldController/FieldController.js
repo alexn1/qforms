@@ -1,5 +1,3 @@
-'use strict';
-
 class FieldController extends VisualController {
 
     constructor(model, item) {

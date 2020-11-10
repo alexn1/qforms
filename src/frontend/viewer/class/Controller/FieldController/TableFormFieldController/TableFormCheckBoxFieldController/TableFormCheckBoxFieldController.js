@@ -1,5 +1,3 @@
-'use strict';
-
 class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormCheckBoxFieldView;

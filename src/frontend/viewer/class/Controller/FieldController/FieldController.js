@@ -1,5 +1,3 @@
-'use strict';
-
 class FieldController extends Controller {
 
     static create(model, parent) {

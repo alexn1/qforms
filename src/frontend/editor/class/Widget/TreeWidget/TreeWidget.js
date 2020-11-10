@@ -1,10 +1,3 @@
-'use strict';
-
-/*document.addEventListener('DOMContentLoaded', () => {
-    console.log('TreeWidget DOMContentLoaded');
-    TreeWidget.register();
-});*/
-
 function TreeWidget_createObject(el) {
     el._obj = new TreeWidget(el);
     el._obj.init();

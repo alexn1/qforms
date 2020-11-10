@@ -1,4 +1,3 @@
-'use strict';
 class MdiApplicationController extends ApplicationController {
     constructor(model) {
         super(model);

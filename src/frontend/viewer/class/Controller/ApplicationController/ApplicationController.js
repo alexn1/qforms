@@ -1,5 +1,3 @@
-'use strict';
-
 class ApplicationController extends Controller {
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());

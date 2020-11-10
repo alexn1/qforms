@@ -1,5 +1,3 @@
-'use strict';
-
 class ControlController extends VisualController {
 
     constructor(model, item) {

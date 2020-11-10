@@ -1,5 +1,3 @@
-'use strict';
-
 class Controller extends EventEmitter {
     constructor(model, parent) {
         super();

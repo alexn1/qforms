@@ -1,10 +1,3 @@
-'use strict';
-
-/*document.addEventListener('DOMContentLoaded', () => {
-    console.log('TabWidget DOMContentLoaded');
-    TabWidget.register();
-});*/
-
 class TabWidget extends Widget {
 
     static register() {

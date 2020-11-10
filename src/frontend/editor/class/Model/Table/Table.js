@@ -1,5 +1,3 @@
-'use strict';
-
 class Table extends Model {
     constructor(data, database) {
         super(data);

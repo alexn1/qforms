@@ -1,5 +1,3 @@
-'use strict';
-
 class Control extends Model {
 
     constructor(data, form) {

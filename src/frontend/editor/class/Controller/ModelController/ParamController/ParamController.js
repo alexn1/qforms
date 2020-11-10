@@ -1,5 +1,3 @@
-'use strict';
-
 class ParamController extends ModelController {
 
     constructor(model, item) {

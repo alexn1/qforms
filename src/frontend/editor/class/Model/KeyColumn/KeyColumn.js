@@ -1,5 +1,3 @@
-'use strict';
-
 class KeyColumn extends Model {
 
     constructor(data, dataSource) {

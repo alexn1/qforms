@@ -1,5 +1,3 @@
-'use strict';
-
 class Model extends EventEmitter {
     constructor(data, parent) {
         if (!data.name) throw new Error(`${data.class} no name`);
