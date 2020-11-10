@@ -514,8 +514,11 @@ class HostApp {
 
     async appPost(req, res) {
         console.log('HostApp.appPost');
-        const appList = await this.createApp(req);
-        await res.json({appList});
+        const appInfos = await this.createApp(req);
+        await res.json({appInfos: appInfos.map(appInfo => ({
+            fullName: appInfo.fullName,
+            envs    : appInfo.envs
+        }))});
     }
 
     async createApp(req) {

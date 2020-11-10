@@ -43,7 +43,6 @@ class AppView extends ReactComponent {
                         <div className="col-md-offset-2 col-md-6 col-sm-offset-1 col-sm-6 col-xs-8">
                             <ComboBox
                                 value={ctrl.currentAppFullName}
-                                id="lbApp"
                                 items={ctrl.getAppItems()}
                                 size={15}
                                 style={{width: '100%'}}
