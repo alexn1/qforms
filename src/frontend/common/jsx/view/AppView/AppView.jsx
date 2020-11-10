@@ -1,4 +1,37 @@
 class AppView extends ReactComponent {
+    renderModals() {
+        const ctrl = this.props.ctrl;
+        return (
+            <div>
+                {ctrl.modals.map(modal =><Modal key={modal.id.toString()}>
+                    <div className="modal-dialog modal-sm">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <Button classList={['close']} onClick={ctrl.closeModal}>
+                                    <span>&times;</span>
+                                </Button>
+                                <h4 className="modal-title">New Application</h4>
+                            </div>
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="folderName">Folder Name</label>
+                                    <TextBox id="folderName" classList={['form-control']} onCreate={ctrl.onFolderNameCreate}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="appName">Application Name</label>
+                                    <input id="appName" className="form-control"/>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button name="create" type="button" className="btn btn-primary">Create</button>
+                                <Button classList={['btn', 'btn-default']} onClick={ctrl.closeModal}>Close</Button>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>)}
+            </div>
+        );
+    }
     render() {
         console.log('AppView.render');
         const ctrl = this.props.ctrl;
@@ -36,32 +69,7 @@ class AppView extends ReactComponent {
                         </div>
                     </div>
                 </div>
-                <Modal>
-                    <div className="modal-dialog modal-sm">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <Button classList={['close']}>
-                                    <span>&times;</span>
-                                </Button>
-                                <h4 className="modal-title">New Application</h4>
-                            </div>
-                            <div className="modal-body">
-                                <div className="form-group">
-                                    <label htmlFor="folderName">Folder Name</label>
-                                    <TextBox id="folderName" classList={['form-control']}/>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="appName">Application Name</label>
-                                    <input id="appName" className="form-control"/>
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button name="create" type="button" className="btn btn-primary">Create</button>
-                                <button type="button" className="btn btn-default">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </Modal>
+                {this.renderModals()}
             </div>
         );
     }

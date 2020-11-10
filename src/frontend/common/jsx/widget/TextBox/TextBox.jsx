@@ -2,9 +2,13 @@ class TextBox extends ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
+        this.input = React.createRef();
         this.state = {
             value: this.props.value || ''
         }
+    }
+    getInput() {
+        return this.input.current;
     }
     onChange = e => {
         // console.log('TextBox.onChange', e.target.value);
@@ -22,6 +26,7 @@ class TextBox extends ReactComponent {
         // console.log('TextBox.render');
         return (
             <input
+                ref={this.input}
                 id={this.props.id}
                 className={this.getClassName()}
                 type="text"

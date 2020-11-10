@@ -6,6 +6,10 @@ class HomeController {
         this.view = null;
         this.currentAppFullName = undefined;
         this.currentAppEnv      = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
     }
 
     init() {
@@ -28,7 +32,7 @@ class HomeController {
     }
 
     getEnvItems() {
-        console.log('HomeController.getEnvItems', this.currentAppFullName);
+        // console.log('HomeController.getEnvItems', this.currentAppFullName);
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) return appInfo.envs.map(env => ({value: env, title: env}));
@@ -36,7 +40,7 @@ class HomeController {
     }
 
     getAppInfo(fullName) {
-        console.log('HomeController.getAppInfo', fullName);
+        // console.log('HomeController.getAppInfo', fullName);
         return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
 
@@ -72,7 +76,12 @@ class HomeController {
         }
     }
 
-    btnCreate_Click = e => {
+    btnCreate_Click = async e => {
+        this.modals.push({id: 1});
+        await this.view.rerender();
+        this.folderNameTextBox.getInput().focus();
+
+        /*
         $.get('home/html/newapp.html', (html) => {
             $(document.body).append(html);
             $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -84,7 +93,7 @@ class HomeController {
             });
             $('#myModal').modal('show');
             $("#myModal input[id='folderName']").focus();
-        });
+        });*/
     }
 
     /*static fillSelect(id, options) {
@@ -117,5 +126,15 @@ class HomeController {
                 lbApp.appendChild(option);
             });
         }
+    }
+
+    closeModal = e => {
+        console.log('HomeController.closeModal');
+        this.modals.pop();
+        this.view.rerender();
+    }
+    onFolderNameCreate = textBox => {
+        console.log('HomeController.onFolderNameCreate');
+        this.folderNameTextBox = textBox;
     }
 }
