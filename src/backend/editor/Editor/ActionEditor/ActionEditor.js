@@ -1,5 +1,3 @@
-'use strict';
-
 const Editor = require('../Editor');
 
 class ActionEditor extends Editor {

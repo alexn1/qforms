@@ -1,4 +1,3 @@
-'use strict';
 module.exports.text                              = {en: require('./en'), ru: require('./ru')};
 module.exports.Helper                            = require('./Helper');
 module.exports.JsonFile                          = require('./JsonFile');

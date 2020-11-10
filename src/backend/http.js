@@ -1,4 +1,3 @@
-'use strict';
 // console.log('http.js');
 const http = require('http');
 const path = require('path');

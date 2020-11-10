@@ -1,4 +1,3 @@
-'use strict';
 // console.log('server.js');
 const express    = require('express');
 // const morgan     = require('morgan');

@@ -1,5 +1,3 @@
-'use strict';
-
 const path    = require('path');
 const ejs     = require('ejs');
 const qforms = require('../../qforms');

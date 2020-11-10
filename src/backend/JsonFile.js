@@ -1,5 +1,3 @@
-'use strict';
-
 const Helper = require('./Helper');
 
 class JsonFile {

@@ -1,5 +1,3 @@
-'use strict';
-
 const DatabaseEditor = require('../DatabaseEditor');
 
 class MySqlDatabaseEditor extends DatabaseEditor {

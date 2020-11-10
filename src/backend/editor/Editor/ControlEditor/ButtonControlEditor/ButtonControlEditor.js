@@ -1,5 +1,3 @@
-'use strict';
-
 const ControlEditor = require('../ControlEditor');
 
 class ButtonControlEditor extends ControlEditor {

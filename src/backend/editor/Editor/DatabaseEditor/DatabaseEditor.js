@@ -1,5 +1,3 @@
-'use strict';
-
 const Editor = require('../Editor');
 const ParamEditor = require('../ParamEditor/ParamEditor');
 const TableEditor = require('../TableEditor/TableEditor');

@@ -1,5 +1,3 @@
-'use strict';
-
 const DataSourceEditor = require('../DataSourceEditor');
 
 class SqlDataSourceEditor extends DataSourceEditor {

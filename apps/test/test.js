@@ -1,4 +1,3 @@
-'use strict';
 class testController extends ApplicationController {
     getViewClass() {
         return testView;
