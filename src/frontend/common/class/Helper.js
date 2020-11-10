@@ -1,5 +1,3 @@
-'use strict';
-
 class Helper {
     /*static currentDate() {
         const now = new Date();

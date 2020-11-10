@@ -1,5 +1,3 @@
-'use strict';
-
 const { Pool, Client } = require('pg');
 const Database = require('../Database');
 

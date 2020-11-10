@@ -1,6 +1,4 @@
-'use strict';
-
-const path    = require('path');
+const path  = require('path');
 const Model = require('../Model');
 
 class Control extends Model {

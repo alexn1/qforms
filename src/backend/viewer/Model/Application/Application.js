@@ -1,5 +1,3 @@
-'use strict';
-
 const path          = require('path');
 const _             = require('underscore');
 const child_process = require('child_process');

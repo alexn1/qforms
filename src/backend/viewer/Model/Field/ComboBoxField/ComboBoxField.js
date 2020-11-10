@@ -1,6 +1,4 @@
-'use strict';
-
-const path    = require('path');
+const path   = require('path');
 const Field  = require('../Field');
 
 class ComboBoxField extends Field {

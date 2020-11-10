@@ -1,5 +1,3 @@
-'use strict';
-
 const Editor = require('../Editor');
 const ColumnEditor = require('../ColumnEditor/ColumnEditor');
 

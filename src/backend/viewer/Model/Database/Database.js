@@ -1,5 +1,3 @@
-'use strict';
-
 const Model     = require('../Model');
 const Param     = require('../Param/Param');
 const BaseModel = require('../../../BaseModel');

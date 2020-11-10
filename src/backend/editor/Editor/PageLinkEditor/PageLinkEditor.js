@@ -1,5 +1,3 @@
-'use strict';
-
 const Editor = require('../Editor');
 
 class PageLinkEditor extends Editor {

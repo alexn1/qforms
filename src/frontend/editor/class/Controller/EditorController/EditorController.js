@@ -1,5 +1,3 @@
-'use strict';
-
 class EditorController {
     constructor(appData) {
         this.appData = appData;

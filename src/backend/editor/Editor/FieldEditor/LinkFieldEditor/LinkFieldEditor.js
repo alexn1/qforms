@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const FieldEditor = require('../FieldEditor');
 

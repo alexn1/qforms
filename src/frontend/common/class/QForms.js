@@ -1,5 +1,3 @@
-'use strict';
-
 class QForms {
     constructor(data) {
         console.log('QForms.constructor', data);
