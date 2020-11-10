@@ -108,12 +108,13 @@ class HomeController {
     }*/
 
     async createApp(folderName, appName) {
-        const args = {
+
+        const data = await QForms.doHttpRequest({
             action: 'new',
             folder: folderName,
             name  : appName
-        };
-        const data = await QForms.doHttpRequest(args);
+        });
+        console.log('data:', data);
         if (data.appList) {
             const lbApp = document.getElementById('lbApp');
             lbApp.innerHTML = '';
@@ -128,7 +129,7 @@ class HomeController {
         }
     }
 
-    closeModal = e => {
+    closeModal = () => {
         console.log('HomeController.closeModal');
         this.modals.pop();
         this.view.rerender();
@@ -136,5 +137,18 @@ class HomeController {
     onFolderNameCreate = textBox => {
         console.log('HomeController.onFolderNameCreate');
         this.folderNameTextBox = textBox;
+    }
+    onFolderNameChange = folderName => {
+        // console.log('HomeController.onFolderNameChange', folderName);
+        this.folderName = folderName;
+    }
+    onAppNameChange = appName => {
+        this.appName = appName;
+    }
+    onCreateClick = async e => {
+        console.log('HomeController.onCreateClick');
+        console.log(this.folderName, this.appName);
+        this.closeModal();
+        await this.createApp(this.folderName, this.appName);
     }
 }

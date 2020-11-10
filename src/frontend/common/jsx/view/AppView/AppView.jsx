@@ -15,15 +15,16 @@ class AppView extends ReactComponent {
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label htmlFor="folderName">Folder Name</label>
-                                    <TextBox id="folderName" classList={['form-control']} onCreate={ctrl.onFolderNameCreate}/>
+                                    <TextBox id="folderName" classList={['form-control']} onCreate={ctrl.onFolderNameCreate} onChange={ctrl.onFolderNameChange}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="appName">Application Name</label>
-                                    <input id="appName" className="form-control"/>
+                                    <TextBox id="appName" classList={['form-control']} onChange={ctrl.onAppNameChange}/>
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button name="create" type="button" className="btn btn-primary">Create</button>
+                                {/*<button name="create" type="button" className="btn btn-primary">Create</button>*/}
+                                <Button name="create" classList={['btn', 'btn-primary']} onClick={ctrl.onCreateClick}>Create</Button>
                                 <Button classList={['btn', 'btn-default']} onClick={ctrl.closeModal}>Close</Button>
                             </div>
                         </div>
