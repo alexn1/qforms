@@ -91,7 +91,7 @@ class QForms {
         document.querySelector('html').classList.remove('wait');
     }
 
-    static go(url, method, params) {
+    /*static go(url, method, params) {
         let inputs = '';
         for (const name in params) {
             inputs += '<input type="hidden" name="{name}" value="{value}">'
@@ -103,7 +103,7 @@ class QForms {
             .replace('{method}', method)
             .replace('{inputs}', inputs);
         $(form).appendTo('body').submit().remove();
-    }
+    }*/
 
     static insertNewNodeAt(parent, child, i) {
         if (i < 0 || i > parent.children.length) {
