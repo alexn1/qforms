@@ -17,7 +17,6 @@ class HomeController {
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
-        console.log('this.currentAppEnv:', this.currentAppEnv);
     }
 
     createView(root) {
