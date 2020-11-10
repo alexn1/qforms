@@ -133,10 +133,10 @@ class QForms {
         }
     }
 
-    static moveArrayElement(arr, oldIndex, newIndex) {
+    /*static moveArrayElement(arr, oldIndex, newIndex) {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
         return arr;
-    }
+    }*/
 
     /*static merge(o1, o2) {
         const oN = {};
