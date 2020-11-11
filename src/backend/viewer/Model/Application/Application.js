@@ -274,10 +274,7 @@ class Application extends Model {
             const page = this.pages[context.query.page];
             return page.getTitle(context, data.pages[0]);
         }
-        // sdi
-        const firstPage = this.pages[Object.keys(this.pages)[0]];
-        return firstPage.getTitle(context, data.pages[0]);
-        // return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
+        return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }
 }
 
