@@ -52,6 +52,9 @@ class Page extends Model {
     async fill(context) {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
         const data = await super.fill(context);
+        delete data.formatVersion;
+        delete data.width;
+        delete data.height;
         data.newMode = !!context.newMode;
         return data;
     }
@@ -70,6 +73,9 @@ class Page extends Model {
     async respond(res, context) {
         const data = await this.fill(context);
         await res.json({page: data});
+    }
+    getTitle(context, data) {
+        return this.getAttr('caption');
     }
 }
 

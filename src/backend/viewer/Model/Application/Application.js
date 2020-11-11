@@ -78,6 +78,7 @@ class Application extends Model {
         delete data.user;
         delete data.password;
         delete data.authentication;
+        delete data.formatVersion;
 
         // env
         data.env = this.hostApp.nodeEnv;
@@ -86,7 +87,7 @@ class Application extends Model {
         data.text = this.getText();
 
         // params
-        data.params = Application.getParams(context);
+        // data.params = Application.getParams(context);
 
         // menu
         data.menu = await this.createMenu(context);
@@ -268,8 +269,12 @@ class Application extends Model {
     getComponents() {
         return components;
     }
-    getTitle(context) {
-        return `${context.appDirName}/${this.getAttr('caption')}[${this.getEnv()}] - QForms`;
+    getTitle(context, data) {
+        if (context.query.page) {
+            const page = this.pages[context.query.page];
+            return page.getTitle();
+        }
+        return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }
 }
 

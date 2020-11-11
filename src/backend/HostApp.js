@@ -166,7 +166,7 @@ class HostApp {
                 // viewerClassJs : this.viewerClassJs,
                 links         : application.css,
                 scripts       : application.js,
-                title         : application.getTitle(context),
+                title         : application.getTitle(context, data),
                 data          : JSON.stringify(data, null, 4),
                 // env           : application.getEnv(),
                 components    : application.getComponents()
