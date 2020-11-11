@@ -89,12 +89,12 @@ class HostApp {
 
         this.publicDirPath = publicDirPath;
         this.appsDirPath  = appsDirPath;
-        this.commonClassCss = Helper.getFilePathsSync(publicDirPath, 'common/class', 'css');
+        // this.commonClassCss = Helper.getFilePathsSync(publicDirPath, 'common/class', 'css');
         this.commonClassJs = Helper.getFilePathsSync(publicDirPath, 'common/class', 'js' );
-        this.homeClassCss = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'css');
-        this.homeClassJs = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'js' );
-        this.viewerClassCss = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'css');
-        this.viewerClassJs = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'js' );
+        // this.homeClassCss = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'css');
+        // this.homeClassJs = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'js' );
+        // this.viewerClassCss = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'css');
+        // this.viewerClassJs = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'js' );
         this.editorClassCss = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'css');
         this.editorClassJs = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'js' );
 
@@ -478,7 +478,7 @@ class HostApp {
         const appFileContent = JSON.stringify(app, null, 4);
         res.render('editor/view', {
             version        : pkg.version,
-            commonClassCss : this.commonClassCss,
+            // commonClassCss : this.commonClassCss,
             commonClassJs  : this.commonClassJs,
             editorClassCss : this.editorClassCss,
             editorClassJs  : this.editorClassJs,
