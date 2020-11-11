@@ -1,10 +1,11 @@
 const path          = require('path');
-const fs            = require('fs');
-const child_process = require('child_process');
-const stream        = require('stream');
+// const fs            = require('fs');
+// const child_process = require('child_process');
+// const stream        = require('stream');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
 const BaseModel = require('../../../BaseModel');
+const Helper = require('../../../Helper');      // for eval
 
 class Page extends Model {
 
@@ -78,7 +79,5 @@ class Page extends Model {
         return this.getAttr('caption');
     }
 }
-
-
 
 module.exports = Page;

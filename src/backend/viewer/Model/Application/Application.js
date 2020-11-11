@@ -272,7 +272,7 @@ class Application extends Model {
     getTitle(context, data) {
         if (context.query.page) {
             const page = this.pages[context.query.page];
-            return page.getTitle();
+            return page.getTitle(context, data.pages[0]);
         }
         return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }
