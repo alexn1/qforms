@@ -169,9 +169,7 @@ class QForms {
       return new Date();
     }*/
 
-    /*static render(view, data) {
+    static render(view, data) {
         return new EJS({text:view}).render(data);
-    }*/
-
-
+    }
 }
