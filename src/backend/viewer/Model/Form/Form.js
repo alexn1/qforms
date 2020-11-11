@@ -114,7 +114,7 @@ class Form extends Model {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
     isNewMode(context) {
-        return context.newMode;
+        return !!context.newMode;
     }
 
 }
