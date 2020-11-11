@@ -1,10 +1,17 @@
 class RowForm extends Form {
     init() {
         super.init();
-        if (this.getPage().isNewMode()) {
+        if (this.isNewMode()) {
             this.getDataSource().newRow(this.createRow());
         }
         this.fillParams(this.getRow()); // dump row values to page params
+    }
+
+    isNewMode() {
+        const newMode = this.getNewMode();
+        if (newMode ===  'true') return  true;
+        if (newMode === 'false') return false;
+        return this.getPage().isNewMode();
     }
 
     fillParams(row) {
@@ -51,6 +58,10 @@ class RowForm extends Form {
                 this.fields[name].valueToPageParams(this.getRow())
             });
         }
+    }
+
+    getNewMode() {
+        return this.data.newMode;
     }
 
 }
