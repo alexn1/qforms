@@ -210,7 +210,7 @@ class SqlDataSource extends DataSource {
         delete data.limit;
 
         // if form data source named default then check mode
-        if (this.parent instanceof qforms.Form && this.getName() === 'default' && context.newMode) {
+        if (this.parent instanceof qforms.Form && this.getName() === 'default' && this.parent.isNewMode(context)) {
             if (this.getAttr('limit') !== '') {
                 data.limit = parseInt(this.getAttr('limit'));
             }
