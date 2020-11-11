@@ -3,24 +3,18 @@
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
-    <title><%=caption%>[<%=env%>] - QForms</title>
+    <title><%=title%></title>
     <!-- EventEmitter -->
     <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
     <script src="common/lib/react/react.development.js"></script>
     <script src="common/lib/react/react-dom.development.js"></script>
-    <!-- qforms css -->
-<!--    <link rel="stylesheet" href="common/class/all.css"/>-->
-    <link rel="stylesheet" href="common/jsx/all.css"/>
-    <!-- viewer css -->
-<%viewerClassCss.forEach((filePath) => {
-        %>    <link rel="stylesheet" href="<%=filePath%>"/><%='\n'%><%
-    });%>
-    <!-- qforms js -->
+    <!-- framework js -->
     <script src="common/class/all.js"></script>
     <script src="viewer/class/all.js"></script>
-
-    <!-- components -->
+    <!-- framework css -->
+    <link rel="stylesheet" href="common/jsx/all.css"/>
+    <!-- framework jsx -->
     <%components.forEach(filePath => {
         %>  <script src="<%=filePath%>"></script><%='\n'%><%
     });%>

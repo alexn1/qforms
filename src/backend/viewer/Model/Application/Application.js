@@ -268,9 +268,9 @@ class Application extends Model {
     getComponents() {
         return components;
     }
-
-
-
+    getTitle(context) {
+        return `${context.appDirName}/${this.getAttr('caption')}[${this.getEnv()}] - QForms`;
+    }
 }
 
 module.exports = Application;

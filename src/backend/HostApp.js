@@ -160,15 +160,15 @@ class HostApp {
             res.render('viewer/view', {
                 version       : pkg.version,
                 debugApp      : context.query.debug,
-                commonClassCss: this.commonClassCss,
-                commonClassJs : this.commonClassJs,
-                viewerClassCss: this.viewerClassCss,
-                viewerClassJs : this.viewerClassJs,
+                // commonClassCss: this.commonClassCss,
+                // commonClassJs : this.commonClassJs,
+                // viewerClassCss: this.viewerClassCss,
+                // viewerClassJs : this.viewerClassJs,
                 links         : application.css,
                 scripts       : application.js,
-                caption       : `${context.appDirName}/${application.getAttr('caption')}`,
+                title         : application.getTitle(context),
                 data          : JSON.stringify(data, null, 4),
-                env           : application.getEnv(),
+                // env           : application.getEnv(),
                 components    : application.getComponents()
             });
         }
