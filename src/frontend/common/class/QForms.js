@@ -54,7 +54,7 @@ class QForms {
     static async doHttpRequest(data) {
         console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
         const result = await QForms.postJson(window.location.href, data);
-        console.warn(`result ${data.page}.${data.form}.${data.ds}.${data.action}:`, result);
+        console.warn(`result ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, result);
         return result;
     }
 
