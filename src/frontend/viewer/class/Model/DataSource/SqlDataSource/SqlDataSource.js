@@ -193,10 +193,8 @@ class SqlDataSource extends DataSource {
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
-                // ...this.params,
                 ...this.getPageParams(),
                 ...params,
-                // ...(this.getLimit() ? {frame : this.frame,} : {}),
             })
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
@@ -215,7 +213,6 @@ class SqlDataSource extends DataSource {
             form          : form ? form.getName()      : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
-                // ...this.params,
                 ...this.getPageParams(),
                 ...params,
             })
@@ -237,7 +234,6 @@ class SqlDataSource extends DataSource {
             row           : this.getRowWithChanges(row),
             parentPageName: page.parentPageName || null
         };
-
         const data = await this.getApp().request(args);
         const [key] = Object.keys(data);
         if (!key) throw new Error('no inserted row key');
@@ -245,39 +241,16 @@ class SqlDataSource extends DataSource {
         const values = data[key];
         for (const column in values) row[column] = values[column];
         console.log('row:', row);
-
-
         this.news.splice(this.news.indexOf(row), 1);
         this.changes.clear();
         this.addRow(row);
-
         // console.log('this.news:', this.news);
-
-        // creating index with for rows
-        // const vals = this.getKeysAndChilds(this.data.rows);
-        /*const vals = this.getKeysAndChilds([row]);
-        this.rowsByKey = vals.rowsByKey;
-        this.childs    = vals.childs;*/
-
-
-
-
         const keyParams = DataSource.keyToParams(key);
-
-        /*
-        // save key params for refill
-        for (const name in keyParams) {
-            this.params[name] = keyParams[name];
-        }
-        console.log('this.params', this.params);
-        */
-
         const e = {source: this, key, keyParams};
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(e);
         }
         this.getTable().emit('insert', e);
-
         return key;
     }
 
@@ -303,7 +276,6 @@ class SqlDataSource extends DataSource {
             parentPageName: page ? page.parentPageName : null
         };
         const data = await this.getApp().request(args);
-        // this.removeRow(key);
         await this.refill();
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete({source: this, key: key});
