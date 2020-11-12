@@ -153,10 +153,11 @@ class DataSource extends Model {
         this.news.push(row);
     }
 
-    getSingleRow() {
+    getSingleRow(withChanges = false) {
         if (this.news[0]) return this.news[0];
         const row = this.rows[0];
         if (!row) throw new Error('no single row');
+        if (withChanges) return this.getRowWithChanges(row);
         return row;
     }
 

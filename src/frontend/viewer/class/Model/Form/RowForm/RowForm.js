@@ -30,8 +30,8 @@ class RowForm extends Form {
         super.onDataSourceInsert(e);
     }
 
-    getRow() {
-        return this.getDataSource().getSingleRow();
+    getRow(withChanges) {
+        return this.getDataSource().getSingleRow(withChanges);
     }
 
     getKey() {
