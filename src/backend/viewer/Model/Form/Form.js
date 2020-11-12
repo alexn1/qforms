@@ -98,7 +98,7 @@ class Form extends Model {
 
     async rpc(context, name, params) {
         console.log('Form.rpc', name, params);
-        if (this[name]) return this[name](params);
+        if (this[name]) return await this[name](params);
         return {errorMessage: `no rpc ${name}`};
     }
 

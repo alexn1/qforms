@@ -60,11 +60,10 @@ class Page extends Model {
         return data;
     }
 
-    async rpc(context) {
-        console.log('Page.rpc');
-        return {
-            result: 'Page.rpc'
-        };
+    async rpc(context, name, params) {
+        console.log('Page.rpc', name, params);
+        if (this[name]) return await this[name](params);
+        return {errorMessage: `no rpc ${name}`};
     }
 
     getApp() {
