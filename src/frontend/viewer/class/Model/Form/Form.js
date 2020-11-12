@@ -103,9 +103,9 @@ class Form extends Model {
         if (!name) throw new Error('no name');
         return await this.getPage().getApp().request({
             action: 'rpc',
-            page: this.getPage().getName(),
-            form: this.getName(),
-            name: name,
+            page  : this.getPage().getName(),
+            form  : this.getName(),
+            name  : name,
             params: Helper.encodeObject(params)
         });
     }
