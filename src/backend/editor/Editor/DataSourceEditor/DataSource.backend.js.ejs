@@ -8,16 +8,16 @@ class <%=page%><%=form%><%=dataSource%>Controller extends <%=_class%>Controller 
         return super.select(context);
     }
 
-    insert(context) {
-        return super.insert(this, context);
+    insert(context, params) {
+        return super.insert(context, params);
     }
 
     update(context) {
-        return super.update(this, context);
+        return super.update(context);
     }
 
     delete(context) {
-        return super.delete(this, context);
+        return super.delete(context);
     }
 
 }

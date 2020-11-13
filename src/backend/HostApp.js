@@ -341,7 +341,7 @@ class HostApp {
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
-            const result = await dataSource.insert(context);
+            const result = await dataSource.insert(context, context.params);
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.getDatabase().commit(cnn);
             await res.json(result);
