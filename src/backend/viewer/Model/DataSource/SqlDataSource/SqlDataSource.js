@@ -170,7 +170,7 @@ class SqlDataSource extends DataSource {
         const autoTypes = this.getAutoTypes();
         console.log('autoTypes:', autoTypes);
 
-        const values = await this.getDatabase().insertRow(context, this.getAttr('table'), autoColumns, context.row, autoTypes);
+        const values = await this.getDatabase().insertRow(context, this.getAttr('table'), autoColumns, context.params, autoTypes);
         console.log('values:', values);
 
         const key = this.getKeyFromValues(values);
@@ -194,10 +194,8 @@ class SqlDataSource extends DataSource {
 
     async delete(context) {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
-        // const keyValues = this.getKeyValuesFromRow(context.row);
         const keyValues = this.getKeyValuesFromKey(context.params.key);
         const query = this.getDatabase().getDeleteQuery(this.getAttr('table'), keyValues);
-        // await this.getDatabase().queryResult(context, query, row);
         await this.getDatabase().queryResult(context, query, keyValues);
     }
 

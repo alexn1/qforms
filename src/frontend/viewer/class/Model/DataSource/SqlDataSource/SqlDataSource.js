@@ -231,7 +231,7 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             // ds            : this.getName(),
-            row           : this.getRowWithChanges(row),
+            params        : this.getRowWithChanges(row),
             parentPageName: page.parentPageName || null
         };
         const data = await this.getApp().request(args);
