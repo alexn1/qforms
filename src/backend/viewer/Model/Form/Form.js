@@ -81,9 +81,9 @@ class Form extends Model {
         });
     }
 
-    async update(context, ds) {
+    async update(context) {
         console.log('Form.update', this.getFullName());
-        const dataSource = this.dataSources[ds];
+        const dataSource = this.dataSources.default;
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);

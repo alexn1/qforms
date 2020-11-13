@@ -259,7 +259,7 @@ class HostApp {
         console.log('HostApp.update', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
         const form = page.forms[req.body.form];
-        const result = await form.update(context, req.body.ds);
+        const result = await form.update(context);
         if (result === undefined) throw new Error('action update: result is undefined');
         await res.json(result);
     }
@@ -337,7 +337,7 @@ class HostApp {
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+        const dataSource = page.forms[req.body.form].dataSources.default;
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
@@ -355,7 +355,7 @@ class HostApp {
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+        const dataSource = page.forms[req.body.form].dataSources.default;
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
