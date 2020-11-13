@@ -383,7 +383,7 @@ class HostApp {
         } else {
             model = application;
         }
-        const result = await model.rpc(context, req.body.name, context.params);
+        const result = await model.rpc(req.body.name, context);
         await res.json(result);
     }
 

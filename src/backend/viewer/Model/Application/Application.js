@@ -230,9 +230,9 @@ class Application extends Model {
         };
     }
 
-    async rpc(context, name, params) {
-        console.log('Application.rpc', name, params);
-        if (this[name]) return await this[name](params);
+    async rpc(name, context) {
+        console.log('Application.rpc', name);
+        if (this[name]) return await this[name](context);
         return {errorMessage: `no rpc ${name}`};
     }
 
