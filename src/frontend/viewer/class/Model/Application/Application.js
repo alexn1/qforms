@@ -62,4 +62,13 @@ class Application extends Model {
     getText() {
         return this.data.text;
     }
+    async rpc(name, params) {
+        console.log('Application.rpc', this.getFullName(), name, params);
+        if (!name) throw new Error('no name');
+        return await this.request({
+            action: 'rpc',
+            name  : name,
+            params: Helper.encodeObject(params)
+        });
+    }
 }
