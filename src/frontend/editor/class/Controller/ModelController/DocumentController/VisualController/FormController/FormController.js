@@ -225,7 +225,8 @@ class FormController extends VisualController {
                 refreshButton: [
                     'true',
                     'false'
-                ]
+                ],
+                newMode: ['', 'true', 'false']
             }
         };
     }
