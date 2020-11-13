@@ -59,7 +59,7 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldLabel(fieldCtrl, key) {
+    renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
         return (
             <div key={key} className="label">
@@ -68,8 +68,8 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderFieldView(fieldCtrl, key) {
-        // console.log('RowFormView.renderFieldView', fieldCtrl.model.getClassName());
+    renderField(fieldCtrl, key) {
+        // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         if ([
             'DatePickerField',
             'ComboBoxField',
@@ -91,8 +91,8 @@ class RowFormView extends ReactComponent {
             ctrl={fieldCtrl}
         />;
     }
-    renderFieldTooltip(fieldCtrl, key) {
-        // console.log('RowFormView.renderToolbar:', fieldCtrl.state);
+    renderTooltip(fieldCtrl, key) {
+        // console.log('RowFormView.renderTooltip:', fieldCtrl.state);
         return (
             <div key={key} className="tooltip">
                 <Tooltip position="left" type="alert" hidden={fieldCtrl.state.error === null} tip={fieldCtrl.state.error}/>
@@ -107,9 +107,9 @@ class RowFormView extends ReactComponent {
                 {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
                     const fieldCtrl = ctrl.fields[name];
                     return [
-                        this.renderFieldLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
-                        this.renderFieldView(fieldCtrl, `field.${fieldCtrl.model.getName()}`),
-                        this.renderFieldTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
+                        this.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
+                        this.renderField(fieldCtrl, `field.${fieldCtrl.model.getName()}`),
+                        this.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}
             </div>
