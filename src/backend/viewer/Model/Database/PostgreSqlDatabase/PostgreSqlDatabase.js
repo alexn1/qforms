@@ -44,7 +44,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async queryResult(context, query, params = null) {
-        console.log('PostgreSqlDatabase.queryResult', query, params/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        console.log('PostgreSqlDatabase.queryResult', {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
@@ -56,7 +56,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     static async queryResult(cnn, query, params = null) {
-        console.log('PostgreSqlDatabase.queryResult', query, params/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        console.log('static PostgreSqlDatabase.queryResult', {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
