@@ -27,6 +27,7 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.onChange', viewValue);
         try {
             this.setValueFromView(viewValue);
+            this.emit('change', {value: viewValue});
             this.state.error = null;
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);

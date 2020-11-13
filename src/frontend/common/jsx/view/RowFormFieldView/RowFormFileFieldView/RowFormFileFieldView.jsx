@@ -19,6 +19,12 @@ class RowFormFileFieldView extends RowFormFieldView {
     onClearClick = e => {
         this.props.ctrl.onChange('');
     }
+    onChange = async e => {
+        const file = e.target.files[0];
+        const viewValue = await Helper.readFileAsDataURL(file);
+        // console.log('viewValue:', viewValue);
+        this.props.ctrl.onChange(viewValue);
+    }
     render() {
         const ctrl = this.props.ctrl;
         const value = ctrl.getValueForView();
@@ -32,7 +38,7 @@ class RowFormFileFieldView extends RowFormFieldView {
                     <span className="length">{value.length}</span>
                 </div>
             }
-            <input type="file" onChange={ctrl.onFileChange} disabled={!ctrl.isEditable()}/>
+            <input type="file" onChange={this.onChange} disabled={!ctrl.isEditable()}/>
             {!!value && <Button onClick={this.onClearClick} enabled={ctrl.isEditable()}>Clear</Button>}
         </div>;
     }
