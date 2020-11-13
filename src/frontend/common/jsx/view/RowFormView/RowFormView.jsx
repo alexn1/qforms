@@ -68,7 +68,7 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderField(fieldCtrl, key) {
+    renderField(fieldCtrl, props = {}) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         if ([
             'DatePickerField',
@@ -80,16 +80,16 @@ class RowFormView extends ReactComponent {
             'FileField',
         ].includes(fieldCtrl.model.getClassName())) {
             return React.createElement(fieldCtrl.getViewClass(), {
-                key : key,
                 classList: ['field'],
                 ctrl: fieldCtrl,
+                ...props
             });
         }
-        return <RowFormTextBoxFieldView
-            key={key}
-            classList={['field']}
-            ctrl={fieldCtrl}
-        />;
+        return React.createElement(RowFormTextBoxFieldView, {
+            classList: ['field'],
+            ctrl: fieldCtrl,
+            ...props
+        });
     }
     renderTooltip(fieldCtrl, key) {
         // console.log('RowFormView.renderTooltip:', fieldCtrl.state);
@@ -108,7 +108,7 @@ class RowFormView extends ReactComponent {
                     const fieldCtrl = ctrl.fields[name];
                     return [
                         this.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
-                        this.renderField(fieldCtrl, `field.${fieldCtrl.model.getName()}`),
+                        this.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
                         this.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}

@@ -9,6 +9,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceholder()}
                 format={ctrl.model.getFormat()}
+                oldDates={this.props.oldDates}
             />
         </div>;
     }
