@@ -146,7 +146,7 @@ class DataSource extends Model {
     }
 
     newRow(row) {
-        console.log('DataSource.newRow', row);
+        console.log('DataSource.newRow', this.getFullName(), row);
         if (this.data.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
