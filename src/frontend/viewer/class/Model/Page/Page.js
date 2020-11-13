@@ -146,5 +146,14 @@ class Page extends Model {
             this.params[name] = e.keyParams[name];
         }
     }
-
+    async rpc(name, params) {
+        console.log('Page.rpc', this.getFullName(), name, params);
+        if (!name) throw new Error('no name');
+        return await this.getApp().request({
+            action: 'rpc',
+            page  : this.getName(),
+            name  : name,
+            params: Helper.encodeObject(params)
+        });
+    }
 }
