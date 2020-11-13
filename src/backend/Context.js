@@ -19,10 +19,9 @@ class Context {
         // user
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
 
-        if (context.query            === undefined) context.query            = req.query ? Context.decodeObject(req.query) : {};
-        if (context.changes          === undefined) context.changes          = Context.decodeChanges(req.body.changes);
-        if (context.params           === undefined) context.params           = req.body.params ? Context.decodeObject(req.body.params) : {};
-        // if (context.row              === undefined) context.row              = req.body.row    ? Context.decodeObject(req.body.row)    : {};
+        if (context.query            === undefined) context.query            = req.query        ? Context.decodeObject(req.query)         : {};
+        if (context.params           === undefined) context.params           = req.body.params  ? Context.decodeObject(req.body.params)   : {};
+        if (context.changes          === undefined) context.changes          = req.body.changes ? Context.decodeChanges(req.body.changes) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
 
