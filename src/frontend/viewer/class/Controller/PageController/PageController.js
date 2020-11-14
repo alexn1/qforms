@@ -117,11 +117,13 @@ class PageController extends Controller {
         return this.model.getCaption();
     }
     static createLink(params) {
-        const query = window.location.search.split('?')[1];
+        // const query = window.location.search.split('?')[1];
+        // console.log('query:', query);
         return [
             window.location.pathname,
             [
-                ...(query ? query.split('&') : []),
+                // ...(query ? query.split('&') : []),
+                ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
                 ...Object.keys(params).map(name => `${name}=${encodeURI(Helper.encodeValue(params[name]))}`)
             ].join('&')
         ].join('?');
