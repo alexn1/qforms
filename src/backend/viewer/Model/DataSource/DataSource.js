@@ -92,15 +92,15 @@ class DataSource extends Model {
         }
     }
 
-    encodeRow(row) {
-        // console.log('DataSource.encodeRow', this.getFullName());
-        for (const name in row) {
-            /*if (row[name] instanceof Buffer) {
-                row[name] = JSON.stringify(row[name].toString('base64'));
-            }*/
-            row[name] = JSON.stringify(row[name]);
-        }
-    }
+    // encodeRow(row) {
+    //     // console.log('DataSource.encodeRow', this.getFullName());
+    //     for (const name in row) {
+    //         /*if (row[name] instanceof Buffer) {
+    //             row[name] = JSON.stringify(row[name].toString('base64'));
+    //         }*/
+    //         row[name] = JSON.stringify(row[name]);
+    //     }
+    // }
 
     getApp() {
         return this.parent.getApp();
@@ -186,7 +186,7 @@ class DataSource extends Model {
     async fill(context) {
         //console.log('DataSource.fill', this.getFullName());
         let data = await super.fill(context);
-        delete data.view;
+        // delete data.view;
         delete data.js;
 
         // keyColumns
