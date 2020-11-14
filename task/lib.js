@@ -1,3 +1,5 @@
+/*
+console.log('lib.js');
 const path = require('path');
 const gulp = require('gulp');
 
@@ -13,3 +15,4 @@ function lib() {
 }
 
 module.exports = lib;
+*/
