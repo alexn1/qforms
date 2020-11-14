@@ -34,9 +34,9 @@ class Page extends Model {
         this.forms              = {};
     }
 
-    getCustomViewFilePath() {
+    /*getCustomViewFilePath() {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

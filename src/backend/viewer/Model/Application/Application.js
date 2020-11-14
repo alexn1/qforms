@@ -45,9 +45,9 @@ class Application extends Model {
         this.dataSources        = {};
     }
 
-    getCustomViewFilePath() {
+    /*getCustomViewFilePath() {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

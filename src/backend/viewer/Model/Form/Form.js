@@ -17,9 +17,9 @@ class Form extends Model {
         this.actions            = {};
     }
 
-    getCustomViewFilePath() {
+    /*getCustomViewFilePath() {
         return path.join(this.getDirPath(),  `${this.getName()}.ejs`);
-    }
+    }*/
 
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'forms', this.getName());

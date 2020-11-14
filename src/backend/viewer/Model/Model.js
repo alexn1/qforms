@@ -119,9 +119,9 @@ class Model extends BaseModel {
         return null;
     }*/
 
-    getCustomViewFilePath() {
+    /*getCustomViewFilePath() {
         return null;
-    }
+    }*/
 
 }
 
