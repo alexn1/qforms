@@ -49,7 +49,7 @@ class Helper {
     }
 
     static encodeValue(value) {
-        return JSON.stringify(value)
+        return JSON.stringify(value);
     }
 
     static decodeObject(eObj) {

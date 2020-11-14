@@ -407,6 +407,9 @@ class Helper {
     static decodeValue(rawValue) {
         return JSON.parse(rawValue, Helper.dateTimeReviver);
     }
+    static encodeValue(value) {
+        return JSON.stringify(value);
+    }
 }
 
 module.exports = Helper;
