@@ -4,7 +4,7 @@ const child_process = require('child_process');
 const axios         = require('axios');
 
 const qforms  = require('../../../qforms');
-const server  = require('../../../server');
+// const server  = require('../../../server');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
@@ -49,13 +49,13 @@ class Application extends Model {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view',
             'ApplicationView.ejs'
         );
-    }
+    }*/
 
     getDirPath() {
         return this.appInfo.dirPath;

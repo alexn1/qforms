@@ -7,13 +7,13 @@ class TextAreaField extends Field {
         return new TextAreaField(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/TextAreaFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
 }
 

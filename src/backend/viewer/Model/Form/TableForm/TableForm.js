@@ -7,13 +7,13 @@ class TableForm extends Form {
         return new TableForm(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FormController/TableFormController/view',
             this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
     // async fill(context) {
     //     console.log('TableForm.fill', this.constructor.name, this.getFullName());

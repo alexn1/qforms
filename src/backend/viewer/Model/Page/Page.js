@@ -38,13 +38,13 @@ class Page extends Model {
         return path.join(this.getDirPath(), `${this.getName()}.ejs`);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/PageController/view',
             this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'pages', this.getName());

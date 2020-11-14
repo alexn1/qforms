@@ -7,13 +7,13 @@ class DatePickerField extends Field {
         return new DatePickerField(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
 }
 

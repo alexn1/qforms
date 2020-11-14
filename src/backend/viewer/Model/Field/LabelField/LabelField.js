@@ -7,13 +7,13 @@ class LabelField extends Field {
         return new LabelField(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/LabelFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
 }
 

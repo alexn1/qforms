@@ -7,13 +7,13 @@ class TreeForm extends Form {
         return new TreeForm(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FormController/TreeFormController/view',
             this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
     async fill(context) {
         console.log('TreeForm.fill', this.constructor.name, this.getName());

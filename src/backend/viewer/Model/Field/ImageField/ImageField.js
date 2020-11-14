@@ -7,13 +7,13 @@ class ImageField extends Field {
         return new ImageField(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/ImageFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
 }
 

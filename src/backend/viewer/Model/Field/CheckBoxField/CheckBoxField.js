@@ -7,13 +7,13 @@ class CheckBoxField extends Field {
         return new CheckBoxField(data, parent);
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return path.join(
             this.getApp().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/CheckBoxFieldController/view',
             this.parent.data['@class'] + this.data['@class'] + 'View.ejs'
         );
-    }
+    }*/
 
 }
 

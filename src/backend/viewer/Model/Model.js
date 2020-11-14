@@ -89,7 +89,7 @@ class Model extends BaseModel {
         }
     }
 
-    async getView() {
+    /*async getView() {
         const viewFilePath = this.getViewFilePath();
         if (!viewFilePath) return null;
         const customViewFilePath = this.getCustomViewFilePath();
@@ -101,7 +101,7 @@ class Model extends BaseModel {
             return qforms.Helper.readTextFile(viewFilePath);
         }
         return await qforms.Helper.readTextFile(viewFilePath);
-    }
+    }*/
 
     async getJs() {
         if (!this.getDirPath()) return null;
@@ -115,9 +115,9 @@ class Model extends BaseModel {
         return null;
     }
 
-    getViewFilePath() {
+    /*getViewFilePath() {
         return null;
-    }
+    }*/
 
     getCustomViewFilePath() {
         return null;
