@@ -218,24 +218,6 @@ class Helper {
             return Helper.readTextFile(filePath);
         }
         return null;
-
-        // return new Promise((resolve, reject) => {
-        //     fs.exists(filePath, exists => {
-        //         if (exists) {
-        //             Helper.readTextFile(filePath).then(resolve).catch(reject);
-        //             /*
-        //             fs.readFile(filePath, 'utf8', (err, content) => {
-        //                 if (err) {
-        //                     reject(err);
-        //                 } else {
-        //                     resolve(content);
-        //                 }
-        //             });*/
-        //         } else {
-        //             resolve(null);
-        //         }
-        //     });
-        // });
     }
 
     static readBinaryFile(filePath) {
