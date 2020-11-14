@@ -4,7 +4,9 @@ const BUILD_PATH = './build';
 
 function root() {
     return gulp.src([
-        './package.json'
+        './LICENSE',
+        './package.json',
+        './README.md',
     ]).pipe(gulp.dest(BUILD_PATH));
 }
 
