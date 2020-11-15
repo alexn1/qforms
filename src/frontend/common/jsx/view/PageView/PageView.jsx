@@ -8,11 +8,11 @@ class PageView extends ReactComponent {
             return {
                 name   : form.getName(),
                 title  : form.getCaption(),
-                content: this.renderForm(formCtrl)
+                content: PageView.renderForm(formCtrl)
             };
         });
     }
-    renderForm(formCtrl) {
+    static renderForm(formCtrl) {
         return React.createElement(formCtrl.getViewClass(), {
             key     : formCtrl.model.getName(),
             ctrl    : formCtrl,
@@ -25,7 +25,7 @@ class PageView extends ReactComponent {
         const model = ctrl.model;
         return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
             const formCtrl = ctrl.forms[name];
-            return this.renderForm(formCtrl);
+            return PageView.renderForm(formCtrl);
         });
     }
     renderCaption() {
