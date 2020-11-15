@@ -59,7 +59,7 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderLabel(fieldCtrl, key) {
+    static renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
         return (
             <div key={key} className="label">
@@ -107,7 +107,7 @@ class RowFormView extends ReactComponent {
                 {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
                     const fieldCtrl = ctrl.fields[name];
                     return [
-                        this.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
+                        RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
                         RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
                         this.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
