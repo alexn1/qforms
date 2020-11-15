@@ -2,10 +2,10 @@ class ApplicationView extends ReactComponent {
     renderActivePage() {
         const ctrl = this.props.ctrl;
         if (ctrl.activePage) {
-            return this.renderPage(ctrl.activePage);
+            return ApplicationView.renderPage(ctrl.activePage);
         }
     }
-    renderPage(pageCtrl) {
+    static renderPage(pageCtrl) {
         return React.createElement(pageCtrl.getViewClass(), {
             ctrl    : pageCtrl,
             onCreate: pageCtrl.onViewCreate
@@ -14,7 +14,7 @@ class ApplicationView extends ReactComponent {
     renderModalPages() {
         return this.props.ctrl.modalPages.map(pageCtrl =>
             <Modal key={pageCtrl.model.id}>
-                {this.renderPage(pageCtrl)}
+                {ApplicationView.renderPage(pageCtrl)}
             </Modal>
         );
     }
