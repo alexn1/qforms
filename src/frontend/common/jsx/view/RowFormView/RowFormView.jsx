@@ -68,7 +68,7 @@ class RowFormView extends ReactComponent {
             </div>
         );
     }
-    renderField(fieldCtrl, props = {}) {
+    static renderField(fieldCtrl, props = {}) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         if ([
             'DatePickerField',
@@ -108,7 +108,7 @@ class RowFormView extends ReactComponent {
                     const fieldCtrl = ctrl.fields[name];
                     return [
                         this.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
-                        this.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
+                        RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
                         this.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}
