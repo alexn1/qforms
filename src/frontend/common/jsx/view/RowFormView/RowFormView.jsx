@@ -91,7 +91,7 @@ class RowFormView extends ReactComponent {
             ...props
         });
     }
-    renderTooltip(fieldCtrl, key) {
+    static renderTooltip(fieldCtrl, key) {
         // console.log('RowFormView.renderTooltip:', fieldCtrl.state);
         return (
             <div key={key} className="tooltip">
@@ -109,7 +109,7 @@ class RowFormView extends ReactComponent {
                     return [
                         RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
                         RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
-                        this.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
+                        RowFormView.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}
             </div>
