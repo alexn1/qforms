@@ -35,6 +35,10 @@ class Helper {
         return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
 
+    static formatNumber(value) {
+        return new Intl.NumberFormat('ru-RU').format(value);
+    }
+
     static today() {
         const now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate());
