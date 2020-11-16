@@ -74,7 +74,7 @@ class RowFormFieldController extends FieldController {
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {
-        // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName());
+        // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getPlaceholder());
         if (this.model.getPlaceholder()) return this.model.getPlaceholder();
         if (ApplicationController.isInDebugMode()) {
             // try {
