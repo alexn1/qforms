@@ -91,8 +91,8 @@ class RowFormView extends ReactComponent {
             ...props
         });
     }
-    static renderTooltip(fieldCtrl, key) {
-        // console.log('RowFormView.renderTooltip:', fieldCtrl.state);
+    static renderError(fieldCtrl, key) {
+        // console.log('RowFormView.renderError:', fieldCtrl.state);
         return (
             <div key={key} className="tooltip">
                 <Tooltip position="left" type="alert" hidden={fieldCtrl.state.error === null} tip={fieldCtrl.state.error}/>
@@ -109,7 +109,7 @@ class RowFormView extends ReactComponent {
                     return [
                         RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
                         RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
-                        RowFormView.renderTooltip(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
+                        RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
                     ];
                 })}
             </div>
