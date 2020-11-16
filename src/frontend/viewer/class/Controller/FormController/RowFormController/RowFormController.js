@@ -76,12 +76,14 @@ class RowFormController extends FormController {
         }
         return true;
     }
-
-    onSaveClick = async () => {
-        console.log('RowFormController.onSaveClick');
+    validate() {
         for (const name in this.fields) {
             this.fields[name].validate();
         }
+    }
+    onSaveClick = async () => {
+        console.log('RowFormController.onSaveClick');
+        this.validate();
         if (this.isValid()) {
             await this.model.update();
         } else {

@@ -15,7 +15,7 @@ class Controller extends EventEmitter {
         this.deinited = true;
     }
     onViewCreate = view => {
-        // console.log('Controller.onViewCreate');
+        // console.log('Controller.onViewCreate', this.model.getFullName());
         this.view = view;
     }
     rerender() {
