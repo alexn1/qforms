@@ -174,10 +174,13 @@ class PageEditor extends Editor {
         return dirPath;
     }
 
-    async getCustomFilePath(ext) {
+    /*async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
+        if (ext === 'js') {
+            return path.join(customDirPath, 'Controller.js');
+        }
         return path.join(customDirPath, this.name + '.' + ext);
-    }
+    }*/
 
     newDataSource(params) {
         const name   = params['name'];

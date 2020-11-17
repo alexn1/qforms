@@ -125,10 +125,13 @@ class ApplicationEditor extends Editor {
         return this.appInfo.dirPath;
     }
 
-    async getCustomFilePath(ext) {
+    /*async getCustomFilePath(ext) {
         console.log('ApplicationEditor.getCustomFilePath');
+        if (ext === 'js') {
+            return path.join(this.appInfo.dirPath, 'Controller.js');
+        }
         return path.join(this.appInfo.dirPath, this.name + '.' + ext);
-    }
+    }*/
 
     createDataSourceEditor(name) {
         const dataSourceData = this.getData('dataSources', name);

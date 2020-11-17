@@ -103,6 +103,13 @@ class Editor extends BaseModel {
     getAppEditor() {
         return null;
     }
+    async getCustomFilePath(ext) {
+        const customDirPath = await this.getCustomDirPath();
+        if (ext === 'js') {
+            return path.join(customDirPath, 'Controller.js');
+        }
+        return path.join(customDirPath, this.name + '.' + ext);
+    }
 }
 
 module.exports = Editor;
