@@ -27,7 +27,7 @@ class RowForm extends Form {
             page.getName(),
             'forms',
             name,
-            name + '.backend.js'
+            'Model.backend.js'
         );
         // console.log('customClassFilePath:', customClassFilePath);
         const content = await qforms.Helper.getFileContent(customClassFilePath);

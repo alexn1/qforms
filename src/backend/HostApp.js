@@ -169,7 +169,7 @@ class HostApp {
                 title         : application.getTitle(context, data),
                 data          : JSON.stringify(data, null, 4),
                 // env           : application.getEnv(),
-                components    : application.getComponents()
+                // components    : application.getComponents()
             });
         }
     }

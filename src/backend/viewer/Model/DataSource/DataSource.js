@@ -14,7 +14,7 @@ class DataSource extends Model {
                 'pages', form.getPage().getName(),
                 'forms', form.getName(),
                 'dataSources', name,
-                `${name}.backend.js`
+                'Model.backend.js'
             );
             const content = await qforms.Helper.getFileContent(customBackendJsFilePath);
             if (content) {

@@ -8,7 +8,7 @@ const qforms  = require('../../../qforms');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
-const components = require('../../../components.json');
+// const components = require('../../../components.json');
 
 
 class Application extends Model {
@@ -18,7 +18,7 @@ class Application extends Model {
         const appInfo = await qforms.Helper.getAppInfo(appFilePath, env);
         const json = await qforms.Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
-        const customClassFilePath = path.join(appInfo.dirPath, `${appInfo.name}.backend.js`);
+        const customClassFilePath = path.join(appInfo.dirPath, 'Model.backend.js');
         //console.log('customClassFilePath:', customClassFilePath);
         const js = await qforms.Helper.getFileContent(customClassFilePath);
         if (js) {
@@ -265,9 +265,9 @@ class Application extends Model {
         return this.databases[name];
     }
 
-    getComponents() {
+    /*getComponents() {
         return components;
-    }
+    }*/
     getTitle(context, data) {
         if (context.query.page) {
             const page = this.pages[context.query.page];
