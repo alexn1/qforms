@@ -18,7 +18,7 @@ const SRC_PATH   = "./src";
 
 function frontend_home_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/home/class/**/*.js'))
-        .pipe(concat('home.js'))
+        .pipe(concat('app.js'))
         //.pipe(uglify())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
