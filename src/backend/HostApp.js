@@ -90,13 +90,13 @@ class HostApp {
         this.publicDirPath = publicDirPath;
         this.appsDirPath  = appsDirPath;
         // this.commonClassCss = Helper.getFilePathsSync(publicDirPath, 'common/class', 'css');
-        this.commonClassJs = Helper.getFilePathsSync(publicDirPath, 'common/class', 'js' );
+        // this.commonClassJs = Helper.getFilePathsSync(publicDirPath, 'common/class', 'js' );
         // this.homeClassCss = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'css');
         // this.homeClassJs = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'js' );
         // this.viewerClassCss = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'css');
         // this.viewerClassJs = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'js' );
-        this.editorClassCss = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'css');
-        this.editorClassJs = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'js' );
+        // this.editorClassCss = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'css');
+        // this.editorClassJs = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'js' );
 
 
         // production by default to disable editor
@@ -479,9 +479,9 @@ class HostApp {
         res.render('editor/view', {
             version        : pkg.version,
             // commonClassCss : this.commonClassCss,
-            commonClassJs  : this.commonClassJs,
-            editorClassCss : this.editorClassCss,
-            editorClassJs  : this.editorClassJs,
+            // commonClassJs  : this.commonClassJs,
+            // editorClassCss : this.editorClassCss,
+            // editorClassJs  : this.editorClassJs,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
             appFileContent : appFileContent,
             appDirName     : context.appDirName,
