@@ -1,2 +1,2 @@
-module.exports.build = require("./gulp/build");
-module.exports.clean = require('./gulp/clean');
+module.exports.build = require("./task/build");
+module.exports.clean = require('./task/clean');
