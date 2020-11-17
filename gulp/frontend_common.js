@@ -9,18 +9,10 @@ const babel      = require('gulp-babel');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-/*function frontend_common_class_less() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/common/class/!**!/!*.less'))
-        .pipe(less())
-        .pipe(concat('all.css'))
-        .pipe(minifyCss())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/class')));
-}*/
-
 function frontend_common_jsx_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.less'))
         .pipe(less())
-        .pipe(concat('jsx.css'))
+        .pipe(concat('common-jsx.css'))
         // .pipe(minifyCss())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
@@ -28,7 +20,7 @@ function frontend_common_jsx_less() {
 function frontend_common_jsx_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.jsx'))
         .pipe(babel())
-        .pipe(concat('jsx.js'))
+        .pipe(concat('common-jsx.js'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
@@ -38,8 +30,6 @@ function frontend_common_class_js() {
         //.pipe(uglify())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
-
-
 
 function frontend_common_lib() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/lib/**/*'))
