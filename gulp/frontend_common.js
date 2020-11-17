@@ -21,7 +21,7 @@ function frontend_common_jsx_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.less'))
         .pipe(less())
         .pipe(concat('jsx.css'))
-        .pipe(minifyCss())
+        // .pipe(minifyCss())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
