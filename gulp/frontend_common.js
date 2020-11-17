@@ -28,7 +28,8 @@ function frontend_common_jsx_less() {
 function frontend_common_jsx_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.jsx'))
         .pipe(babel())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/jsx')));
+        .pipe(concat('jsx.js'))
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
 function frontend_common_class_js() {
@@ -45,7 +46,7 @@ function frontend_common_img() {
 
 function frontend_common_lib() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/lib/**/*'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/lib')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
 }
 
 const frontend_common_class = gulp.series(frontend_common_class_js, /*frontend_common_class_less,*/ frontend_common_jsx_less, frontend_common_jsx_js);

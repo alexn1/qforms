@@ -5,17 +5,15 @@
     <meta charset="utf-8"/>
     <title>QForms monitor v<%=version%></title>
     <!-- EventEmitter -->
-    <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
+    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
-    <script src="common/lib/react/react.development.js"></script>
-    <script src="common/lib/react/react-dom.development.js"></script>
+    <script src="lib/react/react.development.js"></script>
+    <script src="lib/react/react-dom.development.js"></script>
     <!-- qforms jsx css -->
-    <link rel="stylesheet" href="common/jsx/all.css"/>
+    <link rel="stylesheet" href="jsx.css"/>
     <!-- qforms js -->
-    <script src="common/class/all.js"></script>
-    <!-- jsx js -->
-    <script src="common/jsx/ReactComponent/ReactComponent.js"></script>
-    <script src="common/jsx/view/MonitorView/MonitorView.js"></script>
+    <script src="common.js"></script>
+    <script src="jsx.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = <%- dump %>;

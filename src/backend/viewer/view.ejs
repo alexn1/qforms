@@ -5,19 +5,16 @@
     <meta charset="utf-8"/>
     <title><%=title%></title>
     <!-- EventEmitter -->
-    <script src="common/lib/EventEmitter/EventEmitter.min.js"></script>
+    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
-    <script src="common/lib/react/react.development.js"></script>
-    <script src="common/lib/react/react-dom.development.js"></script>
+    <script src="lib/react/react.development.js"></script>
+    <script src="lib/react/react-dom.development.js"></script>
     <!-- framework js -->
     <script src="common.js"></script>
     <script src="viewer.js"></script>
+    <script src="jsx.js"></script>
     <!-- framework css -->
     <link rel="stylesheet" href="jsx.css"/>
-    <!-- framework jsx -->
-    <%components.forEach(filePath => {
-        %>  <script src="<%=filePath%>"></script><%='\n'%><%
-    });%>
     <!-- app css -->
     <%links.forEach(link => {
         %><link rel="stylesheet" href="<%=link%>"/>
