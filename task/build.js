@@ -5,4 +5,4 @@ const root     = require("./root");
 const backend  = require("./backend");
 const frontend = require("./frontend");
 
-module.exports = gulp.series(/*clean, */root, backend, frontend);
+module.exports = gulp.series(clean, root, backend, frontend);
