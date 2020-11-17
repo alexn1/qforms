@@ -8,27 +8,27 @@ const less      = require('gulp-less');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-function frontend_viewer_class_css() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.less'))
+/*function frontend_viewer_class_css() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/!**!/!*.less'))
         .pipe(less())
         //.pipe(concat('all.css'))
         //.pipe(minifyCss())
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
-}
+}*/
 
-function frontend_viewer_class_ejs() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.ejs'))
+/*function frontend_viewer_class_ejs() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/!**!/!*.ejs'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
-}
+}*/
 
 function frontend_viewer_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.js'))
-        .pipe(concat('all.js'))
+        .pipe(concat('viewer.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/class')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
-const frontend_viewer_class     = gulp.series(frontend_viewer_class_js, frontend_viewer_class_css, frontend_viewer_class_ejs);
+const frontend_viewer_class     = gulp.series(frontend_viewer_class_js, /*frontend_viewer_class_css, frontend_viewer_class_ejs*/);
 const frontend_viewer           = gulp.series(frontend_viewer_class);
 
 module.exports = frontend_viewer;
