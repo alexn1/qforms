@@ -21,7 +21,7 @@ class Editor extends BaseModel {
         if (text === '') {
             text = emptyTemplate;
         }
-        await qforms.Helper.writeFile(newFilePath, text);
+        await qforms.Helper.writeFile2(newFilePath, text);
         return text;
     }
 
@@ -32,7 +32,7 @@ class Editor extends BaseModel {
         }
         const template = await qforms.Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await qforms.Helper.writeFile(newFilePath, content);
+        await qforms.Helper.writeFile2(newFilePath, content);
         return content;
     }
 
@@ -53,7 +53,7 @@ class Editor extends BaseModel {
         if (!exists) {
             throw new Error("File {fileName} doesn't exist.".replace('{fileName}', path.basename(filePath)));
         }
-        return await qforms.Helper.writeFile(filePath, content);
+        return await qforms.Helper.writeFile2(filePath, content);
     }
 
     async getCustomFile(ext) {

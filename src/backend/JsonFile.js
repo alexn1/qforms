@@ -17,7 +17,7 @@ class JsonFile {
             this.data = {};
         }
         this.content = JSON.stringify(this.data, null, 4);
-        await Helper.writeFile(this.filePath, this.content);
+        await Helper.writeFile2(this.filePath, this.content);
     }
 
     async read() {
@@ -29,7 +29,7 @@ class JsonFile {
     async save() {
         console.log('JsonFile.save');
         this.content = JSON.stringify(this.data, null, 4);
-        await Helper.writeFile(this.filePath, this.content);
+        await Helper.writeFile2(this.filePath, this.content);
     }
 
     getAttr(name) {

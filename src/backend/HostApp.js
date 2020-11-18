@@ -528,7 +528,7 @@ class HostApp {
         const folder = req.body.folder;
         const name = req.body.name;
         const appDirPath  = path.join(this.appsDirPath, folder);
-        const appFilePath = path.join(appDirPath,                 name + '.json');
+        const appFilePath = path.join(appDirPath, name + '.json');
         await qforms.Helper.createDirIfNotExists(appDirPath);
         await qforms.ApplicationEditor.createAppFile(appFilePath, {name});
         const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
