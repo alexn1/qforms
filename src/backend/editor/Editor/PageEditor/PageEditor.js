@@ -170,7 +170,7 @@ class PageEditor extends Editor {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'pages', this.name);
-        await qforms.Helper.createDirIfNotExists(dirPath);
+        // await qforms.Helper.createDirIfNotExists(dirPath);
         return dirPath;
     }
 

@@ -56,8 +56,8 @@ class ApplicationEditor extends Editor {
         const pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath    = path.join(pagesDirPath, params.name);
         const pageFilePath   = path.join(pageDirPath , params.name + '.json');
-        await qforms.Helper.createDirIfNotExists(pagesDirPath);
-        await qforms.Helper.createDirIfNotExists(pageDirPath);
+        // await qforms.Helper.createDirIfNotExists(pagesDirPath);
+        // await qforms.Helper.createDirIfNotExists(pageDirPath);
         const pageFile = new qforms.JsonFile(pageFilePath, qforms.PageEditor.createData(params));
         await pageFile.create();
         this.newPageLink(params);
