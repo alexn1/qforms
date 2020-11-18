@@ -14,21 +14,21 @@ function frontend_common_jsx_less() {
         .pipe(less())
         .pipe(concat('common-jsx.css'))
         // .pipe(minifyCss())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
 function frontend_common_jsx_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.jsx'))
         .pipe(babel())
         .pipe(concat('common-jsx.js'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_common_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/class/**/*.js'))
         .pipe(concat('common.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_common_lib() {

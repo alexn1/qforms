@@ -13,14 +13,14 @@ function frontend_viewer_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.js'))
         .pipe(concat('viewer.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_viewer_jsx_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/View/**/*.jsx'))
         .pipe(babel())
         .pipe(concat('viewer-jsx.js'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_viewer_jsx_less() {
@@ -28,7 +28,7 @@ function frontend_viewer_jsx_less() {
         .pipe(less())
         .pipe(concat('viewer-jsx.css'))
         // .pipe(minifyCss())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
 const frontend_viewer = gulp.series(frontend_viewer_class_js, frontend_viewer_jsx_js, frontend_viewer_jsx_less);

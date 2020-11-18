@@ -12,7 +12,7 @@ function frontend_home_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/home/class/**/*.js'))
         .pipe(concat('app.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 const frontend_home = gulp.series(frontend_home_class_js);

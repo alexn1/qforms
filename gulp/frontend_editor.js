@@ -13,7 +13,7 @@ function frontend_editor_class_css() {
         .pipe(less())
         .pipe(concat('editor.css'))
         // .pipe(minifyCss())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
 function frontend_editor_class_html() {
@@ -25,7 +25,7 @@ function frontend_editor_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.js'))
         .pipe(concat('editor.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_editor_lib() {
