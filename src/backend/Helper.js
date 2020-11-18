@@ -327,7 +327,7 @@ class Helper {
     }
 
     static exists(path) {
-        //console.log('Helper.exists');
+        console.log('Helper.exists', path);
         return new Promise(resolve => {
             fs.exists(path, exists => {
                 resolve(exists);
