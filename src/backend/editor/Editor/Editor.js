@@ -41,7 +41,7 @@ class Editor extends BaseModel {
     }
 
     async getFile(filePath) {
-        console.log('Editor.getFile');
+        console.log('Editor.getFile', filePath);
         const exists = await qforms.Helper.exists(filePath);
         if (exists) {
             return await qforms.Helper.readTextFile(filePath);
@@ -57,7 +57,7 @@ class Editor extends BaseModel {
     }
 
     async getCustomFile(ext) {
-        console.log('Editor.getCustomFile');
+        console.log('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }

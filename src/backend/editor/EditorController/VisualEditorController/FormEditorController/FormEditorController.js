@@ -67,7 +67,7 @@ class FormEditorController extends VisualEditorController {
                 const formEditor = pageEditor.createFormEditor(params.form);
                 result.data.ejs = await formEditor.getCustomFile('ejs');
                 result.data.css = await formEditor.getCustomFile('css');
-                result.data.js = await formEditor.getCustomFile('js');
+                result.data.js  = await formEditor.getCustomFile('js');
                 return result;
             default:
                 return result;
