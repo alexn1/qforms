@@ -244,7 +244,32 @@ class Helper {
         });
     }
 
+    static createPath(arr) {
+        if (arr.length === 0) throw new Error('no path elements');
+        if (arr.length === 1) return '/';
+        return arr.join('/');
+    }
+
+    static getDirPath(filePath) {
+        const arr = filePath.split('/');
+        return Helper.createPath(arr.slice(0, arr.length - 1));
+    }
+
+    static async createDirIfNotExists2(originalDirPath) {
+        console.log('Helper.createDirIfNotExists2', originalDirPath);
+        const arr = originalDirPath.split('/');
+        for (let i = 1; i <= arr.length; i++) {
+            const dirPath = Helper.createPath(arr.slice(0, i));
+            const exists = await Helper.exists(dirPath);
+            console.log('dirPath', i, dirPath, exists);
+            if (!exists) {
+                await Helper.createDirIfNotExists(dirPath);
+            }
+        }
+    }
+
     static createDirIfNotExists(dirPath) {
+        console.log('Helper.createDirIfNotExists', dirPath);
         return new Promise((resolve, reject) => {
             fs.exists(dirPath, exists => {
                 if (exists) {
@@ -327,7 +352,7 @@ class Helper {
     }
 
     static exists(path) {
-        console.log('Helper.exists', path);
+        // console.log('Helper.exists', path);
         return new Promise(resolve => {
             fs.exists(path, exists => {
                 resolve(exists);
@@ -335,10 +360,13 @@ class Helper {
         });
     }
 
-    static writeFile(path, content) {
-        //console.log('Helper.writeFile');
+    static writeFile(filePath, content) {
+        console.log('Helper.writeFile', filePath);
+
+
+
         return new Promise((resolve, reject) => {
-            fs.writeFile(path, content, 'utf8', err => {
+            fs.writeFile(filePath, content, 'utf8', err => {
                 if (err) {
                     reject(err);
                 } else {
@@ -346,6 +374,11 @@ class Helper {
                 }
             });
         });
+    }
+    static async writeFile2(filePath, content) {
+        const dirPath = Helper.getDirPath(filePath);
+        await Helper.createDirIfNotExists2(dirPath);
+        return await Helper.writeFile(filePath, content);
     }
 
     static escapeHtml(string) {
