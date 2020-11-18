@@ -36,7 +36,7 @@ function frontend_common_lib() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
 }
 
-const frontend_common_class = gulp.series(frontend_common_class_js, /*frontend_common_class_less,*/ frontend_common_jsx_less, frontend_common_jsx_js);
+const frontend_common_class = gulp.series(frontend_common_class_js, frontend_common_jsx_less, frontend_common_jsx_js);
 const frontend_common       = gulp.series(frontend_common_class, frontend_common_lib);
 
 module.exports = frontend_common;

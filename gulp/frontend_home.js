@@ -8,14 +8,6 @@ const less      = require('gulp-less');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-/*function frontend_home_class_css() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/home/class/!**!/!*.less'))
-        .pipe(less())
-        .pipe(concat('all.css'))
-        .pipe(minifyCss())
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/home/class')));
-}*/
-
 function frontend_home_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/home/class/**/*.js'))
         .pipe(concat('app.js'))
@@ -23,12 +15,6 @@ function frontend_home_class_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
-/*function frontend_home_html() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/home/html/!**!/!*'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/home/html')));
-}*/
-
-const frontend_home_class = gulp.series(frontend_home_class_js/*, frontend_home_class_css*/);
-const frontend_home       = gulp.series(frontend_home_class/*, frontend_home_html*/);
+const frontend_home = gulp.series(frontend_home_class_js);
 
 module.exports = frontend_home;
