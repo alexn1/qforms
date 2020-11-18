@@ -38,10 +38,11 @@ class RowFormFieldController extends FieldController {
             this.state.error = err.message;
         }
         if (!this.state.error) {
-            this.validate();
+            /*this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());
-            }
+            }*/
+            this.model.setValue(this.getRow(), this.getValue());
         }
         this.refreshChanged();
         this.parent.onFieldChange({source: this});
