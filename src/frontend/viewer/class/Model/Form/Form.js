@@ -101,13 +101,14 @@ class Form extends Model {
     async rpc(name, params) {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        return await this.getPage().getApp().request({
+        const result = await this.getPage().getApp().request({
             action: 'rpc',
             page  : this.getPage().getName(),
             form  : this.getName(),
             name  : name,
             params: Helper.encodeObject(params)
         });
+        return result;
     }
 
     getKey() {

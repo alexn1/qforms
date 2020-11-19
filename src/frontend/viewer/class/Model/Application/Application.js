@@ -65,10 +65,12 @@ class Application extends Model {
     async rpc(name, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        return await this.request({
+        const result = await this.request({
             action: 'rpc',
             name  : name,
             params: Helper.encodeObject(params)
         });
+        if (result.errorMessage) throw new Error(result.errorMessage);
+        return result;
     }
 }

@@ -149,11 +149,13 @@ class Page extends Model {
     async rpc(name, params) {
         console.log('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        return await this.getApp().request({
+        const result =  await this.getApp().request({
             action: 'rpc',
             page  : this.getName(),
             name  : name,
             params: Helper.encodeObject(params)
         });
+        if (result.errorMessage) throw new Error(result.errorMessage);
+        return result;
     }
 }
