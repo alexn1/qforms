@@ -138,7 +138,7 @@ class DataSourceEditorController extends EditorController {
         switch (params.view) {
             case 'QueryView.ejs':
                 const dataSourceEditor = await this.createDataSourceEditor(params);
-                const backendJs = await dataSourceEditor.getCustomFile('backend.js');
+                const backendJs = await dataSourceEditor.getCustomFile('back.js');
                 result.data.backendJs = backendJs;
                 return result;
             default:
@@ -148,7 +148,7 @@ class DataSourceEditorController extends EditorController {
 
     async saveController(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
-        await dataSourceEditor.saveCustomFile('backend.js', params.text);
+        await dataSourceEditor.saveCustomFile('back.js', params.text);
         return null;
     }
 

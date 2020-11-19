@@ -15,7 +15,7 @@ class Page extends Model {
             parent.getDirPath(),
             'pages',
             name,
-            'Model.backend.js'
+            'Model.back.js'
         );
         const content = await qforms.Helper.getFileContent(customClassFilePath);
         if (content) {

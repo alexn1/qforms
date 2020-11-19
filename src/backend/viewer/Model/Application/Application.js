@@ -18,7 +18,7 @@ class Application extends Model {
         const appInfo = await qforms.Helper.getAppInfo(appFilePath, env);
         const json = await qforms.Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
-        const customClassFilePath = path.join(appInfo.dirPath, 'Model.backend.js');
+        const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         //console.log('customClassFilePath:', customClassFilePath);
         const js = await qforms.Helper.getFileContent(customClassFilePath);
         if (js) {

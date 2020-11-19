@@ -22,7 +22,7 @@ class SqlDataSource extends DataSource {
                 form.getName(),
                 'dataSources',
                 name,
-                'Model.backend.js'
+                'Model.back.js'
             );
             const content = await qforms.Helper.getFileContent(customClassFilePath);
             if (content) {

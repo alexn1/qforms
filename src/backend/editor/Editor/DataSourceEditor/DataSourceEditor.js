@@ -60,8 +60,8 @@ class DataSourceEditor extends Editor {
     }*/
 
     async createBackendJs(params) {
-        const templateFilePath = path.join(__dirname, 'DataSource.backend.js.ejs');
-        const customJsFilePath = await this.getCustomFilePath('backend.js');
+        const templateFilePath = path.join(__dirname, 'DataSource.back.js.ejs');
+        const customJsFilePath = await this.getCustomFilePath('back.js');
         const backendJs = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page      : params.page ? params.page : '',
             form      : params.form ? params.form : '',
