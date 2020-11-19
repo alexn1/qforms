@@ -21,6 +21,11 @@ function frontend_editor_class_html() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
 }
 
+function frontend_editor_class_ejs() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.ejs'))
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/class')));
+}
+
 function frontend_editor_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.js'))
         .pipe(concat('editor.js'))
@@ -38,7 +43,7 @@ function frontend_editor_img() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/img')));
 }
 
-const frontend_editor_class = gulp.series(frontend_editor_class_js, frontend_editor_class_css, frontend_editor_class_html);
+const frontend_editor_class = gulp.series(frontend_editor_class_js, frontend_editor_class_css, frontend_editor_class_html, frontend_editor_class_ejs);
 const frontend_editor = gulp.series(frontend_editor_class, frontend_editor_lib, frontend_editor_img);
 
 module.exports = frontend_editor;
