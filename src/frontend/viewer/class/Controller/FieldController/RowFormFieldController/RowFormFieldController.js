@@ -2,9 +2,9 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            value      : null,
-            changed    : false,
-            error      : null
+            value  : null,
+            changed: false,
+            error  : null
         };
     }
     init() {
