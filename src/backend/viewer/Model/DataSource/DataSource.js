@@ -72,7 +72,7 @@ class DataSource extends Model {
                 this.calcColumns(rows[i]);
             }
         }
-        DataSource.encodeRows(rows);
+        // DataSource.encodeRows(rows);
     }
 
     calcColumns(row) {

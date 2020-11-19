@@ -221,11 +221,13 @@ class SqlDataSource extends DataSource {
         }
         if (this.isDefaultOnRowForm()) {
             const row = await this.selectSingle(context);
+            DataSource.encodeRow(row);
             if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
             data.rows = [row];
         } else {
             try {
                 const [rows, count] = await this.selectMultiple(context);
+                DataSource.encodeRows(rows);
                 data.rows = rows;
                 data.count = count;
             } catch (err) {

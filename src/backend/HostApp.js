@@ -6,9 +6,8 @@ const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
-// const Context = require('./Context');
 const MonitorModel = require('./monitor/MonitorModel');
-
+const DataSource = require('./viewer/Model/DataSource/DataSource');
 
 // post actions
 const ACTIONS = [
@@ -260,6 +259,7 @@ class HostApp {
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
         const form = page.forms[req.body.form];
         const result = await form.update(context);
+        Object.keys(result).map(key => DataSource.encodeRow(result[key]));
         if (result === undefined) throw new Error('action update: result is undefined');
         await res.json(result);
     }
@@ -281,6 +281,7 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.select(context);
+        DataSource.encodeRows(rows);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
@@ -304,6 +305,7 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const row = await dataSource.selectSingle(context);
+        DataSource.encodeRow(row);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({row, time});
@@ -327,6 +329,7 @@ class HostApp {
             dataSource = application.dataSources[req.body.ds];
         }
         const [rows, count] = await dataSource.selectMultiple(context);
+        DataSource.encodeRows(rows);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
@@ -344,6 +347,7 @@ class HostApp {
             const result = await dataSource.insert(context, context.params);
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.getDatabase().commit(cnn);
+            Object.keys(result).map(key => DataSource.encodeRow(result[key]));
             await res.json(result);
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
