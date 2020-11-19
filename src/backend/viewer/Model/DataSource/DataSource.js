@@ -72,9 +72,7 @@ class DataSource extends Model {
                 this.calcColumns(rows[i]);
             }
         }
-        for (let i = 0; i < rows.length; i++) {
-            this.encodeRow(rows[i]);
-        }
+        DataSource.encodeRows(rows);
     }
 
     calcColumns(row) {
@@ -93,8 +91,14 @@ class DataSource extends Model {
         }
     }
 
-    encodeRow(row) {
-        // console.log('DataSource.encodeRow', this.getFullName());
+    static encodeRows(rows) {
+        for (let i = 0; i < rows.length; i++) {
+            DataSource.encodeRow(rows[i]);
+        }
+    }
+
+    static encodeRow(row) {
+        // console.log('DataSource.encodeRow');
         for (const name in row) {
             /*if (row[name] instanceof Buffer) {
                 row[name] = JSON.stringify(row[name].toString('base64'));
