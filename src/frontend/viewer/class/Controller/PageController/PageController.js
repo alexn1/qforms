@@ -37,7 +37,7 @@ class PageController extends Controller {
         if (this.isValid()) {
             await this.model.update();
             console.log('page model updated', this.model.getFullName());
-            this.getApplicationController().closePage(this);
+            this.getApp().closePage(this);
         }
     }
 
@@ -56,7 +56,7 @@ class PageController extends Controller {
             const result = confirm(this.model.getApp().data.text.form.areYouSure);
             if (!result) return;
         }
-        this.getApplicationController().closePage(this);
+        this.getApp().closePage(this);
     }
     isValid() {
         // console.log('PageController.isValid', this.model.getFullName());
@@ -92,7 +92,7 @@ class PageController extends Controller {
 
     async openPage(options) {
         options.parentPage = this.model;
-        return await this.getApplicationController().openPage(options);
+        return await this.getApp().openPage(options);
     }
 
     isChanged() {
@@ -107,7 +107,7 @@ class PageController extends Controller {
         return false;
     }
 
-    getApplicationController() {
+    getApp() {
         return this.parent;
     }
     getViewClass() {
