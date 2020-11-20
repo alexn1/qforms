@@ -229,7 +229,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         const query = queries.join('; ');
         // console.log('query:', query);
         const result = await this.queryResult(context, query);
-        console.log('result:', result);
+        // console.log('result:', result);
         if (result instanceof Array) {
             return autoColumns.reduce((acc, name, i) => {
                 // console.log('name:', name);
