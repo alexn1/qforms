@@ -3,15 +3,18 @@ const gulp      = require('gulp');
 //const uglify    = require('gulp-uglify');
 const minifyCss = require('gulp-minify-css');
 const concat    = require('gulp-concat');
-const less      = require('gulp-less');
+// const less      = require('gulp-less');
+const sourcemaps = require('gulp-sourcemaps');
 
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
 function frontend_home_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/home/class/**/*.js'))
+        .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         //.pipe(uglify())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
