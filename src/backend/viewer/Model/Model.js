@@ -23,7 +23,7 @@ class Model extends BaseModel {
         const data = {
             class: this.getClassName(),
             // view : await this.getView(),
-            js   : await this.getControllerJs()
+            // js   : await this.getControllerJs()
         };
         for (const name in this.attributes()) {
             data[name] = this.getAttr(name);
@@ -103,13 +103,13 @@ class Model extends BaseModel {
         return await qforms.Helper.readTextFile(viewFilePath);
     }*/
 
-    async getControllerJs() {
+    /*async getControllerJs() {
         if (!this.getDirPath()) return null;
         const jsFilePath = path.join(this.getDirPath(), 'Controller.js');
         const exists = await qforms.Helper.exists(jsFilePath);
         if (exists) return qforms.Helper.readTextFile(jsFilePath);
         return null;
-    }
+    }*/
 
     getDirPath() {
         return null;
