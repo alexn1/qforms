@@ -4,15 +4,18 @@ const gulp      = require('gulp');
 const minifyCss = require('gulp-minify-css');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
+const sourcemaps = require('gulp-sourcemaps');
 
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
 function frontend_editor_class_css() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.less'))
+        .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('editor.css'))
         // .pipe(minifyCss())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
@@ -28,8 +31,10 @@ function frontend_editor_class_ejs() {
 
 function frontend_editor_class_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/class/**/*.js'))
+        .pipe(sourcemaps.init())
         .pipe(concat('editor.js'))
         //.pipe(uglify())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
