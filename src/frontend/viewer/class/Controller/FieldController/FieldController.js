@@ -2,17 +2,20 @@ class FieldController extends Controller {
 
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
-        let obj;
-        if (model.data.js) {
+        const customClassName = `${model.getPage().getName()}${model.getForm().getName()}${model.getName()}Controller`;
+        if (eval(`typeof ${customClassName}`) === 'function') {
+            const CustomClass = eval(customClassName);
+            // console.log('CustomClass:', CustomClass);
+            return new CustomClass(model, parent);
+        }
+        /*if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
-            obj = new CustomClass(model, parent);
-        } else {
-            let className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
-            // console.log('className:', className);
-            obj = eval(`new ${className}(model, parent);`);
-        }
-        return obj;
+            return new CustomClass(model, parent);
+        }*/
+        const className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+        // console.log('className:', className);
+        return eval(`new ${className}(model, parent);`);
     }
 
     /*constructor(model, parent) {
