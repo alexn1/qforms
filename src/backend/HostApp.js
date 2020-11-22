@@ -413,7 +413,7 @@ class HostApp {
         const filePath = path.join(application.appInfo.dirPath, 'build', context.uri);
         // console.log('filePath:', filePath);
         const ext = path.extname(filePath);
-        if (['.css', '.js'].includes(ext)) {
+        if (['.css', '.js', '.map'].includes(ext)) {
             const exists = await qforms.Helper.exists(filePath);
             if (exists) {
                 return [await qforms.Helper.readTextFile(filePath), ext];
@@ -438,6 +438,9 @@ class HostApp {
             }
             if (content[1] === '.js') {
                 res.setHeader('content-type', 'text/javascript');
+            }
+            if (content[1] === '.map') {
+                res.setHeader('content-type', 'application/json');
             }
             if (content[1] === '.ttf') {
                 res.setHeader('content-type', 'font/ttf');
