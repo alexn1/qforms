@@ -1,11 +1,17 @@
 class ApplicationController extends Controller {
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
-        if (model.data.js) {
+        const customClassName = `${model.getName()}Controller`;
+        if (eval(`typeof ${customClassName}`) === 'function') {
+            const CustomClass = eval(customClassName);
+            // console.log('CustomClass:', CustomClass);
+            return new CustomClass(model);
+        }
+        /*if (model.data.js) {
             const CustomClass = eval(model.data.js);
             if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
             return new CustomClass(model);
-        }
+        }*/
         return new SdiApplicationController(model);
     }
     static getSearchObj() {
