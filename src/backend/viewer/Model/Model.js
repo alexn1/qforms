@@ -1,4 +1,4 @@
-const path    = require('path');
+// const path    = require('path');
 const qforms  = require('../../qforms');
 
 const BaseModel = require('../../BaseModel');
@@ -70,6 +70,7 @@ class Model extends BaseModel {
         const items = Object.keys(this[colName]);
         for (let i = 0; i < items.length; i++) {
             const itemName = items[i];
+            if (this[colName][itemName].attributes()['backOnly'] === 'true') continue;
             data[colName][itemName] = await this[colName][itemName].fill(context);
         }
     }

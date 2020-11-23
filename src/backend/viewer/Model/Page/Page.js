@@ -28,10 +28,15 @@ class Page extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.createCollections  = ['dataSources', 'forms'];
-        this.fillCollections    = ['dataSources', 'forms'];
+        // this.createCollections  = ['dataSources', 'forms'];
+        // this.fillCollections    = ['dataSources', 'forms'];
         this.dataSources        = {};
         this.forms              = {};
+    }
+
+    async init() {
+        await this.createCollection('dataSources');
+        await this.createCollection('forms');
     }
 
     /*getCustomViewFilePath() {
@@ -52,7 +57,16 @@ class Page extends Model {
 
     async fill(context) {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
-        const data = await super.fill(context);
+        const data = {
+            class: this.getClassName()
+        };
+        // fill attributes
+        for (const name in this.attributes()) {
+            data[name] = this.getAttr(name);
+        }
+        await this.fillCollectionDefaultFirst(data, 'dataSources', context);
+        await this.fillCollection(data, 'forms', context);
+
         delete data.formatVersion;
         delete data.width;
         delete data.height;
