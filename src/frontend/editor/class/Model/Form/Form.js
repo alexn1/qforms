@@ -37,10 +37,10 @@ class Form extends Model {
         const args = {
             controller: 'Form',
             action    : 'moveUp',
-            params    : {
+            params    : Helper.encodeObject({
                 pageFileName: this.page.pageLink.data['@attributes'].fileName,
                 form        : this.data['@attributes'].name
-            }
+            })
         };
         return QForms.doHttpRequest(args);
     }
