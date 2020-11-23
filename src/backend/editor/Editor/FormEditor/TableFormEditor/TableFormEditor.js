@@ -21,6 +21,7 @@ class TableFormEditor extends FormEditor {
             '@attributes'   : {
                 name          : params.name,
                 caption       : params.caption ? params.caption : params.name,
+                visible       : params.visible ? params.visible : 'true',
                 editMethod    : 'disabled',
                 itemEditPage  : '',
                 itemCreatePage: '',

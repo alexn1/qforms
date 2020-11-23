@@ -226,7 +226,9 @@ class FormController extends VisualController {
                     'true',
                     'false'
                 ],
-                newMode: ['', 'true', 'false']
+                visible: ['true', 'false'],
+                newMode: ['', 'true', 'false'],
+                hidden : ['true', 'false'],
             }
         };
     }

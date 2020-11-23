@@ -21,7 +21,9 @@ class RowFormEditor extends FormEditor {
             '@attributes': {
                 name    : params.name,
                 caption : params.caption ? params.caption : params.name,
-                newMode : params.newMode ? params.newMode : ''
+                visible : params.visible ? params.visible : 'true',
+                newMode : params.newMode ? params.newMode : '',
+                hidden  : params.hidden  ? params.hidden  : 'false'
             },
             dataSources: {},
             fields     : {},
