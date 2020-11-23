@@ -1,3 +1,10 @@
+// props
+//  visible boolean
+//  selectedDate array
+//  minDate array
+//  onMouseDown function
+//  onDateSelected function
+//  getDateStyle function
 class DatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
@@ -166,18 +173,20 @@ class DatePicker extends ReactComponent {
                 <tbody>
                     {[0, 1, 2, 3, 4, 5].map(i => (<tr key={i}>
                         {[0, 1, 2, 3, 4, 5, 6].map(j => {
-                            const classes = [];
-                            if (j === 5 || j === 6) classes.push('weekend');
-                            if (date.getTime() === today.getTime()) classes.push('today');
-                            if (date.getMonth() !== this.state.selectedMonth[1]) classes.push('out');
-                            if (!minDate) classes.push('selectable'); else if (date.getTime() >= minDate.getTime()) classes.push('selectable');
-                            if (selectedDate && date.getTime() === selectedDate.getTime()) classes.push('selected');
+                            const classList = [];
+                            if (j === 5 || j === 6) classList.push('weekend');
+                            if (date.getTime() === today.getTime()) classList.push('today');
+                            if (date.getMonth() !== this.state.selectedMonth[1]) classList.push('out');
+                            if (!minDate) classList.push('selectable'); else if (date.getTime() >= minDate.getTime()) classList.push('selectable');
+                            if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
                             const text = date.getDate().toString();
-                            const dataDate =  JSON.stringify([date.getFullYear(), date.getMonth(), date.getDate()]);
+                            const dataDate = JSON.stringify([date.getFullYear(), date.getMonth(), date.getDate()]);
+                            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : undefined;
                             date.setDate(date.getDate() + 1);
                             return (<td
                                 key={text}
-                                className={classes.join(' ')}
+                                className={classList.join(' ')}
+                                style={style}
                                 data-date={dataDate}
                             >{text}</td>);
                         })}
