@@ -9,12 +9,11 @@ class Form extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.createCollections  = ['dataSources', 'fields', 'controls', 'actions'];
-        this.fillCollections    = ['dataSources', 'fields', 'controls', 'actions'];
-        this.dataSources        = {};
-        this.fields             = {};
-        this.controls           = {};
-        this.actions            = {};
+        this.createCollections = ['dataSources', 'fields', 'actions'];
+        this.fillCollections   = ['dataSources', 'fields', 'actions'];
+        this.dataSources       = {};
+        this.fields            = {};
+        this.actions           = {};
     }
 
     /*getCustomViewFilePath() {
