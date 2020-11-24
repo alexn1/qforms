@@ -9,6 +9,7 @@ class DatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
+        if (!(this.props.minDate instanceof Array)) throw new Error('minDate must be array');
         this.state = {selectedMonth: this.calcSelectedMonth()};
         this.MONTH = [
             'Январь', 'Февраль',
@@ -37,14 +38,12 @@ class DatePicker extends ReactComponent {
         }
     }
 
-    /*static getToday() {
-        const now = new Date();
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    }*/
-
     static getTodayArr() {
-        const now = new Date();
-        return [now.getFullYear(), now.getMonth(), now.getDate()];
+        return DatePicker.dateToArray(new Date());
+    }
+
+    static dateToArray(date) {
+        return [date.getFullYear(), date.getMonth(), date.getDate()];
     }
 
     static getDay(date) {
@@ -180,7 +179,7 @@ class DatePicker extends ReactComponent {
                             if (!minDate) classList.push('selectable'); else if (date.getTime() >= minDate.getTime()) classList.push('selectable');
                             if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
                             const text = date.getDate().toString();
-                            const dataDate = JSON.stringify([date.getFullYear(), date.getMonth(), date.getDate()]);
+                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
                             const style = this.props.getDateStyle ? this.props.getDateStyle(date) : undefined;
                             date.setDate(date.getDate() + 1);
                             return (<td
