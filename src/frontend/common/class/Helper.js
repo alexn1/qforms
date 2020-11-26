@@ -143,3 +143,4 @@ class Helper {
     }
 }
 
+Helper.DAY = 24*60*60*1000;
