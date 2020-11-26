@@ -9,7 +9,7 @@ class DatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
-        if (!(this.props.minDate instanceof Array)) throw new Error('minDate must be array');
+        if (this.props.minDate && !(this.props.minDate instanceof Array)) throw new Error('minDate must be array');
         this.state = {selectedMonth: this.calcSelectedMonth()};
         this.MONTH = [
             'Январь', 'Февраль',
