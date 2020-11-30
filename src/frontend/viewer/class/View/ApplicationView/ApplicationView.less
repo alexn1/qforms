@@ -1,5 +1,6 @@
 html.admin {
   height: 100%;
+  box-sizing: border-box;
   &.wait, &.wait * {
     cursor: wait !important;
   }
@@ -11,6 +12,10 @@ html.admin {
   #root {
     height: 100%;
   }
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 .ApplicationView {
