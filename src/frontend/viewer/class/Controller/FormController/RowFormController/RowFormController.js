@@ -134,11 +134,11 @@ class RowFormController extends FormController {
         return false;
     }
 
-    onFieldChange(e) {
+    async onFieldChange(e) {
         // console.log('RowFormController.onFieldChange', this.model.getFullName());
         this.calcState();
         this.invalidate();
-        super.onFieldChange(e);
+        await super.onFieldChange(e);
     }
 
     onEditClick = e => {

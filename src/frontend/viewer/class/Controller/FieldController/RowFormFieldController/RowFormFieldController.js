@@ -23,7 +23,7 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    onChange = viewValue => {
+    onChange = async viewValue => {
         // console.log('RowFormFieldController.onChange', viewValue);
         try {
             this.setValueFromView(viewValue);
@@ -38,6 +38,7 @@ class RowFormFieldController extends FieldController {
             this.state.error = err.message;
         }
         if (!this.state.error) {
+            // TODO: add option to validate field on change
             /*this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());

@@ -45,9 +45,9 @@ class FormController extends Controller {
     isChanged() {
         return false;
     }
-    onFieldChange(e) {
+    async onFieldChange(e) {
         // console.log('FormController.onFieldChange', this.model.getFullName());
-        this.getPageController().onFormChange(e);
+        await this.getPageController().onFormChange(e);
     }
     getUpdated() {
         return this.state.updated;
