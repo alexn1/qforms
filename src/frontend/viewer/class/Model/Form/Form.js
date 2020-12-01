@@ -64,29 +64,12 @@ class Form extends Model {
         this.emit('delete', e);
     }
 
-
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
         if (this.getPage().deinited) throw new Error('page already deinited');
         if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form not changed or does not have new rows: ${this.getFullName()}`);
         await this.getDataSource().update();
     }
-
-    /*async refill() {
-        console.log('Form.refill', this.getFullName());
-        await this.getDataSource().refill(this.getPage().params);
-        this.emit('refilled', {source: this});
-    }*/
-
-    // executeAction(action, args) {
-    //     action.exec(args, {'form':this});
-    // }
-
-    /*async refresh() {
-        console.log('Form.refresh', this.getFullName());
-        await this.getDataSource().refresh();
-        // this.emit('refresh', {source: this});
-    }*/
 
     isChanged() {
         // console.log('Form.isChanged', this.getFullName());
