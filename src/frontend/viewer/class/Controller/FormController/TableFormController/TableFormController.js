@@ -45,7 +45,7 @@ class TableFormController extends FormController {
     }
     onRefreshClick = async e => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
-        await this.model.getDataSource().refresh();
+        await this.model.refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     }

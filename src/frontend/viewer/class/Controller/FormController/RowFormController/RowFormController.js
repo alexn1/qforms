@@ -120,7 +120,7 @@ class RowFormController extends FormController {
 
     onRefreshClick = async () => {
         // console.log('RowFormController.onRefreshClick', this.model.getFullName());
-        await this.model.getDataSource().refresh();
+        await this.model.refresh();
     }
 
     isChanged() {

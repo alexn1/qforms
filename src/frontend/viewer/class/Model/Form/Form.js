@@ -111,4 +111,7 @@ class Form extends Model {
     getApp() {
         return this.parent.parent;
     }
+    async refresh() {
+        await this.getDataSource().refresh();
+    }
 }
