@@ -23,7 +23,7 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
-    onChange = async viewValue => {
+    onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
         try {
             this.setValueFromView(viewValue);
@@ -46,7 +46,7 @@ class RowFormFieldController extends FieldController {
             this.model.setValue(this.getRow(), this.getValue());
         }
         this.refreshChanged();
-        this.parent.onFieldChange({source: this});
+        if (fireEvent) this.parent.onFieldChange({source: this});
     }
     getValueForView() {
         return this.valueToString(this.getValue());
