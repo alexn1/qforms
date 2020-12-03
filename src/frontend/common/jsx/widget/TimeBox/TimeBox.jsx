@@ -1,14 +1,34 @@
 class TimeBox extends TextBox {
     onKeyPress = event => {
-        console.log('TimeBox.onKeyPress', event.which);
-        var mask = '99:99';
-        //with (event) {
-        event.stopPropagation()
-        event.preventDefault()
-        event.target.value = '12:'
+        console.log('TimeBox.onKeyPress', event.key, event.target.value);
+        if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':'].includes(event.key)) {
+            console.log('cancel', event.key);
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        const mask = '00:00';
+    }
+    onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        /*event.target.value = '12:'
         event.target.selectionStart = 0;
-        event.target.selectionEnd = 0;
+        event.target.selectionEnd = 0;*/
         /*
+        var mask = '99:99';
+        with (event) {
         if (!event.charCode) return
         var c = String.fromCharCode(event.charCode)
         if (c.match(/\D/)) return
@@ -40,6 +60,11 @@ class TimeBox extends TextBox {
             return n
         }*/
     }
+    onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }
     render() {
         // console.log('TimeBox.render');
         return (
@@ -52,7 +77,9 @@ class TimeBox extends TextBox {
                 readOnly={this.props.readOnly}
                 onChange={this.onChange}
                 placeholder={this.props.placeholder}
-                onKeyDown={this.onKeyPress}
+                // onKeyDown={this.onKeyDown}
+                // onKeyUp={this.onKeyUp}
+                onKeyPress={this.onKeyPress}
                 style={{backgroundColor: 'rgba(0,0,0,0)'}}
             />
         );

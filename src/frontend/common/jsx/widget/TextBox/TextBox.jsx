@@ -11,7 +11,7 @@ class TextBox extends ReactComponent {
         return this.input.current;
     }
     onChange = e => {
-        console.log('TextBox.onChange', e.target.value);
+        // console.log('TextBox.onChange', e.target.value);
         this.setState({value: e.target.value});
         if (this.props.onChange) {
             this.props.onChange(e.target.value);
