@@ -8,6 +8,15 @@ class TimeBox extends TextBox {
         }
         const mask = '00:00';
     }
+    onChange = e => {
+        console.log('TimeBox.onChange', e.target.value);
+
+        const real = e.target.value.replace(':', '');
+
+        const value = `${real[0]===undefined?'':real[0]}${real[1]===undefined?'':real[1]}:${real[2]===undefined?'':real[2]}${real[3]===undefined?'':real[3]}`;
+
+        this.setState({value});
+    }
     onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
