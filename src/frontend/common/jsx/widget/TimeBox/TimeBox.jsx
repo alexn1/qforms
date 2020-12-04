@@ -13,33 +13,27 @@ class TimeBox extends TextBox {
         let min = '';
         let sec = '';
         const pure = value.replace(':', '');
-        let value2 = value;
         switch (pure.length) {
             case 0: break;
             case 1:
                 min = pure;
-                value2 = min;
                 break;
             case 2:
                 min = pure;
-                value2 = `${min}:`;
                 break;
             case 3:
                 min = pure.substr(0, 2);
                 sec = pure.substr(2, 1);
-                value2 = `${min}:${sec}`;
                 break;
             case 4:
                 min = pure.substr(0, 2);
                 sec = pure.substr(2, 2);
-                value2 = `${min}:${sec}`;
                 break;
         }
-        console.log([
+        return [
             min,
             ...(sec ? [sec] : [])
-        ].join(':'));
-        return value;
+        ].join(':');
     }
     onChange = e => {
         // console.log('TimeBox.onChange', e.target.value);
@@ -48,12 +42,13 @@ class TimeBox extends TextBox {
         const start = target.selectionStart;
         const end   = target.selectionEnd;
 
-        if (target.value.length > 4) {
+        if (target.value.length > 5) {
             return;
         }
 
         const inEnd = start === end && start === target.value.length;
         const value = this.formatValue(target.value);
+        console.log('value:', value);
 
         // console.log('before:', target.selectionStart, target.selectionEnd);
         this.setState({value}, () => {
