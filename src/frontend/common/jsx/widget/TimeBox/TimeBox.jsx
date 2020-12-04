@@ -1,59 +1,64 @@
 class TimeBox extends TextBox {
     onKeyPress = event => {
-        console.log('TimeBox.onKeyPress', event.key, event.target.value);
+        // console.log('TimeBox.onKeyPress', event.key, event.target.value);
         if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             console.log('cancel', event.key);
-            // event.stopPropagation();
             event.preventDefault();
         }
         /*if (event.target.value.length + 1 > 5) {
-            // event.stopPropagation();
             event.preventDefault();
         }*/
     }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        let value2 = value;
+        switch (pure.length) {
+            case 0: break;
+            case 1:
+                min = pure;
+                value2 = min;
+                break;
+            case 2:
+                min = pure;
+                value2 = `${min}:`;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                value2 = `${min}:${sec}`;
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                value2 = `${min}:${sec}`;
+                break;
+        }
+        console.log([
+            min,
+            ...(sec ? [sec] : [])
+        ].join(':'));
+        return value;
+    }
     onChange = e => {
-        console.log('TimeBox.onChange', e.target.value);
+        // console.log('TimeBox.onChange', e.target.value);
         // const value = e.target.value.substr(0, 4);
         const target = e.target;
         const start = target.selectionStart;
         const end   = target.selectionEnd;
 
-        if (target.value.length > 5) {
+        if (target.value.length > 4) {
             return;
         }
 
         const inEnd = start === end && start === target.value.length;
+        const value = this.formatValue(target.value);
 
-        let min = '';
-        let sec = '';
-
-        const pure = e.target.value.replace(':', '');
-        let value = target.value;
-        switch (pure.length) {
-            case 0: break;
-            case 1:
-                min = pure;
-                value = min;
-                break;
-            case 2:
-                min = pure;
-                value = `${min}`;
-                break;
-            case 3:
-                min = pure.substr(0, 2);
-                sec = pure.substr(2, 1);
-                value = `${min}:${sec}`;
-                break;
-            case 4:
-                min = pure.substr(0, 2);
-                sec = pure.substr(2, 2);
-                value = `${min}:${sec}`;
-                break;
-        }
-        console.log('before:', target.selectionStart, target.selectionEnd);
+        // console.log('before:', target.selectionStart, target.selectionEnd);
         this.setState({value}, () => {
-            console.log('after:', target.selectionStart, target.selectionEnd);
-            console.log('inEnd:', inEnd);
+            // console.log('after:', target.selectionStart, target.selectionEnd);
+            // console.log('inEnd:', inEnd);
             if (!inEnd) {
                 target.selectionStart = start;
                 target.selectionEnd = end;
