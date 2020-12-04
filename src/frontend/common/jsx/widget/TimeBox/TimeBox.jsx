@@ -133,7 +133,6 @@ class TimeBox extends TextBox {
                 // onKeyDown={this.onKeyDown}
                 // onKeyUp={this.onKeyUp}
                 onKeyPress={this.onKeyPress}
-                style={{backgroundColor: 'rgba(0,0,0,0)'}}
             />
         );
     }
