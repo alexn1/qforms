@@ -1,0 +1,3 @@
+class RowFormTimeFieldController extends RowFormFieldController {
+
+}
