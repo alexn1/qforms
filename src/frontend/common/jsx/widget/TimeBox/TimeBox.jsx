@@ -1,21 +1,69 @@
 class TimeBox extends TextBox {
     onKeyPress = event => {
         console.log('TimeBox.onKeyPress', event.key, event.target.value);
-        if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':'].includes(event.key)) {
+        if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             console.log('cancel', event.key);
-            event.stopPropagation();
+            // event.stopPropagation();
             event.preventDefault();
         }
-        const mask = '00:00';
+        /*if (event.target.value.length + 1 > 5) {
+            // event.stopPropagation();
+            event.preventDefault();
+        }*/
     }
     onChange = e => {
         console.log('TimeBox.onChange', e.target.value);
+        // const value = e.target.value.substr(0, 4);
+        const target = e.target;
+        const start = target.selectionStart;
+        const end   = target.selectionEnd;
 
-        const real = e.target.value.replace(':', '');
+        if (target.value.length > 5) {
+            return;
+        }
 
-        const value = `${real[0]===undefined?'':real[0]}${real[1]===undefined?'':real[1]}:${real[2]===undefined?'':real[2]}${real[3]===undefined?'':real[3]}`;
+        const inEnd = start === end && start === target.value.length;
 
-        this.setState({value});
+        let min = '';
+        let sec = '';
+        const originalValue = target.value;
+        let value = target.value;
+
+
+
+        const pure = e.target.value.replace(':', '');
+
+        switch (pure.length) {
+            case 0: break;
+            case 1:
+                min = pure;
+                value = min;
+                break;
+            case 2:
+                min = pure;
+                value = `${min}`;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                value = `${min}:${sec}`;
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                value = `${min}:${sec}`;
+                break;
+        }
+        console.log('before:', target.selectionStart, target.selectionEnd);
+        this.setState({value}, () => {
+            console.log('after:', target.selectionStart, target.selectionEnd);
+            console.log('inEnd:', inEnd);
+            if (!inEnd) {
+                target.selectionStart = start;
+                target.selectionEnd = end;
+            }
+        });
+        //this.setState({value: e.target.value});
     }
     onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
