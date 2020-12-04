@@ -26,13 +26,9 @@ class TimeBox extends TextBox {
 
         let min = '';
         let sec = '';
-        const originalValue = target.value;
-        let value = target.value;
-
-
 
         const pure = e.target.value.replace(':', '');
-
+        let value = target.value;
         switch (pure.length) {
             case 0: break;
             case 1:
