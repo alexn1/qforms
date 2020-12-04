@@ -52,6 +52,7 @@ module.exports.Field                             = require('./viewer/Model/Field
 module.exports.CheckBoxField                     = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');
 module.exports.ComboBoxField                     = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
 module.exports.DatePickerField                   = require('./viewer/Model/Field/DatePickerField/DatePickerField');
+module.exports.TimeField                         = require('./viewer/Model/Field/TimeField/TimeField');
 module.exports.FileField                         = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField                        = require('./viewer/Model/Field/ImageField/ImageField');
 module.exports.LabelField                        = require('./viewer/Model/Field/LabelField/LabelField');
