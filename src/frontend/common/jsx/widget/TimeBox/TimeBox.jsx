@@ -91,8 +91,21 @@ class TimeBox extends ReactComponent {
         event.stopPropagation();
         event.preventDefault();
     }*/
+    getValue() {
+        return this.state.value;
+    }
     getStringValue() {
-        return this.state.value.toString();
+        const value = this.getValue();
+        if (value !== undefined) {
+            let h = Math.floor(value / 3600);
+            let m = Math.floor((value - h * 3600) / 60);
+            let s = value - h * 3600 - m * 60;
+            if (h < 10) h = '0' + h;
+            if (m < 10) m = '0' + m;
+            if (s < 10) s = '0' + s;
+            return `${h}:${m}`;
+        }
+        return '';
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
