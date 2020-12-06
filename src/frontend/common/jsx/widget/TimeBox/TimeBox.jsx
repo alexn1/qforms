@@ -2,12 +2,12 @@ class TimeBox extends ReactComponent {
     constructor(props) {
         // console.log('TimeBox.constructor', props);
         super(props);
-        this.state = {
-            value: props.value || null,
-        };
         if (props.value && typeof props.value !== 'number') {
             throw new Error(`need number type, got ${typeof props.value}`);
         }
+        this.state = {
+            value: this.getStringValue(props.value)
+        };
     }
     onKeyPress = event => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
@@ -43,7 +43,7 @@ class TimeBox extends ReactComponent {
         ].join(':');
     }
     onChange = e => {
-        // console.log('TimeBox.onChange', e.target.value);
+        console.log('TimeBox.onChange', e.target.value);
         // const value = e.target.value.substr(0, 4);
         const target = e.target;
         const start = target.selectionStart;
@@ -91,11 +91,8 @@ class TimeBox extends ReactComponent {
         event.stopPropagation();
         event.preventDefault();
     }*/
-    getValue() {
-        return this.state.value;
-    }
-    getStringValue() {
-        const value = this.getValue();
+    getStringValue(value) {
+        console.log('TimeBox.getStringValue', value);
         if (value !== undefined) {
             let h = Math.floor(value / 3600);
             let m = Math.floor((value - h * 3600) / 60);
@@ -120,7 +117,7 @@ class TimeBox extends ReactComponent {
                 id={this.props.id}
                 className={this.getClassName()}
                 type="text"
-                value={this.getStringValue()}
+                value={this.state.value}
                 readOnly={this.props.readOnly}
                 onChange={this.onChange}
                 placeholder={this.props.placeholder}
