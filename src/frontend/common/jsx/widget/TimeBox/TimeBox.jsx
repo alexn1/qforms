@@ -1,12 +1,12 @@
 class TimeBox extends ReactComponent {
     constructor(props) {
-        // console.log('TimeBox.constructor', props);
+        console.log('TimeBox.constructor', props);
         super(props);
         if (props.value && typeof props.value !== 'number') {
             throw new Error(`need number type, got ${typeof props.value}`);
         }
         this.state = {
-            value: this.getStringValue(props.value)
+            value: TimeBox.getStringValue(props.value)
         };
     }
     onKeyPress = event => {
@@ -61,11 +61,10 @@ class TimeBox extends ReactComponent {
                 target.selectionEnd   = end;
             }
         });
-
     }
     onBlur = e => {
         console.log('TimeBox.onBlur');
-        const nValue = this.getIntegerValue(this.state.value);
+        const nValue = TimeBox.getIntegerValue(this.state.value);
         console.log('nValue:', nValue);
         if (this.props.value !== undefined && this.props.value !== nValue  && this.props.onChange) {
             this.props.onChange(nValue);
@@ -91,8 +90,9 @@ class TimeBox extends ReactComponent {
         event.stopPropagation();
         event.preventDefault();
     }*/
-    getStringValue(value) {
+    static getStringValue(value) {
         console.log('TimeBox.getStringValue', value);
+        if (value === null) return '';
         if (value !== undefined) {
             let h = Math.floor(value / 3600);
             let m = Math.floor((value - h * 3600) / 60);
@@ -104,7 +104,7 @@ class TimeBox extends ReactComponent {
         }
         return '';
     }
-    getIntegerValue(stringValue) {
+    static getIntegerValue(stringValue) {
         console.log('TimeBox.getIntegerValue', stringValue);
         try {
             if (stringValue === '') return null;
@@ -125,11 +125,11 @@ class TimeBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        this.state.value = nextProps.value;
+        this.state.value = TimeBox.getStringValue(nextProps.value);
         return true;
     }
     render() {
-        // console.log('TimeBox.render');
+        console.log('TimeBox.render', this.state.value);
         return (
             <input
                 ref={this.input}
