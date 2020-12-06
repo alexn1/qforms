@@ -44,20 +44,21 @@ class TimeBox extends ReactComponent {
     }
     onChange = e => {
         console.log('TimeBox.onChange', e.target.value);
-        // const value = e.target.value.substr(0, 4);
         const target = e.target;
         const start = target.selectionStart;
         const end   = target.selectionEnd;
-
         if (target.value.length > 5) {
             return;
         }
-
         const inEnd = start === end && start === target.value.length;
         const stringValue = this.formatValue(target.value);
-        console.log('value:', stringValue);
-
         // console.log('before:', target.selectionStart, target.selectionEnd);
+        try {
+            const nValue = this.getIntegerValue(stringValue);
+            console.log('nValue:', nValue);
+        } catch (err) {
+            console.error(err.message);
+        }
         this.setState({value: stringValue}, () => {
             // console.log('after:', target.selectionStart, target.selectionEnd);
             // console.log('inEnd:', inEnd);
@@ -66,7 +67,6 @@ class TimeBox extends ReactComponent {
                 target.selectionEnd   = end;
             }
         });
-
         /*if (this.props.onChange) {
             this.props.onChange(value);
         }*/
@@ -103,6 +103,20 @@ class TimeBox extends ReactComponent {
             return `${h}:${m}`;
         }
         return '';
+    }
+    getIntegerValue(stringValue) {
+        console.log('TimeBox.getIntegerValue', stringValue);
+        if (stringValue === '') return null;
+        const arr = stringValue.split(':');
+        if (!arr[0]) throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1]) throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2) throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2) throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23) throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59) throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh*3600 + mm*60;
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
