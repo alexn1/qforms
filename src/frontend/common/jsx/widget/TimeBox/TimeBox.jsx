@@ -61,15 +61,22 @@ class TimeBox extends ReactComponent {
                 target.selectionEnd   = end;
             }
         });
+
+        const nValue = TimeBox.getIntegerValue(stringValue);
+        console.log('nValue:', nValue);
+        if (this.props.value !== undefined && this.props.value !== nValue  && this.props.onChange) {
+            this.props.onChange(nValue);
+        }
+
     }
-    onBlur = e => {
+    /*onBlur = e => {
         console.log('TimeBox.onBlur');
         const nValue = TimeBox.getIntegerValue(this.state.value);
         console.log('nValue:', nValue);
         if (this.props.value !== undefined && this.props.value !== nValue  && this.props.onChange) {
             this.props.onChange(nValue);
         }
-    }
+    }*/
     /*onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
@@ -125,25 +132,37 @@ class TimeBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        this.state.value = TimeBox.getStringValue(nextProps.value);
-        return true;
+        if (this.props.readOnly !== nextProps.readOnly) {
+            return true;
+        }
+        if (this.props.placeholder !== nextProps.placeholder) {
+            return true;
+        }
+        if (this.props.value !== nextProps.value) {
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.state.value !== nextState.value) {
+            return true;
+        }
+        return false;
     }
     render() {
-        console.log('TimeBox.render', this.state.value);
+        // console.log('TimeBox.render', this.state.value);
         return (
             <input
-                ref={this.input}
-                id={this.props.id}
-                className={this.getClassName()}
                 type="text"
-                value={this.state.value}
+                className={this.getClassName()}
+                id={this.props.id}
                 readOnly={this.props.readOnly}
-                onChange={this.onChange}
                 placeholder={this.props.placeholder}
+                value={this.state.value}
+                onChange={this.onChange}
                 // onKeyDown={this.onKeyDown}
                 // onKeyUp={this.onKeyUp}
                 onKeyPress={this.onKeyPress}
-                onBlur={this.onBlur}
+                // onBlur={this.onBlur}
+                ref={this.input}
             />
         );
     }
