@@ -23,7 +23,7 @@ class FieldController extends Controller {
     }*/
 
     valueToString(value) {
-        // console.log('Field.valueToString', this.getFullName(), typeof value, value);
+        // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
