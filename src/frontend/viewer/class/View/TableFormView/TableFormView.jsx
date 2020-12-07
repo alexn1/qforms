@@ -76,7 +76,8 @@ class TableFormView extends ReactComponent {
             'DatePickerField',
             'ComboBoxField',
             'CheckBoxField',
-            'LinkField'
+            'LinkField',
+            'TimeField',
         ].includes(ctrl.model.getClassName())) {
             return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
         }
