@@ -112,7 +112,7 @@ class TimeBox extends ReactComponent {
         return '';
     }
     static getIntegerValue(stringValue) {
-        console.log('TimeBox.getIntegerValue', stringValue);
+        // console.log('TimeBox.getIntegerValue', stringValue);
         try {
             if (stringValue === '') return null;
             const arr = stringValue.split(':');
