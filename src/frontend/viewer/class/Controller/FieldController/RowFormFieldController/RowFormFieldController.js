@@ -129,4 +129,7 @@ class RowFormFieldController extends FieldController {
         }
         return changed;
     }
+    setError(error) {
+        this.state.error = error;
+    }
 }
