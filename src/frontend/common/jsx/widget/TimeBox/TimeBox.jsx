@@ -101,12 +101,10 @@ class TimeBox extends ReactComponent {
         // console.log('TimeBox.getStringValue', value);
         if (value === null) return '';
         if (value !== undefined) {
-            let h = Math.floor(value / 3600);
-            let m = Math.floor((value - h * 3600) / 60);
-            let s = value - h * 3600 - m * 60;
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
             if (h < 10) h = '0' + h;
             if (m < 10) m = '0' + m;
-            if (s < 10) s = '0' + s;
             return `${h}:${m}`;
         }
         return '';
@@ -124,7 +122,7 @@ class TimeBox extends ReactComponent {
             const mm = parseInt(arr[1]);
             if (hh > 23) throw new Error(`hours out of range: ${mm}, ${stringValue}`);
             if (mm > 59) throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
-            return hh*3600 + mm*60;
+            return hh*60 + mm;
         } catch (err) {
             console.error(err.message);
             return NaN;
