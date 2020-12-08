@@ -1,6 +1,6 @@
 class TimeBox extends ReactComponent {
     constructor(props) {
-        console.log('TimeBox.constructor', props);
+        // console.log('TimeBox.constructor', props);
         super(props);
         if (props.value && typeof props.value !== 'number') {
             throw new Error(`need number type, got ${typeof props.value}`);
@@ -98,7 +98,7 @@ class TimeBox extends ReactComponent {
         event.preventDefault();
     }*/
     static getStringValue(value) {
-        console.log('TimeBox.getStringValue', value);
+        // console.log('TimeBox.getStringValue', value);
         if (value === null) return '';
         if (value !== undefined) {
             let h = Math.floor(value / 3600);
