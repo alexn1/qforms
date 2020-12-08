@@ -27,11 +27,6 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.onChange', viewValue);
         try {
             this.setValueFromView(viewValue);
-            try {
-                this.emit('change', {value: viewValue});
-            } catch (err) {
-                console.error('unhandled change event error:', this.model.getFullName(), err);
-            }
             this.state.error = null;
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
@@ -46,7 +41,14 @@ class RowFormFieldController extends FieldController {
             this.model.setValue(this.getRow(), this.getValue());
         }
         this.refreshChanged();
-        if (fireEvent) this.parent.onFieldChange({source: this});
+        if (fireEvent) {
+            try {
+                this.emit('change', {value: viewValue});
+            } catch (err) {
+                console.error('unhandled change event error:', this.model.getFullName(), err);
+            }
+            this.parent.onFieldChange({source: this});
+        }
     }
     getValueForView() {
         return this.valueToString(this.getValue());
