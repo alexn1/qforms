@@ -25,14 +25,16 @@ class RowFormFieldController extends FieldController {
     }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
+        let error = null;
         try {
             this.setValueFromView(viewValue);
-            this.state.error = null;
+            // this.state.error = null;
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
-            this.state.error = err.message;
+            // this.state.error = err.message;
+            error = err.message;
         }
-        if (!this.state.error) {
+        if (!error) {
             // TODO: add option to validate field on change
             /*this.validate();
             if (this.isValid()) {

@@ -61,13 +61,11 @@ class TimeBox extends ReactComponent {
                 target.selectionEnd   = end;
             }
         });
-
         const nValue = TimeBox.getIntegerValue(stringValue);
-        console.log('nValue:', nValue);
-        if (this.props.value !== undefined && this.props.value !== nValue  && this.props.onChange) {
+        // console.log('nValue:', nValue);
+        if (this.props.onChange) {
             this.props.onChange(nValue);
         }
-
     }
     /*onBlur = e => {
         console.log('TimeBox.onBlur');
