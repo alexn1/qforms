@@ -3,7 +3,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <DropdownDatePicker
-                // onCreate={ctrl.onViewCreate}
+                onCreate={ctrl.onViewCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}

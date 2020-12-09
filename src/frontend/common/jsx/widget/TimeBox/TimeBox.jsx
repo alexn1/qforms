@@ -67,6 +67,9 @@ class TimeBox extends ReactComponent {
             this.props.onChange(nValue);
         }
     }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
     /*onBlur = e => {
         console.log('TimeBox.onBlur');
         const nValue = TimeBox.getIntegerValue(this.state.value);

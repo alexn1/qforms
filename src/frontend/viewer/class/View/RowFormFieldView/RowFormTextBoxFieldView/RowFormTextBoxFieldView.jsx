@@ -3,7 +3,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <TextBox
-                // onCreate={ctrl.onViewCreate}
+                onCreate={ctrl.onViewCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
