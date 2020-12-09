@@ -6,6 +6,7 @@ class RowFormFieldController extends FieldController {
             changed: false,
             error  : null
         };
+        this.parseError = false;
     }
     init() {
         const row = this.getRow();
@@ -25,23 +26,22 @@ class RowFormFieldController extends FieldController {
     }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
+        this.parseError = false;
         this.setError(null);
-        let error = null;
         try {
             this.setValueFromView(viewValue);
             // this.state.error = null;
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             // this.state.error = err.message;
-            error = err.message;
+            this.parseError = true;
         }
-        if (!error) {
+        if (!this.parseError) {
             // TODO: add option to validate field on change
-            /*this.validate();
+            this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());
-            }*/
-            this.model.setValue(this.getRow(), this.getValue());
+            }
         }
         this.refreshChanged();
         if (fireEvent) {
@@ -114,6 +114,7 @@ class RowFormFieldController extends FieldController {
     calcChangedState(row) {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
+        if (this.parseError) return true;
         if (!this.isValid()) return true;
         if (this.model.hasColumn()) {
             const fieldRawValue = Field.encodeValue(this.getValue());

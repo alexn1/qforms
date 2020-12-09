@@ -60,12 +60,20 @@ class TimeBox extends ReactComponent {
                 target.selectionStart = start;
                 target.selectionEnd   = end;
             }
+
+            let nValue;
+            try {
+                nValue = this.getValue();
+            } catch (err) {
+                console.log(err.message);
+                nValue = NaN;
+            }
+            // console.log('nValue:', nValue);
+            if (this.props.onChange) {
+                this.props.onChange(nValue);
+            }
         });
-        const nValue = TimeBox.getIntegerValue(stringValue);
-        // console.log('nValue:', nValue);
-        if (this.props.onChange) {
-            this.props.onChange(nValue);
-        }
+
     }
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
@@ -112,7 +120,7 @@ class TimeBox extends ReactComponent {
     }
     static getIntegerValue(stringValue) {
         // console.log('TimeBox.getIntegerValue', stringValue);
-        try {
+        // try {
             if (stringValue === '') return null;
             const arr = stringValue.split(':');
             if (!arr[0]) throw new Error(`no hours: ${stringValue}`);
@@ -124,10 +132,10 @@ class TimeBox extends ReactComponent {
             if (hh > 23) throw new Error(`hours out of range: ${mm}, ${stringValue}`);
             if (mm > 59) throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
             return hh*60 + mm;
-        } catch (err) {
-            console.error(err.message);
-            return NaN;
-        }
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
