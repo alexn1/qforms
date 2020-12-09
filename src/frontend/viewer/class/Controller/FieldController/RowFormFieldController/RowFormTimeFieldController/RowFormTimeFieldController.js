@@ -10,7 +10,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
         this.setValue(viewValue);
     }
     onBlur = () => {
-        console.log('RowFormTimeFieldController.onBlur', this.model.getFullName());
+        // console.log('RowFormTimeFieldController.onBlur', this.model.getFullName());
         this.validate();
         if (this.isValid()) {
             this.model.setValue(this.getRow(), this.getValue());
@@ -19,7 +19,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
         this.parent.onFieldChange({source: this});
     }
     getError() {
-        console.log('RowFormTimeFieldController.getError', this.model.getFullName());
+        // console.log('RowFormTimeFieldController.getError', this.model.getFullName());
         try {
             const viewValue = this.view.getValue();
             this.setValueFromView(viewValue);
