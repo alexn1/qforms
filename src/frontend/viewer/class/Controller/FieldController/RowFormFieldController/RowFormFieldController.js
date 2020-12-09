@@ -25,6 +25,7 @@ class RowFormFieldController extends FieldController {
     }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
+        this.setError(null);
         let error = null;
         try {
             this.setValueFromView(viewValue);
@@ -74,6 +75,7 @@ class RowFormFieldController extends FieldController {
         return this.state.error === null;
     }
     validate() {
+        console.log('RowFormFieldController.validate', this.model.getFullName());
         this.state.error = this.getError();
     }
     refreshChanged() {
