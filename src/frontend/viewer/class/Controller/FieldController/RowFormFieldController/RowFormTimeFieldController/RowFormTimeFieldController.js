@@ -9,6 +9,15 @@ class RowFormTimeFieldController extends RowFormFieldController {
         if (isNaN(viewValue)) throw new Error('wrong time');
         this.setValue(viewValue);
     }
+    onBlur = () => {
+        console.log('RowFormTimeFieldController.onBlur', this.model.getFullName());
+        this.validate();
+        if (this.isValid()) {
+            this.model.setValue(this.getRow(), this.getValue());
+        }
+        this.refreshChanged();
+        this.parent.onFieldChange({source: this});
+    }
     getError() {
         console.log('RowFormTimeFieldController.getError', this.model.getFullName());
         try {

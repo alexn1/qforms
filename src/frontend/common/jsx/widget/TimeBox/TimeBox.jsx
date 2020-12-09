@@ -78,14 +78,12 @@ class TimeBox extends ReactComponent {
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
     }
-    /*onBlur = e => {
-        console.log('TimeBox.onBlur');
-        const nValue = TimeBox.getIntegerValue(this.state.value);
-        console.log('nValue:', nValue);
-        if (this.props.value !== undefined && this.props.value !== nValue  && this.props.onChange) {
-            this.props.onChange(nValue);
+    onBlur = e => {
+        // console.log('TimeBox.onBlur');
+        if (this.props.onBlur) {
+            this.props.onBlur();
         }
-    }*/
+    }
     /*onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
@@ -162,7 +160,7 @@ class TimeBox extends ReactComponent {
                 // onKeyDown={this.onKeyDown}
                 // onKeyUp={this.onKeyUp}
                 onKeyPress={this.onKeyPress}
-                // onBlur={this.onBlur}
+                onBlur={this.onBlur}
                 ref={this.input}
             />
         );

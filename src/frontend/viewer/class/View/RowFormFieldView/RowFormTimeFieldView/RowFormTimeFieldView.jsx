@@ -7,6 +7,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
+                onBlur={ctrl.onBlur}
                 placeholder={ctrl.getPlaceholder()}
             />
         </div>
