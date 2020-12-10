@@ -150,9 +150,15 @@ class Field extends Model {
         return this.data.placeholder;
     }
     validateOnChange() {
+        if (this.data.validateOnChange !== undefined) {
+            return this.data.validateOnChange === 'true';
+        }
         return true;
     }
     validateOnBlur() {
+        if (this.data.validateOnBlur !== undefined) {
+            return this.data.validateOnBlur === 'true';
+        }
         return false;
     }
 }
