@@ -1,13 +1,16 @@
-.standard .RowFormDatePickerFieldView {
+.RowFormDatePickerFieldView {
     > .DropdownDatePicker {
         width: 100%;
     }
     > div > input {
         width       : 100%;
+    }
+}
+.standard .RowFormDatePickerFieldView {
+    > div > input {
         height      : 20px;
         border-width: 0;
         padding     : 0 5px 0 5px;
-        box-sizing  : border-box;
     }
     &.changed > div > input {
         background-color: rgb(238, 253, 234);
