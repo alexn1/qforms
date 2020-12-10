@@ -28,6 +28,8 @@ class DatePickerFieldEditor extends FieldEditor {
                 // align       : params['align']        ? params['align']        :                            'left',
                 param       : params.param           ? params.param           :                           'false',
                 placeholder : params.placeholder     ? params.placeholder     :                                '',
+                validateOnChange: params.validateOnChange ? params.validateOnChange :         'true',
+                validateOnBlur  : params.validateOnBlur   ? params.validateOnBlur   :        'false',
             }
         };
     }

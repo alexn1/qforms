@@ -29,6 +29,8 @@ class TextAreaFieldEditor extends FieldEditor {
                 rows        : params['rows']         ? params['rows']         :             '',
                 cols        : params['cols']         ? params['cols']         :             '',
                 param       : params.param           ? params.param           :        'false',
+                validateOnChange: params.validateOnChange ? params.validateOnChange :         'true',
+                validateOnBlur  : params.validateOnBlur   ? params.validateOnBlur   :        'false',
             }
         };
     }
