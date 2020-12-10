@@ -1,6 +1,23 @@
 .RowFormTextBoxFieldView {
+  position: relative;
   > input {
     width: 100%;
+  }
+  > .close {
+    display: flex;
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    top: 0;
+    right: 4px;
+    cursor: pointer;
+    visibility: hidden;
+    &:hover svg line {
+      stroke: black;
+    }
+    &.visible {
+      visibility: visible;
+    }
   }
 }
 .standard .RowFormTextBoxFieldView {
