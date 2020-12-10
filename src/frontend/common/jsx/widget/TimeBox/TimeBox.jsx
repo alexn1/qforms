@@ -43,7 +43,7 @@ class TimeBox extends ReactComponent {
         ].join(':');
     }
     onChange = e => {
-        console.log('TimeBox.onChange', e.target.value);
+        // console.log('TimeBox.onChange', e.target.value);
         const target = e.target;
         const start = target.selectionStart;
         const end   = target.selectionEnd;

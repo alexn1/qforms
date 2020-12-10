@@ -31,7 +31,7 @@ class RowFormFieldController extends FieldController {
         try {
             this.setValueFromView(viewValue);
         } catch (err) {
-            console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+            console.log(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.parseError = true;
         }
         if (!this.parseError) {
@@ -106,8 +106,14 @@ class RowFormFieldController extends FieldController {
     calcChangedState(row) {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        if (this.parseError) return true;
-        if (!this.isValid()) return true;
+        if (this.parseError) {
+            console.log(`FIELD CHANGED ${this.model.getFullName()}: parse error`);
+            return true;
+        }
+        if (!this.isValid()) {
+            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid`);
+            return true;
+        }
         if (this.model.hasColumn()) {
             const fieldRawValue = Field.encodeValue(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
@@ -116,15 +122,15 @@ class RowFormFieldController extends FieldController {
                 return true;
             }
         }
-        const changed = this.model.isChanged(row);
-        if (changed) {
+        if (this.model.isChanged(row)) {
             let original = row[this.model.data.column];
             let modified = this.model.getDataSource().getRowWithChanges(row)[this.model.data.column];
             if (original) original = original.substr(0, 100);
             if (modified) modified = modified.substr(0, 100);
             console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
+            return true;
         }
-        return changed;
+        return false;
     }
     setError(error) {
         this.state.error = error;
