@@ -1,16 +1,16 @@
-const path = require('path');
+// const path = require('path');
 
 const FieldEditor = require('../FieldEditor');
 
 class ComboBoxFieldEditor extends FieldEditor {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
         this.defaultViewDirPath = path.join(
             this.getAppEditor().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/FieldController/ComboBoxFieldController/view'
         );
-    }
+    }*/
 
     static createData(params) {
         return {
@@ -19,7 +19,7 @@ class ComboBoxFieldEditor extends FieldEditor {
                 name          : params['name'],
                 caption       : params['caption']        ? params['caption']        : params['name'],
                 isVisible     : params['isVisible']      ? params['isVisible']      :         'true',
-                width         : params['width']          ? params['width']          :            '0',
+                // width         : params['width']          ? params['width']          :            '0',
                 defaultValue  : params['defaultValue']   ? params['defaultValue']   :             '',
                 column        : params['column']         ? params['column']         : params['name'],
                 type          : params['type']           ? params['type']           :             '',
