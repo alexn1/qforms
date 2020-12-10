@@ -83,26 +83,20 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getPlaceholder());
         if (this.model.getPlaceholder()) return this.model.getPlaceholder();
         if (ApplicationController.isInDebugMode()) {
-            // try {
             const value = this.getValue();
             if (value === undefined) return 'undefined';
             if (value === null) return 'null';
             if (value === '') return 'empty string';
-            // } catch (err) {
-            //     console.error(`${this.model.getFullName()}: getPlaceholder: ${err.message}`);
-            // }
         }
     }
     getError() {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
-        // try {
         const value = this.getValue();
+
+        // null validator
         if (this.model.isNotNull() && (value === null || value === undefined)) {
             return 'not null';
         }
-        // } catch (err) {
-        //     return err.message;
-        // }
         return null;
     }
     isEditable() {

@@ -20,6 +20,8 @@ class RowFormTimeFieldController extends RowFormFieldController {
     }
     getError() {
         // console.log('RowFormTimeFieldController.getError', this.model.getFullName());
+
+        // parse validator
         try {
             const viewValue = this.view.getValue();
             this.setValueFromView(viewValue);
