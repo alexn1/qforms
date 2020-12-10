@@ -6,6 +6,9 @@ class TextArea extends ReactComponent {
             value: this.props.value || ''
         }
     }
+    getValue() {
+        return this.state.value;
+    }
     onChange = e => {
         // console.log('TextArea.onChange', e.target.value);
         this.setState({value: e.target.value});

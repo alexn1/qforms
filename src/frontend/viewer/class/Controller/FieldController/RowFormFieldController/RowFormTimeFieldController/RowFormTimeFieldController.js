@@ -18,16 +18,16 @@ class RowFormTimeFieldController extends RowFormFieldController {
         this.refreshChanged();
         this.parent.onFieldChange({source: this});
     }
-    getError() {
+    /*getError() {
         // console.log('RowFormTimeFieldController.getError', this.model.getFullName());
 
         // parse validator
         try {
             const viewValue = this.view.getValue();
-            this.setValueFromView(viewValue);
+            // this.setValueFromView(viewValue);
         } catch (err) {
             return `cannot parse view value: ${err.message}`;
         }
         return super.getError();
-    }
+    }*/
 }

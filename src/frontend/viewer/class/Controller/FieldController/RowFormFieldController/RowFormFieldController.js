@@ -91,9 +91,17 @@ class RowFormFieldController extends FieldController {
     }
     getError() {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
-        const value = this.getValue();
+
+        // parse validator
+        try {
+            const viewValue = this.view.getValue();
+            // this.setValueFromView(viewValue);
+        } catch (err) {
+            return `cannot parse view value: ${err.message}`;
+        }
 
         // null validator
+        const value = this.getValue();
         if (this.model.isNotNull() && (value === null || value === undefined)) {
             return 'not null';
         }

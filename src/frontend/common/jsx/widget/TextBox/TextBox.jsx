@@ -7,6 +7,9 @@ class TextBox extends ReactComponent {
             value: this.props.value || ''
         }
     }
+    getValue() {
+        return this.state.value;
+    }
     getInput() {
         return this.input.current;
     }

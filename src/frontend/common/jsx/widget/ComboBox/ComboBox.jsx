@@ -10,6 +10,9 @@ class ComboBox extends ReactComponent {
         }
         this.state  = {value: props.value || ''};
     }
+    getValue() {
+        return this.state.value;
+    }
     onChange = e => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setState({value: e.target.value});

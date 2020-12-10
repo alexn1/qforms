@@ -11,7 +11,9 @@ class CheckBox extends ReactComponent {
             checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
         };
     }
-
+    getValue() {
+        return this.state.checked;
+    }
     onChange = e => {
         // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
         if (!this.props.readOnly) {

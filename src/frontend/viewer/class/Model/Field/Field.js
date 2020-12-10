@@ -149,4 +149,7 @@ class Field extends Model {
     getPlaceholder() {
         return this.data.placeholder;
     }
+    validateOnChange() {
+        return true;
+    }
 }
