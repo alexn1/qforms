@@ -54,6 +54,7 @@ class RowFormFieldController extends FieldController {
     onBlur = () => {
         // console.log('RowFormFieldController.onBlur', this.model.getFullName());
         if (this.model.validateOnBlur()) {
+            console.log('validateOnBlur');
             this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());
