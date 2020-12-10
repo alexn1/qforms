@@ -32,4 +32,17 @@ class Action extends Model {
         this.setAttr(name, value);
         return data;
     }
+
+    async delete() {
+        return await QForms.doHttpRequest({
+            controller: 'Action',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getAttr('fileName'),
+                form        : this.form.getAttr('name'),
+                action      : this.getAttr('name')
+            })
+        });
+    }
+
 }

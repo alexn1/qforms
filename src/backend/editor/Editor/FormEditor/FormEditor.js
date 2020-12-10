@@ -72,6 +72,11 @@ class FormEditor extends Editor {
         return this.parent.save();
     }
 
+    async removeAction(name) {
+        delete this.data.actions[name];
+        return this.parent.save();
+    }
+
     async createControl(params) {
         const name = params.name;
         if (!this.data.controls) {

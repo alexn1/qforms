@@ -28,5 +28,13 @@ class ActionEditorController extends EditorController {
         await actionEditor.setAttr(params.attr, params.value);
         return null;
     }
+
+    async delete(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const formEditor = pageEditor.createFormEditor(params.form);
+        await formEditor.removeAction(params.action);
+        return null;
+    }
 }
 module.exports = ActionEditorController;
