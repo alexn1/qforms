@@ -34,8 +34,8 @@ class RowFormFieldController extends FieldController {
             console.log(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.parseError = true;
         }
-        if (!this.parseError) {
-            // TODO: add option to validate field on change
+
+        if (this.model.validateOnChange()) {
             this.validate();
             if (this.isValid()) {
                 this.model.setValue(this.getRow(), this.getValue());
@@ -48,6 +48,17 @@ class RowFormFieldController extends FieldController {
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
+            this.parent.onFieldChange({source: this});
+        }
+    }
+    onBlur = () => {
+        // console.log('RowFormFieldController.onBlur', this.model.getFullName());
+        if (this.model.validateOnBlur()) {
+            this.validate();
+            if (this.isValid()) {
+                this.model.setValue(this.getRow(), this.getValue());
+            }
+            this.refreshChanged();
             this.parent.onFieldChange({source: this});
         }
     }
@@ -97,7 +108,7 @@ class RowFormFieldController extends FieldController {
             const viewValue = this.view.getValue();
             // this.setValueFromView(viewValue);
         } catch (err) {
-            return `cannot parse view value: ${err.message}`;
+            return `can't parse value: ${err.message}`;
         }
 
         // null validator

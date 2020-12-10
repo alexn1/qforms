@@ -152,4 +152,7 @@ class Field extends Model {
     validateOnChange() {
         return true;
     }
+    validateOnBlur() {
+        return false;
+    }
 }
