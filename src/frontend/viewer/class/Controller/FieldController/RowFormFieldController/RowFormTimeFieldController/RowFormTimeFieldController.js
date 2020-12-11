@@ -1,7 +1,7 @@
 class RowFormTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
-        this.defaultStringValue = null;
+        this.defaultValue = null;
     }
     getViewClass() {
         return RowFormTimeFieldView;
@@ -14,14 +14,18 @@ class RowFormTimeFieldController extends RowFormFieldController {
         this.setValue(viewValue);
     }
     getDefaultValue() {
-        return this.defaultStringValue ? TimeBox.getIntegerValue(this.defaultStringValue) : null;
+        return this.defaultValue;
     }
     setDefaultValue(defaultValue) {
-        this.defaultStringValue = defaultValue;
+        if (typeof defaultValue === 'string') {
+            this.defaultValue = TimeBox.getIntegerValue(defaultValue);
+        } else {
+            this.defaultValue = defaultValue;
+        }
     }
     getPlaceholder() {
-        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultStringValue);
-        if (this.defaultStringValue) return this.defaultStringValue;
+        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultValue);
+        if (this.defaultValue) return TimeBox.getStringValue(this.defaultValue);
         return super.getPlaceholder();
     }
 }
