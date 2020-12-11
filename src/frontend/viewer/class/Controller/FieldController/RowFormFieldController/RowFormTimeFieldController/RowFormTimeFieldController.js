@@ -16,4 +16,12 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getDefaultValue() {
         return this.defaultStringValue ? TimeBox.getIntegerValue(this.defaultStringValue) : null;
     }
+    setDefaultValue(defaultValue) {
+        this.defaultStringValue = defaultValue;
+    }
+    getPlaceholder() {
+        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultStringValue);
+        if (this.defaultStringValue) return this.defaultStringValue;
+        return super.getPlaceholder();
+    }
 }
