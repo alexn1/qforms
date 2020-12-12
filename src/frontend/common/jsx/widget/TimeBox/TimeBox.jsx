@@ -60,16 +60,15 @@ class TimeBox extends ReactComponent {
                 target.selectionStart = start;
                 target.selectionEnd   = end;
             }
-
-            let nValue;
-            try {
-                nValue = this.getValue();
-            } catch (err) {
-                console.log(err.message);
-                nValue = NaN;
-            }
-            // console.log('nValue:', nValue);
             if (this.props.onChange) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                } catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
                 this.props.onChange(nValue);
             }
         });
@@ -81,7 +80,15 @@ class TimeBox extends ReactComponent {
     onBlur = e => {
         // console.log('TimeBox.onBlur');
         if (this.props.onBlur) {
-            this.props.onBlur();
+            let nValue;
+            try {
+                nValue = this.getValue();
+            } catch (err) {
+                console.log(err.message);
+                nValue = NaN;
+            }
+            // console.log('nValue:', nValue);
+            this.props.onBlur(nValue);
         }
     }
     /*onKeyDown = event => {

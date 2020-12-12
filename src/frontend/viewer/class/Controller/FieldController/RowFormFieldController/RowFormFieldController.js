@@ -51,7 +51,7 @@ class RowFormFieldController extends FieldController {
             this.parent.onFieldChange({source: this});
         }
     }
-    onBlur = () => {
+    onBlur = (viewValue, fireEvent) => {
         // console.log('RowFormFieldController.onBlur', this.model.getFullName());
         if (this.model.validateOnBlur()) {
             console.log('validateOnBlur');
@@ -60,7 +60,14 @@ class RowFormFieldController extends FieldController {
                 this.model.setValue(this.getRow(), this.getValue());
             }
             this.refreshChanged();
-            this.parent.onFieldChange({source: this});
+            if (fireEvent) {
+                try {
+                    this.emit('change', {value: viewValue});
+                } catch (err) {
+                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                }
+                this.parent.onFieldChange({source: this});
+            }
         }
     }
     getValueForView() {
