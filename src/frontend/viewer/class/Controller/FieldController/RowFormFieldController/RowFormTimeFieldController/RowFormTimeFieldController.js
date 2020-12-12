@@ -20,6 +20,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
+            if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
         }
     }
