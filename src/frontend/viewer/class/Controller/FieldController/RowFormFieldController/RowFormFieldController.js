@@ -112,11 +112,13 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
         // parse validator
-        try {
-            const viewValue = this.view.getValue();
-            // this.setValueFromView(viewValue);
-        } catch (err) {
-            return `can't parse value: ${err.message}`;
+        if (this.view) {
+            try {
+                const viewValue = this.view.getValue();
+                // this.setValueFromView(viewValue);
+            } catch (err) {
+                return `can't parse value: ${err.message}`;
+            }
         }
 
         // null validator
@@ -138,7 +140,7 @@ class RowFormFieldController extends FieldController {
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid`);
+            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.state.error}`);
             return true;
         }
         if (this.model.hasColumn()) {
