@@ -13,6 +13,7 @@ module.exports.CheckBoxFieldEditor               = require('./editor/Editor/Fiel
 module.exports.ComboBoxFieldEditor               = require('./editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
 module.exports.DatePickerFieldEditor             = require('./editor/Editor/FieldEditor/DatePickerFieldEditor/DatePickerFieldEditor');
 module.exports.TimeFieldEditor                   = require('./editor/Editor/FieldEditor/TimeFieldEditor/TimeFieldEditor');
+module.exports.DateTimeFieldEditor               = require('./editor/Editor/FieldEditor/DateTimeFieldEditor/DateTimeFieldEditor');
 module.exports.FileFieldEditor                   = require('./editor/Editor/FieldEditor/FileFieldEditor/FileFieldEditor');
 module.exports.ImageFieldEditor                  = require('./editor/Editor/FieldEditor/ImageFieldEditor/ImageFieldEditor');
 module.exports.LabelFieldEditor                  = require('./editor/Editor/FieldEditor/LabelFieldEditor/LabelFieldEditor');
