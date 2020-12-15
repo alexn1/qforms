@@ -1,12 +1,12 @@
-const path    = require('path');
+// const path    = require('path');
 const Field  = require('../Field');
 
 class TextBoxField extends Field {
 
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         return new TextBoxField(data, parent);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

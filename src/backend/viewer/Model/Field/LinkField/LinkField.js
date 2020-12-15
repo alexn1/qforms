@@ -1,11 +1,11 @@
-const path    = require('path');
+// const path    = require('path');
 const Field  = require('../Field');
 
 class LinkField extends Field {
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         return new LinkField(data, parent);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

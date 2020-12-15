@@ -1,11 +1,11 @@
-const path    = require('path');
+// const path    = require('path');
 const Field  = require('../Field');
 
 class LabelField extends Field {
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         return new LabelField(data, parent);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

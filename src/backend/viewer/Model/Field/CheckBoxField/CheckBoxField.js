@@ -1,11 +1,11 @@
-const path    = require('path');
+// const path    = require('path');
 const Field   = require('../Field');
 
 class CheckBoxField extends Field {
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         return new CheckBoxField(data, parent);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(

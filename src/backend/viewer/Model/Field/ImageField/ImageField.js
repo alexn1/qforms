@@ -1,11 +1,11 @@
-const path    = require('path');
+// const path    = require('path');
 const Field  = require('../Field');
 
 class ImageField extends Field {
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         return new ImageField(data, parent);
-    }
+    }*/
 
     /*getViewFilePath() {
         return path.join(
