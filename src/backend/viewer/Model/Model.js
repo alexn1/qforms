@@ -55,7 +55,10 @@ class Model extends BaseModel {
             // const className = qforms[className1] ? className1 : className2;
             const className = itemData['@class'];
             try {
-                const obj = await qforms[className].create(itemData, this);
+                // const obj = await qforms[className].create(itemData, this);
+                // const obj = await qforms[className].create(itemData, this);
+                const Class = qforms[className];
+                const obj = new Class(itemData, this);
                 this[colName][itemName] = obj;
                 await obj.init();
             } catch (err) {
