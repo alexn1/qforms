@@ -71,7 +71,7 @@ class TableFormView extends ReactComponent {
         // console.log('TableFormView.renderGridCellView');
         const ctrl = this.props.ctrl.fields[column.name];
         // console.log(column.name, ctrl.constructor.name);
-        if ([
+        /*if ([
             'TextBoxField',
             'DatePickerField',
             'ComboBoxField',
@@ -81,7 +81,8 @@ class TableFormView extends ReactComponent {
         ].includes(ctrl.model.getClassName())) {
             return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
         }
-        return null;
+        return null;*/
+        return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TableFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);

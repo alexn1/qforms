@@ -14,7 +14,7 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.style.MozUserSelect = 'none';
         view.firstElementChild.contentEditable = false;
     }*/
-    getViewClass() {
+    /*getViewClass() {
         return TableFormTextBoxFieldView;
-    }
+    }*/
 }
