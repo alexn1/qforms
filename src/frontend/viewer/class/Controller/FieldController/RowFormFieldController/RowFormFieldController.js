@@ -21,6 +21,9 @@ class RowFormFieldController extends FieldController {
         this.state.error = null;
         this.refreshChanged();
     }
+    getViewClass() {
+        return RowFormTextBoxFieldView;
+    }
     getRow() {
         return this.model.getForm().getRow();
     }

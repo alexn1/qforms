@@ -70,23 +70,7 @@ class RowFormView extends ReactComponent {
     }
     static renderField(fieldCtrl, props = {}) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
-        if ([
-            'DatePickerField',
-            'ComboBoxField',
-            'TextAreaField',
-            'CheckBoxField',
-            'LinkField',
-            'ImageField',
-            'FileField',
-            'TimeField',
-        ].includes(fieldCtrl.model.getClassName())) {
-            return React.createElement(fieldCtrl.getViewClass(), {
-                classList: ['field'],
-                ctrl: fieldCtrl,
-                ...props
-            });
-        }
-        return React.createElement(RowFormTextBoxFieldView, {
+        return React.createElement(fieldCtrl.getViewClass(), {
             classList: ['field'],
             ctrl: fieldCtrl,
             ...props
