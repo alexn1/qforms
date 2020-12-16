@@ -17,8 +17,11 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             />
             <div>
                 <TimeBox
+                    onCreate={ctrl.onView2Create}
                     readOnly={!ctrl.isEditable()}
                     value={ctrl.getValueForTime()}
+                    onChange={ctrl.onChange2}
+                    placeholder={'00:00'}
                 />
                 <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">

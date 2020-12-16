@@ -27,6 +27,10 @@ class RowFormFieldController extends FieldController {
     getRow() {
         return this.model.getForm().getRow();
     }
+    copyValueToModel() {
+        console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
+        this.model.setValue(this.getRow(), this.getValue());
+    }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
         this.parseError = false;
@@ -41,7 +45,7 @@ class RowFormFieldController extends FieldController {
         if (this.model.validateOnChange()) {
             this.validate();
             if (this.isValid()) {
-                this.model.setValue(this.getRow(), this.getValue());
+                this.copyValueToModel();
             }
         }
         this.refreshChanged();
