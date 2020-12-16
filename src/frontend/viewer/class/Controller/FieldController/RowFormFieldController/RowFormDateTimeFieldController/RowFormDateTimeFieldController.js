@@ -1,6 +1,6 @@
 class RowFormDateTimeFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormDatePickerFieldView;
+        return RowFormDateTimeFieldView;
     }
     getValueForView() {
         return this.getValue();
