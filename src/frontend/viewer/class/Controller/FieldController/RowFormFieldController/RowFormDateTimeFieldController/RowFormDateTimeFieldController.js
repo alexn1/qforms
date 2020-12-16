@@ -2,6 +2,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
         this.view2 = null;
+        this.defaultValue = 1;
     }
     getViewClass() {
         return RowFormDateTimeFieldView;
@@ -26,13 +27,17 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onChange2 = viewValue => {
         console.log('RowFormDateTimeFieldController.onChange2', viewValue);
         if (!isNaN(viewValue) && this.state.value) {
-            if (viewValue === null) {
-                this.state.value.setHours(5, 5);
-                console.log('this.state.value:', this.state.value);
-                this.copyValueToModel();
-                this.refreshChanged();
-                this.parent.onFieldChange({source: this});
-            }
+            const value = viewValue !== null ? viewValue : this.defaultValue;
+            const hours = Math.floor(value / 60);
+            const minutes = value - hours * 60;
+            this.state.value.setHours(hours, minutes);
+            // console.log('this.state.value:', this.state.value);
+            this.copyValueToModel();
+            this.refreshChanged();
+            this.parent.onFieldChange({source: this});
         }
+    }
+    getPlaceholder2() {
+        return TimeBox.getStringValue(this.defaultValue);
     }
 }
