@@ -1,18 +1,23 @@
 .RowFormDateTimeFieldView {
-  > .DropdownDatePicker {
-    width: 100%;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .standard .RowFormDateTimeFieldView {
-  > div > input {
+  > .DropdownDatePicker > input {
     height      : 20px;
     border-width: 0;
     padding     : 0 5px 0 5px;
   }
-  &.changed > div > input {
+  > div > input.TimeBox {
+    width       : 100%;
+    height      : 20px;
+    border-width: 0;
+    padding     : 0 5px 0 5px;
+  }
+  /*&.changed > div > input {
     background-color: rgb(238, 253, 234);
   }
   &.error > div > input {
     background-color: #f2dede;
-  }
+  }*/
 }
