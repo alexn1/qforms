@@ -13,7 +13,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                 getMinDate={this.props.getMinDate}
             />
             <div>
-                <TimeBox/>
+                <TimeBox placeholder="00:00"/>
             </div>
         </div>;
     }

@@ -4,10 +4,19 @@
     }
 }
 .standard .RowFormDatePickerFieldView {
-    > div > input {
-        height      : 20px;
-        border-width: 0;
-        padding     : 0 5px 0 5px;
+    > .DropdownDatePicker {
+        > input {
+            height      : 20px;
+            border-width: 0;
+            padding     : 0 5px 0 5px;
+        }
+        &.readOnly > input {
+            background-color: lightgoldenrodyellow;
+            color: gray;
+        }
+        &:not(.readOnly) > input {
+            cursor: pointer;
+        }
     }
     &.changed > div > input {
         background-color: rgb(238, 253, 234);
