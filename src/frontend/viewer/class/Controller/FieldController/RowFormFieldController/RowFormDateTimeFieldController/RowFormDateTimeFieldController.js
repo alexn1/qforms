@@ -2,7 +2,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
         this.view2 = null;
-        this.defaultValue = 1;
+        this.defaultValue = 0;
     }
     getViewClass() {
         return RowFormDateTimeFieldView;
@@ -13,7 +13,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     getValueForTime() {
         const date = this.getValue();
         if (date) {
-            return date.getHours()*60 + date.getMinutes();
+            const value = date.getHours()*60 + date.getMinutes();
+            if (value !== this.defaultValue) return value;
         }
         return null;
     }
