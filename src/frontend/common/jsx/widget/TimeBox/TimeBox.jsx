@@ -16,6 +16,9 @@ class TimeBox extends ReactComponent {
             event.preventDefault();
         }
     }
+    reset() {
+        this.setState({value: TimeBox.getStringValue(this.props.value)});
+    }
     formatValue(value) {
         let min = '';
         let sec = '';

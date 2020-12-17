@@ -6,6 +6,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         return `${super.getClassName()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`;
     }
     render() {
+        // console.log('RowFormDateTimeFieldView.render');
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getClassName()}>
