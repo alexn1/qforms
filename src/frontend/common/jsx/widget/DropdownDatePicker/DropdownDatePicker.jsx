@@ -86,10 +86,17 @@ class DropdownDatePicker extends ReactComponent {
         this.state.value = nextProps.value;
         return true;
     }
+    getClassList() {
+        return [
+            ...super.getClassList(),
+            ...(this.props.readOnly ? ['readOnly'] : [])
+        ];
+    }
+
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
         return (
-            <div className={`DropdownDatePicker ${this.props.readOnly ? 'readOnly' : ''}`}>
+            <div className={this.getClassName()}>
                 <input
                     readOnly
                     onClick={this.onInputClick}
