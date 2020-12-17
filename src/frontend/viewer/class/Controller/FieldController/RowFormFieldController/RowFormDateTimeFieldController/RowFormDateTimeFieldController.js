@@ -41,4 +41,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
     }
+    getDefaultValue() {
+        return this.defaultValue;
+    }
+    setDefaultValue(defaultValue) {
+        if (typeof defaultValue === 'string') {
+            this.defaultValue = TimeBox.getIntegerValue(defaultValue);
+        } else {
+            if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
+            this.defaultValue = defaultValue;
+        }
+    }
 }
