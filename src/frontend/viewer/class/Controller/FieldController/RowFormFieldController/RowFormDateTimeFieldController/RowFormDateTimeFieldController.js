@@ -1,8 +1,9 @@
 class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
-        // this.view2 = null;
+        this.view2 = null;
         this.defaultValue = 0;
+        this.parseError2 = false;
     }
     getViewClass() {
         return RowFormDateTimeFieldView;
@@ -27,25 +28,21 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     onChange2 = viewValue => {
         console.log('RowFormDateTimeFieldController.onChange2', viewValue);
-
+        this.parseError  = false;
+        this.parseError2 = false;
+        this.setError(null);
         try {
-            const value = this.view2.getValue();
-            console.log('value', value);
+            this.setValueFromView2(viewValue);
         } catch (err) {
-            console.error(err.message);
+            console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+            this.parseError2 = true;
         }
-
-
-        if (!isNaN(viewValue) && this.state.value) {
-            const value = viewValue !== null ? viewValue : this.defaultValue;
-            const hours = Math.floor(value / 60);
-            const minutes = value - hours * 60;
-            this.state.value.setHours(hours, minutes);
-            // console.log('this.state.value:', this.state.value);
+        this.validate2();
+        if (this.isValid()) {
             this.copyValueToModel();
-            this.refreshChanged();
-            this.parent.onFieldChange({source: this});
         }
+        this.refreshChanged();
+        this.parent.onFieldChange({source: this});
     }
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
@@ -60,5 +57,36 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
         }
+    }
+    setValueFromView2(viewValue) {
+        if (isNaN(viewValue)) throw new Error('wrong time');
+        this.setValue2(viewValue);
+    }
+    setValue2(viewValue) {
+        const value = viewValue !== null ? viewValue : this.defaultValue;
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        this.state.value.setHours(hours, minutes);
+    }
+    validate2() {
+        // console.log('RowFormFieldController.validate', this.model.getFullName());
+        this.state.error = this.getError2();
+    }
+    getError2() {
+        // console.log('RowFormFieldController.getError', this.model.getFullName());
+
+        // parse validator
+        if (this.view2) {
+            try {
+                const viewValue = this.view2.getValue();
+            } catch (err) {
+                return `can't parse time: ${err.message}`;
+            }
+        }
+
+        return null;
+    }
+    isParseError() {
+        return super.isParseError() || this.parseError2;
     }
 }

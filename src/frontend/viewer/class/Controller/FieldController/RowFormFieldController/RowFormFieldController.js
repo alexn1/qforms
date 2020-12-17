@@ -138,11 +138,13 @@ class RowFormFieldController extends FieldController {
     isEditable() {
         return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
     }
-
+    isParseError() {
+        return this.parseError;
+    }
     calcChangedState(row) {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
-        if (this.parseError) {
+        if (this.isParseError()) {
             console.log(`FIELD CHANGED ${this.model.getFullName()}: parse error`);
             return true;
         }
