@@ -20,7 +20,7 @@ function frontend_viewer_class_js() {
 }
 
 function frontend_viewer_jsx_js() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/View/**/*.jsx'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.jsx'))
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('viewer-jsx.js'))
@@ -29,7 +29,7 @@ function frontend_viewer_jsx_js() {
 }
 
 function frontend_viewer_jsx_less() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/View/**/*.less'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.less'))
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('viewer-jsx.css'))
