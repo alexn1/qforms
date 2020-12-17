@@ -91,4 +91,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         super.resetErrors();
         this.parseError2 = false;
     }
+    setValue(value) {
+        if (this.state.value) {
+            this.state.value.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
+        } else {
+            this.state.value = value;
+        }
+    }
 }
