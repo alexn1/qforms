@@ -21,7 +21,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                 />
                 <div className={'time'}>
                     <TimeBox
-                        // onCreate={ctrl.onView2Create}
+                        onCreate={ctrl.onView2Create}
                         readOnly={!ctrl.isEditable()}
                         value={ctrl.getValueForTime()}
                         onChange={ctrl.onChange2}
