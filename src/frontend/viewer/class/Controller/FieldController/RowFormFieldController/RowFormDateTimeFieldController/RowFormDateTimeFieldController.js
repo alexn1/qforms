@@ -28,9 +28,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     onChange2 = viewValue => {
         console.log('RowFormDateTimeFieldController.onChange2', viewValue);
-        this.parseError  = false;
-        this.parseError2 = false;
-        this.setError(null);
+        this.resetErrors();
         try {
             this.setValueFromView2(viewValue);
         } catch (err) {
@@ -88,5 +86,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     isParseError() {
         return super.isParseError() || this.parseError2;
+    }
+    resetErrors() {
+        super.resetErrors();
+        this.parseError2 = false;
     }
 }

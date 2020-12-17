@@ -33,8 +33,7 @@ class RowFormFieldController extends FieldController {
     }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
-        this.parseError = false;
-        this.setError(null);
+        this.resetErrors();
         try {
             this.setValueFromView(viewValue);
         } catch (err) {
@@ -172,5 +171,9 @@ class RowFormFieldController extends FieldController {
     }
     setError(error) {
         this.state.error = error;
+    }
+    resetErrors() {
+        this.setError(null);
+        this.parseError = false;
     }
 }
