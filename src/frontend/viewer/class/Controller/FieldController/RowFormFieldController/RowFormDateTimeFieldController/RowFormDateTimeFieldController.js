@@ -1,7 +1,7 @@
 class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
-        this.view2 = null;
+        // this.view2 = null;
         this.defaultValue = 0;
     }
     getViewClass() {
@@ -21,10 +21,10 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     setValueFromView(viewValue) {
         this.setValue(viewValue);
     }
-    onView2Create = view2 => {
+    /*onView2Create = view2 => {
         console.log('RowFormDateTimeFieldController.onView2Create', view2);
         this.view2 = view2;
-    }
+    }*/
     onChange2 = viewValue => {
         console.log('RowFormDateTimeFieldController.onChange2', viewValue);
         if (!isNaN(viewValue) && this.state.value) {
