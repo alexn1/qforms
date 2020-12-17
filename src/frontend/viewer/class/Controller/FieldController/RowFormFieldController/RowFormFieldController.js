@@ -148,7 +148,7 @@ class RowFormFieldController extends FieldController {
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.state.error}`);
+            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.getErrorMessage()}`);
             return true;
         }
         if (this.model.hasColumn()) {
@@ -175,5 +175,8 @@ class RowFormFieldController extends FieldController {
     resetErrors() {
         this.setError(null);
         this.parseError = false;
+    }
+    getErrorMessage() {
+        return this.state.error;
     }
 }

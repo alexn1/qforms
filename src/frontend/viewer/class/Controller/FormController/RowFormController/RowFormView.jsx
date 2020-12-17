@@ -80,7 +80,7 @@ class RowFormView extends ReactComponent {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         return (
             <div key={key} className="tooltip">
-                <Tooltip position="left" type="alert" hidden={fieldCtrl.state.error === null} tip={fieldCtrl.state.error}/>
+                <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
             </div>
         );
     }
