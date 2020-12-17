@@ -1,9 +1,13 @@
 .RowFormDateTimeFieldView {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  &.datetime {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  &.date > .time {
+    display: none;
+  }
   > .time {
     position: relative;
-    //display: none;
     > .close {
       display: flex;
       position: absolute;
