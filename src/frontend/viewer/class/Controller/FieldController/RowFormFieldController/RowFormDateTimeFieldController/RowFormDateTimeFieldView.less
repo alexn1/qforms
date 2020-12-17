@@ -1,6 +1,26 @@
 .RowFormDateTimeFieldView {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  > .time {
+    position: relative;
+    //display: none;
+    > .close {
+      display: flex;
+      position: absolute;
+      width: 10px;
+      height: 100%;
+      top: 0;
+      right: 4px;
+      cursor: pointer;
+      visibility: hidden;
+      &:hover svg line {
+        stroke: black;
+      }
+      &.visible {
+        visibility: visible;
+      }
+    }
+  }
 }
 .standard .RowFormDateTimeFieldView {
   > .DropdownDatePicker {
@@ -17,8 +37,7 @@
       cursor: pointer;
     }
   }
-  > div {
-    position: relative;
+  > .time {
     > input.TimeBox {
       width       : 100%;
       height      : 20px;
@@ -27,22 +46,6 @@
       &:read-only {
         background-color: lightgoldenrodyellow;
         color: gray;
-      }
-    }
-    > .close {
-      display: flex;
-      position: absolute;
-      width: 10px;
-      height: 100%;
-      top: 0;
-      right: 4px;
-      cursor: pointer;
-      visibility: hidden;
-      &:hover svg line {
-        stroke: black;
-      }
-      &.visible {
-        visibility: visible;
       }
     }
   }
