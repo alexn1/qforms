@@ -146,7 +146,7 @@ class TimeBox extends ReactComponent {
         // }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.readOnly !== nextProps.readOnly) return true;
         if (this.props.placeholder !== nextProps.placeholder) return true;
         if (this.props.value !== nextProps.value) {

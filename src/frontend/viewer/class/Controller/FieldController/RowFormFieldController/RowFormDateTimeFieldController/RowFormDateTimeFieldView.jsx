@@ -2,9 +2,9 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     onCloseClick = async e => {
         console.log('RowFormDateTimeFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
-        ctrl.view2.state.value = '';
-        ctrl.view2.setState({value: ''});
-        ctrl.onChange2(null);
+        ctrl.view2.setState({value: ''}, () => {
+            ctrl.onChange2(null);
+        });
     }
     isCloseVisible() {
         if (this.props.readOnly) return false;
