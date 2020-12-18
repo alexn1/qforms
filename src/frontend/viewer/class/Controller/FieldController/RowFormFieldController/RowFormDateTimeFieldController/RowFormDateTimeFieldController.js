@@ -103,7 +103,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         if (value === null) {
             this.resetErrors2();
-            this.view2.setState({value: ''});
+            if (this.view2) this.view2.setState({value: ''});
         }
     }
     refill() {
