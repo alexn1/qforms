@@ -101,6 +101,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         } else {
             this.state.value = value;
         }
+        if (value === null) {
+            this.resetErrors2();
+        }
     }
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
