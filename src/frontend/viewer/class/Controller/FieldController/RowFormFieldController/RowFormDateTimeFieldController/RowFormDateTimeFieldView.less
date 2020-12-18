@@ -6,8 +6,16 @@
   &.date > .time {
     display: none;
   }
+  > .DropdownDatePicker {
+    &:not(.readOnly) > input {
+      cursor: pointer;
+    }
+  }
   > .time {
     position: relative;
+    > input.TimeBox {
+      width       : 100%;
+    }
     > .close {
       display: flex;
       position: absolute;
@@ -37,13 +45,9 @@
       background-color: lightgoldenrodyellow;
       color: gray;
     }
-    &:not(.readOnly) > input {
-      cursor: pointer;
-    }
   }
   > .time {
     > input.TimeBox {
-      width       : 100%;
       height      : 20px;
       border-width: 0;
       padding     : 0 5px 0 5px;
