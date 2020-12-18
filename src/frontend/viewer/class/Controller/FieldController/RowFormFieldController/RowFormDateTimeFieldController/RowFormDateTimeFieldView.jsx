@@ -1,6 +1,18 @@
 class RowFormDateTimeFieldView extends RowFormFieldView {
+    onCloseClick = async e => {
+        console.log('RowFormDateTimeFieldView.onCloseClick');
+        const ctrl = this.props.ctrl;
+        ctrl.view2.state.value = '';
+        ctrl.view2.setState({value: ''});
+        ctrl.onChange2(null);
+    }
     isCloseVisible() {
-        return true;
+        if (this.props.readOnly) return false;
+        const ctrl = this.props.ctrl;
+        if (!ctrl.view2) {
+            return this.props.value !== undefined;
+        }
+        return ctrl.view2.state.value !== '';
     }
     getClassName() {
         return `${super.getClassName()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`;
