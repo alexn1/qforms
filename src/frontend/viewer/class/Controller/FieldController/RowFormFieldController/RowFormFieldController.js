@@ -2,11 +2,11 @@ class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            value  : null,
-            changed: false,
-            error  : null
+            value     : null,
+            parseError: false,
+            error     : null,
+            changed   : false,
         };
-        this.parseError = false;
     }
     init() {
         const row = this.getRow();
@@ -38,7 +38,7 @@ class RowFormFieldController extends FieldController {
             this.setValueFromView(viewValue);
         } catch (err) {
             console.log(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
-            this.parseError = true;
+            this.state.parseError = true;
         }
 
         if (this.model.validateOnChange()) {
@@ -138,7 +138,7 @@ class RowFormFieldController extends FieldController {
         return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
     }
     isParseError() {
-        return this.parseError;
+        return this.state.parseError;
     }
     calcChangedState(row) {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
@@ -174,7 +174,7 @@ class RowFormFieldController extends FieldController {
     }
     resetErrors() {
         this.setError(null);
-        this.parseError = false;
+        this.state.parseError = false;
     }
     getErrorMessage() {
         return this.state.error;
