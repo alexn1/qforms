@@ -31,8 +31,12 @@ class RowFormFieldController extends FieldController {
         console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.model.setValue(this.getRow(), this.getValue());
     }
+    _onChange(viewValue) {
+
+    }
     onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
+        this._onChange(viewValue);
         this.resetErrors();
         try {
             this.setValueFromView(viewValue);
