@@ -24,7 +24,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.setValue(viewValue);
     }
     onView2Create = view2 => {
-        console.log('RowFormDateTimeFieldController.onView2Create', view2);
+        // console.log('RowFormDateTimeFieldController.onView2Create', view2);
         this.view2 = view2;
     }
     _onChange(viewValue) {
