@@ -38,6 +38,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                         readOnly={!ctrl.isEditable()}
                         value={ctrl.getValueForTime()}
                         onChange={ctrl.onChange2}
+                        onBlur={ctrl.onBlur2}
                         placeholder={ctrl.getPlaceholder2()}
                     />
                     <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
