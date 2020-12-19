@@ -8,6 +8,7 @@ class TimeBox extends ReactComponent {
         this.state = {
             value: TimeBox.getStringValue(props.value)
         };
+        this.input = null;
     }
     onKeyPress = event => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
