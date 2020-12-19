@@ -1,6 +1,6 @@
 class RowFormDateTimeFieldView extends RowFormFieldView {
-    onCloseClick = async e => {
-        console.log('RowFormDateTimeFieldView.onCloseClick');
+    onCloseDown = async e => {
+        console.log('RowFormDateTimeFieldView.onCloseDown');
         const ctrl = this.props.ctrl;
         ctrl.view2.setState({value: ''}, () => {
             ctrl.onChange2(null);
@@ -41,7 +41,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                         onBlur={ctrl.onBlur2}
                         placeholder={ctrl.getPlaceholder2()}
                     />
-                    <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
+                    <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                             <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
                                   strokeMiterlimit="10"></line>
