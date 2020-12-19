@@ -35,8 +35,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             input.setSelectionRange(0, input.value.length);
         }, 0);
     }
-    onChange2 = viewValue => {
-        console.log('RowFormDateTimeFieldController.onChange2', viewValue);
+    onChange2 = (viewValue, fireEvent = true) => {
+        // console.log('RowFormDateTimeFieldController.onChange2', viewValue);
         this.resetErrors2();
         try {
             this.setValueFromView2(viewValue);
@@ -51,9 +51,16 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         */
         this.refreshChanged();
-        this.parent.onFieldChange({source: this});
+        if (fireEvent) {
+            try {
+                this.emit('change', {value: viewValue});
+            } catch (err) {
+                console.error('unhandled change event error:', this.model.getFullName(), err);
+            }
+            this.parent.onFieldChange({source: this});
+        }
     }
-    onBlur2 = viewValue => {
+    onBlur2 = (viewValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
         if (!this.isEditable()) return;
         this.validate2();
@@ -61,7 +68,14 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.copyValueToModel();
         }
         this.refreshChanged();
-        this.parent.onFieldChange({source: this});
+        if (fireEvent) {
+            try {
+                this.emit('change', {value: viewValue});
+            } catch (err) {
+                console.error('unhandled change event error:', this.model.getFullName(), err);
+            }
+            this.parent.onFieldChange({source: this});
+        }
     }
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
