@@ -20,9 +20,6 @@ class TimeBox extends ReactComponent {
             event.preventDefault();
         }
     }
-    reset() {
-        this.setState({value: TimeBox.getStringValue(this.props.value)});
-    }
     formatValue(value) {
         let min = '';
         let sec = '';
@@ -83,6 +80,9 @@ class TimeBox extends ReactComponent {
     }
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({value: TimeBox.getStringValue(value)});
     }
     onBlur = e => {
         // console.log('TimeBox.onBlur');

@@ -116,7 +116,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     setError2(error2) {
         this.state.error2 = error2;
     }
-    setValue(value) {
+    /*setValue(value) {
         if (this.state.value && value) {
             this.state.value.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
         } else {
@@ -126,12 +126,13 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.resetErrors2();
             if (this.view2) this.view2.setState({value: ''});
         }
-    }
+    }*/
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
-        this.view2.reset();
-        this.resetErrors2();
         super.refill();
+        this.resetErrors2();
+        this.view2.setValue(this.getValueForTime());
+        this.refreshChanged();
     }
     isValid() {
         return super.isValid() && this.state.error2 === null;
