@@ -28,7 +28,7 @@ class RowFormFieldController extends FieldController {
         return this.model.getForm().getRow();
     }
     copyValueToModel() {
-        console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
+        // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.model.setValue(this.getRow(), this.getValue());
     }
     _onChange(viewValue) {

@@ -28,14 +28,13 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.view2 = view2;
     }
     _onChange(viewValue) {
-        console.log('RowFormDateTimeFieldController._onChange', this.view2);
+        // console.log('RowFormDateTimeFieldController._onChange', this.view2);
         if (viewValue !== null) setTimeout(() => {
             const input = this.view2.getInput();
             input.focus();
             input.setSelectionRange(0, input.value.length);
         }, 0);
     }
-
     onChange2 = viewValue => {
         console.log('RowFormDateTimeFieldController.onChange2', viewValue);
         this.resetErrors2();
