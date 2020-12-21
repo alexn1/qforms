@@ -29,6 +29,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         if (viewValue === null) {
             this.state.parseError2 = false;
             this.resetErrors2();
+            if (this.view2) this.view2.setValue(null);
         } else {
             const [h, m] = TimeBox.splitTime(this.defaultValue);
             viewValue.setHours(h, m);
