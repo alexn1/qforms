@@ -125,7 +125,6 @@ class RowFormFieldController extends FieldController {
         if (this.view) {
             try {
                 const viewValue = this.view.getValue();
-                // this.setValueFromView(viewValue);
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }

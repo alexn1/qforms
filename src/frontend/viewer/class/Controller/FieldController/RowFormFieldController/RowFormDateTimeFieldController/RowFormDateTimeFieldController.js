@@ -21,6 +21,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         return null;
     }
     setValueFromView(viewValue) {
+        const [h, m] = TimeBox.splitTime(this.defaultValue);
+        viewValue.setHours(h, m);
         this.setValue(viewValue);
     }
     onView2Create = view2 => {
@@ -97,8 +99,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     setValue2(viewValue) {
         const value = viewValue !== null ? viewValue : this.defaultValue;
-        const [hours, minutes] = TimeBox.splitTime(value);
-        this.state.value.setHours(hours, minutes);
+        const [h, m] = TimeBox.splitTime(value);
+        this.state.value.setHours(h, m);
     }
     validate2() {
         // console.log('RowFormFieldController.validate', this.model.getFullName());
@@ -128,17 +130,6 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     setError2(error2) {
         this.state.error2 = error2;
     }
-    /*setValue(value) {
-        if (this.state.value && value) {
-            this.state.value.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
-        } else {
-            this.state.value = value;
-        }
-        if (value === null) {
-            this.resetErrors2();
-            if (this.view2) this.view2.setState({value: ''});
-        }
-    }*/
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
         super.refill();
