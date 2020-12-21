@@ -76,8 +76,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
         }
+        this.parent.onFieldChange({source: this});
     }
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
