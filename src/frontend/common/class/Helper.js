@@ -41,7 +41,12 @@ class Helper {
 
     static today() {
         const now = new Date();
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return Helper.getStartOfDay(now);
+    }
+
+    static getStartOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
     static encodeObject(obj) {
