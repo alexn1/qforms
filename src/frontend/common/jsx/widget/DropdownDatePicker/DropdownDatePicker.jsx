@@ -21,8 +21,8 @@ class DropdownDatePicker extends ReactComponent {
             this.setState({open: false});
         }
     }
-    onCloseClick = async (e) => {
-        // console.log('DropdownDatePicker.onCloseClick', e);
+    onCloseDown = async (e) => {
+        // console.log('DropdownDatePicker.onCloseDown', e);
         this.setState({value: null});
         if (this.props.onChange) {
             this.props.onChange(null);
@@ -105,7 +105,7 @@ class DropdownDatePicker extends ReactComponent {
                     placeholder={this.props.placeholder}
                     onKeyDown={this.onInputKeyDown}
                 />
-                <div className={`close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onClick={this.onCloseClick}>
+                <div className={`close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
                         <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
                               strokeMiterlimit="10"></line>
