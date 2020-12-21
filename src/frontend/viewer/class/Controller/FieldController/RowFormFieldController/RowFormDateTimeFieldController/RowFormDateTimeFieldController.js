@@ -13,10 +13,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         return this.getValue();
     }
     getValueForTime() {
+        // console.log('RowFormDateTimeFieldController.getValueForTime', this.model.getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
             const value = date.getHours()*60 + date.getMinutes();
-            if (value !== this.defaultValue) return value;
+            // console.log('value:', value);
+            if (value !== this.defaultValue) {
+                // console.log('not equal to default value', value, this.defaultValue);
+                return value;
+            }
         }
         return null;
     }
@@ -86,11 +91,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         return this.defaultValue;
     }
     setDefaultValue(defaultValue) {
+        // console.log('RowFormDateTimeFieldController.setDefaultValue', this.view2 ? this.view2.getValue() : null);
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
             if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
+        }
+        if (this.view2 && this.view2.getValue() === null && this.state.value) {
+            this.setValue2(null);
         }
     }
     setValueFromView2(viewValue) {
