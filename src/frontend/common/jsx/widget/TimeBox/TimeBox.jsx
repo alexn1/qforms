@@ -149,6 +149,11 @@ class TimeBox extends ReactComponent {
         //     return NaN;
         // }
     }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.readOnly !== nextProps.readOnly) return true;

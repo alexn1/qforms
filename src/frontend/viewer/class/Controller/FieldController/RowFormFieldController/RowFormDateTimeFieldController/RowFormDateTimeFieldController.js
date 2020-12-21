@@ -97,8 +97,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     setValue2(viewValue) {
         const value = viewValue !== null ? viewValue : this.defaultValue;
-        const hours = Math.floor(value / 60);
-        const minutes = value - hours * 60;
+        const [hours, minutes] = TimeBox.splitTime(value);
         this.state.value.setHours(hours, minutes);
     }
     validate2() {
