@@ -91,7 +91,7 @@ class Form extends Model {
             name  : name,
             params: Helper.encodeObject(params)
         });
-        if (result.errorMessage) throw new Error(result.errorMessage);
+        if (result.errorMessage) throw new Error(`rpc error: ${result.errorMessage}`);
         return result;
     }
 
