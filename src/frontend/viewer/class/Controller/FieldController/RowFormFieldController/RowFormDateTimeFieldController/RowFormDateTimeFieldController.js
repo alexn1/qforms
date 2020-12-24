@@ -57,12 +57,12 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
             this.state.parseError2 = true;
         }
-        /*
-        this.validate2();
-        if (this.isValid()) {
-            this.copyValueToModel();
+        if (!this.state.parseError2) {
+            this.validate2();
+            if (this.isValid()) {
+                this.copyValueToModel();
+            }
         }
-        */
         this.refreshChanged();
         if (fireEvent) {
             try {

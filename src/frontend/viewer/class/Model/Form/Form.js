@@ -67,7 +67,7 @@ class Form extends Model {
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
         if (this.getPage().deinited) throw new Error('page already deinited');
-        if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form not changed or does not have new rows: ${this.getFullName()}`);
+        if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
         await this.getDataSource().update();
     }
 
