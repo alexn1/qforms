@@ -7,9 +7,9 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         ctrl.onChange('');
     }
     isCloseVisible() {
-        // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
-        if (this.props.readOnly) return false;
+        // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.props.ctrl;
+        if (!ctrl.isEditable()) return false;
         if (!ctrl.view) {
             return this.props.value !== undefined;
         }
