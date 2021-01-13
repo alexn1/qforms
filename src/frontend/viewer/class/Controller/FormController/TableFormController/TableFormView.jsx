@@ -92,6 +92,7 @@ class TableFormView extends ReactComponent {
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
+        const dataSource = ctrl.model.getDataSource();
         return (
             <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
@@ -106,7 +107,7 @@ class TableFormView extends ReactComponent {
                       renderGridCellView={this.renderGridCellView}
                       updated={ctrl.getUpdated()}
                 />
-                {this.renderPaging()}
+                {dataSource.constructor.name === 'SqlDataSource' && this.renderPaging()}
             </div>
         );
     }
