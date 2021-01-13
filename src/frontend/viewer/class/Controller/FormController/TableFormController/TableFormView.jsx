@@ -2,10 +2,11 @@ class TableFormView extends ReactComponent {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
+        const dataSource = model.getDataSource();
         const width = '90px';
         return (
             <div className="toolbar">
-                {model.data.refreshButton === 'true' &&
+                {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
                     <Button
                         key="refresh"
                         width={width}
