@@ -26,9 +26,7 @@ class PageEditor extends Editor {
             '@attributes': {
                 formatVersion: '0.1',
                 name     : params['name'],
-                caption  : params['caption'] ? params['caption'] : params['name'],
-                // width    : params['width']   ? params['width']   : '640',
-                // height   : params['height']  ? params['height']  : '480'
+                caption  : params['caption'] ? params['caption'] : params['name']
             },
             dataSources: {},
             forms      : {}
