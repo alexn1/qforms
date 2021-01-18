@@ -26,7 +26,7 @@ class EditorController {
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
         // props
-        this.props = new PropertyGrid(document.getElementById(('props')));
+        this.props = new PropertyGrid(document.getElementById('props'), this);
         this.props.on('changed', this.listeners.changed = this.onObjChange.bind(this));
         this.props.init();
 
