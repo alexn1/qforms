@@ -72,10 +72,10 @@ class EditorController {
 
     fillActionsAndGrid(ctrl) {
         this.fillActions(ctrl);
-        this.fillGrid(ctrl);
+        this.fillPropertyGrid(ctrl);
     }
 
-    fillGrid(ctrl) {
+    fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
         this.props.beginEdit(propList['list'], propList['options']);
     }

@@ -48,7 +48,7 @@ class FieldController extends VisualController {
                 self.model.changeClass({class:fieldClass}).then((data) => {
                     //console.log(data);
                     self.item.setCaption(FieldController.prototype.getCaption(self.model.data));
-                    EditorController.editorController.fillGrid(self);
+                    EditorController.editorController.fillPropertyGrid(self);
                 });
             }
             $('#modal').modal('hide');
