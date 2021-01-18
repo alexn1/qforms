@@ -37,7 +37,7 @@ class EditorController {
 
         const root = document.getElementById('root');
         console.log('root:', root);
-        // const box = Helper.createReactComponent(root, Box);
+        const pg = Helper.createReactComponent(root, PropertyGrid2);
 
     }
 
