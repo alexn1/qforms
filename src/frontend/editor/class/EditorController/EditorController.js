@@ -7,6 +7,8 @@ class EditorController {
         this.props     = null;
         this.listeners = {};
         EditorController.editorController = this;
+        this.editObj     = null;
+        this.editOptions = null;
     }
 
     init() {
@@ -64,10 +66,14 @@ class EditorController {
             }
             this.fillActionsAndGrid(e.item.ctrl);
         } else {
-            $('#treeActionsList').children().remove();
-            $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
+            this.clearActions();
             this.props.endEdit();
         }
+    }
+
+    clearActions() {
+        $('#treeActionsList').children().remove();
+        $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
     }
 
     fillActionsAndGrid(ctrl) {
@@ -77,7 +83,13 @@ class EditorController {
 
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
-        this.props.beginEdit(propList['list'], propList['options']);
+        this.beginEdit(propList['list'], propList['options']);
+    }
+
+    beginEdit(obj, options) {
+        this.editObj     = obj;
+        this.editOptions = options;
+        this.props.beginEdit(obj, options);
     }
 
     async pageLinkToPage(item) {
@@ -102,6 +114,12 @@ class EditorController {
         }
         $('#treeActionsList').children().remove();
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
+        this.endEdit();
+    }
+
+    endEdit() {
+        this.editObj     = null;
+        this.editOptions = null;
         this.props.endEdit();
     }
 
