@@ -1,5 +1,6 @@
 class EditorController {
     constructor(appData) {
+        console.log('EditorController.constructor');
         this.appData = appData;
         this.tree      = null;
         this.docs      = null;
@@ -9,34 +10,39 @@ class EditorController {
     }
 
     init() {
+        console.log('EditorController.init');
+
         // tree
         this.tree = document.getElementById('tree')._obj;
         this.tree.on('doubleClick', this.listeners.doubleClick = this.onItemDoubleClick.bind(this));
-        this.tree.on('select', this.listeners.select = this.onItemSelect.bind(this));
-        this.tree.on('open', this.listeners.open = this.onItemOpen.bind(this));
-        this.tree.on('delete', this.listeners.delete = this.onItemDelete.bind(this));
+        this.tree.on('select'     , this.listeners.select      = this.onItemSelect.bind(this));
+        this.tree.on('open'       , this.listeners.open        = this.onItemOpen.bind(this));
+        this.tree.on('delete'     , this.listeners.delete      = this.onItemDelete.bind(this));
+
         // docs
         this.docs = document.getElementById('docs')._obj;
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
+
         // props
         this.props = new PropertyGrid(document.getElementById(('props')));
         this.props.on('changed', this.listeners.changed = this.onObjChange.bind(this));
         this.props.init();
-        // root
+
+        // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
-        const appItem = this.tree.addItem(caption, 'opened');
         const app = new Application(this.appData);
+        const appItem = this.tree.addItem(caption, 'opened');
         appItem.ctrl = new ApplicationController(app, appItem, this);
         appItem.ctrl.createTree();
     }
 
     deinit() {
-        this.tree.off('doubleClick', this.listeners.doubleClick);
-        this.tree.off('select', this.listeners.select);
-        this.tree.off('open', this.listeners.open);
-        this.tree.off('delete', this.listeners.delete);
+        this.tree.off('doubleClick'     , this.listeners.doubleClick);
+        this.tree.off('select'          , this.listeners.select);
+        this.tree.off('open'            , this.listeners.open);
+        this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.props.off('changed', this.listeners.changed);
+        this.props.off('changed'        , this.listeners.changed);
     }
 
     onItemOpen(e) {
