@@ -2,11 +2,11 @@ class PropertyGrid extends EventEmitter {
 
     constructor(el) {
         super();
-        this.el           = el;
-        this.id           = el.id;
-        this.tbody        = null;
-        this.obj          = null;
-        this.options      = null;
+        this.el      = el;
+        this.id      = el.id;
+        this.tbody   = null;
+        this.obj     = null;
+        this.options = null;
     }
 
     init() {

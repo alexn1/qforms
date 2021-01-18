@@ -34,6 +34,11 @@ class EditorController {
         const appItem = this.tree.addItem(caption, 'opened');
         appItem.ctrl = new ApplicationController(app, appItem, this);
         appItem.ctrl.createTree();
+
+        const root = document.getElementById('root');
+        console.log('root:', root);
+        // const box = Helper.createReactComponent(root, Box);
+
     }
 
     deinit() {
