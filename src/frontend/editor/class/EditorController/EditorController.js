@@ -87,7 +87,11 @@ class EditorController {
         this.editOptions = options;
         this.propertyGrid.fill();
         if (!this.propertyGrid2) {
-            this.propertyGrid2 = Helper.createReactComponent(document.getElementById('root'), PropertyGrid2);
+            this.propertyGrid2 = Helper.createReactComponent(
+                document.getElementById('root'),
+                PropertyGrid2,
+                {obj, options}
+            );
         }
     }
 
