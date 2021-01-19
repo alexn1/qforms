@@ -36,10 +36,6 @@ class EditorController {
         const appItem = this.tree.addItem(caption, 'opened');
         appItem.ctrl = new ApplicationController(app, appItem, this);
         appItem.ctrl.createTree();
-
-        const root = document.getElementById('root');
-        console.log('root:', root);
-        this.propertyGrid2 = Helper.createReactComponent(root, PropertyGrid2);
     }
 
     deinit() {
@@ -48,10 +44,7 @@ class EditorController {
         this.tree.off('open'            , this.listeners.open);
         this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.propertyGrid.off('changed'        , this.listeners.changed);
-        if (this.propertyGrid2) {
-            Helper.destroyReactComponent(this.propertyGrid2);
-        }
+        this.propertyGrid.off('changed' , this.listeners.changed);
     }
 
     onItemOpen(e) {
@@ -92,6 +85,19 @@ class EditorController {
         this.editObj     = obj;
         this.editOptions = options;
         this.propertyGrid.fill();
+        if (!this.propertyGrid2) {
+            this.propertyGrid2 = Helper.createReactComponent(document.getElementById('root'), PropertyGrid2);
+        }
+    }
+
+    endEdit() {
+        this.editObj     = null;
+        this.editOptions = null;
+        this.propertyGrid.clear();
+        if (this.propertyGrid2) {
+            Helper.destroyReactComponent(document.getElementById('root'));
+            this.propertyGrid2 = null;
+        }
     }
 
     async pageLinkToPage(item) {
@@ -117,12 +123,6 @@ class EditorController {
         $('#treeActionsList').children().remove();
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
         this.endEdit();
-    }
-
-    endEdit() {
-        this.editObj     = null;
-        this.editOptions = null;
-        this.propertyGrid.clear();
     }
 
     fillActions(ctrl) {
