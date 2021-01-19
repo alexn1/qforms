@@ -1,7 +1,7 @@
 class PropertyGrid2 extends ReactComponent {
     renderInput(name) {
         const obj = this.props.obj;
-        return <input name={name} value={obj[name]} spellCheck="false"/>;
+        return <TextBox name={name} value={obj[name]} spellCheck="false"/>;
     }
     renderSelect(name) {
         const obj = this.props.obj;

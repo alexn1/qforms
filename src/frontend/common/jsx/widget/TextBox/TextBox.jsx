@@ -31,13 +31,15 @@ class TextBox extends ReactComponent {
         return (
             <input
                 ref={this.input}
-                id={this.props.id}
                 className={this.getClassName()}
                 type="text"
-                value={this.state.value}
+                name={this.props.name}
+                id={this.props.id}
                 readOnly={this.props.readOnly}
-                onChange={this.onChange}
                 placeholder={this.props.placeholder}
+                spellCheck={this.props.spellCheck}
+                onChange={this.onChange}
+                value={this.state.value}
             />
         );
     }
