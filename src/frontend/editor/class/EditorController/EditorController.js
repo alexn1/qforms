@@ -39,8 +39,7 @@ class EditorController {
 
         const root = document.getElementById('root');
         console.log('root:', root);
-        const pg = Helper.createReactComponent(root, PropertyGrid2);
-
+        this.propertyGrid2 = Helper.createReactComponent(root, PropertyGrid2);
     }
 
     deinit() {
@@ -50,6 +49,9 @@ class EditorController {
         this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
         this.propertyGrid.off('changed'        , this.listeners.changed);
+        if (this.propertyGrid2) {
+            Helper.destroyReactComponent(this.propertyGrid2);
+        }
     }
 
     onItemOpen(e) {

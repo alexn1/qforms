@@ -88,6 +88,9 @@ class Helper {
         ReactDOM.render(reactElement, root);
         return component;
     }
+    static destroyReactComponent(component) {
+        ReactDOM.unmountComponentAtNode(component);
+    }
 
     static readFileAsDataURL(file) {
         return new Promise(resolve => {
