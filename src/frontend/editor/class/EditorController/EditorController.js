@@ -82,6 +82,7 @@ class EditorController {
     }
 
     beginEdit(obj, options) {
+        console.log('EditorController.beginEdit', obj, options);
         this.editObj     = obj;
         this.editOptions = options;
         this.propertyGrid.fill();
@@ -91,6 +92,7 @@ class EditorController {
     }
 
     endEdit() {
+        console.log('EditorController.endEdit');
         this.editObj     = null;
         this.editOptions = null;
         this.propertyGrid.clear();
