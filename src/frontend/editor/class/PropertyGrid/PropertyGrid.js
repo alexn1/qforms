@@ -4,30 +4,20 @@ class PropertyGrid extends EventEmitter {
         super();
         this.el      = el;
         this.parent  = parent;
-        this.id      = el.id;
+        // this.id      = el.id;
         this.tbody   = null;
-        // this.obj     = null;
-        // this.options = null;
     }
 
     init() {
         this.tbody = $(this.el).children('table').children('tbody').get(0);
     }
 
-    beginEdit(obj, options) {
-        // this.obj     = obj;
-        // this.options = options;
-        this.fill();
-    }
-
     getObj() {
-        // return this.obj;
         if (!this.parent) return null;
         return this.parent.editObj;
     }
 
     getOptions() {
-        // return this.options;
         if (!this.parent) return null;
         return this.parent.editOptions;
     }
@@ -66,12 +56,6 @@ class PropertyGrid extends EventEmitter {
 
     clear() {
         this.tbody.innerHTML = '';
-    }
-
-    endEdit() {
-        // this.obj     = null;
-        // this.options = null;
-        this.clear();
     }
 
 }

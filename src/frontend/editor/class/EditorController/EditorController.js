@@ -67,7 +67,7 @@ class EditorController {
             this.fillActionsAndGrid(e.item.ctrl);
         } else {
             this.clearActions();
-            this.props.endEdit();
+            this.endEdit();
         }
     }
 
@@ -89,7 +89,7 @@ class EditorController {
     beginEdit(obj, options) {
         this.editObj     = obj;
         this.editOptions = options;
-        this.props.beginEdit(obj, options);
+        this.props.fill();
     }
 
     async pageLinkToPage(item) {
@@ -120,7 +120,7 @@ class EditorController {
     endEdit() {
         this.editObj     = null;
         this.editOptions = null;
-        this.props.endEdit();
+        this.props.clear();
     }
 
     fillActions(ctrl) {
