@@ -4,7 +4,7 @@ class EditorController {
         this.appData = appData;
         this.tree      = null;
         this.docs      = null;
-        this.props     = null;
+        this.propertyGrid     = null;
         this.listeners = {};
         EditorController.editorController = this;
         this.editObj     = null;
@@ -25,10 +25,10 @@ class EditorController {
         this.docs = document.getElementById('docs')._obj;
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
-        // props
-        this.props = new PropertyGrid(document.getElementById('props'), this);
-        this.props.on('changed', this.listeners.changed = this.onObjChange.bind(this));
-        this.props.init();
+        // propertyGrid
+        this.propertyGrid = new PropertyGrid(document.getElementById('propertyGrid'), this);
+        this.propertyGrid.on('changed', this.listeners.changed = this.onObjChange.bind(this));
+        this.propertyGrid.init();
 
         // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
@@ -49,7 +49,7 @@ class EditorController {
         this.tree.off('open'            , this.listeners.open);
         this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.props.off('changed'        , this.listeners.changed);
+        this.propertyGrid.off('changed'        , this.listeners.changed);
     }
 
     onItemOpen(e) {
@@ -89,7 +89,7 @@ class EditorController {
     beginEdit(obj, options) {
         this.editObj     = obj;
         this.editOptions = options;
-        this.props.fill();
+        this.propertyGrid.fill();
     }
 
     async pageLinkToPage(item) {
@@ -120,7 +120,7 @@ class EditorController {
     endEdit() {
         this.editObj     = null;
         this.editOptions = null;
-        this.props.clear();
+        this.propertyGrid.clear();
     }
 
     fillActions(ctrl) {
