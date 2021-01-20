@@ -261,7 +261,7 @@ class Helper {
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = Helper.createPath(arr.slice(0, i));
             const exists = await Helper.exists(dirPath);
-            console.log('dirPath', i, dirPath, exists);
+            // console.log('dirPath', i, dirPath, exists);
             if (!exists) {
                 await Helper.createDirIfNotExists(dirPath);
             }

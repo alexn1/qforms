@@ -83,7 +83,7 @@ class EditorController {
 
     onPropertyGrid2Change = (name, value) => {
         console.log('EditorController.onPropertyGrid2Change', name, value);
-        // this.tree.active.ctrl.setProperty(name, value);
+        this.tree.active.ctrl.setProperty(name, value);
     }
 
     beginEdit(obj, options) {
