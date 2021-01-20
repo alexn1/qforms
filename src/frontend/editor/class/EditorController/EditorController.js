@@ -43,14 +43,14 @@ class EditorController {
             document.getElementById('root2'),
             Tab,
             {
+                classList: ['Tab-blue', 'full'],
                 tabs: [
                     {
                         name   : 'properties',
                         title  : 'Properties',
                         content: React.createElement(PropertyGrid2, {})
                     }
-                ],
-                classList: ['Tab-blue', 'full']
+                ]
             }
         );
         console.log('tab:', tab);
