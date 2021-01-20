@@ -1,7 +1,15 @@
 class PropertyGrid2 extends ReactComponent {
+    onChange = (name, value) => {
+        console.log('PropertyGrid2.onChange', name, value);
+    }
     renderInput(name) {
         const obj = this.props.obj;
-        return <TextBox name={name} value={obj[name]} spellCheck="false"/>;
+        return <TextBox
+            name={name}
+            value={obj[name]}
+            spellCheck="false"
+            onChange={value => this.onChange(name, value)}
+        />;
     }
     renderSelect(name) {
         const obj     = this.props.obj;
@@ -13,6 +21,7 @@ class PropertyGrid2 extends ReactComponent {
                 value: value,
                 title: value
             }))}
+            onChange={value => this.onChange(name, value)}
         />;
     }
     renderRows() {
