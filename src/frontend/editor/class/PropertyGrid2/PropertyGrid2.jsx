@@ -41,7 +41,7 @@ class PropertyGrid2 extends ReactComponent {
         return <div className={'PropertyGrid2'}>
             <table>
                 <tbody>
-                    {this.renderRows()}
+                    {this.props.obj && this.renderRows()}
                 </tbody>
             </table>
         </div>
