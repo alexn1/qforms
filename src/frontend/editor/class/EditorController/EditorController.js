@@ -91,13 +91,16 @@ class EditorController {
         this.editObj     = obj;
         this.editOptions = options;
         this.propertyGrid.fill();
-        if (!this.propertyGrid2) {
-            this.propertyGrid2 = Helper.createReactComponent(
-                document.getElementById('root'),
-                PropertyGrid2,
-                {obj, options, onChange: this.onPropertyGrid2Change}
-            );
+
+        // propertyGrid2
+        if (this.propertyGrid2) {
+            Helper.destroyReactComponent(document.getElementById('root'));
         }
+        this.propertyGrid2 = Helper.createReactComponent(
+            document.getElementById('root'),
+            PropertyGrid2,
+            {obj, options, onChange: this.onPropertyGrid2Change}
+        );
     }
 
     endEdit() {
