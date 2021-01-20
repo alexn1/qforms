@@ -1,5 +1,6 @@
 class ComboBox extends ReactComponent {
     constructor(props) {
+        // console.log('ComboBox.constructor', props);
         super(props);
         if (props.value) {
             const item = props.items.find(item => item.value === props.value);

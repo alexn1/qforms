@@ -4,11 +4,16 @@ class PropertyGrid2 extends ReactComponent {
         return <TextBox name={name} value={obj[name]} spellCheck="false"/>;
     }
     renderSelect(name) {
-        const obj = this.props.obj;
+        const obj     = this.props.obj;
         const options = this.props.options;
-        return <select name={name} value={obj[name]}>
-            {options[name].map(value => <option key={value}>{value}</option>)}
-        </select>;
+        return <ComboBox
+            name={name}
+            value={obj[name]}
+            items={options[name].map(value => ({
+                value: value,
+                title: value
+            }))}
+        />;
     }
     renderRows() {
         const obj     = this.props.obj;
