@@ -4,7 +4,8 @@ class EditorController {
         this.appData = appData;
         this.tree      = null;
         this.docs      = null;
-        this.propertyGrid     = null;
+        // this.propertyGrid  = null;
+        this.propertyGrid2 = null;
         this.listeners = {};
         EditorController.editorController = this;
         this.editObj     = null;
@@ -26,9 +27,9 @@ class EditorController {
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
         // propertyGrid
-        this.propertyGrid = new PropertyGrid(document.getElementById('propertyGrid'), this);
-        this.propertyGrid.on('changed', this.listeners.changed = this.onObjChange.bind(this));
-        this.propertyGrid.init();
+        // this.propertyGrid = new PropertyGrid(document.getElementById('propertyGrid'), this);
+        // this.propertyGrid.on('changed', this.listeners.changed = this.onObjChange.bind(this));
+        // this.propertyGrid.init();
 
         // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
@@ -44,7 +45,7 @@ class EditorController {
         this.tree.off('open'            , this.listeners.open);
         this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        this.propertyGrid.off('changed' , this.listeners.changed);
+        // this.propertyGrid.off('changed' , this.listeners.changed);
     }
 
     onItemOpen(e) {
@@ -59,7 +60,9 @@ class EditorController {
             if (e.item.ctrl instanceof PageLinkController) {
                 await this.pageLinkToPage(e.item);
             }
-            this.fillActionsAndGrid(e.item.ctrl);
+            // this.fillActionsAndGrid(e.item.ctrl);
+            this.fillActions(e.item.ctrl);
+            this.fillPropertyGrid(e.item.ctrl);
         } else {
             this.clearActions();
             this.endEdit();
@@ -71,10 +74,10 @@ class EditorController {
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
     }
 
-    fillActionsAndGrid(ctrl) {
+    /*fillActionsAndGrid(ctrl) {
         this.fillActions(ctrl);
         this.fillPropertyGrid(ctrl);
-    }
+    }*/
 
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
@@ -90,7 +93,7 @@ class EditorController {
         console.log('EditorController.beginEdit', obj, options);
         this.editObj     = obj;
         this.editOptions = options;
-        this.propertyGrid.fill();
+        // this.propertyGrid.fill();
 
         // propertyGrid2
         if (this.propertyGrid2) {
@@ -107,7 +110,7 @@ class EditorController {
         console.log('EditorController.endEdit');
         this.editObj     = null;
         this.editOptions = null;
-        this.propertyGrid.clear();
+        // this.propertyGrid.clear();
         if (this.propertyGrid2) {
             Helper.destroyReactComponent(document.getElementById('root'));
             this.propertyGrid2 = null;
@@ -157,9 +160,9 @@ class EditorController {
         });
     }
 
-    onObjChange(e) {
+    /*onObjChange(e) {
         this.tree.active.ctrl.setProperty(e.name, e.value);
-    }
+    }*/
 
     onItemDoubleClick(e) {
         console.log('EditorController.onItemDoubleClick', e.item);
