@@ -81,6 +81,11 @@ class EditorController {
         this.beginEdit(propList['list'], propList['options']);
     }
 
+    onPropertyGrid2Change = (name, value) => {
+        console.log('EditorController.onPropertyGrid2Change', name, value);
+        // this.tree.active.ctrl.setProperty(name, value);
+    }
+
     beginEdit(obj, options) {
         console.log('EditorController.beginEdit', obj, options);
         this.editObj     = obj;
@@ -90,7 +95,7 @@ class EditorController {
             this.propertyGrid2 = Helper.createReactComponent(
                 document.getElementById('root'),
                 PropertyGrid2,
-                {obj, options}
+                {obj, options, onChange: this.onPropertyGrid2Change}
             );
         }
     }

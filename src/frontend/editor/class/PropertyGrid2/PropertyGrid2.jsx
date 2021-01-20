@@ -1,6 +1,9 @@
 class PropertyGrid2 extends ReactComponent {
     onChange = (name, value) => {
-        console.log('PropertyGrid2.onChange', name, value);
+        // console.log('PropertyGrid2.onChange', name, value);
+        if (this.props.onChange) {
+            this.props.onChange(name, value);
+        }
     }
     renderInput(name) {
         const obj = this.props.obj;
