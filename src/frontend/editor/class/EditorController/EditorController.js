@@ -10,6 +10,7 @@ class EditorController {
         EditorController.editorController = this;
         this.editObj     = null;
         this.editOptions = null;
+        this.pg = null;
     }
 
     init() {
@@ -48,7 +49,10 @@ class EditorController {
                     {
                         name   : 'properties',
                         title  : 'Properties',
-                        content: React.createElement(PropertyGrid2, {})
+                        content: React.createElement(PropertyGrid2, {onCreate: c => {
+                            console.log('pg created:', c);
+                            this.pg = c;
+                        }})
                     }
                 ]
             }

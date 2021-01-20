@@ -33,7 +33,7 @@ class PropertyGrid2 extends ReactComponent {
         return Object.keys(obj).map(name => <tr key={name}>
             <td>{name}</td>
             <td>
-                {options && options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name)}
+                {options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name)}
             </td>
         </tr>);
     }
