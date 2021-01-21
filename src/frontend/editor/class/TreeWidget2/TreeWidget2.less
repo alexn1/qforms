@@ -1,0 +1,46 @@
+.TreeWidget2 {
+  cursor: default;
+  -moz-user-select: none;
+  overflow: auto;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  li > ul {
+    display: none;
+  }
+
+  li.opened > ul {
+    display:block;
+  }
+
+  li > div {
+    padding: 1px;
+  }
+
+  li > div.active {
+    background-color: rgb(66,139,202);
+    color: white;
+  }
+
+  .node {
+    display: inline-block;
+    height: 11px;
+    width: 11px;
+
+    background-image: url("/img/icon/plusminus.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+  }
+
+  .leaf {
+    display: inline-block;
+    height: 11px;
+    width: 11px;
+  }
+
+  .opened > div > span.node {
+    background-position: 0 -11px;
+  }
+}
