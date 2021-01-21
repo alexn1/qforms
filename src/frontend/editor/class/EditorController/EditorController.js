@@ -30,25 +30,8 @@ class EditorController {
         appItem.ctrl = new ApplicationController(app, appItem, this);
         appItem.ctrl.createTree();
 
-        // tab
-        const tab = Helper.createReactComponent(
-            document.getElementById('root2'),
-            Tab,
-            {
-                classList: ['Tab-blue', 'full'],
-                tabs: [
-                    {
-                        name   : 'properties',
-                        title  : 'Properties',
-                        content: React.createElement(PropertyGrid2, {
-                            onCreate: c => this.pg = c,
-                            onChange: this.onPropertyGrid2Change
-                        })
-                    }
-                ]
-            }
-        );
-        console.log('tab:', tab);
+        // view
+        Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
     }
 
     deinit() {
