@@ -5,8 +5,8 @@ class EditorController {
         this.tree      = null;
         this.docs      = null;
         this.listeners = {};
-        EditorController.editorController = this;
         this.pg = null;
+        EditorController.editorController = this;
     }
 
     init() {
