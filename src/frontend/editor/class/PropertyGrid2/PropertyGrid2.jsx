@@ -1,4 +1,20 @@
 class PropertyGrid2 extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    getObj() {
+        if (this.state.object) {
+            return this.state.object.obj;
+        }
+        return null;
+    }
+    getOptions() {
+        if (this.state.object) {
+            return this.state.object.options;
+        }
+        return null;
+    }
     onChange = (name, value) => {
         // console.log('PropertyGrid2.onChange', name, value);
         if (this.props.onChange) {
@@ -6,7 +22,7 @@ class PropertyGrid2 extends ReactComponent {
         }
     }
     renderInput(name) {
-        const obj = this.props.obj;
+        const obj = this.getObj();
         return <TextBox
             name={name}
             value={obj[name]}
@@ -15,8 +31,8 @@ class PropertyGrid2 extends ReactComponent {
         />;
     }
     renderSelect(name) {
-        const obj     = this.props.obj;
-        const options = this.props.options;
+        const obj     = this.getObj();
+        const options = this.getOptions();
         return <ComboBox
             name={name}
             value={obj[name]}
@@ -28,8 +44,8 @@ class PropertyGrid2 extends ReactComponent {
         />;
     }
     renderRows() {
-        const obj     = this.props.obj;
-        const options = this.props.options;
+        const obj     = this.getObj();
+        const options = this.getOptions();
         return Object.keys(obj).map(name => <tr key={name}>
             <td>{name}</td>
             <td>
@@ -41,7 +57,7 @@ class PropertyGrid2 extends ReactComponent {
         return <div className={'PropertyGrid2'}>
             <table>
                 <tbody>
-                    {this.props.obj && this.renderRows()}
+                    {this.getObj() && this.renderRows()}
                 </tbody>
             </table>
         </div>

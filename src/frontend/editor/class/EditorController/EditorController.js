@@ -4,12 +4,8 @@ class EditorController {
         this.appData = appData;
         this.tree      = null;
         this.docs      = null;
-        // this.propertyGrid  = null;
-        this.propertyGrid2 = null;
         this.listeners = {};
         EditorController.editorController = this;
-        this.editObj     = null;
-        this.editOptions = null;
         this.pg = null;
     }
 
@@ -26,11 +22,6 @@ class EditorController {
         // docs
         this.docs = document.getElementById('docs')._obj;
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-
-        // propertyGrid
-        // this.propertyGrid = new PropertyGrid(document.getElementById('propertyGrid'), this);
-        // this.propertyGrid.on('changed', this.listeners.changed = this.onObjChange.bind(this));
-        // this.propertyGrid.init();
 
         // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
@@ -49,10 +40,10 @@ class EditorController {
                     {
                         name   : 'properties',
                         title  : 'Properties',
-                        content: React.createElement(PropertyGrid2, {onCreate: c => {
-                            console.log('pg created:', c);
-                            this.pg = c;
-                        }})
+                        content: React.createElement(PropertyGrid2, {
+                            onCreate: c => this.pg = c,
+                            onChange: this.onPropertyGrid2Change
+                        })
                     }
                 ]
             }
@@ -66,7 +57,6 @@ class EditorController {
         this.tree.off('open'            , this.listeners.open);
         this.tree.off('delete'          , this.listeners.delete);
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
-        // this.propertyGrid.off('changed' , this.listeners.changed);
     }
 
     onItemOpen(e) {
@@ -81,7 +71,6 @@ class EditorController {
             if (e.item.ctrl instanceof PageLinkController) {
                 await this.pageLinkToPage(e.item);
             }
-            // this.fillActionsAndGrid(e.item.ctrl);
             this.fillActions(e.item.ctrl);
             this.fillPropertyGrid(e.item.ctrl);
         } else {
@@ -112,30 +101,12 @@ class EditorController {
 
     beginEdit(obj, options) {
         console.log('EditorController.beginEdit', obj, options);
-        this.editObj     = obj;
-        this.editOptions = options;
-        // this.propertyGrid.fill();
-
-        // propertyGrid2
-        if (this.propertyGrid2) {
-            Helper.destroyReactComponent(document.getElementById('root'));
-        }
-        this.propertyGrid2 = Helper.createReactComponent(
-            document.getElementById('root'),
-            PropertyGrid2,
-            {obj, options, onChange: this.onPropertyGrid2Change}
-        );
+        this.pg.setState({object: {obj, options}});
     }
 
     endEdit() {
         console.log('EditorController.endEdit');
-        this.editObj     = null;
-        this.editOptions = null;
-        // this.propertyGrid.clear();
-        if (this.propertyGrid2) {
-            Helper.destroyReactComponent(document.getElementById('root'));
-            this.propertyGrid2 = null;
-        }
+        this.pg.setState({object: null});
     }
 
     async pageLinkToPage(item) {
@@ -180,10 +151,6 @@ class EditorController {
             }
         });
     }
-
-    /*onObjChange(e) {
-        this.tree.active.ctrl.setProperty(e.name, e.value);
-    }*/
 
     onItemDoubleClick(e) {
         console.log('EditorController.onItemDoubleClick', e.item);
