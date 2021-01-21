@@ -7,10 +7,10 @@ class EditorView extends ReactComponent {
                 {
                     name   : 'properties',
                     title  : 'Properties',
-                    content: <PropertyGrid2
-                        onCreate = {c => ctrl.pg = c}
-                        onChange = {ctrl.onPropertyGrid2Change}
-                    />
+                    content: <div>
+                        <PropertyGrid2 onCreate={c => ctrl.pg = c} onChange={ctrl.onPropertyGrid2Change}/>
+                        <TreeWidget2/>
+                    </div>
                 }
             ]}
         />

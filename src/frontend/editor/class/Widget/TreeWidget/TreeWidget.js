@@ -14,6 +14,7 @@ class TreeWidget extends Widget {
     }
 
     constructor(el) {
+        console.log('TreeWidget.constructor');
         super(el);
         this.id     = el.id;
         this.tree   = this;
