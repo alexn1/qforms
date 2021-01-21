@@ -67,11 +67,6 @@ class EditorController {
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
     }
 
-    /*fillActionsAndGrid(ctrl) {
-        this.fillActions(ctrl);
-        this.fillPropertyGrid(ctrl);
-    }*/
-
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
         this.beginEdit(propList['list'], propList['options']);
