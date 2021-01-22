@@ -12,9 +12,6 @@ class EditorController {
     init() {
         console.log('EditorController.init');
 
-        // view
-        Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
-
         // tree
         this.tree = document.getElementById('tree')._obj;
         this.tree.on('doubleClick', this.listeners.doubleClick = this.onItemDoubleClick.bind(this));
@@ -29,9 +26,13 @@ class EditorController {
         // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
         const appModel = new Application(this.appData);
+        console.log('appModel:', appModel);
         const appItem = this.tree.addItem(caption, 'opened');
         appItem.ctrl = new ApplicationController(appModel, appItem, this);
         appItem.ctrl.createTree();
+
+        // view
+        Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
     }
 
     deinit() {
