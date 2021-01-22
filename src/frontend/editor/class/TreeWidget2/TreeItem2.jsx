@@ -14,14 +14,14 @@ class TreeItem2 extends ReactComponent {
         const item = this.props.item;
         const tree = this.props.tree;
         return <li key={item.title} className={'opened'}>
-            <div onMouseDown={this.onDivMouseDown} className={this.isSelected() ? 'active' : null}>
+            <div onMouseDown={this.onDivMouseDown} className={this.isSelected() ? 'active' : null} style={{paddingLeft: this.props.paddingLeft}}>
                 <span className={'node'} onMouseDown={this.onNodeMouseDown}/>
                 &nbsp;
                 <span>{item.title}</span>
             </div>
             {item.items &&
-            <ul style={{paddingLeft: 15}}>
-                {item.items.map(item => <TreeItem2 key={item.title} tree={tree} item={item}/>)}
+            <ul>
+                {item.items.map(item => <TreeItem2 key={item.title} tree={tree} item={item} paddingLeft={this.props.paddingLeft+15}/>)}
             </ul>
             }
         </li>;
