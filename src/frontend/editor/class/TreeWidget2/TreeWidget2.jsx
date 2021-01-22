@@ -6,7 +6,7 @@ class TreeWidget2 extends ReactComponent {
         };
     }
     select(item) {
-        console.log('TreeWidget2.select', item);
+        // console.log('TreeWidget2.select', item);
         this.setState({selectedItem: item});
     }
     render() {
