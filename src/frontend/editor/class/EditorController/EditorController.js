@@ -10,7 +10,7 @@ class EditorController {
     }
 
     init() {
-        console.log('EditorController.init');
+        console.log('EditorController.init', this.appData);
 
         // tree
         this.tree = document.getElementById('tree')._obj;
