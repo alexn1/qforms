@@ -145,4 +145,19 @@ class EditorController {
         this.docs.closeTab(e.tab);
     }
 
+    getTreeItems() {
+        return [
+            {
+                title: 'itemA',
+                items: [
+                    {title: 'item 1'},
+                    {title: 'item 2'},
+                    {title: 'item 3'},
+                ]
+            },
+            {title: 'itemB'},
+            {title: 'itemC'}
+        ];
+    }
+
 }
