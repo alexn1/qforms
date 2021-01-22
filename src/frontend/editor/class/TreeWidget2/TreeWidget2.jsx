@@ -1,39 +1,32 @@
 class TreeWidget2 extends ReactComponent {
-    renderItems(items, offset) {
+    onDivMouseDown = e => {
+        console.log('TreeWidget2.onDivMouseDown', e.currentTarget);
+    }
+    onNodeMouseDown = e => {
+        console.log('TreeWidget2.onNodeMouseDown', e.currentTarget);
+        e.stopPropagation();
+    }
+    renderItems(items) {
         return items.map(item => {
             return <li key={item.title} className={'opened'}>
-                <div style={{paddingLeft: offset}}>
-                    <span className={'node'}/>&nbsp;<span>{item.title}</span>
-                    {item.items &&
-                        <ul>
-                            {this.renderItems(item.items, offset + 15)}
-                        </ul>
-                    }
+                <div onMouseDown={this.onDivMouseDown}>
+                    <span className={'node'} onMouseDown={this.onNodeMouseDown}/>
+                    &nbsp;
+                    <span>{item.title}</span>
                 </div>
+                {item.items &&
+                    <ul style={{paddingLeft: 15}}>
+                        {this.renderItems(item.items)}
+                    </ul>
+                }
             </li>
         });
     }
     render() {
         console.log('TreeWidget2.render', this.props.items);
         return <div className={'TreeWidget2'}>
-            <ul>
-                {this.renderItems(this.props.items, 5)}
-                {/*<li className={'opened'}>
-                    <div style={{paddingLeft: 5}}>
-                        <span className={'node'}></span>
-                        &nbsp;
-                        <span>admin</span>
-                    </div>
-                    <ul>
-                        <li className={'opened'}>
-                            <div style={{paddingLeft: 20}}>
-                                <span className={'node'}></span>
-                                &nbsp;
-                                <span>Databases</span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>*/}
+            <ul style={{paddingLeft: 5}}>
+                {this.renderItems(this.props.items)}
             </ul>
         </div>;
     }

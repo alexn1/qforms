@@ -150,7 +150,14 @@ class EditorController {
             {
                 title: 'itemA',
                 items: [
-                    {title: 'item 1'},
+                    {
+                        title: 'item 1',
+                        items: [
+                            {title: 'itemX'},
+                            {title: 'itemY'},
+                            {title: 'itemZ'}
+                        ]
+                    },
                     {title: 'item 2'},
                     {title: 'item 3'},
                 ]
