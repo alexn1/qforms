@@ -10,16 +10,13 @@ class ApplicationController extends VisualController {
         this.pageItems        = {};
     }
 
-    getItems() {
+    getItem() {
+        return {
+            title: this.model.getName(),
+            items: [
 
-        return [
-            {
-                title: this.model.getName(),
-                items: [
-
-                ]
-            }
-        ];
+            ]
+        };
         /*
         return [
             {

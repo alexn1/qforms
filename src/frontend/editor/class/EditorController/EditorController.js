@@ -148,7 +148,7 @@ class EditorController {
     }
 
     getTreeItems() {
-        return this.appCtrl.getItems();
+        return [this.appCtrl.getItem()];
     }
 
 }
