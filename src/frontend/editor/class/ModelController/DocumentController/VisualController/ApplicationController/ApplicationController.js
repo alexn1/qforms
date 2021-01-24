@@ -14,7 +14,14 @@ class ApplicationController extends VisualController {
         return {
             title: this.model.getName(),
             items: [
-
+                {
+                    title: 'Databases',
+                    /*items: Object.keys(this.model.data.databases).map(name => {
+                        return this.model.data.databases[name].getItem();
+                    })*/
+                },
+                {title: 'Data Sources'},
+                {title: 'Pages'}
             ]
         };
         /*
@@ -45,7 +52,7 @@ class ApplicationController extends VisualController {
         if (this.model.data.databases) {
             for (const name in this.model.data.databases) {
                 const databaseData = this.model.data.databases[name];
-                this.addDatabaseItem(databaseData);
+                this.addDatabaseItem(databaseData, name);
             }
         }
         // data sources
@@ -53,7 +60,7 @@ class ApplicationController extends VisualController {
         if (this.model.data.dataSources) {
             for (const name in this.model.data.dataSources) {
                 const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData);
+                this.addDataSourceItem(dataSourceData, name);
             }
         }
         // pages
@@ -61,34 +68,37 @@ class ApplicationController extends VisualController {
         if (this.model.data.pageLinks) {
             for (const name in this.model.data.pageLinks) {
                 const pageLinkData = this.model.data.pageLinks[name];
-                this.pageItems[name] = this.addPageLinkItem(pageLinkData);
+                this.pageItems[name] = this.addPageLinkItem(pageLinkData, name);
             }
         }
     }
 
-    addDatabaseItem(databaseData) {
+    addDatabaseItem(databaseData, name) {
         const caption = DatabaseController.prototype.getCaption(databaseData);
         const databaseItem = this.databasesItem.addItem(caption);
-        const database = new Database(databaseData);
+        // const database = new Database(databaseData);
+        const database = this.model.databases[name];
         databaseItem.ctrl = new DatabaseController(database, databaseItem, this);
         databaseItem.ctrl.createTree();
         return databaseItem;
     }
 
-    addDataSourceItem(dataSourceData) {
+    addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        const dataSource = new DataSource(dataSourceData, this.model);
+        // const dataSource = new DataSource(dataSourceData, this.model);
+        const dataSource = this.model.dataSources[name];
         dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
         dataSourceItem.ctrl.createTree();
         return dataSourceItem;
     }
 
-    addPageLinkItem(pageLinkData) {
+    addPageLinkItem(pageLinkData, name) {
         const caption = PageLinkController.prototype.getCaption(pageLinkData);
         const pageLinkItem = this.pagesItem.addItem(caption);
         pageLinkItem.node.className = 'node';
-        const pageLink = new PageLink(pageLinkData, this.model);
+        // const pageLink = new PageLink(pageLinkData, this.model);
+        const pageLink = this.model.pageLinks[name];
         pageLinkItem.ctrl = new PageLinkController(pageLink, pageLinkItem);
         return pageLinkItem;
     }

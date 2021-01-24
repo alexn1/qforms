@@ -30,4 +30,10 @@ class ModelController extends EventEmitter {
         this.item.parent.removeItem(this.item);
     }
 
+    getItem() {
+        return {
+            title: this.model.getName()
+        };
+    }
+
 }

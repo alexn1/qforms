@@ -27,6 +27,7 @@ class EditorController {
         // appItem
         const caption = ApplicationController.prototype.getCaption(this.appData);
         const appModel = new Application(this.appData);
+        appModel.init();
         console.log('appModel:', appModel);
         const appItem = this.tree.addItem(caption, 'opened');
         this.appCtrl = appItem.ctrl = new ApplicationController(appModel, appItem, this);

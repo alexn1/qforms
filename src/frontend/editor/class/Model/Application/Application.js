@@ -1,8 +1,34 @@
 class Application extends Model {
 
-    /*constructor(data) {
+    constructor(data) {
         super(data);
-    }*/
+        this.databases = {};
+        this.dataSources = {};
+        this.pageLinks = {};
+    }
+
+    init() {
+        // databases
+        for (const name in this.data.databases) {
+            const databaseData = this.data.databases[name];
+            const database = new Database(databaseData);
+            this.databases[name] = database;
+        }
+
+        // dataSources
+        for (const name in this.data.dataSources) {
+            const dataSourceData = this.data.dataSources[name];
+            const dataSource = new DataSource(dataSourceData);
+            this.dataSources[name] = dataSource;
+        }
+
+        // pageLinks
+        for (const name in this.data.pageLinks) {
+            const pageLinkData = this.data.pageLinks[name];
+            const pageLink = new PageLink(pageLinkData, this);
+            this.pageLinks[name] = pageLink;
+        }
+    }
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
