@@ -20,10 +20,14 @@ class TreeItem2 extends ReactComponent {
         return this.props.tree.state.selectedItem === this.props.item;
     }
     isNode() {
-        return !!this.props.item.items;
+        return this.hasItems();
     }
     isOpened() {
         return this.state.opened;
+    }
+    hasItems() {
+        const item = this.props.item;
+        return !!(item.items && item.items.length);
     }
     render() {
         const item = this.props.item;
@@ -34,7 +38,7 @@ class TreeItem2 extends ReactComponent {
                 &nbsp;
                 <span>{item.title}</span>
             </div>
-            {item.items &&
+            {this.hasItems() &&
             <ul>
                 {item.items.map(item => <TreeItem2 key={item.title} tree={tree} item={item} paddingLeft={this.props.paddingLeft+15}/>)}
             </ul>

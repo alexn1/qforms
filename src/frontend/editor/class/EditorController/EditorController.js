@@ -6,6 +6,7 @@ class EditorController {
         this.docs      = null;
         this.listeners = {};
         this.pg = null;
+        this.appCtrl = null;
         EditorController.editorController = this;
     }
 
@@ -28,7 +29,7 @@ class EditorController {
         const appModel = new Application(this.appData);
         console.log('appModel:', appModel);
         const appItem = this.tree.addItem(caption, 'opened');
-        appItem.ctrl = new ApplicationController(appModel, appItem, this);
+        this.appCtrl = appItem.ctrl = new ApplicationController(appModel, appItem, this);
         appItem.ctrl.createTree();
 
         // view
@@ -147,25 +148,7 @@ class EditorController {
     }
 
     getTreeItems() {
-        return [
-            {
-                title: 'itemA',
-                items: [
-                    {
-                        title: 'item 1',
-                        items: [
-                            {title: 'itemX'},
-                            {title: 'itemY'},
-                            {title: 'itemZ'}
-                        ]
-                    },
-                    {title: 'item 2'},
-                    {title: 'item 3'},
-                ]
-            },
-            {title: 'itemB'},
-            {title: 'itemC'}
-        ];
+        return this.appCtrl.getItems();
     }
 
 }

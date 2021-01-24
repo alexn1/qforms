@@ -10,6 +10,38 @@ class ApplicationController extends VisualController {
         this.pageItems        = {};
     }
 
+    getItems() {
+
+        return [
+            {
+                title: this.model.getName(),
+                items: [
+
+                ]
+            }
+        ];
+        /*
+        return [
+            {
+                title: 'itemA',
+                items: [
+                    {
+                        title: 'item 1',
+                        items: [
+                            {title: 'itemX'},
+                            {title: 'itemY'},
+                            {title: 'itemZ'}
+                        ]
+                    },
+                    {title: 'item 2'},
+                    {title: 'item 3'},
+                ]
+            },
+            {title: 'itemB'},
+            {title: 'itemC'}
+        ];*/
+    }
+
     createTree() {
         // databases
         this.databasesItem = this.item.addItem('Databases');
