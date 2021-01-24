@@ -168,4 +168,10 @@ class DatabaseController extends DocumentController {
         return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
     }
 
+    getItem() {
+        return {
+            title: `${this.model.getClassName()}: ${this.model.getName()}`
+        };
+    }
+
 }
