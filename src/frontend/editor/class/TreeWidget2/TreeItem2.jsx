@@ -9,10 +9,15 @@ class TreeItem2 extends ReactComponent {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
-        tree.select(item);
-        if (item.onDown) {
-            item.onDown();
+        if (!tree.isSelected(item)) {
+            tree.select(item);
+            if (item.onSelect) item.onSelect();
         }
+    }
+    onDivDoubleClick = e => {
+        // console.log('TreeItem2.onDivDoubleClick');
+        const item = this.props.item;
+        if (item.onDoubleClick) item.onDoubleClick();
     }
     onNodeMouseDown = e => {
         // console.log('TreeItem2.onNodeMouseDown', e.currentTarget);
@@ -38,7 +43,11 @@ class TreeItem2 extends ReactComponent {
         const item = this.props.item;
         const tree = this.props.tree;
         return <li key={item.title} className={this.isOpened() ? 'opened' : null}>
-            <div onMouseDown={this.onDivMouseDown} className={this.isSelected() ? 'active' : null} style={{paddingLeft: this.props.paddingLeft}}>
+            <div className={this.isSelected() ? 'active' : null}
+                 style={{paddingLeft: this.props.paddingLeft}}
+                 onMouseDown={this.onDivMouseDown}
+                 onDoubleClick={this.onDivDoubleClick}
+            >
                 <span className={this.isNode() ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown}/>
                 &nbsp;
                 <span>{item.title}</span>
