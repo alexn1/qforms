@@ -176,8 +176,14 @@ class DatabaseController extends DocumentController {
         return {
             title: `${this.model.getClassName()}: ${this.model.getName()}`,
             items: [
-                {title: 'Params'},
-                {title: 'Tables'}
+                {
+                    title: 'Params',
+                    items: Object.keys(this.params).map(name => this.params[name].getItem())
+                },
+                {
+                    title: 'Tables',
+                    items: Object.keys(this.tables).map(name => this.tables[name].getItem())
+                }
             ]
         };
     }
