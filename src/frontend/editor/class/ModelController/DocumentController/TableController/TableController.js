@@ -5,6 +5,7 @@ class TableController extends DocumentController {
         this.item = item;
         this.parent = parent;
         this.columnsItem = null;
+        this.columns = {};
     }
 
     createTree() {
@@ -14,16 +15,17 @@ class TableController extends DocumentController {
         if (this.model.data.columns) {
             for (const name in this.model.data.columns) {
                 const data = this.model.data.columns[name];
-                this.addColumnItem(data);
+                this.addColumnItem(data, name);
             }
         }
     }
 
-    addColumnItem(data) {
+    addColumnItem(data, name) {
         const caption = ColumnController.prototype.getCaption(data);
         const item = this.columnsItem.addItem(caption);
-        const column = new Column(data, this.model);
-        item.ctrl = new ColumnController(column, item);
+        // const column = new Column(data, this.model);
+        const column = this.model.columns[name];
+        this.columns[name] = item.ctrl = new ColumnController(column, item);
         return item;
     }
 
@@ -139,6 +141,18 @@ class TableController extends DocumentController {
         });
         $('#modal').modal('show');
         $("#modal input[id='formPage']").focus();
+    }
+
+    getItem() {
+        return {
+            title: this.model.getName(),
+            items: [
+                {
+                    title: 'Columns',
+                    items: Object.keys(this.columns).map(name => this.columns[name].getItem())
+                }
+            ]
+        };
     }
 
 }

@@ -2,6 +2,17 @@ class Table extends Model {
     constructor(data, database) {
         super(data, database);
         this.database = database;
+        this.columns = {};
+    }
+
+    init() {
+        // columns
+        for (const name in this.data.columns) {
+            const columnData = this.data.columns[name];
+            const column = new Column(columnData, this);
+            column.init();
+            this.columns[name] = column;
+        }
     }
 
     async newColumn(name) {
