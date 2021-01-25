@@ -67,6 +67,13 @@ class EditorController {
 
     onItemSelect2 = async item => {
         console.log('EditorController.onItemSelect2', item);
+        if (item.ctrl) {
+            this.fillActions(item.ctrl);
+            this.fillPropertyGrid(item.ctrl);
+        } else {
+            this.clearActions();
+            this.endEdit();
+        }
     }
     onItemDoubleClick2 = item => {
         console.log('EditorController.onItemDoubleClick2', item);

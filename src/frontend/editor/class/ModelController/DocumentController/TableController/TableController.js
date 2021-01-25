@@ -144,6 +144,7 @@ class TableController extends DocumentController {
 
     getItem() {
         return {
+            ctrl : this,
             title: this.model.getName(),
             items: [
                 {

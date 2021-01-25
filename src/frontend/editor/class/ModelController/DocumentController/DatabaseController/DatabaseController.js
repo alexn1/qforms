@@ -174,6 +174,7 @@ class DatabaseController extends DocumentController {
 
     getItem() {
         return {
+            ctrl : this,
             title: `${this.model.getClassName()}: ${this.model.getName()}`,
             items: [
                 {
