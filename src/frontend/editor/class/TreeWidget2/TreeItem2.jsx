@@ -7,7 +7,12 @@ class TreeItem2 extends ReactComponent {
     }
     onDivMouseDown = e => {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
-        this.props.tree.select(this.props.item);
+        const item = this.props.item;
+        const tree = this.props.tree;
+        tree.select(item);
+        if (item.onDown) {
+            item.onDown();
+        }
     }
     onNodeMouseDown = e => {
         // console.log('TreeItem2.onNodeMouseDown', e.currentTarget);

@@ -13,11 +13,14 @@ class ApplicationController extends VisualController {
         this.dataSources = {};
         this.pageLinks   = {};
     }
-
+    onItemDown = () => {
+        console.log('ApplicationController.onItemDown');
+    }
     getItem() {
         return {
             title : this.model.getName(),
             opened: true,
+            onDown: this.onItemDown,
             items : [
                 {
                     title: 'Databases',
