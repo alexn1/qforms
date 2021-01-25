@@ -2,7 +2,7 @@ class TreeItem2 extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            opened: props.item.opened
+            opened: props.item.opened !== undefined ? props.item.opened : false
         };
     }
     onDivMouseDown = e => {
