@@ -2,6 +2,19 @@ class Database extends Model {
 
     constructor(data) {
         super(data);
+        this.params = {};
+        this.tables = {};
+    }
+
+    init() {
+
+        // params
+        for (const name in this.data.params) {
+            const paramData = this.data.params[name];
+            const param = new Param(paramData, this);
+            param.init();
+            this.params[name] = param;
+        }
     }
 
     async setValue(name, value) {

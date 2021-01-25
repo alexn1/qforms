@@ -5,6 +5,9 @@ class Model {
         this.name = data['@attributes'].name;
     }
 
+    init() {
+    }
+
     getClassName() {
         return this.data['@class'];
     }

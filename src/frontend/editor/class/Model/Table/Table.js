@@ -1,6 +1,6 @@
 class Table extends Model {
     constructor(data, database) {
-        super(data);
+        super(data, database);
         this.database = database;
     }
 

@@ -2,9 +2,9 @@ class Application extends Model {
 
     constructor(data) {
         super(data);
-        this.databases = {};
+        this.databases   = {};
         this.dataSources = {};
-        this.pageLinks = {};
+        this.pageLinks   = {};
     }
 
     init() {
@@ -12,6 +12,7 @@ class Application extends Model {
         for (const name in this.data.databases) {
             const databaseData = this.data.databases[name];
             const database = new Database(databaseData);
+            database.init();
             this.databases[name] = database;
         }
 
@@ -19,6 +20,7 @@ class Application extends Model {
         for (const name in this.data.dataSources) {
             const dataSourceData = this.data.dataSources[name];
             const dataSource = new DataSource(dataSourceData);
+            dataSource.init();
             this.dataSources[name] = dataSource;
         }
 
@@ -26,6 +28,7 @@ class Application extends Model {
         for (const name in this.data.pageLinks) {
             const pageLinkData = this.data.pageLinks[name];
             const pageLink = new PageLink(pageLinkData, this);
+            pageLink.init();
             this.pageLinks[name] = pageLink;
         }
     }
