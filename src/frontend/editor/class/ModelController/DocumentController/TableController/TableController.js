@@ -23,7 +23,6 @@ class TableController extends DocumentController {
     addColumnItem(data, name) {
         const caption = ColumnController.prototype.getCaption(data);
         const item = this.columnsItem.addItem(caption);
-        // const column = new Column(data, this.model);
         const column = this.model.columns[name];
         this.columns[name] = item.ctrl = new ColumnController(column, item);
         return item;
