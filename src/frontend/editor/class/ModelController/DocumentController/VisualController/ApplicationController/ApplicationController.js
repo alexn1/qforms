@@ -13,18 +13,16 @@ class ApplicationController extends VisualController {
         this.dataSources = {};
         this.pageLinks   = {};
     }
-    onDoubleClick = () => {
-        console.log('ApplicationController.onDoubleClick');
-    }
-    onItemSelect() {
-        console.log('ApplicationController.onItemSelect');
-    }
+    /*onDoubleClick = (item) => {
+        console.log('ApplicationController.onDoubleClick', item);
+    }*/
     getItem() {
         return {
+            ctrl: this,
             title : this.model.getName(),
             opened: true,
-            onSelect: this.onItemSelect,
-            onDoubleClick: this.onDoubleClick,
+            // onSelect: this.editorController.onItemSelect2,
+            // onDoubleClick: this.onDoubleClick,
             items : [
                 {
                     title: 'Databases',

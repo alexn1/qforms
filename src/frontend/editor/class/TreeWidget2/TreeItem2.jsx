@@ -9,15 +9,13 @@ class TreeItem2 extends ReactComponent {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
-        if (!tree.isSelected(item)) {
-            tree.select(item);
-            if (item.onSelect) item.onSelect();
-        }
+        tree.select(item);
     }
     onDivDoubleClick = e => {
         // console.log('TreeItem2.onDivDoubleClick');
         const item = this.props.item;
-        if (item.onDoubleClick) item.onDoubleClick();
+        const tree = this.props.tree;
+        tree.onDoubleClick(item);
     }
     onNodeMouseDown = e => {
         // console.log('TreeItem2.onNodeMouseDown', e.currentTarget);

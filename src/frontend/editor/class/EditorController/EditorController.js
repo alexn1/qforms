@@ -65,6 +65,12 @@ class EditorController {
         }
     }
 
+    onItemSelect2 = async item => {
+        console.log('EditorController.onItemSelect2', item);
+    }
+    onItemDoubleClick2 = item => {
+        console.log('EditorController.onItemDoubleClick2', item);
+    }
     clearActions() {
         $('#treeActionsList').children().remove();
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");

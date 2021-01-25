@@ -9,6 +9,11 @@ class TreeWidget2 extends ReactComponent {
         // console.log('TreeWidget2.select', item);
         if (this.isSelected(item)) return;
         this.setState({selectedItem: item});
+        if (this.props.onItemSelect) this.props.onItemSelect(item);
+    }
+    onDoubleClick(item) {
+        // console.log('TreeWidget2.onDoubleClick', item);
+        if (this.props.onItemDoubleClick) this.props.onItemDoubleClick(item);
     }
     isSelected(item) {
         return this.state.selectedItem === item;
