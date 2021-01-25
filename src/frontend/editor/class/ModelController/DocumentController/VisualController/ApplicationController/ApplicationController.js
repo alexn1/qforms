@@ -16,8 +16,9 @@ class ApplicationController extends VisualController {
 
     getItem() {
         return {
-            title: this.model.getName(),
-            items: [
+            title : this.model.getName(),
+            opened: true,
+            items : [
                 {
                     title: 'Databases',
                     items: Object.keys(this.databases).map(name => {
@@ -28,26 +29,6 @@ class ApplicationController extends VisualController {
                 {title: 'Pages'}
             ]
         };
-        /*
-        return [
-            {
-                title: 'itemA',
-                items: [
-                    {
-                        title: 'item 1',
-                        items: [
-                            {title: 'itemX'},
-                            {title: 'itemY'},
-                            {title: 'itemZ'}
-                        ]
-                    },
-                    {title: 'item 2'},
-                    {title: 'item 3'},
-                ]
-            },
-            {title: 'itemB'},
-            {title: 'itemC'}
-        ];*/
     }
 
     createTree() {
