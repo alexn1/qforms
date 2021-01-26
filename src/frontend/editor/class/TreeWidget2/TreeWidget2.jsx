@@ -26,7 +26,15 @@ class TreeWidget2 extends ReactComponent {
         const items = this.props.items;
         return <div className={'TreeWidget2'}>
             <ul>
-                {items.map(item => <TreeItem2 key={item.title} tree={this} item={item} paddingLeft={5}/>)}
+                {items.map(item =>
+                    <TreeItem2
+                        key={item.title}
+                        tree={this}
+                        item={item}
+                        paddingLeft={5}
+                        onCreate={c => { if (item.ctrl) item.ctrl.c = c}}
+                    />
+                )}
             </ul>
         </div>;
     }

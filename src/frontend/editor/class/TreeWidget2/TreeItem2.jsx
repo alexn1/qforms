@@ -60,7 +60,15 @@ class TreeItem2 extends ReactComponent {
             </div>
             {this.hasItems() &&
             <ul>
-                {item.items.map(item => <TreeItem2 key={item.title} tree={tree} item={item} paddingLeft={this.props.paddingLeft+15}/>)}
+                {item.items.map(item =>
+                    <TreeItem2
+                        key={item.title}
+                        tree={tree}
+                        item={item}
+                        paddingLeft={this.props.paddingLeft+15}
+                        onCreate={c => { if (item.ctrl) item.ctrl.c = c}}
+                    />
+                )}
             </ul>
             }
         </li>;

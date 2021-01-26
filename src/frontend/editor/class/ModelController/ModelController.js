@@ -4,6 +4,7 @@ class ModelController extends EventEmitter {
         super();
         this.model     = model;
         this.listeners = {};
+        this.c = null;
     }
 
     getPropList() {
