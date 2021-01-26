@@ -133,8 +133,13 @@ class EditorController {
             })
         });
         const page = new Page(pageData, pageLink.parent, pageLink);
+
+        // change item controller
+        const c = item.ctrl.c;
         item.ctrl = new PageController(page, item, pageLink);
-        // item.ctrl.createTree();
+        item.items = [{title: 'Forms'}];
+        item.ctrl.c = c;
+        item.ctrl.c.rerender();
     }
 
     onItemDelete(e) {
