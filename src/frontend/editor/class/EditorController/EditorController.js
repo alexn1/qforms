@@ -50,8 +50,11 @@ class EditorController {
             this.pageLinkToPage(e.item);
         }
     }
-    onItemOpen2(item) {
+    onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item);
+        if (item.ctrl instanceof PageLinkController) {
+            await this.pageLinkToPage2(item);
+        }
     }
     async onItemSelect(e) {
         console.log('EditorController.onItemSelect');
