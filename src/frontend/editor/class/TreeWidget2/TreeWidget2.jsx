@@ -22,7 +22,7 @@ class TreeWidget2 extends ReactComponent {
         return this.state.selectedItem === item;
     }
     render() {
-        // console.log('TreeWidget2.render', this.props.items);
+        console.log('TreeWidget2.render'/*, this.props.items*/);
         const items = this.props.items;
         return <div className={'TreeWidget2'}>
             <ul>
