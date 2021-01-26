@@ -19,10 +19,16 @@ class TreeItem2 extends ReactComponent {
     }
     onNodeMouseDown = e => {
         // console.log('TreeItem2.onNodeMouseDown', e.currentTarget);
+        const item = this.props.item;
+        const tree = this.props.tree;
+        const opened = this.state.opened;
         e.stopPropagation();
         this.setState(prevState => {
             return {opened: !prevState.opened};
         });
+        if (!opened) {
+            tree.onOpen(item);
+        }
     }
     isSelected() {
         return this.props.tree.state.selectedItem === this.props.item;

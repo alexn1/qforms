@@ -50,7 +50,9 @@ class EditorController {
             this.pageLinkToPage(e.item);
         }
     }
-
+    onItemOpen2(item) {
+        console.log('EditorController.onItemOpen2', item);
+    }
     async onItemSelect(e) {
         console.log('EditorController.onItemSelect');
         if (e.item.ctrl) {

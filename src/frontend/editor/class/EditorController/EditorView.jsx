@@ -12,6 +12,7 @@ class EditorView extends ReactComponent {
                             items={ctrl.getTreeItems()}
                             onItemSelect={ctrl.onItemSelect2}
                             onItemDoubleClick={ctrl.onItemDoubleClick2}
+                            onItemOpen={ctrl.onItemOpen2}
                         />
                         <PropertyGrid2
                             onCreate={c => ctrl.pg = c}
