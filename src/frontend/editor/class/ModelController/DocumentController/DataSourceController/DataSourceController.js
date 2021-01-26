@@ -6,7 +6,8 @@ class DataSourceController extends DocumentController {
         this.itemKeys             = null;
         this.itemParentKeyColumns = null;
         this.$view                = null;
-        this.cmQuery              = null;
+        // this.cmQuery              = null;
+        this.keyColumns = {};
     }
 
     createTree() {
@@ -28,10 +29,11 @@ class DataSourceController extends DocumentController {
     }
 
     addKeyColumn(itemData, name) {
+        // const keyColumn = new KeyColumn(itemData, this.model);
+        const keyColumn = this.model.keyColumns[name];
         const caption = KeyColumnController.prototype.getCaption(itemData);
         const keyColumnItem = this.itemKeys.addItem(caption);
-        const keyColumn = new KeyColumn(itemData, this.model);
-        keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
+        this.keyColumns[name] = keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
         return keyColumnItem;
     }
 
@@ -336,7 +338,8 @@ class DataSourceController extends DocumentController {
             title: `${this.model.getClassName()}: ${this.model.getName()}`,
             items: [
                 {
-                    title: 'Key Columns'
+                    title: 'Key Columns',
+                    items: Object.keys(this.keyColumns).map(name => this.keyColumns[name].getItem())
                 }
             ]
         };
