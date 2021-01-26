@@ -15,7 +15,7 @@ class DataSourceController extends DocumentController {
         if (this.model.data.keyColumns)
         for (const name in this.model.data.keyColumns) {
             const keyColumnData = this.model.data.keyColumns[name];
-            this.addKeyColumn(keyColumnData);
+            this.addKeyColumn(keyColumnData, name);
         }
 
         // parent key columns
@@ -27,7 +27,7 @@ class DataSourceController extends DocumentController {
         }
     }
 
-    addKeyColumn(itemData) {
+    addKeyColumn(itemData, name) {
         const caption = KeyColumnController.prototype.getCaption(itemData);
         const keyColumnItem = this.itemKeys.addItem(caption);
         const keyColumn = new KeyColumn(itemData, this.model);
@@ -328,6 +328,18 @@ class DataSourceController extends DocumentController {
             .replace('{name}' , data['@attributes'].name)
             .replace('{class}', data['@class']);
         return caption;
+    }
+
+    getItem() {
+        return {
+            ctrl : this,
+            title: `${this.model.getClassName()}: ${this.model.getName()}`,
+            items: [
+                {
+                    title: 'Key Columns'
+                }
+            ]
+        };
     }
 
 }
