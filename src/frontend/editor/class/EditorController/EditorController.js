@@ -145,6 +145,7 @@ class EditorController {
         const c = item.ctrl.c;
         item.ctrl = new PageController(page, item, pageLink);
         item.items = item.ctrl.getItem().items;
+        console.log('item.items:', item.items);
         item.ctrl.c = c;
         item.ctrl.c.rerender();
     }
