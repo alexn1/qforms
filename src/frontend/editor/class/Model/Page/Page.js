@@ -5,6 +5,26 @@ class Page extends Model {
         this.parent      = parent;
         this.pageLink    = pageLink;
         this.application = parent;
+        this.dataSources = {};
+        this.forms       = {};
+    }
+
+    init() {
+        // data sources
+        for (const name in this.data.dataSources) {
+            const dataSourceData = this.data.dataSources[name];
+            const dataSource = new DataSource(dataSourceData, this);
+            dataSource.init();
+            this.dataSources[name] = dataSource;
+        }
+
+        // forms
+        for (const name in this.data.forms) {
+            const formData = this.data.forms[name];
+            const form = new Form(formData, this);
+            form.init();
+            this.forms[name] = form;
+        }
     }
 
     async setValue(name, value) {

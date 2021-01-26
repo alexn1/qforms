@@ -13,7 +13,7 @@ class PageController extends VisualController {
         if (this.model.data.dataSources) {
             for (const name in this.model.data.dataSources) {
                 const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData);
+                this.addDataSourceItem(dataSourceData, name);
             }
         }
         // forms
@@ -21,24 +21,26 @@ class PageController extends VisualController {
         if (this.model.data.forms) {
             for (const name in this.model.data.forms) {
                 const formData = this.model.data.forms[name];
-                this.addFormItem(formData);
+                this.addFormItem(formData, name);
             }
         }
     }
 
-    addFormItem(formData) {
+    addFormItem(formData, name) {
         const caption = FormController.prototype.getCaption(formData);
         const itemForm = this.itemForms.addItem(caption);
-        const form = new Form(formData, this.model);
+        // const form = new Form(formData, this.model);
+        const form = this.model.forms[name];
         itemForm.ctrl = new FormController(form, itemForm);
         itemForm.ctrl.createTree();
         return itemForm;
     }
 
-    addDataSourceItem(dataSourceData) {
+    addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        const dataSource = new DataSource(dataSourceData, this.model);
+        // const dataSource = new DataSource(dataSourceData, this.model);
+        const dataSource = this.model.dataSources[name];
         dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
         dataSourceItem.ctrl.createTree();
         return dataSourceItem;

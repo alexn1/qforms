@@ -120,6 +120,7 @@ class EditorController {
             })
         });
         const page = new Page(pageData, pageLink.parent, pageLink);
+        page.init();
         item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();
     }
