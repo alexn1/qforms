@@ -35,7 +35,8 @@ class TreeItem2 extends ReactComponent {
     }
     hasItems() {
         const item = this.props.item;
-        return !!(item.items && item.items.length);
+        // return !!(item.items && item.items.length);
+        return Array.isArray(item.items);
     }
     render() {
         const item = this.props.item;
