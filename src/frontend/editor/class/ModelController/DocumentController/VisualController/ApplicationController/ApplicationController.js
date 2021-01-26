@@ -23,7 +23,10 @@ class ApplicationController extends VisualController {
                     title: 'Databases',
                     items: Object.keys(this.databases).map(name => this.databases[name].getItem())
                 },
-                {title: 'Data Sources'},
+                {
+                    title: 'Data Sources',
+                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                },
                 {
                     title : 'Pages',
                     opened: true,

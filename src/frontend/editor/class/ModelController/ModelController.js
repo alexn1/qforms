@@ -32,6 +32,7 @@ class ModelController extends EventEmitter {
 
     getItem() {
         return {
+            ctrl : this,
             title: this.model.getName()
         };
     }
