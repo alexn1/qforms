@@ -75,9 +75,6 @@ class EditorController {
             this.endEdit();
         }
     }
-    onItemDoubleClick2 = item => {
-        console.log('EditorController.onItemDoubleClick2', item);
-    }
     clearActions() {
         $('#treeActionsList').children().remove();
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
@@ -156,7 +153,16 @@ class EditorController {
             controller.createTab(this.docs);
         }
     }
-
+    onItemDoubleClick2 = item => {
+        console.log('EditorController.onItemDoubleClick2', item);
+        const controller = item.ctrl;
+        if (!controller || !controller instanceof DocumentController) return;
+        if (controller.tab) {
+            this.docs.selectTab(controller.tab);
+        } else {
+            controller.createTab(this.docs);
+        }
+    }
     onTabClosingByUser(e) {
         this.docs.closeTab(e.tab);
     }
