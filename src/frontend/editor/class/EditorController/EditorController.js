@@ -70,6 +70,9 @@ class EditorController {
     onItemSelect2 = async item => {
         console.log('EditorController.onItemSelect2', item);
         if (item.ctrl) {
+            if (item.ctrl instanceof PageLinkController) {
+                await this.pageLinkToPage2(item);
+            }
             this.fillActions(item.ctrl);
             this.fillPropertyGrid(item.ctrl);
         } else {
@@ -116,6 +119,22 @@ class EditorController {
         const page = new Page(pageData, pageLink.parent, pageLink);
         item.ctrl = new PageController(page, item, pageLink);
         item.ctrl.createTree();
+    }
+
+    async pageLinkToPage2(item) {
+        console.log('EditorController.pageLinkToPage2');
+        const pageLink = item.ctrl.model;
+
+        const pageData = await QForms.doHttpRequest({
+            controller: 'Page',
+            action    : 'get',
+            params    : Helper.encodeObject({
+                fileName: pageLink.data['@attributes'].fileName
+            })
+        });
+        const page = new Page(pageData, pageLink.parent, pageLink);
+        item.ctrl = new PageController(page, item, pageLink);
+        // item.ctrl.createTree();
     }
 
     onItemDelete(e) {
