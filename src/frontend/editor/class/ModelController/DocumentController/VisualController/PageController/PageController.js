@@ -136,4 +136,15 @@ class PageController extends VisualController {
             ModelController.prototype.setProperty.call(this, name, value);
         }
     }
+
+    getItem() {
+        return {
+            ctrl : this,
+            title: this.model.getName(),
+            items: [
+                {title: 'Data Sources'},
+                {title: 'Forms'}
+            ]
+        };
+    }
 }

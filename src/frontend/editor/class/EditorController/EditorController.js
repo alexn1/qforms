@@ -140,7 +140,7 @@ class EditorController {
         // change item controller
         const c = item.ctrl.c;
         item.ctrl = new PageController(page, item, pageLink);
-        item.items = [{title: 'Forms'}];
+        item.items = item.ctrl.getItem().items;
         item.ctrl.c = c;
         item.ctrl.c.rerender();
     }
