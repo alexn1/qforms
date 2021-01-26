@@ -124,18 +124,21 @@ class EditorController {
         item.ctrl.createTree();
     }
 
+    static async fetchPageData(fileName) {
+        console.log('EditorController.fetchPageData', fileName);
+        return await QForms.doHttpRequest({
+            controller: 'Page',
+            action    : 'get',
+            params    : Helper.encodeObject({fileName})
+        });
+    }
+
     async pageLinkToPage2(item) {
         console.log('EditorController.pageLinkToPage2');
         const pageLink = item.ctrl.model;
-
-        const pageData = await QForms.doHttpRequest({
-            controller: 'Page',
-            action    : 'get',
-            params    : Helper.encodeObject({
-                fileName: pageLink.data['@attributes'].fileName
-            })
-        });
+        const pageData = await EditorController.fetchPageData(pageLink.getFileName());
         const page = new Page(pageData, pageLink.parent, pageLink);
+        page.init();
 
         // change item controller
         const c = item.ctrl.c;
