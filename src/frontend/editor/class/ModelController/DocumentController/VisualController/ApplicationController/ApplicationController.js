@@ -22,6 +22,14 @@ class ApplicationController extends VisualController {
                 this.databases[name] = new DatabaseController(database, this);
             }
         }
+
+        // dataSources
+        if (this.model.data.dataSources) {
+            for (const name in this.model.data.dataSources) {
+                const dataSource = this.model.dataSources[name];
+                this.dataSources[name] = new DataSourceController(dataSource, null, this);
+            }
+        }
     }
 
 
@@ -64,10 +72,6 @@ class ApplicationController extends VisualController {
 
     addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
-        const dataSource = this.model.dataSources[name];
-        this.dataSources[name] = new DataSourceController(dataSource, null, this);
-
-        // item
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
         dataSourceItem.ctrl = this.dataSources[name];
         dataSourceItem.ctrl.createTree(dataSourceItem);
