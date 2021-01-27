@@ -24,16 +24,20 @@ class EditorController {
         this.docs = document.getElementById('docs')._obj;
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
-        // appItem
+        // appModel
         const caption = ApplicationController.prototype.getCaption(this.appData);
         const appModel = new Application(this.appData);
         appModel.init();
         console.log('appModel:', appModel);
 
+        // application controller
         this.appCtrl = new ApplicationController(appModel, this);
+        this.appCtrl.init();
 
+        // appItem
         const appItem = this.tree.addItem(caption, 'opened');
         appItem.ctrl = this.appCtrl;
+
         this.appCtrl.createTree(appItem);
 
         // view

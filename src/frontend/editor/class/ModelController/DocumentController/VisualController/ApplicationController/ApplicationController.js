@@ -13,28 +13,17 @@ class ApplicationController extends VisualController {
         this.dataSources = {};
         this.pageLinks   = {};
     }
-    getItem() {
-        return {
-            ctrl  : this,
-            title : this.model.getName(),
-            opened: true,
-            items : [
-                {
-                    title: 'Databases',
-                    items: Object.keys(this.databases).map(name => this.databases[name].getItem())
-                },
-                {
-                    title: 'Data Sources',
-                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
-                },
-                {
-                    title : 'Pages',
-                    opened: true,
-                    items : Object.keys(this.pageLinks).map(name => this.pageLinks[name].getItem())
-                }
-            ]
-        };
+    init() {
+
+        // databases
+        if (this.model.data.databases) {
+            for (const name in this.model.data.databases) {
+                const database = this.model.databases[name];
+                this.databases[name] = new DatabaseController(database, this);
+            }
+        }
     }
+
 
     createTree(item) {
         this.item = item;
@@ -67,9 +56,6 @@ class ApplicationController extends VisualController {
 
     addDatabaseItem(databaseData, name) {
         const caption = DatabaseController.prototype.getCaption(databaseData);
-        const database = this.model.databases[name];
-        this.databases[name] = new DatabaseController(database, this);
-
         const databaseItem = this.databasesItem.addItem(caption);
         databaseItem.ctrl = this.databases[name];
         databaseItem.ctrl.createTree(databaseItem);
@@ -78,10 +64,13 @@ class ApplicationController extends VisualController {
 
     addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
-        const dataSourceItem = this.dataSourcesItem.addItem(caption);
         const dataSource = this.model.dataSources[name];
-        this.dataSources[name] = dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
-        dataSourceItem.ctrl.createTree();
+        this.dataSources[name] = new DataSourceController(dataSource, null, this);
+
+        // item
+        const dataSourceItem = this.dataSourcesItem.addItem(caption);
+        dataSourceItem.ctrl = this.dataSources[name];
+        dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
     }
 
@@ -210,6 +199,29 @@ class ApplicationController extends VisualController {
         propList.options['authentication'] = ['true', 'false'];
         propList.options['lang']           = ['en'  , 'ru'   ];
         return propList;
+    }
+
+    getItem() {
+        return {
+            ctrl  : this,
+            title : this.model.getName(),
+            opened: true,
+            items : [
+                {
+                    title: 'Databases',
+                    items: Object.keys(this.databases).map(name => this.databases[name].getItem())
+                },
+                {
+                    title: 'Data Sources',
+                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                },
+                {
+                    title : 'Pages',
+                    opened: true,
+                    items : Object.keys(this.pageLinks).map(name => this.pageLinks[name].getItem())
+                }
+            ]
+        };
     }
 
 }
