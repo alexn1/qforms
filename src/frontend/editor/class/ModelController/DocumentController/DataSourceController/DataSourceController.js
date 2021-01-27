@@ -16,13 +16,15 @@ class DataSourceController extends DocumentController {
             for (const name in this.model.data.keyColumns) {
                 const keyColumn = this.model.keyColumns[name];
                 this.keyColumns[name] = new KeyColumnController(keyColumn, null);
+                this.keyColumns[name].init();
             }
         }
 
         if (this.model.data.parentKeyColumns) {
             for (const name in this.model.data.parentKeyColumns) {
-                const parentKeyColumn = new ParentKeyColumn(pkcData, this.model);
+                const parentKeyColumn = this.model.parentKeyColumns[name];
                 this.parentKeyColumns[name] = new ParentKeyColumnController(parentKeyColumn, null);
+                this.parentKeyColumns[name].init();
             }
         }
     }
