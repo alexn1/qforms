@@ -52,9 +52,9 @@ class EditorController {
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
     }
 
-    onItemOpen(e) {
+    async onItemOpen(e) {
         if (e.item.ctrl instanceof PageLinkController) {
-            this.pageLinkToPage(e.item);
+            await this.pageLinkToPage(e.item);
         }
     }
     onItemOpen2 = async item => {
@@ -118,18 +118,12 @@ class EditorController {
     async pageLinkToPage(item) {
         console.log('EditorController.pageLinkToPage');
         const pageLink = item.ctrl.model;
-
-        const pageData = await QForms.doHttpRequest({
-            controller: 'Page',
-            action    : 'get',
-            params    : Helper.encodeObject({
-                fileName: pageLink.data['@attributes'].fileName
-            })
-        });
+        const pageData = await EditorController.fetchPageData(pageLink.getFileName());
         const page = new Page(pageData, pageLink.parent, pageLink);
         page.init();
-        item.ctrl = new PageController(page, item, pageLink);
-        item.ctrl.createTree();
+        item.ctrl = new PageController(page, null, pageLink);
+        item.ctrl.init();
+        item.ctrl.createTree(item);
     }
 
     static async fetchPageData(fileName) {
@@ -151,6 +145,7 @@ class EditorController {
         // change item controller
         const c = item.ctrl.c;
         item.ctrl = new PageController(page, item, pageLink);
+        item.ctrl.init();
         item.items = item.ctrl.getItem().items;
         console.log('item.items:', item.items);
         item.ctrl.c = c;

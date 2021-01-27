@@ -9,7 +9,8 @@ class PageController extends VisualController {
         this.forms       = {};
     }
 
-    createTree() {
+    createTree(item) {
+        if (item) this.item = item;
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
         if (this.model.data.dataSources) {

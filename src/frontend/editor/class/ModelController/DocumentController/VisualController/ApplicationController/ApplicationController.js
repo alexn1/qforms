@@ -95,13 +95,17 @@ class ApplicationController extends VisualController {
     }
 
     addPageItem(pageData, pageLinkData) {
-        const caption = PageController.prototype.getCaption(pageData);
-        const pageItem = this.pagesItem.addItem(caption);
-        pageItem.node.className = 'node';
         const pageLink = new PageLink(pageLinkData, this.model);
         const page = new Page(pageData, this.model, pageLink);
-        pageItem.ctrl = new PageController(page, pageItem, pageLink);
-        pageItem.ctrl.createTree();
+        const pageController = new PageController(page, null, pageLink);
+        pageController.init();
+
+        // pageItem
+        const caption = PageController.prototype.getCaption(pageData);
+        const pageItem = this.pagesItem.addItem(caption);
+        pageItem.ctrl = pageController;
+        pageItem.node.className = 'node';
+        pageItem.ctrl.createTree(pageItem);
         return pageItem;
     }
 
