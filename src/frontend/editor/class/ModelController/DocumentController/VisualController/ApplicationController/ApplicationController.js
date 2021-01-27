@@ -67,10 +67,12 @@ class ApplicationController extends VisualController {
 
     addDatabaseItem(databaseData, name) {
         const caption = DatabaseController.prototype.getCaption(databaseData);
-        const databaseItem = this.databasesItem.addItem(caption);
         const database = this.model.databases[name];
-        this.databases[name] = databaseItem.ctrl = new DatabaseController(database, databaseItem, this);
-        databaseItem.ctrl.createTree();
+        this.databases[name] = new DatabaseController(database, this);
+
+        const databaseItem = this.databasesItem.addItem(caption);
+        databaseItem.ctrl = this.databases[name];
+        databaseItem.ctrl.createTree(databaseItem);
         return databaseItem;
     }
 

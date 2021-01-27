@@ -1,10 +1,10 @@
 class DatabaseController extends DocumentController {
 
-    constructor(model, item, applicationController) {
+    constructor(model, applicationController) {
         super(model);
-        this.item                  = item;
         this.parent                = applicationController;
         this.applicationController = applicationController;
+        this.item                  = null;
         this.paramsItem            = null;
         this.tablesItem            = null;
 
@@ -21,7 +21,8 @@ class DatabaseController extends DocumentController {
     }
 
 
-    createTree() {
+    createTree(item) {
+        this.item = item;
         // params
         this.paramsItem = this.item.addItem('Params');
         if (this.model.data.params) {
