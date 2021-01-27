@@ -8,7 +8,8 @@ class TableController extends DocumentController {
         this.columns = {};
     }
 
-    createTree() {
+    createTree(item) {
+        if (item) this.item = item;
 
         // columns
         this.columnsItem = this.item.addItem('Columns');

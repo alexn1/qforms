@@ -20,6 +20,7 @@ class ApplicationController extends VisualController {
             for (const name in this.model.data.databases) {
                 const database = this.model.databases[name];
                 this.databases[name] = new DatabaseController(database, this);
+                this.databases[name].init();
             }
         }
 
@@ -28,6 +29,7 @@ class ApplicationController extends VisualController {
             for (const name in this.model.data.dataSources) {
                 const dataSource = this.model.dataSources[name];
                 this.dataSources[name] = new DataSourceController(dataSource, null, this);
+                this.dataSources[name].init();
             }
         }
 
@@ -36,6 +38,7 @@ class ApplicationController extends VisualController {
             for (const name in this.model.data.pageLinks) {
                 const pageLink = this.model.pageLinks[name];
                 this.pageLinks[name] = new PageLinkController(pageLink, null);
+                this.pageLinks[name].init();
             }
         }
     }
