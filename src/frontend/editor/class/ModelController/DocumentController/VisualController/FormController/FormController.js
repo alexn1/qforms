@@ -26,7 +26,14 @@ class FormController extends VisualController {
         if (this.model.data.fields) {
             for (const name in this.model.data.fields) {
                 const field = this.model.fields[name];
-                this.fields[name] =  new FieldController(field, null);
+                this.fields[name] = new FieldController(field, null);
+            }
+        }
+
+        if (this.model.data.actions) {
+            for (const name in this.model.data.actions) {
+                const action = this.model.actions[name];
+                this.actions[name] = new ActionController(action, null);
             }
         }
 
@@ -99,10 +106,12 @@ class FormController extends VisualController {
     }
 
     addActionItem(actionData, name) {
+
+
+
         const caption = ActionController.prototype.getCaption(actionData);
         const itemAction = this.itemActions.addItem(caption);
-        const control = new Action(actionData, this.model);
-        itemAction.ctrl = new ActionController(control, itemAction);
+        itemAction.ctrl = this.actions[name];
         return itemAction;
     }
 

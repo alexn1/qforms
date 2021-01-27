@@ -23,6 +23,12 @@ class Form extends Model {
             field.init();
             this.fields[name] = field;
         }
+
+        for (const name in this.data.actions) {
+            const action = new Action(this.data.actions[name], this);
+            action.init();
+            this.actions[name] = action;
+        }
     }
 
     async setValue(name, value) {
