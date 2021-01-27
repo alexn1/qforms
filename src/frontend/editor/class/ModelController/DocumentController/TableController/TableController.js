@@ -8,6 +8,15 @@ class TableController extends DocumentController {
         this.columns = {};
     }
 
+    init() {
+        if (this.model.data.columns) {
+            for (const name in this.model.data.columns) {
+                const column = this.model.columns[name];
+                this.columns[name] = new ColumnController(column, null);
+            }
+        }
+    }
+
     createTree(item) {
         if (item) this.item = item;
 
@@ -24,8 +33,7 @@ class TableController extends DocumentController {
     addColumnItem(data, name) {
         const caption = ColumnController.prototype.getCaption(data);
         const item = this.columnsItem.addItem(caption);
-        const column = this.model.columns[name];
-        this.columns[name] = item.ctrl = new ColumnController(column, item);
+        item.ctrl = this.columns[name];
         return item;
     }
 
