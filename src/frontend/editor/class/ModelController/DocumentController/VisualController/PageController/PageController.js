@@ -9,6 +9,10 @@ class PageController extends VisualController {
         this.forms       = {};
     }
 
+    init() {
+
+    }
+
     createTree(item) {
         if (item) this.item = item;
         // data sources
@@ -32,7 +36,6 @@ class PageController extends VisualController {
     addFormItem(formData, name) {
         const caption = FormController.prototype.getCaption(formData);
         const itemForm = this.itemForms.addItem(caption);
-        // const form = new Form(formData, this.model);
         const form = this.model.forms[name];
         this.forms[name] = itemForm.ctrl = new FormController(form, itemForm);
         itemForm.ctrl.createTree();
@@ -42,10 +45,9 @@ class PageController extends VisualController {
     addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        // const dataSource = new DataSource(dataSourceData, this.model);
         const dataSource = this.model.dataSources[name];
-        this.dataSources[name] = dataSourceItem.ctrl = new DataSourceController(dataSource, dataSourceItem, this);
-        dataSourceItem.ctrl.createTree();
+        this.dataSources[name] = dataSourceItem.ctrl = new DataSourceController(dataSource, null, this);
+        dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
     }
 
