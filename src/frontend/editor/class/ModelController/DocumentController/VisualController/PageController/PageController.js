@@ -10,11 +10,28 @@ class PageController extends VisualController {
     }
 
     init() {
+        // dataSources
+        if (this.model.data.dataSources) {
+            for (const name in this.model.data.dataSources) {
+                const dataSource = this.model.dataSources[name];
+                this.dataSources[name] = new DataSourceController(dataSource, null, this);
+                this.dataSources[name].init();
+            }
+        }
 
+        // forms
+        if (this.model.data.forms) {
+            for (const name in this.model.data.forms) {
+                const form = this.model.forms[name];
+                this.forms[name] = new FormController(form, null);
+                this.forms[name].init();
+            }
+        }
     }
 
     createTree(item) {
         if (item) this.item = item;
+
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
         if (this.model.data.dataSources) {
@@ -23,6 +40,7 @@ class PageController extends VisualController {
                 this.addDataSourceItem(dataSourceData, name);
             }
         }
+
         // forms
         this.itemForms = this.item.addItem('Forms');
         if (this.model.data.forms) {
@@ -33,22 +51,20 @@ class PageController extends VisualController {
         }
     }
 
-    addFormItem(formData, name) {
-        const caption = FormController.prototype.getCaption(formData);
-        const itemForm = this.itemForms.addItem(caption);
-        const form = this.model.forms[name];
-        this.forms[name] = itemForm.ctrl = new FormController(form, itemForm);
-        itemForm.ctrl.createTree();
-        return itemForm;
-    }
-
     addDataSourceItem(dataSourceData, name) {
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        const dataSource = this.model.dataSources[name];
-        this.dataSources[name] = dataSourceItem.ctrl = new DataSourceController(dataSource, null, this);
+        dataSourceItem.ctrl = this.dataSources[name];
         dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
+    }
+
+    addFormItem(formData, name) {
+        const caption = FormController.prototype.getCaption(formData);
+        const itemForm = this.itemForms.addItem(caption);
+        itemForm.ctrl = this.forms[name];
+        itemForm.ctrl.createTree(itemForm);
+        return itemForm;
     }
 
     getActions() {

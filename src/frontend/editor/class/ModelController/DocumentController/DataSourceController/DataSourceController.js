@@ -10,6 +10,10 @@ class DataSourceController extends DocumentController {
         this.keyColumns = {};
     }
 
+    init() {
+
+    }
+
     createTree(item) {
         if (item) this.item = item;
 

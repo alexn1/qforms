@@ -9,7 +9,8 @@ class FormController extends VisualController {
         this.itemActions     = null;
     }
 
-    createTree() {
+    createTree(item) {
+        if (item) this.item = item;
         // dataSources
         this.itemDataSources = this.item.addItem('Data Sources');
         if (this.model.data.dataSources) {
