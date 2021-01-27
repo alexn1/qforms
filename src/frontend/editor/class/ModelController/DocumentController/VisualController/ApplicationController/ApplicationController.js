@@ -1,9 +1,9 @@
 class ApplicationController extends VisualController {
 
-    constructor(model, item, editorController) {
+    constructor(model, editorController) {
         super(model);
-        this.item = item;
         this.editorController = editorController;
+        this.item = null;
         this.databasesItem = null;
         this.dataSourcesItem = null;
         this.pagesItem = null;
@@ -36,7 +36,10 @@ class ApplicationController extends VisualController {
         };
     }
 
-    createTree() {
+    createTree(item) {
+        this.item = item;
+        item.ctrl = this;
+
         // databases
         this.databasesItem = this.item.addItem('Databases');
         if (this.model.data.databases) {

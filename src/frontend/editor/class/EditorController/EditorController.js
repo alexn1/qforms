@@ -29,9 +29,11 @@ class EditorController {
         const appModel = new Application(this.appData);
         appModel.init();
         console.log('appModel:', appModel);
+
+        this.appCtrl = new ApplicationController(appModel, this);
+
         const appItem = this.tree.addItem(caption, 'opened');
-        this.appCtrl = appItem.ctrl = new ApplicationController(appModel, appItem, this);
-        appItem.ctrl.createTree();
+        this.appCtrl.createTree(appItem);
 
         // view
         Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
