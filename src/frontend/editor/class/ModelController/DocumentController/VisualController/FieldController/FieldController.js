@@ -16,6 +16,10 @@ class FieldController extends VisualController {
         ];
     }
 
+    setItem(item) {
+        this.item = item;
+    }
+
     async doAction(action) {
         switch (action) {
             case 'changeClass':

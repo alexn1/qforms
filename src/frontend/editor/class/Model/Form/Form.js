@@ -4,6 +4,25 @@ class Form extends Model {
         super(data);
         this.parent = page;
         this.page   = page;
+        this.dataSources = {};
+        this.fields      = {};
+        this.actions     = {};
+    }
+
+    init() {
+        // dataSources
+        for (const name in this.data.dataSources) {
+            const dataSource = new DataSource(this.data.dataSources[name], this);
+            dataSource.init();
+            this.dataSources[name] = dataSource;
+        }
+
+        // fields
+        for (const name in this.data.fields) {
+            const field = new Field(this.data.fields[name], this);
+            field.init();
+            this.fields[name] = field;
+        }
     }
 
     async setValue(name, value) {

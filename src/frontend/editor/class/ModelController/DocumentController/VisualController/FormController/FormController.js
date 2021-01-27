@@ -7,60 +7,86 @@ class FormController extends VisualController {
         this.itemFields      = null;
         this.itemControls    = null;
         this.itemActions     = null;
+
+        this.dataSources = {};
+        this.fields      = {};
+        this.actions     = {};
+    }
+
+    init() {
+
+        // dataSources
+        if (this.model.data.dataSources) {
+            for (const name in this.model.data.dataSources) {
+                const dataSource = this.model.dataSources[name];
+                this.dataSources[name] = new DataSourceController(dataSource, null);
+            }
+        }
+
+        if (this.model.data.fields) {
+            for (const name in this.model.data.fields) {
+                const field = this.model.fields[name];
+                this.fields[name] =  new FieldController(field, null);
+            }
+        }
+
     }
 
     createTree(item) {
         if (item) this.item = item;
+
         // dataSources
         this.itemDataSources = this.item.addItem('Data Sources');
         if (this.model.data.dataSources) {
             for (const name in this.model.data.dataSources) {
                 const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData);
+                this.addDataSourceItem(dataSourceData, name);
             }
         }
+
         // fields
         this.itemFields = this.item.addItem('Fields');
         if (this.model.data.fields) {
             for (const name in this.model.data.fields) {
                 const fieldData = this.model.data.fields[name];
-                this.addFieldItem(fieldData);
+                this.addFieldItem(fieldData, name);
             }
         }
 
-        // controls
+        /*// controls
         this.itemControls = this.item.addItem('Controls');
         if (this.model.data.controls) {
             for (const name in this.model.data.controls) {
                 const controlData = this.model.data.controls[name];
                 this.addControlItem(controlData);
             }
-        }
+        }*/
 
         // actions
         this.itemActions =  this.item.addItem('Actions');
         if (this.model.data.actions) {
             for (const name in this.model.data.actions) {
                 const data = this.model.data.actions[name];
-                this.addActionItem(data);
+                this.addActionItem(data, name);
             }
         }
     }
 
-    addDataSourceItem(dataSourceData) {
+    addDataSourceItem(dataSourceData, name) {
+
+
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const itemDataSource = this.itemDataSources.addItem(caption);
-        const dataSource = new DataSource(dataSourceData, this.model);
-        itemDataSource.ctrl = new DataSourceController(dataSource, itemDataSource);
-        itemDataSource.ctrl.createTree();
+        itemDataSource.ctrl = this.dataSources[name];
+        itemDataSource.ctrl.createTree(itemDataSource);
         return itemDataSource;
     }
 
-    addFieldItem(fieldData) {
+    addFieldItem(fieldData, name) {
         const caption = FieldController.prototype.getCaption(fieldData);
         const itemField = this.itemFields.addItem(caption);
-        const field = new Field(fieldData, this.model);
-        itemField.ctrl = new FieldController(field, itemField);
+        this.fields[name].setItem(itemField);
+        itemField.ctrl = this.fields[name];
         return itemField;
     }
 
@@ -72,7 +98,7 @@ class FormController extends VisualController {
         return itemControl;
     }
 
-    addActionItem(actionData) {
+    addActionItem(actionData, name) {
         const caption = ActionController.prototype.getCaption(actionData);
         const itemAction = this.itemActions.addItem(caption);
         const control = new Action(actionData, this.model);
