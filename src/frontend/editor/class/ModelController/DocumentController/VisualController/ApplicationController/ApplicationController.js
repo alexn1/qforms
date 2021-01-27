@@ -38,7 +38,6 @@ class ApplicationController extends VisualController {
 
     createTree(item) {
         this.item = item;
-        item.ctrl = this;
 
         // databases
         this.databasesItem = this.item.addItem('Databases');

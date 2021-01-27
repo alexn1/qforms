@@ -33,6 +33,7 @@ class EditorController {
         this.appCtrl = new ApplicationController(appModel, this);
 
         const appItem = this.tree.addItem(caption, 'opened');
+        appItem.ctrl = this.appCtrl;
         this.appCtrl.createTree(appItem);
 
         // view
