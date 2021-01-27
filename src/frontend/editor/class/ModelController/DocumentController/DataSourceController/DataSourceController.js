@@ -8,10 +8,23 @@ class DataSourceController extends DocumentController {
         this.$view                = null;
         // this.cmQuery              = null;
         this.keyColumns = {};
+        this.parentKeyColumns = {};
     }
 
     init() {
+        if (this.model.data.keyColumns) {
+            for (const name in this.model.data.keyColumns) {
+                const keyColumn = this.model.keyColumns[name];
+                this.keyColumns[name] = new KeyColumnController(keyColumn, null);
+            }
+        }
 
+        if (this.model.data.parentKeyColumns) {
+            for (const name in this.model.data.parentKeyColumns) {
+                const parentKeyColumn = new ParentKeyColumn(pkcData, this.model);
+                this.parentKeyColumns[name] = new ParentKeyColumnController(parentKeyColumn, null);
+            }
+        }
     }
 
     createTree(item) {
@@ -19,35 +32,34 @@ class DataSourceController extends DocumentController {
 
         // keys
         this.itemKeys = this.item.addItem('Key Columns');
-        if (this.model.data.keyColumns)
-        for (const name in this.model.data.keyColumns) {
-            const keyColumnData = this.model.data.keyColumns[name];
-            this.addKeyColumn(keyColumnData, name);
+        if (this.model.data.keyColumns) {
+            for (const name in this.model.data.keyColumns) {
+                const keyColumnData = this.model.data.keyColumns[name];
+                this.addKeyColumn(keyColumnData, name);
+            }
         }
 
         // parent key columns
         this.itemParentKeyColumns = this.item.addItem('Parent Key Columns');
-        if (this.model.data.parentKeyColumns)
-        for (const name in this.model.data.parentKeyColumns) {
-            const pkcData = this.model.data.parentKeyColumns[name];
-            this.addParentKeyColumn(pkcData);
+        if (this.model.data.parentKeyColumns) {
+            for (const name in this.model.data.parentKeyColumns) {
+                const pkcData = this.model.data.parentKeyColumns[name];
+                this.addParentKeyColumn(pkcData, name);
+            }
         }
     }
 
     addKeyColumn(itemData, name) {
-        // const keyColumn = new KeyColumn(itemData, this.model);
-        const keyColumn = this.model.keyColumns[name];
         const caption = KeyColumnController.prototype.getCaption(itemData);
         const keyColumnItem = this.itemKeys.addItem(caption);
-        this.keyColumns[name] = keyColumnItem.ctrl = new KeyColumnController(keyColumn, keyColumnItem);
+        keyColumnItem.ctrl = this.keyColumns[name];
         return keyColumnItem;
     }
 
-    addParentKeyColumn(pkcData) {
+    addParentKeyColumn(pkcData, name) {
         const caption = ParentKeyColumnController.prototype.getCaption(pkcData);
         const itemParentKeyColumn = this.itemParentKeyColumns.addItem(caption);
-        const parentKeyColumn = new ParentKeyColumn(pkcData, this.model);
-        itemParentKeyColumn.ctrl = new ParentKeyColumnController(parentKeyColumn, itemParentKeyColumn);
+        itemParentKeyColumn.ctrl = this.parentKeyColumns[name];
         return itemParentKeyColumn;
     }
 
