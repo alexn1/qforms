@@ -30,6 +30,14 @@ class ApplicationController extends VisualController {
                 this.dataSources[name] = new DataSourceController(dataSource, null, this);
             }
         }
+
+        // pageLinks
+        if (this.model.data.pageLinks) {
+            for (const name in this.model.data.pageLinks) {
+                const pageLink = this.model.pageLinks[name];
+                this.pageLinks[name] = new PageLinkController(pageLink, null);
+            }
+        }
     }
 
 
@@ -82,8 +90,7 @@ class ApplicationController extends VisualController {
         const caption = PageLinkController.prototype.getCaption(pageLinkData);
         const pageLinkItem = this.pagesItem.addItem(caption);
         pageLinkItem.node.className = 'node';
-        const pageLink = this.model.pageLinks[name];
-        this.pageLinks[name] = pageLinkItem.ctrl = new PageLinkController(pageLink, pageLinkItem);
+        pageLinkItem.ctrl = this.pageLinks[name];
         return pageLinkItem;
     }
 
