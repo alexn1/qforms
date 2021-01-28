@@ -46,11 +46,7 @@ class ApplicationController extends VisualController {
 
         // databases
         this.databasesItem = this.item.addItem('Databases');
-        if (this.model.data.databases) {
-            for (const name in this.model.data.databases) {
-                this.addDatabaseItem(name);
-            }
-        }
+        this.databases.forEach(database => this.addDatabaseItem(database));
 
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
@@ -71,8 +67,7 @@ class ApplicationController extends VisualController {
         }
     }
 
-    addDatabaseItem(name) {
-        const database = this.getObject('databases', name);
+    addDatabaseItem(database) {
         const caption = `${database.model.getClassName()}: ${database.model.getName()}`;
         const databaseItem = this.databasesItem.addItem(caption);
         databaseItem.ctrl = database;
