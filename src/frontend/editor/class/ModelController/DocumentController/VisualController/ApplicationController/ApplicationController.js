@@ -7,7 +7,7 @@ class ApplicationController extends VisualController {
         this.databasesItem = null;
         this.dataSourcesItem = null;
         this.pagesItem = null;
-        this.pageItems = {};
+        // this.pageItems = {};
 
         this.databases   = [];
         this.dataSources = [];
@@ -50,11 +50,8 @@ class ApplicationController extends VisualController {
 
         // pageLinks
         this.pagesItem = this.item.addItem('Pages', 'opened');
-        if (this.model.data.pageLinks) {
-            for (const name in this.model.data.pageLinks) {
-                const pageLinkData = this.model.data.pageLinks[name];
-                this.pageItems[name] = this.addPageLinkItem(pageLinkData, name);
-            }
+        for (const name in this.pageLinks) {
+            this.addPageLinkItem(this.pageLinks[name]);
         }
     }
 
@@ -74,11 +71,10 @@ class ApplicationController extends VisualController {
         return dataSourceItem;
     }
 
-    addPageLinkItem(pageLinkData, name) {
-        const caption = PageLinkController.prototype.getCaption(pageLinkData);
-        const pageLinkItem = this.pagesItem.addItem(caption);
+    addPageLinkItem(pageLink) {
+        const pageLinkItem = this.pagesItem.addItem(pageLink.model.getName());
         pageLinkItem.node.className = 'node';
-        pageLinkItem.ctrl = this.pageLinks[name];
+        pageLinkItem.ctrl = pageLink;
         return pageLinkItem;
     }
 
