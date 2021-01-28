@@ -14,14 +14,7 @@ class ApplicationController extends VisualController {
         this.pageLinks   = {};
     }
     init() {
-
-        // databases
-        if (this.model.data.databases) {
-            for (const name in this.model.data.databases) {
-                const database = this.model.getObject('databases', name);
-                this.createDatabase(name, database);
-            }
-        }
+        this.model.databases.forEach(database => this.createDatabase(database));
 
         // dataSources
         if (this.model.data.dataSources) {
@@ -42,7 +35,7 @@ class ApplicationController extends VisualController {
         }
     }
 
-    createDatabase(name, model) {
+    createDatabase(model) {
         const database = new DatabaseController(model, this);
         database.init();
         this.databases.push(database);
@@ -58,6 +51,7 @@ class ApplicationController extends VisualController {
                 this.addDatabaseItem(name);
             }
         }
+
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
         if (this.model.data.dataSources) {
@@ -66,6 +60,7 @@ class ApplicationController extends VisualController {
                 this.addDataSourceItem(dataSourceData, name);
             }
         }
+
         // pages
         this.pagesItem = this.item.addItem('Pages', 'opened');
         if (this.model.data.pageLinks) {

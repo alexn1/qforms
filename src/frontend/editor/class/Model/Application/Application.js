@@ -10,7 +10,7 @@ class Application extends Model {
     init() {
         // databases
         for (const name in this.data.databases) {
-            this.createDatabase(name, this.data.databases[name]);
+            this.createDatabase(this.data.databases[name]);
         }
 
         // dataSources
@@ -30,7 +30,7 @@ class Application extends Model {
         }
     }
 
-    createDatabase(name, databaseData) {
+    createDatabase(databaseData) {
         const database = new Database(databaseData);
         database.init();
         this.databases.push(database);
