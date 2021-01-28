@@ -17,12 +17,8 @@ class ApplicationController extends VisualController {
         this.model.databases.forEach(database => this.createDatabase(database));
 
         // dataSources
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSource = this.model.dataSources[name];
-                this.dataSources[name] = new DataSourceController(dataSource, null, this);
-                this.dataSources[name].init();
-            }
+        for (const name in this.model.dataSources) {
+            this.createDataSource(this.model.dataSources[name], name);
         }
 
         // pageLinks
@@ -40,6 +36,11 @@ class ApplicationController extends VisualController {
         database.init();
         this.databases.push(database);
     }
+    createDataSource(model, name) {
+        const dataSource = new DataSourceController(model, null, this);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
+    }
 
     createTree(item) {
         this.item = item;
@@ -50,11 +51,8 @@ class ApplicationController extends VisualController {
 
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData, name);
-            }
+        for (const name in this.dataSources) {
+            this.addDataSourceItem(this.dataSources[name]);
         }
 
         // pages
@@ -75,10 +73,10 @@ class ApplicationController extends VisualController {
         return databaseItem;
     }
 
-    addDataSourceItem(dataSourceData, name) {
-        const caption = DataSourceController.prototype.getCaption(dataSourceData);
+    addDataSourceItem(dataSource) {
+        const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        dataSourceItem.ctrl = this.dataSources[name];
+        dataSourceItem.ctrl = dataSource;
         dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
     }

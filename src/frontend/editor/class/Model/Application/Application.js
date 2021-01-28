@@ -15,10 +15,7 @@ class Application extends Model {
 
         // dataSources
         for (const name in this.data.dataSources) {
-            const dataSourceData = this.data.dataSources[name];
-            const dataSource = new DataSource(dataSourceData);
-            dataSource.init();
-            this.dataSources[name] = dataSource;
+            this.createDataSource(this.data.dataSources[name], name);
         }
 
         // pageLinks
@@ -30,10 +27,15 @@ class Application extends Model {
         }
     }
 
-    createDatabase(databaseData) {
-        const database = new Database(databaseData);
+    createDatabase(data) {
+        const database = new Database(data);
         database.init();
         this.databases.push(database);
+    }
+    createDataSource(data, name) {
+        const dataSource = new DataSource(data);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
     }
 
     async setValue(name, value) {
