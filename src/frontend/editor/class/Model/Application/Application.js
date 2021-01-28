@@ -20,10 +20,7 @@ class Application extends Model {
 
         // pageLinks
         for (const name in this.data.pageLinks) {
-            const pageLinkData = this.data.pageLinks[name];
-            const pageLink = new PageLink(pageLinkData, this);
-            pageLink.init();
-            this.pageLinks[name] = pageLink;
+            this.createPageLink(this.data.pageLinks[name], name);
         }
     }
 
@@ -37,7 +34,11 @@ class Application extends Model {
         dataSource.init();
         this.dataSources.push(dataSource);
     }
-
+    createPageLink(data, name) {
+        const pageLink = new PageLink(data, this);
+        pageLink.init();
+        this.pageLinks[name] = pageLink;
+    }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await QForms.doHttpRequest({

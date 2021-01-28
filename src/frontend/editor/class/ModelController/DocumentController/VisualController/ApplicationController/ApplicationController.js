@@ -17,13 +17,8 @@ class ApplicationController extends VisualController {
         this.model.databases.forEach(database => this.createDatabase(database));
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
 
-        // pageLinks
-        if (this.model.data.pageLinks) {
-            for (const name in this.model.data.pageLinks) {
-                const pageLink = this.model.pageLinks[name];
-                this.pageLinks[name] = new PageLinkController(pageLink, null);
-                this.pageLinks[name].init();
-            }
+        for (const name in this.model.pageLinks) {
+            this.createPageLink(this.model.pageLinks[name], name);
         }
     }
 
@@ -37,7 +32,11 @@ class ApplicationController extends VisualController {
         dataSource.init();
         this.dataSources.push(dataSource);
     }
-
+    createPageLink(model, name) {
+        const pageLink  = new PageLinkController(model, null);
+        pageLink.init();
+        this.pageLinks[name] = pageLink;
+    }
     createTree(item) {
         this.item = item;
 
