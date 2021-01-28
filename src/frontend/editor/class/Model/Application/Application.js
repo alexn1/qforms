@@ -3,7 +3,7 @@ class Application extends Model {
     constructor(data) {
         super(data);
         this.databases   = [];
-        this.dataSources = {};
+        this.dataSources = [];
         this.pageLinks   = {};
     }
 
@@ -15,7 +15,7 @@ class Application extends Model {
 
         // dataSources
         for (const name in this.data.dataSources) {
-            this.createDataSource(this.data.dataSources[name], name);
+            this.createDataSource(this.data.dataSources[name]);
         }
 
         // pageLinks
@@ -32,10 +32,10 @@ class Application extends Model {
         database.init();
         this.databases.push(database);
     }
-    createDataSource(data, name) {
+    createDataSource(data) {
         const dataSource = new DataSource(data);
         dataSource.init();
-        this.dataSources[name] = dataSource;
+        this.dataSources.push(dataSource);
     }
 
     async setValue(name, value) {

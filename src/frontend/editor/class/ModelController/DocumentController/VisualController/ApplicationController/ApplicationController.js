@@ -10,16 +10,12 @@ class ApplicationController extends VisualController {
         this.pageItems = {};
 
         this.databases   = [];
-        this.dataSources = {};
+        this.dataSources = [];
         this.pageLinks   = {};
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
-
-        // dataSources
-        for (const name in this.model.dataSources) {
-            this.createDataSource(this.model.dataSources[name], name);
-        }
+        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
 
         // pageLinks
         if (this.model.data.pageLinks) {
@@ -36,10 +32,10 @@ class ApplicationController extends VisualController {
         database.init();
         this.databases.push(database);
     }
-    createDataSource(model, name) {
+    createDataSource(model) {
         const dataSource = new DataSourceController(model, null, this);
         dataSource.init();
-        this.dataSources[name] = dataSource;
+        this.dataSources.push(dataSource);
     }
 
     createTree(item) {
@@ -51,11 +47,9 @@ class ApplicationController extends VisualController {
 
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
-        for (const name in this.dataSources) {
-            this.addDataSourceItem(this.dataSources[name]);
-        }
+        this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
 
-        // pages
+        // pageLinks
         this.pagesItem = this.item.addItem('Pages', 'opened');
         if (this.model.data.pageLinks) {
             for (const name in this.model.data.pageLinks) {
@@ -219,12 +213,11 @@ class ApplicationController extends VisualController {
             items : [
                 {
                     title: 'Databases',
-                    // items: Object.keys(this.databases).map(name => this.databases[name].getItem())
                     items: this.databases.map(database => database.getItem())
                 },
                 {
                     title: 'Data Sources',
-                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                    items: this.dataSources.map(dataSource => dataSource.getItem())
                 },
                 {
                     title : 'Pages',
