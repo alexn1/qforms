@@ -80,8 +80,6 @@ class FormController extends VisualController {
     }
 
     addDataSourceItem(dataSourceData, name) {
-
-
         const caption = DataSourceController.prototype.getCaption(dataSourceData);
         const itemDataSource = this.itemDataSources.addItem(caption);
         itemDataSource.ctrl = this.dataSources[name];

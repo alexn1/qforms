@@ -10,6 +10,8 @@ class PageController extends VisualController {
     }
 
     init() {
+        // console.log('PageController.init');
+
         // dataSources
         if (this.model.data.dataSources) {
             for (const name in this.model.data.dataSources) {
