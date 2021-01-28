@@ -45,4 +45,8 @@ class Model {
         this.data['@attributes'][name] = value;
     }
 
+    getObject(col, name) {
+        return this[col].find(obj => obj.getName() === name);
+    }
+
 }

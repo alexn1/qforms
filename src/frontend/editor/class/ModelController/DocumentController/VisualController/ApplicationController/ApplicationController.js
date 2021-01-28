@@ -9,7 +9,7 @@ class ApplicationController extends VisualController {
         this.pagesItem = null;
         this.pageItems = {};
 
-        this.databases   = {};
+        this.databases   = [];
         this.dataSources = {};
         this.pageLinks   = {};
     }
@@ -18,9 +18,8 @@ class ApplicationController extends VisualController {
         // databases
         if (this.model.data.databases) {
             for (const name in this.model.data.databases) {
-                const database = this.model.databases[name];
-                this.databases[name] = new DatabaseController(database, this);
-                this.databases[name].init();
+                const database = this.model.getObject('databases', name);
+                this.createDatabase(name, database);
             }
         }
 
@@ -43,6 +42,11 @@ class ApplicationController extends VisualController {
         }
     }
 
+    createDatabase(name, model) {
+        const database = new DatabaseController(model, this);
+        database.init();
+        this.databases.push(database);
+    }
 
     createTree(item) {
         this.item = item;
@@ -51,8 +55,7 @@ class ApplicationController extends VisualController {
         this.databasesItem = this.item.addItem('Databases');
         if (this.model.data.databases) {
             for (const name in this.model.data.databases) {
-                const databaseData = this.model.data.databases[name];
-                this.addDatabaseItem(databaseData, name);
+                this.addDatabaseItem(name);
             }
         }
         // data sources
@@ -73,10 +76,11 @@ class ApplicationController extends VisualController {
         }
     }
 
-    addDatabaseItem(databaseData, name) {
-        const caption = DatabaseController.prototype.getCaption(databaseData);
+    addDatabaseItem(name) {
+        const database = this.getObject('databases', name);
+        const caption = `${database.model.getClassName()}: ${database.model.getName()}`;
         const databaseItem = this.databasesItem.addItem(caption);
-        databaseItem.ctrl = this.databases[name];
+        databaseItem.ctrl = database;
         databaseItem.ctrl.createTree(databaseItem);
         return databaseItem;
     }
@@ -227,7 +231,8 @@ class ApplicationController extends VisualController {
             items : [
                 {
                     title: 'Databases',
-                    items: Object.keys(this.databases).map(name => this.databases[name].getItem())
+                    // items: Object.keys(this.databases).map(name => this.databases[name].getItem())
+                    items: this.databases.map(database => database.getItem())
                 },
                 {
                     title: 'Data Sources',

@@ -42,4 +42,8 @@ class ModelController extends EventEmitter {
         };
     }
 
+    getObject(col, name) {
+        return this[col].find(obj => obj.model.getName() === name);
+    }
+
 }
