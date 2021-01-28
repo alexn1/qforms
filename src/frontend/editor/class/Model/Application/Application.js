@@ -4,7 +4,7 @@ class Application extends Model {
         super(data);
         this.databases   = [];
         this.dataSources = [];
-        this.pageLinks   = {};
+        this.pageLinks   = [];
     }
 
     init() {
@@ -20,7 +20,7 @@ class Application extends Model {
 
         // pageLinks
         for (const name in this.data.pageLinks) {
-            this.createPageLink(this.data.pageLinks[name], name);
+            this.createPageLink(this.data.pageLinks[name]);
         }
     }
 
@@ -34,10 +34,10 @@ class Application extends Model {
         dataSource.init();
         this.dataSources.push(dataSource);
     }
-    createPageLink(data, name) {
+    createPageLink(data) {
         const pageLink = new PageLink(data, this);
         pageLink.init();
-        this.pageLinks[name] = pageLink;
+        this.pageLinks.push(pageLink);
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);

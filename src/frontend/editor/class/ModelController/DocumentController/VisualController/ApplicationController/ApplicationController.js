@@ -11,15 +11,12 @@ class ApplicationController extends VisualController {
 
         this.databases   = [];
         this.dataSources = [];
-        this.pageLinks   = {};
+        this.pageLinks   = [];
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-
-        for (const name in this.model.pageLinks) {
-            this.createPageLink(this.model.pageLinks[name], name);
-        }
+        this.model.pageLinks.forEach(pageLink => this.createPageLink(pageLink));
     }
 
     createDatabase(model) {
@@ -32,10 +29,10 @@ class ApplicationController extends VisualController {
         dataSource.init();
         this.dataSources.push(dataSource);
     }
-    createPageLink(model, name) {
-        const pageLink  = new PageLinkController(model, null);
+    createPageLink(model) {
+        const pageLink = new PageLinkController(model, null);
         pageLink.init();
-        this.pageLinks[name] = pageLink;
+        this.pageLinks.push(pageLink);
     }
     createTree(item) {
         this.item = item;
@@ -50,9 +47,7 @@ class ApplicationController extends VisualController {
 
         // pageLinks
         this.pagesItem = this.item.addItem('Pages', 'opened');
-        for (const name in this.pageLinks) {
-            this.addPageLinkItem(this.pageLinks[name]);
-        }
+        this.pageLinks.forEach(pageLink => this.addPageLinkItem(pageLink));
     }
 
     addDatabaseItem(database) {
@@ -217,7 +212,7 @@ class ApplicationController extends VisualController {
                 {
                     title : 'Pages',
                     opened: true,
-                    items : Object.keys(this.pageLinks).map(name => this.pageLinks[name].getItem())
+                    items: this.pageLinks.map(pageLink => pageLink.getItem())
                 }
             ]
         };
