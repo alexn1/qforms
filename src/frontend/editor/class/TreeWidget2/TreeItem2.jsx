@@ -34,15 +34,14 @@ class TreeItem2 extends ReactComponent {
         return this.props.tree.state.selectedItem === this.props.item;
     }
     isNode() {
-        return this.hasItems();
+        return this.props.item.node || this.hasItems();
     }
     isOpened() {
         return this.state.opened;
     }
     hasItems() {
         const item = this.props.item;
-        // return !!(item.items && item.items.length);
-        return Array.isArray(item.items);
+        return !!(item.items && item.items.length);
     }
     render() {
         // console.log('TreeItem2.render', this.props.item.title);

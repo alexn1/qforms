@@ -7,6 +7,7 @@ class PageLinkController extends ModelController {
         return {
             ctrl : this,
             title: this.model.getName(),
+            node : true,
             items: []
         };
     }

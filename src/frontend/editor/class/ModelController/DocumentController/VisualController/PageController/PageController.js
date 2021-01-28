@@ -167,7 +167,10 @@ class PageController extends VisualController {
             ctrl : this,
             title: this.model.getName(),
             items: [
-                {title: 'Data Sources'},
+                {
+                    title: 'Data Sources',
+                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                },
                 {
                     title: 'Forms',
                     items: Object.keys(this.forms).map(name => this.forms[name].getItem())

@@ -23,6 +23,7 @@ class FormController extends VisualController {
             }
         }
 
+        // fields
         if (this.model.data.fields) {
             for (const name in this.model.data.fields) {
                 const field = this.model.fields[name];
@@ -30,6 +31,7 @@ class FormController extends VisualController {
             }
         }
 
+        // actions
         if (this.model.data.actions) {
             for (const name in this.model.data.actions) {
                 const action = this.model.actions[name];
@@ -279,6 +281,27 @@ class FormController extends VisualController {
             .replace('{name}' , data['@attributes'].name)
             .replace('{class}', data['@class']);
         return caption;
+    }
+
+    getItem() {
+        return {
+            ctrl : this,
+            title: this.model.getName(),
+            items: [
+                {
+                    title: 'Data Sources',
+                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                },
+                {
+                    title: 'Fields',
+                    items: Object.keys(this.fields).map(name => this.fields[name].getItem())
+                },
+                {
+                    title: 'Actions',
+                    items: Object.keys(this.actions).map(name => this.actions[name].getItem())
+                }
+            ]
+        };
     }
 
 }
