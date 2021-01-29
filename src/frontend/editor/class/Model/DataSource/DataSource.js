@@ -3,14 +3,14 @@ class DataSource extends Model {
     constructor(data, parent) {
         super(data);
         this.parent = parent;
-        this.keyColumns = {};
+        this.keyColumns = [];
         this.parentKeyColumns = {};
     }
 
     init() {
         // key columns
         for (const name in this.data.keyColumns) {
-            this.createKeyColumn(this.data.keyColumns[name], name);
+            this.createKeyColumn(this.data.keyColumns[name]);
         }
 
         for (const name in this.data.parentKeyColumns) {
@@ -21,10 +21,10 @@ class DataSource extends Model {
 
     }
 
-    createKeyColumn(data, name) {
+    createKeyColumn(data) {
         const keyColumn = new KeyColumn(data, this);
         keyColumn.init();
-        this.keyColumns[name] = keyColumn;
+        this.keyColumns.push(keyColumn);
     }
 
     static async create(parent, params) {

@@ -7,14 +7,12 @@ class DataSourceController extends DocumentController {
         this.itemParentKeyColumns = null;
         this.$view                = null;
         // this.cmQuery              = null;
-        this.keyColumns = {};
+        this.keyColumns = [];
         this.parentKeyColumns = {};
     }
 
     init() {
-        for (const name in this.model.keyColumns) {
-            this.createKeyColumn(this.model.keyColumns[name], name);
-        }
+        this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
 
         for (const name in this.model.data.parentKeyColumns) {
             const parentKeyColumn = this.model.parentKeyColumns[name];
@@ -23,10 +21,10 @@ class DataSourceController extends DocumentController {
         }
     }
 
-    createKeyColumn(model, name) {
+    createKeyColumn(model) {
         const keyColumn = new KeyColumnController(model, null);
         keyColumn.init();
-        this.keyColumns[name] = keyColumn;
+        this.keyColumns.push(keyColumn);
     }
 
     createTree(item) {
@@ -34,9 +32,7 @@ class DataSourceController extends DocumentController {
 
         // keys
         this.itemKeys = this.item.addItem('Key Columns');
-        for (const name in this.keyColumns) {
-            this.addKeyColumn(this.keyColumns[name]);
-        }
+        this.keyColumns.forEach(keyColumn => this.addKeyColumn(keyColumn));
 
         // parent key columns
         this.itemParentKeyColumns = this.item.addItem('Parent Key Columns');
@@ -355,7 +351,7 @@ class DataSourceController extends DocumentController {
             items: [
                 {
                     title: 'Key Columns',
-                    items: Object.keys(this.keyColumns).map(name => this.keyColumns[name].getItem())
+                    items: this.keyColumns.map(keyColumn => keyColumn.getItem())
                 }
             ]
         };
