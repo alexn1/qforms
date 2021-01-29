@@ -17,10 +17,7 @@ class Page extends Model {
 
         // forms
         for (const name in this.data.forms) {
-            const formData = this.data.forms[name];
-            const form = new Form(formData, this);
-            form.init();
-            this.forms[name] = form;
+            this.createForm(this.data.forms[name], name);
         }
     }
 
@@ -28,6 +25,12 @@ class Page extends Model {
         const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
+    }
+
+    createForm(data, name) {
+        const form = new Form(data, this);
+        form.init();
+        this.forms[name] = form;
     }
 
     async setValue(name, value) {
