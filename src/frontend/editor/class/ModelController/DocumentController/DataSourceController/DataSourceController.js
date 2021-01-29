@@ -12,21 +12,21 @@ class DataSourceController extends DocumentController {
     }
 
     init() {
-        if (this.model.data.keyColumns) {
-            for (const name in this.model.data.keyColumns) {
-                const keyColumn = this.model.keyColumns[name];
-                this.keyColumns[name] = new KeyColumnController(keyColumn, null);
-                this.keyColumns[name].init();
-            }
+        for (const name in this.model.keyColumns) {
+            this.createKeyColumn(this.model.keyColumns[name], name);
         }
 
-        if (this.model.data.parentKeyColumns) {
-            for (const name in this.model.data.parentKeyColumns) {
-                const parentKeyColumn = this.model.parentKeyColumns[name];
-                this.parentKeyColumns[name] = new ParentKeyColumnController(parentKeyColumn, null);
-                this.parentKeyColumns[name].init();
-            }
+        for (const name in this.model.data.parentKeyColumns) {
+            const parentKeyColumn = this.model.parentKeyColumns[name];
+            this.parentKeyColumns[name] = new ParentKeyColumnController(parentKeyColumn, null);
+            this.parentKeyColumns[name].init();
         }
+    }
+
+    createKeyColumn(model, name) {
+        const keyColumn = new KeyColumnController(model, null);
+        keyColumn.init();
+        this.keyColumns[name] = keyColumn;
     }
 
     createTree(item) {
@@ -34,11 +34,8 @@ class DataSourceController extends DocumentController {
 
         // keys
         this.itemKeys = this.item.addItem('Key Columns');
-        if (this.model.data.keyColumns) {
-            for (const name in this.model.data.keyColumns) {
-                const keyColumnData = this.model.data.keyColumns[name];
-                this.addKeyColumn(keyColumnData, name);
-            }
+        for (const name in this.keyColumns) {
+            this.addKeyColumn(this.keyColumns[name]);
         }
 
         // parent key columns
@@ -51,10 +48,9 @@ class DataSourceController extends DocumentController {
         }
     }
 
-    addKeyColumn(itemData, name) {
-        const caption = KeyColumnController.prototype.getCaption(itemData);
-        const keyColumnItem = this.itemKeys.addItem(caption);
-        keyColumnItem.ctrl = this.keyColumns[name];
+    addKeyColumn(keyColumn) {
+        const keyColumnItem = this.itemKeys.addItem(keyColumn.model.getName());
+        keyColumnItem.ctrl = keyColumn;
         return keyColumnItem;
     }
 

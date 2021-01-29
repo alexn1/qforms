@@ -10,9 +10,7 @@ class DataSource extends Model {
     init() {
         // key columns
         for (const name in this.data.keyColumns) {
-            const keyColumn = new KeyColumn(this.data.keyColumns[name], this);
-            keyColumn.init();
-            this.keyColumns[name] = keyColumn;
+            this.createKeyColumn(this.data.keyColumns[name], name);
         }
 
         for (const name in this.data.parentKeyColumns) {
@@ -21,6 +19,12 @@ class DataSource extends Model {
             this.parentKeyColumns[name] = parentKeyColumn;
         }
 
+    }
+
+    createKeyColumn(data, name) {
+        const keyColumn = new KeyColumn(data, this);
+        keyColumn.init();
+        this.keyColumns[name] = keyColumn;
     }
 
     static async create(parent, params) {
