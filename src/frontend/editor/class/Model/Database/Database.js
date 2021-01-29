@@ -10,10 +10,7 @@ class Database extends Model {
 
         // params
         for (const name in this.data.params) {
-            const paramData = this.data.params[name];
-            const param = new Param(paramData, this);
-            param.init();
-            this.params[name] = param;
+            this.createParam(this.data.params[name], name);
         }
 
         // tables
@@ -23,6 +20,12 @@ class Database extends Model {
             table.init();
             this.tables[name] = table;
         }
+    }
+
+    createParam(data, name) {
+        const param = new Param(data, this);
+        param.init();
+        this.params[name] = param;
     }
 
     async setValue(name, value) {

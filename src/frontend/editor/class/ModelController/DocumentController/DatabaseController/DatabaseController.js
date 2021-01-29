@@ -42,14 +42,13 @@ class DatabaseController extends DocumentController {
 
     createTree(item) {
         this.item = item;
+
         // params
         this.paramsItem = this.item.addItem('Params');
-        if (this.model.data.params) {
-            for (const name in this.model.data.params) {
-                const paramData = this.model.data.params[name];
-                this.addParamItem(paramData, name);
-            }
+        for (const name in this.model.params) {
+            this.addParamItem(this.params[name]);
         }
+
 
         // tables
         this.tablesItem = this.item.addItem('Tables');
@@ -61,10 +60,10 @@ class DatabaseController extends DocumentController {
         }
     }
 
-    addParamItem(data, name) {
-        const caption = ParamController.prototype.getCaption(data);
-        const item = this.paramsItem.addItem(caption);
-        item.ctrl = this.params[name];
+    addParamItem(param) {
+        // const caption = ParamController.prototype.getCaption(data);
+        const item = this.paramsItem.addItem(param.model.getName());
+        item.ctrl = param;
         return item;
     }
 
