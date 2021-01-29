@@ -9,7 +9,7 @@ class FormController extends VisualController {
         this.itemActions     = null;
 
         this.dataSources = [];
-        this.fields      = {};
+        this.fields      = [];
         this.actions     = {};
     }
 
@@ -19,9 +19,7 @@ class FormController extends VisualController {
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
 
         // fields
-        for (const name in this.model.fields) {
-            this.createField(this.model.fields[name], name);
-        }
+        this.model.fields.forEach(field => this.createField(field));
 
         // actions
         for (const name in this.model.actions) {
@@ -37,10 +35,10 @@ class FormController extends VisualController {
         this.dataSources.push(dataSource);
     }
 
-    createField(model, name) {
+    createField(model) {
         const field = new FieldController(model, null);
         field.init();
-        this.fields[name] = field;
+        this.fields.push(field);
     }
 
     createTree(item) {
@@ -52,9 +50,7 @@ class FormController extends VisualController {
 
         // fields
         this.itemFields = this.item.addItem('Fields');
-        for (const name in this.model.data.fields) {
-            this.addFieldItem(this.fields[name]);
-        }
+        this.fields.forEach(field => this.addFieldItem(field));
 
         /*// controls
         this.itemControls = this.item.addItem('Controls');
@@ -279,12 +275,11 @@ class FormController extends VisualController {
             items: [
                 {
                     title: 'Data Sources',
-                    //items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
                     items: this.dataSources.map(dataSource => dataSource.getItem())
                 },
                 {
                     title: 'Fields',
-                    items: Object.keys(this.fields).map(name => this.fields[name].getItem())
+                    items: this.fields.map(field => field.getItem())
                 },
                 {
                     title: 'Actions',
