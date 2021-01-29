@@ -25,7 +25,7 @@ class Page extends Model {
     }
 
     createDataSource(data) {
-        const dataSource = new (data, this);
+        const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
     }
