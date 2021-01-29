@@ -17,9 +17,7 @@ class Form extends Model {
 
         // fields
         for (const name in this.data.fields) {
-            const field = new Field(this.data.fields[name], this);
-            field.init();
-            this.fields[name] = field;
+            this.createField(this.data.fields[name], name);
         }
 
         // actions
@@ -34,6 +32,11 @@ class Form extends Model {
         const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
+    }
+    createField(data, name) {
+        const field = new Field(data, this);
+        field.init();
+        this.fields[name] = field;
     }
 
     async setValue(name, value) {
