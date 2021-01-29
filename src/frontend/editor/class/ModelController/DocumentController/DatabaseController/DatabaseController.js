@@ -25,12 +25,8 @@ class DatabaseController extends DocumentController {
         this.model.params.forEach(param => this.createParam(param));
 
         // tables
-        if (this.model.data.tables) {
-            for (const name in this.model.data.tables) {
-                const table = this.model.tables[name];
-                this.tables[name] = new TableController(table, null, this);
-                this.tables[name].init();
-            }
+        for (const name in this.model.tables) {
+            this.createTable2(this.model.tables[name], name);
         }
     }
 
@@ -38,6 +34,11 @@ class DatabaseController extends DocumentController {
         const param = new ParamController(model, null);
         param.init();
         this.params.push(param);
+    }
+
+    createTable2(model, name) {
+        this.tables[name] = new TableController(model, null, this);
+        this.tables[name].init();
     }
 
     createTree(item) {

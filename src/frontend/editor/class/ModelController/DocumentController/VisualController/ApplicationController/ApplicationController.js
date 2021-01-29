@@ -7,7 +7,7 @@ class ApplicationController extends VisualController {
         this.databasesItem = null;
         this.dataSourcesItem = null;
         this.pagesItem = null;
-        // this.pageItems = {};
+        this.pageItems = {};
 
         this.databases   = [];
         this.dataSources = [];

@@ -15,10 +15,7 @@ class Database extends Model {
 
         // tables
         for (const name in this.data.tables) {
-            const tableData = this.data.tables[name];
-            const table = new Table(tableData, this);
-            table.init();
-            this.tables[name] = table;
+            this.createTable(this.data.tables[name], name);
         }
     }
 
@@ -26,6 +23,12 @@ class Database extends Model {
         const param = new Param(data, this);
         param.init();
         this.params.push(param);
+    }
+
+    createTable(data, name) {
+        const table = new Table(data, this);
+        table.init();
+        this.tables[name] = table;
     }
 
     async setValue(name, value) {
