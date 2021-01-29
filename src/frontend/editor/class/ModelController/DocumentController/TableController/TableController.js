@@ -9,31 +9,28 @@ class TableController extends DocumentController {
     }
 
     init() {
-        if (this.model.data.columns) {
-            for (const name in this.model.data.columns) {
-                const column = this.model.columns[name];
-                this.columns[name] = new ColumnController(column, null);
-            }
+        for (const name in this.model.columns) {
+            this.createColumn(this.model.columns[name], name);
         }
+    }
+    createColumn(model, name) {
+        const column = new ColumnController(model, null);
+        column.init();
+        this.columns[name] = column;
     }
 
     createTree(item) {
         if (item) this.item = item;
 
-        // columns
         this.columnsItem = this.item.addItem('Columns');
-        if (this.model.data.columns) {
-            for (const name in this.model.data.columns) {
-                const data = this.model.data.columns[name];
-                this.addColumnItem(data, name);
-            }
+        for (const name in this.columns) {
+            this.addColumnItem(this.columns[name]);
         }
     }
 
-    addColumnItem(data, name) {
-        const caption = ColumnController.prototype.getCaption(data);
-        const item = this.columnsItem.addItem(caption);
-        item.ctrl = this.columns[name];
+    addColumnItem(column) {
+        const item = this.columnsItem.addItem(column.model.getName());
+        item.ctrl = column;
         return item;
     }
 
