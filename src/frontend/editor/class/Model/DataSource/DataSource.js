@@ -4,27 +4,27 @@ class DataSource extends Model {
         super(data);
         this.parent = parent;
         this.keyColumns = [];
-        this.parentKeyColumns = {};
+        this.parentKeyColumns = [];
     }
 
     init() {
-        // key columns
         for (const name in this.data.keyColumns) {
             this.createKeyColumn(this.data.keyColumns[name]);
         }
-
         for (const name in this.data.parentKeyColumns) {
-            const parentKeyColumn = new ParentKeyColumn(this.model.data.parentKeyColumns[name], this);
-            parentKeyColumn.init();
-            this.parentKeyColumns[name] = parentKeyColumn;
+            this.createParentKeyColumn(this.model.parentKeyColumns[name]);
         }
-
     }
 
     createKeyColumn(data) {
         const keyColumn = new KeyColumn(data, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
+    }
+    createParentKeyColumn(data) {
+        const parentKeyColumn = new ParentKeyColumn(data, this);
+        parentKeyColumn.init();
+        this.parentKeyColumns.push(parentKeyColumn);
     }
 
     static async create(parent, params) {
