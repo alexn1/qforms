@@ -6,7 +6,7 @@ class Page extends Model {
         this.pageLink    = pageLink;
         this.application = parent;
         this.dataSources = [];
-        this.forms       = {};
+        this.forms       = [];
     }
 
     init() {
@@ -17,7 +17,7 @@ class Page extends Model {
 
         // forms
         for (const name in this.data.forms) {
-            this.createForm(this.data.forms[name], name);
+            this.createForm(this.data.forms[name]);
         }
     }
 
@@ -27,10 +27,10 @@ class Page extends Model {
         this.dataSources.push(dataSource);
     }
 
-    createForm(data, name) {
+    createForm(data) {
         const form = new Form(data, this);
         form.init();
-        this.forms[name] = form;
+        this.forms.push(form);
     }
 
     async setValue(name, value) {
