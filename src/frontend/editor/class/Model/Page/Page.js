@@ -12,10 +12,7 @@ class Page extends Model {
     init() {
         // data sources
         for (const name in this.data.dataSources) {
-            const dataSourceData = this.data.dataSources[name];
-            const dataSource = new DataSource(dataSourceData, this);
-            dataSource.init();
-            this.dataSources[name] = dataSource;
+            this.createDataSource(this.data.dataSources[name], name);
         }
 
         // forms
@@ -25,6 +22,12 @@ class Page extends Model {
             form.init();
             this.forms[name] = form;
         }
+    }
+
+    createDataSource(data, name) {
+        const dataSource = new (data, this);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
     }
 
     async setValue(name, value) {

@@ -13,12 +13,8 @@ class PageController extends VisualController {
         // console.log('PageController.init');
 
         // dataSources
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSource = this.model.dataSources[name];
-                this.dataSources[name] = new DataSourceController(dataSource, null, this);
-                this.dataSources[name].init();
-            }
+        for (const name in this.model.dataSources) {
+            this.createDataSource(this.model.dataSources[name], name);
         }
 
         // forms
@@ -31,16 +27,20 @@ class PageController extends VisualController {
         }
     }
 
+    createDataSource(model, name) {
+        const dataSource = new DataSourceController(model, null, this);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
+    }
+
     createTree(item) {
         if (item) this.item = item;
 
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData, name);
-            }
+
+        for (const name in this.dataSources) {
+            this.addDataSourceItem(this.dataSources[name]);
         }
 
         // forms
@@ -53,10 +53,9 @@ class PageController extends VisualController {
         }
     }
 
-    addDataSourceItem(dataSourceData, name) {
-        const caption = DataSourceController.prototype.getCaption(dataSourceData);
-        const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        dataSourceItem.ctrl = this.dataSources[name];
+    addDataSourceItem(dataSource) {
+        const dataSourceItem = this.dataSourcesItem.addItem(dataSource.model.getName());
+        dataSourceItem.ctrl = dataSource;
         dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
     }
