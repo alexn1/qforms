@@ -22,9 +22,7 @@ class Form extends Model {
 
         // actions
         for (const name in this.data.actions) {
-            const action = new Action(this.data.actions[name], this);
-            action.init();
-            this.actions[name] = action;
+            this.createAction(this.data.actions[name], name);
         }
     }
 
@@ -37,6 +35,11 @@ class Form extends Model {
         const field = new Field(data, this);
         field.init();
         this.fields.push(field);
+    }
+    createAction(data, name) {
+        const action = new Action(data, this);
+        action.init();
+        this.actions[name] = action;
     }
 
     async setValue(name, value) {

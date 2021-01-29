@@ -23,8 +23,7 @@ class FormController extends VisualController {
 
         // actions
         for (const name in this.model.actions) {
-            const action = this.model.actions[name];
-            this.actions[name] = new ActionController(action, null);
+            this.createAction(this.model.actions[name], name);
         }
 
     }
@@ -39,6 +38,11 @@ class FormController extends VisualController {
         const field = new FieldController(model, null);
         field.init();
         this.fields.push(field);
+    }
+    createAction(model, name) {
+        const action = new ActionController(model, null);
+        action.init();
+        this.actions[name] = action;
     }
 
     createTree(item) {
@@ -63,9 +67,8 @@ class FormController extends VisualController {
 
         // actions
         this.itemActions =  this.item.addItem('Actions');
-        for (const name in this.model.data.actions) {
-            const data = this.model.data.actions[name];
-            this.addActionItem(data, name);
+        for (const name in this.actions) {
+            this.addActionItem(this.actions[name]);
         }
     }
 
@@ -85,18 +88,17 @@ class FormController extends VisualController {
         return itemField;
     }
 
-    addControlItem(controlData) {
+    /*addControlItem(controlData) {
         const caption = ControlController.prototype.getCaption(controlData);
         const itemControl = this.itemControls.addItem(caption);
         const control = new Control(controlData, this.model);
         itemControl.ctrl = new ControlController(control, itemControl);
         return itemControl;
-    }
+    }*/
 
-    addActionItem(actionData, name) {
-        const caption = ActionController.prototype.getCaption(actionData);
-        const itemAction = this.itemActions.addItem(caption);
-        itemAction.ctrl = this.actions[name];
+    addActionItem(action) {
+        const itemAction = this.itemActions.addItem(action.model.getName());
+        itemAction.ctrl = action;
         return itemAction;
     }
 
