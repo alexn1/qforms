@@ -5,7 +5,7 @@ class PageController extends VisualController {
         this.item      = item;
         this.pageLink  = pageLink;
         this.itemForms = null;
-        this.dataSources = {};
+        this.dataSources = [];
         this.forms       = {};
     }
 
@@ -13,9 +13,7 @@ class PageController extends VisualController {
         // console.log('PageController.init');
 
         // dataSources
-        for (const name in this.model.dataSources) {
-            this.createDataSource(this.model.dataSources[name], name);
-        }
+        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
 
         // forms
         if (this.model.data.forms) {
@@ -27,10 +25,10 @@ class PageController extends VisualController {
         }
     }
 
-    createDataSource(model, name) {
+    createDataSource(model) {
         const dataSource = new DataSourceController(model, null, this);
         dataSource.init();
-        this.dataSources[name] = dataSource;
+        this.dataSources.push(dataSource);
     }
 
     createTree(item) {
@@ -38,10 +36,7 @@ class PageController extends VisualController {
 
         // data sources
         this.dataSourcesItem = this.item.addItem('Data Sources');
-
-        for (const name in this.dataSources) {
-            this.addDataSourceItem(this.dataSources[name]);
-        }
+        this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
 
         // forms
         this.itemForms = this.item.addItem('Forms');
@@ -168,7 +163,7 @@ class PageController extends VisualController {
             items: [
                 {
                     title: 'Data Sources',
-                    items: Object.keys(this.dataSources).map(name => this.dataSources[name].getItem())
+                    items: this.dataSources.map(dataSource => dataSource.getItem())
                 },
                 {
                     title: 'Forms',

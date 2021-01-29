@@ -5,14 +5,14 @@ class Page extends Model {
         this.parent      = parent;
         this.pageLink    = pageLink;
         this.application = parent;
-        this.dataSources = {};
+        this.dataSources = [];
         this.forms       = {};
     }
 
     init() {
         // data sources
         for (const name in this.data.dataSources) {
-            this.createDataSource(this.data.dataSources[name], name);
+            this.createDataSource(this.data.dataSources[name]);
         }
 
         // forms
@@ -24,10 +24,10 @@ class Page extends Model {
         }
     }
 
-    createDataSource(data, name) {
+    createDataSource(data) {
         const dataSource = new (data, this);
         dataSource.init();
-        this.dataSources[name] = dataSource;
+        this.dataSources.push(dataSource);
     }
 
     async setValue(name, value) {
