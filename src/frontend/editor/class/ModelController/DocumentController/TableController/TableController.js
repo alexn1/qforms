@@ -5,18 +5,16 @@ class TableController extends DocumentController {
         this.item = item;
         this.parent = parent;
         this.columnsItem = null;
-        this.columns = {};
+        this.columns = [];
     }
 
     init() {
-        for (const name in this.model.columns) {
-            this.createColumn(this.model.columns[name], name);
-        }
+        this.model.columns.forEach(column => this.createColumn(column));
     }
-    createColumn(model, name) {
+    createColumn(model) {
         const column = new ColumnController(model, null);
         column.init();
-        this.columns[name] = column;
+        this.columns.push(column);
     }
 
     createTree(item) {

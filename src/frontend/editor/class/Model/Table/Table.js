@@ -2,19 +2,19 @@ class Table extends Model {
     constructor(data, database) {
         super(data, database);
         this.database = database;
-        this.columns = {};
+        this.columns = [];
     }
 
     init() {
         for (const name in this.data.columns) {
-            this.createColumn(this.data.columns[name], name);
+            this.createColumn(this.data.columns[name]);
         }
     }
 
-    createColumn(data, name) {
+    createColumn(data) {
         const column = new Column(data, this);
         column.init();
-        this.columns[name] = column;
+        this.columns.push(column);
     }
 
     async newColumn(name) {
