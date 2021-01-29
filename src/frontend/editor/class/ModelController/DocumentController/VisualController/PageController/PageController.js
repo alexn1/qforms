@@ -42,11 +42,8 @@ class PageController extends VisualController {
 
         // forms
         this.itemForms = this.item.addItem('Forms');
-        if (this.model.data.forms) {
-            for (const name in this.model.data.forms) {
-                const formData = this.model.data.forms[name];
-                this.addFormItem(formData, name);
-            }
+        for (const name in this.model.forms) {
+            this.addFormItem(this.forms[name]);
         }
     }
 
@@ -57,10 +54,10 @@ class PageController extends VisualController {
         return dataSourceItem;
     }
 
-    addFormItem(formData, name) {
-        const caption = FormController.prototype.getCaption(formData);
+    addFormItem(form) {
+        const caption = `${form.model.getClassName()}: ${form.model.getName()}`;
         const itemForm = this.itemForms.addItem(caption);
-        itemForm.ctrl = this.forms[name];
+        itemForm.ctrl = form;
         itemForm.ctrl.createTree(itemForm);
         return itemForm;
     }
