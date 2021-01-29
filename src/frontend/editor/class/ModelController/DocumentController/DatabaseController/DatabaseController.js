@@ -16,18 +16,13 @@ class DatabaseController extends DocumentController {
         this.tables                = null;
         this.tableName             = null;
 
-        this.params = [];
-        this.tables = {};
+        this.params  = [];
+        this.tables2 = [];
     }
 
     init() {
-        // params
         this.model.params.forEach(param => this.createParam(param));
-
-        // tables
-        for (const name in this.model.tables) {
-            this.createTable2(this.model.tables[name], name);
-        }
+        this.model.tables.forEach(table => this.createTable2(table));
     }
 
     createParam(model) {
@@ -36,9 +31,10 @@ class DatabaseController extends DocumentController {
         this.params.push(param);
     }
 
-    createTable2(model, name) {
-        this.tables[name] = new TableController(model, null, this);
-        this.tables[name].init();
+    createTable2(model) {
+        const table = new TableController(model, null, this);
+        table.init();
+        this.tables2.push(table);
     }
 
     createTree(item) {
@@ -50,9 +46,7 @@ class DatabaseController extends DocumentController {
 
         // tables
         this.tablesItem = this.item.addItem('Tables');
-        for (const name in this.model.tables) {
-            this.addTableItem(this.tables[name]);
-        }
+        this.tables2.forEach(table => this.addTableItem(table));
     }
 
     addParamItem(param) {
@@ -189,11 +183,11 @@ class DatabaseController extends DocumentController {
             items: [
                 {
                     title: 'Params',
-                    items: Object.keys(this.params).map(name => this.params[name].getItem())
+                    items: this.params.map(param => param.getItem())
                 },
                 {
                     title: 'Tables',
-                    items: Object.keys(this.tables).map(name => this.tables[name].getItem())
+                    items: this.tables2.map(table => table.getItem())
                 }
             ]
         };

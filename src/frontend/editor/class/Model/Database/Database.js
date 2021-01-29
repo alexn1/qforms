@@ -3,7 +3,7 @@ class Database extends Model {
     constructor(data) {
         super(data);
         this.params = [];
-        this.tables = {};
+        this.tables = [];
     }
 
     init() {
@@ -15,7 +15,7 @@ class Database extends Model {
 
         // tables
         for (const name in this.data.tables) {
-            this.createTable(this.data.tables[name], name);
+            this.createTable(this.data.tables[name]);
         }
     }
 
@@ -25,10 +25,10 @@ class Database extends Model {
         this.params.push(param);
     }
 
-    createTable(data, name) {
+    createTable(data) {
         const table = new Table(data, this);
         table.init();
-        this.tables[name] = table;
+        this.tables.push(table);
     }
 
     async setValue(name, value) {
