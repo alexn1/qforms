@@ -19,11 +19,8 @@ class TableController extends DocumentController {
 
     createTree(item) {
         if (item) this.item = item;
-
         this.columnsItem = this.item.addItem('Columns');
-        for (const name in this.columns) {
-            this.addColumnItem(this.columns[name]);
-        }
+        this.columns.forEach(column => this.addColumnItem(column));
     }
 
     addColumnItem(column) {
@@ -153,7 +150,7 @@ class TableController extends DocumentController {
             items: [
                 {
                     title: 'Columns',
-                    items: Object.keys(this.columns).map(name => this.columns[name].getItem())
+                    items: this.columns.map(column => column.getItem())
                 }
             ]
         };
