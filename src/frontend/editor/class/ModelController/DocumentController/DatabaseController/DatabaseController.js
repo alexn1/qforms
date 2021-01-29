@@ -50,11 +50,8 @@ class DatabaseController extends DocumentController {
 
         // tables
         this.tablesItem = this.item.addItem('Tables');
-        if (this.model.data.tables) {
-            for (const name in this.model.data.tables) {
-                const tableData = this.model.data.tables[name];
-                this.addTableItem(tableData, name);
-            }
+        for (const name in this.model.tables) {
+            this.addTableItem(this.tables[name]);
         }
     }
 
@@ -64,10 +61,9 @@ class DatabaseController extends DocumentController {
         return item;
     }
 
-    addTableItem(data, name) {
-        const caption = TableController.prototype.getCaption(data);
-        const item = this.tablesItem.addItem(caption);
-        item.ctrl = this.tables[name];
+    addTableItem(table) {
+        const item = this.tablesItem.addItem(table.model.getName());
+        item.ctrl = table;
         item.ctrl.createTree(item);
         return item;
     }
