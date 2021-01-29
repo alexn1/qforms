@@ -16,29 +16,28 @@ class FormController extends VisualController {
     init() {
 
         // dataSources
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSource = this.model.dataSources[name];
-                this.dataSources[name] = new DataSourceController(dataSource, null);
-            }
+        for (const name in this.model.dataSources) {
+            this.createDataSource(this.model.dataSources[name], name);
         }
 
         // fields
-        if (this.model.data.fields) {
-            for (const name in this.model.data.fields) {
-                const field = this.model.fields[name];
-                this.fields[name] = new FieldController(field, null);
-            }
+        for (const name in this.model.fields) {
+            const field = this.model.fields[name];
+            this.fields[name] = new FieldController(field, null);
         }
 
         // actions
-        if (this.model.data.actions) {
-            for (const name in this.model.data.actions) {
-                const action = this.model.actions[name];
-                this.actions[name] = new ActionController(action, null);
-            }
+        for (const name in this.model.actions) {
+            const action = this.model.actions[name];
+            this.actions[name] = new ActionController(action, null);
         }
 
+    }
+
+    createDataSource(model, name) {
+        const dataSource  = new DataSourceController(model, null);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
     }
 
     createTree(item) {
@@ -46,20 +45,15 @@ class FormController extends VisualController {
 
         // dataSources
         this.itemDataSources = this.item.addItem('Data Sources');
-        if (this.model.data.dataSources) {
-            for (const name in this.model.data.dataSources) {
-                const dataSourceData = this.model.data.dataSources[name];
-                this.addDataSourceItem(dataSourceData, name);
-            }
+        for (const name in this.dataSources) {
+            this.addDataSourceItem(this.dataSources[name]);
         }
 
         // fields
         this.itemFields = this.item.addItem('Fields');
-        if (this.model.data.fields) {
-            for (const name in this.model.data.fields) {
-                const fieldData = this.model.data.fields[name];
-                this.addFieldItem(fieldData, name);
-            }
+        for (const name in this.model.data.fields) {
+            const fieldData = this.model.data.fields[name];
+            this.addFieldItem(fieldData, name);
         }
 
         /*// controls
@@ -73,18 +67,16 @@ class FormController extends VisualController {
 
         // actions
         this.itemActions =  this.item.addItem('Actions');
-        if (this.model.data.actions) {
-            for (const name in this.model.data.actions) {
-                const data = this.model.data.actions[name];
-                this.addActionItem(data, name);
-            }
+        for (const name in this.model.data.actions) {
+            const data = this.model.data.actions[name];
+            this.addActionItem(data, name);
         }
     }
 
-    addDataSourceItem(dataSourceData, name) {
-        const caption = DataSourceController.prototype.getCaption(dataSourceData);
+    addDataSourceItem(dataSource) {
+        const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
         const itemDataSource = this.itemDataSources.addItem(caption);
-        itemDataSource.ctrl = this.dataSources[name];
+        itemDataSource.ctrl = dataSource;
         itemDataSource.ctrl.createTree(itemDataSource);
         return itemDataSource;
     }

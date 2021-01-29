@@ -12,9 +12,7 @@ class Form extends Model {
     init() {
         // dataSources
         for (const name in this.data.dataSources) {
-            const dataSource = new DataSource(this.data.dataSources[name], this);
-            dataSource.init();
-            this.dataSources[name] = dataSource;
+            this.createDataSource(this.data.dataSources[name], name);
         }
 
         // fields
@@ -24,11 +22,18 @@ class Form extends Model {
             this.fields[name] = field;
         }
 
+        // actions
         for (const name in this.data.actions) {
             const action = new Action(this.data.actions[name], this);
             action.init();
             this.actions[name] = action;
         }
+    }
+
+    createDataSource(data, name) {
+        const dataSource = new DataSource(data, this);
+        dataSource.init();
+        this.dataSources[name] = dataSource;
     }
 
     async setValue(name, value) {
