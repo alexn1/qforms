@@ -20,8 +20,7 @@ class FormController extends VisualController {
 
         // fields
         for (const name in this.model.fields) {
-            const field = this.model.fields[name];
-            this.fields[name] = new FieldController(field, null);
+            this.createField(this.model.fields[name], name);
         }
 
         // actions
@@ -38,6 +37,12 @@ class FormController extends VisualController {
         this.dataSources.push(dataSource);
     }
 
+    createField(model, name) {
+        const field = new FieldController(model, null);
+        field.init();
+        this.fields[name] = field;
+    }
+
     createTree(item) {
         if (item) this.item = item;
 
@@ -48,8 +53,7 @@ class FormController extends VisualController {
         // fields
         this.itemFields = this.item.addItem('Fields');
         for (const name in this.model.data.fields) {
-            const fieldData = this.model.data.fields[name];
-            this.addFieldItem(fieldData, name);
+            this.addFieldItem(this.fields[name]);
         }
 
         /*// controls
@@ -77,11 +81,11 @@ class FormController extends VisualController {
         return itemDataSource;
     }
 
-    addFieldItem(fieldData, name) {
-        const caption = FieldController.prototype.getCaption(fieldData);
+    addFieldItem(field) {
+        const caption = `${field.model.getClassName()}: ${field.model.getName()}`;
         const itemField = this.itemFields.addItem(caption);
-        this.fields[name].setItem(itemField);
-        itemField.ctrl = this.fields[name];
+        field.setItem(itemField);
+        itemField.ctrl = field;
         return itemField;
     }
 
@@ -94,9 +98,6 @@ class FormController extends VisualController {
     }
 
     addActionItem(actionData, name) {
-
-
-
         const caption = ActionController.prototype.getCaption(actionData);
         const itemAction = this.itemActions.addItem(caption);
         itemAction.ctrl = this.actions[name];
