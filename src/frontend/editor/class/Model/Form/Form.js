@@ -6,7 +6,7 @@ class Form extends Model {
         this.page   = page;
         this.dataSources = [];
         this.fields      = [];
-        this.actions     = {};
+        this.actions     = [];
     }
 
     init() {
@@ -22,7 +22,7 @@ class Form extends Model {
 
         // actions
         for (const name in this.data.actions) {
-            this.createAction(this.data.actions[name], name);
+            this.createAction(this.data.actions[name]);
         }
     }
 
@@ -36,10 +36,10 @@ class Form extends Model {
         field.init();
         this.fields.push(field);
     }
-    createAction(data, name) {
+    createAction(data) {
         const action = new Action(data, this);
         action.init();
-        this.actions[name] = action;
+        this.actions.push(action);
     }
 
     async setValue(name, value) {

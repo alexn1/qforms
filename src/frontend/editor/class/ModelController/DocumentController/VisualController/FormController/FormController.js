@@ -10,21 +10,13 @@ class FormController extends VisualController {
 
         this.dataSources = [];
         this.fields      = [];
-        this.actions     = {};
+        this.actions     = [];
     }
 
     init() {
-
-        // dataSources
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-
-        // fields
         this.model.fields.forEach(field => this.createField(field));
-
-        // actions
-        for (const name in this.model.actions) {
-            this.createAction(this.model.actions[name], name);
-        }
+        this.model.actions.forEach(action => this.createAction(action));
 
     }
 
@@ -39,10 +31,10 @@ class FormController extends VisualController {
         field.init();
         this.fields.push(field);
     }
-    createAction(model, name) {
+    createAction(model) {
         const action = new ActionController(model, null);
         action.init();
-        this.actions[name] = action;
+        this.actions.push(action);
     }
 
     createTree(item) {
@@ -67,9 +59,7 @@ class FormController extends VisualController {
 
         // actions
         this.itemActions =  this.item.addItem('Actions');
-        for (const name in this.actions) {
-            this.addActionItem(this.actions[name]);
-        }
+        this.actions.forEach(action => this.addActionItem(action));
     }
 
     addDataSourceItem(dataSource) {
@@ -285,7 +275,7 @@ class FormController extends VisualController {
                 },
                 {
                     title: 'Actions',
-                    items: Object.keys(this.actions).map(name => this.actions[name].getItem())
+                    items: this.actions.map(action => action.getItem())
                 }
             ]
         };
