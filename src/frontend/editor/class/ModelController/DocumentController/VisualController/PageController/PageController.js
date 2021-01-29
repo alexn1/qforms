@@ -16,12 +16,8 @@ class PageController extends VisualController {
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
 
         // forms
-        if (this.model.data.forms) {
-            for (const name in this.model.data.forms) {
-                const form = this.model.forms[name];
-                this.forms[name] = new FormController(form, null);
-                this.forms[name].init();
-            }
+        for (const name in this.model.forms) {
+            this.createForm(this.model.forms[name], name);
         }
     }
 
@@ -29,6 +25,12 @@ class PageController extends VisualController {
         const dataSource = new DataSourceController(model, null, this);
         dataSource.init();
         this.dataSources.push(dataSource);
+    }
+
+    createForm(model, name) {
+        const form = new FormController(model, null);
+        form.init();
+        this.forms[name] = form;
     }
 
     createTree(item) {
