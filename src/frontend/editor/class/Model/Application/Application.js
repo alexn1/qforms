@@ -60,6 +60,7 @@ class Application extends Model {
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
+        this.createPageLink(data.pageLink);
         return [data.page, data.pageLink];
     }
 
