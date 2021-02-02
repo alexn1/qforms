@@ -33,33 +33,29 @@ class TreeItem2 extends ReactComponent {
     isSelected() {
         return this.props.tree.state.selectedItem === this.props.item;
     }
-    isNode() {
-        return this.props.item.node || this.hasItems();
-    }
     isOpened() {
         return this.state.opened;
     }
-    hasItems() {
-        const item = this.props.item;
-        return !!(item.items && item.items.length);
-    }
     render() {
         // console.log('TreeItem2.render', this.props.item.title);
-        const item = this.props.item;
         const tree = this.props.tree;
+        const item = this.props.item;
+        const items = item.items;
+        const hasItems = !!(items && items.length);
+        const isNode = item.node || hasItems;
         return <li key={item.title} className={this.isOpened() ? 'opened' : null}>
             <div className={this.isSelected() ? 'active' : null}
                  style={{paddingLeft: this.props.paddingLeft}}
                  onMouseDown={this.onDivMouseDown}
                  onDoubleClick={this.onDivDoubleClick}
             >
-                <span className={this.isNode() ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown}/>
+                <span className={isNode ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown}/>
                 &nbsp;
                 <span>{item.title}</span>
             </div>
-            {this.hasItems() &&
+            {hasItems &&
             <ul>
-                {item.items.map(item =>
+                {items.map(item =>
                     <TreeItem2
                         key={item.title}
                         tree={tree}
