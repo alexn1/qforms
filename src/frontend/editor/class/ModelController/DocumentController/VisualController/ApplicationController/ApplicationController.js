@@ -33,6 +33,7 @@ class ApplicationController extends VisualController {
         const pageLink = new PageLinkController(model, null);
         pageLink.init();
         this.pageLinks.push(pageLink);
+        return pageLink;
     }
     createTree(item) {
         this.item = item;
@@ -73,8 +74,7 @@ class ApplicationController extends VisualController {
         return pageLinkItem;
     }
 
-    addPageItem(pageData, pageLinkData) {
-        const pageLink = new PageLink(pageLinkData, this.model);
+    addPageItem(pageData, pageLink) {
         const page = new Page(pageData, this.model, pageLink);
         const pageController = new PageController(page, null, pageLink);
         pageController.init();
@@ -126,10 +126,12 @@ class ApplicationController extends VisualController {
                 caption: caption,
                 startup: startup
             };
-            const [pageData, pageLinkData] = await this.model.newPage(params);
-            this.pageItems[name] = this.addPageItem(pageData, pageLinkData);
+            const [pageData, pageLinkData, pageLink] = await this.model.newPage(params);
+            this.createPageLink(pageLink);
+            this.pageItems[name] = this.addPageItem(pageData, pageLink);
             this.pageItems[name].select();
             $('#myModal').modal('hide');
+            this.editorController.treeWidget2.rerender();
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
@@ -195,6 +197,7 @@ class ApplicationController extends VisualController {
     }
 
     getItem() {
+        console.log('ApplicationController.getItem');
         return {
             ctrl  : this,
             title : this.model.getName(),
@@ -202,7 +205,11 @@ class ApplicationController extends VisualController {
             items : [
                 {
                     title: 'Databases',
-                    items: this.databases.map(database => database.getItem())
+                    items: this.databases.map(database => database.getItem()),
+                    /*getItems: () => {
+                        console.log('Databases.getItems');
+                        return this.databases.map(database => database.getItem())
+                    }*/
                 },
                 {
                     title: 'Data Sources',
@@ -211,7 +218,11 @@ class ApplicationController extends VisualController {
                 {
                     title : 'Pages',
                     opened: true,
-                    items: this.pageLinks.map(pageLink => pageLink.getItem())
+                    items: this.pageLinks.map(pageLink => pageLink.getItem()),
+                    /*getItems: () => {
+                        console.log('Pages.getItems');
+                        return this.pageLinks.map(pageLink => pageLink.getItem());
+                    }*/
                 }
             ]
         };

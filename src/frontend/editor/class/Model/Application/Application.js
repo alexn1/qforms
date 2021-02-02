@@ -38,6 +38,7 @@ class Application extends Model {
         const pageLink = new PageLink(data, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
+        return pageLink;
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
@@ -60,8 +61,8 @@ class Application extends Model {
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
-        this.createPageLink(data.pageLink);
-        return [data.page, data.pageLink];
+        const pageLink = this.createPageLink(data.pageLink);
+        return [data.page, data.pageLink, pageLink];
     }
 
     async newDatabase(params) {
