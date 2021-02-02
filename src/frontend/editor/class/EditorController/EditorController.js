@@ -5,9 +5,11 @@ class EditorController {
         this.tree      = null;
         this.docs      = null;
         this.listeners = {};
-        this.pg = null;
+
         this.appCtrl = null;
         EditorController.editorController = this;
+        this.pg = null;
+        this.treeWidget2 = null;
     }
 
     init() {
@@ -204,6 +206,7 @@ class EditorController {
     }
 
     getTreeItems() {
+        console.log('EditorController.getTreeItems');
         return [this.appCtrl.getItem()];
     }
 
