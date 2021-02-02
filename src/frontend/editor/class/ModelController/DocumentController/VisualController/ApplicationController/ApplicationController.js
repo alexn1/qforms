@@ -12,6 +12,22 @@ class ApplicationController extends VisualController {
         this.databases   = [];
         this.dataSources = [];
         this.pageLinks   = [];
+
+        // item
+        this.title = this.model.getName();
+        this.opened = true;
+        this.items = [
+            {
+                title: 'Databases'
+            },
+            {
+                title: 'Data Sources'
+            },
+            {
+                title : 'Pages',
+                opened: true
+            }
+        ];
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
@@ -206,10 +222,6 @@ class ApplicationController extends VisualController {
                 {
                     title: 'Databases',
                     items: this.databases.map(database => database.getItem()),
-                    /*getItems: () => {
-                        console.log('Databases.getItems');
-                        return this.databases.map(database => database.getItem())
-                    }*/
                 },
                 {
                     title: 'Data Sources',
@@ -219,10 +231,6 @@ class ApplicationController extends VisualController {
                     title : 'Pages',
                     opened: true,
                     items: this.pageLinks.map(pageLink => pageLink.getItem()),
-                    /*getItems: () => {
-                        console.log('Pages.getItems');
-                        return this.pageLinks.map(pageLink => pageLink.getItem());
-                    }*/
                 }
             ]
         };

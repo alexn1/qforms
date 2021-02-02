@@ -10,7 +10,7 @@ class EditorView extends ReactComponent {
                     content: <div style={{height: '100%'}}>
                         <TreeWidget2
                             onCreate={c => ctrl.treeWidget2 = c}
-                            items={ctrl.getTreeItems()}
+                            items={ctrl.items}
                             onItemSelect={ctrl.onItemSelect2}
                             onItemDoubleClick={ctrl.onItemDoubleClick2}
                             onItemOpen={ctrl.onItemOpen2}

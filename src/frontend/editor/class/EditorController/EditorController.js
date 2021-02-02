@@ -10,6 +10,7 @@ class EditorController {
         EditorController.editorController = this;
         this.pg = null;
         this.treeWidget2 = null;
+        this.items = null;
     }
 
     init() {
@@ -35,6 +36,8 @@ class EditorController {
         // application controller
         this.appCtrl = new ApplicationController(appModel, this);
         this.appCtrl.init();
+
+        this.items = [this.appCtrl];
 
         // appItem
         const appItem = this.tree.addItem(caption, 'opened');
@@ -205,9 +208,5 @@ class EditorController {
         this.docs.closeTab(e.tab);
     }
 
-    getTreeItems() {
-        console.log('EditorController.getTreeItems');
-        return [this.appCtrl.getItem()];
-    }
 
 }
