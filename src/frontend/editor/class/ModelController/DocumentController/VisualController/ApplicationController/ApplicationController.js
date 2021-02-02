@@ -117,18 +117,18 @@ class ApplicationController extends VisualController {
         const result = await Page.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
-            const name = $("#myModal input[id='name']").val();
+        $("#myModal button[name='create']").click(() => {
+            const name    = $("#myModal input[id='name']").val();
             const caption = $("#myModal input[id='caption']").val();
             const startup = $("#myModal select[id='startup']").val();
             const params = {
-                name:name,
-                caption:caption,
-                startup:startup
+                name   : name,
+                caption: caption,
+                startup: startup
             };
-            self.model.newPage(params).then(([pageData, pageLinkData]) => {
-                self.pageItems[name] = self.addPageItem(pageData, pageLinkData);
-                self.pageItems[name].select();
+            this.model.newPage(params).then(([pageData, pageLinkData]) => {
+                this.pageItems[name] = this.addPageItem(pageData, pageLinkData);
+                this.pageItems[name].select();
             });
             $('#myModal').modal('hide');
         });
