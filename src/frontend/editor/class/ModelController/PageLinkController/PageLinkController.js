@@ -32,5 +32,14 @@ class PageLinkController extends ModelController {
         pageController.items.forEach(item => this.items.push(item));
         this.view.rerender();
     }
+    getActions() {
+        return this.pageController.getActions();
+    }
+    getPropList() {
+        return this.pageController.getPropList();
+    }
+    async setProperty(name, value) {
+        this.pageController.setProperty(name, value);
+    }
 
 }

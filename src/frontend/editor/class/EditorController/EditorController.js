@@ -88,8 +88,8 @@ class EditorController {
             if (item instanceof PageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
-            /*this.fillActions(item);
-            this.fillPropertyGrid(item);*/
+            this.fillActions(item);
+            this.fillPropertyGrid(item);
         } else {
             this.clearActions();
             this.endEdit();
@@ -107,7 +107,9 @@ class EditorController {
 
     onPropertyGrid2Change = (name, value) => {
         console.log('EditorController.onPropertyGrid2Change', name, value);
-        this.tree.active.ctrl.setProperty(name, value);
+        const controller = this.treeWidget2.state.selectedItem;
+        console.log('controller', controller);
+        controller.setProperty(name, value);
     }
 
     beginEdit(obj, options) {
