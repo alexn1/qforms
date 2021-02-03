@@ -16,7 +16,9 @@ class FormController extends VisualController {
             {getTitle: () => 'Actions'     , items: this.actions}
         ];
     }
-
+    getTitle() {
+        return `${this.model.getClassName()}: ${this.model.getName()}`;
+    }
     init() {
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
         this.model.fields.forEach(field => this.createField(field));
