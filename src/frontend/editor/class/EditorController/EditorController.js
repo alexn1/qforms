@@ -64,7 +64,7 @@ class EditorController {
     }
     onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item);
-        if (item.ctrl instanceof PageLinkController) {
+        if (item instanceof PageLinkController) {
             await this.pageLinkToPage2(item);
         }
     }
@@ -88,8 +88,8 @@ class EditorController {
             if (item instanceof PageLinkController) {
                 await this.pageLinkToPage2(item);
             }
-            this.fillActions(item);
-            this.fillPropertyGrid(item);
+            /*this.fillActions(item);
+            this.fillPropertyGrid(item);*/
         } else {
             this.clearActions();
             this.endEdit();
@@ -140,21 +140,25 @@ class EditorController {
         });
     }
 
-    async pageLinkToPage2(item) {
-        console.log('EditorController.pageLinkToPage2');
-        const pageLink = item.ctrl.model;
+    async pageLinkToPage2(pageLinkController) {
+        console.log('EditorController.pageLinkToPage2', pageLinkController);
+        /*
+        const pageLink = pageLinkController.model;
         const pageData = await EditorController.fetchPageData(pageLink.getFileName());
         const page = new Page(pageData, pageLink.parent, pageLink);
         page.init();
+        const pageController = new PageController(page, null, pageLink);
+        pageController.init();*/
 
+        /*
         // change item controller
         const c = item.ctrl.c;
-        item.ctrl = new PageController(page, item, pageLink);
+        item.ctrl
         item.ctrl.init();
         item.items = item.ctrl.getItem().items;
         // console.log('item.items:', item.items);
         item.ctrl.c = c;
-        item.ctrl.c.rerender();
+        item.ctrl.c.rerender();*/
     }
 
     onItemDelete(e) {
