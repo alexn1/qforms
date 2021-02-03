@@ -39,7 +39,7 @@ class Page extends Model {
             controller: 'Page',
             action    : 'save',
             params    : Helper.encodeObject({
-                fileName: this.pageLink.data['@attributes'].fileName,
+                fileName: this.pageLink.getFileName(),
                 attr    : name,
                 value   : value
             })
@@ -59,7 +59,7 @@ class Page extends Model {
     }
 
     async newForm(params) {
-        params['pageFileName'] = this.pageLink.data['@attributes'].fileName;
+        params['pageFileName'] = this.pageLink.getFileName();
         return await QForms.doHttpRequest({
             controller: 'Form',
             action    : '_new',

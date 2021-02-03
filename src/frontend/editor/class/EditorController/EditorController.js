@@ -140,27 +140,6 @@ class EditorController {
         });
     }
 
-    async pageLinkToPage2(pageLinkController) {
-        console.log('EditorController.pageLinkToPage2', pageLinkController);
-        /*
-        const pageLink = pageLinkController.model;
-        const pageData = await EditorController.fetchPageData(pageLink.getFileName());
-        const page = new Page(pageData, pageLink.parent, pageLink);
-        page.init();
-        const pageController = new PageController(page, null, pageLink);
-        pageController.init();*/
-
-        /*
-        // change item controller
-        const c = item.ctrl.c;
-        item.ctrl
-        item.ctrl.init();
-        item.items = item.ctrl.getItem().items;
-        // console.log('item.items:', item.items);
-        item.ctrl.c = c;
-        item.ctrl.c.rerender();*/
-    }
-
     onItemDelete(e) {
         if (e.item.ctrl.tab) {
             this.docs.closeTab(e.item.ctrl.tab);

@@ -7,6 +7,16 @@ class PageController extends VisualController {
         this.itemForms = null;
         this.dataSources = [];
         this.forms       = [];
+
+        // items
+        this.items = [
+            {
+                getTitle: () => 'Data Sources'
+            },
+            {
+                getTitle: () => 'Forms'
+            }
+        ];
     }
 
     init() {

@@ -18,6 +18,19 @@ class PageLinkController extends ModelController {
     }
     async loadPage() {
         console.log('PageLinkController.loadPage', this.getTitle());
+        const pageLink = this.model;
+        const pageData = await EditorController.fetchPageData(pageLink.getFileName());
+
+        // page
+        const page = new Page(pageData, pageLink.parent, pageLink);
+        page.init();
+
+        // pageController
+        const pageController = this.pageController = new PageController(page, null, pageLink);
+        pageController.init();
+
+        pageController.items.forEach(item => this.items.push(item));
+        this.view.rerender();
     }
 
 }
