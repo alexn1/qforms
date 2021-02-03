@@ -22,7 +22,8 @@ class ApplicationController extends VisualController {
                 items: this.databases
             },
             {
-                title: 'Data Sources'
+                title: 'Data Sources',
+                items: this.dataSources
             },
             {
                 title : 'Pages',

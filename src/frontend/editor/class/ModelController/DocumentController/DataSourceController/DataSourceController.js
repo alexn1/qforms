@@ -9,6 +9,9 @@ class DataSourceController extends DocumentController {
         // this.cmQuery              = null;
         this.keyColumns = [];
         this.parentKeyColumns = [];
+
+        // item
+        this.title = `${this.model.getClassName()}: ${this.model.getName()}`;
     }
 
     init() {

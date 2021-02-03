@@ -84,12 +84,12 @@ class EditorController {
 
     onItemSelect2 = async item => {
         console.log('EditorController.onItemSelect2', item);
-        if (item.ctrl) {
-            if (item.ctrl instanceof PageLinkController) {
+        if (item instanceof ModelController) {
+            if (item instanceof PageLinkController) {
                 await this.pageLinkToPage2(item);
             }
-            this.fillActions(item.ctrl);
-            this.fillPropertyGrid(item.ctrl);
+            this.fillActions(item);
+            this.fillPropertyGrid(item);
         } else {
             this.clearActions();
             this.endEdit();
