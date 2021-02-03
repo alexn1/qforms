@@ -40,9 +40,7 @@ class TreeItem2 extends ReactComponent {
         // console.log('TreeItem2.render', this.props.item.title);
         const tree = this.props.tree;
         const item = this.props.item;
-        const items = item.getItems ? item.getItems() : item.items;
-
-
+        const items = item.items;
         const hasItems = !!(items && items.length);
         const isNode = item.node || hasItems;
         return <li key={item.title} className={this.isOpened() ? 'opened' : null}>
