@@ -9,6 +9,10 @@ class PageLinkController extends ModelController {
         // items
         this.items = [];
     }
+    getTitle() {
+        if (this.pageController) return this.pageController.getTitle();
+        return super.getTitle();
+    }
     hasPage() {
         return this.pageController != null;
     }

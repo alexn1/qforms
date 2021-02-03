@@ -62,7 +62,7 @@ class TreeItem2 extends ReactComponent {
                         tree={tree}
                         item={item}
                         paddingLeft={this.props.paddingLeft+15}
-                        // onCreate={c => { if (item.ctrl) item.ctrl.c = c}}
+                        onCreate={c => item.view = c}
                     />
                 )}
             </ul>

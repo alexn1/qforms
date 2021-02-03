@@ -32,7 +32,7 @@ class TreeWidget2 extends ReactComponent {
                         tree={this}
                         item={item}
                         paddingLeft={5}
-                        // onCreate={c => { if (item.ctrl) item.ctrl.c = c}}
+                        onCreate={c => item.view = c}
                     />
                 )}
             </ul>
