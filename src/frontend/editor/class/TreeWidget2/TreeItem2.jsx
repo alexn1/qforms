@@ -43,7 +43,8 @@ class TreeItem2 extends ReactComponent {
         const items = item.items;
         const hasItems = !!(items && items.length);
         const isNode = item.node || hasItems;
-        return <li key={item.title} className={this.isOpened() ? 'opened' : null}>
+        const title = item.title;
+        return <li key={title} className={this.isOpened() ? 'opened' : null}>
             <div className={this.isSelected() ? 'active' : null}
                  style={{paddingLeft: this.props.paddingLeft}}
                  onMouseDown={this.onDivMouseDown}
@@ -51,7 +52,7 @@ class TreeItem2 extends ReactComponent {
             >
                 <span className={isNode ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown}/>
                 &nbsp;
-                <span>{item.title}</span>
+                <span>{title}</span>
             </div>
             {hasItems &&
             <ul>
