@@ -10,6 +10,11 @@ class FormController extends VisualController {
         this.dataSources = [];
         this.fields      = [];
         this.actions     = [];
+        this.items = [
+            {getTitle: () => 'Data Sources', items: this.dataSources},
+            {getTitle: () => 'Fields'      , items: this.fields},
+            {getTitle: () => 'Actions'     , items: this.actions}
+        ];
     }
 
     init() {
@@ -258,26 +263,5 @@ class FormController extends VisualController {
             .replace('{class}', data['@class']);
         return caption;
     }
-
-    /*getItem() {
-        return {
-            ctrl : this,
-            title: this.model.getName(),
-            items: [
-                {
-                    title: 'Data Sources',
-                    items: this.dataSources.map(dataSource => dataSource.getItem())
-                },
-                {
-                    title: 'Fields',
-                    items: this.fields.map(field => field.getItem())
-                },
-                {
-                    title: 'Actions',
-                    items: this.actions.map(action => action.getItem())
-                }
-            ]
-        };
-    }*/
 
 }

@@ -4,7 +4,9 @@ class FieldController extends VisualController {
         super(model);
         this.item = item;
     }
-
+    getTitle() {
+        return `${this.model.getClassName()}: ${this.model.getName()}`;
+    }
     getActions() {
         return [
             {'action': 'changeClass', 'caption': 'Change Class'},
