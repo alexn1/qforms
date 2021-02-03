@@ -3,6 +3,9 @@ class ParamController extends ModelController {
     constructor(model, item) {
         super(model);
         this.item = item;
+
+        // item
+        this.title = this.model.getName();
     }
 
     getActions() {

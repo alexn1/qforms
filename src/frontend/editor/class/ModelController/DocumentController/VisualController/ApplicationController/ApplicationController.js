@@ -18,7 +18,8 @@ class ApplicationController extends VisualController {
         this.opened = true;
         this.items = [
             {
-                title: 'Databases'
+                title: 'Databases',
+                items: this.databases
             },
             {
                 title: 'Data Sources'
@@ -212,7 +213,7 @@ class ApplicationController extends VisualController {
         return propList;
     }
 
-    getItem() {
+    /*getItem() {
         console.log('ApplicationController.getItem');
         return {
             ctrl  : this,
@@ -225,15 +226,15 @@ class ApplicationController extends VisualController {
                 },
                 {
                     title: 'Data Sources',
-                    items: this.dataSources.map(dataSource => dataSource.getItem())
+                    items: this.dataSources.map(dataSource => dataSource.getItem()),
                 },
                 {
                     title : 'Pages',
+                    items : this.pageLinks.map(pageLink => pageLink.getItem()),
                     opened: true,
-                    items: this.pageLinks.map(pageLink => pageLink.getItem()),
                 }
             ]
         };
-    }
+    }*/
 
 }

@@ -6,6 +6,15 @@ class TableController extends DocumentController {
         this.parent = parent;
         this.columnsItem = null;
         this.columns = [];
+
+        // item
+        this.title = this.model.getName();
+        this.items = [
+            {
+                title: 'Columns',
+                items: this.columns
+            }
+        ];
     }
 
     init() {
@@ -143,7 +152,7 @@ class TableController extends DocumentController {
         $("#modal input[id='formPage']").focus();
     }
 
-    getItem() {
+    /*getItem() {
         return {
             ctrl : this,
             title: this.model.getName(),
@@ -154,6 +163,6 @@ class TableController extends DocumentController {
                 }
             ]
         };
-    }
+    }*/
 
 }

@@ -18,6 +18,19 @@ class DatabaseController extends DocumentController {
 
         this.params  = [];
         this.tables2 = [];
+
+        // item
+        this.title = `${this.model.getClassName()}: ${this.model.getName()}`;
+        this.items = [
+            {
+                title: 'Params',
+                items: this.params
+            },
+            {
+                title: 'Tables',
+                items: this.tables2
+            }
+        ];
     }
 
     init() {
