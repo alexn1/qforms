@@ -14,19 +14,18 @@ class ApplicationController extends VisualController {
         this.pageLinks   = [];
 
         // item
-        this.title = this.model.getName();
         this.opened = true;
         this.items = [
             {
-                title: 'Databases',
+                getTitle: () => 'Databases',
                 items: this.databases
             },
             {
-                title: 'Data Sources',
+                getTitle: () => 'Data Sources',
                 items: this.dataSources
             },
             {
-                title : 'Pages',
+                getTitle: () => 'Pages',
                 opened: true
             }
         ];

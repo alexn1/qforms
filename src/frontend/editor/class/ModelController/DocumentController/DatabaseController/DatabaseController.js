@@ -19,20 +19,21 @@ class DatabaseController extends DocumentController {
         this.params  = [];
         this.tables2 = [];
 
-        // item
-        this.title = `${this.model.getClassName()}: ${this.model.getName()}`;
+        // items
         this.items = [
             {
-                title: 'Params',
+                getTitle: () => 'Params',
                 items: this.params
             },
             {
-                title: 'Tables',
+                getTitle: () => 'Tables',
                 items: this.tables2
             }
         ];
     }
-
+    getTitle() {
+        return `${this.model.getClassName()}: ${this.model.getName()}`;
+    }
     init() {
         this.model.params.forEach(param => this.createParam(param));
         this.model.tables.forEach(table => this.createTable2(table));

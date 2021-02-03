@@ -37,13 +37,13 @@ class TreeItem2 extends ReactComponent {
         return this.state.opened;
     }
     render() {
-        // console.log('TreeItem2.render', this.props.item.title);
+        // console.log('TreeItem2.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
         const hasItems = !!(items && items.length);
         const isNode = item.node || hasItems;
-        const title = item.title;
+        const title = item.getTitle();
         return <li key={title} className={this.isOpened() ? 'opened' : null}>
             <div className={this.isSelected() ? 'active' : null}
                  style={{paddingLeft: this.props.paddingLeft}}
@@ -58,7 +58,7 @@ class TreeItem2 extends ReactComponent {
             <ul>
                 {items.map(item =>
                     <TreeItem2
-                        key={item.title}
+                        key={item.getTitle()}
                         tree={tree}
                         item={item}
                         paddingLeft={this.props.paddingLeft+15}

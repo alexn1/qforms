@@ -10,7 +10,9 @@ class ModelController extends EventEmitter {
     init() {
 
     }
-
+    getTitle() {
+        return this.model.getName();
+    }
     getPropList() {
         return {
             list   : this.model.data['@attributes'],

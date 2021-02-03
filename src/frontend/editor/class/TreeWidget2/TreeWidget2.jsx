@@ -28,7 +28,7 @@ class TreeWidget2 extends ReactComponent {
             <ul>
                 {items.map(item =>
                     <TreeItem2
-                        key={item.title}
+                        key={item.getTitle()}
                         tree={this}
                         item={item}
                         paddingLeft={5}

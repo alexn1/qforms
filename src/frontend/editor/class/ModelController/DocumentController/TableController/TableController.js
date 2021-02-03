@@ -7,11 +7,10 @@ class TableController extends DocumentController {
         this.columnsItem = null;
         this.columns = [];
 
-        // item
-        this.title = this.model.getName();
+        // items
         this.items = [
             {
-                title: 'Columns',
+                getTitle: () => 'Columns',
                 items: this.columns
             }
         ];

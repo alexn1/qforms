@@ -9,11 +9,10 @@ class DataSourceController extends DocumentController {
         // this.cmQuery              = null;
         this.keyColumns = [];
         this.parentKeyColumns = [];
-
-        // item
-        this.title = `${this.model.getClassName()}: ${this.model.getName()}`;
     }
-
+    getTitle() {
+        return `${this.model.getClassName()}: ${this.model.getName()}`;
+    }
     init() {
         this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
         this.model.parentKeyColumns.forEach(parentKeyColumn => this.createParentKeyColumn(parentKeyColumn));
