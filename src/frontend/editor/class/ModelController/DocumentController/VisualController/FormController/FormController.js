@@ -260,7 +260,7 @@ class FormController extends VisualController {
         return caption;
     }
 
-    getItem() {
+    /*getItem() {
         return {
             ctrl : this,
             title: this.model.getName(),
@@ -279,6 +279,6 @@ class FormController extends VisualController {
                 }
             ]
         };
-    }
+    }*/
 
 }

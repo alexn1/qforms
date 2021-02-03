@@ -9,6 +9,14 @@ class DataSourceController extends DocumentController {
         // this.cmQuery              = null;
         this.keyColumns = [];
         this.parentKeyColumns = [];
+
+        // items for TreeWidget2
+        this.items = [
+            {
+                getTitle: () => 'Key Columns',
+                items: this.keyColumns
+            }
+        ];
     }
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
@@ -339,19 +347,6 @@ class DataSourceController extends DocumentController {
             .replace('{name}' , data['@attributes'].name)
             .replace('{class}', data['@class']);
         return caption;
-    }
-
-    getItem() {
-        return {
-            ctrl : this,
-            title: `${this.model.getClassName()}: ${this.model.getName()}`,
-            items: [
-                {
-                    title: 'Key Columns',
-                    items: this.keyColumns.map(keyColumn => keyColumn.getItem())
-                }
-            ]
-        };
     }
 
 }

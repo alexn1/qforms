@@ -151,17 +151,4 @@ class TableController extends DocumentController {
         $("#modal input[id='formPage']").focus();
     }
 
-    /*getItem() {
-        return {
-            ctrl : this,
-            title: this.model.getName(),
-            items: [
-                {
-                    title: 'Columns',
-                    items: this.columns.map(column => column.getItem())
-                }
-            ]
-        };
-    }*/
-
 }

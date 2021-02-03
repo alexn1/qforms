@@ -190,21 +190,4 @@ class DatabaseController extends DocumentController {
         return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
     }
 
-    getItem() {
-        return {
-            ctrl : this,
-            title: `${this.model.getClassName()}: ${this.model.getName()}`,
-            items: [
-                {
-                    title: 'Params',
-                    items: this.params.map(param => param.getItem())
-                },
-                {
-                    title: 'Tables',
-                    items: this.tables2.map(table => table.getItem())
-                }
-            ]
-        };
-    }
-
 }

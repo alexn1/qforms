@@ -151,7 +151,7 @@ class PageController extends VisualController {
         }
     }
 
-    getItem() {
+    /*getItem() {
         return {
             ctrl : this,
             title: this.model.getName(),
@@ -166,5 +166,5 @@ class PageController extends VisualController {
                 }
             ]
         };
-    }
+    }*/
 }

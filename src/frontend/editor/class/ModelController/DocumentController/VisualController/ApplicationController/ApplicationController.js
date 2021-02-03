@@ -13,7 +13,7 @@ class ApplicationController extends VisualController {
         this.dataSources = [];
         this.pageLinks   = [];
 
-        // item
+        // items
         this.opened = true;
         this.items = [
             {
@@ -26,6 +26,7 @@ class ApplicationController extends VisualController {
             },
             {
                 getTitle: () => 'Pages',
+                items: this.pageLinks,
                 opened: true
             }
         ];
@@ -212,29 +213,5 @@ class ApplicationController extends VisualController {
         propList.options['lang']           = ['en'  , 'ru'   ];
         return propList;
     }
-
-    /*getItem() {
-        console.log('ApplicationController.getItem');
-        return {
-            ctrl  : this,
-            title : this.model.getName(),
-            opened: true,
-            items : [
-                {
-                    title: 'Databases',
-                    items: this.databases.map(database => database.getItem()),
-                },
-                {
-                    title: 'Data Sources',
-                    items: this.dataSources.map(dataSource => dataSource.getItem()),
-                },
-                {
-                    title : 'Pages',
-                    items : this.pageLinks.map(pageLink => pageLink.getItem()),
-                    opened: true,
-                }
-            ]
-        };
-    }*/
 
 }
