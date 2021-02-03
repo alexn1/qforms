@@ -64,8 +64,8 @@ class EditorController {
     }
     onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item);
-        if (item instanceof PageLinkController) {
-            await this.pageLinkToPage2(item);
+        if (item instanceof PageLinkController && !item.hasPage()) {
+            await item.loadPage();
         }
     }
     async onItemSelect(e) {
@@ -83,10 +83,10 @@ class EditorController {
     }
 
     onItemSelect2 = async item => {
-        console.log('EditorController.onItemSelect2', item);
+        console.log('EditorController.onItemSelect2', item.getTitle());
         if (item instanceof ModelController) {
-            if (item instanceof PageLinkController) {
-                await this.pageLinkToPage2(item);
+            if (item instanceof PageLinkController && !item.hasPage()) {
+                await item.loadPage();
             }
             /*this.fillActions(item);
             this.fillPropertyGrid(item);*/
