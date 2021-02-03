@@ -28,6 +28,7 @@ class PageLinkController extends ModelController {
         // pageController
         const pageController = this.pageController = new PageController(page, null, pageLink);
         pageController.init();
+        console.log('pageController:', pageController);
 
         pageController.items.forEach(item => this.items.push(item));
         this.view.rerender();

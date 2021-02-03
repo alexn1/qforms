@@ -7,15 +7,9 @@ class PageController extends VisualController {
         this.itemForms = null;
         this.dataSources = [];
         this.forms       = [];
-
-        // items
         this.items = [
-            {
-                getTitle: () => 'Data Sources'
-            },
-            {
-                getTitle: () => 'Forms'
-            }
+            {getTitle: () => 'Data Sources', items: this.dataSources},
+            {getTitle: () => 'Forms'       , items: this.forms}
         ];
     }
 
@@ -161,20 +155,4 @@ class PageController extends VisualController {
         }
     }
 
-    /*getItem() {
-        return {
-            ctrl : this,
-            title: this.model.getName(),
-            items: [
-                {
-                    title: 'Data Sources',
-                    items: this.dataSources.map(dataSource => dataSource.getItem())
-                },
-                {
-                    title: 'Forms',
-                    items: this.forms.map(form => form.getItem())
-                }
-            ]
-        };
-    }*/
 }

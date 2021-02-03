@@ -5,9 +5,8 @@ class FormController extends VisualController {
         this.item            = item;
         this.itemDataSources = null;
         this.itemFields      = null;
-        this.itemControls    = null;
+        // this.itemControls    = null;
         this.itemActions     = null;
-
         this.dataSources = [];
         this.fields      = [];
         this.actions     = [];
