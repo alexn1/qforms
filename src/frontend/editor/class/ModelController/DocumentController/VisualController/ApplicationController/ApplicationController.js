@@ -93,9 +93,6 @@ class ApplicationController extends VisualController {
     }
 
     addPageItem(pageController) {
-
-
-        // pageItem
         const pageItem = this.pagesItem.addItem(pageController.getTitle());
         pageItem.ctrl = pageController;
         pageItem.node.className = 'node';
@@ -149,9 +146,10 @@ class ApplicationController extends VisualController {
             pageLinkController.setPageController(pageController);
 
             this.pageItems[name] = this.addPageItem(pageController);
-            this.pageItems[name].select();
+            // this.pageItems[name].select();
             $('#myModal').modal('hide');
-            this.editorController.treeWidget2.rerender();
+
+            this.editorController.treeWidget2.select(pageLinkController);
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
