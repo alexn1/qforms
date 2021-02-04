@@ -49,13 +49,15 @@ class Page extends Model {
     }
 
     async delete() {
-        return await QForms.doHttpRequest({
+        console.log('Page.delete', this.getName());
+        await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'delete',
             params    : Helper.encodeObject({
                 page: this.data['@attributes'].name
             })
         });
+        this.parent.removePageLink(this.pageLink);
     }
 
     async newForm(params) {

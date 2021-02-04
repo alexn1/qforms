@@ -32,7 +32,7 @@ class ModelController extends EventEmitter {
     }
 
     async delete() {
-        console.log('ModelController.delete', this.name);
+        console.log('ModelController.delete', this.model.getName());
         await this.model.delete();
         this.item.parent.removeItem(this.item);
     }

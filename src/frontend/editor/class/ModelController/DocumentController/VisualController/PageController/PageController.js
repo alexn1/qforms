@@ -1,7 +1,8 @@
 class PageController extends VisualController {
 
-    constructor(model) {
+    constructor(model, pageLinkController = null) {
         super(model);
+        this.pageLinkController = pageLinkController;
         this.item      = null;
         this.itemForms = null;
         this.dataSources = [];
@@ -95,6 +96,12 @@ class PageController extends VisualController {
             default:
                 console.log(action);
         }
+    }
+
+    async delete() {
+        await this.model.delete();
+
+        this.item.parent.removeItem(this.item);
     }
 
     async actionNewForm() {

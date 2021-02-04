@@ -141,7 +141,7 @@ class ApplicationController extends VisualController {
             const pageLinkController = this.createPageLink(page.pageLink);
 
             // pageController
-            const pageController = new PageController(page);
+            const pageController = new PageController(page, pageLinkController);
             pageController.init();
             pageLinkController.setPageController(pageController);
 

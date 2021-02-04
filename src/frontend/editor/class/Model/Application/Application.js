@@ -40,6 +40,12 @@ class Application extends Model {
         this.pageLinks.push(pageLink);
         return pageLink;
     }
+    removePageLink(pageLink) {
+        console.log('Application.removePageLink', pageLink.getName());
+        const i = this.pageLinks.indexOf(pageLink);
+        if (i === -1) throw new Error('no such pageLink');
+        this.pageLinks.splice(i, 1);
+    }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await QForms.doHttpRequest({
