@@ -37,8 +37,8 @@ class ModelController extends EventEmitter {
         this.item.parent.removeItem(this.item);
     }
 
-    getObject(col, name) {
+    /*getObject(col, name) {
         return this[col].find(obj => obj.model.getName() === name);
-    }
+    }*/
 
 }
