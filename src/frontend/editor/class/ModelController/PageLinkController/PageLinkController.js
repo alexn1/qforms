@@ -23,7 +23,7 @@ class PageLinkController extends ModelController {
         const pageData = await EditorController.fetchPageData(pageLink.getFileName());
 
         // page
-        const page = new Page(pageData, pageLink.parent, pageLink);
+        const page = new Page(pageData, pageLink);
         page.init();
 
         // pageController

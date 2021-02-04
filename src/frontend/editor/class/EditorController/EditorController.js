@@ -124,11 +124,12 @@ class EditorController {
 
     async pageLinkToPage(item) {
         console.log('EditorController.pageLinkToPage');
-        const pageLink = item.ctrl.model;
+        const pageLinkController = item.ctrl;
+        const pageLink = pageLinkController.model;
         const pageData = await EditorController.fetchPageData(pageLink.getFileName());
-        const page = new Page(pageData, pageLink.parent, pageLink);
+        const page = new Page(pageData, pageLink);
         page.init();
-        item.ctrl = new PageController(page);
+        item.ctrl = new PageController(page, pageLinkController);
         item.ctrl.init();
         item.ctrl.createTree(item);
     }

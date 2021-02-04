@@ -1,8 +1,7 @@
 class Page extends Model {
 
-    constructor(data, parent, pageLink) {
+    constructor(data, pageLink) {
         super(data);
-        this.parent      = parent;
         this.pageLink    = pageLink;
         this.application = parent;
         this.dataSources = [];
@@ -54,10 +53,10 @@ class Page extends Model {
             controller: 'Page',
             action    : 'delete',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name
+                page: this.getName()
             })
         });
-        this.parent.removePageLink(this.pageLink);
+        this.pageLink.remove();
     }
 
     async newForm(params) {
@@ -75,7 +74,7 @@ class Page extends Model {
             action    : 'getView',
             params    : Helper.encodeObject({
                 view: view,
-                page: this.data !== undefined ? this.data['@attributes'].name : null
+                page: this.data !== undefined ? this.getName() : null
             })
         });
     }
@@ -85,7 +84,7 @@ class Page extends Model {
             controller: 'Page',
             action    : 'saveView',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name,
+                page: this.getName(),
                 view: view,
                 text: text
             })
@@ -97,7 +96,7 @@ class Page extends Model {
             controller: 'Page',
             action    : 'saveController',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name,
+                page: this.getName(),
                 text: text
             })
         });
@@ -108,7 +107,7 @@ class Page extends Model {
             controller: 'Page',
             action    : 'createView',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name
+                page: this.getName()
             })
         });
     }
@@ -118,7 +117,7 @@ class Page extends Model {
             controller: 'Page',
             action    : 'createController',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name
+                page: this.getName()
             })
         });
     }

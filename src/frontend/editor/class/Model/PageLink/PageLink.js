@@ -44,5 +44,9 @@ class PageLink extends Model {
     getFileName() {
         return this.data['@attributes'].fileName;
     }
+    remove() {
+        console.log('PageLink.remove', this.getName());
+        this.parent.removePageLink(this);
+    }
 
 }
