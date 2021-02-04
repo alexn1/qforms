@@ -100,7 +100,6 @@ class PageController extends VisualController {
 
     async delete() {
         await this.model.delete();
-
         this.item.parent.removeItem(this.item);
     }
 

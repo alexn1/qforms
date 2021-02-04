@@ -48,10 +48,15 @@ class ApplicationController extends VisualController {
         this.dataSources.push(dataSource);
     }
     createPageLink(model) {
-        const pageLink = new PageLinkController(model);
+        const pageLink = new PageLinkController(model, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
+    }
+    removePageLink(pageLinkController) {
+        const i = this.pageLinks.indexOf(pageLinkController);
+        if (i === -1) throw new Error('no such pageLinkController');
+        this.pageLinks.splice(i, 1);
     }
     createTree(item) {
         this.item = item;

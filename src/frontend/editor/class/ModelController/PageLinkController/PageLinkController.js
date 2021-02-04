@@ -1,6 +1,7 @@
 class PageLinkController extends ModelController {
-    constructor(model) {
+    constructor(model, parent) {
         super(model);
+        this.parent = parent;
         this.item = null;
         this.node = true;
 
@@ -46,5 +47,9 @@ class PageLinkController extends ModelController {
         if (this.pageController) throw new Error('pageLinkController already has pageController');
         this.pageController = pageController;
         pageController.items.forEach(item => this.items.push(item));
+    }
+    remove() {
+        console.log('PageLinkController.remove', this.getTitle());
+        this.parent.removePageLink(this);
     }
 }
