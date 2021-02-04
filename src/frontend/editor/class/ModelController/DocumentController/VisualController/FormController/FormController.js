@@ -27,7 +27,7 @@ class FormController extends VisualController {
     }
 
     createDataSource(model) {
-        const dataSource  = new DataSourceController(model, null);
+        const dataSource  = new DataSourceController(model);
         dataSource.init();
         this.dataSources.push(dataSource);
     }

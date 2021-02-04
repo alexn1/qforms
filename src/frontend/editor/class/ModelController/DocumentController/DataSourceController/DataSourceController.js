@@ -1,8 +1,8 @@
 class DataSourceController extends DocumentController {
 
-    constructor(model, item) {
+    constructor(model) {
         super(model);
-        this.item                 = item;
+        this.item                 = null;
         this.itemKeys             = null;
         this.itemParentKeyColumns = null;
         this.$view                = null;

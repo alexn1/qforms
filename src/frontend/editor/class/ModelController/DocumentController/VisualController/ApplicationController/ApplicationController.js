@@ -43,12 +43,12 @@ class ApplicationController extends VisualController {
         this.databases.push(database);
     }
     createDataSource(model) {
-        const dataSource = new DataSourceController(model, null, this);
+        const dataSource = new DataSourceController(model);
         dataSource.init();
         this.dataSources.push(dataSource);
     }
     createPageLink(model) {
-        const pageLink = new PageLinkController(model, null);
+        const pageLink = new PageLinkController(model);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
@@ -140,10 +140,10 @@ class ApplicationController extends VisualController {
                 caption: caption,
                 startup: startup
             };
-            const [pageData, pageLink] = await this.model.newPage(params);
-            this.createPageLink(pageLink);
+            const page = await this.model.newPage(params);
+            this.createPageLink(page.pageLink);
 
-            const page = new Page(pageData, this.model, pageLink);
+
             const pageController = new PageController(page);
             pageController.init();
 

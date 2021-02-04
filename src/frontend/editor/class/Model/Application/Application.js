@@ -62,7 +62,8 @@ class Application extends Model {
             params    : Helper.encodeObject(params)
         });
         const pageLink = this.createPageLink(data.pageLink);
-        return [data.page, pageLink];
+        const page = new Page(data.page, this, pageLink);
+        return page;
     }
 
     async newDatabase(params) {

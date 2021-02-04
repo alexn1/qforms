@@ -1,7 +1,7 @@
 class PageLinkController extends ModelController {
-    constructor(model, item) {
+    constructor(model) {
         super(model);
-        this.item = item;
+        this.item = null;
         this.node = true;
 
         this.pageController = null;
