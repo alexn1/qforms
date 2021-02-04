@@ -182,12 +182,13 @@ class EditorController {
     }
     onItemDoubleClick2 = item => {
         console.log('EditorController.onItemDoubleClick2', item);
-        const controller = item.ctrl;
-        if (!controller || !controller instanceof DocumentController) return;
-        if (controller.tab) {
-            this.docs.selectTab(controller.tab);
+        const pageLinkController = item;
+        const pageController = pageLinkController.pageController;
+        if (!pageController || !pageController instanceof DocumentController) return;
+        if (pageController.tab) {
+            this.docs.selectTab(pageController.tab);
         } else {
-            controller.createTab(this.docs);
+            pageController.createTab(this.docs);
         }
     }
     onTabClosingByUser(e) {
