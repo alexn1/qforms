@@ -128,7 +128,7 @@ class EditorController {
         const pageData = await EditorController.fetchPageData(pageLink.getFileName());
         const page = new Page(pageData, pageLink.parent, pageLink);
         page.init();
-        item.ctrl = new PageController(page, null, pageLink);
+        item.ctrl = new PageController(page);
         item.ctrl.init();
         item.ctrl.createTree(item);
     }

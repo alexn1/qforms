@@ -26,7 +26,7 @@ class PageLinkController extends ModelController {
         page.init();
 
         // pageController
-        const pageController = this.pageController = new PageController(page, null, pageLink);
+        const pageController = this.pageController = new PageController(page);
         pageController.init();
         console.log('pageController:', pageController);
 

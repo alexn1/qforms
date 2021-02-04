@@ -92,14 +92,11 @@ class ApplicationController extends VisualController {
         return pageLinkItem;
     }
 
-    addPageItem(pageData, pageLink) {
-        const page = new Page(pageData, this.model, pageLink);
-        const pageController = new PageController(page, null, pageLink);
-        pageController.init();
+    addPageItem(pageController) {
+
 
         // pageItem
-        const caption = PageController.prototype.getCaption(pageData);
-        const pageItem = this.pagesItem.addItem(caption);
+        const pageItem = this.pagesItem.addItem(pageController.getTitle());
         pageItem.ctrl = pageController;
         pageItem.node.className = 'node';
         pageItem.ctrl.createTree(pageItem);
@@ -131,7 +128,6 @@ class ApplicationController extends VisualController {
     }
 
     async newPageAction() {
-        const self = this;
         const result = await Page.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -144,9 +140,14 @@ class ApplicationController extends VisualController {
                 caption: caption,
                 startup: startup
             };
-            const [pageData, pageLinkData, pageLink] = await this.model.newPage(params);
+            const [pageData, pageLink] = await this.model.newPage(params);
             this.createPageLink(pageLink);
-            this.pageItems[name] = this.addPageItem(pageData, pageLink);
+
+            const page = new Page(pageData, this.model, pageLink);
+            const pageController = new PageController(page);
+            pageController.init();
+
+            this.pageItems[name] = this.addPageItem(pageController);
             this.pageItems[name].select();
             $('#myModal').modal('hide');
             this.editorController.treeWidget2.rerender();

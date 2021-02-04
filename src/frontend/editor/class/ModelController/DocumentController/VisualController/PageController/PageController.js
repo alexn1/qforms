@@ -1,9 +1,8 @@
 class PageController extends VisualController {
 
-    constructor(model, item, pageLink) {
+    constructor(model) {
         super(model);
-        this.item      = item;
-        this.pageLink  = pageLink;
+        this.item      = null;
         this.itemForms = null;
         this.dataSources = [];
         this.forms       = [];
@@ -141,18 +140,22 @@ class PageController extends VisualController {
 
     getPropList() {
         const propList = super.getPropList();
-        propList.list['menu']    = this.pageLink.data['@attributes']['menu'];
-        propList.list['startup'] = this.pageLink.data['@attributes']['startup'];
+        propList.list['menu']    = this.getPageLink().data['@attributes']['menu'];
+        propList.list['startup'] = this.getPageLink().data['@attributes']['startup'];
         propList.options['startup'] = ['true', 'false'];
         return propList;
     }
 
     setProperty(name, value) {
         if (name === 'startup' || name === 'menu') {
-            this.pageLink.setValue(name, value);
+            this.getPageLink().setValue(name, value);
         } else  {
             ModelController.prototype.setProperty.call(this, name, value);
         }
+    }
+
+    getPageLink() {
+        return this.model.pageLink;
     }
 
 }
