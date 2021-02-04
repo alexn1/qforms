@@ -17,18 +17,18 @@ class EditorController {
         console.log('EditorController.init', this.appData);
 
         // tree
-        this.tree = document.getElementById('tree')._obj;
+        /*this.tree = document.getElementById('tree')._obj;
         this.tree.on('doubleClick', this.listeners.doubleClick = this.onItemDoubleClick.bind(this));
         this.tree.on('select'     , this.listeners.select      = this.onItemSelect.bind(this));
         this.tree.on('open'       , this.listeners.open        = this.onItemOpen.bind(this));
-        this.tree.on('delete'     , this.listeners.delete      = this.onItemDelete.bind(this));
+        this.tree.on('delete'     , this.listeners.delete      = this.onItemDelete.bind(this));*/
 
         // docs
         this.docs = document.getElementById('docs')._obj;
         this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
         // appModel
-        const caption = ApplicationController.prototype.getCaption(this.appData);
+        // const caption = ApplicationController.prototype.getCaption(this.appData);
         const appModel = new Application(this.appData);
         appModel.init();
         console.log('appModel:', appModel);
@@ -40,35 +40,34 @@ class EditorController {
         this.items = [this.appCtrl];
 
         // appItem
-        const appItem = this.tree.addItem(caption, 'opened');
+        /*const appItem = this.tree.addItem(this.appCtrl.getTitle(), 'opened');
         appItem.ctrl = this.appCtrl;
-
-        this.appCtrl.createTree(appItem);
+        this.appCtrl.createTree(appItem);*/
 
         // view
         Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
     }
 
     deinit() {
-        this.tree.off('doubleClick'     , this.listeners.doubleClick);
+        /*this.tree.off('doubleClick'     , this.listeners.doubleClick);
         this.tree.off('select'          , this.listeners.select);
         this.tree.off('open'            , this.listeners.open);
-        this.tree.off('delete'          , this.listeners.delete);
+        this.tree.off('delete'          , this.listeners.delete);*/
         this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
     }
 
-    async onItemOpen(e) {
+    /*async onItemOpen(e) {
         if (e.item.ctrl instanceof PageLinkController) {
             await this.pageLinkToPage(e.item);
         }
-    }
+    }*/
     onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item);
         if (item instanceof PageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
     }
-    async onItemSelect(e) {
+    /*async onItemSelect(e) {
         console.log('EditorController.onItemSelect');
         if (e.item.ctrl) {
             if (e.item.ctrl instanceof PageLinkController) {
@@ -80,7 +79,7 @@ class EditorController {
             this.clearActions();
             this.endEdit();
         }
-    }
+    }*/
 
     onItemSelect2 = async item => {
         console.log('EditorController.onItemSelect2', item.getTitle());
@@ -143,14 +142,14 @@ class EditorController {
         });
     }
 
-    onItemDelete(e) {
+    /*onItemDelete(e) {
         if (e.item.ctrl.tab) {
             this.docs.closeTab(e.item.ctrl.tab);
         }
         $('#treeActionsList').children().remove();
         $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
         this.endEdit();
-    }
+    }*/
 
     fillActions(ctrl) {
         $('#treeActionsList').children().remove();
@@ -170,7 +169,7 @@ class EditorController {
         });
     }
 
-    onItemDoubleClick(e) {
+    /*onItemDoubleClick(e) {
         console.log('EditorController.onItemDoubleClick', e.item);
         const controller = e.item.ctrl;
         if (!controller || !controller instanceof DocumentController) return;
@@ -179,7 +178,7 @@ class EditorController {
         } else {
             controller.createTab(this.docs);
         }
-    }
+    }*/
     onItemDoubleClick2 = item => {
         console.log('EditorController.onItemDoubleClick2', item);
         const controller = item instanceof PageLinkController ? item.pageController : item;
