@@ -141,11 +141,12 @@ class ApplicationController extends VisualController {
                 startup: startup
             };
             const page = await this.model.newPage(params);
-            this.createPageLink(page.pageLink);
+            const pageLinkController = this.createPageLink(page.pageLink);
 
-
+            // pageController
             const pageController = new PageController(page);
             pageController.init();
+            pageLinkController.setPageController(pageController);
 
             this.pageItems[name] = this.addPageItem(pageController);
             this.pageItems[name].select();

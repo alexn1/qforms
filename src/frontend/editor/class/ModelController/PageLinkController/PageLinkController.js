@@ -26,11 +26,11 @@ class PageLinkController extends ModelController {
         page.init();
 
         // pageController
-        const pageController = this.pageController = new PageController(page);
+        const pageController = new PageController(page);
         pageController.init();
+        this.setPageController(pageController);
         console.log('pageController:', pageController);
 
-        pageController.items.forEach(item => this.items.push(item));
         this.view.rerender();
     }
     getActions() {
@@ -42,5 +42,9 @@ class PageLinkController extends ModelController {
     async setProperty(name, value) {
         this.pageController.setProperty(name, value);
     }
-
+    setPageController(pageController) {
+        if (this.pageController) throw new Error('pageLinkController already has pageController');
+        this.pageController = pageController;
+        pageController.items.forEach(item => this.items.push(item));
+    }
 }
