@@ -23,12 +23,14 @@ class Database extends Model {
         const param = new Param(data, this);
         param.init();
         this.params.push(param);
+        return param;
     }
 
     createTable(data) {
         const table = new Table(data, this);
         table.init();
         this.tables.push(table);
+        return table;
     }
 
     async setValue(name, value) {

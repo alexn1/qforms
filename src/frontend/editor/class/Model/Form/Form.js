@@ -30,16 +30,19 @@ class Form extends Model {
         const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
     createField(data) {
         const field = new Field(data, this);
         field.init();
         this.fields.push(field);
+        return field;
     }
     createAction(data) {
         const action = new Action(data, this);
         action.init();
         this.actions.push(action);
+        return action;
     }
 
     async setValue(name, value) {

@@ -23,7 +23,7 @@ class DataSourceController extends DocumentController {
     }
     init() {
         this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
-        this.model.parentKeyColumns.forEach(parentKeyColumn => this.createParentKeyColumn(parentKeyColumn));
+        // this.model.parentKeyColumns.forEach(parentKeyColumn => this.createParentKeyColumn(parentKeyColumn));
     }
 
     createKeyColumn(model) {

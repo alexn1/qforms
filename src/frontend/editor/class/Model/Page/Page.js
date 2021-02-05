@@ -24,12 +24,14 @@ class Page extends Model {
         const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
 
     createForm(data) {
         const form = new Form(data, this);
         form.init();
         this.forms.push(form);
+        return form;
     }
 
     async setValue(name, value) {

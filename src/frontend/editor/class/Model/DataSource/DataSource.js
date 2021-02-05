@@ -4,28 +4,30 @@ class DataSource extends Model {
         super(data);
         this.parent = parent;
         this.keyColumns = [];
-        this.parentKeyColumns = [];
+        // this.parentKeyColumns = [];
     }
 
     init() {
         for (const name in this.data.keyColumns) {
             this.createKeyColumn(this.data.keyColumns[name]);
         }
-        for (const name in this.data.parentKeyColumns) {
+        /*for (const name in this.data.parentKeyColumns) {
             this.createParentKeyColumn(this.model.parentKeyColumns[name]);
-        }
+        }*/
     }
 
     createKeyColumn(data) {
         const keyColumn = new KeyColumn(data, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
+        return keyColumn;
     }
-    createParentKeyColumn(data) {
+    /*createParentKeyColumn(data) {
         const parentKeyColumn = new ParentKeyColumn(data, this);
         parentKeyColumn.init();
         this.parentKeyColumns.push(parentKeyColumn);
-    }
+        return parentKeyColumn;
+    }*/
 
     static async create(parent, params) {
         if (parent instanceof Form) {
@@ -140,7 +142,7 @@ class DataSource extends Model {
         return await QForms.doHttpRequest(args);
     }
 
-    async newParentKeyColumn(name) {
+    /*async newParentKeyColumn(name) {
         return await QForms.doHttpRequest({
             controller: 'ParentKeyColumn',
             action    : '_new',
@@ -151,7 +153,7 @@ class DataSource extends Model {
                 name      : name
             })
         });
-    }
+    }*/
 
     async getView(view) {
         const args = {
