@@ -81,7 +81,7 @@ class EditorController {
     }*/
 
     onItemSelect2 = async item => {
-        console.log('EditorController.onItemSelect2', item.getTitle());
+        console.log('EditorController.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof ModelController) {
             if (item instanceof PageLinkController && !item.hasPage()) {
                 await item.loadPage();
