@@ -15,6 +15,7 @@ class Table extends Model {
         const column = new Column(data, this);
         column.init();
         this.columns.push(column);
+        return column;
     }
 
     async newColumn(name) {

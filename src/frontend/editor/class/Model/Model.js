@@ -2,7 +2,7 @@ class Model {
 
     constructor(data) {
         this.data = data;
-        this.name = data['@attributes'].name;
+        // this.name = data['@attributes'].name;
     }
 
     init() {
@@ -13,7 +13,7 @@ class Model {
     }
 
     getName() {
-        return this.data['@attributes'].name;
+        return this.getAttr('name');
     }
 
     getFullName(splitter) {
