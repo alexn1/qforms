@@ -1,7 +1,6 @@
 class ActionController extends ModelController {
-    constructor(model, item) {
+    constructor(model) {
         super(model);
-        this.item = item;
     }
 
     getActions() {

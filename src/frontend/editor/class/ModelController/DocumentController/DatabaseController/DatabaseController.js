@@ -46,7 +46,7 @@ class DatabaseController extends DocumentController {
     }
 
     createTable2(model) {
-        const table = new TableController(model, null, this);
+        const table = new TableController(model, this);
         table.init();
         this.tables2.push(table);
     }

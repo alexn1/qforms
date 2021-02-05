@@ -2,11 +2,11 @@ class FormController extends VisualController {
 
     constructor(model, item) {
         super(model);
-        this.item            = item;
-        this.itemDataSources = null;
-        this.itemFields      = null;
+        // this.item            = item;
+        // this.itemDataSources = null;
+        // this.itemFields      = null;
         // this.itemControls    = null;
-        this.itemActions     = null;
+        // this.itemActions     = null;
         this.dataSources = [];
         this.fields      = [];
         this.actions     = [];
@@ -33,12 +33,12 @@ class FormController extends VisualController {
     }
 
     createField(model) {
-        const field = new FieldController(model, null);
+        const field = new FieldController(model);
         field.init();
         this.fields.push(field);
     }
     createAction(model) {
-        const action = new ActionController(model, null);
+        const action = new ActionController(model);
         action.init();
         this.actions.push(action);
     }

@@ -1,9 +1,9 @@
 class ControlController extends VisualController {
 
-    constructor(model, item) {
+    /*constructor(model) {
         super(model);
-        this.item = item;
-    }
+        // this.item = item;
+    }*/
 
     getCaption(data) {
         const caption = "<span class='blue'>{class}:</span> <span class='green'>{name}</span>"

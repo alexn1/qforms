@@ -30,7 +30,7 @@ class PageController extends VisualController {
     }
 
     createForm(model) {
-        const form = new FormController(model, null);
+        const form = new FormController(model);
         form.init();
         this.forms.push(form);
     }

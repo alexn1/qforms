@@ -2,13 +2,11 @@ class ModelController extends EventEmitter {
 
     constructor(model) {
         super();
-        this.model     = model;
+        this.model = model;
         this.listeners = {};
         this.view = null;
     }
-
     init() {
-
     }
     getTitle() {
         return this.model.getName();
@@ -22,9 +20,9 @@ class ModelController extends EventEmitter {
 
     async setProperty(name, value) {
         await this.model.setValue(name, value);
-        if (name === 'name') {
+        /*if (name === 'name') {
             this.item.text.innerHTML = this.getCaption(this.model.data);
-        }
+        }*/
     }
 
     getCaption(data) {
@@ -34,7 +32,7 @@ class ModelController extends EventEmitter {
     async delete() {
         console.log('ModelController.delete', this.model.getName());
         await this.model.delete();
-        this.item.parent.removeItem(this.item);
+        // this.item.parent.removeItem(this.item);
     }
 
     /*getObject(col, name) {

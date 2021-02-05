@@ -1,16 +1,15 @@
 class EditorController {
     constructor(appData) {
         console.log('EditorController.constructor');
+        EditorController.editorController = this;
         this.appData = appData;
-        this.tree      = null;
+        // this.tree      = null;
         this.docs      = null;
         this.listeners = {};
-
         this.appCtrl = null;
-        EditorController.editorController = this;
         this.pg = null;
         this.treeWidget2 = null;
-        this.items = null;
+        this.items = null;              // treeWidget2 items
     }
 
     init() {
@@ -31,7 +30,7 @@ class EditorController {
         // const caption = ApplicationController.prototype.getCaption(this.appData);
         const appModel = new Application(this.appData);
         appModel.init();
-        console.log('appModel:', appModel);
+        // console.log('appModel:', appModel);
 
         // application controller
         this.appCtrl = new ApplicationController(appModel, this);
@@ -107,7 +106,7 @@ class EditorController {
     onPropertyGrid2Change = (name, value) => {
         console.log('EditorController.onPropertyGrid2Change', name, value);
         const controller = this.treeWidget2.state.selectedItem;
-        console.log('controller', controller);
+        // console.log('controller', controller);
         controller.setProperty(name, value);
     }
 
@@ -192,6 +191,5 @@ class EditorController {
     onTabClosingByUser(e) {
         this.docs.closeTab(e.tab);
     }
-
 
 }

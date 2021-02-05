@@ -1,8 +1,8 @@
 class FieldController extends VisualController {
 
-    constructor(model, item) {
+    constructor(model) {
         super(model);
-        this.item = item;
+        // this.item = item;
     }
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;

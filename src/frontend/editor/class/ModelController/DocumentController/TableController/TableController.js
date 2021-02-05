@@ -1,8 +1,8 @@
 class TableController extends DocumentController {
 
-    constructor(model, item, parent) {
+    constructor(model, parent) {
         super(model);
-        this.item = item;
+        // this.item = item;
         this.parent = parent;
         this.columnsItem = null;
         this.columns = [];
@@ -20,7 +20,7 @@ class TableController extends DocumentController {
         this.model.columns.forEach(column => this.createColumn(column));
     }
     createColumn(model) {
-        const column = new ColumnController(model, null);
+        const column = new ColumnController(model);
         column.init();
         this.columns.push(column);
     }
