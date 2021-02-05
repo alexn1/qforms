@@ -155,11 +155,7 @@ class ApplicationController extends VisualController {
             $('#myModal').modal('hide');
 
             this.editorController.treeWidget2.select(pageLinkController);
-            const element = pageLinkController.view.getElement();
-            console.log('element:', element);
-            element.scrollIntoView();
-
-
+            this.editorController.treeWidget2.scrollToSelected();
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();

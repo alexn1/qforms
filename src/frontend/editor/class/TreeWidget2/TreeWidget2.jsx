@@ -24,6 +24,9 @@ class TreeWidget2 extends ReactComponent {
     getSelectedItem() {
         return this.state.selectedItem;
     }
+    scrollToSelected() {
+        this.getSelectedItem().view.getElement().scrollIntoView();
+    }
     render() {
         console.log('TreeWidget2.render'/*, this.props.items*/);
         const items = this.props.items;
