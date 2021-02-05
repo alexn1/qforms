@@ -39,4 +39,8 @@ class ModelController extends EventEmitter {
         return this[col].find(obj => obj.model.getName() === name);
     }*/
 
+    async doAction(name) {
+        throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
+    }
+
 }

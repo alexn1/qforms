@@ -112,8 +112,8 @@ class FormController extends VisualController {
         ];
     }
 
-    async doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'newDataSource':
                 this.actionNewDataSource();
                 break;

@@ -85,8 +85,8 @@ class DatabaseController extends DocumentController {
         ];
     }
 
-    doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'newParam':
                 this.actionNewParam();
                 break;

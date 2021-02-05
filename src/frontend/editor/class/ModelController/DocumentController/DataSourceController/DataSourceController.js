@@ -86,8 +86,8 @@ class DataSourceController extends DocumentController {
         ];
     }
 
-    async doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'newItem':
                 this.actionNewKeyColumn();
                 break;

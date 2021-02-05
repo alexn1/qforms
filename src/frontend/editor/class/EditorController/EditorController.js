@@ -152,7 +152,7 @@ class EditorController {
 
     fillActions(ctrl) {
         $('#treeActionsList').children().remove();
-        ctrl.getActions().forEach((action) => {
+        ctrl.getActions().forEach(action => {
             if (action.caption === '-') {
                 $('#treeActionsList').append("<li class='divider'></li>");
             } else {
@@ -160,7 +160,8 @@ class EditorController {
                 li.miAction = action.action;
                 li.ctrl = ctrl;
                 $(li).click(function() {
-                    this.ctrl.doAction(this.miAction);
+                    const controller = this.ctrl instanceof PageLinkController ? this.ctrl.pageController : this.ctrl;
+                    controller.doAction(this.miAction);
                 });
                 li.innerHTML = `<a style='cursor: pointer;'>${action.caption}</a>`;
                 $('#treeActionsList').append(li);

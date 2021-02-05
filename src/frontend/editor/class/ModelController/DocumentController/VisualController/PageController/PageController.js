@@ -75,8 +75,8 @@ class PageController extends VisualController {
         ];
     }
 
-    async doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'newForm':
                 this.actionNewForm();
                 break;
@@ -95,7 +95,7 @@ class PageController extends VisualController {
                 this.item.move(1);
                 break;
             default:
-                console.log(action);
+                console.log(name);
         }
     }
 

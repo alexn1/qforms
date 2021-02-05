@@ -22,8 +22,8 @@ class FieldController extends VisualController {
         this.item = item;
     }*/
 
-    async doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'changeClass':
                 this.actionChangeClass();
                 break;

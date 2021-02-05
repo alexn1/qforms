@@ -27,8 +27,8 @@ class ControlController extends VisualController {
         return {list: list, options: options};
     }
 
-    doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'delete':
                 this.delete();
                 break;

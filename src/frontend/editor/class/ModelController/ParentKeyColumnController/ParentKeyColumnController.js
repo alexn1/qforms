@@ -11,8 +11,8 @@ class ParentKeyColumnController extends ModelController {
         ];
     }
 
-    doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'delete':
                 this.delete();
                 break;

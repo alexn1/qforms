@@ -113,8 +113,8 @@ class ApplicationController extends VisualController {
         ];
     }
 
-    doAction(action) {
-        switch (action) {
+    async doAction(name) {
+        switch (name) {
             case 'newDatabase':
                 this.newDatabaseAction();
                 break;
@@ -125,7 +125,7 @@ class ApplicationController extends VisualController {
                 this.newPageAction();
                 break;
             default:
-                console.log(action);
+                console.log(name);
         }
     }
 
