@@ -254,9 +254,9 @@ class FormController extends VisualController {
 
     async setProperty(name, value) {
         await this.model.setValue(name, value);
-        if (name === 'name') {
+        /*if (name === 'name') {
             this.item.text.innerHTML = this.getCaption(this.model.data);
-        }
+        }*/
     }
 
     getCaption(data) {

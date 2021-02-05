@@ -4,9 +4,9 @@ class DatabaseController extends DocumentController {
         super(model);
         this.parent                = applicationController;
         this.applicationController = applicationController;
-        this.item                  = null;
-        this.paramsItem            = null;
-        this.tablesItem            = null;
+        // this.item                  = null;
+        // this.paramsItem            = null;
+        // this.tablesItem            = null;
 
         // document view
         this.treeTables            = null;
@@ -40,7 +40,7 @@ class DatabaseController extends DocumentController {
     }
 
     createParam(model) {
-        const param = new ParamController(model, null);
+        const param = new ParamController(model);
         param.init();
         this.params.push(param);
     }

@@ -18,9 +18,9 @@ class FieldController extends VisualController {
         ];
     }
 
-    setItem(item) {
+    /*setItem(item) {
         this.item = item;
-    }
+    }*/
 
     async doAction(action) {
         switch (action) {
@@ -53,7 +53,7 @@ class FieldController extends VisualController {
             if (self.model.data['@class'] !== fieldClass) {
                 self.model.changeClass({class:fieldClass}).then((data) => {
                     //console.log(data);
-                    self.item.setCaption(FieldController.prototype.getCaption(self.model.data));
+                    // self.item.setCaption(FieldController.prototype.getCaption(self.model.data));
                     EditorController.editorController.fillPropertyGrid(self);
                 });
             }

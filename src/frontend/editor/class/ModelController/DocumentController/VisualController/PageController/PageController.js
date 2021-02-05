@@ -3,8 +3,9 @@ class PageController extends VisualController {
     constructor(model, pageLinkController = null) {
         super(model);
         this.pageLinkController = pageLinkController;
-        this.item      = null;
-        this.itemForms = null;
+        // this.item      = null;
+        // this.dataSourcesItem = null;
+        // this.itemForms = null;
         this.dataSources = [];
         this.forms       = [];
         this.items = [
@@ -101,11 +102,8 @@ class PageController extends VisualController {
     async delete() {
         await this.model.delete();
         this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        this.item.parent.removeItem(this.item);
-
-
+        // this.item.parent.removeItem(this.item);
         this.pageLinkController.parent.editorController.treeWidget2.rerender();
-
     }
 
     async actionNewForm() {

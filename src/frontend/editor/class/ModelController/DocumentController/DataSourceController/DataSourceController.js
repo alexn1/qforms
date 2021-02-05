@@ -27,13 +27,13 @@ class DataSourceController extends DocumentController {
     }
 
     createKeyColumn(model) {
-        const keyColumn = new KeyColumnController(model, null);
+        const keyColumn = new KeyColumnController(model);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
     }
 
     createParentKeyColumn(model) {
-        const parentKeyColumn  = new ParentKeyColumnController(model, null);
+        const parentKeyColumn  = new ParentKeyColumnController(model);
         parentKeyColumn.init();
         this.parentKeyColumns.push(parentKeyColumn);
     }

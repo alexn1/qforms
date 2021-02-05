@@ -3,11 +3,11 @@ class ApplicationController extends VisualController {
     constructor(model, editorController) {
         super(model);
         this.editorController = editorController;
-        this.item = null;
-        this.databasesItem = null;
-        this.dataSourcesItem = null;
-        this.pagesItem = null;
-        this.pageItems = {};
+        // this.item = null;
+        // this.databasesItem = null;
+        // this.dataSourcesItem = null;
+        // this.pagesItem = null;
+        // this.pageItems = {};
 
         this.databases   = [];
         this.dataSources = [];

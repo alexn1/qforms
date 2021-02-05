@@ -1,9 +1,9 @@
 class KeyColumnController extends ModelController {
 
-    constructor(model, item) {
+    /*constructor(model) {
         super(model);
-        this.item = item;
-    }
+        // this.item = item;
+    }*/
 
     getActions() {
         return [
