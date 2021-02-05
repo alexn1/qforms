@@ -77,7 +77,7 @@ class Application extends Model {
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
-        return data;
+        return this.createDatabase(data);
     }
 
     async getView(view) {

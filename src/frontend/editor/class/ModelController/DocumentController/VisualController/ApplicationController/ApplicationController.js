@@ -129,6 +129,38 @@ class ApplicationController extends VisualController {
         }
     }
 
+    async newDatabaseAction() {
+        const result = await Database.prototype.getView('new.html');
+        $(document.body).append(result.view);
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+        $("#myModal button[name='create']").click(async () => {
+            const _class   = $("#myModal select[id='class']").val();
+            const name     = $("#myModal input[id='name']").val();
+            const host     = $("#myModal input[id='host']").val();
+            const dbname   = $("#myModal input[id='dbname']").val();
+            const user     = $("#myModal input[id='user']").val();
+            const password = $("#myModal input[id='password']").val();
+            const params = {
+                _class: _class,
+                name  : name,
+                params: {
+                    host    : {name: 'host'    , value: host    },
+                    database: {name: 'database', value: dbname  },
+                    user    : {name: 'user'    , value: user    },
+                    password: {name: 'password', value: password}
+                }
+            };
+            // console.log('params:', params);
+            const database = await this.model.newDatabase(params);
+            const databaseController = this.createDatabase(database);
+
+            // this.addDatabaseItem(databaseData).select();
+            $('#myModal').modal('hide');
+        });
+        $('#myModal').modal('show');
+        $("#myModal input[id='name']").focus();
+    }
+
     async newPageAction() {
         const result = await Page.prototype.getView('new.html');
         $(document.body).append(result.view);
@@ -180,37 +212,6 @@ class ApplicationController extends VisualController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
-    }
-
-    async newDatabaseAction() {
-        const self = this;
-        const result = await Database.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const _class = $("#myModal select[id='class']").val();
-            const name     = $("#myModal input[id='name']").val();
-            const host     = $("#myModal input[id='host']").val();
-            const dbname   = $("#myModal input[id='dbname']").val();
-            const user     = $("#myModal input[id='user']").val();
-            const password = $("#myModal input[id='password']").val();
-            const params = {
-                _class: _class,
-                name  : name,
-                params: {
-                    host    : {name: 'host'    , value: host    },
-                    database: {name: 'database', value: dbname  },
-                    user    : {name: 'user'    , value: user    },
-                    password: {name: 'password', value: password}
-                }
-            };
-            // console.log('params:', params);
-            const databaseData = await self.model.newDatabase(params);
-            self.addDatabaseItem(databaseData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
     }
 
     getPropList() {
