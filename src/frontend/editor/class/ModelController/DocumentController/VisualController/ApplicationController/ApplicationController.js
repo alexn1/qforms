@@ -41,11 +41,13 @@ class ApplicationController extends VisualController {
         const database = new DatabaseController(model, this);
         database.init();
         this.databases.push(database);
+        return database;
     }
     createDataSource(model) {
         const dataSource = new DataSourceController(model);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
     createPageLink(model) {
         const pageLink = new PageLinkController(model, this);
@@ -153,8 +155,8 @@ class ApplicationController extends VisualController {
             // console.log('params:', params);
             const database = await this.model.newDatabase(params);
             const databaseController = this.createDatabase(database);
+            this.editorController.treeWidget2.select(databaseController);
 
-            // this.addDatabaseItem(databaseData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
@@ -182,12 +184,12 @@ class ApplicationController extends VisualController {
             pageController.init();
             pageLinkController.setPageController(pageController);
 
-            // this.pageItems[name] = this.addPageItem(pageController);
-            // this.pageItems[name].select();
-            $('#myModal').modal('hide');
+
 
             this.editorController.treeWidget2.select(pageLinkController);
             this.editorController.treeWidget2.scrollToSelected();
+
+            $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();

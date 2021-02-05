@@ -28,11 +28,13 @@ class Application extends Model {
         const database = new Database(data);
         database.init();
         this.databases.push(database);
+        return database;
     }
     createDataSource(data) {
         const dataSource = new DataSource(data);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
     createPageLink(data) {
         const pageLink = new PageLink(data, this);
