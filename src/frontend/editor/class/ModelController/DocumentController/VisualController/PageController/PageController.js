@@ -28,12 +28,14 @@ class PageController extends VisualController {
         const dataSource = new DataSourceController(model);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
 
     createForm(model) {
         const form = new FormController(model);
         form.init();
         this.forms.push(form);
+        return form;
     }
 
     /*createTree(item) {

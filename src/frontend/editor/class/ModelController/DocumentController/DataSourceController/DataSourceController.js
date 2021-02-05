@@ -30,12 +30,7 @@ class DataSourceController extends DocumentController {
         const keyColumn = new KeyColumnController(model);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
-    }
-
-    createParentKeyColumn(model) {
-        const parentKeyColumn  = new ParentKeyColumnController(model);
-        parentKeyColumn.init();
-        this.parentKeyColumns.push(parentKeyColumn);
+        return keyColumn;
     }
 
     /*createTree(item) {

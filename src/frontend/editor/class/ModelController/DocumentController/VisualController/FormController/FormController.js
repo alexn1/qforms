@@ -30,17 +30,20 @@ class FormController extends VisualController {
         const dataSource  = new DataSourceController(model);
         dataSource.init();
         this.dataSources.push(dataSource);
+        return dataSource;
     }
 
     createField(model) {
         const field = new FieldController(model);
         field.init();
         this.fields.push(field);
+        return field;
     }
     createAction(model) {
         const action = new ActionController(model);
         action.init();
         this.actions.push(action);
+        return action;
     }
 
     // createTree(item) {

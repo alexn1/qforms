@@ -43,12 +43,14 @@ class DatabaseController extends DocumentController {
         const param = new ParamController(model);
         param.init();
         this.params.push(param);
+        return param;
     }
 
     createTable2(model) {
         const table = new TableController(model, this);
         table.init();
         this.tables2.push(table);
+        return table;
     }
 
     /*createTree(item) {

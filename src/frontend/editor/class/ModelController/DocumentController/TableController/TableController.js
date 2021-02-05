@@ -4,7 +4,7 @@ class TableController extends DocumentController {
         super(model);
         // this.item = item;
         this.parent = parent;
-        this.columnsItem = null;
+        // this.columnsItem = null;
         this.columns = [];
 
         // items
@@ -23,6 +23,7 @@ class TableController extends DocumentController {
         const column = new ColumnController(model);
         column.init();
         this.columns.push(column);
+        return column;
     }
 
     /*createTree(item) {
@@ -31,11 +32,11 @@ class TableController extends DocumentController {
         this.columns.forEach(column => this.addColumnItem(column));
     }*/
 
-    addColumnItem(column) {
+    /*addColumnItem(column) {
         const item = this.columnsItem.addItem(column.model.getName());
         item.ctrl = column;
         return item;
-    }
+    }*/
 
     getActions() {
         return [
