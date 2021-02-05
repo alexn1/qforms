@@ -4,6 +4,7 @@ class TreeItem2 extends ReactComponent {
         this.state = {
             opened: props.item.opened !== undefined ? props.item.opened : false
         };
+        this.li = React.createRef();
     }
     onDivMouseDown = e => {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
@@ -31,10 +32,13 @@ class TreeItem2 extends ReactComponent {
         }
     }
     isSelected() {
-        return this.props.tree.state.selectedItem === this.props.item;
+        return this.props.tree.getSelectedItem() === this.props.item;
     }
     isOpened() {
         return this.state.opened;
+    }
+    getElement() {
+        return this.li.current;
     }
     render() {
         // console.log('TreeItem2.render', this.props.item.getTitle());
@@ -44,7 +48,7 @@ class TreeItem2 extends ReactComponent {
         const hasItems = !!(items && items.length);
         const isNode = item.node || hasItems;
         const title = item.getTitle();
-        return <li key={title} className={this.isOpened() ? 'opened' : null}>
+        return <li key={title} ref={this.li} className={this.isOpened() ? 'opened' : null}>
             <div className={this.isSelected() ? 'active' : null}
                  style={{paddingLeft: this.props.paddingLeft}}
                  onMouseDown={this.onDivMouseDown}

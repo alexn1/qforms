@@ -105,7 +105,7 @@ class EditorController {
 
     onPropertyGrid2Change = (name, value) => {
         console.log('EditorController.onPropertyGrid2Change', name, value);
-        const controller = this.treeWidget2.state.selectedItem;
+        const controller = this.treeWidget2.getSelectedItem();
         // console.log('controller', controller);
         controller.setProperty(name, value);
     }
