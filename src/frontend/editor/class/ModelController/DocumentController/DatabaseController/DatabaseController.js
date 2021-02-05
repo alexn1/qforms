@@ -51,7 +51,7 @@ class DatabaseController extends DocumentController {
         this.tables2.push(table);
     }
 
-    createTree(item) {
+    /*createTree(item) {
         this.item = item;
 
         // params
@@ -61,20 +61,20 @@ class DatabaseController extends DocumentController {
         // tables
         this.tablesItem = this.item.addItem('Tables');
         this.tables2.forEach(table => this.addTableItem(table));
-    }
+    }*/
 
-    addParamItem(param) {
+    /*addParamItem(param) {
         const item = this.paramsItem.addItem(param.model.getName());
         item.ctrl = param;
         return item;
-    }
+    }*/
 
-    addTableItem(table) {
+    /*addTableItem(table) {
         const item = this.tablesItem.addItem(table.model.getName());
         item.ctrl = table;
         item.ctrl.createTree(item);
         return item;
-    }
+    }*/
 
     getActions() {
         return [

@@ -121,7 +121,7 @@ class EditorController {
         this.pg.setState({object: null});
     }
 
-    async pageLinkToPage(item) {
+    /*async pageLinkToPage(item) {
         console.log('EditorController.pageLinkToPage');
         const pageLinkController = item.ctrl;
         const pageLink = pageLinkController.model;
@@ -131,7 +131,7 @@ class EditorController {
         item.ctrl = new PageController(page, pageLinkController);
         item.ctrl.init();
         item.ctrl.createTree(item);
-    }
+    }*/
 
     static async fetchPageData(fileName) {
         console.log('EditorController.fetchPageData', fileName);

@@ -35,7 +35,7 @@ class PageController extends VisualController {
         this.forms.push(form);
     }
 
-    createTree(item) {
+    /*createTree(item) {
         if (item) this.item = item;
 
         // data sources
@@ -45,22 +45,22 @@ class PageController extends VisualController {
         // forms
         this.itemForms = this.item.addItem('Forms');
         this.forms.forEach(form => this.addFormItem(form));
-    }
+    }*/
 
-    addDataSourceItem(dataSource) {
+    /*addDataSourceItem(dataSource) {
         const dataSourceItem = this.dataSourcesItem.addItem(dataSource.model.getName());
         dataSourceItem.ctrl = dataSource;
         dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
-    }
+    }*/
 
-    addFormItem(form) {
+    /*addFormItem(form) {
         const caption = `${form.model.getClassName()}: ${form.model.getName()}`;
         const itemForm = this.itemForms.addItem(caption);
         itemForm.ctrl = form;
         itemForm.ctrl.createTree(itemForm);
         return itemForm;
-    }
+    }*/
 
     getActions() {
         return [

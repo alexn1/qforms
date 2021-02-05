@@ -25,11 +25,11 @@ class TableController extends DocumentController {
         this.columns.push(column);
     }
 
-    createTree(item) {
+    /*createTree(item) {
         if (item) this.item = item;
         this.columnsItem = this.item.addItem('Columns');
         this.columns.forEach(column => this.addColumnItem(column));
-    }
+    }*/
 
     addColumnItem(column) {
         const item = this.columnsItem.addItem(column.model.getName());

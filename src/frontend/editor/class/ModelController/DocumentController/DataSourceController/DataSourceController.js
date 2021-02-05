@@ -38,7 +38,7 @@ class DataSourceController extends DocumentController {
         this.parentKeyColumns.push(parentKeyColumn);
     }
 
-    createTree(item) {
+    /*createTree(item) {
         if (item) this.item = item;
 
         // keys
@@ -48,7 +48,7 @@ class DataSourceController extends DocumentController {
         // parent key columns
         this.itemParentKeyColumns = this.item.addItem('Parent Key Columns');
         this.parentKeyColumns.forEach(parentKeyColumn => this.addParentKeyColumn(parentKeyColumn));
-    }
+    }*/
 
     addKeyColumn(keyColumn) {
         const keyColumnItem = this.itemKeys.addItem(keyColumn.model.getName());

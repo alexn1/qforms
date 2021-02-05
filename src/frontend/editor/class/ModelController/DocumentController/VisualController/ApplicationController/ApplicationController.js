@@ -58,7 +58,7 @@ class ApplicationController extends VisualController {
         if (i === -1) throw new Error('no such pageLinkController');
         this.pageLinks.splice(i, 1);
     }
-    createTree(item) {
+    /*createTree(item) {
         this.item = item;
 
         // databases
@@ -72,38 +72,38 @@ class ApplicationController extends VisualController {
         // pageLinks
         this.pagesItem = this.item.addItem('Pages', 'opened');
         this.pageLinks.forEach(pageLink => this.addPageLinkItem(pageLink));
-    }
+    }*/
 
-    addDatabaseItem(database) {
+    /*addDatabaseItem(database) {
         const caption = `${database.model.getClassName()}: ${database.model.getName()}`;
         const databaseItem = this.databasesItem.addItem(caption);
         databaseItem.ctrl = database;
         databaseItem.ctrl.createTree(databaseItem);
         return databaseItem;
-    }
+    }*/
 
-    addDataSourceItem(dataSource) {
+    /*addDataSourceItem(dataSource) {
         const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
         const dataSourceItem = this.dataSourcesItem.addItem(caption);
         dataSourceItem.ctrl = dataSource;
         dataSourceItem.ctrl.createTree(dataSourceItem);
         return dataSourceItem;
-    }
+    }*/
 
-    addPageLinkItem(pageLink) {
+    /*addPageLinkItem(pageLink) {
         const pageLinkItem = this.pagesItem.addItem(pageLink.model.getName());
         pageLinkItem.node.className = 'node';
         pageLinkItem.ctrl = pageLink;
         return pageLinkItem;
-    }
+    }*/
 
-    addPageItem(pageController) {
+    /*addPageItem(pageController) {
         const pageItem = this.pagesItem.addItem(pageController.getTitle());
         pageItem.ctrl = pageController;
         pageItem.node.className = 'node';
         pageItem.ctrl.createTree(pageItem);
         return pageItem;
-    }
+    }*/
 
     getActions() {
         return [
@@ -150,7 +150,7 @@ class ApplicationController extends VisualController {
             pageController.init();
             pageLinkController.setPageController(pageController);
 
-            this.pageItems[name] = this.addPageItem(pageController);
+            // this.pageItems[name] = this.addPageItem(pageController);
             // this.pageItems[name].select();
             $('#myModal').modal('hide');
 

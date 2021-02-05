@@ -43,46 +43,46 @@ class FormController extends VisualController {
         this.actions.push(action);
     }
 
-    createTree(item) {
-        if (item) this.item = item;
+    // createTree(item) {
+    //     if (item) this.item = item;
+    //
+    //     // dataSources
+    //     this.itemDataSources = this.item.addItem('Data Sources');
+    //     this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
+    //
+    //     // fields
+    //     this.itemFields = this.item.addItem('Fields');
+    //     this.fields.forEach(field => this.addFieldItem(field));
+    //
+    //     /*// controls
+    //     this.itemControls = this.item.addItem('Controls');
+    //     if (this.model.data.controls) {
+    //         for (const name in this.model.data.controls) {
+    //             const controlData = this.model.data.controls[name];
+    //             this.addControlItem(controlData);
+    //         }
+    //     }*/
+    //
+    //     // actions
+    //     this.itemActions =  this.item.addItem('Actions');
+    //     this.actions.forEach(action => this.addActionItem(action));
+    // }
 
-        // dataSources
-        this.itemDataSources = this.item.addItem('Data Sources');
-        this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
-
-        // fields
-        this.itemFields = this.item.addItem('Fields');
-        this.fields.forEach(field => this.addFieldItem(field));
-
-        /*// controls
-        this.itemControls = this.item.addItem('Controls');
-        if (this.model.data.controls) {
-            for (const name in this.model.data.controls) {
-                const controlData = this.model.data.controls[name];
-                this.addControlItem(controlData);
-            }
-        }*/
-
-        // actions
-        this.itemActions =  this.item.addItem('Actions');
-        this.actions.forEach(action => this.addActionItem(action));
-    }
-
-    addDataSourceItem(dataSource) {
+    /*addDataSourceItem(dataSource) {
         const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
         const itemDataSource = this.itemDataSources.addItem(caption);
         itemDataSource.ctrl = dataSource;
         itemDataSource.ctrl.createTree(itemDataSource);
         return itemDataSource;
-    }
+    }*/
 
-    addFieldItem(field) {
+    /*addFieldItem(field) {
         const caption = `${field.model.getClassName()}: ${field.model.getName()}`;
         const itemField = this.itemFields.addItem(caption);
         field.setItem(itemField);
         itemField.ctrl = field;
         return itemField;
-    }
+    }*/
 
     /*addControlItem(controlData) {
         const caption = ControlController.prototype.getCaption(controlData);
@@ -92,11 +92,11 @@ class FormController extends VisualController {
         return itemControl;
     }*/
 
-    addActionItem(action) {
+    /*addActionItem(action) {
         const itemAction = this.itemActions.addItem(action.model.getName());
         itemAction.ctrl = action;
         return itemAction;
-    }
+    }*/
 
     getActions() {
         return [
