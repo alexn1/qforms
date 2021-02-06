@@ -8,7 +8,7 @@ class PageLinkController extends ModelController {
         this.pageController = null;
 
         // items
-        this.items = [];
+        this.items = null;
     }
     getTitle() {
         if (this.pageController) return this.pageController.getTitle();
@@ -46,7 +46,7 @@ class PageLinkController extends ModelController {
     setPageController(pageController) {
         if (this.pageController) throw new Error('pageLinkController already has pageController');
         this.pageController = pageController;
-        pageController.items.forEach(item => this.items.push(item));
+        this.items = pageController.items;
     }
     remove() {
         console.log('PageLinkController.remove', this.getTitle());
