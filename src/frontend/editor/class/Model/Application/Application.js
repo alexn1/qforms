@@ -64,7 +64,7 @@ class Application extends Model {
 
     async newPageAndPageLinkData(params) {
         params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-        const data = await QForms.doHttpRequest({
+        return await QForms.doHttpRequest({
             controller: 'Page',
             action    : '_new',
             params    : Helper.encodeObject(params)
@@ -72,9 +72,9 @@ class Application extends Model {
     }
 
     async newPage(params) {
-        const data = await this.newPageAndPageLinkData(params);
-        const pageLink = this.createPageLink(data.pageLink);
-        return new Page(data.page, pageLink);
+        const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
+        const pageLink = this.createPageLink(pageLinkData);
+        return new Page(pageData, pageLink);
     }
 
     async newDatabase(params) {
