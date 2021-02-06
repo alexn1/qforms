@@ -1,8 +1,7 @@
 class PageLink extends Model {
 
     constructor(data, parent) {
-        super(data);
-        this.parent      = parent;
+        super(data, parent);
         this.application = parent;
     }
 

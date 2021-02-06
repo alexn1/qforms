@@ -1,6 +1,6 @@
 class Action extends Model {
     constructor(data, form) {
-        super(data);
+        super(data, form);
         this.form = form;
     }
 

@@ -1,8 +1,7 @@
 class DataSource extends Model {
 
     constructor(data, parent) {
-        super(data);
-        this.parent = parent;
+        super(data, parent);
         this.keyColumns = [];
         // this.parentKeyColumns = [];
     }

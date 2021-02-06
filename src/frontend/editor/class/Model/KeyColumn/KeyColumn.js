@@ -1,7 +1,7 @@
 class KeyColumn extends Model {
 
     constructor(data, dataSource) {
-        super(data);
+        super(data, dataSource);
         this.dataSource = dataSource;
     }
 

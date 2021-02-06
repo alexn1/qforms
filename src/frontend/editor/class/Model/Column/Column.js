@@ -1,7 +1,7 @@
 class Column extends Model {
 
     constructor(data, table) {
-        super(data);
+        super(data, table);
         this.table = table;
     }
 

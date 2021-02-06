@@ -3,7 +3,7 @@ class Page extends Model {
     constructor(data, pageLink) {
         super(data);
         this.pageLink    = pageLink;
-        this.application = parent;
+        // this.application = parent;
         this.dataSources = [];
         this.forms       = [];
     }

@@ -1,8 +1,7 @@
 class Form extends Model {
 
     constructor(data, page) {
-        super(data);
-        this.parent = page;
+        super(data, page);
         this.page   = page;
         this.dataSources = [];
         this.fields      = [];

@@ -1,9 +1,8 @@
 class Field extends Model {
 
-    constructor(data, parent) {
-        super(data);
-        this.parent = parent;
-        this.form   = parent;
+    constructor(data, form) {
+        super(data, form);
+        this.form = form;
     }
 
     async setValue(name, value) {

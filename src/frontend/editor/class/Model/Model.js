@@ -1,8 +1,8 @@
 class Model {
 
-    constructor(data) {
-        this.data = data;
-        // this.name = data['@attributes'].name;
+    constructor(data, parent = null) {
+        this.data   = data;
+        this.parent = parent;
     }
 
     init() {
