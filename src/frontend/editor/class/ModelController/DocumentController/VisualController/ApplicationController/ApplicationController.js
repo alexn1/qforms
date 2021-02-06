@@ -158,7 +158,6 @@ class ApplicationController extends VisualController {
 
             $('#myModal').modal('hide');
 
-
             await this.editorController.treeWidget2.select(databaseController);
             databaseController.view.parentItem.open();
             await this.items[0].view.rerender();
@@ -189,9 +188,6 @@ class ApplicationController extends VisualController {
             const pageController = new PageController(page, pageLinkController);
             pageController.init();
             pageLinkController.setPageController(pageController);
-
-
-
             this.editorController.treeWidget2.select(pageLinkController);
             this.editorController.treeWidget2.scrollToSelected();
 

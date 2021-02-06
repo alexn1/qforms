@@ -5,6 +5,7 @@ class TreeItem2 extends ReactComponent {
             opened: props.item.opened !== undefined ? props.item.opened : false
         };
         this.li = React.createRef();
+        this.parentItem = null;
     }
     onDivMouseDown = e => {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
