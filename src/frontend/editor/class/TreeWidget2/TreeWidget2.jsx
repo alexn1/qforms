@@ -5,11 +5,15 @@ class TreeWidget2 extends ReactComponent {
             selectedItem: null
         };
     }
-    select(item) {
+    async select(item) {
         // console.log('TreeWidget2.select', item);
         if (this.isSelected(item)) return;
-        this.setState({selectedItem: item});
-        if (this.props.onItemSelect) this.props.onItemSelect(item);
+        return new Promise(resolve => {
+            this.setState({selectedItem: item}, () => {
+                if (this.props.onItemSelect) this.props.onItemSelect(item);
+                resolve();
+            });
+        });
     }
     onDoubleClick(item) {
         // console.log('TreeWidget2.onDoubleClick', item);

@@ -40,6 +40,11 @@ class TreeItem2 extends ReactComponent {
     getElement() {
         return this.li.current;
     }
+    open() {
+        console.log('TreeItem2.open', this.props.item.getTitle());
+        this.state.opened = true;
+        if (this.parentItem) this.parentItem.open();
+    }
     render() {
         // console.log('TreeItem2.render', this.props.item.getTitle());
         const tree = this.props.tree;
@@ -66,7 +71,7 @@ class TreeItem2 extends ReactComponent {
                         tree={tree}
                         item={item}
                         paddingLeft={this.props.paddingLeft+15}
-                        onCreate={c => item.view = c}
+                        onCreate={c => {item.view = c; c.parentItem = this;}}
                     />
                 )}
             </ul>

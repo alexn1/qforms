@@ -155,9 +155,15 @@ class ApplicationController extends VisualController {
             // console.log('params:', params);
             const database = await this.model.newDatabase(params);
             const databaseController = this.createDatabase(database);
-            this.editorController.treeWidget2.select(databaseController);
 
             $('#myModal').modal('hide');
+
+
+            await this.editorController.treeWidget2.select(databaseController);
+            databaseController.view.parentItem.open();
+            await this.items[0].view.rerender();
+            this.editorController.treeWidget2.scrollToSelected();
+
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
