@@ -1,13 +1,8 @@
 class TableController extends DocumentController {
 
     constructor(model, parent) {
-        super(model);
-        // this.item = item;
-        this.parent = parent;
-        // this.columnsItem = null;
+        super(model, parent);
         this.columns = [];
-
-        // items
         this.items = [
             {
                 getTitle: () => 'Columns',

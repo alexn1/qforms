@@ -1,7 +1,7 @@
 class VisualController extends DocumentController {
 
-    /*constructor(model) {
-        super(model);
+    /*constructor(model, parent) {
+        super(model, parent);
     }*/
 
     async createTab(docs) {

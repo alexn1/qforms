@@ -1,8 +1,7 @@
 class KeyColumnController extends ModelController {
 
-    /*constructor(model) {
-        super(model);
-        // this.item = item;
+    /*constructor(model, parent) {
+        super(model, parent);
     }*/
 
     getActions() {

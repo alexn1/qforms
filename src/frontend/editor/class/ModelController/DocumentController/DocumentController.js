@@ -1,7 +1,7 @@
 class DocumentController extends ModelController {
 
-    constructor(model) {
-        super(model);
+    constructor(model, parent) {
+        super(model, parent);
         this.tab = null;
     }
 

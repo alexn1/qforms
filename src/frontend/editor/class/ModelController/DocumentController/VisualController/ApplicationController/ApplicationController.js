@@ -1,7 +1,7 @@
 class ApplicationController extends VisualController {
 
     constructor(model, editorController) {
-        super(model);
+        super(model, editorController);
         this.editorController = editorController;
         // this.item = null;
         // this.databasesItem = null;

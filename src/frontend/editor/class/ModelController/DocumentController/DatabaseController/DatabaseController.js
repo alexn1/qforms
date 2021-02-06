@@ -1,8 +1,7 @@
 class DatabaseController extends DocumentController {
 
     constructor(model, applicationController) {
-        super(model);
-        this.parent                = applicationController;
+        super(model, applicationController);
         this.applicationController = applicationController;
         // this.item                  = null;
         // this.paramsItem            = null;

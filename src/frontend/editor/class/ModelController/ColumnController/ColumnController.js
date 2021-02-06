@@ -1,9 +1,8 @@
 class ColumnController extends ModelController {
 
-    constructor(model, item) {
-        super(model);
-        // this.item = item;
-    }
+    /*constructor(model, parent) {
+        super(model, parent);
+    }*/
 
     getActions() {
         return [

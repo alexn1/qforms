@@ -1,7 +1,7 @@
 class FormController extends VisualController {
 
-    constructor(model, item) {
-        super(model);
+    constructor(model, parent) {
+        super(model, parent);
         // this.item            = item;
         // this.itemDataSources = null;
         // this.itemFields      = null;

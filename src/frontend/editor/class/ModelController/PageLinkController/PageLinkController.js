@@ -1,13 +1,8 @@
 class PageLinkController extends ModelController {
     constructor(model, parent) {
-        super(model);
-        this.parent = parent;
-        // this.item = null;
+        super(model, parent);
         this.node = true;
-
         this.pageController = null;
-
-        // items
         this.items = null;
     }
     getTitle() {
