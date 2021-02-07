@@ -25,13 +25,13 @@ class Application extends Model {
     }
 
     createDatabase(data) {
-        const database = new Database(data);
+        const database = new Database(data, this);
         database.init();
         this.databases.push(database);
         return database;
     }
     createDataSource(data) {
-        const dataSource = new DataSource(data);
+        const dataSource = new DataSource(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
