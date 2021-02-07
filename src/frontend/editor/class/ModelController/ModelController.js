@@ -30,11 +30,10 @@ class ModelController extends EventEmitter {
         return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
     }
 
-    async delete() {
+    /*async delete() {
         console.log('ModelController.delete', this.model.getName());
         await this.model.delete();
-        // this.item.parent.removeItem(this.item);
-    }
+    }*/
 
     /*getObject(col, name) {
         return this[col].find(obj => obj.model.getName() === name);

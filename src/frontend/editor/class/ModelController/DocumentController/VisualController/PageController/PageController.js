@@ -101,13 +101,6 @@ class PageController extends VisualController {
         }
     }
 
-    async delete() {
-        await this.model.delete();
-        this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        this.pageLinkController.parent.editorController.treeWidget2.select(null);
-        this.pageLinkController.parent.editorController.treeWidget2.rerender();
-    }
-
     async actionNewForm() {
         const self = this;
         const result = await Form.prototype.getView('new.html');
@@ -167,6 +160,13 @@ class PageController extends VisualController {
 
     getPageLink() {
         return this.model.pageLink;
+    }
+
+    async delete() {
+        await this.model.delete();
+        this.pageLinkController.parent.removePageLink(this.pageLinkController);
+        this.pageLinkController.parent.editorController.treeWidget2.select(null);
+        this.pageLinkController.parent.editorController.treeWidget2.rerender();
     }
 
 }

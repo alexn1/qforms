@@ -49,8 +49,7 @@ class Page extends Model {
         return data;
     }
 
-    async delete() {
-        console.log('Page.delete', this.getName());
+    async deleteData() {
         await QForms.doHttpRequest({
             controller: 'Page',
             action    : 'delete',
@@ -58,6 +57,11 @@ class Page extends Model {
                 page: this.getName()
             })
         });
+    }
+
+    async delete() {
+        console.log('Page.delete', this.getName());
+        await this.deleteData();
         this.pageLink.remove();
     }
 

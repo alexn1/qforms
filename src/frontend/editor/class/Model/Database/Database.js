@@ -48,7 +48,7 @@ class Database extends Model {
         return data;
     }
 
-    async delete() {
+    async deleteData() {
         return await QForms.doHttpRequest({
             controller: 'Database',
             action    : 'delete',
@@ -56,6 +56,10 @@ class Database extends Model {
                 database: this.data['@attributes'].name
             })
         });
+    }
+
+    async delete() {
+        await this.deleteData();
     }
 
     async newParam(name) {

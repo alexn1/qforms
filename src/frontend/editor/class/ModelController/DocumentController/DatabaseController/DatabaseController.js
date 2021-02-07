@@ -191,4 +191,9 @@ class DatabaseController extends DocumentController {
         return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
     }
 
+    async delete() {
+        console.log('DatabaseController.delete', this.getTitle());
+        await this.model.delete();
+    }
+
 }
