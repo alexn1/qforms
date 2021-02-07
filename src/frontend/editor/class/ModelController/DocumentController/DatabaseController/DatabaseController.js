@@ -39,7 +39,7 @@ class DatabaseController extends DocumentController {
     }
 
     createParam(model) {
-        const param = new ParamController(model);
+        const param = new ParamController(model, this);
         param.init();
         this.params.push(param);
         return param;

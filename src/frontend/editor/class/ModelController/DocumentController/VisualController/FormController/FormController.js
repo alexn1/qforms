@@ -27,20 +27,20 @@ class FormController extends VisualController {
     }
 
     createDataSource(model) {
-        const dataSource  = new DataSourceController(model);
+        const dataSource  = new DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
 
     createField(model) {
-        const field = new FieldController(model);
+        const field = new FieldController(model, this);
         field.init();
         this.fields.push(field);
         return field;
     }
     createAction(model) {
-        const action = new ActionController(model);
+        const action = new ActionController(model, this);
         action.init();
         this.actions.push(action);
         return action;

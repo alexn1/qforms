@@ -15,7 +15,7 @@ class TableController extends DocumentController {
         this.model.columns.forEach(column => this.createColumn(column));
     }
     createColumn(model) {
-        const column = new ColumnController(model);
+        const column = new ColumnController(model, this);
         column.init();
         this.columns.push(column);
         return column;

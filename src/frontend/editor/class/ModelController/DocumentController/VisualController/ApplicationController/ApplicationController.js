@@ -44,7 +44,7 @@ class ApplicationController extends VisualController {
         return database;
     }
     createDataSource(model) {
-        const dataSource = new DataSourceController(model);
+        const dataSource = new DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;

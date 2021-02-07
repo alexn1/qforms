@@ -25,14 +25,14 @@ class PageController extends VisualController {
     }
 
     createDataSource(model) {
-        const dataSource = new DataSourceController(model);
+        const dataSource = new DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
 
     createForm(model) {
-        const form = new FormController(model);
+        const form = new FormController(model, this);
         form.init();
         this.forms.push(form);
         return form;

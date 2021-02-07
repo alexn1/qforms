@@ -26,7 +26,7 @@ class DataSourceController extends DocumentController {
     }
 
     createKeyColumn(model) {
-        const keyColumn = new KeyColumnController(model);
+        const keyColumn = new KeyColumnController(model, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
