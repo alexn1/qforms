@@ -164,9 +164,8 @@ class ApplicationController extends VisualController {
 
             $('#myModal').modal('hide');
 
-            // this.items[0].view.open();
             await this.editorController.treeWidget2.select(databaseController);
-            databaseController.view.open();
+            databaseController.view.parent.open();
             this.items[0].view.rerender();
             this.editorController.treeWidget2.scrollToSelected();
         });

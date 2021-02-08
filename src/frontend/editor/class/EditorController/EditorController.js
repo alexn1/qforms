@@ -61,7 +61,8 @@ class EditorController {
         }
     }*/
     onItemOpen2 = async item => {
-        console.log('EditorController.onItemOpen2', item);
+        console.log('EditorController.onItemOpen2', item.getTitle());
+        // console.log('parent:', item.view.parent);
         if (item instanceof PageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
