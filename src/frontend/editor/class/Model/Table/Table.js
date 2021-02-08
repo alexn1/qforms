@@ -30,9 +30,8 @@ class Table extends Model {
             })
         });
     }
-
-    async delete() {
-        return await QForms.doHttpRequest({
+    async deleteData() {
+        await QForms.doHttpRequest({
             controller: 'Table',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -40,5 +39,9 @@ class Table extends Model {
                 table   : this.data['@attributes'].name
             })
         });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeTable(this);
     }
 }

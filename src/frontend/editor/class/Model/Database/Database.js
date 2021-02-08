@@ -32,6 +32,12 @@ class Database extends Model {
         this.tables.push(table);
         return table;
     }
+    removeTable(table) {
+        console.log('Database.removeTable', table.getName());
+        const i = this.tables.indexOf(table);
+        if (i == -1) throw new Error('no such table');
+        this.tables.splice(i, 1);
+    }
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);

@@ -146,5 +146,12 @@ class TableController extends DocumentController {
         $('#modal').modal('show');
         $("#modal input[id='formPage']").focus();
     }
+    async delete() {
+        console.log('TableController.delete', this.getTitle());
+        await this.model.delete();
+        this.parent.removeTable2(this);
+        this.parent.parent.editorController.treeWidget2.select(null);
+        this.parent.parent.editorController.treeWidget2.rerender();
+    }
 
 }

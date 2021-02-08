@@ -51,6 +51,12 @@ class DatabaseController extends DocumentController {
         this.tables2.push(table);
         return table;
     }
+    removeTable2(tableController) {
+        console.log('DatabaseController.removeTable2', tableController.getTitle());
+        const i = this.tables2.indexOf(tableController);
+        if (i === -1) throw new Error('no such tableController');
+        this.tables2.splice(i, 1);
+    }
 
     /*createTree(item) {
         this.item = item;
