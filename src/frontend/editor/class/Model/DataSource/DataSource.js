@@ -68,7 +68,7 @@ class DataSource extends Model {
         return data;
     }
 
-    async delete() {
+    async deleteData() {
         const args = {
             controller: 'DataSource',
             action    : 'delete',
@@ -83,7 +83,11 @@ class DataSource extends Model {
             args.params.form = Helper.encodeValue(this.parent.data['@attributes'].name);
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
         }
-        return await QForms.doHttpRequest(args);
+        await QForms.doHttpRequest(args);
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDataSource();
     }
 
     async moveUp() {
