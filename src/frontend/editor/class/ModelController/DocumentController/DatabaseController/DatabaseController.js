@@ -194,6 +194,9 @@ class DatabaseController extends DocumentController {
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
+        this.parent.removeDatabase(this);
+        this.parent.editorController.treeWidget2.select(null);
+        this.parent.editorController.treeWidget2.rerender();
     }
 
 }

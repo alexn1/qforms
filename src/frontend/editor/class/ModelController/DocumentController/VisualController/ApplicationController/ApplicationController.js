@@ -55,6 +55,12 @@ class ApplicationController extends VisualController {
         this.pageLinks.push(pageLink);
         return pageLink;
     }
+    removeDatabase(databaseController) {
+        console.log('ApplicationController.removeDatabase', databaseController.getTitle());
+        const i = this.databases.indexOf(databaseController);
+        if (i === -1) throw new Error('no such databaseController');
+        this.databases.splice(i, 1);
+    }
     removePageLink(pageLinkController) {
         const i = this.pageLinks.indexOf(pageLinkController);
         if (i === -1) throw new Error('no such pageLinkController');
@@ -158,11 +164,11 @@ class ApplicationController extends VisualController {
 
             $('#myModal').modal('hide');
 
+            // this.items[0].view.open();
             await this.editorController.treeWidget2.select(databaseController);
-            databaseController.view.parentItem.open();
-            await this.items[0].view.rerender();
+            databaseController.view.open();
+            this.items[0].view.rerender();
             this.editorController.treeWidget2.scrollToSelected();
-
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();

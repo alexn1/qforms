@@ -6,7 +6,7 @@ class TreeWidget2 extends ReactComponent {
         };
     }
     async select(item) {
-        // console.log('TreeWidget2.select', item);
+        console.log('TreeWidget2.select', item.getTitle());
         if (this.isSelected(item)) return;
         return new Promise(resolve => {
             this.setState({selectedItem: item}, () => {
@@ -29,6 +29,7 @@ class TreeWidget2 extends ReactComponent {
         return this.state.selectedItem;
     }
     scrollToSelected() {
+        console.log('TreeWidget2.scrollToSelected', this.getSelectedItem().getTitle());
         this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {

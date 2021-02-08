@@ -5,7 +5,7 @@ class TreeItem2 extends ReactComponent {
             opened: props.item.opened !== undefined ? props.item.opened : false
         };
         this.li = React.createRef();
-        this.parentItem = null;
+        this.parent = null;
     }
     onDivMouseDown = e => {
         // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
@@ -44,7 +44,11 @@ class TreeItem2 extends ReactComponent {
     open() {
         console.log('TreeItem2.open', this.props.item.getTitle());
         this.state.opened = true;
-        if (this.parentItem) this.parentItem.open();
+        if (this.parent) {
+            this.parent.open();
+        } else {
+            console.log('this.parent', this.parent);
+        }
     }
     render() {
         // console.log('TreeItem2.render', this.props.item.getTitle());
@@ -72,7 +76,11 @@ class TreeItem2 extends ReactComponent {
                         tree={tree}
                         item={item}
                         paddingLeft={this.props.paddingLeft+15}
-                        onCreate={c => {item.view = c; c.parentItem = this;}}
+                        onCreate={c => {
+                            console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                            c.parent = this;
+                            item.view = c;
+                        }}
                     />
                 )}
             </ul>
