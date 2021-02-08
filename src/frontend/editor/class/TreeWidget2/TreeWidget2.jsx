@@ -6,7 +6,7 @@ class TreeWidget2 extends ReactComponent {
         };
     }
     async select(item) {
-        console.log('TreeWidget2.select', item.getTitle());
+        console.log('TreeWidget2.select', item ? item.getTitle() : null);
         if (this.isSelected(item)) return;
         return new Promise(resolve => {
             this.setState({selectedItem: item}, () => {
