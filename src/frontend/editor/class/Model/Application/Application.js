@@ -48,6 +48,12 @@ class Application extends Model {
         if (i === -1) throw new Error('no such database');
         this.databases.splice(i, 1);
     }
+    removeDataSource(dataSource) {
+        console.log('Application.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1) throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
     removePageLink(pageLink) {
         console.log('Application.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);
