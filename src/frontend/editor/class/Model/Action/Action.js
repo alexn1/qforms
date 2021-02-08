@@ -33,8 +33,8 @@ class Action extends Model {
         return data;
     }
 
-    async delete() {
-        return await QForms.doHttpRequest({
+    async deleteData() {
+        await QForms.doHttpRequest({
             controller: 'Action',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -43,6 +43,11 @@ class Action extends Model {
                 action      : this.getAttr('name')
             })
         });
+    }
+    async delete() {
+        console.log('Action.delete', this.getName());
+        await this.deleteData();
+        this.parent.deleteAction(this);
     }
 
 }
