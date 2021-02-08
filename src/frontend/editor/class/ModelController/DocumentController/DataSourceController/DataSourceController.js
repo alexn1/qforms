@@ -342,5 +342,13 @@ class DataSourceController extends DocumentController {
             .replace('{class}', data['@class']);
         return caption;
     }
-
+    async delete() {
+        console.log('DataSourceController.delete', this.getTitle());
+        await this.model.delete();
+        this.parent.removeDataSource(this);
+        this.parent.editorController.treeWidget2.select(null);
+        this.parent.editorController.treeWidget2.rerender();
+    }
 }
+
+
