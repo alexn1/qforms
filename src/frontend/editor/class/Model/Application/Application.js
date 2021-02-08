@@ -42,6 +42,12 @@ class Application extends Model {
         this.pageLinks.push(pageLink);
         return pageLink;
     }
+    removeDatabase(database) {
+        console.log('Application.removeDatabase', database.getName());
+        const i = this.databases.indexOf(database);
+        if (i === -1) throw new Error('no such database');
+        this.databases.splice(i, 1);
+    }
     removePageLink(pageLink) {
         console.log('Application.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);

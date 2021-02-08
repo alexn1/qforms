@@ -60,6 +60,7 @@ class Database extends Model {
 
     async delete() {
         await this.deleteData();
+        this.parent.removeDatabase(this);
     }
 
     async newParam(name) {
