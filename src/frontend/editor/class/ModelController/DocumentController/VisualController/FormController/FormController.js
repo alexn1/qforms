@@ -45,6 +45,24 @@ class FormController extends VisualController {
         this.actions.push(action);
         return action;
     }
+    removeDataSource(dataSourceController) {
+        console.log('ApplicationController.removeDataSource', dataSourceController.getTitle());
+        const i = this.dataSources.indexOf(dataSourceController);
+        if (i === -1) throw new Error('no such dataSourceController');
+        this.dataSources.splice(i, 1);
+    }
+    removeField(fieldController) {
+        console.log('FormController.removeField', fieldController.getTitle());
+        const i = this.fields.indexOf(fieldController);
+        if (i === -1) throw new Error('no such fieldController');
+        this.fields.splice(i, 1);
+    }
+    removeAction(actionController) {
+        console.log('FormController.removeAction', actionController.getTitle());
+        const i = this.actions.indexOf(actionController);
+        if (i === -1) throw new Error('no such actionController');
+        this.actions.splice(i, 1);
+    }
 
     // createTree(item) {
     //     if (item) this.item = item;

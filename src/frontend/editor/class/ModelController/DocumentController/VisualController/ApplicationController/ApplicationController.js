@@ -61,10 +61,10 @@ class ApplicationController extends VisualController {
         if (i === -1) throw new Error('no such databaseController');
         this.databases.splice(i, 1);
     }
-    removeDataSource(dataSource) {
-        console.log('ApplicationController.removeDataSource', dataSource.getTitle());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
+    removeDataSource(dataSourceController) {
+        console.log('ApplicationController.removeDataSource', dataSourceController.getTitle());
+        const i = this.dataSources.indexOf(dataSourceController);
+        if (i === -1) throw new Error('no such dataSourceController');
         this.dataSources.splice(i, 1);
     }
     removePageLink(pageLinkController) {

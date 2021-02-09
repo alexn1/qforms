@@ -20,6 +20,12 @@ class TableController extends DocumentController {
         this.columns.push(column);
         return column;
     }
+    removeColumn(columnController) {
+        console.log('TableController.removeColumn', columnController.getTitle());
+        const i = this.columns.indexOf(columnController);
+        if (i === -1) throw new Error('no such columnController');
+        this.columns.splice(i, 1);
+    }
 
     /*createTree(item) {
         if (item) this.item = item;
