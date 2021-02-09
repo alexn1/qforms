@@ -47,7 +47,7 @@ class Action extends Model {
     async delete() {
         console.log('Action.delete', this.getName());
         await this.deleteData();
-        this.parent.deleteAction(this);
+        this.parent.removeAction(this);
     }
 
 }

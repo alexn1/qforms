@@ -87,7 +87,7 @@ class DataSource extends Model {
     }
     async delete() {
         await this.deleteData();
-        this.parent.removeDataSource();
+        this.parent.removeDataSource(this);
     }
 
     async moveUp() {

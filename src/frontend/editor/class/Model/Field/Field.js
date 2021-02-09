@@ -21,9 +21,8 @@ class Field extends Model {
         this.data['@attributes'][name] = value;
         return data;
     }
-
-    async delete() {
-        return await QForms.doHttpRequest({
+    async deleteData() {
+        await QForms.doHttpRequest({
             controller : 'Field',
             action     : 'delete',
             params     : Helper.encodeObject({
@@ -33,7 +32,10 @@ class Field extends Model {
             })
         });
     }
-
+    async delete() {
+        await this.deleteData();
+        this.parent.removeField(this);
+    }
     async getView(view) {
         return await QForms.doHttpRequest({
             controller: 'Field',
