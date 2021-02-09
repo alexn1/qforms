@@ -60,8 +60,8 @@ class Form extends Model {
         return data;
     }
 
-    async delete() {
-        return await QForms.doHttpRequest({
+    async deleteData() {
+        await QForms.doHttpRequest({
             controller: 'Form',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -70,7 +70,10 @@ class Form extends Model {
             })
         });
     }
-
+    async delete() {
+        await this.deleteData();
+        this.parent.removeForm(this);
+    }
     moveUp() {
         const args = {
             controller: 'Form',

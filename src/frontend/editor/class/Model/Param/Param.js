@@ -21,8 +21,8 @@ class Param extends Model {
         return data;
     }
 
-    async delete() {
-        return await QForms.doHttpRequest({
+    async deleteData() {
+        await QForms.doHttpRequest({
             controller: 'Param',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -31,5 +31,8 @@ class Param extends Model {
             })
         });
     }
-
+    async delete() {
+        await this.deleteData();
+        this.parent.removeParam(this);
+    }
 }
