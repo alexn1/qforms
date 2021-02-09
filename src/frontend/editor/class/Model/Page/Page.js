@@ -33,7 +33,18 @@ class Page extends Model {
         this.forms.push(form);
         return form;
     }
-
+    removeDataSource(dataSource) {
+        console.log('Page.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1) throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
+    removeForm(form) {
+        console.log('Page.removeForm', form.getName());
+        const i = this.forms.indexOf(form);
+        if (i === -1) throw new Error('no such form');
+        this.forms.splice(i, 1);
+    }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await QForms.doHttpRequest({
