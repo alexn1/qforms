@@ -268,5 +268,10 @@ class FormController extends VisualController {
             .replace('{class}', data['@class']);
         return caption;
     }
-
+    async delete() {
+        await this.model.delete();
+        this.parent.removeForm(this);
+        this.parent.parent.editorController.treeWidget2.select(null);
+        this.parent.parent.editorController.treeWidget2.rerender();
+    }
 }

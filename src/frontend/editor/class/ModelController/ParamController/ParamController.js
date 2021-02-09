@@ -27,5 +27,10 @@ class ParamController extends ModelController {
             })
         });
     }
-
+    async delete() {
+        await this.model.delete();
+        this.parent.removeParam(this);
+        this.parent.parent.editorController.treeWidget2.select(null);
+        this.parent.parent.editorController.treeWidget2.rerender();
+    }
 }

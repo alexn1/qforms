@@ -27,5 +27,10 @@ class KeyColumnController extends ModelController {
             })
         });
     }
-
+    async delete() {
+        await this.model.delete();
+        this.parent.removeKeyColumn(this);
+        this.parent.parent.editorController.treeWidget2.select(null);
+        this.parent.parent.editorController.treeWidget2.rerender();
+    }
 }
