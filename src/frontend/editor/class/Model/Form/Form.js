@@ -43,7 +43,24 @@ class Form extends Model {
         this.actions.push(action);
         return action;
     }
-
+    removeDataSource(dataSource) {
+        console.log('Form.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1) throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
+    removeField(field) {
+        console.log('Form.removeField', field.getName());
+        const i = this.dataSources.indexOf(field);
+        if (i === -1) throw new Error('no such field');
+        this.dataSources.splice(i, 1);
+    }
+    removeAction(action) {
+        console.log('Form.removeField', action.getName());
+        const i = this.dataSources.indexOf(action);
+        if (i === -1) throw new Error('no such action');
+        this.dataSources.splice(i, 1);
+    }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await QForms.doHttpRequest({
