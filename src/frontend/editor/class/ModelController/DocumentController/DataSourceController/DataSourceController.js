@@ -31,6 +31,12 @@ class DataSourceController extends DocumentController {
         this.keyColumns.push(keyColumn);
         return keyColumn;
     }
+    removeKeyColumn(keyColumnController) {
+        console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
+        const i = this.keyColumns.indexOf(keyColumnController);
+        if (i === -1) throw new Error('no such keyColumnController');
+        this.keyColumns.splice(i, 1);
+    }
 
     /*createTree(item) {
         if (item) this.item = item;
