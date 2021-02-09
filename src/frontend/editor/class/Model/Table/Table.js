@@ -17,6 +17,12 @@ class Table extends Model {
         this.columns.push(column);
         return column;
     }
+    removeColumn(column) {
+        console.log('Table.removeColumn', column.getName());
+        const i = this.columns.indexOf(column);
+        if (i === -1) throw new Error('no such column');
+        this.columns.splice(i, 1);
+    }
 
     async newColumn(name) {
         if (!name) throw new Error(`newColumn: no name`);
