@@ -350,5 +350,3 @@ class DataSourceController extends DocumentController {
         this.parent.editorController.treeWidget2.rerender();
     }
 }
-
-

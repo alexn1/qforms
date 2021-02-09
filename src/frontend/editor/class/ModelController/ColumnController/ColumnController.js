@@ -35,5 +35,10 @@ class ColumnController extends ModelController {
         propList.options['nullable'] = ['true', 'false'];
         return propList;
     }
-
+    async delete() {
+        await this.model.delete();
+        this.parent.removeColumn(this);
+        this.parent.editorController.treeWidget2.select(null);
+        this.parent.editorController.treeWidget2.rerender();
+    }
 }

@@ -16,4 +16,10 @@ class ActionController extends ModelController {
                 break;
         }
     }
+    async delete() {
+        await this.model.delete();
+        this.parent.removeAction(this);
+        this.parent.editorController.treeWidget2.select(null);
+        this.parent.editorController.treeWidget2.rerender();
+    }
 }
