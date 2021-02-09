@@ -51,6 +51,12 @@ class DatabaseController extends DocumentController {
         this.tables2.push(table);
         return table;
     }
+    removeParam(paramController) {
+        console.log('DatabaseController.removeParam', paramController.getTitle());
+        const i = this.params.indexOf(paramController);
+        if (i === -1) throw new Error('no such paramController');
+        this.params.splice(i, 1);
+    }
     removeTable2(tableController) {
         console.log('DatabaseController.removeTable2', tableController.getTitle());
         const i = this.tables2.indexOf(tableController);
