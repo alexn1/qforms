@@ -35,13 +35,13 @@ class Database extends Model {
     removeParam(param) {
         console.log('Database.removeParam', param.getName());
         const i = this.params.indexOf(param);
-        if (i == -1) throw new Error('no such param');
+        if (i === -1) throw new Error('no such param');
         this.params.splice(i, 1);
     }
     removeTable(table) {
         console.log('Database.removeTable', table.getName());
         const i = this.tables.indexOf(table);
-        if (i == -1) throw new Error('no such table');
+        if (i === -1) throw new Error('no such table');
         this.tables.splice(i, 1);
     }
 

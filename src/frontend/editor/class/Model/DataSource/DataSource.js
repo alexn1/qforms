@@ -21,6 +21,12 @@ class DataSource extends Model {
         this.keyColumns.push(keyColumn);
         return keyColumn;
     }
+    removeKeyColumn(keyColumn) {
+        console.log('Database.removeParam', keyColumn.getName());
+        const i = this.keyColumns.indexOf(keyColumn);
+        if (i === -1) throw new Error('no such keyColumn');
+        this.keyColumns.splice(i, 1);
+    }
     /*createParentKeyColumn(data) {
         const parentKeyColumn = new ParentKeyColumn(data, this);
         parentKeyColumn.init();
