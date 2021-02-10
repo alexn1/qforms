@@ -102,9 +102,10 @@ class TableController extends DocumentController {
         const result = await TableController.getView('newForm.ejs');
         const databaseController = this.parent;
         const applicationController = databaseController.parent;
+        const application = this.model.parent.parent;
         const html = QForms.render(result.view, {
-            tableName :this.model.name,
-            pages     :Object.keys(applicationController.pageItems)
+            tableName: this.model.getName(),
+            pages    : application.pageLinks.map(pageLink => pageLink.getName())
         });
         $(document.body).append(html);
         $('#modal').on('hidden.bs.modal', function(e) {

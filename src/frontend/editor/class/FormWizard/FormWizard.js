@@ -4,9 +4,9 @@ class FormWizard {
         console.log('FormWizard.constructor', params);
         this.params        = params;
         this.model         = params.model;
-        this.databaseName  = this.model.database.name;
-        this.tableName     = this.model.name;
-        this.tableColumns  = Object.keys(this.model.data.columns).map(name => this.model.data.columns[name]['@attributes']);
+        this.databaseName  = params.model.database.getName();
+        this.tableName     = params.model.getName();
+        this.tableColumns  = Object.keys(params.model.data.columns).map(name => params.model.data.columns[name]['@attributes']);
     }
 
     static create(params) {

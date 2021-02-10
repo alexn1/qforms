@@ -1,7 +1,7 @@
 class Database extends Model {
 
-    constructor(data, application) {
-        super(data, application);
+    constructor(data, parent) {
+        super(data, parent);
         this.params = [];
         this.tables = [];
     }
