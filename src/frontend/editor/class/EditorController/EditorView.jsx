@@ -2,7 +2,7 @@ class EditorView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div style={{height: '100%'}}>
-            <div id="tree-bar2" className="flex-min">
+            <div id="tree-bar" className="flex-min">
                 <div id="treeActions" className="dropdown">
                     <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink}
                        style={{float: "right"}}>Run Application</a>
