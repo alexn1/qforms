@@ -1,5 +1,4 @@
 class ModelController extends EventEmitter {
-
     constructor(model, parent = null) {
         super();
         this.model = model;
@@ -18,30 +17,13 @@ class ModelController extends EventEmitter {
             options: {}
         };
     }
-
     async setProperty(name, value) {
         await this.model.setValue(name, value);
-        /*if (name === 'name') {
-            this.item.text.innerHTML = this.getCaption(this.model.data);
-        }*/
     }
-
-    /*getCaption(data) {
-        return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
-    }*/
-
-    /*async delete() {
-        console.log('ModelController.delete', this.model.getName());
-        await this.model.delete();
-    }*/
-
     /*getObject(col, name) {
         return this[col].find(obj => obj.model.getName() === name);
     }*/
-
     async doAction(name) {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
-
-
 }

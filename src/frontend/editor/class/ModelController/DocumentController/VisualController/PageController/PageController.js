@@ -3,9 +3,6 @@ class PageController extends VisualController {
     constructor(model, pageLinkController = null) {
         super(model);
         this.pageLinkController = pageLinkController;
-        // this.item      = null;
-        // this.dataSourcesItem = null;
-        // this.itemForms = null;
         this.dataSources = [];
         this.forms       = [];
         this.items = [
@@ -16,11 +13,7 @@ class PageController extends VisualController {
 
     init() {
         // console.log('PageController.init');
-
-        // dataSources
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-
-        // forms
         this.model.forms.forEach(form => this.createForm(form));
     }
 
@@ -37,33 +30,6 @@ class PageController extends VisualController {
         this.forms.push(form);
         return form;
     }
-
-    /*createTree(item) {
-        if (item) this.item = item;
-
-        // data sources
-        this.dataSourcesItem = this.item.addItem('Data Sources');
-        this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
-
-        // forms
-        this.itemForms = this.item.addItem('Forms');
-        this.forms.forEach(form => this.addFormItem(form));
-    }*/
-
-    /*addDataSourceItem(dataSource) {
-        const dataSourceItem = this.dataSourcesItem.addItem(dataSource.model.getName());
-        dataSourceItem.ctrl = dataSource;
-        dataSourceItem.ctrl.createTree(dataSourceItem);
-        return dataSourceItem;
-    }*/
-
-    /*addFormItem(form) {
-        const caption = `${form.model.getClassName()}: ${form.model.getName()}`;
-        const itemForm = this.itemForms.addItem(caption);
-        itemForm.ctrl = form;
-        itemForm.ctrl.createTree(itemForm);
-        return itemForm;
-    }*/
 
     getActions() {
         return [

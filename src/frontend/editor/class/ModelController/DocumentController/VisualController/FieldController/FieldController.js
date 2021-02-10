@@ -16,10 +16,6 @@ class FieldController extends VisualController {
         ];
     }
 
-    /*setItem(item) {
-        this.item = item;
-    }*/
-
     async doAction(name) {
         switch (name) {
             case 'changeClass':
@@ -60,10 +56,6 @@ class FieldController extends VisualController {
         $('#modal').modal('show');
         $("#modal input[id='fieldClass']").focus();
     }
-
-    /*getCaption(data) {
-        return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
-    }*/
 
     getPropList() {
         const list = this.model.data['@attributes'];

@@ -22,7 +22,6 @@ class DataSourceController extends DocumentController {
     }
     init() {
         this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
-        // this.model.parentKeyColumns.forEach(parentKeyColumn => this.createParentKeyColumn(parentKeyColumn));
     }
 
     createKeyColumn(model) {
@@ -37,18 +36,6 @@ class DataSourceController extends DocumentController {
         if (i === -1) throw new Error('no such keyColumnController');
         this.keyColumns.splice(i, 1);
     }
-
-    /*createTree(item) {
-        if (item) this.item = item;
-
-        // keys
-        this.itemKeys = this.item.addItem('Key Columns');
-        this.keyColumns.forEach(keyColumn => this.addKeyColumn(keyColumn));
-
-        // parent key columns
-        this.itemParentKeyColumns = this.item.addItem('Parent Key Columns');
-        this.parentKeyColumns.forEach(parentKeyColumn => this.addParentKeyColumn(parentKeyColumn));
-    }*/
 
     addKeyColumn(keyColumn) {
         const keyColumnItem = this.itemKeys.addItem(keyColumn.model.getName());
@@ -342,12 +329,6 @@ class DataSourceController extends DocumentController {
         this.showCustomController();
     }
 
-    /*getCaption(data) {
-        const caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
-            .replace('{name}' , data['@attributes'].name)
-            .replace('{class}', data['@class']);
-        return caption;
-    }*/
     async delete() {
         console.log('DataSourceController.delete', this.getTitle());
         await this.model.delete();

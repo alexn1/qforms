@@ -27,18 +27,6 @@ class TableController extends DocumentController {
         this.columns.splice(i, 1);
     }
 
-    /*createTree(item) {
-        if (item) this.item = item;
-        this.columnsItem = this.item.addItem('Columns');
-        this.columns.forEach(column => this.addColumnItem(column));
-    }*/
-
-    /*addColumnItem(column) {
-        const item = this.columnsItem.addItem(column.model.getName());
-        item.ctrl = column;
-        return item;
-    }*/
-
     getActions() {
         return [
             {'action':'newColumn','caption':'New Column'},

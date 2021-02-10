@@ -1,12 +1,6 @@
 class FormController extends VisualController {
-
     constructor(model, parent) {
         super(model, parent);
-        // this.item            = item;
-        // this.itemDataSources = null;
-        // this.itemFields      = null;
-        // this.itemControls    = null;
-        // this.itemActions     = null;
         this.dataSources = [];
         this.fields      = [];
         this.actions     = [];
@@ -63,61 +57,6 @@ class FormController extends VisualController {
         if (i === -1) throw new Error('no such actionController');
         this.actions.splice(i, 1);
     }
-
-    // createTree(item) {
-    //     if (item) this.item = item;
-    //
-    //     // dataSources
-    //     this.itemDataSources = this.item.addItem('Data Sources');
-    //     this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
-    //
-    //     // fields
-    //     this.itemFields = this.item.addItem('Fields');
-    //     this.fields.forEach(field => this.addFieldItem(field));
-    //
-    //     /*// controls
-    //     this.itemControls = this.item.addItem('Controls');
-    //     if (this.model.data.controls) {
-    //         for (const name in this.model.data.controls) {
-    //             const controlData = this.model.data.controls[name];
-    //             this.addControlItem(controlData);
-    //         }
-    //     }*/
-    //
-    //     // actions
-    //     this.itemActions =  this.item.addItem('Actions');
-    //     this.actions.forEach(action => this.addActionItem(action));
-    // }
-
-    /*addDataSourceItem(dataSource) {
-        const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
-        const itemDataSource = this.itemDataSources.addItem(caption);
-        itemDataSource.ctrl = dataSource;
-        itemDataSource.ctrl.createTree(itemDataSource);
-        return itemDataSource;
-    }*/
-
-    /*addFieldItem(field) {
-        const caption = `${field.model.getClassName()}: ${field.model.getName()}`;
-        const itemField = this.itemFields.addItem(caption);
-        field.setItem(itemField);
-        itemField.ctrl = field;
-        return itemField;
-    }*/
-
-    /*addControlItem(controlData) {
-        const caption = ControlController.prototype.getCaption(controlData);
-        const itemControl = this.itemControls.addItem(caption);
-        const control = new Control(controlData, this.model);
-        itemControl.ctrl = new ControlController(control, itemControl);
-        return itemControl;
-    }*/
-
-    /*addActionItem(action) {
-        const itemAction = this.itemActions.addItem(action.model.getName());
-        itemAction.ctrl = action;
-        return itemAction;
-    }*/
 
     getActions() {
         return [
@@ -275,17 +214,8 @@ class FormController extends VisualController {
 
     async setProperty(name, value) {
         await this.model.setValue(name, value);
-        /*if (name === 'name') {
-            this.item.text.innerHTML = this.getCaption(this.model.data);
-        }*/
     }
 
-    /*getCaption(data) {
-        const caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
-            .replace('{name}' , data['@attributes'].name)
-            .replace('{class}', data['@class']);
-        return caption;
-    }*/
     async delete() {
         await this.model.delete();
         this.parent.removeForm(this);

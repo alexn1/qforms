@@ -1,13 +1,8 @@
 class ApplicationController extends VisualController {
 
     constructor(model, editorController) {
-        super(model, editorController);
+        super(model);
         this.editorController = editorController;
-        // this.item = null;
-        // this.databasesItem = null;
-        // this.dataSourcesItem = null;
-        // this.pagesItem = null;
-        // this.pageItems = {};
 
         this.databases   = [];
         this.dataSources = [];
@@ -72,52 +67,6 @@ class ApplicationController extends VisualController {
         if (i === -1) throw new Error('no such pageLinkController');
         this.pageLinks.splice(i, 1);
     }
-    /*createTree(item) {
-        this.item = item;
-
-        // databases
-        this.databasesItem = this.item.addItem('Databases');
-        this.databases.forEach(database => this.addDatabaseItem(database));
-
-        // data sources
-        this.dataSourcesItem = this.item.addItem('Data Sources');
-        this.dataSources.forEach(dataSource => this.addDataSourceItem(dataSource));
-
-        // pageLinks
-        this.pagesItem = this.item.addItem('Pages', 'opened');
-        this.pageLinks.forEach(pageLink => this.addPageLinkItem(pageLink));
-    }*/
-
-    /*addDatabaseItem(database) {
-        const caption = `${database.model.getClassName()}: ${database.model.getName()}`;
-        const databaseItem = this.databasesItem.addItem(caption);
-        databaseItem.ctrl = database;
-        databaseItem.ctrl.createTree(databaseItem);
-        return databaseItem;
-    }*/
-
-    /*addDataSourceItem(dataSource) {
-        const caption = `${dataSource.model.getClassName()}: ${dataSource.model.getName()}`;
-        const dataSourceItem = this.dataSourcesItem.addItem(caption);
-        dataSourceItem.ctrl = dataSource;
-        dataSourceItem.ctrl.createTree(dataSourceItem);
-        return dataSourceItem;
-    }*/
-
-    /*addPageLinkItem(pageLink) {
-        const pageLinkItem = this.pagesItem.addItem(pageLink.model.getName());
-        pageLinkItem.node.className = 'node';
-        pageLinkItem.ctrl = pageLink;
-        return pageLinkItem;
-    }*/
-
-    /*addPageItem(pageController) {
-        const pageItem = this.pagesItem.addItem(pageController.getTitle());
-        pageItem.ctrl = pageController;
-        pageItem.node.className = 'node';
-        pageItem.ctrl.createTree(pageItem);
-        return pageItem;
-    }*/
 
     getActions() {
         return [

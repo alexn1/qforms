@@ -1,7 +1,6 @@
 class DatabaseController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
-        // this.applicationController = applicationController;
 
         // document view
         this.treeTables            = null;
@@ -57,31 +56,6 @@ class DatabaseController extends DocumentController {
         if (i === -1) throw new Error('no such tableController');
         this.tables2.splice(i, 1);
     }
-
-    /*createTree(item) {
-        this.item = item;
-
-        // params
-        this.paramsItem = this.item.addItem('Params');
-        this.params.forEach(param => this.addParamItem(param));
-
-        // tables
-        this.tablesItem = this.item.addItem('Tables');
-        this.tables2.forEach(table => this.addTableItem(table));
-    }*/
-
-    /*addParamItem(param) {
-        const item = this.paramsItem.addItem(param.model.getName());
-        item.ctrl = param;
-        return item;
-    }*/
-
-    /*addTableItem(table) {
-        const item = this.tablesItem.addItem(table.model.getName());
-        item.ctrl = table;
-        item.ctrl.createTree(item);
-        return item;
-    }*/
 
     getActions() {
         return [
@@ -194,10 +168,6 @@ class DatabaseController extends DocumentController {
         this.view.rerender();
         // EditorController.editorController.treeWidget2.scrollToSelected();
     }
-
-    /*getCaption(data) {
-        return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
-    }*/
 
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());
