@@ -98,26 +98,25 @@ class TableController extends DocumentController {
     }
 
     async createForm() {
-        const self = this;
         console.log('TableController.createForm');
         const result = await TableController.getView('newForm.ejs');
-        const databaseController = self.parent;
+        const databaseController = this.parent;
         const applicationController = databaseController.parent;
         const html = QForms.render(result.view, {
-            tableName :self.model.name,
+            tableName :this.model.name,
             pages     :Object.keys(applicationController.pageItems)
         });
         $(document.body).append(html);
         $('#modal').on('hidden.bs.modal', function(e) {
             $(this).remove();
         });
-        $("#modal button[name='create']").click(function() {
+        $("#modal button[name='create']").click(() => {
             const formPage    = $("#modal select[id='formPage']").val();
             const formClass   = $("#modal select[id='formClass']").val();
             const formName    = $("#modal input[id='formName']").val();
             const formCaption = $("#modal input[id='formCaption']").val();
             const formWizard = FormWizard.create({
-                model       : self.model,
+                model       : this.model,
                 pageName    : formPage,
                 className   : formClass,
                 formName    : formName,
