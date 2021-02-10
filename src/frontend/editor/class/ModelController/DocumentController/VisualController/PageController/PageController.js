@@ -123,8 +123,8 @@ class PageController extends VisualController {
 
     getPropList() {
         const propList = super.getPropList();
-        propList.list['menu']    = this.getPageLink().data['@attributes']['menu'];
-        propList.list['startup'] = this.getPageLink().data['@attributes']['startup'];
+        propList.list['menu']    = this.getPageLink().getAttr('menu');
+        propList.list['startup'] = this.getPageLink().getAttr('startup');
         propList.options['startup'] = ['true', 'false'];
         return propList;
     }

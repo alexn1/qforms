@@ -70,7 +70,7 @@ class DataSource extends Model {
             args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
         const data = await QForms.doHttpRequest(args);
-        this.data['@attributes'][name] = value;
+        this.setAttr(name, value);
         return data;
     }
 
