@@ -182,7 +182,7 @@ class DatabaseController extends DocumentController {
 
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
-        const params = {
+        const table = await this.model.newTable({
             name   : tableName,
             columns: tableInfo.map(column => ({
                 name    : column.name,
@@ -193,9 +193,12 @@ class DatabaseController extends DocumentController {
                 auto    : column.auto,
                 nullable: column.nullable,
             }))
-        };
-        const table = await this.model.newTable(params);
+        });
         const tableController = this.createTable2(table);
+        await EditorController.editorController.treeWidget2.select(tableController);
+        tableController.view.parent.open();
+        this.view.rerender();
+        // EditorController.editorController.treeWidget2.scrollToSelected();
     }
 
     getCaption(data) {
