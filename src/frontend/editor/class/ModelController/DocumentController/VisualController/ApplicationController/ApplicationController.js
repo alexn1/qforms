@@ -184,5 +184,8 @@ class ApplicationController extends VisualController {
         propList.options['lang']           = ['en'  , 'ru'   ];
         return propList;
     }
+    findPageLink(name) {
+        return this.pageLinks.find(pageLink => pageLink.model.getName() === name);
+    }
 
 }

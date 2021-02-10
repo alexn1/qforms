@@ -14,6 +14,7 @@ class PageLinkController extends ModelController {
     }
     async loadPage() {
         console.log('PageLinkController.loadPage', this.getTitle());
+        if (this.pageController) throw new Error('page already loaded');
         const pageLink = this.model;
         const pageData = await EditorController.fetchPageData(pageLink.getFileName());
 
@@ -25,7 +26,7 @@ class PageLinkController extends ModelController {
         const pageController = new PageController(page, this);
         pageController.init();
         this.setPageController(pageController);
-        console.log('pageController:', pageController);
+        // console.log('pageController:', pageController);
 
         this.view.rerender();
     }

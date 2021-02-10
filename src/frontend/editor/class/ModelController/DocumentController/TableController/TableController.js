@@ -111,7 +111,9 @@ class TableController extends DocumentController {
         $('#modal').on('hidden.bs.modal', function(e) {
             $(this).remove();
         });
-        $("#modal button[name='create']").click(() => {
+        $("#modal button[name='create']").click(async () => {
+
+
             const formPage    = $("#modal select[id='formPage']").val();
             const formClass   = $("#modal select[id='formClass']").val();
             const formName    = $("#modal input[id='formName']").val();
@@ -125,6 +127,15 @@ class TableController extends DocumentController {
             });
             const params = formWizard.getFormParams();
             console.log('params:', params);
+
+            const pageLinkController = applicationController.findPageLink(formPage);
+            if (!pageLinkController.pageController) {
+                await pageLinkController.loadPage();
+            }
+            const pageController = pageLinkController.pageController;
+            console.log('pageController:', pageController);
+
+            $('#modal').modal('hide');
 
             /*
             const pageItem = applicationController.pageItems[formPage];
