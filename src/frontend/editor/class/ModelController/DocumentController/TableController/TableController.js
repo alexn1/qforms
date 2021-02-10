@@ -112,8 +112,6 @@ class TableController extends DocumentController {
             $(this).remove();
         });
         $("#modal button[name='create']").click(async () => {
-
-
             const formPage    = $("#modal select[id='formPage']").val();
             const formClass   = $("#modal select[id='formClass']").val();
             const formName    = $("#modal input[id='formName']").val();
@@ -126,7 +124,7 @@ class TableController extends DocumentController {
                 formCaption : formCaption,
             });
             const params = formWizard.getFormParams();
-            console.log('params:', params);
+            // console.log('params:', params);
 
             const pageLinkController = applicationController.findPageLink(formPage);
             if (!pageLinkController.pageController) {
@@ -135,31 +133,15 @@ class TableController extends DocumentController {
             const pageController = pageLinkController.pageController;
             // console.log('pageController:', pageController);
             const form = await pageController.model.newForm(params);
-            console.log('form:', form);
+            // console.log('form:', form);
 
             const formController = pageController.createForm(form);
             await EditorController.editorController.treeWidget2.select(formController);
-
-
-
-
-
+            formController.view.parent.open();
+            this.items[1].view.rerender();
+            this.editorController.treeWidget2.scrollToSelected();
 
             $('#modal').modal('hide');
-
-            /*
-            const pageItem = applicationController.pageItems[formPage];
-            Promise.try(() => {
-                if (pageItem.ctrl instanceof PageLinkController) {
-                    return EditorController.editorController.pageLinkToPage(pageItem);
-                }
-            }).then(() => {
-
-                return pageItem.ctrl.model.newForm(params).then((formData) => {
-                    pageItem.ctrl.addFormItem(formData).select();
-                    $('#modal').modal('hide');
-                });
-            });*/
         });
         $('#modal').modal('show');
         $("#modal input[id='formPage']").focus();
