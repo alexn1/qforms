@@ -11,9 +11,9 @@ class DatabaseController extends DocumentController {
         this.treeTables            = null;
         this.$divTableInfo         = null;
         this.tableView             = null;
-        this.tableInfo             = null;
         this.tables                = null;
-        this.tableName             = null;
+        // this.tableInfo             = null;
+        // this.tableName             = null;
 
         this.params  = [];
         this.tables2 = [];
@@ -170,22 +170,21 @@ class DatabaseController extends DocumentController {
 
     async onTableSelect(e) {
         console.log('DatabaseController.onTableSelect');
-        this.tableName = e.item.caption;
-        const data = await this.model.getTableInfo(this.tableName);
-        this.tableInfo = data.tableInfo;
+        const tableName = e.item.caption;
+        const data = await this.model.getTableInfo(tableName);
         const html = QForms.render(this.tableView, data);
         this.$divTableInfo.empty();
         this.$divTableInfo.append(html);
         this.$divTableInfo.find('.btnCreateTable').click(() => {
-            this.createTable();
+            this.createTable(tableName, data.tableInfo);
         });
     }
 
-    async createTable() {
-        console.log('DatabaseController.createTable', this.tableInfo);
+    async createTable(tableName, tableInfo) {
+        console.log('DatabaseController.createTable', tableName, tableInfo);
         const params = {
-            name: this.tableName,
-            columns: this.tableInfo.map(column => ({
+            name   : tableName,
+            columns: tableInfo.map(column => ({
                 name    : column.name,
                 caption : column.name,
                 type    : column.type,
@@ -196,7 +195,8 @@ class DatabaseController extends DocumentController {
             }))
         };
         const tableData = await this.model.newTable(params);
-        this.addTableItem(tableData).select();
+
+        // this.addTableItem(tableData).select();
     }
 
     getCaption(data) {
