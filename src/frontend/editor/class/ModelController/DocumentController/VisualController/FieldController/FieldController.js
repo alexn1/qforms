@@ -61,9 +61,9 @@ class FieldController extends VisualController {
         $("#modal input[id='fieldClass']").focus();
     }
 
-    getCaption(data) {
+    /*getCaption(data) {
         return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
-    }
+    }*/
 
     getPropList() {
         const list = this.model.data['@attributes'];

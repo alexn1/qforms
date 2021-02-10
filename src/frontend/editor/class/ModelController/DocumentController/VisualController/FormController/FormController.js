@@ -280,12 +280,12 @@ class FormController extends VisualController {
         }*/
     }
 
-    getCaption(data) {
+    /*getCaption(data) {
         const caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
             .replace('{name}' , data['@attributes'].name)
             .replace('{class}', data['@class']);
         return caption;
-    }
+    }*/
     async delete() {
         await this.model.delete();
         this.parent.removeForm(this);

@@ -1,15 +1,12 @@
 class ColumnController extends ModelController {
-
     /*constructor(model, parent) {
         super(model, parent);
     }*/
-
     getActions() {
         return [
             {'action': 'delete', 'caption': 'Delete'}
         ];
     }
-
     async doAction(name) {
         switch (name) {
             case 'delete':
@@ -17,7 +14,6 @@ class ColumnController extends ModelController {
                 break;
         }
     }
-
     static async getView(view) {
         return await QForms.doHttpRequest({
             controller: 'Column',
@@ -27,7 +23,6 @@ class ColumnController extends ModelController {
             })
         });
     }
-
     getPropList() {
         const propList = super.getPropList();
         propList.options['key']      = ['true', 'false'];

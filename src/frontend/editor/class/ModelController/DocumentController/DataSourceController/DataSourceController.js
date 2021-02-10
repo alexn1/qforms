@@ -342,12 +342,12 @@ class DataSourceController extends DocumentController {
         this.showCustomController();
     }
 
-    getCaption(data) {
+    /*getCaption(data) {
         const caption = "<span class='blue'>{class}:</span>  <span class='green'>{name}</span>"
             .replace('{name}' , data['@attributes'].name)
             .replace('{class}', data['@class']);
         return caption;
-    }
+    }*/
     async delete() {
         console.log('DataSourceController.delete', this.getTitle());
         await this.model.delete();

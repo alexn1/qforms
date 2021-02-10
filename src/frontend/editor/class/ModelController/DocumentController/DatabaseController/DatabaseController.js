@@ -1,19 +1,13 @@
 class DatabaseController extends DocumentController {
-
-    constructor(model, applicationController) {
-        super(model, applicationController);
-        this.applicationController = applicationController;
-        // this.item                  = null;
-        // this.paramsItem            = null;
-        // this.tablesItem            = null;
+    constructor(model, parent) {
+        super(model, parent);
+        // this.applicationController = applicationController;
 
         // document view
         this.treeTables            = null;
         this.$divTableInfo         = null;
         this.tableView             = null;
         this.tables                = null;
-        // this.tableInfo             = null;
-        // this.tableName             = null;
 
         this.params  = [];
         this.tables2 = [];
@@ -201,9 +195,9 @@ class DatabaseController extends DocumentController {
         // EditorController.editorController.treeWidget2.scrollToSelected();
     }
 
-    getCaption(data) {
+    /*getCaption(data) {
         return `<span class='blue'>${data['@class']}:</span> <span class='green'>${data['@attributes'].name}</span>`;
-    }
+    }*/
 
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());

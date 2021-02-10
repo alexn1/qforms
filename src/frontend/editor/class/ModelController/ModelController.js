@@ -26,9 +26,9 @@ class ModelController extends EventEmitter {
         }*/
     }
 
-    getCaption(data) {
+    /*getCaption(data) {
         return "<span class='green'>{name}</span>".replace('{name}', data['@attributes'].name);
-    }
+    }*/
 
     /*async delete() {
         console.log('ModelController.delete', this.model.getName());
