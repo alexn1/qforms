@@ -11,7 +11,7 @@ class PageLink extends Model {
             controller: 'PageLink',
             action    : 'save',
             params    : Helper.encodeObject({
-                pageLink: this.data['@attributes'].name,
+                pageLink: this.getName(),
                 attr    : name,
                 value   : value
             })
@@ -25,7 +25,7 @@ class PageLink extends Model {
             controller: 'PageLink',
             action    : 'moveUp',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name
+                page: this.getName()
             })
         });
     }
@@ -35,7 +35,7 @@ class PageLink extends Model {
             controller: 'PageLink',
             action    : 'moveDown',
             params    : Helper.encodeObject({
-                page: this.data['@attributes'].name
+                page: this.getName()
             })
         });
     }

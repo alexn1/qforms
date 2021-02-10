@@ -11,8 +11,8 @@ class Param extends Model {
             controller: 'Param',
             action    : 'save',
             params    : Helper.encodeObject({
-                database: this.database.data['@attributes'].name,
-                param   : this.data['@attributes'].name,
+                database: this.database.getName(),
+                param   : this.getName(),
                 attr    : name,
                 value   : value
             })
@@ -26,8 +26,8 @@ class Param extends Model {
             controller: 'Param',
             action    : 'delete',
             params    : Helper.encodeObject({
-                database: this.database.data['@attributes'].name,
-                param   : this.data['@attributes'].name
+                database: this.database.getName(),
+                param   : this.getName()
             })
         });
     }

@@ -11,10 +11,10 @@ class KeyColumn extends Model {
             controller: 'KeyColumn',
             action    : 'save',
             params    : Helper.encodeObject({
-                form        : this.dataSource.parent.data['@attributes'].name,
+                form        : this.dataSource.parent.getName(),
                 pageFileName: this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
-                dataSource  : this.dataSource.data['@attributes'].name,
-                keyColumn   : this.data['@attributes'].name,
+                dataSource  : this.dataSource.getName(),
+                keyColumn   : this.getName(),
                 attr        : name,
                 value       : value
             })
@@ -29,9 +29,9 @@ class KeyColumn extends Model {
             action    : 'delete',
             params    : Helper.encodeObject({
                 page      : this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
-                form      : this.dataSource.parent.data['@attributes'].name,
-                dataSource: this.dataSource.data['@attributes'].name,
-                keyColumn : this.data['@attributes'].name
+                form      : this.dataSource.parent.getName(),
+                dataSource: this.dataSource.getName(),
+                keyColumn : this.getName()
             })
         });
     }

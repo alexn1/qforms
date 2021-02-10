@@ -30,8 +30,8 @@ class Table extends Model {
             controller: 'Column',
             action    : '_new',
             params    : Helper.encodeObject({
-                database: this.database.data['@attributes'].name,
-                table   : this.data['@attributes'].name,
+                database: this.database.getName(),
+                table   : this.getName(),
                 name    : name
             })
         });
@@ -41,8 +41,8 @@ class Table extends Model {
             controller: 'Table',
             action    : 'delete',
             params    : Helper.encodeObject({
-                database: this.database.data['@attributes'].name,
-                table   : this.data['@attributes'].name
+                database: this.database.getName(),
+                table   : this.getName()
             })
         });
     }

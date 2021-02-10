@@ -12,8 +12,8 @@ class Field extends Model {
             action    : 'save',
             params    : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
-                form        : this.form.data['@attributes'].name,
-                field       : this.data['@attributes'].name,
+                form        : this.form.getName(),
+                field       : this.getName(),
                 attr        : name,
                 value       : value
             })
@@ -27,8 +27,8 @@ class Field extends Model {
             action     : 'delete',
             params     : Helper.encodeObject({
                 pageFileName:this.form.page.pageLink.data['@attributes'].fileName,
-                form        :this.form.data['@attributes'].name,
-                field       :this.data['@attributes'].name
+                form        :this.form.getName(),
+                field       :this.getName()
             })
         });
     }
@@ -42,9 +42,9 @@ class Field extends Model {
             action    : 'getView',
             params    : Helper.encodeObject({
                 view : view,
-                page : this.data !== undefined ? this.form.page.data['@attributes'].name : null,
-                form : this.data !== undefined ? this.form.data['@attributes'].name      : null,
-                field: this.data !== undefined ? this.data['@attributes'].name           : null
+                page : this.data !== undefined ? this.form.page.getName() : null,
+                form : this.data !== undefined ? this.form.getName()      : null,
+                field: this.data !== undefined ? this.getName()           : null
             })
         });
     }
@@ -54,9 +54,9 @@ class Field extends Model {
             controller: 'Field',
             action    : 'saveView',
             params    : Helper.encodeObject({
-                page : this.form.page.data['@attributes'].name,
-                form : this.form.data['@attributes'].name,
-                field: this.data['@attributes'].name,
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
                 view : view,
                 text : text
             })
@@ -68,9 +68,9 @@ class Field extends Model {
             controller: 'Field',
             action    : 'saveController',
             params    : Helper.encodeObject({
-                page : this.form.page.data['@attributes'].name,
-                form : this.form.data['@attributes'].name,
-                field: this.data['@attributes'].name,
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
                 text : text
             })
         });
@@ -81,9 +81,9 @@ class Field extends Model {
             controller: 'Field',
             action    : 'createView',
             params    : Helper.encodeObject({
-                page : this.form.page.data['@attributes'].name,
-                form : this.form.data['@attributes'].name,
-                field: this.data['@attributes'].name,
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
                 class: this.data['@class']
             })
         });
@@ -94,18 +94,18 @@ class Field extends Model {
             controller: 'Field',
             action    : 'createController',
             params    : Helper.encodeObject({
-                page : this.form.page.data['@attributes'].name,
-                form : this.form.data['@attributes'].name,
-                field: this.data['@attributes'].name,
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
                 class: this.data['@class']
             })
         });
     }
 
     async changeClass(params) {
-        params['page']  = this.form.page.data['@attributes'].name;
-        params['form']  = this.form.data['@attributes'].name;
-        params['field'] = this.data['@attributes'].name;
+        params['page']  = this.form.page.getName();
+        params['form']  = this.form.getName();
+        params['field'] = this.getName();
         const data = await QForms.doHttpRequest({
             controller: 'Field',
             action    : 'changeClass',
@@ -120,8 +120,8 @@ class Field extends Model {
             action     : 'moveUp',
             params     : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
-                form        : this.form.data['@attributes'].name,
-                field       : this.data['@attributes'].name
+                form        : this.form.getName(),
+                field       : this.getName()
             })
         };
         return QForms.doHttpRequest(args);
@@ -133,8 +133,8 @@ class Field extends Model {
             action     : 'moveDown',
             params     : Helper.encodeObject({
                 pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
-                form        : this.form.data['@attributes'].name,
-                field       : this.data['@attributes'].name
+                form        : this.form.getName(),
+                field       : this.getName()
             })
         };
         return QForms.doHttpRequest(args);
