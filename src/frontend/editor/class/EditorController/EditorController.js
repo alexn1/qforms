@@ -1,8 +1,9 @@
 class EditorController {
-    constructor(appData) {
+    constructor(appData, runAppLink) {
         console.log('EditorController.constructor');
         EditorController.editorController = this;
         this.appData = appData;
+        this.runAppLink = runAppLink;
         this.docs      = null;
         this.listeners = {};
         this.appCtrl = null;

@@ -88,15 +88,6 @@ class HostApp {
 
         this.publicDirPath = publicDirPath;
         this.appsDirPath  = appsDirPath;
-        // this.commonClassCss = Helper.getFilePathsSync(publicDirPath, 'common/class', 'css');
-        // this.commonClassJs = Helper.getFilePathsSync(publicDirPath, 'common/class', 'js' );
-        // this.homeClassCss = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'css');
-        // this.homeClassJs = Helper.getFilePathsSync(publicDirPath, 'home/class'  , 'js' );
-        // this.viewerClassCss = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'css');
-        // this.viewerClassJs = Helper.getFilePathsSync(publicDirPath, 'viewer/class', 'js' );
-        // this.editorClassCss = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'css');
-        // this.editorClassJs = Helper.getFilePathsSync(publicDirPath, 'editor/class', 'js' );
-
 
         // production by default to disable editor
         /*if (!process.env.NODE_ENV) {
@@ -160,10 +151,6 @@ class HostApp {
                 version       : pkg.version,
                 lang          : data.lang,
                 debugApp      : context.query.debug,
-                // commonClassCss: this.commonClassCss,
-                // commonClassJs : this.commonClassJs,
-                // viewerClassCss: this.viewerClassCss,
-                // viewerClassJs : this.viewerClassJs,
                 links         : application.css,
                 scripts       : application.js,
                 title         : application.getTitle(context, data),
@@ -486,10 +473,6 @@ class HostApp {
         const appFileContent = JSON.stringify(app, null, 4);
         res.render('editor/view', {
             version        : pkg.version,
-            // commonClassCss : this.commonClassCss,
-            // commonClassJs  : this.commonClassJs,
-            // editorClassCss : this.editorClassCss,
-            // editorClassJs  : this.editorClassJs,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
             appFileContent : appFileContent,
             appDirName     : context.appDirName,

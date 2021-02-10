@@ -2,6 +2,18 @@ class EditorView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div style={{height: '100%'}}>
+            <div id="tree-bar2" className="flex-min">
+                <div id="treeActions" className="dropdown">
+                    <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink}
+                       style={{float: "right"}}>Run Application</a>
+                    <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span>Actions</span> <span className="caret"></span>
+                    </button>
+                    <ul id="treeActionsList" className="dropdown-menu">
+                        <li className="disabled"><a>none</a></li>
+                    </ul>
+                </div>
+            </div>
             <TreeWidget2
                 onCreate={c => ctrl.treeWidget2 = c}
                 items={ctrl.items}

@@ -39,9 +39,10 @@
             console.log('editor.ejs DOMContentLoaded');
             TreeWidget.register();
             TabWidget.register();
+            const runAppLink = "<%=runAppLink%>";
             const data = <%-appFileContent%>;
             new QForms(data);
-            new EditorController(data).init();
+            new EditorController(data, runAppLink).init();
         });
     </script>
 </head>
