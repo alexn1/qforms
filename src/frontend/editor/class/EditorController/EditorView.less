@@ -83,29 +83,26 @@ body {
 .EditorView {
     height: 100%;
     #sidebar {
-        position:fixed;
-        top: 0;
+        position: fixed;
+        top   : 0;
         bottom: 0;
-        width: 350px;
-        #root2 {
-            #tree-bar {
-                padding: 5px;
-                background-color: rgb(245,245,245);
-            }
-            .TreeWidget2 {
-                height: 50%;
-            }
-            .Tab {
-                height: 50%;
-            }
+        width : 350px;
+        .TreeBar {
+            padding: 5px;
+            background-color: rgb(245,245,245);
+        }
+        .TreeWidget2 {
+            height: 50%;
+        }
+        .Tab {
+            height: 50%;
         }
     }
-
     #client {
         position: fixed;
-        top:0;
-        left: 350px;
-        right: 0;
+        top   : 0;
+        left  : 350px;
+        right : 0;
         bottom: 0;
         background-color: #d3d3d3;
         .cm-container {
@@ -114,8 +111,4 @@ body {
             }
         }
     }
-
-
-
 }
-

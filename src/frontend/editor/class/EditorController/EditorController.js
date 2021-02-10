@@ -30,7 +30,7 @@ class EditorController {
         this.items = [this.appCtrl];
 
         // view
-        Helper.createReactComponent(document.getElementById('root2'), EditorView, {ctrl: this});
+        Helper.createReactComponent(document.getElementById('sidebar'), EditorView, {ctrl: this});
     }
 
     deinit() {
