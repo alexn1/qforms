@@ -11,9 +11,9 @@ class Column extends Model {
             controller: 'Column',
             action    : 'save',
             params    : Helper.encodeObject({
-                database: this.table.database.data['@attributes'].name,
-                table   : this.table.data['@attributes'].name,
-                column  : this.data['@attributes'].name,
+                database: this.table.database.getName(),
+                table   : this.table.getName(),
+                column  : this.getName(),
                 attr    : name,
                 value   : value
             })
@@ -27,9 +27,9 @@ class Column extends Model {
             controller: 'Column',
             action    : 'delete',
             params    : Helper.encodeObject({
-                database: this.table.database.data['@attributes'].name,
-                table   : this.table.data['@attributes'].name,
-                column  : this.data['@attributes'].name,
+                database: this.table.database.getName(),
+                table   : this.table.getName(),
+                column  : this.getName(),
             })
         });
     }

@@ -103,7 +103,7 @@ class Application extends Model {
             controller: 'Application',
             action    : 'getView',
             params    : Helper.encodeObject({
-                app : this.data['@attributes'].name,
+                app : this.getName(),
                 view: view
             })
         });
@@ -114,7 +114,7 @@ class Application extends Model {
             controller: 'Application',
             action    : 'saveView',
             params    : Helper.encodeObject({
-                app : this.data['@attributes'].name,
+                app : this.getName(),
                 view: view,
                 text: text
             })
@@ -126,7 +126,7 @@ class Application extends Model {
             controller: 'Application',
             action    : 'saveController',
             params    : Helper.encodeObject({
-                app : this.data['@attributes'].name,
+                app : this.getName(),
                 text: text
             })
         });
@@ -137,7 +137,7 @@ class Application extends Model {
             controller: 'Application',
             action    : 'createView',
             params    : Helper.encodeObject({
-                app: this.data['@attributes'].name
+                app: this.getName()
             })
         });
     }
@@ -147,7 +147,7 @@ class Application extends Model {
             controller: 'Application',
             action    : 'createController',
             params    : Helper.encodeObject({
-                app: this.data['@attributes'].name
+                app: this.getName()
             })
         });
     }

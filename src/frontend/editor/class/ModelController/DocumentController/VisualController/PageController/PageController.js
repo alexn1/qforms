@@ -31,6 +31,19 @@ class PageController extends VisualController {
         return form;
     }
 
+    removeDataSource(dataSourceController) {
+        console.log('PageController.removeDataSource', dataSourceController.getTitle());
+        const i = this.dataSources.indexOf(dataSourceController);
+        if (i === -1) throw new Error('no such dataSourceController');
+        this.dataSources.splice(i, 1);
+    }
+    removeForm(formController) {
+        console.log('PageController.removeForm', formController.getTitle());
+        const i = this.forms.indexOf(formController);
+        if (i === -1) throw new Error('no such formController');
+        this.forms.splice(i, 1);
+    }
+
     getActions() {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},

@@ -133,7 +133,17 @@ class TableController extends DocumentController {
                 await pageLinkController.loadPage();
             }
             const pageController = pageLinkController.pageController;
-            console.log('pageController:', pageController);
+            // console.log('pageController:', pageController);
+            const form = await pageController.model.newForm(params);
+            console.log('form:', form);
+
+            const formController = pageController.createForm(form);
+            await EditorController.editorController.treeWidget2.select(formController);
+
+
+
+
+
 
             $('#modal').modal('hide');
 

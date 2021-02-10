@@ -51,7 +51,7 @@ class Database extends Model {
             controller: 'Database',
             action    : 'save',
             params    : Helper.encodeObject({
-                database: this.data['@attributes'].name,
+                database: this.getName(),
                 attr    : name,
                 value   : value
             })
@@ -65,7 +65,7 @@ class Database extends Model {
             controller: 'Database',
             action    : 'delete',
             params    : Helper.encodeObject({
-                database: this.data['@attributes'].name
+                database: this.getName()
             })
         });
     }
@@ -80,7 +80,7 @@ class Database extends Model {
             controller: 'Param',
             action    : '_new',
             params    : Helper.encodeObject({
-                database: this.data['@attributes'].name,
+                database: this.getName(),
                 name    : name
             })
         });
@@ -92,7 +92,7 @@ class Database extends Model {
             controller: 'Table',
             action    : '_new',
             params    : Helper.encodeObject({
-                database: this.data['@attributes'].name,
+                database: this.getName(),
                 name    : params.name,
                 columns : params.columns
             })
@@ -107,7 +107,7 @@ class Database extends Model {
             action    : 'getView',
             params    : Helper.encodeObject({
                 view    : view,
-                database: this.data !== undefined ? this.data['@attributes'].name : null
+                database: this.data !== undefined ? this.getName() : null
             })
         });
     }
@@ -117,7 +117,7 @@ class Database extends Model {
             controller: 'Database',
             action    : 'getTableInfo',
             params    : Helper.encodeObject({
-                database: this.data !== undefined ? this.data['@attributes'].name : null,
+                database: this.data !== undefined ? this.getName() : null,
                 table   : table
             })
         });
