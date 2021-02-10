@@ -31,6 +31,9 @@ class EditorController {
 
         // view
         Helper.createReactComponent(document.getElementById('sidebar'), EditorView, {ctrl: this});
+
+        // view 2
+        Helper.createReactComponent(document.getElementById('root2'), EditorView2, {ctrl: this});
     }
 
     deinit() {
