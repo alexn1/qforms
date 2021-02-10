@@ -11,7 +11,7 @@ class Field extends Model {
             controller: 'Field',
             action    : 'save',
             params    : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName(),
                 attr        : name,
@@ -26,7 +26,7 @@ class Field extends Model {
             controller : 'Field',
             action     : 'delete',
             params     : Helper.encodeObject({
-                pageFileName:this.form.page.pageLink.data['@attributes'].fileName,
+                pageFileName:this.form.page.pageLink.getFileName(),
                 form        :this.form.getName(),
                 field       :this.getName()
             })
@@ -84,7 +84,7 @@ class Field extends Model {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
-                class: this.data['@class']
+                class: this.getClassName()
             })
         });
     }
@@ -97,7 +97,7 @@ class Field extends Model {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
-                class: this.data['@class']
+                class: this.getClassName()
             })
         });
     }
@@ -119,7 +119,7 @@ class Field extends Model {
             controller : 'Field',
             action     : 'moveUp',
             params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
             })
@@ -132,7 +132,7 @@ class Field extends Model {
             controller : 'Field',
             action     : 'moveDown',
             params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
             })

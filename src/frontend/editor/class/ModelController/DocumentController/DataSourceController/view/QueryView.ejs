@@ -1,7 +1,7 @@
 <div class="full">
     <div class="TabWidget full">
         <div>
-            <% if (model.data['@class'] === 'SqlDataSource') {  %>
+            <% if (model.getClassName() === 'SqlDataSource') {  %>
                 <div>
                     <div class="full flex-rows" style="background-color: #bbb;">
                         <div class="flex-min" style="background-color: white;padding: 5px;">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <ul>
-            <% if (model.data['@class'] === 'SqlDataSource') {  %>
+            <% if (model.getClassName() === 'SqlDataSource') {  %>
                 <li class="tabProperties">
                     <span>Properties</span>
                 </li>

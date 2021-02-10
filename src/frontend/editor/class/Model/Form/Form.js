@@ -67,7 +67,7 @@ class Form extends Model {
             controller: 'Form',
             action    : 'save',
             params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName(),
                 attr        : name,
                 value       : value
@@ -82,7 +82,7 @@ class Form extends Model {
             controller: 'Form',
             action    : 'delete',
             params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
             })
         });
@@ -96,7 +96,7 @@ class Form extends Model {
             controller: 'Form',
             action    : 'moveUp',
             params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
             })
         };
@@ -108,7 +108,7 @@ class Form extends Model {
             controller: 'Form',
             action    : 'moveDown',
             params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
             })
         };
@@ -116,7 +116,7 @@ class Form extends Model {
     }
 
     async newField(params) {
-        params['pageFileName'] = this.page.pageLink.data['@attributes'].fileName;
+        params['pageFileName'] = this.page.pageLink.getFileName();
         params['form']         = this.getName();
         return await QForms.doHttpRequest({
             controller: 'Field',
@@ -126,7 +126,7 @@ class Form extends Model {
     }
 
     async newControl(params) {
-        params['pageFileName'] = this.page.pageLink.data['@attributes'].fileName;
+        params['pageFileName'] = this.page.pageLink.getFileName();
         params['form']         = this.getName();
         return await QForms.doHttpRequest({
             controller: 'Control',
@@ -146,7 +146,7 @@ class Form extends Model {
     }
 
     async newDataSource(params) {
-        params['page']  = this.page.pageLink.data['@attributes'].fileName;
+        params['page']  = this.page.pageLink.getFileName();
         params['form']  = this.getName();
         return await QForms.doHttpRequest({
             controller: 'DataSource',
@@ -199,7 +199,7 @@ class Form extends Model {
             params    : Helper.encodeObject({
                 page : this.page.getName(),
                 form : this.getName(),
-                class: this.data['@class']
+                class: this.getClassName()
             })
         });
     }
@@ -211,7 +211,7 @@ class Form extends Model {
             params    : Helper.encodeObject({
                 page : this.page.getName(),
                 form : this.getName(),
-                class: this.data['@class']
+                class: this.getClassName()
             })
         });
     }

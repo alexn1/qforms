@@ -44,10 +44,9 @@ class FieldController extends VisualController {
         });
         $("#modal button[name='change']").click(function() {
             const fieldClass = $("#modal select[id='fieldClass']").val();
-            if (self.model.data['@class'] !== fieldClass) {
-                self.model.changeClass({class:fieldClass}).then((data) => {
+            if (self.model.getClassName() !== fieldClass) {
+                self.model.changeClass({class: fieldClass}).then((data) => {
                     //console.log(data);
-                    // self.item.setCaption(FieldController.prototype.getCaption(self.model.data));
                     EditorController.editorController.fillPropertyGrid(self);
                 });
             }

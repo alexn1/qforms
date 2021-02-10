@@ -193,7 +193,7 @@ class DataSourceController extends DocumentController {
         });
 
         // properties
-        if (self.model.data['@class'] === 'SqlDataSource') {
+        if (self.model.getClassName() === 'SqlDataSource') {
             self.$view.find('.wndSingleQuery').css('display', 'block');
             self.initCmSingleQuery();
         }

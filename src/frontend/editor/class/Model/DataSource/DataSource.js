@@ -37,12 +37,12 @@ class DataSource extends Model {
     static async create(parent, params) {
         if (parent instanceof Form) {
             const form = parent;
-            params['page']  = form.page.pageLink.data['@attributes'].fileName;
+            params['page']  = form.page.pageLink.getFileName();
             params['form']  = form.getName();
         }
         if (parent instanceof Page) {
             const page = parent;
-            params['page']  = page.pageLink.data['@attributes'].fileName;
+            params['page']  = page.pageLink.getFileName();
         }
         return await QForms.doHttpRequest({
             controller: 'DataSource',
@@ -63,11 +63,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof Form) {
             args.params.form         = Helper.encodeValue(this.parent.getName());
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
         const data = await QForms.doHttpRequest(args);
         this.data['@attributes'][name] = value;
@@ -83,11 +83,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof Form) {
             args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
         await QForms.doHttpRequest(args);
     }
@@ -105,11 +105,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof Form) {
             args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
         return await QForms.doHttpRequest(args);
     }
@@ -123,11 +123,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof Form) {
             args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
         return await QForms.doHttpRequest(args);
     }
@@ -142,11 +142,11 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Form) {
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form = Helper.encodeValue(this.parent.getName());
         }
         if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         return await QForms.doHttpRequest(args);
     }
@@ -162,10 +162,10 @@ class DataSource extends Model {
         };
         if (this.parent instanceof Page) {
 
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.data['@attributes'].fileName : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.getFileName() : undefined);
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.data['@attributes'].fileName : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
             args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
         }
         return await QForms.doHttpRequest(args);
@@ -181,10 +181,10 @@ class DataSource extends Model {
             })
         };
         if (this.parent instanceof Page) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.data['@attributes'].fileName);
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.data['@attributes'].fileName);
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form         = Helper.encodeValue(this.parent.getName());
         }
         return await QForms.doHttpRequest(args);
@@ -196,7 +196,7 @@ class DataSource extends Model {
             action    : 'createController',
             params    : Helper.encodeObject({
                 page        : this.parent.page.getName(),
-                pageFileName: this.parent.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.parent.page.pageLink.getFileName(),
                 form        : this.parent.getName(),
                 dataSource  : this.getName()
             })

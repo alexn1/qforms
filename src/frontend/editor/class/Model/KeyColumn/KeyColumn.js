@@ -12,7 +12,7 @@ class KeyColumn extends Model {
             action    : 'save',
             params    : Helper.encodeObject({
                 form        : this.dataSource.parent.getName(),
-                pageFileName: this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
+                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
                 dataSource  : this.dataSource.getName(),
                 keyColumn   : this.getName(),
                 attr        : name,
@@ -28,7 +28,7 @@ class KeyColumn extends Model {
             controller: 'KeyColumn',
             action    : 'delete',
             params    : Helper.encodeObject({
-                page      : this.dataSource.parent.page.pageLink.data['@attributes'].fileName,
+                page      : this.dataSource.parent.page.pageLink.getFileName(),
                 form      : this.dataSource.parent.getName(),
                 dataSource: this.dataSource.getName(),
                 keyColumn : this.getName()
