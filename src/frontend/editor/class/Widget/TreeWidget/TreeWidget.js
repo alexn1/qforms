@@ -1,4 +1,5 @@
 function TreeWidget_createObject(el) {
+    console.log('TreeWidget_createObject', el);
     el._obj = new TreeWidget(el);
     el._obj.init();
     return el._obj;

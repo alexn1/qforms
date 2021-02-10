@@ -129,8 +129,6 @@ class DatabaseController extends DocumentController {
         this.$divTableInfo = $div.find('.divTableInfo');
         this.treeTables.on('select', this.listeners.select = this.onTableSelect.bind(this));
         for (let i = 0; i < data.tables.length; i++) {
-            //const row = data.tables[i];
-            //self.treeTables.addItem(row[0]);
             const tableName = data.tables[i];
             this.treeTables.addItem(tableName);
         }
