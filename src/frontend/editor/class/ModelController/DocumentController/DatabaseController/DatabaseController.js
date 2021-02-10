@@ -176,12 +176,12 @@ class DatabaseController extends DocumentController {
         this.$divTableInfo.empty();
         this.$divTableInfo.append(html);
         this.$divTableInfo.find('.btnCreateTable').click(() => {
-            this.createTable(tableName, data.tableInfo);
+            this.newTableAction(tableName, data.tableInfo);
         });
     }
 
-    async createTable(tableName, tableInfo) {
-        console.log('DatabaseController.createTable', tableName, tableInfo);
+    async newTableAction(tableName, tableInfo) {
+        console.log('DatabaseController.newTableAction', tableName, tableInfo);
         const params = {
             name   : tableName,
             columns: tableInfo.map(column => ({
@@ -194,9 +194,8 @@ class DatabaseController extends DocumentController {
                 nullable: column.nullable,
             }))
         };
-        const tableData = await this.model.newTable(params);
-
-        // this.addTableItem(tableData).select();
+        const table = await this.model.newTable(params);
+        const tableController = this.createTable2(table);
     }
 
     getCaption(data) {
@@ -207,8 +206,8 @@ class DatabaseController extends DocumentController {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDatabase(this);
-        this.parent.editorController.treeWidget2.select(null);
-        this.parent.editorController.treeWidget2.rerender();
+        EditorController.editorController.treeWidget2.select(null);
+        EditorController.editorController.treeWidget2.rerender();
     }
 
 }

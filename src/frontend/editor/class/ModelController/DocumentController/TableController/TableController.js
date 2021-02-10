@@ -138,7 +138,7 @@ class TableController extends DocumentController {
             const pageItem = applicationController.pageItems[formPage];
             Promise.try(() => {
                 if (pageItem.ctrl instanceof PageLinkController) {
-                    return applicationController.editorController.pageLinkToPage(pageItem);
+                    return EditorController.editorController.pageLinkToPage(pageItem);
                 }
             }).then(() => {
                 const params = formWizard.getFormParams();
@@ -156,8 +156,8 @@ class TableController extends DocumentController {
         console.log('TableController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeTable2(this);
-        this.parent.parent.editorController.treeWidget2.select(null);
-        this.parent.parent.editorController.treeWidget2.rerender();
+        EditorController.editorController.treeWidget2.select(null);
+        EditorController.editorController.treeWidget2.rerender();
     }
 
 }

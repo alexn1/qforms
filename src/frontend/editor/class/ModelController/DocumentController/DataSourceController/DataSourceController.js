@@ -352,7 +352,7 @@ class DataSourceController extends DocumentController {
         console.log('DataSourceController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDataSource(this);
-        this.parent.editorController.treeWidget2.select(null);
-        this.parent.editorController.treeWidget2.rerender();
+        EditorController.editorController.treeWidget2.select(null);
+        EditorController.editorController.treeWidget2.rerender();
     }
 }

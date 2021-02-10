@@ -165,8 +165,8 @@ class PageController extends VisualController {
     async delete() {
         await this.model.delete();
         this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        this.pageLinkController.parent.editorController.treeWidget2.select(null);
-        this.pageLinkController.parent.editorController.treeWidget2.rerender();
+        EditorController.editorController.treeWidget2.select(null);
+        EditorController.editorController.treeWidget2.rerender();
     }
 
 }

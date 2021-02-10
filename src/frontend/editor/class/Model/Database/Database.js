@@ -88,7 +88,7 @@ class Database extends Model {
 
     async newTable(params) {
         if (!params.name) throw new Error('newTable: no name');
-        return await QForms.doHttpRequest({
+        const data =  await QForms.doHttpRequest({
             controller: 'Table',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -97,6 +97,7 @@ class Database extends Model {
                 columns : params.columns
             })
         });
+        return this.createTable(data);
     }
 
     async getView(view) {
