@@ -1,10 +1,8 @@
 class DocumentController extends ModelController {
-
     constructor(model, parent) {
         super(model, parent);
         this.tab = null;
     }
-
     createTab(docs, element) {
         if (!element) throw new Error('no element');
         // const $div = $('<div style="height:100%;background-color:lightgoldenrodyellow;">sample tab</div>');
@@ -15,5 +13,4 @@ class DocumentController extends ModelController {
         this.tab.ctrl = this;
         docs.selectTab(this.tab);
     }
-
 }

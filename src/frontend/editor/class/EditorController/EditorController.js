@@ -111,7 +111,7 @@ class EditorController {
     }
 
     onItemDoubleClick2 = item => {
-        console.log('EditorController.onItemDoubleClick2', item);
+        console.log('EditorController.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
         if (!controller || !controller instanceof DocumentController) return;
         if (controller.tab) {
