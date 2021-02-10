@@ -1,4 +1,12 @@
 class FormWizard {
+    static create(params) {
+        console.log('FormWizard.create', params);
+        switch (params.model.database.getClassName()) {
+            case 'MySqlDatabase'     : return new MySqlFormWizard(params);
+            case 'PostgreSqlDatabase': return new PostgreSqlFormWizard(params);
+            default: throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
+        }
+    }
 
     constructor(params) {
         console.log('FormWizard.constructor', params);
@@ -7,15 +15,6 @@ class FormWizard {
         this.databaseName  = params.model.database.getName();
         this.tableName     = params.model.getName();
         this.tableColumns  = Object.keys(params.model.data.columns).map(name => params.model.data.columns[name]['@attributes']);
-    }
-
-    static create(params) {
-        console.log('FormWizard.create', params);
-        switch (params.model.database.getClassName()) {
-            case 'MySqlDatabase'     : return new MySqlFormWizard(params);
-            case 'PostgreSqlDatabase': return new PostgreSqlFormWizard(params);
-            default: throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
-        }
     }
 
     getDataSources() {
@@ -42,7 +41,7 @@ class FormWizard {
     }
 
     getField(column) {
-        console.log('FormWizard.getField', column);
+        // console.log('FormWizard.getField', column);
         let field = {
             class: this.getFieldClass(column),
             name : column.name

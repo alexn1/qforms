@@ -123,19 +123,22 @@ class TableController extends DocumentController {
                 formName    : formName,
                 formCaption : formCaption,
             });
+            const params = formWizard.getFormParams();
+            console.log('params:', params);
+
+            /*
             const pageItem = applicationController.pageItems[formPage];
             Promise.try(() => {
                 if (pageItem.ctrl instanceof PageLinkController) {
                     return EditorController.editorController.pageLinkToPage(pageItem);
                 }
             }).then(() => {
-                const params = formWizard.getFormParams();
-                console.log('params:', params);
+
                 return pageItem.ctrl.model.newForm(params).then((formData) => {
                     pageItem.ctrl.addFormItem(formData).select();
                     $('#modal').modal('hide');
                 });
-            });
+            });*/
         });
         $('#modal').modal('show');
         $("#modal input[id='formPage']").focus();
