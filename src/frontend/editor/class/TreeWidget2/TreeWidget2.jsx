@@ -35,7 +35,7 @@ class TreeWidget2 extends ReactComponent {
     render() {
         console.log('TreeWidget2.render'/*, this.props.items*/);
         const items = this.props.items;
-        return <div className={'TreeWidget2'}>
+        return <div className={this.getClassName()}>
             <ul>
                 {items.map(item =>
                     <TreeItem2
