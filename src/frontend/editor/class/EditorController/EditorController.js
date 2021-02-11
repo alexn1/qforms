@@ -139,6 +139,7 @@ class EditorController {
         if (!document) {
             document = await controller.createDocument();
             this.documents.push(document);
+            // console.log('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
         this.view2.rerender();
