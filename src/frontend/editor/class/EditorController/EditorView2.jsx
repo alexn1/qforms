@@ -1,7 +1,12 @@
 class EditorView2 extends ReactComponent {
+    onTabClose = i => {
+        console.log('EditorView2.onTabClose', i);
+    }
     render() {
         return <Tab
             classList={['full']}
+            canClose={true}
+            onTabClose={this.onTabClose}
             tabs={[
                 {
                     name: 'tab1',
