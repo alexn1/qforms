@@ -26,4 +26,7 @@ class ModelController extends EventEmitter {
     async doAction(name) {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
+    getDocumentView() {
+        return null;
+    }
 }

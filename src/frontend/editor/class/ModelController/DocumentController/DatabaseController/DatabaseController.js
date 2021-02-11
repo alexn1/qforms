@@ -174,5 +174,7 @@ class DatabaseController extends DocumentController {
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
     }
-
+    getDocumentView() {
+        return DatabaseView;
+    }
 }
