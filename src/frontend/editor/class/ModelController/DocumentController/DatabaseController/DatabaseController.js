@@ -119,9 +119,12 @@ class DatabaseController extends DocumentController {
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         const $div = $(result.view);
         this.initView($div, result.data);
-        super.createTab(docs, $div.get(0));
+        await super.createTab(docs, $div.get(0));
     }
-
+    async createDocument() {
+        const document = await super.createDocument();
+        return document;
+    }
     initView($div, data) {
         this.tables        = data.tables;
         this.tableView     = data.tableView;

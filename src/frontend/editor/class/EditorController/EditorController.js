@@ -117,25 +117,27 @@ class EditorController {
         });
     }
 
-    onItemDoubleClick2 = item => {
+    onItemDoubleClick2 = async item => {
         console.log('EditorController.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
-        if (!controller || !controller instanceof DocumentController) return;
-        this.openDocument(controller);
+        if (!controller || !(controller instanceof DocumentController)) return;
+        await this.openDocument(controller);
     }
     onTabClosingByUser(e) {
         this.docs.closeTab(e.tab);
     }
-    openDocument(controller) {
+    async openDocument(controller) {
         console.log('EditorController.openDocument', controller.getTitle());
         if (controller.tab) {
             this.docs.selectTab(controller.tab);
         } else {
             controller.createTab(this.docs);
         }
+
+        // document
         let document = this.findDocument(controller);
         if (!document) {
-            document = {controller};
+            document = await controller.createDocument();
             this.documents.push(document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
