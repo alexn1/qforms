@@ -117,14 +117,18 @@ class EditorController {
         console.log('EditorController.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
         if (!controller || !controller instanceof DocumentController) return;
+        this.openDocument(controller);
+    }
+    onTabClosingByUser(e) {
+        this.docs.closeTab(e.tab);
+    }
+    openDocument(controller) {
+        console.log('EditorController.openDocument', controller.getTitle());
         if (controller.tab) {
             this.docs.selectTab(controller.tab);
         } else {
             controller.createTab(this.docs);
         }
-    }
-    onTabClosingByUser(e) {
-        this.docs.closeTab(e.tab);
     }
 
 }
