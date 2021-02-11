@@ -2,23 +2,26 @@ class EditorView2 extends ReactComponent {
     onTabClose = i => {
         console.log('EditorView2.onTabClose', i);
     }
+    renderTab(document) {
+        return <div>
+            {document.controller.model.getName()}
+        </div>;
+    }
+    getTabs() {
+        return this.props.ctrl.documents.map(document => ({
+            name   : document.controller.model.getName(),
+            title  : document.controller.model.getName(),
+            content: this.renderTab(document)
+        }));
+    }
     render() {
+        const ctrl = this.props.ctrl;
         return <Tab
             classList={['full']}
             canClose={true}
-            onTabClose={this.onTabClose}
-            tabs={[
-                {
-                    name: 'tab1',
-                    title: 'Tab1',
-                    content: <div>tab1 content</div>
-                },
-                {
-                    name: 'tab2',
-                    title: 'Tab2',
-                    content: <div>tab2 content</div>
-                }
-            ]}
+            onTabClose={ctrl.onDocumentClose}
+            onCreate={c => ctrl.tabWidget = c}
+            tabs={this.getTabs()}
         />;
     }
 }

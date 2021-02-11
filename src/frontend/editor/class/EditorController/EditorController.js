@@ -10,6 +10,10 @@ class EditorController {
         this.pg = null;
         this.treeWidget2 = null;
         this.items = null;              // treeWidget2 items
+        this.documents = [];
+        this.view = null;
+        this.view2 = null;
+        this.tabWidget = null;
     }
 
     init() {
@@ -30,10 +34,10 @@ class EditorController {
         this.items = [this.appCtrl];
 
         // view
-        Helper.createReactComponent(document.getElementById('sidebar'), EditorView, {ctrl: this});
+        this.view = Helper.createReactComponent(document.getElementById('sidebar'), EditorView, {ctrl: this});
 
         // view 2
-        Helper.createReactComponent(document.getElementById('root2'), EditorView2, {ctrl: this});
+        this.view2 = Helper.createReactComponent(document.getElementById('root2'), EditorView2, {ctrl: this});
     }
 
     deinit() {
@@ -129,6 +133,34 @@ class EditorController {
         } else {
             controller.createTab(this.docs);
         }
+        let document = this.findDocument(controller);
+        if (!document) {
+            document = {controller};
+            this.documents.push(document);
+        }
+        this.tabWidget.state.active = this.documents.indexOf(document);
+        this.view2.rerender();
+    }
+    findDocument(controller) {
+        return this.documents.find(document => document.controller === controller) || null;
+    }
+    onDocumentClose = i => {
+        console.log('EditorController.onDocumentClose', i, this.tabWidget.state.active);
+        const document = this.documents[i];
+        const activeDocument = this.documents[this.tabWidget.state.active];
+        this.documents.splice(i, 1);
+        if (document === activeDocument) {
+            if (this.documents.length) {
+                if (this.tabWidget.state.active > this.documents.length) {
+                    this.tabWidget.state.active = this.documents.length - 1;
+                }
+            } else {
+                this.tabWidget.state.active = null;
+            }
+        } else {
+            this.tabWidget.state.active = this.documents.indexOf(activeDocument);
+        }
+        this.view2.rerender();
     }
 
 }
