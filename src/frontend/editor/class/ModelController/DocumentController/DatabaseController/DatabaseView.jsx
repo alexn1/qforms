@@ -3,6 +3,8 @@ class DatabaseView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return <Grid
             columns={Object.keys(ctrl.tableInfo[0]).map(name => ({name: name, title: name, width: 100}))}
+            rows={ctrl.tableInfo}
+            getRowKey={row => row.name}
         />;
     }
     render() {
@@ -18,7 +20,7 @@ class DatabaseView extends ReactComponent {
             </div>
             <TreeWidget2
                 classList={['sidebar']}
-                items={document.tables.map(tableName => ({getTitle: () => tableName}))}
+                items={document.treeWidgetItems}
                 onItemSelect={ctrl.onTableSelect2}
             />
         </div>;
