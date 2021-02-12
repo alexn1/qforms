@@ -11,6 +11,7 @@ class DatabaseView extends ReactComponent {
             <TreeWidget2
                 classList={['sidebar']}
                 items={document.tables.map(tableName => ({getTitle: () => tableName}))}
+                onItemSelect={ctrl.onTableSelect2}
             />
         </div>;
     }
