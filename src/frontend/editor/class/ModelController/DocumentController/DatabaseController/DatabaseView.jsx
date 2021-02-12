@@ -1,11 +1,20 @@
 class DatabaseView extends ReactComponent {
+    renderGrid() {
+        return <Grid
+            columns={[
+                {name: 'abc', title: 'Abc', width: 100}
+            ]}
+        />;
+    }
     render() {
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return <div className={'DatabaseView place'}>
             <div className={'client place'}>
                 <div className={'frame'}>
-                    <div className={'divTableInfo'}></div>
+                    <div className={'divTableInfo'}>
+                        {ctrl.tableInfo && this.renderGrid()}
+                    </div>
                 </div>
             </div>
             <TreeWidget2

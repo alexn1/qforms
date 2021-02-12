@@ -1,7 +1,8 @@
 class EditorView2 extends ReactComponent {
     renderTab(document) {
-        if (!document.controller.getDocumentView()) return null;
-        return React.createElement(document.controller.getDocumentView(), {
+        if (!document.controller.getDocumentViewClass()) return null;
+        return React.createElement(document.controller.getDocumentViewClass(), {
+            onCreate: c => document.controller.documentView = c,
             document: document,
             ctrl    : document.controller
         });

@@ -2,6 +2,7 @@ class DocumentController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.tab = null;
+        this.documentView = null;
     }
     async createTab(docs, element) {
         if (!element) throw new Error('no element');

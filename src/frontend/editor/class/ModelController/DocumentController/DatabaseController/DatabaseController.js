@@ -157,6 +157,7 @@ class DatabaseController extends DocumentController {
         const tableName = item.getTitle();
         const data = await this.model.getTableInfo(tableName);
         this.tableInfo = data.tableInfo;
+        this.documentView.rerender();
         // console.log('tableInfo:', this.tableInfo);
     }
     async newTableAction(tableName, tableInfo) {
@@ -187,7 +188,7 @@ class DatabaseController extends DocumentController {
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
     }
-    getDocumentView() {
+    getDocumentViewClass() {
         return DatabaseView;
     }
 }
