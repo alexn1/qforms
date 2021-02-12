@@ -157,7 +157,7 @@ class DatabaseController extends DocumentController {
         const tableName = item.getTitle();
         const data = await this.model.getTableInfo(tableName);
         this.tableInfo = data.tableInfo;
-        console.log('tableInfo:', this.tableInfo);
+        // console.log('tableInfo:', this.tableInfo);
     }
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
