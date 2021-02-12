@@ -1,9 +1,8 @@
 class DatabaseView extends ReactComponent {
     renderGrid() {
+        const ctrl = this.props.ctrl;
         return <Grid
-            columns={[
-                {name: 'abc', title: 'Abc', width: 100}
-            ]}
+            columns={Object.keys(ctrl.tableInfo[0]).map(name => ({name: name, title: name, width: 100}))}
         />;
     }
     render() {
