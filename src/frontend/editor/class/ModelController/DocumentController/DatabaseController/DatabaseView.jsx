@@ -3,7 +3,15 @@ class DatabaseView extends ReactComponent {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return <Grid
-            columns={Object.keys(ctrl.tableInfo[0]).map(name => ({name: name, title: name, width: 100}))}
+            columns={[
+                {name: 'name', title: 'name', width: 100},
+                {name: 'type', title: 'type', width: 60},
+                {name: 'key', title: 'key', width: 60},
+                {name: 'auto', title: 'auto', width: 60},
+                {name: 'nullable', title: 'nullable', width: 60},
+                {name: 'dbType', title: 'dbType', width: 200},
+                {name: 'comment', title: 'comment', width: 100},
+            ]}
             rows={ctrl.tableInfo}
             getRowKey={row => row.name}
             updated={Date.now()}
