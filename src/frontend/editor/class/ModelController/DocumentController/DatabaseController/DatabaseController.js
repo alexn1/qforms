@@ -22,6 +22,7 @@ class DatabaseController extends DocumentController {
                 items: this.tables2
             }
         ];
+        this.tableInfo = null;
     }
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
@@ -155,7 +156,8 @@ class DatabaseController extends DocumentController {
         console.log('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
         const data = await this.model.getTableInfo(tableName);
-        console.log('tableInfo:', data.tableInfo);
+        this.tableInfo = data.tableInfo;
+        console.log('tableInfo:', this.tableInfo);
     }
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
