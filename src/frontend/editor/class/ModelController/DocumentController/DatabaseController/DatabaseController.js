@@ -3,10 +3,13 @@ class DatabaseController extends DocumentController {
         super(model, parent);
 
         // document view
-        this.treeTables            = null;
-        this.$divTableInfo         = null;
-        this.tableView             = null;
-        this.tables                = null;
+        // this.treeTables            = null;
+        // this.$divTableInfo         = null;
+        // this.tableView             = null;
+        // this.tables                = null;
+
+        this.tableName = null;
+        this.tableInfo = null;
 
         this.params  = [];
         this.tables2 = [];
@@ -22,7 +25,6 @@ class DatabaseController extends DocumentController {
                 items: this.tables2
             }
         ];
-        this.tableInfo = null;
     }
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
@@ -31,14 +33,12 @@ class DatabaseController extends DocumentController {
         this.model.params.forEach(param => this.createParam(param));
         this.model.tables.forEach(table => this.createTable2(table));
     }
-
     createParam(model) {
         const param = new ParamController(model, this);
         param.init();
         this.params.push(param);
         return param;
     }
-
     createTable2(model) {
         const table = new TableController(model, this);
         table.init();
@@ -57,7 +57,6 @@ class DatabaseController extends DocumentController {
         if (i === -1) throw new Error('no such tableController');
         this.tables2.splice(i, 1);
     }
-
     getActions() {
         return [
             {'action':'newParam','caption':'New Param'},
@@ -66,7 +65,6 @@ class DatabaseController extends DocumentController {
             {'action':'delete','caption':'Delete'}
         ];
     }
-
     async doAction(name) {
         switch (name) {
             case 'newParam':
@@ -80,7 +78,6 @@ class DatabaseController extends DocumentController {
                 break;
         }
     }
-
     async actionNewParam() {
         const self = this;
         const result = await ParamController.getView('new.html');
@@ -96,7 +93,6 @@ class DatabaseController extends DocumentController {
         $('#myModal').modal('show');
         $("#myModal input[id='paramName']").focus();
     }
-
     actionNewTable() {
         const self = this;
         TableController.getView('new.html').then((result) => {
@@ -114,13 +110,12 @@ class DatabaseController extends DocumentController {
             $("#myModal input[id='tableName']").focus();
         });
     }
-
     async createTab(docs) {
-        console.log('DatabaseController.createTab');
+        /*console.log('DatabaseController.createTab');
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         const $div = $(result.view);
         this.initView($div, result.data);
-        await super.createTab(docs, $div.get(0));
+        await super.createTab(docs, $div.get(0));*/
     }
     async createDocument() {
         const document = await super.createDocument();
@@ -129,7 +124,7 @@ class DatabaseController extends DocumentController {
         document.treeWidgetItems = result.data.tables.map(tableName => ({getTitle: () => tableName}))
         return document;
     }
-    initView($div, data) {
+    /*initView($div, data) {
         this.tables        = data.tables;
         this.tableView     = data.tableView;
         this.treeTables    = TreeWidget_createObject($div.find('.tcTables').get(0));
@@ -139,9 +134,9 @@ class DatabaseController extends DocumentController {
             const tableName = data.tables[i];
             this.treeTables.addItem(tableName);
         }
-    }
+    }*/
 
-    async onTableSelect(e) {
+    /*async onTableSelect(e) {
         console.log('DatabaseController.onTableSelect');
         const tableName = e.item.caption;
         const data = await this.model.getTableInfo(tableName);
@@ -151,7 +146,7 @@ class DatabaseController extends DocumentController {
         this.$divTableInfo.find('.btnCreateTable').click(() => {
             this.newTableAction(tableName, data.tableInfo);
         });
-    }
+    }*/
     onTableSelect2 = async item => {
         console.log('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
