@@ -87,7 +87,6 @@ class TableController extends DocumentController {
         });
         super.createTab(docs, $div.get(0));
     }
-
     static async getView(view) {
         console.log('TableController.getView', view);
         return QForms.doHttpRequest({
