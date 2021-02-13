@@ -153,5 +153,8 @@ class TableController extends DocumentController {
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
     }
+    getDocumentViewClass() {
+        return TableView;
+    }
 
 }
