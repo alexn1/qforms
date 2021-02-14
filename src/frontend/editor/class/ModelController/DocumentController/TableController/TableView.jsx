@@ -16,12 +16,14 @@ class TableView extends ReactComponent {
                 <div className="frame">
                     <table>
                         <thead>
-                            <th>name</th>
-                            <th>caption</th>
-                            <th>type</th>
-                            <th>key</th>
-                            <th>auto</th>
-                            <th>nullable</th>
+                            <tr>
+                                <th>name</th>
+                                <th>caption</th>
+                                <th>type</th>
+                                <th>key</th>
+                                <th>auto</th>
+                                <th>nullable</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {this.renderRows()}
