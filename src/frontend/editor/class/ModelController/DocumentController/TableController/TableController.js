@@ -29,9 +29,18 @@ class TableController extends DocumentController {
 
     getActions() {
         return [
-            {'action':'newColumn','caption':'New Column'},
-            {'action':'','caption':'-'},
-            {'action': 'delete', 'caption': 'Delete'},
+            {
+                'action': 'newColumn',
+                'caption': 'New Column'
+            },
+            {
+                'action': '',
+                'caption': '-'
+            },
+            {
+                'action': 'delete',
+                'caption': 'Delete'
+            },
         ];
     }
 
@@ -76,14 +85,14 @@ class TableController extends DocumentController {
     }
 
     async createTab(docs) {
-        console.log('TableController.createTab');
+        /*console.log('TableController.createTab');
         const result = await TableController.getView('TableView/TableView.ejs');
         const html = QForms.render(result.view, {model: this.model});
         const $div = $(html);
         $div.find('.btnCreateForm').click(() => {
             this.createFormAction();
         });
-        super.createTab(docs, $div.get(0));
+        super.createTab(docs, $div.get(0));*/
     }
     onCreateFormButtonClick = async e => {
         console.log('TableController.onCreateFormButtonClick');
