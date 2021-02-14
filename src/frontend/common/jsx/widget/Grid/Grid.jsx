@@ -137,8 +137,11 @@ class Grid extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
-        if (nextProps.updated - this.props.updated) return true;
-        return false;
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated) return true;
+            return false;
+        }
+        return true;
     }
     render() {
         console.log('Grid.render', this.props.name);

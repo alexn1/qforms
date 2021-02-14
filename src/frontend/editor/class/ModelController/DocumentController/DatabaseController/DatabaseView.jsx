@@ -14,7 +14,6 @@ class DatabaseView extends ReactComponent {
             ]}
             rows={ctrl.tableInfo}
             getRowKey={row => row.name}
-            updated={Date.now()}
         />;
     }
     render() {
