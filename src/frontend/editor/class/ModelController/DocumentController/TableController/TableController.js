@@ -135,8 +135,8 @@ class TableController extends DocumentController {
             const formController = pageController.createForm(form);
             await EditorController.editorController.treeWidget2.select(formController);
             formController.view.parent.open();
-            this.items[1].view.rerender();
-            this.editorController.treeWidget2.scrollToSelected();
+            pageLinkController.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
 
             $('#modal').modal('hide');
         });
