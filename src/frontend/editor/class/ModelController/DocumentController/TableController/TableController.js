@@ -76,14 +76,12 @@ class TableController extends DocumentController {
     }
 
     async createTab(docs) {
-        const self = this;
         console.log('TableController.createTab');
-        // const $div = $('<div style="height:100%;background-color:lightgoldenrodyellow;">sample tab</div>');
         const result = await TableController.getView('TableView/TableView.ejs');
         const html = QForms.render(result.view, {model: this.model});
         const $div = $(html);
         $div.find('.btnCreateForm').click(() => {
-            self.createForm();
+            this.createFormAction();
         });
         super.createTab(docs, $div.get(0));
     }
@@ -96,8 +94,8 @@ class TableController extends DocumentController {
         });
     }
 
-    async createForm() {
-        console.log('TableController.createForm');
+    async createFormAction() {
+        console.log('TableController.createFormAction');
         const result = await TableController.getView('newForm.ejs');
         const databaseController = this.parent;
         const applicationController = databaseController.parent;
