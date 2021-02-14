@@ -40,6 +40,9 @@ class Model {
     getAttr(name) {
         return this.data['@attributes'][name];
     }
+    getAttributes() {
+        return this.data['@attributes'];
+    }
 
     setAttr(name, value) {
         this.data['@attributes'][name] = value;

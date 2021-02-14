@@ -98,15 +98,16 @@ class TableFormView extends ReactComponent {
             <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
                 <Grid
-                      name={ctrl.model.getFullName()}
-                      columns={ctrl.getGridColumns()}
-                      rows={ctrl.getRows()}
-                      getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
-                      onDoubleClick={ctrl.onGridCellDblClick}
-                      onActiveRowChange={ctrl.onActiveRowChange}
-                      getActiveRowIndex={ctrl.getActiveRowIndex}
-                      renderGridCellView={this.renderGridCellView}
-                      updated={ctrl.getUpdated()}
+                    classList={['flex-max']}
+                    name={ctrl.model.getFullName()}
+                    columns={ctrl.getGridColumns()}
+                    rows={ctrl.getRows()}
+                    getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
+                    onDoubleClick={ctrl.onGridCellDblClick}
+                    onActiveRowChange={ctrl.onActiveRowChange}
+                    getActiveRowIndex={ctrl.getActiveRowIndex}
+                    renderGridCellView={this.renderGridCellView}
+                    updated={ctrl.getUpdated()}
                 />
                 {dataSource.constructor.name === 'SqlDataSource' && this.renderPaging()}
             </div>

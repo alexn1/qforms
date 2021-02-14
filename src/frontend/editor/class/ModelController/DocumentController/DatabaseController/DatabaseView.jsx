@@ -3,6 +3,7 @@ class DatabaseView extends ReactComponent {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return <Grid
+            classList={['flex-max']}
             columns={[
                 {name: 'name', title: 'name', width: 100},
                 {name: 'type', title: 'type', width: 60},

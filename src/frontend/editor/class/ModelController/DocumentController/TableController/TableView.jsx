@@ -14,23 +14,20 @@ class TableView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <div className="client place">
-                <div className="frame">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>caption</th>
-                                <th>type</th>
-                                <th>key</th>
-                                <th>auto</th>
-                                <th>nullable</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderRows()}
-                        </tbody>
-                    </table>
-                    <br/>
+                <div className="frame flex-rows">
+                    <Grid
+                        classList={['flex-max']}
+                        columns={[
+                            {name: 'name', title: 'name', width: 100},
+                            {name: 'caption', title: 'caption', width: 100},
+                            {name: 'type', title: 'type', width: 60},
+                            {name: 'key', title: 'key', width: 60},
+                            {name: 'auto', title: 'auto', width: 60},
+                            {name: 'nullable', title: 'nullable', width: 60},
+                        ]}
+                        rows={ctrl.columns.map(column => column.model.getAttributes())}
+                        getRowKey={row => row.name}
+                    />
                     <Button onClick={ctrl.onCreateFormButtonClick}>Create Form</Button>
                 </div>
             </div>

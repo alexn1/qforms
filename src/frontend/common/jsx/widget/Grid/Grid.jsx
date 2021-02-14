@@ -146,7 +146,7 @@ class Grid extends ReactComponent {
     render() {
         console.log('Grid.render', this.props.name);
         return (
-            <div className="Grid flex-max">
+            <div className={this.getClassName()}>
                 <div className="head" ref={this.head}><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
                 <div className="block"/>
                 <div className="body" onScroll={this.onBodyScroll}>
