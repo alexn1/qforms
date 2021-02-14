@@ -85,6 +85,10 @@ class TableController extends DocumentController {
         });
         super.createTab(docs, $div.get(0));
     }
+    onCreateFormButtonClick = async e => {
+        console.log('TableController.onCreateFormButtonClick');
+        await this.createFormAction();
+    }
     static async getView(view) {
         console.log('TableController.getView', view);
         return QForms.doHttpRequest({

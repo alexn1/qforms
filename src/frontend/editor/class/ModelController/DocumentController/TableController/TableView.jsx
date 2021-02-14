@@ -11,6 +11,7 @@ class TableView extends ReactComponent {
         </tr>);
     }
     render() {
+        const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <div className="client place">
                 <div className="frame">
@@ -30,7 +31,7 @@ class TableView extends ReactComponent {
                         </tbody>
                     </table>
                     <br/>
-                    <button className="btnCreateForm">Create Form</button>
+                    <Button onClick={ctrl.onCreateFormButtonClick}>Create Form</Button>
                 </div>
             </div>
         </div>;
