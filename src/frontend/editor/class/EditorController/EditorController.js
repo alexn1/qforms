@@ -142,7 +142,7 @@ class EditorController {
             // console.log('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
-        this.view2.rerender();
+        await this.view2.rerender();
     }
     findDocument(controller) {
         return this.documents.find(document => document.controller === controller) || null;
