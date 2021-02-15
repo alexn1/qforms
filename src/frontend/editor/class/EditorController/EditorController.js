@@ -155,7 +155,7 @@ class EditorController {
         document.controller.documentView = null;
         if (document === activeDocument) {
             if (this.documents.length) {
-                if (this.tabWidget.state.active > this.documents.length) {
+                if (this.tabWidget.state.active >= this.documents.length) {
                     this.tabWidget.state.active = this.documents.length - 1;
                 }
             } else {
