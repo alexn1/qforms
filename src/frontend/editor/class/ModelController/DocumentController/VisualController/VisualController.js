@@ -1,8 +1,15 @@
 class VisualController extends DocumentController {
 
-    /*constructor(model, parent) {
+    constructor(model, parent) {
         super(model, parent);
-    }*/
+        this.$view = null;
+        this.data = null;
+        this.cmTemplateHtml = null;
+        this.cmTemplateCss  = null;
+        this.cmTemplateJs   = null;
+        this.save = null;
+        this.tabWidget = null;
+    }
 
     async createTab(docs) {
         const name = this.model.getFullName('_');
@@ -23,6 +30,7 @@ class VisualController extends DocumentController {
         tab.ctrl = this;
         docs.selectTab(tab);
         this.tab = tab;
+
         // view/code tab
         this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
         this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
