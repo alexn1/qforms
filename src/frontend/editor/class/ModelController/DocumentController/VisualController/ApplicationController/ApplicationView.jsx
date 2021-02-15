@@ -8,9 +8,12 @@ class ApplicationView extends ReactComponent {
     }
     componentDidMount() {
         console.log('ApplicationView.componentDidMount', this.getTextarea());
-        const obj = CodeMirror.fromTextArea(this.getTextarea(), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-        obj.setOption('theme', 'cobalt');
-        obj.setValue('abc');
+        const ctrl = this.props.ctrl;
+        if (ctrl.data.js) {
+            const obj = CodeMirror.fromTextArea(this.getTextarea(), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+            obj.setOption('theme', 'cobalt');
+            obj.setValue(ctrl.data.js);
+        }
     }
     render() {
         return <div className={'ApplicationView full'}>

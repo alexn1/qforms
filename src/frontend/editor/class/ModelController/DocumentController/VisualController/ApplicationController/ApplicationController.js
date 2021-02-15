@@ -8,6 +8,8 @@ class ApplicationController extends VisualController {
         this.dataSources = [];
         this.pageLinks   = [];
 
+        this.data = null;
+
         // items
         this.opened = true;
         this.items = [
@@ -190,5 +192,11 @@ class ApplicationController extends VisualController {
     getDocumentViewClass() {
         return ApplicationView;
     }
+    async createDocument() {
+        const document = await super.createDocument();
+        const result = await this.model.getView('VisualView.html');
+        this.data = result.data;
 
+        return document;
+    }
 }
