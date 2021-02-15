@@ -5,47 +5,48 @@ class VisualController extends DocumentController {
     }*/
 
     async createTab(docs) {
-        const self = this;
-        const name = self.model.getFullName('_');
-        const caption = self.model.getFullName('/');
-        // get from server all needed to display edit window
-        const result = await self.model.getView('VisualView.html');
-        self.$view          = $(result.view);
-        self.$view.attr('id', name);
-        self.data           = result.data;
-        self.cmTemplateHtml = null;
-        self.cmTemplateCss  = null;
-        self.cmTemplateJs   = null;
-        self.save           = 'ejs';
+        const name = this.model.getFullName('_');
+        const caption = this.model.getFullName('/');
+
+        // get from server all needed to display an edit window
+        const result = await this.model.getView('VisualView.html');
+        this.$view          = $(result.view);
+        this.$view.attr('id', name);
+        this.data           = result.data;
+        this.cmTemplateHtml = null;
+        this.cmTemplateCss  = null;
+        this.cmTemplateJs   = null;
+        this.save           = 'ejs';
+
         // document tab
-        const tab = docs.createTab(self.$view.get(0), caption, function(tab) {tab.ctrl.tab = undefined;});
-        tab.ctrl = self;
+        const tab = docs.createTab(this.$view.get(0), caption, (tab) => {tab.ctrl.tab = undefined;});
+        tab.ctrl = this;
         docs.selectTab(tab);
-        self.tab = tab;
+        this.tab = tab;
         // view/code tab
-        self.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
-        self.tabWidget = new TabWidget(self.$view.children('.TabWidget').get(0));
-        self.tabWidget.init();
-        self.tabWidget.on('tabShow', self.listeners.tabShow = self.tabWidget_TabShow.bind(self));
+        this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
+        this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
+        this.tabWidget.init();
+        this.tabWidget.on('tabShow', this.listeners.tabShow = this.tabWidget_TabShow.bind(this));
 
         // custom view
-        if (self.data.ejs) {
-            self.showCustomView();
+        if (this.data.ejs) {
+            this.showCustomView();
         } else {
-            self.$view.find('.btnCreateView').click(function() {
-                self.btnCreateView_Click();
+            this.$view.find('.btnCreateView').click(() => {
+                this.btnCreateView_Click();
             });
-            self.$view.find('.btnSaveView').css('display', 'none');
+            this.$view.find('.btnSaveView').css('display', 'none');
         }
 
         // custom controller
-        if (self.data.js) {
-            self.showCustomController();
+        if (this.data.js) {
+            this.showCustomController();
         } else {
-            self.$view.find('.btnCreateController').click(function() {
-                self.btnCreateController_Click();
+            this.$view.find('.btnCreateController').click(() => {
+                this.btnCreateController_Click();
             });
-            self.$view.find('.btnSaveController').css('display', 'none');
+            this.$view.find('.btnSaveController').css('display', 'none');
         }
     }
 
@@ -60,23 +61,21 @@ class VisualController extends DocumentController {
     }
 
     showCustomController() {
-        const self = this;
         this.$view.find('.wndJs').css('display', 'block');
         if ($(this.tabWidget.activeTab).hasClass('tabController')) {
             this.initCmTemplateJs();
         }
-        this.$view.find('.btnSaveController').click(function() {self.btnSaveController_Click();});
+        this.$view.find('.btnSaveController').click(() => {this.btnSaveController_Click();});
         this.$view.find('.btnCreateController').css('display', 'none');
         this.$view.find('.btnSaveController').css('display', 'inline-block');
     }
 
     showCustomView() {
-        const self = this;
         this.$view.find('.wndHtml').css('display', 'block');
         this.initCmTemplateHtml();
-        this.$view.find('.btnSaveView').click(function() {self.btnSaveView_Click();});
-        this.$view.find('.btnHtml').click(function() {self.btnHtml_Click();});
-        this.$view.find('.btnCss').click(function() {self.btnCss_Click();});
+        this.$view.find('.btnSaveView').click(() => {this.btnSaveView_Click();});
+        this.$view.find('.btnHtml').click(() => {this.btnHtml_Click();});
+        this.$view.find('.btnCss').click(() => {this.btnCss_Click();});
         this.$view.find('.btnCreateView').css('display', 'none');
         this.$view.find('.btnSaveView').css('display', 'inline-block');
     }

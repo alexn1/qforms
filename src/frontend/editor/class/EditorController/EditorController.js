@@ -166,5 +166,4 @@ class EditorController {
         }
         this.view2.rerender();
     }
-
 }
