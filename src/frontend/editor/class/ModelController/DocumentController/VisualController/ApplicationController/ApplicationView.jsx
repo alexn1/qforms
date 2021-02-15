@@ -14,9 +14,22 @@ class ApplicationView extends ReactComponent {
     }
     render() {
         return <div className={'ApplicationView full'}>
-            <div className="cm-container full ">
-                <textarea ref={this.textarea}/>
+
+
+            <div className="full flex-rows" style={{backgroundColor: "#bbb"}}>
+                <div className="flex-min" style={{backgroundColor: "white", padding: 5}}>
+                    <button className="btn btn-default btn-xs btnCreateController">Create Custom Controller</button>
+                    <button className="btn btn-default btn-xs btnSaveController">Save</button>
+                </div>
+                <div className="flex-max full" style={{overflow: 'auto'}}>
+                    <div className="cm-container full">
+                        <textarea ref={this.textarea}/>
+                    </div>
+                </div>
             </div>
+
+
+
         </div>;
     }
 }
