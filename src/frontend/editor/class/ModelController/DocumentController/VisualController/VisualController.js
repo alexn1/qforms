@@ -2,13 +2,15 @@ class VisualController extends DocumentController {
 
     constructor(model, parent) {
         super(model, parent);
-        this.$view = null;
         this.data = null;
+        this.$view = null;
         this.cmTemplateHtml = null;
         this.cmTemplateCss  = null;
         this.cmTemplateJs   = null;
         this.save = null;
         this.tabWidget = null;
+
+        this.cm   = null;
     }
 
     async createTab(docs) {
@@ -158,6 +160,26 @@ class VisualController extends DocumentController {
         const data = await this.model.createController();
         this.data.js = data.js;
         this.showCustomController();
+    }
+
+    async createDocument() {
+        const document = await super.createDocument();
+        const result = await this.model.getView('VisualView.html');
+        this.data = result.data;
+        return document;
+    }
+    onCMCreate(cm) {
+        this.cm = cm;
+    }
+    onControllerSave = async e => {
+        console.log('ApplicationController.onControllerSave'/*, this.cm.getValue()*/);
+        this.model.saveController(this.cm.getValue());
+    }
+    onCreateCustomController = async e => {
+        console.log('ApplicationController.onCreateCustomController');
+        const data = await this.model.createController();
+        this.data.js = data.js;
+        this.document.view.rerender();
     }
 
 }

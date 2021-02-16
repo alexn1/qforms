@@ -25,8 +25,8 @@ class ApplicationController extends VisualController {
             }
         ];
 
-        this.data = null;
-        this.cm   = null;
+
+
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
@@ -191,24 +191,5 @@ class ApplicationController extends VisualController {
     }
     getDocumentViewClass() {
         return ApplicationView;
-    }
-    async createDocument() {
-        const document = await super.createDocument();
-        const result = await this.model.getView('VisualView.html');
-        this.data = result.data;
-        return document;
-    }
-    onCMCreate(cm) {
-        this.cm = cm;
-    }
-    onControllerSave = async e => {
-        console.log('ApplicationController.onControllerSave'/*, this.cm.getValue()*/);
-        this.model.saveController(this.cm.getValue());
-    }
-    onCreateCustomController = async e => {
-        console.log('ApplicationController.onCreateCustomController');
-        const data = await this.model.createController();
-        this.data.js = data.js;
-        this.document.view.rerender();
     }
 }
