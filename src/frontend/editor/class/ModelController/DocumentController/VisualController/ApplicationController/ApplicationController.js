@@ -202,7 +202,7 @@ class ApplicationController extends VisualController {
         this.cm = cm;
     }
     onControllerSave = async e => {
-        console.log('ApplicationController.onControllerSave');
-        console.log('text', this.cm.getValue());
+        console.log('ApplicationController.onControllerSave'/*, this.cm.getValue()*/);
+        this.model.saveController(this.cm.getValue());
     }
 }
