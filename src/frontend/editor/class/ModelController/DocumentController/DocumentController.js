@@ -15,11 +15,11 @@ class DocumentController extends ModelController {
         docs.selectTab(this.tab);
     }
     async createDocument() {
-        const document = this.document = {
+        const document = {
             controller: this,
             view      : null,
         };
-        return document;
+        return this.document = document;
     }
     onDocumentClose() {
         console.log('DocumentController.onDocumentClose', this.getTitle());
