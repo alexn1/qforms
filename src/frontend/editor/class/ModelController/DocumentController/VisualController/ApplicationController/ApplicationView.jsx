@@ -10,17 +10,19 @@ class ApplicationView extends ReactComponent {
         console.log('ApplicationView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            const obj = CodeMirror.fromTextArea(this.getTextarea(), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-            obj.setOption('theme', 'cobalt');
-            obj.setValue(ctrl.data.js);
+            const cm = CodeMirror.fromTextArea(this.getTextarea(), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
+            cm.setOption('theme', 'cobalt');
+            cm.setValue(ctrl.data.js);
+            ctrl.onCMCreate(cm);
         }
     }
     render() {
+        const ctrl = this.props.ctrl;
         return <div className={'ApplicationView full'}>
             <div className="full flex-rows">
                 <div className="toolbar flex-min">
                     <Button>Create Custom Controller</Button>
-                    <Button>Save</Button>
+                    <Button onClick={ctrl.onControllerSave}>Save</Button>
                 </div>
                 <div className="edit flex-max full">
                     <div className="cm-container full">

@@ -3,12 +3,9 @@ class ApplicationController extends VisualController {
     constructor(model, editorController) {
         super(model);
         this.editorController = editorController;
-
         this.databases   = [];
         this.dataSources = [];
         this.pageLinks   = [];
-
-        this.data = null;
 
         // items
         this.opened = true;
@@ -27,6 +24,9 @@ class ApplicationController extends VisualController {
                 opened: true
             }
         ];
+
+        this.data = null;
+        this.cm   = null;
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
@@ -196,7 +196,13 @@ class ApplicationController extends VisualController {
         const document = await super.createDocument();
         const result = await this.model.getView('VisualView.html');
         this.data = result.data;
-
         return document;
+    }
+    onCMCreate(cm) {
+        this.cm = cm;
+    }
+    onControllerSave = async e => {
+        console.log('ApplicationController.onControllerSave');
+        console.log('text', this.cm.getValue());
     }
 }
