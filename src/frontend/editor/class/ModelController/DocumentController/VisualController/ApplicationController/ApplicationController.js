@@ -190,6 +190,6 @@ class ApplicationController extends VisualController {
         return this.pageLinks.find(pageLink => pageLink.model.getName() === name);
     }
     getDocumentViewClass() {
-        return ApplicationView;
+        return VisualView;
     }
 }

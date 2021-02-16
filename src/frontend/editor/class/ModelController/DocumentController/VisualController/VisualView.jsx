@@ -1,4 +1,4 @@
-class ApplicationView extends ReactComponent {
+class VisualView extends ReactComponent {
     constructor(props) {
         super(props);
         this.textarea = React.createRef();
@@ -8,10 +8,10 @@ class ApplicationView extends ReactComponent {
         return null;
     }
     componentDidMount() {
-        // console.log('ApplicationView.componentDidMount', this.getTextarea());
+        // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            const cm = ApplicationView.createCM(this.getTextarea(), ctrl.data.js);
+            const cm = VisualView.createCM(this.getTextarea(), ctrl.data.js);
             ctrl.onCMCreate(cm);
         }
     }
@@ -26,13 +26,13 @@ class ApplicationView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !ctrl.cm) {
-            const cm = ApplicationView.createCM(this.getTextarea(), ctrl.data.js);
+            const cm = VisualView.createCM(this.getTextarea(), ctrl.data.js);
             ctrl.onCMCreate(cm);
         }
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={'ApplicationView full'}>
+        return <div className={'VisualView full'}>
             <div className="full flex-rows">
                 <div className="toolbar flex-min">
                     <Button onClick={ctrl.onCreateCustomController}>Create Custom Controller</Button>
