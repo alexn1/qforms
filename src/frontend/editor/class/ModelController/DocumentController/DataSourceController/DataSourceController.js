@@ -332,4 +332,8 @@ class DataSourceController extends DocumentController {
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
     }
+    getDocumentViewClass() {
+        if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
+        return super.getDocumentViewClass();
+    }
 }
