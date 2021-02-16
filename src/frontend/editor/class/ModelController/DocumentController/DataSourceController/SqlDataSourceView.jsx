@@ -1,4 +1,10 @@
 class SqlDataSourceView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.cmSingleQuery = React.createRef();
+        this.cmMultipleQuery = React.createRef();
+        this.cmCountQuery = React.createRef();
+    }
     render() {
         return <div className={'SqlDataSourceView full flex-rows'}>
             <div className="toolbar flex-min">
@@ -11,8 +17,14 @@ class SqlDataSourceView extends ReactComponent {
                 </div>
             </div>
             <div className="edit flex-max full">
-                <div className="cm-container full wndSingleQuery">
-                    <textarea className="cmSingleQuery"></textarea>
+                <div className="cm-container full" style={{display: 'none'}}>
+                    <textarea ref={this.cmSingleQuery}></textarea>
+                </div>
+                <div className="cm-container full" style={{display: 'none'}}>
+                    <textarea ref={this.cmMultipleQuery}></textarea>
+                </div>
+                <div className="cm-container full" style={{display: 'none'}}>
+                    <textarea ref={this.cmCountQuery}></textarea>
                 </div>
             </div>
         </div>;
