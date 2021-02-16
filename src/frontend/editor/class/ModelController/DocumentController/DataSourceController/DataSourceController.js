@@ -146,7 +146,6 @@ class DataSourceController extends DocumentController {
 
     async createTab(docs) {
         console.log('DataSourceController.createTab', this.model.getFullName());
-        const self = this;
         const name = this.model.getFullName();
         const result = await this.model.getView('QueryView.ejs');
         const html = QForms.render(result.view, {model: this.model});
@@ -169,38 +168,38 @@ class DataSourceController extends DocumentController {
         this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
         this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
         this.tabWidget.init();
-        this.tabWidget.on('tabShow', self.listeners.tabShow = self.tabWidget_TabShow.bind(self));
+        this.tabWidget.on('tabShow', this.listeners.tabShow = this.tabWidget_TabShow.bind(this));
 
         // toolbar
-        self.$view.find('.btnSave').click(() => {
-            self.btnSave_Click();
+        this.$view.find('.btnSave').click(() => {
+            this.btnSave_Click();
         });
-        self.$view.find('.btnCountQuery').click(() => {
-            self.btnCountQuery_Click();
+        this.$view.find('.btnCountQuery').click(() => {
+            this.btnCountQuery_Click();
         });
-        self.$view.find('.btnSingleQuery').click(() => {
-            self.btnSingleQuery_Click();
+        this.$view.find('.btnSingleQuery').click(() => {
+            this.btnSingleQuery_Click();
         });
-        self.$view.find('.btnMultipleQuery').click(() => {
-            self.btnMultipleQuery_Click();
+        this.$view.find('.btnMultipleQuery').click(() => {
+            this.btnMultipleQuery_Click();
         });
-        self.$view.find('.btnSaveController').click(() => {
-            self.btnSaveController_Click();
+        this.$view.find('.btnSaveController').click(() => {
+            this.btnSaveController_Click();
         });
-        self.$view.find('.btnCreateController').click(() => {
-            self.btnCreateController_Click();
+        this.$view.find('.btnCreateController').click(() => {
+            this.btnCreateController_Click();
         });
 
         // properties
-        if (self.model.getClassName() === 'SqlDataSource') {
-            self.$view.find('.wndSingleQuery').css('display', 'block');
-            self.initCmSingleQuery();
+        if (this.model.getClassName() === 'SqlDataSource') {
+            this.$view.find('.wndSingleQuery').css('display', 'block');
+            this.initCmSingleQuery();
         }
 
-        if (self.data.backendJs) {
-            self.showCustomController();
+        if (this.data.backendJs) {
+            this.showCustomController();
         } else {
-            self.$view.find('.btnSaveController').css('display', 'none');
+            this.$view.find('.btnSaveController').css('display', 'none');
         }
     }
 
