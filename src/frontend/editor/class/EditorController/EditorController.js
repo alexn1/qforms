@@ -152,7 +152,7 @@ class EditorController {
         const document = this.documents[i];
         const activeDocument = this.documents[this.tabWidget.state.active];
         this.documents.splice(i, 1);
-        document.controller.documentView = null;
+        document.controller.onDocumentClose();
         if (document === activeDocument) {
             if (this.documents.length) {
                 if (this.tabWidget.state.active >= this.documents.length) {

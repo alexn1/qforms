@@ -153,7 +153,7 @@ class DatabaseController extends DocumentController {
         this.tableName = tableName;
         const data = await this.model.getTableInfo(tableName);
         this.tableInfo = data.tableInfo;
-        this.documentView.rerender();
+        this.document.view.rerender();
         // console.log('tableInfo:', this.tableInfo);
     }
     onCreateTableClick = e => {

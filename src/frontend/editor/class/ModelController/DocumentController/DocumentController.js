@@ -2,7 +2,7 @@ class DocumentController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.tab = null;
-        this.documentView = null;
+        this.document = null;
     }
     async createTab(docs, element) {
         if (!element) throw new Error('no element');
@@ -15,8 +15,14 @@ class DocumentController extends ModelController {
         docs.selectTab(this.tab);
     }
     async createDocument() {
-        return {
-            controller: this
+        const document = this.document = {
+            controller: this,
+            view      : null,
         };
+        return document;
+    }
+    onDocumentClose() {
+        console.log('DocumentController.onDocumentClose', this.getTitle());
+        this.document = null;
     }
 }
