@@ -163,6 +163,7 @@ class VisualController extends DocumentController {
     }
 
     async createDocument() {
+        console.log('VisualController.createDocument');
         const document = await super.createDocument();
         const result = await this.model.getView('VisualView.html');
         this.data = result.data;
