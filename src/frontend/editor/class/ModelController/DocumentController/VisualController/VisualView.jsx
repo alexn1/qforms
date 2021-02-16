@@ -35,8 +35,8 @@ class VisualView extends ReactComponent {
         return <div className={'VisualView full'}>
             <div className="full flex-rows">
                 <div className="toolbar flex-min">
-                    <Button onClick={ctrl.onCreateCustomController}>Create Custom Controller</Button>
-                    <Button onClick={ctrl.onControllerSave}>Save</Button>
+                    {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Create Custom Controller</Button>}
+                    {ctrl.data.js && <Button onClick={ctrl.onControllerSave}>Save</Button>}
                 </div>
                 <div className="edit flex-max full">
                     <div className="cm-container full">
