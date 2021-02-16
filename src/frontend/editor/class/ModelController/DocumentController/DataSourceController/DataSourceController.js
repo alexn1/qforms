@@ -96,14 +96,13 @@ class DataSourceController extends DocumentController {
     }
 
     async actionNewKeyColumn() {
-        const self = this;
         const result = await KeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const itemName = $("#myModal input[id='itemName']").val();
-            self.model.newKeyColumn(itemName).then((itemData) => {
-                self.addKeyColumn(itemData).select();
+            this.model.newKeyColumn(itemName).then((itemData) => {
+                this.addKeyColumn(itemData).select();
             });
             $('#myModal').modal('hide');
         });
@@ -112,14 +111,13 @@ class DataSourceController extends DocumentController {
     }
 
     async actionNewParentKeyColumn() {
-        const self = this;
         const result = await ParentKeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const pkcName = $("#myModal input[id='pkcName']").val();
-            self.model.newParentKeyColumn(pkcName).then((parentKeyColumnData) => {
-                self.addParentKeyColumn(parentKeyColumnData).select();
+            this.model.newParentKeyColumn(pkcName).then((parentKeyColumnData) => {
+                this.addParentKeyColumn(parentKeyColumnData).select();
             });
             $('#myModal').modal('hide');
         });
@@ -149,48 +147,48 @@ class DataSourceController extends DocumentController {
     async createTab(docs) {
         console.log('DataSourceController.createTab', this.model.getFullName());
         const self = this;
-        const name = self.model.getFullName();
-        const result = await self.model.getView('QueryView.ejs');
-        const html = QForms.render(result.view, {model: self.model});
-        self.$view        = $(html);
-        self.data         = result.data;
-        self.cmCountQuery = null;
-        self.cmSingleQuery = null;
-        self.cmMultipleQuery = null;
-        self.cmBackendJs  = null;
-        self.save         = 'singleQuery';
+        const name = this.model.getFullName();
+        const result = await this.model.getView('QueryView.ejs');
+        const html = QForms.render(result.view, {model: this.model});
+        this.$view        = $(html);
+        this.data         = result.data;
+        this.cmCountQuery = null;
+        this.cmSingleQuery = null;
+        this.cmMultipleQuery = null;
+        this.cmBackendJs  = null;
+        this.save         = 'singleQuery';
 
         // tab
-        self.tab = docs.createTab(self.$view.get(0), name, function(tab) {
+        this.tab = docs.createTab(this.$view.get(0), name, (tab) => {
             tab.ctrl.tab = undefined;
         });
-        self.tab.ctrl = self;
-        docs.selectTab(self.tab);
+        this.tab.ctrl = this;
+        docs.selectTab(this.tab);
 
         // prop/backend tab
-        self.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
-        self.tabWidget = new TabWidget(self.$view.children('.TabWidget').get(0));
-        self.tabWidget.init();
-        self.tabWidget.on('tabShow', self.listeners.tabShow = self.tabWidget_TabShow.bind(self));
+        this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
+        this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
+        this.tabWidget.init();
+        this.tabWidget.on('tabShow', self.listeners.tabShow = self.tabWidget_TabShow.bind(self));
 
         // toolbar
-        self.$view.find('.btnSave').click(function() {
-            self.btnSave_Click(this);
+        self.$view.find('.btnSave').click(() => {
+            self.btnSave_Click();
         });
-        self.$view.find('.btnCountQuery').click(function() {
-            self.btnCountQuery_Click(this);
+        self.$view.find('.btnCountQuery').click(() => {
+            self.btnCountQuery_Click();
         });
-        self.$view.find('.btnSingleQuery').click(function() {
-            self.btnSingleQuery_Click(this);
+        self.$view.find('.btnSingleQuery').click(() => {
+            self.btnSingleQuery_Click();
         });
-        self.$view.find('.btnMultipleQuery').click(function() {
-            self.btnMultipleQuery_Click(this);
+        self.$view.find('.btnMultipleQuery').click(() => {
+            self.btnMultipleQuery_Click();
         });
-        self.$view.find('.btnSaveController').click(function() {
-            self.btnSaveController_Click(this);
+        self.$view.find('.btnSaveController').click(() => {
+            self.btnSaveController_Click();
         });
-        self.$view.find('.btnCreateController').click(function() {
-            self.btnCreateController_Click(this);
+        self.$view.find('.btnCreateController').click(() => {
+            self.btnCreateController_Click();
         });
 
         // properties
@@ -230,7 +228,7 @@ class DataSourceController extends DocumentController {
         this.cmBackendJs.setValue(this.data.backendJs);
     }
 
-    btnSave_Click(ctrl) {
+    btnSave_Click() {
         switch (this.save) {
             case 'countQuery': this.model.setValue('countQuery', this.cmCountQuery.getValue()); break;
             case 'singleQuery': this.model.setValue('singleQuery', this.cmSingleQuery.getValue()); break;
@@ -238,7 +236,7 @@ class DataSourceController extends DocumentController {
         }
     }
 
-    btnCountQuery_Click(ctrl) {
+    btnCountQuery_Click() {
         console.log('btnCountQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'block');
@@ -258,7 +256,7 @@ class DataSourceController extends DocumentController {
         this.save = 'countQuery';
     }
 
-    btnSingleQuery_Click(ctrl) {
+    btnSingleQuery_Click() {
         console.log('btnSingleQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'none');
@@ -278,7 +276,7 @@ class DataSourceController extends DocumentController {
         this.save = 'singleQuery';
     }
 
-    btnMultipleQuery_Click(ctrl) {
+    btnMultipleQuery_Click() {
         console.log('btnMultipleQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'none');
@@ -319,7 +317,7 @@ class DataSourceController extends DocumentController {
     }
 
 
-    btnSaveController_Click(ctrl) {
+    btnSaveController_Click() {
         const text = this.cmBackendJs.getValue();
         this.model.saveController(text);
     }
