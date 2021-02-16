@@ -206,11 +206,11 @@ class DataSource extends Model {
 
     getFullName() {
         if (this.parent instanceof Form) {
-            return [this.parent.parent.name, this.parent.name, this.name].join('.');
+            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Page) {
-            return [this.parent.name, this.name].join('.');
+            return [this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Application) {
-            return this.name;
+            return this.getName();
         }
     }
 

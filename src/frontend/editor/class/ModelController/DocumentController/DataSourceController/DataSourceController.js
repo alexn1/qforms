@@ -147,6 +147,7 @@ class DataSourceController extends DocumentController {
     }
 
     async createTab(docs) {
+        console.log('DataSourceController.createTab', this.model.getFullName());
         const self = this;
         const name = self.model.getFullName();
         const result = await self.model.getView('QueryView.ejs');
