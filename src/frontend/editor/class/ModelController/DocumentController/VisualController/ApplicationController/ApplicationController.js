@@ -205,4 +205,10 @@ class ApplicationController extends VisualController {
         console.log('ApplicationController.onControllerSave'/*, this.cm.getValue()*/);
         this.model.saveController(this.cm.getValue());
     }
+    onCreateCustomController = async e => {
+        console.log('ApplicationController.onCreateCustomController');
+        const data = await this.model.createController();
+        this.data.js = data.js;
+        this.document.view.rerender();
+    }
 }
