@@ -7,7 +7,7 @@ class ApplicationView extends ReactComponent {
         return this.textarea.current;
     }
     componentDidMount() {
-        console.log('ApplicationView.componentDidMount', this.getTextarea());
+        // console.log('ApplicationView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
             const cm = CodeMirror.fromTextArea(this.getTextarea(), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
