@@ -3,16 +3,12 @@ class DataSource extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
-        // this.parentKeyColumns = [];
     }
 
     init() {
         for (const name in this.data.keyColumns) {
             this.createKeyColumn(this.data.keyColumns[name]);
         }
-        /*for (const name in this.data.parentKeyColumns) {
-            this.createParentKeyColumn(this.model.parentKeyColumns[name]);
-        }*/
     }
 
     createKeyColumn(data) {
@@ -27,13 +23,6 @@ class DataSource extends Model {
         if (i === -1) throw new Error('no such keyColumn');
         this.keyColumns.splice(i, 1);
     }
-    /*createParentKeyColumn(data) {
-        const parentKeyColumn = new ParentKeyColumn(data, this);
-        parentKeyColumn.init();
-        this.parentKeyColumns.push(parentKeyColumn);
-        return parentKeyColumn;
-    }*/
-
     static async create(parent, params) {
         if (parent instanceof Form) {
             const form = parent;

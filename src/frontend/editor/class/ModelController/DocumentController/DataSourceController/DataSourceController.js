@@ -5,9 +5,7 @@ class DataSourceController extends DocumentController {
         this.itemKeys             = null;
         this.itemParentKeyColumns = null;
         this.$view                = null;
-        // this.cmQuery              = null;
         this.keyColumns = [];
-        this.parentKeyColumns = [];
 
         // items for TreeWidget2
         this.items = [
