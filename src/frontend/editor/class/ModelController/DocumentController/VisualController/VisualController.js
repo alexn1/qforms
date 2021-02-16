@@ -168,7 +168,7 @@ class VisualController extends DocumentController {
         this.data = result.data;
         return document;
     }
-    onCMCreate(cm) {
+    onCmCreate(cm) {
         this.cm = cm;
     }
     onControllerSave = async e => {

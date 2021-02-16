@@ -1,9 +1,25 @@
-class SqlDataSourceView extends ReactComponent {
+class SqlDataSourceView extends DocumentView {
     constructor(props) {
         super(props);
-        this.cmSingleQuery = React.createRef();
+        this.cmSingleQuery   = React.createRef();
         this.cmMultipleQuery = React.createRef();
-        this.cmCountQuery = React.createRef();
+        this.cmCountQuery    = React.createRef();
+    }
+    getCmSingleQuery() {
+        return this.cmSingleQuery.current;
+    }
+    getCmMultipleQuery() {
+        return this.cmMultipleQuery.current;
+    }
+    getCmCountQuery() {
+        return this.cmCountQuery.current;
+    }
+    componentDidMount() {
+        const ctrl = this.props.ctrl;
+        const cmSingleQuery = DocumentView.createCM(this.getCmSingleQuery(), ctrl.model.getAttr('singleQuery'));
+        const cmMultipleQuery = DocumentView.createCM(this.getCmMultipleQuery(), ctrl.model.getAttr('multipleQuery'));
+        const cmCountQuery = DocumentView.createCM(this.getCmCountQuery(), ctrl.model.getAttr('countQuery'));
+        ctrl.onCmCreate(cmSingleQuery, cmMultipleQuery, cmCountQuery);
     }
     render() {
         return <div className={'SqlDataSourceView full flex-rows'}>
@@ -17,7 +33,7 @@ class SqlDataSourceView extends ReactComponent {
                 </div>
             </div>
             <div className="edit flex-max full">
-                <div className="cm-container full" style={{display: 'none'}}>
+                <div className="cm-container full" style={{}}>
                     <textarea ref={this.cmSingleQuery}></textarea>
                 </div>
                 <div className="cm-container full" style={{display: 'none'}}>

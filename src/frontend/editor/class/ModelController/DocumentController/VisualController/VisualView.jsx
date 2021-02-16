@@ -1,4 +1,4 @@
-class VisualView extends ReactComponent {
+class VisualView extends DocumentView {
     constructor(props) {
         super(props);
         this.textarea = React.createRef();
@@ -11,23 +11,17 @@ class VisualView extends ReactComponent {
         // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            const cm = VisualView.createCM(this.getTextarea(), ctrl.data.js);
-            ctrl.onCMCreate(cm);
+            const cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            ctrl.onCmCreate(cm);
         }
-    }
-    static createCM(textarea, value) {
-        const cm = CodeMirror.fromTextArea(textarea, {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
-        cm.setOption('theme', 'cobalt');
-        cm.setValue(value);
-        return cm;
     }
     componentDidUpdate() {
         // console.log('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !ctrl.cm) {
-            const cm = VisualView.createCM(this.getTextarea(), ctrl.data.js);
-            ctrl.onCMCreate(cm);
+            const cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            ctrl.onCmCreate(cm);
         }
     }
     render() {
