@@ -74,4 +74,9 @@ class FieldController extends VisualController {
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
     }
+    getDocumentViewClass() {
+        return VisualView;
+    }
+    async createTab(docs) {
+    }
 }
