@@ -24,28 +24,19 @@ class SqlDataSourceView extends DocumentView {
         const cmCountQuery = DocumentView.createCM(this.getCmCountQuery(), ctrl.model.getAttr('countQuery'));
         ctrl.onCmCreate(cmSingleQuery, cmMultipleQuery, cmCountQuery);
     }
-    /*onSingleQueryClick = async e => {
-        console.log('SqlDataSourceView.onSingleQueryClick');
-        this.setState({selected: 'single'});
-    }*/
-    /*onMultipleQuery = async e => {
-        console.log('SqlDataSourceView.onMultipleQuery');
-        this.setState({selected: 'multiple'});
-    }*/
-    /*onCountQueryClick = async e => {
-        console.log('SqlDataSourceView.onCountQueryClick');
-        this.setState({selected: 'count'});
-    }*/
     getButtonClass(name) {
-        return `btn btn-xs ${this.state.selected === name ? 'btn-primary' : 'btn-default'}`;
+        return this.state.selected === name ? 'btn-primary' : 'btn-default';
     }
     getVisibility(name) {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
+    onSaveClick = e => {
+        console.log('SqlDataSourceView.onSaveClick');
+    }
     render() {
         return <div className={'SqlDataSourceView full flex-rows'}>
             <div className="toolbar flex-min">
-                <button className="btn btn-default btn-xs">Save</button>
+                <button className="btn btn-default btn-xs" onClick={this.onSaveClick}>Save</button>
                 &nbsp;
                 <div className="btn-group" role="group">
                     <button className={`btn btn-xs ${this.getButtonClass('single')}`}   onClick={e => this.setState({selected: 'single'})}>singleQuery</button>
