@@ -3,7 +3,7 @@ class ModelController extends EventEmitter {
         super();
         this.model = model;
         this.parent = parent;
-        this.listeners = {};
+        // this.listeners = {};
         this.view = null;
     }
     init() {

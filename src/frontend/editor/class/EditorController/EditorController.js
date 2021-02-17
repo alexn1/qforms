@@ -4,8 +4,8 @@ class EditorController {
         EditorController.editorController = this;
         this.appData = appData;
         this.runAppLink = runAppLink;
-        this.docs      = null;
-        this.listeners = {};
+        // this.docs      = null;
+        // this.listeners = {};
         this.appCtrl = null;
         this.pg = null;
         this.treeWidget2 = null;
@@ -20,8 +20,8 @@ class EditorController {
         console.log('EditorController.init', this.appData);
 
         // docs
-        this.docs = document.getElementById('docs')._obj;
-        this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
+        // this.docs = document.getElementById('docs')._obj;
+        // this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
 
         // appModel
         const appModel = new Application(this.appData);
@@ -41,7 +41,7 @@ class EditorController {
     }
 
     deinit() {
-        this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
+        // this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
     }
     onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item.getTitle());
@@ -123,9 +123,9 @@ class EditorController {
         if (!controller || !(controller instanceof DocumentController)) return;
         await this.openDocument(controller);
     }
-    onTabClosingByUser(e) {
+    /*onTabClosingByUser(e) {
         this.docs.closeTab(e.tab);
-    }
+    }*/
     async openDocument(controller) {
         console.log('EditorController.openDocument', controller.getTitle());
         /*if (controller.tab) {
