@@ -58,13 +58,13 @@ class DatabaseController extends DocumentController {
     async doAction(name) {
         switch (name) {
             case 'newParam':
-                this.actionNewParam();
+                await this.actionNewParam();
                 break;
             case 'newTable':
-                this.actionNewTable();
+                await this.actionNewTable();
                 break;
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
         }
     }
@@ -72,31 +72,30 @@ class DatabaseController extends DocumentController {
         const result = await ParamController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const paramName = $("#myModal input[id='paramName']").val();
-            this.model.newParam(paramName).then((paramData) => {
-                this.addParamItem(paramData).select();
-            });
+            const paramData = await this.model.newParam(paramName);
+            this.addParamItem(paramData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='paramName']").focus();
     }
-    actionNewTable() {
-        TableController.getView('new.html').then((result) => {
-            if (!result.view) throw new Error('actionNewTable: no view');
-            $(document.body).append(result.view);
-            $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-            $("#myModal button[name='create']").click(() => {
-                const tableName = $("#myModal input[id='tableName']").val();
-                this.model.newTable({name: tableName}).then((tableData) => {
-                    this.addTableItem(tableData).select();
-                });
-                $('#myModal').modal('hide');
+    async actionNewTable() {
+        const result = await TableController.getView('new.html');
+        if (!result.view) throw new Error('actionNewTable: no view');
+        $(document.body).append(result.view);
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+        $("#myModal button[name='create']").click(() => {
+            const tableName = $("#myModal input[id='tableName']").val();
+            this.model.newTable({name: tableName}).then((tableData) => {
+                this.addTableItem(tableData).select();
             });
-            $('#myModal').modal('show');
-            $("#myModal input[id='tableName']").focus();
+            $('#myModal').modal('hide');
         });
+        $('#myModal').modal('show');
+        $("#myModal input[id='tableName']").focus();
+
     }
     async createDocument() {
         const document = await super.createDocument();
