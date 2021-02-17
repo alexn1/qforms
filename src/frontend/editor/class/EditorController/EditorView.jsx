@@ -15,7 +15,6 @@ class EditorView extends ReactComponent {
             content: this.renderDocumentView(document)
         }));
     }
-
     render() {
         const ctrl = this.props.ctrl;
         return <div className="EditorView">
@@ -62,9 +61,6 @@ class EditorView extends ReactComponent {
                     tabs={this.getTabs()}
                 />
             </div>
-        </div>
-
-
-
+        </div>;
     }
 }

@@ -60,6 +60,6 @@ class PropertyGrid2 extends ReactComponent {
                     {this.getObj() && this.renderRows()}
                 </tbody>
             </table>
-        </div>
+        </div>;
     }
 }
