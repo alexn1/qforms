@@ -2,6 +2,7 @@ class VisualView extends DocumentView {
     constructor(props) {
         super(props);
         this.textarea = React.createRef();
+        this.cm = null;
     }
     getTextarea() {
         if (this.textarea) return this.textarea.current;
@@ -11,18 +12,20 @@ class VisualView extends DocumentView {
         // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            const cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
-            ctrl.onCmCreate(cm);
+            this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
     }
     componentDidUpdate() {
         // console.log('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
-        if (textarea && ctrl.data.js && !ctrl.cm) {
-            const cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
-            ctrl.onCmCreate(cm);
+        if (textarea && ctrl.data.js && !this.cm) {
+            this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
+    }
+    onControllerSave = async e => {
+        const ctrl = this.props.ctrl;
+        await ctrl.onControllerSave(this.cm.getValue());
     }
     render() {
         const ctrl = this.props.ctrl;
@@ -30,7 +33,7 @@ class VisualView extends DocumentView {
             <div className="full flex-rows">
                 <div className="toolbar flex-min">
                     {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Create Custom Controller</Button>}
-                    {ctrl.data.js && <Button onClick={ctrl.onControllerSave}>Save</Button>}
+                    {ctrl.data.js && <Button onClick={this.onControllerSave}>Save</Button>}
                 </div>
                 <div className="edit flex-max full">
                     <div className="cm-container full">
