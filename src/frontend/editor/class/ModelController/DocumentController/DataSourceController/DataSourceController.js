@@ -77,11 +77,10 @@ class DataSourceController extends DocumentController {
         const result = await KeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const itemName = $("#myModal input[id='itemName']").val();
-            this.model.newKeyColumn(itemName).then((itemData) => {
-                this.addKeyColumn(itemData).select();
-            });
+            const itemData = await this.model.newKeyColumn(itemName);
+            this.addKeyColumn(itemData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');

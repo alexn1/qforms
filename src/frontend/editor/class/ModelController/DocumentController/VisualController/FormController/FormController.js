@@ -103,16 +103,15 @@ class FormController extends VisualController {
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const dsName = $("#myModal input[id='dsName']").val();
             const dsClass = $("#myModal select[id='dsClass']").val();
             const params = {
                 name:dsName,
                 class:dsClass
             };
-            this.model.newDataSource(params).then((dataSourceData) => {
-                this.addDataSourceItem(dataSourceData).select();
-            });
+            const dataSourceData = await this.model.newDataSource(params);
+            this.addDataSourceItem(dataSourceData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
@@ -123,7 +122,7 @@ class FormController extends VisualController {
         const result = await Field.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const name = $("#myModal input[id='name']").val();
             const caption = $("#myModal input[id='caption']").val();
             const fieldClass = $("#myModal select[id='fieldClass']").val();
@@ -132,9 +131,8 @@ class FormController extends VisualController {
                 caption:caption,
                 class:fieldClass
             };
-            this.model.newField(params).then((fieldData) => {
-                this.addFieldItem(fieldData).select();
-            });
+            const fieldData = await this.model.newField(params);
+            this.addFieldItem(fieldData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');

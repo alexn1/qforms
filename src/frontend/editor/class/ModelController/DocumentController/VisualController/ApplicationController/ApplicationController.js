@@ -160,16 +160,15 @@ class ApplicationController extends VisualController {
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const dsName = $("#myModal input[id='dsName']").val();
             const dsClass = $("#myModal select[id='dsClass']").val();
             const params = {
                 name :dsName,
                 class:dsClass
             };
-            this.model.newDataSource(params).then((dataSourceData) => {
-                this.addDataSourceItem(dataSourceData).select();
-            });
+            const dataSourceData = await this.model.newDataSource(params);
+            this.addDataSourceItem(dataSourceData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');

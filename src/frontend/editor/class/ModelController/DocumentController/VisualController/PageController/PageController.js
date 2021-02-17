@@ -84,16 +84,15 @@ class PageController extends VisualController {
         const result = await Form.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const params = {
                 name:$("#myModal input[id='name']").val(),
                 caption:$("#myModal input[id='caption']").val(),
                 class:$("#myModal select[id='formClass']").val()
             };
-            this.model.newForm(params).then((formData) => {
-                this.addFormItem(formData).select();
-                $('#myModal').modal('hide');
-            });
+            const formData = await this.model.newForm(params);
+            this.addFormItem(formData).select();
+            $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
@@ -103,16 +102,15 @@ class PageController extends VisualController {
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(() => {
+        $("#myModal button[name='create']").click(async () => {
             const dsName = $("#myModal input[id='dsName']").val();
             const dsClass = $("#myModal select[id='dsClass']").val();
             const params = {
                 name :dsName,
                 class:dsClass
             };
-            DataSource.create(this.model, params).then((dataSourceData) => {
-                this.addDataSourceItem(dataSourceData).select();
-            });
+            const dataSourceData = await DataSource.create(this.model, params);
+            this.addDataSourceItem(dataSourceData).select();
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');

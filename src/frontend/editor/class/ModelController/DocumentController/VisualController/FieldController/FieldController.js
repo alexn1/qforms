@@ -39,13 +39,12 @@ class FieldController extends VisualController {
         const result = await Field.prototype.getView('changeClass.html');
         $(document.body).append(result.view);
         $('#modal').on('hidden.bs.modal', function() {$(this).remove();});
-        $("#modal button[name='change']").click(() => {
+        $("#modal button[name='change']").click(async () => {
             const fieldClass = $("#modal select[id='fieldClass']").val();
             if (this.model.getClassName() !== fieldClass) {
-                this.model.changeClass({class: fieldClass}).then((data) => {
-                    //console.log(data);
-                    EditorController.editorController.fillPropertyGrid(this);
-                });
+                const data = await this.model.changeClass({class: fieldClass});
+                //console.log(data);
+                EditorController.editorController.fillPropertyGrid(this);
             }
             $('#modal').modal('hide');
         });
