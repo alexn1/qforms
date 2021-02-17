@@ -30,7 +30,6 @@ class EditorController {
     }
 
     deinit() {
-        // this.docs.off('tabClosingByUser', this.listeners.tabClosingByUser);
     }
     onItemOpen2 = async item => {
         console.log('EditorController.onItemOpen2', item.getTitle());
@@ -112,18 +111,8 @@ class EditorController {
         if (!controller || !(controller instanceof DocumentController)) return;
         await this.openDocument(controller);
     }
-    /*onTabClosingByUser(e) {
-        this.docs.closeTab(e.tab);
-    }*/
     async openDocument(controller) {
         console.log('EditorController.openDocument', controller.getTitle());
-        /*if (controller.tab) {
-            this.docs.selectTab(controller.tab);
-        } else {
-            controller.createTab(this.docs);
-        }*/
-
-        // document
         let document = this.findDocument(controller);
         if (!document) {
             document = await controller.createDocument();
