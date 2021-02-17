@@ -317,7 +317,6 @@ class DataSourceController extends DocumentController {
         this.$view.find('.btnSaveController').css('display', 'inline-block');
     }
 
-
     btnSaveController_Click() {
         const text = this.cmBackendJs.getValue();
         this.model.saveController(text);

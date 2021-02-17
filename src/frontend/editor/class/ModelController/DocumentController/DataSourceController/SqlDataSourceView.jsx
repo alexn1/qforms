@@ -4,6 +4,9 @@ class SqlDataSourceView extends DocumentView {
         this.cmSingleQuery   = React.createRef();
         this.cmMultipleQuery = React.createRef();
         this.cmCountQuery    = React.createRef();
+        this.state = {
+            selected: 'single'
+        };
     }
     getCmSingleQuery() {
         return this.cmSingleQuery.current;
@@ -21,25 +24,43 @@ class SqlDataSourceView extends DocumentView {
         const cmCountQuery = DocumentView.createCM(this.getCmCountQuery(), ctrl.model.getAttr('countQuery'));
         ctrl.onCmCreate(cmSingleQuery, cmMultipleQuery, cmCountQuery);
     }
+    /*onSingleQueryClick = async e => {
+        console.log('SqlDataSourceView.onSingleQueryClick');
+        this.setState({selected: 'single'});
+    }*/
+    /*onMultipleQuery = async e => {
+        console.log('SqlDataSourceView.onMultipleQuery');
+        this.setState({selected: 'multiple'});
+    }*/
+    /*onCountQueryClick = async e => {
+        console.log('SqlDataSourceView.onCountQueryClick');
+        this.setState({selected: 'count'});
+    }*/
+    getButtonClass(name) {
+        return `btn btn-xs ${this.state.selected === name ? 'btn-primary' : 'btn-default'}`;
+    }
+    getVisibility(name) {
+        return this.state.selected === name ? 'visible' : 'hidden';
+    }
     render() {
         return <div className={'SqlDataSourceView full flex-rows'}>
             <div className="toolbar flex-min">
-                <button className="btn btn-default btn-xs btnSave">Save</button>
+                <button className="btn btn-default btn-xs">Save</button>
                 &nbsp;
                 <div className="btn-group" role="group">
-                    <button className="btn btn-xs btn-primary btnSingleQuery">singleQuery</button>
-                    <button className="btn btn-xs btn-default btnMultipleQuery">multipleQuery</button>
-                    <button className="btn btn-xs btn-default btnCountQuery">countQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('single')}`}   onClick={e => this.setState({selected: 'single'})}>singleQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('multiple')}`} onClick={e => this.setState({selected: 'multiple'})}>multipleQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('count')}`}    onClick={e => this.setState({selected: 'count'})}>countQuery</button>
                 </div>
             </div>
             <div className="edit flex-max full">
-                <div className="cm-container full" style={{}}>
+                <div className="cm-container full" style={{visibility: this.getVisibility('single')}}>
                     <textarea ref={this.cmSingleQuery}></textarea>
                 </div>
-                <div className="cm-container full" style={{display: 'none'}}>
+                <div className="cm-container full" style={{visibility: this.getVisibility('multiple')}}>
                     <textarea ref={this.cmMultipleQuery}></textarea>
                 </div>
-                <div className="cm-container full" style={{display: 'none'}}>
+                <div className="cm-container full" style={{visibility: this.getVisibility('count')}}>
                     <textarea ref={this.cmCountQuery}></textarea>
                 </div>
             </div>
