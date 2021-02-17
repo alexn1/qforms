@@ -1,10 +1,10 @@
 class DocumentController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
-        this.tab = null;
+        // this.tab = null;
         this.document = null;
     }
-    async createTab(docs, element) {
+    /*async createTab(docs, element) {
         if (!element) throw new Error('no element');
         // const $div = $('<div style="height:100%;background-color:lightgoldenrodyellow;">sample tab</div>');
         const name = this.model.getName();
@@ -13,7 +13,7 @@ class DocumentController extends ModelController {
         });
         this.tab.ctrl = this;
         docs.selectTab(this.tab);
-    }
+    }*/
     async createDocument() {
         const document = {
             controller: this,

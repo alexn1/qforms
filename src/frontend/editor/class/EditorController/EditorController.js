@@ -128,11 +128,11 @@ class EditorController {
     }
     async openDocument(controller) {
         console.log('EditorController.openDocument', controller.getTitle());
-        if (controller.tab) {
+        /*if (controller.tab) {
             this.docs.selectTab(controller.tab);
         } else {
             controller.createTab(this.docs);
-        }
+        }*/
 
         // document
         let document = this.findDocument(controller);
