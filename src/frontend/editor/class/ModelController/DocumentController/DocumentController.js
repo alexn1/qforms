@@ -1,7 +1,6 @@
 class DocumentController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
-        // this.tab = null;
         this.document = null;
     }
     async createDocument() {

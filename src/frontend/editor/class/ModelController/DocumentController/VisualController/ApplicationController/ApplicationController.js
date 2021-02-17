@@ -24,9 +24,6 @@ class ApplicationController extends VisualController {
                 opened: true
             }
         ];
-
-
-
     }
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));

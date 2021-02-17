@@ -17,7 +17,6 @@ class FormController extends VisualController {
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
         this.model.fields.forEach(field => this.createField(field));
         this.model.actions.forEach(action => this.createAction(action));
-
     }
 
     createDataSource(model) {
