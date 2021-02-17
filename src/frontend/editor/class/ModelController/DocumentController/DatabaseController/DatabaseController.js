@@ -69,14 +69,13 @@ class DatabaseController extends DocumentController {
         }
     }
     async actionNewParam() {
-        const self = this;
         const result = await ParamController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(() => {
             const paramName = $("#myModal input[id='paramName']").val();
-            self.model.newParam(paramName).then((paramData) => {
-                self.addParamItem(paramData).select();
+            this.model.newParam(paramName).then((paramData) => {
+                this.addParamItem(paramData).select();
             });
             $('#myModal').modal('hide');
         });
