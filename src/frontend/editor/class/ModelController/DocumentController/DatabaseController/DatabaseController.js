@@ -94,7 +94,6 @@ class DatabaseController extends DocumentController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='tableName']").focus();
-
     }
     async createDocument() {
         const document = await super.createDocument();
