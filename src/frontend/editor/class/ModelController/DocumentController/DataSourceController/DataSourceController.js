@@ -2,9 +2,9 @@ class DataSourceController extends DocumentController {
 
     constructor(model, parent) {
         super(model, parent);
-        this.itemKeys             = null;
-        this.itemParentKeyColumns = null;
-        this.$view                = null;
+        // this.itemKeys             = null;
+        // this.itemParentKeyColumns = null;
+        // this.$view                = null;
         this.keyColumns = [];
 
         // items for TreeWidget2
@@ -35,17 +35,17 @@ class DataSourceController extends DocumentController {
         this.keyColumns.splice(i, 1);
     }
 
-    addKeyColumn(keyColumn) {
+    /*addKeyColumn(keyColumn) {
         const keyColumnItem = this.itemKeys.addItem(keyColumn.model.getName());
         keyColumnItem.ctrl = keyColumn;
         return keyColumnItem;
-    }
+    }*/
 
-    addParentKeyColumn(parentKeyColumn) {
+    /*addParentKeyColumn(parentKeyColumn) {
         const itemParentKeyColumn = this.itemParentKeyColumns.addItem(parentKeyColumn.model.getName());
         itemParentKeyColumn.ctrl = parentKeyColumn;
         return itemParentKeyColumn;
-    }
+    }*/
 
     getActions() {
         return [
@@ -108,7 +108,7 @@ class DataSourceController extends DocumentController {
         $("#myModal input[id='itemName']").focus();
     }
 
-    async actionNewParentKeyColumn() {
+    /*async actionNewParentKeyColumn() {
         const result = await ParentKeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -121,7 +121,7 @@ class DataSourceController extends DocumentController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='pkcName']").focus();
-    }
+    }*/
 
     getPropList() {
         const propList = {
@@ -143,7 +143,7 @@ class DataSourceController extends DocumentController {
     }
 
     async createTab(docs) {
-        console.log('DataSourceController.createTab', this.model.getFullName());
+        /*console.log('DataSourceController.createTab', this.model.getFullName());
         const name = this.model.getFullName();
         const result = await this.model.getView('QueryView.ejs');
         const html = QForms.render(result.view, {model: this.model});
@@ -198,42 +198,42 @@ class DataSourceController extends DocumentController {
             this.showCustomController();
         } else {
             this.$view.find('.btnSaveController').css('display', 'none');
-        }
+        }*/
     }
 
-    initCmCountQuery() {
+    /*initCmCountQuery() {
         this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmCountQuery.setOption('theme', 'cobalt');
         this.cmCountQuery.setValue(this.model.data['@attributes'].countQuery);
-    }
+    }*/
 
-    initCmSingleQuery() {
+    /*initCmSingleQuery() {
         this.cmSingleQuery = CodeMirror.fromTextArea(this.$view.find('.cmSingleQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmSingleQuery.setOption('theme', 'cobalt');
         this.cmSingleQuery.setValue(this.model.data['@attributes'].singleQuery);
-    }
+    }*/
 
-    initCmMultipleQuery() {
+    /*initCmMultipleQuery() {
         this.cmMultipleQuery = CodeMirror.fromTextArea(this.$view.find('.cmMultipleQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmMultipleQuery.setOption('theme', 'cobalt');
         this.cmMultipleQuery.setValue(this.model.data['@attributes'].multipleQuery);
-    }
+    }*/
 
-    initCmBackendJs() {
+    /*initCmBackendJs() {
         this.cmBackendJs = CodeMirror.fromTextArea(this.$view.find('.cmBackendJs').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmBackendJs.setOption('theme', 'cobalt');
         this.cmBackendJs.setValue(this.data.backendJs);
-    }
+    }*/
 
-    btnSave_Click() {
+    /*btnSave_Click() {
         switch (this.save) {
             case 'countQuery': this.model.setValue('countQuery', this.cmCountQuery.getValue()); break;
             case 'singleQuery': this.model.setValue('singleQuery', this.cmSingleQuery.getValue()); break;
             case 'multipleQuery': this.model.setValue('multipleQuery', this.cmMultipleQuery.getValue()); break;
         }
-    }
+    }*/
 
-    btnCountQuery_Click() {
+    /*btnCountQuery_Click() {
         console.log('btnCountQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'block');
@@ -251,9 +251,9 @@ class DataSourceController extends DocumentController {
         this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
         this.$view.find('.btnMultipleQuery').addClass('btn-default');
         this.save = 'countQuery';
-    }
+    }*/
 
-    btnSingleQuery_Click() {
+    /*btnSingleQuery_Click() {
         console.log('btnSingleQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'none');
@@ -271,9 +271,9 @@ class DataSourceController extends DocumentController {
         this.$view.find('.btnMultipleQuery').removeClass('btn-primary');
         this.$view.find('.btnMultipleQuery').addClass('btn-default');
         this.save = 'singleQuery';
-    }
+    }*/
 
-    btnMultipleQuery_Click() {
+    /*btnMultipleQuery_Click() {
         console.log('btnMultipleQuery_Click');
         this.$view.find('.wndQuery').css('display', 'none');
         this.$view.find('.wndCountQuery').css('display', 'none');
@@ -291,9 +291,9 @@ class DataSourceController extends DocumentController {
         this.$view.find('.btnMultipleQuery').removeClass('btn-default');
         this.$view.find('.btnMultipleQuery').addClass('btn-primary');
         this.save = 'multipleQuery';
-    }
+    }*/
 
-    tabWidget_TabShow(ea) {
+    /*tabWidget_TabShow(ea) {
         console.log('DataSourceController.tabWidget_TabShow');
         if ($(ea.tab).hasClass('tabController')) {
             if (this.data.backendJs) {
@@ -302,35 +302,35 @@ class DataSourceController extends DocumentController {
                 }
             }
         }
-    }
+    }*/
 
-    showCustomController() {
+    /*showCustomController() {
         this.$view.find('.wndBackendJs').css('display', 'block');
         if ($(this.tabWidget.activeTab).hasClass('tabController')) {
             this.initCmBackendJs();
         }
         this.$view.find('.btnCreateController').css('display', 'none');
         this.$view.find('.btnSaveController').css('display', 'inline-block');
-    }
+    }*/
 
-    btnSaveController_Click() {
+    /*btnSaveController_Click() {
         const text = this.cmBackendJs.getValue();
         this.model.saveController(text);
-    }
+    }*/
 
-    async btnCreateController_Click() {
+    /*async btnCreateController_Click() {
         const data = await this.model.createController();
         this.data.backendJs = data.backendJs;
         this.showCustomController();
-    }
+    }*/
 
-    async delete() {
+    /*async delete() {
         console.log('DataSourceController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDataSource(this);
         EditorController.editorController.treeWidget2.select(null);
         EditorController.editorController.treeWidget2.rerender();
-    }
+    }*/
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
         return super.getDocumentViewClass();
