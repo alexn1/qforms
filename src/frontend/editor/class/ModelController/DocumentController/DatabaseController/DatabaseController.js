@@ -73,7 +73,7 @@ class DatabaseController extends DocumentController {
         const result = await ParamController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const paramName = $("#myModal input[id='paramName']").val();
             self.model.newParam(paramName).then((paramData) => {
                 self.addParamItem(paramData).select();
@@ -89,7 +89,7 @@ class DatabaseController extends DocumentController {
             if (!result.view) throw new Error('actionNewTable: no view');
             $(document.body).append(result.view);
             $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-            $("#myModal button[name='create']").click(function() {
+            $("#myModal button[name='create']").click(() => {
                 const tableName = $("#myModal input[id='tableName']").val();
                 self.model.newTable({name: tableName}).then((tableData) => {
                     self.addTableItem(tableData).select();

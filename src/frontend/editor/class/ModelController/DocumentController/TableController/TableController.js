@@ -73,7 +73,7 @@ class TableController extends DocumentController {
         if (!result.view) throw new Error('actionNewColumn: no view');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const columnName = $("#myModal input[id='columnName']").val();
             self.model.newColumn(columnName).then((data) => {
                 self.addColumnItem(data).select();
@@ -107,9 +107,7 @@ class TableController extends DocumentController {
             pages    : application.pageLinks.map(pageLink => pageLink.getName())
         });
         $(document.body).append(html);
-        $('#modal').on('hidden.bs.modal', function(e) {
-            $(this).remove();
-        });
+        $('#modal').on('hidden.bs.modal', function(e) {$(this).remove();});
         $("#modal button[name='create']").click(async () => {
             const formPage    = $("#modal select[id='formPage']").val();
             const formClass   = $("#modal select[id='formClass']").val();

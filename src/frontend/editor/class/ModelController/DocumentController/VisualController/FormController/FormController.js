@@ -104,7 +104,7 @@ class FormController extends VisualController {
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const dsName = $("#myModal input[id='dsName']").val();
             const dsClass = $("#myModal select[id='dsClass']").val();
             const params = {
@@ -125,7 +125,7 @@ class FormController extends VisualController {
         const result = await Field.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(function() {
+        $("#myModal button[name='create']").click(() => {
             const name = $("#myModal input[id='name']").val();
             const caption = $("#myModal input[id='caption']").val();
             const fieldClass = $("#myModal select[id='fieldClass']").val();
