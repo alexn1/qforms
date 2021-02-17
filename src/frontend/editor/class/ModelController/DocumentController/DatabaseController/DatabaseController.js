@@ -1,20 +1,10 @@
 class DatabaseController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
-
-        // document view
-        // this.treeTables            = null;
-        // this.$divTableInfo         = null;
-        // this.tableView             = null;
-        // this.tables                = null;
-
         this.tableName = null;
         this.tableInfo = null;
-
         this.params  = [];
         this.tables2 = [];
-
-        // items
         this.items = [
             {
                 getTitle: () => 'Params',
@@ -117,29 +107,6 @@ class DatabaseController extends DocumentController {
         document.treeWidgetItems = result.data.tables.map(tableName => ({getTitle: () => tableName}))
         return document;
     }
-    /*initView($div, data) {
-        this.tables        = data.tables;
-        this.tableView     = data.tableView;
-        this.treeTables    = TreeWidget_createObject($div.find('.tcTables').get(0));
-        this.$divTableInfo = $div.find('.divTableInfo');
-        this.treeTables.on('select', this.listeners.select = this.onTableSelect.bind(this));
-        for (let i = 0; i < data.tables.length; i++) {
-            const tableName = data.tables[i];
-            this.treeTables.addItem(tableName);
-        }
-    }*/
-
-    /*async onTableSelect(e) {
-        console.log('DatabaseController.onTableSelect');
-        const tableName = e.item.caption;
-        const data = await this.model.getTableInfo(tableName);
-        const html = QForms.render(this.tableView, data);
-        this.$divTableInfo.empty();
-        this.$divTableInfo.append(html);
-        this.$divTableInfo.find('.btnCreateTable').click(() => {
-            this.newTableAction(tableName, data.tableInfo);
-        });
-    }*/
     onTableSelect2 = async item => {
         console.log('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
@@ -173,7 +140,6 @@ class DatabaseController extends DocumentController {
         this.view.rerender();
         // EditorController.editorController.treeWidget2.scrollToSelected();
     }
-
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
