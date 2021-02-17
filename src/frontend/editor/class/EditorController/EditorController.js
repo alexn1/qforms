@@ -12,7 +12,6 @@ class EditorController {
         this.items = null;              // treeWidget2 items
         this.documents = [];
         this.view = null;
-        this.view2 = null;
         this.tabWidget = null;
     }
 
@@ -34,10 +33,7 @@ class EditorController {
         this.items = [this.appCtrl];
 
         // view
-        this.view = Helper.createReactComponent(document.getElementById('sidebar'), EditorView, {ctrl: this});
-
-        // view 2
-        this.view2 = Helper.createReactComponent(document.getElementById('client'), EditorView2, {ctrl: this});
+        this.view = Helper.createReactComponent(document.getElementById('root'), EditorView, {ctrl: this});
     }
 
     deinit() {
@@ -142,7 +138,7 @@ class EditorController {
             // console.log('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
-        await this.view2.rerender();
+        await this.view.rerender();
     }
     findDocument(controller) {
         return this.documents.find(document => document.controller === controller) || null;
@@ -164,6 +160,6 @@ class EditorController {
         } else {
             this.tabWidget.state.active = this.documents.indexOf(activeDocument);
         }
-        this.view2.rerender();
+        this.view.rerender();
     }
 }
