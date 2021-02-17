@@ -30,8 +30,8 @@ class ApplicationEditorController extends VisualEditorController {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const appEditor = await this.createApplicationEditor();
-            result.data.ejs = await appEditor.getCustomFile('ejs');
-            result.data.css = await appEditor.getCustomFile('css');
+            // result.data.ejs = await appEditor.getCustomFile('ejs');
+            // result.data.css = await appEditor.getCustomFile('css');
             result.data.js = await appEditor.getCustomFile('js');
         }
         return result;

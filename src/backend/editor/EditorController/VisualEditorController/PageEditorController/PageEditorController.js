@@ -55,8 +55,8 @@ class PageEditorController extends VisualEditorController {
             case 'VisualView.html':
                 const appEditor = await this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
-                result.data.ejs = await pageEditor.getCustomFile('ejs');
-                result.data.css = await pageEditor.getCustomFile('css');
+                // result.data.ejs = await pageEditor.getCustomFile('ejs');
+                // result.data.css = await pageEditor.getCustomFile('css');
                 result.data.js = await pageEditor.getCustomFile('js');
                 return result;
             default:

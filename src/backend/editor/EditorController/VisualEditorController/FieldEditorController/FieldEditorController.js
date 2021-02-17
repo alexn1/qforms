@@ -64,8 +64,8 @@ class FieldEditorController extends VisualEditorController {
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor  = pageEditor.createFormEditor(params.form);
                 const fieldEditor = formEditor.getField(params.field);
-                result.data.ejs = await fieldEditor.getCustomFile('ejs');
-                result.data.css = await fieldEditor.getCustomFile('css');
+                // result.data.ejs = await fieldEditor.getCustomFile('ejs');
+                // result.data.css = await fieldEditor.getCustomFile('css');
                 result.data.js = await fieldEditor.getCustomFile('js');
                 return result;
             default:

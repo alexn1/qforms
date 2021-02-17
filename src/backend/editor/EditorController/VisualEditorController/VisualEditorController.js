@@ -4,7 +4,7 @@ const EditorController = require('../EditorController');
 
 class VisualEditorController extends EditorController {
 
-    async getView(params) {
+    /*async getView(params) {
         console.log('VisualEditorController.getView');
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
@@ -15,7 +15,7 @@ class VisualEditorController extends EditorController {
             result.view = await qforms.Helper.readTextFile(viewFilePath);
         }
         return result;
-    }
+    }*/
 
 }
 
