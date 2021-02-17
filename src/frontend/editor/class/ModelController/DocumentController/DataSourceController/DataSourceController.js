@@ -14,10 +14,6 @@ class DataSourceController extends DocumentController {
                 items: this.keyColumns
             }
         ];
-
-        this.cmSingleQuery   = null;
-        this.cmMultipleQuery = null;
-        this.cmCountQuery    = null;
     }
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
@@ -339,9 +335,8 @@ class DataSourceController extends DocumentController {
         if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
         return super.getDocumentViewClass();
     }
-    onCmCreate(cmSingleQuery, cmMultipleQuery, cmCountQuery) {
-        this.cmSingleQuery   = cmSingleQuery;
-        this.cmMultipleQuery = cmMultipleQuery;
-        this.cmCountQuery    = cmCountQuery;
+    async onSaveClick(name, value) {
+        // console.log('DataSourceController.onSaveClick', name, value);
+        await this.model.setValue(name, value);
     }
 }

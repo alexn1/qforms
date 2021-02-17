@@ -1,28 +1,21 @@
 class SqlDataSourceView extends DocumentView {
     constructor(props) {
         super(props);
-        this.cmSingleQuery   = React.createRef();
-        this.cmMultipleQuery = React.createRef();
-        this.cmCountQuery    = React.createRef();
+        this.singleRef   = React.createRef();
+        this.multipleRef = React.createRef();
+        this.countRef    = React.createRef();
         this.state = {
-            selected: 'single'
+            selected: 'singleQuery'
         };
-    }
-    getCmSingleQuery() {
-        return this.cmSingleQuery.current;
-    }
-    getCmMultipleQuery() {
-        return this.cmMultipleQuery.current;
-    }
-    getCmCountQuery() {
-        return this.cmCountQuery.current;
+        this.singleQuery   = null;
+        this.multipleQuery = null;
+        this.countQuery    = null;
     }
     componentDidMount() {
         const ctrl = this.props.ctrl;
-        const cmSingleQuery = DocumentView.createCM(this.getCmSingleQuery(), ctrl.model.getAttr('singleQuery'));
-        const cmMultipleQuery = DocumentView.createCM(this.getCmMultipleQuery(), ctrl.model.getAttr('multipleQuery'));
-        const cmCountQuery = DocumentView.createCM(this.getCmCountQuery(), ctrl.model.getAttr('countQuery'));
-        ctrl.onCmCreate(cmSingleQuery, cmMultipleQuery, cmCountQuery);
+        this.singleQuery   = DocumentView.createCM(this.singleRef.current  , ctrl.model.getAttr('singleQuery'));
+        this.multipleQuery = DocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
+        this.countQuery    = DocumentView.createCM(this.countRef.current   , ctrl.model.getAttr('countQuery'));
     }
     getButtonClass(name) {
         return this.state.selected === name ? 'btn-primary' : 'btn-default';
@@ -30,8 +23,10 @@ class SqlDataSourceView extends DocumentView {
     getVisibility(name) {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
-    onSaveClick = e => {
+    onSaveClick = async e => {
         console.log('SqlDataSourceView.onSaveClick');
+        const ctrl = this.props.ctrl;
+        await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
     }
     render() {
         return <div className={'SqlDataSourceView full flex-rows'}>
@@ -39,20 +34,20 @@ class SqlDataSourceView extends DocumentView {
                 <button className="btn btn-default btn-xs" onClick={this.onSaveClick}>Save</button>
                 &nbsp;
                 <div className="btn-group" role="group">
-                    <button className={`btn btn-xs ${this.getButtonClass('single')}`}   onClick={e => this.setState({selected: 'single'})}>singleQuery</button>
-                    <button className={`btn btn-xs ${this.getButtonClass('multiple')}`} onClick={e => this.setState({selected: 'multiple'})}>multipleQuery</button>
-                    <button className={`btn btn-xs ${this.getButtonClass('count')}`}    onClick={e => this.setState({selected: 'count'})}>countQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('singleQuery')}`}   onClick={e => this.setState({selected: 'singleQuery'})}>singleQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('multipleQuery')}`} onClick={e => this.setState({selected: 'multipleQuery'})}>multipleQuery</button>
+                    <button className={`btn btn-xs ${this.getButtonClass('countQuery')}`}    onClick={e => this.setState({selected: 'countQuery'})}>countQuery</button>
                 </div>
             </div>
             <div className="edit flex-max full">
-                <div className="cm-container full" style={{visibility: this.getVisibility('single')}}>
-                    <textarea ref={this.cmSingleQuery}></textarea>
+                <div className="cm-container full" style={{visibility: this.getVisibility('singleQuery')}}>
+                    <textarea ref={this.singleRef}/>
                 </div>
-                <div className="cm-container full" style={{visibility: this.getVisibility('multiple')}}>
-                    <textarea ref={this.cmMultipleQuery}></textarea>
+                <div className="cm-container full" style={{visibility: this.getVisibility('multipleQuery')}}>
+                    <textarea ref={this.multipleRef}/>
                 </div>
-                <div className="cm-container full" style={{visibility: this.getVisibility('count')}}>
-                    <textarea ref={this.cmCountQuery}></textarea>
+                <div className="cm-container full" style={{visibility: this.getVisibility('countQuery')}}>
+                    <textarea ref={this.countRef}/>
                 </div>
             </div>
         </div>;
