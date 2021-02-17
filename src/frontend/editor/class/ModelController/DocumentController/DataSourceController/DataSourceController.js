@@ -142,65 +142,6 @@ class DataSourceController extends DocumentController {
         return propList;
     }
 
-    async createTab(docs) {
-        /*console.log('DataSourceController.createTab', this.model.getFullName());
-        const name = this.model.getFullName();
-        const result = await this.model.getView('QueryView.ejs');
-        const html = QForms.render(result.view, {model: this.model});
-        this.$view        = $(html);
-        this.data         = result.data;
-        this.cmCountQuery = null;
-        this.cmSingleQuery = null;
-        this.cmMultipleQuery = null;
-        this.cmBackendJs  = null;
-        this.save         = 'singleQuery';
-
-        // tab
-        this.tab = docs.createTab(this.$view.get(0), name, (tab) => {
-            tab.ctrl.tab = undefined;
-        });
-        this.tab.ctrl = this;
-        docs.selectTab(this.tab);
-
-        // prop/backend tab
-        this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
-        this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
-        this.tabWidget.init();
-        this.tabWidget.on('tabShow', this.listeners.tabShow = this.tabWidget_TabShow.bind(this));
-
-        // toolbar
-        this.$view.find('.btnSave').click(() => {
-            this.btnSave_Click();
-        });
-        this.$view.find('.btnCountQuery').click(() => {
-            this.btnCountQuery_Click();
-        });
-        this.$view.find('.btnSingleQuery').click(() => {
-            this.btnSingleQuery_Click();
-        });
-        this.$view.find('.btnMultipleQuery').click(() => {
-            this.btnMultipleQuery_Click();
-        });
-        this.$view.find('.btnSaveController').click(() => {
-            this.btnSaveController_Click();
-        });
-        this.$view.find('.btnCreateController').click(() => {
-            this.btnCreateController_Click();
-        });
-
-        // properties
-        if (this.model.getClassName() === 'SqlDataSource') {
-            this.$view.find('.wndSingleQuery').css('display', 'block');
-            this.initCmSingleQuery();
-        }
-
-        if (this.data.backendJs) {
-            this.showCustomController();
-        } else {
-            this.$view.find('.btnSaveController').css('display', 'none');
-        }*/
-    }
-
     /*initCmCountQuery() {
         this.cmCountQuery = CodeMirror.fromTextArea(this.$view.find('.cmCountQuery').get(0), {lineNumbers: true, styleActiveLine: true, matchBrackets: true});
         this.cmCountQuery.setOption('theme', 'cobalt');

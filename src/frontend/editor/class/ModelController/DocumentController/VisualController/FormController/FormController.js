@@ -225,6 +225,4 @@ class FormController extends VisualController {
     getDocumentViewClass() {
         return VisualView;
     }
-    async createTab(docs) {
-    }
 }

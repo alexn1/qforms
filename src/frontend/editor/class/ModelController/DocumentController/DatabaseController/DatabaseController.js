@@ -110,13 +110,6 @@ class DatabaseController extends DocumentController {
             $("#myModal input[id='tableName']").focus();
         });
     }
-    async createTab(docs) {
-        /*console.log('DatabaseController.createTab');
-        const result = await this.model.getView('DatabaseView/DatabaseView.html');
-        const $div = $(result.view);
-        this.initView($div, result.data);
-        await super.createTab(docs, $div.get(0));*/
-    }
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');

@@ -151,7 +151,4 @@ class PageController extends VisualController {
     getDocumentViewClass() {
         return VisualView;
     }
-    async createTab(docs) {
-    }
-
 }

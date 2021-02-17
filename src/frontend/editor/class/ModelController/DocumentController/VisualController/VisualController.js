@@ -12,53 +12,6 @@ class VisualController extends DocumentController {
         this.cm = null;
     }
 
-    /*async createTab(docs) {
-        const name = this.model.getFullName('_');
-        const caption = this.model.getFullName('/');
-
-        // get from server all needed to display an edit window
-        const result = await this.model.getView('VisualView.html');
-        this.$view          = $(result.view);
-        this.$view.attr('id', name);
-        this.data           = result.data;
-        this.cmTemplateHtml = null;
-        this.cmTemplateCss  = null;
-        this.cmTemplateJs   = null;
-        this.save           = 'ejs';
-
-        // document tab
-        const tab = docs.createTab(this.$view.get(0), caption, (tab) => {tab.ctrl.tab = undefined;});
-        tab.ctrl = this;
-        docs.selectTab(tab);
-        this.tab = tab;
-
-        // view/code tab
-        this.$view.children('.TabWidget').attr('id', '{name}_TabWidget'.replace('{name}', name));
-        this.tabWidget = new TabWidget(this.$view.children('.TabWidget').get(0));
-        this.tabWidget.init();
-        this.tabWidget.on('tabShow', this.listeners.tabShow = this.tabWidget_TabShow.bind(this));
-
-        // custom view
-        if (this.data.ejs) {
-            this.showCustomView();
-        } else {
-            this.$view.find('.btnCreateView').click(() => {
-                this.btnCreateView_Click();
-            });
-            this.$view.find('.btnSaveView').css('display', 'none');
-        }
-
-        // custom controller
-        if (this.data.js) {
-            this.showCustomController();
-        } else {
-            this.$view.find('.btnCreateController').click(() => {
-                this.btnCreateController_Click();
-            });
-            this.$view.find('.btnSaveController').css('display', 'none');
-        }
-    }*/
-
     /*tabWidget_TabShow(ea) {
         if ($(ea.tab).hasClass('tabController')) {
             if (this.data.js) {

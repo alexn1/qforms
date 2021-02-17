@@ -83,17 +83,6 @@ class TableController extends DocumentController {
         $('#myModal').modal('show');
         $("#myModal input[id='columnName']").focus();
     }
-
-    async createTab(docs) {
-        /*console.log('TableController.createTab');
-        const result = await TableController.getView('TableView/TableView.ejs');
-        const html = QForms.render(result.view, {model: this.model});
-        const $div = $(html);
-        $div.find('.btnCreateForm').click(() => {
-            this.createFormAction();
-        });
-        super.createTab(docs, $div.get(0));*/
-    }
     onCreateFormButtonClick = async e => {
         console.log('TableController.onCreateFormButtonClick');
         await this.createFormAction();
