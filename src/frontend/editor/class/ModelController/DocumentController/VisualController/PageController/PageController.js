@@ -81,7 +81,6 @@ class PageController extends VisualController {
     }
 
     async actionNewForm() {
-        const self = this;
         const result = await Form.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -91,8 +90,8 @@ class PageController extends VisualController {
                 caption:$("#myModal input[id='caption']").val(),
                 class:$("#myModal select[id='formClass']").val()
             };
-            self.model.newForm(params).then((formData) => {
-                self.addFormItem(formData).select();
+            this.model.newForm(params).then((formData) => {
+                this.addFormItem(formData).select();
                 $('#myModal').modal('hide');
             });
         });
@@ -101,7 +100,6 @@ class PageController extends VisualController {
     }
 
     async newDataSourceAction() {
-        const self = this;
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -112,8 +110,8 @@ class PageController extends VisualController {
                 name :dsName,
                 class:dsClass
             };
-            DataSource.create(self.model, params).then((dataSourceData) => {
-                self.addDataSourceItem(dataSourceData).select();
+            DataSource.create(this.model, params).then((dataSourceData) => {
+                this.addDataSourceItem(dataSourceData).select();
             });
             $('#myModal').modal('hide');
         });

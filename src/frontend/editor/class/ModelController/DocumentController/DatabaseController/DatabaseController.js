@@ -83,15 +83,14 @@ class DatabaseController extends DocumentController {
         $("#myModal input[id='paramName']").focus();
     }
     actionNewTable() {
-        const self = this;
         TableController.getView('new.html').then((result) => {
             if (!result.view) throw new Error('actionNewTable: no view');
             $(document.body).append(result.view);
             $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
             $("#myModal button[name='create']").click(() => {
                 const tableName = $("#myModal input[id='tableName']").val();
-                self.model.newTable({name: tableName}).then((tableData) => {
-                    self.addTableItem(tableData).select();
+                this.model.newTable({name: tableName}).then((tableData) => {
+                    this.addTableItem(tableData).select();
                 });
                 $('#myModal').modal('hide');
             });

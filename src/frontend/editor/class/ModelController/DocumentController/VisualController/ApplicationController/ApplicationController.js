@@ -157,7 +157,6 @@ class ApplicationController extends VisualController {
     }
 
     async newDataSourceAction() {
-        const self = this;
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -168,8 +167,8 @@ class ApplicationController extends VisualController {
                 name :dsName,
                 class:dsClass
             };
-            self.model.newDataSource(params).then((dataSourceData) => {
-                self.addDataSourceItem(dataSourceData).select();
+            this.model.newDataSource(params).then((dataSourceData) => {
+                this.addDataSourceItem(dataSourceData).select();
             });
             $('#myModal').modal('hide');
         });

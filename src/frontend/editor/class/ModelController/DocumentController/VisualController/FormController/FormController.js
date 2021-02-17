@@ -100,7 +100,6 @@ class FormController extends VisualController {
     }
 
     async actionNewDataSource() {
-        const self = this;
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -111,8 +110,8 @@ class FormController extends VisualController {
                 name:dsName,
                 class:dsClass
             };
-            self.model.newDataSource(params).then((dataSourceData) => {
-                self.addDataSourceItem(dataSourceData).select();
+            this.model.newDataSource(params).then((dataSourceData) => {
+                this.addDataSourceItem(dataSourceData).select();
             });
             $('#myModal').modal('hide');
         });
@@ -121,7 +120,6 @@ class FormController extends VisualController {
     }
 
     async actionNewField() {
-        const self = this;
         const result = await Field.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -134,8 +132,8 @@ class FormController extends VisualController {
                 caption:caption,
                 class:fieldClass
             };
-            self.model.newField(params).then((fieldData) => {
-                self.addFieldItem(fieldData).select();
+            this.model.newField(params).then((fieldData) => {
+                this.addFieldItem(fieldData).select();
             });
             $('#myModal').modal('hide');
         });

@@ -68,15 +68,14 @@ class TableController extends DocumentController {
     }
 
     async actionNewColumn() {
-        const self = this;
         const result = await ColumnController.getView('new.html');
         if (!result.view) throw new Error('actionNewColumn: no view');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(() => {
             const columnName = $("#myModal input[id='columnName']").val();
-            self.model.newColumn(columnName).then((data) => {
-                self.addColumnItem(data).select();
+            this.model.newColumn(columnName).then((data) => {
+                this.addColumnItem(data).select();
             });
             $('#myModal').modal('hide');
         });
