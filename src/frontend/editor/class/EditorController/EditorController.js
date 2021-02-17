@@ -1,36 +1,29 @@
 class EditorController {
-    constructor(appData, runAppLink) {
+    constructor(data, runAppLink) {
         console.log('EditorController.constructor');
         EditorController.editorController = this;
-        this.appData = appData;
+        this.data = data;
         this.runAppLink = runAppLink;
-        // this.docs      = null;
-        // this.listeners = {};
-        this.appCtrl = null;
-        this.pg = null;
-        this.treeWidget2 = null;
-        this.items = null;              // treeWidget2 items
-        this.documents = [];
         this.view = null;
+        this.treeWidget2 = null;
+        this.pg = null;                 // property grid
+        this.items = null;              // treeWidget2 items
         this.tabWidget = null;
+        this.documents = [];
     }
 
     init() {
-        console.log('EditorController.init', this.appData);
+        console.log('EditorController.init', this.data);
 
-        // docs
-        // this.docs = document.getElementById('docs')._obj;
-        // this.docs.on('tabClosingByUser', this.listeners.tabClosingByUser = this.onTabClosingByUser.bind(this));
-
-        // appModel
-        const appModel = new Application(this.appData);
-        appModel.init();
-        // console.log('appModel:', appModel);
+        // app
+        const app = new Application(this.data);
+        app.init();
+        // console.log('app:', app);
 
         // application controller
-        this.appCtrl = new ApplicationController(appModel, this);
-        this.appCtrl.init();
-        this.items = [this.appCtrl];
+        const applicationController = new ApplicationController(app, this);
+        applicationController.init();
+        this.items = [applicationController];
 
         // view
         this.view = Helper.createReactComponent(document.getElementById('root'), EditorView, {ctrl: this});
