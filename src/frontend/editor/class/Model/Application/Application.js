@@ -153,11 +153,12 @@ class Application extends Model {
     }
 
     async newDataSource(params) {
-        return await QForms.doHttpRequest({
+        const data = await QForms.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
+        return this.createDatabase(data);
     }
 
 }

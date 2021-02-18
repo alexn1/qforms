@@ -115,26 +115,16 @@ class ApplicationController extends VisualController {
 
     async newDataSourceAction() {
         await EditorController.editorController.openModal(new NewDataSourceController({onCreate: async values => {
-
+            const dataSource = await this.model.newDataSource({
+                name : values.name,
+                class: values.class
+            });
+            /*const dataSourceController = this.createDataSource(dataSource);
+            await this.editorController.treeWidget2.select(dataSourceController);
+            dataSourceController.view.parent.open();
+            this.items[1].view.rerender();
+            this.editorController.treeWidget2.scrollToSelected();*/
         }}));
-        /*
-        const result = await DataSource.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const dsName = $("#myModal input[id='dsName']").val();
-            const dsClass = $("#myModal select[id='dsClass']").val();
-            const params = {
-                name :dsName,
-                class:dsClass
-            };
-            const dataSourceData = await this.model.newDataSource(params);
-            this.addDataSourceItem(dataSourceData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='dsName']").focus();
-        */
     }
 
     async newPageAction() {

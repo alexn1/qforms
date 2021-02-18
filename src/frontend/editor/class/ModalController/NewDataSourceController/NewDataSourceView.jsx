@@ -1,4 +1,16 @@
 class NewDataSourceView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.name  = null;
+        this.class = null;
+    }
+    onCreate = async e => {
+        // console.log('NewDataSourceView.onCreate');
+        await this.props.ctrl.onCreate({
+            name    : this.name.getValue(),
+            class   : this.class.getValue(),
+        });
+    }
     render() {
         const ctrl = this.props.ctrl;
         return <div className="NewDataSourceView modal-content" style={{width: 360, margin: 'auto'}}>
@@ -8,20 +20,20 @@ class NewDataSourceView extends ReactComponent {
             </div>
             <div className="modal-body">
                 <div className="form-group">
-                    <label htmlFor="dsName">Name</label>
-                    <input id="dsName" className="form-control"/>
+                    <label htmlFor="name">Name</label>
+                    <TextBox id={'name'} classList={['form-control']} onCreate={c => this.name = c}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dsClass">Class</label>
-                    <select id="dsClass" className="form-control">
-                        <option value="DataSource" selected>DataSource</option>
-                        <option value="SqlDataSource">SqlDataSource</option>
-                    </select>
+                    <label htmlFor="class">Class</label>
+                    <ComboBox id="class" classList={['form-control']} items={[
+                        {value: 'DataSource', title: 'DataSource'},
+                        {value: 'SqlDataSource', title: 'SqlDataSource'},
+                    ]} onCreate={c => this.class = c}/>
                 </div>
             </div>
             <div className="modal-footer">
-                <button name="create" type="button" className="btn btn-primary">Create</button>
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                <Button name="create" classList={['btn', 'btn-primary']} onClick={this.onCreate}>Create</Button>
+                <Button classList={['btn', 'btn-default']} onClick={ctrl.onClose}>Close</Button>
             </div>
         </div>;
     }
