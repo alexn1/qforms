@@ -10,14 +10,14 @@ class ModalView extends ReactComponent {
                 <div className="modal-body">
                     <div className="form-group">
                         <label htmlFor="class">Class</label>
-                        <select id="class" className="form-control">
-                            <option value="MySqlDatabase">MySqlDatabase</option>
-                            <option value="PostgreSqlDatabase">PostgreSqlDatabase</option>
-                        </select>
+                        <ComboBox classList={['form-control']} items={[
+                            {value: 'MySqlDatabase'     , title: 'MySqlDatabase'},
+                            {value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase'}
+                        ]}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
-                        <input id="name" className="form-control" value="default"/>
+                        <TextBox classList={['form-control']} value={'default'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="host">Host</label>
