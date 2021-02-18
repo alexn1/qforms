@@ -6,11 +6,11 @@ class NewPageView extends ReactComponent {
         this.startup = null;
     }
     onCreate = async e => {
-        console.log('NewPageView.onCreate');
+        // console.log('NewPageView.onCreate');
         await this.props.ctrl.onCreate({
-            name    : this.name.getValue(),
-            caption   : this.caption.getValue(),
-            startup   : this.startup.getValue(),
+            name   : this.name.getValue(),
+            caption: this.caption.getValue(),
+            startup: this.startup.getValue(),
         });
     }
     render() {
