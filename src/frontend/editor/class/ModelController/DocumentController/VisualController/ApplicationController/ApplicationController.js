@@ -93,44 +93,24 @@ class ApplicationController extends VisualController {
 
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
-
-        await EditorController.editorController.openModal(new NewDatabaseController());
-        return;
-
-
-        const result = await Database.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const _class   = $("#myModal select[id='class']").val();
-            const name     = $("#myModal input[id='name']").val();
-            const host     = $("#myModal input[id='host']").val();
-            const dbname   = $("#myModal input[id='dbname']").val();
-            const user     = $("#myModal input[id='user']").val();
-            const password = $("#myModal input[id='password']").val();
-            const params = {
-                _class: _class,
-                name  : name,
-                params: {
-                    host    : {name: 'host'    , value: host    },
-                    database: {name: 'database', value: dbname  },
-                    user    : {name: 'user'    , value: user    },
-                    password: {name: 'password', value: password}
-                }
-            };
-            // console.log('params:', params);
-            const database = await this.model.newDatabase(params);
-            const databaseController = this.createDatabase(database);
-
-            $('#myModal').modal('hide');
-
-            await this.editorController.treeWidget2.select(databaseController);
-            databaseController.view.parent.open();
-            this.items[0].view.rerender();
-            this.editorController.treeWidget2.scrollToSelected();
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
+        await EditorController.editorController.openModal(new NewDatabaseController({onCreate: async values => {
+            console.log('values: ', values);
+                const database = await this.model.newDatabase({
+                    _class: values.class,
+                    name  : values.name,
+                    params: {
+                        host    : {name: 'host'    , value: values.host    },
+                        database: {name: 'database', value: values.database},
+                        user    : {name: 'user'    , value: values.user    },
+                        password: {name: 'password', value: values.password}
+                    }
+                });
+                const databaseController = this.createDatabase(database);
+                await this.editorController.treeWidget2.select(databaseController);
+                databaseController.view.parent.open();
+                this.items[0].view.rerender();
+                this.editorController.treeWidget2.scrollToSelected();
+        }}));
     }
 
     async newPageAction() {

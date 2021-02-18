@@ -1,4 +1,7 @@
 class ModalController {
+    constructor(options) {
+        this.options = options;
+    }
     onClose = async e => {
         console.log('ModalController.onClose');
         await this.close();
@@ -6,6 +9,9 @@ class ModalController {
     onCreate = async values => {
         console.log('ModalController.onCreate', values);
         await this.close();
+        if (this.options.onCreate) {
+            await this.options.onCreate(values);
+        }
     }
     async close() {
         await EditorController.editorController.onModalClose();
