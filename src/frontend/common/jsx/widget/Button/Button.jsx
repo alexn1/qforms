@@ -20,6 +20,7 @@ class Button extends ReactComponent {
         return (
             <button className={this.getClassName()}
                 name={this.props.name}
+                id={this.props.id}
                 disabled={this.isDisabled()}
                 onClick={this.onClick}
                 style={{

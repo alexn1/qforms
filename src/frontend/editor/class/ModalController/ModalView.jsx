@@ -4,41 +4,43 @@ class ModalView extends ReactComponent {
         return <Modal>
             <div className="modal-content" style={{width: 360, margin: 'auto'}}>
                 <div className="modal-header">
-                    <button type="button" className="close" data-dismiss="modal" onClick={ctrl.onClose}><span>&times;</span></button>
+                    <button type="button" className="close" data-dismiss="modal" onClick={ctrl.onClose}>
+                        <span>&times;</span>
+                    </button>
                     <h4 className="modal-title">New Database</h4>
                 </div>
                 <div className="modal-body">
                     <div className="form-group">
                         <label htmlFor="class">Class</label>
-                        <ComboBox classList={['form-control']} items={[
+                        <ComboBox id={'class'} classList={['form-control']} items={[
                             {value: 'MySqlDatabase'     , title: 'MySqlDatabase'},
                             {value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase'}
                         ]}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
-                        <TextBox classList={['form-control']} value={'default'}/>
+                        <TextBox id={'name'} classList={['form-control']} value={'default'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="host">Host</label>
-                        <input id="host" className="form-control" value="localhost"/>
+                        <TextBox id={'host'} classList={['form-control']} value={'localhost'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="dbname">Database</label>
-                        <input id="dbname" className="form-control" value="test"/>
+                        <TextBox id={'dbname'} classList={['form-control']} value={'test'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="user">User</label>
-                        <input id="user" className="form-control" value="test"/>
+                        <TextBox id={'user'} classList={['form-control']} value={'test'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="user">Password</label>
-                        <input id="password" className="form-control" value="123qwe"/>
+                        <TextBox id={'password'} classList={['form-control']} value={'123qwe'}/>
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button name="create" type="button" className="btn btn-primary">Create</button>
-                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                    <Button name="create" classList={['btn', 'btn-primary']} onClick={ctrl.onCreate}>Create</Button>
+                    <Button classList={['btn', 'btn-default']} onClick={ctrl.onClose}>Close</Button>
                 </div>
             </div>
         </Modal>;
