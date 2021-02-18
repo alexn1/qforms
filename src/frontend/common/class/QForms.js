@@ -90,21 +90,6 @@ class QForms {
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
-
-    /*static go(url, method, params) {
-        let inputs = '';
-        for (const name in params) {
-            inputs += '<input type="hidden" name="{name}" value="{value}">'
-                .replace('{name}',  name)
-                .replace('{value}', params[name]);
-        }
-        const form =  '<form action="{url}" method="{method}" target="_blank">{inputs}</form>'
-            .replace('{url}',    url)
-            .replace('{method}', method)
-            .replace('{inputs}', inputs);
-        $(form).appendTo('body').submit().remove();
-    }*/
-
     static insertNewNodeAt(parent, child, i) {
         if (i < 0 || i > parent.children.length) {
             throw new Error('invalid index i = ' + i + ', length = ' + parent.childNodes.length);
