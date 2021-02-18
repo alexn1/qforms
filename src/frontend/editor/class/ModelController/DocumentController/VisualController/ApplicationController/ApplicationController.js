@@ -94,7 +94,7 @@ class ApplicationController extends VisualController {
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
 
-        await EditorController.editorController.openModal(new ModalController());
+        await EditorController.editorController.openModal(new NewDatabaseController());
         return;
 
 

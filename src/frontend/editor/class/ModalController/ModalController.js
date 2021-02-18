@@ -1,6 +1,4 @@
 class ModalController {
-    constructor() {
-    }
     onClose = async e => {
         console.log('ModalController.onClose');
         await this.close();
@@ -10,5 +8,8 @@ class ModalController {
     }
     async close() {
         await EditorController.editorController.onModalClose();
+    }
+    getViewClass() {
+        throw new Error('ModalController.getViewClass not implemented');
     }
 }
