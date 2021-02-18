@@ -1,10 +1,23 @@
 class NewDatabaseView extends ReactComponent {
     constructor(props) {
         super(props);
-        this.class = null;
+        this.class    = null;
+        this.name     = null;
+        this.host     = null;
+        this.database = null;
+        this.user     = null;
+        this.password = null;
     }
-    onCreate = e => {
-        console.log('NewDatabaseView.onCreate', {class: this.class.getValue()});
+    onCreate = async e => {
+        // console.log('NewDatabaseView.onCreate');
+        await this.props.ctrl.onCreate({
+            class   : this.class.getValue(),
+            name    : this.name.getValue(),
+            host    : this.host.getValue(),
+            database: this.database.getValue(),
+            user    : this.user.getValue(),
+            password: this.password.getValue()
+        });
     }
     render() {
         const ctrl = this.props.ctrl;
@@ -25,23 +38,23 @@ class NewDatabaseView extends ReactComponent {
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <TextBox id={'name'} classList={['form-control']} value={'default'}/>
+                    <TextBox id={'name'} classList={['form-control']} value={'default'} onCreate={c => this.name = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="host">Host</label>
-                    <TextBox id={'host'} classList={['form-control']} value={'localhost'}/>
+                    <TextBox id={'host'} classList={['form-control']} value={'localhost'} onCreate={c => this.host = c}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dbname">Database</label>
-                    <TextBox id={'dbname'} classList={['form-control']} value={'test'}/>
+                    <label htmlFor="database">Database</label>
+                    <TextBox id={'database'} classList={['form-control']} value={'test'} onCreate={c => this.database = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="user">User</label>
-                    <TextBox id={'user'} classList={['form-control']} value={'test'}/>
+                    <TextBox id={'user'} classList={['form-control']} value={'test'} onCreate={c => this.user = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="user">Password</label>
-                    <TextBox id={'password'} classList={['form-control']} value={'123qwe'}/>
+                    <TextBox id={'password'} classList={['form-control']} value={'123qwe'} onCreate={c => this.password = c}/>
                 </div>
             </div>
             <div className="modal-footer">
