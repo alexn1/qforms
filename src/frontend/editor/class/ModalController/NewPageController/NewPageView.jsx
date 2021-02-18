@@ -1,4 +1,18 @@
 class NewPageView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.name    = null;
+        this.caption = null;
+        this.startup = null;
+    }
+    onCreate = async e => {
+        console.log('NewPageView.onCreate');
+        await this.props.ctrl.onCreate({
+            name    : this.name.getValue(),
+            caption   : this.caption.getValue(),
+            startup   : this.startup.getValue(),
+        });
+    }
     render() {
         const ctrl = this.props.ctrl;
         return <div className="modal-content" style={{width: 360, margin: 'auto'}}>
@@ -9,22 +23,22 @@ class NewPageView extends ReactComponent {
             <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <input id="name" className="form-control"/>
+                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="caption">Caption</label>
-                    <input id="caption" className="form-control"/>
+                    <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="startup">Startup</label>
-                    <select id="startup" className="form-control">
-                        <option selected>false</option>
-                        <option>true</option>
-                    </select>
+                    <ComboBox id="startup" classList={['form-control']} items={[
+                        {value: 'false', title: 'false'},
+                        {value: 'true', title: 'true'}
+                    ]} onCreate={c => this.startup = c}/>
                 </div>
             </div>
             <div className="modal-footer">
-                <button name="create" type="button" className="btn btn-primary">Create</button>
+                <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
                 <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
             </div>
         </div>;

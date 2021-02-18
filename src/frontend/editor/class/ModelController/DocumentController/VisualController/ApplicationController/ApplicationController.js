@@ -128,20 +128,11 @@ class ApplicationController extends VisualController {
     }
 
     async newPageAction() {
-        await EditorController.editorController.openModal(new NewPageController());
-        /*
-        const result = await Page.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const name    = $("#myModal input[id='name']").val();
-            const caption = $("#myModal input[id='caption']").val();
-            const startup = $("#myModal select[id='startup']").val();
-
+        await EditorController.editorController.openModal(new NewPageController({onCreate: async values => {
             const page = await this.model.newPage({
-                name   : name,
-                caption: caption,
-                startup: startup
+                name   : values.name,
+                caption: values.caption,
+                startup: values.startup
             });
             const pageLinkController = this.createPageLink(page.pageLink);
             const pageController = new PageController(page, pageLinkController);
@@ -149,12 +140,7 @@ class ApplicationController extends VisualController {
             pageLinkController.setPageController(pageController);
             this.editorController.treeWidget2.select(pageLinkController);
             this.editorController.treeWidget2.scrollToSelected();
-
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
-        */
+        }}));
     }
 
     getPropList() {
