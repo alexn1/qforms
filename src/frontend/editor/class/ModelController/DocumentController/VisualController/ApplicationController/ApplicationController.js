@@ -94,23 +94,47 @@ class ApplicationController extends VisualController {
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
         await EditorController.editorController.openModal(new NewDatabaseController({onCreate: async values => {
-            console.log('values: ', values);
-                const database = await this.model.newDatabase({
-                    _class: values.class,
-                    name  : values.name,
-                    params: {
-                        host    : {name: 'host'    , value: values.host    },
-                        database: {name: 'database', value: values.database},
-                        user    : {name: 'user'    , value: values.user    },
-                        password: {name: 'password', value: values.password}
-                    }
-                });
-                const databaseController = this.createDatabase(database);
-                await this.editorController.treeWidget2.select(databaseController);
-                databaseController.view.parent.open();
-                this.items[0].view.rerender();
-                this.editorController.treeWidget2.scrollToSelected();
+            // console.log('values: ', values);
+            const database = await this.model.newDatabase({
+                _class: values.class,
+                name  : values.name,
+                params: {
+                    host    : {name: 'host'    , value: values.host    },
+                    database: {name: 'database', value: values.database},
+                    user    : {name: 'user'    , value: values.user    },
+                    password: {name: 'password', value: values.password}
+                }
+            });
+            const databaseController = this.createDatabase(database);
+            await this.editorController.treeWidget2.select(databaseController);
+            databaseController.view.parent.open();
+            this.items[0].view.rerender();
+            this.editorController.treeWidget2.scrollToSelected();
         }}));
+    }
+
+    async newDataSourceAction() {
+        await EditorController.editorController.openModal(new NewDataSourceController({onCreate: async values => {
+
+        }}));
+        /*
+        const result = await DataSource.prototype.getView('new.html');
+        $(document.body).append(result.view);
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+        $("#myModal button[name='create']").click(async () => {
+            const dsName = $("#myModal input[id='dsName']").val();
+            const dsClass = $("#myModal select[id='dsClass']").val();
+            const params = {
+                name :dsName,
+                class:dsClass
+            };
+            const dataSourceData = await this.model.newDataSource(params);
+            this.addDataSourceItem(dataSourceData).select();
+            $('#myModal').modal('hide');
+        });
+        $('#myModal').modal('show');
+        $("#myModal input[id='dsName']").focus();
+        */
     }
 
     async newPageAction() {
@@ -140,25 +164,6 @@ class ApplicationController extends VisualController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
-    }
-
-    async newDataSourceAction() {
-        const result = await DataSource.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const dsName = $("#myModal input[id='dsName']").val();
-            const dsClass = $("#myModal select[id='dsClass']").val();
-            const params = {
-                name :dsName,
-                class:dsClass
-            };
-            const dataSourceData = await this.model.newDataSource(params);
-            this.addDataSourceItem(dataSourceData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='dsName']").focus();
     }
 
     getPropList() {
