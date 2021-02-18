@@ -119,11 +119,11 @@ class ApplicationController extends VisualController {
                 name : values.name,
                 class: values.class
             });
-            /*const dataSourceController = this.createDataSource(dataSource);
+            const dataSourceController = this.createDataSource(dataSource);
             await this.editorController.treeWidget2.select(dataSourceController);
             dataSourceController.view.parent.open();
             this.items[1].view.rerender();
-            this.editorController.treeWidget2.scrollToSelected();*/
+            this.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 

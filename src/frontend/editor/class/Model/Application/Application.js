@@ -158,7 +158,7 @@ class Application extends Model {
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
-        return this.createDatabase(data);
+        return this.createDataSource(data);
     }
 
 }
