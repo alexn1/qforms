@@ -61,12 +61,7 @@ class EditorView extends ReactComponent {
                     tabs={this.getTabs()}
                 />
             </div>
-            {/*<Modal>
-                <div>
-                    <div className={'close'}>&times;</div>
-                    <p>abc</p>
-                </div>
-            </Modal>*/}
+            {ctrl.modal && React.createElement(ModalView, {ctrl: ctrl.modal})}
         </div>;
     }
 }

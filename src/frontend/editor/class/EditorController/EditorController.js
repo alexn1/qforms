@@ -10,6 +10,7 @@ class EditorController {
         this.items = null;              // treeWidget2 items
         this.tabWidget = null;
         this.documents = [];
+        this.modal = null;
     }
 
     init() {
@@ -143,5 +144,15 @@ class EditorController {
             this.tabWidget.state.active = this.documents.indexOf(activeDocument);
         }
         this.view.rerender();
+    }
+    async openModal(modalController) {
+        console.log('EditorController.openModal');
+        this.modal = modalController;
+        await this.view.rerender();
+    }
+    async onModalClose() {
+        console.log('EditorController.onModalClose');
+        this.modal = null;
+        await this.view.rerender();
     }
 }

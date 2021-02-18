@@ -93,6 +93,11 @@ class ApplicationController extends VisualController {
 
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
+
+        await EditorController.editorController.openModal(new ModalController());
+        return;
+
+
         const result = await Database.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
