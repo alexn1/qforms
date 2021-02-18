@@ -1,4 +1,11 @@
 class NewDatabaseView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.class = null;
+    }
+    onCreate = e => {
+        console.log('NewDatabaseView.onCreate', {class: this.class.getValue()});
+    }
     render() {
         const ctrl = this.props.ctrl;
         return <div className="NewDatabaseView modal-content" style={{width: 360, margin: 'auto'}}>
@@ -14,7 +21,7 @@ class NewDatabaseView extends ReactComponent {
                     <ComboBox id={'class'} classList={['form-control']} items={[
                         {value: 'MySqlDatabase'     , title: 'MySqlDatabase'},
                         {value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase'}
-                    ]}/>
+                    ]} onCreate={c => this.class = c}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -38,7 +45,7 @@ class NewDatabaseView extends ReactComponent {
                 </div>
             </div>
             <div className="modal-footer">
-                <Button name="create" classList={['btn', 'btn-primary']} onClick={ctrl.onCreate}>Create</Button>
+                <Button name="create" classList={['btn', 'btn-primary']} onClick={this.onCreate}>Create</Button>
                 <Button classList={['btn', 'btn-default']} onClick={ctrl.onClose}>Close</Button>
             </div>
         </div>;

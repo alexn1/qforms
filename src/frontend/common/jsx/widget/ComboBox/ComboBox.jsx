@@ -2,14 +2,20 @@ class ComboBox extends ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props);
         super(props);
+        let value = '';
         if (props.value) {
+            value = props.value;
             const item = props.items.find(item => item.value === props.value);
             if (!item) {
                 console.error(`no item for value: ${props.value}, ${typeof props.value}`);
                 console.log('items:', props.items);
             }
+        } else {
+            if (props.items.length) {
+                value = props.items[0].value;
+            }
         }
-        this.state  = {value: props.value || ''};
+        this.state = {value: value};
     }
     getValue() {
         return this.state.value;
