@@ -1,19 +1,30 @@
 class NewColumnView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.name = null;
+    }
+    onCreate = async e => {
+        // console.log('NewParamView.onCreate');
+        await this.props.ctrl.onCreate({
+            name: this.name.getValue()
+        });
+    }
     render() {
-        return <div className="modal-content">
+        const ctrl = this.props.ctrl;
+        return <div className="modal-content" style={{width: 360, margin: 'auto'}}>
             <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal"><span>&times;</span></button>
+                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Column</h4>
             </div>
             <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="columnName">Name</label>
-                    <input id="columnName" className="form-control"/>
+                    <TextBox id="columnName" classList={['form-control']} onCreate={c => this.name = c}/>
                 </div>
             </div>
             <div className="modal-footer">
-                <button name="create" type="button" className="btn btn-primary">Create</button>
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
+                <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
             </div>
         </div>;
     }
