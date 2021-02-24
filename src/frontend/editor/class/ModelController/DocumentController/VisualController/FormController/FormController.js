@@ -110,6 +110,10 @@ class FormController extends VisualController {
     }
 
     async actionNewField() {
+        await EditorController.editorController.openModal(new NewFieldController({onCreate: async values => {
+
+        }}));
+        /*
         const result = await Field.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -127,7 +131,7 @@ class FormController extends VisualController {
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
+        $("#myModal input[id='name']").focus();*/
     }
 
     async actionNewAction() {
