@@ -1,4 +1,20 @@
 class NewFormFromTableView extends ReactComponent {
+    constructor(props) {
+        super(props);
+        this.page = null;
+        this.class = null;
+        this.name  = null;
+        this.caption  = null;
+    }
+    onCreate = async e => {
+        // console.log('NewDataSourceView.onCreate');
+        await this.props.ctrl.onCreate({
+            page   : this.page.getValue(),
+            class  : this.class.getValue(),
+            name   : this.name.getValue(),
+            caption: this.caption.getValue(),
+        });
+    }
     render() {
         const ctrl = this.props.ctrl;
         const tableController = ctrl.options.tableController;
@@ -11,32 +27,32 @@ class NewFormFromTableView extends ReactComponent {
             </div>
             <div className="modal-body">
                 <div className="form-group">
-                    <label htmlFor="formTable">Table</label>
-                    <TextBox id="formTable" classList={['form-control']} disabled={true} value={tableController.model.getName()}/>
+                    <label htmlFor="table">Table</label>
+                    <TextBox id="table" classList={['form-control']} disabled={true} value={tableController.model.getName()}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="formPage">Page</label>
-                    <ComboBox id="formPage" classList={['form-control']} items={pages} value={pages[pages.length-1].value}/>
+                    <label htmlFor="page">Page</label>
+                    <ComboBox id="page" classList={['form-control']} items={pages} value={pages[pages.length-1].value} onCreate={c => this.page = c}/>
             </div>
             <div className="form-group">
-                <label htmlFor="formClass">Form Class</label>
-                <ComboBox id="formClass" classList={['form-control']} value={'TableForm'} items={[
+                <label htmlFor="class">Form Class</label>
+                <ComboBox id="class" classList={['form-control']} value={'TableForm'} items={[
                     {value: 'RowForm', title: 'RowForm'},
                     {value: 'TableForm', title: 'TableForm'},
                     {value: 'TreeForm', title: 'TreeForm'},
-                ]}/>
+                ]} onCreate={c => this.class = c}/>
             </div>
             <div className="form-group">
-                <label htmlFor="formName">Name</label>
-                <TextBox id="formName" classList={['form-control']} value={ctrl.options.tableController.model.getName()}/>
+                <label htmlFor="name">Name</label>
+                <TextBox id="name" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.name = c}/>
             </div>
             <div className="form-group">
-                <label htmlFor="formCaption">Caption</label>
-                <TextBox id="formCaption" classList={['form-control']} value={ctrl.options.tableController.model.getName()}/>
+                <label htmlFor="caption">Caption</label>
+                <TextBox id="caption" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.caption = c}/>
             </div>
         </div>
         <div className="modal-footer">
-            <button name="create" type="button" className="btn btn-primary">Create</button>
+            <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
             <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
         </div>
     </div>;

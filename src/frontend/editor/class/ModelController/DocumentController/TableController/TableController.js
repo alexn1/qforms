@@ -95,53 +95,31 @@ class TableController extends DocumentController {
         await EditorController.editorController.openModal(new NewFormFromTableController({
             tableController: this,
             onCreate: async values => {
-
+                const formWizard = FormWizard.create({
+                    model       : this.model,
+                    pageName    : values.page,
+                    className   : values.class,
+                    formName    : values.name,
+                    formCaption : values.caption,
+                });
+                const params = formWizard.getFormParams();
+                // console.log('params:', params);
+                const databaseController = this.parent;
+                const applicationController = databaseController.parent;
+                const pageLinkController = applicationController.findPageLink(values.page);
+                if (!pageLinkController.pageController) {
+                    await pageLinkController.loadPage();
+                }
+                const pageController = pageLinkController.pageController;
+                // console.log('pageController:', pageController);
+                const form = await pageController.model.newForm(params);
+                // console.log('form:', form);
+                const formController = pageController.createForm(form);
+                await EditorController.editorController.treeWidget2.select(formController);
+                formController.view.parent.open();
+                pageLinkController.view.rerender();
+                EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*
-        const result = await TableController.getView('newForm.ejs');
-        const databaseController = this.parent;
-        const applicationController = databaseController.parent;
-        const application = this.model.parent.parent;
-        const html = QForms.render(result.view, {
-            tableName: this.model.getName(),
-            pages    : application.pageLinks.map(pageLink => pageLink.getName())
-        });
-        $(document.body).append(html);
-        $('#modal').on('hidden.bs.modal', function(e) {$(this).remove();});
-        $("#modal button[name='create']").click(async () => {
-            const formPage    = $("#modal select[id='formPage']").val();
-            const formClass   = $("#modal select[id='formClass']").val();
-            const formName    = $("#modal input[id='formName']").val();
-            const formCaption = $("#modal input[id='formCaption']").val();
-            const formWizard = FormWizard.create({
-                model       : this.model,
-                pageName    : formPage,
-                className   : formClass,
-                formName    : formName,
-                formCaption : formCaption,
-            });
-            const params = formWizard.getFormParams();
-            // console.log('params:', params);
-
-            const pageLinkController = applicationController.findPageLink(formPage);
-            if (!pageLinkController.pageController) {
-                await pageLinkController.loadPage();
-            }
-            const pageController = pageLinkController.pageController;
-            // console.log('pageController:', pageController);
-            const form = await pageController.model.newForm(params);
-            // console.log('form:', form);
-
-            const formController = pageController.createForm(form);
-            await EditorController.editorController.treeWidget2.select(formController);
-            formController.view.parent.open();
-            pageLinkController.view.rerender();
-            EditorController.editorController.treeWidget2.scrollToSelected();
-
-            $('#modal').modal('hide');
-        });
-        $('#modal').modal('show');
-        $("#modal input[id='formPage']").focus();*/
     }
     async delete() {
         console.log('TableController.delete', this.getTitle());
