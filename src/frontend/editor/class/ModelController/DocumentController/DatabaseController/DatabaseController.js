@@ -70,19 +70,13 @@ class DatabaseController extends DocumentController {
     }
     async actionNewParam() {
         await EditorController.editorController.openModal(new NewParamController({onCreate: async values => {
-
+            const param = await this.model.newParam(values.name);
+            const paramController = this.createParam(param);
+            await EditorController.editorController.treeWidget2.select(paramController);
+            paramController.view.parent.open();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*const result = await ParamController.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const paramName = $("#myModal input[id='paramName']").val();
-            const paramData = await this.model.newParam(paramName);
-            this.addParamItem(paramData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='paramName']").focus();*/
     }
     async actionNewTable() {
         const result = await TableController.getView('new.html');

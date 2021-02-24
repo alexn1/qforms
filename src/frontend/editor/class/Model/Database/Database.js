@@ -76,7 +76,7 @@ class Database extends Model {
     }
 
     async newParam(name) {
-        return await QForms.doHttpRequest({
+        const data = await QForms.doHttpRequest({
             controller: 'Param',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -84,6 +84,7 @@ class Database extends Model {
                 name    : name
             })
         });
+        return this.createParam(data);
     }
 
     async newTable(params) {

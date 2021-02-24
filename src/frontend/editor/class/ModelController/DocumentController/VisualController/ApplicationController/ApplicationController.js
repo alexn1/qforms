@@ -106,10 +106,10 @@ class ApplicationController extends VisualController {
                 }
             });
             const databaseController = this.createDatabase(database);
-            await this.editorController.treeWidget2.select(databaseController);
+            await EditorController.editorController.treeWidget2.select(databaseController);
             databaseController.view.parent.open();
-            this.items[0].view.rerender();
-            this.editorController.treeWidget2.scrollToSelected();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 
@@ -120,10 +120,10 @@ class ApplicationController extends VisualController {
                 class: values.class
             });
             const dataSourceController = this.createDataSource(dataSource);
-            await this.editorController.treeWidget2.select(dataSourceController);
+            await EditorController.editorController.treeWidget2.select(dataSourceController);
             dataSourceController.view.parent.open();
-            this.items[1].view.rerender();
-            this.editorController.treeWidget2.scrollToSelected();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 
@@ -138,8 +138,8 @@ class ApplicationController extends VisualController {
             const pageController = new PageController(page, pageLinkController);
             pageController.init();
             pageLinkController.setPageController(pageController);
-            this.editorController.treeWidget2.select(pageLinkController);
-            this.editorController.treeWidget2.scrollToSelected();
+            EditorController.editorController.treeWidget2.select(pageLinkController);
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 
