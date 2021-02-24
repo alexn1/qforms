@@ -126,6 +126,10 @@ class FormController extends VisualController {
 
     async actionNewAction() {
         console.log('FormController.actionNewAction');
+        await EditorController.editorController.openModal(new NewActionController({onCreate: async values => {
+
+        }}));
+        /*
         const result = await Action.prototype.getView('new.html');
         $(document.body).append(result.view);
         $('#modal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -140,6 +144,7 @@ class FormController extends VisualController {
         });
         $('#modal').modal('show');
         $("#modal input[id='name']").focus();
+        */
     }
 
     getPropList() {
