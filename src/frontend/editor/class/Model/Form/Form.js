@@ -125,16 +125,6 @@ class Form extends Model {
         });
     }
 
-    async newControl(params) {
-        params['pageFileName'] = this.page.pageLink.getFileName();
-        params['form']         = this.getName();
-        return await QForms.doHttpRequest({
-            controller: 'Control',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-    }
-
     async newAction(params) {
         params['pageFileName'] = this.page.pageLink.getFileName();
         params['form']         = this.getName();

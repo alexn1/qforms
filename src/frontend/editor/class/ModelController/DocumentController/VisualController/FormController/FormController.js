@@ -61,7 +61,6 @@ class FormController extends VisualController {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},
             {'action': 'newField'     , 'caption': 'New Field'      },
-            {'action': 'newControl'   , 'caption': 'New Control'    },
             {'action': 'newAction'    , 'caption': 'New Action'     },
             {'action': ''             , 'caption': '-'              },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
@@ -78,9 +77,6 @@ class FormController extends VisualController {
                 break;
             case 'newField':
                 this.actionNewField();
-                break;
-            case 'newControl':
-                this.actionNewControl();
                 break;
             case 'newAction':
                 this.actionNewAction();
@@ -137,24 +133,6 @@ class FormController extends VisualController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='name']").focus();
-    }
-
-    async actionNewControl() {
-        const result = await Control.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#modal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#modal button[name='create']").click(async () => {
-            const params = {
-                name   : $("#modal input[id='name']").val(),
-                class  : $("#modal select[id='class']").val(),
-                caption: $("#modal input[id='caption']").val()
-            };
-            const data = await this.model.newControl(params);
-            this.addControlItem(data).select();
-            $('#modal').modal('hide');
-        });
-        $('#modal').modal('show');
-        $("#modal input[id='name']").focus();
     }
 
     async actionNewAction() {
