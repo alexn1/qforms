@@ -129,11 +129,12 @@ class Form extends Model {
     async newAction(params) {
         params['pageFileName'] = this.page.pageLink.getFileName();
         params['form']         = this.getName();
-        return await QForms.doHttpRequest({
+        const data = await QForms.doHttpRequest({
             controller: 'Action',
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
+        return this.createAction(data);
     }
 
     async newDataSource(params) {
