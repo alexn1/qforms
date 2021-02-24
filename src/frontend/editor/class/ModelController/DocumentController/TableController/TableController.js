@@ -69,20 +69,13 @@ class TableController extends DocumentController {
 
     async actionNewColumn() {
         await EditorController.editorController.openModal(new NewColumnController({onCreate: async values => {
-
+            const column = await this.model.newColumn(values.name);
+            const columnController = this.createColumn(column);
+            await EditorController.editorController.treeWidget2.select(columnController);
+            columnController.view.parent.open();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*const result = await ColumnController.getView('new.html');
-        if (!result.view) throw new Error('actionNewColumn: no view');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const columnName = $("#myModal input[id='columnName']").val();
-            const data = await this.model.newColumn(columnName);
-            this.addColumnItem(data).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='columnName']").focus();*/
     }
     onCreateFormButtonClick = async e => {
         console.log('TableController.onCreateFormButtonClick');

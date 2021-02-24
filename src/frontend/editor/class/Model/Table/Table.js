@@ -26,7 +26,7 @@ class Table extends Model {
 
     async newColumn(name) {
         if (!name) throw new Error(`newColumn: no name`);
-        return await QForms.doHttpRequest({
+        const data = await QForms.doHttpRequest({
             controller: 'Column',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -35,6 +35,7 @@ class Table extends Model {
                 name    : name
             })
         });
+        return this.createColumn(data);
     }
     async deleteData() {
         await QForms.doHttpRequest({
