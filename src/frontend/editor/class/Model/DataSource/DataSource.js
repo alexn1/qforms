@@ -121,7 +121,7 @@ class DataSource extends Model {
         return await QForms.doHttpRequest(args);
     }
 
-    async newKeyColumn(name) {
+    async newKeyColumnData(name) {
         const args = {
             controller: 'KeyColumn',
             action    : '_new',
@@ -139,7 +139,10 @@ class DataSource extends Model {
         }
         return await QForms.doHttpRequest(args);
     }
-
+    async newKeyColumn(name) {
+        const data = await this.newKeyColumnData(name);
+        return this.createKeyColumn(data);
+    }
     async getView(view) {
         const args = {
             controller: 'DataSource',

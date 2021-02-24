@@ -68,19 +68,13 @@ class DataSourceController extends DocumentController {
 
     async actionNewKeyColumn() {
         await EditorController.editorController.openModal(new NewKeyColumnController({onCreate: async values => {
-
+            const keyColumn = await this.model.newKeyColumn(values.name);
+            const keyColumnController = this.createKeyColumn(keyColumn);
+            await EditorController.editorController.treeWidget2.select(keyColumnController);
+            keyColumnController.view.parent.open();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*const result = await KeyColumnController.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const itemName = $("#myModal input[id='itemName']").val();
-            const itemData = await this.model.newKeyColumn(itemName);
-            this.addKeyColumn(itemData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='itemName']").focus();*/
     }
 
     getPropList() {
