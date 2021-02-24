@@ -79,7 +79,10 @@ class DatabaseController extends DocumentController {
         }}));
     }
     async actionNewTable() {
-        const result = await TableController.getView('new.html');
+        await EditorController.editorController.openModal(new NewTableController({onCreate: async values => {
+
+        }}));
+        /*const result = await TableController.getView('new.html');
         if (!result.view) throw new Error('actionNewTable: no view');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -90,7 +93,7 @@ class DatabaseController extends DocumentController {
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
-        $("#myModal input[id='tableName']").focus();
+        $("#myModal input[id='tableName']").focus();*/
     }
     async createDocument() {
         const document = await super.createDocument();
