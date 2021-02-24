@@ -118,11 +118,12 @@ class Form extends Model {
     async newField(params) {
         params['pageFileName'] = this.page.pageLink.getFileName();
         params['form']         = this.getName();
-        return await QForms.doHttpRequest({
+        const data = await QForms.doHttpRequest({
             controller: 'Field',
             action    : '_new',
             params    : Helper.encodeObject(params)
         });
+        return this.createField(data);
     }
 
     async newAction(params) {

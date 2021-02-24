@@ -111,27 +111,17 @@ class FormController extends VisualController {
 
     async actionNewField() {
         await EditorController.editorController.openModal(new NewFieldController({onCreate: async values => {
-
+            const field = await this.model.newField({
+                name   : values.name,
+                caption: values.caption,
+                class  : values.class
+            });
+            const fieldController = this.createField(field);
+            await EditorController.editorController.treeWidget2.select(fieldController);
+            fieldController.view.parent.open();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*
-        const result = await Field.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const name = $("#myModal input[id='name']").val();
-            const caption = $("#myModal input[id='caption']").val();
-            const fieldClass = $("#myModal select[id='fieldClass']").val();
-            const params = {
-                name:name,
-                caption:caption,
-                class:fieldClass
-            };
-            const fieldData = await this.model.newField(params);
-            this.addFieldItem(fieldData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();*/
     }
 
     async actionNewAction() {
