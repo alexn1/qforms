@@ -92,6 +92,10 @@ class TableController extends DocumentController {
 
     async createFormAction() {
         console.log('TableController.createFormAction');
+        await EditorController.editorController.openModal(new NewFormFromTableController({onCreate: async values => {
+
+        }}));
+        /*
         const result = await TableController.getView('newForm.ejs');
         const databaseController = this.parent;
         const applicationController = databaseController.parent;
@@ -135,7 +139,7 @@ class TableController extends DocumentController {
             $('#modal').modal('hide');
         });
         $('#modal').modal('show');
-        $("#modal input[id='formPage']").focus();
+        $("#modal input[id='formPage']").focus();*/
     }
     async delete() {
         console.log('TableController.delete', this.getTitle());
