@@ -101,25 +101,17 @@ class PageController extends VisualController {
 
     async actionNewForm() {
         await EditorController.editorController.openModal(new NewFormController({onCreate: async values => {
-
+            const form = await this.model.newForm({
+                name   : values.name,
+                caption: values.caption,
+                class  : values.class
+            });
+            const formController = this.createForm(form);
+            await EditorController.editorController.treeWidget2.select(formController);
+            formController.view.parent.open();
+            this.pageLinkController.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*
-        const result = await Form.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const params = {
-                name:$("#myModal input[id='name']").val(),
-                caption:$("#myModal input[id='caption']").val(),
-                class:$("#myModal select[id='formClass']").val()
-            };
-            const formData = await this.model.newForm(params);
-            this.addFormItem(formData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
-        */
     }
 
     getPropList() {
