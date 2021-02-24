@@ -68,7 +68,10 @@ class TableController extends DocumentController {
     }
 
     async actionNewColumn() {
-        const result = await ColumnController.getView('new.html');
+        await EditorController.editorController.openModal(new NewColumnController({onCreate: async values => {
+
+        }}));
+        /*const result = await ColumnController.getView('new.html');
         if (!result.view) throw new Error('actionNewColumn: no view');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
@@ -79,7 +82,7 @@ class TableController extends DocumentController {
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
-        $("#myModal input[id='columnName']").focus();
+        $("#myModal input[id='columnName']").focus();*/
     }
     onCreateFormButtonClick = async e => {
         console.log('TableController.onCreateFormButtonClick');
