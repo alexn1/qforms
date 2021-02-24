@@ -80,24 +80,6 @@ class PageController extends VisualController {
         }
     }
 
-    async actionNewForm() {
-        const result = await Form.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const params = {
-                name:$("#myModal input[id='name']").val(),
-                caption:$("#myModal input[id='caption']").val(),
-                class:$("#myModal select[id='formClass']").val()
-            };
-            const formData = await this.model.newForm(params);
-            this.addFormItem(formData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='name']").focus();
-    }
-
     async newDataSourceAction() {
         const result = await DataSource.prototype.getView('new.html');
         $(document.body).append(result.view);
@@ -115,6 +97,29 @@ class PageController extends VisualController {
         });
         $('#myModal').modal('show');
         $("#myModal input[id='dsName']").focus();
+    }
+
+    async actionNewForm() {
+        await EditorController.editorController.openModal(new NewFormController({onCreate: async values => {
+
+        }}));
+        /*
+        const result = await Form.prototype.getView('new.html');
+        $(document.body).append(result.view);
+        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
+        $("#myModal button[name='create']").click(async () => {
+            const params = {
+                name:$("#myModal input[id='name']").val(),
+                caption:$("#myModal input[id='caption']").val(),
+                class:$("#myModal select[id='formClass']").val()
+            };
+            const formData = await this.model.newForm(params);
+            this.addFormItem(formData).select();
+            $('#myModal').modal('hide');
+        });
+        $('#myModal').modal('show');
+        $("#myModal input[id='name']").focus();
+        */
     }
 
     getPropList() {
