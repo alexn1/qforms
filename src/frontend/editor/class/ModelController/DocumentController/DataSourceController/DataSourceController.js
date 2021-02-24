@@ -33,10 +33,6 @@ class DataSourceController extends DocumentController {
                 'action' : 'newItem',
                 'caption': 'New Key Column'
             },
-            {
-                'action' : 'newParentKeyColumn',
-                'caption': 'New Parent Key Column'
-            },
             {'action':        '', 'caption':         '-'},
             {'action':  'moveUp', 'caption':   'Move Up'},
             {'action':'moveDown', 'caption': 'Move Down'},
@@ -56,9 +52,6 @@ class DataSourceController extends DocumentController {
             case 'newItem':
                 this.actionNewKeyColumn();
                 break;
-            case 'newParentKeyColumn':
-                this.actionNewParentKeyColumn();
-                break;
             case 'delete':
                 this.delete();
                 break;
@@ -74,7 +67,10 @@ class DataSourceController extends DocumentController {
     }
 
     async actionNewKeyColumn() {
-        const result = await KeyColumnController.getView('new.html');
+        await EditorController.editorController.openModal(new NewKeyColumnController({onCreate: async values => {
+
+        }}));
+        /*const result = await KeyColumnController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(async () => {
@@ -84,7 +80,7 @@ class DataSourceController extends DocumentController {
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
-        $("#myModal input[id='itemName']").focus();
+        $("#myModal input[id='itemName']").focus();*/
     }
 
     getPropList() {
