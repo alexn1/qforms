@@ -80,20 +80,13 @@ class DatabaseController extends DocumentController {
     }
     async actionNewTable() {
         await EditorController.editorController.openModal(new NewTableController({onCreate: async values => {
-
+            const table = await this.model.newTable({name: values.name});
+            const tableController = this.createTable2(table);
+            await EditorController.editorController.treeWidget2.select(tableController);
+            tableController.view.parent.open();
+            this.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-        /*const result = await TableController.getView('new.html');
-        if (!result.view) throw new Error('actionNewTable: no view');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const tableName = $("#myModal input[id='tableName']").val();
-            const tableData = await this.model.newTable({name: tableName});
-            this.addTableItem(tableData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='tableName']").focus();*/
     }
     async createDocument() {
         const document = await super.createDocument();
