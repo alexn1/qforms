@@ -69,7 +69,10 @@ class DatabaseController extends DocumentController {
         }
     }
     async actionNewParam() {
-        const result = await ParamController.getView('new.html');
+        await EditorController.editorController.openModal(new NewParamController({onCreate: async values => {
+
+        }}));
+        /*const result = await ParamController.getView('new.html');
         $(document.body).append(result.view);
         $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
         $("#myModal button[name='create']").click(async () => {
@@ -79,7 +82,7 @@ class DatabaseController extends DocumentController {
             $('#myModal').modal('hide');
         });
         $('#myModal').modal('show');
-        $("#myModal input[id='paramName']").focus();
+        $("#myModal input[id='paramName']").focus();*/
     }
     async actionNewTable() {
         const result = await TableController.getView('new.html');
