@@ -81,22 +81,18 @@ class PageController extends VisualController {
     }
 
     async newDataSourceAction() {
-        const result = await DataSource.prototype.getView('new.html');
-        $(document.body).append(result.view);
-        $('#myModal').on('hidden.bs.modal', function(e){$(this).remove();});
-        $("#myModal button[name='create']").click(async () => {
-            const dsName = $("#myModal input[id='dsName']").val();
-            const dsClass = $("#myModal select[id='dsClass']").val();
-            const params = {
-                name :dsName,
-                class:dsClass
-            };
-            const dataSourceData = await DataSource.create(this.model, params);
-            this.addDataSourceItem(dataSourceData).select();
-            $('#myModal').modal('hide');
-        });
-        $('#myModal').modal('show');
-        $("#myModal input[id='dsName']").focus();
+        await EditorController.editorController.openModal(new NewDataSourceController({onCreate: async values => {
+            const dataSourceData = await DataSource.create(this.model, {
+                name : values.name,
+                class: values.class
+            });
+            const dataSource = this.model.createDataSource(dataSourceData);
+            const dataSourceController = this.createDataSource(dataSource);
+            await EditorController.editorController.treeWidget2.select(dataSourceController);
+            dataSourceController.view.parent.open();
+            this.pageLinkController.view.rerender();
+            EditorController.editorController.treeWidget2.scrollToSelected();
+        }}));
     }
 
     async actionNewForm() {
