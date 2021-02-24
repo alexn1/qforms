@@ -2,6 +2,7 @@ class ComboBox extends ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props);
         super(props);
+        if (!props.items) throw new Error('no ComboBox items');
         let value = '';
         if (props.value) {
             value = props.value;

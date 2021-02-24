@@ -92,7 +92,9 @@ class TableController extends DocumentController {
 
     async createFormAction() {
         console.log('TableController.createFormAction');
-        await EditorController.editorController.openModal(new NewFormFromTableController({onCreate: async values => {
+        await EditorController.editorController.openModal(new NewFormFromTableController({
+            tableController: this,
+            onCreate: async values => {
 
         }}));
         /*

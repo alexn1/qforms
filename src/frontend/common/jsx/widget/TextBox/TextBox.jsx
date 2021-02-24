@@ -40,6 +40,7 @@ class TextBox extends ReactComponent {
                 spellCheck={this.props.spellCheck}
                 onChange={this.onChange}
                 value={this.state.value}
+                disabled={this.props.disabled}
             />
         );
     }

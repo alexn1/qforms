@@ -1,41 +1,43 @@
 class NewFormFromTableView extends ReactComponent {
     render() {
-        return <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                <h4 class="modal-title">New Form</h4>
+        const ctrl = this.props.ctrl;
+        const tableController = ctrl.options.tableController;
+        const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({value: pageLink.getName(), title: pageLink.getName()}))
+        console.log('pages:', pages);
+        return <div className="modal-content" style={{width: 360, margin: 'auto'}}>
+            <div className="modal-header">
+                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
+                <h4 className="modal-title">New Form</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="formTable">Table</label>
-                    <input id="formTable" class="form-control" disabled/>
+            <div className="modal-body">
+                <div className="form-group">
+                    <label htmlFor="formTable">Table</label>
+                    <TextBox id="formTable" classList={['form-control']} disabled={true} value={tableController.model.getName()}/>
                 </div>
-                <div class="form-group">
-                    <label for="formPage">Page</label>
-                    <select id="formPage" class="form-control">
-
-                    </select>
+                <div className="form-group">
+                    <label htmlFor="formPage">Page</label>
+                    <ComboBox id="formPage" classList={['form-control']} items={pages} value={pages[pages.length-1].value}/>
             </div>
-            <div class="form-group">
-                <label for="formClass">Form Class</label>
-                <select id="formClass" class="form-control">
-                    <option value="RowForm">RowForm</option>
-                    <option value="TableForm" selected>TableForm</option>
-                    <option value="TreeForm">TreeForm</option>
-                </select>
+            <div className="form-group">
+                <label htmlFor="formClass">Form Class</label>
+                <ComboBox id="formClass" classList={['form-control']} value={'TableForm'} items={[
+                    {value: 'RowForm', title: 'RowForm'},
+                    {value: 'TableForm', title: 'TableForm'},
+                    {value: 'TreeForm', title: 'TreeForm'},
+                ]}/>
             </div>
-            <div class="form-group">
-                <label for="formName">Name</label>
-                <input id="formName" class="form-control" value="<%=tableName%>"/>
+            <div className="form-group">
+                <label htmlFor="formName">Name</label>
+                <TextBox id="formName" classList={['form-control']} value={ctrl.options.tableController.model.getName()}/>
             </div>
-            <div class="form-group">
-                <label for="formCaption">Caption</label>
-                <input id="formCaption" class="form-control" value="<%=tableName%>"/>
+            <div className="form-group">
+                <label htmlFor="formCaption">Caption</label>
+                <TextBox id="formCaption" classList={['form-control']} value={ctrl.options.tableController.model.getName()}/>
             </div>
         </div>
-        <div class="modal-footer">
-            <button name="create" type="button" class="btn btn-primary">Create</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div className="modal-footer">
+            <button name="create" type="button" className="btn btn-primary">Create</button>
+            <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
         </div>
     </div>;
     }
