@@ -4,12 +4,9 @@ const child_process = require('child_process');
 const axios         = require('axios');
 
 const qforms  = require('../../../qforms');
-// const server  = require('../../../server');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
-// const components = require('../../../components.json');
-
 
 class Application extends Model {
 
@@ -39,23 +36,11 @@ class Application extends Model {
         this.createCollections  = ['databases', 'dataSources'];
         this.fillCollections    = ['databases', 'dataSources'];
         this.pages              = {};
-        this.css                = [];
-        this.js                 = [];
         this.databases          = {};
         this.dataSources        = {};
+        this.css                = [];
+        this.js                 = [];
     }
-
-    /*getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
-    }*/
-
-    /*getViewFilePath() {
-        return path.join(
-            this.hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/ApplicationController/view',
-            'ApplicationView.ejs'
-        );
-    }*/
 
     getDirPath() {
         return this.appInfo.dirPath;
@@ -175,18 +160,6 @@ class Application extends Model {
         return this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
     }
 
-    /*async createStartupPages() {
-        if (!this.data.pageLinks) return;
-        const startupPageNames = this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
-        for (let i = 0; i < startupPageNames.length; i++) {
-            const pageLinkName = startupPageNames[i];
-            const pageLink = this.createPageLink(pageLinkName);
-            const pageLinkName2 = pageLink.getAttr('name');
-            const page = await this._createPage(pageLinkName2);
-            this.pages[pageLinkName2] = page;
-        }
-    }*/
-
     async fillStartupPages(context) {
         console.log('Application.fillStartupPages', context.query.page);
         const pages = [];
@@ -265,9 +238,6 @@ class Application extends Model {
         return this.databases[name];
     }
 
-    /*getComponents() {
-        return components;
-    }*/
     getTitle(context, data) {
         if (context.query.page) {
             const page = this.pages[context.query.page];
