@@ -24,26 +24,6 @@ class FieldEditor extends Editor {
         return newData;
     }
 
-    /*async createEjs(params) {
-        const formData = this.parent.getData();
-        const defaultEjsFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.ejs');
-        const customEjsFilePath = await this.getCustomFilePath('ejs');
-        const replaceFrom = formData['@class'] + this.getViewName();
-        const replaceTo = params.page + '-' + params.form + '-' + params.field;
-        const ejs = await this.createFileByReplace(customEjsFilePath, defaultEjsFilePath, replaceFrom, replaceTo, null);
-        return ejs;
-    }*/
-
-    /*async createCss(params) {
-        const formData = this.parent.getData();
-        const defaultCssFilePath = path.join(this.defaultViewDirPath, formData['@class'] + this.getViewName() + '.css');
-        const customCssFilePath = await this.getCustomFilePath('css');
-        const replaceFrom = formData['@class'] + this.getViewName();
-        const replaceTo   = params.page + '-' + params.form + '-' + params.field;
-        const ejs = await this.createFileByReplace(customCssFilePath, defaultCssFilePath, replaceFrom, replaceTo, null);
-        return ejs;
-    }*/
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

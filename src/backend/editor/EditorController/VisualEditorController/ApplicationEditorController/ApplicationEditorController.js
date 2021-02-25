@@ -17,14 +17,14 @@ class ApplicationEditorController extends VisualEditorController {
         return null;
     }
 
-    async createView(params) {
+    /*async createView(params) {
         //console.log('ApplicationEditorController.createView');
         const appEditor = await this.createApplicationEditor();
         return {
             ejs: await appEditor.createEjs(params),
             css: await appEditor.createCss(params)
         };
-    }
+    }*/
 
     async getView(params) {
         const result = await super.getView(params);

@@ -48,14 +48,14 @@ class FormEditorController extends VisualEditorController {
         return result;
     }
 
-    async createView(params) {
+    /*async createView(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
         const ejs = await formEditor.createEjs(params);
         const css = await formEditor.createCss(params);
         return {ejs, css};
-    }
+    }*/
 
     async getView(params) {
         console.log('FormEditorController.getView');
