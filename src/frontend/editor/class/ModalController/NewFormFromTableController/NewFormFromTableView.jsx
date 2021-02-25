@@ -20,7 +20,7 @@ class NewFormFromTableView extends ReactComponent {
         const tableController = ctrl.options.tableController;
         const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({value: pageLink.getName(), title: pageLink.getName()}))
         console.log('pages:', pages);
-        return <div className="modal-content" style={{width: 360, margin: 'auto'}}>
+        return <div className="modal-content">
             <div className="modal-header">
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Form</h4>

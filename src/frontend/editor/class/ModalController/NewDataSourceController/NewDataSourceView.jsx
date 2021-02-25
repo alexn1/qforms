@@ -13,7 +13,7 @@ class NewDataSourceView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="NewDataSourceView modal-content" style={{width: 360, margin: 'auto'}}>
+        return <div className="NewDataSourceView modal-content">
             <div className="modal-header">
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Data Source</h4>

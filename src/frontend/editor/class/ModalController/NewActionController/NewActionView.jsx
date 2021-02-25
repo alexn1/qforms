@@ -13,7 +13,7 @@ class NewActionView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="modal-content" style={{width: 360, margin: 'auto'}}>
+        return <div className="modal-content">
             <div className="modal-header">
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Action</h4>
