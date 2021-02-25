@@ -120,23 +120,23 @@ class FormEditor extends Editor {
         return await this.parent.save();
     }
 
-    async createEjs(params) {
+    /*async createEjs(params) {
         const customEjsFilePath = await this.getCustomFilePath('ejs');
         const replaceFrom = `${this.getViewName()} `;
         const replaceTo = '';
         const emptyTemplate = '';
         const ejs = await this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, replaceFrom, replaceTo, emptyTemplate);
         return ejs;
-    }
+    }*/
 
-    async createCss(params) {
+    /*async createCss(params) {
         const customCssFilePath = await this.getCustomFilePath('css');
         const replaceFrom   = `.${this.getViewName()}`;
         const replaceTo     = `.${params.page} .${params.form}`;
         const emptyTemplate = `.${params.page} .${params.form}`;
         const css = await this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, replaceFrom, replaceTo, emptyTemplate);
         return css;
-    }
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');

@@ -16,14 +16,14 @@ class ApplicationEditor extends Editor {
         this.hostApp            = hostApp;
         this.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
         this.name               = this.getAttr('name');
-        this.defaultEjsFilePath = path.join(
+        /*this.defaultEjsFilePath = path.join(
             this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
-        );
-        this.defaultCssFilePath = path.join(
+        );*/
+        /*this.defaultCssFilePath = path.join(
             this.hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
-        );
+        );*/
     }
 
     static createData(params) {
@@ -98,18 +98,18 @@ class ApplicationEditor extends Editor {
         return await this.getPageByFileName(relFilePath);
     }
 
-    async createEjs(params) {
+    /*async createEjs(params) {
         console.log('ApplicationEditor.createEjs');
         const customEjsFilePath = await this.getCustomFilePath('ejs');
         return this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), this.name, null);
-    }
+    }*/
 
-    async createCss(params) {
+    /*async createCss(params) {
         console.log('ApplicationEditor.createCss');
         const customCssFilePath = await this.getCustomFilePath('css');
         const emptyTemplate = '.' + this.name + ' {\n}';
         return this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), this.name, emptyTemplate);
-    }
+    }*/
 
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');

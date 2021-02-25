@@ -10,14 +10,14 @@ class PageEditor extends Editor {
         this.appEditor          = appEditor;
         this.pageFile           = pageFile;
         this.name               = this.getAttr('name');
-        this.defaultEjsFilePath = path.join(
+        /*this.defaultEjsFilePath = path.join(
             this.getAppEditor().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
-        );
-        this.defaultCssFilePath = path.join(
+        );*/
+        /*this.defaultCssFilePath = path.join(
             this.getAppEditor().hostApp.publicDirPath,
             'viewer/class/Controller/ModelController/PageController/view/PageView.css'
-        );
+        );*/
     }
 
     static createData(params) {
@@ -141,18 +141,18 @@ class PageEditor extends Editor {
         return this.save();
     }
 
-    async createEjs(params) {
+    /*async createEjs(params) {
         const customEjsFilePath = await this.getCustomFilePath('ejs');
         const ejs = await this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.page, null);
         return ejs;
-    }
+    }*/
 
-    async createCss(params) {
+    /*async createCss(params) {
         const customCssFilePath = await this.getCustomFilePath('css');
         const emptyTemplate = '.' + params.page + ' \n';
         const css = await this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.page, emptyTemplate);
         return css;
-    }
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
