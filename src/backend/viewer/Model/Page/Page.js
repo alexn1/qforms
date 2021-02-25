@@ -28,8 +28,6 @@ class Page extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.createCollections  = ['dataSources', 'forms'];
-        // this.fillCollections    = ['dataSources', 'forms'];
         this.dataSources        = {};
         this.forms              = {};
     }
