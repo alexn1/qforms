@@ -36,7 +36,10 @@ class FieldController extends VisualController {
     }
 
     async actionChangeClass() {
-        const result = await Field.prototype.getView('changeClass.html');
+        await EditorController.editorController.openModal(new ChangeClassController({onCreate: async values => {
+
+        }}));
+        /*const result = await Field.prototype.getView('changeClass.html');
         $(document.body).append(result.view);
         $('#modal').on('hidden.bs.modal', function() {$(this).remove();});
         $("#modal button[name='change']").click(async () => {
@@ -49,7 +52,7 @@ class FieldController extends VisualController {
             $('#modal').modal('hide');
         });
         $('#modal').modal('show');
-        $("#modal input[id='fieldClass']").focus();
+        $("#modal input[id='fieldClass']").focus();*/
     }
 
     getPropList() {
