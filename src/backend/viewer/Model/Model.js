@@ -7,15 +7,11 @@ class Model extends BaseModel {
 
     constructor(data, parent) {
         super(data, parent);
-        // this.createCollections  = [];
         this.fillCollections    = [];
     }
 
     async init() {
-        /*for (let i = 0; i < this.createCollections.length; i++) {
-            const colName = this.createCollections[i];
-            await this.createCollection(colName);
-        }*/
+
     }
 
     async fill(context) {

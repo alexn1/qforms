@@ -14,7 +14,6 @@ class Database extends Model {
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);
-        // this.createCollections = ['tables'];
         this.fillCollections   = ['tables'];
         this.tables            = {};
     }
