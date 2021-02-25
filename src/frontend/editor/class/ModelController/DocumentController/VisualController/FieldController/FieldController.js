@@ -8,10 +8,8 @@ class FieldController extends VisualController {
     getActions() {
         return [
             {'action': 'changeClass', 'caption': 'Change Class'},
-            {'action': ''           , 'caption': '-'           },
             {'action': 'moveUp'     , 'caption': 'Move Up'     },
             {'action': 'moveDown'   , 'caption': 'Move Down'   },
-            {'action': ''           , 'caption': '-'           },
             {'action': 'delete'     , 'caption': 'Delete'      }
         ];
     }

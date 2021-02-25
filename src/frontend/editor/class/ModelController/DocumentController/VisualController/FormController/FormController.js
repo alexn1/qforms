@@ -62,10 +62,8 @@ class FormController extends VisualController {
             {'action': 'newDataSource', 'caption': 'New Data Source'},
             {'action': 'newField'     , 'caption': 'New Field'      },
             {'action': 'newAction'    , 'caption': 'New Action'     },
-            {'action': ''             , 'caption': '-'              },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': ''             , 'caption': '-'              },
             {'action': 'delete'       , 'caption': 'Delete'         }
         ];
     }

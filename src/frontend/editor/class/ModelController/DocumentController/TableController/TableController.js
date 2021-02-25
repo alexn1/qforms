@@ -29,18 +29,8 @@ class TableController extends DocumentController {
 
     getActions() {
         return [
-            {
-                'action': 'newColumn',
-                'caption': 'New Column'
-            },
-            {
-                'action': '',
-                'caption': '-'
-            },
-            {
-                'action': 'delete',
-                'caption': 'Delete'
-            },
+            {'action': 'newColumn', 'caption': 'New Column'},
+            {'action': 'delete', 'caption': 'Delete'},
         ];
     }
 

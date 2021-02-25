@@ -48,10 +48,8 @@ class PageController extends VisualController {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},
             {'action': 'newForm'      , 'caption': 'New Form'       },
-            {'action': ''             , 'caption': '-'              },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': ''             , 'caption': '-'              },
             {'action': 'delete'       , 'caption': 'Delete'         }
         ];
     }

@@ -29,21 +29,10 @@ class DataSourceController extends DocumentController {
     }
     getActions() {
         return [
-            {
-                'action' : 'newItem',
-                'caption': 'New Key Column'
-            },
-            {'action':        '', 'caption':         '-'},
+            {'action' : 'newItem', 'caption': 'New Key Column'},
             {'action':  'moveUp', 'caption':   'Move Up'},
             {'action':'moveDown', 'caption': 'Move Down'},
-            {
-                'action' : '',
-                'caption': '-'
-            },
-            {
-                'action' : 'delete',
-                'caption': 'Delete'
-            }
+            {'action' : 'delete', 'caption': 'Delete'}
         ];
     }
 

@@ -51,7 +51,6 @@ class DatabaseController extends DocumentController {
         return [
             {'action':'newParam','caption':'New Param'},
             {'action':'newTable','caption':'New Table'},
-            {'action':'','caption':'-'},
             {'action':'delete','caption':'Delete'}
         ];
     }
