@@ -86,31 +86,11 @@ class EditorController {
     }
 
     fillActions(item) {
-        console.log('EditorController.fillActions');
+        // console.log('EditorController.fillActions');
         this.actionList.setState({item});
-        /*
-        $('#actionList').children().remove();
-        ctrl.getActions().forEach(action => {
-            if (action.caption === '-') {
-                $('#actionList').append("<li class='divider'></li>");
-            } else {
-                const li = document.createElement('li');
-                li.miAction = action.action;
-                li.ctrl = ctrl;
-                $(li).click(function() {
-                    const controller = this.ctrl instanceof PageLinkController ? this.ctrl.pageController : this.ctrl;
-                    controller.doAction(this.miAction);
-                });
-                li.innerHTML = `<a style='cursor: pointer;'>${action.caption}</a>`;
-                $('#actionList').append(li);
-            }
-        });*/
     }
     clearActions() {
-        console.log('EditorController.clearActions');
-        /*
-        $('#actionList').children().remove();
-        $('#actionList').append("<li class='disabled'><a href='#'>none</a></li>");*/
+        // console.log('EditorController.clearActions');
         this.actionList.setState({item: null});
     }
 
@@ -163,4 +143,12 @@ class EditorController {
         this.modal = null;
         await this.view.rerender();
     }
+    async onActionClick(actionName) {
+        console.log('EditorController.onActionClick', actionName);
+        const item = this.treeWidget2.getSelectedItem();
+        // console.log('item', item);
+        const controller = item instanceof PageLinkController ? item.pageController : item;
+        await controller.doAction(actionName);
+    }
 }
+

@@ -5,17 +5,16 @@ class ActionList extends ReactComponent {
             item: null
         };
     }
-    onActionClick = e => {
-        console.log('ActionList.onActionClick');
-        // const controller = this.ctrl instanceof PageLinkController ? this.ctrl.pageController : this.ctrl;
-        // controller.doAction(this.miAction);
+    onActionClick = async e => {
+        // console.log('ActionList.onActionClick', e.currentTarget.dataset.action);
+        await this.props.ctrl.onActionClick(e.currentTarget.dataset.action);
     }
     renderActions(ctrl) {
         return ctrl.getActions().map(action => {
             if (action.caption === '-') {
                 return <li className='divider'></li>;
             } else {
-                return <li onClick={this.onActionClick}>
+                return <li key={action.action} onClick={this.onActionClick} data-action={action.action}>
                     <a style={{cursor: 'pointer'}}>{action.caption}</a>
                 </li>;
             }
