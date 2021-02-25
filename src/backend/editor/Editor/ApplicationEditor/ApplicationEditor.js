@@ -16,14 +16,6 @@ class ApplicationEditor extends Editor {
         this.hostApp            = hostApp;
         this.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
         this.name               = this.getAttr('name');
-        /*this.defaultEjsFilePath = path.join(
-            this.hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.ejs'
-        );*/
-        /*this.defaultCssFilePath = path.join(
-            this.hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/ApplicationController/view/ApplicationView.css'
-        );*/
     }
 
     static createData(params) {
