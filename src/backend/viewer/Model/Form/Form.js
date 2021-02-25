@@ -9,7 +9,7 @@ class Form extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.createCollections = ['dataSources', 'fields', 'actions'];
+        // this.createCollections = ['dataSources', 'fields', 'actions'];
         this.fillCollections   = ['dataSources', 'fields', 'actions'];
         this.dataSources       = {};
         this.fields            = {};
@@ -19,6 +19,12 @@ class Form extends Model {
     /*getCustomViewFilePath() {
         return path.join(this.getDirPath(),  `${this.getName()}.ejs`);
     }*/
+
+    async init() {
+        await this.createCollection('dataSources');
+        await this.createCollection('fields');
+        await this.createCollection('actions');
+    }
 
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'forms', this.getName());

@@ -1,17 +1,20 @@
 const Model = require('../Model');
 
 class Table extends Model {
+    static async create(data, parent) {
+        return new Table(data, parent);
+    }
 
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
-        this.createCollections  = ['columns'];
+        // this.createCollections  = ['columns'];
         this.fillCollections    = ['columns'];
         this.columns = {};
     }
 
-    static async create(data, parent) {
-        return new Table(data, parent);
+    async init() {
+        await this.createCollection('columns');
     }
 
     getKeyColumns() {

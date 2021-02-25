@@ -5,18 +5,22 @@ const qforms    = require('../../../qforms');
 
 class Database extends Model {
 
-    constructor(data, parent) {
-        //console.log('Database.constructor');
-        super(data, parent);
-        this.createCollections = ['tables'];
-        this.fillCollections   = ['tables'];
-        this.tables            = {};
-    }
-
     static create(data, parent) {
         console.log('Database.create', BaseModel.getClassName(data), BaseModel.getName(data));
         const className = BaseModel.getClassName(data);
         return eval(`new qforms.${className}(data, parent)`);
+    }
+
+    constructor(data, parent) {
+        //console.log('Database.constructor');
+        super(data, parent);
+        // this.createCollections = ['tables'];
+        this.fillCollections   = ['tables'];
+        this.tables            = {};
+    }
+
+    async init() {
+        await this.createCollection('tables');
     }
 
     async deinit() {
