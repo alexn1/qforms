@@ -140,7 +140,7 @@ class ApplicationEditor extends Editor {
         this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, 1);
     }
 
-    newDatabase(params) {
+    newDatabaseData(params) {
         const name = params['name'];
         if (!this.data.databases) {
             this.data.databases = {};
@@ -148,20 +148,21 @@ class ApplicationEditor extends Editor {
         if (this.data.databases[name]) {
             throw new Error(`database ${name} already exists`);
         }
-        let database;
+        let databaseData;
         if (params._class === 'MySqlDatabase') {
-            database = MySqlDatabaseEditor.createData(params);
+            databaseData = MySqlDatabaseEditor.createData(params);
         } else if (params._class === 'PostgreSqlDatabase') {
-            database = PostgreSqlDatabaseEditor.createData(params);
+            databaseData = PostgreSqlDatabaseEditor.createData(params);
         } else {
             throw new Error(`unknown database class ${params._class}`);
         }
-        return this.data.databases[name] = database;
+        return this.data.databases[name] = databaseData;
     }
 
     getDatabaseData(name) {
-        if (!this.data.databases[name]) throw new Error(`no database: ${name}`);
-        return this.data.databases[name];
+        // if (!this.data.databases[name]) throw new Error(`no database: ${name}`);
+        // return this.data.databases[name];
+        return this.getModelData('databases', name);
     }
 
     createDatabaseEditor(name) {
