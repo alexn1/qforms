@@ -1,6 +1,6 @@
-class ModelController extends EventEmitter {
+class ModelController /*extends EventEmitter*/ {
     constructor(model, parent = null) {
-        super();
+        // super();
         this.model = model;
         this.parent = parent;
         this.view = null;
