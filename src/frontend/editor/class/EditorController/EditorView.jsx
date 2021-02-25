@@ -20,15 +20,12 @@ class EditorView extends ReactComponent {
         return <div className="EditorView">
             <div id="sidebar">
                 <div className="TreeBar flex-min">
-                    <div id="treeActions" className="dropdown">
-                        <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink}
-                           style={{float: "right"}}>Run Application</a>
-                        <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                            <span>Actions</span> <span className="caret"></span>
+                    <div className="dropdown">
+                        <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >
+                            <span>Actions</span> <span className="caret"/>
                         </button>
-                        <ul id="treeActionsList" className="dropdown-menu">
-                            <li className="disabled"><a>none</a></li>
-                        </ul>
+                        <ActionList onCreate={c => ctrl.actionList = c} ctrl={ctrl}/>
+                        <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink} style={{float: "right"}}>Run Application</a>
                     </div>
                 </div>
                 <TreeWidget2

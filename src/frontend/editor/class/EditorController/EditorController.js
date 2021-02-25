@@ -5,6 +5,7 @@ class EditorController {
         this.data = data;
         this.runAppLink = runAppLink;
         this.view = null;
+        this.actionList = null;
         this.treeWidget2 = null;
         this.pg = null;                 // property grid
         this.items = null;              // treeWidget2 items
@@ -52,10 +53,7 @@ class EditorController {
             this.endEdit();
         }
     }
-    clearActions() {
-        $('#treeActionsList').children().remove();
-        $('#treeActionsList').append("<li class='disabled'><a href='#'>none</a></li>");
-    }
+
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
         this.beginEdit(propList['list'], propList['options']);
@@ -87,11 +85,14 @@ class EditorController {
         });
     }
 
-    fillActions(ctrl) {
-        $('#treeActionsList').children().remove();
+    fillActions(item) {
+        console.log('EditorController.fillActions');
+        this.actionList.setState({item});
+        /*
+        $('#actionList').children().remove();
         ctrl.getActions().forEach(action => {
             if (action.caption === '-') {
-                $('#treeActionsList').append("<li class='divider'></li>");
+                $('#actionList').append("<li class='divider'></li>");
             } else {
                 const li = document.createElement('li');
                 li.miAction = action.action;
@@ -101,9 +102,16 @@ class EditorController {
                     controller.doAction(this.miAction);
                 });
                 li.innerHTML = `<a style='cursor: pointer;'>${action.caption}</a>`;
-                $('#treeActionsList').append(li);
+                $('#actionList').append(li);
             }
-        });
+        });*/
+    }
+    clearActions() {
+        console.log('EditorController.clearActions');
+        /*
+        $('#actionList').children().remove();
+        $('#actionList').append("<li class='disabled'><a href='#'>none</a></li>");*/
+        this.actionList.setState({item: null});
     }
 
     onItemDoubleClick2 = async item => {
