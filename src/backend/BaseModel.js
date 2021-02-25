@@ -73,8 +73,13 @@ class BaseModel {
         return this.data;
     }
 
+    getModelData2(col, name) {
+        return this.data[col].find(obj => obj.getName() === name);
+    }
+
     getApp() {
         throw new Error('getApp: not implemented');
     }
+
 }
 module.exports = BaseModel;
