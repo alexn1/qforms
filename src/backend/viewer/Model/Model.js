@@ -42,17 +42,12 @@ class Model extends BaseModel {
     async createCollection(colName) {
         // console.log(`Model.createCollection ${this.getName()}.${colName}`);
         if (!this.data[colName]) return;
-        const items = Object.keys(this.data[colName]);
-        for (let i = 0; i < items.length; i++) {
-            const itemName = items[i];
+        const names = Object.keys(this.data[colName]);
+        for (let i = 0; i < names.length; i++) {
+            const itemName = names[i];
             const itemData = this.getData(colName, itemName);
-            // const className1 = `${itemData['@class']}Controller`;
-            // const className2 = itemData['@class'];
-            // const className = qforms[className1] ? className1 : className2;
             const className = itemData['@class'];
             try {
-                // const obj = await qforms[className].create(itemData, this);
-                // const obj = await qforms[className].create(itemData, this);
                 const Class = qforms[className];
                 const obj = new Class(itemData, this);
                 this[colName][itemName] = obj;

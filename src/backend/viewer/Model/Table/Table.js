@@ -8,7 +8,7 @@ class Table extends Model {
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
-        this.fillCollections    = ['columns'];
+        this.fillCollections = ['columns'];
         this.columns = {};
     }
 

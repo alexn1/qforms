@@ -10,14 +10,6 @@ class RowForm extends Form {
     //     // console.log('RowForm.constructor', this.getFullName());
     // }
 
-    /*getViewFilePath() {
-        return path.join(
-            this.getApp().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/RowFormController/view',
-            this.data['@class'] + 'View.ejs'
-        );
-    }*/
-
     static async create(data, page) {
         const name = BaseModel.getName(data);
         // console.log('RowForm.create', name);
