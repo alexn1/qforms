@@ -1,9 +1,9 @@
-const path    = require('path');
-const qforms = require('../../../qforms');
-const Editor = require('../Editor');
-const DatabaseEditor = require('../DatabaseEditor/DatabaseEditor');
+const path = require('path');
 
-const MySqlDatabaseEditor = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
+const qforms                   = require('../../../qforms');
+const Editor                   = require('../Editor');
+const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
+const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 
 class ApplicationEditor extends Editor {
@@ -12,10 +12,10 @@ class ApplicationEditor extends Editor {
         if (!hostApp) throw new Error('no hostApp');
         if (!env) throw new Error('ApplicationEditor.constructor: no env');
         super(appFile.data);
-        this.appFile            = appFile;
-        this.hostApp            = hostApp;
-        this.appInfo            = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
-        this.name               = this.getAttr('name');
+        this.appFile  = appFile;
+        this.hostApp  = hostApp;
+        this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
+        this.name     = this.getAttr('name');
     }
 
     static createData(params) {
@@ -148,13 +148,15 @@ class ApplicationEditor extends Editor {
         if (this.data.databases[name]) {
             throw new Error(`database ${name} already exists`);
         }
+        let database;
         if (params._class === 'MySqlDatabase') {
-            return this.data.databases[name] = MySqlDatabaseEditor.createData(params);
+            database = MySqlDatabaseEditor.createData(params);
         } else if (params._class === 'PostgreSqlDatabase') {
-            return this.data.databases[name] = PostgreSqlDatabaseEditor.createData(params);
+            database = PostgreSqlDatabaseEditor.createData(params);
         } else {
             throw new Error(`unknown database class ${params._class}`);
         }
+        return this.data.databases[name] = database;
     }
 
     getDatabaseData(name) {
