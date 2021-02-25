@@ -90,19 +90,6 @@ class ApplicationEditor extends Editor {
         return await this.getPageByFileName(relFilePath);
     }
 
-    /*async createEjs(params) {
-        console.log('ApplicationEditor.createEjs');
-        const customEjsFilePath = await this.getCustomFilePath('ejs');
-        return this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), this.name, null);
-    }*/
-
-    /*async createCss(params) {
-        console.log('ApplicationEditor.createCss');
-        const customCssFilePath = await this.getCustomFilePath('css');
-        const emptyTemplate = '.' + this.name + ' {\n}';
-        return this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), this.name, emptyTemplate);
-    }*/
-
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
         const templateFilePath = path.join(__dirname, 'Application.js.ejs');
@@ -116,14 +103,6 @@ class ApplicationEditor extends Editor {
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
-
-    /*async getCustomFilePath(ext) {
-        console.log('ApplicationEditor.getCustomFilePath');
-        if (ext === 'js') {
-            return path.join(this.appInfo.dirPath, 'Controller.js');
-        }
-        return path.join(this.appInfo.dirPath, this.name + '.' + ext);
-    }*/
 
     createDataSourceEditor(name) {
         const dataSourceData = this.getModelData('dataSources', name);

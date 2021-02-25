@@ -141,19 +141,6 @@ class PageEditor extends Editor {
         return this.save();
     }
 
-    /*async createEjs(params) {
-        const customEjsFilePath = await this.getCustomFilePath('ejs');
-        const ejs = await this.createFileByReplace(customEjsFilePath, this.defaultEjsFilePath, this.getViewName(), params.page, null);
-        return ejs;
-    }*/
-
-    /*async createCss(params) {
-        const customCssFilePath = await this.getCustomFilePath('css');
-        const emptyTemplate = '.' + params.page + ' \n';
-        const css = await this.createFileByReplace(customCssFilePath, this.defaultCssFilePath, this.getViewName(), params.page, emptyTemplate);
-        return css;
-    }*/
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -171,14 +158,6 @@ class PageEditor extends Editor {
         // await qforms.Helper.createDirIfNotExists(dirPath);
         return dirPath;
     }
-
-    /*async getCustomFilePath(ext) {
-        const customDirPath = await this.getCustomDirPath();
-        if (ext === 'js') {
-            return path.join(customDirPath, 'Controller.js');
-        }
-        return path.join(customDirPath, this.name + '.' + ext);
-    }*/
 
     newDataSource(params) {
         const name   = params['name'];

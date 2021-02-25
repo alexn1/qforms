@@ -51,14 +51,6 @@ class FieldEditor extends Editor {
         return dirPath;
     }
 
-    /*async getCustomFilePath(ext) {
-        const customDirPath = await this.getCustomDirPath();
-        if (ext === 'js') {
-            return path.join(customDirPath, 'Controller.js');
-        }
-        return path.join(customDirPath, this.name + '.' + ext);
-    }*/
-
     getAppEditor() {
         return this.parent.getAppEditor();
     }
