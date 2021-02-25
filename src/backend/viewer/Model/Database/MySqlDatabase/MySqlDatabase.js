@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const mysql   = require('mysql');
 const Database  = require('../Database');
 
