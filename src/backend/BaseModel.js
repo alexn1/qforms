@@ -50,7 +50,18 @@ class BaseModel {
         return false;
     }
 
-    getData(colName, name) {
+    getData() {
+        if (!this.data) throw new Error('no data');
+        return this.data;
+    }
+
+    getCol(colName) {
+        if (!this.data) throw new Error('no data');
+        if (!colName) throw new Error('no colName');
+        return this.data[colName];
+    }
+
+    getModelData(colName, name) {
         if (!this.data) throw new Error('no data');
         if (colName && name) {
             if (!this.data[colName][name]) throw new Error(`no ${colName}: ${name}`);

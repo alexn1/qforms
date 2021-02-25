@@ -117,12 +117,12 @@ class Application extends Model {
     }
 
     createPageLink(name) {
-        const pageLinkData = this.getData('pageLinks', name);
+        const pageLinkData = this.getModelData('pageLinks', name);
         return new PageLink(pageLinkData, this);
     }
 
     createDatabase(name) {
-        const databaseData = this.getData('databases', name);
+        const databaseData = this.getModelData('databases', name);
         return Database.create(databaseData, this);
     }
 
@@ -153,7 +153,7 @@ class Application extends Model {
     }
 
     getPageLinkNameList() {
-        return Object.keys(this.getData('pageLinks'));
+        return Object.keys(this.getCol('pageLinks'));
     }
 
     getStartupPageNames() {

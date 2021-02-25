@@ -71,7 +71,7 @@ class ApplicationEditor extends Editor {
     }
 
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this, name, this.getData('pageLinks', name));
+        return new qforms.PageLinkEditor(this, name, this.getModelData('pageLinks', name));
     }
 
     async setAttr(name, value) {
@@ -134,7 +134,7 @@ class ApplicationEditor extends Editor {
     }*/
 
     createDataSourceEditor(name) {
-        const dataSourceData = this.getData('dataSources', name);
+        const dataSourceData = this.getModelData('dataSources', name);
         const className = dataSourceData['@class'];
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(this, name, dataSourceData);

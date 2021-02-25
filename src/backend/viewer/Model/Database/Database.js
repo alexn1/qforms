@@ -91,7 +91,7 @@ class Database extends Model {
     }
 
     createParam(name) {
-        return new Param(this.getData('params', name), this);
+        return new Param(this.getModelData('params', name), this);
     }
 
     getConfig() {
