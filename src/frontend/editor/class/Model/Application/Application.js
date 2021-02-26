@@ -12,6 +12,7 @@ class Application extends Model {
         for (const name in this.data.databases) {
             this.createDatabase(this.data.databases[name]);
         }
+        this.data.databases2.forEach(data => this.createDatabase(data));
 
         // dataSources
         for (const name in this.data.dataSources) {
