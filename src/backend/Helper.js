@@ -112,7 +112,7 @@ class Helper {
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName  = path.basename(path.dirname(appFilePath));
         return {
-            name        : BaseModel.getAttr(data, 'name'),
+            name        : BaseModel.getName(data),
             caption     : BaseModel.getAttr(data, 'caption'),
             fullName    : [dirName, fileName].join('/'),
             envs        : BaseModel.getEnvList(data),

@@ -33,7 +33,8 @@ class ApplicationEditor extends Editor {
             },
             env      : {},
             databases: {},
-            pageLinks: {}
+            pageLinks: {},
+            databases2: []
         };
     }
 
@@ -124,9 +125,16 @@ class ApplicationEditor extends Editor {
         if (!this.data.databases) {
             this.data.databases = {};
         }
+        if (!this.data.databases2) {
+            this.data.databases2 = [];
+        }
         if (this.data.databases[name]) {
             throw new Error(`database ${name} already exists`);
         }
+        if (this.findModelData('databases2', name)) {
+            throw new Error(`database ${name} already exists`);
+        }
+
         let databaseData;
         if (params._class === 'MySqlDatabase') {
             databaseData = MySqlDatabaseEditor.createData(params);
@@ -135,13 +143,17 @@ class ApplicationEditor extends Editor {
         } else {
             throw new Error(`unknown database class ${params._class}`);
         }
-        return this.data.databases[name] = databaseData;
+        // this.data.databases[name] = databaseData;
+        this.addModelData('databases2', databaseData);
+        return databaseData;
     }
 
     getDatabaseData(name) {
-        // if (!this.data.databases[name]) throw new Error(`no database: ${name}`);
-        // return this.data.databases[name];
-        return this.getModelData('databases', name);
+        let data = this.getModelData('databases', name);
+        if (data) return data;
+        data = this.findModelData('databases2', name);
+        if (data) return data;
+        throw new Error(`no database: ${name}`);
     }
 
     createDatabaseEditor(name) {

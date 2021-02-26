@@ -45,7 +45,7 @@ class Model extends BaseModel {
         const names = Object.keys(this.getCol(colName));
         for (let i = 0; i < names.length; i++) {
             const itemData = this.getModelData(colName, names[i]);
-            const itemName = BaseModel.getAttr(itemData, 'name');
+            const itemName = BaseModel.getName(itemData);
             const className = BaseModel.getClassName(itemData);
             try {
                 const Class = qforms[className];

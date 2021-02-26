@@ -43,38 +43,31 @@ class BaseModel {
         return this.data['@attributes'][name] !== undefined;
     }
 
-    isData(colName, name) {
-        if (colName && name && this.data[colName] && this.data[colName][name]) {
-            return true;
-        }
-        return false;
+    isData(col, name) {
+        if (!col) throw new Error('isData: no col');
+        if (!name) throw new Error('isData: no name');
+        return !!this.data[col][name];
     }
 
     getData() {
-        if (!this.data) throw new Error('no data');
         return this.data;
     }
 
-    getCol(colName) {
-        if (!this.data) throw new Error('no data');
-        if (!colName) throw new Error('no colName');
-        return this.data[colName];
+    getCol(name) {
+        if (!name) throw new Error('getCol: no name');
+        return this.data[name];
     }
 
-    getModelData(colName, name) {
-        if (!this.data) throw new Error('no data');
-        if (colName && name) {
-            if (!this.data[colName][name]) throw new Error(`no ${colName}: ${name}`);
-            return this.data[colName][name];
-        }
-        if (colName) {
-            return this.data[colName];
-        }
-        return this.data;
+    getModelData(col, name) {
+        return this.data[col][name];
     }
 
-    getModelData2(col, name) {
-        return this.data[col].find(obj => obj.getName() === name);
+    findModelData(col, name) {
+        return this.data[col].find(data => BaseModel.getName(data) === name);
+    }
+
+    addModelData(col, data) {
+        this.data[col].push(data);
     }
 
     getApp() {
