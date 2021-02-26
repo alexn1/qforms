@@ -12,13 +12,13 @@ class Application extends Model {
         for (const name in this.data.databases) {
             this.createDatabase(this.data.databases[name]);
         }
-        this.data.databases2.forEach(data => this.createDatabase(data));
+        if (this.data.databases2) this.data.databases2.forEach(data => this.createDatabase(data));
 
         // dataSources
         for (const name in this.data.dataSources) {
             this.createDataSource(this.data.dataSources[name]);
         }
-        this.data.dataSources2.forEach(data => this.createDataSource(data));
+        if (this.data.dataSources2) this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // pageLinks
         for (const name in this.data.pageLinks) {
