@@ -16,7 +16,7 @@ class ParamEditorController extends EditorController {
     async _new(params) {
         console.log('ParamEditorController._new');
         const appEditor = await this.createApplicationEditor();
-        const param = appEditor.createDatabaseEditor(params.database).newParam(params);
+        const param = appEditor.createDatabaseEditor(params.database).newParamData(params);
         await appEditor.save();
         return param;
     }

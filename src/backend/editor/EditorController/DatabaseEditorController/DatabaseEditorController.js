@@ -21,7 +21,7 @@ class DatabaseEditorController extends EditorController {
             const databaseEditor = appEditor.createDatabaseEditor(params.name);
             for (const name in params.params) {
                 const param = params.params[name];
-                databaseEditor.newParam(param);
+                databaseEditor.newParamData(param);
             }
         }
         await appEditor.save();

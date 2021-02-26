@@ -35,7 +35,7 @@ class DatabaseEditor extends Editor {
         return new TableEditor(this.getTableData(name), this);
     }
 
-    newParam(params) {
+    newParamData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
         if (!this.data.params) this.data.params = {};
