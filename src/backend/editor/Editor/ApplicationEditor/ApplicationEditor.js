@@ -195,7 +195,7 @@ class ApplicationEditor extends Editor {
             this.data.dataSources = {};
         }
         if (this.data.dataSources[name]) {
-            throw new Error('Data Source {name} already exist.'.replace('{name}', name));
+            throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
         switch (_class) {
