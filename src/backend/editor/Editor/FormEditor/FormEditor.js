@@ -145,7 +145,7 @@ class FormEditor extends Editor {
         return dirPath;
     }
 
-    newDataSource(params) {
+    newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (!this.data.dataSources) {

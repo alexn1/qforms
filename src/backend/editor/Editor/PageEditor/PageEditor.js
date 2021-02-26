@@ -101,7 +101,7 @@ class PageEditor extends Editor {
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
-                formEditor.newDataSource(
+                formEditor.newDataSourceData(
                     _.extend(
                         {form:name},
                         dataSource
@@ -159,7 +159,7 @@ class PageEditor extends Editor {
         return dirPath;
     }
 
-    newDataSource(params) {
+    newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (!this.data.dataSources) {

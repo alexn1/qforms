@@ -188,7 +188,7 @@ class ApplicationEditor extends Editor {
         delete this.data.pageLinks[name];
     }
 
-    newDataSource(params) {
+    newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (!this.data.dataSources) {

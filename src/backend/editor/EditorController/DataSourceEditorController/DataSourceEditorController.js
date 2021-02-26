@@ -19,18 +19,18 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
-                const dataSourceEditor = formEditor.newDataSource(params);
+                const dataSourceEditor = formEditor.newDataSourceData(params);
                 await pageEditor.save();
                 return dataSourceEditor.getData();
             } else {
                 // page data source
-                const dataSourceData = pageEditor.newDataSource(params);
+                const dataSourceData = pageEditor.newDataSourceData(params);
                 await pageEditor.save();
                 return dataSourceData;
             }
         } else {
             // app data source
-            const dataSourceData = appEditor.newDataSource(params);
+            const dataSourceData = appEditor.newDataSourceData(params);
             await appEditor.save();
             return dataSourceData;
         }
