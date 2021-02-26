@@ -12,11 +12,13 @@ class Database extends Model {
         for (const name in this.data.params) {
             this.createParam(this.data.params[name]);
         }
+        if (this.data.params2) this.data.params2.forEach(data => this.createParam(data));
 
         // tables
         for (const name in this.data.tables) {
             this.createTable(this.data.tables[name]);
         }
+        if (this.data.tables2) this.data.tables2.forEach(data => this.createTable(data));
     }
 
     createParam(data) {

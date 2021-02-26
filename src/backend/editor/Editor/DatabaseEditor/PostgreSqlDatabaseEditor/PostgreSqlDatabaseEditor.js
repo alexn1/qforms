@@ -7,7 +7,11 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor {
             '@class'      : 'PostgreSqlDatabase',
             '@attributes' : {
                 name : params.name
-            }
+            },
+            params: {},
+            tables: {},
+            params2: [],
+            tables2: [],
         };
     }
 }

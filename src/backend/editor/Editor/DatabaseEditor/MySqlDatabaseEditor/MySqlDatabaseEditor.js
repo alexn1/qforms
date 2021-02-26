@@ -7,7 +7,11 @@ class MySqlDatabaseEditor extends DatabaseEditor {
             '@class'      : 'MySqlDatabase',
             '@attributes' : {
                 name : params.name
-            }
+            },
+            params: {},
+            tables: {},
+            params2: [],
+            tables2: [],
         };
     }
 }
