@@ -13,7 +13,9 @@ class TableEditor extends Editor {
             '@class'      : 'Table',
             '@attributes' : {
                 name : params.name
-            }
+            },
+            columns: {},
+            columns2: [],
         };
     }
 

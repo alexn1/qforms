@@ -13,22 +13,28 @@ class DatabaseEditor extends Editor {
         throw new Error('DatabaseEditor.createData not implemented');
     }
 
-    newTable(params) {
+    newTableData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
         if (!this.data.tables) this.data.tables = {};
-        if (this.data.tables[name]) throw new Error(`table ${name} already exists`);
-        const tableData = this.data.tables[name] = TableEditor.createData(params);
+        if (!this.data.tables2) this.data.tables2 = [];
+        if (this.data.tables[name] || this.getModelData('tables2', name)) throw new Error(`table ${name} already exists`);
+        const tableData = TableEditor.createData(params);
         if (params.columns) {
-            params.columns.forEach(column => {
-                this.createTableEditor(params.name).newColumn(column);
-            });
+            const tableEditor = this.createTableEditor(name);
+            params.columns.forEach(column => tableEditor.newColumn(column));
         }
+        // this.data.tables[name] = tableData;
+        this.addModelData('tables2', tableData);
         return tableData;
     }
 
     getTableData(name) {
-        return this.data.tables[name];
+        let data = this.getModelData('tables', name);
+        if (data) return data;
+        data = this.findModelData('tables2', name);
+        if (data) return data;
+        throw new Error(`no table: ${name}`);
     }
 
     createTableEditor(name) {

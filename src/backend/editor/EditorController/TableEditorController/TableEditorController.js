@@ -16,7 +16,7 @@ class TableEditorController extends EditorController {
         console.log('TableEditorController._new');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
-        const tableData = databaseEditor.newTable(params);
+        const tableData = databaseEditor.newTableData(params);
         await appEditor.save();
         return tableData;
     }
