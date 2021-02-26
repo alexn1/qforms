@@ -18,6 +18,7 @@ class Application extends Model {
         for (const name in this.data.dataSources) {
             this.createDataSource(this.data.dataSources[name]);
         }
+        this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // pageLinks
         for (const name in this.data.pageLinks) {
