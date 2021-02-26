@@ -13,16 +13,19 @@ class Form extends Model {
         for (const name in this.data.dataSources) {
             this.createDataSource(this.data.dataSources[name]);
         }
+        if (this.data.dataSources2) this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // fields
         for (const name in this.data.fields) {
             this.createField(this.data.fields[name]);
         }
+        if (this.data.fields2) this.data.fields2.forEach(data => this.createField(data));
 
         // actions
         for (const name in this.data.actions) {
             this.createAction(this.data.actions[name]);
         }
+        if (this.data.actions2) this.data.actions2.forEach(data => this.createAction(data));
     }
 
     createDataSource(data) {

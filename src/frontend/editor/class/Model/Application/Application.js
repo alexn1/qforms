@@ -24,6 +24,7 @@ class Application extends Model {
         for (const name in this.data.pageLinks) {
             this.createPageLink(this.data.pageLinks[name]);
         }
+        if (this.data.pageLinks2) this.data.pageLinks2.forEach(data => this.createPageLink(data));
     }
 
     createDatabase(data) {

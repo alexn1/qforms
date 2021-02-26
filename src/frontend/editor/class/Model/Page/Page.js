@@ -13,11 +13,13 @@ class Page extends Model {
         for (const name in this.data.dataSources) {
             this.createDataSource(this.data.dataSources[name]);
         }
+        if (this.data.dataSources2) this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // forms
         for (const name in this.data.forms) {
             this.createForm(this.data.forms[name]);
         }
+        if (this.data.forms2) this.data.forms2.forEach(data => this.createForm(data));
     }
 
     createDataSource(data) {
