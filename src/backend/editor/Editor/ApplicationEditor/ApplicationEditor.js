@@ -131,10 +131,7 @@ class ApplicationEditor extends Editor {
         if (!this.data.databases2) {
             this.data.databases2 = [];
         }
-        if (this.data.databases[name]) {
-            throw new Error(`database ${name} already exists`);
-        }
-        if (this.findModelData('databases2', name)) {
+        if (this.data.databases[name] || this.findModelData('databases2', name)) {
             throw new Error(`database ${name} already exists`);
         }
 
@@ -194,7 +191,10 @@ class ApplicationEditor extends Editor {
         if (!this.data.dataSources) {
             this.data.dataSources = {};
         }
-        if (this.data.dataSources[name]) {
+        if (!this.data.dataSources2) {
+            this.data.dataSources2 = [];
+        }
+        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
             throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
@@ -208,7 +208,8 @@ class ApplicationEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        this.data.dataSources[name] = data;
+        // this.data.dataSources[name] = data;
+        this.addModelData('dataSources2', data);
         return data;
     }
 
