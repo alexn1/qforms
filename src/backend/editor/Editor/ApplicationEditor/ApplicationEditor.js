@@ -31,10 +31,13 @@ class ApplicationEditor extends Editor {
                 lang          : 'en',
                 theme         : 'standard'
             },
-            env      : {},
-            databases: {},
-            pageLinks: {},
-            databases2: []
+            env        : {},
+            databases  : {},
+            dataSources: {},
+            pageLinks  : {},
+
+            databases2  : [],
+            dataSources2: [],
         };
     }
 
@@ -135,17 +138,17 @@ class ApplicationEditor extends Editor {
             throw new Error(`database ${name} already exists`);
         }
 
-        let databaseData;
+        let data;
         if (params._class === 'MySqlDatabase') {
-            databaseData = MySqlDatabaseEditor.createData(params);
+            data = MySqlDatabaseEditor.createData(params);
         } else if (params._class === 'PostgreSqlDatabase') {
-            databaseData = PostgreSqlDatabaseEditor.createData(params);
+            data = PostgreSqlDatabaseEditor.createData(params);
         } else {
             throw new Error(`unknown database class ${params._class}`);
         }
-        // this.data.databases[name] = databaseData;
-        this.addModelData('databases2', databaseData);
-        return databaseData;
+        // this.data.databases[name] = data;
+        this.addModelData('databases2', data);
+        return data;
     }
 
     getDatabaseData(name) {
@@ -205,7 +208,8 @@ class ApplicationEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        return this.data.dataSources[name] = data;
+        this.data.dataSources[name] = data;
+        return data;
     }
 
     deleteDataSource(dataSource) {

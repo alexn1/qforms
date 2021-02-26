@@ -115,10 +115,10 @@ class FormEditor extends Editor {
     //     return this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
     // }
 
-    async removeControl(name) {
+    /*async removeControl(name) {
         delete this.data.controls[name];
         return await this.parent.save();
-    }
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
@@ -176,7 +176,7 @@ class FormEditor extends Editor {
             this.data.dataSources[dataSource].keyColumns = {};
         }
         if (this.data.dataSources[dataSource].keyColumns[name]) {
-            throw new Error('Key Column {name} already exist.'.replace('{name}', name));
+            throw new Error(`Key Column ${name} already exist.`);
         }
         return this.data.dataSources[dataSource].keyColumns[name] = {
             '@class'     : 'KeyColumn',
