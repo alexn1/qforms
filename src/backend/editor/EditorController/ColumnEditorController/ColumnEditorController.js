@@ -26,9 +26,9 @@ class ColumnEditorController extends EditorController {
     async _new(params) {
         console.log('ColumnEditorController._new');
         const appEditor = await this.createApplicationEditor();
-        const column = appEditor.createDatabaseEditor(params.database).createTableEditor(params.table).newColumn(params);
+        const columnData = appEditor.createDatabaseEditor(params.database).createTableEditor(params.table).newColumnData(params);
         await appEditor.save();
-        return column;
+        return columnData;
     }
 
     async delete(params) {

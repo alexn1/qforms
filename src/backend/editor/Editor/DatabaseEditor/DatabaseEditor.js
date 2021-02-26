@@ -22,7 +22,7 @@ class DatabaseEditor extends Editor {
         const tableData = TableEditor.createData(params);
         if (params.columns) {
             const tableEditor = this.createTableEditor(name);
-            params.columns.forEach(column => tableEditor.newColumn(column));
+            params.columns.forEach(column => tableEditor.newColumnData(column));
         }
         // this.data.tables[name] = tableData;
         this.addModelData('tables2', tableData);

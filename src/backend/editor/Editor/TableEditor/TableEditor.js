@@ -23,20 +23,26 @@ class TableEditor extends Editor {
         delete this.data.columns[name];
     }
 
-    newColumn(params) {
+    newColumnData(params) {
         const name = params.name;
         if (!name) throw new Error('need name');
-        if (!this.data.columns) {
-            this.data.columns = {};
-        }
-        if (this.data.columns[name]) {
+        if (!this.data.columns) this.data.columns = {};
+        if (!this.data.columns2) this.data.columns2 = [];
+        if (this.data.columns[name] && this.findModelData('tables2', name)) {
             throw new Error(`Column ${name} already exists.`);
         }
-        return this.data.columns[name] = ColumnEditor.createData(params);
+        const data = ColumnEditor.createData(params);
+        // this.data.columns[name] = data;
+        this.addModelData('columns2', data);
+        return data;
     }
 
     getColumnData(name) {
-        return this.data.columns[name];
+        let data = this.getModelData('columns', name);
+        if (data) return data;
+        data = this.findModelData('columns2', name);
+        if (data) return data;
+        throw new Error(`no column ${name}`);
     }
 
     getColumnEditor(name) {
