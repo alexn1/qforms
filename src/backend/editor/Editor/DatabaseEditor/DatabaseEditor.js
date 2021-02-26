@@ -21,7 +21,7 @@ class DatabaseEditor extends Editor {
         const tableData = this.data.tables[name] = TableEditor.createData(params);
         if (params.columns) {
             params.columns.forEach(column => {
-                this.getTableEditor(params.name).newColumn(column);
+                this.createTableEditor(params.name).newColumn(column);
             });
         }
         return tableData;
@@ -31,7 +31,7 @@ class DatabaseEditor extends Editor {
         return this.data.tables[name];
     }
 
-    getTableEditor(name) {
+    createTableEditor(name) {
         return new TableEditor(this.getTableData(name), this);
     }
 

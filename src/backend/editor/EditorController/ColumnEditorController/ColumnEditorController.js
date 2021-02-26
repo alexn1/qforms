@@ -17,7 +17,7 @@ class ColumnEditorController extends EditorController {
         console.log('ColumnEditorController.save');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
-        const tableEditor = databaseEditor.getTableEditor(params.table);
+        const tableEditor = databaseEditor.createTableEditor(params.table);
         const columnEditor = tableEditor.getColumnEditor(params.column);
         await columnEditor.setAttr(params.attr, params.value);
         return null;
@@ -26,7 +26,7 @@ class ColumnEditorController extends EditorController {
     async _new(params) {
         console.log('ColumnEditorController._new');
         const appEditor = await this.createApplicationEditor();
-        const column = appEditor.createDatabaseEditor(params.database).getTableEditor(params.table).newColumn(params);
+        const column = appEditor.createDatabaseEditor(params.database).createTableEditor(params.table).newColumn(params);
         await appEditor.save();
         return column;
     }
@@ -34,7 +34,7 @@ class ColumnEditorController extends EditorController {
     async delete(params) {
         console.log('ColumnEditorController.delete');
         const appEditor = await this.createApplicationEditor();
-        appEditor.createDatabaseEditor(params.database).getTableEditor(params.table).deleteColumn(params.column);
+        appEditor.createDatabaseEditor(params.database).createTableEditor(params.table).deleteColumn(params.column);
         await appEditor.save();
         return null;
     }
