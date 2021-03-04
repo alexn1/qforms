@@ -1,4 +1,3 @@
-const path = require('path');
 const FormEditor = require('../FormEditor');
 
 class RowFormEditor extends FormEditor {
