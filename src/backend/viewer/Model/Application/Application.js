@@ -34,23 +34,33 @@ class Application extends Model {
         this.hostApp            = hostApp;
         this.env                = env;
         this.fillCollections    = ['databases', 'dataSources'];
-        this.pages              = {};
+
         this.databases          = {};
         this.dataSources        = {};
+        this.pages              = {};
         this.css                = [];
         this.js                 = [];
-    }
-
-    getDirPath() {
-        return this.appInfo.dirPath;
     }
 
     async init() {
         // await super.init();
         await this.createCollection('databases');
+        await this.createCollection2('databases');
         await this.createCollection('dataSources');
         this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
+    }
+
+    async deinit() {
+        console.log('Application.deinit: ' + this.getName());
+        const names = Object.keys(this.databases);
+        for (let i = 0; i < names.length; i++) {
+            await this.databases[names[i]].deinit();
+        }
+    }
+
+    getDirPath() {
+        return this.appInfo.dirPath;
     }
 
     getText() {
@@ -106,14 +116,6 @@ class Application extends Model {
             }
         }
         return menu;
-    }
-
-    async deinit() {
-        console.log('Application.deinit: ' + this.getName());
-        const names = Object.keys(this.databases);
-        for (let i = 0; i < names.length; i++) {
-            await this.databases[names[i]].deinit();
-        }
     }
 
     createPageLink(name) {
@@ -176,8 +178,6 @@ class Application extends Model {
                 pages.push(pageData);
             }
         }
-
-
         return pages;
     }
 
