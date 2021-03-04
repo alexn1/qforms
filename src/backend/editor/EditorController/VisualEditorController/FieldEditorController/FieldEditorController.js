@@ -15,7 +15,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
-        const fieldData = formEditor.newField(params);
+        const fieldData = formEditor.newFieldData(params);
         await pageEditor.save();
         return fieldData;
     }
@@ -24,7 +24,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
         const formEditor  = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         await fieldEditor.setAttr(params.attr, params.value);
         return null;
     }
@@ -41,7 +41,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         const newFieldData = await fieldEditor.changeClass(params['class']);
         return newFieldData;
     }
@@ -50,7 +50,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         const ejs = await fieldEditor.createEjs(params);
         const css = await fieldEditor.createCss(params);
         return {ejs, css};
@@ -63,7 +63,7 @@ class FieldEditorController extends VisualEditorController {
                 const appEditor = await this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor  = pageEditor.createFormEditor(params.form);
-                const fieldEditor = formEditor.getField(params.field);
+                const fieldEditor = formEditor.createFieldEditor(params.field);
                 // result.data.ejs = await fieldEditor.getCustomFile('ejs');
                 // result.data.css = await fieldEditor.getCustomFile('css');
                 result.data.js = await fieldEditor.getCustomFile('js');
@@ -77,7 +77,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         switch (params.view) {
             case 'ejs':
                 await fieldEditor.saveCustomFile('ejs', params.text);
@@ -92,7 +92,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         const js = await fieldEditor.createJs(params);
         return {js};
     }
@@ -101,7 +101,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.getField(params.field);
+        const fieldEditor = formEditor.createFieldEditor(params.field);
         await fieldEditor.saveCustomFile('js', params.text);
         return null;
     }

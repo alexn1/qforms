@@ -10,15 +10,21 @@ class FormEditor extends Editor {
         this.colName = 'forms';
     }
 
-    newField(params) {
+    newFieldData(params) {
         const name = params['name'];
         if (!this.data.fields) {
             this.data.fields = {};
         }
-        if (this.data.fields[name]) {
-            throw new Error('Field {name} already exist.'.replace('{name}', name));
+        if (!this.data.fields2) {
+            this.data.fields2 = [];
         }
-        return this.data.fields[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
+        if (this.data.fields[name] || this.findModelData('fields2', name)) {
+            throw new Error(`Field ${name} already exist.`);
+        }
+        const data = eval(`qforms.${params['class']}Editor.createData(params);`);
+        // this.data.fields[name] = data;
+        this.addModelData('fields2', data);
+        return data;
     }
 
     async moveFieldUp(params) {
@@ -47,13 +53,11 @@ class FormEditor extends Editor {
     }
 
     getFieldData(name) {
-        if (!this.data.fields[name]) throw new Error(`no field: ${name}`);
-        return this.data.fields[name];
-    }
-
-    getControlData(name) {
-        if (!this.data.controls[name]) throw new Error(`no control: ${name}`);
-        return this.data.controls[name];
+        let data = this.getModelData('fields', name);
+        if (data) return data;
+        data = this.findModelData('fields2', name);
+        if (data) return data;
+        throw new Error(`no field: ${name}`);
     }
 
     getActionData(name) {
@@ -61,14 +65,9 @@ class FormEditor extends Editor {
         return this.data.actions[name];
     }
 
-    getField(name) {
+    createFieldEditor(name) {
         const fieldData = this.getFieldData(name);
         return eval(`new qforms.${fieldData['@class']}Editor(this, name, fieldData)`);
-    }
-
-    createControlEditor(name) {
-        const controlData = this.getControlData(name);
-        return eval(`new qforms.${controlData['@class']}Editor(this, name, controlData)`);
     }
 
     createActionEditor(name) {
@@ -125,16 +124,12 @@ class FormEditor extends Editor {
 
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
-        const dirPath = path.join(customDirPath, 'forms');
-        // await qforms.Helper.createDirIfNotExists(dirPath);
-        return dirPath;
+        return path.join(customDirPath, 'forms');
     }
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        const dirPath = path.join(collectionDirPath, this.name);
-        // await qforms.Helper.createDirIfNotExists(dirPath);
-        return dirPath;
+        return path.join(collectionDirPath, this.name);
     }
 
     newDataSourceData(params) {
