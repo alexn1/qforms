@@ -19,14 +19,14 @@ class DatabaseEditor extends Editor {
         if (!this.data.tables) this.data.tables = {};
         if (!this.data.tables2) this.data.tables2 = [];
         if (this.data.tables[name] || this.getModelData('tables2', name)) throw new Error(`table ${name} already exists`);
-        const tableData = TableEditor.createData(params);
+        const data = TableEditor.createData(params);
         if (params.columns) {
             const tableEditor = this.createTableEditor(name);
             params.columns.forEach(column => tableEditor.newColumnData(column));
         }
-        // this.data.tables[name] = tableData;
-        this.addModelData('tables2', tableData);
-        return tableData;
+        // this.data.tables[name] = data;
+        this.addModelData('tables2', data);
+        return data;
     }
 
     getTableData(name) {

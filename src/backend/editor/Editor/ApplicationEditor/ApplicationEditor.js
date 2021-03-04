@@ -108,8 +108,16 @@ class ApplicationEditor extends Editor {
         return this.appInfo.dirPath;
     }
 
+    getDataSourceData(name) {
+        let data = this.getModelData('dataSources', name);
+        if (data) return data;
+        data = this.findModelData('dataSources2', name);
+        if (data) return data;
+        throw new Error(`no data source: ${name}`);
+    }
+
     createDataSourceEditor(name) {
-        const dataSourceData = this.getModelData('dataSources', name);
+        const dataSourceData = this.getDataSourceData(name);
         const className = dataSourceData['@class'];
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(this, name, dataSourceData);

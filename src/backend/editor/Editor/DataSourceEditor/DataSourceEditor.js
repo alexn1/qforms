@@ -27,15 +27,21 @@ class DataSourceEditor extends Editor {
         if (!this.data.keyColumns) {
             this.data.keyColumns = {};
         }
-        if (this.data.keyColumns[name]) {
-            throw new Error('Key Column {name} already exist.'.replace('{name}', name));
+        if (!this.data.keyColumns2) {
+            this.data.keyColumns2 = [];
         }
-        return this.data.keyColumns[name] = {
+        if (this.data.keyColumns[name] || this.getModelData('keyColumns2', name)) {
+            throw new Error(`Key Column ${name} already exist.`);
+        }
+        const data = {
             '@class'     : 'KeyColumn',
             '@attributes': {
                 'name': name
             }
         };
+        // this.data.keyColumns[name] = data;
+        this.addModelData('keyColumns2', data);
+        return data;
     }
 
     async getCollectionDirPath() {
