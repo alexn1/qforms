@@ -18,7 +18,7 @@ class DatabaseEditor extends Editor {
         if (!name) throw new Error('need param name');
         if (!this.data.tables) this.data.tables = {};
         if (!this.data.tables2) this.data.tables2 = [];
-        if (this.findModelData('tables', name)) throw new Error(`table ${name} already exists`);
+        if (this.getModelData('tables', name)) throw new Error(`table ${name} already exists`);
         const data = TableEditor.createData(params);
         if (params.columns) {
             const tableEditor = this.createTableEditor(name);
