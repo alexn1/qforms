@@ -11,7 +11,9 @@ class DataSourceEditor extends Editor {
             '@attributes': {
                 name                : params.name,
                 // dumpFirstRowToParams: 'false'
-            }
+            },
+            keyColumns: {},
+            keyColumns2: [],
         };
     }
 
@@ -39,16 +41,12 @@ class DataSourceEditor extends Editor {
 
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
-        const dirPath = path.join(customDirPath, 'dataSources');
-        // await qforms.Helper.createDirIfNotExists(dirPath);
-        return dirPath;
+        return path.join(customDirPath, 'dataSources');
     }
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        const dirPath = path.join(collectionDirPath, this.name);
-        // await qforms.Helper.createDirIfNotExists(dirPath);
-        return dirPath;
+        return path.join(collectionDirPath, this.name);
     }
 
     async createBackendJs(params) {
