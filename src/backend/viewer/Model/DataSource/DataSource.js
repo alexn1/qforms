@@ -29,8 +29,7 @@ class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.keyColumns       = null;
-        // this.parentKeyColumns = null;
+        this.keyColumns = null;
     }
 
     getDirPath() {
@@ -44,20 +43,17 @@ class DataSource extends Model {
     async init() {
         // console.log('DataSource.init', this.getFullName());
         await super.init();
-        this.keyColumns       = this.getKeyColumns();
-        // this.parentKeyColumns = this.getParentKeyColumns();
+        this.keyColumns = this.getKeyColumns();
     }
 
     getKeyColumns() {
-        if (this.data.keyColumns === undefined || Object.keys(this.data.keyColumns).length === 0) {
-            throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
-        }
-        return Object.keys(this.data.keyColumns);
+        const keyColumns = [
+            ...(this.data.keyColumns  ? Object.keys(this.data.keyColumns)                          : []),
+            ...(this.data.keyColumns2 ? this.data.keyColumns2.map(data => BaseModel.getName(data)) : []),
+        ];
+        if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
+        return keyColumns;
     }
-
-    /*getParentKeyColumns() {
-        return this.data.parentKeyColumns ? Object.keys(this.data.parentKeyColumns) : [];
-    }*/
 
     prepareRows(rows) {
         if (rows[0]) {
@@ -197,11 +193,6 @@ class DataSource extends Model {
 
         // keyColumns
         data.keyColumns = this.keyColumns;
-
-        // parentKeyColumns
-        /*if (this.parentKeyColumns.length > 0) {
-            data.parentKeyColumns = this.parentKeyColumns;
-        }*/
 
         // rows from JSON file
         data.rows = await this.getRows();

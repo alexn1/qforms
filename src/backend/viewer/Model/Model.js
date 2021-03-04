@@ -49,10 +49,13 @@ class Model extends BaseModel {
     }
 
     async createCollection2(colName) {
-        const arr = this.getCol(colName + '2');
-        for (let i = 0; i < arr.length; i++) {
-            const data = arr[i];
-            await this.addColItemToObj(colName, data);
+        console.log('Model.createCollection2', colName);
+        const arr = this.getCol(`${colName}2`);
+        if (arr) {
+            for (let i = 0; i < arr.length; i++) {
+                const data = arr[i];
+                await this.addColItemToObj(colName, data);
+            }
         }
     }
 
