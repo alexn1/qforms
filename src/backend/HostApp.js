@@ -26,18 +26,16 @@ const ACTIONS = [
 const EDITOR_CONTROLLERS = [
     'Application',
     'Database'   ,
+    'Param'      ,
+    'Table',
+    'Column',
     'DataSource' ,
-    'Field'      ,
-    'Control'    ,
-    'Form'       ,
     'KeyColumn'  ,
     'Page'       ,
     'PageLink'   ,
-    'Param'      ,
-    'ParentKeyColumn',
-    'Table',
-    'Column',
-    'Action'
+    'Form'       ,
+    'Field'      ,
+    'Action'     ,
 ];
 
 const EDITOR_ACTIONS = [
@@ -47,7 +45,7 @@ const EDITOR_ACTIONS = [
     'getView'         ,
     'saveView'        ,
     'saveController'  ,
-    'createView'      ,
+    // 'createView'      ,
     'createController',
     'get'             ,
     'getTableInfo'    ,
