@@ -46,7 +46,7 @@ class DatabaseEditor extends Editor {
         if (!name) throw new Error('need param name');
         if (!this.data.params) this.data.params = {};
         if (!this.data.params2) this.data.params2 = [];
-        if (this.data.params[name] || this.findModelData('params', name)) throw new Error(`param ${name} already exists`);
+        if (this.data.params[name] || this.findModelData('params2', name)) throw new Error(`param ${name} already exists`);
         const data = ParamEditor.createData(params);
         // this.data.params[name] = data;
         this.addModelData('params2', data);
