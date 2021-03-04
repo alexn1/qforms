@@ -169,7 +169,7 @@ class FormEditor extends Editor {
         return this.createDataSourceEditor(name);
     }
 
-    newDataSourceKeyColumn(params) {
+    /*newDataSourceKeyColumn(params) {
         const dataSource = params['dataSource'];
         const name       = params['name'];
         if (!this.data.dataSources[dataSource].keyColumns) {
@@ -184,24 +184,7 @@ class FormEditor extends Editor {
                 'name': name
             }
         };
-    }
-
-    newDataSourceParentKeyColumn(params) {
-        const dataSource = params['dataSource'];
-        const name       = params['name'];
-        if (!(this.data.dataSources[dataSource].parentKeyColumns)) {
-            this.data.dataSources[dataSource].parentKeyColumns = {};
-        }
-        if ((this.data.dataSources[dataSource].parentKeyColumns[name])) {
-            throw new Error('Parent Key Column {name} already exist.'.replace('{name}', name));
-        }
-        return this.data.dataSources[dataSource].parentKeyColumns[name] = {
-            '@class'     : 'ParentKeyColumn',
-            '@attributes': {
-                'name': name
-            }
-        };
-    }
+    }*/
 
     deleteFormDataSource(dataSource) {
         delete this.data.dataSources[dataSource];

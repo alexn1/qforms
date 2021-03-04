@@ -22,7 +22,7 @@ class DataSourceEditor extends Editor {
         this.colName = 'dataSources';
     }
 
-    newKeyColumn(params) {
+    newKeyColumnData(params) {
         const name = params.name;
         if (!this.data.keyColumns) {
             this.data.keyColumns = {};

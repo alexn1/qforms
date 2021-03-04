@@ -107,16 +107,18 @@ class PageEditor extends Editor {
                         dataSource
                     )
                 );
+                const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
                 // keyColumns
                 if (dataSource.keyColumns) {
                     for (const keyColumnName in dataSource.keyColumns) {
                         const keyColumn = dataSource.keyColumns[keyColumnName];
-                        formEditor.newDataSourceKeyColumn(
-                            _.extend(
-                                {'form':name, 'dataSource':dataSourceName},
-                                keyColumn
-                            )
-                        );
+                        dataSourceEditor.newKeyColumnData(_.extend(
+                            {
+                                form      : name,
+                                dataSource: dataSourceName
+                            },
+                            keyColumn
+                        ));
                     }
                 }
             }
