@@ -80,8 +80,7 @@ class DataSourceController extends DocumentController {
         }
 
         // options
-        // propList.options['insertNewKey']         = ['true', 'false'];
-        // propList.options['dumpFirstRowToParams'] = ['true', 'false'];
+        // propList.options['insertNewKey'] = ['true', 'false'];
         return propList;
     }
     getDocumentViewClass() {

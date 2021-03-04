@@ -55,7 +55,6 @@ class Form extends Model {
         return {
             class               : 'DataSource',
             name                : 'default',
-            // dumpFirstRowToParams: 'false',
             keyColumns          : ['id'],
             rows                : [row],
             // database            : '',

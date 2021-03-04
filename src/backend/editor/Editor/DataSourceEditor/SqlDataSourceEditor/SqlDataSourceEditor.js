@@ -7,7 +7,6 @@ class SqlDataSourceEditor extends DataSourceEditor {
             '@class'     : 'SqlDataSource',
             '@attributes': {
                 name                : params.name,
-                // dumpFirstRowToParams: 'false',
                 database            : params.database      ? params.database      : 'default',
                 table               : params.table         ? params.table         :        '',
                 singleQuery         : params.singleQuery   ? params.singleQuery   :        '',

@@ -9,8 +9,7 @@ class DataSourceEditor extends Editor {
         return {
             '@class'     : 'DataSource',
             '@attributes': {
-                name                : params.name,
-                // dumpFirstRowToParams: 'false'
+                name: params.name,
             },
             keyColumns: {},
             keyColumns2: [],
