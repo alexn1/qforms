@@ -75,19 +75,19 @@ class Editor extends BaseModel {
         this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
     }
 
-    renameObjField(objName, oldName, newName) {
+    /*renameObjField(objName, oldName, newName) {
         console.log(`Editor(${this.constructor.name}).renameObjField`, objName, oldName, newName);
         this.data[objName] = qforms.Helper.replaceKey(this.data[objName], oldName, newName);
-    }
+    }*/
 
     async setAttr(name, value) {
         console.log(`Editor(${this.constructor.name}).setAttr`, name, value);
-        const oldValue = this.getAttr(name);
+        // const oldValue = this.getAttr(name);
         this.data['@attributes'][name] = value;
-        if (name === 'name' && this.colName) {
+        /*if (name === 'name' && this.colName) {
             if (!this.parent) throw new Error('no parent editor');
             this.parent.renameObjField(this.colName, oldValue, value);
-        }
+        }*/
         return await this.save();
     }
 
