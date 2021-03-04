@@ -8,10 +8,10 @@ const EditorController = require('../EditorController');
 class DatabaseEditorController extends EditorController {
     constructor(...args) {
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/DocumentController/DatabaseController/view'
-        );
+        );*/
     }
 
     async _new(params) {

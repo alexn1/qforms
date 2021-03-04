@@ -8,21 +8,22 @@ class EditorController {
         this.appInfo     = appInfo;
         this.hostApp     = hostApp;
         this.application = application;
-        this.viewDirPath = null;
+        // this.viewDirPath = null;
     }
 
     async getView(params) {
         console.log('EditorController.getView');
-        if (!this.viewDirPath) throw new Error('viewDirPath is null');
+        let view = null;
+
+        /*if (!this.viewDirPath) throw new Error('viewDirPath is null');
         const viewFilePath = path.join(this.viewDirPath, params.view);
         const exists = await qforms.Helper.exists(viewFilePath);
-        let view = null;
         if (exists) {
             console.log(`view file exists: ${viewFilePath}`);
         } else {
             console.warn(`view file does not exist: ${viewFilePath}`);
         }
-        if (exists) view = await qforms.Helper.readTextFile(viewFilePath);
+        if (exists) view = await qforms.Helper.readTextFile(viewFilePath);*/
         return {
             view,
             data: {}

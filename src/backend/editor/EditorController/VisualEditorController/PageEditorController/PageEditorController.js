@@ -6,10 +6,10 @@ class PageEditorController extends VisualEditorController {
 
     constructor(...args) {
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/DocumentController/VisualController/PageController'
-        );
+        );*/
     }
 
     async get(params) {

@@ -7,10 +7,10 @@ class ColumnEditorController extends EditorController {
     constructor(...args) {
         console.log('ColumnEditorController.constructor');
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/ColumnController'
-        );
+        );*/
     }
 
     async save(params) {

@@ -6,10 +6,10 @@ class TableEditorController extends EditorController {
 
     constructor(...args) {
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/DocumentController/TableController/view'
-        );
+        );*/
     }
 
     async _new(params) {

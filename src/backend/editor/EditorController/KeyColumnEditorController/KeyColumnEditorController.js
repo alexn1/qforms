@@ -7,10 +7,10 @@ class KeyColumnEditorController extends EditorController {
 
     constructor(...args) {
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/KeyColumnController'
-        );
+        );*/
     }
 
     async _new(params) {

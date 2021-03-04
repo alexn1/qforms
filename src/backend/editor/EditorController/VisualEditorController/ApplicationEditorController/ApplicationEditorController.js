@@ -5,10 +5,10 @@ class ApplicationEditorController extends VisualEditorController {
 
     constructor(...args) {
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/DocumentController/VisualController/ApplicationController'
-        );
+        );*/
     }
 
     async save(params) {

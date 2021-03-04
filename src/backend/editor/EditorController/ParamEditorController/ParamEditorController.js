@@ -7,10 +7,10 @@ class ParamEditorController extends EditorController {
     constructor(...args) {
         console.log('ParamEditorController.constructor');
         super(...args);
-        this.viewDirPath = path.join(
+        /*this.viewDirPath = path.join(
             this.hostApp.publicDirPath,
             'editor/class/Controller/ModelController/ParamController'
-        );
+        );*/
     }
 
     async _new(params) {
