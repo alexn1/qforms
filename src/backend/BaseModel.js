@@ -59,7 +59,11 @@ class BaseModel {
     }
 
     getModelData(col, name) {
-        return this.data[col][name];
+        let data = this.data[col][name];
+        if (data) return data;
+        data = this.findModelData(`${col}2`, name);
+        if (data) return data;
+        throw new Error(`no ${col}: ${name}`);
     }
 
     findModelData(col, name) {

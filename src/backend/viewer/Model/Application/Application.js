@@ -119,9 +119,12 @@ class Application extends Model {
         return menu;
     }
 
+    getPageLinkData(name) {
+        return this.getModelData('pageLinks', name);
+    }
+
     createPageLink(name) {
-        const pageLinkData = this.getModelData('pageLinks', name);
-        return new PageLink(pageLinkData, this);
+        return new PageLink(this.getPageLinkData(name), this);
     }
 
     createDatabase(name) {
@@ -129,8 +132,8 @@ class Application extends Model {
         return Database.create(databaseData, this);
     }
 
-    async _createPage(pageLinkName) {
-        // console.log('Application._createPage', pageLinkName);
+    async createPage(pageLinkName) {
+        // console.log('Application.createPage', pageLinkName);
         const relFilePath  = this.createPageLink(pageLinkName).getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await qforms.Helper.readTextFile(pageFilePath);
@@ -152,7 +155,7 @@ class Application extends Model {
         if (this.pages[name]) {
             return this.pages[name];
         }
-        return this.pages[name] = await this._createPage(name);
+        return this.pages[name] = await this.createPage(name);
     }
 
     getPageLinkNameList() {
@@ -160,7 +163,7 @@ class Application extends Model {
     }
 
     getStartupPageNames() {
-        return this.getPageLinkNameList().filter(pageName => this.createPageLink(pageName).getAttr('startup') === 'true');
+        return this.getPageLinkNameList().filter(pageLinkName => this.createPageLink(pageLinkName).getAttr('startup') === 'true');
     }
 
     async fillStartupPages(context) {
