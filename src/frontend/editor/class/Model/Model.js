@@ -1,6 +1,7 @@
 class Model {
 
     constructor(data, parent = null) {
+        if (!data) throw new Error('no data');
         this.data   = data;
         this.parent = parent;
     }

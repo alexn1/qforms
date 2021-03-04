@@ -68,13 +68,21 @@ class ApplicationEditor extends Editor {
         await this.appFile.save();
     }
 
+    getPageLinkData(name) {
+        let data = this.getModelData('pageLinks', name);
+        if (data) return data;
+        data = this.findModelData('pageLinks2', name);
+        if (data) return data;
+        throw new Error(`no page link: ${name}`);
+    }
+
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this, name, this.getModelData('pageLinks', name));
+        return new qforms.PageLinkEditor(this, name, this.getPageLinkData(name));
     }
 
     async setAttr(name, value) {
         console.log('ApplicationEditor.setAttr');
-        super.setAttr(name, value);
+        await super.setAttr(name, value);
         await this.appFile.save();
     }
 
