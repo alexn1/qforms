@@ -143,7 +143,10 @@ class FormEditor extends Editor {
         if (!this.data.dataSources) {
             this.data.dataSources = {};
         }
-        if (this.data.dataSources[name]) {
+        if (!this.data.dataSources2) {
+            this.data.dataSources2 = [];
+        }
+        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
             throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
@@ -157,8 +160,9 @@ class FormEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        this.data.dataSources[name] = data;
-        return this.createDataSourceEditor(name);
+        // this.data.dataSources[name] = data;
+        this.addModelData('dataSources2', data);
+        return data;
     }
 
     deleteFormDataSource(dataSource) {
