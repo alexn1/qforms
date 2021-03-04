@@ -28,9 +28,7 @@ class TableEditor extends Editor {
         if (!name) throw new Error('need name');
         if (!this.data.columns) this.data.columns = {};
         if (!this.data.columns2) this.data.columns2 = [];
-        if (this.data.columns[name] && this.findModelData('tables2', name)) {
-            throw new Error(`Column ${name} already exists.`);
-        }
+        if (this.getModelData('tables', name)) throw new Error(`Column ${name} already exists.`);
         const data = ColumnEditor.createData(params);
         // this.data.columns[name] = data;
         this.addModelData('columns2', data);
@@ -38,11 +36,11 @@ class TableEditor extends Editor {
     }
 
     getColumnData(name) {
-        let data = this.getModelData('columns', name);
-        if (data) return data;
+        return this.getModelData('columns', name);
+        /*if (data) return data;
         data = this.findModelData('columns2', name);
         if (data) return data;
-        throw new Error(`no column ${name}`);
+        throw new Error(`no column ${name}`);*/
     }
 
     getColumnEditor(name) {

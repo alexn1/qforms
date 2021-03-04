@@ -63,7 +63,8 @@ class BaseModel {
         if (data) return data;
         data = this.findModelData(`${col}2`, name);
         if (data) return data;
-        throw new Error(`no ${col}: ${name}`);
+        // throw new Error(`no ${col}: ${name}`);
+        return null;
     }
 
     findModelData(col, name) {

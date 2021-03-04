@@ -62,7 +62,7 @@ class PageEditor extends Editor {
         if (!this.data.forms2) {
             this.data.forms2 = [];
         }
-        if (this.data.forms[name] || this.findModelData('forms2', name)) {
+        if (this.getModelData('forms', name)) {
             throw new Error(`Form ${name} already exists.`);
         }
         let data;
@@ -127,11 +127,11 @@ class PageEditor extends Editor {
     }
 
     getFormData(name) {
-        let data = this.getModelData('forms', name);
-        if (data) return data;
-        data = this.findModelData('forms2', name);
-        if (data) return data;
-        throw new Error(`no form ${name}`);
+        return this.getModelData('forms', name);
+        // if (data) return data;
+        // data = this.findModelData('forms2', name);
+        // if (data) return data;
+        // throw new Error(`no form ${name}`);
     }
 
     createFormEditor(name) {
@@ -140,11 +140,11 @@ class PageEditor extends Editor {
     }
 
     getDataSourceData(name) {
-        let data = this.getModelData('dataSources', name);
-        if (data) return data;
-        data = this.findModelData('dataSources2', name);
-        if (data) return data;
-        throw new Error(`no data source: ${name}`);
+        return this.getModelData('dataSources', name);
+        // if (data) return data;
+        // data = this.findModelData('dataSources2', name);
+        // if (data) return data;
+        // throw new Error(`no data source: ${name}`);
     }
 
     createDataSourceEditor(name) {
@@ -182,7 +182,7 @@ class PageEditor extends Editor {
         if (!this.data.dataSources2) {
             this.data.dataSources2 = [];
         }
-        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
+        if (this.getModelData('dataSources', name)) {
             throw new Error(`DataSource ${name} already exist`);
         }
         let data;

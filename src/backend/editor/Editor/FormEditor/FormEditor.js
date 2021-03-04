@@ -18,8 +18,8 @@ class FormEditor extends Editor {
         if (!this.data.fields2) {
             this.data.fields2 = [];
         }
-        if (this.data.fields[name] || this.findModelData('fields2', name)) {
-            throw new Error(`Field ${name} already exist.`);
+        if (this.getModelData('fields', name)) {
+            throw new Error(`field ${name} already exist`);
         }
         const data = eval(`qforms.${params['class']}Editor.createData(params);`);
         // this.data.fields[name] = data;
@@ -40,11 +40,11 @@ class FormEditor extends Editor {
     }
 
     getDataSourceData(name) {
-        let data = this.getModelData('dataSources', name);
-        if (data) return data;
+        return this.getModelData('dataSources', name);
+        /*if (data) return data;
         data = this.findModelData('dataSources2', name);
         if (data) return data;
-        throw new Error(`no data source: ${name}`);
+        throw new Error(`no data source: ${name}`);*/
     }
 
     createDataSourceEditor(name) {
@@ -53,11 +53,11 @@ class FormEditor extends Editor {
     }
 
     getFieldData(name) {
-        let data = this.getModelData('fields', name);
-        if (data) return data;
+        return this.getModelData('fields', name);
+        /*if (data) return data;
         data = this.findModelData('fields2', name);
         if (data) return data;
-        throw new Error(`no field: ${name}`);
+        throw new Error(`no field: ${name}`);*/
     }
 
     getActionData(name) {
@@ -93,7 +93,7 @@ class FormEditor extends Editor {
         if (!this.data.actions2) {
             this.data.actions2 = [];
         }
-        if (this.data.actions[name] || this.findModelData('actions2', name)) {
+        if (this.getModelData('actions', name)) {
             throw new Error(`action ${name} already exist`);
         }
         const data = qforms.ActionEditor.createData(params);
@@ -132,8 +132,8 @@ class FormEditor extends Editor {
         if (!this.data.dataSources2) {
             this.data.dataSources2 = [];
         }
-        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
-            throw new Error(`Data Source ${name} already exist.`);
+        if (this.getModelData('dataSources', name)) {
+            throw new Error(`data source ${name} already exist.`);
         }
         let data;
         switch (_class) {

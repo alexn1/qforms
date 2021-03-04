@@ -30,7 +30,7 @@ class DataSourceEditor extends Editor {
         if (!this.data.keyColumns2) {
             this.data.keyColumns2 = [];
         }
-        if (this.data.keyColumns[name] || this.findModelData('keyColumns2', name)) {
+        if (this.getModelData('keyColumns', name)) {
             throw new Error(`Key Column ${name} already exist.`);
         }
         const data = {

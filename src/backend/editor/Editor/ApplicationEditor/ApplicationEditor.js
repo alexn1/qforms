@@ -68,16 +68,8 @@ class ApplicationEditor extends Editor {
         await this.appFile.save();
     }
 
-    getPageLinkData(name) {
-        let data = this.getModelData('pageLinks', name);
-        if (data) return data;
-        data = this.findModelData('pageLinks2', name);
-        if (data) return data;
-        throw new Error(`no page link: ${name}`);
-    }
-
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this, name, this.getPageLinkData(name));
+        return new qforms.PageLinkEditor(this, name, this.getModelData('pageLinks', name));
     }
 
     async setAttr(name, value) {
@@ -119,11 +111,11 @@ class ApplicationEditor extends Editor {
     }
 
     getDataSourceData(name) {
-        let data = this.getModelData('dataSources', name);
-        if (data) return data;
-        data = this.findModelData('dataSources2', name);
-        if (data) return data;
-        throw new Error(`no data source: ${name}`);
+        return this.getModelData('dataSources', name);
+        // if (data) return data;
+        // data = this.findModelData('dataSources2', name);
+        // if (data) return data;
+        // throw new Error(`no data source: ${name}`);
     }
 
     createDataSourceEditor(name) {
@@ -149,7 +141,7 @@ class ApplicationEditor extends Editor {
         if (!this.data.databases2) {
             this.data.databases2 = [];
         }
-        if (this.data.databases[name] || this.findModelData('databases2', name)) {
+        if (this.getModelData('databases', name)) {
             throw new Error(`database ${name} already exists`);
         }
 
@@ -167,11 +159,11 @@ class ApplicationEditor extends Editor {
     }
 
     getDatabaseData(name) {
-        let data = this.getModelData('databases', name);
-        if (data) return data;
-        data = this.findModelData('databases2', name);
-        if (data) return data;
-        throw new Error(`no database: ${name}`);
+        return this.getModelData('databases', name);
+        // if (data) return data;
+        // data = this.findModelData('databases2', name);
+        // if (data) return data;
+        // throw new Error(`no database: ${name}`);
     }
 
     createDatabaseEditor(name) {
@@ -186,7 +178,7 @@ class ApplicationEditor extends Editor {
         if (!this.data.pageLinks2) {
             this.data.pageLinks2 = [];
         }
-        if (this.data.pageLinks[name] || this.findModelData('pageLinks2', name)) {
+        if (this.getModelData('pageLinks', name)) {
             throw new Error(`Page Link ${name} already exists.`);
         }
         const data = qforms.PageLinkEditor.createData(params);
@@ -218,7 +210,7 @@ class ApplicationEditor extends Editor {
         if (!this.data.dataSources2) {
             this.data.dataSources2 = [];
         }
-        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
+        if (this.getModelData('dataSources', name)) {
             throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
