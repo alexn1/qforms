@@ -133,9 +133,17 @@ class PageEditor extends Editor {
         return eval(`new qforms.${formData['@class']}Editor(this, name, formData)`);
     }
 
+    getDataSourceData(name) {
+        let data = this.getModelData('dataSources', name);
+        if (data) return data;
+        data = this.findModelData('dataSources2', name);
+        if (data) return data;
+        throw new Error(`no data source: ${name}`);
+    }
+
     createDataSourceEditor(name) {
-        const dataSourceData = this.data.dataSources[name];
-        return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+        const dataSourceData = this.getDataSourceData(name);
+        return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
     }
 
     removeForm(name) {
@@ -156,9 +164,7 @@ class PageEditor extends Editor {
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
-        const dirPath = path.join(customDirPath, 'pages', this.name);
-        // await qforms.Helper.createDirIfNotExists(dirPath);
-        return dirPath;
+        return path.join(customDirPath, 'pages', this.name);
     }
 
     newDataSourceData(params) {
@@ -167,7 +173,10 @@ class PageEditor extends Editor {
         if (!this.data.dataSources) {
             this.data.dataSources = {};
         }
-        if (this.data.dataSources[name]) {
+        if (!this.data.dataSources2) {
+            this.data.dataSources2 = [];
+        }
+        if (this.data.dataSources[name] || this.findModelData('dataSources2', name)) {
             throw new Error(`DataSource ${name} already exist`);
         }
         let data;
@@ -181,7 +190,9 @@ class PageEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        return this.data.dataSources[name] = data;
+        // this.data.dataSources[name] = data;
+        this.addModelData('dataSources2', data);
+        return data;
     }
 
     deleteForm(name) {

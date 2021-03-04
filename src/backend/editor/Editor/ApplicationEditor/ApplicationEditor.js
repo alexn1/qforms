@@ -186,7 +186,7 @@ class ApplicationEditor extends Editor {
         if (!this.data.pageLinks2) {
             this.data.pageLinks2 = [];
         }
-        if (this.data.pageLinks[name] || this.getModelData('pageLinks2', name)) {
+        if (this.data.pageLinks[name] || this.findModelData('pageLinks2', name)) {
             throw new Error(`Page Link ${name} already exists.`);
         }
         const data = qforms.PageLinkEditor.createData(params);
