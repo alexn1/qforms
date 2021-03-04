@@ -104,22 +104,6 @@ class FormEditor extends Editor {
         return data;
     }
 
-    // newControl(params) {
-    //     const name = params.name;
-    //     if (!this.data.controls) {
-    //         this.data.controls = {};
-    //     }
-    //     if (this.data.controls[name]) {
-    //         throw new Error('Control {name} already exist.'.repalce('{name}', name));
-    //     }
-    //     return this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
-    // }
-
-    /*async removeControl(name) {
-        delete this.data.controls[name];
-        return await this.parent.save();
-    }*/
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

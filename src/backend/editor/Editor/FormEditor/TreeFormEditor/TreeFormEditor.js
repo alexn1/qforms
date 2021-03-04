@@ -3,17 +3,9 @@ const FormEditor = require('../FormEditor');
 
 class TreeFormEditor extends FormEditor {
 
-    constructor(pageEditor, name, data) {
+    /*constructor(pageEditor, name, data) {
         super(pageEditor, name, data);
-        /*this.defaultEjsFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.ejs'
-        );*/
-        /*this.defaultCssFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/TreeFormController/view/TreeFormView.css'
-        );*/
-    }
+    }*/
 
     static createData(params) {
         return {
@@ -25,7 +17,6 @@ class TreeFormEditor extends FormEditor {
             },
             dataSources: {},
             fields     : {},
-            controls   : {},
             actions    : {}
         };
     }

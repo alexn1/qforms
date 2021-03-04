@@ -3,17 +3,9 @@ const FormEditor = require('../FormEditor');
 
 class TableFormEditor extends FormEditor {
 
-    constructor(pageEditor, name, data) {
+    /*constructor(pageEditor, name, data) {
         super(pageEditor, name, data);
-        /*this.defaultEjsFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.ejs'
-        );*/
-        /*this.defaultCssFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/TableFormController/view/TableFormView.css'
-        );*/
-    }
+    }*/
 
     static createData(params) {
         return {
@@ -31,7 +23,6 @@ class TableFormEditor extends FormEditor {
             },
             dataSources   : {},
             fields        : {},
-            controls      : {},
             actions       : {}
         };
     }

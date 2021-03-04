@@ -3,17 +3,9 @@ const FormEditor = require('../FormEditor');
 
 class RowFormEditor extends FormEditor {
 
-    constructor(pageEditor, name, data) {
+    /*constructor(pageEditor, name, data) {
         super(pageEditor, name, data);
-        /*this.defaultEjsFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.ejs'
-        );*/
-        /*this.defaultCssFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FormController/RowFormController/view/RowFormView.css'
-        );*/
-    }
+    }*/
 
     static createData(params) {
         return {
@@ -27,7 +19,6 @@ class RowFormEditor extends FormEditor {
             },
             dataSources: {},
             fields     : {},
-            controls   : {},
             actions    : {}
         };
     }
