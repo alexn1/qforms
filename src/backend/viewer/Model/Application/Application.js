@@ -119,12 +119,8 @@ class Application extends Model {
         return menu;
     }
 
-    getPageLinkData(name) {
-        return this.getModelData('pageLinks', name);
-    }
-
     createPageLink(name) {
-        return new PageLink(this.getPageLinkData(name), this);
+        return new PageLink(this.getModelData('pageLinks', name), this);
     }
 
     createDatabase(name) {
