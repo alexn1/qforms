@@ -73,11 +73,8 @@ class PageEditor extends Editor {
             case 'RowForm':
                 data = qforms.RowFormEditor.createData(params);
                 break;
-            case 'TreeForm':
-                data = qforms.TreeFormEditor.createData(params);
-                break;
             default:
-                throw new Error('unknown form class');
+                throw new Error(`unknown form class: ${_class}`);
         }
         // this.data.forms[name] = data;
         this.addModelData('forms2', data);

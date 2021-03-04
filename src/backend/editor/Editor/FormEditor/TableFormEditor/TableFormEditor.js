@@ -22,7 +22,11 @@ class TableFormEditor extends FormEditor {
             },
             dataSources   : {},
             fields        : {},
-            actions       : {}
+            actions       : {},
+
+            dataSources2: [],
+            fields2     : [],
+            actions2    : [],
         };
     }
 

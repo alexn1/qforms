@@ -33,9 +33,17 @@ class FormEditor extends Editor {
         return 'ok';
     }
 
+    getDataSourceData(name) {
+        let data = this.getModelData('dataSources', name);
+        if (data) return data;
+        data = this.findModelData('dataSources2', name);
+        if (data) return data;
+        throw new Error(`no data source: ${name}`);
+    }
+
     createDataSourceEditor(name) {
-        const dataSourceData  = this.data.dataSources[name];
-        return eval('new qforms.{class}Editor(this, name, dataSourceData)'.replace('{class}', dataSourceData['@class']));
+        const dataSourceData = this.getDataSourceData(name);
+        return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
     }
 
     getFieldData(name) {
@@ -152,23 +160,6 @@ class FormEditor extends Editor {
         this.data.dataSources[name] = data;
         return this.createDataSourceEditor(name);
     }
-
-    /*newDataSourceKeyColumn(params) {
-        const dataSource = params['dataSource'];
-        const name       = params['name'];
-        if (!this.data.dataSources[dataSource].keyColumns) {
-            this.data.dataSources[dataSource].keyColumns = {};
-        }
-        if (this.data.dataSources[dataSource].keyColumns[name]) {
-            throw new Error(`Key Column ${name} already exist.`);
-        }
-        return this.data.dataSources[dataSource].keyColumns[name] = {
-            '@class'     : 'KeyColumn',
-            '@attributes': {
-                'name': name
-            }
-        };
-    }*/
 
     deleteFormDataSource(dataSource) {
         delete this.data.dataSources[dataSource];

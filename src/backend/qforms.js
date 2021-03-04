@@ -23,7 +23,6 @@ module.exports.TextBoxFieldEditor                = require('./editor/Editor/Fiel
 module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
-module.exports.TreeFormEditor                    = require('./editor/Editor/FormEditor/TreeFormEditor/TreeFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 module.exports.EditorController                  = require('./editor/EditorController/EditorController');
