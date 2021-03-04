@@ -62,7 +62,7 @@ class PageEditor extends Editor {
         if (!this.data.forms2) {
             this.data.forms2 = [];
         }
-        if (this.data.forms[name]) {
+        if (this.data.forms[name] || this.findModelData('forms2', name)) {
             throw new Error(`Form ${name} already exists.`);
         }
         let data;
@@ -79,7 +79,8 @@ class PageEditor extends Editor {
             default:
                 throw new Error('unknown form class');
         }
-        this.data.forms[name] = data;
+        // this.data.forms[name] = data;
+        this.addModelData('forms2', data);
         return data;
     }
 
@@ -128,8 +129,16 @@ class PageEditor extends Editor {
         return formEditor;
     }
 
+    getFormData(name) {
+        let data = this.getModelData('forms', name);
+        if (data) return data;
+        data = this.findModelData('forms2', name);
+        if (data) return data;
+        throw new Error(`no form ${name}`);
+    }
+
     createFormEditor(name) {
-        const formData = this.data.forms[name];
+        const formData = this.getFormData(name);
         return eval(`new qforms.${formData['@class']}Editor(this, name, formData)`);
     }
 
