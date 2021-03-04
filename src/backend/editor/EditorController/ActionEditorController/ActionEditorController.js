@@ -16,7 +16,8 @@ class ActionEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
-        const actionData = await formEditor.createAction(params);
+        const actionData = await formEditor.newActionData(params);
+        await formEditor.save();
         return actionData;
     }
 

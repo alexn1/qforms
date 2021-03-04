@@ -84,30 +84,21 @@ class FormEditor extends Editor {
         return this.parent.save();
     }
 
-    async createControl(params) {
-        const name = params.name;
-        if (!this.data.controls) {
-            this.data.controls = {};
-        }
-        if (this.data.controls[name]) {
-            throw new Error('Control {name} already exist.'.repalce('{name}', name));
-        }
-        const controlData = this.data.controls[name] = eval('qforms.{class}Editor.createData(params);'.replace('{class}', params['class']));
-        await this.parent.save();
-        return controlData;
-    }
-
-    async createAction(params) {
+    async newActionData(params) {
         if (!params.name) throw new Error('no name');
         const name = params.name;
         if (!this.data.actions) {
             this.data.actions = {};
         }
-        if (this.data.actions[name]) {
+        if (!this.data.actions2) {
+            this.data.actions2 = [];
+        }
+        if (this.data.actions[name] || this.findModelData('actions2', name)) {
             throw new Error(`action ${name} already exist`);
         }
-        const data = this.data.actions[name] = qforms.ActionEditor.createData(params);
-        await this.parent.save();
+        const data = qforms.ActionEditor.createData(params);
+        // this.data.actions[name] = data;
+        this.addModelData('actions2', data);
         return data;
     }
 
