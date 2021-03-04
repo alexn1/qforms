@@ -36,8 +36,10 @@ class ApplicationEditor extends Editor {
             dataSources: {},
             pageLinks  : {},
 
+            env2        : [],
             databases2  : [],
             dataSources2: [],
+            pageLinks2  : [],
         };
     }
 
@@ -56,7 +58,7 @@ class ApplicationEditor extends Editor {
         // await qforms.Helper.createDirIfNotExists(pageDirPath);
         const pageFile = new qforms.JsonFile(pageFilePath, qforms.PageEditor.createData(params));
         await pageFile.create();
-        this.newPageLink(params);
+        this.newPageLinkData(params);
         await this.save();
         return new qforms.PageEditor(this, pageFile);
     }
@@ -168,15 +170,21 @@ class ApplicationEditor extends Editor {
         return new DatabaseEditor(this.getDatabaseData(name), this);
     }
 
-    newPageLink(params) {
+    newPageLinkData(params) {
         const name = params.name;
         if (!this.data.pageLinks) {
             this.data.pageLinks = {};
         }
-        if (this.data.pageLinks[name]) {
-            throw new Error('Page Link {name} already exists.'.replace('{name}', name));
+        if (!this.data.pageLinks2) {
+            this.data.pageLinks2 = [];
         }
-        return this.data.pageLinks[params.name] = qforms.PageLinkEditor.createData(params);
+        if (this.data.pageLinks[name] || this.getModelData('pageLinks2', name)) {
+            throw new Error(`Page Link ${name} already exists.`);
+        }
+        const data = qforms.PageLinkEditor.createData(params);
+        // this.data.pageLinks[params.name] = data;
+        this.addModelData('pageLinks2', data);
+        return data;
     }
 
     deleteDatabase(name) {
