@@ -7,17 +7,9 @@ class PageEditor extends Editor {
 
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);
-        this.appEditor          = appEditor;
-        this.pageFile           = pageFile;
-        this.name               = this.getAttr('name');
-        /*this.defaultEjsFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/PageController/view/PageView.ejs'
-        );*/
-        /*this.defaultCssFilePath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/PageController/view/PageView.css'
-        );*/
+        this.appEditor = appEditor;
+        this.pageFile  = pageFile;
+        this.name      = this.getAttr('name');
     }
 
     static createData(params) {
@@ -29,7 +21,10 @@ class PageEditor extends Editor {
                 caption  : params['caption'] ? params['caption'] : params['name']
             },
             dataSources: {},
-            forms      : {}
+            forms      : {},
+
+            dataSources2: [],
+            forms2      : [],
         };
     }
 
@@ -58,14 +53,17 @@ class PageEditor extends Editor {
         return 'ok';
     }
 
-    newForm(params) {
+    newFormData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (!this.data.forms) {
             this.data.forms = {};
         }
+        if (!this.data.forms2) {
+            this.data.forms2 = [];
+        }
         if (this.data.forms[name]) {
-            throw new Error('Form {name} already exists.'.replace('{name}', name));
+            throw new Error(`Form ${name} already exists.`);
         }
         let data;
         switch (_class) {
@@ -82,12 +80,14 @@ class PageEditor extends Editor {
                 throw new Error('unknown form class');
         }
         this.data.forms[name] = data;
-        return this.createFormEditor(name);
+        return data;
     }
 
     async createForm(params) {
         const name = params.name;
-        const formEditor = this.newForm(params);
+        const formData = this.newFormData(params);
+        const formEditor = this.createFormEditor(name);
+
         // fields
         if (params.fields) {
             for (const fieldName in params.fields) {
@@ -97,6 +97,7 @@ class PageEditor extends Editor {
                 ));
             }
         }
+
         // dataSources
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
@@ -124,8 +125,7 @@ class PageEditor extends Editor {
             }
         }
         await this.save();
-        const formEditor2 = this.createFormEditor(name);
-        return formEditor2;
+        return formEditor;
     }
 
     createFormEditor(name) {
