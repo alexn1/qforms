@@ -35,16 +35,8 @@ class TableEditor extends Editor {
         return data;
     }
 
-    getColumnData(name) {
-        return this.getModelData('columns', name);
-        /*if (data) return data;
-        data = this.findModelData('columns2', name);
-        if (data) return data;
-        throw new Error(`no column ${name}`);*/
-    }
-
     getColumnEditor(name) {
-        return new ColumnEditor(this.getColumnData(name), this);
+        return new ColumnEditor(this.getModelData('columns', name), this);
     }
 
 }

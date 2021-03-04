@@ -110,16 +110,8 @@ class ApplicationEditor extends Editor {
         return this.appInfo.dirPath;
     }
 
-    getDataSourceData(name) {
-        return this.getModelData('dataSources', name);
-        // if (data) return data;
-        // data = this.findModelData('dataSources2', name);
-        // if (data) return data;
-        // throw new Error(`no data source: ${name}`);
-    }
-
     createDataSourceEditor(name) {
-        const dataSourceData = this.getDataSourceData(name);
+        const dataSourceData = this.getModelData('dataSources', name);
         const className = dataSourceData['@class'];
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(this, name, dataSourceData);
@@ -158,16 +150,8 @@ class ApplicationEditor extends Editor {
         return data;
     }
 
-    getDatabaseData(name) {
-        return this.getModelData('databases', name);
-        // if (data) return data;
-        // data = this.findModelData('databases2', name);
-        // if (data) return data;
-        // throw new Error(`no database: ${name}`);
-    }
-
     createDatabaseEditor(name) {
-        return new DatabaseEditor(this.getDatabaseData(name), this);
+        return new DatabaseEditor(this.getModelData('databases', name), this);
     }
 
     newPageLinkData(params) {

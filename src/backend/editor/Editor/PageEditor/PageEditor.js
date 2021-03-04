@@ -126,29 +126,13 @@ class PageEditor extends Editor {
         return formEditor;
     }
 
-    getFormData(name) {
-        return this.getModelData('forms', name);
-        // if (data) return data;
-        // data = this.findModelData('forms2', name);
-        // if (data) return data;
-        // throw new Error(`no form ${name}`);
-    }
-
     createFormEditor(name) {
-        const formData = this.getFormData(name);
+        const formData = this.getModelData('forms', name);
         return eval(`new qforms.${formData['@class']}Editor(this, name, formData)`);
     }
 
-    getDataSourceData(name) {
-        return this.getModelData('dataSources', name);
-        // if (data) return data;
-        // data = this.findModelData('dataSources2', name);
-        // if (data) return data;
-        // throw new Error(`no data source: ${name}`);
-    }
-
     createDataSourceEditor(name) {
-        const dataSourceData = this.getDataSourceData(name);
+        const dataSourceData = this.getModelData('dataSources', name);
         return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
     }
 

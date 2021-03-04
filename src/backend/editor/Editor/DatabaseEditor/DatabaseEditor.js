@@ -29,16 +29,8 @@ class DatabaseEditor extends Editor {
         return data;
     }
 
-    getTableData(name) {
-        return this.getModelData('tables', name);
-        // if (data) return data;
-        // data = this.findModelData('tables2', name);
-        // if (data) return data;
-        // throw new Error(`no table: ${name}`);
-    }
-
     createTableEditor(name) {
-        return new TableEditor(this.getTableData(name), this);
+        return new TableEditor(this.getModelData('tables', name), this);
     }
 
     newParamData(params) {

@@ -39,25 +39,9 @@ class FormEditor extends Editor {
         return 'ok';
     }
 
-    getDataSourceData(name) {
-        return this.getModelData('dataSources', name);
-        /*if (data) return data;
-        data = this.findModelData('dataSources2', name);
-        if (data) return data;
-        throw new Error(`no data source: ${name}`);*/
-    }
-
     createDataSourceEditor(name) {
-        const dataSourceData = this.getDataSourceData(name);
+        const dataSourceData = this.getModelData('dataSources', name);
         return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
-    }
-
-    getFieldData(name) {
-        return this.getModelData('fields', name);
-        /*if (data) return data;
-        data = this.findModelData('fields2', name);
-        if (data) return data;
-        throw new Error(`no field: ${name}`);*/
     }
 
     getActionData(name) {
@@ -66,7 +50,7 @@ class FormEditor extends Editor {
     }
 
     createFieldEditor(name) {
-        const fieldData = this.getFieldData(name);
+        const fieldData = this.getModelData('fields', name);
         return eval(`new qforms.${fieldData['@class']}Editor(this, name, fieldData)`);
     }
 
