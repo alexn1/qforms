@@ -3,6 +3,7 @@ const _             = require('underscore');
 const child_process = require('child_process');
 const axios         = require('axios');
 
+const BaseModel = require('../../../BaseModel');
 const qforms  = require('../../../qforms');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
@@ -155,7 +156,10 @@ class Application extends Model {
     }
 
     getPageLinkNameList() {
-        return Object.keys(this.getCol('pageLinks'));
+        return [
+            ...Object.keys(this.getCol('pageLinks')),
+            ...(this.data.pageLinks2 ? this.data.pageLinks2.map(data => BaseModel.getName(data)) : [])
+        ];
     }
 
     getStartupPageNames() {
