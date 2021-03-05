@@ -52,7 +52,9 @@ class Application extends Model {
 
     async deinit() {
         console.log('Application.deinit: ' + this.getName());
-        const names = Object.keys(this.databases);
+
+        // databases
+        const names = this.getItemNames('databases');
         for (let i = 0; i < names.length; i++) {
             await this.databases[names[i]].deinit();
         }
