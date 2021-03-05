@@ -73,29 +73,29 @@ class Model extends BaseModel {
         }
     }
 
-    async fillCollection(data, colName, context) {
+    async fillCollection(response, colName, context) {
         if (!this[colName]) return;
-        data[colName] = {};
+        response[colName] = {};
         const items = Object.keys(this[colName]);
         for (let i = 0; i < items.length; i++) {
             const itemName = items[i];
             if (this[colName][itemName].attributes()['backOnly'] === 'true') continue;
-            data[colName][itemName] = await this[colName][itemName].fill(context);
+            response[colName][itemName] = await this[colName][itemName].fill(context);
         }
     }
 
-    async fillCollectionDefaultFirst(data, colName, context) {
+    async fillCollectionDefaultFirst(response, colName, context) {
         //console.log('Model.fillCollectionDefaultFirst', colName);
-        data[colName] = {};
+        response[colName] = {};
         const defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
         for (let i = 0; i < defaultArr.length; i++) {
             const itemName = defaultArr[i];
-            data[colName][itemName] = await this[colName][itemName].fill(context);
+            response[colName][itemName] = await this[colName][itemName].fill(context);
         }
         const noDefaultArr = Object.keys(this[colName]).filter(itemName => {return itemName !== 'default';});
         for (let i = 0; i < noDefaultArr.length; i++) {
             const itemName = noDefaultArr[i];
-            data[colName][itemName] = await this[colName][itemName].fill(context);
+            response[colName][itemName] = await this[colName][itemName].fill(context);
         }
     }
 
