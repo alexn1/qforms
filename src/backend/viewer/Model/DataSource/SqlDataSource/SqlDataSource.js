@@ -201,20 +201,20 @@ class SqlDataSource extends DataSource {
 
     async fill(context) {
         //console.log('SqlDataSource.fill', this.getFullName());
-        let data = await super.fill(context);
-        delete data.singleQuery;
-        delete data.multipleQuery;
-        delete data.countQuery;
-        delete data.limit;
+        let response = await super.fill(context);
+        delete response.singleQuery;
+        delete response.multipleQuery;
+        delete response.countQuery;
+        delete response.limit;
 
         // if form data source named default then check mode
         if (this.parent instanceof qforms.Form && this.getName() === 'default' && this.parent.isNewMode(context)) {
             if (this.getAttr('limit') !== '') {
-                data.limit = parseInt(this.getAttr('limit'));
+                response.limit = parseInt(this.getAttr('limit'));
             }
-            data.rows = [];
-            data.count = 0;
-            return data;
+            response.rows = [];
+            response.count = 0;
+            return response;
         }
         if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
@@ -223,26 +223,26 @@ class SqlDataSource extends DataSource {
             const row = await this.selectSingle(context);
             DataSource.encodeRow(row);
             if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
-            data.rows = [row];
+            response.rows = [row];
         } else {
             try {
                 const [rows, count] = await this.selectMultiple(context);
                 DataSource.encodeRows(rows);
-                data.rows = rows;
-                data.count = count;
+                response.rows = rows;
+                response.count = count;
             } catch (err) {
                 err.message = `selectMultiple error of ${this.getFullName()}: ${err.message}`;
                 throw err;
             }
         }
 
-        if (this.isDefaultOnRowForm() && data.rows[0]) {
-            this.parent.dumpRowToParams(data.rows[0], context.querytime.params);
+        if (this.isDefaultOnRowForm() && response.rows[0]) {
+            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
         }
         if (this.getAttr('limit') !== '') {
-            data.limit = context.params.limit;
+            response.limit = context.params.limit;
         }
-        return data;
+        return response;
     }
 
     async getRows() {

@@ -7,7 +7,7 @@ class Model extends BaseModel {
 
     constructor(data, parent) {
         super(data, parent);
-        this.fillCollections    = [];
+        this.fillCollections = [];
     }
 
     async init() {
@@ -26,13 +26,13 @@ class Model extends BaseModel {
         return response;
     }
 
-    async _fillCollections(data, context) {
+    async _fillCollections(response, context) {
         for (let i = 0; i < this.fillCollections.length; i++) {
             const colName = this.fillCollections[i];
             if (colName === 'dataSources') {
-                await this.fillCollectionDefaultFirst(data, colName, context);
+                await this.fillCollectionDefaultFirst(response, colName, context);
             } else {
-                await this.fillCollection(data, colName, context);
+                await this.fillCollection(response, colName, context);
             }
         }
     }

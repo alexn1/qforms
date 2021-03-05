@@ -187,16 +187,16 @@ class DataSource extends Model {
 
     async fill(context) {
         //console.log('DataSource.fill', this.getFullName());
-        let data = await super.fill(context);
-        // delete data.view;
-        delete data.js;
+        let response = await super.fill(context);
+        // delete response.view;
+        delete response.js;
 
         // keyColumns
-        data.keyColumns = this.keyColumns;
+        response.keyColumns = this.keyColumns;
 
         // rows from JSON file
-        data.rows = await this.getRows();
-        return data;
+        response.rows = await this.getRows();
+        return response;
     }
 
     async getRows() {

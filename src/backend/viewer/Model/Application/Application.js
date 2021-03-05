@@ -3,7 +3,6 @@ const _             = require('underscore');
 const child_process = require('child_process');
 const axios         = require('axios');
 
-const BaseModel = require('../../../BaseModel');
 const qforms  = require('../../../qforms');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
@@ -69,28 +68,28 @@ class Application extends Model {
 
     async fill(context) {
         // console.log('Application.fill');
-        const data = await super.fill(context);
-        delete data.user;
-        delete data.password;
-        delete data.authentication;
-        delete data.formatVersion;
+        const response = await super.fill(context);
+        delete response.user;
+        delete response.password;
+        delete response.authentication;
+        delete response.formatVersion;
 
         // env
-        data.env = this.hostApp.nodeEnv;
+        response.env = this.hostApp.nodeEnv;
 
         // text
-        data.text = this.getText();
+        response.text = this.getText();
 
         // params
-        // data.params = Application.getParams(context);
+        // response.params = Application.getParams(context);
 
         // menu
-        data.menu = await this.createMenu(context);
+        response.menu = await this.createMenu(context);
 
         // pages
-        data.pages = await this.fillStartupPages(context);
+        response.pages = await this.fillStartupPages(context);
 
-        return data;
+        return response;
     }
 
     async createMenu(context) {
