@@ -19,7 +19,7 @@ class Database extends Model {
     }
 
     async init() {
-        await this.createCollection('tables');
+        await this.createCollectionItems('tables');
     }
 
     async deinit() {

@@ -63,16 +63,23 @@ class Model extends BaseModel {
         }
     }
 
-    async createCollection(colName) {
-        // console.log(`Model.createCollection ${this.getName()}.${colName}`);
-        const names = Object.keys(this.getCol(colName));
+    getItemNames(colName) {
+        return [
+            ...Object.keys(this.getCol(colName)),
+            ...(this.data[`${colName}2`] ? this.data[`${colName}2`].map(data => BaseModel.getName(data)) : [])
+        ];
+    }
+
+    async createCollectionItems(colName) {
+        // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
+        const names = this.getItemNames(colName);
         for (let i = 0; i < names.length; i++) {
             const data = this.getModelData(colName, names[i]);
-            await this.addColItemToObj(colName, data);
+            await this.createCollectionItem(colName, data);
         }
     }
 
-    async addColItemToObj(colName, data) {
+    async createCollectionItem(colName, data) {
         const name = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
         try {

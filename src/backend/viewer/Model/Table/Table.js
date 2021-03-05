@@ -13,7 +13,7 @@ class Table extends Model {
     }
 
     async init() {
-        await this.createCollection('columns');
+        await this.createCollectionItems('columns');
     }
 
     getKeyColumns() {

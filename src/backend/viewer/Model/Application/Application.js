@@ -45,8 +45,8 @@ class Application extends Model {
 
     async init() {
         // await super.init();
-        await this.createCollection('databases');
-        await this.createCollection('dataSources');
+        await this.createCollectionItems('databases');
+        await this.createCollectionItems('dataSources');
         this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
@@ -95,7 +95,7 @@ class Application extends Model {
 
     async createMenu(context) {
         const menu = {};
-        const pageNames = this.getPageLinkNameList().filter(pageName => {
+        const pageNames = this.getItemNames('pageLinks').filter(pageName => {
             return context.user ? this.authorizePage(context.user, pageName) : true;
         });
         for (let i = 0; i < pageNames.length; i++) {
@@ -153,15 +153,8 @@ class Application extends Model {
         return this.pages[name] = await this.createPage(name);
     }
 
-    getPageLinkNameList() {
-        return [
-            ...Object.keys(this.getCol('pageLinks')),
-            ...(this.data.pageLinks2 ? this.data.pageLinks2.map(data => BaseModel.getName(data)) : [])
-        ];
-    }
-
     getStartupPageNames() {
-        return this.getPageLinkNameList().filter(pageLinkName => this.createPageLink(pageLinkName).getAttr('startup') === 'true');
+        return this.getItemNames('pageLinks').filter(pageLinkName => this.createPageLink(pageLinkName).getAttr('startup') === 'true');
     }
 
     async fillStartupPages(context) {
