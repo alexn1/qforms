@@ -15,10 +15,6 @@ class Form extends Model {
         this.actions           = {};
     }
 
-    /*getCustomViewFilePath() {
-        return path.join(this.getDirPath(),  `${this.getName()}.ejs`);
-    }*/
-
     async init() {
         await this.createCollection('dataSources');
         await this.createCollection('fields');

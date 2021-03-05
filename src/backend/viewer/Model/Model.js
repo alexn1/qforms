@@ -99,20 +99,6 @@ class Model extends BaseModel {
         }
     }
 
-    /*async getView() {
-        const viewFilePath = this.getViewFilePath();
-        if (!viewFilePath) return null;
-        const customViewFilePath = this.getCustomViewFilePath();
-        if (customViewFilePath) {
-            const exists = await qforms.Helper.exists(customViewFilePath);
-            if (exists) {
-                return qforms.Helper.readTextFile(customViewFilePath);
-            }
-            return qforms.Helper.readTextFile(viewFilePath);
-        }
-        return await qforms.Helper.readTextFile(viewFilePath);
-    }*/
-
     /*async getControllerJs() {
         if (!this.getDirPath()) return null;
         const jsFilePath = path.join(this.getDirPath(), 'Controller.js');
@@ -124,14 +110,6 @@ class Model extends BaseModel {
     getDirPath() {
         return null;
     }
-
-    /*getViewFilePath() {
-        return null;
-    }*/
-
-    /*getCustomViewFilePath() {
-        return null;
-    }*/
 
 }
 

@@ -12,10 +12,6 @@ class Field extends Model {
     //     super(data, parent);
     // }
 
-    /*getCustomViewFilePath() {
-        return path.join(this.getDirPath(), `${this.getName()}.ejs`);
-    }*/
-
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'fields', this.getName());
     }
