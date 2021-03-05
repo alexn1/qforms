@@ -46,9 +46,7 @@ class Application extends Model {
     async init() {
         // await super.init();
         await this.createCollection('databases');
-        await this.createCollection2('databases');
         await this.createCollection('dataSources');
-        await this.createCollection2('dataSources');
         this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }

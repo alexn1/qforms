@@ -16,16 +16,14 @@ class Model extends BaseModel {
 
     async fill(context) {
         // console.log('Model.fill', this.constructor.name, this.getName());
-        const data = {
+        const response = {
             class: this.getClassName(),
-            // view : await this.getView(),
-            // js   : await this.getControllerJs()
         };
         for (const name in this.attributes()) {
-            data[name] = this.getAttr(name);
+            response[name] = this.getAttr(name);
         }
-        await this._fillCollections(data, context);
-        return data;
+        await this._fillCollections(response, context);
+        return response;
     }
 
     async _fillCollections(data, context) {
@@ -36,40 +34,6 @@ class Model extends BaseModel {
             } else {
                 await this.fillCollection(data, colName, context);
             }
-        }
-    }
-
-    async createCollection(colName) {
-        // console.log(`Model.createCollection ${this.getName()}.${colName}`);
-        const names = Object.keys(this.getCol(colName));
-        for (let i = 0; i < names.length; i++) {
-            const data = this.getModelData(colName, names[i]);
-            await this.addColItemToObj(colName, data);
-        }
-    }
-
-    async createCollection2(colName) {
-        console.log('Model.createCollection2', colName);
-        const arr = this.getCol(`${colName}2`);
-        if (arr) {
-            for (let i = 0; i < arr.length; i++) {
-                const data = arr[i];
-                await this.addColItemToObj(colName, data);
-            }
-        }
-    }
-
-    async addColItemToObj(colName, data) {
-        const name = BaseModel.getName(data);
-        const className = BaseModel.getClassName(data);
-        try {
-            const Class = qforms[className];
-            const obj = new Class(data, this);
-            this[colName][name] = obj;
-            await obj.init();
-        } catch (err) {
-            err.message = `${className}[${name}]: ${err.message}`;
-            throw err;
         }
     }
 
@@ -99,13 +63,28 @@ class Model extends BaseModel {
         }
     }
 
-    /*async getControllerJs() {
-        if (!this.getDirPath()) return null;
-        const jsFilePath = path.join(this.getDirPath(), 'Controller.js');
-        const exists = await qforms.Helper.exists(jsFilePath);
-        if (exists) return qforms.Helper.readTextFile(jsFilePath);
-        return null;
-    }*/
+    async createCollection(colName) {
+        // console.log(`Model.createCollection ${this.getName()}.${colName}`);
+        const names = Object.keys(this.getCol(colName));
+        for (let i = 0; i < names.length; i++) {
+            const data = this.getModelData(colName, names[i]);
+            await this.addColItemToObj(colName, data);
+        }
+    }
+
+    async addColItemToObj(colName, data) {
+        const name = BaseModel.getName(data);
+        const className = BaseModel.getClassName(data);
+        try {
+            const Class = qforms[className];
+            const obj = new Class(data, this);
+            this[colName][name] = obj;
+            await obj.init();
+        } catch (err) {
+            err.message = `${className}[${name}]: ${err.message}`;
+            throw err;
+        }
+    }
 
     getDirPath() {
         return null;

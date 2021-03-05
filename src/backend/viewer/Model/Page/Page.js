@@ -34,9 +34,7 @@ class Page extends Model {
 
     async init() {
         await this.createCollection('dataSources');
-        await this.createCollection2('dataSources');
         await this.createCollection('forms');
-        await this.createCollection2('forms');
     }
 
     getDirPath() {
