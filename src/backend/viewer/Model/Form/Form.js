@@ -27,14 +27,14 @@ class Form extends Model {
 
     async fill(context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
-        if (this.data.dataSources.default) {
+        if (this.getDataSource()) {
             return super.fill(context);
         }
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
-        const data = await super.fill(context);
-        data.dataSources.default = dataSourceResponse;
-        return data;
+        const response = await super.fill(context);
+        response.dataSources.default = dataSourceResponse;
+        return response;
     }
 
     getDataSource() {
@@ -82,7 +82,7 @@ class Form extends Model {
 
     async update(context) {
         console.log('Form.update', this.getFullName());
-        const dataSource = this.dataSources.default;
+        const dataSource = this.getDataSource();
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
