@@ -232,10 +232,11 @@ class Application extends Model {
         return this.databases[name];
     }
 
-    getTitle(context, data) {
+    getTitle(context) {
         if (context.query.page) {
             const page = this.pages[context.query.page];
-            return page.getTitle(context, data.pages[0]);
+            if (!page) throw new Error(`no page: ${context.query.page}`);
+            return page.getTitle();
         }
         return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }

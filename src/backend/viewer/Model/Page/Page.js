@@ -74,7 +74,7 @@ class Page extends Model {
         const data = await this.fill(context);
         await res.json({page: data});
     }
-    getTitle(context, data) {
+    getTitle() {
         return this.getAttr('caption');
     }
 }
