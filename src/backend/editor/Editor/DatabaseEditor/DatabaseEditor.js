@@ -6,7 +6,7 @@ class DatabaseEditor extends Editor {
 
     constructor(...args) {
         super(...args);
-        this.colName = 'databases';
+        // this.colName = 'databases';
     }
 
     static createData(params) {

@@ -4,7 +4,7 @@ class ParamEditor extends Editor {
 
     constructor(...args) {
         super(...args);
-        this.colName = 'params';
+        // this.colName = 'params';
     }
 
     static createData(params) {

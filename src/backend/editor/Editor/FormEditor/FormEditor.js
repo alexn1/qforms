@@ -7,7 +7,7 @@ class FormEditor extends Editor {
     constructor(pageEditor, name, data) {
         super(data, pageEditor);
         this.name    = name;
-        this.colName = 'forms';
+        // this.colName = 'forms';
     }
 
     newFieldData(params) {

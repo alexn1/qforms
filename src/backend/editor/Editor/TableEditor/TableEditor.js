@@ -5,7 +5,7 @@ class TableEditor extends Editor {
 
     constructor(...args) {
         super(...args);
-        this.colName = 'tables';
+        // this.colName = 'tables';
     }
 
     static createData(params) {

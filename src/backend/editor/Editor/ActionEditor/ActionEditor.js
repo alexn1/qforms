@@ -3,7 +3,7 @@ const Editor = require('../Editor');
 class ActionEditor extends Editor {
     constructor(...args) {
         super(...args);
-        this.colName = 'actions';
+        // this.colName = 'actions';
     }
 
     static createData(params) {

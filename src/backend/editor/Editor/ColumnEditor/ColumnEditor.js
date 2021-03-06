@@ -4,7 +4,7 @@ class ColumnEditor extends Editor {
 
     constructor(...args) {
         super(...args);
-        this.colName = 'columns';
+        // this.colName = 'columns';
     }
 
     static createData(params) {

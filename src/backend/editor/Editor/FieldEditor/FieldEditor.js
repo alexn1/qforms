@@ -10,7 +10,7 @@ class FieldEditor extends Editor {
         super(data, formEditor);
         this.formEditor = formEditor;
         this.name       = name;
-        this.colName = 'fields';
+        // this.colName = 'fields';
     }
 
     async setData(data) {

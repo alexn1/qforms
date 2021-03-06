@@ -19,7 +19,7 @@ class DataSourceEditor extends Editor {
     constructor(parent, name, data) {
         super(data, parent);
         this.name = this.getAttr('name');
-        this.colName = 'dataSources';
+        // this.colName = 'dataSources';
     }
 
     newKeyColumnData(params) {

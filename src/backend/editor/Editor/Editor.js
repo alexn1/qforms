@@ -6,7 +6,7 @@ const BaseModel = require('../../BaseModel');
 class Editor extends BaseModel {
     constructor(data, parent) {
         super(data, parent);
-        this.colName = null;
+        // this.colName = null;
     }
 
     async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
@@ -36,9 +36,9 @@ class Editor extends BaseModel {
         return content;
     }
 
-    getViewName() {
+    /*getViewName() {
         return this.constructor.name.replace('Editor', '') + 'View';
-    }
+    }*/
 
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
@@ -74,11 +74,6 @@ class Editor extends BaseModel {
     moveDataSourceDown(name) {
         this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
     }
-
-    /*renameObjField(objName, oldName, newName) {
-        console.log(`Editor(${this.constructor.name}).renameObjField`, objName, oldName, newName);
-        this.data[objName] = qforms.Helper.replaceKey(this.data[objName], oldName, newName);
-    }*/
 
     async setAttr(name, value) {
         console.log(`Editor(${this.constructor.name}).setAttr`, name, value);

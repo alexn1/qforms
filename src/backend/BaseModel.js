@@ -4,16 +4,16 @@ class BaseModel {
         return data['@class'];
     }
 
-    static getName(data) {
-        return BaseModel.getAttr(data, 'name');
-    }
-
     static getAttr(data, name) {
         return data['@attributes'][name];
     }
 
     static setAttr(data, name, value) {
         data['@attributes'][name] = value;
+    }
+
+    static getName(data) {
+        return BaseModel.getAttr(data, 'name');
     }
 
     static getEnvList(data) {
@@ -95,6 +95,11 @@ class BaseModel {
     getApp() {
         throw new Error('getApp: not implemented');
     }
+
+    /*renameObjField(objName, oldName, newName) {
+        console.log(`Editor(${this.constructor.name}).renameObjField`, objName, oldName, newName);
+        this.data[objName] = qforms.Helper.replaceKey(this.data[objName], oldName, newName);
+    }*/
 
 }
 module.exports = BaseModel;
