@@ -63,13 +63,6 @@ class Model extends BaseModel {
         }
     }
 
-    getItemNames(colName) {
-        return [
-            ...Object.keys(this.getCol(colName)),
-            ...(this.data[`${colName}2`] ? this.data[`${colName}2`].map(data => BaseModel.getName(data)) : [])
-        ];
-    }
-
     async createCollectionItems(colName) {
         // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
         const names = this.getItemNames(colName);

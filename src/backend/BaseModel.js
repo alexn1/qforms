@@ -50,7 +50,7 @@ class BaseModel {
     isData(col, name) {
         if (!col) throw new Error('isData: no col');
         if (!name) throw new Error('isData: no name');
-        return !!this.findModelData(col, name);
+        return !!this.findModelData(`${col}2`, name);
         // return !!this.data[col][name];
     }
 
@@ -63,12 +63,21 @@ class BaseModel {
         return this.data[name];
     }
 
+    getItemNames(col) {
+        const arr = this.getCol(`${col}2`);
+        if (!arr) throw new Error(`getItemNames: no col: ${col}`);
+        return [
+            // ...Object.keys(this.getCol(col)),
+            ...(arr.map(data => BaseModel.getName(data)))
+        ];
+    }
+
     getModelData(col, name) {
         let data;
-        if (this.data[col] && this.data[col][name]) {
+        /*if (this.data[col] && this.data[col][name]) {
             data = this.data[col][name];
             if (data) return data;
-        }
+        }*/
         if (Array.isArray(this.data[`${col}2`])) {
             data = this.findModelData(`${col}2`, name);
             if (data) return data;
