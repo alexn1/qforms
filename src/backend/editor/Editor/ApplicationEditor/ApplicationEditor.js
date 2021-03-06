@@ -145,8 +145,7 @@ class ApplicationEditor extends Editor {
         } else {
             throw new Error(`unknown database class ${params._class}`);
         }
-        // this.data.databases[name] = data;
-        this.addModelData('databases2', data);
+        this.addModelData('databases', data);
         return data;
     }
 
@@ -166,8 +165,7 @@ class ApplicationEditor extends Editor {
             throw new Error(`Page Link ${name} already exists.`);
         }
         const data = qforms.PageLinkEditor.createData(params);
-        // this.data.pageLinks[params.name] = data;
-        this.addModelData('pageLinks2', data);
+        this.addModelData('pageLinks', data);
         return data;
     }
 
@@ -208,8 +206,7 @@ class ApplicationEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        // this.data.dataSources[name] = data;
-        this.addModelData('dataSources2', data);
+        this.addModelData('dataSources', data);
         return data;
     }
 

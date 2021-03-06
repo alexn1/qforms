@@ -24,8 +24,7 @@ class DatabaseEditor extends Editor {
             const tableEditor = this.createTableEditor(name);
             params.columns.forEach(column => tableEditor.newColumnData(column));
         }
-        // this.data.tables[name] = data;
-        this.addModelData('tables2', data);
+        this.addModelData('tables', data);
         return data;
     }
 
@@ -40,8 +39,7 @@ class DatabaseEditor extends Editor {
         if (!this.data.params2) this.data.params2 = [];
         if (this.getModelData('params', name)) throw new Error(`param ${name} already exists`);
         const data = ParamEditor.createData(params);
-        // this.data.params[name] = data;
-        this.addModelData('params2', data);
+        this.addModelData('params', data);
         return data;
     }
 

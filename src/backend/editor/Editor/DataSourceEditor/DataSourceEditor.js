@@ -39,8 +39,7 @@ class DataSourceEditor extends Editor {
                 'name': name
             }
         };
-        // this.data.keyColumns[name] = data;
-        this.addModelData('keyColumns2', data);
+        this.addModelData('keyColumns', data);
         return data;
     }
 

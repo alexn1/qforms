@@ -76,8 +76,7 @@ class PageEditor extends Editor {
             default:
                 throw new Error(`unknown form class: ${_class}`);
         }
-        // this.data.forms[name] = data;
-        this.addModelData('forms2', data);
+        this.addModelData('forms', data);
         return data;
     }
 
@@ -180,8 +179,7 @@ class PageEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        // this.data.dataSources[name] = data;
-        this.addModelData('dataSources2', data);
+        this.addModelData('dataSources', data);
         return data;
     }
 

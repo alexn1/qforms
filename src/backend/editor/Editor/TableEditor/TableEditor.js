@@ -30,8 +30,7 @@ class TableEditor extends Editor {
         if (!this.data.columns2) this.data.columns2 = [];
         if (this.getModelData('tables', name)) throw new Error(`Column ${name} already exists.`);
         const data = ColumnEditor.createData(params);
-        // this.data.columns[name] = data;
-        this.addModelData('columns2', data);
+        this.addModelData('columns', data);
         return data;
     }
 

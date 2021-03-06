@@ -22,8 +22,7 @@ class FormEditor extends Editor {
             throw new Error(`field ${name} already exist`);
         }
         const data = eval(`qforms.${params['class']}Editor.createData(params);`);
-        // this.data.fields[name] = data;
-        this.addModelData('fields2', data);
+        this.addModelData('fields', data);
         return data;
     }
 
@@ -81,8 +80,7 @@ class FormEditor extends Editor {
             throw new Error(`action ${name} already exist`);
         }
         const data = qforms.ActionEditor.createData(params);
-        // this.data.actions[name] = data;
-        this.addModelData('actions2', data);
+        this.addModelData('actions', data);
         return data;
     }
 
@@ -130,8 +128,7 @@ class FormEditor extends Editor {
             default:
                 throw new Error(`unknown data source class: ${_class}`);
         }
-        // this.data.dataSources[name] = data;
-        this.addModelData('dataSources2', data);
+        this.addModelData('dataSources', data);
         return data;
     }
 
