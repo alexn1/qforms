@@ -51,7 +51,7 @@ class BaseModel {
         if (!col) throw new Error('isData: no col');
         if (!name) throw new Error('isData: no name');
         return !!this.findModelData(`${col}2`, name);
-        // return !!this.data[col][name];
+        // return !!this.getCol(col)[name];
     }
 
     getData() {
@@ -60,12 +60,13 @@ class BaseModel {
 
     getCol(name) {
         if (!name) throw new Error('getCol: no name');
-        return this.data[name];
+        const arr = this.data[name];
+        if (!arr) throw new Error(`getCol: no col: ${col}`);
+        return arr;
     }
 
     getItemNames(col) {
         const arr = this.getCol(`${col}2`);
-        if (!arr) throw new Error(`getItemNames: no col: ${col}`);
         return [
             // ...Object.keys(this.getCol(col)),
             ...(arr.map(data => BaseModel.getName(data)))
@@ -78,19 +79,17 @@ class BaseModel {
             data = this.data[col][name];
             if (data) return data;
         }*/
-        if (Array.isArray(this.data[`${col}2`])) {
-            data = this.findModelData(`${col}2`, name);
-            if (data) return data;
-        }
+        data = this.findModelData(`${col}2`, name);
+        if (data) return data;
         return null;
     }
 
     findModelData(col, name) {
-        return this.data[col].find(data => BaseModel.getName(data) === name);
+        return this.getCol(col).find(data => BaseModel.getName(data) === name);
     }
 
     addModelData(col, data) {
-        this.data[col].push(data);
+        this.getCol(col).push(data);
     }
 
     getApp() {
