@@ -26,8 +26,8 @@ class TableEditor extends Editor {
     newColumnData(params) {
         const name = params.name;
         if (!name) throw new Error('need name');
-        if (!this.data.columns) this.data.columns = {};
-        if (!this.data.columns2) this.data.columns2 = [];
+        // if (!this.data.columns) this.data.columns = {};
+        // if (!this.data.columns2) this.data.columns2 = [];
         if (this.getModelData('tables', name)) throw new Error(`Column ${name} already exists.`);
         const data = ColumnEditor.createData(params);
         this.addModelData('columns', data);

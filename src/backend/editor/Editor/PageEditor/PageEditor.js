@@ -56,12 +56,12 @@ class PageEditor extends Editor {
     newFormData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (!this.data.forms) {
+        /*if (!this.data.forms) {
             this.data.forms = {};
-        }
-        if (!this.data.forms2) {
+        }*/
+        /*if (!this.data.forms2) {
             this.data.forms2 = [];
-        }
+        }*/
         if (this.getModelData('forms', name)) {
             throw new Error(`Form ${name} already exists.`);
         }
@@ -159,12 +159,12 @@ class PageEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (!this.data.dataSources) {
+        /*if (!this.data.dataSources) {
             this.data.dataSources = {};
-        }
-        if (!this.data.dataSources2) {
+        }*/
+        /*if (!this.data.dataSources2) {
             this.data.dataSources2 = [];
-        }
+        }*/
         if (this.getModelData('dataSources', name)) {
             throw new Error(`DataSource ${name} already exist`);
         }

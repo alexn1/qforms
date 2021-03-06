@@ -127,12 +127,12 @@ class ApplicationEditor extends Editor {
 
     newDatabaseData(params) {
         const name = params['name'];
-        if (!this.data.databases) {
+        /*if (!this.data.databases) {
             this.data.databases = {};
         }
         if (!this.data.databases2) {
             this.data.databases2 = [];
-        }
+        }*/
         if (this.getModelData('databases', name)) {
             throw new Error(`database ${name} already exists`);
         }
@@ -155,12 +155,12 @@ class ApplicationEditor extends Editor {
 
     newPageLinkData(params) {
         const name = params.name;
-        if (!this.data.pageLinks) {
+        /*if (!this.data.pageLinks) {
             this.data.pageLinks = {};
-        }
-        if (!this.data.pageLinks2) {
+        }*/
+        /*if (!this.data.pageLinks2) {
             this.data.pageLinks2 = [];
-        }
+        }*/
         if (this.getModelData('pageLinks', name)) {
             throw new Error(`Page Link ${name} already exists.`);
         }
@@ -186,12 +186,12 @@ class ApplicationEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (!this.data.dataSources) {
+        /*if (!this.data.dataSources) {
             this.data.dataSources = {};
-        }
-        if (!this.data.dataSources2) {
+        }*/
+        /*if (!this.data.dataSources2) {
             this.data.dataSources2 = [];
-        }
+        }*/
         if (this.getModelData('dataSources', name)) {
             throw new Error(`Data Source ${name} already exist.`);
         }

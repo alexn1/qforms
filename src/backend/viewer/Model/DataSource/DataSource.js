@@ -47,10 +47,7 @@ class DataSource extends Model {
     }
 
     getKeyColumns() {
-        const keyColumns = [
-            ...(this.data.keyColumns  ? Object.keys(this.data.keyColumns)                          : []),
-            ...(this.data.keyColumns2 ? this.data.keyColumns2.map(data => BaseModel.getName(data)) : []),
-        ];
+        const keyColumns = this.getItemNames('keyColumns');
         if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
         return keyColumns;
     }

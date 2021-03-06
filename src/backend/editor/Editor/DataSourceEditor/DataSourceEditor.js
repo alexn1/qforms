@@ -24,12 +24,12 @@ class DataSourceEditor extends Editor {
 
     newKeyColumnData(params) {
         const name = params.name;
-        if (!this.data.keyColumns) {
+        /*if (!this.data.keyColumns) {
             this.data.keyColumns = {};
-        }
-        if (!this.data.keyColumns2) {
+        }*/
+        /*if (!this.data.keyColumns2) {
             this.data.keyColumns2 = [];
-        }
+        }*/
         if (this.getModelData('keyColumns', name)) {
             throw new Error(`Key Column ${name} already exist.`);
         }
