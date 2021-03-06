@@ -68,7 +68,7 @@ class BaseModel {
     getItemNames(colName) {
         return [
             // ...Object.keys(this.getCol(colName)),
-            ...(this.getCol(`${colName}2`).map(data => BaseModel.getName(data)))
+            ...(this.getCol(colName).map(data => BaseModel.getName(data)))
         ];
     }
 
@@ -78,7 +78,7 @@ class BaseModel {
             data = this.data[colName][name];
             if (data) return data;
         }*/
-        data = this.findItemByName(this.getCol(`${colName}2`), name);
+        data = this.findItemByName(this.getCol(colName), name);
         if (data) return data;
         return null;
     }
@@ -88,7 +88,7 @@ class BaseModel {
     }
 
     addModelData(colName, data) {
-        this.getCol(`${colName}2`).push(data);
+        this.getCol(colName).push(data);
     }
 
     getApp() {
