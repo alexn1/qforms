@@ -12,6 +12,10 @@ class BaseModel {
         return data['@attributes'][name];
     }
 
+    static setAttr(data, name, value) {
+        data['@attributes'][name] = value;
+    }
+
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
         return ['local', ...list];
@@ -46,7 +50,8 @@ class BaseModel {
     isData(col, name) {
         if (!col) throw new Error('isData: no col');
         if (!name) throw new Error('isData: no name');
-        return !!this.data[col][name];
+        return !!this.findModelData(col, name);
+        // return !!this.data[col][name];
     }
 
     getData() {

@@ -14,8 +14,8 @@ class TextAreaFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
-            '@class'      : 'TextAreaField',
-            '@attributes' : {
+            '@class'     : 'TextAreaField',
+            '@attributes': {
                 name        : params['name'],
                 caption     : params['caption']      ? params['caption']      : params['name'],
                 isVisible   : params['isVisible']    ? params['isVisible']    :         'true',

@@ -12,8 +12,8 @@ class ParamEditor extends Editor {
         const value    = params.value || '';
         if (!name) throw new Error('need param name');
         return {
-            '@class'      : 'Param',
-            '@attributes' : {
+            '@class'     : 'Param',
+            '@attributes': {
                 name : name,
                 value: value
             }

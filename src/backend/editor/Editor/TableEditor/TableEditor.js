@@ -10,11 +10,11 @@ class TableEditor extends Editor {
 
     static createData(params) {
         return {
-            '@class'      : 'Table',
-            '@attributes' : {
+            '@class'     : 'Table',
+            '@attributes': {
                 name : params.name
             },
-            columns: {},
+            columns : {},
             columns2: [],
         };
     }

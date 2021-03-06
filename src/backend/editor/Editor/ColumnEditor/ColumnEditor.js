@@ -10,8 +10,8 @@ class ColumnEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
-            '@class'      : 'Column',
-            '@attributes' : {
+            '@class'     : 'Column',
+            '@attributes': {
                 name    : params.name,
                 caption : params.caption || params.name,
                 type    : params.type || '',

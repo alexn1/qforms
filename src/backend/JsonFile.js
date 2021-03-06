@@ -1,4 +1,5 @@
 const Helper = require('./Helper');
+const BaseModel = require('./BaseModel');
 
 class JsonFile {
     constructor(filePath, data) {
@@ -33,8 +34,9 @@ class JsonFile {
     }
 
     getAttr(name) {
-        if (this.data['@attributes'][name] === undefined) throw new Error(`no attribute '${name}'`);
-        return this.data['@attributes'][name];
+        const value = BaseModel.getAttr(this.data, name);
+        if (value === undefined) throw new Error(`no attribute '${name}'`);
+        return value;
     }
 }
 

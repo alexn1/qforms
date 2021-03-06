@@ -83,7 +83,7 @@ class Editor extends BaseModel {
     async setAttr(name, value) {
         console.log(`Editor(${this.constructor.name}).setAttr`, name, value);
         // const oldValue = this.getAttr(name);
-        this.data['@attributes'][name] = value;
+        BaseModel.setAttr(this.data, name, value);
         /*if (name === 'name' && this.colName) {
             if (!this.parent) throw new Error('no parent editor');
             this.parent.renameObjField(this.colName, oldValue, value);

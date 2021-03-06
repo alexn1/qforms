@@ -8,8 +8,8 @@ class TableFormEditor extends FormEditor {
 
     static createData(params) {
         return {
-            '@class'        : 'TableForm',
-            '@attributes'   : {
+            '@class'     : 'TableForm',
+            '@attributes': {
                 name          : params.name,
                 caption       : params.caption ? params.caption : params.name,
                 visible       : params.visible ? params.visible : 'true',
