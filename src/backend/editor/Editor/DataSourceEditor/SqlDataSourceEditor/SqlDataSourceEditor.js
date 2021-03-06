@@ -15,8 +15,8 @@ class SqlDataSourceEditor extends DataSourceEditor {
                 limit               : params.limit         ? params.limit         :        '',
                 // insertNewKey        :'false'
             },
-            keyColumns: {},
-            keyColumns2: [],
+            // keyColumns: {},
+            keyColumns: [],
         };
     }
 

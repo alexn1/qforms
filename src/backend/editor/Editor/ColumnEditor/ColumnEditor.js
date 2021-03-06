@@ -16,8 +16,8 @@ class ColumnEditor extends Editor {
                 caption : params.caption || params.name,
                 type    : params.type || '',
                 dbType  : params.dbType || '',
-                key     : params.key ? 'true' : 'false',
-                auto    : params.auto ? 'true' : 'false',
+                key     : params.key      ? 'true' : 'false',
+                auto    : params.auto     ? 'true' : 'false',
                 nullable: params.nullable ? 'true' : 'false',
             }
         };

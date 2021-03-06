@@ -32,14 +32,12 @@ class ApplicationEditor extends Editor {
                 theme         : 'standard'
             },
             env        : {},
-            databases  : {},
-            dataSources: {},
-            pageLinks  : {},
-
-            env2        : [],
-            databases2  : [],
-            dataSources2: [],
-            pageLinks2  : [],
+            // databases  : {},
+            // dataSources: {},
+            // pageLinks  : {},
+            databases  : [],
+            dataSources: [],
+            pageLinks  : [],
         };
     }
 

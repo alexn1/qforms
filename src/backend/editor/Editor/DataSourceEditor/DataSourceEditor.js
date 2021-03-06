@@ -11,8 +11,8 @@ class DataSourceEditor extends Editor {
             '@attributes': {
                 name: params.name,
             },
-            keyColumns: {},
-            keyColumns2: [],
+            // keyColumns: {},
+            keyColumns: [],
         };
     }
 

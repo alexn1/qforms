@@ -8,10 +8,10 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor {
             '@attributes': {
                 name : params.name
             },
-            params: {},
-            tables: {},
-            params2: [],
-            tables2: [],
+            // params: {},
+            // tables: {},
+            params: [],
+            tables: [],
         };
     }
 }
