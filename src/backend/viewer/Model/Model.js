@@ -27,8 +27,7 @@ class Model extends BaseModel {
     }
 
     async _fillCollections(response, context) {
-        for (let i = 0; i < this.fillCollections.length; i++) {
-            const colName = this.fillCollections[i];
+        for (const colName of this.fillCollections) {
             if (colName === 'dataSources') {
                 await this.fillCollectionDefaultFirst(response, colName, context);
             } else {
@@ -66,8 +65,8 @@ class Model extends BaseModel {
     async createCollectionItems(colName) {
         // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
         const names = this.getItemNames(colName);
-        for (let i = 0; i < names.length; i++) {
-            const data = this.getModelData(colName, names[i]);
+        for (const name of names) {
+            const data = this.getModelData(colName, name);
             await this.createCollectionItem(colName, data);
         }
     }
