@@ -143,18 +143,18 @@ class Application extends Model {
         return true;
     }
 
-    async getPage(context, name) {
-        // console.log('Application.getPage', name);
-        if (context.user && this.authorizePage(context.user, name) === false) {
+    async getPage(context, pageLinkName) {
+        // console.log('Application.getPage', pageLinkName);
+        if (context.user && this.authorizePage(context.user, pageLinkName) === false) {
             throw new Error('authorization error');
         }
-        if (this.pages[name]) {
-            return this.pages[name];
+        if (this.pages[pageLinkName]) {
+            return this.pages[pageLinkName];
         }
-        return this.pages[name] = await this.createPage(name);
+        return this.pages[pageLinkName] = await this.createPage(pageLinkName);
     }
 
-    getStartupPageNames() {
+    getStartupPageLinkNames() {
         return this.getItemNames('pageLinks').filter(pageLinkName => this.createPageLink(pageLinkName).getAttr('startup') === 'true');
     }
 
@@ -163,15 +163,13 @@ class Application extends Model {
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
-            const pageData = await page.fill(context);
-            pages.push(pageData);
+            const response = await page.fill(context);
+            pages.push(response);
         } else {
-            const startupPageNames = this.getStartupPageNames();
-            for (let i = 0; i < startupPageNames.length; i++) {
-                const pageLinkName = startupPageNames[i];
+            for (const pageLinkName of this.getStartupPageLinkNames()) {
                 const page = await this.getPage(context, pageLinkName);
-                const pageData = await page.fill(context);
-                pages.push(pageData);
+                const response = await page.fill(context);
+                pages.push(response);
             }
         }
         return pages;
