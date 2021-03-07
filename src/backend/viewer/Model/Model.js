@@ -22,22 +22,23 @@ class Model extends BaseModel {
         for (const name in this.attributes()) {
             response[name] = this.getAttr(name);
         }
-        await this._fillCollections(response, context);
-        return response;
-    }
-
-    async _fillCollections(response, context) {
+        // await this._fillCollections(response, context);
         for (const colName of this.fillCollections) {
             await this.fillCollection(response, colName, context);
         }
+        return response;
     }
+
+    /*async _fillCollections(response, context) {
+        for (const colName of this.fillCollections) {
+            await this.fillCollection(response, colName, context);
+        }
+    }*/
 
     async fillCollection(response, colName, context) {
         if (!this[colName]) return;
         response[colName] = {};
-        const items = Object.keys(this[colName]);
-        for (let i = 0; i < items.length; i++) {
-            const itemName = items[i];
+        for (const itemName of Object.keys(this[colName])) {
             if (this[colName][itemName].attributes()['backOnly'] === 'true') continue;
             response[colName][itemName] = await this[colName][itemName].fill(context);
         }
