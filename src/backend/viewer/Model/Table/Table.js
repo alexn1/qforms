@@ -9,7 +9,7 @@ class Table extends Model {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
-        this.columns = {};
+        this.columns = [];
     }
 
     async init() {
@@ -18,7 +18,8 @@ class Table extends Model {
 
     getKeyColumns() {
         // console.log('Table.getKeyColumns');
-        const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
+        const keyColumns = this.columns.filter(column => column.isKey()).map(column => column.getName());
+        // const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
         if (keyColumns.length === 0) throw new Error(`no key columns in table: ${this.getName()}`);
         return keyColumns;
     }
@@ -27,8 +28,14 @@ class Table extends Model {
         return this.parent.parent;
     }
 
-    getColumn(name) {
+    /*getColumn(name) {
         return this.columns[name];
+    }*/
+
+    getColumn(name) {
+        const column = this.columns.find(column => column.getName() === name);
+        if (!column) throw new Error(`no column ${name}`);
+        return column;
     }
 }
 

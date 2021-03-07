@@ -38,11 +38,27 @@ class Model extends BaseModel {
     async fillCollection(response, colName, context) {
         if (!this[colName]) return;
         response[colName] = {};
-        for (const itemName of Object.keys(this[colName])) {
+        /*for (const itemName of Object.keys(this[colName])) {
             if (this[colName][itemName].attributes()['backOnly'] === 'true') continue;
             response[colName][itemName] = await this[colName][itemName].fill(context);
+        }*/
+        for (const model of this[colName]) {
+            const itemName = model.getName();
+            if (model.attributes()['backOnly'] === 'true') continue;
+            response[colName][itemName] = await model.fill(context);
         }
     }
+
+    /*async fillCollection2(response, colName, context) {
+        if (!this[colName]) return;
+        response[colName] = {};
+
+        for (const model of this[`${colName}2`]) {
+            const itemName = model.getName();
+            if (model.attributes()['backOnly'] === 'true') continue;
+            response[colName][itemName] = await model.fill(context);
+        }
+    }*/
 
     /*async fillCollectionDefaultFirst(response, colName, context) {
         //console.log('Model.fillCollectionDefaultFirst', colName);
@@ -66,19 +82,41 @@ class Model extends BaseModel {
         }
     }
 
+    /*async createCollectionItems2(colName) {
+        // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
+        for (const data of this.getCol(colName)) {
+            await this.createCollectionItem2(colName, data);
+        }
+    }*/
+
     async createCollectionItem(colName, data) {
         const name = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
         try {
             const Class = qforms[className];
             const obj = new Class(data, this);
-            this[colName][name] = obj;
+            // this[colName][name] = obj;
+            this[colName].push(obj);
             await obj.init();
         } catch (err) {
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
         }
     }
+
+    /*async createCollectionItem2(colName, data) {
+        const name = BaseModel.getName(data);
+        const className = BaseModel.getClassName(data);
+        try {
+            const Class = qforms[className];
+            const obj = new Class(data, this);
+            this[`${colName}2`].push(obj);
+            await obj.init();
+        } catch (err) {
+            err.message = `${className}[${name}]: ${err.message}`;
+            throw err;
+        }
+    }*/
 
     getDirPath() {
         return null;

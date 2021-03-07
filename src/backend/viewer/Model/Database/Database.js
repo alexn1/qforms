@@ -15,7 +15,7 @@ class Database extends Model {
         //console.log('Database.constructor');
         super(data, parent);
         this.fillCollections = ['tables'];
-        this.tables          = {};
+        this.tables          = [];
     }
 
     async init() {
@@ -115,8 +115,11 @@ class Database extends Model {
 
     getTable(name) {
         if (!name) throw new Error('getTable: no name');
-        if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
-        return this.tables[name];
+        const table = this.tables.find(table => table.getName() === name);
+        if (!table) throw new Error(`no table with name: ${name}`);
+        return table;
+        // if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
+        // return this.tables[name];
     }
 
     static getUsedParams(query) {

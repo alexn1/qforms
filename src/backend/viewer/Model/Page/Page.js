@@ -28,8 +28,8 @@ class Page extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.dataSources = {};
-        this.forms       = {};
+        this.dataSources = [];
+        this.forms       = [];
     }
 
     async init() {

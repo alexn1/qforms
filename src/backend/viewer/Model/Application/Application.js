@@ -36,13 +36,12 @@ class Application extends Model {
         this.env                = env;
         this.fillCollections    = ['databases', 'dataSources'];
 
-        this.databases          = {};
-        this.dataSources        = {};
+        this.databases          = [];
+        this.dataSources        = [];
         this.pages              = {};
         this.css                = [];
         this.js                 = [];
 
-        this.databases2 = [];
     }
 
     async init() {
@@ -57,8 +56,11 @@ class Application extends Model {
         console.log('Application.deinit: ' + this.getName());
 
         // databases
-        for (const name of Object.keys(this.databases)) {
+        /*for (const name of Object.keys(this.databases)) {
             await this.databases[name].deinit();
+        }*/
+        for (const database of this.databases) {
+            await database.deinit();
         }
     }
 
@@ -92,6 +94,8 @@ class Application extends Model {
 
         // pages
         response.pages = await this.fillStartupPages(context);
+
+        // await this.fillCollection2(response, 'databases', context);
 
         return response;
     }
@@ -232,8 +236,12 @@ class Application extends Model {
 
     getDatabase(name) {
         if (!name) throw new Error('getDatabase: no name');
-        if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
-        return this.databases[name];
+        const database = this.databases.find(database => database.getName() === name);
+        if (!database) throw new Error(`no database with name: ${name}`);
+        return database;
+        // if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
+        // return this.databases[name];
+
     }
 
     getTitle(context) {

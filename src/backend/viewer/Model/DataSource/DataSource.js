@@ -29,7 +29,7 @@ class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.keyColumns = null;
+        this.keyColumns = [];
     }
 
     getDirPath() {
@@ -48,11 +48,13 @@ class DataSource extends Model {
 
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
+        console.log('keyColumns:', keyColumns);
         if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
         return keyColumns;
     }
 
     prepareRows(rows) {
+        console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         if (rows[0]) {
             this.keyColumns.forEach(column => {
                 if (!rows[0].hasOwnProperty(column)) {

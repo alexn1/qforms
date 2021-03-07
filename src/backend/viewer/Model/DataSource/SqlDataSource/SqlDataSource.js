@@ -274,7 +274,7 @@ class SqlDataSource extends DataSource {
     }
 
     getAutoColumns() {
-        return this.keyColumns.filter(name => this.table.columns[name].isAuto());
+        return this.keyColumns.filter(name => this.table.getColumn(name).isAuto());
     }
 
     getAutoTypes() {
