@@ -54,9 +54,8 @@ class Application extends Model {
         console.log('Application.deinit: ' + this.getName());
 
         // databases
-        const names = this.getItemNames('databases');
-        for (let i = 0; i < names.length; i++) {
-            await this.databases[names[i]].deinit();
+        for (const name of Object.keys(this.databases)) {
+            await this.databases[name].deinit();
         }
     }
 
