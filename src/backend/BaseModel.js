@@ -78,12 +78,12 @@ class BaseModel {
             data = this.data[colName][name];
             if (data) return data;
         }*/
-        data = this.findItemByName(this.getCol(colName), name);
+        data = BaseModel.findDataByName(this.getCol(colName), name);
         if (data) return data;
         return null;
     }
 
-    findItemByName(col, name) {
+    static findDataByName(col, name) {
         return col.find(data => BaseModel.getName(data) === name);
     }
 
