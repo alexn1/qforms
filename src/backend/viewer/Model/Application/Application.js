@@ -7,6 +7,7 @@ const qforms  = require('../../../qforms');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
+const BaseModel = require('../../../BaseModel');
 
 class Application extends Model {
 
@@ -40,6 +41,8 @@ class Application extends Model {
         this.pages              = {};
         this.css                = [];
         this.js                 = [];
+
+        this.databases2 = [];
     }
 
     async init() {
@@ -154,7 +157,9 @@ class Application extends Model {
     }
 
     getStartupPageLinkNames() {
-        return this.getItemNames('pageLinks').filter(pageLinkName => this.createPageLink(pageLinkName).getAttr('startup') === 'true');
+        return this.getCol('pageLinks')
+            .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
+            .map(data => BaseModel.getName(data));
     }
 
     async fillStartupPages(context) {
