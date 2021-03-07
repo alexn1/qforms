@@ -279,8 +279,8 @@ class SqlDataSource extends DataSource {
 
     getAutoTypes() {
         const columns = this.getAutoColumns();
-        return columns.reduce((acc, column) => {
-            acc[column] = this.table.columns[column].getAttr('type');
+        return columns.reduce((acc, name) => {
+            acc[name] = this.table.getColumn(name).getAttr('type');
             return acc;
         }, {});
     }
