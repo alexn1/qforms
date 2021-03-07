@@ -123,8 +123,8 @@ class Application extends Model {
     }
 
     createDatabase(name) {
-        const databaseData = this.getModelData('databases', name);
-        return Database.create(databaseData, this);
+        const data = this.getModelData('databases', name);
+        return Database.create(data, this);
     }
 
     async createPage(pageLinkName) {
