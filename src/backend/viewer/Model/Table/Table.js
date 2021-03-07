@@ -28,11 +28,8 @@ class Table extends Model {
         return this.parent.parent;
     }
 
-    /*getColumn(name) {
-        return this.columns[name];
-    }*/
-
     getColumn(name) {
+        // return this.columns[name];
         const column = this.columns.find(column => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;
