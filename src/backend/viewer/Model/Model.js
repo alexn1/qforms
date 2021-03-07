@@ -28,11 +28,7 @@ class Model extends BaseModel {
 
     async _fillCollections(response, context) {
         for (const colName of this.fillCollections) {
-            if (colName === 'dataSources') {
-                await this.fillCollectionDefaultFirst(response, colName, context);
-            } else {
-                await this.fillCollection(response, colName, context);
-            }
+            await this.fillCollection(response, colName, context);
         }
     }
 
@@ -47,7 +43,7 @@ class Model extends BaseModel {
         }
     }
 
-    async fillCollectionDefaultFirst(response, colName, context) {
+    /*async fillCollectionDefaultFirst(response, colName, context) {
         //console.log('Model.fillCollectionDefaultFirst', colName);
         response[colName] = {};
         const defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
@@ -60,7 +56,7 @@ class Model extends BaseModel {
             const itemName = noDefaultArr[i];
             response[colName][itemName] = await this[colName][itemName].fill(context);
         }
-    }
+    }*/
 
     async createCollectionItems(colName) {
         // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);

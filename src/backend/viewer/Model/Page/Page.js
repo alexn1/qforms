@@ -50,7 +50,7 @@ class Page extends Model {
         for (const name in this.attributes()) {
             response[name] = this.getAttr(name);
         }
-        await this.fillCollectionDefaultFirst(response, 'dataSources', context);
+        await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'forms', context);
 
         delete response.formatVersion;
