@@ -61,7 +61,7 @@ class BaseModel {
     getCol(name) {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
-        if (!arr) throw new Error(`getCol: no col: ${col}`);
+        if (!arr) throw new Error(`getCol: no col: ${name}`);
         return arr;
     }
 
