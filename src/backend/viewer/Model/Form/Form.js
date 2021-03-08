@@ -33,20 +33,22 @@ class Form extends Model {
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
         const response = await super.fill(context);
-        response.dataSources.default = dataSourceResponse;
+        // response.dataSources.default = dataSourceResponse;
+        response.dataSources.push(dataSourceResponse);
         return response;
     }
 
     getDataSource() {
-        return this.dataSources.default;
+        // return this.dataSources.default;
+        return this.dataSources.find(dataSource => dataSource.getName() === 'default');
     }
 
     _getSurrogateDataSourceResponse(context) {
         const row = {
             id: 1
         };
-        for (const name in this.fields) {
-            this.fields[name].fillDefaultValue(context, row);
+        for (const field of this.fields) {
+            field.fillDefaultValue(context, row);
         }
         return {
             class               : 'DataSource',

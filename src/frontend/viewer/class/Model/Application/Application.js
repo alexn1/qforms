@@ -10,14 +10,16 @@ class Application extends Model {
         if (!this.data.theme) throw new Error('no theme attr');
 
         // databases
-        for (const name in this.data.databases) {
-            this.databases[name] = new Database(this.data.databases[name], this);
+        for (const data of this.data.databases) {
+            const name = data.name;
+            this.databases[name] = new Database(data, this);
             this.databases[name].init();
         }
 
         // dataSources
-        for (const name in this.data.dataSources) {
-            const data = this.data.dataSources[name];
+        for (const data of this.data.dataSources) {
+            // const data = this.data.dataSources[name];
+            const name = data.name;
             this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }

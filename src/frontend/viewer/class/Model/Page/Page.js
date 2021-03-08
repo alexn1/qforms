@@ -12,13 +12,15 @@ class Page extends Model {
 
     init() {
         this.initParams();
-        for (const name in this.data.dataSources) {
-            const data = this.data.dataSources[name];
+        for (const data of this.data.dataSources) {
+            // const data = this.data.dataSources[name];
+            const name = data.name;
             this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
-        for (const name in this.data.forms) {
-            const data = this.data.forms[name];
+        for (const data of this.data.forms) {
+            // const data = this.data.forms[name];
+            const name = data.name;
             this.forms[name] = eval(`new ${data.class}(data, this)`);
             this.forms[name].init();
         }
@@ -40,8 +42,9 @@ class Page extends Model {
     initParams() {
         // params defined during data source filling on the server
         if (this.data.params !== undefined) {
-            for (const name in this.data.params) {
-                this.params[name] = this.data.params[name];
+            for (const data of this.data.params) {
+                const name = data.name;
+                this.params[name] = data;
             }
         }
     }

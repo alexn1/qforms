@@ -30,11 +30,13 @@ class Model extends BaseModel {
 
     async fillCollection(response, colName, context) {
         if (!this[colName]) return;
-        response[colName] = {};
+        // response[colName] = {};
+        response[colName] = [];
         for (const model of this[colName]) {
             const itemName = model.getName();
             if (model.attributes()['backOnly'] === 'true') continue;
-            response[colName][itemName] = await model.fill(context);
+            // response[colName][itemName] = await model.fill(context);
+            response[colName].push(await model.fill(context));
         }
     }
 

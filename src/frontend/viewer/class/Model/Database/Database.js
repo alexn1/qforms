@@ -6,9 +6,9 @@ class Database extends Model {
 
     init() {
         // console.log('Database.init', this.getName());
-        for (const name in this.data.tables) {
-            this.tables[name] = new Table(this.data.tables[name], this);
-            this.tables[name].init();
+        for (const data of this.data.tables) {
+            this.tables[data.name] = new Table(data, this);
+            this.tables[data.name].init();
         }
     }
 
