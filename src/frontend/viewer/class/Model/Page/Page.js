@@ -95,16 +95,16 @@ class Page extends Model {
     }
 
     hasRowForm() {
-        for (const formName in this.forms) {
-            const form = this.forms[formName];
+        for (const name in this.forms) {
+            const form = this.forms[name];
             if (form.getClassName() === 'RowForm') return true;
         }
         return false;
     }
 
     hasTableForm() {
-        for (const formName in this.forms) {
-            const form = this.forms[formName];
+        for (const name in this.forms) {
+            const form = this.forms[name];
             if (form.getClassName() === 'TableForm') {
                 return true;
             }
