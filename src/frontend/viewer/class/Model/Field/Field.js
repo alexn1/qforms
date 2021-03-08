@@ -23,7 +23,7 @@ class Field extends Model {
         if (!this.data.column) return;
         const defaultValue = this.replaceThis(this.data.defaultValue);
         const params = {
-            ...this.getApp().data.params,
+            // ...this.getApp().data.params,
             ...this.getPage().params,
         };
         const js = Helper.templateValue(defaultValue, params);
