@@ -58,13 +58,6 @@ class QForms {
         return result;
     }
 
-    /*static async doHttpRequest2(body) {
-        console.warn('QForms.doHttpRequest2', 'POST', window.location.href, body);
-        const result = await QForms.post(window.location.href, Helper.createFormData(body));
-        console.warn(`result`, result);
-        return result;
-    }*/
-
     static async postJson(url, data) {
         return await QForms.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
     }
