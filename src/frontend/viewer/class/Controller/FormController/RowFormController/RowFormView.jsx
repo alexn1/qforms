@@ -53,7 +53,7 @@ class RowFormView extends ReactComponent {
                         width={width}
                     />
                 }
-                {Object.keys(ctrl.model.data.actions).length > 0 &&
+                {ctrl.model.data.actions.length > 0 &&
                     <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
                 }
             </div>
@@ -110,7 +110,7 @@ class RowFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return (
             <div className="RowFormView">
-                {(ctrl.model.getDataSource().getClassName() === 'SqlDataSource' || Object.keys(ctrl.model.data.actions).length > 0) && this.renderToolbar()}
+                {(ctrl.model.getDataSource().getClassName() === 'SqlDataSource' || ctrl.model.data.actions.length > 0) && this.renderToolbar()}
                 {this.renderFields()}
             </div>
         );

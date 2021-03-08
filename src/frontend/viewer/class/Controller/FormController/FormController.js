@@ -56,17 +56,23 @@ class FormController extends Controller {
         this.state.updated = Date.now();
     }
     getActions() {
+        return this.model.data.actions.map(action => ({
+            name : action.name,
+            title: action.caption
+        }));
+        /*
         return Object.keys(this.model.data.actions).map(name => {
             const action = this.model.data.actions[name];
             return {
                 name : action.name,
                 title: action.caption
             };
-        });
+        });*/
     }
     onActionsClick = async li => {
         // console.log('Toolbar.onActionsClick:', li);
-        const action = this.model.data.actions[li.dataset.action];
+        // const action = this.model.data.actions[li.dataset.action];
+        const action = this.model.data.actions.find(data => data.name === li.dataset.action);
         const result = await this.onActionClick(action, this.getActiveRow(true));
         if (!result) alert(`no handler for ${action.name}`);
     }
