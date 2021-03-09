@@ -81,6 +81,10 @@ class Model extends BaseModel {
         return null;
     }
 
+    getDataSource(name) {
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
+    }
+
 }
 
 module.exports = Model;

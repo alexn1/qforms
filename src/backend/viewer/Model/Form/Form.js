@@ -116,6 +116,9 @@ class Form extends Model {
     isNewMode(context) {
         return !!context.newMode;
     }
+    getField(name) {
+        return this.fields.find(field => field.getName() === name);
+    }
 
 }
 
