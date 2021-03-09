@@ -15,6 +15,10 @@ class Model extends EventEmitter {
         this.deinited = true;
     }
 
+    getAttr(name) {
+        return this.data[name];
+    }
+
     getClassName() {
         return this.data.class;
     }
@@ -22,7 +26,6 @@ class Model extends EventEmitter {
     getName() {
         return this.data.name;
     }
-
     getFullName() {
         if (this.parent) {
             return `${this.parent.getFullName()}.${this.getName()}`;
