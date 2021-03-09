@@ -36,13 +36,14 @@ class Model extends EventEmitter {
         return this.data.caption;
     }
     getDataSource(name) {
-        return this.dataSources[name];
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const dataSource = this.dataSources[data.name] = eval(`new ${data.class}(data, this)`);
+                const dataSource = eval(`new ${data.class}(data, this)`);
                 dataSource.init();
+                this.dataSources.push(dataSource);
             } catch (err) {
                 err.message = `${this.getFullName()}.${data.name}: ${err.message}`;
                 throw err;
@@ -50,8 +51,8 @@ class Model extends EventEmitter {
         }
     }
     deinitDataSources() {
-        for (const name in this.dataSources) {
-            this.dataSources[name].deinit();
+        for (const dataSource of this.dataSources) {
+            dataSource.deinit();
         }
     }
 }

@@ -1,7 +1,7 @@
 class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
-        this.dataSources = {};
+        this.dataSources = [];
         this.fields      = [];
     }
 

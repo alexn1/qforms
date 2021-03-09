@@ -5,7 +5,7 @@ class Page extends Model {
         this.parentPageName = options.parentPageName || null;
         this.id             = options.id;
         this.params         = (options.params !== undefined) ? options.params : {};
-        this.dataSources    = {};
+        this.dataSources    = [];
         this.forms          = [];
         this.modal          = !!options.modal;
     }
