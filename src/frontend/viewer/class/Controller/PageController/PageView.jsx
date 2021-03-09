@@ -1,8 +1,7 @@
 class PageView extends ReactComponent {
     getTabs() {
         const ctrl = this.props.ctrl;
-        return Object.keys(ctrl.forms).filter(name => ctrl.forms[name].model.getClassName() === 'TableForm').map(name => {
-            const form = ctrl.forms[name];
+        return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {
             return {
                 name   : form.model.getName(),
                 title  : form.model.getCaption(),
@@ -20,8 +19,7 @@ class PageView extends ReactComponent {
     }
     renderRowForms() {
         const ctrl = this.props.ctrl;
-        return Object.keys(ctrl.forms).filter(name => ctrl.forms[name].model.getClassName() === 'RowForm').map(name => {
-            const form = ctrl.forms[name];
+        return ctrl.forms.filter(form => form.model.getClassName() === 'RowForm').map(form => {
             return PageView.renderForm(form);
         });
     }

@@ -21,8 +21,8 @@ class FormController extends Controller {
     }
     init() {
         for (const field of this.model.fields) {
-            const fieldCtrl = this.fields[field.getName()] = FieldController.create(field, this);
-            fieldCtrl.init();
+            const ctrl = this.fields[field.getName()] = FieldController.create(field, this);
+            ctrl.init();
         }
     }
     deinit() {

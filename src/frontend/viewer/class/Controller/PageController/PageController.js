@@ -19,20 +19,21 @@ class PageController extends Controller {
     constructor(model, parent) {
         //console.log('PageController.constructor', model);
         super(model, parent);
-        this.forms = {};
+        this.forms = [];
     }
 
     init() {
         for (const form of this.model.forms) {
-            const ctrl = this.forms[form.getName()] = FormController.create(form, this);
+            const ctrl = FormController.create(form, this);
             ctrl.init();
+            this.forms.push(ctrl);
         }
     }
 
     deinit() {
         console.log('PageController.deinit: ' + this.model.getFullName());
-        for (const name in this.forms) {
-            this.forms[name].deinit();
+        for (const form of this.forms) {
+            form.deinit();
         }
         super.deinit();
     }
@@ -65,8 +66,8 @@ class PageController extends Controller {
     }
     isValid() {
         // console.log('PageController.isValid', this.model.getFullName());
-        for (const name in this.forms) {
-            if (!this.forms[name].isValid()) {
+        for (const form of this.forms) {
+            if (!form.isValid()) {
                 return false;
             }
         }
@@ -89,8 +90,8 @@ class PageController extends Controller {
     onFormInsert(e) {
         console.log('PageController.onFormInsert:', this.model.getFullName());
         // console.log('hasNew:', this.model.hasNew());
-        for (const name in this.forms) {
-            this.forms[name].invalidate();
+        for (const form of this.forms) {
+            form.invalidate();
         }
         this.rerender();
     }
@@ -102,8 +103,7 @@ class PageController extends Controller {
 
     isChanged() {
         // console.log('PageController.isChanged', this.model.getFullName());
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.isChanged()) {
                 // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
                 return true;
@@ -134,6 +134,6 @@ class PageController extends Controller {
         ].join('?');
     }
     getForm(name) {
-        return this.forms[name];
+        return this.forms.find(form => form.model.getName() === name);
     }
 }
