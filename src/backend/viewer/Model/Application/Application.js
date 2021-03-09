@@ -99,12 +99,12 @@ class Application extends Model {
 
     async createMenu(context) {
         const menu = {};
-        const pageNames = this.getItemNames('pageLinks').filter(pageName => {
-            return context.user ? this.authorizePage(context.user, pageName) : true;
+        const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
+            return context.user ? this.authorizePage(context.user, pageLinkName) : true;
         });
-        for (let i = 0; i < pageNames.length; i++) {
-            const pageName = pageNames[i];
-            const pageLink = this.createPageLink(pageName);
+        for (let i = 0; i < pageLinkNames.length; i++) {
+            const pageLinkName = pageLinkNames[i];
+            const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
