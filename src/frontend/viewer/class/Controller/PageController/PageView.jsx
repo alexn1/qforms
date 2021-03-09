@@ -20,10 +20,9 @@ class PageView extends ReactComponent {
     }
     renderRowForms() {
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'RowForm').map(name => {
-            const formCtrl = ctrl.forms[name];
-            return PageView.renderForm(formCtrl);
+        return Object.keys(ctrl.forms).filter(name => ctrl.forms[name].model.getClassName() === 'RowForm').map(name => {
+            const form = ctrl.forms[name];
+            return PageView.renderForm(form);
         });
     }
     renderCaption() {
