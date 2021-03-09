@@ -33,8 +33,6 @@ class Model extends EventEmitter {
         return this.data.caption;
     }
     getDataSource(name) {
-        const dataSource = this.dataSources[name];
-        if (!dataSource) throw new Error(`${this.getFullName()}: no data source: ${name}`);
-        return dataSource;
+        return this.dataSources[name];
     }
 }

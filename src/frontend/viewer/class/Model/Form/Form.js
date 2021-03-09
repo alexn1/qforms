@@ -100,7 +100,9 @@ class Form extends Model {
     }
 
     getDefaultDataSource() {
-        return this.getDataSource('default');
+        const dataSource = this.getDataSource('default');
+        if (!dataSource) throw new Error(`${this.getFullName()}: no default data source`);
+        return dataSource;
     }
 
     getPage() {

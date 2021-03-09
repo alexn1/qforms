@@ -30,12 +30,12 @@ class ComboBoxField extends Field {
     getComboBoxDataSource() {
         const name = this.data.dataSourceName;
         if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
-        if (this.getForm().dataSources[name]) {
-            return this.getForm().dataSources[name];
-        } else if (this.getPage().dataSources[name]) {
-            return this.getPage().dataSources[name];
-        } else if (this.getApp().dataSources[name]) {
-            return this.getApp().dataSources[name];
+        if (this.getForm().getDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        } else if (this.getPage().getDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        } else if (this.getApp().getDataSource(name)) {
+            return this.getApp().getDataSource(name);
         }
         return null;
     }
