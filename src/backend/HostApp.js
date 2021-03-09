@@ -243,7 +243,7 @@ class HostApp {
     async update(req, res, context) {
         console.log('HostApp.update', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const form = page.forms[req.body.form];
+        const form = page.getForm(req.body.form);
         const result = await form.update(context);
         Object.keys(result).map(key => DataSource.encodeRow(result[key]));
         if (result === undefined) throw new Error('action update: result is undefined');
@@ -259,7 +259,7 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
             } else {
                 dataSource = page.dataSources[req.body.ds];
             }
@@ -283,7 +283,7 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
             } else {
                 dataSource = page.dataSources[req.body.ds];
             }
@@ -307,7 +307,7 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.forms[req.body.form].dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
             } else {
                 dataSource = page.dataSources[req.body.ds];
             }
@@ -326,7 +326,7 @@ class HostApp {
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.forms[req.body.form].dataSources.default;
+        const dataSource = page.getForm(req.body.form).dataSources.default;
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
@@ -345,7 +345,7 @@ class HostApp {
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.forms[req.body.form].dataSources.default;
+        const dataSource = page.getForm(req.body.form).dataSources.default;
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
@@ -366,7 +366,7 @@ class HostApp {
         if (req.body.page) {
             if (req.body.form) {
                 const page = await application.getPage(context, req.body.page);
-                model = page.forms[req.body.form];
+                model = page.getForm(req.body.form);
             } else {
                 model = await application.getPage(context, req.body.page);
             }
