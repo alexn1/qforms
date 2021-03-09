@@ -236,12 +236,9 @@ class Application extends Model {
         const database = this.databases.find(database => database.getName() === name);
         if (!database) throw new Error(`no database with name: ${name}`);
         return database;
-        // if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
-        // return this.databases[name];
-
     }
 
-    getTitle(context) {
+    getTitle(context, data) {
         if (context.query.page) {
             const page = this.pages[context.query.page];
             if (!page) throw new Error(`no page: ${context.query.page}`);
