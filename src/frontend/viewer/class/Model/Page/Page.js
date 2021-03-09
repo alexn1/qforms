@@ -6,7 +6,7 @@ class Page extends Model {
         this.id             = options.id;
         this.params         = (options.params !== undefined) ? options.params : {};
         this.dataSources    = {};
-        this.forms          = {};
+        this.forms          = [];
         this.modal          = !!options.modal;
     }
 
@@ -14,9 +14,9 @@ class Page extends Model {
         this.initParams();
         this.createDataSources();
         for (const data of this.data.forms) {
-            const name = data.name;
-            this.forms[name] = eval(`new ${data.class}(data, this)`);
-            this.forms[name].init();
+            const form = /*this.forms[data.name] =*/ eval(`new ${data.class}(data, this)`);
+            form.init();
+            this.forms.push(form);
         }
         // console.log('page params:', this.params);
     }
@@ -25,8 +25,8 @@ class Page extends Model {
         // console.log('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
-        for (const name in this.forms) {
-            this.forms[name].deinit();
+        for (const form of this.forms) {
+            form.deinit();
         }
         super.deinit();
     }

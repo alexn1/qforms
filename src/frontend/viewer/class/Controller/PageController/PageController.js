@@ -23,9 +23,8 @@ class PageController extends Controller {
     }
 
     init() {
-        for (const name in this.model.forms) {
-            const form = this.model.forms[name];
-            const ctrl = this.forms[name] = FormController.create(form, this);
+        for (const form of this.model.forms) {
+            const ctrl = this.forms[form.getName()] = FormController.create(form, this);
             ctrl.init();
         }
     }
