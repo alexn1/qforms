@@ -134,4 +134,7 @@ class PageController extends Controller {
             ].join('&')
         ].join('?');
     }
+    getForm(name) {
+        return this.forms[name];
+    }
 }
