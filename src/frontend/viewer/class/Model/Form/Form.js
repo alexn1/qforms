@@ -8,7 +8,6 @@ class Form extends Model {
     init() {
         // dataSources
         for (const data of this.data.dataSources) {
-            // const data = this.data.dataSources[name];
             const name = data.name;
             try {
                 this.dataSources[name] = eval(`new ${data.class}(data, this)`);
@@ -21,7 +20,6 @@ class Form extends Model {
 
         // fields
         for (const data of this.data.fields) {
-            // const data = this.data.fields[name];
             const name = data.name;
             this.fields[name] = eval(`new ${data.class}(data, this)`);
             this.fields[name].init();

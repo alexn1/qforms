@@ -13,13 +13,11 @@ class Page extends Model {
     init() {
         this.initParams();
         for (const data of this.data.dataSources) {
-            // const data = this.data.dataSources[name];
             const name = data.name;
             this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
         }
         for (const data of this.data.forms) {
-            // const data = this.data.forms[name];
             const name = data.name;
             this.forms[name] = eval(`new ${data.class}(data, this)`);
             this.forms[name].init();
