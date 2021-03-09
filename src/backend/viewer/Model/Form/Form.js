@@ -60,8 +60,8 @@ class Form extends Model {
     }
 
     dumpRowToParams(row, params) {
-        for (const name in this.fields) {
-            this.fields[name].dumpRowValueToParams(row, params);
+        for (const field of this.fields) {
+            field.dumpRowValueToParams(row, params);
         }
         //console.log(params);
     }

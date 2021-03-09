@@ -72,7 +72,7 @@ class DataSource extends Model {
 
     calcColumns(row) {
         for (const name in this.parent.fields) {
-            const field = this.parent.fields[name];
+            const field = this.parent.getField(name);
             const columnName = field.getAttr('column');
             if (!columnName) {
                 throw new Error(`[${this.getFullName()}]: no column name`);
