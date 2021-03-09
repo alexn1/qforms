@@ -114,4 +114,7 @@ class Form extends Model {
     async refresh() {
         await this.getDataSource().refresh();
     }
+    getDataSource(name) {
+        return this.dataSources[name];
+    }
 }
