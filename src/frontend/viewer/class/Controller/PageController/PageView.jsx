@@ -1,14 +1,12 @@
 class PageView extends ReactComponent {
     getTabs() {
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        return Object.keys(model.forms).filter(name => model.forms[name].getClassName() === 'TableForm').map(name => {
-            const form = model.forms[name];
-            const formCtrl = ctrl.forms[name];
+        return Object.keys(ctrl.forms).filter(name => ctrl.forms[name].model.getClassName() === 'TableForm').map(name => {
+            const form = ctrl.forms[name];
             return {
-                name   : form.getName(),
-                title  : form.getCaption(),
-                content: PageView.renderForm(formCtrl)
+                name   : form.model.getName(),
+                title  : form.model.getCaption(),
+                content: PageView.renderForm(form)
             };
         });
     }
