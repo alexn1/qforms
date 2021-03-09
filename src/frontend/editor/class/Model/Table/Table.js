@@ -6,10 +6,9 @@ class Table extends Model {
     }
 
     init() {
-        for (const name in this.data.columns) {
-            this.createColumn(this.data.columns[name]);
+        for (const data of this.data.columns) {
+            this.createColumn(data);
         }
-        if (this.data.columns2) this.data.columns2.forEach(data => this.createColumn(data));
     }
 
     createColumn(data) {

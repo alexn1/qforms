@@ -8,23 +8,21 @@ class Application extends Model {
     }
 
     init() {
+        console.log('Application.init', this.data);
         // databases
-        for (const name in this.data.databases) {
-            this.createDatabase(this.data.databases[name]);
+        for (const data of this.data.databases) {
+            this.createDatabase(data);
         }
-        if (this.data.databases2) this.data.databases2.forEach(data => this.createDatabase(data));
 
         // dataSources
-        for (const name in this.data.dataSources) {
-            this.createDataSource(this.data.dataSources[name]);
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
         }
-        if (this.data.dataSources2) this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // pageLinks
-        for (const name in this.data.pageLinks) {
-            this.createPageLink(this.data.pageLinks[name]);
+        for (const data of this.data.pageLinks) {
+            this.createPageLink(data);
         }
-        if (this.data.pageLinks2) this.data.pageLinks2.forEach(data => this.createPageLink(data));
     }
 
     createDatabase(data) {

@@ -10,22 +10,19 @@ class Form extends Model {
 
     init() {
         // dataSources
-        for (const name in this.data.dataSources) {
-            this.createDataSource(this.data.dataSources[name]);
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
         }
-        if (this.data.dataSources2) this.data.dataSources2.forEach(data => this.createDataSource(data));
 
         // fields
-        for (const name in this.data.fields) {
-            this.createField(this.data.fields[name]);
+        for (const data of this.data.fields) {
+            this.createField(data);
         }
-        if (this.data.fields2) this.data.fields2.forEach(data => this.createField(data));
 
         // actions
-        for (const name in this.data.actions) {
-            this.createAction(this.data.actions[name]);
+        for (const data of this.data.actions) {
+            this.createAction(data);
         }
-        if (this.data.actions2) this.data.actions2.forEach(data => this.createAction(data));
     }
 
     createDataSource(data) {

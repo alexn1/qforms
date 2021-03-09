@@ -6,10 +6,9 @@ class DataSource extends Model {
     }
 
     init() {
-        for (const name in this.data.keyColumns) {
-            this.createKeyColumn(this.data.keyColumns[name]);
+        for (const data of this.data.keyColumns) {
+            this.createKeyColumn(data);
         }
-        if (this.data.keyColumns2) this.data.keyColumns2.forEach(data => this.createKeyColumn(data));
     }
 
     createKeyColumn(data) {
