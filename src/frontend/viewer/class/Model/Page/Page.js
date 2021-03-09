@@ -14,7 +14,7 @@ class Page extends Model {
         this.initParams();
         this.createDataSources();
         for (const data of this.data.forms) {
-            const form = /*this.forms[data.name] =*/ eval(`new ${data.class}(data, this)`);
+            const form = eval(`new ${data.class}(data, this)`);
             form.init();
             this.forms.push(form);
         }
@@ -43,22 +43,20 @@ class Page extends Model {
 
     async update() {
         console.log('Page.update', this.getFullName());
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) await form.update();
         }
     }
 
     discard() {
         console.log('Page.discard', this.getFullName());
-        for (const name in this.forms) {
-            this.forms[name].discard();
+        for (const form of this.forms) {
+            form.discard();
         }
     }
 
     getKey() {
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.getClassName() === 'RowForm') {
                 return form.getKey();
             }
@@ -67,8 +65,7 @@ class Page extends Model {
     }
 
     hasRowFormWithDefaultDs() {
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.getClassName() === 'RowForm' && form.getDefaultDataSource()) {
                 return true;
             }
@@ -77,8 +74,7 @@ class Page extends Model {
     }
 
     hasRowFormWithDefaultSqlDataSource() {
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.getClassName() === 'RowForm' && form.getDefaultDataSource().getClassName() === 'SqlDataSource') {
                 return true;
             }
@@ -87,16 +83,14 @@ class Page extends Model {
     }
 
     hasRowForm() {
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.getClassName() === 'RowForm') return true;
         }
         return false;
     }
 
     hasTableForm() {
-        for (const name in this.forms) {
-            const form = this.forms[name];
+        for (const form of this.forms) {
             if (form.getClassName() === 'TableForm') {
                 return true;
             }
@@ -109,8 +103,8 @@ class Page extends Model {
     }
 
     hasNew() {
-        for (const name in this.forms) {
-            if (this.forms[name].hasNew()) {
+        for (const form of this.forms) {
+            if (form.hasNew()) {
                 return true;
             }
         }
