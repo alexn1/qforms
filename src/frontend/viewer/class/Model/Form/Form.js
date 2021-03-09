@@ -2,7 +2,7 @@ class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = {};
-        this.fields      = {};
+        this.fields      = [];
     }
 
     init() {
@@ -11,24 +11,24 @@ class Form extends Model {
 
         // fields
         for (const data of this.data.fields) {
-            const name = data.name;
-            this.fields[name] = eval(`new ${data.class}(data, this)`);
-            this.fields[name].init();
+            const field = eval(`new ${data.class}(data, this)`);
+            field.init();
+            this.fields.push(field);
         }
     }
 
     deinit() {
         // console.log('Form.deinit:', this.getFullName());
         this.deinitDataSources();
-        for (const name in this.fields) {
-            this.fields[name].deinit();
+        for (const field of this.fields) {
+            field.deinit();
         }
         super.deinit();
     }
 
     fillDefaultValues(row) {
-        for (const name in this.fields) {
-            this.fields[name].fillDefaultValue(row);
+        for (const field of this.fields) {
+            field.fillDefaultValue(row);
         }
     }
 

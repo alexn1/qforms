@@ -15,8 +15,8 @@ class RowForm extends Form {
     }
 
     fillParams(row) {
-        for (const name in this.fields) {
-            this.fields[name].valueToPageParams(row);
+        for (const field of this.fields) {
+            field.valueToPageParams(row);
         }
     }
 
@@ -55,7 +55,7 @@ class RowForm extends Form {
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
             fields.forEach(name => {
-                this.fields[name].valueToPageParams(this.getRow())
+                this.getField(name).valueToPageParams(this.getRow())
             });
         }
     }
