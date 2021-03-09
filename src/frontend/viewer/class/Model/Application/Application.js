@@ -1,7 +1,7 @@
 class Application extends Model {
     constructor(data) {
         super(data);
-        this.databases   = {};
+        this.databases   = [];
         this.dataSources = {};
     }
 
@@ -11,14 +11,13 @@ class Application extends Model {
 
         // databases
         for (const data of this.data.databases) {
-            const name = data.name;
-            this.databases[name] = new Database(data, this);
-            this.databases[name].init();
+            const database = new Database(data, this);
+            database.init();
+            this.databases.push(database);
         }
 
         // dataSources
         for (const data of this.data.dataSources) {
-            // const data = this.data.dataSources[name];
             const name = data.name;
             this.dataSources[name] = eval(`new ${data.class}(data, this)`);
             this.dataSources[name].init();
@@ -49,8 +48,9 @@ class Application extends Model {
     }
 
     getDatabase(name) {
-        if (!this.databases[name]) throw new Error(`no database with name: ${name}`);
-        return this.databases[name];
+        const database = this.databases.find(database => database.getName() === name);
+        if (!database) throw new Error(`no database: ${name}`);
+        return database;
     }
 
     getText() {
