@@ -77,6 +77,9 @@ class Page extends Model {
     getTitle() {
         return this.getAttr('caption');
     }
+    getForm(name) {
+        return this.forms.find(form => form.getName() === name);
+    }
 }
 
 module.exports = Page;

@@ -37,7 +37,7 @@ class Field extends Model {
         // console.log('Field.dumpRowValueToParams', this.getFullName());
         const name  = this.getFullName();
         const column = this.getAttr('column');
-        // if (this.getForm().getDataSource() && this.getForm().getDataSource().getDbType(column) === 'text') return;
+        // if (this.getForm().getDefaultDataSource() && this.getForm().getDefaultDataSource().getDbType(column) === 'text') return;
         if (this.isParam()) {
             params[name] = Helper.decodeValue(row[column]);
         }
