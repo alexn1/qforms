@@ -79,4 +79,7 @@ class FormController extends Controller {
     async onActionClick(action, row) {
         console.log('FormController.onActionClick', action, row);
     }
+    getField(name) {
+        return this.fields[name];
+    }
 }
