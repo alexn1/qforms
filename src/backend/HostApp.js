@@ -259,12 +259,12 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
             } else {
-                dataSource = page.dataSources[req.body.ds];
+                dataSource = page.getDataSource(req.body.ds);
             }
         } else {
-            dataSource = application.dataSources[req.body.ds];
+            dataSource = application.getDataSource(req.body.ds);
         }
         const [rows, count] = await dataSource.select(context);
         DataSource.encodeRows(rows);
@@ -283,12 +283,12 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
             } else {
-                dataSource = page.dataSources[req.body.ds];
+                dataSource = page.getDataSource(req.body.ds);
             }
         } else {
-            dataSource = application.dataSources[req.body.ds];
+            dataSource = application.getDataSource(req.body.ds);
         }
         const row = await dataSource.selectSingle(context);
         DataSource.encodeRow(row);
@@ -307,12 +307,12 @@ class HostApp {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.getForm(req.body.form).dataSources[req.body.ds];
+                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
             } else {
-                dataSource = page.dataSources[req.body.ds];
+                dataSource = page.getDataSource(req.body.ds);
             }
         } else {
-            dataSource = application.dataSources[req.body.ds];
+            dataSource = application.getDataSource(req.body.ds);
         }
         const [rows, count] = await dataSource.selectMultiple(context);
         DataSource.encodeRows(rows);
