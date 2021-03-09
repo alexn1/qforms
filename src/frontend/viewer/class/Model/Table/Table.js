@@ -1,19 +1,20 @@
 class Table extends Model {
     constructor(...args) {
         super(...args);
-        this.columns = {};
+        this.columns = [];
     }
     init() {
         // console.log('Table.init', this.getFullName());
         for (const data of this.data.columns) {
-            const name = data.name;
-            this.columns[name] = new Column(data, this);
-            this.columns[name].init();
+            const column = new Column(data, this);
+            column.init();
+            this.columns.push(column);
         }
     }
 
     getColumn(name) {
-        if (!this.columns[name]) throw new Error(`table ${this.getFullName()}: no column ${name}`);
-        return this.columns[name];
+        const column = this.columns.find(column => column.getName() === name);
+        if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
+        return column;
     }
 }
