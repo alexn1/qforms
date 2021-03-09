@@ -67,18 +67,18 @@ class Form extends Model {
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
         if (this.getPage().deinited) throw new Error('page already deinited');
-        if (!this.isChanged() && !this.getDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
-        await this.getDataSource().update();
+        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
+        await this.getDefaultDataSource().update();
     }
 
     isChanged() {
         // console.log('Form.isChanged', this.getFullName());
-        return this.getDataSource().isChanged();
+        return this.getDefaultDataSource().isChanged();
     }
 
     hasNew() {
         // console.log('Form.hasNew', this.getFullName());
-        return this.getDataSource().hasNew();
+        return this.getDefaultDataSource().hasNew();
     }
 
     async rpc(name, params) {
@@ -99,7 +99,7 @@ class Form extends Model {
         return null;
     }
 
-    getDataSource() {
+    getDefaultDataSource() {
         if (!this.dataSources.default) throw new Error(`${this.getFullName()}: no default data source`);
         return this.dataSources.default;
     }
@@ -112,9 +112,6 @@ class Form extends Model {
         return this.parent.parent;
     }
     async refresh() {
-        await this.getDataSource().refresh();
-    }
-    getDataSource(name) {
-        return this.dataSources[name];
+        await this.getDefaultDataSource().refresh();
     }
 }

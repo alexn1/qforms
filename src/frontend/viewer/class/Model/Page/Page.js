@@ -75,7 +75,7 @@ class Page extends Model {
     hasRowFormWithDefaultDs() {
         for (const name in this.forms) {
             const form = this.forms[name];
-            if (form.getClassName() === 'RowForm' && form.getDataSource()) {
+            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource()) {
                 return true;
             }
         }
@@ -85,7 +85,7 @@ class Page extends Model {
     hasRowFormWithDefaultSqlDataSource() {
         for (const name in this.forms) {
             const form = this.forms[name];
-            if (form.getClassName() === 'RowForm' && form.getDataSource().getClassName() === 'SqlDataSource') {
+            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource().getClassName() === 'SqlDataSource') {
                 return true;
             }
         }
@@ -152,9 +152,5 @@ class Page extends Model {
         });
         if (result.errorMessage) throw new Error(`rpc error: ${result.errorMessage}`);
         return result;
-    }
-
-    getDataSource(name) {
-        return this.dataSources[name];
     }
 }

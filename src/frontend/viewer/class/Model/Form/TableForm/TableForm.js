@@ -4,7 +4,7 @@ class TableForm extends Form {
     // onDataSourceChanged(e) {
     //     const dataSource = e.source;
     //     if (dataSource.getName() !== 'default') return;
-    //     this.getDataSource().update();
+    //     this.getDefaultDataSource().update();
     // }
 
 }

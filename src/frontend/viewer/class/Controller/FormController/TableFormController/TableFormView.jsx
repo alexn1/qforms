@@ -2,7 +2,7 @@ class TableFormView extends ReactComponent {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-        const dataSource = model.getDataSource();
+        const dataSource = model.getDefaultDataSource();
         const width = '90px';
         return (
             <div className="toolbar">
@@ -46,7 +46,7 @@ class TableFormView extends ReactComponent {
     renderPaging() {
         const ctrl = this.props.ctrl;
         const model = this.props.ctrl.model;
-        const dataSource = model.getDataSource();
+        const dataSource = model.getDefaultDataSource();
         const text = model.getApp().getText();
         return (
             <div className="paging">
@@ -57,7 +57,7 @@ class TableFormView extends ReactComponent {
                     <div className="gotoBlock">
                         <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
                         <ComboBox
-                            value={ctrl.model.getDataSource().getFrame().toString()}
+                            value={ctrl.model.getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                             items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
                             ({value: (i+1).toString(), title: (i+1).toString()})
@@ -93,7 +93,7 @@ class TableFormView extends ReactComponent {
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        const dataSource = ctrl.model.getDataSource();
+        const dataSource = ctrl.model.getDefaultDataSource();
         return (
             <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
@@ -102,7 +102,7 @@ class TableFormView extends ReactComponent {
                     name={ctrl.model.getFullName()}
                     columns={ctrl.getGridColumns()}
                     rows={ctrl.getRows()}
-                    getRowKey={row => ctrl.model.getDataSource().getRowKey(row)}
+                    getRowKey={row => ctrl.model.getDefaultDataSource().getRowKey(row)}
                     onDoubleClick={ctrl.onGridCellDblClick}
                     onActiveRowChange={ctrl.onActiveRowChange}
                     getActiveRowIndex={ctrl.getActiveRowIndex}

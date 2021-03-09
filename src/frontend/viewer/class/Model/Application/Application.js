@@ -67,8 +67,4 @@ class Application extends Model {
         if (result.errorMessage) throw new Error(`rpc error: ${result.errorMessage}`);
         return result;
     }
-
-    getDataSource(name) {
-        return this.dataSources[name];
-    }
 }

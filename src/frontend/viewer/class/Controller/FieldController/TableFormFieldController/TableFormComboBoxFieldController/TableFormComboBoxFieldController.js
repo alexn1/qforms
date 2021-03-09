@@ -134,7 +134,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         //console.log(ea);
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
-                const key = this.model.getForm().getDataSource().getRowKey(this.model.getForm().row);
+                const key = this.model.getForm().getDefaultDataSource().getRowKey(this.model.getForm().row);
                 const view = this.views[key];
                 this._createOption(view, ea.i);
                 break;

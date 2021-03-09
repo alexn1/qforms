@@ -5,7 +5,7 @@ class RowFormView extends ReactComponent {
         const width = '90px';
         return (
             <div className="toolbar">
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         key="edit"
                         title="Edit"
@@ -14,7 +14,7 @@ class RowFormView extends ReactComponent {
                         width={width}
                     />
                 }
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         key="save"
                         title="Save"
@@ -24,7 +24,7 @@ class RowFormView extends ReactComponent {
                         width={width}
                     />
                 }
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         key="cancel"
                         title="Finish"
@@ -33,7 +33,7 @@ class RowFormView extends ReactComponent {
                         width={width}
                     />
                 }
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         key="discard"
                         title="Discard"
@@ -43,7 +43,7 @@ class RowFormView extends ReactComponent {
                         width={width}
                     />
                 }
-                {ctrl.model.getDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
                     <Button
                         key="refresh"
                         title="Refresh"
@@ -110,7 +110,7 @@ class RowFormView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return (
             <div className="RowFormView">
-                {(ctrl.model.getDataSource().getClassName() === 'SqlDataSource' || ctrl.model.data.actions.length > 0) && this.renderToolbar()}
+                {(ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' || ctrl.model.data.actions.length > 0) && this.renderToolbar()}
                 {this.renderFields()}
             </div>
         );

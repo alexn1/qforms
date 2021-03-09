@@ -2,7 +2,7 @@ class RowForm extends Form {
     init() {
         super.init();
         if (this.isNewMode()) {
-            this.getDataSource().newRow(this.createRow());
+            this.getDefaultDataSource().newRow(this.createRow());
         }
         this.fillParams(this.getRow()); // dump row values to page params
     }
@@ -31,12 +31,12 @@ class RowForm extends Form {
     }
 
     getRow(withChanges) {
-        return this.getDataSource().getSingleRow(withChanges);
+        return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 
     getKey() {
         // console.log('RowForm.getKey', this.getFullName());
-        const dataSource = this.getDataSource();
+        const dataSource = this.getDefaultDataSource();
         if (dataSource.getClassName() === 'SqlDataSource') {
             const row = this.getRow();
             return dataSource.getRowKey(row);
@@ -52,8 +52,8 @@ class RowForm extends Form {
 
     discard(fields) {
         console.log('RowForm.discard', fields);
-        if (this.getDataSource().isChanged()) {
-            this.getDataSource().discard();
+        if (this.getDefaultDataSource().isChanged()) {
+            this.getDefaultDataSource().discard();
             fields.forEach(name => {
                 this.fields[name].valueToPageParams(this.getRow())
             });

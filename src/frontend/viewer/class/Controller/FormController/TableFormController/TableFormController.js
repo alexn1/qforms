@@ -38,7 +38,7 @@ class TableFormController extends FormController {
         });
     }
     getRows() {
-        return this.model.getDataSource().getRows();
+        return this.model.getDefaultDataSource().getRows();
     }
     onNewClick = async e => {
         await this.new();
@@ -52,7 +52,7 @@ class TableFormController extends FormController {
     onDeleteClick = e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.state.activeRowKey);
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
-            this.model.getDataSource().delete(this.state.activeRowKey);
+            this.model.getDefaultDataSource().delete(this.state.activeRowKey);
         }
     }
     onGridCellDblClick = async (row) => {
@@ -60,7 +60,7 @@ class TableFormController extends FormController {
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
         // console.log('row:', row);
-        const key = this.model.getDataSource().getRowKey(row);
+        const key = this.model.getDefaultDataSource().getRowKey(row);
         // console.log('key:', key);
         switch (this.model.data.editMethod) {
             // case 'table':
@@ -86,7 +86,7 @@ class TableFormController extends FormController {
         if (this.model.data.newRowMode === 'oneclick') {
             const row = {};
             this.model.fillDefaultValues(row);
-            this.model.getDataSource().insert(row);
+            this.model.getDefaultDataSource().insert(row);
         } else if (this.model.data.newRowMode === 'editform') {
             if (!this.model.data.itemEditPage) {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
@@ -110,7 +110,7 @@ class TableFormController extends FormController {
             }
             const row = {};
             this.model.fillDefaultValues(row);
-            const key = await this.model.getDataSource().insert(row);
+            const key = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
                 name: this.model.data.itemEditPage,
                 key : key
@@ -121,7 +121,7 @@ class TableFormController extends FormController {
             }
             const row = {};
             this.model.fillDefaultValues(row);
-            const key2 = await this.model.getDataSource().insert(row);
+            const key2 = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
                 name: this.model.data.itemCreatePage,
                 key : key2
@@ -170,22 +170,22 @@ class TableFormController extends FormController {
     }
     onActiveRowChange = i => {
         // console.log('TableFormController.onActiveRowChange', i);
-        const rows = this.model.getDataSource().getRows();
-        this.state.activeRowKey = this.model.getDataSource().getRowKey(rows[i]);
+        const rows = this.model.getDefaultDataSource().getRows();
+        this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
         this.rerender();
     }
     getActiveRowIndex = () => {
         // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);
         if (this.state.activeRowKey) {
-            const rows = this.model.getDataSource().getRows();
-            const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
+            const rows = this.model.getDefaultDataSource().getRows();
+            const row = this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
             if (row) {
                 const i = rows.indexOf(row);
                 if (i === -1) throw new Error('cannot find active row')
                 return i;
             } else {
                 // console.log('rows:', rows);
-                // console.log('this.rowsByKey:', this.model.getDataSource().rowsByKey);
+                // console.log('this.rowsByKey:', this.model.getDefaultDataSource().rowsByKey);
                 console.error('no active row in rows');
             }
         }
@@ -193,12 +193,12 @@ class TableFormController extends FormController {
     }
     getActiveRow() {
         if (!this.state.activeRowKey) throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDataSource().getRowByKey(this.state.activeRowKey);
+        return this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
         if (this.state.activeRowKey !== null) {
-            const row = this.model.getDataSource().getRowByKey(this.state.activeRowKey);
+            const row = this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
             if (row) return true;
         }
         return false;
@@ -206,30 +206,30 @@ class TableFormController extends FormController {
     onFrameChanged = value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
-        this.model.getDataSource().setFrame(frame);
-        this.model.getDataSource().refresh();
+        this.model.getDefaultDataSource().setFrame(frame);
+        this.model.getDefaultDataSource().refresh();
         this.rerender();
     }
     onNextClick = () => {
         console.log('TableFormController.onNextClick');
-        const frame = this.model.getDataSource().getFrame() + 1;
-        this.model.getDataSource().setFrame(frame);
-        this.model.getDataSource().refresh();
+        const frame = this.model.getDefaultDataSource().getFrame() + 1;
+        this.model.getDefaultDataSource().setFrame(frame);
+        this.model.getDefaultDataSource().refresh();
         this.rerender();
     }
 
     onPreviousClick = () => {
         console.log('TableFormController.onPreviousClick');
-        const frame = this.model.getDataSource().getFrame() - 1;
-        this.model.getDataSource().setFrame(frame);
-        this.model.getDataSource().refresh();
+        const frame = this.model.getDefaultDataSource().getFrame() - 1;
+        this.model.getDefaultDataSource().setFrame(frame);
+        this.model.getDefaultDataSource().refresh();
         this.rerender();
     }
     canPrev() {
-        return this.model.getDataSource().getFrame() > 1;
+        return this.model.getDefaultDataSource().getFrame() > 1;
     }
     canNext() {
-        const ds = this.model.getDataSource();
+        const ds = this.model.getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
 }

@@ -51,7 +51,7 @@ class Field extends Model {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = Field.encodeValue(value);
-        this.getForm().getDataSource().setValue(row, this.data.column, rawValue);
+        this.getForm().getDefaultDataSource().setValue(row, this.data.column, rawValue);
         this.valueToPageParams(row);
     }
 
@@ -62,12 +62,12 @@ class Field extends Model {
     isChanged(row) {
         // console.log('Field.isChanged', this.getFullName());
         if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
-        return this.getDataSource().isRowColumnChanged(row, this.data.column);
+        return this.getDefaultDataSource().isRowColumnChanged(row, this.data.column);
     }
 
     getRawValue(row) {
         if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm().getDataSource().getValue(row, this.data.column);
+        return this.getForm().getDefaultDataSource().getValue(row, this.data.column);
     }
 
     hasColumn() {
@@ -92,23 +92,23 @@ class Field extends Model {
         throw new Error(`${this.getFullName()}: no column and no value in field`);
     }
 
-    getDataSource() {
-        return this.getForm().getDataSource();
+    getDefaultDataSource() {
+        return this.getForm().getDefaultDataSource();
     }
 
     getType() {
-        const dataSource = this.getDataSource();
+        const dataSource = this.getDefaultDataSource();
         if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
-            return this.getDataSource().getType(this.data.column);
+            return this.getDefaultDataSource().getType(this.data.column);
         }
         if (this.data.type) return this.data.type;
         throw new Error(`${this.getFullName()}: field type empty`);
     }
 
     getDbType() {
-        const dataSource = this.getDataSource();
+        const dataSource = this.getDefaultDataSource();
         if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
-            return this.getDataSource().getDbType(this.data.column);
+            return this.getDefaultDataSource().getDbType(this.data.column);
         }
         return null;
     }
