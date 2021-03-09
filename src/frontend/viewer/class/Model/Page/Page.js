@@ -12,11 +12,7 @@ class Page extends Model {
 
     init() {
         this.initParams();
-        for (const data of this.data.dataSources) {
-            const name = data.name;
-            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
-            this.dataSources[name].init();
-        }
+        this.createDataSources();
         for (const data of this.data.forms) {
             const name = data.name;
             this.forms[name] = eval(`new ${data.class}(data, this)`);
@@ -28,9 +24,7 @@ class Page extends Model {
     deinit() {
         // console.log('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
-        for (const name in this.dataSources) {
-            this.dataSources[name].deinit();
-        }
+        this.deinitDataSources();
         for (const name in this.forms) {
             this.forms[name].deinit();
         }

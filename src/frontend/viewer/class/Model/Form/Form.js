@@ -7,16 +7,7 @@ class Form extends Model {
 
     init() {
         // dataSources
-        for (const data of this.data.dataSources) {
-            const name = data.name;
-            try {
-                this.dataSources[name] = eval(`new ${data.class}(data, this)`);
-                this.dataSources[name].init();
-            } catch (err) {
-                err.message = `${this.getFullName()}.${name}: ${err.message}`;
-                throw err;
-            }
-        }
+        this.createDataSources();
 
         // fields
         for (const data of this.data.fields) {
@@ -28,9 +19,7 @@ class Form extends Model {
 
     deinit() {
         // console.log('Form.deinit:', this.getFullName());
-        for (const dsName in this.dataSources) {
-            this.dataSources[dsName].deinit();
-        }
+        this.deinitDataSources();
         for (const name in this.fields) {
             this.fields[name].deinit();
         }

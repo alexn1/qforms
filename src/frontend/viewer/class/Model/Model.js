@@ -35,4 +35,21 @@ class Model extends EventEmitter {
     getDataSource(name) {
         return this.dataSources[name];
     }
+    createDataSources() {
+        for (const data of this.data.dataSources) {
+            const name = data.name;
+            try {
+                this.dataSources[name] = eval(`new ${data.class}(data, this)`);
+                this.dataSources[name].init();
+            } catch (err) {
+                err.message = `${this.getFullName()}.${name}: ${err.message}`;
+                throw err;
+            }
+        }
+    }
+    deinitDataSources() {
+        for (const name in this.dataSources) {
+            this.dataSources[name].deinit();
+        }
+    }
 }

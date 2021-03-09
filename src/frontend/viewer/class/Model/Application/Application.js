@@ -17,17 +17,11 @@ class Application extends Model {
         }
 
         // dataSources
-        for (const data of this.data.dataSources) {
-            const name = data.name;
-            this.dataSources[name] = eval(`new ${data.class}(data, this)`);
-            this.dataSources[name].init();
-        }
+        this.createDataSources();
     }
 
     deinit() {
-        for (const name in this.dataSources) {
-            this.dataSources[name].deinit();
-        }
+        this.deinitDataSources();
         // TODO: add deinit on opened pages
         super.deinit();
     }
