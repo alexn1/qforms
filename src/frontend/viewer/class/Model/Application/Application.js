@@ -16,7 +16,7 @@ class Application extends Model {
             this.databases.push(database);
         }
 
-        // dataSources
+        // data sources
         this.createDataSources();
     }
 

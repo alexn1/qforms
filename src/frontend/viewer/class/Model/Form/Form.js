@@ -6,7 +6,7 @@ class Form extends Model {
     }
 
     init() {
-        // dataSources
+        // data sources
         this.createDataSources();
 
         // fields
