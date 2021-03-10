@@ -326,7 +326,7 @@ class HostApp {
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.getForm(req.body.form).dataSources.default;
+        const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
@@ -345,7 +345,7 @@ class HostApp {
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
         const page = await this.getApplication(req, context).getPage(context, req.body.page);
-        const dataSource = page.getForm(req.body.form).dataSources.default;
+        const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
