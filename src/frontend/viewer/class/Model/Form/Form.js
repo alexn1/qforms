@@ -104,4 +104,7 @@ class Form extends Model {
     async refresh() {
         await this.getDefaultDataSource().refresh();
     }
+    getField(name) {
+        return this.fields.find(field => field.getName() === name);
+    }
 }
