@@ -4,7 +4,6 @@ class ComboBoxField extends Field {
         let value = null;
         if (row[this.data.displayColumn]) {
             try {
-                // value = JSON.parse(row[this.data.displayColumn], Helper.dateTimeReviver);
                 value = Helper.decodeValue(row[this.data.displayColumn]);
             } catch (err) {
                 console.log('cannot parse:', row[this.data.displayColumn]);
@@ -23,7 +22,6 @@ class ComboBoxField extends Field {
         if (!row[this.data.valueColumn]) {
             throw new Error('no valueColumn in ComboBox data source');
         }
-        // return JSON.parse(row[this.data.valueColumn], Helper.dateTimeReviver);
         return Helper.decodeValue(row[this.data.valueColumn]);
     }
 

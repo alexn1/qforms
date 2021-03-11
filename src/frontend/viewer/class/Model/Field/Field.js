@@ -81,7 +81,6 @@ class Field extends Model {
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
             try {
-                // return JSON.parse(rawValue, Helper.dateTimeReviver);
                 return Helper.decodeValue(rawValue);
             } catch (err) {
                 console.log('rawValue:', this.getFullName(), rawValue);
