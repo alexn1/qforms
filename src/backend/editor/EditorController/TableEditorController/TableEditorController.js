@@ -25,9 +25,9 @@ class TableEditorController extends EditorController {
         console.log('TableEditorController.delete');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database)
-        databaseEditor.removeColData('tables', params.table);
+        const data = databaseEditor.removeColData('tables', params.table);
         await appEditor.save();
-        return null;
+        return data;
     }
 
 }

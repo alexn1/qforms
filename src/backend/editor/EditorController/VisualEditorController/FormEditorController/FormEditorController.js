@@ -30,9 +30,9 @@ class FormEditorController extends VisualEditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
-        pageEditor.removeColData('forms', params.form);
+        const data = pageEditor.removeColData('forms', params.form);
         await pageEditor.save();
-        return null;
+        return data;
     }
 
     async moveUp(params) {

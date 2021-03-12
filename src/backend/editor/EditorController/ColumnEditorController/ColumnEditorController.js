@@ -36,9 +36,9 @@ class ColumnEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const tableEditor = databaseEditor.createTableEditor(params.table);
-        tableEditor.removeColData('columns', params.column);
+        const data = tableEditor.removeColData('columns', params.column);
         await appEditor.save();
-        return null;
+        return data;
     }
 
 }

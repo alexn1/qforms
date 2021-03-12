@@ -34,9 +34,9 @@ class ParamEditorController extends EditorController {
         console.log('ParamEditorController.delete');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
-        databaseEditor.removeColData('params', params.param);
+        const data = databaseEditor.removeColData('params', params.param);
         await appEditor.save();
-        return null;
+        return data;
     }
 
 }

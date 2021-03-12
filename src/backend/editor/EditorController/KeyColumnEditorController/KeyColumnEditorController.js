@@ -51,9 +51,9 @@ class KeyColumnEditorController extends EditorController {
         const pageEditor = await appEditor.getPageByFileName(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
         const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
-        dataSourceEditor.removeColData('keyColumns', params.keyColumn);
+        const data = dataSourceEditor.removeColData('keyColumns', params.keyColumn);
         await pageEditor.save();
-        return null;
+        return data;
     }
 
 }
