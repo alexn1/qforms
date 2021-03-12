@@ -51,15 +51,15 @@ class Form extends Model {
     }
     removeField(field) {
         console.log('Form.removeField', field.getName());
-        const i = this.dataSources.indexOf(field);
+        const i = this.fields.indexOf(field);
         if (i === -1) throw new Error('no such field');
-        this.dataSources.splice(i, 1);
+        this.fields.splice(i, 1);
     }
     removeAction(action) {
         console.log('Form.removeField', action.getName());
-        const i = this.dataSources.indexOf(action);
+        const i = this.actions.indexOf(action);
         if (i === -1) throw new Error('no such action');
-        this.dataSources.splice(i, 1);
+        this.actions.splice(i, 1);
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
