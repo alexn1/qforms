@@ -33,7 +33,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
-        formEditor.removeField(params.field);
+        formEditor.removeColData('fields', params.field);
         await pageEditor.save();
         return null;
     }

@@ -39,7 +39,7 @@ class DatabaseEditorController extends EditorController {
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
-        appEditor.deleteDatabase(params.database);
+        appEditor.removeColData('databases', params.database);
         await appEditor.save();
         return null;
     }

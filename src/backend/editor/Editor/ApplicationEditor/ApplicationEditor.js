@@ -167,10 +167,6 @@ class ApplicationEditor extends Editor {
         return data;
     }
 
-    deleteDatabase(name) {
-        this.removeColData('databases', name);
-    }
-
     async deletePage(name) {
         const pageFilePath = path.join(
             this.appInfo.dirPath,

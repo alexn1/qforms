@@ -45,10 +45,6 @@ class FormEditor extends Editor {
         return new qforms.ActionEditor(this.getModelData('actions', name), this);
     }
 
-    removeField(name) {
-        this.removeColData('fields', name);
-    }
-
     async removeAction(name) {
         delete this.data.actions[name];
         return this.parent.save();
@@ -57,12 +53,6 @@ class FormEditor extends Editor {
     async newActionData(params) {
         if (!params.name) throw new Error('no name');
         const name = params.name;
-        /*if (!this.data.actions) {
-            this.data.actions = {};
-        }*/
-        /*if (!this.data.actions2) {
-            this.data.actions2 = [];
-        }*/
         if (this.getModelData('actions', name)) {
             throw new Error(`action ${name} already exist`);
         }
