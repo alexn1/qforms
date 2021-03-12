@@ -163,8 +163,8 @@ class RowFormFieldController extends FieldController {
             }
         }
         if (this.model.isChanged(row)) {
-            let original = row[this.model.data.column];
-            let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.data.column];
+            let original = row[this.model.getAttr('column')];
+            let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
             if (original) original = original.substr(0, 100);
             if (modified) modified = modified.substr(0, 100);
             console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, original, modified);

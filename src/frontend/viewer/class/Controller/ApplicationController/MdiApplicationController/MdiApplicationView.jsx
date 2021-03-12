@@ -16,7 +16,7 @@ class MdiApplicationView extends ApplicationView {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
-            <div className={`MdiApplicationView ${model.data.theme}`}>
+            <div className={`MdiApplicationView ${model.getAttr('theme')}`}>
                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 <Tab
                     tabs={this.getTabs()}

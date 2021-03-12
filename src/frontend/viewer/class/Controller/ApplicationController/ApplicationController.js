@@ -53,7 +53,7 @@ class ApplicationController extends Controller {
         // console.log('ApplicationController.createView');
         this.view = Helper.createReactComponent(root, this.getViewClass(), {ctrl: this});
         if (this.statusbar) {
-            this.statusbar.setLastQueryTime(this.model.data.time);
+            this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
 

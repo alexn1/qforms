@@ -21,7 +21,7 @@ class Field extends Model {
     fillDefaultValue(row) {
         // console.log('Field.fillDefaultValue', this.getFullName());
         if (!this.data.column) return;
-        const defaultValue = this.replaceThis(this.data.defaultValue);
+        const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
         const params = {
             // ...this.getApp().data.params,
             ...this.getPage().params,
