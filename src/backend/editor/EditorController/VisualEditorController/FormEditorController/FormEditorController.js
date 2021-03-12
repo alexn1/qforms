@@ -9,7 +9,7 @@ class FormEditorController extends VisualEditorController {
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
+        const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
         const formEditor = await pageEditor.createForm(params);
         const formData = formEditor.getData();
         return formData;
@@ -17,7 +17,7 @@ class FormEditorController extends VisualEditorController {
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params['pageFileName']);
+        const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
         const formEditor = pageEditor.createFormEditor(params.form);
         await formEditor.setAttr(params['attr'], params['value']);
         return null;
@@ -25,7 +25,7 @@ class FormEditorController extends VisualEditorController {
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const data = pageEditor.removeColData('forms', params.form);
         await pageEditor.save();
         return data;
@@ -33,14 +33,14 @@ class FormEditorController extends VisualEditorController {
 
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const result = await pageEditor.moveFormUp(params);
         return result;
     }
 
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const result = await pageEditor.moveFormDown(params);
         return result;
     }

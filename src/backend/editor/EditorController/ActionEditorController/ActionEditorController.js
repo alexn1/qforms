@@ -13,7 +13,7 @@ class ActionEditorController extends EditorController {
         if (!params.name) throw new Error('no name');
         // if (!params.caption) throw new Error('no caption');
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
         const actionData = await formEditor.newActionData(params);
         await formEditor.save();
@@ -22,7 +22,7 @@ class ActionEditorController extends EditorController {
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
         const actionEditor = formEditor.createActionEditor(params.action);
         await actionEditor.setAttr(params.attr, params.value);
@@ -31,7 +31,7 @@ class ActionEditorController extends EditorController {
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
+        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
         const data = formEditor.removeColData('actions', params.action);
         await pageEditor.save();

@@ -11,7 +11,7 @@ class DataSourceEditorController extends EditorController {
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            const pageEditor = await appEditor.getPageByFileName(params.page);
+            const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
@@ -36,7 +36,7 @@ class DataSourceEditorController extends EditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            const pageEditor = await appEditor.getPageByFileName(params.page);
+            const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
 
                 // form data source
@@ -61,7 +61,7 @@ class DataSourceEditorController extends EditorController {
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            const pageEditor = await appEditor.getPageByFileName(params.page);
+            const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
@@ -85,7 +85,7 @@ class DataSourceEditorController extends EditorController {
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
-            const pageEditor = await appEditor.getPageByFileName(params.page);
+            const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
@@ -110,7 +110,7 @@ class DataSourceEditorController extends EditorController {
         console.log('DataSourceEditorController.save');
         let editor = await this.createApplicationEditor();
         if (params.pageFileName) {
-            editor = await editor.getPageByFileName(params.pageFileName);
+            editor = await editor.createPageEditor(params.pageFileName);
             if (params.form) {
                 editor = editor.createFormEditor(params.form);
             }
@@ -123,7 +123,7 @@ class DataSourceEditorController extends EditorController {
     async createDataSourceEditor(params) {
         let editor = await this.createApplicationEditor();
         if (params.pageFileName) {
-            editor = await editor.getPageByFileName(params.pageFileName);
+            editor = await editor.createPageEditor(params.pageFileName);
             if (params.form) {
                 editor = editor.createFormEditor(params.form);
             }

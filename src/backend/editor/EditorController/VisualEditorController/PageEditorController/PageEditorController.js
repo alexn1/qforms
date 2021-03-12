@@ -16,7 +16,7 @@ class PageEditorController extends VisualEditorController {
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPageByFileName(params.fileName);
+        const pageEditor = await appEditor.createPageEditor(params.fileName);
         await pageEditor.setAttr(params.attr, params.value);
         return null;
     }

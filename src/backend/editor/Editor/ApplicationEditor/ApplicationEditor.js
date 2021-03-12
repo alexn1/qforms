@@ -76,7 +76,7 @@ class ApplicationEditor extends Editor {
         await qforms.Helper.fsUnlink(pageFilePath);
     }
 
-    async getPageByFileName(relFilePath) {
+    async createPageEditor(relFilePath) {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new qforms.JsonFile(pageFilePath);
         await pageFile.read();
@@ -86,7 +86,7 @@ class ApplicationEditor extends Editor {
     async getPage(name) {
         const pageLinkEditor = this.createPageLinkEditor(name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
-        return await this.getPageByFileName(relFilePath);
+        return await this.createPageEditor(relFilePath);
     }
 
     async createJs(params) {
