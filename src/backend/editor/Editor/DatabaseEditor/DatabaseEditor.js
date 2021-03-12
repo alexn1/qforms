@@ -43,11 +43,6 @@ class DatabaseEditor extends Editor {
         return data;
     }
 
-    deleteParam(name) {
-        if (!name) throw new Error('no name');
-        delete this.data.params[name];
-    }
-
     deleteTable(name) {
         if (!name) throw new Error('no name');
         delete this.data.tables[name];
