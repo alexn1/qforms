@@ -32,10 +32,10 @@ class FormEditor extends Editor {
         return 'ok';
     }
 
-    createDataSourceEditor(name) {
+    /*createDataSourceEditor(name) {
         const data = this.getModelData('dataSources', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
-    }
+    }*/
 
     createFieldEditor(name) {
         const data = this.getModelData('fields', name);

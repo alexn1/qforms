@@ -104,12 +104,12 @@ class ApplicationEditor extends Editor {
         return this.appInfo.dirPath;
     }
 
-    createDataSourceEditor(name) {
+    /*createDataSourceEditor(name) {
         const data = this.getModelData('dataSources', name);
         const className = BaseModel.getClassName(data);
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(this, name, data);
-    }
+    }*/
 
     movePageLinkUp(name) {
         this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, -1);

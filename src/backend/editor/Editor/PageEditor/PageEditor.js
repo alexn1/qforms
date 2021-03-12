@@ -124,10 +124,10 @@ class PageEditor extends Editor {
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
     }
 
-    createDataSourceEditor(name) {
+    /*createDataSourceEditor(name) {
         const data = this.getModelData('dataSources', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
-    }
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');

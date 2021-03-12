@@ -105,6 +105,12 @@ class Editor extends BaseModel {
         }
         return path.join(customDirPath, this.name + '.' + ext);
     }
+    createDataSourceEditor(name) {
+        const data = this.getModelData('dataSources', name);
+        const className = BaseModel.getClassName(data);
+        const DataSourceClass = qforms[`${className}Editor`];
+        return new DataSourceClass(this, name, data);
+    }
 }
 
 module.exports = Editor;
