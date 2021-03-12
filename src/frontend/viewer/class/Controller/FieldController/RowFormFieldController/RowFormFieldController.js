@@ -81,7 +81,9 @@ class RowFormFieldController extends FieldController {
         }
     }
     getValueForView() {
-        return this.valueToString(this.getValue());
+        const value = this.getValue();
+        // console.log('value:', this.model.getFullName(), value, typeof value);
+        return this.valueToString(value);
     }
     setValueFromView(viewValue) {
         if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
