@@ -104,10 +104,6 @@ class FormEditor extends Editor {
         return data;
     }
 
-    deleteFormDataSourceKeyColumn(dataSource, keyColumn) {
-        delete this.data.dataSources[dataSource].keyColumns[keyColumn];
-    }
-
     getAppEditor() {
         return this.parent.getAppEditor();
     }

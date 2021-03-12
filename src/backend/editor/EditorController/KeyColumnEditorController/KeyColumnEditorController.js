@@ -49,8 +49,9 @@ class KeyColumnEditorController extends EditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.page);
-        const formEditor = pageEditor.createFormEditor(params['form']);
-        formEditor.deleteFormDataSourceKeyColumn(params['dataSource'], params['keyColumn']);
+        const formEditor = pageEditor.createFormEditor(params.form);
+        const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
+        dataSourceEditor.removeColData('keyColumns', params.keyColumn);
         await pageEditor.save();
         return null;
     }
