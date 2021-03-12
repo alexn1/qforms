@@ -8,8 +8,6 @@ class MySqlDatabaseEditor extends DatabaseEditor {
             '@attributes': {
                 name : params.name
             },
-            // params: {},
-            // tables: {},
             params: [],
             tables: [],
         };
