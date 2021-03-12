@@ -6,14 +6,13 @@ const Editor = require('../Editor');
 
 class FieldEditor extends Editor {
 
-    constructor(formEditor, name, data) {
+    /*constructor(data, formEditor) {
         super(data, formEditor);
-        this.formEditor = formEditor;
-        this.name       = name;
-    }
+        // this.formEditor = formEditor;
+    }*/
 
     async setData(data) {
-        this.parent.data.fields[this.name] = data;
+        this.parent.data.fields[this.getName()] = data;
         return await this.parent.parent.save();
     }
 
@@ -28,8 +27,8 @@ class FieldEditor extends Editor {
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page     : this.parent.parent.getName(),
-            form     : this.parent.name,
-            field    : this.name,
+            form     : this.parent.getName(),
+            field    : this.getName(),
             formClass: this.parent.constructor.name.replace('Editor', ''),
             _class   : this.constructor.name.replace('Editor', '')
         });
@@ -44,7 +43,7 @@ class FieldEditor extends Editor {
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        const dirPath = path.join(collectionDirPath, this.name);
+        const dirPath = path.join(collectionDirPath, this.getName());
         return dirPath;
     }
 

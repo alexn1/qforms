@@ -38,7 +38,7 @@ class FormEditor extends Editor {
 
     createFieldEditor(name) {
         const data = this.getModelData('fields', name);
-        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     createActionEditor(name) {
