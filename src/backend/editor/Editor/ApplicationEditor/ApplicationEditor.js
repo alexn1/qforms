@@ -168,8 +168,7 @@ class ApplicationEditor extends Editor {
     }
 
     deleteDatabase(name) {
-        if (!name) throw new Error('no name');
-        delete this.data.databases[name];
+        this.removeColData('databases', name);
     }
 
     async deletePage(name) {
