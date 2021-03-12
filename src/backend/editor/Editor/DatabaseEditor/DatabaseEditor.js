@@ -16,8 +16,6 @@ class DatabaseEditor extends Editor {
     newTableData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
-        // if (!this.data.tables) this.data.tables = {};
-        // if (!this.data.tables2) this.data.tables2 = [];
         if (this.getModelData('tables', name)) throw new Error(`table ${name} already exists`);
         const data = TableEditor.createData(params);
         if (params.columns) {
@@ -35,8 +33,6 @@ class DatabaseEditor extends Editor {
     newParamData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
-        // if (!this.data.params) this.data.params = {};
-        // if (!this.data.params2) this.data.params2 = [];
         if (this.getModelData('params', name)) throw new Error(`param ${name} already exists`);
         const data = ParamEditor.createData(params);
         this.addModelData('params', data);

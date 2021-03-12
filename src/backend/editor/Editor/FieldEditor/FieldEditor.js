@@ -40,14 +40,12 @@ class FieldEditor extends Editor {
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
-        // await qforms.Helper.createDirIfNotExists(dirPath);
         return dirPath;
     }
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         const dirPath = path.join(collectionDirPath, this.name);
-        // await qforms.Helper.createDirIfNotExists(dirPath);
         return dirPath;
     }
 

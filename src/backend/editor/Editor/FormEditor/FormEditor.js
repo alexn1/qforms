@@ -80,12 +80,6 @@ class FormEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        /*if (!this.data.dataSources) {
-            this.data.dataSources = {};
-        }*/
-        /*if (!this.data.dataSources2) {
-            this.data.dataSources2 = [];
-        }*/
         if (this.getModelData('dataSources', name)) {
             throw new Error(`data source ${name} already exist.`);
         }
