@@ -2,12 +2,12 @@ class FormController extends VisualController {
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];
-        this.fields      = [];
         this.actions     = [];
+        this.fields      = [];
         this.items = [
             {getTitle: () => 'Data Sources', items: this.dataSources},
-            {getTitle: () => 'Fields'      , items: this.fields},
-            {getTitle: () => 'Actions'     , items: this.actions}
+            {getTitle: () => 'Actions'     , items: this.actions},
+            {getTitle: () => 'Fields'      , items: this.fields}
         ];
     }
     getTitle() {
@@ -18,14 +18,12 @@ class FormController extends VisualController {
         this.model.fields.forEach(field => this.createField(field));
         this.model.actions.forEach(action => this.createAction(action));
     }
-
     createDataSource(model) {
         const dataSource  = new DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
-
     createField(model) {
         const field = new FieldController(model, this);
         field.init();
