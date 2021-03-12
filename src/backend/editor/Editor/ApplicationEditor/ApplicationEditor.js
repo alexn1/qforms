@@ -16,7 +16,7 @@ class ApplicationEditor extends Editor {
         this.appFile  = appFile;
         this.hostApp  = hostApp;
         this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
-        this.name     = this.getAttr('name');
+        this.name     = this.getName();
     }
 
     static createData(params) {
@@ -94,7 +94,7 @@ class ApplicationEditor extends Editor {
         const customJsFilePath = await this.getCustomFilePath('js');
         const templateFilePath = path.join(__dirname, 'Application.js.ejs');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            application: this.getAttr('name'),
+            application: this.getName(),
             _class     : this.constructor.name.replace('Editor', '')
         });
         return js;

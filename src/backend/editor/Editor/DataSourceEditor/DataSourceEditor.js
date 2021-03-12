@@ -16,7 +16,7 @@ class DataSourceEditor extends Editor {
 
     /*constructor(data, parent) {
         super(data, parent);
-        // this.name = this.getAttr('name');
+        // this.name = this.getName();
     }*/
 
     newKeyColumnData(params) {
@@ -41,7 +41,7 @@ class DataSourceEditor extends Editor {
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        return path.join(collectionDirPath, this.getAttr('name'));
+        return path.join(collectionDirPath, this.getName());
     }
 
     async createBackendJs(params) {
@@ -50,7 +50,7 @@ class DataSourceEditor extends Editor {
         const backendJs = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page      : params.page ? params.page : '',
             form      : params.form ? params.form : '',
-            dataSource: this.getAttr('name'),
+            dataSource: this.getName(),
             _class    : this.constructor.name.replace('Editor', '')
         });
         return backendJs;

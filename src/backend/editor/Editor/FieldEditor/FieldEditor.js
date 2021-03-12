@@ -27,7 +27,7 @@ class FieldEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page     : this.parent.parent.getAttr('name'),
+            page     : this.parent.parent.getName(),
             form     : this.parent.name,
             field    : this.name,
             formClass: this.parent.constructor.name.replace('Editor', ''),

@@ -10,7 +10,7 @@ class PageEditor extends Editor {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
         this.pageFile  = pageFile;
-        this.name      = this.getAttr('name');
+        this.name      = this.getName();
     }
 
     static createData(params) {
@@ -133,7 +133,7 @@ class PageEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page  : this.getAttr('name'),
+            page  : this.getName(),
             _class: this.constructor.name.replace('Editor', '')
         });
         return js;
