@@ -134,11 +134,6 @@ class PageEditor extends Editor {
         return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
     }
 
-    removeForm(name) {
-        this.deleteForm(name);
-        return this.save();
-    }
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
