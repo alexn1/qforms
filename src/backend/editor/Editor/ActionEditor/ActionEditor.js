@@ -1,10 +1,9 @@
 const Editor = require('../Editor');
 
 class ActionEditor extends Editor {
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        // this.colName = 'actions';
-    }
+    }*/
 
     static createData(params) {
         if (!params.name) throw new Error('no name');

@@ -2,10 +2,9 @@ const Editor = require('../Editor');
 
 class ColumnEditor extends Editor {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        // this.colName = 'columns';
-    }
+    }*/
 
     static createData(params) {
         if (!params.name) throw new Error('no name');

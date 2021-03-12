@@ -4,10 +4,9 @@ const qforms = require('../../qforms');
 const BaseModel = require('../../BaseModel');
 
 class Editor extends BaseModel {
-    constructor(data, parent) {
+    /*constructor(data, parent) {
         super(data, parent);
-        // this.colName = null;
-    }
+    }*/
 
     async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
@@ -109,7 +108,7 @@ class Editor extends BaseModel {
         const data = this.getModelData('dataSources', name);
         const className = BaseModel.getClassName(data);
         const DataSourceClass = qforms[`${className}Editor`];
-        return new DataSourceClass(this, name, data);
+        return new DataSourceClass(this, data);
     }
 }
 
