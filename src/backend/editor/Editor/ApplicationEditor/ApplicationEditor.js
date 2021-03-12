@@ -203,10 +203,6 @@ class ApplicationEditor extends Editor {
         return data;
     }
 
-    deleteDataSource(dataSource) {
-        delete this.data.dataSources[dataSource];
-    }
-
 }
 
 module.exports = ApplicationEditor;

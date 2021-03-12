@@ -42,23 +42,24 @@ class DataSourceEditorController extends EditorController {
         if (params.page) {
             const pageEditor = await appEditor.getPageByFileName(params.page);
             if (params.form) {
+
                 // form data source
-                const formEditor = pageEditor.createFormEditor(params['form']);
-                formEditor.deleteFormDataSource(params['dataSource']);
+                const formEditor = pageEditor.createFormEditor(params.form);
+                const data = formEditor.removeColData('dataSources', params.dataSource);
                 await pageEditor.save();
-                return null;
-            } else {
-                // page data source
-                pageEditor.deleteDataSource(params['dataSource']);
-                await pageEditor.save();
-                return null;
+                return data;
             }
-        } else {
-            // app data source
-            appEditor.deleteDataSource(params.dataSource);
-            await appEditor.save();
-            return null;
+
+            // page data source
+            const data = pageEditor.removeColData('dataSources', params.dataSource);
+            await pageEditor.save();
+            return data;
         }
+
+        // app data source
+        const data = appEditor.removeColData('dataSources', params.dataSource);
+        await appEditor.save();
+        return data;
     }
 
     async moveUp(params) {

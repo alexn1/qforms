@@ -186,10 +186,6 @@ class PageEditor extends Editor {
         delete this.data.forms[name];
     }
 
-    deleteDataSource(dataSource) {
-        delete this.data.dataSources[dataSource];
-    }
-
     getAppEditor() {
         return this.appEditor;
     }

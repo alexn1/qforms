@@ -81,6 +81,7 @@ class BaseModel {
         const data = BaseModel.findColDataByName(col, name);
         if (!data) throw new Error(`removeColData: no ${name} in ${colName}`);
         col.splice(col.indexOf(data), 1);
+        return data;
     }
 
     static findColDataByName(col, name) {

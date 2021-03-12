@@ -34,7 +34,9 @@ class ColumnEditorController extends EditorController {
     async delete(params) {
         console.log('ColumnEditorController.delete');
         const appEditor = await this.createApplicationEditor();
-        appEditor.createDatabaseEditor(params.database).createTableEditor(params.table).deleteColumn(params.column);
+        const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        const tableEditor = databaseEditor.createTableEditor(params.table);
+        tableEditor.removeColData('columns', params.column);
         await appEditor.save();
         return null;
     }

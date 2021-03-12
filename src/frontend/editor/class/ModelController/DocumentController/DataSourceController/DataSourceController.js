@@ -91,4 +91,10 @@ class DataSourceController extends DocumentController {
         // console.log('DataSourceController.onSaveClick', name, value);
         await this.model.setValue(name, value);
     }
+    async delete() {
+        await this.model.delete();
+        this.parent.removeDataSource(this);
+        EditorController.editorController.treeWidget2.select(null);
+        EditorController.editorController.treeWidget2.rerender();
+    }
 }

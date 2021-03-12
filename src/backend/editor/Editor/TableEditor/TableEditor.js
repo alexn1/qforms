@@ -19,10 +19,6 @@ class TableEditor extends Editor {
         };
     }
 
-    deleteColumn(name) {
-        delete this.data.columns[name];
-    }
-
     newColumnData(params) {
         const name = params.name;
         if (!name) throw new Error('need name');
