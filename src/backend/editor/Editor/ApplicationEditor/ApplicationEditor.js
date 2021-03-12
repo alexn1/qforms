@@ -76,9 +76,9 @@ class ApplicationEditor extends Editor {
         await this.appFile.save();
     }
 
-    async removePage(name) {
-        await this.deletePage(name);
-        await this.save();
+    async removePageFile(name) {
+        const pageFilePath = path.join(this.appInfo.dirPath, this.createPageLinkEditor(name).getAttr('fileName'));
+        await qforms.Helper.fsUnlink(pageFilePath);
     }
 
     async getPageByFileName(relFilePath) {
@@ -165,15 +165,6 @@ class ApplicationEditor extends Editor {
         const data = qforms.PageLinkEditor.createData(params);
         this.addModelData('pageLinks', data);
         return data;
-    }
-
-    async deletePage(name) {
-        const pageFilePath = path.join(
-            this.appInfo.dirPath,
-            this.createPageLinkEditor(name).getAttr('fileName')
-        );
-        await qforms.Helper.fsUnlink(pageFilePath);
-        delete this.data.pageLinks[name];
     }
 
     newDataSourceData(params) {

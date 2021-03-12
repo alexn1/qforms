@@ -37,7 +37,9 @@ class PageEditorController extends VisualEditorController {
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
-        await appEditor.removePage(params.page);
+        await appEditor.removePageFile(params.page);
+        appEditor.removeColData('pageLinks', params.page);
+        await appEditor.save();
         return null;
     }
 
