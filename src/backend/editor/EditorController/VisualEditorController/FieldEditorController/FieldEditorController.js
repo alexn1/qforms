@@ -47,16 +47,6 @@ class FieldEditorController extends VisualEditorController {
         return newFieldData;
     }
 
-    /*async createView(params) {
-        const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPage(params.page);
-        const formEditor  = pageEditor.createFormEditor(params.form);
-        const fieldEditor = formEditor.createFieldEditor(params.field);
-        const ejs = await fieldEditor.createEjs(params);
-        const css = await fieldEditor.createCss(params);
-        return {ejs, css};
-    }*/
-
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
