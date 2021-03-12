@@ -34,7 +34,8 @@ class ActionEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPageByFileName(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
-        await formEditor.removeAction(params.action);
+        formEditor.removeColData('actions', params.action);
+        await pageEditor.save();
         return null;
     }
 }

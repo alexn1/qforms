@@ -45,11 +45,6 @@ class FormEditor extends Editor {
         return new qforms.ActionEditor(this.getModelData('actions', name), this);
     }
 
-    async removeAction(name) {
-        delete this.data.actions[name];
-        return this.parent.save();
-    }
-
     async newActionData(params) {
         if (!params.name) throw new Error('no name');
         const name = params.name;
