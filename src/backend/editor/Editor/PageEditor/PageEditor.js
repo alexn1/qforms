@@ -121,7 +121,7 @@ class PageEditor extends Editor {
 
     createFormEditor(name) {
         const data = this.getModelData('forms', name);
-        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     /*createDataSourceEditor(name) {

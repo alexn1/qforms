@@ -5,10 +5,9 @@ const BaseModel = require('../../../BaseModel');
 
 class FormEditor extends Editor {
 
-    constructor(pageEditor, name, data) {
+    /*constructor(data, pageEditor) {
         super(data, pageEditor);
-        this.name    = name;
-    }
+    }*/
 
     newFieldData(params) {
         const name = params['name'];
@@ -62,7 +61,7 @@ class FormEditor extends Editor {
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page  : this.parent.getName(),
-            form  : this.name,
+            form  : this.getName(),
             _class: this.constructor.name.replace('Editor', '')
         });
         return js;
@@ -75,7 +74,7 @@ class FormEditor extends Editor {
 
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        return path.join(collectionDirPath, this.name);
+        return path.join(collectionDirPath, this.getName());
     }
 
     newDataSourceData(params) {
