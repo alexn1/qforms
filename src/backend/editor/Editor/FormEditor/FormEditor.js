@@ -7,17 +7,10 @@ class FormEditor extends Editor {
     constructor(pageEditor, name, data) {
         super(data, pageEditor);
         this.name    = name;
-        // this.colName = 'forms';
     }
 
     newFieldData(params) {
         const name = params['name'];
-        /*if (!this.data.fields) {
-            this.data.fields = {};
-        }*/
-        /*if (!this.data.fields2) {
-            this.data.fields2 = [];
-        }*/
         if (this.getModelData('fields', name)) {
             throw new Error(`field ${name} already exist`);
         }
@@ -52,9 +45,8 @@ class FormEditor extends Editor {
         return new qforms.ActionEditor(this.getModelData('actions', name), this);
     }
 
-    async removeField(name) {
-        delete this.data.fields[name];
-        return this.parent.save();
+    removeField(name) {
+        this.removeColData('fields', name);
     }
 
     async removeAction(name) {

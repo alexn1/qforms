@@ -66,24 +66,24 @@ class BaseModel {
     }
 
     getItemNames(colName) {
-        return [
-            // ...Object.keys(this.getCol(colName)),
-            ...(this.getCol(colName).map(data => BaseModel.getName(data)))
-        ];
+        return this.getCol(colName).map(data => BaseModel.getName(data));
     }
 
     getModelData(colName, name) {
         let data;
-        /*if (this.data[colName] && this.data[colName][name]) {
-            data = this.data[colName][name];
-            if (data) return data;
-        }*/
-        data = BaseModel.findDataByName(this.getCol(colName), name);
+        data = BaseModel.findColDataByName(this.getCol(colName), name);
         if (data) return data;
         return null;
     }
 
-    static findDataByName(col, name) {
+    removeColData(colName, name) {
+        const col = this.getCol(colName);
+        const data = BaseModel.findColDataByName(col, name);
+        if (!data) throw new Error(`removeColData: no ${name} in ${colName}`);
+        col.splice(col.indexOf(data), 1);
+    }
+
+    static findColDataByName(col, name) {
         return col.find(data => BaseModel.getName(data) === name);
     }
 
