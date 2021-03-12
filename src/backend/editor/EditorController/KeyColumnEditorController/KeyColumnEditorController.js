@@ -37,6 +37,7 @@ class KeyColumnEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
+        const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
         formEditor.setDataSourceKeyColumnAttr(params['dataSource'], params['keyColumn'], params['attr'], params['value']);
         await pageEditor.save();
         return null;

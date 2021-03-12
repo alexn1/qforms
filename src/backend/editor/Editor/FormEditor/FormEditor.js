@@ -1,6 +1,7 @@
 const path = require('path');
 const qforms = require('../../../qforms');
 const Editor = require('../Editor');
+const BaseModel = require('../../../BaseModel');
 
 class FormEditor extends Editor {
 
@@ -32,13 +33,13 @@ class FormEditor extends Editor {
     }
 
     createDataSourceEditor(name) {
-        const dataSourceData = this.getModelData('dataSources', name);
-        return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
+        const data = this.getModelData('dataSources', name);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
     }
 
     createFieldEditor(name) {
-        const fieldData = this.getModelData('fields', name);
-        return eval(`new qforms.${fieldData['@class']}Editor(this, name, fieldData)`);
+        const data = this.getModelData('fields', name);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
     }
 
     createActionEditor(name) {

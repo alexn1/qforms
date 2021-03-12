@@ -5,6 +5,7 @@ const Editor                   = require('../Editor');
 const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
+const BaseModel                = require('../../../BaseModel');
 
 class ApplicationEditor extends Editor {
 
@@ -104,10 +105,10 @@ class ApplicationEditor extends Editor {
     }
 
     createDataSourceEditor(name) {
-        const dataSourceData = this.getModelData('dataSources', name);
-        const className = dataSourceData['@class'];
+        const data = this.getModelData('dataSources', name);
+        const className = BaseModel.getClassName(data);
         const DataSourceClass = qforms[`${className}Editor`];
-        return new DataSourceClass(this, name, dataSourceData);
+        return new DataSourceClass(this, name, data);
     }
 
     movePageLinkUp(name) {

@@ -2,6 +2,7 @@ const path = require('path');
 const _    = require('underscore');
 const qforms = require('../../../qforms');
 const Editor = require('../Editor');
+const BaseModel = require('../../../BaseModel');
 
 class PageEditor extends Editor {
 
@@ -119,13 +120,13 @@ class PageEditor extends Editor {
     }
 
     createFormEditor(name) {
-        const formData = this.getModelData('forms', name);
-        return eval(`new qforms.${formData['@class']}Editor(this, name, formData)`);
+        const data = this.getModelData('forms', name);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
     }
 
     createDataSourceEditor(name) {
-        const dataSourceData = this.getModelData('dataSources', name);
-        return eval(`new qforms.${dataSourceData['@class']}Editor(this, name, dataSourceData)`);
+        const data = this.getModelData('dataSources', name);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(this, name, data)`);
     }
 
     async createJs(params) {
@@ -163,10 +164,6 @@ class PageEditor extends Editor {
         }
         this.addModelData('dataSources', data);
         return data;
-    }
-
-    deleteForm(name) {
-        delete this.data.forms[name];
     }
 
     getAppEditor() {
