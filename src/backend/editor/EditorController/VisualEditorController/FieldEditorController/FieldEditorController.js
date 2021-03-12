@@ -1,15 +1,10 @@
-const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
 
 class FieldEditorController extends VisualEditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/DocumentController/VisualController/FieldController'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
@@ -55,8 +50,6 @@ class FieldEditorController extends VisualEditorController {
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor  = pageEditor.createFormEditor(params.form);
                 const fieldEditor = formEditor.createFieldEditor(params.field);
-                // result.data.ejs = await fieldEditor.getCustomFile('ejs');
-                // result.data.css = await fieldEditor.getCustomFile('css');
                 result.data.js = await fieldEditor.getCustomFile('js');
                 return result;
             default:
@@ -64,7 +57,7 @@ class FieldEditorController extends VisualEditorController {
         }
     }
 
-    async saveView(params) {
+    /*async saveView(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
@@ -77,7 +70,7 @@ class FieldEditorController extends VisualEditorController {
                 await fieldEditor.saveCustomFile('css', params.text);
                 return null;
         }
-    }
+    }*/
 
     async createController(params) {
         const appEditor = await this.createApplicationEditor();

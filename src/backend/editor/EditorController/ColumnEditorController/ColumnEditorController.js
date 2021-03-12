@@ -4,14 +4,10 @@ const EditorController = require('../EditorController');
 
 class ColumnEditorController extends EditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         console.log('ColumnEditorController.constructor');
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/ColumnController'
-        );*/
-    }
+    }*/
 
     async save(params) {
         console.log('ColumnEditorController.save');

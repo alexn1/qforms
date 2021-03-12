@@ -1,17 +1,11 @@
-const path = require('path');
-const _    = require('underscore');
 const EditorController = require('../EditorController');
 
 class ParamEditorController extends EditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         console.log('ParamEditorController.constructor');
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/ParamController'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         console.log('ParamEditorController._new');

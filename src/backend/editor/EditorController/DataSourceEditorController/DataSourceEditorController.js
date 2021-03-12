@@ -4,13 +4,9 @@ const EditorController = require('../EditorController');
 
 class DataSourceEditorController extends EditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/DocumentController/DataSourceController/view'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();

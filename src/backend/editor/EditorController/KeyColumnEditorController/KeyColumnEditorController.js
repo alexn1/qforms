@@ -5,13 +5,9 @@ const EditorController = require('../EditorController');
 
 class KeyColumnEditorController extends EditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/KeyColumnController'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();

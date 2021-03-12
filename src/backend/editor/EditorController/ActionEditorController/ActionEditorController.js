@@ -2,10 +2,9 @@ const path = require('path');
 const EditorController = require('../EditorController');
 
 class ActionEditorController extends EditorController {
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        // this.viewDirPath = path.join(this.hostApp.publicDirPath, 'editor/class/Controller/ModelController/ActionController');
-    }
+    }*/
 
     async _new(params) {
         console.log('ActionEditorController._new');

@@ -3,13 +3,9 @@ const VisualEditorController = require('../VisualEditorController');
 
 class ApplicationEditorController extends VisualEditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/DocumentController/VisualController/ApplicationController'
-        );*/
-    }
+    }*/
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
@@ -21,14 +17,12 @@ class ApplicationEditorController extends VisualEditorController {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const appEditor = await this.createApplicationEditor();
-            // result.data.ejs = await appEditor.getCustomFile('ejs');
-            // result.data.css = await appEditor.getCustomFile('css');
             result.data.js = await appEditor.getCustomFile('js');
         }
         return result;
     }
 
-    async saveView(params) {
+    /*async saveView(params) {
         const appEditor = await this.createApplicationEditor();
         switch (params.view) {
             case 'ejs':
@@ -40,7 +34,7 @@ class ApplicationEditorController extends VisualEditorController {
             default:
                 throw new Error(`unknown view: ${params.view}`);
         }
-    }
+    }*/
 
     async createController(params) {
         const appEditor = await this.createApplicationEditor();

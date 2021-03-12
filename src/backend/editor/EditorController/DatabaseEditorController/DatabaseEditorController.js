@@ -6,13 +6,9 @@ const qforms           = require('../../../qforms');
 const EditorController = require('../EditorController');
 
 class DatabaseEditorController extends EditorController {
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/DocumentController/DatabaseController/view'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
@@ -52,10 +48,6 @@ class DatabaseEditorController extends EditorController {
 
             // tables
             result.data.tables = await database.getTableList();
-
-            // table view
-            /*const filePath = path.join(this.viewDirPath, 'TableView/TableView.ejs');
-            result.data.tableView = await qforms.Helper.readTextFile(filePath);*/
         }
         return result;
     }

@@ -3,13 +3,9 @@ const VisualEditorController = require('../VisualEditorController');
 
 class FormEditorController extends VisualEditorController {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        /*this.viewDirPath = path.join(
-            this.hostApp.publicDirPath,
-            'editor/class/Controller/ModelController/DocumentController/VisualController/FormController'
-        );*/
-    }
+    }*/
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
@@ -57,8 +53,6 @@ class FormEditorController extends VisualEditorController {
                 const appEditor = await this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor = pageEditor.createFormEditor(params.form);
-                // result.data.ejs = await formEditor.getCustomFile('ejs');
-                // result.data.css = await formEditor.getCustomFile('css');
                 result.data.js  = await formEditor.getCustomFile('js');
                 return result;
             default:
@@ -66,7 +60,7 @@ class FormEditorController extends VisualEditorController {
         }
     }
 
-    async saveView(params) {
+    /*async saveView(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createFormEditor(params.form);
@@ -78,7 +72,7 @@ class FormEditorController extends VisualEditorController {
                 await formEditor.saveCustomFile('css', params.text);
                 return null;
         }
-    }
+    }*/
 
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
