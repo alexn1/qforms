@@ -1,21 +1,26 @@
 class ComboBox extends ReactComponent {
     constructor(props) {
-        // console.log('ComboBox.constructor', props);
+        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         if (!props.items) throw new Error('no ComboBox items');
-        let value = '';
-        if (props.value) {
+        let value = null;
+        if (props.value !== undefined) {
             value = props.value;
             const item = props.items.find(item => item.value === props.value);
             if (!item) {
-                console.error(`no item for value: ${props.value}, ${typeof props.value}`);
-                console.log('items:', props.items);
+                if (this.props.nullable && value === '') {
+                } else {
+                    console.error(`no item for value:`, props.value, typeof props.value);
+                    console.log('items:', props.items);
+                }
             }
         } else {
             if (props.items.length) {
                 value = props.items[0].value;
             }
         }
+        if (value === null) throw new Error('null is wrong value for ComboBox');
+        // console.log('combobox value:', value);
         this.state = {value: value};
     }
     getValue() {
