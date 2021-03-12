@@ -63,7 +63,7 @@ class ApplicationEditor extends Editor {
     }
 
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this, name, this.getModelData('pageLinks', name));
+        return new qforms.PageLinkEditor(this.getModelData('pageLinks', name), this);
     }
 
     async setAttr(name, value) {

@@ -2,11 +2,9 @@ const Editor = require('../Editor');
 
 class PageLinkEditor extends Editor {
 
-    constructor(appEditor, name, data) {
+    /*constructor(data, appEditor) {
         super(data, appEditor);
-        this.appEditor = appEditor;
-        this.name      = name;
-    }
+    }*/
 
     static createData(params) {
         return {
