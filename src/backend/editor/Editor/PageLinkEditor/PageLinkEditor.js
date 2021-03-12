@@ -6,7 +6,6 @@ class PageLinkEditor extends Editor {
         super(data, appEditor);
         this.appEditor = appEditor;
         this.name      = name;
-        // this.colName = 'pageLinks';
     }
 
     static createData(params) {

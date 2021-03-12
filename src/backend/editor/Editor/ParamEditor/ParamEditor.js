@@ -2,10 +2,9 @@ const Editor = require('../Editor');
 
 class ParamEditor extends Editor {
 
-    constructor(...args) {
+    /*constructor(...args) {
         super(...args);
-        // this.colName = 'params';
-    }
+    }*/
 
     static createData(params) {
         const name     = params.name;
