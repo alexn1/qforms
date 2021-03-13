@@ -78,17 +78,13 @@ class Editor extends BaseModel {
         console.log(`Editor(${this.constructor.name}).setAttr`, name, value);
         // const oldValue = this.getAttr(name);
         BaseModel.setAttr(this.data, name, value);
-        /*if (name === 'name' && this.colName) {
-            if (!this.parent) throw new Error('no parent editor');
-            this.parent.renameObjField(this.colName, oldValue, value);
-        }*/
         return await this.save();
     }
 
     async save() {
         console.log(`Editor(${this.constructor.name}).save`);
         if (this.parent) {
-            return await this.parent.save();
+            await this.parent.save();
         } else {
             console.error(`Editor(${this.constructor.name}).save: no parent`);
         }

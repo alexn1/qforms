@@ -42,7 +42,7 @@ class PageEditor extends Editor {
     }
 
     async save() {
-        return await this.pageFile.save();
+        await this.pageFile.save();
     }
 
     async moveFormDown(params) {
