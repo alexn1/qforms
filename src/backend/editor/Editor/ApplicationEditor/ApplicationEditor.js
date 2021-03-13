@@ -69,7 +69,7 @@ class ApplicationEditor extends Editor {
     async setAttr(name, value) {
         console.log('ApplicationEditor.setAttr');
         await super.setAttr(name, value);
-        await this.appFile.save();
+        await this.save();
     }
 
     async removePageFile(name) {
