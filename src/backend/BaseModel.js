@@ -54,7 +54,7 @@ class BaseModel {
     isData(colName, name) {
         if (!colName) throw new Error('isData: no colName');
         if (!name) throw new Error('isData: no name');
-        return !!this.getModelData(colName, name);
+        return !!this.getColItemData(colName, name);
     }
 
     getData() {
@@ -72,7 +72,7 @@ class BaseModel {
         return this.getCol(colName).map(data => BaseModel.getName(data));
     }
 
-    getModelData(colName, name) {
+    getColItemData(colName, name) {
         let data;
         data = BaseModel.findColDataByName(this.getCol(colName), name);
         if (data) return data;

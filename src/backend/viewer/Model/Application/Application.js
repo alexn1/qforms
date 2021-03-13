@@ -123,11 +123,11 @@ class Application extends Model {
     }
 
     createPageLink(name) {
-        return new PageLink(this.getModelData('pageLinks', name), this);
+        return new PageLink(this.getColItemData('pageLinks', name), this);
     }
 
     createDatabase(name) {
-        const data = this.getModelData('databases', name);
+        const data = this.getColItemData('databases', name);
         return Database.create(data, this);
     }
 
