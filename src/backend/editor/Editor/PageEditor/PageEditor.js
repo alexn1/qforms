@@ -54,7 +54,7 @@ class PageEditor extends Editor {
     newFormData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (this.getModelData('forms', name)) {
+        if (this.getColItemData('forms', name)) {
             throw new Error(`Form ${name} already exists.`);
         }
         let data;
@@ -118,12 +118,12 @@ class PageEditor extends Editor {
     }
 
     createFormEditor(name) {
-        const data = this.getModelData('forms', name);
+        const data = this.getColItemData('forms', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     /*createDataSourceEditor(name) {
-        const data = this.getModelData('dataSources', name);
+        const data = this.getColItemData('dataSources', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }*/
 
@@ -146,7 +146,7 @@ class PageEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (this.getModelData('dataSources', name)) {
+        if (this.getColItemData('dataSources', name)) {
             throw new Error(`DataSource ${name} already exists`);
         }
         let data;

@@ -11,7 +11,7 @@ class FormEditor extends Editor {
 
     newFieldData(params) {
         const name = params['name'];
-        if (this.getModelData('fields', name)) {
+        if (this.getColItemData('fields', name)) {
             throw new Error(`field ${name} already exists`);
         }
         const data = eval(`qforms.${params['class']}Editor.createData(params);`);
@@ -32,23 +32,23 @@ class FormEditor extends Editor {
     }
 
     /*createDataSourceEditor(name) {
-        const data = this.getModelData('dataSources', name);
+        const data = this.getColItemData('dataSources', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }*/
 
     createFieldEditor(name) {
-        const data = this.getModelData('fields', name);
+        const data = this.getColItemData('fields', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     createActionEditor(name) {
-        return new qforms.ActionEditor(this.getModelData('actions', name), this);
+        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
     }
 
     async newActionData(params) {
         if (!params.name) throw new Error('no name');
         const name = params.name;
-        if (this.getModelData('actions', name)) {
+        if (this.getColItemData('actions', name)) {
             throw new Error(`action ${name} already exists`);
         }
         const data = qforms.ActionEditor.createData(params);
@@ -80,7 +80,7 @@ class FormEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (this.getModelData('dataSources', name)) {
+        if (this.getColItemData('dataSources', name)) {
             throw new Error(`data source ${name} already exist.`);
         }
         let data;

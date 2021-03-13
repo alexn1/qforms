@@ -67,7 +67,7 @@ class ApplicationEditor extends Editor {
     }
 
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this.getModelData('pageLinks', name), this);
+        return new qforms.PageLinkEditor(this.getColItemData('pageLinks', name), this);
     }
 
     /*async setAttr(name, value) {
@@ -109,7 +109,7 @@ class ApplicationEditor extends Editor {
     }
 
     /*createDataSourceEditor(name) {
-        const data = this.getModelData('dataSources', name);
+        const data = this.getColItemData('dataSources', name);
         const className = BaseModel.getClassName(data);
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(data, this);
@@ -125,7 +125,7 @@ class ApplicationEditor extends Editor {
 
     newDatabaseData(params) {
         const name = params['name'];
-        if (this.getModelData('databases', name)) {
+        if (this.getColItemData('databases', name)) {
             throw new Error(`database ${name} already exists`);
         }
 
@@ -142,12 +142,12 @@ class ApplicationEditor extends Editor {
     }
 
     createDatabaseEditor(name) {
-        return new DatabaseEditor(this.getModelData('databases', name), this);
+        return new DatabaseEditor(this.getColItemData('databases', name), this);
     }
 
     newPageLinkData(params) {
         const name = params.name;
-        if (this.getModelData('pageLinks', name)) {
+        if (this.getColItemData('pageLinks', name)) {
             throw new Error(`Page Link ${name} already exists.`);
         }
         const data = qforms.PageLinkEditor.createData(params);
@@ -158,7 +158,7 @@ class ApplicationEditor extends Editor {
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (this.getModelData('dataSources', name)) {
+        if (this.getColItemData('dataSources', name)) {
             throw new Error(`Data Source ${name} already exist.`);
         }
         let data;
