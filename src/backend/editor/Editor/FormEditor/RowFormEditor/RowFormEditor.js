@@ -16,13 +16,9 @@ class RowFormEditor extends FormEditor {
                 newMode : params.newMode  ? params.newMode : '',
                 backOnly: params.backOnly ? params.backOnly  : 'false'
             },
-            // dataSources: {},
-            // fields     : {},
-            // actions    : {},
-
             dataSources: [],
-            fields     : [],
             actions    : [],
+            fields     : [],
         };
     }
 

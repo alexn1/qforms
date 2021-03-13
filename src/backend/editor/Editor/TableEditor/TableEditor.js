@@ -13,7 +13,6 @@ class TableEditor extends Editor {
             '@attributes': {
                 name : params.name
             },
-            // columns : {},
             columns: [],
         };
     }

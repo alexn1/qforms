@@ -20,13 +20,9 @@ class TableFormEditor extends FormEditor {
                 deleteRowMode : 'disabled',
                 refreshButton : 'true'
             },
-            // dataSources   : {},
-            // fields        : {},
-            // actions       : {},
-
             dataSources: [],
-            fields     : [],
             actions    : [],
+            fields     : [],
         };
     }
 
