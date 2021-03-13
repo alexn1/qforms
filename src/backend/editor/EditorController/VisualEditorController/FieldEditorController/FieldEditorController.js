@@ -10,9 +10,9 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
-        const fieldData = formEditor.newFieldData(params);
+        const data = formEditor.newFieldData(params);
         await pageEditor.save();
-        return fieldData;
+        return data;
     }
 
     async save(params) {
@@ -21,6 +21,7 @@ class FieldEditorController extends VisualEditorController {
         const formEditor  = pageEditor.createFormEditor(params.form);
         const fieldEditor = formEditor.createFieldEditor(params.field);
         await fieldEditor.setAttr(params.attr, params.value);
+        await pageEditor.save();
         return null;
     }
 
@@ -39,6 +40,7 @@ class FieldEditorController extends VisualEditorController {
         const formEditor  = pageEditor.createFormEditor(params.form);
         const fieldEditor = formEditor.createFieldEditor(params.field);
         const newFieldData = await fieldEditor.changeClass(params['class']);
+        await pageEditor.save();
         return newFieldData;
     }
 
@@ -95,6 +97,7 @@ class FieldEditorController extends VisualEditorController {
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
         const result = await formEditor.moveFieldUp(params);
+        await pageEditor.save();
         return result;
     }
 
@@ -103,6 +106,7 @@ class FieldEditorController extends VisualEditorController {
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createFormEditor(params.form);
         const result = await formEditor.moveFieldDown(params);
+        await pageEditor.save();
         return result;
     }
 

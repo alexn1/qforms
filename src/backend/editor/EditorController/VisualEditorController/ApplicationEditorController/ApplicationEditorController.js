@@ -10,6 +10,7 @@ class ApplicationEditorController extends VisualEditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         await appEditor.setAttr(params.attr, params.value);
+        await appEditor.save();
         return null;
     }
 

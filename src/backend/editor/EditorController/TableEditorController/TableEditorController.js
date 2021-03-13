@@ -10,9 +10,9 @@ class TableEditorController extends EditorController {
         console.log('TableEditorController._new');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
-        const tableData = databaseEditor.newTableData(params);
+        const data = databaseEditor.newTableData(params);
         await appEditor.save();
-        return tableData;
+        return data;
     }
 
     async delete(params) {

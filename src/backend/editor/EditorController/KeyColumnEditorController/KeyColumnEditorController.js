@@ -28,7 +28,7 @@ class KeyColumnEditorController extends EditorController {
         } else {
             const dataSourceEditor = appEditor.createDataSourceEditor(params.dataSource);
             const data = dataSourceEditor.newKeyColumnData(params);
-            await appEditor.appFile.save();
+            await appEditor.save();
             return data;
         }
     }

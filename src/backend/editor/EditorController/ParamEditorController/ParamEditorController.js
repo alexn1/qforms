@@ -21,6 +21,7 @@ class ParamEditorController extends EditorController {
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const paramEditor = databaseEditor.createParamEditor(params.param);
         await paramEditor.setAttr(params.attr, params.value);
+        await appEditor.save();
         return null;
     }
 

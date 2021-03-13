@@ -46,15 +46,19 @@ class ApplicationEditor extends Editor {
         return appFile;
     }
 
-    async createPage(params) {
+    async newPageAndPageLinkData(params) {
         const pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath    = path.join(pagesDirPath, params.name);
         const pageFilePath   = path.join(pageDirPath , params.name + '.json');
-        const pageFile = new qforms.JsonFile(pageFilePath, qforms.PageEditor.createData(params));
+        const pageData = qforms.PageEditor.createData(params);
+        const pageFile = new qforms.JsonFile(pageFilePath, pageData);
         await pageFile.create();
-        this.newPageLinkData(params);
+        const pageLinkData = this.newPageLinkData(params);
         await this.save();
-        return new qforms.PageEditor(this, pageFile);
+        return {
+            page    : pageData,
+            pageLink: pageLinkData
+        };
     }
 
     async save() {

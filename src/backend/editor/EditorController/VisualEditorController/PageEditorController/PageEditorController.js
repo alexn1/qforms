@@ -18,17 +18,15 @@ class PageEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.fileName);
         await pageEditor.setAttr(params.attr, params.value);
+        await pageEditor.save();
         return null;
     }
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.createPage(params);
-        const pageLinkEditor = appEditor.createPageLinkEditor(params.name);
-        return {
-            page    : pageEditor.getData(),
-            pageLink: pageLinkEditor.getData()
-        };
+        const data = await appEditor.newPageAndPageLinkData(params);
+        await appEditor.save();
+        return data;
     }
 
     async delete(params) {

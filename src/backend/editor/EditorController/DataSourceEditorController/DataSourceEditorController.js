@@ -76,7 +76,7 @@ class DataSourceEditorController extends EditorController {
         } else {
             // app data source
             appEditor.moveDataSourceUp(params.dataSource);
-            await appEditor.appFile.save();
+            await appEditor.save();
             return null;
         }
     }
