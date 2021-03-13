@@ -14,11 +14,6 @@ class DataSourceEditor extends Editor {
         };
     }
 
-    /*constructor(data, parent) {
-        super(data, parent);
-        // this.name = this.getName();
-    }*/
-
     newKeyColumnData(params) {
         const name = params.name;
         if (this.getColItemData('keyColumns', name)) {

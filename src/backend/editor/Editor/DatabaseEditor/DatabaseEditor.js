@@ -4,10 +4,6 @@ const TableEditor = require('../TableEditor/TableEditor');
 
 class DatabaseEditor extends Editor {
 
-    /*constructor(...args) {
-        super(...args);
-    }*/
-
     static createData(params) {
         throw new Error('DatabaseEditor.createData not implemented');
     }

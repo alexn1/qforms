@@ -5,10 +5,6 @@ const BaseModel = require('../../../BaseModel');
 
 class FormEditor extends Editor {
 
-    /*constructor(data, pageEditor) {
-        super(data, pageEditor);
-    }*/
-
     newFieldData(params) {
         const name = params['name'];
         if (this.getColItemData('fields', name)) {

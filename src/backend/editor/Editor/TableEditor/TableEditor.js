@@ -3,10 +3,6 @@ const ColumnEditor = require('../ColumnEditor/ColumnEditor');
 
 class TableEditor extends Editor {
 
-    /*constructor(...args) {
-        super(...args);
-    }*/
-
     static createData(params) {
         return {
             '@class'     : 'Table',

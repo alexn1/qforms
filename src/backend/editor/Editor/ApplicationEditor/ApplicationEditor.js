@@ -9,16 +9,6 @@ const BaseModel                = require('../../../BaseModel');
 
 class ApplicationEditor extends Editor {
 
-    constructor(appFile, hostApp, env) {
-        if (!hostApp) throw new Error('no hostApp');
-        if (!env) throw new Error('ApplicationEditor.constructor: no env');
-        super(appFile.data);
-        this.appFile  = appFile;
-        this.hostApp  = hostApp;
-        this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
-        // this.name     = this.getName();
-    }
-
     static createData(params) {
         return {
             '@class'     : 'Application',
@@ -37,6 +27,16 @@ class ApplicationEditor extends Editor {
             dataSources: [],
             pageLinks  : [],
         };
+    }
+
+    constructor(appFile, hostApp, env) {
+        if (!hostApp) throw new Error('no hostApp');
+        if (!env) throw new Error('ApplicationEditor.constructor: no env');
+        super(appFile.data);
+        this.appFile  = appFile;
+        this.hostApp  = hostApp;
+        this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
+        // this.name     = this.getName();
     }
 
     static async createAppFile(appFilePath, params) {

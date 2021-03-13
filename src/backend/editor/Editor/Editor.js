@@ -4,11 +4,8 @@ const qforms = require('../../qforms');
 const BaseModel = require('../../BaseModel');
 
 class Editor extends BaseModel {
-    /*constructor(data, parent) {
-        super(data, parent);
-    }*/
 
-    async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
+    /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await qforms.Helper.exists(newFilePath);
@@ -22,7 +19,7 @@ class Editor extends BaseModel {
         }
         await qforms.Helper.writeFile2(newFilePath, text);
         return text;
-    }
+    }*/
 
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await qforms.Helper.exists(newFilePath);

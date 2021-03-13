@@ -6,13 +6,6 @@ const BaseModel = require('../../../BaseModel');
 
 class PageEditor extends Editor {
 
-    constructor(appEditor, pageFile) {
-        super(pageFile.data, appEditor);
-        this.appEditor = appEditor;
-        this.pageFile  = pageFile;
-        // this.name      = this.getName();
-    }
-
     static createData(params) {
         return {
             '@class'     :'Page',
@@ -24,6 +17,13 @@ class PageEditor extends Editor {
             dataSources: [],
             forms      : [],
         };
+    }
+
+    constructor(appEditor, pageFile) {
+        super(pageFile.data, appEditor);
+        this.appEditor = appEditor;
+        this.pageFile  = pageFile;
+        // this.name      = this.getName();
     }
 
     async setAttr(name, value) {

@@ -2,10 +2,6 @@ const Editor = require('../Editor');
 
 class ColumnEditor extends Editor {
 
-    /*constructor(...args) {
-        super(...args);
-    }*/
-
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {

@@ -6,11 +6,6 @@ const Editor = require('../Editor');
 
 class FieldEditor extends Editor {
 
-    /*constructor(data, formEditor) {
-        super(data, formEditor);
-        // this.formEditor = formEditor;
-    }*/
-
     async setData(data) {
         this.parent.data.fields[this.getName()] = data;
         // await this.parent.parent.save();
