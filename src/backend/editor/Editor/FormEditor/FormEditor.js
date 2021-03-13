@@ -21,13 +21,13 @@ class FormEditor extends Editor {
 
     async moveFieldUp(params) {
         this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, -1);
-        await this.parent.save();
+        // await this.parent.save();
         return 'ok';
     }
 
     async moveFieldDown(params) {
         this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, 1);
-        await this.parent.save();
+        // await this.parent.save();
         return 'ok';
     }
 
@@ -98,9 +98,9 @@ class FormEditor extends Editor {
         return data;
     }
 
-    getAppEditor() {
+    /*getAppEditor() {
         return this.parent.getAppEditor();
-    }
+    }*/
 
 }
 

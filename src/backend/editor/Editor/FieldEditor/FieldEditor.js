@@ -13,7 +13,7 @@ class FieldEditor extends Editor {
 
     async setData(data) {
         this.parent.data.fields[this.getName()] = data;
-        return await this.parent.parent.save();
+        // await this.parent.parent.save();
     }
 
     async changeClass(newClassName) {
@@ -47,9 +47,9 @@ class FieldEditor extends Editor {
         return dirPath;
     }
 
-    getAppEditor() {
+    /*getAppEditor() {
         return this.parent.getAppEditor();
-    }
+    }*/
 
 }
 

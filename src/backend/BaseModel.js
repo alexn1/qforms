@@ -8,9 +8,9 @@ class BaseModel {
         return data['@attributes'][name];
     }
 
-    static setAttr(data, name, value) {
+    /*static setAttr(data, name, value) {
         data['@attributes'][name] = value;
-    }
+    }*/
 
     static getName(data) {
         return BaseModel.getAttr(data, 'name');
@@ -43,6 +43,10 @@ class BaseModel {
         return this.data['@attributes'][name];
     }
 
+    async setAttr(name, value) {
+        this.data['@attributes'][name] = value;
+    }
+
     isAttr(name) {
         return this.data['@attributes'][name] !== undefined;
     }
@@ -51,7 +55,6 @@ class BaseModel {
         if (!colName) throw new Error('isData: no colName');
         if (!name) throw new Error('isData: no name');
         return !!this.getModelData(colName, name);
-        // return !!this.getCol(colName)[name];
     }
 
     getData() {

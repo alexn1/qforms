@@ -10,10 +10,9 @@ class FormEditorController extends VisualEditorController {
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
-        const formEditor = await pageEditor.createForm(params);
-        const formData = formEditor.getData();
+        const data = await pageEditor.createForm(params);
         await pageEditor.save();
-        return formData;
+        return data;
     }
 
     async save(params) {

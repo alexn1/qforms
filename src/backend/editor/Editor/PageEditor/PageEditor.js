@@ -10,7 +10,7 @@ class PageEditor extends Editor {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
         this.pageFile  = pageFile;
-        this.name      = this.getName();
+        // this.name      = this.getName();
     }
 
     static createData(params) {
@@ -29,7 +29,7 @@ class PageEditor extends Editor {
     async setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
-            const pageLinkEditor = this.appEditor.createPageLinkEditor(this.name);
+            const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
             await pageLinkEditor.setAttr(name, value);
         }
         await super.setAttr(name, value);
@@ -37,7 +37,7 @@ class PageEditor extends Editor {
 
     async moveFormUp(params) {
         this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, -1);
-        await this.save();
+        // await this.save();
         return 'ok';
     }
 
@@ -47,7 +47,7 @@ class PageEditor extends Editor {
 
     async moveFormDown(params) {
         this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, 1);
-        await this.save();
+        // await this.save();
         return 'ok';
     }
 
@@ -113,8 +113,8 @@ class PageEditor extends Editor {
                 }
             }
         }
-        await this.save();
-        return formEditor;
+        // await this.save();
+        return formData;
     }
 
     createFormEditor(name) {
@@ -140,7 +140,7 @@ class PageEditor extends Editor {
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
-        return path.join(customDirPath, 'pages', this.name);
+        return path.join(customDirPath, 'pages', this.getName());
     }
 
     newDataSourceData(params) {
@@ -164,9 +164,9 @@ class PageEditor extends Editor {
         return data;
     }
 
-    getAppEditor() {
+    /*getAppEditor() {
         return this.appEditor;
-    }
+    }*/
 
 }
 

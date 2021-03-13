@@ -16,7 +16,7 @@ class ApplicationEditor extends Editor {
         this.appFile  = appFile;
         this.hostApp  = hostApp;
         this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
-        this.name     = this.getName();
+        // this.name     = this.getName();
     }
 
     static createData(params) {
@@ -54,7 +54,7 @@ class ApplicationEditor extends Editor {
         const pageFile = new qforms.JsonFile(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newPageLinkData(params);
-        await this.save();
+        // await this.save();
         return {
             page    : pageData,
             pageLink: pageLinkData
@@ -70,11 +70,11 @@ class ApplicationEditor extends Editor {
         return new qforms.PageLinkEditor(this.getModelData('pageLinks', name), this);
     }
 
-    async setAttr(name, value) {
+    /*async setAttr(name, value) {
         console.log('ApplicationEditor.setAttr');
         await super.setAttr(name, value);
-        await this.save();
-    }
+        // await this.save();
+    }*/
 
     async removePageFile(name) {
         const pageFilePath = path.join(this.appInfo.dirPath, this.createPageLinkEditor(name).getAttr('fileName'));

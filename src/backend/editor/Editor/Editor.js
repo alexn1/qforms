@@ -73,25 +73,15 @@ class Editor extends BaseModel {
     moveDataSourceDown(name) {
         this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
     }
-
-    async setAttr(name, value) {
-        console.log(`Editor(${this.constructor.name}).setAttr`, name, value);
-        // const oldValue = this.getAttr(name);
-        BaseModel.setAttr(this.data, name, value);
-        return await this.save();
-    }
-
-
-
-    getAppEditor() {
+    /*getAppEditor() {
         return null;
-    }
+    }*/
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
             return path.join(customDirPath, 'Controller.js');
         }
-        return path.join(customDirPath, this.name + '.' + ext);
+        return path.join(customDirPath, this.getName() + '.' + ext);
     }
     createDataSourceEditor(name) {
         const data = this.getModelData('dataSources', name);
