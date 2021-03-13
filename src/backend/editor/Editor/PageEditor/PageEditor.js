@@ -147,7 +147,7 @@ class PageEditor extends Editor {
         const name   = params['name'];
         const _class = params['class'];
         if (this.getModelData('dataSources', name)) {
-            throw new Error(`DataSource ${name} already exist`);
+            throw new Error(`DataSource ${name} already exists`);
         }
         let data;
         switch (_class) {

@@ -13,7 +13,7 @@ class Editor extends BaseModel {
         emptyTemplate = emptyTemplate || '';
         const exists = await qforms.Helper.exists(newFilePath);
         if (exists) {
-            throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
+            throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
         const template = await qforms.Helper.readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
@@ -27,7 +27,7 @@ class Editor extends BaseModel {
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await qforms.Helper.exists(newFilePath);
         if (exists) {
-            throw new Error('File {fileName} already exist.'.replace('{fileName}', path.basename(newFilePath)));
+            throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
         const template = await qforms.Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
@@ -50,7 +50,7 @@ class Editor extends BaseModel {
     async saveFile(filePath, content) {
         const exists = await qforms.Helper.exists(filePath);
         if (!exists) {
-            throw new Error("File {fileName} doesn't exist.".replace('{fileName}', path.basename(filePath)));
+            throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
         return await qforms.Helper.writeFile2(filePath, content);
     }

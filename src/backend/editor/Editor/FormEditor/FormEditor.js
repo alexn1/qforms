@@ -12,7 +12,7 @@ class FormEditor extends Editor {
     newFieldData(params) {
         const name = params['name'];
         if (this.getModelData('fields', name)) {
-            throw new Error(`field ${name} already exist`);
+            throw new Error(`field ${name} already exists`);
         }
         const data = eval(`qforms.${params['class']}Editor.createData(params);`);
         this.addModelData('fields', data);
@@ -49,7 +49,7 @@ class FormEditor extends Editor {
         if (!params.name) throw new Error('no name');
         const name = params.name;
         if (this.getModelData('actions', name)) {
-            throw new Error(`action ${name} already exist`);
+            throw new Error(`action ${name} already exists`);
         }
         const data = qforms.ActionEditor.createData(params);
         this.addModelData('actions', data);
