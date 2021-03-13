@@ -26,7 +26,7 @@ class TableEditor extends Editor {
         return data;
     }
 
-    getColumnEditor(name) {
+    createColumnEditor(name) {
         return new ColumnEditor(this.getModelData('columns', name), this);
     }
 
