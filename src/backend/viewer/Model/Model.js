@@ -57,7 +57,7 @@ class Model extends BaseModel {
 
     async createCollectionItems(colName) {
         console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
-        for (const data of this.getCol(colName)) {
+        for (const data of this.getDataCol(colName)) {
             await this.createCollectionItem(colName, data);
         }
     }

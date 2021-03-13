@@ -61,7 +61,7 @@ class BaseModel {
         return this.data;
     }
 
-    getCol(name) {
+    getDataCol(name) {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) throw new Error(`getCol: no col: ${name}`);
@@ -69,18 +69,18 @@ class BaseModel {
     }
 
     getItemNames(colName) {
-        return this.getCol(colName).map(data => BaseModel.getName(data));
+        return this.getDataCol(colName).map(data => BaseModel.getName(data));
     }
 
     getColItemData(colName, name) {
         let data;
-        data = BaseModel.findColDataByName(this.getCol(colName), name);
+        data = BaseModel.findColDataByName(this.getDataCol(colName), name);
         if (data) return data;
         return null;
     }
 
     removeColData(colName, name) {
-        const col = this.getCol(colName);
+        const col = this.getDataCol(colName);
         const data = BaseModel.findColDataByName(col, name);
         if (!data) throw new Error(`removeColData: no ${name} in ${colName}`);
         col.splice(col.indexOf(data), 1);
@@ -92,7 +92,7 @@ class BaseModel {
     }
 
     addModelData(colName, data) {
-        this.getCol(colName).push(data);
+        this.getDataCol(colName).push(data);
     }
 
     getApp() {

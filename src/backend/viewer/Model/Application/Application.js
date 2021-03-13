@@ -158,7 +158,7 @@ class Application extends Model {
     }
 
     getStartupPageLinkNames() {
-        return this.getCol('pageLinks')
+        return this.getDataCol('pageLinks')
             .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
             .map(data => BaseModel.getName(data));
     }
