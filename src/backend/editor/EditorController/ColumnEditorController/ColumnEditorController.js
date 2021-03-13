@@ -16,6 +16,7 @@ class ColumnEditorController extends EditorController {
         const tableEditor = databaseEditor.createTableEditor(params.table);
         const columnEditor = tableEditor.getColumnEditor(params.column);
         await columnEditor.setAttr(params.attr, params.value);
+        await appEditor.save();
         return null;
     }
 

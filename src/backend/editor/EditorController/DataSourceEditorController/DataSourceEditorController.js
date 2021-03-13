@@ -15,21 +15,20 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
-                const dataSourceData  = formEditor.newDataSourceData(params);
-                const dataSourceEditor = formEditor.createDataSourceEditor(params.name);
+                const data = formEditor.newDataSourceData(params);
                 await pageEditor.save();
-                return dataSourceEditor.getData();
+                return data;
             } else {
                 // page data source
-                const dataSourceData = pageEditor.newDataSourceData(params);
+                const data = pageEditor.newDataSourceData(params);
                 await pageEditor.save();
-                return dataSourceData;
+                return data;
             }
         } else {
             // app data source
-            const dataSourceData = appEditor.newDataSourceData(params);
+            const data = appEditor.newDataSourceData(params);
             await appEditor.save();
-            return dataSourceData;
+            return data;
         }
     }
 
@@ -101,22 +100,16 @@ class DataSourceEditorController extends EditorController {
         } else {
             // app data source
             appEditor.moveDataSourceDown(params.dataSource);
-            await appEditor.appFile.save();
+            await appEditor.save();
             return null;
         }
     }
 
     async save(params) {
         console.log('DataSourceEditorController.save');
-        let editor = await this.createApplicationEditor();
-        if (params.pageFileName) {
-            editor = await editor.createPageEditor(params.pageFileName);
-            if (params.form) {
-                editor = editor.createFormEditor(params.form);
-            }
-        }
-        const dataSourceEditor = editor.createDataSourceEditor(params.dataSource);
+        const dataSourceEditor = this.createDataSourceEditor(params);
         await dataSourceEditor.setAttr(params.attr, params.value);
+        await dataSourceEditor.save();
         return null;
     }
 

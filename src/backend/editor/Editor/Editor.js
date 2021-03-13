@@ -81,14 +81,7 @@ class Editor extends BaseModel {
         return await this.save();
     }
 
-    /*async save() {
-        console.log(`Editor(${this.constructor.name}).save`);
-        if (this.parent) {
-            await this.parent.save();
-        } else {
-            console.error(`Editor(${this.constructor.name}).save: no parent`);
-        }
-    }*/
+
 
     getAppEditor() {
         return null;
