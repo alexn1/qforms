@@ -2,10 +2,6 @@ const FormEditor = require('../FormEditor');
 
 class RowFormEditor extends FormEditor {
 
-    /*constructor(pageEditor, name, data) {
-        super(pageEditor, name, data);
-    }*/
-
     static createData(params) {
         return {
             '@class'     : 'RowForm',

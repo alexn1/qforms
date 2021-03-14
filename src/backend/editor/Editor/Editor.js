@@ -70,9 +70,7 @@ class Editor extends BaseModel {
     moveDataSourceDown(name) {
         this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
     }
-    /*getAppEditor() {
-        return null;
-    }*/
+
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {

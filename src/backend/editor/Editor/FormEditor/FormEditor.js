@@ -87,10 +87,6 @@ class FormEditor extends Editor {
         return data;
     }
 
-    /*getAppEditor() {
-        return this.parent.getAppEditor();
-    }*/
-
 }
 
 module.exports = FormEditor;

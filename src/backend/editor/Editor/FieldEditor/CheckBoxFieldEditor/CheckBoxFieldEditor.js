@@ -1,15 +1,6 @@
-// const path = require('path');
 const FieldEditor = require('../FieldEditor');
 
 class CheckBoxFieldEditor extends FieldEditor {
-
-    /*constructor(...args) {
-        super(...args);
-        this.defaultViewDirPath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FieldController/CheckBoxFieldController/view'
-        );
-    }*/
 
     static createData(params) {
         return {

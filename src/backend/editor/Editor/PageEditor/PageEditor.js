@@ -23,7 +23,6 @@ class PageEditor extends Editor {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
         this.pageFile  = pageFile;
-        // this.name      = this.getName();
     }
 
     async setAttr(name, value) {

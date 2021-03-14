@@ -5,7 +5,6 @@ const Editor                   = require('../Editor');
 const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
-const BaseModel                = require('../../../BaseModel');
 
 class ApplicationEditor extends Editor {
 

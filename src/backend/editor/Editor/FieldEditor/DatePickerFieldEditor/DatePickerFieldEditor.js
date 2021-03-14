@@ -1,15 +1,6 @@
-// const path        = require('path');
 const FieldEditor = require('../FieldEditor');
 
 class DatePickerFieldEditor extends FieldEditor {
-
-    /*constructor(...args) {
-        super(...args);
-        this.defaultViewDirPath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FieldController/DatePickerFieldController/view'
-        );
-    }*/
 
     static createData(params) {
         return {

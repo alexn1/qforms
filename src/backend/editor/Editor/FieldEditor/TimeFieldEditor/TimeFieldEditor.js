@@ -1,4 +1,3 @@
-// const path        = require('path');
 const FieldEditor = require('../FieldEditor');
 
 class TimeFieldEditor extends FieldEditor {

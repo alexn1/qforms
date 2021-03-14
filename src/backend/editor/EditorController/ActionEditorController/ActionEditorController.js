@@ -1,10 +1,6 @@
-const path = require('path');
 const EditorController = require('../EditorController');
 
 class ActionEditorController extends EditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
 
     async _new(params) {
         console.log('ActionEditorController._new');

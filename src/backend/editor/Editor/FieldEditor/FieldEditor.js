@@ -41,10 +41,6 @@ class FieldEditor extends Editor {
         return dirPath;
     }
 
-    /*getAppEditor() {
-        return this.parent.getAppEditor();
-    }*/
-
 }
 
 module.exports = FieldEditor;

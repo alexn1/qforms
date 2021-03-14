@@ -1,15 +1,6 @@
-// const path = require('path');
 const FieldEditor = require('../FieldEditor');
 
 class FileFieldEditor extends FieldEditor {
-
-    /*constructor(...args) {
-        super(...args);
-        this.defaultViewDirPath = path.join(
-            this.getAppEditor().hostApp.publicDirPath,
-            'viewer/class/Controller/ModelController/FieldController/FileFieldController/view'
-        );
-    }*/
 
     static createData(params) {
         return {
