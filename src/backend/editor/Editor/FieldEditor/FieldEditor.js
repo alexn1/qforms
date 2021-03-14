@@ -8,7 +8,6 @@ class FieldEditor extends Editor {
 
     async setData(data) {
         this.parent.data.fields[this.getName()] = data;
-        // await this.parent.parent.save();
     }
 
     async changeClass(newClassName) {

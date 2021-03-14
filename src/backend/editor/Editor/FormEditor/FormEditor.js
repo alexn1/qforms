@@ -17,20 +17,13 @@ class FormEditor extends Editor {
 
     async moveFieldUp(params) {
         this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, -1);
-        // await this.parent.save();
         return 'ok';
     }
 
     async moveFieldDown(params) {
         this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, 1);
-        // await this.parent.save();
         return 'ok';
     }
-
-    /*createDataSourceEditor(name) {
-        const data = this.getColItemData('dataSources', name);
-        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
-    }*/
 
     createFieldEditor(name) {
         const data = this.getColItemData('fields', name);

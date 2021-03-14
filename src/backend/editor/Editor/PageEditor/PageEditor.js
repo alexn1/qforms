@@ -37,7 +37,6 @@ class PageEditor extends Editor {
 
     async moveFormUp(params) {
         this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, -1);
-        // await this.save();
         return 'ok';
     }
 
@@ -47,7 +46,6 @@ class PageEditor extends Editor {
 
     async moveFormDown(params) {
         this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, 1);
-        // await this.save();
         return 'ok';
     }
 
@@ -113,7 +111,6 @@ class PageEditor extends Editor {
                 }
             }
         }
-        // await this.save();
         return formData;
     }
 
@@ -121,11 +118,6 @@ class PageEditor extends Editor {
         const data = this.getColItemData('forms', name);
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
-
-    /*createDataSourceEditor(name) {
-        const data = this.getColItemData('dataSources', name);
-        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
-    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
@@ -163,10 +155,6 @@ class PageEditor extends Editor {
         this.addModelData('dataSources', data);
         return data;
     }
-
-    /*getAppEditor() {
-        return this.appEditor;
-    }*/
 
 }
 

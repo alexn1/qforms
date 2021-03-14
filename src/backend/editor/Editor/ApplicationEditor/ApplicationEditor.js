@@ -54,7 +54,6 @@ class ApplicationEditor extends Editor {
         const pageFile = new qforms.JsonFile(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newPageLinkData(params);
-        // await this.save();
         return {
             page    : pageData,
             pageLink: pageLinkData
@@ -101,13 +100,6 @@ class ApplicationEditor extends Editor {
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
-
-    /*createDataSourceEditor(name) {
-        const data = this.getColItemData('dataSources', name);
-        const className = BaseModel.getClassName(data);
-        const DataSourceClass = qforms[`${className}Editor`];
-        return new DataSourceClass(data, this);
-    }*/
 
     movePageLinkUp(name) {
         this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, -1);
