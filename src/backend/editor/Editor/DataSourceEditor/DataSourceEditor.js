@@ -52,11 +52,14 @@ class DataSourceEditor extends Editor {
     }
 
     async save() {
-        console.log(`Editor(${this.constructor.name}).save`);
-        if (this.parent) {
-            await this.parent.save();
+        // console.log(`DataSourceEditor.save`);
+        if (!this.parent) {
+            throw new Error('DataSourceEditor.save: no parent');
+        }
+        if (this.parent instanceof qforms.FormEditor) {
+            await this.parent.parent.save();
         } else {
-            console.error(`Editor(${this.constructor.name}).save: no parent`);
+            await this.parent.save();
         }
     }
 

@@ -107,7 +107,7 @@ class DataSourceEditorController extends EditorController {
 
     async save(params) {
         console.log('DataSourceEditorController.save');
-        const dataSourceEditor = this.createDataSourceEditor(params);
+        const dataSourceEditor = await this.createDataSourceEditor(params);
         await dataSourceEditor.setAttr(params.attr, params.value);
         await dataSourceEditor.save();
         return null;
