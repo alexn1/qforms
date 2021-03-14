@@ -73,8 +73,7 @@ class BaseModel {
     }
 
     getColItemData(colName, name) {
-        let data;
-        data = BaseModel.findColDataByName(this.getDataCol(colName), name);
+        const data = BaseModel.findColDataByName(this.getDataCol(colName), name);
         if (data) return data;
         return null;
     }
@@ -98,11 +97,6 @@ class BaseModel {
     getApp() {
         throw new Error('getApp: not implemented');
     }
-
-    /*renameObjField(objName, oldName, newName) {
-        console.log(`Editor(${this.constructor.name}).renameObjField`, objName, oldName, newName);
-        this.data[objName] = qforms.Helper.replaceKey(this.data[objName], oldName, newName);
-    }*/
 
 }
 module.exports = BaseModel;
