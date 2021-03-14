@@ -70,12 +70,6 @@ class ApplicationEditor extends Editor {
         return new qforms.PageLinkEditor(this.getColItemData('pageLinks', name), this);
     }
 
-    /*async setAttr(name, value) {
-        console.log('ApplicationEditor.setAttr');
-        await super.setAttr(name, value);
-        // await this.save();
-    }*/
-
     async removePageFile(name) {
         const pageFilePath = path.join(this.appInfo.dirPath, this.createPageLinkEditor(name).getAttr('fileName'));
         await qforms.Helper.fsUnlink(pageFilePath);
