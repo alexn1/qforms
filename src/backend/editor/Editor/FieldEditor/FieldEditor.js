@@ -6,8 +6,8 @@ const Editor = require('../Editor');
 
 class FieldEditor extends Editor {
 
-    async setData(data) {
-        this.parent.data.fields[this.getName()] = data;
+    async setData(newData) {
+        return this.parent.replaceDataColItem('fields', this.data, newData);
     }
 
     async changeClass(newClassName) {

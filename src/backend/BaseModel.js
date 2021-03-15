@@ -97,5 +97,13 @@ class BaseModel {
         throw new Error('getApp: not implemented');
     }
 
+    replaceDataColItem(colName, oldData, newData) {
+        const dataCol = this.getDataCol(colName);
+        const i = dataCol.indexOf(oldData);
+        if (i === -1) throw new Error(`replaceDataColItem: no ${BaseModel.getName(oldData)} in ${colName}`);
+        dataCol[i] = newData;
+        return i;
+    }
+
 }
 module.exports = BaseModel;
