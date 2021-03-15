@@ -13,11 +13,11 @@ class DatabaseEditor extends Editor {
         if (!name) throw new Error('need param name');
         if (this.getColItemData('tables', name)) throw new Error(`table ${name} already exists`);
         const data = TableEditor.createData(params);
+        this.addModelData('tables', data);
         if (params.columns) {
             const tableEditor = this.createTableEditor(name);
             params.columns.forEach(column => tableEditor.newColumnData(column));
         }
-        this.addModelData('tables', data);
         return data;
     }
 

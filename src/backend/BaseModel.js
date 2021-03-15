@@ -1,4 +1,9 @@
 class BaseModel {
+    constructor(data, parent) {
+        if (!data) throw new Error(`new ${this.constructor.name}: no data`);
+        this.data = data;
+        this.parent = parent;
+    }
 
     static getClassName(data) {
         return data['@class'];
@@ -8,10 +13,6 @@ class BaseModel {
         return data['@attributes'][name];
     }
 
-    /*static setAttr(data, name, value) {
-        data['@attributes'][name] = value;
-    }*/
-
     static getName(data) {
         return BaseModel.getAttr(data, 'name');
     }
@@ -19,11 +20,6 @@ class BaseModel {
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
         return ['local', ...list];
-    }
-
-    constructor(data, parent) {
-        this.data = data;
-        this.parent = parent;
     }
 
     getClassName() {
@@ -64,7 +60,10 @@ class BaseModel {
     getDataCol(name) {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
-        if (!arr) throw new Error(`getCol: no col: ${name}`);
+        if (!arr) {
+            // console.log('this.data', this.data);
+            throw new Error(`getCol: no col ${name}`);
+        }
         return arr;
     }
 
