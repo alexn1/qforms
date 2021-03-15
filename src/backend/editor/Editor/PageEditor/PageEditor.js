@@ -51,67 +51,40 @@ class PageEditor extends Editor {
     newFormData(params) {
         const name   = params['name'];
         const _class = params['class'];
-        if (this.getColItemData('forms', name)) {
-            throw new Error(`Form ${name} already exists.`);
-        }
+        if (this.getColItemData('forms', name)) throw new Error(`Form ${name} already exists.`);
         let data;
         switch (_class) {
-            case 'TableForm':
-                data = qforms.TableFormEditor.createData(params);
-                break;
-            case 'RowForm':
-                data = qforms.RowFormEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown form class: ${_class}`);
+            case 'TableForm': data = qforms.TableFormEditor.createData(params); break;
+            case 'RowForm'  : data = qforms.RowFormEditor.createData(params)  ; break;
+            default: throw new Error(`unknown form class: ${_class}`);
         }
         this.addModelData('forms', data);
-        return data;
-    }
 
-    async createForm(params) {
-        const name = params.name;
-        const formData = this.newFormData(params);
         const formEditor = this.createFormEditor(name);
-
-
-        // fields
-        if (params.fields) {
-            for (const fieldName in params.fields) {
-                formEditor.newFieldData(_.extend(
-                    {form: name},
-                    params.fields[fieldName]
-                ));
-            }
-        }
 
         // dataSources
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
-                formEditor.newDataSourceData(
-                    _.extend(
-                        {form: name},
-                        dataSource
-                    )
-                );
+                formEditor.newDataSourceData(dataSource);
                 const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
+
                 // keyColumns
                 if (dataSource.keyColumns) {
                     for (const keyColumnName in dataSource.keyColumns) {
-                        const keyColumn = dataSource.keyColumns[keyColumnName];
-                        dataSourceEditor.newKeyColumnData(_.extend(
-                            {
-                                form      : name,
-                                dataSource: dataSourceName
-                            },
-                            keyColumn
-                        ));
+                        dataSourceEditor.newKeyColumnData(dataSource.keyColumns[keyColumnName]);
                     }
                 }
             }
         }
-        return formData;
+
+        // fields
+        if (params.fields) {
+            for (const fieldName in params.fields) {
+                formEditor.newFieldData(params.fields[fieldName]);
+            }
+        }
+        return data;
     }
 
     createFormEditor(name) {
