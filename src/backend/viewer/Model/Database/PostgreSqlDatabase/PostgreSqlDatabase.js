@@ -157,11 +157,11 @@ class PostgreSqlDatabase extends Database {
     async getTableInfo(table) {
         console.log('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
-        console.log('keyColumns:', keyColumns);
+        // console.log('keyColumns:', keyColumns);
         const rows = await this.query(
             `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`
         );
-        console.log('getTableInfo rows:', rows);
+        // console.log('getTableInfo rows:', rows);
         const tableInfo = rows.map(row => ({
             name    : row.column_name,
             type    : this.getColumnTypeByDataType(row.data_type),
