@@ -74,6 +74,7 @@ class PageEditor extends Editor {
         const formData = this.newFormData(params);
         const formEditor = this.createFormEditor(name);
 
+
         // fields
         if (params.fields) {
             for (const fieldName in params.fields) {
@@ -90,7 +91,7 @@ class PageEditor extends Editor {
                 const dataSource = params.dataSources[dataSourceName];
                 formEditor.newDataSourceData(
                     _.extend(
-                        {form:name},
+                        {form: name},
                         dataSource
                     )
                 );
