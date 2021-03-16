@@ -99,7 +99,7 @@ class Page extends Model {
     }
 
     isNewMode() {
-        return this.data.newMode;
+        return this.getAttr('newMode');
     }
 
     hasNew() {

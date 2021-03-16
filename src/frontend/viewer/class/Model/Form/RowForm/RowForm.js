@@ -8,7 +8,7 @@ class RowForm extends Form {
     }
 
     isNewMode() {
-        const newMode = this.getNewMode();
+        const newMode = this.getAttr('newMode');
         if (newMode ===  'true') return  true;
         if (newMode === 'false') return false;
         return this.getPage().isNewMode();
@@ -58,10 +58,6 @@ class RowForm extends Form {
                 this.getField(name).valueToPageParams(this.getRow())
             });
         }
-    }
-
-    getNewMode() {
-        return this.data.newMode;
     }
 
 }
