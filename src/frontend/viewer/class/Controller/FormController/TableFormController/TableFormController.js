@@ -28,6 +28,7 @@ class TableFormController extends FormController {
         super.deinit();
     }
     onNewClick = async e => {
+        console.log('TableFormController.onNewClick');
         await this.new();
     }
     onRefreshClick = async e => {
