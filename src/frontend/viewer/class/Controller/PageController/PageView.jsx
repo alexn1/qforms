@@ -29,7 +29,7 @@ class PageView extends ReactComponent {
         const key = model.getKey();
         let caption = ctrl.getCaption();
         if (ApplicationController.isInDebugMode()) {
-            caption += ` (${model.id})`;
+            caption += ` (${model.getId()})`;
         }
         if (key) {
             caption += ` ${key}`;

@@ -4,12 +4,12 @@ class Page extends Model {
         if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
-        this.id             = options.id;
+        // this.id             = options.id;
         this.parentPageName = options.parentPageName || null;
-        this.modal          = !!options.modal;
+        // this.modal          = !!options.modal;
         this.dataSources    = [];
         this.forms          = [];
-        this.params = {};
+        this.params         = {};
     }
 
     init() {
@@ -42,6 +42,10 @@ class Page extends Model {
             }
         }
     }*/
+
+    getId() {
+        return this.options.id;
+    }
 
     getParams() {
         return {
@@ -129,11 +133,12 @@ class Page extends Model {
     }
 
     getFullName() {
-        return `${this.getName()}(${this.id})`;
+        return `${this.getName()}(${this.getId()})`;
     }
 
     isModal() {
-        return this.modal;
+        // return this.modal;
+        return !!this.options.modal;
     }
 
     onFormInsert(e) {

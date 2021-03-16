@@ -13,7 +13,7 @@ class ApplicationView extends ReactComponent {
     }
     renderModalPages() {
         return this.props.ctrl.modalPages.map(pageCtrl =>
-            <Modal key={pageCtrl.model.id}>
+            <Modal key={pageCtrl.model.getId()}>
                 {ApplicationView.renderPage(pageCtrl)}
             </Modal>
         );
