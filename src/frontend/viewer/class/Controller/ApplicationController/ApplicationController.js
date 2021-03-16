@@ -70,9 +70,9 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
         const key        = options.key || null;
+        const modal      = options.modal   !== undefined ? options.modal   : true;
+        const newMode    = options.newMode !== undefined ? options.newMode : false;
         const parentPage = options.parentPage;
-        const newMode    = !!options.newMode;
-        const modal      = !!options.modal;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);

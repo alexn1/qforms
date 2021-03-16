@@ -18,7 +18,7 @@ class SdiApplicationController extends ApplicationController {
     onMenuItemClick = async (menu, item) => {
         // console.log('ApplicationController.onMenuItemClick', menu, item);
         try {
-            await this.openPage({name: item});
+            await this.openPage({name: item, modal: false});
         } catch (err) {
             console.error(err);
             alert(err.message);
