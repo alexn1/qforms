@@ -74,7 +74,7 @@ class TableFormController extends FormController {
         if (this.model.getAttr('newRowMode') === 'oneclick') {
             const row = {};
             this.model.fillDefaultValues(row);
-            this.model.getDefaultDataSource().insert(row);
+            await this.model.getDefaultDataSource().insert(row);
         } else if (this.model.getAttr('newRowMode') === 'editform') {
             if (!this.model.getAttr('itemEditPage')) {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
@@ -90,7 +90,8 @@ class TableFormController extends FormController {
             }
             await this.openPage({
                 name   : this.model.getAttr('itemCreatePage'),
-                newMode: true
+                newMode: true,
+                modal  : true
             });
         } else if (this.model.getAttr('newRowMode') === 'oneclick editform') {
             if (!this.model.getAttr('itemEditPage')) {
@@ -100,8 +101,9 @@ class TableFormController extends FormController {
             this.model.fillDefaultValues(row);
             const key = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
-                key : key
+                name : this.model.getAttr('itemEditPage'),
+                key  : key,
+                modal: true
             });
         } else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
             if (!this.model.getAttr('itemCreatePage')) {
@@ -111,8 +113,9 @@ class TableFormController extends FormController {
             this.model.fillDefaultValues(row);
             const key2 = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
-                name: this.model.getAttr('itemCreatePage'),
-                key : key2
+                name : this.model.getAttr('itemCreatePage'),
+                key  : key2,
+                modal: true
             });
         }
     }
