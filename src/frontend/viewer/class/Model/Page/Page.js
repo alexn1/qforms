@@ -37,14 +37,18 @@ class Page extends Model {
         // params defined during data source filling on the server
         if (this.data.params !== undefined) {
             for (const data of this.data.params) {
-                this.params[data.name] = data;
+                this.addPageParam(data.name, data);
             }
         }
         // console.log('page params:', this.params);
     }*/
 
     getParams() {
+        return this.params;
+    }
 
+    addPageParam(name, value) {
+        this.params[name] = value;
     }
 
     async update() {
@@ -132,7 +136,7 @@ class Page extends Model {
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
         for (const name in e.keyParams) {
-            this.params[name] = e.keyParams[name];
+            this.addPageParam(name, e.keyParams[name]);
         }
     }
     async rpc(name, params) {

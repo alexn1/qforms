@@ -83,7 +83,7 @@ class ApplicationController extends Controller {
         }
 
         const params = {
-            ...(parentPage ? parentPage.params : {}),
+            ...(parentPage ? parentPage.getParams() : {}),
             ...(key ? DataSource.keyToParams(key) : {})
         };
         //console.log('open ' + name + ' with key: ' + key);

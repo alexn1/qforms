@@ -24,7 +24,7 @@ class Field extends Model {
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
         const params = {
             // ...this.getApp().data.params,
-            ...this.getPage().params,
+            ...this.getPage().getParams(),
         };
         const js = Helper.templateValue(defaultValue, params);
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
@@ -43,7 +43,7 @@ class Field extends Model {
         // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
         // if (this.getDbType() === 'text') return;
         if (this.isParam()) {
-            this.getPage().params[this.getFullName()] = this.getValue(row);
+            this.getPage().addPageParam(this.getFullName(), this.getValue(row));
         }
     }
 

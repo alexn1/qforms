@@ -150,7 +150,7 @@ class SqlDataSource extends DataSource {
 
     getPageParams() {
         const page = this.getPage();
-        return page ? page.params : {};
+        return page ? page.getParams() : {};
     }
 
     async refresh() {
