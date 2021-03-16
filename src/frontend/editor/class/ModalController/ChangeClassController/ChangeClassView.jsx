@@ -31,7 +31,7 @@ class ChangeClassView extends ReactComponent {
                         {value: 'DateTimeField', title: 'DateTimeField'},
                         {value: 'CheckBoxField', title: 'CheckBoxField'},
                         {value: 'FileField', title: 'FileField'},
-                    ]} onCreate={c => this.class = c}/>
+                    ]} value={ctrl.options.fieldCtrl.model.getClassName()} onCreate={c => this.class = c}/>
                 </div>
             </div>
             <div className="modal-footer">

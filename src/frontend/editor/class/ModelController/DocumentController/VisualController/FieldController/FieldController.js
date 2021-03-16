@@ -34,15 +34,15 @@ class FieldController extends VisualController {
     }
 
     async actionChangeClass() {
-        await EditorController.editorController.openModal(new ChangeClassController({onCreate: async values => {
-            const fieldClass = values.class;
-            if (this.model.getClassName() !== fieldClass) {
-                const data = await this.model.changeClass({class: fieldClass});
-                //console.log(data);
+        await EditorController.editorController.openModal(new ChangeClassController({
+            fieldCtrl: this,
+            onCreate: async values => {
+                const data = await this.model.changeClass({class: values.class});
+                console.log(data);
                 EditorController.editorController.fillPropertyGrid(this);
                 this.view.rerender();
             }
-        }}));
+        }));
     }
 
     getPropList() {
