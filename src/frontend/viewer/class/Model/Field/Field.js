@@ -145,9 +145,9 @@ class Field extends Model {
     isParam() {
         return this.data.param === 'true';
     }
-    getPlaceholder() {
-        return this.data.placeholder;
-    }
+    /*getPlaceholder() {
+        return this.getAttr('placeholder');
+    }*/
     validateOnChange() {
         if (this.data.validateOnChange !== undefined) {
             return this.data.validateOnChange === 'true';

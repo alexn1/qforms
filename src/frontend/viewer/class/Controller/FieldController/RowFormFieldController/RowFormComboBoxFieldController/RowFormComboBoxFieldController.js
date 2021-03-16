@@ -12,7 +12,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         return RowFormComboBoxFieldView;
     }
     getPlaceholder() {
-        if (this.model.getPlaceholder()) return this.model.getPlaceholder();
+        if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isInDebugMode() ? '[null]' : null;
     }
 }
