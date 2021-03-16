@@ -6,10 +6,10 @@ class Page extends Model {
         this.options = options;
         this.id             = options.id;
         this.parentPageName = options.parentPageName || null;
-        this.params         = options.params !== undefined ? options.params : {};
         this.modal          = !!options.modal;
         this.dataSources    = [];
         this.forms          = [];
+        this.params = {};
     }
 
     init() {
@@ -21,6 +21,7 @@ class Page extends Model {
             form.init();
             this.forms.push(form);
         }
+        console.log('page params:', this.getParams());
     }
 
     deinit() {
@@ -40,11 +41,13 @@ class Page extends Model {
                 this.addPageParam(data.name, data);
             }
         }
-        // console.log('page params:', this.params);
     }*/
 
     getParams() {
-        return this.params;
+        return {
+            ...(this.options.params !== undefined ? this.options.params : {}),
+            ...this.params,
+        };
     }
 
     addPageParam(name, value) {
