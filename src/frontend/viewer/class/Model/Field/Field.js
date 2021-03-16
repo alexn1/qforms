@@ -23,19 +23,18 @@ class Field extends Model {
         if (!this.data.column) return;
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
         const params = {
-            // ...this.getApp().data.params,
             ...this.getPage().getParams(),
         };
         const js = Helper.templateValue(defaultValue, params);
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
-        // console.log('js', this.getFullName(), js);
+        console.log('js', this.getFullName(), js);
         try {
             const value = eval(js);
             if (value !== undefined) {
                 row[this.data.column] = Field.encodeValue(value);
             }
         } catch (err) {
-            throw new Error(`[${this.getFullName()}] default value error: ${err.toString()}`);
+            throw new Error(`[${this.getFullName()}] fillDefaultValue: ${err.toString()}`);
         }
     }
 

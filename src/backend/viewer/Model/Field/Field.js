@@ -25,7 +25,7 @@ class Field extends Model {
         try {
             value = eval(code);
         } catch (e) {
-            throw new Error('[' + this.getFullName() + '] default value error: ' + e.toString());
+            throw new Error(`[${this.getFullName()}] fillDefaultValue: ${e.toString()}`);
         }
         if (value === undefined) {
             value = null;
