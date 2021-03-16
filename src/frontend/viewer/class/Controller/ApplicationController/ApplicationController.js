@@ -70,9 +70,9 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
         const key        = options.key || null;
+        const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
-        const parentPage = options.parentPage;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -82,27 +82,26 @@ class ApplicationController extends Controller {
             return;
         }
 
-        const params = {
-            ...(parentPage ? parentPage.getParams() : {}),
-            ...(key ? DataSource.keyToParams(key) : {})
-        };
         //console.log('open ' + name + ' with key: ' + key);
-
-        const parentPageName = parentPage ? parentPage.getName() : null;
 
         const {page: pageData} = await this.model.request({
             action        : 'page',
             page          : name,
             newMode       : isNewMode,
-            parentPageName: parentPageName,
-            params        : Helper.encodeObject(params)
+            parentPageName: parentPage ? parentPage.getName() : null,
+            params        : Helper.encodeObject({
+                ...(parentPage ? parentPage.getParams() : {}),
+                ...(key ? DataSource.keyToParams(key) : {})
+            })
         });
 
         const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
-            params        : params,
-            parentPageName: parentPageName,
-            modal         : isModal
+            modal         : isModal,
+            parentPage    : parentPage,
+            params        : {
+                ...(key ? DataSource.keyToParams(key) : {}),
+            },
         });
         pageModel.init();
         const pc = PageController.create(pageModel, this);

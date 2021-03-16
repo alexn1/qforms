@@ -1,19 +1,15 @@
 class Page extends Model {
-    // options {id, parentPageName, params, modal}
     constructor(data, parent, options) {
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options = options;
-        // this.id             = options.id;
-        this.parentPageName = options.parentPageName || null;
-        // this.modal          = !!options.modal;
+        this.options = options; // {id, parentPage, modal, params}
         this.dataSources    = [];
         this.forms          = [];
         this.params         = {};
     }
 
     init() {
-        if (this.data.params) throw new Error('params still here');
+        if (this.data.params) throw new Error('data.params still here');
         // this.initParams();
         this.createDataSources();
         for (const data of this.data.forms) {
@@ -48,11 +44,13 @@ class Page extends Model {
     }
 
     getParentPageName() {
-        return this.parentPageName;
+        return this.options.parentPage ?  this.options.parentPage.getName() : null;
+        // return this.parentPageName;
     }
 
     getParams() {
         return {
+            ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
             ...(this.options.params !== undefined ? this.options.params : {}),
             ...this.params,
         };
