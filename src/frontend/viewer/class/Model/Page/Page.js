@@ -3,6 +3,7 @@ class Page extends Model {
     constructor(data, parent, options) {
         if (!options.id) throw new Error('no page id');
         super(data, parent);
+        this.options = options;
         this.id             = options.id;
         this.parentPageName = options.parentPageName || null;
         this.params         = options.params !== undefined ? options.params : {};
@@ -16,7 +17,7 @@ class Page extends Model {
         // this.initParams();
         this.createDataSources();
         for (const data of this.data.forms) {
-            const form = eval(`new ${data.class}(data, this)`);
+            const form = eval(`new ${Model.getAttr(data, 'class')}(data, this)`);
             form.init();
             this.forms.push(form);
         }
@@ -32,16 +33,15 @@ class Page extends Model {
         super.deinit();
     }
 
-    initParams() {
+    /*initParams() {
         // params defined during data source filling on the server
-
         if (this.data.params !== undefined) {
             for (const data of this.data.params) {
                 this.params[data.name] = data;
             }
         }
         // console.log('page params:', this.params);
-    }
+    }*/
 
     getParams() {
 

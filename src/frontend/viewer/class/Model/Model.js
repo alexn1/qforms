@@ -15,16 +15,20 @@ class Model extends EventEmitter {
         this.deinited = true;
     }
 
+    static getAttr(data, name) {
+        return data[name];
+    }
+
     getAttr(name) {
         return this.data[name];
     }
 
     getClassName() {
-        return this.data.class;
+        return this.getAttr('class');
     }
 
     getName() {
-        return this.data.name;
+        return this.getAttr('name');
     }
     getFullName() {
         if (this.parent) {
