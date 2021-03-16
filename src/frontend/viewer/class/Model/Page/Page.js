@@ -1,5 +1,6 @@
 class Page extends Model {
     constructor(data, parent, options) {
+        // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options; // {id, parentPage, modal, params}
@@ -57,6 +58,7 @@ class Page extends Model {
     }
 
     addPageParam(name, value) {
+        // console.log('Page.addPageParam', name);
         this.params[name] = value;
     }
 
