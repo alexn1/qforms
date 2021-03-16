@@ -188,9 +188,9 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'select',
-            parentPageName: page ? page.parentPageName : null,
-            page          : page ? page.getName()      : null,
-            form          : form ? form.getName()      : null,
+            parentPageName: page ? page.getParentPageName() : null,
+            page          : page ? page.getName()           : null,
+            form          : form ? form.getName()           : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
                 ...this.getPageParams(),
@@ -208,9 +208,9 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'selectSingle',
-            parentPageName: page ? page.parentPageName : null,
-            page          : page ? page.getName()      : null,
-            form          : form ? form.getName()      : null,
+            parentPageName: page ? page.getParentPageName() : null,
+            page          : page ? page.getName()           : null,
+            form          : form ? form.getName()           : null,
             ds            : this.getName(),
             params        : Helper.encodeObject({
                 ...this.getPageParams(),
@@ -232,7 +232,7 @@ class SqlDataSource extends DataSource {
             form          : this.getForm().getName(),
             // ds            : this.getName(),
             params        : this.getRowWithChanges(row),
-            parentPageName: page.parentPageName || null
+            parentPageName: page.getParentPageName() || null
         };
         const data = await this.getApp().request(args);
         const [key] = Object.keys(data);
@@ -273,7 +273,7 @@ class SqlDataSource extends DataSource {
             // ds            : this.getName(),
             // row           : this.getRowByKey(key),
             params        : Helper.encodeObject({key}),
-            parentPageName: page ? page.parentPageName : null
+            parentPageName: page ? page.getParentPageName() : null
         };
         const data = await this.getApp().request(args);
         await this.refill();

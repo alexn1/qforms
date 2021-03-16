@@ -47,6 +47,10 @@ class Page extends Model {
         return this.options.id;
     }
 
+    getParentPageName() {
+        return this.parentPageName;
+    }
+
     getParams() {
         return {
             ...(this.options.params !== undefined ? this.options.params : {}),

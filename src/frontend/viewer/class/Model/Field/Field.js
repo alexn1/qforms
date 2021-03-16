@@ -11,8 +11,8 @@ class Field extends Model {
             if (name.indexOf('.') === -1) return text;
             let arr = name.split('.');
             if (arr[0] === 'this') arr[0] = this.getPage().getName();
-            if (arr[0] === 'parent' && this.getPage().parentPageName) {
-                arr[0] = this.getPage().parentPageName;
+            if (arr[0] === 'parent' && this.getPage().getParentPageName()) {
+                arr[0] = this.getPage().getParentPageName();
             }
             return `{${arr.join('.')}}`;
         });
