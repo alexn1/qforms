@@ -10,7 +10,7 @@ class RowFormEditor extends FormEditor {
                 caption : params.caption  ? params.caption : params.name,
                 visible : params.visible  ? params.visible : 'true',
                 newMode : params.newMode  ? params.newMode : '',
-                backOnly: params.backOnly ? params.backOnly  : 'false'
+                backOnly: params.backOnly ? params.backOnly: 'false'
             },
             dataSources: [],
             actions    : [],
