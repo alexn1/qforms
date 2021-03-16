@@ -90,6 +90,21 @@ class TableFormView extends ReactComponent {
         if (nextProps.updated - this.props.updated) return true;
         return false;
     }
+    getGridColumns() {
+        const ctrl = this.props.ctrl;
+        return Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
+            const field = ctrl.fields[name];
+            return {
+                name : field.model.getName(),
+                title: field.model.getCaption(),
+                width: field.model.getWidth()
+            };
+        });
+    }
+    getRows() {
+        const ctrl = this.props.ctrl;
+        return ctrl.model.getDefaultDataSource().getRows();
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -100,8 +115,8 @@ class TableFormView extends ReactComponent {
                 <Grid
                     classList={['flex-max']}
                     name={ctrl.model.getFullName()}
-                    columns={ctrl.getGridColumns()}
-                    rows={ctrl.getRows()}
+                    columns={this.getGridColumns()}
+                    rows={this.getRows()}
                     getRowKey={row => ctrl.model.getDefaultDataSource().getRowKey(row)}
                     onDoubleClick={ctrl.onGridCellDblClick}
                     onActiveRowChange={ctrl.onActiveRowChange}

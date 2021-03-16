@@ -27,19 +27,6 @@ class TableFormController extends FormController {
         this.model.off('insert' , this.onModelInsert);
         super.deinit();
     }
-    getGridColumns() {
-        return Object.keys(this.model.fields).filter(name => this.model.fields[name].isVisible()).map(name => {
-            const field = this.model.fields[name];
-            return {
-                name : field.getName(),
-                title: field.getCaption(),
-                width: field.getWidth()
-            };
-        });
-    }
-    getRows() {
-        return this.model.getDefaultDataSource().getRows();
-    }
     onNewClick = async e => {
         await this.new();
     }
