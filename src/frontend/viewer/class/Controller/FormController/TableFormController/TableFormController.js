@@ -50,7 +50,7 @@ class TableFormController extends FormController {
         // console.log('row:', row);
         const key = this.model.getDefaultDataSource().getRowKey(row);
         // console.log('key:', key);
-        switch (this.model.data.editMethod) {
+        switch (this.model.getAttr('editMethod')) {
             // case 'table':
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
@@ -71,59 +71,59 @@ class TableFormController extends FormController {
         }*/
     }
     async new() {
-        if (this.model.data.newRowMode === 'oneclick') {
+        if (this.model.getAttr('newRowMode') === 'oneclick') {
             const row = {};
             this.model.fillDefaultValues(row);
             this.model.getDefaultDataSource().insert(row);
-        } else if (this.model.data.newRowMode === 'editform') {
-            if (!this.model.data.itemEditPage) {
+        } else if (this.model.getAttr('newRowMode') === 'editform') {
+            if (!this.model.getAttr('itemEditPage')) {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
             await this.openPage({
-                name   : this.model.data.itemEditPage,
+                name   : this.model.getAttr('itemEditPage'),
                 newMode: true,
                 modal  : true
             });
-        } else if (this.model.data.newRowMode === 'createform') {
-            if (!this.model.data.itemCreatePage) {
+        } else if (this.model.getAttr('newRowMode') === 'createform') {
+            if (!this.model.getAttr('itemCreatePage')) {
                 throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
             await this.openPage({
-                name   : this.model.data.itemCreatePage,
+                name   : this.model.getAttr('itemCreatePage'),
                 newMode: true
             });
-        } else if (this.model.data.newRowMode === 'oneclick editform') {
-            if (!this.model.data.itemEditPage) {
+        } else if (this.model.getAttr('newRowMode') === 'oneclick editform') {
+            if (!this.model.getAttr('itemEditPage')) {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
             const row = {};
             this.model.fillDefaultValues(row);
             const key = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
-                name: this.model.data.itemEditPage,
+                name: this.model.getAttr('itemEditPage'),
                 key : key
             });
-        } else if (this.model.data.newRowMode === 'oneclick createform') {
-            if (!this.model.data.itemCreatePage) {
+        } else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
+            if (!this.model.getAttr('itemCreatePage')) {
                 throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
             const row = {};
             this.model.fillDefaultValues(row);
             const key2 = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
-                name: this.model.data.itemCreatePage,
+                name: this.model.getAttr('itemCreatePage'),
                 key : key2
             });
         }
     }
     async edit(key) {
         // console.log('TableForm.edit', this.model.getFullName(), key);
-        if (!this.model.data.itemEditPage) {
+        if (!this.model.getAttr('itemEditPage')) {
             throw new Error(`${this.model.getFullName()}: itemEditPage is empty`);
         }
         try {
             await this.openPage({
-                name : this.model.data.itemEditPage,
+                name : this.model.getAttr('itemEditPage'),
                 key  : key,
                 modal: true
             });
