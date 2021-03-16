@@ -21,7 +21,7 @@ class Page extends Model {
             form.init();
             this.forms.push(form);
         }
-        console.log('page params:', this.getParams());
+        console.log('page params:', this.getFullName(), this.getParams());
     }
 
     deinit() {
