@@ -54,7 +54,7 @@ class DataSource extends Model {
     }
 
     prepareRows(rows) {
-        console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
+        // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         if (rows[0]) {
             this.keyColumns.forEach(column => {
                 if (!rows[0].hasOwnProperty(column)) {
@@ -67,7 +67,6 @@ class DataSource extends Model {
                 this.calcColumns(rows[i]);
             }
         }
-        // DataSource.encodeRows(rows);
     }
 
     calcColumns(row) {

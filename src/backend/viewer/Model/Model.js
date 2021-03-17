@@ -1,4 +1,4 @@
-// const path    = require('path');
+const path    = require('path');
 const qforms  = require('../../qforms');
 
 const BaseModel = require('../../BaseModel');
@@ -56,15 +56,28 @@ class Model extends BaseModel {
     }*/
 
     async createCollectionItems(colName) {
-        console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
+        // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
         for (const data of this.getDataCol(colName)) {
-            await this.createCollectionItem(colName, data);
+            await this.createColItem(colName, data);
         }
     }
 
-    async createCollectionItem(colName, data) {
+    getColItemDirPath(colName, itemName) {
+        // console.log('Model.getColItemDirPath', colName, itemName, this.getDirPath());
+        const dirPath = this.getDirPath();
+        if (dirPath) {
+            return path.join(this.getDirPath(), colName, itemName);
+        }
+        return null;
+    }
+
+    async createColItem(colName, data) {
         const name = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
+        const colItemDirPath = this.getColItemDirPath(colName, name);
+        if (colItemDirPath) {
+            console.log('colItemDirPath:', colItemDirPath);
+        }
         try {
             const Class = qforms[className];
             const obj = new Class(data, this);
