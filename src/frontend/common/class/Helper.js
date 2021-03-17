@@ -148,7 +148,9 @@ class Helper {
 
     static templateValue(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
-            if (params.hasOwnProperty(name)) return params[name];
+            if (params.hasOwnProperty(name)) {
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
+            }
             return '';
         });
     }

@@ -22,10 +22,7 @@ class Field extends Model {
         // console.log('Field.fillDefaultValue', this.getFullName());
         if (!this.data.column) return;
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
-        const params = {
-            ...this.getPage().getParams(),
-        };
-        const js = Helper.templateValue(defaultValue, params);
+        const js = Helper.templateValue(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
         console.log('js', this.getFullName(), js);
         try {
