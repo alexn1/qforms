@@ -8,17 +8,18 @@ const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
 const Database = require('../Database/Database');
 const BaseModel = require('../../../BaseModel');
+const Helper = require('../../../Helper');
 
 class Application extends Model {
 
     static async create(appFilePath, hostApp, env) {
         // console.log('Application.create', appFilePath);
-        const appInfo = await qforms.Helper.getAppInfo(appFilePath, env);
-        const json = await qforms.Helper.readTextFile(appInfo.filePath);
+        const appInfo = await Helper.getAppInfo(appFilePath, env);
+        const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         //console.log('customClassFilePath:', customClassFilePath);
-        const js = await qforms.Helper.getFileContent(customClassFilePath);
+        const js = await Helper.getFileContent(customClassFilePath);
         if (js) {
             const customClass = eval(js);
             return new customClass(data, appInfo, hostApp, env);
@@ -48,8 +49,8 @@ class Application extends Model {
         // await super.init();
         await this.createCollectionItems('databases');
         await this.createCollectionItems('dataSources');
-        this.css = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'css');
-        this.js  = await qforms.Helper.getFilePaths(this.getDirPath(), 'build', 'js');
+        this.css = await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
+        this.js  = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
 
     async deinit() {
@@ -135,7 +136,7 @@ class Application extends Model {
         // console.log('Application.createPage', pageLinkName);
         const relFilePath  = this.createPageLink(pageLinkName).getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await qforms.Helper.readTextFile(pageFilePath);
+        const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await qforms.Page.create(data, this);
         await page.init();

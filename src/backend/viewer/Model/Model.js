@@ -68,9 +68,8 @@ class Model extends BaseModel {
         try {
             const Class = qforms[className];
             const obj = new Class(data, this);
-            // this[colName][name] = obj;
-            this[colName].push(obj);
             await obj.init();
+            this[colName].push(obj);
         } catch (err) {
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
