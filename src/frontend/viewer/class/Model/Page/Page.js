@@ -59,7 +59,7 @@ class Page extends Model {
 
     addPageParam(name, value) {
         // console.log('Page.addPageParam', name);
-        this.params[name] = value;
+        this.params[name] = value !== undefined ? value : null;
     }
 
     async update() {

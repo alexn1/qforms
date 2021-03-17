@@ -42,7 +42,7 @@ class Field extends Model {
             if (!column) throw new Error('no column attr');
             const value = row[column];
             // console.log('value:', value);
-            params[fullName] = value !== undefined ? Helper.decodeValue(value) : value;
+            params[fullName] = value !== undefined ? Helper.decodeValue(value) : null;
         } catch (err) {
             // console.log('row:', row);
             err.message = `${fullName}: ${err.message}`;

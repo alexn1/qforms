@@ -250,11 +250,11 @@ class SqlDataSource extends DataSource {
     }
 
     isDefaultOnRowForm() {
-        return /*this.form && */this.parent instanceof qforms.RowForm && this.getName() === 'default';
+        return this.parent instanceof qforms.RowForm && this.getName() === 'default';
     }
 
     isDefaultOnTableForm() {
-        return /*this.form && */this.parent instanceof qforms.TableForm && this.getName() === 'default';
+        return this.parent instanceof qforms.TableForm && this.getName() === 'default';
     }
 
     getDatabase() {
