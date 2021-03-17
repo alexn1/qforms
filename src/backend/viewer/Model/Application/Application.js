@@ -20,12 +20,8 @@ class Application extends Model {
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         //console.log('customClassFilePath:', customClassFilePath);
         const js = await Helper.getFileContent(customClassFilePath);
-        if (js) {
-            const customClass = eval(js);
-            return new customClass(data, appInfo, hostApp, env);
-        } else {
-            return new Application(data, appInfo, hostApp, env);
-        }
+        const Class = js ? eval(js) : Application;
+        return new Class(data, appInfo, hostApp, env);
     }
 
     constructor(data, appInfo, hostApp, env) {
@@ -42,7 +38,6 @@ class Application extends Model {
         this.pages              = {};
         this.css                = [];
         this.js                 = [];
-
     }
 
     async init() {

@@ -1,7 +1,7 @@
 const path    = require('path');
 const qforms  = require('../../qforms');
-
 const BaseModel = require('../../BaseModel');
+const Helper = require('../../Helper');
 
 class Model extends BaseModel {
 
@@ -47,24 +47,19 @@ class Model extends BaseModel {
         }
     }
 
-    getColItemDirPath(colName, itemName) {
-        // console.log('Model.getColItemDirPath', colName, itemName, this.getDirPath());
-        const dirPath = this.getDirPath();
-        if (dirPath) {
-            return path.join(this.getDirPath(), colName, itemName);
-        }
-        return null;
-    }
-
     async createColItem(colName, data) {
         const name = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
-        const colItemDirPath = this.getColItemDirPath(colName, name);
-        if (colItemDirPath) {
-            console.log('colItemDirPath:', colItemDirPath);
-        }
         try {
-            const Class = qforms[className];
+            const colItemDirPath = this.getColItemDirPath(colName, name);
+            let js;
+            if (colItemDirPath) {
+                // console.log('colItemDirPath:', colItemDirPath);
+                const customClassFilePath = path.join(colItemDirPath, 'Model.back.js');
+                js = await Helper.getFileContent(customClassFilePath);
+                // if (js) console.log('customClassFilePath:', customClassFilePath, js);
+            }
+            const Class = js ? eval(js) : qforms[className];
             const obj = new Class(data, this);
             await obj.init();
             this[colName].push(obj);
@@ -75,6 +70,15 @@ class Model extends BaseModel {
     }
 
     getDirPath() {
+        return null;
+    }
+
+    getColItemDirPath(colName, itemName) {
+        // console.log('Model.getColItemDirPath', colName, itemName, this.getDirPath());
+        const dirPath = this.getDirPath();
+        if (dirPath) {
+            return path.join(this.getDirPath(), colName, itemName);
+        }
         return null;
     }
 
