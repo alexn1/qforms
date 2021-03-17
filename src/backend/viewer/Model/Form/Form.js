@@ -11,14 +11,14 @@ class Form extends Model {
         super(data, parent);
         this.fillCollections = ['dataSources', 'fields', 'actions'];
         this.dataSources     = [];
-        this.fields          = [];
         this.actions         = [];
+        this.fields          = [];
     }
 
     async init() {
         await this.createCollectionItems('dataSources');
-        await this.createCollectionItems('fields');
         await this.createCollectionItems('actions');
+        await this.createCollectionItems('fields');
     }
 
     getDirPath() {
@@ -49,18 +49,18 @@ class Form extends Model {
             field.fillDefaultValue(context, row);
         }
         return {
-            class               : 'DataSource',
-            name                : 'default',
-            keyColumns          : ['id'],
-            rows                : [row],
-            // database            : '',
-            // table               : '',
+            class     : 'DataSource',
+            name      : 'default',
+            keyColumns: ['id'],
+            rows      : [row],
         };
     }
 
     dumpRowToParams(row, params) {
         for (const field of this.fields) {
-            field.dumpRowValueToParams(row, params);
+            if (field.isParam()) {
+                field.dumpRowValueToParams(row, params);
+            }
         }
         //console.log(params);
     }
