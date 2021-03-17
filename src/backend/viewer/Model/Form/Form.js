@@ -9,10 +9,10 @@ class Form extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.fillCollections   = ['dataSources', 'fields', 'actions'];
-        this.dataSources       = [];
-        this.fields            = [];
-        this.actions           = [];
+        this.fillCollections = ['dataSources', 'fields', 'actions'];
+        this.dataSources     = [];
+        this.fields          = [];
+        this.actions         = [];
     }
 
     async init() {
