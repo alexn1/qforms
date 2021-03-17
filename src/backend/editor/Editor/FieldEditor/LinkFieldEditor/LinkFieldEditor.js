@@ -6,13 +6,12 @@ class LinkFieldEditor extends FieldEditor {
         return {
             '@class' : 'LinkField',
             '@attributes': {
-                name:params['name'],
+                name        : params['name'],
                 caption     : params['caption']      ? params['caption']      : params['name'],
-                isVisible   : params['isVisible']    ? params['isVisible']    :         'true',
-                defaultValue: params['defaultValue'] ? params['defaultValue'] :             '',
                 column      : params['column']       ? params['column']       : params['name'],
+                defaultValue: params['defaultValue'] ? params['defaultValue'] :             '',
+                isVisible   : params['isVisible']    ? params['isVisible']    :         'true',
                 type        : params['type']         ? params['type']         :             '',
-                // readOnly    : params['readOnly']     ? params['readOnly']     :        'true',
                 notNull     : params['notNull']      ? params['notNull']      :        'false',
                 param       : params.param           ? params.param           :        'false',
             }
