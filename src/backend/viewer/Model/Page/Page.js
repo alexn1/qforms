@@ -33,8 +33,8 @@ class Page extends Model {
     }
 
     async init() {
-        await this.createCollectionItems('dataSources');
-        await this.createCollectionItems('forms');
+        await this.createColItems('dataSources');
+        await this.createColItems('forms');
     }
 
     getDirPath() {

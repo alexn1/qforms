@@ -16,9 +16,9 @@ class Form extends Model {
     }
 
     async init() {
-        await this.createCollectionItems('dataSources');
-        await this.createCollectionItems('actions');
-        await this.createCollectionItems('fields');
+        await this.createColItems('dataSources');
+        await this.createColItems('actions');
+        await this.createColItems('fields');
     }
 
     getDirPath() {

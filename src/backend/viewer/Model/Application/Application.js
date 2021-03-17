@@ -47,8 +47,8 @@ class Application extends Model {
 
     async init() {
         // await super.init();
-        await this.createCollectionItems('databases');
-        await this.createCollectionItems('dataSources');
+        await this.createColItems('databases');
+        await this.createColItems('dataSources');
         this.css = await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }

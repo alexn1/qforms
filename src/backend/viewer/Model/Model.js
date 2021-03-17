@@ -40,23 +40,8 @@ class Model extends BaseModel {
         }
     }
 
-    /*async fillCollectionDefaultFirst(response, colName, context) {
-        //console.log('Model.fillCollectionDefaultFirst', colName);
-        response[colName] = {};
-        const defaultArr = Object.keys(this[colName]).filter(itemName => {return itemName === 'default';});
-        for (let i = 0; i < defaultArr.length; i++) {
-            const itemName = defaultArr[i];
-            response[colName][itemName] = await this[colName][itemName].fill(context);
-        }
-        const noDefaultArr = Object.keys(this[colName]).filter(itemName => {return itemName !== 'default';});
-        for (let i = 0; i < noDefaultArr.length; i++) {
-            const itemName = noDefaultArr[i];
-            response[colName][itemName] = await this[colName][itemName].fill(context);
-        }
-    }*/
-
-    async createCollectionItems(colName) {
-        // console.log(`Model.createCollectionItems ${this.getName()}.${colName}`);
+    async createColItems(colName) {
+        // console.log(`Model.createColItems ${this.getName()}.${colName}`);
         for (const data of this.getDataCol(colName)) {
             await this.createColItem(colName, data);
         }
