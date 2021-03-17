@@ -20,15 +20,16 @@ class Field extends Model {
 
     fillDefaultValue(row) {
         // console.log('Field.fillDefaultValue', this.getFullName());
-        if (!this.data.column) return;
+        const column = this.getAttr('column');
+        if (!column) return;
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
-        const js = Helper.templateValue(defaultValue, this.getPage().getParams());
-        if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be js string`);
+        const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
+        if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
         console.log('js', this.getFullName(), js);
         try {
             const value = eval(js);
             if (value !== undefined) {
-                row[this.data.column] = Field.encodeValue(value);
+                row[column] = Helper.encodeValue(value);
             }
         } catch (err) {
             throw new Error(`[${this.getFullName()}] fillDefaultValue: ${err.toString()}`);
@@ -46,13 +47,9 @@ class Field extends Model {
     setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
-        const rawValue = Field.encodeValue(value);
+        const rawValue = Helper.encodeValue(value);
         this.getForm().getDefaultDataSource().setValue(row, this.data.column, rawValue);
         this.valueToPageParams(row);
-    }
-
-    static encodeValue(value) {
-        return JSON.stringify(value);
     }
 
     isChanged(row) {

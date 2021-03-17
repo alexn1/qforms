@@ -146,12 +146,12 @@ class Helper {
         return bytes.buffer;
     }*/
 
-    static templateValue(value, params) {
+    static templateToJsString(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
-            return '';
+            return 'undefined';
         });
     }
 }

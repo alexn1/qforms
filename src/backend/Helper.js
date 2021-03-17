@@ -160,13 +160,12 @@ class Helper {
         return Helper.currentDate() + ' ' + Helper.currentTime();
     }
 
-    static templateValue(value, params) {
+    static templateToJsString(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
-                return params[name];
-            } else {
-                return null;
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
+            return 'undefined';
         });
     }
 

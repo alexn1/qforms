@@ -18,19 +18,20 @@ class Field extends Model {
 
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');
+        if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = qforms.Application.getParams(context);
-        const code = qforms.Helper.templateValue(defaultValue, params);
+        const js = Helper.templateToJsString(defaultValue, params);
         let value;
         try {
-            value = eval(code);
+            value = eval(js);
+            if (value !== undefined) {
+                row[column] = Helper.encodeValue(value);
+            }
         } catch (e) {
             throw new Error(`[${this.getFullName()}] fillDefaultValue: ${e.toString()}`);
         }
-        if (value === undefined) {
-            value = null;
-        }
-        row[column] = JSON.stringify(value);
+
     }
 
     dumpRowValueToParams(row, params) {
