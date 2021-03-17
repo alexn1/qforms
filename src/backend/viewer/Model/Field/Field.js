@@ -37,8 +37,17 @@ class Field extends Model {
     dumpRowValueToParams(row, params) {
         // console.log('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
-        const column   = this.getAttr('column');
-        params[fullName] = Helper.decodeValue(row[column]);
+        try {
+            const column = this.getAttr('column');
+            if (!column) throw new Error('no column attr');
+            const value = row[column];
+            // console.log('value:', value);
+            params[fullName] = value !== undefined ? Helper.decodeValue(value) : value;
+        } catch (err) {
+            // console.log('row:', row);
+            err.message = `${fullName}: ${err.message}`;
+            throw err;
+        }
     }
 
     getFullName() {
