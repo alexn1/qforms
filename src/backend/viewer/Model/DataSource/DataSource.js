@@ -134,7 +134,7 @@ class DataSource extends Model {
     }
 
     getFullName() {
-        if (this.parent instanceof qforms.Form) {
+        if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof qforms.Page) {
             return [this.parent.getName(), this.getName()].join('.');

@@ -44,19 +44,19 @@ class SqlDataSource extends DataSource {
     getCountQuery(context) {
         const countQuery = this.getAttr('countQuery');
         if (!countQuery) throw new Error(`no countQuery: ${this.getFullName()}`);
-        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, countQuery) : countQuery;
+        return this.isOnForm() ? this.parent.replaceThis(context, countQuery) : countQuery;
     }
 
     getSingleQuery(context) {
         const singleQuery = this.getAttr('singleQuery');
         if (!singleQuery) throw new Error(`no singleQuery: ${this.getFullName()}`);
-        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, singleQuery) : singleQuery;
+        return this.isOnForm() ? this.parent.replaceThis(context, singleQuery) : singleQuery;
     }
 
     getMultipleQuery(context) {
         const multipleQuery = this.getAttr('multipleQuery');
         if (!multipleQuery) throw new Error(`no multipleQuery: ${this.getFullName()}`);
-        return this.parent instanceof qforms.Form ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
+        return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
     }
 
     async selectSingle(context) {
@@ -208,7 +208,7 @@ class SqlDataSource extends DataSource {
         delete response.limit;
 
         // if form data source named default then check mode
-        if (this.parent instanceof qforms.Form && this.getName() === 'default' && this.parent.isNewMode(context)) {
+        if (this.isOnForm() && this.getName() === 'default' && this.parent.isNewMode(context)) {
             if (this.getAttr('limit') !== '') {
                 response.limit = parseInt(this.getAttr('limit'));
             }
