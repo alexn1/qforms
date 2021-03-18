@@ -36,10 +36,11 @@ class PostgreSqlDatabase extends Database {
 
     async getConnection(context) {
         // console.log('PostgreSqlDatabase.getConnection');
-        if (context.connections[this.getName()]) {
-            return context.connections[this.getName()];
+        const name = this.getName();
+        if (context.connections[name]) {
+            return context.connections[name];
         } else {
-            return context.connections[this.getName()] = this._getPool();
+            return context.connections[name] = this._getPool();
         }
     }
 
