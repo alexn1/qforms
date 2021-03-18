@@ -249,18 +249,6 @@ class SqlDataSource extends DataSource {
         return null;
     }
 
-    isDefaultOnForm() {
-        return this.parent instanceof qforms.Form && this.getName() === 'default';
-    }
-
-    isDefaultOnRowForm() {
-        return this.parent instanceof qforms.RowForm && this.getName() === 'default';
-    }
-
-    isDefaultOnTableForm() {
-        return this.parent instanceof qforms.TableForm && this.getName() === 'default';
-    }
-
     getDatabase() {
         const databaseName = this.getAttr('database');
         if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);

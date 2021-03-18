@@ -62,7 +62,7 @@ class DataSource extends Model {
                 }
             }
         }
-        if (this.isDefaultOnForm()) {
+        if (this.isOnFormDefault()) {
             for (const row of rows) {
                 this.calcColumns(row);
             }
@@ -201,6 +201,22 @@ class DataSource extends Model {
             return JSON.parse(content);
         }
         return [];
+    }
+
+    isOnForm() {
+        return this.parent instanceof qforms.Form;
+    }
+
+    isOnFormDefault() {
+        return this.isOnForm() && this.getName() === 'default';
+    }
+
+    isDefaultOnRowForm() {
+        return this.parent instanceof qforms.RowForm && this.getName() === 'default';
+    }
+
+    isDefaultOnTableForm() {
+        return this.parent instanceof qforms.TableForm && this.getName() === 'default';
     }
 }
 
