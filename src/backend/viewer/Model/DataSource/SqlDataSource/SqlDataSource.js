@@ -60,10 +60,10 @@ class SqlDataSource extends DataSource {
     }
 
     async selectSingle(context) {
-        // console.log('SqlDataSource.selectSingle');
+        console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
-        if (rows.length > 1) throw new Error(`single query must return single row: ${this.getFullName()}`);
+        if (rows.length > 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(rows);
         return rows[0] || null;
     }
@@ -247,6 +247,10 @@ class SqlDataSource extends DataSource {
 
     async getRows() {
         return null;
+    }
+
+    isDefaultOnForm() {
+        return this.parent instanceof qforms.Form && this.getName() === 'default';
     }
 
     isDefaultOnRowForm() {

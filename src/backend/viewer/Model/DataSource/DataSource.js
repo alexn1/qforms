@@ -56,15 +56,15 @@ class DataSource extends Model {
     prepareRows(rows) {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         if (rows[0]) {
-            this.keyColumns.forEach(column => {
-                if (!rows[0].hasOwnProperty(column)) {
-                    throw new Error(`${this.getFullName()}: no column '${column}' in result set`);
+            for (const keyColumn of this.keyColumns) {
+                if (!rows[0].hasOwnProperty(keyColumn)) {
+                    throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
                 }
-            });
+            }
         }
-        if (this.parent instanceof qforms.Form && this.getName() === 'default') {
-            for (let i = 0; i < rows.length; i++) {
-                this.calcColumns(rows[i]);
+        if (this.isDefaultOnForm()) {
+            for (const row of rows) {
+                this.calcColumns(row);
             }
         }
     }
