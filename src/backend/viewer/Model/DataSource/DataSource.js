@@ -85,8 +85,8 @@ class DataSource extends Model {
     }
 
     static encodeRows(rows) {
-        for (let i = 0; i < rows.length; i++) {
-            DataSource.encodeRow(rows[i]);
+        for (const row of rows) {
+            DataSource.encodeRow(row);
         }
     }
 
