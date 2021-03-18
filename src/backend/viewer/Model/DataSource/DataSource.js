@@ -71,15 +71,15 @@ class DataSource extends Model {
 
     calcColumns(row) {
         for (const field of this.parent.fields) {
-            const columnName = field.getAttr('column');
-            if (!columnName) {
-                throw new Error(`[${this.getFullName()}]: no column name`);
+            const column = field.getAttr('column');
+            if (!column) {
+                throw new Error(`${field.getFullName()}: no column attr`);
             }
-            if (row.hasOwnProperty(columnName)) {
+            if (row.hasOwnProperty(column)) {
             } else if (field.getAttr('value')) {
                 field.calcValue(row);
             } else {
-                throw new Error(`[${field.getFullName()}]: no column '${columnName}' in result set and no value property for calculation`);
+                throw new Error(`[${field.getFullName()}]: no column '${column}' in result set and no value attr for calculation`);
             }
         }
     }
@@ -93,10 +93,6 @@ class DataSource extends Model {
     static encodeRow(row) {
         // console.log('DataSource.encodeRow');
         for (const name in row) {
-            /*if (row[name] instanceof Buffer) {
-                row[name] = JSON.stringify(row[name].toString('base64'));
-            }*/
-            // row[name] = JSON.stringify(row[name]);
             row[name] = Helper.encodeValue(row[name]);
         }
     }

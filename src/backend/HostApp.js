@@ -160,7 +160,7 @@ class HostApp {
     }
 
     async handleViewerPost(req, res, context) {
-        console.log('HostApp.handleViewerPost');
+        // console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
@@ -236,7 +236,8 @@ class HostApp {
         console.log('HostApp.page', req.body.page);
         const application = this.getApplication(req, context);
         const page = await application.getPage(context, req.body.page);
-        await page.respond(res, context);
+        const response = await page.fill(context);
+        await res.json({page: response});
     }
 
     // action
