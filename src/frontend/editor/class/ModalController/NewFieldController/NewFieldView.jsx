@@ -49,7 +49,14 @@ class NewFieldView extends ReactComponent {
                 </div>
                 <div className="form-group">
                     <label htmlFor="type">Type</label>
-                    <TextBox id="type" classList={['form-control']} onCreate={c => this.type = c}/>
+                    <ComboBox id="type" classList={['form-control']} value={'string'} items={[
+                        {value: '', title: ''},
+                        {value: 'string', title: 'string'},
+                        {value: 'number', title: 'number'},
+                        {value: 'boolean', title: 'boolean'},
+                        {value: 'object', title: 'object'},
+                        {value: 'date', title: 'date'},
+                    ]} onCreate={c => this.type = c}/>
                 </div>
             </div>
             <div className="modal-footer">
