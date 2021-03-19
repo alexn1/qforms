@@ -5,7 +5,7 @@ const BaseModel = require('../../../BaseModel');
 const Helper = require('../../../Helper');
 
 class DataSource extends Model {
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         if (parent instanceof qforms.Form) {
             const form = parent;
             const name = BaseModel.getName(data);
@@ -25,7 +25,7 @@ class DataSource extends Model {
         } else {
             return new DataSource(data, parent);
         }
-    }
+    }*/
 
     constructor(data, parent) {
         super(data, parent);

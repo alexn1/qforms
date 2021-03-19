@@ -10,7 +10,7 @@ class SqlDataSource extends DataSource {
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
     }
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         if (parent instanceof qforms.Form) {
             const form = parent;
             const name = BaseModel.getName(data);
@@ -34,7 +34,7 @@ class SqlDataSource extends DataSource {
         } else {
             return new SqlDataSource(data, parent);
         }
-    }
+    }*/
 
     getKeyColumns() {
         // console.log('SqlDataSource.getKeyColumns', this.getFullName());

@@ -44,7 +44,7 @@ class DatabaseEditorController extends EditorController {
         const result = await super.getView(params);
         if (params.view === 'DatabaseView/DatabaseView.html') {
             // database
-            const database = this.application.createDatabase(params.database);
+            const database = this.application.getDatabase(params.database);
 
             // tables
             result.data.tables = await database.getTableList();
@@ -53,7 +53,7 @@ class DatabaseEditorController extends EditorController {
     }
 
     async getTableInfo(params) {
-        const database = this.application.createDatabase(params.database);
+        const database = this.application.getDatabase(params.database);
         const tableInfo = await database.getTableInfo(params.table);
         return {tableInfo};
     }

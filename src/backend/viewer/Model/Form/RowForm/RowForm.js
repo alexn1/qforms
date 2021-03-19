@@ -10,7 +10,7 @@ class RowForm extends Form {
     //     // console.log('RowForm.constructor', this.getFullName());
     // }
 
-    static async create(data, page) {
+    /*static async create(data, page) {
         const name = BaseModel.getName(data);
         // console.log('RowForm.create', name);
         const customClassFilePath = path.join(
@@ -30,7 +30,7 @@ class RowForm extends Form {
         } else {
             return new RowForm(data, page);
         }
-    }
+    }*/
 
     // async fill(context) {
     //     console.log('RowForm.fill', this.constructor.name, this.getFullName());

@@ -122,10 +122,11 @@ class Application extends Model {
         return new PageLink(this.getColItemData('pageLinks', name), this);
     }
 
-    createDatabase(name) {
+    /*createDatabase(name) {
         const data = this.getColItemData('databases', name);
-        return Database.create(data, this);
-    }
+        const className = BaseModel.getClassName(data);
+        return eval(`new qforms.${className}(data, parent)`);
+    }*/
 
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);
