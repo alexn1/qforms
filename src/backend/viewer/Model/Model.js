@@ -48,39 +48,45 @@ class Model extends BaseModel {
     }
 
     async createColItem(colName, data) {
-        const name = BaseModel.getName(data);
-        const className = BaseModel.getClassName(data);
         try {
-            const colItemDirPath = this.getColItemDirPath(colName, name);
-            let js;
-            if (colItemDirPath) {
-                // console.log('colItemDirPath:', colItemDirPath);
-                const customClassFilePath = path.join(colItemDirPath, 'Model.back.js');
-                js = await Helper.getFileContent(customClassFilePath);
-                // if (js) console.log('customClassFilePath:', customClassFilePath, js);
-            }
-            const Class = js ? eval(js) : qforms[className];
-            const obj = new Class(data, this);
-            await obj.init();
-            this[colName].push(obj);
+            const model = await this.createChildModel(colName, data);
+            this[colName].push(model);
         } catch (err) {
+            const name = BaseModel.getName(data);
+            const className = BaseModel.getClassName(data);
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
         }
+    }
+
+    async createChildModel(colName, data) {
+        const modelName = BaseModel.getName(data);
+        const className = BaseModel.getClassName(data);
+        let js;
+        const dirPath = this.getDirPath();
+        if (dirPath) {
+            const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
+            js = await Helper.getFileContent(customClassFilePath);
+            // if (js) console.log('customClassFilePath:', customClassFilePath, js);
+        }
+        const Class = js ? eval(js) : qforms[className];
+        const model = new Class(data, this);
+        await model.init();
+        return model;
     }
 
     getDirPath() {
         return null;
     }
 
-    getColItemDirPath(colName, itemName) {
+    /*getColItemDirPath(colName, itemName) {
         // console.log('Model.getColItemDirPath', colName, itemName, this.getDirPath());
         const dirPath = this.getDirPath();
         if (dirPath) {
-            return path.join(this.getDirPath(), colName, itemName);
+            return path.join(dirPath, colName, itemName);
         }
         return null;
-    }
+    }*/
 
     getDataSource(name) {
         return this.dataSources.find(dataSource => dataSource.getName() === name);

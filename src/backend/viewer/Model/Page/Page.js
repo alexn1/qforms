@@ -9,7 +9,7 @@ const Helper = require('../../../Helper');      // for eval
 
 class Page extends Model {
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         const name = BaseModel.getName(data);
         const customClassFilePath = path.join(
             parent.getDirPath(),
@@ -24,7 +24,9 @@ class Page extends Model {
         } else {
             return new Page(data, parent);
         }
-    }
+    }*/
+
+
 
     constructor(data, parent) {
         super(data, parent);

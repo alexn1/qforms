@@ -134,7 +134,8 @@ class Application extends Model {
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
-        const page = await qforms.Page.create(data, this);
+        const page = await this.createChildModel('pages', data);
+        // const page = await qforms.Page.create(data, this);
         await page.init();
         return page;
     }
