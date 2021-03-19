@@ -4,6 +4,7 @@ class NewFieldView extends ReactComponent {
         this.class   = null;
         this.name    = null;
         this.caption = null;
+        this.type    = null;
     }
     onCreate = async e => {
         // console.log('NewFieldView.onCreate');
@@ -11,6 +12,7 @@ class NewFieldView extends ReactComponent {
             class  : this.class.getValue(),
             name   : this.name.getValue(),
             caption: this.caption.getValue(),
+            type   : this.type.getValue()
         });
     }
     render() {
@@ -44,6 +46,10 @@ class NewFieldView extends ReactComponent {
                 <div className="form-group">
                     <label htmlFor="caption">Caption</label>
                     <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Type</label>
+                    <TextBox id="type" classList={['form-control']} onCreate={c => this.type = c}/>
                 </div>
             </div>
             <div className="modal-footer">

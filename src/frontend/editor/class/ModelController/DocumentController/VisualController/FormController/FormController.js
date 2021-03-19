@@ -108,9 +108,10 @@ class FormController extends VisualController {
     async actionNewField() {
         await EditorController.editorController.openModal(new NewFieldController({onCreate: async values => {
             const field = await this.model.newField({
+                class  : values.class,
                 name   : values.name,
                 caption: values.caption,
-                class  : values.class
+                type   : values.type
             });
             const fieldController = this.createField(field);
             await EditorController.editorController.treeWidget2.select(fieldController);
