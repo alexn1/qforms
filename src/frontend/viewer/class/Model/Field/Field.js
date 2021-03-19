@@ -25,7 +25,7 @@ class Field extends Model {
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
         const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
-        console.log('js', this.getFullName(), js);
+        // console.log('js', this.getFullName(), js);
         try {
             const value = eval(js);
             if (value !== undefined) {

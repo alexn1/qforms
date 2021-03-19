@@ -73,6 +73,7 @@ class ApplicationController extends Controller {
         const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
+        const params     = options.params || {};
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -91,6 +92,7 @@ class ApplicationController extends Controller {
             parentPageName: parentPage ? parentPage.getName() : null,
             params        : Helper.encodeObject({
                 ...(parentPage ? parentPage.getParams() : {}),
+                ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
             })
         });
@@ -100,6 +102,7 @@ class ApplicationController extends Controller {
             modal         : isModal,
             parentPage    : parentPage,
             params        : {
+                ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
             },
         });
