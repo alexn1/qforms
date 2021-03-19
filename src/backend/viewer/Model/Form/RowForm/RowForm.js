@@ -10,28 +10,6 @@ class RowForm extends Form {
     //     // console.log('RowForm.constructor', this.getFullName());
     // }
 
-    /*static async create(data, page) {
-        const name = BaseModel.getName(data);
-        // console.log('RowForm.create', name);
-        const customClassFilePath = path.join(
-            page.getApp().getDirPath(),
-            'pages',
-            page.getName(),
-            'forms',
-            name,
-            'Model.back.js'
-        );
-        // console.log('customClassFilePath:', customClassFilePath);
-        const content = await qforms.Helper.getFileContent(customClassFilePath);
-        if (content) {
-            // console.log('content:', content);
-            const customClass = eval(content);
-            return new customClass(data, page);
-        } else {
-            return new RowForm(data, page);
-        }
-    }*/
-
     // async fill(context) {
     //     console.log('RowForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);

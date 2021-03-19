@@ -50,6 +50,7 @@ class Model extends BaseModel {
     async createColItem(colName, data) {
         try {
             const model = await this.createChildModel(colName, data);
+            await model.init();
             this[colName].push(model);
         } catch (err) {
             const name = BaseModel.getName(data);
@@ -70,23 +71,12 @@ class Model extends BaseModel {
             // if (js) console.log('customClassFilePath:', customClassFilePath, js);
         }
         const Class = js ? eval(js) : qforms[className];
-        const model = new Class(data, this);
-        await model.init();
-        return model;
+        return new Class(data, this);
     }
 
     getDirPath() {
         return null;
     }
-
-    /*getColItemDirPath(colName, itemName) {
-        // console.log('Model.getColItemDirPath', colName, itemName, this.getDirPath());
-        const dirPath = this.getDirPath();
-        if (dirPath) {
-            return path.join(dirPath, colName, itemName);
-        }
-        return null;
-    }*/
 
     getDataSource(name) {
         return this.dataSources.find(dataSource => dataSource.getName() === name);

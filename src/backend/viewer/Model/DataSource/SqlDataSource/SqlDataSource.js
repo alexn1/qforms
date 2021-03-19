@@ -10,32 +10,6 @@ class SqlDataSource extends DataSource {
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
     }
 
-    /*static async create(data, parent) {
-        if (parent instanceof qforms.Form) {
-            const form = parent;
-            const name = BaseModel.getName(data);
-            const customClassFilePath = path.join(
-                form.getPage().getApp().getDirPath(),
-                'pages',
-                form.getPage().getName(),
-                'forms',
-                form.getName(),
-                'dataSources',
-                name,
-                'Model.back.js'
-            );
-            const content = await qforms.Helper.getFileContent(customClassFilePath);
-            if (content) {
-                const CustomClass = eval(content);
-                return new CustomClass(data, parent);
-            } else {
-                return new SqlDataSource(data, parent);
-            }
-        } else {
-            return new SqlDataSource(data, parent);
-        }
-    }*/
-
     getKeyColumns() {
         // console.log('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();

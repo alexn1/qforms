@@ -5,27 +5,6 @@ const BaseModel = require('../../../BaseModel');
 const Helper = require('../../../Helper');
 
 class DataSource extends Model {
-    /*static async create(data, parent) {
-        if (parent instanceof qforms.Form) {
-            const form = parent;
-            const name = BaseModel.getName(data);
-            const customBackendJsFilePath = path.join(
-                form.getPage().getApp().getDirPath(),
-                'pages', form.getPage().getName(),
-                'forms', form.getName(),
-                'dataSources', name,
-                'Model.back.js'
-            );
-            const content = await qforms.Helper.getFileContent(customBackendJsFilePath);
-            if (content) {
-                const CustomClass = eval(content);
-                return new CustomClass(data, parent);
-            }
-            return new DataSource(data, parent);
-        } else {
-            return new DataSource(data, parent);
-        }
-    }*/
 
     constructor(data, parent) {
         super(data, parent);

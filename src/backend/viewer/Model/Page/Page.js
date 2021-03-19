@@ -9,25 +9,6 @@ const Helper = require('../../../Helper');      // for eval
 
 class Page extends Model {
 
-    /*static async create(data, parent) {
-        const name = BaseModel.getName(data);
-        const customClassFilePath = path.join(
-            parent.getDirPath(),
-            'pages',
-            name,
-            'Model.back.js'
-        );
-        const content = await qforms.Helper.getFileContent(customClassFilePath);
-        if (content) {
-            const customClass = eval(content);
-            return new customClass(data, parent);
-        } else {
-            return new Page(data, parent);
-        }
-    }*/
-
-
-
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];

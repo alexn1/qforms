@@ -135,7 +135,6 @@ class Application extends Model {
         const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
-        // const page = await qforms.Page.create(data, this);
         await page.init();
         return page;
     }
