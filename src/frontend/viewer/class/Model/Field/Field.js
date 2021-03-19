@@ -93,8 +93,8 @@ class Field extends Model {
         if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
             return this.getDefaultDataSource().getType(this.data.column);
         }
-        if (this.data.type) return this.data.type;
-        throw new Error(`${this.getFullName()}: field type empty`);
+        if (this.getAttr('type')) return this.getAttr('type');
+        throw new Error(`field type empty`);
     }
 
     getDbType() {

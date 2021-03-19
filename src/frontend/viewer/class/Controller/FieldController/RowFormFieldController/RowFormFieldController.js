@@ -41,7 +41,7 @@ class RowFormFieldController extends FieldController {
         try {
             this.setValueFromView(viewValue);
         } catch (err) {
-            console.log(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+            console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.state.parseError = true;
         }
 
@@ -86,8 +86,10 @@ class RowFormFieldController extends FieldController {
         return this.valueToString(value);
     }
     setValueFromView(viewValue) {
+        // console.log('RowFormFieldController.setValueFromView', this.model.getFullName(), typeof viewValue, viewValue);
         if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
         const value = this.stringToValue(viewValue);
+        // console.log('value:', value);
         this.setValue(value);
     }
     setValue(value) {
