@@ -44,7 +44,7 @@ class Page extends Model {
     }
 
     async rpc(name, context) {
-        console.log('Page.rpc', name);
+        console.log('Page.rpc', name, context.params);
         if (this[name]) return await this[name](context);
         return {errorMessage: `no rpc ${name}`};
     }
