@@ -2,6 +2,7 @@ const path    = require('path');
 const ejs     = require('ejs');
 const qforms = require('../../qforms');
 const BaseModel = require('../../BaseModel');
+const Helper = require('../../Helper');
 
 class Editor extends BaseModel {
 
@@ -83,6 +84,13 @@ class Editor extends BaseModel {
         const className = BaseModel.getClassName(data);
         const DataSourceClass = qforms[`${className}Editor`];
         return new DataSourceClass(data, this);
+    }
+    moveDataColItem(colName, name, offset) {
+        Helper.moveArrItem(
+            this.getDataCol(colName),
+            this.getColItemData(colName, name),
+            offset
+        );
     }
 }
 
