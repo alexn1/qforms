@@ -13,7 +13,7 @@ class ParamController extends ModelController {
     async doAction(name) {
         switch (name) {
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
         }
     }

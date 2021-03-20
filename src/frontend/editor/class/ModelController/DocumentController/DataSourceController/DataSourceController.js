@@ -39,18 +39,20 @@ class DataSourceController extends DocumentController {
     async doAction(name) {
         switch (name) {
             case 'newItem':
-                this.actionNewKeyColumn();
+                await this.actionNewKeyColumn();
                 break;
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
             case 'moveUp':
                 await this.model.moveUp();
-                this.item.move(-1);
+                this.parent.moveColItem('dataSources', this, -1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
-                this.item.move(1);
+                this.parent.moveColItem('dataSources', this, 1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
         }
     }

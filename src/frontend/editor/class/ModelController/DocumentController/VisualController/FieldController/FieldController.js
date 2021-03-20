@@ -17,10 +17,10 @@ class FieldController extends VisualController {
     async doAction(name) {
         switch (name) {
             case 'changeClass':
-                this.actionChangeClass();
+                await this.actionChangeClass();
                 break;
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
             case 'moveUp':
                 await this.model.moveUp();

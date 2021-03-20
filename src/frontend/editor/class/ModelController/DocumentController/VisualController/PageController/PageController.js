@@ -57,13 +57,13 @@ class PageController extends VisualController {
     async doAction(name) {
         switch (name) {
             case 'newForm':
-                this.actionNewForm();
+                await this.actionNewForm();
                 break;
             case 'newDataSource':
-                this.newDataSourceAction();
+                await this.newDataSourceAction();
                 break;
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
             case 'moveUp':
                 await this.model.pageLink.moveUp();

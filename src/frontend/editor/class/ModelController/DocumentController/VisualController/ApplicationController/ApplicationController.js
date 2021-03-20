@@ -78,13 +78,13 @@ class ApplicationController extends VisualController {
     async doAction(name) {
         switch (name) {
             case 'newDatabase':
-                this.newDatabaseAction();
+                await this.newDatabaseAction();
                 break;
             case 'newDataSource':
-                this.newDataSourceAction();
+                await this.newDataSourceAction();
                 break;
             case 'newPage':
-                this.newPageAction();
+                await this.newPageAction();
                 break;
             default:
                 console.log(name);

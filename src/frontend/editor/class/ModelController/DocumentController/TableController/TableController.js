@@ -37,10 +37,10 @@ class TableController extends DocumentController {
     async doAction(name) {
         switch (name) {
             case 'delete':
-                this.delete();
+                await this.delete();
                 break;
             case 'newColumn':
-                this.actionNewColumn();
+                await this.actionNewColumn();
                 break;
             default:
                 throw new Error(`unknown action: ${name}`);
