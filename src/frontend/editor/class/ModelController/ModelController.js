@@ -29,4 +29,7 @@ class ModelController /*extends EventEmitter*/ {
         console.log(`${this.constructor.name}.getDocumentViewClass`);
         return null;
     }
+    moveColItem(colName, item, offset) {
+        Helper.moveArrItem(this[colName], item, offset);
+    }
 }

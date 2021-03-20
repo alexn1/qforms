@@ -24,11 +24,13 @@ class FieldController extends VisualController {
                 break;
             case 'moveUp':
                 await this.model.moveUp();
-                this.item.move(-1);
+                this.parent.moveColItem('fields', this, -1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
-                this.item.move(1);
+                this.parent.moveColItem('fields', this, 1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
         }
     }

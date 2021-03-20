@@ -67,11 +67,13 @@ class PageController extends VisualController {
                 break;
             case 'moveUp':
                 await this.model.pageLink.moveUp();
-                this.item.move(-1);
+                this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, -1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.pageLink.moveDown();
-                this.item.move(1);
+                this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, 1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
             default:
                 console.log(name);
