@@ -310,6 +310,15 @@ class Helper {
         return _.object(keys, values);
     }
 
+    static moveArrItem(arr, item, offset) {
+        const oldIndex = arr.indexOf(item);
+        if (oldIndex === -1) throw new Error('cannot find element');
+        const newIndex = oldIndex + offset;
+        if (newIndex < 0) throw new Error('cannot up top element');
+        if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
+        arr.splice(newIndex, 0,   arr.splice(oldIndex, 1)[0]);
+    }
+
     static getTempSubDirPath3(tempDirPath) {
         return new Promise((resolve, reject) => {
             const subDirName = getRandomString(8);

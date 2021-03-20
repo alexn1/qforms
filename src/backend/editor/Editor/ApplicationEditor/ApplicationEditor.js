@@ -101,11 +101,15 @@ class ApplicationEditor extends Editor {
     }
 
     movePageLinkUp(name) {
-        this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, -1);
+        // this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, -1);
+        const data = this.getColItemData('pageLinks', name);
+        qforms.Helper.moveArrItem(this.getDataCol('pageLinks'), data, -1);
     }
 
     movePageLinkDown(name) {
-        this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, 1);
+        //this.data.pageLinks = qforms.Helper.moveObjProp(this.data.pageLinks, name, 1);
+        const data = this.getColItemData('pageLinks', name);
+        qforms.Helper.moveArrItem(this.getDataCol('pageLinks'), data, 1);
     }
 
     newDatabaseData(params) {
