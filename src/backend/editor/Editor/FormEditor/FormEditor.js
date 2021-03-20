@@ -16,12 +16,12 @@ class FormEditor extends Editor {
     }
 
     async moveFieldUp(params) {
-        this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, -1);
+        this.moveDataColItem('fields', params.field, -1);
         return 'ok';
     }
 
     async moveFieldDown(params) {
-        this.data.fields = qforms.Helper.moveObjProp(this.data.fields, params.field, 1);
+        this.moveDataColItem('fields', params.field, 1);
         return 'ok';
     }
 

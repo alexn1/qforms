@@ -65,11 +65,11 @@ class Editor extends BaseModel {
     }
 
     moveDataSourceUp(name) {
-        this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, -1);
+        this.moveDataColItem('dataSources', name, -1);
     }
 
     moveDataSourceDown(name) {
-        this.data.dataSources = qforms.Helper.moveObjProp(this.data.dataSources, name, 1);
+        this.moveDataColItem('dataSources', name, 1);
     }
 
     async getCustomFilePath(ext) {

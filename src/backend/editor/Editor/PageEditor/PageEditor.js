@@ -35,7 +35,7 @@ class PageEditor extends Editor {
     }
 
     async moveFormUp(params) {
-        this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, -1);
+        this.moveDataColItem('forms', params.form, -1);
         return 'ok';
     }
 
@@ -44,7 +44,7 @@ class PageEditor extends Editor {
     }
 
     async moveFormDown(params) {
-        this.data.forms = qforms.Helper.moveObjProp(this.data.forms, params.form, 1);
+        this.moveDataColItem('forms', params.form, 1);
         return 'ok';
     }
 
