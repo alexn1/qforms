@@ -71,6 +71,7 @@ class DataSource extends Model {
 
     static encodeRow(row) {
         // console.log('DataSource.encodeRow');
+        if (!row) throw new Error(`encodeRow: need row`);
         for (const name in row) {
             row[name] = Helper.encodeValue(row[name]);
         }
