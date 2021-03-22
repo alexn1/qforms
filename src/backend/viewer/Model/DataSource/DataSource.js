@@ -81,13 +81,13 @@ class DataSource extends Model {
         return this.parent.getApp();
     }
 
-    getKeyValuesFromRow(row) {
+    /*getKeyValuesFromRow(row) {
         const values = {};
         this.keyColumns.forEach(column => {
             values[column] = row[column];
         });
         return values;
-    }
+    }*/
 
     getKeyValuesFromKey(key) {
         const arr = JSON.parse(key);
@@ -96,8 +96,8 @@ class DataSource extends Model {
         }
         const values = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
-            const column = this.keyColumns[i];
-            values[column] = arr[i];
+            const keyColumn = this.keyColumns[i];
+            values[keyColumn] = arr[i];
         }
         return values;
     }
