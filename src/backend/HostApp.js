@@ -292,7 +292,6 @@ class HostApp {
             dataSource = application.getDataSource(req.body.ds);
         }
         const row = await dataSource.selectSingle(context);
-        DataSource.encodeRow(row);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({row, time});

@@ -39,7 +39,9 @@ class SqlDataSource extends DataSource {
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length > 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(rows);
-        return rows[0] || null;
+        const row = rows[0] || null;
+        if (row) DataSource.encodeRow(row);
+        return row;
     }
 
     async selectMultiple(context) {
@@ -199,7 +201,6 @@ class SqlDataSource extends DataSource {
         }
         if (this.isDefaultOnRowForm()) {
             const row = await this.selectSingle(context);
-            DataSource.encodeRow(row);
             if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
             response.rows = [row];
         } else {
