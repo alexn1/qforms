@@ -8,7 +8,7 @@ class SqlDataSource extends DataSource {
 
     init() {
         super.init();
-        if (this.data.table !== '') {
+        if (this.getAttr('table') !== '') {
             const table = this.getTable();
             table.on('update', this.onTableUpdated);
             table.on('insert', this.onTableInsert);
@@ -18,7 +18,7 @@ class SqlDataSource extends DataSource {
 
     deinit() {
         // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
-        if (this.data.table !== '') {
+        if (this.getAttr('table') !== '') {
             const table = this.getTable();
             table.removeListener('update', this.onTableUpdated);
             table.removeListener('insert', this.onTableInsert);
@@ -38,17 +38,9 @@ class SqlDataSource extends DataSource {
         return this.getTable().getColumn(column).getDbType();
     }
 
-    /*static encodeChanges(changes) {
-        const eChanges = {};
-        for (const key in changes) {
-            eChanges[key] = Helper.encodeObject(changes[key]);
-        }
-        return eChanges;
-    }*/
-
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
-        if (this.data.table === '') throw new Error(`data source has no table: ${this.getFullName()}`);
+        if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const data = await this.getApp().request({
@@ -97,9 +89,9 @@ class SqlDataSource extends DataSource {
     }
 
     getTable() {
-        if (!this.data.database) throw new Error(`${this.getFullName()}: database prop empty`);
-        if (!this.data.table) throw new Error(`${this.getFullName()}:table prop empty`);
-        return this.getApp().getDatabase(this.data.database).getTable(this.data.table);
+        if (!this.data.database) throw new Error(`${this.getFullName()}: database attr empty`);
+        if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
+        return this.getApp().getDatabase(this.data.database).getTable(this.getAttr('table'));
     }
 
     onTableUpdated = async (e) => {
@@ -264,7 +256,7 @@ class SqlDataSource extends DataSource {
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
-        if (!this.data.table) {
+        if (!this.getAttr('table')) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const page = this.getPage();
@@ -287,8 +279,8 @@ class SqlDataSource extends DataSource {
 
     getTableName() {
         if (!this.data.database) throw new Error('no database');
-        if (!this.data.table) throw new Error('no table');
-        return `${this.data.database}.${this.data.table}`;
+        if (!this.getAttr('table')) throw new Error('no table');
+        return `${this.data.database}.${this.getAttr('table')}`;
     }
 
     getFramesCount() {
