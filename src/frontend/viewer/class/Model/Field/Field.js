@@ -46,30 +46,30 @@ class Field extends Model {
 
     setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
-        if (!this.data.column) throw new Error(`field has no column: ${this.getFullName()}`);
+        if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = Helper.encodeValue(value);
-        this.getForm().getDefaultDataSource().setValue(row, this.data.column, rawValue);
+        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
     }
 
     isChanged(row) {
         // console.log('Field.isChanged', this.getFullName());
-        if (!this.data.column) throw new Error(`${this.getFullName()}: field has no column`);
-        return this.getDefaultDataSource().isRowColumnChanged(row, this.data.column);
+        if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: field has no column`);
+        return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
     }
 
     getRawValue(row) {
         if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm().getDefaultDataSource().getValue(row, this.data.column);
+        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
     }
 
     hasColumn() {
-        return !!this.data.column;
+        return !!this.getAttr('column');
     }
 
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
-        if (this.data.column) {
+        if (this.getAttr('column')) {
             let rawValue = this.getRawValue(row);
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
@@ -90,8 +90,8 @@ class Field extends Model {
 
     getType() {
         const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
-            return this.getDefaultDataSource().getType(this.data.column);
+        if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
+            return this.getDefaultDataSource().getType(this.getAttr('column'));
         }
         if (this.getAttr('type')) return this.getAttr('type');
         throw new Error(`field type empty`);
@@ -99,8 +99,8 @@ class Field extends Model {
 
     getDbType() {
         const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource' && this.data.column) {
-            return this.getDefaultDataSource().getDbType(this.data.column);
+        if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
+            return this.getDefaultDataSource().getDbType(this.getAttr('column'));
         }
         return null;
     }
