@@ -162,13 +162,12 @@ class SqlDataSource extends DataSource {
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows([row]);
         // console.log('row:', row);
+        DataSource.encodeRow(row);
 
-        /*return {
+        return {
             new: {[key]: row}
-        };*/
-        const result = {[key]: row};
-        Object.keys(result).map(key => DataSource.encodeRow(result[key]));
-        return result;
+        };
+        // return {[key]: row};
     }
 
     async delete(context) {
