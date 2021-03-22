@@ -45,8 +45,7 @@ class Page extends Model {
     }
 
     getParentPageName() {
-        return this.options.parentPage ?  this.options.parentPage.getName() : null;
-        // return this.parentPageName;
+        return this.options.parentPage ? this.options.parentPage.getName() : null;
     }
 
     getParams() {

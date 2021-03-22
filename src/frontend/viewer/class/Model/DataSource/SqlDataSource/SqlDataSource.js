@@ -224,15 +224,14 @@ class SqlDataSource extends DataSource {
 
     async insert(row) {
         console.log('SqlDataSource.insert', this.getTableName(), row);
-        if (this.data.table === '') throw new Error('no data source table to insert');
+        if (this.getAttr('table') === '') throw new Error('no data source table to insert');
         const page = this.getPage();
         let args = {
             action        : 'insert',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
-            // ds            : this.getName(),
             params        : this.getRowWithChanges(row),
-            parentPageName: page.getParentPageName() || null
+            parentPageName: page.getParentPageName()
         };
         const data = await this.getApp().request(args);
         const [key] = Object.keys(data);
