@@ -290,7 +290,7 @@ class SqlDataSource extends DataSource {
         return 1;
     }
     getLimit() {
-        if (this.data.limit) return parseInt(this.data.limit);
+        if (this.getAttr('limit')) return parseInt(this.getAttr('limit'));
         return null;
     }
     getCount() {
