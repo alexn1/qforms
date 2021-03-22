@@ -47,7 +47,6 @@ class SqlDataSource extends DataSource {
             action        : 'update',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
-            // ds            : this.getName(),
             changes       : this.getChangesByKey(),
         });
         const [key] = Object.keys(data);
