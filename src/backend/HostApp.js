@@ -247,7 +247,6 @@ class HostApp {
         const form = page.getForm(req.body.form);
         const result = await form.update(context);
         if (result === undefined) throw new Error('action update: result is undefined');
-        // Object.keys(result).map(key => DataSource.encodeRow(result[key]));
         await res.json(result);
     }
 
@@ -268,7 +267,6 @@ class HostApp {
             dataSource = application.getDataSource(req.body.ds);
         }
         const [rows, count] = await dataSource.select(context);
-        // DataSource.encodeRows(rows);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});
@@ -315,7 +313,6 @@ class HostApp {
             dataSource = application.getDataSource(req.body.ds);
         }
         const [rows, count] = await dataSource.selectMultiple(context);
-        // DataSource.encodeRows(rows);
         const time = Date.now() - start;
         console.log('select time:', time);
         await res.json({rows, count, time});

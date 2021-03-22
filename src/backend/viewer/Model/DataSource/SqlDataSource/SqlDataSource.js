@@ -37,11 +37,9 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
-        if (rows.length > 1) throw new Error(`${this.getFullName()}: single query must return single row`);
+        if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(rows);
-        const row = rows[0] || null;
-        if (row) DataSource.encodeRow(row);
-        return row;
+        return rows[0];
     }
 
     async selectMultiple(context) {
@@ -57,7 +55,6 @@ class SqlDataSource extends DataSource {
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
         this.prepareRows(rows);
-        DataSource.encodeRows(rows);
 
         // count
         let count;
@@ -86,7 +83,6 @@ class SqlDataSource extends DataSource {
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
         this.prepareRows(rows);
-        DataSource.encodeRows(rows);
 
         // count
         let count;
@@ -130,9 +126,6 @@ class SqlDataSource extends DataSource {
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows([row]);
         // console.log('row:', row);
-
-        DataSource.encodeRow(row);
-
         return {[key]: row};
     }
 
@@ -169,12 +162,9 @@ class SqlDataSource extends DataSource {
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows([row]);
         // console.log('row:', row);
-        DataSource.encodeRow(row);
-
         return {
             new: {[key]: row}
         };
-        // return {[key]: row};
     }
 
     async delete(context) {
@@ -211,7 +201,6 @@ class SqlDataSource extends DataSource {
         } else {
             try {
                 const [rows, count] = await this.selectMultiple(context);
-                // DataSource.encodeRows(rows);
                 response.rows = rows;
                 response.count = count;
             } catch (err) {

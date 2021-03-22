@@ -46,6 +46,7 @@ class DataSource extends Model {
                 this.calcColumns(row);
             }
         }
+        DataSource.encodeRows(rows);
     }
 
     calcColumns(row) {
