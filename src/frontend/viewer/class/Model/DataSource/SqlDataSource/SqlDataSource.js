@@ -101,14 +101,14 @@ class SqlDataSource extends DataSource {
             // console.error('onTableUpdated stop self update', this.getFullName());
             return;
         }
-        console.log('changes:', e.changes);
+        // console.log('changes:', e.changes);
         if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);
         const key = Object.keys(e.changes)[0];
         const newKey = e.changes[key];
         // console.log(`key: ${key} to ${newKey}`);
-        const params = DataSource.keyToParams(newKey);
-        const data = await this.selectSingle(params);
-        this.updateRow(key, data.row);
+        const keyParams = DataSource.keyToParams(newKey);
+        const result = await this.selectSingle(keyParams);
+        this.updateRow(key, result.row);
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key: key});
         }
@@ -198,7 +198,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.selectSingle', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request({
+        const result = await this.getApp().request({
             action        : 'selectSingle',
             parentPageName: page ? page.getParentPageName() : null,
             page          : page ? page.getName()           : null,
@@ -209,9 +209,9 @@ class SqlDataSource extends DataSource {
                 ...params,
             })
         });
-        if (!data.row) throw new Error('no row');
-        // if (data.time) console.log(`selectSingle time of ${this.getFullName()}:`, data.time);
-        return data;
+        if (!result.row) throw new Error('no row');
+        // if (result.time) console.log(`selectSingle time of ${this.getFullName()}:`, result.time);
+        return result;
     }
 
     async insert(row) {
