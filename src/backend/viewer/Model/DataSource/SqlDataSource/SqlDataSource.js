@@ -163,9 +163,10 @@ class SqlDataSource extends DataSource {
         this.prepareRows([row]);
         // console.log('row:', row);
 
-        return {
+        /*return {
             new: {[key]: row}
-        };
+        };*/
+        return {[key]: row};
     }
 
     async delete(context) {
