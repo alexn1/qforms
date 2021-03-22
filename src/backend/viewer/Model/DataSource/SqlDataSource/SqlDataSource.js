@@ -166,7 +166,9 @@ class SqlDataSource extends DataSource {
         /*return {
             new: {[key]: row}
         };*/
-        return {[key]: row};
+        const result = {[key]: row};
+        Object.keys(result).map(key => DataSource.encodeRow(result[key]));
+        return result;
     }
 
     async delete(context) {

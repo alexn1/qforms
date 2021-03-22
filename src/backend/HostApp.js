@@ -334,7 +334,6 @@ class HostApp {
             const result = await dataSource.insert(context, context.params);
             if (result === undefined) throw new Error('insert: no data');
             await dataSource.getDatabase().commit(cnn);
-            Object.keys(result).map(key => DataSource.encodeRow(result[key]));
             await res.json(result);
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
