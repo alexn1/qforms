@@ -388,10 +388,10 @@ class Helper {
         return await Helper.writeFile(filePath, content);
     }
 
-    static escapeHtml(string) {
+    /*static escapeHtml(string) {
         if (typeof string !== 'string') throw new Error(`escapeHtml: value not string: ${string}`);
         return String(string).replace(/[&<>"'`=\/]/g, s => entityMap[s]);
-    }
+    }*/
 
     static mapObject(object, cb) {
         return Object.keys(object).reduce((obj, key) => {
@@ -431,6 +431,14 @@ class Helper {
     }
     static encodeValue(value) {
         return JSON.stringify(value);
+    }
+    static decodeValues(obj) {
+        if (!obj) throw new Error('decodeValues: need object');
+        const obj2 = {};
+        for (const name in obj) {
+            obj2[name] = Helper.decodeValue(obj[name]);
+        }
+        return obj2;
     }
 }
 
