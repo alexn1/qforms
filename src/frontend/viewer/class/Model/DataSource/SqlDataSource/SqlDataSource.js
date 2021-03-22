@@ -225,25 +225,28 @@ class SqlDataSource extends DataSource {
     async insert(row) {
         console.log('SqlDataSource.insert', this.getTableName(), row);
         if (this.getAttr('table') === '') throw new Error('no data source table to insert');
-        const page = this.getPage();
-        let args = {
+
+        const result = await this.getApp().request({
             action        : 'insert',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
+            parentPageName: this.getPage().getParentPageName(),
             params        : this.getRowWithChanges(row),
-            parentPageName: page.getParentPageName()
-        };
-        const data = await this.getApp().request(args);
-        const [key] = Object.keys(data);
+        });
+        const [key] = Object.keys(result);
         if (!key) throw new Error('no inserted row key');
         console.log('key:', key);
-        const values = data[key];
+        const values = result[key];
         for (const column in values) row[column] = values[column];
         console.log('row:', row);
+
+        // add new row to rows
         this.news.splice(this.news.indexOf(row), 1);
+        // console.log('this.news:', this.news);
         this.changes.clear();
         this.addRow(row);
-        // console.log('this.news:', this.news);
+
+        // events
         const keyParams = DataSource.keyToParams(key);
         const e = {source: this, key, keyParams};
         if (this.parent.onDataSourceInsert) {
