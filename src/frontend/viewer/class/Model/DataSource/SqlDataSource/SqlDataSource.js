@@ -227,9 +227,9 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result);
+        const [key] = Object.keys(result.new);
         if (!key) throw new Error('no inserted row key');
-        const values = result[key];
+        const values = result.new[key];
         for (const column in values) row[column] = values[column];
         console.log('key:', key);
         console.log('row:', row);
