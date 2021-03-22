@@ -225,11 +225,13 @@ class SqlDataSource extends DataSource {
             parentPageName: this.getPage().getParentPageName(),
             params        : this.getRowWithChanges(row),
         });
+
+        // key & values
         const [key] = Object.keys(result);
         if (!key) throw new Error('no inserted row key');
-        console.log('key:', key);
         const values = result[key];
         for (const column in values) row[column] = values[column];
+        console.log('key:', key);
         console.log('row:', row);
 
         // add new row to rows
@@ -239,12 +241,10 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const keyParams = DataSource.keyToParams(key);
-        const e = {source: this, key, keyParams};
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(e);
-        }
+        const e = {source: this, key};
+        if (this.parent.onDataSourceInsert) this.parent.onDataSourceInsert(e);
         this.getTable().emit('insert', e);
+
         return key;
     }
 

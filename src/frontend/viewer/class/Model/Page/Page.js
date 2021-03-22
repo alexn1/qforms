@@ -146,8 +146,12 @@ class Page extends Model {
 
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
-        for (const name in e.keyParams) {
-            this.addPageParam(name, e.keyParams[name]);
+        if (!e.key) throw new Error('no key of inserted row');
+
+        // key params to page params
+        const keyParams = DataSource.keyToParams(e.key);
+        for (const name in keyParams) {
+            this.addPageParam(name, keyParams[name]);
         }
     }
     async rpc(name, params) {
