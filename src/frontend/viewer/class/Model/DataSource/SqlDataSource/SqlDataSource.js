@@ -89,9 +89,9 @@ class SqlDataSource extends DataSource {
     }
 
     getTable() {
-        if (!this.data.database) throw new Error(`${this.getFullName()}: database attr empty`);
+        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
         if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
-        return this.getApp().getDatabase(this.data.database).getTable(this.getAttr('table'));
+        return this.getApp().getDatabase(this.getAttr('database')).getTable(this.getAttr('table'));
     }
 
     onTableUpdated = async (e) => {
@@ -278,9 +278,9 @@ class SqlDataSource extends DataSource {
     }
 
     getTableName() {
-        if (!this.data.database) throw new Error('no database');
+        if (!this.getAttr('database')) throw new Error('no database');
         if (!this.getAttr('table')) throw new Error('no table');
-        return `${this.data.database}.${this.getAttr('table')}`;
+        return `${this.getAttr('database')}.${this.getAttr('table')}`;
     }
 
     getFramesCount() {
