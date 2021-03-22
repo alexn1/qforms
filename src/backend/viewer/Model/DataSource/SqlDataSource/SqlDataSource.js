@@ -57,6 +57,7 @@ class SqlDataSource extends DataSource {
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
         this.prepareRows(rows);
+        DataSource.encodeRows(rows);
 
         // count
         let count;
@@ -85,6 +86,7 @@ class SqlDataSource extends DataSource {
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
         this.prepareRows(rows);
+        DataSource.encodeRows(rows);
 
         // count
         let count;
@@ -128,6 +130,9 @@ class SqlDataSource extends DataSource {
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows([row]);
         // console.log('row:', row);
+
+        DataSource.encodeRow(row);
+
         return {[key]: row};
     }
 
@@ -206,7 +211,7 @@ class SqlDataSource extends DataSource {
         } else {
             try {
                 const [rows, count] = await this.selectMultiple(context);
-                DataSource.encodeRows(rows);
+                // DataSource.encodeRows(rows);
                 response.rows = rows;
                 response.count = count;
             } catch (err) {
