@@ -172,6 +172,7 @@ class SqlDataSource extends DataSource {
 
     static addUpdateToResult(result, table, oldKey, newKey) {
         // console.log('SqlDataSource.addUpdateToResult');
+        if (!result.update) result.update = {};
         if (!result.update[table]) result.update[table] = {};
         result.update[table][oldKey] = newKey;
     }
