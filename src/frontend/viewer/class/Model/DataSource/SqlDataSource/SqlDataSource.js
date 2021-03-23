@@ -88,9 +88,13 @@ class SqlDataSource extends DataSource {
     }
 
     getTable() {
-        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
         if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
-        return this.getApp().getDatabase(this.getAttr('database')).getTable(this.getAttr('table'));
+        return this.getDatabase().getTable(this.getAttr('table'));
+    }
+
+    getDatabase() {
+        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
+        return this.getApp().getDatabase(this.getAttr('database'));
     }
 
     onTableUpdated = async (e) => {
