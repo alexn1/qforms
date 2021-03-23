@@ -164,9 +164,9 @@ class SqlDataSource extends DataSource {
         // console.log('row:', row);
         return {
             new   : {[key]: row},
-            insert: {},
-            update: {},
-            delete: {}
+            // insert: {},
+            // update: {},
+            // delete: {}
         };
     }
 

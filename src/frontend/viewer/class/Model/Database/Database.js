@@ -20,6 +20,7 @@ class Database extends Model {
     }
 
     emitUpdate(dataSource, result) {
+        if (!result.update) return;
         for (const tableName in result.update) {
             const table = this.getTable(tableName);
             for (const key in result.update[tableName]) {
