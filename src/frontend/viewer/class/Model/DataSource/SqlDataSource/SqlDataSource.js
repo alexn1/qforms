@@ -249,12 +249,7 @@ class SqlDataSource extends DataSource {
         this.getTable().emit('insert', e);
 
         // update
-        for (const table in result.update) {
-            for (const key in result.update[table]) {
-                const oldKey = result.update[table][key];
-                this.getDatabase().getTable(table).emit('update', {source: this, changes: {[key]: oldKey}});
-            }
-        }
+        this.getDatabase().emitUpdate(result);
 
         return key;
     }

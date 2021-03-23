@@ -18,4 +18,13 @@ class Database extends Model {
         if (!table) throw new Error(`no table with name: ${name}`);
         return table;
     }
+
+    emitUpdate(result) {
+        for (const table in result.update) {
+            for (const key in result.update[table]) {
+                const oldKey = result.update[table][key];
+                this.getTable(table).emit('update', {source: this, changes: {[key]: oldKey}});
+            }
+        }
+    }
 }
