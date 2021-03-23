@@ -15,7 +15,7 @@ class Database extends Model {
 
     getTable(name) {
         const table = this.tables.find(table => table.getName() === name);
-        if (!table) throw new Error(`no table with name: ${name}`);
+        if (!table) throw new Error(`${this.getFullName()}: no table with name: ${name}`);
         return table;
     }
 
