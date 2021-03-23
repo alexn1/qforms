@@ -43,17 +43,17 @@ class SqlDataSource extends DataSource {
         if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
-        const data = await this.getApp().request({
+        const result = await this.getApp().request({
             action        : 'update',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             changes       : this.getChangesByKey(),
         });
-        const [key] = Object.keys(data);
+        const [key] = Object.keys(result);
         if (!key) throw new Error('no updated row');
-        this.changes.clear();
-        const newValues = data[key];
+        const newValues = result[key];
         const newKey = this.getRowKey(newValues);
+        this.changes.clear();
         this.updateRow(key, newValues);
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key: key});
@@ -247,6 +247,14 @@ class SqlDataSource extends DataSource {
         const e = {source: this, key};
         if (this.parent.onDataSourceInsert) this.parent.onDataSourceInsert(e);
         this.getTable().emit('insert', e);
+
+        // update
+        for (const table in result.update) {
+            for (const key in result.update[table]) {
+                const oldKey = result.update[table][key];
+                this.getDatabase().getTable(table).emit('update', {source: this, changes: {[key]: oldKey}});
+            }
+        }
 
         return key;
     }
