@@ -61,7 +61,6 @@ module.exports.TextBoxField                      = require('./viewer/Model/Field
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
-module.exports.TreeForm                          = require('./viewer/Model/Form/TreeForm/TreeForm');
 module.exports.Page                              = require('./viewer/Model/Page/Page');
 module.exports.PageLink                          = require('./viewer/Model/PageLink/PageLink');
 module.exports.Column                            = require('./viewer/Model/Column/Column');

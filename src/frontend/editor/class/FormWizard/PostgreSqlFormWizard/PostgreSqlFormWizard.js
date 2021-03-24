@@ -1,16 +1,4 @@
 class PostgreSqlFormWizard extends FormWizard {
-    // getQuery() {
-    //     console.log('PostgreSqlFormWizard.getQuery');
-    //     switch (this.params.className) {
-    //         case 'RowForm':
-    //             return this.getSingleQuery();
-    //         case 'TableForm':
-    //         case 'TreeForm':
-    //                 return this.getMultipleQuery();
-    //         default:
-    //             throw new Error(`unknown form class: ${this.params.className}`);
-    //     }
-    // }
 
     getSingleQuery() {
         console.log('PostgreSqlFormWizard.getSingleQuery');

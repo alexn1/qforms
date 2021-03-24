@@ -34,7 +34,7 @@ class NewFormView extends ReactComponent {
                     <ComboBox id="formClass" classList={['form-control']} value={'TableForm'} items={[
                         {value: 'RowForm'  , title: 'RowForm'},
                         {value: 'TableForm', title: 'TableForm'},
-                        {value: 'TreeForm' , title: 'TreeForm'},
+                        {value: 'Form'     , title: 'Form'},
                     ]} onCreate={c => this.class = c}/>
                 </div>
             </div>

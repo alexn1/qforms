@@ -1,16 +1,4 @@
 class MySqlFormWizard extends FormWizard {
-    // getQuery() {
-    //     console.log('MySqlFormWizard.getQuery');
-    //     switch (this.params.className) {
-    //         case 'RowForm':
-    //             return this.getSingleQuery();
-    //         case 'TableForm':
-    //         case 'TreeForm':
-    //             return this.getMultipleQuery();
-    //         default:
-    //             throw new Error(`unknown form class: ${this.params.className}`);
-    //     }
-    // }
 
     getSingleQuery() {
         const columns = this.tableColumns.map(column => column.name);

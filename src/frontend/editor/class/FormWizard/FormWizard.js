@@ -24,10 +24,9 @@ class FormWizard {
                 name      : 'default',
                 database  : this.databaseName,
                 table     : this.tableName,
-                limit     : this.params.className === 'TableForm' || this.params.className === 'TreeForm' ? '100' : '',
-                // query     : this.getQuery(),
-                countQuery: this.getCountQuery(),
-                singleQuery: this.getSingleQuery(),
+                limit     : this.params.className === 'TableForm' ? '100' : '',
+                countQuery   : this.getCountQuery(),
+                singleQuery  : this.getSingleQuery(),
                 multipleQuery: this.getMultipleQuery()
             }
         };
