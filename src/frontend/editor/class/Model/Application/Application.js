@@ -156,4 +156,15 @@ class Application extends Model {
         return this.createDataSource(data);
     }
 
+    async newAction(params) {
+        // params['pageFileName'] = this.page.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await QForms.doHttpRequest({
+            controller: 'Action',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createAction(data);
+    }
+
 }

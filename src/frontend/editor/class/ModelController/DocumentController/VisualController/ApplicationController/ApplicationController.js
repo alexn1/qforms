@@ -65,6 +65,7 @@ class ApplicationController extends VisualController {
         return [
             {'action': 'newDatabase'  , 'caption': 'New Database'   },
             {'action': 'newDataSource', 'caption': 'New Data Source'},
+            {'action': 'newAction'    , 'caption': 'New Action'},
             {'action': 'newPage'      , 'caption': 'New Page'       }
         ];
     }
@@ -79,6 +80,9 @@ class ApplicationController extends VisualController {
                 break;
             case 'newPage':
                 await this.newPageAction();
+                break;
+            case 'newAction':
+                await this.newActionAction();
                 break;
             default:
                 console.log(name);
@@ -105,6 +109,21 @@ class ApplicationController extends VisualController {
             this.view.rerender();
             EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
+    }
+
+    async newActionAction() {
+        console.log('ApplicationController.newActionAction');
+        await EditorController.editorController.openModal(new NewActionController({onCreate: async values => {
+                const action = await this.model.newAction({
+                    name   : values.name,
+                    caption: values.caption
+                });
+                const actionController = this.createAction(action);
+                await EditorController.editorController.treeWidget2.select(actionController);
+                actionController.view.parent.open();
+                this.view.rerender();
+                EditorController.editorController.treeWidget2.scrollToSelected();
+            }}));
     }
 
     async newDataSourceAction() {

@@ -48,17 +48,6 @@ class FormEditor extends Editor {
         return new qforms.ActionEditor(this.getColItemData('actions', name), this);
     }
 
-    async newActionData(params) {
-        if (!params.name) throw new Error('no name');
-        const name = params.name;
-        if (this.getColItemData('actions', name)) {
-            throw new Error(`action ${name} already exists`);
-        }
-        const data = qforms.ActionEditor.createData(params);
-        this.addModelData('actions', data);
-        return data;
-    }
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

@@ -92,6 +92,16 @@ class Editor extends BaseModel {
             offset
         );
     }
+    async newActionData(params) {
+        if (!params.name) throw new Error('no name');
+        const name = params.name;
+        if (this.getColItemData('actions', name)) {
+            throw new Error(`action ${name} already exists`);
+        }
+        const data = qforms.ActionEditor.createData(params);
+        this.addModelData('actions', data);
+        return data;
+    }
 }
 
 module.exports = Editor;
