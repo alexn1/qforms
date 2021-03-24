@@ -24,6 +24,7 @@ class ApplicationEditor extends Editor {
             env        : {},
             databases  : [],
             dataSources: [],
+            actions    : [],
             pageLinks  : [],
         };
     }

@@ -15,6 +15,7 @@ class PageEditor extends Editor {
                 caption  : params['caption'] ? params['caption'] : params['name']
             },
             dataSources: [],
+            actions    : [],
             forms      : [],
         };
     }
