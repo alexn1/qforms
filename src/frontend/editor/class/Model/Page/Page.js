@@ -3,8 +3,8 @@ class Page extends Model {
     constructor(data, pageLink) {
         super(data);
         this.pageLink    = pageLink;
-        // this.application = parent;
         this.dataSources = [];
+        this.actions     = [];
         this.forms       = [];
     }
 
@@ -12,6 +12,11 @@ class Page extends Model {
         // data sources
         for (const data of this.data.dataSources) {
             this.createDataSource(data);
+        }
+
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
         }
 
         // forms
@@ -124,6 +129,17 @@ class Page extends Model {
                 page: this.getName()
             })
         });
+    }
+
+    async newAction(params) {
+        params['pageFileName'] = this.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await QForms.doHttpRequest({
+            controller: 'Action',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createAction(data);
     }
 
 }

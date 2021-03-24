@@ -44,4 +44,22 @@ class VisualController extends DocumentController {
         if (i === -1) throw new Error('no such actionController');
         this.actions.splice(i, 1);
     }
+    async actionNewAction() {
+        console.log('VisualController.actionNewAction');
+        await EditorController.editorController.openModal(new NewActionController({onCreate: async values => {
+            const action = await this.model.newAction({
+                name   : values.name,
+                caption: values.caption
+            });
+            const actionController = this.createAction(action);
+            await EditorController.editorController.treeWidget2.select(actionController);
+            actionController.view.parent.open();
+            if (this.pageLinkController) {
+                this.pageLinkController.view.rerender();
+            } else {
+                this.view.rerender();
+            }
+            EditorController.editorController.treeWidget2.scrollToSelected();
+        }}));
+    }
 }

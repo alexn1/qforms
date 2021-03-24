@@ -102,20 +102,7 @@ class FormController extends VisualController {
         }}));
     }
 
-    async actionNewAction() {
-        console.log('FormController.actionNewAction');
-        await EditorController.editorController.openModal(new NewActionController({onCreate: async values => {
-            const action = await this.model.newAction({
-                name   : values.name,
-                caption: values.caption
-            });
-            const actionController = this.createAction(action);
-            await EditorController.editorController.treeWidget2.select(actionController);
-            actionController.view.parent.open();
-            this.view.rerender();
-            EditorController.editorController.treeWidget2.scrollToSelected();
-        }}));
-    }
+
 
     getPropList() {
         return {

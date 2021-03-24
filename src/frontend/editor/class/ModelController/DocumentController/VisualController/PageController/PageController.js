@@ -4,9 +4,11 @@ class PageController extends VisualController {
         super(model);
         this.pageLinkController = pageLinkController;
         this.dataSources = [];
+        this.actions     = [];
         this.forms       = [];
         this.items = [
             {getTitle: () => 'Data Sources', items: this.dataSources},
+            {getTitle: () => 'Actions'     , items: this.actions},
             {getTitle: () => 'Forms'       , items: this.forms}
         ];
     }
@@ -14,10 +16,9 @@ class PageController extends VisualController {
     init() {
         // console.log('PageController.init');
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
+        this.model.actions.forEach(action => this.createAction(action));
         this.model.forms.forEach(form => this.createForm(form));
     }
-
-
 
     createForm(model) {
         const form = new FormController(model, this);
@@ -35,6 +36,7 @@ class PageController extends VisualController {
     getActions() {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},
+            {'action': 'newAction'    , 'caption': 'New Action'       },
             {'action': 'newForm'      , 'caption': 'New Form'       },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
@@ -49,6 +51,9 @@ class PageController extends VisualController {
                 break;
             case 'newDataSource':
                 await this.newDataSourceAction();
+                break;
+            case 'newAction':
+                await this.actionNewAction();
                 break;
             case 'delete':
                 await this.delete();

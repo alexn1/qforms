@@ -11,23 +11,10 @@ class ApplicationController extends VisualController {
         // items
         this.opened = true;
         this.items = [
-            {
-                getTitle: () => 'Databases',
-                items: this.databases
-            },
-            {
-                getTitle: () => 'Data Sources',
-                items: this.dataSources
-            },
-            {
-                getTitle: () => 'Actions',
-                items: this.actions
-            },
-            {
-                getTitle: () => 'Pages',
-                items: this.pageLinks,
-                opened: true
-            }
+            {getTitle: () => 'Databases'   , items: this.databases},
+            {getTitle: () => 'Data Sources', items: this.dataSources},
+            {getTitle: () => 'Actions'     , items: this.actions},
+            {getTitle: () => 'Pages'       , items: this.pageLinks, opened: true}
         ];
     }
     init() {
@@ -82,7 +69,7 @@ class ApplicationController extends VisualController {
                 await this.newPageAction();
                 break;
             case 'newAction':
-                await this.newActionAction();
+                await this.actionNewAction();
                 break;
             default:
                 console.log(name);
@@ -109,21 +96,6 @@ class ApplicationController extends VisualController {
             this.view.rerender();
             EditorController.editorController.treeWidget2.scrollToSelected();
         }}));
-    }
-
-    async newActionAction() {
-        console.log('ApplicationController.newActionAction');
-        await EditorController.editorController.openModal(new NewActionController({onCreate: async values => {
-                const action = await this.model.newAction({
-                    name   : values.name,
-                    caption: values.caption
-                });
-                const actionController = this.createAction(action);
-                await EditorController.editorController.treeWidget2.select(actionController);
-                actionController.view.parent.open();
-                this.view.rerender();
-                EditorController.editorController.treeWidget2.scrollToSelected();
-            }}));
     }
 
     async newDataSourceAction() {
