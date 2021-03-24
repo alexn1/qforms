@@ -19,25 +19,11 @@ class Page extends Model {
             this.createForm(data);
         }
     }
-
-    createDataSource(data) {
-        const dataSource = new DataSource(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-
     createForm(data) {
         const form = new Form(data, this);
         form.init();
         this.forms.push(form);
         return form;
-    }
-    removeDataSource(dataSource) {
-        console.log('Page.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
     }
     removeForm(form) {
         console.log('Page.removeForm', form.getName());

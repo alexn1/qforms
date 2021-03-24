@@ -52,5 +52,29 @@ class Model {
     /*getObject(col, name) {
         return this[col].find(obj => obj.getName() === name);
     }*/
+    createDataSource(data) {
+        const dataSource = new DataSource(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    removeDataSource(dataSource) {
+        // console.log('Model.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1) throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
+    createAction(data) {
+        const action = new Action(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }
+    removeAction(action) {
+        // console.log('Model.removeField', action.getName());
+        const i = this.actions.indexOf(action);
+        if (i === -1) throw new Error('no such action');
+        this.actions.splice(i, 1);
+    }
 
 }

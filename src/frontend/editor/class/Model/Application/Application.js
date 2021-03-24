@@ -4,6 +4,7 @@ class Application extends Model {
         super(data);
         this.databases   = [];
         this.dataSources = [];
+        this.actions     = [];
         this.pageLinks   = [];
     }
 
@@ -19,23 +20,21 @@ class Application extends Model {
             this.createDataSource(data);
         }
 
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+
         // pageLinks
         for (const data of this.data.pageLinks) {
             this.createPageLink(data);
         }
     }
-
     createDatabase(data) {
         const database = new Database(data, this);
         database.init();
         this.databases.push(database);
         return database;
-    }
-    createDataSource(data) {
-        const dataSource = new DataSource(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
     }
     createPageLink(data) {
         const pageLink = new PageLink(data, this);
@@ -49,12 +48,7 @@ class Application extends Model {
         if (i === -1) throw new Error('no such database');
         this.databases.splice(i, 1);
     }
-    removeDataSource(dataSource) {
-        console.log('Application.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
-    }
+
     removePageLink(pageLink) {
         console.log('Application.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);

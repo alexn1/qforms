@@ -14,22 +14,15 @@ class Form extends Model {
             this.createDataSource(data);
         }
 
-        // fields
-        for (const data of this.data.fields) {
-            this.createField(data);
-        }
-
         // actions
         for (const data of this.data.actions) {
             this.createAction(data);
         }
-    }
 
-    createDataSource(data) {
-        const dataSource = new DataSource(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
+        // fields
+        for (const data of this.data.fields) {
+            this.createField(data);
+        }
     }
     createField(data) {
         const field = new Field(data, this);
@@ -37,29 +30,11 @@ class Form extends Model {
         this.fields.push(field);
         return field;
     }
-    createAction(data) {
-        const action = new Action(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    removeDataSource(dataSource) {
-        console.log('Form.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
-    }
     removeField(field) {
         console.log('Form.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1) throw new Error('no such field');
         this.fields.splice(i, 1);
-    }
-    removeAction(action) {
-        console.log('Form.removeField', action.getName());
-        const i = this.actions.indexOf(action);
-        if (i === -1) throw new Error('no such action');
-        this.actions.splice(i, 1);
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
