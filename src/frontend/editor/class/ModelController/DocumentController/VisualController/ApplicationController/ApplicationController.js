@@ -5,6 +5,7 @@ class ApplicationController extends VisualController {
         this.editorController = editorController;
         this.databases   = [];
         this.dataSources = [];
+        this.actions     = [];
         this.pageLinks   = [];
 
         // items
@@ -19,6 +20,10 @@ class ApplicationController extends VisualController {
                 items: this.dataSources
             },
             {
+                getTitle: () => 'Actions',
+                items: this.actions
+            },
+            {
                 getTitle: () => 'Pages',
                 items: this.pageLinks,
                 opened: true
@@ -28,6 +33,7 @@ class ApplicationController extends VisualController {
     init() {
         this.model.databases.forEach(database => this.createDatabase(database));
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
+        this.model.actions.forEach(action => this.createAction(action));
         this.model.pageLinks.forEach(pageLink => this.createPageLink(pageLink));
     }
 
@@ -36,12 +42,6 @@ class ApplicationController extends VisualController {
         database.init();
         this.databases.push(database);
         return database;
-    }
-    createDataSource(model) {
-        const dataSource = new DataSourceController(model, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
     }
     createPageLink(model) {
         const pageLink = new PageLinkController(model, this);
@@ -54,12 +54,6 @@ class ApplicationController extends VisualController {
         const i = this.databases.indexOf(databaseController);
         if (i === -1) throw new Error('no such databaseController');
         this.databases.splice(i, 1);
-    }
-    removeDataSource(dataSourceController) {
-        console.log('ApplicationController.removeDataSource', dataSourceController.getTitle());
-        const i = this.dataSources.indexOf(dataSourceController);
-        if (i === -1) throw new Error('no such dataSourceController');
-        this.dataSources.splice(i, 1);
     }
     removePageLink(pageLinkController) {
         const i = this.pageLinks.indexOf(pageLinkController);

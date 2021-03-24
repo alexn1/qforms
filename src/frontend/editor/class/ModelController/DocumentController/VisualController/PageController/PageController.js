@@ -17,25 +17,13 @@ class PageController extends VisualController {
         this.model.forms.forEach(form => this.createForm(form));
     }
 
-    createDataSource(model) {
-        const dataSource = new DataSourceController(model, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
+
 
     createForm(model) {
         const form = new FormController(model, this);
         form.init();
         this.forms.push(form);
         return form;
-    }
-
-    removeDataSource(dataSourceController) {
-        console.log('PageController.removeDataSource', dataSourceController.getTitle());
-        const i = this.dataSources.indexOf(dataSourceController);
-        if (i === -1) throw new Error('no such dataSourceController');
-        this.dataSources.splice(i, 1);
     }
     removeForm(formController) {
         console.log('PageController.removeForm', formController.getTitle());

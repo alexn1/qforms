@@ -18,42 +18,21 @@ class FormController extends VisualController {
         this.model.fields.forEach(field => this.createField(field));
         this.model.actions.forEach(action => this.createAction(action));
     }
-    createDataSource(model) {
-        const dataSource  = new DataSourceController(model, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
     createField(model) {
         const field = new FieldController(model, this);
         field.init();
         this.fields.push(field);
         return field;
     }
-    createAction(model) {
-        const action = new ActionController(model, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    removeDataSource(dataSourceController) {
-        console.log('ApplicationController.removeDataSource', dataSourceController.getTitle());
-        const i = this.dataSources.indexOf(dataSourceController);
-        if (i === -1) throw new Error('no such dataSourceController');
-        this.dataSources.splice(i, 1);
-    }
+
+
     removeField(fieldController) {
         console.log('FormController.removeField', fieldController.getTitle());
         const i = this.fields.indexOf(fieldController);
         if (i === -1) throw new Error('no such fieldController');
         this.fields.splice(i, 1);
     }
-    removeAction(actionController) {
-        console.log('FormController.removeAction', actionController.getTitle());
-        const i = this.actions.indexOf(actionController);
-        if (i === -1) throw new Error('no such actionController');
-        this.actions.splice(i, 1);
-    }
+
 
     getActions() {
         return [
