@@ -10,49 +10,39 @@ class DataSourceEditorController extends EditorController {
 
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
+        let data;
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
-                const data = formEditor.newDataSourceData(params);
-                await pageEditor.save();
-                return data;
+                data = formEditor.newDataSourceData(params);
             } else {
-                // page data source
-                const data = pageEditor.newDataSourceData(params);
-                await pageEditor.save();
-                return data;
+                data = pageEditor.newDataSourceData(params);
             }
+            await pageEditor.save();
         } else {
-            // app data source
-            const data = appEditor.newDataSourceData(params);
+            data = appEditor.newDataSourceData(params);
             await appEditor.save();
-            return data;
+
         }
+        return data;
     }
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
+        let data;
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-
-                // form data source
                 const formEditor = pageEditor.createFormEditor(params.form);
-                const data = formEditor.removeColData('dataSources', params.dataSource);
-                await pageEditor.save();
-                return data;
+                data = formEditor.removeColData('dataSources', params.dataSource);
+            } else {
+                data = pageEditor.removeColData('dataSources', params.dataSource);
             }
-
-            // page data source
-            const data = pageEditor.removeColData('dataSources', params.dataSource);
             await pageEditor.save();
-            return data;
         }
 
-        // app data source
-        const data = appEditor.removeColData('dataSources', params.dataSource);
+        data = appEditor.removeColData('dataSources', params.dataSource);
         await appEditor.save();
         return data;
     }
