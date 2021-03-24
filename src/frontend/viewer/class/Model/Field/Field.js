@@ -58,11 +58,6 @@ class Field extends Model {
         return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
     }
 
-    getRawValue(row) {
-        if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
-    }
-
     hasColumn() {
         return !!this.getAttr('column');
     }
@@ -76,12 +71,17 @@ class Field extends Model {
             try {
                 return Helper.decodeValue(rawValue);
             } catch (err) {
-                console.log('rawValue:', this.getFullName(), rawValue);
+                console.log('raw value decode error:', this.getFullName(), rawValue);
                 throw err;
             }
         }
         if (this.data.value) return eval(this.data.value);
         throw new Error(`${this.getFullName()}: no column and no value in field`);
+    }
+
+    getRawValue(row) {
+        if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
+        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
     }
 
     getDefaultDataSource() {
