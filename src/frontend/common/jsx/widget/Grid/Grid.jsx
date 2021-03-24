@@ -14,10 +14,6 @@ class Grid extends ReactComponent {
         if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
         return this.state.row;
     }
-    setActiveRow(i) {
-        this.state.row = i;
-        if (this.props.onActiveRowChange) this.props.onActiveRowChange(i);
-    }
     getActiveColumn() {
         return this.state.column;
     }
@@ -53,14 +49,14 @@ class Grid extends ReactComponent {
     }
     selectCell(i, j) {
         if (this.getActiveRowIndex() === i && this.getActiveColumn() === j) return;
-        this.setActiveRow(i);
+        this.state.row    = i;
         this.state.column = j;
-        this.rerender();
+        if (this.props.onSelectionChange) this.props.onSelectionChange(i);
     }
     selectRow(i) {
         if (this.getActiveRowIndex() === i ) return;
-        this.setActiveRow(i);
-        this.rerender();
+        this.state.row = i;
+        if (this.props.onSelectionChange) this.props.onSelectionChange(i);
     }
     getMaxColumnWidth(column) {
         return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10;
