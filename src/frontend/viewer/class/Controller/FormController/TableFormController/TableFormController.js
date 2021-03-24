@@ -163,6 +163,7 @@ class TableFormController extends FormController {
         // console.log('TableFormController.onActiveRowChange', i);
         const rows = this.model.getDefaultDataSource().getRows();
         this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
+        this.invalidate();
         this.rerender();
     }
     getActiveRowIndex = () => {
