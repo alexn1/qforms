@@ -19,13 +19,13 @@ class Database extends Model {
         return table;
     }
 
-    emitUpdate(dataSource, result) {
+    emitUpdate(result, source = null) {
         if (!result.update) return;
         for (const tableName in result.update) {
             const table = this.getTable(tableName);
             for (const key in result.update[tableName]) {
                 const oldKey = result.update[tableName][key];
-                table.emit('update', {source: dataSource, changes: {[key]: oldKey}});
+                table.emit('update', {source: source, changes: {[key]: oldKey}});
             }
         }
     }

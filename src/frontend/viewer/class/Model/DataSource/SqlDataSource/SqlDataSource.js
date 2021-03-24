@@ -249,7 +249,7 @@ class SqlDataSource extends DataSource {
         this.getTable().emit('insert', e);
 
         // update
-        this.getDatabase().emitUpdate(this, result);
+        this.getDatabase().emitUpdate(result, this);
 
         return key;
     }
