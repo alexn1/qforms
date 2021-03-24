@@ -51,4 +51,27 @@ class Table extends Model {
         await this.deleteData();
         this.parent.removeTable(this);
     }
+
+    moveUp() {
+        return QForms.doHttpRequest({
+            controller : 'Table',
+            action     : 'moveUp',
+            params     : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName()
+            })
+        });
+    }
+
+    moveDown() {
+        return QForms.doHttpRequest({
+            controller : 'Table',
+            action     : 'moveDown',
+            params     : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName()
+            })
+        });
+    }
+
 }

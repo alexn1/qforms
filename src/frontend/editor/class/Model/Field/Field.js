@@ -115,7 +115,7 @@ class Field extends Model {
     }
 
     moveUp() {
-        const args = {
+        return QForms.doHttpRequest({
             controller : 'Field',
             action     : 'moveUp',
             params     : Helper.encodeObject({
@@ -123,12 +123,11 @@ class Field extends Model {
                 form        : this.form.getName(),
                 field       : this.getName()
             })
-        };
-        return QForms.doHttpRequest(args);
+        });
     }
 
     moveDown() {
-        const args = {
+        return QForms.doHttpRequest({
             controller : 'Field',
             action     : 'moveDown',
             params     : Helper.encodeObject({
@@ -136,8 +135,7 @@ class Field extends Model {
                 form        : this.form.getName(),
                 field       : this.getName()
             })
-        };
-        return QForms.doHttpRequest(args);
+        });
     }
 
 }

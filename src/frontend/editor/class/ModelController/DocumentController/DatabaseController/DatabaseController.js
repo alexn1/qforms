@@ -4,7 +4,7 @@ class DatabaseController extends DocumentController {
         this.tableName = null;
         this.tableInfo = null;
         this.params  = [];
-        this.tables2 = [];
+        this.tables = [];
         this.items = [
             {
                 getTitle: () => 'Params',
@@ -12,7 +12,7 @@ class DatabaseController extends DocumentController {
             },
             {
                 getTitle: () => 'Tables',
-                items: this.tables2
+                items: this.tables
             }
         ];
     }
@@ -32,7 +32,7 @@ class DatabaseController extends DocumentController {
     createTable2(model) {
         const table = new TableController(model, this);
         table.init();
-        this.tables2.push(table);
+        this.tables.push(table);
         return table;
     }
     removeParam(paramController) {
@@ -43,9 +43,9 @@ class DatabaseController extends DocumentController {
     }
     removeTable2(tableController) {
         console.log('DatabaseController.removeTable2', tableController.getTitle());
-        const i = this.tables2.indexOf(tableController);
+        const i = this.tables.indexOf(tableController);
         if (i === -1) throw new Error('no such tableController');
-        this.tables2.splice(i, 1);
+        this.tables.splice(i, 1);
     }
     getActions() {
         return [

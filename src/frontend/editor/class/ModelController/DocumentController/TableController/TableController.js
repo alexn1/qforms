@@ -30,6 +30,8 @@ class TableController extends DocumentController {
     getActions() {
         return [
             {'action': 'newColumn', 'caption': 'New Column'},
+            {'action': 'moveUp'     , 'caption': 'Move Up'     },
+            {'action': 'moveDown'   , 'caption': 'Move Down'   },
             {'action': 'delete', 'caption': 'Delete'},
         ];
     }
@@ -41,6 +43,16 @@ class TableController extends DocumentController {
                 break;
             case 'newColumn':
                 await this.actionNewColumn();
+                break;
+            case 'moveUp':
+                await this.model.moveUp();
+                this.parent.moveColItem('tables', this, -1);
+                EditorController.editorController.treeWidget2.rerender();
+                break;
+            case 'moveDown':
+                await this.model.moveDown();
+                this.parent.moveColItem('tables', this, 1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
             default:
                 throw new Error(`unknown action: ${name}`);

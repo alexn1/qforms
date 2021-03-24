@@ -38,6 +38,16 @@ class DatabaseEditor extends Editor {
         return new ParamEditor(this.getColItemData('params', name), this);
     }
 
+    moveTableUp(name) {
+        this.moveDataColItem('tables', name, -1);
+        return 'ok';
+    }
+
+    moveTableDown(name) {
+        this.moveDataColItem('tables', name, 1);
+        return 'ok';
+    }
+
 }
 
 module.exports = DatabaseEditor;
