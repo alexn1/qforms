@@ -166,4 +166,7 @@ class Page extends Model {
         if (result.errorMessage) throw new Error(`rpc error: ${result.errorMessage}`);
         return result;
     }
+    getForm(name) {
+        return this.forms.find(form => form.getName() === name);
+    }
 }
