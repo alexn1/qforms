@@ -11,7 +11,7 @@ class EditorView extends ReactComponent {
         console.log('EditorView.getTabs', this.props.ctrl.documents);
         return this.props.ctrl.documents.map(document => ({
             name   : document.controller.model.getName(),
-            title  : document.controller.model.getName(),
+            title  : document.controller.model.getFullName(),
             content: this.renderDocumentView(document)
         }));
     }
