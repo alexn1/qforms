@@ -28,7 +28,7 @@ class DataSource extends Model {
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
         // console.log('keyColumns:', keyColumns);
-        if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource must have at least one key column`);
+        if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
         return keyColumns;
     }
 
