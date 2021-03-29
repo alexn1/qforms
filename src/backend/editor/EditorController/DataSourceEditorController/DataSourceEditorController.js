@@ -23,7 +23,6 @@ class DataSourceEditorController extends EditorController {
         } else {
             data = appEditor.newDataSourceData(params);
             await appEditor.save();
-
         }
         return data;
     }
@@ -40,10 +39,10 @@ class DataSourceEditorController extends EditorController {
                 data = pageEditor.removeColData('dataSources', params.dataSource);
             }
             await pageEditor.save();
+        } else {
+            data = appEditor.removeColData('dataSources', params.dataSource);
+            await appEditor.save();
         }
-
-        data = appEditor.removeColData('dataSources', params.dataSource);
-        await appEditor.save();
         return data;
     }
 
