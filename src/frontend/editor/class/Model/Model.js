@@ -17,17 +17,12 @@ class Model {
         return this.getAttr('name');
     }
 
-    getFullName(splitter) {
+    getFullName(splitter = '.') {
         let name;
         if (this.form) {
-            name = ('{page}' + splitter + '{form}' + splitter + '{field}')
-                .replace('{page}' , this.form.page.getName())
-                .replace('{form}' , this.form.getName())
-                .replace('{field}', this.getName());
+            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
         } else if (this.page) {
-            name = ('{page}' + splitter + '{form}')
-                .replace('{page}', this.page.getName())
-                .replace('{form}', this.getName());
+            name = `${this.page.getName()}${splitter}${this.getName()}`;
         } else {
             name = this.getName();
         }
