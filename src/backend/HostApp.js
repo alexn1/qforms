@@ -237,6 +237,7 @@ class HostApp {
         const application = this.getApplication(req, context);
         const page = await application.getPage(context, req.body.page);
         const response = await page.fill(context);
+        if (response === undefined) throw new Error('page action: response is undefined');
         await res.json({page: response});
     }
 
@@ -292,6 +293,7 @@ class HostApp {
         const row = await dataSource.selectSingle(context);
         const time = Date.now() - start;
         console.log('select time:', time);
+        if (row === undefined) throw new Error('selectSingle action: row is undefined');
         await res.json({row, time});
         return time;
     }
@@ -315,6 +317,7 @@ class HostApp {
         const [rows, count] = await dataSource.selectMultiple(context);
         const time = Date.now() - start;
         console.log('select time:', time);
+        if (rows === undefined) throw new Error('selectMultiple action: rows are undegined');
         await res.json({rows, count, time});
         return time;
     }
@@ -328,7 +331,7 @@ class HostApp {
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.insert(context, context.params);
-            if (result === undefined) throw new Error('insert: no data');
+            if (result === undefined) throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(cnn);
             await res.json(result);
         } catch (err) {
@@ -370,6 +373,7 @@ class HostApp {
             model = application;
         }
         const result = await model.rpc(req.body.name, context);
+        if (result === undefined) throw new Error('rpc action: result is undefined');
         await res.json(result);
     }
 
@@ -387,6 +391,7 @@ class HostApp {
     async test(req, res, context) {
         console.log('HostApp.test', req.body);
         const result = await Test[req.body.name](req, res, context, this.getApplication(req, context));
+        if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(result);
     }
 
@@ -493,7 +498,7 @@ class HostApp {
         if (!ctrl[method]) throw new Error(`no method: ${controllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
         // console.log('json result:', result);
-        if (result === undefined) throw new Error('result is undefined');
+        if (result === undefined) throw new Error('handleEditorPost: result is undefined');
         await res.json(result);
     }
 
