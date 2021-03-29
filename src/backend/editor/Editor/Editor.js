@@ -72,6 +72,14 @@ class Editor extends BaseModel {
         this.moveDataColItem('dataSources', name, 1);
     }
 
+    moveActionUp(name) {
+        this.moveDataColItem('actions', name, -1);
+    }
+
+    moveActionDown(name) {
+        this.moveDataColItem('actions', name, 1);
+    }
+
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {

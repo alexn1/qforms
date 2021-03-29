@@ -43,5 +43,46 @@ class ActionEditorController extends EditorController {
         await pageEditor.save();
         return data;
     }
+
+    async moveUp(params) {
+        const appEditor = await this.createApplicationEditor();
+        if (params.pageFileName) {
+            const pageEditor = await appEditor.createPageEditor(params.pageFileName);
+            if (params.form) {
+                const formEditor = pageEditor.createFormEditor(params.form);
+                formEditor.moveActionUp(params.action);
+                await pageEditor.save();
+            } else {
+                pageEditor.moveActionUp(params.action);
+                await pageEditor.save();
+            }
+        } else {
+            // app data source
+            appEditor.moveActionUp(params.action);
+            await appEditor.save();
+        }
+        return null;
+    }
+
+    async moveDown(params) {
+        const appEditor = await this.createApplicationEditor();
+        if (params.pageFileName) {
+            const pageEditor = await appEditor.createPageEditor(params.pageFileName);
+            if (params.form) {
+                const formEditor = pageEditor.createFormEditor(params.form);
+                formEditor.moveActionDown(params.action);
+                await pageEditor.save();
+            } else {
+                pageEditor.moveActionDown(params.action);
+                await pageEditor.save();
+            }
+        } else {
+            // app data source
+            appEditor.moveActionDown(params.action);
+            await appEditor.save();
+        }
+        return null;
+    }
+
 }
 module.exports = ActionEditorController;

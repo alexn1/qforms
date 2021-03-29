@@ -49,5 +49,27 @@ class Action extends Model {
         await this.deleteData();
         this.parent.removeAction(this);
     }
+    moveUp() {
+        return QForms.doHttpRequest({
+            controller : 'Action',
+            action     : 'moveUp',
+            params     : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getAttr('fileName'),
+                form        : this.form.getAttr('name'),
+                action      : this.getAttr('name')
+            })
+        });
+    }
+    moveDown() {
+        return QForms.doHttpRequest({
+            controller : 'Action',
+            action     : 'moveDown',
+            params     : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getAttr('fileName'),
+                form        : this.form.getAttr('name'),
+                action      : this.getAttr('name')
+            })
+        });
+    }
 
 }

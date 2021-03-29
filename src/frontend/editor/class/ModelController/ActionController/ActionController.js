@@ -4,6 +4,8 @@ class ActionController extends ModelController {
     }*/
     getActions() {
         return [
+            {'action': 'moveUp'     , 'caption': 'Move Up'     },
+            {'action': 'moveDown'   , 'caption': 'Move Down'   },
             {'action': 'delete', 'caption': 'Delete'}
         ];
     }
@@ -11,6 +13,16 @@ class ActionController extends ModelController {
         switch (name) {
             case 'delete':
                 await this.delete();
+                break;
+            case 'moveUp':
+                await this.model.moveUp();
+                this.parent.moveColItem('actions', this, -1);
+                EditorController.editorController.treeWidget2.rerender();
+                break;
+            case 'moveDown':
+                await this.model.moveDown();
+                this.parent.moveColItem('actions', this, 1);
+                EditorController.editorController.treeWidget2.rerender();
                 break;
         }
     }
