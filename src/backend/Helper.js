@@ -291,7 +291,7 @@ class Helper {
         }
     }
 
-    static moveObjProp(obj, prop, offset) {
+    /*static moveObjProp(obj, prop, offset) {
         const keys     = _.keys(obj);
         const values   = _.values(obj);
         const oldIndex = keys.indexOf(prop);
@@ -308,7 +308,7 @@ class Helper {
         keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
         values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
         return _.object(keys, values);
-    }
+    }*/
 
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
