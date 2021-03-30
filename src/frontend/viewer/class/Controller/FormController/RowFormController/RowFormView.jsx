@@ -54,7 +54,7 @@ class RowFormView extends FormView {
                     />
                 }
                 {ctrl.model.data.actions.length > 0 &&
-                    <DropdownButton actions={ctrl.getActions()} onClick={this.onActionsClick}/>
+                    <DropdownButton actions={this.getActions()} onClick={this.onActionsClick}/>
                 }
             </div>
         );

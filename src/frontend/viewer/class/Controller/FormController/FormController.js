@@ -54,20 +54,6 @@ class FormController extends Controller {
     invalidate() {
         this.state.updated = Date.now();
     }
-    getActions() {
-        return this.model.data.actions.map(action => ({
-            name : action.name,
-            title: action.caption
-        }));
-        /*
-        return Object.keys(this.model.data.actions).map(name => {
-            const action = this.model.data.actions[name];
-            return {
-                name : action.name,
-                title: action.caption
-            };
-        });*/
-    }
     async onActionClick(data, row) {
         console.log('FormController.onActionClick', data, row);
     }

@@ -18,6 +18,9 @@ class Model extends EventEmitter {
     static getAttr(data, name) {
         return data[name];
     }
+    static getName(data) {
+        return Model.getAttr(data, 'name');
+    }
 
     getAttr(name) {
         return this.data[name];
