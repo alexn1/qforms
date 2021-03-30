@@ -1,4 +1,4 @@
-class TableFormView extends ReactComponent {
+class TableFormView extends FormView {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -36,7 +36,7 @@ class TableFormView extends ReactComponent {
                 {ctrl.model.data.actions.length > 0 &&
                     <DropdownButton
                         actions={ctrl.getActions()}
-                        onClick={ctrl.onActionsClick}
+                        onClick={this.onActionsClick}
                         enabled={ctrl.isRowSelected()}
                     />
                 }

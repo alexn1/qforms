@@ -68,13 +68,6 @@ class FormController extends Controller {
             };
         });*/
     }
-    onActionsClick = async li => {
-        // console.log('Toolbar.onActionsClick:', li);
-        // const action = this.model.data.actions[li.dataset.action];
-        const action = this.model.data.actions.find(data => data.name === li.dataset.action);
-        const result = await this.onActionClick(action, this.getActiveRow(true));
-        if (!result) alert(`no handler for ${action.name}`);
-    }
     async onActionClick(action, row) {
         console.log('FormController.onActionClick', action, row);
     }

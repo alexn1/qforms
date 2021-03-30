@@ -1,4 +1,4 @@
-class RowFormView extends ReactComponent {
+class RowFormView extends FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
@@ -54,7 +54,7 @@ class RowFormView extends ReactComponent {
                     />
                 }
                 {ctrl.model.data.actions.length > 0 &&
-                    <DropdownButton actions={ctrl.getActions()} onClick={ctrl.onActionsClick}/>
+                    <DropdownButton actions={ctrl.getActions()} onClick={this.onActionsClick}/>
                 }
             </div>
         );
