@@ -27,8 +27,8 @@ class <%=page%><%=form%>Controller extends <%=_class%>Controller {
     /*
     async onAction1(row) {
     }
-    async onActionClick(action, row) {
-        switch (action.name) {
+    async onActionClick(data, row) {
+        switch (Model.getName(data)) {
             case 'action1': await this.onAction1(row); return true;
         }
         return false;
