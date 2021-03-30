@@ -54,8 +54,8 @@ class FormController extends Controller {
     invalidate() {
         this.state.updated = Date.now();
     }
-    async onActionClick(data, row) {
-        console.log('FormController.onActionClick', data, row);
+    async onActionClick(name, row) {
+        console.log('FormController.onActionClick', name, row);
     }
     getField(name) {
         return this.fields[name];
