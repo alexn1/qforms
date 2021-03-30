@@ -38,7 +38,7 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.putValue', viewValue);
         this.onChange(viewValue, false);
     }
-    onChange = /*async*/ (viewValue, fireEvent = true) => {
+    onChange = async (viewValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', viewValue);
         this._onChange(viewValue);
         this.resetErrors();
