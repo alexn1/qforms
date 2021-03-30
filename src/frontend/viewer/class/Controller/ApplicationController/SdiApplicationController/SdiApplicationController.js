@@ -16,13 +16,13 @@ class SdiApplicationController extends ApplicationController {
     onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
     }
-    onMenuItemClick = async (menu, item, type) => {
-        console.log('ApplicationController.onMenuItemClick', menu, item, type);
+    onMenuItemClick = async (menu, type, name) => {
+        console.log('ApplicationController.onMenuItemClick', menu, type, name);
         try {
             if (type === 'page') {
-                await this.openPage({name: item, modal: false});
+                await this.openPage({name: name, modal: false});
             } else if (type === 'action') {
-
+                await this.onActionClick(name);
             }
         } catch (err) {
             console.error(err);

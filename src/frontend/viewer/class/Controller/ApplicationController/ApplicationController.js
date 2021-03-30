@@ -165,4 +165,7 @@ class ApplicationController extends Controller {
         pageController.deinit();
         pageController.model.deinit();
     }
+    async onActionClick(name) {
+        console.log('ApplicationController.onActionClick', name);
+    }
 }

@@ -31,9 +31,10 @@ class Menu extends ReactComponent {
     onMenuItemClick = async (e) => {
         // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
         e.persist();
-        await this.closeMenu(e.target.dataset.menu);
+        const {menu, type, name} = e.target.dataset;
+        await this.closeMenu(menu);
         if (this.props.onClick) {
-            this.props.onClick(e.target.dataset.menu, e.target.dataset.item, e.target.dataset.type);
+            this.props.onClick(menu, type, name);
         }
     }
     render() {
@@ -43,7 +44,7 @@ class Menu extends ReactComponent {
                     <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
                     <div onMouseDown={this.onMouseDown} onClick={this.onMenuItemClick}>
                         {menu.items.map(item =>
-                            <a key={item.name} data-menu={menu.name} data-type={item.type} data-item={item.name}>{item.title}</a>
+                            <a key={item.name} data-menu={menu.name} data-type={item.type} data-name={item.name}>{item.title}</a>
                         )}
                     </div>
                 </div>)}
