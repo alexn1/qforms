@@ -29,7 +29,7 @@ class EditorView extends ReactComponent {
                     </div>*/}
                     <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink}>Run Application</a>
                     <div>
-                        <ActionList onCreate={c => ctrl.actionList = c} ctrl={ctrl}/>
+                        <ActionList onCreate={c => ctrl.actionList = c} onClick={ctrl.onActionClick}/>
                     </div>
                 </div>
                 <TreeWidget2

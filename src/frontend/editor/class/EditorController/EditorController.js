@@ -143,7 +143,7 @@ class EditorController {
         this.modal = null;
         await this.view.rerender();
     }
-    async onActionClick(actionName) {
+    onActionClick = async actionName => {
         console.log('EditorController.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();
         // console.log('item', item);

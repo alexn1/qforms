@@ -7,7 +7,7 @@ class ActionList extends ReactComponent {
     }
     onClick = async li => {
         console.log('ActionList.onClick', li);
-        await this.props.ctrl.onActionClick(li.dataset.action);
+        await this.props.onClick(li.dataset.action);
     }
     render() {
         // console.log('ActionList.render', this.state.item);
