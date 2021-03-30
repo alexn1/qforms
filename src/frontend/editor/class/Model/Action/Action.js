@@ -1,10 +1,9 @@
 class Action extends Model {
-    constructor(data, form) {
-        super(data, form);
-        this.form = form;
-    }
+    /*constructor(data, parent) {
+        super(data, parent);
+    }*/
 
-    async getView(view) {
+    /*async getView(view) {
         return await QForms.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
@@ -14,6 +13,24 @@ class Action extends Model {
                 form : this.data !== undefined ? this.form.getName()      : null,
             })
         });
+    }*/
+
+    getParams() {
+        if (this.parent instanceof Form) {
+            return {
+                pageFileName: this.parent.page.pageLink.getAttr('fileName'),
+                form        : this.parent.getAttr('name'),
+                action      : this.getAttr('name'),
+            };
+        } else if (this.parent instanceof Page) {
+            return {
+                pageFileName: this.parent.pageLink.getAttr('fileName'),
+                action      : this.getAttr('name'),
+            };
+        }
+        return {
+            action: this.getAttr('name'),
+        };
     }
 
     async setValue(name, value) {
@@ -22,9 +39,7 @@ class Action extends Model {
             controller: 'Action',
             action    : 'save',
             params    : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getAttr('fileName'),
-                form        : this.form.getAttr('name'),
-                action      : this.getAttr('name'),
+                ...this.getParams(),
                 attr        : name,
                 value       : value
             })
@@ -38,9 +53,7 @@ class Action extends Model {
             controller: 'Action',
             action    : 'delete',
             params    : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getAttr('fileName'),
-                form        : this.form.getAttr('name'),
-                action      : this.getAttr('name')
+                ...this.getParams(),
             })
         });
     }
@@ -54,9 +67,7 @@ class Action extends Model {
             controller : 'Action',
             action     : 'moveUp',
             params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getAttr('fileName'),
-                form        : this.form.getAttr('name'),
-                action      : this.getAttr('name')
+                ...this.getParams(),
             })
         });
     }
@@ -65,9 +76,7 @@ class Action extends Model {
             controller : 'Action',
             action     : 'moveDown',
             params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getAttr('fileName'),
-                form        : this.form.getAttr('name'),
-                action      : this.getAttr('name')
+                ...this.getParams(),
             })
         });
     }

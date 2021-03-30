@@ -37,10 +37,20 @@ class ActionEditorController extends EditorController {
 
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const formEditor = pageEditor.createFormEditor(params.form);
-        const data = formEditor.removeColData('actions', params.action);
-        await pageEditor.save();
+        let data;
+        if (params.pageFileName) {
+            const pageEditor = await appEditor.createPageEditor(params.pageFileName);
+            if (params.form) {
+                const formEditor = pageEditor.createFormEditor(params.form);
+                data = formEditor.removeColData('actions', params.action);
+            } else {
+                data = pageEditor.removeColData('actions', params.action);
+            }
+            await pageEditor.save();
+        } else {
+            data = appEditor.removeColData('actions', params.action);
+            await appEditor.save();
+        }
         return data;
     }
 
