@@ -22,7 +22,8 @@ class SdiApplicationController extends ApplicationController {
             if (type === 'page') {
                 await this.openPage({name: name, modal: false});
             } else if (type === 'action') {
-                await this.onActionClick(name);
+                const result = await this.onActionClick(name);
+                if (!result) alert(`no handler for action '${name}'`);
             }
         } catch (err) {
             console.error(err);
