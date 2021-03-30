@@ -95,6 +95,8 @@ class Application extends Model {
 
     async createMenu(context) {
         const menu = {};
+
+        // pages
         const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
             return context.user ? this.authorizePage(context.user, pageLinkName) : true;
         });
@@ -110,11 +112,21 @@ class Application extends Model {
                     menu[pageLinkMenu] = [];
                 }
                 menu[pageLinkMenu].push({
+                    type   :'page',
                     page   : pageLink.getAttr('name'),
                     caption: pageFile.getAttr('caption')
                 });
             }
         }
+
+        // actions
+        menu['Actions'] = [];
+        menu['Actions'].push({
+            type   : 'action',
+            action : 'action1',
+            caption: 'Action 1'
+        });
+
         return menu;
     }
 

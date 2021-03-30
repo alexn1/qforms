@@ -7,7 +7,8 @@ class SdiApplicationController extends ApplicationController {
             name : key,
             title: key,
             items: this.model.data.menu[key].map(item => ({
-                name : item.page,
+                type : item.type,
+                name : item.page || item.action,
                 title: item.caption
             }))
         }));
@@ -15,10 +16,14 @@ class SdiApplicationController extends ApplicationController {
     onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
     }
-    onMenuItemClick = async (menu, item) => {
-        // console.log('ApplicationController.onMenuItemClick', menu, item);
+    onMenuItemClick = async (menu, item, type) => {
+        console.log('ApplicationController.onMenuItemClick', menu, item, type);
         try {
-            await this.openPage({name: item, modal: false});
+            if (type === 'page') {
+                await this.openPage({name: item, modal: false});
+            } else if (type === 'action') {
+
+            }
         } catch (err) {
             console.error(err);
             alert(err.message);

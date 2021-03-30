@@ -33,7 +33,7 @@ class Menu extends ReactComponent {
         e.persist();
         await this.closeMenu(e.target.dataset.menu);
         if (this.props.onClick) {
-            this.props.onClick(e.target.dataset.menu, e.target.dataset.item);
+            this.props.onClick(e.target.dataset.menu, e.target.dataset.item, e.target.dataset.type);
         }
     }
     render() {
@@ -43,7 +43,7 @@ class Menu extends ReactComponent {
                     <button data-menu={menu.name} onClick={this.onMenuClick} onBlur={this.onBlur}>{menu.title}</button>
                     <div onMouseDown={this.onMouseDown} onClick={this.onMenuItemClick}>
                         {menu.items.map(item =>
-                            <a key={item.name} data-menu={menu.name} data-item={item.name}>{item.title}</a>
+                            <a key={item.name} data-menu={menu.name} data-type={item.type} data-item={item.name}>{item.title}</a>
                         )}
                     </div>
                 </div>)}
