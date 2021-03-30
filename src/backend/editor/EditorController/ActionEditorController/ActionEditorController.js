@@ -27,11 +27,22 @@ class ActionEditorController extends EditorController {
 
     async save(params) {
         const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const formEditor = pageEditor.createFormEditor(params.form);
-        const actionEditor = formEditor.createActionEditor(params.action);
-        await actionEditor.setAttr(params.attr, params.value);
-        await pageEditor.save();
+        if (params.pageFileName) {
+            const pageEditor = await appEditor.createPageEditor(params.pageFileName);
+            if (params.form) {
+                const formEditor = pageEditor.createFormEditor(params.form);
+                const actionEditor = formEditor.createActionEditor(params.action);
+                await actionEditor.setAttr(params.attr, params.value);
+            } else {
+                const actionEditor = pageEditor.createActionEditor(params.action);
+                await actionEditor.setAttr(params.attr, params.value);
+            }
+            await pageEditor.save();
+        } else {
+            const actionEditor = appEditor.createActionEditor(params.action);
+            await actionEditor.setAttr(params.attr, params.value);
+            await appEditor.save();
+        }
         return null;
     }
 

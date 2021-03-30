@@ -44,10 +44,6 @@ class FormEditor extends Editor {
         return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
-    createActionEditor(name) {
-        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
-    }
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

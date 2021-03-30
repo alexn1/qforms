@@ -110,6 +110,9 @@ class Editor extends BaseModel {
         this.addModelData('actions', data);
         return data;
     }
+    createActionEditor(name) {
+        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
+    }
 }
 
 module.exports = Editor;
