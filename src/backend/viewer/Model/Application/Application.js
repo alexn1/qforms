@@ -79,16 +79,11 @@ class Application extends Model {
         // text
         response.text = this.getText();
 
-        // params
-        // response.params = Application.getParams(context);
-
         // menu
         response.menu = await this.createMenu(context);
 
         // pages
         response.pages = await this.fillStartupPages(context);
-
-        // await this.fillCollection2(response, 'databases', context);
 
         return response;
     }
@@ -133,12 +128,6 @@ class Application extends Model {
     createPageLink(name) {
         return new PageLink(this.getColItemData('pageLinks', name), this);
     }
-
-    /*createDatabase(name) {
-        const data = this.getColItemData('databases', name);
-        const className = BaseModel.getClassName(data);
-        return eval(`new qforms.${className}(data, parent)`);
-    }*/
 
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);
