@@ -4,9 +4,6 @@ class ActionEditorController extends EditorController {
 
     async _new(params) {
         console.log('ActionEditorController._new');
-        // if (!params.pageFileName) throw new Error('no pageFileName');
-        // if (!params.form)         throw new Error('no form');
-        if (!params.name)         throw new Error('no name');
         const appEditor = await this.createApplicationEditor();
         let data;
         if (params.pageFileName) {
@@ -78,7 +75,6 @@ class ActionEditorController extends EditorController {
                 await pageEditor.save();
             }
         } else {
-            // app data source
             appEditor.moveActionUp(params.action);
             await appEditor.save();
         }
@@ -98,7 +94,6 @@ class ActionEditorController extends EditorController {
                 await pageEditor.save();
             }
         } else {
-            // app data source
             appEditor.moveActionDown(params.action);
             await appEditor.save();
         }
