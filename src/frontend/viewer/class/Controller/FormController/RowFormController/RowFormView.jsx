@@ -53,7 +53,7 @@ class RowFormView extends FormView {
                         width={width}
                     />
                 }
-                {ctrl.model.data.actions.length > 0 &&
+                {ctrl.model.hasActions() &&
                     <DropdownButton actions={this.getActions()} onClick={this.onActionsClick}/>
                 }
             </div>
@@ -110,7 +110,7 @@ class RowFormView extends FormView {
         const ctrl = this.props.ctrl;
         return (
             <div className="RowFormView">
-                {(ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' || ctrl.model.data.actions.length > 0) && this.renderToolbar()}
+                {(ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' || ctrl.model.hasActions()) && this.renderToolbar()}
                 {this.renderFields()}
             </div>
         );
