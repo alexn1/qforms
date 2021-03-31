@@ -87,7 +87,7 @@ class Page extends Model {
 
     hasRowFormWithDefaultSqlDataSource() {
         for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource().getClassName() === 'SqlDataSource') {
+            if (form.getClassName() === 'RowForm' && form.hasDefaultSqlDataSource()) {
                 return true;
             }
         }

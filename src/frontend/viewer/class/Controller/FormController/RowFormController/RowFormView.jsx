@@ -5,7 +5,7 @@ class RowFormView extends FormView {
         const width = '90px';
         return (
             <div className="toolbar">
-                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="edit"
                         title="Edit"
@@ -14,7 +14,7 @@ class RowFormView extends FormView {
                         width={width}
                     />
                 }
-                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="save"
                         title="Save"
@@ -24,7 +24,7 @@ class RowFormView extends FormView {
                         width={width}
                     />
                 }
-                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="cancel"
                         title="Finish"
@@ -33,7 +33,7 @@ class RowFormView extends FormView {
                         width={width}
                     />
                 }
-                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="discard"
                         title="Discard"
@@ -43,7 +43,7 @@ class RowFormView extends FormView {
                         width={width}
                     />
                 }
-                {ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' &&
+                {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="refresh"
                         title="Refresh"
@@ -110,7 +110,7 @@ class RowFormView extends FormView {
         const ctrl = this.props.ctrl;
         return (
             <div className="RowFormView">
-                {(ctrl.model.getDefaultDataSource().getClassName() === 'SqlDataSource' || ctrl.model.hasActions()) && this.renderToolbar()}
+                {(ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar()}
                 {this.renderFields()}
             </div>
         );

@@ -107,4 +107,7 @@ class Form extends Model {
     getField(name) {
         return this.fields.find(field => field.getName() === name);
     }
+    hasDefaultSqlDataSource() {
+        return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
+    }
 }
