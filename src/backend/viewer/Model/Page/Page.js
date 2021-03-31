@@ -28,13 +28,7 @@ class Page extends Model {
 
     async fill(context) {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
-        const response = {
-            class: this.getClassName()
-        };
-        // fill attributes
-        for (const name in this.attributes()) {
-            response[name] = this.getAttr(name);
-        }
+        const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
