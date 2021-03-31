@@ -1,10 +1,4 @@
-class FormView extends ReactComponent {
-    getActions() {
-        return this.props.ctrl.model.data.actions.map(data => ({
-            name : Model.getName(data),
-            title: Model.getAttr(data, 'caption')
-        }));
-    }
+class FormView extends View {
     onActionsClick = async li => {
         // console.log('FormView.onActionsClick:', li);
         const ctrl = this.props.ctrl;

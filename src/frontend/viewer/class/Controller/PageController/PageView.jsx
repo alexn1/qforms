@@ -42,7 +42,7 @@ class PageView extends ReactComponent {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-        const width = '150px';
+        const width = 150;
         return (
             <div className="toolbar">
                 {model.hasRowFormWithDefaultSqlDataSource() &&
