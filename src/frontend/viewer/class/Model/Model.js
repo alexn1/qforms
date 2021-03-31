@@ -62,4 +62,7 @@ class Model extends EventEmitter {
             dataSource.deinit();
         }
     }
+    hasActions() {
+        return this.data.actions.length > 0;
+    }
 }

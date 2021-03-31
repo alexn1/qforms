@@ -12,11 +12,13 @@ class Page extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
+        this.actions     = [];
         this.forms       = [];
     }
 
     async init() {
         await this.createColItems('dataSources');
+        await this.createColItems('actions');
         await this.createColItems('forms');
     }
 
@@ -34,6 +36,7 @@ class Page extends Model {
             response[name] = this.getAttr(name);
         }
         await this.fillCollection(response, 'dataSources', context);
+        await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
 
         delete response.formatVersion;

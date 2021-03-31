@@ -9,7 +9,7 @@ class Form extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.fillCollections = ['dataSources', 'fields', 'actions'];
+        this.fillCollections = ['dataSources', 'actions', 'fields'];
         this.dataSources     = [];
         this.actions         = [];
         this.fields          = [];
