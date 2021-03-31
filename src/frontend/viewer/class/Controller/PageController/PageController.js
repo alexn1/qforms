@@ -136,4 +136,7 @@ class PageController extends Controller {
     getForm(name) {
         return this.forms.find(form => form.model.getName() === name);
     }
+    async onActionClick(name) {
+        console.log('PageController.onActionClick', name);
+    }
 }

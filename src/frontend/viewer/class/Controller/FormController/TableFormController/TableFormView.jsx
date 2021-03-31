@@ -35,7 +35,7 @@ class TableFormView extends FormView {
                 }
                 {ctrl.model.hasActions() &&
                     <DropdownButton
-                        actions={this.getActions()}
+                        actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
                         enabled={ctrl.isRowSelected()}
                     />

@@ -1,4 +1,4 @@
-class PageView extends ReactComponent {
+class PageView extends View {
     getTabs() {
         const ctrl = this.props.ctrl;
         return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {
@@ -39,6 +39,13 @@ class PageView extends ReactComponent {
         }
         return caption;
     }
+    onActionsClick = async li => {
+        // console.log('PageView.onActionsClick:', li);
+        const ctrl = this.props.ctrl;
+        const name = li.dataset.action;
+        const result = await ctrl.onActionClick(name);
+        if (!result) alert(`no handler for action '${name}'`);
+    }
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -61,6 +68,9 @@ class PageView extends ReactComponent {
                         title={model.getApp().getText().page.close}
                         onClick={ctrl.onClosePageClick}
                     />
+                }
+                {model.hasActions() &&
+                    <DropdownButton actions={this.getActionsForDropdownButton()} onClick={this.onActionsClick}/>
                 }
             </div>
         );
