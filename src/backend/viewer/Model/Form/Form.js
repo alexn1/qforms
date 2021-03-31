@@ -30,10 +30,13 @@ class Form extends Model {
         if (this.getDefaultDataSource()) {
             return super.fill(context);
         }
+
+        // surrogate data source response
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
         const response = await super.fill(context);
         response.dataSources.push(dataSourceResponse);
+
         return response;
     }
 

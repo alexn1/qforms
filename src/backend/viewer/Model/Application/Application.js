@@ -31,9 +31,9 @@ class Application extends Model {
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
         this.env                = env;
-        this.fillCollections    = ['databases', 'dataSources'];
 
         this.databases          = [];
+        this.actions            = [];
         this.dataSources        = [];
         this.pages              = {};
         this.css                = [];
@@ -43,6 +43,7 @@ class Application extends Model {
     async init() {
         // await super.init();
         await this.createColItems('databases');
+        await this.createColItems('actions');
         await this.createColItems('dataSources');
         this.css = await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
         this.js  = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
@@ -68,6 +69,11 @@ class Application extends Model {
     async fill(context) {
         // console.log('Application.fill');
         const response = await super.fill(context);
+
+        await this.fillCollection(response, 'databases', context);
+        await this.fillCollection(response, 'actions', context);
+        await this.fillCollection(response, 'dataSources', context);
+
         delete response.user;
         delete response.password;
         delete response.authentication;
