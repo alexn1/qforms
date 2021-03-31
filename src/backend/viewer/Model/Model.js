@@ -32,7 +32,7 @@ class Model extends BaseModel {
         if (!this[colName]) return;
         response[colName] = [];
         for (const model of this[colName]) {
-            if (model.attributes()['backOnly'] === 'true') continue;
+            if (model.isAttr('backOnly') && model.getAttr('backOnly') === 'true') continue;
             response[colName].push(await model.fill(context));
         }
     }
