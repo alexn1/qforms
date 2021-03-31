@@ -10,11 +10,12 @@ class Page extends Model {
     }
 
     init() {
-        if (this.data.params) throw new Error('data.params still here');
-        // this.initParams();
         this.createDataSources();
+
+        // forms
         for (const data of this.data.forms) {
-            const form = eval(`new ${Model.getAttr(data, 'class')}(data, this)`);
+            const FormClass = eval(Model.getClassName(data));
+            const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);
         }
@@ -30,15 +31,6 @@ class Page extends Model {
         }
         super.deinit();
     }
-
-    /*initParams() {
-        // params defined during data source filling on the server
-        if (this.data.params !== undefined) {
-            for (const data of this.data.params) {
-                this.addPageParam(data.name, data);
-            }
-        }
-    }*/
 
     getId() {
         return this.options.id;
