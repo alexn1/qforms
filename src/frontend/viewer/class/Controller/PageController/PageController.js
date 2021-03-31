@@ -58,7 +58,7 @@ class PageController extends Controller {
         // console.log('changed:', changed);
         // const valid = this.isValid();
         // console.log('valid:', valid);
-        if (changed) {
+        if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = confirm(this.model.getApp().data.text.form.areYouSure);
             if (!result) return;
         }
