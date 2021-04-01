@@ -8,11 +8,6 @@ class PageController extends Controller {
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model, parent);
         }
-        /*if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model, parent);
-        }*/
         return new PageController(model, parent);
     }
 
