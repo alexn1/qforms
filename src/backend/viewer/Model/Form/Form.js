@@ -27,7 +27,7 @@ class Form extends Model {
 
     async fill(context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
-        if (this.getDefaultDataSource()) {
+        if (this.getDataSource('default')) {
             return super.fill(context);
         }
 
@@ -40,9 +40,9 @@ class Form extends Model {
         return response;
     }
 
-    getDefaultDataSource() {
-        return this.dataSources.find(dataSource => dataSource.getName() === 'default');
-    }
+    /*getDefaultDataSource() {
+        return this.getDataSource('default');
+    }*/
 
     _getSurrogateDataSourceResponse(context) {
         const row = {
@@ -85,7 +85,7 @@ class Form extends Model {
 
     async update(context) {
         console.log('Form.update', this.getFullName());
-        const dataSource = this.getDefaultDataSource();
+        const dataSource = this.getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
