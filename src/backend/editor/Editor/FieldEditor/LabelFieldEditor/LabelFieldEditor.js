@@ -14,6 +14,7 @@ class LabelFieldEditor extends FieldEditor {
                 param       : params.param           ? params.param           :        'false',
                 isVisible   : params.isVisible    ? params.isVisible    :         'true',
                 type        : params.type         ? params.type         :             '',
+                width           : params.width         ? params.width        :                               '0',
             }
         };
     }

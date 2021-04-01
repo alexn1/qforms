@@ -14,6 +14,7 @@ class DatePickerFieldEditor extends FieldEditor {
                 param       : params.param           ? params.param           :                           'false',
                 isVisible   : params.isVisible    ? params.isVisible    :                            'true',
                 type        : params.type         ? params.type         :                                '',
+                width           : params.width         ? params.width        :                               '0',
 
                 format      : params.format          ? params.format          : '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}',
                 readOnly    : params.readOnly     ? params.readOnly     :                           'false',

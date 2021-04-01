@@ -14,6 +14,7 @@ class LinkFieldEditor extends FieldEditor {
                 param       : params.param           ? params.param           :        'false',
                 isVisible   : params.isVisible    ? params.isVisible    :         'true',
                 type        : params.type         ? params.type         :             '',
+                width           : params.width         ? params.width        :                               '0',
 
                 notNull     : params.notNull      ? params.notNull      :        'false',
             }
