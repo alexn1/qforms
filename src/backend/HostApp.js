@@ -348,9 +348,10 @@ class HostApp {
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
-            await dataSource.delete(context);
+            const result = await dataSource.delete(context);
             await dataSource.getDatabase().commit(cnn);
-            await res.json(null);
+            if (result === undefined) throw new Error('delete result is undefined');
+            await res.json(result);
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
             throw err;
