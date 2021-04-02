@@ -10,7 +10,7 @@ class RowFormView extends FormView {
                         key="edit"
                         title="Edit"
                         onClick={ctrl.onEditClick}
-                        visible={ctrl.state.mode === 'view'}
+                        visible={ctrl.getMode() === 'view'}
                         width={width}
                     />
                 }
@@ -20,7 +20,7 @@ class RowFormView extends FormView {
                         title="Save"
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
-                        visible={ctrl.state.mode === 'edit'}
+                        visible={ctrl.getMode() === 'edit'}
                         width={width}
                     />
                 }
@@ -28,7 +28,7 @@ class RowFormView extends FormView {
                     <Button
                         key="cancel"
                         title="Finish"
-                        visible={ctrl.state.mode === 'edit' && !ctrl.state.changed && ctrl.state.valid}
+                        visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
                         width={width}
                     />
@@ -39,7 +39,7 @@ class RowFormView extends FormView {
                         title="Discard"
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
-                        visible={ctrl.state.mode === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
+                        visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
                         width={width}
                     />
                 }
@@ -49,7 +49,7 @@ class RowFormView extends FormView {
                         title="Refresh"
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                         onClick={ctrl.onRefreshClick}
-                        visible={ctrl.state.mode === 'view'}
+                        visible={ctrl.getMode() === 'view'}
                         width={width}
                     />
                 }

@@ -146,7 +146,7 @@ class RowFormFieldController extends FieldController {
         return null;
     }
     isEditable() {
-        return this.parent.state.mode === 'edit' && !this.model.isReadOnly();
+        return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
     }
     isParseError() {
         return this.state.parseError;

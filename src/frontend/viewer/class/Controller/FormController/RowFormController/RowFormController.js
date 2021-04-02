@@ -15,7 +15,9 @@ class RowFormController extends FormController {
         this.model.on('refresh', this.onModelRefresh);
         this.model.on('insert' , this.onModelInsert);
         this.model.on('update' , this.onModelUpdate);
-        if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') this.state.mode = 'view';
+        if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') {
+            this.state.mode = 'view';
+        }
         this.calcState();
     }
 
@@ -162,5 +164,8 @@ class RowFormController extends FormController {
     }
     getActiveRow(withChanges) {
         return this.model.getRow(withChanges);
+    }
+    getMode() {
+        return this.state.mode;
     }
 }
