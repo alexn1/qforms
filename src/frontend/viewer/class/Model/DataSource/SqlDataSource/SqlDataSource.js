@@ -275,7 +275,7 @@ class SqlDataSource extends DataSource {
             params        : Helper.encodeObject({key}),
             parentPageName: page ? page.getParentPageName() : null
         };
-        const data = await this.getApp().request(args);
+        const result = await this.getApp().request(args);
         await this.refill();
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete({source: this, key: key});

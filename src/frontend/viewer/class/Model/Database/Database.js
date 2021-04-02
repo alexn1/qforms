@@ -29,4 +29,13 @@ class Database extends Model {
             }
         }
     }
+    emitDelete(result, source = null) {
+        if (!result.delete) return;
+        for (const tableName in result.delete) {
+            const table = this.getTable(tableName);
+            for (const key of result.delete[tableName]) {
+                table.emit('delete', {source: source, key: key});
+            }
+        }
+    }
 }
