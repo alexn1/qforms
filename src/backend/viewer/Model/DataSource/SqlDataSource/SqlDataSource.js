@@ -166,7 +166,7 @@ class SqlDataSource extends DataSource {
         // console.log('row:', row);
 
         const result = {
-            new: {[key]: row}
+            // new: {[key]: row}
         };
         SqlDataSource.addInsertToResult(result, table, key, row);
         return result;
