@@ -144,7 +144,9 @@ class SqlDataSource extends DataSource {
         const autoTypes = this.getAutoTypes();
         console.log('autoTypes:', autoTypes);
 
-        const values = await this.getDatabase().insertRow(context, this.getAttr('table'), autoColumns, params, autoTypes);
+        const table = this.getAttr('table');
+
+        const values = await this.getDatabase().insertRow(context, table, autoColumns, params, autoTypes);
         console.log('values:', values);
 
         const key = this.getKeyFromValues(values);
@@ -162,12 +164,18 @@ class SqlDataSource extends DataSource {
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows([row]);
         // console.log('row:', row);
-        return {
-            new   : {[key]: row},
-            // insert: {},
-            // update: {},
-            // delete: {}
+
+        const result = {
+            new: {[key]: row}
         };
+        SqlDataSource.addInsertToResult(result, table, key, row);
+        return result;
+    }
+
+    static addInsertToResult(result, table, key, row) {
+        if (!result.insert) result.insert = {};
+        if (!result.insert[table]) result.insert[table] = {};
+        result.insert[table][key] = row;
     }
 
     static addUpdateToResult(result, table, oldKey, newKey) {

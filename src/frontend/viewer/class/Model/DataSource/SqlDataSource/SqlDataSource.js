@@ -248,9 +248,7 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceInsert) this.parent.onDataSourceInsert(e);
         this.getTable().emit('insert', e);
 
-        // update/delete
-        this.getDatabase().emitUpdate(result, this);
-        this.getDatabase().emitDelete(result, this);
+        this.getDatabase().emitResult(result, this);
 
         return key;
     }
@@ -278,10 +276,8 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete({source: this, key: key});
         }
-
-        // update/delete
-        this.getDatabase().emitUpdate(result, this);
-        this.getDatabase().emitDelete(result, this);
+        this.getDatabase().emitResult(result, this);
+        return result;
     }
 
     getTableName() {
