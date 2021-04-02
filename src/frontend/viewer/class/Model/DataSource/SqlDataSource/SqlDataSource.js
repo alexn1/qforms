@@ -219,7 +219,8 @@ class SqlDataSource extends DataSource {
 
     async insert(row) {
         console.log('SqlDataSource.insert', this.getTableName(), row);
-        if (this.getAttr('table') === '') throw new Error('no data source table to insert');
+        const table = this.getAttr('table');
+        if (table === '') throw new Error('no data source table to insert');
 
         const result = await this.getApp().request({
             action        : 'insert',
@@ -230,12 +231,12 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result.new);
+        const [key] = Object.keys(result.insert[table]);
         if (!key) throw new Error('no inserted row key');
-        const values = result.new[key];
+        const values = result.insert[table][key];
         for (const column in values) row[column] = values[column];
-        console.log('key:', key);
-        console.log('row:', row);
+        // console.log('key:', key);
+        // console.log('row:', row);
 
         // add new row to rows
         this.news.splice(this.news.indexOf(row), 1);
@@ -244,12 +245,10 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const e = {source: this, key};
-        if (this.parent.onDataSourceInsert) this.parent.onDataSourceInsert(e);
-        this.getTable().emit('insert', e);
-
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert({source: this, key});
+        }
         this.getDatabase().emitResult(result, this);
-
         return key;
     }
 

@@ -26,7 +26,13 @@ class Database extends Model {
     }
 
     emitInsert(result, source = null) {
-
+        if (!result.insert) return;
+        for (const tableName in result.insert) {
+            const table = this.getTable(tableName);
+            for (const key in result.insert[tableName]) {
+                table.emit('insert', {source: source, key: key});
+            }
+        }
     }
 
     emitUpdate(result, source = null) {
