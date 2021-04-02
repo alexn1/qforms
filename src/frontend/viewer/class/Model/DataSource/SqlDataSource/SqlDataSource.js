@@ -248,8 +248,9 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceInsert) this.parent.onDataSourceInsert(e);
         this.getTable().emit('insert', e);
 
-        // update
+        // update/delete
         this.getDatabase().emitUpdate(result, this);
+        this.getDatabase().emitDelete(result, this);
 
         return key;
     }
@@ -266,21 +267,21 @@ class SqlDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const page = this.getPage();
-        const args = {
+        const result = await this.getApp().request({
             action        : '_delete',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
-            // ds            : this.getName(),
-            // row           : this.getRowByKey(key),
             params        : Helper.encodeObject({key}),
             parentPageName: page ? page.getParentPageName() : null
-        };
-        const result = await this.getApp().request(args);
+        });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete({source: this, key: key});
         }
-        this.getTable().emit('delete', {source: this, key: key});
+
+        // update/delete
+        this.getDatabase().emitUpdate(result, this);
+        this.getDatabase().emitDelete(result, this);
     }
 
     getTableName() {

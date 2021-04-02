@@ -187,9 +187,11 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
         const {key} = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
-        const query = this.getDatabase().getDeleteQuery(this.getAttr('table'), keyValues);
+        const table = this.getAttr('table');
+        const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
         const result = {};
+        SqlDataSource.addDeleteToResult(result, table, key);
         return result;
     }
 
