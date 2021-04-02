@@ -19,6 +19,11 @@ class Database extends Model {
         return table;
     }
 
+    emitResult(result, source) {
+        this.emitUpdate(result, source);
+        this.emitDelete(result, source);
+    }
+
     emitUpdate(result, source = null) {
         if (!result.update) return;
         for (const tableName in result.update) {
