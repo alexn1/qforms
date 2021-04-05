@@ -13,12 +13,14 @@ class ReactComponent extends React.Component {
     getClassName() {
         return this.getClassList().join(' ');
     }
-    rerender() {
+    rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`);
         return new Promise(resolve => {
             const start = Date.now();
             this.forceUpdate(() => {
-                console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                if (logTime) {
+                    console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                }
                 resolve();
             });
         });
