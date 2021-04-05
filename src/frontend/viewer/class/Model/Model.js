@@ -43,7 +43,7 @@ class Model extends EventEmitter {
         return this.getName();
     }
     getCaption() {
-        return this.data.caption;
+        return this.getAttr('caption');
     }
     getDataSource(name) {
         return this.dataSources.find(dataSource => dataSource.getName() === name);

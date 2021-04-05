@@ -153,4 +153,19 @@ class Field extends Model {
         }
         return false;
     }
+    getCaption() {
+        const caption = this.getAttr('caption');
+        if (caption === '') {
+            const columnName = this.getAttr('column');
+            if (columnName && this.parent.hasDefaultSqlDataSource()) {
+                const ds = this.parent.getDataSource('default');
+                const table = ds.getTable();
+                if (table) {
+                    const column = table.getColumn(columnName);
+                    return column.getCaption();
+                }
+            }
+        }
+        return caption;
+    }
 }

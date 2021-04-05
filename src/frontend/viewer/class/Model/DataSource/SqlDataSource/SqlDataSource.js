@@ -27,15 +27,15 @@ class SqlDataSource extends DataSource {
         super.deinit();
     }
 
-    getType(column) {
-        // console.log('SqlDataSource.getType', column);
-        const type = this.getTable().getColumn(column).getType();
+    getType(columnName) {
+        // console.log('SqlDataSource.getType', columnName);
+        const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
     }
 
-    getDbType(column) {
-        return this.getTable().getColumn(column).getDbType();
+    getDbType(columnName) {
+        return this.getTable().getColumn(columnName).getDbType();
     }
 
     async update() {
