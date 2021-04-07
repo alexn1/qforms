@@ -65,6 +65,9 @@ class Field extends Model {
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
         if (this.getAttr('column')) {
+            if (!row && this.parent instanceof RowForm) {
+                row = this.parent.getRow();
+            }
             let rawValue = this.getRawValue(row);
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
