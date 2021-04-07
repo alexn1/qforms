@@ -1,15 +1,13 @@
 class Controller extends EventEmitter {
     constructor(model, parent) {
         super();
-        this.model     = model;
-        this.parent    = parent;
-        this.view      = null;
-        this.deinited  = false;
+        this.model    = model;
+        this.parent   = parent;
+        this.view     = null;
+        this.deinited = false;
     }
-
     init() {
     }
-
     deinit() {
         if (this.deinited) throw new Error(`${this.model.getFullName()}: controller already deinited`);
         this.deinited = true;
@@ -25,5 +23,10 @@ class Controller extends EventEmitter {
             console.error(`${this.model.getFullName()}: no view`);
         }
     }
-
+    getModel() {
+        return this.model;
+    }
+    getParent() {
+        return this.parent;
+    }
 }
