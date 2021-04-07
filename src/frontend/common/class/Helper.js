@@ -162,6 +162,20 @@ class Helper {
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0,   arr.splice(oldIndex, 1)[0]);
     }
+    static formatTime(sec) {
+        // console.log('Helper.formatTime', sec);
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10) h = '0' + h;
+        if (m < 10) m = '0' + m;
+        if (s < 10) s = '0' + s;
+        if (h > 0) {
+            return `${h}:${m}:${s}`;
+        } else {
+            return `${m}:${s}`;
+        }
+    }
 }
 
 Helper.SECOND = 1000;
