@@ -20,9 +20,9 @@ class Database extends Model {
     }
 
     emitResult(result, source) {
-        this.emitInsert(result, source);
-        this.emitUpdate(result, source);
         this.emitDelete(result, source);
+        this.emitUpdate(result, source);
+        this.emitInsert(result, source);
     }
 
     emitInsert(result, source = null) {
