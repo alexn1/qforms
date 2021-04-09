@@ -5,11 +5,15 @@ class SdiApplicationView extends ApplicationView {
         const model = ctrl.model;
         return (
             <div className={`SdiApplicationView ${model.getAttr('theme')}`}>
-                <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
-                <div className="sdi">
+                <header>
+                    <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
+                </header>
+                <main className="sdi">
                     {this.renderActivePage()}
-                </div>
-                <Statusbar onCreate={ctrl.onStatusbarCreate}/>
+                </main>
+                <footer>
+                    <Statusbar onCreate={ctrl.onStatusbarCreate}/>
+                </footer>
                 {this.renderModalPages()}
             </div>
         );
