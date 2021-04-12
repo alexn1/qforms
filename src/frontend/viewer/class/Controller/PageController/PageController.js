@@ -116,7 +116,7 @@ class PageController extends Controller {
     getCaption() {
         return this.model.getCaption();
     }
-    static createLink(params) {
+    static createLink(params = {}) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
         return [
