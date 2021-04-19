@@ -18,10 +18,16 @@ class QForms {
         // console.log('QForms.init');
         const application = new Application(this.data);
         application.init();
-        document.querySelector('html').classList.add(application.getName());
+        const appName = application.getName();
+        const html = document.querySelector('html');
+        const body = document.querySelector('body');
+        const root = document.querySelector('body > div');
+        html.classList.add(appName);
+        body.classList.add(`${appName}__body`);
+        root.classList.add(`${appName}__root`);
         const applicationController = ApplicationController.create(application);
         applicationController.init();
-        applicationController.createView(document.querySelector('#root'));
+        applicationController.createView(root);
     }
 
     static exit(evt) {
