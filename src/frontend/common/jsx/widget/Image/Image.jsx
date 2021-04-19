@@ -8,7 +8,7 @@ class Image extends ReactComponent {
     }
     render() {
         return (
-            <img ref={this.img} src={this.props.src}/>
+            <img className={this.getClassName()} ref={this.img} src={this.props.src}/>
         );
     }
     /*componentDidMount() {
