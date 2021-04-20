@@ -1,0 +1,17 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html.admin-viewport {
+  height: 100%;
+  body {
+    margin: 0;
+    height: 100%;
+    > div {
+      height: 100%;
+    }
+  }
+  &.wait, &.wait * {
+    cursor: wait !important;
+  }
+}
