@@ -149,7 +149,7 @@ class HostApp {
                 version       : pkg.version,
                 lang          : data.lang,
                 debugApp      : context.query.debug,
-                links         : application.css,
+                links         : application.links,
                 scripts       : application.js,
                 title         : application.getTitle(context, data),
                 data          : JSON.stringify(data, null, 4),

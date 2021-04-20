@@ -36,7 +36,7 @@ class Application extends Model {
         this.actions            = [];
         this.dataSources        = [];
         this.pages              = {};
-        this.css                = [];
+        this.links              = [];
         this.js                 = [];
     }
 
@@ -45,8 +45,12 @@ class Application extends Model {
         await this.createColItems('databases');
         await this.createColItems('actions');
         await this.createColItems('dataSources');
-        this.css = await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
-        this.js  = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
+        this.links = await this.getLinks();
+        this.js    = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
+    }
+
+    async getLinks() {
+        return await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
     }
 
     async deinit() {
