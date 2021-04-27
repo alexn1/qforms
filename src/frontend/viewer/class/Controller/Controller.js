@@ -20,7 +20,7 @@ class Controller extends EventEmitter {
         if (this.view) {
             this.view.rerender();
         } else {
-            console.error(`${this.model.getFullName()}: no view`);
+            console.error(`Controller.rerender no view: ${this.model.getFullName()}`);
         }
     }
     getModel() {

@@ -49,6 +49,7 @@ class RowFormController extends FormController {
 
     onModelRefresh = e => {
         console.log('RowFormController.onModelRefresh', this.model.getFullName());
+        if (!this.view) return;
         this.refill();
         this.invalidate();
         this.rerender();

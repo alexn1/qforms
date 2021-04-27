@@ -147,6 +147,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
+        if (!this.view2) return;
         super.refill();
         this.view2.setValue(this.getValueForTime());
         this.resetErrors2();

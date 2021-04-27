@@ -137,6 +137,7 @@ class TableFormController extends FormController {
     }
     onModelRefresh = e => {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
+        if (!this.view) return;
         this.invalidate();
         this.rerender();
     }
