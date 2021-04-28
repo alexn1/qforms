@@ -6,7 +6,7 @@ class CheckBoxFieldEditor extends FieldEditor {
         return {
             '@class'     : 'CheckBoxField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
                 readOnly    : params.readOnly     ? params.readOnly     :        'false',
                 notNull     : params.notNull      ? params.notNull      :        'false',
             }

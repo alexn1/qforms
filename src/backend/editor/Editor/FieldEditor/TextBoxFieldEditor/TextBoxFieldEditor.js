@@ -6,7 +6,7 @@ class TextBoxFieldEditor extends FieldEditor {
         return {
             '@class'     : 'TextBoxField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
                 readOnly        : params.readOnly         ? params.readOnly         :        'false',
                 notNull         : params.notNull          ? params.notNull          :        'false',
                 placeholder     : params.placeholder      ? params.placeholder      :             '',

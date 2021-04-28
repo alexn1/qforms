@@ -5,7 +5,7 @@ class DateTimeFieldEditor extends FieldEditor {
         return {
             '@class'     : 'DateTimeField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
                 format          : params.format           ? params.format          : '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}',
                 readOnly        : params.readOnly         ? params.readOnly     :                           'false',
                 notNull         : params.notNull          ? params.notNull      :                           'false',

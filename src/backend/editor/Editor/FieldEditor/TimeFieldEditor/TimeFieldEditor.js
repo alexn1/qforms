@@ -5,7 +5,7 @@ class TimeFieldEditor extends FieldEditor {
         return {
             '@class'     : 'TimeField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
                 // format      : params.format          ? params.format          : '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}',
                 readOnly    : params.readOnly     ? params.readOnly     :                           'false',
                 notNull     : params.notNull      ? params.notNull      :                           'false',

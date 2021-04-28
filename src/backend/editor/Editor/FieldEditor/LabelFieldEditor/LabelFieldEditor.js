@@ -6,7 +6,7 @@ class LabelFieldEditor extends FieldEditor {
         return {
             '@class'     : 'LabelField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
             }
         };
     }

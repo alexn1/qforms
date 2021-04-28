@@ -6,7 +6,7 @@ class FileFieldEditor extends FieldEditor {
         return {
             '@class'     : 'FileField',
             '@attributes': {
-                ...Field.createAttributes(params),
+                ...FieldEditor.createAttributes(params),
                 readOnly    : params.readOnly     ? params.readOnly     :        'false',
                 notNull     : params.notNull      ? params.notNull      :        'false',
             }
