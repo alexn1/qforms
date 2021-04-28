@@ -45,7 +45,7 @@ class FieldEditor extends Editor {
     static createAttributes(params) {
         return {
             name        : params.name,
-            caption     : params.caption      !== undefined ? params.caption : params.name,
+            caption     : params.caption      !== undefined ? params.caption      :    params.name,
             column      : params.column       !== undefined ? params.column       :    params.name,
             defaultValue: params.defaultValue !== undefined ? params.defaultValue :             '',
             value       : params.value        !== undefined ? params.value        :             '',
