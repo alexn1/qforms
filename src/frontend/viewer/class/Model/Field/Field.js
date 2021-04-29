@@ -162,9 +162,8 @@ class Field extends Model {
             const columnName = this.getAttr('column');
             if (columnName && this.parent.hasDefaultSqlDataSource()) {
                 const ds = this.parent.getDataSource('default');
-                const table = ds.getTable();
-                if (table) {
-                    const column = table.getColumn(columnName);
+                if (ds.getAttr('table')) {
+                    const column = ds.getTable().getColumn(columnName);
                     return column.getCaption();
                 }
             }
