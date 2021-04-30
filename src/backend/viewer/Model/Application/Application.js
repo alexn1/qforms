@@ -74,8 +74,8 @@ class Application extends Model {
         // console.log('Application.fill');
         const response = await super.fill(context);
 
-        await this.fillCollection(response, 'databases', context);
-        await this.fillCollection(response, 'actions', context);
+        await this.fillCollection(response, 'databases'  , context);
+        await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);
 
         delete response.user;
@@ -93,7 +93,7 @@ class Application extends Model {
         response.menu = await this.createMenu(context);
 
         // pages
-        response.pages = await this.fillStartupPages(context);
+        response.pages = await this.fillPages(context);
 
         return response;
     }
@@ -171,8 +171,8 @@ class Application extends Model {
             .map(data => BaseModel.getName(data));
     }
 
-    async fillStartupPages(context) {
-        console.log('Application.fillStartupPages', context.query.page);
+    async fillPages(context) {
+        console.log('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
