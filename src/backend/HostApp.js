@@ -214,7 +214,7 @@ class HostApp {
                 application: application,
                 caption    : application.getAttr('caption'),
                 REQUEST_URI: req.url,
-                errMsg     : application.text.login.WrongUsernameOrPassword,
+                errMsg     : application.getText().login.WrongUsernameOrPassword,
                 username   : req.body.username,
                 users      : users
             });

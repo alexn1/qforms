@@ -3,7 +3,7 @@
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
-    <title><%=caption%> - <%=application.text.login.login%> - QForms</title>
+    <title><%=caption%> - <%=application.getText().login.login%> - QForms</title>
     <!-- EventEmitter -->
     <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- bootstrap -->
@@ -69,10 +69,10 @@
                     <% }); %>
                 </select>
             <% } else { %>
-                <input name="username" class="form-control" placeholder="<%=application.text.login.username%>" required autofocus value="<%=username%>">
+                <input name="username" class="form-control" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>">
             <% } %>
-            <input name="password" type="password" class="form-control" placeholder="<%=application.text.login.password%>">
-            <button class="btn btn-lg btn-primary btn-block" type="submit"><%=application.text.login.signIn%></button>
+            <input name="password" type="password" class="form-control" placeholder="<%=application.getText().login.password%>">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%=application.getText().login.signIn%></button>
         </form>
     </div>
 </body>
