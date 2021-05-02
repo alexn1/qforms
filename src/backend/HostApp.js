@@ -150,10 +150,7 @@ class HostApp {
                 application   : application,
                 title         : application.getTitle(context, data),
                 debugApp      : context.query.debug,
-                // links         : application.links,
-                // scripts       : application.js,
                 data          : JSON.stringify(data, null, 4),
-                // env           : application.getEnv(),
             });
         }
     }
