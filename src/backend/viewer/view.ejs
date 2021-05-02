@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%=lang%>">
+<html lang="<%=application.getAttr('lang')%>">
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
@@ -19,7 +19,7 @@
     <link href="css/common-jsx.css" rel="stylesheet"/>
     <link href="css/viewer-jsx.css" rel="stylesheet"/>
     <!-- app links -->
-    <%links.forEach(link => {
+    <%application.links.forEach(link => {
         if (typeof link === 'string') {
             %><link href="<%=link%>" rel="stylesheet"/>
     <%
@@ -29,8 +29,8 @@
         }
     });%>
     <!-- app js -->
-    <%scripts.forEach(script => {
-        %><script src="<%=script%>"></script>
+    <%application.js.forEach(src => {
+        %><script src="<%=src%>"></script>
     <%
     });%>
     <script>

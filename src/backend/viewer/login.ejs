@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="<%=lang%>">
+<html lang="<%=application.getAttr('lang')%>">
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=caption%> - <%=application.getText().login.login%> - QForms</title>
+    <title><%=application.getAttr('caption')%> - <%=application.getText().login.login%> - QForms</title>
     <!-- EventEmitter -->
     <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
