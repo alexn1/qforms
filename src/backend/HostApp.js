@@ -147,7 +147,7 @@ class HostApp {
             const data = await this.fill(req, context);
             res.render('viewer/view', {
                 version       : pkg.version,
-                lang          : data.lang,
+                lang          : application.getAttr('lang'),
                 debugApp      : context.query.debug,
                 links         : application.links,
                 scripts       : application.js,
@@ -180,6 +180,7 @@ class HostApp {
         const application = this.getApplication(req, context);
         const users = await application.getUsers(context);
         res.render('viewer/login', {
+            lang          : application.getAttr('lang'),
             version       : pkg.version,
             application   : application,
             caption       : application.getAttr('caption'),
