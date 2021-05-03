@@ -187,7 +187,10 @@ class ApplicationController extends Controller {
     }
     onLogout = async () => {
         console.log('ApplicationController.onLogout');
-        // location.reload();
+        const result = await this.model.request({
+            action: 'logout',
+        });
+        location.reload();
     }
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
