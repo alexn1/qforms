@@ -83,14 +83,14 @@ class PageView extends View {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
-            <div className="PageView full place">
-                <div className="frame flex-rows">
+            <div className="PageView full frame">
+                <div className="frame__content flex-rows">
                     <h3 className="caption">{this.renderCaption()}</h3>
                     {(model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
-                        <div className="table-forms flex-max place">
-                            <div className="frame">
+                        <div className="table-forms flex-max frame">
+                            <div className="frame__content">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                             </div>
                         </div>
