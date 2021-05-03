@@ -42,13 +42,13 @@
     });
     </script>
 </head>
-<body>
+<body class="<%=application.getName()%>-app__body">
 <%
 if (debugApp === 1) {
-    %><div class="debug"></div>
+    %><div class="<%=application.getName()%>-app__root debug"></div>
 <%
 } else {
-    %><div></div><%
+    %><div class="<%=application.getName()%>-app__root"></div><%
 }
 %>
 </body>

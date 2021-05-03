@@ -20,7 +20,7 @@
     <link href="css/common-jsx.css" rel="stylesheet"/>
     <link href="css/viewer-jsx.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="<%=application.getName()%>-app__body">
     <form action="<%=REQUEST_URI%>" method="post">
         <% if (errMsg !== null) { %>
         <div>
