@@ -7,11 +7,6 @@ class ApplicationController extends Controller {
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model);
         }
-        /*if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model);
-        }*/
         return new SdiApplicationController(model);
     }
     static getSearchObj() {
@@ -56,7 +51,6 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
-
     /*onLogout = ea => {
         location.reload();
     }*/
@@ -113,13 +107,10 @@ class ApplicationController extends Controller {
         this.rerender();
         // console.log('pc:', pc);
     }
-
     getNextPageId() {
         this.lastPageId++;
         return this.lastPageId;
     }
-
-
     createPage() {
         if (!this.model.data.pages[0]) return;
         const pageData = this.model.data.pages[0];
