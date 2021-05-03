@@ -18,7 +18,7 @@ class ApplicationView extends ReactComponent {
             </Modal>
         );
     }
-    render() {
+    /*render() {
         console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
@@ -28,5 +28,5 @@ class ApplicationView extends ReactComponent {
                 {this.renderModalPages()}
             </div>
         );
-    }
+    }*/
 }

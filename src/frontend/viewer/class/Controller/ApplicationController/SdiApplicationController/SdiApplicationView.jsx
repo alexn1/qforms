@@ -8,7 +8,7 @@ class SdiApplicationView extends ApplicationView {
                 <header>
                     <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 </header>
-                <main className="sdi">
+                <main className="SdiApplicationView__main">
                     {this.renderActivePage()}
                 </main>
                 <footer>
