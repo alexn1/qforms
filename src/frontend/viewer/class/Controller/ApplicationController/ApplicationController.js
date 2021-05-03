@@ -168,4 +168,32 @@ class ApplicationController extends Controller {
     async onActionClick(name) {
         console.log('ApplicationController.onActionClick', name);
     }
+    getMenuItemsProp() {
+        return Object.keys(this.model.data.menu).map(key => ({
+            name : key,
+            title: key,
+            items: this.model.data.menu[key].map(item => ({
+                type : item.type,
+                name : item.page || item.action,
+                title: item.caption
+            }))
+        }));
+    }
+    onStatusbarCreate = statusbar => {
+        this.statusbar = statusbar;
+    }
+    onMenuItemClick = async (menu, type, name) => {
+        console.log('ApplicationController.onMenuItemClick', menu, type, name);
+        try {
+            if (type === 'page') {
+                await this.openPage({name: name, modal: false});
+            } else if (type === 'action') {
+                const result = await this.onActionClick(name);
+                if (!result) alert(`no handler for action '${name}'`);
+            }
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
+    }
 }
