@@ -22,11 +22,6 @@
 </head>
 <body class="<%=application.getName()%>-login__body">
     <form class="login-form" action="<%=REQUEST_URI%>" method="post">
-        <% if (errMsg !== null) { %>
-        <div>
-            <span><%=errMsg%></span>
-        </div>
-        <% } %>
         <input name="action" type="hidden" value="login">
         <% if (users) { %>
             <select name="username" required autofocus>
@@ -39,6 +34,9 @@
         <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>">
         <% } %>
         <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
+        <% if (errMsg !== null) { %>
+            <p class="login-form__err-msg"><%=errMsg%></p>
+        <% } %>
         <button type="submit"><%=application.getText().login.signIn%></button>
     </form>
 </body>
