@@ -22,9 +22,6 @@ class QForms {
         const html = document.querySelector('html');
         const body = document.querySelector('body');
         const root = document.querySelector('body > div');
-        html.classList.add(`${appName}-viewport`);
-        body.classList.add(`${appName}-viewport__body`);
-        root.classList.add(`${appName}-viewport__root`);
         const applicationController = ApplicationController.create(application);
         applicationController.init();
         applicationController.createView(root);
