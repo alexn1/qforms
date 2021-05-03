@@ -21,27 +21,25 @@
     <link href="css/viewer-jsx.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container">
-        <form action="<%=REQUEST_URI%>" method="post">
-            <% if (errMsg !== null) { %>
-                <div>
-                    <span><%=errMsg%></span>
-                </div>
-            <% } %>
-            <input name="action" type="hidden" value="login">
-            <% if (users) { %>
-                <select name="username" required autofocus>
-                    <option value=""></option>
-                    <% users.forEach((user) => { %>
-                        <option value="<%=user.username%>" <%=user.username === username ? 'selected' : ''%>><%=user.title%></option>
-                    <% }); %>
-                </select>
-            <% } else { %>
-                <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>">
-            <% } %>
-            <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
-            <button type="submit"><%=application.getText().login.signIn%></button>
-        </form>
-    </div>
+    <form action="<%=REQUEST_URI%>" method="post">
+        <% if (errMsg !== null) { %>
+        <div>
+            <span><%=errMsg%></span>
+        </div>
+        <% } %>
+        <input name="action" type="hidden" value="login">
+        <% if (users) { %>
+            <select name="username" required autofocus>
+                <option value=""></option>
+                <% users.forEach((user) => { %>
+                <option value="<%=user.username%>" <%=user.username === username ? 'selected' : ''%>><%=user.title%></option>
+                <% }); %>
+            </select>
+        <% } else { %>
+        <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>">
+        <% } %>
+        <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
+        <button type="submit"><%=application.getText().login.signIn%></button>
+    </form>
 </body>
 </html>
