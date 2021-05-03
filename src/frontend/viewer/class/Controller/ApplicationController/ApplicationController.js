@@ -51,9 +51,6 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
-    /*onLogout = ea => {
-        location.reload();
-    }*/
     onRequest = e => {
         // console.log('onRequest', e);
         if (this.statusbar) {
@@ -160,18 +157,37 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
-        return Object.keys(this.model.data.menu).map(key => ({
-            name : key,
-            title: key,
-            items: this.model.data.menu[key].map(item => ({
-                type : item.type,
-                name : item.page || item.action,
-                title: item.caption
-            }))
-        }));
+        return [
+            // pages & actions
+            ...Object.keys(this.model.data.menu).map(key => ({
+                name : key,
+                title: key,
+                items: this.model.data.menu[key].map(item => ({
+                    type : item.type,
+                    name : item.page || item.action,
+                    title: item.caption
+                }))
+            })),
+            // user menu
+            {
+                name: 'user',
+                title: 'User',
+                items: [
+                    {
+                        type: 'custom',
+                        name: 'logout',
+                        title: 'Logout'
+                    }
+                ]
+            }
+        ];
     }
     onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
+    }
+    onLogout = async () => {
+        console.log('ApplicationController.onLogout');
+        // location.reload();
     }
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
@@ -181,6 +197,10 @@ class ApplicationController extends Controller {
             } else if (type === 'action') {
                 const result = await this.onActionClick(name);
                 if (!result) alert(`no handler for action '${name}'`);
+            } else if (type === 'custom' && name === 'logout') {
+                await this.onLogout();
+            } else {
+                throw new Error(`unknown menu type: ${type}/${name}`);
             }
         } catch (err) {
             console.error(err);
