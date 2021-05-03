@@ -50,11 +50,11 @@ class TableFormView extends FormView {
         const text = model.getApp().getText();
         return (
             <div className="paging">
-                <div className="countBlock">
+                <div className="paging__countBlock">
                     <span className="count">{dataSource.getRowsLength()} {dataSource.getLimit() && `of ${dataSource.getCount()}`}</span>
                 </div>
                 {dataSource.getLimit() &&
-                    <div className="gotoBlock">
+                    <div className="paging__gotoBlock">
                         <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
                         <ComboBox
                             value={ctrl.model.getDefaultDataSource().getFrame().toString()}
