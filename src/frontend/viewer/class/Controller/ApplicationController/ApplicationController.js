@@ -203,7 +203,7 @@ class ApplicationController extends Controller {
             } else if (type === 'custom' && name === 'logout') {
                 await this.onLogout();
             } else {
-                throw new Error(`unknown menu type: ${type}/${name}`);
+                throw new Error(`unknown menu type/name: ${type}/${name}`);
             }
         } catch (err) {
             console.error(err);
