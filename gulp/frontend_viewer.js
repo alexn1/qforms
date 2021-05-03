@@ -28,6 +28,16 @@ function frontend_viewer_jsx_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
+function frontend_viewer_less() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/viewer/*.less'))
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(concat('viewer.css'))
+        // .pipe(minifyCss())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+}
+
 function frontend_viewer_jsx_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/class/**/*.less'))
         .pipe(sourcemaps.init())
@@ -38,6 +48,6 @@ function frontend_viewer_jsx_less() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
-const frontend_viewer = gulp.series(frontend_viewer_class_js, frontend_viewer_jsx_js, frontend_viewer_jsx_less);
+const frontend_viewer = gulp.series(frontend_viewer_class_js, frontend_viewer_jsx_js, frontend_viewer_jsx_less, frontend_viewer_less);
 
 module.exports = frontend_viewer;
