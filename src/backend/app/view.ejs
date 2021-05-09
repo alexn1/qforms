@@ -15,10 +15,12 @@
     <script src="js/common.js"></script>
     <script src="js/common-jsx.js"></script>
     <script src="js/app.js"></script>
+    <!-- data -->
+    <script id="data" type="application/json"><%-JSON.stringify(data, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('app/view.ejs DOMContentLoaded');
-            const data = <%-JSON.stringify(data, null, 4)%>;
+            const data = JSON.parse(document.getElementById('data').textContent);
             const ctrl = new HomeController(data);
             ctrl.init();
             ctrl.createView(document.querySelector('#root'));

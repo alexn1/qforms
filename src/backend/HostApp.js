@@ -150,7 +150,7 @@ class HostApp {
                 application   : application,
                 title         : application.getTitle(context, data),
                 debugApp      : context.query.debug,
-                data          : JSON.stringify(data, null, 4),
+                data          : data,
             });
         }
     }

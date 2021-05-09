@@ -34,12 +34,13 @@
         %><script src="<%=src%>"></script>
     <%
     });%>
+    <script id="data" type="application/json"><%- JSON.stringify(data, null, 4) %></script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const data = <%- data %>;
-        const qforms = new QForms(data);
-        qforms.init();
-    });
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(document.getElementById('data').textContent);
+            const qforms = new QForms(data);
+            qforms.init();
+        });
     </script>
 </head>
 <body class="<%=application.getName()%>-app__body">
