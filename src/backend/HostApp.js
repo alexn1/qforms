@@ -551,7 +551,7 @@ class HostApp {
         const dump = model.dump();
         res.render('monitor/view', {
             version     : pkg.version,
-            dump        : JSON.stringify(dump, null, 4)
+            dump        : dump
         });
     }
     async logError(req, err) {
