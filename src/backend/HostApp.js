@@ -471,11 +471,11 @@ class HostApp {
         await appFile.read();
         const app = JSON.parse(appFile.content);
         app.env = this.nodeEnv;
-        const appFileContent = JSON.stringify(app, null, 4);
+
         res.render('editor/view', {
             version        : pkg.version,
+            app            : app,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
-            appFileContent : appFileContent,
             appDirName     : context.appDirName,
             appName        : appFile.getAttr('name'),
             env            : application.getEnv()
