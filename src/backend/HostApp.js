@@ -377,9 +377,10 @@ class HostApp {
     async logout(req, res, context) {
         console.log('HostApp.logout');
         if (!context.route) throw new Error('no context.route');
-        if (req.session.user && req.session.user[context.route]) {
-            delete req.session.user[context.route];
+        if (!req.session.user || !req.session.user[context.route]) {
+            throw new Error(`no user for route ${context.route}`);
         }
+        delete req.session.user[context.route];
         await res.json(null);
     }
 
