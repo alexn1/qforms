@@ -22,11 +22,11 @@
     <!-- qforms css -->
     <link href="css/editor.css" rel="stylesheet"/>
     <link href="css/common-jsx.css" rel="stylesheet"/>
-    <script id="data" type="application/json"><%-JSON.stringify(app, null, 4)%></script>
+    <script type="application/json"><%-JSON.stringify(app, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log('editor.ejs DOMContentLoaded');
-            const data = JSON.parse(document.getElementById('data').textContent);
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const runAppLink = "<%=runAppLink%>";
             new QForms(data);
             new EditorController(data, runAppLink).init();
