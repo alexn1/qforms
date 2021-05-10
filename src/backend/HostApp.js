@@ -189,6 +189,8 @@ class HostApp {
         const application = this.getApplication(context);
         const user = await application.authenticate(context, req.body.username, req.body.password);
         if (user) {
+            if (!user.id)   throw new Error('no user id');
+            if (!user.name) throw new Error('no user name');
             if (req.session.user === undefined) {
                 req.session.user = {};
             }
