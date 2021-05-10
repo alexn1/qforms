@@ -69,6 +69,9 @@ class Context {
         }
         return value;
     }
+    static getUser(context) {
+        return context.req.session.user[context.route];
+    }
 }
 
 module.exports = Context;

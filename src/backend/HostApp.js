@@ -138,7 +138,7 @@ class HostApp {
         console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
-        if (this.getApplication(context).authentication() && !(req.session.user && req.session.user[context.route])) {
+        if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
@@ -158,7 +158,7 @@ class HostApp {
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
         } else {
-            if (this.getApplication(context).authentication() && !(req.session.user && req.session.user[context.route])) {
+            if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
                 throw new Error('not authenticated');
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {

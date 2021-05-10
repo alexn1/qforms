@@ -195,7 +195,7 @@ class Application extends Model {
         return username === this.getAttr('user') && password === this.getAttr('password');
     }
 
-    authentication() {
+    isAuthentication() {
         return this.getAttr('authentication') === 'true';
     }
 
