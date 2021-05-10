@@ -14,7 +14,7 @@ class Context {
         context.env         = req.params.env;
 
         // route
-        context.route       = Context.getRoute(context);
+        context.route       = Context.calcRoute(context);
 
         // user
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
@@ -37,7 +37,7 @@ class Context {
         return context;
     }
 
-    static getRoute(context) {
+    static calcRoute(context) {
         return [context.appDirName, context.appFileName, context.env].join('/');
     }
 

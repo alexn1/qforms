@@ -103,7 +103,6 @@ class HostApp {
 
     async createApplicationIfNotExists(req, context) {
         // console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
-        // const route = Context.getRoute(req);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.applications[route];

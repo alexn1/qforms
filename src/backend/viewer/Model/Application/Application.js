@@ -78,10 +78,10 @@ class Application extends Model {
         await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);
 
+        delete response.formatVersion;
+        delete response.authentication;
         delete response.user;
         delete response.password;
-        delete response.authentication;
-        delete response.formatVersion;
 
         // env
         response.env = this.hostApp.nodeEnv;
@@ -94,6 +94,9 @@ class Application extends Model {
 
         // pages
         response.pages = await this.fillPages(context);
+
+        // user
+
 
         return response;
     }
