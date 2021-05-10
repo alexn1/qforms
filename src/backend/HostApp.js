@@ -117,12 +117,10 @@ class HostApp {
         return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
     }
 
-    getApplication(req, context) {
-        // const route = Context.getRoute(req);
+    getApplication(context) {
         if (!context.route) throw new Error('no context.route');
-        const route = context.route;
-        const application = this.applications[route];
-        if (!application) throw new Error('no application');
+        const application = this.applications[context.route];
+        if (!application) throw new Error(`no application for route: ${context.route}`);
         return application;
     }
 
@@ -140,8 +138,8 @@ class HostApp {
     async handleViewerGet(req, res, context) {
         console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
-        const application = this.getApplication(req, context);
-        if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
+        const application = this.getApplication(context);
+        if (this.getApplication(context).authentication() && !(req.session.user && req.session.user[context.route])) {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
@@ -161,7 +159,7 @@ class HostApp {
         if (req.body.action === 'login') {
             this.loginPost(req, res, context);
         } else {
-            if (this.getApplication(req, context).authentication() && !(req.session.user && req.session.user[context.route])) {
+            if (this.getApplication(context).authentication() && !(req.session.user && req.session.user[context.route])) {
                 throw new Error('not authenticated');
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
@@ -173,7 +171,7 @@ class HostApp {
 
     async loginGet(req, res, context) {
         console.log('HostApp.loginGet');
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         const users = await application.getUsers(context);
         res.render('viewer/login', {
             version       : pkg.version,
@@ -189,7 +187,7 @@ class HostApp {
         console.log('HostApp.loginPost');
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         const authenticate = await application.authenticate(context, req.body.username, req.body.password);
         const user = null;
         if (authenticate) {
@@ -218,8 +216,8 @@ class HostApp {
 
     // fill application
     async fill(req, context) {
-        console.log('HostApp.fill', this.getApplication(req, context).getName());
-        const application = this.getApplication(req, context);
+        console.log('HostApp.fill', this.getApplication(context).getName());
+        const application = this.getApplication(context);
         const start = Date.now();
         const data = await application.fill(context);
         data.time = Date.now() - start;
@@ -229,7 +227,7 @@ class HostApp {
     // action (fill page)
     async page(req, res, context) {
         console.log('HostApp.page', req.body.page);
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const response = await page.fill(context);
         if (response === undefined) throw new Error('page action: response is undefined');
@@ -239,7 +237,7 @@ class HostApp {
     // action
     async update(req, res, context) {
         console.log('HostApp.update', req.body.page);
-        const page = await this.getApplication(req, context).getPage(context, req.body.page);
+        const page = await this.getApplication(context).getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const result = await form.update(context);
         if (result === undefined) throw new Error('action update: result is undefined');
@@ -250,7 +248,7 @@ class HostApp {
     async select(req, res, context) {
         console.log('HostApp.select', req.body.page);
         const start = Date.now();
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -273,7 +271,7 @@ class HostApp {
     async selectSingle(req, res, context) {
         console.log('HostApp.selectSingle', req.body.page);
         const start = Date.now();
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -297,7 +295,7 @@ class HostApp {
     async selectMultiple(req, res, context) {
         console.log('HostApp.selectMultiple', req.body.page);
         const start = Date.now();
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -320,7 +318,7 @@ class HostApp {
     // action
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
-        const page = await this.getApplication(req, context).getPage(context, req.body.page);
+        const page = await this.getApplication(context).getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
@@ -338,7 +336,7 @@ class HostApp {
     // action
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
-        const page = await this.getApplication(req, context).getPage(context, req.body.page);
+        const page = await this.getApplication(context).getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
@@ -356,7 +354,7 @@ class HostApp {
     // action
     async rpc(req, res, context) {
         console.log('HostApp.rpc', req.body);
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         let model;
         if (req.body.page) {
             if (req.body.form) {
@@ -387,7 +385,7 @@ class HostApp {
     // action
     async test(req, res, context) {
         console.log('HostApp.test', req.body);
-        const result = await Test[req.body.name](req, res, context, this.getApplication(req, context));
+        const result = await Test[req.body.name](req, res, context, this.getApplication(context));
         if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(result);
     }
@@ -414,7 +412,7 @@ class HostApp {
 
     async viewerFile(req, res, context) {
         // console.log('HostApp.viewerFile');
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
             if (content[1] === '.css') {
@@ -451,7 +449,7 @@ class HostApp {
 
     async editorFile(req, res, context) {
         // console.log('HostApp.editorFile', context.uri);
-        const application = this.getApplication(req, context);
+        const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
             res.setHeader('content-type', 'text/css');
@@ -573,7 +571,7 @@ class HostApp {
 
     async logRequest(req, context, time) {
         try {
-            const application = this.getApplication(req, context);
+            const application = this.getApplication(context);
             let args = '';
             if (req.body.params) {
                 args = Object.keys(req.body.params).map(name => `${name}: ${req.body.params[name]}`).join(', ');
