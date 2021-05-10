@@ -187,17 +187,12 @@ class HostApp {
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.getApplication(context);
-        const authenticate = await application.authenticate(context, req.body.username, req.body.password);
-        const user = null;
-        if (authenticate) {
+        const user = await application.authenticate(context, req.body.username, req.body.password);
+        if (user) {
             if (req.session.user === undefined) {
                 req.session.user = {};
             }
-            if (user) {
-                req.session.user[route] = user;
-            } else {
-                req.session.user[route] = {name: req.body.username};
-            }
+            req.session.user[route] = user;
             res.redirect(req.url);
         } else {
             const users = await application.getUsers(context);
