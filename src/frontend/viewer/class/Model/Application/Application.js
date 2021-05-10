@@ -50,6 +50,9 @@ class Application extends Model {
     getText() {
         return this.data.text;
     }
+    getUser() {
+        return this.data.user;
+    }
     async rpc(name, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');

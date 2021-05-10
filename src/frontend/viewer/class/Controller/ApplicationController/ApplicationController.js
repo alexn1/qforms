@@ -157,6 +157,7 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
+        // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
             ...Object.keys(this.model.data.menu).map(key => ({
@@ -168,18 +169,18 @@ class ApplicationController extends Controller {
                     title: item.caption
                 }))
             })),
-            // user menu
-            {
-                name: 'user',
-                title: 'User',
+            // user
+            ...(this.model.getUser() ? [{
+                name : 'user',
+                title: this.model.getUser().name,
                 items: [
                     {
-                        type: 'custom',
-                        name: 'logout',
+                        type : 'custom',
+                        name : 'logout',
                         title: 'Logout'
                     }
                 ]
-            }
+            }] : [])
         ];
     }
     onStatusbarCreate = statusbar => {
