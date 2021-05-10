@@ -1,14 +1,15 @@
 const path          = require('path');
-const _             = require('underscore');
-const child_process = require('child_process');
+// const _             = require('underscore');
+// const child_process = require('child_process');
 const axios         = require('axios');
 
 const qforms  = require('../../../qforms');
 const Model   = require('../Model');
 const PageLink = require('../PageLink/PageLink');
-const Database = require('../Database/Database');
+// const Database = require('../Database/Database');
 const BaseModel = require('../../../BaseModel');
 const Helper = require('../../../Helper');
+const Context = require('../../../Context');
 
 class Application extends Model {
 
@@ -96,6 +97,14 @@ class Application extends Model {
         response.pages = await this.fillPages(context);
 
         // user
+        if (this.isAuthentication()) {
+            const user = Context.getUser(context);
+            response.user = {
+                name: user.name
+            };
+        } else {
+            response.user = null;
+        }
 
 
         return response;
