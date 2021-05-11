@@ -62,6 +62,7 @@ class Helper {
     }
 
     static decodeObject(eObj) {
+        if (!eObj) throw new Error('Helper.decodeObject: no object');
         const obj = {};
         for (const name in eObj) {
             obj[name] = Helper.decodeValue(eObj[name]);
