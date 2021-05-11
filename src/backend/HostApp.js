@@ -156,7 +156,7 @@ class HostApp {
         // console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
         if (req.body.action === 'login') {
-            this.loginPost(req, res, context);
+            await this.loginPost(req, res, context);
         } else {
             if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
                 throw new Error('not authenticated');
