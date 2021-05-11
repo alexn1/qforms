@@ -100,6 +100,7 @@ class Application extends Model {
         if (this.isAuthentication()) {
             const user = Context.getUser(context);
             response.user = {
+                id  : user.id,
                 name: user.name
             };
         } else {
