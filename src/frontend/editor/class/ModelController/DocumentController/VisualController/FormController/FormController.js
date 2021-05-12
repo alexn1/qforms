@@ -13,6 +13,9 @@ class FormController extends VisualController {
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+    getStyle() {
+        return {color: 'green'};
+    }
     init() {
         this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
         this.model.fields.forEach(field => this.createField(field));

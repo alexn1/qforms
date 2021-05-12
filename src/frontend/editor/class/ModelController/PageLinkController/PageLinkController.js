@@ -9,6 +9,9 @@ class PageLinkController extends ModelController {
         if (this.pageController) return this.pageController.getTitle();
         return super.getTitle();
     }
+    getStyle() {
+        return {color: 'red'};
+    }
     hasPage() {
         return this.pageController != null;
     }

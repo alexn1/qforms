@@ -19,6 +19,9 @@ class DatabaseController extends DocumentController {
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+    getStyle() {
+        return {color: 'brown'};
+    }
     init() {
         this.model.params.forEach(param => this.createParam(param));
         this.model.tables.forEach(table => this.createTable2(table));

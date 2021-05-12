@@ -5,6 +5,9 @@ class FieldController extends VisualController {
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+    getStyle() {
+        return {color: 'blue'};
+    }
     getActions() {
         return [
             {'action': 'changeClass', 'caption': 'Change Class'},

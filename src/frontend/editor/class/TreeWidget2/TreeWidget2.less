@@ -19,9 +19,12 @@
     padding: 1px;
   }
 
-  li > div.active {
+  li > .active {
     background-color: rgb(66,139,202);
-    color: white;
+    > span {
+      color: white !important;
+    }
+
   }
 
   .node {
