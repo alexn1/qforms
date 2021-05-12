@@ -13,7 +13,10 @@ class DataSourceController extends DocumentController {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
     getStyle() {
-        return {color: 'purple'};
+        return {
+            fontWeight: 'bold',
+            color: 'brown'
+        };
     }
     init() {
         this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));

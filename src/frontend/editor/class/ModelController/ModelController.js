@@ -10,6 +10,11 @@ class ModelController /*extends EventEmitter*/ {
     getTitle() {
         return this.model.getName();
     }
+    getStyle() {
+        return {
+            fontWeight: 'bold',
+        };
+    }
     getPropList() {
         return {
             list   : this.model.data['@attributes'],

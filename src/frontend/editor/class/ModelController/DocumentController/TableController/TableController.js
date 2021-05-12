@@ -133,5 +133,4 @@ class TableController extends DocumentController {
     getDocumentViewClass() {
         return TableView;
     }
-
 }

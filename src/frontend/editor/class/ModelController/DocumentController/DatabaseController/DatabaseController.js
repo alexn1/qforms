@@ -20,7 +20,10 @@ class DatabaseController extends DocumentController {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
     getStyle() {
-        return {color: 'brown'};
+        return {
+            fontWeight: 'bold',
+            color: 'purple'
+        };
     }
     init() {
         this.model.params.forEach(param => this.createParam(param));
