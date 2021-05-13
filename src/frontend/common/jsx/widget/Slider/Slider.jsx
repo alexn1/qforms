@@ -7,7 +7,7 @@ class Slider extends ReactComponent {
         this.state = {image: 0};
     }
     onPrevClick = e => {
-        console.log('Slider.onPrevClick');
+        // console.log('Slider.onPrevClick');
         this.setState(prevState => {
             let image = prevState.image - 1;
             if (image < 0) {
@@ -17,7 +17,7 @@ class Slider extends ReactComponent {
         });
     }
     onNextClick = e => {
-        console.log('Slider.onNextClick');
+        // console.log('Slider.onNextClick');
         this.setState(prevState => {
             let image = prevState.image + 1;
             if (image > this.props.images.length-1) {
