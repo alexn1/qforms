@@ -1,11 +1,12 @@
 .Slider {
   position: relative;
+  overflow: hidden;
 }
 
-.Slider__list {
+.Slider__line {
   display: flex;
   position: absolute;
-  //left: -100px;
+  transition: left ease 0.5s;
 }
 
 .Slider__label {
@@ -15,4 +16,16 @@
   background-color: black;
   color: white;
   margin: 0;
+}
+
+.Slider__prev {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.Slider__next {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
