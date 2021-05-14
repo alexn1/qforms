@@ -7,7 +7,8 @@ class ReactComponent extends React.Component {
     getClassList() {
         return [
             this.constructor.name,
-            ...(this.props.classList || [])
+            ...(this.props.classList || []),
+            ...(this.state && this.state.classList ? this.state.classList : [])
         ];
     }
     getClassName() {
