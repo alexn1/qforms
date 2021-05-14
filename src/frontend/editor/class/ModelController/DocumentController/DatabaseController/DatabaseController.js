@@ -97,7 +97,7 @@ class DatabaseController extends DocumentController {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         // console.log('data:', result.data);
-        document.treeWidgetItems = result.data.tables.map(tableName => ({getTitle: () => tableName}))
+        document.treeWidgetItems = result.data.tables.sort().map(tableName => ({getTitle: () => tableName}))
         return document;
     }
     onTableSelect2 = async item => {
