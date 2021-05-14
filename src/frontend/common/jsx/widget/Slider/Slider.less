@@ -1,7 +1,23 @@
 .Slider {
   position: relative;
   overflow: hidden;
-  background-color: gray;
+  background-color: black;
+}
+
+.Slider_full {
+  position: fixed;
+  top:0;
+  left: 0;
+  bottom: 0;
+  right:0;
+  z-index: 100;
+  .Slider_image {
+    object-fit: contain;
+    height: 100%;
+  }
+  .Slider__close {
+    display: block;
+  }
 }
 
 .Slider_image {
@@ -27,4 +43,11 @@
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.Slider__close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
 }
