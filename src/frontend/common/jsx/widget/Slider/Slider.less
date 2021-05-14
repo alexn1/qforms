@@ -1,28 +1,15 @@
 .Slider {
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
   background-color: black;
 }
 
-.Slider_full {
-  position: fixed;
-  top:0;
-  left: 0;
-  bottom: 0;
-  right:0;
-  z-index: 100;
-  .Slider_image {
-    object-fit: contain;
-    height: 100%;
-    cursor: default;
-  }
-  .Slider__close {
-    display: block;
-  }
-}
-
 .Slider_image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -52,4 +39,20 @@
   right: 0;
   top: 0;
   display: none;
+}
+
+.Slider_full {
+  position: fixed;
+  top:0;
+  left: 0;
+  bottom: 0;
+  right:0;
+  z-index: 100;
+  .Slider_image {
+    object-fit: contain;
+    cursor: default;
+  }
+  .Slider__close {
+    display: block;
+  }
 }
