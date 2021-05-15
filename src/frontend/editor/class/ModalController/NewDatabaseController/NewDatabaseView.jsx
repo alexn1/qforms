@@ -36,23 +36,23 @@ class NewDatabaseView extends ReactComponent {
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <TextBox id={'name'} classList={['form-control']} value={'default'} onCreate={c => this.name = c}/>
+                    <TextBox id={'name'} classList={['form-control']} value={'default'} onCreate={c => this.name = c} autocomplete={'off'}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="host">Host</label>
-                    <TextBox id={'host'} classList={['form-control']} value={'localhost'} onCreate={c => this.host = c}/>
+                    <TextBox id={'host'} classList={['form-control']} value={'localhost'} onCreate={c => this.host = c} autocomplete={'off'}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="database">Database</label>
-                    <TextBox id={'database'} classList={['form-control']} value={'test'} onCreate={c => this.database = c}/>
+                    <TextBox id={'database'} classList={['form-control']} value={'test'} onCreate={c => this.database = c} autocomplete={'off'}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="user">User</label>
-                    <TextBox id={'user'} classList={['form-control']} value={'test'} onCreate={c => this.user = c}/>
+                    <TextBox id={'user'} classList={['form-control']} value={'test'} onCreate={c => this.user = c} autocomplete={'off'}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="user">Password</label>
-                    <TextBox id={'password'} classList={['form-control']} value={'123qwe'} onCreate={c => this.password = c}/>
+                    <TextBox id={'password'} classList={['form-control']} value={'123qwe'} onCreate={c => this.password = c} autocomplete={'off'}/>
                 </div>
             </div>
             <div className="modal-footer">
