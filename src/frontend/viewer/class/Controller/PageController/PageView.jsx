@@ -51,7 +51,7 @@ class PageView extends View {
         const model = ctrl.model;
         const width = 150;
         return (
-            <div className="toolbar">
+            <div className={'PageView__toolbar'}>
                 {model.hasRowFormWithDefaultSqlDataSource() &&
                     <Button
                         key="saveAndClose"
