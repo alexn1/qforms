@@ -19,7 +19,7 @@ class NewParamView extends ReactComponent {
             <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c}/>
+                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'}/>
                 </div>
             </div>
             <div className="modal-footer">

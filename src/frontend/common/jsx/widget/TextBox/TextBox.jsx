@@ -41,6 +41,7 @@ class TextBox extends ReactComponent {
                 onChange={this.onChange}
                 value={this.state.value}
                 disabled={this.props.disabled}
+                autocomplete={this.props.autocomplete}
             />
         );
     }

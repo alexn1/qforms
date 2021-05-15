@@ -43,11 +43,11 @@ class NewFormFromTableView extends ReactComponent {
             </div>
             <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <TextBox id="name" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.name = c}/>
+                <TextBox id="name" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.name = c} autocomplete={'off'}/>
             </div>
             <div className="form-group">
                 <label htmlFor="caption">Caption</label>
-                <TextBox id="caption" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.caption = c}/>
+                <TextBox id="caption" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.caption = c} autocomplete={'off'}/>
             </div>
         </div>
         <div className="modal-footer">

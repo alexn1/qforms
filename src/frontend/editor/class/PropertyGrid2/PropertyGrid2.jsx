@@ -28,6 +28,7 @@ class PropertyGrid2 extends ReactComponent {
             value={obj[name]}
             spellCheck="false"
             onChange={value => this.onChange(name, value)}
+            autocomplete={'off'}
         />;
     }
     renderSelect(name) {
