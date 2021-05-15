@@ -2,12 +2,7 @@
   background-color: white;
   > .frame__content {
     padding: 0 10px;
-    > h3.caption {
-      color: #333;
-      > span.star {
-        color: red;
-      }
-    }
+
     > .toolbar {
       button {
         margin-right: 5px;
@@ -22,7 +17,14 @@
   }
 }
 
-.standard .Modal .PageView .caption {
+.PageView__caption {
+  color: #333;
+  > span.star {
+    color: red;
+  }
+}
+
+.standard .Modal .PageView__caption {
   background-color: #398bce;
   color: white;
   margin-top: 10px;
