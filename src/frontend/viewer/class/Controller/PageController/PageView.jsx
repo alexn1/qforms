@@ -89,7 +89,7 @@ class PageView extends View {
                     {(model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
-                        <div className="table-forms flex-max frame">
+                        <div className="PageView__table-forms flex-max frame">
                             <div className="frame__content">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                             </div>
