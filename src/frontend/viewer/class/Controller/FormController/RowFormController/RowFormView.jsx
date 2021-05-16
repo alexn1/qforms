@@ -4,7 +4,7 @@ class RowFormView extends FormView {
         const ctrl = this.props.ctrl;
         const width = '90px';
         return (
-            <div className="toolbar">
+            <div className={'RowFormView__toolbar'}>
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="edit"
@@ -88,7 +88,7 @@ class RowFormView extends FormView {
         // console.log('RowFormView.renderFields');
         const ctrl = this.props.ctrl;
         return (
-            <div className="formGrid">
+            <div className="RowFormView__form-grid">
                 {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
                     const fieldCtrl = ctrl.fields[name];
                     return [
