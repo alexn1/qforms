@@ -31,9 +31,7 @@ class RowFormFileFieldView extends RowFormFieldView {
         return <div className={this.getClassName()} style={ctrl.renderViewStyle(ctrl.getRow())}>
             {!!value &&
                 <div>
-                    <a href={value} target="_blank">
-                        <Image ref={this.image} src={value}/>
-                    </a>
+                    <Image ref={this.image} src={value}/>
                     <span className="size" ref={this.div}></span>
                     <span className="length">{value.length}</span>
                 </div>
