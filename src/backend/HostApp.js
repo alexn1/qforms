@@ -215,6 +215,7 @@ class HostApp {
         console.log('HostApp.fill', this.getApplication(context).getName());
         const application = this.getApplication(context);
         const start = Date.now();
+        await application.initContext(context);
         const data = await application.fill(context);
         data.time = Date.now() - start;
         return data;
@@ -224,6 +225,7 @@ class HostApp {
     async page(req, res, context) {
         console.log('HostApp.page', req.body.page);
         const application = this.getApplication(context);
+        await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const response = await page.fill(context);
         if (response === undefined) throw new Error('page action: response is undefined');
@@ -233,7 +235,9 @@ class HostApp {
     // action
     async update(req, res, context) {
         console.log('HostApp.update', req.body.page);
-        const page = await this.getApplication(context).getPage(context, req.body.page);
+        const application = this.getApplication(context);
+        await application.initContext(context);
+        const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const result = await form.update(context);
         if (result === undefined) throw new Error('action update: result is undefined');
@@ -245,6 +249,7 @@ class HostApp {
         console.log('HostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
+        await application.initContext(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -268,6 +273,7 @@ class HostApp {
         console.log('HostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
+        await application.initContext(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -292,6 +298,7 @@ class HostApp {
         console.log('HostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
+        await application.initContext(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -314,7 +321,9 @@ class HostApp {
     // action
     async insert(req, res, context) {
         console.log('HostApp.insert', req.body.page);
-        const page = await this.getApplication(context).getPage(context, req.body.page);
+        const application = this.getApplication(context);
+        await application.initContext(context);
+        const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
@@ -332,7 +341,9 @@ class HostApp {
     // action
     async _delete(req, res, context) {
         console.log('HostApp._delete', req.body.page);
-        const page = await this.getApplication(context).getPage(context, req.body.page);
+        const application = this.getApplication(context);
+        await application.initContext(context);
+        const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
@@ -351,6 +362,7 @@ class HostApp {
     async rpc(req, res, context) {
         console.log('HostApp.rpc', req.body);
         const application = this.getApplication(context);
+        await application.initContext(context);
         let model;
         if (req.body.page) {
             if (req.body.form) {

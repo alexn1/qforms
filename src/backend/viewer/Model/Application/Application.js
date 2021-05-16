@@ -273,6 +273,10 @@ class Application extends Model {
         }
         return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }
+    // to init custom context params before each request get/post
+    async initContext(context) {
+
+    }
 }
 
 module.exports = Application;
