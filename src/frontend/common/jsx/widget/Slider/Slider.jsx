@@ -32,6 +32,7 @@ class Slider extends ReactComponent {
         this.setState({classList: null});
     }
     render() {
+        // console.log('Slider.render', this.props.images);
         const images = this.props.images || [];
         return <div className={this.getClassName()}>
             <img className={'Slider_image'} src={images[this.state.image]} onClick={this.onImageClick}/>
