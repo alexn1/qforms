@@ -149,12 +149,17 @@ class Application extends Model {
     }
 
     createPageLink(name) {
-        return new PageLink(this.getColItemData('pageLinks', name), this);
+        const data = this.getColItemData('pageLinks', name);
+        return new PageLink(data, this);
     }
 
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);
-        const relFilePath  = this.createPageLink(pageLinkName).getAttr('fileName');
+        if (!this.isData('pageLinks', pageLinkName)) {
+            throw new Error(`no page with name: ${pageLinkName}`);
+        }
+        const pageLink = this.createPageLink(pageLinkName);
+        const relFilePath  = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
