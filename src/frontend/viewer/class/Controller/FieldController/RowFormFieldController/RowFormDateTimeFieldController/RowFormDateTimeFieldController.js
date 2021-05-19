@@ -137,9 +137,6 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
 
         return null;
     }
-    isParseError() {
-        return super.isParseError() || this.isParseError2();
-    }
     isParseError2() {
         return this.state.parseError2 !== null;
     }
@@ -150,6 +147,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     setError2(error2) {
         this.state.error2 = error2;
     }
+    getErrorMessage2() {
+        if (this.state.parseError2) {
+            return this.state.parseError2;
+        }
+        return this.state.error2;
+    }
+    isValid2() {
+        return this.state.error2 === null;
+    }
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
         if (!this.view2) return;
@@ -158,17 +164,12 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.resetErrors2();
         this.refreshChanged();
     }
+    isParseError() {
+        return super.isParseError() || this.isParseError2();
+    }
     isValid() {
-        return super.isValid() && this.state.error2 === null;
+        return super.isValid() && this.isValid2();
     }
-
-    getErrorMessage2() {
-        if (this.state.parseError2) {
-            return this.state.parseError2;
-        }
-        return this.state.error2;
-    }
-
     getErrorMessage() {
         if (super.getErrorMessage() === null && this.getErrorMessage2() === null) return null;
         return [
