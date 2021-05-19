@@ -49,7 +49,7 @@ class NewFieldView extends ReactComponent {
                 </div>
                 <div className="form-group">
                     <label htmlFor="type">Type</label>
-                    <ComboBox id="type" classList={['form-control']} value={'string'} items={[
+                    <ComboBox id="type" classList={['form-control']} value={''} items={[
                         {value: '', title: ''},
                         {value: 'string', title: 'string'},
                         {value: 'number', title: 'number'},
