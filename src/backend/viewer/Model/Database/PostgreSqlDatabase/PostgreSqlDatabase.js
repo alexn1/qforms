@@ -187,6 +187,7 @@ class PostgreSqlDatabase extends Database {
             case 'bytea':
                 return 'string';
             case 'json':
+            case 'jsonb':
             case 'ARRAY':
                 return 'object';
             case 'boolean':
