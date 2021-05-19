@@ -16,7 +16,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // console.log('RowFormDateTimeFieldController.getValueForTime', this.model.getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
-            const value = date.getHours()*60 + date.getMinutes();
+            const value = date.getHours() * 60 + date.getMinutes();
             // console.log('value:', value);
             if (value !== this.defaultValue) {
                 // console.log('not equal to default value', value, this.defaultValue);
@@ -39,14 +39,16 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onView2Create = view2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', view2);
         this.view2 = view2;
-    }
+    };
     _onChange(viewValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.view2);
-        if (viewValue !== null) setTimeout(() => {
-            const input = this.view2.getInput();
-            input.focus();
-            input.setSelectionRange(0, input.value.length);
-        }, 0);
+        if (viewValue !== null) {
+            setTimeout(() => {
+                const input = this.view2.getInput();
+                input.focus();
+                input.setSelectionRange(0, input.value.length);
+            }, 0);
+        }
     }
     onChange2 = (viewValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onChange2', viewValue);
@@ -72,7 +74,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }
             this.parent.onFieldChange({source: this});
         }
-    }
+    };
     onBlur2 = (viewValue, fireEvent = false) => {
         // console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
         if (!this.isEditable()) return;
@@ -89,7 +91,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }
         }
         this.parent.onFieldChange({source: this});
-    }
+    };
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
     }
@@ -101,7 +103,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
-            if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
+            if (defaultValue >= 24 * 60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
         }
         if (this.view2 && this.view2.getValue() === null && this.state.value) {
