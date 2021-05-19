@@ -3,7 +3,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         super(...args);
         this.view2 = null;
         this.defaultValue = 0;
-        this.state.parseError2 = false;
+        this.state.parseError2 = null;
         this.state.error2 = null;
     }
     getViewClass() {
@@ -27,7 +27,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     setValueFromView(viewValue) {
         if (viewValue === null) {
-            this.state.parseError2 = false;
+            this.state.parseError2 = null;
             this.resetErrors2();
             if (this.view2) this.view2.setValue(null);
         } else {
@@ -55,7 +55,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.setValueFromView2(viewValue);
         } catch (err) {
             console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
-            this.state.parseError2 = true;
+            this.state.parseError2 = err.message;
         }
         if (!this.state.parseError2) {
             this.validate2();
@@ -136,11 +136,14 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         return null;
     }
     isParseError() {
-        return super.isParseError() || this.state.parseError2;
+        return super.isParseError() || this.isParseError2();
+    }
+    isParseError2() {
+        return this.state.parseError2 !== null;
     }
     resetErrors2() {
         this.setError2(null);
-        this.state.parseError2 = false;
+        this.state.parseError2 = null;
     }
     setError2(error2) {
         this.state.error2 = error2;
@@ -156,11 +159,19 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     isValid() {
         return super.isValid() && this.state.error2 === null;
     }
+
+    getErrorMessage2() {
+        if (this.state.parseError2) {
+            return this.state.parseError2;
+        }
+        return this.state.error2;
+    }
+
     getErrorMessage() {
-        if (this.state.error === null && this.state.error2 === null) return null;
+        if (super.getErrorMessage() === null && this.getErrorMessage2() === null) return null;
         return [
-            ...(this.state.error  ? [this.state.error]  : []),
-            ...(this.state.error2 ? [this.state.error2] : [])
+            ...(super.getErrorMessage() ? [super.getErrorMessage()] : []),
+            ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : [])
         ].join(', ');
     }
 }
