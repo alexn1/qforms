@@ -34,8 +34,15 @@ class FormWizard {
 
     getFieldClass(column) {
         if (column.type === 'date') return 'DatePickerField';
-        if (this.params.className === 'RowForm' && column.dbType === 'text') return 'TextAreaField';
         if (column.type === 'boolean') return 'CheckBoxField';
+        if (this.params.className === 'RowForm') {
+            if (column.dbType === 'text') {
+                return 'TextAreaField';
+            }
+            if (column.dbType === 'json') {
+                return 'TextAreaField';
+            }
+        }
         return 'TextBoxField';
     }
 
