@@ -62,12 +62,18 @@ class Model extends BaseModel {
         const className = BaseModel.getClassName(data);
         let js;
         const dirPath = this.getDirPath();
+        let CustomClass = null;
         if (dirPath) {
             const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
-            js = await Helper.getFileContent(customClassFilePath);
+            const exists = await Helper.exists(customClassFilePath);
+            if (exists) {
+                CustomClass = require(customClassFilePath);
+            }
+            // js = await Helper.getFileContent(customClassFilePath);
             // if (js) console.log('customClassFilePath:', customClassFilePath, js);
         }
-        const Class = js ? eval(js) : qforms[className];
+        // const Class = js ? eval(js) : qforms[className];
+        const Class = CustomClass ? CustomClass : qforms[className];
         return new Class(data, this);
     }
 
