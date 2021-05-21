@@ -1,5 +1,5 @@
 const path = require('path');
-const qforms           = require('../../../qforms');
+const qforms           = require('../../qforms');
 const EditorController = require('./EditorController');
 
 class VisualEditorController extends EditorController {
