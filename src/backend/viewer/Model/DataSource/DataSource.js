@@ -1,8 +1,9 @@
 const path    = require('path');
 const qforms = require('../../../qforms');
 const Model  = require('../Model');
-const BaseModel = require('../../../BaseModel');
 const Helper = require('../../../Helper');
+const Page = require('../Page/Page');
+const Application = require('../Application/Application');
 
 class DataSource extends Model {
 
@@ -117,7 +118,7 @@ class DataSource extends Model {
     getFullName() {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof qforms.Page) {
+        } else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
         } else {
             return this.getName();
@@ -125,7 +126,7 @@ class DataSource extends Model {
     }
 
     getParams(context) {
-        return qforms.Application.getParams(context);
+        return Application.getParams(context);
     }
 
     static keyToParams(key, paramName = 'key') {
@@ -176,9 +177,9 @@ class DataSource extends Model {
     async getRows() {
         // console.log('DataSource.getRows');
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await qforms.Helper.exists(jsonFilePath);
+        const exists = await Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await qforms.Helper.readTextFile(jsonFilePath);
+            const content = await Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
         }
         return [];

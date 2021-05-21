@@ -1,15 +1,9 @@
 const Model     = require('../Model');
 const Param     = require('../Param/Param');
-const BaseModel = require('../../../BaseModel');
-const qforms    = require('../../../qforms');
 
 class Database extends Model {
 
-    /*static create(data, parent) {
-        console.log('Database.create', BaseModel.getClassName(data), BaseModel.getName(data));
-        const className = BaseModel.getClassName(data);
-        return eval(`new qforms.${className}(data, parent)`);
-    }*/
+
 
     constructor(data, parent) {
         //console.log('Database.constructor');

@@ -2,6 +2,7 @@ const path       = require('path');
 const qforms     = require('../../../../qforms');
 const DataSource = require('../DataSource');
 const BaseModel  = require('../../../../BaseModel');
+const Helper = require('../../../../Helper');
 
 class SqlDataSource extends DataSource {
 
@@ -108,8 +109,8 @@ class SqlDataSource extends DataSource {
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
-        const _values = qforms.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = qforms.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = {..._values, ..._where};
         await this.getDatabase().queryResult(context, query, params);
 
