@@ -10,22 +10,25 @@ let _hostApp = null;
 function run(params = {}) {
     console.log('run', params);
     const appsDirPath     = params.appsDirPath     || pkg.config.appsDirPath;
-    const handleException = params.handleException || true;
+    const handleException = params.handleException || pkg.config.handleException;
+    const host            = params.host            || pkg.config.host;
+    const port            = params.port            || pkg.config.port;
 
+    // express server
     const server = express();
+
+    // hostApp
     const hostApp = _hostApp = new HostApp(server);
     hostApp.init({appsDirPath, handleException});
 
-    // console.log('http.main');
+    // process
     process.on('message', onMessage);
     process.on('SIGINT', onSIGINT);
     process.on('SIGTERM', onSIGTERM);
     process.on('exit', onExit);
     process.on('unhandledRejection', onUnhandledRejection);
 
-
-    const host = params.host || pkg.config.host;
-    const port = params.port || pkg.config.port;
+    // httpServer
     const httpServer = http.createServer(server);
     httpServer.on('error', onError);
     httpServer.listen(port, host, () => {
@@ -91,7 +94,5 @@ async function onUnhandledRejection(err) {
         await _hostApp.logError(null, err);
     }
 }
-
-
 
 module.exports = run;
