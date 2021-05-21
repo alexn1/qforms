@@ -6,6 +6,11 @@ const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
+const JsonFile = require('../../../JsonFile');
+const PageEditor = require('../PageEditor/PageEditor');
+const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
+const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
+const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class ApplicationEditor extends Editor {
 
@@ -42,7 +47,7 @@ class ApplicationEditor extends Editor {
 
     static async createAppFile(appFilePath, params) {
         const data = ApplicationEditor.createData(params);
-        const appFile = new qforms.JsonFile(appFilePath, data);
+        const appFile = new JsonFile(appFilePath, data);
         await appFile.create();
         return appFile;
     }
@@ -51,8 +56,8 @@ class ApplicationEditor extends Editor {
         const pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath    = path.join(pagesDirPath, params.name);
         const pageFilePath   = path.join(pageDirPath , params.name + '.json');
-        const pageData = qforms.PageEditor.createData(params);
-        const pageFile = new qforms.JsonFile(pageFilePath, pageData);
+        const pageData = PageEditor.createData(params);
+        const pageFile = new JsonFile(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newPageLinkData(params);
         return {
@@ -67,19 +72,19 @@ class ApplicationEditor extends Editor {
     }
 
     createPageLinkEditor(name) {
-        return new qforms.PageLinkEditor(this.getColItemData('pageLinks', name), this);
+        return new PageLinkEditor(this.getColItemData('pageLinks', name), this);
     }
 
     async removePageFile(name) {
         const pageFilePath = path.join(this.appInfo.dirPath, this.createPageLinkEditor(name).getAttr('fileName'));
-        await qforms.Helper.fsUnlink(pageFilePath);
+        await Helper.fsUnlink(pageFilePath);
     }
 
     async createPageEditor(relFilePath) {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
-        const pageFile = new qforms.JsonFile(pageFilePath);
+        const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
-        return new qforms.PageEditor(this, pageFile);
+        return new PageEditor(this, pageFile);
     }
 
     async getPage(name) {
@@ -137,7 +142,7 @@ class ApplicationEditor extends Editor {
         if (this.getColItemData('pageLinks', name)) {
             throw new Error(`Page Link ${name} already exists.`);
         }
-        const data = qforms.PageLinkEditor.createData(params);
+        const data = PageLinkEditor.createData(params);
         this.addModelData('pageLinks', data);
         return data;
     }
@@ -151,10 +156,10 @@ class ApplicationEditor extends Editor {
         let data;
         switch (_class) {
             case 'DataSource':
-                data = qforms.DataSourceEditor.createData(params);
+                data = DataSourceEditor.createData(params);
                 break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.createData(params);
+                data = SqlDataSourceEditor.createData(params);
                 break;
             default:
                 throw new Error(`unknown data source class: ${_class}`);

@@ -3,6 +3,11 @@ const _    = require('underscore');
 const qforms = require('../../../qforms');
 const Editor = require('../Editor');
 const BaseModel = require('../../../BaseModel');
+const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
+const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
+const FormEditor = require('../FormEditor/FormEditor');
+const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
+const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class PageEditor extends Editor {
 
@@ -55,9 +60,9 @@ class PageEditor extends Editor {
         if (this.getColItemData('forms', name)) throw new Error(`Form ${name} already exists.`);
         let data;
         switch (_class) {
-            case 'TableForm': data = qforms.TableFormEditor.createData(params); break;
-            case 'RowForm'  : data = qforms.RowFormEditor.createData(params)  ; break;
-            case 'Form'     : data = qforms.FormEditor.createData(params)     ; break;
+            case 'TableForm': data = TableFormEditor.createData(params); break;
+            case 'RowForm'  : data = RowFormEditor.createData(params)  ; break;
+            case 'Form'     : data = FormEditor.createData(params)     ; break;
             default: throw new Error(`unknown form class: ${_class}`);
         }
         this.addModelData('forms', data);
@@ -119,10 +124,10 @@ class PageEditor extends Editor {
         let data;
         switch (_class) {
             case 'DataSource':
-                data = qforms.DataSourceEditor.createData(params);
+                data = DataSourceEditor.createData(params);
                 break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.createData(params);
+                data = SqlDataSourceEditor.createData(params);
                 break;
             default:
                 throw new Error(`unknown data source class: ${_class}`);

@@ -2,6 +2,8 @@ const path = require('path');
 const qforms = require('../../../qforms');
 const Editor = require('../Editor');
 const BaseModel = require('../../../BaseModel');
+const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
+const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class FormEditor extends Editor {
 
@@ -74,10 +76,10 @@ class FormEditor extends Editor {
         let data;
         switch (_class) {
             case 'DataSource':
-                data = qforms.DataSourceEditor.createData(params);
+                data = DataSourceEditor.createData(params);
                 break;
             case 'SqlDataSource':
-                data = qforms.SqlDataSourceEditor.createData(params);
+                data = SqlDataSourceEditor.createData(params);
                 break;
             default:
                 throw new Error(`unknown data source class: ${_class}`);
