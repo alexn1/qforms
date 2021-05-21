@@ -70,14 +70,14 @@ class HostApp {
         this.logCnn = null;
     }
 
-    init() {
+    init(env) {
+        const {appsDirPath, handleException} = env;// environment
+
         const engineDirPath  = path.join(__dirname, '..');
         const backendDirPath = __dirname;
         const publicDirPath = path.join(engineDirPath,  'frontend');
         this.logCnn = PostgreSqlDatabase.createPool(logConfig);
 
-        // environment
-        const appsDirPath = Helper.getCommandLineParams().appsDirPath || pkg.config.appsDirPath;
         if (!fs.existsSync(appsDirPath)) {
             console.error(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`);
             process.exit(1);
@@ -85,7 +85,7 @@ class HostApp {
         }
         // vars
         // this.server.set('appsDirPath'    , appsDirPath);
-        this.server.set('handleException', Helper.getCommandLineParams().handleException || true);
+        this.server.set('handleException', handleException);
         this.server.set('view engine'    , 'ejs');
         this.server.set('views'          , backendDirPath);
         // this.server.set('runtime'        , path.join(engineDirPath,  'runtime'));

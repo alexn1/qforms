@@ -1,18 +1,20 @@
-// console.log('http.js');
 const express = require('express');
 const http = require('http');
 const path = require('path');
 
-const qforms = require('./qforms');
 const pkg    = require('../../package.json');
 const HostApp = require('./HostApp');
 
 let _hostApp = null;
 
-function main() {
+function run(params = {}) {
+    console.log('run', params);
+    const appsDirPath     = params.appsDirPath     || pkg.config.appsDirPath;
+    const handleException = params.handleException || true;
+
     const server = express();
     const hostApp = _hostApp = new HostApp(server);
-    hostApp.init();
+    hostApp.init({appsDirPath, handleException});
 
     // console.log('http.main');
     process.on('message', onMessage);
@@ -21,7 +23,7 @@ function main() {
     process.on('exit', onExit);
     process.on('unhandledRejection', onUnhandledRejection);
 
-    const params = qforms.Helper.getCommandLineParams();
+
     const host = params.host || pkg.config.host;
     const port = params.port || pkg.config.port;
     const httpServer = http.createServer(server);
@@ -92,4 +94,4 @@ async function onUnhandledRejection(err) {
 
 
 
-module.exports = main;
+module.exports = run;

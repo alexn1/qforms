@@ -169,24 +169,6 @@ class Helper {
         });
     }
 
-    static getCommandLineParams() {
-        const params = process.argv.map(arg => {
-            const param = arg.split('=');
-            return {
-                name  : param[0],
-                value : param[1]
-            }
-        });
-        return _.object(
-            params.map(param => {
-                return param.name;
-            }),
-            params.map(param => {
-                return param.value;
-            })
-        );
-    }
-
     static replaceKey(obj, key1, key2) {
         const keys   = Object.keys(obj);
         const values = _.filter(obj, () => {return true;});
