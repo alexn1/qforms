@@ -1,7 +1,7 @@
 const path    = require('path');
-const qforms = require('../../../qforms');
 const Helper = require('../../../Helper');
 const Model  = require('../Model');
+const Application = require('../Application/Application');
 
 class Field extends Model {
     static async create(data, parent) {
@@ -20,7 +20,7 @@ class Field extends Model {
         const column = this.getAttr('column');
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
-        const params = qforms.Application.getParams(context);
+        const params = Application.getParams(context);
         const js = Helper.templateToJsString(defaultValue, params);
         let value;
         try {

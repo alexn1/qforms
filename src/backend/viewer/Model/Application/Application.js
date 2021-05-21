@@ -10,6 +10,7 @@ const PageLink = require('../PageLink/PageLink');
 const BaseModel = require('../../../BaseModel');
 const Helper = require('../../../Helper');
 const Context = require('../../../Context');
+const JsonFile = require('../../../JsonFile');
 
 class Application extends Model {
 
@@ -124,7 +125,7 @@ class Application extends Model {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
-                const pageFile = new qforms.JsonFile(pageFilePath);
+                const pageFile = new JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
