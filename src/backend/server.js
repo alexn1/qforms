@@ -33,14 +33,14 @@ initExpressServer(server); function initExpressServer(server) {
     server.post('/test', postTest);
 
     // app
-    server.get( '/app', appGet );
-    server.post('/app', appPost);
+    server.get( '/app', hostApp._appGet.bind(hostApp));
+    server.post('/app', hostApp._appPost.bind(hostApp));
 
     // monitor
-    server.get('/monitor', monitorGet);
+    server.get('/monitor', hostApp._monitorGet.bind(hostApp));
 
     // moduleGet
-    server.get('/:module/:appDirName/:appFileName/:env/', moduleGet);
+    server.get('/:module/:appDirName/:appFileName/:env/', hostApp.moduleGet.bind(hostApp));
 
     // modulePost
     server.post('/:module/:appDirName/:appFileName/:env/', modulePost);
@@ -92,7 +92,7 @@ function favicon(req, res, next) {
     res.end();
 }
 
-async function moduleGet(req, res, next) {
+/*async function moduleGet(req, res, next) {
     console.warn('moduleGet', req.params);
     let context = null;
     try {
@@ -110,7 +110,7 @@ async function moduleGet(req, res, next) {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
 async function modulePost(req, res, next)  {
     console.warn('modulePost', req.params, req.body);
@@ -133,25 +133,25 @@ async function modulePost(req, res, next)  {
     }
 }
 
-async function appPost(req, res, next) {
+/*async function appPost(req, res, next) {
     console.warn('appPost', req.params);
     try {
         await server.get('hostApp').appPost(req, res);
     } catch (err) {
         next(err);
     }
-}
+}*/
 
-async function appGet(req, res, next) {
+/*async function appGet(req, res, next) {
     console.warn('appGet');
     try {
         await server.get('hostApp').appGet(req, res);
     } catch (err) {
         next(err);
     }
-}
+}*/
 
-async function monitorGet(req, res, next) {
+/*async function monitorGet(req, res, next) {
     console.warn('monitorGet');
     try {
         const hostApp = server.get('hostApp');
@@ -163,7 +163,7 @@ async function monitorGet(req, res, next) {
     } catch (err) {
         next(err);
     }
-}
+}*/
 
 async function e404(req, res, next) {
     console.warn(req.method, 'error/404');

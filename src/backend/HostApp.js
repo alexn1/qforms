@@ -9,6 +9,7 @@ const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
 // const DataSource = require('./viewer/Model/DataSource/DataSource');
 const JsonFile = require('../backend/JsonFile');
+const Context = require('../backend/Context');
 
 // post actions
 const ACTIONS = [
@@ -623,6 +624,60 @@ class HostApp {
             values
         );
     }
+
+
+    async moduleGet(req, res, next) {
+        console.warn('HostApp.moduleGet', req.params);
+        let context = null;
+        try {
+            // const hostApp = server.get('hostApp');
+            context = Context.create({req});
+            if (context.module === 'view') {
+                await this.handleViewerGet(req, res, context);
+            } else if (context.module === 'edit') {
+                await this.handleEditorGet(req, res, context);
+            } else {
+                throw new Error(`unknown module: ${context.module}`);
+            }
+        } catch (err) {
+            next(err);
+        } finally {
+            Context.destroy(context);
+        }
+    }
+
+    async _appGet(req, res, next) {
+        console.warn('appGet');
+        try {
+            await this.appGet(req, res);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async _appPost(req, res, next) {
+        console.warn('appPost', req.params);
+        try {
+            await this.appPost(req, res);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async _monitorGet(req, res, next) {
+        console.warn('monitorGet');
+        try {
+
+            if (this.nodeEnv === 'development') {
+                await this.monitorGet(req, res);
+            } else {
+                next();
+            }
+        } catch (err) {
+            next(err);
+        }
+    }
+
 
 }
 
