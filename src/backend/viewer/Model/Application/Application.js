@@ -1,16 +1,13 @@
-const path          = require('path');
-// const _             = require('underscore');
-// const child_process = require('child_process');
-const axios         = require('axios');
+const path  = require('path');
+const axios = require('axios');
 
-const qforms  = require('../../../qforms');
-const Model   = require('../Model');
-const PageLink = require('../PageLink/PageLink');
-// const Database = require('../Database/Database');
+const qforms    = require('../../../qforms');
+const Model     = require('../Model');
+const PageLink  = require('../PageLink/PageLink');
 const BaseModel = require('../../../BaseModel');
-const Helper = require('../../../Helper');
-const Context = require('../../../Context');
-const JsonFile = require('../../../JsonFile');
+const Helper    = require('../../../Helper');
+const Context   = require('../../../Context');
+const JsonFile  = require('../../../JsonFile');
 
 class Application extends Model {
 
@@ -20,9 +17,11 @@ class Application extends Model {
         const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
+        const exists = Helper.exists(customClassFilePath);
         //console.log('customClassFilePath:', customClassFilePath);
-        const js = await Helper.getFileContent(customClassFilePath);
-        const Class = js ? eval(js) : Application;
+        // const js = await Helper.getFileContent(customClassFilePath);
+        // const Class = js ? eval(js) : Application;
+        const Class = exists ? require(customClassFilePath) : Application;
         return new Class(data, appInfo, hostApp, env);
     }
 
