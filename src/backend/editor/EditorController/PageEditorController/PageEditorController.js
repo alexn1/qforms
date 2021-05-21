@@ -1,6 +1,7 @@
 const path = require('path');
-const qforms                 = require('../../../qforms');
+// const qforms                 = require('../../../qforms');
 const VisualEditorController = require('../VisualEditorController');
+const Helper = require('../../../Helper');
 
 class PageEditorController extends VisualEditorController {
 
@@ -10,7 +11,7 @@ class PageEditorController extends VisualEditorController {
 
     async get(params) {
         const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
-        const content = await qforms.Helper.readTextFile(pageFilePath);
+        const content = await Helper.readTextFile(pageFilePath);
         return JSON.parse(content);
     }
 

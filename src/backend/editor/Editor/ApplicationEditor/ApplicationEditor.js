@@ -1,6 +1,6 @@
 const path = require('path');
 
-const qforms                   = require('../../../qforms');
+// const qforms                   = require('../../../qforms');
 const Editor                   = require('../Editor');
 const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');

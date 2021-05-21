@@ -1,5 +1,7 @@
-const path = require('path');
-const qforms = require('../../qforms');
+// const path = require('path');
+// const qforms = require('../../qforms');
+const JsonFile = require('../../JsonFile');
+const ApplicationEditor = require('../Editor/ApplicationEditor');
 
 class EditorController {
     constructor(appInfo, hostApp, application) {
@@ -32,9 +34,9 @@ class EditorController {
 
     async createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
-        const appFile = new qforms.JsonFile(this.appInfo.filePath);
+        const appFile = new JsonFile(this.appInfo.filePath);
         await appFile.read();
-        return new qforms.ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
+        return new ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
     }
 }
 
