@@ -6,7 +6,7 @@ const qforms = require('./qforms');
 const server = require('./server');
 const pkg    = require('../../package.json');
 
-main(); function main() {
+function main() {
     // console.log('http.main');
     process.on('message', onMessage);
     process.on('SIGINT', onSIGINT);
@@ -83,3 +83,5 @@ async function onUnhandledRejection(err) {
         await server.get('hostApp').logError(null, err);
     }
 }
+
+module.exports = main;
