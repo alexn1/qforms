@@ -1,7 +1,8 @@
 module.exports.text                              = {en: require('./en'), ru: require('./ru')};
 module.exports.Helper                            = require('./Helper');
-module.exports.JsonFile                          = require('./JsonFile');
-module.exports.Editor                            = require('./editor/Editor/Editor');
+// module.exports.JsonFile                          = require('./JsonFile');
+
+// module.exports.Editor                            = require('./editor/Editor/Editor');
 module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 module.exports.DataSourceEditor                  = require('./editor/Editor/DataSourceEditor/DataSourceEditor');
@@ -23,6 +24,8 @@ module.exports.RowFormEditor                     = require('./editor/Editor/Form
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
+
+/*
 module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
 module.exports.DatabaseEditorController          = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
@@ -37,6 +40,8 @@ module.exports.ApplicationEditorController       = require('./editor/EditorContr
 module.exports.FieldEditorController             = require('./editor/EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./editor/EditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController              = require('./editor/EditorController/PageEditorController/PageEditorController');
+*/
+
 module.exports.Model                             = require('./viewer/Model/Model');
 module.exports.Application                       = require('./viewer/Model/Application/Application');
 module.exports.Database                          = require('./viewer/Model/Database/Database');

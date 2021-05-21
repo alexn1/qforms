@@ -7,7 +7,8 @@ const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
-const DataSource = require('./viewer/Model/DataSource/DataSource');
+// const DataSource = require('./viewer/Model/DataSource/DataSource');
+const JsonFile = require('../backend/JsonFile');
 
 // post actions
 const ACTIONS = [
@@ -474,7 +475,7 @@ class HostApp {
     async handleEditorGet(req, res, context) {
         console.log('HostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req, context);
-        const appFile = new qforms.JsonFile(application.appInfo.filePath);
+        const appFile = new JsonFile(application.appInfo.filePath);
         await appFile.read();
         const app = JSON.parse(appFile.content);
         app.env = this.nodeEnv;
