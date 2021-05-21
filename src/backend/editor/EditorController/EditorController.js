@@ -17,13 +17,13 @@ class EditorController {
 
         /*if (!this.viewDirPath) throw new Error('viewDirPath is null');
         const viewFilePath = path.join(this.viewDirPath, params.view);
-        const exists = await qforms.Helper.exists(viewFilePath);
+        const exists = await Helper.exists(viewFilePath);
         if (exists) {
             console.log(`view file exists: ${viewFilePath}`);
         } else {
             console.warn(`view file does not exist: ${viewFilePath}`);
         }
-        if (exists) view = await qforms.Helper.readTextFile(viewFilePath);*/
+        if (exists) view = await Helper.readTextFile(viewFilePath);*/
         return {
             view,
             data: {}

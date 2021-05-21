@@ -5,6 +5,7 @@ const Editor                   = require('../Editor');
 const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
+const Helper = require('../../../Helper');
 
 class ApplicationEditor extends Editor {
 
@@ -35,7 +36,7 @@ class ApplicationEditor extends Editor {
         super(appFile.data);
         this.appFile  = appFile;
         this.hostApp  = hostApp;
-        this.appInfo  = qforms.Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
+        this.appInfo  = Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
         // this.name     = this.getName();
     }
 

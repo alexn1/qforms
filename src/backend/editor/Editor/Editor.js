@@ -3,33 +3,34 @@ const ejs     = require('ejs');
 const qforms = require('../../qforms');
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
+const ActionEditor = require('../Editor/ActionEditor/ActionEditor');
 
 class Editor extends BaseModel {
 
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
-        const exists = await qforms.Helper.exists(newFilePath);
+        const exists = await Helper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
-        const template = await qforms.Helper.readTextFile(templateFilePath);
+        const template = await Helper.readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
         if (text === '') {
             text = emptyTemplate;
         }
-        await qforms.Helper.writeFile2(newFilePath, text);
+        await Helper.writeFile2(newFilePath, text);
         return text;
     }*/
 
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await qforms.Helper.exists(newFilePath);
+        const exists = await Helper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
-        const template = await qforms.Helper.readTextFile(templateFilePath);
+        const template = await Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await qforms.Helper.writeFile2(newFilePath, content);
+        await Helper.writeFile2(newFilePath, content);
         return content;
     }
 
@@ -39,18 +40,18 @@ class Editor extends BaseModel {
 
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
-        const exists = await qforms.Helper.exists(filePath);
+        const exists = await Helper.exists(filePath);
         if (exists) {
-            return await qforms.Helper.readTextFile(filePath);
+            return await Helper.readTextFile(filePath);
         }
     }
 
     async saveFile(filePath, content) {
-        const exists = await qforms.Helper.exists(filePath);
+        const exists = await Helper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        return await qforms.Helper.writeFile2(filePath, content);
+        return await Helper.writeFile2(filePath, content);
     }
 
     async getCustomFile(ext) {
@@ -106,12 +107,12 @@ class Editor extends BaseModel {
         if (this.getColItemData('actions', name)) {
             throw new Error(`action ${name} already exists`);
         }
-        const data = qforms.ActionEditor.createData(params);
+        const data = ActionEditor.createData(params);
         this.addModelData('actions', data);
         return data;
     }
     createActionEditor(name) {
-        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
+        return new ActionEditor(this.getColItemData('actions', name), this);
     }
 }
 
