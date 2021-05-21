@@ -1,9 +1,11 @@
-const path    = require('path');
-const qforms = require('../../../qforms');
-const Model  = require('../Model');
+const path = require('path');
+const Model = require('../Model');
 const Helper = require('../../../Helper');
 const Page = require('../Page/Page');
 const Application = require('../Application/Application');
+const Form = require('../Form/Form');
+const RowForm = require('../Form/RowForm/RowForm');
+const TableForm = require('../Form/TableForm/TableForm');
 
 class DataSource extends Model {
 
@@ -186,7 +188,7 @@ class DataSource extends Model {
     }
 
     isOnForm() {
-        return this.parent instanceof qforms.Form;
+        return this.parent instanceof Form;
     }
 
     isOnFormDefault() {
@@ -194,11 +196,11 @@ class DataSource extends Model {
     }
 
     isDefaultOnRowForm() {
-        return this.parent instanceof qforms.RowForm && this.getName() === 'default';
+        return this.parent instanceof RowForm && this.getName() === 'default';
     }
 
     isDefaultOnTableForm() {
-        return this.parent instanceof qforms.TableForm && this.getName() === 'default';
+        return this.parent instanceof TableForm && this.getName() === 'default';
     }
 }
 
