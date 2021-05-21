@@ -1,11 +1,11 @@
 // console.log('server.js');
 const express    = require('express');
 // const morgan     = require('morgan');
-const bodyParser = require('body-parser');
-const session    = require('express-session');
+// const bodyParser = require('body-parser');
+// const session    = require('express-session');
 const Helper    = require('./Helper');
 // const multipart = require('connect-multiparty')();
-const Context = require('./Context');
+// const Context = require('./Context');
 const HostApp = require('./HostApp');
 const server = module.exports = express();
 
@@ -13,54 +13,6 @@ initExpressServer(server); function initExpressServer(server) {
     // console.log('server.initExpressServer');
     const hostApp = new HostApp(server);
     hostApp.init();
-    server.set('hostApp', hostApp);
-
-    // middlewares
-    // server.use(morgan('dev'));
-    // server.use(serverRequest);
-    server.use(bodyParser.json({limit: '10mb'}));
-    server.use(bodyParser.urlencoded({ extended: false }));
-    // server.use(multipartHandler);
-    server.use(session({
-        secret            : 'qforms',
-        key               : 'sid',
-        resave            : false,
-        saveUninitialized : false
-    }));
-
-    // test
-    server.get( '/test', hostApp._getTest.bind(hostApp));
-    server.post('/test', hostApp._postTest.bind(hostApp));
-
-    // app
-    server.get( '/app', hostApp._appGet.bind(hostApp));
-    server.post('/app', hostApp._appPost.bind(hostApp));
-
-    // monitor
-    server.get('/monitor', hostApp._monitorGet.bind(hostApp));
-
-    // moduleGet
-    server.get('/:module/:appDirName/:appFileName/:env/', hostApp._moduleGet.bind(hostApp));
-
-    // modulePost
-    server.post('/:module/:appDirName/:appFileName/:env/', hostApp._modulePost.bind(hostApp));
-
-    // moduleFile
-    server.get('/:module/:appDirName/:appFileName/:env/*', hostApp._moduleFile.bind(hostApp));
-
-    // favicon.ico
-    server.get('/favicon.ico', hostApp._favicon.bind(hostApp));
-
-    // static
-    server.use(express.static(hostApp.publicDirPath));
-
-    // catch 404 and forward to error handler
-    server.use(hostApp._e404.bind(hostApp));
-    server.use(hostApp._e500.bind(hostApp));
-
-    // runtime & temp
-    Helper.createDirIfNotExistsSync(server.get('runtime'));
-    Helper.createDirIfNotExistsSync(server.get('temp'));
 }
 
 /*function serverRequest(req, res, next) {

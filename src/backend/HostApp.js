@@ -11,6 +11,11 @@ const MonitorModel = require('./monitor/MonitorModel');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
 
+
+const bodyParser = require('body-parser');
+const session    = require('express-session');
+const express    = require('express');
+
 // post actions
 const ACTIONS = [
     'page',
@@ -60,6 +65,7 @@ class HostApp {
     constructor(server) {
         // console.log('HostApp.constructor');
         this.server = server;
+        server.set('hostApp', this);
         this.applications = {};
         this.logCnn = null;
     }
@@ -101,6 +107,59 @@ class HostApp {
         if (!this.nodeEnv) {
             this.nodeEnv = 'production';
         }
+
+        // runtime & temp
+        Helper.createDirIfNotExistsSync(this.server.get('runtime'));
+        Helper.createDirIfNotExistsSync(this.server.get('temp'));
+
+        this.initExpressServer();
+    }
+
+    initExpressServer() {
+
+
+        // middlewares
+        // server.use(morgan('dev'));
+        // server.use(serverRequest);
+        this.server.use(bodyParser.json({limit: '10mb'}));
+        this.server.use(bodyParser.urlencoded({ extended: false }));
+        // server.use(multipartHandler);
+        this.server.use(session({
+            secret            : 'qforms',
+            key               : 'sid',
+            resave            : false,
+            saveUninitialized : false
+        }));
+
+        // test
+        this.server.get( '/test', this._getTest.bind(this));
+        this.server.post('/test', this._postTest.bind(this));
+
+        // app
+        this.server.get( '/app', this._appGet.bind(this));
+        this.server.post('/app', this._appPost.bind(this));
+
+        // monitor
+        this.server.get('/monitor', this._monitorGet.bind(this));
+
+        // moduleGet
+        this.server.get('/:module/:appDirName/:appFileName/:env/', this._moduleGet.bind(this));
+
+        // modulePost
+        this.server.post('/:module/:appDirName/:appFileName/:env/', this._modulePost.bind(this));
+
+        // moduleFile
+        this.server.get('/:module/:appDirName/:appFileName/:env/*', this._moduleFile.bind(this));
+
+        // favicon.ico
+        this.server.get('/favicon.ico', this._favicon.bind(this));
+
+        // static
+        this.server.use(express.static(this.publicDirPath));
+
+        // catch 404 and forward to error handler
+        this.server.use(this._e404.bind(this));
+        this.server.use(this._e500.bind(this));
     }
 
     async createApplicationIfNotExists(req, context) {
