@@ -698,6 +698,63 @@ class HostApp {
         }
     }
 
+    async _moduleFile(req, res, next) {
+        // console.warn('moduleFile', req.originalUrl);
+        let context = null;
+        try {
+            context = Context.create({req});
+            if (context.module === 'view') {
+                await this.viewerFile(req, res, context);
+            } else if (context.module === 'edit') {
+                await this.editorFile(req, res, context);
+            } else {
+                next();
+            }
+        } catch (err) {
+            next(err);
+        } finally {
+            Context.destroy(context);
+        }
+    }
+
+    _favicon(req, res, next) {
+        //console.log('/favicon.ico');
+        res.end();
+    }
+
+    async _e404(req, res, next) {
+        console.warn(req.method, 'error/404');
+        const err = new Error(`${req.method} ${req.originalUrl} page not found`);
+        err.status = 404;
+        next(err);
+    }
+
+    async _e500(err, req, res, next) {
+        console.warn('module.exports.e500:', req.method, req.originalUrl);
+        console.error(err);
+        res.status(err.status || 500);
+        if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
+            res.end(typeof err === 'string' ? err : err.message);
+        } else {
+            res.render('error', {
+                message: err.message,
+                error  : req.app.get('env') === 'development' ? err : {}
+            });
+        }
+        await this.logError(req, err);
+    }
+
+    _getTest(req, res, next) {
+        console.log('getTest');
+        res.setHeader('Content-Type', 'text/plain;charset=utf-8');
+        res.end('getTest');
+    }
+
+    _postTest(req, res, next) {
+        console.log('postTest', req.body);
+        res.json({foo: 'bar'});
+    }
+
 
 }
 

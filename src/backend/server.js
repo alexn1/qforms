@@ -29,8 +29,8 @@ initExpressServer(server); function initExpressServer(server) {
     }));
 
     // test
-    server.get( '/test', getTest );
-    server.post('/test', postTest);
+    server.get( '/test', hostApp._getTest.bind(hostApp));
+    server.post('/test', hostApp._postTest.bind(hostApp));
 
     // app
     server.get( '/app', hostApp._appGet.bind(hostApp));
@@ -46,17 +46,17 @@ initExpressServer(server); function initExpressServer(server) {
     server.post('/:module/:appDirName/:appFileName/:env/', hostApp._modulePost.bind(hostApp));
 
     // moduleFile
-    server.get('/:module/:appDirName/:appFileName/:env/*', moduleFile);
+    server.get('/:module/:appDirName/:appFileName/:env/*', hostApp._moduleFile.bind(hostApp));
 
     // favicon.ico
-    server.get('/favicon.ico', favicon);
+    server.get('/favicon.ico', hostApp._favicon.bind(hostApp));
 
     // static
     server.use(express.static(hostApp.publicDirPath));
 
     // catch 404 and forward to error handler
-    server.use(e404);
-    server.use(e500);
+    server.use(hostApp._e404.bind(hostApp));
+    server.use(hostApp._e500.bind(hostApp));
 
     // runtime & temp
     Helper.createDirIfNotExistsSync(server.get('runtime'));
@@ -68,7 +68,7 @@ initExpressServer(server); function initExpressServer(server) {
     next();
 }*/
 
-async function moduleFile(req, res, next) {
+/*async function moduleFile(req, res, next) {
     // console.warn('moduleFile', req.originalUrl);
     let context = null;
     try {
@@ -85,12 +85,12 @@ async function moduleFile(req, res, next) {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
-function favicon(req, res, next) {
+/*function favicon(req, res, next) {
     //console.log('/favicon.ico');
     res.end();
-}
+}*/
 
 /*async function moduleGet(req, res, next) {
     console.warn('moduleGet', req.params);
@@ -165,14 +165,14 @@ function favicon(req, res, next) {
     }
 }*/
 
-async function e404(req, res, next) {
+/*async function e404(req, res, next) {
     console.warn(req.method, 'error/404');
     const err = new Error(`${req.method} ${req.originalUrl} page not found`);
     err.status = 404;
     next(err);
-}
+}*/
 
-async function e500(err, req, res, next) {
+/*async function e500(err, req, res, next) {
     console.warn('module.exports.e500:', req.method, req.originalUrl);
     console.error(err);
     res.status(err.status || 500);
@@ -185,7 +185,7 @@ async function e500(err, req, res, next) {
         });
     }
     await server.get('hostApp').logError(req, err);
-}
+}*/
 
 /*function multipart2(req, res) {
     return new Promise(resolve => multipart(req, res, resolve));
@@ -216,13 +216,15 @@ async function e500(err, req, res, next) {
 //     next();
 // }
 
-function getTest(req, res, next) {
+/*function getTest(req, res, next) {
     console.log('getTest');
     res.setHeader('Content-Type', 'text/plain;charset=utf-8');
     res.end('getTest');
-}
+}*/
 
+/*
 function postTest(req, res, next) {
     console.log('postTest', req.body);
     res.json({foo: 'bar'});
 }
+*/
