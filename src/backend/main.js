@@ -1,18 +1,25 @@
 // console.log('http.js');
+const express = require('express');
 const http = require('http');
 const path = require('path');
 
 const qforms = require('./qforms');
-const server = require('./server');
 const pkg    = require('../../package.json');
+const HostApp = require('./HostApp');
+
+let _hostApp = null;
 
 function main() {
+    const server = express();
+    const hostApp = _hostApp = new HostApp(server);
+    hostApp.init();
+
     // console.log('http.main');
     process.on('message', onMessage);
     process.on('SIGINT', onSIGINT);
     process.on('SIGTERM', onSIGTERM);
     process.on('exit', onExit);
-    process.on('unhandledRejection', onUnhandledRejection );
+    process.on('unhandledRejection', onUnhandledRejection);
 
     const params = qforms.Helper.getCommandLineParams();
     const host = params.host || pkg.config.host;
@@ -23,14 +30,14 @@ function main() {
         if (process.send) {
             process.send('online');
         }
-        const appsDirPath = path.resolve(server.get('hostApp').appsDirPath);
+        const appsDirPath = path.resolve(hostApp.appsDirPath);
         console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/app\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
     });
 }
 
 async function shutdown() {
     console.log('shutdown');
-    const applications = server.get('hostApp').applications;
+    const applications = _hostApp.applications;
     const routes = Object.keys(applications);
     for (let i = 0; i < routes.length; i++) {
         const route = routes[i];
@@ -77,11 +84,12 @@ function onError(err) {
 
 async function onUnhandledRejection(err) {
     console.error('onUnhandledRejection', err);
-    const hostApp = server.get('hostApp');
-    if (hostApp) {
+    if (_hostApp) {
         err.message = `unhandledRejection: ${err.message}`;
-        await server.get('hostApp').logError(null, err);
+        await _hostApp.logError(null, err);
     }
 }
+
+
 
 module.exports = main;

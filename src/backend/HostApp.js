@@ -88,8 +88,8 @@ class HostApp {
         this.server.set('handleException', Helper.getCommandLineParams().handleException || true);
         this.server.set('view engine'    , 'ejs');
         this.server.set('views'          , backendDirPath);
-        this.server.set('runtime'        , path.join(engineDirPath,  'runtime'));
-        this.server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
+        // this.server.set('runtime'        , path.join(engineDirPath,  'runtime'));
+        // this.server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
         this.server.enable('strict routing');
 
         this.publicDirPath = publicDirPath;
@@ -109,8 +109,8 @@ class HostApp {
         }
 
         // runtime & temp
-        Helper.createDirIfNotExistsSync(this.server.get('runtime'));
-        Helper.createDirIfNotExistsSync(this.server.get('temp'));
+        Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
+        Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
 
         this.initExpressServer();
     }
@@ -739,7 +739,6 @@ class HostApp {
     async _modulePost(req, res, next)  {
         console.warn('modulePost', req.params, req.body);
         let context = null;
-        // const hostApp = server.get('hostApp');
         try {
             context = Context.create({req});
             if (context.module === 'view') {
@@ -813,6 +812,8 @@ class HostApp {
         console.log('postTest', req.body);
         res.json({foo: 'bar'});
     }
+
+
 
 
 }
