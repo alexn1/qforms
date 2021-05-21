@@ -40,10 +40,10 @@ initExpressServer(server); function initExpressServer(server) {
     server.get('/monitor', hostApp._monitorGet.bind(hostApp));
 
     // moduleGet
-    server.get('/:module/:appDirName/:appFileName/:env/', hostApp.moduleGet.bind(hostApp));
+    server.get('/:module/:appDirName/:appFileName/:env/', hostApp._moduleGet.bind(hostApp));
 
     // modulePost
-    server.post('/:module/:appDirName/:appFileName/:env/', modulePost);
+    server.post('/:module/:appDirName/:appFileName/:env/', hostApp._modulePost.bind(hostApp));
 
     // moduleFile
     server.get('/:module/:appDirName/:appFileName/:env/*', moduleFile);
@@ -112,7 +112,7 @@ function favicon(req, res, next) {
     }
 }*/
 
-async function modulePost(req, res, next)  {
+/*async function modulePost(req, res, next)  {
     console.warn('modulePost', req.params, req.body);
     let context = null;
     const hostApp = server.get('hostApp');
@@ -131,7 +131,7 @@ async function modulePost(req, res, next)  {
     } finally {
         Context.destroy(context);
     }
-}
+}*/
 
 /*async function appPost(req, res, next) {
     console.warn('appPost', req.params);

@@ -626,11 +626,10 @@ class HostApp {
     }
 
 
-    async moduleGet(req, res, next) {
+    async _moduleGet(req, res, next) {
         console.warn('HostApp.moduleGet', req.params);
         let context = null;
         try {
-            // const hostApp = server.get('hostApp');
             context = Context.create({req});
             if (context.module === 'view') {
                 await this.handleViewerGet(req, res, context);
@@ -675,6 +674,27 @@ class HostApp {
             }
         } catch (err) {
             next(err);
+        }
+    }
+
+    async _modulePost(req, res, next)  {
+        console.warn('modulePost', req.params, req.body);
+        let context = null;
+        // const hostApp = server.get('hostApp');
+        try {
+            context = Context.create({req});
+            if (context.module === 'view') {
+                const time = await this.handleViewerPost(req, res, context);
+                // await this.logRequest(req, context, time);
+            } else if (context.module === 'edit') {
+                const time = await this.handleEditorPost(req, res, context);
+                // await this.logRequest(req, context, time);
+            }
+        } catch (err) {
+            await this.logError(req, err);
+            next(err);
+        } finally {
+            Context.destroy(context);
         }
     }
 
