@@ -828,7 +828,7 @@ class HostApp {
 
         // process
         process.on('message', hostApp.onProcessMessage.bind(hostApp));
-        process.on('SIGINT', onSIGINT);
+        process.on('SIGINT', hostApp.onProcessSIGINT.bind(hostApp));
         process.on('SIGTERM', onSIGTERM);
         process.on('exit', onExit);
         process.on('unhandledRejection', onUnhandledRejection);
@@ -853,6 +853,13 @@ class HostApp {
         }
     }
 
+    async onProcessSIGINT() {
+        console.log('HostApp.onProcessSIGINT');
+        console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        await shutdown();
+        process.exit(0);
+    }
+
 
 }
 
@@ -871,12 +878,7 @@ async function shutdown() {
 
 
 
-async function onSIGINT() {
-    console.log('onSIGINT');
-    console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
-    await shutdown();
-    process.exit(0);
-}
+
 
 function onSIGTERM() {
     console.log('onSIGTERM');
