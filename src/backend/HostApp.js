@@ -832,7 +832,7 @@ class HostApp {
         hostApp.init({appsDirPath, handleException});
 
         // process
-        process.on('message', onMessage);
+        process.on('message', hostApp.onProcessMessage.bind(hostApp));
         process.on('SIGINT', onSIGINT);
         process.on('SIGTERM', onSIGTERM);
         process.on('exit', onExit);
@@ -850,7 +850,13 @@ class HostApp {
         });
     }
 
-
+    async onProcessMessage(message) {
+        console.log('HostApp.onProcessMessage');
+        if (message === 'shutdown') {
+            await shutdown();
+            process.exit(0);
+        }
+    }
 
 
 }
@@ -868,13 +874,7 @@ async function shutdown() {
     }
 }
 
-async function onMessage(message) {
-    console.log('http.onMessage');
-    if (message === 'shutdown') {
-        await shutdown();
-        process.exit(0);
-    }
-}
+
 
 async function onSIGINT() {
     console.log('onSIGINT');
