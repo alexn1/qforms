@@ -3,6 +3,7 @@ module.exports.Helper                            = require('./Helper');
 // module.exports.JsonFile                          = require('./JsonFile');
 
 // module.exports.Editor                            = require('./editor/Editor/Editor');
+/*
 module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 module.exports.DataSourceEditor                  = require('./editor/Editor/DataSourceEditor/DataSourceEditor');
@@ -24,7 +25,7 @@ module.exports.RowFormEditor                     = require('./editor/Editor/Form
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
-
+*/
 /*
 module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');

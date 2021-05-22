@@ -1,5 +1,3 @@
-// const path = require('path');
-// const qforms = require('../../qforms');
 const JsonFile = require('../../JsonFile');
 const ApplicationEditor = require('../Editor/ApplicationEditor');
 

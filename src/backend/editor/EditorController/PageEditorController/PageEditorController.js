@@ -1,5 +1,4 @@
 const path = require('path');
-// const qforms                 = require('../../../qforms');
 const VisualEditorController = require('../VisualEditorController');
 const Helper = require('../../../Helper');
 

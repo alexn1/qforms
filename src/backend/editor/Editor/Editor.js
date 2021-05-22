@@ -1,6 +1,6 @@
 const path    = require('path');
 const ejs     = require('ejs');
-const qforms = require('../../qforms');
+const qforms = require('../../editor');
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
 const ActionEditor = require('../Editor/ActionEditor/ActionEditor');

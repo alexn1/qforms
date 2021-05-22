@@ -1,7 +1,7 @@
 const util = require('util');
 const path = require('path');
 const fs   = require('fs');
-const qforms = require('../../../qforms');
+const qforms = require('../../../editor');
 const Editor = require('../Editor');
 
 class FieldEditor extends Editor {

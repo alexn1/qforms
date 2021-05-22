@@ -1,6 +1,6 @@
 const path = require('path');
 const _    = require('underscore');
-const qforms = require('../../../qforms');
+const qforms = require('../../../editor');
 const Editor = require('../Editor');
 const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
