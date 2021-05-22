@@ -9,7 +9,6 @@ const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
-// const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
