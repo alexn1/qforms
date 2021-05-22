@@ -15,10 +15,6 @@ const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
 const Application = require('./viewer/Model/Application/Application');
 
-
-
-
-
 let _hostApp = null;
 
 // post actions
@@ -117,12 +113,10 @@ class HostApp {
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
 
-        this.initExpressServer();
+
     }
 
     initExpressServer() {
-
-
         // middlewares
         // server.use(morgan('dev'));
         // server.use(serverRequest);
@@ -830,6 +824,7 @@ class HostApp {
         // hostApp
         const hostApp = _hostApp = new HostApp(server);
         hostApp.init({appsDirPath, handleException});
+        hostApp.initExpressServer();
 
         // process
         process.on('message', hostApp.onProcessMessage.bind(hostApp));
