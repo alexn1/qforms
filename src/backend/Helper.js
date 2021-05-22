@@ -6,7 +6,7 @@ const fs         = require('fs');
 const _          = require('underscore');
 const BaseModel = require('./BaseModel');
 
-const entityMap = {
+/*const entityMap = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -15,7 +15,7 @@ const entityMap = {
     '/': '&#x2F;',
     '`': '&#x60;',
     '=': '&#x3D;'
-};
+};*/
 
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
