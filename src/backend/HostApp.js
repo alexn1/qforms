@@ -465,15 +465,15 @@ class HostApp {
         // console.log('filePath:', filePath);
         const ext = path.extname(filePath);
         if (['.css', '.js', '.map'].includes(ext)) {
-            const exists = await qforms.Helper.exists(filePath);
+            const exists = await Helper.exists(filePath);
             if (exists) {
-                return [await qforms.Helper.readTextFile(filePath), ext];
+                return [await Helper.readTextFile(filePath), ext];
             }
         }
         if (['.ttf', '.otf', '.png', '.jpg'].includes(ext)) {
-            const exists = await qforms.Helper.exists(filePath);
+            const exists = await Helper.exists(filePath);
             if (exists) {
-                return [await qforms.Helper.readBinaryFile(filePath), ext];
+                return [await Helper.readBinaryFile(filePath), ext];
             }
         }
         return null;
@@ -589,15 +589,15 @@ class HostApp {
         const name = req.body.name;
         const appDirPath  = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
-        await qforms.Helper.createDirIfNotExists(appDirPath);
+        await Helper.createDirIfNotExists(appDirPath);
         await qforms.ApplicationEditor.createAppFile(appFilePath, {name});
-        const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
+        const appInfos = await Helper.getAppInfos(this.appsDirPath);
         return appInfos;
     }
 
     async appGet(req, res) {
         console.log('HostApp.appGet');
-        const appInfos = await qforms.Helper.getAppInfos(this.appsDirPath);
+        const appInfos = await Helper.getAppInfos(this.appsDirPath);
         // console.log('appInfos:', appInfos);
         res.render('app/view', {
             // req           : req,
