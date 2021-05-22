@@ -3,7 +3,7 @@ module.exports.Helper  = require('./Helper');
 module.exports.HostApp = require('./HostApp');
 
 // viewer
-module.exports.Model                             = require('./viewer/Model/Model');
+// module.exports.Model                             = require('./viewer/Model/Model');
 module.exports.Application                       = require('./viewer/Model/Application/Application');
 module.exports.Database                          = require('./viewer/Model/Database/Database');
 module.exports.MySqlDatabase                     = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
@@ -32,7 +32,7 @@ module.exports.Table                             = require('./viewer/Model/Table
 module.exports.Action                            = require('./viewer/Model/Action/Action');
 
 // editor
-module.exports.Editor                            = require('./editor/Editor/Editor');
+// module.exports.Editor                            = require('./editor/Editor/Editor');
 module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 module.exports.DataSourceEditor                  = require('./editor/Editor/DataSourceEditor/DataSourceEditor');
@@ -56,7 +56,7 @@ module.exports.PageEditor                        = require('./editor/Editor/Page
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 
 
-module.exports.EditorController                  = require('./editor/EditorController/EditorController');
+// module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
 module.exports.DatabaseEditorController          = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
 module.exports.DataSourceEditorController        = require('./editor/EditorController/DataSourceEditorController/DataSourceEditorController');

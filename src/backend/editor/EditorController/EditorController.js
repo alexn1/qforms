@@ -1,5 +1,4 @@
 const JsonFile = require('../../JsonFile');
-
 const qforms = require('../../../backend');
 
 class EditorController {
@@ -9,7 +8,6 @@ class EditorController {
         this.appInfo     = appInfo;
         this.hostApp     = hostApp;
         this.application = application;
-        // this.viewDirPath = null;
     }
 
     async getView(params) {
