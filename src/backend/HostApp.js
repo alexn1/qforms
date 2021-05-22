@@ -9,7 +9,7 @@ const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
-const logConfig = require('./log.config.json');
+// const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
@@ -75,7 +75,7 @@ class HostApp {
         const engineDirPath  = path.join(__dirname, '..');
         const backendDirPath = __dirname;
         const publicDirPath = path.join(engineDirPath,  'frontend');
-        this.logCnn = PostgreSqlDatabase.createPool(logConfig);
+        this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
 
         if (!fs.existsSync(appsDirPath)) {
             console.error(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`);

@@ -73,6 +73,13 @@
     "user": "admin",
     "password": "admin",
     "authentication": "false",
-    "handleException": true
+    "handleException": true,
+    "log": {
+      "host"       : "localhost",
+      "port"       : 5432,
+      "database"   : "car",
+      "user"       : "postgres",
+      "password"   : "example"
+    }
   }
 }
