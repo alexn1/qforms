@@ -1,5 +1,9 @@
 const fs      = require('fs');
 const path    = require('path');
+const bodyParser = require('body-parser');
+const session    = require('express-session');
+const express    = require('express');
+
 const qforms  = require('./qforms');
 const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
@@ -7,14 +11,8 @@ const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
-// const DataSource = require('./viewer/Model/DataSource/DataSource');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
-
-
-const bodyParser = require('body-parser');
-const session    = require('express-session');
-const express    = require('express');
 
 // post actions
 const ACTIONS = [
@@ -618,8 +616,8 @@ class HostApp {
         const model = new MonitorModel(this);
         const dump = model.dump();
         res.render('monitor/view', {
-            version     : pkg.version,
-            dump        : dump
+            version: pkg.version,
+            dump   : dump
         });
     }
     async logError(req, err) {
@@ -683,7 +681,6 @@ class HostApp {
             values
         );
     }
-
 
     async _moduleGet(req, res, next) {
         console.warn('HostApp.moduleGet', req.params);
