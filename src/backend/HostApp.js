@@ -69,6 +69,14 @@ class HostApp {
         this.logCnn = null;
     }
 
+    initProcess() {
+        process.on('message'           , this.onProcessMessage.bind(this));
+        process.on('SIGINT'            , this.onProcessSIGINT.bind(this));
+        process.on('SIGTERM'           , this.onProcessSIGTERM.bind(this));
+        process.on('exit'              , this.onProcessExit.bind(this));
+        process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
+    }
+
     init(env) {
         const {appsDirPath, handleException} = env;// environment
 
@@ -811,6 +819,8 @@ class HostApp {
 
     static run(params = {}) {
         console.log('HostApp.run', params);
+
+        // env
         const appsDirPath     = params.appsDirPath     || pkg.config.appsDirPath;
         const handleException = params.handleException || pkg.config.handleException;
         const host            = params.host            || pkg.config.host;
@@ -821,24 +831,20 @@ class HostApp {
 
         // hostApp
         const hostApp = new HostApp(server);
+        hostApp.initProcess();
         hostApp.init({appsDirPath, handleException});
         hostApp.initExpressServer();
+        hostApp.createAndRunHttpServer(host, port);
+    }
 
-        // process
-        process.on('message', hostApp.onProcessMessage.bind(hostApp));
-        process.on('SIGINT' , hostApp.onProcessSIGINT.bind(hostApp));
-        process.on('SIGTERM', hostApp.onProcessSIGTERM.bind(hostApp));
-        process.on('exit'   , hostApp.onProcessExit.bind(hostApp));
-        process.on('unhandledRejection', hostApp.onUnhandledRejection.bind(hostApp));
-
-        // httpServer
-        const httpServer = http.createServer(server);
+    createAndRunHttpServer(host, port) {
+        const httpServer = http.createServer(this.server);
         httpServer.on('error', onError);
         httpServer.listen(port, host, () => {
             if (process.send) {
                 process.send('online');
             }
-            const appsDirPath = path.resolve(hostApp.appsDirPath);
+            const appsDirPath = path.resolve(this.appsDirPath);
             console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/app\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
         });
     }
