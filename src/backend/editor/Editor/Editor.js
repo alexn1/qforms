@@ -3,7 +3,7 @@ const ejs     = require('ejs');
 
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
-const qforms = require('../../../backend');
+const backend = require('../../../backend');
 
 class Editor extends BaseModel {
 
@@ -107,12 +107,12 @@ class Editor extends BaseModel {
         if (this.getColItemData('actions', name)) {
             throw new Error(`action ${name} already exists`);
         }
-        const data = qforms.ActionEditor.createData(params);
+        const data = backend.ActionEditor.createData(params);
         this.addModelData('actions', data);
         return data;
     }
     createActionEditor(name) {
-        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
+        return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }
 }
 

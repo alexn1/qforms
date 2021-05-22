@@ -3,7 +3,7 @@ const path = require('path');
 // const fs   = require('fs');
 
 const Editor = require('../Editor');
-const qforms = require('../../../../backend');
+const backend = require('../../../../backend');
 
 class FieldEditor extends Editor {
 
@@ -13,7 +13,7 @@ class FieldEditor extends Editor {
     }
 
     async changeClass(newClassName) {
-        const newData = qforms[`${newClassName}Editor`].createData(this.attributes());
+        const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         await this.setData(newData);
         return newData;
     }

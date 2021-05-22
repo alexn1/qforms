@@ -2,7 +2,7 @@ const path = require('path');
 
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
-const qforms  = require('../../../backend');
+const backend  = require('../../../backend');
 
 class Model extends BaseModel {
 
@@ -61,7 +61,7 @@ class Model extends BaseModel {
     async createChildModel(colName, data) {
         const modelName = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
-        let js;
+        // let js;
         const dirPath = this.getDirPath();
         let CustomClass = null;
         if (dirPath) {
@@ -74,7 +74,7 @@ class Model extends BaseModel {
             // if (js) console.log('customClassFilePath:', customClassFilePath, js);
         }
         // const Class = js ? eval(js) : qforms[className];
-        const Class = CustomClass ? CustomClass : qforms[className];
+        const Class = CustomClass ? CustomClass : backend[className];
         return new Class(data, this);
     }
 

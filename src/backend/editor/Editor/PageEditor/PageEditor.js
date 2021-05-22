@@ -2,7 +2,7 @@ const path = require('path');
 // const _    = require('underscore');
 
 const Editor = require('../Editor');
-const qforms = require('../../../../backend');
+const backend = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
@@ -98,7 +98,7 @@ class PageEditor extends Editor {
     createFormEditor(name) {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
-        const Class = qforms[`${className}Editor`];
+        const Class = backend[`${className}Editor`];
         return new Class(data, this);
     }
 

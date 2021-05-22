@@ -5,7 +5,7 @@ const session    = require('express-session');
 const express    = require('express');
 const http = require('http');
 
-const qforms  = require('./index');
+const backend  = require('./index');
 
 // const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
@@ -560,7 +560,7 @@ class HostApp {
             throw new Error(`unknown action ${req.body.action}`);
         }
         const editorControllerClassName = `${req.body.controller}EditorController`;
-        const ControllerClass = qforms[editorControllerClassName];
+        const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
         const method = req.body.action;
         const ctrl = new ControllerClass(appInfo, this, application);
