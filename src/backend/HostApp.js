@@ -15,6 +15,7 @@ const MonitorModel = require('./monitor/MonitorModel');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
 const Application = require('./viewer/Model/Application/Application');
+const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 
 // post actions
 const ACTIONS = [
@@ -558,12 +559,12 @@ class HostApp {
         if (EDITOR_ACTIONS.indexOf(req.body.action) === -1) {
             throw new Error(`unknown action ${req.body.action}`);
         }
-        const controllerClassName = `${req.body.controller}EditorController`;
-        const ControllerClass = qforms[controllerClassName];
-        if (!ControllerClass) throw new Error(`no class with name ${controllerClassName}`);
+        const editorControllerClassName = `${req.body.controller}EditorController`;
+        const ControllerClass = qforms[editorControllerClassName];
+        if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
         const method = req.body.action;
         const ctrl = new ControllerClass(appInfo, this, application);
-        if (!ctrl[method]) throw new Error(`no method: ${controllerClassName}.${method}`);
+        if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
         // console.log('json result:', result);
         if (result === undefined) throw new Error('handleEditorPost: result is undefined');
@@ -588,7 +589,7 @@ class HostApp {
         const appDirPath  = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper.createDirIfNotExists(appDirPath);
-        await qforms.ApplicationEditor.createAppFile(appFilePath, {name});
+        await ApplicationEditor.createAppFile(appFilePath, {name});
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }
