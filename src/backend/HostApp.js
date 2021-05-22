@@ -839,7 +839,7 @@ class HostApp {
 
     createAndRunHttpServer(host, port) {
         const httpServer = http.createServer(this.server);
-        httpServer.on('error', onError);
+        httpServer.on('error', this.onHttpServerError.bind(this));
         httpServer.listen(port, host, () => {
             if (process.send) {
                 process.send('online');
@@ -893,16 +893,18 @@ class HostApp {
         }
     }
 
+    onHttpServerError(err) {
+        console.error('HostApp.onHttpServerError', err.code, err.message);
+        /*if (err.code === 'EADDRINUSE') {
+            console.error(`Address ${host}:${port} in use.`);
+        } else {
+            console.error(err);
+        }*/
+    }
+
 
 }
 
-function onError(err) {
-    console.error('onError', err.code, err.message);
-    /*if (err.code === 'EADDRINUSE') {
-        console.error(`Address ${host}:${port} in use.`);
-    } else {
-        console.error(err);
-    }*/
-}
+
 
 module.exports = HostApp;
