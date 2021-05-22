@@ -1,4 +1,23 @@
-// module.exports.Editor                            = require('./Editor/Editor');
+/*
+module.exports.Editor                            = require('./Editor/Editor');
+module.exports.EditorController                  = require('./EditorController/EditorController');
+module.exports.ActionEditorController            = require('./EditorController/ActionEditorController/ActionEditorController');
+module.exports.DatabaseEditorController          = require('./EditorController/DatabaseEditorController/DatabaseEditorController');
+module.exports.DataSourceEditorController        = require('./EditorController/DataSourceEditorController/DataSourceEditorController');
+module.exports.KeyColumnEditorController         = require('./EditorController/KeyColumnEditorController/KeyColumnEditorController');
+module.exports.PageLinkEditorController          = require('./EditorController/PageLinkEditorController/PageLinkEditorController');
+module.exports.ParamEditorController             = require('./EditorController/ParamEditorController/ParamEditorController');
+module.exports.TableEditorController             = require('./EditorController/TableEditorController/TableEditorController');
+module.exports.ColumnEditorController            = require('./EditorController/ColumnEditorController/ColumnEditorController');
+module.exports.VisualEditorController            = require('./EditorController/VisualEditorController');
+module.exports.ApplicationEditorController       = require('./EditorController/ApplicationEditorController/ApplicationEditorController');
+module.exports.FieldEditorController             = require('./EditorController/FieldEditorController/FieldEditorController');
+module.exports.FormEditorController              = require('./EditorController/FormEditorController/FormEditorController');
+module.exports.PageEditorController              = require('./EditorController/PageEditorController/PageEditorController');
+*/
+
+
+
 module.exports.ActionEditor                      = require('./Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./Editor/ApplicationEditor/ApplicationEditor');
 module.exports.DataSourceEditor                  = require('./Editor/DataSourceEditor/DataSourceEditor');
