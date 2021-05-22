@@ -14,7 +14,7 @@ class FieldEditor extends Editor {
     }
 
     async changeClass(newClassName) {
-        const newData = eval(`qforms.${newClassName}Editor.createData(this.attributes())`);
+        const newData = qforms[`${newClassName}Editor`].createData(this.attributes());
         await this.setData(newData);
         return newData;
     }
