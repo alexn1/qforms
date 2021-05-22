@@ -1,8 +1,9 @@
 const path    = require('path');
 const ejs     = require('ejs');
+
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
-// const ActionEditor = require('../Editor/ActionEditor/ActionEditor');
+const qforms = require('../../../backend');
 
 class Editor extends BaseModel {
 
@@ -106,12 +107,12 @@ class Editor extends BaseModel {
         if (this.getColItemData('actions', name)) {
             throw new Error(`action ${name} already exists`);
         }
-        const data = ActionEditor.createData(params);
+        const data = qforms.ActionEditor.createData(params);
         this.addModelData('actions', data);
         return data;
     }
     createActionEditor(name) {
-        return new ActionEditor(this.getColItemData('actions', name), this);
+        return new qforms.ActionEditor(this.getColItemData('actions', name), this);
     }
 }
 
