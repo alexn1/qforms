@@ -1,5 +1,5 @@
 const path    = require('path');
-const qforms  = require('../../qforms');
+const qforms  = require('../../viewer');
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
 

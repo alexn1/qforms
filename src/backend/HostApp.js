@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session    = require('express-session');
 const express    = require('express');
 
-const qforms  = require('./qforms');
+const qforms  = require('./viewer');
 const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
