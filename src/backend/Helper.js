@@ -5,7 +5,7 @@ const fs         = require('fs');
 // const fsPromises = require('fs').promises;       // node v12
 const _          = require('underscore');
 
-const BaseModel = require('./BaseModel');
+// const BaseModel = require('./BaseModel');
 
 /*const entityMap = {
     '&': '&amp;',
@@ -96,7 +96,7 @@ class Helper {
     }
 
 
-    static async getAppInfo(appFilePath, env) {
+    /*static async getAppInfo(appFilePath, env) {
         // console.log('Helper.getAppInfo', appFilePath);
         const content = await Helper.readTextFile(appFilePath);
         const data = JSON.parse(content);
@@ -105,9 +105,9 @@ class Helper {
             return appInfo;
         }
         return null;
-    }
+    }*/
 
-    static getAppInfoFromData(appFilePath, data, env) {
+    /*static getAppInfoFromData(appFilePath, data, env) {
         // console.log('getAppInfoFromData:', appFilePath, data);
         if (!env) throw new Error('no env');
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
@@ -125,11 +125,11 @@ class Helper {
             extName     : path.extname(appFilePath),
             dirPath     : path.resolve(path.dirname(appFilePath))
         };
-    }
+    }*/
 
-    static async getAppInfos(appsDirPath) {
+    /*static async getAppInfos(appsDirPath) {
         console.log('Helper.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*!/!*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -139,7 +139,7 @@ class Helper {
             }
         }
         return appInfos;
-    }
+    }*/
 
     static currentTime() {
         const now = new Date();

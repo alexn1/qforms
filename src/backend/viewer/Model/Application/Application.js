@@ -13,7 +13,7 @@ class Application extends Model {
 
     static async create(appFilePath, hostApp, env) {
         // console.log('Application.create', appFilePath);
-        const appInfo = await Helper.getAppInfo(appFilePath, env);
+        const appInfo = await Application.getAppInfo(appFilePath, env);
         const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
@@ -282,6 +282,52 @@ class Application extends Model {
     async initContext(context) {
 
     }
+
+    static getAppInfoFromData(appFilePath, data, env) {
+        // console.log('Application.getAppInfoFromData:', appFilePath, data);
+        if (!env) throw new Error('no env');
+        const fileName = path.basename(appFilePath, path.extname(appFilePath));
+        const dirName  = path.basename(path.dirname(appFilePath));
+        return {
+            name        : BaseModel.getName(data),
+            caption     : BaseModel.getAttr(data, 'caption'),
+            fullName    : [dirName, fileName].join('/'),
+            envs        : BaseModel.getEnvList(data),
+            route       : [dirName, fileName, env].join('/'),
+            fileName    : fileName,
+            dirName     : dirName,
+            filePath    : path.resolve(appFilePath),
+            fileNameExt : path.basename(appFilePath),
+            extName     : path.extname(appFilePath),
+            dirPath     : path.resolve(path.dirname(appFilePath))
+        };
+    }
+
+    static async getAppInfo(appFilePath, env) {
+        // console.log('Application.getAppInfo', appFilePath);
+        const content = await Helper.readTextFile(appFilePath);
+        const data = JSON.parse(content);
+        if (data['@class'] && data['@class'] === 'Application') {
+            const appInfo = Application.getAppInfoFromData(appFilePath, data, env);
+            return appInfo;
+        }
+        return null;
+    }
+
+    static async getAppInfos(appsDirPath) {
+        console.log('Application.getAppInfos', appsDirPath);
+        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
+        const appInfos = [];
+        for (let i = 0; i < appFilesPaths.length; i++) {
+            const appFilePath = appFilesPaths[i];
+            const appInfo = await Application.getAppInfo(appFilePath, 'local');
+            if (appInfo) {
+                appInfos.push(appInfo);
+            }
+        }
+        return appInfos;
+    }
+
 }
 
 module.exports = Application;

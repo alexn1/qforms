@@ -589,13 +589,13 @@ class HostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper.createDirIfNotExists(appDirPath);
         await qforms.ApplicationEditor.createAppFile(appFilePath, {name});
-        const appInfos = await Helper.getAppInfos(this.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }
 
     async appGet(req, res) {
         console.log('HostApp.appGet');
-        const appInfos = await Helper.getAppInfos(this.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.appsDirPath);
         // console.log('appInfos:', appInfos);
         res.render('app/view', {
             // req           : req,

@@ -10,6 +10,7 @@ const PageEditor = require('../PageEditor/PageEditor');
 const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
+const Application = require('../../../viewer/Model/Application/Application');
 
 class ApplicationEditor extends Editor {
 
@@ -40,7 +41,7 @@ class ApplicationEditor extends Editor {
         super(appFile.data);
         this.appFile  = appFile;
         this.hostApp  = hostApp;
-        this.appInfo  = Helper.getAppInfoFromData(appFile.filePath, appFile.data, env);
+        this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data, env);
         // this.name     = this.getName();
     }
 
