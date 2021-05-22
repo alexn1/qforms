@@ -15,8 +15,6 @@ const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
 const Application = require('./viewer/Model/Application/Application');
 
-let _hostApp = null;
-
 // post actions
 const ACTIONS = [
     'page',
@@ -822,7 +820,7 @@ class HostApp {
         const server = express();
 
         // hostApp
-        const hostApp = _hostApp = new HostApp(server);
+        const hostApp = new HostApp(server);
         hostApp.init({appsDirPath, handleException});
         hostApp.initExpressServer();
 
@@ -848,7 +846,7 @@ class HostApp {
     async onProcessMessage(message) {
         console.log('HostApp.onProcessMessage');
         if (message === 'shutdown') {
-            await shutdown();
+            await this.shutdown();
             process.exit(0);
         }
     }
@@ -856,7 +854,7 @@ class HostApp {
     async onProcessSIGINT() {
         console.log('HostApp.onProcessSIGINT');
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
-        await shutdown();
+        await this.shutdown();
         process.exit(0);
     }
 
@@ -873,35 +871,24 @@ class HostApp {
 
     async onUnhandledRejection(err) {
         console.error('HostApp.onUnhandledRejection', err);
-        if (_hostApp) {
-            err.message = `unhandledRejection: ${err.message}`;
-            await _hostApp.logError(null, err);
+        err.message = `unhandledRejection: ${err.message}`;
+        await this.logError(null, err);
+    }
+
+    async shutdown() {
+        console.log('HostApp.shutdown');
+        const applications = this.applications;
+        const routes = Object.keys(applications);
+        for (let i = 0; i < routes.length; i++) {
+            const route = routes[i];
+            console.log('route:', route);
+            const application = applications[route];
+            await application.deinit();
         }
     }
 
 
 }
-
-
-async function shutdown() {
-    console.log('shutdown');
-    const applications = _hostApp.applications;
-    const routes = Object.keys(applications);
-    for (let i = 0; i < routes.length; i++) {
-        const route = routes[i];
-        console.log('route:', route);
-        const application = applications[route];
-        await application.deinit();
-    }
-}
-
-
-
-
-
-
-
-
 
 function onError(err) {
     console.error('onError', err.code, err.message);
@@ -911,8 +898,5 @@ function onError(err) {
         console.error(err);
     }*/
 }
-
-
-
 
 module.exports = HostApp;
