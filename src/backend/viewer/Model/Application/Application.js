@@ -1,13 +1,13 @@
 const path  = require('path');
 const axios = require('axios');
 
-const qforms    = require('../../../qforms');
 const Model     = require('../Model');
 const PageLink  = require('../PageLink/PageLink');
 const BaseModel = require('../../../BaseModel');
 const Helper    = require('../../../Helper');
 const Context   = require('../../../Context');
 const JsonFile  = require('../../../JsonFile');
+const text = require('../../../text');
 
 class Application extends Model {
 
@@ -68,7 +68,7 @@ class Application extends Model {
     }
 
     getText() {
-        return qforms.text[this.getAttr('lang') || 'en'];
+        return text[this.getAttr('lang') || 'en'];
     }
 
     async fill(context) {
