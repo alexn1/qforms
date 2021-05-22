@@ -828,9 +828,9 @@ class HostApp {
 
         // process
         process.on('message', hostApp.onProcessMessage.bind(hostApp));
-        process.on('SIGINT', hostApp.onProcessSIGINT.bind(hostApp));
+        process.on('SIGINT' , hostApp.onProcessSIGINT.bind(hostApp));
         process.on('SIGTERM', hostApp.onProcessSIGTERM.bind(hostApp));
-        process.on('exit', onExit);
+        process.on('exit'   , hostApp.onProcessExit.bind(hostApp));
         process.on('unhandledRejection', onUnhandledRejection);
 
         // httpServer
@@ -866,6 +866,11 @@ class HostApp {
         process.exit(1);
     }
 
+    onProcessExit(code) {
+        console.log('HostApp.onProcessExit', code);
+        console.log('process.exit:', code);
+    }
+
 
 }
 
@@ -888,10 +893,7 @@ async function shutdown() {
 
 
 
-function onExit(code) {
-    console.log('onExit', code);
-    console.log('process.exit:', code);
-}
+
 
 function onError(err) {
     console.error('onError', err.code, err.message);
