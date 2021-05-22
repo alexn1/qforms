@@ -557,8 +557,8 @@ class HostApp {
         if (EDITOR_ACTIONS.indexOf(req.body.action) === -1) {
             throw new Error(`unknown action ${req.body.action}`);
         }
-        const controllerClassName = `qforms.${req.body.controller}EditorController`;
-        const ControllerClass = eval(controllerClassName);
+        const controllerClassName = `${req.body.controller}EditorController`;
+        const ControllerClass = qforms[controllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${controllerClassName}`);
         const method = req.body.action;
         const ctrl = new ControllerClass(appInfo, this, application);
