@@ -1,6 +1,6 @@
 const path    = require('path');
 const ejs     = require('ejs');
-const qforms = require('../../editor');
+const editor = require('../../editor');
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
 const ActionEditor = require('../Editor/ActionEditor/ActionEditor');
@@ -91,7 +91,7 @@ class Editor extends BaseModel {
     createDataSourceEditor(name) {
         const data = this.getColItemData('dataSources', name);
         const className = BaseModel.getClassName(data);
-        const DataSourceClass = qforms[`${className}Editor`];
+        const DataSourceClass = editor[`${className}Editor`];
         return new DataSourceClass(data, this);
     }
     moveDataColItem(colName, name, offset) {
