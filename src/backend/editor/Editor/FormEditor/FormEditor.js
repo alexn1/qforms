@@ -1,5 +1,5 @@
 const path = require('path');
-const editor = require('../../../editor');
+const qforms = require('../../../../backend');
 const Editor = require('../Editor');
 const BaseModel = require('../../../BaseModel');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
@@ -26,7 +26,7 @@ class FormEditor extends Editor {
         if (this.getColItemData('fields', name)) {
             throw new Error(`field ${name} already exists`);
         }
-        const data = eval(`editor.${params['class']}Editor.createData(params);`);
+        const data = eval(`qforms.${params['class']}Editor.createData(params);`);
         this.addModelData('fields', data);
         return data;
     }
@@ -43,7 +43,7 @@ class FormEditor extends Editor {
 
     createFieldEditor(name) {
         const data = this.getColItemData('fields', name);
-        return eval(`new editor.${BaseModel.getClassName(data)}Editor(data, this)`);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     async createJs(params) {

@@ -1,6 +1,6 @@
 const path = require('path');
 const _    = require('underscore');
-const editor = require('../../../editor');
+const qforms = require('../../../../backend');
 const Editor = require('../Editor');
 const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
@@ -96,7 +96,7 @@ class PageEditor extends Editor {
 
     createFormEditor(name) {
         const data = this.getColItemData('forms', name);
-        return eval(`new editor.${BaseModel.getClassName(data)}Editor(data, this)`);
+        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
     }
 
     async createJs(params) {
