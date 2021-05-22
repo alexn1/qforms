@@ -829,7 +829,7 @@ class HostApp {
         // process
         process.on('message', hostApp.onProcessMessage.bind(hostApp));
         process.on('SIGINT', hostApp.onProcessSIGINT.bind(hostApp));
-        process.on('SIGTERM', onSIGTERM);
+        process.on('SIGTERM', hostApp.onProcessSIGTERM.bind(hostApp));
         process.on('exit', onExit);
         process.on('unhandledRejection', onUnhandledRejection);
 
@@ -860,6 +860,12 @@ class HostApp {
         process.exit(0);
     }
 
+    onProcessSIGTERM() {
+        console.log('HostApp.onProcessSIGTERM');
+        console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        process.exit(1);
+    }
+
 
 }
 
@@ -880,11 +886,7 @@ async function shutdown() {
 
 
 
-function onSIGTERM() {
-    console.log('onSIGTERM');
-    console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
-    process.exit(1);
-}
+
 
 function onExit(code) {
     console.log('onExit', code);
