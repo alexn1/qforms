@@ -1,9 +1,7 @@
-const Model     = require('../Model');
-const Param     = require('../Param/Param');
+const Model = require('../Model');
+const Param = require('../Param/Param');
 
 class Database extends Model {
-
-
 
     constructor(data, parent) {
         //console.log('Database.constructor');
