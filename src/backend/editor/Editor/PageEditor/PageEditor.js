@@ -98,7 +98,8 @@ class PageEditor extends Editor {
     createFormEditor(name) {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
-        return eval(`new qforms.${className}Editor(data, this)`);
+        const Class = qforms[`${className}Editor`];
+        return new Class(data, this);
     }
 
     async createJs(params) {

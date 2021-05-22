@@ -27,7 +27,7 @@ class FormEditor extends Editor {
         if (this.getColItemData('fields', name)) {
             throw new Error(`field ${name} already exists`);
         }
-        const data = eval(`qforms.${params['class']}Editor.createData(params);`);
+        const data = qforms[`${params['class']}Editor`].createData(params);
         this.addModelData('fields', data);
         return data;
     }
@@ -44,7 +44,9 @@ class FormEditor extends Editor {
 
     createFieldEditor(name) {
         const data = this.getColItemData('fields', name);
-        return eval(`new qforms.${BaseModel.getClassName(data)}Editor(data, this)`);
+        const className = BaseModel.getClassName(data);
+        const Class = qforms[`${className}Editor`];
+        return new Class(data, this);
     }
 
     async createJs(params) {
