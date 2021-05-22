@@ -1,4 +1,4 @@
-module.exports.text                              = {en: require('./en'), ru: require('./ru')};
+module.exports.text                              = require('./text');
 module.exports.Helper                            = require('./Helper');
 // module.exports.JsonFile                          = require('./JsonFile');
 
