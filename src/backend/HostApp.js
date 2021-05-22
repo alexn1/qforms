@@ -64,9 +64,10 @@ class HostApp {
     constructor(server) {
         // console.log('HostApp.constructor');
         this.server = server;
-        server.set('hostApp', this);
-        this.applications = {};
+        this.publicDirPath = null;
+        this.appsDirPath = null;
         this.logCnn = null;
+        this.applications = {};
     }
 
     initProcess() {
@@ -80,35 +81,28 @@ class HostApp {
     init(env) {
         const {appsDirPath, handleException} = env;// environment
 
-        const engineDirPath  = path.join(__dirname, '..');
-        const backendDirPath = __dirname;
-        const publicDirPath = path.join(engineDirPath,  'frontend');
-        this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
-
         if (!fs.existsSync(appsDirPath)) {
             console.error(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`);
             process.exit(1);
             return;
         }
-        // vars
-        // this.server.set('appsDirPath'    , appsDirPath);
+
+        // path
+        const backendDirPath = __dirname;
+        const engineDirPath  = path.join(backendDirPath, '..');
+        this.appsDirPath  = appsDirPath;
+        this.publicDirPath =  path.join(engineDirPath,  'frontend');
+
+        // logCnn
+        this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
+
+        // options
         this.server.set('handleException', handleException);
         this.server.set('view engine'    , 'ejs');
         this.server.set('views'          , backendDirPath);
-        // this.server.set('runtime'        , path.join(engineDirPath,  'runtime'));
-        // this.server.set('temp'           , path.join(engineDirPath,  'runtime/temp'));
         this.server.enable('strict routing');
 
-        this.publicDirPath = publicDirPath;
-        this.appsDirPath  = appsDirPath;
-
         // production by default to disable editor
-        /*if (!process.env.NODE_ENV) {
-            server.set('env', 'production');
-        }
-        this.nodeEnv       = this.server.get('env');*/
-
-
         // nodeEnv
         this.nodeEnv = process.env.NODE_ENV;
         if (!this.nodeEnv) {
@@ -118,8 +112,6 @@ class HostApp {
         // runtime & temp
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
-
-
     }
 
     initExpressServer() {
