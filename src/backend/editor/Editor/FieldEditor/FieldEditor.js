@@ -1,7 +1,8 @@
 const util = require('util');
 const path = require('path');
 const fs   = require('fs');
-const editor = require('../../../editor');
+
+const qforms = require('../../../../backend');
 const Editor = require('../Editor');
 
 class FieldEditor extends Editor {
@@ -12,7 +13,7 @@ class FieldEditor extends Editor {
     }
 
     async changeClass(newClassName) {
-        const newData = eval(`editor.${newClassName}Editor.createData(this.attributes())`);
+        const newData = eval(`qforms.${newClassName}Editor.createData(this.attributes())`);
         await this.setData(newData);
         return newData;
     }

@@ -1,7 +1,6 @@
 const JsonFile = require('../../JsonFile');
 
-const editor = require('../../editor');
-// const ApplicationEditor = require('../Editor/ApplicationEditor');
+const qforms = require('../../../backend');
 
 class EditorController {
     constructor(appInfo, hostApp, application) {
@@ -36,7 +35,7 @@ class EditorController {
         console.log('EditorController.createApplicationEditor');
         const appFile = new JsonFile(this.appInfo.filePath);
         await appFile.read();
-        return new editor.ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
+        return new qforms.ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
     }
 }
 
