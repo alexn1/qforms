@@ -13,6 +13,7 @@ const logConfig = require('./log.config.json');
 const MonitorModel = require('./monitor/MonitorModel');
 const JsonFile = require('../backend/JsonFile');
 const Context = require('../backend/Context');
+const Application = require('./viewer/Model/Application/Application');
 
 // post actions
 const ACTIONS = [
@@ -188,7 +189,7 @@ class HostApp {
 
     async createApplication(appFilePath, env) {
         // console.log(`HostApp.createApplication: ${appFilePath}`);
-        const application = await qforms.Application.create(appFilePath, this, env);
+        const application = await Application.create(appFilePath, this, env);
         await application.init();
         return application;
     }
