@@ -1,5 +1,5 @@
 const _ = require('underscore');
-const run = require('./run');
+const HostApp = require('./HostApp');
 
 function getCommandLineParams() {
     const params = process.argv.map(arg => {
@@ -16,5 +16,5 @@ function getCommandLineParams() {
 }
 
 main(); function main() {
-    run(getCommandLineParams());
+    HostApp.run(getCommandLineParams());
 }
