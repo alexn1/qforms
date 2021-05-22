@@ -7,7 +7,7 @@ const http = require('http');
 
 const qforms  = require('./index');
 
-const Test    = require('./test/Test');
+// const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');
 const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
