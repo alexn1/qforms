@@ -831,7 +831,7 @@ class HostApp {
         process.on('SIGINT' , hostApp.onProcessSIGINT.bind(hostApp));
         process.on('SIGTERM', hostApp.onProcessSIGTERM.bind(hostApp));
         process.on('exit'   , hostApp.onProcessExit.bind(hostApp));
-        process.on('unhandledRejection', onUnhandledRejection);
+        process.on('unhandledRejection', hostApp.onUnhandledRejection.bind(hostApp));
 
         // httpServer
         const httpServer = http.createServer(server);
@@ -871,6 +871,14 @@ class HostApp {
         console.log('process.exit:', code);
     }
 
+    async onUnhandledRejection(err) {
+        console.error('HostApp.onUnhandledRejection', err);
+        if (_hostApp) {
+            err.message = `unhandledRejection: ${err.message}`;
+            await _hostApp.logError(null, err);
+        }
+    }
+
 
 }
 
@@ -904,13 +912,7 @@ function onError(err) {
     }*/
 }
 
-async function onUnhandledRejection(err) {
-    console.error('onUnhandledRejection', err);
-    if (_hostApp) {
-        err.message = `unhandledRejection: ${err.message}`;
-        await _hostApp.logError(null, err);
-    }
-}
+
 
 
 module.exports = HostApp;
