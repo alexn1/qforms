@@ -2,8 +2,9 @@ const util = require('util');
 const path = require('path');
 const fs   = require('fs');
 
-const qforms = require('../../../../backend');
 const Editor = require('../Editor');
+const qforms = require('../../../../backend');
+
 
 class FieldEditor extends Editor {
 

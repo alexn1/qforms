@@ -1,6 +1,7 @@
 const path = require('path');
-const qforms = require('../../../../backend');
+
 const Editor = require('../Editor');
+const qforms = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
