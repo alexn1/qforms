@@ -61,7 +61,6 @@ class Model extends BaseModel {
     async createChildModel(colName, data) {
         const modelName = BaseModel.getName(data);
         const className = BaseModel.getClassName(data);
-        // let js;
         const dirPath = this.getDirPath();
         let CustomClass = null;
         if (dirPath) {
@@ -70,10 +69,7 @@ class Model extends BaseModel {
             if (exists) {
                 CustomClass = require(customClassFilePath);
             }
-            // js = await Helper.getFileContent(customClassFilePath);
-            // if (js) console.log('customClassFilePath:', customClassFilePath, js);
         }
-        // const Class = js ? eval(js) : qforms[className];
         const Class = CustomClass ? CustomClass : backend[className];
         return new Class(data, this);
     }

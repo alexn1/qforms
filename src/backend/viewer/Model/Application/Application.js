@@ -18,9 +18,6 @@ class Application extends Model {
         const data = JSON.parse(json);
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         const exists = await Helper.exists(customClassFilePath);
-        //console.log('customClassFilePath:', customClassFilePath);
-        // const js = await Helper.getFileContent(customClassFilePath);
-        // const Class = js ? eval(js) : Application;
         const Class = exists ? require(customClassFilePath) : Application;
         return new Class(data, appInfo, hostApp, env);
     }
