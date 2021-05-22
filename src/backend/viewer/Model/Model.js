@@ -1,5 +1,5 @@
 const path    = require('path');
-const viewer  = require('../../viewer');
+const qforms  = require('../../../backend');
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
 
@@ -72,8 +72,8 @@ class Model extends BaseModel {
             // js = await Helper.getFileContent(customClassFilePath);
             // if (js) console.log('customClassFilePath:', customClassFilePath, js);
         }
-        // const Class = js ? eval(js) : viewer[className];
-        const Class = CustomClass ? CustomClass : viewer[className];
+        // const Class = js ? eval(js) : qforms[className];
+        const Class = CustomClass ? CustomClass : qforms[className];
         return new Class(data, this);
     }
 

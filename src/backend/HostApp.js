@@ -5,7 +5,8 @@ const session    = require('express-session');
 const express    = require('express');
 const http = require('http');
 
-const qforms  = require('./viewer');
+const qforms  = require('./index');
+
 const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
 const Helper  = require('./Helper');

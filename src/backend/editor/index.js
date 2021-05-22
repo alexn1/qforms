@@ -1,5 +1,3 @@
-/*
-module.exports.Editor                            = require('./Editor/Editor');
 module.exports.EditorController                  = require('./EditorController/EditorController');
 module.exports.ActionEditorController            = require('./EditorController/ActionEditorController/ActionEditorController');
 module.exports.DatabaseEditorController          = require('./EditorController/DatabaseEditorController/DatabaseEditorController');
@@ -14,10 +12,9 @@ module.exports.ApplicationEditorController       = require('./EditorController/A
 module.exports.FieldEditorController             = require('./EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./EditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController              = require('./EditorController/PageEditorController/PageEditorController');
-*/
 
 
-
+module.exports.Editor                            = require('./Editor/Editor');
 module.exports.ActionEditor                      = require('./Editor/ActionEditor/ActionEditor');
 module.exports.ApplicationEditor                 = require('./Editor/ApplicationEditor/ApplicationEditor');
 module.exports.DataSourceEditor                  = require('./Editor/DataSourceEditor/DataSourceEditor');

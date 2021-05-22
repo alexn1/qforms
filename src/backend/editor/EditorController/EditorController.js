@@ -1,5 +1,7 @@
 const JsonFile = require('../../JsonFile');
-const ApplicationEditor = require('../Editor/ApplicationEditor');
+
+const editor = require('../../editor');
+// const ApplicationEditor = require('../Editor/ApplicationEditor');
 
 class EditorController {
     constructor(appInfo, hostApp, application) {
@@ -34,7 +36,7 @@ class EditorController {
         console.log('EditorController.createApplicationEditor');
         const appFile = new JsonFile(this.appInfo.filePath);
         await appFile.read();
-        return new ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
+        return new editor.ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
     }
 }
 
