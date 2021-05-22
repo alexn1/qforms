@@ -1,7 +1,8 @@
-const path    = require('path');
-const qforms  = require('../../../backend');
+const path = require('path');
+
 const BaseModel = require('../../BaseModel');
 const Helper = require('../../Helper');
+const qforms  = require('../../../backend');
 
 class Model extends BaseModel {
 

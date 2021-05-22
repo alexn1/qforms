@@ -1,4 +1,4 @@
-const HostApp = require('./HostApp');
+const { HostApp } = require('./index');
 
 function getCommandLineParams() {
     return process.argv
