@@ -173,7 +173,7 @@ class HostApp {
         this.server.use(this._e500.bind(this));
     }
 
-    async createApplicationIfNotExists(req, context) {
+    async createApplicationIfNotExists(req, context: Context) {
         // console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
@@ -188,14 +188,14 @@ class HostApp {
         return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
     }
 
-    getApplication(context) {
+    getApplication(context: Context) {
         if (!context.route) throw new Error('no context.route');
         const application = this.applications[context.route];
         if (!application) throw new Error(`no application for route: ${context.route}`);
         return application;
     }
 
-    getAppFilePath(context) {
+    getAppFilePath(context: Context) {
         return path.join(this.appsDirPath, context.appDirName, context.appFileName + '.json');
     }
 
@@ -206,7 +206,7 @@ class HostApp {
         return application;
     }
 
-    async handleViewerGet(req, res, context) {
+    async handleViewerGet(req, res, context: Context) {
         console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
@@ -224,7 +224,7 @@ class HostApp {
         }
     }
 
-    async handleViewerPost(req, res, context) {
+    async handleViewerPost(req, res, context: Context) {
         // console.log('HostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
         if (req.body.action === 'login') {
@@ -240,7 +240,7 @@ class HostApp {
         }
     }
 
-    async loginGet(req, res, context) {
+    async loginGet(req, res, context: Context) {
         console.log('HostApp.loginGet');
         const application = this.getApplication(context);
         const users = await application.getUsers(context);
@@ -254,7 +254,7 @@ class HostApp {
         });
     }
 
-    async loginPost(req, res, context) {
+    async loginPost(req, res, context: Context) {
         console.log('HostApp.loginPost');
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
@@ -283,7 +283,7 @@ class HostApp {
     }
 
     // fill application
-    async fill(req, context) {
+    async fill(req, context: Context) {
         console.log('HostApp.fill', this.getApplication(context).getName());
         const application = this.getApplication(context);
         const start = Date.now();
@@ -294,7 +294,7 @@ class HostApp {
     }
 
     // action (fill page)
-    async page(req, res, context) {
+    async page(req, res, context: Context) {
         console.log('HostApp.page', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -305,7 +305,7 @@ class HostApp {
     }
 
     // action
-    async update(req, res, context) {
+    async update(req, res, context: Context) {
         console.log('HostApp.update', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -317,7 +317,7 @@ class HostApp {
     }
 
     // action
-    async select(req, res, context) {
+    async select(req, res, context: Context) {
         console.log('HostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
@@ -341,7 +341,7 @@ class HostApp {
     }
 
     // action
-    async selectSingle(req, res, context) {
+    async selectSingle(req, res, context: Context) {
         console.log('HostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
@@ -366,7 +366,7 @@ class HostApp {
     }
 
     // action
-    async selectMultiple(req, res, context) {
+    async selectMultiple(req, res, context: Context) {
         console.log('HostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
@@ -391,7 +391,7 @@ class HostApp {
     }
 
     // action
-    async insert(req, res, context) {
+    async insert(req, res, context: Context) {
         console.log('HostApp.insert', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -411,7 +411,7 @@ class HostApp {
     }
 
     // action
-    async _delete(req, res, context) {
+    async _delete(req, res, context: Context) {
         console.log('HostApp._delete', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -431,7 +431,7 @@ class HostApp {
     }
 
     // action
-    async rpc(req, res, context) {
+    async rpc(req, res, context: Context) {
         console.log('HostApp.rpc', req.body);
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -463,14 +463,14 @@ class HostApp {
     }
 
     // action
-    async test(req, res, context) {
+    async test(req, res, context: Context) {
         console.log('HostApp.test', req.body);
         // const result = await Test[req.body.name](req, res, context, this.getApplication(context));
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
     }
 
-    async appFile(req, context, application) {
+    async appFile(req, context: Context, application) {
         // console.log('HostApp.appFile', context.uri);
         const filePath = path.join(application.appInfo.dirPath, 'build', context.uri);
         // console.log('filePath:', filePath);
@@ -490,7 +490,7 @@ class HostApp {
         return null;
     }
 
-    async viewerFile(req, res, context) {
+    async viewerFile(req, res, context: Context) {
         // console.log('HostApp.viewerFile');
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
@@ -527,7 +527,7 @@ class HostApp {
         }
     }
 
-    async editorFile(req, res, context) {
+    async editorFile(req, res, context: Context) {
         // console.log('HostApp.editorFile', context.uri);
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
@@ -543,7 +543,7 @@ class HostApp {
         }
     }
 
-    async handleEditorGet(req, res, context) {
+    async handleEditorGet(req, res, context: Context) {
         console.log('HostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req, context);
         const appFile = new JsonFile(application.appInfo.filePath);
@@ -561,7 +561,7 @@ class HostApp {
         });
     }
 
-    async handleEditorPost(req, res, context) {
+    async handleEditorPost(req, res, context: Context) {
         console.log('HostApp.handleEditorPost', context.params);
         const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = application.appInfo;
@@ -649,7 +649,7 @@ class HostApp {
         }
     }
 
-    async logRequest(req, context, time) {
+    async logRequest(req, context: Context, time) {
         try {
             const application = this.getApplication(context);
             let args = '';
