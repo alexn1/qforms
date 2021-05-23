@@ -1,9 +1,25 @@
 const Helper = require('./Helper');
 
 class Context {
+    req: any;
+    uri?: string;
+    module?: string;
+    appDirName?: string;
+    appFileName?: string;
+    env?: any;
+    route?: string;
+    user?: any;
+    query?: any;
+    params?: any;
+    changes?: any;
+    newMode?: any;
+    parentPageName?: string;
+    connections?: any;
+    querytime?: any;
+
     static create(req) {
         if (!req) throw new Error('no req');
-        const context = {req};
+        const context: Context = {req};
 
         // request
         context.uri         = req.params['0'];
@@ -16,19 +32,21 @@ class Context {
         context.route = [context.appDirName, context.appFileName, context.env].join('/');
 
         // user
-        if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
+        if (req.session.user && req.session.user[context.route]) {
+            context.user = req.session.user[context.route];
+        }
 
         // params
-        if (context.query            === undefined) context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
-        if (context.params           === undefined) context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
-        if (context.changes          === undefined) context.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
-        if (context.newMode          === undefined) context.newMode          = req.body.newMode;
-        if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
+        /*if (context.query            === undefined)*/ context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
+        /*if (context.params           === undefined)*/ context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
+        /*if (context.changes          === undefined)*/ context.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
+        /*if (context.newMode          === undefined)*/ context.newMode          = req.body.newMode;
+        /*if (context.parentPageName   === undefined)*/ context.parentPageName   = req.body.parentPageName;
 
         // cnn
-        if (context.connections      === undefined) context.connections      = {};
-        if (context.querytime        === undefined) context.querytime        = {};
-        if (context.querytime.params === undefined) context.querytime.params = {};
+        /*if (context.connections      === undefined)*/ context.connections      = {};
+        /*if (context.querytime        === undefined)*/ context.querytime        = {};
+        /*if (context.querytime.params === undefined)*/ context.querytime.params = {};
         /*context.files = {};
         if (req.files) {
             for (const name in req.files) {
@@ -75,4 +93,4 @@ class Context {
     }
 }
 
-module.exports = Context;
+export = Context;
