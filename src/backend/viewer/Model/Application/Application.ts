@@ -9,9 +9,9 @@ import DataSource from '../DataSource/DataSource';
 import Helper from '../../../Helper';
 import Page from '../Page/Page';
 import PageLink from '../PageLink/PageLink';
+import Context   from '../../../Context';
+import JsonFile from '../../../JsonFile';
 
-const Context   = require('../../../Context');
-const JsonFile  = require('../../../JsonFile');
 const text = require('../../../text');
 
 class Application extends Model {

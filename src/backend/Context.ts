@@ -1,4 +1,4 @@
-const Helper = require('./Helper');
+import Helper from './Helper';
 
 class Context {
     req: any;

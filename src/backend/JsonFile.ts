@@ -1,14 +1,18 @@
-const Helper = require('./Helper');
-const BaseModel = require('./BaseModel');
+import Helper from './Helper';
+import BaseModel from './BaseModel';
 
 class JsonFile {
-    constructor(filePath, data) {
+    filePath: string;
+    content: string;
+    data: any;
+
+    constructor(filePath, data = null) {
         this.filePath = filePath;
+        this.data     = data;
         this.content  = null;
-        this.data     = data || null;
     }
 
-    async create() {
+    async create(): Promise<void> {
         const exists = await Helper.exists(this.filePath);
         if (exists) throw new Error(`File ${this.filePath} already exists`);
         if (this.data) {
@@ -21,13 +25,13 @@ class JsonFile {
         await Helper.writeFile2(this.filePath, this.content);
     }
 
-    async read() {
+    async read():Promise<void> {
         const content = await Helper.readTextFile(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
     }
 
-    async save() {
+    async save(): Promise<void> {
         console.log('JsonFile.save');
         this.content = JSON.stringify(this.data, null, 4);
         await Helper.writeFile2(this.filePath, this.content);
@@ -40,4 +44,4 @@ class JsonFile {
     }
 }
 
-module.exports = JsonFile;
+export = JsonFile;
