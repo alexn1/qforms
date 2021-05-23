@@ -1,11 +1,13 @@
 class BaseModel {
-    constructor(data, parent) {
+    data: any;
+    parent: any;
+    constructor(data: any, parent: any) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
         this.data = data;
         this.parent = parent;
     }
 
-    static getClassName(data) {
+    static getClassName(data): string {
         return data['@class'];
     }
 
@@ -13,7 +15,7 @@ class BaseModel {
         return data['@attributes'][name];
     }
 
-    static getName(data) {
+    static getName(data): string {
         return BaseModel.getAttr(data, 'name');
     }
 
@@ -22,11 +24,11 @@ class BaseModel {
         return ['local', ...list];
     }
 
-    getClassName() {
+    getClassName(): string {
         return this.data['@class'];
     }
 
-    getName() {
+    getName(): string {
         return BaseModel.getName(this.data);
     }
 
@@ -39,21 +41,21 @@ class BaseModel {
         return this.data['@attributes'][name];
     }
 
-    async setAttr(name, value) {
+    async setAttr(name, value): Promise<void> {
         this.data['@attributes'][name] = value;
     }
 
-    isAttr(name) {
+    isAttr(name): boolean {
         return this.data['@attributes'][name] !== undefined;
     }
 
-    isData(colName, name) {
+    isData(colName, name): boolean {
         if (!colName) throw new Error('isData: no colName');
         if (!name) throw new Error('isData: no name');
         return !!this.getColItemData(colName, name);
     }
 
-    getData() {
+    getData(): any {
         return this.data;
     }
 
@@ -106,4 +108,4 @@ class BaseModel {
     }
 
 }
-module.exports = BaseModel;
+export = BaseModel;
