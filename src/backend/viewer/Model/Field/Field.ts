@@ -1,10 +1,11 @@
 const path    = require('path');
-const Helper = require('../../../Helper');
-const Model  = require('../Model');
-const Application = require('../Application/Application');
+
+import Model from '../Model';
+import Helper from '../../../Helper';
+import Application from '../Application/Application';
 
 class Field extends Model {
-    static async create(data, parent) {
+    static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     }
 
@@ -12,7 +13,7 @@ class Field extends Model {
     //     super(data, parent);
     // }
 
-    getDirPath() {
+    getDirPath(): string {
         return path.join(this.parent.getDirPath(), 'fields', this.getName());
     }
 
@@ -79,4 +80,4 @@ class Field extends Model {
 
 }
 
-module.exports = Field;
+export = Field;
