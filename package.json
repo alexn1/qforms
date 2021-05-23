@@ -26,6 +26,7 @@
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "@types/node": "^15.6.0",
     "babel-preset-react-app": "^3.1.2",
     "chai": "^3.2.0",
     "del": "^1.2.1",
@@ -46,7 +47,8 @@
     "build-jsx": "babel --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx",
     "build-jsx-watch": "babel --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx --watch",
     "test-jsx": "babel --out-dir apps/test/build/js apps/test/jsx --watch",
-    "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css"
+    "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
+    "build-ts": "tsc -p ."
   },
   "repository": {
     "type": "git",

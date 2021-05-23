@@ -15,22 +15,22 @@ function backend_text() {
 }
 
 function backend_root() {
-    return gulp.src(path.join(SRC_PATH, 'backend/*.*'))
+    return gulp.src(path.join(SRC_PATH, 'backend/*.js'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend')));
 }
 
 function backend_viewer() {
-    return gulp.src(path.join(SRC_PATH, 'backend/viewer/**/*'))
+    return gulp.src(path.join(SRC_PATH, 'backend/viewer/**/*.js'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend/viewer')));
 }
 
 function backend_editor() {
-    return gulp.src(path.join(SRC_PATH, 'backend/editor/**/*'))
+    return gulp.src(path.join(SRC_PATH, 'backend/editor/**/*.js'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend/editor')));
 }
 
 function backend_monitor() {
-    return gulp.src(path.join(SRC_PATH, 'backend/monitor/**/*'))
+    return gulp.src(path.join(SRC_PATH, 'backend/monitor/**/*.js'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend/monitor')));
 }
 
