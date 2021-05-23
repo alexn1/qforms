@@ -1,8 +1,5 @@
 class Context {
     static create(context) {
-        if (context === undefined) {
-            context = {};
-        }
         if (!context.req) throw new Error('no req');
         const req = context.req;
 
