@@ -1,4 +1,4 @@
-const { HostApp } = require('./index');
+import { HostApp } from './index';
 
 function getCommandLineParams() {
     return process.argv
