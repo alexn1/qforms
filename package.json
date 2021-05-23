@@ -38,7 +38,8 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^1.2.0",
     "prettier": "^1.13.7",
-    "should": "^7.0.4"
+    "should": "^7.0.4",
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "node build/lib/backend/start.js",
@@ -75,11 +76,11 @@
     "authentication": "false",
     "handleException": true,
     "log": {
-      "host"       : "localhost",
-      "port"       : 5432,
-      "database"   : "car",
-      "user"       : "postgres",
-      "password"   : "example"
+      "host": "localhost",
+      "port": 5432,
+      "database": "car",
+      "user": "postgres",
+      "password": "example"
     }
   }
 }
