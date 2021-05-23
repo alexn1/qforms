@@ -687,7 +687,7 @@ class HostApp {
         console.warn('HostApp.moduleGet', req.params);
         let context = null;
         try {
-            context = Context.create({req});
+            context = Context.create(req);
             if (context.module === 'view') {
                 await this.handleViewerGet(req, res, context);
             } else if (context.module === 'edit') {
@@ -738,7 +738,7 @@ class HostApp {
         console.warn('modulePost', req.params, req.body);
         let context = null;
         try {
-            context = Context.create({req});
+            context = Context.create(req);
             if (context.module === 'view') {
                 const time = await this.handleViewerPost(req, res, context);
                 // await this.logRequest(req, context, time);
@@ -758,7 +758,7 @@ class HostApp {
         // console.warn('moduleFile', req.originalUrl);
         let context = null;
         try {
-            context = Context.create({req});
+            context = Context.create(req);
             if (context.module === 'view') {
                 await this.viewerFile(req, res, context);
             } else if (context.module === 'edit') {

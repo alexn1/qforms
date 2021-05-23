@@ -1,11 +1,11 @@
 const Helper = require('./Helper');
 
 class Context {
-    static create(context) {
-        if (!context.req) throw new Error('no req');
-        const req = context.req;
+    static create(req) {
+        if (!req) throw new Error('no req');
+        const context = {req};
 
-        // req.params
+        // request
         context.uri         = req.params['0'];
         context.module      = req.params.module;
         context.appDirName  = req.params.appDirName;
@@ -13,17 +13,19 @@ class Context {
         context.env         = req.params.env;
 
         // route
-        context.route       = [context.appDirName, context.appFileName, context.env].join('/');
+        context.route = [context.appDirName, context.appFileName, context.env].join('/');
 
         // user
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
 
+        // params
         if (context.query            === undefined) context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
         if (context.params           === undefined) context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
         if (context.changes          === undefined) context.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
 
+        // cnn
         if (context.connections      === undefined) context.connections      = {};
         if (context.querytime        === undefined) context.querytime        = {};
         if (context.querytime.params === undefined) context.querytime.params = {};
