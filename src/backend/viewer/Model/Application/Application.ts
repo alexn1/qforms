@@ -7,6 +7,7 @@ import Action from '../Action/Action';
 import Database from '../Database/Database';
 import DataSource from '../DataSource/DataSource';
 import Helper from '../../../Helper';
+import Page from '../Page/Page';
 
 const PageLink  = require('../PageLink/PageLink');
 const Context   = require('../../../Context');
@@ -182,7 +183,7 @@ class Application extends Model {
         return true;
     }
 
-    async getPage(context, pageLinkName) {
+    async getPage(context, pageLinkName): Promise<Page> {
         // console.log('Application.getPage', pageLinkName);
         if (context.user && this.authorizePage(context.user, pageLinkName) === false) {
             throw new Error('authorization error');

@@ -1,8 +1,10 @@
 import Model from '../Model';
-const Param = require('../Param/Param');
+import Param from '../Param/Param';
+import Application from '../Application/Application';
+import Table from '../Table/Table';
 
 class Database extends Model {
-    tables: any[];
+    tables: Table[];
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);
@@ -83,7 +85,7 @@ class Database extends Model {
         return query;
     }
 
-    createParam(name) {
+    createParam(name): Param {
         return new Param(this.getColItemData('params', name), this);
     }
 
@@ -98,15 +100,15 @@ class Database extends Model {
         };
     }
 
-    getDefaultPort() {
+    getDefaultPort(): number {
         return null;
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent;
     }
 
-    getTable(name) {
+    getTable(name): Table {
         if (!name) throw new Error('getTable: no name');
         const table = this.tables.find(table => table.getName() === name);
         if (!table) throw new Error(`no table with name: ${name}`);
