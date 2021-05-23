@@ -1,5 +1,5 @@
-const path      = require('path');
-const gulp      = require('gulp');
+const path = require('path');
+const gulp = require('gulp');
 
 const frontend_common = require("./frontend_common");
 const frontend_editor = require("./frontend_editor");
