@@ -3,6 +3,8 @@ const axios = require('axios');
 
 import BaseModel from '../../../BaseModel';
 import Model from '../Model';
+import Action from '../Action/Action';
+import Database from '../Database/Database';
 
 const PageLink  = require('../PageLink/PageLink');
 
@@ -15,8 +17,8 @@ class Application extends Model {
     appInfo: any;
     hostApp: any;
     env: any;
-    databases: any[];
-    actions: any[];
+    databases: Database[];
+    actions: Action[];
     dataSources: any[];
     pages: any;
     links: any[];
@@ -271,7 +273,7 @@ class Application extends Model {
         return this;
     }
 
-    getDatabase(name) {
+    getDatabase(name): Database {
         if (!name) throw new Error('getDatabase: no name');
         const database = this.databases.find(database => database.getName() === name);
         if (!database) throw new Error(`no database with name: ${name}`);
