@@ -202,7 +202,7 @@ class HostApp {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
-            res.render('viewer/view', {
+            res.render('viewer/index', {
                 version       : pkg.version,
                 application   : application,
                 title         : application.getTitle(context, data),
@@ -539,7 +539,7 @@ class HostApp {
         const app = JSON.parse(appFile.content);
         app.env = this.nodeEnv;
 
-        res.render('editor/view', {
+        res.render('editor/index', {
             version        : pkg.version,
             app            : app,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
@@ -598,7 +598,7 @@ class HostApp {
         console.log('HostApp.appGet');
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         // console.log('appInfos:', appInfos);
-        res.render('app/view', {
+        res.render('app/index', {
             // req           : req,
             hostApp       : this,
             version       : pkg.version,
@@ -616,7 +616,7 @@ class HostApp {
         console.log('HostApp.monitorGet');
         const model = new MonitorModel(this);
         const dump = model.dump();
-        res.render('monitor/view', {
+        res.render('monitor/index', {
             version: pkg.version,
             dump   : dump
         });
