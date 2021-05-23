@@ -1,6 +1,8 @@
 // backend
+module.exports.Context = require('./Context');
 module.exports.Helper  = require('./Helper');
 module.exports.HostApp = require('./HostApp');
+
 
 // viewer
 // module.exports.Model                             = require('./viewer/Model/Model');
