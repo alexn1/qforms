@@ -415,13 +415,21 @@ class Helper {
     static encodeValue(value) {
         return JSON.stringify(value);
     }
-    static decodeValues(obj) {
+    /*static decodeValues(obj) {
         if (!obj) throw new Error('decodeValues: need object');
         const obj2 = {};
         for (const name in obj) {
             obj2[name] = Helper.decodeValue(obj[name]);
         }
         return obj2;
+    }*/
+    static decodeObject(obj) {
+        const dObj = {};
+        for (const name in obj) {
+            if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
+            dObj[name] = Helper.decodeValue(obj[name]);
+        }
+        return dObj;
     }
 }
 

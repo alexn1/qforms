@@ -18,8 +18,8 @@ class Context {
         // user
         if (req.session.user && req.session.user[context.route]) context.user = req.session.user[context.route];
 
-        if (context.query            === undefined) context.query            = req.query        ? Context.decodeObject(req.query)         : {};
-        if (context.params           === undefined) context.params           = req.body.params  ? Context.decodeObject(req.body.params)   : {};
+        if (context.query            === undefined) context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
+        if (context.params           === undefined) context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
         if (context.changes          === undefined) context.changes          = req.body.changes ? Context.decodeChanges(req.body.changes) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
@@ -46,18 +46,18 @@ class Context {
     /*static decodeValue(rawValue) {
         return JSON.parse(rawValue, Context.dateTimeReviver);
     }*/
-    static decodeObject(obj) {
+    /*static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
             if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
             dObj[name] = Helper.decodeValue(obj[name]);
         }
         return dObj;
-    }
+    }*/
     static decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
-            dChanges[key] = Context.decodeObject(changes[key]);
+            dChanges[key] = Helper.decodeObject(changes[key]);
         }
         return dChanges;
     }
