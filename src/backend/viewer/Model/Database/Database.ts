@@ -28,7 +28,7 @@ class Database extends Model {
         throw new Error('Database.queryResult not implemented');
     }
 
-    async queryRows(context, query, params) {
+    async queryRows(context, query, params): Promise<any[]> {
         throw new Error('Database.queryRows not implemented');
     }
 
@@ -55,7 +55,7 @@ class Database extends Model {
         throw new Error('Database.rollback not implemented');
     }
 
-    getUpdateQuery(tableName, values, where) {
+    getUpdateQuery(tableName, values, where): string {
         console.log('Database.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
@@ -66,7 +66,7 @@ class Database extends Model {
         return `update ${tableName} set ${valuesString} where ${whereString}`;
     }
 
-    getInsertQuery(tableName, values) {
+    getInsertQuery(tableName, values): string {
         console.log('Database.getInsertQuery');
         const columns = Object.keys(values);
         const columnsString = columns.join(', ');
@@ -76,7 +76,7 @@ class Database extends Model {
         return query;
     }
 
-    getDeleteQuery(tableName, rowKeyValues) {
+    getDeleteQuery(tableName, rowKeyValues): string {
         console.log('Database.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns.map(keyColumn => `${keyColumn} = {${keyColumn}}`).join(' and ');

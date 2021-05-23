@@ -68,7 +68,7 @@ class PostgreSqlDatabase extends Database {
         return result;
     }
 
-    async queryRows(context, query, params = null) {
+    async queryRows(context, query, params = null): Promise<any[]> {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
@@ -107,7 +107,7 @@ class PostgreSqlDatabase extends Database {
         return {sql, values};
     }
 
-    getDeleteQuery(tableName, rowKeyValues) {
+    getDeleteQuery(tableName, rowKeyValues): string {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
@@ -116,11 +116,11 @@ class PostgreSqlDatabase extends Database {
         return query;
     }
 
-    getUpdateQuery(tableName, values, where) {
+    getUpdateQuery(tableName, values, where): string {
         return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
 
-    static getUpdateQuery(tableName, values, where) {
+    static getUpdateQuery(tableName, values, where): string {
         // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
@@ -131,7 +131,7 @@ class PostgreSqlDatabase extends Database {
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
 
-    getInsertQuery(tableName, values) {
+    getInsertQuery(tableName, values): string {
         // console.log('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length) return `insert into "${tableName}" default values`;
@@ -142,7 +142,7 @@ class PostgreSqlDatabase extends Database {
         return query;
     }
 
-    async getTableList() {
+    async getTableList(): Promise<string[]> {
         console.log('PostgreSqlDatabase.getTableList');
         const config = this.getConfig();
         const client = new Client(config);
@@ -177,7 +177,7 @@ class PostgreSqlDatabase extends Database {
         return tableInfo;
     }
 
-    getColumnTypeByDataType(dataType) {
+    getColumnTypeByDataType(dataType): string {
         switch (dataType) {
             case 'integer':
             case 'numeric':
@@ -212,7 +212,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return rows;
     }
 
-    async query(query) {
+    async query(query): Promise<any[]> {
         const config = this.getConfig();
         const client = new Client(config);
         await client.connect();
@@ -221,7 +221,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return results.rows;
     }
 
-    getDefaultPort() {
+    getDefaultPort(): number {
         return 5432;
     }
 

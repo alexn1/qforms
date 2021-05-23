@@ -43,7 +43,7 @@ class MySqlDatabase extends Database {
         };
     }
 
-    getDefaultPort() {
+    getDefaultPort(): number {
         return 3306;
     }
 
@@ -65,7 +65,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    async queryRows(context, query, params): Promise<any> {
+    async queryRows(context, query, params): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         Database.checkParams(query, params);
         const nest = true;
@@ -102,7 +102,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    _getRows(result, fields) {
+    _getRows(result, fields): any[] {
         //console.log('MySqlDatabase._getRows');
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
@@ -163,7 +163,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    static queryFormat(query, params = {}) {
+    static queryFormat(query, params = {}): string {
         console.log('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -188,7 +188,7 @@ class MySqlDatabase extends Database {
         }
     }
 
-    async getTableList() {
+    async getTableList(): Promise<string[]> {
         console.log('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
@@ -245,7 +245,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         });
     }
 
-    getColumnTypeByDataType(dataType) {
+    getColumnTypeByDataType(dataType): string {
         switch (dataType) {
             case 'int(10) unsigned':
                 return 'number';
