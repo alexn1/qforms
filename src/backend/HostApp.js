@@ -202,7 +202,7 @@ class HostApp {
             this.loginGet(req, res, context);
         } else {
             const data = await this.fill(req, context);
-            res.render('viewer/view', {
+            res.render('ejs/viewer/view', {
                 version       : pkg.version,
                 application   : application,
                 title         : application.getTitle(context, data),
@@ -232,7 +232,7 @@ class HostApp {
         console.log('HostApp.loginGet');
         const application = this.getApplication(context);
         const users = await application.getUsers(context);
-        res.render('viewer/login', {
+        res.render('ejs/viewer/login', {
             version       : pkg.version,
             application   : application,
             REQUEST_URI   : req.url,
@@ -258,7 +258,7 @@ class HostApp {
             res.redirect(req.url);
         } else {
             const users = await application.getUsers(context);
-            res.render('viewer/login', {
+            res.render('ejs/viewer/login', {
                 version    : pkg.version,
                 application: application,
                 caption    : application.getAttr('caption'),
@@ -539,7 +539,7 @@ class HostApp {
         const app = JSON.parse(appFile.content);
         app.env = this.nodeEnv;
 
-        res.render('editor/view', {
+        res.render('ejs/editor/view', {
             version        : pkg.version,
             app            : app,
             runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
@@ -598,7 +598,7 @@ class HostApp {
         console.log('HostApp.appGet');
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         // console.log('appInfos:', appInfos);
-        res.render('app/view', {
+        res.render('ejs/app/view', {
             // req           : req,
             hostApp       : this,
             version       : pkg.version,
@@ -792,7 +792,7 @@ class HostApp {
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
             res.end(typeof err === 'string' ? err : err.message);
         } else {
-            res.render('error', {
+            res.render('ejs/error', {
                 message: err.message,
                 error  : req.app.get('env') === 'development' ? err : {}
             });

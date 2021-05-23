@@ -19,7 +19,7 @@
     <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // console.log('app/view.ejs DOMContentLoaded');
+            // console.log('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const ctrl = new HomeController(data);
             ctrl.init();
