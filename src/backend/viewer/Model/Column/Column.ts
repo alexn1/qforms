@@ -1,4 +1,5 @@
-const Model = require('../Model');
+import Model from '../Model';
+import Application from '../Application/Application';
 
 class Column extends Model {
 
@@ -7,19 +8,19 @@ class Column extends Model {
     //     // console.log('Column.constructor', this.getName());
     // }
 
-    static async create(data, parent) {
+    static async create(data, parent): Promise<Column> {
         return new Column(data, parent);
     }
 
-    isKey() {
+    isKey(): boolean {
         return this.getAttr('key') === 'true';
     }
 
-    isAuto() {
+    isAuto(): boolean {
         return this.getAttr('auto') === 'true';
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent.parent;
     }
     getDbType() {
@@ -27,4 +28,4 @@ class Column extends Model {
     }
 }
 
-module.exports = Column;
+export = Column;
