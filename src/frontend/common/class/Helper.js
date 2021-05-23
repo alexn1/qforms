@@ -183,9 +183,16 @@ class Helper {
             return `${sign}${h}:${m}:${s}`;
         }
     }
+    static SECOND() {
+        return 1000;
+    }
+    static MINUTE() {
+        return 60 * Helper.SECOND();
+    }
+    static HOUR() {
+        return 60*Helper.MINUTE();
+    }
+    static DAY() {
+        return 24*Helper.HOUR();
+    }
 }
-
-Helper.SECOND = 1000;
-Helper.MINUTE = 60*Helper.SECOND;
-Helper.HOUR = 60*Helper.MINUTE;
-Helper.DAY = 24*Helper.HOUR;
