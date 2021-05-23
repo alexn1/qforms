@@ -1,12 +1,13 @@
-const path          = require('path');
-// const fs            = require('fs');
-// const child_process = require('child_process');
-// const stream        = require('stream');
-const Model  = require('../Model');
-// const BaseModel = require('../../../BaseModel');
-// const Helper = require('../../../Helper');      // for eval
+const path = require('path');
+
+import Model from '../Model';
+import DataSource from '../DataSource/DataSource';
+import Action from '../Action/Action';
 
 class Page extends Model {
+    dataSources: DataSource[];
+    actions: Action[];
+    forms: any[];
 
     constructor(data, parent) {
         super(data, parent);
@@ -61,4 +62,4 @@ class Page extends Model {
     }
 }
 
-module.exports = Page;
+export = Page;

@@ -5,10 +5,10 @@ import BaseModel from '../../../BaseModel';
 import Model from '../Model';
 import Action from '../Action/Action';
 import Database from '../Database/Database';
+import DataSource from '../DataSource/DataSource';
+import Helper from '../../../Helper';
 
 const PageLink  = require('../PageLink/PageLink');
-
-const Helper    = require('../../../Helper');
 const Context   = require('../../../Context');
 const JsonFile  = require('../../../JsonFile');
 const text = require('../../../text');
@@ -19,7 +19,7 @@ class Application extends Model {
     env: any;
     databases: Database[];
     actions: Action[];
-    dataSources: any[];
+    dataSources: DataSource[];
     pages: any;
     links: any[];
     js: any[];
@@ -338,7 +338,7 @@ class Application extends Model {
         return appInfos;
     }
 
-    getDataSource(name) {
+    getDataSource(name): DataSource {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 
