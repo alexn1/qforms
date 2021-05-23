@@ -1,7 +1,13 @@
 const path  = require('path');
-const Model = require('../Model');
+import Model from '../Model';
+import DataSource from '../DataSource/DataSource';
+import Action from '../Action/Action';
+import Field from '../Field/Field';
 
 class Form extends Model {
+    dataSources: DataSource[];
+    actions: Action[];
+    fields: Field[];
 
     static async create(data, parent) {
         throw new Error('Form is abstract');
@@ -126,4 +132,4 @@ class Form extends Model {
     }
 }
 
-module.exports = Form;
+export = Form;

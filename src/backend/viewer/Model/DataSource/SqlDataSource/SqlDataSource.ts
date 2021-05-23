@@ -96,7 +96,7 @@ class SqlDataSource extends DataSource {
         return [rows, count];
     }
 
-    async update(context) {
+    async update(context): Promise<any> {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
@@ -247,12 +247,6 @@ class SqlDataSource extends DataSource {
 
     async getRows() {
         return null;
-    }
-
-    getDatabase() {
-        const databaseName = this.getAttr('database');
-        if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
-        return this.getApp().getDatabase(databaseName);
     }
 
     getTable() {

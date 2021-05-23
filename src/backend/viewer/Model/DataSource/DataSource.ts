@@ -202,6 +202,15 @@ class DataSource extends Model {
     isDefaultOnTableForm() {
         return this.parent instanceof TableForm && this.getName() === 'default';
     }
+
+    getDatabase() {
+        const databaseName = this.getAttr('database');
+        if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
+        return this.getApp().getDatabase(databaseName);
+    }
+    async update(context) {
+        throw new Error('DataSource.update not implemented');
+    }
 }
 
 export = DataSource;
