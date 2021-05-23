@@ -20,7 +20,7 @@ class Context {
 
         if (context.query            === undefined) context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
         if (context.params           === undefined) context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
-        if (context.changes          === undefined) context.changes          = req.body.changes ? Context.decodeChanges(req.body.changes) : {};
+        if (context.changes          === undefined) context.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
         if (context.newMode          === undefined) context.newMode          = req.body.newMode;
         if (context.parentPageName   === undefined) context.parentPageName   = req.body.parentPageName;
 
@@ -54,13 +54,13 @@ class Context {
         }
         return dObj;
     }*/
-    static decodeChanges(changes) {
+    /*static decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
             dChanges[key] = Helper.decodeObject(changes[key]);
         }
         return dChanges;
-    }
+    }*/
     /*static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
             const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
