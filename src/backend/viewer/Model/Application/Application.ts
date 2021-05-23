@@ -1,15 +1,26 @@
 const path  = require('path');
 const axios = require('axios');
 
-const Model     = require('../Model');
+import BaseModel from '../../../BaseModel';
+import Model from '../Model';
+
 const PageLink  = require('../PageLink/PageLink');
-const BaseModel = require('../../../BaseModel');
+
 const Helper    = require('../../../Helper');
 const Context   = require('../../../Context');
 const JsonFile  = require('../../../JsonFile');
 const text = require('../../../text');
 
 class Application extends Model {
+    appInfo: any;
+    hostApp: any;
+    env: any;
+    databases: any[];
+    actions: any[];
+    dataSources: any[];
+    pages: any;
+    links: any[];
+    js: any[];
 
     static async create(appFilePath, hostApp, env) {
         // console.log('Application.create', appFilePath);
@@ -331,4 +342,4 @@ class Application extends Model {
 
 }
 
-module.exports = Application;
+export = Application;

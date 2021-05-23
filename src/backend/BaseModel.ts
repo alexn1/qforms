@@ -1,7 +1,7 @@
 class BaseModel {
     data: any;
     parent: any;
-    constructor(data: any, parent: any) {
+    constructor(data: any, parent?: any) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
         this.data = data;
         this.parent = parent;
