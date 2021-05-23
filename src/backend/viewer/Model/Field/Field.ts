@@ -2,6 +2,8 @@ const path = require('path');
 
 import Model from '../Model';
 import Application from '../Application/Application';
+import Page from '../Page/Page';
+import Form from '../Form/Form';
 
 const Helper = require('../../../Helper');
 
@@ -52,7 +54,7 @@ class Field extends Model {
         }
     }
 
-    getFullName() {
+    getFullName(): string {
         return [
             this.getForm().getPage().getName(),
             this.getForm().getName(),
@@ -64,18 +66,18 @@ class Field extends Model {
         row[this.getAttr('column')] = eval(this.getAttr('value'));
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent.parent;
     }
 
-    getPage() {
+    getPage(): Page {
         return this.parent.parent;
     }
 
-    getForm() {
+    getForm(): Form {
         return this.parent;
     }
-    isParam() {
+    isParam(): boolean {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
 
