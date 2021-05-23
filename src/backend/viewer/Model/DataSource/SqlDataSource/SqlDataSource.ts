@@ -1,8 +1,8 @@
-const DataSource = require('../DataSource');
-const Helper = require('../../../../Helper');
+import DataSource from '../DataSource';
+import Helper from '../../../../Helper';
 
 class SqlDataSource extends DataSource {
-
+    table: any;
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
@@ -287,4 +287,4 @@ class SqlDataSource extends DataSource {
     }
 }
 
-module.exports = SqlDataSource;
+export = SqlDataSource;
