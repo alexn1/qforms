@@ -1,14 +1,14 @@
 const path = require('path');
-const Model = require('../Model');
-const Helper = require('../../../Helper');
+import Model from '../Model';
+import Helper from '../../../Helper';
 const Page = require('../Page/Page');
-const Application = require('../Application/Application');
+import Application from '../Application/Application';
 const Form = require('../Form/Form');
 const RowForm = require('../Form/RowForm/RowForm');
 const TableForm = require('../Form/TableForm/TableForm');
 
 class DataSource extends Model {
-
+    keyColumns: any;
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
@@ -204,4 +204,4 @@ class DataSource extends Model {
     }
 }
 
-module.exports = DataSource;
+export = DataSource;
