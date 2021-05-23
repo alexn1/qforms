@@ -1,7 +1,8 @@
 const { Pool, Client } = require('pg');
-const Database = require('../Database');
+import Database from '../Database';
 
 class PostgreSqlDatabase extends Database {
+    pool: any;
     constructor(data, parent) {
         super(data, parent);
         // console.log('new PostgreSqlDatabase');
@@ -277,4 +278,4 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
 
 }
 
-module.exports = PostgreSqlDatabase;
+export = PostgreSqlDatabase;

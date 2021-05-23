@@ -130,4 +130,4 @@ class Database extends Model {
     }
 }
 
-module.exports = Database;
+export = Database;
