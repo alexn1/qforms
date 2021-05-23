@@ -1,3 +1,5 @@
+const Helper = require('./Helper');
+
 class Context {
     static create(context) {
         if (!context.req) throw new Error('no req');
@@ -41,14 +43,14 @@ class Context {
             context.connections[name].release();
         }*/
     }
-    static decodeValue(rawValue) {
+    /*static decodeValue(rawValue) {
         return JSON.parse(rawValue, Context.dateTimeReviver);
-    }
+    }*/
     static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
             if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = Context.decodeValue(obj[name]);
+            dObj[name] = Helper.decodeValue(obj[name]);
         }
         return dObj;
     }
