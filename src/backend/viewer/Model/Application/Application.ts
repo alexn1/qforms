@@ -8,8 +8,8 @@ import Database from '../Database/Database';
 import DataSource from '../DataSource/DataSource';
 import Helper from '../../../Helper';
 import Page from '../Page/Page';
+import PageLink from '../PageLink/PageLink';
 
-const PageLink  = require('../PageLink/PageLink');
 const Context   = require('../../../Context');
 const JsonFile  = require('../../../JsonFile');
 const text = require('../../../text');
@@ -61,7 +61,7 @@ class Application extends Model {
         this.js    = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
     }
 
-    async getLinks() {
+    async getLinks(): Promise<string[]> {
         return await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
     }
 
@@ -74,7 +74,7 @@ class Application extends Model {
         }
     }
 
-    getDirPath() {
+    getDirPath(): string {
         return this.appInfo.dirPath;
     }
 
@@ -159,12 +159,12 @@ class Application extends Model {
         return menu;
     }
 
-    createPageLink(name) {
+    createPageLink(name): PageLink {
         const data = this.getColItemData('pageLinks', name);
         return new PageLink(data, this);
     }
 
-    async createPage(pageLinkName) {
+    async createPage(pageLinkName): Promise<Page> {
         // console.log('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
@@ -194,7 +194,7 @@ class Application extends Model {
         return this.pages[pageLinkName] = await this.createPage(pageLinkName);
     }
 
-    getStartupPageLinkNames() {
+    getStartupPageLinkNames(): string[] {
         return this.getDataCol('pageLinks')
             .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
             .map(data => BaseModel.getName(data));
@@ -270,7 +270,7 @@ class Application extends Model {
         throw new Error(`no env ${name} in ${env}`);
     }
 
-    getApp() {
+    getApp(): Application {
         return this;
     }
 
@@ -281,7 +281,7 @@ class Application extends Model {
         return database;
     }
 
-    getTitle(context, data) {
+    getTitle(context, data): string {
         if (context.query.page) {
             const page = this.pages[context.query.page];
             if (!page) throw new Error(`no page: ${context.query.page}`);

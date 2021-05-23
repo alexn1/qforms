@@ -85,7 +85,7 @@ class Helper {
         });
     }
 
-    static async getFilePaths(publicDirPath, subDirPath, ext) {
+    static async getFilePaths(publicDirPath, subDirPath, ext): Promise<string[]> {
         // console.log('Helper.getFilePaths');
         const filePaths = [];
         await _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths);
