@@ -73,7 +73,7 @@ class Helper {
         });
     }
 
-    static _glob(path) {
+    static _glob(path): Promise<any[]> {
         return new Promise((resolve, reject) => {
             glob(path, (err, items) => {
                 if (err) {
@@ -143,23 +143,43 @@ class Helper {
 
     static currentTime() {
         const now = new Date();
-        let hh = now.getHours();   if (hh < 10) hh = '0' + hh;
-        let mm = now.getMinutes(); if (mm < 10) mm = '0' + mm;
-        let ss = now.getSeconds(); if (ss < 10) ss = '0' + ss;
-        return [hh, mm, ss].join(':');
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map(n => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+
+        /*
+        let hh = now.getHours();
+        let mm = now.getMinutes();
+        let ss = now.getSeconds();
+
+        let _hh = hh.toString();
+        let _mm = mm.toString();
+        let _ss = ss.toString();
+
+        if (hh < 10) _hh = '0' + _hh;
+        if (mm < 10) _mm = '0' + mm;
+        if (ss < 10) _ss = '0' + ss;
+
+
+        return [_hh, _mm, _ss].join(':');*/
+        return arrS.join(':');
     }
 
-    static currentDate() {
+    /*static currentDate() {
         const now = new Date();
         let dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
-        let mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /*January is 0!*/
+        let mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
-    }
+    }*/
 
-    static currentDateTime() {
+    /*static currentDateTime() {
         return Helper.currentDate() + ' ' + Helper.currentTime();
-    }
+    }*/
 
     static templateToJsString(value, params) {
         return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
@@ -213,7 +233,7 @@ class Helper {
         });
     }
 
-    static putFileContent(filePath, content) {
+    static putFileContent(filePath, content): Promise<void> {
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -249,7 +269,7 @@ class Helper {
         }
     }
 
-    static createDirIfNotExists(dirPath) {
+    static createDirIfNotExists(dirPath): Promise<void> {
         console.log('Helper.createDirIfNotExists', dirPath);
         return new Promise((resolve, reject) => {
             fs.exists(dirPath, exists => {
@@ -302,7 +322,7 @@ class Helper {
         arr.splice(newIndex, 0,   arr.splice(oldIndex, 1)[0]);
     }
 
-    static getTempSubDirPath3(tempDirPath) {
+    /*static getTempSubDirPath3(tempDirPath) {
         return new Promise((resolve, reject) => {
             const subDirName = getRandomString(8);
             const tempSubSirPath = path.join(tempDirPath, subDirName);
@@ -322,9 +342,9 @@ class Helper {
                 }
             });
         });
-    }
+    }*/
 
-    static copyFile3(source, target) {
+    static copyFile3(source, target): Promise<void> {
         return new Promise((resolve, reject) => {
             const rd = fs.createReadStream(source);
             rd.on('error', err => {
@@ -350,11 +370,8 @@ class Helper {
         });
     }
 
-    static writeFile(filePath, content) {
+    static writeFile(filePath, content): Promise<void> {
         console.log('Helper.writeFile', filePath);
-
-
-
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', err => {
                 if (err) {
@@ -384,7 +401,7 @@ class Helper {
         }, {});
     }
 
-    static fsUnlink(filePath) {
+    static fsUnlink(filePath): Promise<void> {
         return new Promise((resolve, reject) => {
             fs.unlink(filePath, err => {
                 if (err) {
@@ -452,4 +469,4 @@ class Helper {
     }
 }
 
-module.exports = Helper;
+export = Helper;
