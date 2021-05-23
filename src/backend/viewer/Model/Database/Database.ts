@@ -1,8 +1,8 @@
-const Model = require('../Model');
+import Model from '../Model';
 const Param = require('../Param/Param');
 
 class Database extends Model {
-
+    tables: any[];
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);
@@ -31,7 +31,8 @@ class Database extends Model {
     }
 
     async queryScalar(context, query, params) {
-        const [row] = await this.queryRows(context, query, params);
+        const rows = await this.queryRows(context, query, params);
+        const row = rows[0];
         if (!row) throw new Error(`queryScalar must return one row`);
         const [column] = Object.keys(row);
         if (!column) throw new Error('no column in result set');
