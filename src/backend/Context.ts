@@ -56,7 +56,7 @@ class Context {
         return context;
     }
 
-    static destroy(context) {
+    static destroy(context: Context) {
         if (!context) return;
         /*for (const name in context.connections) {
             //console.log('release connection: ' + name);
@@ -88,7 +88,7 @@ class Context {
         }
         return value;
     }*/
-    static getUser(context) {
+    static getUser(context: Context) {
         return context.req.session.user[context.route];
     }
 }
