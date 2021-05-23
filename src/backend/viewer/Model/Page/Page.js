@@ -55,6 +55,10 @@ class Page extends Model {
     getForm(name) {
         return this.forms.find(form => form.getName() === name);
     }
+
+    getDataSource(name) {
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
+    }
 }
 
 module.exports = Page;

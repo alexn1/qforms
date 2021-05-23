@@ -325,6 +325,10 @@ class Application extends Model {
         return appInfos;
     }
 
+    getDataSource(name) {
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
+    }
+
 }
 
 module.exports = Application;

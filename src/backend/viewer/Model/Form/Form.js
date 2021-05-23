@@ -121,7 +121,9 @@ class Form extends Model {
     getField(name) {
         return this.fields.find(field => field.getName() === name);
     }
-
+    getDataSource(name) {
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
+    }
 }
 
 module.exports = Form;

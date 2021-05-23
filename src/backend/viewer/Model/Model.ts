@@ -1,11 +1,11 @@
 const path = require('path');
 
-const BaseModel = require('../../BaseModel');
+import BaseModel from '../../BaseModel';
 const Helper = require('../../Helper');
 const backend  = require('../../../backend');
 
 class Model extends BaseModel {
-
+    fillCollections: any[];
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = [];
@@ -15,7 +15,7 @@ class Model extends BaseModel {
 
     }
 
-    async fill(context) {
+    async fill(context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const response = {
             class: this.getClassName(),
@@ -78,10 +78,8 @@ class Model extends BaseModel {
         return null;
     }
 
-    getDataSource(name) {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
-    }
+
 
 }
 
-module.exports = Model;
+export = Model;
