@@ -1,3 +1,4 @@
+// import Application from '../Application/Application';
 const Model = require('../Model');
 
 class Action extends Model {
@@ -7,6 +8,11 @@ class Action extends Model {
     static async create(data, parent): Promise<Action> {
         return new Action(data, parent);
     }
+    /*public getApp(): Application {
+        if (this.parent instanceof Application) return this.parent;
+        if (this.parent.parent instanceof Application) return this.parent.parent;
+        if (this.parent.parent.parent instanceof Application) return this.parent.parent.parent;
+    }*/
 }
 
-module.exports = Action;
+export = Action;
