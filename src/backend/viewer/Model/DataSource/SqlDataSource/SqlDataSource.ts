@@ -1,14 +1,15 @@
 import DataSource from '../DataSource';
 import Helper from '../../../../Helper';
+import Table from '../../Table/Table';
 
 class SqlDataSource extends DataSource {
-    table: any;
+    table: Table;
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
     }
 
-    getKeyColumns() {
+    getKeyColumns(): string[] {
         // console.log('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
@@ -249,17 +250,17 @@ class SqlDataSource extends DataSource {
         return null;
     }
 
-    getTable() {
+    getTable(): Table {
         const tableName = this.getAttr('table');
         if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
         return this.getDatabase().getTable(tableName);
     }
 
-    getDbType(column) {
+    getDbType(column): string {
         return this.getTable().getColumn(column).getDbType();
     }
 
-    getAutoColumns() {
+    getAutoColumns(): string[] {
         return this.keyColumns.filter(name => this.table.getColumn(name).isAuto());
     }
 

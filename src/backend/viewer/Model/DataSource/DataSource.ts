@@ -1,4 +1,5 @@
 const path = require('path');
+
 import Model from '../Model';
 import Helper from '../../../Helper';
 const Page = require('../Page/Page');
@@ -6,6 +7,7 @@ import Application from '../Application/Application';
 const Form = require('../Form/Form');
 const RowForm = require('../Form/RowForm/RowForm');
 const TableForm = require('../Form/TableForm/TableForm');
+import Database from '../Database/Database';
 
 class DataSource extends Model {
     keyColumns: any;
@@ -28,7 +30,7 @@ class DataSource extends Model {
         this.keyColumns = this.getKeyColumns();
     }
 
-    getKeyColumns() {
+    getKeyColumns(): string[] {
         const keyColumns = this.getItemNames('keyColumns');
         // console.log('keyColumns:', keyColumns);
         if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
@@ -81,7 +83,7 @@ class DataSource extends Model {
         }
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.getApp();
     }
 
@@ -117,7 +119,7 @@ class DataSource extends Model {
         return JSON.stringify(arr);
     }
 
-    getFullName() {
+    getFullName(): string {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Page) {
@@ -203,7 +205,7 @@ class DataSource extends Model {
         return this.parent instanceof TableForm && this.getName() === 'default';
     }
 
-    getDatabase() {
+    getDatabase(): Database {
         const databaseName = this.getAttr('database');
         if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
         return this.getApp().getDatabase(databaseName);
