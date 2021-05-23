@@ -1,8 +1,9 @@
-const path    = require('path');
+const path = require('path');
 
 import Model from '../Model';
-import Helper from '../../../Helper';
 import Application from '../Application/Application';
+
+const Helper = require('../../../Helper');
 
 class Field extends Model {
     static async create(data, parent): Promise<Field> {

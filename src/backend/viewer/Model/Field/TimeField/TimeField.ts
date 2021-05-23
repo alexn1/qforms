@@ -1,4 +1,4 @@
-const Field  = require('../Field');
+import Field from '../Field';
 
 class TimeField extends Field {
     /*static async create(data, parent) {
@@ -6,4 +6,4 @@ class TimeField extends Field {
     }*/
 }
 
-module.exports = TimeField;
+export = TimeField;
