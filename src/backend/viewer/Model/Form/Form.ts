@@ -120,10 +120,10 @@ class Form extends Model {
         return this.parent;
     }
 
-    getFullName() {
+    getFullName(): string {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
-    isNewMode(context) {
+    isNewMode(context): boolean {
         return !!context.newMode;
     }
     getField(name): Field {

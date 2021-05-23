@@ -78,8 +78,6 @@ class Model extends BaseModel {
         return null;
     }
 
-
-
 }
 
 export = Model;

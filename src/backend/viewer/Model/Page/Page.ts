@@ -4,11 +4,12 @@ import Model from '../Model';
 import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
 import Application from '../Application/Application';
+import Form from '../Form/Form';
 
 class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];
-    forms: any[];
+    forms: Form[];
 
     constructor(data, parent) {
         super(data, parent);
@@ -54,7 +55,7 @@ class Page extends Model {
     getTitle(): string {
         return this.getAttr('caption');
     }
-    getForm(name) {
+    getForm(name): Form {
         return this.forms.find(form => form.getName() === name);
     }
 

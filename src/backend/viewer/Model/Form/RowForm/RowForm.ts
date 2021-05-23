@@ -12,7 +12,7 @@ class RowForm extends Form {
     //     return super.fill(context);
     // }
 
-    isNewMode(context) {
+    isNewMode(context): boolean {
         if (this.isAttr('newMode')) {
             const newMode = this.getAttr('newMode');
             if (newMode ===  'true') return  true;
