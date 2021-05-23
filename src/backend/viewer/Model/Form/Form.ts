@@ -3,13 +3,15 @@ import Model from '../Model';
 import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
 import Field from '../Field/Field';
+import Page from '../Page/Page'
+import Application from '../Application/Application';
 
 class Form extends Model {
     dataSources: DataSource[];
     actions: Action[];
     fields: Field[];
 
-    static async create(data, parent) {
+    static async create(data, parent): Promise<any> {
         throw new Error('Form is abstract');
     }
 
@@ -27,7 +29,7 @@ class Form extends Model {
         await this.createColItems('fields');
     }
 
-    getDirPath() {
+    getDirPath(): string {
         return path.join(this.parent.getDirPath(), 'forms', this.getName());
     }
 
@@ -110,11 +112,11 @@ class Form extends Model {
         return {errorMessage: `no rpc ${name}`};
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent;
     }
 
-    getPage() {
+    getPage(): Page {
         return this.parent;
     }
 
@@ -124,10 +126,10 @@ class Form extends Model {
     isNewMode(context) {
         return !!context.newMode;
     }
-    getField(name) {
+    getField(name): Field {
         return this.fields.find(field => field.getName() === name);
     }
-    getDataSource(name) {
+    getDataSource(name): DataSource {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 }

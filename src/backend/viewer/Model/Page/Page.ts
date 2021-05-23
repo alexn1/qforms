@@ -3,7 +3,7 @@ const path = require('path');
 import Model from '../Model';
 import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
-import Application from "../Application/Application";
+import Application from '../Application/Application';
 
 class Page extends Model {
     dataSources: DataSource[];

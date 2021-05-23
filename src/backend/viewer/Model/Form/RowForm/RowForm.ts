@@ -1,4 +1,4 @@
-const Form = require('../Form');
+import Form from '../Form';
 
 class RowForm extends Form {
 
@@ -23,4 +23,4 @@ class RowForm extends Form {
 
 }
 
-module.exports = RowForm;
+export = RowForm;
