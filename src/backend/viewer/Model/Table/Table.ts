@@ -1,6 +1,10 @@
-const Model = require('../Model');
+import Model from '../Model';
+import Column from '../Column/Column';
+import Application from '../Application/Application';
 
 class Table extends Model {
+    columns: Column[];
+
     static async create(data, parent) {
         return new Table(data, parent);
     }
@@ -16,7 +20,7 @@ class Table extends Model {
         await this.createColItems('columns');
     }
 
-    getKeyColumns() {
+    getKeyColumns(): string[] {
         // console.log('Table.getKeyColumns');
         const keyColumns = this.columns.filter(column => column.isKey()).map(column => column.getName());
         // const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
@@ -24,16 +28,15 @@ class Table extends Model {
         return keyColumns;
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent;
     }
 
-    getColumn(name) {
-        // return this.columns[name];
+    getColumn(name): Column {
         const column = this.columns.find(column => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;
     }
 }
 
-module.exports = Table;
+export = Table;
