@@ -1,8 +1,8 @@
-const mysql   = require('mysql');
-const Database  = require('../Database');
+const mysql = require('mysql');
+import Database from '../Database';
 
 class MySqlDatabase extends Database {
-
+    pool: any;
     constructor(data, parent) {
         super(data, parent);
         //console.log('new MySqlDatabase');
@@ -14,7 +14,7 @@ class MySqlDatabase extends Database {
         return new MySqlDatabase(data, parent);
     }
 
-    async deinit() {
+    async deinit(): Promise<void> {
         console.log('MySqlDatabase.deinit: ' + this.getName());
         if (this.pool !== null) {
             return new Promise(resolve => {
@@ -47,7 +47,7 @@ class MySqlDatabase extends Database {
         return 3306;
     }
 
-    getConnection(context) {
+    getConnection(context): Promise<any> {
         //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
             if (context.connections[this.getName()] === undefined) {
@@ -65,7 +65,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    async queryRows(context, query, params) {
+    async queryRows(context, query, params): Promise<any> {
         console.log('MySqlDatabase.queryRows', query, params);
         Database.checkParams(query, params);
         const nest = true;
@@ -86,7 +86,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    async queryResult(context, query, params) {
+    async queryResult(context, query, params): Promise<any> {
         console.log('MySqlDatabase.queryResult', query, params);
         Database.checkParams(query, params);
         const nest = false;
@@ -127,7 +127,7 @@ class MySqlDatabase extends Database {
         return rows;
     }
 
-    beginTransaction(cnn) {
+    beginTransaction(cnn): Promise<void> {
         console.log('MySqlDatabase.beginTransaction');
         return new Promise((resolve, reject) => {
             cnn.beginTransaction(err => {
@@ -140,7 +140,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    commit(cnn) {
+    commit(cnn): Promise<void> {
         console.log('MySqlDatabase.commit');
         return new Promise((resolve, reject) => {
             cnn.commit(err => {
@@ -153,7 +153,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    rollback(cnn, err) {
+    rollback(cnn, err): Promise<void> {
         console.log('MySqlDatabase.rollback:', err.message);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
@@ -305,4 +305,4 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     }
 }
 
-module.exports = MySqlDatabase;
+export = MySqlDatabase;
