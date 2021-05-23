@@ -62,7 +62,18 @@ const EDITOR_ACTIONS = [
     'moveDown'
 ];
 
+class MyError extends Error {
+    status: number;
+}
+
 class HostApp {
+    server: any;
+    publicDirPath: string;
+    appsDirPath: string;
+    logCnn: any;
+    applications: any;
+    nodeEnv: any;
+
     constructor(server) {
         // console.log('HostApp.constructor');
         this.server = server;
@@ -453,9 +464,9 @@ class HostApp {
     // action
     async test(req, res, context) {
         console.log('HostApp.test', req.body);
-        const result = await Test[req.body.name](req, res, context, this.getApplication(context));
-        if (result === undefined) throw new Error('test action: result is undefined');
-        await res.json(result);
+        // const result = await Test[req.body.name](req, res, context, this.getApplication(context));
+        // if (result === undefined) throw new Error('test action: result is undefined');
+        await res.json(null);
     }
 
     async appFile(req, context, application) {
@@ -780,7 +791,7 @@ class HostApp {
 
     async _e404(req, res, next) {
         console.warn(req.method, 'error/404');
-        const err = new Error(`${req.method} ${req.originalUrl} page not found`);
+        const err = new MyError(`${req.method} ${req.originalUrl} page not found`);
         err.status = 404;
         next(err);
     }
@@ -811,7 +822,7 @@ class HostApp {
         res.json({foo: 'bar'});
     }
 
-    static run(params = {}) {
+    static run(params: any = {}) {
         console.log('HostApp.run', params);
 
         // env
@@ -899,6 +910,4 @@ class HostApp {
 
 }
 
-
-
-module.exports = HostApp;
+export = HostApp;
