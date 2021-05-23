@@ -1,21 +1,21 @@
-const fs      = require('fs');
-const path    = require('path');
+const fs         = require('fs');
+const path       = require('path');
 const bodyParser = require('body-parser');
 const session    = require('express-session');
 const express    = require('express');
-const http = require('http');
+const http       = require('http');
+
+import Helper from './Helper';
+import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
+import JsonFile from '../backend/JsonFile';
+import Context from '../backend/Context';
+import Application from './viewer/Model/Application/Application';
 
 const backend  = require('./index');
-
-// const Test    = require('./test/Test');
 const pkg     = require('../../package.json');
-const Helper  = require('./Helper');
-const PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 const MonitorModel = require('./monitor/MonitorModel');
-const JsonFile = require('../backend/JsonFile');
-const Context = require('../backend/Context');
-const Application = require('./viewer/Model/Application/Application');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
+// const Test    = require('./test/Test');
 
 // post actions
 const ACTIONS = [
@@ -81,6 +81,7 @@ class HostApp {
         this.appsDirPath = null;
         this.logCnn = null;
         this.applications = {};
+        this.nodeEnv = null;
     }
 
     initProcess() {
