@@ -4,7 +4,7 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%=application.getTitle(context, response)%></title>
     <!-- EventEmitter -->
     <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <!-- react -->
@@ -34,7 +34,7 @@
         %><script src="<%=src%>"></script>
     <%
     });%>
-    <script type="application/json"><%- JSON.stringify(data, null, 4) %></script>
+    <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);

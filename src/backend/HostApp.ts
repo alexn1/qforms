@@ -213,13 +213,13 @@ class HostApp {
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
             this.loginGet(req, res, context);
         } else {
-            const data = await this.fill(req, context);
+            const response = await this.fill(req, context);
             res.render('viewer/index', {
                 version       : pkg.version,
                 application   : application,
-                title         : application.getTitle(context, data),
                 debugApp      : context.query.debug,
-                data          : data,
+                context       : context,
+                response      : response,
             });
         }
     }
