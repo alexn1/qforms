@@ -8,7 +8,7 @@ const SRC_PATH   = "./src";
 function backend_ts() {
     return gulp.src(path.join(SRC_PATH, 'backend/**/*.ts'))
         .pipe(ts({
-            target: 'ES2015',
+            target: 'ES2017',
             declaration: true,
             esModuleInterop: true,
             module: 'commonjs'
