@@ -281,7 +281,7 @@ class Application extends Model {
         return database;
     }
 
-    getTitle(context, response): string {
+    getTitle(context: Context, response): string {
         if (context.query.page) {
             const page = this.pages[context.query.page];
             if (!page) throw new Error(`no page: ${context.query.page}`);
