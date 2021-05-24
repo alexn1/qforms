@@ -91,7 +91,7 @@ class Editor extends BaseModel {
     createDataSourceEditor(name) {
         const data = this.getColItemData('dataSources', name);
         const className = BaseModel.getClassName(data);
-        const DataSourceClass = editor[`${className}Editor`];
+        const DataSourceClass = backend[`${className}Editor`];
         return new DataSourceClass(data, this);
     }
     moveDataColItem(colName, name, offset) {

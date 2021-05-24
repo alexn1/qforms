@@ -1,6 +1,6 @@
 const path = require('path');
 const Editor = require('../Editor');
-const FormEditor = require('../FormEditor/FormEditor');
+const backend = require('../../../index');
 
 class DataSourceEditor extends Editor {
 
@@ -56,7 +56,7 @@ class DataSourceEditor extends Editor {
         if (!this.parent) {
             throw new Error('DataSourceEditor.save: no parent');
         }
-        if (this.parent instanceof FormEditor) {
+        if (this.parent instanceof backend.FormEditor) {
             await this.parent.parent.save();
         } else {
             await this.parent.save();
