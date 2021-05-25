@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session    = require('express-session');
 const express    = require('express');
 const http       = require('http');
+const colors     = require('colors/safe');
 
 import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -696,7 +697,7 @@ class HostApp {
     }
 
     async _moduleGet(req, res, next) {
-        console.warn('HostApp.moduleGet', req.params);
+        console.warn(colors.green.underline('HostApp.moduleGet'), req.params);
         let context = null;
         try {
             context = Context.create(req);

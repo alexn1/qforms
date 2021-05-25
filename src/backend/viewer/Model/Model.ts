@@ -74,7 +74,7 @@ class Model extends BaseModel {
         return new Class(data, this);
     }
 
-    getDirPath() {
+    getDirPath(): string {
         return null;
     }
 
