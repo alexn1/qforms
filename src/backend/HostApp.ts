@@ -697,7 +697,7 @@ class HostApp {
     }
 
     async _moduleGet(req, res, next) {
-        console.warn(colors.green.underline('HostApp.moduleGet'), req.params);
+        console.warn(colors.magenta.underline('HostApp.moduleGet'), req.params);
         let context = null;
         try {
             context = Context.create(req);
@@ -716,7 +716,7 @@ class HostApp {
     }
 
     async _appGet(req, res, next) {
-        console.warn('appGet');
+        console.warn(colors.magenta('appGet'));
         try {
             await this.appGet(req, res);
         } catch (err) {
@@ -725,7 +725,7 @@ class HostApp {
     }
 
     async _appPost(req, res, next) {
-        console.warn('appPost', req.params);
+        console.warn(colors.magenta('appPost'), req.params);
         try {
             await this.appPost(req, res);
         } catch (err) {
@@ -734,7 +734,7 @@ class HostApp {
     }
 
     async _monitorGet(req, res, next) {
-        console.warn('monitorGet');
+        console.warn(colors.magenta('monitorGet'));
         try {
 
             if (this.nodeEnv === 'development') {
@@ -748,7 +748,7 @@ class HostApp {
     }
 
     async _modulePost(req, res, next)  {
-        console.warn('modulePost', req.params, req.body);
+        console.warn(colors.magenta('modulePost'), req.params, req.body);
         let context = null;
         try {
             context = Context.create(req);
@@ -792,14 +792,14 @@ class HostApp {
     }
 
     async _e404(req, res, next) {
-        console.warn(req.method, 'error/404');
+        console.warn(colors.magenta(req.method), 'error/404');
         const err = new MyError(`${req.method} ${req.originalUrl} page not found`);
         err.status = 404;
         next(err);
     }
 
     async _e500(err, req, res, next) {
-        console.warn('module.exports.e500:', req.method, req.originalUrl);
+        console.warn(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
         res.status(err.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {

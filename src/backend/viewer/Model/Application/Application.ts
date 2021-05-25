@@ -1,5 +1,6 @@
 const path  = require('path');
 const axios = require('axios');
+const colors     = require('colors/safe');
 
 import BaseModel from '../../../BaseModel';
 import Model from '../Model';
@@ -252,7 +253,7 @@ class Application extends Model {
     }
 
     async request(options) {
-        console.warn('Application.request', options);
+        console.warn(colors.magenta('Application.request'), options);
         return await axios(options);
     }
 
