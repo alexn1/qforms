@@ -453,7 +453,7 @@ class HostApp {
     }
 
     // action
-    async logout(req, res, context) {
+    async logout(req, res, context: Context) {
         console.log('HostApp.logout');
         if (!context.route) throw new Error('no context.route');
         if (!req.session.user || !req.session.user[context.route]) {

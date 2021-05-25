@@ -2,6 +2,7 @@ const path  = require('path');
 const axios = require('axios');
 const colors     = require('colors/safe');
 
+import HostApp from '../../../HostApp';
 import BaseModel from '../../../BaseModel';
 import Model from '../Model';
 import Action from '../Action/Action';
@@ -26,7 +27,7 @@ class Application extends Model {
     links: any[];
     js: any[];
 
-    static async create(appFilePath, hostApp, env) {
+    static async create(appFilePath, hostApp: HostApp, env) {
         // console.log('Application.create', appFilePath);
         const appInfo = await Application.getAppInfo(appFilePath, env);
         const json = await Helper.readTextFile(appInfo.filePath);
@@ -83,7 +84,7 @@ class Application extends Model {
         return text[this.getAttr('lang') || 'en'];
     }
 
-    async fill(context) {
+    async fill(context: Context) {
         // console.log('Application.fill');
         const response = await super.fill(context);
 
@@ -123,7 +124,7 @@ class Application extends Model {
         return response;
     }
 
-    async createMenu(context) {
+    async createMenu(context: Context) {
         const menu = {};
 
         // pages
@@ -184,7 +185,7 @@ class Application extends Model {
         return true;
     }
 
-    async getPage(context, pageLinkName): Promise<Page> {
+    async getPage(context: Context, pageLinkName): Promise<Page> {
         // console.log('Application.getPage', pageLinkName);
         if (context.user && this.authorizePage(context.user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -201,7 +202,7 @@ class Application extends Model {
             .map(data => BaseModel.getName(data));
     }
 
-    async fillPages(context) {
+    async fillPages(context: Context) {
         console.log('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
@@ -232,11 +233,11 @@ class Application extends Model {
         return this.getAttr('authentication') === 'true';
     }
 
-    async getUsers(context) {
+    async getUsers(context: Context) {
         return null;
     }
 
-    static getParams(context) {
+    static getParams(context: Context) {
         // console.log('Application.getParams:', context.query);
         return {
             ...context.query,
@@ -246,7 +247,7 @@ class Application extends Model {
         };
     }
 
-    async rpc(name, context) {
+    async rpc(name, context: Context) {
         console.log('Application.rpc', name, context.params);
         if (this[name]) return await this[name](context);
         return {errorMessage: `no rpc ${name}`};
@@ -291,7 +292,7 @@ class Application extends Model {
         return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
     }
     // to init custom context params before each request get/post
-    async initContext(context) {
+    async initContext(context: Context) {
 
     }
 
