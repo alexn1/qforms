@@ -35,7 +35,7 @@ class MySqlDatabase extends Database {
         return this.pool;
     }
 
-    getConfig() {
+    getConfig(): any {
         console.log('MySqlDatabase.getConfig');
         return {
             ...super.getConfig(),

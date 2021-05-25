@@ -89,7 +89,7 @@ class Database extends Model {
         return new Param(this.getColItemData('params', name), this);
     }
 
-    getConfig() {
+    getConfig(): any {
         const portParam = this.isData('params', 'port') ?  this.createParam('port') : null;
         return {
             host       : this.createParam('host').getValue(),
