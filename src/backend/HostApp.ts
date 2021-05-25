@@ -167,7 +167,8 @@ class HostApp {
         this.server.get('/favicon.ico', this._favicon.bind(this));
 
         // static
-        this.server.use(express.static(this.publicDirPath));
+        // not used anymore, as static file now send moduleFile
+        // this.server.use(express.static(this.publicDirPath));
 
         // catch 404 and forward to error handler
         this.server.use(this._e404.bind(this));
@@ -491,8 +492,8 @@ class HostApp {
         return null;
     }
 
-    async viewerFile(req, res, context: Context) {
-        // console.log('HostApp.viewerFile');
+    async staticFile(req, res, context: Context) {
+        // console.log('HostApp.staticFile');
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
@@ -519,16 +520,14 @@ class HostApp {
             }
             res.send(content[0]);
         } else {
-            // console.error('file not found: ', req.originalUrl);
-            // const base = `/view/${context.route}`;
-            // const uri = req.originalUrl.replace(base, '');
-            // console.log('uri', uri);
             const filePath = path.join(this.publicDirPath, context.uri);
+            const exists = await Helper.exists(filePath);
+            if (!exists) throw new Error(`file not found: ${context.uri}`);
             res.sendFile(filePath);
         }
     }
 
-    async editorFile(req, res, context: Context) {
+    /*async editorFile(req, res, context: Context) {
         // console.log('HostApp.editorFile', context.uri);
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
@@ -536,13 +535,12 @@ class HostApp {
             res.setHeader('content-type', 'text/css');
             res.send(content);
         } else {
-            //console.error('file not found: ', req.originalUrl);
-            // const base = `/edit/${context.route}`;
-            // const uri = req.originalUrl.replace(base, '');
             const filePath = path.join(this.publicDirPath, context.uri);
+            const exists = await Helper.exists(filePath);
+            if (!exists) throw new Error(`file not found: ${context.uri}`);
             res.sendFile(filePath);
         }
-    }
+    }*/
 
     async handleEditorGet(req, res, context: Context) {
         console.log('HostApp.handleEditorGet');
@@ -772,14 +770,9 @@ class HostApp {
         let context = null;
         try {
             context = Context.create(req);
-            if (context.module === 'view') {
-                await this.viewerFile(req, res, context);
-            } else if (context.module === 'edit') {
-                await this.editorFile(req, res, context);
-            } else {
-                next();
-            }
+            await this.staticFile(req, res, context);
         } catch (err) {
+            err.message = `_moduleFile error: ${err.message}`;
             next(err);
         } finally {
             Context.destroy(context);
