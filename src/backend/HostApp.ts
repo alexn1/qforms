@@ -97,7 +97,7 @@ class HostApp {
         const {appsDirPath, handleException} = env;// environment
 
         if (!fs.existsSync(appsDirPath)) {
-            console.error(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`);
+            console.error(colors.red(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`));
             process.exit(1);
             return;
         }
@@ -646,7 +646,7 @@ class HostApp {
                 data   : req ? JSON.stringify(req.body, null, 4) : null
             });
         } catch (err) {
-            console.error(err);
+            console.error(colors.red(err));
         }
     }
 
@@ -677,7 +677,7 @@ class HostApp {
                 data   : JSON.stringify(req.body, null, 4)
             });
         } catch (err) {
-            console.error(err);
+            console.error(colors.red(err));
         }
     }
 
@@ -800,7 +800,7 @@ class HostApp {
 
     async _e500(err, req, res, next) {
         console.warn('module.exports.e500:', req.method, req.originalUrl);
-        console.error(err);
+        console.error(colors.red(err));
         res.status(err.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
             res.end(typeof err === 'string' ? err : err.message);
@@ -883,7 +883,7 @@ class HostApp {
     }
 
     async onUnhandledRejection(err) {
-        console.error('HostApp.onUnhandledRejection', err);
+        console.error(colors.red('HostApp.onUnhandledRejection'), err);
         err.message = `unhandledRejection: ${err.message}`;
         await this.logError(null, err);
     }
@@ -901,7 +901,7 @@ class HostApp {
     }
 
     onHttpServerError(err) {
-        console.error('HostApp.onHttpServerError', err.code, err.message);
+        console.error(colors.red('HostApp.onHttpServerError'), err.code, err.message);
         /*if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
         } else {
