@@ -166,9 +166,8 @@ class HostApp {
         // favicon.ico
         this.server.get('/favicon.ico', this._favicon.bind(this));
 
-        // static
-        // not used anymore, as static file now send moduleFile
-        // this.server.use(express.static(this.publicDirPath));
+        // handle static for app and monitor
+        this.server.use(express.static(this.publicDirPath));
 
         // catch 404 and forward to error handler
         this.server.use(this._e404.bind(this));
