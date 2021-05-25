@@ -748,7 +748,7 @@ class HostApp {
     }
 
     async _modulePost(req, res, next)  {
-        console.warn(colors.magenta('modulePost'), req.params, req.body);
+        console.warn(colors.magenta.underline('HostApp._modulePost'), req.params, req.body);
         let context = null;
         try {
             context = Context.create(req);
@@ -768,7 +768,7 @@ class HostApp {
     }
 
     async _moduleFile(req, res, next) {
-        // console.warn('moduleFile', req.originalUrl);
+        console.warn(colors.magenta.underline('HostApp._modulePost'), req.originalUrl);
         let context = null;
         try {
             context = Context.create(req);
