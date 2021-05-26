@@ -86,7 +86,7 @@ class FrontHostApp {
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
-    static insertNewNodeAt(parent, child, i) {
+    /*static insertNewNodeAt(parent, child, i) {
         if (i < 0 || i > parent.children.length) {
             throw new Error('invalid index i = ' + i + ', length = ' + parent.childNodes.length);
         } else if (i === parent.children.length) {
@@ -94,7 +94,7 @@ class FrontHostApp {
         } else {
             parent.insertBefore(child, parent.children[i]);
         }
-    }
+    }*/
 
     /*static elementIndex(el) {
         const children = el.parentNode.childNodes;
@@ -102,7 +102,7 @@ class FrontHostApp {
         return -1;
     }*/
 
-    static moveNode(parent, child, oldIndex, newIndex) {
+    /*static moveNode(parent, child, oldIndex, newIndex) {
         if (oldIndex < 0 || oldIndex >= parent.children.length || newIndex < 0 || newIndex >= parent.children.length) {
             throw new Error('invalid index');
         } else {
@@ -112,7 +112,7 @@ class FrontHostApp {
                 parent.insertBefore(child, parent.children[newIndex+1]);
             }
         }
-    }
+    }*/
 
     /*static moveArrayElement(arr, oldIndex, newIndex) {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
@@ -150,7 +150,7 @@ class FrontHostApp {
       return new Date();
     }*/
 
-    static render(view, data) {
+    /*static render(view, data) {
         return new EJS({text: view}).render(data);
-    }
+    }*/
 }
