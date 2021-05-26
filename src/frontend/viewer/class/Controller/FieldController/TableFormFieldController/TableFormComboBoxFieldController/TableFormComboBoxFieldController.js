@@ -94,7 +94,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         option.innerHTML = this.model.getDisplayValue(row);
         option.dbRow     = row;
         option.value     = JSON.parse(key)[0];
-        QForms.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
+        FrontHostApp.insertNewNodeAt(view.firstElementChild, option, i + 1); // at 0 position always null-value
         view.keyToOption[key] = option;
         return option;
     }*/
@@ -150,7 +150,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
                 for (const k in this.views) {
                     const view = this.views[k];
                     const option = view.keyToOption[key];
-                    QForms.moveNode(view.firstElementChild, option, oldIndex, newIndex + 1);
+                    FrontHostApp.moveNode(view.firstElementChild, option, oldIndex, newIndex + 1);
                     this._refillRow(option);
                 }
                 break;

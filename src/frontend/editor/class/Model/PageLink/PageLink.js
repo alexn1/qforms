@@ -7,7 +7,7 @@ class PageLink extends Model {
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -21,7 +21,7 @@ class PageLink extends Model {
     }
 
     async moveUp() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveUp',
             params    : Helper.encodeObject({
@@ -31,7 +31,7 @@ class PageLink extends Model {
     }
 
     async moveDown() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveDown',
             params    : Helper.encodeObject({

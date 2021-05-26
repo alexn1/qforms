@@ -4,7 +4,7 @@ class Action extends Model {
     }*/
 
     /*async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
             params    : Helper.encodeObject({
@@ -35,7 +35,7 @@ class Action extends Model {
 
     async setValue(name, value) {
         //console.log('Action.setValue', name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -49,7 +49,7 @@ class Action extends Model {
     }
 
     async deleteData() {
-        await QForms.doHttpRequest({
+        await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -63,7 +63,7 @@ class Action extends Model {
         this.parent.removeAction(this);
     }
     moveUp() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveUp',
             params     : Helper.encodeObject({
@@ -72,7 +72,7 @@ class Action extends Model {
         });
     }
     moveDown() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveDown',
             params     : Helper.encodeObject({

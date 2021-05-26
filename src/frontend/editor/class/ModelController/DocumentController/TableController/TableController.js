@@ -60,7 +60,7 @@ class TableController extends DocumentController {
     }
 
     static async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
             params    : Helper.encodeObject({
@@ -85,7 +85,7 @@ class TableController extends DocumentController {
     }
     static async getView(view) {
         console.log('TableController.getView', view);
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
             params    : Helper.encodeObject({view : view})

@@ -57,7 +57,7 @@ class Application extends Model {
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -71,7 +71,7 @@ class Application extends Model {
 
     async newPageAndPageLinkData(params) {
         params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : '_new',
             params    : Helper.encodeObject(params)
@@ -85,7 +85,7 @@ class Application extends Model {
     }
 
     async newDatabase(params) {
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : '_new',
             params    : Helper.encodeObject(params)
@@ -94,7 +94,7 @@ class Application extends Model {
     }
 
     async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'getView',
             params    : Helper.encodeObject({
@@ -105,7 +105,7 @@ class Application extends Model {
     }
 
     async saveView(text, view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveView',
             params    : Helper.encodeObject({
@@ -117,7 +117,7 @@ class Application extends Model {
     }
 
     async saveController(text) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveController',
             params    : Helper.encodeObject({
@@ -128,7 +128,7 @@ class Application extends Model {
     }
 
     async createView() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createView',
             params    : Helper.encodeObject({
@@ -138,7 +138,7 @@ class Application extends Model {
     }
 
     async createController() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createController',
             params    : Helper.encodeObject({
@@ -148,7 +148,7 @@ class Application extends Model {
     }
 
     async newDataSource(params) {
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
             params    : Helper.encodeObject(params)
@@ -159,7 +159,7 @@ class Application extends Model {
     async newAction(params) {
         // params['pageFileName'] = this.page.pageLink.getFileName();
         // params['form']         = this.getName();
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
             params    : Helper.encodeObject(params)

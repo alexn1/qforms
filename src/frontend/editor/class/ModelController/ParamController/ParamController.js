@@ -19,7 +19,7 @@ class ParamController extends ModelController {
     }
 
     static async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'getView',
             params    : Helper.encodeObject({

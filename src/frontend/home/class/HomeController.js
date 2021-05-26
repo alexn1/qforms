@@ -81,7 +81,7 @@ class HomeController {
     }
 
     async createApp(folderName, appName) {
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             action: 'new',
             folder: folderName,
             name  : appName

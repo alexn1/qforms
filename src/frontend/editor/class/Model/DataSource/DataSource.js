@@ -33,7 +33,7 @@ class DataSource extends Model {
             const page = parent;
             params['page']  = page.pageLink.getFileName();
         }
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
             params    : Helper.encodeObject(params)
@@ -58,7 +58,7 @@ class DataSource extends Model {
             args.params.form         = Helper.encodeValue(this.parent.getName());
             args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
-        const data = await QForms.doHttpRequest(args);
+        const data = await FrontHostApp.doHttpRequest(args);
         this.setAttr(name, value);
         return data;
     }
@@ -78,7 +78,7 @@ class DataSource extends Model {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
-        await QForms.doHttpRequest(args);
+        await FrontHostApp.doHttpRequest(args);
     }
     async delete() {
         await this.deleteData();
@@ -100,7 +100,7 @@ class DataSource extends Model {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
 
     async moveDown() {
@@ -118,7 +118,7 @@ class DataSource extends Model {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
 
     async newKeyColumnData(name) {
@@ -137,7 +137,7 @@ class DataSource extends Model {
         if (this.parent instanceof Page) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
     async newKeyColumn(name) {
         const data = await this.newKeyColumnData(name);
@@ -160,7 +160,7 @@ class DataSource extends Model {
             args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
             args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
         }
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
 
     async saveController(text) {
@@ -179,7 +179,7 @@ class DataSource extends Model {
             args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form         = Helper.encodeValue(this.parent.getName());
         }
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
 
     async createController() {
@@ -193,7 +193,7 @@ class DataSource extends Model {
                 dataSource  : this.getName()
             })
         };
-        return await QForms.doHttpRequest(args);
+        return await FrontHostApp.doHttpRequest(args);
     }
 
     getFullName() {

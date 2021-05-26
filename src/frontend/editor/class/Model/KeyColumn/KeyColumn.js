@@ -7,7 +7,7 @@ class KeyColumn extends Model {
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -24,7 +24,7 @@ class KeyColumn extends Model {
     }
 
     async deleteData() {
-        await QForms.doHttpRequest({
+        await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'delete',
             params    : Helper.encodeObject({

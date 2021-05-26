@@ -19,7 +19,7 @@ class KeyColumnController extends ModelController {
     }
 
     static async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'getView',
             params    : Helper.encodeObject({

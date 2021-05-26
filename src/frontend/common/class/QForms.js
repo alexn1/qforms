@@ -1,21 +1,21 @@
-class QForms {
+class FrontHostApp {
     constructor(data) {
-        console.log('QForms.constructor', data);
+        console.log('FrontHostApp.constructor', data);
         this.data = data;
         if (data) {
-            QForms.env = data.env;
+            FrontHostApp.env = data.env;
         }
-        window.onerror = QForms.errorHandler;
+        window.onerror = FrontHostApp.errorHandler;
         window.onunhandledrejection = (e) => {
             // console.log('window.onunhandledrejection', e.constructor.name);
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
             console.error('unhandled rejection:', err);
             alert(err.message);
         };
-        //window.onbeforeunload = QForms.exit;
+        //window.onbeforeunload = FrontHostApp.exit;
     }
     init() {
-        // console.log('QForms.init');
+        // console.log('FrontHostApp.init');
         const application = new Application(this.data);
         application.init();
         const root = document.querySelector(`.${application.getName()}-app__root`);
@@ -36,10 +36,10 @@ class QForms {
     }
 
     static errorHandler(errorMsg) {
-        console.error('QForms.errorHandler:', errorMsg);
+        console.error('FrontHostApp.errorHandler:', errorMsg);
         let msg;
-        if (QForms.env === 'development') {
-            msg = 'QForms Error Handler:\n' + errorMsg;
+        if (FrontHostApp.env === 'development') {
+            msg = 'FrontHostApp Error Handler:\n' + errorMsg;
             if (arguments[4] !== undefined && arguments[4].stack !== undefined) {
                 const stack = arguments[4].stack;
                 msg += '\n\nstack:\n' + stack;
@@ -52,19 +52,19 @@ class QForms {
     }
 
     static async doHttpRequest(data) {
-        console.warn('QForms.doHttpRequest', 'POST', window.location.href, data);
-        const result = await QForms.postJson(window.location.href, data);
+        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
+        const result = await FrontHostApp.postJson(window.location.href, data);
         console.warn(`result ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, result);
         return result;
     }
 
     static async postJson(url, data) {
-        return await QForms.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
     }
 
     static async post(url, body, contentType) {
         try {
-            QForms.startWait();
+            FrontHostApp.startWait();
             const res = await fetch(url, {
                 method: 'POST',
                 body  : body,
@@ -73,7 +73,7 @@ class QForms {
             if (res.ok) return await res.json();
             throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
         } finally {
-            QForms.stopWait();
+            FrontHostApp.stopWait();
         }
     }
 
@@ -148,6 +148,6 @@ class QForms {
     }*/
 
     static render(view, data) {
-        return new EJS({text:view}).render(data);
+        return new EJS({text: view}).render(data);
     }
 }

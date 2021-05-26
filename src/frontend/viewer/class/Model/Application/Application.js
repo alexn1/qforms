@@ -36,7 +36,7 @@ class Application extends Model {
     async request(options) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const response = await QForms.doHttpRequest(options);
+        const response = await FrontHostApp.doHttpRequest(options);
         this.emit('request', {time: Date.now() - start});
         return response;
     }

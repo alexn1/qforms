@@ -78,7 +78,7 @@ class EditorController {
 
     static async fetchPageData(fileName) {
         console.log('EditorController.fetchPageData', fileName);
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'get',
             params    : Helper.encodeObject({fileName})

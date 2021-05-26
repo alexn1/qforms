@@ -7,7 +7,7 @@ class Field extends Model {
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -22,7 +22,7 @@ class Field extends Model {
         return data;
     }
     async deleteData() {
-        await QForms.doHttpRequest({
+        await FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'delete',
             params     : Helper.encodeObject({
@@ -37,7 +37,7 @@ class Field extends Model {
         this.parent.removeField(this);
     }
     async getView(view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'getView',
             params    : Helper.encodeObject({
@@ -50,7 +50,7 @@ class Field extends Model {
     }
 
     async saveView(text, view) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveView',
             params    : Helper.encodeObject({
@@ -64,7 +64,7 @@ class Field extends Model {
     }
 
     async saveController(text) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveController',
             params    : Helper.encodeObject({
@@ -77,7 +77,7 @@ class Field extends Model {
     }
 
     async createView() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createView',
             params    : Helper.encodeObject({
@@ -90,7 +90,7 @@ class Field extends Model {
     }
 
     async createController() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createController',
             params    : Helper.encodeObject({
@@ -106,7 +106,7 @@ class Field extends Model {
         params['page']  = this.form.page.getName();
         params['form']  = this.form.getName();
         params['field'] = this.getName();
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'changeClass',
             params    : Helper.encodeObject(params)
@@ -115,7 +115,7 @@ class Field extends Model {
     }
 
     moveUp() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveUp',
             params     : Helper.encodeObject({
@@ -127,7 +127,7 @@ class Field extends Model {
     }
 
     moveDown() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveDown',
             params     : Helper.encodeObject({

@@ -26,7 +26,7 @@ class Table extends Model {
 
     async newColumn(name) {
         if (!name) throw new Error(`newColumn: no name`);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -38,7 +38,7 @@ class Table extends Model {
         return this.createColumn(data);
     }
     async deleteData() {
-        await QForms.doHttpRequest({
+        await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -53,7 +53,7 @@ class Table extends Model {
     }
 
     moveUp() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveUp',
             params     : Helper.encodeObject({
@@ -64,7 +64,7 @@ class Table extends Model {
     }
 
     moveDown() {
-        return QForms.doHttpRequest({
+        return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveDown',
             params     : Helper.encodeObject({

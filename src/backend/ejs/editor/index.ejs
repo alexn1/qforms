@@ -28,7 +28,7 @@
             console.log('editor.ejs DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const runAppLink = "<%=runAppLink%>";
-            new QForms(data);
+            new FrontHostApp(data);
             new EditorController(data, runAppLink).init();
         });
     </script>

@@ -47,7 +47,7 @@ class Database extends Model {
 
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'save',
             params    : Helper.encodeObject({
@@ -61,7 +61,7 @@ class Database extends Model {
     }
 
     async deleteData() {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'delete',
             params    : Helper.encodeObject({
@@ -76,7 +76,7 @@ class Database extends Model {
     }
 
     async newParam(name) {
-        const data = await QForms.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -89,7 +89,7 @@ class Database extends Model {
 
     async newTable(params) {
         if (!params.name) throw new Error('newTable: no name');
-        const data =  await QForms.doHttpRequest({
+        const data =  await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : '_new',
             params    : Helper.encodeObject({
@@ -103,7 +103,7 @@ class Database extends Model {
 
     async getView(view) {
         console.log('Database.getView', view);
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
             params    : Helper.encodeObject({
@@ -114,7 +114,7 @@ class Database extends Model {
     }
 
     async getTableInfo(table) {
-        return await QForms.doHttpRequest({
+        return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getTableInfo',
             params    : Helper.encodeObject({
