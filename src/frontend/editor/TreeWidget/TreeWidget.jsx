@@ -1,4 +1,4 @@
-class TreeWidget2 extends ReactComponent {
+class TreeWidget extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -6,7 +6,7 @@ class TreeWidget2 extends ReactComponent {
         };
     }
     async select(item) {
-        console.log('TreeWidget2.select', item ? item.getTitle() : null);
+        console.log('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item)) return;
         return new Promise(resolve => {
             this.setState({selectedItem: item}, () => {
@@ -16,7 +16,7 @@ class TreeWidget2 extends ReactComponent {
         });
     }
     onDoubleClick(item) {
-        // console.log('TreeWidget2.onDoubleClick', item);
+        // console.log('TreeWidget.onDoubleClick', item);
         if (this.props.onItemDoubleClick) this.props.onItemDoubleClick(item);
     }
     onOpen(item) {
@@ -29,16 +29,16 @@ class TreeWidget2 extends ReactComponent {
         return this.state.selectedItem;
     }
     scrollToSelected() {
-        console.log('TreeWidget2.scrollToSelected', this.getSelectedItem().getTitle());
+        console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
         this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
-        console.log('TreeWidget2.render'/*, this.props.items*/);
+        console.log('TreeWidget.render'/*, this.props.items*/);
         const items = this.props.items;
         return <div className={this.getClassName()}>
             <ul>
                 {items.map(item =>
-                    <TreeItem2
+                    <TreeItem
                         key={item.getTitle()}
                         tree={this}
                         item={item}

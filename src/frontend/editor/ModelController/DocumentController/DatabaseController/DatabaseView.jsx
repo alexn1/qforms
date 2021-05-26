@@ -30,7 +30,7 @@ class DatabaseView extends ReactComponent {
                     </div>
                 </div>
             </div>
-            <TreeWidget2
+            <TreeWidget
                 classList={['sidebar']}
                 items={document.treeWidgetItems}
                 onItemSelect={ctrl.onTableSelect2}

@@ -1,4 +1,4 @@
-class TreeItem2 extends ReactComponent {
+class TreeItem extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -7,19 +7,19 @@ class TreeItem2 extends ReactComponent {
         this.li = React.createRef();
     }
     onDivMouseDown = e => {
-        // console.log('TreeItem2.onDivMouseDown', e.currentTarget);
+        // console.log('TreeItem.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         tree.select(item);
     }
     onDivDoubleClick = e => {
-        // console.log('TreeItem2.onDivDoubleClick');
+        // console.log('TreeItem.onDivDoubleClick');
         const item = this.props.item;
         const tree = this.props.tree;
         tree.onDoubleClick(item);
     }
     onNodeMouseDown = e => {
-        // console.log('TreeItem2.onNodeMouseDown', e.currentTarget);
+        // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         const opened = this.state.opened;
@@ -41,7 +41,7 @@ class TreeItem2 extends ReactComponent {
         return this.li.current;
     }
     open() {
-        console.log('TreeItem2.open', this.props.item.getTitle());
+        console.log('TreeItem.open', this.props.item.getTitle());
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();
@@ -50,7 +50,7 @@ class TreeItem2 extends ReactComponent {
         }
     }
     render() {
-        // console.log('TreeItem2.render', this.props.item.getTitle());
+        // console.log('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
@@ -71,7 +71,7 @@ class TreeItem2 extends ReactComponent {
             {hasItems &&
             <ul>
                 {items.map(item =>
-                    <TreeItem2
+                    <TreeItem
                         key={item.getTitle()}
                         tree={tree}
                         item={item}

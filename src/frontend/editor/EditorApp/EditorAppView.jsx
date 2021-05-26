@@ -32,7 +32,7 @@ class EditorAppView extends ReactComponent {
                         <ActionList onCreate={c => ctrl.actionList = c} onClick={ctrl.onActionClick}/>
                     </div>
                 </div>
-                <TreeWidget2
+                <TreeWidget
                     onCreate={c => ctrl.treeWidget2 = c}
                     items={ctrl.items}
                     onItemSelect={ctrl.onItemSelect2}
