@@ -67,7 +67,7 @@ class MyError extends Error {
     status: number;
 }
 
-class HostApp {
+class BackHostApp {
     params: any;
     server: any;
     publicDirPath: string;
@@ -77,7 +77,7 @@ class HostApp {
     nodeEnv: any;
 
     constructor(params: any = {}) {
-        // console.log('HostApp.constructor');
+        // console.log('BackHostApp.constructor');
         this.params = params;
         this.server = null;
         this.publicDirPath = null;
@@ -86,8 +86,6 @@ class HostApp {
         this.applications = {};
         this.nodeEnv = null;
     }
-
-
 
     run() {
         this.initProcess();
@@ -192,7 +190,7 @@ class HostApp {
     }
 
     async createApplicationIfNotExists(req, context: Context) {
-        // console.log(`HostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
+        // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.applications[route];
@@ -218,14 +216,14 @@ class HostApp {
     }
 
     async createApplication(appFilePath, env) {
-        // console.log(`HostApp.createApplication: ${appFilePath}`);
+        // console.log(`BackHostApp.createApplication: ${appFilePath}`);
         const application = await Application.create(appFilePath, this, env);
         await application.init();
         return application;
     }
 
     async handleViewerGet(req, res, context: Context) {
-        console.log('HostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
@@ -243,7 +241,7 @@ class HostApp {
     }
 
     async handleViewerPost(req, res, context: Context) {
-        // console.log('HostApp.handleViewerPost');
+        // console.log('BackHostApp.handleViewerPost');
         await this.createApplicationIfNotExists(req, context);
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context);
@@ -259,7 +257,7 @@ class HostApp {
     }
 
     async loginGet(req, res, context: Context) {
-        console.log('HostApp.loginGet');
+        console.log('BackHostApp.loginGet');
         const application = this.getApplication(context);
         const users = await application.getUsers(context);
         res.render('viewer/login', {
@@ -273,7 +271,7 @@ class HostApp {
     }
 
     async loginPost(req, res, context: Context) {
-        console.log('HostApp.loginPost');
+        console.log('BackHostApp.loginPost');
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.getApplication(context);
@@ -302,7 +300,7 @@ class HostApp {
 
     // fill application
     async fill(req, context: Context) {
-        console.log('HostApp.fill', this.getApplication(context).getName());
+        console.log('BackHostApp.fill', this.getApplication(context).getName());
         const application = this.getApplication(context);
         const start = Date.now();
         await application.initContext(context);
@@ -313,7 +311,7 @@ class HostApp {
 
     // action (fill page)
     async page(req, res, context: Context) {
-        console.log('HostApp.page', req.body.page);
+        console.log('BackHostApp.page', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
@@ -324,7 +322,7 @@ class HostApp {
 
     // action
     async update(req, res, context: Context) {
-        console.log('HostApp.update', req.body.page);
+        console.log('BackHostApp.update', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
@@ -336,7 +334,7 @@ class HostApp {
 
     // action
     async select(req, res, context: Context) {
-        console.log('HostApp.select', req.body.page);
+        console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -360,7 +358,7 @@ class HostApp {
 
     // action
     async selectSingle(req, res, context: Context) {
-        console.log('HostApp.selectSingle', req.body.page);
+        console.log('BackHostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -385,7 +383,7 @@ class HostApp {
 
     // action
     async selectMultiple(req, res, context: Context) {
-        console.log('HostApp.selectMultiple', req.body.page);
+        console.log('BackHostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
         await application.initContext(context);
@@ -410,7 +408,7 @@ class HostApp {
 
     // action
     async insert(req, res, context: Context) {
-        console.log('HostApp.insert', req.body.page);
+        console.log('BackHostApp.insert', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
@@ -430,7 +428,7 @@ class HostApp {
 
     // action
     async _delete(req, res, context: Context) {
-        console.log('HostApp._delete', req.body.page);
+        console.log('BackHostApp._delete', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
@@ -450,7 +448,7 @@ class HostApp {
 
     // action
     async rpc(req, res, context: Context) {
-        console.log('HostApp.rpc', req.body);
+        console.log('BackHostApp.rpc', req.body);
         const application = this.getApplication(context);
         await application.initContext(context);
         let model;
@@ -471,7 +469,7 @@ class HostApp {
 
     // action
     async logout(req, res, context: Context) {
-        console.log('HostApp.logout');
+        console.log('BackHostApp.logout');
         if (!context.route) throw new Error('no context.route');
         if (!req.session.user || !req.session.user[context.route]) {
             throw new Error(`no user for route ${context.route}`);
@@ -482,14 +480,14 @@ class HostApp {
 
     // action
     async test(req, res, context: Context) {
-        console.log('HostApp.test', req.body);
+        console.log('BackHostApp.test', req.body);
         // const result = await Test[req.body.name](req, res, context, this.getApplication(context));
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
     }
 
     async appFile(req, context: Context, application) {
-        // console.log('HostApp.appFile', context.uri);
+        // console.log('BackHostApp.appFile', context.uri);
         const filePath = path.join(application.appInfo.dirPath, 'build', context.uri);
         // console.log('filePath:', filePath);
         const ext = path.extname(filePath);
@@ -509,7 +507,7 @@ class HostApp {
     }
 
     async staticFile(req, res, context: Context) {
-        // console.log('HostApp.staticFile');
+        // console.log('BackHostApp.staticFile');
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
@@ -544,7 +542,7 @@ class HostApp {
     }
 
     /*async editorFile(req, res, context: Context) {
-        // console.log('HostApp.editorFile', context.uri);
+        // console.log('BackHostApp.editorFile', context.uri);
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
@@ -559,7 +557,7 @@ class HostApp {
     }*/
 
     async handleEditorGet(req, res, context: Context) {
-        console.log('HostApp.handleEditorGet');
+        console.log('BackHostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req, context);
         const appFile = new JsonFile(application.appInfo.filePath);
         await appFile.read();
@@ -577,7 +575,7 @@ class HostApp {
     }
 
     async handleEditorPost(req, res, context: Context) {
-        console.log('HostApp.handleEditorPost', context.params);
+        console.log('BackHostApp.handleEditorPost', context.params);
         const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
@@ -599,7 +597,7 @@ class HostApp {
     }
 
     async appPost(req, res) {
-        console.log('HostApp.appPost');
+        console.log('BackHostApp.appPost');
         const appInfos = await this.createApp(req);
         await res.json({appInfos: appInfos.map(appInfo => ({
             fullName: appInfo.fullName,
@@ -622,7 +620,7 @@ class HostApp {
     }
 
     async appGet(req, res) {
-        console.log('HostApp.appGet');
+        console.log('BackHostApp.appGet');
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         // console.log('appInfos:', appInfos);
         res.render('app/index', {
@@ -640,7 +638,7 @@ class HostApp {
     }
 
     async monitorGet(req, res) {
-        console.log('HostApp.monitorGet');
+        console.log('BackHostApp.monitorGet');
         const model = new MonitorModel(this);
         const dump = model.dump();
         res.render('monitor/index', {
@@ -649,9 +647,9 @@ class HostApp {
         });
     }
     async logError(req, err) {
-        console.log('HostApp.logError:', err.message);
+        console.log('BackHostApp.logError:', err.message);
         try {
-            await HostApp.createLog(this.logCnn, {
+            await BackHostApp.createLog(this.logCnn, {
                 type   : 'error',
                 source : 'server',
                 ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -683,7 +681,7 @@ class HostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await HostApp.createLog(this.logCnn, {
+            await BackHostApp.createLog(this.logCnn, {
                 type   : 'log',
                 source : 'server',
                 ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -696,7 +694,7 @@ class HostApp {
     }
 
     static async createLog(cnn, values) {
-        // console.log('HostApp.createLog', values);
+        // console.log('BackHostApp.createLog', values);
         if (values.stack === undefined) values.stack = null;
         if (values.created === undefined) values.created = new Date();
         if (values.message && values.message.length > 255) {
@@ -711,7 +709,7 @@ class HostApp {
     }
 
     async _moduleGet(req, res, next) {
-        console.warn(colors.magenta.underline('HostApp.moduleGet'), req.params);
+        console.warn(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context = null;
         try {
             context = Context.create(req);
@@ -762,7 +760,7 @@ class HostApp {
     }
 
     async _modulePost(req, res, next)  {
-        console.warn(colors.magenta.underline('HostApp._modulePost'), req.params, req.body);
+        console.warn(colors.magenta.underline('BackHostApp._modulePost'), req.params, req.body);
         let context = null;
         try {
             context = Context.create(req);
@@ -782,7 +780,7 @@ class HostApp {
     }
 
     async _moduleFile(req, res, next) {
-        // console.warn(colors.magenta.underline('HostApp._moduleFile'), req.originalUrl);
+        // console.warn(colors.magenta.underline('BackHostApp._moduleFile'), req.originalUrl);
         let context = null;
         try {
             context = Context.create(req);
@@ -846,7 +844,7 @@ class HostApp {
     }
 
     async onProcessMessage(message) {
-        console.log('HostApp.onProcessMessage');
+        console.log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             await this.shutdown();
             process.exit(0);
@@ -854,31 +852,31 @@ class HostApp {
     }
 
     async onProcessSIGINT() {
-        console.log('HostApp.onProcessSIGINT');
+        console.log('BackHostApp.onProcessSIGINT');
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
         await this.shutdown();
         process.exit(0);
     }
 
     onProcessSIGTERM() {
-        console.log('HostApp.onProcessSIGTERM');
+        console.log('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         process.exit(1);
     }
 
     onProcessExit(code) {
-        console.log('HostApp.onProcessExit', code);
+        console.log('BackHostApp.onProcessExit', code);
         console.log('process.exit:', code);
     }
 
     async onUnhandledRejection(err) {
-        console.error(colors.red('HostApp.onUnhandledRejection'), err);
+        console.error(colors.red('BackHostApp.onUnhandledRejection'), err);
         err.message = `unhandledRejection: ${err.message}`;
         await this.logError(null, err);
     }
 
     async shutdown() {
-        console.log('HostApp.shutdown');
+        console.log('BackHostApp.shutdown');
         const applications = this.applications;
         const routes = Object.keys(applications);
         for (let i = 0; i < routes.length; i++) {
@@ -890,7 +888,7 @@ class HostApp {
     }
 
     onHttpServerError(err) {
-        console.error(colors.red('HostApp.onHttpServerError'), err.code, err.message);
+        console.error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /*if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
         } else {
@@ -901,4 +899,4 @@ class HostApp {
 
 }
 
-export = HostApp;
+export = BackHostApp;

@@ -2,7 +2,7 @@ const path  = require('path');
 const axios = require('axios');
 const colors     = require('colors/safe');
 
-import HostApp from '../../../HostApp';
+import BackHostApp from '../../../BackHostApp';
 import BaseModel from '../../../BaseModel';
 import Model from '../Model';
 import Action from '../Action/Action';
@@ -27,7 +27,7 @@ class Application extends Model {
     links: any[];
     js: any[];
 
-    static async create(appFilePath, hostApp: HostApp, env) {
+    static async create(appFilePath, hostApp: BackHostApp, env) {
         // console.log('Application.create', appFilePath);
         const appInfo = await Application.getAppInfo(appFilePath, env);
         const json = await Helper.readTextFile(appInfo.filePath);

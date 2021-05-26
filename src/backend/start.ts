@@ -1,4 +1,4 @@
-import { HostApp } from './index';
+import { BackHostApp } from './index';
 
 function getCommandLineParams() {
     return process.argv
@@ -10,5 +10,5 @@ function getCommandLineParams() {
 }
 
 main(); function main() {
-    new HostApp(getCommandLineParams()).run();
+    new BackHostApp(getCommandLineParams()).run();
 }
