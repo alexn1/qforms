@@ -3,7 +3,7 @@ const gulp = require('gulp');
 
 const frontend_common = require("./frontend_common");
 const frontend_editor = require("./frontend_editor");
-const frontend_home   = require("./frontend_home");
+const frontend_app   = require("./frontend_app");
 const frontend_viewer = require("./frontend_viewer");
 
 const BUILD_PATH = './build';
@@ -14,6 +14,6 @@ function frontend_root() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend')));
 }
 
-const frontend = gulp.series(frontend_common, frontend_editor, frontend_home, frontend_viewer, frontend_root);
+const frontend = gulp.series(frontend_common, frontend_editor, frontend_app, frontend_viewer, frontend_root);
 
 module.exports = frontend;
