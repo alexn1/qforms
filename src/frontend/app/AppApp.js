@@ -17,6 +17,7 @@ class AppApp {
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.createView(document.querySelector('#root'));
     }
 
     createView(root) {
