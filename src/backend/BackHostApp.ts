@@ -11,6 +11,7 @@ import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/Postg
 import JsonFile from '../backend/JsonFile';
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
+import { AppInfo } from './AppInfo';
 
 const backend  = require('./index');
 const pkg     = require('../../package.json');
@@ -231,11 +232,12 @@ class BackHostApp {
         return application;
     }
 
-    async getApplicationClass(appInfo) {
+    async getApplicationClass(appInfo: AppInfo) {
         // console.log('BackHostApp.getApplicationClass', appInfo);
-        const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
+        /*const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         const exists = await Helper.exists(customClassFilePath);
-        return exists ? require(customClassFilePath) : Application;
+        return exists ? require(customClassFilePath) : Application;*/
+        return Application;
     }
 
     async handleViewerGet(req, res, context: Context) {
