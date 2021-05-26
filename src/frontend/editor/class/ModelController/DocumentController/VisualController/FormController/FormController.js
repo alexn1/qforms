@@ -68,32 +68,32 @@ class FormController extends VisualController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('forms', this, -1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('forms', this, 1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
 
     async actionNewDataSource() {
-        await EditorApp.editorController.openModal(new NewDataSourceController({onCreate: async values => {
+        await EditorApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
             const dataSource = await this.model.newDataSource({
                 name : values.name,
                 class: values.class
             });
             const dataSourceController = this.createDataSource(dataSource);
-            await EditorApp.editorController.treeWidget2.select(dataSourceController);
+            await EditorApp.editorApp.treeWidget2.select(dataSourceController);
             dataSourceController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 
     async actionNewField() {
-        await EditorApp.editorController.openModal(new NewFieldController({onCreate: async values => {
+        await EditorApp.editorApp.openModal(new NewFieldController({onCreate: async values => {
             const field = await this.model.newField({
                 class  : values.class,
                 name   : values.name,
@@ -101,10 +101,10 @@ class FormController extends VisualController {
                 type   : values.type
             });
             const fieldController = this.createField(field);
-            await EditorApp.editorController.treeWidget2.select(fieldController);
+            await EditorApp.editorApp.treeWidget2.select(fieldController);
             fieldController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 
@@ -149,8 +149,8 @@ class FormController extends VisualController {
     async delete() {
         await this.model.delete();
         this.parent.removeForm(this);
-        EditorApp.editorController.treeWidget2.select(null);
-        EditorApp.editorController.treeWidget2.rerender();
+        EditorApp.editorApp.treeWidget2.select(null);
+        EditorApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
         return VisualView;

@@ -1,7 +1,7 @@
 class EditorApp {
     constructor(data, runAppLink) {
         console.log('EditorApp.constructor');
-        EditorApp.editorController = this;
+        EditorApp.editorApp = this;
         this.data = data;
         this.runAppLink = runAppLink;
         this.view = null;

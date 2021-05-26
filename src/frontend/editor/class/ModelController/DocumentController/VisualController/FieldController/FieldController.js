@@ -31,23 +31,23 @@ class FieldController extends VisualController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('fields', this, -1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('fields', this, 1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
 
     async actionChangeClass() {
-        await EditorApp.editorController.openModal(new ChangeClassController({
+        await EditorApp.editorApp.openModal(new ChangeClassController({
             fieldCtrl: this,
             onCreate: async values => {
                 const data = await this.model.changeClass({class: values.class});
                 console.log(data);
-                EditorApp.editorController.fillPropertyGrid(this);
+                EditorApp.editorApp.fillPropertyGrid(this);
                 this.view.rerender();
             }
         }));
@@ -68,8 +68,8 @@ class FieldController extends VisualController {
     async delete() {
         await this.model.delete();
         this.parent.removeField(this);
-        EditorApp.editorController.treeWidget2.select(null);
-        EditorApp.editorController.treeWidget2.rerender();
+        EditorApp.editorApp.treeWidget2.select(null);
+        EditorApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
         return VisualView;

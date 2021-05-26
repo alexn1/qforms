@@ -30,7 +30,7 @@ class KeyColumnController extends ModelController {
     async delete() {
         await this.model.delete();
         this.parent.removeKeyColumn(this);
-        EditorApp.editorController.treeWidget2.select(null);
-        EditorApp.editorController.treeWidget2.rerender();
+        EditorApp.editorApp.treeWidget2.select(null);
+        EditorApp.editorApp.treeWidget2.rerender();
     }
 }

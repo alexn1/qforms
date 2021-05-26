@@ -53,24 +53,24 @@ class DataSourceController extends DocumentController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('dataSources', this, -1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('dataSources', this, 1);
-                EditorApp.editorController.treeWidget2.rerender();
+                EditorApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
 
     async actionNewKeyColumn() {
-        await EditorApp.editorController.openModal(new NewKeyColumnController({onCreate: async values => {
+        await EditorApp.editorApp.openModal(new NewKeyColumnController({onCreate: async values => {
             const keyColumn = await this.model.newKeyColumn(values.name);
             const keyColumnController = this.createKeyColumn(keyColumn);
-            await EditorApp.editorController.treeWidget2.select(keyColumnController);
+            await EditorApp.editorApp.treeWidget2.select(keyColumnController);
             keyColumnController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 
@@ -102,7 +102,7 @@ class DataSourceController extends DocumentController {
     async delete() {
         await this.model.delete();
         this.parent.removeDataSource(this);
-        EditorApp.editorController.treeWidget2.select(null);
-        EditorApp.editorController.treeWidget2.rerender();
+        EditorApp.editorApp.treeWidget2.select(null);
+        EditorApp.editorApp.treeWidget2.rerender();
     }
 }
