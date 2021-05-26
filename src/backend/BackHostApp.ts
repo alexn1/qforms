@@ -216,14 +216,16 @@ class BackHostApp {
     }
 
     async createApplication(appFilePath, env) {
-        console.log(`BackHostApp.createApplication: ${appFilePath}`);
+        // console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
         const appInfo = await Application.getAppInfo(appFilePath, env);
+
+        // ApplicationClass
         const ApplicationClass = await this.getApplicationClass(appInfo);
-        const json = await Helper.readTextFile(appInfo.filePath);
-        const data = JSON.parse(json);
 
         // application
+        const json = await Helper.readTextFile(appInfo.filePath);
+        const data = JSON.parse(json);
         const application = new ApplicationClass(data, appInfo, this, env);
         await application.init();
         return application;
