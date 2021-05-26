@@ -10,14 +10,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-function frontend_common_jsx_less() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.less'))
+function frontend_common_class_js() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/class/**/*.js'))
         .pipe(sourcemaps.init())
-        .pipe(less())
-        .pipe(concat('common-jsx.css'))
-        // .pipe(minifyCss())
+        .pipe(concat('common.js'))
+        //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
 function frontend_common_jsx_js() {
@@ -29,13 +28,14 @@ function frontend_common_jsx_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
-function frontend_common_class_js() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/common/class/**/*.js'))
+function frontend_common_jsx_less() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/common/jsx/**/*.less'))
         .pipe(sourcemaps.init())
-        .pipe(concat('common.js'))
-        //.pipe(uglify())
+        .pipe(less())
+        .pipe(concat('common-jsx.css'))
+        // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
 }
 
 function frontend_common_lib() {
@@ -43,7 +43,11 @@ function frontend_common_lib() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
 }
 
-const frontend_common_class = gulp.series(frontend_common_class_js, frontend_common_jsx_less, frontend_common_jsx_js);
-const frontend_common       = gulp.series(frontend_common_class, frontend_common_lib);
+const frontend_common = gulp.series(
+    frontend_common_class_js,
+    frontend_common_jsx_js,
+    frontend_common_jsx_less,
+    frontend_common_lib
+);
 
 module.exports = frontend_common;
