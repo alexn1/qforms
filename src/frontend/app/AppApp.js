@@ -1,7 +1,7 @@
-class HomeController {
+class AppApp {
 
     constructor(data) {
-        console.log('HomeController.constructor', data);
+        console.log('AppApp.constructor', data);
         this.data = data;
         this.view = null;
         this.currentAppFullName = undefined;
@@ -13,7 +13,7 @@ class HomeController {
     }
 
     init() {
-        // console.log('HomeController.init');
+        // console.log('AppApp.init');
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
@@ -31,7 +31,7 @@ class HomeController {
     }
 
     getEnvItems() {
-        // console.log('HomeController.getEnvItems', this.currentAppFullName);
+        // console.log('AppApp.getEnvItems', this.currentAppFullName);
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) return appInfo.envs.map(env => ({value: env, title: env}));
@@ -39,12 +39,12 @@ class HomeController {
     }
 
     getAppInfo(fullName) {
-        // console.log('HomeController.getAppInfo', fullName);
+        // console.log('AppApp.getAppInfo', fullName);
         return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
 
     onAppChange = fullName => {
-        console.log('HomeController.onAppChange', fullName);
+        console.log('AppApp.onAppChange', fullName);
         this.currentAppFullName = fullName;
         const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
         if (!appInfo) throw new Error(`no appInfo ${fullName}`);
@@ -54,7 +54,7 @@ class HomeController {
     }
 
     onEnvChange = env => {
-        console.log('HomeController.onEnvChange', env);
+        console.log('AppApp.onEnvChange', env);
         this.currentAppEnv = env;
     }
 
@@ -95,23 +95,23 @@ class HomeController {
     }
 
     closeModal = () => {
-        console.log('HomeController.closeModal');
+        console.log('AppApp.closeModal');
         this.modals.pop();
         this.view.rerender();
     }
     onFolderNameCreate = textBox => {
-        console.log('HomeController.onFolderNameCreate');
+        console.log('AppApp.onFolderNameCreate');
         this.folderNameTextBox = textBox;
     }
     onFolderNameChange = folderName => {
-        // console.log('HomeController.onFolderNameChange', folderName);
+        // console.log('AppApp.onFolderNameChange', folderName);
         this.folderName = folderName;
     }
     onAppNameChange = appName => {
         this.appName = appName;
     }
     onCreateClick = async e => {
-        console.log('HomeController.onCreateClick');
+        console.log('AppApp.onCreateClick');
         console.log(this.folderName, this.appName);
         this.closeModal();
         await this.createApp(this.folderName, this.appName);

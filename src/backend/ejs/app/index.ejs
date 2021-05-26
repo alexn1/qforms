@@ -23,7 +23,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            const ctrl = new HomeController(data);
+            const ctrl = new AppApp(data);
             ctrl.init();
             ctrl.createView(document.querySelector('#root'));
         });
