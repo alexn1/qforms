@@ -1,6 +1,6 @@
 const path  = require('path');
 const axios = require('axios');
-const colors     = require('colors/safe');
+const colors = require('colors/safe');
 
 import BackHostApp from '../../../BackHostApp';
 import BaseModel from '../../../BaseModel';
@@ -27,16 +27,14 @@ class Application extends Model {
     links: any[];
     js: any[];
 
-    static async create(appFilePath, hostApp: BackHostApp, env) {
+    /*static async create(appFilePath, hostApp: BackHostApp, env) {
         // console.log('Application.create', appFilePath);
         const appInfo = await Application.getAppInfo(appFilePath, env);
+        const Class = await hostApp.getApplicationClass(appInfo);
         const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
-        const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
-        const exists = await Helper.exists(customClassFilePath);
-        const Class = exists ? require(customClassFilePath) : Application;
         return new Class(data, appInfo, hostApp, env);
-    }
+    }*/
 
     constructor(data, appInfo, hostApp, env) {
         super(data);

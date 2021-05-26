@@ -217,9 +217,23 @@ class BackHostApp {
 
     async createApplication(appFilePath, env) {
         // console.log(`BackHostApp.createApplication: ${appFilePath}`);
-        const application = await Application.create(appFilePath, this, env);
+        // const application = await Application.create(appFilePath, this, env);
+        const appInfo = await Application.getAppInfo(appFilePath, env);
+        const ApplicationClass = await this.getApplicationClass(appInfo);
+        const json = await Helper.readTextFile(appInfo.filePath);
+        const data = JSON.parse(json);
+
+        // application
+        const application = new ApplicationClass(data, appInfo, this, env);
         await application.init();
         return application;
+    }
+
+    async getApplicationClass(appInfo) {
+        console.log('BackHostApp.getApplicationClass', appInfo);
+        const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
+        const exists = await Helper.exists(customClassFilePath);
+        return exists ? require(customClassFilePath) : Application;
     }
 
     async handleViewerGet(req, res, context: Context) {
