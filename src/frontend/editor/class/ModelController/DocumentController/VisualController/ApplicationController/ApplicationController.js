@@ -78,7 +78,7 @@ class ApplicationController extends VisualController {
 
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
-        await EditorController.editorController.openModal(new NewDatabaseController({onCreate: async values => {
+        await EditorApp.editorController.openModal(new NewDatabaseController({onCreate: async values => {
             // console.log('values: ', values);
             const database = await this.model.newDatabase({
                 _class: values.class,
@@ -91,29 +91,29 @@ class ApplicationController extends VisualController {
                 }
             });
             const databaseController = this.createDatabase(database);
-            await EditorController.editorController.treeWidget2.select(databaseController);
+            await EditorApp.editorController.treeWidget2.select(databaseController);
             databaseController.view.parent.open();
             this.view.rerender();
-            EditorController.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 
     async newDataSourceAction() {
-        await EditorController.editorController.openModal(new NewDataSourceController({onCreate: async values => {
+        await EditorApp.editorController.openModal(new NewDataSourceController({onCreate: async values => {
             const dataSource = await this.model.newDataSource({
                 name : values.name,
                 class: values.class
             });
             const dataSourceController = this.createDataSource(dataSource);
-            await EditorController.editorController.treeWidget2.select(dataSourceController);
+            await EditorApp.editorController.treeWidget2.select(dataSourceController);
             dataSourceController.view.parent.open();
             this.view.rerender();
-            EditorController.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 
     async newPageAction() {
-        await EditorController.editorController.openModal(new NewPageController({onCreate: async values => {
+        await EditorApp.editorController.openModal(new NewPageController({onCreate: async values => {
             const page = await this.model.newPage({
                 name   : values.name,
                 caption: values.caption,
@@ -123,8 +123,8 @@ class ApplicationController extends VisualController {
             const pageController = new PageController(page, pageLinkController);
             pageController.init();
             pageLinkController.setPageController(pageController);
-            EditorController.editorController.treeWidget2.select(pageLinkController);
-            EditorController.editorController.treeWidget2.scrollToSelected();
+            EditorApp.editorController.treeWidget2.select(pageLinkController);
+            EditorApp.editorController.treeWidget2.scrollToSelected();
         }}));
     }
 

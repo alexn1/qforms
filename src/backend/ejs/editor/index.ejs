@@ -29,7 +29,7 @@
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const runAppLink = "<%=runAppLink%>";
             new FrontHostApp(data);
-            new EditorController(data, runAppLink).init();
+            new EditorApp(data, runAppLink).init();
         });
     </script>
 </head>

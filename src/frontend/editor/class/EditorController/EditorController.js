@@ -1,7 +1,7 @@
-class EditorController {
+class EditorApp {
     constructor(data, runAppLink) {
-        console.log('EditorController.constructor');
-        EditorController.editorController = this;
+        console.log('EditorApp.constructor');
+        EditorApp.editorController = this;
         this.data = data;
         this.runAppLink = runAppLink;
         this.view = null;
@@ -15,7 +15,7 @@ class EditorController {
     }
 
     init() {
-        console.log('EditorController.init', this.data);
+        console.log('EditorApp.init', this.data);
 
         // app
         const app = new Application(this.data);
@@ -34,14 +34,14 @@ class EditorController {
     deinit() {
     }
     onItemOpen2 = async item => {
-        console.log('EditorController.onItemOpen2', item.getTitle());
+        console.log('EditorApp.onItemOpen2', item.getTitle());
         // console.log('parent:', item.view.parent);
         if (item instanceof PageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
     }
     onItemSelect2 = async item => {
-        console.log('EditorController.onItemSelect2', item ? item.getTitle() : null);
+        console.log('EditorApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof ModelController) {
             if (item instanceof PageLinkController && !item.hasPage()) {
                 await item.loadPage();
@@ -60,24 +60,24 @@ class EditorController {
     }
 
     onPropertyGrid2Change = (name, value) => {
-        console.log('EditorController.onPropertyGrid2Change', name, value);
+        console.log('EditorApp.onPropertyGrid2Change', name, value);
         const controller = this.treeWidget2.getSelectedItem();
         // console.log('controller', controller);
         controller.setProperty(name, value);
     }
 
     beginEdit(obj, options) {
-        console.log('EditorController.beginEdit', obj, options);
+        console.log('EditorApp.beginEdit', obj, options);
         this.pg.setState({object: {obj, options}});
     }
 
     endEdit() {
-        console.log('EditorController.endEdit');
+        console.log('EditorApp.endEdit');
         this.pg.setState({object: null});
     }
 
     static async fetchPageData(fileName) {
-        console.log('EditorController.fetchPageData', fileName);
+        console.log('EditorApp.fetchPageData', fileName);
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'get',
@@ -86,22 +86,22 @@ class EditorController {
     }
 
     fillActions(item) {
-        // console.log('EditorController.fillActions');
+        // console.log('EditorApp.fillActions');
         this.actionList.setState({item});
     }
     clearActions() {
-        // console.log('EditorController.clearActions');
+        // console.log('EditorApp.clearActions');
         this.actionList.setState({item: null});
     }
 
     onItemDoubleClick2 = async item => {
-        console.log('EditorController.onItemDoubleClick2', item.getTitle());
+        console.log('EditorApp.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
         if (!controller || !(controller instanceof DocumentController)) return;
         await this.openDocument(controller);
     }
     async openDocument(controller) {
-        console.log('EditorController.openDocument', controller.getTitle());
+        console.log('EditorApp.openDocument', controller.getTitle());
         let document = this.findDocument(controller);
         if (!document) {
             document = await controller.createDocument();
@@ -115,7 +115,7 @@ class EditorController {
         return this.documents.find(document => document.controller === controller) || null;
     }
     onDocumentClose = i => {
-        console.log('EditorController.onDocumentClose', i, this.tabWidget.state.active);
+        console.log('EditorApp.onDocumentClose', i, this.tabWidget.state.active);
         const document = this.documents[i];
         const activeDocument = this.documents[this.tabWidget.state.active];
         this.documents.splice(i, 1);
@@ -134,17 +134,17 @@ class EditorController {
         this.view.rerender();
     }
     async openModal(modalController) {
-        console.log('EditorController.openModal');
+        console.log('EditorApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
     }
     async onModalClose() {
-        console.log('EditorController.onModalClose');
+        console.log('EditorApp.onModalClose');
         this.modal = null;
         await this.view.rerender();
     }
     onActionClick = async actionName => {
-        console.log('EditorController.onActionClick', actionName);
+        console.log('EditorApp.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();
         // console.log('item', item);
         const controller = item instanceof PageLinkController ? item.pageController : item;
