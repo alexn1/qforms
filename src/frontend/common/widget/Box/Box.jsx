@@ -1,4 +1,4 @@
-class Box extends React.Component {
+class Box extends ReactComponent {
     constructor(props) {
         console.log('Box.constructor', props);
         super(props);

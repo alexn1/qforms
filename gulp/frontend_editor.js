@@ -58,24 +58,21 @@ function frontend_editor_jsx_less() {
 }
 
 
-function frontend_editor_lib() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/editor/lib/**/*'))
+/*function frontend_editor_lib() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/lib/!**!/!*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
-}
+}*/
 
-function frontend_editor_img() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/editor/img/**/*'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/img')));
-}
 
-const frontend_editor_class = gulp.series(
+const frontend_editor = gulp.series(
     frontend_editor_class_js,
     frontend_editor_class_css,
     frontend_editor_class_html,
     frontend_editor_class_ejs,
     frontend_editor_jsx_js,
     frontend_editor_jsx_less,
+    /*frontend_editor_lib,*/
+
 );
-const frontend_editor = gulp.series(frontend_editor_class, frontend_editor_lib, frontend_editor_img);
 
 module.exports = frontend_editor;

@@ -19,13 +19,20 @@ function frontend_lib() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
 }
 
+function frontend_img() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/img/**/*'))
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/img')));
+}
+
 const frontend = gulp.series(
     frontend_root,
     frontend_lib,
+    frontend_img,
     frontend_common,
     frontend_app,
     frontend_editor,
     frontend_viewer,
+
 );
 
 module.exports = frontend;
