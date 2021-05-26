@@ -1,4 +1,4 @@
-class PropertyGrid2 extends ReactComponent {
+class PropertyGrid extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {};
@@ -16,7 +16,7 @@ class PropertyGrid2 extends ReactComponent {
         return null;
     }
     onChange = (name, value) => {
-        // console.log('PropertyGrid2.onChange', name, value);
+        // console.log('PropertyGrid.onChange', name, value);
         if (this.props.onChange) {
             this.props.onChange(name, value);
         }
@@ -55,7 +55,7 @@ class PropertyGrid2 extends ReactComponent {
         </tr>);
     }
     render() {
-        return <div className={'PropertyGrid2'}>
+        return <div className={'PropertyGrid'}>
             <table cellPadding={0} cellSpacing={0}>
                 <tbody>
                     {this.getObj() && this.renderRows()}

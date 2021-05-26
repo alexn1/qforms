@@ -45,7 +45,7 @@ class EditorAppView extends ReactComponent {
                         {
                             name   : 'properties',
                             title  : 'Properties',
-                            content: <PropertyGrid2
+                            content: <PropertyGrid
                                 onCreate={c => ctrl.pg = c}
                                 onChange={ctrl.onPropertyGrid2Change}
                             />
