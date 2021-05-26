@@ -39,7 +39,7 @@ function frontend_common_jsx_less() {
 }
 
 function frontend_common_lib() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/common/lib/**/*'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/lib/**/*'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/lib')));
 }
 
