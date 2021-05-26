@@ -36,8 +36,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            const qforms = new FrontHostApp(data);
-            qforms.init();
+            new FrontHostApp(data).run();
         });
     </script>
 </head>

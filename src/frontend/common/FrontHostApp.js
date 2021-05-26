@@ -14,14 +14,17 @@ class FrontHostApp {
         };
         //window.onbeforeunload = FrontHostApp.exit;
     }
-    init() {
-        // console.log('FrontHostApp.init');
+    run() {
+        // console.log('FrontHostApp.run');
+
+        // application
         const application = new Application(this.data);
         application.init();
-        const root = document.querySelector(`.${application.getName()}-app__root`);
+
+        // applicationController
         const applicationController = ApplicationController.create(application);
         applicationController.init();
-        applicationController.createView(root);
+        applicationController.createView(document.querySelector(`.${application.getName()}-app__root`));
     }
 
     static exit(evt) {
