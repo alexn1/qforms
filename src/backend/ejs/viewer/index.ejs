@@ -5,30 +5,29 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getTitle(context, response)%></title>
-    <!-- EventEmitter -->
-    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <!-- react -->
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <!-- qforms js -->
-    <script src="js/common.js"></script>
-    <script src="js/common-jsx.js"></script>
-    <script src="js/viewer.js"></script>
-    <script src="js/viewer-jsx.js"></script>
-    <!-- qforms css -->
+    <!-- qforms links -->
     <link href="css/common.css" rel="stylesheet"/>
     <link href="css/viewer.css" rel="stylesheet"/>
     <!-- app links -->
     <%application.links.forEach(link => {
-        if (typeof link === 'string') {
-            %><link href="<%=link%>" rel="stylesheet"/>
+    if (typeof link === 'string') {
+    %><link href="<%=link%>" rel="stylesheet"/>
     <%
-        } else if (typeof link === 'object') {
-            %><link href="<%=link.href%>" rel="<%=link.rel%>"/>
+    } else if (typeof link === 'object') {
+    %><link href="<%=link.href%>" rel="<%=link.rel%>"/>
     <%
-        }
+    }
     });%>
-    <!-- app js -->
+    <!-- lib scripts -->
+    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
+    <script src="lib/react/react.development.js"></script>
+    <script src="lib/react/react-dom.development.js"></script>
+    <!-- qforms scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/common-jsx.js"></script>
+    <script src="js/viewer.js"></script>
+    <script src="js/viewer-jsx.js"></script>
+    <!-- app scripts -->
     <%application.js.forEach(src => {
         %><script src="<%=src%>"></script>
     <%

@@ -5,6 +5,7 @@ import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
 import Application from '../Application/Application';
 import Form from '../Form/Form';
+import Context from '../../../Context';
 
 class Page extends Model {
     dataSources: DataSource[];
@@ -52,7 +53,7 @@ class Page extends Model {
         return this.parent;
     }
 
-    getTitle(): string {
+    getTitle(context: Context): string {
         return this.getAttr('caption');
     }
     getForm(name): Form {
