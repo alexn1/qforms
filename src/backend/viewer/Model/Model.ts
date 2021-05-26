@@ -59,16 +59,16 @@ class Model extends BaseModel {
     }
 
     async getChildModelCustomClass(colName, data) {
-        const modelName = BaseModel.getName(data);
-        const dirPath = this.getDirPath();
         let CustomClass = null;
+        /*const dirPath = this.getDirPath();
         if (dirPath) {
+            const modelName = BaseModel.getName(data);
             const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
             const exists = await Helper.exists(customClassFilePath);
             if (exists) {
                 CustomClass = require(customClassFilePath);
             }
-        }
+        }*/
         return CustomClass;
     }
 
