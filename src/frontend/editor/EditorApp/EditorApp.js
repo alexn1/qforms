@@ -14,8 +14,8 @@ class EditorApp {
         this.modal = null;
     }
 
-    init() {
-        console.log('EditorApp.init', this.data);
+    run() {
+        console.log('EditorApp.run', this.data);
 
         // app
         const app = new Application(this.data);
