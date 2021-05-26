@@ -219,7 +219,8 @@ class Application extends Model {
         return pages;
     }
 
-    async authenticate(context, username, password) {
+    async authenticate(context: Context, username, password) {
+        console.log('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id  : 1,

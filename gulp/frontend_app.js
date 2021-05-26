@@ -10,7 +10,7 @@ const babel      = require('gulp-babel');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-function frontend_app_class_js() {
+function frontend_app_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/app/**/*.js'))
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
@@ -19,7 +19,7 @@ function frontend_app_class_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
 }
 
-function frontend_app_jsx_js() {
+function frontend_app_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/app/**/*.jsx'))
         .pipe(sourcemaps.init())
         .pipe(babel())
@@ -40,8 +40,8 @@ function frontend_app_less() {
 
 
 const frontend_app = gulp.series(
-    frontend_app_class_js,
-    frontend_app_jsx_js,
+    frontend_app_js,
+    frontend_app_jsx,
     frontend_app_less
 );
 
