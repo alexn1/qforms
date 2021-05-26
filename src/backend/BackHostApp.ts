@@ -195,10 +195,10 @@ class BackHostApp {
         const route = context.route;
         const application = this.applications[route];
         if (application) {
-            if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
+            /*if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
-            }
+            }*/
             return application;
         }
         return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
@@ -216,7 +216,7 @@ class BackHostApp {
     }
 
     async createApplication(appFilePath, env) {
-        // console.log(`BackHostApp.createApplication: ${appFilePath}`);
+        console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
         const appInfo = await Application.getAppInfo(appFilePath, env);
         const ApplicationClass = await this.getApplicationClass(appInfo);
@@ -230,14 +230,14 @@ class BackHostApp {
     }
 
     async getApplicationClass(appInfo) {
-        console.log('BackHostApp.getApplicationClass', appInfo);
+        // console.log('BackHostApp.getApplicationClass', appInfo);
         const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
         const exists = await Helper.exists(customClassFilePath);
         return exists ? require(customClassFilePath) : Application;
     }
 
     async handleViewerGet(req, res, context: Context) {
-        console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        // console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
