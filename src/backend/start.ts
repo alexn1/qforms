@@ -10,5 +10,5 @@ function getCommandLineParams() {
 }
 
 main(); function main() {
-    HostApp.run(getCommandLineParams());
+    new HostApp(getCommandLineParams()).run();
 }

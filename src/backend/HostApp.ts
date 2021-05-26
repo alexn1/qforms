@@ -68,6 +68,7 @@ class MyError extends Error {
 }
 
 class HostApp {
+    params: any;
     server: any;
     publicDirPath: string;
     appsDirPath: string;
@@ -75,9 +76,10 @@ class HostApp {
     applications: any;
     nodeEnv: any;
 
-    constructor(server) {
+    constructor(params: any = {}) {
         // console.log('HostApp.constructor');
-        this.server = server;
+        this.params = params;
+        this.server = null;
         this.publicDirPath = null;
         this.appsDirPath = null;
         this.logCnn = null;
@@ -85,22 +87,26 @@ class HostApp {
         this.nodeEnv = null;
     }
 
-    initProcess() {
-        process.on('message'           , this.onProcessMessage.bind(this));
-        process.on('SIGINT'            , this.onProcessSIGINT.bind(this));
-        process.on('SIGTERM'           , this.onProcessSIGTERM.bind(this));
-        process.on('exit'              , this.onProcessExit.bind(this));
-        process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
-    }
 
-    init(env) {
-        const {appsDirPath, handleException} = env;// environment
+
+    run() {
+        this.initProcess();
+
+        // env
+        const appsDirPath     = this.params.appsDirPath     || pkg.config.appsDirPath;
+        const handleException = this.params.handleException || pkg.config.handleException;
+        const host            = this.params.host            || pkg.config.host;
+        const port            = this.params.port            || pkg.config.port;
+
 
         if (!fs.existsSync(appsDirPath)) {
             console.error(colors.red(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`));
             process.exit(1);
             return;
         }
+
+        // express server
+        this.server = express();
 
         // path
         const backendDirPath = __dirname;
@@ -127,6 +133,17 @@ class HostApp {
         // runtime & temp
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
         Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
+
+        this.initExpressServer();
+        this.createAndRunHttpServer(host, port);
+    }
+
+    initProcess() {
+        process.on('message'           , this.onProcessMessage.bind(this));
+        process.on('SIGINT'            , this.onProcessSIGINT.bind(this));
+        process.on('SIGTERM'           , this.onProcessSIGTERM.bind(this));
+        process.on('exit'              , this.onProcessExit.bind(this));
+        process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
     initExpressServer() {
@@ -814,26 +831,6 @@ class HostApp {
     _postTest(req, res, next) {
         console.log('postTest', req.body);
         res.json({foo: 'bar'});
-    }
-
-    static run(params: any = {}) {
-        console.log('HostApp.run', params);
-
-        // env
-        const appsDirPath     = params.appsDirPath     || pkg.config.appsDirPath;
-        const handleException = params.handleException || pkg.config.handleException;
-        const host            = params.host            || pkg.config.host;
-        const port            = params.port            || pkg.config.port;
-
-        // express server
-        const server = express();
-
-        // hostApp
-        const hostApp = new HostApp(server);
-        hostApp.initProcess();
-        hostApp.init({appsDirPath, handleException});
-        hostApp.initExpressServer();
-        hostApp.createAndRunHttpServer(host, port);
     }
 
     createAndRunHttpServer(host, port) {
