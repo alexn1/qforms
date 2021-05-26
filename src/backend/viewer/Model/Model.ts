@@ -58,9 +58,8 @@ class Model extends BaseModel {
         }
     }
 
-    async createChildModel(colName, data) {
+    async getChildModelCustomClass(colName, data) {
         const modelName = BaseModel.getName(data);
-        const className = BaseModel.getClassName(data);
         const dirPath = this.getDirPath();
         let CustomClass = null;
         if (dirPath) {
@@ -70,6 +69,12 @@ class Model extends BaseModel {
                 CustomClass = require(customClassFilePath);
             }
         }
+        return CustomClass;
+    }
+
+    async createChildModel(colName, data) {
+        const CustomClass = await this.getChildModelCustomClass(colName, data);
+        const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
         return new Class(data, this);
     }
