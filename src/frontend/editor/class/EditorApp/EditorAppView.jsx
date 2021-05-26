@@ -1,4 +1,4 @@
-class EditorView extends ReactComponent {
+class EditorAppView extends ReactComponent {
     renderDocumentView(document) {
         if (!document.controller.getDocumentViewClass()) return <div>no document view for {document.controller.constructor.name}</div>;
         return React.createElement(document.controller.getDocumentViewClass(), {
@@ -8,7 +8,7 @@ class EditorView extends ReactComponent {
         });
     }
     getTabs() {
-        console.log('EditorView.getTabs', this.props.ctrl.documents);
+        console.log('EditorAppView.getTabs', this.props.ctrl.documents);
         return this.props.ctrl.documents.map(document => ({
             name   : document.controller.model.getFullName(),
             title  : document.controller.model.getFullName(),
@@ -17,7 +17,7 @@ class EditorView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="EditorView">
+        return <div className="EditorAppView">
             <div id="sidebar">
                 <div className="TreeBar flex-min">
                     {/*<div className="dropdown">

@@ -28,7 +28,7 @@ class EditorApp {
         this.items = [applicationController];
 
         // view
-        this.view = Helper.createReactComponent(document.querySelector('.editor__root'), EditorView, {ctrl: this});
+        this.view = Helper.createReactComponent(document.querySelector('.editor__root'), EditorAppView, {ctrl: this});
     }
 
     deinit() {
