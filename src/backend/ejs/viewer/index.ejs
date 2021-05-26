@@ -43,7 +43,7 @@
 </head>
 <body class="<%=application.getName()%>-app__body">
 <%
-if (debugApp === 1) {
+if (context.query.debug === 1) {
     %><div class="<%=application.getName()%>-app__root debug"></div>
 <%
 } else {

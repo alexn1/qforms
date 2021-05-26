@@ -251,7 +251,6 @@ class BackHostApp {
             res.render('viewer/index', {
                 version       : pkg.version,
                 application   : application,
-                debugApp      : context.query.debug,
                 context       : context,
                 response      : response,
             });
