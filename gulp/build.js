@@ -1,4 +1,4 @@
-const gulp      = require('gulp');
+const gulp = require('gulp');
 
 const clean    = require('./clean');
 const root     = require("./root");
