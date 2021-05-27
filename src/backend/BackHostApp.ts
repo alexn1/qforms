@@ -111,7 +111,7 @@ class BackHostApp {
         const backendDirPath = __dirname;
         const engineDirPath  = path.join(backendDirPath, '..');
         this.appsDirPath  = appsDirPath;
-        this.publicDirPath =  path.join(engineDirPath,  'frontend');
+        this.publicDirPath = path.join(engineDirPath,  'frontend');
 
         // logCnn
         this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
@@ -479,9 +479,16 @@ class BackHostApp {
         } else {
             model = application;
         }
-        const result = await model.rpc(req.body.name, context);
-        if (result === undefined) throw new Error('rpc action: result is undefined');
-        await res.json(result);
+        try {
+            const result = await model.rpc(req.body.name, context);
+            if (result === undefined) throw new Error('rpc action: result is undefined');
+            await res.json(result);
+        } catch (err) {
+            const errorMessage = err.message;
+            err.message = `rpc error: ${err.message}`;
+            await this.logError(req, err);
+            await res.json({errorMessage});
+        }
     }
 
     // action
