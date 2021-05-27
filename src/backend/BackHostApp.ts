@@ -205,7 +205,7 @@ class BackHostApp {
         return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
     }
 
-    getApplication(context: Context) {
+    getApplication(context: Context): Application {
         if (!context.route) throw new Error('no context.route');
         const application = this.applications[context.route];
         if (!application) throw new Error(`no application for route: ${context.route}`);
@@ -216,7 +216,7 @@ class BackHostApp {
         return path.join(this.appsDirPath, context.appDirName, context.appFileName + '.json');
     }
 
-    async createApplication(appFilePath, env) {
+    async createApplication(appFilePath, env): Promise<Application> {
         // console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
         const appInfo = await Application.getAppInfo(appFilePath, env);
@@ -241,7 +241,7 @@ class BackHostApp {
     }
 
     async handleViewerGet(req, res, context: Context) {
-        // console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {

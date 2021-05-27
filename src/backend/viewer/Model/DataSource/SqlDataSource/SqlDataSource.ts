@@ -1,6 +1,7 @@
 import DataSource from '../DataSource';
 import Helper from '../../../../Helper';
 import Table from '../../Table/Table';
+import Context from '../../../../Context';
 
 class SqlDataSource extends DataSource {
     table: Table;
@@ -14,25 +15,25 @@ class SqlDataSource extends DataSource {
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
 
-    getCountQuery(context) {
+    getCountQuery(context: Context) {
         const countQuery = this.getAttr('countQuery');
         if (!countQuery) throw new Error(`no countQuery: ${this.getFullName()}`);
         return this.isOnForm() ? this.parent.replaceThis(context, countQuery) : countQuery;
     }
 
-    getSingleQuery(context) {
+    getSingleQuery(context: Context) {
         const singleQuery = this.getAttr('singleQuery');
         if (!singleQuery) throw new Error(`no singleQuery: ${this.getFullName()}`);
         return this.isOnForm() ? this.parent.replaceThis(context, singleQuery) : singleQuery;
     }
 
-    getMultipleQuery(context) {
+    getMultipleQuery(context: Context) {
         const multipleQuery = this.getAttr('multipleQuery');
         if (!multipleQuery) throw new Error(`no multipleQuery: ${this.getFullName()}`);
         return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
     }
 
-    async selectSingle(context) {
+    async selectSingle(context: Context) {
         console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
@@ -41,7 +42,7 @@ class SqlDataSource extends DataSource {
         return rows[0];
     }
 
-    async selectMultiple(context) {
+    async selectMultiple(context: Context) {
         // console.log('SqlDataSource.selectMultiple');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
@@ -69,7 +70,7 @@ class SqlDataSource extends DataSource {
         return [rows, count];
     }
 
-    async select(context) {
+    async select(context: Context) {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
         // rows
@@ -97,7 +98,7 @@ class SqlDataSource extends DataSource {
         return [rows, count];
     }
 
-    async update(context): Promise<any> {
+    async update(context: Context): Promise<any> {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
@@ -128,11 +129,11 @@ class SqlDataSource extends DataSource {
         return {[key]: row};
     }
 
-    async getBuffer(context, file) {
+    async getBuffer(context: Context, file) {
         return file.data;
     }
 
-    async insert(context, params) {
+    async insert(context: Context, params): Promise<any> {
         console.log('SqlDataSource.insert');
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
@@ -190,7 +191,7 @@ class SqlDataSource extends DataSource {
         result.delete[table].push(key);
     }
 
-    async delete(context) {
+    async delete(context: Context): Promise<any> {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
         const {key} = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
@@ -202,7 +203,7 @@ class SqlDataSource extends DataSource {
         return result;
     }
 
-    async fill(context) {
+    async fill(context: Context) {
         //console.log('SqlDataSource.fill', this.getFullName());
         let response = await super.fill(context);
         delete response.singleQuery;
@@ -272,7 +273,7 @@ class SqlDataSource extends DataSource {
         }, {});
     }
 
-    getAccess(context) {
+    getAccess(context: Context) {
         return {
             select: true,
             insert: true,

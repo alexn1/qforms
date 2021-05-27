@@ -427,6 +427,8 @@ class Helper {
     }
 
     static decodeValue(rawValue) {
+        if (rawValue === undefined) throw new Error('decodeValue undefined');
+        if (rawValue === null) throw new Error('decodeValue null');
         return JSON.parse(rawValue, Helper.dateTimeReviver);
     }
     static encodeValue(value) {

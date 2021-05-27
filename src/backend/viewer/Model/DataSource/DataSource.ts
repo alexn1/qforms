@@ -2,12 +2,13 @@ const path = require('path');
 
 import Model from '../Model';
 import Helper from '../../../Helper';
-const Page = require('../Page/Page');
+import Context from '../../../Context';
 import Application from '../Application/Application';
-const Form = require('../Form/Form');
-const RowForm = require('../Form/RowForm/RowForm');
-const TableForm = require('../Form/TableForm/TableForm');
 import Database from '../Database/Database';
+import Page from '../Page/Page';
+import Form from '../Form/Form';
+import RowForm from '../Form/RowForm/RowForm';
+import TableForm from '../Form/TableForm/TableForm';
 
 class DataSource extends Model {
     keyColumns: any;
@@ -129,7 +130,7 @@ class DataSource extends Model {
         }
     }
 
-    getParams(context) {
+    getParams(context: Context) {
         return Application.getParams(context);
     }
 
@@ -164,7 +165,7 @@ class DataSource extends Model {
         return this.getKeyFromValues(newKeyValues);
     }
 
-    async fill(context) {
+    async fill(context: Context) {
         //console.log('DataSource.fill', this.getFullName());
         let response = await super.fill(context);
         // delete response.view;
@@ -210,9 +211,16 @@ class DataSource extends Model {
         if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
         return this.getApp().getDatabase(databaseName);
     }
-    async update(context) {
+    async update(context: Context) {
         throw new Error('DataSource.update not implemented');
     }
+    async insert(context: Context, params): Promise<any> {
+        throw new Error('DataSource.insert not implemented');
+    }
+    async delete(context: Context): Promise<any> {
+        throw new Error('DataSource.delete not implemented');
+    }
+
 }
 
 export = DataSource;

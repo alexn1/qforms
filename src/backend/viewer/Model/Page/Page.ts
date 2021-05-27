@@ -53,7 +53,7 @@ class Page extends Model {
         return this.parent;
     }
 
-    getTitle(context: Context): string {
+    getTitle(context: Context, response): string {
         return this.getAttr('caption');
     }
     getForm(name): Form {
