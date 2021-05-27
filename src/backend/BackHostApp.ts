@@ -796,7 +796,6 @@ class BackHostApp {
                 // await this.logRequest(req, context, time);
             }
         } catch (err) {
-            await this.logError(req, err);
             next(err);
         } finally {
             Context.destroy(context);
