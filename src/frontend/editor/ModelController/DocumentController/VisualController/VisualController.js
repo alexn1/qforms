@@ -46,20 +46,20 @@ class VisualController extends DocumentController {
     }
     async actionNewAction() {
         console.log('VisualController.actionNewAction');
-        await EditorApp.editorApp.openModal(new NewActionController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewActionController({onCreate: async values => {
             const action = await this.model.newAction({
                 name   : values.name,
                 caption: values.caption
             });
             const actionController = this.createAction(action);
-            await EditorApp.editorApp.treeWidget2.select(actionController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
             actionController.view.parent.open();
             if (this.pageLinkController) {
                 this.pageLinkController.view.rerender();
             } else {
                 this.view.rerender();
             }
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 }

@@ -74,23 +74,23 @@ class DatabaseController extends DocumentController {
         }
     }
     async actionNewParam() {
-        await EditorApp.editorApp.openModal(new NewParamController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewParamController({onCreate: async values => {
             const param = await this.model.newParam(values.name);
             const paramController = this.createParam(param);
-            await EditorApp.editorApp.treeWidget2.select(paramController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
             paramController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
     async actionNewTable() {
-        await EditorApp.editorApp.openModal(new NewTableController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewTableController({onCreate: async values => {
             const table = await this.model.newTable({name: values.name});
             const tableController = this.createTable2(table);
-            await EditorApp.editorApp.treeWidget2.select(tableController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
             tableController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
     async createDocument() {
@@ -128,17 +128,17 @@ class DatabaseController extends DocumentController {
             }))
         });
         const tableController = this.createTable2(table);
-        await EditorApp.editorApp.treeWidget2.select(tableController);
+        await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
         tableController.view.parent.open();
         this.view.rerender();
-        // EditorApp.editorApp.treeWidget2.scrollToSelected();
+        // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
     }
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDatabase(this);
-        EditorApp.editorApp.treeWidget2.select(null);
-        EditorApp.editorApp.treeWidget2.rerender();
+        EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
         return DatabaseView;

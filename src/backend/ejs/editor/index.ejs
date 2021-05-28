@@ -26,8 +26,7 @@
             console.log('editor.ejs DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const runAppLink = "<%=runAppLink%>";
-            new FrontHostApp(data);
-            new EditorApp(data, runAppLink).run();
+            new EditorFrontHostApp(data, runAppLink).run();
         });
     </script>
 </head>

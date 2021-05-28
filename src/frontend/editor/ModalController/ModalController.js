@@ -14,7 +14,7 @@ class ModalController {
         }
     }
     async close() {
-        await EditorApp.editorApp.onModalClose();
+        await EditorFrontHostApp.editorApp.onModalClose();
     }
     getViewClass() {
         throw new Error('ModalController.getViewClass not implemented');

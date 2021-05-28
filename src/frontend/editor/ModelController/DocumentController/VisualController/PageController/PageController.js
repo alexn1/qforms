@@ -61,12 +61,12 @@ class PageController extends VisualController {
             case 'moveUp':
                 await this.model.pageLink.moveUp();
                 this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, -1);
-                EditorApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.pageLink.moveDown();
                 this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, 1);
-                EditorApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
                 console.log(name);
@@ -74,32 +74,32 @@ class PageController extends VisualController {
     }
 
     async newDataSourceAction() {
-        await EditorApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
             const dataSourceData = await DataSource.create(this.model, {
                 name : values.name,
                 class: values.class
             });
             const dataSource = this.model.createDataSource(dataSourceData);
             const dataSourceController = this.createDataSource(dataSource);
-            await EditorApp.editorApp.treeWidget2.select(dataSourceController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
             dataSourceController.view.parent.open();
             this.pageLinkController.view.rerender();
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 
     async actionNewForm() {
-        await EditorApp.editorApp.openModal(new NewFormController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewFormController({onCreate: async values => {
             const form = await this.model.newForm({
                 name   : values.name,
                 caption: values.caption,
                 class  : values.class
             });
             const formController = this.createForm(form);
-            await EditorApp.editorApp.treeWidget2.select(formController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
             formController.view.parent.open();
             this.pageLinkController.view.rerender();
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
 
@@ -126,8 +126,8 @@ class PageController extends VisualController {
     async delete() {
         await this.model.delete();
         this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        EditorApp.editorApp.treeWidget2.select(null);
-        EditorApp.editorApp.treeWidget2.rerender();
+        EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 
     getDocumentViewClass() {

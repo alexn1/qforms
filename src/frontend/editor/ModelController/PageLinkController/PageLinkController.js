@@ -22,7 +22,7 @@ class PageLinkController extends ModelController {
         console.log('PageLinkController.loadPage', this.getTitle());
         if (this.pageController) throw new Error('page already loaded');
         const pageLink = this.model;
-        const pageData = await EditorApp.fetchPageData(pageLink.getFileName());
+        const pageData = await EditorFrontHostApp.fetchPageData(pageLink.getFileName());
 
         // page
         const page = new Page(pageData, pageLink);

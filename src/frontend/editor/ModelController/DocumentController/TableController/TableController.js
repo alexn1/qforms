@@ -47,12 +47,12 @@ class TableController extends DocumentController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('tables', this, -1);
-                EditorApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('tables', this, 1);
-                EditorApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
                 throw new Error(`unknown action: ${name}`);
@@ -70,13 +70,13 @@ class TableController extends DocumentController {
     }
 
     async actionNewColumn() {
-        await EditorApp.editorApp.openModal(new NewColumnController({onCreate: async values => {
+        await EditorFrontHostApp.editorApp.openModal(new NewColumnController({onCreate: async values => {
             const column = await this.model.newColumn(values.name);
             const columnController = this.createColumn(column);
-            await EditorApp.editorApp.treeWidget2.select(columnController);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
             columnController.view.parent.open();
             this.view.rerender();
-            EditorApp.editorApp.treeWidget2.scrollToSelected();
+                EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
     onCreateFormButtonClick = async e => {
@@ -94,7 +94,7 @@ class TableController extends DocumentController {
 
     async createFormAction() {
         console.log('TableController.createFormAction');
-        await EditorApp.editorApp.openModal(new NewFormFromTableController({
+        await EditorFrontHostApp.editorApp.openModal(new NewFormFromTableController({
             tableController: this,
             onCreate: async values => {
                 const formWizard = FormWizard.create({
@@ -117,18 +117,18 @@ class TableController extends DocumentController {
                 const form = await pageController.model.newForm(params);
                 // console.log('form:', form);
                 const formController = pageController.createForm(form);
-                await EditorApp.editorApp.treeWidget2.select(formController);
+                await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                 formController.view.parent.open();
                 pageLinkController.view.rerender();
-                EditorApp.editorApp.treeWidget2.scrollToSelected();
+                EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
     async delete() {
         console.log('TableController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeTable2(this);
-        EditorApp.editorApp.treeWidget2.select(null);
-        EditorApp.editorApp.treeWidget2.rerender();
+        EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
         return TableView;
