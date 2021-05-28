@@ -60,11 +60,11 @@ class Application extends Model {
         await this.createColItems('actions');
         await this.createColItems('dataSources');
         this.links = await this.getLinks();
-        this.js    = await Helper.getFilePaths(this.getDirPath(), 'build', 'js');
+        this.js    = await Helper.getFilePaths(this.getBuildDirPath(), 'js');
     }
 
     async getLinks(): Promise<string[]> {
-        return await Helper.getFilePaths(this.getDirPath(), 'build', 'css');
+        return await Helper.getFilePaths(this.getBuildDirPath(), 'css');
     }
 
     async deinit() {
@@ -78,6 +78,10 @@ class Application extends Model {
 
     getDirPath(): string {
         return this.appInfo.dirPath;
+    }
+
+    getBuildDirPath() {
+        return path.join(this.getDirPath(), 'build');
     }
 
     getText() {

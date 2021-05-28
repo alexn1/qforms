@@ -74,7 +74,7 @@ class BackHostApp {
     publicDirPath: string;
     appsDirPath: string;
     logCnn: any;
-    applications: any;
+    applications: any;          // application by route
     nodeEnv: any;
 
     constructor(params: any = {}) {
@@ -510,9 +510,9 @@ class BackHostApp {
         await res.json(null);
     }
 
-    async appFile(req, context: Context, application) {
+    async appFile(req, context: Context, application: Application) {
         // console.log('BackHostApp.appFile', context.uri);
-        const filePath = path.join(application.appInfo.dirPath, 'build', context.uri);
+        const filePath = path.join(application.getBuildDirPath(), context.uri);
         // console.log('filePath:', filePath);
         const ext = path.extname(filePath);
         if (['.css', '.js', '.map'].includes(ext)) {
@@ -900,12 +900,11 @@ class BackHostApp {
 
     async shutdown() {
         console.log('BackHostApp.shutdown');
-        const applications = this.applications;
-        const routes = Object.keys(applications);
+        const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
             console.log('route:', route);
-            const application = applications[route];
+            const application = this.applications[route];
             await application.deinit();
         }
     }

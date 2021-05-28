@@ -85,16 +85,15 @@ class Helper {
         });
     }
 
-    static async getFilePaths(publicDirPath, subDirPath, ext): Promise<string[]> {
+    static async getFilePaths(dirPath, ext): Promise<string[]> {
         // console.log('Helper.getFilePaths');
         const filePaths = [];
-        await _getFilePaths2(path.join(publicDirPath, subDirPath), ext, filePaths);
+        await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map(filePath => {
-            return slash(path.relative(path.join(publicDirPath, subDirPath), filePath));
+            return slash(path.relative(dirPath, filePath));
         });
         return relativeFilePaths;
     }
-
 
     /*static async getAppInfo(appFilePath, env) {
         // console.log('Helper.getAppInfo', appFilePath);
