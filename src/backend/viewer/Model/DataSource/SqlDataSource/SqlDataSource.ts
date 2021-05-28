@@ -133,7 +133,7 @@ class SqlDataSource extends DataSource {
         return file.data;
     }
 
-    async insert(context: Context, params): Promise<any> {
+    async insert(context: Context, values): Promise<any> {
         console.log('SqlDataSource.insert');
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
@@ -146,10 +146,10 @@ class SqlDataSource extends DataSource {
 
         const table = this.getAttr('table');
 
-        const values = await this.getDatabase().insertRow(context, table, autoColumns, params, autoTypes);
-        console.log('values:', values);
+        const newRow = await this.getDatabase().insertRow(context, table, autoColumns, values, autoTypes);
+        console.log('newRow:', newRow);
 
-        const key = this.getKeyFromValues(values);
+        const key = this.getKeyFromValues(newRow);
         if (!key) throw new Error('insert: cannot calc row key');
         console.log('key:', key);
 
