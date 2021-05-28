@@ -671,7 +671,7 @@ class BackHostApp {
         });
     }
     async logError(req, err) {
-        console.log('BackHostApp.logError:', err.message);
+        console.log('BackHostApp.logError:', colors.red(err));
         try {
             await BackHostApp.createLog(this.logCnn, {
                 type   : 'error',
