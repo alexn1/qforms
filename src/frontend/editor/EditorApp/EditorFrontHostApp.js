@@ -29,7 +29,7 @@ class EditorFrontHostApp extends FrontHostApp {
         this.items = [applicationController];
 
         // view
-        this.view = Helper.createReactComponent(document.querySelector('.editor__root'), EditorAppView, {ctrl: this});
+        this.view = Helper.createReactComponent(document.querySelector('.editor__root'), EditorFrontHostAppView, {ctrl: this});
     }
 
     deinit() {
