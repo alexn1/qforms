@@ -12,6 +12,7 @@ import JsonFile from '../backend/JsonFile';
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
+import Model from './viewer/Model/Model';
 
 const backend  = require('./index');
 const pkg     = require('../../package.json');
@@ -468,7 +469,7 @@ class BackHostApp {
         console.log('BackHostApp.rpc', req.body);
         const application = this.getApplication(context);
         await application.initContext(context);
-        let model;
+        let model: Model;
         if (req.body.page) {
             if (req.body.form) {
                 const page = await application.getPage(context, req.body.page);
@@ -485,7 +486,7 @@ class BackHostApp {
             await res.json(result);
         } catch (err) {
             const errorMessage = err.message;
-            err.message = `rpc error: ${err.message}`;
+            err.message = `rpc error ${req.body.name}: ${err.message}`;
             await this.logError(req, err);
             await res.json({errorMessage});
         }

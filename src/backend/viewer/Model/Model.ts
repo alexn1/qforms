@@ -1,3 +1,5 @@
+import Context from "../../Context";
+
 const path = require('path');
 
 import BaseModel from '../../BaseModel';
@@ -81,6 +83,10 @@ class Model extends BaseModel {
 
     getDirPath(): string {
         return null;
+    }
+
+    async rpc(name, context: Context) {
+        throw new Error(`${this.constructor.name}.rpc not implemented`);
     }
 
 }
