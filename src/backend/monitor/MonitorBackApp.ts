@@ -3,7 +3,7 @@ class MonitorBackApp {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
-    dump() {
+    fill() {
         return {
             applications: Object.keys(this.hostApp.applications).map(route => {
                 const app = this.hostApp.applications[route];

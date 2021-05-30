@@ -17,7 +17,7 @@
     <script src="js/common-jsx.js"></script>
 <!--    <script src="js/monitor.js"></script>-->
     <script src="js/monitor-jsx.js"></script>
-    <script type="application/json"><%-JSON.stringify(dump, null, 4)%></script>
+    <script type="application/json"><%-JSON.stringify(response, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);

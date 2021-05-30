@@ -657,10 +657,10 @@ class BackHostApp {
     async monitorGet(req, res) {
         console.log('BackHostApp.monitorGet');
         const app = new MonitorBackApp(this);
-        const dump = app.dump();
+        const response = app.fill();
         res.render('monitor/index', {
-            version: pkg.version,
-            dump   : dump
+            version : pkg.version,
+            response: response
         });
     }
     async logError(req, err) {
