@@ -13,10 +13,11 @@ import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
+import MonitorBackApp from './monitor/MonitorBackApp';
+import AppBackApp from './app/AppBackApp'
 
-const backend  = require('./index');
+const backend = require('./index');
 const pkg     = require('../../package.json');
-const MonitorBackApp = require('./monitor/MonitorBackApp');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
 
@@ -643,26 +644,20 @@ class BackHostApp {
 
     async appGet(req, res) {
         console.log('BackHostApp.appGet');
-        const appInfos = await Application.getAppInfos(this.appsDirPath);
-        // console.log('appInfos:', appInfos);
+        const app = new AppBackApp(this);
+        const data = await app.fill();
         res.render('app/index', {
             // req           : req,
-            hostApp       : this,
-            version       : pkg.version,
-            data          : {
-                nodeEnv : this.nodeEnv,
-                appInfos: appInfos.map(appInfo => ({
-                    fullName: appInfo.fullName,
-                    envs    : appInfo.envs
-                }))
-            }
+            hostApp: this,
+            version: pkg.version,
+            data   : data
         });
     }
 
     async monitorGet(req, res) {
         console.log('BackHostApp.monitorGet');
-        const model = new MonitorBackApp(this);
-        const dump = model.dump();
+        const app = new MonitorBackApp(this);
+        const dump = app.dump();
         res.render('monitor/index', {
             version: pkg.version,
             dump   : dump
