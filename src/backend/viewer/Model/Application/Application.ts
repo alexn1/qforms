@@ -94,6 +94,8 @@ class Application extends Model {
 
     async fill(context: Context) {
         // console.log('Application.fill');
+
+        const start = Date.now();
         const response = await super.fill(context);
 
         await this.fillCollection(response, 'databases'  , context);
@@ -128,7 +130,7 @@ class Application extends Model {
             response.user = null;
         }
 
-
+        response.time = Date.now() - start;
         return response;
     }
 

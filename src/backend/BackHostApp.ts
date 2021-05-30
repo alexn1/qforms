@@ -246,9 +246,10 @@ class BackHostApp {
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
-            this.loginGet(req, res, context);
+            await this.loginGet(req, res, context);
         } else {
-            const response = await this.fill(req, context);
+            await application.initContext(context);
+            const response =  await application.fill(context);
             res.render('viewer/index', {
                 version       : pkg.version,
                 application   : application,
@@ -317,15 +318,11 @@ class BackHostApp {
     }
 
     // fill application
-    async fill(req, context: Context) {
+    /*async fill(req, context: Context) {
         console.log('BackHostApp.fill', this.getApplication(context).getName());
         const application = this.getApplication(context);
-        const start = Date.now();
-        await application.initContext(context);
-        const data = await application.fill(context);
-        data.time = Date.now() - start;
-        return data;
-    }
+        return await application.fill(context);
+    }*/
 
     // action (fill page)
     async page(req, res, context: Context) {
