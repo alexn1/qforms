@@ -60,11 +60,15 @@ class Application extends Model {
         await this.createColItems('actions');
         await this.createColItems('dataSources');
         this.links = await this.getLinks();
-        this.js    = await Helper.getFilePaths(this.getBuildDirPath(), 'js');
+        this.js    = await this.getScripts();
     }
 
     async getLinks(): Promise<string[]> {
         return await Helper.getFilePaths(this.getBuildDirPath(), 'css');
+    }
+
+    async getScripts(): Promise<string[]> {
+        return await Helper.getFilePaths(this.getBuildDirPath(), 'js');
     }
 
     async deinit() {
