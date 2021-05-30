@@ -42,7 +42,6 @@ class ApplicationEditor extends Editor {
         this.appFile  = appFile;
         this.hostApp  = hostApp;
         this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data, env);
-        // this.name     = this.getName();
     }
 
     static async createAppFile(appFilePath, params) {
