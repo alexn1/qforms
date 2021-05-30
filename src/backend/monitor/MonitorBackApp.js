@@ -1,4 +1,4 @@
-class MonitorModel {
+class MonitorBackApp {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
@@ -18,4 +18,4 @@ class MonitorModel {
         };
     }
 }
-module.exports = MonitorModel;
+module.exports = MonitorBackApp;

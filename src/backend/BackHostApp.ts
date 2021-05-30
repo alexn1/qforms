@@ -16,7 +16,7 @@ import Model from './viewer/Model/Model';
 
 const backend  = require('./index');
 const pkg     = require('../../package.json');
-const MonitorModel = require('./monitor/MonitorModel');
+const MonitorBackApp = require('./monitor/MonitorBackApp');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
 
@@ -661,7 +661,7 @@ class BackHostApp {
 
     async monitorGet(req, res) {
         console.log('BackHostApp.monitorGet');
-        const model = new MonitorModel(this);
+        const model = new MonitorBackApp(this);
         const dump = model.dump();
         res.render('monitor/index', {
             version: pkg.version,
