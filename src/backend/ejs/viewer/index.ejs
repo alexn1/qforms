@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="<%=application.getViewClassName()%>-index" lang="<%=application.getAttr('lang')%>">
+<html class="<%=application.getViewClassName()%>" lang="<%=application.getAttr('lang')%>">
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
@@ -40,13 +40,13 @@
         });
     </script>
 </head>
-<body class="<%=application.getViewClassName()%>-index__body">
+<body class="<%=application.getViewClassName()%>__body">
 <%
 if (context.query.debug === 1) {
-    %><div class="<%=application.getViewClassName()%>-index__root debug"></div>
+    %><div class="<%=application.getViewClassName()%>__root debug"></div>
 <%
 } else {
-    %><div class="<%=application.getViewClassName()%>-index__root"></div><%
+    %><div class="<%=application.getViewClassName()%>__root"></div><%
 }
 %>
 </body>

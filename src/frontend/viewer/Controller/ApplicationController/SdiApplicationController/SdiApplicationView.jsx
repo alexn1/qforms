@@ -4,11 +4,11 @@ class SdiApplicationView extends ApplicationView {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         return (
-            <div className={`SdiApplicationView-index__container ${model.getAttr('theme')}`}>
+            <div className={`SdiApplicationView__container ${model.getAttr('theme')}`}>
                 <header>
                     <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 </header>
-                <main className="SdiApplicationView-index__main">
+                <main className="SdiApplicationView__main">
                     {this.renderActivePage()}
                 </main>
                 <footer>
