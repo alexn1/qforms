@@ -25,7 +25,7 @@ class FrontHostApp {
         // applicationController
         const applicationController = ApplicationController.create(application);
         applicationController.init();
-        applicationController.createView(document.querySelector(`.${application.getName()}-index__root`));
+        applicationController.createView(document.querySelector(`.${applicationController.getViewClass().name}-index__root`));
     }
 
     /*exit(evt) {

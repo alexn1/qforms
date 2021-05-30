@@ -1,10 +1,41 @@
-.SdiApplicationView {
+// index ---------------------------------------------------------------------------------------------------------------
+.SdiApplicationView-index {
+  height: 100%;
+  &.wait,
+  &.wait * {
+    cursor: wait !important;
+  }
+}
+
+.SdiApplicationView-index__body {
+  margin: 0;
+  height: 100%;
+  > div {
+    height: 100%;
+  }
+}
+
+.SdiApplicationView-index__container {
   height: 100%;
   font-family: sans-serif;
   display: grid;
   grid-template-rows: max-content auto max-content;
 }
 
-.SdiApplicationView__main {
+.SdiApplicationView-index__main {
   background-color: gray;
+}
+
+// login ---------------------------------------------------------------------------------------------------------------
+.SdiApplicationView-login {
+  height: 100%;
+}
+
+.SdiApplicationView-login__body {
+  margin: 0;
+  height: 100%;
+  //background-color: #afd9ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

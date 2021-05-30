@@ -356,6 +356,10 @@ class Application extends Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 
+    getViewName() {
+        return 'SdiApplicationView';
+    }
+
 }
 
 export = Application;
