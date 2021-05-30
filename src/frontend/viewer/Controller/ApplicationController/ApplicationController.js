@@ -160,7 +160,7 @@ class ApplicationController extends Controller {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...Object.keys(this.model.data.menu).map(key => ({
+            ...(this.model.data.menu ? Object.keys(this.model.data.menu).map(key => ({
                 name : key,
                 title: key,
                 items: this.model.data.menu[key].map(item => ({
@@ -168,7 +168,7 @@ class ApplicationController extends Controller {
                     name : item.page || item.action,
                     title: item.caption
                 }))
-            })),
+            })) : []),
             // user
             ...(this.model.getUser() ? [{
                 name : 'user',
