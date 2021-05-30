@@ -75,9 +75,6 @@
     "host": "localhost",
     "port": "3000",
     "appsDirPath": "./apps",
-    "user": "admin",
-    "password": "admin",
-    "authentication": "false",
     "handleException": true,
     "log": {
       "host": "localhost",
