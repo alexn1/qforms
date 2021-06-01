@@ -40,7 +40,7 @@ class AppView extends ReactComponent {
             <div className="AppView">
                 <div className="container" style={{backgroundColor: '#eee'}}>
                     <div className="row" style={{margin: '50px 0'}}>
-                        <div className="col-md-offset-2 col-md-6 col-sm-offset-1 col-sm-6 col-xs-8">
+                        <div>
                             <ComboBox
                                 value={ctrl.currentAppFullName}
                                 items={ctrl.getAppItems()}
@@ -50,7 +50,7 @@ class AppView extends ReactComponent {
                                 onChange={ctrl.onAppChange}
                             />
                         </div>
-                        <div className="col-md-2 col-sm-3 col-xs-4">
+                        <div>
                             <div className="form-group">
                                 <ComboBox
                                     value={ctrl.currentAppEnv}
