@@ -98,7 +98,7 @@ class BackHostApp {
         const handleException = this.params.handleException || true;
         const host            = this.params.host            || 'localhost';
         const port            = this.params.port            || 3000;
-        const logConfig       = this.params.log;
+        const log             = this.params.log;
 
 
         if (!fs.existsSync(appsDirPath)) {
@@ -117,8 +117,8 @@ class BackHostApp {
         this.publicDirPath = path.join(engineDirPath,  'frontend');
 
         // logCnn
-        if (logConfig) {
-            this.logCnn = PostgreSqlDatabase.createPool(logConfig);
+        if (log) {
+            this.logCnn = PostgreSqlDatabase.createPool(log);
         }
 
 
