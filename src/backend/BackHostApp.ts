@@ -94,10 +94,11 @@ class BackHostApp {
         this.initProcess();
 
         // env
-        const appsDirPath     = this.params.appsDirPath     || pkg.config.appsDirPath;
-        const handleException = this.params.handleException || pkg.config.handleException;
-        const host            = this.params.host            || pkg.config.host;
-        const port            = this.params.port            || pkg.config.port;
+        const appsDirPath     = this.params.appsDirPath     || './apps';
+        const handleException = this.params.handleException || true;
+        const host            = this.params.host            || 'localhost';
+        const port            = this.params.port            || 3000;
+        const logConfig       = this.params.log;
 
 
         if (!fs.existsSync(appsDirPath)) {
@@ -116,8 +117,8 @@ class BackHostApp {
         this.publicDirPath = path.join(engineDirPath,  'frontend');
 
         // logCnn
-        if (pkg.config.log) {
-            this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
+        if (logConfig) {
+            this.logCnn = PostgreSqlDatabase.createPool(logConfig);
         }
 
 

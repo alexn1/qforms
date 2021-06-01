@@ -70,18 +70,5 @@
   "bugs": {
     "url": "https://github.com/alexn1/qforms/issues"
   },
-  "homepage": "https://github.com/alexn1/qforms",
-  "config": {
-    "host": "localhost",
-    "port": 3000,
-    "appsDirPath": "./apps",
-    "handleException": true,
-    "log": {
-      "host": "localhost",
-      "port": 5432,
-      "database": "car",
-      "user": "postgres",
-      "password": "example"
-    }
-  }
+  "homepage": "https://github.com/alexn1/qforms"
 }
