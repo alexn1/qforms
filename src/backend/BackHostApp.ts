@@ -116,7 +116,10 @@ class BackHostApp {
         this.publicDirPath = path.join(engineDirPath,  'frontend');
 
         // logCnn
-        this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
+        if (pkg.config.log) {
+            this.logCnn = PostgreSqlDatabase.createPool(pkg.config.log);
+        }
+
 
         // options
         this.server.set('handleException', handleException);
@@ -665,6 +668,7 @@ class BackHostApp {
     }
     async logError(req, err) {
         console.log('BackHostApp.logError:', colors.red(err));
+        if (!this.logCnn) return;
         try {
             await BackHostApp.createLog(this.logCnn, {
                 type   : 'error',
@@ -680,6 +684,7 @@ class BackHostApp {
     }
 
     async logRequest(req, context: Context, time) {
+        if (!this.logCnn) return;
         try {
             const application = this.getApplication(context);
             let args = '';
