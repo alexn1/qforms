@@ -4,7 +4,7 @@ class ComboBox extends ReactComponent {
         super(props);
         if (!props.items) throw new Error('no ComboBox items');
         let value = null;
-        if (props.value !== undefined) {
+        if (props.value !== undefined && props.value !== null) {
             value = props.value;
             const item = props.items.find(item => item.value === props.value);
             if (!item) {
@@ -17,6 +17,8 @@ class ComboBox extends ReactComponent {
         } else {
             if (props.items.length) {
                 value = props.items[0].value;
+            } else {
+                value = '';
             }
         }
         if (value === null) throw new Error('null is wrong value for ComboBox');
