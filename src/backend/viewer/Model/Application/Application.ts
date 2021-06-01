@@ -161,13 +161,14 @@ class Application extends Model {
         }
 
         // actions
-        menu['Actions'] = [];
-        menu['Actions'].push({
-            type   : 'action',
-            action : 'action1',
-            caption: 'Action 1'
-        });
-
+        const actions = this.getDataCol('actions');
+        if (actions.length) {
+            menu['Actions'] = actions.map(actionData => ({
+                type   : 'action',
+                action : BaseModel.getName(actionData),
+                caption: BaseModel.getAttr(actionData, 'caption')
+            }));
+        }
         return menu;
     }
 
