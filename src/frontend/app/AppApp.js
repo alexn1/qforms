@@ -37,6 +37,7 @@ class AppApp {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) return appInfo.envs.map(env => ({value: env, title: env}));
         }
+        return [];
     }
 
     getAppInfo(fullName) {
