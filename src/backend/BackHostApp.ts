@@ -204,11 +204,11 @@ class BackHostApp {
         if (application) {
             /*if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
                 await application.deinit();
-                return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
+                return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
             }*/
             return application;
         }
-        return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context.env);
+        return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
     }
 
     getApplication(context: Context): Application {
@@ -222,10 +222,10 @@ class BackHostApp {
         return path.join(this.appsDirPath, context.appDirName, context.appFileName + '.json');
     }
 
-    async createApplication(appFilePath, env): Promise<Application> {
+    async createApplication(appFilePath, context: Context): Promise<Application> {
         // console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
-        const appInfo = await Application.getAppInfo(appFilePath, env);
+        const appInfo = await Application.getAppInfo(appFilePath, context.env);
 
         // ApplicationClass
         const ApplicationClass = await this.getApplicationClass(appInfo);
@@ -233,7 +233,7 @@ class BackHostApp {
         // application
         const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
-        const application = new ApplicationClass(data, appInfo, this, env);
+        const application = new ApplicationClass(data, appInfo, this, context);
         await application.init();
         return application;
     }

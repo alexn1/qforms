@@ -4,7 +4,7 @@ const path  = require('path');
 const axios = require('axios');
 const colors = require('colors/safe');
 
-// import BackHostApp from '../../../BackHostApp';
+import BackHostApp from '../../../BackHostApp';
 import BaseModel from '../../../BaseModel';
 import Model from '../Model';
 import Action from '../Action/Action';
@@ -38,13 +38,18 @@ class Application extends Model {
         return new Class(data, appInfo, hostApp, env);
     }*/
 
-    constructor(data, appInfo: AppInfo, hostApp, env) {
+    constructor(
+        data: any,
+        appInfo: AppInfo,
+        hostApp: BackHostApp,
+        context: Context
+    ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
-        if (!env) throw new Error('no env');
+        if (!context.env) throw new Error('no env');
         this.appInfo            = appInfo;
         this.hostApp            = hostApp;
-        this.env                = env;
+        this.env                = context.env;
 
         this.databases          = [];
         this.actions            = [];
