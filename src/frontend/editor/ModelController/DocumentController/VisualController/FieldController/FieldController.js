@@ -7,7 +7,7 @@ class FieldController extends VisualController {
     }
     getStyle() {
         return {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'blue'
         };
     }

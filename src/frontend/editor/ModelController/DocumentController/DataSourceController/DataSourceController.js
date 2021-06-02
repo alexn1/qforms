@@ -14,7 +14,7 @@ class DataSourceController extends DocumentController {
     }
     getStyle() {
         return {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'brown'
         };
     }

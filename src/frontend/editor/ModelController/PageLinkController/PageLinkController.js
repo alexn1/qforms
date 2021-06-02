@@ -11,7 +11,7 @@ class PageLinkController extends ModelController {
     }
     getStyle() {
         return {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'red'
         };
     }

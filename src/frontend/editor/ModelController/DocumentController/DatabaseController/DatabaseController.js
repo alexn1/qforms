@@ -21,7 +21,7 @@ class DatabaseController extends DocumentController {
     }
     getStyle() {
         return {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
             color: 'purple'
         };
     }

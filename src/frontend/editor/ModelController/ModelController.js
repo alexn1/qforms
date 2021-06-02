@@ -12,7 +12,7 @@ class ModelController /*extends EventEmitter*/ {
     }
     getStyle() {
         return {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
         };
     }
     getPropList() {
