@@ -2,7 +2,7 @@ class FormController extends Controller {
 
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
-        const customClassName = `${model.getPage().getName()}${model.getName()}Controller`;
+        const customClassName = `${model.getPage().getName()}${model.getName()}FormController`;
         if (eval(`typeof ${customClassName}`) === 'function') {
             const CustomClass = eval(customClassName);
             // console.log('CustomClass:', CustomClass);
