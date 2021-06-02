@@ -47,7 +47,7 @@ class NewFormFromTableView extends ReactComponent {
             </div>
             <div className="form-group">
                 <label htmlFor="caption">Caption</label>
-                <TextBox id="caption" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
             </div>
         </div>
         <div className="modal-footer">
