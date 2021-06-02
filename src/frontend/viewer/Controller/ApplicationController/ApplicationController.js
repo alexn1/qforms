@@ -1,7 +1,7 @@
 class ApplicationController extends Controller {
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
-        const customClassName = `${model.getName()}Controller`;
+        const customClassName = `${model.getName()}ApplicationController`;
         if (eval(`typeof ${customClassName}`) === 'function') {
             const CustomClass = eval(customClassName);
             // console.log('CustomClass:', CustomClass);
