@@ -214,7 +214,7 @@ class Application extends Model {
     }
 
     async fillPages(context: Context) {
-        console.log('Application.fillPages', context.query.page);
+        // console.log('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -296,7 +296,7 @@ class Application extends Model {
     }
 
     getTitle(context: Context, response): string {
-        console.log('Application.getTitle', context.query.page);
+        // console.log('Application.getTitle', context.query.page);
         if (context.query.page) {
             const page = this.pages[context.query.page];
             if (!page) throw new Error(`no page: ${context.query.page}`);
