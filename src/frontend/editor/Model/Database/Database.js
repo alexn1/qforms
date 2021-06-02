@@ -123,5 +123,23 @@ class Database extends Model {
             })
         });
     }
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveUp',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveDown',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
 
 }

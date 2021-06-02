@@ -57,6 +57,20 @@ class DatabaseEditorController extends EditorController {
         return {tableInfo};
     }
 
+    async moveUp(params) {
+        const appEditor = await this.createApplicationEditor();
+        appEditor.moveDataColItem('databases', params.database, -1);
+        await appEditor.save();
+        return 'ok';
+    }
+
+    async moveDown(params) {
+        const appEditor = await this.createApplicationEditor();
+        appEditor.moveDataColItem('databases', params.database, 1);
+        await appEditor.save();
+        return 'ok';
+    }
+
 }
 
 module.exports = DatabaseEditorController;

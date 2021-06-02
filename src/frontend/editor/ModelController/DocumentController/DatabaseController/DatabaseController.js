@@ -55,9 +55,11 @@ class DatabaseController extends DocumentController {
     }
     getActions() {
         return [
-            {'action':'newParam','caption':'New Param'},
-            {'action':'newTable','caption':'New Table'},
-            {'action':'delete','caption':'Delete'}
+            {'action': 'newParam', 'caption': 'New Param'},
+            {'action': 'newTable', 'caption': 'New Table'},
+            {'action': 'moveUp'  , 'caption': 'Move Up'  },
+            {'action': 'moveDown', 'caption': 'Move Down'},
+            {'action': 'delete'  , 'caption': 'Delete'   }
         ];
     }
     async doAction(name) {
@@ -71,6 +73,18 @@ class DatabaseController extends DocumentController {
             case 'delete':
                 await this.delete();
                 break;
+            case 'moveUp':
+                await this.model.moveUp();
+                this.parent.moveColItem('databases', this, -1);
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                break;
+            case 'moveDown':
+                await this.model.moveDown();
+                this.parent.moveColItem('databases', this, 1);
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                break;
+            default:
+                throw new Error(`unknown action: ${name}`);
         }
     }
     async actionNewParam() {
