@@ -3,7 +3,6 @@ export type AppInfo = {
     caption     : string;
     fullName    : string;
     envs        : string[];
-    route       : string;
     fileName    : string;
     dirName     : string;
     filePath    : string;

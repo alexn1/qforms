@@ -917,6 +917,11 @@ class BackHostApp {
         }*/
     }
 
+    getDomain(req) {
+        const hostPort = req.get('host');
+        const [host, port] = hostPort.split(':');
+        return host;
+    }
 
 }
 

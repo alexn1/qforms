@@ -28,6 +28,7 @@ class Application extends Model {
     pages: any;
     links: any[];
     js: any[];
+    domain: string;
 
     constructor(
         data: any,
@@ -48,6 +49,7 @@ class Application extends Model {
         this.pages              = {};
         this.links              = [];
         this.js                 = [];
+        this.domain             = hostApp.getDomain(context.req);
     }
 
     async init(context: Context) {
@@ -316,7 +318,6 @@ class Application extends Model {
             caption     : BaseModel.getAttr(data, 'caption'),
             fullName    : [dirName, fileName].join('/'),
             envs        : BaseModel.getEnvList(data),
-            route       : [dirName, fileName, env].join('/'),
             fileName    : fileName,
             dirName     : dirName,
             filePath    : path.resolve(appFilePath),
