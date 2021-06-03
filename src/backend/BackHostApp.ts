@@ -259,6 +259,8 @@ class BackHostApp {
                 application   : application,
                 context       : context,
                 response      : response,
+                links         : await application.getLinks(),
+                scripts       : await application.getScripts()
             });
         }
     }

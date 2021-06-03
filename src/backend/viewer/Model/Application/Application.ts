@@ -39,17 +39,15 @@ class Application extends Model {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context.env) throw new Error('no env');
-        this.appInfo            = appInfo;
-        this.hostApp            = hostApp;
-        this.env                = context.env;
+        this.appInfo     = appInfo;
+        this.hostApp     = hostApp;
+        this.env         = context.env;
 
-        this.databases          = [];
-        this.actions            = [];
-        this.dataSources        = [];
-        this.pages              = {};
-        this.links              = [];
-        this.js                 = [];
-        this.domain             = hostApp.getDomain(context.req);
+        this.databases   = [];
+        this.actions     = [];
+        this.dataSources = [];
+        this.pages       = {};
+        this.domain      = hostApp.getDomain(context.req);
     }
 
     async init(context: Context) {
@@ -57,8 +55,6 @@ class Application extends Model {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
-        this.links = await this.getLinks();
-        this.js    = await this.getScripts();
     }
 
     async getLinks(): Promise<string[]> {

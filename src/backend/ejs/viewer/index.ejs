@@ -9,7 +9,7 @@
     <link href="css/common.css" rel="stylesheet"/>
     <link href="css/viewer.css" rel="stylesheet"/>
     <!-- app links -->
-    <%application.links.forEach(link => {
+    <%links.forEach(link => {
     if (typeof link === 'string') {
     %><link href="<%=link%>" rel="stylesheet"/>
     <%
@@ -28,7 +28,7 @@
     <script src="js/viewer.js"></script>
     <script src="js/viewer-jsx.js"></script>
     <!-- app scripts -->
-    <%application.js.forEach(src => {
+    <%scripts.forEach(src => {
         %><script src="<%=src%>"></script>
     <%
     });%>
