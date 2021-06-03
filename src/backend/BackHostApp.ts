@@ -14,7 +14,7 @@ import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorBackApp from './monitor/MonitorBackApp';
-import AppBackApp from './app/AppBackApp';
+import AppModule from './app/AppModule';
 import MyError from './MyError';
 
 const backend = require('./index');
@@ -635,8 +635,8 @@ class BackHostApp {
 
     async appGet(req, res) {
         console.log('BackHostApp.appGet');
-        const app = new AppBackApp(this);
-        const data = await app.fill();
+        const module = new AppModule(this);
+        const data = await module.fill();
         res.render('app/index', {
             // req           : req,
             hostApp: this,

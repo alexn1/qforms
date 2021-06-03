@@ -1,6 +1,6 @@
 import Application from '../viewer/Model/Application/Application';
 
-class AppBackApp {
+class AppModule {
     hostApp: any;
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -17,4 +17,4 @@ class AppBackApp {
         };
     }
 }
-export = AppBackApp;
+export = AppModule;

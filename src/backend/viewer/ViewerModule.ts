@@ -1,0 +1,4 @@
+class ViewerModule {
+
+}
+export = ViewerModule;
