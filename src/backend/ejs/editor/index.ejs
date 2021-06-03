@@ -5,20 +5,20 @@
     <meta charset="utf-8">
     <title><%=appDirName%>/<%=appFileName%>[<%=env%>] - QForms Editor</title>
     <!-- style -->
-    <link href="lib/codemirror-4.8/lib/codemirror.css" rel="stylesheet">
-    <link href="lib/codemirror-4.8/theme/cobalt.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet"/>
-    <link href="css/editor.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="lib/codemirror-4.8/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror-4.8/theme/cobalt.css">
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/editor.css"/>
     <!-- code -->
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <script src="lib/codemirror-4.8/lib/codemirror.js"></script>
-    <script src="lib/codemirror-4.8/mode/javascript/javascript.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/common-jsx.js"></script>
-    <script src="js/editor.js"></script>
-    <script src="js/editor-jsx.js"></script>
-    <script>
+    <script type="text/javascript" src="lib/react/react.development.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.development.js"></script>
+    <script type="text/javascript" src="lib/codemirror-4.8/lib/codemirror.js"></script>
+    <script type="text/javascript" src="lib/codemirror-4.8/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/common-jsx.js"></script>
+    <script type="text/javascript" src="js/editor.js"></script>
+    <script type="text/javascript" src="js/editor-jsx.js"></script>
+    <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
             console.log('editor.ejs DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
