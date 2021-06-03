@@ -29,15 +29,6 @@ class Application extends Model {
     links: any[];
     js: any[];
 
-    /*static async create(appFilePath, hostApp: BackHostApp, env) {
-        // console.log('Application.create', appFilePath);
-        const appInfo = await Application.getAppInfo(appFilePath, env);
-        const Class = await hostApp.getApplicationClass(appInfo);
-        const json = await Helper.readTextFile(appInfo.filePath);
-        const data = JSON.parse(json);
-        return new Class(data, appInfo, hostApp, env);
-    }*/
-
     constructor(
         data: any,
         appInfo: AppInfo,
@@ -177,12 +168,12 @@ class Application extends Model {
         return menu;
     }
 
-    createPageLink(name): PageLink {
+    createPageLink(name: string): PageLink {
         const data = this.getColItemData('pageLinks', name);
         return new PageLink(data, this);
     }
 
-    async createPage(pageLinkName): Promise<Page> {
+    async createPage(pageLinkName: string): Promise<Page> {
         // console.log('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
@@ -197,11 +188,11 @@ class Application extends Model {
         return page;
     }
 
-    authorizePage(user, pageName) {
+    authorizePage(user, pageName: string) {
         return true;
     }
 
-    async getPage(context: Context, pageLinkName): Promise<Page> {
+    async getPage(context: Context, pageLinkName: string): Promise<Page> {
         // console.log('Application.getPage', pageLinkName);
         if (context.user && this.authorizePage(context.user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -235,7 +226,7 @@ class Application extends Model {
         return pages;
     }
 
-    async authenticate(context: Context, username, password) {
+    async authenticate(context: Context, username: string, password: string) {
         console.log('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
@@ -264,7 +255,7 @@ class Application extends Model {
         };
     }
 
-    async rpc(name, context: Context) {
+    async rpc(name: string, context: Context) {
         console.log('Application.rpc', name, context.params);
         if (this[name]) return await this[name](context);
         throw new Error(`no rpc ${name}`);
@@ -279,7 +270,7 @@ class Application extends Model {
         return this.env;
     }
 
-    getEnvVarValue(name) {
+    getEnvVarValue(name: string) {
         // console.log(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
@@ -293,7 +284,7 @@ class Application extends Model {
         return this;
     }
 
-    getDatabase(name): Database {
+    getDatabase(name: string): Database {
         if (!name) throw new Error('getDatabase: no name');
         const database = this.databases.find(database => database.getName() === name);
         if (!database) throw new Error(`no database with name: ${name}`);
