@@ -34,7 +34,7 @@ class SqlDataSource extends DataSource {
     }
 
     async selectSingle(context: Context) {
-        console.log('SqlDataSource.selectSingle');
+        // console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
         if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
