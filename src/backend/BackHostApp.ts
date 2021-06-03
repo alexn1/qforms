@@ -568,21 +568,6 @@ class BackHostApp {
         }
     }
 
-    /*async editorFile(req, res, context: Context) {
-        // console.log('BackHostApp.editorFile', context.uri);
-        const application = this.getApplication(context);
-        const content = await this.appFile(req, context, application);
-        if (content !== null) {
-            res.setHeader('content-type', 'text/css');
-            res.send(content);
-        } else {
-            const filePath = path.join(this.publicDirPath, context.uri);
-            const exists = await Helper.exists(filePath);
-            if (!exists) throw new Error(`file not found: ${context.uri}`);
-            res.sendFile(filePath);
-        }
-    }*/
-
     async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req, context);
