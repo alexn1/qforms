@@ -96,6 +96,8 @@ class Application extends Model {
         const start = Date.now();
         const response = await super.fill(context);
 
+        response.domain = this.domain;
+
         await this.fillCollection(response, 'databases'  , context);
         await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);

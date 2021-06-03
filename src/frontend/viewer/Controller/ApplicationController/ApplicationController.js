@@ -172,7 +172,7 @@ class ApplicationController extends Controller {
             // user
             ...(this.model.getUser() ? [{
                 name : 'user',
-                title: this.model.getUser().name,
+                title: `${this.model.getDomain()}/${this.model.getUser().name}`,
                 items: [
                     {
                         type : 'custom',
