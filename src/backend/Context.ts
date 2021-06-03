@@ -59,11 +59,10 @@ class Context {
         }
     }
 
-    static destroy(context: Context) {
-        if (!context) return;
-        /*for (const name in context.connections) {
+    destroy() {
+        /*for (const name in this.connections) {
             //console.log('release connection: ' + name);
-            context.connections[name].release();
+            this.connections[name].release();
         }*/
     }
     /*static decodeValue(rawValue) {

@@ -746,7 +746,7 @@ class BackHostApp {
         } catch (err) {
             next(err);
         } finally {
-            Context.destroy(context);
+            context.destroy();
         }
     }
 
@@ -797,7 +797,7 @@ class BackHostApp {
         } catch (err) {
             next(err);
         } finally {
-            Context.destroy(context);
+            context.destroy();
         }
     }
 
@@ -811,7 +811,7 @@ class BackHostApp {
             err.message = `_moduleFile error: ${err.message}`;
             next(err);
         } finally {
-            Context.destroy(context);
+            context.destroy();
         }
     }
 
