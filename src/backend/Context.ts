@@ -16,6 +16,7 @@ class Context {
     parentPageName?: string;
     connections?: any;
     querytime?: any;
+    files: any;
 
     constructor(req) {
         if (!req) throw new Error('no req');
@@ -44,15 +45,18 @@ class Context {
         this.parentPageName   = req.body.parentPageName;
 
         // cnn
-        this.connections      = {};
-        this.querytime        = {};
-        this.querytime.params = {};
-        /*this.files = {};
+        this.connections = {};
+        this.querytime   = {
+            params : {}
+        };
+
+        // files
+        this.files = {};
         if (req.files) {
             for (const name in req.files) {
                 this.files[name] = req.files[name].buffer;
             }
-        }*/
+        }
     }
 
     static destroy(context: Context) {
