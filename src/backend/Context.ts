@@ -17,43 +17,42 @@ class Context {
     connections?: any;
     querytime?: any;
 
-    static create(req) {
+    constructor(req) {
         if (!req) throw new Error('no req');
-        const context: Context = {req};
+        this.req = req;
 
         // request
-        context.uri         = req.params['0'];
-        context.module      = req.params.module;
-        context.appDirName  = req.params.appDirName;
-        context.appFileName = req.params.appFileName;
-        context.env         = req.params.env;
+        this.uri         = req.params['0'];
+        this.module      = req.params.module;
+        this.appDirName  = req.params.appDirName;
+        this.appFileName = req.params.appFileName;
+        this.env         = req.params.env;
 
         // route
-        context.route = [context.appDirName, context.appFileName, context.env].join('/');
+        this.route = [this.appDirName, this.appFileName, this.env].join('/');
 
         // user
-        if (req.session.user && req.session.user[context.route]) {
-            context.user = req.session.user[context.route];
+        if (req.session.user && req.session.user[this.route]) {
+            this.user = req.session.user[this.route];
         }
 
         // params
-        /*if (context.query            === undefined)*/ context.query            = req.query        ? Helper.decodeObject(req.query)         : {};
-        /*if (context.params           === undefined)*/ context.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
-        /*if (context.changes          === undefined)*/ context.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
-        /*if (context.newMode          === undefined)*/ context.newMode          = req.body.newMode;
-        /*if (context.parentPageName   === undefined)*/ context.parentPageName   = req.body.parentPageName;
+        this.query            = req.query        ? Helper.decodeObject(req.query)         : {};
+        this.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
+        this.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
+        this.newMode          = req.body.newMode;
+        this.parentPageName   = req.body.parentPageName;
 
         // cnn
-        /*if (context.connections      === undefined)*/ context.connections      = {};
-        /*if (context.querytime        === undefined)*/ context.querytime        = {};
-        /*if (context.querytime.params === undefined)*/ context.querytime.params = {};
-        /*context.files = {};
+        this.connections      = {};
+        this.querytime        = {};
+        this.querytime.params = {};
+        /*this.files = {};
         if (req.files) {
             for (const name in req.files) {
-                context.files[name] = req.files[name].buffer;
+                this.files[name] = req.files[name].buffer;
             }
         }*/
-        return context;
     }
 
     static destroy(context: Context) {
@@ -88,8 +87,8 @@ class Context {
         }
         return value;
     }*/
-    static getUser(context: Context) {
-        return context.req.session.user[context.route];
+    getUser() {
+        return this.req.session.user[this.route];
     }
 }
 

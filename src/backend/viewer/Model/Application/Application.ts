@@ -93,7 +93,7 @@ class Application extends Model {
         return path.join(this.getDirPath(), 'build');
     }
 
-    getText() {
+    getText(): any {
         return text[this.getAttr('lang') || 'en'];
     }
 
@@ -126,7 +126,7 @@ class Application extends Model {
 
         // user
         if (this.isAuthentication()) {
-            const user = Context.getUser(context);
+            const user = context.getUser();
             response.user = {
                 id  : user.id,
                 name: user.name
