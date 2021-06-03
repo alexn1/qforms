@@ -4,23 +4,20 @@
     <!-- <%=version%> -->
     <meta charset="utf-8">
     <title><%=appDirName%>/<%=appFileName%>[<%=env%>] - QForms Editor</title>
-    <!-- react -->
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <!-- codemirror -->
+    <!-- style -->
     <link href="lib/codemirror-4.8/lib/codemirror.css" rel="stylesheet">
     <link href="lib/codemirror-4.8/theme/cobalt.css" rel="stylesheet">
-    <script src="lib/codemirror-4.8/lib/codemirror.js"></script>
-    <script src="lib/codemirror-4.8/mode/javascript/javascript.js"></script>
-    <!-- qforms links -->
     <link href="css/common.css" rel="stylesheet"/>
     <link href="css/editor.css" rel="stylesheet"/>
-    <!-- qforms scripts -->
+    <!-- code -->
+    <script src="lib/react/react.development.js"></script>
+    <script src="lib/react/react-dom.development.js"></script>
+    <script src="lib/codemirror-4.8/lib/codemirror.js"></script>
+    <script src="lib/codemirror-4.8/mode/javascript/javascript.js"></script>
     <script src="js/common.js"></script>
     <script src="js/common-jsx.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/editor-jsx.js"></script>
-    <script type="application/json"><%-JSON.stringify(app, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log('editor.ejs DOMContentLoaded');
@@ -29,6 +26,8 @@
             new EditorFrontHostApp(data, runAppLink).run();
         });
     </script>
+    <!-- data -->
+    <script type="application/json"><%-JSON.stringify(app, null, 4)%></script>
 </head>
 <body class="editor__body">
     <div class="editor__root"></div>

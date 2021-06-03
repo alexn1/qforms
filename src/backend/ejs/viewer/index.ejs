@@ -5,10 +5,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getTitle(context, response)%></title>
-    <!-- qforms links -->
+    <!-- style -->
     <link href="css/common.css" rel="stylesheet"/>
     <link href="css/viewer.css" rel="stylesheet"/>
-    <!-- app links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
     %><link href="<%=link%>" rel="stylesheet"/>
@@ -18,27 +17,27 @@
     <%
     }
     });%>
-    <!-- lib scripts -->
+
+    <!-- code -->
     <script src="lib/EventEmitter/EventEmitter.min.js"></script>
     <script src="lib/react/react.development.js"></script>
     <script src="lib/react/react-dom.development.js"></script>
-    <!-- qforms scripts -->
     <script src="js/common.js"></script>
     <script src="js/common-jsx.js"></script>
     <script src="js/viewer.js"></script>
     <script src="js/viewer-jsx.js"></script>
-    <!-- app scripts -->
     <%scripts.forEach(src => {
         %><script src="<%=src%>"></script>
     <%
     });%>
-    <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             new FrontHostApp(data).run();
         });
     </script>
+    <!-- data -->
+    <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
 </head>
 <body class="<%=application.getViewClassName()%>__body">
 <%
