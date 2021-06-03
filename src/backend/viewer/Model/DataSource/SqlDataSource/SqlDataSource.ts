@@ -42,6 +42,26 @@ class SqlDataSource extends DataSource {
         return rows[0];
     }
 
+    /*async selectSingle(params = {}) {
+        console.log('SqlDataSource.selectSingle', this.getFullName(), params);
+        const page = this.getPage();
+        const form = this.getForm();
+        const result = await this.getApp().request({
+            action        : 'selectSingle',
+            parentPageName: page ? page.getParentPageName() : null,
+            page          : page ? page.getName()           : null,
+            form          : form ? form.getName()           : null,
+            ds            : this.getName(),
+            params        : Helper.encodeObject({
+                ...this.getPageParams(),
+                ...params,
+            })
+        });
+        if (!result.row) throw new Error('no row');
+        // if (result.time) console.log(`selectSingle time of ${this.getFullName()}:`, result.time);
+        return result;
+    }*/
+
     async selectMultiple(context: Context) {
         // console.log('SqlDataSource.selectMultiple');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
