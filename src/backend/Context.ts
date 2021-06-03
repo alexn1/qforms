@@ -2,20 +2,20 @@ import Helper from './Helper';
 
 class Context {
     req: any;
-    uri?: string;
-    module?: string;
-    appDirName?: string;
-    appFileName?: string;
-    env?: any;
-    route?: string;
-    user?: any;
-    query?: any;
-    params?: any;
-    changes?: any;
-    newMode?: any;
-    parentPageName?: string;
-    connections?: any;
-    querytime?: any;
+    uri: string;
+    module: string;
+    appDirName: string;
+    appFileName: string;
+    env: string;
+    route: string;
+    user: any;
+    query: any;
+    params: any;
+    changes: any;
+    newMode: any;
+    parentPageName: string;
+    connections: any;
+    querytime: any;
     files: any;
 
     constructor(req) {
@@ -30,7 +30,7 @@ class Context {
         this.env         = req.params.env;
 
         // route
-        this.route = [this.appDirName, this.appFileName, this.env].join('/');
+        this.route = this.calcRoute();
 
         // user
         if (req.session.user && req.session.user[this.route]) {
@@ -57,6 +57,10 @@ class Context {
                 this.files[name] = req.files[name].buffer;
             }
         }
+    }
+
+    calcRoute() {
+        return [this.appDirName, this.appFileName, this.env].join('/');
     }
 
     destroy() {
