@@ -14,7 +14,8 @@ import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorBackApp from './monitor/MonitorBackApp';
-import AppBackApp from './app/AppBackApp'
+import AppBackApp from './app/AppBackApp';
+import MyError from './MyError';
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -66,9 +67,7 @@ const EDITOR_ACTIONS = [
     'moveDown'
 ];
 
-class MyError extends Error {
-    status: number;
-}
+
 
 class BackHostApp {
     params: any;
@@ -489,6 +488,7 @@ class BackHostApp {
         } catch (err) {
             const errorMessage = err.message;
             err.message = `rpc error ${req.body.name}: ${err.message}`;
+            err.context = context;
             await this.logError(req, err);
             await res.json({errorMessage});
         }
@@ -677,7 +677,10 @@ class BackHostApp {
                 ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                 message: err.message,
                 stack  : err.stack.toString(),
-                data   : req ? JSON.stringify(req.body, null, 4) : null
+                data   : req ? JSON.stringify({
+                    route: err.context ? err.context.route : null,
+                    body : req.body
+                }, null, 4) : null
             });
         } catch (err) {
             console.error(colors.red(err));
