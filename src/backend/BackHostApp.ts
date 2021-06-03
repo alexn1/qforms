@@ -594,10 +594,10 @@ class BackHostApp {
         res.render('editor/index', {
             version        : pkg.version,
             app            : app,
-            runAppLink     : `/view/${application.appInfo.route}/?debug=1`,
+            runAppLink     : `/view/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
             appDirName     : context.appDirName,
-            appName        : appFile.getAttr('name'),
-            env            : application.getEnv()
+            appFileName    : context.appFileName,
+            env            : context.env
         });
     }
 
