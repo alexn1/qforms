@@ -2,6 +2,7 @@ import Model from '../Model';
 import Param from '../Param/Param';
 import Application from '../Application/Application';
 import Table from '../Table/Table';
+import Context from '../../../Context';
 
 class Database extends Model {
     tables: Table[];
@@ -12,8 +13,8 @@ class Database extends Model {
         this.tables          = [];
     }
 
-    async init() {
-        await this.createColItems('tables');
+    async init(context: Context) {
+        await this.createColItems('tables', context);
     }
 
     async deinit() {

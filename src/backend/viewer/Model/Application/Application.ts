@@ -50,11 +50,11 @@ class Application extends Model {
         this.js                 = [];
     }
 
-    async init() {
-        // await super.init();
-        await this.createColItems('databases');
-        await this.createColItems('actions');
-        await this.createColItems('dataSources');
+    async init(context: Context) {
+        await super.init(context);
+        await this.createColItems('databases', context);
+        await this.createColItems('actions', context);
+        await this.createColItems('dataSources', context);
         this.links = await this.getLinks();
         this.js    = await this.getScripts();
     }

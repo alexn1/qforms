@@ -1,9 +1,6 @@
 import Context from "../../Context";
-
-const path = require('path');
-
 import BaseModel from '../../BaseModel';
-const Helper = require('../../Helper');
+
 const backend  = require('../../../backend');
 
 class Model extends BaseModel {
@@ -13,11 +10,11 @@ class Model extends BaseModel {
         this.fillCollections = [];
     }
 
-    async init() {
+    async init(context: Context) {
 
     }
 
-    async fill(context): Promise<any> {
+    async fill(context: Context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const response = {
             class: this.getClassName(),
@@ -31,7 +28,7 @@ class Model extends BaseModel {
         return response;
     }
 
-    async fillCollection(response, colName, context) {
+    async fillCollection(response: any, colName: string, context: Context) {
         if (!this[colName]) return;
         response[colName] = [];
         for (const model of this[colName]) {
@@ -40,17 +37,17 @@ class Model extends BaseModel {
         }
     }
 
-    async createColItems(colName) {
+    async createColItems(colName: string, context: Context) {
         // console.log(`Model.createColItems ${this.getName()}.${colName}`);
         for (const data of this.getDataCol(colName)) {
-            await this.createColItem(colName, data);
+            await this.createColItem(colName, data, context);
         }
     }
 
-    async createColItem(colName, data) {
+    async createColItem(colName: string, data: any, context: Context) {
         try {
             const model = await this.createChildModel(colName, data);
-            await model.init();
+            await model.init(context);
             this[colName].push(model);
         } catch (err) {
             const name = BaseModel.getName(data);
@@ -60,7 +57,7 @@ class Model extends BaseModel {
         }
     }
 
-    async getChildModelCustomClass(colName, data) {
+    async getChildModelCustomClass(colName: string, data: any) {
         let CustomClass = null;
         /*const dirPath = this.getDirPath();
         if (dirPath) {
@@ -74,7 +71,7 @@ class Model extends BaseModel {
         return CustomClass;
     }
 
-    async createChildModel(colName, data) {
+    async createChildModel(colName: string, data: any) {
         const CustomClass = await this.getChildModelCustomClass(colName, data);
         const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
@@ -85,7 +82,7 @@ class Model extends BaseModel {
         return null;
     }
 
-    async rpc(name, context: Context) {
+    async rpc(name: string, context: Context) {
         throw new Error(`${this.constructor.name}.rpc not implemented`);
     }
 

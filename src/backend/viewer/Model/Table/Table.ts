@@ -16,8 +16,8 @@ class Table extends Model {
         this.columns = [];
     }
 
-    async init() {
-        await this.createColItems('columns');
+    async init(context) {
+        await this.createColItems('columns', context);
     }
 
     getKeyColumns(): string[] {

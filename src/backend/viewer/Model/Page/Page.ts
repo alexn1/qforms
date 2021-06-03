@@ -19,10 +19,10 @@ class Page extends Model {
         this.forms       = [];
     }
 
-    async init(): Promise<void> {
-        await this.createColItems('dataSources');
-        await this.createColItems('actions');
-        await this.createColItems('forms');
+    async init(context): Promise<void> {
+        await this.createColItems('dataSources', context);
+        await this.createColItems('actions', context);
+        await this.createColItems('forms', context);
     }
 
     getDirPath(): string {

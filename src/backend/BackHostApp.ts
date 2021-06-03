@@ -234,7 +234,7 @@ class BackHostApp {
         const json = await Helper.readTextFile(appInfo.filePath);
         const data = JSON.parse(json);
         const application = new ApplicationClass(data, appInfo, this, context);
-        await application.init();
+        await application.init(context);
         return application;
     }
 

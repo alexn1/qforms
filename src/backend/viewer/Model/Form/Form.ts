@@ -23,10 +23,10 @@ class Form extends Model {
         this.fields          = [];
     }
 
-    async init() {
-        await this.createColItems('dataSources');
-        await this.createColItems('actions');
-        await this.createColItems('fields');
+    async init(context) {
+        await this.createColItems('dataSources', context);
+        await this.createColItems('actions', context);
+        await this.createColItems('fields', context);
     }
 
     getDirPath(): string {
