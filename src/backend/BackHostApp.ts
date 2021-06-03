@@ -13,7 +13,7 @@ import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
-import MonitorBackApp from './monitor/MonitorBackApp';
+import MonitorModule from './monitor/MonitorModule';
 import AppModule from './app/AppModule';
 import MyError from './MyError';
 
@@ -647,8 +647,8 @@ class BackHostApp {
 
     async monitorGet(req, res) {
         console.log('BackHostApp.monitorGet');
-        const app = new MonitorBackApp(this);
-        const response = app.fill();
+        const module = new MonitorModule(this);
+        const response = module.fill();
         res.render('monitor/index', {
             version : pkg.version,
             response: response
