@@ -2,6 +2,7 @@ import Helper from './Helper';
 
 class Context {
     req: any;
+    domain: string;
     uri: string;
     module: string;
     appDirName: string;
@@ -18,9 +19,10 @@ class Context {
     querytime: any;
     files: any;
 
-    constructor(req) {
+    constructor(req, domain) {
         if (!req) throw new Error('no req');
-        this.req = req;
+        this.req    = req;
+        this.domain = domain;
 
         // request
         this.uri         = req.params['0'];
@@ -60,7 +62,7 @@ class Context {
     }
 
     calcRoute() {
-        return [this.appDirName, this.appFileName, this.env].join('/');
+        return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
 
     destroy() {

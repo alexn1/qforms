@@ -735,7 +735,7 @@ class BackHostApp {
         console.warn(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context = null;
         try {
-            context = new Context(req);
+            context = new Context(req, this.getDomain(req));
             if (context.module === 'view') {
                 await this.handleViewerGet(req, res, context);
             } else if (context.module === 'edit') {
@@ -786,7 +786,7 @@ class BackHostApp {
         console.warn(colors.magenta.underline('BackHostApp._modulePost'), req.params, req.body);
         let context = null;
         try {
-            context = new Context(req);
+            context = new Context(req, this.getDomain(req));
             if (context.module === 'view') {
                 const time = await this.handleViewerPost(req, res, context);
                 // await this.logRequest(req, context, time);
@@ -805,7 +805,7 @@ class BackHostApp {
         // console.warn(colors.magenta.underline('BackHostApp._moduleFile'), req.originalUrl);
         let context = null;
         try {
-            context = new Context(req);
+            context = new Context(req, this.getDomain(req));
             await this.staticFile(req, res, context);
         } catch (err) {
             err.message = `_moduleFile error: ${err.message}`;
@@ -917,7 +917,7 @@ class BackHostApp {
         }*/
     }
 
-    getDomain(req) {
+    getDomain(req: any): string {
         const hostPort = req.get('host');
         const [host, port] = hostPort.split(':');
         return host;
