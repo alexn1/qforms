@@ -100,17 +100,15 @@ class BackHostApp {
         this.initProcess();
 
         // env
-        const appsDirPath     = this.params.appsDirPath     || './apps';
+        this.appsDirPath      = this.params.appsDirPath     || './apps';
+        this.logErrorUrl      = this.params.logErrorUrl     || '/error';
         const handleException = this.params.handleException || true;
         const host            = this.params.host            || 'localhost';
         const port            = this.params.port            || 3000;
         const log             = this.params.log;
 
-        this.logErrorUrl = this.params.logErrorUrl || '/error';
-
-
-        if (!fs.existsSync(appsDirPath)) {
-            console.error(colors.red(`Application folder '${path.resolve(appsDirPath)}' doesn't exist`));
+        if (!fs.existsSync(this.appsDirPath)) {
+            console.error(colors.red(`Application folder '${path.resolve(this.appsDirPath)}' doesn't exist`));
             process.exit(1);
             return;
         }
@@ -121,7 +119,6 @@ class BackHostApp {
         // path
         const backendDirPath = __dirname;
         const engineDirPath  = path.join(backendDirPath, '..');
-        this.appsDirPath  = appsDirPath;
         this.publicDirPath = path.join(engineDirPath,  'frontend');
 
         // logCnn
