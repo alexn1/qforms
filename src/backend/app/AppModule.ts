@@ -17,7 +17,21 @@ class AppModule {
         };
     }
     getLinks() {
-        return [];
+        return [
+            'common/css/common.css',
+            'app/css/app.css'
+        ];
+    }
+    getScripts() {
+        return [
+            'lib/EventEmitter/EventEmitter.min.js',
+            'lib/react/react.development.js',
+            'lib/react/react-dom.development.js',
+            'common/js/common.js',
+            'common/js/common-jsx.js',
+            'app/js/app.js',
+            'app/js/app-jsx.js'
+        ];
     }
 }
 export = AppModule;

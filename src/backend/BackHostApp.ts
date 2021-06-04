@@ -79,6 +79,7 @@ class BackHostApp {
     appsDirPath: string;
     logCnn: any;
     nodeEnv: any;
+    appModule: AppModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
@@ -147,6 +148,7 @@ class BackHostApp {
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
 
+        this.appModule    = new AppModule(this);
         this.viewerModule = new ViewerModule(this);
         this.editorModule = new EditorModule(this);
     }
@@ -663,13 +665,14 @@ class BackHostApp {
 
     async appGet(req, res) {
         console.log('BackHostApp.appGet');
-        const module = new AppModule(this);
-        const data = await module.fill();
+        const data = await this.appModule.fill();
         res.render('app/index', {
             // req           : req,
             hostApp: this,
             version: pkg.version,
-            data   : data
+            data   : data,
+            links  : this.appModule.getLinks(),
+            scripts: this.appModule.getScripts(),
         });
     }
 

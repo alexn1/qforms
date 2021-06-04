@@ -6,17 +6,20 @@
     <title>QForms v<%=version%></title>
 
     <!-- links -->
-    <link href="common/css/common.css" rel="stylesheet"/>
-    <link href="app/css/app.css" rel="stylesheet"/>
-
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
     <!-- scripts -->
-    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <script src="common/js/common.js"></script>
-    <script src="common/js/common-jsx.js"></script>
-    <script src="app/js/app.js"></script>
-    <script src="app/js/app-jsx.js"></script>
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('DOMContentLoaded');

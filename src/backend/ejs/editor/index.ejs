@@ -4,7 +4,7 @@
     <!-- <%=version%> -->
     <meta charset="utf-8">
     <title><%=appDirName%>/<%=appFileName%>[<%=env%>] - QForms Editor</title>
-    <!-- style -->
+    <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
     %><link rel="stylesheet" href="<%=link%>"/>
@@ -14,7 +14,7 @@
     <%
     }
     });%>
-    <!-- code -->
+    <!-- scripts -->
     <%scripts.forEach(src => {
     %><script type="text/javascript" src="<%=src%>"></script>
     <%
