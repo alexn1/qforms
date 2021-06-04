@@ -9,7 +9,7 @@ class EditorModule {
         return [
             'lib/codemirror-4.8/lib/codemirror.css',
             'lib/codemirror-4.8/theme/cobalt.css',
-            'css/common.css',
+            'common/css/common.css',
             'css/editor.css'
         ];
     }
@@ -19,8 +19,8 @@ class EditorModule {
             'lib/react/react-dom.development.js',
             'lib/codemirror-4.8/lib/codemirror.js',
             'lib/codemirror-4.8/mode/javascript/javascript.js',
-            'js/common.js',
-            'js/common-jsx.js',
+            'common/js/common.js',
+            'common/js/common-jsx.js',
             'js/editor.js',
             'js/editor-jsx.js'
         ];

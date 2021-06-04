@@ -16,7 +16,7 @@ function frontend_common_js() {
         .pipe(concat('common.js'))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
 }
 
 function frontend_common_jsx() {
@@ -25,7 +25,7 @@ function frontend_common_jsx() {
         .pipe(babel())
         .pipe(concat('common-jsx.js'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
 }
 
 function frontend_common_less() {
@@ -35,7 +35,7 @@ function frontend_common_less() {
         .pipe(concat('common.css'))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/css')));
 }
 
 const frontend_common = gulp.series(

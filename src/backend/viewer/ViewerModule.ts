@@ -7,7 +7,7 @@ class ViewerModule {
     }
     getLinks() {
         return [
-            'css/common.css',
+            'common/css/common.css',
             'viewer/css/viewer.css'
         ];
     }
@@ -16,8 +16,8 @@ class ViewerModule {
             'lib/EventEmitter/EventEmitter.min.js',
             'lib/react/react.development.js',
             'lib/react/react-dom.development.js',
-            'js/common.js',
-            'js/common-jsx.js',
+            'common/js/common.js',
+            'common/js/common-jsx.js',
             'viewer/js/viewer.js',
             'viewer/js/viewer-jsx.js'
         ];
