@@ -11,7 +11,7 @@
     %><link rel="stylesheet" href="<%=link%>"/>
     <%
     } else if (typeof link === 'object') {
-    %><link href="<%=link.href%>" rel="<%=link.rel%>"/>
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
     <%
     }
     });%>
