@@ -300,11 +300,11 @@ class BackHostApp {
                 response      : response,
                 links         : [
                     ...this.viewerModule.getLinks(),
-                    ...await application.getLinks()
+                    ...application.links
                 ],
                 scripts       : [
                     ...this.viewerModule.getScripts(),
-                    ...await application.getScripts()
+                    ...application.scripts
                 ]
             });
         }

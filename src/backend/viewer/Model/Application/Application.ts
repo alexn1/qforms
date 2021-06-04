@@ -28,7 +28,7 @@ class Application extends Model {
     dataSources: DataSource[];
     pages: any;
     links: any[];
-    js: any[];
+    scripts: any[];
     domain: string;
 
     constructor(
@@ -56,6 +56,8 @@ class Application extends Model {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
+        this.links = await this.getLinks();
+        this.scripts = await this.getScripts();
     }
 
     async getLinks(): Promise<string[]> {
