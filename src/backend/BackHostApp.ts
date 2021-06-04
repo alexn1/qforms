@@ -83,6 +83,7 @@ class BackHostApp {
     nodeEnv: any;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
+    startTime: Date;
 
     constructor(params: any = {}) {
         // console.log('BackHostApp.constructor');
@@ -96,6 +97,7 @@ class BackHostApp {
     }
 
     run() {
+        this.startTime = new Date();
         this.initProcess();
 
         // env
