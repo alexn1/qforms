@@ -42,18 +42,21 @@ class FrontHostApp {
 
     errorHandler(errorMsg) {
         console.error('FrontHostApp.errorHandler:', errorMsg);
-        let msg;
+        let message = errorMsg;
+        const stack = arguments[4] !== undefined && arguments[4].stack !== undefined ? arguments[4].stack : null;
+
         if (this.env === 'development') {
-            msg = 'FrontHostApp Error Handler:\n' + errorMsg;
-            if (arguments[4] !== undefined && arguments[4].stack !== undefined) {
-                const stack = arguments[4].stack;
-                msg += '\n\nstack:\n' + stack;
+            message = 'FrontHostApp Error Handler:\n' + errorMsg;
+            if (stack) {
                 console.error('stack:', stack);
+                message += '\n\nstack:\n' + stack;
             }
-        } else {
-            msg = errorMsg;
         }
-        alert(msg);
+        FrontHostApp.doHttpRequest({
+            action: 'error',
+            error: {message: errorMsg, stack}
+        });
+        alert(message);
     }
     onunhandledrejection(e) {
         // console.log('FrontHostApp.onunhandledrejection', e.constructor.name);

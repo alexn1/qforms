@@ -35,7 +35,8 @@ const ACTIONS = [
     '_delete',      // delete
     'rpc',
     'logout',
-    'test'
+    'test',
+    'error',
 ];
 
 const EDITOR_CONTROLLERS = [
@@ -66,7 +67,7 @@ const EDITOR_ACTIONS = [
     'getTableInfo'    ,
     'changeClass'     ,
     'moveUp'          ,
-    'moveDown'
+    'moveDown'        ,
 ];
 
 
@@ -928,6 +929,28 @@ class BackHostApp {
         const hostPort = req.get('host');
         const [host, port] = hostPort.split(':');
         return host;
+    }
+
+    async error(req, res, context) {
+        console.log(colors.red('BackHostApp.error'), colors.red(req.body.error));
+        const err = req.body.error;
+        if (this.logCnn) {
+            try {
+                await BackHostApp.createLog(this.logCnn, {
+                    type   : 'error',
+                    source : 'client',
+                    ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    message: err.message,
+                    stack  : err.stack.toString(),
+                    data   : req ? JSON.stringify({
+                        route: context.route
+                    }, null, 4) : null
+                });
+            } catch (err) {
+                console.error(colors.red(err));
+            }
+        }
+        res.json({});
     }
 
 }
