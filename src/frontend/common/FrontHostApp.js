@@ -5,13 +5,7 @@ class FrontHostApp {
         if (data) {
             this.env = data.env;
         }
-        window.onerror = this.errorHandler.bind(this);
-        /*window.onunhandledrejection = (e) => {
-            // console.log('window.onunhandledrejection', e.constructor.name);
-            const err = e instanceof Error ? e : e.reason || e.detail.reason;
-            console.error('unhandled rejection:', err);
-            alert(err.message);
-        };*/
+        window.onerror              = this.errorHandler.bind(this);
         window.onunhandledrejection = this.onunhandledrejection.bind(this);
         //window.onbeforeunload = this.exit.bind(this);
     }
@@ -67,7 +61,6 @@ class FrontHostApp {
         console.error('unhandled rejection:', err);
         alert(err.message);
     }
-
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const result = await FrontHostApp.postJson(window.location.href, data);
