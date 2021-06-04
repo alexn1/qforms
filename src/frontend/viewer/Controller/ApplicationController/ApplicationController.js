@@ -193,7 +193,7 @@ class ApplicationController extends Controller {
     }
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
-        try {
+        // try {
             if (type === 'page') {
                 await this.openPage({name: name, modal: false});
             } else if (type === 'action') {
@@ -204,9 +204,9 @@ class ApplicationController extends Controller {
             } else {
                 throw new Error(`unknown menu type/name: ${type}/${name}`);
             }
-        } catch (err) {
-            console.error(err);
-            alert(err.message);
-        }
+        // } catch (err) {
+        //     console.error(err);
+        //     alert(err.message);
+        // }
     }
 }

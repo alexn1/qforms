@@ -5,8 +5,9 @@ class FrontHostApp {
         if (data) {
             this.env = data.env;
         }
-        window.addEventListener('error', this.onWindowError.bind(this));
-        window.onunhandledrejection = this.onunhandledrejection.bind(this);
+        window.addEventListener('error'             , this.onWindowError.bind(this));
+        window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this))
+        // window.onunhandledrejection = this.onunhandledrejection.bind(this);
         //window.onerror              = this.errorHandler.bind(this);
         //window.onbeforeunload       = this.exit.bind(this);
     }
@@ -59,27 +60,32 @@ class FrontHostApp {
         });
         alert(message);
     }*/
-    onunhandledrejection(e) {
-        // console.log('FrontHostApp.onunhandledrejection', e.constructor.name);
+    onWindowUnhandledrejection(e) {
+        console.error('FrontHostApp.onWindowUnhandledrejection', e);
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
-        console.error('unhandled rejection:', err);
+        this.logError(err);
         alert(err.message);
+        e.preventDefault();
     }
     onWindowError(e) {
         console.error('FrontHostApp.onWindowError', e.error);
+        const err = e.error;
+        this.logError(err);
+        alert(err.message);
+        e.preventDefault();
+    }
+    logError(err) {
         fetch(this.data.logErrorUrl, {
             method: 'POST',
             body  : JSON.stringify({
-                message: e.error.message,
-                stack  : e.error.stack,
+                message: err.message,
+                stack  : err.stack,
                 href   : window.location.href,
             }),
             headers: {'Content-Type': 'application/json;charset=utf-8'}
         }).catch(err => {
             console.error(err.message);
         });
-        alert(e.error.message);
-        e.preventDefault();
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
