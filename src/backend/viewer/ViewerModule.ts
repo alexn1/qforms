@@ -1,6 +1,6 @@
-import Helper from "../Helper";
-
 const path = require('path');
+
+import Helper from "../Helper";
 import BackHostApp from '../BackHostApp';
 
 class ViewerModule {

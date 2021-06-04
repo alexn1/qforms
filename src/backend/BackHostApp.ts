@@ -151,13 +151,23 @@ class BackHostApp {
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
 
+        // commonModule
         this.commonModule = new CommonModule(this);
         this.commonModule.init();
-        this.appModule     = new AppModule(this);
+
+        // appModule
+        this.appModule = new AppModule(this);
+
+        // monitorModule
         this.monitorModule = new MonitorModule(this);
-        this.viewerModule  = new ViewerModule(this);
+
+        // viewerModule
+        this.viewerModule = new ViewerModule(this);
         this.viewerModule.init();
-        this.editorModule  = new EditorModule(this);
+
+        // editorModule
+        this.editorModule = new EditorModule(this);
+        this.editorModule.init();
     }
 
     initProcess() {
