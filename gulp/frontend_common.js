@@ -6,6 +6,7 @@ const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 const babel      = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
+const hash = require('gulp-hash-filename');
 
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
@@ -14,6 +15,7 @@ function frontend_common_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.js'))
         .pipe(sourcemaps.init())
         .pipe(concat('common.js'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
@@ -24,6 +26,7 @@ function frontend_common_jsx() {
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('common-jsx.js'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
 }
@@ -33,6 +36,7 @@ function frontend_common_less() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('common.css'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/css')));
