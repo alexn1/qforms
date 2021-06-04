@@ -13,6 +13,7 @@ class MonitorModule {
                 const app = this.backHostApp.applications[route];
                 return {
                     route: route,
+                    version: app.getVersion(),
                     pages: Object.keys(app.pages).map(name => {
                         return {
                             name: name
