@@ -17,6 +17,7 @@ import Context   from '../../../Context';
 import JsonFile from '../../../JsonFile';
 
 const text = require('../../../text');
+const pkg  = require('../../../../../package.json');
 
 class Application extends Model {
     appInfo: AppInfo;
@@ -86,14 +87,20 @@ class Application extends Model {
         return text[this.getAttr('lang') || 'en'];
     }
 
+    getVersion() {
+        return null;
+    }
+
     async fill(context: Context) {
         // console.log('Application.fill');
 
         const start = Date.now();
         const response = await super.fill(context);
 
-        response.domain      = this.domain;
-        response.logErrorUrl = this.hostApp.logErrorUrl;
+        response.domain          = this.domain;
+        response.logErrorUrl     = this.hostApp.logErrorUrl;
+        response.platformVersion = pkg.version;
+        response.appVersion      = this.getVersion();
 
         await this.fillCollection(response, 'databases'  , context);
         await this.fillCollection(response, 'actions'    , context);

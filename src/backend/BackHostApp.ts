@@ -691,8 +691,9 @@ class BackHostApp {
                 message: err.message,
                 stack  : err.stack.toString(),
                 data   : req ? JSON.stringify({
-                    route: err.context ? err.context.route : null,
-                    body : req.body
+                    platformVersion: pkg.version,
+                    route          : err.context ? err.context.route : null,
+                    body           : req.body
                 }, null, 4) : null
             });
         } catch (err) {
@@ -951,7 +952,7 @@ class BackHostApp {
                     stack  : req.body.stack.toString(),
                     data   : req ? JSON.stringify({
                         domain: this.getDomain(req),
-                        href  : req.body.href
+                        body  : req.body
                     }, null, 4) : null
                 });
             } catch (err) {
