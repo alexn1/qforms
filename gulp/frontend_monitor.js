@@ -16,7 +16,7 @@ function frontend_monitor_js() {
         .pipe(concat('monitor.js'))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/monitor/js')));
 }
 
 function frontend_monitor_jsx() {
@@ -25,7 +25,7 @@ function frontend_monitor_jsx() {
         .pipe(babel())
         .pipe(concat('monitor-jsx.js'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/monitor/js')));
 }
 
 function frontend_monitor_less() {
@@ -35,7 +35,7 @@ function frontend_monitor_less() {
         .pipe(concat('monitor.css'))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/monitor/css')));
 }
 
 

@@ -50,10 +50,16 @@ function frontend_editor_less() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/css')));
 }
 
+function frontend_editor_img() {
+    return gulp.src(path.join(SRC_PATH, 'frontend/editor/img/**/*'))
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/img')));
+}
+
 const frontend_editor = gulp.series(
     frontend_editor_js,
     frontend_editor_jsx,
     frontend_editor_less,
+    frontend_editor_img,
 );
 
 module.exports = frontend_editor;
