@@ -5,9 +5,10 @@ class FrontHostApp {
         if (data) {
             this.env = data.env;
         }
-        window.onerror              = this.errorHandler.bind(this);
+        window.addEventListener('error', this.onWindowError.bind(this));
         window.onunhandledrejection = this.onunhandledrejection.bind(this);
-        //window.onbeforeunload = this.exit.bind(this);
+        //window.onerror              = this.errorHandler.bind(this);
+        //window.onbeforeunload       = this.exit.bind(this);
     }
     run() {
         console.log('FrontHostApp.run');
@@ -40,7 +41,7 @@ class FrontHostApp {
         return message;
     }*/
 
-    errorHandler(errorMsg) {
+    /*errorHandler(errorMsg) {
         console.error('FrontHostApp.errorHandler:', errorMsg);
         let message = errorMsg;
         const stack = arguments[4] !== undefined && arguments[4].stack !== undefined ? arguments[4].stack : null;
@@ -57,12 +58,24 @@ class FrontHostApp {
             error: {message: errorMsg, stack}
         });
         alert(message);
-    }
+    }*/
     onunhandledrejection(e) {
         // console.log('FrontHostApp.onunhandledrejection', e.constructor.name);
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         console.error('unhandled rejection:', err);
         alert(err.message);
+    }
+    onWindowError(e) {
+        console.error('FrontHostApp.onWindowError', e.error);
+        alert(e.error.message);
+        FrontHostApp.doHttpRequest({
+            action: 'error',
+            error: {
+                message: e.error.message,
+                stack  : e.error.stack
+            }
+        });
+        e.preventDefault();
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
