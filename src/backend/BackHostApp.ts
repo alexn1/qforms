@@ -157,6 +157,7 @@ class BackHostApp {
 
         // appModule
         this.appModule = new AppModule(this);
+        this.appModule.init();
 
         // monitorModule
         this.monitorModule = new MonitorModule(this);

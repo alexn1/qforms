@@ -1,15 +1,26 @@
+const path = require('path');
+
 import Application from '../viewer/Model/Application/Application';
+import Helper from "../Helper";
 
 class AppModule {
-    hostApp: any;
-    constructor(hostApp) {
-        this.hostApp = hostApp;
+    backHostApp: any;
+    css: string[];
+    js : string[];
+    constructor(backHostApp) {
+        this.backHostApp = backHostApp;
+    }
+    async init() {
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `app/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `app/${path}`);
+        console.log('app.css:', this.css);
+        console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.backHostApp.appsDirPath);
         // console.log('appInfos:', appInfos);
         return {
-            nodeEnv : this.hostApp.nodeEnv,
+            nodeEnv : this.backHostApp.nodeEnv,
             appInfos: appInfos.map(appInfo => ({
                 fullName: appInfo.fullName,
                 envs    : appInfo.envs
@@ -18,8 +29,8 @@ class AppModule {
     }
     getLinks() {
         return [
-            'common/css/common.css',
-            'app/css/app.css'
+            ...(this.backHostApp.commonModule.css),
+            ...(this.css)
         ];
     }
     getScripts() {
@@ -27,10 +38,8 @@ class AppModule {
             'lib/EventEmitter/EventEmitter.min.js',
             'lib/react/react.development.js',
             'lib/react/react-dom.development.js',
-            'common/js/common.js',
-            'common/js/common-jsx.js',
-            'app/js/app.js',
-            'app/js/app-jsx.js'
+            ...(this.backHostApp.commonModule.js),
+            ...(this.js)
         ];
     }
 }
