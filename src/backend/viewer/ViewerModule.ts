@@ -8,7 +8,7 @@ class ViewerModule {
     getLinks() {
         return [
             'css/common.css',
-            'css/viewer.css'
+            'viewer/css/viewer.css'
         ];
     }
     getScripts() {
@@ -18,8 +18,8 @@ class ViewerModule {
             'lib/react/react-dom.development.js',
             'js/common.js',
             'js/common-jsx.js',
-            'js/viewer.js',
-            'js/viewer-jsx.js'
+            'viewer/js/viewer.js',
+            'viewer/js/viewer-jsx.js'
         ];
     }
 }

@@ -5,19 +5,23 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getAttr('caption')%> - <%=application.getText().login.login%> - QForms</title>
-    <!-- EventEmitter -->
-    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <!-- react -->
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <!-- qforms js -->
-    <script src="js/common.js"></script>
-    <script src="js/common-jsx.js"></script>
-    <script src="js/viewer.js"></script>
-    <script src="js/viewer-jsx.js"></script>
-    <!-- qforms css -->
-    <link href="css/common.css" rel="stylesheet"/>
-    <link href="css/viewer.css" rel="stylesheet"/>
+
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link href="<%=link.href%>" rel="<%=link.rel%>"/>
+    <%
+    }
+    });%>
+
+    <!-- scripts -->
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
 </head>
 <body class="login__body">
     <form class="login__form" action="<%=REQUEST_URI%>" method="post">

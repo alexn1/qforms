@@ -315,7 +315,9 @@ class BackHostApp {
             REQUEST_URI   : req.url,
             errMsg        : null,
             username      : null,
-            users         : users
+            users         : users,
+            links         : this.viewerModule.getLinks(),
+            scripts       : this.viewerModule.getScripts()
         });
     }
 

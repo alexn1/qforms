@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getTitle(context, response)%></title>
-    <!-- style -->
+    <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
     %><link rel="stylesheet" href="<%=link%>"/>
@@ -16,7 +16,7 @@
     }
     });%>
 
-    <!-- code -->
+    <!-- scripts -->
     <%scripts.forEach(src => {
         %><script type="text/javascript" src="<%=src%>"></script>
     <%
