@@ -1,34 +1,19 @@
 class FrontHostApp {
     constructor(data) {
         console.log('FrontHostApp.constructor', data);
+        if (!data) throw new Error('no data');
         this.data = data;
-        if (data) {
-            this.env = data.env;
-        }
+        // if (data) {
+        this.env = data.env;
+        // }
         window.addEventListener('error'             , this.onWindowError.bind(this));
         window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this))
         // window.onunhandledrejection = this.onunhandledrejection.bind(this);
-        //window.onerror              = this.errorHandler.bind(this);
-        //window.onbeforeunload       = this.exit.bind(this);
+        // window.onerror              = this.errorHandler.bind(this);
+        // window.onbeforeunload       = this.exit.bind(this);
     }
     run() {
-        console.log('FrontHostApp.run');
-
-        // application
-        const application = new Application(this.data);
-        application.init();
-
-        // applicationController
-        const applicationController = ApplicationController.create(application);
-        applicationController.init();
-
-        // view
-        const rootElementName = `.${applicationController.getViewClass().name}__root`;
-        const rootElement = document.querySelector(rootElementName);
-        if (!rootElement) {
-            throw new Error(`no root element: ${rootElementName}`);
-        }
-        applicationController.createView(rootElement);
+        throw new Error('FrontHostApp.run not implemented');
     }
 
     /*exit(evt) {
