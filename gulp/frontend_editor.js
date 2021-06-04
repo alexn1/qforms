@@ -28,7 +28,7 @@ function frontend_editor_js() {
         .pipe(concat('editor.js'))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/js')));
 }
 
 function frontend_editor_jsx() {
@@ -37,7 +37,7 @@ function frontend_editor_jsx() {
         .pipe(babel())
         .pipe(concat('editor-jsx.js'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/js')));
 }
 
 function frontend_editor_less() {
@@ -47,7 +47,7 @@ function frontend_editor_less() {
         .pipe(concat('editor.css'))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/css')));
 }
 
 const frontend_editor = gulp.series(

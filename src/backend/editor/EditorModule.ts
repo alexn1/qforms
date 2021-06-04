@@ -10,7 +10,7 @@ class EditorModule {
             'lib/codemirror-4.8/lib/codemirror.css',
             'lib/codemirror-4.8/theme/cobalt.css',
             'common/css/common.css',
-            'css/editor.css'
+            'editor/css/editor.css'
         ];
     }
     getScripts() {
@@ -21,8 +21,8 @@ class EditorModule {
             'lib/codemirror-4.8/mode/javascript/javascript.js',
             'common/js/common.js',
             'common/js/common-jsx.js',
-            'js/editor.js',
-            'js/editor-jsx.js'
+            'editor/js/editor.js',
+            'editor/js/editor-jsx.js'
         ];
     }
 }
