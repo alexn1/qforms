@@ -4,7 +4,13 @@ class MonitorView extends ReactComponent {
             <li key={app.route}>
                 <div>{app.route} <span style={{color: 'gray'}}>version: {app.version}</span></div>
                 <ul>
-                    {app.pages.map(page => <li key={page.name}>{page.name}</li>)}
+                    <li>
+                        <div>pages:</div>
+                        <ul>
+                            {app.pages.map(page => <li key={page.name}>{page.name}</li>)}
+                        </ul>
+                    </li>
+                    <li>users:</li>
                 </ul>
             </li>
         );
