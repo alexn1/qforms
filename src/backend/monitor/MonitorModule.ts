@@ -1,9 +1,20 @@
+const path = require('path');
+
 import BackHostApp from '../BackHostApp';
+import Helper from "../Helper";
 
 class MonitorModule {
     backHostApp: BackHostApp;
+    css: string[];
+    js : string[];
     constructor(backHostApp: BackHostApp) {
         this.backHostApp = backHostApp;
+    }
+    async init() {
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'monitor'), 'css')).map(path => `monitor/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'monitor'), 'js' )).map(path => `monitor/${path}`);
+        console.log('monitor.css:', this.css);
+        console.log('monitor.js:' , this.js);
     }
     fill() {
         return {
@@ -25,8 +36,8 @@ class MonitorModule {
     }
     getLinks() {
         return [
-            'common/css/common.css',
-            'monitor/css/monitor.css'
+            ...(this.backHostApp.commonModule.css),
+            ...(this.css)
         ];
     }
     getScripts() {
@@ -34,9 +45,8 @@ class MonitorModule {
             'lib/EventEmitter/EventEmitter.min.js',
             'lib/react/react.development.js',
             'lib/react/react-dom.development.js',
-            'common/js/common.js',
-            'common/js/common-jsx.js',
-            'monitor/js/monitor-jsx.js'
+            ...(this.backHostApp.commonModule.js),
+            ...(this.js)
         ];
     }
 }
