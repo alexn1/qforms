@@ -80,6 +80,7 @@ class BackHostApp {
     logCnn: any;
     nodeEnv: any;
     appModule: AppModule;
+    monitorModule: MonitorModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
@@ -148,9 +149,10 @@ class BackHostApp {
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
 
-        this.appModule    = new AppModule(this);
-        this.viewerModule = new ViewerModule(this);
-        this.editorModule = new EditorModule(this);
+        this.appModule     = new AppModule(this);
+        this.monitorModule = new MonitorModule(this);
+        this.viewerModule  = new ViewerModule(this);
+        this.editorModule  = new EditorModule(this);
     }
 
     initProcess() {
@@ -678,11 +680,12 @@ class BackHostApp {
 
     async monitorGet(req, res) {
         console.log('BackHostApp.monitorGet');
-        const module = new MonitorModule(this);
-        const response = module.fill();
+        const response = this.monitorModule.fill();
         res.render('monitor/index', {
             version : pkg.version,
             response: response,
+            links   : this.monitorModule.getLinks(),
+            scripts : this.monitorModule.getScripts(),
         });
     }
     async logError(req, err) {

@@ -5,7 +5,6 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getAttr('caption')%> - <%=application.getText().login.login%> - QForms</title>
-
     <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
@@ -16,7 +15,6 @@
     <%
     }
     });%>
-
     <!-- scripts -->
     <%scripts.forEach(src => {
     %><script type="text/javascript" src="<%=src%>"></script>

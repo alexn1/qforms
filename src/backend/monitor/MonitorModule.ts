@@ -23,5 +23,21 @@ class MonitorModule {
             })
         };
     }
+    getLinks() {
+        return [
+            'common/css/common.css',
+            'monitor/css/monitor.css'
+        ];
+    }
+    getScripts() {
+        return [
+            'lib/EventEmitter/EventEmitter.min.js',
+            'lib/react/react.development.js',
+            'lib/react/react-dom.development.js',
+            'common/js/common.js',
+            'common/js/common-jsx.js',
+            'monitor/js/monitor-jsx.js'
+        ];
+    }
 }
 export = MonitorModule;

@@ -4,16 +4,21 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <title>QForms monitor v<%=version%></title>
-    <!-- style -->
-    <link href="common/css/common.css" rel="stylesheet"/>
-    <link href="monitor/css/monitor.css" rel="stylesheet"/>
-    <!-- code -->
-    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <script src="common/js/common.js"></script>
-    <script src="common/js/common-jsx.js"></script>
-    <script src="monitor/js/monitor-jsx.js"></script>
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
+    <!-- scripts -->
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
@@ -21,7 +26,6 @@
             Helper.createReactComponent(document.querySelector('.monitor__root'), MonitorView, {data});
         });
     </script>
-    <!-- data -->
     <script type="application/json"><%-JSON.stringify(response, null, 4)%></script>
 </head>
 <body class="monitor__body">

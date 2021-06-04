@@ -15,7 +15,6 @@
     <%
     }
     });%>
-
     <!-- scripts -->
     <%scripts.forEach(src => {
         %><script type="text/javascript" src="<%=src%>"></script>
@@ -27,7 +26,6 @@
             new ViewerFrontHostApp(data).run();
         });
     </script>
-    <!-- data -->
     <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
 </head>
 <body class="<%=application.getViewClassName()%>__body">
