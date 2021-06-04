@@ -19,6 +19,7 @@ import MonitorModule from './monitor/MonitorModule';
 import AppModule from './app/AppModule';
 import MyError from './MyError';
 import ViewerModule from './viewer/ViewerModule';
+import EditorModule from './editor/EditorModule';
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -74,23 +75,24 @@ const EDITOR_ACTIONS = [
 
 class BackHostApp {
     params: any;
+    applications: any;          // application by route
     server: any;
     publicDirPath: string;
     appsDirPath: string;
     logCnn: any;
-    applications: any;          // application by route
     nodeEnv: any;
-    viewerModule: ViewerModule
+    viewerModule: ViewerModule;
+    editorModule: EditorModule;
 
     constructor(params: any = {}) {
         // console.log('BackHostApp.constructor');
         this.params = params;
-        this.server = null;
-        this.publicDirPath = null;
-        this.appsDirPath = null;
-        this.logCnn = null;
         this.applications = {};
-        this.nodeEnv = null;
+        // this.server = null;
+        // this.publicDirPath = null;
+        // this.appsDirPath = null;
+        // this.logCnn = null;
+        // this.nodeEnv = null;
     }
 
     run() {
@@ -146,6 +148,7 @@ class BackHostApp {
         this.createAndRunHttpServer(host, port);
 
         this.viewerModule = new ViewerModule(this);
+        this.editorModule = new EditorModule(this);
     }
 
     initProcess() {
