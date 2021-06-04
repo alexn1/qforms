@@ -9,6 +9,7 @@ class MonitorView extends ReactComponent {
         const data = this.props.data;
         return (
             <div className="MonitorView">
+                <div>uptime: {data.uptime}ms</div>
                 <div>Applications:</div>
                 {data.applications.map(app => this.renderApplication(app))}
             </div>

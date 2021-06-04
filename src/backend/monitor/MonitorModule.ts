@@ -1,12 +1,15 @@
+import BackHostApp from '../BackHostApp';
+
 class MonitorModule {
-    hostApp: any;
-    constructor(hostApp) {
-        this.hostApp = hostApp;
+    backHostApp: BackHostApp;
+    constructor(backHostApp: BackHostApp) {
+        this.backHostApp = backHostApp;
     }
     fill() {
         return {
-            applications: Object.keys(this.hostApp.applications).map(route => {
-                const app = this.hostApp.applications[route];
+            uptime: Date.now() - this.backHostApp.startTime.getTime(),
+            applications: Object.keys(this.backHostApp.applications).map(route => {
+                const app = this.backHostApp.applications[route];
                 return {
                     route: route,
                     pages: Object.keys(app.pages).map(name => {

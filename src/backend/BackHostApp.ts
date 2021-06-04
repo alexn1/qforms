@@ -668,7 +668,7 @@ class BackHostApp {
         const response = module.fill();
         res.render('monitor/index', {
             version : pkg.version,
-            response: response
+            response: response,
         });
     }
     async logError(req, err) {
