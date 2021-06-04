@@ -18,6 +18,7 @@ import AppModule from './app/AppModule';
 import MyError from './MyError';
 import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
+import CommonModule from './common/CommonModule';
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -79,6 +80,7 @@ class BackHostApp {
     appsDirPath: string;
     logCnn: any;
     nodeEnv: any;
+    commonModule: CommonModule;
     appModule: AppModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -149,9 +151,12 @@ class BackHostApp {
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
 
+        this.commonModule = new CommonModule(this);
+        this.commonModule.init();
         this.appModule     = new AppModule(this);
         this.monitorModule = new MonitorModule(this);
         this.viewerModule  = new ViewerModule(this);
+        this.viewerModule.init();
         this.editorModule  = new EditorModule(this);
     }
 
@@ -976,6 +981,10 @@ class BackHostApp {
         }
         res.header('Access-Control-Allow-Origin', '*');
         res.end('');
+    }
+
+    getPublicDirPath() {
+        return this.publicDirPath;
     }
 
 }
