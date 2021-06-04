@@ -269,7 +269,10 @@ class BackHostApp {
                     ...this.viewerModule.getLinks(),
                     ...await application.getLinks()
                 ],
-                scripts       : await application.getScripts()
+                scripts       : [
+                    ...this.viewerModule.getScripts(),
+                    ...await application.getScripts()
+                ]
             });
         }
     }
