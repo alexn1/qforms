@@ -1,7 +1,12 @@
 class MonitorView extends ReactComponent {
     renderApplication(app) {
         return (
-            <div key={app.route}>{app.route} ({app.pages.map(page => page.name).join(',')})</div>
+            <li key={app.route}>
+                <div>{app.route}</div>
+                <ul>
+                    {app.pages.map(page => <li key={page.name}>{page.name}</li>)}
+                </ul>
+            </li>
         );
     }
     render() {
@@ -9,9 +14,12 @@ class MonitorView extends ReactComponent {
         const data = this.props.data;
         return (
             <div className="MonitorView">
+                <div>nodeEnv: {data.nodeEnv}</div>
                 <div>uptime: {data.uptime}ms</div>
-                <div>Applications:</div>
-                {data.applications.map(app => this.renderApplication(app))}
+                <div>applications:</div>
+                <ul>
+                    {data.applications.map(app => this.renderApplication(app))}
+                </ul>
             </div>
         );
     }
