@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=application.getTitle(context, response)%></title>
     <!-- style -->
-    <link href="css/common.css" rel="stylesheet"/>
-    <link href="css/viewer.css" rel="stylesheet"/>
     <%links.forEach(link => {
     if (typeof link === 'string') {
     %><link href="<%=link%>" rel="stylesheet"/>

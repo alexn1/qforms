@@ -1,3 +1,5 @@
+
+
 const fs         = require('fs');
 const path       = require('path');
 const bodyParser = require('body-parser');
@@ -16,6 +18,7 @@ import Model from './viewer/Model/Model';
 import MonitorModule from './monitor/MonitorModule';
 import AppModule from './app/AppModule';
 import MyError from './MyError';
+import ViewerModule from './viewer/ViewerModule';
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -77,6 +80,7 @@ class BackHostApp {
     logCnn: any;
     applications: any;          // application by route
     nodeEnv: any;
+    viewerModule: ViewerModule
 
     constructor(params: any = {}) {
         // console.log('BackHostApp.constructor');
@@ -140,6 +144,8 @@ class BackHostApp {
 
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
+
+        this.viewerModule = new ViewerModule(this);
     }
 
     initProcess() {
@@ -259,7 +265,10 @@ class BackHostApp {
                 application   : application,
                 context       : context,
                 response      : response,
-                links         : await application.getLinks(),
+                links         : [
+                    ...this.viewerModule.getLinks(),
+                    ...await application.getLinks()
+                ],
                 scripts       : await application.getScripts()
             });
         }
