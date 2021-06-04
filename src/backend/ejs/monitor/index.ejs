@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html class="monitor">
+<html class="monitor" lang="en">
 <head>
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <title>QForms monitor v<%=version%></title>
-    <!-- EventEmitter -->
-    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <!-- react -->
-    <script src="lib/react/react.development.js"></script>
-    <script src="lib/react/react-dom.development.js"></script>
-    <!-- qforms css -->
+    <!-- style -->
     <link href="css/common.css" rel="stylesheet"/>
     <link href="css/monitor.css" rel="stylesheet"/>
-    <!-- qforms js -->
+    <!-- code -->
+    <script src="lib/EventEmitter/EventEmitter.min.js"></script>
+    <script src="lib/react/react.development.js"></script>
+    <script src="lib/react/react-dom.development.js"></script>
     <script src="js/common.js"></script>
     <script src="js/common-jsx.js"></script>
-<!--    <script src="js/monitor.js"></script>-->
     <script src="js/monitor-jsx.js"></script>
-    <script type="application/json"><%-JSON.stringify(response, null, 4)%></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             Helper.createReactComponent(document.querySelector('.monitor__root'), MonitorView, {data});
         });
     </script>
+    <!-- data -->
+    <script type="application/json"><%-JSON.stringify(response, null, 4)%></script>
 </head>
 <body class="monitor__body">
     <div class="monitor__root"></div>
