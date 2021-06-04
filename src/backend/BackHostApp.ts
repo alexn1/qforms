@@ -1,5 +1,3 @@
-
-
 const fs         = require('fs');
 const path       = require('path');
 const bodyParser = require('body-parser');
@@ -596,12 +594,14 @@ class BackHostApp {
         app.env = this.nodeEnv;
 
         res.render('editor/index', {
-            version        : pkg.version,
-            app            : app,
-            runAppLink     : `/view/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
-            appDirName     : context.appDirName,
-            appFileName    : context.appFileName,
-            env            : context.env
+            version    : pkg.version,
+            app        : app,
+            runAppLink : `/view/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
+            appDirName : context.appDirName,
+            appFileName: context.appFileName,
+            env        : context.env,
+            links      : this.editorModule.getLinks(),
+            scripts    : this.editorModule.getScripts()
         });
     }
 

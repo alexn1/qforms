@@ -5,19 +5,20 @@
     <meta charset="utf-8">
     <title><%=appDirName%>/<%=appFileName%>[<%=env%>] - QForms Editor</title>
     <!-- style -->
-    <link rel="stylesheet" href="lib/codemirror-4.8/lib/codemirror.css">
-    <link rel="stylesheet" href="lib/codemirror-4.8/theme/cobalt.css">
-    <link rel="stylesheet" href="css/common.css"/>
-    <link rel="stylesheet" href="css/editor.css"/>
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
     <!-- code -->
-    <script type="text/javascript" src="lib/react/react.development.js"></script>
-    <script type="text/javascript" src="lib/react/react-dom.development.js"></script>
-    <script type="text/javascript" src="lib/codemirror-4.8/lib/codemirror.js"></script>
-    <script type="text/javascript" src="lib/codemirror-4.8/mode/javascript/javascript.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/common-jsx.js"></script>
-    <script type="text/javascript" src="js/editor.js"></script>
-    <script type="text/javascript" src="js/editor-jsx.js"></script>
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
             console.log('editor.ejs DOMContentLoaded');
