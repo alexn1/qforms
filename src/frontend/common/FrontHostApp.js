@@ -61,20 +61,21 @@ class FrontHostApp {
         alert(message);
     }*/
     onWindowUnhandledrejection(e) {
-        console.error('FrontHostApp.onWindowUnhandledrejection', e);
+        console.log('FrontHostApp.onWindowUnhandledrejection', e);
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
         alert(err.message);
         e.preventDefault();
     }
     onWindowError(e) {
-        console.error('FrontHostApp.onWindowError', e.error);
+        console.log('FrontHostApp.onWindowError', e);
         const err = e.error;
         this.logError(err);
         alert(err.message);
         e.preventDefault();
     }
     logError(err) {
+        console.error('FrontHostApp.logError', err);
         fetch(this.data.logErrorUrl, {
             method: 'POST',
             body  : JSON.stringify({
