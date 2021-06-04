@@ -4,21 +4,19 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <title>QForms v<%=version%></title>
-    <!-- EventEmitter -->
+
+    <!-- links -->
+    <link href="common/css/common.css" rel="stylesheet"/>
+    <link href="app/css/app.css" rel="stylesheet"/>
+
+    <!-- scripts -->
     <script src="lib/EventEmitter/EventEmitter.min.js"></script>
-    <!-- react -->
     <script src="lib/react/react.development.js"></script>
     <script src="lib/react/react-dom.development.js"></script>
-    <!-- qforms css-->
-    <link href="common/css/common.css" rel="stylesheet"/>
-    <link href="css/app.css" rel="stylesheet"/>
-    <!-- qforms js-->
     <script src="common/js/common.js"></script>
     <script src="common/js/common-jsx.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/app-jsx.js"></script>
-    <!-- data -->
-    <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>
+    <script src="app/js/app.js"></script>
+    <script src="app/js/app-jsx.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('DOMContentLoaded');
@@ -26,6 +24,7 @@
             new AppApp(data).init();
         });
     </script>
+    <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>
 </head>
 <body>
 <div id="root"></div>

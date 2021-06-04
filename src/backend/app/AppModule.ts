@@ -16,5 +16,8 @@ class AppModule {
             }))
         };
     }
+    getLinks() {
+        return [];
+    }
 }
 export = AppModule;

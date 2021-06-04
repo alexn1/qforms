@@ -16,7 +16,7 @@ function frontend_app_js() {
         .pipe(concat('app.js'))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/js')));
 }
 
 function frontend_app_jsx() {
@@ -25,7 +25,7 @@ function frontend_app_jsx() {
         .pipe(babel())
         .pipe(concat('app-jsx.js'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/js')));
 }
 
 function frontend_app_less() {
@@ -35,7 +35,7 @@ function frontend_app_less() {
         .pipe(concat('app.css'))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/css')));
 }
 
 
