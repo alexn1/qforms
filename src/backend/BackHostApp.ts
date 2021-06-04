@@ -684,6 +684,11 @@ class BackHostApp {
         console.log('BackHostApp.logError:', colors.red(err));
         if (!this.logCnn) return;
         try {
+            const route = err.context ? err.context.route : null;
+            let appVersion = null;
+            if (route) {
+                appVersion = this.applications[route].getVersion();
+            }
             await BackHostApp.createLog(this.logCnn, {
                 type   : 'error',
                 source : 'server',
@@ -692,7 +697,8 @@ class BackHostApp {
                 stack  : err.stack.toString(),
                 data   : req ? JSON.stringify({
                     platformVersion: pkg.version,
-                    route          : err.context ? err.context.route : null,
+                    appVersion     : appVersion,
+                    route          : route,
                     body           : req.body
                 }, null, 4) : null
             });
