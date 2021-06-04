@@ -6,6 +6,7 @@ const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 const babel      = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
+const hash = require('gulp-hash-filename');
 
 const SRC_PATH   = "./src";
 const BUILD_PATH = './build';
@@ -14,6 +15,7 @@ function frontend_viewer_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.js'))
         .pipe(sourcemaps.init())
         .pipe(concat('viewer.js'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/js')));
@@ -24,6 +26,7 @@ function frontend_viewer_jsx() {
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('viewer-jsx.js'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/js')));
 }
@@ -33,6 +36,7 @@ function frontend_viewer_less() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('viewer.css'))
+        .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/css')));
