@@ -67,14 +67,20 @@ class FrontHostApp {
     }
     onWindowError(e) {
         console.error('FrontHostApp.onWindowError', e.error);
-        alert(e.error.message);
-        FrontHostApp.doHttpRequest({
-            action: 'error',
-            error: {
+        // const url = '/error';
+        const url = 'http://localhost:4000/error';
+        fetch(url, {
+            method: 'POST',
+            body  : JSON.stringify({
                 message: e.error.message,
-                stack  : e.error.stack
-            }
+                stack  : e.error.stack,
+                href   : window.location.href,
+            }),
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+        }).catch(err => {
+            console.error(err.message);
         });
+        alert(e.error.message);
         e.preventDefault();
     }
     static async doHttpRequest(data) {

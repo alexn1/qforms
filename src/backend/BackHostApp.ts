@@ -36,7 +36,6 @@ const ACTIONS = [
     'rpc',
     'logout',
     'test',
-    'error',
 ];
 
 const EDITOR_CONTROLLERS = [
@@ -177,6 +176,15 @@ class BackHostApp {
         // test
         this.server.get( '/test', this._getTest.bind(this));
         this.server.post('/test', this._postTest.bind(this));
+
+        // error
+        this.server.options('/error', (req, res, next) => {
+            console.log('options /error');
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
+            res.end();
+        });
+        this.server.post('/error', this.postError.bind(this));
 
         // app
         this.server.get( '/app', this._appGet.bind(this));
@@ -931,26 +939,27 @@ class BackHostApp {
         return host;
     }
 
-    async error(req, res, context) {
-        console.log(colors.red('BackHostApp.error'), colors.red(req.body.error));
-        const err = req.body.error;
+    async postError(req, res, next) {
+        console.log(colors.red('BackHostApp.postError'), colors.red(req.body));
         if (this.logCnn) {
             try {
                 await BackHostApp.createLog(this.logCnn, {
                     type   : 'error',
                     source : 'client',
                     ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
-                    message: err.message,
-                    stack  : err.stack.toString(),
+                    message: req.body.message,
+                    stack  : req.body.stack.toString(),
                     data   : req ? JSON.stringify({
-                        route: context.route
+                        domain: this.getDomain(req),
+                        href  : req.body.href
                     }, null, 4) : null
                 });
             } catch (err) {
                 console.error(colors.red(err));
             }
         }
-        res.json({});
+        res.header('Access-Control-Allow-Origin', '*');
+        res.end('');
     }
 
 }
