@@ -92,7 +92,8 @@ class Application extends Model {
         const start = Date.now();
         const response = await super.fill(context);
 
-        response.domain = this.domain;
+        response.domain      = this.domain;
+        response.logErrorUrl = this.hostApp.logErrorUrl;
 
         await this.fillCollection(response, 'databases'  , context);
         await this.fillCollection(response, 'actions'    , context);

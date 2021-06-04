@@ -67,9 +67,7 @@ class FrontHostApp {
     }
     onWindowError(e) {
         console.error('FrontHostApp.onWindowError', e.error);
-        // const url = '/error';
-        const url = 'http://localhost:4000/error';
-        fetch(url, {
+        fetch(this.data.logErrorUrl, {
             method: 'POST',
             body  : JSON.stringify({
                 message: e.error.message,

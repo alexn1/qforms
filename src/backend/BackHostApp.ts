@@ -82,6 +82,7 @@ class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
+    logErrorUrl: string;
 
     constructor(params: any = {}) {
         // console.log('BackHostApp.constructor');
@@ -104,6 +105,8 @@ class BackHostApp {
         const host            = this.params.host            || 'localhost';
         const port            = this.params.port            || 3000;
         const log             = this.params.log;
+
+        this.logErrorUrl = this.params.logErrorUrl || '/error';
 
 
         if (!fs.existsSync(appsDirPath)) {
