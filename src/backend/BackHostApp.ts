@@ -215,7 +215,9 @@ class BackHostApp {
         }
 
         // monitor
-        this.server.get('/monitor', this._monitorGet.bind(this));
+        if (this.nodeEnv === 'development') {
+            this.server.get('/monitor', this._monitorGet.bind(this));
+        }
 
         // viewer/editor
         this.server.get('/:module/:appDirName/:appFileName/:env/', this._moduleGet.bind(this));
@@ -819,12 +821,7 @@ class BackHostApp {
     async _monitorGet(req, res, next) {
         console.warn(colors.magenta('monitorGet'));
         try {
-
-            if (this.nodeEnv === 'development') {
-                await this.monitorGet(req, res);
-            } else {
-                next();
-            }
+            await this.monitorGet(req, res);
         } catch (err) {
             next(err);
         }
