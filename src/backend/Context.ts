@@ -29,7 +29,7 @@ class Context {
         this.req    = req;
         this.domain = domain;
 
-        // request
+        // req.params
         this.uri         = req.params['0'];
         this.module      = req.params.module;
         this.appDirName  = req.params.appDirName;
