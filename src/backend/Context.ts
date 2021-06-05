@@ -25,6 +25,7 @@ class Context {
 
         // req, domain
         if (!req) throw new Error('no req');
+        if (!domain) throw new Error('no domain');
         this.req    = req;
         this.domain = domain;
 
