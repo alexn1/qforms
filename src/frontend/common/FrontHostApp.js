@@ -61,6 +61,7 @@ class FrontHostApp {
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
+        console.log(`post error to ${this.data.logErrorUrl}`);
         fetch(this.data.logErrorUrl, {
             method: 'POST',
             body  : JSON.stringify({
@@ -94,6 +95,7 @@ class FrontHostApp {
                 body  : body,
                 ...(contentType ? {headers: {'Content-Type': contentType}} : {}),
             });
+            // console.log('res:', res);
             if (res.ok) return await res.json();
             throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
         } finally {

@@ -131,8 +131,10 @@ class TableFormController extends FormController {
                 modal: true
             });
         } catch (err) {
-            console.error(`${this.model.getFullName()}: edit form error handler:`, err);
-            alert(`${this.model.getFullName()}: ${err.message}`);
+            // console.error(`${this.model.getFullName()}: edit form error handler:`, err);
+            // alert(`${this.model.getFullName()}: ${err.message}`);
+            err.message = `${this.model.getFullName()} edit: ${err.message}`;
+            throw err;
         }
     }
     onModelRefresh = e => {
