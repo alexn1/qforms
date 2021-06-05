@@ -95,7 +95,6 @@ class FrontHostApp {
                 body  : body,
                 ...(contentType ? {headers: {'Content-Type': contentType}} : {}),
             });
-            // console.log('res:', res);
             if (res.ok) return await res.json();
             throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
         } finally {
