@@ -195,8 +195,8 @@ class BackHostApp {
         }));
 
         // test
-        this.server.get( '/test', this._getTest.bind(this));
-        this.server.post('/test', this._postTest.bind(this));
+        // this.server.get( '/test', this._getTest.bind(this));
+        // this.server.post('/test', this._postTest.bind(this));
 
         // error
         this.server.options('/error', (req, res, next) => {
@@ -207,29 +207,28 @@ class BackHostApp {
         });
         this.server.post('/error', this.postError.bind(this));
 
-        // app
-        this.server.get( '/app', this._appGet.bind(this));
-        this.server.post('/app', this._appPost.bind(this));
+
+        // index
+        if (this.nodeEnv === 'development') {
+            this.server.get( '/', this._appGet.bind(this));
+            this.server.post('/', this._appPost.bind(this));
+        }
 
         // monitor
         this.server.get('/monitor', this._monitorGet.bind(this));
 
-        // moduleGet
+        // viewer/editor
         this.server.get('/:module/:appDirName/:appFileName/:env/', this._moduleGet.bind(this));
-
-        // modulePost
         this.server.post('/:module/:appDirName/:appFileName/:env/', this._modulePost.bind(this));
-
-        // moduleFile
         this.server.get('/:module/:appDirName/:appFileName/:env/*', this._moduleFile.bind(this));
 
         // favicon.ico
         this.server.get('/favicon.ico', this._favicon.bind(this));
 
-        // handle static for app and monitor
+        // handle static for index and monitor
         this.server.use(express.static(this.publicDirPath));
 
-        // catch 404 and forward to error handler
+        // 404 and 500 error handlers
         this.server.use(this._e404.bind(this));
         this.server.use(this._e500.bind(this));
     }
@@ -891,16 +890,16 @@ class BackHostApp {
         await this.logError(req, err);
     }
 
-    _getTest(req, res, next) {
+    /*_getTest(req, res, next) {
         console.log('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
-    }
+    }*/
 
-    _postTest(req, res, next) {
+    /*_postTest(req, res, next) {
         console.log('postTest', req.body);
         res.json({foo: 'bar'});
-    }
+    }*/
 
     createAndRunHttpServer(host, port) {
         const httpServer = http.createServer(this.server);
@@ -910,7 +909,7 @@ class BackHostApp {
                 process.send('online');
             }
             const appsDirPath = path.resolve(this.appsDirPath);
-            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/app\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
+            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
         });
     }
 
