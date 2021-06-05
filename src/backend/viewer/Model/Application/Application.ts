@@ -16,7 +16,7 @@ import PageLink from '../PageLink/PageLink';
 import Context   from '../../../Context';
 import JsonFile from '../../../JsonFile';
 
-const text = require('../../../common/text');
+const text = require('../../text');
 const pkg  = require('../../../../../package.json');
 
 class Application extends Model {
