@@ -64,38 +64,12 @@ class Context {
     calcRoute() {
         return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
-
     destroy() {
         /*for (const name in this.connections) {
             //console.log('release connection: ' + name);
             this.connections[name].release();
         }*/
     }
-    /*static decodeValue(rawValue) {
-        return JSON.parse(rawValue, Context.dateTimeReviver);
-    }*/
-    /*static decodeObject(obj) {
-        const dObj = {};
-        for (const name in obj) {
-            if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = Helper.decodeValue(obj[name]);
-        }
-        return dObj;
-    }*/
-    /*static decodeChanges(changes) {
-        const dChanges = {};
-        for (const key in changes) {
-            dChanges[key] = Helper.decodeObject(changes[key]);
-        }
-        return dChanges;
-    }*/
-    /*static dateTimeReviver(key, value) {
-        if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/.exec(value);
-            if (a) return new Date(value);
-        }
-        return value;
-    }*/
     getUser() {
         return this.req.session.user[this.route];
     }
