@@ -19,7 +19,11 @@ class Context {
     querytime: any;
     files: any;
 
-    constructor(req, domain) {
+    constructor(options) {
+        const req    = options.req;
+        const domain = options.domain;
+
+        // req, domain
         if (!req) throw new Error('no req');
         this.req    = req;
         this.domain = domain;
