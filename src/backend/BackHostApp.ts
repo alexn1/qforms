@@ -867,7 +867,7 @@ class BackHostApp {
 
     async _e404(req, res, next) {
         console.warn(colors.magenta(req.method), 'error/404');
-        const err = new MyError(`${req.method} ${req.originalUrl} page not found`);
+        const err = new MyError(`${req.method} ${req.originalUrl} not found`);
         err.status = 404;
         next(err);
     }
