@@ -62,7 +62,7 @@ class AppApp {
 
     run = e => {
         if (this.currentAppFullName) {
-            const href = `view/${this.currentAppFullName}/${this.currentAppEnv}/`;
+            const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/`;
             console.log('href:', href);
             window.location.href = href;
         }
@@ -70,7 +70,7 @@ class AppApp {
 
     edit = e => {
         if (this.currentAppFullName) {
-            const href = `edit/${this.currentAppFullName}/${this.currentAppEnv}/`;
+            const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/`;
             console.log('href:', href);
             window.location.href = href;
         }

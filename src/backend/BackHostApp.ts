@@ -628,7 +628,7 @@ class BackHostApp {
         res.render('editor/index', {
             version    : pkg.version,
             app        : app,
-            runAppLink : `/view/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
+            runAppLink : `/viewer/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
             appDirName : context.appDirName,
             appFileName: context.appFileName,
             env        : context.env,
@@ -785,9 +785,9 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context(req, this.getDomain(req));
-            if (context.module === 'view') {
+            if (context.module === 'viewer') {
                 await this.handleViewerGet(req, res, context);
-            } else if (context.module === 'edit') {
+            } else if (context.module === 'editor') {
                 await this.handleEditorGet(req, res, context);
             } else {
                 throw new Error(`unknown module: ${context.module}`);
@@ -836,10 +836,10 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context(req, this.getDomain(req));
-            if (context.module === 'view') {
+            if (context.module === 'viewer') {
                 const time = await this.handleViewerPost(req, res, context);
                 // await this.logRequest(req, context, time);
-            } else if (context.module === 'edit') {
+            } else if (context.module === 'editor') {
                 const time = await this.handleEditorPost(req, res, context);
                 // await this.logRequest(req, context, time);
             }
