@@ -32,7 +32,7 @@ class NewDatabaseView extends ReactComponent {
                     <ComboBox id={'class'} classList={['form-control']} items={[
                         {value: 'MySqlDatabase'     , title: 'MySqlDatabase'},
                         {value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase'}
-                    ]} onCreate={c => this.class = c}/>
+                    ]} onCreate={c => this.class = c} value={'PostgreSqlDatabase'}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>

@@ -11,7 +11,7 @@ function backend_ts() {
             target: 'ES2017',
             declaration: true,
             esModuleInterop: true,
-            module: 'commonjs'
+            module: 'commonjs',
         }))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend')));
 }
