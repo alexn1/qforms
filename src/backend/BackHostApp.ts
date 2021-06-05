@@ -134,7 +134,7 @@ class BackHostApp {
         // options
         this.server.set('handleException', handleException);
         this.server.set('view engine'    , 'ejs');
-        this.server.set('views'          , path.join(backendDirPath, 'ejs'));
+        this.server.set('views'          , backendDirPath);
         this.server.enable('strict routing');
 
         // production by default to disable editor
