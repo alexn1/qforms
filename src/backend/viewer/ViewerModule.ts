@@ -13,8 +13,8 @@ class ViewerModule {
     async init() {
         this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'viewer'), 'css')).map(path => `viewer/${path}`);
         this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'viewer'), 'js' )).map(path => `viewer/${path}`);
-        console.log('viewer.css:', this.css);
-        console.log('viewer.js:' , this.js);
+        // console.log('viewer.css:', this.css);
+        // console.log('viewer.js:' , this.js);
     }
     getLinks() {
         return [

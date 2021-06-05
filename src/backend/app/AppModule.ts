@@ -13,8 +13,8 @@ class AppModule {
     async init() {
         this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `app/${path}`);
         this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `app/${path}`);
-        console.log('app.css:', this.css);
-        console.log('app.js:' , this.js);
+        // console.log('app.css:', this.css);
+        // console.log('app.js:' , this.js);
     }
     async fill() {
         const appInfos = await Application.getAppInfos(this.backHostApp.appsDirPath);
