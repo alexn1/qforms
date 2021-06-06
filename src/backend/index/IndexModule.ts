@@ -11,8 +11,8 @@ class IndexModule {
         this.backHostApp = backHostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `/app/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `/app/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `/index/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `/index/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }

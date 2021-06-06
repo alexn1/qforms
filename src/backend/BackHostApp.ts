@@ -14,7 +14,7 @@ import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorModule from './monitor/MonitorModule';
-import IndexModule from './app/IndexModule';
+import IndexModule from './index/IndexModule';
 import MyError from './MyError';
 import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
@@ -801,7 +801,7 @@ class BackHostApp {
         console.warn(colors.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
-            res.render('app/index', {
+            res.render('index/index', {
                 hostApp: this,
                 version: pkg.version,
                 data   : data,

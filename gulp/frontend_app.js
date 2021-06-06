@@ -18,7 +18,7 @@ function frontend_app_js() {
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
 function frontend_app_jsx() {
@@ -28,7 +28,7 @@ function frontend_app_jsx() {
         .pipe(concat('app-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/js')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
 function frontend_app_less() {
@@ -39,7 +39,7 @@ function frontend_app_less() {
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/app/css')));
+        .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/css')));
 }
 
 
