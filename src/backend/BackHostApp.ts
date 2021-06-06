@@ -199,7 +199,7 @@ class BackHostApp {
         // this.server.post('/test', this._postTest.bind(this));
 
 
-        this.initCustomRoutes();
+
 
         // error logger
         this.server.options('/error', (req, res, next) => {
@@ -228,6 +228,9 @@ class BackHostApp {
         this.server.get( '/:module/:appDirName/:appFileName/:env/' , this.appGet.bind(this));
         this.server.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
         this.server.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
+
+
+        this.initCustomRoutes();
 
         // favicon.ico
         // this.server.get('/favicon.ico', this._favicon.bind(this));
