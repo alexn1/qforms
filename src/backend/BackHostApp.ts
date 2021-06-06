@@ -586,44 +586,48 @@ class BackHostApp {
         return null;
     }*/
 
-    async sendAppFile(req, res, context: Context) {
-        // console.log('BackHostApp.sendAppFile');
-        const application = this.getApplication(context);
-        const appFilePath = path.join(application.getBuildDirPath(), context.uri);
-        const exists = await Helper.exists(appFilePath);
+    // async sendAppFile(req, res, context: Context) {
+    //     // console.log('BackHostApp.sendAppFile');
+    //     const application = this.getApplication(context);
+    //     const filePath = path.join(application.getBuildDirPath(), context.uri);
+    //     const exists = await Helper.exists(filePath);
+    //
+    //     // const content = await this.appFile(req, context, application);
+    //     if (exists) {
+    //         res.sendFile(filePath);
+    //         /*
+    //         if (content[1] === '.css') {
+    //             res.setHeader('content-type', 'text/css');
+    //         }
+    //         if (content[1] === '.js') {
+    //             res.setHeader('content-type', 'text/javascript');
+    //         }
+    //         if (content[1] === '.map') {
+    //             res.setHeader('content-type', 'application/json');
+    //         }
+    //         if (content[1] === '.ttf') {
+    //             res.setHeader('content-type', 'font/ttf');
+    //         }
+    //         if (content[1] === '.otf') {
+    //             res.setHeader('content-type', 'font/opentype');
+    //         }
+    //         if (content[1] === '.png') {
+    //             res.setHeader('content-type', 'image/png');
+    //         }
+    //         if (content[1] === '.jpg') {
+    //             res.setHeader('content-type', 'image/jpeg');
+    //         }
+    //         res.send(content[0]);*/
+    //     } else {
+    //         await this.sendPlatformFile(context, res);
+    //     }
+    // }
 
-        // const content = await this.appFile(req, context, application);
-        if (exists) {
-            res.sendFile(appFilePath);
-            /*
-            if (content[1] === '.css') {
-                res.setHeader('content-type', 'text/css');
-            }
-            if (content[1] === '.js') {
-                res.setHeader('content-type', 'text/javascript');
-            }
-            if (content[1] === '.map') {
-                res.setHeader('content-type', 'application/json');
-            }
-            if (content[1] === '.ttf') {
-                res.setHeader('content-type', 'font/ttf');
-            }
-            if (content[1] === '.otf') {
-                res.setHeader('content-type', 'font/opentype');
-            }
-            if (content[1] === '.png') {
-                res.setHeader('content-type', 'image/png');
-            }
-            if (content[1] === '.jpg') {
-                res.setHeader('content-type', 'image/jpeg');
-            }
-            res.send(content[0]);*/
-        } else {
-            const filePath = path.join(this.publicDirPath, context.uri);
-            const exists = await Helper.exists(filePath);
-            if (!exists) throw new Error(`file not found: ${context.uri}`);
-            res.sendFile(filePath);
-        }
+    async sendPlatformFile(context: Context, res) {
+        const filePath = path.join(this.publicDirPath, context.uri);
+        const exists = await Helper.exists(filePath);
+        if (!exists) throw new Error(`file not found: ${context.uri}`);
+        res.sendFile(filePath);
     }
 
     async handleEditorGet(req, res, context: Context) {
@@ -844,7 +848,14 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
-            await this.sendAppFile(req, res, context);
+            const application = this.getApplication(context);
+            const filePath = path.join(application.getBuildDirPath(), context.uri);
+            const exists = await Helper.exists(filePath);
+            if (exists) {
+                res.sendFile(filePath);
+            } else {
+                await this.sendPlatformFile(context, res);
+            }
         } catch (err) {
             err.message = `appGetFile error: ${err.message}`;
             next(err);
