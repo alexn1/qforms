@@ -213,13 +213,13 @@ class BackHostApp {
 
         // index
         if (this.nodeEnv === 'development') {
-            this.server.get( '/index', this._appGet.bind(this));
-            this.server.post('/index', this._appPost.bind(this));
+            this.server.get( '/index', this._indexGet.bind(this));
+            this.server.post('/index', this._indexPost.bind(this));
         }
 
         // monitor
         if (this.nodeEnv === 'development') {
-            this.server.get('/monitor', this._monitorGet.bind(this));
+            this.server.get('/monitor/', this._monitorGet.bind(this));
         }
 
         // viewer/editor
@@ -785,7 +785,7 @@ class BackHostApp {
     }
 
     async _moduleGet(req, res, next) {
-        console.warn(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        console.warn(colors.magenta.underline('BackHostApp._moduleGet'), req.params);
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
@@ -803,8 +803,8 @@ class BackHostApp {
         }
     }
 
-    async _appGet(req, res, next) {
-        console.warn(colors.magenta('appGet'));
+    async _indexGet(req, res, next) {
+        console.warn(colors.magenta('_indexGet'));
         try {
             await this.appGet(req, res);
         } catch (err) {
@@ -812,8 +812,8 @@ class BackHostApp {
         }
     }
 
-    async _appPost(req, res, next) {
-        console.warn(colors.magenta('appPost'), req.params);
+    async _indexPost(req, res, next) {
+        console.warn(colors.magenta('_indexPost'), req.params);
         try {
             await this.appPost(req, res);
         } catch (err) {
