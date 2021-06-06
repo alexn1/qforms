@@ -586,8 +586,8 @@ class BackHostApp {
         return null;
     }
 
-    async staticFile(req, res, context: Context) {
-        // console.log('BackHostApp.staticFile');
+    async sendAppFile(req, res, context: Context) {
+        // console.log('BackHostApp.sendAppFile');
         const application = this.getApplication(context);
         const content = await this.appFile(req, context, application);
         if (content !== null) {
@@ -839,7 +839,7 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
-            await this.staticFile(req, res, context);
+            await this.sendAppFile(req, res, context);
         } catch (err) {
             err.message = `appGetFile error: ${err.message}`;
             next(err);
