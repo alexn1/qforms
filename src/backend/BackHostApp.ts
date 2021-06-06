@@ -213,13 +213,13 @@ class BackHostApp {
 
         // index
         if (this.nodeEnv === 'development') {
-            this.server.get( '/index', this._indexGet.bind(this));
-            this.server.post('/index', this._indexPost.bind(this));
+            this.server.get( '/index', this.indexGet.bind(this));
+            this.server.post('/index', this.indexPost.bind(this));
         }
 
         // monitor
         if (this.nodeEnv === 'development') {
-            this.server.get('/monitor/', this.monitorGet.bind(this));
+            this.server.get('/monitor', this.monitorGet.bind(this));
         }
 
         // viewer/editor
@@ -780,12 +780,11 @@ class BackHostApp {
         }
     }
 
-    async _indexGet(req, res, next) {
-        console.warn(colors.magenta('_indexGet'));
+    async indexGet(req, res, next) {
+        console.warn(colors.magenta('indexGet'));
         try {
             const data = await this.appModule.fill();
             res.render('app/index', {
-                // req           : req,
                 hostApp: this,
                 version: pkg.version,
                 data   : data,
@@ -797,8 +796,8 @@ class BackHostApp {
         }
     }
 
-    async _indexPost(req, res, next) {
-        console.warn(colors.magenta('_indexPost'), req.params);
+    async indexPost(req, res, next) {
+        console.warn(colors.magenta('indexPost'), req.params);
         try {
             await this.appPost(req, res);
         } catch (err) {
