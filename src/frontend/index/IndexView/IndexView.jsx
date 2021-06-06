@@ -1,4 +1,4 @@
-class AppView extends ReactComponent {
+class IndexView extends ReactComponent {
     renderModals() {
         const ctrl = this.props.ctrl;
         return (
@@ -34,10 +34,10 @@ class AppView extends ReactComponent {
         );
     }
     render() {
-        console.log('AppView.render');
+        console.log('IndexView.render');
         const ctrl = this.props.ctrl;
         return (
-            <div className="AppView">
+            <div className="IndexView">
                 <div className="container" style={{backgroundColor: '#eee'}}>
                     <div className="row" style={{margin: '50px 0'}}>
                         <div>

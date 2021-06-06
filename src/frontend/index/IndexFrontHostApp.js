@@ -21,7 +21,7 @@ class IndexFrontHostApp {
     }
 
     createView(root) {
-        this.view = Helper.createReactComponent(root, AppView, {ctrl: this});
+        this.view = Helper.createReactComponent(root, IndexView, {ctrl: this});
     }
 
     getAppItems() {
