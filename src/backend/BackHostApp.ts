@@ -1007,13 +1007,19 @@ class BackHostApp {
         appDirName: string,
         appFileName: string,
         env: string,
-        cb: string
+        cb: string,
+        query?: any
     ) {
         this.server[method](path, async (req, res, next) => {
             req.params.module      = module;
             req.params.appDirName  = appDirName;
             req.params.appFileName = appFileName;
             req.params.env         = env;
+            if (query) {
+                for (const name in query) {
+                    req.query[name] = Helper.encodeValue(query[name] ? query[name] : req.params[name]);
+                }
+            }
             await this[cb](req, res, next);
         });
     }
