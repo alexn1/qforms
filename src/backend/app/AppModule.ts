@@ -11,8 +11,8 @@ class AppModule {
         this.backHostApp = backHostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `app/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `app/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'css')).map(path => `/app/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'app'), 'js' )).map(path => `/app/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
@@ -35,9 +35,9 @@ class AppModule {
     }
     getScripts() {
         return [
-            'lib/EventEmitter/EventEmitter.min.js',
-            'lib/react/react.development.js',
-            'lib/react/react-dom.development.js',
+            '/lib/EventEmitter/EventEmitter.min.js',
+            '/lib/react/react.development.js',
+            '/lib/react/react-dom.development.js',
             ...(this.backHostApp.commonModule.js),
             ...(this.js)
         ];

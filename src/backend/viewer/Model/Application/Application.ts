@@ -347,7 +347,7 @@ class Application extends Model {
     }
 
     static async getAppInfos(appsDirPath) {
-        console.log('Application.getAppInfos', appsDirPath);
+        // console.log('Application.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
