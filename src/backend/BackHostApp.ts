@@ -198,6 +198,9 @@ class BackHostApp {
         // this.server.get( '/test', this._getTest.bind(this));
         // this.server.post('/test', this._postTest.bind(this));
 
+
+        this.initCustomRoutes();
+
         // error
         this.server.options('/error', (req, res, next) => {
             console.log('options /error');
@@ -994,7 +997,9 @@ class BackHostApp {
     getPublicDirPath() {
         return this.publicDirPath;
     }
+    initCustomRoutes() {
 
+    }
 }
 
 export = BackHostApp;
