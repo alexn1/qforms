@@ -213,14 +213,14 @@ class BackHostApp {
 
         // index module
         if (this.nodeEnv === 'development') {
-            this.server.get( '/index/' , this.indexGet.bind(this));
-            this.server.post('/index/' , this.indexPost.bind(this));
+            this.server.get( '/index' , this.indexGet.bind(this));
+            this.server.post('/index' , this.indexPost.bind(this));
             // this.server.get( '/index/*', this.indexGetFile.bind(this));
         }
 
         // monitor module
         if (this.nodeEnv === 'development') {
-            this.server.get('/monitor/' , this.monitorGet.bind(this));
+            this.server.get('/monitor' , this.monitorGet.bind(this));
             // this.server.get('/monitor/*', this.monitorGetFile.bind(this));
         }
 
@@ -949,7 +949,7 @@ class BackHostApp {
                 process.send('online');
             }
             const appsDirPath = path.resolve(this.appsDirPath);
-            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index/\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor/`);
+            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
         });
     }
 
