@@ -223,9 +223,9 @@ class BackHostApp {
         }
 
         // viewer/editor
-        this.server.get('/:module/:appDirName/:appFileName/:env/', this._moduleGet.bind(this));
-        this.server.post('/:module/:appDirName/:appFileName/:env/', this._modulePost.bind(this));
-        this.server.get('/:module/:appDirName/:appFileName/:env/*', this._moduleFile.bind(this));
+        this.server.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
+        this.server.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
+        this.server.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
         // favicon.ico
         // this.server.get('/favicon.ico', this._favicon.bind(this));
@@ -663,15 +663,6 @@ class BackHostApp {
         await res.json(result);
     }
 
-    async appPost(req, res) {
-        console.log('BackHostApp.appPost');
-        const appInfos = await this.createApp(req);
-        await res.json({appInfos: appInfos.map(appInfo => ({
-            fullName: appInfo.fullName,
-            envs    : appInfo.envs
-        }))});
-    }
-
     async createApp(req) {
         console.log('createApp');
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
@@ -761,8 +752,8 @@ class BackHostApp {
         );
     }
 
-    async _moduleGet(req, res, next) {
-        console.warn(colors.magenta.underline('BackHostApp._moduleGet'), req.params);
+    async appGet(req, res, next) {
+        console.warn(colors.magenta.underline('BackHostApp.appGet'), req.params);
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
@@ -799,7 +790,11 @@ class BackHostApp {
     async indexPost(req, res, next) {
         console.warn(colors.magenta('indexPost'), req.params);
         try {
-            await this.appPost(req, res);
+            const appInfos = await this.createApp(req);
+            await res.json({appInfos: appInfos.map(appInfo => ({
+                    fullName: appInfo.fullName,
+                    envs    : appInfo.envs
+                }))});
         } catch (err) {
             next(err);
         }
@@ -820,8 +815,8 @@ class BackHostApp {
         }
     }
 
-    async _modulePost(req, res, next)  {
-        console.warn(colors.magenta.underline('BackHostApp._modulePost'), req.params, req.body);
+    async appPost(req, res, next)  {
+        console.warn(colors.magenta.underline('BackHostApp.appPost'), req.params, req.body);
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
@@ -839,14 +834,14 @@ class BackHostApp {
         }
     }
 
-    async _moduleFile(req, res, next) {
-        // console.warn(colors.magenta.underline('BackHostApp._moduleFile'), req.originalUrl);
+    async appGetFile(req, res, next) {
+        // console.warn(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
             await this.staticFile(req, res, context);
         } catch (err) {
-            err.message = `_moduleFile error: ${err.message}`;
+            err.message = `appGetFile error: ${err.message}`;
             next(err);
         } finally {
             context.destroy();
