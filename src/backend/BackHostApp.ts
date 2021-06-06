@@ -782,22 +782,25 @@ class BackHostApp {
         console.warn(colors.magenta.underline('BackHostApp.appGet'), req.params);
         let context = null;
         try {
-            context = new Context({req, domain: this.getDomain(req)});
-            if (context.module === 'viewer') {
+            if (req.params.module === 'viewer') {
+                context = new Context({req, domain: this.getDomain(req)});
                 await this.handleViewerGet(req, res, context);
-            } else if (context.module === 'editor') {
+            } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
+                    context = new Context({req, domain: this.getDomain(req)});
                     await this.handleEditorGet(req, res, context);
                 } else {
                     next();
                 }
             } else {
-                throw new Error(`unknown module: ${context.module}`);
+                next();
             }
         } catch (err) {
             next(err);
         } finally {
-            context.destroy();
+            if (context) {
+                context.destroy();
+            }
         }
     }
 
@@ -865,22 +868,27 @@ class BackHostApp {
         console.warn(colors.magenta.underline('BackHostApp.appPost'), req.params, req.body);
         let context = null;
         try {
-            context = new Context({req, domain: this.getDomain(req)});
-            if (context.module === 'viewer') {
+            if (req.params.module === 'viewer') {
+                context = new Context({req, domain: this.getDomain(req)});
                 const time = await this.handleViewerPost(req, res, context);
                 // await this.logRequest(req, context, time);
-            } else if (context.module === 'editor') {
+            } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
+                    context = new Context({req, domain: this.getDomain(req)});
                     const time = await this.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 } else {
                     next();
                 }
+            } else {
+                next();
             }
         } catch (err) {
             next(err);
         } finally {
-            context.destroy();
+            if (context) {
+                context.destroy();
+            }
         }
     }
 
@@ -907,7 +915,9 @@ class BackHostApp {
             err.message = `appGetFile error: ${err.message}`;
             next(err);
         } finally {
-            context.destroy();
+            if (context) {
+                context.destroy();
+            }
         }
     }
 
