@@ -213,8 +213,9 @@ class BackHostApp {
 
         // index
         if (this.nodeEnv === 'development') {
-            this.server.get( '/index', this.indexGet.bind(this));
-            this.server.post('/index', this.indexPost.bind(this));
+            this.server.get( '/index/' , this.indexGet.bind(this));
+            this.server.post('/index/' , this.indexPost.bind(this));
+            this.server.get( '/index/*', this.indexGetFile.bind(this));
         }
 
         // monitor
@@ -619,16 +620,16 @@ class BackHostApp {
     //         }
     //         res.send(content[0]);*/
     //     } else {
-    //         await this.sendPlatformFile(context, res);
+    //         await this.sendPlatformFile(req, res);
     //     }
     // }
 
-    async sendPlatformFile(context: Context, res) {
-        const filePath = path.join(this.publicDirPath, context.uri);
+    async sendPlatformFile(req, res) {
+        const uri = req.params['0'];
+        const filePath = path.join(this.publicDirPath, uri);
         const exists = await Helper.exists(filePath);
         if (!exists) {
-            const err = new MyError(`file not found: ${context.uri}`);
-            err.context = context;
+            const err = new MyError(`file not found: ${uri}`);
             err.data = {filePath};
             err.status = 404;
             throw err;
@@ -818,6 +819,14 @@ class BackHostApp {
         }
     }
 
+    async indexGetFile(req, res, next) {
+        try {
+            await this.sendPlatformFile(req, res);
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async monitorGet(req, res, next) {
         console.warn(colors.magenta('monitorGet'));
         try {
@@ -863,7 +872,7 @@ class BackHostApp {
             if (exists) {
                 res.sendFile(filePath);
             } else {
-                await this.sendPlatformFile(context, res);
+                await this.sendPlatformFile(req, res);
             }
         } catch (err) {
             err.message = `appGetFile error: ${err.message}`;
@@ -919,7 +928,7 @@ class BackHostApp {
                 process.send('online');
             }
             const appsDirPath = path.resolve(this.appsDirPath);
-            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
+            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index/\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
         });
     }
 
