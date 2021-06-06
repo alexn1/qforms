@@ -566,7 +566,7 @@ class BackHostApp {
         await res.json(null);
     }
 
-    async appFile(req, context: Context, application: Application) {
+    /*async appFile(req, context: Context, application: Application) {
         // console.log('BackHostApp.appFile', context.uri);
         const filePath = path.join(application.getBuildDirPath(), context.uri);
         // console.log('filePath:', filePath);
@@ -584,13 +584,18 @@ class BackHostApp {
             }
         }
         return null;
-    }
+    }*/
 
     async sendAppFile(req, res, context: Context) {
         // console.log('BackHostApp.sendAppFile');
         const application = this.getApplication(context);
-        const content = await this.appFile(req, context, application);
-        if (content !== null) {
+        const appFilePath = path.join(application.getBuildDirPath(), context.uri);
+        const exists = await Helper.exists(appFilePath);
+
+        // const content = await this.appFile(req, context, application);
+        if (exists) {
+            res.sendFile(appFilePath);
+            /*
             if (content[1] === '.css') {
                 res.setHeader('content-type', 'text/css');
             }
@@ -612,7 +617,7 @@ class BackHostApp {
             if (content[1] === '.jpg') {
                 res.setHeader('content-type', 'image/jpeg');
             }
-            res.send(content[0]);
+            res.send(content[0]);*/
         } else {
             const filePath = path.join(this.publicDirPath, context.uri);
             const exists = await Helper.exists(filePath);
