@@ -628,8 +628,9 @@ class BackHostApp {
         const exists = await Helper.exists(filePath);
         if (!exists) {
             const err = new MyError(`file not found: ${context.uri}`);
-            err.data = {filePath};
             err.context = context;
+            err.data = {filePath};
+            err.status = 404;
             throw err;
         }
         res.sendFile(filePath);
@@ -713,6 +714,7 @@ class BackHostApp {
                     appVersion     : appVersion,
                     route          : route,
                     body           : req.body,
+                    status         : err.status || null,
                     data           : err.data || null
                 }, null, 4) : null
             });
