@@ -12,7 +12,7 @@ const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
 function frontend_app_js() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/app/**/*.js'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.js'))
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
@@ -22,7 +22,7 @@ function frontend_app_js() {
 }
 
 function frontend_app_jsx() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/app/**/*.jsx'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.jsx'))
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('app-jsx.js'))
@@ -32,7 +32,7 @@ function frontend_app_jsx() {
 }
 
 function frontend_app_less() {
-    return gulp.src(path.join(SRC_PATH, 'frontend/app/**/*.less'))
+    return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.less'))
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('app.css'))

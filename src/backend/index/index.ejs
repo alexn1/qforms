@@ -23,7 +23,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            new AppApp(data).init();
+            new IndexFrontHostApp(data).init();
         });
     </script>
     <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>
