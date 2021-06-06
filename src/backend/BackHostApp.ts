@@ -786,7 +786,11 @@ class BackHostApp {
             if (context.module === 'viewer') {
                 await this.handleViewerGet(req, res, context);
             } else if (context.module === 'editor') {
-                await this.handleEditorGet(req, res, context);
+                if (this.isDevelopment()) {
+                    await this.handleEditorGet(req, res, context);
+                } else {
+                    next();
+                }
             } else {
                 throw new Error(`unknown module: ${context.module}`);
             }
@@ -866,8 +870,12 @@ class BackHostApp {
                 const time = await this.handleViewerPost(req, res, context);
                 // await this.logRequest(req, context, time);
             } else if (context.module === 'editor') {
-                const time = await this.handleEditorPost(req, res, context);
-                // await this.logRequest(req, context, time);
+                if (this.isDevelopment()) {
+                    const time = await this.handleEditorPost(req, res, context);
+                    // await this.logRequest(req, context, time);
+                } else {
+                    next();
+                }
             }
         } catch (err) {
             next(err);
@@ -1062,6 +1070,9 @@ class BackHostApp {
             }
             await this[cb](req, res, next);
         });
+    }
+    isDevelopment() {
+        return this.nodeEnv === 'development';
     }
 
 }
