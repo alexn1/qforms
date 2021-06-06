@@ -3,7 +3,7 @@ const path = require('path');
 import Application from '../viewer/Model/Application/Application';
 import Helper from "../Helper";
 
-class AppModule {
+class IndexModule {
     backHostApp: any;
     css: string[];
     js : string[];
@@ -43,4 +43,4 @@ class AppModule {
         ];
     }
 }
-export = AppModule;
+export = IndexModule;

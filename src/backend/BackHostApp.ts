@@ -14,7 +14,7 @@ import Application from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorModule from './monitor/MonitorModule';
-import AppModule from './app/AppModule';
+import IndexModule from './app/IndexModule';
 import MyError from './MyError';
 import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
@@ -81,7 +81,7 @@ class BackHostApp {
     logCnn: any;
     nodeEnv: any;
     commonModule: CommonModule;
-    appModule: AppModule;
+    indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
@@ -155,9 +155,9 @@ class BackHostApp {
         this.commonModule = new CommonModule(this);
         this.commonModule.init();
 
-        // appModule
-        this.appModule = new AppModule(this);
-        this.appModule.init();
+        // indexModule
+        this.indexModule = new IndexModule(this);
+        this.indexModule.init();
 
         // monitorModule
         this.monitorModule = new MonitorModule(this);
@@ -800,13 +800,13 @@ class BackHostApp {
     async indexGet(req, res, next) {
         console.warn(colors.magenta('indexGet'));
         try {
-            const data = await this.appModule.fill();
+            const data = await this.indexModule.fill();
             res.render('app/index', {
                 hostApp: this,
                 version: pkg.version,
                 data   : data,
-                links  : this.appModule.getLinks(),
-                scripts: this.appModule.getScripts(),
+                links  : this.indexModule.getLinks(),
+                scripts: this.indexModule.getScripts(),
             });
         } catch (err) {
             next(err);
