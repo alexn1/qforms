@@ -626,7 +626,12 @@ class BackHostApp {
     async sendPlatformFile(context: Context, res) {
         const filePath = path.join(this.publicDirPath, context.uri);
         const exists = await Helper.exists(filePath);
-        if (!exists) throw new Error(`file not found: ${context.uri}`);
+        if (!exists) {
+            const err = new MyError(`file not found: ${context.uri}`);
+            err.data = {filePath};
+            err.context = context;
+            throw err;
+        }
         res.sendFile(filePath);
     }
 
@@ -702,11 +707,13 @@ class BackHostApp {
                 message: err.message,
                 stack  : err.stack.toString(),
                 data   : req ? JSON.stringify({
+                    originalUrl    : req.originalUrl,
                     uri            : req.params['0'],
                     platformVersion: pkg.version,
                     appVersion     : appVersion,
                     route          : route,
-                    body           : req.body
+                    body           : req.body,
+                    data           : err.data || null
                 }, null, 4) : null
             });
         } catch (err) {
