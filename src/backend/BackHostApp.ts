@@ -201,7 +201,7 @@ class BackHostApp {
 
         this.initCustomRoutes();
 
-        // error
+        // error logger
         this.server.options('/error', (req, res, next) => {
             console.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
@@ -211,28 +211,29 @@ class BackHostApp {
         this.server.post('/error', this.postError.bind(this));
 
 
-        // index
+        // index module
         if (this.nodeEnv === 'development') {
             this.server.get( '/index/' , this.indexGet.bind(this));
             this.server.post('/index/' , this.indexPost.bind(this));
             this.server.get( '/index/*', this.indexGetFile.bind(this));
         }
 
-        // monitor
+        // monitor module
         if (this.nodeEnv === 'development') {
-            this.server.get('/monitor', this.monitorGet.bind(this));
+            this.server.get('/monitor/' , this.monitorGet.bind(this));
+            this.server.get('/monitor/*', this.monitorGetFile.bind(this));
         }
 
-        // viewer/editor
-        this.server.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
-        this.server.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
-        this.server.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
+        // viewer/editor module
+        this.server.get( '/:module/:appDirName/:appFileName/:env/' , this.appGet.bind(this));
+        this.server.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
+        this.server.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
         // favicon.ico
         // this.server.get('/favicon.ico', this._favicon.bind(this));
 
         // handle static for index and monitor
-        this.server.use(express.static(this.publicDirPath));
+        // this.server.use(express.static(this.publicDirPath));
 
         // 404 and 500 error handlers
         this.server.use(this._e404.bind(this));
@@ -819,6 +820,14 @@ class BackHostApp {
         }
     }
 
+    async monitorGetFile(req, res, next) {
+        try {
+            await this.sendPlatformFile(req, res);
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async indexGetFile(req, res, next) {
         try {
             await this.sendPlatformFile(req, res);
@@ -928,7 +937,7 @@ class BackHostApp {
                 process.send('online');
             }
             const appsDirPath = path.resolve(this.appsDirPath);
-            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index/\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor`);
+            console.log(`QForms server v${pkg.version} listening on http://${host}:${port}/index/\n\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n\tappsDirPath: ${appsDirPath}\n\tmonitor: http://${host}:${port}/monitor/`);
         });
     }
 
