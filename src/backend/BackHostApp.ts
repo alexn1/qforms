@@ -1000,7 +1000,15 @@ class BackHostApp {
     initCustomRoutes() {
 
     }
-    alias(method, path, module, appDirName, appFileName, env, cb) {
+    alias(
+        method: string,
+        path: string,
+        module: string,
+        appDirName: string,
+        appFileName: string,
+        env: string,
+        cb: string
+    ) {
         this.server[method](path, async (req, res, next) => {
             req.params.module      = module;
             req.params.appDirName  = appDirName;
