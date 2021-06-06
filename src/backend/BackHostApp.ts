@@ -219,7 +219,7 @@ class BackHostApp {
 
         // monitor
         if (this.nodeEnv === 'development') {
-            this.server.get('/monitor/', this._monitorGet.bind(this));
+            this.server.get('/monitor/', this.monitorGet.bind(this));
         }
 
         // viewer/editor
@@ -686,29 +686,6 @@ class BackHostApp {
         return appInfos;
     }
 
-    async appGet(req, res) {
-        console.log('BackHostApp.appGet');
-        const data = await this.appModule.fill();
-        res.render('app/index', {
-            // req           : req,
-            hostApp: this,
-            version: pkg.version,
-            data   : data,
-            links  : this.appModule.getLinks(),
-            scripts: this.appModule.getScripts(),
-        });
-    }
-
-    async monitorGet(req, res) {
-        console.log('BackHostApp.monitorGet');
-        const response = this.monitorModule.fill();
-        res.render('monitor/index', {
-            version : pkg.version,
-            response: response,
-            links   : this.monitorModule.getLinks(),
-            scripts : this.monitorModule.getScripts(),
-        });
-    }
     async logError(req, err) {
         console.log('BackHostApp.logError:', colors.red(err));
         if (!this.logCnn) return;
@@ -806,7 +783,15 @@ class BackHostApp {
     async _indexGet(req, res, next) {
         console.warn(colors.magenta('_indexGet'));
         try {
-            await this.appGet(req, res);
+            const data = await this.appModule.fill();
+            res.render('app/index', {
+                // req           : req,
+                hostApp: this,
+                version: pkg.version,
+                data   : data,
+                links  : this.appModule.getLinks(),
+                scripts: this.appModule.getScripts(),
+            });
         } catch (err) {
             next(err);
         }
@@ -821,10 +806,16 @@ class BackHostApp {
         }
     }
 
-    async _monitorGet(req, res, next) {
+    async monitorGet(req, res, next) {
         console.warn(colors.magenta('monitorGet'));
         try {
-            await this.monitorGet(req, res);
+            const response = this.monitorModule.fill();
+            res.render('monitor/index', {
+                version : pkg.version,
+                response: response,
+                links   : this.monitorModule.getLinks(),
+                scripts : this.monitorModule.getScripts(),
+            });
         } catch (err) {
             next(err);
         }
