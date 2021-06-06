@@ -11,7 +11,7 @@ const hash = require('gulp-hash-filename');
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
-function frontend_app_js() {
+function frontend_index_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.js'))
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
@@ -21,7 +21,7 @@ function frontend_app_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
-function frontend_app_jsx() {
+function frontend_index_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.jsx'))
         .pipe(sourcemaps.init())
         .pipe(babel())
@@ -31,7 +31,7 @@ function frontend_app_jsx() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
-function frontend_app_less() {
+function frontend_index_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.less'))
         .pipe(sourcemaps.init())
         .pipe(less())
@@ -43,10 +43,10 @@ function frontend_app_less() {
 }
 
 
-const frontend_app = gulp.series(
-    frontend_app_js,
-    frontend_app_jsx,
-    frontend_app_less
+const frontend_index = gulp.series(
+    frontend_index_js,
+    frontend_index_jsx,
+    frontend_index_less
 );
 
-module.exports = frontend_app;
+module.exports = frontend_index;

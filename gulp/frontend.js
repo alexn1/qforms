@@ -4,7 +4,7 @@ const gulp = require('gulp');
 const frontend_common = require("./frontend_common");
 const frontend_monitor = require("./frontend_monitor");
 const frontend_editor = require("./frontend_editor");
-const frontend_app   = require("./frontend_app");
+const frontend_index   = require("./frontend_index");
 const frontend_viewer = require("./frontend_viewer");
 
 
@@ -29,7 +29,7 @@ const frontend = gulp.series(
     frontend_lib,
     frontend_common,
     frontend_monitor,
-    frontend_app,
+    frontend_index,
     frontend_editor,
     frontend_viewer,
 );
