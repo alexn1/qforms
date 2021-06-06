@@ -889,13 +889,17 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
-            const application = this.getApplication(context);
-            if (application.isAuthentication() && !(req.session.user && req.session.user[context.route])) {
-                throw new Error('not authenticated');
-            }
-            const filePath = path.join(application.getBuildDirPath(), context.uri);
-            if (await Helper.exists(filePath)) {
-                res.sendFile(filePath);
+            if (this.applications[context.route]) {
+                const application = this.getApplication(context);
+                if (application.isAuthentication() && !(req.session.user && req.session.user[context.route])) {
+                    throw new Error('not authenticated');
+                }
+                const filePath = path.join(application.getBuildDirPath(), context.uri);
+                if (await Helper.exists(filePath)) {
+                    res.sendFile(filePath);
+                } else {
+                    next();
+                }
             } else {
                 next();
             }
