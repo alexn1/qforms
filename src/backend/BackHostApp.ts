@@ -1000,6 +1000,16 @@ class BackHostApp {
     initCustomRoutes() {
 
     }
+    alias(method, path, module, appDirName, appFileName, env, cb) {
+        this.server[method](path, async (req, res, next) => {
+            req.params.module      = module;
+            req.params.appDirName  = appDirName;
+            req.params.appFileName = appFileName;
+            req.params.env         = env;
+            await this[cb](req, res, next);
+        });
+    }
+
 }
 
 export = BackHostApp;
