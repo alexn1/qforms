@@ -56,16 +56,18 @@ class Application extends Model {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
-        this.links = await this.getLinks();
-        this.scripts = await this.getScripts();
+        this.links   = await this.getLinks(context);
+        this.scripts = await this.getScripts(context);
     }
 
-    async getLinks(): Promise<string[]> {
-        return await Helper.getFilePaths(this.getBuildDirPath(), 'css');
+    async getLinks(context: Context): Promise<string[]> {
+        return (await Helper.getFilePaths(this.getBuildDirPath(), 'css'))
+            .map(src => `/${context.module}/${context.appDirName}/${context.appFileName}/${context.env}/${src}`);
     }
 
-    async getScripts(): Promise<string[]> {
-        return await Helper.getFilePaths(this.getBuildDirPath(), 'js');
+    async getScripts(context: Context): Promise<string[]> {
+        return (await Helper.getFilePaths(this.getBuildDirPath(), 'js'))
+            .map(src => `/${context.module}/${context.appDirName}/${context.appFileName}/${context.env}/${src}`);
     }
 
     async deinit() {
