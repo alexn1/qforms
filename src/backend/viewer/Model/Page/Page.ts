@@ -6,6 +6,7 @@ import Action from '../Action/Action';
 import Application from '../Application/Application';
 import Form from '../Form/Form';
 import Context from '../../../Context';
+import MyError from '../../../MyError';
 
 class Page extends Model {
     dataSources: DataSource[];
@@ -46,7 +47,10 @@ class Page extends Model {
     async rpc(name, context): Promise<any> {
         console.log('Page.rpc', name, context.params);
         if (this[name]) return await this[name](context);
-        throw new Error(`no rpc ${name}`);
+        const err = new MyError(`no rpc ${name}`);
+        err.context = context;
+        err.data = {method: `${this.constructor.name}.rpc`};
+        throw err;
     }
 
     getApp(): Application {
