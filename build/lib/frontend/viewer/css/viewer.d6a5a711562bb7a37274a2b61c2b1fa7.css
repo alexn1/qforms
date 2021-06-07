@@ -1,3 +1,113 @@
+/*.flex-cols {
+    display: flex;
+    flex-direction: row;
+  }*/
+
+.flex-max {
+  flex: 1 1 auto;
+}
+
+/*.flex-min {
+    flex-shrink: 0;
+  }*/
+
+.flex-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__content {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+input,
+select,
+img {
+  display: block;
+}
+*:focus {
+  outline: 0 !important;
+}
+
+.login {
+  height: 100%;
+}
+.login__body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.login__form {
+  background-color: palegoldenrod;
+  padding: 10px;
+  border: solid 1px gray;
+}
+
+.paging {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paging__countBlock {
+  font-size: 14px;
+}
+.paging__gotoBlock {
+  display: flex;
+}
+.paging__gotoBlock select {
+  height: 26px;
+  margin: 0 5px;
+  border: none;
+}
+
+.PageView {
+  background-color: white;
+}
+.PageView > .frame__content {
+  padding: 10px;
+  grid-gap: 10px;
+}
+.PageView__caption {
+  margin: 0;
+  color: #333;
+}
+.PageView__caption > span.star {
+  color: red;
+}
+.PageView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+.PageView__table-forms {
+  min-height: 300px;
+}
+.standard .Modal .PageView__caption {
+  background-color: #398bce;
+  color: white;
+  padding: 5px;
+}
+
 .MdiApplicationView {
   height: 100%;
   font-family: sans-serif;
@@ -27,6 +137,45 @@
 }
 .SdiApplicationView__main {
   background-color: gray;
+}
+
+.TableFormView {
+  grid-gap: 5px;
+  padding: 5px 0;
+}
+.TableFormView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+
+.RowFormView {
+  grid-gap: 5px;
+}
+.RowFormView__form-grid {
+  display: grid;
+  grid-template-columns: 150px 300px 24px 150px 300px 24px;
+}
+.standard .RowFormView {
+  background-color: #eeeeee;
+  padding: 5px;
+  font-size: small;
+}
+.standard .RowFormView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+.standard .RowFormView__form-grid {
+  grid-row-gap: 5px;
+}
+.standard .RowFormView__form-grid > div.label {
+  margin-left: 5px;
+  border-bottom: 1px dotted gray;
+}
+.standard .RowFormView__form-grid > div.field {
+  border-bottom: 1px dotted gray;
+}
+.standard .RowFormView__form-grid > div.tooltip {
+  margin-left: 5px;
 }
 
 .standard .RowFormCheckBoxFieldView > input {
@@ -307,153 +456,4 @@
   white-space: nowrap;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.RowFormView {
-  grid-gap: 5px;
-}
-.RowFormView__form-grid {
-  display: grid;
-  grid-template-columns: 150px 300px 24px 150px 300px 24px;
-}
-.standard .RowFormView {
-  background-color: #eeeeee;
-  padding: 5px;
-  font-size: small;
-}
-.standard .RowFormView__toolbar {
-  display: flex;
-  grid-gap: 5px;
-}
-.standard .RowFormView__form-grid {
-  grid-row-gap: 5px;
-}
-.standard .RowFormView__form-grid > div.label {
-  margin-left: 5px;
-  border-bottom: 1px dotted gray;
-}
-.standard .RowFormView__form-grid > div.field {
-  border-bottom: 1px dotted gray;
-}
-.standard .RowFormView__form-grid > div.tooltip {
-  margin-left: 5px;
-}
-
-.TableFormView {
-  grid-gap: 5px;
-  padding: 5px 0;
-}
-.TableFormView__toolbar {
-  display: flex;
-  grid-gap: 5px;
-}
-
-.PageView {
-  background-color: white;
-}
-.PageView > .frame__content {
-  padding: 10px;
-  grid-gap: 10px;
-}
-.PageView__caption {
-  margin: 0;
-  color: #333;
-}
-.PageView__caption > span.star {
-  color: red;
-}
-.PageView__toolbar {
-  display: flex;
-  grid-gap: 5px;
-}
-.PageView__table-forms {
-  min-height: 300px;
-}
-.standard .Modal .PageView__caption {
-  background-color: #398bce;
-  color: white;
-  padding: 5px;
-}
-
-/*.flex-cols {
-    display: flex;
-    flex-direction: row;
-  }*/
-
-.flex-max {
-  flex: 1 1 auto;
-}
-
-/*.flex-min {
-    flex-shrink: 0;
-  }*/
-
-.flex-rows {
-  display: flex;
-  flex-direction: column;
-}
-
-.frame {
-  position: relative;
-  overflow: hidden;
-}
-.frame__content {
-  position: absolute;
-  overflow: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.full {
-  height: 100%;
-  width: 100%;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-input,
-select,
-img {
-  display: block;
-}
-*:focus {
-  outline: 0 !important;
-}
-
-.login {
-  height: 100%;
-}
-.login__body {
-  margin: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.login__form {
-  background-color: palegoldenrod;
-  padding: 10px;
-  border: solid 1px gray;
-}
-
-.paging {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.paging__countBlock {
-  font-size: 14px;
-}
-.paging__gotoBlock {
-  display: flex;
-}
-.paging__gotoBlock select {
-  height: 26px;
-  margin: 0 5px;
-  border: none;
 }

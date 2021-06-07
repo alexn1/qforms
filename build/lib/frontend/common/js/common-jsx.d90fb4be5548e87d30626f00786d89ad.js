@@ -35,6 +35,77 @@ class ReactComponent extends React.Component {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class CheckBox extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onChange", e => {
+      // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+      if (!this.props.readOnly) {
+        this.setState(prevState => {
+          if (this.props.onChange) this.props.onChange(!prevState.checked);
+          return {
+            checked: !prevState.checked
+          };
+        });
+      }
+    });
+
+    _defineProperty(this, "onClick", e => {
+      if (!this.props.readOnly) {
+        if (this.props.onChange) this.props.onChange(true);
+        this.setState({
+          checked: true
+        });
+      }
+    });
+
+    if (this.props.checked !== undefined && this.props.checked !== null && typeof this.props.checked !== 'boolean') {
+      throw new Error(`wrong checked prop: ${this.props.checked}`);
+    }
+
+    this.state = {
+      checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+    };
+  }
+
+  getValue() {
+    return this.state.checked;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+    this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
+    return true;
+  }
+
+  render() {
+    if (this.state.checked === null) {
+      return /*#__PURE__*/React.createElement("span", {
+        style: {
+          width: '16px',
+          height: '16px',
+          // backgroundColor: 'yellow',
+          display: 'inline-block',
+          textAlign: 'center',
+          cursor: 'default'
+        },
+        onClick: this.onClick
+      }, "?");
+    }
+
+    return /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      checked: this.state.checked,
+      readOnly: this.props.readOnly,
+      disabled: this.props.disabled,
+      onChange: this.onChange
+    });
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class Box extends ReactComponent {
   constructor(props) {
     console.log('Box.constructor', props);
@@ -125,77 +196,6 @@ class Button extends ReactComponent {
         width: this.props.width
       }
     }, this.props.title || this.props.children);
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class CheckBox extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onChange", e => {
-      // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
-      if (!this.props.readOnly) {
-        this.setState(prevState => {
-          if (this.props.onChange) this.props.onChange(!prevState.checked);
-          return {
-            checked: !prevState.checked
-          };
-        });
-      }
-    });
-
-    _defineProperty(this, "onClick", e => {
-      if (!this.props.readOnly) {
-        if (this.props.onChange) this.props.onChange(true);
-        this.setState({
-          checked: true
-        });
-      }
-    });
-
-    if (this.props.checked !== undefined && this.props.checked !== null && typeof this.props.checked !== 'boolean') {
-      throw new Error(`wrong checked prop: ${this.props.checked}`);
-    }
-
-    this.state = {
-      checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
-    };
-  }
-
-  getValue() {
-    return this.state.checked;
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-    this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
-    return true;
-  }
-
-  render() {
-    if (this.state.checked === null) {
-      return /*#__PURE__*/React.createElement("span", {
-        style: {
-          width: '16px',
-          height: '16px',
-          // backgroundColor: 'yellow',
-          display: 'inline-block',
-          textAlign: 'center',
-          cursor: 'default'
-        },
-        onClick: this.onClick
-      }, "?");
-    }
-
-    return /*#__PURE__*/React.createElement("input", {
-      type: "checkbox",
-      checked: this.state.checked,
-      readOnly: this.props.readOnly,
-      disabled: this.props.disabled,
-      onChange: this.onChange
-    });
   }
 
 }
@@ -466,6 +466,34 @@ class DatePicker extends ReactComponent {
   }
 
 }
+class DropDownIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: {
+        width: this.props.size,
+        height: this.props.size
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("circle", {
+      cx: "5",
+      cy: "5",
+      r: "5",
+      style: {
+        fill: 'gray'
+      }
+    }), /*#__PURE__*/React.createElement("polyline", {
+      points: "2,4 5,7 8,4",
+      fill: "none",
+      stroke: "white",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    })));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class DropdownButton extends ReactComponent {
@@ -531,205 +559,6 @@ class DropdownButton extends ReactComponent {
       key: action.name,
       "data-action": action.name
     }, action.title))));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class DropdownDatePicker extends ReactComponent {
-  constructor(props) {
-    // console.log('DropdownDatePicker.constructor', props);
-    super(props);
-
-    _defineProperty(this, "onInputClick", e => {
-      // console.log('DropdownDatePicker.onInputClick', e);
-      if (this.props.readOnly) return;
-      this.setState(prevState => ({
-        open: !prevState.open
-      }));
-    });
-
-    _defineProperty(this, "onInputKeyDown", e => {
-      // console.log('DropdownDatePicker.onInputKeyDown', e.which);
-      if (e.which === 27 && this.state.open) {
-        this.setState({
-          open: false
-        });
-      }
-    });
-
-    _defineProperty(this, "onCloseDown", async e => {
-      // console.log('DropdownDatePicker.onCloseDown', e);
-      this.setState({
-        value: null
-      });
-
-      if (this.props.onChange) {
-        this.props.onChange(null);
-      }
-    });
-
-    _defineProperty(this, "onBlur", e => {
-      // console.log('DropdownDatePicker.onBlur');
-      if (this.state.open) {
-        this.setState({
-          open: false
-        });
-      }
-    });
-
-    _defineProperty(this, "onDatePickerMouseDown", e => {
-      // console.log('DropdownDatePicker.onDatePickerMouseDown');
-      e.preventDefault(); // e.stopPropagation();
-      // return false;
-    });
-
-    _defineProperty(this, "onDatePickerDateSelected", date => {
-      // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
-      const value = new Date(date[0], date[1], date[2]);
-      this.setState({
-        open: false,
-        value
-      });
-
-      if (this.props.onChange) {
-        this.props.onChange(value);
-      }
-    });
-
-    this.state = {
-      open: false,
-      value: props.value || null
-    };
-
-    if (props.value && !(props.value instanceof Date)) {
-      throw new Error(`need Date type, got ${typeof props.value}`);
-    }
-  }
-
-  getFormat() {
-    if (this.props.format) return this.props.format;
-    return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
-  }
-
-  getStringValue() {
-    if (this.getValue()) {
-      return Helper.formatDate(this.getValue(), this.getFormat());
-    }
-
-    return '';
-  }
-
-  getMinDate() {
-    if (this.props.getMinDate) {
-      return this.props.getMinDate();
-    } else if (this.props.oldDates === false) {
-      return DatePicker.getTodayArr();
-    }
-
-    return null;
-  }
-
-  getSelectedMonth() {
-    if (this.getValue()) {
-      return [this.getValue().getFullYear(), this.getValue().getMonth()];
-    }
-
-    return null;
-  }
-
-  getSelectedDate() {
-    if (this.getValue()) {
-      return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
-    }
-
-    return null;
-  }
-
-  getValue() {
-    return this.state.value;
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-    this.state.value = nextProps.value;
-    return true;
-  }
-
-  getClassList() {
-    return [...super.getClassList(), ...(this.props.readOnly ? ['readOnly'] : [])];
-  }
-
-  render() {
-    // console.log('DropdownDatePicker.render', this.props, this.state);
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("input", {
-      readOnly: true,
-      onClick: this.onInputClick,
-      onBlur: this.onBlur,
-      value: this.getStringValue(),
-      placeholder: this.props.placeholder,
-      onKeyDown: this.onInputKeyDown
-    }), /*#__PURE__*/React.createElement("div", {
-      className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
-      onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }))), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
-      minDate: this.getMinDate(),
-      selectedMonth: this.getSelectedMonth(),
-      selectedDate: this.getSelectedDate(),
-      onMouseDown: this.onDatePickerMouseDown,
-      onDateSelected: this.onDatePickerDateSelected
-    }));
-  }
-
-}
-class DropDownIcon extends ReactComponent {
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: {
-        width: this.props.size,
-        height: this.props.size
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("circle", {
-      cx: "5",
-      cy: "5",
-      r: "5",
-      style: {
-        fill: 'gray'
-      }
-    }), /*#__PURE__*/React.createElement("polyline", {
-      points: "2,4 5,7 8,4",
-      fill: "none",
-      stroke: "white",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })));
   }
 
 }
@@ -953,6 +782,177 @@ class GridCell extends ReactComponent {
   }
 
 }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class DropdownDatePicker extends ReactComponent {
+  constructor(props) {
+    // console.log('DropdownDatePicker.constructor', props);
+    super(props);
+
+    _defineProperty(this, "onInputClick", e => {
+      // console.log('DropdownDatePicker.onInputClick', e);
+      if (this.props.readOnly) return;
+      this.setState(prevState => ({
+        open: !prevState.open
+      }));
+    });
+
+    _defineProperty(this, "onInputKeyDown", e => {
+      // console.log('DropdownDatePicker.onInputKeyDown', e.which);
+      if (e.which === 27 && this.state.open) {
+        this.setState({
+          open: false
+        });
+      }
+    });
+
+    _defineProperty(this, "onCloseDown", async e => {
+      // console.log('DropdownDatePicker.onCloseDown', e);
+      this.setState({
+        value: null
+      });
+
+      if (this.props.onChange) {
+        this.props.onChange(null);
+      }
+    });
+
+    _defineProperty(this, "onBlur", e => {
+      // console.log('DropdownDatePicker.onBlur');
+      if (this.state.open) {
+        this.setState({
+          open: false
+        });
+      }
+    });
+
+    _defineProperty(this, "onDatePickerMouseDown", e => {
+      // console.log('DropdownDatePicker.onDatePickerMouseDown');
+      e.preventDefault(); // e.stopPropagation();
+      // return false;
+    });
+
+    _defineProperty(this, "onDatePickerDateSelected", date => {
+      // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+      const value = new Date(date[0], date[1], date[2]);
+      this.setState({
+        open: false,
+        value
+      });
+
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
+    });
+
+    this.state = {
+      open: false,
+      value: props.value || null
+    };
+
+    if (props.value && !(props.value instanceof Date)) {
+      throw new Error(`need Date type, got ${typeof props.value}`);
+    }
+  }
+
+  getFormat() {
+    if (this.props.format) return this.props.format;
+    return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+  }
+
+  getStringValue() {
+    if (this.getValue()) {
+      return Helper.formatDate(this.getValue(), this.getFormat());
+    }
+
+    return '';
+  }
+
+  getMinDate() {
+    if (this.props.getMinDate) {
+      return this.props.getMinDate();
+    } else if (this.props.oldDates === false) {
+      return DatePicker.getTodayArr();
+    }
+
+    return null;
+  }
+
+  getSelectedMonth() {
+    if (this.getValue()) {
+      return [this.getValue().getFullYear(), this.getValue().getMonth()];
+    }
+
+    return null;
+  }
+
+  getSelectedDate() {
+    if (this.getValue()) {
+      return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
+    }
+
+    return null;
+  }
+
+  getValue() {
+    return this.state.value;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+    this.state.value = nextProps.value;
+    return true;
+  }
+
+  getClassList() {
+    return [...super.getClassList(), ...(this.props.readOnly ? ['readOnly'] : [])];
+  }
+
+  render() {
+    // console.log('DropdownDatePicker.render', this.props, this.state);
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("input", {
+      readOnly: true,
+      onClick: this.onInputClick,
+      onBlur: this.onBlur,
+      value: this.getStringValue(),
+      placeholder: this.props.placeholder,
+      onKeyDown: this.onInputKeyDown
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
+      onMouseDown: this.onCloseDown
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "2",
+      y1: "2",
+      x2: "8",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "8",
+      y1: "2",
+      x2: "2",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }))), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
+      minDate: this.getMinDate(),
+      selectedMonth: this.getSelectedMonth(),
+      selectedDate: this.getSelectedDate(),
+      onMouseDown: this.onDatePickerMouseDown,
+      onDateSelected: this.onDatePickerDateSelected
+    }));
+  }
+
+}
 class GridRow extends ReactComponent {
   isCellActive(j) {
     return this.props.active && this.props.activeColumn === j;
@@ -989,51 +989,6 @@ class GridRow extends ReactComponent {
       onDoubleClick: grid.onRowDoubleClick
     }));
   }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class Image extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onImgClick", e => {
-      console.log('Image.onImgClick');
-      this.setState(prevState => {
-        if (prevState.classList) {
-          return {
-            classList: null
-          };
-        } else {
-          return {
-            classList: ['Image_full']
-          };
-        }
-      });
-    });
-
-    this.img = React.createRef();
-    this.state = {
-      classList: null
-    };
-  }
-
-  getNaturalSize() {
-    return [this.img.current.naturalWidth, this.img.current.naturalHeight];
-  }
-
-  render() {
-    return /*#__PURE__*/React.createElement("img", {
-      className: this.getClassName(),
-      ref: this.img,
-      src: this.props.src,
-      onClick: this.onImgClick
-    });
-  }
-  /*componentDidMount() {
-      console.log('Image.componentDidMount', this.getNaturalSize());
-  }*/
-
 
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1111,6 +1066,51 @@ class Menu extends ReactComponent {
       "data-name": item.name
     }, item.title))))));
   }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Image extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onImgClick", e => {
+      console.log('Image.onImgClick');
+      this.setState(prevState => {
+        if (prevState.classList) {
+          return {
+            classList: null
+          };
+        } else {
+          return {
+            classList: ['Image_full']
+          };
+        }
+      });
+    });
+
+    this.img = React.createRef();
+    this.state = {
+      classList: null
+    };
+  }
+
+  getNaturalSize() {
+    return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("img", {
+      className: this.getClassName(),
+      ref: this.img,
+      src: this.props.src,
+      onClick: this.onImgClick
+    });
+  }
+  /*componentDidMount() {
+      console.log('Image.componentDidMount', this.getNaturalSize());
+  }*/
+
 
 }
 class Modal extends ReactComponent {

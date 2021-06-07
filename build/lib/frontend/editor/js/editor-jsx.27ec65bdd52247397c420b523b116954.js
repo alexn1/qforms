@@ -92,6 +92,255 @@ class EditorFrontHostAppView extends ReactComponent {
   }
 
 }
+class ModalView extends ReactComponent {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement(Modal, null, React.createElement(ctrl.getViewClass(), {
+      ctrl
+    }));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class PropertyGrid extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onChange", (name, value) => {
+      // console.log('PropertyGrid.onChange', name, value);
+      if (this.props.onChange) {
+        this.props.onChange(name, value);
+      }
+    });
+
+    this.state = {};
+  }
+
+  getObj() {
+    if (this.state.object) {
+      return this.state.object.obj;
+    }
+
+    return null;
+  }
+
+  getOptions() {
+    if (this.state.object) {
+      return this.state.object.options;
+    }
+
+    return null;
+  }
+
+  renderInput(name) {
+    const obj = this.getObj();
+    return /*#__PURE__*/React.createElement(TextBox, {
+      name: name,
+      value: obj[name],
+      spellCheck: "false",
+      onChange: value => this.onChange(name, value),
+      autocomplete: 'off'
+    });
+  }
+
+  renderSelect(name) {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return /*#__PURE__*/React.createElement(ComboBox, {
+      name: name,
+      value: obj[name],
+      items: options[name].map(value => ({
+        value: value,
+        title: value
+      })),
+      onChange: value => this.onChange(name, value)
+    });
+  }
+
+  renderRows() {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return Object.keys(obj).map(name => /*#__PURE__*/React.createElement("tr", {
+      key: name
+    }, /*#__PURE__*/React.createElement("td", null, name), /*#__PURE__*/React.createElement("td", null, options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name))));
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'PropertyGrid'
+    }, /*#__PURE__*/React.createElement("table", {
+      cellPadding: 0,
+      cellSpacing: 0
+    }, /*#__PURE__*/React.createElement("tbody", null, this.getObj() && this.renderRows())));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class TreeItem extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onDivMouseDown", e => {
+      // console.log('TreeItem.onDivMouseDown', e.currentTarget);
+      const item = this.props.item;
+      const tree = this.props.tree;
+      tree.select(item);
+    });
+
+    _defineProperty(this, "onDivDoubleClick", e => {
+      // console.log('TreeItem.onDivDoubleClick');
+      const item = this.props.item;
+      const tree = this.props.tree;
+      tree.onDoubleClick(item);
+    });
+
+    _defineProperty(this, "onNodeMouseDown", e => {
+      // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
+      const item = this.props.item;
+      const tree = this.props.tree;
+      const opened = this.state.opened;
+      e.stopPropagation();
+      this.setState(prevState => {
+        return {
+          opened: !prevState.opened
+        };
+      });
+
+      if (!opened) {
+        tree.onOpen(item);
+      }
+    });
+
+    this.state = {
+      opened: props.item.opened !== undefined ? props.item.opened : false
+    };
+    this.li = React.createRef();
+  }
+
+  isSelected() {
+    return this.props.tree.getSelectedItem() === this.props.item;
+  }
+
+  isOpened() {
+    return this.state.opened;
+  }
+
+  getElement() {
+    return this.li.current;
+  }
+
+  open() {
+    console.log('TreeItem.open', this.props.item.getTitle());
+    this.state.opened = true;
+
+    if (this.parent) {
+      this.parent.open();
+    } else {
+      console.log('this.parent', this.parent);
+    }
+  }
+
+  render() {
+    // console.log('TreeItem.render', this.props.item.getTitle());
+    const tree = this.props.tree;
+    const item = this.props.item;
+    const items = item.items;
+    const hasItems = !!(items && items.length);
+    const isNode = item.node || hasItems;
+    const style = item.getStyle ? item.getStyle() : null;
+    const title = item.getTitle();
+    return /*#__PURE__*/React.createElement("li", {
+      key: title,
+      ref: this.li,
+      className: this.isOpened() ? 'opened' : null
+    }, /*#__PURE__*/React.createElement("div", {
+      className: this.isSelected() ? 'active' : null,
+      style: {
+        paddingLeft: this.props.paddingLeft
+      },
+      onMouseDown: this.onDivMouseDown,
+      onDoubleClick: this.onDivDoubleClick
+    }, /*#__PURE__*/React.createElement("span", {
+      className: isNode ? 'node' : 'leaf',
+      onMouseDown: this.onNodeMouseDown
+    }), "\xA0", /*#__PURE__*/React.createElement("span", {
+      style: style
+    }, title)), hasItems && /*#__PURE__*/React.createElement("ul", null, items.map(item => /*#__PURE__*/React.createElement(TreeItem, {
+      key: item.getTitle(),
+      tree: tree,
+      item: item,
+      paddingLeft: this.props.paddingLeft + 15,
+      onCreate: c => {
+        // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+        c.parent = this;
+        item.view = c;
+      }
+    }))));
+  }
+
+}
+class TreeWidget extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: null
+    };
+  }
+
+  async select(item) {
+    console.log('TreeWidget.select', item ? item.getTitle() : null);
+    if (this.isSelected(item)) return;
+    return new Promise(resolve => {
+      this.setState({
+        selectedItem: item
+      }, () => {
+        if (this.props.onItemSelect) this.props.onItemSelect(item);
+        resolve();
+      });
+    });
+  }
+
+  onDoubleClick(item) {
+    // console.log('TreeWidget.onDoubleClick', item);
+    if (this.props.onItemDoubleClick) this.props.onItemDoubleClick(item);
+  }
+
+  onOpen(item) {
+    if (this.props.onItemOpen) this.props.onItemOpen(item);
+  }
+
+  isSelected(item) {
+    return this.state.selectedItem === item;
+  }
+
+  getSelectedItem() {
+    return this.state.selectedItem;
+  }
+
+  scrollToSelected() {
+    console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
+    this.getSelectedItem().view.getElement().scrollIntoView();
+  }
+
+  render() {
+    console.log('TreeWidget.render'
+    /*, this.props.items*/
+    );
+    const items = this.props.items;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("ul", null, items.map(item => /*#__PURE__*/React.createElement(TreeItem, {
+      key: item.getTitle(),
+      tree: this,
+      item: item,
+      paddingLeft: 5,
+      onCreate: c => item.view = c
+    }))));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class ChangeClassView extends ReactComponent {
@@ -177,15 +426,6 @@ class ChangeClassView extends ReactComponent {
       className: "btn btn-default",
       onClick: ctrl.onClose
     }, "Close")));
-  }
-
-}
-class ModalView extends ReactComponent {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement(Modal, null, React.createElement(ctrl.getViewClass(), {
-      ctrl
-    }));
   }
 
 }
@@ -309,6 +549,76 @@ class NewColumnView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class NewDataSourceView extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onCreate", async e => {
+      // console.log('NewDataSourceView.onCreate');
+      await this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        class: this.class.getValue()
+      });
+    });
+
+    this.name = null;
+    this.class = null;
+  }
+
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "NewDataSourceView modal-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-header"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "close",
+      onClick: ctrl.onClose
+    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
+      className: "modal-title"
+    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
+      className: "modal-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "name"
+    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
+      id: 'name',
+      classList: ['form-control'],
+      onCreate: c => this.name = c,
+      autocomplete: 'off'
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "class"
+    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
+      id: "class",
+      classList: ['form-control'],
+      items: [{
+        value: 'DataSource',
+        title: 'DataSource'
+      }, {
+        value: 'SqlDataSource',
+        title: 'SqlDataSource'
+      }],
+      onCreate: c => this.class = c,
+      value: 'SqlDataSource'
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "modal-footer"
+    }, /*#__PURE__*/React.createElement(Button, {
+      name: "create",
+      classList: ['btn', 'btn-primary'],
+      onClick: this.onCreate
+    }, "Create"), /*#__PURE__*/React.createElement(Button, {
+      classList: ['btn', 'btn-default'],
+      onClick: ctrl.onClose
+    }, "Close")));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class NewDatabaseView extends ReactComponent {
   constructor(props) {
     super(props);
@@ -413,76 +723,6 @@ class NewDatabaseView extends ReactComponent {
       value: '123qwe',
       onCreate: c => this.password = c,
       autocomplete: 'off'
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "modal-footer"
-    }, /*#__PURE__*/React.createElement(Button, {
-      name: "create",
-      classList: ['btn', 'btn-primary'],
-      onClick: this.onCreate
-    }, "Create"), /*#__PURE__*/React.createElement(Button, {
-      classList: ['btn', 'btn-default'],
-      onClick: ctrl.onClose
-    }, "Close")));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class NewDataSourceView extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onCreate", async e => {
-      // console.log('NewDataSourceView.onCreate');
-      await this.props.ctrl.onCreate({
-        name: this.name.getValue(),
-        class: this.class.getValue()
-      });
-    });
-
-    this.name = null;
-    this.class = null;
-  }
-
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "NewDataSourceView modal-content"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "modal-header"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "close",
-      onClick: ctrl.onClose
-    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
-      className: "modal-title"
-    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
-      className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "name"
-    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
-      id: 'name',
-      classList: ['form-control'],
-      onCreate: c => this.name = c,
-      autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "class"
-    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
-      id: "class",
-      classList: ['form-control'],
-      items: [{
-        value: 'DataSource',
-        title: 'DataSource'
-      }, {
-        value: 'SqlDataSource',
-        title: 'SqlDataSource'
-      }],
-      onCreate: c => this.class = c,
-      value: 'SqlDataSource'
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement(Button, {
@@ -1075,65 +1315,16 @@ class NewTableView extends ReactComponent {
   }
 
 }
-class DatabaseView extends ReactComponent {
-  renderGrid() {
-    // console.log('DatabaseView.renderGrid');
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement(Grid, {
-      classList: ['flex-max'],
-      columns: [{
-        name: 'name',
-        title: 'name',
-        width: 100
-      }, {
-        name: 'type',
-        title: 'type',
-        width: 60
-      }, {
-        name: 'key',
-        title: 'key',
-        width: 60
-      }, {
-        name: 'auto',
-        title: 'auto',
-        width: 60
-      }, {
-        name: 'nullable',
-        title: 'nullable',
-        width: 60
-      }, {
-        name: 'dbType',
-        title: 'dbType',
-        width: 200
-      }, {
-        name: 'comment',
-        title: 'comment',
-        width: 100
-      }],
-      rows: ctrl.tableInfo,
-      getRowKey: row => row.name
+class DocumentView extends ReactComponent {
+  static createCM(textarea, value) {
+    const cm = CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      styleActiveLine: true,
+      matchBrackets: true
     });
-  }
-
-  render() {
-    // console.log('DatabaseView.render');
-    const ctrl = this.props.ctrl;
-    const document = this.props.document;
-    return /*#__PURE__*/React.createElement("div", {
-      className: 'DatabaseView place'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'client place'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'frame'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'divTableInfo full flex-rows'
-    }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
-      onClick: ctrl.onCreateTableClick
-    }, "Create Table")))), /*#__PURE__*/React.createElement(TreeWidget, {
-      classList: ['sidebar'],
-      items: document.treeWidgetItems,
-      onItemSelect: ctrl.onTableSelect2
-    }));
+    cm.setOption('theme', 'cobalt');
+    cm.setValue(value);
+    return cm;
   }
 
 }
@@ -1228,16 +1419,65 @@ class SqlDataSourceView extends DocumentView {
   }
 
 }
-class DocumentView extends ReactComponent {
-  static createCM(textarea, value) {
-    const cm = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      styleActiveLine: true,
-      matchBrackets: true
+class DatabaseView extends ReactComponent {
+  renderGrid() {
+    // console.log('DatabaseView.renderGrid');
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement(Grid, {
+      classList: ['flex-max'],
+      columns: [{
+        name: 'name',
+        title: 'name',
+        width: 100
+      }, {
+        name: 'type',
+        title: 'type',
+        width: 60
+      }, {
+        name: 'key',
+        title: 'key',
+        width: 60
+      }, {
+        name: 'auto',
+        title: 'auto',
+        width: 60
+      }, {
+        name: 'nullable',
+        title: 'nullable',
+        width: 60
+      }, {
+        name: 'dbType',
+        title: 'dbType',
+        width: 200
+      }, {
+        name: 'comment',
+        title: 'comment',
+        width: 100
+      }],
+      rows: ctrl.tableInfo,
+      getRowKey: row => row.name
     });
-    cm.setOption('theme', 'cobalt');
-    cm.setValue(value);
-    return cm;
+  }
+
+  render() {
+    // console.log('DatabaseView.render');
+    const ctrl = this.props.ctrl;
+    const document = this.props.document;
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'DatabaseView place'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'client place'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'frame'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'divTableInfo full flex-rows'
+    }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onCreateTableClick
+    }, "Create Table")))), /*#__PURE__*/React.createElement(TreeWidget, {
+      classList: ['sidebar'],
+      items: document.treeWidgetItems,
+      onItemSelect: ctrl.onTableSelect2
+    }));
   }
 
 }
@@ -1350,246 +1590,6 @@ class VisualView extends DocumentView {
     }, ctrl.data.js && /*#__PURE__*/React.createElement("textarea", {
       ref: this.textarea
     })))));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class PropertyGrid extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onChange", (name, value) => {
-      // console.log('PropertyGrid.onChange', name, value);
-      if (this.props.onChange) {
-        this.props.onChange(name, value);
-      }
-    });
-
-    this.state = {};
-  }
-
-  getObj() {
-    if (this.state.object) {
-      return this.state.object.obj;
-    }
-
-    return null;
-  }
-
-  getOptions() {
-    if (this.state.object) {
-      return this.state.object.options;
-    }
-
-    return null;
-  }
-
-  renderInput(name) {
-    const obj = this.getObj();
-    return /*#__PURE__*/React.createElement(TextBox, {
-      name: name,
-      value: obj[name],
-      spellCheck: "false",
-      onChange: value => this.onChange(name, value),
-      autocomplete: 'off'
-    });
-  }
-
-  renderSelect(name) {
-    const obj = this.getObj();
-    const options = this.getOptions();
-    return /*#__PURE__*/React.createElement(ComboBox, {
-      name: name,
-      value: obj[name],
-      items: options[name].map(value => ({
-        value: value,
-        title: value
-      })),
-      onChange: value => this.onChange(name, value)
-    });
-  }
-
-  renderRows() {
-    const obj = this.getObj();
-    const options = this.getOptions();
-    return Object.keys(obj).map(name => /*#__PURE__*/React.createElement("tr", {
-      key: name
-    }, /*#__PURE__*/React.createElement("td", null, name), /*#__PURE__*/React.createElement("td", null, options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name))));
-  }
-
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: 'PropertyGrid'
-    }, /*#__PURE__*/React.createElement("table", {
-      cellPadding: 0,
-      cellSpacing: 0
-    }, /*#__PURE__*/React.createElement("tbody", null, this.getObj() && this.renderRows())));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class TreeItem extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onDivMouseDown", e => {
-      // console.log('TreeItem.onDivMouseDown', e.currentTarget);
-      const item = this.props.item;
-      const tree = this.props.tree;
-      tree.select(item);
-    });
-
-    _defineProperty(this, "onDivDoubleClick", e => {
-      // console.log('TreeItem.onDivDoubleClick');
-      const item = this.props.item;
-      const tree = this.props.tree;
-      tree.onDoubleClick(item);
-    });
-
-    _defineProperty(this, "onNodeMouseDown", e => {
-      // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
-      const item = this.props.item;
-      const tree = this.props.tree;
-      const opened = this.state.opened;
-      e.stopPropagation();
-      this.setState(prevState => {
-        return {
-          opened: !prevState.opened
-        };
-      });
-
-      if (!opened) {
-        tree.onOpen(item);
-      }
-    });
-
-    this.state = {
-      opened: props.item.opened !== undefined ? props.item.opened : false
-    };
-    this.li = React.createRef();
-  }
-
-  isSelected() {
-    return this.props.tree.getSelectedItem() === this.props.item;
-  }
-
-  isOpened() {
-    return this.state.opened;
-  }
-
-  getElement() {
-    return this.li.current;
-  }
-
-  open() {
-    console.log('TreeItem.open', this.props.item.getTitle());
-    this.state.opened = true;
-
-    if (this.parent) {
-      this.parent.open();
-    } else {
-      console.log('this.parent', this.parent);
-    }
-  }
-
-  render() {
-    // console.log('TreeItem.render', this.props.item.getTitle());
-    const tree = this.props.tree;
-    const item = this.props.item;
-    const items = item.items;
-    const hasItems = !!(items && items.length);
-    const isNode = item.node || hasItems;
-    const style = item.getStyle ? item.getStyle() : null;
-    const title = item.getTitle();
-    return /*#__PURE__*/React.createElement("li", {
-      key: title,
-      ref: this.li,
-      className: this.isOpened() ? 'opened' : null
-    }, /*#__PURE__*/React.createElement("div", {
-      className: this.isSelected() ? 'active' : null,
-      style: {
-        paddingLeft: this.props.paddingLeft
-      },
-      onMouseDown: this.onDivMouseDown,
-      onDoubleClick: this.onDivDoubleClick
-    }, /*#__PURE__*/React.createElement("span", {
-      className: isNode ? 'node' : 'leaf',
-      onMouseDown: this.onNodeMouseDown
-    }), "\xA0", /*#__PURE__*/React.createElement("span", {
-      style: style
-    }, title)), hasItems && /*#__PURE__*/React.createElement("ul", null, items.map(item => /*#__PURE__*/React.createElement(TreeItem, {
-      key: item.getTitle(),
-      tree: tree,
-      item: item,
-      paddingLeft: this.props.paddingLeft + 15,
-      onCreate: c => {
-        // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
-        c.parent = this;
-        item.view = c;
-      }
-    }))));
-  }
-
-}
-class TreeWidget extends ReactComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedItem: null
-    };
-  }
-
-  async select(item) {
-    console.log('TreeWidget.select', item ? item.getTitle() : null);
-    if (this.isSelected(item)) return;
-    return new Promise(resolve => {
-      this.setState({
-        selectedItem: item
-      }, () => {
-        if (this.props.onItemSelect) this.props.onItemSelect(item);
-        resolve();
-      });
-    });
-  }
-
-  onDoubleClick(item) {
-    // console.log('TreeWidget.onDoubleClick', item);
-    if (this.props.onItemDoubleClick) this.props.onItemDoubleClick(item);
-  }
-
-  onOpen(item) {
-    if (this.props.onItemOpen) this.props.onItemOpen(item);
-  }
-
-  isSelected(item) {
-    return this.state.selectedItem === item;
-  }
-
-  getSelectedItem() {
-    return this.state.selectedItem;
-  }
-
-  scrollToSelected() {
-    console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
-    this.getSelectedItem().view.getElement().scrollIntoView();
-  }
-
-  render() {
-    console.log('TreeWidget.render'
-    /*, this.props.items*/
-    );
-    const items = this.props.items;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("ul", null, items.map(item => /*#__PURE__*/React.createElement(TreeItem, {
-      key: item.getTitle(),
-      tree: this,
-      item: item,
-      paddingLeft: 5,
-      onCreate: c => item.view = c
-    }))));
   }
 
 }
