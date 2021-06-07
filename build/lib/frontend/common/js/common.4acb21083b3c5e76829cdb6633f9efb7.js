@@ -308,5 +308,3 @@ class Helper {
         return 24*Helper.HOUR();
     }
 }
-
-//# sourceMappingURL=common.4acb21083b3c5e76829cdb6633f9efb7.js.map

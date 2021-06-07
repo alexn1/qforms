@@ -89,4 +89,3 @@ class IndexView extends ReactComponent {
   }
 
 }
-//# sourceMappingURL=app-jsx.56395d845a8828ed9f98a8fc07de5c39.js.map

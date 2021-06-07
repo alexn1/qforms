@@ -20,4 +20,3 @@ class MonitorView extends ReactComponent {
   }
 
 }
-//# sourceMappingURL=monitor-jsx.5b75a8ffd70c79f5db193f648373bb21.js.map

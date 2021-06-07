@@ -13,32 +13,32 @@ const SRC_PATH   = "./src";
 
 function frontend_index_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.js'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
 function frontend_index_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.jsx'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('app-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/js')));
 }
 
 function frontend_index_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.less'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('app.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/index/css')));
 }
 

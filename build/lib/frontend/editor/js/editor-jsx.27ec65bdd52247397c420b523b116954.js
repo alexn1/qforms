@@ -1593,4 +1593,3 @@ class VisualView extends DocumentView {
   }
 
 }
-//# sourceMappingURL=editor-jsx.27ec65bdd52247397c420b523b116954.js.map

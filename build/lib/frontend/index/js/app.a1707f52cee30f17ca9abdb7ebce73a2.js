@@ -119,5 +119,3 @@ class IndexFrontHostApp {
         await this.createApp(this.folderName, this.appName);
     }
 }
-
-//# sourceMappingURL=app.a1707f52cee30f17ca9abdb7ebce73a2.js.map

@@ -13,32 +13,32 @@ const SRC_PATH   = "./src";
 
 function frontend_editor_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.js'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(concat('editor.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/js')));
 }
 
 function frontend_editor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.jsx'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('editor-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/js')));
 }
 
 function frontend_editor_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.less'))
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('editor.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/editor/css')));
 }
 

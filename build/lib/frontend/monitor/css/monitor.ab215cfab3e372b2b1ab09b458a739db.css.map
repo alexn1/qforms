@@ -1,1 +1,0 @@
-{"version":3,"sources":["monitor.less","MonitorView/MonitorView.less"],"names":[],"mappings":"AAGA;EACE,uBAAA;;;ACJF","file":"monitor.ab215cfab3e372b2b1ab09b458a739db.css","sourcesContent":[".monitor {\n}\n\n.monitor__body {\n  font-family: sans-serif;\n}\n",".MonitorView {\n\n}\n"]}

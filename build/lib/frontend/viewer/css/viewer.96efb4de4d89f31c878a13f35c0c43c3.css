@@ -108,6 +108,37 @@ img {
   padding: 5px;
 }
 
+.MdiApplicationView {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+.SdiApplicationView {
+  height: 100%;
+}
+.SdiApplicationView.wait,
+.SdiApplicationView.wait * {
+  cursor: wait !important;
+}
+.SdiApplicationView__body {
+  margin: 0;
+  height: 100%;
+}
+.SdiApplicationView__body > div {
+  height: 100%;
+}
+.SdiApplicationView__container {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+.SdiApplicationView__main {
+  background-color: gray;
+}
+
 .RowFormView {
   grid-gap: 5px;
 }
@@ -145,37 +176,6 @@ img {
 .TableFormView__toolbar {
   display: flex;
   grid-gap: 5px;
-}
-
-.MdiApplicationView {
-  height: 100%;
-  font-family: sans-serif;
-  display: grid;
-  grid-template-rows: max-content auto max-content;
-}
-
-.SdiApplicationView {
-  height: 100%;
-}
-.SdiApplicationView.wait,
-.SdiApplicationView.wait * {
-  cursor: wait !important;
-}
-.SdiApplicationView__body {
-  margin: 0;
-  height: 100%;
-}
-.SdiApplicationView__body > div {
-  height: 100%;
-}
-.SdiApplicationView__container {
-  height: 100%;
-  font-family: sans-serif;
-  display: grid;
-  grid-template-rows: max-content auto max-content;
-}
-.SdiApplicationView__main {
-  background-color: gray;
 }
 
 .standard .RowFormCheckBoxFieldView > input {
@@ -311,11 +311,6 @@ img {
   width: 100%;
 }
 
-.standard .RowFormLinkFieldView > a {
-  padding: 0 5px 0 5px;
-  color: blue;
-}
-
 .RowFormTextAreaFieldView > textarea {
   width: 100%;
   display: block;
@@ -333,6 +328,11 @@ img {
 .standard .RowFormTextAreaFieldView > textarea[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+
+.standard .RowFormLinkFieldView > a {
+  padding: 0 5px 0 5px;
+  color: blue;
 }
 
 .RowFormTextBoxFieldView {
@@ -457,5 +457,3 @@ img {
   padding-left: 5px;
   padding-right: 5px;
 }
-
-/*# sourceMappingURL=viewer.d60b36f51214eefcc04402dcd0384f65.css.map */

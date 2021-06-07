@@ -1,1 +1,0 @@
-{"version":3,"sources":["IndexView/IndexView.less"],"names":[],"mappings":"AAAA;EACE,gBAAA;;AADF,UAEE;EACE,YAAA;;AAHJ,UAKE,EAAC;EACC,wBAAA","file":"app.552826efd5290645041594390ee8c83b.css","sourcesContent":[".IndexView {\n  font-size: small;\n  option {\n    padding: 5px;\n  }\n  *:focus {\n    outline: none !important;\n  }\n}\n"]}

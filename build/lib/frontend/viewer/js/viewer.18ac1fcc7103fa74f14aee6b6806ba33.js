@@ -999,306 +999,6 @@ class Database extends Model {
     }
 }
 
-class Form extends Model {
-    constructor(data, parent) {
-        super(data, parent);
-        this.dataSources = [];
-        this.fields      = [];
-    }
-
-    init() {
-        // data sources
-        this.createDataSources();
-
-        // fields
-        for (const data of this.data.fields) {
-            const field = eval(`new ${data.class}(data, this)`);
-            field.init();
-            this.fields.push(field);
-        }
-    }
-
-    deinit() {
-        // console.log('Form.deinit:', this.getFullName());
-        this.deinitDataSources();
-        for (const field of this.fields) {
-            field.deinit();
-        }
-        super.deinit();
-    }
-
-    fillDefaultValues(row) {
-        for (const field of this.fields) {
-            field.fillDefaultValue(row);
-        }
-    }
-
-    onDataSourceRefresh(e) {
-        // console.log('Form.onDataSourceRefresh', this.getFullName());
-        this.emit('refresh', e);
-    }
-
-    onDataSourceInsert(e) {
-        // console.log('Form.onDataSourceInsert', this.getFullName());
-        this.parent.onFormInsert(e);
-        this.emit('insert', e);
-    }
-
-    onDataSourceUpdate(e) {
-        // console.log('Form.onDataSourceUpdate', this.getFullName());
-        this.emit('update', e);
-    }
-
-    onDataSourceDelete(e) {
-        // console.log('Form.onDataSourceDelete', this.getFullName());
-        this.emit('delete', e);
-    }
-
-    async update() {
-        console.log('Form.update', this.getFullName(), this.isChanged());
-        if (this.getPage().deinited) throw new Error('page already deinited');
-        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
-        await this.getDefaultDataSource().update();
-    }
-
-    isChanged() {
-        // console.log('Form.isChanged', this.getFullName());
-        return this.getDefaultDataSource().isChanged();
-    }
-
-    hasNew() {
-        // console.log('Form.hasNew', this.getFullName());
-        return this.getDefaultDataSource().hasNew();
-    }
-
-    async rpc(name, params) {
-        console.log('Form.rpc', this.getFullName(), name, params);
-        if (!name) throw new Error('no name');
-        const result = await this.getApp().request({
-            action: 'rpc',
-            page  : this.getPage().getName(),
-            form  : this.getName(),
-            name  : name,
-            params: Helper.encodeObject(params)
-        });
-        if (result.errorMessage) throw new Error(result.errorMessage);
-        return result;
-    }
-
-    getKey() {
-        return null;
-    }
-
-    getDefaultDataSource() {
-        const dataSource = this.getDataSource('default');
-        if (!dataSource) throw new Error(`${this.getFullName()}: no default data source`);
-        return dataSource;
-    }
-
-    getPage() {
-        return this.parent;
-    }
-
-    getApp() {
-        return this.parent.parent;
-    }
-    async refresh() {
-        await this.getDefaultDataSource().refresh();
-    }
-    getField(name) {
-        return this.fields.find(field => field.getName() === name);
-    }
-    hasDefaultSqlDataSource() {
-        return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
-    }
-}
-
-class Table extends Model {
-    constructor(...args) {
-        super(...args);
-        this.columns = [];
-    }
-    init() {
-        // console.log('Table.init', this.getFullName());
-        for (const data of this.data.columns) {
-            const column = new Column(data, this);
-            column.init();
-            this.columns.push(column);
-        }
-    }
-
-    getColumn(name) {
-        const column = this.columns.find(column => column.getName() === name);
-        if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
-        return column;
-    }
-}
-
-class Page extends Model {
-    constructor(data, parent, options) {
-        // console.log('Page.constructor', options);
-        if (!options.id) throw new Error('no page id');
-        super(data, parent);
-        this.options = options; // {id, parentPage, modal, params}
-        this.dataSources    = [];
-        this.forms          = [];
-        this.params         = {};
-    }
-
-    init() {
-        this.createDataSources();
-
-        // forms
-        for (const data of this.data.forms) {
-            const FormClass = eval(Model.getClassName(data));
-            const form = new FormClass(data, this);
-            form.init();
-            this.forms.push(form);
-        }
-        console.log('page params:', this.getFullName(), this.getParams());
-    }
-
-    deinit() {
-        // console.log('Page.deinit', this.getFullName());
-        if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
-        this.deinitDataSources();
-        for (const form of this.forms) {
-            form.deinit();
-        }
-        super.deinit();
-    }
-
-    getId() {
-        return this.options.id;
-    }
-
-    getParentPageName() {
-        return this.options.parentPage ? this.options.parentPage.getName() : null;
-    }
-
-    getParams() {
-        return {
-            ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
-            ...(this.options.params !== undefined ? this.options.params : {}),
-            ...this.params,
-        };
-    }
-
-    addPageParam(name, value) {
-        // console.log('Page.addPageParam', name);
-        this.params[name] = value !== undefined ? value : null;
-    }
-
-    async update() {
-        console.log('Page.update', this.getFullName());
-        for (const form of this.forms) {
-            if (form.isChanged() || form.hasNew()) await form.update();
-        }
-    }
-
-    discard() {
-        console.log('Page.discard', this.getFullName());
-        for (const form of this.forms) {
-            form.discard();
-        }
-    }
-
-    getKey() {
-        for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm') {
-                return form.getKey();
-            }
-        }
-        return null;
-    }
-
-    hasRowFormWithDefaultDs() {
-        for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    hasRowFormWithDefaultSqlDataSource() {
-        for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm' && form.hasDefaultSqlDataSource()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    hasRowForm() {
-        for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm') return true;
-        }
-        return false;
-    }
-
-    hasTableForm() {
-        for (const form of this.forms) {
-            if (form.getClassName() === 'TableForm') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    isNewMode() {
-        return this.getAttr('newMode');
-    }
-
-    hasNew() {
-        for (const form of this.forms) {
-            if (form.hasNew()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    getApp() {
-        return this.parent;
-    }
-
-    getFullName() {
-        return `${this.getName()}(${this.getId()})`;
-    }
-
-    isModal() {
-        // return this.modal;
-        return !!this.options.modal;
-    }
-
-    onFormInsert(e) {
-        console.log('Page.onFormInsert', e);
-        if (!e.key) throw new Error('no key of inserted row');
-
-        // key params to page params
-        const keyParams = DataSource.keyToParams(e.key);
-        for (const name in keyParams) {
-            this.addPageParam(name, keyParams[name]);
-        }
-    }
-    async rpc(name, params) {
-        // console.log('Page.rpc', this.getFullName(), name, params);
-        if (!name) throw new Error('no name');
-        const result =  await this.getApp().request({
-            action: 'rpc',
-            page  : this.getName(),
-            name  : name,
-            params: Helper.encodeObject(params)
-        });
-        if (result.errorMessage) throw new Error(result.errorMessage);
-        return result;
-    }
-    getForm(name) {
-        return this.forms.find(form => form.getName() === name);
-    }
-}
-
 class Field extends Model {
     // constructor(data, parent) {
     //     super(data, parent);
@@ -1470,6 +1170,306 @@ class Field extends Model {
             }
         }
         return caption;
+    }
+}
+
+class Form extends Model {
+    constructor(data, parent) {
+        super(data, parent);
+        this.dataSources = [];
+        this.fields      = [];
+    }
+
+    init() {
+        // data sources
+        this.createDataSources();
+
+        // fields
+        for (const data of this.data.fields) {
+            const field = eval(`new ${data.class}(data, this)`);
+            field.init();
+            this.fields.push(field);
+        }
+    }
+
+    deinit() {
+        // console.log('Form.deinit:', this.getFullName());
+        this.deinitDataSources();
+        for (const field of this.fields) {
+            field.deinit();
+        }
+        super.deinit();
+    }
+
+    fillDefaultValues(row) {
+        for (const field of this.fields) {
+            field.fillDefaultValue(row);
+        }
+    }
+
+    onDataSourceRefresh(e) {
+        // console.log('Form.onDataSourceRefresh', this.getFullName());
+        this.emit('refresh', e);
+    }
+
+    onDataSourceInsert(e) {
+        // console.log('Form.onDataSourceInsert', this.getFullName());
+        this.parent.onFormInsert(e);
+        this.emit('insert', e);
+    }
+
+    onDataSourceUpdate(e) {
+        // console.log('Form.onDataSourceUpdate', this.getFullName());
+        this.emit('update', e);
+    }
+
+    onDataSourceDelete(e) {
+        // console.log('Form.onDataSourceDelete', this.getFullName());
+        this.emit('delete', e);
+    }
+
+    async update() {
+        console.log('Form.update', this.getFullName(), this.isChanged());
+        if (this.getPage().deinited) throw new Error('page already deinited');
+        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
+        await this.getDefaultDataSource().update();
+    }
+
+    isChanged() {
+        // console.log('Form.isChanged', this.getFullName());
+        return this.getDefaultDataSource().isChanged();
+    }
+
+    hasNew() {
+        // console.log('Form.hasNew', this.getFullName());
+        return this.getDefaultDataSource().hasNew();
+    }
+
+    async rpc(name, params) {
+        console.log('Form.rpc', this.getFullName(), name, params);
+        if (!name) throw new Error('no name');
+        const result = await this.getApp().request({
+            action: 'rpc',
+            page  : this.getPage().getName(),
+            form  : this.getName(),
+            name  : name,
+            params: Helper.encodeObject(params)
+        });
+        if (result.errorMessage) throw new Error(result.errorMessage);
+        return result;
+    }
+
+    getKey() {
+        return null;
+    }
+
+    getDefaultDataSource() {
+        const dataSource = this.getDataSource('default');
+        if (!dataSource) throw new Error(`${this.getFullName()}: no default data source`);
+        return dataSource;
+    }
+
+    getPage() {
+        return this.parent;
+    }
+
+    getApp() {
+        return this.parent.parent;
+    }
+    async refresh() {
+        await this.getDefaultDataSource().refresh();
+    }
+    getField(name) {
+        return this.fields.find(field => field.getName() === name);
+    }
+    hasDefaultSqlDataSource() {
+        return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
+    }
+}
+
+class Page extends Model {
+    constructor(data, parent, options) {
+        // console.log('Page.constructor', options);
+        if (!options.id) throw new Error('no page id');
+        super(data, parent);
+        this.options = options; // {id, parentPage, modal, params}
+        this.dataSources    = [];
+        this.forms          = [];
+        this.params         = {};
+    }
+
+    init() {
+        this.createDataSources();
+
+        // forms
+        for (const data of this.data.forms) {
+            const FormClass = eval(Model.getClassName(data));
+            const form = new FormClass(data, this);
+            form.init();
+            this.forms.push(form);
+        }
+        console.log('page params:', this.getFullName(), this.getParams());
+    }
+
+    deinit() {
+        // console.log('Page.deinit', this.getFullName());
+        if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
+        this.deinitDataSources();
+        for (const form of this.forms) {
+            form.deinit();
+        }
+        super.deinit();
+    }
+
+    getId() {
+        return this.options.id;
+    }
+
+    getParentPageName() {
+        return this.options.parentPage ? this.options.parentPage.getName() : null;
+    }
+
+    getParams() {
+        return {
+            ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
+            ...(this.options.params !== undefined ? this.options.params : {}),
+            ...this.params,
+        };
+    }
+
+    addPageParam(name, value) {
+        // console.log('Page.addPageParam', name);
+        this.params[name] = value !== undefined ? value : null;
+    }
+
+    async update() {
+        console.log('Page.update', this.getFullName());
+        for (const form of this.forms) {
+            if (form.isChanged() || form.hasNew()) await form.update();
+        }
+    }
+
+    discard() {
+        console.log('Page.discard', this.getFullName());
+        for (const form of this.forms) {
+            form.discard();
+        }
+    }
+
+    getKey() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm') {
+                return form.getKey();
+            }
+        }
+        return null;
+    }
+
+    hasRowFormWithDefaultDs() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    hasRowFormWithDefaultSqlDataSource() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm' && form.hasDefaultSqlDataSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    hasRowForm() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm') return true;
+        }
+        return false;
+    }
+
+    hasTableForm() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'TableForm') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isNewMode() {
+        return this.getAttr('newMode');
+    }
+
+    hasNew() {
+        for (const form of this.forms) {
+            if (form.hasNew()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getApp() {
+        return this.parent;
+    }
+
+    getFullName() {
+        return `${this.getName()}(${this.getId()})`;
+    }
+
+    isModal() {
+        // return this.modal;
+        return !!this.options.modal;
+    }
+
+    onFormInsert(e) {
+        console.log('Page.onFormInsert', e);
+        if (!e.key) throw new Error('no key of inserted row');
+
+        // key params to page params
+        const keyParams = DataSource.keyToParams(e.key);
+        for (const name in keyParams) {
+            this.addPageParam(name, keyParams[name]);
+        }
+    }
+    async rpc(name, params) {
+        // console.log('Page.rpc', this.getFullName(), name, params);
+        if (!name) throw new Error('no name');
+        const result =  await this.getApp().request({
+            action: 'rpc',
+            page  : this.getName(),
+            name  : name,
+            params: Helper.encodeObject(params)
+        });
+        if (result.errorMessage) throw new Error(result.errorMessage);
+        return result;
+    }
+    getForm(name) {
+        return this.forms.find(form => form.getName() === name);
+    }
+}
+
+class Table extends Model {
+    constructor(...args) {
+        super(...args);
+        this.columns = [];
+    }
+    init() {
+        // console.log('Table.init', this.getFullName());
+        for (const data of this.data.columns) {
+            const column = new Column(data, this);
+            column.init();
+            this.columns.push(column);
+        }
+    }
+
+    getColumn(name) {
+        const column = this.columns.find(column => column.getName() === name);
+        if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
+        return column;
     }
 }
 
@@ -2494,6 +2494,92 @@ class SqlDataSource extends DataSource {
     }
 }
 
+class CheckBoxField extends Field {
+
+}
+
+class ComboBoxField extends Field {
+
+    getDisplayValue(row) {
+        let value = null;
+        if (row[this.data.displayColumn]) {
+            try {
+                value = Helper.decodeValue(row[this.data.displayColumn]);
+            } catch (err) {
+                console.log('cannot parse:', row[this.data.displayColumn]);
+                throw err;
+            }
+        } else {
+            value = this.data.displayColumn;
+            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
+                return row.hasOwnProperty(name) ? (row[name] || '') : text;
+            });
+        }
+        return value;
+    }
+
+    getValueValue(row) {
+        if (!row[this.data.valueColumn]) {
+            throw new Error('no valueColumn in ComboBox data source');
+        }
+        return Helper.decodeValue(row[this.data.valueColumn]);
+    }
+
+    getComboBoxDataSource() {
+        const name = this.data.dataSourceName;
+        if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
+        if (this.getForm().getDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        } else if (this.getPage().getDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        } else if (this.getApp().getDataSource(name)) {
+            return this.getApp().getDataSource(name);
+        }
+        return null;
+    }
+
+    findRowByRawValue(rawValue) {
+        return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
+    }
+}
+
+class DatePickerField extends Field {
+    getFormat() {
+        return this.data.format;
+    }
+}
+
+class DateTimeField extends Field {
+    getFormat() {
+        return this.data.format;
+    }
+}
+class FileField extends Field {
+}
+
+class ImageField extends Field {
+}
+
+class LabelField extends Field {
+}
+
+class LinkField extends Field {
+}
+
+class TextAreaField extends Field {
+    getRows() {
+        return this.data.rows;
+    }
+    getCols() {
+        return this.data.cols;
+    }
+}
+
+class TextBoxField extends Field {}
+class TimeField extends Field {
+
+}
+
 class RowForm extends Form {
     init() {
         super.init();
@@ -2562,92 +2648,6 @@ class TableForm extends Form {
 
 }
 
-class CheckBoxField extends Field {
-
-}
-
-class ComboBoxField extends Field {
-
-    getDisplayValue(row) {
-        let value = null;
-        if (row[this.data.displayColumn]) {
-            try {
-                value = Helper.decodeValue(row[this.data.displayColumn]);
-            } catch (err) {
-                console.log('cannot parse:', row[this.data.displayColumn]);
-                throw err;
-            }
-        } else {
-            value = this.data.displayColumn;
-            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
-                return row.hasOwnProperty(name) ? (row[name] || '') : text;
-            });
-        }
-        return value;
-    }
-
-    getValueValue(row) {
-        if (!row[this.data.valueColumn]) {
-            throw new Error('no valueColumn in ComboBox data source');
-        }
-        return Helper.decodeValue(row[this.data.valueColumn]);
-    }
-
-    getComboBoxDataSource() {
-        const name = this.data.dataSourceName;
-        if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
-        if (this.getForm().getDataSource(name)) {
-            return this.getForm().getDataSource(name);
-        } else if (this.getPage().getDataSource(name)) {
-            return this.getPage().getDataSource(name);
-        } else if (this.getApp().getDataSource(name)) {
-            return this.getApp().getDataSource(name);
-        }
-        return null;
-    }
-
-    findRowByRawValue(rawValue) {
-        return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
-    }
-}
-
-class DatePickerField extends Field {
-    getFormat() {
-        return this.data.format;
-    }
-}
-
-class DateTimeField extends Field {
-    getFormat() {
-        return this.data.format;
-    }
-}
-class FileField extends Field {
-}
-
-class LabelField extends Field {
-}
-
-class LinkField extends Field {
-}
-
-class ImageField extends Field {
-}
-
-class TextAreaField extends Field {
-    getRows() {
-        return this.data.rows;
-    }
-    getCols() {
-        return this.data.cols;
-    }
-}
-
-class TextBoxField extends Field {}
-class TimeField extends Field {
-
-}
-
 class RowFormCheckBoxFieldController extends RowFormFieldController {
     getValueForView() {
         return this.getValue();
@@ -2677,18 +2677,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isInDebugMode() ? '[null]' : null;
-    }
-}
-
-class RowFormDatePickerFieldController extends RowFormFieldController {
-    getViewClass() {
-        return RowFormDatePickerFieldView;
-    }
-    getValueForView() {
-        return this.getValue();
-    }
-    setValueFromView(viewValue) {
-        this.setValue(viewValue);
     }
 }
 
@@ -2873,6 +2861,18 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
 }
 
+class RowFormDatePickerFieldController extends RowFormFieldController {
+    getViewClass() {
+        return RowFormDatePickerFieldView;
+    }
+    getValueForView() {
+        return this.getValue();
+    }
+    setValueFromView(viewValue) {
+        this.setValue(viewValue);
+    }
+}
+
 class RowFormFileFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormFileFieldView;
@@ -2885,12 +2885,6 @@ class RowFormImageFieldController extends RowFormFieldController {
     }
 }
 
-class RowFormTextAreaFieldController extends RowFormFieldController {
-    getViewClass() {
-        return RowFormTextAreaFieldView;
-    }
-}
-
 class RowFormLinkFieldController extends  RowFormFieldController {
     getViewClass() {
         return RowFormLinkFieldView;
@@ -2898,6 +2892,12 @@ class RowFormLinkFieldController extends  RowFormFieldController {
     onClick = e => {
         console.log('RowFormLinkFieldController.onClick', e);
         this.emit({source: this});
+    }
+}
+
+class RowFormTextAreaFieldController extends RowFormFieldController {
+    getViewClass() {
+        return RowFormTextAreaFieldView;
     }
 }
 
@@ -3175,5 +3175,3 @@ class TableFormTimeFieldController extends TableFormFieldController {
         return TimeBox.getStringValue(value);
     }
 }
-
-//# sourceMappingURL=viewer.ce1d22a2151eea87247b3b941de6f0e1.js.map
