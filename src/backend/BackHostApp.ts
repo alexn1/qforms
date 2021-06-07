@@ -329,7 +329,7 @@ class BackHostApp {
             await this.loginPost(req, res, context);
         } else {
             if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
-                throw new Error('not authenticated');
+                throw new MyError({message: 'not authenticated', context});
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
@@ -636,10 +636,11 @@ class BackHostApp {
         const filePath = path.join(this.publicDirPath, uri);
         const exists = await Helper.exists(filePath);
         if (!exists) {
-            const err = new MyError(`file not found: ${uri}`);
-            err.data = {filePath};
-            err.status = 404;
-            throw err;
+            throw new MyError({
+                message: `file not found: ${uri}`,
+                data: {filePath},
+                status: 404
+            });
         }
         res.sendFile(filePath);
     }*/
@@ -900,7 +901,7 @@ class BackHostApp {
             if (this.applications[context.route]) {
                 const application = this.getApplication(context);
                 if (application.isAuthentication() && !(req.session.user && req.session.user[context.route])) {
-                    throw new Error('not authenticated');
+                    throw new MyError({message: 'not authenticated', context});
                 }
                 const filePath = path.join(application.getBuildDirPath(), context.uri);
                 if (await Helper.exists(filePath)) {
@@ -928,9 +929,10 @@ class BackHostApp {
 
     async _e404(req, res, next) {
         console.warn(colors.magenta(req.method), 'error/404');
-        const err = new MyError(`${req.method} ${req.originalUrl} not found`);
-        err.status = 404;
-        next(err);
+        next(new MyError({
+            message: `${req.method} ${req.originalUrl} not found`,
+            status : 404
+        }));
     }
 
     async _e500(err, req, res, next) {

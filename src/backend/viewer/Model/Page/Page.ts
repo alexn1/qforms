@@ -47,10 +47,11 @@ class Page extends Model {
     async rpc(name, context): Promise<any> {
         console.log('Page.rpc', name, context.params);
         if (this[name]) return await this[name](context);
-        const err = new MyError(`no rpc ${this.constructor.name}.${name}`);
-        err.context = context;
-        err.data = {method: `${this.constructor.name}.rpc`};
-        throw err;
+        throw new MyError({
+            message: `no rpc ${this.constructor.name}.${name}`,
+            data   : {method: `${this.constructor.name}.rpc`},
+            context,
+        });
     }
 
     getApp(): Application {
