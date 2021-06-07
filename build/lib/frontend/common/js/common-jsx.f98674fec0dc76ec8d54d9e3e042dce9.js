@@ -35,6 +35,59 @@ class ReactComponent extends React.Component {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class Box extends ReactComponent {
+  constructor(props) {
+    console.log('Box.constructor', props);
+    super(props);
+
+    _defineProperty(this, "update", () => {
+      console.log('Box.update');
+      this.setState({
+        backgroundColor: 'green'
+      });
+    });
+
+    this.state = {
+      backgroundColor: 'purple'
+    };
+  } // componentWillMount() {
+  //     console.log('Box.componentWillMount');
+  // }
+
+
+  componentDidMount() {
+    console.log('Box.componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('Box.componentWillUnmount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Box.shouldComponentUpdate', nextProps, nextState);
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('Box.componentDidUpdate');
+  }
+
+  render() {
+    console.log('Box.render');
+    return /*#__PURE__*/React.createElement("div", {
+      className: "Box"
+    }, /*#__PURE__*/React.createElement(Button, {
+      name: "one"
+    }), /*#__PURE__*/React.createElement(Button, {
+      name: "two"
+    }), /*#__PURE__*/React.createElement(Button, {
+      name: "three"
+    }));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class CheckBox extends ReactComponent {
   constructor(props) {
     super(props);
@@ -101,59 +154,6 @@ class CheckBox extends ReactComponent {
       disabled: this.props.disabled,
       onChange: this.onChange
     });
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class Box extends ReactComponent {
-  constructor(props) {
-    console.log('Box.constructor', props);
-    super(props);
-
-    _defineProperty(this, "update", () => {
-      console.log('Box.update');
-      this.setState({
-        backgroundColor: 'green'
-      });
-    });
-
-    this.state = {
-      backgroundColor: 'purple'
-    };
-  } // componentWillMount() {
-  //     console.log('Box.componentWillMount');
-  // }
-
-
-  componentDidMount() {
-    console.log('Box.componentDidMount');
-  }
-
-  componentWillUnmount() {
-    console.log('Box.componentWillUnmount');
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('Box.shouldComponentUpdate', nextProps, nextState);
-    return true;
-  }
-
-  componentDidUpdate() {
-    console.log('Box.componentDidUpdate');
-  }
-
-  render() {
-    console.log('Box.render');
-    return /*#__PURE__*/React.createElement("div", {
-      className: "Box"
-    }, /*#__PURE__*/React.createElement(Button, {
-      name: "one"
-    }), /*#__PURE__*/React.createElement(Button, {
-      name: "two"
-    }), /*#__PURE__*/React.createElement(Button, {
-      name: "three"
-    }));
   }
 
 }
@@ -496,6 +496,177 @@ class DropDownIcon extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class DropdownDatePicker extends ReactComponent {
+  constructor(props) {
+    // console.log('DropdownDatePicker.constructor', props);
+    super(props);
+
+    _defineProperty(this, "onInputClick", e => {
+      // console.log('DropdownDatePicker.onInputClick', e);
+      if (this.props.readOnly) return;
+      this.setState(prevState => ({
+        open: !prevState.open
+      }));
+    });
+
+    _defineProperty(this, "onInputKeyDown", e => {
+      // console.log('DropdownDatePicker.onInputKeyDown', e.which);
+      if (e.which === 27 && this.state.open) {
+        this.setState({
+          open: false
+        });
+      }
+    });
+
+    _defineProperty(this, "onCloseDown", async e => {
+      // console.log('DropdownDatePicker.onCloseDown', e);
+      this.setState({
+        value: null
+      });
+
+      if (this.props.onChange) {
+        this.props.onChange(null);
+      }
+    });
+
+    _defineProperty(this, "onBlur", e => {
+      // console.log('DropdownDatePicker.onBlur');
+      if (this.state.open) {
+        this.setState({
+          open: false
+        });
+      }
+    });
+
+    _defineProperty(this, "onDatePickerMouseDown", e => {
+      // console.log('DropdownDatePicker.onDatePickerMouseDown');
+      e.preventDefault(); // e.stopPropagation();
+      // return false;
+    });
+
+    _defineProperty(this, "onDatePickerDateSelected", date => {
+      // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+      const value = new Date(date[0], date[1], date[2]);
+      this.setState({
+        open: false,
+        value
+      });
+
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
+    });
+
+    this.state = {
+      open: false,
+      value: props.value || null
+    };
+
+    if (props.value && !(props.value instanceof Date)) {
+      throw new Error(`need Date type, got ${typeof props.value}`);
+    }
+  }
+
+  getFormat() {
+    if (this.props.format) return this.props.format;
+    return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+  }
+
+  getStringValue() {
+    if (this.getValue()) {
+      return Helper.formatDate(this.getValue(), this.getFormat());
+    }
+
+    return '';
+  }
+
+  getMinDate() {
+    if (this.props.getMinDate) {
+      return this.props.getMinDate();
+    } else if (this.props.oldDates === false) {
+      return DatePicker.getTodayArr();
+    }
+
+    return null;
+  }
+
+  getSelectedMonth() {
+    if (this.getValue()) {
+      return [this.getValue().getFullYear(), this.getValue().getMonth()];
+    }
+
+    return null;
+  }
+
+  getSelectedDate() {
+    if (this.getValue()) {
+      return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
+    }
+
+    return null;
+  }
+
+  getValue() {
+    return this.state.value;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+    this.state.value = nextProps.value;
+    return true;
+  }
+
+  getClassList() {
+    return [...super.getClassList(), ...(this.props.readOnly ? ['readOnly'] : [])];
+  }
+
+  render() {
+    // console.log('DropdownDatePicker.render', this.props, this.state);
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("input", {
+      readOnly: true,
+      onClick: this.onInputClick,
+      onBlur: this.onBlur,
+      value: this.getStringValue(),
+      placeholder: this.props.placeholder,
+      onKeyDown: this.onInputKeyDown
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
+      onMouseDown: this.onCloseDown
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "2",
+      y1: "2",
+      x2: "8",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "8",
+      y1: "2",
+      x2: "2",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }))), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
+      minDate: this.getMinDate(),
+      selectedMonth: this.getSelectedMonth(),
+      selectedDate: this.getSelectedDate(),
+      onMouseDown: this.onDatePickerMouseDown,
+      onDateSelected: this.onDatePickerDateSelected
+    }));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class DropdownButton extends ReactComponent {
   constructor(props) {
     super(props);
@@ -782,177 +953,6 @@ class GridCell extends ReactComponent {
   }
 
 }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class DropdownDatePicker extends ReactComponent {
-  constructor(props) {
-    // console.log('DropdownDatePicker.constructor', props);
-    super(props);
-
-    _defineProperty(this, "onInputClick", e => {
-      // console.log('DropdownDatePicker.onInputClick', e);
-      if (this.props.readOnly) return;
-      this.setState(prevState => ({
-        open: !prevState.open
-      }));
-    });
-
-    _defineProperty(this, "onInputKeyDown", e => {
-      // console.log('DropdownDatePicker.onInputKeyDown', e.which);
-      if (e.which === 27 && this.state.open) {
-        this.setState({
-          open: false
-        });
-      }
-    });
-
-    _defineProperty(this, "onCloseDown", async e => {
-      // console.log('DropdownDatePicker.onCloseDown', e);
-      this.setState({
-        value: null
-      });
-
-      if (this.props.onChange) {
-        this.props.onChange(null);
-      }
-    });
-
-    _defineProperty(this, "onBlur", e => {
-      // console.log('DropdownDatePicker.onBlur');
-      if (this.state.open) {
-        this.setState({
-          open: false
-        });
-      }
-    });
-
-    _defineProperty(this, "onDatePickerMouseDown", e => {
-      // console.log('DropdownDatePicker.onDatePickerMouseDown');
-      e.preventDefault(); // e.stopPropagation();
-      // return false;
-    });
-
-    _defineProperty(this, "onDatePickerDateSelected", date => {
-      // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
-      const value = new Date(date[0], date[1], date[2]);
-      this.setState({
-        open: false,
-        value
-      });
-
-      if (this.props.onChange) {
-        this.props.onChange(value);
-      }
-    });
-
-    this.state = {
-      open: false,
-      value: props.value || null
-    };
-
-    if (props.value && !(props.value instanceof Date)) {
-      throw new Error(`need Date type, got ${typeof props.value}`);
-    }
-  }
-
-  getFormat() {
-    if (this.props.format) return this.props.format;
-    return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
-  }
-
-  getStringValue() {
-    if (this.getValue()) {
-      return Helper.formatDate(this.getValue(), this.getFormat());
-    }
-
-    return '';
-  }
-
-  getMinDate() {
-    if (this.props.getMinDate) {
-      return this.props.getMinDate();
-    } else if (this.props.oldDates === false) {
-      return DatePicker.getTodayArr();
-    }
-
-    return null;
-  }
-
-  getSelectedMonth() {
-    if (this.getValue()) {
-      return [this.getValue().getFullYear(), this.getValue().getMonth()];
-    }
-
-    return null;
-  }
-
-  getSelectedDate() {
-    if (this.getValue()) {
-      return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
-    }
-
-    return null;
-  }
-
-  getValue() {
-    return this.state.value;
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-    this.state.value = nextProps.value;
-    return true;
-  }
-
-  getClassList() {
-    return [...super.getClassList(), ...(this.props.readOnly ? ['readOnly'] : [])];
-  }
-
-  render() {
-    // console.log('DropdownDatePicker.render', this.props, this.state);
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("input", {
-      readOnly: true,
-      onClick: this.onInputClick,
-      onBlur: this.onBlur,
-      value: this.getStringValue(),
-      placeholder: this.props.placeholder,
-      onKeyDown: this.onInputKeyDown
-    }), /*#__PURE__*/React.createElement("div", {
-      className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
-      onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }))), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
-      minDate: this.getMinDate(),
-      selectedMonth: this.getSelectedMonth(),
-      selectedDate: this.getSelectedDate(),
-      onMouseDown: this.onDatePickerMouseDown,
-      onDateSelected: this.onDatePickerDateSelected
-    }));
-  }
-
-}
 class GridRow extends ReactComponent {
   isCellActive(j) {
     return this.props.active && this.props.activeColumn === j;
@@ -989,6 +989,51 @@ class GridRow extends ReactComponent {
       onDoubleClick: grid.onRowDoubleClick
     }));
   }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Image extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onImgClick", e => {
+      console.log('Image.onImgClick');
+      this.setState(prevState => {
+        if (prevState.classList) {
+          return {
+            classList: null
+          };
+        } else {
+          return {
+            classList: ['Image_full']
+          };
+        }
+      });
+    });
+
+    this.img = React.createRef();
+    this.state = {
+      classList: null
+    };
+  }
+
+  getNaturalSize() {
+    return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("img", {
+      className: this.getClassName(),
+      ref: this.img,
+      src: this.props.src,
+      onClick: this.onImgClick
+    });
+  }
+  /*componentDidMount() {
+      console.log('Image.componentDidMount', this.getNaturalSize());
+  }*/
+
 
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1066,51 +1111,6 @@ class Menu extends ReactComponent {
       "data-name": item.name
     }, item.title))))));
   }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class Image extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onImgClick", e => {
-      console.log('Image.onImgClick');
-      this.setState(prevState => {
-        if (prevState.classList) {
-          return {
-            classList: null
-          };
-        } else {
-          return {
-            classList: ['Image_full']
-          };
-        }
-      });
-    });
-
-    this.img = React.createRef();
-    this.state = {
-      classList: null
-    };
-  }
-
-  getNaturalSize() {
-    return [this.img.current.naturalWidth, this.img.current.naturalHeight];
-  }
-
-  render() {
-    return /*#__PURE__*/React.createElement("img", {
-      className: this.getClassName(),
-      ref: this.img,
-      src: this.props.src,
-      onClick: this.onImgClick
-    });
-  }
-  /*componentDidMount() {
-      console.log('Image.componentDidMount', this.getNaturalSize());
-  }*/
-
 
 }
 class Modal extends ReactComponent {
