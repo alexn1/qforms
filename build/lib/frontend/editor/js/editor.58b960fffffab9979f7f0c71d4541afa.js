@@ -469,6 +469,11 @@ class NewDataSourceController extends ModalController {
     }
 }
 
+class NewDatabaseController extends ModalController {
+    getViewClass() {
+        return NewDatabaseView;
+    }
+}
 class NewFieldController extends ModalController {
     getViewClass() {
         return NewFieldView;
@@ -481,11 +486,6 @@ class NewFormController extends ModalController {
     }
 }
 
-class NewDatabaseController extends ModalController {
-    getViewClass() {
-        return NewDatabaseView;
-    }
-}
 class NewFormFromTableController extends ModalController {
     getViewClass() {
         return NewFormFromTableView;
@@ -508,12 +508,6 @@ class NewParamController extends ModalController {
         return NewParamView;
     }
 }
-class NewTableController extends ModalController {
-    getViewClass() {
-        return NewTableView;
-    }
-}
-
 class Action extends Model {
     /*constructor(data, parent) {
         super(data, parent);
@@ -597,6 +591,12 @@ class Action extends Model {
         });
     }
 
+}
+
+class NewTableController extends ModalController {
+    getViewClass() {
+        return NewTableView;
+    }
 }
 
 class Application extends Model {

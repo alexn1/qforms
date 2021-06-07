@@ -88,48 +88,6 @@ class Box extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class Button extends ReactComponent {
-  constructor(props) {
-    // console.log('Button.constructor', props);
-    super(props);
-
-    _defineProperty(this, "onClick", e => {
-      // console.log('Button.onClick', e);
-      if (this.props.onClick) this.props.onClick(e);
-    });
-
-    this.state = {
-      disabled: false
-    };
-  }
-
-  isDisabled() {
-    if (this.props.enabled !== undefined) return !this.props.enabled;
-    return this.state.disabled;
-  }
-
-  isVisible() {
-    return this.props.visible === undefined ? true : this.props.visible;
-  }
-
-  render() {
-    // console.log('Button.render', this.props.title, this.props);
-    return /*#__PURE__*/React.createElement("button", {
-      className: this.getClassName(),
-      name: this.props.name,
-      id: this.props.id,
-      disabled: this.isDisabled(),
-      onClick: this.onClick,
-      style: {
-        display: !this.isVisible() ? 'none' : null,
-        width: this.props.width
-      }
-    }, this.props.title || this.props.children);
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class CheckBox extends ReactComponent {
   constructor(props) {
     super(props);
@@ -196,6 +154,48 @@ class CheckBox extends ReactComponent {
       disabled: this.props.disabled,
       onChange: this.onChange
     });
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Button extends ReactComponent {
+  constructor(props) {
+    // console.log('Button.constructor', props);
+    super(props);
+
+    _defineProperty(this, "onClick", e => {
+      // console.log('Button.onClick', e);
+      if (this.props.onClick) this.props.onClick(e);
+    });
+
+    this.state = {
+      disabled: false
+    };
+  }
+
+  isDisabled() {
+    if (this.props.enabled !== undefined) return !this.props.enabled;
+    return this.state.disabled;
+  }
+
+  isVisible() {
+    return this.props.visible === undefined ? true : this.props.visible;
+  }
+
+  render() {
+    // console.log('Button.render', this.props.title, this.props);
+    return /*#__PURE__*/React.createElement("button", {
+      className: this.getClassName(),
+      name: this.props.name,
+      id: this.props.id,
+      disabled: this.isDisabled(),
+      onClick: this.onClick,
+      style: {
+        display: !this.isVisible() ? 'none' : null,
+        width: this.props.width
+      }
+    }, this.props.title || this.props.children);
   }
 
 }
@@ -1121,6 +1121,86 @@ class Modal extends ReactComponent {
   }
 
 }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Slider extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onPrevClick", e => {
+      // console.log('Slider.onPrevClick');
+      this.setState(prevState => {
+        let image = prevState.image - 1;
+
+        if (image < 0) {
+          image = this.props.images.length - 1;
+        }
+
+        return {
+          image
+        };
+      });
+    });
+
+    _defineProperty(this, "onNextClick", e => {
+      // console.log('Slider.onNextClick');
+      this.setState(prevState => {
+        let image = prevState.image + 1;
+
+        if (image > this.props.images.length - 1) {
+          image = 0;
+        }
+
+        return {
+          image
+        };
+      });
+    });
+
+    _defineProperty(this, "onImageClick", e => {
+      console.log('Slider.onImageClick');
+      this.setState({
+        classList: ['Slider_full']
+      });
+    });
+
+    _defineProperty(this, "onCloseClick", e => {
+      this.setState({
+        classList: null
+      });
+    });
+
+    if (!this.props.images) throw new Error('Slider: no images');
+    this.state = {
+      image: 0,
+      classList: null
+    };
+  }
+
+  render() {
+    // console.log('Slider.render', this.props.images);
+    const images = this.props.images || [];
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("img", {
+      className: 'Slider_image',
+      src: images[this.state.image],
+      onClick: this.onImageClick
+    }), /*#__PURE__*/React.createElement("p", {
+      className: 'Slider__label'
+    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), /*#__PURE__*/React.createElement("button", {
+      className: 'Slider__prev',
+      onClick: this.onPrevClick
+    }, "prev"), /*#__PURE__*/React.createElement("button", {
+      className: 'Slider__next',
+      onClick: this.onNextClick
+    }, "next"), /*#__PURE__*/React.createElement("button", {
+      className: 'Slider__close',
+      onClick: this.onCloseClick
+    }, "close"));
+  }
+
+}
 class Statusbar extends ReactComponent {
   constructor(props) {
     // console.log('Statusbar.constructor', props);
@@ -1257,86 +1337,6 @@ class TextArea extends ReactComponent {
       rows: this.props.rows,
       cols: this.props.cols
     });
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class Slider extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onPrevClick", e => {
-      // console.log('Slider.onPrevClick');
-      this.setState(prevState => {
-        let image = prevState.image - 1;
-
-        if (image < 0) {
-          image = this.props.images.length - 1;
-        }
-
-        return {
-          image
-        };
-      });
-    });
-
-    _defineProperty(this, "onNextClick", e => {
-      // console.log('Slider.onNextClick');
-      this.setState(prevState => {
-        let image = prevState.image + 1;
-
-        if (image > this.props.images.length - 1) {
-          image = 0;
-        }
-
-        return {
-          image
-        };
-      });
-    });
-
-    _defineProperty(this, "onImageClick", e => {
-      console.log('Slider.onImageClick');
-      this.setState({
-        classList: ['Slider_full']
-      });
-    });
-
-    _defineProperty(this, "onCloseClick", e => {
-      this.setState({
-        classList: null
-      });
-    });
-
-    if (!this.props.images) throw new Error('Slider: no images');
-    this.state = {
-      image: 0,
-      classList: null
-    };
-  }
-
-  render() {
-    // console.log('Slider.render', this.props.images);
-    const images = this.props.images || [];
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("img", {
-      className: 'Slider_image',
-      src: images[this.state.image],
-      onClick: this.onImageClick
-    }), /*#__PURE__*/React.createElement("p", {
-      className: 'Slider__label'
-    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), /*#__PURE__*/React.createElement("button", {
-      className: 'Slider__prev',
-      onClick: this.onPrevClick
-    }, "prev"), /*#__PURE__*/React.createElement("button", {
-      className: 'Slider__next',
-      onClick: this.onNextClick
-    }, "next"), /*#__PURE__*/React.createElement("button", {
-      className: 'Slider__close',
-      onClick: this.onCloseClick
-    }, "close"));
   }
 
 }

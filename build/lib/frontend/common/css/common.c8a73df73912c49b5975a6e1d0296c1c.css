@@ -138,6 +138,14 @@ table.DatePicker td.selected {
   z-index: 2;
 }
 
+.GridCell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .Grid {
   font-family: arial, sans-serif;
   font-size: 12px;
@@ -257,12 +265,20 @@ table.DatePicker td.selected {
 }
 
 
-.GridCell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
+.Image {
+  cursor: pointer;
+}
+.Image_full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100%;
+  background-color: black;
+  object-fit: contain;
+  z-index: 100;
 }
 
 .Menu {
@@ -313,22 +329,6 @@ table.DatePicker td.selected {
 }
 .Menu > div > div > a:hover {
   background-color: #ddd;
-}
-
-.Image {
-  cursor: pointer;
-}
-.Image_full {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100%;
-  background-color: black;
-  object-fit: contain;
-  z-index: 100;
 }
 
 .Modal {
