@@ -88,48 +88,6 @@ class Box extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class Button extends ReactComponent {
-  constructor(props) {
-    // console.log('Button.constructor', props);
-    super(props);
-
-    _defineProperty(this, "onClick", e => {
-      // console.log('Button.onClick', e);
-      if (this.props.onClick) this.props.onClick(e);
-    });
-
-    this.state = {
-      disabled: false
-    };
-  }
-
-  isDisabled() {
-    if (this.props.enabled !== undefined) return !this.props.enabled;
-    return this.state.disabled;
-  }
-
-  isVisible() {
-    return this.props.visible === undefined ? true : this.props.visible;
-  }
-
-  render() {
-    // console.log('Button.render', this.props.title, this.props);
-    return /*#__PURE__*/React.createElement("button", {
-      className: this.getClassName(),
-      name: this.props.name,
-      id: this.props.id,
-      disabled: this.isDisabled(),
-      onClick: this.onClick,
-      style: {
-        display: !this.isVisible() ? 'none' : null,
-        width: this.props.width
-      }
-    }, this.props.title || this.props.children);
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class CheckBox extends ReactComponent {
   constructor(props) {
     super(props);
@@ -196,6 +154,48 @@ class CheckBox extends ReactComponent {
       disabled: this.props.disabled,
       onChange: this.onChange
     });
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Button extends ReactComponent {
+  constructor(props) {
+    // console.log('Button.constructor', props);
+    super(props);
+
+    _defineProperty(this, "onClick", e => {
+      // console.log('Button.onClick', e);
+      if (this.props.onClick) this.props.onClick(e);
+    });
+
+    this.state = {
+      disabled: false
+    };
+  }
+
+  isDisabled() {
+    if (this.props.enabled !== undefined) return !this.props.enabled;
+    return this.state.disabled;
+  }
+
+  isVisible() {
+    return this.props.visible === undefined ? true : this.props.visible;
+  }
+
+  render() {
+    // console.log('Button.render', this.props.title, this.props);
+    return /*#__PURE__*/React.createElement("button", {
+      className: this.getClassName(),
+      name: this.props.name,
+      id: this.props.id,
+      disabled: this.isDisabled(),
+      onClick: this.onClick,
+      style: {
+        display: !this.isVisible() ? 'none' : null,
+        width: this.props.width
+      }
+    }, this.props.title || this.props.children);
   }
 
 }
@@ -531,6 +531,34 @@ class DropdownButton extends ReactComponent {
       key: action.name,
       "data-action": action.name
     }, action.title))));
+  }
+
+}
+class DropDownIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: {
+        width: this.props.size,
+        height: this.props.size
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("circle", {
+      cx: "5",
+      cy: "5",
+      r: "5",
+      style: {
+        fill: 'gray'
+      }
+    }), /*#__PURE__*/React.createElement("polyline", {
+      points: "2,4 5,7 8,4",
+      fill: "none",
+      stroke: "white",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    })));
   }
 
 }
@@ -1195,79 +1223,6 @@ class Statusbar extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class Tab extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onLiMouseDown", e => {
-      // console.log('Tab.onLiMouseDown', e.target);
-      if (e.target.classList.contains('close')) return;
-      const i = parseInt(e.currentTarget.dataset.i);
-
-      if (this.props.getActive) {
-        if (this.props.onTabMouseDown) this.props.onTabMouseDown(i);
-      } else {
-        if (i !== this.getActive()) {
-          this.selectTab(i);
-        }
-      }
-    });
-
-    _defineProperty(this, "onLiClick", e => {
-      // console.log('Tab.onLiClick', e.target);
-      if (e.target.classList.contains('close')) {
-        const i = parseInt(e.currentTarget.dataset.i); // console.log('close tab:', i);
-
-        if (this.props.onTabClose) this.props.onTabClose(i);
-      }
-    });
-
-    this.state = {
-      active: 0
-    };
-  }
-
-  getActive() {
-    if (this.props.getActive) return this.props.getActive();
-    return this.state.active;
-  }
-
-  selectTab(i) {
-    if (i === this.getActive()) return;
-    const start = Date.now();
-    this.setState({
-      active: i
-    }, () => console.log('selectTab time:', Date.now() - start));
-  }
-
-  renderTitles() {
-    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("li", {
-      key: tab.name,
-      className: i === this.getActive() ? 'active' : null,
-      onMouseDown: this.onLiMouseDown,
-      onClick: this.onLiClick,
-      "data-i": i
-    }, /*#__PURE__*/React.createElement("span", null, tab.title), this.props.canClose && /*#__PURE__*/React.createElement("span", {
-      className: "close"
-    }, "\xD7")));
-  }
-
-  renderContents() {
-    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("div", {
-      key: tab.name,
-      className: i === this.getActive() ? 'active' : null
-    }, tab.content));
-  }
-
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("ul", null, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", null, this.props.tabs && this.renderContents()));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class TextArea extends ReactComponent {
   constructor(props) {
     // console.log('TextArea.constructor', props);
@@ -1367,6 +1322,79 @@ class TextBox extends ReactComponent {
       disabled: this.props.disabled,
       autoComplete: this.props.autocomplete
     });
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Tab extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onLiMouseDown", e => {
+      // console.log('Tab.onLiMouseDown', e.target);
+      if (e.target.classList.contains('close')) return;
+      const i = parseInt(e.currentTarget.dataset.i);
+
+      if (this.props.getActive) {
+        if (this.props.onTabMouseDown) this.props.onTabMouseDown(i);
+      } else {
+        if (i !== this.getActive()) {
+          this.selectTab(i);
+        }
+      }
+    });
+
+    _defineProperty(this, "onLiClick", e => {
+      // console.log('Tab.onLiClick', e.target);
+      if (e.target.classList.contains('close')) {
+        const i = parseInt(e.currentTarget.dataset.i); // console.log('close tab:', i);
+
+        if (this.props.onTabClose) this.props.onTabClose(i);
+      }
+    });
+
+    this.state = {
+      active: 0
+    };
+  }
+
+  getActive() {
+    if (this.props.getActive) return this.props.getActive();
+    return this.state.active;
+  }
+
+  selectTab(i) {
+    if (i === this.getActive()) return;
+    const start = Date.now();
+    this.setState({
+      active: i
+    }, () => console.log('selectTab time:', Date.now() - start));
+  }
+
+  renderTitles() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("li", {
+      key: tab.name,
+      className: i === this.getActive() ? 'active' : null,
+      onMouseDown: this.onLiMouseDown,
+      onClick: this.onLiClick,
+      "data-i": i
+    }, /*#__PURE__*/React.createElement("span", null, tab.title), this.props.canClose && /*#__PURE__*/React.createElement("span", {
+      className: "close"
+    }, "\xD7")));
+  }
+
+  renderContents() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("div", {
+      key: tab.name,
+      className: i === this.getActive() ? 'active' : null
+    }, tab.content));
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("ul", null, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", null, this.props.tabs && this.renderContents()));
   }
 
 }
@@ -1600,34 +1628,6 @@ class Tooltip extends ReactComponent {
     }, this.props.type !== 'alert' && /*#__PURE__*/React.createElement("div", null, "tooltip"), /*#__PURE__*/React.createElement("span", {
       className: this.props.position
     }, this.props.tip || 'tip'));
-  }
-
-}
-class DropDownIcon extends ReactComponent {
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: {
-        width: this.props.size,
-        height: this.props.size
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("circle", {
-      cx: "5",
-      cy: "5",
-      r: "5",
-      style: {
-        fill: 'gray'
-      }
-    }), /*#__PURE__*/React.createElement("polyline", {
-      points: "2,4 5,7 8,4",
-      fill: "none",
-      stroke: "white",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })));
   }
 
 }

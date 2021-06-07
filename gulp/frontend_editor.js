@@ -7,6 +7,7 @@ const less      = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
+const order = require('gulp-order');
 
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
@@ -14,6 +15,7 @@ const SRC_PATH   = "./src";
 function frontend_editor_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.js'))
         // .pipe(sourcemaps.init())
+        .pipe(order())
         .pipe(concat('editor.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())

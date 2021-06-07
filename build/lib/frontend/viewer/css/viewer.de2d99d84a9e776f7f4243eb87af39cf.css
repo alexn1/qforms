@@ -182,27 +182,6 @@ img {
   margin: 0;
 }
 
-.RowFormComboBoxFieldView > select {
-  width: 100%;
-}
-.standard .RowFormComboBoxFieldView > select {
-  height: 20px;
-  border-width: 0;
-  padding: 0;
-  background-color: white;
-  cursor: pointer;
-}
-.standard .RowFormComboBoxFieldView > select[disabled] {
-  background-color: lightgoldenrodyellow;
-  cursor: default;
-}
-.standard .RowFormComboBoxFieldView.changed > select {
-  background-color: #eefdea;
-}
-.standard .RowFormComboBoxFieldView.error > select {
-  background-color: #f2dede;
-}
-
 .RowFormDatePickerFieldView > .DropdownDatePicker {
   width: 100%;
 }
@@ -285,6 +264,27 @@ img {
   background-color: #f2dede;
 }
 
+.RowFormComboBoxFieldView > select {
+  width: 100%;
+}
+.standard .RowFormComboBoxFieldView > select {
+  height: 20px;
+  border-width: 0;
+  padding: 0;
+  background-color: white;
+  cursor: pointer;
+}
+.standard .RowFormComboBoxFieldView > select[disabled] {
+  background-color: lightgoldenrodyellow;
+  cursor: default;
+}
+.standard .RowFormComboBoxFieldView.changed > select {
+  background-color: #eefdea;
+}
+.standard .RowFormComboBoxFieldView.error > select {
+  background-color: #f2dede;
+}
+
 .standard .RowFormFileFieldView img {
   width: 300px;
   display: block;
@@ -309,6 +309,11 @@ img {
 
 .RowFormImageFieldView img {
   width: 100%;
+}
+
+.standard .RowFormLinkFieldView > a {
+  padding: 0 5px 0 5px;
+  color: blue;
 }
 
 .RowFormTextAreaFieldView > textarea {
@@ -406,23 +411,6 @@ img {
   color: gray;
 }
 
-.standard .RowFormLinkFieldView > a {
-  padding: 0 5px 0 5px;
-  color: blue;
-}
-
-.TableFormCheckBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-}
-.TableFormCheckBoxFieldView > span {
-  margin: 3px 3px 3px 4px;
-}
-
 .TableFormComboBoxFieldView {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -437,6 +425,18 @@ img {
   white-space: nowrap;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.TableFormCheckBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+.TableFormCheckBoxFieldView > span {
+  margin: 3px 3px 3px 4px;
 }
 
 .TableFormLinkFieldView {

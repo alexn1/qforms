@@ -28,6 +28,15 @@ class ActionList extends ReactComponent {
   }
 
 }
+class ModalView extends ReactComponent {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement(Modal, null, React.createElement(ctrl.getViewClass(), {
+      ctrl
+    }));
+  }
+
+}
 class EditorFrontHostAppView extends ReactComponent {
   renderDocumentView(document) {
     if (!document.controller.getDocumentViewClass()) return /*#__PURE__*/React.createElement("div", null, "no document view for ", document.controller.constructor.name);
@@ -88,15 +97,6 @@ class EditorFrontHostAppView extends ReactComponent {
       tabs: this.getTabs()
     })), ctrl.modal && React.createElement(ModalView, {
       ctrl: ctrl.modal
-    }));
-  }
-
-}
-class ModalView extends ReactComponent {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement(Modal, null, React.createElement(ctrl.getViewClass(), {
-      ctrl
     }));
   }
 
@@ -549,76 +549,6 @@ class NewColumnView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class NewDataSourceView extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onCreate", async e => {
-      // console.log('NewDataSourceView.onCreate');
-      await this.props.ctrl.onCreate({
-        name: this.name.getValue(),
-        class: this.class.getValue()
-      });
-    });
-
-    this.name = null;
-    this.class = null;
-  }
-
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "NewDataSourceView modal-content"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "modal-header"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "close",
-      onClick: ctrl.onClose
-    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
-      className: "modal-title"
-    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
-      className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "name"
-    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
-      id: 'name',
-      classList: ['form-control'],
-      onCreate: c => this.name = c,
-      autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "class"
-    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
-      id: "class",
-      classList: ['form-control'],
-      items: [{
-        value: 'DataSource',
-        title: 'DataSource'
-      }, {
-        value: 'SqlDataSource',
-        title: 'SqlDataSource'
-      }],
-      onCreate: c => this.class = c,
-      value: 'SqlDataSource'
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "modal-footer"
-    }, /*#__PURE__*/React.createElement(Button, {
-      name: "create",
-      classList: ['btn', 'btn-primary'],
-      onClick: this.onCreate
-    }, "Create"), /*#__PURE__*/React.createElement(Button, {
-      classList: ['btn', 'btn-default'],
-      onClick: ctrl.onClose
-    }, "Close")));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class NewDatabaseView extends ReactComponent {
   constructor(props) {
     super(props);
@@ -738,7 +668,7 @@ class NewDatabaseView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class NewFormView extends ReactComponent {
+class NewDataSourceView extends ReactComponent {
   constructor(props) {
     super(props);
 
@@ -746,20 +676,18 @@ class NewFormView extends ReactComponent {
       // console.log('NewDataSourceView.onCreate');
       await this.props.ctrl.onCreate({
         name: this.name.getValue(),
-        caption: this.caption.getValue(),
         class: this.class.getValue()
       });
     });
 
     this.name = null;
-    this.caption = null;
     this.class = null;
   }
 
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "modal-content"
+      className: "NewDataSourceView modal-content"
     }, /*#__PURE__*/React.createElement("div", {
       className: "modal-header"
     }, /*#__PURE__*/React.createElement("button", {
@@ -768,55 +696,41 @@ class NewFormView extends ReactComponent {
       onClick: ctrl.onClose
     }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
       className: "modal-title"
-    }, "New Form")), /*#__PURE__*/React.createElement("div", {
+    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
     }, /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
-      id: "name",
+      id: 'name',
       classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off'
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "caption"
-    }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
-      id: "caption",
-      classList: ['form-control'],
-      onCreate: c => this.caption = c,
-      autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "formClass"
+      htmlFor: "class"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
-      id: "formClass",
+      id: "class",
       classList: ['form-control'],
-      value: 'TableForm',
       items: [{
-        value: 'RowForm',
-        title: 'RowForm'
+        value: 'DataSource',
+        title: 'DataSource'
       }, {
-        value: 'TableForm',
-        title: 'TableForm'
-      }, {
-        value: 'Form',
-        title: 'Form'
+        value: 'SqlDataSource',
+        title: 'SqlDataSource'
       }],
-      onCreate: c => this.class = c
+      onCreate: c => this.class = c,
+      value: 'SqlDataSource'
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
-    }, /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement(Button, {
       name: "create",
-      type: "button",
-      className: "btn btn-primary",
+      classList: ['btn', 'btn-primary'],
       onClick: this.onCreate
-    }, "Create"), /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "btn btn-default",
+    }, "Create"), /*#__PURE__*/React.createElement(Button, {
+      classList: ['btn', 'btn-default'],
       onClick: ctrl.onClose
     }, "Close")));
   }
@@ -1074,18 +988,22 @@ class NewFormFromTableView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class NewKeyColumnView extends ReactComponent {
+class NewFormView extends ReactComponent {
   constructor(props) {
     super(props);
 
     _defineProperty(this, "onCreate", async e => {
-      // console.log('NewParamView.onCreate');
+      // console.log('NewDataSourceView.onCreate');
       await this.props.ctrl.onCreate({
-        name: this.name.getValue()
+        name: this.name.getValue(),
+        caption: this.caption.getValue(),
+        class: this.class.getValue()
       });
     });
 
     this.name = null;
+    this.caption = null;
+    this.class = null;
   }
 
   render() {
@@ -1100,7 +1018,7 @@ class NewKeyColumnView extends ReactComponent {
       onClick: ctrl.onClose
     }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
       className: "modal-title"
-    }, "New Key Column")), /*#__PURE__*/React.createElement("div", {
+    }, "New Form")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
     }, /*#__PURE__*/React.createElement("div", {
       className: "form-group"
@@ -1111,6 +1029,34 @@ class NewKeyColumnView extends ReactComponent {
       classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off'
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "caption"
+    }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
+      id: "caption",
+      classList: ['form-control'],
+      onCreate: c => this.caption = c,
+      autocomplete: 'off'
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "formClass"
+    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
+      id: "formClass",
+      classList: ['form-control'],
+      value: 'TableForm',
+      items: [{
+        value: 'RowForm',
+        title: 'RowForm'
+      }, {
+        value: 'TableForm',
+        title: 'TableForm'
+      }, {
+        value: 'Form',
+        title: 'Form'
+      }],
+      onCreate: c => this.class = c
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement("button", {
@@ -1300,6 +1246,60 @@ class NewTableView extends ReactComponent {
       id: "tableName",
       classList: ['form-control'],
       onCreate: c => this.name = c
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "modal-footer"
+    }, /*#__PURE__*/React.createElement("button", {
+      name: "create",
+      type: "button",
+      className: "btn btn-primary",
+      onClick: this.onCreate
+    }, "Create"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "btn btn-default",
+      onClick: ctrl.onClose
+    }, "Close")));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class NewKeyColumnView extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onCreate", async e => {
+      // console.log('NewParamView.onCreate');
+      await this.props.ctrl.onCreate({
+        name: this.name.getValue()
+      });
+    });
+
+    this.name = null;
+  }
+
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "modal-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-header"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "close",
+      onClick: ctrl.onClose
+    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
+      className: "modal-title"
+    }, "New Key Column")), /*#__PURE__*/React.createElement("div", {
+      className: "modal-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "name"
+    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
+      id: "name",
+      classList: ['form-control'],
+      onCreate: c => this.name = c,
+      autocomplete: 'off'
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement("button", {
