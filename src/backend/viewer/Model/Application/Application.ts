@@ -60,7 +60,7 @@ class Application extends Model {
         this.scripts = await this.getScripts(context);
     }
 
-    getVirtualPath(context: Context) {
+    getVirtualPath(context: Context): string {
         return `/${context.module}/${context.appDirName}/${context.appFileName}/${context.env}`;
     }
 
