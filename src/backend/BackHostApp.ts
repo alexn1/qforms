@@ -1061,10 +1061,7 @@ class BackHostApp {
     alias(
         method: string,
         path: string,
-        module: string,
-        appDirName: string,
-        appFileName: string,
-        env: string,
+        [module, appDirName, appFileName, env],
         cb: string,
         query?: any
     ) {
