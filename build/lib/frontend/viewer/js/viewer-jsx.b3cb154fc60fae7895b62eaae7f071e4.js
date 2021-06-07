@@ -44,22 +44,6 @@ class ApplicationView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class FormView extends View {
-  constructor(...args) {
-    super(...args);
-
-    _defineProperty(this, "onActionsClick", async li => {
-      // console.log('FormView.onActionsClick:', li);
-      const ctrl = this.props.ctrl;
-      const name = li.dataset.action;
-      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-      if (!result) alert(`no handler for action '${name}'`);
-    });
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class PageView extends View {
   constructor(...args) {
     super(...args);
@@ -205,6 +189,22 @@ class PageView2 extends PageView {
   }
 
 }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class FormView extends View {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onActionsClick", async li => {
+      // console.log('FormView.onActionsClick:', li);
+      const ctrl = this.props.ctrl;
+      const name = li.dataset.action;
+      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
+      if (!result) alert(`no handler for action '${name}'`);
+    });
+  }
+
+}
 class MdiApplicationView extends ApplicationView {
   getTabs() {
     return this.props.ctrl.pages.map(pageCtrl => {
@@ -241,6 +241,13 @@ class MdiApplicationView extends ApplicationView {
   }
 
 }
+class RowFormFieldView extends ReactComponent {
+  getClassList() {
+    const ctrl = this.props.ctrl;
+    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
+  }
+
+}
 class SdiApplicationView extends ApplicationView {
   render() {
     console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
@@ -256,13 +263,6 @@ class SdiApplicationView extends ApplicationView {
     }, this.renderActivePage()), /*#__PURE__*/React.createElement("footer", null, /*#__PURE__*/React.createElement(Statusbar, {
       onCreate: ctrl.onStatusbarCreate
     })), this.renderModalPages());
-  }
-
-}
-class RowFormFieldView extends ReactComponent {
-  getClassList() {
-    const ctrl = this.props.ctrl;
-    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
   }
 
 }
@@ -920,12 +920,12 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
   }
 
 }
-class TableFormComboBoxFieldView extends TableFormFieldView {
+class TableFormDatePickerFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormComboBoxFieldView",
+      className: "TableFormDatePickerFieldView",
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
@@ -933,12 +933,12 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
   }
 
 }
-class TableFormDatePickerFieldView extends TableFormFieldView {
+class TableFormComboBoxFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormDatePickerFieldView",
+      className: "TableFormComboBoxFieldView",
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
