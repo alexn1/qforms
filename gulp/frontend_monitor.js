@@ -38,7 +38,7 @@ function frontend_monitor_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/monitor/**/*.less'))
         // .pipe(sourcemaps.init())
         .pipe(less())
-        // .pipe(order())
+        .pipe(order())
         .pipe(concat('monitor.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())

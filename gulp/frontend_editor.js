@@ -38,7 +38,7 @@ function frontend_editor_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.less'))
         // .pipe(sourcemaps.init())
         .pipe(less())
-        // .pipe(order())
+        .pipe(order())
         .pipe(concat('editor.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())

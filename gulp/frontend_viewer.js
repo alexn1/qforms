@@ -38,7 +38,7 @@ function frontend_viewer_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.less'))
         // .pipe(sourcemaps.init())
         .pipe(less())
-        // .pipe(order())
+        .pipe(order())
         .pipe(concat('viewer.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())

@@ -44,6 +44,22 @@ class ApplicationView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class FormView extends View {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onActionsClick", async li => {
+      // console.log('FormView.onActionsClick:', li);
+      const ctrl = this.props.ctrl;
+      const name = li.dataset.action;
+      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
+      if (!result) alert(`no handler for action '${name}'`);
+    });
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class PageView extends View {
   constructor(...args) {
     super(...args);
@@ -189,22 +205,6 @@ class PageView2 extends PageView {
   }
 
 }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class FormView extends View {
-  constructor(...args) {
-    super(...args);
-
-    _defineProperty(this, "onActionsClick", async li => {
-      // console.log('FormView.onActionsClick:', li);
-      const ctrl = this.props.ctrl;
-      const name = li.dataset.action;
-      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-      if (!result) alert(`no handler for action '${name}'`);
-    });
-  }
-
-}
 class MdiApplicationView extends ApplicationView {
   getTabs() {
     return this.props.ctrl.pages.map(pageCtrl => {
@@ -241,13 +241,6 @@ class MdiApplicationView extends ApplicationView {
   }
 
 }
-class RowFormFieldView extends ReactComponent {
-  getClassList() {
-    const ctrl = this.props.ctrl;
-    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
-  }
-
-}
 class SdiApplicationView extends ApplicationView {
   render() {
     console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
@@ -274,6 +267,13 @@ class TableFormFieldView extends ReactComponent {
 
   getSpanOffsetWidth() {
     return this.span.current.offsetWidth;
+  }
+
+}
+class RowFormFieldView extends ReactComponent {
+  getClassList() {
+    const ctrl = this.props.ctrl;
+    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
   }
 
 }
@@ -524,6 +524,74 @@ class TableFormView extends FormView {
   }
 
 }
+class TableFormCheckBoxFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "TableFormCheckBoxFieldView",
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement(CheckBox, {
+      checked: ctrl.getValueForView(row),
+      readOnly: true // disabled={true}
+
+    }));
+  }
+
+}
+class TableFormComboBoxFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "TableFormComboBoxFieldView",
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForView(row)));
+  }
+
+}
+class TableFormDatePickerFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "TableFormDatePickerFieldView",
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForView(row)));
+  }
+
+}
+class TableFormLinkFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "TableFormLinkFieldView",
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "#",
+      onClick: ctrl.onClick
+    }, ctrl.getValueForView(row)));
+  }
+
+}
+class TableFormTextBoxFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "TableFormTextBoxFieldView",
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForView(row)));
+  }
+
+}
 class RowFormCheckBoxFieldView extends RowFormFieldView {
   render() {
     // console.log('RowFormCheckBoxFieldView.render');
@@ -729,18 +797,6 @@ class RowFormFileFieldView extends RowFormFieldView {
   }
 
 }
-class RowFormImageFieldView extends RowFormFieldView {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
-    }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForView()
-    }));
-  }
-
-}
 class RowFormLinkFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -750,6 +806,18 @@ class RowFormLinkFieldView extends RowFormFieldView {
       href: "#",
       onClick: ctrl.onClick
     }, ctrl.getValueForView()));
+  }
+
+}
+class RowFormImageFieldView extends RowFormFieldView {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: ctrl.renderViewStyle(ctrl.getRow())
+    }, /*#__PURE__*/React.createElement(Image, {
+      src: ctrl.getValueForView()
+    }));
   }
 
 }
@@ -902,74 +970,6 @@ class RowFormTimeFieldView extends RowFormFieldView {
       strokeLinecap: "round",
       strokeMiterlimit: "10"
     }))));
-  }
-
-}
-class TableFormCheckBoxFieldView extends TableFormFieldView {
-  render() {
-    const row = this.props.row;
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormCheckBoxFieldView",
-      style: ctrl.renderViewStyle(row)
-    }, /*#__PURE__*/React.createElement(CheckBox, {
-      checked: ctrl.getValueForView(row),
-      readOnly: true // disabled={true}
-
-    }));
-  }
-
-}
-class TableFormDatePickerFieldView extends TableFormFieldView {
-  render() {
-    const row = this.props.row;
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormDatePickerFieldView",
-      style: ctrl.renderViewStyle(row)
-    }, /*#__PURE__*/React.createElement("span", {
-      ref: this.span
-    }, ctrl.getValueForView(row)));
-  }
-
-}
-class TableFormComboBoxFieldView extends TableFormFieldView {
-  render() {
-    const row = this.props.row;
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormComboBoxFieldView",
-      style: ctrl.renderViewStyle(row)
-    }, /*#__PURE__*/React.createElement("span", {
-      ref: this.span
-    }, ctrl.getValueForView(row)));
-  }
-
-}
-class TableFormLinkFieldView extends TableFormFieldView {
-  render() {
-    const row = this.props.row;
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormLinkFieldView",
-      style: ctrl.renderViewStyle(row)
-    }, /*#__PURE__*/React.createElement("a", {
-      href: "#",
-      onClick: ctrl.onClick
-    }, ctrl.getValueForView(row)));
-  }
-
-}
-class TableFormTextBoxFieldView extends TableFormFieldView {
-  render() {
-    const row = this.props.row;
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormTextBoxFieldView",
-      style: ctrl.renderViewStyle(row)
-    }, /*#__PURE__*/React.createElement("span", {
-      ref: this.span
-    }, ctrl.getValueForView(row)));
   }
 
 }

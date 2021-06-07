@@ -680,20 +680,6 @@ class Application extends Model {
     }
 }
 
-class Column  extends Model {
-    init() {
-        // console.log('Column.init', this.getFullName());
-    }
-
-    getType() {
-        if (!this.data.type) throw new Error(`column ${this.getFullName()}: no type`);
-        return this.data.type;
-    }
-    getDbType() {
-        return this.data.dbType;
-    }
-}
-
 class DataSource extends Model {
 
     constructor(data, parent) {
@@ -939,6 +925,20 @@ class DataSource extends Model {
         return this.news.length > 0;
     }
 
+}
+
+class Column  extends Model {
+    init() {
+        // console.log('Column.init', this.getFullName());
+    }
+
+    getType() {
+        if (!this.data.type) throw new Error(`column ${this.getFullName()}: no type`);
+        return this.data.type;
+    }
+    getDbType() {
+        return this.data.dbType;
+    }
 }
 
 class Database extends Model {
@@ -2563,6 +2563,9 @@ class ImageField extends Field {
 class LabelField extends Field {
 }
 
+class LinkField extends Field {
+}
+
 class TextAreaField extends Field {
     getRows() {
         return this.data.rows;
@@ -2570,9 +2573,6 @@ class TextAreaField extends Field {
     getCols() {
         return this.data.cols;
     }
-}
-
-class LinkField extends Field {
 }
 
 class TextBoxField extends Field {}

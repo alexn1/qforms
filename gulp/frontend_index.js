@@ -38,7 +38,7 @@ function frontend_index_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/index/**/*.less'))
         // .pipe(sourcemaps.init())
         .pipe(less())
-        // .pipe(order())
+        .pipe(order())
         .pipe(concat('app.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
