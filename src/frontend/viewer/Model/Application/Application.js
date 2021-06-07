@@ -56,6 +56,9 @@ class Application extends Model {
     getDomain() {
         return this.data.domain;
     }
+    getVirtualPath() {
+        return this.data.virtualPath;
+    }
     async rpc(name, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
