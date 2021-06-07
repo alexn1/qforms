@@ -88,6 +88,48 @@ class Box extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class Button extends ReactComponent {
+  constructor(props) {
+    // console.log('Button.constructor', props);
+    super(props);
+
+    _defineProperty(this, "onClick", e => {
+      // console.log('Button.onClick', e);
+      if (this.props.onClick) this.props.onClick(e);
+    });
+
+    this.state = {
+      disabled: false
+    };
+  }
+
+  isDisabled() {
+    if (this.props.enabled !== undefined) return !this.props.enabled;
+    return this.state.disabled;
+  }
+
+  isVisible() {
+    return this.props.visible === undefined ? true : this.props.visible;
+  }
+
+  render() {
+    // console.log('Button.render', this.props.title, this.props);
+    return /*#__PURE__*/React.createElement("button", {
+      className: this.getClassName(),
+      name: this.props.name,
+      id: this.props.id,
+      disabled: this.isDisabled(),
+      onClick: this.onClick,
+      style: {
+        display: !this.isVisible() ? 'none' : null,
+        width: this.props.width
+      }
+    }, this.props.title || this.props.children);
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class CheckBox extends ReactComponent {
   constructor(props) {
     super(props);
@@ -154,48 +196,6 @@ class CheckBox extends ReactComponent {
       disabled: this.props.disabled,
       onChange: this.onChange
     });
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class Button extends ReactComponent {
-  constructor(props) {
-    // console.log('Button.constructor', props);
-    super(props);
-
-    _defineProperty(this, "onClick", e => {
-      // console.log('Button.onClick', e);
-      if (this.props.onClick) this.props.onClick(e);
-    });
-
-    this.state = {
-      disabled: false
-    };
-  }
-
-  isDisabled() {
-    if (this.props.enabled !== undefined) return !this.props.enabled;
-    return this.state.disabled;
-  }
-
-  isVisible() {
-    return this.props.visible === undefined ? true : this.props.visible;
-  }
-
-  render() {
-    // console.log('Button.render', this.props.title, this.props);
-    return /*#__PURE__*/React.createElement("button", {
-      className: this.getClassName(),
-      name: this.props.name,
-      id: this.props.id,
-      disabled: this.isDisabled(),
-      onClick: this.onClick,
-      style: {
-        display: !this.isVisible() ? 'none' : null,
-        width: this.props.width
-      }
-    }, this.props.title || this.props.children);
   }
 
 }
@@ -463,34 +463,6 @@ class DatePicker extends ReactComponent {
         "data-date": dataDate
       }, text);
     })))));
-  }
-
-}
-class DropDownIcon extends ReactComponent {
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: {
-        width: this.props.size,
-        height: this.props.size
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("circle", {
-      cx: "5",
-      cy: "5",
-      r: "5",
-      style: {
-        fill: 'gray'
-      }
-    }), /*#__PURE__*/React.createElement("polyline", {
-      points: "2,4 5,7 8,4",
-      fill: "none",
-      stroke: "white",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })));
   }
 
 }
@@ -1628,6 +1600,34 @@ class Tooltip extends ReactComponent {
     }, this.props.type !== 'alert' && /*#__PURE__*/React.createElement("div", null, "tooltip"), /*#__PURE__*/React.createElement("span", {
       className: this.props.position
     }, this.props.tip || 'tip'));
+  }
+
+}
+class DropDownIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: {
+        width: this.props.size,
+        height: this.props.size
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("circle", {
+      cx: "5",
+      cy: "5",
+      r: "5",
+      style: {
+        fill: 'gray'
+      }
+    }), /*#__PURE__*/React.createElement("polyline", {
+      points: "2,4 5,7 8,4",
+      fill: "none",
+      stroke: "white",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    })));
   }
 
 }

@@ -7,6 +7,7 @@ const less      = require('gulp-less');
 const babel      = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
+const order = require('gulp-order');
 
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
@@ -14,6 +15,7 @@ const SRC_PATH   = "./src";
 function frontend_common_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.js'))
         // .pipe(sourcemaps.init())
+        .pipe(order())
         .pipe(concat('common.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())

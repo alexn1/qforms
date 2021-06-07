@@ -178,53 +178,6 @@ img {
   grid-gap: 5px;
 }
 
-.TableFormCheckBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-}
-.TableFormCheckBoxFieldView > span {
-  margin: 3px 3px 3px 4px;
-}
-
-.TableFormComboBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.TableFormDatePickerFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.TableFormLinkFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-.TableFormLinkFieldView > a {
-  color: blue;
-}
-
-.TableFormTextBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 .standard .RowFormCheckBoxFieldView > input {
   margin: 0;
 }
@@ -358,11 +311,6 @@ img {
   width: 100%;
 }
 
-.standard .RowFormLinkFieldView > a {
-  padding: 0 5px 0 5px;
-  color: blue;
-}
-
 .RowFormTextAreaFieldView > textarea {
   width: 100%;
   display: block;
@@ -456,4 +404,56 @@ img {
 .standard .RowFormTimeFieldView > input[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+
+.standard .RowFormLinkFieldView > a {
+  padding: 0 5px 0 5px;
+  color: blue;
+}
+
+.TableFormCheckBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+.TableFormCheckBoxFieldView > span {
+  margin: 3px 3px 3px 4px;
+}
+
+.TableFormComboBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.TableFormDatePickerFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.TableFormLinkFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.TableFormLinkFieldView > a {
+  color: blue;
+}
+
+.TableFormTextBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
 }

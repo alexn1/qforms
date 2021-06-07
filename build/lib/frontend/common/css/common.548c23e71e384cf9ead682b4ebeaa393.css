@@ -138,14 +138,6 @@ table.DatePicker td.selected {
   z-index: 2;
 }
 
-.GridCell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 .Grid {
   font-family: arial, sans-serif;
   font-size: 12px;
@@ -264,6 +256,14 @@ table.DatePicker td.selected {
   background-color: lightgreen;
 }
 
+
+.GridCell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 .Image {
   cursor: pointer;

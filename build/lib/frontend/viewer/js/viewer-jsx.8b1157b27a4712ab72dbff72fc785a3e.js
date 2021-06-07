@@ -44,22 +44,6 @@ class ApplicationView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class FormView extends View {
-  constructor(...args) {
-    super(...args);
-
-    _defineProperty(this, "onActionsClick", async li => {
-      // console.log('FormView.onActionsClick:', li);
-      const ctrl = this.props.ctrl;
-      const name = li.dataset.action;
-      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-      if (!result) alert(`no handler for action '${name}'`);
-    });
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class PageView extends View {
   constructor(...args) {
     super(...args);
@@ -202,6 +186,22 @@ class PageView2 extends PageView {
       tabs: this.getAllTabs(),
       classList: ['Tab-blue', 'full']
     })))));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class FormView extends View {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onActionsClick", async li => {
+      // console.log('FormView.onActionsClick:', li);
+      const ctrl = this.props.ctrl;
+      const name = li.dataset.action;
+      const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
+      if (!result) alert(`no handler for action '${name}'`);
+    });
   }
 
 }
