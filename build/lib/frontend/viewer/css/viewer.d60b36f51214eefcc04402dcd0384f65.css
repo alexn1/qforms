@@ -1,0 +1,461 @@
+/*.flex-cols {
+    display: flex;
+    flex-direction: row;
+  }*/
+
+.flex-max {
+  flex: 1 1 auto;
+}
+
+/*.flex-min {
+    flex-shrink: 0;
+  }*/
+
+.flex-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__content {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+input,
+select,
+img {
+  display: block;
+}
+*:focus {
+  outline: 0 !important;
+}
+
+.login {
+  height: 100%;
+}
+.login__body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.login__form {
+  background-color: palegoldenrod;
+  padding: 10px;
+  border: solid 1px gray;
+}
+
+.paging {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paging__countBlock {
+  font-size: 14px;
+}
+.paging__gotoBlock {
+  display: flex;
+}
+.paging__gotoBlock select {
+  height: 26px;
+  margin: 0 5px;
+  border: none;
+}
+
+.PageView {
+  background-color: white;
+}
+.PageView > .frame__content {
+  padding: 10px;
+  grid-gap: 10px;
+}
+.PageView__caption {
+  margin: 0;
+  color: #333;
+}
+.PageView__caption > span.star {
+  color: red;
+}
+.PageView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+.PageView__table-forms {
+  min-height: 300px;
+}
+.standard .Modal .PageView__caption {
+  background-color: #398bce;
+  color: white;
+  padding: 5px;
+}
+
+.RowFormView {
+  grid-gap: 5px;
+}
+.RowFormView__form-grid {
+  display: grid;
+  grid-template-columns: 150px 300px 24px 150px 300px 24px;
+}
+.standard .RowFormView {
+  background-color: #eeeeee;
+  padding: 5px;
+  font-size: small;
+}
+.standard .RowFormView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+.standard .RowFormView__form-grid {
+  grid-row-gap: 5px;
+}
+.standard .RowFormView__form-grid > div.label {
+  margin-left: 5px;
+  border-bottom: 1px dotted gray;
+}
+.standard .RowFormView__form-grid > div.field {
+  border-bottom: 1px dotted gray;
+}
+.standard .RowFormView__form-grid > div.tooltip {
+  margin-left: 5px;
+}
+
+.TableFormView {
+  grid-gap: 5px;
+  padding: 5px 0;
+}
+.TableFormView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+
+.MdiApplicationView {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+.SdiApplicationView {
+  height: 100%;
+}
+.SdiApplicationView.wait,
+.SdiApplicationView.wait * {
+  cursor: wait !important;
+}
+.SdiApplicationView__body {
+  margin: 0;
+  height: 100%;
+}
+.SdiApplicationView__body > div {
+  height: 100%;
+}
+.SdiApplicationView__container {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+.SdiApplicationView__main {
+  background-color: gray;
+}
+
+.standard .RowFormCheckBoxFieldView > input {
+  margin: 0;
+}
+
+.RowFormComboBoxFieldView > select {
+  width: 100%;
+}
+.standard .RowFormComboBoxFieldView > select {
+  height: 20px;
+  border-width: 0;
+  padding: 0;
+  background-color: white;
+  cursor: pointer;
+}
+.standard .RowFormComboBoxFieldView > select[disabled] {
+  background-color: lightgoldenrodyellow;
+  cursor: default;
+}
+.standard .RowFormComboBoxFieldView.changed > select {
+  background-color: #eefdea;
+}
+.standard .RowFormComboBoxFieldView.error > select {
+  background-color: #f2dede;
+}
+
+.RowFormDatePickerFieldView > .DropdownDatePicker {
+  width: 100%;
+}
+.RowFormDatePickerFieldView > .DropdownDatePicker:not(.readOnly) > input {
+  cursor: pointer;
+}
+.standard .RowFormDatePickerFieldView > .DropdownDatePicker > input {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormDatePickerFieldView > .DropdownDatePicker.readOnly > input {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+.standard .RowFormDatePickerFieldView.changed > div > input {
+  background-color: #eefdea;
+}
+.standard .RowFormDatePickerFieldView.error > div > input {
+  background-color: #f2dede;
+}
+
+.RowFormDateTimeFieldView.datetime {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.RowFormDateTimeFieldView.date > .time {
+  display: none;
+}
+.RowFormDateTimeFieldView > .DropdownDatePicker:not(.readOnly) > input {
+  cursor: pointer;
+}
+.RowFormDateTimeFieldView > .time {
+  position: relative;
+}
+.RowFormDateTimeFieldView > .time > input.TimeBox {
+  width: 100%;
+}
+.RowFormDateTimeFieldView > .time > .close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 4px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormDateTimeFieldView > .time > .close:hover svg line {
+  stroke: black;
+}
+.RowFormDateTimeFieldView > .time > .close.visible {
+  visibility: visible;
+}
+.standard .RowFormDateTimeFieldView > .DropdownDatePicker > input {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormDateTimeFieldView > .DropdownDatePicker.readOnly > input {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+.standard .RowFormDateTimeFieldView > .time {
+  border-left: solid 1px #ddd;
+}
+.standard .RowFormDateTimeFieldView > .time > input.TimeBox {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormDateTimeFieldView > .time > input.TimeBox:read-only {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+.standard .RowFormDateTimeFieldView.changed > div > input {
+  background-color: #eefdea;
+}
+.standard .RowFormDateTimeFieldView.error > div > input {
+  background-color: #f2dede;
+}
+
+.standard .RowFormFileFieldView img {
+  width: 300px;
+  display: block;
+}
+.standard .RowFormFileFieldView > div {
+  position: relative;
+  font-size: 10px;
+}
+.standard .RowFormFileFieldView > div > .size {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #eee;
+}
+.standard .RowFormFileFieldView > div > .length {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #eee;
+}
+
+.RowFormImageFieldView img {
+  width: 100%;
+}
+
+.standard .RowFormLinkFieldView > a {
+  padding: 0 5px 0 5px;
+  color: blue;
+}
+
+.RowFormTextAreaFieldView > textarea {
+  width: 100%;
+  display: block;
+}
+.standard .RowFormTextAreaFieldView > textarea {
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormTextAreaFieldView.changed > textarea {
+  background-color: #eefdea;
+}
+.standard .RowFormTextAreaFieldView.error > textarea {
+  background-color: #f2dede;
+}
+.standard .RowFormTextAreaFieldView > textarea[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+
+.RowFormTextBoxFieldView {
+  position: relative;
+}
+.RowFormTextBoxFieldView > input {
+  width: 100%;
+}
+.RowFormTextBoxFieldView > .close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 4px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormTextBoxFieldView > .close:hover svg line {
+  stroke: black;
+}
+.RowFormTextBoxFieldView > .close.visible {
+  visibility: visible;
+}
+.standard .RowFormTextBoxFieldView > input {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormTextBoxFieldView.changed > input {
+  background-color: #eefdea;
+}
+.standard .RowFormTextBoxFieldView.error > input {
+  background-color: #f2dede;
+}
+.standard .RowFormTextBoxFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+
+.RowFormTimeFieldView {
+  position: relative;
+}
+.RowFormTimeFieldView > input {
+  width: 100%;
+}
+.RowFormTimeFieldView > .close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 4px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormTimeFieldView > .close:hover svg line {
+  stroke: black;
+}
+.RowFormTimeFieldView > .close.visible {
+  visibility: visible;
+}
+.standard .RowFormTimeFieldView > input {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.standard .RowFormTimeFieldView.changed > input {
+  background-color: #eefdea;
+}
+.standard .RowFormTimeFieldView.error > input {
+  background-color: #f2dede;
+}
+.standard .RowFormTimeFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+
+.TableFormCheckBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+.TableFormCheckBoxFieldView > span {
+  margin: 3px 3px 3px 4px;
+}
+
+.TableFormComboBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.TableFormDatePickerFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.TableFormLinkFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.TableFormLinkFieldView > a {
+  color: blue;
+}
+
+.TableFormTextBoxFieldView {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*# sourceMappingURL=viewer.d60b36f51214eefcc04402dcd0384f65.css.map */

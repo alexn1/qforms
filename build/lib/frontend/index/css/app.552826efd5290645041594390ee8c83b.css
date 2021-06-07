@@ -1,0 +1,11 @@
+.IndexView {
+  font-size: small;
+}
+.IndexView option {
+  padding: 5px;
+}
+.IndexView *:focus {
+  outline: none !important;
+}
+
+/*# sourceMappingURL=app.552826efd5290645041594390ee8c83b.css.map */
