@@ -4,6 +4,8 @@ class FormView extends View {
         const ctrl = this.props.ctrl;
         const name = li.dataset.action;
         const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-        if (!result) alert(`no handler for action '${name}'`);
+        if (!result) {
+            throw new Error(`no handler for action '${name}'`);
+        }
     }
 }

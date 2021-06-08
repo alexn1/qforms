@@ -53,7 +53,10 @@ class FormView extends View {
       const ctrl = this.props.ctrl;
       const name = li.dataset.action;
       const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-      if (!result) alert(`no handler for action '${name}'`);
+
+      if (!result) {
+        throw new Error(`no handler for action '${name}'`);
+      }
     });
   }
 
@@ -69,7 +72,10 @@ class PageView extends View {
       const ctrl = this.props.ctrl;
       const name = li.dataset.action;
       const result = await ctrl.onActionClick(name);
-      if (!result) alert(`no handler for action '${name}'`);
+
+      if (!result) {
+        throw new Error(`no handler for action '${name}'`);
+      }
     });
   }
 
@@ -658,18 +664,6 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
   }
 
 }
-class RowFormImageFieldView extends RowFormFieldView {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
-    }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForView()
-    }));
-  }
-
-}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormFileFieldView extends RowFormFieldView {
@@ -738,6 +732,18 @@ class RowFormFileFieldView extends RowFormFieldView {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('RowFormFileFieldView.componentDidUpdate', this.props.ctrl.model.getFullName(), snapshot);
     setTimeout(() => this.updateSize(), 0);
+  }
+
+}
+class RowFormImageFieldView extends RowFormFieldView {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: ctrl.renderViewStyle(ctrl.getRow())
+    }, /*#__PURE__*/React.createElement(Image, {
+      src: ctrl.getValueForView()
+    }));
   }
 
 }

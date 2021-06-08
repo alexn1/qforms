@@ -325,7 +325,9 @@ class ApplicationController extends Controller {
                 await this.openPage({name: name, modal: false});
             } else if (type === 'action') {
                 const result = await this.onActionClick(name);
-                if (!result) alert(`no handler for action '${name}'`);
+                if (!result) {
+                    throw new Error(`no handler for action '${name}'`);
+                }
             } else if (type === 'custom' && name === 'logout') {
                 await this.onLogout();
             } else {

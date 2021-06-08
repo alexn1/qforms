@@ -44,7 +44,9 @@ class PageView extends View {
         const ctrl = this.props.ctrl;
         const name = li.dataset.action;
         const result = await ctrl.onActionClick(name);
-        if (!result) alert(`no handler for action '${name}'`);
+        if (!result) {
+            throw new Error(`no handler for action '${name}'`);
+        }
     }
     renderToolbar() {
         const ctrl = this.props.ctrl;
