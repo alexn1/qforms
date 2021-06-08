@@ -3,7 +3,7 @@ const path       = require('path');
 const slash      = require('slash');
 const fs         = require('fs');
 // const fsPromises = require('fs').promises;       // node v12
-const _          = require('underscore');
+// const _          = require('underscore');
 
 // const BaseModel = require('./BaseModel');
 
@@ -189,7 +189,7 @@ class Helper {
         });
     }
 
-    static replaceKey(obj, key1, key2) {
+    /*static replaceKey(obj, key1, key2) {
         const keys   = Object.keys(obj);
         const values = _.filter(obj, () => {return true;});
         const index  = keys.indexOf(key1);
@@ -198,7 +198,7 @@ class Helper {
             obj = _.object(keys, values);
         }
         return obj;
-    }
+    }*/
 
     static readTextFile(path): Promise<string> {
         // console.log('Helper.readTextFile', path);

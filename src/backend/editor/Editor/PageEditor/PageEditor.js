@@ -1,5 +1,4 @@
 const path = require('path');
-// const _    = require('underscore');
 
 const Editor = require('../Editor');
 const backend = require('../../../../backend');

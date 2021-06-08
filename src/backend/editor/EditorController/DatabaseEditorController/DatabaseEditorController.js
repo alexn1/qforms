@@ -1,7 +1,3 @@
-// const util    = require('util');
-// const path    = require('path');
-// const _       = require('underscore');
-
 const EditorController = require('../EditorController');
 
 class DatabaseEditorController extends EditorController {

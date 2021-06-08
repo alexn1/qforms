@@ -1,6 +1,3 @@
-const path = require('path');
-const fs   = require('fs');
-const _    = require('underscore');
 const EditorController = require('../EditorController');
 
 class KeyColumnEditorController extends EditorController {
