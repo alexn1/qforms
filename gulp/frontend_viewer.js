@@ -9,8 +9,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
 const order = require('gulp-order');
 
-const SRC_PATH   = "./src";
 const BUILD_PATH = './build';
+const SRC_PATH   = "./src";
 
 function frontend_viewer_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.js'))
