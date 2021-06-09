@@ -344,7 +344,7 @@ class FieldController extends Controller {
 
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
-        const customClassName = `${model.getPage().getName()}${model.getForm().getName()}${model.getName()}Controller`;
+        const customClassName = `${model.getPage().getName()}${model.getForm().getName()}${model.getName()}FieldController`;
         if (eval(`typeof ${customClassName}`) === 'function') {
             const CustomClass = eval(customClassName);
             // console.log('CustomClass:', CustomClass);
