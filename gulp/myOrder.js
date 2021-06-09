@@ -1,4 +1,5 @@
 const through = require('through');
+const path = require('path');
 
 class Folder {
     constructor(name) {
@@ -9,8 +10,8 @@ class Folder {
     addFolder(folder) {
         return this.folders[folder.name] = folder;
     }
-    addFile(name, file) {
-        this.files[name] = file;
+    addFile(file) {
+        this.files[path.basename(file.path)] = file;
     }
     getFolders() {
         return Object.keys(this.folders).sort().map(name => this.folders[name]);
@@ -35,7 +36,7 @@ function placeFile(rootFolder, file) {
             folder = folder.addFolder(new Folder(name));
         }
         if (i === items.length-2) {
-            folder.addFile(items[items.length-1], file);
+            folder.addFile(file);
         }
     }
 }
