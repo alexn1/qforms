@@ -103,6 +103,107 @@ class ModalView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class ChangeClassView extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onCreate", async e => {
+      // console.log('NewDataSourceView.onCreate');
+      await this.props.ctrl.onCreate({
+        class: this.class.getValue()
+      });
+    });
+
+    this.class = null;
+  }
+
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "modal-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-header"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "close",
+      onClick: ctrl.onClose
+    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
+      className: "modal-title"
+    }, "Change Field Class")), /*#__PURE__*/React.createElement("div", {
+      className: "modal-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "class"
+    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
+      id: "class",
+      classList: ['form-control'],
+      items: [{
+        value: 'TextBoxField',
+        title: 'TextBoxField'
+      }, {
+        value: 'ComboBoxField',
+        title: 'ComboBoxField'
+      }, {
+        value: 'TextAreaField',
+        title: 'TextAreaField'
+      }, {
+        value: 'LinkField',
+        title: 'LinkField'
+      }, {
+        value: 'ImageField',
+        title: 'ImageField'
+      }, {
+        value: 'LabelField',
+        title: 'LabelField'
+      }, {
+        value: 'DatePickerField',
+        title: 'DatePickerField'
+      }, {
+        value: 'TimeField',
+        title: 'TimeField'
+      }, {
+        value: 'DateTimeField',
+        title: 'DateTimeField'
+      }, {
+        value: 'CheckBoxField',
+        title: 'CheckBoxField'
+      }, {
+        value: 'FileField',
+        title: 'FileField'
+      }],
+      value: ctrl.options.fieldCtrl.model.getClassName(),
+      onCreate: c => this.class = c
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "modal-footer"
+    }, /*#__PURE__*/React.createElement("button", {
+      name: "change",
+      type: "button",
+      className: "btn btn-primary",
+      onClick: this.onCreate
+    }, "Change"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "btn btn-default",
+      onClick: ctrl.onClose
+    }, "Close")));
+  }
+
+}
+class DocumentView extends ReactComponent {
+  static createCM(textarea, value) {
+    const cm = CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      styleActiveLine: true,
+      matchBrackets: true
+    });
+    cm.setOption('theme', 'cobalt');
+    cm.setValue(value);
+    return cm;
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class PropertyGrid extends ReactComponent {
   constructor(props) {
     super(props);
@@ -343,94 +444,6 @@ class TreeWidget extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class ChangeClassView extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onCreate", async e => {
-      // console.log('NewDataSourceView.onCreate');
-      await this.props.ctrl.onCreate({
-        class: this.class.getValue()
-      });
-    });
-
-    this.class = null;
-  }
-
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "modal-content"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "modal-header"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "close",
-      onClick: ctrl.onClose
-    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
-      className: "modal-title"
-    }, "Change Field Class")), /*#__PURE__*/React.createElement("div", {
-      className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "class"
-    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
-      id: "class",
-      classList: ['form-control'],
-      items: [{
-        value: 'TextBoxField',
-        title: 'TextBoxField'
-      }, {
-        value: 'ComboBoxField',
-        title: 'ComboBoxField'
-      }, {
-        value: 'TextAreaField',
-        title: 'TextAreaField'
-      }, {
-        value: 'LinkField',
-        title: 'LinkField'
-      }, {
-        value: 'ImageField',
-        title: 'ImageField'
-      }, {
-        value: 'LabelField',
-        title: 'LabelField'
-      }, {
-        value: 'DatePickerField',
-        title: 'DatePickerField'
-      }, {
-        value: 'TimeField',
-        title: 'TimeField'
-      }, {
-        value: 'DateTimeField',
-        title: 'DateTimeField'
-      }, {
-        value: 'CheckBoxField',
-        title: 'CheckBoxField'
-      }, {
-        value: 'FileField',
-        title: 'FileField'
-      }],
-      value: ctrl.options.fieldCtrl.model.getClassName(),
-      onCreate: c => this.class = c
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "modal-footer"
-    }, /*#__PURE__*/React.createElement("button", {
-      name: "change",
-      type: "button",
-      className: "btn btn-primary",
-      onClick: this.onCreate
-    }, "Change"), /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "btn btn-default",
-      onClick: ctrl.onClose
-    }, "Close")));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class NewActionView extends ReactComponent {
   constructor(props) {
     super(props);
@@ -549,76 +562,6 @@ class NewColumnView extends ReactComponent {
 }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class NewDataSourceView extends ReactComponent {
-  constructor(props) {
-    super(props);
-
-    _defineProperty(this, "onCreate", async e => {
-      // console.log('NewDataSourceView.onCreate');
-      await this.props.ctrl.onCreate({
-        name: this.name.getValue(),
-        class: this.class.getValue()
-      });
-    });
-
-    this.name = null;
-    this.class = null;
-  }
-
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "NewDataSourceView modal-content"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "modal-header"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "close",
-      onClick: ctrl.onClose
-    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
-      className: "modal-title"
-    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
-      className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "name"
-    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
-      id: 'name',
-      classList: ['form-control'],
-      onCreate: c => this.name = c,
-      autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "class"
-    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
-      id: "class",
-      classList: ['form-control'],
-      items: [{
-        value: 'DataSource',
-        title: 'DataSource'
-      }, {
-        value: 'SqlDataSource',
-        title: 'SqlDataSource'
-      }],
-      onCreate: c => this.class = c,
-      value: 'SqlDataSource'
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "modal-footer"
-    }, /*#__PURE__*/React.createElement(Button, {
-      name: "create",
-      classList: ['btn', 'btn-primary'],
-      onClick: this.onCreate
-    }, "Create"), /*#__PURE__*/React.createElement(Button, {
-      classList: ['btn', 'btn-default'],
-      onClick: ctrl.onClose
-    }, "Close")));
-  }
-
-}
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class NewDatabaseView extends ReactComponent {
   constructor(props) {
     super(props);
@@ -723,6 +666,76 @@ class NewDatabaseView extends ReactComponent {
       value: '123qwe',
       onCreate: c => this.password = c,
       autocomplete: 'off'
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "modal-footer"
+    }, /*#__PURE__*/React.createElement(Button, {
+      name: "create",
+      classList: ['btn', 'btn-primary'],
+      onClick: this.onCreate
+    }, "Create"), /*#__PURE__*/React.createElement(Button, {
+      classList: ['btn', 'btn-default'],
+      onClick: ctrl.onClose
+    }, "Close")));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class NewDataSourceView extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onCreate", async e => {
+      // console.log('NewDataSourceView.onCreate');
+      await this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        class: this.class.getValue()
+      });
+    });
+
+    this.name = null;
+    this.class = null;
+  }
+
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "NewDataSourceView modal-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-header"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "close",
+      onClick: ctrl.onClose
+    }, /*#__PURE__*/React.createElement("span", null, "\xD7")), /*#__PURE__*/React.createElement("h4", {
+      className: "modal-title"
+    }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
+      className: "modal-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "name"
+    }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
+      id: 'name',
+      classList: ['form-control'],
+      onCreate: c => this.name = c,
+      autocomplete: 'off'
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "class"
+    }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
+      id: "class",
+      classList: ['form-control'],
+      items: [{
+        value: 'DataSource',
+        title: 'DataSource'
+      }, {
+        value: 'SqlDataSource',
+        title: 'SqlDataSource'
+      }],
+      onCreate: c => this.class = c,
+      value: 'SqlDataSource'
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement(Button, {
@@ -1315,16 +1328,65 @@ class NewTableView extends ReactComponent {
   }
 
 }
-class DocumentView extends ReactComponent {
-  static createCM(textarea, value) {
-    const cm = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      styleActiveLine: true,
-      matchBrackets: true
+class DatabaseView extends ReactComponent {
+  renderGrid() {
+    // console.log('DatabaseView.renderGrid');
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement(Grid, {
+      classList: ['flex-max'],
+      columns: [{
+        name: 'name',
+        title: 'name',
+        width: 100
+      }, {
+        name: 'type',
+        title: 'type',
+        width: 60
+      }, {
+        name: 'key',
+        title: 'key',
+        width: 60
+      }, {
+        name: 'auto',
+        title: 'auto',
+        width: 60
+      }, {
+        name: 'nullable',
+        title: 'nullable',
+        width: 60
+      }, {
+        name: 'dbType',
+        title: 'dbType',
+        width: 200
+      }, {
+        name: 'comment',
+        title: 'comment',
+        width: 100
+      }],
+      rows: ctrl.tableInfo,
+      getRowKey: row => row.name
     });
-    cm.setOption('theme', 'cobalt');
-    cm.setValue(value);
-    return cm;
+  }
+
+  render() {
+    // console.log('DatabaseView.render');
+    const ctrl = this.props.ctrl;
+    const document = this.props.document;
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'DatabaseView place'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'client place'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'frame'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'divTableInfo full flex-rows'
+    }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onCreateTableClick
+    }, "Create Table")))), /*#__PURE__*/React.createElement(TreeWidget, {
+      classList: ['sidebar'],
+      items: document.treeWidgetItems,
+      onItemSelect: ctrl.onTableSelect2
+    }));
   }
 
 }
@@ -1416,68 +1478,6 @@ class SqlDataSourceView extends DocumentView {
     }, /*#__PURE__*/React.createElement("textarea", {
       ref: this.countRef
     }))));
-  }
-
-}
-class DatabaseView extends ReactComponent {
-  renderGrid() {
-    // console.log('DatabaseView.renderGrid');
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement(Grid, {
-      classList: ['flex-max'],
-      columns: [{
-        name: 'name',
-        title: 'name',
-        width: 100
-      }, {
-        name: 'type',
-        title: 'type',
-        width: 60
-      }, {
-        name: 'key',
-        title: 'key',
-        width: 60
-      }, {
-        name: 'auto',
-        title: 'auto',
-        width: 60
-      }, {
-        name: 'nullable',
-        title: 'nullable',
-        width: 60
-      }, {
-        name: 'dbType',
-        title: 'dbType',
-        width: 200
-      }, {
-        name: 'comment',
-        title: 'comment',
-        width: 100
-      }],
-      rows: ctrl.tableInfo,
-      getRowKey: row => row.name
-    });
-  }
-
-  render() {
-    // console.log('DatabaseView.render');
-    const ctrl = this.props.ctrl;
-    const document = this.props.document;
-    return /*#__PURE__*/React.createElement("div", {
-      className: 'DatabaseView place'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'client place'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'frame'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'divTableInfo full flex-rows'
-    }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
-      onClick: ctrl.onCreateTableClick
-    }, "Create Table")))), /*#__PURE__*/React.createElement(TreeWidget, {
-      classList: ['sidebar'],
-      items: document.treeWidgetItems,
-      onItemSelect: ctrl.onTableSelect2
-    }));
   }
 
 }

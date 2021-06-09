@@ -72,9 +72,33 @@ function frontend_editor_js() {
 
 function frontend_editor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.jsx'))
+        .pipe(order([
+            'ActionList/ActionList.jsx',
+            'EditorFrontHostApp/EditorFrontHostAppView.jsx',
+            'ModalController/ModalView.jsx',
+            'ModalController/ChangeClassController/ChangeClassView.jsx',
+            'ModalController/NewActionController/NewActionController.jsx',
+            'ModalController/NewColumnController/NewColumnController.jsx',
+            'ModalController/NewDatabaseController/NewDatabaseController.jsx',
+            'ModalController/NewDataSourceController/NewDataSourceController.jsx',
+            'ModalController/NewFieldController/NewFieldController.jsx',
+            'ModalController/NewFormController/NewFormController.jsx',
+            'ModalController/NewFormFromTableController/NewFormFromTableController.jsx',
+            'ModalController/NewKeyColumnController/NewKeyColumnController.jsx',
+            'ModalController/NewPageController/NewPageController.jsx',
+            'ModalController/NewParamController/NewParamController.jsx',
+            'ModalController/NewTableController/NewTableController.jsx',
+            'ModelController/DocumentController/DocumentView.jsx',
+            'ModelController/DatabaseController/DatabaseView.jsx',
+            'ModelController/DataSourceController/SqlDataSourceView.jsx',
+            'ModelController/TableController/TableView.jsx',
+            'ModelController/VisualController/VisualView.jsx',
+            'PropertyGrid/PropertyGrid.jsx',
+            'TreeWidget/TreeItem.jsx',
+            'TreeWidget/TreeWidget.jsx',
+        ]))
         // .pipe(sourcemaps.init())
         .pipe(babel())
-        // .pipe(order())
         .pipe(concat('editor-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(sourcemaps.write('.'))
