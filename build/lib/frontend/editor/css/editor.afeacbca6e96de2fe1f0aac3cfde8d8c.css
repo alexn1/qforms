@@ -7,39 +7,6 @@ html.wait * {
   cursor: wait !important;
 }
 
-.EditorFrontHostAppView {
-  height: 100%;
-  font-family: sans-serif;
-  font-size: small;
-}
-.EditorFrontHostAppView #sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 350px;
-}
-.EditorFrontHostAppView #sidebar .TreeBar {
-  padding: 5px;
-  background-color: #f5f5f5;
-}
-.EditorFrontHostAppView #sidebar .TreeWidget {
-  height: 50%;
-}
-.EditorFrontHostAppView #sidebar .Tab {
-  height: 50%;
-}
-.EditorFrontHostAppView #client {
-  position: fixed;
-  top: 0;
-  left: 350px;
-  right: 0;
-  bottom: 0;
-  background-color: #d3d3d3;
-}
-.EditorFrontHostAppView #client .cm-container > div {
-  height: 100%;
-}
-
 *,
 *:before,
 *:after {
@@ -112,10 +79,55 @@ nav {
     }
 }*/
 
+.EditorFrontHostAppView {
+  height: 100%;
+  font-family: sans-serif;
+  font-size: small;
+}
+.EditorFrontHostAppView #sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 350px;
+}
+.EditorFrontHostAppView #sidebar .TreeBar {
+  padding: 5px;
+  background-color: #f5f5f5;
+}
+.EditorFrontHostAppView #sidebar .TreeWidget {
+  height: 50%;
+}
+.EditorFrontHostAppView #sidebar .Tab {
+  height: 50%;
+}
+.EditorFrontHostAppView #client {
+  position: fixed;
+  top: 0;
+  left: 350px;
+  right: 0;
+  bottom: 0;
+  background-color: #d3d3d3;
+}
+.EditorFrontHostAppView #client .cm-container > div {
+  height: 100%;
+}
+
 .modal-content {
   background-color: white;
   width: 300px;
   margin: auto;
+}
+
+.SqlDataSourceView .toolbar {
+  background-color: white;
+  padding: 5px;
+}
+.SqlDataSourceView .edit {
+  overflow: auto;
+  position: relative;
+}
+.SqlDataSourceView .edit > div {
+  position: absolute;
 }
 
 .DatabaseView {
@@ -136,18 +148,6 @@ nav {
   left: 200px;
   bottom: 0;
   right: 0;
-}
-
-.SqlDataSourceView .toolbar {
-  background-color: white;
-  padding: 5px;
-}
-.SqlDataSourceView .edit {
-  overflow: auto;
-  position: relative;
-}
-.SqlDataSourceView .edit > div {
-  position: absolute;
 }
 
 .TableView {

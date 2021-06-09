@@ -7,15 +7,17 @@ const less      = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
-const order = require('gulp-order');
+// const order = require('gulp-order');
+const myOrder = require('./myOrder');
 
 const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function frontend_editor_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.js'))
+        .pipe(myOrder())
         // .pipe(sourcemaps.init())
-        .pipe(order([
+        /*.pipe(order([
             'EditorFrontHostApp/EditorFrontHostApp.js',
             'FormWizard/FormWizard.js',
             'FormWizard/MySqlFormWizard/MySqlFormWizard.js',
@@ -62,7 +64,7 @@ function frontend_editor_js() {
             'ModelController/KeyColumnController/KeyColumnController.js',
             'ModelController/PageLinkController/PageLinkController.js',
             'ModelController/ParamController/ParamController.js',
-        ]))
+        ]))*/
         .pipe(concat('editor.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
@@ -72,7 +74,8 @@ function frontend_editor_js() {
 
 function frontend_editor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.jsx'))
-        .pipe(order([
+        .pipe(myOrder())
+        /*.pipe(order([
             'ActionList/ActionList.jsx',
             'EditorFrontHostApp/EditorFrontHostAppView.jsx',
             'ModalController/ModalView.jsx',
@@ -96,7 +99,7 @@ function frontend_editor_jsx() {
             'PropertyGrid/PropertyGrid.jsx',
             'TreeWidget/TreeItem.jsx',
             'TreeWidget/TreeWidget.jsx',
-        ]))
+        ]))*/
         // .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('editor-jsx.js'))
@@ -108,8 +111,8 @@ function frontend_editor_jsx() {
 function frontend_editor_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.less'))
         // .pipe(sourcemaps.init())
+        .pipe(myOrder())
         .pipe(less())
-        .pipe(order())
         .pipe(concat('editor.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())

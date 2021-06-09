@@ -346,17 +346,17 @@ class NewColumnController extends ModalController {
     }
 }
 
-class NewDatabaseController extends ModalController {
-    getViewClass() {
-        return NewDatabaseView;
-    }
-}
 class NewDataSourceController extends ModalController {
     getViewClass() {
         return NewDataSourceView;
     }
 }
 
+class NewDatabaseController extends ModalController {
+    getViewClass() {
+        return NewDatabaseView;
+    }
+}
 class NewFieldController extends ModalController {
     getViewClass() {
         return NewFieldView;
@@ -781,152 +781,6 @@ class Column extends Model {
 
 }
 
-class Database extends Model {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.params = [];
-        this.tables = [];
-    }
-
-    init() {
-
-        // params
-        for (const data of this.data.params) {
-            this.createParam(data);
-        }
-
-        // tables
-        for (const data of this.data.tables) {
-            this.createTable(data);
-        }
-    }
-
-    createParam(data) {
-        const param = new Param(data, this);
-        param.init();
-        this.params.push(param);
-        return param;
-    }
-
-    createTable(data) {
-        const table = new Table(data, this);
-        table.init();
-        this.tables.push(table);
-        return table;
-    }
-    removeParam(param) {
-        console.log('Database.removeParam', param.getName());
-        const i = this.params.indexOf(param);
-        if (i === -1) throw new Error('no such param');
-        this.params.splice(i, 1);
-    }
-    removeTable(table) {
-        console.log('Database.removeTable', table.getName());
-        const i = this.tables.indexOf(table);
-        if (i === -1) throw new Error('no such table');
-        this.tables.splice(i, 1);
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDatabase(this);
-    }
-
-    async newParam(name) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                name    : name
-            })
-        });
-        return this.createParam(data);
-    }
-
-    async newTable(params) {
-        if (!params.name) throw new Error('newTable: no name');
-        const data =  await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                name    : params.name,
-                columns : params.columns
-            })
-        });
-        return this.createTable(data);
-    }
-
-    async getView(view) {
-        console.log('Database.getView', view);
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view    : view,
-                database: this.data !== undefined ? this.getName() : null
-            })
-        });
-    }
-
-    async getTableInfo(table) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getTableInfo',
-            params    : Helper.encodeObject({
-                database: this.data !== undefined ? this.getName() : null,
-                table   : table
-            })
-        });
-    }
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveUp',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveDown',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-
-}
-
 class DataSource extends Model {
 
     constructor(data, parent) {
@@ -1133,6 +987,152 @@ class DataSource extends Model {
         } else if (this.parent instanceof Application) {
             return this.getName();
         }
+    }
+
+}
+
+class Database extends Model {
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.params = [];
+        this.tables = [];
+    }
+
+    init() {
+
+        // params
+        for (const data of this.data.params) {
+            this.createParam(data);
+        }
+
+        // tables
+        for (const data of this.data.tables) {
+            this.createTable(data);
+        }
+    }
+
+    createParam(data) {
+        const param = new Param(data, this);
+        param.init();
+        this.params.push(param);
+        return param;
+    }
+
+    createTable(data) {
+        const table = new Table(data, this);
+        table.init();
+        this.tables.push(table);
+        return table;
+    }
+    removeParam(param) {
+        console.log('Database.removeParam', param.getName());
+        const i = this.params.indexOf(param);
+        if (i === -1) throw new Error('no such param');
+        this.params.splice(i, 1);
+    }
+    removeTable(table) {
+        console.log('Database.removeTable', table.getName());
+        const i = this.tables.indexOf(table);
+        if (i === -1) throw new Error('no such table');
+        this.tables.splice(i, 1);
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDatabase(this);
+    }
+
+    async newParam(name) {
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                name    : name
+            })
+        });
+        return this.createParam(data);
+    }
+
+    async newTable(params) {
+        if (!params.name) throw new Error('newTable: no name');
+        const data =  await FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                name    : params.name,
+                columns : params.columns
+            })
+        });
+        return this.createTable(data);
+    }
+
+    async getView(view) {
+        console.log('Database.getView', view);
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view    : view,
+                database: this.data !== undefined ? this.getName() : null
+            })
+        });
+    }
+
+    async getTableInfo(table) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'getTableInfo',
+            params    : Helper.encodeObject({
+                database: this.data !== undefined ? this.getName() : null,
+                table   : table
+            })
+        });
+    }
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveUp',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveDown',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
     }
 
 }
@@ -1983,6 +1983,115 @@ class DocumentController extends ModelController {
     }
 }
 
+class DataSourceController extends DocumentController {
+    constructor(model, parent) {
+        super(model, parent);
+        this.keyColumns = [];
+        this.items = [
+            {
+                getTitle: () => 'Key Columns',
+                items: this.keyColumns
+            }
+        ];
+    }
+    getTitle() {
+        return `${this.model.getClassName()}: ${this.model.getName()}`;
+    }
+    getStyle() {
+        return {
+            // fontWeight: 'bold',
+            color: 'brown'
+        };
+    }
+    init() {
+        this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
+    }
+    createKeyColumn(model) {
+        const keyColumn = new KeyColumnController(model, this);
+        keyColumn.init();
+        this.keyColumns.push(keyColumn);
+        return keyColumn;
+    }
+    removeKeyColumn(keyColumnController) {
+        console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
+        const i = this.keyColumns.indexOf(keyColumnController);
+        if (i === -1) throw new Error('no such keyColumnController');
+        this.keyColumns.splice(i, 1);
+    }
+    getActions() {
+        return [
+            {'action' : 'newItem', 'caption': 'New Key Column'},
+            {'action':  'moveUp', 'caption':   'Move Up'},
+            {'action':'moveDown', 'caption': 'Move Down'},
+            {'action' : 'delete', 'caption': 'Delete'}
+        ];
+    }
+
+    async doAction(name) {
+        switch (name) {
+            case 'newItem':
+                await this.actionNewKeyColumn();
+                break;
+            case 'delete':
+                await this.delete();
+                break;
+            case 'moveUp':
+                await this.model.moveUp();
+                this.parent.moveColItem('dataSources', this, -1);
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                break;
+            case 'moveDown':
+                await this.model.moveDown();
+                this.parent.moveColItem('dataSources', this, 1);
+                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                break;
+        }
+    }
+
+    async actionNewKeyColumn() {
+        await EditorFrontHostApp.editorApp.openModal(new NewKeyColumnController({onCreate: async values => {
+            const keyColumn = await this.model.newKeyColumn(values.name);
+            const keyColumnController = this.createKeyColumn(keyColumn);
+            await EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
+            keyColumnController.view.parent.open();
+            this.view.rerender();
+            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+        }}));
+    }
+
+    getPropList() {
+        const propList = {
+            list   : {},
+            options: {}
+        };
+
+        // list
+        for (const name in this.model.data['@attributes']) {
+            if (!['countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
+                propList.list[name] = this.model.data['@attributes'][name];
+            }
+        }
+
+        // options
+        // propList.options['insertNewKey'] = ['true', 'false'];
+        return propList;
+    }
+    getDocumentViewClass() {
+        if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
+        return super.getDocumentViewClass();
+    }
+    async onSaveClick(name, value) {
+        // console.log('DataSourceController.onSaveClick', name, value);
+        await this.model.setValue(name, value);
+    }
+    async delete() {
+        await this.model.delete();
+        this.parent.removeDataSource(this);
+        EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    }
+}
+
 class DatabaseController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
@@ -2141,115 +2250,6 @@ class DatabaseController extends DocumentController {
     }
     getDocumentViewClass() {
         return DatabaseView;
-    }
-}
-
-class DataSourceController extends DocumentController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.keyColumns = [];
-        this.items = [
-            {
-                getTitle: () => 'Key Columns',
-                items: this.keyColumns
-            }
-        ];
-    }
-    getTitle() {
-        return `${this.model.getClassName()}: ${this.model.getName()}`;
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'brown'
-        };
-    }
-    init() {
-        this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
-    }
-    createKeyColumn(model) {
-        const keyColumn = new KeyColumnController(model, this);
-        keyColumn.init();
-        this.keyColumns.push(keyColumn);
-        return keyColumn;
-    }
-    removeKeyColumn(keyColumnController) {
-        console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
-        const i = this.keyColumns.indexOf(keyColumnController);
-        if (i === -1) throw new Error('no such keyColumnController');
-        this.keyColumns.splice(i, 1);
-    }
-    getActions() {
-        return [
-            {'action' : 'newItem', 'caption': 'New Key Column'},
-            {'action':  'moveUp', 'caption':   'Move Up'},
-            {'action':'moveDown', 'caption': 'Move Down'},
-            {'action' : 'delete', 'caption': 'Delete'}
-        ];
-    }
-
-    async doAction(name) {
-        switch (name) {
-            case 'newItem':
-                await this.actionNewKeyColumn();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('dataSources', this, -1);
-                EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('dataSources', this, 1);
-                EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-        }
-    }
-
-    async actionNewKeyColumn() {
-        await EditorFrontHostApp.editorApp.openModal(new NewKeyColumnController({onCreate: async values => {
-            const keyColumn = await this.model.newKeyColumn(values.name);
-            const keyColumnController = this.createKeyColumn(keyColumn);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
-            keyColumnController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
-    }
-
-    getPropList() {
-        const propList = {
-            list   : {},
-            options: {}
-        };
-
-        // list
-        for (const name in this.model.data['@attributes']) {
-            if (!['countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
-                propList.list[name] = this.model.data['@attributes'][name];
-            }
-        }
-
-        // options
-        // propList.options['insertNewKey'] = ['true', 'false'];
-        return propList;
-    }
-    getDocumentViewClass() {
-        if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
-        return super.getDocumentViewClass();
-    }
-    async onSaveClick(name, value) {
-        // console.log('DataSourceController.onSaveClick', name, value);
-        await this.model.setValue(name, value);
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeDataSource(this);
-        EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
 
