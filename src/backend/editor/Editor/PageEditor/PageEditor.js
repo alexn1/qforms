@@ -111,6 +111,15 @@ class PageEditor extends Editor {
         return js;
     }
 
+    async createModelBackJs(params) {
+        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const js = await this.createFileByParams(filePath, templateFilePath, {
+            name: this.getName(),
+        });
+        return js;
+    }
+
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();

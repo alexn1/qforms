@@ -61,7 +61,7 @@ const EDITOR_ACTIONS = [
     'getView'          ,
     'saveView'         ,
     'saveController'   ,
-    // 'createView'       ,
+    'createView'       ,
     'createController' ,
     'get'              ,
     'getTableInfo'     ,

@@ -160,6 +160,17 @@ class Form extends Model {
         });
     }
 
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                page: this.page.getName(),
+                form: this.getName(),
+            })
+        });
+    }
+
     async createView() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',

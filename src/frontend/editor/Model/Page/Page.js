@@ -131,6 +131,16 @@ class Page extends Model {
         });
     }
 
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
     async newAction(params) {
         params['pageFileName'] = this.pageLink.getFileName();
         // params['form']         = this.getName();
