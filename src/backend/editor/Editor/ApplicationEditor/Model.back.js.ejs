@@ -1,6 +1,13 @@
 const { Application } = require('../../../qforms');
+const pkg = require('../../../package.json');
 
 class <%=name%>BackApplication extends Application {
+    getVersion() {
+        return pkg.version;
+    }
+    /*getViewClassName() {
+        return '<%=name%>View';
+    }*/
     /*async getChildModelCustomClass(colName, data) {
         if (colName === 'pages') {
             if (BaseModel.getName(data) === 'Page1') {
@@ -10,12 +17,6 @@ class <%=name%>BackApplication extends Application {
             }
         }
         return null;
-    }*/
-    /*getViewClassName() {
-        return '<%=name%>View';
-    }*/
-    /*getVersion() {
-        return pkg.version;
     }*/
 }
 module.exports = <%=name%>BackApplication;
