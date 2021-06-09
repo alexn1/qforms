@@ -1,10 +1,12 @@
 const path  = require('path');
+
 import Model from '../Model';
 import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
 import Field from '../Field/Field';
 import Page from '../Page/Page'
 import Application from '../Application/Application';
+import MyError from '../../../MyError';
 
 class Form extends Model {
     dataSources: DataSource[];
@@ -109,7 +111,11 @@ class Form extends Model {
     async rpc(name, context) {
         console.log('Form.rpc', name, context.params);
         if (this[name]) return await this[name](context);
-        throw new Error(`no rpc ${name}`);
+        throw new MyError({
+            message: `no rpc ${this.constructor.name}.${name}`,
+            data   : {method: `${this.constructor.name}.rpc`},
+            context,
+        });
     }
 
     getApp(): Application {

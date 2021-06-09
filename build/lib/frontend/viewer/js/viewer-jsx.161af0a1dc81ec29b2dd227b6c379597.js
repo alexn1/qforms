@@ -735,18 +735,6 @@ class RowFormFileFieldView extends RowFormFieldView {
   }
 
 }
-class RowFormImageFieldView extends RowFormFieldView {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
-    }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForView()
-    }));
-  }
-
-}
 class RowFormLinkFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -756,6 +744,18 @@ class RowFormLinkFieldView extends RowFormFieldView {
       href: "#",
       onClick: ctrl.onClick
     }, ctrl.getValueForView()));
+  }
+
+}
+class RowFormImageFieldView extends RowFormFieldView {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: ctrl.renderViewStyle(ctrl.getRow())
+    }, /*#__PURE__*/React.createElement(Image, {
+      src: ctrl.getValueForView()
+    }));
   }
 
 }

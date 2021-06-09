@@ -15,6 +15,7 @@ import Page from '../Page/Page';
 import PageLink from '../PageLink/PageLink';
 import Context   from '../../../Context';
 import JsonFile from '../../../JsonFile';
+import MyError from '../../../MyError';
 
 const text = require('../../text');
 const pkg  = require('../../../../../package.json');
@@ -275,7 +276,11 @@ class Application extends Model {
     async rpc(name: string, context: Context) {
         console.log('Application.rpc', name, context.params);
         if (this[name]) return await this[name](context);
-        throw new Error(`no rpc ${name}`);
+        throw new MyError({
+            message: `no rpc ${this.constructor.name}.${name}`,
+            data   : {method: `${this.constructor.name}.rpc`},
+            context,
+        });
     }
 
     async request(options) {
