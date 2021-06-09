@@ -1579,9 +1579,11 @@ class VisualView extends DocumentView {
       className: "full flex-rows"
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbar flex-min"
-    }, !ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onCreateModelBack
+    }, "Model.back.js"), !ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateCustomController
-    }, "Create Custom Controller"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
+    }, "Controller.front.js"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: this.onControllerSave
     }, "Save")), /*#__PURE__*/React.createElement("div", {
       className: "edit flex-max full"

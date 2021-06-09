@@ -707,6 +707,16 @@ class Application extends Model {
         });
     }
 
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                app: this.getName()
+            })
+        });
+    }
+
     async newDataSource(params) {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
@@ -2380,6 +2390,9 @@ class VisualController extends DocumentController {
         const data = await this.model.createController();
         this.data.js = data.js;
         this.document.view.rerender();
+    }
+    onCreateModelBack = async e => {
+        const data = await this.model.createModelBackJs();
     }
     createDataSource(model) {
         const dataSource = new DataSourceController(model, this);

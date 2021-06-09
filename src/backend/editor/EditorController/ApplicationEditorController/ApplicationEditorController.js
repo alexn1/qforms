@@ -43,6 +43,12 @@ class ApplicationEditorController extends VisualEditorController {
         return {js};
     }
 
+    async createModelBackJs(params) {
+        const appEditor = await this.createApplicationEditor();
+        const js = await appEditor.createModelBackJs(params);
+        return {js};
+    }
+
     async saveController(params) {
         const appEditor = await this.createApplicationEditor();
         await appEditor.saveCustomFile('js', params.text);

@@ -20,6 +20,9 @@ class VisualController extends DocumentController {
         this.data.js = data.js;
         this.document.view.rerender();
     }
+    onCreateModelBack = async e => {
+        const data = await this.model.createModelBackJs();
+    }
     createDataSource(model) {
         const dataSource = new DataSourceController(model, this);
         dataSource.init();

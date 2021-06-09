@@ -147,6 +147,16 @@ class Application extends Model {
         });
     }
 
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                app: this.getName()
+            })
+        });
+    }
+
     async newDataSource(params) {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',

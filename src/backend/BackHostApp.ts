@@ -55,22 +55,21 @@ const EDITOR_CONTROLLERS = [
 ];
 
 const EDITOR_ACTIONS = [
-    'save'            ,
-    '_new'            ,
-    'delete'          ,
-    'getView'         ,
-    'saveView'        ,
-    'saveController'  ,
-    // 'createView'      ,
-    'createController',
-    'get'             ,
-    'getTableInfo'    ,
-    'changeClass'     ,
-    'moveUp'          ,
-    'moveDown'        ,
+    'save'             ,
+    '_new'             ,
+    'delete'           ,
+    'getView'          ,
+    'saveView'         ,
+    'saveController'   ,
+    // 'createView'       ,
+    'createController' ,
+    'get'              ,
+    'getTableInfo'     ,
+    'changeClass'      ,
+    'moveUp'           ,
+    'moveDown'         ,
+    'createModelBackJs',
 ];
-
-
 
 class BackHostApp {
     params: any;
