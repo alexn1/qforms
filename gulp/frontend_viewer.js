@@ -9,13 +9,15 @@ const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
 const order = require('gulp-order');
 
+const myOrder = require('./myOrder');
+
 const BUILD_PATH = './build';
 const SRC_PATH   = "./src";
 
 function frontend_viewer_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.js'))
         // .pipe(sourcemaps.init())
-        // .pipe(order())
+        .pipe(myOrder())
         .pipe(concat('viewer.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())

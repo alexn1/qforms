@@ -664,6 +664,30 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
   }
 
 }
+class RowFormImageFieldView extends RowFormFieldView {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName(),
+      style: ctrl.renderViewStyle(ctrl.getRow())
+    }, /*#__PURE__*/React.createElement(Image, {
+      src: ctrl.getValueForView()
+    }));
+  }
+
+}
+class RowFormLinkFieldView extends RowFormFieldView {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "#",
+      onClick: ctrl.onClick
+    }, ctrl.getValueForView()));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormFileFieldView extends RowFormFieldView {
@@ -732,30 +756,6 @@ class RowFormFileFieldView extends RowFormFieldView {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('RowFormFileFieldView.componentDidUpdate', this.props.ctrl.model.getFullName(), snapshot);
     setTimeout(() => this.updateSize(), 0);
-  }
-
-}
-class RowFormImageFieldView extends RowFormFieldView {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
-    }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForView()
-    }));
-  }
-
-}
-class RowFormLinkFieldView extends RowFormFieldView {
-  render() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
-    }, /*#__PURE__*/React.createElement("a", {
-      href: "#",
-      onClick: ctrl.onClick
-    }, ctrl.getValueForView()));
   }
 
 }
