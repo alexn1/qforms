@@ -99,6 +99,7 @@ class BackHostApp {
     }
 
     run() {
+        console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.initProcess();
 
