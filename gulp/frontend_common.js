@@ -9,7 +9,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
 const order = require('gulp-order');
 
-const SRC_PATH   = "./src";
+const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function frontend_common_js() {

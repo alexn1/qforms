@@ -2,7 +2,7 @@ const path = require('path');
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 
-const SRC_PATH   = "./src";
+const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function backend_ts() {

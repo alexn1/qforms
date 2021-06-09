@@ -3,7 +3,7 @@ const gulp = require('gulp');
 
 const backend_ts = require('./backend_ts');
 
-const SRC_PATH   = "./src";
+const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function backend_ejs() {

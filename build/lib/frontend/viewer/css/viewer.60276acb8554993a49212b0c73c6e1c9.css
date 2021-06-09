@@ -1,3 +1,86 @@
+/*.flex-cols {
+    display: flex;
+    flex-direction: row;
+  }*/
+
+.flex-max {
+  flex: 1 1 auto;
+}
+
+/*.flex-min {
+    flex-shrink: 0;
+  }*/
+
+.flex-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__content {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+input,
+select,
+img {
+  display: block;
+}
+*:focus {
+  outline: 0 !important;
+}
+
+.login {
+  height: 100%;
+}
+.login__body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.login__form {
+  background-color: palegoldenrod;
+  padding: 10px;
+  border: solid 1px gray;
+}
+
+.paging {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paging__countBlock {
+  font-size: 14px;
+}
+.paging__gotoBlock {
+  display: flex;
+}
+.paging__gotoBlock select {
+  height: 26px;
+  margin: 0 5px;
+  border: none;
+}
+
 .MdiApplicationView {
   height: 100%;
   font-family: sans-serif;
@@ -373,87 +456,4 @@
   background-color: #398bce;
   color: white;
   padding: 5px;
-}
-
-/*.flex-cols {
-    display: flex;
-    flex-direction: row;
-  }*/
-
-.flex-max {
-  flex: 1 1 auto;
-}
-
-/*.flex-min {
-    flex-shrink: 0;
-  }*/
-
-.flex-rows {
-  display: flex;
-  flex-direction: column;
-}
-
-.frame {
-  position: relative;
-  overflow: hidden;
-}
-.frame__content {
-  position: absolute;
-  overflow: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.full {
-  height: 100%;
-  width: 100%;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-input,
-select,
-img {
-  display: block;
-}
-*:focus {
-  outline: 0 !important;
-}
-
-.login {
-  height: 100%;
-}
-.login__body {
-  margin: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.login__form {
-  background-color: palegoldenrod;
-  padding: 10px;
-  border: solid 1px gray;
-}
-
-.paging {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.paging__countBlock {
-  font-size: 14px;
-}
-.paging__gotoBlock {
-  display: flex;
-}
-.paging__gotoBlock select {
-  height: 26px;
-  margin: 0 5px;
-  border: none;
 }

@@ -9,7 +9,7 @@ const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
 const order = require('gulp-order');
 
-const SRC_PATH   = "./src";
+const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function frontend_editor_js() {

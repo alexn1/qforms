@@ -7,7 +7,7 @@ const frontend_editor = require("./frontend_editor");
 const frontend_index   = require("./frontend_index");
 const frontend_viewer = require("./frontend_viewer");
 
-const SRC_PATH   = "./src";
+const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function frontend_root() {
