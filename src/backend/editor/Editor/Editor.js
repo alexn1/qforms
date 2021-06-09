@@ -84,7 +84,7 @@ class Editor extends BaseModel {
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
-            return path.join(customDirPath, 'Controller.js');
+            return path.join(customDirPath, 'Controller.front.js');
         }
         return path.join(customDirPath, this.getName() + '.' + ext);
     }
