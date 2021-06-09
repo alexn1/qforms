@@ -67,6 +67,13 @@ table.DatePicker td.selected {
   background-color: #eea236;
 }
 
+.DropDownIcon {
+  display: inline-block;
+}
+.DropDownIcon:hover circle {
+  fill: black !important;
+}
+
 .DropdownButton {
   position: relative;
   display: inline-block;
@@ -130,14 +137,6 @@ table.DatePicker td.selected {
   position: absolute;
   z-index: 2;
 }
-
-.DropDownIcon {
-  display: inline-block;
-}
-.DropDownIcon:hover circle {
-  fill: black !important;
-}
-
 
 .Grid {
   font-family: arial, sans-serif;
@@ -256,6 +255,7 @@ table.DatePicker td.selected {
   cursor: text;
   background-color: lightgreen;
 }
+
 
 .GridCell {
   overflow: hidden;

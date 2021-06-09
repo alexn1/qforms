@@ -7,15 +7,16 @@ const less      = require('gulp-less');
 const babel      = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
-const order = require('gulp-order');
+// const order = require('gulp-order');
+const myOrder = require('./myOrder');
 
 const SRC_PATH   = './src';
 const BUILD_PATH = './build';
 
 function frontend_common_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.js'))
+        .pipe(myOrder())
         // .pipe(sourcemaps.init())
-        .pipe(order())
         .pipe(concat('common.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
@@ -25,9 +26,9 @@ function frontend_common_js() {
 
 function frontend_common_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.jsx'))
+        .pipe(myOrder())
         // .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(order())
         .pipe(concat('common-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(sourcemaps.write('.'))
@@ -36,9 +37,9 @@ function frontend_common_jsx() {
 
 function frontend_common_less() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.less'))
+        .pipe(myOrder())
         // .pipe(sourcemaps.init())
         .pipe(less())
-        .pipe(order())
         .pipe(concat('common.css'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
