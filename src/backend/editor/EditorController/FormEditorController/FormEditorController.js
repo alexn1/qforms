@@ -93,6 +93,14 @@ class FormEditorController extends VisualEditorController {
         return null;
     }
 
+    async createModelBackJs(params) {
+        const appEditor = await this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.createFormEditor(params.form);
+        const js = await formEditor.createModelBackJs(params);
+        return {js};
+    }
+
 }
 
 module.exports = FormEditorController;
