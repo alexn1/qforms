@@ -17,7 +17,7 @@ const SRC_PATH   = "./src";
 function frontend_viewer_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.js'))
         // .pipe(sourcemaps.init())
-        .pipe(myOrder())
+        // .pipe(myOrder())
         .pipe(concat('viewer.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
@@ -28,8 +28,8 @@ function frontend_viewer_js() {
 function frontend_viewer_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.jsx'))
         // .pipe(sourcemaps.init())
+        .pipe(myOrder())
         .pipe(babel())
-        // .pipe(order())
         .pipe(concat('viewer-jsx.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(sourcemaps.write('.'))
