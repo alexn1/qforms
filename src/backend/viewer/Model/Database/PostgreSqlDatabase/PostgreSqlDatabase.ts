@@ -11,10 +11,10 @@ class PostgreSqlDatabase extends Database {
         this.pool = null;
     }
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         // console.log('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
-    }
+    }*/
 
     async deinit() {
         console.log('PostgreSqlDatabase.deinit: ' + this.getName());

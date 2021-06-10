@@ -9,10 +9,10 @@ class MySqlDatabase extends Database {
         this.pool = null;
     }
 
-    static async create(data, parent) {
+    /*static async create(data, parent) {
         //console.log('MySqlDatabase.create');
         return new MySqlDatabase(data, parent);
-    }
+    }*/
 
     async deinit(): Promise<void> {
         console.log('MySqlDatabase.deinit: ' + this.getName());
