@@ -21,12 +21,10 @@ class Folder {
     }
 }
 
-
-
 function placeFile(rootFolder, file) {
     // console.log('placeFile', file.path);
-    const items = file.path.split('/');
     let folder = rootFolder;
+    const items = file.path.split('/');
     for (let i = 1; i <= items.length-2; i++) {
         const name = items[i];
         // console.log('name:', name);
