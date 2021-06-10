@@ -146,19 +146,15 @@ class PostgreSqlDatabase extends Database {
 
     async getTableList(): Promise<string[]> {
         console.log('PostgreSqlDatabase.getTableList');
-        const config = this.getConfig();
-        const client = new Client(config);
-        await client.connect();
-        const results = await client.query(
+        const rows = await this.query(
             `select "table_name" from information_schema.tables where table_schema = 'public'`
         );
-        await client.end();
-        const tableList = results.rows.map(row => row.table_name);
-        console.log('tableList:', tableList);
+        const tableList = rows.map(row => row.table_name);
+        // console.log('tableList:', tableList);
         return tableList;
     }
 
-    async getTableInfo(table) {
+    async getTableInfo(table: string) {
         console.log('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
         // console.log('keyColumns:', keyColumns);
@@ -175,7 +171,7 @@ class PostgreSqlDatabase extends Database {
             comment : null,
             dbType  : row.data_type
         }));
-        console.log('tableInfo:', tableInfo);
+        // console.log('tableInfo:', tableInfo);
         return tableInfo;
     }
 
