@@ -3,7 +3,7 @@ import Database from '../Database';
 
 class MySqlDatabase extends Database {
     pool: any;
-    constructor(data, parent) {
+    constructor(data, parent?) {
         super(data, parent);
         //console.log('new MySqlDatabase');
         this.pool = null;

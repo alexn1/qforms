@@ -6,7 +6,7 @@ import Context from '../../../Context';
 
 class Database extends Model {
     tables: Table[];
-    constructor(data, parent) {
+    constructor(data, parent?) {
         //console.log('Database.constructor');
         super(data, parent);
         this.fillCollections = ['tables'];

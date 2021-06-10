@@ -5,7 +5,7 @@ const backend  = require('../../../backend');
 
 class Model extends BaseModel {
     fillCollections: any[];
-    constructor(data, parent?) {
+    constructor(data: any, parent?: any) {
         super(data, parent);
         this.fillCollections = [];
     }

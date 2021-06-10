@@ -5,7 +5,7 @@ import Database from '../Database';
 
 class PostgreSqlDatabase extends Database {
     pool: any;
-    constructor(data, parent) {
+    constructor(data, parent?) {
         super(data, parent);
         // console.log('new PostgreSqlDatabase');
         this.pool = null;
