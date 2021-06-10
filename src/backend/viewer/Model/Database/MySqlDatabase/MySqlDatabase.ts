@@ -43,9 +43,9 @@ class MySqlDatabase extends Database {
         };
     }
 
-    getDefaultPort(): number {
+    /*getDefaultPort(): number {
         return 3306;
-    }
+    }*/
 
     getConnection(context): Promise<any> {
         //console.log('MySqlDatabase.getConnection');
@@ -86,7 +86,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    async queryResult(context, query, params): Promise<any> {
+    async queryResult(context, query, params = null): Promise<any> {
         console.log('MySqlDatabase.queryResult', query, params);
         Database.checkParams(query, params);
         const nest = false;

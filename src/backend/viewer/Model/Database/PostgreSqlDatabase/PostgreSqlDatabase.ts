@@ -219,9 +219,9 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return results.rows;
     }
 
-    getDefaultPort(): number {
+    /*getDefaultPort(): number {
         return 5432;
-    }
+    }*/
 
     async queryAutoValues(context, table, autoColumns, autoTypes) {
         console.log('PostgreSqlDatabase.queryAutoValues', autoColumns, autoTypes);

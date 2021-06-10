@@ -25,7 +25,7 @@ class Database extends Model {
         throw new Error('Database.getConnection not implemented');
     }
 
-    async queryResult(context, query, params) {
+    async queryResult(context, query, params = null) {
         throw new Error('Database.queryResult not implemented');
     }
 
@@ -91,19 +91,21 @@ class Database extends Model {
     }
 
     getConfig(): any {
-        const portParam = this.isData('params', 'port') ?  this.createParam('port') : null;
-        return {
+        const config: any = {
             host       : this.createParam('host').getValue(),
-            port       : portParam ? portParam.getValue() : this.getDefaultPort(),
             user       : this.createParam('user').getValue(),
             database   : this.createParam('database').getValue(),
             password   : this.createParam('password').getValue(),
         };
+        if (this.isData('params', 'port')) {
+            config.port = this.createParam('port').getValue();
+        }
+        return config;
     }
 
-    getDefaultPort(): number {
+    /*getDefaultPort(): number {
         return null;
-    }
+    }*/
 
     getApp(): Application {
         return this.parent;
