@@ -265,6 +265,7 @@ class Application extends Model {
 
     static getParams(context: Context) {
         // console.log('Application.getParams:', context.query);
+        /*
         const params = {
             ...context.query,
         };
@@ -283,14 +284,14 @@ class Application extends Model {
         if (context.user) {
             params.username = context.user.name;
         }
-        /*
+        return params;
+        */
         return {
-
+            ...context.query,
             ...context.params,
             ...(context.querytime ? context.querytime.params : {}),
             ...(context.user ? {username: context.user.name} : {})
-        };*/
-        return params;
+        };
     }
 
     async rpc(name: string, context: Context) {
