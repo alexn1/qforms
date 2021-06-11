@@ -265,12 +265,32 @@ class Application extends Model {
 
     static getParams(context: Context) {
         // console.log('Application.getParams:', context.query);
-        return {
+        const params = {
             ...context.query,
+        };
+        for (const name in context.params) {
+            if (context.params[name] !== undefined) {
+                params[name] = context.params[name];
+            }
+        }
+        if (context.querytime) {
+            for (const name in context.querytime.params) {
+                if (context.querytime.params[name] !== undefined) {
+                    params[name] = context.querytime.params[name];
+                }
+            }
+        }
+        if (context.user) {
+            params.username = context.user.name;
+        }
+        /*
+        return {
+
             ...context.params,
             ...(context.querytime ? context.querytime.params : {}),
             ...(context.user ? {username: context.user.name} : {})
-        };
+        };*/
+        return params;
     }
 
     async rpc(name: string, context: Context) {
