@@ -111,30 +111,36 @@ class DataSourceEditorController extends EditorController {
         return editor.createDataSourceEditor(params.dataSource);
     }
 
+    async createModelBackJs(params) {
+        const dataSourceEditor = await this.createDataSourceEditor(params);
+        const js = await dataSourceEditor.createModelBackJs(params);
+        return {js};
+    }
+
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
-            case 'QueryView.ejs':
+            /*case 'QueryView.ejs':
                 const dataSourceEditor = await this.createDataSourceEditor(params);
                 const backendJs = await dataSourceEditor.getCustomFile('back.js');
                 result.data.backendJs = backendJs;
-                return result;
+                return result;*/
             default:
                 return result;
         }
     }
 
-    async saveController(params) {
+    /*async saveController(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         await dataSourceEditor.saveCustomFile('back.js', params.text);
         return null;
-    }
+    }*/
 
-    async createController(params) {
+    /*async createController(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         const backendJs = await dataSourceEditor.createBackendJs(params);
         return {backendJs};
-    }
+    }*/
 
 }
 

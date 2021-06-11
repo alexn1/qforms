@@ -29,14 +29,16 @@ class SqlDataSourceView extends DocumentView {
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
     }
     render() {
+        const ctrl = this.props.ctrl;
         return <div className={'SqlDataSourceView full flex-rows'}>
             <div className="toolbar flex-min">
-                <button className="btn btn-default btn-xs" onClick={this.onSaveClick}>Save</button>
+                <button onClick={this.onSaveClick}>Save</button>
+                <button onClick={ctrl.onCreateModelBack}>Model.back.js</button>
                 &nbsp;
                 <div className="btn-group" role="group">
-                    <button className={`btn btn-xs ${this.getButtonClass('singleQuery')}`}   onClick={e => this.setState({selected: 'singleQuery'})}>singleQuery</button>
-                    <button className={`btn btn-xs ${this.getButtonClass('multipleQuery')}`} onClick={e => this.setState({selected: 'multipleQuery'})}>multipleQuery</button>
-                    <button className={`btn btn-xs ${this.getButtonClass('countQuery')}`}    onClick={e => this.setState({selected: 'countQuery'})}>countQuery</button>
+                    <button className={`${this.getButtonClass('singleQuery')}`}   onClick={e => this.setState({selected: 'singleQuery'})}>singleQuery</button>
+                    <button className={`${this.getButtonClass('multipleQuery')}`} onClick={e => this.setState({selected: 'multipleQuery'})}>multipleQuery</button>
+                    <button className={`${this.getButtonClass('countQuery')}`}    onClick={e => this.setState({selected: 'countQuery'})}>countQuery</button>
                 </div>
             </div>
             <div className="edit flex-max full">

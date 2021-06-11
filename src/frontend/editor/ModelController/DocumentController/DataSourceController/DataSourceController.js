@@ -105,4 +105,7 @@ class DataSourceController extends DocumentController {
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+    onCreateModelBack = async e => {
+        const data = await this.model.createModelBackJs();
+    }
 }

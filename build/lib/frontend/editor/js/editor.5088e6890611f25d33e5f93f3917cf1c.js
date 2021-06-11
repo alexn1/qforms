@@ -863,6 +863,22 @@ class DataSource extends Model {
         }
         await FrontHostApp.doHttpRequest(args);
     }
+
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                ...(this.parent instanceof Page ? {page: this.parent.pageLink.getFileName()} : {}),
+                ...(this.parent instanceof Form ? {
+                    form: this.parent.getName(),
+                    page: this.parent.page.pageLink.getFileName()
+                } : {}),
+                dataSource: this.getName(),
+            })
+        });
+    }
+
     async delete() {
         await this.deleteData();
         this.parent.removeDataSource(this);
@@ -2089,6 +2105,9 @@ class DataSourceController extends DocumentController {
         this.parent.removeDataSource(this);
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    }
+    onCreateModelBack = async e => {
+        const data = await this.model.createModelBackJs();
     }
 }
 

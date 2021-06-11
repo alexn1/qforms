@@ -39,7 +39,7 @@ class DataSourceEditor extends Editor {
         return path.join(collectionDirPath, this.getName());
     }
 
-    async createBackendJs(params) {
+    /*async createBackendJs(params) {
         const templateFilePath = path.join(__dirname, 'DataSource.back.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('back.js');
         const backendJs = await this.createFileByParams(customJsFilePath, templateFilePath, {
@@ -49,6 +49,18 @@ class DataSourceEditor extends Editor {
             _class    : this.constructor.name.replace('Editor', '')
         });
         return backendJs;
+    }*/
+
+    async createModelBackJs(params) {
+        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const js = await this.createFileByParams(filePath, templateFilePath, {
+            _class: this.getClassName(),
+            page      : params.page ? params.page : '',
+            form      : params.form ? params.form : '',
+            dataSource: this.getName(),
+        });
+        return js;
     }
 
     async save() {
@@ -62,6 +74,8 @@ class DataSourceEditor extends Editor {
             await this.parent.save();           // on page
         }
     }
+
+
 
 }
 

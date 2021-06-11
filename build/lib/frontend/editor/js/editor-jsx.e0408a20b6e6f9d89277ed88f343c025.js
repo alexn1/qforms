@@ -1127,28 +1127,30 @@ class SqlDataSourceView extends DocumentView {
   }
 
   render() {
+    const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: 'SqlDataSourceView full flex-rows'
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbar flex-min"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "btn btn-default btn-xs",
       onClick: this.onSaveClick
-    }, "Save"), "\xA0", /*#__PURE__*/React.createElement("div", {
+    }, "Save"), /*#__PURE__*/React.createElement("button", {
+      onClick: ctrl.onCreateModelBack
+    }, "Model.back.js"), "\xA0", /*#__PURE__*/React.createElement("div", {
       className: "btn-group",
       role: "group"
     }, /*#__PURE__*/React.createElement("button", {
-      className: `btn btn-xs ${this.getButtonClass('singleQuery')}`,
+      className: `${this.getButtonClass('singleQuery')}`,
       onClick: e => this.setState({
         selected: 'singleQuery'
       })
     }, "singleQuery"), /*#__PURE__*/React.createElement("button", {
-      className: `btn btn-xs ${this.getButtonClass('multipleQuery')}`,
+      className: `${this.getButtonClass('multipleQuery')}`,
       onClick: e => this.setState({
         selected: 'multipleQuery'
       })
     }, "multipleQuery"), /*#__PURE__*/React.createElement("button", {
-      className: `btn btn-xs ${this.getButtonClass('countQuery')}`,
+      className: `${this.getButtonClass('countQuery')}`,
       onClick: e => this.setState({
         selected: 'countQuery'
       })
