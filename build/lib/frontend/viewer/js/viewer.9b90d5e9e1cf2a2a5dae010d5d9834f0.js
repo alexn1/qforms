@@ -2396,6 +2396,27 @@ class SqlDataSource extends DataSource {
         return data;
     }
 
+    async selectSingle(params = {}) {
+        console.log('SqlDataSource.selectSingle', this.getFullName(), params);
+        const page = this.getPage();
+        const form = this.getForm();
+        const data = await this.getApp().request({
+            action        : 'selectSingle',
+            parentPageName: page ? page.getParentPageName() : null,
+            page          : page ? page.getName()           : null,
+            form          : form ? form.getName()           : null,
+            ds            : this.getName(),
+            params        : Helper.encodeObject({
+                ...this.getPageParams(),
+                ...params,
+            })
+        });
+        // if (!(data.rows instanceof Array)) throw new Error('rows must be array');
+        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+        return data;
+    }
+
+
     async insert(row) {
         console.log('SqlDataSource.insert', this.getTableName(), row);
         const table = this.getAttr('table');
