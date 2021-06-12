@@ -158,15 +158,13 @@ class SqlDataSource extends DataSource {
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
 
-        // autoColumns
-        const autoColumns = this.getAutoColumns();
-        console.log('autoColumns:', autoColumns);
-        const autoTypes = this.getAutoTypes();
-        console.log('autoTypes:', autoTypes);
-
         const table = this.getAttr('table');
+        const autoColumns = this.getAutoColumns();
+        // console.log('autoColumns:', autoColumns);
+        const autoTypes = this.getAutoTypes();
+        // console.log('autoTypes:', autoTypes);
 
-        const newRow = await this.getDatabase().insertRow(context, table, autoColumns, values, autoTypes);
+        const newRow = await this.getDatabase().insertRow(context, table, values, autoColumns, autoTypes);
         console.log('newRow:', newRow);
 
         const key = this.getKeyFromValues(newRow);
