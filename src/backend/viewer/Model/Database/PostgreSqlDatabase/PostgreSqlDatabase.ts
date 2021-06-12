@@ -2,6 +2,7 @@ const { Pool, Client } = require('pg');
 const colors = require('colors');
 
 import Database from '../Database';
+import Context from '../../../../Context';
 
 class PostgreSqlDatabase extends Database {
     pool: any;
@@ -33,11 +34,11 @@ class PostgreSqlDatabase extends Database {
         return this.pool;
     }
 
-    static createPool(config) {
+    static createPool(config: any) {
         return new Pool(config);
     }
 
-    async getConnection(context) {
+    async getConnection(context: Context) {
         // console.log('PostgreSqlDatabase.getConnection');
         const name = this.getName();
         if (context.connections[name]) {
@@ -47,7 +48,7 @@ class PostgreSqlDatabase extends Database {
         }
     }
 
-    async queryResult(context, query, params = null) {
+    async queryResult(context: Context, query: string, params: any = null) {
         if (context.query.sql) console.log(colors.blue('PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
@@ -59,7 +60,7 @@ class PostgreSqlDatabase extends Database {
         return result;
     }
 
-    static async queryResult(cnn, query, params = null) {
+    static async queryResult(cnn, query: string, params: any = null) {
         console.log(colors.blue('static PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
@@ -70,7 +71,7 @@ class PostgreSqlDatabase extends Database {
         return result;
     }
 
-    async queryRows(context, query, params = null): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
@@ -89,7 +90,7 @@ class PostgreSqlDatabase extends Database {
         // throw err;
     }
 
-    static formatQuery(query, params) {
+    static formatQuery(query: string, params: any) {
         // console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
@@ -109,7 +110,7 @@ class PostgreSqlDatabase extends Database {
         return {sql, values};
     }
 
-    getDeleteQuery(tableName, rowKeyValues): string {
+    getDeleteQuery(tableName: string, rowKeyValues: any): string {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
@@ -118,11 +119,11 @@ class PostgreSqlDatabase extends Database {
         return query;
     }
 
-    getUpdateQuery(tableName, values, where): string {
+    getUpdateQuery(tableName: string, values: any, where: any): string {
         return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
 
-    static getUpdateQuery(tableName, values, where): string {
+    static getUpdateQuery(tableName: string, values: any, where: any): string {
         // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
@@ -133,7 +134,7 @@ class PostgreSqlDatabase extends Database {
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
 
-    getInsertQuery(tableName, values): string {
+    getInsertQuery(tableName: string, values: any): string {
         // console.log('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length) return `insert into "${tableName}" default values`;
@@ -175,7 +176,7 @@ class PostgreSqlDatabase extends Database {
         return tableInfo;
     }
 
-    getColumnTypeByDataType(dataType): string {
+    getColumnTypeByDataType(dataType: string): string {
         switch (dataType) {
             case 'integer':
             case 'numeric':
@@ -199,7 +200,7 @@ class PostgreSqlDatabase extends Database {
         }
     }
 
-    async getTableKeyColumns(table) {
+    async getTableKeyColumns(table: string) {
         console.log('PostgreSqlDatabase.getTableKeyColumns');
         const rows = await this.query(
             `SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
@@ -210,7 +211,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return rows;
     }
 
-    async query(query): Promise<any[]> {
+    async query(query: string): Promise<any[]> {
         const config = this.getConfig();
         const client = new Client(config);
         await client.connect();
@@ -223,7 +224,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return 5432;
     }*/
 
-    async queryAutoValues(context, table, autoColumns, autoTypes) {
+    async queryAutoValues(context: Context, table: string, autoColumns: string[], autoTypes: any) {
         console.log('PostgreSqlDatabase.queryAutoValues', autoColumns, autoTypes);
         if (!autoColumns.length) throw new Error('no auto columns');
         const queries = autoColumns.map(column => `select currval('"${table}_${column}_seq"')`);
@@ -242,7 +243,6 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
                 return acc;
             }, {});
         } else {
-
             let [{currval: val}] = result.rows;
             const name = autoColumns[0];
             if (autoTypes[name] === 'number' && typeof val === 'string') val = Number(val);
@@ -251,7 +251,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         }
     }
 
-    async insertRow(context, table, autoColumns, values, autoTypes) {
+    async insertRow(context: Context, table: string, autoColumns: string[], values: any, autoTypes: any) {
         console.log(`PostgreSqlDatabase.insertRow ${table}`, autoColumns, values, autoTypes);
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
