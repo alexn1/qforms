@@ -378,11 +378,6 @@ class FieldController extends Controller {
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model, parent);
         }
-        /*if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
-            return new CustomClass(model, parent);
-        }*/
         const className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
         // console.log('className:', className);
         return eval(`new ${className}(model, parent);`);
@@ -1186,11 +1181,6 @@ class FormController extends Controller {
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model, parent);
         }
-        /*if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getFullName()}" form does not return type`);
-            return new CustomClass(model, parent);
-        }*/
         return eval(`new ${model.getClassName()}Controller(model, parent);`);
     }
     constructor(model, parent) {
@@ -1648,13 +1638,9 @@ class PageController extends Controller {
 
     static create(model, parent) {
         // console.log('PageController.create', model.getName());
-        const customClassName = `${model.getName()}PageController`;
-        if (eval(`typeof ${customClassName}`) === 'function') {
-            const CustomClass = eval(customClassName);
-            // console.log('CustomClass:', CustomClass);
-            return new CustomClass(model, parent);
-        }
-        return new PageController(model, parent);
+        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
+        const Class = CustomClass ? CustomClass : PageController;
+        return new Class(model, parent);
     }
 
     constructor(model, parent) {

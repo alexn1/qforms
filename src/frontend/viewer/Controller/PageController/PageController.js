@@ -2,13 +2,9 @@ class PageController extends Controller {
 
     static create(model, parent) {
         // console.log('PageController.create', model.getName());
-        const customClassName = `${model.getName()}PageController`;
-        if (eval(`typeof ${customClassName}`) === 'function') {
-            const CustomClass = eval(customClassName);
-            // console.log('CustomClass:', CustomClass);
-            return new CustomClass(model, parent);
-        }
-        return new PageController(model, parent);
+        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
+        const Class = CustomClass ? CustomClass : PageController;
+        return new Class(model, parent);
     }
 
     constructor(model, parent) {
