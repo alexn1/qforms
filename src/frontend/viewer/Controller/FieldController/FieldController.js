@@ -1,21 +1,18 @@
 class FieldController extends Controller {
 
-    static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
-        const customClassName = `${model.getPage().getName()}${model.getForm().getName()}${model.getName()}FieldController`;
-        if (eval(`typeof ${customClassName}`) === 'function') {
-            const CustomClass = eval(customClassName);
-            // console.log('CustomClass:', CustomClass);
-            return new CustomClass(model, parent);
-        }
-        const className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
-        // console.log('className:', className);
-        return eval(`new ${className}(model, parent);`);
-    }
-
     /*constructor(model, parent) {
         super(model, parent);
     }*/
+
+    static create(model, parent) {
+        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+        const page = model.getPage();
+        const form = model.getForm();
+        const CustomClass = FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
+        const GeneralClass = FrontHostApp.getClassByName(`${parent.model.getClassName()}${model.getClassName()}Controller`);
+        const Class = CustomClass ? CustomClass : GeneralClass;
+        return new Class(model, parent);
+    }
 
     valueToString(value) {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
