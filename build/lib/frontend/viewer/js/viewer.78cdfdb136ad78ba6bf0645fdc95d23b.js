@@ -56,13 +56,9 @@ class Controller extends EventEmitter {
 class ApplicationController extends Controller {
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
-        const customClassName = `${model.getName()}ApplicationController`;
-        if (eval(`typeof ${customClassName}`) === 'function') {
-            const CustomClass = eval(customClassName);
-            // console.log('CustomClass:', CustomClass);
-            return new CustomClass(model);
-        }
-        return new SdiApplicationController(model);
+        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
+        const Class = CustomClass ? CustomClass : SdiApplicationController;
+        return new Class(model);
     }
     static getSearchObj() {
         // console.log('ApplicationController.getSearchObj:', window.location);

@@ -110,6 +110,12 @@ class FrontHostApp {
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
+    static getClassByName(className) {
+        if (eval(`typeof ${className}`) === 'function') {
+            return eval(className);
+        }
+        return null;
+    }
 }
 
 window.QForms.FrontHostApp = FrontHostApp;
