@@ -8,11 +8,6 @@ class FieldController extends Controller {
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model, parent);
         }
-        /*if (model.data.js) {
-            const CustomClass = eval(model.data.js);
-            if (!CustomClass) throw new Error(`custom class of "${model.getName()}" field does not return type`);
-            return new CustomClass(model, parent);
-        }*/
         const className = `${parent.model.getClassName()}${model.getClassName()}Controller`;
         // console.log('className:', className);
         return eval(`new ${className}(model, parent);`);
