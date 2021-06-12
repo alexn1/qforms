@@ -63,3 +63,5 @@ class ComboBox extends ReactComponent {
         );
     }
 }
+
+window.QForms.ComboBox = ComboBox;

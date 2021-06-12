@@ -31,3 +31,5 @@ class Button extends ReactComponent {
         );
     }
 }
+
+window.QForms.Button = Button;

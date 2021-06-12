@@ -46,3 +46,5 @@ class TextBox extends ReactComponent {
         );
     }
 }
+
+window.QForms.TextBox = TextBox;

@@ -15,3 +15,5 @@ class Tooltip extends ReactComponent {
         );
     }
 }
+
+window.QForms.Tooltip = Tooltip;

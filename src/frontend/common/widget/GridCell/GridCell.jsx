@@ -24,3 +24,5 @@ class GridCell extends ReactComponent {
         );
     }
 }
+
+window.QForms.GridCell = GridCell;

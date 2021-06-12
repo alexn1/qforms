@@ -37,3 +37,5 @@ class GridRow extends ReactComponent {
         </tr>;
     }
 }
+
+window.QForms.GridRow = GridRow;

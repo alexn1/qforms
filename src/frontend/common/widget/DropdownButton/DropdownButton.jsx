@@ -51,3 +51,5 @@ class DropdownButton extends ReactComponent{
         );
     }
 }
+
+window.QForms.DropdownButton = DropdownButton;

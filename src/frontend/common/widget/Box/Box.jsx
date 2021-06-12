@@ -39,3 +39,5 @@ class Box extends ReactComponent {
         );
     }
 }
+
+window.QForms.Box = Box;

@@ -196,3 +196,5 @@ class Helper {
         return 24*Helper.HOUR();
     }
 }
+
+window.QForms.Helper = Helper;

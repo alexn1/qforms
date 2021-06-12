@@ -1,5 +1,3 @@
-window.QForms = {};
-
 class FrontHostApp {
     constructor(data) {
         console.log('FrontHostApp.constructor', data);
@@ -318,3 +316,5 @@ class Helper {
         return 24*Helper.HOUR();
     }
 }
+
+window.QForms.Helper = Helper;

@@ -185,3 +185,5 @@ class TimeBox extends ReactComponent {
         );
     }
 }
+
+window.QForms.TimeBox = TimeBox;

@@ -1,3 +1,4 @@
+window.QForms = {};
 class ReactComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -31,3 +32,5 @@ class ReactComponent extends React.Component {
         if (this.props.onUnmount) this.props.onUnmount(this, this.props.name);
     }
 }
+
+window.QForms.ReactComponent = ReactComponent;

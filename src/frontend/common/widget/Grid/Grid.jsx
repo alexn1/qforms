@@ -154,3 +154,5 @@ class Grid extends ReactComponent {
         );
     }
 }
+
+window.QForms.Grid = Grid;

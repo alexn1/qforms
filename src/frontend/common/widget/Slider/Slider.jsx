@@ -43,3 +43,5 @@ class Slider extends ReactComponent {
         </div>;
     }
 }
+
+window.QForms.Slider = Slider;

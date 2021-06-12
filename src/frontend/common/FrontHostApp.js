@@ -1,5 +1,3 @@
-window.QForms = {};
-
 class FrontHostApp {
     constructor(data) {
         console.log('FrontHostApp.constructor', data);

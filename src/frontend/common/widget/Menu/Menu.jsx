@@ -52,3 +52,5 @@ class Menu extends ReactComponent {
         );
     }
 }
+
+window.QForms.Menu = Menu;

@@ -15,3 +15,5 @@ class Statusbar extends ReactComponent {
         );
     }
 }
+
+window.QForms.Statusbar = Statusbar;

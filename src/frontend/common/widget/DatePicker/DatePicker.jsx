@@ -195,3 +195,5 @@ class DatePicker extends ReactComponent {
         );
     }
 }
+
+window.QForms.DatePicker = DatePicker;

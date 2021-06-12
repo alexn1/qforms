@@ -70,3 +70,5 @@ class Tab extends ReactComponent {
         );
     }
 }
+
+window.QForms.Tab = Tab;

@@ -31,3 +31,5 @@ class Image extends ReactComponent {
         console.log('Image.componentDidMount', this.getNaturalSize());
     }*/
 }
+
+window.QForms.Image = Image;

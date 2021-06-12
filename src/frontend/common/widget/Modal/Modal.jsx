@@ -7,3 +7,5 @@ class Modal extends ReactComponent {
         );
     }
 }
+
+window.QForms.Modal = Modal;

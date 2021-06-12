@@ -1,3 +1,5 @@
+window.QForms = {};
+
 class ReactComponent extends React.Component {
   constructor(props) {
     super(props); // if (props.cb) props.cb(this, this.props.name);
@@ -33,6 +35,8 @@ class ReactComponent extends React.Component {
   }
 
 }
+
+window.QForms.ReactComponent = ReactComponent;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Box extends ReactComponent {
@@ -86,6 +90,8 @@ class Box extends ReactComponent {
   }
 
 }
+
+window.QForms.Box = Box;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Button extends ReactComponent {
@@ -128,6 +134,8 @@ class Button extends ReactComponent {
   }
 
 }
+
+window.QForms.Button = Button;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class CheckBox extends ReactComponent {
@@ -199,6 +207,8 @@ class CheckBox extends ReactComponent {
   }
 
 }
+
+window.QForms.CheckBox = CheckBox;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class ComboBox extends ReactComponent {
@@ -275,6 +285,8 @@ class ComboBox extends ReactComponent {
   }
 
 }
+
+window.QForms.ComboBox = ComboBox;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // props
@@ -466,6 +478,8 @@ class DatePicker extends ReactComponent {
   }
 
 }
+
+window.QForms.DatePicker = DatePicker;
 class DropDownIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
@@ -494,6 +508,8 @@ class DropDownIcon extends ReactComponent {
   }
 
 }
+
+window.QForms.DropDownIcon = DropDownIcon;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class DropdownButton extends ReactComponent {
@@ -562,6 +578,8 @@ class DropdownButton extends ReactComponent {
   }
 
 }
+
+window.QForms.DropdownButton = DropdownButton;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class DropdownDatePicker extends ReactComponent {
@@ -733,6 +751,8 @@ class DropdownDatePicker extends ReactComponent {
   }
 
 }
+
+window.QForms.DropdownDatePicker = DropdownDatePicker;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Grid extends ReactComponent {
@@ -920,6 +940,8 @@ class Grid extends ReactComponent {
   }
 
 }
+
+window.QForms.Grid = Grid;
 class GridCell extends ReactComponent {
   constructor(props) {
     super(props);
@@ -953,6 +975,8 @@ class GridCell extends ReactComponent {
   }
 
 }
+
+window.QForms.GridCell = GridCell;
 class GridRow extends ReactComponent {
   isCellActive(j) {
     return this.props.active && this.props.activeColumn === j;
@@ -991,6 +1015,8 @@ class GridRow extends ReactComponent {
   }
 
 }
+
+window.QForms.GridRow = GridRow;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Image extends ReactComponent {
@@ -1036,6 +1062,8 @@ class Image extends ReactComponent {
 
 
 }
+
+window.QForms.Image = Image;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Menu extends ReactComponent {
@@ -1113,6 +1141,8 @@ class Menu extends ReactComponent {
   }
 
 }
+
+window.QForms.Menu = Menu;
 class Modal extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
@@ -1121,6 +1151,8 @@ class Modal extends ReactComponent {
   }
 
 }
+
+window.QForms.Modal = Modal;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Slider extends ReactComponent {
@@ -1201,6 +1233,8 @@ class Slider extends ReactComponent {
   }
 
 }
+
+window.QForms.Slider = Slider;
 class Statusbar extends ReactComponent {
   constructor(props) {
     // console.log('Statusbar.constructor', props);
@@ -1221,6 +1255,8 @@ class Statusbar extends ReactComponent {
   }
 
 }
+
+window.QForms.Statusbar = Statusbar;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Tab extends ReactComponent {
@@ -1294,6 +1330,8 @@ class Tab extends ReactComponent {
   }
 
 }
+
+window.QForms.Tab = Tab;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class TextArea extends ReactComponent {
@@ -1340,6 +1378,8 @@ class TextArea extends ReactComponent {
   }
 
 }
+
+window.QForms.TextArea = TextArea;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class TextBox extends ReactComponent {
@@ -1398,6 +1438,8 @@ class TextBox extends ReactComponent {
   }
 
 }
+
+window.QForms.TextBox = TextBox;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class TimeBox extends ReactComponent {
@@ -1616,6 +1658,8 @@ class TimeBox extends ReactComponent {
   }
 
 }
+
+window.QForms.TimeBox = TimeBox;
 class Tooltip extends ReactComponent {
   // constructor(props) {
   //     console.log('Tooltip.constructor', props);
@@ -1631,3 +1675,5 @@ class Tooltip extends ReactComponent {
   }
 
 }
+
+window.QForms.Tooltip = Tooltip;

@@ -59,3 +59,5 @@ class CheckBox extends ReactComponent {
         );
     }
 }
+
+window.QForms.CheckBox = CheckBox;

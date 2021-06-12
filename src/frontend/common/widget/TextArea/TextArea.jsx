@@ -35,3 +35,5 @@ class TextArea extends ReactComponent {
         );
     }
 }
+
+window.QForms.TextArea = TextArea;

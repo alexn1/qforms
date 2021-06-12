@@ -126,3 +126,5 @@ class DropdownDatePicker extends ReactComponent {
         );
     }
 }
+
+window.QForms.DropdownDatePicker = DropdownDatePicker;
