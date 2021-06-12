@@ -159,12 +159,10 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
 
         const table = this.getAttr('table');
-        const autoColumns = this.getAutoColumns();
-        // console.log('autoColumns:', autoColumns);
         const autoTypes = this.getAutoTypes();
         // console.log('autoTypes:', autoTypes);
 
-        const newRow = await this.getDatabase().insertRow(context, table, values, autoColumns, autoTypes);
+        const newRow = await this.getDatabase().insertRow(context, table, values, autoTypes);
         console.log('newRow:', newRow);
 
         const key = this.getKeyFromValues(newRow);

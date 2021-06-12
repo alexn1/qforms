@@ -251,8 +251,11 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         }
     }
 
-    async insertRow(context: Context, table: string, values: any, autoColumns: string[], autoTypes: any) {
-        console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumns, autoTypes);
+    async insertRow(context: Context, table: string, values: any, autoTypes: any) {
+        console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoTypes);
+
+        const autoColumns = Object.keys(autoTypes);
+
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
 
