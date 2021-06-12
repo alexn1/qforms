@@ -2411,7 +2411,7 @@ class SqlDataSource extends DataSource {
                 ...params,
             })
         });
-        // if (!(data.rows instanceof Array)) throw new Error('rows must be array');
+        if (!data.row) throw new Error('selectSingle must return row');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
