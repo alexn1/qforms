@@ -224,8 +224,9 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         return 5432;
     }*/
 
-    async queryAutoValues(context: Context, table: string, autoColumns: string[], autoTypes: any) {
-        console.log('PostgreSqlDatabase.queryAutoValues', autoColumns, autoTypes);
+    async queryAutoValues(context: Context, table: string, autoColumnTypes: any) {
+        console.log('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
+        const autoColumns = Object.keys(autoColumnTypes);
         if (!autoColumns.length) throw new Error('no auto columns');
         const queries = autoColumns.map(column => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
@@ -237,34 +238,30 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
                 // console.log('name:', name);
                 const r = result[i];
                 let [{currval: val}] = r.rows;
-                if (autoTypes[name] === 'number' && typeof val === 'string') val = Number(val);
-                if (typeof val !== autoTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoTypes[name]}`);
+                if (autoColumnTypes[name] === 'number' && typeof val === 'string') val = Number(val);
+                if (typeof val !== autoColumnTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
                 acc[name] = val;
                 return acc;
             }, {});
         } else {
             let [{currval: val}] = result.rows;
             const name = autoColumns[0];
-            if (autoTypes[name] === 'number' && typeof val === 'string') val = Number(val);
-            if (typeof val !== autoTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoTypes[name]}`);
+            if (autoColumnTypes[name] === 'number' && typeof val === 'string') val = Number(val);
+            if (typeof val !== autoColumnTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
             return {[name]: val};
         }
     }
 
-    async insertRow(context: Context, table: string, values: any, autoTypes: any) {
-        console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoTypes);
-
-        const autoColumns = Object.keys(autoTypes);
-
+    async insertRow(context: Context, table: string, values: any, autoColumnTypes: any) {
+        console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
-
         const result = await this.queryResult(context, query,  values);
         // console.log('insert result:', result);
 
         // auto
-        if (autoColumns.length > 0) {
-            const auto = await this.queryAutoValues(context, table, autoColumns, autoTypes);
+        if (Object.keys(autoColumnTypes).length > 0) {
+            const auto = await this.queryAutoValues(context, table, autoColumnTypes);
             console.log('auto:', auto);
             return {
                 ...auto,

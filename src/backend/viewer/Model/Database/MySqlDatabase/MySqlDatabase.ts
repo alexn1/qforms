@@ -256,9 +256,9 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         }
     }
 
-    async insertRow(context, table, values, autoTypes) {
-        console.log(`MySqlDatabase.insertRow ${table}`, values, autoTypes);
-        const autoColumns = Object.keys(autoTypes);
+    async insertRow(context, table, values, autoColumnTypes) {
+        console.log(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        const autoColumns = Object.keys(autoColumnTypes);
         if (autoColumns.length > 1) throw new Error('mysql does not support more than one auto increment column');
 
         const query = this.getInsertQuery(table, values);

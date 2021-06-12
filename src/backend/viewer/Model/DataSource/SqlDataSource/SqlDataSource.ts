@@ -159,10 +159,10 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
 
         const table = this.getAttr('table');
-        const autoTypes = this.getAutoTypes();
-        // console.log('autoTypes:', autoTypes);
+        const autoColumnTypes = this.getAutoColumnTypes();
+        // console.log('autoColumnTypes:', autoColumnTypes);
 
-        const newRow = await this.getDatabase().insertRow(context, table, values, autoTypes);
+        const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
         console.log('newRow:', newRow);
 
         const key = this.getKeyFromValues(newRow);
@@ -281,7 +281,7 @@ class SqlDataSource extends DataSource {
         return this.keyColumns.filter(name => this.table.getColumn(name).isAuto());
     }
 
-    getAutoTypes() {
+    getAutoColumnTypes() {
         const columns = this.getAutoColumns();
         return columns.reduce((acc, name) => {
             acc[name] = this.table.getColumn(name).getAttr('type');
