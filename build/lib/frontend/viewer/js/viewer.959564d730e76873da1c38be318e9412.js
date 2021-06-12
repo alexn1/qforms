@@ -370,6 +370,10 @@ class SdiApplicationController extends ApplicationController {
 
 class FieldController extends Controller {
 
+    /*constructor(model, parent) {
+        super(model, parent);
+    }*/
+
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const page = model.getPage();
@@ -379,10 +383,6 @@ class FieldController extends Controller {
         const Class = CustomClass ? CustomClass : GeneralClass;
         return new Class(model, parent);
     }
-
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
 
     valueToString(value) {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
@@ -1172,13 +1172,19 @@ class FormController extends Controller {
 
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
-        const customClassName = `${model.getPage().getName()}${model.getName()}FormController`;
+        const page = model.getPage();
+        const customClassName = `${page.getName()}${model.getName()}FormController`;
+        const CustomClass = FrontHostApp.getClassByName(customClassName);
+        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+        const Class = CustomClass ? CustomClass : GeneralClass;
+        return new Class(model, parent);
+        /*
         if (eval(`typeof ${customClassName}`) === 'function') {
             const CustomClass = eval(customClassName);
             // console.log('CustomClass:', CustomClass);
             return new CustomClass(model, parent);
         }
-        return eval(`new ${model.getClassName()}Controller(model, parent);`);
+        return eval(`new ${model.getClassName()}Controller(model, parent);`);*/
     }
     constructor(model, parent) {
         super(model, parent);
