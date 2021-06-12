@@ -1,3 +1,5 @@
+window.QForms = {};
+
 class FrontHostApp {
     constructor(data) {
         console.log('FrontHostApp.constructor', data);
@@ -109,3 +111,5 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
 }
+
+window.QForms.FrontHostApp = FrontHostApp;
