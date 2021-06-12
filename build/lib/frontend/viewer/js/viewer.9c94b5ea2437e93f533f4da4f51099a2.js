@@ -1178,13 +1178,6 @@ class FormController extends Controller {
         const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
         const Class = CustomClass ? CustomClass : GeneralClass;
         return new Class(model, parent);
-        /*
-        if (eval(`typeof ${customClassName}`) === 'function') {
-            const CustomClass = eval(customClassName);
-            // console.log('CustomClass:', CustomClass);
-            return new CustomClass(model, parent);
-        }
-        return eval(`new ${model.getClassName()}Controller(model, parent);`);*/
     }
     constructor(model, parent) {
         super(model, parent);
@@ -1824,7 +1817,8 @@ class Model extends EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const dataSource = eval(`new ${data.class}(data, this)`);
+                const Class = FrontHostApp.getClassByName(data.class);
+                const dataSource = new Class(data, this);
                 dataSource.init();
                 this.dataSources.push(dataSource);
             } catch (err) {
@@ -2832,7 +2826,8 @@ class Form extends Model {
 
         // fields
         for (const data of this.data.fields) {
-            const field = eval(`new ${data.class}(data, this)`);
+            const Class = FrontHostApp.getClassByName(data.class);
+            const field = new Class(data, this);
             field.init();
             this.fields.push(field);
         }
@@ -3017,7 +3012,7 @@ class Page extends Model {
 
         // forms
         for (const data of this.data.forms) {
-            const FormClass = eval(Model.getClassName(data));
+            const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
             const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);

@@ -51,7 +51,8 @@ class Model extends EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const dataSource = eval(`new ${data.class}(data, this)`);
+                const Class = FrontHostApp.getClassByName(data.class);
+                const dataSource = new Class(data, this);
                 dataSource.init();
                 this.dataSources.push(dataSource);
             } catch (err) {

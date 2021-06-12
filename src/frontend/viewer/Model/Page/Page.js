@@ -14,7 +14,7 @@ class Page extends Model {
 
         // forms
         for (const data of this.data.forms) {
-            const FormClass = eval(Model.getClassName(data));
+            const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
             const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);
