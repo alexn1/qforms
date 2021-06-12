@@ -11,3 +11,4 @@ class Column  extends Model {
         return this.data.dbType;
     }
 }
+window.QForms.Column = Column;

@@ -9,3 +9,4 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
         );
     }
 }
+window.QForms.TableFormDatePickerFieldView = TableFormDatePickerFieldView;

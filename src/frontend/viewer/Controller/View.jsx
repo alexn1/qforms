@@ -6,3 +6,4 @@ class View extends ReactComponent {
         }));
     }
 }
+window.QForms.View = View;

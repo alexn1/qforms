@@ -1,3 +1,4 @@
 class TableFormTextAreaFieldController extends TableFormFieldController {
 
 }
+window.QForms.TableFormTextAreaFieldController = TableFormTextAreaFieldController;

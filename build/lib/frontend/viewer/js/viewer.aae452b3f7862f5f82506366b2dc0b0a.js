@@ -20,6 +20,8 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
 }
 
+window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
+
 class Controller extends EventEmitter {
     constructor(model, parent) {
         super();
@@ -52,6 +54,8 @@ class Controller extends EventEmitter {
         return this.parent;
     }
 }
+
+window.QForms.Controller = Controller;
 
 class ApplicationController extends Controller {
     static create(model) {
@@ -264,6 +268,8 @@ class ApplicationController extends Controller {
     }
 }
 
+window.QForms.ApplicationController = ApplicationController;
+
 class MdiApplicationController extends ApplicationController {
     constructor(model) {
         super(model);
@@ -362,11 +368,15 @@ class MdiApplicationController extends ApplicationController {
     }
 }
 
+window.QForms.MdiApplicationController = MdiApplicationController;
+
 class SdiApplicationController extends ApplicationController {
     getViewClass() {
         return SdiApplicationView;
     }
 }
+
+window.QForms.SdiApplicationController = SdiApplicationController;
 
 class FieldController extends Controller {
 
@@ -428,6 +438,7 @@ class FieldController extends Controller {
     }
 
 }
+window.QForms.FieldController = FieldController;
 
 class RowFormFieldController extends FieldController {
     constructor(model, parent) {
@@ -626,6 +637,7 @@ class RowFormFieldController extends FieldController {
         return this.state.error;
     }
 }
+window.QForms.RowFormFieldController = RowFormFieldController;
 
 class RowFormCheckBoxFieldController extends RowFormFieldController {
     getValueForView() {
@@ -639,6 +651,8 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
         return RowFormCheckBoxFieldView;
     }
 }
+
+window.QForms.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;
 
 class RowFormComboBoxFieldController extends RowFormFieldController {
     getItems() {
@@ -659,6 +673,8 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
 }
 
+window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+
 class RowFormDatePickerFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormDatePickerFieldView;
@@ -670,6 +686,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.setValue(viewValue);
     }
 }
+window.QForms.RowFormDatePickerFieldController = RowFormDatePickerFieldController;
 
 class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
@@ -851,18 +868,21 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         ].join(', ');
     }
 }
+window.QForms.RowFormDateTimeFieldController = RowFormDateTimeFieldController;
 
 class RowFormFileFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormFileFieldView;
     }
 }
+window.QForms.RowFormFileFieldController = RowFormFileFieldController;
 
 class RowFormImageFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormImageFieldView;
     }
 }
+window.QForms.RowFormImageFieldController = RowFormImageFieldController;
 
 class RowFormLinkFieldController extends  RowFormFieldController {
     getViewClass() {
@@ -873,18 +893,21 @@ class RowFormLinkFieldController extends  RowFormFieldController {
         this.emit({source: this});
     }
 }
+window.QForms.RowFormLinkFieldController = RowFormLinkFieldController;
 
 class RowFormTextAreaFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormTextAreaFieldView;
     }
 }
+window.QForms.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
 
 class RowFormTextBoxFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormTextBoxFieldView;
     }
 }
+window.QForms.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
 
 class RowFormTimeFieldController extends RowFormFieldController {
     constructor(...args) {
@@ -918,6 +941,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
         return super.getPlaceholder();
     }
 }
+window.QForms.RowFormTimeFieldController = RowFormTimeFieldController;
 
 class TableFormFieldController extends FieldController {
     getViewClass() {
@@ -931,6 +955,7 @@ class TableFormFieldController extends FieldController {
         return null;
     }
 }
+window.QForms.TableFormFieldController = TableFormFieldController;
 
 class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
@@ -940,6 +965,7 @@ class TableFormCheckBoxFieldController extends TableFormFieldController {
         return this.model.getValue(row);
     }
 }
+window.QForms.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;
 
 class TableFormComboBoxFieldController extends TableFormFieldController {
     getViewClass() {
@@ -1100,6 +1126,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
     }*/
 }
+window.QForms.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
 
 class TableFormDatePickerFieldController extends TableFormFieldController {
     getViewClass() {
@@ -1111,6 +1138,7 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
         return '';
     }
 }
+window.QForms.TableFormDatePickerFieldController = TableFormDatePickerFieldController;
 
 class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
@@ -1122,6 +1150,7 @@ class TableFormDateTimeFieldController extends TableFormFieldController {
         return '';
     }
 }
+window.QForms.TableFormDateTimeFieldController = TableFormDateTimeFieldController;
 
 class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
@@ -1132,10 +1161,12 @@ class TableFormLinkFieldController extends TableFormFieldController {
         this.emit('click', {source: this});
     }
 }
+window.QForms.TableFormLinkFieldController = TableFormLinkFieldController;
 
 class TableFormTextAreaFieldController extends TableFormFieldController {
 
 }
+window.QForms.TableFormTextAreaFieldController = TableFormTextAreaFieldController;
 
 class TableFormTextBoxFieldController extends TableFormFieldController {
     /*beginEdit(view) {
@@ -1157,6 +1188,7 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         return TableFormTextBoxFieldView;
     }*/
 }
+window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
 
 class TableFormTimeFieldController extends TableFormFieldController {
     /*getViewClass() {
@@ -1167,6 +1199,7 @@ class TableFormTimeFieldController extends TableFormFieldController {
         return TimeBox.getStringValue(value);
     }
 }
+window.QForms.TableFormTimeFieldController = TableFormTimeFieldController;
 
 class FormController extends Controller {
 
@@ -1225,6 +1258,7 @@ class FormController extends Controller {
         return this.fields[name];
     }
 }
+window.QForms.FormController = FormController;
 
 class RowFormController extends FormController {
     constructor(model, parent) {
@@ -1398,6 +1432,7 @@ class RowFormController extends FormController {
         return this.state.mode;
     }
 }
+window.QForms.RowFormController = RowFormController;
 
 class TableFormController extends FormController {
     constructor(model, parent) {
@@ -1629,6 +1664,7 @@ class TableFormController extends FormController {
         return ds.getFrame() < ds.getFramesCount();
     }
 }
+window.QForms.TableFormController = TableFormController;
 
 class PageController extends Controller {
 
@@ -1763,6 +1799,7 @@ class PageController extends Controller {
         console.log('PageController.onActionClick', name);
     }
 }
+window.QForms.PageController = PageController;
 
 class Model extends EventEmitter {
     constructor(data, parent) {
@@ -1836,6 +1873,7 @@ class Model extends EventEmitter {
         return this.data.actions.length > 0;
     }
 }
+window.QForms.Model = Model;
 
 class Application extends Model {
     constructor(data) {
@@ -1910,6 +1948,7 @@ class Application extends Model {
         return result;
     }
 }
+window.QForms.Application = Application;
 
 class Column  extends Model {
     init() {
@@ -1924,6 +1963,7 @@ class Column  extends Model {
         return this.data.dbType;
     }
 }
+window.QForms.Column = Column;
 
 class DataSource extends Model {
 
@@ -2171,6 +2211,7 @@ class DataSource extends Model {
     }
 
 }
+window.QForms.DataSource = DataSource;
 
 class SqlDataSource extends DataSource {
     constructor(data, parent) {
@@ -2494,6 +2535,7 @@ class SqlDataSource extends DataSource {
         return this.lastFrame < this.getFramesCount();
     }
 }
+window.QForms.SqlDataSource = SqlDataSource;
 
 class Database extends Model {
     constructor(...args) {
@@ -2552,6 +2594,7 @@ class Database extends Model {
         }
     }
 }
+window.QForms.Database = Database;
 
 class Field extends Model {
     // constructor(data, parent) {
@@ -2726,10 +2769,12 @@ class Field extends Model {
         return caption;
     }
 }
+window.QForms.Field = Field;
 
 class CheckBoxField extends Field {
 
 }
+window.QForms.CheckBoxField = CheckBoxField;
 
 class ComboBoxField extends Field {
 
@@ -2775,29 +2820,37 @@ class ComboBoxField extends Field {
         return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }
+window.QForms.ComboBoxField = ComboBoxField;
 
 class DatePickerField extends Field {
     getFormat() {
         return this.data.format;
     }
 }
+window.QForms.DatePickerField = DatePickerField;
 
 class DateTimeField extends Field {
     getFormat() {
         return this.data.format;
     }
 }
+window.QForms.DateTimeField = DateTimeField;
+
 class FileField extends Field {
 }
+window.QForms.FileField = FileField;
 
 class ImageField extends Field {
 }
+window.QForms.ImageField = ImageField;
 
 class LabelField extends Field {
 }
+window.QForms.LabelField = LabelField;
 
 class LinkField extends Field {
 }
+window.QForms.LinkField = LinkField;
 
 class TextAreaField extends Field {
     getRows() {
@@ -2807,11 +2860,17 @@ class TextAreaField extends Field {
         return this.data.cols;
     }
 }
+window.QForms.TextAreaField = TextAreaField;
 
-class TextBoxField extends Field {}
+class TextBoxField extends Field {
+
+}
+window.QForms.TextBoxField = TextBoxField;
+
 class TimeField extends Field {
 
 }
+window.QForms.TimeField = TimeField;
 
 class Form extends Model {
     constructor(data, parent) {
@@ -2927,6 +2986,7 @@ class Form extends Model {
         return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
     }
 }
+window.QForms.Form = Form;
 
 class RowForm extends Form {
     init() {
@@ -2991,10 +3051,12 @@ class RowForm extends Form {
     }
 
 }
+window.QForms.RowForm = RowForm;
 
 class TableForm extends Form {
 
 }
+window.QForms.TableForm = TableForm;
 
 class Page extends Model {
     constructor(data, parent, options) {
@@ -3160,6 +3222,7 @@ class Page extends Model {
         return this.forms.find(form => form.getName() === name);
     }
 }
+window.QForms.Page = Page;
 
 class Table extends Model {
     constructor(...args) {
@@ -3181,3 +3244,4 @@ class Table extends Model {
         return column;
     }
 }
+window.QForms.Table = Table;

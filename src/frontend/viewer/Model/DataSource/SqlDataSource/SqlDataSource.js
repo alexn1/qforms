@@ -320,3 +320,4 @@ class SqlDataSource extends DataSource {
         return this.lastFrame < this.getFramesCount();
     }
 }
+window.QForms.SqlDataSource = SqlDataSource;

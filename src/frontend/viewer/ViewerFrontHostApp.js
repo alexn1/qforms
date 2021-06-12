@@ -19,3 +19,5 @@ class ViewerFrontHostApp extends FrontHostApp {
         applicationController.createView(rootElement);
     }
 }
+
+window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;

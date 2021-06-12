@@ -131,3 +131,4 @@ class PageController extends Controller {
         console.log('PageController.onActionClick', name);
     }
 }
+window.QForms.PageController = PageController;

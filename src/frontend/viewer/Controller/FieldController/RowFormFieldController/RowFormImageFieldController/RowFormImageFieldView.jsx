@@ -6,3 +6,4 @@ class RowFormImageFieldView extends RowFormFieldView {
         </div>;
     }
 }
+window.QForms.RowFormImageFieldView = RowFormImageFieldView;

@@ -49,3 +49,4 @@ class RowFormFileFieldView extends RowFormFieldView {
         setTimeout(() => this.updateSize(), 0);
     }
 }
+window.QForms.RowFormFileFieldView = RowFormFileFieldView;

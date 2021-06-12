@@ -95,3 +95,5 @@ class MdiApplicationController extends ApplicationController {
         this.pages.push(this.activePage = pc);
     }
 }
+
+window.QForms.MdiApplicationController = MdiApplicationController;

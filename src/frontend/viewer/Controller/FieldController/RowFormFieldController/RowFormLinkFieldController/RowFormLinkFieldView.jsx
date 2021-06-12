@@ -8,3 +8,4 @@ class RowFormLinkFieldView extends RowFormFieldView {
         );
     }
 }
+window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;

@@ -16,3 +16,4 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
         );
     }
 }
+window.QForms.RowFormComboBoxFieldView = RowFormComboBoxFieldView;

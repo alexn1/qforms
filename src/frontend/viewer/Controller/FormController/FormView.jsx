@@ -9,3 +9,4 @@ class FormView extends View {
         }
     }
 }
+window.QForms.FormView = FormView;

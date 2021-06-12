@@ -38,3 +38,4 @@ class RowFormTimeFieldView extends RowFormFieldView {
         </div>
     }
 }
+window.QForms.RowFormTimeFieldView = RowFormTimeFieldView;

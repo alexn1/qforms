@@ -3,3 +3,4 @@ class RowFormFileFieldController extends RowFormFieldController {
         return RowFormFileFieldView;
     }
 }
+window.QForms.RowFormFileFieldController = RowFormFileFieldController;

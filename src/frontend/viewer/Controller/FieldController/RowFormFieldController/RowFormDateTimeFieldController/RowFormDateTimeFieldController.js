@@ -178,3 +178,4 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         ].join(', ');
     }
 }
+window.QForms.RowFormDateTimeFieldController = RowFormDateTimeFieldController;

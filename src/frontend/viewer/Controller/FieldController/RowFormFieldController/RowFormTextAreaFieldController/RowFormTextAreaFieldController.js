@@ -3,3 +3,4 @@ class RowFormTextAreaFieldController extends RowFormFieldController {
         return RowFormTextAreaFieldView;
     }
 }
+window.QForms.RowFormTextAreaFieldController = RowFormTextAreaFieldController;

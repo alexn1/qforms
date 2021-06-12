@@ -9,3 +9,4 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
         );
     }
 }
+window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;

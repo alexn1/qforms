@@ -58,3 +58,4 @@ class FieldController extends Controller {
     }
 
 }
+window.QForms.FieldController = FieldController;

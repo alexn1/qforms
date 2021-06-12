@@ -18,3 +18,4 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         return TableFormTextBoxFieldView;
     }*/
 }
+window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;

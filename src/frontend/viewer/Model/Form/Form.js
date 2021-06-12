@@ -112,3 +112,4 @@ class Form extends Model {
         return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
     }
 }
+window.QForms.Form = Form;

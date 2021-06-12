@@ -37,3 +37,4 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         </div>;
     }
 }
+window.QForms.RowFormTextBoxFieldView = RowFormTextBoxFieldView;

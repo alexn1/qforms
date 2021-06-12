@@ -10,3 +10,5 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
         return RowFormCheckBoxFieldView;
     }
 }
+
+window.QForms.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;

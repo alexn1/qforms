@@ -16,3 +16,5 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         return ApplicationController.isInDebugMode() ? '[null]' : null;
     }
 }
+
+window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;

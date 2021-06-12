@@ -7,3 +7,4 @@ class RowFormLinkFieldController extends  RowFormFieldController {
         this.emit({source: this});
     }
 }
+window.QForms.RowFormLinkFieldController = RowFormLinkFieldController;

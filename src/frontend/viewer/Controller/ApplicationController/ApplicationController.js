@@ -208,3 +208,5 @@ class ApplicationController extends Controller {
         // }
     }
 }
+
+window.QForms.ApplicationController = ApplicationController;

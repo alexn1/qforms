@@ -10,3 +10,4 @@ class TableFormFieldController extends FieldController {
         return null;
     }
 }
+window.QForms.TableFormFieldController = TableFormFieldController;

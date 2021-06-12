@@ -170,3 +170,4 @@ class RowFormController extends FormController {
         return this.state.mode;
     }
 }
+window.QForms.RowFormController = RowFormController;

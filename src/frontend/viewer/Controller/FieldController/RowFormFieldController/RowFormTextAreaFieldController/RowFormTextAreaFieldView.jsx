@@ -14,3 +14,4 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
         </div>;
     }
 }
+window.QForms.RowFormTextAreaFieldView = RowFormTextAreaFieldView;

@@ -54,3 +54,4 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         );
     }
 }
+window.QForms.RowFormDateTimeFieldView = RowFormDateTimeFieldView;

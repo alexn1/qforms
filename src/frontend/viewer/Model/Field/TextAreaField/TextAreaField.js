@@ -6,3 +6,4 @@ class TextAreaField extends Field {
         return this.data.cols;
     }
 }
+window.QForms.TextAreaField = TextAreaField;

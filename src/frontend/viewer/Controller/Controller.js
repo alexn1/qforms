@@ -30,3 +30,5 @@ class Controller extends EventEmitter {
         return this.parent;
     }
 }
+
+window.QForms.Controller = Controller;

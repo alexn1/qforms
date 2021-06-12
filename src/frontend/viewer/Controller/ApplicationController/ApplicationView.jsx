@@ -30,3 +30,5 @@ class ApplicationView extends ReactComponent {
         );
     }*/
 }
+
+window.QForms.ApplicationView = ApplicationView;

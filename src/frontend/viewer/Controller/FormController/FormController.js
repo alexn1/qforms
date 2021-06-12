@@ -55,3 +55,4 @@ class FormController extends Controller {
         return this.fields[name];
     }
 }
+window.QForms.FormController = FormController;

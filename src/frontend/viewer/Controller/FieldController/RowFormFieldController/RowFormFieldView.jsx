@@ -8,3 +8,4 @@ class RowFormFieldView extends ReactComponent {
         ];
     }
 }
+window.QForms.RowFormFieldView = RowFormFieldView;

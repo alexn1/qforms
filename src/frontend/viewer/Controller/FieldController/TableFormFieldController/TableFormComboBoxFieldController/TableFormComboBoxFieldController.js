@@ -157,3 +157,4 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
     }*/
 }
+window.QForms.TableFormComboBoxFieldController = TableFormComboBoxFieldController;

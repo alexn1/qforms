@@ -195,3 +195,4 @@ class RowFormFieldController extends FieldController {
         return this.state.error;
     }
 }
+window.QForms.RowFormFieldController = RowFormFieldController;

@@ -7,6 +7,8 @@ class View extends ReactComponent {
   }
 
 }
+
+window.QForms.View = View;
 class ApplicationView extends ReactComponent {
   renderActivePage() {
     const ctrl = this.props.ctrl;
@@ -42,6 +44,8 @@ class ApplicationView extends ReactComponent {
 
 
 }
+
+window.QForms.ApplicationView = ApplicationView;
 class MdiApplicationView extends ApplicationView {
   getTabs() {
     return this.props.ctrl.pages.map(pageCtrl => {
@@ -78,6 +82,8 @@ class MdiApplicationView extends ApplicationView {
   }
 
 }
+
+window.QForms.MdiApplicationView = MdiApplicationView;
 class SdiApplicationView extends ApplicationView {
   render() {
     console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
@@ -96,6 +102,8 @@ class SdiApplicationView extends ApplicationView {
   }
 
 }
+
+window.QForms.SdiApplicationView = SdiApplicationView;
 class RowFormFieldView extends ReactComponent {
   getClassList() {
     const ctrl = this.props.ctrl;
@@ -103,6 +111,8 @@ class RowFormFieldView extends ReactComponent {
   }
 
 }
+
+window.QForms.RowFormFieldView = RowFormFieldView;
 class RowFormCheckBoxFieldView extends RowFormFieldView {
   render() {
     // console.log('RowFormCheckBoxFieldView.render');
@@ -118,6 +128,8 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
 class RowFormComboBoxFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -135,6 +147,8 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
 class RowFormDatePickerFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -153,6 +167,8 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormDatePickerFieldView = RowFormDatePickerFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormDateTimeFieldView extends RowFormFieldView {
@@ -237,6 +253,8 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormDateTimeFieldView = RowFormDateTimeFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormFileFieldView extends RowFormFieldView {
@@ -308,6 +326,8 @@ class RowFormFileFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormFileFieldView = RowFormFileFieldView;
 class RowFormImageFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -320,6 +340,8 @@ class RowFormImageFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormImageFieldView = RowFormImageFieldView;
 class RowFormLinkFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -332,6 +354,8 @@ class RowFormLinkFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
 class RowFormTextAreaFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
@@ -349,6 +373,8 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormTextBoxFieldView extends RowFormFieldView {
@@ -417,6 +443,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormTimeFieldView extends RowFormFieldView {
@@ -484,6 +512,8 @@ class RowFormTimeFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormTimeFieldView = RowFormTimeFieldView;
 class TableFormFieldView extends ReactComponent {
   constructor(props) {
     super(props);
@@ -495,6 +525,8 @@ class TableFormFieldView extends ReactComponent {
   }
 
 }
+
+window.QForms.TableFormFieldView = TableFormFieldView;
 class TableFormCheckBoxFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -510,6 +542,8 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
   }
 
 }
+
+window.QForms.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
 class TableFormComboBoxFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -523,6 +557,8 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
   }
 
 }
+
+window.QForms.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
 class TableFormDatePickerFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -536,6 +572,8 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
   }
 
 }
+
+window.QForms.TableFormDatePickerFieldView = TableFormDatePickerFieldView;
 class TableFormLinkFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -550,6 +588,8 @@ class TableFormLinkFieldView extends TableFormFieldView {
   }
 
 }
+
+window.QForms.TableFormLinkFieldView = TableFormLinkFieldView;
 class TableFormTextBoxFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -563,6 +603,8 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
   }
 
 }
+
+window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class FormView extends View {
@@ -582,6 +624,8 @@ class FormView extends View {
   }
 
 }
+
+window.QForms.FormView = FormView;
 class RowFormView extends FormView {
   renderToolbar() {
     // console.log('RowFormView.renderToolbar');
@@ -690,6 +734,8 @@ class RowFormView extends FormView {
   }
 
 }
+
+window.QForms.RowFormView = RowFormView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class TableFormView extends FormView {
@@ -829,6 +875,8 @@ class TableFormView extends FormView {
   }
 
 }
+
+window.QForms.TableFormView = TableFormView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class PageView extends View {
@@ -946,6 +994,8 @@ class PageView extends View {
   }
 
 }
+
+window.QForms.PageView = PageView;
 class PageView2 extends PageView {
   getAllTabs() {
     const ctrl = this.props.ctrl;
@@ -979,3 +1029,5 @@ class PageView2 extends PageView {
   }
 
 }
+
+window.QForms.PageView2 = PageView2;

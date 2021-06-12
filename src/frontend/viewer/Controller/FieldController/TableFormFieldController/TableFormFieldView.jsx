@@ -7,3 +7,4 @@ class TableFormFieldView extends ReactComponent {
         return this.span.current.offsetWidth;
     }
 }
+window.QForms.TableFormFieldView = TableFormFieldView;

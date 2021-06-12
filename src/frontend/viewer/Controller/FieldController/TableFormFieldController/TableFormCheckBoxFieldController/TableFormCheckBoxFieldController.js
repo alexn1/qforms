@@ -6,3 +6,4 @@ class TableFormCheckBoxFieldController extends TableFormFieldController {
         return this.model.getValue(row);
     }
 }
+window.QForms.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;

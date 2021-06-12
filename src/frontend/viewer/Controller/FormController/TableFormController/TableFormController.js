@@ -228,3 +228,4 @@ class TableFormController extends FormController {
         return ds.getFrame() < ds.getFramesCount();
     }
 }
+window.QForms.TableFormController = TableFormController;

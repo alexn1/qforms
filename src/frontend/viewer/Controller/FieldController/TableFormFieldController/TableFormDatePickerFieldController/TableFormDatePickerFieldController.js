@@ -8,3 +8,4 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
         return '';
     }
 }
+window.QForms.TableFormDatePickerFieldController = TableFormDatePickerFieldController;

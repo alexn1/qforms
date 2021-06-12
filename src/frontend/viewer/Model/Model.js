@@ -70,3 +70,4 @@ class Model extends EventEmitter {
         return this.data.actions.length > 0;
     }
 }
+window.QForms.Model = Model;

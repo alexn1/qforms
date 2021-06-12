@@ -12,3 +12,5 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+window.QForms.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;

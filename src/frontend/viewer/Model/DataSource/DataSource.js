@@ -244,3 +244,4 @@ class DataSource extends Model {
     }
 
 }
+window.QForms.DataSource = DataSource;

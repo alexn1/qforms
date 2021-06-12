@@ -1,1 +1,4 @@
-class TextBoxField extends Field {}
+class TextBoxField extends Field {
+
+}
+window.QForms.TextBoxField = TextBoxField;

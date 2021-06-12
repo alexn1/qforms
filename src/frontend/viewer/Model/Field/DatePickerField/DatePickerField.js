@@ -3,3 +3,4 @@ class DatePickerField extends Field {
         return this.data.format;
     }
 }
+window.QForms.DatePickerField = DatePickerField;

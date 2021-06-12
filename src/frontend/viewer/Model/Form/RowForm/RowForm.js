@@ -61,3 +61,4 @@ class RowForm extends Form {
     }
 
 }
+window.QForms.RowForm = RowForm;

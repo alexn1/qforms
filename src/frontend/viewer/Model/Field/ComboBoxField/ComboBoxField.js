@@ -42,3 +42,4 @@ class ComboBoxField extends Field {
         return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }
+window.QForms.ComboBoxField = ComboBoxField;

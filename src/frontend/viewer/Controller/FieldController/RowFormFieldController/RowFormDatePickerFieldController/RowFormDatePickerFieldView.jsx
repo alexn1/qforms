@@ -15,3 +15,4 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
         </div>;
     }
 }
+window.QForms.RowFormDatePickerFieldView = RowFormDatePickerFieldView;

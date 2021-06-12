@@ -102,3 +102,4 @@ class PageView extends View {
         );
     }
 }
+window.QForms.PageView = PageView;

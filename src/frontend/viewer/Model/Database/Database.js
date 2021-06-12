@@ -55,3 +55,4 @@ class Database extends Model {
         }
     }
 }
+window.QForms.Database = Database;

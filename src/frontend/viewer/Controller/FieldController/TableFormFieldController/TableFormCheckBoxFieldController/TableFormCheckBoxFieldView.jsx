@@ -13,3 +13,4 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
         );
     }
 }
+window.QForms.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;

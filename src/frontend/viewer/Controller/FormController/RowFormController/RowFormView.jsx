@@ -116,3 +116,4 @@ class RowFormView extends FormView {
         );
     }
 }
+window.QForms.RowFormView = RowFormView;

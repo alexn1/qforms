@@ -18,3 +18,4 @@ class Table extends Model {
         return column;
     }
 }
+window.QForms.Table = Table;

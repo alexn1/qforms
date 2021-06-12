@@ -3,3 +3,4 @@ class RowFormImageFieldController extends RowFormFieldController {
         return RowFormImageFieldView;
     }
 }
+window.QForms.RowFormImageFieldController = RowFormImageFieldController;

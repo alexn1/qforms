@@ -32,3 +32,5 @@ class MdiApplicationView extends ApplicationView {
         );
     }
 }
+
+window.QForms.MdiApplicationView = MdiApplicationView;

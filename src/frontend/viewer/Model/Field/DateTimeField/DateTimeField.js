@@ -3,3 +3,4 @@ class DateTimeField extends Field {
         return this.data.format;
     }
 }
+window.QForms.DateTimeField = DateTimeField;

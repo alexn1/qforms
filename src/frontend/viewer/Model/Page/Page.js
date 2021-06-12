@@ -162,3 +162,4 @@ class Page extends Model {
         return this.forms.find(form => form.getName() === name);
     }
 }
+window.QForms.Page = Page;

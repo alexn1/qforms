@@ -3,3 +3,5 @@ class SdiApplicationController extends ApplicationController {
         return SdiApplicationView;
     }
 }
+
+window.QForms.SdiApplicationController = SdiApplicationController;

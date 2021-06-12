@@ -71,3 +71,4 @@ class Application extends Model {
         return result;
     }
 }
+window.QForms.Application = Application;

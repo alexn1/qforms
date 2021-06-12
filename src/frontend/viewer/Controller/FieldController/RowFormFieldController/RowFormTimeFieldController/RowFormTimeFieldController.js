@@ -30,3 +30,4 @@ class RowFormTimeFieldController extends RowFormFieldController {
         return super.getPlaceholder();
     }
 }
+window.QForms.RowFormTimeFieldController = RowFormTimeFieldController;
