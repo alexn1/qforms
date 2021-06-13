@@ -48,7 +48,7 @@ class Editor {
         return this[col].find(obj => obj.getName() === name);
     }*/
     createDataSource(data) {
-        const dataSource = new DataSource(data, this);
+        const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
@@ -191,7 +191,7 @@ class ApplicationEditor extends Editor {
         }
     }
     createDatabase(data) {
-        const database = new Database(data, this);
+        const database = new DatabaseEditor(data, this);
         database.init();
         this.databases.push(database);
         return database;
@@ -381,7 +381,7 @@ class ColumnEditor extends Editor {
 
 }
 
-class DataSource extends Editor {
+class DataSourceEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -401,7 +401,7 @@ class DataSource extends Editor {
         return keyColumn;
     }
     removeKeyColumn(keyColumn) {
-        console.log('Database.removeParam', keyColumn.getName());
+        console.log('DatabaseEditor.removeParam', keyColumn.getName());
         const i = this.keyColumns.indexOf(keyColumn);
         if (i === -1) throw new Error('no such keyColumn');
         this.keyColumns.splice(i, 1);
@@ -547,17 +547,16 @@ class DataSource extends Editor {
             controller: 'DataSource',
             action    : 'getView',
             params    : Helper.encodeObject({
-                dataSource: (this instanceof DataSource) ? this.getName() : undefined,
+                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
                 view      : view
             })
         };
         if (this.parent instanceof Page) {
-
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.getFileName() : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
-            args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined);
+            args.params.form         = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined);
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -607,7 +606,7 @@ class DataSource extends Editor {
 
 }
 
-class Database extends Editor {
+class DatabaseEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -642,13 +641,13 @@ class Database extends Editor {
         return table;
     }
     removeParam(param) {
-        console.log('Database.removeParam', param.getName());
+        console.log('DatabaseEditor.removeParam', param.getName());
         const i = this.params.indexOf(param);
         if (i === -1) throw new Error('no such param');
         this.params.splice(i, 1);
     }
     removeTable(table) {
-        console.log('Database.removeTable', table.getName());
+        console.log('DatabaseEditor.removeTable', table.getName());
         const i = this.tables.indexOf(table);
         if (i === -1) throw new Error('no such table');
         this.tables.splice(i, 1);
@@ -711,7 +710,7 @@ class Database extends Editor {
     }
 
     async getView(view) {
-        console.log('Database.getView', view);
+        console.log('DatabaseEditor.getView', view);
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
@@ -2935,7 +2934,7 @@ class PageController extends VisualController {
 
     async newDataSourceAction() {
         await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
-            const dataSourceData = await DataSource.create(this.model, {
+            const dataSourceData = await DataSourceEditor.create(this.model, {
                 name : values.name,
                 class: values.class
             });

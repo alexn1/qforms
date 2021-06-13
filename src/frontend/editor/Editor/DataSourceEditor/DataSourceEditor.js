@@ -1,4 +1,4 @@
-class DataSource extends Editor {
+class DataSourceEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -164,17 +164,16 @@ class DataSource extends Editor {
             controller: 'DataSource',
             action    : 'getView',
             params    : Helper.encodeObject({
-                dataSource: (this instanceof DataSource) ? this.getName() : undefined,
+                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
                 view      : view
             })
         };
         if (this.parent instanceof Page) {
-
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.getFileName() : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
         }
         if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
-            args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined);
+            args.params.form         = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined);
         }
         return await FrontHostApp.doHttpRequest(args);
     }

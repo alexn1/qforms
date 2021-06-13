@@ -48,7 +48,7 @@ class Editor {
         return this[col].find(obj => obj.getName() === name);
     }*/
     createDataSource(data) {
-        const dataSource = new DataSource(data, this);
+        const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;

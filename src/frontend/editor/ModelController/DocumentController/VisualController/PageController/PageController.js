@@ -75,7 +75,7 @@ class PageController extends VisualController {
 
     async newDataSourceAction() {
         await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
-            const dataSourceData = await DataSource.create(this.model, {
+            const dataSourceData = await DataSourceEditor.create(this.model, {
                 name : values.name,
                 class: values.class
             });
