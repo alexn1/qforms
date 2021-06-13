@@ -1,4 +1,4 @@
-class Table extends Editor {
+class TableEditor extends Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;
@@ -18,7 +18,7 @@ class Table extends Editor {
         return column;
     }
     removeColumn(column) {
-        console.log('Table.removeColumn', column.getName());
+        console.log('TableEditor.removeColumn', column.getName());
         const i = this.columns.indexOf(column);
         if (i === -1) throw new Error('no such column');
         this.columns.splice(i, 1);

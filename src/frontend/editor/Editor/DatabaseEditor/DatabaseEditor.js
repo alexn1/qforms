@@ -27,7 +27,7 @@ class DatabaseEditor extends Editor {
     }
 
     createTable(data) {
-        const table = new Table(data, this);
+        const table = new TableEditor(data, this);
         table.init();
         this.tables.push(table);
         return table;

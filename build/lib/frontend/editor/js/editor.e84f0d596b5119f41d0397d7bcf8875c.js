@@ -197,7 +197,7 @@ class ApplicationEditor extends Editor {
         return database;
     }
     createPageLink(data) {
-        const pageLink = new PageLink(data, this);
+        const pageLink = new PageLinkEditor(data, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
@@ -628,14 +628,14 @@ class DatabaseEditor extends Editor {
     }
 
     createParam(data) {
-        const param = new Param(data, this);
+        const param = new ParamEditor(data, this);
         param.init();
         this.params.push(param);
         return param;
     }
 
     createTable(data) {
-        const table = new Table(data, this);
+        const table = new TableEditor(data, this);
         table.init();
         this.tables.push(table);
         return table;
@@ -1294,7 +1294,7 @@ class PageEditor extends Editor {
 
 }
 
-class PageLink extends Editor {
+class PageLinkEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -1340,13 +1340,13 @@ class PageLink extends Editor {
         return this.data['@attributes'].fileName;
     }
     remove() {
-        console.log('PageLink.remove', this.getName());
+        console.log('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
 
 }
 
-class Param extends Editor {
+class ParamEditor extends Editor {
 
     constructor(data, database) {
         super(data, database);
@@ -1385,7 +1385,7 @@ class Param extends Editor {
     }
 }
 
-class Table extends Editor {
+class TableEditor extends Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;
@@ -1405,7 +1405,7 @@ class Table extends Editor {
         return column;
     }
     removeColumn(column) {
-        console.log('Table.removeColumn', column.getName());
+        console.log('TableEditor.removeColumn', column.getName());
         const i = this.columns.indexOf(column);
         if (i === -1) throw new Error('no such column');
         this.columns.splice(i, 1);
