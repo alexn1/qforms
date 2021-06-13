@@ -80,5 +80,4 @@ class Action extends Editor {
             })
         });
     }
-
 }

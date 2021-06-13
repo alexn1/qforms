@@ -52,8 +52,8 @@ class ApplicationController extends VisualController {
         return [
             {'action': 'newDatabase'  , 'caption': 'New Database'   },
             {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newAction'    , 'caption': 'New Action'},
-            {'action': 'newPage'      , 'caption': 'New Page'       }
+            {'action': 'newAction'    , 'caption': 'New Action'     },
+            {'action': 'newPage'      , 'caption': 'New Page'       },
         ];
     }
 
