@@ -1,4 +1,4 @@
-class Param extends Model {
+class Param extends Editor {
 
     constructor(data, database) {
         super(data, database);

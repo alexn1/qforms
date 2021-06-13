@@ -1,4 +1,4 @@
-class Form extends Model {
+class Form extends Editor {
 
     constructor(data, page) {
         super(data, page);

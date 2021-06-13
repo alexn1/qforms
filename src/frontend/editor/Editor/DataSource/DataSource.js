@@ -1,4 +1,4 @@
-class DataSource extends Model {
+class DataSource extends Editor {
 
     constructor(data, parent) {
         super(data, parent);

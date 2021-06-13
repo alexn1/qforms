@@ -1,4 +1,4 @@
-class Action extends Model {
+class Action extends Editor {
     /*constructor(data, parent) {
         super(data, parent);
     }*/

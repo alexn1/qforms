@@ -1,4 +1,4 @@
-class Application extends Model {
+class Application extends Editor {
 
     constructor(data) {
         super(data);

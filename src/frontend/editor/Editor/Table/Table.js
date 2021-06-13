@@ -1,4 +1,4 @@
-class Table extends Model {
+class Table extends Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;

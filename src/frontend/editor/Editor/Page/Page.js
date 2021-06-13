@@ -1,4 +1,4 @@
-class Page extends Model {
+class Page extends Editor {
 
     constructor(data, pageLink) {
         super(data);

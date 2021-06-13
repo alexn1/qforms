@@ -1,4 +1,4 @@
-class Column extends Model {
+class Column extends Editor {
 
     constructor(data, table) {
         super(data, table);

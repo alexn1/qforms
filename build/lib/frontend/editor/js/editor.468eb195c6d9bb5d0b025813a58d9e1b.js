@@ -1,3 +1,1470 @@
+class Editor {
+
+    constructor(data, parent = null) {
+        if (!data) throw new Error('no data');
+        this.data   = data;
+        this.parent = parent;
+    }
+
+    init() {
+    }
+
+    getClassName() {
+        return this.data['@class'];
+    }
+
+    getName() {
+        return this.getAttr('name');
+    }
+
+    getFullName(splitter = '.') {
+        let name;
+        if (this.form) {
+            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
+        } else if (this.page) {
+            name = `${this.page.getName()}${splitter}${this.getName()}`;
+        } else {
+            name = this.getName();
+        }
+        return name;
+    }
+
+    async setValue(name, value) {
+        throw new Error(`${this.constructor.name}.setValue not implemented`);
+    }
+
+    getAttr(name) {
+        return this.data['@attributes'][name];
+    }
+    getAttributes() {
+        return this.data['@attributes'];
+    }
+
+    setAttr(name, value) {
+        this.data['@attributes'][name] = value;
+    }
+
+    /*getObject(col, name) {
+        return this[col].find(obj => obj.getName() === name);
+    }*/
+    createDataSource(data) {
+        const dataSource = new DataSource(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    removeDataSource(dataSource) {
+        // console.log('Editor.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1) throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
+    createAction(data) {
+        const action = new Action(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }
+    removeAction(action) {
+        // console.log('Editor.removeField', action.getName());
+        const i = this.actions.indexOf(action);
+        if (i === -1) throw new Error('no such action');
+        this.actions.splice(i, 1);
+    }
+
+}
+
+class Action extends Editor {
+    /*constructor(data, parent) {
+        super(data, parent);
+    }*/
+
+    /*async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view : view,
+                page : this.data !== undefined ? this.form.page.getName() : null,
+                form : this.data !== undefined ? this.form.getName()      : null,
+            })
+        });
+    }*/
+
+    getParams() {
+        if (this.parent instanceof Form) {
+            return {
+                pageFileName: this.parent.page.pageLink.getAttr('fileName'),
+                form        : this.parent.getAttr('name'),
+                action      : this.getAttr('name'),
+            };
+        } else if (this.parent instanceof Page) {
+            return {
+                pageFileName: this.parent.pageLink.getAttr('fileName'),
+                action      : this.getAttr('name'),
+            };
+        }
+        return {
+            action: this.getAttr('name'),
+        };
+    }
+
+    async setValue(name, value) {
+        //console.log('Action.setValue', name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                ...this.getParams(),
+                attr        : name,
+                value       : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                ...this.getParams(),
+            })
+        });
+    }
+    async delete() {
+        console.log('Action.delete', this.getName());
+        await this.deleteData();
+        this.parent.removeAction(this);
+    }
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Action',
+            action     : 'moveUp',
+            params     : Helper.encodeObject({
+                ...this.getParams(),
+            })
+        });
+    }
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Action',
+            action     : 'moveDown',
+            params     : Helper.encodeObject({
+                ...this.getParams(),
+            })
+        });
+    }
+
+}
+
+class Application extends Editor {
+
+    constructor(data) {
+        super(data);
+        this.databases   = [];
+        this.dataSources = [];
+        this.actions     = [];
+        this.pageLinks   = [];
+    }
+
+    init() {
+        console.log('Application.init', this.data);
+        // databases
+        for (const data of this.data.databases) {
+            this.createDatabase(data);
+        }
+
+        // dataSources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+
+        // pageLinks
+        for (const data of this.data.pageLinks) {
+            this.createPageLink(data);
+        }
+    }
+    createDatabase(data) {
+        const database = new Database(data, this);
+        database.init();
+        this.databases.push(database);
+        return database;
+    }
+    createPageLink(data) {
+        const pageLink = new PageLink(data, this);
+        pageLink.init();
+        this.pageLinks.push(pageLink);
+        return pageLink;
+    }
+    removeDatabase(database) {
+        console.log('Application.removeDatabase', database.getName());
+        const i = this.databases.indexOf(database);
+        if (i === -1) throw new Error('no such database');
+        this.databases.splice(i, 1);
+    }
+
+    removePageLink(pageLink) {
+        console.log('Application.removePageLink', pageLink.getName());
+        const i = this.pageLinks.indexOf(pageLink);
+        if (i === -1) throw new Error('no such pageLink');
+        this.pageLinks.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                attr : name,
+                value: value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async newPageAndPageLinkData(params) {
+        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+    }
+
+    async newPage(params) {
+        const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
+        const pageLink = this.createPageLink(pageLinkData);
+        return new Page(pageData, pageLink);
+    }
+
+    async newDatabase(params) {
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createDatabase(data);
+    }
+
+    async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                app : this.getName(),
+                view: view
+            })
+        });
+    }
+
+    async saveView(text, view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'saveView',
+            params    : Helper.encodeObject({
+                app : this.getName(),
+                view: view,
+                text: text
+            })
+        });
+    }
+
+    async saveController(text) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'saveController',
+            params    : Helper.encodeObject({
+                app : this.getName(),
+                text: text
+            })
+        });
+    }
+
+    async createView() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'createView',
+            params    : Helper.encodeObject({
+                app: this.getName()
+            })
+        });
+    }
+
+    async createController() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'createController',
+            params    : Helper.encodeObject({
+                app: this.getName()
+            })
+        });
+    }
+
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                app: this.getName()
+            })
+        });
+    }
+
+    async newDataSource(params) {
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createDataSource(data);
+    }
+
+    async newAction(params) {
+        // params['pageFileName'] = this.page.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createAction(data);
+    }
+
+}
+
+class Column extends Editor {
+
+    constructor(data, table) {
+        super(data, table);
+        this.table = table;
+    }
+
+    async setValue(name, value) {
+        //console.log('Column.setValue', name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                database: this.table.database.getName(),
+                table   : this.table.getName(),
+                column  : this.getName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                database: this.table.database.getName(),
+                table   : this.table.getName(),
+                column  : this.getName(),
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeColumn(this);
+    }
+
+}
+
+class DataSource extends Editor {
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.keyColumns = [];
+    }
+
+    init() {
+        for (const data of this.data.keyColumns) {
+            this.createKeyColumn(data);
+        }
+    }
+
+    createKeyColumn(data) {
+        const keyColumn = new KeyColumn(data, this);
+        keyColumn.init();
+        this.keyColumns.push(keyColumn);
+        return keyColumn;
+    }
+    removeKeyColumn(keyColumn) {
+        console.log('Database.removeParam', keyColumn.getName());
+        const i = this.keyColumns.indexOf(keyColumn);
+        if (i === -1) throw new Error('no such keyColumn');
+        this.keyColumns.splice(i, 1);
+    }
+    static async create(parent, params) {
+        if (parent instanceof Form) {
+            const form = parent;
+            params['page']  = form.page.pageLink.getFileName();
+            params['form']  = form.getName();
+        }
+        if (parent instanceof Page) {
+            const page = parent;
+            params['page']  = page.pageLink.getFileName();
+        }
+        return await FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const args = {
+            controller: 'DataSource',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                dataSource: this.getName(),
+                attr      : name,
+                value     : value
+            })
+        };
+        if (this.parent instanceof Page) {
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        if (this.parent instanceof Form) {
+            args.params.form         = Helper.encodeValue(this.parent.getName());
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+        }
+        const data = await FrontHostApp.doHttpRequest(args);
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                dataSource: this.getName()
+            })
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = Helper.encodeValue(this.parent.getName());
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+        }
+        await FrontHostApp.doHttpRequest(args);
+    }
+
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                ...(this.parent instanceof Page ? {page: this.parent.pageLink.getFileName()} : {}),
+                ...(this.parent instanceof Form ? {
+                    form: this.parent.getName(),
+                    page: this.parent.page.pageLink.getFileName()
+                } : {}),
+                dataSource: this.getName(),
+            })
+        });
+    }
+
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDataSource(this);
+    }
+
+    async moveUp() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'moveUp',
+            params    : Helper.encodeObject({
+                dataSource: this.getName()
+            })
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = Helper.encodeValue(this.parent.getName());
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+        }
+        return await FrontHostApp.doHttpRequest(args);
+    }
+
+    async moveDown() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'moveDown',
+            params    : Helper.encodeObject({
+                dataSource: this.getName()
+            })
+        };
+        if (this.parent instanceof Page) {
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        if (this.parent instanceof Form) {
+            args.params.form = Helper.encodeValue(this.parent.getName());
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+        }
+        return await FrontHostApp.doHttpRequest(args);
+    }
+
+    async newKeyColumnData(name) {
+        const args = {
+            controller: 'KeyColumn',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                dataSource: this.getName(),
+                name      : name
+            })
+        };
+        if (this.parent instanceof Form) {
+            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = Helper.encodeValue(this.parent.getName());
+        }
+        if (this.parent instanceof Page) {
+            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        return await FrontHostApp.doHttpRequest(args);
+    }
+    async newKeyColumn(name) {
+        const data = await this.newKeyColumnData(name);
+        return this.createKeyColumn(data);
+    }
+    async getView(view) {
+        const args = {
+            controller: 'DataSource',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                dataSource: (this instanceof DataSource) ? this.getName() : undefined,
+                view      : view
+            })
+        };
+        if (this.parent instanceof Page) {
+
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.getFileName() : undefined);
+        }
+        if (this.parent instanceof Form) {
+            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
+            args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
+        }
+        return await FrontHostApp.doHttpRequest(args);
+    }
+
+    async saveController(text) {
+        const args = {
+            controller: 'DataSource',
+            action    : 'saveController',
+            params    : Helper.encodeObject({
+                dataSource: this.getName(),
+                text      : text
+            })
+        };
+        if (this.parent instanceof Page) {
+            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+        }
+        if (this.parent instanceof Form) {
+            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form         = Helper.encodeValue(this.parent.getName());
+        }
+        return await FrontHostApp.doHttpRequest(args);
+    }
+
+    async createController() {
+        const args = {
+            controller: 'DataSource',
+            action    : 'createController',
+            params    : Helper.encodeObject({
+                page        : this.parent.page.getName(),
+                pageFileName: this.parent.page.pageLink.getFileName(),
+                form        : this.parent.getName(),
+                dataSource  : this.getName()
+            })
+        };
+        return await FrontHostApp.doHttpRequest(args);
+    }
+
+    getFullName() {
+        if (this.parent instanceof Form) {
+            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
+        } else if (this.parent instanceof Page) {
+            return [this.parent.getName(), this.getName()].join('.');
+        } else if (this.parent instanceof Application) {
+            return this.getName();
+        }
+    }
+
+}
+
+class Database extends Editor {
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.params = [];
+        this.tables = [];
+    }
+
+    init() {
+
+        // params
+        for (const data of this.data.params) {
+            this.createParam(data);
+        }
+
+        // tables
+        for (const data of this.data.tables) {
+            this.createTable(data);
+        }
+    }
+
+    createParam(data) {
+        const param = new Param(data, this);
+        param.init();
+        this.params.push(param);
+        return param;
+    }
+
+    createTable(data) {
+        const table = new Table(data, this);
+        table.init();
+        this.tables.push(table);
+        return table;
+    }
+    removeParam(param) {
+        console.log('Database.removeParam', param.getName());
+        const i = this.params.indexOf(param);
+        if (i === -1) throw new Error('no such param');
+        this.params.splice(i, 1);
+    }
+    removeTable(table) {
+        console.log('Database.removeTable', table.getName());
+        const i = this.tables.indexOf(table);
+        if (i === -1) throw new Error('no such table');
+        this.tables.splice(i, 1);
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDatabase(this);
+    }
+
+    async newParam(name) {
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                name    : name
+            })
+        });
+        return this.createParam(data);
+    }
+
+    async newTable(params) {
+        if (!params.name) throw new Error('newTable: no name');
+        const data =  await FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                database: this.getName(),
+                name    : params.name,
+                columns : params.columns
+            })
+        });
+        return this.createTable(data);
+    }
+
+    async getView(view) {
+        console.log('Database.getView', view);
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view    : view,
+                database: this.data !== undefined ? this.getName() : null
+            })
+        });
+    }
+
+    async getTableInfo(table) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action    : 'getTableInfo',
+            params    : Helper.encodeObject({
+                database: this.data !== undefined ? this.getName() : null,
+                table   : table
+            })
+        });
+    }
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveUp',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Database',
+            action     : 'moveDown',
+            params    : Helper.encodeObject({
+                database: this.getName()
+            })
+        });
+    }
+
+}
+
+class Field extends Editor {
+
+    constructor(data, form) {
+        super(data, form);
+        this.form = form;
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form        : this.form.getName(),
+                field       : this.getName(),
+                attr        : name,
+                value       : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller : 'Field',
+            action     : 'delete',
+            params     : Helper.encodeObject({
+                pageFileName:this.form.page.pageLink.getFileName(),
+                form        :this.form.getName(),
+                field       :this.getName()
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeField(this);
+    }
+    async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view : view,
+                page : this.data !== undefined ? this.form.page.getName() : null,
+                form : this.data !== undefined ? this.form.getName()      : null,
+                field: this.data !== undefined ? this.getName()           : null
+            })
+        });
+    }
+
+    async saveView(text, view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'saveView',
+            params    : Helper.encodeObject({
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                view : view,
+                text : text
+            })
+        });
+    }
+
+    async saveController(text) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'saveController',
+            params    : Helper.encodeObject({
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                text : text
+            })
+        });
+    }
+
+    async createView() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'createView',
+            params    : Helper.encodeObject({
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            })
+        });
+    }
+
+    async createController() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'createController',
+            params    : Helper.encodeObject({
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            })
+        });
+    }
+
+    async changeClass(params) {
+        params['page']  = this.form.page.getName();
+        params['form']  = this.form.getName();
+        params['field'] = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'changeClass',
+            params    : Helper.encodeObject(params)
+        });
+        return this.data = data;
+    }
+
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Field',
+            action     : 'moveUp',
+            params     : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form        : this.form.getName(),
+                field       : this.getName()
+            })
+        });
+    }
+
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Field',
+            action     : 'moveDown',
+            params     : Helper.encodeObject({
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form        : this.form.getName(),
+                field       : this.getName()
+            })
+        });
+    }
+
+}
+
+class Form extends Editor {
+
+    constructor(data, page) {
+        super(data, page);
+        this.page   = page;
+        this.dataSources = [];
+        this.fields      = [];
+        this.actions     = [];
+    }
+
+    init() {
+        // dataSources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+
+        // fields
+        for (const data of this.data.fields) {
+            this.createField(data);
+        }
+    }
+    createField(data) {
+        const field = new Field(data, this);
+        field.init();
+        this.fields.push(field);
+        return field;
+    }
+    removeField(field) {
+        console.log('Form.removeField', field.getName());
+        const i = this.fields.indexOf(field);
+        if (i === -1) throw new Error('no such field');
+        this.fields.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                pageFileName: this.page.pageLink.getFileName(),
+                form        : this.getName(),
+                attr        : name,
+                value       : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                pageFileName: this.page.pageLink.getFileName(),
+                form        : this.getName()
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeForm(this);
+    }
+    moveUp() {
+        const args = {
+            controller: 'Form',
+            action    : 'moveUp',
+            params    : Helper.encodeObject({
+                pageFileName: this.page.pageLink.getFileName(),
+                form        : this.getName()
+            })
+        };
+        return FrontHostApp.doHttpRequest(args);
+    }
+
+    moveDown() {
+        const args = {
+            controller: 'Form',
+            action    : 'moveDown',
+            params    : Helper.encodeObject({
+                pageFileName: this.page.pageLink.getFileName(),
+                form        : this.getName()
+            })
+        };
+        return FrontHostApp.doHttpRequest(args);
+    }
+
+    async newField(params) {
+        params['pageFileName'] = this.page.pageLink.getFileName();
+        params['form']         = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createField(data);
+    }
+
+    async newAction(params) {
+        params['pageFileName'] = this.page.pageLink.getFileName();
+        params['form']         = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createAction(data);
+    }
+
+    async newDataSource(params) {
+        params['page']  = this.page.pageLink.getFileName();
+        params['form']  = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createDataSource(data);
+    }
+
+    async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view: view,
+                page: this.data !== undefined ? this.page.getName() : null,
+                form: this.data !== undefined ? this.getName()      : null
+            })
+        });
+    }
+
+    async saveView(text, view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'saveView',
+            params    : Helper.encodeObject({
+                page: this.page.getName(),
+                form: this.getName(),
+                view: view,
+                text: text
+            })
+        });
+    }
+
+    async saveController(text) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'saveController',
+            params    : Helper.encodeObject({
+                page: this.page.getName(),
+                form: this.getName(),
+                text: text
+            })
+        });
+    }
+
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                page: this.page.getName(),
+                form: this.getName(),
+            })
+        });
+    }
+
+    async createView() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'createView',
+            params    : Helper.encodeObject({
+                page : this.page.getName(),
+                form : this.getName(),
+                class: this.getClassName()
+            })
+        });
+    }
+
+    async createController() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'createController',
+            params    : Helper.encodeObject({
+                page : this.page.getName(),
+                form : this.getName(),
+                class: this.getClassName()
+            })
+        });
+    }
+
+}
+
+class KeyColumn extends Editor {
+
+    constructor(data, dataSource) {
+        super(data, dataSource);
+        this.dataSource = dataSource;
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'KeyColumn',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                form        : this.dataSource.parent.getName(),
+                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
+                dataSource  : this.dataSource.getName(),
+                keyColumn   : this.getName(),
+                attr        : name,
+                value       : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'KeyColumn',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                page      : this.dataSource.parent.page.pageLink.getFileName(),
+                form      : this.dataSource.parent.getName(),
+                dataSource: this.dataSource.getName(),
+                keyColumn : this.getName()
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeKeyColumn(this);
+    }
+
+
+}
+
+class Page extends Editor {
+
+    constructor(data, pageLink) {
+        super(data);
+        this.pageLink    = pageLink;
+        this.dataSources = [];
+        this.actions     = [];
+        this.forms       = [];
+    }
+
+    init() {
+        // data sources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+
+        // forms
+        for (const data of this.data.forms) {
+            this.createForm(data);
+        }
+    }
+    createForm(data) {
+        const form = new Form(data, this);
+        form.init();
+        this.forms.push(form);
+        return form;
+    }
+    removeForm(form) {
+        console.log('Page.removeForm', form.getName());
+        const i = this.forms.indexOf(form);
+        if (i === -1) throw new Error('no such form');
+        this.forms.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                fileName: this.pageLink.getFileName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    async delete() {
+        console.log('Page.delete', this.getName());
+        await this.deleteData();
+        this.pageLink.remove();
+    }
+
+    async newForm(params) {
+        params['pageFileName'] = this.pageLink.getFileName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createForm(data);
+    }
+
+    async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'getView',
+            params    : Helper.encodeObject({
+                view: view,
+                page: this.data !== undefined ? this.getName() : null
+            })
+        });
+    }
+
+    async saveView(text, view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'saveView',
+            params    : Helper.encodeObject({
+                page: this.getName(),
+                view: view,
+                text: text
+            })
+        });
+    }
+
+    async saveController(text) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'saveController',
+            params    : Helper.encodeObject({
+                page: this.getName(),
+                text: text
+            })
+        });
+    }
+
+    async createView() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'createView',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    async createController() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'createController',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    async createModelBackJs() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'createModelBackJs',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    async newAction(params) {
+        params['pageFileName'] = this.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : '_new',
+            params    : Helper.encodeObject(params)
+        });
+        return this.createAction(data);
+    }
+
+}
+
+class PageLink extends Editor {
+
+    constructor(data, parent) {
+        super(data, parent);
+        this.application = parent;
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                pageLink: this.getName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async moveUp() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action    : 'moveUp',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    async moveDown() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action    : 'moveDown',
+            params    : Helper.encodeObject({
+                page: this.getName()
+            })
+        });
+    }
+
+    getFileName() {
+        return this.data['@attributes'].fileName;
+    }
+    remove() {
+        console.log('PageLink.remove', this.getName());
+        this.parent.removePageLink(this);
+    }
+
+}
+
+class Param extends Editor {
+
+    constructor(data, database) {
+        super(data, database);
+        this.database = database;
+    }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action    : 'save',
+            params    : Helper.encodeObject({
+                database: this.database.getName(),
+                param   : this.getName(),
+                attr    : name,
+                value   : value
+            })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                database: this.database.getName(),
+                param   : this.getName()
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeParam(this);
+    }
+}
+
+class Table extends Editor {
+    constructor(data, database) {
+        super(data, database);
+        this.database = database;
+        this.columns = [];
+    }
+
+    init() {
+        for (const data of this.data.columns) {
+            this.createColumn(data);
+        }
+    }
+
+    createColumn(data) {
+        const column = new Column(data, this);
+        column.init();
+        this.columns.push(column);
+        return column;
+    }
+    removeColumn(column) {
+        console.log('Table.removeColumn', column.getName());
+        const i = this.columns.indexOf(column);
+        if (i === -1) throw new Error('no such column');
+        this.columns.splice(i, 1);
+    }
+
+    async newColumn(name) {
+        if (!name) throw new Error(`newColumn: no name`);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action    : '_new',
+            params    : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName(),
+                name    : name
+            })
+        });
+        return this.createColumn(data);
+    }
+    async deleteData() {
+        await FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action    : 'delete',
+            params    : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName()
+            })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeTable(this);
+    }
+
+    moveUp() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Table',
+            action     : 'moveUp',
+            params     : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName()
+            })
+        });
+    }
+
+    moveDown() {
+        return FrontHostApp.doHttpRequest({
+            controller : 'Table',
+            action     : 'moveDown',
+            params     : Helper.encodeObject({
+                database: this.database.getName(),
+                table   : this.getName()
+            })
+        });
+    }
+
+}
+
 class EditorFrontHostApp extends FrontHostApp {
     constructor(data, runAppLink) {
         console.log('EditorFrontHostApp.constructor');
@@ -395,1473 +1862,6 @@ class NewTableController extends ModalController {
     getViewClass() {
         return NewTableView;
     }
-}
-
-class Model {
-
-    constructor(data, parent = null) {
-        if (!data) throw new Error('no data');
-        this.data   = data;
-        this.parent = parent;
-    }
-
-    init() {
-    }
-
-    getClassName() {
-        return this.data['@class'];
-    }
-
-    getName() {
-        return this.getAttr('name');
-    }
-
-    getFullName(splitter = '.') {
-        let name;
-        if (this.form) {
-            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
-        } else if (this.page) {
-            name = `${this.page.getName()}${splitter}${this.getName()}`;
-        } else {
-            name = this.getName();
-        }
-        return name;
-    }
-
-    async setValue(name, value) {
-        throw new Error(`${this.constructor.name}.setValue not implemented`);
-    }
-
-    getAttr(name) {
-        return this.data['@attributes'][name];
-    }
-    getAttributes() {
-        return this.data['@attributes'];
-    }
-
-    setAttr(name, value) {
-        this.data['@attributes'][name] = value;
-    }
-
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.getName() === name);
-    }*/
-    createDataSource(data) {
-        const dataSource = new DataSource(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-    removeDataSource(dataSource) {
-        // console.log('Model.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
-    }
-    createAction(data) {
-        const action = new Action(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    removeAction(action) {
-        // console.log('Model.removeField', action.getName());
-        const i = this.actions.indexOf(action);
-        if (i === -1) throw new Error('no such action');
-        this.actions.splice(i, 1);
-    }
-
-}
-
-class Action extends Model {
-    /*constructor(data, parent) {
-        super(data, parent);
-    }*/
-
-    /*async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view : view,
-                page : this.data !== undefined ? this.form.page.getName() : null,
-                form : this.data !== undefined ? this.form.getName()      : null,
-            })
-        });
-    }*/
-
-    getParams() {
-        if (this.parent instanceof Form) {
-            return {
-                pageFileName: this.parent.page.pageLink.getAttr('fileName'),
-                form        : this.parent.getAttr('name'),
-                action      : this.getAttr('name'),
-            };
-        } else if (this.parent instanceof Page) {
-            return {
-                pageFileName: this.parent.pageLink.getAttr('fileName'),
-                action      : this.getAttr('name'),
-            };
-        }
-        return {
-            action: this.getAttr('name'),
-        };
-    }
-
-    async setValue(name, value) {
-        //console.log('Action.setValue', name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                ...this.getParams(),
-                attr        : name,
-                value       : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                ...this.getParams(),
-            })
-        });
-    }
-    async delete() {
-        console.log('Action.delete', this.getName());
-        await this.deleteData();
-        this.parent.removeAction(this);
-    }
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Action',
-            action     : 'moveUp',
-            params     : Helper.encodeObject({
-                ...this.getParams(),
-            })
-        });
-    }
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Action',
-            action     : 'moveDown',
-            params     : Helper.encodeObject({
-                ...this.getParams(),
-            })
-        });
-    }
-
-}
-
-class Application extends Model {
-
-    constructor(data) {
-        super(data);
-        this.databases   = [];
-        this.dataSources = [];
-        this.actions     = [];
-        this.pageLinks   = [];
-    }
-
-    init() {
-        console.log('Application.init', this.data);
-        // databases
-        for (const data of this.data.databases) {
-            this.createDatabase(data);
-        }
-
-        // dataSources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-
-        // pageLinks
-        for (const data of this.data.pageLinks) {
-            this.createPageLink(data);
-        }
-    }
-    createDatabase(data) {
-        const database = new Database(data, this);
-        database.init();
-        this.databases.push(database);
-        return database;
-    }
-    createPageLink(data) {
-        const pageLink = new PageLink(data, this);
-        pageLink.init();
-        this.pageLinks.push(pageLink);
-        return pageLink;
-    }
-    removeDatabase(database) {
-        console.log('Application.removeDatabase', database.getName());
-        const i = this.databases.indexOf(database);
-        if (i === -1) throw new Error('no such database');
-        this.databases.splice(i, 1);
-    }
-
-    removePageLink(pageLink) {
-        console.log('Application.removePageLink', pageLink.getName());
-        const i = this.pageLinks.indexOf(pageLink);
-        if (i === -1) throw new Error('no such pageLink');
-        this.pageLinks.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                attr : name,
-                value: value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async newPageAndPageLinkData(params) {
-        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-    }
-
-    async newPage(params) {
-        const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
-        const pageLink = this.createPageLink(pageLinkData);
-        return new Page(pageData, pageLink);
-    }
-
-    async newDatabase(params) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createDatabase(data);
-    }
-
-    async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                app : this.getName(),
-                view: view
-            })
-        });
-    }
-
-    async saveView(text, view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'saveView',
-            params    : Helper.encodeObject({
-                app : this.getName(),
-                view: view,
-                text: text
-            })
-        });
-    }
-
-    async saveController(text) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'saveController',
-            params    : Helper.encodeObject({
-                app : this.getName(),
-                text: text
-            })
-        });
-    }
-
-    async createView() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createView',
-            params    : Helper.encodeObject({
-                app: this.getName()
-            })
-        });
-    }
-
-    async createController() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createController',
-            params    : Helper.encodeObject({
-                app: this.getName()
-            })
-        });
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
-                app: this.getName()
-            })
-        });
-    }
-
-    async newDataSource(params) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createDataSource(data);
-    }
-
-    async newAction(params) {
-        // params['pageFileName'] = this.page.pageLink.getFileName();
-        // params['form']         = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createAction(data);
-    }
-
-}
-
-class Column extends Model {
-
-    constructor(data, table) {
-        super(data, table);
-        this.table = table;
-    }
-
-    async setValue(name, value) {
-        //console.log('Column.setValue', name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeColumn(this);
-    }
-
-}
-
-class DataSource extends Model {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.keyColumns = [];
-    }
-
-    init() {
-        for (const data of this.data.keyColumns) {
-            this.createKeyColumn(data);
-        }
-    }
-
-    createKeyColumn(data) {
-        const keyColumn = new KeyColumn(data, this);
-        keyColumn.init();
-        this.keyColumns.push(keyColumn);
-        return keyColumn;
-    }
-    removeKeyColumn(keyColumn) {
-        console.log('Database.removeParam', keyColumn.getName());
-        const i = this.keyColumns.indexOf(keyColumn);
-        if (i === -1) throw new Error('no such keyColumn');
-        this.keyColumns.splice(i, 1);
-    }
-    static async create(parent, params) {
-        if (parent instanceof Form) {
-            const form = parent;
-            params['page']  = form.page.pageLink.getFileName();
-            params['form']  = form.getName();
-        }
-        if (parent instanceof Page) {
-            const page = parent;
-            params['page']  = page.pageLink.getFileName();
-        }
-        return await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const args = {
-            controller: 'DataSource',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                dataSource: this.getName(),
-                attr      : name,
-                value     : value
-            })
-        };
-        if (this.parent instanceof Page) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        if (this.parent instanceof Form) {
-            args.params.form         = Helper.encodeValue(this.parent.getName());
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-        }
-        const data = await FrontHostApp.doHttpRequest(args);
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                dataSource: this.getName()
-            })
-        };
-        if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        if (this.parent instanceof Form) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-        }
-        await FrontHostApp.doHttpRequest(args);
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
-                ...(this.parent instanceof Page ? {page: this.parent.pageLink.getFileName()} : {}),
-                ...(this.parent instanceof Form ? {
-                    form: this.parent.getName(),
-                    page: this.parent.page.pageLink.getFileName()
-                } : {}),
-                dataSource: this.getName(),
-            })
-        });
-    }
-
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDataSource(this);
-    }
-
-    async moveUp() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'moveUp',
-            params    : Helper.encodeObject({
-                dataSource: this.getName()
-            })
-        };
-        if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        if (this.parent instanceof Form) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async moveDown() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'moveDown',
-            params    : Helper.encodeObject({
-                dataSource: this.getName()
-            })
-        };
-        if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        if (this.parent instanceof Form) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async newKeyColumnData(name) {
-        const args = {
-            controller: 'KeyColumn',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                dataSource: this.getName(),
-                name      : name
-            })
-        };
-        if (this.parent instanceof Form) {
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form = Helper.encodeValue(this.parent.getName());
-        }
-        if (this.parent instanceof Page) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-    async newKeyColumn(name) {
-        const data = await this.newKeyColumnData(name);
-        return this.createKeyColumn(data);
-    }
-    async getView(view) {
-        const args = {
-            controller: 'DataSource',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                dataSource: (this instanceof DataSource) ? this.getName() : undefined,
-                view      : view
-            })
-        };
-        if (this.parent instanceof Page) {
-
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.pageLink.getFileName() : undefined);
-        }
-        if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSource) ? this.parent.page.pageLink.getFileName() : undefined);
-            args.params.form         = Helper.encodeValue((this instanceof DataSource) ? this.parent.getName()                   : undefined);
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async saveController(text) {
-        const args = {
-            controller: 'DataSource',
-            action    : 'saveController',
-            params    : Helper.encodeObject({
-                dataSource: this.getName(),
-                text      : text
-            })
-        };
-        if (this.parent instanceof Page) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
-        }
-        if (this.parent instanceof Form) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form         = Helper.encodeValue(this.parent.getName());
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async createController() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'createController',
-            params    : Helper.encodeObject({
-                page        : this.parent.page.getName(),
-                pageFileName: this.parent.page.pageLink.getFileName(),
-                form        : this.parent.getName(),
-                dataSource  : this.getName()
-            })
-        };
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    getFullName() {
-        if (this.parent instanceof Form) {
-            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof Page) {
-            return [this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof Application) {
-            return this.getName();
-        }
-    }
-
-}
-
-class Database extends Model {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.params = [];
-        this.tables = [];
-    }
-
-    init() {
-
-        // params
-        for (const data of this.data.params) {
-            this.createParam(data);
-        }
-
-        // tables
-        for (const data of this.data.tables) {
-            this.createTable(data);
-        }
-    }
-
-    createParam(data) {
-        const param = new Param(data, this);
-        param.init();
-        this.params.push(param);
-        return param;
-    }
-
-    createTable(data) {
-        const table = new Table(data, this);
-        table.init();
-        this.tables.push(table);
-        return table;
-    }
-    removeParam(param) {
-        console.log('Database.removeParam', param.getName());
-        const i = this.params.indexOf(param);
-        if (i === -1) throw new Error('no such param');
-        this.params.splice(i, 1);
-    }
-    removeTable(table) {
-        console.log('Database.removeTable', table.getName());
-        const i = this.tables.indexOf(table);
-        if (i === -1) throw new Error('no such table');
-        this.tables.splice(i, 1);
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDatabase(this);
-    }
-
-    async newParam(name) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                name    : name
-            })
-        });
-        return this.createParam(data);
-    }
-
-    async newTable(params) {
-        if (!params.name) throw new Error('newTable: no name');
-        const data =  await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                database: this.getName(),
-                name    : params.name,
-                columns : params.columns
-            })
-        });
-        return this.createTable(data);
-    }
-
-    async getView(view) {
-        console.log('Database.getView', view);
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view    : view,
-                database: this.data !== undefined ? this.getName() : null
-            })
-        });
-    }
-
-    async getTableInfo(table) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getTableInfo',
-            params    : Helper.encodeObject({
-                database: this.data !== undefined ? this.getName() : null,
-                table   : table
-            })
-        });
-    }
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveUp',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveDown',
-            params    : Helper.encodeObject({
-                database: this.getName()
-            })
-        });
-    }
-
-}
-
-class Field extends Model {
-
-    constructor(data, form) {
-        super(data, form);
-        this.form = form;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName(),
-                attr        : name,
-                value       : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'delete',
-            params     : Helper.encodeObject({
-                pageFileName:this.form.page.pageLink.getFileName(),
-                form        :this.form.getName(),
-                field       :this.getName()
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeField(this);
-    }
-    async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view : view,
-                page : this.data !== undefined ? this.form.page.getName() : null,
-                form : this.data !== undefined ? this.form.getName()      : null,
-                field: this.data !== undefined ? this.getName()           : null
-            })
-        });
-    }
-
-    async saveView(text, view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'saveView',
-            params    : Helper.encodeObject({
-                page : this.form.page.getName(),
-                form : this.form.getName(),
-                field: this.getName(),
-                view : view,
-                text : text
-            })
-        });
-    }
-
-    async saveController(text) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'saveController',
-            params    : Helper.encodeObject({
-                page : this.form.page.getName(),
-                form : this.form.getName(),
-                field: this.getName(),
-                text : text
-            })
-        });
-    }
-
-    async createView() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'createView',
-            params    : Helper.encodeObject({
-                page : this.form.page.getName(),
-                form : this.form.getName(),
-                field: this.getName(),
-                class: this.getClassName()
-            })
-        });
-    }
-
-    async createController() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'createController',
-            params    : Helper.encodeObject({
-                page : this.form.page.getName(),
-                form : this.form.getName(),
-                field: this.getName(),
-                class: this.getClassName()
-            })
-        });
-    }
-
-    async changeClass(params) {
-        params['page']  = this.form.page.getName();
-        params['form']  = this.form.getName();
-        params['field'] = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : 'changeClass',
-            params    : Helper.encodeObject(params)
-        });
-        return this.data = data;
-    }
-
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'moveUp',
-            params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName()
-            })
-        });
-    }
-
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'moveDown',
-            params     : Helper.encodeObject({
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName()
-            })
-        });
-    }
-
-}
-
-class Form extends Model {
-
-    constructor(data, page) {
-        super(data, page);
-        this.page   = page;
-        this.dataSources = [];
-        this.fields      = [];
-        this.actions     = [];
-    }
-
-    init() {
-        // dataSources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-
-        // fields
-        for (const data of this.data.fields) {
-            this.createField(data);
-        }
-    }
-    createField(data) {
-        const field = new Field(data, this);
-        field.init();
-        this.fields.push(field);
-        return field;
-    }
-    removeField(field) {
-        console.log('Form.removeField', field.getName());
-        const i = this.fields.indexOf(field);
-        if (i === -1) throw new Error('no such field');
-        this.fields.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.getFileName(),
-                form        : this.getName(),
-                attr        : name,
-                value       : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.getFileName(),
-                form        : this.getName()
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeForm(this);
-    }
-    moveUp() {
-        const args = {
-            controller: 'Form',
-            action    : 'moveUp',
-            params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.getFileName(),
-                form        : this.getName()
-            })
-        };
-        return FrontHostApp.doHttpRequest(args);
-    }
-
-    moveDown() {
-        const args = {
-            controller: 'Form',
-            action    : 'moveDown',
-            params    : Helper.encodeObject({
-                pageFileName: this.page.pageLink.getFileName(),
-                form        : this.getName()
-            })
-        };
-        return FrontHostApp.doHttpRequest(args);
-    }
-
-    async newField(params) {
-        params['pageFileName'] = this.page.pageLink.getFileName();
-        params['form']         = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createField(data);
-    }
-
-    async newAction(params) {
-        params['pageFileName'] = this.page.pageLink.getFileName();
-        params['form']         = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createAction(data);
-    }
-
-    async newDataSource(params) {
-        params['page']  = this.page.pageLink.getFileName();
-        params['form']  = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createDataSource(data);
-    }
-
-    async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view: view,
-                page: this.data !== undefined ? this.page.getName() : null,
-                form: this.data !== undefined ? this.getName()      : null
-            })
-        });
-    }
-
-    async saveView(text, view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'saveView',
-            params    : Helper.encodeObject({
-                page: this.page.getName(),
-                form: this.getName(),
-                view: view,
-                text: text
-            })
-        });
-    }
-
-    async saveController(text) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'saveController',
-            params    : Helper.encodeObject({
-                page: this.page.getName(),
-                form: this.getName(),
-                text: text
-            })
-        });
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
-                page: this.page.getName(),
-                form: this.getName(),
-            })
-        });
-    }
-
-    async createView() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'createView',
-            params    : Helper.encodeObject({
-                page : this.page.getName(),
-                form : this.getName(),
-                class: this.getClassName()
-            })
-        });
-    }
-
-    async createController() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : 'createController',
-            params    : Helper.encodeObject({
-                page : this.page.getName(),
-                form : this.getName(),
-                class: this.getClassName()
-            })
-        });
-    }
-
-}
-
-class KeyColumn extends Model {
-
-    constructor(data, dataSource) {
-        super(data, dataSource);
-        this.dataSource = dataSource;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                form        : this.dataSource.parent.getName(),
-                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
-                dataSource  : this.dataSource.getName(),
-                keyColumn   : this.getName(),
-                attr        : name,
-                value       : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                page      : this.dataSource.parent.page.pageLink.getFileName(),
-                form      : this.dataSource.parent.getName(),
-                dataSource: this.dataSource.getName(),
-                keyColumn : this.getName()
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeKeyColumn(this);
-    }
-
-
-}
-
-class Page extends Model {
-
-    constructor(data, pageLink) {
-        super(data);
-        this.pageLink    = pageLink;
-        this.dataSources = [];
-        this.actions     = [];
-        this.forms       = [];
-    }
-
-    init() {
-        // data sources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-
-        // forms
-        for (const data of this.data.forms) {
-            this.createForm(data);
-        }
-    }
-    createForm(data) {
-        const form = new Form(data, this);
-        form.init();
-        this.forms.push(form);
-        return form;
-    }
-    removeForm(form) {
-        console.log('Page.removeForm', form.getName());
-        const i = this.forms.indexOf(form);
-        if (i === -1) throw new Error('no such form');
-        this.forms.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                fileName: this.pageLink.getFileName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    async delete() {
-        console.log('Page.delete', this.getName());
-        await this.deleteData();
-        this.pageLink.remove();
-    }
-
-    async newForm(params) {
-        params['pageFileName'] = this.pageLink.getFileName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createForm(data);
-    }
-
-    async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'getView',
-            params    : Helper.encodeObject({
-                view: view,
-                page: this.data !== undefined ? this.getName() : null
-            })
-        });
-    }
-
-    async saveView(text, view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'saveView',
-            params    : Helper.encodeObject({
-                page: this.getName(),
-                view: view,
-                text: text
-            })
-        });
-    }
-
-    async saveController(text) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'saveController',
-            params    : Helper.encodeObject({
-                page: this.getName(),
-                text: text
-            })
-        });
-    }
-
-    async createView() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'createView',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    async createController() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'createController',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    async newAction(params) {
-        params['pageFileName'] = this.pageLink.getFileName();
-        // params['form']         = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : '_new',
-            params    : Helper.encodeObject(params)
-        });
-        return this.createAction(data);
-    }
-
-}
-
-class PageLink extends Model {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.application = parent;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                pageLink: this.getName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async moveUp() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'moveUp',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    async moveDown() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'moveDown',
-            params    : Helper.encodeObject({
-                page: this.getName()
-            })
-        });
-    }
-
-    getFileName() {
-        return this.data['@attributes'].fileName;
-    }
-    remove() {
-        console.log('PageLink.remove', this.getName());
-        this.parent.removePageLink(this);
-    }
-
-}
-
-class Param extends Model {
-
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : 'save',
-            params    : Helper.encodeObject({
-                database: this.database.getName(),
-                param   : this.getName(),
-                attr    : name,
-                value   : value
-            })
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                database: this.database.getName(),
-                param   : this.getName()
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeParam(this);
-    }
-}
-
-class Table extends Model {
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-        this.columns = [];
-    }
-
-    init() {
-        for (const data of this.data.columns) {
-            this.createColumn(data);
-        }
-    }
-
-    createColumn(data) {
-        const column = new Column(data, this);
-        column.init();
-        this.columns.push(column);
-        return column;
-    }
-    removeColumn(column) {
-        console.log('Table.removeColumn', column.getName());
-        const i = this.columns.indexOf(column);
-        if (i === -1) throw new Error('no such column');
-        this.columns.splice(i, 1);
-    }
-
-    async newColumn(name) {
-        if (!name) throw new Error(`newColumn: no name`);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : '_new',
-            params    : Helper.encodeObject({
-                database: this.database.getName(),
-                table   : this.getName(),
-                name    : name
-            })
-        });
-        return this.createColumn(data);
-    }
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : 'delete',
-            params    : Helper.encodeObject({
-                database: this.database.getName(),
-                table   : this.getName()
-            })
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeTable(this);
-    }
-
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveUp',
-            params     : Helper.encodeObject({
-                database: this.database.getName(),
-                table   : this.getName()
-            })
-        });
-    }
-
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveDown',
-            params     : Helper.encodeObject({
-                database: this.database.getName(),
-                table   : this.getName()
-            })
-        });
-    }
-
 }
 
 class ModelController /*extends EventEmitter*/ {

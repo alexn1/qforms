@@ -1,4 +1,4 @@
-class Model {
+class Editor {
 
     constructor(data, parent = null) {
         if (!data) throw new Error('no data');
@@ -54,7 +54,7 @@ class Model {
         return dataSource;
     }
     removeDataSource(dataSource) {
-        // console.log('Model.removeDataSource', dataSource.getName());
+        // console.log('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1) throw new Error('no such dataSource');
         this.dataSources.splice(i, 1);
@@ -66,7 +66,7 @@ class Model {
         return action;
     }
     removeAction(action) {
-        // console.log('Model.removeField', action.getName());
+        // console.log('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);
         if (i === -1) throw new Error('no such action');
         this.actions.splice(i, 1);
