@@ -20,7 +20,7 @@ class DatabaseEditor extends Editor {
     }
 
     createParam(data) {
-        const param = new Param(data, this);
+        const param = new ParamEditor(data, this);
         param.init();
         this.params.push(param);
         return param;
