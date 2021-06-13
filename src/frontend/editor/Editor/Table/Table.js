@@ -12,7 +12,7 @@ class Table extends Editor {
     }
 
     createColumn(data) {
-        const column = new Column(data, this);
+        const column = new ColumnEditor(data, this);
         column.init();
         this.columns.push(column);
         return column;

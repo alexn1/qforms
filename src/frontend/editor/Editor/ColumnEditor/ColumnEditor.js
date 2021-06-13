@@ -1,4 +1,4 @@
-class Column extends Editor {
+class ColumnEditor extends Editor {
 
     constructor(data, table) {
         super(data, table);
@@ -6,7 +6,7 @@ class Column extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log('Column.setValue', name + ' = ' + value);
+        //console.log('ColumnEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'save',
