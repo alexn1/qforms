@@ -1,4 +1,4 @@
-class PageLink extends Editor {
+class PageLinkEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -44,7 +44,7 @@ class PageLink extends Editor {
         return this.data['@attributes'].fileName;
     }
     remove() {
-        console.log('PageLink.remove', this.getName());
+        console.log('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
 

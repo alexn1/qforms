@@ -37,7 +37,7 @@ class ApplicationEditor extends Editor {
         return database;
     }
     createPageLink(data) {
-        const pageLink = new PageLink(data, this);
+        const pageLink = new PageLinkEditor(data, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
