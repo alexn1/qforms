@@ -1,4 +1,4 @@
-class Action extends Editor {
+class ActionEditor extends Editor {
     /*constructor(data, parent) {
         super(data, parent);
     }*/
@@ -34,7 +34,7 @@ class Action extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log('Action.setValue', name + ' = ' + value);
+        //console.log('ActionEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'save',
@@ -58,7 +58,7 @@ class Action extends Editor {
         });
     }
     async delete() {
-        console.log('Action.delete', this.getName());
+        console.log('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }

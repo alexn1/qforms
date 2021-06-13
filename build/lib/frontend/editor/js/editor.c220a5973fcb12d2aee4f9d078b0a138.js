@@ -60,7 +60,7 @@ class Editor {
         this.dataSources.splice(i, 1);
     }
     createAction(data) {
-        const action = new Action(data, this);
+        const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
@@ -74,7 +74,7 @@ class Editor {
 
 }
 
-class Action extends Editor {
+class ActionEditor extends Editor {
     /*constructor(data, parent) {
         super(data, parent);
     }*/
@@ -110,7 +110,7 @@ class Action extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log('Action.setValue', name + ' = ' + value);
+        //console.log('ActionEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'save',
@@ -134,7 +134,7 @@ class Action extends Editor {
         });
     }
     async delete() {
-        console.log('Action.delete', this.getName());
+        console.log('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }
@@ -156,7 +156,6 @@ class Action extends Editor {
             })
         });
     }
-
 }
 
 class Application extends Editor {
@@ -2532,8 +2531,8 @@ class ApplicationController extends VisualController {
         return [
             {'action': 'newDatabase'  , 'caption': 'New Database'   },
             {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newAction'    , 'caption': 'New Action'},
-            {'action': 'newPage'      , 'caption': 'New Page'       }
+            {'action': 'newAction'    , 'caption': 'New Action'     },
+            {'action': 'newPage'      , 'caption': 'New Page'       },
         ];
     }
 
@@ -2749,7 +2748,7 @@ class FormController extends VisualController {
             {'action': 'newAction'    , 'caption': 'New Action'     },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': 'delete'       , 'caption': 'Delete'         }
+            {'action': 'delete'       , 'caption': 'Delete'         },
         ];
     }
 
@@ -2897,11 +2896,11 @@ class PageController extends VisualController {
     getActions() {
         return [
             {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newAction'    , 'caption': 'New Action'       },
+            {'action': 'newAction'    , 'caption': 'New Action'     },
             {'action': 'newForm'      , 'caption': 'New Form'       },
             {'action': 'moveUp'       , 'caption': 'Move Up'        },
             {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': 'delete'       , 'caption': 'Delete'         }
+            {'action': 'delete'       , 'caption': 'Delete'         },
         ];
     }
 

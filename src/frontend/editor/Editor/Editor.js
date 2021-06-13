@@ -60,7 +60,7 @@ class Editor {
         this.dataSources.splice(i, 1);
     }
     createAction(data) {
-        const action = new Action(data, this);
+        const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
