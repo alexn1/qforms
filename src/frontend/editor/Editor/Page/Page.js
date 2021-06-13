@@ -25,7 +25,7 @@ class Page extends Editor {
         }
     }
     createForm(data) {
-        const form = new Form(data, this);
+        const form = new FormEditor(data, this);
         form.init();
         this.forms.push(form);
         return form;

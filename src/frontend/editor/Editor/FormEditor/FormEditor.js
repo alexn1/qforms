@@ -1,4 +1,4 @@
-class Form extends Editor {
+class FormEditor extends Editor {
 
     constructor(data, page) {
         super(data, page);
@@ -31,7 +31,7 @@ class Form extends Editor {
         return field;
     }
     removeField(field) {
-        console.log('Form.removeField', field.getName());
+        console.log('FormEditor.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1) throw new Error('no such field');
         this.fields.splice(i, 1);

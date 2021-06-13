@@ -92,7 +92,7 @@ class ActionEditor extends Editor {
     }*/
 
     getParams() {
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             return {
                 pageFileName: this.parent.page.pageLink.getAttr('fileName'),
                 form        : this.parent.getAttr('name'),
@@ -407,7 +407,7 @@ class DataSourceEditor extends Editor {
         this.keyColumns.splice(i, 1);
     }
     static async create(parent, params) {
-        if (parent instanceof Form) {
+        if (parent instanceof FormEditor) {
             const form = parent;
             params['page']  = form.page.pageLink.getFileName();
             params['form']  = form.getName();
@@ -437,7 +437,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.form         = Helper.encodeValue(this.parent.getName());
             args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
@@ -457,7 +457,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
@@ -470,7 +470,7 @@ class DataSourceEditor extends Editor {
             action    : 'createModelBackJs',
             params    : Helper.encodeObject({
                 ...(this.parent instanceof Page ? {page: this.parent.pageLink.getFileName()} : {}),
-                ...(this.parent instanceof Form ? {
+                ...(this.parent instanceof FormEditor ? {
                     form: this.parent.getName(),
                     page: this.parent.page.pageLink.getFileName()
                 } : {}),
@@ -495,7 +495,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
@@ -513,7 +513,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.form = Helper.encodeValue(this.parent.getName());
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
         }
@@ -529,7 +529,7 @@ class DataSourceEditor extends Editor {
                 name      : name
             })
         };
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form = Helper.encodeValue(this.parent.getName());
         }
@@ -554,7 +554,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined);
             args.params.form         = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined);
         }
@@ -573,7 +573,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof Page) {
             args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form         = Helper.encodeValue(this.parent.getName());
         }
@@ -595,7 +595,7 @@ class DataSourceEditor extends Editor {
     }
 
     getFullName() {
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
@@ -752,7 +752,7 @@ class DatabaseEditor extends Editor {
 
 }
 
-class Field extends Editor {
+class FieldEditor extends Editor {
 
     constructor(data, form) {
         super(data, form);
@@ -894,7 +894,7 @@ class Field extends Editor {
 
 }
 
-class Form extends Editor {
+class FormEditor extends Editor {
 
     constructor(data, page) {
         super(data, page);
@@ -921,13 +921,13 @@ class Form extends Editor {
         }
     }
     createField(data) {
-        const field = new Field(data, this);
+        const field = new FieldEditor(data, this);
         field.init();
         this.fields.push(field);
         return field;
     }
     removeField(field) {
-        console.log('Form.removeField', field.getName());
+        console.log('FormEditor.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1) throw new Error('no such field');
         this.fields.splice(i, 1);
@@ -1165,7 +1165,7 @@ class Page extends Editor {
         }
     }
     createForm(data) {
-        const form = new Form(data, this);
+        const form = new FormEditor(data, this);
         form.init();
         this.forms.push(form);
         return form;

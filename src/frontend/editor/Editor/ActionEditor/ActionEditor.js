@@ -16,7 +16,7 @@ class ActionEditor extends Editor {
     }*/
 
     getParams() {
-        if (this.parent instanceof Form) {
+        if (this.parent instanceof FormEditor) {
             return {
                 pageFileName: this.parent.page.pageLink.getAttr('fileName'),
                 form        : this.parent.getAttr('name'),
