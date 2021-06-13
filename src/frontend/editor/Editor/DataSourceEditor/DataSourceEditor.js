@@ -12,7 +12,7 @@ class DataSourceEditor extends Editor {
     }
 
     createKeyColumn(data) {
-        const keyColumn = new KeyColumn(data, this);
+        const keyColumn = new KeyColumnEditor(data, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
