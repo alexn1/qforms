@@ -31,7 +31,7 @@ class ApplicationEditor extends Editor {
         }
     }
     createDatabase(data) {
-        const database = new Database(data, this);
+        const database = new DatabaseEditor(data, this);
         database.init();
         this.databases.push(database);
         return database;

@@ -18,7 +18,7 @@ class DataSource extends Editor {
         return keyColumn;
     }
     removeKeyColumn(keyColumn) {
-        console.log('Database.removeParam', keyColumn.getName());
+        console.log('DatabaseEditor.removeParam', keyColumn.getName());
         const i = this.keyColumns.indexOf(keyColumn);
         if (i === -1) throw new Error('no such keyColumn');
         this.keyColumns.splice(i, 1);

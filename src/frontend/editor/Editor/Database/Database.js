@@ -1,4 +1,4 @@
-class Database extends Editor {
+class DatabaseEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);
@@ -33,13 +33,13 @@ class Database extends Editor {
         return table;
     }
     removeParam(param) {
-        console.log('Database.removeParam', param.getName());
+        console.log('DatabaseEditor.removeParam', param.getName());
         const i = this.params.indexOf(param);
         if (i === -1) throw new Error('no such param');
         this.params.splice(i, 1);
     }
     removeTable(table) {
-        console.log('Database.removeTable', table.getName());
+        console.log('DatabaseEditor.removeTable', table.getName());
         const i = this.tables.indexOf(table);
         if (i === -1) throw new Error('no such table');
         this.tables.splice(i, 1);
@@ -102,7 +102,7 @@ class Database extends Editor {
     }
 
     async getView(view) {
-        console.log('Database.getView', view);
+        console.log('DatabaseEditor.getView', view);
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
