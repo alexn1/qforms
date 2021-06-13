@@ -25,7 +25,7 @@ class Form extends Editor {
         }
     }
     createField(data) {
-        const field = new Field(data, this);
+        const field = new FieldEditor(data, this);
         field.init();
         this.fields.push(field);
         return field;
