@@ -1,4 +1,4 @@
-class Application extends Editor {
+class ApplicationEditor extends Editor {
 
     constructor(data) {
         super(data);
@@ -9,7 +9,7 @@ class Application extends Editor {
     }
 
     init() {
-        console.log('Application.init', this.data);
+        console.log('ApplicationEditor.init', this.data);
         // databases
         for (const data of this.data.databases) {
             this.createDatabase(data);
@@ -43,14 +43,14 @@ class Application extends Editor {
         return pageLink;
     }
     removeDatabase(database) {
-        console.log('Application.removeDatabase', database.getName());
+        console.log('ApplicationEditor.removeDatabase', database.getName());
         const i = this.databases.indexOf(database);
         if (i === -1) throw new Error('no such database');
         this.databases.splice(i, 1);
     }
 
     removePageLink(pageLink) {
-        console.log('Application.removePageLink', pageLink.getName());
+        console.log('ApplicationEditor.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);
         if (i === -1) throw new Error('no such pageLink');
         this.pageLinks.splice(i, 1);

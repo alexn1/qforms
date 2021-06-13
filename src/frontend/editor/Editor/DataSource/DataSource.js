@@ -217,7 +217,7 @@ class DataSource extends Editor {
             return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof Application) {
+        } else if (this.parent instanceof ApplicationEditor) {
             return this.getName();
         }
     }

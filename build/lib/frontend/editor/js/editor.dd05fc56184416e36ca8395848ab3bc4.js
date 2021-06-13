@@ -158,7 +158,7 @@ class ActionEditor extends Editor {
     }
 }
 
-class Application extends Editor {
+class ApplicationEditor extends Editor {
 
     constructor(data) {
         super(data);
@@ -169,7 +169,7 @@ class Application extends Editor {
     }
 
     init() {
-        console.log('Application.init', this.data);
+        console.log('ApplicationEditor.init', this.data);
         // databases
         for (const data of this.data.databases) {
             this.createDatabase(data);
@@ -203,14 +203,14 @@ class Application extends Editor {
         return pageLink;
     }
     removeDatabase(database) {
-        console.log('Application.removeDatabase', database.getName());
+        console.log('ApplicationEditor.removeDatabase', database.getName());
         const i = this.databases.indexOf(database);
         if (i === -1) throw new Error('no such database');
         this.databases.splice(i, 1);
     }
 
     removePageLink(pageLink) {
-        console.log('Application.removePageLink', pageLink.getName());
+        console.log('ApplicationEditor.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);
         if (i === -1) throw new Error('no such pageLink');
         this.pageLinks.splice(i, 1);
@@ -600,7 +600,7 @@ class DataSource extends Editor {
             return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof Application) {
+        } else if (this.parent instanceof ApplicationEditor) {
             return this.getName();
         }
     }
@@ -1485,7 +1485,7 @@ class EditorFrontHostApp extends FrontHostApp {
         console.log('EditorFrontHostApp.run', this.data);
 
         // app
-        const app = new Application(this.data);
+        const app = new ApplicationEditor(this.data);
         app.init();
         // console.log('app:', app);
 

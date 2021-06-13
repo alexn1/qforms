@@ -19,7 +19,7 @@ class EditorFrontHostApp extends FrontHostApp {
         console.log('EditorFrontHostApp.run', this.data);
 
         // app
-        const app = new Application(this.data);
+        const app = new ApplicationEditor(this.data);
         app.init();
         // console.log('app:', app);
 
