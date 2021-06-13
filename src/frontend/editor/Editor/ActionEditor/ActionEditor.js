@@ -22,7 +22,7 @@ class ActionEditor extends Editor {
                 form        : this.parent.getAttr('name'),
                 action      : this.getAttr('name'),
             };
-        } else if (this.parent instanceof Page) {
+        } else if (this.parent instanceof PageEditor) {
             return {
                 pageFileName: this.parent.pageLink.getAttr('fileName'),
                 action      : this.getAttr('name'),

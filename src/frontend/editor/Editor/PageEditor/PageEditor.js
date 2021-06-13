@@ -1,4 +1,4 @@
-class Page extends Editor {
+class PageEditor extends Editor {
 
     constructor(data, pageLink) {
         super(data);
@@ -62,7 +62,7 @@ class Page extends Editor {
     }
 
     async delete() {
-        console.log('Page.delete', this.getName());
+        console.log('PageEditor.delete', this.getName());
         await this.deleteData();
         this.pageLink.remove();
     }

@@ -81,7 +81,7 @@ class ApplicationEditor extends Editor {
     async newPage(params) {
         const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
         const pageLink = this.createPageLink(pageLinkData);
-        return new Page(pageData, pageLink);
+        return new PageEditor(pageData, pageLink);
     }
 
     async newDatabase(params) {

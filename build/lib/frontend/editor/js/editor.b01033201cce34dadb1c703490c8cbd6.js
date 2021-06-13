@@ -98,7 +98,7 @@ class ActionEditor extends Editor {
                 form        : this.parent.getAttr('name'),
                 action      : this.getAttr('name'),
             };
-        } else if (this.parent instanceof Page) {
+        } else if (this.parent instanceof PageEditor) {
             return {
                 pageFileName: this.parent.pageLink.getAttr('fileName'),
                 action      : this.getAttr('name'),
@@ -241,7 +241,7 @@ class ApplicationEditor extends Editor {
     async newPage(params) {
         const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
         const pageLink = this.createPageLink(pageLinkData);
-        return new Page(pageData, pageLink);
+        return new PageEditor(pageData, pageLink);
     }
 
     async newDatabase(params) {
@@ -395,7 +395,7 @@ class DataSourceEditor extends Editor {
     }
 
     createKeyColumn(data) {
-        const keyColumn = new KeyColumn(data, this);
+        const keyColumn = new KeyColumnEditor(data, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
@@ -412,7 +412,7 @@ class DataSourceEditor extends Editor {
             params['page']  = form.page.pageLink.getFileName();
             params['form']  = form.getName();
         }
-        if (parent instanceof Page) {
+        if (parent instanceof PageEditor) {
             const page = parent;
             params['page']  = page.pageLink.getFileName();
         }
@@ -434,7 +434,7 @@ class DataSourceEditor extends Editor {
                 value     : value
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof FormEditor) {
@@ -454,7 +454,7 @@ class DataSourceEditor extends Editor {
                 dataSource: this.getName()
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof FormEditor) {
@@ -469,7 +469,7 @@ class DataSourceEditor extends Editor {
             controller: 'DataSource',
             action    : 'createModelBackJs',
             params    : Helper.encodeObject({
-                ...(this.parent instanceof Page ? {page: this.parent.pageLink.getFileName()} : {}),
+                ...(this.parent instanceof PageEditor ? {page: this.parent.pageLink.getFileName()} : {}),
                 ...(this.parent instanceof FormEditor ? {
                     form: this.parent.getName(),
                     page: this.parent.page.pageLink.getFileName()
@@ -492,7 +492,7 @@ class DataSourceEditor extends Editor {
                 dataSource: this.getName()
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof FormEditor) {
@@ -510,7 +510,7 @@ class DataSourceEditor extends Editor {
                 dataSource: this.getName()
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof FormEditor) {
@@ -533,7 +533,7 @@ class DataSourceEditor extends Editor {
             args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
             args.params.form = Helper.encodeValue(this.parent.getName());
         }
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         return await FrontHostApp.doHttpRequest(args);
@@ -551,7 +551,7 @@ class DataSourceEditor extends Editor {
                 view      : view
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
         }
         if (this.parent instanceof FormEditor) {
@@ -570,7 +570,7 @@ class DataSourceEditor extends Editor {
                 text      : text
             })
         };
-        if (this.parent instanceof Page) {
+        if (this.parent instanceof PageEditor) {
             args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
         }
         if (this.parent instanceof FormEditor) {
@@ -597,7 +597,7 @@ class DataSourceEditor extends Editor {
     getFullName() {
         if (this.parent instanceof FormEditor) {
             return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof Page) {
+        } else if (this.parent instanceof PageEditor) {
             return [this.parent.getName(), this.getName()].join('.');
         } else if (this.parent instanceof ApplicationEditor) {
             return this.getName();
@@ -1093,7 +1093,7 @@ class FormEditor extends Editor {
 
 }
 
-class KeyColumn extends Editor {
+class KeyColumnEditor extends Editor {
 
     constructor(data, dataSource) {
         super(data, dataSource);
@@ -1138,7 +1138,7 @@ class KeyColumn extends Editor {
 
 }
 
-class Page extends Editor {
+class PageEditor extends Editor {
 
     constructor(data, pageLink) {
         super(data);
@@ -1202,7 +1202,7 @@ class Page extends Editor {
     }
 
     async delete() {
-        console.log('Page.delete', this.getName());
+        console.log('PageEditor.delete', this.getName());
         await this.deleteData();
         this.pageLink.remove();
     }
@@ -3058,7 +3058,7 @@ class PageLinkController extends ModelController {
         const pageData = await EditorFrontHostApp.fetchPageData(pageLink.getFileName());
 
         // page
-        const page = new Page(pageData, pageLink);
+        const page = new PageEditor(pageData, pageLink);
         page.init();
 
         // pageController
