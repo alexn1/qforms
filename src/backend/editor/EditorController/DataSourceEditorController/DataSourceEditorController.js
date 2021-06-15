@@ -6,6 +6,17 @@ class DataSourceEditorController extends EditorController {
         super(...args);
     }*/
 
+    async createDataSourceEditor(params) {
+        let editor = await this.createApplicationEditor();
+        if (params.pageFileName) {
+            editor = await editor.createPageEditor(params.pageFileName);
+            if (params.form) {
+                editor = editor.createFormEditor(params.form);
+            }
+        }
+        return editor.createDataSourceEditor(params.dataSource);
+    }
+
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         let data;
@@ -100,17 +111,6 @@ class DataSourceEditorController extends EditorController {
         return null;
     }
 
-    async createDataSourceEditor(params) {
-        let editor = await this.createApplicationEditor();
-        if (params.pageFileName) {
-            editor = await editor.createPageEditor(params.pageFileName);
-            if (params.form) {
-                editor = editor.createFormEditor(params.form);
-            }
-        }
-        return editor.createDataSourceEditor(params.dataSource);
-    }
-
     async createModelBackJs(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         const js = await dataSourceEditor.createModelBackJs(params);
@@ -130,16 +130,16 @@ class DataSourceEditorController extends EditorController {
         }
     }
 
-    /*async saveController(params) {
-        const dataSourceEditor = await this.createDataSourceEditor(params);
-        await dataSourceEditor.saveCustomFile('back.js', params.text);
-        return null;
-    }*/
-
     /*async createController(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         const backendJs = await dataSourceEditor.createBackendJs(params);
         return {backendJs};
+    }*/
+
+    /*async saveController(params) {
+        const dataSourceEditor = await this.createDataSourceEditor(params);
+        await dataSourceEditor.saveCustomFile('back.js', params.text);
+        return null;
     }*/
 
 }
