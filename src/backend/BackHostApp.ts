@@ -651,11 +651,14 @@ class BackHostApp {
         const appFile = new JsonFile(application.appInfo.filePath);
         await appFile.read();
         const app = JSON.parse(appFile.content);
-        app.env = this.nodeEnv;
-
+        const data = {
+            app        : app,
+            env        : this.nodeEnv,
+            logErrorUrl: this.logErrorUrl
+        };
         res.render('editor/index', {
             version    : pkg.version,
-            app        : app,
+            data       : data,
             runAppLink : `/viewer/${context.appDirName}/${context.appFileName}/${context.env}/?debug=1`,
             appDirName : context.appDirName,
             appFileName: context.appFileName,

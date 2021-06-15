@@ -1465,10 +1465,9 @@ class TableEditor extends Editor {
 
 class EditorFrontHostApp extends FrontHostApp {
     constructor(data, runAppLink) {
-        console.log('EditorFrontHostApp.constructor');
+        console.log('EditorFrontHostApp.constructor', data);
         super(data);
         EditorFrontHostApp.editorApp = this;
-        // this.data = data;
         this.runAppLink = runAppLink;
         this.view = null;
         this.actionList = null;
@@ -1481,10 +1480,10 @@ class EditorFrontHostApp extends FrontHostApp {
     }
 
     run() {
-        console.log('EditorFrontHostApp.run', this.data);
+        console.log('EditorFrontHostApp.run');
 
         // app
-        const app = new ApplicationEditor(this.data);
+        const app = new ApplicationEditor(this.data.app);
         app.init();
         // console.log('app:', app);
 
