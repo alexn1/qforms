@@ -86,9 +86,13 @@ class DataSourceEditor extends Editor {
             controller: 'DataSource',
             action    : 'createModelBackJs',
             params    : Helper.encodeObject({
-                ...(this.parent instanceof PageEditor ? {pageFileName: this.parent.pageLink.getFileName()} : {}),
+                ...(this.parent instanceof PageEditor ? {
+                    page        : this.parent.getName(),
+                    pageFileName: this.parent.pageLink.getFileName()
+                } : {}),
                 ...(this.parent instanceof FormEditor ? {
                     form        : this.parent.getName(),
+                    page        : this.parent.page.getName(),
                     pageFileName: this.parent.page.pageLink.getFileName()
                 } : {}),
                 dataSource: this.getName(),
