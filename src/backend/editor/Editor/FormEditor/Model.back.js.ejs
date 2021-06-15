@@ -1,6 +1,21 @@
-const { <%=_class%> } = require('../../../../../../../qforms');
+const { <%=_class%>, BaseModel } = require('../../../../../../../qforms');
 
 class <%=page%><%=form%>Back<%=_class%> extends <%=_class%> {
-
+    constructor(...args) {
+        console.log('<%=page%><%=form%>Back<%=_class%>.constructor');
+        super(...args);
+    }
+    /*async getChildModelCustomClass(colName, data) {
+        if (colName === 'fields') {
+            if (BaseModel.getName(data) === 'field1') {
+                return Field1Field;
+            }
+        } else if (colName === 'dataSources') {
+            if (BaseModel.getName(data) === 'default') {
+                return DefaultDataSource;
+            }
+        }
+        return null;
+    }*/
 }
 module.exports = <%=page%><%=form%>Back<%=_class%>;
