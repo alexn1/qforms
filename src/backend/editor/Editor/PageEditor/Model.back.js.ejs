@@ -1,6 +1,10 @@
 const { Page } = require('../../../../../qforms');
 
 class <%=name%>BackPage extends Page {
+    constructor(...args) {
+        console.log('<%=name%>BackPage.constructor');
+        super(...args);
+    }
     /*async getChildModelCustomClass(colName, data) {
         if (colName === 'forms') {
             if (BaseModel.getName(data) === 'Form1') {
