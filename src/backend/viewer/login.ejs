@@ -32,7 +32,7 @@
                 <% }); %>
             </select>
         <% } else { %>
-        <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>">
+        <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
         <% } %>
         <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
         <% if (errMsg !== null) { %>
