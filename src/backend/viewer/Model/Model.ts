@@ -1,5 +1,6 @@
 import Context from "../../Context";
 import BaseModel from '../../BaseModel';
+import {Mode} from "fs";
 
 const backend  = require('../../../backend');
 
@@ -57,9 +58,9 @@ class Model extends BaseModel {
         }
     }
 
-    async getChildModelCustomClass(colName: string, data: any) {
-        let CustomClass = null;
-        /*const dirPath = this.getDirPath();
+    async getChildModelCustomClass(model: Model, colName: string, data: any) {
+        /*let CustomClass = null;
+        const dirPath = this.getDirPath();
         if (dirPath) {
             const modelName = BaseModel.getName(data);
             const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
@@ -67,12 +68,13 @@ class Model extends BaseModel {
             if (exists) {
                 CustomClass = require(customClassFilePath);
             }
-        }*/
-        return CustomClass;
+        }
+        return CustomClass;*/
+        return this.getParent() ? this.getParent().getChildModelCustomClass(model, colName, data) : null;
     }
 
     async createChildModel(colName: string, data: any) {
-        const CustomClass = await this.getChildModelCustomClass(colName, data);
+        const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
         return new Class(data, this);

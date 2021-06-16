@@ -5,13 +5,15 @@ class <%=name%>BackPage extends Page {
         console.log('<%=name%>BackPage.constructor');
         super(...args);
     }
-    /*async getChildModelCustomClass(colName, data) {
-        if (colName === 'forms') {
-            if (BaseModel.getName(data) === 'Form1') {
-                return Form1Form;
+    /*async getChildModelCustomClass(model, colName, data) {
+        if (model === this) {
+            if (colName === 'forms') {
+                if (BaseModel.getName(data) === 'Form1') {
+                    return Form1Form;
+                }
             }
         }
-        return null;
+        return super.getChildModelCustomClass(model, colName, data);
     }*/
 }
 module.exports = <%=name%>BackPage;

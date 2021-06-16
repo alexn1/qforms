@@ -8,15 +8,17 @@ class <%=name%>BackApplication extends Application {
     /*getViewClassName() {
         return '<%=name%>View';
     }*/
-    /*async getChildModelCustomClass(colName, data) {
-        if (colName === 'pages') {
-            if (BaseModel.getName(data) === 'Page1') {
-                return Page1Page;
-            } else if (BaseModel.getName(data) === 'Page2') {
-                return Page2Page;
+    /*async getChildModelCustomClass(model, colName, data) {
+        if (model === this) {
+            if (colName === 'pages') {
+                if (BaseModel.getName(data) === 'Page1') {
+                    return Page1Page;
+                } else if (BaseModel.getName(data) === 'Page2') {
+                    return Page2Page;
+                }
             }
         }
-        return null;
+        return super.getChildModelCustomClass(model, colName, data);
     }*/
 
     // remote procedure

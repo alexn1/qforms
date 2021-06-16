@@ -107,5 +107,9 @@ class BaseModel {
         return i;
     }
 
+    getParent() {
+        return this.parent;
+    }
+
 }
 export = BaseModel;
