@@ -37,9 +37,9 @@ class SqlDataSource extends DataSource {
         // console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
-        if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
+        // if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(rows);
-        return rows[0];
+        return rows[0] || null;
     }
 
     async selectMultiple(context: Context) {
