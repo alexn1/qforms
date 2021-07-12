@@ -5,7 +5,7 @@ module.exports.Context     = require('./Context');
 module.exports.Helper      = require('./Helper');
 
 // viewer
-// module.exports.Model                             = require('./viewer/Model/Model');
+module.exports.Model                             = require('./viewer/Model/Model');
 module.exports.Application                       = require('./viewer/Model/Application/Application');
 module.exports.Database                          = require('./viewer/Model/Database/Database');
 module.exports.MySqlDatabase                     = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
