@@ -1,6 +1,6 @@
 class ViewerFrontHostApp extends FrontHostApp {
     run() {
-        console.log('ViewerFrontHostApp.run');
+        console.log('ViewerFrontHostApp.run', this.data);
 
         // application
         const application = new Application(this.data);
