@@ -125,9 +125,7 @@ class PageController extends Controller {
         ].join('?');
     }
     getForm(name) {
-        const form = this.forms.find(form => form.model.getName() === name);
-        if (!form) throw new Error(`${this.getModel().getFullName()}: no form: ${name}`);
-        return form;
+        return this.forms.find(form => form.model.getName() === name);
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);

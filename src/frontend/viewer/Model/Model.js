@@ -46,8 +46,7 @@ class Model extends EventEmitter {
         return this.getAttr('caption');
     }
     getDataSource(name) {
-        const dataSource = this.dataSources.find(dataSource => dataSource.getName() === name);
-        return dataSource;
+        return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
     createDataSources() {
         for (const data of this.data.dataSources) {
