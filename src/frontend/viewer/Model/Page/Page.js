@@ -159,7 +159,9 @@ class Page extends Model {
         return result;
     }
     getForm(name) {
-        return this.forms.find(form => form.getName() === name);
+        const form = this.forms.find(form => form.getName() === name);
+        if (!form) throw new Error(`${this.getFullName()}: no form: ${name}`);
+        return form;
     }
 }
 window.QForms.Page = Page;

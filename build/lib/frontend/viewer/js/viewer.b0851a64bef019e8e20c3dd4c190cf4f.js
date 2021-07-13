@@ -1793,7 +1793,9 @@ class PageController extends Controller {
         ].join('?');
     }
     getForm(name) {
-        return this.forms.find(form => form.model.getName() === name);
+        const form = this.forms.find(form => form.model.getName() === name);
+        if (!form) throw new Error(`${this.getModel().getFullName()}: no form: ${name}`);
+        return form;
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
@@ -1849,7 +1851,8 @@ class Model extends EventEmitter {
         return this.getAttr('caption');
     }
     getDataSource(name) {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        const dataSource = this.dataSources.find(dataSource => dataSource.getName() === name);
+        return dataSource;
     }
     createDataSources() {
         for (const data of this.data.dataSources) {
@@ -3219,7 +3222,9 @@ class Page extends Model {
         return result;
     }
     getForm(name) {
-        return this.forms.find(form => form.getName() === name);
+        const form = this.forms.find(form => form.getName() === name);
+        if (!form) throw new Error(`${this.getFullName()}: no form: ${name}`);
+        return form;
     }
 }
 window.QForms.Page = Page;
