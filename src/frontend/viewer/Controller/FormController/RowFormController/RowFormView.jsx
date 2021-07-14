@@ -3,7 +3,7 @@ class RowFormView extends FormView {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
         const text = ctrl.getModel().getApp().getText();
-        const width = '90px';
+        const width = '120px';
         return (
             <div className={'RowFormView__toolbar'}>
                 {ctrl.model.hasDefaultSqlDataSource() &&

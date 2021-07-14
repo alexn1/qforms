@@ -1295,9 +1295,9 @@ class RowFormController extends FormController {
         this.state.hasNew  = this.model.hasNew();
         this.state.changed = this.isChanged();
         this.state.valid   = this.isValid();
-        if (this.state.hasNew) {
+        /*if (this.state.hasNew) {
             this.state.mode = 'edit';
-        }
+        }*/
         // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
     }
@@ -1356,6 +1356,7 @@ class RowFormController extends FormController {
         console.log('RowFormController.onSaveClick');
         this.validate();
         if (this.isValid()) {
+            this.state.mode = 'view';
             await this.model.update();
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
@@ -1383,6 +1384,7 @@ class RowFormController extends FormController {
 
         // ui
         this.calcState();
+        this.state.mode = 'view';
         this.rerender();
 
         // event

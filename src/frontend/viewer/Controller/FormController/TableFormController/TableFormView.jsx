@@ -3,7 +3,7 @@ class TableFormView extends FormView {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         const dataSource = model.getDefaultDataSource();
-        const width = '90px';
+        const width = '120px';
         return (
             <div className={'TableFormView__toolbar'}>
                 {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&

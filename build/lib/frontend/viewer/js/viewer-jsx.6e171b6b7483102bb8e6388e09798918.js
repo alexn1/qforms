@@ -631,7 +631,7 @@ class RowFormView extends FormView {
     // console.log('RowFormView.renderToolbar');
     const ctrl = this.props.ctrl;
     const text = ctrl.getModel().getApp().getText();
-    const width = '90px';
+    const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
       className: 'RowFormView__toolbar'
     }, ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
@@ -774,7 +774,7 @@ class TableFormView extends FormView {
     const ctrl = this.props.ctrl;
     const model = ctrl.model;
     const dataSource = model.getDefaultDataSource();
-    const width = '90px';
+    const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
       className: 'TableFormView__toolbar'
     }, model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
