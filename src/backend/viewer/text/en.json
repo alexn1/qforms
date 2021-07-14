@@ -16,7 +16,8 @@
         "save": "Save",
         "close": "Close",
         "refresh": "Refresh",
-        "discard": "Discard"
+        "discard": "Discard",
+        "actions": "Actions"
     },
     "form": {
         "refresh": "Refresh",

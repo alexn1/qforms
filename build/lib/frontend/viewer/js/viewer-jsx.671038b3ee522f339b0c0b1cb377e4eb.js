@@ -796,7 +796,7 @@ class TableFormView extends FormView {
       onClick: ctrl.onDeleteClick,
       enabled: ctrl.isRowSelected()
     }), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
-      title: 'Actions',
+      title: model.getApp().getText().form.actions,
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick,
       enabled: ctrl.isRowSelected()
@@ -967,7 +967,7 @@ class PageView extends View {
       title: model.getApp().getText().page.close,
       onClick: ctrl.onClosePageClick
     }), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
-      title: 'Actions',
+      title: model.getApp().getText().page.actions,
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
     }));
