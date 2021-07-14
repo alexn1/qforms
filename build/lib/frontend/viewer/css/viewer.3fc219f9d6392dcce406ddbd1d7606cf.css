@@ -257,6 +257,7 @@ img {
 .standard .RowFormTextAreaFieldView > textarea {
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-size: inherit;
 }
 .standard .RowFormTextAreaFieldView.changed > textarea {
   background-color: #eefdea;
