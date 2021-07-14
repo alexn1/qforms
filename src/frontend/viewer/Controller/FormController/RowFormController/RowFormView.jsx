@@ -27,8 +27,8 @@ class RowFormView extends FormView {
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
-                        key="cancel"
-                        title="Finish"
+                        key="finish"
+                        title={text.form.finish}
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
                         width={width}
@@ -37,7 +37,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="discard"
-                        title="Discard"
+                        title={text.form.discard}
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
@@ -47,7 +47,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="refresh"
-                        title="Refresh"
+                        title={text.form.refresh}
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                         onClick={ctrl.onRefreshClick}
                         visible={ctrl.getMode() === 'view'}

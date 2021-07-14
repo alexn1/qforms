@@ -27,7 +27,9 @@
         "previous": "Previous",
         "next": "Next",
         "edit": "Edit",
-        "save": "Save"
+        "save": "Save",
+        "finish": "Finish",
+        "discard": "Discard"
     },
     "field": {
         "selectValue": "select value",

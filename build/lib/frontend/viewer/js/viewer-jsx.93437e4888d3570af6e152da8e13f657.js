@@ -648,21 +648,21 @@ class RowFormView extends FormView {
       visible: ctrl.getMode() === 'edit',
       width: width
     }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
-      key: "cancel",
-      title: "Finish",
+      key: "finish",
+      title: text.form.finish,
       visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid,
       onClick: ctrl.onCancelClick,
       width: width
     }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "discard",
-      title: "Discard",
+      title: text.form.discard,
       enabled: ctrl.state.changed || !ctrl.isValid(),
       onClick: ctrl.onDiscardClick,
       visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid),
       width: width
     }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
-      title: "Refresh",
+      title: text.form.refresh,
       enabled: !ctrl.state.changed && !ctrl.state.hasNew,
       onClick: ctrl.onRefreshClick,
       visible: ctrl.getMode() === 'view',
