@@ -29,7 +29,8 @@
         "edit": "Edit",
         "save": "Save",
         "finish": "Finish",
-        "discard": "Discard"
+        "discard": "Discard",
+        "actions": "Actions"
     },
     "field": {
         "selectValue": "select value",
