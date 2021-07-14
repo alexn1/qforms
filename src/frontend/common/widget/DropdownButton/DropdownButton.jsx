@@ -41,7 +41,7 @@ class DropdownButton extends ReactComponent{
                     onClick={this.onButtonClick}
                     onBlur={this.onButtonBlur}
                     disabled={this.isDisabled()}
-                >Actions</button>
+                >{this.props.title}</button>
                 <ul onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
                     {this.props.actions && this.props.actions.map(action =>
                         <li key={action.name} data-action={action.name}>{action.title}</li>

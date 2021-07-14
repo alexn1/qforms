@@ -72,7 +72,11 @@ class PageView extends View {
                     />
                 }
                 {model.hasActions() &&
-                    <DropdownButton actions={this.getActionsForDropdownButton()} onClick={this.onActionsClick}/>
+                    <DropdownButton
+                        title={'Actions'}
+                        actions={this.getActionsForDropdownButton()}
+                        onClick={this.onActionsClick}
+                    />
                 }
             </div>
         );

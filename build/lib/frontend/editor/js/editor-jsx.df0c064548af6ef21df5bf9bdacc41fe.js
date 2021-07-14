@@ -17,6 +17,7 @@ class ActionList extends ReactComponent {
   render() {
     // console.log('ActionList.render', this.state.item);
     return /*#__PURE__*/React.createElement(DropdownButton, {
+      title: 'Actions',
       onClick: this.onClick,
       actions: this.state.item ? this.state.item.getActions().map(action => {
         return {
@@ -24,7 +25,7 @@ class ActionList extends ReactComponent {
           title: action.caption
         };
       }) : []
-    }, "Actions");
+    });
   }
 
 }

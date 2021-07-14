@@ -11,8 +11,8 @@ class ActionList extends ReactComponent {
     }
     render() {
         // console.log('ActionList.render', this.state.item);
-        return <DropdownButton onClick={this.onClick} actions={this.state.item ? this.state.item.getActions().map(action => {
+        return <DropdownButton title={'Actions'} onClick={this.onClick} actions={this.state.item ? this.state.item.getActions().map(action => {
             return {name: action.action, title: action.caption};
-        }) : []}>Actions</DropdownButton>
+        }) : []}/>
     }
 }
