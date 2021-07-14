@@ -3063,10 +3063,10 @@ class Page extends Model {
         // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options = options; // {id, parentPage, modal, params}
-        this.dataSources    = [];
-        this.forms          = [];
-        this.params         = {};
+        this.options     = options; // {id, parentPage, modal, params}
+        this.dataSources = [];
+        this.forms       = [];
+        this.params      = {};
     }
 
     init() {
