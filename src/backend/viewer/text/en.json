@@ -26,7 +26,8 @@
         "count": "Count",
         "previous": "Previous",
         "next": "Next",
-        "edit": "Edit"
+        "edit": "Edit",
+        "save": "Save"
     },
     "field": {
         "selectValue": "select value",

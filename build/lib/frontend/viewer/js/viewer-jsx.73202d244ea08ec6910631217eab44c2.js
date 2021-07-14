@@ -642,7 +642,7 @@ class RowFormView extends FormView {
       width: width
     }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "save",
-      title: "Save",
+      title: text.form.save,
       enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid,
       onClick: ctrl.onSaveClick,
       visible: ctrl.getMode() === 'edit',

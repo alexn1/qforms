@@ -18,7 +18,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="save"
-                        title="Save"
+                        title={text.form.save}
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
                         visible={ctrl.getMode() === 'edit'}
