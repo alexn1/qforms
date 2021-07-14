@@ -80,6 +80,7 @@ class RowFormController extends FormController {
         return true;
     }
     validate() {
+        // console.log('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].validate();
         }

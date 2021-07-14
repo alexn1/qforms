@@ -31,10 +31,13 @@ class PageController extends Controller {
 
     onSaveAndCloseClick = async () => {
         console.log('PageController.onSaveAndCloseClick');
+        this.validate();
         if (this.isValid()) {
             await this.model.update();
             console.log('page model updated', this.model.getFullName());
             this.getAppController().closePage(this);
+        } else {
+            this.rerender();
         }
     }
 
@@ -54,6 +57,14 @@ class PageController extends Controller {
             if (!result) return;
         }
         this.getAppController().closePage(this);
+    }
+    validate() {
+        for (const form of this.forms) {
+            if (form instanceof RowFormController) {
+                form.validate();
+                form.invalidate();
+            }
+        }
     }
     isValid() {
         // console.log('PageController.isValid', this.model.getFullName());
