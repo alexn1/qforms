@@ -2,13 +2,14 @@ class RowFormView extends FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
+        const text = ctrl.getModel().getApp().getText();
         const width = '90px';
         return (
             <div className={'RowFormView__toolbar'}>
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="edit"
-                        title="Edit"
+                        title={text.form.edit}
                         onClick={ctrl.onEditClick}
                         visible={ctrl.getMode() === 'view'}
                         width={width}

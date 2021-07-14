@@ -25,7 +25,8 @@
         "areYouSure": "Are you sure?",
         "count": "Count",
         "previous": "Previous",
-        "next": "Next"
+        "next": "Next",
+        "edit": "Edit"
     },
     "field": {
         "selectValue": "select value",

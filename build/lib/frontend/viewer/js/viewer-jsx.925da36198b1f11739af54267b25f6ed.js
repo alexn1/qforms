@@ -630,12 +630,13 @@ class RowFormView extends FormView {
   renderToolbar() {
     // console.log('RowFormView.renderToolbar');
     const ctrl = this.props.ctrl;
+    const text = ctrl.getModel().getApp().getText();
     const width = '90px';
     return /*#__PURE__*/React.createElement("div", {
       className: 'RowFormView__toolbar'
     }, ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "edit",
-      title: "Edit",
+      title: text.form.edit,
       onClick: ctrl.onEditClick,
       visible: ctrl.getMode() === 'view',
       width: width
