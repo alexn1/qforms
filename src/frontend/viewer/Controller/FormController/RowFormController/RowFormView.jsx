@@ -27,8 +27,8 @@ class RowFormView extends FormView {
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
-                        key="finish"
-                        title={text.form.finish}
+                        key="cancel"
+                        title={text.form.cancel}
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
                         width={width}
