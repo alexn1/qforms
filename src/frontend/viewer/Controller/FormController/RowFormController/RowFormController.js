@@ -96,6 +96,7 @@ class RowFormController extends FormController {
     onSaveClick = async () => {
         console.log('RowFormController.onSaveClick');
         this.validate();
+        this.calcState();
         if (this.isValid()) {
             this.state.mode = 'view';
             await this.model.update();
