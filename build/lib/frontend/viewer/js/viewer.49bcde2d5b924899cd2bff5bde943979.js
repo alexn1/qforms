@@ -1298,11 +1298,9 @@ class RowFormController extends FormController {
         this.state.hasNew  = this.model.hasNew();
         this.state.changed = this.isChanged();
         this.state.valid   = this.isValid();
-        /*if (this.state.hasNew) {
-            this.state.mode = 'edit';
-        }*/
-        // console.log('changed:', changed);
         // console.log('hasNew:', hasNew);
+        // console.log('changed:', changed);
+        // console.log('valid:', valid);
     }
 
     refill() {
@@ -1419,12 +1417,12 @@ class RowFormController extends FormController {
     }
 
     onEditClick = e => {
-        // console.log('RowFormController.onEditClick', this);
+        console.log('RowFormController.onEditClick');
         this.state.mode = 'edit';
         this.rerender();
     }
     onCancelClick = e => {
-        // console.log('RowFormController.onCancelClick', this);
+        console.log('RowFormController.onCancelClick');
         this.state.mode = 'view';
         this.rerender();
     }
