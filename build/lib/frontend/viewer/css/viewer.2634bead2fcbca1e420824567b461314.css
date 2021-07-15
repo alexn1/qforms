@@ -216,7 +216,7 @@ img {
   background-color: #eefdea;
 }
 .standard .RowFormDateTimeFieldView.error > div > input {
-  background-color: #f2dede;
+  background-color: #f2dede !important;
 }
 
 .standard .RowFormFileFieldView img {
