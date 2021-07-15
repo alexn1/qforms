@@ -1281,6 +1281,9 @@ class RowFormController extends FormController {
             this.state.mode = 'view';
         }
         this.calcState();
+        if (this.state.hasNew) {
+            this.state.mode = 'edit';
+        }
     }
 
     deinit() {
