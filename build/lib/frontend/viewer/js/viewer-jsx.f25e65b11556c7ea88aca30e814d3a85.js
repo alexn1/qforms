@@ -987,7 +987,9 @@ class PageView extends View {
       className: "frame__content flex-rows"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "PageView__caption"
-    }, this.renderCaption()), (model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
+    }, this.renderCaption()),
+    /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
+    this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__content"

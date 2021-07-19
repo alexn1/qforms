@@ -92,7 +92,7 @@ class PageView extends View {
             <div className="PageView full frame">
                 <div className="frame__content flex-rows">
                     <h3 className="PageView__caption">{this.renderCaption()}</h3>
-                    {(model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar()}
+                    {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
                         <div className="PageView__table-forms flex-max frame">
