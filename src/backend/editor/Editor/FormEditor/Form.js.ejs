@@ -9,11 +9,13 @@ class <%=page%><%=form%>FormController extends <%=_class%>Controller {
     /*
     init() {
         super.init();
+        this.getField('field1').on('change', this.onField1Change);
     }
     */
 
     /*
     deinit() {
+        this.getField('field1').off('change', this.onField1Change);
         super.deinit();
     }
     */
@@ -32,6 +34,11 @@ class <%=page%><%=form%>FormController extends <%=_class%>Controller {
             case 'action1': await this.onAction1(row); return true;
         }
         return false;
+    }
+    */
+
+    /*
+    onField1Change = async e => {
     }
     */
 
