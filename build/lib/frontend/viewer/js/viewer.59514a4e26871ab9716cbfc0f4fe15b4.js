@@ -2654,7 +2654,7 @@ class Field extends Model {
         // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
         // if (this.getDbType() === 'text') return;
         if (this.isParam()) {
-            this.getPage().addPageParam(this.getFullName(), this.getValue(row));
+            this.getPage().addParam(this.getFullName(), this.getValue(row));
         }
     }
 
@@ -3124,8 +3124,8 @@ class Page extends Model {
         };
     }
 
-    addPageParam(name, value) {
-        // console.log('Page.addPageParam', name);
+    addParam(name, value) {
+        // console.log('Page.addParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
 
@@ -3219,7 +3219,7 @@ class Page extends Model {
         // key params to page params
         const keyParams = DataSource.keyToParams(e.key);
         for (const name in keyParams) {
-            this.addPageParam(name, keyParams[name]);
+            this.addParam(name, keyParams[name]);
         }
     }
     async rpc(name, params) {

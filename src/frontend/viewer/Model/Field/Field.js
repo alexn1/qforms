@@ -40,7 +40,7 @@ class Field extends Model {
         // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
         // if (this.getDbType() === 'text') return;
         if (this.isParam()) {
-            this.getPage().addPageParam(this.getFullName(), this.getValue(row));
+            this.getPage().addParam(this.getFullName(), this.getValue(row));
         }
     }
 
