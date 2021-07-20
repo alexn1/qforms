@@ -76,7 +76,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
     };
     onBlur2 = (viewValue, fireEvent = false) => {
-        // console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
+        console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
         if (!this.isEditable()) return;
         this.validate2();
         if (this.isValid()) {

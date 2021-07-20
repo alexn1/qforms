@@ -618,7 +618,7 @@ class RowFormFieldController extends FieldController {
             let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
             if (original) original = original.substr(0, 100);
             if (modified) modified = modified.substr(0, 100);
-            console.log(`FIELD MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
+            console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
             return true;
         }
         return false;
@@ -766,7 +766,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
     };
     onBlur2 = (viewValue, fireEvent = false) => {
-        // console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
+        console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
         if (!this.isEditable()) return;
         this.validate2();
         if (this.isValid()) {
