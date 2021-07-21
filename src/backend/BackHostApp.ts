@@ -496,7 +496,7 @@ class BackHostApp {
         const cnn = await dataSource.getDatabase().getConnection(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
-            const result = await dataSource.insert(context, context.params);
+            const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(cnn);
             await res.json(result);
