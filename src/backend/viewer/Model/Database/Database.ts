@@ -93,8 +93,8 @@ class Database extends Model {
     getConfig(): any {
         const config: any = {
             host       : this.createParam('host').getValue(),
-            user       : this.createParam('user').getValue(),
             database   : this.createParam('database').getValue(),
+            user       : this.createParam('user').getValue(),
             password   : this.createParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
