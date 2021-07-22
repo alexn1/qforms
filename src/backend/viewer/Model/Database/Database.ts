@@ -134,7 +134,7 @@ class Database extends Model {
         if (notPassedParams.length > 0) throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
     }
 
-    async insertRow(context, table, values, autoColumnTypes) {
+    async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
         throw new Error('Database.insertRow not implemented');
     }
 }
