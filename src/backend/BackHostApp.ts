@@ -377,7 +377,9 @@ class BackHostApp {
                 REQUEST_URI: req.url,
                 errMsg     : application.getText().login.WrongUsernameOrPassword,
                 username   : req.body.username,
-                users      : users
+                users      : users,
+                links      : this.viewerModule.getLinks(),
+                scripts    : this.viewerModule.getScripts()
             });
         }
     }
