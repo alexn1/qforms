@@ -116,6 +116,9 @@ img {
   margin: 0;
 }
 
+.RowFormComboBoxFieldView {
+  display: flex;
+}
 .RowFormComboBoxFieldView > select {
   width: 100%;
 }
@@ -129,6 +132,17 @@ img {
 .standard .RowFormComboBoxFieldView > select[disabled] {
   background-color: lightgoldenrodyellow;
   cursor: default;
+}
+.standard .RowFormComboBoxFieldView > button {
+  height: 20px;
+  border: none;
+  background-color: #ccc;
+}
+.standard .RowFormComboBoxFieldView > button:hover {
+  background-color: #ddd;
+}
+.standard .RowFormComboBoxFieldView > button:active {
+  background-color: #bbb;
 }
 .standard .RowFormComboBoxFieldView.changed > select {
   background-color: #eefdea;
@@ -399,6 +413,9 @@ img {
 .RowFormView__form-grid {
   display: grid;
   grid-template-columns: 150px 300px 24px 150px 300px 24px;
+}
+.RowFormView__form-grid div {
+  align-items: start;
 }
 .standard .RowFormView {
   background-color: #eeeeee;

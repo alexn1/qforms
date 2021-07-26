@@ -143,7 +143,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
       onChange: ctrl.onChange,
       items: ctrl.getItems(),
       placeholder: ctrl.getPlaceholder()
-    }));
+    }), /*#__PURE__*/React.createElement("button", null, "..."));
   }
 
 }
