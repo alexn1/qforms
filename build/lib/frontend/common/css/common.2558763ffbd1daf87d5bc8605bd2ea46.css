@@ -92,7 +92,7 @@ table.DatePicker td.selected {
   background-color: white;
   width: 300%;
   visibility: hidden;
-  z-index: 2;
+  z-index: 3;
 }
 .DropdownButton > ul > li {
   display: block;
