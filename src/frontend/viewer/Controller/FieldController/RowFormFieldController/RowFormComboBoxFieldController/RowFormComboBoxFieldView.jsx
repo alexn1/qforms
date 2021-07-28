@@ -12,7 +12,12 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                     items={ctrl.getItems()}
                     placeholder={ctrl.getPlaceholder()}
                 />
-                <button onClick={ctrl.onEditButtonClick}>...</button>
+                {ctrl.getModel().getAttr('itemEditPage') &&
+                    <Button
+                        onClick={ctrl.onEditButtonClick}
+                        enabled={!!ctrl.getModel().getAttr('itemEditPage')}
+                    >...</Button>
+                }
             </div>
         );
     }

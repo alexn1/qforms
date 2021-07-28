@@ -138,11 +138,11 @@ img {
   border: none;
   background-color: #ccc;
 }
-.standard .RowFormComboBoxFieldView > button:hover {
-  background-color: #ddd;
-}
 .standard .RowFormComboBoxFieldView > button:active {
   background-color: #bbb;
+}
+.standard .RowFormComboBoxFieldView > button:not([disabled]):hover {
+  background-color: #ddd;
 }
 .standard .RowFormComboBoxFieldView.changed > select {
   background-color: #eefdea;
