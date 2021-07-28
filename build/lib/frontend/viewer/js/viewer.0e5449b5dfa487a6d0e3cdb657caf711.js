@@ -671,6 +671,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isInDebugMode() ? '[null]' : null;
     }
+    onEditButtonClick = e => {
+        console.log('RowFormComboBoxFieldController.onEditButtonClick');
+    }
+
 }
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
