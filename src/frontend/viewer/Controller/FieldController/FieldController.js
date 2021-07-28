@@ -57,5 +57,9 @@ class FieldController extends Controller {
         return null;
     }
 
+    async openPage(options) {
+        return await this.getParent().openPage(options);
+    }
+
 }
 window.QForms.FieldController = FieldController;

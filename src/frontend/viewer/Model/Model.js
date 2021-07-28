@@ -69,5 +69,8 @@ class Model extends EventEmitter {
     hasActions() {
         return this.data.actions.length > 0;
     }
+    getParent() {
+        return this.parent;
+    }
 }
 window.QForms.Model = Model;

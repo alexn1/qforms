@@ -15,10 +15,21 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isInDebugMode() ? '[null]' : null;
     }
-    onEditButtonClick = e => {
+    onEditButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onEditButtonClick');
+        const itemEditPage = this.getModel().getAttr('itemEditPage');
+        const value = this.getValue();
+        // console.log('itemEditPage', itemEditPage);
+        // console.log('value:', value);
+        if (itemEditPage && value) {
+            await this.openPage({
+                name: itemEditPage,
+                params: {
+                    key: value
+                }
+            });
+        }
     }
-
 }
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;

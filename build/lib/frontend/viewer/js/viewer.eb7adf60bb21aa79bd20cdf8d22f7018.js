@@ -437,6 +437,10 @@ class FieldController extends Controller {
         return null;
     }
 
+    async openPage(options) {
+        return await this.getParent().openPage(options);
+    }
+
 }
 window.QForms.FieldController = FieldController;
 
@@ -671,10 +675,21 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isInDebugMode() ? '[null]' : null;
     }
-    onEditButtonClick = e => {
+    onEditButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onEditButtonClick');
+        const itemEditPage = this.getModel().getAttr('itemEditPage');
+        const value = this.getValue();
+        // console.log('itemEditPage', itemEditPage);
+        // console.log('value:', value);
+        if (itemEditPage && value) {
+            await this.openPage({
+                name: itemEditPage,
+                params: {
+                    key: value
+                }
+            });
+        }
     }
-
 }
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
@@ -1891,6 +1906,9 @@ class Model extends EventEmitter {
     }
     hasActions() {
         return this.data.actions.length > 0;
+    }
+    getParent() {
+        return this.parent;
     }
 }
 window.QForms.Model = Model;
