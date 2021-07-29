@@ -100,17 +100,15 @@ class PageController extends Controller {
 
     async openPage(options) {
         // options.parentPage = this.model;
-
         if (!options.params) {
             options.params = {};
         }
-
         const params =  this.getModel().getParams();
-
         for (const name in params) {
-            options.params[name] = params[name];
+            if (!options.params[name]) {
+                options.params[name] = params[name];
+            }
         }
-
         return await this.getAppController().openPage(options);
     }
 
