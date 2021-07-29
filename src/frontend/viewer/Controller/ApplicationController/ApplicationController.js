@@ -76,7 +76,7 @@ class ApplicationController extends Controller {
             action        : 'page',
             page          : name,
             newMode       : isNewMode,
-            parentPageName: parentPage ? parentPage.getName() : null,
+            // parentPageName: parentPage ? parentPage.getName() : null,
             params        : Helper.encodeObject({
                 ...(parentPage ? parentPage.getParams() : {}),
                 ...params,

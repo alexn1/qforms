@@ -187,7 +187,7 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'select',
-            parentPageName: page ? page.getParentPageName() : null,
+            // parentPageName: page ? page.getParentPageName() : null,
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
@@ -207,7 +207,7 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'selectSingle',
-            parentPageName: page ? page.getParentPageName() : null,
+            // parentPageName: page ? page.getParentPageName() : null,
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
@@ -231,7 +231,7 @@ class SqlDataSource extends DataSource {
             action        : 'insert',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
-            parentPageName: this.getPage().getParentPageName(),
+            // parentPageName: this.getPage().getParentPageName(),
             params        : this.getRowWithChanges(row),
         });
 
@@ -274,7 +274,7 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             params        : Helper.encodeObject({key}),
-            parentPageName: page ? page.getParentPageName() : null
+            // parentPageName: page ? page.getParentPageName() : null
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {

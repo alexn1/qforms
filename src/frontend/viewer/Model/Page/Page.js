@@ -36,9 +36,9 @@ class Page extends Model {
         return this.options.id;
     }
 
-    getParentPageName() {
+    /*getParentPageName() {
         return this.options.parentPage ? this.options.parentPage.getName() : null;
-    }
+    }*/
 
     getParams() {
         return {
