@@ -28,6 +28,9 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             });
         }
     }
+    onCreateButtonClick = async e => {
+        console.log('RowFormComboBoxFieldController.onCreateButtonClick');
+    }
 }
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
