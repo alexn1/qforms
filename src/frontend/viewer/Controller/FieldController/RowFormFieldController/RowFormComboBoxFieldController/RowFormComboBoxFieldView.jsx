@@ -18,6 +18,9 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                         // enabled={!!ctrl.getModel().getAttr('itemEditPage')}
                     >...</Button>
                 }
+                {ctrl.getModel().getAttr('itemEditPage') &&
+                    <Button>+</Button>
+                }
             </div>
         );
     }
