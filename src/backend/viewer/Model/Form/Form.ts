@@ -84,8 +84,8 @@ class Form extends Model {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {
                     arr[0] = this.getPage().getName();
-                } else if (arr[0] === 'parent' && context.parentPageName) {
-                    arr[0] = context.parentPageName;
+                // } else if (arr[0] === 'parent' && context.parentPageName) {
+                //     arr[0] = context.parentPageName;
                 }
                 return '{' + arr.join('.') + '}';
             }
