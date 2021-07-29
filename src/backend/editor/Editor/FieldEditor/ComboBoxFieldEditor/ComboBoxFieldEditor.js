@@ -14,6 +14,8 @@ class ComboBoxFieldEditor extends FieldEditor {
                 valueColumn   : params.valueColumn    ? params.valueColumn    :             '',
                 displayColumn : params.displayColumn  ? params.displayColumn  :             '',
                 itemEditPage  : params.itemEditPage   ? params.itemEditPage   :             '',
+                itemCreatePage: params.itemCreatePage ? params.itemCreatePage :             '',
+                newRowMode    : params.newRowMode     ? params.newRowMode     :     'disabled',
             }
         };
     }
