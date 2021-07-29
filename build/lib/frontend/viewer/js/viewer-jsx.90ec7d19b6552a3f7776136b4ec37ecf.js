@@ -143,9 +143,9 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
       onChange: ctrl.onChange,
       items: ctrl.getItems(),
       placeholder: ctrl.getPlaceholder()
-    }), ctrl.getModel().getAttr('itemEditPage') && /*#__PURE__*/React.createElement(Button, {
-      onClick: ctrl.onEditButtonClick,
-      enabled: !!ctrl.getModel().getAttr('itemEditPage')
+    }), ctrl.getModel().getAttr('itemEditPage') && ctrl.getValue() && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onEditButtonClick // enabled={!!ctrl.getModel().getAttr('itemEditPage')}
+
     }, "..."));
   }
 
