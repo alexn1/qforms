@@ -42,7 +42,7 @@ class Page extends Model {
 
     getParams() {
         return {
-            ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
+            // ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
             ...(this.options.params !== undefined ? this.options.params : {}),
             ...this.params,
         };

@@ -57,7 +57,7 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
         const key        = options.key || null;
-        const parentPage = options.parentPage;
+        // const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
         const params     = options.params || {};
@@ -78,7 +78,7 @@ class ApplicationController extends Controller {
             newMode       : isNewMode,
             // parentPageName: parentPage ? parentPage.getName() : null,
             params        : Helper.encodeObject({
-                ...(parentPage ? parentPage.getParams() : {}),
+                // ...(parentPage ? parentPage.getParams() : {}),
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
             })
@@ -87,7 +87,7 @@ class ApplicationController extends Controller {
         const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
             modal         : isModal,
-            parentPage    : parentPage,
+            // parentPage    : parentPage,
             params        : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),

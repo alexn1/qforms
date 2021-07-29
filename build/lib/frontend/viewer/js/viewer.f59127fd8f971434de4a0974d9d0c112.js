@@ -116,7 +116,7 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
         const key        = options.key || null;
-        const parentPage = options.parentPage;
+        // const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
         const params     = options.params || {};
@@ -137,7 +137,7 @@ class ApplicationController extends Controller {
             newMode       : isNewMode,
             // parentPageName: parentPage ? parentPage.getName() : null,
             params        : Helper.encodeObject({
-                ...(parentPage ? parentPage.getParams() : {}),
+                // ...(parentPage ? parentPage.getParams() : {}),
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
             })
@@ -146,7 +146,7 @@ class ApplicationController extends Controller {
         const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
             modal         : isModal,
-            parentPage    : parentPage,
+            // parentPage    : parentPage,
             params        : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
@@ -1791,7 +1791,18 @@ class PageController extends Controller {
     }
 
     async openPage(options) {
-        options.parentPage = this.model;
+        // options.parentPage = this.model;
+
+        if (!options.params) {
+            options.params = {};
+        }
+
+        const params =  this.getModel().getParams();
+
+        for (const name in params) {
+            options.params[name] = params[name];
+        }
+
         return await this.getAppController().openPage(options);
     }
 
@@ -3140,7 +3151,7 @@ class Page extends Model {
 
     getParams() {
         return {
-            ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
+            // ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
             ...(this.options.params !== undefined ? this.options.params : {}),
             ...this.params,
         };
