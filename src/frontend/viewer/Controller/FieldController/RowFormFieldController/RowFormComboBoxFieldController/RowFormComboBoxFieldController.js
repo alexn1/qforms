@@ -1,6 +1,6 @@
 class RowFormComboBoxFieldController extends RowFormFieldController {
     init() {
-        console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
         const ds = this.model.getComboBoxDataSource();
         ds.on('insert', this.onListInsert);
