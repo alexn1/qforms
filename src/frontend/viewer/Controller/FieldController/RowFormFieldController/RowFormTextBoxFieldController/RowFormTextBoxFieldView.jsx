@@ -21,7 +21,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         return <div className={this.getClassName()}>
             <TextBox
                 onCreate={ctrl.onWidgetCreate}
-                value={ctrl.getValueForView()}
+                value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceholder()}

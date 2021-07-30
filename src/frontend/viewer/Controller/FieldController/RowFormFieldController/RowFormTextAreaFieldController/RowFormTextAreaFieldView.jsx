@@ -4,7 +4,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
         return <div className={this.getClassName()}>
             <TextArea
                 onCreate={ctrl.onWidgetCreate}
-                value={ctrl.getValueForView()}
+                value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceholder()}

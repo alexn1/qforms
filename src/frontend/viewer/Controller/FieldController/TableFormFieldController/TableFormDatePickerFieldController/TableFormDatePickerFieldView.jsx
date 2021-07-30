@@ -4,7 +4,7 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
         const ctrl = this.props.ctrl;
         return (
             <div className="TableFormDatePickerFieldView" style={ctrl.renderViewStyle(row)}>
-                <span ref={this.span}>{ctrl.getValueForView(row)}</span>
+                <span ref={this.span}>{ctrl.getValueForWidget(row)}</span>
             </div>
         );
     }

@@ -3,7 +3,7 @@ class RowFormLinkFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getClassName()}>
-                <a href="#" onClick={ctrl.onClick}>{ctrl.getValueForView()}</a>
+                <a href="#" onClick={ctrl.onClick}>{ctrl.getValueForWidget()}</a>
             </div>
         );
     }

@@ -2,8 +2,8 @@ class TableFormFieldController extends FieldController {
     getViewClass() {
         return TableFormTextBoxFieldView;
     }
-    getValueForView(row) {
-        // console.log('TableFormFieldController.getValueForView');
+    getValueForWidget(row) {
+        // console.log('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.model.getValue(row));
     }
     renderViewStyle(row) {

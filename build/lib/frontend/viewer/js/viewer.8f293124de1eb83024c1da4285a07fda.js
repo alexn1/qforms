@@ -539,7 +539,7 @@ class RowFormFieldController extends FieldController {
             }
         }
     }
-    getValueForView() {
+    getValueForWidget() {
         const value = this.getValue();
         // console.log('value:', this.model.getFullName(), value, typeof value);
         return this.valueToString(value);
@@ -652,7 +652,7 @@ class RowFormFieldController extends FieldController {
 window.QForms.RowFormFieldController = RowFormFieldController;
 
 class RowFormCheckBoxFieldController extends RowFormFieldController {
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     setValueFromView(viewValue) {
@@ -750,7 +750,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormDatePickerFieldView;
     }
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     setValueFromView(viewValue) {
@@ -770,7 +770,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormDateTimeFieldView;
     }
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     getValueForTime() {
@@ -988,7 +988,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormTimeFieldView;
     }
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     setValueFromView(viewValue) {
@@ -1018,8 +1018,8 @@ class TableFormFieldController extends FieldController {
     getViewClass() {
         return TableFormTextBoxFieldView;
     }
-    getValueForView(row) {
-        // console.log('TableFormFieldController.getValueForView');
+    getValueForWidget(row) {
+        // console.log('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.model.getValue(row));
     }
     renderViewStyle(row) {
@@ -1032,7 +1032,7 @@ class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormCheckBoxFieldView;
     }
-    getValueForView(row) {
+    getValueForWidget(row) {
         return this.model.getValue(row);
     }
 }
@@ -1042,7 +1042,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormComboBoxFieldView;
     }
-    getValueForView(row) {
+    getValueForWidget(row) {
         const rawValue = this.model.getRawValue(row);
         if (rawValue === undefined || rawValue === 'null') return '';
         const cbRow = this.model.findRowByRawValue(rawValue);
@@ -1203,7 +1203,7 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormDatePickerFieldView;
     }
-    getValueForView(row) {
+    getValueForWidget(row) {
         const value = this.model.getValue(row);
         if (value) return Helper.formatDate(value, this.model.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
@@ -1215,7 +1215,7 @@ class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormDatePickerFieldView;
     }
-    getValueForView(row) {
+    getValueForWidget(row) {
         const value = this.model.getValue(row);
         if (value) return Helper.formatDate(value, this.model.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
@@ -1265,7 +1265,7 @@ class TableFormTimeFieldController extends TableFormFieldController {
     /*getViewClass() {
         return TableFormTextBoxFieldView;
     }*/
-    getValueForView(row) {
+    getValueForWidget(row) {
         const value = this.model.getValue(row);
         return TimeBox.getStringValue(value);
     }

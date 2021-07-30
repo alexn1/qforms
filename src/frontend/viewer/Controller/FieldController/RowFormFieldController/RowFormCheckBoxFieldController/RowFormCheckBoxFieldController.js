@@ -1,5 +1,5 @@
 class RowFormCheckBoxFieldController extends RowFormFieldController {
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     setValueFromView(viewValue) {

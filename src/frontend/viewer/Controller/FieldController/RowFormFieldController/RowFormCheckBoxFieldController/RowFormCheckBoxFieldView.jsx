@@ -5,7 +5,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
         return <div className={this.getClassName()}>
             <CheckBox
                 onCreate={ctrl.onWidgetCreate}
-                checked={ctrl.getValueForView()}
+                checked={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
             />

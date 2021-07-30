@@ -24,7 +24,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             <div className={this.getClassName()} style={ctrl.renderViewStyle(ctrl.getRow())}>
                 <DropdownDatePicker
                     onCreate={ctrl.onWidgetCreate}
-                    value={ctrl.getValueForView()}
+                    value={ctrl.getValueForWidget()}
                     readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange}
                     placeholder={ctrl.getPlaceholder()}

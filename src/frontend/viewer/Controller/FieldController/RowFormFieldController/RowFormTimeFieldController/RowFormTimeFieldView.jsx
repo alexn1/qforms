@@ -21,7 +21,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
         return <div className={this.getClassName()}>
             <TimeBox
                 onCreate={ctrl.onWidgetCreate}
-                value={ctrl.getValueForView()}
+                value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 onBlur={ctrl.onBlur}

@@ -6,7 +6,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getViewClass() {
         return RowFormTimeFieldView;
     }
-    getValueForView() {
+    getValueForWidget() {
         return this.getValue();
     }
     setValueFromView(viewValue) {

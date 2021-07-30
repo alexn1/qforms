@@ -121,7 +121,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(CheckBox, {
       onCreate: ctrl.onWidgetCreate,
-      checked: ctrl.getValueForView(),
+      checked: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange
     }));
@@ -139,7 +139,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
     }, /*#__PURE__*/React.createElement(ComboBox, {
       onCreate: ctrl.onWidgetCreate,
       nullable: true,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       items: ctrl.getItems(),
@@ -162,7 +162,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
       onCreate: ctrl.onWidgetCreate,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
@@ -215,7 +215,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       style: ctrl.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
       onCreate: ctrl.onWidgetCreate,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
@@ -299,7 +299,7 @@ class RowFormFileFieldView extends RowFormFieldView {
 
   render() {
     const ctrl = this.props.ctrl;
-    const value = ctrl.getValueForView();
+    const value = ctrl.getValueForWidget();
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName(),
       style: ctrl.renderViewStyle(ctrl.getRow())
@@ -341,7 +341,7 @@ class RowFormImageFieldView extends RowFormFieldView {
       className: this.getClassName(),
       style: ctrl.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForView()
+      src: ctrl.getValueForWidget()
     }));
   }
 
@@ -356,7 +356,7 @@ class RowFormLinkFieldView extends RowFormFieldView {
     }, /*#__PURE__*/React.createElement("a", {
       href: "#",
       onClick: ctrl.onClick
-    }, ctrl.getValueForView()));
+    }, ctrl.getValueForWidget()));
   }
 
 }
@@ -369,7 +369,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TextArea, {
       onCreate: ctrl.onWidgetCreate,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
@@ -417,7 +417,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TextBox, {
       onCreate: ctrl.onWidgetCreate,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder()
@@ -485,7 +485,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TimeBox, {
       onCreate: ctrl.onWidgetCreate,
-      value: ctrl.getValueForView(),
+      value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       onBlur: ctrl.onBlur,
@@ -541,7 +541,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
       className: "TableFormCheckBoxFieldView",
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement(CheckBox, {
-      checked: ctrl.getValueForView(row),
+      checked: ctrl.getValueForWidget(row),
       readOnly: true // disabled={true}
 
     }));
@@ -559,7 +559,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
-    }, ctrl.getValueForView(row)));
+    }, ctrl.getValueForWidget(row)));
   }
 
 }
@@ -574,7 +574,7 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
-    }, ctrl.getValueForView(row)));
+    }, ctrl.getValueForWidget(row)));
   }
 
 }
@@ -590,7 +590,7 @@ class TableFormLinkFieldView extends TableFormFieldView {
     }, /*#__PURE__*/React.createElement("a", {
       href: "#",
       onClick: ctrl.onClick
-    }, ctrl.getValueForView(row)));
+    }, ctrl.getValueForWidget(row)));
   }
 
 }
@@ -605,7 +605,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
-    }, ctrl.getValueForView(row)));
+    }, ctrl.getValueForWidget(row)));
   }
 
 }

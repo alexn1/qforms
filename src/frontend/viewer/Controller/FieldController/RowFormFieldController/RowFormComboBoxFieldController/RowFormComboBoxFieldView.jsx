@@ -7,7 +7,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                 <ComboBox
                     onCreate={ctrl.onWidgetCreate}
                     nullable={true}
-                    value={ctrl.getValueForView()}
+                    value={ctrl.getValueForWidget()}
                     readOnly={!ctrl.isEditable()}
                     onChange={ctrl.onChange}
                     items={ctrl.getItems()}

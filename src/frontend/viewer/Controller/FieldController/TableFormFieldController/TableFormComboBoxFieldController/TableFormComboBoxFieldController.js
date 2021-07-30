@@ -2,7 +2,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return TableFormComboBoxFieldView;
     }
-    getValueForView(row) {
+    getValueForWidget(row) {
         const rawValue = this.model.getRawValue(row);
         if (rawValue === undefined || rawValue === 'null') return '';
         const cbRow = this.model.findRowByRawValue(rawValue);

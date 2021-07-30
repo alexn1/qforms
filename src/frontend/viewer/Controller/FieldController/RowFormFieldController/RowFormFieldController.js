@@ -89,7 +89,7 @@ class RowFormFieldController extends FieldController {
             }
         }
     }
-    getValueForView() {
+    getValueForWidget() {
         const value = this.getValue();
         // console.log('value:', this.model.getFullName(), value, typeof value);
         return this.valueToString(value);
