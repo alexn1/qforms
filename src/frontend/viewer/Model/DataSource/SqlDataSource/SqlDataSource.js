@@ -65,7 +65,7 @@ class SqlDataSource extends DataSource {
                     [key]: newKey
                 }
             }
-        })
+        }, this);
         return newKey;
     }
 

@@ -2352,7 +2352,6 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key: key});
         }
-
         // this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
         this.getDatabase().emitResult({
             update: {
@@ -2360,7 +2359,7 @@ class SqlDataSource extends DataSource {
                     [key]: newKey
                 }
             }
-        })
+        }, this);
         return newKey;
     }
 
