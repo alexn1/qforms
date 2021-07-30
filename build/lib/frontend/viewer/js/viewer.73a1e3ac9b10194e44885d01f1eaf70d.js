@@ -2665,8 +2665,8 @@ class Database extends Model {
         for (const tableName in result.update) {
             const table = this.getTable(tableName);
             for (const key in result.update[tableName]) {
-                const oldKey = result.update[tableName][key];
-                table.emit('update', {source: source, changes: {[key]: oldKey}});
+                const newKey = result.update[tableName][key];
+                table.emit('update', {source: source, changes: {[key]: newKey}});
             }
         }
     }
