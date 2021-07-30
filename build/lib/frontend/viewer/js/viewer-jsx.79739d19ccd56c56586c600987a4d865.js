@@ -273,9 +273,9 @@ class RowFormFileFieldView extends RowFormFieldView {
 
     _defineProperty(this, "onChange", async e => {
       const file = e.target.files[0];
-      const viewValue = await Helper.readFileAsDataURL(file); // console.log('viewValue:', viewValue);
+      const widgetValue = await Helper.readFileAsDataURL(file); // console.log('widgetValue:', widgetValue);
 
-      this.props.ctrl.onChange(viewValue);
+      this.props.ctrl.onChange(widgetValue);
     });
 
     this.image = React.createRef();

@@ -25,24 +25,24 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         return null;
     }
-    setValueFromWidget(viewValue) {
-        if (viewValue === null) {
+    setValueFromWidget(widgetValue) {
+        if (widgetValue === null) {
             this.state.parseError2 = null;
             this.resetErrors2();
             if (this.widget2) this.widget2.setValue(null);
         } else {
             const [h, m] = TimeBox.splitTime(this.defaultValue);
-            viewValue.setHours(h, m);
+            widgetValue.setHours(h, m);
         }
-        this.setValue(viewValue);
+        this.setValue(widgetValue);
     }
     onView2Create = widget2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
     };
-    _onChange(viewValue) {
+    _onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
-        if (viewValue !== null) {
+        if (widgetValue !== null) {
             setTimeout(() => {
                 const input = this.widget2.getInput();
                 input.focus();
@@ -50,11 +50,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }, 0);
         }
     }
-    onChange2 = (viewValue, fireEvent = true) => {
-        // console.log('RowFormDateTimeFieldController.onChange2', viewValue);
+    onChange2 = (widgetValue, fireEvent = true) => {
+        // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
         this.resetErrors2();
         try {
-            this.setValueFromView2(viewValue);
+            this.setValueFromView2(widgetValue);
         } catch (err) {
             console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
             this.state.parseError2 = err.message;
@@ -68,15 +68,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
             this.parent.onFieldChange({source: this});
         }
     };
-    onBlur2 = (viewValue, fireEvent = false) => {
-        console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
+    onBlur2 = (widgetValue, fireEvent = false) => {
+        console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
         this.validate2();
         if (this.isValid()) {
@@ -85,7 +85,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
@@ -110,12 +110,12 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.setValue2(null);
         }
     }
-    setValueFromView2(viewValue) {
-        if (isNaN(viewValue)) throw new Error('wrong time');
-        this.setValue2(viewValue);
+    setValueFromView2(widgetValue) {
+        if (isNaN(widgetValue)) throw new Error('wrong time');
+        this.setValue2(widgetValue);
     }
-    setValue2(viewValue) {
-        const value = viewValue !== null ? viewValue : this.defaultValue;
+    setValue2(widgetValue) {
+        const value = widgetValue !== null ? widgetValue : this.defaultValue;
         const [h, m] = TimeBox.splitTime(value);
         this.state.value.setHours(h, m);
     }
@@ -129,7 +129,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // parse validator
         if (this.widget2) {
             try {
-                const viewValue = this.widget2.getValue();
+                const widgetValue = this.widget2.getValue();
             } catch (err) {
                 return `can't parse time: ${err.message}`;
             }

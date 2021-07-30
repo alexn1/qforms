@@ -9,9 +9,9 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromWidget(viewValue) {
-        if (isNaN(viewValue)) throw new Error('wrong time');
-        this.setValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        if (isNaN(widgetValue)) throw new Error('wrong time');
+        this.setValue(widgetValue);
     }
     getDefaultValue() {
         return this.defaultValue;

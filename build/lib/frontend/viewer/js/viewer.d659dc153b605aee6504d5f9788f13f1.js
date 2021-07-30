@@ -486,19 +486,19 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.model.setValue(this.getRow(), this.getValue());
     }
-    _onChange(viewValue) {
+    _onChange(widgetValue) {
 
     }
-    putValue(viewValue) {
-        // console.log('RowFormFieldController.putValue', viewValue);
-        this.onChange(viewValue, false);
+    putValue(widgetValue) {
+        // console.log('RowFormFieldController.putValue', widgetValue);
+        this.onChange(widgetValue, false);
     }
-    onChange = async (viewValue, fireEvent = true) => {
-        // console.log('RowFormFieldController.onChange', viewValue);
-        this._onChange(viewValue);
+    onChange = async (widgetValue, fireEvent = true) => {
+        // console.log('RowFormFieldController.onChange', widgetValue);
+        this._onChange(widgetValue);
         this.resetErrors();
         try {
-            this.setValueFromWidget(viewValue);
+            this.setValueFromWidget(widgetValue);
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.state.parseError = err.message;
@@ -513,14 +513,14 @@ class RowFormFieldController extends FieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
             this.parent.onFieldChange({source: this});
         }
     }
-    onBlur = (viewValue, fireEvent = true) => {
+    onBlur = (widgetValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onBlur', this.model.getFullName());
         if (this.model.validateOnBlur()) {
             console.log('validateOnBlur');
@@ -531,7 +531,7 @@ class RowFormFieldController extends FieldController {
             this.refreshChanged();
             if (fireEvent) {
                 try {
-                    this.emit('change', {value: viewValue});
+                    this.emit('change', {value: widgetValue});
                 } catch (err) {
                     console.error('unhandled change event error:', this.model.getFullName(), err);
                 }
@@ -544,10 +544,10 @@ class RowFormFieldController extends FieldController {
         // console.log('value:', this.model.getFullName(), value, typeof value);
         return this.valueToString(value);
     }
-    setValueFromWidget(viewValue) {
-        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof viewValue, viewValue);
-        if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
-        const value = this.stringToValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof widgetValue, widgetValue);
+        if (typeof widgetValue !== 'string') throw new Error(`${this.model.getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
+        const value = this.stringToValue(widgetValue);
         // console.log('value:', value);
         this.setValue(value);
     }
@@ -587,7 +587,7 @@ class RowFormFieldController extends FieldController {
         // parse validator
         if (this.view && this.widget) {
             try {
-                const viewValue = this.widget.getValue();
+                const widgetValue = this.widget.getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }
@@ -655,8 +655,8 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromWidget(viewValue) {
-        this.setValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
     }
 
     getViewClass() {
@@ -753,8 +753,8 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromWidget(viewValue) {
-        this.setValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
     }
 }
 window.QForms.RowFormDatePickerFieldController = RowFormDatePickerFieldController;
@@ -786,24 +786,24 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         return null;
     }
-    setValueFromWidget(viewValue) {
-        if (viewValue === null) {
+    setValueFromWidget(widgetValue) {
+        if (widgetValue === null) {
             this.state.parseError2 = null;
             this.resetErrors2();
             if (this.widget2) this.widget2.setValue(null);
         } else {
             const [h, m] = TimeBox.splitTime(this.defaultValue);
-            viewValue.setHours(h, m);
+            widgetValue.setHours(h, m);
         }
-        this.setValue(viewValue);
+        this.setValue(widgetValue);
     }
     onView2Create = widget2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
     };
-    _onChange(viewValue) {
+    _onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
-        if (viewValue !== null) {
+        if (widgetValue !== null) {
             setTimeout(() => {
                 const input = this.widget2.getInput();
                 input.focus();
@@ -811,11 +811,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }, 0);
         }
     }
-    onChange2 = (viewValue, fireEvent = true) => {
-        // console.log('RowFormDateTimeFieldController.onChange2', viewValue);
+    onChange2 = (widgetValue, fireEvent = true) => {
+        // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
         this.resetErrors2();
         try {
-            this.setValueFromView2(viewValue);
+            this.setValueFromView2(widgetValue);
         } catch (err) {
             console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
             this.state.parseError2 = err.message;
@@ -829,15 +829,15 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
             this.parent.onFieldChange({source: this});
         }
     };
-    onBlur2 = (viewValue, fireEvent = false) => {
-        console.log('RowFormDateTimeFieldController.onBlur2', viewValue);
+    onBlur2 = (widgetValue, fireEvent = false) => {
+        console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
         this.validate2();
         if (this.isValid()) {
@@ -846,7 +846,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
@@ -871,12 +871,12 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.setValue2(null);
         }
     }
-    setValueFromView2(viewValue) {
-        if (isNaN(viewValue)) throw new Error('wrong time');
-        this.setValue2(viewValue);
+    setValueFromView2(widgetValue) {
+        if (isNaN(widgetValue)) throw new Error('wrong time');
+        this.setValue2(widgetValue);
     }
-    setValue2(viewValue) {
-        const value = viewValue !== null ? viewValue : this.defaultValue;
+    setValue2(widgetValue) {
+        const value = widgetValue !== null ? widgetValue : this.defaultValue;
         const [h, m] = TimeBox.splitTime(value);
         this.state.value.setHours(h, m);
     }
@@ -890,7 +890,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // parse validator
         if (this.widget2) {
             try {
-                const viewValue = this.widget2.getValue();
+                const widgetValue = this.widget2.getValue();
             } catch (err) {
                 return `can't parse time: ${err.message}`;
             }
@@ -991,9 +991,9 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromWidget(viewValue) {
-        if (isNaN(viewValue)) throw new Error('wrong time');
-        this.setValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        if (isNaN(widgetValue)) throw new Error('wrong time');
+        this.setValue(widgetValue);
     }
     getDefaultValue() {
         return this.defaultValue;

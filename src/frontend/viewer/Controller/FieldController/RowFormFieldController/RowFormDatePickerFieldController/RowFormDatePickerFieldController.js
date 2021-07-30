@@ -5,8 +5,8 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromWidget(viewValue) {
-        this.setValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
     }
 }
 window.QForms.RowFormDatePickerFieldController = RowFormDatePickerFieldController;

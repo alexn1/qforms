@@ -21,9 +21,9 @@ class RowFormFileFieldView extends RowFormFieldView {
     }
     onChange = async e => {
         const file = e.target.files[0];
-        const viewValue = await Helper.readFileAsDataURL(file);
-        // console.log('viewValue:', viewValue);
-        this.props.ctrl.onChange(viewValue);
+        const widgetValue = await Helper.readFileAsDataURL(file);
+        // console.log('widgetValue:', widgetValue);
+        this.props.ctrl.onChange(widgetValue);
     }
     render() {
         const ctrl = this.props.ctrl;

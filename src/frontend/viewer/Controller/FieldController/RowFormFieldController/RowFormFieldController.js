@@ -36,19 +36,19 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.model.setValue(this.getRow(), this.getValue());
     }
-    _onChange(viewValue) {
+    _onChange(widgetValue) {
 
     }
-    putValue(viewValue) {
-        // console.log('RowFormFieldController.putValue', viewValue);
-        this.onChange(viewValue, false);
+    putValue(widgetValue) {
+        // console.log('RowFormFieldController.putValue', widgetValue);
+        this.onChange(widgetValue, false);
     }
-    onChange = async (viewValue, fireEvent = true) => {
-        // console.log('RowFormFieldController.onChange', viewValue);
-        this._onChange(viewValue);
+    onChange = async (widgetValue, fireEvent = true) => {
+        // console.log('RowFormFieldController.onChange', widgetValue);
+        this._onChange(widgetValue);
         this.resetErrors();
         try {
-            this.setValueFromWidget(viewValue);
+            this.setValueFromWidget(widgetValue);
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.state.parseError = err.message;
@@ -63,14 +63,14 @@ class RowFormFieldController extends FieldController {
         this.refreshChanged();
         if (fireEvent) {
             try {
-                this.emit('change', {value: viewValue});
+                this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
             this.parent.onFieldChange({source: this});
         }
     }
-    onBlur = (viewValue, fireEvent = true) => {
+    onBlur = (widgetValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onBlur', this.model.getFullName());
         if (this.model.validateOnBlur()) {
             console.log('validateOnBlur');
@@ -81,7 +81,7 @@ class RowFormFieldController extends FieldController {
             this.refreshChanged();
             if (fireEvent) {
                 try {
-                    this.emit('change', {value: viewValue});
+                    this.emit('change', {value: widgetValue});
                 } catch (err) {
                     console.error('unhandled change event error:', this.model.getFullName(), err);
                 }
@@ -94,10 +94,10 @@ class RowFormFieldController extends FieldController {
         // console.log('value:', this.model.getFullName(), value, typeof value);
         return this.valueToString(value);
     }
-    setValueFromWidget(viewValue) {
-        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof viewValue, viewValue);
-        if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
-        const value = this.stringToValue(viewValue);
+    setValueFromWidget(widgetValue) {
+        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof widgetValue, widgetValue);
+        if (typeof widgetValue !== 'string') throw new Error(`${this.model.getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
+        const value = this.stringToValue(widgetValue);
         // console.log('value:', value);
         this.setValue(value);
     }
@@ -137,7 +137,7 @@ class RowFormFieldController extends FieldController {
         // parse validator
         if (this.view && this.widget) {
             try {
-                const viewValue = this.widget.getValue();
+                const widgetValue = this.widget.getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }
