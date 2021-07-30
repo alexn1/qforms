@@ -56,8 +56,9 @@ class SqlDataSource extends DataSource {
         this.changes.clear();
         this.updateRow(key, newValues);
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, key: key});
+            this.parent.onDataSourceUpdate({source: this, key});
         }
+        this.emit('update', {source: this, key});
         // this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
         this.getDatabase().emitResult({
             update: {
@@ -123,7 +124,7 @@ class SqlDataSource extends DataSource {
             const result = await this.selectSingle(keyParams);
             this.updateRow(key, result.row);
             if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate({source: this, key: key});
+                this.parent.onDataSourceUpdate({source: this, key});
             }
         }
     }
@@ -260,6 +261,7 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert({source: this, key});
         }
+        this.emit('insert', {source: this, key});
         this.getDatabase().emitResult(result, this);
         return key;
     }
@@ -285,8 +287,9 @@ class SqlDataSource extends DataSource {
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, key: key});
+            this.parent.onDataSourceDelete({source: this, key});
         }
+        this.emit('delete', {source: this, key});
         this.getDatabase().emitResult(result, this);
         return result;
     }
