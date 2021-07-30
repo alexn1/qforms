@@ -16,9 +16,9 @@ class Controller extends EventEmitter {
         // console.log('Controller.onViewCreate', this.model.getFullName());
         this.view = view;
     }
-    rerender() {
+    async rerender() {
         if (this.view) {
-            this.view.rerender();
+            return await this.view.rerender();
         } else {
             console.error(`Controller.rerender no view: ${this.model.getFullName()}`);
         }

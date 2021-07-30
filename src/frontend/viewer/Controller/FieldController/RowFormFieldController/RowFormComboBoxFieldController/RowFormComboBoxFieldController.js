@@ -30,6 +30,19 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     onCreateButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onCreateButtonClick');
+        const newRowMode = this.getModel().getAttr('newRowMode');
+        let createPageName;
+        if (newRowMode === 'editPage') {
+            createPageName = this.getModel().getAttr('itemEditPage');
+        } else if (newRowMode === 'createPage') {
+            createPageName = this.getModel().getAttr('itemCreatePage');
+        } else {
+            throw new Error('wrong value');
+        }
+        await this.openPage({
+            name: createPageName,
+            newMode: true
+        });
     }
 }
 

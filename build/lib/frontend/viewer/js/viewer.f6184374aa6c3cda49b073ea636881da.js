@@ -40,9 +40,9 @@ class Controller extends EventEmitter {
         // console.log('Controller.onViewCreate', this.model.getFullName());
         this.view = view;
     }
-    rerender() {
+    async rerender() {
         if (this.view) {
-            this.view.rerender();
+            return await this.view.rerender();
         } else {
             console.error(`Controller.rerender no view: ${this.model.getFullName()}`);
         }
@@ -115,11 +115,11 @@ class ApplicationController extends Controller {
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
+        const params     = options.params || {};
         const key        = options.key || null;
         // const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
-        const params     = options.params || {};
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -156,7 +156,7 @@ class ApplicationController extends Controller {
         const pc = PageController.create(pageModel, this);
         pc.init();
         isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
-        this.rerender();
+        await this.rerender();
         // console.log('pc:', pc);
     }
     getNextPageId() {
@@ -690,6 +690,19 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     onCreateButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onCreateButtonClick');
+        const newRowMode = this.getModel().getAttr('newRowMode');
+        let createPageName;
+        if (newRowMode === 'editPage') {
+            createPageName = this.getModel().getAttr('itemEditPage');
+        } else if (newRowMode === 'createPage') {
+            createPageName = this.getModel().getAttr('itemCreatePage');
+        } else {
+            throw new Error('wrong value');
+        }
+        await this.openPage({
+            name: createPageName,
+            newMode: true
+        });
     }
 }
 
@@ -1253,7 +1266,7 @@ class FormController extends Controller {
         return true;
     }
     async openPage(options) {
-        return this.getPageController().openPage(options);
+        return await this.getPageController().openPage(options);
     }
     getPageController() {
         return this.parent;

@@ -30,7 +30,7 @@ class FormController extends Controller {
         return true;
     }
     async openPage(options) {
-        return this.getPageController().openPage(options);
+        return await this.getPageController().openPage(options);
     }
     getPageController() {
         return this.parent;

@@ -56,11 +56,11 @@ class ApplicationController extends Controller {
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
+        const params     = options.params || {};
         const key        = options.key || null;
         // const parentPage = options.parentPage;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
-        const params     = options.params || {};
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -97,7 +97,7 @@ class ApplicationController extends Controller {
         const pc = PageController.create(pageModel, this);
         pc.init();
         isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
-        this.rerender();
+        await this.rerender();
         // console.log('pc:', pc);
     }
     getNextPageId() {
