@@ -1,7 +1,7 @@
 class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
-        this.view2 = null;
+        this.widget2 = null;
         this.defaultValue = 0;
         this.state.parseError2 = null;
         this.state.error2 = null;
@@ -29,22 +29,22 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         if (viewValue === null) {
             this.state.parseError2 = null;
             this.resetErrors2();
-            if (this.view2) this.view2.setValue(null);
+            if (this.widget2) this.widget2.setValue(null);
         } else {
             const [h, m] = TimeBox.splitTime(this.defaultValue);
             viewValue.setHours(h, m);
         }
         this.setValue(viewValue);
     }
-    onView2Create = view2 => {
-        // console.log('RowFormDateTimeFieldController.onView2Create', view2);
-        this.view2 = view2;
+    onView2Create = widget2 => {
+        // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
+        this.widget2 = widget2;
     };
     _onChange(viewValue) {
-        // console.log('RowFormDateTimeFieldController._onChange', this.view2);
+        // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (viewValue !== null) {
             setTimeout(() => {
-                const input = this.view2.getInput();
+                const input = this.widget2.getInput();
                 input.focus();
                 input.setSelectionRange(0, input.value.length);
             }, 0);
@@ -99,14 +99,14 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         return this.defaultValue;
     }
     setDefaultValue(defaultValue) {
-        // console.log('RowFormDateTimeFieldController.setDefaultValue', this.view2 ? this.view2.getValue() : null);
+        // console.log('RowFormDateTimeFieldController.setDefaultValue', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
             if (defaultValue >= 24 * 60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
         }
-        if (this.view2 && this.view2.getValue() === null && this.state.value) {
+        if (this.widget2 && this.widget2.getValue() === null && this.state.value) {
             this.setValue2(null);
         }
     }
@@ -127,9 +127,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
         // parse validator
-        if (this.view2) {
+        if (this.widget2) {
             try {
-                const viewValue = this.view2.getValue();
+                const viewValue = this.widget2.getValue();
             } catch (err) {
                 return `can't parse time: ${err.message}`;
             }
@@ -158,9 +158,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
-        if (!this.view2) return;
+        if (!this.widget2) return;
         super.refill();
-        this.view2.setValue(this.getValueForTime());
+        this.widget2.setValue(this.getValueForTime());
         this.resetErrors2();
         this.refreshChanged();
     }

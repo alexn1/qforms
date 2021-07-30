@@ -184,7 +184,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     _defineProperty(this, "onCloseDown", async e => {
       console.log('RowFormDateTimeFieldView.onCloseDown');
       const ctrl = this.props.ctrl;
-      ctrl.view2.setState({
+      ctrl.widget2.setState({
         value: ''
       }, () => {
         ctrl.onChange2(null);
@@ -196,11 +196,11 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     if (this.props.readOnly) return false;
     const ctrl = this.props.ctrl;
 
-    if (!ctrl.view2) {
+    if (!ctrl.widget2) {
       return this.props.value !== undefined;
     }
 
-    return ctrl.view2.state.value !== '';
+    return ctrl.widget2.state.value !== '';
   }
 
   getClassName() {
