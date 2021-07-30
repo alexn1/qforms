@@ -498,7 +498,7 @@ class RowFormFieldController extends FieldController {
         this._onChange(viewValue);
         this.resetErrors();
         try {
-            this.setValueFromView(viewValue);
+            this.setValueFromWidget(viewValue);
         } catch (err) {
             console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
             this.state.parseError = err.message;
@@ -544,8 +544,8 @@ class RowFormFieldController extends FieldController {
         // console.log('value:', this.model.getFullName(), value, typeof value);
         return this.valueToString(value);
     }
-    setValueFromView(viewValue) {
-        // console.log('RowFormFieldController.setValueFromView', this.model.getFullName(), typeof viewValue, viewValue);
+    setValueFromWidget(viewValue) {
+        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof viewValue, viewValue);
         if (typeof viewValue !== 'string') throw new Error(`${this.model.getFullName()}: viewValue must be string, but got ${typeof viewValue}`);
         const value = this.stringToValue(viewValue);
         // console.log('value:', value);
@@ -655,7 +655,7 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         this.setValue(viewValue);
     }
 
@@ -753,7 +753,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         this.setValue(viewValue);
     }
 }
@@ -786,7 +786,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         return null;
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         if (viewValue === null) {
             this.state.parseError2 = null;
             this.resetErrors2();
@@ -991,7 +991,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         if (isNaN(viewValue)) throw new Error('wrong time');
         this.setValue(viewValue);
     }

@@ -25,7 +25,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         return null;
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         if (viewValue === null) {
             this.state.parseError2 = null;
             this.resetErrors2();

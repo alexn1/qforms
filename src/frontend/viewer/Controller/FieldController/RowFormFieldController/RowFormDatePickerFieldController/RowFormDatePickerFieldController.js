@@ -5,7 +5,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
     getValueForWidget() {
         return this.getValue();
     }
-    setValueFromView(viewValue) {
+    setValueFromWidget(viewValue) {
         this.setValue(viewValue);
     }
 }
