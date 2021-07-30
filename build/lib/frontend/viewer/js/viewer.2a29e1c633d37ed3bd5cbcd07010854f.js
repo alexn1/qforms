@@ -707,25 +707,20 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             throw new Error(`wrong newRowMode value: ${newRowMode}`);
         }
 
-
-
+        // page
         const pc = await this.openPage({
             name: createPageName,
             newMode: true
         });
-        console.log('pc:', pc);
 
+        // form
         const form = pc.getModel().getForm(itemCreateForm);
         const onInsert = e => {
-            console.log('new cb row:', e.key);
             form.off('insert', onInsert);
             const [id] = Helper.decodeValue(e.key);
             console.log('id:', id);
-
-
         }
         form.on('insert', onInsert);
-
     }
 }
 
@@ -2343,10 +2338,10 @@ class SqlDataSource extends DataSource {
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const result = await this.getApp().request({
-            action        : 'update',
-            page          : this.getForm().getPage().getName(),
-            form          : this.getForm().getName(),
-            changes       : this.getChangesByKey(),
+            action : 'update',
+            page   : this.getForm().getPage().getName(),
+            form   : this.getForm().getName(),
+            changes: this.getChangesByKey(),
         });
         const [key] = Object.keys(result);
         if (!key) throw new Error('no updated row');
