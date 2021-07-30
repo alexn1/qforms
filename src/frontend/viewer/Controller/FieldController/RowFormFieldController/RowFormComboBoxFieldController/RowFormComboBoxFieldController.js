@@ -1,4 +1,16 @@
 class RowFormComboBoxFieldController extends RowFormFieldController {
+    init() {
+        console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        super.init();
+        const ds = this.model.getComboBoxDataSource();
+        ds.on('insert', this.onListInsert);
+    }
+    deinit() {
+        const ds = this.model.getComboBoxDataSource();
+        ds.off('insert', this.onListInsert);
+        super.deinit();
+    }
+
     getItems() {
         return this.getRows().map(row => ({
             value: this.model.getValueValue(row).toString(),
@@ -57,6 +69,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             console.log('id:', id);
         }
         form.on('insert', onInsert);
+    }
+    onListInsert = async e => {
+        console.log('RowFormComboBoxFieldController.onListInsert');
+        await this.rerender();
     }
 }
 

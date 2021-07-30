@@ -3,7 +3,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <TextArea
-                onCreate={ctrl.onViewCreate}
+                onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}

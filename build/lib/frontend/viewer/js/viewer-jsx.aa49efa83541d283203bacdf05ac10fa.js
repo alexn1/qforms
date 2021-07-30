@@ -120,7 +120,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(CheckBox, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       checked: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange
@@ -132,11 +132,12 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
 window.QForms.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
 class RowFormComboBoxFieldView extends RowFormFieldView {
   render() {
+    // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(ComboBox, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       nullable: true,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
@@ -160,7 +161,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -213,7 +214,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       className: this.getClassName(),
       style: ctrl.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -367,7 +368,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TextArea, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -389,8 +390,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     _defineProperty(this, "onCloseClick", async e => {
       console.log('RowFormTextBoxFieldView.onCloseClick');
       const ctrl = this.props.ctrl;
-      ctrl.view.state.value = '';
-      ctrl.view.setState({
+      ctrl.widget.state.value = '';
+      ctrl.widget.setState({
         value: ''
       });
       ctrl.onChange('');
@@ -402,12 +403,12 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     if (!ctrl.isEditable()) return false;
 
-    if (!ctrl.view) {
+    if (!ctrl.widget) {
       return this.props.value !== undefined;
-    } // console.log('ctrl.view.state.value:', ctrl.view.state.value);
+    } // console.log('ctrl.widget.state.value:', ctrl.widget.state.value);
 
 
-    return ctrl.view.state.value !== '';
+    return ctrl.widget.state.value !== '';
   }
 
   render() {
@@ -415,7 +416,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TextBox, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -470,12 +471,12 @@ class RowFormTimeFieldView extends RowFormFieldView {
     if (this.props.readOnly) return false;
     const ctrl = this.props.ctrl;
 
-    if (!ctrl.view) {
+    if (!ctrl.widget) {
       return this.props.value !== undefined;
     } // console.log('ctrl.view.state.value:', ctrl.view.state.value);
 
 
-    return ctrl.view.state.value !== '';
+    return ctrl.widget.state.value !== '';
   }
 
   render() {
@@ -483,7 +484,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement(TimeBox, {
-      onCreate: ctrl.onViewCreate,
+      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForView(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -695,6 +696,7 @@ class RowFormView extends FormView {
     // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
     return React.createElement(fieldCtrl.getViewClass(), {
       classList: ['field'],
+      onCreate: fieldCtrl.onViewCreate,
       ctrl: fieldCtrl,
       ...props
     });

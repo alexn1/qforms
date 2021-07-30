@@ -2,25 +2,25 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     onCloseClick = async e => {
         console.log('RowFormTextBoxFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
-        ctrl.view.state.value = '';
-        ctrl.view.setState({value: ''});
+        ctrl.widget.state.value = '';
+        ctrl.widget.setState({value: ''});
         ctrl.onChange('');
     }
     isCloseVisible() {
         // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.props.ctrl;
         if (!ctrl.isEditable()) return false;
-        if (!ctrl.view) {
+        if (!ctrl.widget) {
             return this.props.value !== undefined;
         }
-        // console.log('ctrl.view.state.value:', ctrl.view.state.value);
-        return ctrl.view.state.value !== '';
+        // console.log('ctrl.widget.state.value:', ctrl.widget.state.value);
+        return ctrl.widget.state.value !== '';
     }
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <TextBox
-                onCreate={ctrl.onViewCreate}
+                onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}

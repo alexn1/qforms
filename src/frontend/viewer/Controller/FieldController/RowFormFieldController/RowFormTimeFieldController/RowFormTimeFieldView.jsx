@@ -10,17 +10,17 @@ class RowFormTimeFieldView extends RowFormFieldView {
         // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly) return false;
         const ctrl = this.props.ctrl;
-        if (!ctrl.view) {
+        if (!ctrl.widget) {
             return this.props.value !== undefined;
         }
         // console.log('ctrl.view.state.value:', ctrl.view.state.value);
-        return ctrl.view.state.value !== '';
+        return ctrl.widget.state.value !== '';
     }
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getClassName()}>
             <TimeBox
-                onCreate={ctrl.onViewCreate}
+                onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForView()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}

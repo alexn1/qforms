@@ -77,6 +77,7 @@ class RowFormView extends FormView {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         return React.createElement(fieldCtrl.getViewClass(), {
             classList: ['field'],
+            onCreate: fieldCtrl.onViewCreate,
             ctrl: fieldCtrl,
             ...props
         });

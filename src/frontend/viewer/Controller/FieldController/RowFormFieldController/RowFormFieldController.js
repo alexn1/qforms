@@ -1,12 +1,16 @@
 class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.widget = null;
         this.state = {
             value     : null,
             parseError: null,
             error     : null,
             changed   : false,
         };
+    }
+    onWidgetCreate = widget => {
+        this.widget = widget;
     }
     init() {
         const row = this.getRow();
@@ -131,9 +135,9 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
         // parse validator
-        if (this.view) {
+        if (this.view && this.widget) {
             try {
-                const viewValue = this.view.getValue();
+                const viewValue = this.widget.getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }

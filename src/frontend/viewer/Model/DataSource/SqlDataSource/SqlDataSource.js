@@ -140,6 +140,7 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(e);
         }
+        this.emit('insert', e);
     }
 
     onTableDelete = async (e) => {

@@ -451,12 +451,16 @@ window.QForms.FieldController = FieldController;
 class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.widget = null;
         this.state = {
             value     : null,
             parseError: null,
             error     : null,
             changed   : false,
         };
+    }
+    onWidgetCreate = widget => {
+        this.widget = widget;
     }
     init() {
         const row = this.getRow();
@@ -581,9 +585,9 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
         // parse validator
-        if (this.view) {
+        if (this.view && this.widget) {
             try {
-                const viewValue = this.view.getValue();
+                const viewValue = this.widget.getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }
@@ -663,6 +667,18 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
 window.QForms.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;
 
 class RowFormComboBoxFieldController extends RowFormFieldController {
+    init() {
+        console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        super.init();
+        const ds = this.model.getComboBoxDataSource();
+        ds.on('insert', this.onListInsert);
+    }
+    deinit() {
+        const ds = this.model.getComboBoxDataSource();
+        ds.off('insert', this.onListInsert);
+        super.deinit();
+    }
+
     getItems() {
         return this.getRows().map(row => ({
             value: this.model.getValueValue(row).toString(),
@@ -721,6 +737,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             console.log('id:', id);
         }
         form.on('insert', onInsert);
+    }
+    onListInsert = async e => {
+        console.log('RowFormComboBoxFieldController.onListInsert');
+        await this.rerender();
     }
 }
 
@@ -2434,6 +2454,7 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(e);
         }
+        this.emit('insert', e);
     }
 
     onTableDelete = async (e) => {
