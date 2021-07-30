@@ -126,7 +126,7 @@ class ApplicationController extends Controller {
         // console.log('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
-            return;
+            return pageController;
         }
 
         //console.log('open ' + name + ' with key: ' + key);
@@ -143,6 +143,7 @@ class ApplicationController extends Controller {
             })
         });
 
+        // pageModel
         const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
             modal         : isModal,
@@ -153,11 +154,14 @@ class ApplicationController extends Controller {
             },
         });
         pageModel.init();
+
+        // pageController
         const pc = PageController.create(pageModel, this);
         pc.init();
         isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
         await this.rerender();
         // console.log('pc:', pc);
+        return pc;
     }
     getNextPageId() {
         this.lastPageId++;
@@ -697,12 +701,13 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         } else if (newRowMode === 'createPage') {
             createPageName = this.getModel().getAttr('itemCreatePage');
         } else {
-            throw new Error('wrong value');
+            throw new Error(`wrong newRowMode value: ${newRowMode}`);
         }
-        await this.openPage({
+        const pc = await this.openPage({
             name: createPageName,
             newMode: true
         });
+        console.log('pc:', pc);
     }
 }
 
@@ -1743,7 +1748,7 @@ class PageController extends Controller {
             console.log('page model updated', this.model.getFullName());
             this.getAppController().closePage(this);
         } else {
-            this.rerender();
+            await this.rerender();
         }
     }
 

@@ -37,7 +37,7 @@ class PageController extends Controller {
             console.log('page model updated', this.model.getFullName());
             this.getAppController().closePage(this);
         } else {
-            this.rerender();
+            await this.rerender();
         }
     }
 

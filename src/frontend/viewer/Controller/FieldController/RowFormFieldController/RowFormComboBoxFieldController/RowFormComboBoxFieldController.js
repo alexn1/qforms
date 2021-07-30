@@ -37,12 +37,13 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         } else if (newRowMode === 'createPage') {
             createPageName = this.getModel().getAttr('itemCreatePage');
         } else {
-            throw new Error('wrong value');
+            throw new Error(`wrong newRowMode value: ${newRowMode}`);
         }
-        await this.openPage({
+        const pc = await this.openPage({
             name: createPageName,
             newMode: true
         });
+        console.log('pc:', pc);
     }
 }
 

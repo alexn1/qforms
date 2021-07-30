@@ -67,7 +67,7 @@ class ApplicationController extends Controller {
         // console.log('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
-            return;
+            return pageController;
         }
 
         //console.log('open ' + name + ' with key: ' + key);
@@ -84,6 +84,7 @@ class ApplicationController extends Controller {
             })
         });
 
+        // pageModel
         const pageModel = new Page(pageData, this.model, {
             id            : `p${this.getNextPageId()}`,
             modal         : isModal,
@@ -94,11 +95,14 @@ class ApplicationController extends Controller {
             },
         });
         pageModel.init();
+
+        // pageController
         const pc = PageController.create(pageModel, this);
         pc.init();
         isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
         await this.rerender();
         // console.log('pc:', pc);
+        return pc;
     }
     getNextPageId() {
         this.lastPageId++;
