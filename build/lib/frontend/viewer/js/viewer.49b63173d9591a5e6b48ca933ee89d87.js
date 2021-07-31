@@ -2324,7 +2324,7 @@ class SqlDataSource extends DataSource {
         super.init();
         if (this.getAttr('table') !== '') {
             const table = this.getTable();
-            table.on('update', this.onTableUpdated);
+            table.on('update', this.onTableUpdate);
             table.on('insert', this.onTableInsert);
             table.on('delete', this.onTableDelete);
         }
@@ -2334,7 +2334,7 @@ class SqlDataSource extends DataSource {
         // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         if (this.getAttr('table') !== '') {
             const table = this.getTable();
-            table.removeListener('update', this.onTableUpdated);
+            table.removeListener('update', this.onTableUpdate);
             table.removeListener('insert', this.onTableInsert);
             table.removeListener('delete', this.onTableDelete);
         }
@@ -2419,11 +2419,11 @@ class SqlDataSource extends DataSource {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    onTableUpdated = async (e) => {
-        console.log('SqlDataSource.onTableUpdated', this.getFullName(), this.getTableName(), e);
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdated`);
+    onTableUpdate = async (e) => {
+        console.log('SqlDataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
-            // console.error('onTableUpdated stop self update', this.getFullName());
+            // console.error('onTableUpdate stop self update', this.getFullName());
             return;
         }
         // console.log('changes:', e.changes);
@@ -2440,6 +2440,7 @@ class SqlDataSource extends DataSource {
             if (this.parent.onDataSourceUpdate) {
                 this.parent.onDataSourceUpdate({source: this, key});
             }
+            this.emit('update', e);
         }
     }
 
@@ -2468,6 +2469,7 @@ class SqlDataSource extends DataSource {
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete(e);
         }
+        this.emit('delete', e);
     }
 
     getPageParams() {
