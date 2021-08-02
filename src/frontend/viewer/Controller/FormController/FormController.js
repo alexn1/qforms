@@ -30,9 +30,9 @@ class FormController extends Controller {
         return true;
     }
     async openPage(options) {
-        return await this.getPageController().openPage(options);
+        return await this.getPage().openPage(options);
     }
-    getPageController() {
+    getPage() {
         return this.parent;
     }
     isChanged() {
@@ -40,7 +40,7 @@ class FormController extends Controller {
     }
     async onFieldChange(e) {
         // console.log('FormController.onFieldChange', this.model.getFullName());
-        await this.getPageController().onFormChange(e);
+        await this.getPage().onFormChange(e);
     }
     getUpdated() {
         return this.state.updated;

@@ -19,8 +19,10 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                         // enabled={!!ctrl.getModel().getAttr('itemEditPage')}
                     >...</Button>
                 }
-                {ctrl.getModel().getAttr('newRowMode') && ctrl.getModel().getAttr('newRowMode') !== 'disabled' &&
-                    <Button
+                {ctrl.getModel().getAttr('newRowMode')
+                    && ctrl.getModel().getAttr('newRowMode') !== 'disabled'
+                    && ctrl.getForm().getMode() === 'edit'
+                    && <Button
                         onClick={ctrl.onCreateButtonClick}
                     >+</Button>
                 }
