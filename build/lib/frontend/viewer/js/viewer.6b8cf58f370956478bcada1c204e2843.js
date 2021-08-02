@@ -672,10 +672,14 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         super.init();
         const ds = this.model.getComboBoxDataSource();
         ds.on('insert', this.onListInsert);
+        ds.on('update', this.onListUpdate);
+        ds.on('delete', this.onListDelete);
     }
     deinit() {
         const ds = this.model.getComboBoxDataSource();
         ds.off('insert', this.onListInsert);
+        ds.off('update', this.onListUpdate);
+        ds.off('delete', this.onListDelete);
         super.deinit();
     }
 
@@ -735,11 +739,19 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
             form.off('insert', onInsert);
             const [id] = Helper.decodeValue(e.key);
             console.log('id:', id);
+            this.setValue(id);
         }
         form.on('insert', onInsert);
     }
     onListInsert = async e => {
         console.log('RowFormComboBoxFieldController.onListInsert');
+        await this.rerender();
+    }
+    onListUpdate = async e => {
+        // console.log('RowFormComboBoxFieldController.onListUpdate');
+        await this.rerender();
+    }
+    onListDelete = async e => {
         await this.rerender();
     }
 }
