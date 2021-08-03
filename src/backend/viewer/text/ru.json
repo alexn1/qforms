@@ -32,7 +32,7 @@
         "cancel": "Отменить",
         "discard": "Сбросить",
         "actions": "Действия",
-        "required": "обязательное"
+        "required": "обязательно"
     },
     "field": {
         "selectValue": "выберите значение",
