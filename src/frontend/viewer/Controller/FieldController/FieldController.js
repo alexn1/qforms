@@ -60,9 +60,14 @@ class FieldController extends Controller {
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
-
     getForm() {
         return this.parent;
+    }
+    getPage() {
+        return this.parent.parent;
+    }
+    getApp() {
+        return this.parent.parent.parent;
     }
 
 }

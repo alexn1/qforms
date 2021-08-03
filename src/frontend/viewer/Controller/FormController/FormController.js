@@ -54,5 +54,8 @@ class FormController extends Controller {
     getField(name) {
         return this.fields[name];
     }
+    getApp() {
+        return this.parent.parent;
+    }
 }
 window.QForms.FormController = FormController;

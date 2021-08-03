@@ -35,7 +35,7 @@ class PageController extends Controller {
         if (this.isValid()) {
             await this.model.update();
             console.log('page model updated', this.model.getFullName());
-            this.getAppController().closePage(this);
+            this.getApp().closePage(this);
         } else {
             await this.rerender();
         }
@@ -56,7 +56,7 @@ class PageController extends Controller {
             const result = confirm(this.model.getApp().getText().form.areYouSure);
             if (!result) return;
         }
-        this.getAppController().closePage(this);
+        this.getApp().closePage(this);
     }
     validate() {
         for (const form of this.forms) {
@@ -109,7 +109,7 @@ class PageController extends Controller {
                 options.params[name] = params[name];
             }
         }
-        return await this.getAppController().openPage(options);
+        return await this.getApp().openPage(options);
     }
 
     isChanged() {
@@ -122,8 +122,7 @@ class PageController extends Controller {
         }
         return false;
     }
-
-    getAppController() {
+    getApp() {
         return this.parent;
     }
     getViewClass() {
