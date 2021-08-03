@@ -31,7 +31,8 @@
         "save": "Save",
         "cancel": "Cancel",
         "discard": "Discard",
-        "actions": "Actions"
+        "actions": "Actions",
+        "required": "required"
     },
     "field": {
         "selectValue": "select value",
