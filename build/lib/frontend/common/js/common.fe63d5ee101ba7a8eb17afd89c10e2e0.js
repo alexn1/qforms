@@ -3,14 +3,17 @@ class FrontHostApp {
         // console.log('FrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
         this.data = data;
-        // if (data) {
         this.env = data.env;
-        // }
+
+        // window
         window.addEventListener('error'             , this.onWindowError.bind(this));
         window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this))
         // window.onunhandledrejection = this.onunhandledrejection.bind(this);
         // window.onerror              = this.errorHandler.bind(this);
         // window.onbeforeunload       = this.exit.bind(this);
+
+        // document
+        document.addEventListener('keydown', this.onDocumentKeyDown.bind(this));
     }
     run() {
         throw new Error('FrontHostApp.run not implemented');
@@ -113,6 +116,9 @@ class FrontHostApp {
             return eval(className);
         }
         return null;
+    }
+    onDocumentKeyDown(e) {
+        console.log('FrontHostApp.onDocumentKeyDown', e);
     }
 }
 
