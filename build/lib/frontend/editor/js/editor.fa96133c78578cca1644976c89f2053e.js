@@ -2694,11 +2694,11 @@ class FieldController extends VisualController {
         options['isVisible']        = ['true', 'false'];
         options['readOnly']         = ['true', 'false'];
         options['notNull']          = ['true', 'false'];
-        // options['align']            = ['left', 'right'];
         options['param']            = ['true', 'false'];
         options['validateOnChange'] = ['true', 'false'];
         options['validateOnBlur']   = ['true', 'false'];
-        options['newRowMode']       = ['disabled', 'editPage', 'createPage']
+        options['newRowMode']       = ['disabled', 'editPage', 'createPage'];
+        options['type']             = ['', 'string', 'number', 'boolean', 'object', 'date'];
         return {list: list, options: options};
     }
     async delete() {
