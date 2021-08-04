@@ -28,6 +28,16 @@ class ColumnController extends ModelController {
         propList.options['key']      = ['true', 'false'];
         propList.options['auto']     = ['true', 'false'];
         propList.options['nullable'] = ['true', 'false'];
+        propList.options['type']     = ['', 'string', 'number', 'boolean', 'object', 'date'];
+        /*propList.options['dbType']   = [
+            '',
+            'integer',
+            'character varying',
+            'boolean',
+            'timestamp with time zone',
+            'text',
+            'json',
+        ];*/
         return propList;
     }
     async delete() {
