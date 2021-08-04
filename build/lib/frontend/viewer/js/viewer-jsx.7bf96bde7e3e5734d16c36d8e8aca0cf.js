@@ -949,7 +949,7 @@ class PageView extends View {
     if (ctrl.isChanged() || model.hasNew()) {
       return [caption, ' ', /*#__PURE__*/React.createElement("span", {
         key: 'star',
-        className: "star"
+        className: "PageView__star"
       }, "*")];
     }
 
@@ -968,11 +968,6 @@ class PageView extends View {
       title: model.getApp().getText().page.saveAndClose,
       onClick: ctrl.onSaveAndCloseClick,
       enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged())
-    }), model.isModal() && /*#__PURE__*/React.createElement(Button, {
-      key: "close",
-      width: width,
-      title: model.getApp().getText().page.close,
-      onClick: ctrl.onClosePageClick
     }), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       title: model.getApp().getText().page.actions,
       actions: this.getActionsForDropdownButton(),
@@ -987,14 +982,17 @@ class PageView extends View {
   render() {
     console.log('PageView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
-    const model = ctrl.model;
+    const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__content flex-rows"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "PageView__caption"
-    }, this.renderCaption()),
+    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+      className: 'PageView__close',
+      onClick: ctrl.onClosePageClick
+    }, "\xD7")),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"

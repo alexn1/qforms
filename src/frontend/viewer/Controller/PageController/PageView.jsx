@@ -35,7 +35,7 @@ class PageView extends View {
             caption += ` ${key}`;
         }
         if (ctrl.isChanged() || model.hasNew()) {
-            return [caption, ' ', <span key={'star'} className="star">*</span>];
+            return [caption, ' ', <span key={'star'} className="PageView__star">*</span>];
         }
         return caption;
     }
@@ -63,14 +63,14 @@ class PageView extends View {
                         enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
                     />
                 }
-                {model.isModal() &&
+                {/*{model.isModal() &&
                     <Button
                         key="close"
                         width={width}
                         title={model.getApp().getText().page.close}
                         onClick={ctrl.onClosePageClick}
                     />
-                }
+                }*/}
                 {model.hasActions() &&
                     <DropdownButton
                         title={model.getApp().getText().page.actions}
@@ -87,11 +87,17 @@ class PageView extends View {
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
+        const model = ctrl.getModel();
         return (
             <div className="PageView full frame">
                 <div className="frame__content flex-rows">
-                    <h3 className="PageView__caption">{this.renderCaption()}</h3>
+                    <h3 className="PageView__caption">
+                        {this.renderCaption()}
+                        {model.isModal() && <span
+                            className={'PageView__close'}
+                            onClick={ctrl.onClosePageClick}
+                        >×</span>}
+                    </h3>
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&

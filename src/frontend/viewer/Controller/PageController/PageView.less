@@ -9,10 +9,17 @@
 .PageView__caption {
   margin: 0;
   color: #333;
-  > span.star {
-    color: red;
-  }
 }
+
+.PageView__star {
+  color: red;
+}
+
+.PageView__close {
+  float: right;
+  cursor: pointer;
+}
+
 
 .PageView__toolbar {
   display: flex;
@@ -28,7 +35,7 @@
     .PageView__caption {
       background-color: #398bce;
       color: white;
-      padding: 5px;
+      padding: 5px 10px;
     }
   }
 }
