@@ -934,7 +934,7 @@ class PageView extends View {
 
   renderCaption() {
     const ctrl = this.props.ctrl;
-    const model = ctrl.model;
+    const model = ctrl.getModel();
     const key = model.getKey();
     let caption = ctrl.getCaption();
 
@@ -946,7 +946,7 @@ class PageView extends View {
       caption += ` ${key}`;
     }
 
-    if (ctrl.isChanged() || model.hasNew()) {
+    if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew())) {
       return [caption, ' ', /*#__PURE__*/React.createElement("span", {
         key: 'star',
         className: "PageView__star"
