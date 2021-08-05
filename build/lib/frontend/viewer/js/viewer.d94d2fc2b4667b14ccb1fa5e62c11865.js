@@ -22,8 +22,9 @@ class ViewerFrontHostApp extends FrontHostApp {
         }
         applicationController.createView(rootElement);
     }
-    onDocumentKeyDown(e) {
-        console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
+    async onDocumentKeyDown(e) {
+        // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
+        await this.applicationController.onDocumentKeyDown(e);
     }
 }
 
@@ -65,6 +66,14 @@ class Controller extends EventEmitter {
 window.QForms.Controller = Controller;
 
 class ApplicationController extends Controller {
+    constructor(model) {
+        // console.log('ApplicationController.constructor', model, view);
+        super(model, null);
+        this.lastPageId = 0;
+        this.modalPages = [];
+        this.activePage = null;
+        this.statusbar  = null;
+    }
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
@@ -82,14 +91,6 @@ class ApplicationController extends Controller {
     }
     static isInDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
-    }
-    constructor(model) {
-        // console.log('ApplicationController.constructor', model, view);
-        super(model, null);
-        this.lastPageId = 0;
-        this.modalPages = [];
-        this.activePage = null;
-        this.statusbar  = null;
     }
     init() {
         // console.log('ApplicationController.init');
@@ -276,6 +277,12 @@ class ApplicationController extends Controller {
         //     console.error(err);
         //     alert(err.message);
         // }
+    }
+    async onDocumentKeyDown(e) {
+        // console.log('ApplicationController.onDocumentKeyDown', e);
+        if (this.activePage) {
+            await this.activePage.onDocumentKeyDown(e);
+        }
     }
 }
 
@@ -1817,7 +1824,7 @@ class PageController extends Controller {
     }
 
     onClosePageClick = () => {
-        // console.log('PageController.onClosePageClick', this.model.getFullName());
+        console.log('PageController.onClosePageClick', this.getModel().getFullName());
         this.close();
     }
 
@@ -1923,6 +1930,9 @@ class PageController extends Controller {
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
+    }
+    async onDocumentKeyDown(e) {
+        console.log('PageController.onDocumentKeyDown', this.getModel().getFullName());
     }
 }
 window.QForms.PageController = PageController;

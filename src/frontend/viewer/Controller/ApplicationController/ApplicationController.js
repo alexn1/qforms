@@ -1,4 +1,12 @@
 class ApplicationController extends Controller {
+    constructor(model) {
+        // console.log('ApplicationController.constructor', model, view);
+        super(model, null);
+        this.lastPageId = 0;
+        this.modalPages = [];
+        this.activePage = null;
+        this.statusbar  = null;
+    }
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
@@ -16,14 +24,6 @@ class ApplicationController extends Controller {
     }
     static isInDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
-    }
-    constructor(model) {
-        // console.log('ApplicationController.constructor', model, view);
-        super(model, null);
-        this.lastPageId = 0;
-        this.modalPages = [];
-        this.activePage = null;
-        this.statusbar  = null;
     }
     init() {
         // console.log('ApplicationController.init');
@@ -210,6 +210,12 @@ class ApplicationController extends Controller {
         //     console.error(err);
         //     alert(err.message);
         // }
+    }
+    async onDocumentKeyDown(e) {
+        // console.log('ApplicationController.onDocumentKeyDown', e);
+        if (this.activePage) {
+            await this.activePage.onDocumentKeyDown(e);
+        }
     }
 }
 

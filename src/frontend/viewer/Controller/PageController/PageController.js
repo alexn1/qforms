@@ -42,7 +42,7 @@ class PageController extends Controller {
     }
 
     onClosePageClick = () => {
-        // console.log('PageController.onClosePageClick', this.model.getFullName());
+        console.log('PageController.onClosePageClick', this.getModel().getFullName());
         this.close();
     }
 
@@ -148,6 +148,9 @@ class PageController extends Controller {
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
+    }
+    async onDocumentKeyDown(e) {
+        console.log('PageController.onDocumentKeyDown', this.getModel().getFullName());
     }
 }
 window.QForms.PageController = PageController;

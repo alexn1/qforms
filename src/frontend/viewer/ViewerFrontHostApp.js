@@ -22,8 +22,9 @@ class ViewerFrontHostApp extends FrontHostApp {
         }
         applicationController.createView(rootElement);
     }
-    onDocumentKeyDown(e) {
-        console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
+    async onDocumentKeyDown(e) {
+        // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
+        await this.applicationController.onDocumentKeyDown(e);
     }
 }
 

@@ -1029,7 +1029,12 @@ class PageView2 extends PageView {
       className: "frame__content flex-rows"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "PageView__caption"
-    }, this.renderCaption()), (model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
+    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+      className: 'PageView__close',
+      onClick: ctrl.onClosePageClick
+    }, "\xD7")),
+    /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
+    this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__content"

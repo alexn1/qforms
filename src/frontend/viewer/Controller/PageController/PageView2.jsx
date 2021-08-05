@@ -16,8 +16,14 @@ class PageView2 extends PageView {
         return (
             <div className="PageView full frame">
                 <div className="frame__content flex-rows">
-                    <h3 className="PageView__caption">{this.renderCaption()}</h3>
-                    {(model.hasRowFormWithDefaultDs() || model.hasActions()) && this.renderToolbar()}
+                    <h3 className="PageView__caption">
+                        {this.renderCaption()}
+                        {model.isModal() && <span
+                            className={'PageView__close'}
+                            onClick={ctrl.onClosePageClick}
+                        >×</span>}
+                    </h3>
+                    {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     <div className="PageView__table-forms flex-max frame">
                         <div className="frame__content">
                             <Tab tabs={this.getAllTabs()} classList={['Tab-blue', 'full']}/>
