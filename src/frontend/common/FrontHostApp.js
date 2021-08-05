@@ -118,7 +118,7 @@ class FrontHostApp {
         return null;
     }
     onDocumentKeyDown(e) {
-        console.log('FrontHostApp.onDocumentKeyDown', e);
+        // console.log('FrontHostApp.onDocumentKeyDown', e);
     }
 }
 

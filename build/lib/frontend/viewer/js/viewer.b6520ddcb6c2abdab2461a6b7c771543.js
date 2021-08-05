@@ -1,4 +1,8 @@
 class ViewerFrontHostApp extends FrontHostApp {
+    constructor(data) {
+        super(data);
+        this.applicationController = null;
+    }
     run() {
         console.log('ViewerFrontHostApp.run', this.data);
 
@@ -7,7 +11,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         application.init();
 
         // applicationController
-        const applicationController = ApplicationController.create(application);
+        const applicationController = this.applicationController = ApplicationController.create(application);
         applicationController.init();
 
         // view
@@ -17,6 +21,9 @@ class ViewerFrontHostApp extends FrontHostApp {
             throw new Error(`no root element: ${rootElementName}`);
         }
         applicationController.createView(rootElement);
+    }
+    onDocumentKeyDown(e) {
+        console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
     }
 }
 
