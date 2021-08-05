@@ -150,7 +150,12 @@ class PageController extends Controller {
         console.log('PageController.onActionClick', name);
     }
     async onDocumentKeyDown(e) {
-        console.log('PageController.onDocumentKeyDown', this.getModel().getFullName());
+        // console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
+        if (e.key === 'Escape') {
+            if (this.getModel().isModal()) {
+                this.close();
+            }
+        }
     }
 }
 window.QForms.PageController = PageController;

@@ -71,7 +71,7 @@ class ApplicationController extends Controller {
         super(model, null);
         this.lastPageId = 0;
         this.modalPages = [];
-        this.activePage = null;
+        this.activePage = null;     // active non modal page
         this.statusbar  = null;
     }
     static create(model) {
@@ -280,9 +280,17 @@ class ApplicationController extends Controller {
     }
     async onDocumentKeyDown(e) {
         // console.log('ApplicationController.onDocumentKeyDown', e);
-        if (this.activePage) {
-            await this.activePage.onDocumentKeyDown(e);
+        const page = this.getFocusPage();
+        // console.log('page:', page.getModel().getFullName());
+        if (page) {
+            await page.onDocumentKeyDown(e);
         }
+    }
+    getFocusPage() {
+        if (this.modalPages.length > 0) {
+            return this.modalPages[this.modalPages.length-1];
+        }
+        return this.activePage;
     }
 }
 
@@ -1932,7 +1940,12 @@ class PageController extends Controller {
         console.log('PageController.onActionClick', name);
     }
     async onDocumentKeyDown(e) {
-        console.log('PageController.onDocumentKeyDown', this.getModel().getFullName());
+        console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
+        if (e.key === 'Escape') {
+            if (this.getModel().isModal()) {
+                this.close();
+            }
+        }
     }
 }
 window.QForms.PageController = PageController;
