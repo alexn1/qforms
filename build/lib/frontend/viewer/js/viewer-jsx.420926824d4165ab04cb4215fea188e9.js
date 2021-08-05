@@ -979,6 +979,17 @@ class PageView extends View {
     return false;
   }
 
+  renderCaption2() {
+    const ctrl = this.props.ctrl;
+    const model = ctrl.getModel();
+    return /*#__PURE__*/React.createElement("h3", {
+      className: "PageView__caption"
+    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+      className: 'PageView__close',
+      onClick: ctrl.onClosePageClick
+    }, "\xD7"));
+  }
+
   render() {
     console.log('PageView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
@@ -987,12 +998,7 @@ class PageView extends View {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__content flex-rows"
-    }, /*#__PURE__*/React.createElement("h3", {
-      className: "PageView__caption"
-    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
-      className: 'PageView__close',
-      onClick: ctrl.onClosePageClick
-    }, "\xD7")),
+    }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"
@@ -1021,18 +1027,11 @@ class PageView2 extends PageView {
 
   render() {
     console.log('PageView2.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
-    const model = ctrl.model;
     return /*#__PURE__*/React.createElement("div", {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__content flex-rows"
-    }, /*#__PURE__*/React.createElement("h3", {
-      className: "PageView__caption"
-    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
-      className: 'PageView__close',
-      onClick: ctrl.onClosePageClick
-    }, "\xD7")),
+    }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"

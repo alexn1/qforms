@@ -84,6 +84,17 @@ class PageView extends View {
     shouldComponentUpdate(nextProps, nextState) {
         return false;
     }
+    renderCaption2() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.getModel();
+        return <h3 className="PageView__caption">
+            {this.renderCaption()}
+            {model.isModal() && <span
+                className={'PageView__close'}
+                onClick={ctrl.onClosePageClick}
+            >×</span>}
+        </h3>;
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -91,13 +102,7 @@ class PageView extends View {
         return (
             <div className="PageView full frame">
                 <div className="frame__content flex-rows">
-                    <h3 className="PageView__caption">
-                        {this.renderCaption()}
-                        {model.isModal() && <span
-                            className={'PageView__close'}
-                            onClick={ctrl.onClosePageClick}
-                        >×</span>}
-                    </h3>
+                    {this.renderCaption2()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
