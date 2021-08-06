@@ -43,7 +43,7 @@ class TableFormController extends FormController {
             this.model.getDefaultDataSource().delete(this.state.activeRowKey);
         }
     }
-    onGridCellDblClick = async (row) => {
+    onGridCellDblClick = async row => {
         // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
@@ -162,12 +162,12 @@ class TableFormController extends FormController {
         this.invalidate();
         this.rerender();
     }
-    onSelectionChange = i => {
+    onSelectionChange = async i => {
         // console.log('TableFormController.onSelectionChange', i);
         const rows = this.model.getDefaultDataSource().getRows();
         this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
         this.invalidate();
-        this.rerender();
+        await this.rerender();
     }
     getActiveRowIndex = () => {
         // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);

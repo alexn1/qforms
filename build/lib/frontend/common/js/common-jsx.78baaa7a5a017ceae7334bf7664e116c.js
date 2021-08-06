@@ -759,42 +759,46 @@ class Grid extends ReactComponent {
   constructor(props) {
     super(props);
 
-    _defineProperty(this, "onCellMouseDown", e => {
+    _defineProperty(this, "onCellMouseDown", async e => {
       // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-      this.selectCell(i, j);
+      await this.selectCell(i, j);
     });
 
-    _defineProperty(this, "onCellDoubleClick", e => {
+    _defineProperty(this, "onCellDoubleClick", async e => {
       // console.log('Grid.onCellDoubleClick');
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
       const row = this.props.rows[i]; // console.log('row:', row);
 
-      if (this.props.onDoubleClick) this.props.onDoubleClick(row);
+      if (this.props.onDoubleClick) {
+        await this.props.onDoubleClick(row);
+      }
     });
 
-    _defineProperty(this, "onRowMouseDown", e => {
+    _defineProperty(this, "onRowMouseDown", async e => {
       // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
       const i = parseInt(e.currentTarget.dataset.r);
-      this.selectRow(i);
+      await this.selectRow(i);
     });
 
-    _defineProperty(this, "onRowDoubleClick", e => {
+    _defineProperty(this, "onRowDoubleClick", async e => {
       // console.log('Grid.onRowDoubleClick');
       const i = parseInt(e.currentTarget.dataset.r);
       const row = this.props.rows[i]; // console.log('row:', row);
 
-      if (this.props.onDoubleClick) this.props.onDoubleClick(row);
+      if (this.props.onDoubleClick) {
+        await this.props.onDoubleClick(row);
+      }
     });
 
-    _defineProperty(this, "onResizeDoubleClick", e => {
+    _defineProperty(this, "onResizeDoubleClick", async e => {
       console.log('Grid.onResizeDoubleClick', e.target);
       const i = parseInt(e.target.dataset.i);
       const column = this.props.columns[i];
       if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
       this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
       this.state.resized = Date.now();
-      this.rerender();
+      await this.rerender();
     });
 
     _defineProperty(this, "onCellViewCreate", c => {
@@ -812,7 +816,7 @@ class Grid extends ReactComponent {
       this.columns[columnName].splice(i, 1);
     });
 
-    _defineProperty(this, "onBodyScroll", e => {
+    _defineProperty(this, "onBodyScroll", async e => {
       // console.log('Grid.onBodyScroll', e.target.scrollLeft);
       this.head.current.scrollLeft = e.target.scrollLeft;
     });
@@ -844,17 +848,29 @@ class Grid extends ReactComponent {
     return i === this.getActiveRowIndex() && j === this.getActiveColumn();
   }
 
-  selectCell(i, j) {
+  async selectCell(i, j) {
+    // console.log('Grid.selectCell', i, j);
     if (this.getActiveRowIndex() === i && this.getActiveColumn() === j) return;
     this.state.row = i;
     this.state.column = j;
-    if (this.props.onSelectionChange) this.props.onSelectionChange(i);
+
+    if (this.props.onSelectionChange) {
+      await this.props.onSelectionChange(i);
+    } else {
+      await this.rerender();
+    }
   }
 
-  selectRow(i) {
+  async selectRow(i) {
+    // console.log('Grid.selectRow', i);
     if (this.getActiveRowIndex() === i) return;
     this.state.row = i;
-    if (this.props.onSelectionChange) this.props.onSelectionChange(i);
+
+    if (this.props.onSelectionChange) {
+      await this.props.onSelectionChange(i);
+    } else {
+      await this.rerender();
+    }
   }
 
   getMaxColumnWidth(column) {
@@ -874,7 +890,7 @@ class Grid extends ReactComponent {
       style: {
         width: this.getColumnWidth(i)
       }
-    }, /*#__PURE__*/React.createElement("div", null, column.title), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("div", null, column.title || column.name), /*#__PURE__*/React.createElement("span", {
       className: "resize",
       "data-i": i,
       onDoubleClick: this.onResizeDoubleClick
