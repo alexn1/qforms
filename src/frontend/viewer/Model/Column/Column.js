@@ -7,8 +7,8 @@ class Column  extends Model {
         if (!this.data.type) throw new Error(`column ${this.getFullName()}: no type`);
         return this.data.type;
     }
-    getDbType() {
+    /*getDbType() {
         return this.data.dbType;
-    }
+    }*/
 }
 window.QForms.Column = Column;

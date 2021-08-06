@@ -34,9 +34,9 @@ class SqlDataSource extends DataSource {
         return type;
     }
 
-    getDbType(columnName) {
+    /*getDbType(columnName) {
         return this.getTable().getColumn(columnName).getDbType();
-    }
+    }*/
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());

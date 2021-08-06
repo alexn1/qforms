@@ -37,8 +37,7 @@ class Field extends Model {
     }
 
     valueToPageParams(row) {
-        // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
-        // if (this.getDbType() === 'text') return;
+        // console.log('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
             this.getPage().addParam(this.getFullName(), this.getValue(row));
         }
@@ -100,13 +99,13 @@ class Field extends Model {
         throw new Error(`field type empty`);
     }
 
-    getDbType() {
+    /*getDbType() {
         const dataSource = this.getDefaultDataSource();
         if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
             return this.getDefaultDataSource().getDbType(this.getAttr('column'));
         }
         return null;
-    }
+    }*/
 
     getForm() {
         return this.parent;

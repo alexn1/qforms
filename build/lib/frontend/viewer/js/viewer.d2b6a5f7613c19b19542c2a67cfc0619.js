@@ -2111,9 +2111,9 @@ class Column  extends Model {
         if (!this.data.type) throw new Error(`column ${this.getFullName()}: no type`);
         return this.data.type;
     }
-    getDbType() {
+    /*getDbType() {
         return this.data.dbType;
-    }
+    }*/
 }
 window.QForms.Column = Column;
 
@@ -2401,9 +2401,9 @@ class SqlDataSource extends DataSource {
         return type;
     }
 
-    getDbType(columnName) {
+    /*getDbType(columnName) {
         return this.getTable().getColumn(columnName).getDbType();
-    }
+    }*/
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
@@ -2800,8 +2800,7 @@ class Field extends Model {
     }
 
     valueToPageParams(row) {
-        // console.log('Field.valueToPageParams', this.getFullName(), this.getDbType());
-        // if (this.getDbType() === 'text') return;
+        // console.log('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
             this.getPage().addParam(this.getFullName(), this.getValue(row));
         }
@@ -2863,13 +2862,13 @@ class Field extends Model {
         throw new Error(`field type empty`);
     }
 
-    getDbType() {
+    /*getDbType() {
         const dataSource = this.getDefaultDataSource();
         if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
             return this.getDefaultDataSource().getDbType(this.getAttr('column'));
         }
         return null;
-    }
+    }*/
 
     getForm() {
         return this.parent;

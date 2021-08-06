@@ -23,9 +23,9 @@ class Column extends Model {
     getApp(): Application {
         return this.parent.parent.parent;
     }
-    getDbType() {
+    /*getDbType() {
         return this.getAttr('dbType');
-    }
+    }*/
 }
 
 export = Column;
