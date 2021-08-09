@@ -2371,8 +2371,60 @@ class DataSource extends Model {
         return this.news.length > 0;
     }
 
+    updateRow(key, newValues) {
+        console.log('SqlDataSource.updateRow', this.getFullName(), key, newValues);
+        if (!key) throw new Error('no key');
+        const row = this.rowsByKey[key];
+        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
+        const newKey = this.getRowKey(newValues);
+
+        // copy new values to original row object
+        for (const column in row) {
+            row[column] = newValues[column];
+        }
+        if (key !== newKey) {
+            delete this.rowsByKey[key];
+            this.rowsByKey[newKey] = row;
+        }
+        // console.log(`key: ${key} to ${newKey}`);
+        // console.log('this.rowsByKey:', this.rowsByKey);
+        // console.log('this.data.rows:', this.data.rows);
+        // return {source: this, key};
+    }
+
     async update() {
-        throw new Error('DataSource.update not implemented');
+        console.log('DataSource.update', this.getFullName());
+        if (this.news[0]) return this.insert(this.news[0]);
+        if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
+
+        const changes = this.getChangesByKey();
+        console.log('changes:', changes);
+        const key = Object.keys(changes)[0];
+        console.log('key:', key);
+        const row = this.getRowByKey(key);
+        console.log('row:', row);
+        const newValues = this.getRowWithChanges(row);
+        console.log('newValues:', newValues);
+        const newKey = this.getRowKey(newValues);
+        console.log('newKey:', newKey);
+
+
+        this.changes.clear();
+        this.updateRow(key, newValues);
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, key});
+        }
+        this.emit('update', {source: this, key});
+        if (this.getAttr('table')) {
+            this.getDatabase().emitResult({
+                update: {
+                    [this.getAttr('table')]: {
+                        [key]: newKey
+                    }
+                }
+            }, this);
+        }
+
     }
 
 }
@@ -2420,7 +2472,6 @@ class SqlDataSource extends DataSource {
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
-        // if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
@@ -2454,27 +2505,6 @@ class SqlDataSource extends DataSource {
         // return newKey;
     }
 
-    updateRow(key, newValues) {
-        console.log('SqlDataSource.updateRow', this.getFullName(), key, newValues);
-        if (!key) throw new Error('no key');
-        const row = this.rowsByKey[key];
-        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        const newKey = this.getRowKey(newValues);
-
-        // copy new values to original row object
-        for (const column in row) {
-            row[column] = newValues[column];
-        }
-        if (key !== newKey) {
-            delete this.rowsByKey[key];
-            this.rowsByKey[newKey] = row;
-        }
-        // console.log(`key: ${key} to ${newKey}`);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.data.rows:', this.data.rows);
-        // return {source: this, key};
-    }
-
     getTable() {
         if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
         return this.getDatabase().getTable(this.getAttr('table'));
@@ -2485,7 +2515,7 @@ class SqlDataSource extends DataSource {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    onTableUpdate = async (e) => {
+    onTableUpdate = async e => {
         console.log('SqlDataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
@@ -2747,7 +2777,7 @@ class Database extends Model {
             const table = this.getTable(tableName);
             for (const key in result.update[tableName]) {
                 const newKey = result.update[tableName][key];
-                table.emit('update', {source: source, changes: {[key]: newKey}});
+                table.emit('update', {source: source, changes: [{[key]: newKey}]});
             }
         }
     }

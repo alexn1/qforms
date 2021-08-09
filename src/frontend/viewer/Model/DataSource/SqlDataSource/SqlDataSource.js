@@ -40,7 +40,6 @@ class SqlDataSource extends DataSource {
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
-        // if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
@@ -74,27 +73,6 @@ class SqlDataSource extends DataSource {
         // return newKey;
     }
 
-    updateRow(key, newValues) {
-        console.log('SqlDataSource.updateRow', this.getFullName(), key, newValues);
-        if (!key) throw new Error('no key');
-        const row = this.rowsByKey[key];
-        if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        const newKey = this.getRowKey(newValues);
-
-        // copy new values to original row object
-        for (const column in row) {
-            row[column] = newValues[column];
-        }
-        if (key !== newKey) {
-            delete this.rowsByKey[key];
-            this.rowsByKey[newKey] = row;
-        }
-        // console.log(`key: ${key} to ${newKey}`);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.data.rows:', this.data.rows);
-        // return {source: this, key};
-    }
-
     getTable() {
         if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
         return this.getDatabase().getTable(this.getAttr('table'));
@@ -105,7 +83,7 @@ class SqlDataSource extends DataSource {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    onTableUpdate = async (e) => {
+    onTableUpdate = async e => {
         console.log('SqlDataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
