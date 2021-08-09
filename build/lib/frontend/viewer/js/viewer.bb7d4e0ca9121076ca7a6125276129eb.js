@@ -2411,16 +2411,16 @@ class DataSource extends Model {
 
         this.changes.clear();
         this.updateRow(key, newValues);
+
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, key});
+            this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
         }
-        this.emit('update', {source: this, key});
+        this.emit('update', {source: this, changes: {[key]: newKey}});
+
         if (this.getAttr('table')) {
             this.getDatabase().emitResult({
                 update: {
-                    [this.getAttr('table')]: {
-                        [key]: newKey
-                    }
+                    [this.getAttr('table')]: {[key]: newKey}
                 }
             }, this);
         }
@@ -2490,15 +2490,13 @@ class SqlDataSource extends DataSource {
         this.changes.clear();
         this.updateRow(key, newValues);
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, key});
+            this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
         }
-        this.emit('update', {source: this, key});
+        this.emit('update', {source: this, changes: {[key]: newKey}});
         if (this.getAttr('table')) {
             this.getDatabase().emitResult({
                 update: {
-                    [this.getAttr('table')]: {
-                        [key]: newKey
-                    }
+                    [this.getAttr('table')]: {[key]: newKey}
                 }
             }, this);
         }
