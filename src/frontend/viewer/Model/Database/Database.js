@@ -37,8 +37,8 @@ class Database extends Model {
 
     emitUpdate(result, source = null) {
         if (!result.update) return;
-        for (const tableName in result.update) {
-            this.getTable(tableName).emitUpdate(source, result.update[tableName]);
+        for (const table in result.update) {
+            this.getTable(table).emitUpdate(source, result.update[table]);
         }
     }
     emitDelete(result, source = null) {
