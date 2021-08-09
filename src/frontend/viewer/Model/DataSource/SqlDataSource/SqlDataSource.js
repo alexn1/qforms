@@ -64,13 +64,11 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
         }
         this.emit('update', {source: this, changes: {[key]: newKey}});
-        if (table) {
-            this.getDatabase().emitResult({
-                update: {
-                    [table]: {[key]: newKey}
-                }
-            }, this);
-        }
+        this.getDatabase().emitResult({
+            update: {
+                [table]: {[key]: newKey}
+            }
+        }, this);
     }
 
     getTable() {
@@ -241,10 +239,15 @@ class SqlDataSource extends DataSource {
 
         // events
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, changes: result.insert[table]});
+            this.parent.onDataSourceInsert({source: this, changes: Object.keys(result.insert[table])});
         }
-        this.emit('insert', {source: this, changes: result.insert[table]});
-        this.getDatabase().emitResult(result, this);
+        this.emit('insert', {source: this, changes: Object.keys(result.insert[table])});
+        // this.getDatabase().emitResult(result, this);
+        this.getDatabase().emitResult({
+            insert: {
+                [table]: Object.keys(result.insert[table])
+            }
+        }, this);
         return key;
     }
 

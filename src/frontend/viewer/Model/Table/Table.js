@@ -17,7 +17,9 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
-
+    emitInsert(source, changes) {
+        this.emit('insert', {source, changes});
+    }
     emitUpdate(source, changes) {
         this.emit('update', {source, changes});
     }

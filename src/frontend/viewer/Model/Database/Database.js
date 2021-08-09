@@ -28,10 +28,7 @@ class Database extends Model {
     emitInsert(result, source = null) {
         if (!result.insert) return;
         for (const tableName in result.insert) {
-            const table = this.getTable(tableName);
-            for (const key in result.insert[tableName]) {
-                table.emit('insert', {source: source, key});
-            }
+            this.getTable(tableName).emitInsert(source, result.insert[tableName]);
         }
     }
 
@@ -46,7 +43,7 @@ class Database extends Model {
         for (const tableName in result.delete) {
             const table = this.getTable(tableName);
             for (const key of result.delete[tableName]) {
-                table.emit('delete', {source: source, key: key});
+                table.emit('delete', {source: source, key});
             }
         }
     }

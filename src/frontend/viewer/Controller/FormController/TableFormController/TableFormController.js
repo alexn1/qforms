@@ -158,7 +158,9 @@ class TableFormController extends FormController {
     }
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
-        this.state.activeRowKey = e.key;
+        const [key] = e.changes;
+        if (!key) throw new Error('no insert key');
+        this.state.activeRowKey = key;
         this.invalidate();
         this.rerender();
     }

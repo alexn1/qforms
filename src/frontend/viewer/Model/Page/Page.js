@@ -138,8 +138,7 @@ class Page extends Model {
 
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
-        // if (!e.key) throw new Error('no key of inserted row');
-        for (const key in e.changes) {
+        for (const key of e.changes) {
             const keyParams = DataSource.keyToParams(key);// key params to page params
             for (const name in keyParams) {
                 this.addParam(name, keyParams[name]);
