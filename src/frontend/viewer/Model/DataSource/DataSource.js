@@ -294,10 +294,9 @@ class DataSource extends Model {
         this.updateRow(key, newValues);
 
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
+            this.parent.onDataSourceUpdate({source: this, updates: {[key]: newKey}});
         }
-        this.emit('update', {source: this, changes: {[key]: newKey}});
-
+        this.emit('update', {source: this, updates: {[key]: newKey}});
         if (this.getAttr('table')) {
             this.getDatabase().emitResult({
                 update: {
