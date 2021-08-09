@@ -96,7 +96,7 @@ class ApplicationController extends Controller {
         // console.log('pc:', pc);
 
         // show
-        isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
+        pc.getModel().isModal() ? this.modalPages.push(pc) : this.onPageCreate(pc);
         await this.rerender();
 
         return pc;
