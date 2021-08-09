@@ -20,8 +20,8 @@ class Table extends Model {
     emitInsert(source, inserts) {
         this.emit('insert', {source, inserts});
     }
-    emitUpdate(source, changes) {
-        this.emit('update', {source, changes});
+    emitUpdate(source, updates) {
+        this.emit('update', {source, updates});
     }
 
 }

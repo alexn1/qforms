@@ -61,9 +61,9 @@ class SqlDataSource extends DataSource {
         this.changes.clear();
         this.updateRow(key, newValues);
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
+            this.parent.onDataSourceUpdate({source: this, updates: {[key]: newKey}});
         }
-        this.emit('update', {source: this, changes: {[key]: newKey}});
+        this.emit('update', {source: this, updates: {[key]: newKey}});
         this.getDatabase().emitResult({
             update: {
                 [table]: {[key]: newKey}
@@ -88,12 +88,12 @@ class SqlDataSource extends DataSource {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
         }
-        // console.log('changes:', e.changes);
-        if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);
-        for (const key in e.changes) {
+        // console.log('updates:', e.updates);
+        if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no changes`);
+        for (const key in e.updates) {
             // check if updated row exists in this ds
             if (this.rowsByKey[key]) {
-                const newKey = e.changes[key];
+                const newKey = e.updates[key];
                 // console.log(`key: ${key} to ${newKey}`);
                 const keyParams = DataSource.keyToParams(newKey);
                 const result = await this.selectSingle(keyParams);
