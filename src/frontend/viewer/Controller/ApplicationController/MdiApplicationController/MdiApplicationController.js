@@ -91,7 +91,7 @@ class MdiApplicationController extends ApplicationController {
     findPageControllerByPageNameAndKey(pageName, key) {
         return this.pages.find(({model}) => model.getName() === pageName && model.getKey() === key);
     }
-    onPageCreate(pc) {
+    addPage(pc) {
         this.pages.push(this.activePage = pc);
     }
 }

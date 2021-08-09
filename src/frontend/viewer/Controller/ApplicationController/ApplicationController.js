@@ -96,10 +96,13 @@ class ApplicationController extends Controller {
         // console.log('pc:', pc);
 
         // show
-        pc.getModel().isModal() ? this.modalPages.push(pc) : this.onPageCreate(pc);
+        pc.getModel().isModal() ? this.addModalPage(pc) : this.addPage(pc);
         await this.rerender();
 
         return pc;
+    }
+    addModalPage(pc) {
+        this.modalPages.push(pc);
     }
     getNextPageId() {
         this.lastPageId++;
@@ -121,7 +124,7 @@ class ApplicationController extends Controller {
         pc.init();
         return pc;
     }
-    onPageCreate(pc) {
+    addPage(pc) {
         if (this.activePage) {
             this.closePage(this.activePage);
         }
