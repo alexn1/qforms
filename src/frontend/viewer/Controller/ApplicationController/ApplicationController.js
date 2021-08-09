@@ -88,6 +88,9 @@ class ApplicationController extends Controller {
                 ...(key ? DataSource.keyToParams(key) : {}),
             },
         });
+        if (options.onPageCreate) {
+            options.onPageCreate(pageModel);
+        }
         pageModel.init();
 
         // pageController
