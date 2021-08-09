@@ -253,5 +253,9 @@ class DataSource extends Model {
         return this.news.length > 0;
     }
 
+    async update() {
+        throw new Error('DataSource.update not implemented');
+    }
+
 }
 window.QForms.DataSource = DataSource;

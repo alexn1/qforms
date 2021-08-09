@@ -54,7 +54,9 @@ class Page extends Model {
     async update() {
         console.log('Page.update', this.getFullName());
         for (const form of this.forms) {
-            if (form.isChanged() || form.hasNew()) await form.update();
+            if (form.isChanged() || form.hasNew()) {
+                await form.update();
+            }
         }
     }
 

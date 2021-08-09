@@ -40,9 +40,11 @@ class SqlDataSource extends DataSource {
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
-        if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
+        // if (this.getAttr('table') === '') throw new Error(`data source has no table: ${this.getFullName()}`);
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
+
+        // specific to SqlDataSource
         const result = await this.getApp().request({
             action : 'update',
             page   : this.getForm().getPage().getName(),
@@ -53,21 +55,23 @@ class SqlDataSource extends DataSource {
         if (!key) throw new Error('no updated row');
         const newValues = result[key];
         const newKey = this.getRowKey(newValues);
+
         this.changes.clear();
         this.updateRow(key, newValues);
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate({source: this, key});
         }
         this.emit('update', {source: this, key});
-        // this.getTable().emit('update', {source: this, changes: {[key]: newKey}});
-        this.getDatabase().emitResult({
-            update: {
-                [this.getAttr('table')]: {
-                    [key]: newKey
+        if (this.getAttr('table')) {
+            this.getDatabase().emitResult({
+                update: {
+                    [this.getAttr('table')]: {
+                        [key]: newKey
+                    }
                 }
-            }
-        }, this);
-        return newKey;
+            }, this);
+        }
+        // return newKey;
     }
 
     updateRow(key, newValues) {
@@ -78,7 +82,9 @@ class SqlDataSource extends DataSource {
         const newKey = this.getRowKey(newValues);
 
         // copy new values to original row object
-        for (const column in row) row[column] = newValues[column];
+        for (const column in row) {
+            row[column] = newValues[column];
+        }
         if (key !== newKey) {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
@@ -86,8 +92,7 @@ class SqlDataSource extends DataSource {
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
-
-        return {source: this, key};
+        // return {source: this, key};
     }
 
     getTable() {
