@@ -1716,7 +1716,7 @@ class TableFormController extends FormController {
     }
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
-        const [key] = e.changes;
+        const [key] = e.inserts;
         if (!key) throw new Error('no insert key');
         this.state.activeRowKey = key;
         this.invalidate();
@@ -2673,18 +2673,15 @@ class SqlDataSource extends DataSource {
 
         // events
         if (this.parent.onDataSourceInsert) {
-
-            this.parent.onDataSourceInsert({source: this, changes: Object.keys(result.insert[table])});
+            this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
         }
-        this.emit('insert', {source: this, changes: Object.keys(result.insert[table])});
+        this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
         // this.getDatabase().emitResult(result, this);
         this.getDatabase().emitResult({
             insert: {
                 [table]: Object.keys(result.insert[table])
             }
         }, this);
-
-
         return key;
     }
 
@@ -3396,7 +3393,7 @@ class Page extends Model {
 
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
-        for (const key of e.changes) {
+        for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key);// key params to page params
             for (const name in keyParams) {
                 this.addParam(name, keyParams[name]);
@@ -3440,8 +3437,8 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
-    emitInsert(source, changes) {
-        this.emit('insert', {source, changes});
+    emitInsert(source, inserts) {
+        this.emit('insert', {source, inserts});
     }
     emitUpdate(source, changes) {
         this.emit('update', {source, changes});

@@ -239,9 +239,9 @@ class SqlDataSource extends DataSource {
 
         // events
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, changes: Object.keys(result.insert[table])});
+            this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
         }
-        this.emit('insert', {source: this, changes: Object.keys(result.insert[table])});
+        this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
         // this.getDatabase().emitResult(result, this);
         this.getDatabase().emitResult({
             insert: {

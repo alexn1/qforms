@@ -138,7 +138,7 @@ class Page extends Model {
 
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
-        for (const key of e.changes) {
+        for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key);// key params to page params
             for (const name in keyParams) {
                 this.addParam(name, keyParams[name]);
