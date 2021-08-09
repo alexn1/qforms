@@ -92,20 +92,20 @@ class SqlDataSource extends DataSource {
         }
         // console.log('changes:', e.changes);
         if (!Object.keys(e.changes).length) throw new Error(`${this.getFullName()}: no changes`);
-        const key = Object.keys(e.changes)[0];
-
-        // check if updated row exists in this ds
-        if (this.rowsByKey[key]) {
-            const newKey = e.changes[key];
-            // console.log(`key: ${key} to ${newKey}`);
-            const keyParams = DataSource.keyToParams(newKey);
-            const result = await this.selectSingle(keyParams);
-            this.updateRow(key, result.row);
-            if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate({source: this, key});
+        for (const key in e.changes) {
+            // check if updated row exists in this ds
+            if (this.rowsByKey[key]) {
+                const newKey = e.changes[key];
+                // console.log(`key: ${key} to ${newKey}`);
+                const keyParams = DataSource.keyToParams(newKey);
+                const result = await this.selectSingle(keyParams);
+                this.updateRow(key, result.row);
             }
-            this.emit('update', e);
         }
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate(e);
+        }
+        this.emit('update', e);
     }
 
     onTableInsert = async (e) => {
