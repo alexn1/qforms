@@ -75,11 +75,6 @@ class SqlDataSource extends DataSource {
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        /*const i = this.data.rows.indexOf(row);
-        if (i === -1) {
-            console.log('this.data.rows:', this.data.rows);
-            throw new Error(`${this.getFullName()}: cannot find row with key ${key}`);
-        }*/
         const newKey = this.getRowKey(newValues);
 
         // copy new values to original row object
@@ -269,11 +264,7 @@ class SqlDataSource extends DataSource {
         return key;
     }
 
-    addRow(row) {
-        this.rows.push(row);
-        const key = this.getRowKey(row);
-        this.rowsByKey[key] = row;
-    }
+
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
@@ -316,9 +307,6 @@ class SqlDataSource extends DataSource {
     getCount() {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         return this.count;
-    }
-    getRowsLength() {
-        return this.rows.length;
     }
     getFrame() {
         return this.frame;

@@ -2137,11 +2137,21 @@ class DataSource extends Model {
         this.fillRowsByKey();
     }
 
+    addRow(row) {
+        this.rows.push(row);
+        const key = this.getRowKey(row);
+        this.rowsByKey[key] = row;
+    }
+
     addRows(rows) {
         for (let i = 0; i < rows.length; i++) {
             this.rows.push(rows[i]);
         }
         this.fillRowsByKey();
+    }
+
+    getRowsLength() {
+        return this.rows.length;
     }
 
     fillRowsByKey() {
@@ -2266,7 +2276,7 @@ class DataSource extends Model {
 
     newRow(row) {
         console.log('DataSource.newRow', this.getFullName(), row);
-        if (this.data.rows.length > 0) {
+        if (this.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
         this.news.push(row);
@@ -2442,11 +2452,6 @@ class SqlDataSource extends DataSource {
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
-        /*const i = this.data.rows.indexOf(row);
-        if (i === -1) {
-            console.log('this.data.rows:', this.data.rows);
-            throw new Error(`${this.getFullName()}: cannot find row with key ${key}`);
-        }*/
         const newKey = this.getRowKey(newValues);
 
         // copy new values to original row object
@@ -2636,11 +2641,7 @@ class SqlDataSource extends DataSource {
         return key;
     }
 
-    addRow(row) {
-        this.rows.push(row);
-        const key = this.getRowKey(row);
-        this.rowsByKey[key] = row;
-    }
+
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
@@ -2683,9 +2684,6 @@ class SqlDataSource extends DataSource {
     getCount() {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         return this.count;
-    }
-    getRowsLength() {
-        return this.rows.length;
     }
     getFrame() {
         return this.frame;
