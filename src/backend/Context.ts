@@ -14,7 +14,6 @@ class Context {
     params: any;
     changes: any;
     newMode: any;
-    // parentPageName: string;
     connections: any;
     querytime: any;
     files: any;
@@ -49,7 +48,6 @@ class Context {
         this.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
         this.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
         this.newMode          = req.body.newMode;
-        // this.parentPageName   = req.body.parentPageName;
 
         // cnn
         this.connections = {};

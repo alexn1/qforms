@@ -3,7 +3,7 @@ class Page extends Model {
         // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options     = options; // {id, parentPage, modal, params}
+        this.options     = options; // {id, modal, params}
         this.dataSources = [];
         this.forms       = [];
         this.params      = {};
@@ -36,13 +36,8 @@ class Page extends Model {
         return this.options.id;
     }
 
-    /*getParentPageName() {
-        return this.options.parentPage ? this.options.parentPage.getName() : null;
-    }*/
-
     getParams() {
         return {
-            // ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
             ...(this.options.params !== undefined ? this.options.params : {}),
             ...this.params,
         };

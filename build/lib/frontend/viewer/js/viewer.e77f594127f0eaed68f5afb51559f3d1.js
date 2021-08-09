@@ -1886,7 +1886,6 @@ class PageController extends Controller {
     }
 
     async openPage(options) {
-        // options.parentPage = this.model;
         if (!options.params) {
             options.params = {};
         }
@@ -2567,7 +2566,6 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'select',
-            // parentPageName: page ? page.getParentPageName() : null,
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
@@ -2587,7 +2585,6 @@ class SqlDataSource extends DataSource {
         const form = this.getForm();
         const data = await this.getApp().request({
             action        : 'selectSingle',
-            // parentPageName: page ? page.getParentPageName() : null,
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
@@ -2611,7 +2608,6 @@ class SqlDataSource extends DataSource {
             action        : 'insert',
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
-            // parentPageName: this.getPage().getParentPageName(),
             params        : this.getRowWithChanges(row),
         });
 
@@ -2651,7 +2647,6 @@ class SqlDataSource extends DataSource {
             page          : this.getForm().getPage().getName(),
             form          : this.getForm().getName(),
             params        : Helper.encodeObject({key}),
-            // parentPageName: page ? page.getParentPageName() : null
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
@@ -2769,9 +2764,6 @@ class Field extends Model {
             if (name.indexOf('.') === -1) return text;
             let arr = name.split('.');
             if (arr[0] === 'this') arr[0] = this.getPage().getName();
-            /*if (arr[0] === 'parent' && this.getPage().getParentPageName()) {
-                arr[0] = this.getPage().getParentPageName();
-            }*/
             return `{${arr.join('.')}}`;
         });
     }
@@ -3222,7 +3214,7 @@ class Page extends Model {
         // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options     = options; // {id, parentPage, modal, params}
+        this.options     = options; // {id, modal, params}
         this.dataSources = [];
         this.forms       = [];
         this.params      = {};
@@ -3255,13 +3247,8 @@ class Page extends Model {
         return this.options.id;
     }
 
-    /*getParentPageName() {
-        return this.options.parentPage ? this.options.parentPage.getName() : null;
-    }*/
-
     getParams() {
         return {
-            // ...(this.options.parentPage ? this.options.parentPage.getParams() : {}),
             ...(this.options.params !== undefined ? this.options.params : {}),
             ...this.params,
         };

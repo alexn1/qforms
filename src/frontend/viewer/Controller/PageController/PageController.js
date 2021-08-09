@@ -99,7 +99,6 @@ class PageController extends Controller {
     }
 
     async openPage(options) {
-        // options.parentPage = this.model;
         if (!options.params) {
             options.params = {};
         }
