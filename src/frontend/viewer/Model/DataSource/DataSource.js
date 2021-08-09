@@ -280,31 +280,34 @@ class DataSource extends Model {
 
         const changes = this.getChangesByKey();
         console.log('changes:', changes);
-        const key = Object.keys(changes)[0];
-        console.log('key:', key);
-        const row = this.getRowByKey(key);
-        console.log('row:', row);
-        const newValues = this.getRowWithChanges(row);
-        console.log('newValues:', newValues);
-        const newKey = this.getRowKey(newValues);
-        console.log('newKey:', newKey);
 
-
-        this.changes.clear();
-        this.updateRow(key, newValues);
-
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, updates: {[key]: newKey}});
+        // apply changes to rows
+        const updates = {};
+        for (const key in changes) {
+            // console.log('key:', key);
+            const row = this.getRowByKey(key);
+            // console.log('row:', row);
+            const newValues = this.getRowWithChanges(row);
+            // console.log('newValues:', newValues);
+            const newKey = this.getRowKey(newValues);
+            // console.log('newKey:', newKey);
+            this.updateRow(key, newValues);
+            updates[key] = newKey;
         }
-        this.emit('update', {source: this, updates: {[key]: newKey}});
+        this.changes.clear();
+
+        // events
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate({source: this, updates});
+        }
+        this.emit('update', {source: this, updates});
         if (this.getAttr('table')) {
             this.getDatabase().emitResult({
                 update: {
-                    [this.getAttr('table')]: {[key]: newKey}
+                    [this.getAttr('table')]: updates
                 }
             }, this);
         }
-
     }
 
 }

@@ -65,7 +65,7 @@ class RowFormController extends FormController {
     }
 
     onModelUpdate = e => {
-        console.log('RowFormController.onModelUpdate', this.model.getFullName());
+        console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
         this.refill();
         this.invalidate();
         this.calcState();

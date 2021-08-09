@@ -85,7 +85,7 @@ class PageController extends Controller {
     }
 
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate:', this.model.getFullName());
+        console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
         this.rerender();
     }
 
