@@ -126,7 +126,6 @@ class ApplicationController extends Controller {
             this.closePage(this.activePage);
         }
         this.activePage = pc
-        this.rerender();
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage && this.activePage.model.getName() === pageName && this.activePage.model.getKey() === key) {
