@@ -60,6 +60,7 @@ class ApplicationController extends Controller {
         const key        = options.key    || null;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
+        //                 options.pageOptions
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -81,6 +82,7 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
+            ...(options.pageOptions ? options.pageOptions : {}),
             id    : `p${this.getNextPageId()}`,
             modal : isModal,
             params: {
@@ -88,9 +90,6 @@ class ApplicationController extends Controller {
                 ...(key ? DataSource.keyToParams(key) : {}),
             },
         });
-        if (options.onPageCreate) {
-            options.onPageCreate(pageModel);
-        }
         pageModel.init();
 
         // pageController

@@ -7,6 +7,9 @@ class Page extends Model {
         this.dataSources = [];
         this.forms       = [];
         this.params      = {};
+        if (options.onCreate) {
+            options.onCreate(this);
+        }
     }
 
     init() {
