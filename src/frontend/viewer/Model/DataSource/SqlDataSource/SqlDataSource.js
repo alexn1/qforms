@@ -40,6 +40,9 @@ class SqlDataSource extends DataSource {
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
+        const table = this.getAttr('table');
+        if (table === '') throw new Error('no data source table to update');
+
         if (this.news[0]) return this.insert(this.news[0]);
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
@@ -61,14 +64,13 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate({source: this, changes: {[key]: newKey}});
         }
         this.emit('update', {source: this, changes: {[key]: newKey}});
-        if (this.getAttr('table')) {
+        if (table) {
             this.getDatabase().emitResult({
                 update: {
-                    [this.getAttr('table')]: {[key]: newKey}
+                    [table]: {[key]: newKey}
                 }
             }, this);
         }
-        // return newKey;
     }
 
     getTable() {
@@ -223,14 +225,18 @@ class SqlDataSource extends DataSource {
         const [key] = Object.keys(result.insert[table]);
         if (!key) throw new Error('no inserted row key');
         const values = result.insert[table][key];
-        for (const column in values) row[column] = values[column];
+        for (const column in values) {
+            row[column] = values[column];
+        }
         // console.log('key:', key);
         // console.log('row:', row);
 
-        // add new row to rows
+        // clear news & changes
         this.news.splice(this.news.indexOf(row), 1);
         // console.log('this.news:', this.news);
         this.changes.clear();
+
+        // add new row to rows
         this.addRow(row);
 
         // events
