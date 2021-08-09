@@ -1702,12 +1702,12 @@ class TableFormController extends FormController {
         this.rerender();
     }
     onModelUpdate = e => {
-        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e.key);
+        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
         this.invalidate();
         this.rerender();
     }
     onModelDelete = e => {
-        console.log('TableFormController.onModelDelete', this.model.getFullName(), e.key);
+        console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         if (this.state.activeRowKey === e.key) {
             this.state.activeRowKey = null;
         }
@@ -1715,7 +1715,7 @@ class TableFormController extends FormController {
         this.rerender();
     }
     onModelInsert = e => {
-        console.log('TableFormController.onModelInsert', this.model.getFullName(), e.key);
+        console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         this.state.activeRowKey = e.key;
         this.invalidate();
         this.rerender();
