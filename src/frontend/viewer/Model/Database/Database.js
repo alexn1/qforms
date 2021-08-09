@@ -30,7 +30,7 @@ class Database extends Model {
         for (const tableName in result.insert) {
             const table = this.getTable(tableName);
             for (const key in result.insert[tableName]) {
-                table.emit('insert', {source: source, key: key});
+                table.emit('insert', {source: source, key});
             }
         }
     }
@@ -38,11 +38,7 @@ class Database extends Model {
     emitUpdate(result, source = null) {
         if (!result.update) return;
         for (const tableName in result.update) {
-            const table = this.getTable(tableName);
-            for (const key in result.update[tableName]) {
-                const newKey = result.update[tableName][key];
-                table.emit('update', {source: source, changes: {[key]: newKey}});
-            }
+            this.getTable(tableName).emitUpdate(source, result.update[tableName]);
         }
     }
     emitDelete(result, source = null) {

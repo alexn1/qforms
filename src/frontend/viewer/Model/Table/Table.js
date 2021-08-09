@@ -17,5 +17,10 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
+
+    emitUpdate(source, changes) {
+        this.emit('update', {source, changes});
+    }
+
 }
 window.QForms.Table = Table;
