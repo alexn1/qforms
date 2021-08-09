@@ -27,8 +27,8 @@ class Database extends Model {
 
     emitInsert(result, source = null) {
         if (!result.insert) return;
-        for (const tableName in result.insert) {
-            this.getTable(tableName).emitInsert(source, result.insert[tableName]);
+        for (const table in result.insert) {
+            this.getTable(table).emitInsert(source, result.insert[table]);
         }
     }
 
@@ -40,11 +40,8 @@ class Database extends Model {
     }
     emitDelete(result, source = null) {
         if (!result.delete) return;
-        for (const tableName in result.delete) {
-            const table = this.getTable(tableName);
-            for (const key of result.delete[tableName]) {
-                table.emit('delete', {source: source, key});
-            }
+        for (const table in result.delete) {
+            this.getTable(table).emitDelete(source, result.delete[table]);
         }
     }
 }

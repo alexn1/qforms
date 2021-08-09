@@ -242,7 +242,6 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
         }
         this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
-        // this.getDatabase().emitResult(result, this);
         this.getDatabase().emitResult({
             insert: {
                 [table]: Object.keys(result.insert[table])
@@ -255,7 +254,8 @@ class SqlDataSource extends DataSource {
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
-        if (!this.getAttr('table')) {
+        const table = this.getAttr('table');
+        if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const page = this.getPage();
@@ -267,10 +267,15 @@ class SqlDataSource extends DataSource {
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, key});
+            this.parent.onDataSourceDelete({source: this, deletes: result.delete[table]});
         }
-        this.emit('delete', {source: this, key});
-        this.getDatabase().emitResult(result, this);
+        this.emit('delete', {source: this, deletes: result.delete[table]});
+        this.getDatabase().emitResult({
+            'delete': {
+                [table]: result.delete[table]
+            }
+        }, this);
+
         return result;
     }
 

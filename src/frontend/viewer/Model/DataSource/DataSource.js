@@ -271,7 +271,6 @@ class DataSource extends Model {
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
-        // return {source: this, key};
     }
 
     async update() {

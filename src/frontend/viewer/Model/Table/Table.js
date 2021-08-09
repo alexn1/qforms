@@ -23,6 +23,9 @@ class Table extends Model {
     emitUpdate(source, updates) {
         this.emit('update', {source, updates});
     }
+    emitDelete(source, deletes) {
+        this.emit('delete', {source, deletes});
+    }
 
 }
 window.QForms.Table = Table;

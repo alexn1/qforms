@@ -150,17 +150,19 @@ class TableFormController extends FormController {
     }
     onModelDelete = e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
-        if (this.state.activeRowKey === e.key) {
-            this.state.activeRowKey = null;
+        for (const key of e.deletes) {
+            if (this.state.activeRowKey === key) {
+                this.state.activeRowKey = null;
+            }
         }
         this.invalidate();
         this.rerender();
     }
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
-        const [key] = e.inserts;
-        if (!key) throw new Error('no insert key');
-        this.state.activeRowKey = key;
+        for (const key of e.inserts) {
+            this.state.activeRowKey = key;
+        }
         this.invalidate();
         this.rerender();
     }

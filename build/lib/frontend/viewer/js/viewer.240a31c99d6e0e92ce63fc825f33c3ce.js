@@ -1709,17 +1709,19 @@ class TableFormController extends FormController {
     }
     onModelDelete = e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
-        if (this.state.activeRowKey === e.key) {
-            this.state.activeRowKey = null;
+        for (const key of e.deletes) {
+            if (this.state.activeRowKey === key) {
+                this.state.activeRowKey = null;
+            }
         }
         this.invalidate();
         this.rerender();
     }
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
-        const [key] = e.inserts;
-        if (!key) throw new Error('no insert key');
-        this.state.activeRowKey = key;
+        for (const key of e.inserts) {
+            this.state.activeRowKey = key;
+        }
         this.invalidate();
         this.rerender();
     }
@@ -2392,7 +2394,6 @@ class DataSource extends Model {
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
         // console.log('this.data.rows:', this.data.rows);
-        // return {source: this, key};
     }
 
     async update() {
@@ -2677,7 +2678,6 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
         }
         this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
-        // this.getDatabase().emitResult(result, this);
         this.getDatabase().emitResult({
             insert: {
                 [table]: Object.keys(result.insert[table])
@@ -2690,7 +2690,8 @@ class SqlDataSource extends DataSource {
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
-        if (!this.getAttr('table')) {
+        const table = this.getAttr('table');
+        if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const page = this.getPage();
@@ -2702,10 +2703,15 @@ class SqlDataSource extends DataSource {
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, key});
+            this.parent.onDataSourceDelete({source: this, deletes: result.delete[table]});
         }
-        this.emit('delete', {source: this, key});
-        this.getDatabase().emitResult(result, this);
+        this.emit('delete', {source: this, deletes: result.delete[table]});
+        this.getDatabase().emitResult({
+            'delete': {
+                [table]: result.delete[table]
+            }
+        }, this);
+
         return result;
     }
 
@@ -2773,8 +2779,8 @@ class Database extends Model {
 
     emitInsert(result, source = null) {
         if (!result.insert) return;
-        for (const tableName in result.insert) {
-            this.getTable(tableName).emitInsert(source, result.insert[tableName]);
+        for (const table in result.insert) {
+            this.getTable(table).emitInsert(source, result.insert[table]);
         }
     }
 
@@ -2786,11 +2792,8 @@ class Database extends Model {
     }
     emitDelete(result, source = null) {
         if (!result.delete) return;
-        for (const tableName in result.delete) {
-            const table = this.getTable(tableName);
-            for (const key of result.delete[tableName]) {
-                table.emit('delete', {source: source, key});
-            }
+        for (const table in result.delete) {
+            this.getTable(table).emitDelete(source, result.delete[table]);
         }
     }
 }
@@ -3443,6 +3446,9 @@ class Table extends Model {
     }
     emitUpdate(source, updates) {
         this.emit('update', {source, updates});
+    }
+    emitDelete(source, deletes) {
+        this.emit('delete', {source, deletes});
     }
 
 }
