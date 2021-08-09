@@ -124,8 +124,7 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.openPage', options);
         const name       = options.name;
         const params     = options.params || {};
-        const key        = options.key || null;
-        // const parentPage = options.parentPage;
+        const key        = options.key    || null;
         const isModal    = options.modal   !== undefined ? options.modal   : true;
         const isNewMode  = options.newMode !== undefined ? options.newMode : false;
 
@@ -137,15 +136,11 @@ class ApplicationController extends Controller {
             return pageController;
         }
 
-        //console.log('open ' + name + ' with key: ' + key);
-
         const {page: pageData} = await this.model.request({
-            action        : 'page',
-            page          : name,
-            newMode       : isNewMode,
-            // parentPageName: parentPage ? parentPage.getName() : null,
-            params        : Helper.encodeObject({
-                // ...(parentPage ? parentPage.getParams() : {}),
+            action : 'page',
+            page   : name,
+            newMode: isNewMode,
+            params : Helper.encodeObject({
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
             })
@@ -153,10 +148,9 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
-            id            : `p${this.getNextPageId()}`,
-            modal         : isModal,
-            // parentPage    : parentPage,
-            params        : {
+            id    : `p${this.getNextPageId()}`,
+            modal : isModal,
+            params: {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
             },
@@ -166,9 +160,12 @@ class ApplicationController extends Controller {
         // pageController
         const pc = PageController.create(pageModel, this);
         pc.init();
+        // console.log('pc:', pc);
+
+        // show
         isModal ? this.modalPages.push(pc) : this.onPageCreate(pc);
         await this.rerender();
-        // console.log('pc:', pc);
+
         return pc;
     }
     getNextPageId() {
