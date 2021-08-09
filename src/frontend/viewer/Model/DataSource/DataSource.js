@@ -176,7 +176,7 @@ class DataSource extends Model {
         return this.parent.getApp();
     }
 
-    getNamespace() {
+    /*getNamespace() {
         if (this.parent instanceof Form) {
             return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
         }
@@ -184,7 +184,7 @@ class DataSource extends Model {
             return this.parent.getName() + '.' + this.getName();
         }
         return this.getName();
-    }
+    }*/
 
     getRow(key) {
         return this.rowsByKey[key];
