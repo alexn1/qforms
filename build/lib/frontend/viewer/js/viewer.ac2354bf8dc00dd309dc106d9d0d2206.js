@@ -2694,14 +2694,13 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
         const table = this.getAttr('table');
         if (!table) {
-            throw new Error(`no table in data source: ${this.getFullName()}`);
+            throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
         }
-        const page = this.getPage();
         const result = await this.getApp().request({
-            action        : '_delete',
-            page          : this.getForm().getPage().getName(),
-            form          : this.getForm().getName(),
-            params        : Helper.encodeObject({key}),
+            action: '_delete',
+            page  : this.getForm().getPage().getName(),
+            form  : this.getForm().getName(),
+            params: Helper.encodeObject({key}),
         });
         await this.refill();
         if (this.parent.onDataSourceDelete) {
