@@ -8,8 +8,9 @@ class DataSourceEditor extends Editor {
         return {
             '@class'     : 'DataSource',
             '@attributes': {
-                name : params.name,
-                table: params.table ? params.table: '',
+                name    : params.name,
+                database: params.database ? params.database : 'default',
+                table   : params.table    ? params.table    :        '',
             },
             keyColumns: [],
         };
