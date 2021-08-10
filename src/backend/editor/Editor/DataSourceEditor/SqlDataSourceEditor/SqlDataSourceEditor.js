@@ -13,7 +13,6 @@ class SqlDataSourceEditor extends DataSourceEditor {
                 multipleQuery       : params.multipleQuery ? params.multipleQuery :        '',
                 countQuery          : params.countQuery    ? params.countQuery    :        '',
                 limit               : params.limit         ? params.limit         :        '',
-                // insertNewKey        :'false'
             },
             keyColumns: [],
         };

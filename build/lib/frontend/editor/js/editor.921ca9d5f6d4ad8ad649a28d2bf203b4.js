@@ -2099,8 +2099,6 @@ class DataSourceController extends DocumentController {
             }
         }
 
-        // options
-        // propList.options['insertNewKey'] = ['true', 'false'];
         return propList;
     }
     getDocumentViewClass() {
