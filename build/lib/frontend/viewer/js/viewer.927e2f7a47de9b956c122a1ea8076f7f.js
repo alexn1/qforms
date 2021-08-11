@@ -3436,10 +3436,12 @@ class Table extends Model {
         for (const data of this.data.columns) {
             const column = new Column(data, this);
             column.init();
-            this.columns.push(column);
+            this.addColumn(column);
         }
     }
-
+    addColumn(column) {
+        this.columns.push(column);
+    }
     getColumn(name) {
         const column = this.columns.find(column => column.getName() === name);
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
