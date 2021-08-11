@@ -165,6 +165,17 @@ class DataSource extends Model {
         return this.getKeyFromValues(newKeyValues);
     }
 
+    fillAttributes(response: any): void {
+        response.class    = this.getClassName();
+        response.name     = this.getAttr('name');
+        if (this.isAttr('database')) {
+            response.database = this.getAttr('database');
+        }
+        if (this.isAttr('table')) {
+            response.table = this.getAttr('table');
+        }
+    }
+
     async fill(context: Context) {
         //console.log('DataSource.fill', this.getFullName());
         let response = await super.fill(context);
