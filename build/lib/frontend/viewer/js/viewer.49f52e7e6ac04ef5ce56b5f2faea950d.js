@@ -2289,13 +2289,6 @@ class DataSource extends Model {
         return JSON.stringify(arr);
     }
 
-    // copy new values to data source row
-    copyNewValues(oldRow, newRow) {
-        for (const columnName in newRow) {
-            oldRow[columnName] = newRow[columnName];
-        }
-    }
-
     removeRow(key) {
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
@@ -2403,17 +2396,19 @@ class DataSource extends Model {
         return this.news.length > 0;
     }
 
+    copyNewValues(oldRow, newRow) {
+        for (const columnName in oldRow) {
+            oldRow[columnName] = newRow[columnName];
+        }
+    }
+
     updateRow(key, newValues) {
         console.log('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const newKey = this.getRowKey(newValues);
-
-        // copy new values to original row object
-        for (const column in row) {
-            row[column] = newValues[column];
-        }
+        this.copyNewValues(row, newValues);// copy new values to original row object
         if (key !== newKey) {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
@@ -2453,7 +2448,7 @@ class DataSource extends Model {
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         const changes = this.getChangesByKey();
-        console.log('changes:', changes);
+        // console.log('changes:', changes);
 
         // apply changes to rows
         const updates = {};
