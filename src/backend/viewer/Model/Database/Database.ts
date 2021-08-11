@@ -21,6 +21,10 @@ class Database extends Model {
         throw new Error('Database.deinit not implemented');
     }
 
+    fillAttributes(response: any): void {
+        response.name = this.getAttr('name');
+    }
+
     async getConnection(context) {
         throw new Error('Database.getConnection not implemented');
     }

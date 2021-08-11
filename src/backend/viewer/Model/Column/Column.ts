@@ -12,7 +12,7 @@ class Column extends Model {
         return new Column(data, parent);
     }
 
-    fillAttributes(response) {
+    fillAttributes(response: any): void {
         response.name    = this.getAttr('name');
         response.caption = this.getAttr('caption');
         response.type    = this.getAttr('type');

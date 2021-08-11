@@ -5,15 +5,15 @@ import Application from '../Application/Application';
 class Table extends Model {
     columns: Column[];
 
-    static async create(data, parent) {
-        return new Table(data, parent);
-    }
-
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
         this.columns = [];
+    }
+
+    static async create(data, parent) {
+        return new Table(data, parent);
     }
 
     async init(context) {
@@ -36,6 +36,10 @@ class Table extends Model {
         const column = this.columns.find(column => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;
+    }
+
+    fillAttributes(response: any): void {
+        response.name = this.getAttr('name');
     }
 }
 

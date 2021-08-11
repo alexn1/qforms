@@ -16,9 +16,7 @@ class Model extends BaseModel {
 
     async fill(context: Context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
-        const response = {
-            class: this.getClassName(),
-        };
+        const response = {};
         this.fillAttributes(response);
         for (const colName of this.fillCollections) {
             await this.fillCollection(response, colName, context);
@@ -26,7 +24,8 @@ class Model extends BaseModel {
         return response;
     }
 
-    fillAttributes(response) {
+    fillAttributes(response: any): void {
+        response.class = this.getClassName();
         for (const name in this.attributes()) {
             response[name] = this.getAttr(name);
         }
