@@ -9,8 +9,12 @@ class Database extends Model {
         for (const data of this.data.tables) {
             const table = new Table(data, this);
             table.init();
-            this.tables.push(table);
+            this.addTable(table);
         }
+    }
+
+    addTable(table) {
+        this.tables.push(table);
     }
 
     getTable(name) {

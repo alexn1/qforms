@@ -2760,8 +2760,12 @@ class Database extends Model {
         for (const data of this.data.tables) {
             const table = new Table(data, this);
             table.init();
-            this.tables.push(table);
+            this.addTable(table);
         }
+    }
+
+    addTable(table) {
+        this.tables.push(table);
     }
 
     getTable(name) {
@@ -3423,8 +3427,8 @@ class Page extends Model {
 window.QForms.Page = Page;
 
 class Table extends Model {
-    constructor(...args) {
-        super(...args);
+    constructor(data, parent) {
+        super(data, parent);
         this.columns = [];
     }
     init() {

@@ -1,6 +1,6 @@
 class Table extends Model {
-    constructor(...args) {
-        super(...args);
+    constructor(data, parent) {
+        super(data, parent);
         this.columns = [];
     }
     init() {
