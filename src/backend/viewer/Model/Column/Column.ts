@@ -12,6 +12,12 @@ class Column extends Model {
         return new Column(data, parent);
     }
 
+    fillAttributes(response) {
+        response.name    = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+        response.type    = this.getAttr('type');
+    }
+
     isKey(): boolean {
         return this.getAttr('key') === 'true';
     }

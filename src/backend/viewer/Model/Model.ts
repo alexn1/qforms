@@ -19,13 +19,17 @@ class Model extends BaseModel {
         const response = {
             class: this.getClassName(),
         };
-        for (const name in this.attributes()) {
-            response[name] = this.getAttr(name);
-        }
+        this.fillAttributes(response);
         for (const colName of this.fillCollections) {
             await this.fillCollection(response, colName, context);
         }
         return response;
+    }
+
+    fillAttributes(response) {
+        for (const name in this.attributes()) {
+            response[name] = this.getAttr(name);
+        }
     }
 
     async fillCollection(response: any, colName: string, context: Context) {
