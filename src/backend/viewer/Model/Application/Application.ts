@@ -100,6 +100,14 @@ class Application extends Model {
         return null;
     }
 
+    fillAttributes(response: any): void {
+        response.class = this.getClassName();
+        response.name = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+        response.lang = this.getAttr('lang');
+        response.theme = this.getAttr('theme');
+    }
+
     async fill(context: Context) {
         // console.log('Application.fill');
 
@@ -116,10 +124,10 @@ class Application extends Model {
         await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);
 
-        delete response.formatVersion;
+        /*delete response.formatVersion;
         delete response.authentication;
         delete response.user;
-        delete response.password;
+        delete response.password;*/
 
         // env
         response.env = this.hostApp.nodeEnv;

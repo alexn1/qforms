@@ -30,6 +30,11 @@ class Page extends Model {
         return path.join(this.parent.getDirPath(), 'pages', this.getName());
     }
 
+    fillAttributes(response: any): void {
+        response.name = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+    }
+
     async fill(context): Promise<any> {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
@@ -38,8 +43,7 @@ class Page extends Model {
         await this.fillCollection(response, 'forms', context);
 
         delete response.formatVersion;
-        delete response.width;
-        delete response.height;
+
         response.newMode = !!context.newMode;
         return response;
     }
