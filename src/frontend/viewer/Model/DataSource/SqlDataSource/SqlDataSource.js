@@ -27,13 +27,6 @@ class SqlDataSource extends DataSource {
         super.deinit();
     }
 
-    getType(columnName) {
-        // console.log('SqlDataSource.getType', columnName);
-        const type = this.getTable().getColumn(columnName).getType();
-        // console.log('type:', type);
-        return type;
-    }
-
     /*getDbType(columnName) {
         return this.getTable().getColumn(columnName).getDbType();
     }*/
@@ -69,16 +62,6 @@ class SqlDataSource extends DataSource {
                 [table]: {[key]: newKey}
             }
         }, this);
-    }
-
-    getTable() {
-        if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
-        return this.getDatabase().getTable(this.getAttr('table'));
-    }
-
-    getDatabase() {
-        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
-        return this.getApp().getDatabase(this.getAttr('database'));
     }
 
     onTableUpdate = async e => {

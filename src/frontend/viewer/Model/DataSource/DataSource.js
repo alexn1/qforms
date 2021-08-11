@@ -273,6 +273,23 @@ class DataSource extends Model {
         // console.log('this.data.rows:', this.data.rows);
     }
 
+    getTable() {
+        if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
+        return this.getDatabase().getTable(this.getAttr('table'));
+    }
+
+    getDatabase() {
+        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
+        return this.getApp().getDatabase(this.getAttr('database'));
+    }
+
+    getType(columnName) {
+        // console.log('SqlDataSource.getType', columnName);
+        const type = this.getTable().getColumn(columnName).getType();
+        // console.log('type:', type);
+        return type;
+    }
+
     async update() {
         console.log('DataSource.update', this.getFullName());
         if (this.news[0]) return this.insert(this.news[0]);
