@@ -941,7 +941,7 @@ class Grid extends ReactComponent {
   }
 
   render() {
-    console.log('Grid.render', this.props.name);
+    // console.log('Grid.render', this.props.name);
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
     }, /*#__PURE__*/React.createElement("div", {

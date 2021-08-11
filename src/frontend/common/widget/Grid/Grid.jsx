@@ -154,7 +154,7 @@ class Grid extends ReactComponent {
         return true;
     }
     render() {
-        console.log('Grid.render', this.props.name);
+        // console.log('Grid.render', this.props.name);
         return (
             <div className={this.getClassName()}>
                 <div className="head" ref={this.head}><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
