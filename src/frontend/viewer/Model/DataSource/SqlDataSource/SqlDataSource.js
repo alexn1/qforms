@@ -8,7 +8,7 @@ class SqlDataSource extends DataSource {
 
     init() {
         super.init();
-        if (this.getAttr('table') !== '') {
+        if (this.getAttr('table')) {
             const table = this.getTable();
             table.on('update', this.onTableUpdate);
             table.on('insert', this.onTableInsert);
@@ -18,11 +18,11 @@ class SqlDataSource extends DataSource {
 
     deinit() {
         // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
-        if (this.getAttr('table') !== '') {
+        if (this.getAttr('table')) {
             const table = this.getTable();
-            table.removeListener('update', this.onTableUpdate);
-            table.removeListener('insert', this.onTableInsert);
-            table.removeListener('delete', this.onTableDelete);
+            table.off('update', this.onTableUpdate);
+            table.off('insert', this.onTableInsert);
+            table.off('delete', this.onTableDelete);
         }
         super.deinit();
     }
@@ -249,8 +249,6 @@ class SqlDataSource extends DataSource {
         }, this);
         return key;
     }
-
-
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
