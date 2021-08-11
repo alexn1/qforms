@@ -46,6 +46,7 @@ class Application extends Model {
     }
 
     getDatabase(name) {
+        // console.log('Application.getDatabase', name);
         const database = this.databases.find(database => database.getName() === name);
         if (!database) throw new Error(`no database: ${name}`);
         return database;

@@ -254,7 +254,7 @@ class DataSource extends Model {
     }
 
     updateRow(key, newValues) {
-        console.log('SqlDataSource.updateRow', this.getFullName(), key, newValues);
+        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
@@ -279,12 +279,13 @@ class DataSource extends Model {
     }
 
     getDatabase() {
+        // console.log('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
         if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
     getType(columnName) {
-        // console.log('SqlDataSource.getType', columnName);
+        // console.log('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
