@@ -41,9 +41,6 @@ class Page extends Model {
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-
-        delete response.formatVersion;
-
         response.newMode = !!context.newMode;
         return response;
     }

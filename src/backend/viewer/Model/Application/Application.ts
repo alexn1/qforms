@@ -124,11 +124,6 @@ class Application extends Model {
         await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);
 
-        /*delete response.formatVersion;
-        delete response.authentication;
-        delete response.user;
-        delete response.password;*/
-
         // env
         response.env = this.hostApp.nodeEnv;
 

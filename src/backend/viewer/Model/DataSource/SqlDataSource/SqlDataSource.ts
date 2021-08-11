@@ -202,13 +202,16 @@ class SqlDataSource extends DataSource {
         return result;
     }
 
+    fillAttributes(response: any): void {
+        response.class    = this.getClassName();
+        response.name     = this.getAttr('name');
+        response.database = this.getAttr('database');
+        response.table    = this.getAttr('table');
+    }
+
     async fill(context: Context) {
         //console.log('SqlDataSource.fill', this.getFullName());
         let response = await super.fill(context);
-        delete response.singleQuery;
-        delete response.multipleQuery;
-        delete response.countQuery;
-        delete response.limit;
 
         // if form data source named default then check mode
         if (this.isOnForm() && this.getName() === 'default' && this.parent.isNewMode(context)) {
