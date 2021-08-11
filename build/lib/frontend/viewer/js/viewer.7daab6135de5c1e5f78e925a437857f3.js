@@ -2888,11 +2888,12 @@ class Field extends Model {
     }
 
     getType() {
-        const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
+        if (this.getAttr('column')) {
             return this.getDefaultDataSource().getType(this.getAttr('column'));
         }
-        if (this.getAttr('type')) return this.getAttr('type');
+        if (this.getAttr('type')) {
+            return this.getAttr('type');
+        }
         throw new Error(`field type empty`);
     }
 
