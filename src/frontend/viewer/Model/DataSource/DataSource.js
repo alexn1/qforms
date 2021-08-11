@@ -11,6 +11,22 @@ class DataSource extends Model {
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
         this.setRows(this.data.rows);
+        if (this.getAttr('table')) {
+            const table = this.getTable();
+            table.on('insert', this.onTableInsert);
+            table.on('update', this.onTableUpdate);
+            table.on('delete', this.onTableDelete);
+        }
+    }
+
+    deinit() {
+        if (this.getAttr('table')) {
+            const table = this.getTable();
+            table.off('insert', this.onTableInsert);
+            table.off('update', this.onTableUpdate);
+            table.off('delete', this.onTableDelete);
+        }
+        super.deinit();
     }
 
     setRows(rows) {
@@ -284,6 +300,12 @@ class DataSource extends Model {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
+    getTableName() {
+        if (!this.getAttr('database')) throw new Error('no database');
+        if (!this.getAttr('table')) throw new Error('no table');
+        return `${this.getAttr('database')}.${this.getAttr('table')}`;
+    }
+
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
@@ -326,6 +348,27 @@ class DataSource extends Model {
                 }
             }, this);
         }
+    }
+
+    onTableUpdate = async e => {
+        console.log('DataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+        if (e.source === this) {
+            // console.error('onTableUpdate stop self update', this.getFullName());
+            return;
+        }
+        if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
+        for (const key in e.updates) {
+            if (this.rowsByKey[key]) {
+                const newKey = e.updates[key];
+                const sourceRow = e.source.getRowByKey(newKey);
+                this.updateRow(key, sourceRow);
+            }
+        }
+        if (this.parent.onDataSourceUpdate) {
+            this.parent.onDataSourceUpdate(e);
+        }
+        this.emit('update', e);
     }
 
 }

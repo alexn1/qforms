@@ -6,26 +6,14 @@ class SqlDataSource extends DataSource {
         this.lastFrame = 1;
     }
 
-    init() {
+    /*init() {
         super.init();
-        if (this.getAttr('table')) {
-            const table = this.getTable();
-            table.on('update', this.onTableUpdate);
-            table.on('insert', this.onTableInsert);
-            table.on('delete', this.onTableDelete);
-        }
-    }
+    }*/
 
-    deinit() {
+    /*deinit() {
         // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
-        if (this.getAttr('table')) {
-            const table = this.getTable();
-            table.off('update', this.onTableUpdate);
-            table.off('insert', this.onTableInsert);
-            table.off('delete', this.onTableDelete);
-        }
         super.deinit();
-    }
+    }*/
 
     /*getDbType(columnName) {
         return this.getTable().getColumn(columnName).getDbType();
@@ -72,7 +60,7 @@ class SqlDataSource extends DataSource {
             return;
         }
         // console.log('updates:', e.updates);
-        if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no changes`);
+        if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
             // check if updated row exists in this ds
             if (this.rowsByKey[key]) {
@@ -257,12 +245,6 @@ class SqlDataSource extends DataSource {
         }, this);
 
         return result;
-    }
-
-    getTableName() {
-        if (!this.getAttr('database')) throw new Error('no database');
-        if (!this.getAttr('table')) throw new Error('no table');
-        return `${this.getAttr('database')}.${this.getAttr('table')}`;
     }
 
     getFramesCount() {
