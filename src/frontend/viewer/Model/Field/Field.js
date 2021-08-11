@@ -88,13 +88,13 @@ class Field extends Model {
     }
 
     getType() {
-        if (this.getAttr('column')) {
-            return this.getDefaultDataSource().getType(this.getAttr('column'));
-        }
         if (this.getAttr('type')) {
             return this.getAttr('type');
         }
-        throw new Error(`field type empty`);
+        if (this.getAttr('column')) {
+            return this.getDefaultDataSource().getType(this.getAttr('column'));
+        }
+        throw new Error(`fields type and column empty`);
     }
 
     /*getDbType() {
