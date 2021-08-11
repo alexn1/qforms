@@ -2046,7 +2046,7 @@ class Application extends Model {
         for (const data of this.data.databases) {
             const database = new Database(data, this);
             database.init();
-            this.databases.push(database);
+            this.addDatabase(database);
         }
 
         // data sources
@@ -2057,6 +2057,10 @@ class Application extends Model {
         this.deinitDataSources();
         // TODO: add deinit on opened pages
         super.deinit();
+    }
+
+    addDatabase(database) {
+        this.databases.push(database);
     }
 
     async logout() {
