@@ -25,10 +25,11 @@ class Model extends BaseModel {
     }
 
     fillAttributes(response: any): void {
-        response.class = this.getClassName();
+        throw new Error(`${this.constructor.name}.fillAttributes not implemented`);
+        /*response.class = this.getClassName();
         for (const name in this.attributes()) {
             response[name] = this.getAttr(name);
-        }
+        }*/
     }
 
     async fillCollection(response: any, colName: string, context: Context) {

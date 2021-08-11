@@ -21,6 +21,11 @@ class RowForm extends Form {
         return super.isNewMode(context);
     }
 
+    fillAttributes(response: any): void {
+        super.fillAttributes(response);
+        response.newMode  = this.getAttr('newMode');
+    }
+
 }
 
 export = RowForm;

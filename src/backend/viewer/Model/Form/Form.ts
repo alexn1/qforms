@@ -35,6 +35,13 @@ class Form extends Model {
         return path.join(this.parent.getDirPath(), 'forms', this.getName());
     }
 
+    fillAttributes(response: any): void {
+        response.class            = this.getClassName();
+        response.name             = this.getAttr('name');
+        response.caption          = this.getAttr('caption');
+        response.visible          = this.getAttr('visible');
+    }
+
     async fill(context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
         if (this.getDataSource('default')) {

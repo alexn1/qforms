@@ -11,6 +11,16 @@ class TableForm extends Form {
     //     return super.fill(context);
     // }
 
+    fillAttributes(response: any): void {
+        super.fillAttributes(response);
+        response.editMethod  = this.getAttr('editMethod');
+        response.itemEditPage  = this.getAttr('itemEditPage');
+        response.itemCreatePage  = this.getAttr('itemCreatePage');
+        response.newRowMode  = this.getAttr('newRowMode');
+        response.deleteRowMode  = this.getAttr('deleteRowMode');
+        response.refreshButton  = this.getAttr('refreshButton');
+    }
+
 }
 
 export = TableForm;
