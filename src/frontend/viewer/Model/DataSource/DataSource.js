@@ -383,6 +383,27 @@ class DataSource extends Model {
 
     onTableInsert = async e => {
         console.log('DataSource.onTableInsert', this.getFullName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+        if (e.source === this) {
+            // console.error('onTableInsert stop self insert', this.getFullName());
+            return;
+        }
+        if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
+
+        for (const key of e.inserts) {
+            if (this.rowsByKey[key]) throw new Error('row already in this data source');
+            const newValues = e.source.getRowByKey(key);
+            const newRow = {};
+            DataSource.copyNewValues(newRow, newValues);
+            console.log('newRow:', newRow);
+            this.addRow(newRow);
+        }
+
+        // events
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert(e);
+        }
+        this.emit('insert', e);
     }
 
     onTableUpdate = async e => {
@@ -400,6 +421,8 @@ class DataSource extends Model {
                 this.updateRow(key, sourceRow);
             }
         }
+
+        // events
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(e);
         }
