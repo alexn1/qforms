@@ -395,7 +395,7 @@ class DataSource extends Model {
             const newValues = e.source.getRowByKey(key);
             const newRow = {};
             DataSource.copyNewValues(newRow, newValues);
-            console.log('newRow:', newRow);
+            // console.log('newRow:', newRow);
             this.addRow(newRow);
         }
 
