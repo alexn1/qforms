@@ -2428,11 +2428,11 @@ class DataSource extends Model {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    getTableName() {
+    /*getTableName() {
         if (!this.getAttr('database')) throw new Error('no database');
         if (!this.getAttr('table')) throw new Error('no table');
         return `${this.getAttr('database')}.${this.getAttr('table')}`;
-    }
+    }*/
 
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
@@ -2444,14 +2444,35 @@ class DataSource extends Model {
     async insert() {
         console.log('DataSource.insert', this.news);
         if (!this.news.length) throw new Error('no new rows to insert');
+        const inserts = [];
         for (const row of this.news) {
             const newValues = this.getRowWithChanges(row);
-            console.log('newValues:', newValues);
+            // console.log('newValues:', newValues);
             DataSource.copyNewValues(row, newValues);
-            console.log('row:', row);
+            // console.log('row:', row);
             const key = this.getRowKey(row);
             if (!key) throw new Error('invalid insert row, no key');
-            console.log('key:', key);
+            // console.log('key:', key);
+            inserts.push(key);
+        }
+        this.changes.clear();
+        for (const row of this.news) {
+            this.addRow(row);
+        }
+        this.news = [];
+        console.log('rows:', this.getRows());
+        console.log('inserts:', inserts);
+
+        // events
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert({source: this, inserts});
+        }
+        this.emit('insert', {source: this, inserts});
+        const table = this.getAttr('table');
+        if (table) {
+            this.getDatabase().emitResult({
+                insert: {[table]: inserts}
+            }, this);
         }
     }
 
@@ -2494,8 +2515,12 @@ class DataSource extends Model {
         }
     }
 
+    onTableInsert = async e => {
+        console.log('DataSource.onTableInsert', this.getFullName(), e);
+    }
+
     onTableUpdate = async e => {
-        console.log('DataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
+        console.log('DataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
@@ -2543,8 +2568,9 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.update', this.getFullName());
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to update');
-
-        if (this.news[0]) return this.insert(this.news[0]);
+        if (this.news[0]) {
+            return await this.insert(this.news[0]);
+        }
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         // specific to SqlDataSource
@@ -2573,7 +2599,7 @@ class SqlDataSource extends DataSource {
     }
 
     onTableUpdate = async e => {
-        console.log('SqlDataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
+        console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
@@ -2612,7 +2638,7 @@ class SqlDataSource extends DataSource {
     }
 
     onTableDelete = async (e) => {
-        console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getTableName(), e);
+        console.log('SqlDataSource.onTableDelete', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
             // console.error('onTableDelete stop self delete', this.getFullName());
@@ -2699,7 +2725,7 @@ class SqlDataSource extends DataSource {
 
 
     async insert(row) {
-        console.log('SqlDataSource.insert', this.getTableName(), row);
+        console.log('SqlDataSource.insert', row);
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to insert');
 
@@ -2729,15 +2755,15 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
+        const inserts = Object.keys(result.insert[table]);
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
+            this.parent.onDataSourceInsert({source: this, inserts});
         }
-        this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
+        this.emit('insert', {source: this, inserts});
         this.getDatabase().emitResult({
-            insert: {
-                [table]: Object.keys(result.insert[table])
-            }
+            insert: {[table]: inserts}
         }, this);
+
         return key;
     }
 

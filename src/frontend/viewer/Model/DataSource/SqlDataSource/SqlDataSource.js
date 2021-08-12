@@ -23,8 +23,9 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.update', this.getFullName());
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to update');
-
-        if (this.news[0]) return this.insert(this.news[0]);
+        if (this.news[0]) {
+            return await this.insert(this.news[0]);
+        }
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         // specific to SqlDataSource
@@ -53,7 +54,7 @@ class SqlDataSource extends DataSource {
     }
 
     onTableUpdate = async e => {
-        console.log('SqlDataSource.onTableUpdate', this.getFullName(), this.getTableName(), e);
+        console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
@@ -92,7 +93,7 @@ class SqlDataSource extends DataSource {
     }
 
     onTableDelete = async (e) => {
-        console.log('SqlDataSource.onTableDelete', this.getFullName(), this.getTableName(), e);
+        console.log('SqlDataSource.onTableDelete', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
             // console.error('onTableDelete stop self delete', this.getFullName());
@@ -179,7 +180,7 @@ class SqlDataSource extends DataSource {
 
 
     async insert(row) {
-        console.log('SqlDataSource.insert', this.getTableName(), row);
+        console.log('SqlDataSource.insert', row);
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to insert');
 
@@ -209,15 +210,15 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
+        const inserts = Object.keys(result.insert[table]);
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, inserts: Object.keys(result.insert[table])});
+            this.parent.onDataSourceInsert({source: this, inserts});
         }
-        this.emit('insert', {source: this, inserts: Object.keys(result.insert[table])});
+        this.emit('insert', {source: this, inserts});
         this.getDatabase().emitResult({
-            insert: {
-                [table]: Object.keys(result.insert[table])
-            }
+            insert: {[table]: inserts}
         }, this);
+
         return key;
     }
 
