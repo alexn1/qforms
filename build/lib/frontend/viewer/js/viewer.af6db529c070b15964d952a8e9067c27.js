@@ -2274,15 +2274,14 @@ class DataSource extends Model {
     getRowKey(row) {
         // console.log('DataSource.getRowKey', row);
         const arr = [];
-        for (let i = 0; i < this.data.keyColumns.length; i++) {
-            const column = this.data.keyColumns[i];
+        for (const column of this.data.keyColumns) {
             if (row[column] === undefined) return null;
             if (row[column] === null) throw new Error('wrong value null for data source value');
             try {
                 const value = JSON.parse(row[column]);
                 arr.push(value);
             } catch (err) {
-                console.log('cannot parse: ', row[column]);
+                console.log('getRowKey: cannot parse: ', row[column]);
                 throw err;
             }
         }
@@ -2396,9 +2395,9 @@ class DataSource extends Model {
         return this.news.length > 0;
     }
 
-    copyNewValues(oldRow, newRow) {
-        for (const columnName in oldRow) {
-            oldRow[columnName] = newRow[columnName];
+    static copyNewValues(row, newValues) {
+        for (const name in newValues) {
+            row[name] = newValues[name];
         }
     }
 
@@ -2408,7 +2407,7 @@ class DataSource extends Model {
         const row = this.rowsByKey[key];
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const newKey = this.getRowKey(newValues);
-        this.copyNewValues(row, newValues);// copy new values to original row object
+        DataSource.copyNewValues(row, newValues);// copy new values to original row object
         if (key !== newKey) {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
@@ -2442,11 +2441,27 @@ class DataSource extends Model {
         return type;
     }
 
+    async insert() {
+        console.log('DataSource.insert', this.news);
+        if (!this.news.length) throw new Error('no new rows to insert');
+        for (const row of this.news) {
+            const newValues = this.getRowWithChanges(row);
+            console.log('newValues:', newValues);
+            DataSource.copyNewValues(row, newValues);
+            console.log('row:', row);
+            const key = this.getRowKey(row);
+            if (!key) throw new Error('invalid insert row, no key');
+            console.log('key:', key);
+        }
+    }
+
     async update() {
         console.log('DataSource.update', this.getFullName());
-        if (this.news[0]) return this.insert(this.news[0]);
+        if (this.news.length) {
+            await this.insert();
+            return;
+        }
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
-
         const changes = this.getChangesByKey();
         // console.log('changes:', changes);
 
