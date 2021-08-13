@@ -73,17 +73,6 @@ class TableFormView extends FormView {
         // console.log('TableFormView.renderGridCellView');
         const ctrl = this.props.ctrl.fields[column.name];
         // console.log(column.name, ctrl.constructor.name);
-        /*if ([
-            'TextBoxField',
-            'DatePickerField',
-            'ComboBoxField',
-            'CheckBoxField',
-            'LinkField',
-            'TimeField',
-        ].includes(ctrl.model.getClassName())) {
-            return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
-        }
-        return null;*/
         return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
     }
     shouldComponentUpdate(nextProps, nextState) {

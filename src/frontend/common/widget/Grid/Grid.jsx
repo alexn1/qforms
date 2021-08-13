@@ -5,7 +5,8 @@ class Grid extends ReactComponent {
             column     : null,
             row        : null,
             columnWidth: {},
-            resized    : Date.now()
+            resized    : Date.now(),
+            key        : null,
         };
         this.columns = {};
         this.head = React.createRef();
@@ -16,6 +17,9 @@ class Grid extends ReactComponent {
     }
     setActiveRowIndex(i) {
         this.state.row = i;
+        if (this.props.getRowKey) {
+            this.state.key = this.getRowKey(this.props.rows[i]);
+        }
     }
     getActiveRow() {
         const i = this.getActiveRowIndex();
@@ -27,11 +31,8 @@ class Grid extends ReactComponent {
     getActiveColumn() {
         return this.state.column;
     }
-    isRowActive(i) {
+    isRowActive(i, key) {
         return i === this.getActiveRowIndex();
-    }
-    isCellActive(i, j) {
-        return i === this.getActiveRowIndex() && j === this.getActiveColumn();
     }
     onCellMouseDown = async e => {
         // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
@@ -109,18 +110,20 @@ class Grid extends ReactComponent {
         );
     }
     renderRows() {
-        return this.props.rows.map((row, i) =>
-            <GridRow
-                key={this.getRowKey(row)}
+        return this.props.rows.map((row, i) => {
+            const key = this.getRowKey(row);
+            return <GridRow
+                key={key}
+                rowKey={key}
                 grid={this}
                 row={row}
                 i={i}
-                active={this.isRowActive(i)}
+                active={this.isRowActive(i, key)}
                 activeColumn={this.getActiveColumn()}
                 updated={this.props.updated}
                 resized={this.state.resized}
-            />
-        );
+            />;
+        });
     }
     getRowKey(row) {
         return this.props.getRowKey(row);

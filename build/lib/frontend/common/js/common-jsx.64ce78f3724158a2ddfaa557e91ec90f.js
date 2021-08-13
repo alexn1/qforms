@@ -825,7 +825,8 @@ class Grid extends ReactComponent {
       column: null,
       row: null,
       columnWidth: {},
-      resized: Date.now()
+      resized: Date.now(),
+      key: null
     };
     this.columns = {};
     this.head = React.createRef();
@@ -838,6 +839,10 @@ class Grid extends ReactComponent {
 
   setActiveRowIndex(i) {
     this.state.row = i;
+
+    if (this.props.getRowKey) {
+      this.state.key = this.getRowKey(this.props.rows[i]);
+    }
   }
 
   getActiveRow() {
@@ -854,12 +859,8 @@ class Grid extends ReactComponent {
     return this.state.column;
   }
 
-  isRowActive(i) {
+  isRowActive(i, key) {
     return i === this.getActiveRowIndex();
-  }
-
-  isCellActive(i, j) {
-    return i === this.getActiveRowIndex() && j === this.getActiveColumn();
   }
 
   async selectCell(i, j) {
@@ -912,16 +913,20 @@ class Grid extends ReactComponent {
   }
 
   renderRows() {
-    return this.props.rows.map((row, i) => /*#__PURE__*/React.createElement(GridRow, {
-      key: this.getRowKey(row),
-      grid: this,
-      row: row,
-      i: i,
-      active: this.isRowActive(i),
-      activeColumn: this.getActiveColumn(),
-      updated: this.props.updated,
-      resized: this.state.resized
-    }));
+    return this.props.rows.map((row, i) => {
+      const key = this.getRowKey(row);
+      return /*#__PURE__*/React.createElement(GridRow, {
+        key: key,
+        rowKey: key,
+        grid: this,
+        row: row,
+        i: i,
+        active: this.isRowActive(i, key),
+        activeColumn: this.getActiveColumn(),
+        updated: this.props.updated,
+        resized: this.state.resized
+      });
+    });
   }
 
   getRowKey(row) {
@@ -1030,14 +1035,18 @@ class GridRow extends ReactComponent {
     const grid = this.props.grid;
     const row = this.props.row;
     const i = this.props.i;
+    const key = this.props.rowKey;
     return /*#__PURE__*/React.createElement("tr", {
-      className: this.props.active ? 'active' : null
+      className: this.props.active ? 'active' : null,
+      "data-key": key
     }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("td", {
       key: column.name,
       className: this.isCellActive(j) ? 'active' : null,
       style: {
         width: grid.getColumnWidth(j)
       },
+      "data-row": key,
+      "data-col": j,
       "data-rc": `[${i},${j}]`,
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick

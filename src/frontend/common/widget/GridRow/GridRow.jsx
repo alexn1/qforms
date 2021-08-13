@@ -18,14 +18,18 @@ class GridRow extends ReactComponent {
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
+        const key = this.props.rowKey;
         return <tr
             className={this.props.active ? 'active' : null}
+            data-key={key}
         >
             {grid.props.columns.map((column, j) =>
                 <td
                     key={column.name}
                     className={this.isCellActive(j) ? 'active' : null}
                     style={{width: grid.getColumnWidth(j)}}
+                    data-row={key}
+                    data-col={j}
                     data-rc={`[${i},${j}]`}
                     onMouseDown={grid.onCellMouseDown}
                     onDoubleClick={grid.onCellDoubleClick}
