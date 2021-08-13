@@ -9,12 +9,8 @@ class Column  extends Model {
     init() {
         // console.log('Column.init', this.getFullName());
     }
-
     getType() {
         return this.getAttr('type');
     }
-    /*getDbType() {
-        return this.data.dbType;
-    }*/
 }
 window.QForms.Column = Column;

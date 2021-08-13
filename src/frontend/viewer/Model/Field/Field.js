@@ -97,14 +97,6 @@ class Field extends Model {
         throw new Error(`fields type and column empty`);
     }
 
-    /*getDbType() {
-        const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
-            return this.getDefaultDataSource().getDbType(this.getAttr('column'));
-        }
-        return null;
-    }*/
-
     getForm() {
         return this.parent;
     }

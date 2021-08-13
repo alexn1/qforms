@@ -2122,13 +2122,9 @@ class Column  extends Model {
     init() {
         // console.log('Column.init', this.getFullName());
     }
-
     getType() {
         return this.getAttr('type');
     }
-    /*getDbType() {
-        return this.data.dbType;
-    }*/
 }
 window.QForms.Column = Column;
 
@@ -2583,9 +2579,48 @@ class SqlDataSource extends DataSource {
         super.deinit();
     }*/
 
-    /*getDbType(columnName) {
-        return this.getTable().getColumn(columnName).getDbType();
-    }*/
+    async insert(row) {
+        console.log('SqlDataSource.insert', row);
+        const table = this.getAttr('table');
+        if (table === '') throw new Error('no data source table to insert');
+
+        const result = await this.getApp().request({
+            action        : 'insert',
+            page          : this.getForm().getPage().getName(),
+            form          : this.getForm().getName(),
+            params        : this.getRowWithChanges(row),
+        });
+
+        // key & values
+        const [key] = Object.keys(result.insert[table]);
+        if (!key) throw new Error('no inserted row key');
+        const values = result.insert[table][key];
+        for (const column in values) {
+            row[column] = values[column];
+        }
+        // console.log('key:', key);
+        // console.log('row:', row);
+
+        // clear news & changes
+        this.news.splice(this.news.indexOf(row), 1);
+        // console.log('this.news:', this.news);
+        this.changes.clear();
+
+        // add new row to rows
+        this.addRow(row);
+
+        // events
+        const inserts = Object.keys(result.insert[table]);
+        if (this.parent.onDataSourceInsert) {
+            this.parent.onDataSourceInsert({source: this, inserts});
+        }
+        this.emit('insert', {source: this, inserts});
+        this.getDatabase().emitResult({
+            insert: {[table]: inserts}
+        }, this);
+
+        return key;
+    }
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
@@ -2619,6 +2654,34 @@ class SqlDataSource extends DataSource {
                 [table]: {[key]: newKey}
             }
         }, this);
+    }
+
+    async delete(key) {
+        console.log('SqlDataSource.delete:', this.getFullName(), key);
+        if (!key) throw new Error('no key');
+        const table = this.getAttr('table');
+        if (!table) {
+            throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
+        }
+        const result = await this.getApp().request({
+            action: '_delete',
+            page  : this.getForm().getPage().getName(),
+            form  : this.getForm().getName(),
+            params: Helper.encodeObject({key}),
+        });
+        await this.refill();
+
+        // events
+        const deletes = result.delete[table];
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete({source: this, deletes});
+        }
+        this.emit('delete', {source: this, deletes});
+        this.getDatabase().emitResult({
+            'delete': {[table]: deletes}
+        }, this);
+
+        return result;
     }
 
     onTableUpdate = async e => {
@@ -2744,76 +2807,6 @@ class SqlDataSource extends DataSource {
         if (!data.row) throw new Error('selectSingle must return row');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
-    }
-
-
-    async insert(row) {
-        console.log('SqlDataSource.insert', row);
-        const table = this.getAttr('table');
-        if (table === '') throw new Error('no data source table to insert');
-
-        const result = await this.getApp().request({
-            action        : 'insert',
-            page          : this.getForm().getPage().getName(),
-            form          : this.getForm().getName(),
-            params        : this.getRowWithChanges(row),
-        });
-
-        // key & values
-        const [key] = Object.keys(result.insert[table]);
-        if (!key) throw new Error('no inserted row key');
-        const values = result.insert[table][key];
-        for (const column in values) {
-            row[column] = values[column];
-        }
-        // console.log('key:', key);
-        // console.log('row:', row);
-
-        // clear news & changes
-        this.news.splice(this.news.indexOf(row), 1);
-        // console.log('this.news:', this.news);
-        this.changes.clear();
-
-        // add new row to rows
-        this.addRow(row);
-
-        // events
-        const inserts = Object.keys(result.insert[table]);
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, inserts});
-        }
-        this.emit('insert', {source: this, inserts});
-        this.getDatabase().emitResult({
-            insert: {[table]: inserts}
-        }, this);
-
-        return key;
-    }
-
-    async delete(key) {
-        console.log('SqlDataSource.delete:', this.getFullName(), key);
-        const table = this.getAttr('table');
-        if (!table) {
-            throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
-        }
-        const result = await this.getApp().request({
-            action: '_delete',
-            page  : this.getForm().getPage().getName(),
-            form  : this.getForm().getName(),
-            params: Helper.encodeObject({key}),
-        });
-        await this.refill();
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, deletes: result.delete[table]});
-        }
-        this.emit('delete', {source: this, deletes: result.delete[table]});
-        this.getDatabase().emitResult({
-            'delete': {
-                [table]: result.delete[table]
-            }
-        }, this);
-
-        return result;
     }
 
     getFramesCount() {
@@ -2996,14 +2989,6 @@ class Field extends Model {
         }
         throw new Error(`fields type and column empty`);
     }
-
-    /*getDbType() {
-        const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource' && this.getAttr('column')) {
-            return this.getDefaultDataSource().getDbType(this.getAttr('column'));
-        }
-        return null;
-    }*/
 
     getForm() {
         return this.parent;
