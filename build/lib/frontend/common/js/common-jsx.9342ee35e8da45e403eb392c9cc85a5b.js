@@ -836,6 +836,10 @@ class Grid extends ReactComponent {
     return this.state.row;
   }
 
+  setActiveRowIndex(i) {
+    this.state.row = i;
+  }
+
   getActiveRow() {
     const i = this.getActiveRowIndex();
 

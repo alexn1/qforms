@@ -382,12 +382,12 @@ class DataSource extends Model {
     }
 
     onTableInsert = async e => {
-        console.log('DataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
+        console.log('DataSource.onTableInsert', this.getFullName(), e);
         if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
 
         for (const key of e.inserts) {

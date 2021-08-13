@@ -14,6 +14,9 @@ class Grid extends ReactComponent {
         if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
         return this.state.row;
     }
+    setActiveRowIndex(i) {
+        this.state.row = i;
+    }
     getActiveRow() {
         const i = this.getActiveRowIndex();
         if (i !== null) {
