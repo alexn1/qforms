@@ -1599,7 +1599,7 @@ class TableFormController extends FormController {
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     }
-    onDeleteClick = e => {
+    onDeleteClick = async e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
             this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
@@ -1621,10 +1621,10 @@ class TableFormController extends FormController {
             break;
         }
     }
-    onHidePage = () => {
+    onHidePage = async () => {
         // this.grid.saveScroll();
     }
-    onShowPage = () => {
+    onShowPage = async () => {
         console.log('TableFormController.onShowPage', this.model.getFullName());
         /*if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
@@ -1703,7 +1703,7 @@ class TableFormController extends FormController {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
         if (!this.view) return;
         this.invalidate();
-        this.rerender();
+        await this.rerender();
     }
     onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
@@ -1750,22 +1750,22 @@ class TableFormController extends FormController {
         // console.log('TableFormController.isRowSelected');
         return !!this.grid && !!this.grid.getActiveRowKey();
     }
-    onFrameChanged = value => {
+    onFrameChanged = async value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();
-        this.rerender();
+        await this.rerender();
     }
-    onNextClick = () => {
+    onNextClick = async () => {
         console.log('TableFormController.onNextClick');
         const frame = this.model.getDefaultDataSource().getFrame() + 1;
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();
-        this.rerender();
+        await this.rerender();
     }
 
-    onPreviousClick = () => {
+    onPreviousClick = async () => {
         console.log('TableFormController.onPreviousClick');
         const frame = this.model.getDefaultDataSource().getFrame() - 1;
         this.model.getDefaultDataSource().setFrame(frame);
