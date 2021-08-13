@@ -28,6 +28,9 @@ class Grid extends ReactComponent {
     getActiveRowKey() {
         return this.state.key;
     }
+    setActiveRowKey(key) {
+        this.state.key = key;
+    }
     isRowActive(i, key) {
         // return i === this.getActiveRowIndex();
         return this.getActiveRowKey() === key;
@@ -70,7 +73,7 @@ class Grid extends ReactComponent {
         // this.state.row    = i;
         this.state.column = j;
         if (this.props.onSelectionChange) {
-            await this.props.onSelectionChange(i);
+            await this.props.onSelectionChange(i, key);
         } else {
             await this.rerender();
         }
@@ -81,7 +84,7 @@ class Grid extends ReactComponent {
         // this.state.row = i;
         this.state.key = key;
         if (this.props.onSelectionChange) {
-            await this.props.onSelectionChange(i);
+            await this.props.onSelectionChange(i, key);
         } else {
             await this.rerender();
         }

@@ -1562,7 +1562,7 @@ class TableFormController extends FormController {
         super(model, parent);
         this.state = {
             updated     : Date.now(),
-            activeRowKey: null
+            // activeRowKey: null
         };
         this.grid = null;
     }
@@ -1601,9 +1601,9 @@ class TableFormController extends FormController {
         // alert(err.message);
     }
     onDeleteClick = e => {
-        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.state.activeRowKey);
+        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
-            this.model.getDefaultDataSource().delete(this.state.activeRowKey);
+            this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
     }
     onGridCellDblClick = async row => {
@@ -1714,8 +1714,11 @@ class TableFormController extends FormController {
     onModelDelete = e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         for (const key of e.deletes) {
-            if (this.state.activeRowKey === key) {
+            /*if (this.state.activeRowKey === key) {
                 this.state.activeRowKey = null;
+            }*/
+            if (this.grid.getActiveRowKey() === key) {
+                this.grid.setActiveRowKey(null);
             }
         }
         this.invalidate();
@@ -1724,15 +1727,16 @@ class TableFormController extends FormController {
     onModelInsert = e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         for (const key of e.inserts) {
-            this.state.activeRowKey = key;
+            // this.state.activeRowKey = key;
+            this.grid.setActiveRowKey(key);
         }
         this.invalidate();
         this.rerender();
     }
-    onSelectionChange = async i => {
+    onSelectionChange = async (i, key) => {
         // console.log('TableFormController.onSelectionChange', i);
-        const rows = this.model.getDefaultDataSource().getRows();
-        this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
+        // const rows = this.model.getDefaultDataSource().getRows();
+        // this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
         this.invalidate();
         await this.rerender();
     }
@@ -1754,16 +1758,13 @@ class TableFormController extends FormController {
         return null;
     }*/
     getActiveRow() {
-        if (!this.state.activeRowKey) throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
+        const key = this.grid.getActiveRowKey();
+        if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
+        return this.model.getDefaultDataSource().getRowByKey(key);
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
-        if (this.state.activeRowKey !== null) {
-            const row = this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
-            if (row) return true;
-        }
-        return false;
+        return !!this.grid && !!this.grid.getActiveRowKey();
     }
     onFrameChanged = value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));

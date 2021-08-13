@@ -855,6 +855,10 @@ class Grid extends ReactComponent {
     return this.state.key;
   }
 
+  setActiveRowKey(key) {
+    this.state.key = key;
+  }
+
   isRowActive(i, key) {
     // return i === this.getActiveRowIndex();
     return this.getActiveRowKey() === key;
@@ -868,7 +872,7 @@ class Grid extends ReactComponent {
     this.state.column = j;
 
     if (this.props.onSelectionChange) {
-      await this.props.onSelectionChange(i);
+      await this.props.onSelectionChange(i, key);
     } else {
       await this.rerender();
     }
@@ -881,7 +885,7 @@ class Grid extends ReactComponent {
     this.state.key = key;
 
     if (this.props.onSelectionChange) {
-      await this.props.onSelectionChange(i);
+      await this.props.onSelectionChange(i, key);
     } else {
       await this.rerender();
     }
