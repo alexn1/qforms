@@ -1699,38 +1699,42 @@ class TableFormController extends FormController {
             throw err;
         }
     }
-    onModelRefresh = e => {
+    onModelRefresh = async e => {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
         if (!this.view) return;
         this.invalidate();
         this.rerender();
     }
-    onModelUpdate = e => {
+    onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
         this.invalidate();
-        this.rerender();
+        for (const key in e.updates) {
+            if (this.grid.getActiveRowKey() === key) {
+                const newKey = e.updates[key];
+                if (key !== newKey) {
+                    this.grid.setActiveRowKey(newKey);
+                }
+            }
+        }
+        await this.rerender();
     }
-    onModelDelete = e => {
+    onModelDelete = async e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         for (const key of e.deletes) {
-            /*if (this.state.activeRowKey === key) {
-                this.state.activeRowKey = null;
-            }*/
             if (this.grid.getActiveRowKey() === key) {
                 this.grid.setActiveRowKey(null);
             }
         }
         this.invalidate();
-        this.rerender();
+        await this.rerender();
     }
-    onModelInsert = e => {
+    onModelInsert = async e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         for (const key of e.inserts) {
-            // this.state.activeRowKey = key;
             this.grid.setActiveRowKey(key);
         }
         this.invalidate();
-        this.rerender();
+        await this.rerender();
     }
     onSelectionChange = async key => {
         // console.log('TableFormController.onSelectionChange', key);
