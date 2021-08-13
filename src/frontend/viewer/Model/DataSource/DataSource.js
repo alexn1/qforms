@@ -342,6 +342,29 @@ class DataSource extends Model {
         }
     }
 
+    async delete(row) {
+        console.log('DataSource.delete', row);
+        if (!row) throw new Error('no row');
+        const i = this.getRows().indexOf(row);
+        console.log('i:', i);
+        const key = this.getRowKey(row);
+        if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
+        this.getRows().splice(i, 1);
+
+        // events
+        const deletes = [key];
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete({source: this, deletes});
+        }
+        this.emit('delete', {source: this, deletes});
+        const table = this.getAttr('table');
+        if (table) {
+            this.getDatabase().emitResult({
+                'delete': {[table]: deletes}
+            }, this);
+        }
+    }
+
     async update() {
         console.log('DataSource.update', this.getFullName());
         if (this.news.length) {
@@ -407,12 +430,12 @@ class DataSource extends Model {
     }
 
     onTableUpdate = async e => {
-        console.log('DataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
         }
+        console.log('DataSource.onTableUpdate', this.getFullName(), e);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
             if (this.rowsByKey[key]) {
@@ -427,6 +450,32 @@ class DataSource extends Model {
             this.parent.onDataSourceUpdate(e);
         }
         this.emit('update', e);
+    }
+
+    onTableDelete = async e => {
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (e.source === this) {
+            // console.error('onTableDelete stop self update', this.getFullName());
+            return;
+        }
+        console.log('DataSource.onTableDelete', this.getFullName(), e);
+        if (!e.deletes.length) throw new Error(`${this.getFullName()}: no deletes`);
+        for (const key of e.deletes) {
+            const row = this.rowsByKey[key];
+            if (row) {
+                const i = this.getRows().indexOf(row);
+                console.log('i:', i);
+                if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
+                this.getRows().splice(i, 1);
+            }
+        }
+
+        // events
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete(e);
+        }
+        this.emit('delete', e);
+
     }
 
 }
