@@ -866,8 +866,7 @@ class TableFormView extends FormView {
       rows: this.getRows(),
       getRowKey: row => ctrl.model.getDefaultDataSource().getRowKey(row),
       onDoubleClick: ctrl.onGridCellDblClick,
-      onSelectionChange: ctrl.onSelectionChange // getActiveRowIndex={ctrl.getActiveRowIndex}
-      ,
+      onSelectionChange: ctrl.onSelectionChange,
       renderGridCellView: this.renderGridCellView,
       updated: ctrl.getUpdated()
     }), dataSource.constructor.name === 'SqlDataSource' && this.renderPaging());

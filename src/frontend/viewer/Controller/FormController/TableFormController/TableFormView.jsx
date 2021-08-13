@@ -111,7 +111,6 @@ class TableFormView extends FormView {
                     getRowKey={row => ctrl.model.getDefaultDataSource().getRowKey(row)}
                     onDoubleClick={ctrl.onGridCellDblClick}
                     onSelectionChange={ctrl.onSelectionChange}
-                    // getActiveRowIndex={ctrl.getActiveRowIndex}
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
                 />

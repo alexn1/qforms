@@ -1561,8 +1561,7 @@ class TableFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            updated     : Date.now(),
-            // activeRowKey: null
+            updated: Date.now()
         };
         this.grid = null;
     }
@@ -1733,30 +1732,11 @@ class TableFormController extends FormController {
         this.invalidate();
         this.rerender();
     }
-    onSelectionChange = async (i, key) => {
-        // console.log('TableFormController.onSelectionChange', i);
-        // const rows = this.model.getDefaultDataSource().getRows();
-        // this.state.activeRowKey = this.model.getDefaultDataSource().getRowKey(rows[i]);
+    onSelectionChange = async key => {
+        // console.log('TableFormController.onSelectionChange', key);
         this.invalidate();
         await this.rerender();
     }
-    /*getActiveRowIndex = () => {
-        // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);
-        if (this.state.activeRowKey) {
-            const rows = this.model.getDefaultDataSource().getRows();
-            const row = this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);
-            if (row) {
-                const i = rows.indexOf(row);
-                if (i === -1) throw new Error('cannot find active row')
-                return i;
-            } else {
-                // console.log('rows:', rows);
-                // console.log('this.rowsByKey:', this.model.getDefaultDataSource().rowsByKey);
-                console.error('no active row in rows');
-            }
-        }
-        return null;
-    }*/
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
@@ -2477,12 +2457,14 @@ class DataSource extends Model {
         }
     }
 
-    async delete(row) {
-        console.log('DataSource.delete', row);
-        if (!row) throw new Error('no row');
+    async delete(key) {
+        console.log('DataSource.delete', key);
+        if (!key) throw new Error('no key');
+        const row = this.getRowByKey(key);
+        if (!row) throw new Error(`${this.getFullName()}:  no row with key: ${key}`);
         const i = this.getRows().indexOf(row);
         console.log('i:', i);
-        const key = this.getRowKey(row);
+        // const key = this.getRowKey(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
         this.getRows().splice(i, 1);
 

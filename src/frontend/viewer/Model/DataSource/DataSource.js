@@ -342,12 +342,14 @@ class DataSource extends Model {
         }
     }
 
-    async delete(row) {
-        console.log('DataSource.delete', row);
-        if (!row) throw new Error('no row');
+    async delete(key) {
+        console.log('DataSource.delete', key);
+        if (!key) throw new Error('no key');
+        const row = this.getRowByKey(key);
+        if (!row) throw new Error(`${this.getFullName()}:  no row with key: ${key}`);
         const i = this.getRows().indexOf(row);
         console.log('i:', i);
-        const key = this.getRowKey(row);
+        // const key = this.getRowKey(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
         this.getRows().splice(i, 1);
 

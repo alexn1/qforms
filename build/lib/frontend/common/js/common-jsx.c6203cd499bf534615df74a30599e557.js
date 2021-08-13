@@ -761,16 +761,15 @@ class Grid extends ReactComponent {
 
     _defineProperty(this, "onRowMouseDown", async e => {
       // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
-      const i = parseInt(e.currentTarget.dataset.r);
       const key = e.currentTarget.dataset.row;
-      await this.selectRow(i, key);
+      await this.selectRow(key);
     });
 
     _defineProperty(this, "onCellMouseDown", async e => {
-      console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
+      // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
       const key = e.currentTarget.dataset.row;
-      await this.selectCell(i, j, key);
+      await this.selectCell(key, j);
     });
 
     _defineProperty(this, "onCellDoubleClick", async e => {
@@ -825,7 +824,6 @@ class Grid extends ReactComponent {
 
     this.state = {
       key: null,
-      // row        : null,
       column: null,
       columnWidth: {},
       resized: Date.now()
@@ -833,22 +831,13 @@ class Grid extends ReactComponent {
     this.columns = {};
     this.head = React.createRef();
   }
-  /*getActiveRowIndex() {
-      // if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
-      return this.state.row;
-  }*/
-
-  /*getActiveRow() {
-      const i = this.getActiveRowIndex();
-      if (i !== null) {
-          return this.props.rows[i];
-      }
-      return null;
-  }*/
-
 
   getActiveColumn() {
     return this.state.column;
+  }
+
+  setActiveColumn(column) {
+    this.state.column = column;
   }
 
   getActiveRowKey() {
@@ -856,36 +845,34 @@ class Grid extends ReactComponent {
   }
 
   setActiveRowKey(key) {
+    console.log('Grid.setActiveRowKey', key);
     this.state.key = key;
   }
 
   isRowActive(i, key) {
-    // return i === this.getActiveRowIndex();
     return this.getActiveRowKey() === key;
   }
 
-  async selectCell(i, j, key) {
-    console.log('Grid.selectCell', i, j, key);
+  async selectCell(key, j) {
+    // console.log('Grid.selectCell', key, j);
     if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
-    this.state.key = key; // this.state.row    = i;
-
-    this.state.column = j;
+    this.setActiveRowKey(key);
+    this.setActiveColumn(j);
 
     if (this.props.onSelectionChange) {
-      await this.props.onSelectionChange(i, key);
+      await this.props.onSelectionChange(key);
     } else {
       await this.rerender();
     }
   }
 
-  async selectRow(i, key) {
-    console.log('Grid.selectRow', i, key);
-    if (this.getActiveRowKey() === key) return; // this.state.row = i;
-
-    this.state.key = key;
+  async selectRow(key) {
+    // console.log('Grid.selectRow', key);
+    if (this.getActiveRowKey() === key) return;
+    this.setActiveRowKey(key);
 
     if (this.props.onSelectionChange) {
-      await this.props.onSelectionChange(i, key);
+      await this.props.onSelectionChange(key);
     } else {
       await this.rerender();
     }
