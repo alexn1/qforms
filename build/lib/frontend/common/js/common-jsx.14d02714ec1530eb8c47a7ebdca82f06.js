@@ -924,7 +924,7 @@ class Grid extends ReactComponent {
       return this.props.getRowKey(row);
     }
 
-    return this.props.rows.indexOf(row);
+    return this.props.rows.indexOf(row).toString();
   }
 
   renderCell(row, column) {

@@ -123,7 +123,7 @@ class Grid extends ReactComponent {
         if (this.props.getRowKey) {
             return this.props.getRowKey(row);
         }
-        return this.props.rows.indexOf(row);
+        return this.props.rows.indexOf(row).toString();
     }
     onCellViewCreate = c => {
         // console.log('Grid.onCellViewCreate', c.props.column.name);
