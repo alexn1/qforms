@@ -759,10 +759,18 @@ class Grid extends ReactComponent {
   constructor(props) {
     super(props);
 
+    _defineProperty(this, "onRowMouseDown", async e => {
+      // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
+      const i = parseInt(e.currentTarget.dataset.r);
+      const key = e.currentTarget.dataset.row;
+      await this.selectRow(i, key);
+    });
+
     _defineProperty(this, "onCellMouseDown", async e => {
-      // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
+      console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-      await this.selectCell(i, j);
+      const key = e.currentTarget.dataset.row;
+      await this.selectCell(i, j, key);
     });
 
     _defineProperty(this, "onCellDoubleClick", async e => {
@@ -773,12 +781,6 @@ class Grid extends ReactComponent {
       if (this.props.onDoubleClick) {
         await this.props.onDoubleClick(row);
       }
-    });
-
-    _defineProperty(this, "onRowMouseDown", async e => {
-      // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
-      const i = parseInt(e.currentTarget.dataset.r);
-      await this.selectRow(i);
     });
 
     _defineProperty(this, "onRowDoubleClick", async e => {
@@ -822,51 +824,47 @@ class Grid extends ReactComponent {
     });
 
     this.state = {
+      key: null,
+      // row        : null,
       column: null,
-      row: null,
       columnWidth: {},
-      resized: Date.now(),
-      key: null
+      resized: Date.now()
     };
     this.columns = {};
     this.head = React.createRef();
   }
+  /*getActiveRowIndex() {
+      // if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
+      return this.state.row;
+  }*/
 
-  getActiveRowIndex() {
-    if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
-    return this.state.row;
-  }
+  /*getActiveRow() {
+      const i = this.getActiveRowIndex();
+      if (i !== null) {
+          return this.props.rows[i];
+      }
+      return null;
+  }*/
 
-  setActiveRowIndex(i) {
-    this.state.row = i;
-
-    if (this.props.getRowKey) {
-      this.state.key = this.getRowKey(this.props.rows[i]);
-    }
-  }
-
-  getActiveRow() {
-    const i = this.getActiveRowIndex();
-
-    if (i !== null) {
-      return this.props.rows[i];
-    }
-
-    return null;
-  }
 
   getActiveColumn() {
     return this.state.column;
   }
 
-  isRowActive(i, key) {
-    return i === this.getActiveRowIndex();
+  getActiveRowKey() {
+    return this.state.key;
   }
 
-  async selectCell(i, j) {
-    // console.log('Grid.selectCell', i, j);
-    if (this.getActiveRowIndex() === i && this.getActiveColumn() === j) return;
-    this.state.row = i;
+  isRowActive(i, key) {
+    // return i === this.getActiveRowIndex();
+    return this.getActiveRowKey() === key;
+  }
+
+  async selectCell(i, j, key) {
+    console.log('Grid.selectCell', i, j, key);
+    if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
+    this.state.key = key; // this.state.row    = i;
+
     this.state.column = j;
 
     if (this.props.onSelectionChange) {
@@ -876,10 +874,11 @@ class Grid extends ReactComponent {
     }
   }
 
-  async selectRow(i) {
-    // console.log('Grid.selectRow', i);
-    if (this.getActiveRowIndex() === i) return;
-    this.state.row = i;
+  async selectRow(i, key) {
+    console.log('Grid.selectRow', i, key);
+    if (this.getActiveRowKey() === key) return; // this.state.row = i;
+
+    this.state.key = key;
 
     if (this.props.onSelectionChange) {
       await this.props.onSelectionChange(i);
@@ -930,7 +929,11 @@ class Grid extends ReactComponent {
   }
 
   getRowKey(row) {
-    return this.props.getRowKey(row);
+    if (this.props.getRowKey) {
+      return this.props.getRowKey(row);
+    }
+
+    return this.props.rows.indexOf(row);
   }
 
   renderCell(row, column) {
@@ -1045,13 +1048,13 @@ class GridRow extends ReactComponent {
       style: {
         width: grid.getColumnWidth(j)
       },
-      "data-row": key,
-      "data-col": j,
       "data-rc": `[${i},${j}]`,
+      "data-row": key,
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
     }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("td", {
       "data-r": i,
+      "data-row": key,
       onMouseDown: grid.onRowMouseDown,
       onDoubleClick: grid.onRowDoubleClick
     }));

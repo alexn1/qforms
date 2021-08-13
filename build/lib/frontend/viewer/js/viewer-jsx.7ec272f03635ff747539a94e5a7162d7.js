@@ -860,13 +860,14 @@ class TableFormView extends FormView {
       className: "TableFormView full flex-rows"
     }, this.renderToolbar(), /*#__PURE__*/React.createElement(Grid, {
       classList: ['flex-max'],
+      onCreate: ctrl.onGridCreate,
       name: ctrl.model.getFullName(),
       columns: this.getGridColumns(),
       rows: this.getRows(),
       getRowKey: row => ctrl.model.getDefaultDataSource().getRowKey(row),
       onDoubleClick: ctrl.onGridCellDblClick,
-      onSelectionChange: ctrl.onSelectionChange,
-      getActiveRowIndex: ctrl.getActiveRowIndex,
+      onSelectionChange: ctrl.onSelectionChange // getActiveRowIndex={ctrl.getActiveRowIndex}
+      ,
       renderGridCellView: this.renderGridCellView,
       updated: ctrl.getUpdated()
     }), dataSource.constructor.name === 'SqlDataSource' && this.renderPaging());

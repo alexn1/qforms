@@ -28,9 +28,8 @@ class GridRow extends ReactComponent {
                     key={column.name}
                     className={this.isCellActive(j) ? 'active' : null}
                     style={{width: grid.getColumnWidth(j)}}
-                    data-row={key}
-                    data-col={j}
                     data-rc={`[${i},${j}]`}
+                    data-row={key}
                     onMouseDown={grid.onCellMouseDown}
                     onDoubleClick={grid.onCellDoubleClick}
                 >
@@ -38,6 +37,7 @@ class GridRow extends ReactComponent {
                 </td>)}
             <td
                 data-r={i}
+                data-row={key}
                 onMouseDown={grid.onRowMouseDown}
                 onDoubleClick={grid.onRowDoubleClick}
             />

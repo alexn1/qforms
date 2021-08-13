@@ -5,6 +5,7 @@ class TableFormController extends FormController {
             updated     : Date.now(),
             activeRowKey: null
         };
+        this.grid = null;
     }
     getViewClass() {
         return TableFormView;
@@ -26,6 +27,9 @@ class TableFormController extends FormController {
         this.model.off('delete' , this.onModelDelete);
         this.model.off('insert' , this.onModelInsert);
         super.deinit();
+    }
+    onGridCreate = grid => {
+        this.grid = grid;
     }
     onNewClick = async e => {
         console.log('TableFormController.onNewClick');
@@ -173,7 +177,7 @@ class TableFormController extends FormController {
         this.invalidate();
         await this.rerender();
     }
-    getActiveRowIndex = () => {
+    /*getActiveRowIndex = () => {
         // console.log('TableFormController.getActiveRowIndex', this.state.activeRowKey);
         if (this.state.activeRowKey) {
             const rows = this.model.getDefaultDataSource().getRows();
@@ -189,7 +193,7 @@ class TableFormController extends FormController {
             }
         }
         return null;
-    }
+    }*/
     getActiveRow() {
         if (!this.state.activeRowKey) throw new Error(`${this.model.getFullName()}: no active row key`);
         return this.model.getDefaultDataSource().getRowByKey(this.state.activeRowKey);

@@ -104,13 +104,14 @@ class TableFormView extends FormView {
                 {this.renderToolbar()}
                 <Grid
                     classList={['flex-max']}
+                    onCreate={ctrl.onGridCreate}
                     name={ctrl.model.getFullName()}
                     columns={this.getGridColumns()}
                     rows={this.getRows()}
                     getRowKey={row => ctrl.model.getDefaultDataSource().getRowKey(row)}
                     onDoubleClick={ctrl.onGridCellDblClick}
                     onSelectionChange={ctrl.onSelectionChange}
-                    getActiveRowIndex={ctrl.getActiveRowIndex}
+                    // getActiveRowIndex={ctrl.getActiveRowIndex}
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
                 />

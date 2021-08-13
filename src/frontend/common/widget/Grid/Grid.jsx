@@ -2,42 +2,47 @@ class Grid extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
+            key        : null,
+            // row        : null,
             column     : null,
-            row        : null,
             columnWidth: {},
             resized    : Date.now(),
-            key        : null,
         };
         this.columns = {};
         this.head = React.createRef();
     }
-    getActiveRowIndex() {
-        if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
+    /*getActiveRowIndex() {
+        // if (this.props.getActiveRowIndex) return this.props.getActiveRowIndex();
         return this.state.row;
-    }
-    setActiveRowIndex(i) {
-        this.state.row = i;
-        if (this.props.getRowKey) {
-            this.state.key = this.getRowKey(this.props.rows[i]);
-        }
-    }
-    getActiveRow() {
+    }*/
+    /*getActiveRow() {
         const i = this.getActiveRowIndex();
         if (i !== null) {
             return this.props.rows[i];
         }
         return null;
-    }
+    }*/
     getActiveColumn() {
         return this.state.column;
     }
+    getActiveRowKey() {
+        return this.state.key;
+    }
     isRowActive(i, key) {
-        return i === this.getActiveRowIndex();
+        // return i === this.getActiveRowIndex();
+        return this.getActiveRowKey() === key;
+    }
+    onRowMouseDown = async e => {
+        // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
+        const i = parseInt(e.currentTarget.dataset.r);
+        const key = e.currentTarget.dataset.row;
+        await this.selectRow(i, key);
     }
     onCellMouseDown = async e => {
-        // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
+        console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-        await this.selectCell(i, j);
+        const key = e.currentTarget.dataset.row;
+        await this.selectCell(i, j, key);
     }
     onCellDoubleClick = async e => {
         // console.log('Grid.onCellDoubleClick');
@@ -48,11 +53,7 @@ class Grid extends ReactComponent {
             await this.props.onDoubleClick(row);
         }
     }
-    onRowMouseDown = async e => {
-        // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
-        const i = parseInt(e.currentTarget.dataset.r);
-        await this.selectRow(i);
-    }
+
     onRowDoubleClick = async e => {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
@@ -62,10 +63,11 @@ class Grid extends ReactComponent {
             await this.props.onDoubleClick(row);
         }
     }
-    async selectCell(i, j) {
-        // console.log('Grid.selectCell', i, j);
-        if (this.getActiveRowIndex() === i && this.getActiveColumn() === j) return;
-        this.state.row    = i;
+    async selectCell(i, j, key) {
+        console.log('Grid.selectCell', i, j, key);
+        if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
+        this.state.key = key;
+        // this.state.row    = i;
         this.state.column = j;
         if (this.props.onSelectionChange) {
             await this.props.onSelectionChange(i);
@@ -73,10 +75,11 @@ class Grid extends ReactComponent {
             await this.rerender();
         }
     }
-    async selectRow(i) {
-        // console.log('Grid.selectRow', i);
-        if (this.getActiveRowIndex() === i ) return;
-        this.state.row = i;
+    async selectRow(i, key) {
+        console.log('Grid.selectRow', i, key);
+        if (this.getActiveRowKey() === key) return;
+        // this.state.row = i;
+        this.state.key = key;
         if (this.props.onSelectionChange) {
             await this.props.onSelectionChange(i);
         } else {
@@ -126,7 +129,10 @@ class Grid extends ReactComponent {
         });
     }
     getRowKey(row) {
-        return this.props.getRowKey(row);
+        if (this.props.getRowKey) {
+            return this.props.getRowKey(row);
+        }
+        return this.props.rows.indexOf(row);
     }
     onCellViewCreate = c => {
         // console.log('Grid.onCellViewCreate', c.props.column.name);
