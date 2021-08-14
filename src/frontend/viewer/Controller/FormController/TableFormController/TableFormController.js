@@ -185,7 +185,7 @@ class TableFormController extends FormController {
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDefaultDataSource().getRowByKey(key);
+        return this.model.getDefaultDataSource().getRow(key);
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');

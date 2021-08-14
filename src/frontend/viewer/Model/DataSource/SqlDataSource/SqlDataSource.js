@@ -131,7 +131,7 @@ class SqlDataSource extends DataSource {
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
             // check if updated row exists in this ds
-            if (this.rowsByKey[key]) {
+            if (this.getRow(key)) {
                 const newKey = e.updates[key];
                 // console.log(`key: ${key} to ${newKey}`);
                 const keyParams = DataSource.keyToParams(newKey);

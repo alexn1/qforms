@@ -1744,7 +1744,7 @@ class TableFormController extends FormController {
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDefaultDataSource().getRowByKey(key);
+        return this.model.getDefaultDataSource().getRow(key);
     }
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
@@ -2274,7 +2274,7 @@ class DataSource extends Model {
     }
 
     removeRow(key) {
-        const row = this.rowsByKey[key];
+        const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
         const i = this.rows.indexOf(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
@@ -2324,8 +2324,12 @@ class DataSource extends Model {
     }*/
 
     getRow(key) {
-        return this.rowsByKey[key];
+        return this.rowsByKey[key] || null;
     }
+
+    /*getRowByKey(key) {
+        return this.rowsByKey[key] || null;
+    }*/
 
     getRows() {
         return this.rows;
@@ -2335,9 +2339,7 @@ class DataSource extends Model {
         return this.rows[i];
     }
 
-    getRowByKey(key) {
-        return this.rowsByKey[key] || null;
-    }
+
 
     discard() {
         console.log('DataSource.discard', this.getFullName());
@@ -2389,7 +2391,7 @@ class DataSource extends Model {
     updateRow(key, newValues) {
         console.log('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
-        const row = this.rowsByKey[key];
+        const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const newKey = this.getRowKey(newValues);
         DataSource.copyNewValues(row, newValues);// copy new values to original row object
@@ -2494,7 +2496,7 @@ class DataSource extends Model {
         const updates = {};
         for (const key in changes) {
             // console.log('key:', key);
-            const row = this.getRowByKey(key);
+            const row = this.getRow(key);
             // console.log('row:', row);
             const newValues = this.getRowWithChanges(row);
             // console.log('newValues:', newValues);
@@ -2529,12 +2531,12 @@ class DataSource extends Model {
         if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
 
         for (const key of e.inserts) {
-            if (this.rowsByKey[key]) {
+            if (this.getRow(key)) {
                 console.log('rows:', this.rows);
                 console.log('rowsByKey:', this.rowsByKey);
                 throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
             }
-            const newValues = e.source.getRowByKey(key);
+            const newValues = e.source.getRow(key);
             const newRow = {};
             DataSource.copyNewValues(newRow, newValues);
             // console.log('newRow:', newRow);
@@ -2557,9 +2559,9 @@ class DataSource extends Model {
         console.log('DataSource.onTableUpdate', this.getFullName(), e);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
-            if (this.rowsByKey[key]) {
+            if (this.getRow(key)) {
                 const newKey = e.updates[key];
-                const sourceRow = e.source.getRowByKey(newKey);
+                const sourceRow = e.source.getRow(newKey);
                 this.updateRow(key, sourceRow);
             }
         }
@@ -2580,7 +2582,7 @@ class DataSource extends Model {
         console.log('DataSource.onTableDelete', this.getFullName(), e);
         if (!e.deletes.length) throw new Error(`${this.getFullName()}: no deletes`);
         for (const key of e.deletes) {
-            if (this.rowsByKey[key]) {
+            if (this.getRow(key)) {
                 this.removeRow(key);
             }
         }
@@ -2728,7 +2730,7 @@ class SqlDataSource extends DataSource {
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
             // check if updated row exists in this ds
-            if (this.rowsByKey[key]) {
+            if (this.getRow(key)) {
                 const newKey = e.updates[key];
                 // console.log(`key: ${key} to ${newKey}`);
                 const keyParams = DataSource.keyToParams(newKey);
