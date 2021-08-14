@@ -1605,12 +1605,12 @@ class TableFormController extends FormController {
             this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
     }
-    onGridCellDblClick = async row => {
+    onGridCellDblClick = async (row, key) => {
         // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
         // console.log('row:', row);
-        const key = this.model.getDefaultDataSource().getRowKey(row);
+        // const key = this.model.getDefaultDataSource().getRowKey(row);
         // console.log('key:', key);
         switch (this.model.getAttr('editMethod')) {
             // case 'table':
@@ -2338,8 +2338,6 @@ class DataSource extends Model {
     getRowByIndex(i) {
         return this.rows[i];
     }
-
-
 
     discard() {
         console.log('DataSource.discard', this.getFullName());

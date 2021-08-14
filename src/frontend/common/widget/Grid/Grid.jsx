@@ -41,9 +41,10 @@ class Grid extends ReactComponent {
         // console.log('Grid.onCellDoubleClick');
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         const row = this.props.rows[i];
+        const key = e.currentTarget.dataset.row;
         // console.log('row:', row);
         if (this.props.onDoubleClick) {
-            await this.props.onDoubleClick(row);
+            await this.props.onDoubleClick(row, key);
         }
     }
 
@@ -51,9 +52,10 @@ class Grid extends ReactComponent {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
         const row = this.props.rows[i];
+        const key = e.currentTarget.dataset.row;
         // console.log('row:', row);
         if (this.props.onDoubleClick) {
-            await this.props.onDoubleClick(row);
+            await this.props.onDoubleClick(row, key);
         }
     }
     async selectCell(key, j) {

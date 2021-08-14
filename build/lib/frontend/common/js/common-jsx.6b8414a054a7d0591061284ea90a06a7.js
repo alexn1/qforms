@@ -775,20 +775,22 @@ class Grid extends ReactComponent {
     _defineProperty(this, "onCellDoubleClick", async e => {
       // console.log('Grid.onCellDoubleClick');
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-      const row = this.props.rows[i]; // console.log('row:', row);
+      const row = this.props.rows[i];
+      const key = e.currentTarget.dataset.row; // console.log('row:', row);
 
       if (this.props.onDoubleClick) {
-        await this.props.onDoubleClick(row);
+        await this.props.onDoubleClick(row, key);
       }
     });
 
     _defineProperty(this, "onRowDoubleClick", async e => {
       // console.log('Grid.onRowDoubleClick');
       const i = parseInt(e.currentTarget.dataset.r);
-      const row = this.props.rows[i]; // console.log('row:', row);
+      const row = this.props.rows[i];
+      const key = e.currentTarget.dataset.row; // console.log('row:', row);
 
       if (this.props.onDoubleClick) {
-        await this.props.onDoubleClick(row);
+        await this.props.onDoubleClick(row, key);
       }
     });
 
