@@ -2464,13 +2464,7 @@ class DataSource extends Model {
     async delete(key) {
         console.log('DataSource.delete', key);
         if (!key) throw new Error('no key');
-        const row = this.getRowByKey(key);
-        if (!row) throw new Error(`${this.getFullName()}:  no row with key: ${key}`);
-        const i = this.getRows().indexOf(row);
-        console.log('i:', i);
-        // const key = this.getRowKey(row);
-        if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
-        this.getRows().splice(i, 1);
+        this.removeRow(key);
 
         // events
         const deletes = [key];
@@ -2535,7 +2529,11 @@ class DataSource extends Model {
         if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
 
         for (const key of e.inserts) {
-            if (this.rowsByKey[key]) throw new Error('row already in this data source');
+            if (this.rowsByKey[key]) {
+                console.log('rows:', this.rows);
+                console.log('rowsByKey:', this.rowsByKey);
+                throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
+            }
             const newValues = e.source.getRowByKey(key);
             const newRow = {};
             DataSource.copyNewValues(newRow, newValues);
@@ -2582,12 +2580,8 @@ class DataSource extends Model {
         console.log('DataSource.onTableDelete', this.getFullName(), e);
         if (!e.deletes.length) throw new Error(`${this.getFullName()}: no deletes`);
         for (const key of e.deletes) {
-            const row = this.rowsByKey[key];
-            if (row) {
-                const i = this.getRows().indexOf(row);
-                console.log('i:', i);
-                if (i === -1) throw new Error(`${this.getFullName()}: no row to delete: ${key}`);
-                this.getRows().splice(i, 1);
+            if (this.rowsByKey[key]) {
+                this.removeRow(key);
             }
         }
 
@@ -2596,7 +2590,6 @@ class DataSource extends Model {
             this.parent.onDataSourceDelete(e);
         }
         this.emit('delete', e);
-
     }
 
 }
