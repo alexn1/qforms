@@ -888,7 +888,7 @@ class Grid extends ReactComponent {
     console.log('Grid.onLeft');
     const j = this.getActiveColumn();
 
-    if (j - 1 <= 0) {
+    if (j - 1 >= 0) {
       this.setActiveColumn(j - 1);
       await this.rerender();
     }
