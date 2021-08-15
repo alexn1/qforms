@@ -886,6 +886,12 @@ class Grid extends ReactComponent {
 
   async onLeft() {
     console.log('Grid.onLeft');
+    const j = this.getActiveColumn();
+
+    if (j - 1 <= 0) {
+      this.setActiveColumn(j - 1);
+      await this.rerender();
+    }
   }
 
   async onUp() {
@@ -904,6 +910,12 @@ class Grid extends ReactComponent {
 
   async onRight() {
     console.log('Grid.onRight');
+    const j = this.getActiveColumn();
+
+    if (j + 1 <= this.props.columns.length - 1) {
+      this.setActiveColumn(j + 1);
+      await this.rerender();
+    }
   }
 
   async onDown() {
