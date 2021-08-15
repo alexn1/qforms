@@ -794,6 +794,31 @@ class Grid extends ReactComponent {
       }
     });
 
+    _defineProperty(this, "onKeyDown", async e => {
+      // console.log('Grid.onKeyDown', e.keyCode);
+      switch (e.keyCode) {
+        case 37:
+          this.onLeft();
+          break;
+
+        case 38:
+          this.onUp();
+          break;
+
+        case 39:
+          this.onRight();
+          break;
+
+        case 40:
+          this.onDown();
+          break;
+
+        case 13:
+          this.onEnter();
+          break;
+      }
+    });
+
     _defineProperty(this, "onResizeDoubleClick", async e => {
       console.log('Grid.onResizeDoubleClick', e.target);
       const i = parseInt(e.target.dataset.i);
@@ -853,6 +878,26 @@ class Grid extends ReactComponent {
 
   isRowActive(i, key) {
     return this.getActiveRowKey() === key;
+  }
+
+  onLeft() {
+    console.log('Grid.onLeft');
+  }
+
+  onUp() {
+    console.log('Grid.onUp');
+  }
+
+  onRight() {
+    console.log('Grid.onRight');
+  }
+
+  onDown() {
+    console.log('Grid.onDown', this.getActiveRowKey());
+  }
+
+  onEnter() {
+    console.log('Grid.onEnter');
   }
 
   async selectCell(key, j) {
@@ -958,7 +1003,9 @@ class Grid extends ReactComponent {
   render() {
     // console.log('Grid.render', this.props.name);
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getClassName(),
+      tabIndex: 0,
+      onKeyDown: this.onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
       className: "head",
       ref: this.head

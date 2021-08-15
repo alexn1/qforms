@@ -47,7 +47,6 @@ class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     }
-
     onRowDoubleClick = async e => {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
@@ -57,6 +56,31 @@ class Grid extends ReactComponent {
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
+    }
+    onKeyDown = async e => {
+        // console.log('Grid.onKeyDown', e.keyCode);
+        switch (e.keyCode) {
+            case 37: this.onLeft() ; break;
+            case 38: this.onUp()   ; break;
+            case 39: this.onRight(); break;
+            case 40: this.onDown() ; break;
+            case 13: this.onEnter(); break;
+        }
+    }
+    onLeft() {
+        console.log('Grid.onLeft');
+    }
+    onUp() {
+        console.log('Grid.onUp');
+    }
+    onRight() {
+        console.log('Grid.onRight');
+    }
+    onDown() {
+        console.log('Grid.onDown', this.getActiveRowKey());
+    }
+    onEnter() {
+        console.log('Grid.onEnter');
     }
     async selectCell(key, j) {
         // console.log('Grid.selectCell', key, j);
@@ -168,7 +192,10 @@ class Grid extends ReactComponent {
     render() {
         // console.log('Grid.render', this.props.name);
         return (
-            <div className={this.getClassName()}>
+            <div className={this.getClassName()}
+                 tabIndex={0}
+                 onKeyDown={this.onKeyDown}
+            >
                 <div className="head" ref={this.head}><table><tbody><tr>{this.props.columns && this.renderColumns()}<td/></tr></tbody></table></div>
                 <div className="block"/>
                 <div className="body" onScroll={this.onBodyScroll}>
