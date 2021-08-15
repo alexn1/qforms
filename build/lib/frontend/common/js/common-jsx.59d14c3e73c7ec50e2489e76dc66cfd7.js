@@ -798,23 +798,23 @@ class Grid extends ReactComponent {
       // console.log('Grid.onKeyDown', e.keyCode);
       switch (e.keyCode) {
         case 37:
-          this.onLeft();
+          await this.onLeft();
           break;
 
         case 38:
-          this.onUp();
+          await this.onUp();
           break;
 
         case 39:
-          this.onRight();
+          await this.onRight();
           break;
 
         case 40:
-          this.onDown();
+          await this.onDown();
           break;
 
         case 13:
-          this.onEnter();
+          await this.onEnter();
           break;
       }
     });
@@ -880,24 +880,54 @@ class Grid extends ReactComponent {
     return this.getActiveRowKey() === key;
   }
 
-  onLeft() {
+  findRow(key) {
+    return this.props.rows.find(row => this.getRowKey(row) === key);
+  }
+
+  async onLeft() {
     console.log('Grid.onLeft');
   }
 
-  onUp() {
+  async onUp() {
     console.log('Grid.onUp');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key);
+    const i = this.props.rows.indexOf(row);
+
+    if (i - 1 >= 0) {
+      const pRow = this.props.rows[i - 1];
+      const pKey = this.getRowKey(pRow);
+      this.setActiveRowKey(pKey);
+      await this.rerender();
+    }
   }
 
-  onRight() {
+  async onRight() {
     console.log('Grid.onRight');
   }
 
-  onDown() {
-    console.log('Grid.onDown', this.getActiveRowKey());
+  async onDown() {
+    console.log('Grid.onDown');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key);
+    const i = this.props.rows.indexOf(row);
+
+    if (i + 1 <= this.props.rows.length - 1) {
+      const nRow = this.props.rows[i + 1];
+      const nKey = this.getRowKey(nRow);
+      this.setActiveRowKey(nKey);
+      await this.rerender();
+    }
   }
 
-  onEnter() {
+  async onEnter() {
     console.log('Grid.onEnter');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key); // console.log(row, key);
+
+    if (this.props.onDoubleClick) {
+      await this.props.onDoubleClick(row, key);
+    }
   }
 
   async selectCell(key, j) {
