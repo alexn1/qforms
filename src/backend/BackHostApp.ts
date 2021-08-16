@@ -520,7 +520,7 @@ class BackHostApp {
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
-            await dataSource.getDatabase().beginTransaction(context);
+            await dataSource.getDatabase().begin(context);
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(context);
@@ -542,7 +542,7 @@ class BackHostApp {
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
-            await dataSource.getDatabase().beginTransaction(context);
+            await dataSource.getDatabase().begin(context);
             const result = await dataSource.delete(context);
             await dataSource.getDatabase().commit(context);
             if (result === undefined) throw new Error('delete result is undefined');

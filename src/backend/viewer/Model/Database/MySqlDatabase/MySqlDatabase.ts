@@ -127,8 +127,8 @@ class MySqlDatabase extends Database {
         return rows;
     }
 
-    beginTransaction(cnn): Promise<void> {
-        console.log('MySqlDatabase.beginTransaction');
+    begin(cnn): Promise<void> {
+        console.log('MySqlDatabase.begin');
         return new Promise((resolve, reject) => {
             cnn.beginTransaction(err => {
                 if (err) {

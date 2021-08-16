@@ -56,8 +56,8 @@ class Database extends Model {
         return value;
     }
 
-    async beginTransaction(context: Context): Promise<void> {
-        throw new Error('Database.beginTransaction not implemented');
+    async begin(context: Context): Promise<void> {
+        throw new Error('Database.begin not implemented');
     }
 
     async commit(context): Promise<void> {

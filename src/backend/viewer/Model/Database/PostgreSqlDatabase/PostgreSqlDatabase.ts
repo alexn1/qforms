@@ -90,8 +90,8 @@ class PostgreSqlDatabase extends Database {
         return result.rows;
     }
 
-    async beginTransaction(context: Context): Promise<void> {
-        console.log('PostgreSqlDatabase.beginTransaction', this.getName());
+    async begin(context: Context): Promise<void> {
+        console.log('PostgreSqlDatabase.begin', this.getName());
         await this.getConnection(context).query('begin');
     }
 

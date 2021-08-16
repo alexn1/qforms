@@ -103,7 +103,7 @@ class Form extends Model {
         const dataSource = this.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
-            await dataSource.getDatabase().beginTransaction(context);
+            await dataSource.getDatabase().begin(context);
             const result = await dataSource.update(context);
             await dataSource.getDatabase().commit(context);
             return result;
