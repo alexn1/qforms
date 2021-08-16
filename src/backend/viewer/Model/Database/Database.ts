@@ -56,15 +56,15 @@ class Database extends Model {
         return value;
     }
 
-    async beginTransaction(cnn): Promise<void> {
+    async beginTransaction(context: Context): Promise<void> {
         throw new Error('Database.beginTransaction not implemented');
     }
 
-    async commit(cnn): Promise<void> {
+    async commit(context): Promise<void> {
         throw new Error('Database.commit not implemented');
     }
 
-    async rollback(cnn, err): Promise<void> {
+    async rollback(context, err): Promise<void> {
         throw new Error('Database.rollback not implemented');
     }
 

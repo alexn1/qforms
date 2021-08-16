@@ -49,8 +49,7 @@ class PostgreSqlDatabase extends Database {
 
     release(context: Context): void {
         console.log('PostgreSqlDatabase.release', this.getName());
-        const client = this.getConnection(context);
-        client.release();
+        this.getConnection(context).release();
     }
 
     getConnection(context: Context): any {
@@ -73,8 +72,7 @@ class PostgreSqlDatabase extends Database {
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
-        const cnn = this.getConnection(context);
-        const result = await cnn.query(sql, values);
+        const result = await this.getConnection(context).query(sql, values);
         // console.log('cnn.query result:', result);
         return result;
     }
@@ -96,19 +94,19 @@ class PostgreSqlDatabase extends Database {
         return result.rows;
     }
 
-    async beginTransaction(cnn) {
+    async beginTransaction(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.beginTransaction');
-        await cnn.query('begin');
+        await this.getConnection(context).query('begin');
     }
 
-    async commit(cnn) {
+    async commit(context): Promise<void> {
         console.log('PostgreSqlDatabase.commit');
-        await cnn.query('commit');
+        await this.getConnection(context).query('commit');
     }
 
-    async rollback(cnn, err) {
+    async rollback(context, err): Promise<void> {
         console.log('PostgreSqlDatabase.rollback: ', err.message);
-        await cnn.query('rollback');
+        await this.getConnection(context).query('rollback');
     }
 
     static formatQuery(query: string, params: any) {

@@ -400,9 +400,14 @@ class BackHostApp {
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
-        const response = await page.fill(context);
-        if (response === undefined) throw new Error('page action: response is undefined');
-        await res.json({page: response});
+        await application.connect(context);
+        try {
+            const response = await page.fill(context);
+            if (response === undefined) throw new Error('page action: response is undefined');
+            await res.json({page: response});
+        } finally {
+            application.release(context);
+        }
     }
 
     // action
@@ -500,13 +505,13 @@ class BackHostApp {
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().connect(context);
         try {
-            await dataSource.getDatabase().beginTransaction(cnn);
+            await dataSource.getDatabase().beginTransaction(context);
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert action: result is undefined');
-            await dataSource.getDatabase().commit(cnn);
+            await dataSource.getDatabase().commit(context);
             await res.json(result);
         } catch (err) {
-            await dataSource.getDatabase().rollback(cnn, err);
+            await dataSource.getDatabase().rollback(context, err);
             throw err;
         } finally {
             dataSource.getDatabase().release(context);
@@ -522,13 +527,13 @@ class BackHostApp {
         const dataSource = page.getForm(req.body.form).getDataSource('default');
         const cnn = await dataSource.getDatabase().connect(context);
         try {
-            await dataSource.getDatabase().beginTransaction(cnn);
+            await dataSource.getDatabase().beginTransaction(context);
             const result = await dataSource.delete(context);
-            await dataSource.getDatabase().commit(cnn);
+            await dataSource.getDatabase().commit(context);
             if (result === undefined) throw new Error('delete result is undefined');
             await res.json(result);
         } catch (err) {
-            await dataSource.getDatabase().rollback(cnn, err);
+            await dataSource.getDatabase().rollback(context, err);
             throw err;
         } finally {
             dataSource.getDatabase().release(context);
