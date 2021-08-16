@@ -19,9 +19,9 @@ class PostgreSqlDatabase extends Database {
 
     async deinit() {
         console.log('PostgreSqlDatabase.deinit: ' + this.getName());
-        if (this.pool !== null) {
-            return this.pool.end();
-        }
+        if (!this.pool) return;
+        console.log('ending pool:', this.pool.totalCount);
+        return await this.pool.end();
     }
 
     getPool() {

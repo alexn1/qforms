@@ -435,7 +435,7 @@ class BackHostApp {
             await res.json({rows, count, time});
             return time;
         } finally {
-            await dataSource.getDatabase().release();
+            await dataSource.getDatabase().release(context);
         }
     }
 
@@ -465,7 +465,7 @@ class BackHostApp {
             await res.json({row, time});
             return time;
         } finally {
-            await dataSource.getDatabase().release();
+            await dataSource.getDatabase().release(context);
         }
     }
 
@@ -495,7 +495,7 @@ class BackHostApp {
             await res.json({rows, count, time});
             return time;
         } finally {
-            await dataSource.getDatabase().release();
+            await dataSource.getDatabase().release(context);
         }
     }
 
