@@ -304,9 +304,7 @@ class BackHostApp {
             await this.loginGet(req, res, context);
         } else {
             await application.initContext(context);
-            for (const db of application.databases) {
-                await db.connect(context);
-            }
+            await application.connect(context);
             try {
                 const response =  await application.fill(context);
                 res.render('viewer/index', {
@@ -324,9 +322,7 @@ class BackHostApp {
                     ]
                 });
             } finally {
-                for (const db of application.databases) {
-                    db.release(context);
-                }
+                application.release(context);
             }
         }
     }
@@ -368,28 +364,33 @@ class BackHostApp {
         if (!context.route) throw new Error('no context.route');
         const route = context.route;
         const application = this.getApplication(context);
-        const user = await application.authenticate(context, req.body.username, req.body.password);
-        if (user) {
-            if (!user.id)   throw new Error('no user id');
-            if (!user.name) throw new Error('no user name');
-            if (req.session.user === undefined) {
-                req.session.user = {};
+        await application.connect(context);
+        try {
+            const user = await application.authenticate(context, req.body.username, req.body.password);
+            if (user) {
+                if (!user.id)   throw new Error('no user id');
+                if (!user.name) throw new Error('no user name');
+                if (req.session.user === undefined) {
+                    req.session.user = {};
+                }
+                req.session.user[route] = user;
+                res.redirect(req.url);
+            } else {
+                const users = await application.getUsers(context);
+                res.render('viewer/login', {
+                    version    : pkg.version,
+                    application: application,
+                    caption    : application.getAttr('caption'),
+                    REQUEST_URI: req.url,
+                    errMsg     : application.getText().login.WrongUsernameOrPassword,
+                    username   : req.body.username,
+                    users      : users,
+                    links      : this.viewerModule.getLinks(),
+                    scripts    : this.viewerModule.getScripts()
+                });
             }
-            req.session.user[route] = user;
-            res.redirect(req.url);
-        } else {
-            const users = await application.getUsers(context);
-            res.render('viewer/login', {
-                version    : pkg.version,
-                application: application,
-                caption    : application.getAttr('caption'),
-                REQUEST_URI: req.url,
-                errMsg     : application.getText().login.WrongUsernameOrPassword,
-                username   : req.body.username,
-                users      : users,
-                links      : this.viewerModule.getLinks(),
-                scripts    : this.viewerModule.getScripts()
-            });
+        } finally {
+            application.release(context);
         }
     }
 

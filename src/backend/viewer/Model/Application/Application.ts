@@ -404,6 +404,16 @@ class Application extends Model {
         return 'SdiApplicationView';
     }
 
+    async connect(context: Context): Promise<void> {
+        for (const db of this.databases) {
+            await db.connect(context);
+        }
+    }
+    release(context): void {
+        for (const db of this.databases) {
+            db.release(context);
+        }
+    }
 }
 
 export = Application;
