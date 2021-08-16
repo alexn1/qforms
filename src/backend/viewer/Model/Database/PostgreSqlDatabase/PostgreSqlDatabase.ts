@@ -78,16 +78,18 @@ class PostgreSqlDatabase extends Database {
     }
 
     async beginTransaction(cnn) {
-        // console.log('PostgreSqlDatabase.beginTransaction');
+        console.log('PostgreSqlDatabase.beginTransaction');
+        await cnn.query('begin');
     }
 
     async commit(cnn) {
-        // console.log('PostgreSqlDatabase.commit');
+        console.log('PostgreSqlDatabase.commit');
+        await cnn.query('commit');
     }
 
     async rollback(cnn, err) {
         console.log('PostgreSqlDatabase.rollback: ', err.message);
-        // throw err;
+        await cnn.query('rollback');
     }
 
     static formatQuery(query: string, params: any) {
