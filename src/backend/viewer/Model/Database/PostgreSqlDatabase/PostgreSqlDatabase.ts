@@ -91,17 +91,17 @@ class PostgreSqlDatabase extends Database {
     }
 
     async beginTransaction(context: Context): Promise<void> {
-        console.log('PostgreSqlDatabase.beginTransaction');
+        console.log('PostgreSqlDatabase.beginTransaction', this.getName());
         await this.getConnection(context).query('begin');
     }
 
     async commit(context): Promise<void> {
-        console.log('PostgreSqlDatabase.commit');
+        console.log('PostgreSqlDatabase.commit', this.getName());
         await this.getConnection(context).query('commit');
     }
 
     async rollback(context, err): Promise<void> {
-        console.log('PostgreSqlDatabase.rollback: ', err.message);
+        console.log('PostgreSqlDatabase.rollback: ', this.getName(), err.message);
         await this.getConnection(context).query('rollback');
     }
 
