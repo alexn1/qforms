@@ -411,18 +411,6 @@ class BackHostApp {
     }
 
     // action
-    async update(req, res, context: Context) {
-        console.log('BackHostApp.update', req.body.page);
-        const application = this.getApplication(context);
-        await application.initContext(context);
-        const page = await application.getPage(context, req.body.page);
-        const form = page.getForm(req.body.form);
-        const result = await form.update(context);
-        if (result === undefined) throw new Error('action update: result is undefined');
-        await res.json(result);
-    }
-
-    // action
     async select(req, res, context: Context) {
         console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
@@ -517,7 +505,8 @@ class BackHostApp {
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
-        const dataSource = page.getForm(req.body.form).getDataSource('default');
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().begin(context);
@@ -534,18 +523,42 @@ class BackHostApp {
     }
 
     // action
+    async update(req, res, context: Context) {
+        console.log('BackHostApp.update', req.body.page);
+        const application = this.getApplication(context);
+        await application.initContext(context);
+        const page = await application.getPage(context, req.body.page);
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
+        await dataSource.getDatabase().connect(context);
+        try {
+            await dataSource.getDatabase().begin(context);
+            const result = await dataSource.update(context);
+            if (result === undefined) throw new Error('action update: result is undefined');
+            await dataSource.getDatabase().commit(context);
+            await res.json(result);
+        } catch (err) {
+            await dataSource.getDatabase().rollback(context, err);
+            throw err;
+        } finally {
+            dataSource.getDatabase().release(context);
+        }
+    }
+
+    // action
     async _delete(req, res, context: Context) {
         console.log('BackHostApp._delete', req.body.page);
         const application = this.getApplication(context);
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
-        const dataSource = page.getForm(req.body.form).getDataSource('default');
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().begin(context);
             const result = await dataSource.delete(context);
-            await dataSource.getDatabase().commit(context);
             if (result === undefined) throw new Error('delete result is undefined');
+            await dataSource.getDatabase().commit(context);
             await res.json(result);
         } catch (err) {
             await dataSource.getDatabase().rollback(context, err);

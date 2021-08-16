@@ -98,7 +98,7 @@ class Form extends Model {
         });
     }
 
-    async update(context) {
+    /*async update(context) {
         console.log('Form.update', this.getFullName());
         const dataSource = this.getDataSource('default');
         await dataSource.getDatabase().connect(context);
@@ -113,7 +113,7 @@ class Form extends Model {
         } finally {
             dataSource.getDatabase().release(context);
         }
-    }
+    }*/
 
     async rpc(name, context) {
         console.log('Form.rpc', name, context.params);
