@@ -417,6 +417,9 @@ class BackHostApp {
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
+
+
+
         const result = await form.update(context);
         if (result === undefined) throw new Error('action update: result is undefined');
         await res.json(result);
@@ -503,7 +506,7 @@ class BackHostApp {
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
-        const cnn = await dataSource.getDatabase().connect(context);
+        await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(context);
             const result = await dataSource.insert(context);
@@ -525,7 +528,7 @@ class BackHostApp {
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
-        const cnn = await dataSource.getDatabase().connect(context);
+        await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(context);
             const result = await dataSource.delete(context);

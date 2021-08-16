@@ -101,7 +101,7 @@ class Form extends Model {
     async update(context) {
         console.log('Form.update', this.getFullName());
         const dataSource = this.getDataSource('default');
-        const cnn = await dataSource.getDatabase().connect(context);
+        await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(context);
             const result = await dataSource.update(context);

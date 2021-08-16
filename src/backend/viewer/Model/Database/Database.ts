@@ -25,7 +25,7 @@ class Database extends Model {
         response.name = this.getAttr('name');
     }
 
-    async connect(context: Context): Promise<any> {
+    async connect(context: Context): Promise<void> {
         throw new Error('Database.connect not implemented');
     }
 

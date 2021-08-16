@@ -38,13 +38,13 @@ class PostgreSqlDatabase extends Database {
         return new Pool(config);
     }
 
-    async connect(context: Context): Promise<any> {
+    async connect(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.connect', this.getName());
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        return context.connections[name] = await this.getPool().connect();
+        context.connections[name] = await this.getPool().connect();
     }
 
     getConnection(context: Context): any {
