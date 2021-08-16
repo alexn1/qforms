@@ -13,11 +13,11 @@ class Database extends Model {
         this.tables          = [];
     }
 
-    async init(context: Context) {
+    async init(context: Context): Promise<void> {
         await this.createColItems('tables', context);
     }
 
-    async deinit() {
+    async deinit(): Promise<void> {
         throw new Error('Database.deinit not implemented');
     }
 
