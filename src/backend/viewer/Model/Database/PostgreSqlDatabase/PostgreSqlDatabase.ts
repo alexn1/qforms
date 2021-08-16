@@ -38,14 +38,33 @@ class PostgreSqlDatabase extends Database {
         return new Pool(config);
     }
 
-    async getConnection(context: Context) {
-        // console.log('PostgreSqlDatabase.getConnection');
+    async connect(context: Context): Promise<any> {
+        console.log('PostgreSqlDatabase.connect', this.getName());
         const name = this.getName();
         if (context.connections[name]) {
+            throw new Error(`already connected: ${name}`);
+        }
+        return context.connections[name] = this._getPool().connect();
+    }
+
+    release(context: Context): void {
+        console.log('PostgreSqlDatabase.release', this.getName());
+        const client = this.getConnection(context);
+        client.release();
+    }
+
+    getConnection(context: Context): any {
+        // console.log('PostgreSqlDatabase.getConnection');
+        const name = this.getName();
+        /*if (context.connections[name]) {
             return context.connections[name];
         } else {
-            return context.connections[name] = this._getPool();
+            return context.connections[name] = this._getPool().connect();
+        }*/
+        if (!context.connections[name]) {
+            throw new Error(`not connected: ${name}`);
         }
+        return context.connections[name];
     }
 
     async queryResult(context: Context, query: string, params: any = null) {
@@ -54,7 +73,7 @@ class PostgreSqlDatabase extends Database {
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
-        const cnn = await this.getConnection(context);
+        const cnn = this.getConnection(context);
         const result = await cnn.query(sql, values);
         // console.log('cnn.query result:', result);
         return result;

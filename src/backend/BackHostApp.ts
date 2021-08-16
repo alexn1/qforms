@@ -495,7 +495,7 @@ class BackHostApp {
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
-        const cnn = await dataSource.getDatabase().getConnection(context);
+        const cnn = await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.insert(context);
@@ -505,6 +505,8 @@ class BackHostApp {
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
             throw err;
+        } finally {
+            dataSource.getDatabase().release(context);
         }
     }
 
@@ -515,7 +517,7 @@ class BackHostApp {
         await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const dataSource = page.getForm(req.body.form).getDataSource('default');
-        const cnn = await dataSource.getDatabase().getConnection(context);
+        const cnn = await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.delete(context);
@@ -525,6 +527,8 @@ class BackHostApp {
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
             throw err;
+        } finally {
+            dataSource.getDatabase().release(context);
         }
     }
 

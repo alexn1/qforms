@@ -25,8 +25,16 @@ class Database extends Model {
         response.name = this.getAttr('name');
     }
 
-    async getConnection(context) {
+    async connect(context: Context): Promise<any> {
+        throw new Error('Database.connect not implemented');
+    }
+
+    getConnection(context): any {
         throw new Error('Database.getConnection not implemented');
+    }
+
+    release(context: Context): void {
+        throw new Error('Database.getConnection not release');
     }
 
     async queryResult(context, query, params = null) {
@@ -48,15 +56,15 @@ class Database extends Model {
         return value;
     }
 
-    async beginTransaction(cnn) {
+    async beginTransaction(cnn): Promise<void> {
         throw new Error('Database.beginTransaction not implemented');
     }
 
-    async commit(cnn) {
+    async commit(cnn): Promise<void> {
         throw new Error('Database.commit not implemented');
     }
 
-    async rollback(cnn, err) {
+    async rollback(cnn, err): Promise<void> {
         throw new Error('Database.rollback not implemented');
     }
 

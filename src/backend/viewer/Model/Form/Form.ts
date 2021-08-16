@@ -101,7 +101,7 @@ class Form extends Model {
     async update(context) {
         console.log('Form.update', this.getFullName());
         const dataSource = this.getDataSource('default');
-        const cnn = await dataSource.getDatabase().getConnection(context);
+        const cnn = await dataSource.getDatabase().connect(context);
         try {
             await dataSource.getDatabase().beginTransaction(cnn);
             const result = await dataSource.update(context);
@@ -110,6 +110,8 @@ class Form extends Model {
         } catch (err) {
             await dataSource.getDatabase().rollback(cnn, err);
             throw err;
+        } finally {
+            dataSource.getDatabase().release(context);
         }
     }
 
