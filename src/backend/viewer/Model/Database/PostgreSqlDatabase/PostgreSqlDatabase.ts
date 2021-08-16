@@ -24,8 +24,8 @@ class PostgreSqlDatabase extends Database {
         }
     }
 
-    _getPool() {
-        // console.log('PostgreSqlDatabase._getPool');
+    getPool() {
+        // console.log('PostgreSqlDatabase.getPool');
         if (this.pool === null) {
             const config = this.getConfig();
             // console.log('creating connection pool for: ' + this.getName(), config);
@@ -44,26 +44,22 @@ class PostgreSqlDatabase extends Database {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        return context.connections[name] = await this._getPool().connect();
-    }
-
-    release(context: Context): void {
-        console.log('PostgreSqlDatabase.release', this.getName());
-        this.getConnection(context).release();
+        return context.connections[name] = await this.getPool().connect();
     }
 
     getConnection(context: Context): any {
         // console.log('PostgreSqlDatabase.getConnection');
         const name = this.getName();
-        /*if (context.connections[name]) {
-            return context.connections[name];
-        } else {
-            return context.connections[name] = this._getPool().connect();
-        }*/
         if (!context.connections[name]) {
             throw new Error(`not connected: ${name}`);
         }
         return context.connections[name];
+    }
+
+    release(context: Context): void {
+        console.log('PostgreSqlDatabase.release', this.getName());
+        this.getConnection(context).release();
+        context.connections[this.getName()] = null;
     }
 
     async queryResult(context: Context, query: string, params: any = null) {

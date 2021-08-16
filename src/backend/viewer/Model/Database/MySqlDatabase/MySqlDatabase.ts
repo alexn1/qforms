@@ -25,8 +25,8 @@ class MySqlDatabase extends Database {
         }
     }
 
-    _getPool() {
-        //console.log('MySqlDatabase._getPool');
+    getPool() {
+        //console.log('MySqlDatabase.getPool');
         if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
             this.pool = mysql.createPool(this.getConfig());
@@ -51,7 +51,7 @@ class MySqlDatabase extends Database {
         //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
             if (context.connections[this.getName()] === undefined) {
-                this._getPool().getConnection((err, cnn) => {
+                this.getPool().getConnection((err, cnn) => {
                     if (err) {
                         reject(err);
                     } else {
