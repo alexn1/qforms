@@ -304,21 +304,30 @@ class BackHostApp {
             await this.loginGet(req, res, context);
         } else {
             await application.initContext(context);
-            const response =  await application.fill(context);
-            res.render('viewer/index', {
-                version       : pkg.version,
-                application   : application,
-                context       : context,
-                response      : response,
-                links         : [
-                    ...this.viewerModule.getLinks(),
-                    ...application.links
-                ],
-                scripts       : [
-                    ...this.viewerModule.getScripts(),
-                    ...application.scripts
-                ]
-            });
+            for (const db of application.databases) {
+                await db.connect(context);
+            }
+            try {
+                const response =  await application.fill(context);
+                res.render('viewer/index', {
+                    version       : pkg.version,
+                    application   : application,
+                    context       : context,
+                    response      : response,
+                    links         : [
+                        ...this.viewerModule.getLinks(),
+                        ...application.links
+                    ],
+                    scripts       : [
+                        ...this.viewerModule.getScripts(),
+                        ...application.scripts
+                    ]
+                });
+            } finally {
+                for (const db of application.databases) {
+                    db.release(context);
+                }
+            }
         }
     }
 
@@ -383,13 +392,6 @@ class BackHostApp {
             });
         }
     }
-
-    // fill application
-    /*async fill(req, context: Context) {
-        console.log('BackHostApp.fill', this.getApplication(context).getName());
-        const application = this.getApplication(context);
-        return await application.fill(context);
-    }*/
 
     // action (fill page)
     async page(req, res, context: Context) {

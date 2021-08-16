@@ -44,7 +44,7 @@ class PostgreSqlDatabase extends Database {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        return context.connections[name] = this._getPool().connect();
+        return context.connections[name] = await this._getPool().connect();
     }
 
     release(context: Context): void {
