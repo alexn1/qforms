@@ -20,7 +20,7 @@ class Grid extends ReactComponent {
         return this.state.key;
     }
     setActiveRowKey(key) {
-        console.log('Grid.setActiveRowKey', key);
+        // console.log('Grid.setActiveRowKey', key);
         this.state.key = key;
     }
     isRowActive(i, key) {

@@ -872,7 +872,7 @@ class Grid extends ReactComponent {
   }
 
   setActiveRowKey(key) {
-    console.log('Grid.setActiveRowKey', key);
+    // console.log('Grid.setActiveRowKey', key);
     this.state.key = key;
   }
 
