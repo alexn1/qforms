@@ -439,11 +439,16 @@ class BackHostApp {
         } else {
             dataSource = application.getDataSource(req.body.ds);
         }
-        const [rows, count] = await dataSource.select(context);
-        const time = Date.now() - start;
-        console.log('select time:', time);
-        await res.json({rows, count, time});
-        return time;
+        await dataSource.getDatabase().connect(context);
+        try {
+            const [rows, count] = await dataSource.select(context);
+            const time = Date.now() - start;
+            console.log('select time:', time);
+            await res.json({rows, count, time});
+            return time;
+        } finally {
+            await dataSource.getDatabase().release();
+        }
     }
 
     // action
@@ -463,12 +468,17 @@ class BackHostApp {
         } else {
             dataSource = application.getDataSource(req.body.ds);
         }
-        const row = await dataSource.selectSingle(context);
-        const time = Date.now() - start;
-        console.log('select time:', time);
-        if (row === undefined) throw new Error('selectSingle action: row is undefined');
-        await res.json({row, time});
-        return time;
+        await dataSource.getDatabase().connect(context);
+        try {
+            const row = await dataSource.selectSingle(context);
+            const time = Date.now() - start;
+            console.log('select time:', time);
+            if (row === undefined) throw new Error('selectSingle action: row is undefined');
+            await res.json({row, time});
+            return time;
+        } finally {
+            await dataSource.getDatabase().release();
+        }
     }
 
     // action
@@ -488,12 +498,17 @@ class BackHostApp {
         } else {
             dataSource = application.getDataSource(req.body.ds);
         }
-        const [rows, count] = await dataSource.selectMultiple(context);
-        const time = Date.now() - start;
-        console.log('select time:', time);
-        if (rows === undefined) throw new Error('selectMultiple action: rows are undegined');
-        await res.json({rows, count, time});
-        return time;
+        await dataSource.getDatabase().connect(context);
+        try {
+            const [rows, count] = await dataSource.selectMultiple(context);
+            const time = Date.now() - start;
+            console.log('select time:', time);
+            if (rows === undefined) throw new Error('selectMultiple action: rows are undegined');
+            await res.json({rows, count, time});
+            return time;
+        } finally {
+            await dataSource.getDatabase().release();
+        }
     }
 
     // action
