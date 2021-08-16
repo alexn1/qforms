@@ -77,7 +77,7 @@ class BackHostApp {
     server: any;
     publicDirPath: string;
     appsDirPath: string;
-    logCnn: any;
+    logPool: any;
     nodeEnv: any;
     commonModule: CommonModule;
     indexModule: IndexModule;
@@ -94,7 +94,7 @@ class BackHostApp {
         // this.server = null;
         // this.publicDirPath = null;
         // this.appsDirPath = null;
-        // this.logCnn = null;
+        // this.logPool = null;
         // this.nodeEnv = null;
     }
 
@@ -125,11 +125,10 @@ class BackHostApp {
         const engineDirPath  = path.join(backendDirPath, '..');
         this.publicDirPath = path.join(engineDirPath,  'frontend');
 
-        // logCnn
+        // logPool
         if (log) {
-            this.logCnn = PostgreSqlDatabase.createPool(log);
+            this.logPool = PostgreSqlDatabase.createPool(log);
         }
-
 
         // options
         this.server.set('handleException', handleException);
@@ -748,14 +747,14 @@ class BackHostApp {
 
     async logError(req, err) {
         console.log('BackHostApp.logError:', colors.red(err));
-        if (!this.logCnn) return;
+        if (!this.logPool) return;
         try {
             const route = err.context ? err.context.route : null;
             let appVersion = null;
             if (route) {
                 appVersion = this.applications[route].getVersion();
             }
-            await BackHostApp.createLog(this.logCnn, {
+            await BackHostApp.createLog(this.logPool, {
                 type   : 'error',
                 source : 'server',
                 ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -778,7 +777,7 @@ class BackHostApp {
     }
 
     async logRequest(req, context: Context, time) {
-        if (!this.logCnn) return;
+        if (!this.logPool) return;
         try {
             const application = this.getApplication(context);
             let args = '';
@@ -797,7 +796,7 @@ class BackHostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await BackHostApp.createLog(this.logCnn, {
+            await BackHostApp.createLog(this.logPool, {
                 type   : 'log',
                 source : 'server',
                 ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -1078,9 +1077,9 @@ class BackHostApp {
 
     async postError(req, res, next) {
         console.log(colors.red('BackHostApp.postError'), colors.red(req.body));
-        if (this.logCnn) {
+        if (this.logPool) {
             try {
-                await BackHostApp.createLog(this.logCnn, {
+                await BackHostApp.createLog(this.logPool, {
                     type   : 'error',
                     source : 'client',
                     ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
