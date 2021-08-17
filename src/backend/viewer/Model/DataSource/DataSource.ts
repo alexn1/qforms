@@ -223,7 +223,7 @@ class DataSource extends Model {
     async update(context: Context) {
         throw new Error('DataSource.update not implemented');
     }
-    async insert(context: Context): Promise<any> {
+    async insert(context: Context, values: any = null): Promise<any> {
         throw new Error('DataSource.insert not implemented');
     }
     async delete(context: Context): Promise<any> {
