@@ -40,6 +40,7 @@ class PostgreSqlDatabase extends Database {
 
     async connect(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.connect', this.getName());
+        if (!context) throw new Error('no context');
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
@@ -49,6 +50,7 @@ class PostgreSqlDatabase extends Database {
 
     getConnection(context: Context): any {
         // console.log('PostgreSqlDatabase.getConnection');
+        if (!context) throw new Error('no context');
         const name = this.getName();
         if (!context.connections[name]) {
             throw new Error(`not connected: ${name}`);
@@ -58,6 +60,7 @@ class PostgreSqlDatabase extends Database {
 
     release(context: Context): void {
         console.log('PostgreSqlDatabase.release', this.getName());
+        if (!context) throw new Error('no context');
         this.getConnection(context).release();
         context.connections[this.getName()] = null;
     }
