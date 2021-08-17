@@ -149,11 +149,13 @@ class TableFormController extends FormController {
     onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
         this.invalidate();
-        for (const key in e.updates) {
-            if (this.grid.getActiveRowKey() === key) {
-                const newKey = e.updates[key];
-                if (key !== newKey) {
-                    this.grid.setActiveRowKey(newKey);
+        if (this.grid) {
+            for (const key in e.updates) {
+                if (this.grid.getActiveRowKey() === key) {
+                    const newKey = e.updates[key];
+                    if (key !== newKey) {
+                        this.grid.setActiveRowKey(newKey);
+                    }
                 }
             }
         }
