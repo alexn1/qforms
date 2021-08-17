@@ -32,12 +32,19 @@ class Model extends BaseModel {
         }*/
     }
 
+    isBackOnly(): boolean {
+        return this.isAttr('backOnly') && this.getAttr('backOnly') === 'true';
+    }
+
     async fillCollection(response: any, colName: string, context: Context) {
         if (!this[colName]) return;
         response[colName] = [];
         for (const model of this[colName]) {
-            if (model.isAttr('backOnly') && model.getAttr('backOnly') === 'true') continue;
-            response[colName].push(await model.fill(context));
+            if (model.isBackOnly()) {
+                continue;
+            }
+            const itemResponse = await model.fill(context);
+            response[colName].push(itemResponse);
         }
     }
 
