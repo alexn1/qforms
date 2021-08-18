@@ -891,8 +891,8 @@ class Grid extends ReactComponent {
     console.log('Grid.onCopy');
     const row = this.findRow(this.getActiveRowKey());
     const column = this.props.columns[this.getActiveColumn()].name;
-    const value = row[column];
-    console.log('value:', value);
+    const text = Helper.decodeValue(row[column]).toString();
+    await Helper.copyTextToClipboard(text);
   }
 
   findRow(key) {
