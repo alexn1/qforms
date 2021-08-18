@@ -17,14 +17,14 @@ class PostgreSqlDatabase extends Database {
         return new PostgreSqlDatabase(data, parent);
     }*/
 
-    async deinit() {
+    async deinit(): Promise<void> {
         console.log('PostgreSqlDatabase.deinit: ' + this.getName());
         if (!this.pool) return;
         console.log('ending pool:', this.pool.totalCount);
-        return await this.pool.end();
+        await this.pool.end();
     }
 
-    getPool() {
+    getPool(): any {
         // console.log('PostgreSqlDatabase.getPool');
         if (this.pool === null) {
             const config = this.getConfig();
@@ -34,7 +34,7 @@ class PostgreSqlDatabase extends Database {
         return this.pool;
     }
 
-    static createPool(config: any) {
+    static createPool(config: any): any {
         return new Pool(config);
     }
 
@@ -65,7 +65,7 @@ class PostgreSqlDatabase extends Database {
         context.connections[this.getName()] = null;
     }
 
-    async queryResult(context: Context, query: string, params: any = null) {
+    async queryResult(context: Context, query: string, params: any = null): Promise<any> {
         if (context.query.sql) console.log(colors.blue('PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
@@ -76,7 +76,7 @@ class PostgreSqlDatabase extends Database {
         return result;
     }
 
-    static async queryResult(cnn, query: string, params: any = null) {
+    static async queryResult(cnn, query: string, params: any = null): Promise<any> {
         console.log(colors.blue('static PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
@@ -95,16 +95,19 @@ class PostgreSqlDatabase extends Database {
 
     async begin(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.begin', this.getName());
+        if (!context) throw new Error('no context');
         await this.getConnection(context).query('begin');
     }
 
     async commit(context): Promise<void> {
         console.log('PostgreSqlDatabase.commit', this.getName());
+        if (!context) throw new Error('no context');
         await this.getConnection(context).query('commit');
     }
 
     async rollback(context, err): Promise<void> {
         console.log('PostgreSqlDatabase.rollback: ', this.getName(), err.message);
+        if (!context) throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
 
