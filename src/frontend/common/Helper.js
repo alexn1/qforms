@@ -196,28 +196,17 @@ class Helper {
         return 24*Helper.HOUR();
     }
     static fallbackCopyTextToClipboard(text) {
-        console.log('Helper.fallbackCopyTextToClipboard', text);
+        // console.log('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
-
-        // Avoid scrolling to bottom
-        textArea.style.top = '0';
+        textArea.style.top = '0';       // Avoid scrolling to bottom
         textArea.style.left = '0';
         textArea.style.position = 'fixed';
-
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-
-        try {
-            const successful = document.execCommand('copy');
-            const msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Fallback: Copying text command was ' + msg);
-        } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
-        }
-
+        document.execCommand('copy');
         document.body.removeChild(textArea);
         activeElement.focus();
     }
@@ -227,7 +216,7 @@ class Helper {
             Helper.fallbackCopyTextToClipboard(text);
             return;
         }
-        return await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(text);
     }
 }
 
