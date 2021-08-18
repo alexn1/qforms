@@ -58,14 +58,26 @@ class Grid extends ReactComponent {
         }
     }
     onKeyDown = async e => {
-        // console.log('Grid.onKeyDown', e.keyCode);
+        // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
         switch (e.keyCode) {
             case 37: await this.onLeft() ; break;
             case 38: await this.onUp()   ; break;
             case 39: await this.onRight(); break;
             case 40: await this.onDown() ; break;
             case 13: await this.onEnter(); break;
+            case 67:
+                if (e.ctrlKey) {
+                    await this.onCopy();
+                }
+                break;
         }
+    }
+    async onCopy() {
+        console.log('Grid.onCopy');
+        const row = this.findRow(this.getActiveRowKey());
+        const column = this.props.columns[this.getActiveColumn()].name;
+        const value = row[column];
+        console.log('value:', value);
     }
     findRow(key) {
         return this.props.rows.find(row => this.getRowKey(row) === key);
