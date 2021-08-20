@@ -49,7 +49,9 @@
     "build-jsx-watch": "babel --out-dir build/lib/frontend/common/jsx src/frontend/common/jsx --watch",
     "test-jsx": "babel --out-dir apps/test/build/js apps/test/jsx --watch",
     "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
-    "build-ts": "tsc -p ."
+    "build-ts": "tsc -p .",
+    "build": "gulp build",
+    "release": "node release.js"
   },
   "repository": {
     "type": "git",
