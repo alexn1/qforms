@@ -1,6 +1,6 @@
 {
   "name": "qforms",
-  "version": "0.0.46",
+  "version": "0.0.47-dev",
   "description": "A platform for building Web UI for databases.",
   "main": "",
   "dependencies": {
