@@ -972,7 +972,7 @@ class BackHostApp {
     }*/
 
     async _e404(req, res, next) {
-        console.warn(colors.magenta(req.method), 'error/404');
+        console.warn(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(new MyError({
             message: `${req.method} ${req.originalUrl} not found`,
             status : 404
