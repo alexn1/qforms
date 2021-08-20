@@ -2,7 +2,7 @@
   "name": "qforms",
   "version": "0.0.47-dev",
   "description": "A platform for building Web UI for databases.",
-  "main": "",
+  "main": "lib/backend/index.js",
   "dependencies": {
     "async": "^0.9.0",
     "axios": "^0.21.1",
