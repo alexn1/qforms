@@ -918,10 +918,7 @@ class BackHostApp {
                 process.send('online');
             }
             const appsDirPath = path.resolve(this.appsDirPath);
-            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}`;
-            if (this.isDevelopment()) {
-                msg += `/index\n`;
-            }
+            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index' : ''}\n`;
             msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
             msg += `\tappsDirPath: ${appsDirPath}\n`;
             if (this.isDevelopment()) {
