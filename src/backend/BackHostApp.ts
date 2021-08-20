@@ -197,9 +197,6 @@ class BackHostApp {
         // this.server.get( '/test', this._getTest.bind(this));
         // this.server.post('/test', this._postTest.bind(this));
 
-
-
-
         // error logger
         this.server.options('/error', (req, res, next) => {
             console.log('options /error');
@@ -209,16 +206,15 @@ class BackHostApp {
         });
         this.server.post('/error', this.postError.bind(this));
 
-
         // index module
-        if (this.nodeEnv === 'development') {
+        if (this.isDevelopment()) {
             this.server.get( '/index' , this.indexGet.bind(this));
             this.server.post('/index' , this.indexPost.bind(this));
             // this.server.get( '/index/*', this.indexGetFile.bind(this));
         }
 
         // monitor module
-        if (this.nodeEnv === 'development') {
+        if (this.isDevelopment()) {
             this.server.get('/monitor' , this.monitorGet.bind(this));
             // this.server.get('/monitor/*', this.monitorGetFile.bind(this));
         }
@@ -228,9 +224,6 @@ class BackHostApp {
         this.server.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
         this.server.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
-
-
-
         // favicon.ico
         // this.server.get('/favicon.ico', this._favicon.bind(this));
 
@@ -238,7 +231,6 @@ class BackHostApp {
         this.server.use(express.static(this.publicDirPath));
 
         this.initCustomRoutes();
-
 
         // 404 and 500 error handlers
         this.server.use(this._e404.bind(this));
@@ -615,77 +607,6 @@ class BackHostApp {
         await res.json(null);
     }
 
-    /*async appFile(req, context: Context, application: Application) {
-        // console.log('BackHostApp.appFile', context.uri);
-        const filePath = path.join(application.getBuildDirPath(), context.uri);
-        // console.log('filePath:', filePath);
-        const ext = path.extname(filePath);
-        if (['.css', '.js', '.map'].includes(ext)) {
-            const exists = await Helper.exists(filePath);
-            if (exists) {
-                return [await Helper.readTextFile(filePath), ext];
-            }
-        }
-        if (['.ttf', '.otf', '.png', '.jpg'].includes(ext)) {
-            const exists = await Helper.exists(filePath);
-            if (exists) {
-                return [await Helper.readBinaryFile(filePath), ext];
-            }
-        }
-        return null;
-    }*/
-
-    // async sendAppFile(req, res, context: Context) {
-    //     // console.log('BackHostApp.sendAppFile');
-    //     const application = this.getApplication(context);
-    //     const filePath = path.join(application.getBuildDirPath(), context.uri);
-    //     const exists = await Helper.exists(filePath);
-    //
-    //     // const content = await this.appFile(req, context, application);
-    //     if (exists) {
-    //         res.sendFile(filePath);
-    //         /*
-    //         if (content[1] === '.css') {
-    //             res.setHeader('content-type', 'text/css');
-    //         }
-    //         if (content[1] === '.js') {
-    //             res.setHeader('content-type', 'text/javascript');
-    //         }
-    //         if (content[1] === '.map') {
-    //             res.setHeader('content-type', 'application/json');
-    //         }
-    //         if (content[1] === '.ttf') {
-    //             res.setHeader('content-type', 'font/ttf');
-    //         }
-    //         if (content[1] === '.otf') {
-    //             res.setHeader('content-type', 'font/opentype');
-    //         }
-    //         if (content[1] === '.png') {
-    //             res.setHeader('content-type', 'image/png');
-    //         }
-    //         if (content[1] === '.jpg') {
-    //             res.setHeader('content-type', 'image/jpeg');
-    //         }
-    //         res.send(content[0]);*/
-    //     } else {
-    //         await this.sendPlatformFile(req, res);
-    //     }
-    // }
-
-    /*async sendPlatformFile(req, res) {
-        const uri = req.params['0'];
-        const filePath = path.join(this.publicDirPath, uri);
-        const exists = await Helper.exists(filePath);
-        if (!exists) {
-            throw new MyError({
-                message: `file not found: ${uri}`,
-                data: {filePath},
-                status: 404
-            });
-        }
-        res.sendFile(filePath);
-    }*/
-
     async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
         const application = await this.createApplicationIfNotExists(req, context);
@@ -877,22 +798,6 @@ class BackHostApp {
             next(err);
         }
     }
-
-    /*async monitorGetFile(req, res, next) {
-        try {
-            await this.sendPlatformFile(req, res);
-        } catch (err) {
-            next(err);
-        }
-    }*/
-
-    /*async indexGetFile(req, res, next) {
-        try {
-            await this.sendPlatformFile(req, res);
-        } catch (err) {
-            next(err);
-        }
-    }*/
 
     async monitorGet(req, res, next) {
         console.warn(colors.magenta('monitorGet'));
@@ -1104,6 +1009,7 @@ class BackHostApp {
     initCustomRoutes() {
 
     }
+
     alias(
         method: string,
         path: string,
@@ -1124,6 +1030,7 @@ class BackHostApp {
             await this[cb](req, res, next);
         });
     }
+
     isDevelopment() {
         return this.nodeEnv === 'development';
     }
