@@ -1037,6 +1037,11 @@ class BackHostApp {
         });
     }
 
+    getPostAlias(path, arr, query) {
+        this.alias('get' , path , arr, 'appGet' , query);
+        this.alias('post', path , arr, 'appPost', query);
+    }
+
     isDevelopment() {
         return this.nodeEnv === 'development';
     }
