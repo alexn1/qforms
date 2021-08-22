@@ -745,7 +745,7 @@ class BackHostApp {
     }
 
     async appGet(req, res, next) {
-        console.warn(colors.magenta.underline('BackHostApp.appGet'), req.params);
+        console.log(colors.magenta.underline('BackHostApp.appGet'), req.params);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -771,7 +771,7 @@ class BackHostApp {
     }
 
     async indexGet(req, res, next) {
-        console.warn(colors.magenta('indexGet'));
+        console.log(colors.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
             res.render('index/index', {
@@ -787,7 +787,7 @@ class BackHostApp {
     }
 
     async indexPost(req, res, next) {
-        console.warn(colors.magenta('indexPost'), req.params);
+        console.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             await res.json({appInfos: appInfos.map(appInfo => ({
@@ -800,7 +800,7 @@ class BackHostApp {
     }
 
     async monitorGet(req, res, next) {
-        console.warn(colors.magenta('monitorGet'));
+        console.log(colors.magenta('monitorGet'));
         try {
             const response = this.monitorModule.fill();
             res.render('monitor/index', {
@@ -815,7 +815,7 @@ class BackHostApp {
     }
 
     async appPost(req, res, next)  {
-        console.warn(colors.magenta.underline('BackHostApp.appPost'), req.params, req.body);
+        console.log(colors.magenta.underline('BackHostApp.appPost'), req.params, req.body);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -843,7 +843,7 @@ class BackHostApp {
     }
 
     async appGetFile(req, res, next) {
-        console.warn(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
+        console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
@@ -877,7 +877,7 @@ class BackHostApp {
     }*/
 
     async _e404(req, res, next) {
-        console.warn(colors.magenta(req.method), 'error/404', req.originalUrl);
+        console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(new MyError({
             message: `${req.method} ${req.originalUrl} not found`,
             status : 404
@@ -885,7 +885,7 @@ class BackHostApp {
     }
 
     async _e500(err, req, res, next) {
-        console.warn(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
+        console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
         res.status(err.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {

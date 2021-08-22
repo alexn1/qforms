@@ -308,7 +308,7 @@ class Application extends Model {
     }
 
     async request(options) {
-        console.warn(colors.magenta('Application.request'), options);
+        console.log(colors.magenta('Application.request'), options);
         return await axios(options);
     }
 
