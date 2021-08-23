@@ -224,9 +224,6 @@ class BackHostApp {
         this.server.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
         this.server.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
-        // favicon.ico
-        // this.server.get('/favicon.ico', this._favicon.bind(this));
-
         // handle static for index and monitor
         this.server.use(express.static(this.publicDirPath));
 
@@ -872,11 +869,6 @@ class BackHostApp {
             }
         }
     }
-
-    /*_favicon(req, res, next) {
-        //console.log('/favicon.ico');
-        res.end();
-    }*/
 
     async _e404(req, res, next) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
