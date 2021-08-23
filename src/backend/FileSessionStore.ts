@@ -6,7 +6,7 @@ class FileSessionStore extends session.Store {
     store: any;
     dirPath: string;
     constructor(dirPath: string) {
-        console.log('FileSessionStore.constructor', dirPath);
+        // console.log('FileSessionStore.constructor', dirPath);
         super();
         this.dirPath = dirPath;
         this.store = {};
@@ -21,7 +21,7 @@ class FileSessionStore extends session.Store {
         });
     }
     get(sid, cb) {
-        console.log('FileSessionStore.get', sid);
+        // console.log('FileSessionStore.get', sid);
         const session = this.store[sid];
         if (session) {
             cb(null, session);
