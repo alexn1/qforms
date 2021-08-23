@@ -75,8 +75,9 @@ class BackHostApp {
     params: any;
     applications: any;          // application by route
     server: any;
-    publicDirPath: string;
     appsDirPath: string;
+    publicDirPath: string;
+    runtimeDirPath: string;
     logPool: any;
     nodeEnv: any;
     commonModule: CommonModule;
@@ -92,8 +93,9 @@ class BackHostApp {
         this.params = params;
         this.applications = {};
         // this.server = null;
-        // this.publicDirPath = null;
         // this.appsDirPath = null;
+        // this.publicDirPath = null;
+        // this.runtimeDirPath = null;
         // this.logPool = null;
         // this.nodeEnv = null;
     }
@@ -104,7 +106,8 @@ class BackHostApp {
         this.initProcess();
 
         // env
-        this.appsDirPath      = path.resolve(this.params.appsDirPath || './apps');
+        this.appsDirPath      = path.resolve(this.params.appsDirPath    || './apps');
+        this.runtimeDirPath   = path.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl      = this.params.logErrorUrl     || '/error';
         const handleException = this.params.handleException || true;
         const host            = this.params.host            || 'localhost';
@@ -123,6 +126,7 @@ class BackHostApp {
         // path
         const backendDirPath = __dirname;
         this.publicDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
+
 
         // logPool
         if (log) {
@@ -143,8 +147,8 @@ class BackHostApp {
         }
 
         // runtime & temp
-        // Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
-        // Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
+        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
+        // Helper.createDirIfNotExistsSync(path.join(this.workingDirPath,  'runtime/temp'));
 
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);

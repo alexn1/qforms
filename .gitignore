@@ -1,7 +1,7 @@
 .idea/
 node_modules
 build/lib/backend
-lib/runtime/
+runtime/
 apps/*
 !apps/demo
 !apps/demo2
