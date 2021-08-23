@@ -6,4 +6,3 @@ apps/*
 !apps/demo
 !apps/demo2
 !apps/test
-dist/
