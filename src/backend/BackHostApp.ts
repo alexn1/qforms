@@ -881,20 +881,18 @@ class BackHostApp {
     async _e500(err, req, res, next) {
         console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
-        res.status(err.status || 500);
+        const error = typeof err === 'string' ? new MyError({message: err}) : err;
+        res.status(error.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
-            if (this.isDevelopment()) {
-                res.end(typeof err === 'string' ? err : err.message);
-            } else {
-                res.end('Internal Software Error');
-            }
+            res.end(this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error');
         } else {
             res.render('error', {
-                message: this.isDevelopment() ? err.message : 'Internal Software Error',
-                error  : this.isDevelopment() ? err : {}
+                status : error.status,
+                message: this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error',
+                stack  : this.isDevelopment() && error.status !== 404 ? error.stack : null
             });
         }
-        await this.logError(req, err);
+        await this.logError(req, error);
     }
 
     /*_getTest(req, res, next) {
