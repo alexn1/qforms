@@ -104,7 +104,7 @@ class BackHostApp {
         this.initProcess();
 
         // env
-        this.appsDirPath      = this.params.appsDirPath     || './apps';
+        this.appsDirPath      = path.resolve(this.params.appsDirPath || './apps');
         this.logErrorUrl      = this.params.logErrorUrl     || '/error';
         const handleException = this.params.handleException || true;
         const host            = this.params.host            || 'localhost';
@@ -112,7 +112,7 @@ class BackHostApp {
         const log             = this.params.log;
 
         if (!fs.existsSync(this.appsDirPath)) {
-            console.error(colors.red(`Application folder '${path.resolve(this.appsDirPath)}' doesn't exist`));
+            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
             process.exit(1);
             return;
         }
@@ -913,10 +913,9 @@ class BackHostApp {
             if (process.send) {
                 process.send('online');
             }
-            const appsDirPath = path.resolve(this.appsDirPath);
             let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index' : ''}\n`;
             msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
-            msg += `\tappsDirPath: ${appsDirPath}\n`;
+            msg += `\tappsDirPath: ${this.appsDirPath}\n`;
             if (this.isDevelopment()) {
                 msg += `\tmonitor: http://${host}:${port}/monitor`;
             }
