@@ -32,20 +32,20 @@ async function _getFilePaths2(dirPath, ext, filePaths) {
     }
 }
 
-function getRandomString(length) {
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        const index = getRandomInt(0, chars.length - 1);
-        result += chars.substr(index, 1);
-    }
-    return result;
-}
-
 class Helper {
+    static getRandomString(length) {
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            const index = getRandomInt(0, chars.length - 1);
+            result += chars.substr(index, 1);
+        }
+        return result;
+    }
+
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
         return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(filePath => {
             return slash(path.relative(publicDirPath, filePath));
@@ -153,6 +153,12 @@ class Helper {
         }
         return null;
     }
+    static getFileContentSync(filePath) {
+        if (!fs.existsSync(filePath)) {
+            return null;
+        }
+        return fs.readFileSync(filePath, 'utf8');
+    }
 
     static readBinaryFile(filePath) {
         return new Promise((resolve, reject) => {
@@ -245,7 +251,7 @@ class Helper {
 
     /*static getTempSubDirPath3(tempDirPath) {
         return new Promise((resolve, reject) => {
-            const subDirName = getRandomString(8);
+            const subDirName = Helper.getRandomString(8);
             const tempSubSirPath = path.join(tempDirPath, subDirName);
             fs.exists(tempSubSirPath, exists => {
                 if (!exists) {
@@ -303,6 +309,11 @@ class Helper {
             });
         });
     }
+    static writeFileSync(filePath, content) {
+        // console.log('writeFileSync', filePath, content);
+        return fs.writeFileSync(filePath, content, 'utf8');
+    }
+
     static async writeFile2(filePath, content) {
         const dirPath = Helper.getDirPath(filePath);
         await Helper.createDirIfNotExists2(dirPath);

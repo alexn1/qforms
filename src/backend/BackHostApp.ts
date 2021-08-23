@@ -178,6 +178,18 @@ class BackHostApp {
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
+    getSecretSync() {
+        const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
+        let secret;
+        secret = Helper.getFileContentSync(secretFilePath);
+        if (secret) {
+            return secret;
+        }
+        secret = Helper.getRandomString(20);
+        Helper.writeFileSync(secretFilePath, secret);
+        return secret;
+    }
+
     initExpressServer() {
         // middlewares
         // server.use(morgan('dev'));
@@ -187,7 +199,7 @@ class BackHostApp {
         // server.use(multipartHandler);
         this.server.use(session({
             store             : new FileSessionStore(this.sessionDirPath),
-            secret            : 'qforms',
+            secret            : this.getSecretSync(),
             key               : 'sid',
             resave            : false,
             saveUninitialized : false
