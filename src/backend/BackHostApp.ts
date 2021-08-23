@@ -890,11 +890,15 @@ class BackHostApp {
         console.error(colors.red(err));
         res.status(err.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
-            res.end(typeof err === 'string' ? err : err.message);
+            if (this.isDevelopment()) {
+                res.end(typeof err === 'string' ? err : err.message);
+            } else {
+                res.end('Internal Software Error');
+            }
         } else {
             res.render('error', {
-                message: err.message,
-                error  : req.app.get('env') === 'development' ? err : {}
+                message: this.isDevelopment() ? err.message : 'Internal Software Error',
+                error  : this.isDevelopment() ? err : {}
             });
         }
         await this.logError(req, err);
