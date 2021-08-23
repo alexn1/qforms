@@ -19,6 +19,7 @@ import MyError from './MyError';
 import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
 import CommonModule from './common/CommonModule';
+import FileSessionStore from './FileSessionStore';
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -148,7 +149,7 @@ class BackHostApp {
 
         // runtime & temp
         Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        // Helper.createDirIfNotExistsSync(path.join(this.workingDirPath,  'runtime/temp'));
+        // Helper.createDirIfNotExistsSync(path.join(this.runtimeDirPath,  'runtime/temp'));
 
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
@@ -190,6 +191,7 @@ class BackHostApp {
         this.server.use(bodyParser.urlencoded({ extended: false }));
         // server.use(multipartHandler);
         this.server.use(session({
+            // store             : new FileSessionStore(this.runtimeDirPath),
             secret            : 'qforms',
             key               : 'sid',
             resave            : false,
