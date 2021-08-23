@@ -593,6 +593,7 @@ class BackHostApp {
             throw new Error(`no user for route ${context.route}`);
         }
         delete req.session.user[context.route];
+        await Helper.Session_save(req.session);
         await res.json(null);
     }
 

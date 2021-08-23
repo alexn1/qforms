@@ -377,6 +377,17 @@ class Helper {
     static DAY() {
         return 24*Helper.HOUR();
     }
+    static Session_save(session): Promise<void> {
+        return new Promise((resolve, reject) => {
+            session.save(err => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        })
+    }
 }
 
 export = Helper;

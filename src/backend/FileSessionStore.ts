@@ -14,7 +14,9 @@ class FileSessionStore extends session.Store {
     set(sid, session, cb) {
         console.log('FileSessionStore.set', sid, session);
         this.store[sid] = session;
-        Helper.writeFile(path.join(this.dirPath, `${sid}.json`), JSON.stringify(session, null, 4)).then(() => {
+        const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
+        const content = JSON.stringify(session, null, 4);
+        Helper.writeFile(sessionFilePath, content).then(() => {
             cb(null);
         });
     }
