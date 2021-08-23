@@ -682,6 +682,7 @@ class BackHostApp {
                 message: err.message,
                 stack  : err.stack.toString(),
                 data   : req ? JSON.stringify({
+                    host           : req.headers.host,
                     originalUrl    : req.originalUrl,
                     uri            : req.params['0'],
                     platformVersion: pkg.version,
