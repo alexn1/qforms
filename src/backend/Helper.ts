@@ -2,21 +2,6 @@ const glob       = require('glob');
 const path       = require('path');
 const slash      = require('slash');
 const fs         = require('fs');
-// const fsPromises = require('fs').promises;       // node v12
-// const _          = require('underscore');
-
-// const BaseModel = require('./BaseModel');
-
-/*const entityMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '/': '&#x2F;',
-    '`': '&#x60;',
-    '=': '&#x3D;'
-};*/
 
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -60,12 +45,6 @@ function getRandomString(length) {
     return result;
 }
 
-/*String.prototype.template = function (values) {
-    return this.replace(/\{([\w]+)\}/g, (text, name) => {
-        return values.hasOwnProperty(name) ? values[name] : text;
-    });
-};*/
-
 class Helper {
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
         return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map(filePath => {
@@ -94,51 +73,6 @@ class Helper {
         });
         return relativeFilePaths;
     }
-
-    /*static async getAppInfo(appFilePath, env) {
-        // console.log('Helper.getAppInfo', appFilePath);
-        const content = await Helper.readTextFile(appFilePath);
-        const data = JSON.parse(content);
-        if (data['@class'] && data['@class'] === 'Application') {
-            const appInfo = Helper.getAppInfoFromData(appFilePath, data, env);
-            return appInfo;
-        }
-        return null;
-    }*/
-
-    /*static getAppInfoFromData(appFilePath, data, env) {
-        // console.log('getAppInfoFromData:', appFilePath, data);
-        if (!env) throw new Error('no env');
-        const fileName = path.basename(appFilePath, path.extname(appFilePath));
-        const dirName  = path.basename(path.dirname(appFilePath));
-        return {
-            name        : BaseModel.getName(data),
-            caption     : BaseModel.getAttr(data, 'caption'),
-            fullName    : [dirName, fileName].join('/'),
-            envs        : BaseModel.getEnvList(data),
-            route       : [dirName, fileName, env].join('/'),
-            fileName    : fileName,
-            dirName     : dirName,
-            filePath    : path.resolve(appFilePath),
-            fileNameExt : path.basename(appFilePath),
-            extName     : path.extname(appFilePath),
-            dirPath     : path.resolve(path.dirname(appFilePath))
-        };
-    }*/
-
-    /*static async getAppInfos(appsDirPath) {
-        console.log('Helper.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*!/!*.json'));
-        const appInfos = [];
-        for (let i = 0; i < appFilesPaths.length; i++) {
-            const appFilePath = appFilesPaths[i];
-            const appInfo = await Helper.getAppInfo(appFilePath, 'local');
-            if (appInfo) {
-                appInfos.push(appInfo);
-            }
-        }
-        return appInfos;
-    }*/
 
     static currentTime() {
         const now = new Date();
@@ -387,11 +321,6 @@ class Helper {
         return await Helper.writeFile(filePath, content);
     }
 
-    /*static escapeHtml(string) {
-        if (typeof string !== 'string') throw new Error(`escapeHtml: value not string: ${string}`);
-        return String(string).replace(/[&<>"'`=\/]/g, s => entityMap[s]);
-    }*/
-
     static mapObject(object, cb) {
         return Object.keys(object).reduce((obj, key) => {
             const [newKey, newVal] = cb(key, object[key]);
@@ -433,14 +362,6 @@ class Helper {
     static encodeValue(value) {
         return JSON.stringify(value);
     }
-    /*static decodeValues(obj) {
-        if (!obj) throw new Error('decodeValues: need object');
-        const obj2 = {};
-        for (const name in obj) {
-            obj2[name] = Helper.decodeValue(obj[name]);
-        }
-        return obj2;
-    }*/
     static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
