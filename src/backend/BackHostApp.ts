@@ -122,8 +122,7 @@ class BackHostApp {
 
         // path
         const backendDirPath = __dirname;
-        const engineDirPath  = path.join(backendDirPath, '..');
-        this.publicDirPath = path.join(engineDirPath,  'frontend');
+        this.publicDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
 
         // logPool
         if (log) {
@@ -144,8 +143,8 @@ class BackHostApp {
         }
 
         // runtime & temp
-        Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
-        Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
+        // Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime'));
+        // Helper.createDirIfNotExistsSync(path.join(engineDirPath,  'runtime/temp'));
 
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
