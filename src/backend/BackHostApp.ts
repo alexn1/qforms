@@ -191,7 +191,7 @@ class BackHostApp {
         this.server.use(bodyParser.urlencoded({ extended: false }));
         // server.use(multipartHandler);
         this.server.use(session({
-            // store             : new FileSessionStore(this.runtimeDirPath),
+            store             : new FileSessionStore(this.runtimeDirPath),
             secret            : 'qforms',
             key               : 'sid',
             resave            : false,

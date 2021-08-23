@@ -1,11 +1,11 @@
-const events = require('events');
+const session  = require('express-session');
 
-class FileSessionStore extends events.EventEmitter {
+class FileSessionStore extends session.Store {
     store: any;
     dirPath: string;
     constructor(dirPath: string) {
-        super();
         console.log('FileSessionStore.constructor', dirPath);
+        super();
         this.dirPath = dirPath;
         this.store = {};
     }
