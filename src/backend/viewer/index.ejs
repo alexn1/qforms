@@ -4,7 +4,7 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=application.getTitle(context, response)%></title>
+    <title><%=application.getTitle(context, response)%> v<%=application.getVersion()%></title>
     <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
