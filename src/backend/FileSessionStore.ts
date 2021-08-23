@@ -1,4 +1,6 @@
+const path = require('path');
 const session  = require('express-session');
+import Helper from './Helper';
 
 class FileSessionStore extends session.Store {
     store: any;
@@ -12,11 +14,31 @@ class FileSessionStore extends session.Store {
     set(sid, session, cb) {
         console.log('FileSessionStore.set', sid, session);
         this.store[sid] = session;
-        cb(null);
+        Helper.writeFile(path.join(this.dirPath, `${sid}.json`), JSON.stringify(session, null, 4)).then(() => {
+            cb(null);
+        });
     }
     get(sid, cb) {
         console.log('FileSessionStore.get', sid);
-        cb(null, this.store[sid]);
+        const session = this.store[sid];
+        if (session) {
+            cb(null, session);
+        } else {
+            const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
+            console.log('getFileContent:', sessionFilePath);
+            Helper.getFileContent(sessionFilePath).then(content => {
+                if (content) {
+                    try {
+                        const session = this.store[sid] = JSON.parse(content);
+                        cb(null, session);
+                    } catch (err) {
+                        cb(err);
+                    }
+                } else {
+                    cb(null, null);
+                }
+            });
+        }
     }
     destroy(sid, cb) {
         console.log('FileSessionStore.destroy', sid);

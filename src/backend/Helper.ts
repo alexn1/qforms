@@ -166,18 +166,6 @@ class Helper {
         });
     }
 
-    static putFileContent(filePath, content): Promise<void> {
-        return new Promise((resolve, reject) => {
-            fs.writeFile(filePath, content, 'utf8', (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-    }
-
     static createPath(arr) {
         if (arr.length === 0) throw new Error('no path elements');
         if (arr.length === 1) return '/';

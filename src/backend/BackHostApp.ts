@@ -79,6 +79,7 @@ class BackHostApp {
     appsDirPath: string;
     publicDirPath: string;
     runtimeDirPath: string;
+    sessionDirPath: string;
     logPool: any;
     nodeEnv: any;
     commonModule: CommonModule;
@@ -93,12 +94,6 @@ class BackHostApp {
         // console.log('BackHostApp.constructor');
         this.params = params;
         this.applications = {};
-        // this.server = null;
-        // this.appsDirPath = null;
-        // this.publicDirPath = null;
-        // this.runtimeDirPath = null;
-        // this.logPool = null;
-        // this.nodeEnv = null;
     }
 
     run() {
@@ -127,7 +122,7 @@ class BackHostApp {
         // path
         const backendDirPath = __dirname;
         this.publicDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
-
+        this.sessionDirPath = path.join(this.runtimeDirPath,  'session');
 
         // logPool
         if (log) {
@@ -149,7 +144,7 @@ class BackHostApp {
 
         // runtime & temp
         Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        // Helper.createDirIfNotExistsSync(path.join(this.runtimeDirPath,  'runtime/temp'));
+        Helper.createDirIfNotExistsSync(this.sessionDirPath);
 
         this.initExpressServer();
         this.createAndRunHttpServer(host, port);
@@ -191,7 +186,7 @@ class BackHostApp {
         this.server.use(bodyParser.urlencoded({ extended: false }));
         // server.use(multipartHandler);
         this.server.use(session({
-            store             : new FileSessionStore(this.runtimeDirPath),
+            store             : new FileSessionStore(this.sessionDirPath),
             secret            : 'qforms',
             key               : 'sid',
             resave            : false,
