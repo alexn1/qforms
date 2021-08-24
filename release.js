@@ -4,8 +4,8 @@ const child_process = require('child_process');
 main(); async function main() {
 
     // master branch
-    await exec('git checkout master')
-    await exec('git pull origin master')
+    await exec('git checkout master');
+    await exec('git pull origin master');
     await exec('git push origin master');
     const packageJson1 = await getJsonFileData('package.json');
     const releaseVersion = packageJson1.version = versionWithoutDev(packageJson1.version);
@@ -104,13 +104,17 @@ function putJsonFileData(filePath, data) {
 async function exec(cmd) {
     console.log(cmd);
     return new Promise(function(resolve, reject) {
-        child_process.exec(cmd, function(err, stdout, stderr) {
+        const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
             if (err) {
                 reject(err);
+            } else if (stderr) {
+                reject(new Error(stderr));
             } else {
-                console.log(stdout);
-                resolve(stdout);
+                resolve();
             }
         });
+        childProcess.stdout.on('data', data => process.stdout.write(data));
+        childProcess.stderr.on('data', data => process.stderr.write(data));
+        // childProcess.on('exit', code => console.log(`child process exited with code: ${code}`);
     });
 }
