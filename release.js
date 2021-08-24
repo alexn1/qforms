@@ -13,7 +13,10 @@ main(); async function main() {
     const releaseVersion = packageJson1.version = versionWithoutDev(packageJson1.version);
     await putJsonFileData('package.json', packageJson1);
 
+    // build
     let stderr = await exec('gulp build'); if (stderr) throw new Error('stderr');
+
+    // commit
     await exec(`git commit -am "release v${releaseVersion}"`);
 
     // release branch
@@ -26,16 +29,18 @@ main(); async function main() {
 
     // master branch
     await exec('git checkout master');
-    await exec('git push origin master');
 
     // edit package.json
     const packageJson2 = await getJsonFileData('package.json');
     const nextVersion = packageJson2.version = versionWithDev(incPatch(packageJson2.version));
     await putJsonFileData('package.json', packageJson2);
 
+    // build
     stderr = await exec('gulp build'); if (stderr) throw new Error('stderr');
 
+    // commit
     await exec(`git commit -am "begin v${versionWithoutDev(nextVersion)}"`);
+
     await exec('git push origin master');
 }
 
