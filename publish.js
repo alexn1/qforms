@@ -3,10 +3,8 @@ const child_process = require('child_process');
 main(); async function main() {
     // release branch
     await exec('git checkout release');
-    await exec('gulp build');
     await exec('cd build');
     await exec('npm publish');
-    await exec('git reset --hard');
     await exec('git checkout master');
 }
 async function exec(cmd) {
