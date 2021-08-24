@@ -110,7 +110,7 @@ async function exec(cmd) {
             // } else if (stderr) {
             //     reject(new Error(stderr));
             } else {
-                resolve();
+                resolve(stderr);
             }
         });
         childProcess.stdout.on('data', data => process.stdout.write(data));
