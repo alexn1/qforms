@@ -77,7 +77,7 @@ class BackHostApp {
     applications: any;          // application by route
     server: any;
     appsDirPath: string;
-    publicDirPath: string;
+    frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
     logPool: any;
@@ -121,7 +121,7 @@ class BackHostApp {
 
         // path
         const backendDirPath = __dirname;
-        this.publicDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
+        this.frontendDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
         this.sessionDirPath = path.join(this.runtimeDirPath,  'session');
 
         // logPool
@@ -237,7 +237,7 @@ class BackHostApp {
         this.server.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
         // handle static for index and monitor
-        this.server.use(express.static(this.publicDirPath));
+        this.server.use(express.static(this.frontendDirPath));
 
         this.initCustomRoutes();
 
@@ -1018,7 +1018,7 @@ class BackHostApp {
     }
 
     getPublicDirPath() {
-        return this.publicDirPath;
+        return this.frontendDirPath;
     }
     initCustomRoutes() {
 
