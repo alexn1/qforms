@@ -3,7 +3,7 @@ const child_process = require('child_process');
 
 main(); async function main() {
     // release branch
-    // await exec('git checkout release');
+    await exec('git checkout release');
     await exec('gulp build');
 }
 async function exec(cmd) {
