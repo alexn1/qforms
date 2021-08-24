@@ -6,6 +6,8 @@ main(); async function main() {
     await exec('gulp build');
     await exec('cd build');
     await exec('npm publish');
+    await exec('git reset --hard');
+    await exec('git checkout master');
 }
 async function exec(cmd) {
     console.log(cmd);
