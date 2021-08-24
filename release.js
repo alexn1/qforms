@@ -119,14 +119,12 @@ async function exec(cmd) {
         const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
             if (err) {
                 reject(err);
-            // } else if (stderr) {
-            //     reject(new Error(stderr));
             } else {
                 resolve(stderr);
             }
         });
         childProcess.stdout.on('data', data => process.stdout.write(data));
         childProcess.stderr.on('data', data => process.stderr.write(data));
-        // childProcess.on('exit', code => console.log(`child process exited with code: ${code}`);
+        // childProcess.on('exit', code => console.log(`${cmd} process exited with code: ${code}`));
     });
 }
