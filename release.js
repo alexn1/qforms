@@ -107,8 +107,8 @@ async function exec(cmd) {
         const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
             if (err) {
                 reject(err);
-            } else if (stderr) {
-                reject(new Error(stderr));
+            // } else if (stderr) {
+            //     reject(new Error(stderr));
             } else {
                 resolve();
             }

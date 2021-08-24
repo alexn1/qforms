@@ -1,5 +1,4 @@
 const child_process = require('child_process');
-// const spawn = child_process.spawn;
 
 main(); async function main() {
     // release branch
@@ -10,10 +9,11 @@ async function exec(cmd) {
     console.log(cmd);
     return new Promise(function(resolve, reject) {
         const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
+            // console.log('stderr:', stderr);
             if (err) {
                 reject(err);
-            } else if (stderr) {
-                reject(new Error(stderr));
+            // } else if (stderr) {
+            //     reject(new Error(stderr));
             } else {
                 resolve();
             }
