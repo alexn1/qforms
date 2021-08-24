@@ -11,8 +11,8 @@ class MonitorModule {
         this.backHostApp = backHostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'monitor'), 'js' )).map(path => `/monitor/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'monitor'), 'js' )).map(path => `/monitor/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }

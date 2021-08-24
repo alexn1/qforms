@@ -7,7 +7,7 @@ class VisualEditorController extends EditorController {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const viewFilePath = path.join(
-                this.hostApp.getPublicDirPath(),
+                this.hostApp.getFrontendDirPath(),
                 'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
             );
             result.view = await Helper.readTextFile(viewFilePath);

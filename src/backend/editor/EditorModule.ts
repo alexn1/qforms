@@ -11,8 +11,8 @@ class EditorModule {
         this.backHostApp = backHostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getPublicDirPath(), 'editor'), 'js' )).map(path => `/editor/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'editor'), 'js' )).map(path => `/editor/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }

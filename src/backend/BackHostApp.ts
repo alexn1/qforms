@@ -1017,7 +1017,7 @@ class BackHostApp {
         res.end('');
     }
 
-    getPublicDirPath() {
+    getFrontendDirPath() {
         return this.frontendDirPath;
     }
     initCustomRoutes() {
