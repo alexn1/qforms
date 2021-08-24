@@ -4,6 +4,8 @@ main(); async function main() {
     // release branch
     await exec('git checkout release');
     await exec('gulp build');
+    await exec('cd build');
+    await exec('npm publish');
 }
 async function exec(cmd) {
     console.log(cmd);
