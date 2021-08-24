@@ -66,12 +66,12 @@ class Application extends Model {
     }
 
     async getLinks(context: Context): Promise<string[]> {
-        return (await Helper.getFilePaths(this.getBuildDirPath(), 'css'))
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${this.getVirtualPath(context)}/${src}`);
     }
 
     async getScripts(context: Context): Promise<string[]> {
-        return (await Helper.getFilePaths(this.getBuildDirPath(), 'js'))
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${this.getVirtualPath(context)}/${src}`);
     }
 
@@ -88,8 +88,8 @@ class Application extends Model {
         return this.appInfo.dirPath;
     }
 
-    getBuildDirPath() {
-        return path.join(this.getDirPath(), 'build');
+    getFrontendDirPath() {
+        return path.join(this.getDirPath(), 'frontend');
     }
 
     getText(): any {
