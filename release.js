@@ -14,7 +14,8 @@ main(); async function main() {
     await putJsonFileData('package.json', packageJson1);
 
     // build
-    let stderr = await exec('gulp build'); if (stderr) throw new Error(stderr);
+    let stderr = await exec('gulp build');
+    if (stderr) throw new Error(stderr);
 
     // commit
     await exec(`git commit -am "release v${releaseVersion}"`);
@@ -37,11 +38,11 @@ main(); async function main() {
     await putJsonFileData('package.json', packageJson2);
 
     // build
-    stderr = await exec('gulp build'); if (stderr) throw new Error(stderr);
+    stderr = await exec('gulp build');
+    if (stderr) throw new Error(stderr);
 
     // commit
     await exec(`git commit -am "begin v${versionWithoutDev(nextVersion)}"`);
-
     await exec('git push origin master');
 }
 
