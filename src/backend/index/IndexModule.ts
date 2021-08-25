@@ -20,7 +20,7 @@ class IndexModule {
         const appInfos = await Application.getAppInfos(this.backHostApp.appsDirPath);
         // console.log('appInfos:', appInfos);
         return {
-            nodeEnv : this.backHostApp.nodeEnv,
+            nodeEnv : this.backHostApp.getNodeEnv(),
             appInfos: appInfos.map(appInfo => ({
                 fullName: appInfo.fullName,
                 envs    : appInfo.envs

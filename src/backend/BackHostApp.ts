@@ -81,7 +81,6 @@ class BackHostApp {
     runtimeDirPath: string;
     sessionDirPath: string;
     logPool: any;
-    nodeEnv: any;
     commonModule: CommonModule;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
@@ -133,13 +132,6 @@ class BackHostApp {
         this.server.set('view engine'    , 'ejs');
         this.server.set('views'          , backendDirPath);
         this.server.enable('strict routing');
-
-        // production by default to disable editor
-        // nodeEnv
-        this.nodeEnv = process.env.NODE_ENV;
-        if (!this.nodeEnv) {
-            this.nodeEnv = 'production';
-        }
 
         // runtime & temp
         Helper.createDirIfNotExistsSync(this.runtimeDirPath);
@@ -624,7 +616,7 @@ class BackHostApp {
         const app = JSON.parse(appFile.content);
         const data = {
             app        : app,
-            nodeEnv    : this.nodeEnv,
+            nodeEnv    : this.getNodeEnv(),
             logErrorUrl: this.logErrorUrl
         };
         res.render('editor/index', {
@@ -1049,8 +1041,12 @@ class BackHostApp {
         this.alias('post', path , arr, 'appPost', query);
     }
 
+    getNodeEnv() {
+        return process.env.NODE_ENV || null;
+    }
+
     isDevelopment() {
-        return this.nodeEnv === 'development';
+        return this.getNodeEnv() === 'development';
     }
 
 }

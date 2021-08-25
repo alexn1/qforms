@@ -18,7 +18,7 @@ class MonitorModule {
     }
     fill() {
         return {
-            nodeEnv : this.backHostApp.nodeEnv,
+            nodeEnv : this.backHostApp.getNodeEnv(),
             uptime: Date.now() - this.backHostApp.startTime.getTime(),
             applications: Object.keys(this.backHostApp.applications).map(route => {
                 const app = this.backHostApp.applications[route];
