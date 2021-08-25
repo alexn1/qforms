@@ -39,9 +39,9 @@ class Context {
         this.route = this.calcRoute();
 
         // user
-        if (req.session.user && req.session.user[this.route]) {
-            this.user = req.session.user[this.route];
-        }
+        // if (req.session.user && req.session.user[this.route]) {
+        //     this.user = req.session.user[this.route];
+        // }
 
         // params
         this.query            = req.query        ? Helper.decodeObject(req.query)         : {};
@@ -74,7 +74,10 @@ class Context {
         }*/
     }
     getUser() {
-        return this.req.session.user[this.route];
+        if (this.req.session.user && this.req.session.user[this.route]) {
+            return this.req.session.user[this.route];
+        }
+        return null;
     }
 }
 

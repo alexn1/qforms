@@ -155,8 +155,9 @@ class Application extends Model {
         const menu = {};
 
         // pages
+        const user = context.getUser();
         const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
-            return context.user ? this.authorizePage(context.user, pageLinkName) : true;
+            return user ? this.authorizePage(user, pageLinkName) : true;
         });
         for (let i = 0; i < pageLinkNames.length; i++) {
             const pageLinkName = pageLinkNames[i];
@@ -215,7 +216,8 @@ class Application extends Model {
 
     async getPage(context: Context, pageLinkName: string): Promise<Page> {
         // console.log('Application.getPage', pageLinkName);
-        if (context.user && this.authorizePage(context.user, pageLinkName) === false) {
+        const user = context.getUser();
+        if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
         }
         if (this.pages[pageLinkName]) {
@@ -268,32 +270,12 @@ class Application extends Model {
 
     static getParams(context: Context) {
         // console.log('Application.getParams:', context.query);
-        /*
-        const params = {
-            ...context.query,
-        };
-        for (const name in context.params) {
-            if (context.params[name] !== undefined) {
-                params[name] = context.params[name];
-            }
-        }
-        if (context.querytime) {
-            for (const name in context.querytime.params) {
-                if (context.querytime.params[name] !== undefined) {
-                    params[name] = context.querytime.params[name];
-                }
-            }
-        }
-        if (context.user) {
-            params.username = context.user.name;
-        }
-        return params;
-        */
+        const user = context.getUser();
         return {
             ...context.query,
             ...context.params,
             ...(context.querytime ? context.querytime.params : {}),
-            ...(context.user ? {username: context.user.name} : {})
+            ...(user ? {username: user.name} : {})
         };
     }
 
