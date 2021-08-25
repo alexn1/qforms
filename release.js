@@ -18,6 +18,7 @@ main(); async function main() {
 
     // commit
     await exec(`git commit -am "release v${releaseVersion}"`);
+    await exec('git push origin master');
 
     // release branch
     await exec('git checkout release');
