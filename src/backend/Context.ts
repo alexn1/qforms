@@ -65,6 +65,10 @@ class Context {
     }
 
     calcRoute() {
+        if (!this.domain) throw new Error('no domain');
+        if (!this.appDirName) throw new Error('no appDirName');
+        if (!this.appFileName) throw new Error('no appFileName');
+        if (!this.env) throw new Error('no env');
         return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
     destroy() {
@@ -74,6 +78,9 @@ class Context {
             return this.req.session.user[this.route];
         }
         return null;
+    }
+    getRoute() {
+        return this.route;
     }
 }
 

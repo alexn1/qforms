@@ -239,9 +239,7 @@ class BackHostApp {
 
     async createApplicationIfNotExists(req, context: Context) {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
-        if (!context.route) throw new Error('no context.route');
-        const route = context.route;
-        const application = this.applications[route];
+        const application = this.applications[context.getRoute()];
         if (application) {
             /*if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
                 await application.deinit();
@@ -249,13 +247,12 @@ class BackHostApp {
             }*/
             return application;
         }
-        return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
+        return this.applications[context.getRoute()] = await this.createApplication(this.getAppFilePath(context), context);
     }
 
     getApplication(context: Context): Application {
-        if (!context.route) throw new Error('no context.route');
-        const application = this.applications[context.route];
-        if (!application) throw new Error(`no application for route: ${context.route}`);
+        const application = this.applications[context.getRoute()];
+        if (!application) throw new Error(`no application for route: ${context.getRoute()}`);
         return application;
     }
 
@@ -291,7 +288,7 @@ class BackHostApp {
         console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         await this.createApplicationIfNotExists(req, context);
         const application = this.getApplication(context);
-        if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
+        if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
         } else {
             await application.initContext(context);
@@ -324,7 +321,7 @@ class BackHostApp {
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context);
         } else {
-            if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.route])) {
+            if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
                 throw new MyError({message: 'not authenticated', context});
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
@@ -352,11 +349,15 @@ class BackHostApp {
 
     async loginPost(req, res, context: Context) {
         console.log('BackHostApp.loginPost');
-        if (!context.route) throw new Error('no context.route');
-        const route = context.route;
+        if (req.body.now      === undefined) throw new Error('no now');
+        if (req.body.username === undefined) throw new Error('no username');
+        if (req.body.password === undefined) throw new Error('no password');
+
         const application = this.getApplication(context);
         await application.connect(context);
         try {
+
+
             const user = await application.authenticate(context, req.body.username, req.body.password);
             if (user) {
                 if (!user.id)   throw new Error('no user id');
@@ -364,7 +365,7 @@ class BackHostApp {
                 if (req.session.user === undefined) {
                     req.session.user = {};
                 }
-                req.session.user[route] = user;
+                req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
             } else {
                 const users = await application.getUsers(context);
@@ -591,11 +592,10 @@ class BackHostApp {
     // action
     async logout(req, res, context: Context) {
         console.log('BackHostApp.logout');
-        if (!context.route) throw new Error('no context.route');
-        if (!req.session.user || !req.session.user[context.route]) {
-            throw new Error(`no user for route ${context.route}`);
+        if (!req.session.user || !req.session.user[context.getRoute()]) {
+            throw new Error(`no user for route ${context.getRoute()}`);
         }
-        delete req.session.user[context.route];
+        delete req.session.user[context.getRoute()];
         await Helper.Session_save(req.session);
         await res.json(null);
     }
@@ -671,7 +671,7 @@ class BackHostApp {
         console.log('BackHostApp.logError:', colors.red(err));
         if (!this.logPool) return;
         try {
-            const route = err.context ? err.context.route : null;
+            const route = err.context ? err.context.getRoute() : null;
             let appVersion = null;
             if (route) {
                 appVersion = this.applications[route].getVersion();
@@ -850,9 +850,9 @@ class BackHostApp {
         let context = null;
         try {
             context = new Context({req, domain: this.getDomain(req)});
-            if (this.applications[context.route]) {
+            if (this.applications[context.getRoute()]) {
                 const application = this.getApplication(context);
-                if (application.isAuthentication() && !(req.session.user && req.session.user[context.route])) {
+                if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
                     throw new MyError({message: 'not authenticated', context});
                 }
                 const filePath = path.join(application.getFrontendDirPath(), context.uri);
