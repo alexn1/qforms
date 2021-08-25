@@ -20,17 +20,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('form');
             form.addEventListener('submit', e => {
-                const nowInput = document.querySelector('input[name=now]');
-                const now = new Date();
+                const n = new Date();
                 const value = JSON.stringify([
-                    now.getFullYear(),
-                    now.getMonth(),
-                    now.getDate(),
-                    now.getHours(),
-                    now.getMinutes(),
-                    now.getSeconds()
+                    n.getFullYear(),
+                    n.getMonth(),
+                    n.getDate(),
+                    n.getHours(),
+                    n.getMinutes(),
+                    n.getSeconds()
                 ]);
-                nowInput.setAttribute('value', value);
+                document.querySelector('input[name=now]').setAttribute('value', value);
+                document.querySelector('input[name=timezoneOffset]').setAttribute('value', JSON.stringify(new Date().getTimezoneOffset()));
             });
         });
     </script>
@@ -41,6 +41,7 @@
 </head>
 <body class="login__body">
     <form class="login__form" action="<%=REQUEST_URI%>" method="post">
+        <input name="timezoneOffset" type="hidden">
         <input name="now"    type="hidden">
         <input name="action" type="hidden" value="login">
         <% if (users) { %>

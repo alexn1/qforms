@@ -399,6 +399,19 @@ class Helper {
             });
         })
     }
+    static calcTimeOffset(clientNow) {
+        const now = new Date();
+        const serverNow = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            now.getHours(),
+            now.getMinutes(),
+            now.getSeconds()
+        );
+        const offset = serverNow.getTime() - clientNow.getTime();
+        return offset;
+    }
 }
 
 export = Helper;

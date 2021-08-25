@@ -353,6 +353,11 @@ class BackHostApp {
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');
 
+        // offset
+        // const n = JSON.parse(req.body.now);
+        // const offset = Helper.calcTimeOffset(new Date(n[0], n[1], n[2], n[3], n[4], n[5]));
+        console.log('timezone offset:', new Date().getTimezoneOffset());
+
         const application = this.getApplication(context);
         await application.connect(context);
         try {
