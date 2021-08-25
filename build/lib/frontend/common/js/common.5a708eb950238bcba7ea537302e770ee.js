@@ -3,7 +3,6 @@ class FrontHostApp {
         // console.log('FrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
         this.data = data;
-        this.env = data.env;
 
         // window
         window.addEventListener('error'             , this.onWindowError.bind(this));
@@ -18,36 +17,6 @@ class FrontHostApp {
     run() {
         throw new Error('FrontHostApp.run not implemented');
     }
-
-    /*exit(evt) {
-        const message = 'After refreshing or closing of page, all opened pages and unsaved data will be lost.';
-        if (typeof evt === 'undefined') {
-            evt = window.event;
-        }
-        if (evt) {
-            evt.returnValue = message;
-        }
-        return message;
-    }*/
-
-    /*errorHandler(errorMsg) {
-        console.error('FrontHostApp.errorHandler:', errorMsg);
-        let message = errorMsg;
-        const stack = arguments[4] !== undefined && arguments[4].stack !== undefined ? arguments[4].stack : null;
-
-        if (this.env === 'development') {
-            message = 'FrontHostApp Error Handler:\n' + errorMsg;
-            if (stack) {
-                console.error('stack:', stack);
-                message += '\n\nstack:\n' + stack;
-            }
-        }
-        FrontHostApp.doHttpRequest({
-            action: 'error',
-            error: {message: errorMsg, stack}
-        });
-        alert(message);
-    }*/
     onWindowUnhandledrejection(e) {
         console.log('FrontHostApp.onWindowUnhandledrejection', e);
         const err = e instanceof Error ? e : e.reason || e.detail.reason;

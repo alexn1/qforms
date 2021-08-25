@@ -101,7 +101,6 @@ class BackHostApp {
         this.startTime = new Date();
         this.initProcess();
 
-        // env
         this.appsDirPath      = path.resolve(this.params.appsDirPath    || './apps');
         this.runtimeDirPath   = path.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl      = this.params.logErrorUrl     || '/error';
@@ -625,7 +624,7 @@ class BackHostApp {
         const app = JSON.parse(appFile.content);
         const data = {
             app        : app,
-            env        : this.nodeEnv,
+            nodeEnv    : this.nodeEnv,
             logErrorUrl: this.logErrorUrl
         };
         res.render('editor/index', {

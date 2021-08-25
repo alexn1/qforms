@@ -124,8 +124,8 @@ class Application extends Model {
         await this.fillCollection(response, 'actions'    , context);
         await this.fillCollection(response, 'dataSources', context);
 
-        // env
-        response.env = this.hostApp.nodeEnv;
+        // nodeEnv
+        response.nodeEnv = this.hostApp.nodeEnv;
 
         // text
         response.text = this.getText();
