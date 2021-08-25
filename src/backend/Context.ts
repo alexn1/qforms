@@ -67,6 +67,8 @@ class Context {
     calcRoute() {
         return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
+    destroy() {
+    }
     getUser() {
         if (this.req.session.user && this.req.session.user[this.route]) {
             return this.req.session.user[this.route];
