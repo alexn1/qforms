@@ -67,12 +67,6 @@ class Context {
     calcRoute() {
         return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
-    destroy() {
-        /*for (const name in this.connections) {
-            //console.log('release connection: ' + name);
-            this.connections[name].release();
-        }*/
-    }
     getUser() {
         if (this.req.session.user && this.req.session.user[this.route]) {
             return this.req.session.user[this.route];
