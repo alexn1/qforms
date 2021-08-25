@@ -10,7 +10,7 @@ const hash = require('gulp-hash-filename');
 // const order = require('gulp-order');
 const myOrder = require('./myOrder');
 
-const BUILD_PATH = './build';
+const BUILD_PATH = './dist';
 const SRC_PATH   = './src';
 
 function frontend_viewer_js() {

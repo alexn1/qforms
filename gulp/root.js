@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 
-const BUILD_PATH = './build';
+const BUILD_PATH = './dist';
 
 function root() {
     return gulp.src([

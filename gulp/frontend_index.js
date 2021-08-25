@@ -11,7 +11,7 @@ const hash = require('gulp-hash-filename');
 const myOrder = require('./myOrder');
 
 const SRC_PATH   = './src';
-const BUILD_PATH = './build';
+const BUILD_PATH = './dist';
 
 
 function frontend_index_js() {

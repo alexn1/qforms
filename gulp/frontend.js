@@ -8,7 +8,7 @@ const frontend_index   = require("./frontend_index");
 const frontend_viewer = require("./frontend_viewer");
 
 const SRC_PATH   = './src';
-const BUILD_PATH = './build';
+const BUILD_PATH = './dist';
 
 function frontend_root() {
     return gulp.src(path.join(SRC_PATH, 'frontend/*.*'))

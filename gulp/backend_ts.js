@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const ts = require('gulp-typescript');
 
 const SRC_PATH   = './src';
-const BUILD_PATH = './build';
+const BUILD_PATH = './dist';
 
 function backend_ts() {
     return gulp.src(path.join(SRC_PATH, 'backend/**/*.ts'))

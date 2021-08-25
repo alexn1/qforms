@@ -1,7 +1,7 @@
 var path   = require('path');
 var del    = require('del');
 
-var qforms = require(path.join('../build', 'lib/qforms'));
+var qforms = require(path.join('../dist', 'lib/qforms'));
 
 describe('test02', function() {
     var appFileDir  = 'apps/test';

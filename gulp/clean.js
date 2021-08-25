@@ -1,7 +1,7 @@
 const del = require('del');
 
 async function clean() {
-    return del(['build']);
+    return del(['dist']);
 }
 
 module.exports = clean;

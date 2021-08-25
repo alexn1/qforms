@@ -1,6 +1,6 @@
 .idea/
 node_modules
-build/lib/backend
+dist/lib/backend
 runtime/
 apps/*
 !apps/demo

@@ -1,8 +1,8 @@
 var path   = require('path');
 var should = require('should');
 
-var qforms = require(path.join('../build', 'lib/qforms'));
-var Context = require('../build/lib/backend/viewer/Context');
+var qforms = require(path.join('../dist', 'lib/qforms'));
+var Context = require('../dist/lib/backend/viewer/Context');
 
 describe('test01', function() {
     var application;
