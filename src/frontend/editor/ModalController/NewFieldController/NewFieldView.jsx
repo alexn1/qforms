@@ -11,7 +11,7 @@ class NewFieldView extends ReactComponent {
         await this.props.ctrl.onCreate({
             class  : this.class.getValue(),
             name   : this.name.getValue(),
-            caption: this.caption.getValue(),
+            caption: this.caption.getValue() || this.name.getValue(),
             type   : this.type.getValue()
         });
     }
