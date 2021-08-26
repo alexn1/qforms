@@ -322,7 +322,7 @@ class BackHostApp {
             await this.loginPost(req, res, context);
         } else {
             if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-                throw new MyError({message: 'not authenticated', context});
+                throw new MyError({message: 'Unauthorized', status: 401, context});
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
