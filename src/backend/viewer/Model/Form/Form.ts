@@ -98,23 +98,6 @@ class Form extends Model {
         });
     }
 
-    /*async update(context) {
-        console.log('Form.update', this.getFullName());
-        const dataSource = this.getDataSource('default');
-        await dataSource.getDatabase().connect(context);
-        try {
-            await dataSource.getDatabase().begin(context);
-            const result = await dataSource.update(context);
-            await dataSource.getDatabase().commit(context);
-            return result;
-        } catch (err) {
-            await dataSource.getDatabase().rollback(context, err);
-            throw err;
-        } finally {
-            dataSource.getDatabase().release(context);
-        }
-    }*/
-
     async rpc(name, context) {
         console.log('Form.rpc', name, context.params);
         if (this[name]) return await this[name](context);
