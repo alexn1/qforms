@@ -148,7 +148,7 @@ class Helper {
     }*/
 
     static templateToJsString(value, params) {
-        return value.replace(/\{([\w\.@]+)\}/g, (text, name) => {
+        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
