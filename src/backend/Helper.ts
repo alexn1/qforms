@@ -350,7 +350,7 @@ class Helper {
         const date = new Date(ts);
         ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
         if (timeOffset !== undefined && timeOffset !== null) {
-            ts += Helper.MINUTE() * timeOffset;
+            ts -= Helper.MINUTE() * timeOffset;
         }
         return new Date(ts);
     }
