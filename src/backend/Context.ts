@@ -84,7 +84,7 @@ class Context {
     }
     getClientTimezoneOffset() {
         if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
-            return this.req.session.tzOffset
+            return this.req.session.tzOffset;
         }
         return null;
     }
