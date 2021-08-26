@@ -3,13 +3,14 @@ import Helper from './Helper';
 class Context {
     req: any;
     domain: string;
+
     uri: string;
     module: string;
     appDirName: string;
     appFileName: string;
     env: string;
+
     route: string;
-    user: any;
     query: any;
     params: any;
     changes: any;
@@ -22,9 +23,14 @@ class Context {
         const req    = options.req;
         const domain = options.domain;
 
-        // req, domain
+        // check
         if (!req) throw new Error('no req');
+        if (!req.params.appDirName) throw new Error('no appDirName');
+        if (!req.params.appFileName) throw new Error('no appFileName');
+        if (!req.params.env) throw new Error('no env');
         if (!domain) throw new Error('no domain');
+
+        // req, domain
         this.req    = req;
         this.domain = domain;
 
@@ -37,11 +43,6 @@ class Context {
 
         // route
         this.route = this.calcRoute();
-
-        // user
-        // if (req.session.user && req.session.user[this.route]) {
-        //     this.user = req.session.user[this.route];
-        // }
 
         // params
         this.query            = req.query        ? Helper.decodeObject(req.query)         : {};
@@ -65,10 +66,6 @@ class Context {
     }
 
     calcRoute() {
-        if (!this.domain) throw new Error('no domain');
-        if (!this.appDirName) throw new Error('no appDirName');
-        if (!this.appFileName) throw new Error('no appFileName');
-        if (!this.env) throw new Error('no env');
         return [this.domain, this.appDirName, this.appFileName, this.env].join('/');
     }
     destroy() {
@@ -81,6 +78,9 @@ class Context {
     }
     getRoute() {
         return this.route;
+    }
+    getVirtualPath(): string {
+        return `/${this.module}/${this.appDirName}/${this.appFileName}/${this.env}`;
     }
 }
 

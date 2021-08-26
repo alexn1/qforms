@@ -349,20 +349,13 @@ class BackHostApp {
 
     async loginPost(req, res, context: Context) {
         console.log('BackHostApp.loginPost');
-        if (req.body.now      === undefined) throw new Error('no now');
+        if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');
-
-        // offset
-        // const n = JSON.parse(req.body.now);
-        // const offset = Helper.calcTimeOffset(new Date(n[0], n[1], n[2], n[3], n[4], n[5]));
-        console.log('timezone offset:', new Date().getTimezoneOffset());
-
+        req.session.tzOffset = JSON.parse(req.body.tzOffset);
         const application = this.getApplication(context);
         await application.connect(context);
         try {
-
-
             const user = await application.authenticate(context, req.body.username, req.body.password);
             if (user) {
                 if (!user.id)   throw new Error('no user id');

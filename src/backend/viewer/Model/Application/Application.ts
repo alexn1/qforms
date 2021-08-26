@@ -61,18 +61,14 @@ class Application extends Model {
         this.scripts = await this.getScripts(context);
     }
 
-    getVirtualPath(context: Context): string {
-        return `/${context.module}/${context.appDirName}/${context.appFileName}/${context.env}`;
-    }
-
     async getLinks(context: Context): Promise<string[]> {
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
-            .map(src => `${this.getVirtualPath(context)}/${src}`);
+            .map(src => `${context.getVirtualPath()}/${src}`);
     }
 
     async getScripts(context: Context): Promise<string[]> {
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
-            .map(src => `${this.getVirtualPath(context)}/${src}`);
+            .map(src => `${context.getVirtualPath()}/${src}`);
     }
 
     async deinit() {
@@ -118,7 +114,7 @@ class Application extends Model {
         response.logErrorUrl     = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion      = this.getVersion();
-        response.virtualPath     = this.getVirtualPath(context);
+        response.virtualPath     = context.getVirtualPath();
 
         await this.fillCollection(response, 'databases'  , context);
         await this.fillCollection(response, 'actions'    , context);
