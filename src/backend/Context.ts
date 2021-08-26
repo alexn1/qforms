@@ -83,11 +83,14 @@ class Context {
         return `/${this.module}/${this.appDirName}/${this.appFileName}/${this.env}`;
     }
     getClientTimezoneOffset() {
-        return this.req.session.tzOffset;
+        if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
+            return this.req.session.tzOffset
+        }
+        return null;
     }
     getTimeOffset() {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
-        if (clientTimezoneOffset) {
+        if (clientTimezoneOffset !== null) {
             return new Date().getTimezoneOffset() - clientTimezoneOffset;
         }
         return null;

@@ -193,7 +193,7 @@ class BackHostApp {
             secret            : this.getSecretSync(),
             key               : 'sid',
             resave            : false,
-            saveUninitialized : true
+            saveUninitialized : false
         }));
 
         // test
