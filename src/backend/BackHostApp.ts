@@ -919,8 +919,9 @@ class BackHostApp {
             msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
             msg += `\tappsDirPath: ${this.appsDirPath}\n`;
             if (this.isDevelopment()) {
-                msg += `\tmonitor: http://${host}:${port}/monitor`;
+                msg += `\tmonitor: http://${host}:${port}/monitor\n`;
             }
+            msg += `\tstarted at: ${new Date().toISOString()}\n`;
             console.log(msg);
         });
     }
