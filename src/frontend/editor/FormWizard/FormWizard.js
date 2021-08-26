@@ -50,11 +50,9 @@ class FormWizard {
         // console.log('FormWizard.getField', column);
         let field = {
             class: this.getFieldClass(column),
-            name : column.name
+            name : column.name,
+            caption: column.caption || column.name
         };
-        if (column.caption) {
-            field.caption = column.caption;
-        }
         if (column.key === 'true') {
             if (column.auto === 'false') {
                 field.notNull = 'true';
