@@ -13,8 +13,6 @@ async function exec(cmd) {
             // console.log('stderr:', stderr);
             if (err) {
                 reject(err);
-            // } else if (stderr) {
-            //     reject(new Error(stderr));
             } else {
                 resolve(stderr);
             }
