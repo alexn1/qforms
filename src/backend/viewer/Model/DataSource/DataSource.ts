@@ -130,10 +130,6 @@ class DataSource extends Model {
         }
     }
 
-    getParams(context: Context) {
-        return Application.getParams(context);
-    }
-
     static keyToParams(key, paramName = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};

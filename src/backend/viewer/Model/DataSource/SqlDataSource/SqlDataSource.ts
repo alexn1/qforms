@@ -36,7 +36,7 @@ class SqlDataSource extends DataSource {
     async selectSingle(context: Context) {
         // console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
-        const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), context.getParams());
         // if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(rows);
         return rows[0] || null;
@@ -53,14 +53,14 @@ class SqlDataSource extends DataSource {
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
-        const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), context.getParams());
         this.prepareRows(rows);
 
         // count
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('countQuery')) {
             try {
-                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), context.getParams());
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -81,14 +81,14 @@ class SqlDataSource extends DataSource {
             context.params.limit = limit;
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
-        const rows = await this.getDatabase().queryRows(context, query, this.getParams(context));
+        const rows = await this.getDatabase().queryRows(context, query, context.getParams());
         this.prepareRows(rows);
 
         // count
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getParams(context));
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), context.getParams());
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;

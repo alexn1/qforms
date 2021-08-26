@@ -82,8 +82,27 @@ class Context {
     getVirtualPath(): string {
         return `/${this.module}/${this.appDirName}/${this.appFileName}/${this.env}`;
     }
-    getTimezoneOffset() {
+    getClientTimezoneOffset() {
         return this.req.session.tzOffset;
+    }
+    getTimeOffset() {
+        const clientTimezoneOffset = this.getClientTimezoneOffset();
+        if (clientTimezoneOffset) {
+            return new Date().getTimezoneOffset() - clientTimezoneOffset;
+        }
+        return null;
+    }
+    getParams(): any {
+        // console.log('Context.getParams:');
+        const user = this.getUser();
+        const timeOffset = this.getTimeOffset();
+        return {
+            ...this.query,
+            ...this.params,
+            ...(this.querytime ? this.querytime.params : {}),
+            ...(user ? {username: user.name} : {}),
+            ...(timeOffset !== null ? {timeOffset} : {})
+        };
     }
 }
 

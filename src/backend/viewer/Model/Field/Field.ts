@@ -37,7 +37,7 @@ class Field extends Model {
         const column = this.getAttr('column');
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
-        const params = Application.getParams(context);
+        const params = context.getParams();
         const js = Helper.templateToJsString(defaultValue, params);
         let value;
         try {

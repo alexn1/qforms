@@ -264,17 +264,6 @@ class Application extends Model {
         return null;
     }
 
-    static getParams(context: Context) {
-        // console.log('Application.getParams:', context.query);
-        const user = context.getUser();
-        return {
-            ...context.query,
-            ...context.params,
-            ...(context.querytime ? context.querytime.params : {}),
-            ...(user ? {username: user.name} : {})
-        };
-    }
-
     async rpc(name: string, context: Context) {
         console.log('Application.rpc', name, context.params);
         if (this[name]) return await this[name](context);
