@@ -345,10 +345,14 @@ class Helper {
         console.log('Helper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
+            ts -= Helper.MINUTE() * timeOffset;
+        }
+        const date = new Date(ts);
+        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        if (timeOffset !== undefined && timeOffset !== null) {
             ts += Helper.MINUTE() * timeOffset;
         }
-        const now = new Date(ts);
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return new Date(ts);
     }
 
     static dateTimeReviver(key, value) {
