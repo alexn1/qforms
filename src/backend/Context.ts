@@ -82,6 +82,9 @@ class Context {
     getVirtualPath(): string {
         return `/${this.module}/${this.appDirName}/${this.appFileName}/${this.env}`;
     }
+    getTimezoneOffset() {
+        return this.req.session.tzOffset;
+    }
 }
 
 export = Context;
