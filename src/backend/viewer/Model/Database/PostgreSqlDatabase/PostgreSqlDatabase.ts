@@ -69,8 +69,10 @@ class PostgreSqlDatabase extends Database {
         if (context.query.sql) console.log(colors.blue('PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database.checkParams(query, params);
         const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
-        // console.log('sql:', sql);
-        // console.log('values:', values);
+        if (context.query.sql) {
+            console.log('sql:', sql);
+            console.log('values:', values);
+        }
         const result = await this.getConnection(context).query(sql, values);
         // console.log('cnn.query result:', result);
         return result;
