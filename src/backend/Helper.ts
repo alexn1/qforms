@@ -366,7 +366,11 @@ class Helper {
     static decodeValue(rawValue) {
         if (rawValue === undefined) throw new Error('decodeValue undefined');
         if (rawValue === null) throw new Error('decodeValue null');
-        return JSON.parse(rawValue, Helper.dateTimeReviver);
+        try {
+            return JSON.parse(rawValue, Helper.dateTimeReviver);
+        } catch (err) {
+            throw new Error(`decodeValue failed: ${rawValue}`);
+        }
     }
     static encodeValue(value) {
         return JSON.stringify(value);
