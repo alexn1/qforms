@@ -994,18 +994,18 @@ class BackHostApp {
                     source : 'client',
                     ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                     message: req.body.message,
-                    stack  : req.body.stack.toString(),
+                    stack  : req.body.stack ? req.body.stack.toString() : null,
                     data   : req ? JSON.stringify({
                         domain: this.getDomain(req),
                         body  : req.body
                     }, null, 4) : null
                 });
+                res.header('Access-Control-Allow-Origin', '*');
+                res.end('ok');
             } catch (err) {
-                console.error(colors.red(err));
+                next(err);
             }
         }
-        res.header('Access-Control-Allow-Origin', '*');
-        res.end('');
     }
 
     getFrontendDirPath() {
