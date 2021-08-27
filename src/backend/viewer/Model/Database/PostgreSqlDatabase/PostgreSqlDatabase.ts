@@ -216,7 +216,7 @@ class PostgreSqlDatabase extends Database {
             case 'boolean':
                 return 'boolean';
             case 'timestamp with time zone':
-            case 'time without time zone':
+            case 'timestamp without time zone':
                 return 'date';
             default:
                 return null;
