@@ -38,7 +38,7 @@ class DataSource extends Model {
         return keyColumns;
     }
 
-    prepareRows(rows: any[]): void {
+    prepareRows(context: Context, rows: any[]): void {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         if (rows[0]) {
             for (const keyColumn of this.keyColumns) {

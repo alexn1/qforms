@@ -38,7 +38,7 @@ class SqlDataSource extends DataSource {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), context.getParams());
         // if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
-        this.prepareRows(rows);
+        this.prepareRows(context, rows);
         return rows[0] || null;
     }
 
@@ -54,7 +54,7 @@ class SqlDataSource extends DataSource {
             context.params.limit = limit;
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), context.getParams());
-        this.prepareRows(rows);
+        this.prepareRows(context, rows);
 
         // count
         let count;
@@ -82,7 +82,7 @@ class SqlDataSource extends DataSource {
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const rows = await this.getDatabase().queryRows(context, query, context.getParams());
-        this.prepareRows(rows);
+        this.prepareRows(context, rows);
 
         // count
         let count;
@@ -124,7 +124,7 @@ class SqlDataSource extends DataSource {
         // console.log('singleQuery:', singleQuery);
         const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.prepareRows([row]);
+        this.prepareRows(context, [row]);
         // console.log('row:', row);
         return {[key]: row};
     }
@@ -160,7 +160,7 @@ class SqlDataSource extends DataSource {
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.prepareRows([row]);
+        this.prepareRows(context, [row]);
         // console.log('row:', row);
 
         const result = {
