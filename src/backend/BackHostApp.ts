@@ -681,6 +681,7 @@ class BackHostApp {
                 message: err.message,
                 stack  : err.stack.toString(),
                 data   : req ? JSON.stringify({
+                    headers        : req.headers,
                     method         : req.method,
                     host           : req.headers.host,
                     originalUrl    : req.originalUrl,
@@ -994,10 +995,11 @@ class BackHostApp {
                     source : 'client',
                     ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                     message: req.body.message,
-                    stack  : req.body.stack ? req.body.stack.toString() : null,
+                    stack  : req.body.stack,
                     data   : req ? JSON.stringify({
-                        domain: this.getDomain(req),
-                        body  : req.body
+                        headers: req.headers,
+                        domain : this.getDomain(req),
+                        body   : req.body
                     }, null, 4) : null
                 });
                 res.header('Access-Control-Allow-Origin', '*');
