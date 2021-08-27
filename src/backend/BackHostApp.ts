@@ -980,7 +980,7 @@ class BackHostApp {
     }
 
     getDomain(req: any): string {
-        const hostPort = req.get('host');
+        const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
         const [host, port] = hostPort.split(':');
         return host;
