@@ -7,7 +7,7 @@ class DateTimeField extends Field {
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        console.log('DateTimeField.rawToValue:', value);
+        // console.log('DateTimeField.rawToValue:', value);
         return value;
     }
     valueToRaw(value) {
@@ -19,7 +19,7 @@ class DateTimeField extends Field {
         } else {
             rawValue = Helper.encodeValue(value);
         }
-        console.log('DateTimeField.valueToRaw', rawValue);
+        // console.log('DateTimeField.valueToRaw', rawValue);
         return rawValue;
     }
 }
