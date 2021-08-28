@@ -3177,7 +3177,7 @@ class DatePickerField extends Field {
     rawToValue(rawValue) {
         const value = Helper.decodeValue(rawValue);
         if (value && this.getAttr('timezone') === 'false') {
-            value.setMinutes(value.getMinutes() + value.getTimezoneOffset());
+            Helper.addMinutes(value, value.getTimezoneOffset());
         }
         console.log('DatePickerField.rawToValue:', value);
         return value;
@@ -3187,7 +3187,8 @@ class DatePickerField extends Field {
         let rawValue;
         if (value) {
             const v = new Date(value.getTime());
-            v.setMinutes(v.getMinutes() - value.getTimezoneOffset())
+            // v.setMinutes(v.getMinutes() - value.getTimezoneOffset())
+            Helper.addMinutes(v, -v.getTimezoneOffset());
             rawValue = Helper.encodeValue(v);
         } else {
             rawValue = Helper.encodeValue(value);

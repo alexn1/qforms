@@ -313,6 +313,9 @@ class Helper {
         }
         await navigator.clipboard.writeText(text);
     }
+    static addMinutes(date, minutes) {
+        date.setMinutes(date.getMinutes() + minutes);
+    }
 }
 
 window.QForms.Helper = Helper;
