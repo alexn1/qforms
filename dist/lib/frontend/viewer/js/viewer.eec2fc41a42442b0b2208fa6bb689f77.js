@@ -2988,7 +2988,7 @@ class Field extends Model {
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
             try {
-                return Helper.decodeValue(rawValue);
+                return this.rawToValue(rawValue)
             } catch (err) {
                 console.log('raw value decode error:', this.getFullName(), rawValue);
                 throw err;
@@ -3001,9 +3001,17 @@ class Field extends Model {
     setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
-        const rawValue = Helper.encodeValue(value);
+        const rawValue = this.valueToRaw(value);
         this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
+    }
+
+    rawToValue(rawValue) {
+        return Helper.decodeValue(rawValue);
+    }
+
+    valueToRaw(value) {
+        return Helper.encodeValue(value);
     }
 
     getRawValue(row) {
@@ -3146,7 +3154,7 @@ class DatePickerField extends Field {
         return this.data.format;
     }
 
-    getValue(row) {
+    /*getValue(row) {
         // console.log('Field.getValue', this.getFullName());
         if (this.getAttr('column')) {
             if (!row && this.parent instanceof RowForm) {
@@ -3169,9 +3177,9 @@ class DatePickerField extends Field {
         }
         if (this.data.value) return eval(this.data.value);
         throw new Error(`${this.getFullName()}: no column and no value in field`);
-    }
+    }*/
 
-    setValue(row, value) {
+    /*setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
 
@@ -3185,7 +3193,7 @@ class DatePickerField extends Field {
         console.log('DatePickerField.setValue', rawValue);
         this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
-    }
+    }*/
 }
 window.QForms.DatePickerField = DatePickerField;
 

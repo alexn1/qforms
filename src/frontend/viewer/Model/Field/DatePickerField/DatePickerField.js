@@ -3,7 +3,7 @@ class DatePickerField extends Field {
         return this.data.format;
     }
 
-    getValue(row) {
+    /*getValue(row) {
         // console.log('Field.getValue', this.getFullName());
         if (this.getAttr('column')) {
             if (!row && this.parent instanceof RowForm) {
@@ -26,9 +26,9 @@ class DatePickerField extends Field {
         }
         if (this.data.value) return eval(this.data.value);
         throw new Error(`${this.getFullName()}: no column and no value in field`);
-    }
+    }*/
 
-    setValue(row, value) {
+    /*setValue(row, value) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
 
@@ -42,6 +42,6 @@ class DatePickerField extends Field {
         console.log('DatePickerField.setValue', rawValue);
         this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
-    }
+    }*/
 }
 window.QForms.DatePickerField = DatePickerField;
