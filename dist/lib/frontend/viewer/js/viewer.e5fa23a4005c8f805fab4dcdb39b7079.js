@@ -2968,14 +2968,6 @@ class Field extends Model {
         }
     }
 
-    setValue(row, value) {
-        // console.log('Field.setValue', this.getFullName(), value);
-        if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
-        const rawValue = Helper.encodeValue(value);
-        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
-        this.valueToPageParams(row);
-    }
-
     isChanged(row) {
         // console.log('Field.isChanged', this.getFullName());
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: field has no column`);
@@ -3004,6 +2996,14 @@ class Field extends Model {
         }
         if (this.data.value) return eval(this.data.value);
         throw new Error(`${this.getFullName()}: no column and no value in field`);
+    }
+
+    setValue(row, value) {
+        // console.log('Field.setValue', this.getFullName(), value);
+        if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
+        const rawValue = Helper.encodeValue(value);
+        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
+        this.valueToPageParams(row);
     }
 
     getRawValue(row) {
