@@ -25,6 +25,10 @@ class Model extends EventEmitter {
         return Model.getAttr(data, 'class');
     }
 
+    isAttr(name) {
+        return this.data[name] !== undefined;
+    }
+
     getAttr(name) {
         return this.data[name];
     }
