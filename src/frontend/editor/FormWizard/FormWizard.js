@@ -66,6 +66,9 @@ class FormWizard {
         if (column.auto === 'true') {
             field.readOnly = 'true';
         }
+        if (column.type === 'date' && column.dbType === 'timestamp without time zone') {
+            field.timezone = 'false';
+        }
         return field;
     }
 

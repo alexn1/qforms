@@ -1690,6 +1690,9 @@ class FormWizard {
         if (column.auto === 'true') {
             field.readOnly = 'true';
         }
+        if (column.type === 'date' && column.dbType === 'timestamp without time zone') {
+            field.timezone = 'false';
+        }
         return field;
     }
 
@@ -2693,6 +2696,7 @@ class FieldController extends VisualController {
         options['param']            = ['true', 'false'];
         options['validateOnChange'] = ['true', 'false'];
         options['validateOnBlur']   = ['true', 'false'];
+        options['timezone']         = ['true', 'false'];
         options['newRowMode']       = ['disabled', 'editPage', 'createPage'];
         options['type']             = ['', 'string', 'number', 'boolean', 'object', 'date'];
         return {list: list, options: options};

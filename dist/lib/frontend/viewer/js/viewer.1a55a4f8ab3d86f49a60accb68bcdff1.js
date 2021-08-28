@@ -3158,7 +3158,7 @@ class DatePickerField extends Field {
             try {
                 const value = Helper.decodeValue(rawValue);
                 if (value) {
-                    value.setMinutes(value.getMinutes() + value.getTimezoneOffset());
+                    // value.setMinutes(value.getMinutes() + value.getTimezoneOffset());
                 }
                 console.log('DatePickerField.getValue:', value);
                 return value;
@@ -3179,7 +3179,7 @@ class DatePickerField extends Field {
 
         if (value2) {
             value2 = new Date(value.getTime());
-            value2.setMinutes(value2.getMinutes() - value.getTimezoneOffset());
+            // value2.setMinutes(value2.getMinutes() - value.getTimezoneOffset());
         }
         const rawValue = Helper.encodeValue(value2);
         console.log('DatePickerField.setValue', rawValue);
