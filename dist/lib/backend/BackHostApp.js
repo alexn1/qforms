@@ -192,7 +192,7 @@ class BackHostApp {
         this.server.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(req, context) {
-        // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
+        // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
             /*if (req.method === 'GET' && (context.query.debug === 1 || context.getModule() === 'edit')) {
@@ -215,7 +215,7 @@ class BackHostApp {
     async createApplication(appFilePath, context) {
         // console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
-        const appInfo = await Application_1.default.getAppInfo(appFilePath, context.env);
+        const appInfo = await Application_1.default.getAppInfo(appFilePath, context.getEnv());
         // ApplicationClass
         const ApplicationClass = await this.getApplicationClass(appInfo);
         // application
@@ -590,10 +590,10 @@ class BackHostApp {
         res.render('editor/index', {
             version: pkg.version,
             data: data,
-            runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.env}/?debug=1`,
+            runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/?debug=1`,
             appDirName: context.getAppDirName(),
             appFileName: context.getAppFileName(),
-            env: context.env,
+            env: context.getEnv(),
             links: this.editorModule.getLinks(),
             scripts: this.editorModule.getScripts()
         });

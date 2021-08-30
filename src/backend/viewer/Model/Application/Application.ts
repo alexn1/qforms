@@ -40,10 +40,10 @@ class Application extends Model {
     ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
-        if (!context.env) throw new Error('no env');
+        if (!context.getEnv()) throw new Error('no env');
         this.appInfo     = appInfo;
         this.hostApp     = hostApp;
-        this.env         = context.env;
+        this.env         = context.getEnv();
 
         this.databases   = [];
         this.actions     = [];

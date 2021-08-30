@@ -2,7 +2,6 @@ declare class Context {
     req: any;
     domain: string;
     uri: string;
-    env: string;
     route: string;
     query: any;
     params: any;
@@ -22,5 +21,6 @@ declare class Context {
     getModule(): any;
     getAppDirName(): any;
     getAppFileName(): any;
+    getEnv(): any;
 }
 export = Context;
