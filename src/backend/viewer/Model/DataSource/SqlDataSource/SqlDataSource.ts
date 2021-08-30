@@ -133,9 +133,24 @@ class SqlDataSource extends DataSource {
         return file.data;
     }
 
+    getValuesFromRow(row) {
+        console.log('SqlDataSource.getValuesFromRow', row);
+        const values = {};
+        if (this.isOnForm()) {
+            for (const field of this.getParent().fields) {
+                const column = field.getAttr('column');
+                if (row[column] !== undefined) {
+                    values[column] = field.rawToValue(row[column]);
+                }
+            }
+            return values;
+        }
+        return Helper.decodeObject(row);
+    }
+
     async insert(context: Context, _values: any = null): Promise<any> {
         console.log('SqlDataSource.insert');
-        const values = _values ? _values : Helper.decodeObject(context.getBody().row);
+        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
 
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);

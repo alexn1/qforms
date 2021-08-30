@@ -93,7 +93,11 @@ class Field extends Model {
     isParam(): boolean {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
-
+    rawToValue(raw) {
+        const value = Helper.decodeValue(raw);
+        console.log('Field.rawToValue', this.getFullName(), raw, value);
+        return value;
+    }
 }
 
 export = Field;
