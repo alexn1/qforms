@@ -19,7 +19,7 @@ class DateTimeField extends Field_1.default {
     }
     valueToRaw(value) {
         let raw;
-        if (value) {
+        if (value && this.getAttr('timezone') === 'false') {
             const v = new Date(value.getTime());
             Helper.addMinutes(v, -v.getTimezoneOffset());
             raw = Helper.encodeValue(v);

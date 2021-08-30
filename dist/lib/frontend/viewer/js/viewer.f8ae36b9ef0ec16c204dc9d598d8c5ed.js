@@ -590,6 +590,7 @@ class RowFormFieldController extends FieldController {
         return this.state.value;
     }
     isChanged() {
+        // console.log('RowFormFieldController.isChanged', this.model.getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {
@@ -2227,7 +2228,7 @@ class DataSource extends Model {
     }
 
     isChanged() {
-        // console.log('DataSource.isChanged', this.getFullName());
+        // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
 
@@ -3169,7 +3170,7 @@ class DatePickerField extends Field {
 
     valueToRaw(value) {
         let rawValue;
-        if (value) {
+        if (value && this.getAttr('timezone') === 'false') {
             const v = new Date(value.getTime());
             Helper.addMinutes(v, -v.getTimezoneOffset());
             rawValue = Helper.encodeValue(v);
@@ -3196,7 +3197,7 @@ class DateTimeField extends Field {
     }
     valueToRaw(value) {
         let rawValue;
-        if (value) {
+        if (value && this.getAttr('timezone') === 'false') {
             const v = new Date(value.getTime());
             Helper.addMinutes(v, -v.getTimezoneOffset());
             rawValue = Helper.encodeValue(v);

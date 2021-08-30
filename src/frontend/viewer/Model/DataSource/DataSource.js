@@ -102,7 +102,7 @@ class DataSource extends Model {
     }
 
     isChanged() {
-        // console.log('DataSource.isChanged', this.getFullName());
+        // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
 

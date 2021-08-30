@@ -109,6 +109,7 @@ class RowFormFieldController extends FieldController {
         return this.state.value;
     }
     isChanged() {
+        // console.log('RowFormFieldController.isChanged', this.model.getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {

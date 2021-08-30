@@ -400,6 +400,7 @@ class Helper {
         });
     }
     static addMinutes(date, minutes) {
+        // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
 }

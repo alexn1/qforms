@@ -223,6 +223,7 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
+        // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
 }
