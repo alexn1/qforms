@@ -46,6 +46,18 @@ class DataSource extends Model {
                     throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
                 }
             }
+            if (this.isOnForm()) {
+                const rowColumns = Object.keys(rows[0]);
+                const formColumns = this.getParent().fields.map(field => field.getAttr('column')).filter(column => !!column);
+                for (const rowColumn of rowColumns) {
+                    if (!formColumns.includes(rowColumn)) {
+                        console.log('rowColumns:', rowColumns);
+                        console.log('formColumns:', formColumns);
+                        console.log('row:', rows[0]);
+                        throw new Error(`${this.getFullName()}: unknown column "${rowColumn}"`);
+                    }
+                }
+            }
         }
         if (this.isOnFormDefault()) {
             for (const row of rows) {
