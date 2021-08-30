@@ -102,7 +102,7 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table)
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const changes = SqlDataSource.decodeChanges(context.getBody().changes);
+        const changes = this.decodeChanges(context.getBody().changes);
         // console.log('changes:', changes);
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
@@ -129,18 +129,6 @@ class SqlDataSource extends DataSource_1.default {
     }
     async getBuffer(context, file) {
         return file.data;
-    }
-    getValuesFromRow(row) {
-        console.log('SqlDataSource.getValuesFromRow', row);
-        const values = {};
-        for (const field of this.getParent().fields) {
-            const column = field.getAttr('column');
-            if (row.hasOwnProperty(column)) {
-                values[column] = field.rawToValue(row[column]);
-            }
-        }
-        return values;
-        // return Helper.decodeObject(row);
     }
     async insert(context, _values = null) {
         console.log('SqlDataSource.insert');
@@ -284,10 +272,23 @@ class SqlDataSource extends DataSource_1.default {
             delete: true
         };
     }
-    static decodeChanges(changes) {
+    getValuesFromRow(row) {
+        console.log('SqlDataSource.getValuesFromRow', row);
+        const values = {};
+        for (const field of this.getParent().fields) {
+            const column = field.getAttr('column');
+            if (row.hasOwnProperty(column)) {
+                values[column] = field.rawToValue(row[column]);
+            }
+        }
+        return values;
+        // return Helper.decodeObject(row);
+    }
+    decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
-            dChanges[key] = Helper_1.default.decodeObject(changes[key]);
+            //dChanges[key] = Helper.decodeObject(changes[key]);
+            dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
     }

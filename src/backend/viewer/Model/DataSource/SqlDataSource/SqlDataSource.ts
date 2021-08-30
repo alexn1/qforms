@@ -102,7 +102,7 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const changes = SqlDataSource.decodeChanges(context.getBody().changes);
+        const changes = this.decodeChanges(context.getBody().changes);
 
         // console.log('changes:', changes);
         const key = Object.keys(changes)[0];
@@ -132,19 +132,6 @@ class SqlDataSource extends DataSource {
 
     async getBuffer(context: Context, file) {
         return file.data;
-    }
-
-    getValuesFromRow(row) {
-        console.log('SqlDataSource.getValuesFromRow', row);
-        const values = {};
-        for (const field of this.getParent().fields) {
-            const column = field.getAttr('column');
-            if (row.hasOwnProperty(column)) {
-                values[column] = field.rawToValue(row[column]);
-            }
-        }
-        return values;
-        // return Helper.decodeObject(row);
     }
 
     async insert(context: Context, _values: any = null): Promise<any> {
@@ -297,10 +284,22 @@ class SqlDataSource extends DataSource {
         };
     }
 
-    static decodeChanges(changes) {
+    getValuesFromRow(row) {
+        console.log('SqlDataSource.getValuesFromRow', row);
+        const values = {};
+        for (const field of this.getParent().fields) {
+            const column = field.getAttr('column');
+            if (row.hasOwnProperty(column)) {
+                values[column] = field.rawToValue(row[column]);
+            }
+        }
+        return values;
+    }
+
+    decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
-            dChanges[key] = Helper.decodeObject(changes[key]);
+            dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
     }

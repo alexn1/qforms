@@ -13,7 +13,6 @@ declare class SqlDataSource extends DataSource {
     select(context: Context): Promise<any[]>;
     update(context: Context): Promise<any>;
     getBuffer(context: Context, file: any): Promise<any>;
-    getValuesFromRow(row: any): {};
     insert(context: Context, _values?: any): Promise<any>;
     static addInsertToResult(result: any, table: any, key: any, row: any): void;
     static addUpdateToResult(result: any, table: any, oldKey: any, newKey: any): void;
@@ -31,6 +30,7 @@ declare class SqlDataSource extends DataSource {
         update: boolean;
         delete: boolean;
     };
-    static decodeChanges(changes: any): {};
+    getValuesFromRow(row: any): {};
+    decodeChanges(changes: any): {};
 }
 export = SqlDataSource;
