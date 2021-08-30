@@ -415,6 +415,9 @@ class Helper {
             });
         })
     }
+    static addMinutes(date, minutes) {
+        date.setMinutes(date.getMinutes() + minutes);
+    }
 }
 
 export = Helper;

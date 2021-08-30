@@ -3,12 +3,12 @@ class DatePickerField extends Field {
         return this.data.format;
     }
 
-    rawToValue(rawValue) {
-        const value = Helper.decodeValue(rawValue);
+    rawToValue(raw) {
+        const value = Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        // console.log('DatePickerField.rawToValue:', value);
+        // console.log('DatePickerField.rawToValue:', raw, value);
         return value;
     }
 
