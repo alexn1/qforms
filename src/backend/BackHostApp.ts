@@ -257,7 +257,7 @@ class BackHostApp {
     }
 
     getAppFilePath(context: Context) {
-        return path.join(this.appsDirPath, context.getAppDirName(), context.appFileName + '.json');
+        return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
 
     async createApplication(appFilePath, context: Context): Promise<Application> {
@@ -620,9 +620,9 @@ class BackHostApp {
         res.render('editor/index', {
             version    : pkg.version,
             data       : data,
-            runAppLink : `/viewer/${context.getAppDirName()}/${context.appFileName}/${context.env}/?debug=1`,
+            runAppLink : `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.env}/?debug=1`,
             appDirName : context.getAppDirName(),
-            appFileName: context.appFileName,
+            appFileName: context.getAppFileName(),
             env        : context.env,
             links      : this.editorModule.getLinks(),
             scripts    : this.editorModule.getScripts()

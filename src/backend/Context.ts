@@ -6,7 +6,7 @@ class Context {
     uri: string;
     // module: string;
     // appDirName: string;
-    appFileName: string;
+    // appFileName: string;
     env: string;
     route: string;
     query: any;
@@ -35,7 +35,7 @@ class Context {
         this.uri         = req.params['0'];
         // this.module      = req.params.module;
         // this.appDirName  = req.params.appDirName;
-        this.appFileName = req.params.appFileName;
+        // this.appFileName = req.params.appFileName;
         this.env         = req.params.env;
 
         // route
@@ -61,7 +61,7 @@ class Context {
     }
 
     calcRoute() {
-        return [this.domain, this.getAppDirName(), this.appFileName, this.env].join('/');
+        return [this.domain, this.getAppDirName(), this.getAppFileName(), this.env].join('/');
     }
     destroy() {
     }
@@ -75,7 +75,7 @@ class Context {
         return this.route;
     }
     getVirtualPath(): string {
-        return `/${this.getModule()}/${this.getAppDirName()}/${this.appFileName}/${this.env}`;
+        return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.env}`;
     }
     getClientTimezoneOffset() {
         if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
@@ -110,6 +110,9 @@ class Context {
     }
     getAppDirName() {
         return this.req.params.appDirName;
+    }
+    getAppFileName() {
+        return this.req.params.appFileName;
     }
 }
 
