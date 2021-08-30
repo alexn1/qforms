@@ -11,7 +11,7 @@ function exists(path) {
 
 async function clean() {
     const e = await exists('dist');
-    // console.log('e:', e);
+    console.log('exists dist:', e);
     if (e) {
         return del(['dist']);
     }
