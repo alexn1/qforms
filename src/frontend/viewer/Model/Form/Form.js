@@ -111,5 +111,15 @@ class Form extends Model {
     hasDefaultSqlDataSource() {
         return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
     }
+    decodeRow(row) {
+        const values = {};
+        for (const field of this.fields) {
+            const column = field.getAttr('column');
+            if (column) {
+                values[column] = field.getValue(row);
+            }
+        }
+        return values;
+    }
 }
 window.QForms.Form = Form;
