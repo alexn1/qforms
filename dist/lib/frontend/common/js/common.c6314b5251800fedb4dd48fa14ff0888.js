@@ -165,8 +165,13 @@ class Helper {
         return obj;
     }
 
-    static decodeValue(rawValue) {
-        return JSON.parse(rawValue, Helper.dateTimeReviver);
+    static decodeValue(raw) {
+        try {
+            return JSON.parse(raw, Helper.dateTimeReviver);
+        } catch (err) {
+            console.log('raw:', raw);
+            throw err;
+        }
     }
 
     static dateTimeReviver(key, value) {
