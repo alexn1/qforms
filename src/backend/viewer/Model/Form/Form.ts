@@ -120,7 +120,7 @@ class Form extends Model {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
     isNewMode(context): boolean {
-        return !!context.newMode;
+        return !!context.getBody().newMode;
     }
     getField(name): Field {
         return this.fields.find(field => field.getName() === name);

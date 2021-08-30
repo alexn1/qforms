@@ -23,7 +23,7 @@ class RowForm extends Form {
 
     fillAttributes(response: any): void {
         super.fillAttributes(response);
-        response.newMode  = this.getAttr('newMode');
+        response.newMode = this.getAttr('newMode');
     }
 
 }

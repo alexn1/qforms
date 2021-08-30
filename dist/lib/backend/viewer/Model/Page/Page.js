@@ -30,7 +30,7 @@ class Page extends Model_1.default {
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        response.newMode = !!context.newMode;
+        response.newMode = !!context.getBody().newMode;
         return response;
     }
     async rpc(name, context) {

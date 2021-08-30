@@ -41,7 +41,7 @@ class Page extends Model {
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        response.newMode = !!context.newMode;
+        response.newMode = !!context.getBody().newMode;
         return response;
     }
 

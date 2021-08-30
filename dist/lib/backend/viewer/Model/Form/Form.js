@@ -99,7 +99,7 @@ class Form extends Model_1.default {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
     isNewMode(context) {
-        return !!context.newMode;
+        return !!context.getBody().newMode;
     }
     getField(name) {
         return this.fields.find(field => field.getName() === name);
