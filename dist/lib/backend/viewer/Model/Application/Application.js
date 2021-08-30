@@ -260,7 +260,7 @@ class Application extends Model_1.default {
             const pageResponse = response.pages.length === 1 ? response.pages[0] : null;
             return page.getTitle(context, pageResponse);
         }
-        return `${context.appDirName}/${context.appFileName}[${this.getEnv()}]`;
+        return `${context.getAppDirName()}/${context.appFileName}[${this.getEnv()}]`;
     }
     // to init custom context params before each request get/post
     async initContext(context) {
