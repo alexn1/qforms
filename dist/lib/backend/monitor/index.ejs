@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html class="monitor" lang="en">
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8"/>
+    <title>QForms monitor v<%=version%></title>
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
+    <!-- scripts -->
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            console.log('data:', data);
+            Helper.createReactComponent(document.querySelector('.monitor__root'), MonitorView, {data});
+        });
+    </script>
+    <script type="application/json"><%-JSON.stringify(response, null, 4)%></script>
+</head>
+<body class="monitor__body">
+    <div class="monitor__root"></div>
+</body>
+</html>

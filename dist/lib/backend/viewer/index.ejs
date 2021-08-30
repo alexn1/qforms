@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="<%=application.getViewClassName()%>" lang="<%=application.getAttr('lang')%>">
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=application.getTitle(context, response)%> v<%=application.getVersion()%></title>
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
+    <!-- scripts -->
+    <%scripts.forEach(src => {
+        %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            new ViewerFrontHostApp(data).run();
+        });
+    </script>
+    <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
+</head>
+<body class="<%=application.getViewClassName()%>__body">
+<%
+if (context.query.debug === 1) {
+    %><div class="<%=application.getViewClassName()%>__root debug"></div>
+<%
+} else {
+    %><div class="<%=application.getViewClassName()%>__root"></div><%
+}
+%>
+</body>
+</html>

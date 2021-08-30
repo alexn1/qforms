@@ -1,0 +1,41 @@
+{
+    "login": {
+        "login": "Login",
+        "username": "Username",
+        "password": "Password",
+        "signIn": "Sign in",
+        "WrongUsernameOrPassword": "Wrong username or password"
+    },
+    "application": {
+        "logout": "Logout"
+    },
+    "page": {
+        "create": "Create",
+        "cancel": "Cancel",
+        "saveAndClose": "Save and close",
+        "save": "Save",
+        "close": "Close",
+        "refresh": "Refresh",
+        "discard": "Discard",
+        "actions": "Actions"
+    },
+    "form": {
+        "refresh": "Refresh",
+        "new": "New",
+        "delete": "Delete",
+        "areYouSure": "Are you sure?",
+        "count": "Count",
+        "previous": "Previous",
+        "next": "Next",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "discard": "Discard",
+        "actions": "Actions",
+        "required": "required"
+    },
+    "field": {
+        "selectValue": "select value",
+        "fillValue": "fill in this field"
+    }
+}

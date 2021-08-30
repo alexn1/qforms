@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="editor" lang="en">
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8">
+    <title><%=appDirName%>/<%=appFileName%>[<%=env%>] - QForms Editor</title>
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
+    <!-- scripts -->
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('editor.ejs DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const runAppLink = "<%=runAppLink%>";
+            new EditorFrontHostApp(data, runAppLink).run();
+        });
+    </script>
+    <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>
+</head>
+<body class="editor__body">
+    <div class="editor__root"></div>
+</body>
+</html>

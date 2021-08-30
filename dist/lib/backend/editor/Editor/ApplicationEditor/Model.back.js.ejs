@@ -1,0 +1,28 @@
+const { Application } = require('../../../qforms');
+const pkg = require('../../../package.json');
+
+class <%=name%>BackApplication extends Application {
+    getVersion() {
+        return pkg.version;
+    }
+    /*getViewClassName() {
+        return '<%=name%>View';
+    }*/
+    /*async getChildModelCustomClass(model, colName, data) {
+        if (model === this) {
+            if (colName === 'pages') {
+                if (BaseModel.getName(data) === 'Page1') {
+                    return Page1Page;
+                } else if (BaseModel.getName(data) === 'Page2') {
+                    return Page2Page;
+                }
+            }
+        }
+        return super.getChildModelCustomClass(model, colName, data);
+    }*/
+    /*async prName(context) {
+        const {param1} = context.params;
+        return {abc: 'xyz'};
+    }*/
+}
+module.exports = <%=name%>BackApplication;

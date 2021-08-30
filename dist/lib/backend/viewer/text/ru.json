@@ -1,0 +1,41 @@
+{
+    "login": {
+        "login": "Вход",
+        "signIn": "Войти",
+        "username": "Логин",
+        "password": "Пароль",
+        "WrongUsernameOrPassword": "Неверное имя пользователя или пароль"
+    },
+    "application": {
+        "logout": "Выйти"
+    },
+    "page": {
+        "create": "Создать",
+        "cancel": "Отмена",
+        "saveAndClose": "Сохранить и закрыть",
+        "save": "Сохранить",
+        "close": "Закрыть",
+        "refresh": "Обновить",
+        "discard": "Сбросить",
+        "actions": "Действия"
+    },
+    "form": {
+        "refresh": "Обновить",
+        "new": "Создать",
+        "delete": "Удалить",
+        "areYouSure": "Вы уверены?",
+        "count": "Количество",
+        "previous": "Предыдущая",
+        "next": "Следующая",
+        "edit": "Редактировать",
+        "save": "Сохранить",
+        "cancel": "Отменить",
+        "discard": "Сбросить",
+        "actions": "Действия",
+        "required": "обязательно"
+    },
+    "field": {
+        "selectValue": "выберите значение",
+        "fillValue": "заполните поле"
+    }
+}

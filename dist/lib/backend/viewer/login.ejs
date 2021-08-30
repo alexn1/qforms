@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="login" lang="<%=application.getAttr('lang')%>">
+<head>
+    <!-- <%=version%> -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=application.getAttr('caption')%> - <%=application.getText().login.login%> - QForms</title>
+    <!-- links -->
+    <%links.forEach(link => {
+    if (typeof link === 'string') {
+    %><link rel="stylesheet" href="<%=link%>"/>
+    <%
+    } else if (typeof link === 'object') {
+    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    <%
+    }
+    });%>
+    <!-- scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('form').addEventListener('submit', e => {
+                document.querySelector('input[name=tzOffset]').setAttribute(
+                    'value',
+                    JSON.stringify(
+                        new Date().getTimezoneOffset())
+                    )
+                ;
+            });
+        });
+    </script>
+    <%scripts.forEach(src => {
+    %><script type="text/javascript" src="<%=src%>"></script>
+    <%
+    });%>
+</head>
+<body class="login__body">
+    <form class="login__form" action="<%=REQUEST_URI%>" method="post">
+        <input name="tzOffset" type="hidden">
+        <input name="action" type="hidden" value="login">
+        <% if (users) { %>
+            <select name="username" required autofocus>
+                <option value=""></option>
+                <% users.forEach((user) => { %>
+                <option value="<%=user.username%>" <%=user.username === username ? 'selected' : ''%>><%=user.title%></option>
+                <% }); %>
+            </select>
+        <% } else { %>
+        <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
+        <% } %>
+        <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
+        <% if (errMsg !== null) { %>
+            <p class="login-form__err-msg"><%=errMsg%></p>
+        <% } %>
+        <button type="submit"><%=application.getText().login.signIn%></button>
+    </form>
+</body>
+</html>
