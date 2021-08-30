@@ -241,7 +241,7 @@ class BackHostApp {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.env}`);
         const application = this.applications[context.getRoute()];
         if (application) {
-            /*if (req.method === 'GET' && (context.query.debug === 1 || context.module === 'edit')) {
+            /*if (req.method === 'GET' && (context.query.debug === 1 || context.getModule() === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
             }*/

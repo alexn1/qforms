@@ -10,6 +10,8 @@ class Context {
         // check
         if (!req)
             throw new Error('no req');
+        if (!req.params.module)
+            throw new Error('no module');
         if (!req.params.appDirName)
             throw new Error('no appDirName');
         if (!req.params.appFileName)
@@ -23,7 +25,7 @@ class Context {
         this.domain = domain;
         // req.params
         this.uri = req.params['0'];
-        this.module = req.params.module;
+        // this.module      = req.params.module;
         this.appDirName = req.params.appDirName;
         this.appFileName = req.params.appFileName;
         this.env = req.params.env;
@@ -60,7 +62,7 @@ class Context {
         return this.route;
     }
     getVirtualPath() {
-        return `/${this.module}/${this.appDirName}/${this.appFileName}/${this.env}`;
+        return `/${this.getModule()}/${this.appDirName}/${this.appFileName}/${this.env}`;
     }
     getClientTimezoneOffset() {
         if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
@@ -83,6 +85,9 @@ class Context {
     }
     getBody() {
         return this.req.body;
+    }
+    getModule() {
+        return this.req.params.module;
     }
 }
 module.exports = Context;
