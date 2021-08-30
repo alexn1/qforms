@@ -91,8 +91,7 @@ class DataSource extends Model {
     encodeRow(row) {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
-
-        if (this.isOnForm()) {
+        if (this.isOnForm() && this.getName() === 'default') {
             for (const field of this.getParent().fields) {
                 const column = field.getAttr('column');
                 row[column] = field.valueToRaw(row[column]);

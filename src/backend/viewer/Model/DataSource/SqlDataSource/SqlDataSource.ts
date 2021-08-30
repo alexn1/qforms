@@ -136,16 +136,14 @@ class SqlDataSource extends DataSource {
     getValuesFromRow(row) {
         console.log('SqlDataSource.getValuesFromRow', row);
         const values = {};
-        if (this.isOnForm()) {
-            for (const field of this.getParent().fields) {
-                const column = field.getAttr('column');
-                if (row.hasOwnProperty(column)) {
-                    values[column] = field.rawToValue(row[column]);
-                }
+        for (const field of this.getParent().fields) {
+            const column = field.getAttr('column');
+            if (row.hasOwnProperty(column)) {
+                values[column] = field.rawToValue(row[column]);
             }
-            return values;
         }
-        return Helper.decodeObject(row);
+        return values;
+        // return Helper.decodeObject(row);
     }
 
     async insert(context: Context, _values: any = null): Promise<any> {
