@@ -102,7 +102,8 @@ class SqlDataSource extends DataSource {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const changes = context.changes;
+        const changes = SqlDataSource.decodeChanges(context.getBody().changes);
+
         // console.log('changes:', changes);
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
@@ -294,6 +295,14 @@ class SqlDataSource extends DataSource {
             update: true,
             delete: true
         };
+    }
+
+    static decodeChanges(changes) {
+        const dChanges = {};
+        for (const key in changes) {
+            dChanges[key] = Helper.decodeObject(changes[key]);
+        }
+        return dChanges;
     }
 }
 

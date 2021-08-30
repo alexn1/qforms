@@ -385,13 +385,6 @@ class Helper {
         }
         return dObj;
     }
-    static decodeChanges(changes) {
-        const dChanges = {};
-        for (const key in changes) {
-            dChanges[key] = Helper.decodeObject(changes[key]);
-        }
-        return dChanges;
-    }
     static SECOND() {
         return 1000;
     }

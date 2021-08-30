@@ -3,17 +3,14 @@ import Helper from './Helper';
 class Context {
     req: any;
     domain: string;
-
     uri: string;
     module: string;
     appDirName: string;
     appFileName: string;
     env: string;
-
     route: string;
     query: any;
     params: any;
-    changes: any;
     newMode: any;
     connections: any;
     querytime: any;
@@ -47,7 +44,6 @@ class Context {
         // params
         this.query            = req.query        ? Helper.decodeObject(req.query)         : {};
         this.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
-        this.changes          = req.body.changes ? Helper.decodeChanges(req.body.changes) : {};
         this.newMode          = req.body.newMode;
 
         // cnn

@@ -32,7 +32,6 @@ class Context {
         // params
         this.query = req.query ? Helper_1.default.decodeObject(req.query) : {};
         this.params = req.body.params ? Helper_1.default.decodeObject(req.body.params) : {};
-        this.changes = req.body.changes ? Helper_1.default.decodeChanges(req.body.changes) : {};
         this.newMode = req.body.newMode;
         // cnn
         this.connections = {};

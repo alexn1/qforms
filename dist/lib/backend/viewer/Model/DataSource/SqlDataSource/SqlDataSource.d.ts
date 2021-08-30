@@ -31,5 +31,6 @@ declare class SqlDataSource extends DataSource {
         update: boolean;
         delete: boolean;
     };
+    static decodeChanges(changes: any): {};
 }
 export = SqlDataSource;

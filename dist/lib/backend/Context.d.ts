@@ -9,7 +9,6 @@ declare class Context {
     route: string;
     query: any;
     params: any;
-    changes: any;
     newMode: any;
     connections: any;
     querytime: any;

@@ -27,7 +27,6 @@ declare class Helper {
     static decodeValue(rawValue: any): any;
     static encodeValue(value: any): string;
     static decodeObject(obj: any): {};
-    static decodeChanges(changes: any): {};
     static SECOND(): number;
     static MINUTE(): number;
     static HOUR(): number;
