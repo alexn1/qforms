@@ -52,7 +52,7 @@ class DataSource extends Model {
                 this.calcColumns(row);
             }
         }
-        DataSource.encodeRows(rows);
+        this.encodeRows(rows);
     }
 
     calcColumns(row) {
@@ -70,17 +70,25 @@ class DataSource extends Model {
         }
     }
 
-    static encodeRows(rows) {
+    encodeRows(rows) {
         for (const row of rows) {
-            DataSource.encodeRow(row);
+            this.encodeRow(row);
         }
     }
 
-    static encodeRow(row) {
+    encodeRow(row) {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
-        for (const name in row) {
-            row[name] = Helper.encodeValue(row[name]);
+
+        if (this.isOnForm()) {
+            for (const field of this.getParent().fields) {
+                const column = field.getAttr('column');
+                row[column] = field.valueToRaw(row[column]);
+            }
+        } else {
+            for (const name in row) {
+                row[name] = Helper.encodeValue(row[name]);
+            }
         }
     }
 

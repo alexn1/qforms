@@ -139,7 +139,7 @@ class SqlDataSource extends DataSource {
         if (this.isOnForm()) {
             for (const field of this.getParent().fields) {
                 const column = field.getAttr('column');
-                if (row[column] !== undefined) {
+                if (row.hasOwnProperty(column)) {
                     values[column] = field.rawToValue(row[column]);
                 }
             }

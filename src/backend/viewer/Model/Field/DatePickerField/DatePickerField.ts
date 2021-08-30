@@ -23,7 +23,7 @@ class DatePickerField extends Field {
         } else {
             raw = Helper.encodeValue(value);
         }
-        console.log('DatePickerField.valueToRaw', this.getFullName(), raw, value);
+        console.log('DatePickerField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {

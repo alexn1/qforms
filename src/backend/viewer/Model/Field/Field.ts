@@ -93,10 +93,10 @@ class Field extends Model {
     isParam(): boolean {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
-    valueToRaw(value) {
+    valueToRaw(value): any {
         return Helper.encodeValue(value);
     }
-    rawToValue(raw) {
+    rawToValue(raw): any {
         return Helper.decodeValue(raw);
     }
 }

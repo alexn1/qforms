@@ -1,4 +1,5 @@
 import Field from '../Field';
+const Helper = require('../../../../Helper');
 
 class DateTimeField extends Field {
     fillAttributes(response: any): void {
@@ -12,6 +13,26 @@ class DateTimeField extends Field {
         response.placeholder  = this.getAttr('placeholder');
         response.validateOnChange  = this.getAttr('validateOnChange');
         response.validateOnBlur  = this.getAttr('validateOnBlur');
+    }
+    valueToRaw(value) {
+        let raw;
+        if (value) {
+            const v = new Date(value.getTime());
+            Helper.addMinutes(v, -v.getTimezoneOffset());
+            raw = Helper.encodeValue(v);
+        } else {
+            raw = Helper.encodeValue(value);
+        }
+        console.log('DateTimeField.rawToValue', this.getFullName(), value, raw);
+        return raw;
+    }
+    rawToValue(raw) {
+        const value = Helper.decodeValue(raw);
+        if (value && this.getAttr('timezone') === 'false') {
+            Helper.addMinutes(value, value.getTimezoneOffset());
+        }
+        console.log('DateTimeField.rawToValue', this.getFullName(), raw, value);
+        return value;
     }
 }
 
