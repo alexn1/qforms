@@ -2624,10 +2624,10 @@ class SqlDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const result = await this.getApp().request({
-            action        : 'insert',
-            page          : this.getForm().getPage().getName(),
-            form          : this.getForm().getName(),
-            params        : this.getRowWithChanges(row),
+            action: 'insert',
+            page  : this.getForm().getPage().getName(),
+            form  : this.getForm().getName(),
+            row   : this.getRowWithChanges(row),
         });
 
         // key & values

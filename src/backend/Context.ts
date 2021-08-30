@@ -107,6 +107,9 @@ class Context {
             ...(timeOffset !== null ? {timeOffset} : {})
         };
     }
+    getBody() {
+        return this.req.body;
+    }
 }
 
 export = Context;

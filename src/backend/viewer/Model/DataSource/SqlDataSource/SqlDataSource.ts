@@ -135,7 +135,7 @@ class SqlDataSource extends DataSource {
 
     async insert(context: Context, _values: any = null): Promise<any> {
         console.log('SqlDataSource.insert');
-        const values = _values ? _values : context.params;
+        const values = _values ? _values : Helper.decodeObject(context.getBody().row);
 
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
