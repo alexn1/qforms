@@ -11,7 +11,6 @@ class Context {
     route: string;
     query: any;
     params: any;
-    // newMode: any;
     connections: any;
     querytime: any;
     files: any;
@@ -42,9 +41,8 @@ class Context {
         this.route = this.calcRoute();
 
         // params
-        this.query            = req.query        ? Helper.decodeObject(req.query)         : {};
-        this.params           = req.body.params  ? Helper.decodeObject(req.body.params)   : {};
-        // this.newMode          = req.body.newMode;
+        this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
+        this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
 
         // cnn
         this.connections = {};

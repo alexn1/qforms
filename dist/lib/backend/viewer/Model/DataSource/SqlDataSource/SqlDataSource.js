@@ -282,12 +282,10 @@ class SqlDataSource extends DataSource_1.default {
             }
         }
         return values;
-        // return Helper.decodeObject(row);
     }
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
-            //dChanges[key] = Helper.decodeObject(changes[key]);
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
