@@ -854,7 +854,7 @@ class BackHostApp {
                 if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
                     throw new MyError({message: 'not authenticated', context});
                 }
-                const filePath = path.join(application.getFrontendDirPath(), context.uri);
+                const filePath = path.join(application.getFrontendDirPath(), context.getUri());
                 if (await Helper.exists(filePath)) {
                     res.sendFile(filePath);
                 } else {

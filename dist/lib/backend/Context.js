@@ -24,7 +24,7 @@ class Context {
         this.req = req;
         this.domain = domain;
         // req.params
-        this.uri = req.params['0'];
+        // this.uri         = req.params['0'];
         // this.module      = req.params.module;
         // this.appDirName  = req.params.appDirName;
         // this.appFileName = req.params.appFileName;
@@ -97,6 +97,9 @@ class Context {
     }
     getEnv() {
         return this.req.params.env;
+    }
+    getUri() {
+        return this.req.params['0'];
     }
 }
 module.exports = Context;
