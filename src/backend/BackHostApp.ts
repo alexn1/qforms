@@ -630,7 +630,7 @@ class BackHostApp {
     }
 
     async handleEditorPost(req, res, context: Context) {
-        console.log('BackHostApp.handleEditorPost', context.params);
+        console.log('BackHostApp.handleEditorPost', req.body);
         const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
