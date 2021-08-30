@@ -29,8 +29,6 @@ class Context {
         // this.appDirName  = req.params.appDirName;
         // this.appFileName = req.params.appFileName;
         // this.env         = req.params.env;
-        // route
-        this.route = this.calcRoute();
         // params
         this.query = req.query ? Helper_1.default.decodeObject(req.query) : {};
         this.params = req.body.params ? Helper_1.default.decodeObject(req.body.params) : {};
@@ -47,19 +45,17 @@ class Context {
             }
         }
     }
-    calcRoute() {
-        return [this.domain, this.getAppDirName(), this.getAppFileName(), this.getEnv()].join('/');
+    getRoute() {
+        return `${this.domain}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
     destroy() {
     }
     getUser() {
-        if (this.req.session.user && this.req.session.user[this.route]) {
-            return this.req.session.user[this.route];
+        const route = this.getRoute();
+        if (this.req.session.user && this.req.session.user[route]) {
+            return this.req.session.user[route];
         }
         return null;
-    }
-    getRoute() {
-        return this.route;
     }
     getVirtualPath() {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;

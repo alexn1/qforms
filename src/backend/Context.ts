@@ -3,12 +3,6 @@ import Helper from './Helper';
 class Context {
     req: any;
     domain: string;
-    // uri: string;
-    // module: string;
-    // appDirName: string;
-    // appFileName: string;
-    // env: string;
-    route: string;
     query: any;
     params: any;
     connections: any;
@@ -38,9 +32,6 @@ class Context {
         // this.appFileName = req.params.appFileName;
         // this.env         = req.params.env;
 
-        // route
-        this.route = this.calcRoute();
-
         // params
         this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
         this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
@@ -59,31 +50,28 @@ class Context {
             }
         }
     }
-
-    calcRoute() {
-        return [this.domain, this.getAppDirName(), this.getAppFileName(), this.getEnv()].join('/');
+    getRoute(): string {
+        return `${this.domain}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
     destroy() {
     }
-    getUser() {
-        if (this.req.session.user && this.req.session.user[this.route]) {
-            return this.req.session.user[this.route];
+    getUser(): any {
+        const route = this.getRoute();
+        if (this.req.session.user && this.req.session.user[route]) {
+            return this.req.session.user[route];
         }
         return null;
-    }
-    getRoute() {
-        return this.route;
     }
     getVirtualPath(): string {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
-    getClientTimezoneOffset() {
+    getClientTimezoneOffset(): number {
         if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
             return this.req.session.tzOffset;
         }
         return null;
     }
-    getTimeOffset() {
+    getTimeOffset(): number {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
         if (clientTimezoneOffset !== null) {
             return new Date().getTimezoneOffset() - clientTimezoneOffset;
@@ -102,22 +90,22 @@ class Context {
             ...(timeOffset !== null ? {timeOffset} : {})
         };
     }
-    getBody() {
+    getBody(): any {
         return this.req.body;
     }
-    getModule() {
+    getModule(): string {
         return this.req.params.module;
     }
-    getAppDirName() {
+    getAppDirName(): string {
         return this.req.params.appDirName;
     }
-    getAppFileName() {
+    getAppFileName(): string {
         return this.req.params.appFileName;
     }
-    getEnv() {
+    getEnv(): string {
         return this.req.params.env;
     }
-    getUri() {
+    getUri(): string {
         return this.req.params['0'];
     }
 }

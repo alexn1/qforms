@@ -1,26 +1,24 @@
 declare class Context {
     req: any;
     domain: string;
-    route: string;
     query: any;
     params: any;
     connections: any;
     querytime: any;
     files: any;
     constructor(options: any);
-    calcRoute(): string;
+    getRoute(): string;
     destroy(): void;
     getUser(): any;
-    getRoute(): string;
     getVirtualPath(): string;
-    getClientTimezoneOffset(): any;
+    getClientTimezoneOffset(): number;
     getTimeOffset(): number;
     getParams(): any;
     getBody(): any;
-    getModule(): any;
-    getAppDirName(): any;
-    getAppFileName(): any;
-    getEnv(): any;
-    getUri(): any;
+    getModule(): string;
+    getAppDirName(): string;
+    getAppFileName(): string;
+    getEnv(): string;
+    getUri(): string;
 }
 export = Context;
