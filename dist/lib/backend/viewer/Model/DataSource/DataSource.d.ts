@@ -24,7 +24,7 @@ declare class DataSource extends Model {
     fill(context: Context): Promise<any>;
     getRows(): Promise<any>;
     isOnForm(): boolean;
-    isOnFormDefault(): boolean;
+    isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;
     isDefaultOnTableForm(): boolean;
     getDatabase(): Database;

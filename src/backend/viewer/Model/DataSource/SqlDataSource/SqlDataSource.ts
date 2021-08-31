@@ -214,7 +214,7 @@ class SqlDataSource extends DataSource {
         let response = await super.fill(context);
 
         // if form data source named default then check mode
-        if (this.isOnForm() && this.getName() === 'default' && this.parent.isNewMode(context)) {
+        if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
             if (this.getAttr('limit') !== '') {
                 response.limit = parseInt(this.getAttr('limit'));
             }

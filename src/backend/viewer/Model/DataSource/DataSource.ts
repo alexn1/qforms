@@ -59,7 +59,7 @@ class DataSource extends Model {
                 }
             }*/
         }
-        if (this.isOnFormDefault()) {
+        if (this.isDefaultOnForm()) {
             for (const row of rows) {
                 this.calcColumns(row);
             }
@@ -91,7 +91,7 @@ class DataSource extends Model {
     encodeRow(row) {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
-        if (this.isOnForm() && this.getName() === 'default') {
+        if (this.isDefaultOnForm()) {
             for (const field of this.getParent().fields) {
                 const column = field.getAttr('column');
                 row[column] = field.valueToRaw(row[column]);
@@ -218,16 +218,16 @@ class DataSource extends Model {
         return this.parent instanceof Form;
     }
 
-    isOnFormDefault() {
-        return this.isOnForm() && this.getName() === 'default';
+    isDefaultOnForm() {
+        return this.getName() === 'default' && this.isOnForm();
     }
 
     isDefaultOnRowForm() {
-        return this.parent instanceof RowForm && this.getName() === 'default';
+        return this.getName() === 'default' && this.parent instanceof RowForm;
     }
 
     isDefaultOnTableForm() {
-        return this.parent instanceof TableForm && this.getName() === 'default';
+        return this.getName() === 'default' && this.parent instanceof TableForm;
     }
 
     getDatabase(): Database {
