@@ -3,6 +3,7 @@ module.exports.BackHostApp = require('./BackHostApp');
 module.exports.BaseModel   = require('./BaseModel');
 module.exports.Context     = require('./Context');
 module.exports.Helper      = require('./Helper');
+module.exports.Convert     = require('./Convert');
 
 // viewer
 module.exports.Model                             = require('./viewer/Model/Model');
