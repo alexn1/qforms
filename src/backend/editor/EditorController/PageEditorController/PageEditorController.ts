@@ -77,4 +77,4 @@ class PageEditorController extends VisualEditorController {
     }
 }
 
-module.exports = PageEditorController;
+export = PageEditorController;

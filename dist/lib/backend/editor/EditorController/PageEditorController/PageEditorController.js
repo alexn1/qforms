@@ -1,7 +1,7 @@
+"use strict";
 const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
 const Helper = require('../../../Helper');
-
 class PageEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
@@ -18,7 +18,6 @@ class PageEditorController extends VisualEditorController {
         await pageEditor.save();
         return null;
     }
-
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const data = await appEditor.newPageAndPageLinkData(params);
@@ -32,7 +31,6 @@ class PageEditorController extends VisualEditorController {
         await appEditor.save();
         return data;
     }
-
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
@@ -61,7 +59,7 @@ class PageEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createJs(params);
-        return {js};
+        return { js };
     }
     async saveController(params) {
         const appEditor = await this.createApplicationEditor();
@@ -73,8 +71,7 @@ class PageEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
 }
-
 module.exports = PageEditorController;

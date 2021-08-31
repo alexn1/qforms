@@ -1,11 +1,9 @@
+"use strict";
 const EditorController = require('../EditorController');
-
 class KeyColumnEditorController extends EditorController {
-
     /*constructor(...args) {
         super(...args);
     }*/
-
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
@@ -16,20 +14,21 @@ class KeyColumnEditorController extends EditorController {
                 const data = dataSourceEditor.newKeyColumnData(params);
                 await pageEditor.save();
                 return data;
-            } else {
+            }
+            else {
                 const dataSourceEditor = pageEditor.createDataSourceEditor(params.dataSource);
                 const data = dataSourceEditor.newKeyColumnData(params);
                 await pageEditor.save();
                 return data;
             }
-        } else {
+        }
+        else {
             const dataSourceEditor = appEditor.createDataSourceEditor(params.dataSource);
             const data = dataSourceEditor.newKeyColumnData(params);
             await appEditor.save();
             return data;
         }
     }
-
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -39,7 +38,6 @@ class KeyColumnEditorController extends EditorController {
         await pageEditor.save();
         return null;
     }
-
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.page);
@@ -49,7 +47,5 @@ class KeyColumnEditorController extends EditorController {
         await pageEditor.save();
         return data;
     }
-
 }
-
 module.exports = KeyColumnEditorController;

@@ -52,4 +52,4 @@ class KeyColumnEditorController extends EditorController {
 
 }
 
-module.exports = KeyColumnEditorController;
+export = KeyColumnEditorController;

@@ -57,4 +57,4 @@ class ApplicationEditorController extends VisualEditorController {
 
 }
 
-module.exports = ApplicationEditorController;
+export = ApplicationEditorController;

@@ -1,19 +1,16 @@
-const path    = require('path');
+"use strict";
+const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
-
 class ApplicationEditorController extends VisualEditorController {
-
     /*constructor(...args) {
         super(...args);
     }*/
-
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         await appEditor.setAttr(params.attr, params.value);
         await appEditor.save();
         return null;
     }
-
     async getView(params) {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
@@ -22,7 +19,6 @@ class ApplicationEditorController extends VisualEditorController {
         }
         return result;
     }
-
     /*async saveView(params) {
         const appEditor = await this.createApplicationEditor();
         switch (params.view) {
@@ -36,25 +32,20 @@ class ApplicationEditorController extends VisualEditorController {
                 throw new Error(`unknown view: ${params.view}`);
         }
     }*/
-
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const js = await appEditor.createJs(params);
-        return {js};
+        return { js };
     }
-
     async createModelBackJs(params) {
         const appEditor = await this.createApplicationEditor();
         const js = await appEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
-
     async saveController(params) {
         const appEditor = await this.createApplicationEditor();
         await appEditor.saveCustomFile('js', params.text);
         return null;
     }
-
 }
-
 module.exports = ApplicationEditorController;

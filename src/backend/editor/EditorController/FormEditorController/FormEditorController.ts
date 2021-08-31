@@ -103,4 +103,4 @@ class FormEditorController extends VisualEditorController {
 
 }
 
-module.exports = FormEditorController;
+export = FormEditorController;

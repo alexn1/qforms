@@ -42,4 +42,4 @@ class TableEditorController extends EditorController {
 
 }
 
-module.exports = TableEditorController;
+export = TableEditorController;

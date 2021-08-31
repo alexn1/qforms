@@ -101,4 +101,4 @@ class ActionEditorController extends EditorController {
     }
 
 }
-module.exports = ActionEditorController;
+export = ActionEditorController;

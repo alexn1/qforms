@@ -69,4 +69,4 @@ class DatabaseEditorController extends EditorController {
 
 }
 
-module.exports = DatabaseEditorController;
+export = DatabaseEditorController;

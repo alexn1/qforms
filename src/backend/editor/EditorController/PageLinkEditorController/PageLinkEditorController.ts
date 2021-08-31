@@ -26,4 +26,4 @@ class PageLinkEditorController extends EditorController {
 
 }
 
-module.exports = PageLinkEditorController;
+export = PageLinkEditorController;

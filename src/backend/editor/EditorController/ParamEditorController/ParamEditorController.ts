@@ -36,4 +36,4 @@ class ParamEditorController extends EditorController {
 
 }
 
-module.exports = ParamEditorController;
+export = ParamEditorController;

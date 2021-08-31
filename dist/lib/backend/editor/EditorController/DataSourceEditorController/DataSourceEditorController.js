@@ -1,11 +1,9 @@
+"use strict";
 const EditorController = require('../EditorController');
-
 class DataSourceEditorController extends EditorController {
-
     /*constructor(...args) {
         super(...args);
     }*/
-
     async createDataSourceEditor(params) {
         let editor = await this.createApplicationEditor();
         if (params.pageFileName) {
@@ -16,7 +14,6 @@ class DataSourceEditorController extends EditorController {
         }
         return editor.createDataSourceEditor(params.dataSource);
     }
-
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         let data;
@@ -25,17 +22,18 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 const formEditor = pageEditor.createFormEditor(params.form);
                 data = formEditor.newDataSourceData(params);
-            } else {
+            }
+            else {
                 data = pageEditor.newDataSourceData(params);
             }
             await pageEditor.save();
-        } else {
+        }
+        else {
             data = appEditor.newDataSourceData(params);
             await appEditor.save();
         }
         return data;
     }
-
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         let data;
@@ -44,17 +42,18 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 const formEditor = pageEditor.createFormEditor(params.form);
                 data = formEditor.removeColData('dataSources', params.dataSource);
-            } else {
+            }
+            else {
                 data = pageEditor.removeColData('dataSources', params.dataSource);
             }
             await pageEditor.save();
-        } else {
+        }
+        else {
             data = appEditor.removeColData('dataSources', params.dataSource);
             await appEditor.save();
         }
         return data;
     }
-
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
@@ -65,20 +64,21 @@ class DataSourceEditorController extends EditorController {
                 formEditor.moveDataSourceUp(params.dataSource);
                 await pageEditor.save();
                 return null;
-            } else {
+            }
+            else {
                 // page data source
                 pageEditor.moveDataSourceUp(params.dataSource);
                 await pageEditor.save();
                 return null;
             }
-        } else {
+        }
+        else {
             // app data source
             appEditor.moveDataSourceUp(params.dataSource);
             await appEditor.save();
             return null;
         }
     }
-
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.page) {
@@ -89,20 +89,21 @@ class DataSourceEditorController extends EditorController {
                 formEditor.moveDataSourceDown(params.dataSource);
                 await pageEditor.save();
                 return null;
-            } else {
+            }
+            else {
                 // page data source
                 pageEditor.moveDataSourceDown(params.dataSource);
                 await pageEditor.save();
                 return null;
             }
-        } else {
+        }
+        else {
             // app data source
             appEditor.moveDataSourceDown(params.dataSource);
             await appEditor.save();
             return null;
         }
     }
-
     async save(params) {
         console.log('DataSourceEditorController.save');
         const dataSourceEditor = await this.createDataSourceEditor(params);
@@ -110,13 +111,11 @@ class DataSourceEditorController extends EditorController {
         await dataSourceEditor.save();
         return null;
     }
-
     async createModelBackJs(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         const js = await dataSourceEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
-
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
@@ -129,19 +128,5 @@ class DataSourceEditorController extends EditorController {
                 return result;
         }
     }
-
-    /*async createController(params) {
-        const dataSourceEditor = await this.createDataSourceEditor(params);
-        const backendJs = await dataSourceEditor.createBackendJs(params);
-        return {backendJs};
-    }*/
-
-    /*async saveController(params) {
-        const dataSourceEditor = await this.createDataSourceEditor(params);
-        await dataSourceEditor.saveCustomFile('back.js', params.text);
-        return null;
-    }*/
-
 }
-
 module.exports = DataSourceEditorController;

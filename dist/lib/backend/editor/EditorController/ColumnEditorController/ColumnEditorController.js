@@ -1,12 +1,10 @@
+"use strict";
 const EditorController = require('../EditorController');
-
 class ColumnEditorController extends EditorController {
-
     /*constructor(...args) {
         console.log('ColumnEditorController.constructor');
         super(...args);
     }*/
-
     async save(params) {
         console.log('ColumnEditorController.save');
         const appEditor = await this.createApplicationEditor();
@@ -17,7 +15,6 @@ class ColumnEditorController extends EditorController {
         await appEditor.save();
         return null;
     }
-
     async _new(params) {
         console.log('ColumnEditorController._new');
         const appEditor = await this.createApplicationEditor();
@@ -25,7 +22,6 @@ class ColumnEditorController extends EditorController {
         await appEditor.save();
         return columnData;
     }
-
     async delete(params) {
         console.log('ColumnEditorController.delete');
         const appEditor = await this.createApplicationEditor();
@@ -35,7 +31,5 @@ class ColumnEditorController extends EditorController {
         await appEditor.save();
         return data;
     }
-
 }
-
 module.exports = ColumnEditorController;

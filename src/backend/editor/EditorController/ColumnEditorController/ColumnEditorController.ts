@@ -38,4 +38,4 @@ class ColumnEditorController extends EditorController {
 
 }
 
-module.exports = ColumnEditorController;
+export = ColumnEditorController;

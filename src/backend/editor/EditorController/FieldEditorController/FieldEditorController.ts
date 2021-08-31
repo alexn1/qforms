@@ -112,4 +112,4 @@ class FieldEditorController extends VisualEditorController {
 
 }
 
-module.exports = FieldEditorController;
+export = FieldEditorController;

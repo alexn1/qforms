@@ -144,4 +144,4 @@ class DataSourceEditorController extends EditorController {
 
 }
 
-module.exports = DataSourceEditorController;
+export = DataSourceEditorController;
