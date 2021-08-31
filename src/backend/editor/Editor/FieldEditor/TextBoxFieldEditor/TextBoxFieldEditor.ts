@@ -18,4 +18,4 @@ class TextBoxFieldEditor extends FieldEditor {
 
 }
 
-module.exports = TextBoxFieldEditor;
+export = TextBoxFieldEditor;

@@ -1,13 +1,12 @@
 const FieldEditor = require('../FieldEditor');
 
-class CheckBoxFieldEditor extends FieldEditor {
+class LinkFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
-            '@class'     : 'CheckBoxField',
+            '@class' : 'LinkField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
-                readOnly    : params.readOnly     ? params.readOnly     :        'false',
                 notNull     : params.notNull      ? params.notNull      :        'false',
             }
         };
@@ -15,4 +14,4 @@ class CheckBoxFieldEditor extends FieldEditor {
 
 }
 
-module.exports = CheckBoxFieldEditor;
+export = LinkFieldEditor;

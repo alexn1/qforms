@@ -1,10 +1,9 @@
 const FieldEditor = require('../FieldEditor');
 
-class DatePickerFieldEditor extends FieldEditor {
-
+class DateTimeFieldEditor extends FieldEditor {
     static createData(params) {
         return {
-            '@class'     : 'DatePickerField',
+            '@class'     : 'DateTimeField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
                 readOnly        : params.readOnly         ? params.readOnly        :                           'false',
@@ -17,7 +16,6 @@ class DatePickerFieldEditor extends FieldEditor {
             }
         };
     }
-
 }
 
-module.exports = DatePickerFieldEditor;
+export = DateTimeFieldEditor;

@@ -15,4 +15,4 @@ class FileFieldEditor extends FieldEditor {
 
 }
 
-module.exports = FileFieldEditor;
+export = FileFieldEditor;

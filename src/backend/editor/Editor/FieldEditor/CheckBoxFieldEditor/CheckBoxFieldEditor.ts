@@ -1,10 +1,10 @@
 const FieldEditor = require('../FieldEditor');
 
-class ImageFieldEditor extends FieldEditor {
+class CheckBoxFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
-            '@class':'ImageField',
+            '@class'     : 'CheckBoxField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
                 readOnly    : params.readOnly     ? params.readOnly     :        'false',
@@ -15,4 +15,4 @@ class ImageFieldEditor extends FieldEditor {
 
 }
 
-module.exports = ImageFieldEditor;
+export = CheckBoxFieldEditor;

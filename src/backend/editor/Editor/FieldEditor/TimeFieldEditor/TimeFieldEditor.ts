@@ -16,4 +16,4 @@ class TimeFieldEditor extends FieldEditor {
     }
 }
 
-module.exports = TimeFieldEditor;
+export = TimeFieldEditor;

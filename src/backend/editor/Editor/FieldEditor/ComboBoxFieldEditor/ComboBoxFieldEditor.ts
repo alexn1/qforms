@@ -23,4 +23,4 @@ class ComboBoxFieldEditor extends FieldEditor {
 
 }
 
-module.exports = ComboBoxFieldEditor;
+export = ComboBoxFieldEditor;

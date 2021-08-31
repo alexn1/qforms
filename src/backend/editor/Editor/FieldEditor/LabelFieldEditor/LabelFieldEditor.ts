@@ -1,17 +1,16 @@
 const FieldEditor = require('../FieldEditor');
 
-class LinkFieldEditor extends FieldEditor {
+class LabelFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
-            '@class' : 'LinkField',
+            '@class'     : 'LabelField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
-                notNull     : params.notNull      ? params.notNull      :        'false',
             }
         };
     }
 
 }
 
-module.exports = LinkFieldEditor;
+export = LabelFieldEditor;

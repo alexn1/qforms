@@ -19,4 +19,4 @@ class TextAreaFieldEditor extends FieldEditor {
 
 }
 
-module.exports = TextAreaFieldEditor;
+export = TextAreaFieldEditor;
