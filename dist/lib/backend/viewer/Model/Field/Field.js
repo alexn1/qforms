@@ -90,5 +90,8 @@ class Field extends Model_1.default {
     rawToValue(raw) {
         return Helper.decodeValue(raw);
     }
+    isTimezone() {
+        return this.getAttr('timezone') === 'true';
+    }
 }
 module.exports = Field;

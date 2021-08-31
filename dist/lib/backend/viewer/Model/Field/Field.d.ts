@@ -16,5 +16,6 @@ declare class Field extends Model {
     isParam(): boolean;
     valueToRaw(value: any): any;
     rawToValue(raw: any): any;
+    isTimezone(): boolean;
 }
 export = Field;
