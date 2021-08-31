@@ -1,12 +1,17 @@
 const JsonFile = require('../../JsonFile');
 const ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 
+import {AppInfo} from '../../AppInfo';
+import Application from '../../viewer/Model/Application/Application';
+
 class EditorController {
+    appInfo: AppInfo;
+    application: Application;
     constructor(appInfo, hostApp, application) {
         if (!hostApp) throw new Error(`no hostApp for ${this.constructor.name}`);
         if (!application) throw new Error(`no application for ${this.constructor.name}`);
         this.appInfo     = appInfo;
-        this.hostApp     = hostApp;
+        // this.hostApp     = hostApp;
         this.application = application;
     }
 
@@ -37,4 +42,4 @@ class EditorController {
     }
 }
 
-module.exports = EditorController;
+export = EditorController;

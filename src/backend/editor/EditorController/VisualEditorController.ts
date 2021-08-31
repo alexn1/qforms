@@ -17,4 +17,4 @@ class VisualEditorController extends EditorController {
 
 }
 
-module.exports = VisualEditorController;
+export = VisualEditorController;
