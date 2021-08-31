@@ -33,7 +33,7 @@ class EditorController {
         console.log('EditorController.createApplicationEditor');
         const appFile = new JsonFile(this.appInfo.filePath);
         await appFile.read();
-        return new ApplicationEditor(appFile, this.hostApp, this.application.getEnv());
+        return new ApplicationEditor(appFile/*, this.hostApp*/);
     }
 }
 

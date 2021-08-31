@@ -1,4 +1,4 @@
 declare class Convert {
-    static convert(): void;
+    static convert(appFilePath: any): Promise<void>;
 }
 export = Convert;

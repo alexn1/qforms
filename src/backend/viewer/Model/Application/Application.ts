@@ -23,7 +23,7 @@ const pkg  = require('../../../../../package.json');
 class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
-    env: any;
+    env: string;
     databases: Database[];
     actions: Action[];
     dataSources: DataSource[];
@@ -319,9 +319,9 @@ class Application extends Model {
 
     }
 
-    static getAppInfoFromData(appFilePath, data, env): AppInfo {
+    static getAppInfoFromData(appFilePath, data): AppInfo {
         // console.log('Application.getAppInfoFromData:', appFilePath, data);
-        if (!env) throw new Error('no env');
+
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName  = path.basename(path.dirname(appFilePath));
         return {
@@ -338,12 +338,12 @@ class Application extends Model {
         };
     }
 
-    static async getAppInfo(appFilePath, env) {
+    static async getAppInfo(appFilePath) {
         // console.log('Application.getAppInfo', appFilePath);
         const content = await Helper.readTextFile(appFilePath);
         const data = JSON.parse(content);
         if (data['@class'] && data['@class'] === 'Application') {
-            const appInfo = Application.getAppInfoFromData(appFilePath, data, env);
+            const appInfo = Application.getAppInfoFromData(appFilePath, data);
             return appInfo;
         }
         return null;
@@ -355,7 +355,7 @@ class Application extends Model {
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.getAppInfo(appFilePath, 'local');
+            const appInfo = await Application.getAppInfo(appFilePath);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

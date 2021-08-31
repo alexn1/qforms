@@ -265,10 +265,8 @@ class Application extends Model_1.default {
     // to init custom context params before each request get/post
     async initContext(context) {
     }
-    static getAppInfoFromData(appFilePath, data, env) {
+    static getAppInfoFromData(appFilePath, data) {
         // console.log('Application.getAppInfoFromData:', appFilePath, data);
-        if (!env)
-            throw new Error('no env');
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
         return {
@@ -284,12 +282,12 @@ class Application extends Model_1.default {
             dirPath: path.resolve(path.dirname(appFilePath))
         };
     }
-    static async getAppInfo(appFilePath, env) {
+    static async getAppInfo(appFilePath) {
         // console.log('Application.getAppInfo', appFilePath);
         const content = await Helper_1.default.readTextFile(appFilePath);
         const data = JSON.parse(content);
         if (data['@class'] && data['@class'] === 'Application') {
-            const appInfo = Application.getAppInfoFromData(appFilePath, data, env);
+            const appInfo = Application.getAppInfoFromData(appFilePath, data);
             return appInfo;
         }
         return null;
@@ -300,7 +298,7 @@ class Application extends Model_1.default {
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.getAppInfo(appFilePath, 'local');
+            const appInfo = await Application.getAppInfo(appFilePath);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

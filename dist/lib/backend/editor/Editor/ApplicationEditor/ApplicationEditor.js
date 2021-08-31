@@ -14,6 +14,14 @@ const Application = require('../../../viewer/Model/Application/Application');
 
 class ApplicationEditor extends Editor {
 
+    constructor(appFile/*, hostApp = null*/) {
+        // if (!hostApp) throw new Error('no hostApp');
+        super(appFile.data);
+        this.appFile  = appFile;
+        // this.hostApp  = hostApp;
+        this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data);
+    }
+
     static createData(params) {
         return {
             '@class'     : 'Application',
@@ -33,15 +41,6 @@ class ApplicationEditor extends Editor {
             actions    : [],
             pageLinks  : [],
         };
-    }
-
-    constructor(appFile, hostApp, env) {
-        if (!hostApp) throw new Error('no hostApp');
-        if (!env) throw new Error('ApplicationEditor.constructor: no env');
-        super(appFile.data);
-        this.appFile  = appFile;
-        this.hostApp  = hostApp;
-        this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data, env);
     }
 
     static async createAppFile(appFilePath, params) {

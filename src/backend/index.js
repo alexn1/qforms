@@ -4,6 +4,7 @@ module.exports.BaseModel   = require('./BaseModel');
 module.exports.Context     = require('./Context');
 module.exports.Helper      = require('./Helper');
 module.exports.Convert     = require('./Convert');
+module.exports.JsonFile    = require('./JsonFile');
 
 // viewer
 module.exports.Model                             = require('./viewer/Model/Model');

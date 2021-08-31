@@ -10,7 +10,7 @@ import Context from '../../../Context';
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
-    env: any;
+    env: string;
     databases: Database[];
     actions: Action[];
     dataSources: DataSource[];
@@ -44,14 +44,14 @@ declare class Application extends Model {
     getUsers(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
     request(options: any): Promise<any>;
-    getEnv(): any;
+    getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): Application;
     getDatabase(name: string): Database;
     getTitle(context: Context, response: any): string;
     initContext(context: Context): Promise<void>;
-    static getAppInfoFromData(appFilePath: any, data: any, env: any): AppInfo;
-    static getAppInfo(appFilePath: any, env: any): Promise<AppInfo>;
+    static getAppInfoFromData(appFilePath: any, data: any): AppInfo;
+    static getAppInfo(appFilePath: any): Promise<AppInfo>;
     static getAppInfos(appsDirPath: any): Promise<any[]>;
     getDataSource(name: any): DataSource;
     getViewClassName(): string;
