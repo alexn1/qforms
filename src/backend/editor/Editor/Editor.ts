@@ -81,6 +81,10 @@ class Editor extends BaseModel {
         this.moveDataColItem('actions', name, 1);
     }
 
+    async getCustomDirPath(): Promise<string> {
+        throw new Error('Editor.getCustomDirPath not implemented');
+    }
+
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -116,4 +120,4 @@ class Editor extends BaseModel {
     }
 }
 
-module.exports = Editor;
+export = Editor;
