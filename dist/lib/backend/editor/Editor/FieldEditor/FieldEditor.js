@@ -3,12 +3,12 @@ const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 class FieldEditor extends Editor {
-    async changeClass(newClassName) {
+    changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         this.setData('fields', newData);
         return newData;
     }
-    async reformat() {
+    reformat() {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
         this.setData('fields', newData);
         return newData;
