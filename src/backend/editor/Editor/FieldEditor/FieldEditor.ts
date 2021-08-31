@@ -56,4 +56,4 @@ class FieldEditor extends Editor {
 
 }
 
-module.exports = FieldEditor;
+export = FieldEditor;

@@ -14,4 +14,4 @@ class ActionEditor extends Editor {
     }
 }
 
-module.exports = ActionEditor;
+export = ActionEditor;

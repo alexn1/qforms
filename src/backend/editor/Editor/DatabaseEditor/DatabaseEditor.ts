@@ -50,4 +50,4 @@ class DatabaseEditor extends Editor {
 
 }
 
-module.exports = DatabaseEditor;
+export = DatabaseEditor;

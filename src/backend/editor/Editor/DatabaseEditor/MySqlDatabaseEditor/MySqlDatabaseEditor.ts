@@ -1,10 +1,10 @@
 const DatabaseEditor = require('../DatabaseEditor');
 
-class PostgreSqlDatabaseEditor extends DatabaseEditor {
+class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
-            '@class'     : 'PostgreSqlDatabase',
+            '@class'     : 'MySqlDatabase',
             '@attributes': {
                 name : params.name
             },
@@ -13,4 +13,4 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor {
         };
     }
 }
-module.exports = PostgreSqlDatabaseEditor;
+export = MySqlDatabaseEditor;

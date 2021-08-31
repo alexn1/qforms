@@ -149,4 +149,4 @@ class PageEditor extends Editor {
 
 }
 
-module.exports = PageEditor;
+export = PageEditor;

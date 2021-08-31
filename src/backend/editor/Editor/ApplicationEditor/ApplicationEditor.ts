@@ -5,15 +5,17 @@ const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
-const JsonFile = require('../../../JsonFile');
 const PageEditor = require('../PageEditor/PageEditor');
 const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 const Application = require('../../../viewer/Model/Application/Application');
+import JsonFile from '../../../JsonFile';
+import {AppInfo} from '../../../AppInfo';
 
 class ApplicationEditor extends Editor {
-
+    appFile: JsonFile;
+    appInfo: AppInfo;
     constructor(appFile/*, hostApp = null*/) {
         // if (!hostApp) throw new Error('no hostApp');
         super(appFile.data);
@@ -177,4 +179,4 @@ class ApplicationEditor extends Editor {
 
 }
 
-module.exports = ApplicationEditor;
+export = ApplicationEditor;

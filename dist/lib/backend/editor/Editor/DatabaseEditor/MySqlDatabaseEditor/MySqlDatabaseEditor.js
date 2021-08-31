@@ -1,12 +1,13 @@
+"use strict";
 const DatabaseEditor = require('../DatabaseEditor');
-
 class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
-        if (!params.name) throw new Error('no name');
+        if (!params.name)
+            throw new Error('no name');
         return {
-            '@class'     : 'MySqlDatabase',
+            '@class': 'MySqlDatabase',
             '@attributes': {
-                name : params.name
+                name: params.name
             },
             params: [],
             tables: [],

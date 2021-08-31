@@ -4,7 +4,7 @@ const backend = require('../../../index');
 
 class DataSourceEditor extends Editor {
 
-    static createData(params) {
+    static createData(params): any {
         return {
             '@class'     : 'DataSource',
             '@attributes': {
@@ -81,4 +81,4 @@ class DataSourceEditor extends Editor {
 
 }
 
-module.exports = DataSourceEditor;
+export = DataSourceEditor;

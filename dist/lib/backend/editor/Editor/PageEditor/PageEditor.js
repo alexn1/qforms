@@ -1,5 +1,5 @@
+"use strict";
 const path = require('path');
-
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
@@ -8,29 +8,25 @@ const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
 const FormEditor = require('../FormEditor/FormEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
-
 class PageEditor extends Editor {
-
     static createData(params) {
         return {
-            '@class'     :'Page',
+            '@class': 'Page',
             '@attributes': {
                 formatVersion: '0.1',
-                name     : params['name'],
-                caption  : params['caption'] ? params['caption'] : params['name']
+                name: params['name'],
+                caption: params['caption'] ? params['caption'] : params['name']
             },
             dataSources: [],
-            actions    : [],
-            forms      : [],
+            actions: [],
+            forms: [],
         };
     }
-
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
-        this.pageFile  = pageFile;
+        this.pageFile = pageFile;
     }
-
     async setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
@@ -39,43 +35,43 @@ class PageEditor extends Editor {
         }
         await super.setAttr(name, value);
     }
-
     async moveFormUp(params) {
         this.moveDataColItem('forms', params.form, -1);
         return 'ok';
     }
-
     async save() {
         await this.pageFile.save();
     }
-
     async moveFormDown(params) {
         this.moveDataColItem('forms', params.form, 1);
         return 'ok';
     }
-
     newFormData(params) {
-        const name   = params['name'];
+        const name = params['name'];
         const _class = params['class'];
-        if (this.getColItemData('forms', name)) throw new Error(`Form ${name} already exists.`);
+        if (this.getColItemData('forms', name))
+            throw new Error(`Form ${name} already exists.`);
         let data;
         switch (_class) {
-            case 'TableForm': data = TableFormEditor.createData(params); break;
-            case 'RowForm'  : data = RowFormEditor.createData(params)  ; break;
-            case 'Form'     : data = FormEditor.createData(params)     ; break;
+            case 'TableForm':
+                data = TableFormEditor.createData(params);
+                break;
+            case 'RowForm':
+                data = RowFormEditor.createData(params);
+                break;
+            case 'Form':
+                data = FormEditor.createData(params);
+                break;
             default: throw new Error(`unknown form class: ${_class}`);
         }
         this.addModelData('forms', data);
-
         const formEditor = this.createFormEditor(name);
-
         // dataSources
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
                 formEditor.newDataSourceData(dataSource);
                 const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
-
                 // keyColumns
                 if (dataSource.keyColumns) {
                     for (const keyColumnName in dataSource.keyColumns) {
@@ -84,7 +80,6 @@ class PageEditor extends Editor {
                 }
             }
         }
-
         // fields
         if (params.fields) {
             for (const fieldName in params.fields) {
@@ -93,24 +88,21 @@ class PageEditor extends Editor {
         }
         return data;
     }
-
     createFormEditor(name) {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
     }
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page  : this.getName(),
+            page: this.getName(),
             _class: this.constructor.name.replace('Editor', '')
         });
         return js;
     }
-
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -119,15 +111,13 @@ class PageEditor extends Editor {
         });
         return js;
     }
-
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
-
     newDataSourceData(params) {
-        const name   = params['name'];
+        const name = params['name'];
         const _class = params['class'];
         if (this.getColItemData('dataSources', name)) {
             throw new Error(`DataSource ${name} already exists`);
@@ -146,7 +136,5 @@ class PageEditor extends Editor {
         this.addModelData('dataSources', data);
         return data;
     }
-
 }
-
 module.exports = PageEditor;

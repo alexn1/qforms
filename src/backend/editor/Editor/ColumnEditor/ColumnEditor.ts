@@ -20,4 +20,4 @@ class ColumnEditor extends Editor {
 
 }
 
-module.exports = ColumnEditor;
+export = ColumnEditor;
