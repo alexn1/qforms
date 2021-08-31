@@ -16,4 +16,4 @@ class ParamEditor extends Editor {
     }
 }
 
-module.exports = ParamEditor;
+export = ParamEditor;

@@ -28,4 +28,4 @@ class TableEditor extends Editor {
 
 }
 
-module.exports = TableEditor;
+export = TableEditor;

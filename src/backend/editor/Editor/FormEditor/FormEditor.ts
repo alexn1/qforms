@@ -8,7 +8,7 @@ const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/Sql
 
 class FormEditor extends Editor {
 
-    static createData(params) {
+    static createData(params): any {
         return {
             '@class'     : 'Form',
             '@attributes': {
@@ -104,4 +104,4 @@ class FormEditor extends Editor {
 
 }
 
-module.exports = FormEditor;
+export = FormEditor;

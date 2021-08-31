@@ -21,4 +21,4 @@ class RowFormEditor extends FormEditor {
 
 }
 
-module.exports = RowFormEditor;
+export = RowFormEditor;

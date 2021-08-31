@@ -15,4 +15,4 @@ class PageLinkEditor extends Editor {
     }
 }
 
-module.exports = PageLinkEditor;
+export = PageLinkEditor;

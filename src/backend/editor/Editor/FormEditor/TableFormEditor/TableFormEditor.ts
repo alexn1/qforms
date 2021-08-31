@@ -25,4 +25,4 @@ class TableFormEditor extends FormEditor {
 
 }
 
-module.exports = TableFormEditor;
+export = TableFormEditor;

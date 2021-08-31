@@ -1,28 +1,24 @@
+"use strict";
 const FormEditor = require('../FormEditor');
-
 class TableFormEditor extends FormEditor {
-
     static createData(params) {
         return {
-            '@class'     : 'TableForm',
+            '@class': 'TableForm',
             '@attributes': {
-                name          : params.name,
-                caption       : params.caption ? params.caption : params.name,
-                visible       : params.visible ? params.visible : 'true',
-
-                editMethod    : 'disabled',
-                itemEditPage  : '',
+                name: params.name,
+                caption: params.caption ? params.caption : params.name,
+                visible: params.visible ? params.visible : 'true',
+                editMethod: 'disabled',
+                itemEditPage: '',
                 itemCreatePage: '',
-                newRowMode    : 'disabled',
-                deleteRowMode : 'disabled',
-                refreshButton : 'true'
+                newRowMode: 'disabled',
+                deleteRowMode: 'disabled',
+                refreshButton: 'true'
             },
             dataSources: [],
-            actions    : [],
-            fields     : [],
+            actions: [],
+            fields: [],
         };
     }
-
 }
-
 module.exports = TableFormEditor;
