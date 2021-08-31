@@ -4,20 +4,15 @@ const backend = require('../../../../backend');
 
 class FieldEditor extends Editor {
 
-    async setData(newData) {
-        // console.log('FieldEditor.setData', newData);
-        return this.parent.replaceDataColItem('fields', this.data, newData);
-    }
-
     async changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
-        await this.setData(newData);
+        this.setData('fields', newData);
         return newData;
     }
 
     async reformat(): Promise<any> {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        await this.setData(newData);
+        this.setData('fields', newData);
         return newData;
     }
 

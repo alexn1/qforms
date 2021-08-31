@@ -21,8 +21,10 @@ class Convert {
         const fieldNames = formEditor.data.fields.map(data => BaseModel_1.default.getName(data));
         // console.log('fieldNames:', fieldNames);
         const fieldEditor = formEditor.createFieldEditor(fieldNames[0]);
+        console.log('oldData:', fieldEditor.data);
         const newData = await fieldEditor.reformat();
         console.log('newData:', newData);
+        await pageEditor.save();
     }
 }
 module.exports = Convert;

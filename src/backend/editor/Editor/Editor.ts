@@ -118,6 +118,10 @@ class Editor extends BaseModel {
     createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }
+    setData(colName, newData) {
+        // console.log('Editor.setData', newData);
+        return this.parent.replaceDataColItem(colName, this.data, newData);
+    }
 }
 
 export = Editor;

@@ -1,6 +1,5 @@
 declare const Editor: any;
 declare class FieldEditor extends Editor {
-    setData(newData: any): Promise<any>;
     changeClass(newClassName: any): Promise<any>;
     reformat(): Promise<any>;
     createJs(params: any): Promise<any>;

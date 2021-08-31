@@ -3,18 +3,14 @@ const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 class FieldEditor extends Editor {
-    async setData(newData) {
-        // console.log('FieldEditor.setData', newData);
-        return this.parent.replaceDataColItem('fields', this.data, newData);
-    }
     async changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
-        await this.setData(newData);
+        this.setData('fields', newData);
         return newData;
     }
     async reformat() {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        await this.setData(newData);
+        this.setData('fields', newData);
         return newData;
     }
     async createJs(params) {
@@ -40,6 +36,8 @@ class FieldEditor extends Editor {
         return dirPath;
     }
     static createAttributes(params) {
+        if (!params.name)
+            throw new Error('no name');
         return {
             name: params.name,
             caption: params.caption !== undefined ? params.caption : params.name,
