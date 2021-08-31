@@ -15,6 +15,12 @@ class FieldEditor extends Editor {
         return newData;
     }
 
+    async reformat(): Promise<any> {
+        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
+        await this.setData(newData);
+        return newData;
+    }
+
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -41,6 +47,7 @@ class FieldEditor extends Editor {
     }
 
     static createAttributes(params) {
+        if (!params.name) throw new Error('no name');
         return {
             name        : params.name,
             caption     : params.caption      !== undefined ? params.caption      :    params.name,

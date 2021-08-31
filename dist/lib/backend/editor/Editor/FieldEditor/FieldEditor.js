@@ -12,6 +12,11 @@ class FieldEditor extends Editor {
         await this.setData(newData);
         return newData;
     }
+    async reformat() {
+        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
+        await this.setData(newData);
+        return newData;
+    }
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
