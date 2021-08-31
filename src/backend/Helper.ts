@@ -184,7 +184,7 @@ class Helper {
     }
 
     static async createDirIfNotExists2(originalDirPath) {
-        console.log('Helper.createDirIfNotExists2', originalDirPath);
+        // console.log('Helper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = Helper.createPath(arr.slice(0, i));
