@@ -1,3 +1,5 @@
+import FormEditor from '../FormEditor/FormEditor';
+
 const path = require('path');
 
 const Editor = require('../Editor');
@@ -5,7 +7,6 @@ const backend = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
-const FormEditor = require('../FormEditor/FormEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
@@ -94,7 +95,7 @@ class PageEditor extends Editor {
         return data;
     }
 
-    createFormEditor(name) {
+    createFormEditor(name): FormEditor {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];

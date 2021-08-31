@@ -8,12 +8,12 @@ const DatabaseEditor = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
-const PageEditor = require('../PageEditor/PageEditor');
 const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 const Application = require('../../../viewer/Model/Application/Application');
 const JsonFile_1 = __importDefault(require("../../../JsonFile"));
+const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
 class ApplicationEditor extends Editor {
     constructor(appFile /*, hostApp = null*/) {
         // if (!hostApp) throw new Error('no hostApp');
@@ -52,7 +52,7 @@ class ApplicationEditor extends Editor {
         const pagesDirPath = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath = path.join(pagesDirPath, params.name);
         const pageFilePath = path.join(pageDirPath, params.name + '.json');
-        const pageData = PageEditor.createData(params);
+        const pageData = PageEditor_1.default.createData(params);
         const pageFile = new JsonFile_1.default(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newPageLinkData(params);
@@ -76,7 +76,7 @@ class ApplicationEditor extends Editor {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile_1.default(pageFilePath);
         await pageFile.read();
-        return new PageEditor(this, pageFile);
+        return new PageEditor_1.default(this, pageFile);
     }
     async getPage(name) {
         const pageLinkEditor = this.createPageLinkEditor(name);

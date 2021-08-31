@@ -5,6 +5,7 @@ const backend = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
+import FieldEditor from '../FieldEditor/FieldEditor';
 
 class FormEditor extends Editor {
 
@@ -42,7 +43,7 @@ class FormEditor extends Editor {
         return 'ok';
     }
 
-    createFieldEditor(name) {
+    createFieldEditor(name): FieldEditor {
         const data = this.getColItemData('fields', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];

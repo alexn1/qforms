@@ -1,11 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const FormEditor_1 = __importDefault(require("../FormEditor/FormEditor"));
 const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
-const FormEditor = require('../FormEditor/FormEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 class PageEditor extends Editor {
@@ -60,7 +63,7 @@ class PageEditor extends Editor {
                 data = RowFormEditor.createData(params);
                 break;
             case 'Form':
-                data = FormEditor.createData(params);
+                data = FormEditor_1.default.createData(params);
                 break;
             default: throw new Error(`unknown form class: ${_class}`);
         }

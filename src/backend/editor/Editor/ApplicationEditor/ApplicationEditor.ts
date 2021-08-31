@@ -1,3 +1,5 @@
+import Page from "../../../viewer/Model/Page/Page";
+
 const path = require('path');
 
 const Editor                   = require('../Editor');
@@ -5,13 +7,13 @@ const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
-const PageEditor = require('../PageEditor/PageEditor');
 const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 const Application = require('../../../viewer/Model/Application/Application');
 import JsonFile from '../../../JsonFile';
 import {AppInfo} from '../../../AppInfo';
+import PageEditor from '../PageEditor/PageEditor';
 
 class ApplicationEditor extends Editor {
     appFile: JsonFile;
@@ -80,14 +82,14 @@ class ApplicationEditor extends Editor {
         await Helper.fsUnlink(pageFilePath);
     }
 
-    async createPageEditor(relFilePath) {
+    async createPageEditor(relFilePath): Promise<PageEditor> {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
         return new PageEditor(this, pageFile);
     }
 
-    async getPage(name) {
+    async getPage(name): Promise<PageEditor> {
         const pageLinkEditor = this.createPageLinkEditor(name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
         return await this.createPageEditor(relFilePath);

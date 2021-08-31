@@ -1,3 +1,4 @@
+import FormEditor from '../FormEditor/FormEditor';
 declare const Editor: any;
 declare class PageEditor extends Editor {
     static createData(params: any): {
@@ -17,7 +18,7 @@ declare class PageEditor extends Editor {
     save(): Promise<void>;
     moveFormDown(params: any): Promise<string>;
     newFormData(params: any): any;
-    createFormEditor(name: any): any;
+    createFormEditor(name: any): FormEditor;
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<any>;

@@ -16,6 +16,10 @@ class Convert {
         const formNames = pageEditor.data.forms.map(data => BaseModel.getName(data));
         console.log('formNames:', formNames);
         const formEditor =  pageEditor.createFormEditor(formNames[0]);
+        const fieldNames = formEditor.data.fields.map(data => BaseModel.getName(data));
+        console.log('fieldNames:', fieldNames);
+        const fieldEditor = formEditor.createFieldEditor(fieldNames[0]);
+
     }
 }
 
