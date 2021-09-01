@@ -19,12 +19,12 @@ class Convert {
             const formNames = pageEditor.data.forms.map(data => BaseModel_1.default.getName(data));
             // console.log('formNames:', formNames);
             for (const formName of formNames) {
-                const formEditor = pageEditor.createFormEditor(formName);
+                const formEditor = pageEditor.createItemEditor('forms', formName);
                 const fieldNames = formEditor.data.fields.map(data => BaseModel_1.default.getName(data));
                 // console.log('fieldNames:', fieldNames);
                 for (const fieldName of fieldNames) {
                     console.log(`${pageName}.${formName}.${fieldName}`);
-                    const fieldEditor = formEditor.createFieldEditor(fieldName);
+                    const fieldEditor = formEditor.createItemEditor('fields', fieldName);
                     // console.log('oldData:', fieldEditor.data);
                     const newData = fieldEditor.reformat();
                     // console.log('newData:', newData);

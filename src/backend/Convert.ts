@@ -1,6 +1,7 @@
 import JsonFile from './JsonFile';
 import ApplicationEditor from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import BaseModel from './BaseModel';
+import FormEditor from "./editor/Editor/FormEditor/FormEditor";
 
 class Convert {
     static async convert(appFilePath) {
@@ -17,12 +18,12 @@ class Convert {
             const formNames = pageEditor.data.forms.map(data => BaseModel.getName(data));
             // console.log('formNames:', formNames);
             for (const formName of formNames) {
-                const formEditor =  pageEditor.createFormEditor(formName);
+                const formEditor: FormEditor = pageEditor.createItemEditor('forms', formName);
                 const fieldNames = formEditor.data.fields.map(data => BaseModel.getName(data));
                 // console.log('fieldNames:', fieldNames);
                 for (const fieldName of fieldNames) {
                     console.log(`${pageName}.${formName}.${fieldName}`);
-                    const fieldEditor = formEditor.createFieldEditor(fieldName);
+                    const fieldEditor = formEditor.createItemEditor('fields', fieldName);
                     // console.log('oldData:', fieldEditor.data);
                     const newData = fieldEditor.reformat();
                     // console.log('newData:', newData);

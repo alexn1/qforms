@@ -16,6 +16,6 @@ declare class Editor extends BaseModel {
     newActionData(params: any): Promise<any>;
     createActionEditor(name: any): any;
     setData(colName: any, newData: any): any;
-    createItemEditor(colName: any, itemName: any): Editor;
+    createItemEditor(colName: any, itemName: any): any;
 }
 export = Editor;
