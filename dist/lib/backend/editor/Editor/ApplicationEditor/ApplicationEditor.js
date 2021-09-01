@@ -65,11 +65,13 @@ class ApplicationEditor extends Editor {
         console.log('ApplicationEditor.save');
         await this.appFile.save();
     }
-    createPageLinkEditor(name) {
+    /*createPageLinkEditor(name) {
         return new PageLinkEditor(this.getColItemData('pageLinks', name), this);
-    }
+    }*/
     async removePageFile(name) {
-        const pageFilePath = path.join(this.appInfo.dirPath, this.createPageLinkEditor(name).getAttr('fileName'));
+        // const pageLinkEditor = this.createPageLinkEditor(name);
+        const pageLinkEditor = this.createItemEditor('pageLinks', name);
+        const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
         await Helper.fsUnlink(pageFilePath);
     }
     async createPageEditor(relFilePath) {
@@ -79,7 +81,8 @@ class ApplicationEditor extends Editor {
         return new PageEditor_1.default(this, pageFile);
     }
     async getPage(name) {
-        const pageLinkEditor = this.createPageLinkEditor(name);
+        // const pageLinkEditor = this.createPageLinkEditor(name);
+        const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
         return await this.createPageEditor(relFilePath);
     }

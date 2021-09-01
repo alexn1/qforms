@@ -40,7 +40,6 @@ declare class ApplicationEditor extends Editor {
         pageLink: any;
     }>;
     save(): Promise<void>;
-    createPageLinkEditor(name: any): any;
     removePageFile(name: any): Promise<void>;
     createPageEditor(relFilePath: any): Promise<PageEditor>;
     getPage(name: any): Promise<PageEditor>;

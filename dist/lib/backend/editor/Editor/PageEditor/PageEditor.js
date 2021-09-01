@@ -33,7 +33,8 @@ class PageEditor extends Editor {
     setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
-            const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
+            // const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
+            const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
         }
         super.setAttr(name, value);
