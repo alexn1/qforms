@@ -18,7 +18,7 @@ class FormEditor extends Editor {
             fields: [],
         };
     }
-    newFieldData(params) {
+    /*newFieldData(params) {
         const name = params['name'];
         if (this.getColItemData('fields', name)) {
             throw new Error(`field ${name} already exists`);
@@ -26,7 +26,7 @@ class FormEditor extends Editor {
         const data = backend[`${params['class']}Editor`].createData(params);
         this.addModelData('fields', data);
         return data;
-    }
+    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

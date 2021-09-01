@@ -78,7 +78,6 @@ class PageEditor extends Editor {
         if (params.fields) {
             for (const fieldName in params.fields) {
                 const fieldParams = params.fields[fieldName];
-                // formEditor.newFieldData(fieldParams);
                 formEditor.newItemData(fieldParams.class, 'fields', fieldParams);
             }
         }

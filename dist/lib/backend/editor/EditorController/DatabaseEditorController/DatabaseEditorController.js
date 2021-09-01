@@ -6,7 +6,8 @@ class DatabaseEditorController extends EditorController {
     }*/
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
-        const data = appEditor.newDatabaseData(params);
+        // const data = appEditor.newDatabaseData(params);
+        const data = appEditor.newItemData(params._class, 'databases', params);
         if (params.params) {
             const databaseEditor = appEditor.createItemEditor('databases', params.name);
             for (const name in params.params) {

@@ -59,6 +59,9 @@ module.exports.TableFormEditor                   = require('./editor/Editor/Form
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 module.exports.KeyColumnEditor                   = require('./editor/Editor/KeyColumnEditor/KeyColumnEditor');
+module.exports.DatabaseEditor                    = require('./editor/Editor/DatabaseEditor/DatabaseEditor');
+module.exports.MySqlDatabaseEditor               = require('./editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
+module.exports.PostgreSqlDatabaseEditor          = require('./editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 
 // module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
