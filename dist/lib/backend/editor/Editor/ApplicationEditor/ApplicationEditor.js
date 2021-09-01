@@ -4,16 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const path = require('path');
 const Editor = require('../Editor');
-const MySqlDatabaseEditor = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
-const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
-const PageLinkEditor = require('../PageLinkEditor/PageLinkEditor');
-const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
-const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 const Application = require('../../../viewer/Model/Application/Application');
 const JsonFile_1 = __importDefault(require("../../../JsonFile"));
 const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
-const backend = require('../../../../backend');
 class ApplicationEditor extends Editor {
     constructor(appFile) {
         super(appFile.data);

@@ -8,7 +8,8 @@ class TableEditorController extends EditorController {
         console.log('TableEditorController._new');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const data = databaseEditor.newTableData(params);
+        // const data = databaseEditor.newTableData(params);
+        const data = databaseEditor.newItemData('Table', 'tables', params);
         await appEditor.save();
         return data;
     }
