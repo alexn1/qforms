@@ -67,7 +67,7 @@ class PageEditor extends Editor {
                 // keyColumns
                 if (dataSource.keyColumns) {
                     for (const keyColumnName in dataSource.keyColumns) {
-                        dataSourceEditor.newKeyColumnData(dataSource.keyColumns[keyColumnName]);
+                        dataSourceEditor.newItemData('KeyColumn', 'keyColumns', dataSource.keyColumns[keyColumnName]);
                     }
                 }
             }

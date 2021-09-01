@@ -15,7 +15,7 @@ class DataSourceEditor extends Editor {
             keyColumns: [],
         };
     }
-    newKeyColumnData(params) {
+    /*newKeyColumnData(params) {
         const name = params.name;
         if (this.getColItemData('keyColumns', name)) {
             throw new Error(`Key Column ${name} already exist.`);
@@ -23,7 +23,7 @@ class DataSourceEditor extends Editor {
         const data = KeyColumnEditor.createData(params);
         this.addModelData('keyColumns', data);
         return data;
-    }
+    }*/
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'dataSources');

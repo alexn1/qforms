@@ -13,18 +13,18 @@ class KeyColumnEditorController extends EditorController {
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
                 const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
-                const data = dataSourceEditor.newKeyColumnData(params);
+                const data = dataSourceEditor.newItemData('KeyColumn', 'keyColumns', params);
                 await pageEditor.save();
                 return data;
             } else {
                 const dataSourceEditor = pageEditor.createItemEditor('dataSources', params.dataSource);
-                const data = dataSourceEditor.newKeyColumnData(params);
+                const data = dataSourceEditor.newItemData('KeyColumn', 'keyColumns', params);
                 await pageEditor.save();
                 return data;
             }
         } else {
             const dataSourceEditor = appEditor.createItemEditor('dataSources', params.dataSource);
-            const data = dataSourceEditor.newKeyColumnData(params);
+            const data = dataSourceEditor.newItemData('KeyColumn', 'keyColumns', params);
             await appEditor.save();
             return data;
         }
