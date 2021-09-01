@@ -16,7 +16,7 @@ class ActionEditor extends Editor {
 
     reformat(): Promise<any> {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData('fields', newData);
+        this.setData('actions', newData);
         return newData;
     }
 }
