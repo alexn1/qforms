@@ -60,7 +60,7 @@ class PageEditor extends Editor {
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
-                formEditor.newDataSourceData(dataSource);
+                formEditor.newItemData(params.class, 'dataSources', dataSource);
                 // const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
                 const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
 
@@ -104,7 +104,7 @@ class PageEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
-    newDataSourceData(params) {
+    /*newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (this.getColItemData('dataSources', name)) {
@@ -123,7 +123,7 @@ class PageEditor extends Editor {
         }
         this.addModelData('dataSources', data);
         return data;
-    }
+    }*/
 }
 
 export = PageEditor;

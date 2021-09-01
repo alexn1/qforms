@@ -52,7 +52,7 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
-    newDataSourceData(params) {
+    /*newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (this.getColItemData('dataSources', name)) {
@@ -71,7 +71,7 @@ class FormEditor extends Editor {
         }
         this.addModelData('dataSources', data);
         return data;
-    }
+    }*/
 }
 
 export = FormEditor;

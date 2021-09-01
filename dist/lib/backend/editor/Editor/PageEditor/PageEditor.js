@@ -63,7 +63,7 @@ class PageEditor extends Editor {
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
-                formEditor.newDataSourceData(dataSource);
+                formEditor.newItemData(params.class, 'dataSources', dataSource);
                 // const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
                 const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
                 // keyColumns
@@ -104,26 +104,6 @@ class PageEditor extends Editor {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
-    }
-    newDataSourceData(params) {
-        const name = params['name'];
-        const _class = params['class'];
-        if (this.getColItemData('dataSources', name)) {
-            throw new Error(`DataSource ${name} already exists`);
-        }
-        let data;
-        switch (_class) {
-            case 'DataSource':
-                data = DataSourceEditor.createData(params);
-                break;
-            case 'SqlDataSource':
-                data = SqlDataSourceEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown data source class: ${_class}`);
-        }
-        this.addModelData('dataSources', data);
-        return data;
     }
 }
 module.exports = PageEditor;

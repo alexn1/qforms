@@ -21,10 +21,10 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                data = formEditor.newDataSourceData(params);
+                data = formEditor.newItemData(params.class, 'dataSources', params);
             }
             else {
-                data = pageEditor.newDataSourceData(params);
+                data = pageEditor.newItemData(params.class, 'dataSources', params);
             }
             await pageEditor.save();
         }
