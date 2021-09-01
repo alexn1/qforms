@@ -122,7 +122,7 @@ class Editor extends BaseModel {
         // console.log('Editor.setData', newData);
         return this.parent.replaceDataColItem(colName, this.data, newData);
     }
-    createItemEditor(colName, itemName): any {
+    createItemEditor(colName: string, itemName: string): any {
         const data = this.getColItemData(colName, itemName);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];

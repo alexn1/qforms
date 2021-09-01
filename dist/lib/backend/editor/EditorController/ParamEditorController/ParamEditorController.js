@@ -8,14 +8,17 @@ class ParamEditorController extends EditorController {
     async _new(params) {
         console.log('ParamEditorController._new');
         const appEditor = await this.createApplicationEditor();
-        const param = appEditor.createDatabaseEditor(params.database).newParamData(params);
+        // const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        const databaseEditor = appEditor.createItemEditor('databases', params.database);
+        const param = databaseEditor.newParamData(params);
         await appEditor.save();
         return param;
     }
     async save(params) {
         console.log('ParamEditorController.save');
         const appEditor = await this.createApplicationEditor();
-        const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        // const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const paramEditor = databaseEditor.createParamEditor(params.param);
         paramEditor.setAttr(params.attr, params.value);
         await appEditor.save();
@@ -24,7 +27,8 @@ class ParamEditorController extends EditorController {
     async delete(params) {
         console.log('ParamEditorController.delete');
         const appEditor = await this.createApplicationEditor();
-        const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        // const databaseEditor = appEditor.createDatabaseEditor(params.database);
+        const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('params', params.param);
         await appEditor.save();
         return data;
