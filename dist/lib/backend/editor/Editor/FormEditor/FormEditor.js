@@ -51,25 +51,5 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
-    newDataSourceData(params) {
-        const name = params['name'];
-        const _class = params['class'];
-        if (this.getColItemData('dataSources', name)) {
-            throw new Error(`data source ${name} already exist.`);
-        }
-        let data;
-        switch (_class) {
-            case 'DataSource':
-                data = DataSourceEditor.createData(params);
-                break;
-            case 'SqlDataSource':
-                data = SqlDataSourceEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown data source class: ${_class}`);
-        }
-        this.addModelData('dataSources', data);
-        return data;
-    }
 }
 module.exports = FormEditor;

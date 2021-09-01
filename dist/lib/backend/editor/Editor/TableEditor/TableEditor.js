@@ -3,23 +3,16 @@ const Editor = require('../Editor');
 const ColumnEditor = require('../ColumnEditor/ColumnEditor');
 class TableEditor extends Editor {
     static createData(params) {
+        console.log('TableEditor.createData', params);
         return {
             '@class': 'Table',
             '@attributes': {
                 name: params.name
             },
-            columns: [],
+            columns: [
+                ...(params.columns ? params.columns.map(columnParams => ColumnEditor.createData(columnParams)) : [])
+            ],
         };
-    }
-    newColumnData(params) {
-        const name = params.name;
-        if (!name)
-            throw new Error('no column name');
-        if (this.getColItemData('columns', name))
-            throw new Error(`Column ${name} already exists.`);
-        const data = ColumnEditor.createData(params);
-        this.addModelData('columns', data);
-        return data;
     }
 }
 module.exports = TableEditor;

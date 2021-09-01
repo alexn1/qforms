@@ -14,7 +14,7 @@ class DatabaseEditor extends Editor {
         this.addModelData('tables', data);
         if (params.columns) {
             const tableEditor = this.createItemEditor('tables', name);
-            params.columns.forEach(column => tableEditor.newColumnData(column));
+            params.columns.forEach(column => tableEditor.newItemData('Column', 'columns', column));
         }
         return data;
     }*/

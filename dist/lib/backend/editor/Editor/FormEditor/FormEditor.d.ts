@@ -4,6 +4,5 @@ declare class FormEditor extends Editor {
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCollectionDirPath(): Promise<any>;
-    newDataSourceData(params: any): any;
 }
 export = FormEditor;
