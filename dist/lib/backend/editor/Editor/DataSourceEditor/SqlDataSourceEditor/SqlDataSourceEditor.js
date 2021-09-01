@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 const DataSourceEditor = require('../DataSourceEditor');
+const KeyColumnEditor_1 = __importDefault(require("../../KeyColumnEditor/KeyColumnEditor"));
 class SqlDataSourceEditor extends DataSourceEditor {
     static createData(params) {
         return {
@@ -13,7 +17,9 @@ class SqlDataSourceEditor extends DataSourceEditor {
                 countQuery: params.countQuery ? params.countQuery : '',
                 limit: params.limit ? params.limit : '',
             },
-            keyColumns: [],
+            keyColumns: [
+                ...(params.keyColumns ? params.keyColumns.map(keyColumnParams => KeyColumnEditor_1.default.createData(keyColumnParams)) : [])
+            ],
         };
     }
 }

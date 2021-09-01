@@ -1,7 +1,9 @@
 "use strict";
 const FormEditor = require('../FormEditor');
+const backend = require('../../../../../backend');
 class RowFormEditor extends FormEditor {
     static createData(params) {
+        console.log('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',
             '@attributes': {
@@ -11,7 +13,12 @@ class RowFormEditor extends FormEditor {
                 newMode: params.newMode ? params.newMode : '',
                 backOnly: params.backOnly ? params.backOnly : 'false'
             },
-            dataSources: [],
+            dataSources: [
+                ...(params.dataSources ? Object.keys(params.dataSources).map(name => {
+                    const dataSourceParams = params.dataSources[name];
+                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
+                }) : [])
+            ],
             actions: [],
             fields: [],
         };

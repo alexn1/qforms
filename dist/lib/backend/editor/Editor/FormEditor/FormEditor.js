@@ -1,8 +1,10 @@
 "use strict";
 const path = require('path');
 const Editor = require('../Editor');
+const backend = require('../../../../backend');
 class FormEditor extends Editor {
     static createData(params) {
+        console.log('FormEditor.createData', params);
         return {
             '@class': 'Form',
             '@attributes': {
@@ -10,7 +12,12 @@ class FormEditor extends Editor {
                 caption: params.caption ? params.caption : params.name,
                 visible: params.visible ? params.visible : 'true',
             },
-            dataSources: [],
+            dataSources: [
+                ...(params.dataSources ? Object.keys(params.dataSources).map(name => {
+                    const dataSourceParams = params.dataSources[name];
+                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
+                }) : [])
+            ],
             actions: [],
             fields: [],
         };

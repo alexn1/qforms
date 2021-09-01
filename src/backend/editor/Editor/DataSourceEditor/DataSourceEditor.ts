@@ -1,6 +1,6 @@
 const path = require('path');
 const Editor = require('../Editor');
-// const backend = require('../../../index');
+import KeyColumnEditor from '../KeyColumnEditor/KeyColumnEditor';
 
 class DataSourceEditor extends Editor {
     static createData(params): any {
@@ -11,7 +11,9 @@ class DataSourceEditor extends Editor {
                 database: params.database ? params.database : 'default',
                 table   : params.table    ? params.table    :        '',
             },
-            keyColumns: [],
+            keyColumns: [
+                ...(params.keyColumns ? params.keyColumns.map(keyColumnParams => KeyColumnEditor.createData(keyColumnParams)) : [])
+            ],
         };
     }
     async getCollectionDirPath() {

@@ -58,20 +58,17 @@ class PageEditor extends Editor {
         this.addModelData('forms', data);
         const formEditor = this.createItemEditor('forms', name);
         // dataSources
-        if (params.dataSources) {
-            for (const dataSourceName in params.dataSources) {
-                const dataSource = params.dataSources[dataSourceName];
-                formEditor.newItemData(params.class, 'dataSources', dataSource);
-                // const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
-                const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
-                // keyColumns
-                if (dataSource.keyColumns) {
-                    for (const keyColumnName in dataSource.keyColumns) {
-                        dataSourceEditor.newItemData('KeyColumn', 'keyColumns', dataSource.keyColumns[keyColumnName]);
-                    }
-                }
-            }
-        }
+        // if (params.dataSources) {
+        //     for (const dataSourceParams of params.dataSources) {
+        //         formEditor.newItemData(dataSourceParams.class, 'dataSources', dataSourceParams);
+        //         // const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
+        //         // if (dataSource.keyColumns) {
+        //         //     for (const keyColumnName in dataSource.keyColumns) {
+        //         //         dataSourceEditor.newItemData('KeyColumn', 'keyColumns', dataSource.keyColumns[keyColumnName]);
+        //         //     }
+        //         // }
+        //     }
+        // }
         // fields
         if (params.fields) {
             for (const fieldName in params.fields) {

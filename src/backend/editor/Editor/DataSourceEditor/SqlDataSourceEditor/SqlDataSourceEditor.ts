@@ -1,4 +1,5 @@
 const DataSourceEditor = require('../DataSourceEditor');
+import KeyColumnEditor from '../../KeyColumnEditor/KeyColumnEditor';
 
 class SqlDataSourceEditor extends DataSourceEditor {
     static createData(params): any {
@@ -13,7 +14,9 @@ class SqlDataSourceEditor extends DataSourceEditor {
                 countQuery          : params.countQuery    ? params.countQuery    :        '',
                 limit               : params.limit         ? params.limit         :        '',
             },
-            keyColumns: [],
+            keyColumns: [
+                ...(params.keyColumns ? params.keyColumns.map(keyColumnParams => KeyColumnEditor.createData(keyColumnParams)) : [])
+            ],
         };
     }
 }

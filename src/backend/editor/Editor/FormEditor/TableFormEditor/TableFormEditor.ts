@@ -1,7 +1,9 @@
 const FormEditor = require('../FormEditor');
+const backend = require('../../../../../backend');
 
 class TableFormEditor extends FormEditor {
     static createData(params) {
+        console.log('TableFormEditor.createData', params);
         return {
             '@class'     : 'TableForm',
             '@attributes': {
@@ -16,7 +18,12 @@ class TableFormEditor extends FormEditor {
                 deleteRowMode : 'disabled',
                 refreshButton : 'true'
             },
-            dataSources: [],
+            dataSources: [
+                ...(params.dataSources ? Object.keys(params.dataSources).map(name => {
+                    const dataSourceParams = params.dataSources[name];
+                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams)
+                }) : [])
+            ],
             actions    : [],
             fields     : [],
         };

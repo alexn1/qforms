@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 const path = require('path');
 const Editor = require('../Editor');
-// const backend = require('../../../index');
+const KeyColumnEditor_1 = __importDefault(require("../KeyColumnEditor/KeyColumnEditor"));
 class DataSourceEditor extends Editor {
     static createData(params) {
         return {
@@ -11,7 +14,9 @@ class DataSourceEditor extends Editor {
                 database: params.database ? params.database : 'default',
                 table: params.table ? params.table : '',
             },
-            keyColumns: [],
+            keyColumns: [
+                ...(params.keyColumns ? params.keyColumns.map(keyColumnParams => KeyColumnEditor_1.default.createData(keyColumnParams)) : [])
+            ],
         };
     }
     async getCollectionDirPath() {
