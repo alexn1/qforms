@@ -122,9 +122,17 @@ class Editor extends BaseModel {
     moveItemUp(colName, itemName): void {
         this.moveDataColItem(colName, itemName, -1);
     }
-
     moveItemDown(colName, itemName): void {
         this.moveDataColItem(colName, itemName, 1);
+    }
+    newItemData(className, colName, params) {
+        console.log('Editor.newItemData', className, colName, params);
+        const {name} = params;
+        if (!name) throw new Error('no name');
+        const Class = backend[`${className}Editor`];
+        const data = Class.createData(params);
+        this.addModelData(colName, data);
+        return data;
     }
 }
 

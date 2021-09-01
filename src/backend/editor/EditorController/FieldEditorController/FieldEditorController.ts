@@ -8,7 +8,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const data = formEditor.newFieldData(params);
+        const data = formEditor.newItemData(params.class, 'fields', params);
         await pageEditor.save();
         return data;
     }
@@ -34,9 +34,9 @@ class FieldEditorController extends VisualEditorController {
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
-        const newFieldData = fieldEditor.changeClass(params.class);
+        const newData = fieldEditor.changeClass(params.class);
         await pageEditor.save();
-        return newFieldData;
+        return newData;
     }
 
     async getView(params) {

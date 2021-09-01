@@ -28,21 +28,6 @@ class DataSourceEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'dataSources');
     }
-    /*async getCustomDirPath() {
-        const collectionDirPath = await this.getCollectionDirPath();
-        return path.join(collectionDirPath, this.getName());
-    }*/
-    /*async createBackendJs(params) {
-        const templateFilePath = path.join(__dirname, 'DataSource.back.js.ejs');
-        const customJsFilePath = await this.getCustomFilePath('back.js');
-        const backendJs = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page      : params.page ? params.page : '',
-            form      : params.form ? params.form : '',
-            dataSource: this.getName(),
-            _class    : this.constructor.name.replace('Editor', '')
-        });
-        return backendJs;
-    }*/
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');

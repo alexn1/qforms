@@ -13,15 +13,15 @@ class TableEditor extends Editor {
     }
     newColumnData(params) {
         const name = params.name;
-        if (!name) throw new Error('need name');
+        if (!name) throw new Error('no column name');
         if (this.getColItemData('columns', name)) throw new Error(`Column ${name} already exists.`);
         const data = ColumnEditor.createData(params);
         this.addModelData('columns', data);
         return data;
     }
-    /*createColumnEditor(name) {
-        return new ColumnEditor(this.getColItemData('columns', name), this);
-    }*/
+
+
+
 }
 
 export = TableEditor;

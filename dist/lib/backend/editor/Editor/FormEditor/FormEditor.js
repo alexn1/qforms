@@ -2,10 +2,8 @@
 const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
-// const BaseModel = require('../../../BaseModel');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
-// import FieldEditor from '../FieldEditor/FieldEditor';
 class FormEditor extends Editor {
     static createData(params) {
         return {
@@ -29,20 +27,6 @@ class FormEditor extends Editor {
         this.addModelData('fields', data);
         return data;
     }
-    /*async moveFieldUp(params) {
-        this.moveDataColItem('fields', params.field, -1);
-        return 'ok';
-    }*/
-    /*async moveFieldDown(params) {
-        this.moveDataColItem('fields', params.field, 1);
-        return 'ok';
-    }*/
-    /*createFieldEditor(name): FieldEditor {
-        const data = this.getColItemData('fields', name);
-        const className = BaseModel.getClassName(data);
-        const Class = backend[`${className}Editor`];
-        return new Class(data, this);
-    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -67,10 +51,6 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
-    /*async getCustomDirPath() {
-        const collectionDirPath = await this.getCollectionDirPath();
-        return path.join(collectionDirPath, this.getName());
-    }*/
     newDataSourceData(params) {
         const name = params['name'];
         const _class = params['class'];

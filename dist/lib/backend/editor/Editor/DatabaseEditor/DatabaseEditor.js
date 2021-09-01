@@ -20,9 +20,6 @@ class DatabaseEditor extends Editor {
         }
         return data;
     }
-    /*createTableEditor(name) {
-        return new TableEditor(this.getColItemData('tables', name), this);
-    }*/
     newParamData(params) {
         const name = params.name;
         if (!name)

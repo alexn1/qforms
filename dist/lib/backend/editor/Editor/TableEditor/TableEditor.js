@@ -14,7 +14,7 @@ class TableEditor extends Editor {
     newColumnData(params) {
         const name = params.name;
         if (!name)
-            throw new Error('need name');
+            throw new Error('no column name');
         if (this.getColItemData('columns', name))
             throw new Error(`Column ${name} already exists.`);
         const data = ColumnEditor.createData(params);

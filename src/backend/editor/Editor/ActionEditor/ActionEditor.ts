@@ -2,7 +2,6 @@ const Editor = require('../Editor');
 const backend = require('../../../../backend');
 
 class ActionEditor extends Editor {
-
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -13,7 +12,6 @@ class ActionEditor extends Editor {
             }
         };
     }
-
     reformat(): Promise<any> {
         const editor = backend[`${this.getClassName()}Editor`];
         const newData = editor.createData(this.attributes());

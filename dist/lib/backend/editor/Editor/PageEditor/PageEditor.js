@@ -2,11 +2,9 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const FormEditor_1 = __importDefault(require("../FormEditor/FormEditor"));
 const path = require('path');
+const FormEditor_1 = __importDefault(require("../FormEditor/FormEditor"));
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
-const BaseModel = require('../../../BaseModel');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
@@ -38,17 +36,9 @@ class PageEditor extends Editor {
         }
         super.setAttr(name, value);
     }
-    /*async moveFormUp(params) {
-        this.moveDataColItem('forms', params.form, -1);
-        return 'ok';
-    }*/
     async save() {
         await this.pageFile.save();
     }
-    /*async moveFormDown(params) {
-        this.moveDataColItem('forms', params.form, 1);
-        return 'ok';
-    }*/
     newFormData(params) {
         const name = params['name'];
         const _class = params['class'];
@@ -87,17 +77,13 @@ class PageEditor extends Editor {
         // fields
         if (params.fields) {
             for (const fieldName in params.fields) {
-                formEditor.newFieldData(params.fields[fieldName]);
+                const fieldParams = params.fields[fieldName];
+                // formEditor.newFieldData(fieldParams);
+                formEditor.newItemData(fieldParams.class, 'fields', fieldParams);
             }
         }
         return data;
     }
-    /*createFormEditor(name): FormEditor {
-        const data = this.getColItemData('forms', name);
-        const className = BaseModel.getClassName(data);
-        const Class = backend[`${className}Editor`];
-        return new Class(data, this);
-    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

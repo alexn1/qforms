@@ -1,9 +1,5 @@
-import Page from "../../../viewer/Model/Page/Page";
-
 const path = require('path');
-
 const Editor                   = require('../Editor');
-// const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
@@ -18,11 +14,9 @@ import PageEditor from '../PageEditor/PageEditor';
 class ApplicationEditor extends Editor {
     appFile: JsonFile;
     appInfo: AppInfo;
-    constructor(appFile/*, hostApp = null*/) {
-        // if (!hostApp) throw new Error('no hostApp');
+    constructor(appFile) {
         super(appFile.data);
         this.appFile  = appFile;
-        // this.hostApp  = hostApp;
         this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data);
     }
     static createData(params) {
@@ -68,11 +62,7 @@ class ApplicationEditor extends Editor {
         console.log('ApplicationEditor.save');
         await this.appFile.save();
     }
-    /*createPageLinkEditor(name) {
-        return new PageLinkEditor(this.getColItemData('pageLinks', name), this);
-    }*/
     async removePageFile(name) {
-        // const pageLinkEditor = this.createPageLinkEditor(name);
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
         await Helper.fsUnlink(pageFilePath);
@@ -108,12 +98,6 @@ class ApplicationEditor extends Editor {
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
-    /*movePageLinkUp(name) {
-        this.moveDataColItem('pageLinks', name, -1);
-    }*/
-    /*movePageLinkDown(name) {
-        this.moveDataColItem('pageLinks', name, 1);
-    }*/
     newDatabaseData(params) {
         const name = params['name'];
         if (this.getColItemData('databases', name)) {
@@ -131,9 +115,6 @@ class ApplicationEditor extends Editor {
         this.addModelData('databases', data);
         return data;
     }
-    /*createDatabaseEditor(name) {
-        return new DatabaseEditor(this.getColItemData('databases', name), this);
-    }*/
     newPageLinkData(params) {
         const name = params.name;
         if (this.getColItemData('pageLinks', name)) {

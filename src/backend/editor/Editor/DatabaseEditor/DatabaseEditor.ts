@@ -18,9 +18,6 @@ class DatabaseEditor extends Editor {
         }
         return data;
     }
-    /*createTableEditor(name) {
-        return new TableEditor(this.getColItemData('tables', name), this);
-    }*/
     newParamData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
@@ -29,17 +26,6 @@ class DatabaseEditor extends Editor {
         this.addModelData('params', data);
         return data;
     }
-    /*createParamEditor(name) {
-        return new ParamEditor(this.getColItemData('params', name), this);
-    }*/
-    /*moveTableUp(name) {
-        this.moveDataColItem('tables', name, -1);
-        return 'ok';
-    }*/
-    /*moveTableDown(name) {
-        this.moveDataColItem('tables', name, 1);
-        return 'ok';
-    }*/
 }
 
 export = DatabaseEditor;

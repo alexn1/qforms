@@ -14,5 +14,6 @@ declare class Editor extends BaseModel {
     getCollectionDirPath(): Promise<string>;
     moveItemUp(colName: any, itemName: any): void;
     moveItemDown(colName: any, itemName: any): void;
+    newItemData(className: any, colName: any, params: any): any;
 }
 export = Editor;

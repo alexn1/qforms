@@ -80,6 +80,9 @@ class BaseModel {
         return col.find(data => BaseModel.getName(data) === name);
     }
     addModelData(colName, data) {
+        const name = BaseModel.getName(data);
+        if (this.getColItemData(colName, name))
+            throw new Error(`${name} already exists in ${colName}`);
         this.getDataCol(colName).push(data);
     }
     getApp() {
