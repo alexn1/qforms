@@ -49,7 +49,6 @@ declare class ApplicationEditor extends Editor {
     movePageLinkUp(name: any): void;
     movePageLinkDown(name: any): void;
     newDatabaseData(params: any): any;
-    createDatabaseEditor(name: any): any;
     newPageLinkData(params: any): any;
     newDataSourceData(params: any): any;
 }

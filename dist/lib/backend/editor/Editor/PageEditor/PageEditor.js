@@ -69,7 +69,7 @@ class PageEditor extends Editor {
             default: throw new Error(`unknown form class: ${_class}`);
         }
         this.addModelData('forms', data);
-        const formEditor = this.createFormEditor(name);
+        const formEditor = this.createItemEditor('forms', name);
         // dataSources
         if (params.dataSources) {
             for (const dataSourceName in params.dataSources) {
@@ -93,12 +93,12 @@ class PageEditor extends Editor {
         }
         return data;
     }
-    createFormEditor(name) {
+    /*createFormEditor(name): FormEditor {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
-    }
+    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

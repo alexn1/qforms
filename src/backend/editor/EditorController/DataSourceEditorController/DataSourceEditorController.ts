@@ -11,7 +11,7 @@ class DataSourceEditorController extends EditorController {
         if (params.pageFileName) {
             editor = await editor.createPageEditor(params.pageFileName);
             if (params.form) {
-                editor = editor.createFormEditor(params.form);
+                editor = editor.createItemEditor('forms', params.form);
             }
         }
         // return editor.createDataSourceEditor(params.dataSource);
@@ -24,7 +24,7 @@ class DataSourceEditorController extends EditorController {
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 data = formEditor.newDataSourceData(params);
             } else {
                 data = pageEditor.newDataSourceData(params);
@@ -43,7 +43,7 @@ class DataSourceEditorController extends EditorController {
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 data = formEditor.removeColData('dataSources', params.dataSource);
             } else {
                 data = pageEditor.removeColData('dataSources', params.dataSource);
@@ -62,7 +62,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveDataSourceUp(params.dataSource);
                 await pageEditor.save();
                 return null;
@@ -86,7 +86,7 @@ class DataSourceEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 // form data source
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveDataSourceDown(params.dataSource);
                 await pageEditor.save();
                 return null;

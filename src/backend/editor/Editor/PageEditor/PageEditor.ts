@@ -73,7 +73,7 @@ class PageEditor extends Editor {
         }
         this.addModelData('forms', data);
 
-        const formEditor = this.createFormEditor(name);
+        const formEditor = this.createItemEditor('forms', name);
 
         // dataSources
         if (params.dataSources) {
@@ -101,14 +101,12 @@ class PageEditor extends Editor {
         return data;
     }
 
-    createFormEditor(name): FormEditor {
+    /*createFormEditor(name): FormEditor {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
-    }
-
-
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');

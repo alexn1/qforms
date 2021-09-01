@@ -147,9 +147,9 @@ class ApplicationEditor extends Editor {
         return data;
     }
 
-    createDatabaseEditor(name) {
+    /*createDatabaseEditor(name) {
         return new DatabaseEditor(this.getColItemData('databases', name), this);
-    }
+    }*/
 
     newPageLinkData(params) {
         const name = params.name;

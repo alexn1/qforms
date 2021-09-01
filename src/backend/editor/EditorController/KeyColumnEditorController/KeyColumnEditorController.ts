@@ -13,7 +13,7 @@ class KeyColumnEditorController extends EditorController {
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 // const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
                 const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
                 const data = dataSourceEditor.newKeyColumnData(params);
@@ -38,7 +38,7 @@ class KeyColumnEditorController extends EditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const formEditor = pageEditor.createFormEditor(params.form);
+        const formEditor = pageEditor.createItemEditor('forms', params.form);
         // const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
         const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
         const keyColumnEditor: KeyColumnEditor = dataSourceEditor.createItemEditor('keyColumns', params.keyColumn);
@@ -50,7 +50,7 @@ class KeyColumnEditorController extends EditorController {
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.page);
-        const formEditor = pageEditor.createFormEditor(params.form);
+        const formEditor = pageEditor.createItemEditor('forms', params.form);
         // const dataSourceEditor = formEditor.createDataSourceEditor(params.dataSource);
         const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
         const data = dataSourceEditor.removeColData('keyColumns', params.keyColumn);

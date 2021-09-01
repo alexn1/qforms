@@ -130,9 +130,9 @@ class ApplicationEditor extends Editor {
         this.addModelData('databases', data);
         return data;
     }
-    createDatabaseEditor(name) {
+    /*createDatabaseEditor(name) {
         return new DatabaseEditor(this.getColItemData('databases', name), this);
-    }
+    }*/
     newPageLinkData(params) {
         const name = params.name;
         if (this.getColItemData('pageLinks', name)) {

@@ -9,7 +9,7 @@ class ActionEditorController extends EditorController {
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 data = await formEditor.newActionData(params);
             } else {
                 data = await pageEditor.newActionData(params);
@@ -27,7 +27,7 @@ class ActionEditorController extends EditorController {
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 const actionEditor = formEditor.createActionEditor(params.action);
                 actionEditor.setAttr(params.attr, params.value);
             } else {
@@ -49,7 +49,7 @@ class ActionEditorController extends EditorController {
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 data = formEditor.removeColData('actions', params.action);
             } else {
                 data = pageEditor.removeColData('actions', params.action);
@@ -67,7 +67,7 @@ class ActionEditorController extends EditorController {
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveActionUp(params.action);
                 await pageEditor.save();
             } else {
@@ -86,7 +86,7 @@ class ActionEditorController extends EditorController {
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
-                const formEditor = pageEditor.createFormEditor(params.form);
+                const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveActionDown(params.action);
                 await pageEditor.save();
             } else {
