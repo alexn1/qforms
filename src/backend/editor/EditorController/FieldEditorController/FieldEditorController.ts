@@ -20,7 +20,7 @@ class FieldEditorController extends VisualEditorController {
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor  = pageEditor.createFormEditor(params.form);
         const fieldEditor = formEditor.createFieldEditor(params.field);
-        await fieldEditor.setAttr(params.attr, params.value);
+        fieldEditor.setAttr(params.attr, params.value);
         await pageEditor.save();
         return null;
     }

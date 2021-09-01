@@ -58,6 +58,7 @@ module.exports.RowFormEditor                     = require('./editor/Editor/Form
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
+module.exports.KeyColumnEditor                   = require('./editor/Editor/KeyColumnEditor/KeyColumnEditor');
 
 // module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');

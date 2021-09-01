@@ -23,7 +23,7 @@ class DatabaseEditorController extends EditorController {
         console.log('DatabaseEditorController.save');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createDatabaseEditor(params.database);
-        await databaseEditor.setAttr(params.attr, params.value);
+        databaseEditor.setAttr(params.attr, params.value);
         await appEditor.save();
         return null;
     }

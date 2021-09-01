@@ -1,6 +1,10 @@
 import FormEditor from '../FormEditor/FormEditor';
+import ApplicationEditor from '../ApplicationEditor/ApplicationEditor';
+import JsonFile from '../../../JsonFile';
 declare const Editor: any;
 declare class PageEditor extends Editor {
+    appEditor: ApplicationEditor;
+    pageFile: JsonFile;
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -13,7 +17,7 @@ declare class PageEditor extends Editor {
         forms: any[];
     };
     constructor(appEditor: any, pageFile: any);
-    setAttr(name: any, value: any): Promise<void>;
+    setAttr(name: any, value: any): void;
     moveFormUp(params: any): Promise<string>;
     save(): Promise<void>;
     moveFormDown(params: any): Promise<string>;

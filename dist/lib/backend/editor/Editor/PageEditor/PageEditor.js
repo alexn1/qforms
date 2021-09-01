@@ -12,6 +12,11 @@ const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
 const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 class PageEditor extends Editor {
+    constructor(appEditor, pageFile) {
+        super(pageFile.data, appEditor);
+        this.appEditor = appEditor;
+        this.pageFile = pageFile;
+    }
     static createData(params) {
         return {
             '@class': 'Page',
@@ -25,18 +30,13 @@ class PageEditor extends Editor {
             forms: [],
         };
     }
-    constructor(appEditor, pageFile) {
-        super(pageFile.data, appEditor);
-        this.appEditor = appEditor;
-        this.pageFile = pageFile;
-    }
-    async setAttr(name, value) {
+    setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
-            await pageLinkEditor.setAttr(name, value);
+            pageLinkEditor.setAttr(name, value);
         }
-        await super.setAttr(name, value);
+        super.setAttr(name, value);
     }
     async moveFormUp(params) {
         this.moveDataColItem('forms', params.form, -1);

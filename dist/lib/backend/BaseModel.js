@@ -33,7 +33,7 @@ class BaseModel {
             throw new Error(`no attribute '${name}'`);
         return this.data['@attributes'][name];
     }
-    async setAttr(name, value) {
+    setAttr(name, value) {
         this.data['@attributes'][name] = value;
     }
     isAttr(name) {

@@ -1,4 +1,6 @@
 import FormEditor from '../FormEditor/FormEditor';
+import ApplicationEditor from '../ApplicationEditor/ApplicationEditor';
+import JsonFile from '../../../JsonFile';
 
 const path = require('path');
 
@@ -11,6 +13,8 @@ const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
 const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class PageEditor extends Editor {
+    appEditor: ApplicationEditor;
+    pageFile: JsonFile;
 
     static createData(params) {
         return {
@@ -32,13 +36,13 @@ class PageEditor extends Editor {
         this.pageFile  = pageFile;
     }
 
-    async setAttr(name, value) {
+    setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
-            await pageLinkEditor.setAttr(name, value);
+            pageLinkEditor.setAttr(name, value);
         }
-        await super.setAttr(name, value);
+        super.setAttr(name, value);
     }
 
     async moveFormUp(params) {
@@ -101,6 +105,8 @@ class PageEditor extends Editor {
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
     }
+
+
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');

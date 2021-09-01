@@ -41,7 +41,7 @@ class BaseModel {
         return this.data['@attributes'][name];
     }
 
-    async setAttr(name, value): Promise<void> {
+    setAttr(name, value): void {
         this.data['@attributes'][name] = value;
     }
 

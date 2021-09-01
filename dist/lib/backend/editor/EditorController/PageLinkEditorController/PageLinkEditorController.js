@@ -4,7 +4,7 @@ class PageLinkEditorController extends EditorController {
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         const pageLinkEditor = appEditor.createPageLinkEditor(params.pageLink);
-        await pageLinkEditor.setAttr(params.attr, params.value);
+        pageLinkEditor.setAttr(params.attr, params.value);
         await appEditor.save();
         return null;
     }

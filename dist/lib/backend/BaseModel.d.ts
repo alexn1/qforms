@@ -10,7 +10,7 @@ declare class BaseModel {
     getName(): string;
     attributes(): any;
     getAttr(name: any): any;
-    setAttr(name: any, value: any): Promise<void>;
+    setAttr(name: any, value: any): void;
     isAttr(name: any): boolean;
     isData(colName: any, name: any): boolean;
     getData(): any;
