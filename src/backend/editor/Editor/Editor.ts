@@ -92,12 +92,12 @@ class Editor extends BaseModel {
         }
         return path.join(customDirPath, this.getName() + '.' + ext);
     }
-    createDataSourceEditor(name) {
+    /*createDataSourceEditor(name) {
         const data = this.getColItemData('dataSources', name);
         const className = BaseModel.getClassName(data);
         const DataSourceClass = backend[`${className}Editor`];
         return new DataSourceClass(data, this);
-    }
+    }*/
     moveDataColItem(colName, name, offset) {
         Helper.moveArrItem(
             this.getDataCol(colName),

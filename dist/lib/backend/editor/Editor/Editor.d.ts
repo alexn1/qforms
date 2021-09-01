@@ -11,7 +11,6 @@ declare class Editor extends BaseModel {
     moveActionDown(name: any): void;
     getCustomDirPath(): Promise<string>;
     getCustomFilePath(ext: any): Promise<any>;
-    createDataSourceEditor(name: any): any;
     moveDataColItem(colName: any, name: any, offset: any): void;
     newActionData(params: any): Promise<any>;
     createActionEditor(name: any): any;

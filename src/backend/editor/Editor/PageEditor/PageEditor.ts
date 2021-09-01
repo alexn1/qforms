@@ -80,7 +80,8 @@ class PageEditor extends Editor {
             for (const dataSourceName in params.dataSources) {
                 const dataSource = params.dataSources[dataSourceName];
                 formEditor.newDataSourceData(dataSource);
-                const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
+                // const dataSourceEditor = formEditor.createDataSourceEditor(dataSourceName);
+                const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
 
                 // keyColumns
                 if (dataSource.keyColumns) {

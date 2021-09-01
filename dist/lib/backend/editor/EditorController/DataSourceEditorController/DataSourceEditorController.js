@@ -12,7 +12,8 @@ class DataSourceEditorController extends EditorController {
                 editor = editor.createFormEditor(params.form);
             }
         }
-        return editor.createDataSourceEditor(params.dataSource);
+        // return editor.createDataSourceEditor(params.dataSource);
+        return editor.createItemEditor('dataSources', params.dataSource);
     }
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
