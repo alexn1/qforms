@@ -133,6 +133,13 @@ class Editor extends BaseModel {
         throw new Error('Editor.getCollectionDirPath not implemented');
     }
 
+    moveItemUp(colName, itemName): void {
+        this.moveDataColItem(colName, itemName, -1);
+    }
+
+    moveItemDown(colName, itemName): void {
+        this.moveDataColItem(colName, itemName, 1);
+    }
 }
 
 export = Editor;

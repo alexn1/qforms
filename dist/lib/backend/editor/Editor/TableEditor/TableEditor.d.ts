@@ -8,6 +8,5 @@ declare class TableEditor extends Editor {
         columns: any[];
     };
     newColumnData(params: any): any;
-    createColumnEditor(name: any): any;
 }
 export = TableEditor;

@@ -21,8 +21,5 @@ class TableEditor extends Editor {
         this.addModelData('columns', data);
         return data;
     }
-    createColumnEditor(name) {
-        return new ColumnEditor(this.getColItemData('columns', name), this);
-    }
 }
 module.exports = TableEditor;

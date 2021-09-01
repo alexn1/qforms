@@ -115,5 +115,11 @@ class Editor extends BaseModel {
     async getCollectionDirPath() {
         throw new Error('Editor.getCollectionDirPath not implemented');
     }
+    moveItemUp(colName, itemName) {
+        this.moveDataColItem(colName, itemName, -1);
+    }
+    moveItemDown(colName, itemName) {
+        this.moveDataColItem(colName, itemName, 1);
+    }
 }
 module.exports = Editor;

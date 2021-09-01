@@ -43,12 +43,12 @@ class FormEditor extends Editor {
         return 'ok';
     }
 
-    createFieldEditor(name): FieldEditor {
+    /*createFieldEditor(name): FieldEditor {
         const data = this.getColItemData('fields', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
-    }
+    }*/
 
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');

@@ -22,9 +22,9 @@ class TableEditor extends Editor {
         return data;
     }
 
-    createColumnEditor(name) {
+    /*createColumnEditor(name) {
         return new ColumnEditor(this.getColItemData('columns', name), this);
-    }
+    }*/
 
 }
 
