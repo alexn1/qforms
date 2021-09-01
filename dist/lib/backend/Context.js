@@ -31,7 +31,8 @@ class Context {
         // this.env         = req.params.env;
         // params
         this.query = req.query ? Helper_1.default.decodeObject(req.query) : {};
-        this.params = req.body.params ? Helper_1.default.decodeObject(req.body.params) : {};
+        // this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
+        this.params = Object.assign({}, (req.body.params ? req.body.params : {}));
         // cnn
         this.connections = {};
         this.querytime = {

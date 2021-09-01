@@ -140,10 +140,14 @@ class ApplicationController extends Controller {
             action : 'page',
             page   : name,
             newMode: isNewMode,
-            params : Helper.encodeObject({
+            // params : Helper.encodeObject({
+            //     ...params,
+            //     ...(key ? DataSource.keyToParams(key) : {})
+            // })
+            params : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
-            })
+            }
         });
 
         // pageModel
@@ -2099,7 +2103,8 @@ class Application extends Model {
         const result = await this.request({
             action: 'rpc',
             name  : name,
-            params: Helper.encodeObject(params)
+            // params: Helper.encodeObject(params)
+            params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
@@ -2707,7 +2712,8 @@ class SqlDataSource extends DataSource {
             action: '_delete',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),
-            params: Helper.encodeObject({key}),
+            // params: Helper.encodeObject({key}),
+            params: {key},
         });
         await this.refill();
 
@@ -2820,10 +2826,14 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            params        : Helper.encodeObject({
+            // params        : Helper.encodeObject({
+            //     ...this.getPageParams(),
+            //     ...params,
+            // })
+            params        : {
                 ...this.getPageParams(),
                 ...params,
-            })
+            }
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
@@ -2839,10 +2849,14 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            params        : Helper.encodeObject({
+            // params        : Helper.encodeObject({
+            //     ...this.getPageParams(),
+            //     ...params,
+            // })
+            params        : {
                 ...this.getPageParams(),
                 ...params,
-            })
+            }
         });
         if (!data.row) throw new Error('selectSingle must return row');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
@@ -3327,7 +3341,8 @@ class Form extends Model {
             page  : this.getPage().getName(),
             form  : this.getName(),
             name  : name,
-            params: Helper.encodeObject(params)
+            // params: Helper.encodeObject(params)
+            params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
@@ -3596,7 +3611,8 @@ class Page extends Model {
             action: 'rpc',
             page  : this.getName(),
             name  : name,
-            params: Helper.encodeObject(params)
+            // params: Helper.encodeObject(params)
+            params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

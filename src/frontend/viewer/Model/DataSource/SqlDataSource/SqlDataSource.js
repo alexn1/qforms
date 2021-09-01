@@ -103,7 +103,8 @@ class SqlDataSource extends DataSource {
             action: '_delete',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),
-            params: Helper.encodeObject({key}),
+            // params: Helper.encodeObject({key}),
+            params: {key},
         });
         await this.refill();
 
@@ -216,10 +217,14 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            params        : Helper.encodeObject({
+            // params        : Helper.encodeObject({
+            //     ...this.getPageParams(),
+            //     ...params,
+            // })
+            params        : {
                 ...this.getPageParams(),
                 ...params,
-            })
+            }
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
@@ -235,10 +240,14 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            params        : Helper.encodeObject({
+            // params        : Helper.encodeObject({
+            //     ...this.getPageParams(),
+            //     ...params,
+            // })
+            params        : {
                 ...this.getPageParams(),
                 ...params,
-            })
+            }
         });
         if (!data.row) throw new Error('selectSingle must return row');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);

@@ -79,7 +79,8 @@ class Form extends Model {
             page  : this.getPage().getName(),
             form  : this.getName(),
             name  : name,
-            params: Helper.encodeObject(params)
+            // params: Helper.encodeObject(params)
+            params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
