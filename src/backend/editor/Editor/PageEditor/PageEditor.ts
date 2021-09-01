@@ -6,8 +6,6 @@ import JsonFile from '../../../JsonFile';
 const Editor = require('../Editor');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
-const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
-const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class PageEditor extends Editor {
     appEditor: ApplicationEditor;
@@ -104,26 +102,6 @@ class PageEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
-    /*newDataSourceData(params) {
-        const name   = params['name'];
-        const _class = params['class'];
-        if (this.getColItemData('dataSources', name)) {
-            throw new Error(`DataSource ${name} already exists`);
-        }
-        let data;
-        switch (_class) {
-            case 'DataSource':
-                data = DataSourceEditor.createData(params);
-                break;
-            case 'SqlDataSource':
-                data = SqlDataSourceEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown data source class: ${_class}`);
-        }
-        this.addModelData('dataSources', data);
-        return data;
-    }*/
 }
 
 export = PageEditor;

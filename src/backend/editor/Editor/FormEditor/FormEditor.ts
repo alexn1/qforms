@@ -1,9 +1,5 @@
 const path = require('path');
-
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
-const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
-const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 
 class FormEditor extends Editor {
     static createData(params): any {
@@ -19,15 +15,6 @@ class FormEditor extends Editor {
             fields     : [],
         };
     }
-    /*newFieldData(params) {
-        const name = params['name'];
-        if (this.getColItemData('fields', name)) {
-            throw new Error(`field ${name} already exists`);
-        }
-        const data = backend[`${params['class']}Editor`].createData(params);
-        this.addModelData('fields', data);
-        return data;
-    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -52,26 +39,6 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
-    /*newDataSourceData(params) {
-        const name   = params['name'];
-        const _class = params['class'];
-        if (this.getColItemData('dataSources', name)) {
-            throw new Error(`data source ${name} already exist.`);
-        }
-        let data;
-        switch (_class) {
-            case 'DataSource':
-                data = DataSourceEditor.createData(params);
-                break;
-            case 'SqlDataSource':
-                data = SqlDataSourceEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown data source class: ${_class}`);
-        }
-        this.addModelData('dataSources', data);
-        return data;
-    }*/
 }
 
 export = FormEditor;

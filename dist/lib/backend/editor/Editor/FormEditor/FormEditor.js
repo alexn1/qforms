@@ -1,9 +1,6 @@
 "use strict";
 const path = require('path');
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
-const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
-const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 class FormEditor extends Editor {
     static createData(params) {
         return {
@@ -18,15 +15,6 @@ class FormEditor extends Editor {
             fields: [],
         };
     }
-    /*newFieldData(params) {
-        const name = params['name'];
-        if (this.getColItemData('fields', name)) {
-            throw new Error(`field ${name} already exists`);
-        }
-        const data = backend[`${params['class']}Editor`].createData(params);
-        this.addModelData('fields', data);
-        return data;
-    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

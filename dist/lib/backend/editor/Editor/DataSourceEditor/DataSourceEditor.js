@@ -1,8 +1,7 @@
 "use strict";
 const path = require('path');
 const Editor = require('../Editor');
-const backend = require('../../../index');
-const KeyColumnEditor = require('../KeyColumnEditor/KeyColumnEditor');
+// const backend = require('../../../index');
 class DataSourceEditor extends Editor {
     static createData(params) {
         return {
@@ -15,15 +14,6 @@ class DataSourceEditor extends Editor {
             keyColumns: [],
         };
     }
-    /*newKeyColumnData(params) {
-        const name = params.name;
-        if (this.getColItemData('keyColumns', name)) {
-            throw new Error(`Key Column ${name} already exist.`);
-        }
-        const data = KeyColumnEditor.createData(params);
-        this.addModelData('keyColumns', data);
-        return data;
-    }*/
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'dataSources');
@@ -38,18 +28,6 @@ class DataSourceEditor extends Editor {
             dataSource: this.getName(),
         });
         return js;
-    }
-    async save() {
-        // console.log(`DataSourceEditor.save`);
-        if (!this.parent) {
-            throw new Error('DataSourceEditor.save: no parent');
-        }
-        if (this.parent instanceof backend.FormEditor) {
-            await this.parent.parent.save(); // on form
-        }
-        else {
-            await this.parent.save(); // on page
-        }
     }
 }
 module.exports = DataSourceEditor;

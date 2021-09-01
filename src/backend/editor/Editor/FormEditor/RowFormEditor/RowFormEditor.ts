@@ -1,7 +1,6 @@
 const FormEditor = require('../FormEditor');
 
 class RowFormEditor extends FormEditor {
-
     static createData(params) {
         return {
             '@class'     : 'RowForm',
@@ -18,7 +17,6 @@ class RowFormEditor extends FormEditor {
             fields     : [],
         };
     }
-
 }
 
 export = RowFormEditor;

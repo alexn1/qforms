@@ -7,8 +7,6 @@ const FormEditor_1 = __importDefault(require("../FormEditor/FormEditor"));
 const Editor = require('../Editor');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
-const DataSourceEditor = require('../DataSourceEditor/DataSourceEditor');
-const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 class PageEditor extends Editor {
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);

@@ -1,7 +1,6 @@
 const FormEditor = require('../FormEditor');
 
 class TableFormEditor extends FormEditor {
-
     static createData(params) {
         return {
             '@class'     : 'TableForm',
@@ -22,7 +21,6 @@ class TableFormEditor extends FormEditor {
             fields     : [],
         };
     }
-
 }
 
 export = TableFormEditor;
