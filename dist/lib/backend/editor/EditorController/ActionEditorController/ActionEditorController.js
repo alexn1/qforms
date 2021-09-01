@@ -70,16 +70,16 @@ class ActionEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveActionUp(params.action);
+                formEditor.moveItemUp('actions', params.action);
                 await pageEditor.save();
             }
             else {
-                pageEditor.moveActionUp(params.action);
+                pageEditor.moveItemUp('actions', params.action);
                 await pageEditor.save();
             }
         }
         else {
-            appEditor.moveActionUp(params.action);
+            appEditor.moveItemUp('actions', params.action);
             await appEditor.save();
         }
         return null;
@@ -90,16 +90,16 @@ class ActionEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveActionDown(params.action);
+                formEditor.moveItemDown('actions', params.action);
                 await pageEditor.save();
             }
             else {
-                pageEditor.moveActionDown(params.action);
+                pageEditor.moveItemDown('actions', params.action);
                 await pageEditor.save();
             }
         }
         else {
-            appEditor.moveActionDown(params.action);
+            appEditor.moveItemDown('actions', params.action);
             await appEditor.save();
         }
         return null;

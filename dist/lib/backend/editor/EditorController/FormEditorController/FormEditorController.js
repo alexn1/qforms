@@ -1,5 +1,4 @@
 "use strict";
-const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
 class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
@@ -30,14 +29,14 @@ class FormEditorController extends VisualEditorController {
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const result = await pageEditor.moveFormUp(params);
+        const result = await pageEditor.moveItemUp('forms', params);
         await pageEditor.save();
         return result;
     }
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const result = await pageEditor.moveFormDown(params);
+        const result = await pageEditor.moveItemDown('forms', params);
         await pageEditor.save();
         return result;
     }
@@ -55,19 +54,6 @@ class FormEditorController extends VisualEditorController {
                 return result;
         }
     }
-    /*async saveView(params) {
-        const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.createItemEditor('forms', params.form);
-        switch (params.view) {
-            case 'ejs':
-                await formEditor.saveCustomFile('ejs', params.text);
-                return null;
-            case 'css':
-                await formEditor.saveCustomFile('css', params.text);
-                return null;
-        }
-    }*/
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

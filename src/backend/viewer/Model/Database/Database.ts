@@ -149,6 +149,12 @@ class Database extends Model {
     async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
         throw new Error('Database.insertRow not implemented');
     }
+    async getTableList(): Promise<string[]> {
+        throw new Error('Database.getTableList not implemented');
+    }
+    async getTableInfo(table): Promise<any[]> {
+        throw new Error('Database.getTableInfo not implemented');
+    }
 }
 
 export = Database;

@@ -14,7 +14,6 @@ class EditorController {
         // this.hostApp     = hostApp;
         this.application = application;
     }
-
     async getView(params) {
         console.log('EditorController.getView');
         let view = null;
@@ -33,7 +32,6 @@ class EditorController {
             data: {}
         };
     }
-
     async createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
         const appFile = new JsonFile(this.appInfo.filePath);

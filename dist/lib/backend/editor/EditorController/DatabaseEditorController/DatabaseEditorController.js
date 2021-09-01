@@ -8,7 +8,6 @@ class DatabaseEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         const data = appEditor.newDatabaseData(params);
         if (params.params) {
-            // const databaseEditor = appEditor.createDatabaseEditor(params.name);
             const databaseEditor = appEditor.createItemEditor('databases', params.name);
             for (const name in params.params) {
                 const param = params.params[name];
@@ -21,11 +20,10 @@ class DatabaseEditorController extends EditorController {
     async save(params) {
         console.log('DatabaseEditorController.save');
         const appEditor = await this.createApplicationEditor();
-        // const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         databaseEditor.setAttr(params.attr, params.value);
         await appEditor.save();
-        return null;
+        return 'ok';
     }
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
@@ -50,13 +48,13 @@ class DatabaseEditorController extends EditorController {
     }
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
-        appEditor.moveDataColItem('databases', params.database, -1);
+        appEditor.moveItemUp('databases', params.database);
         await appEditor.save();
         return 'ok';
     }
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
-        appEditor.moveDataColItem('databases', params.database, 1);
+        appEditor.moveItemDown('databases', params.database);
         await appEditor.save();
         return 'ok';
     }

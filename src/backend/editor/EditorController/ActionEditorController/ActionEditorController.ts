@@ -1,7 +1,6 @@
 const EditorController = require('../EditorController');
 
 class ActionEditorController extends EditorController {
-
     async _new(params) {
         console.log('ActionEditorController._new');
         const appEditor = await this.createApplicationEditor();
@@ -21,7 +20,6 @@ class ActionEditorController extends EditorController {
         }
         return data;
     }
-
     async save(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.pageFileName) {
@@ -42,7 +40,6 @@ class ActionEditorController extends EditorController {
         }
         return null;
     }
-
     async delete(params) {
         const appEditor = await this.createApplicationEditor();
         let data;
@@ -61,44 +58,42 @@ class ActionEditorController extends EditorController {
         }
         return data;
     }
-
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveActionUp(params.action);
+                formEditor.moveItemUp('actions', params.action);
                 await pageEditor.save();
             } else {
-                pageEditor.moveActionUp(params.action);
+                pageEditor.moveItemUp('actions', params.action);
                 await pageEditor.save();
             }
         } else {
-            appEditor.moveActionUp(params.action);
+            appEditor.moveItemUp('actions', params.action);
             await appEditor.save();
         }
         return null;
     }
-
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveActionDown(params.action);
+                formEditor.moveItemDown('actions', params.action);
                 await pageEditor.save();
             } else {
-                pageEditor.moveActionDown(params.action);
+                pageEditor.moveItemDown('actions', params.action);
                 await pageEditor.save();
             }
         } else {
-            appEditor.moveActionDown(params.action);
+            appEditor.moveItemDown('actions', params.action);
             await appEditor.save();
         }
         return null;
     }
-
 }
+
 export = ActionEditorController;

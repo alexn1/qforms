@@ -12,7 +12,6 @@ class DataSourceEditorController extends EditorController {
                 editor = editor.createItemEditor('forms', params.form);
             }
         }
-        // return editor.createDataSourceEditor(params.dataSource);
         return editor.createItemEditor('dataSources', params.dataSource);
     }
     async _new(params) {
@@ -62,20 +61,20 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveDataSourceUp(params.dataSource);
+                formEditor.moveItemUp('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
             else {
                 // page data source
-                pageEditor.moveDataSourceUp(params.dataSource);
+                pageEditor.moveItemUp('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
         }
         else {
             // app data source
-            appEditor.moveDataSourceUp(params.dataSource);
+            appEditor.moveItemUp('dataSources', params.dataSource);
             await appEditor.save();
             return null;
         }
@@ -87,20 +86,20 @@ class DataSourceEditorController extends EditorController {
             if (params.form) {
                 // form data source
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                formEditor.moveDataSourceDown(params.dataSource);
+                formEditor.moveItemDown('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
             else {
                 // page data source
-                pageEditor.moveDataSourceDown(params.dataSource);
+                pageEditor.moveItemDown('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
         }
         else {
             // app data source
-            appEditor.moveDataSourceDown(params.dataSource);
+            appEditor.moveItemDown('dataSources', params.dataSource);
             await appEditor.save();
             return null;
         }

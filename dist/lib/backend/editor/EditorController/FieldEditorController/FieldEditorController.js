@@ -52,20 +52,6 @@ class FieldEditorController extends VisualEditorController {
                 return result;
         }
     }
-    /*async saveView(params) {
-        const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPage(params.page);
-        const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const fieldEditor = formEditor.createItemEditor('fields', params.field);
-        switch (params.view) {
-            case 'ejs':
-                await fieldEditor.saveCustomFile('ejs', params.text);
-                return null;
-            case 'css':
-                await fieldEditor.saveCustomFile('css', params.text);
-                return null;
-        }
-    }*/
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
@@ -86,7 +72,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const result = await formEditor.moveFieldUp(params);
+        const result = await formEditor.moveItemUp('fields', params);
         await pageEditor.save();
         return result;
     }
@@ -94,7 +80,7 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const result = await formEditor.moveFieldDown(params);
+        const result = await formEditor.moveItemDown('fields', params);
         await pageEditor.save();
         return result;
     }

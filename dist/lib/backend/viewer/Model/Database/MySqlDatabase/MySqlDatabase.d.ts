@@ -15,7 +15,7 @@ declare class MySqlDatabase extends Database {
     static queryFormat(query: any, params?: {}): string;
     static typeCast(field: any, next: any): any;
     getTableList(): Promise<string[]>;
-    getTableInfo(table: any): Promise<unknown>;
+    getTableInfo(table: any): Promise<any[]>;
     getColumnTypeByDataType(dataType: any): string;
     insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<any>;
 }

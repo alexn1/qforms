@@ -11,13 +11,13 @@ class PageLinkEditorController extends EditorController {
     }
     async moveUp(params) {
         const appEditor = await this.createApplicationEditor();
-        appEditor.movePageLinkUp(params.page);
+        appEditor.moveItemUp('pageLinks', params.page);
         await appEditor.save();
         return 'ok';
     }
     async moveDown(params) {
         const appEditor = await this.createApplicationEditor();
-        appEditor.movePageLinkDown(params.page);
+        appEditor.moveItemDown('pageLinks', params.page);
         await appEditor.save();
         return 'ok';
     }

@@ -18,7 +18,6 @@ class PageEditorController extends VisualEditorController {
         await pageEditor.save();
         return null;
     }
-
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const data = await appEditor.newPageAndPageLinkData(params);
@@ -32,7 +31,6 @@ class PageEditorController extends VisualEditorController {
         await appEditor.save();
         return data;
     }
-
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
@@ -45,18 +43,6 @@ class PageEditorController extends VisualEditorController {
                 return result;
         }
     }
-    /*async saveView(params) {
-        const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPage(params.page);
-        switch (params.view) {
-            case 'ejs':
-                await pageEditor.saveCustomFile('ejs', params.text);
-                return null;
-            case 'css':
-                await pageEditor.saveCustomFile('css', params.text);
-                return null;
-        }
-    }*/
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

@@ -134,5 +134,11 @@ class Database extends Model_1.default {
     async insertRow(context, table, values, autoColumnTypes = {}) {
         throw new Error('Database.insertRow not implemented');
     }
+    async getTableList() {
+        throw new Error('Database.getTableList not implemented');
+    }
+    async getTableInfo(table) {
+        throw new Error('Database.getTableInfo not implemented');
+    }
 }
 module.exports = Database;

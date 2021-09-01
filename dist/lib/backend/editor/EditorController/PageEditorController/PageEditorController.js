@@ -43,18 +43,6 @@ class PageEditorController extends VisualEditorController {
                 return result;
         }
     }
-    /*async saveView(params) {
-        const appEditor = await this.createApplicationEditor();
-        const pageEditor = await appEditor.getPage(params.page);
-        switch (params.view) {
-            case 'ejs':
-                await pageEditor.saveCustomFile('ejs', params.text);
-                return null;
-            case 'css':
-                await pageEditor.saveCustomFile('css', params.text);
-                return null;
-        }
-    }*/
     async createController(params) {
         const appEditor = await this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

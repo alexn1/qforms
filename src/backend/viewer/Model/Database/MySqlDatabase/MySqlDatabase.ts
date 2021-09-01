@@ -208,7 +208,7 @@ class MySqlDatabase extends Database {
         });
     }
 
-    async getTableInfo(table) {
+    async getTableInfo(table): Promise<any[]> {
         console.log('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {

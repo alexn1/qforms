@@ -28,5 +28,7 @@ declare class Database extends Model {
     static getUsedParams(query: any): any;
     static checkParams(query: any, params: any): void;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;
+    getTableList(): Promise<string[]>;
+    getTableInfo(table: any): Promise<any[]>;
 }
 export = Database;
