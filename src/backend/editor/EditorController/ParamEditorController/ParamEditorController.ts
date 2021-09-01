@@ -9,9 +9,9 @@ class ParamEditorController extends EditorController {
         console.log('ParamEditorController._new');
         const appEditor = await this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const param = databaseEditor.newParamData(params);
+        const data = databaseEditor.newItemData('Param', 'params', params);
         await appEditor.save();
-        return param;
+        return data;
     }
     async save(params) {
         console.log('ParamEditorController.save');
