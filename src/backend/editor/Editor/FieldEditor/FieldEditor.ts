@@ -3,7 +3,6 @@ const Editor = require('../Editor');
 const backend = require('../../../../backend');
 
 class FieldEditor extends Editor {
-
     static createData(params): any {
         if (!params.name) throw new Error('no name');
         return {
@@ -18,19 +17,16 @@ class FieldEditor extends Editor {
             width       : params.width        !== undefined ? params.width        :            '0',
         }
     }
-
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         this.setData('fields', newData);
         return newData;
     }
-
     reformat(): Promise<any> {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
         this.setData('fields', newData);
         return newData;
     }
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -43,19 +39,16 @@ class FieldEditor extends Editor {
         });
         return js;
     }
-
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
         return dirPath;
     }
-
     /*async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         const dirPath = path.join(collectionDirPath, this.getName());
         return dirPath;
     }*/
-
 }
 
 export = FieldEditor;

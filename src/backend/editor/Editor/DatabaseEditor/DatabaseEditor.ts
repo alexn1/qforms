@@ -3,11 +3,9 @@ const ParamEditor = require('../ParamEditor/ParamEditor');
 const TableEditor = require('../TableEditor/TableEditor');
 
 class DatabaseEditor extends Editor {
-
     static createData(params) {
         throw new Error('DatabaseEditor.createData not implemented');
     }
-
     newTableData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
@@ -20,11 +18,9 @@ class DatabaseEditor extends Editor {
         }
         return data;
     }
-
     /*createTableEditor(name) {
         return new TableEditor(this.getColItemData('tables', name), this);
     }*/
-
     newParamData(params) {
         const name = params.name;
         if (!name) throw new Error('need param name');
@@ -33,21 +29,17 @@ class DatabaseEditor extends Editor {
         this.addModelData('params', data);
         return data;
     }
-
     /*createParamEditor(name) {
         return new ParamEditor(this.getColItemData('params', name), this);
     }*/
-
-    moveTableUp(name) {
+    /*moveTableUp(name) {
         this.moveDataColItem('tables', name, -1);
         return 'ok';
-    }
-
-    moveTableDown(name) {
+    }*/
+    /*moveTableDown(name) {
         this.moveDataColItem('tables', name, 1);
         return 'ok';
-    }
-
+    }*/
 }
 
 export = DatabaseEditor;

@@ -46,8 +46,6 @@ declare class ApplicationEditor extends Editor {
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<string>;
-    movePageLinkUp(name: any): void;
-    movePageLinkDown(name: any): void;
     newDatabaseData(params: any): any;
     newPageLinkData(params: any): any;
     newDataSourceData(params: any): any;

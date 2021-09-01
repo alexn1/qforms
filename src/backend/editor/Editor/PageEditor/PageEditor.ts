@@ -15,7 +15,11 @@ const SqlDataSourceEditor = require('../DataSourceEditor/SqlDataSourceEditor/Sql
 class PageEditor extends Editor {
     appEditor: ApplicationEditor;
     pageFile: JsonFile;
-
+    constructor(appEditor, pageFile) {
+        super(pageFile.data, appEditor);
+        this.appEditor = appEditor;
+        this.pageFile  = pageFile;
+    }
     static createData(params) {
         return {
             '@class'     :'Page',
@@ -29,37 +33,25 @@ class PageEditor extends Editor {
             forms      : [],
         };
     }
-
-    constructor(appEditor, pageFile) {
-        super(pageFile.data, appEditor);
-        this.appEditor = appEditor;
-        this.pageFile  = pageFile;
-    }
-
     setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
-            // const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
         }
         super.setAttr(name, value);
     }
-
-    async moveFormUp(params) {
+    /*async moveFormUp(params) {
         this.moveDataColItem('forms', params.form, -1);
         return 'ok';
-    }
-
+    }*/
     async save() {
         await this.pageFile.save();
     }
-
-    async moveFormDown(params) {
+    /*async moveFormDown(params) {
         this.moveDataColItem('forms', params.form, 1);
         return 'ok';
-    }
-
+    }*/
     newFormData(params) {
         const name   = params['name'];
         const _class = params['class'];
@@ -100,14 +92,12 @@ class PageEditor extends Editor {
         }
         return data;
     }
-
     /*createFormEditor(name): FormEditor {
         const data = this.getColItemData('forms', name);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
     }*/
-
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -117,7 +107,6 @@ class PageEditor extends Editor {
         });
         return js;
     }
-
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -126,13 +115,11 @@ class PageEditor extends Editor {
         });
         return js;
     }
-
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
-
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
@@ -153,7 +140,6 @@ class PageEditor extends Editor {
         this.addModelData('dataSources', data);
         return data;
     }
-
 }
 
 export = PageEditor;

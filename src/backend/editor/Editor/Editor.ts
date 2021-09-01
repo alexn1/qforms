@@ -6,7 +6,6 @@ const Helper = require('../../Helper');
 const backend = require('../../../backend');
 
 class Editor extends BaseModel {
-
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
@@ -22,7 +21,6 @@ class Editor extends BaseModel {
         await Helper.writeFile2(newFilePath, text);
         return text;
     }*/
-
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await Helper.exists(newFilePath);
         if (exists) {
@@ -33,11 +31,9 @@ class Editor extends BaseModel {
         await Helper.writeFile2(newFilePath, content);
         return content;
     }
-
     /*getViewName() {
         return this.constructor.name.replace('Editor', '') + 'View';
     }*/
-
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
         const exists = await Helper.exists(filePath);
@@ -45,7 +41,6 @@ class Editor extends BaseModel {
             return await Helper.readTextFile(filePath);
         }
     }
-
     async saveFile(filePath, content) {
         const exists = await Helper.exists(filePath);
         if (!exists) {
@@ -53,34 +48,27 @@ class Editor extends BaseModel {
         }
         return await Helper.writeFile2(filePath, content);
     }
-
     async getCustomFile(ext) {
         console.log('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
-
     async saveCustomFile(ext, text) {
         const customFilePath = await this.getCustomFilePath(ext);
         return await this.saveFile(customFilePath, text);
     }
-
-    moveDataSourceUp(name) {
+    /*moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);
-    }
-
-    moveDataSourceDown(name) {
+    }*/
+    /*moveDataSourceDown(name) {
         this.moveDataColItem('dataSources', name, 1);
-    }
-
-    moveActionUp(name) {
+    }*/
+    /*moveActionUp(name) {
         this.moveDataColItem('actions', name, -1);
-    }
-
-    moveActionDown(name) {
+    }*/
+    /*moveActionDown(name) {
         this.moveDataColItem('actions', name, 1);
-    }
-
+    }*/
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -111,9 +99,9 @@ class Editor extends BaseModel {
         this.addModelData('actions', data);
         return data;
     }
-    createActionEditor(name) {
+    /*createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
-    }
+    }*/
     setData(colName, newData) {
         // console.log('Editor.setData', newData);
         return this.parent.replaceDataColItem(colName, this.data, newData);
@@ -128,11 +116,9 @@ class Editor extends BaseModel {
         const collectionDirPath = await this.getCollectionDirPath();
         return path.join(collectionDirPath, this.getName());
     }
-
     async getCollectionDirPath(): Promise<string> {
         throw new Error('Editor.getCollectionDirPath not implemented');
     }
-
     moveItemUp(colName, itemName): void {
         this.moveDataColItem(colName, itemName, -1);
     }

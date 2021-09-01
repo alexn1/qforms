@@ -4,6 +4,7 @@ declare const Editor: any;
 declare class PageEditor extends Editor {
     appEditor: ApplicationEditor;
     pageFile: JsonFile;
+    constructor(appEditor: any, pageFile: any);
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -15,11 +16,8 @@ declare class PageEditor extends Editor {
         actions: any[];
         forms: any[];
     };
-    constructor(appEditor: any, pageFile: any);
     setAttr(name: any, value: any): void;
-    moveFormUp(params: any): Promise<string>;
     save(): Promise<void>;
-    moveFormDown(params: any): Promise<string>;
     newFormData(params: any): any;
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;

@@ -26,15 +26,15 @@ class ActionEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                const actionEditor = formEditor.createActionEditor(params.action);
+                const actionEditor = formEditor.createItemEditor('actions', params.action);
                 actionEditor.setAttr(params.attr, params.value);
             } else {
-                const actionEditor = pageEditor.createActionEditor(params.action);
+                const actionEditor = pageEditor.createItemEditor('actions', params.action);
                 actionEditor.setAttr(params.attr, params.value);
             }
             await pageEditor.save();
         } else {
-            const actionEditor = appEditor.createActionEditor(params.action);
+            const actionEditor = appEditor.createItemEditor('actions', params.action);
             actionEditor.setAttr(params.attr, params.value);
             await appEditor.save();
         }

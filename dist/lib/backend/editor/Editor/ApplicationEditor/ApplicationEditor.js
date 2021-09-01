@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const path = require('path');
 const Editor = require('../Editor');
-const DatabaseEditor = require('../DatabaseEditor/DatabaseEditor');
+// const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
@@ -81,7 +81,6 @@ class ApplicationEditor extends Editor {
         return new PageEditor_1.default(this, pageFile);
     }
     async getPage(name) {
-        // const pageLinkEditor = this.createPageLinkEditor(name);
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
         return await this.createPageEditor(relFilePath);
@@ -106,12 +105,12 @@ class ApplicationEditor extends Editor {
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
-    movePageLinkUp(name) {
+    /*movePageLinkUp(name) {
         this.moveDataColItem('pageLinks', name, -1);
-    }
-    movePageLinkDown(name) {
+    }*/
+    /*movePageLinkDown(name) {
         this.moveDataColItem('pageLinks', name, 1);
-    }
+    }*/
     newDatabaseData(params) {
         const name = params['name'];
         if (this.getColItemData('databases', name)) {

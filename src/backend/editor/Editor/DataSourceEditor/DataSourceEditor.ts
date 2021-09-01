@@ -4,7 +4,6 @@ const backend = require('../../../index');
 const KeyColumnEditor = require('../KeyColumnEditor/KeyColumnEditor');
 
 class DataSourceEditor extends Editor {
-
     static createData(params): any {
         return {
             '@class'     : 'DataSource',
@@ -16,7 +15,6 @@ class DataSourceEditor extends Editor {
             keyColumns: [],
         };
     }
-
     newKeyColumnData(params) {
         const name = params.name;
         if (this.getColItemData('keyColumns', name)) {
@@ -26,17 +24,14 @@ class DataSourceEditor extends Editor {
         this.addModelData('keyColumns', data);
         return data;
     }
-
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'dataSources');
     }
-
     /*async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         return path.join(collectionDirPath, this.getName());
     }*/
-
     /*async createBackendJs(params) {
         const templateFilePath = path.join(__dirname, 'DataSource.back.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('back.js');
@@ -48,7 +43,6 @@ class DataSourceEditor extends Editor {
         });
         return backendJs;
     }*/
-
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -60,7 +54,6 @@ class DataSourceEditor extends Editor {
         });
         return js;
     }
-
     async save() {
         // console.log(`DataSourceEditor.save`);
         if (!this.parent) {
@@ -72,9 +65,6 @@ class DataSourceEditor extends Editor {
             await this.parent.save();           // on page
         }
     }
-
-
-
 }
 
 export = DataSourceEditor;

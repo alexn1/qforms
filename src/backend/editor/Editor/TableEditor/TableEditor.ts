@@ -2,7 +2,6 @@ const Editor = require('../Editor');
 const ColumnEditor = require('../ColumnEditor/ColumnEditor');
 
 class TableEditor extends Editor {
-
     static createData(params) {
         return {
             '@class'     : 'Table',
@@ -12,7 +11,6 @@ class TableEditor extends Editor {
             columns: [],
         };
     }
-
     newColumnData(params) {
         const name = params.name;
         if (!name) throw new Error('need name');
@@ -21,11 +19,9 @@ class TableEditor extends Editor {
         this.addModelData('columns', data);
         return data;
     }
-
     /*createColumnEditor(name) {
         return new ColumnEditor(this.getColItemData('columns', name), this);
     }*/
-
 }
 
 export = TableEditor;

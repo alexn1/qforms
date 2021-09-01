@@ -56,18 +56,18 @@ class Editor extends BaseModel {
         const customFilePath = await this.getCustomFilePath(ext);
         return await this.saveFile(customFilePath, text);
     }
-    moveDataSourceUp(name) {
+    /*moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);
-    }
-    moveDataSourceDown(name) {
+    }*/
+    /*moveDataSourceDown(name) {
         this.moveDataColItem('dataSources', name, 1);
-    }
-    moveActionUp(name) {
+    }*/
+    /*moveActionUp(name) {
         this.moveDataColItem('actions', name, -1);
-    }
-    moveActionDown(name) {
+    }*/
+    /*moveActionDown(name) {
         this.moveDataColItem('actions', name, 1);
-    }
+    }*/
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -95,9 +95,9 @@ class Editor extends BaseModel {
         this.addModelData('actions', data);
         return data;
     }
-    createActionEditor(name) {
+    /*createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
-    }
+    }*/
     setData(colName, newData) {
         // console.log('Editor.setData', newData);
         return this.parent.replaceDataColItem(colName, this.data, newData);

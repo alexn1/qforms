@@ -1,7 +1,6 @@
 const DataSourceEditor = require('../DataSourceEditor');
 
 class SqlDataSourceEditor extends DataSourceEditor {
-
     static createData(params): any {
         return {
             '@class'     : 'SqlDataSource',
@@ -17,7 +16,6 @@ class SqlDataSourceEditor extends DataSourceEditor {
             keyColumns: [],
         };
     }
-
 }
 
 export = SqlDataSourceEditor;

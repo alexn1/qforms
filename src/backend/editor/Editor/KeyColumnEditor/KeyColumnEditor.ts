@@ -11,7 +11,6 @@ class KeyColumnEditor extends Editor {
             }
         };
     }
-
     reformat(): Promise<any> {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
         this.setData('keyColumns', newData);

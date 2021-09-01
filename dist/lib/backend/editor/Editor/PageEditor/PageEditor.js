@@ -33,23 +33,22 @@ class PageEditor extends Editor {
     setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
-            // const pageLinkEditor = this.appEditor.createPageLinkEditor(this.getName());
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
         }
         super.setAttr(name, value);
     }
-    async moveFormUp(params) {
+    /*async moveFormUp(params) {
         this.moveDataColItem('forms', params.form, -1);
         return 'ok';
-    }
+    }*/
     async save() {
         await this.pageFile.save();
     }
-    async moveFormDown(params) {
+    /*async moveFormDown(params) {
         this.moveDataColItem('forms', params.form, 1);
         return 'ok';
-    }
+    }*/
     newFormData(params) {
         const name = params['name'];
         const _class = params['class'];

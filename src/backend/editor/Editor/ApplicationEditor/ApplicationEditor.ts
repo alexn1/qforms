@@ -3,7 +3,7 @@ import Page from "../../../viewer/Model/Page/Page";
 const path = require('path');
 
 const Editor                   = require('../Editor');
-const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
+// const DatabaseEditor           = require('../DatabaseEditor/DatabaseEditor');
 const MySqlDatabaseEditor      = require('../DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
 const PostgreSqlDatabaseEditor = require('../DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 const Helper = require('../../../Helper');
@@ -25,7 +25,6 @@ class ApplicationEditor extends Editor {
         // this.hostApp  = hostApp;
         this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data);
     }
-
     static createData(params) {
         return {
             '@class'     : 'Application',
@@ -46,14 +45,12 @@ class ApplicationEditor extends Editor {
             pageLinks  : [],
         };
     }
-
     static async createAppFile(appFilePath, params) {
         const data = ApplicationEditor.createData(params);
         const appFile = new JsonFile(appFilePath, data);
         await appFile.create();
         return appFile;
     }
-
     async newPageAndPageLinkData(params) {
         const pagesDirPath   = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath    = path.join(pagesDirPath, params.name);
@@ -67,37 +64,30 @@ class ApplicationEditor extends Editor {
             pageLink: pageLinkData
         };
     }
-
     async save() {
         console.log('ApplicationEditor.save');
         await this.appFile.save();
     }
-
     /*createPageLinkEditor(name) {
         return new PageLinkEditor(this.getColItemData('pageLinks', name), this);
     }*/
-
     async removePageFile(name) {
         // const pageLinkEditor = this.createPageLinkEditor(name);
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
         await Helper.fsUnlink(pageFilePath);
     }
-
     async createPageEditor(relFilePath): Promise<PageEditor> {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
         return new PageEditor(this, pageFile);
     }
-
     async getPage(name): Promise<PageEditor> {
-        // const pageLinkEditor = this.createPageLinkEditor(name);
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
         return await this.createPageEditor(relFilePath);
     }
-
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
         const templateFilePath = path.join(__dirname, 'Application.js.ejs');
@@ -107,7 +97,6 @@ class ApplicationEditor extends Editor {
         });
         return js;
     }
-
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -116,19 +105,15 @@ class ApplicationEditor extends Editor {
         });
         return js;
     }
-
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
-
-    movePageLinkUp(name) {
+    /*movePageLinkUp(name) {
         this.moveDataColItem('pageLinks', name, -1);
-    }
-
-    movePageLinkDown(name) {
+    }*/
+    /*movePageLinkDown(name) {
         this.moveDataColItem('pageLinks', name, 1);
-    }
-
+    }*/
     newDatabaseData(params) {
         const name = params['name'];
         if (this.getColItemData('databases', name)) {
@@ -146,11 +131,9 @@ class ApplicationEditor extends Editor {
         this.addModelData('databases', data);
         return data;
     }
-
     /*createDatabaseEditor(name) {
         return new DatabaseEditor(this.getColItemData('databases', name), this);
     }*/
-
     newPageLinkData(params) {
         const name = params.name;
         if (this.getColItemData('pageLinks', name)) {
@@ -160,7 +143,6 @@ class ApplicationEditor extends Editor {
         this.addModelData('pageLinks', data);
         return data;
     }
-
     newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
@@ -181,7 +163,6 @@ class ApplicationEditor extends Editor {
         this.addModelData('dataSources', data);
         return data;
     }
-
 }
 
 export = ApplicationEditor;

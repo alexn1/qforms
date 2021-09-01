@@ -1,7 +1,6 @@
 const Editor = require('../Editor');
 
 class PageLinkEditor extends Editor {
-
     static createData(params) {
         return {
             '@class'     : 'PageLink',
