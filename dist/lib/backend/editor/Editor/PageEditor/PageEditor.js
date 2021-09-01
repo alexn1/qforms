@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
-const FormEditor_1 = __importDefault(require("../FormEditor/FormEditor"));
 const Editor = require('../Editor');
 const TableFormEditor = require('../FormEditor/TableFormEditor/TableFormEditor');
 const RowFormEditor = require('../FormEditor/RowFormEditor/RowFormEditor');
@@ -37,47 +33,29 @@ class PageEditor extends Editor {
     async save() {
         await this.pageFile.save();
     }
-    newFormData(params) {
-        const name = params['name'];
+    /*newFormData(params) {
+        const name   = params['name'];
         const _class = params['class'];
-        if (this.getColItemData('forms', name))
-            throw new Error(`Form ${name} already exists.`);
+        if (this.getColItemData('forms', name)) throw new Error(`Form ${name} already exists.`);
         let data;
         switch (_class) {
-            case 'TableForm':
-                data = TableFormEditor.createData(params);
-                break;
-            case 'RowForm':
-                data = RowFormEditor.createData(params);
-                break;
-            case 'Form':
-                data = FormEditor_1.default.createData(params);
-                break;
+            case 'TableForm': data = TableFormEditor.createData(params); break;
+            case 'RowForm'  : data = RowFormEditor.createData(params)  ; break;
+            case 'Form'     : data = FormEditor.createData(params)     ; break;
             default: throw new Error(`unknown form class: ${_class}`);
         }
         this.addModelData('forms', data);
-        const formEditor = this.createItemEditor('forms', name);
-        // dataSources
-        // if (params.dataSources) {
-        //     for (const dataSourceParams of params.dataSources) {
-        //         formEditor.newItemData(dataSourceParams.class, 'dataSources', dataSourceParams);
-        //         // const dataSourceEditor = formEditor.createItemEditor('dataSources', dataSourceName);
-        //         // if (dataSource.keyColumns) {
-        //         //     for (const keyColumnName in dataSource.keyColumns) {
-        //         //         dataSourceEditor.newItemData('KeyColumn', 'keyColumns', dataSource.keyColumns[keyColumnName]);
-        //         //     }
-        //         // }
+
+        // const formEditor = this.createItemEditor('forms', name);
+        // // fields
+        // if (params.fields) {
+        //     for (const fieldName in params.fields) {
+        //         const fieldParams = params.fields[fieldName];
+        //         formEditor.newItemData(fieldParams.class, 'fields', fieldParams);
         //     }
         // }
-        // fields
-        if (params.fields) {
-            for (const fieldName in params.fields) {
-                const fieldParams = params.fields[fieldName];
-                formEditor.newItemData(fieldParams.class, 'fields', fieldParams);
-            }
-        }
         return data;
-    }
+    }*/
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');

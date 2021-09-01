@@ -20,7 +20,12 @@ class RowFormEditor extends FormEditor {
                 }) : [])
             ],
             actions: [],
-            fields: [],
+            fields: [
+                ...(params.fields ? Object.keys(params.fields).map(name => {
+                    const fieldParams = params.fields[name];
+                    return backend[`${fieldParams.class}Editor`].createData(fieldParams);
+                }) : [])
+            ],
         };
     }
 }

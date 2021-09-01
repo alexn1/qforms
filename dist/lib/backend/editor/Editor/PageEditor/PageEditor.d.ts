@@ -18,7 +18,6 @@ declare class PageEditor extends Editor {
     };
     setAttr(name: any, value: any): void;
     save(): Promise<void>;
-    newFormData(params: any): any;
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<any>;

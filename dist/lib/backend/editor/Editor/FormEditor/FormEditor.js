@@ -19,7 +19,12 @@ class FormEditor extends Editor {
                 }) : [])
             ],
             actions: [],
-            fields: [],
+            fields: [
+                ...(params.fields ? Object.keys(params.fields).map(name => {
+                    const fieldParams = params.fields[name];
+                    return backend[`${fieldParams.class}Editor`].createData(fieldParams);
+                }) : [])
+            ],
         };
     }
     async createJs(params) {
