@@ -45,10 +45,5 @@ class FieldEditor extends Editor {
         const dirPath = path.join(customDirPath, 'fields');
         return dirPath;
     }
-    async getCustomDirPath() {
-        const collectionDirPath = await this.getCollectionDirPath();
-        const dirPath = path.join(collectionDirPath, this.getName());
-        return dirPath;
-    }
 }
 module.exports = FieldEditor;

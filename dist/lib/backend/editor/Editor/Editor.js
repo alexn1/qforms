@@ -68,9 +68,6 @@ class Editor extends BaseModel {
     moveActionDown(name) {
         this.moveDataColItem('actions', name, 1);
     }
-    async getCustomDirPath() {
-        throw new Error('Editor.getCustomDirPath not implemented');
-    }
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -110,6 +107,13 @@ class Editor extends BaseModel {
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
+    }
+    async getCustomDirPath() {
+        const collectionDirPath = await this.getCollectionDirPath();
+        return path.join(collectionDirPath, this.getName());
+    }
+    async getCollectionDirPath() {
+        throw new Error('Editor.getCollectionDirPath not implemented');
     }
 }
 module.exports = Editor;

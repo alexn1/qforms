@@ -5,6 +5,5 @@ declare class FieldEditor extends Editor {
     reformat(): Promise<any>;
     createJs(params: any): Promise<any>;
     getCollectionDirPath(): Promise<any>;
-    getCustomDirPath(): Promise<any>;
 }
 export = FieldEditor;

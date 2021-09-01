@@ -66,10 +66,10 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
-    async getCustomDirPath() {
+    /*async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         return path.join(collectionDirPath, this.getName());
-    }
+    }*/
     newDataSourceData(params) {
         const name = params['name'];
         const _class = params['class'];

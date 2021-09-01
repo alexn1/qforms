@@ -32,10 +32,10 @@ class DataSourceEditor extends Editor {
         return path.join(customDirPath, 'dataSources');
     }
 
-    async getCustomDirPath() {
+    /*async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         return path.join(collectionDirPath, this.getName());
-    }
+    }*/
 
     /*async createBackendJs(params) {
         const templateFilePath = path.join(__dirname, 'DataSource.back.js.ejs');

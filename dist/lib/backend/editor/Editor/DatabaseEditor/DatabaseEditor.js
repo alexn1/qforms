@@ -15,14 +15,14 @@ class DatabaseEditor extends Editor {
         const data = TableEditor.createData(params);
         this.addModelData('tables', data);
         if (params.columns) {
-            const tableEditor = this.createTableEditor(name);
+            const tableEditor = this.createItemEditor('tables', name);
             params.columns.forEach(column => tableEditor.newColumnData(column));
         }
         return data;
     }
-    createTableEditor(name) {
+    /*createTableEditor(name) {
         return new TableEditor(this.getColItemData('tables', name), this);
-    }
+    }*/
     newParamData(params) {
         const name = params.name;
         if (!name)
@@ -33,9 +33,9 @@ class DatabaseEditor extends Editor {
         this.addModelData('params', data);
         return data;
     }
-    createParamEditor(name) {
+    /*createParamEditor(name) {
         return new ParamEditor(this.getColItemData('params', name), this);
-    }
+    }*/
     moveTableUp(name) {
         this.moveDataColItem('tables', name, -1);
         return 'ok';

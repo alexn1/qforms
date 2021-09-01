@@ -9,12 +9,13 @@ declare class Editor extends BaseModel {
     moveDataSourceDown(name: any): void;
     moveActionUp(name: any): void;
     moveActionDown(name: any): void;
-    getCustomDirPath(): Promise<string>;
     getCustomFilePath(ext: any): Promise<any>;
     moveDataColItem(colName: any, name: any, offset: any): void;
     newActionData(params: any): Promise<any>;
     createActionEditor(name: any): any;
     setData(colName: any, newData: any): any;
     createItemEditor(colName: string, itemName: string): any;
+    getCustomDirPath(): Promise<any>;
+    getCollectionDirPath(): Promise<string>;
 }
 export = Editor;

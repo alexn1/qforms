@@ -50,11 +50,11 @@ class FieldEditor extends Editor {
         return dirPath;
     }
 
-    async getCustomDirPath() {
+    /*async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
         const dirPath = path.join(collectionDirPath, this.getName());
         return dirPath;
-    }
+    }*/
 
 }
 

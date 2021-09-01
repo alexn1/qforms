@@ -10,7 +10,7 @@ class ColumnEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         // const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const tableEditor = databaseEditor.createTableEditor(params.table);
+        const tableEditor = databaseEditor.createItemEditor('tables', params.table);
         const columnEditor = tableEditor.createColumnEditor(params.column);
         columnEditor.setAttr(params.attr, params.value);
         await appEditor.save();
@@ -21,7 +21,7 @@ class ColumnEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         // const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const columnData = databaseEditor.createTableEditor(params.table).newColumnData(params);
+        const columnData = databaseEditor.createItemEditor('tables', params.table).newColumnData(params);
         await appEditor.save();
         return columnData;
     }
@@ -30,7 +30,7 @@ class ColumnEditorController extends EditorController {
         const appEditor = await this.createApplicationEditor();
         // const databaseEditor = appEditor.createDatabaseEditor(params.database);
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const tableEditor = databaseEditor.createTableEditor(params.table);
+        const tableEditor = databaseEditor.createItemEditor('tables', params.table);
         const data = tableEditor.removeColData('columns', params.column);
         await appEditor.save();
         return data;
