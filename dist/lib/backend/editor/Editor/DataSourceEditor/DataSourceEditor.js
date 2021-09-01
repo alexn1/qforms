@@ -2,6 +2,7 @@
 const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../index');
+const KeyColumnEditor = require('../KeyColumnEditor/KeyColumnEditor');
 class DataSourceEditor extends Editor {
     static createData(params) {
         return {
@@ -19,12 +20,7 @@ class DataSourceEditor extends Editor {
         if (this.getColItemData('keyColumns', name)) {
             throw new Error(`Key Column ${name} already exist.`);
         }
-        const data = {
-            '@class': 'KeyColumn',
-            '@attributes': {
-                'name': name
-            }
-        };
+        const data = KeyColumnEditor.createData(params);
         this.addModelData('keyColumns', data);
         return data;
     }

@@ -7,7 +7,7 @@ class DataSourceEditorController extends EditorController {
     }*/
 
     async createDataSourceEditor(params) {
-        let editor = await this.createApplicationEditor();
+        let editor: any = await this.createApplicationEditor();
         if (params.pageFileName) {
             editor = await editor.createPageEditor(params.pageFileName);
             if (params.form) {

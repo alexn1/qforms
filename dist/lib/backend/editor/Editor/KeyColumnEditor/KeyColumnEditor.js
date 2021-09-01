@@ -1,22 +1,21 @@
 "use strict";
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
-class ActionEditor extends Editor {
+class KeyColumnEditor extends Editor {
     static createData(params) {
         if (!params.name)
             throw new Error('no name');
         return {
-            '@class': 'Action',
+            '@class': 'KeyColumn',
             '@attributes': {
-                name: params.name,
-                caption: params.caption || params.name
+                'name': params.name
             }
         };
     }
     reformat() {
         const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData('fields', newData);
+        this.setData('keyColumns', newData);
         return newData;
     }
 }
-module.exports = ActionEditor;
+module.exports = KeyColumnEditor;

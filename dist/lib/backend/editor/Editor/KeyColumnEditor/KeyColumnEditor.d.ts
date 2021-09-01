@@ -1,12 +1,11 @@
 declare const Editor: any;
-declare class ActionEditor extends Editor {
+declare class KeyColumnEditor extends Editor {
     static createData(params: any): {
         '@class': string;
         '@attributes': {
             name: any;
-            caption: any;
         };
     };
     reformat(): Promise<any>;
 }
-export = ActionEditor;
+export = KeyColumnEditor;
