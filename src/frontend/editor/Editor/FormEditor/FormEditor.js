@@ -41,12 +41,12 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -56,10 +56,10 @@ class FormEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -70,10 +70,10 @@ class FormEditor extends Editor {
         const args = {
             controller: 'Form',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         };
         return FrontHostApp.doHttpRequest(args);
     }
@@ -82,10 +82,10 @@ class FormEditor extends Editor {
         const args = {
             controller: 'Form',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         };
         return FrontHostApp.doHttpRequest(args);
     }
@@ -96,7 +96,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createField(data);
     }
@@ -107,7 +107,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }
@@ -118,7 +118,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDataSource(data);
     }
@@ -127,11 +127,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view,
                 page: this.data !== undefined ? this.page.getName() : null,
                 form: this.data !== undefined ? this.getName()      : null
-            })
+            }
         });
     }
 
@@ -139,12 +139,12 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -152,11 +152,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -164,10 +164,10 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
-            })
+            }
         });
     }
 
@@ -175,11 +175,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.page.getName(),
                 form : this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -187,11 +187,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.page.getName(),
                 form : this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 

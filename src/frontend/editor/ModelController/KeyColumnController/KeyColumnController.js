@@ -22,9 +22,9 @@ class KeyColumnController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     async delete() {

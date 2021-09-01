@@ -10,11 +10,11 @@ class PageLinkEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageLink: this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -24,9 +24,9 @@ class PageLinkEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -34,9 +34,9 @@ class PageLinkEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 

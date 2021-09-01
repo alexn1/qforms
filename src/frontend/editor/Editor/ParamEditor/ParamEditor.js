@@ -10,12 +10,12 @@ class ParamEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 param   : this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -25,10 +25,10 @@ class ParamEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 param   : this.getName()
-            })
+            }
         });
     }
     async delete() {

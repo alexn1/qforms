@@ -29,11 +29,11 @@ class TableEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 table   : this.getName(),
                 name    : name
-            })
+            }
         });
         return this.createColumn(data);
     }
@@ -41,10 +41,10 @@ class TableEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -56,10 +56,10 @@ class TableEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
 
@@ -67,10 +67,10 @@ class TableEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
 

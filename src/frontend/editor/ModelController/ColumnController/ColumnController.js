@@ -18,9 +18,9 @@ class ColumnController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     getPropList() {

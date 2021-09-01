@@ -63,9 +63,9 @@ class TableController extends DocumentController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
 
@@ -88,7 +88,7 @@ class TableController extends DocumentController {
         return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : Helper.encodeObject({view : view})
+            params    : {view : view}
         });
     }
 

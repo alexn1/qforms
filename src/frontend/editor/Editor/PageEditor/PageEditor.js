@@ -41,11 +41,11 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 fileName: this.pageLink.getFileName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -55,9 +55,9 @@ class PageEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -72,7 +72,7 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createForm(data);
     }
@@ -81,10 +81,10 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view,
                 page: this.data !== undefined ? this.getName() : null
-            })
+            }
         });
     }
 
@@ -92,11 +92,11 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -104,10 +104,10 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -115,9 +115,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -125,9 +125,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -135,9 +135,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -147,7 +147,7 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }

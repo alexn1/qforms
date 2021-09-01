@@ -7,11 +7,11 @@ class ActionEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view : view,
                 page : this.data !== undefined ? this.form.page.getName() : null,
                 form : this.data !== undefined ? this.form.getName()      : null,
-            })
+            }
         });
     }*/
 
@@ -38,11 +38,11 @@ class ActionEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 ...this.getParams(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -52,9 +52,9 @@ class ActionEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 ...this.getParams(),
-            })
+            }
         });
     }
     async delete() {
@@ -66,18 +66,18 @@ class ActionEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 ...this.getParams(),
-            })
+            }
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 ...this.getParams(),
-            })
+            }
         });
     }
 }

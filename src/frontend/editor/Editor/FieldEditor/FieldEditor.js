@@ -10,13 +10,13 @@ class FieldEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -25,11 +25,11 @@ class FieldEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'delete',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName:this.form.page.pageLink.getFileName(),
                 form        :this.form.getName(),
                 field       :this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -40,12 +40,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view : view,
                 page : this.data !== undefined ? this.form.page.getName() : null,
                 form : this.data !== undefined ? this.form.getName()      : null,
                 field: this.data !== undefined ? this.getName()           : null
-            })
+            }
         });
     }
 
@@ -53,13 +53,13 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 view : view,
                 text : text
-            })
+            }
         });
     }
 
@@ -67,12 +67,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 text : text
-            })
+            }
         });
     }
 
@@ -80,12 +80,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -93,12 +93,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -109,7 +109,7 @@ class FieldEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'changeClass',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.data = data;
     }
@@ -118,11 +118,11 @@ class FieldEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
-            })
+            }
         });
     }
 
@@ -130,11 +130,11 @@ class FieldEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
-            })
+            }
         });
     }
 

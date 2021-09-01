@@ -22,9 +22,9 @@ class ParamController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     async delete() {

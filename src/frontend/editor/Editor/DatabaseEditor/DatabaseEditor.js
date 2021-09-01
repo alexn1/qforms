@@ -50,11 +50,11 @@ class DatabaseEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -64,9 +64,9 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
 
@@ -79,10 +79,10 @@ class DatabaseEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 name    : name
-            })
+            }
         });
         return this.createParam(data);
     }
@@ -92,11 +92,11 @@ class DatabaseEditor extends Editor {
         const data =  await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 name    : params.name,
                 columns : params.columns
-            })
+            }
         });
         return this.createTable(data);
     }
@@ -106,10 +106,10 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view    : view,
                 database: this.data !== undefined ? this.getName() : null
-            })
+            }
         });
     }
 
@@ -117,28 +117,28 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getTableInfo',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.data !== undefined ? this.getName() : null,
                 table   : table
-            })
+            }
         });
     }
     moveUp() {
         return FrontHostApp.doHttpRequest({
             controller : 'Database',
             action     : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller : 'Database',
             action     : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
 

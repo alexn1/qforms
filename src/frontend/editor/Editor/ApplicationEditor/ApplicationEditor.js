@@ -60,10 +60,10 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 attr : name,
                 value: value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -74,7 +74,7 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
     }
 
@@ -88,7 +88,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDatabase(data);
     }
@@ -97,10 +97,10 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 view: view
-            })
+            }
         });
     }
 
@@ -108,11 +108,11 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -120,10 +120,10 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -131,9 +131,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -141,9 +141,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -151,9 +151,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -161,7 +161,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDataSource(data);
     }
@@ -172,7 +172,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }

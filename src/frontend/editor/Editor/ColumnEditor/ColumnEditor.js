@@ -10,13 +10,13 @@ class ColumnEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.table.database.getName(),
                 table   : this.table.getName(),
                 column  : this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -26,11 +26,11 @@ class ColumnEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.table.database.getName(),
                 table   : this.table.getName(),
                 column  : this.getName(),
-            })
+            }
         });
     }
     async delete() {

@@ -83,11 +83,11 @@ class ActionEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view : view,
                 page : this.data !== undefined ? this.form.page.getName() : null,
                 form : this.data !== undefined ? this.form.getName()      : null,
-            })
+            }
         });
     }*/
 
@@ -114,11 +114,11 @@ class ActionEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 ...this.getParams(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -128,9 +128,9 @@ class ActionEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 ...this.getParams(),
-            })
+            }
         });
     }
     async delete() {
@@ -142,18 +142,18 @@ class ActionEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 ...this.getParams(),
-            })
+            }
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller : 'Action',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 ...this.getParams(),
-            })
+            }
         });
     }
 }
@@ -220,10 +220,10 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 attr : name,
                 value: value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -234,7 +234,7 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
     }
 
@@ -248,7 +248,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDatabase(data);
     }
@@ -257,10 +257,10 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 view: view
-            })
+            }
         });
     }
 
@@ -268,11 +268,11 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -280,10 +280,10 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 app : this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -291,9 +291,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -301,9 +301,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -311,9 +311,9 @@ class ApplicationEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Application',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 app: this.getName()
-            })
+            }
         });
     }
 
@@ -321,7 +321,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDataSource(data);
     }
@@ -332,7 +332,7 @@ class ApplicationEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }
@@ -351,13 +351,13 @@ class ColumnEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.table.database.getName(),
                 table   : this.table.getName(),
                 column  : this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -367,11 +367,11 @@ class ColumnEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.table.database.getName(),
                 table   : this.table.getName(),
                 column  : this.getName(),
-            })
+            }
         });
     }
     async delete() {
@@ -419,7 +419,7 @@ class DataSourceEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
     }
 
@@ -428,18 +428,18 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 attr      : name,
                 value     : value
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form         = Helper.encodeValue(this.parent.getName());
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form         = this.parent.getName();
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
         const data = await FrontHostApp.doHttpRequest(args);
         this.setAttr(name, value);
@@ -450,16 +450,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         await FrontHostApp.doHttpRequest(args);
     }
@@ -468,7 +468,7 @@ class DataSourceEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 ...(this.parent instanceof PageEditor ? {
                     page        : this.parent.getName(),
                     pageFileName: this.parent.pageLink.getFileName()
@@ -479,7 +479,7 @@ class DataSourceEditor extends Editor {
                     pageFileName: this.parent.page.pageLink.getFileName()
                 } : {}),
                 dataSource: this.getName(),
-            })
+            }
         });
     }
 
@@ -492,16 +492,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -510,16 +510,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -528,17 +528,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'KeyColumn',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 name      : name
-            })
+            }
         };
         if (this.parent instanceof FormEditor) {
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form = Helper.encodeValue(this.parent.getName());
+            args.params.page = this.parent.page.pageLink.getFileName();
+            args.params.form = this.parent.getName();
         }
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -550,17 +550,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
                 view      : view
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
         }
         if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined);
-            args.params.form         = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined);
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            args.params.form         = (this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined;
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -569,17 +569,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 text      : text
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form         = Helper.encodeValue(this.parent.getName());
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
+            args.params.form         = this.parent.getName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -588,12 +588,12 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page        : this.parent.page.getName(),
                 pageFileName: this.parent.page.pageLink.getFileName(),
                 form        : this.parent.getName(),
                 dataSource  : this.getName()
-            })
+            }
         };
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -662,11 +662,11 @@ class DatabaseEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -676,9 +676,9 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
 
@@ -691,10 +691,10 @@ class DatabaseEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 name    : name
-            })
+            }
         });
         return this.createParam(data);
     }
@@ -704,11 +704,11 @@ class DatabaseEditor extends Editor {
         const data =  await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName(),
                 name    : params.name,
                 columns : params.columns
-            })
+            }
         });
         return this.createTable(data);
     }
@@ -718,10 +718,10 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view    : view,
                 database: this.data !== undefined ? this.getName() : null
-            })
+            }
         });
     }
 
@@ -729,28 +729,28 @@ class DatabaseEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action    : 'getTableInfo',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.data !== undefined ? this.getName() : null,
                 table   : table
-            })
+            }
         });
     }
     moveUp() {
         return FrontHostApp.doHttpRequest({
             controller : 'Database',
             action     : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller : 'Database',
             action     : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.getName()
-            })
+            }
         });
     }
 
@@ -768,13 +768,13 @@ class FieldEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -783,11 +783,11 @@ class FieldEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'delete',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName:this.form.page.pageLink.getFileName(),
                 form        :this.form.getName(),
                 field       :this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -798,12 +798,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view : view,
                 page : this.data !== undefined ? this.form.page.getName() : null,
                 form : this.data !== undefined ? this.form.getName()      : null,
                 field: this.data !== undefined ? this.getName()           : null
-            })
+            }
         });
     }
 
@@ -811,13 +811,13 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 view : view,
                 text : text
-            })
+            }
         });
     }
 
@@ -825,12 +825,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 text : text
-            })
+            }
         });
     }
 
@@ -838,12 +838,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -851,12 +851,12 @@ class FieldEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.form.page.getName(),
                 form : this.form.getName(),
                 field: this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -867,7 +867,7 @@ class FieldEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : 'changeClass',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.data = data;
     }
@@ -876,11 +876,11 @@ class FieldEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
-            })
+            }
         });
     }
 
@@ -888,11 +888,11 @@ class FieldEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Field',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form        : this.form.getName(),
                 field       : this.getName()
-            })
+            }
         });
     }
 
@@ -941,12 +941,12 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -956,10 +956,10 @@ class FormEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -970,10 +970,10 @@ class FormEditor extends Editor {
         const args = {
             controller: 'Form',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         };
         return FrontHostApp.doHttpRequest(args);
     }
@@ -982,10 +982,10 @@ class FormEditor extends Editor {
         const args = {
             controller: 'Form',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 pageFileName: this.page.pageLink.getFileName(),
                 form        : this.getName()
-            })
+            }
         };
         return FrontHostApp.doHttpRequest(args);
     }
@@ -996,7 +996,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createField(data);
     }
@@ -1007,7 +1007,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }
@@ -1018,7 +1018,7 @@ class FormEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createDataSource(data);
     }
@@ -1027,11 +1027,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view,
                 page: this.data !== undefined ? this.page.getName() : null,
                 form: this.data !== undefined ? this.getName()      : null
-            })
+            }
         });
     }
 
@@ -1039,12 +1039,12 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -1052,11 +1052,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -1064,10 +1064,10 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.page.getName(),
                 form: this.getName(),
-            })
+            }
         });
     }
 
@@ -1075,11 +1075,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.page.getName(),
                 form : this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -1087,11 +1087,11 @@ class FormEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page : this.page.getName(),
                 form : this.getName(),
                 class: this.getClassName()
-            })
+            }
         });
     }
 
@@ -1109,14 +1109,14 @@ class KeyColumnEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 form        : this.dataSource.parent.getName(),
                 pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
                 dataSource  : this.dataSource.getName(),
                 keyColumn   : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -1126,12 +1126,12 @@ class KeyColumnEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 page      : this.dataSource.parent.page.pageLink.getFileName(),
                 form      : this.dataSource.parent.getName(),
                 dataSource: this.dataSource.getName(),
                 keyColumn : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -1185,11 +1185,11 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 fileName: this.pageLink.getFileName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -1199,9 +1199,9 @@ class PageEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1216,7 +1216,7 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Form',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createForm(data);
     }
@@ -1225,10 +1225,10 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view,
                 page: this.data !== undefined ? this.getName() : null
-            })
+            }
         });
     }
 
@@ -1236,11 +1236,11 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'saveView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName(),
                 view: view,
                 text: text
-            })
+            }
         });
     }
 
@@ -1248,10 +1248,10 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName(),
                 text: text
-            })
+            }
         });
     }
 
@@ -1259,9 +1259,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createView',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1269,9 +1269,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1279,9 +1279,9 @@ class PageEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1291,7 +1291,7 @@ class PageEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
         return this.createAction(data);
     }
@@ -1310,11 +1310,11 @@ class PageLinkEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 pageLink: this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -1324,9 +1324,9 @@ class PageLinkEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1334,9 +1334,9 @@ class PageLinkEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 page: this.getName()
-            })
+            }
         });
     }
 
@@ -1362,12 +1362,12 @@ class ParamEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 param   : this.getName(),
                 attr    : name,
                 value   : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -1377,10 +1377,10 @@ class ParamEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 param   : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -1420,11 +1420,11 @@ class TableEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 table   : this.getName(),
                 name    : name
-            })
+            }
         });
         return this.createColumn(data);
     }
@@ -1432,10 +1432,10 @@ class TableEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
     async delete() {
@@ -1447,10 +1447,10 @@ class TableEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveUp',
-            params     : Helper.encodeObject({
+            params     : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
 
@@ -1458,10 +1458,10 @@ class TableEditor extends Editor {
         return FrontHostApp.doHttpRequest({
             controller : 'Table',
             action     : 'moveDown',
-            params     : Helper.encodeObject({
+            params     : {
                 database: this.database.getName(),
                 table   : this.getName()
-            })
+            }
         });
     }
 
@@ -1550,7 +1550,7 @@ class EditorFrontHostApp extends FrontHostApp {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'get',
-            params    : Helper.encodeObject({fileName})
+            params    : {fileName}
         });
     }
 
@@ -1963,9 +1963,9 @@ class ColumnController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     getPropList() {
@@ -2347,9 +2347,9 @@ class TableController extends DocumentController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
 
@@ -2372,7 +2372,7 @@ class TableController extends DocumentController {
         return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
-            params    : Helper.encodeObject({view : view})
+            params    : {view : view}
         });
     }
 
@@ -3032,9 +3032,9 @@ class KeyColumnController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     async delete() {
@@ -3127,9 +3127,9 @@ class ParamController extends ModelController {
         return await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 view: view
-            })
+            }
         });
     }
     async delete() {

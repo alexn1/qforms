@@ -81,7 +81,7 @@ class EditorFrontHostApp extends FrontHostApp {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action    : 'get',
-            params    : Helper.encodeObject({fileName})
+            params    : {fileName}
         });
     }
 

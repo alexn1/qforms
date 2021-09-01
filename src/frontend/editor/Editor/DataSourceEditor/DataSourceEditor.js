@@ -36,7 +36,7 @@ class DataSourceEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : '_new',
-            params    : Helper.encodeObject(params)
+            params    : params
         });
     }
 
@@ -45,18 +45,18 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 attr      : name,
                 value     : value
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form         = Helper.encodeValue(this.parent.getName());
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form         = this.parent.getName();
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
         const data = await FrontHostApp.doHttpRequest(args);
         this.setAttr(name, value);
@@ -67,16 +67,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         await FrontHostApp.doHttpRequest(args);
     }
@@ -85,7 +85,7 @@ class DataSourceEditor extends Editor {
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action    : 'createModelBackJs',
-            params    : Helper.encodeObject({
+            params    : {
                 ...(this.parent instanceof PageEditor ? {
                     page        : this.parent.getName(),
                     pageFileName: this.parent.pageLink.getFileName()
@@ -96,7 +96,7 @@ class DataSourceEditor extends Editor {
                     pageFileName: this.parent.page.pageLink.getFileName()
                 } : {}),
                 dataSource: this.getName(),
-            })
+            }
         });
     }
 
@@ -109,16 +109,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'moveUp',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -127,16 +127,16 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'moveDown',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName()
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.form = Helper.encodeValue(this.parent.getName());
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
+            args.params.form = this.parent.getName();
+            args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -145,17 +145,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'KeyColumn',
             action    : '_new',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 name      : name
-            })
+            }
         };
         if (this.parent instanceof FormEditor) {
-            args.params.page = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form = Helper.encodeValue(this.parent.getName());
+            args.params.page = this.parent.page.pageLink.getFileName();
+            args.params.form = this.parent.getName();
         }
         if (this.parent instanceof PageEditor) {
-            args.params.page = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.page = this.parent.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -167,17 +167,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'getView',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
                 view      : view
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined);
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
         }
         if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined);
-            args.params.form         = Helper.encodeValue((this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined);
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            args.params.form         = (this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined;
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -186,17 +186,17 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'saveController',
-            params    : Helper.encodeObject({
+            params    : {
                 dataSource: this.getName(),
                 text      : text
-            })
+            }
         };
         if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.pageLink.getFileName());
+            args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = Helper.encodeValue(this.parent.page.pageLink.getFileName());
-            args.params.form         = Helper.encodeValue(this.parent.getName());
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
+            args.params.form         = this.parent.getName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -205,12 +205,12 @@ class DataSourceEditor extends Editor {
         const args = {
             controller: 'DataSource',
             action    : 'createController',
-            params    : Helper.encodeObject({
+            params    : {
                 page        : this.parent.page.getName(),
                 pageFileName: this.parent.page.pageLink.getFileName(),
                 form        : this.parent.getName(),
                 dataSource  : this.getName()
-            })
+            }
         };
         return await FrontHostApp.doHttpRequest(args);
     }

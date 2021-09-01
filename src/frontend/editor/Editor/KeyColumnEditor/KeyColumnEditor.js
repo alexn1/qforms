@@ -10,14 +10,14 @@ class KeyColumnEditor extends Editor {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'save',
-            params    : Helper.encodeObject({
+            params    : {
                 form        : this.dataSource.parent.getName(),
                 pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
                 dataSource  : this.dataSource.getName(),
                 keyColumn   : this.getName(),
                 attr        : name,
                 value       : value
-            })
+            }
         });
         this.setAttr(name, value);
         return data;
@@ -27,12 +27,12 @@ class KeyColumnEditor extends Editor {
         await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action    : 'delete',
-            params    : Helper.encodeObject({
+            params    : {
                 page      : this.dataSource.parent.page.pageLink.getFileName(),
                 form      : this.dataSource.parent.getName(),
                 dataSource: this.dataSource.getName(),
                 keyColumn : this.getName()
-            })
+            }
         });
     }
     async delete() {
