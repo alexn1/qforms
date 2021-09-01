@@ -53,7 +53,8 @@ class ApplicationEditor extends Editor {
         const pageData = PageEditor_1.default.createData(params);
         const pageFile = new JsonFile_1.default(pageFilePath, pageData);
         await pageFile.create();
-        const pageLinkData = this.newPageLinkData(params);
+        // const pageLinkData = this.newPageLinkData(params);
+        const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
             page: pageData,
             pageLink: pageLinkData
@@ -116,7 +117,7 @@ class ApplicationEditor extends Editor {
         this.addModelData('databases', data);
         return data;
     }*/
-    newPageLinkData(params) {
+    /*newPageLinkData(params) {
         const name = params.name;
         if (this.getColItemData('pageLinks', name)) {
             throw new Error(`Page Link ${name} already exists.`);
@@ -124,7 +125,7 @@ class ApplicationEditor extends Editor {
         const data = PageLinkEditor.createData(params);
         this.addModelData('pageLinks', data);
         return data;
-    }
+    }*/
     newDataSourceData(params) {
         const name = params['name'];
         const _class = params['class'];

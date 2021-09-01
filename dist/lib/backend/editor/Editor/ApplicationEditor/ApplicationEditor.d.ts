@@ -46,7 +46,6 @@ declare class ApplicationEditor extends Editor {
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<string>;
-    newPageLinkData(params: any): any;
     newDataSourceData(params: any): any;
 }
 export = ApplicationEditor;
