@@ -53,7 +53,6 @@ class ApplicationEditor extends Editor {
         const pageData = PageEditor.createData(params);
         const pageFile = new JsonFile(pageFilePath, pageData);
         await pageFile.create();
-        // const pageLinkData = this.newPageLinkData(params);
         const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
             page    : pageData,
@@ -126,7 +125,7 @@ class ApplicationEditor extends Editor {
         this.addModelData('pageLinks', data);
         return data;
     }*/
-    newDataSourceData(params) {
+    /*newDataSourceData(params) {
         const name   = params['name'];
         const _class = params['class'];
         if (this.getColItemData('dataSources', name)) {
@@ -145,7 +144,7 @@ class ApplicationEditor extends Editor {
         }
         this.addModelData('dataSources', data);
         return data;
-    }
+    }*/
 }
 
 export = ApplicationEditor;

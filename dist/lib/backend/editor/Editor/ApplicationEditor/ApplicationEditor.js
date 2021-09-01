@@ -53,7 +53,6 @@ class ApplicationEditor extends Editor {
         const pageData = PageEditor_1.default.createData(params);
         const pageFile = new JsonFile_1.default(pageFilePath, pageData);
         await pageFile.create();
-        // const pageLinkData = this.newPageLinkData(params);
         const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
             page: pageData,
@@ -99,52 +98,6 @@ class ApplicationEditor extends Editor {
     }
     async getCustomDirPath() {
         return this.appInfo.dirPath;
-    }
-    /*newDatabaseData(params) {
-        const name = params['name'];
-        if (this.getColItemData('databases', name)) {
-            throw new Error(`database ${name} already exists`);
-        }
-        // if (params._class === 'MySqlDatabase') {
-        //     data = MySqlDatabaseEditor.createData(params);
-        // } else if (params._class === 'PostgreSqlDatabase') {
-        //     data = PostgreSqlDatabaseEditor.createData(params);
-        // } else {
-        //     throw new Error(`unknown database class ${params._class}`);
-        // }
-        const Class = backend[`${params._class}Editor`];
-        const data = Class.createData(params);
-        this.addModelData('databases', data);
-        return data;
-    }*/
-    /*newPageLinkData(params) {
-        const name = params.name;
-        if (this.getColItemData('pageLinks', name)) {
-            throw new Error(`Page Link ${name} already exists.`);
-        }
-        const data = PageLinkEditor.createData(params);
-        this.addModelData('pageLinks', data);
-        return data;
-    }*/
-    newDataSourceData(params) {
-        const name = params['name'];
-        const _class = params['class'];
-        if (this.getColItemData('dataSources', name)) {
-            throw new Error(`Data Source ${name} already exist.`);
-        }
-        let data;
-        switch (_class) {
-            case 'DataSource':
-                data = DataSourceEditor.createData(params);
-                break;
-            case 'SqlDataSource':
-                data = SqlDataSourceEditor.createData(params);
-                break;
-            default:
-                throw new Error(`unknown data source class: ${_class}`);
-        }
-        this.addModelData('dataSources', data);
-        return data;
     }
 }
 module.exports = ApplicationEditor;

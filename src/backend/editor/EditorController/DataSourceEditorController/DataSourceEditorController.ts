@@ -30,7 +30,7 @@ class DataSourceEditorController extends EditorController {
             }
             await pageEditor.save();
         } else {
-            data = appEditor.newDataSourceData(params);
+            data = appEditor.newItemData(params.class, 'dataSources', params);
             await appEditor.save();
         }
         return data;
