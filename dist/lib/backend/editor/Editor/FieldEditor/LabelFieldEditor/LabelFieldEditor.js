@@ -4,7 +4,7 @@ class LabelFieldEditor extends FieldEditor {
     static createData(params) {
         return {
             '@class': 'LabelField',
-            '@attributes': Object.assign({}, FieldEditor.createAttributes(params))
+            '@attributes': Object.assign({}, FieldEditor.createData(params))
         };
     }
 }

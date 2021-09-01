@@ -4,7 +4,7 @@ class LinkFieldEditor extends FieldEditor {
     static createData(params) {
         return {
             '@class': 'LinkField',
-            '@attributes': Object.assign(Object.assign({}, FieldEditor.createAttributes(params)), { notNull: params.notNull ? params.notNull : 'false' })
+            '@attributes': Object.assign(Object.assign({}, FieldEditor.createData(params)), { notNull: params.notNull ? params.notNull : 'false' })
         };
     }
 }

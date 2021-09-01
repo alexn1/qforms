@@ -3,6 +3,21 @@ const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 class FieldEditor extends Editor {
+    static createData(params) {
+        if (!params.name)
+            throw new Error('no name');
+        return {
+            name: params.name,
+            caption: params.caption !== undefined ? params.caption : params.name,
+            column: params.column !== undefined ? params.column : params.name,
+            defaultValue: params.defaultValue !== undefined ? params.defaultValue : '',
+            value: params.value !== undefined ? params.value : '',
+            param: params.param !== undefined ? params.param : 'false',
+            isVisible: params.isVisible !== undefined ? params.isVisible : 'true',
+            type: params.type !== undefined ? params.type : '',
+            width: params.width !== undefined ? params.width : '0',
+        };
+    }
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         this.setData('fields', newData);
@@ -34,21 +49,6 @@ class FieldEditor extends Editor {
         const collectionDirPath = await this.getCollectionDirPath();
         const dirPath = path.join(collectionDirPath, this.getName());
         return dirPath;
-    }
-    static createAttributes(params) {
-        if (!params.name)
-            throw new Error('no name');
-        return {
-            name: params.name,
-            caption: params.caption !== undefined ? params.caption : params.name,
-            column: params.column !== undefined ? params.column : params.name,
-            defaultValue: params.defaultValue !== undefined ? params.defaultValue : '',
-            value: params.value !== undefined ? params.value : '',
-            param: params.param !== undefined ? params.param : 'false',
-            isVisible: params.isVisible !== undefined ? params.isVisible : 'true',
-            type: params.type !== undefined ? params.type : '',
-            width: params.width !== undefined ? params.width : '0',
-        };
     }
 }
 module.exports = FieldEditor;

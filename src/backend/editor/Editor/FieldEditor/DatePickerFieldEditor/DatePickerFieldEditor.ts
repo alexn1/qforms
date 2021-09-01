@@ -6,7 +6,7 @@ class DatePickerFieldEditor extends FieldEditor {
         return {
             '@class'     : 'DatePickerField',
             '@attributes': {
-                ...FieldEditor.createAttributes(params),
+                ...FieldEditor.createData(params),
                 readOnly        : params.readOnly         ? params.readOnly        :                           'false',
                 notNull         : params.notNull          ? params.notNull         :                           'false',
                 format          : params.format           ? params.format          : '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}',

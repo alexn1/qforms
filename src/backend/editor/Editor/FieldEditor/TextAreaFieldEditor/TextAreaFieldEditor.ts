@@ -6,7 +6,7 @@ class TextAreaFieldEditor extends FieldEditor {
         return {
             '@class'     : 'TextAreaField',
             '@attributes': {
-                ...FieldEditor.createAttributes(params),
+                ...FieldEditor.createData(params),
                 readOnly    : params.readOnly     ? params.readOnly     :        'false',
                 notNull     : params.notNull      ? params.notNull      :        'false',
                 rows        : params.rows         ? params.rows         :             '',
