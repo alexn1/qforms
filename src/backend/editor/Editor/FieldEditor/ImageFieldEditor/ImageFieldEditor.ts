@@ -6,7 +6,7 @@ class ImageFieldEditor extends FieldEditor {
         return {
             '@class':'ImageField',
             '@attributes': {
-                ...FieldEditor.createData(params),
+                ...FieldEditor.createAttributes(params),
                 readOnly    : params.readOnly     ? params.readOnly     :        'false',
                 notNull     : params.notNull      ? params.notNull      :        'false',
             }

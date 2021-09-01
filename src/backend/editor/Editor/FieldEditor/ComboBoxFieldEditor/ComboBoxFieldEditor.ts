@@ -6,7 +6,7 @@ class ComboBoxFieldEditor extends FieldEditor {
         return {
             '@class'     : 'ComboBoxField',
             '@attributes': {
-                ...FieldEditor.createData(params),
+                ...FieldEditor.createAttributes(params),
                 readOnly      : params.readOnly       ? params.readOnly       :        'false',
                 notNull       : params.notNull        ? params.notNull        :        'false',
                 placeholder   : params.placeholder    ? params.placeholder    :             '',

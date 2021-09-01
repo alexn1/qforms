@@ -3,8 +3,8 @@ const Editor = require('../Editor');
 const backend = require('../../../../backend');
 
 class FormEditor extends Editor {
-    static createData(params): any {
-        console.log('FormEditor.createData', params);
+    static createAttributes(params): any {
+        console.log('FormEditor.createAttributes', params);
         return {
             '@class'     : 'Form',
             '@attributes': {
