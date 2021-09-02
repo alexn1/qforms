@@ -18,7 +18,7 @@ declare class ApplicationEditor extends Editor {
             lang: string;
             theme: string;
         };
-        env: {};
+        env: any;
         databases: any[];
         dataSources: any[];
         actions: any[];

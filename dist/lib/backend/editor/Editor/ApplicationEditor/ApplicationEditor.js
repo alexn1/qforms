@@ -6,6 +6,7 @@ const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
+const backend = require('../../../../backend');
 const JsonFile_1 = __importDefault(require("../../../JsonFile"));
 const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
 class ApplicationEditor extends Editor {
@@ -27,11 +28,27 @@ class ApplicationEditor extends Editor {
                 lang: 'en',
                 theme: 'standard'
             },
-            env: {},
-            databases: [],
-            dataSources: [],
-            actions: [],
-            pageLinks: [],
+            env: params.env ? params.env : {},
+            databases: [
+                ...(params.databases ? params.databases.map(databaseParams => {
+                    return backend[`${databaseParams.class}Editor`].createData(databaseParams);
+                }) : [])
+            ],
+            dataSources: [
+                ...(params.dataSources ? params.dataSources.map(dataSourceParams => {
+                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
+                }) : [])
+            ],
+            actions: [
+                ...(params.actions ? params.actions.map(actionParams => {
+                    return backend[`${actionParams.class}Editor`].createData(actionParams);
+                }) : [])
+            ],
+            pageLinks: [
+                ...(params.pageLinks ? params.pageLinks.map(pageLinkParams => {
+                    return backend[`${pageLinkParams.class}Editor`].createData(pageLinkParams);
+                }) : [])
+            ],
         };
     }
     static async createAppFile(appFilePath, params) {
