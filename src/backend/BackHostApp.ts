@@ -241,7 +241,7 @@ class BackHostApp {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
-            /*if (req.method === 'GET' && (context.query.debug === 1 || context.getModule() === 'edit')) {
+            /*if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
             }*/
@@ -1031,7 +1031,8 @@ class BackHostApp {
             req.params.env         = env;
             if (query) {
                 for (const name in query) {
-                    req.query[name] = Helper.encodeValue(query[name] ? query[name] : req.params[name]);
+                    // req.query[name] = Helper.encodeValue(query[name] ? query[name] : req.params[name]);
+                    req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }
             await this[cb](req, res, next);

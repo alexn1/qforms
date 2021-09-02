@@ -25,15 +25,11 @@ class Context {
         this.req    = req;
         this.domain = domain;
 
-        // req.params
-        // this.uri         = req.params['0'];
-        // this.module      = req.params.module;
-        // this.appDirName  = req.params.appDirName;
-        // this.appFileName = req.params.appFileName;
-        // this.env         = req.params.env;
-
         // params
-        this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
+        // this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
+        this.query  = {
+            ...(req.query ? req.query : {})
+        };
         // this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
         this.params = {
             ...(req.body.params ? req.body.params : {})

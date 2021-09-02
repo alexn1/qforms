@@ -1,7 +1,7 @@
 import JsonFile from './JsonFile';
 import ApplicationEditor from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import BaseModel from './BaseModel';
-import FormEditor from "./editor/Editor/FormEditor/FormEditor";
+import FormEditor from './editor/Editor/FormEditor/FormEditor';
 
 class Convert {
     static async convert(appFilePath) {

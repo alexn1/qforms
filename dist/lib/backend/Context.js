@@ -1,8 +1,4 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Helper_1 = __importDefault(require("./Helper"));
 class Context {
     constructor(options) {
         const req = options.req;
@@ -23,14 +19,9 @@ class Context {
         // req, domain
         this.req = req;
         this.domain = domain;
-        // req.params
-        // this.uri         = req.params['0'];
-        // this.module      = req.params.module;
-        // this.appDirName  = req.params.appDirName;
-        // this.appFileName = req.params.appFileName;
-        // this.env         = req.params.env;
         // params
-        this.query = req.query ? Helper_1.default.decodeObject(req.query) : {};
+        // this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
+        this.query = Object.assign({}, (req.query ? req.query : {}));
         // this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
         this.params = Object.assign({}, (req.body.params ? req.body.params : {}));
         // cnn
