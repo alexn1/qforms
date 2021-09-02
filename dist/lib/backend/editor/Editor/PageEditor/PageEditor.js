@@ -15,9 +15,15 @@ class PageEditor extends Editor {
                 name: params['name'],
                 caption: params['caption'] ? params['caption'] : params['name']
             },
-            dataSources: [],
-            actions: [],
-            forms: [],
+            dataSources: [
+                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
+            ],
+            actions: [
+                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+            ],
+            forms: [
+                ...(params.forms ? params.forms.map(Editor.createItemData) : [])
+            ],
         };
     }
     setAttr(name, value) {

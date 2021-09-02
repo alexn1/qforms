@@ -3,7 +3,7 @@ const Editor = require('../../Editor');
 
 class RowFormEditor extends FormEditor {
     static createData(params) {
-        console.log('RowFormEditor.createData', params);
+        // console.log('RowFormEditor.createData', params);
         return {
             '@class'     : 'RowForm',
             '@attributes': {

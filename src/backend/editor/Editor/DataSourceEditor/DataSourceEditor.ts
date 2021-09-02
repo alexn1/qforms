@@ -1,6 +1,5 @@
 const path = require('path');
 const Editor = require('../Editor');
-import KeyColumnEditor from '../KeyColumnEditor/KeyColumnEditor';
 
 class DataSourceEditor extends Editor {
     static createData(params): any {
@@ -12,7 +11,7 @@ class DataSourceEditor extends Editor {
                 table   : params.table    ? params.table    :        '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(keyColumnParams => KeyColumnEditor.createData(keyColumnParams)) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : [])
             ],
         };
     }

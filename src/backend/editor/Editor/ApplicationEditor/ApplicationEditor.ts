@@ -18,7 +18,7 @@ class ApplicationEditor extends Editor {
         this.appInfo  = Application.getAppInfoFromData(appFile.filePath, appFile.data);
     }
     static createData(params) {
-        console.log('ApplicationEditor.createData', params);
+        // console.log('ApplicationEditor.createData', params);
         return {
             '@class'     : 'Application',
             '@attributes': {
