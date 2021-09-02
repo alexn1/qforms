@@ -265,25 +265,19 @@ class BackHostApp {
 
     async createApplication(appFilePath, context: Context): Promise<Application> {
         console.log(`BackHostApp.createApplication: ${appFilePath}`);
-        // const application = await Application.create(appFilePath, this, env);
-        const appInfo = await Application.getAppInfo(appFilePath);
+        const appInfo = await Application.loadAppInfo(appFilePath);
 
         // ApplicationClass
-        const ApplicationClass = await this.getApplicationClass(appInfo);
+        const ApplicationClass = this.getApplicationClass(appInfo);
 
         // application
-        const json = await Helper.readTextFile(appInfo.filePath);
-        const data = JSON.parse(json);
-        const application = new ApplicationClass(data, appInfo, this, context);
+        const application = new ApplicationClass(appInfo.appFile.data, appInfo, this, context);
         await application.init(context);
         return application;
     }
 
-    async getApplicationClass(appInfo: AppInfo) {
+    getApplicationClass(appInfo: AppInfo) {
         // console.log('BackHostApp.getApplicationClass', appInfo);
-        /*const customClassFilePath = path.join(appInfo.dirPath, 'Model.back.js');
-        const exists = await Helper.exists(customClassFilePath);
-        return exists ? require(customClassFilePath) : Application;*/
         return Application;
     }
 

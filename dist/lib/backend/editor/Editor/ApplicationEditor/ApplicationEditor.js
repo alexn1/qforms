@@ -12,7 +12,7 @@ class ApplicationEditor extends Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = Application.getAppInfoFromData(appFile.filePath, appFile.data);
+        this.appInfo = Application.makeAppInfoFromAppFile(appFile);
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);

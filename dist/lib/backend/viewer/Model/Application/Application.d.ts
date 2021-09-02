@@ -7,6 +7,7 @@ import DataSource from '../DataSource/DataSource';
 import Page from '../Page/Page';
 import PageLink from '../PageLink/PageLink';
 import Context from '../../../Context';
+import JsonFile from '../../../JsonFile';
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
@@ -51,8 +52,8 @@ declare class Application extends Model {
     getDatabase(name: string): Database;
     getTitle(context: Context, response: any): string;
     initContext(context: Context): Promise<void>;
-    static getAppInfoFromData(appFilePath: any, data: any): AppInfo;
-    static getAppInfo(appFilePath: any): Promise<AppInfo>;
+    static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
+    static loadAppInfo(appFilePath: any): Promise<AppInfo>;
     static getAppInfos(appsDirPath: any): Promise<any[]>;
     getDataSource(name: any): DataSource;
     getViewClassName(): string;

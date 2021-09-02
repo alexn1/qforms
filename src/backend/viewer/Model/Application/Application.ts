@@ -323,12 +323,14 @@ class Application extends Model {
 
     }
 
-    static getAppInfoFromData(appFilePath, data): AppInfo {
-        // console.log('Application.getAppInfoFromData:', appFilePath, data);
-
+    static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo {
+        // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
+        const appFilePath = appFile.filePath;
+        const data = appFile.data;
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName  = path.basename(path.dirname(appFilePath));
         return {
+            appFile     : appFile,
             name        : BaseModel.getName(data),
             caption     : BaseModel.getAttr(data, 'caption'),
             fullName    : [dirName, fileName].join('/'),
@@ -342,15 +344,12 @@ class Application extends Model {
         };
     }
 
-    static async getAppInfo(appFilePath) {
-        // console.log('Application.getAppInfo', appFilePath);
-        const content = await Helper.readTextFile(appFilePath);
-        const data = JSON.parse(content);
-        if (data['@class'] && data['@class'] === 'Application') {
-            const appInfo = Application.getAppInfoFromData(appFilePath, data);
-            return appInfo;
-        }
-        return null;
+    static async loadAppInfo(appFilePath) {
+        // console.log('Application.loadAppInfo', appFilePath);
+        const appFile = new JsonFile(appFilePath);
+        await appFile.read();
+        const appInfo = Application.makeAppInfoFromAppFile(appFile);
+        return appInfo;
     }
 
     static async getAppInfos(appsDirPath) {
@@ -359,7 +358,7 @@ class Application extends Model {
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.getAppInfo(appFilePath);
+            const appInfo = await Application.loadAppInfo(appFilePath);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

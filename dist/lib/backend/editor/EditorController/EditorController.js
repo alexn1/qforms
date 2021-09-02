@@ -32,7 +32,7 @@ class EditorController {
         console.log('EditorController.createApplicationEditor');
         const appFile = new JsonFile(this.appInfo.filePath);
         await appFile.read();
-        return new ApplicationEditor(appFile /*, this.hostApp*/);
+        return new ApplicationEditor(appFile);
     }
 }
 module.exports = EditorController;

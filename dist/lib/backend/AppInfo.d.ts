@@ -1,4 +1,6 @@
+import JsonFile from './JsonFile';
 export declare type AppInfo = {
+    appFile: JsonFile;
     name: string;
     caption: string;
     fullName: string;

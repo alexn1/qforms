@@ -31,7 +31,7 @@ declare class BackHostApp {
     getApplication(context: Context): Application;
     getAppFilePath(context: Context): any;
     createApplication(appFilePath: any, context: Context): Promise<Application>;
-    getApplicationClass(appInfo: AppInfo): Promise<typeof Application>;
+    getApplicationClass(appInfo: AppInfo): typeof Application;
     handleViewerGet(req: any, res: any, context: Context): Promise<void>;
     handleViewerPost(req: any, res: any, context: Context): Promise<any>;
     loginGet(req: any, res: any, context: Context): Promise<void>;
