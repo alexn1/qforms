@@ -28,7 +28,7 @@ class DataSource extends Model {
     }
 
     async init(context) {
-        console.log('DataSource.init', this.getFullName());
+        // console.log('DataSource.init', this.getFullName());
         await super.init(context);
 
         // keyColumns
