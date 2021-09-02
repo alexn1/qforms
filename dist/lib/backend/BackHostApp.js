@@ -11,7 +11,6 @@ const http = require('http');
 const colors = require('colors/safe');
 const Helper_1 = __importDefault(require("./Helper"));
 const PostgreSqlDatabase_1 = __importDefault(require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase"));
-const JsonFile_1 = __importDefault(require("../backend/JsonFile"));
 const Context_1 = __importDefault(require("../backend/Context"));
 const Application_1 = __importDefault(require("./viewer/Model/Application/Application"));
 const MonitorModule_1 = __importDefault(require("./monitor/MonitorModule"));
@@ -200,11 +199,11 @@ class BackHostApp {
         if (application) {
             /*if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
                 await application.deinit();
-                return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
+                return this.applications[route] = await this.createApplication(context);
             }*/
             return application;
         }
-        return this.applications[context.getRoute()] = await this.createApplication(this.getAppFilePath(context), context);
+        return this.applications[context.getRoute()] = await this.createApplication(context);
     }
     getApplication(context) {
         const application = this.applications[context.getRoute()];
@@ -215,9 +214,9 @@ class BackHostApp {
     getAppFilePath(context) {
         return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
-    async createApplication(appFilePath, context) {
-        console.log(`BackHostApp.createApplication: ${appFilePath}`);
-        const appInfo = await Application_1.default.loadAppInfo(appFilePath);
+    async createApplication(context) {
+        console.log(`BackHostApp.createApplication: ${this.getAppFilePath(context)}`);
+        const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -576,12 +575,11 @@ class BackHostApp {
     }
     async handleEditorGet(req, res, context) {
         console.log('BackHostApp.handleEditorGet');
-        const application = await this.createApplicationIfNotExists(req, context);
-        const appFile = new JsonFile_1.default(application.appInfo.filePath);
-        await appFile.read();
-        const app = JSON.parse(appFile.content);
+        //const application = await this.createApplicationIfNotExists(req, context);
+        const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
+        // data
         const data = {
-            app: app,
+            app: appInfo.appFile.data,
             nodeEnv: this.getNodeEnv(),
             logErrorUrl: this.logErrorUrl
         };
@@ -598,8 +596,6 @@ class BackHostApp {
     }
     async handleEditorPost(req, res, context) {
         console.log('BackHostApp.handleEditorPost', req.body);
-        const application = await this.createApplicationIfNotExists(req, context);
-        const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
@@ -610,8 +606,10 @@ class BackHostApp {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
+        const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
+        const ctrl = new ControllerClass(appInfo, this, null);
+        await ctrl.init(context);
         const method = req.body.action;
-        const ctrl = new ControllerClass(appInfo, this, application);
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);

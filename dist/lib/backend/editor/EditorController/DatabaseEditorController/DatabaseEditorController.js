@@ -4,6 +4,9 @@ class DatabaseEditorController extends EditorController {
     /*constructor(...args) {
         super(...args);
     }*/
+    async init(context) {
+        this.application = await this.hostApp.createApplication(context);
+    }
     async _new(params) {
         const appEditor = await this.createApplicationEditor();
         const data = appEditor.newItemData(params._class, 'databases', params);

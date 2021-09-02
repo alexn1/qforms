@@ -1,18 +1,24 @@
-const JsonFile = require('../../JsonFile');
+import BackHostApp from "../../BackHostApp";
+
+// const JsonFile = require('../../JsonFile');
 const ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 
 import {AppInfo} from '../../AppInfo';
 import Application from '../../viewer/Model/Application/Application';
+import Context from "../../Context";
 
 class EditorController {
     appInfo: AppInfo;
+    hostApp: BackHostApp;
     application: Application;
-    constructor(appInfo, hostApp, application) {
+    constructor(appInfo, hostApp) {
         if (!hostApp) throw new Error(`no hostApp for ${this.constructor.name}`);
-        if (!application) throw new Error(`no application for ${this.constructor.name}`);
         this.appInfo     = appInfo;
-        // this.hostApp     = hostApp;
-        this.application = application;
+        this.hostApp     = hostApp;
+        this.application = null;
+    }
+    async init(context: Context) {
+
     }
     async getView(params) {
         console.log('EditorController.getView');
@@ -34,9 +40,7 @@ class EditorController {
     }
     async createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
-        const appFile = new JsonFile(this.appInfo.filePath);
-        await appFile.read();
-        return new ApplicationEditor(appFile);
+        return new ApplicationEditor(this.appInfo.appFile);
     }
 }
 

@@ -246,11 +246,11 @@ class BackHostApp {
         if (application) {
             /*if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
                 await application.deinit();
-                return this.applications[route] = await this.createApplication(this.getAppFilePath(context), context);
+                return this.applications[route] = await this.createApplication(context);
             }*/
             return application;
         }
-        return this.applications[context.getRoute()] = await this.createApplication(this.getAppFilePath(context), context);
+        return this.applications[context.getRoute()] = await this.createApplication(context);
     }
 
     getApplication(context: Context): Application {
@@ -263,9 +263,9 @@ class BackHostApp {
         return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
 
-    async createApplication(appFilePath, context: Context): Promise<Application> {
-        console.log(`BackHostApp.createApplication: ${appFilePath}`);
-        const appInfo = await Application.loadAppInfo(appFilePath);
+    async createApplication(context: Context): Promise<Application> {
+        console.log(`BackHostApp.createApplication: ${this.getAppFilePath(context)}`);
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
 
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
@@ -606,12 +606,11 @@ class BackHostApp {
 
     async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
-        const application = await this.createApplicationIfNotExists(req, context);
-        const appFile = new JsonFile(application.appInfo.filePath);
-        await appFile.read();
-        const app = JSON.parse(appFile.content);
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+
+        // data
         const data = {
-            app        : app,
+            app        : appInfo.appFile.data,
             nodeEnv    : this.getNodeEnv(),
             logErrorUrl: this.logErrorUrl
         };
@@ -629,8 +628,6 @@ class BackHostApp {
 
     async handleEditorPost(req, res, context: Context) {
         console.log('BackHostApp.handleEditorPost', req.body);
-        const application = await this.createApplicationIfNotExists(req, context);
-        const appInfo = application.appInfo;
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
@@ -640,8 +637,11 @@ class BackHostApp {
         const editorControllerClassName = `${req.body.controller}EditorController`;
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
+
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+        const ctrl = new ControllerClass(appInfo, this, null);
+        await ctrl.init(context);
         const method = req.body.action;
-        const ctrl = new ControllerClass(appInfo, this, application);
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
         // console.log('json result:', result);

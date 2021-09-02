@@ -1,5 +1,7 @@
+import Context from "../../../Context";
 declare const EditorController: any;
 declare class DatabaseEditorController extends EditorController {
+    init(context: Context): Promise<void>;
     _new(params: any): Promise<any>;
     save(params: any): Promise<string>;
     delete(params: any): Promise<any>;
