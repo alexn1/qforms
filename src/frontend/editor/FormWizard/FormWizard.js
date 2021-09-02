@@ -18,8 +18,8 @@ class FormWizard {
     }
 
     getDataSources() {
-        return {
-            default: {
+        return [
+            {
                 class     : 'SqlDataSource',
                 name      : 'default',
                 database  : this.databaseName,
@@ -29,7 +29,7 @@ class FormWizard {
                 singleQuery  : this.getSingleQuery(),
                 multipleQuery: this.getMultipleQuery()
             }
-        };
+        ];
     }
 
     getFieldClass(column) {
@@ -73,15 +73,12 @@ class FormWizard {
     }
 
     getFields() {
-        let fields = {};
+        /*let fields = {};
         this.getColumns().forEach(column => {
             fields[column.name] = this.getField(column);
         });
-        /*for (let i = 0; i < this.tableColumns.length; i++) {
-            const column = this.tableColumns[i];
-            fields[column.name] = this.getField(column);
-        }*/
-        return fields;
+        return fields;*/
+        return this.getColumns().map(column => this.getField(column));
     }
 
     getColumns() {

@@ -14,15 +14,13 @@ class RowFormEditor extends FormEditor {
                 backOnly: params.backOnly ? params.backOnly : 'false'
             },
             dataSources: [
-                ...(params.dataSources ? Object.keys(params.dataSources).map(name => {
-                    const dataSourceParams = params.dataSources[name];
+                ...(params.dataSources ? params.dataSources.map(dataSourceParams => {
                     return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
                 }) : [])
             ],
             actions: [],
             fields: [
-                ...(params.fields ? Object.keys(params.fields).map(name => {
-                    const fieldParams = params.fields[name];
+                ...(params.fields ? params.fields.map(fieldParams => {
                     return backend[`${fieldParams.class}Editor`].createData(fieldParams);
                 }) : [])
             ],

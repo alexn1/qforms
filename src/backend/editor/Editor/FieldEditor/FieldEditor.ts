@@ -3,7 +3,7 @@ const Editor = require('../Editor');
 const backend = require('../../../../backend');
 
 class FieldEditor extends Editor {
-    static createData(params): any {
+    static createAttributes(params): any {
         if (!params.name) throw new Error('no name');
         return {
             name        : params.name,
