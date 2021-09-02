@@ -9,12 +9,15 @@ class Convert {
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
         const appEditor = new ApplicationEditor(appFile);
-        const newData = ApplicationEditor.createData({
+        appEditor.data = appEditor.appFile.data = ApplicationEditor.createData({
             ...appEditor.attributes(),
-            env      : appEditor.data.env,
-            databases: appEditor.data.databases,
+            env        : appEditor.data.env,
+            databases  : appEditor.data.databases,
+            dataSources: appEditor.data.dataSources,
+            actions    : appEditor.data.actions,
+            pageLinks  : appEditor.data.pageLinks,
         });
-        console.log('newData:', newData);
+        await appEditor.save();
 
 
         /*const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));

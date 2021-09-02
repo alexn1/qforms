@@ -6,7 +6,6 @@ const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
-const backend = require('../../../../backend');
 const JsonFile_1 = __importDefault(require("../../../JsonFile"));
 const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
 class ApplicationEditor extends Editor {
@@ -17,17 +16,19 @@ class ApplicationEditor extends Editor {
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);
+        if (!params.name)
+            throw new Error('no name');
         return {
             '@class': 'Application',
             '@attributes': {
                 formatVersion: '0.1',
                 name: params.name,
-                caption: params.name,
-                authentication: 'false',
-                user: 'admin',
-                password: 'admin',
-                lang: 'en',
-                theme: 'standard'
+                caption: params.caption || params.name,
+                authentication: params.authentication || 'false',
+                user: params.user || 'admin',
+                password: params.password || 'admin',
+                lang: params.lang || 'en',
+                theme: params.theme || 'standard'
             },
             env: params.env ? params.env : {},
             databases: [

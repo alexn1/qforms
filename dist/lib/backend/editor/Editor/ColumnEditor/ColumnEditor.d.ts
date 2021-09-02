@@ -7,9 +7,9 @@ declare class ColumnEditor extends Editor {
             caption: any;
             type: any;
             dbType: any;
-            key: string;
-            auto: string;
-            nullable: string;
+            key: any;
+            auto: any;
+            nullable: any;
         };
     };
     getColName(): string;

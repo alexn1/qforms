@@ -12,11 +12,11 @@ declare class ApplicationEditor extends Editor {
             formatVersion: string;
             name: any;
             caption: any;
-            authentication: string;
-            user: string;
-            password: string;
-            lang: string;
-            theme: string;
+            authentication: any;
+            user: any;
+            password: any;
+            lang: any;
+            theme: any;
         };
         env: any;
         databases: any[];

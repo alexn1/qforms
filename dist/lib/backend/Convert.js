@@ -10,8 +10,8 @@ class Convert {
         const appFile = new JsonFile_1.default(appFilePath);
         await appFile.read();
         const appEditor = new ApplicationEditor_1.default(appFile);
-        const newData = ApplicationEditor_1.default.createData(Object.assign(Object.assign({}, appEditor.attributes()), { env: appEditor.data.env, databases: appEditor.data.databases }));
-        console.log('newData:', newData);
+        appEditor.data = appEditor.appFile.data = ApplicationEditor_1.default.createData(Object.assign(Object.assign({}, appEditor.attributes()), { env: appEditor.data.env, databases: appEditor.data.databases, dataSources: appEditor.data.dataSources, actions: appEditor.data.actions, pageLinks: appEditor.data.pageLinks }));
+        await appEditor.save();
         /*const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         for (const pageName of pageNames) {
