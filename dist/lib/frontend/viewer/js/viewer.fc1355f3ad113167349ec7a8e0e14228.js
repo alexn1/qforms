@@ -1929,7 +1929,8 @@ class PageController extends Controller {
             [
                 // ...(query ? query.split('&') : []),
                 ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
-                ...Object.keys(params).map(name => `${name}=${encodeURI(Helper.encodeValue(params[name]))}`)
+                //...Object.keys(params).map(name => `${name}=${encodeURI(Helper.encodeValue(params[name]))}`)
+                ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
             ].join('&')
         ].join('?');
     }
