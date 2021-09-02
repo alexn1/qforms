@@ -20,5 +20,6 @@ declare class Context {
     getAppFileName(): string;
     getEnv(): string;
     getUri(): string;
+    getIp(): string;
 }
 export = Context;

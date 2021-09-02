@@ -107,7 +107,7 @@ class Context {
     getUri(): string {
         return this.req.params['0'];
     }
-    getIp() {
+    getIp(): string {
         return this.req.headers['x-forwarded-for'] || this.req.connection.remoteAddress;
     }
 }
