@@ -1,4 +1,5 @@
 const DatabaseEditor = require('../DatabaseEditor');
+const Editor = require('../../Editor');
 
 class PostgreSqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
@@ -8,8 +9,12 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor {
             '@attributes': {
                 name : params.name
             },
-            params: [],
-            tables: [],
+            params: [
+                ...(params.params ? params.params.map(Editor.createItemData) : [])
+            ],
+            tables: [
+                ...(params.tables ? params.tables.map(Editor.createItemData) : [])
+            ],
         };
     }
 }

@@ -1,6 +1,5 @@
 "use strict";
 const Editor = require('../Editor');
-const ColumnEditor = require('../ColumnEditor/ColumnEditor');
 class TableEditor extends Editor {
     static createData(params) {
         console.log('TableEditor.createData', params);
@@ -10,7 +9,7 @@ class TableEditor extends Editor {
                 name: params.name
             },
             columns: [
-                ...(params.columns ? params.columns.map(columnParams => ColumnEditor.createData(columnParams)) : [])
+                ...(params.columns ? params.columns.map(Editor.createItemData) : [])
             ],
         };
     }

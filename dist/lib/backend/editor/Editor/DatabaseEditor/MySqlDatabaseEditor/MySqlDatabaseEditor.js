@@ -1,5 +1,6 @@
 "use strict";
 const DatabaseEditor = require('../DatabaseEditor');
+const Editor = require('../../Editor');
 class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
         if (!params.name)
@@ -9,8 +10,12 @@ class MySqlDatabaseEditor extends DatabaseEditor {
             '@attributes': {
                 name: params.name
             },
-            params: [],
-            tables: [],
+            params: [
+                ...(params.params ? params.params.map(Editor.createItemData) : [])
+            ],
+            tables: [
+                ...(params.tables ? params.tables.map(Editor.createItemData) : [])
+            ],
         };
     }
 }
