@@ -107,6 +107,9 @@ class Context {
     getUri(): string {
         return this.req.params['0'];
     }
+    getIp() {
+        return this.req.headers['x-forwarded-for'] || this.req.connection.remoteAddress;
+    }
 }
 
 export = Context;

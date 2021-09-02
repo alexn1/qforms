@@ -355,7 +355,6 @@ class BackHostApp {
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');
-        req.session.tzOffset = JSON.parse(req.body.tzOffset);
         const application = this.getApplication(context);
         await application.connect(context);
         try {
@@ -366,6 +365,8 @@ class BackHostApp {
                 if (req.session.user === undefined) {
                     req.session.user = {};
                 }
+                req.session.ip       = context.getIp();
+                req.session.tzOffset = JSON.parse(req.body.tzOffset);
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
             } else {
