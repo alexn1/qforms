@@ -32,6 +32,10 @@ class BaseModel {
         return BaseModel.getName(this.data);
     }
 
+    static attributes(data) {
+        return data['@attributes'];
+    }
+
     attributes() {
         return this.data['@attributes'];
     }

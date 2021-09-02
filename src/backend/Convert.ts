@@ -9,9 +9,15 @@ class Convert {
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
         const appEditor = new ApplicationEditor(appFile);
-        // console.log('data:', appEditor.data);
+        const newData = ApplicationEditor.createData({
+            ...appEditor.attributes(),
+            env      : appEditor.data.env,
+            databases: appEditor.data.databases,
+        });
+        console.log('newData:', newData);
 
-        const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
+
+        /*const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);
@@ -30,7 +36,7 @@ class Convert {
                 }
             }
             await pageEditor.save();
-        }
+        }*/
     }
 }
 

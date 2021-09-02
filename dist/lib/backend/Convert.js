@@ -4,23 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const JsonFile_1 = __importDefault(require("./JsonFile"));
 const ApplicationEditor_1 = __importDefault(require("./editor/Editor/ApplicationEditor/ApplicationEditor"));
-const BaseModel_1 = __importDefault(require("./BaseModel"));
 class Convert {
     static async convert(appFilePath) {
         console.log('Convert.convert', appFilePath);
         const appFile = new JsonFile_1.default(appFilePath);
         await appFile.read();
         const appEditor = new ApplicationEditor_1.default(appFile);
-        // console.log('data:', appEditor.data);
-        const pageNames = appEditor.data.pageLinks.map(data => BaseModel_1.default.getName(data));
+        const newData = ApplicationEditor_1.default.createData(Object.assign(Object.assign({}, appEditor.attributes()), { env: appEditor.data.env, databases: appEditor.data.databases }));
+        console.log('newData:', newData);
+        /*const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);
-            const formNames = pageEditor.data.forms.map(data => BaseModel_1.default.getName(data));
+            const formNames = pageEditor.data.forms.map(data => BaseModel.getName(data));
             // console.log('formNames:', formNames);
             for (const formName of formNames) {
-                const formEditor = pageEditor.createItemEditor('forms', formName);
-                const fieldNames = formEditor.data.fields.map(data => BaseModel_1.default.getName(data));
+                const formEditor: FormEditor = pageEditor.createItemEditor('forms', formName);
+                const fieldNames = formEditor.data.fields.map(data => BaseModel.getName(data));
                 // console.log('fieldNames:', fieldNames);
                 for (const fieldName of fieldNames) {
                     console.log(`${pageName}.${formName}.${fieldName}`);
@@ -31,7 +31,7 @@ class Convert {
                 }
             }
             await pageEditor.save();
-        }
+        }*/
     }
 }
 module.exports = Convert;

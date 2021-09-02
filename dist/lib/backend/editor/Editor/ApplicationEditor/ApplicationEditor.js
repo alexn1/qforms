@@ -16,6 +16,7 @@ class ApplicationEditor extends Editor {
         this.appInfo = Application.getAppInfoFromData(appFile.filePath, appFile.data);
     }
     static createData(params) {
+        console.log('ApplicationEditor.createData', params);
         return {
             '@class': 'Application',
             '@attributes': {
@@ -30,24 +31,16 @@ class ApplicationEditor extends Editor {
             },
             env: params.env ? params.env : {},
             databases: [
-                ...(params.databases ? params.databases.map(databaseParams => {
-                    return backend[`${databaseParams.class}Editor`].createData(databaseParams);
-                }) : [])
+                ...(params.databases ? params.databases.map(Editor.createItemData) : [])
             ],
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(dataSourceParams => {
-                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
-                }) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
             ],
             actions: [
-                ...(params.actions ? params.actions.map(actionParams => {
-                    return backend[`${actionParams.class}Editor`].createData(actionParams);
-                }) : [])
+                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
             ],
             pageLinks: [
-                ...(params.pageLinks ? params.pageLinks.map(pageLinkParams => {
-                    return backend[`${pageLinkParams.class}Editor`].createData(pageLinkParams);
-                }) : [])
+                ...(params.pageLinks ? params.pageLinks.map(Editor.createItemData) : [])
             ],
         };
     }

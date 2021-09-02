@@ -17,5 +17,6 @@ declare class Editor extends BaseModel {
     newItemData(className: any, colName: any, params: any): any;
     getColName(): void;
     reformat(): Promise<any>;
+    static createItemData(data: any): any;
 }
 export = Editor;

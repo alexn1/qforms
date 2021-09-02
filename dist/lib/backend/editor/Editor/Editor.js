@@ -139,5 +139,9 @@ class Editor extends BaseModel {
         this.setData(this.getColName(), newData);
         return newData;
     }
+    static createItemData(data) {
+        const params = data.class ? data : Object.assign(Object.assign({ class: BaseModel.getClassName(data) }, BaseModel.attributes(data)), data);
+        return backend[`${params.class}Editor`].createData(params);
+    }
 }
 module.exports = Editor;

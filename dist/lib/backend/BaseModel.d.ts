@@ -8,6 +8,7 @@ declare class BaseModel {
     static getEnvList(data: any): string[];
     getClassName(): string;
     getName(): string;
+    static attributes(data: any): any;
     attributes(): any;
     getAttr(name: any): any;
     setAttr(name: any, value: any): void;

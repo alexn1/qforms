@@ -1,6 +1,6 @@
 "use strict";
 const FormEditor = require('../FormEditor');
-const backend = require('../../../../../backend');
+const Editor = require('../../Editor');
 class TableFormEditor extends FormEditor {
     static createData(params) {
         console.log('TableFormEditor.createData', params);
@@ -18,15 +18,13 @@ class TableFormEditor extends FormEditor {
                 refreshButton: 'true'
             },
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(dataSourceParams => {
-                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams);
-                }) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
             ],
-            actions: [],
+            actions: [
+                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+            ],
             fields: [
-                ...(params.fields ? params.fields.map(fieldParams => {
-                    return backend[`${fieldParams.class}Editor`].createData(fieldParams);
-                }) : [])
+                ...(params.fields ? params.fields.map(Editor.createItemData) : [])
             ],
         };
     }

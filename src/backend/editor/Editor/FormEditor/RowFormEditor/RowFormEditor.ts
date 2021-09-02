@@ -1,5 +1,5 @@
 const FormEditor = require('../FormEditor');
-const backend = require('../../../../../backend');
+const Editor = require('../../Editor');
 
 class RowFormEditor extends FormEditor {
     static createData(params) {
@@ -14,15 +14,13 @@ class RowFormEditor extends FormEditor {
                 backOnly: params.backOnly ? params.backOnly: 'false'
             },
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(dataSourceParams => {
-                    return backend[`${dataSourceParams.class}Editor`].createData(dataSourceParams)
-                }) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
             ],
-            actions    : [],
+            actions    : [
+                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+            ],
             fields     : [
-                ...(params.fields ? params.fields.map(fieldParams => {
-                    return backend[`${fieldParams.class}Editor`].createData(fieldParams)
-                }) : [])
+                ...(params.fields ? params.fields.map(Editor.createItemData) : [])
             ],
         };
     }
