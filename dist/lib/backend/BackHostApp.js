@@ -575,7 +575,6 @@ class BackHostApp {
     }
     async handleEditorGet(req, res, context) {
         console.log('BackHostApp.handleEditorGet');
-        //const application = await this.createApplicationIfNotExists(req, context);
         const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
         // data
         const data = {

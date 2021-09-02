@@ -1,13 +1,16 @@
 import Context from "../../../Context";
-
+import Application from "../../../viewer/Model/Application/Application";
 const EditorController = require('../EditorController');
 
 class DatabaseEditorController extends EditorController {
-    /*constructor(...args) {
+    application: Application;
+    constructor(...args) {
         super(...args);
-    }*/
+        this.application = null;
+    }
 
     async init(context: Context) {
+        await super.init(context);
         this.application = await this.hostApp.createApplication(context);
     }
 

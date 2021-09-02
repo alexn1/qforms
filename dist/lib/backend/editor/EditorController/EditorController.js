@@ -1,14 +1,14 @@
 "use strict";
-// const JsonFile = require('../../JsonFile');
-const ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const ApplicationEditor_1 = __importDefault(require("../Editor/ApplicationEditor/ApplicationEditor"));
 class EditorController {
-    constructor(appInfo, hostApp, application) {
+    constructor(appInfo, hostApp) {
         if (!hostApp)
             throw new Error(`no hostApp for ${this.constructor.name}`);
-        // if (!application) throw new Error(`no application for ${this.constructor.name}`);
         this.appInfo = appInfo;
         this.hostApp = hostApp;
-        this.application = application;
     }
     async init(context) {
     }
@@ -31,9 +31,7 @@ class EditorController {
     }
     async createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
-        // const appFile = new JsonFile(this.appInfo.filePath);
-        // await appFile.read();
-        return new ApplicationEditor(this.appInfo.appFile);
+        return new ApplicationEditor_1.default(this.appInfo.appFile);
     }
 }
 module.exports = EditorController;

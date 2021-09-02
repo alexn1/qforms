@@ -1,10 +1,12 @@
 "use strict";
 const EditorController = require('../EditorController');
 class DatabaseEditorController extends EditorController {
-    /*constructor(...args) {
+    constructor(...args) {
         super(...args);
-    }*/
+        this.application = null;
+    }
     async init(context) {
+        await super.init(context);
         this.application = await this.hostApp.createApplication(context);
     }
     async _new(params) {
