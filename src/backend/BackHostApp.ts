@@ -185,7 +185,10 @@ class BackHostApp {
         // middlewares
         // server.use(morgan('dev'));
         // server.use(serverRequest);
-        this.server.use(bodyParser.json({limit: '10mb'}));
+        this.server.use(bodyParser.json({
+            limit  : '10mb',
+            reviver: Helper.dateTimeReviver
+        }));
         this.server.use(bodyParser.urlencoded({ extended: false }));
         // server.use(multipartHandler);
         this.server.use(session({
