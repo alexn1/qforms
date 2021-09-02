@@ -1,5 +1,4 @@
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
 
 class KeyColumnEditor extends Editor {
     static createData(params) {
@@ -11,10 +10,8 @@ class KeyColumnEditor extends Editor {
             }
         };
     }
-    reformat(): Promise<any> {
-        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData('keyColumns', newData);
-        return newData;
+    getColName() {
+        return 'keyColumns';
     }
 }
 

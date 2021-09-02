@@ -9,5 +9,6 @@ declare class PageLinkEditor extends Editor {
             startup: any;
         };
     };
+    getColName(): string;
 }
 export = PageLinkEditor;

@@ -7,5 +7,6 @@ declare class ParamEditor extends Editor {
             value: any;
         };
     };
+    getColName(): string;
 }
 export = ParamEditor;

@@ -19,12 +19,7 @@ class FieldEditor extends Editor {
     }
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
-        this.setData('fields', newData);
-        return newData;
-    }
-    reformat(): Promise<any> {
-        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData('fields', newData);
+        this.setData(this.getColName(), newData);
         return newData;
     }
     async createJs(params) {
@@ -43,6 +38,9 @@ class FieldEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
         return dirPath;
+    }
+    getColName() {
+        return 'fields';
     }
 }
 

@@ -134,6 +134,14 @@ class Editor extends BaseModel {
         this.addModelData(colName, data);
         return data;
     }
+    getColName() {
+        throw new Error(`${this.constructor.name}.getColName not implemented`);
+    }
+    reformat(): Promise<any> {
+        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
+        this.setData(this.getColName(), newData);
+        return newData;
+    }
 }
 
 export = Editor;

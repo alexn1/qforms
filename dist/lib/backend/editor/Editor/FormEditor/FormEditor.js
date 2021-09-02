@@ -49,5 +49,8 @@ class FormEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
+    getColName() {
+        return 'forms';
+    }
 }
 module.exports = FormEditor;

@@ -12,5 +12,6 @@ declare class ColumnEditor extends Editor {
             nullable: string;
         };
     };
+    getColName(): string;
 }
 export = ColumnEditor;

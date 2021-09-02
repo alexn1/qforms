@@ -7,5 +7,6 @@ declare class TableEditor extends Editor {
         };
         columns: any[];
     };
+    getColName(): string;
 }
 export = TableEditor;

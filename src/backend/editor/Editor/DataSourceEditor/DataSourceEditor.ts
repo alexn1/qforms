@@ -31,17 +31,9 @@ class DataSourceEditor extends Editor {
         });
         return js;
     }
-    /*async save() {
-        // console.log(`DataSourceEditor.save`);
-        if (!this.parent) {
-            throw new Error('DataSourceEditor.save: no parent');
-        }
-        if (this.parent instanceof backend.FormEditor) {
-            await this.parent.parent.save();    // on form
-        } else {
-            await this.parent.save();           // on page
-        }
-    }*/
+    getColName() {
+        return 'dataSources';
+    }
 }
 
 export = DataSourceEditor;

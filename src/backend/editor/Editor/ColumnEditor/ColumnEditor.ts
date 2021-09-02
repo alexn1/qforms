@@ -16,6 +16,9 @@ class ColumnEditor extends Editor {
             }
         };
     }
+    getColName() {
+        return 'columns';
+    }
 }
 
 export = ColumnEditor;

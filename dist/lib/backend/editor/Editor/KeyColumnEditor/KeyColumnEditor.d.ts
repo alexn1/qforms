@@ -6,6 +6,6 @@ declare class KeyColumnEditor extends Editor {
             name: any;
         };
     };
-    reformat(): Promise<any>;
+    getColName(): string;
 }
 export = KeyColumnEditor;

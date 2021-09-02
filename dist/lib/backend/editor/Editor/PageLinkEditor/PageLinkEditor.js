@@ -12,5 +12,8 @@ class PageLinkEditor extends Editor {
             }
         };
     }
+    getColName() {
+        return 'pageLinks';
+    }
 }
 module.exports = PageLinkEditor;

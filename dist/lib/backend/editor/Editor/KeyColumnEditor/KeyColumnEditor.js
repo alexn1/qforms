@@ -1,6 +1,5 @@
 "use strict";
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
 class KeyColumnEditor extends Editor {
     static createData(params) {
         if (!params.name)
@@ -12,10 +11,8 @@ class KeyColumnEditor extends Editor {
             }
         };
     }
-    reformat() {
-        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData('keyColumns', newData);
-        return newData;
+    getColName() {
+        return 'keyColumns';
     }
 }
 module.exports = KeyColumnEditor;

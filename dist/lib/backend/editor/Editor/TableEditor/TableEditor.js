@@ -14,5 +14,8 @@ class TableEditor extends Editor {
             ],
         };
     }
+    getColName() {
+        return 'tables';
+    }
 }
 module.exports = TableEditor;

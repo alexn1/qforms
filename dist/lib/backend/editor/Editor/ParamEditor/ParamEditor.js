@@ -14,5 +14,8 @@ class ParamEditor extends Editor {
             }
         };
     }
+    getColName() {
+        return 'params';
+    }
 }
 module.exports = ParamEditor;

@@ -34,5 +34,8 @@ class DataSourceEditor extends Editor {
         });
         return js;
     }
+    getColName() {
+        return 'dataSources';
+    }
 }
 module.exports = DataSourceEditor;

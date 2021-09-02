@@ -7,6 +7,6 @@ declare class ActionEditor extends Editor {
             caption: any;
         };
     };
-    reformat(): Promise<any>;
+    getColName(): string;
 }
 export = ActionEditor;

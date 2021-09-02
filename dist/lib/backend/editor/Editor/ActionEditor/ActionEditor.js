@@ -13,11 +13,8 @@ class ActionEditor extends Editor {
             }
         };
     }
-    reformat() {
-        const editor = backend[`${this.getClassName()}Editor`];
-        const newData = editor.createData(this.attributes());
-        this.setData('actions', newData);
-        return newData;
+    getColName() {
+        return 'actions';
     }
 }
 module.exports = ActionEditor;

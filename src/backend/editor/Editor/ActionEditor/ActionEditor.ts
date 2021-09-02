@@ -12,11 +12,8 @@ class ActionEditor extends Editor {
             }
         };
     }
-    reformat(): Promise<any> {
-        const editor = backend[`${this.getClassName()}Editor`];
-        const newData = editor.createData(this.attributes());
-        this.setData('actions', newData);
-        return newData;
+    getColName() {
+        return 'actions';
     }
 }
 

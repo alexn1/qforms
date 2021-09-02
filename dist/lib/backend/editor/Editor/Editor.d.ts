@@ -15,5 +15,7 @@ declare class Editor extends BaseModel {
     moveItemUp(colName: any, itemName: any): void;
     moveItemDown(colName: any, itemName: any): void;
     newItemData(className: any, colName: any, params: any): any;
+    getColName(): void;
+    reformat(): Promise<any>;
 }
 export = Editor;
