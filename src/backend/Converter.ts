@@ -1,12 +1,10 @@
 import JsonFile from './JsonFile';
 import ApplicationEditor from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import BaseModel from './BaseModel';
-import FormEditor from './editor/Editor/FormEditor/FormEditor';
-import PageEditor from "./editor/Editor/PageEditor/PageEditor";
 
-class Convert {
-    static async convert(appFilePath) {
-        console.log('Convert.convert', appFilePath);
+class Converter {
+    static async reformat(appFilePath) {
+        console.log('Convert.reformat', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
 
@@ -27,4 +25,4 @@ class Convert {
     }
 }
 
-export = Convert;
+export = Converter;

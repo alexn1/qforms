@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const JsonFile_1 = __importDefault(require("./JsonFile"));
 const ApplicationEditor_1 = __importDefault(require("./editor/Editor/ApplicationEditor/ApplicationEditor"));
 const BaseModel_1 = __importDefault(require("./BaseModel"));
-class Convert {
-    static async convert(appFilePath) {
-        console.log('Convert.convert', appFilePath);
+class Converter {
+    static async reformat(appFilePath) {
+        console.log('Convert.reformat', appFilePath);
         const appFile = new JsonFile_1.default(appFilePath);
         await appFile.read();
         // app
@@ -25,4 +25,4 @@ class Convert {
         }
     }
 }
-module.exports = Convert;
+module.exports = Converter;
