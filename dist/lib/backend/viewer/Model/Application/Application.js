@@ -36,6 +36,7 @@ class Application extends Model_1.default {
         await this.createColItems('dataSources', context);
         this.links = await this.getLinks(context);
         this.scripts = await this.getScripts(context);
+        this.menu = await this.createMenu(context);
     }
     async getLinks(context) {
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
@@ -88,7 +89,7 @@ class Application extends Model_1.default {
         // text
         response.text = this.getText();
         // menu
-        response.menu = await this.createMenu(context);
+        response.menu = this.menu;
         // pages
         response.pages = await this.fillPages(context);
         // user
@@ -106,6 +107,7 @@ class Application extends Model_1.default {
         return response;
     }
     async createMenu(context) {
+        console.log('Application.createMenu');
         const menu = {};
         // pages
         const user = context.getUser();
@@ -117,7 +119,8 @@ class Application extends Model_1.default {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
-                const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
+                // const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
+                const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile_1.default(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {

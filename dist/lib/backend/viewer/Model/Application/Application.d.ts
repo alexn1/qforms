@@ -18,6 +18,7 @@ declare class Application extends Model {
     links: any[];
     scripts: any[];
     domain: string;
+    menu: any;
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
     getLinks(context: Context): Promise<string[]>;

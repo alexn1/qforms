@@ -31,6 +31,7 @@ class Application extends Model {
     links: any[];
     scripts: any[];
     domain: string;
+    menu: any;
 
     constructor(
         data: any,
@@ -59,6 +60,7 @@ class Application extends Model {
         await this.createColItems('dataSources', context);
         this.links   = await this.getLinks(context);
         this.scripts = await this.getScripts(context);
+        this.menu = await this.createMenu(context);
     }
 
     async getLinks(context: Context): Promise<string[]> {
@@ -127,7 +129,7 @@ class Application extends Model {
         response.text = this.getText();
 
         // menu
-        response.menu = await this.createMenu(context);
+        response.menu = this.menu;
 
         // pages
         response.pages = await this.fillPages(context);
@@ -148,6 +150,7 @@ class Application extends Model {
     }
 
     async createMenu(context: Context) {
+        console.log('Application.createMenu');
         const menu = {};
 
         // pages
@@ -160,7 +163,8 @@ class Application extends Model {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
-                const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
+                // const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
+                const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
