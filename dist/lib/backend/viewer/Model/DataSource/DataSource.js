@@ -22,7 +22,7 @@ class DataSource extends Model_1.default {
         return path.join(this.getDirPath(), `${this.getName()}.json`);
     }
     async init(context) {
-        console.log('DataSource.init', this.getFullName());
+        // console.log('DataSource.init', this.getFullName());
         await super.init(context);
         // keyColumns
         this.keyColumns = this.getKeyColumns();
