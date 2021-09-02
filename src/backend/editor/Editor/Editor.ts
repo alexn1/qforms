@@ -137,18 +137,19 @@ class Editor extends BaseModel {
     getColName() {
         throw new Error(`${this.constructor.name}.getColName not implemented`);
     }
-    reformat(): Promise<any> {
-        const newData = backend[`${this.getClassName()}Editor`].createData(this.attributes());
-        this.setData(this.getColName(), newData);
-        return newData;
-    }
     static createItemData(data) {
-        const params = data.class ? data : {
-            class: BaseModel.getClassName(data),
-            ...BaseModel.attributes(data),
-            ...data,
-        };
-        return backend[`${params.class}Editor`].createData(params);
+        try {
+            const params = data.class ? data : {
+                class: BaseModel.getClassName(data),
+                ...BaseModel.attributes(data),
+                ...data,
+            };
+            return backend[`${params.class}Editor`].createData(params);
+        } catch (err) {
+            err.message = `${BaseModel.getName(data)}: ${err.message}`;
+            throw err;
+        }
+
     }
 }
 

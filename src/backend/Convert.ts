@@ -2,44 +2,28 @@ import JsonFile from './JsonFile';
 import ApplicationEditor from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import BaseModel from './BaseModel';
 import FormEditor from './editor/Editor/FormEditor/FormEditor';
+import PageEditor from "./editor/Editor/PageEditor/PageEditor";
 
 class Convert {
     static async convert(appFilePath) {
         console.log('Convert.convert', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
+
+        // app
         const appEditor = new ApplicationEditor(appFile);
-        appEditor.data = appEditor.appFile.data = ApplicationEditor.createData({
-            ...appEditor.attributes(),
-            env        : appEditor.data.env,
-            databases  : appEditor.data.databases,
-            dataSources: appEditor.data.dataSources,
-            actions    : appEditor.data.actions,
-            pageLinks  : appEditor.data.pageLinks,
-        });
+        appEditor.reformat();
         await appEditor.save();
 
-
-        /*const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
+        // pages
+        const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
+        // const pageName = pageNames[0];
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);
-            const formNames = pageEditor.data.forms.map(data => BaseModel.getName(data));
-            // console.log('formNames:', formNames);
-            for (const formName of formNames) {
-                const formEditor: FormEditor = pageEditor.createItemEditor('forms', formName);
-                const fieldNames = formEditor.data.fields.map(data => BaseModel.getName(data));
-                // console.log('fieldNames:', fieldNames);
-                for (const fieldName of fieldNames) {
-                    console.log(`${pageName}.${formName}.${fieldName}`);
-                    const fieldEditor = formEditor.createItemEditor('fields', fieldName);
-                    // console.log('oldData:', fieldEditor.data);
-                    const newData = fieldEditor.reformat();
-                    // console.log('newData:', newData);
-                }
-            }
+            pageEditor.reformat();
             await pageEditor.save();
-        }*/
+        }
     }
 }
 

@@ -7,8 +7,8 @@ class DataSourceEditor extends Editor {
             '@class': 'DataSource',
             '@attributes': {
                 name: params.name,
-                database: params.database ? params.database : 'default',
-                table: params.table ? params.table : '',
+                database: params.database || 'default',
+                table: params.table || '',
             },
             keyColumns: [
                 ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : [])

@@ -59,5 +59,8 @@ class PageEditor extends Editor {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
+    reformat() {
+        this.data = this.pageFile.data = PageEditor.createData(Object.assign(Object.assign({}, this.attributes()), { dataSources: this.data.dataSources, actions: this.data.actions, forms: this.data.forms }));
+    }
 }
 module.exports = PageEditor;

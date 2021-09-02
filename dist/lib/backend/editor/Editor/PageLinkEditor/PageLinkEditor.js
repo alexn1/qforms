@@ -6,7 +6,7 @@ class PageLinkEditor extends Editor {
             '@class': 'PageLink',
             '@attributes': {
                 name: params.name,
-                fileName: 'pages/{name}/{name}.json'.replace(/{name}/g, params.name),
+                fileName: params.fileName || `pages/${params.name}/${params.name}.json`,
                 menu: params.menu || (params.startup === 'true' ? 'Menu' : ''),
                 startup: params.startup || 'false'
             }

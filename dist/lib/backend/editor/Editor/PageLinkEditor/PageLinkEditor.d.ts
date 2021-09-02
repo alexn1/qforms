@@ -4,7 +4,7 @@ declare class PageLinkEditor extends Editor {
         '@class': string;
         '@attributes': {
             name: any;
-            fileName: string;
+            fileName: any;
             menu: any;
             startup: any;
         };

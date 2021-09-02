@@ -6,12 +6,12 @@ declare class TableFormEditor extends FormEditor {
             name: any;
             caption: any;
             visible: any;
-            editMethod: string;
-            itemEditPage: string;
-            itemCreatePage: string;
-            newRowMode: string;
-            deleteRowMode: string;
-            refreshButton: string;
+            editMethod: any;
+            itemEditPage: any;
+            itemCreatePage: any;
+            newRowMode: any;
+            deleteRowMode: any;
+            refreshButton: any;
         };
         dataSources: any[];
         actions: any[];

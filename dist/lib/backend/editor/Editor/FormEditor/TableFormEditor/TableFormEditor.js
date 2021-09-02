@@ -10,12 +10,12 @@ class TableFormEditor extends FormEditor {
                 name: params.name,
                 caption: params.caption ? params.caption : params.name,
                 visible: params.visible ? params.visible : 'true',
-                editMethod: 'disabled',
-                itemEditPage: '',
-                itemCreatePage: '',
-                newRowMode: 'disabled',
-                deleteRowMode: 'disabled',
-                refreshButton: 'true'
+                editMethod: params.editMethod || 'disabled',
+                itemEditPage: params.itemEditPage || '',
+                itemCreatePage: params.itemCreatePage || '',
+                newRowMode: params.newRowMode || 'disabled',
+                deleteRowMode: params.deleteRowMode || 'disabled',
+                refreshButton: params.refreshButton || 'true',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])

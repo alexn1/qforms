@@ -21,5 +21,6 @@ declare class PageEditor extends Editor {
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<any>;
+    reformat(): void;
 }
 export = PageEditor;

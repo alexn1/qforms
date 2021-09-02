@@ -104,5 +104,8 @@ class ApplicationEditor extends Editor {
     async getCustomDirPath() {
         return this.appInfo.dirPath;
     }
+    reformat() {
+        this.data = this.appFile.data = ApplicationEditor.createData(Object.assign(Object.assign({}, this.attributes()), { env: this.data.env, databases: this.data.databases, dataSources: this.data.dataSources, actions: this.data.actions, pageLinks: this.data.pageLinks }));
+    }
 }
 module.exports = ApplicationEditor;

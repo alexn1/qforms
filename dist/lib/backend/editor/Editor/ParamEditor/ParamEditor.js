@@ -2,15 +2,13 @@
 const Editor = require('../Editor');
 class ParamEditor extends Editor {
     static createData(params) {
-        const name = params.name;
-        const value = params.value || '';
-        if (!name)
-            throw new Error('need param name');
+        if (!params.name)
+            throw new Error('no name');
         return {
             '@class': 'Param',
             '@attributes': {
-                name: name,
-                value: value
+                name: params.name,
+                value: params.value || ''
             }
         };
     }
