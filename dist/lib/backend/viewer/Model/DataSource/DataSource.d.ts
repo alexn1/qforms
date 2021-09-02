@@ -4,6 +4,7 @@ import Application from '../Application/Application';
 import Database from '../Database/Database';
 declare class DataSource extends Model {
     keyColumns: any;
+    rows: any[];
     constructor(data: any, parent: any);
     getDirPath(): any;
     getJsonFilePath(): any;
@@ -22,7 +23,7 @@ declare class DataSource extends Model {
     calcNewKey(key: any, values: any): string;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
-    getRows(): Promise<any>;
+    getRows(): Promise<any[]>;
     isOnForm(): boolean;
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;

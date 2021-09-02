@@ -216,7 +216,7 @@ class BackHostApp {
         return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     async createApplication(appFilePath, context) {
-        // console.log(`BackHostApp.createApplication: ${appFilePath}`);
+        console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
         const appInfo = await Application_1.default.getAppInfo(appFilePath);
         // ApplicationClass

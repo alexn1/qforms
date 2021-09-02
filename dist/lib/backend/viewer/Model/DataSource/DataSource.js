@@ -13,6 +13,7 @@ class DataSource extends Model_1.default {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
+        this.rows = [];
     }
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'dataSources', this.getName());
@@ -21,9 +22,17 @@ class DataSource extends Model_1.default {
         return path.join(this.getDirPath(), `${this.getName()}.json`);
     }
     async init(context) {
-        // console.log('DataSource.init', this.getFullName());
+        console.log('DataSource.init', this.getFullName());
         await super.init(context);
+        // keyColumns
         this.keyColumns = this.getKeyColumns();
+        // rows
+        const jsonFilePath = this.getJsonFilePath();
+        const exists = await Helper_1.default.exists(jsonFilePath);
+        if (exists) {
+            const content = await Helper_1.default.readTextFile(jsonFilePath);
+            this.rows = JSON.parse(content);
+        }
     }
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
@@ -194,13 +203,13 @@ class DataSource extends Model_1.default {
     }
     async getRows() {
         // console.log('DataSource.getRows');
-        const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper_1.default.exists(jsonFilePath);
+        /*const jsonFilePath = this.getJsonFilePath();
+        const exists = await Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper_1.default.readTextFile(jsonFilePath);
+            const content = await Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
-        }
-        return [];
+        }*/
+        return this.rows;
     }
     isOnForm() {
         return this.parent instanceof Form_1.default;

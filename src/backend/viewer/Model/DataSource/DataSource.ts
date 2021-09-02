@@ -12,9 +12,11 @@ import TableForm from '../Form/TableForm/TableForm';
 
 class DataSource extends Model {
     keyColumns: any;
+    rows: any[];
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
+        this.rows = [];
     }
 
     getDirPath() {
@@ -26,9 +28,19 @@ class DataSource extends Model {
     }
 
     async init(context) {
-        // console.log('DataSource.init', this.getFullName());
+        console.log('DataSource.init', this.getFullName());
         await super.init(context);
+
+        // keyColumns
         this.keyColumns = this.getKeyColumns();
+
+        // rows
+        const jsonFilePath = this.getJsonFilePath();
+        const exists = await Helper.exists(jsonFilePath);
+        if (exists) {
+            const content = await Helper.readTextFile(jsonFilePath);
+            this.rows = JSON.parse(content);
+        }
     }
 
     getKeyColumns(): string[] {
@@ -181,8 +193,8 @@ class DataSource extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.class    = this.getClassName();
-        response.name     = this.getAttr('name');
+        response.class = this.getClassName();
+        response.name  = this.getAttr('name');
         if (this.isAttr('database')) {
             response.database = this.getAttr('database');
         }
@@ -205,13 +217,13 @@ class DataSource extends Model {
 
     async getRows() {
         // console.log('DataSource.getRows');
-        const jsonFilePath = this.getJsonFilePath();
+        /*const jsonFilePath = this.getJsonFilePath();
         const exists = await Helper.exists(jsonFilePath);
         if (exists) {
             const content = await Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
-        }
-        return [];
+        }*/
+        return this.rows;
     }
 
     isOnForm() {

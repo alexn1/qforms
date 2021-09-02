@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const path = require('path');
 const session = require('express-session');
 const Helper_1 = __importDefault(require("./Helper"));
+const colors = require('colors/safe');
 class FileSessionStore extends session.Store {
     constructor(dirPath) {
         // console.log('FileSessionStore.constructor', dirPath);
@@ -29,7 +30,6 @@ class FileSessionStore extends session.Store {
         }
         else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            console.log('getFileContent:', sessionFilePath);
             Helper_1.default.getFileContent(sessionFilePath).then(content => {
                 if (content) {
                     try {

@@ -1,6 +1,7 @@
 const path = require('path');
 const session  = require('express-session');
 import Helper from './Helper';
+const colors     = require('colors/safe');
 
 class FileSessionStore extends session.Store {
     store: any;
@@ -27,7 +28,6 @@ class FileSessionStore extends session.Store {
             cb(null, session);
         } else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            console.log('getFileContent:', sessionFilePath);
             Helper.getFileContent(sessionFilePath).then(content => {
                 if (content) {
                     try {

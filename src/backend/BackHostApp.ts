@@ -264,7 +264,7 @@ class BackHostApp {
     }
 
     async createApplication(appFilePath, context: Context): Promise<Application> {
-        // console.log(`BackHostApp.createApplication: ${appFilePath}`);
+        console.log(`BackHostApp.createApplication: ${appFilePath}`);
         // const application = await Application.create(appFilePath, this, env);
         const appInfo = await Application.getAppInfo(appFilePath);
 

@@ -2,6 +2,7 @@ const glob       = require('glob');
 const path       = require('path');
 const slash      = require('slash');
 const fs         = require('fs');
+const colors     = require('colors/safe');
 
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -135,7 +136,7 @@ class Helper {
     }*/
 
     static readTextFile(path): Promise<string> {
-        // console.log('Helper.readTextFile', path);
+        console.log(colors.blue('Helper.readTextFile'), path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {
@@ -154,6 +155,7 @@ class Helper {
         return null;
     }
     static getFileContentSync(filePath) {
+        console.log(colors.blue('Helper.getFileContentSync'), filePath);
         if (!fs.existsSync(filePath)) {
             return null;
         }
@@ -161,6 +163,7 @@ class Helper {
     }
 
     static readBinaryFile(filePath) {
+        console.log(colors.blue('Helper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
                 if (err) {
@@ -197,7 +200,7 @@ class Helper {
     }
 
     static createDirIfNotExists(dirPath): Promise<void> {
-        console.log('Helper.createDirIfNotExists', dirPath);
+        console.log(colors.blue('Helper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs.exists(dirPath, exists => {
                 if (exists) {
@@ -216,6 +219,7 @@ class Helper {
     }
 
     static createDirIfNotExistsSync(dirPath) {
+        console.log(colors.blue('Helper.createDirIfNotExistsSync'), dirPath);
         if (!fs.existsSync(dirPath)) {
             fs.mkdirSync(dirPath);
         }
@@ -289,7 +293,7 @@ class Helper {
     }
 
     static exists(path) {
-        // console.log('Helper.exists', path);
+        console.log(colors.blue('Helper.exists'), path);
         return new Promise(resolve => {
             fs.exists(path, exists => {
                 resolve(exists);
@@ -298,7 +302,7 @@ class Helper {
     }
 
     static writeFile(filePath, content): Promise<void> {
-        // console.log('Helper.writeFile', filePath);
+        console.log(colors.blue('Helper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', err => {
                 if (err) {
@@ -310,7 +314,7 @@ class Helper {
         });
     }
     static writeFileSync(filePath, content) {
-        // console.log('writeFileSync', filePath, content);
+        console.log(colors.blue('Helper.writeFileSync'), filePath/*, content*/);
         return fs.writeFileSync(filePath, content, 'utf8');
     }
 
@@ -342,7 +346,7 @@ class Helper {
 
     // timeOffset number in minutes
     static today(timeOffset) {
-        console.log('Helper.today', timeOffset);
+        // console.log('Helper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
             ts += Helper.MINUTE() * timeOffset;
