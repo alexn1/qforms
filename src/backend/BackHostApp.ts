@@ -1033,7 +1033,6 @@ class BackHostApp {
             req.params.env         = env;
             if (query) {
                 for (const name in query) {
-                    // req.query[name] = Helper.encodeValue(query[name] ? query[name] : req.params[name]);
                     req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }

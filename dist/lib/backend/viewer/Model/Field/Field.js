@@ -38,7 +38,7 @@ class Field extends Model_1.default {
         try {
             value = eval(js);
             if (value !== undefined) {
-                row[column] = Helper.encodeValue(value);
+                row[column] = this.valueToRaw(value);
             }
         }
         catch (e) {

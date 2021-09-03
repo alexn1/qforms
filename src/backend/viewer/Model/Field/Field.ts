@@ -43,12 +43,11 @@ class Field extends Model {
         try {
             value = eval(js);
             if (value !== undefined) {
-                row[column] = Helper.encodeValue(value);
+                row[column] = this.valueToRaw(value);
             }
         } catch (e) {
             throw new Error(`[${this.getFullName()}] fillDefaultValue: ${e.toString()}`);
         }
-
     }
 
     dumpRowValueToParams(row, params) {
