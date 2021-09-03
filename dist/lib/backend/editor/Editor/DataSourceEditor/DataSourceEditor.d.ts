@@ -4,5 +4,6 @@ declare class DataSourceEditor extends Editor {
     getCollectionDirPath(): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getColName(): string;
+    save(): Promise<void>;
 }
 export = DataSourceEditor;

@@ -11,6 +11,6 @@ declare class EditorController {
         view: any;
         data: {};
     }>;
-    createApplicationEditor(): Promise<ApplicationEditor>;
+    createApplicationEditor(): ApplicationEditor;
 }
 export = EditorController;

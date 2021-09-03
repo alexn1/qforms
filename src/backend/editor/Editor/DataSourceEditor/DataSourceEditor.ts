@@ -1,3 +1,6 @@
+import ApplicationEditor from "../ApplicationEditor/ApplicationEditor";
+import PageEditor from "../PageEditor/PageEditor";
+
 const path = require('path');
 const Editor = require('../Editor');
 
@@ -32,6 +35,15 @@ class DataSourceEditor extends Editor {
     }
     getColName() {
         return 'dataSources';
+    }
+    async save() {
+        if (this.parent instanceof ApplicationEditor) {
+            await this.parent.appFile.save();
+        } else if (this.parent instanceof PageEditor) {
+            await this.parent.pageFile.save();
+        } else {
+            await this.parent.getParent().pageFile.save();
+        }
     }
 }
 

@@ -31,7 +31,7 @@ class EditorController {
             data: {}
         };
     }
-    async createApplicationEditor() {
+    createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
         return new ApplicationEditor(this.appInfo.appFile);
     }

@@ -7,7 +7,7 @@ class ColumnEditorController extends EditorController {
     }*/
     async save(params) {
         console.log('ColumnEditorController.save');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
         const columnEditor = tableEditor.createItemEditor('columns', params.column);
@@ -17,7 +17,7 @@ class ColumnEditorController extends EditorController {
     }
     async _new(params) {
         console.log('ColumnEditorController._new');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
         const columnData = tableEditor.newItemData('column', 'columns', params);
@@ -26,7 +26,7 @@ class ColumnEditorController extends EditorController {
     }
     async delete(params) {
         console.log('ColumnEditorController.delete');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
         const data = tableEditor.removeColData('columns', params.column);

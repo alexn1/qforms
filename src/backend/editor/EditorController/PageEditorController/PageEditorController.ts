@@ -12,20 +12,20 @@ class PageEditorController extends VisualEditorController {
         return JSON.parse(content);
     }
     async save(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.fileName);
         pageEditor.setAttr(params.attr, params.value);
         await pageEditor.save();
         return null;
     }
     async _new(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const data = await appEditor.newPageAndPageLinkData(params);
         await appEditor.save();
         return data;
     }
     async delete(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         await appEditor.removePageFile(params.page);
         const data = appEditor.removeColData('pageLinks', params.page);
         await appEditor.save();
@@ -35,7 +35,7 @@ class PageEditorController extends VisualEditorController {
         const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':
-                const appEditor = await this.createApplicationEditor();
+                const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 result.data.js = await pageEditor.getCustomFile('js');
                 return result;
@@ -44,19 +44,19 @@ class PageEditorController extends VisualEditorController {
         }
     }
     async createController(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createJs(params);
         return {js};
     }
     async saveController(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         await pageEditor.saveCustomFile('js', params.text);
         return null;
     }
     async createModelBackJs(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createModelBackJs(params);
         return {js};

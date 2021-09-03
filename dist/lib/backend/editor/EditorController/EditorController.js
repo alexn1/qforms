@@ -29,7 +29,7 @@ class EditorController {
             data: {}
         };
     }
-    async createApplicationEditor() {
+    createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
         return new ApplicationEditor_1.default(this.appInfo.appFile);
     }

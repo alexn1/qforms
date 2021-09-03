@@ -6,7 +6,7 @@ class TableEditorController extends EditorController {
     }*/
     async _new(params) {
         console.log('TableEditorController._new');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         // const data = databaseEditor.newTableData(params);
         const data = databaseEditor.newItemData('Table', 'tables', params);
@@ -15,14 +15,14 @@ class TableEditorController extends EditorController {
     }
     async delete(params) {
         console.log('TableEditorController.delete');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('tables', params.table);
         await appEditor.save();
         return data;
     }
     async moveUp(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const result = databaseEditor.moveItemUp('tables', params.table);
         await appEditor.save();
@@ -30,7 +30,7 @@ class TableEditorController extends EditorController {
     }
 
     async moveDown(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const result = databaseEditor.moveItemDown('tables', params.table);
         await appEditor.save();

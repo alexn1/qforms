@@ -7,7 +7,7 @@ class DataSourceEditorController extends EditorController {
     }*/
 
     async createDataSourceEditor(params) {
-        let editor: any = await this.createApplicationEditor();
+        let editor: any = this.createApplicationEditor();
         if (params.pageFileName) {
             editor = await editor.createPageEditor(params.pageFileName);
             if (params.form) {
@@ -18,7 +18,7 @@ class DataSourceEditorController extends EditorController {
     }
 
     async _new(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         let data;
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
@@ -37,7 +37,7 @@ class DataSourceEditorController extends EditorController {
     }
 
     async delete(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         let data;
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
@@ -56,7 +56,7 @@ class DataSourceEditorController extends EditorController {
     }
 
     async moveUp(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
@@ -80,7 +80,7 @@ class DataSourceEditorController extends EditorController {
     }
 
     async moveDown(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {

@@ -58,7 +58,7 @@ class DataSource extends Model {
                     throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
                 }
             }
-            /*if (this.isOnForm()) {
+            if (this.isOnForm()) {
                 const rowColumns = Object.keys(rows[0]);
                 const formColumns = this.getParent().fields.map(field => field.getAttr('column')).filter(column => !!column);
                 for (const rowColumn of rowColumns) {
@@ -69,7 +69,7 @@ class DataSource extends Model {
                         throw new Error(`${this.getFullName()}: unknown column "${rowColumn}"`);
                     }
                 }
-            }*/
+            }
         }
         if (this.isDefaultOnForm()) {
             for (const row of rows) {

@@ -1,4 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const ApplicationEditor_1 = __importDefault(require("../ApplicationEditor/ApplicationEditor"));
+const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
 const path = require('path');
 const Editor = require('../Editor');
 class DataSourceEditor extends Editor {
@@ -32,6 +37,17 @@ class DataSourceEditor extends Editor {
     }
     getColName() {
         return 'dataSources';
+    }
+    async save() {
+        if (this.parent instanceof ApplicationEditor_1.default) {
+            await this.parent.appFile.save();
+        }
+        else if (this.parent instanceof PageEditor_1.default) {
+            await this.parent.pageFile.save();
+        }
+        else {
+            await this.parent.getParent().pageFile.save();
+        }
     }
 }
 module.exports = DataSourceEditor;

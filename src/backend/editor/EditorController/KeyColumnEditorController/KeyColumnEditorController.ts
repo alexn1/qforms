@@ -7,7 +7,7 @@ class KeyColumnEditorController extends EditorController {
         super(...args);
     }*/
     async _new(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
@@ -31,7 +31,7 @@ class KeyColumnEditorController extends EditorController {
     }
 
     async save(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
@@ -42,7 +42,7 @@ class KeyColumnEditorController extends EditorController {
     }
 
     async delete(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);

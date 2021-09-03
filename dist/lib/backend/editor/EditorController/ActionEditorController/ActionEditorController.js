@@ -3,7 +3,7 @@ const EditorController = require('../EditorController');
 class ActionEditorController extends EditorController {
     async _new(params) {
         console.log('ActionEditorController._new');
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         let data;
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -23,7 +23,7 @@ class ActionEditorController extends EditorController {
         return data;
     }
     async save(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
@@ -45,7 +45,7 @@ class ActionEditorController extends EditorController {
         return null;
     }
     async delete(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         let data;
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -65,7 +65,7 @@ class ActionEditorController extends EditorController {
         return data;
     }
     async moveUp(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
@@ -85,7 +85,7 @@ class ActionEditorController extends EditorController {
         return null;
     }
     async moveDown(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {

@@ -5,7 +5,7 @@ class FieldEditorController extends VisualEditorController {
         super(...args);
     }*/
     async _new(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const data = formEditor.newItemData(params.class, 'fields', params);
@@ -13,7 +13,7 @@ class FieldEditorController extends VisualEditorController {
         return data;
     }
     async save(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor  = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
@@ -22,7 +22,7 @@ class FieldEditorController extends VisualEditorController {
         return null;
     }
     async delete(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const data = formEditor.removeColData('fields', params.field);
@@ -30,7 +30,7 @@ class FieldEditorController extends VisualEditorController {
         return data;
     }
     async changeClass(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
@@ -43,7 +43,7 @@ class FieldEditorController extends VisualEditorController {
         const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':
-                const appEditor = await this.createApplicationEditor();
+                const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor  = pageEditor.createItemEditor('forms', params.form);
                 const fieldEditor = formEditor.createItemEditor('fields', params.field);
@@ -55,7 +55,7 @@ class FieldEditorController extends VisualEditorController {
     }
 
     async createController(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor  = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
@@ -64,7 +64,7 @@ class FieldEditorController extends VisualEditorController {
     }
 
     async saveController(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
@@ -73,7 +73,7 @@ class FieldEditorController extends VisualEditorController {
     }
 
     async moveUp(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const result = await formEditor.moveItemUp('fields', params);
@@ -82,7 +82,7 @@ class FieldEditorController extends VisualEditorController {
     }
 
     async moveDown(params) {
-        const appEditor = await this.createApplicationEditor();
+        const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const result = await formEditor.moveItemDown('fields', params);
