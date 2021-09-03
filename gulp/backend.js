@@ -21,6 +21,11 @@ function backend_js() {
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/backend')));
 }
 
-const backend = gulp.series(backend_ejs, backend_json, backend_js, backend_ts);
+const backend = gulp.series(
+    backend_ejs,
+    backend_json,
+    backend_js,
+    backend_ts
+);
 
 module.exports = backend;

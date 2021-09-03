@@ -1,20 +1,8 @@
-const del = require('del');
 const fs = require("fs");
 
-function exists(path) {
-    return new Promise(resolve => {
-        fs.exists(path, exists => {
-            resolve(exists);
-        });
-    });
-}
-
 async function clean() {
-    const e = await exists('dist');
-    console.log('exists dist:', e);
-    if (e) {
-        return del(['dist']);
-    }
+    fs.rmdirSync('dist', { recursive: true });
+    // fs.mkdirSync('dist/lib/backend', { recursive: true });
 }
 
 module.exports = clean;
