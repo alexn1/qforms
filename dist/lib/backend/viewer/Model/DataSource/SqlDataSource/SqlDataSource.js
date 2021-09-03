@@ -156,10 +156,9 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = {
-        // new: {[key]: row}
-        };
-        SqlDataSource.addInsertToResult(result, table, key, row);
+        const result = {};
+        SqlDataSource.addInsertToResult(result, table, key);
+        SqlDataSource.addInsertExToResult(result, table, key, row);
         return result;
     }
     // result {
@@ -169,12 +168,19 @@ class SqlDataSource extends DataSource_1.default {
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
     //   updateEx: {table: {"1": {field: 1, field2: 2}}}
     // }
-    static addInsertToResult(result, table, key, row) {
+    static addInsertToResult(result, table, key) {
         if (!result.insert)
             result.insert = {};
         if (!result.insert[table])
-            result.insert[table] = {};
-        result.insert[table][key] = row;
+            result.insert[table] = [];
+        result.insert[table].push(key);
+    }
+    static addInsertExToResult(result, table, key, row) {
+        if (!result.insertEx)
+            result.insertEx = {};
+        if (!result.insertEx[table])
+            result.insertEx[table] = {};
+        result.insertEx[table][key] = row;
     }
     static addUpdateToResult(result, table, oldKey, newKey) {
         // console.log('SqlDataSource.addUpdateToResult');

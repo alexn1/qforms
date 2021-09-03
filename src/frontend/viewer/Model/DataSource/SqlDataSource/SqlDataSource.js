@@ -28,9 +28,9 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result.insert[table]);
+        const [key] = Object.keys(result.insertEx[table]);
         if (!key) throw new Error('no inserted row key');
-        const values = result.insert[table][key];
+        const values = result.insertEx[table][key];
         for (const column in values) {
             row[column] = values[column];
         }
@@ -46,15 +46,12 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const inserts = Object.keys(result.insert[table]);
+        const inserts = result.insert[table];
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert({source: this, inserts});
         }
         this.emit('insert', {source: this, inserts});
-        this.getDatabase().emitResult({
-            insert: {[table]: inserts},
-            delete: result.delete
-        }, this);
+        this.getDatabase().emitResult(result, this);
 
         return key;
     }
