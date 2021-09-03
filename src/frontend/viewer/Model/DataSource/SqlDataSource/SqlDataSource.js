@@ -46,11 +46,11 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const inserts = result.insert[table];
+        const event = {source : this, inserts: result.insert[table]};
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, inserts});
+            this.parent.onDataSourceInsert(event);
         }
-        this.emit('insert', {source: this, inserts});
+        this.emit('insert', event);
         this.getDatabase().emitResult(result, this);
 
         return key;
@@ -83,11 +83,11 @@ class SqlDataSource extends DataSource {
         this.updateRow(key, newValues);
 
         // events
-        const updates = result.update[table];
+        const event = {source: this, updates: result.update[table]};
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, updates});
+            this.parent.onDataSourceUpdate(event);
         }
-        this.emit('update', {source: this, updates});
+        this.emit('update', event);
         this.getDatabase().emitResult(result, this);
         return result;
     }
@@ -108,11 +108,11 @@ class SqlDataSource extends DataSource {
         await this.refill();
 
         // events
-        const deletes = result.delete[table];
+        const event = {source: this, deletes: result.delete[table]};
         if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, deletes});
+            this.parent.onDataSourceDelete(event);
         }
-        this.emit('delete', {source: this, deletes});
+        this.emit('delete', event);
         this.getDatabase().emitResult(result);
         return result;
     }
