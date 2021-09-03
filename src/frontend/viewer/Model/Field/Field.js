@@ -127,7 +127,7 @@ class Field extends Model {
         return this.data.notNull === 'false';
     }
     isVisible() {
-        return this.data.isVisible === 'true';
+        return this.data.visible === 'true';
     }
     getWidth() {
         return this.data.width !== '0' ? parseInt(this.data.width) : 100;

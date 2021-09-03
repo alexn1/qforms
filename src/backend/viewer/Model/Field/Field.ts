@@ -17,16 +17,16 @@ class Field extends Model {
     // }
 
     fillAttributes(response: any): void {
-        response.class            = this.getClassName();
-        response.name             = this.getAttr('name');
-        response.caption          = this.getAttr('caption');
-        response.column           = this.getAttr('column');
-        response.defaultValue     = this.getAttr('defaultValue');
-        response.value            = this.getAttr('value');
-        response.param            = this.getAttr('param');
-        response.isVisible        = this.getAttr('isVisible');
-        response.type             = this.getAttr('type');
-        response.width            = this.getAttr('width');
+        response.class        = this.getClassName();
+        response.name         = this.getAttr('name');
+        response.caption      = this.getAttr('caption');
+        response.column       = this.getAttr('column');
+        response.defaultValue = this.getAttr('defaultValue');
+        response.value        = this.getAttr('value');
+        response.param        = this.getAttr('param');
+        response.visible      = this.getAttr('isVisible');
+        response.type         = this.getAttr('type');
+        response.width        = this.getAttr('width');
     }
 
     getDirPath(): string {
