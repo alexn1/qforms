@@ -820,40 +820,37 @@ class BackHostApp {
         }
     }
     async appGetFile(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl, req.params.module);
+        console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
         if (req.params.module === 'viewer') {
-            let context = null;
-            try {
-                context = new Context_1.default({ req, domain: this.getDomain(req) });
-                if (this.applications[context.getRoute()]) {
-                    const application = this.getApplication(context);
-                    if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-                        throw new MyError_1.default({ message: 'not authenticated', context });
-                    }
-                    const filePath = path.join(application.getFrontendDirPath(), context.getUri());
-                    if (await Helper_1.default.exists(filePath)) {
-                        res.sendFile(filePath);
-                    }
-                    else {
-                        next();
-                    }
-                }
-                else {
-                    next();
-                }
-            }
-            catch (err) {
-                err.message = `appGetFile error: ${err.message}`;
-                next(err);
-            }
-            finally {
-                if (context) {
-                    context.destroy();
-                }
-            }
-        }
-        else {
             next();
+            return;
+        }
+        let context = null;
+        try {
+            context = new Context_1.default({ req, domain: this.getDomain(req) });
+            if (!this.applications[context.getRoute()]) {
+                next();
+                return;
+            }
+            const application = this.getApplication(context);
+            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+                throw new MyError_1.default({ message: 'not authenticated', context });
+            }
+            const filePath = path.join(application.getFrontendDirPath(), context.getUri());
+            if (!await Helper_1.default.exists(filePath)) {
+                next();
+                return;
+            }
+            res.sendFile(filePath);
+        }
+        catch (err) {
+            err.message = `appGetFile error: ${err.message}`;
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
         }
     }
     async _e404(req, res, next) {
