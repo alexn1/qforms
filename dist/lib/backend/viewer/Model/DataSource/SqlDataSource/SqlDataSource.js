@@ -162,6 +162,13 @@ class SqlDataSource extends DataSource_1.default {
         SqlDataSource.addInsertToResult(result, table, key, row);
         return result;
     }
+    // result {
+    //   insert: {table: ["1", "2"]},
+    //   update: {table: []},
+    //   delete: {table:[]},
+    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
+    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
+    // }
     static addInsertToResult(result, table, key, row) {
         if (!result.insert)
             result.insert = {};
