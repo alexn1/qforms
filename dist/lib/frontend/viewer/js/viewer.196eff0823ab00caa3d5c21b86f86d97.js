@@ -1682,10 +1682,10 @@ class TableFormController extends FormController {
             }
             const row = {};
             this.model.fillDefaultValues(row);
-            const key2 = await this.model.getDefaultDataSource().insert(row);
+            const key = await this.model.getDefaultDataSource().insert(row);
             await this.openPage({
                 name : this.model.getAttr('itemCreatePage'),
-                key  : key2,
+                key  : key,
                 modal: true
             });
         }
