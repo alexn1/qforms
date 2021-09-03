@@ -53,7 +53,7 @@ class SqlDataSource extends DataSource {
         this.emit('insert', event);
         this.getDatabase().emitResult(result, this);
 
-        return key;
+        return result;
     }
 
     async update() {

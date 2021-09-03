@@ -290,8 +290,8 @@ class SqlDataSource extends DataSource {
     }
     // result {
     //   insert: {table: ["1", "2"]},
-    //   update: {table: []},
-    //   delete: {table:[]},
+    //   update: {table: {"1": "2"}},
+    //   delete: {table:["1", "2"]},
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
     //   updateEx: {table: {"1": {field: 1, field2: 2}}}
     // }
