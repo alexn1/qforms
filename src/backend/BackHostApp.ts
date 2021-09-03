@@ -844,7 +844,7 @@ class BackHostApp {
 
     async appGetFile(req, res, next) {
         console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
-        if (req.params.module === 'viewer') {
+        if (req.params.module !== 'viewer') {
             next();
             return;
         }
