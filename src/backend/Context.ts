@@ -26,11 +26,9 @@ class Context {
         this.domain = domain;
 
         // params
-        // this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
         this.query  = {
             ...(req.query ? req.query : {})
         };
-        // this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
         this.params = {
             ...(req.body.params ? req.body.params : {})
         };
