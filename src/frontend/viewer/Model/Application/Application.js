@@ -70,8 +70,7 @@ class Application extends Model {
         const result = await this.request({
             action: 'rpc',
             name  : name,
-            // params: Helper.encodeObject(params)
-            params
+            params: params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

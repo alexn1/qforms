@@ -74,10 +74,6 @@ class ApplicationController extends Controller {
             action : 'page',
             page   : name,
             newMode: isNewMode,
-            // params : Helper.encodeObject({
-            //     ...params,
-            //     ...(key ? DataSource.keyToParams(key) : {})
-            // })
             params : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})

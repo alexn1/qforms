@@ -152,8 +152,7 @@ class Page extends Model {
             action: 'rpc',
             page  : this.getName(),
             name  : name,
-            // params: Helper.encodeObject(params)
-            params
+            params: params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

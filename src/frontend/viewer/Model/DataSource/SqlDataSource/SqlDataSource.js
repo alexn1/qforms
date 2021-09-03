@@ -103,7 +103,6 @@ class SqlDataSource extends DataSource {
             action: '_delete',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),
-            // params: Helper.encodeObject({key}),
             params: {key},
         });
         await this.refill();
@@ -217,10 +216,6 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            // params        : Helper.encodeObject({
-            //     ...this.getPageParams(),
-            //     ...params,
-            // })
             params        : {
                 ...this.getPageParams(),
                 ...params,
@@ -236,15 +231,11 @@ class SqlDataSource extends DataSource {
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
-            action        : 'selectSingle',
-            page          : page ? page.getName()           : null,
-            form          : form ? form.getName()           : null,
-            ds            : this.getName(),
-            // params        : Helper.encodeObject({
-            //     ...this.getPageParams(),
-            //     ...params,
-            // })
-            params        : {
+            action: 'selectSingle',
+            page  : page ? page.getName()           : null,
+            form  : form ? form.getName()           : null,
+            ds    : this.getName(),
+            params: {
                 ...this.getPageParams(),
                 ...params,
             }
