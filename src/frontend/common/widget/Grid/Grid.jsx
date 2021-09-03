@@ -65,6 +65,7 @@ class Grid extends ReactComponent {
             case 39: await this.onRight(); break;
             case 40: await this.onDown() ; break;
             case 13: await this.onEnter(); break;
+            case 46: await this.onDelete(); break;
             case 67:
                 if (e.ctrlKey) {
                     await this.onCopy();
@@ -129,6 +130,15 @@ class Grid extends ReactComponent {
         // console.log(row, key);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
+        }
+    }
+    async onDelete() {
+        console.log('Grid.onDelete');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDeleteClick) {
+            await this.props.onDeleteClick(row, key);
         }
     }
     async selectCell(key, j) {

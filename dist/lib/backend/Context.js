@@ -20,9 +20,7 @@ class Context {
         this.req = req;
         this.domain = domain;
         // params
-        // this.query  = req.query       ? Helper.decodeObject(req.query)       : {};
         this.query = Object.assign({}, (req.query ? req.query : {}));
-        // this.params = req.body.params ? Helper.decodeObject(req.body.params) : {};
         this.params = Object.assign({}, (req.body.params ? req.body.params : {}));
         // cnn
         this.connections = {};

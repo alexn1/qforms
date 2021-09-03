@@ -1622,6 +1622,14 @@ class TableFormController extends FormController {
             break;
         }
     }
+    onGridDeleteClick = async (row, key) => {
+        console.log('TableFormController.onGridDeleteClick', row, key);
+        if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
+            if (confirm(this.model.getApp().getText().form.areYouSure)) {
+                this.model.getDefaultDataSource().delete(key);
+            }
+        }
+    }
     onHidePage = async () => {
         // this.grid.saveScroll();
     }
