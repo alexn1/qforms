@@ -844,30 +844,35 @@ class BackHostApp {
 
     async appGetFile(req, res, next) {
         console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
-        let context = null;
-        try {
-            context = new Context({req, domain: this.getDomain(req)});
-            if (this.applications[context.getRoute()]) {
-                const application = this.getApplication(context);
-                if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-                    throw new MyError({message: 'not authenticated', context});
-                }
-                const filePath = path.join(application.getFrontendDirPath(), context.getUri());
-                if (await Helper.exists(filePath)) {
-                    res.sendFile(filePath);
+        if (req.params.module === 'viewer') {
+            let context = null;
+            try {
+                context = new Context({req, domain: this.getDomain(req)});
+                if (this.applications[context.getRoute()]) {
+                    const application = this.getApplication(context);
+                    if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+                        throw new MyError({message: 'not authenticated', context});
+                    }
+                    const filePath = path.join(application.getFrontendDirPath(), context.getUri());
+
+                    if (await Helper.exists(filePath)) {
+                        res.sendFile(filePath);
+                    } else {
+                        next();
+                    }
                 } else {
                     next();
                 }
-            } else {
-                next();
+            } catch (err) {
+                err.message = `appGetFile error: ${err.message}`;
+                next(err);
+            } finally {
+                if (context) {
+                    context.destroy();
+                }
             }
-        } catch (err) {
-            err.message = `appGetFile error: ${err.message}`;
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
+        } else {
+            next();
         }
     }
 
