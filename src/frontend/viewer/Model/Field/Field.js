@@ -26,7 +26,7 @@ class Field extends Model {
         try {
             const value = eval(js);
             if (value !== undefined) {
-                row[column] = Helper.encodeValue(value);
+                row[column] = this.valueToRaw(value);
             }
         } catch (err) {
             throw new Error(`[${this.getFullName()}] fillDefaultValue: ${err.toString()}`);

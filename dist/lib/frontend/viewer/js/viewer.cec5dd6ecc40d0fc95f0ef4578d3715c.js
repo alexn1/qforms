@@ -1933,7 +1933,6 @@ class PageController extends Controller {
             [
                 // ...(query ? query.split('&') : []),
                 ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
-                //...Object.keys(params).map(name => `${name}=${encodeURI(Helper.encodeValue(params[name]))}`)
                 ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
             ].join('&')
         ].join('?');
@@ -2968,7 +2967,7 @@ class Field extends Model {
         try {
             const value = eval(js);
             if (value !== undefined) {
-                row[column] = Helper.encodeValue(value);
+                row[column] = this.valueToRaw(value);
             }
         } catch (err) {
             throw new Error(`[${this.getFullName()}] fillDefaultValue: ${err.toString()}`);
