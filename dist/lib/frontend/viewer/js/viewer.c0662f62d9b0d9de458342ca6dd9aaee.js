@@ -2684,22 +2684,24 @@ class SqlDataSource extends DataSource {
             form   : this.getForm().getName(),
             changes: this.getChangesByKey(),
         });
-        const [key] = Object.keys(result);
+
+
+        const [key] = Object.keys(result.updateEx[table]);
         if (!key) throw new Error('no updated row');
-        const newValues = result[key];
-        const newKey = this.getRowKey(newValues);
+        const newValues = result.updateEx[table][key];
+        // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
         this.updateRow(key, newValues);
+
+        // events
+        const updates = result.update[table];
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, updates: {[key]: newKey}});
+            this.parent.onDataSourceUpdate({source: this, updates});
         }
-        this.emit('update', {source: this, updates: {[key]: newKey}});
-        this.getDatabase().emitResult({
-            update: {
-                [table]: {[key]: newKey}
-            }
-        }, this);
+        this.emit('update', {source: this, updates});
+        this.getDatabase().emitResult(result, this);
+        return result;
     }
 
     async delete(key) {

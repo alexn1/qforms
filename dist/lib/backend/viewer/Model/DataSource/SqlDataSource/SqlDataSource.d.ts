@@ -11,13 +11,9 @@ declare class SqlDataSource extends DataSource {
     selectSingle(context: Context): Promise<any>;
     selectMultiple(context: Context): Promise<any[]>;
     select(context: Context): Promise<any[]>;
-    update(context: Context): Promise<any>;
     getBuffer(context: Context, file: any): Promise<any>;
     insert(context: Context, _values?: any): Promise<any>;
-    static addInsertToResult(result: any, table: any, key: any): void;
-    static addInsertExToResult(result: any, table: any, key: any, row: any): void;
-    static addUpdateToResult(result: any, table: any, oldKey: any, newKey: any): void;
-    static addDeleteToResult(result: any, table: any, key: any): void;
+    update(context: Context): Promise<any>;
     delete(context: Context): Promise<any>;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
@@ -33,5 +29,10 @@ declare class SqlDataSource extends DataSource {
     };
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
+    static addInsertToResult(result: any, table: any, key: any): void;
+    static addInsertExToResult(result: any, table: any, key: any, row: any): void;
+    static addUpdateToResult(result: any, table: any, oldKey: any, newKey: any): void;
+    static addUpdateExToResult(result: any, table: any, oldKey: any, row: any): void;
+    static addDeleteToResult(result: any, table: any, key: any): void;
 }
 export = SqlDataSource;

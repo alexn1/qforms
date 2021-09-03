@@ -96,48 +96,17 @@ class SqlDataSource extends DataSource_1.default {
         }
         return [rows, count];
     }
-    async update(context) {
-        console.log('SqlDataSource.update');
-        if (this.getAccess(context).update !== true)
-            throw new Error(`[${this.getFullName()}]: access denied.`);
-        if (!this.table)
-            throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const changes = this.decodeChanges(context.getBody().changes);
-        // console.log('changes:', changes);
-        const key = Object.keys(changes)[0];
-        const where = this.getKeyValuesFromKey(key);
-        const values = changes[key];
-        const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
-        const _values = Helper_1.default.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = Helper_1.default.mapObject(where, (name, value) => [`key_${name}`, value]);
-        const params = Object.assign(Object.assign({}, _values), _where);
-        await this.getDatabase().queryResult(context, query, params);
-        // get updated row
-        const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource_1.default.keyToParams(newKey);
-        console.log('key:', key);
-        console.log('newKey:', newKey);
-        console.log('newKeyParams:', newKeyParams);
-        const singleQuery = this.getSingleQuery(context);
-        // console.log('singleQuery:', singleQuery);
-        const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
-        if (!row)
-            throw new Error('singleQuery does not return row');
-        this.prepareRows(context, [row]);
-        // console.log('row:', row);
-        return { [key]: row };
-    }
     async getBuffer(context, file) {
         return file.data;
     }
     async insert(context, _values = null) {
         console.log('SqlDataSource.insert');
-        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
-        if (!this.table)
-            throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         if (this.getAccess(context).insert !== true)
             throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (!this.table)
+            throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
         const table = this.getAttr('table');
+        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
         // console.log('autoColumnTypes:', autoColumnTypes);
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
@@ -161,41 +130,40 @@ class SqlDataSource extends DataSource_1.default {
         SqlDataSource.addInsertExToResult(result, table, key, row);
         return result;
     }
-    // result {
-    //   insert: {table: ["1", "2"]},
-    //   update: {table: []},
-    //   delete: {table:[]},
-    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
-    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
-    // }
-    static addInsertToResult(result, table, key) {
-        if (!result.insert)
-            result.insert = {};
-        if (!result.insert[table])
-            result.insert[table] = [];
-        result.insert[table].push(key);
-    }
-    static addInsertExToResult(result, table, key, row) {
-        if (!result.insertEx)
-            result.insertEx = {};
-        if (!result.insertEx[table])
-            result.insertEx[table] = {};
-        result.insertEx[table][key] = row;
-    }
-    static addUpdateToResult(result, table, oldKey, newKey) {
-        // console.log('SqlDataSource.addUpdateToResult');
-        if (!result.update)
-            result.update = {};
-        if (!result.update[table])
-            result.update[table] = {};
-        result.update[table][oldKey] = newKey;
-    }
-    static addDeleteToResult(result, table, key) {
-        if (!result.delete)
-            result.delete = {};
-        if (!result.delete[table])
-            result.delete[table] = [];
-        result.delete[table].push(key);
+    async update(context) {
+        console.log('SqlDataSource.update');
+        if (this.getAccess(context).update !== true)
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (!this.table)
+            throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        const table = this.getAttr('table');
+        const changes = this.decodeChanges(context.getBody().changes);
+        // console.log('changes:', changes);
+        const key = Object.keys(changes)[0];
+        const where = this.getKeyValuesFromKey(key);
+        const values = changes[key];
+        const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
+        const _values = Helper_1.default.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = Helper_1.default.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const params = Object.assign(Object.assign({}, _values), _where);
+        await this.getDatabase().queryResult(context, query, params);
+        // get updated row
+        const newKey = this.calcNewKey(key, values);
+        const newKeyParams = DataSource_1.default.keyToParams(newKey);
+        console.log('key:', key);
+        console.log('newKey:', newKey);
+        console.log('newKeyParams:', newKeyParams);
+        const singleQuery = this.getSingleQuery(context);
+        // console.log('singleQuery:', singleQuery);
+        const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
+        if (!row)
+            throw new Error('singleQuery does not return row');
+        this.prepareRows(context, [row]);
+        // console.log('row:', row);
+        const result = {};
+        SqlDataSource.addUpdateToResult(result, table, key, newKey);
+        SqlDataSource.addUpdateExToResult(result, table, key, row);
+        return result;
     }
     async delete(context) {
         if (this.getAccess(context).delete !== true)
@@ -302,6 +270,50 @@ class SqlDataSource extends DataSource_1.default {
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
+    }
+    // result {
+    //   insert: {table: ["1", "2"]},
+    //   update: {table: []},
+    //   delete: {table:[]},
+    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
+    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
+    // }
+    static addInsertToResult(result, table, key) {
+        if (!result.insert)
+            result.insert = {};
+        if (!result.insert[table])
+            result.insert[table] = [];
+        result.insert[table].push(key);
+    }
+    static addInsertExToResult(result, table, key, row) {
+        if (!result.insertEx)
+            result.insertEx = {};
+        if (!result.insertEx[table])
+            result.insertEx[table] = {};
+        result.insertEx[table][key] = row;
+    }
+    static addUpdateToResult(result, table, oldKey, newKey) {
+        // console.log('SqlDataSource.addUpdateToResult');
+        if (!result.update)
+            result.update = {};
+        if (!result.update[table])
+            result.update[table] = {};
+        result.update[table][oldKey] = newKey;
+    }
+    static addUpdateExToResult(result, table, oldKey, row) {
+        // console.log('SqlDataSource.addUpdateExToResult');
+        if (!result.updateEx)
+            result.updateEx = {};
+        if (!result.updateEx[table])
+            result.updateEx[table] = {};
+        result.updateEx[table][oldKey] = row;
+    }
+    static addDeleteToResult(result, table, key) {
+        if (!result.delete)
+            result.delete = {};
+        if (!result.delete[table])
+            result.delete[table] = [];
+        result.delete[table].push(key);
     }
 }
 module.exports = SqlDataSource;
