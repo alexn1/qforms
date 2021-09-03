@@ -2664,7 +2664,8 @@ class SqlDataSource extends DataSource {
         }
         this.emit('insert', {source: this, inserts});
         this.getDatabase().emitResult({
-            insert: {[table]: inserts}
+            insert: {[table]: inserts},
+            delete: result.delete
         }, this);
 
         return key;
@@ -2725,10 +2726,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceDelete({source: this, deletes});
         }
         this.emit('delete', {source: this, deletes});
-        this.getDatabase().emitResult({
-            'delete': {[table]: deletes}
-        }, this);
-
+        this.getDatabase().emitResult(result);
         return result;
     }
 
@@ -2912,6 +2910,7 @@ class Database extends Model {
     }
 
     emitResult(result, source) {
+        console.log('Database.emitResult', result, source);
         this.emitDelete(result, source);
         this.emitUpdate(result, source);
         this.emitInsert(result, source);
