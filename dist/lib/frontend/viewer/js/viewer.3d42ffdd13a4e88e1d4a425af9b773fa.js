@@ -140,10 +140,6 @@ class ApplicationController extends Controller {
             action : 'page',
             page   : name,
             newMode: isNewMode,
-            // params : Helper.encodeObject({
-            //     ...params,
-            //     ...(key ? DataSource.keyToParams(key) : {})
-            // })
             params : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
@@ -2104,8 +2100,7 @@ class Application extends Model {
         const result = await this.request({
             action: 'rpc',
             name  : name,
-            // params: Helper.encodeObject(params)
-            params
+            params: params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
@@ -2713,7 +2708,6 @@ class SqlDataSource extends DataSource {
             action: '_delete',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),
-            // params: Helper.encodeObject({key}),
             params: {key},
         });
         await this.refill();
@@ -2827,10 +2821,6 @@ class SqlDataSource extends DataSource {
             page          : page ? page.getName()           : null,
             form          : form ? form.getName()           : null,
             ds            : this.getName(),
-            // params        : Helper.encodeObject({
-            //     ...this.getPageParams(),
-            //     ...params,
-            // })
             params        : {
                 ...this.getPageParams(),
                 ...params,
@@ -2846,15 +2836,11 @@ class SqlDataSource extends DataSource {
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
-            action        : 'selectSingle',
-            page          : page ? page.getName()           : null,
-            form          : form ? form.getName()           : null,
-            ds            : this.getName(),
-            // params        : Helper.encodeObject({
-            //     ...this.getPageParams(),
-            //     ...params,
-            // })
-            params        : {
+            action: 'selectSingle',
+            page  : page ? page.getName()           : null,
+            form  : form ? form.getName()           : null,
+            ds    : this.getName(),
+            params: {
                 ...this.getPageParams(),
                 ...params,
             }
@@ -3342,8 +3328,7 @@ class Form extends Model {
             page  : this.getPage().getName(),
             form  : this.getName(),
             name  : name,
-            // params: Helper.encodeObject(params)
-            params
+            params: params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
@@ -3612,8 +3597,7 @@ class Page extends Model {
             action: 'rpc',
             page  : this.getName(),
             name  : name,
-            // params: Helper.encodeObject(params)
-            params
+            params: params
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
