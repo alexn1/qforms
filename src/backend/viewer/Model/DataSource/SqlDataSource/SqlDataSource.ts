@@ -168,7 +168,6 @@ class SqlDataSource extends DataSource {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
 
-
         const result = {};
         SqlDataSource.addUpdateToResult(result, table, key, newKey);
         SqlDataSource.addUpdateExToResult(result, table, key, row);
