@@ -7,7 +7,6 @@ declare class Editor extends BaseModel {
     saveCustomFile(ext: any, text: any): Promise<any>;
     getCustomFilePath(ext: any): Promise<any>;
     moveDataColItem(colName: any, name: any, offset: any): void;
-    newActionData(params: any): Promise<any>;
     setData(colName: any, newData: any): any;
     createItemEditor(colName: string, itemName: string): any;
     getCustomDirPath(): Promise<any>;

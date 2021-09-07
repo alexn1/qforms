@@ -9,13 +9,13 @@ class ActionEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.pageFileName);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                data = await formEditor.newActionData(params);
+                data = await formEditor.newItemData('Action', 'actions', params);
             } else {
-                data = await pageEditor.newActionData(params);
+                data = await pageEditor.newItemData('Action', 'actions', params);
             }
             await pageEditor.save();
         } else {
-            data = await appEditor.newActionData(params);
+            data = await appEditor.newItemData('Action', 'actions', params);
             await appEditor.save();
         }
         return data;

@@ -81,14 +81,14 @@ class ApplicationController extends VisualController {
         await EditorFrontHostApp.editorApp.openModal(new NewDatabaseController({onCreate: async values => {
             // console.log('values: ', values);
             const database = await this.model.newDatabase({
-                _class: values.class,
+                class : values.class,
                 name  : values.name,
-                params: {
-                    host    : {name: 'host'    , value: values.host    },
-                    database: {name: 'database', value: values.database},
-                    user    : {name: 'user'    , value: values.user    },
-                    password: {name: 'password', value: values.password}
-                }
+                params: [
+                    {class: 'Param', name: 'host'    , value: values.host    },
+                    {class: 'Param', name: 'database', value: values.database},
+                    {class: 'Param', name: 'user'    , value: values.user    },
+                    {class: 'Param', name: 'password', value: values.password}
+                ]
             });
             const databaseController = this.createDatabase(database);
             await EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);

@@ -84,9 +84,8 @@ class Editor extends BaseModel {
     moveDataColItem(colName, name, offset) {
         Helper.moveArrItem(this.getDataCol(colName), this.getColItemData(colName, name), offset);
     }
-    async newActionData(params) {
-        if (!params.name)
-            throw new Error('no name');
+    /*async newActionData(params) {
+        if (!params.name) throw new Error('no name');
         const name = params.name;
         if (this.getColItemData('actions', name)) {
             throw new Error(`action ${name} already exists`);
@@ -94,7 +93,7 @@ class Editor extends BaseModel {
         const data = backend.ActionEditor.createData(params);
         this.addModelData('actions', data);
         return data;
-    }
+    }*/
     /*createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }*/
@@ -135,12 +134,18 @@ class Editor extends BaseModel {
         throw new Error(`${this.constructor.name}.getColName not implemented`);
     }
     static createItemData(data) {
+        // console.log('Editor.createItemData', data);
         try {
-            const params = data.class ? data : Object.assign(Object.assign({ class: BaseModel.getClassName(data) }, BaseModel.attributes(data)), data);
+            const params = data['@attributes'] ? Object.assign(Object.assign({ class: BaseModel.getClassName(data) }, BaseModel.attributes(data)), data) : data;
+            if (!params.class) {
+                const name = data['@attributes'] ? BaseModel.getName(data) : data.name;
+                throw new Error(`${name}: no class in data`);
+            }
             return backend[`${params.class}Editor`].createData(params);
         }
         catch (err) {
-            err.message = `${BaseModel.getName(data)}: ${err.message}`;
+            const name = data['@attributes'] ? BaseModel.getName(data) : data.name;
+            err.message = `${name}: ${err.message}`;
             throw err;
         }
     }
