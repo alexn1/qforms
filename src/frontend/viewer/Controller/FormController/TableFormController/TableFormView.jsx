@@ -98,7 +98,6 @@ class TableFormView extends FormView {
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        const dataSource = ctrl.model.getDefaultDataSource();
         return (
             <div className="TableFormView full flex-rows">
                 {this.renderToolbar()}
@@ -115,7 +114,7 @@ class TableFormView extends FormView {
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
                 />
-                {dataSource.constructor.name === 'SqlDataSource' && this.renderPaging()}
+                {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>
         );
     }

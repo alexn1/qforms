@@ -855,7 +855,6 @@ class TableFormView extends FormView {
   render() {
     console.log('TableFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
-    const dataSource = ctrl.model.getDefaultDataSource();
     return /*#__PURE__*/React.createElement("div", {
       className: "TableFormView full flex-rows"
     }, this.renderToolbar(), /*#__PURE__*/React.createElement(Grid, {
@@ -870,7 +869,7 @@ class TableFormView extends FormView {
       onSelectionChange: ctrl.onSelectionChange,
       renderGridCellView: this.renderGridCellView,
       updated: ctrl.getUpdated()
-    }), dataSource.constructor.name === 'SqlDataSource' && this.renderPaging());
+    }), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 
 }
