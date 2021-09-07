@@ -1078,12 +1078,10 @@ class Grid extends ReactComponent {
       tabIndex: 0,
       onKeyDown: this.onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
-      className: "head",
+      className: 'Grid__head',
       ref: this.head
     }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("td", null))))), /*#__PURE__*/React.createElement("div", {
-      className: "block"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "body",
+      className: 'Grid__body',
       onScroll: this.onBodyScroll
     }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, this.props.rows && this.renderRows()))));
   }

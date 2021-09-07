@@ -37,89 +37,91 @@
     }
   }
 
-  > .head {
-    width     : 100%;
-    position  : absolute;
-    top       : 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    tr {
-      height: @headTrHeight;
-      td {
-        background      : @headTdBackground;
-        text-shadow     : @headTdTextShadow;
-        background-color: @headTdBackgroundColor;
-        color           : @headTdColor;
-        position        : relative;
-        background-clip : padding-box; /* prevent hiding border when position: relative */
-        > div {
-          text-overflow: ellipsis;
-          white-space  : nowrap;
-          margin-left  : 5px;
-          margin-right : 5px;
-        }
-        > span.resize {
-          position        : absolute;
-          top             : 0;
-          right           : -4px;
-          width           : 7px;
-          height          : 100%;
-          background-color: transparent;
-          cursor          : w-resize;
-          z-index         : 2;
-        }
+}
+
+
+.Grid__head {
+  width     : 100%;
+  position  : absolute;
+  top       : 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  tr {
+    height: @headTrHeight;
+    td {
+      background      : @headTdBackground;
+      text-shadow     : @headTdTextShadow;
+      background-color: @headTdBackgroundColor;
+      color           : @headTdColor;
+      position        : relative;
+      background-clip : padding-box; /* prevent hiding border when position: relative */
+      > div {
+        text-overflow: ellipsis;
+        white-space  : nowrap;
+        margin-left  : 5px;
+        margin-right : 5px;
+      }
+      > span.resize {
+        position        : absolute;
+        top             : 0;
+        right           : -4px;
+        width           : 7px;
+        height          : 100%;
+        background-color: transparent;
+        cursor          : w-resize;
+        z-index         : 2;
       }
     }
   }
+}
 
-  > .block {
-    position        : absolute;
-    top             : 0;
-    right           : 0;
-    width           : 16px;
-    height          : @headTrHeight;
-    background-color: @blockBackgroundColor;
-    box-sizing      : border-box;
-  }
+.Grid::after {
+  content: "";
+  position        : absolute;
+  top             : 0;
+  right           : 0;
+  width           : 16px;
+  height          : @headTrHeight;
+  background-color: @blockBackgroundColor;
+  box-sizing      : border-box;
+}
 
-  > .body {
-    width     : 100%;
-    position  : absolute;
-    top       : @bodyTop;
-    bottom    : 0;
-    overflow-y: scroll;
-    overflow-x: auto;
-    tr {
+.Grid__body {
+  width     : 100%;
+  position  : absolute;
+  top       : @bodyTop;
+  bottom    : 0;
+  overflow-y: scroll;
+  overflow-x: auto;
+  tr {
+    &.active {
+      background-color: @bodyTrActiveBackgroundColor !important;
+    }
+    &:nth-child(even) {
+      background-color: @bodyTrEvenBackgroundColor;
+    }
+    > td {
+      height: @bodyTdHeight;
+      text-shadow: @bodyTdTextShadow;
       &.active {
-        background-color: @bodyTrActiveBackgroundColor !important;
-      }
-      &:nth-child(even) {
-        background-color: @bodyTrEvenBackgroundColor;
-      }
-      > td {
-        height: @bodyTdHeight;
-        text-shadow: @bodyTdTextShadow;
-        &.active {
-          text-shadow     : @bodyTdActiveTextShadow;
-          background-color: @bodyTdActiveBackgroundColor;
-          > div {
-            color           : @bodyTdActiveColor           !important;
-            background-color: @bodyTdActiveBackgroundColor !important;
-            > a {
-              color: white;
-            }
-            > select {
-              color: black;
-            }
+        text-shadow     : @bodyTdActiveTextShadow;
+        background-color: @bodyTdActiveBackgroundColor;
+        > div {
+          color           : @bodyTdActiveColor           !important;
+          background-color: @bodyTdActiveBackgroundColor !important;
+          > a {
+            color: white;
+          }
+          > select {
+            color: black;
           }
         }
-        &.edit {
-          color           : inherit;
-          cursor          : text;
-          background-color: @bodyTdEditBackgroundColor;
-        }
+      }
+      &.edit {
+        color           : inherit;
+        cursor          : text;
+        background-color: @bodyTdEditBackgroundColor;
       }
     }
   }
-
 }
