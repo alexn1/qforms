@@ -32,6 +32,7 @@ class Application extends Model {
     scripts: any[];
     domain: string;
     menu: any;
+    nav: any;
 
     constructor(
         data: any,
@@ -60,7 +61,7 @@ class Application extends Model {
         await this.createColItems('dataSources', context);
         this.links   = await this.getLinks(context);
         this.scripts = await this.getScripts(context);
-        this.menu = await this.createMenu(context);
+        await this.createMenu(context);
     }
 
     async getLinks(context: Context): Promise<string[]> {
@@ -131,6 +132,16 @@ class Application extends Model {
         // menu
         response.menu = this.menu;
 
+        // nav
+        response.nav = this.nav;
+
+        // actions
+        response.actions = this.getDataCol('actions').map(data => ({
+            name : BaseModel.getName(data),
+            caption: BaseModel.getAttr(data, 'caption')
+        }));
+
+
         // pages
         response.pages = await this.fillPages(context);
 
@@ -149,17 +160,17 @@ class Application extends Model {
         return response;
     }
 
-    async createMenu(context: Context) {
+    async createMenu(context: Context): Promise<void> {
         console.log('Application.createMenu');
         const menu = {};
+        const nav = {};
 
         // pages
         const user = context.getUser();
         const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
             return user ? this.authorizePage(user, pageLinkName) : true;
         });
-        for (let i = 0; i < pageLinkNames.length; i++) {
-            const pageLinkName = pageLinkNames[i];
+        for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
@@ -167,11 +178,22 @@ class Application extends Model {
                 const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile(pageFilePath);
                 await pageFile.read();
+
+                // menu
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
                 }
                 menu[pageLinkMenu].push({
                     type   :'page',
+                    page   : pageLink.getAttr('name'),
+                    caption: pageFile.getAttr('caption')
+                });
+
+                // nav
+                if (!nav[pageLinkMenu]) {
+                    nav[pageLinkMenu] = [];
+                }
+                nav[pageLinkMenu].push({
                     page   : pageLink.getAttr('name'),
                     caption: pageFile.getAttr('caption')
                 });
@@ -187,7 +209,9 @@ class Application extends Model {
                 caption: BaseModel.getAttr(actionData, 'caption')
             }));
         }
-        return menu;
+
+        this.menu = menu;
+        this.nav  = nav;
     }
 
     createPageLink(name: string): PageLink {

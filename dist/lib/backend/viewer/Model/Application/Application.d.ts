@@ -20,6 +20,7 @@ declare class Application extends Model {
     scripts: any[];
     domain: string;
     menu: any;
+    nav: any;
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
     getLinks(context: Context): Promise<string[]>;
@@ -31,7 +32,7 @@ declare class Application extends Model {
     getVersion(): any;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
-    createMenu(context: Context): Promise<{}>;
+    createMenu(context: Context): Promise<void>;
     createPageLink(name: string): PageLink;
     createPage(pageLinkName: string): Promise<Page>;
     authorizePage(user: any, pageName: string): boolean;

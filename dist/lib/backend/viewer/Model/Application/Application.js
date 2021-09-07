@@ -36,7 +36,7 @@ class Application extends Model_1.default {
         await this.createColItems('dataSources', context);
         this.links = await this.getLinks(context);
         this.scripts = await this.getScripts(context);
-        this.menu = await this.createMenu(context);
+        await this.createMenu(context);
     }
     async getLinks(context) {
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
@@ -90,6 +90,13 @@ class Application extends Model_1.default {
         response.text = this.getText();
         // menu
         response.menu = this.menu;
+        // nav
+        response.nav = this.nav;
+        // actions
+        response.actions = this.getDataCol('actions').map(data => ({
+            name: BaseModel_1.default.getName(data),
+            caption: BaseModel_1.default.getAttr(data, 'caption')
+        }));
         // pages
         response.pages = await this.fillPages(context);
         // user
@@ -109,13 +116,13 @@ class Application extends Model_1.default {
     async createMenu(context) {
         console.log('Application.createMenu');
         const menu = {};
+        const nav = {};
         // pages
         const user = context.getUser();
         const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
             return user ? this.authorizePage(user, pageLinkName) : true;
         });
-        for (let i = 0; i < pageLinkNames.length; i++) {
-            const pageLinkName = pageLinkNames[i];
+        for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
@@ -123,11 +130,20 @@ class Application extends Model_1.default {
                 const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile_1.default(pageFilePath);
                 await pageFile.read();
+                // menu
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
                 }
                 menu[pageLinkMenu].push({
                     type: 'page',
+                    page: pageLink.getAttr('name'),
+                    caption: pageFile.getAttr('caption')
+                });
+                // nav
+                if (!nav[pageLinkMenu]) {
+                    nav[pageLinkMenu] = [];
+                }
+                nav[pageLinkMenu].push({
                     page: pageLink.getAttr('name'),
                     caption: pageFile.getAttr('caption')
                 });
@@ -142,7 +158,8 @@ class Application extends Model_1.default {
                 caption: BaseModel_1.default.getAttr(actionData, 'caption')
             }));
         }
-        return menu;
+        this.menu = menu;
+        this.nav = nav;
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);

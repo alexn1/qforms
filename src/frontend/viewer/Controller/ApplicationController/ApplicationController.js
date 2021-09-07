@@ -194,23 +194,21 @@ class ApplicationController extends Controller {
     }
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
-        // try {
-            if (type === 'page') {
-                await this.openPage({name: name, modal: false});
-            } else if (type === 'action') {
-                const result = await this.onActionClick(name);
-                if (!result) {
-                    throw new Error(`no handler for action '${name}'`);
-                }
-            } else if (type === 'custom' && name === 'logout') {
-                await this.onLogout();
-            } else {
-                throw new Error(`unknown menu type/name: ${type}/${name}`);
+        if (type === 'page') {
+            await this.openPage({name: name, modal: false});
+        } else if (type === 'action') {
+            const result = await this.onActionClick(name);
+            if (!result) {
+                throw new Error(`no handler for action '${name}'`);
             }
-        // } catch (err) {
-        //     console.error(err);
-        //     alert(err.message);
-        // }
+        } else if (type === 'custom' && name === 'logout') {
+            await this.onLogout();
+        } else {
+            throw new Error(`unknown menu type/name: ${type}/${name}`);
+        }
+    }
+    onNavItemClick = async pageName => {
+        await this.openPage({name: pageName, modal: false});
     }
     async onDocumentKeyDown(e) {
         // console.log('ApplicationController.onDocumentKeyDown', e);
