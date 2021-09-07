@@ -81,6 +81,7 @@ class DatabaseEditor extends Editor {
             action    : '_new',
             params    : {
                 database: this.getName(),
+                class   : 'Param',
                 name    : name
             }
         });
@@ -94,6 +95,7 @@ class DatabaseEditor extends Editor {
             action    : '_new',
             params    : {
                 database: this.getName(),
+                class   : 'Table',
                 name    : params.name,
                 columns : params.columns
             }

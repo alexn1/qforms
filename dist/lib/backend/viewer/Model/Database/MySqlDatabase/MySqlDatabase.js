@@ -40,25 +40,36 @@ class MySqlDatabase extends Database_1.default {
     /*getDefaultPort(): number {
         return 3306;
     }*/
-    getConnection(context) {
+    static async Pool_getConnection(pool) {
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, cnn) => {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(cnn);
+                }
+            });
+        });
+    }
+    /*
+    getConnection(context): Promise<any> {
         //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
             if (context.connections[this.getName()] === undefined) {
                 this.getPool().getConnection((err, cnn) => {
                     if (err) {
                         reject(err);
-                    }
-                    else {
+                    } else {
                         context.connections[this.getName()] = cnn;
                         resolve(context.connections[this.getName()]);
                     }
                 });
-            }
-            else {
+            } else {
                 resolve(context.connections[this.getName()]);
             }
         });
-    }
+    }*/
     async queryRows(context, query, params) {
         console.log('MySqlDatabase.queryRows', query, params);
         Database_1.default.checkParams(query, params);
@@ -121,8 +132,9 @@ class MySqlDatabase extends Database_1.default {
         }
         return rows;
     }
-    begin(cnn) {
+    begin(context) {
         console.log('MySqlDatabase.begin');
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.beginTransaction(err => {
                 if (err) {
@@ -134,8 +146,9 @@ class MySqlDatabase extends Database_1.default {
             });
         });
     }
-    commit(cnn) {
+    commit(context) {
         console.log('MySqlDatabase.commit');
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.commit(err => {
                 if (err) {
@@ -147,11 +160,11 @@ class MySqlDatabase extends Database_1.default {
             });
         });
     }
-    rollback(cnn, err) {
-        console.log('MySqlDatabase.rollback:', err.message);
+    rollback(context, err) {
+        console.log('MySqlDatabase.rollback:', this.getName(), err.message);
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
-                // reject(err);
                 resolve();
             });
         });
@@ -285,6 +298,23 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             buffers[name] = buffer;
         }
         */
+    }
+    async connect(context) {
+        console.log('MySqlDatabase.connect', this.getName());
+        if (!context)
+            throw new Error('no context');
+        const name = this.getName();
+        if (context.connections[name]) {
+            throw new Error(`already connected: ${name}`);
+        }
+        context.connections[name] = await MySqlDatabase.Pool_getConnection(this.getPool());
+    }
+    release(context) {
+        console.log('MySqlDatabase.release', this.getName());
+        if (!context)
+            throw new Error('no context');
+        this.getConnection(context).release();
+        context.connections[this.getName()] = null;
     }
 }
 module.exports = MySqlDatabase;

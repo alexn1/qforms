@@ -24,7 +24,14 @@ class Database extends Model_1.default {
         throw new Error('Database.connect not implemented');
     }
     getConnection(context) {
-        throw new Error('Database.getConnection not implemented');
+        // console.log('Database.getConnection');
+        if (!context)
+            throw new Error('no context');
+        const name = this.getName();
+        if (!context.connections[name]) {
+            throw new Error(`not connected: ${name}`);
+        }
+        return context.connections[name];
     }
     release(context) {
         throw new Error('Database.getConnection not release');

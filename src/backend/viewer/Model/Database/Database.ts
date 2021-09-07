@@ -30,7 +30,13 @@ class Database extends Model {
     }
 
     getConnection(context): any {
-        throw new Error('Database.getConnection not implemented');
+        // console.log('Database.getConnection');
+        if (!context) throw new Error('no context');
+        const name = this.getName();
+        if (!context.connections[name]) {
+            throw new Error(`not connected: ${name}`);
+        }
+        return context.connections[name];
     }
 
     release(context: Context): void {

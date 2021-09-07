@@ -7,14 +7,13 @@ declare class PostgreSqlDatabase extends Database {
     getPool(): any;
     static createPool(config: any): any;
     connect(context: Context): Promise<void>;
-    getConnection(context: Context): any;
     release(context: Context): void;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
     static queryResult(cnn: any, query: string, params?: any): Promise<any>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;
     begin(context: Context): Promise<void>;
-    commit(context: any): Promise<void>;
-    rollback(context: any, err: any): Promise<void>;
+    commit(context: Context): Promise<void>;
+    rollback(context: Context, err: any): Promise<void>;
     static formatQuery(query: string, params: any): {
         sql: string;
         values: any[];

@@ -130,15 +130,17 @@ class DatabaseController extends DocumentController {
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
         const table = await this.model.newTable({
+            class  : 'Table',
             name   : tableName,
             columns: tableInfo.map(column => ({
+                class   : 'Column',
                 name    : column.name,
                 caption : column.name,
                 type    : column.type,
                 dbType  : column.dbType,
-                key     : column.key,
-                auto    : column.auto,
-                nullable: column.nullable,
+                key     : column.key.toString(),
+                auto    : column.auto.toString(),
+                nullable: column.nullable.toString(),
             }))
         });
         const tableController = this.createTable2(table);

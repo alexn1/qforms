@@ -147,6 +147,7 @@ class DataSourceEditor extends Editor {
             action    : '_new',
             params    : {
                 dataSource: this.getName(),
+                class     : 'KeyColumn',
                 name      : name
             }
         };

@@ -48,7 +48,7 @@ class PostgreSqlDatabase extends Database {
         context.connections[name] = await this.getPool().connect();
     }
 
-    getConnection(context: Context): any {
+    /*getConnection(context: Context): any {
         // console.log('PostgreSqlDatabase.getConnection');
         if (!context) throw new Error('no context');
         const name = this.getName();
@@ -56,7 +56,7 @@ class PostgreSqlDatabase extends Database {
             throw new Error(`not connected: ${name}`);
         }
         return context.connections[name];
-    }
+    }*/
 
     release(context: Context): void {
         console.log('PostgreSqlDatabase.release', this.getName());
@@ -101,13 +101,13 @@ class PostgreSqlDatabase extends Database {
         await this.getConnection(context).query('begin');
     }
 
-    async commit(context): Promise<void> {
+    async commit(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.commit', this.getName());
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('commit');
     }
 
-    async rollback(context, err): Promise<void> {
+    async rollback(context: Context, err): Promise<void> {
         console.log('PostgreSqlDatabase.rollback: ', this.getName(), err.message);
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('rollback');

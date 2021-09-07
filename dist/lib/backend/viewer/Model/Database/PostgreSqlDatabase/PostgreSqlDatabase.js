@@ -44,16 +44,15 @@ class PostgreSqlDatabase extends Database_1.default {
         }
         context.connections[name] = await this.getPool().connect();
     }
-    getConnection(context) {
+    /*getConnection(context: Context): any {
         // console.log('PostgreSqlDatabase.getConnection');
-        if (!context)
-            throw new Error('no context');
+        if (!context) throw new Error('no context');
         const name = this.getName();
         if (!context.connections[name]) {
             throw new Error(`not connected: ${name}`);
         }
         return context.connections[name];
-    }
+    }*/
     release(context) {
         console.log('PostgreSqlDatabase.release', this.getName());
         if (!context)

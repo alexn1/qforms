@@ -1,3 +1,5 @@
+import Context from "../../../../Context";
+
 const mysql = require('mysql');
 import Database from '../Database';
 
@@ -47,6 +49,19 @@ class MySqlDatabase extends Database {
         return 3306;
     }*/
 
+    static async Pool_getConnection(pool): Promise<any> {
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, cnn) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(cnn);
+                }
+            });
+        });
+    }
+
+    /*
     getConnection(context): Promise<any> {
         //console.log('MySqlDatabase.getConnection');
         return new Promise((resolve, reject) => {
@@ -63,7 +78,8 @@ class MySqlDatabase extends Database {
                 resolve(context.connections[this.getName()]);
             }
         });
-    }
+    }*/
+
 
     async queryRows(context, query, params): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
@@ -127,8 +143,9 @@ class MySqlDatabase extends Database {
         return rows;
     }
 
-    begin(cnn): Promise<void> {
+    begin(context: Context): Promise<void> {
         console.log('MySqlDatabase.begin');
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.beginTransaction(err => {
                 if (err) {
@@ -140,8 +157,9 @@ class MySqlDatabase extends Database {
         });
     }
 
-    commit(cnn): Promise<void> {
+    commit(context: Context): Promise<void> {
         console.log('MySqlDatabase.commit');
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.commit(err => {
                 if (err) {
@@ -153,11 +171,11 @@ class MySqlDatabase extends Database {
         });
     }
 
-    rollback(cnn, err): Promise<void> {
-        console.log('MySqlDatabase.rollback:', err.message);
+    rollback(context: Context, err): Promise<void> {
+        console.log('MySqlDatabase.rollback:', this.getName(), err.message);
+        const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
-                // reject(err);
                 resolve();
             });
         });
@@ -303,6 +321,22 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             buffers[name] = buffer;
         }
         */
+    }
+    async connect(context: Context): Promise<void> {
+        console.log('MySqlDatabase.connect', this.getName());
+        if (!context) throw new Error('no context');
+        const name = this.getName();
+        if (context.connections[name]) {
+            throw new Error(`already connected: ${name}`);
+        }
+        context.connections[name] = await MySqlDatabase.Pool_getConnection(this.getPool());
+    }
+
+    release(context: Context): void {
+        console.log('MySqlDatabase.release', this.getName());
+        if (!context) throw new Error('no context');
+        this.getConnection(context).release();
+        context.connections[this.getName()] = null;
     }
 }
 
