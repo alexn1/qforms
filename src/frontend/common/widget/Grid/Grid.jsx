@@ -7,7 +7,7 @@ class Grid extends ReactComponent {
             columnWidth: {},
             resized    : Date.now(),
         };
-        this.columns = {};
+        this.columns = {};                      // each column is the array of each cell view
         this.head = React.createRef();
     }
     getActiveColumn() {
