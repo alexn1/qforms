@@ -266,9 +266,14 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     getColumnTypeByDataType(dataType): string {
         switch (dataType) {
             case 'int(10) unsigned':
+            case 'int unsigned':
                 return 'number';
             case 'varchar(255)':
+            case 'varchar(15)':
+            case 'text':
                 return 'string';
+            case 'datetime':
+                return 'date';
             default:
                 return null;
         }
