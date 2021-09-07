@@ -1,5 +1,6 @@
 @import 'colors';
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
   font-family        : @gridFontFamily;
   font-size          : @gridFontSize;
@@ -39,7 +40,19 @@
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid::after {
+  content: "";
+  position        : absolute;
+  top             : 0;
+  right           : 0;
+  width           : 16px;
+  height          : @headTrHeight;
+  background-color: @blockBackgroundColor;
+  box-sizing      : border-box;
+}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__head {
   width     : 100%;
   position  : absolute;
@@ -75,17 +88,7 @@
   }
 }
 
-.Grid::after {
-  content: "";
-  position        : absolute;
-  top             : 0;
-  right           : 0;
-  width           : 16px;
-  height          : @headTrHeight;
-  background-color: @blockBackgroundColor;
-  box-sizing      : border-box;
-}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__body {
   width     : 100%;
   position  : absolute;
