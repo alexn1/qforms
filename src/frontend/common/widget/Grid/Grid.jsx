@@ -255,7 +255,7 @@ class Grid extends ReactComponent {
                  tabIndex={0}
                  onKeyDown={this.onKeyDown}
             >
-                <div className={'Grid__head'} ref={this.head}>
+                <div className={`${this.constructor.name}__head`} ref={this.head}>
                     <table>
                         <tbody>
                             <tr>
@@ -265,7 +265,7 @@ class Grid extends ReactComponent {
                         </tbody>
                     </table>
                 </div>
-                <div className={'Grid__body'} onScroll={this.onBodyScroll}>
+                <div className={`${this.constructor.name}__body`} onScroll={this.onBodyScroll}>
                     <table>
                         <tbody>{this.props.rows && this.renderRows()}</tbody>
                     </table>

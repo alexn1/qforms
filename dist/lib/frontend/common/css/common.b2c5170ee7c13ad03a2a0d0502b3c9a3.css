@@ -257,7 +257,6 @@ table.DatePicker td.selected {
   background-color: lightgreen;
 }
 
-
 .GridCell {
   overflow: hidden;
   text-overflow: ellipsis;
