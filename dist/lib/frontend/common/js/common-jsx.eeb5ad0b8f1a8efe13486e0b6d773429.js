@@ -803,31 +803,38 @@ class Grid extends ReactComponent {
       // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
       switch (e.keyCode) {
         case 37:
+          e.preventDefault();
           await this.onLeft();
           break;
 
         case 38:
+          e.preventDefault();
           await this.onUp();
           break;
 
         case 39:
+          e.preventDefault();
           await this.onRight();
           break;
 
         case 40:
+          e.preventDefault();
           await this.onDown();
           break;
 
         case 13:
+          e.preventDefault();
           await this.onEnter();
           break;
 
         case 46:
+          e.preventDefault();
           await this.onDelete();
           break;
 
         case 67:
           if (e.ctrlKey) {
+            e.preventDefault();
             await this.onCopy();
           }
 
