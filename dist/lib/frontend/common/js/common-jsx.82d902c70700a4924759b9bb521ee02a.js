@@ -768,8 +768,13 @@ class Grid extends ReactComponent {
     _defineProperty(this, "onCellMouseDown", async e => {
       // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+      const row = this.props.rows[i];
       const key = e.currentTarget.dataset.row;
       await this.selectCell(key, j);
+
+      if (this.props.onClick) {
+        this.props.onClick(row, key);
+      }
     });
 
     _defineProperty(this, "onCellDoubleClick", async e => {

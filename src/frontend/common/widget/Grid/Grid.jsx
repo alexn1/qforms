@@ -34,8 +34,12 @@ class Grid extends ReactComponent {
     onCellMouseDown = async e => {
         // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+        const row = this.props.rows[i];
         const key = e.currentTarget.dataset.row;
         await this.selectCell(key, j);
+        if (this.props.onClick) {
+            this.props.onClick(row, key);
+        }
     }
     onCellDoubleClick = async e => {
         // console.log('Grid.onCellDoubleClick');
