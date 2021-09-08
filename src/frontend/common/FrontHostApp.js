@@ -7,6 +7,7 @@ class FrontHostApp {
         // window
         window.addEventListener('error'             , this.onWindowError.bind(this));
         window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this))
+        window.addEventListener('popstate'          , this.onWindowPopState.bind(this));
         // window.onunhandledrejection = this.onunhandledrejection.bind(this);
         // window.onerror              = this.errorHandler.bind(this);
         // window.onbeforeunload       = this.exit.bind(this);
@@ -87,7 +88,10 @@ class FrontHostApp {
         return null;
     }
     async onDocumentKeyDown(e) {
-        // console.log('FrontHostApp.onDocumentKeyDown', e);
+        console.log('FrontHostApp.onDocumentKeyDown', e);
+    }
+    async onWindowPopState(e) {
+        console.log('FrontHostApp.onWindowPopState', e.state);
     }
 }
 

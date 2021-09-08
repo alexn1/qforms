@@ -26,6 +26,10 @@ class ViewerFrontHostApp extends FrontHostApp {
         // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
         await this.applicationController.onDocumentKeyDown(e);
     }
+
+    async onWindowPopState(e) {
+        console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+    }
 }
 
 window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
