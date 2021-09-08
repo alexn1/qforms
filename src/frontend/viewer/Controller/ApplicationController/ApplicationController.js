@@ -231,6 +231,10 @@ class ApplicationController extends Controller {
     }
     async onWindowPopState(e) {
         console.log('ApplicationController.onWindowPopState', e.state);
+        await this.openPage({
+            name : e.state.pageName,
+            modal: false
+        });
     }
 }
 
