@@ -3,13 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', e => {
+            console.log('DOMContentLoaded', e);
+
+
+            const headC0 = document.querySelector('.head .c0');
+            const bodyC0 = document.querySelector('.body .c0');
+            const max0 = Math.max(headC0.getBoundingClientRect().width, bodyC0.getBoundingClientRect().width);
+            headC0.style.width = `${max0}px`;
+            bodyC0.style.width = `${max0}px`;
+
+            /*
+            const headC1 = document.querySelector('.head .c1');
+            const bodyC1 = document.querySelector('.body .c1');
+            const max1 = Math.max(headC1.getBoundingClientRect().width, bodyC1.getBoundingClientRect().width);
+            headC1.style.width = `${max1}px`;
+            bodyC1.style.width = `${max1}px`;*/
+
+        })
+    </script>
     <style>
 
-        .container {
-            /*overflow: auto;*/
-            /*height: 100px;*/
-            display: inline-block;
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        .grid {
+            display: inline-flex;
+            flex-direction: column;
             background-color: #b9def0;
+            height: 50%;
+            /*width: 100%;*/
         }
 
         .table {
@@ -21,41 +57,38 @@
             text-decoration: none;
             color: inherit;
         }
-        .row:hover {
+        .body .row:hover {
             background-color: #398bce;
         }
         .cell {
             display: table-cell;
             padding: 10px;
-        }
-        .thead {
-            display: table-header-group;
-        }
-        .tbody {
-            display: table-row-group;
+            box-sizing: border-box;
         }
         .body {
-            height: 100px;
-            overflow: auto;
+            overflow-y: scroll;
+            overflow-x: auto;
+            flex-shrink: 1;
+            flex-grow: 1;
+            flex-basis: auto;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <div class="table">
-                <a class="row" href="abc">
-                    <div class="cell">title 1</div>
-                    <div class="cell">title 2</div>
-                </a>
+    <div class="grid">
+        <div class="head table">
+            <div class="row">
+                <div class="cell c0">title 1 title 1 title 1 title 1 title 1</div>
+                <div class="cell c1">title 2</div>
+                <div>&nbsp;</div>
             </div>
         </div>
         <div class="body">
-            <div class="table">
+            <div class="body table">
                 <a class="row" href="xyz">
-                    <div class="cell">abc xyz asdf asdf </div>
-                    <div class="cell">xyz</div>
+                    <div class="cell c0">abc xyz asdf asdf </div>
+                    <div class="cell c1">xyz asdf asdfa f asdfasdf </div>
                 </a>
                 <a class="row" href="xyz">
                     <div class="cell">abc xyz asdf asdf </div>
@@ -75,8 +108,6 @@
                 </a>
             </div>
         </div>
-
     </div>
-
 </body>
 </html>
