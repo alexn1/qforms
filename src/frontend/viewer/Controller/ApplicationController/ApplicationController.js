@@ -199,6 +199,7 @@ class ApplicationController extends Controller {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
             await this.openPage({name: name, modal: false});
+            history.pushState({pageName: name}, '', PageController.createLink({page: name}));
         } else if (type === 'action') {
             const result = await this.onActionClick(name);
             if (!result) {
