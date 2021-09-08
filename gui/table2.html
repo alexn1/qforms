@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .container {
+            /*overflow: auto;*/
+            /*height: 100px;*/
+            display: inline-block;
+            background-color: #b9def0;
+        }
+
+        .table {
+            display: table;
+            /*border-spacing: 2px;*/
+        }
+        .row {
+            display: table-row;
+            text-decoration: none;
+            color: inherit;
+        }
+        .row:hover {
+            background-color: #398bce;
+        }
+        .cell {
+            display: table-cell;
+            padding: 10px;
+        }
+        .thead {
+            display: table-header-group;
+        }
+        .tbody {
+            display: table-row-group;
+        }
+        .body {
+            height: 100px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="table">
+                <a class="row" href="abc">
+                    <div class="cell">title 1</div>
+                    <div class="cell">title 2</div>
+                </a>
+            </div>
+        </div>
+        <div class="body">
+            <div class="table">
+                <a class="row" href="xyz">
+                    <div class="cell">abc xyz asdf asdf </div>
+                    <div class="cell">xyz</div>
+                </a>
+                <a class="row" href="xyz">
+                    <div class="cell">abc xyz asdf asdf </div>
+                    <div class="cell">xyz</div>
+                </a>
+                <a class="row" href="xyz">
+                    <div class="cell">abc xyz asdf asdf </div>
+                    <div class="cell">xyz</div>
+                </a>
+                <a class="row" href="xyz">
+                    <div class="cell">abc xyz asdf asdf </div>
+                    <div class="cell">xyz</div>
+                </a>
+                <a class="row" href="xyz">
+                    <div class="cell">abc xyz asdf asdf </div>
+                    <div class="cell">xyz</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
