@@ -28,7 +28,8 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
 
     async onWindowPopState(e) {
-        console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        await this.applicationController.onWindowPopState(e);
     }
 }
 
@@ -301,6 +302,9 @@ class ApplicationController extends Controller {
             return this.activePage.getModel().getName();
         }
         return null;
+    }
+    async onWindowPopState(e) {
+        console.log('ApplicationController.onWindowPopState', e.state);
     }
 }
 

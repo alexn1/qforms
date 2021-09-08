@@ -28,7 +28,8 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
 
     async onWindowPopState(e) {
-        console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        await this.applicationController.onWindowPopState(e);
     }
 }
 

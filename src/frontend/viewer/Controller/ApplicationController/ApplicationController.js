@@ -229,6 +229,9 @@ class ApplicationController extends Controller {
         }
         return null;
     }
+    async onWindowPopState(e) {
+        console.log('ApplicationController.onWindowPopState', e.state);
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
