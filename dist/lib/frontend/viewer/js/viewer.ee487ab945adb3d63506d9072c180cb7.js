@@ -128,6 +128,7 @@ class ApplicationController extends Controller {
     }
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
+        if (!options.name) throw new Error('no name');
         const name       = options.name;
         const params     = options.params || {};
         const key        = options.key    || null;
@@ -280,9 +281,7 @@ class ApplicationController extends Controller {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
     }
-    onNavItemClick = async pageName => {
-        await this.openPage({name: pageName, modal: false});
-    }
+
     async onDocumentKeyDown(e) {
         // console.log('ApplicationController.onDocumentKeyDown', e);
         const page = this.getFocusPage();
