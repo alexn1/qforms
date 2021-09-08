@@ -753,7 +753,8 @@ class TableFormView extends FormView {
 
     _defineProperty(this, "renderGridCellView", (row, column, onCreate, onUnmount) => {
       // console.log('TableFormView.renderGridCellView');
-      const ctrl = this.props.ctrl.fields[column.name]; // console.log(column.name, ctrl.constructor.name);
+      const ctrl = this.props.ctrl.fields[column.name];
+      if (!ctrl) throw new Error(`no field: ${column.name}`); // console.log(column.name, ctrl.constructor.name);
 
       return React.createElement(ctrl.getViewClass(), {
         row,
