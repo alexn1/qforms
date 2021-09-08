@@ -4,7 +4,7 @@ class PageView2 extends PageView {
         return ctrl.forms.map(form => {
             return {
                 name   : form.model.getName(),
-                title  : form.model.getCaption(),
+                title  : form.getTitle(),
                 content: PageView.renderForm(form)
             };
         });

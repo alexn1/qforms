@@ -3,7 +3,7 @@ class MdiApplicationView extends ApplicationView {
         return this.props.ctrl.pages.map(pageCtrl => {
             return {
                 name   : pageCtrl.model.getId(),
-                title  : pageCtrl.model.getCaption(),
+                title  : pageCtrl.getTitle(),
                 content: React.createElement(pageCtrl.getViewClass(), {
                     ctrl    : pageCtrl,
                     onCreate: pageCtrl.onViewCreate

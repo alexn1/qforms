@@ -3,7 +3,6 @@ import DataSource from '../DataSource/DataSource';
 import Action from '../Action/Action';
 import Application from '../Application/Application';
 import Form from '../Form/Form';
-import Context from '../../../Context';
 declare class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];
@@ -15,7 +14,6 @@ declare class Page extends Model {
     fill(context: any): Promise<any>;
     rpc(name: any, context: any): Promise<any>;
     getApp(): Application;
-    getTitle(context: Context, response: any): string;
     getForm(name: any): Form;
     getDataSource(name: any): DataSource;
 }

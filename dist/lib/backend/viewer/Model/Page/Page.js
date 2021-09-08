@@ -46,9 +46,9 @@ class Page extends Model_1.default {
     getApp() {
         return this.parent;
     }
-    getTitle(context, response) {
+    /*getTitle(context: Context, response): string {
         return this.getAttr('caption');
-    }
+    }*/
     getForm(name) {
         return this.forms.find(form => form.getName() === name);
     }

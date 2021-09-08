@@ -51,7 +51,6 @@ declare class Application extends Model {
     getEnvVarValue(name: string): any;
     getApp(): Application;
     getDatabase(name: string): Database;
-    getTitle(context: Context, response: any): string;
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
     static loadAppInfo(appFilePath: any): Promise<AppInfo>;

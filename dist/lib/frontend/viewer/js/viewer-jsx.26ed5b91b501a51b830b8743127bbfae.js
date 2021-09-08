@@ -51,7 +51,7 @@ class MdiApplicationView extends ApplicationView {
     return this.props.ctrl.pages.map(pageCtrl => {
       return {
         name: pageCtrl.model.getId(),
-        title: pageCtrl.model.getCaption(),
+        title: pageCtrl.getTitle(),
         content: React.createElement(pageCtrl.getViewClass(), {
           ctrl: pageCtrl,
           onCreate: pageCtrl.onViewCreate
@@ -899,7 +899,7 @@ class PageView extends View {
     return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {
       return {
         name: form.model.getName(),
-        title: form.model.getCaption(),
+        title: form.getTitle(),
         content: PageView.renderForm(form)
       };
     });
@@ -925,7 +925,7 @@ class PageView extends View {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
     const key = model.getKey();
-    let caption = ctrl.getCaption();
+    let caption = ctrl.getTitle();
 
     if (ApplicationController.isInDebugMode()) {
       caption += ` (${model.getId()})`;
@@ -1008,7 +1008,7 @@ class PageView2 extends PageView {
     return ctrl.forms.map(form => {
       return {
         name: form.model.getName(),
-        title: form.model.getCaption(),
+        title: form.getTitle(),
         content: PageView.renderForm(form)
       };
     });

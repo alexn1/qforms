@@ -4,7 +4,7 @@ class PageView extends View {
         return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {
             return {
                 name   : form.model.getName(),
-                title  : form.model.getCaption(),
+                title  : form.getTitle(),
                 content: PageView.renderForm(form)
             };
         });
@@ -27,7 +27,7 @@ class PageView extends View {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
         const key = model.getKey();
-        let caption = ctrl.getCaption();
+        let caption = ctrl.getTitle();
         if (ApplicationController.isInDebugMode()) {
             caption += ` (${model.getId()})`;
         }

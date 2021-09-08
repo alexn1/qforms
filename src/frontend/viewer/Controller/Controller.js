@@ -31,6 +31,9 @@ class Controller extends EventEmitter {
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
+    getTitle() {
+        return this.getModel().getCaption();
+    }
 }
 
 window.QForms.Controller = Controller;

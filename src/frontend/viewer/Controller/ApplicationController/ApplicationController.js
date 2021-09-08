@@ -32,7 +32,8 @@ class ApplicationController extends Controller {
         // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
         this.activePage = this.createPage();
-        this.homePageName = this.activePage.model.getName();
+        document.title = this.activePage.getTitle();
+        this.homePageName = this.activePage.getModel().getName();
     }
     deinit() {
         // this.model.off('logout', this.onLogout);
@@ -133,7 +134,8 @@ class ApplicationController extends Controller {
         if (this.activePage) {
             this.closePage(this.activePage);
         }
-        this.activePage = pc
+        this.activePage = pc;
+        document.title = pc.getTitle();
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage && this.activePage.model.getName() === pageName && this.activePage.model.getKey() === key) {
@@ -150,6 +152,7 @@ class ApplicationController extends Controller {
             this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
         } else if (this.activePage === pageController) {
             this.activePage = null;
+            document.title = '';
         } else  {
             throw new Error('page not found');
         }

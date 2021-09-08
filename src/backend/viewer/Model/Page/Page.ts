@@ -59,9 +59,9 @@ class Page extends Model {
         return this.parent;
     }
 
-    getTitle(context: Context, response): string {
+    /*getTitle(context: Context, response): string {
         return this.getAttr('caption');
-    }
+    }*/
     getForm(name): Form {
         return this.forms.find(form => form.getName() === name);
     }
