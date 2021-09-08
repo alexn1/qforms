@@ -293,6 +293,12 @@ class ApplicationController extends Controller {
         }
         return this.activePage;
     }
+    getActivePageName() {
+        if (this.activePage) {
+            return this.activePage.getModel().getName();
+        }
+        return null;
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
