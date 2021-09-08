@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html class="<%=application.getViewClassName()%>" lang="<%=application.getAttr('lang')%>">
 <head>
-    <!-- <%=version%> -->
+    <!-- qforms version <%=version%> -->
+    <!-- app version <%=application.getVersion()%>  -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=application.getTitle(context, response)%> v<%=application.getVersion()%></title>
+    <title><%=application.getTitle(context, response)%> </title>
     <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {

@@ -273,11 +273,17 @@ class Application extends Model_1.default {
     }
     getTitle(context, response) {
         // console.log('Application.getTitle', context.query.page);
-        if (context.query.page) {
+        /*if (context.query.page) {
             const page = this.pages[context.query.page];
-            if (!page)
-                throw new Error(`no page: ${context.query.page}`);
+            if (!page) throw new Error(`no page: ${context.query.page}`);
             const pageResponse = response.pages.length === 1 ? response.pages[0] : null;
+            return page.getTitle(context, pageResponse);
+        }
+        */
+        const pageResponse = response.pages[0];
+        if (pageResponse) {
+            const pageName = pageResponse.name;
+            const page = this.pages[pageName];
             return page.getTitle(context, pageResponse);
         }
         return `${context.getAppDirName()}/${context.getAppFileName()}[${this.getEnv()}]`;
