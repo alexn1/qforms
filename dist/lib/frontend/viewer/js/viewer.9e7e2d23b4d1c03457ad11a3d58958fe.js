@@ -80,6 +80,7 @@ class ApplicationController extends Controller {
         this.modalPages = [];
         this.activePage = null;     // active non modal page
         this.statusbar  = null;
+        this.homePageName = null;
     }
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
@@ -105,6 +106,7 @@ class ApplicationController extends Controller {
         // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
         this.activePage = this.createPage();
+        this.homePageName = this.activePage.model.getName();
     }
     deinit() {
         // this.model.off('logout', this.onLogout);
@@ -306,7 +308,7 @@ class ApplicationController extends Controller {
     async onWindowPopState(e) {
         console.log('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
-            name : e.state.pageName,
+            name : e.state ? e.state.pageName : this.homePageName,
             modal: false
         });
     }
