@@ -305,7 +305,10 @@ class ApplicationController extends Controller {
     }
     async onWindowPopState(e) {
         console.log('ApplicationController.onWindowPopState', e.state);
-        await this.openPage({name: e.state.pageName, modal: false})
+        await this.openPage({
+            name : e.state.pageName,
+            modal: false
+        });
     }
 }
 
@@ -1944,17 +1947,20 @@ class PageController extends Controller {
     getCaption() {
         return this.model.getCaption();
     }
-    static createLink(params = {}) {
+    static createLink(params = null) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
-        return [
-            window.location.pathname,
-            [
-                // ...(query ? query.split('&') : []),
-                ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
-                ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
-            ].join('&')
-        ].join('?');
+        if (params) {
+            return [
+                window.location.pathname,
+                [
+                    // ...(query ? query.split('&') : []),
+                    ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
+                    ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
+                ].join('&')
+            ].join('?');
+        }
+        return window.location.pathname;
     }
     getForm(name) {
         return this.forms.find(form => form.model.getName() === name);
