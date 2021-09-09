@@ -32,20 +32,20 @@
         body {
             height: 100%;
             margin: 0;
+
+
         }
 
-        * {
-            box-sizing: border-box;
-        }
 
+        body .grid {
+            height: 50%;
+        }
 
 
         .grid {
             display: inline-flex;
             flex-direction: column;
             background-color: #b9def0;
-            height: 50%;
-            /*width: 100%;*/
         }
 
         .table {
@@ -77,11 +77,13 @@
 <body>
 
     <div class="grid">
-        <div class="head table">
-            <div class="row">
-                <div class="cell c0">title 1 title 1 title 1 title 1 title 1</div>
-                <div class="cell c1">title 2</div>
-                <div>&nbsp;</div>
+        <div class="head">
+            <div class="table">
+                <div class="row">
+                    <div class="cell c0">title 1 title 1 title 1 title 1 title 1</div>
+                    <div class="cell c1">title 2</div>
+                    <div>&nbsp;</div>
+                </div>
             </div>
         </div>
         <div class="body">

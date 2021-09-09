@@ -1104,6 +1104,54 @@ class Grid extends ReactComponent {
 }
 
 window.QForms.Grid = Grid;
+class Grid2 extends ReactComponent {
+  renderColumns() {
+    return this.props.columns.map(column => {
+      return /*#__PURE__*/React.createElement("div", {
+        key: column.name,
+        className: `${this.constructor.name}__cell`
+      }, column.name);
+    });
+  }
+
+  renderRows() {
+    return this.props.rows.map(row => {
+      const i = this.props.rows.indexOf(row);
+      return /*#__PURE__*/React.createElement("a", {
+        key: i.toString(),
+        className: `${this.constructor.name}__row Grid2__row__hover`,
+        href: "xyz"
+      }, this.props.columns && this.props.columns.map(column => {
+        return /*#__PURE__*/React.createElement("div", {
+          key: column.name,
+          className: `${this.constructor.name}__cell`
+        }, row[column.name]);
+      }));
+    });
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getClassName()
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__head`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__table`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__row`
+    }, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'table-cell',
+        boxSizing: 'border-box'
+      }
+    }, "\xA0")))), /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__body`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__table`
+    }, this.props.rows && this.renderRows())));
+  }
+
+}
 class GridCell extends ReactComponent {
   constructor(props) {
     super(props);
