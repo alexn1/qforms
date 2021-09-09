@@ -282,19 +282,15 @@ class Grid extends ReactComponent {
             >
                 <div className={`${this.constructor.name}__head`} ref={this.head}>
                     <div className={`${this.constructor.name}__table`}>
-                        <div className={'Grid__tbody'}>
-                            <div className={'Grid__tr'}>
-                                {this.props.columns && this.renderColumns()}
-                                <div className={'Grid__td'}/>
-                            </div>
+                        <div className={'Grid__tr'}>
+                            {this.props.columns && this.renderColumns()}
+                            <div className={'Grid__td'}/>
                         </div>
                     </div>
                 </div>
                 <div className={`${this.constructor.name}__body`} onScroll={this.onBodyScroll}>
                     <div className={`${this.constructor.name}__table`}>
-                        <div className={'Grid__tbody'}>
-                            {this.props.rows && this.renderRows()}
-                        </div>
+                        {this.props.rows && this.renderRows()}
                     </div>
                 </div>
             </div>
