@@ -54,7 +54,7 @@ class PageView extends View {
         const width = 150;
         return (
             <div className={'PageView__toolbar'}>
-                {model.hasRowFormWithDefaultSqlDataSource() &&
+                {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
                     <Button
                         key="saveAndClose"
                         width={width}

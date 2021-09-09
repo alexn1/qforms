@@ -951,7 +951,7 @@ class PageView extends View {
     const width = 150;
     return /*#__PURE__*/React.createElement("div", {
       className: 'PageView__toolbar'
-    }, model.hasRowFormWithDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+    }, model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
       key: "saveAndClose",
       width: width,
       title: model.getApp().getText().page.saveAndClose,
