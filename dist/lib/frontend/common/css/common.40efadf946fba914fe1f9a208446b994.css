@@ -268,6 +268,13 @@ table.DatePicker td.selected {
 .Grid__td {
   display: table-cell;
 }
+a.Grid__tr {
+  text-decoration: none;
+  color: inherit;
+}
+a[href].Grid__tr:hover {
+  background-color: lightgreen !important;
+}
 
 .GridCell {
   overflow: hidden;

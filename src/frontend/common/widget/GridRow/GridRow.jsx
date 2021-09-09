@@ -22,7 +22,7 @@ class GridRow extends ReactComponent {
         const row = this.props.row;
         const i = this.props.i;
         const key = this.props.rowKey;
-        return <div
+        return <a
             className={`${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`}
             data-key={key}
         >
@@ -44,7 +44,7 @@ class GridRow extends ReactComponent {
                 onMouseDown={grid.onRowMouseDown}
                 onDoubleClick={grid.onRowDoubleClick}
             />
-        </div>;
+        </a>;
     }
 }
 

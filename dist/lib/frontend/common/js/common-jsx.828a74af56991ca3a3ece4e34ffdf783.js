@@ -1174,7 +1174,7 @@ class GridRow extends ReactComponent {
     const row = this.props.row;
     const i = this.props.i;
     const key = this.props.rowKey;
-    return /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("a", {
       className: `${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`,
       "data-key": key
     }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("div", {
