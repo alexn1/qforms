@@ -19,14 +19,14 @@ class GridRow extends ReactComponent {
         const row = this.props.row;
         const i = this.props.i;
         const key = this.props.rowKey;
-        return <tr
-            className={this.props.active ? 'active' : null}
+        return <div
+            className={`Grid__tr ${this.props.active ? 'active' : null}`}
             data-key={key}
         >
             {grid.props.columns.map((column, j) =>
-                <td
+                <div
                     key={column.name}
-                    className={this.isCellActive(j) ? 'active' : null}
+                    className={`Grid__td ${this.isCellActive(j) ? 'active' : null}`}
                     style={{width: grid.getColumnWidth(j)}}
                     data-rc={`[${i},${j}]`}
                     data-row={key}
@@ -34,14 +34,14 @@ class GridRow extends ReactComponent {
                     onDoubleClick={grid.onCellDoubleClick}
                 >
                     {grid.renderCell(row, column)}
-                </td>)}
-            <td
+                </div>)}
+            <div className={'Grid__td'}
                 data-r={i}
                 data-row={key}
                 onMouseDown={grid.onRowMouseDown}
                 onDoubleClick={grid.onRowDoubleClick}
             />
-        </tr>;
+        </div>;
     }
 }
 

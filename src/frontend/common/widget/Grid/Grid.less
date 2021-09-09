@@ -49,14 +49,14 @@
   -ms-user-select    : none;
   -khtml-user-select : none;
 
-  table {
+  .Grid__table {
     width          : 100%;
     border-spacing : 0;
     border-collapse: collapse;
     table-layout   : fixed;
-    tr {
+    .Grid_tr {
       border-bottom: @trBorderBottom;
-      td {
+      .Grid__td {
         padding: 0;
         cursor : default;
         &:not(:last-child) {
@@ -90,9 +90,9 @@
   top       : 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  tr {
+  .Grid__tr {
     height: @headTrHeight;
-    td {
+    .Grid__td {
       background      : @headTdBackground;
       text-shadow     : @headTdTextShadow;
       background-color: @headTdBackgroundColor;
@@ -127,14 +127,14 @@
   bottom    : 0;
   overflow-y: scroll;
   overflow-x: auto;
-  tr {
+  .Grid__tr {
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
     }
     &:nth-child(even) {
       background-color: @bodyTrEvenBackgroundColor;
     }
-    > td {
+    > .Grid__td {
       height: @bodyTdHeight;
       text-shadow: @bodyTdTextShadow;
       &.active {
@@ -158,4 +158,20 @@
       }
     }
   }
+}
+
+.Grid__table {
+  display: table;
+}
+
+.Grid__tbody {
+  display: table-row-group;
+}
+
+.Grid__tr {
+  display: table-row;
+}
+
+.Grid__td {
+  display: table-cell;
 }

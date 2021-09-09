@@ -207,10 +207,10 @@ class Grid extends ReactComponent {
     }
     renderColumns() {
         return this.props.columns.map((column, i) =>
-            <td key={column.name} style={{width: this.getColumnWidth(i)}}>
+            <div className={'Grid__td'} key={column.name} style={{width: this.getColumnWidth(i)}}>
                 <div>{column.title || column.name}</div>
                 <span className="resize" data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
-            </td>
+            </div>
         );
     }
     renderRows() {
@@ -281,19 +281,21 @@ class Grid extends ReactComponent {
                  onKeyDown={this.onKeyDown}
             >
                 <div className={`${this.constructor.name}__head`} ref={this.head}>
-                    <table>
-                        <tbody>
-                            <tr>
+                    <div className={`${this.constructor.name}__table`}>
+                        <div className={'Grid__tbody'}>
+                            <div className={'Grid__tr'}>
                                 {this.props.columns && this.renderColumns()}
-                                <td/>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <div className={'Grid__td'}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className={`${this.constructor.name}__body`} onScroll={this.onBodyScroll}>
-                    <table>
-                        <tbody>{this.props.rows && this.renderRows()}</tbody>
-                    </table>
+                    <div className={`${this.constructor.name}__table`}>
+                        <div className={'Grid__tbody'}>
+                            {this.props.rows && this.renderRows()}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

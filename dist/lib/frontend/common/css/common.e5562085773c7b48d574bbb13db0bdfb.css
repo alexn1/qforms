@@ -155,23 +155,23 @@ table.DatePicker td.selected {
   -ms-user-select: none;
   -khtml-user-select: none;
 }
-.Grid table {
+.Grid .Grid__table {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   table-layout: fixed;
 }
-.Grid table tr {
+.Grid .Grid__table .Grid_tr {
   border-bottom: 0px solid white;
 }
-.Grid table tr td {
+.Grid .Grid__table .Grid_tr .Grid__td {
   padding: 0;
   cursor: default;
 }
-.Grid table tr td:not(:last-child) {
+.Grid .Grid__table .Grid_tr .Grid__td:not(:last-child) {
   border-right: 1px solid white !important;
 }
-.Grid table tr td > div {
+.Grid .Grid__table .Grid_tr .Grid__td > div {
   overflow: hidden;
 }
 .Grid::after {
@@ -191,10 +191,10 @@ table.DatePicker td.selected {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.Grid__head tr {
+.Grid__head .Grid__tr {
   height: 22px;
 }
-.Grid__head tr td {
+.Grid__head .Grid__tr .Grid__td {
   background: none;
   text-shadow: none;
   background-color: #7c7c8b;
@@ -203,13 +203,13 @@ table.DatePicker td.selected {
   background-clip: padding-box;
   /* prevent hiding border when position: relative */
 }
-.Grid__head tr td > div {
+.Grid__head .Grid__tr .Grid__td > div {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-left: 5px;
   margin-right: 5px;
 }
-.Grid__head tr td > span.resize {
+.Grid__head .Grid__tr .Grid__td > span.resize {
   position: absolute;
   top: 0;
   right: -4px;
@@ -227,34 +227,46 @@ table.DatePicker td.selected {
   overflow-y: scroll;
   overflow-x: auto;
 }
-.Grid__body tr.active {
+.Grid__body .Grid__tr.active {
   background-color: #c8e2fe !important;
 }
-.Grid__body tr:nth-child(even) {
+.Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
 }
-.Grid__body tr > td {
+.Grid__body .Grid__tr > .Grid__td {
   height: 20px;
   text-shadow: none;
 }
-.Grid__body tr > td.active {
+.Grid__body .Grid__tr > .Grid__td.active {
   text-shadow: none;
   background-color: #428bca;
 }
-.Grid__body tr > td.active > div {
+.Grid__body .Grid__tr > .Grid__td.active > div {
   color: white !important;
   background-color: #428bca !important;
 }
-.Grid__body tr > td.active > div > a {
+.Grid__body .Grid__tr > .Grid__td.active > div > a {
   color: white;
 }
-.Grid__body tr > td.active > div > select {
+.Grid__body .Grid__tr > .Grid__td.active > div > select {
   color: black;
 }
-.Grid__body tr > td.edit {
+.Grid__body .Grid__tr > .Grid__td.edit {
   color: inherit;
   cursor: text;
   background-color: lightgreen;
+}
+.Grid__table {
+  display: table;
+}
+.Grid__tbody {
+  display: table-row-group;
+}
+.Grid__tr {
+  display: table-row;
+}
+.Grid__td {
+  display: table-cell;
 }
 
 .Grid2 {

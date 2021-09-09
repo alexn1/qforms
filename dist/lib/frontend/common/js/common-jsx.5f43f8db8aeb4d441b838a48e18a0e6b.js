@@ -1023,7 +1023,8 @@ class Grid extends ReactComponent {
   }
 
   renderColumns() {
-    return this.props.columns.map((column, i) => /*#__PURE__*/React.createElement("td", {
+    return this.props.columns.map((column, i) => /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__td',
       key: column.name,
       style: {
         width: this.getColumnWidth(i)
@@ -1095,10 +1096,22 @@ class Grid extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.constructor.name}__head`,
       ref: this.head
-    }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("td", null))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__table`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__tbody'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__tr'
+    }, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__td'
+    }))))), /*#__PURE__*/React.createElement("div", {
       className: `${this.constructor.name}__body`,
       onScroll: this.onBodyScroll
-    }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, this.props.rows && this.renderRows()))));
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__table`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__tbody'
+    }, this.props.rows && this.renderRows()))));
   }
 
 }
@@ -1211,12 +1224,12 @@ class GridRow extends ReactComponent {
     const row = this.props.row;
     const i = this.props.i;
     const key = this.props.rowKey;
-    return /*#__PURE__*/React.createElement("tr", {
-      className: this.props.active ? 'active' : null,
+    return /*#__PURE__*/React.createElement("div", {
+      className: `Grid__tr ${this.props.active ? 'active' : null}`,
       "data-key": key
-    }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("td", {
+    }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("div", {
       key: column.name,
-      className: this.isCellActive(j) ? 'active' : null,
+      className: `Grid__td ${this.isCellActive(j) ? 'active' : null}`,
       style: {
         width: grid.getColumnWidth(j)
       },
@@ -1224,7 +1237,8 @@ class GridRow extends ReactComponent {
       "data-row": key,
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
-    }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("td", {
+    }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("div", {
+      className: 'Grid__td',
       "data-r": i,
       "data-row": key,
       onMouseDown: grid.onRowMouseDown,
