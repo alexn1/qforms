@@ -1022,9 +1022,13 @@ class Grid extends ReactComponent {
     return null;
   }
 
+  getGridBlockName() {
+    return this.constructor.name;
+  }
+
   renderColumns() {
     return this.props.columns.map((column, i) => /*#__PURE__*/React.createElement("div", {
-      className: 'Grid__td',
+      className: `${this.getGridBlockName()}__td`,
       key: column.name,
       style: {
         width: this.getColumnWidth(i)
@@ -1048,7 +1052,8 @@ class Grid extends ReactComponent {
         active: this.isRowActive(i, key),
         activeColumn: this.getActiveColumn(),
         updated: this.props.updated,
-        resized: this.state.resized
+        resized: this.state.resized,
+        gridBlockName: this.getGridBlockName()
       });
     });
   }
@@ -1094,19 +1099,19 @@ class Grid extends ReactComponent {
       tabIndex: 0,
       onKeyDown: this.onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.constructor.name}__head`,
+      className: `${this.getGridBlockName()}__head`,
       ref: this.head
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.constructor.name}__table`
+      className: `${this.getGridBlockName()}__table`
     }, /*#__PURE__*/React.createElement("div", {
-      className: 'Grid__tr'
+      className: `${this.getGridBlockName()}__tr`
     }, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("div", {
-      className: 'Grid__td'
+      className: `${this.getGridBlockName()}__td`
     })))), /*#__PURE__*/React.createElement("div", {
-      className: `${this.constructor.name}__body`,
+      className: `${this.getGridBlockName()}__body`,
       onScroll: this.onBodyScroll
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.constructor.name}__table`
+      className: `${this.getGridBlockName()}__table`
     }, this.props.rows && this.renderRows())));
   }
 
@@ -1166,11 +1171,6 @@ class GridCell extends ReactComponent {
     super(props);
     this.span = React.createRef();
   }
-  /*onClick = e => {
-      console.log('GridCell.onClick', this.span.current);
-      console.log('offsetWidth:', this.span.current.offsetWidth);
-  }*/
-
 
   getSpanOffsetWidth() {
     return this.span.current.offsetWidth;
@@ -1185,9 +1185,7 @@ class GridCell extends ReactComponent {
     const row = this.props.row;
     const column = this.props.column;
     return /*#__PURE__*/React.createElement("div", {
-      className: "GridCell"
-      /*onClick={this.onClick}*/
-
+      className: this.getClassName()
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, this.renderCellValue(row[column.name])));
@@ -1214,6 +1212,10 @@ class GridRow extends ReactComponent {
     return true;
   }
 
+  getGridBlockName() {
+    return this.props.gridBlockName || this.constructor.name;
+  }
+
   render() {
     // console.log('GridRow.render', this.props.i);
     const grid = this.props.grid;
@@ -1221,11 +1223,11 @@ class GridRow extends ReactComponent {
     const i = this.props.i;
     const key = this.props.rowKey;
     return /*#__PURE__*/React.createElement("div", {
-      className: `Grid__tr ${this.props.active ? 'active' : null}`,
+      className: `${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`,
       "data-key": key
     }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("div", {
       key: column.name,
-      className: `Grid__td ${this.isCellActive(j) ? 'active' : null}`,
+      className: `${this.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
       style: {
         width: grid.getColumnWidth(j)
       },
@@ -1234,7 +1236,7 @@ class GridRow extends ReactComponent {
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
     }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("div", {
-      className: 'Grid__td',
+      className: `${this.getGridBlockName()}__td`,
       "data-r": i,
       "data-row": key,
       onMouseDown: grid.onRowMouseDown,

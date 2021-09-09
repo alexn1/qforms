@@ -3,10 +3,6 @@ class GridCell extends ReactComponent {
         super(props);
         this.span = React.createRef();
     }
-    /*onClick = e => {
-        console.log('GridCell.onClick', this.span.current);
-        console.log('offsetWidth:', this.span.current.offsetWidth);
-    }*/
     getSpanOffsetWidth() {
         return this.span.current.offsetWidth;
     }
@@ -18,7 +14,7 @@ class GridCell extends ReactComponent {
         const row = this.props.row;
         const column = this.props.column;
         return (
-            <div className="GridCell" /*onClick={this.onClick}*/>
+            <div className={this.getClassName()}>
                 <span ref={this.span}>{this.renderCellValue(row[column.name])}</span>
             </div>
         );

@@ -13,6 +13,9 @@ class GridRow extends ReactComponent {
         }
         return true;
     }
+    getGridBlockName() {
+        return this.props.gridBlockName || this.constructor.name;
+    }
     render() {
         // console.log('GridRow.render', this.props.i);
         const grid = this.props.grid;
@@ -20,13 +23,13 @@ class GridRow extends ReactComponent {
         const i = this.props.i;
         const key = this.props.rowKey;
         return <div
-            className={`Grid__tr ${this.props.active ? 'active' : null}`}
+            className={`${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`}
             data-key={key}
         >
             {grid.props.columns.map((column, j) =>
                 <div
                     key={column.name}
-                    className={`Grid__td ${this.isCellActive(j) ? 'active' : null}`}
+                    className={`${this.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`}
                     style={{width: grid.getColumnWidth(j)}}
                     data-rc={`[${i},${j}]`}
                     data-row={key}
@@ -35,7 +38,7 @@ class GridRow extends ReactComponent {
                 >
                     {grid.renderCell(row, column)}
                 </div>)}
-            <div className={'Grid__td'}
+            <div className={`${this.getGridBlockName()}__td`}
                 data-r={i}
                 data-row={key}
                 onMouseDown={grid.onRowMouseDown}
