@@ -13,23 +13,24 @@ class GridRow extends ReactComponent {
         }
         return true;
     }
-    getGridBlockName() {
-        return this.props.gridBlockName || this.constructor.name;
-    }
+
     render() {
         // console.log('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
         const key = this.props.rowKey;
+        const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
         return <a
-            className={`${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`}
+            className={`${grid.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`}
             data-key={key}
+            href={link}
+            onClick={grid.onLinkClick}
         >
             {grid.props.columns.map((column, j) =>
                 <div
                     key={column.name}
-                    className={`${this.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`}
+                    className={`${grid.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`}
                     style={{width: grid.getColumnWidth(j)}}
                     data-rc={`[${i},${j}]`}
                     data-row={key}
@@ -38,7 +39,7 @@ class GridRow extends ReactComponent {
                 >
                     {grid.renderCell(row, column)}
                 </div>)}
-            <div className={`${this.getGridBlockName()}__td`}
+            <div className={`${grid.getGridBlockName()}__td`}
                 data-r={i}
                 data-row={key}
                 onMouseDown={grid.onRowMouseDown}

@@ -26,13 +26,9 @@ class Grid extends ReactComponent {
     isRowActive(i, key) {
         return this.getActiveRowKey() === key;
     }
-    onRowMouseDown = async e => {
-        // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
-        const key = e.currentTarget.dataset.row;
-        await this.selectRow(key);
-    }
     onCellMouseDown = async e => {
-        // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
+        console.log('Grid.onCellMouseDown', this.isLink());
+        if (this.isLink()) return;
         const button = e.button;
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         const row = this.props.rows[i];
@@ -41,6 +37,12 @@ class Grid extends ReactComponent {
         if (button === 0 && this.props.onClick) {
             this.props.onClick(row, key);
         }
+    }
+    onRowMouseDown = async e => {
+        console.log('Grid.onRowMouseDown', this.isLink());
+        if (this.isLink()) return;
+        const key = e.currentTarget.dataset.row;
+        await this.selectRow(key);
     }
     onCellDoubleClick = async e => {
         // console.log('Grid.onCellDoubleClick');
@@ -229,7 +231,6 @@ class Grid extends ReactComponent {
                 activeColumn={this.getActiveColumn()}
                 updated={this.props.updated}
                 resized={this.state.resized}
-                gridBlockName={this.getGridBlockName()}
             />;
         });
     }
@@ -299,6 +300,17 @@ class Grid extends ReactComponent {
                 </div>
             </div>
         );
+    }
+    isLink() {
+        return !!this.props.createLinkCallback;
+    }
+    onLinkClick = async e => {
+        console.log('Grid.onLinkClick', e.currentTarget.dataset.key);
+        e.preventDefault();
+        const key = e.currentTarget.dataset.key;
+        if (this.props.onLinkClick) {
+            await this.props.onLinkClick(key);
+        }
     }
 }
 

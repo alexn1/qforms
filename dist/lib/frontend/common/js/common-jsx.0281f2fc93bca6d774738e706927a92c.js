@@ -759,14 +759,9 @@ class Grid extends ReactComponent {
   constructor(props) {
     super(props);
 
-    _defineProperty(this, "onRowMouseDown", async e => {
-      // console.log('Grid.onRowMouseDown', e.currentTarget.dataset);
-      const key = e.currentTarget.dataset.row;
-      await this.selectRow(key);
-    });
-
     _defineProperty(this, "onCellMouseDown", async e => {
-      // console.log('Grid.onCellMouseDown', e.currentTarget.dataset);
+      console.log('Grid.onCellMouseDown', this.isLink());
+      if (this.isLink()) return;
       const button = e.button;
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
       const row = this.props.rows[i];
@@ -776,6 +771,13 @@ class Grid extends ReactComponent {
       if (button === 0 && this.props.onClick) {
         this.props.onClick(row, key);
       }
+    });
+
+    _defineProperty(this, "onRowMouseDown", async e => {
+      console.log('Grid.onRowMouseDown', this.isLink());
+      if (this.isLink()) return;
+      const key = e.currentTarget.dataset.row;
+      await this.selectRow(key);
     });
 
     _defineProperty(this, "onCellDoubleClick", async e => {
@@ -872,6 +874,16 @@ class Grid extends ReactComponent {
     _defineProperty(this, "onBodyScroll", async e => {
       // console.log('Grid.onBodyScroll', e.target.scrollLeft);
       this.head.current.scrollLeft = e.target.scrollLeft;
+    });
+
+    _defineProperty(this, "onLinkClick", async e => {
+      console.log('Grid.onLinkClick', e.currentTarget.dataset.key);
+      e.preventDefault();
+      const key = e.currentTarget.dataset.key;
+
+      if (this.props.onLinkClick) {
+        await this.props.onLinkClick(key);
+      }
     });
 
     this.state = {
@@ -1052,8 +1064,7 @@ class Grid extends ReactComponent {
         active: this.isRowActive(i, key),
         activeColumn: this.getActiveColumn(),
         updated: this.props.updated,
-        resized: this.state.resized,
-        gridBlockName: this.getGridBlockName()
+        resized: this.state.resized
       });
     });
   }
@@ -1115,6 +1126,10 @@ class Grid extends ReactComponent {
     }, this.props.rows && this.renderRows())));
   }
 
+  isLink() {
+    return !!this.props.createLinkCallback;
+  }
+
 }
 
 window.QForms.Grid = Grid;
@@ -1164,22 +1179,21 @@ class GridRow extends ReactComponent {
     return true;
   }
 
-  getGridBlockName() {
-    return this.props.gridBlockName || this.constructor.name;
-  }
-
   render() {
     // console.log('GridRow.render', this.props.i);
     const grid = this.props.grid;
     const row = this.props.row;
     const i = this.props.i;
     const key = this.props.rowKey;
+    const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
     return /*#__PURE__*/React.createElement("a", {
-      className: `${this.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`,
-      "data-key": key
+      className: `${grid.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`,
+      "data-key": key,
+      href: link,
+      onClick: grid.onLinkClick
     }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("div", {
       key: column.name,
-      className: `${this.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
+      className: `${grid.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
       style: {
         width: grid.getColumnWidth(j)
       },
@@ -1188,7 +1202,7 @@ class GridRow extends ReactComponent {
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
     }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__td`,
+      className: `${grid.getGridBlockName()}__td`,
       "data-r": i,
       "data-row": key,
       onMouseDown: grid.onRowMouseDown,
