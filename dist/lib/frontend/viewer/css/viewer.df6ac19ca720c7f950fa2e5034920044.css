@@ -376,8 +376,6 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .TableFormDatePickerFieldView {
