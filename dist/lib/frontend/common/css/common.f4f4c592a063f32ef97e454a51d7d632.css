@@ -164,14 +164,17 @@ table.DatePicker td.selected {
 .Grid .Grid__table .Grid_tr {
   border-bottom: 0px solid white;
 }
-.Grid .Grid__table .Grid_tr .Grid__td {
+.Grid .Grid__table .Grid_tr .Grid__td,
+.Grid .Grid__table .Grid_tr .Grid__th {
   padding: 0;
   cursor: default;
 }
-.Grid .Grid__table .Grid_tr .Grid__td:not(:last-child) {
+.Grid .Grid__table .Grid_tr .Grid__td:not(:last-child),
+.Grid .Grid__table .Grid_tr .Grid__th:not(:last-child) {
   border-right: 1px solid white !important;
 }
-.Grid .Grid__table .Grid_tr .Grid__td > div {
+.Grid .Grid__table .Grid_tr .Grid__td > div,
+.Grid .Grid__table .Grid_tr .Grid__th > div {
   overflow: hidden;
 }
 .Grid::after {
@@ -194,7 +197,7 @@ table.DatePicker td.selected {
 .Grid__head .Grid__tr {
   height: 22px;
 }
-.Grid__head .Grid__tr .Grid__td {
+.Grid__head .Grid__tr .Grid__th {
   background: none;
   text-shadow: none;
   background-color: #7c7c8b;
@@ -203,13 +206,13 @@ table.DatePicker td.selected {
   background-clip: padding-box;
   /* prevent hiding border when position: relative */
 }
-.Grid__head .Grid__tr .Grid__td > div {
+.Grid__head .Grid__tr .Grid__th > div {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-left: 5px;
   padding-right: 5px;
 }
-.Grid__head .Grid__tr .Grid__td > span.resize {
+.Grid__head .Grid__tr .Grid__th > span.resize {
   position: absolute;
   top: 0;
   right: -4px;
@@ -259,13 +262,13 @@ table.DatePicker td.selected {
 .Grid__table {
   display: table;
 }
-.Grid__tbody {
-  display: table-row-group;
-}
 .Grid__tr {
   display: table-row;
 }
 .Grid__td {
+  display: table-cell;
+}
+.Grid__th {
   display: table-cell;
 }
 a.Grid__tr {

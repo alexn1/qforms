@@ -880,6 +880,7 @@ class Grid extends ReactComponent {
       console.log('Grid.onLinkClick', e.ctrlKey);
       if (e.ctrlKey) return;
       e.preventDefault();
+      if (!this.isLink()) return;
       const key = e.currentTarget.dataset.key;
 
       if (this.props.onLinkClick) {
@@ -1041,7 +1042,7 @@ class Grid extends ReactComponent {
 
   renderColumns() {
     return this.props.columns.map((column, i) => /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__td`,
+      className: `${this.getGridBlockName()}__th`,
       key: column.name,
       style: {
         width: this.getColumnWidth(i)
@@ -1118,7 +1119,7 @@ class Grid extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getGridBlockName()}__tr`
     }, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__td`
+      className: `${this.getGridBlockName()}__th`
     })))), /*#__PURE__*/React.createElement("div", {
       className: `${this.getGridBlockName()}__body`,
       onScroll: this.onBodyScroll

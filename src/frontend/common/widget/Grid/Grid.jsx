@@ -212,7 +212,7 @@ class Grid extends ReactComponent {
     }
     renderColumns() {
         return this.props.columns.map((column, i) =>
-            <div className={`${this.getGridBlockName()}__td`} key={column.name} style={{width: this.getColumnWidth(i)}}>
+            <div className={`${this.getGridBlockName()}__th`} key={column.name} style={{width: this.getColumnWidth(i)}}>
                 <div>{column.title || column.name}</div>
                 <span className="resize" data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
             </div>
@@ -289,7 +289,7 @@ class Grid extends ReactComponent {
                     <div className={`${this.getGridBlockName()}__table`}>
                         <div className={`${this.getGridBlockName()}__tr`}>
                             {this.props.columns && this.renderColumns()}
-                            <div className={`${this.getGridBlockName()}__td`}/>
+                            <div className={`${this.getGridBlockName()}__th`}/>
                         </div>
                     </div>
                 </div>
@@ -308,6 +308,7 @@ class Grid extends ReactComponent {
         console.log('Grid.onLinkClick', e.ctrlKey);
         if (e.ctrlKey) return;
         e.preventDefault();
+        if (!this.isLink()) return;
         const key = e.currentTarget.dataset.key;
         if (this.props.onLinkClick) {
             await this.props.onLinkClick(key);

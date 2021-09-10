@@ -55,7 +55,7 @@
     table-layout   : fixed;
     .Grid_tr {
       border-bottom: @trBorderBottom;
-      .Grid__td {
+      .Grid__td, .Grid__th {
         padding: 0;
         cursor : default;
         &:not(:last-child) {
@@ -91,7 +91,7 @@
   overflow-x: hidden;
   .Grid__tr {
     height: @headTrHeight;
-    .Grid__td {
+    .Grid__th {
       background      : @headTdBackground;
       text-shadow     : @headTdTextShadow;
       background-color: @headTdBackgroundColor;
@@ -163,15 +163,15 @@
   display: table;
 }
 
-.Grid__tbody {
-  display: table-row-group;
-}
-
 .Grid__tr {
   display: table-row;
 }
 
 .Grid__td {
+  display: table-cell;
+}
+
+.Grid__th {
   display: table-cell;
 }
 
