@@ -112,9 +112,9 @@ class TableFormView extends FormView {
                     onDoubleClick={ctrl.onGridCellDblClick}
                     onDeleteClick={ctrl.onGridDeleteClick}
                     onSelectionChange={ctrl.onSelectionChange}
+                    onLinkClick={ctrl.onGridLinkClick}
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
-                    onLinkClick={ctrl.onGridLinkClick}
                 />
                 {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>
