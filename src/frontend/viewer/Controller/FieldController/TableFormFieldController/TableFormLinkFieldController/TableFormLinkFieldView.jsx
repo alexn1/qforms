@@ -3,7 +3,7 @@ class TableFormLinkFieldView extends TableFormFieldView {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className="TableFormLinkFieldView" style={ctrl.renderViewStyle(row)}>
+            <div className={this.getClassName()} style={ctrl.renderViewStyle(row)}>
                 <a href="#" onClick={ctrl.onClick}>{ctrl.getValueForWidget(row)}</a>
             </div>
         );

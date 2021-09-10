@@ -3,7 +3,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className="TableFormComboBoxFieldView" style={ctrl.renderViewStyle(row)}>
+            <div className={this.getClassName()} style={ctrl.renderViewStyle(row)}>
                 <span ref={this.span}>{ctrl.getValueForWidget(row)}</span>
             </div>
         );

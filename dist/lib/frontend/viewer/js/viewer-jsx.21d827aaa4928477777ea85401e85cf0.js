@@ -602,7 +602,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormTextBoxFieldView",
+      className: this.getClassName(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
