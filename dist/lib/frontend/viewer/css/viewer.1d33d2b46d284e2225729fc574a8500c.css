@@ -364,8 +364,6 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
   text-align: center;
 }
 .TableFormCheckBoxFieldView > span {
@@ -382,16 +380,12 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .TableFormLinkFieldView {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 .TableFormLinkFieldView > a {
   color: blue;
@@ -401,8 +395,6 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .RowFormView {
