@@ -877,7 +877,8 @@ class Grid extends ReactComponent {
     });
 
     _defineProperty(this, "onLinkClick", async e => {
-      console.log('Grid.onLinkClick', e.currentTarget.dataset.key);
+      console.log('Grid.onLinkClick', e.ctrlKey);
+      if (e.ctrlKey) return;
       e.preventDefault();
       const key = e.currentTarget.dataset.key;
 
