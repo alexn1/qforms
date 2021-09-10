@@ -115,6 +115,7 @@ class TableFormView extends FormView {
                     onLinkClick={ctrl.onGridLinkClick}
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
+                    extraColumn={true}
                 />
                 {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>

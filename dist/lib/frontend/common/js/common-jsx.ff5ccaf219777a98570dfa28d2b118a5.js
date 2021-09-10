@@ -1118,7 +1118,7 @@ class Grid extends ReactComponent {
       className: `${this.getGridBlockName()}__table`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getGridBlockName()}__tr`
-    }, this.props.columns && this.renderColumns(), /*#__PURE__*/React.createElement("div", {
+    }, this.props.columns && this.renderColumns(), !!this.props.extraColumn && /*#__PURE__*/React.createElement("div", {
       className: `${this.getGridBlockName()}__th`
     })))), /*#__PURE__*/React.createElement("div", {
       className: `${this.getGridBlockName()}__body`,
@@ -1203,7 +1203,7 @@ class GridRow extends ReactComponent {
       "data-row": key,
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
-    }, grid.renderCell(row, column))), /*#__PURE__*/React.createElement("div", {
+    }, grid.renderCell(row, column))), !!grid.props.extraColumn && /*#__PURE__*/React.createElement("div", {
       className: `${grid.getGridBlockName()}__td`,
       "data-r": i,
       "data-row": key,

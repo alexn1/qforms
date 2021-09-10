@@ -870,7 +870,8 @@ class TableFormView extends FormView {
       onSelectionChange: ctrl.onSelectionChange,
       onLinkClick: ctrl.onGridLinkClick,
       renderGridCellView: this.renderGridCellView,
-      updated: ctrl.getUpdated()
+      updated: ctrl.getUpdated(),
+      extraColumn: true
     }), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 

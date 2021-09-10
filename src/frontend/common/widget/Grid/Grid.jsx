@@ -289,7 +289,7 @@ class Grid extends ReactComponent {
                     <div className={`${this.getGridBlockName()}__table`}>
                         <div className={`${this.getGridBlockName()}__tr`}>
                             {this.props.columns && this.renderColumns()}
-                            <div className={`${this.getGridBlockName()}__th`}/>
+                            {!!this.props.extraColumn && <div className={`${this.getGridBlockName()}__th`}/>}
                         </div>
                     </div>
                 </div>

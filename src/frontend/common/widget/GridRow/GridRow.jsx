@@ -39,12 +39,14 @@ class GridRow extends ReactComponent {
                 >
                     {grid.renderCell(row, column)}
                 </div>)}
-            <div className={`${grid.getGridBlockName()}__td`}
-                data-r={i}
-                data-row={key}
-                onMouseDown={grid.onRowMouseDown}
-                onDoubleClick={grid.onRowDoubleClick}
-            />
+            {!!grid.props.extraColumn &&
+                <div className={`${grid.getGridBlockName()}__td`}
+                     data-r={i}
+                     data-row={key}
+                     onMouseDown={grid.onRowMouseDown}
+                     onDoubleClick={grid.onRowDoubleClick}
+                />
+            }
         </a>;
     }
 }
