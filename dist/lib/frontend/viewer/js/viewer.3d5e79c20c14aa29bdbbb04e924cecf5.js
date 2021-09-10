@@ -1649,6 +1649,10 @@ class TableFormController extends FormController {
             break;
         }
     }
+    onGridLinkClick = async key => {
+        console.log('TableFormController.onGridLinkClick', key);
+        await this.edit(key);
+    }
     onGridDeleteClick = async (row, key) => {
         console.log('TableFormController.onGridDeleteClick', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {

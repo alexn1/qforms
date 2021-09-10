@@ -869,7 +869,8 @@ class TableFormView extends FormView {
       onDeleteClick: ctrl.onGridDeleteClick,
       onSelectionChange: ctrl.onSelectionChange,
       renderGridCellView: this.renderGridCellView,
-      updated: ctrl.getUpdated()
+      updated: ctrl.getUpdated(),
+      onLinkClick: ctrl.onGridLinkClick
     }), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 
