@@ -18,10 +18,11 @@ class ApplicationView extends ReactComponent {
     }
   }
 
-  static renderPage(pageCtrl) {
+  static renderPage(pageCtrl, props = {}) {
     return React.createElement(pageCtrl.getViewClass(), {
       ctrl: pageCtrl,
-      onCreate: pageCtrl.onViewCreate
+      onCreate: pageCtrl.onViewCreate,
+      ...props
     });
   }
 
@@ -907,12 +908,13 @@ class PageView extends View {
     });
   }
 
-  static renderForm(formCtrl) {
+  static renderForm(formCtrl, props = {}) {
     return React.createElement(formCtrl.getViewClass(), {
       key: formCtrl.model.getName(),
       ctrl: formCtrl,
       onCreate: formCtrl.onViewCreate,
-      updated: formCtrl.getUpdated()
+      updated: formCtrl.getUpdated(),
+      ...props
     });
   }
 

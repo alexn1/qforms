@@ -5,10 +5,11 @@ class ApplicationView extends ReactComponent {
             return ApplicationView.renderPage(ctrl.activePage);
         }
     }
-    static renderPage(pageCtrl) {
+    static renderPage(pageCtrl, props = {}) {
         return React.createElement(pageCtrl.getViewClass(), {
-            ctrl    : pageCtrl,
-            onCreate: pageCtrl.onViewCreate
+            ctrl     : pageCtrl,
+            onCreate : pageCtrl.onViewCreate,
+            ...props
         });
     }
     renderModalPages() {

@@ -9,12 +9,13 @@ class PageView extends View {
             };
         });
     }
-    static renderForm(formCtrl) {
+    static renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
-            key     : formCtrl.model.getName(),
-            ctrl    : formCtrl,
-            onCreate: formCtrl.onViewCreate,
-            updated : formCtrl.getUpdated()
+            key      : formCtrl.model.getName(),
+            ctrl     : formCtrl,
+            onCreate : formCtrl.onViewCreate,
+            updated  : formCtrl.getUpdated(),
+            ...props
         });
     }
     renderRowForms() {
