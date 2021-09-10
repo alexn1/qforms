@@ -539,7 +539,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormCheckBoxFieldView",
+      className: this.getClassName(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement(CheckBox, {
       checked: ctrl.getValueForWidget(row),
@@ -556,7 +556,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormComboBoxFieldView",
+      className: this.getClassName(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
@@ -571,7 +571,7 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormDatePickerFieldView",
+      className: this.getClassName(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
@@ -586,7 +586,7 @@ class TableFormLinkFieldView extends TableFormFieldView {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "TableFormLinkFieldView",
+      className: this.getClassName(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("a", {
       href: "#",
