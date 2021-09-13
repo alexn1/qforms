@@ -29,16 +29,16 @@ class FormEditorController extends VisualEditorController {
     async moveUp(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const result = await pageEditor.moveItemUp('forms', params);
+        pageEditor.moveItemUp('forms', params.form);
         await pageEditor.save();
-        return result;
+        return 'ok';
     }
     async moveDown(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
-        const result = await pageEditor.moveItemDown('forms', params);
+        pageEditor.moveItemDown('forms', params.form);
         await pageEditor.save();
-        return result;
+        return 'ok';
     }
     async getView(params) {
         console.log('FormEditorController.getView');

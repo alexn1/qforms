@@ -9,7 +9,7 @@ declare class FieldEditorController extends VisualEditorController {
         js: any;
     }>;
     saveController(params: any): Promise<any>;
-    moveUp(params: any): Promise<any>;
-    moveDown(params: any): Promise<any>;
+    moveUp(params: any): Promise<string>;
+    moveDown(params: any): Promise<string>;
 }
 export = FieldEditorController;

@@ -72,17 +72,17 @@ class FieldEditorController extends VisualEditorController {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const result = await formEditor.moveItemUp('fields', params);
+        formEditor.moveItemUp('fields', params.field);
         await pageEditor.save();
-        return result;
+        return 'ok';
     }
     async moveDown(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
-        const result = await formEditor.moveItemDown('fields', params);
+        formEditor.moveItemDown('fields', params.field);
         await pageEditor.save();
-        return result;
+        return 'ok';
     }
 }
 module.exports = FieldEditorController;

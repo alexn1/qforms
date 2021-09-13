@@ -3035,7 +3035,6 @@ class Field extends Model {
         if (!row) {
             console.log(`${this.getFullName()}: need row`);
         }
-
         if (this.getAttr('column')) {
             let rawValue = this.getRawValue(row);
             if (rawValue === undefined) return undefined;

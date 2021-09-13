@@ -24,17 +24,17 @@ class TableEditorController extends EditorController {
     async moveUp(params) {
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const result = databaseEditor.moveItemUp('tables', params.table);
+        databaseEditor.moveItemUp('tables', params.table);
         await appEditor.save();
-        return result;
+        return 'ok';
     }
 
     async moveDown(params) {
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        const result = databaseEditor.moveItemDown('tables', params.table);
+        databaseEditor.moveItemDown('tables', params.table);
         await appEditor.save();
-        return result;
+        return 'ok';
     }
 
 }
