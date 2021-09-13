@@ -9,7 +9,6 @@ declare class Field extends Model {
     fillDefaultValue(context: any, row: any): void;
     dumpRowValueToParams(row: any, params: any): void;
     getFullName(): string;
-    calcValue(row: any): void;
     getApp(): Application;
     getPage(): Page;
     getForm(): Form;

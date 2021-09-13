@@ -82,15 +82,16 @@ class DataSource extends Model {
     calcColumns(row) {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
-            if (!column) {
-                throw new Error(`${field.getFullName()}: no column attr`);
+            if (column) {
+                if (!row.hasOwnProperty(column)) {
+                    throw new Error(`[${field.getFullName()}]: no column '${column}' in result set`);
+                }
+                continue;
             }
-            if (row.hasOwnProperty(column)) {
-            } else if (field.getAttr('value')) {
-                field.calcValue(row);
-            } else {
-                throw new Error(`[${field.getFullName()}]: no column '${column}' in result set and no value attr for calculation`);
+            if (field.getAttr('value')) {
+                continue;
             }
+            throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);
         }
     }
 

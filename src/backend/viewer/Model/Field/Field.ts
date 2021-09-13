@@ -74,10 +74,6 @@ class Field extends Model {
         ].join('.');
     }
 
-    calcValue(row) {
-        row[this.getAttr('column')] = eval(this.getAttr('value'));
-    }
-
     getApp(): Application {
         return this.parent.parent.parent;
     }

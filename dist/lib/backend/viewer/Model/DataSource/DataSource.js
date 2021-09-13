@@ -72,17 +72,17 @@ class DataSource extends Model_1.default {
     calcColumns(row) {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
-            if (!column) {
-                throw new Error(`${field.getFullName()}: no column attr`);
+            if (column) {
+                if (!row.hasOwnProperty(column)) {
+                    throw new Error(`[${field.getFullName()}]: no column '${column}' in result set`);
+                }
+                continue;
             }
-            if (row.hasOwnProperty(column)) {
+            if (field.getAttr('value')) {
+                // field.calcValue(row);
+                continue;
             }
-            else if (field.getAttr('value')) {
-                field.calcValue(row);
-            }
-            else {
-                throw new Error(`[${field.getFullName()}]: no column '${column}' in result set and no value attr for calculation`);
-            }
+            throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);
         }
     }
     encodeRows(rows) {
