@@ -52,21 +52,33 @@ class Field extends Model {
 
     getValue(row) {
         // console.log('Field.getValue', this.getFullName());
+        if (!row && this.parent instanceof RowForm) {
+            row = this.parent.getRow();
+        }
+        if (!row) {
+            console.log(`${this.getFullName()}: need row`);
+        }
         if (this.getAttr('column')) {
-            if (!row && this.parent instanceof RowForm) {
-                row = this.parent.getRow();
-            }
             let rawValue = this.getRawValue(row);
             if (rawValue === undefined) return undefined;
             if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
             try {
-                return this.rawToValue(rawValue)
+                return this.rawToValue(rawValue);
             } catch (err) {
                 console.log('raw value decode error:', this.getFullName(), rawValue);
                 throw err;
             }
         }
-        if (this.data.value) return eval(this.data.value);
+        if (this.getAttr('value')) {
+            const js = this.getAttr('value');
+            try {
+                const value = eval(js);
+                console.log(this.getFullName(), value, typeof value);
+                return value;
+            } catch (err) {
+                throw new Error(`${this.getFullName()}: value eval error: ${err.message}`);
+            }
+        }
         throw new Error(`${this.getFullName()}: no column and no value in field`);
     }
 

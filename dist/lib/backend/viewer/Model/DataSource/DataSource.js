@@ -64,12 +64,12 @@ class DataSource extends Model_1.default {
         }
         if (this.isDefaultOnForm()) {
             for (const row of rows) {
-                this.calcColumns(row);
+                this.checkColumns(row);
             }
         }
         this.encodeRows(rows);
     }
-    calcColumns(row) {
+    checkColumns(row) {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
             if (column) {
@@ -79,7 +79,6 @@ class DataSource extends Model_1.default {
                 continue;
             }
             if (field.getAttr('value')) {
-                // field.calcValue(row);
                 continue;
             }
             throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);

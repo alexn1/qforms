@@ -69,10 +69,6 @@ class Field extends Model_1.default {
             this.getName()
         ].join('.');
     }
-    /*calcValue(row) {
-        const js = this.getAttr('value');
-        row[this.getAttr('column')] = eval(js);
-    }*/
     getApp() {
         return this.parent.parent.parent;
     }

@@ -11,7 +11,7 @@ declare class DataSource extends Model {
     init(context: any): Promise<void>;
     getKeyColumns(): string[];
     prepareRows(context: Context, rows: any[]): void;
-    calcColumns(row: any): void;
+    checkColumns(row: any): void;
     encodeRows(rows: any): void;
     encodeRow(row: any): void;
     getApp(): Application;
