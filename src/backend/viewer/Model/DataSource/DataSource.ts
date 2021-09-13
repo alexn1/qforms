@@ -73,13 +73,13 @@ class DataSource extends Model {
         }
         if (this.isDefaultOnForm()) {
             for (const row of rows) {
-                this.calcColumns(row);
+                this.checkColumns(row);
             }
         }
         this.encodeRows(rows);
     }
 
-    calcColumns(row) {
+    checkColumns(row) {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
             if (column) {
