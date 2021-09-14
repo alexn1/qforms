@@ -990,13 +990,13 @@ class PageView extends View {
     return /*#__PURE__*/React.createElement("div", {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__content flex-rows"
+      className: "frame__container flex-rows"
     }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__content"
+      className: "frame__container"
     }, /*#__PURE__*/React.createElement(Tab, {
       tabs: this.getTabs(),
       classList: ['Tab-blue', 'full']
@@ -1023,13 +1023,13 @@ class PageView2 extends PageView {
     return /*#__PURE__*/React.createElement("div", {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__content flex-rows"
+      className: "frame__container flex-rows"
     }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
       className: "PageView__table-forms flex-max frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__content"
+      className: "frame__container"
     }, /*#__PURE__*/React.createElement(Tab, {
       tabs: this.getAllTabs(),
       classList: ['Tab-blue', 'full']

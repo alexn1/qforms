@@ -102,13 +102,13 @@ class PageView extends View {
         const model = ctrl.getModel();
         return (
             <div className="PageView full frame">
-                <div className="frame__content flex-rows">
+                <div className="frame__container flex-rows">
                     {this.renderCaption2()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
                         <div className="PageView__table-forms flex-max frame">
-                            <div className="frame__content">
+                            <div className="frame__container">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                             </div>
                         </div>
