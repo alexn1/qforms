@@ -11,7 +11,7 @@
     %><link rel="stylesheet" href="<%=link%>"/>
     <%
     } else if (typeof link === 'object') {
-    %><link rel="<%=link.rel%>" href="<%=link.href%>"/>
+    %><link rel="<%=link.rel%>" href="<%=link.href%>" <%=link.crossorigin === true ? 'crossorigin' : ''%>/>
     <%
     }
     });%>

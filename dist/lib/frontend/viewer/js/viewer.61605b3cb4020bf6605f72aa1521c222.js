@@ -321,7 +321,7 @@ class ApplicationController extends Controller {
     }
 
     getTitle() {
-        console.log('ApplicationController.getTitle', this.activePage);
+        // console.log('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
             return `${this.activePage.getCaption()} - ${this.getModel().getCaption()}`;
         }
