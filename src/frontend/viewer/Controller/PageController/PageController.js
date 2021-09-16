@@ -127,9 +127,6 @@ class PageController extends Controller {
     getViewClass() {
         return PageView;
     }
-    getTitle() {
-        return `${this.getModel().getCaption()} - ${this.getApp().getTitle()}`;
-    }
     static createLink(params = null) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);

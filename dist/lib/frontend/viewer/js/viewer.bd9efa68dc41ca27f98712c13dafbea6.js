@@ -109,7 +109,7 @@ class ApplicationController extends Controller {
         // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
         this.activePage = this.createPage();
-        document.title = this.activePage.getTitle();
+        document.title = this.getTitle();
         this.homePageName = this.activePage.getModel().getName();
     }
     deinit() {
@@ -212,7 +212,7 @@ class ApplicationController extends Controller {
             this.closePage(this.activePage);
         }
         this.activePage = pc;
-        document.title = pc.getTitle();
+        document.title = this.getTitle();
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage && this.activePage.model.getName() === pageName && this.activePage.model.getKey() === key) {
@@ -318,6 +318,14 @@ class ApplicationController extends Controller {
             name : e.state ? e.state.pageName : this.homePageName,
             modal: false
         });
+    }
+
+    getTitle() {
+        console.log('ApplicationController.getTitle', this.activePage);
+        if (this.activePage) {
+            return `${this.activePage.getCaption()} - ${this.getModel().getCaption()}`;
+        }
+        return this.getModel().getCaption();
     }
 }
 
@@ -1956,9 +1964,6 @@ class PageController extends Controller {
     }
     getViewClass() {
         return PageView;
-    }
-    getTitle() {
-        return `${this.getModel().getCaption()} - ${this.getApp().getTitle()}`;
     }
     static createLink(params = null) {
         // const query = window.location.search.split('?')[1];
