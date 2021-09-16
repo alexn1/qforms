@@ -65,6 +65,9 @@ class Controller extends EventEmitter {
     getParent() {
         return this.parent;
     }
+    getView() {
+        return this.view;
+    }
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
