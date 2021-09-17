@@ -1760,23 +1760,32 @@ class TableFormController extends FormController {
         this.invalidate();
         await this.rerender();
     }
+    onModelInsert = async e => {
+        console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
+        if (!this.view) return;
+        for (const key of e.inserts) {
+            this.grid.setActiveRowKey(key);
+        }
+        this.invalidate();
+        await this.rerender();
+    }
     onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
-        this.invalidate();
-        if (this.grid) {
-            for (const key in e.updates) {
-                if (this.grid.getActiveRowKey() === key) {
-                    const newKey = e.updates[key];
-                    if (key !== newKey) {
-                        this.grid.setActiveRowKey(newKey);
-                    }
+        if (!this.view) return;
+        for (const key in e.updates) {
+            if (this.grid.getActiveRowKey() === key) {
+                const newKey = e.updates[key];
+                if (key !== newKey) {
+                    this.grid.setActiveRowKey(newKey);
                 }
             }
         }
+        this.invalidate();
         await this.rerender();
     }
     onModelDelete = async e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
+        if (!this.view) return;
         for (const key of e.deletes) {
             if (this.grid.getActiveRowKey() === key) {
                 this.grid.setActiveRowKey(null);
@@ -1785,14 +1794,7 @@ class TableFormController extends FormController {
         this.invalidate();
         await this.rerender();
     }
-    onModelInsert = async e => {
-        console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
-        for (const key of e.inserts) {
-            this.grid.setActiveRowKey(key);
-        }
-        this.invalidate();
-        await this.rerender();
-    }
+
     onSelectionChange = async key => {
         // console.log('TableFormController.onSelectionChange', key);
         this.invalidate();
