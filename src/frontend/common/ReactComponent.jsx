@@ -31,6 +31,9 @@ class ReactComponent extends React.Component {
         // console.log('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount) this.props.onUnmount(this, this.props.name);
     }
+    /*componentDidMount() {
+        console.log('ReactComponent.componentDidMount', this.constructor.name);
+    }*/
 }
 
 window.QForms.ReactComponent = ReactComponent;
