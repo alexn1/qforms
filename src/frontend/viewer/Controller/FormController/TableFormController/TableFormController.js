@@ -165,20 +165,24 @@ class TableFormController extends FormController {
     onModelInsert = async e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         if (!this.view) return;
-        for (const key of e.inserts) {
-            this.grid.setActiveRowKey(key);
+        if (this.grid) {
+            for (const key of e.inserts) {
+                this.grid.setActiveRowKey(key);
+            }
         }
         this.invalidate();
         await this.rerender();
     }
     onModelUpdate = async e => {
-        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e);
+        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
         if (!this.view) return;
-        for (const key in e.updates) {
-            if (this.grid.getActiveRowKey() === key) {
-                const newKey = e.updates[key];
-                if (key !== newKey) {
-                    this.grid.setActiveRowKey(newKey);
+        if (this.grid) {
+            for (const key in e.updates) {
+                if (this.grid.getActiveRowKey() === key) {
+                    const newKey = e.updates[key];
+                    if (key !== newKey) {
+                        this.grid.setActiveRowKey(newKey);
+                    }
                 }
             }
         }
@@ -188,9 +192,11 @@ class TableFormController extends FormController {
     onModelDelete = async e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         if (!this.view) return;
-        for (const key of e.deletes) {
-            if (this.grid.getActiveRowKey() === key) {
-                this.grid.setActiveRowKey(null);
+        if (this.grid) {
+            for (const key of e.deletes) {
+                if (this.grid.getActiveRowKey() === key) {
+                    this.grid.setActiveRowKey(null);
+                }
             }
         }
         this.invalidate();
