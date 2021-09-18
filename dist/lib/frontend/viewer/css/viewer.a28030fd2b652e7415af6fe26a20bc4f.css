@@ -81,6 +81,11 @@ img {
   border: none;
 }
 
+.wait,
+.wait * {
+  cursor: wait !important;
+}
+
 .MdiApplicationView {
   height: 100%;
   font-family: sans-serif;
@@ -90,10 +95,6 @@ img {
 
 .SdiApplicationView {
   height: 100%;
-}
-.SdiApplicationView.wait,
-.SdiApplicationView.wait * {
-  cursor: wait !important;
 }
 .SdiApplicationView__body {
   margin: 0;
