@@ -14,14 +14,7 @@ class Page extends Model {
 
     init() {
         this.createDataSources();
-
-        // forms
-        for (const data of this.data.forms) {
-            const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
-            const form = new FormClass(data, this);
-            form.init();
-            this.forms.push(form);
-        }
+        this.createForms();
         console.log('page params:', this.getFullName(), this.getParams());
     }
 
@@ -29,10 +22,24 @@ class Page extends Model {
         // console.log('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
+        this.deinitForms();
+        super.deinit();
+    }
+
+    createForms() {
+        // forms
+        for (const data of this.data.forms) {
+            const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
+            const form = new FormClass(data, this);
+            form.init();
+            this.forms.push(form);
+        }
+    }
+
+    deinitForms() {
         for (const form of this.forms) {
             form.deinit();
         }
-        super.deinit();
     }
 
     getId() {
