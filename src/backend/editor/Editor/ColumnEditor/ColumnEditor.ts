@@ -3,9 +3,15 @@ const Editor = require('../Editor');
 class ColumnEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
-        if (typeof params.key      !== 'string') throw new Error('key not string');
-        if (typeof params.auto     !== 'string') throw new Error('auto not string');
-        if (typeof params.nullable !== 'string') throw new Error('nullable not string');
+        if (params.key !== undefined && typeof params.key !== 'string') {
+            throw new Error('key not string');
+        }
+        if (params.auto !== undefined && typeof params.auto !== 'string') {
+            throw new Error('auto not string');
+        }
+        if (params.nullable !== undefined && typeof params.nullable !== 'string') {
+            throw new Error('nullable not string');
+        }
         return {
             '@class'     : 'Column',
             '@attributes': {
