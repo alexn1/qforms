@@ -155,26 +155,26 @@ table.DatePicker td.selected {
   -ms-user-select: none;
   -khtml-user-select: none;
 }
-.Grid .Grid__table {
+.Grid__table {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   table-layout: fixed;
 }
-.Grid .Grid__table .Grid_tr {
+.Grid_tr {
   border-bottom: 0px solid white;
 }
-.Grid .Grid__table .Grid_tr .Grid__td,
-.Grid .Grid__table .Grid_tr .Grid__th {
+.Grid__td,
+.Grid__th {
   padding: 0;
   cursor: default;
 }
-.Grid .Grid__table .Grid_tr .Grid__td:not(:last-child),
-.Grid .Grid__table .Grid_tr .Grid__th:not(:last-child) {
+.Grid__td:not(:last-child),
+.Grid__th:not(:last-child) {
   border-right: 1px solid white !important;
 }
-.Grid .Grid__table .Grid_tr .Grid__td > div,
-.Grid .Grid__table .Grid_tr .Grid__th > div {
+.Grid__td > div,
+.Grid__th > div {
   overflow: hidden;
 }
 .Grid::after {
@@ -197,7 +197,7 @@ table.DatePicker td.selected {
 .Grid__head .Grid__tr {
   height: 22px;
 }
-.Grid__head .Grid__tr .Grid__th {
+.Grid__th {
   background: none;
   text-shadow: none;
   background-color: #7c7c8b;
@@ -207,13 +207,13 @@ table.DatePicker td.selected {
   /* prevent hiding border when position: relative */
   vertical-align: middle;
 }
-.Grid__head .Grid__tr .Grid__th > div {
+.Grid__th > div {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-left: 5px;
   padding-right: 5px;
 }
-.Grid__head .Grid__tr .Grid__th > span.resize {
+.Grid__th > span.resize {
   position: absolute;
   top: 0;
   right: -4px;
@@ -237,26 +237,26 @@ table.DatePicker td.selected {
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
 }
-.Grid__body .Grid__tr > .Grid__td {
+.Grid__td {
   height: 20px;
   text-shadow: none;
   vertical-align: middle;
 }
-.Grid__body .Grid__tr > .Grid__td.active {
+.Grid__td.active {
   text-shadow: none;
   background-color: #428bca;
 }
-.Grid__body .Grid__tr > .Grid__td.active > div {
+.Grid__td.active > div {
   color: white !important;
   background-color: #428bca !important;
 }
-.Grid__body .Grid__tr > .Grid__td.active > div > a {
+.Grid__td.active > div > a {
   color: white;
 }
-.Grid__body .Grid__tr > .Grid__td.active > div > select {
+.Grid__td.active > div > select {
   color: black;
 }
-.Grid__body .Grid__tr > .Grid__td.edit {
+.Grid__td.edit {
   color: inherit;
   cursor: text;
   background-color: lightgreen;

@@ -29,7 +29,6 @@
 @bodyTdActiveBackgroundColor: rgb(66,139,202);
 @bodyTdEditBackgroundColor  : lightgreen;
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
   font-family        : @gridFontFamily;
@@ -47,27 +46,31 @@
   -webkit-user-select: none;
   -ms-user-select    : none;
   -khtml-user-select : none;
+}
 
-  .Grid__table {
-    width          : 100%;
-    border-spacing : 0;
-    border-collapse: collapse;
-    table-layout   : fixed;
-    .Grid_tr {
-      border-bottom: @trBorderBottom;
-      .Grid__td, .Grid__th {
-        padding: 0;
-        cursor : default;
-        &:not(:last-child) {
-          border-right: @tdBorderRight !important;
-        }
-        > div {
-          overflow: hidden;
-        }
-      }
-    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid__table {
+  width          : 100%;
+  border-spacing : 0;
+  border-collapse: collapse;
+  table-layout   : fixed;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid_tr {
+  border-bottom: @trBorderBottom;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid__td, .Grid__th {
+  padding: 0;
+  cursor : default;
+  &:not(:last-child) {
+    border-right: @tdBorderRight !important;
   }
-
+  > div {
+    overflow: hidden;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,31 +94,33 @@
   overflow-x: hidden;
   .Grid__tr {
     height: @headTrHeight;
-    .Grid__th {
-      background      : @headTdBackground;
-      text-shadow     : @headTdTextShadow;
-      background-color: @headTdBackgroundColor;
-      color           : @headTdColor;
-      position        : relative;
-      background-clip : padding-box; /* prevent hiding border when position: relative */
-      vertical-align: middle;
-      > div {
-        text-overflow: ellipsis;
-        white-space  : nowrap;
-        padding-left  : 5px;
-        padding-right : 5px;
-      }
-      > span.resize {
-        position        : absolute;
-        top             : 0;
-        right           : -4px;
-        width           : 7px;
-        height          : 100%;
-        background-color: transparent;
-        cursor          : w-resize;
-        z-index         : 2;
-      }
-    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid__th {
+  background      : @headTdBackground;
+  text-shadow     : @headTdTextShadow;
+  background-color: @headTdBackgroundColor;
+  color           : @headTdColor;
+  position        : relative;
+  background-clip : padding-box; /* prevent hiding border when position: relative */
+  vertical-align: middle;
+  > div {
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+    padding-left  : 5px;
+    padding-right : 5px;
+  }
+  > span.resize {
+    position        : absolute;
+    top             : 0;
+    right           : -4px;
+    width           : 7px;
+    height          : 100%;
+    background-color: transparent;
+    cursor          : w-resize;
+    z-index         : 2;
   }
 }
 
@@ -134,54 +139,62 @@
     &:nth-child(even) {
       background-color: @bodyTrEvenBackgroundColor;
     }
-    > .Grid__td {
-      height: @bodyTdHeight;
-      text-shadow: @bodyTdTextShadow;
-      vertical-align: middle;
-      &.active {
-        text-shadow     : @bodyTdActiveTextShadow;
-        background-color: @bodyTdActiveBackgroundColor;
-        > div {
-          color           : @bodyTdActiveColor           !important;
-          background-color: @bodyTdActiveBackgroundColor !important;
-          > a {
-            color: white;
-          }
-          > select {
-            color: black;
-          }
-        }
-      }
-      &.edit {
-        color           : inherit;
-        cursor          : text;
-        background-color: @bodyTdEditBackgroundColor;
-      }
-    }
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid__td {
+  height: @bodyTdHeight;
+  text-shadow: @bodyTdTextShadow;
+  vertical-align: middle;
+  &.active {
+    text-shadow     : @bodyTdActiveTextShadow;
+    background-color: @bodyTdActiveBackgroundColor;
+    > div {
+      color           : @bodyTdActiveColor           !important;
+      background-color: @bodyTdActiveBackgroundColor !important;
+      > a {
+        color: white;
+      }
+      > select {
+        color: black;
+      }
+    }
+  }
+  &.edit {
+    color           : inherit;
+    cursor          : text;
+    background-color: @bodyTdEditBackgroundColor;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__table {
   display: table;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__tr {
   display: table-row;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td {
   display: table-cell;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__th {
   display: table-cell;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 a.Grid__tr {
   text-decoration: none;
   color: inherit;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 a[href].Grid__tr:hover {
   background-color: lightgreen !important;
 }
