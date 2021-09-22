@@ -112,16 +112,18 @@
     padding-left  : 5px;
     padding-right : 5px;
   }
-  > span.resize {
-    position        : absolute;
-    top             : 0;
-    right           : -4px;
-    width           : 7px;
-    height          : 100%;
-    background-color: transparent;
-    cursor          : w-resize;
-    z-index         : 2;
-  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid__resize {
+  position        : absolute;
+  top             : 0;
+  right           : -4px;
+  width           : 7px;
+  height          : 100%;
+  background-color: transparent;
+  cursor          : w-resize;
+  z-index         : 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,11 +163,11 @@
       }
     }
   }
-  &.edit {
+  /*&.edit {
     color           : inherit;
     cursor          : text;
     background-color: @bodyTdEditBackgroundColor;
-  }
+  }*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

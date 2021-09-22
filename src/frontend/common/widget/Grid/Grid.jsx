@@ -214,7 +214,7 @@ class Grid extends ReactComponent {
         return this.props.columns.map((column, i) =>
             <div className={`${this.getGridBlockName()}__th`} key={column.name} style={{width: this.getColumnWidth(i)}}>
                 <div>{column.title || column.name}</div>
-                <span className="resize" data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
+                <span className={'Grid__resize'} data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
             </div>
         );
     }

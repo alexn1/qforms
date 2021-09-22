@@ -1052,7 +1052,7 @@ class Grid extends ReactComponent {
         width: this.getColumnWidth(i)
       }
     }, /*#__PURE__*/React.createElement("div", null, column.title || column.name), /*#__PURE__*/React.createElement("span", {
-      className: "resize",
+      className: 'Grid__resize',
       "data-i": i,
       onDoubleClick: this.onResizeDoubleClick
     })));

@@ -213,7 +213,7 @@ table.DatePicker td.selected {
   padding-left: 5px;
   padding-right: 5px;
 }
-.Grid__th > span.resize {
+.Grid__resize {
   position: absolute;
   top: 0;
   right: -4px;
@@ -241,6 +241,11 @@ table.DatePicker td.selected {
   height: 20px;
   text-shadow: none;
   vertical-align: middle;
+  /*&.edit {
+    color           : inherit;
+    cursor          : text;
+    background-color: @bodyTdEditBackgroundColor;
+  }*/
 }
 .Grid__td.active {
   text-shadow: none;
@@ -255,11 +260,6 @@ table.DatePicker td.selected {
 }
 .Grid__td.active > div > select {
   color: black;
-}
-.Grid__td.edit {
-  color: inherit;
-  cursor: text;
-  background-color: lightgreen;
 }
 .Grid__table {
   display: table;
