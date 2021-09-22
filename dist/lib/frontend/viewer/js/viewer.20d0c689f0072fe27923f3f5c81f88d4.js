@@ -1641,7 +1641,7 @@ class TableFormController extends FormController {
     onDeleteClick = async e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
         if (confirm(this.model.getApp().getText().form.areYouSure)) {
-            this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
+            await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
     }
     onGridCellDblClick = async (row, key) => {
@@ -1668,7 +1668,7 @@ class TableFormController extends FormController {
         console.log('TableFormController.onGridDeleteClick', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
             if (confirm(this.model.getApp().getText().form.areYouSure)) {
-                this.model.getDefaultDataSource().delete(key);
+                await this.model.getDefaultDataSource().delete(key);
             }
         }
     }
