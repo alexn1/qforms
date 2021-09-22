@@ -6,16 +6,16 @@ class Model extends EventEmitter {
         this.parent   = parent;
         this.deinited = false;
     }
-
     init() {
     }
-
     deinit() {
         if (this.deinited) throw new Error(`${this.getFullName()}: model already deinited`);
         this.deinited = true;
     }
-
     static getAttr(data, name) {
+        return data[name];
+    }
+    static getCol(data, name) {
         return data[name];
     }
     static getName(data) {
@@ -24,19 +24,15 @@ class Model extends EventEmitter {
     static getClassName(data) {
         return Model.getAttr(data, 'class');
     }
-
     isAttr(name) {
         return this.data[name] !== undefined;
     }
-
     getAttr(name) {
         return this.data[name];
     }
-
     getClassName() {
         return this.getAttr('class');
     }
-
     getName() {
         return this.getAttr('name');
     }
