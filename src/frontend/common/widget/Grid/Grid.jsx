@@ -190,7 +190,7 @@ class Grid extends ReactComponent {
         }
     }
     getMaxColumnWidth(column) {
-        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10;
+        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 1;
     }
     onResizeDoubleClick = async e => {
         console.log('Grid.onResizeDoubleClick', e.target);
