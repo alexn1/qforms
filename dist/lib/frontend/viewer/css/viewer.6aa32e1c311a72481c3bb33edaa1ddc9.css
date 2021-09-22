@@ -362,41 +362,18 @@ img {
 }
 
 .TableFormCheckBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   text-align: center;
 }
 .TableFormCheckBoxFieldView > span {
   margin: 3px 3px 3px 4px;
 }
 
-.TableFormComboBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-.TableFormDatePickerFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-.TableFormLinkFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .TableFormLinkFieldView > a {
   color: blue;
 }
 
-.TableFormTextBoxFieldView {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
 .RowFormView {
   grid-gap: 5px;

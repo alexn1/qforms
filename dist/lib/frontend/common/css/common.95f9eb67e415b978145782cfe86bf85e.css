@@ -168,6 +168,7 @@ table.DatePicker td.selected {
 .Grid__th {
   padding: 0;
   cursor: default;
+  vertical-align: middle;
 }
 .Grid__td:not(:last-child),
 .Grid__th:not(:last-child) {
@@ -176,6 +177,42 @@ table.DatePicker td.selected {
 .Grid__td > div,
 .Grid__th > div {
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.Grid__th {
+  background: none;
+  text-shadow: none;
+  background-color: #7c7c8b;
+  color: white;
+  position: relative;
+  background-clip: padding-box;
+  /* prevent hiding border when position: relative */
+}
+.Grid__td {
+  height: 20px;
+  text-shadow: none;
+  /*&.edit {
+    color           : inherit;
+    cursor          : text;
+    background-color: @bodyTdEditBackgroundColor;
+  }*/
+}
+.Grid__td.active {
+  text-shadow: none;
+  background-color: #428bca;
+}
+.Grid__td.active > div {
+  color: white !important;
+  background-color: #428bca !important;
+}
+.Grid__td.active > div > a {
+  color: white;
+}
+.Grid__td.active > div > select {
+  color: black;
 }
 .Grid::after {
   content: "";
@@ -196,22 +233,6 @@ table.DatePicker td.selected {
 }
 .Grid__head .Grid__tr {
   height: 22px;
-}
-.Grid__th {
-  background: none;
-  text-shadow: none;
-  background-color: #7c7c8b;
-  color: white;
-  position: relative;
-  background-clip: padding-box;
-  /* prevent hiding border when position: relative */
-  vertical-align: middle;
-}
-.Grid__th > div {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 .Grid__resize {
   position: absolute;
@@ -237,30 +258,6 @@ table.DatePicker td.selected {
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
 }
-.Grid__td {
-  height: 20px;
-  text-shadow: none;
-  vertical-align: middle;
-  /*&.edit {
-    color           : inherit;
-    cursor          : text;
-    background-color: @bodyTdEditBackgroundColor;
-  }*/
-}
-.Grid__td.active {
-  text-shadow: none;
-  background-color: #428bca;
-}
-.Grid__td.active > div {
-  color: white !important;
-  background-color: #428bca !important;
-}
-.Grid__td.active > div > a {
-  color: white;
-}
-.Grid__td.active > div > select {
-  color: black;
-}
 .Grid__table {
   display: table;
 }
@@ -279,14 +276,6 @@ a.Grid__tr {
 }
 a[href].Grid__tr:hover {
   background-color: lightgreen !important;
-}
-
-.GridCell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .Image {
