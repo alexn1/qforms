@@ -2035,9 +2035,13 @@ class Model extends EventEmitter {
         return Model.getAttr(data, 'class');
     }
     isAttr(name) {
-        return this.data[name] !== undefined;
+        // return this.data[name] !== undefined;
+        return this.data.hasOwnProperty(name);
     }
     getAttr(name) {
+        return this.data[name];
+    }
+    getCol(name) {
         return this.data[name];
     }
     getClassName() {
