@@ -82,7 +82,7 @@ class Editor extends BaseModel {
         return new DataSourceClass(data, this);
     }*/
     moveDataColItem(colName, name, offset) {
-        Helper.moveArrItem(this.getDataCol(colName), this.getColItemData(colName, name), offset);
+        Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     /*async newActionData(params) {
         if (!params.name) throw new Error('no name');

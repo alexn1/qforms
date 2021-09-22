@@ -15,7 +15,7 @@ declare class BaseModel {
     isAttr(name: any): boolean;
     isData(colName: any, name: any): boolean;
     getData(): any;
-    getDataCol(name: any): any;
+    getCol(name: any): any;
     getItemNames(colName: any): any;
     getColItemData(colName: any, name: any): any;
     removeColData(colName: any, name: any): any;

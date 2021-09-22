@@ -84,7 +84,7 @@ class Editor extends BaseModel {
     }*/
     moveDataColItem(colName, name, offset) {
         Helper.moveArrItem(
-            this.getDataCol(colName),
+            this.getCol(colName),
             this.getColItemData(colName, name),
             offset
         );

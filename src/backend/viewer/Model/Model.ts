@@ -50,7 +50,7 @@ class Model extends BaseModel {
 
     async createColItems(colName: string, context: Context) {
         // console.log(`Model.createColItems ${this.getName()}.${colName}`);
-        for (const data of this.getDataCol(colName)) {
+        for (const data of this.getCol(colName)) {
             await this.createColItem(colName, data, context);
         }
     }

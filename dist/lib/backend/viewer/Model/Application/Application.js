@@ -93,7 +93,7 @@ class Application extends Model_1.default {
         // nav
         response.nav = this.nav;
         // actions
-        response.actions = this.getDataCol('actions').map(data => ({
+        response.actions = this.getCol('actions').map(data => ({
             name: BaseModel_1.default.getName(data),
             caption: BaseModel_1.default.getAttr(data, 'caption')
         }));
@@ -150,7 +150,7 @@ class Application extends Model_1.default {
             }
         }
         // actions
-        const actions = this.getDataCol('actions');
+        const actions = this.getCol('actions');
         if (actions.length) {
             menu['Actions'] = actions.map(actionData => ({
                 type: 'action',
@@ -194,7 +194,7 @@ class Application extends Model_1.default {
         return this.pages[pageLinkName] = await this.createPage(pageLinkName);
     }
     getStartupPageLinkNames() {
-        return this.getDataCol('pageLinks')
+        return this.getCol('pageLinks')
             .filter(data => BaseModel_1.default.getAttr(data, 'startup') === 'true')
             .map(data => BaseModel_1.default.getName(data));
     }

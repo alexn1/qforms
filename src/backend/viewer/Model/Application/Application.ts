@@ -136,7 +136,7 @@ class Application extends Model {
         response.nav = this.nav;
 
         // actions
-        response.actions = this.getDataCol('actions').map(data => ({
+        response.actions = this.getCol('actions').map(data => ({
             name : BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption')
         }));
@@ -201,7 +201,7 @@ class Application extends Model {
         }
 
         // actions
-        const actions = this.getDataCol('actions');
+        const actions = this.getCol('actions');
         if (actions.length) {
             menu['Actions'] = actions.map(actionData => ({
                 type   : 'action',
@@ -251,7 +251,7 @@ class Application extends Model {
     }
 
     getStartupPageLinkNames(): string[] {
-        return this.getDataCol('pageLinks')
+        return this.getCol('pageLinks')
             .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
             .map(data => BaseModel.getName(data));
     }

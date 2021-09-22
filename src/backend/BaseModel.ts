@@ -63,28 +63,28 @@ class BaseModel {
         return this.data;
     }
 
-    getDataCol(name) {
-        if (!name) throw new Error('getDataCol: no name');
+    getCol(name) {
+        if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) {
             // console.log('this.data', this.data);
-            throw new Error(`getDataCol: no col ${name}`);
+            throw new Error(`getCol: no col ${name}`);
         }
         return arr;
     }
 
     getItemNames(colName) {
-        return this.getDataCol(colName).map(data => BaseModel.getName(data));
+        return this.getCol(colName).map(data => BaseModel.getName(data));
     }
 
     getColItemData(colName, name) {
-        const data = BaseModel.findColDataByName(this.getDataCol(colName), name);
+        const data = BaseModel.findColDataByName(this.getCol(colName), name);
         if (data) return data;
         return null;
     }
 
     removeColData(colName, name) {
-        const col = this.getDataCol(colName);
+        const col = this.getCol(colName);
         const data = BaseModel.findColDataByName(col, name);
         if (!data) throw new Error(`removeColData: no ${name} in ${colName}`);
         col.splice(col.indexOf(data), 1);
@@ -98,7 +98,7 @@ class BaseModel {
     addModelData(colName, data) {
         const name = BaseModel.getName(data);
         if (this.getColItemData(colName, name)) throw new Error(`${name} already exists in ${colName}`);
-        this.getDataCol(colName).push(data);
+        this.getCol(colName).push(data);
     }
 
     getApp() {
@@ -106,7 +106,7 @@ class BaseModel {
     }
 
     replaceDataColItem(colName, oldData, newData) {
-        const dataCol = this.getDataCol(colName);
+        const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
         if (i === -1) throw new Error(`replaceDataColItem: no ${BaseModel.getName(oldData)} in ${colName}`);
         dataCol[i] = newData;
