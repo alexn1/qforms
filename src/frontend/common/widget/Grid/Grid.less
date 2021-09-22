@@ -98,6 +98,7 @@
       color           : @headTdColor;
       position        : relative;
       background-clip : padding-box; /* prevent hiding border when position: relative */
+      vertical-align: middle;
       > div {
         text-overflow: ellipsis;
         white-space  : nowrap;
@@ -136,6 +137,7 @@
     > .Grid__td {
       height: @bodyTdHeight;
       text-shadow: @bodyTdTextShadow;
+      vertical-align: middle;
       &.active {
         text-shadow     : @bodyTdActiveTextShadow;
         background-color: @bodyTdActiveBackgroundColor;
