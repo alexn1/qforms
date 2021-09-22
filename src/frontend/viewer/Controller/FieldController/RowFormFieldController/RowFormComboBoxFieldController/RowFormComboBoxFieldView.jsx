@@ -1,6 +1,10 @@
 class RowFormComboBoxFieldView extends RowFormFieldView {
+    onChange = async e => {
+        this.rerender();
+        await this.props.ctrl.onChange(e);
+    }
     render() {
-        // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems());
+        // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getClassName()}>
@@ -9,14 +13,14 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                     nullable={true}
                     value={ctrl.getValueForWidget()}
                     readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange}
+                    onChange={this.onChange}
                     items={ctrl.getItems()}
                     placeholder={ctrl.getPlaceholder()}
                 />
-                {ctrl.getModel().getAttr('itemEditPage') && ctrl.getValue() &&
+                {ctrl.getModel().getAttr('itemEditPage') &&
                     <Button
                         onClick={ctrl.onEditButtonClick}
-                        // enabled={!!ctrl.getModel().getAttr('itemEditPage')}
+                        enabled={!!ctrl.getValue()}
                     >...</Button>
                 }
                 {ctrl.getModel().getAttr('newRowMode')

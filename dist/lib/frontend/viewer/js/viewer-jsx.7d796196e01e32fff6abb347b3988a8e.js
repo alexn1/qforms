@@ -131,9 +131,20 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormComboBoxFieldView extends RowFormFieldView {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onChange", async e => {
+      this.rerender();
+      await this.props.ctrl.onChange(e);
+    });
+  }
+
   render() {
-    // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems());
+    // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getClassName()
@@ -142,12 +153,12 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
       nullable: true,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
-      onChange: ctrl.onChange,
+      onChange: this.onChange,
       items: ctrl.getItems(),
       placeholder: ctrl.getPlaceholder()
-    }), ctrl.getModel().getAttr('itemEditPage') && ctrl.getValue() && /*#__PURE__*/React.createElement(Button, {
-      onClick: ctrl.onEditButtonClick // enabled={!!ctrl.getModel().getAttr('itemEditPage')}
-
+    }), ctrl.getModel().getAttr('itemEditPage') && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onEditButtonClick,
+      enabled: !!ctrl.getValue()
     }, "..."), ctrl.getModel().getAttr('newRowMode') && ctrl.getModel().getAttr('newRowMode') !== 'disabled' && ctrl.getForm().getMode() === 'edit' && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateButtonClick
     }, "+"));
