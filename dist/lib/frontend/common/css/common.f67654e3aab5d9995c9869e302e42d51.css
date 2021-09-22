@@ -156,16 +156,26 @@ table.DatePicker td.selected {
   -khtml-user-select: none;
 }
 .Grid__table {
+  display: table;
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   table-layout: fixed;
 }
-.Grid_tr {
+.Grid__tr {
+  display: table-row;
   border-bottom: 0px solid white;
+}
+a.Grid__tr {
+  text-decoration: none;
+  color: inherit;
+}
+a[href].Grid__tr:hover {
+  background-color: lightgreen !important;
 }
 .Grid__td,
 .Grid__th {
+  display: table-cell;
   padding: 0;
   cursor: default;
   vertical-align: middle;
@@ -257,25 +267,6 @@ table.DatePicker td.selected {
 }
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
-}
-.Grid__table {
-  display: table;
-}
-.Grid__tr {
-  display: table-row;
-}
-.Grid__td {
-  display: table-cell;
-}
-.Grid__th {
-  display: table-cell;
-}
-a.Grid__tr {
-  text-decoration: none;
-  color: inherit;
-}
-a[href].Grid__tr:hover {
-  background-color: lightgreen !important;
 }
 
 .Image {
