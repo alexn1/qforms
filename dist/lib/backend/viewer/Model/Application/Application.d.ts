@@ -32,10 +32,7 @@ declare class Application extends Model {
     getVersion(): any;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
-    getClientUserFromServerUser(context: Context): Promise<{
-        id: any;
-        login: any;
-    }>;
+    getClientUserFromServerUser(context: Context): Promise<any>;
     createMenu(context: Context): Promise<void>;
     createPageLink(name: string): PageLink;
     createPage(pageLinkName: string): Promise<Page>;
