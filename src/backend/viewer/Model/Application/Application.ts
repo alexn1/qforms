@@ -156,7 +156,9 @@ class Application extends Model {
 
     getResponseUser(context: Context) {
         if (this.isAuthentication()) {
-            return this.getClientUserFromServerUser(context.getUser());
+            const clientUser = this.getClientUserFromServerUser(context.getUser());
+            // console.log('clientUser:', clientUser);
+            return clientUser;
         }
         return null;
     }
