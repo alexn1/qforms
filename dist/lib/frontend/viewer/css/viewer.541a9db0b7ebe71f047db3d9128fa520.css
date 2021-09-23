@@ -77,11 +77,11 @@
 .standard .RowFormComboBoxFieldView > button:active {
   background-color: #bbb;
 }
-.standard .RowFormComboBoxFieldView.changed > select {
-  background-color: #eefdea;
-}
 .standard .RowFormComboBoxFieldView.error > select {
   background-color: #f2dede;
+}
+.debug .RowFormComboBoxFieldView.changed > select {
+  background-color: #eefdea;
 }
 
 .RowFormDatePickerFieldView > .DropdownDatePicker {
@@ -99,11 +99,11 @@
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.standard .RowFormDatePickerFieldView.changed > div > input {
-  background-color: #eefdea;
-}
 .standard .RowFormDatePickerFieldView.error > div > input {
   background-color: #f2dede;
+}
+.debug .RowFormDatePickerFieldView.changed > div > input {
+  background-color: #eefdea;
 }
 
 .RowFormDateTimeFieldView.datetime {
@@ -159,11 +159,11 @@
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.standard .RowFormDateTimeFieldView.changed > div > input {
-  background-color: #eefdea;
-}
 .standard .RowFormDateTimeFieldView.error > div > input {
   background-color: #f2dede !important;
+}
+.debug .RowFormDateTimeFieldView.changed > div > input {
+  background-color: #eefdea;
 }
 
 .standard .RowFormFileFieldView img {
@@ -206,15 +206,15 @@
   padding: 0 5px 0 5px;
   font-size: inherit;
 }
-.standard .RowFormTextAreaFieldView.changed > textarea {
-  background-color: #eefdea;
-}
 .standard .RowFormTextAreaFieldView.error > textarea {
   background-color: #f2dede;
 }
 .standard .RowFormTextAreaFieldView > textarea[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+.debug .RowFormTextAreaFieldView.changed > textarea {
+  background-color: #eefdea;
 }
 
 .RowFormTextBoxFieldView {
@@ -244,15 +244,15 @@
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.standard .RowFormTextBoxFieldView.changed > input {
-  background-color: #eefdea;
-}
 .standard .RowFormTextBoxFieldView.error > input {
   background-color: #f2dede;
 }
 .standard .RowFormTextBoxFieldView > input[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+.debug .RowFormTextBoxFieldView.changed > input {
+  background-color: #eefdea;
 }
 
 .RowFormTimeFieldView {
@@ -282,15 +282,15 @@
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.standard .RowFormTimeFieldView.changed > input {
-  background-color: #eefdea;
-}
 .standard .RowFormTimeFieldView.error > input {
   background-color: #f2dede;
 }
 .standard .RowFormTimeFieldView > input[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+.debug .RowFormTimeFieldView.changed > input {
+  background-color: #eefdea;
 }
 
 .TableFormCheckBoxFieldView {

@@ -11,9 +11,7 @@
         //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
         font-size: inherit;
     }
-    &.changed > textarea {
-        background-color: rgb(238, 253, 234);
-    }
+
     &.error > textarea {
         background-color: #f2dede;
     }
@@ -21,4 +19,8 @@
         background-color: lightgoldenrodyellow;
         color: gray;
     }
+}
+
+.debug .RowFormTextAreaFieldView.changed > textarea {
+    background-color: rgb(238, 253, 234);
 }
