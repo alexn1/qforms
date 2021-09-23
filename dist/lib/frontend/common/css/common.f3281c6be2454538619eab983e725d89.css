@@ -392,18 +392,10 @@ a[href].Grid__tr:hover {
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
 }
-.Modal > div {
+.Modal__container {
   margin: auto;
-  width: 85%;
+  width: 1100px;
   height: 85%;
-  /*.close {
-      color: #aaa;
-      float: right;
-      &:hover {
-        color: black;
-        cursor: pointer;
-      }
-    }*/
 }
 
 .Slider {

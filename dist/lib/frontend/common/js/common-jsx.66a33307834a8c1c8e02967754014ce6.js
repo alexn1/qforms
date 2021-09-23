@@ -1352,8 +1352,10 @@ window.QForms.Menu = Menu;
 class Modal extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: "Modal"
-    }, /*#__PURE__*/React.createElement("div", null, this.props.children));
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__container`
+    }, this.props.children));
   }
 
 }
