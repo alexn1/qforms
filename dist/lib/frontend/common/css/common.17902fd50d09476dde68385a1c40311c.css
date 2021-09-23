@@ -1,3 +1,49 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: 0 !important;
+}
+input,
+select,
+img {
+  display: block;
+}
+
+.flex-max {
+  flex: 1 1 auto;
+}
+
+.flex-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__container {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+.wait,
+.wait * {
+  cursor: wait !important;
+}
+
 .Box {
   background-color: blue;
   height: 200px;

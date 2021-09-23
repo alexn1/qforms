@@ -21,9 +21,9 @@ class DatabaseView extends ReactComponent {
         // console.log('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
-        return <div className={'DatabaseView place'}>
-            <div className={'client place'}>
-                <div className={'frame'}>
+        return <div className={'DatabaseView frame'}>
+            <div className={'client frame'}>
+                <div className={'frame__container'}>
                     <div className={'divTableInfo full flex-rows'}>
                         {ctrl.tableInfo && this.renderGrid()}
                         {ctrl.tableInfo && <Button onClick={ctrl.onCreateTableClick}>Create Table</Button>}

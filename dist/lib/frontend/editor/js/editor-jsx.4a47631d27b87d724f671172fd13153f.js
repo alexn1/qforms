@@ -1227,11 +1227,11 @@ class DatabaseView extends ReactComponent {
     const ctrl = this.props.ctrl;
     const document = this.props.document;
     return /*#__PURE__*/React.createElement("div", {
-      className: 'DatabaseView place'
+      className: 'DatabaseView frame'
     }, /*#__PURE__*/React.createElement("div", {
-      className: 'client place'
+      className: 'client frame'
     }, /*#__PURE__*/React.createElement("div", {
-      className: 'frame'
+      className: 'frame__container'
     }, /*#__PURE__*/React.createElement("div", {
       className: 'divTableInfo full flex-rows'
     }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
@@ -1257,9 +1257,9 @@ class TableView extends ReactComponent {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("div", {
-      className: "client place"
+      className: "client frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame flex-rows"
+      className: "frame__container flex-rows"
     }, /*#__PURE__*/React.createElement(Grid, {
       classList: ['flex-max'],
       columns: [{
