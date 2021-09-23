@@ -770,7 +770,7 @@ class TableFormView extends FormView {
     const dataSource = model.getDefaultDataSource();
     const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
-      className: 'TableFormView__toolbar'
+      className: `${this.getCssBlockName()}__toolbar`
     }, model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
       width: width,

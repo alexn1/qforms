@@ -5,7 +5,7 @@ class TableFormView extends FormView {
         const dataSource = model.getDefaultDataSource();
         const width = '120px';
         return (
-            <div className={'TableFormView__toolbar'}>
+            <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
                     <Button
                         key="refresh"
