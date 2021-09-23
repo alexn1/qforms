@@ -159,7 +159,7 @@ img {
   border: none;
   background-color: #ccc;
 }
-.standard .RowFormComboBoxFieldView > button:hover {
+.standard .RowFormComboBoxFieldView > button:hover:enabled {
   background-color: #ddd;
 }
 .standard .RowFormComboBoxFieldView > button:active {
