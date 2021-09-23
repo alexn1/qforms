@@ -19,7 +19,24 @@ class ApplicationView extends ReactComponent {
             </Modal>
         );
     }
-
+    render() {
+        console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
+        const ctrl = this.props.ctrl;
+        return (
+            <div className={`${this.constructor.name}__container`}>
+                <header>
+                    <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
+                </header>
+                <main className={`${this.constructor.name}__main`}>
+                    {this.renderActivePage()}
+                </main>
+                <footer>
+                    <Statusbar onCreate={ctrl.onStatusbarCreate}/>
+                </footer>
+                {this.renderModalPages()}
+            </div>
+        );
+    }
 }
 
 window.QForms.ApplicationView = ApplicationView;

@@ -402,7 +402,7 @@ class Application extends Model {
     }
 
     getViewClassName() {
-        return 'SdiApplicationView';
+        return 'ApplicationView';
     }
 
     async connect(context: Context): Promise<void> {

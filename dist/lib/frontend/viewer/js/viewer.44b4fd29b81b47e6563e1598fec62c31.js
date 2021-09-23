@@ -91,7 +91,7 @@ class ApplicationController extends Controller {
     static create(model) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
-        const Class = CustomClass ? CustomClass : SdiApplicationController;
+        const Class = CustomClass ? CustomClass : ApplicationController;
         return new Class(model);
     }
     static getSearchObj() {

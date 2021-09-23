@@ -335,7 +335,7 @@ class Application extends Model_1.default {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
     getViewClassName() {
-        return 'SdiApplicationView';
+        return 'ApplicationView';
     }
     async connect(context) {
         for (const db of this.databases) {

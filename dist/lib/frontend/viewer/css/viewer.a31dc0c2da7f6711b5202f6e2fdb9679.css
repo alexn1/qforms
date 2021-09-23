@@ -86,6 +86,26 @@ img {
   cursor: wait !important;
 }
 
+.ApplicationView {
+  height: 100%;
+}
+.ApplicationView__body {
+  margin: 0;
+  height: 100%;
+}
+.ApplicationView__root {
+  height: 100%;
+}
+.ApplicationView__container {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+.ApplicationView__main {
+  background-color: gray;
+}
+
 .MdiApplicationView {
   height: 100%;
   font-family: sans-serif;

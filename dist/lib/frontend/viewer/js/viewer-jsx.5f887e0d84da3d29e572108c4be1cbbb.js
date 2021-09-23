@@ -32,6 +32,21 @@ class ApplicationView extends ReactComponent {
     }, ApplicationView.renderPage(pageCtrl)));
   }
 
+  render() {
+    console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.constructor.name}__container`
+    }, /*#__PURE__*/React.createElement("header", null, /*#__PURE__*/React.createElement(Menu, {
+      items: ctrl.getMenuItemsProp(),
+      onClick: ctrl.onMenuItemClick
+    })), /*#__PURE__*/React.createElement("main", {
+      className: `${this.constructor.name}__main`
+    }, this.renderActivePage()), /*#__PURE__*/React.createElement("footer", null, /*#__PURE__*/React.createElement(Statusbar, {
+      onCreate: ctrl.onStatusbarCreate
+    })), this.renderModalPages());
+  }
+
 }
 
 window.QForms.ApplicationView = ApplicationView;
@@ -73,23 +88,7 @@ class MdiApplicationView extends ApplicationView {
 }
 
 window.QForms.MdiApplicationView = MdiApplicationView;
-class SdiApplicationView extends ApplicationView {
-  render() {
-    console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: `SdiApplicationView__container`
-    }, /*#__PURE__*/React.createElement("header", null, /*#__PURE__*/React.createElement(Menu, {
-      items: ctrl.getMenuItemsProp(),
-      onClick: ctrl.onMenuItemClick
-    })), /*#__PURE__*/React.createElement("main", {
-      className: "SdiApplicationView__main"
-    }, this.renderActivePage()), /*#__PURE__*/React.createElement("footer", null, /*#__PURE__*/React.createElement(Statusbar, {
-      onCreate: ctrl.onStatusbarCreate
-    })), this.renderModalPages());
-  }
-
-}
+class SdiApplicationView extends ApplicationView {}
 
 window.QForms.SdiApplicationView = SdiApplicationView;
 class RowFormFieldView extends ReactComponent {
@@ -947,6 +946,17 @@ class PageView extends View {
     return caption;
   }
 
+  renderCaption2() {
+    const ctrl = this.props.ctrl;
+    const model = ctrl.getModel();
+    return /*#__PURE__*/React.createElement("h3", {
+      className: "PageView__caption"
+    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+      className: 'PageView__close',
+      onClick: ctrl.onClosePageClick
+    }, "\xD7"));
+  }
+
   renderToolbar() {
     const ctrl = this.props.ctrl;
     const model = ctrl.model;
@@ -968,17 +978,6 @@ class PageView extends View {
 
   shouldComponentUpdate(nextProps, nextState) {
     return false;
-  }
-
-  renderCaption2() {
-    const ctrl = this.props.ctrl;
-    const model = ctrl.getModel();
-    return /*#__PURE__*/React.createElement("h3", {
-      className: "PageView__caption"
-    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
-      className: 'PageView__close',
-      onClick: ctrl.onClosePageClick
-    }, "\xD7"));
   }
 
   render() {

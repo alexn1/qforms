@@ -40,6 +40,17 @@ class PageView extends View {
         }
         return caption;
     }
+    renderCaption2() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.getModel();
+        return <h3 className="PageView__caption">
+            {this.renderCaption()}
+            {model.isModal() && <span
+                className={'PageView__close'}
+                onClick={ctrl.onClosePageClick}
+            >×</span>}
+        </h3>;
+    }
     onActionsClick = async li => {
         // console.log('PageView.onActionsClick:', li);
         const ctrl = this.props.ctrl;
@@ -84,17 +95,6 @@ class PageView extends View {
     }
     shouldComponentUpdate(nextProps, nextState) {
         return false;
-    }
-    renderCaption2() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.getModel();
-        return <h3 className="PageView__caption">
-            {this.renderCaption()}
-            {model.isModal() && <span
-                className={'PageView__close'}
-                onClick={ctrl.onClosePageClick}
-            >×</span>}
-        </h3>;
     }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
