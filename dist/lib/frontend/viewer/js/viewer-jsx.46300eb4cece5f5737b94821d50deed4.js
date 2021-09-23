@@ -929,7 +929,13 @@ class PageView extends View {
     }
 
     if (key) {
-      caption += ` ${key}`;
+      const arr = JSON.parse(key);
+
+      if (arr.length === 1 && typeof arr[0] === 'number') {
+        caption += ` #${arr[0]}`;
+      } else {
+        caption += ` ${key}`;
+      }
     }
 
     if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew())) {
