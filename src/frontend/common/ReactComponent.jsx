@@ -7,14 +7,20 @@ class ReactComponent extends React.Component {
     }
     getClassList() {
         return [
-            this.constructor.name,
+            this.getCssBlockName(),
             ...(this.props.classList || []),
             ...(this.state && this.state.classList ? this.state.classList : [])
         ];
     }
-    getClassName() {
+    getCssBlockName() {
+        return this.constructor.name;
+    }
+    getCssClassNames() {
         return this.getClassList().join(' ');
     }
+    /*getClassName() {
+        return this.getClassList().join(' ');
+    }*/
     rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`);
         return new Promise(resolve => {

@@ -1255,7 +1255,7 @@ class TableView extends ReactComponent {
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("div", {
       className: "client place"
     }, /*#__PURE__*/React.createElement("div", {
@@ -1587,7 +1587,7 @@ class TreeWidget extends ReactComponent {
     );
     const items = this.props.items;
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("ul", null, items.map(item => /*#__PURE__*/React.createElement(TreeItem, {
       key: item.getTitle(),
       tree: this,

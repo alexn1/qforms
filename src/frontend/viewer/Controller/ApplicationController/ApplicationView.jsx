@@ -23,11 +23,11 @@ class ApplicationView extends ReactComponent {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.constructor.name}__container`}>
+            <div className={`${this.getCssBlockName()}__container`}>
                 <header>
                     <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 </header>
-                <main className={`${this.constructor.name}__main`}>
+                <main className={`${this.getCssBlockName()}__main`}>
                     {this.renderActivePage()}
                 </main>
                 <footer>

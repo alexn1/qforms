@@ -20,7 +20,7 @@ class Image extends ReactComponent {
     render() {
         return (
             <img
-                className={this.getClassName()}
+                className={this.getCssClassNames()}
                 ref={this.img}
                 src={this.props.src}
                 onClick={this.onImgClick}

@@ -170,7 +170,7 @@ class TimeBox extends ReactComponent {
         return (
             <input
                 type="text"
-                className={this.getClassName()}
+                className={this.getCssClassNames()}
                 id={this.props.id}
                 readOnly={this.props.readOnly}
                 placeholder={this.props.placeholder}

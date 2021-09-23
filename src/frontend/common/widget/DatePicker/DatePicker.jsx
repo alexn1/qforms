@@ -144,7 +144,7 @@ class DatePicker extends ReactComponent {
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (
-            <table className={this.getClassName()}
+            <table className={this.getCssClassNames()}
                 style={this.props.visible === false ? {display: 'none'} : {display: 'block'}}
                    cellSpacing="0"
                    cellPadding="0"

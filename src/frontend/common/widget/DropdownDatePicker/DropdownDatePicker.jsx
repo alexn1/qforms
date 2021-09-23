@@ -96,7 +96,7 @@ class DropdownDatePicker extends ReactComponent {
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
         return (
-            <div className={this.getClassName()}>
+            <div className={this.getCssClassNames()}>
                 <input
                     readOnly
                     onClick={this.onInputClick}

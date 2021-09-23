@@ -7,7 +7,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
         const ctrl = this.props.ctrl;
         return (
-            <div className={this.getClassName()}>
+            <div className={this.getCssClassNames()}>
                 <ComboBox
                     onCreate={ctrl.onWidgetCreate}
                     nullable={true}

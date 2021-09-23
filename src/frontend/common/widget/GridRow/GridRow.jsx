@@ -22,7 +22,7 @@ class GridRow extends ReactComponent {
         const key = this.props.rowKey;
         const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
         return <a
-            className={`${grid.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`}
+            className={`${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`}
             data-key={key}
             href={link}
             onClick={grid.onLinkClick}
@@ -30,7 +30,7 @@ class GridRow extends ReactComponent {
             {grid.props.columns.map((column, j) =>
                 <div
                     key={column.name}
-                    className={`${grid.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`}
+                    className={`${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`}
                     style={{width: grid.getColumnWidth(j)}}
                     data-rc={`[${i},${j}]`}
                     data-row={key}
@@ -40,7 +40,7 @@ class GridRow extends ReactComponent {
                     {grid.renderCell(row, column)}
                 </div>)}
             {!!grid.props.extraColumn &&
-                <div className={`${grid.getGridBlockName()}__td`}
+                <div className={`${grid.getCssBlockName()}__td`}
                      data-r={i}
                      data-row={key}
                      onMouseDown={grid.onRowMouseDown}

@@ -21,7 +21,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         // console.log('RowFormDateTimeFieldView.render');
         const ctrl = this.props.ctrl;
         return (
-            <div className={this.getClassName()} style={ctrl.renderViewStyle(ctrl.getRow())}>
+            <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(ctrl.getRow())}>
                 <DropdownDatePicker
                     onCreate={ctrl.onWidgetCreate}
                     value={ctrl.getValueForWidget()}

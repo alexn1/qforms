@@ -8,12 +8,20 @@ class ReactComponent extends React.Component {
   }
 
   getClassList() {
-    return [this.constructor.name, ...(this.props.classList || []), ...(this.state && this.state.classList ? this.state.classList : [])];
+    return [this.getCssBlockName(), ...(this.props.classList || []), ...(this.state && this.state.classList ? this.state.classList : [])];
   }
 
-  getClassName() {
+  getCssBlockName() {
+    return this.constructor.name;
+  }
+
+  getCssClassNames() {
     return this.getClassList().join(' ');
   }
+  /*getClassName() {
+      return this.getClassList().join(' ');
+  }*/
+
 
   rerender(logTime = true) {
     // console.log(`${this.constructor.name}.rerender`);
@@ -125,7 +133,7 @@ class Button extends ReactComponent {
   render() {
     // console.log('Button.render', this.props.title, this.props);
     return /*#__PURE__*/React.createElement("button", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       name: this.props.name,
       id: this.props.id,
       disabled: this.isDisabled(),
@@ -272,7 +280,7 @@ class ComboBox extends ReactComponent {
   render() {
     // console.log('ComboBox.render', this.state.value);
     return /*#__PURE__*/React.createElement("select", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       onChange: this.onChange,
       value: this.state.value,
       disabled: this.props.readOnly,
@@ -441,7 +449,7 @@ class DatePicker extends ReactComponent {
     const minDate = this.isMinDate() ? this.createMinDate() : null;
     const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
     return /*#__PURE__*/React.createElement("table", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       style: this.props.visible === false ? {
         display: 'none'
       } : {
@@ -487,7 +495,7 @@ window.QForms.DatePicker = DatePicker;
 class DropDownIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       style: {
         width: this.props.size,
         height: this.props.size
@@ -713,7 +721,7 @@ class DropdownDatePicker extends ReactComponent {
   render() {
     // console.log('DropdownDatePicker.render', this.props, this.state);
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("input", {
       readOnly: true,
       onClick: this.onInputClick,
@@ -1040,13 +1048,9 @@ class Grid extends ReactComponent {
     return null;
   }
 
-  getGridBlockName() {
-    return this.constructor.name;
-  }
-
   renderColumns() {
     return this.props.columns.map((column, i) => /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__th`,
+      className: `${this.getCssBlockName()}__th`,
       key: column.name,
       style: {
         width: this.getColumnWidth(i)
@@ -1112,23 +1116,23 @@ class Grid extends ReactComponent {
   render() {
     // console.log('Grid.render', this.props.name);
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       tabIndex: 0,
       onKeyDown: this.onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__head`,
+      className: `${this.getCssBlockName()}__head`,
       ref: this.head
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__table`
+      className: `${this.getCssBlockName()}__table`
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__tr`
+      className: `${this.getCssBlockName()}__tr`
     }, this.props.columns && this.renderColumns(), !!this.props.extraColumn && /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__th`
+      className: `${this.getCssBlockName()}__th`
     })))), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__body`,
+      className: `${this.getCssBlockName()}__body`,
       onScroll: this.onBodyScroll
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getGridBlockName()}__table`
+      className: `${this.getCssBlockName()}__table`
     }, this.props.rows && this.renderRows())));
   }
 
@@ -1158,7 +1162,7 @@ class GridCell extends ReactComponent {
     const row = this.props.row;
     const column = this.props.column;
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, this.renderCellValue(row[column.name])));
@@ -1193,13 +1197,13 @@ class GridRow extends ReactComponent {
     const key = this.props.rowKey;
     const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
     return /*#__PURE__*/React.createElement("a", {
-      className: `${grid.getGridBlockName()}__tr ${this.props.active ? 'active' : ''}`,
+      className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`,
       "data-key": key,
       href: link,
       onClick: grid.onLinkClick
     }, grid.props.columns.map((column, j) => /*#__PURE__*/React.createElement("div", {
       key: column.name,
-      className: `${grid.getGridBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
+      className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
       style: {
         width: grid.getColumnWidth(j)
       },
@@ -1208,7 +1212,7 @@ class GridRow extends ReactComponent {
       onMouseDown: grid.onCellMouseDown,
       onDoubleClick: grid.onCellDoubleClick
     }, grid.renderCell(row, column))), !!grid.props.extraColumn && /*#__PURE__*/React.createElement("div", {
-      className: `${grid.getGridBlockName()}__td`,
+      className: `${grid.getCssBlockName()}__td`,
       "data-r": i,
       "data-row": key,
       onMouseDown: grid.onRowMouseDown,
@@ -1252,7 +1256,7 @@ class Image extends ReactComponent {
 
   render() {
     return /*#__PURE__*/React.createElement("img", {
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       ref: this.img,
       src: this.props.src,
       onClick: this.onImgClick
@@ -1415,7 +1419,7 @@ class Slider extends ReactComponent {
     // console.log('Slider.render', this.props.images);
     const images = this.props.images || [];
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("img", {
       className: 'Slider_image',
       src: images[this.state.image],
@@ -1527,7 +1531,7 @@ class Tab extends ReactComponent {
 
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getClassName()
+      className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("ul", null, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", null, this.props.tabs && this.renderContents()));
   }
 
@@ -1625,7 +1629,7 @@ class TextBox extends ReactComponent {
     // console.log('TextBox.render');
     return /*#__PURE__*/React.createElement("input", {
       ref: this.input,
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       type: "text",
       name: this.props.name,
       id: this.props.id,
@@ -1845,7 +1849,7 @@ class TimeBox extends ReactComponent {
     // console.log('TimeBox.render', this.state.value);
     return /*#__PURE__*/React.createElement("input", {
       type: "text",
-      className: this.getClassName(),
+      className: this.getCssClassNames(),
       id: this.props.id,
       readOnly: this.props.readOnly,
       placeholder: this.props.placeholder,

@@ -12,7 +12,7 @@ class TableView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getClassName()}>
+        return <div className={this.getCssClassNames()}>
             <div className="client place">
                 <div className="frame flex-rows">
                     <Grid

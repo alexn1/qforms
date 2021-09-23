@@ -207,12 +207,9 @@ class Grid extends ReactComponent {
         if (this.props.columns[i].width) return `${this.props.columns[i].width}px`;
         return null;
     }
-    getGridBlockName() {
-        return this.constructor.name;
-    }
     renderColumns() {
         return this.props.columns.map((column, i) =>
-            <div className={`${this.getGridBlockName()}__th`} key={column.name} style={{width: this.getColumnWidth(i)}}>
+            <div className={`${this.getCssBlockName()}__th`} key={column.name} style={{width: this.getColumnWidth(i)}}>
                 <div>{column.title || column.name}</div>
                 <span className={'Grid__resize'} data-i={i} onDoubleClick={this.onResizeDoubleClick}></span>
             </div>
@@ -281,20 +278,20 @@ class Grid extends ReactComponent {
     render() {
         // console.log('Grid.render', this.props.name);
         return (
-            <div className={this.getClassName()}
+            <div className={this.getCssClassNames()}
                  tabIndex={0}
                  onKeyDown={this.onKeyDown}
             >
-                <div className={`${this.getGridBlockName()}__head`} ref={this.head}>
-                    <div className={`${this.getGridBlockName()}__table`}>
-                        <div className={`${this.getGridBlockName()}__tr`}>
+                <div className={`${this.getCssBlockName()}__head`} ref={this.head}>
+                    <div className={`${this.getCssBlockName()}__table`}>
+                        <div className={`${this.getCssBlockName()}__tr`}>
                             {this.props.columns && this.renderColumns()}
-                            {!!this.props.extraColumn && <div className={`${this.getGridBlockName()}__th`}/>}
+                            {!!this.props.extraColumn && <div className={`${this.getCssBlockName()}__th`}/>}
                         </div>
                     </div>
                 </div>
-                <div className={`${this.getGridBlockName()}__body`} onScroll={this.onBodyScroll}>
-                    <div className={`${this.getGridBlockName()}__table`}>
+                <div className={`${this.getCssBlockName()}__body`} onScroll={this.onBodyScroll}>
+                    <div className={`${this.getCssBlockName()}__table`}>
                         {this.props.rows && this.renderRows()}
                     </div>
                 </div>

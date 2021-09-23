@@ -3,7 +3,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className={this.getClassName()} style={ctrl.renderViewStyle(row)}>
+            <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(row)}>
                 <CheckBox
                     checked={ctrl.getValueForWidget(row)}
                     readOnly={true}

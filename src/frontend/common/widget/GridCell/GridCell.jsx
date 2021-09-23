@@ -14,7 +14,7 @@ class GridCell extends ReactComponent {
         const row = this.props.row;
         const column = this.props.column;
         return (
-            <div className={this.getClassName()}>
+            <div className={this.getCssClassNames()}>
                 <span ref={this.span}>{this.renderCellValue(row[column.name])}</span>
             </div>
         );

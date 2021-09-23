@@ -59,7 +59,7 @@ class Tab extends ReactComponent {
     render() {
 
         return (
-            <div className={this.getClassName()}>
+            <div className={this.getCssClassNames()}>
                 <ul>
                     {this.props.tabs && this.renderTitles()}
                 </ul>

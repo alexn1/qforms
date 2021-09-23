@@ -44,7 +44,7 @@ class ComboBox extends ReactComponent {
         // console.log('ComboBox.render', this.state.value);
         return (
             <select
-                className={this.getClassName()}
+                className={this.getCssClassNames()}
                 onChange={this.onChange}
                 value={this.state.value}
                 disabled={this.props.readOnly}

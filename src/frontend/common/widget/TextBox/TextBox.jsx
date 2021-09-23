@@ -31,7 +31,7 @@ class TextBox extends ReactComponent {
         return (
             <input
                 ref={this.input}
-                className={this.getClassName()}
+                className={this.getCssClassNames()}
                 type="text"
                 name={this.props.name}
                 id={this.props.id}

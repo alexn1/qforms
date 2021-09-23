@@ -100,7 +100,7 @@ class TableFormView extends FormView {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getClassName()} full flex-rows`}>
+            <div className={`${this.getCssClassNames()} full flex-rows`}>
                 {this.renderToolbar()}
                 <Grid
                     classList={['flex-max']}

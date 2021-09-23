@@ -1,7 +1,7 @@
 class RowFormTextAreaFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getClassName()}>
+        return <div className={this.getCssClassNames()}>
             <TextArea
                 onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForWidget()}

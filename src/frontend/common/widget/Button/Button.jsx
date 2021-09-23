@@ -18,7 +18,7 @@ class Button extends ReactComponent {
     render() {
         // console.log('Button.render', this.props.title, this.props);
         return (
-            <button className={this.getClassName()}
+            <button className={this.getCssClassNames()}
                 name={this.props.name}
                 id={this.props.id}
                 disabled={this.isDisabled()}
