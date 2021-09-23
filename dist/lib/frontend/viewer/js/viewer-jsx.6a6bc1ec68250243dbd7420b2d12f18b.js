@@ -637,7 +637,7 @@ class RowFormView extends FormView {
     const text = ctrl.getModel().getApp().getText();
     const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
-      className: 'RowFormView__toolbar'
+      className: `${this.getCssBlockName()}__toolbar`
     }, ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "edit",
       title: text.form.edit,
@@ -717,7 +717,7 @@ class RowFormView extends FormView {
     // console.log('RowFormView.renderFields');
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: "RowFormView__form-grid"
+      className: `${this.getCssBlockName()}__form-grid`
     }, Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
       const fieldCtrl = ctrl.fields[name];
       return [RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`), RowFormView.renderField(fieldCtrl, {
