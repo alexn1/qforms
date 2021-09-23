@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="<%=application.getViewClassName()%> <%=application.getAttr('theme')%>" lang="<%=application.getAttr('lang')%>">
+<html class="<%=application.getViewClassName()%> <%=application.getAttr('theme')%> <%=context.query.debug === '1' ? 'debug' : ''%>" lang="<%=application.getAttr('lang')%>">
 <head>
     <!-- qforms v<%=version%> -->
     <!-- app v<%=application.getVersion()%>  -->
@@ -30,13 +30,6 @@
     <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>
 </head>
 <body class="<%=application.getViewClassName()%>__body">
-<%
-if (context.query.debug === '1') {
-    %><div class="<%=application.getViewClassName()%>__root debug"></div>
-<%
-} else {
-    %><div class="<%=application.getViewClassName()%>__root"></div><%
-}
-%>
+    <div class="<%=application.getViewClassName()%>__root"/>
 </body>
 </html>
