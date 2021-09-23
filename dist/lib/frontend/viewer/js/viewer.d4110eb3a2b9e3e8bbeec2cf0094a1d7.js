@@ -1312,6 +1312,7 @@ class TableFormLinkFieldController extends TableFormFieldController {
     }
     onClick = e => {
         console.log('TableFormLinkFieldController.onClick', e);
+        e.preventDefault();
         this.emit('click', {source: this});
     }
 }
