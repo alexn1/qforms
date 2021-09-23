@@ -14,14 +14,12 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         }
         return ctrl.widget2.state.value !== '';
     }
-    getClassName() {
-        return `${super.getClassName()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`;
-    }
     render() {
         // console.log('RowFormDateTimeFieldView.render');
         const ctrl = this.props.ctrl;
         return (
-            <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(ctrl.getRow())}>
+            <div className={`${this.getCssClassNames()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`}
+                 style={ctrl.renderViewStyle(ctrl.getRow())}>
                 <DropdownDatePicker
                     onCreate={ctrl.onWidgetCreate}
                     value={ctrl.getValueForWidget()}
