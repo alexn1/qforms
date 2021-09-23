@@ -91,7 +91,7 @@ class SdiApplicationView extends ApplicationView {
     const ctrl = this.props.ctrl;
     const model = ctrl.model;
     return /*#__PURE__*/React.createElement("div", {
-      className: `SdiApplicationView__container ${model.getAttr('theme')}`
+      className: `SdiApplicationView__container`
     }, /*#__PURE__*/React.createElement("header", null, /*#__PURE__*/React.createElement(Menu, {
       items: ctrl.getMenuItemsProp(),
       onClick: ctrl.onMenuItemClick
