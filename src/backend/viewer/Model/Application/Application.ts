@@ -146,18 +146,26 @@ class Application extends Model {
         response.pages = await this.fillPages(context);
 
         // user
-        if (this.isAuthentication()) {
-            const user = context.getUser();
-            response.user = {
-                id   : user.id,
-                login: user.name
-            };
-        } else {
-            response.user = null;
-        }
+        response.user = this.getResponseUser(context);
 
+        // time
         response.time = Date.now() - start;
+
         return response;
+    }
+
+    getResponseUser(context: Context) {
+        if (this.isAuthentication()) {
+            return this.getClientUserFromServerUser(context.getUser());
+        }
+        return null;
+    }
+
+    getClientUserFromServerUser(user) {
+        return {
+            id   : user.id,
+            login: user.name
+        };
     }
 
     async createMenu(context: Context): Promise<void> {
