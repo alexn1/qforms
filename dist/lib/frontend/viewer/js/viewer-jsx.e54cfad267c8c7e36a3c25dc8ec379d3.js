@@ -1004,6 +1004,10 @@ class PageView extends View {
 
 window.QForms.PageView = PageView;
 class PageView2 extends PageView {
+  getCssBlockName() {
+    return 'PageView';
+  }
+
   getAllTabs() {
     const ctrl = this.props.ctrl;
     return ctrl.forms.map(form => {
