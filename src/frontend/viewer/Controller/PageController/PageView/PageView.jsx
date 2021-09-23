@@ -36,17 +36,17 @@ class PageView extends View {
             caption += ` ${key}`;
         }
         if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) ) {
-            return [caption, ' ', <span key={'star'} className="PageView__star">*</span>];
+            return [caption, ' ', <span key={'star'} className={`${this.getCssBlockName()}__star`}>*</span>];
         }
         return caption;
     }
     renderCaption2() {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
-        return <h3 className="PageView__caption">
+        return <h3 className={`${this.getCssBlockName()}__caption`}>
             {this.renderCaption()}
             {model.isModal() && <span
-                className={'PageView__close'}
+                className={`${this.getCssBlockName()}__close`}
                 onClick={ctrl.onClosePageClick}
             >×</span>}
         </h3>;
@@ -65,7 +65,7 @@ class PageView extends View {
         const model = ctrl.model;
         const width = 150;
         return (
-            <div className={'PageView__toolbar'}>
+            <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
                     <Button
                         key="saveAndClose"
@@ -107,7 +107,7 @@ class PageView extends View {
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
-                        <div className="PageView__table-forms flex-max frame">
+                        <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
                             <div className="frame__container">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                             </div>

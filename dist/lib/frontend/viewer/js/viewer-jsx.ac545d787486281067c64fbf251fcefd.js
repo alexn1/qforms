@@ -939,7 +939,7 @@ class PageView extends View {
     if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew())) {
       return [caption, ' ', /*#__PURE__*/React.createElement("span", {
         key: 'star',
-        className: "PageView__star"
+        className: `${this.getCssBlockName()}__star`
       }, "*")];
     }
 
@@ -950,9 +950,9 @@ class PageView extends View {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("h3", {
-      className: "PageView__caption"
+      className: `${this.getCssBlockName()}__caption`
     }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
-      className: 'PageView__close',
+      className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
     }, "\xD7"));
   }
@@ -962,7 +962,7 @@ class PageView extends View {
     const model = ctrl.model;
     const width = 150;
     return /*#__PURE__*/React.createElement("div", {
-      className: 'PageView__toolbar'
+      className: `${this.getCssBlockName()}__toolbar`
     }, model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
       key: "saveAndClose",
       width: width,
@@ -991,7 +991,7 @@ class PageView extends View {
     }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
-      className: "PageView__table-forms flex-max frame"
+      className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container"
     }, /*#__PURE__*/React.createElement(Tab, {
@@ -1024,7 +1024,7 @@ class PageView2 extends PageView {
     }, this.renderCaption2(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
-      className: "PageView__table-forms flex-max frame"
+      className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container"
     }, /*#__PURE__*/React.createElement(Tab, {

@@ -16,7 +16,7 @@ class PageView2 extends PageView {
                 <div className="frame__container flex-rows">
                     {this.renderCaption2()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
-                    <div className="PageView__table-forms flex-max frame">
+                    <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
                         <div className="frame__container">
                             <Tab tabs={this.getAllTabs()} classList={['Tab-blue', 'full']}/>
                         </div>
