@@ -100,20 +100,13 @@ class Application extends Model_1.default {
         // pages
         response.pages = await this.fillPages(context);
         // user
-        response.user = this.getResponseUser(context);
+        response.user = this.isAuthentication() ? await this.getClientUserFromServerUser(context) : null;
         // time
         response.time = Date.now() - start;
         return response;
     }
-    getResponseUser(context) {
-        if (this.isAuthentication()) {
-            const clientUser = this.getClientUserFromServerUser(context.getUser());
-            // console.log('clientUser:', clientUser);
-            return clientUser;
-        }
-        return null;
-    }
-    getClientUserFromServerUser(user) {
+    async getClientUserFromServerUser(context) {
+        const user = context.getUser();
         return {
             id: user.id,
             login: user.name
