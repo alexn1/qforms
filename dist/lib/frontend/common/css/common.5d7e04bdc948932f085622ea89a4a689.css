@@ -393,6 +393,7 @@ a[href].Grid__tr:hover {
   display: flex;
 }
 .Modal__container {
+  background-color: white;
   margin: auto;
   width: 1100px;
   height: 85%;
