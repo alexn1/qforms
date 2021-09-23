@@ -31,18 +31,6 @@ class ApplicationView extends ReactComponent {
       key: pageCtrl.model.getId()
     }, ApplicationView.renderPage(pageCtrl)));
   }
-  /*render() {
-      console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
-      const ctrl = this.props.ctrl;
-      const model = ctrl.model;
-      return (
-          <div className={`ApplicationView ${model.data.theme}`}>
-              {this.renderActivePage()}
-              {this.renderModalPages()}
-          </div>
-      );
-  }*/
-
 
 }
 
@@ -89,7 +77,6 @@ class SdiApplicationView extends ApplicationView {
   render() {
     console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
-    const model = ctrl.model;
     return /*#__PURE__*/React.createElement("div", {
       className: `SdiApplicationView__container`
     }, /*#__PURE__*/React.createElement("header", null, /*#__PURE__*/React.createElement(Menu, {

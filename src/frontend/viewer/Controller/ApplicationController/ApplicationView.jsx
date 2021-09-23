@@ -19,17 +19,7 @@ class ApplicationView extends ReactComponent {
             </Modal>
         );
     }
-    /*render() {
-        console.log('ApplicationView.render', this.props.ctrl.model.getFullName());
-        const ctrl = this.props.ctrl;
-        const model = ctrl.model;
-        return (
-            <div className={`ApplicationView ${model.data.theme}`}>
-                {this.renderActivePage()}
-                {this.renderModalPages()}
-            </div>
-        );
-    }*/
+
 }
 
 window.QForms.ApplicationView = ApplicationView;

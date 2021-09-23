@@ -224,10 +224,10 @@ class ApplicationController extends Controller {
         return null;
     }
     onPageSelect(pc) {
-        console.log('SdiApplicationController.onPageSelect', pc.model.getName());
+        console.log('ApplicationController.onPageSelect', pc.model.getName());
     }
     closePage(pageController) {
-        console.log('SdiApplicationController.closePage', pageController.model.getFullName());
+        console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (this.modalPages.indexOf(pageController) > -1) {
             this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
         } else if (this.activePage === pageController) {

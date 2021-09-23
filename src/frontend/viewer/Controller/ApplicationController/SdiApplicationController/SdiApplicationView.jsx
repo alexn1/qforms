@@ -2,7 +2,6 @@ class SdiApplicationView extends ApplicationView {
     render() {
         console.log('SdiApplicationView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        const model = ctrl.model;
         return (
             <div className={`SdiApplicationView__container`}>
                 <header>
