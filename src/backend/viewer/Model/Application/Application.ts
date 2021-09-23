@@ -149,8 +149,8 @@ class Application extends Model {
         if (this.isAuthentication()) {
             const user = context.getUser();
             response.user = {
-                id  : user.id,
-                name: user.name
+                id   : user.id,
+                login: user.name
             };
         } else {
             response.user = null;

@@ -104,7 +104,7 @@ class Application extends Model_1.default {
             const user = context.getUser();
             response.user = {
                 id: user.id,
-                name: user.name
+                login: user.name
             };
         }
         else {
