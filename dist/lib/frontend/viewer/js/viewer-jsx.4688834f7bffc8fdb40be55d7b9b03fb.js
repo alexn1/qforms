@@ -945,7 +945,7 @@ class PageView extends View {
   renderCaption2() {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
-    return /*#__PURE__*/React.createElement("h3", {
+    return /*#__PURE__*/React.createElement("h1", {
       className: `${this.getCssBlockName()}__caption`
     }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
       className: `${this.getCssBlockName()}__close`,

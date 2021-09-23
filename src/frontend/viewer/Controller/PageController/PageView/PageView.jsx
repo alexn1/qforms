@@ -43,13 +43,13 @@ class PageView extends View {
     renderCaption2() {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
-        return <h3 className={`${this.getCssBlockName()}__caption`}>
+        return <h1 className={`${this.getCssBlockName()}__caption`}>
             {this.renderCaption()}
             {model.isModal() && <span
                 className={`${this.getCssBlockName()}__close`}
                 onClick={ctrl.onClosePageClick}
             >×</span>}
-        </h3>;
+        </h1>;
     }
     onActionsClick = async li => {
         // console.log('PageView.onActionsClick:', li);
