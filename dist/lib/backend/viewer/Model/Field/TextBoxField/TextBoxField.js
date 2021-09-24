@@ -11,6 +11,7 @@ class TextBoxField extends Field_1.default {
         response.placeholder = this.getAttr('placeholder');
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur = this.getAttr('validateOnBlur');
+        response.autocomplete = this.getAttr('autocomplete');
     }
 }
 module.exports = TextBoxField;

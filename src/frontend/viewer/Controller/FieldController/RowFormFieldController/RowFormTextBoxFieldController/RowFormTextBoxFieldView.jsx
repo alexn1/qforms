@@ -24,8 +24,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
-                placeholder={ctrl.getPlaceholder()}
-                autocomplete={'off'}
+                placeholder={ctrl.getPlaceholder() || null}
+                autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
             />
             <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
