@@ -12,6 +12,7 @@ class TextBoxFieldEditor extends FieldEditor {
                 placeholder     : params.placeholder      ? params.placeholder      :             '',
                 validateOnChange: params.validateOnChange ? params.validateOnChange :         'true',
                 validateOnBlur  : params.validateOnBlur   ? params.validateOnBlur   :        'false',
+                autocomplete    : params.autocomplete     ? params.autocomplete     :           'on',
             }
         };
     }
