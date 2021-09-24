@@ -2006,6 +2006,24 @@ class PageController extends Controller {
             }
         }
     }
+    getTitle() {
+        const model = this.getModel();
+        const key = model.getKey();
+        let keyPart;
+        if (key) {
+            const arr = JSON.parse(key);
+            if (arr.length === 1 && typeof arr[0] === 'number') {
+                keyPart = `#${arr[0]}`;
+            } else {
+                keyPart = `${key}`;
+            }
+        }
+        return [
+            model.getCaption(),
+            ...(ApplicationController.isInDebugMode() ? [`(${model.getId()})`] : []),
+            ...(keyPart ? [keyPart] : [])
+        ].join(' ');
+    }
 }
 window.QForms.PageController = PageController;
 

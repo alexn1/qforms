@@ -17,7 +17,7 @@ class PageView2 extends PageView {
         return (
             <div className="PageView full frame">
                 <div className="frame__container flex-rows">
-                    {this.renderCaption2()}
+                    {this.renderCaption()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
                         <div className="frame__container">

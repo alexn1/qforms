@@ -24,34 +24,21 @@ class PageView extends View {
             return PageView.renderForm(form);
         });
     }
+    renderTitle() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.getModel();
+        const title = ctrl.getTitle();
+        if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) ) {
+            return [title, ' ', <span key={'star'} className={`${this.getCssBlockName()}__star`}>*</span>];
+        }
+        return title;
+    }
     renderCaption() {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
-        const key = model.getKey();
-        let caption = ctrl.getTitle();
-        if (ApplicationController.isInDebugMode()) {
-            caption += ` (${model.getId()})`;
-        }
-        if (key) {
-            const arr = JSON.parse(key);
-            if (arr.length === 1 && typeof arr[0] === 'number') {
-                caption += ` #${arr[0]}`;
-            } else {
-                caption += ` ${key}`;
-            }
-        }
-        if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) ) {
-            return [caption, ' ', <span key={'star'} className={`${this.getCssBlockName()}__star`}>*</span>];
-        }
-        return caption;
-    }
-    renderCaption2() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.getModel();
         return <h1 className={`${this.getCssBlockName()}__caption`}>
-            {this.renderCaption()}
-            {model.isModal() && <span
-                className={`${this.getCssBlockName()}__close`}
+            {this.renderTitle()}
+            {model.isModal() && <span className={`${this.getCssBlockName()}__close`}
                 onClick={ctrl.onClosePageClick}
             >×</span>}
         </h1>;
@@ -108,7 +95,7 @@ class PageView extends View {
         return (
             <div className="PageView full frame">
                 <div className="frame__container flex-rows">
-                    {this.renderCaption2()}
+                    {this.renderCaption()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&

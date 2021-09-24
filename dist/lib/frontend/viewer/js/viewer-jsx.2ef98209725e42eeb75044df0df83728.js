@@ -414,7 +414,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
-      placeholder: ctrl.getPlaceholder(),
+      placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
@@ -919,42 +919,27 @@ class PageView extends View {
     });
   }
 
-  renderCaption() {
+  renderTitle() {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
-    const key = model.getKey();
-    let caption = ctrl.getTitle();
-
-    if (ApplicationController.isInDebugMode()) {
-      caption += ` (${model.getId()})`;
-    }
-
-    if (key) {
-      const arr = JSON.parse(key);
-
-      if (arr.length === 1 && typeof arr[0] === 'number') {
-        caption += ` #${arr[0]}`;
-      } else {
-        caption += ` ${key}`;
-      }
-    }
+    const title = ctrl.getTitle();
 
     if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew())) {
-      return [caption, ' ', /*#__PURE__*/React.createElement("span", {
+      return [title, ' ', /*#__PURE__*/React.createElement("span", {
         key: 'star',
         className: `${this.getCssBlockName()}__star`
       }, "*")];
     }
 
-    return caption;
+    return title;
   }
 
-  renderCaption2() {
+  renderCaption() {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("h1", {
       className: `${this.getCssBlockName()}__caption`
-    }, this.renderCaption(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+    }, this.renderTitle(), model.isModal() && /*#__PURE__*/React.createElement("span", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
     }, "\xD7"));
@@ -991,7 +976,7 @@ class PageView extends View {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows"
-    }, this.renderCaption2(),
+    }, this.renderCaption(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
@@ -1028,7 +1013,7 @@ class PageView2 extends PageView {
       className: "PageView full frame"
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows"
-    }, this.renderCaption2(),
+    }, this.renderCaption(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
