@@ -17,6 +17,7 @@ class ComboBoxFieldEditor extends FieldEditor {
                 itemEditPage  : params.itemEditPage   ? params.itemEditPage   :             '',
                 itemCreatePage: params.itemCreatePage ? params.itemCreatePage :             '',
                 itemCreateForm: params.itemCreateForm ? params.itemCreateForm :             '',
+                itemSelectPage: params.itemSelectPage ? params.itemSelectPage :             '',
             }
         };
     }
