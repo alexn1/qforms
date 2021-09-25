@@ -19,9 +19,6 @@ nav {
 .EditorFrontHostAppView__client {
   background-color: #d3d3d3;
 }
-.EditorFrontHostAppView__client .cm-container > div {
-  height: 100%;
-}
 
 .modal-content {
   background-color: white;
@@ -79,6 +76,9 @@ nav {
 }
 .VisualView .edit {
   overflow: auto;
+}
+.VisualView .edit .cm-container > div {
+  height: 100%;
 }
 
 .PropertyGrid {
