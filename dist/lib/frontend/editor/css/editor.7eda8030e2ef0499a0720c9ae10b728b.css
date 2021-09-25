@@ -176,7 +176,3 @@ nav {
   box-shadow: 0 0 2px red  !important;
   color: red;
 }
-
-.flex-min {
-  flex-shrink: 0;
-}

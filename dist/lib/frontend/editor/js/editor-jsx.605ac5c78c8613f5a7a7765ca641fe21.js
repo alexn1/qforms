@@ -55,7 +55,7 @@ class EditorFrontHostAppView extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       id: "sidebar"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "TreeBar flex-min"
+      className: "TreeBar"
     }, /*#__PURE__*/React.createElement("a", {
       className: "btn btn-large btn-primary",
       target: "_blank",
@@ -1132,7 +1132,7 @@ class SqlDataSourceView extends DocumentView {
     return /*#__PURE__*/React.createElement("div", {
       className: 'SqlDataSourceView full flex-rows'
     }, /*#__PURE__*/React.createElement("div", {
-      className: "toolbar flex-min"
+      className: "toolbar"
     }, /*#__PURE__*/React.createElement("button", {
       onClick: this.onSaveClick
     }, "Save"), /*#__PURE__*/React.createElement("button", {
@@ -1341,7 +1341,7 @@ class VisualView extends DocumentView {
     }, /*#__PURE__*/React.createElement("div", {
       className: "full flex-rows"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "toolbar flex-min"
+      className: "toolbar"
     }, /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateModelBack
     }, "Model.back.js"), !ctrl.data.js && /*#__PURE__*/React.createElement(Button, {

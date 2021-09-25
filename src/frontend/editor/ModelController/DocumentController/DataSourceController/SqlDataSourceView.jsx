@@ -31,7 +31,7 @@ class SqlDataSourceView extends DocumentView {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={'SqlDataSourceView full flex-rows'}>
-            <div className="toolbar flex-min">
+            <div className="toolbar">
                 <button onClick={this.onSaveClick}>Save</button>
                 <button onClick={ctrl.onCreateModelBack}>Model.back.js</button>
                 &nbsp;
