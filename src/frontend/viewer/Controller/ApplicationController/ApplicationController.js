@@ -59,12 +59,12 @@ class ApplicationController extends Controller {
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
-        const name       = options.name;
-        const params     = options.params || {};
-        const key        = options.key    || null;
-        const isModal    = options.modal   !== undefined ? options.modal   : true;
-        const isNewMode  = options.newMode !== undefined ? options.newMode : false;
-        //                 options.pageOptions
+        const name         = options.name;
+        const params       = options.params || {};
+        const key          = options.key    || null;
+        const isModal      = options.modal      !== undefined ? options.modal      : true;
+        const isNewMode    = options.newMode    !== undefined ? options.newMode    : false;
+        const isSelectMode = options.selectMode !== undefined ? options.selectMode : false;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -86,13 +86,14 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
-            ...(options.pageOptions ? options.pageOptions : {}),
-            id    : `p${this.getNextPageId()}`,
-            modal : isModal,
-            params: {
+            id        : `p${this.getNextPageId()}`,
+            modal     : isModal,
+            newMode   : isNewMode,
+            selectMode: isSelectMode,
+            params    : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
-            },
+            }
         });
         pageModel.init();
 

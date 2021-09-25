@@ -3,7 +3,7 @@ class Page extends Model {
         // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options     = options; // {id, modal, params}
+        this.options     = options; // {id, modal, newMode, selectMode, params}
         this.dataSources = [];
         this.forms       = [];
         this.params      = {};
@@ -15,6 +15,7 @@ class Page extends Model {
     init() {
         this.createDataSources();
         this.createForms();
+        console.log('page options:', this.options);
         console.log('page params:', this.getFullName(), this.getParams());
     }
 
@@ -139,7 +140,6 @@ class Page extends Model {
     }
 
     isModal() {
-        // return this.modal;
         return !!this.options.modal;
     }
 

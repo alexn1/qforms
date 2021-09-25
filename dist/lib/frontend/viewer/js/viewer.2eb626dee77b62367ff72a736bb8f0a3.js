@@ -139,12 +139,12 @@ class ApplicationController extends Controller {
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
-        const name       = options.name;
-        const params     = options.params || {};
-        const key        = options.key    || null;
-        const isModal    = options.modal   !== undefined ? options.modal   : true;
-        const isNewMode  = options.newMode !== undefined ? options.newMode : false;
-        //                 options.pageOptions
+        const name         = options.name;
+        const params       = options.params || {};
+        const key          = options.key    || null;
+        const isModal      = options.modal      !== undefined ? options.modal      : true;
+        const isNewMode    = options.newMode    !== undefined ? options.newMode    : false;
+        const isSelectMode = options.selectMode !== undefined ? options.selectMode : false;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -166,13 +166,14 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
-            ...(options.pageOptions ? options.pageOptions : {}),
-            id    : `p${this.getNextPageId()}`,
-            modal : isModal,
-            params: {
+            id        : `p${this.getNextPageId()}`,
+            modal     : isModal,
+            newMode   : isNewMode,
+            selectMode: isSelectMode,
+            params    : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
-            },
+            }
         });
         pageModel.init();
 
@@ -829,7 +830,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
             e.preventDefault();
-            const pc = await this.openPage({name: this.getModel().getAttr('itemSelectPage')});
+            const pc = await this.openPage({
+                name: this.getModel().getAttr('itemSelectPage'),
+                selectMode: true
+            });
         }
     }
 }
@@ -3545,7 +3549,7 @@ class Page extends Model {
         // console.log('Page.constructor', options);
         if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options     = options; // {id, modal, params}
+        this.options     = options; // {id, modal, newMode, selectMode, params}
         this.dataSources = [];
         this.forms       = [];
         this.params      = {};
@@ -3557,6 +3561,7 @@ class Page extends Model {
     init() {
         this.createDataSources();
         this.createForms();
+        console.log('page options:', this.options);
         console.log('page params:', this.getFullName(), this.getParams());
     }
 
@@ -3681,7 +3686,6 @@ class Page extends Model {
     }
 
     isModal() {
-        // return this.modal;
         return !!this.options.modal;
     }
 

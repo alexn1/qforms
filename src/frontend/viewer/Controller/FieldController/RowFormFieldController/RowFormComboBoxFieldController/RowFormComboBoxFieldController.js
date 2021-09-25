@@ -91,7 +91,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
             e.preventDefault();
-            const pc = await this.openPage({name: this.getModel().getAttr('itemSelectPage')});
+            const pc = await this.openPage({
+                name: this.getModel().getAttr('itemSelectPage'),
+                selectMode: true
+            });
         }
     }
 }
