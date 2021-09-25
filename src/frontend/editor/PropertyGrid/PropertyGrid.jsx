@@ -56,7 +56,7 @@ class PropertyGrid extends ReactComponent {
     }
     render() {
         return <div className={'PropertyGrid'}>
-            <table cellPadding={0} cellSpacing={0}>
+            <table className={'PropertyGrid__table'} cellPadding={0} cellSpacing={0}>
                 <tbody>
                     {this.getObj() && this.renderRows()}
                 </tbody>

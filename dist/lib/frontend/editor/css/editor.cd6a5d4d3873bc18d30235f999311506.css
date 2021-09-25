@@ -15,16 +15,12 @@ nav {
   top: 0;
   bottom: 0;
   width: 350px;
+  display: grid;
+  grid-template-rows: max-content 1fr 1fr;
 }
 .EditorFrontHostAppView__sidebar .TreeBar {
   padding: 5px;
   background-color: #f5f5f5;
-}
-.EditorFrontHostAppView__sidebar .TreeWidget {
-  height: 50%;
-}
-.EditorFrontHostAppView__sidebar .Tab {
-  height: 50%;
 }
 .EditorFrontHostAppView__client {
   position: fixed;
@@ -100,23 +96,23 @@ nav {
   background-color: #eee;
   overflow: auto;
 }
-.PropertyGrid > table {
+.PropertyGrid__table {
   background-color: white;
   width: 100%;
   table-layout: fixed;
 }
-.PropertyGrid > table > tbody > tr > td {
+.PropertyGrid__table > tbody > tr > td {
   border: 1px solid #d3d3d3;
   font-weight: bold;
 }
-.PropertyGrid > table > tbody > tr > td > input {
+.PropertyGrid__table > tbody > tr > td > input {
   font-weight: normal;
   border-width: 0;
   outline: none;
   padding-left: 4px;
   width: 100%;
 }
-.PropertyGrid > table > tbody > tr > td > select {
+.PropertyGrid__table > tbody > tr > td > select {
   font-weight: normal;
   border-width: 0;
   outline: none;

@@ -1426,6 +1426,7 @@ class PropertyGrid extends ReactComponent {
     return /*#__PURE__*/React.createElement("div", {
       className: 'PropertyGrid'
     }, /*#__PURE__*/React.createElement("table", {
+      className: 'PropertyGrid__table',
       cellPadding: 0,
       cellSpacing: 0
     }, /*#__PURE__*/React.createElement("tbody", null, this.getObj() && this.renderRows())));
