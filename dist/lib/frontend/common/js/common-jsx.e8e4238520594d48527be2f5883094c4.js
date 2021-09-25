@@ -228,7 +228,7 @@ class ComboBox extends ReactComponent {
     // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
     super(props);
 
-    _defineProperty(this, "onChange", e => {
+    _defineProperty(this, "onChange", async e => {
       // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
       this.setState({
         value: e.target.value
@@ -239,7 +239,15 @@ class ComboBox extends ReactComponent {
       }
     });
 
-    if (!props.items) throw new Error('no ComboBox items');
+    _defineProperty(this, "onMouseDown", async e => {
+      // console.log('ComboBox.onMouseDown', e.button);
+      if (this.props.onMouseDown) {
+        await this.props.onMouseDown(e);
+      }
+    });
+
+    if (!props.items) throw new Error('no ComboBox items'); // value
+
     let value = null;
 
     if (props.value !== undefined && props.value !== null) {
@@ -287,9 +295,10 @@ class ComboBox extends ReactComponent {
       size: this.props.size,
       style: this.props.style,
       id: this.props.id,
-      onDoubleClick: this.props.onDoubleClick
+      onDoubleClick: this.props.onDoubleClick,
+      onMouseDown: this.onMouseDown
     }, this.props.nullable && /*#__PURE__*/React.createElement("option", {
-      value: ""
+      value: ''
     }, this.props.placeholder), this.props.items && this.props.items.map(item => /*#__PURE__*/React.createElement("option", {
       key: item.value,
       value: item.value
