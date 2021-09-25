@@ -62,9 +62,8 @@ class ApplicationController extends Controller {
         const name         = options.name;
         const params       = options.params || {};
         const key          = options.key    || null;
-        const isModal      = options.modal      !== undefined ? options.modal      : true;
-        const isNewMode    = options.newMode    !== undefined ? options.newMode    : false;
-        const isSelectMode = options.selectMode !== undefined ? options.selectMode : false;
+        const isModal      = options.modal   !== undefined ? options.modal  : true ;
+        const isNewMode    = options.newMode !== undefined ? options.newMode: false;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -89,7 +88,8 @@ class ApplicationController extends Controller {
             id        : `p${this.getNextPageId()}`,
             modal     : isModal,
             newMode   : isNewMode,
-            selectMode: isSelectMode,
+            selectMode: options.selectMode,
+            onCreate  : options.onCreate,
             params    : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {}),
