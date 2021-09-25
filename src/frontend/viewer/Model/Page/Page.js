@@ -119,7 +119,8 @@ class Page extends Model {
     }
 
     isNewMode() {
-        return this.getAttr('newMode');
+        // return this.getAttr('newMode');
+        return !!this.options.newMode;
     }
 
     hasNew() {

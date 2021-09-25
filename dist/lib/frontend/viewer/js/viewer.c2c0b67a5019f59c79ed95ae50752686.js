@@ -142,8 +142,8 @@ class ApplicationController extends Controller {
         const name         = options.name;
         const params       = options.params || {};
         const key          = options.key    || null;
-        const isModal      = options.modal   !== undefined ? options.modal  : true ;
-        const isNewMode    = options.newMode !== undefined ? options.newMode: false;
+        // const isModal      = options.modal   !== undefined ? options.modal  : true ;
+        // const isNewMode    = options.newMode !== undefined ? options.newMode: false;
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(name, key);
@@ -156,7 +156,7 @@ class ApplicationController extends Controller {
         const {page: pageData} = await this.model.request({
             action : 'page',
             page   : name,
-            newMode: isNewMode,
+            newMode: !!options.newMode,
             params : {
                 ...params,
                 ...(key ? DataSource.keyToParams(key) : {})
@@ -166,8 +166,8 @@ class ApplicationController extends Controller {
         // pageModel
         const pageModel = new Page(pageData, this.model, {
             id        : `p${this.getNextPageId()}`,
-            modal     : isModal,
-            newMode   : isNewMode,
+            modal     : options.modal !== undefined ? options.modal : true,
+            newMode   : options.newMode,
             selectMode: options.selectMode,
             onCreate  : options.onCreate,
             params    : {
@@ -3665,7 +3665,8 @@ class Page extends Model {
     }
 
     isNewMode() {
-        return this.getAttr('newMode');
+        // return this.getAttr('newMode');
+        return !!this.options.newMode;
     }
 
     hasNew() {
