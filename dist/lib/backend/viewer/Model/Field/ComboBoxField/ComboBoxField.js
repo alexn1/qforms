@@ -12,18 +12,11 @@ class ComboBoxField extends Field_1.default {
         response.dataSourceName = this.getAttr('dataSourceName');
         response.valueColumn = this.getAttr('valueColumn');
         response.displayColumn = this.getAttr('displayColumn');
-        if (this.isAttr('newRowMode')) {
-            response.newRowMode = this.getAttr('newRowMode');
-        }
-        if (this.isAttr('itemEditPage')) {
-            response.itemEditPage = this.getAttr('itemEditPage');
-        }
-        if (this.isAttr('itemCreatePage')) {
-            response.itemCreatePage = this.getAttr('itemCreatePage');
-        }
-        if (this.isAttr('itemCreateForm')) {
-            response.itemCreateForm = this.getAttr('itemCreateForm');
-        }
+        response.newRowMode = this.getAttr('newRowMode');
+        response.itemEditPage = this.getAttr('itemEditPage');
+        response.itemCreatePage = this.getAttr('itemCreatePage');
+        response.itemCreateForm = this.getAttr('itemCreateForm');
+        response.itemSelectPage = this.getAttr('itemSelectPage');
     }
 }
 module.exports = ComboBoxField;

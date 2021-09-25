@@ -87,6 +87,13 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     onListDelete = async e => {
         await this.rerender();
     }
+    onItemSelect = async e => {
+        // console.log('RowFormComboBoxFieldController.onItemSelect');
+        if (e.button === 0) {
+            e.preventDefault();
+            const pc = await this.openPage({name: this.getModel().getAttr('itemSelectPage')});
+        }
+    }
 }
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
