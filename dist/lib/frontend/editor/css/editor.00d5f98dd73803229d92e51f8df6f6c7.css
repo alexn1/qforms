@@ -18,10 +18,6 @@ nav {
   display: grid;
   grid-template-rows: max-content 1fr 1fr;
 }
-.EditorFrontHostAppView__sidebar .TreeBar {
-  padding: 5px;
-  background-color: #f5f5f5;
-}
 .EditorFrontHostAppView__client {
   position: fixed;
   top: 0;
@@ -162,8 +158,14 @@ nav {
   background-position: 0 -11px;
 }
 
+.editor {
+  height: 100%;
+}
 .editor__body {
   margin: 0;
+  height: 100%;
+}
+.editor__root {
   height: 100%;
 }
 
@@ -171,4 +173,9 @@ nav {
 .error:focus {
   box-shadow: 0 0 2px red  !important;
   color: red;
+}
+
+.tree-bar {
+  padding: 5px;
+  background-color: #f5f5f5;
 }

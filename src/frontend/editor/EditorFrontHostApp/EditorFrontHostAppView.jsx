@@ -19,7 +19,7 @@ class EditorFrontHostAppView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return <div className="EditorFrontHostAppView">
             <div className={'EditorFrontHostAppView__sidebar'}>
-                <div className="TreeBar">
+                <div className={'tree-bar'}>
                     {/*<div className="dropdown">
                         <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >
                             <span>Actions</span> <span className="caret"/>

@@ -55,7 +55,7 @@ class EditorFrontHostAppView extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: 'EditorFrontHostAppView__sidebar'
     }, /*#__PURE__*/React.createElement("div", {
-      className: "TreeBar"
+      className: 'tree-bar'
     }, /*#__PURE__*/React.createElement("a", {
       href: ctrl.runAppLink,
       target: "_blank"
