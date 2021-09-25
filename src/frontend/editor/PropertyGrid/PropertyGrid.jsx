@@ -55,15 +55,13 @@ class PropertyGrid extends ReactComponent {
         </tr>);
     }
     render() {
-        return <div className={'PropertyGrid full'}>
-            <div className={'frame full'}>
-                <div className={'frame__container'}>
-                    <table className={'PropertyGrid__table'} cellPadding={0} cellSpacing={0}>
-                        <tbody>
-                            {this.getObj() && this.renderRows()}
-                        </tbody>
-                    </table>
-                </div>
+        return <div className={'PropertyGrid full frame'}>
+            <div className={'frame__container'}>
+                <table className={'PropertyGrid__table'} cellPadding={0} cellSpacing={0}>
+                    <tbody>
+                        {this.getObj() && this.renderRows()}
+                    </tbody>
+                </table>
             </div>
         </div>;
     }
