@@ -30,13 +30,18 @@ class EditorFrontHostAppView extends ReactComponent {
                         <ActionList onCreate={c => ctrl.actionList = c} onClick={ctrl.onActionClick}/>
                     </div>
                 </div>
-                <TreeWidget
-                    onCreate={c => ctrl.treeWidget2 = c}
-                    items={ctrl.items}
-                    onItemSelect={ctrl.onItemSelect2}
-                    onItemDoubleClick={ctrl.onItemDoubleClick2}
-                    onItemOpen={ctrl.onItemOpen2}
-                />
+                <div className={'frame full'}>
+                    <div className={'frame__container'}>
+                        <TreeWidget
+                            classList={['full']}
+                            onCreate={c => ctrl.treeWidget2 = c}
+                            items={ctrl.items}
+                            onItemSelect={ctrl.onItemSelect2}
+                            onItemDoubleClick={ctrl.onItemDoubleClick2}
+                            onItemOpen={ctrl.onItemOpen2}
+                        />
+                    </div>
+                </div>
                 <Tab
                     classList={['Tab-blue', 'full']}
                     tabs={[

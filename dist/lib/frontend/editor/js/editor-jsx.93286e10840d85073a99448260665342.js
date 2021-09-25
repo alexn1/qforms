@@ -62,13 +62,18 @@ class EditorFrontHostAppView extends ReactComponent {
     }, "Run Application"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ActionList, {
       onCreate: c => ctrl.actionList = c,
       onClick: ctrl.onActionClick
-    }))), /*#__PURE__*/React.createElement(TreeWidget, {
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: 'frame full'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'frame__container'
+    }, /*#__PURE__*/React.createElement(TreeWidget, {
+      classList: ['full'],
       onCreate: c => ctrl.treeWidget2 = c,
       items: ctrl.items,
       onItemSelect: ctrl.onItemSelect2,
       onItemDoubleClick: ctrl.onItemDoubleClick2,
       onItemOpen: ctrl.onItemOpen2
-    }), /*#__PURE__*/React.createElement(Tab, {
+    }))), /*#__PURE__*/React.createElement(Tab, {
       classList: ['Tab-blue', 'full'],
       tabs: [{
         name: 'properties',

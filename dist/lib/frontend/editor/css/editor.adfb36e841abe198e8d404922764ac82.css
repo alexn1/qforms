@@ -9,21 +9,14 @@ nav {
   height: 100%;
   font-family: sans-serif;
   font-size: small;
+  display: grid;
+  grid-template-columns: 350px 1fr;
 }
 .EditorFrontHostAppView__sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 350px;
   display: grid;
   grid-template-rows: max-content 1fr 1fr;
 }
 .EditorFrontHostAppView__client {
-  position: fixed;
-  top: 0;
-  left: 350px;
-  right: 0;
-  bottom: 0;
   background-color: #d3d3d3;
 }
 .EditorFrontHostAppView__client .cm-container > div {
