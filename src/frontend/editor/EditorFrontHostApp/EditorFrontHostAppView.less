@@ -1,34 +1,39 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .EditorFrontHostAppView {
     height: 100%;
     font-family: sans-serif;
     font-size: small;
-    #sidebar {
-        position: fixed;
-        top   : 0;
-        bottom: 0;
-        width : 350px;
-        .TreeBar {
-            padding: 5px;
-            background-color: rgb(245,245,245);
-        }
-        .TreeWidget {
-            height: 50%;
-        }
-        .Tab {
-            height: 50%;
-        }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.EditorFrontHostAppView__sidebar {
+    position: fixed;
+    top   : 0;
+    bottom: 0;
+    width : 350px;
+    .TreeBar {
+        padding: 5px;
+        background-color: rgb(245,245,245);
     }
-    #client {
-        position: fixed;
-        top   : 0;
-        left  : 350px;
-        right : 0;
-        bottom: 0;
-        background-color: #d3d3d3;
-        .cm-container {
-            > div {
-                height: 100%;
-            }
+    .TreeWidget {
+        height: 50%;
+    }
+    .Tab {
+        height: 50%;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.EditorFrontHostAppView__client {
+    position: fixed;
+    top   : 0;
+    left  : 350px;
+    right : 0;
+    bottom: 0;
+    background-color: #d3d3d3;
+    .cm-container {
+        > div {
+            height: 100%;
         }
     }
 }

@@ -53,13 +53,12 @@ class EditorFrontHostAppView extends ReactComponent {
     return /*#__PURE__*/React.createElement("div", {
       className: "EditorFrontHostAppView"
     }, /*#__PURE__*/React.createElement("div", {
-      id: "sidebar"
+      className: 'EditorFrontHostAppView__sidebar'
     }, /*#__PURE__*/React.createElement("div", {
       className: "TreeBar"
     }, /*#__PURE__*/React.createElement("a", {
-      className: "btn btn-large btn-primary",
-      target: "_blank",
-      href: ctrl.runAppLink
+      href: ctrl.runAppLink,
+      target: "_blank"
     }, "Run Application"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ActionList, {
       onCreate: c => ctrl.actionList = c,
       onClick: ctrl.onActionClick
@@ -80,7 +79,7 @@ class EditorFrontHostAppView extends ReactComponent {
         })
       }]
     })), /*#__PURE__*/React.createElement("div", {
-      id: "client"
+      className: 'EditorFrontHostAppView__client'
     }, /*#__PURE__*/React.createElement(Tab, {
       classList: ['full'],
       canClose: true,

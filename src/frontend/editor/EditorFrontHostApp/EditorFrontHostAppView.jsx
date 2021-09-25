@@ -18,16 +18,14 @@ class EditorFrontHostAppView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <div className="EditorFrontHostAppView">
-            <div id="sidebar">
+            <div className={'EditorFrontHostAppView__sidebar'}>
                 <div className="TreeBar">
                     {/*<div className="dropdown">
                         <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >
                             <span>Actions</span> <span className="caret"/>
                         </button>
-
-
                     </div>*/}
-                    <a className="btn btn-large btn-primary" target="_blank" href={ctrl.runAppLink}>Run Application</a>
+                    <a href={ctrl.runAppLink} target="_blank">Run Application</a>
                     <div>
                         <ActionList onCreate={c => ctrl.actionList = c} onClick={ctrl.onActionClick}/>
                     </div>
@@ -53,7 +51,7 @@ class EditorFrontHostAppView extends ReactComponent {
                     ]}
                 />
             </div>
-            <div id="client">
+            <div className={'EditorFrontHostAppView__client'}>
                 <Tab
                     classList={['full']}
                     canClose={true}
