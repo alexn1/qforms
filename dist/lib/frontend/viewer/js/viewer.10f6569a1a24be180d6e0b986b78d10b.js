@@ -1681,7 +1681,11 @@ class TableFormController extends FormController {
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
             case 'form':
-                await this.edit(key);
+                if (this.getPage().getModel().options.selectMode) {
+                    await this.getPage().selectRow(key);
+                } else {
+                    await this.edit(key);
+                }
             break;
         }
     }
@@ -2069,10 +2073,12 @@ class PageController extends Controller {
     }
     onSelectClick = async e => {
         console.log('PageController.onSelectClick');
-        const selectedRowKey = this.getSelectedRowKey();
-        console.log('selectedRowKey:', selectedRowKey);
+        await this.selectRow(this.getSelectedRowKey());
+    }
+    async selectRow(key) {
+        console.log('PageController.selectRow', key);
         this.close();
-        await this.getModel().options.onSelect(selectedRowKey);
+        await this.getModel().options.onSelect(key);
     }
 }
 window.QForms.PageController = PageController;
