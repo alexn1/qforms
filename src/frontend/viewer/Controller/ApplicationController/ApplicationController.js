@@ -78,10 +78,7 @@ class ApplicationController extends Controller {
             action : 'page',
             page   : name,
             newMode: !!options.newMode,
-            params : {
-                ...params,
-                // ...(key ? DataSource.keyToParams(key) : {})
-            }
+            params : params
         });
 
         // pageModel
@@ -91,10 +88,7 @@ class ApplicationController extends Controller {
             newMode   : options.newMode,
             selectMode: options.selectMode,
             onCreate  : options.onCreate,
-            params    : {
-                ...params,
-                // ...(key ? DataSource.keyToParams(key) : {}),
-            }
+            params    : params
         });
         pageModel.init();
 
