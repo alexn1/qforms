@@ -88,6 +88,7 @@ class ApplicationController extends Controller {
             newMode   : options.newMode,
             selectMode: options.selectMode,
             onCreate  : options.onCreate,
+            onSelect  : options.onSelect,
             params    : params
         });
         pageModel.init();

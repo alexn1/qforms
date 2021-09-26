@@ -1,7 +1,8 @@
 class RowFormComboBoxFieldView extends RowFormFieldView {
-    onChange = async e => {
+    onChange = async widgetValue => {
+        // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
         this.rerender();
-        await this.props.ctrl.onChange(e);
+        await this.props.ctrl.onChange(widgetValue);
     }
     render() {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());

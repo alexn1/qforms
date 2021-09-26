@@ -168,6 +168,7 @@ class ApplicationController extends Controller {
             newMode   : options.newMode,
             selectMode: options.selectMode,
             onCreate  : options.onCreate,
+            onSelect  : options.onSelect,
             params    : params
         });
         pageModel.init();
@@ -827,9 +828,22 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
             e.preventDefault();
-            const pc = await this.openPage({
-                name: this.getModel().getAttr('itemSelectPage'),
-                selectMode: true
+            await this.openPage({
+                name      : this.getModel().getAttr('itemSelectPage'),
+                selectMode: true,
+                onSelect: async key => {
+                    if (key) {
+                        const [id] = Helper.decodeValue(key);
+                        // console.log('id:', id);
+                        if (this.getValue() !== id) {
+                            await this.getView().onChange(id.toString());
+                        }
+                    } else {
+                        if (this.getValue() !== null) {
+                            await this.getView().onChange('');
+                        }
+                    }
+                }
             });
         }
     }
@@ -1824,7 +1838,7 @@ class TableFormController extends FormController {
     onSelectionChange = async key => {
         // console.log('TableFormController.onSelectionChange', key);
         this.invalidate();
-        await this.rerender();
+        await this.getPage().rerender();
     }
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
@@ -2057,6 +2071,8 @@ class PageController extends Controller {
         console.log('PageController.onSelectClick');
         const selectedRowKey = this.getSelectedRowKey();
         console.log('selectedRowKey:', selectedRowKey);
+        this.close();
+        await this.getModel().options.onSelect(selectedRowKey);
     }
 }
 window.QForms.PageController = PageController;

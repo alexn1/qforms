@@ -215,7 +215,7 @@ class TableFormController extends FormController {
     onSelectionChange = async key => {
         // console.log('TableFormController.onSelectionChange', key);
         this.invalidate();
-        await this.rerender();
+        await this.getPage().rerender();
     }
     getActiveRow() {
         const key = this.grid.getActiveRowKey();

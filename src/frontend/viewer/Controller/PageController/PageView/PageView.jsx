@@ -61,6 +61,7 @@ class PageView extends View {
                 {model.options.selectMode &&
                     <Button title={model.getApp().getText().page.select}
                         onClick={ctrl.onSelectClick}
+                        // enabled={!!ctrl.getSelectedRowKey()}
                     />
                 }
                 {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&

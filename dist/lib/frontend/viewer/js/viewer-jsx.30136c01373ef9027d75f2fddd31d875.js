@@ -123,9 +123,10 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
   constructor(...args) {
     super(...args);
 
-    _defineProperty(this, "onChange", async e => {
+    _defineProperty(this, "onChange", async widgetValue => {
+      // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
       this.rerender();
-      await this.props.ctrl.onChange(e);
+      await this.props.ctrl.onChange(widgetValue);
     });
   }
 
@@ -954,7 +955,8 @@ class PageView extends View {
       className: `${this.getCssBlockName()}__toolbar`
     }, model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
       title: model.getApp().getText().page.select,
-      onClick: ctrl.onSelectClick
+      onClick: ctrl.onSelectClick // enabled={!!ctrl.getSelectedRowKey()}
+
     }), model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
       key: "saveAndClose",
       width: width,

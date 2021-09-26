@@ -185,6 +185,8 @@ class PageController extends Controller {
         console.log('PageController.onSelectClick');
         const selectedRowKey = this.getSelectedRowKey();
         console.log('selectedRowKey:', selectedRowKey);
+        this.close();
+        await this.getModel().options.onSelect(selectedRowKey);
     }
 }
 window.QForms.PageController = PageController;
