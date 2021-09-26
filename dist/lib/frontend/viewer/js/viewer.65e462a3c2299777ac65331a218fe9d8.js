@@ -779,7 +779,10 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (itemEditPage && value) {
             await this.openPage({
                 name: itemEditPage,
-                key: Helper.encodeValue([value]),
+                // key: Helper.encodeValue([value]),
+                params: {
+                    key: value
+                }
             });
         }
     }
