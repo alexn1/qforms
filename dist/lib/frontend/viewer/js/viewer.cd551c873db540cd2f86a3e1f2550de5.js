@@ -3562,7 +3562,7 @@ class Page extends Model {
         this.createDataSources();
         this.createForms();
         console.log('page options:', this.options);
-        console.log('page params:', this.getFullName(), this.getParams());
+        console.log('page params:', this.getParams());
     }
 
     deinit() {
