@@ -139,14 +139,15 @@ class ApplicationController extends Controller {
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
+        if (options.key) throw new Error('openPage: key param is deprecated');
         const name         = options.name;
         const params       = options.params || {};
-        const key          = options.key    || null;
-        // const isModal      = options.modal   !== undefined ? options.modal  : true ;
+        // const key          = options.key    || null;
+        // const isModal      = options.modal   !== undefined ? options.modal  : true;
         // const isNewMode    = options.newMode !== undefined ? options.newMode: false;
 
         // if this page with this key is already opened, then show it
-        const pageController = this.findPageControllerByPageNameAndKey(name, key);
+        const pageController = this.findPageControllerByPageNameAndKey(name, null);
         // console.log('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
@@ -159,7 +160,7 @@ class ApplicationController extends Controller {
             newMode: !!options.newMode,
             params : {
                 ...params,
-                ...(key ? DataSource.keyToParams(key) : {})
+                // ...(key ? DataSource.keyToParams(key) : {})
             }
         });
 
@@ -172,7 +173,7 @@ class ApplicationController extends Controller {
             onCreate  : options.onCreate,
             params    : {
                 ...params,
-                ...(key ? DataSource.keyToParams(key) : {}),
+                // ...(key ? DataSource.keyToParams(key) : {}),
             }
         });
         pageModel.init();
