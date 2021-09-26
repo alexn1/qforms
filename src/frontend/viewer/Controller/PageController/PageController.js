@@ -174,8 +174,17 @@ class PageController extends Controller {
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
+    getSelectedRowKey() {
+        for (const form of this.forms) {
+            const selectedRowKey = form.getSelectedRowKey();
+            if (selectedRowKey) return selectedRowKey;
+        }
+        return null;
+    }
     onSelectClick = async e => {
         console.log('PageController.onSelectClick');
+        const selectedRowKey = this.getSelectedRowKey();
+        console.log('selectedRowKey:', selectedRowKey);
     }
 }
 window.QForms.PageController = PageController;

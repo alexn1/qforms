@@ -1365,7 +1365,6 @@ class TableFormTimeFieldController extends TableFormFieldController {
 window.QForms.TableFormTimeFieldController = TableFormTimeFieldController;
 
 class FormController extends Controller {
-
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
@@ -1422,6 +1421,9 @@ class FormController extends Controller {
     }
     getApp() {
         return this.parent.parent;
+    }
+    getSelectedRowKey() {
+        return null;
     }
 }
 window.QForms.FormController = FormController;
@@ -1862,6 +1864,9 @@ class TableFormController extends FormController {
         const ds = this.model.getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
+    getSelectedRowKey() {
+        return this.grid ? this.grid.getActiveRowKey() : null;
+    }
 }
 window.QForms.TableFormController = TableFormController;
 
@@ -2041,8 +2046,17 @@ class PageController extends Controller {
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
+    getSelectedRowKey() {
+        for (const form of this.forms) {
+            const selectedRowKey = form.getSelectedRowKey();
+            if (selectedRowKey) return selectedRowKey;
+        }
+        return null;
+    }
     onSelectClick = async e => {
         console.log('PageController.onSelectClick');
+        const selectedRowKey = this.getSelectedRowKey();
+        console.log('selectedRowKey:', selectedRowKey);
     }
 }
 window.QForms.PageController = PageController;

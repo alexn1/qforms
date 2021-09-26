@@ -255,5 +255,8 @@ class TableFormController extends FormController {
         const ds = this.model.getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
+    getSelectedRowKey() {
+        return this.grid ? this.grid.getActiveRowKey() : null;
+    }
 }
 window.QForms.TableFormController = TableFormController;

@@ -1,5 +1,4 @@
 class FormController extends Controller {
-
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
@@ -56,6 +55,9 @@ class FormController extends Controller {
     }
     getApp() {
         return this.parent.parent;
+    }
+    getSelectedRowKey() {
+        return null;
     }
 }
 window.QForms.FormController = FormController;
