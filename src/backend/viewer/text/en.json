@@ -17,7 +17,8 @@
         "close": "Close",
         "refresh": "Refresh",
         "discard": "Discard",
-        "actions": "Actions"
+        "actions": "Actions",
+        "select": "Select"
     },
     "form": {
         "refresh": "Refresh",

@@ -2041,6 +2041,9 @@ class PageController extends Controller {
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
+    onSelectClick = async e => {
+        console.log('PageController.onSelectClick');
+    }
 }
 window.QForms.PageController = PageController;
 

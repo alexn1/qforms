@@ -952,7 +952,10 @@ class PageView extends View {
     const width = 150;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__toolbar`
-    }, model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
+    }, model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
+      title: model.getApp().getText().page.select,
+      onClick: ctrl.onSelectClick
+    }), model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
       key: "saveAndClose",
       width: width,
       title: model.getApp().getText().page.saveAndClose,

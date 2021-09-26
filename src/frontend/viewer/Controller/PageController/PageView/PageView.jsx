@@ -58,6 +58,11 @@ class PageView extends View {
         const width = 150;
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
+                {model.options.selectMode &&
+                    <Button title={model.getApp().getText().page.select}
+                        onClick={ctrl.onSelectClick}
+                    />
+                }
                 {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
                     <Button
                         key="saveAndClose"
