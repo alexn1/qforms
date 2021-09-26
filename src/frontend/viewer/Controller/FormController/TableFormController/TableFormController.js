@@ -119,8 +119,11 @@ class TableFormController extends FormController {
             const [key] = result.insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
-                key  : key,
-                modal: true
+                // key  : key,
+                modal: true,
+                params: {
+                    ...DataSource.keyToParams(key)
+                }
             });
         } else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
             if (!this.model.getAttr('itemCreatePage')) {
@@ -133,8 +136,11 @@ class TableFormController extends FormController {
             const [key] = result.insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemCreatePage'),
-                key  : key,
-                modal: true
+                // key  : key,
+                modal: true,
+                params: {
+                    ...DataSource.keyToParams(key)
+                }
             });
         }
     }
@@ -146,8 +152,11 @@ class TableFormController extends FormController {
         try {
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
-                key  : key,
-                modal: true
+                // key  : key,
+                modal: true,
+                params: {
+                    ...DataSource.keyToParams(key)
+                }
             });
         } catch (err) {
             // console.error(`${this.model.getFullName()}: edit form error handler:`, err);
