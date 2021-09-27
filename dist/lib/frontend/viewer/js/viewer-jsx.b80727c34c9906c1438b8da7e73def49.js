@@ -960,8 +960,11 @@ class PageView extends View {
       className: `${this.getCssBlockName()}__toolbar`
     }, model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
       title: model.getApp().getText().page.select,
-      onClick: ctrl.onSelectClick // enabled={!!ctrl.getSelectedRowKey()}
-
+      onClick: ctrl.onSelectClick,
+      enabled: !!ctrl.getSelectedRowKey()
+    }), /*#__PURE__*/React.createElement(Button, {
+      title: model.getApp().getText().page.reset,
+      onClick: ctrl.onResetClick
     }), model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
       key: "saveAndClose",
       width: width,

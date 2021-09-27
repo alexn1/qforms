@@ -61,9 +61,12 @@ class PageView extends View {
                 {model.options.selectMode &&
                     <Button title={model.getApp().getText().page.select}
                         onClick={ctrl.onSelectClick}
-                        // enabled={!!ctrl.getSelectedRowKey()}
+                        enabled={!!ctrl.getSelectedRowKey()}
                     />
                 }
+                <Button title={model.getApp().getText().page.reset}
+                    onClick={ctrl.onResetClick}
+                />
                 {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
                     <Button
                         key="saveAndClose"

@@ -2081,6 +2081,10 @@ class PageController extends Controller {
         console.log('PageController.onSelectClick');
         await this.selectRow(this.getSelectedRowKey());
     }
+    onResetClick = async e => {
+        console.log('PageController.onResetClick');
+        await this.selectRow(null);
+    }
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         this.close();

@@ -18,7 +18,8 @@
         "refresh": "Refresh",
         "discard": "Discard",
         "actions": "Actions",
-        "select": "Select"
+        "select": "Select",
+        "reset": "Reset"
     },
     "form": {
         "refresh": "Refresh",
