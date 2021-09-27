@@ -155,7 +155,11 @@ class SqlDataSource extends DataSource {
             // console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
+
+        // update rows
         await this.refill();
+
+        // events
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(e);
         }
@@ -229,7 +233,7 @@ class SqlDataSource extends DataSource {
         return data;
     }
 
-    async selectSingle(params = {}) {
+    /*async selectSingle(params = {}) {
         console.log('SqlDataSource.selectSingle', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
@@ -246,7 +250,7 @@ class SqlDataSource extends DataSource {
         if (!data.row) throw new Error('selectSingle must return row');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
-    }
+    }*/
 
     getFramesCount() {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
