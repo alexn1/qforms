@@ -22,25 +22,31 @@
   grid-template-rows: max-content auto max-content;
 }
 
+/*
 .SdiApplicationView {
   height: 100%;
 }
+
 .SdiApplicationView__body {
   margin: 0;
   height: 100%;
 }
+
 .SdiApplicationView__root {
   height: 100%;
 }
+
 .SdiApplicationView__container {
   height: 100%;
   font-family: sans-serif;
   display: grid;
   grid-template-rows: max-content auto max-content;
 }
+
 .SdiApplicationView__main {
   background-color: gray;
 }
+*/
 
 .standard .RowFormCheckBoxFieldView > input {
   margin: 0;

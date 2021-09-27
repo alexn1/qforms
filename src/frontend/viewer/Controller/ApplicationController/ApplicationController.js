@@ -83,13 +83,14 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
-            id        : `p${this.getNextPageId()}`,
-            modal     : options.modal !== undefined ? options.modal : true,
-            newMode   : options.newMode,
-            selectMode: options.selectMode,
-            onCreate  : options.onCreate,
-            onSelect  : options.onSelect,
-            params    : params
+            id         : `p${this.getNextPageId()}`,
+            modal      : options.modal !== undefined ? options.modal : true,
+            newMode    : options.newMode,
+            selectMode : options.selectMode,
+            selectedKey: options.selectedKey,
+            onCreate   : options.onCreate,
+            onSelect   : options.onSelect,
+            params     : params
         });
         pageModel.init();
 

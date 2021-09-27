@@ -163,13 +163,14 @@ class ApplicationController extends Controller {
 
         // pageModel
         const pageModel = new Page(pageData, this.model, {
-            id        : `p${this.getNextPageId()}`,
-            modal     : options.modal !== undefined ? options.modal : true,
-            newMode   : options.newMode,
-            selectMode: options.selectMode,
-            onCreate  : options.onCreate,
-            onSelect  : options.onSelect,
-            params    : params
+            id         : `p${this.getNextPageId()}`,
+            modal      : options.modal !== undefined ? options.modal : true,
+            newMode    : options.newMode,
+            selectMode : options.selectMode,
+            selectedKey: options.selectedKey,
+            onCreate   : options.onCreate,
+            onSelect   : options.onSelect,
+            params     : params
         });
         pageModel.init();
 
@@ -431,6 +432,7 @@ class MdiApplicationController extends ApplicationController {
 
 window.QForms.MdiApplicationController = MdiApplicationController;
 
+/*
 class SdiApplicationController extends ApplicationController {
     getViewClass() {
         return SdiApplicationView;
@@ -438,6 +440,7 @@ class SdiApplicationController extends ApplicationController {
 }
 
 window.QForms.SdiApplicationController = SdiApplicationController;
+*/
 
 class FieldController extends Controller {
 
@@ -828,10 +831,13 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
             e.preventDefault();
+            const id = this.getValue();
+            const selectedKey = id ? [id].toString() : null;
             await this.openPage({
-                name      : this.getModel().getAttr('itemSelectPage'),
-                selectMode: true,
-                onSelect: async key => {
+                name       : this.getModel().getAttr('itemSelectPage'),
+                selectMode : true,
+                selectedKey: selectedKey,
+                onSelect   : async key => {
                     if (key) {
                         const [id] = Helper.decodeValue(key);
                         // console.log('id:', id);

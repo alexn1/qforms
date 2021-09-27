@@ -1,3 +1,4 @@
+/*
 class SdiApplicationController extends ApplicationController {
     getViewClass() {
         return SdiApplicationView;
@@ -5,3 +6,4 @@ class SdiApplicationController extends ApplicationController {
 }
 
 window.QForms.SdiApplicationController = SdiApplicationController;
+*/

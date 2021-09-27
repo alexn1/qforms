@@ -93,10 +93,13 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
             e.preventDefault();
+            const id = this.getValue();
+            const selectedKey = id ? [id].toString() : null;
             await this.openPage({
-                name      : this.getModel().getAttr('itemSelectPage'),
-                selectMode: true,
-                onSelect: async key => {
+                name       : this.getModel().getAttr('itemSelectPage'),
+                selectMode : true,
+                selectedKey: selectedKey,
+                onSelect   : async key => {
                     if (key) {
                         const [id] = Helper.decodeValue(key);
                         // console.log('id:', id);

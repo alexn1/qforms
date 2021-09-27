@@ -88,9 +88,13 @@ class MdiApplicationView extends ApplicationView {
 }
 
 window.QForms.MdiApplicationView = MdiApplicationView;
-class SdiApplicationView extends ApplicationView {}
+/*
+class SdiApplicationView extends ApplicationView {
+
+}
 
 window.QForms.SdiApplicationView = SdiApplicationView;
+*/
 class RowFormFieldView extends ReactComponent {
   getClassList() {
     const ctrl = this.props.ctrl;
