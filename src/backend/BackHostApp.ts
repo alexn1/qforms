@@ -30,8 +30,8 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
 const ACTIONS = [
     'page',
     'select',        // select
-    'selectSingle',
-    'selectMultiple',
+    // 'selectSingle',
+    // 'selectMultiple',
     'insert',       // insert
     'update',       // update
     '_delete',      // delete
@@ -428,7 +428,7 @@ class BackHostApp {
     }
 
     // action
-    async selectSingle(req, res, context: Context) {
+    /*async selectSingle(req, res, context: Context) {
         console.log('BackHostApp.selectSingle', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
@@ -455,10 +455,10 @@ class BackHostApp {
         } finally {
             await dataSource.getDatabase().release(context);
         }
-    }
+    }*/
 
     // action
-    async selectMultiple(req, res, context: Context) {
+    /*async selectMultiple(req, res, context: Context) {
         console.log('BackHostApp.selectMultiple', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
@@ -485,7 +485,7 @@ class BackHostApp {
         } finally {
             await dataSource.getDatabase().release(context);
         }
-    }
+    }*/
 
     // action
     async insert(req, res, context: Context) {

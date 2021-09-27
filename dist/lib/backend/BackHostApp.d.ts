@@ -38,8 +38,6 @@ declare class BackHostApp {
     loginPost(req: any, res: any, context: Context): Promise<void>;
     page(req: any, res: any, context: Context): Promise<void>;
     select(req: any, res: any, context: Context): Promise<number>;
-    selectSingle(req: any, res: any, context: Context): Promise<number>;
-    selectMultiple(req: any, res: any, context: Context): Promise<number>;
     insert(req: any, res: any, context: Context): Promise<void>;
     update(req: any, res: any, context: Context): Promise<void>;
     _delete(req: any, res: any, context: Context): Promise<void>;
