@@ -912,7 +912,7 @@ class Grid extends ReactComponent {
 
     this.state = {
       key: this.props.selectedKey || null,
-      column: null,
+      column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
       columnWidth: {},
       resized: Date.now()
     };
