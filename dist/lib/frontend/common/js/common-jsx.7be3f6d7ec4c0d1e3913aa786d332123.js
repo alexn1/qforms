@@ -778,6 +778,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 class Grid extends ReactComponent {
   constructor(props) {
+    console.log('Grid.constructor', props);
     super(props);
 
     _defineProperty(this, "onCellMouseDown", async e => {
@@ -910,7 +911,7 @@ class Grid extends ReactComponent {
     });
 
     this.state = {
-      key: null,
+      key: this.props.selectedKey || null,
       column: null,
       columnWidth: {},
       resized: Date.now()

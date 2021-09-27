@@ -94,7 +94,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         if (e.button === 0) {
             e.preventDefault();
             const id = this.getValue();
-            const selectedKey = id ? [id].toString() : null;
+            const selectedKey = id ? JSON.stringify([id]) : null;
             await this.openPage({
                 name       : this.getModel().getAttr('itemSelectPage'),
                 selectMode : true,

@@ -1,8 +1,9 @@
 class Grid extends ReactComponent {
     constructor(props) {
+        console.log('Grid.constructor', props);
         super(props);
         this.state = {
-            key        : null,
+            key        : this.props.selectedKey || null,
             column     : null,
             columnWidth: {},
             resized    : Date.now(),

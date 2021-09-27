@@ -116,6 +116,7 @@ class TableFormView extends FormView {
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
                     extraColumn={true}
+                    selectedKey={ctrl.getParent().getModel().options.selectedKey}
                 />
                 {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>
