@@ -2867,6 +2867,10 @@ class SqlDataSource extends DataSource {
         }
         // console.log('updates:', e.updates);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
+
+        await this.refill();
+        // update rows
+        /*
         for (const key in e.updates) {
             // check if updated row exists in this ds
             if (this.getRow(key)) {
@@ -2876,7 +2880,9 @@ class SqlDataSource extends DataSource {
                 const result = await this.selectSingle(keyParams);
                 this.updateRow(key, result.row);
             }
-        }
+        }*/
+
+        // events
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(e);
         }
