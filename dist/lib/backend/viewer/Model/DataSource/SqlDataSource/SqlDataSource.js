@@ -284,49 +284,49 @@ class SqlDataSource extends DataSource_1.default {
     static addInsertToResult(result, database, table, key) {
         if (!result[database])
             result[database] = {};
-        if (!result[database].insert)
-            result[database].insert = {};
-        if (!result[database].insert[table])
-            result[database].insert[table] = [];
-        result[database].insert[table].push(key);
+        if (!result[database][table])
+            result[database][table] = [];
+        if (!result[database][table].insert)
+            result[database][table].insert = {};
+        result[database][table].insert.push(key);
     }
     static addInsertExToResult(result, database, table, key, row) {
         if (!result[database])
             result[database] = {};
-        if (!result[database].insertEx)
-            result[database].insertEx = {};
-        if (!result[database].insertEx[table])
-            result[database].insertEx[table] = {};
-        result[database].insertEx[table][key] = row;
+        if (!result[database][table])
+            result[database][table] = {};
+        if (!result[database][table].insertEx)
+            result[database][table].insertEx = {};
+        result[database][table].insertEx[key] = row;
     }
     static addUpdateToResult(result, database, table, oldKey, newKey) {
         // console.log('SqlDataSource.addUpdateToResult');
         if (!result[database])
             result[database] = {};
-        if (!result[database].update)
-            result[database].update = {};
-        if (!result[database].update[table])
-            result[database].update[table] = {};
-        result[database].update[table][oldKey] = newKey;
+        if (!result[database][table])
+            result[database][table] = {};
+        if (!result[database][table].update)
+            result[database][table].update = {};
+        result[database][table].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, database, table, oldKey, row) {
         // console.log('SqlDataSource.addUpdateExToResult');
         if (!result[database])
             result[database] = {};
-        if (!result[database].updateEx)
-            result[database].updateEx = {};
-        if (!result[database].updateEx[table])
-            result[database].updateEx[table] = {};
-        result[database].updateEx[table][oldKey] = row;
+        if (!result[database][table])
+            result[database][table] = {};
+        if (!result[database][table].updateEx)
+            result[database][table].updateEx = {};
+        result[database][table].updateEx[oldKey] = row;
     }
     static addDeleteToResult(result, database, table, key) {
         if (!result[database])
             result[database] = {};
-        if (!result[database].delete)
-            result[database].delete = {};
-        if (!result[database].delete[table])
-            result[database].delete[table] = [];
-        result[database].delete[table].push(key);
+        if (!result[database][table])
+            result[database][table] = [];
+        if (!result[database][table].delete)
+            result[database][table].delete = {};
+        result[database][table].delete.push(key);
     }
 }
 module.exports = SqlDataSource;

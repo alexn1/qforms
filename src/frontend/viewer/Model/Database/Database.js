@@ -33,20 +33,20 @@ class Database extends Model {
     emitInsert(result, source = null) {
         if (!result.insert) return;
         for (const table in result.insert) {
-            this.getTable(table).emitInsert(source, result.insert[table]);
+            this.getTable(table).emitInsert(source, result[table].insert);
         }
     }
 
     emitUpdate(result, source = null) {
         if (!result.update) return;
         for (const table in result.update) {
-            this.getTable(table).emitUpdate(source, result.update[table]);
+            this.getTable(table).emitUpdate(source, result[table].update);
         }
     }
     emitDelete(result, source = null) {
         if (!result.delete) return;
         for (const table in result.delete) {
-            this.getTable(table).emitDelete(source, result.delete[table]);
+            this.getTable(table).emitDelete(source, result[table].delete);
         }
     }
 }

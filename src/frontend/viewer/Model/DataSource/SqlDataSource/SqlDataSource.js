@@ -29,9 +29,9 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result[database].insertEx[table]);
+        const [key] = Object.keys(result[database][table].insertEx);
         if (!key) throw new Error('no inserted row key');
-        const values = result[database].insertEx[table][key];
+        const values = result[database][table].insertEx[key];
         for (const column in values) {
             row[column] = values[column];
         }
@@ -47,7 +47,7 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const event = {source : this, inserts: result[database].insert[table]};
+        const event = {source : this, inserts: result[database][table].insert};
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(event);
         }
@@ -77,16 +77,16 @@ class SqlDataSource extends DataSource {
         });
 
 
-        const [key] = Object.keys(result[database].updateEx[table]);
+        const [key] = Object.keys(result[database][table].updateEx);
         if (!key) throw new Error('no updated row');
-        const newValues = result[database].updateEx[table][key];
+        const newValues = result[database][table].updateEx[key];
         // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
         this.updateRow(key, newValues);
 
         // events
-        const event = {source: this, updates: result[database].update[table]};
+        const event = {source: this, updates: result[database][table].update};
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(event);
         }
@@ -113,7 +113,7 @@ class SqlDataSource extends DataSource {
         await this.refill();
 
         // events
-        const event = {source: this, deletes: result[database].delete[table]};
+        const event = {source: this, deletes: result[database][table].delete};
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete(event);
         }

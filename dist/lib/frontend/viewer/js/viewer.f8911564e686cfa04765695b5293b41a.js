@@ -1750,7 +1750,7 @@ class TableFormController extends FormController {
             const result = await this.model.getDefaultDataSource().insert(row);
             const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result[database].insert[table];
+            const [key] = result[database][table].insert;
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
                 // key  : key,
@@ -1768,7 +1768,7 @@ class TableFormController extends FormController {
             const result = await this.model.getDefaultDataSource().insert(row);
             const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result[database].insert[table];
+            const [key] = result[database][table].insert;
             await this.openPage({
                 name : this.model.getAttr('itemCreatePage'),
                 // key  : key,
@@ -2617,11 +2617,8 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                insert: {[table]: inserts}
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                insert: {[table]: inserts}
+                [table]: {insert: inserts}
             }}, this);
         }
     }
@@ -2640,11 +2637,8 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                'delete': {[table]: deletes}
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                'delete': {[table]: deletes}
+                    [table]: {delete: deletes}
             }}, this);
         }
     }
@@ -2683,14 +2677,9 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                update: {
-                    [this.getAttr('table')]: updates
-                }
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                update: {
-                    [table]: updates
+                [table]: {
+                    update: updates
                 }
             }}, this);
         }
@@ -2803,9 +2792,9 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result[database].insertEx[table]);
+        const [key] = Object.keys(result[database][table].insertEx);
         if (!key) throw new Error('no inserted row key');
-        const values = result[database].insertEx[table][key];
+        const values = result[database][table].insertEx[key];
         for (const column in values) {
             row[column] = values[column];
         }
@@ -2821,7 +2810,7 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const event = {source : this, inserts: result[database].insert[table]};
+        const event = {source : this, inserts: result[database][table].insert};
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(event);
         }
@@ -2851,16 +2840,16 @@ class SqlDataSource extends DataSource {
         });
 
 
-        const [key] = Object.keys(result[database].updateEx[table]);
+        const [key] = Object.keys(result[database][table].updateEx);
         if (!key) throw new Error('no updated row');
-        const newValues = result[database].updateEx[table][key];
+        const newValues = result[database][table].updateEx[key];
         // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
         this.updateRow(key, newValues);
 
         // events
-        const event = {source: this, updates: result[database].update[table]};
+        const event = {source: this, updates: result[database][table].update};
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(event);
         }
@@ -2887,7 +2876,7 @@ class SqlDataSource extends DataSource {
         await this.refill();
 
         // events
-        const event = {source: this, deletes: result[database].delete[table]};
+        const event = {source: this, deletes: result[database][table].delete};
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete(event);
         }
@@ -3096,20 +3085,20 @@ class Database extends Model {
     emitInsert(result, source = null) {
         if (!result.insert) return;
         for (const table in result.insert) {
-            this.getTable(table).emitInsert(source, result.insert[table]);
+            this.getTable(table).emitInsert(source, result[table].insert);
         }
     }
 
     emitUpdate(result, source = null) {
         if (!result.update) return;
         for (const table in result.update) {
-            this.getTable(table).emitUpdate(source, result.update[table]);
+            this.getTable(table).emitUpdate(source, result[table].update);
         }
     }
     emitDelete(result, source = null) {
         if (!result.delete) return;
         for (const table in result.delete) {
-            this.getTable(table).emitDelete(source, result.delete[table]);
+            this.getTable(table).emitDelete(source, result[table].delete);
         }
     }
 }

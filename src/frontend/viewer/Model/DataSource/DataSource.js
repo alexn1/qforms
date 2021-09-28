@@ -337,11 +337,8 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                insert: {[table]: inserts}
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                insert: {[table]: inserts}
+                [table]: {insert: inserts}
             }}, this);
         }
     }
@@ -360,11 +357,8 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                'delete': {[table]: deletes}
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                'delete': {[table]: deletes}
+                    [table]: {delete: deletes}
             }}, this);
         }
     }
@@ -403,14 +397,9 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            /*this.getDatabase().emitResult({
-                update: {
-                    [this.getAttr('table')]: updates
-                }
-            }, this);*/
             this.getApp().emitResult({[database]: {
-                update: {
-                    [table]: updates
+                [table]: {
+                    update: updates
                 }
             }}, this);
         }
