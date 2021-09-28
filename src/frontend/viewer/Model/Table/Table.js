@@ -19,6 +19,17 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
+    emitResult(result, source) {
+        if (result.insert) {
+            this.emitInsert(source, result.insert);
+        }
+        if (result.update) {
+            this.emitUpdate(source, result.update);
+        }
+        if (result.delete) {
+            this.emitDelete(source, result.delete);
+        }
+    }
     emitInsert(source, inserts) {
         this.emit('insert', {source, inserts});
     }
@@ -28,6 +39,5 @@ class Table extends Model {
     emitDelete(source, deletes) {
         this.emit('delete', {source, deletes});
     }
-
 }
 window.QForms.Table = Table;

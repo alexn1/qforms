@@ -3077,28 +3077,8 @@ class Database extends Model {
 
     emitResult(result, source) {
         console.log('Database.emitResult', result, source);
-        this.emitDelete(result, source);
-        this.emitUpdate(result, source);
-        this.emitInsert(result, source);
-    }
-
-    emitInsert(result, source = null) {
-        if (!result.insert) return;
-        for (const table in result.insert) {
-            this.getTable(table).emitInsert(source, result[table].insert);
-        }
-    }
-
-    emitUpdate(result, source = null) {
-        if (!result.update) return;
-        for (const table in result.update) {
-            this.getTable(table).emitUpdate(source, result[table].update);
-        }
-    }
-    emitDelete(result, source = null) {
-        if (!result.delete) return;
-        for (const table in result.delete) {
-            this.getTable(table).emitDelete(source, result[table].delete);
+        for (const table in result) {
+            this.getTable(table).emitResult(result[table], source);
         }
     }
 }
@@ -3821,6 +3801,17 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
+    emitResult(result, source) {
+        if (result.insert) {
+            this.emitInsert(source, result.insert);
+        }
+        if (result.update) {
+            this.emitUpdate(source, result.update);
+        }
+        if (result.delete) {
+            this.emitDelete(source, result.delete);
+        }
+    }
     emitInsert(source, inserts) {
         this.emit('insert', {source, inserts});
     }
@@ -3830,6 +3821,5 @@ class Table extends Model {
     emitDelete(source, deletes) {
         this.emit('delete', {source, deletes});
     }
-
 }
 window.QForms.Table = Table;

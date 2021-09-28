@@ -25,28 +25,8 @@ class Database extends Model {
 
     emitResult(result, source) {
         console.log('Database.emitResult', result, source);
-        this.emitDelete(result, source);
-        this.emitUpdate(result, source);
-        this.emitInsert(result, source);
-    }
-
-    emitInsert(result, source = null) {
-        if (!result.insert) return;
-        for (const table in result.insert) {
-            this.getTable(table).emitInsert(source, result[table].insert);
-        }
-    }
-
-    emitUpdate(result, source = null) {
-        if (!result.update) return;
-        for (const table in result.update) {
-            this.getTable(table).emitUpdate(source, result[table].update);
-        }
-    }
-    emitDelete(result, source = null) {
-        if (!result.delete) return;
-        for (const table in result.delete) {
-            this.getTable(table).emitDelete(source, result[table].delete);
+        for (const table in result) {
+            this.getTable(table).emitResult(result[table], source);
         }
     }
 }
