@@ -119,8 +119,9 @@ class TableFormController extends FormController {
             const row = {};
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
+            const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result.insert[table];
+            const [key] = result[database].insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
                 // key  : key,
@@ -136,8 +137,9 @@ class TableFormController extends FormController {
             const row = {};
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
+            const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result.insert[table];
+            const [key] = result[database].insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemCreatePage'),
                 // key  : key,

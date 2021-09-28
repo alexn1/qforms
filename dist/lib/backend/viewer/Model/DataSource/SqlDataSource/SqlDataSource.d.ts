@@ -29,10 +29,10 @@ declare class SqlDataSource extends DataSource {
     };
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
-    static addInsertToResult(result: any, table: any, key: any): void;
-    static addInsertExToResult(result: any, table: any, key: any, row: any): void;
-    static addUpdateToResult(result: any, table: any, oldKey: any, newKey: any): void;
-    static addUpdateExToResult(result: any, table: any, oldKey: any, row: any): void;
-    static addDeleteToResult(result: any, table: any, key: any): void;
+    static addInsertToResult(result: any, database: any, table: any, key: any): void;
+    static addInsertExToResult(result: any, database: any, table: any, key: any, row: any): void;
+    static addUpdateToResult(result: any, database: any, table: any, oldKey: any, newKey: any): void;
+    static addUpdateExToResult(result: any, database: any, table: any, oldKey: any, row: any): void;
+    static addDeleteToResult(result: any, database: any, table: any, key: any): void;
 }
 export = SqlDataSource;

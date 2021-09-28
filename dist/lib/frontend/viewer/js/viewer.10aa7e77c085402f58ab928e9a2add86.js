@@ -1748,8 +1748,9 @@ class TableFormController extends FormController {
             const row = {};
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
+            const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result.insert[table];
+            const [key] = result[database].insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
                 // key  : key,
@@ -1765,8 +1766,9 @@ class TableFormController extends FormController {
             const row = {};
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
+            const database = this.model.getDefaultDataSource().getAttr('database');
             const table = this.model.getDefaultDataSource().getAttr('table');
-            const [key] = result.insert[table];
+            const [key] = result[database].insert[table];
             await this.openPage({
                 name : this.model.getAttr('itemCreatePage'),
                 // key  : key,
@@ -2250,6 +2252,11 @@ class Application extends Model {
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
+    }
+    emitResult(result, source) {
+        for (const database in result) {
+            this.getDatabase(database).emitResult(result[database], source);
+        }
     }
 }
 window.QForms.Application = Application;
@@ -2768,6 +2775,7 @@ class SqlDataSource extends DataSource {
 
     async insert(row) {
         console.log('SqlDataSource.insert', row);
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to insert');
 
@@ -2779,9 +2787,9 @@ class SqlDataSource extends DataSource {
         });
 
         // key & values
-        const [key] = Object.keys(result.insertEx[table]);
+        const [key] = Object.keys(result[database].insertEx[table]);
         if (!key) throw new Error('no inserted row key');
-        const values = result.insertEx[table][key];
+        const values = result[database].insertEx[table][key];
         for (const column in values) {
             row[column] = values[column];
         }
@@ -2797,18 +2805,20 @@ class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const event = {source : this, inserts: result.insert[table]};
+        const event = {source : this, inserts: result[database].insert[table]};
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(event);
         }
         this.emit('insert', event);
-        this.getDatabase().emitResult(result, this);
+        this.getApp().emitResult(result, this);
+        // this.getDatabase().emitResult(result, this);
 
         return result;
     }
 
     async update() {
         console.log('SqlDataSource.update', this.getFullName());
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to update');
         if (this.news[0]) {
@@ -2825,27 +2835,29 @@ class SqlDataSource extends DataSource {
         });
 
 
-        const [key] = Object.keys(result.updateEx[table]);
+        const [key] = Object.keys(result[database].updateEx[table]);
         if (!key) throw new Error('no updated row');
-        const newValues = result.updateEx[table][key];
+        const newValues = result[database].updateEx[table][key];
         // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
         this.updateRow(key, newValues);
 
         // events
-        const event = {source: this, updates: result.update[table]};
+        const event = {source: this, updates: result[database].update[table]};
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(event);
         }
         this.emit('update', event);
-        this.getDatabase().emitResult(result, this);
+        this.getApp().emitResult(result, this);
+        // this.getDatabase().emitResult(result, this);
         return result;
     }
 
     async delete(key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
         if (!key) throw new Error('no key');
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (!table) {
             throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
@@ -2859,12 +2871,13 @@ class SqlDataSource extends DataSource {
         await this.refill();
 
         // events
-        const event = {source: this, deletes: result.delete[table]};
+        const event = {source: this, deletes: result[database].delete[table]};
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete(event);
         }
         this.emit('delete', event);
-        this.getDatabase().emitResult(result);
+        this.getApp().emitResult(result, this);
+        // this.getDatabase().emitResult(result, this);
         return result;
     }
 

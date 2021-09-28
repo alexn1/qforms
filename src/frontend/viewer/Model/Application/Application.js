@@ -75,5 +75,10 @@ class Application extends Model {
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }
+    emitResult(result, source) {
+        for (const database in result) {
+            this.getDatabase(database).emitResult(result[database], source);
+        }
+    }
 }
 window.QForms.Application = Application;

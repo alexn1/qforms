@@ -105,6 +105,7 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table)
             throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
@@ -126,8 +127,8 @@ class SqlDataSource extends DataSource_1.default {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
         const result = {};
-        SqlDataSource.addInsertToResult(result, table, key);
-        SqlDataSource.addInsertExToResult(result, table, key, row);
+        SqlDataSource.addInsertToResult(result, database, table, key);
+        SqlDataSource.addInsertExToResult(result, database, table, key, row);
         return result;
     }
     async update(context) {
@@ -136,6 +137,7 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table)
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
         // console.log('changes:', changes);
@@ -161,8 +163,8 @@ class SqlDataSource extends DataSource_1.default {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
         const result = {};
-        SqlDataSource.addUpdateToResult(result, table, key, newKey);
-        SqlDataSource.addUpdateExToResult(result, table, key, row);
+        SqlDataSource.addUpdateToResult(result, database, table, key, newKey);
+        SqlDataSource.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
     async delete(context) {
@@ -170,11 +172,12 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error(`${this.getFullName()}: access denied`);
         const { key } = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
         const result = {};
-        SqlDataSource.addDeleteToResult(result, table, key);
+        SqlDataSource.addDeleteToResult(result, database, table, key);
         return result;
     }
     fillAttributes(response) {
@@ -278,42 +281,52 @@ class SqlDataSource extends DataSource_1.default {
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
     //   updateEx: {table: {"1": {field: 1, field2: 2}}}
     // }
-    static addInsertToResult(result, table, key) {
-        if (!result.insert)
-            result.insert = {};
-        if (!result.insert[table])
-            result.insert[table] = [];
-        result.insert[table].push(key);
+    static addInsertToResult(result, database, table, key) {
+        if (!result[database])
+            result[database] = {};
+        if (!result[database].insert)
+            result[database].insert = {};
+        if (!result[database].insert[table])
+            result[database].insert[table] = [];
+        result[database].insert[table].push(key);
     }
-    static addInsertExToResult(result, table, key, row) {
-        if (!result.insertEx)
-            result.insertEx = {};
-        if (!result.insertEx[table])
-            result.insertEx[table] = {};
-        result.insertEx[table][key] = row;
+    static addInsertExToResult(result, database, table, key, row) {
+        if (!result[database])
+            result[database] = {};
+        if (!result[database].insertEx)
+            result[database].insertEx = {};
+        if (!result[database].insertEx[table])
+            result[database].insertEx[table] = {};
+        result[database].insertEx[table][key] = row;
     }
-    static addUpdateToResult(result, table, oldKey, newKey) {
+    static addUpdateToResult(result, database, table, oldKey, newKey) {
         // console.log('SqlDataSource.addUpdateToResult');
-        if (!result.update)
-            result.update = {};
-        if (!result.update[table])
-            result.update[table] = {};
-        result.update[table][oldKey] = newKey;
+        if (!result[database])
+            result[database] = {};
+        if (!result[database].update)
+            result[database].update = {};
+        if (!result[database].update[table])
+            result[database].update[table] = {};
+        result[database].update[table][oldKey] = newKey;
     }
-    static addUpdateExToResult(result, table, oldKey, row) {
+    static addUpdateExToResult(result, database, table, oldKey, row) {
         // console.log('SqlDataSource.addUpdateExToResult');
-        if (!result.updateEx)
-            result.updateEx = {};
-        if (!result.updateEx[table])
-            result.updateEx[table] = {};
-        result.updateEx[table][oldKey] = row;
+        if (!result[database])
+            result[database] = {};
+        if (!result[database].updateEx)
+            result[database].updateEx = {};
+        if (!result[database].updateEx[table])
+            result[database].updateEx[table] = {};
+        result[database].updateEx[table][oldKey] = row;
     }
-    static addDeleteToResult(result, table, key) {
-        if (!result.delete)
-            result.delete = {};
-        if (!result.delete[table])
-            result.delete[table] = [];
-        result.delete[table].push(key);
+    static addDeleteToResult(result, database, table, key) {
+        if (!result[database])
+            result[database] = {};
+        if (!result[database].delete)
+            result[database].delete = {};
+        if (!result[database].delete[table])
+            result[database].delete[table] = [];
+        result[database].delete[table].push(key);
     }
 }
 module.exports = SqlDataSource;
