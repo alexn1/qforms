@@ -75,6 +75,7 @@ class BackHostApp {
     params: any;
     applications: any;          // application by route
     express: any;
+    httpServer: any;
     appsDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
@@ -113,31 +114,29 @@ class BackHostApp {
             return;
         }
 
-        // express server
-        this.express = express();
-
         // path
         const backendDirPath = __dirname;
         this.frontendDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
         this.sessionDirPath = path.join(this.runtimeDirPath,  'session');
+
+        // runtime & temp
+        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
+        Helper.createDirIfNotExistsSync(this.sessionDirPath);
 
         // logPool
         if (log) {
             this.logPool = PostgreSqlDatabase.createPool(log);
         }
 
-        // options
+        // express server
+        this.express = express();
         this.express.set('handleException', handleException);
         this.express.set('view engine'    , 'ejs');
         this.express.set('views'          , backendDirPath);
         this.express.enable('strict routing');
 
-        // runtime & temp
-        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        Helper.createDirIfNotExistsSync(this.sessionDirPath);
-
         this.initExpressServer();
-        this.createAndRunHttpServer(host, port);
+        this.httpServer = this.createAndRunHttpServer(host, port);
 
         // commonModule
         this.commonModule = new CommonModule(this);
@@ -926,6 +925,7 @@ class BackHostApp {
             msg += `\tstarted at: ${new Date().toISOString()}\n`;
             console.log(msg);
         });
+        return httpServer;
     }
 
     async onProcessMessage(message) {

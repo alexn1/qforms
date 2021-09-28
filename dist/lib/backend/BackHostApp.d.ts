@@ -10,6 +10,7 @@ declare class BackHostApp {
     params: any;
     applications: any;
     express: any;
+    httpServer: any;
     appsDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
@@ -58,7 +59,7 @@ declare class BackHostApp {
     appGetFile(req: any, res: any, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
-    createAndRunHttpServer(host: any, port: any): void;
+    createAndRunHttpServer(host: any, port: any): any;
     onProcessMessage(message: any): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): void;
