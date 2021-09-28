@@ -2614,11 +2614,15 @@ class DataSource extends Model {
             this.parent.onDataSourceInsert({source: this, inserts});
         }
         this.emit('insert', {source: this, inserts});
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
-        if (table) {
-            this.getDatabase().emitResult({
+        if (database && table) {
+            /*this.getDatabase().emitResult({
                 insert: {[table]: inserts}
-            }, this);
+            }, this);*/
+            this.getApp().emitResult({[database]: {
+                insert: {[table]: inserts}
+            }}, this);
         }
     }
 
@@ -2633,11 +2637,15 @@ class DataSource extends Model {
             this.parent.onDataSourceDelete({source: this, deletes});
         }
         this.emit('delete', {source: this, deletes});
+        const database = this.getAttr('database');
         const table = this.getAttr('table');
-        if (table) {
-            this.getDatabase().emitResult({
+        if (database && table) {
+            /*this.getDatabase().emitResult({
                 'delete': {[table]: deletes}
-            }, this);
+            }, this);*/
+            this.getApp().emitResult({[database]: {
+                'delete': {[table]: deletes}
+            }}, this);
         }
     }
 
@@ -2671,12 +2679,20 @@ class DataSource extends Model {
             this.parent.onDataSourceUpdate({source: this, updates});
         }
         this.emit('update', {source: this, updates});
-        if (this.getAttr('table')) {
-            this.getDatabase().emitResult({
+
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (database && table) {
+            /*this.getDatabase().emitResult({
                 update: {
                     [this.getAttr('table')]: updates
                 }
-            }, this);
+            }, this);*/
+            this.getApp().emitResult({[database]: {
+                update: {
+                    [table]: updates
+                }
+            }}, this);
         }
     }
 
