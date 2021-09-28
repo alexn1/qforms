@@ -299,8 +299,8 @@ class SqlDataSource extends DataSource {
     // }
     static addInsertToResult(result, database, table, key) {
         if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = [];
-        if (!result[database][table].insert) result[database][table].insert = {};
+        if (!result[database][table]) result[database][table] = {};
+        if (!result[database][table].insert) result[database][table].insert = [];
         result[database][table].insert.push(key);
     }
 
@@ -329,8 +329,8 @@ class SqlDataSource extends DataSource {
 
     static addDeleteToResult(result, database, table, key) {
         if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = [];
-        if (!result[database][table].delete) result[database][table].delete = {};
+        if (!result[database][table]) result[database][table] = {};
+        if (!result[database][table].delete) result[database][table].delete = [];
         result[database][table].delete.push(key);
     }
 }

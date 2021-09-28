@@ -90,7 +90,7 @@ class BackHostApp {
             return;
         }
         // express server
-        this.server = express();
+        this.express = express();
         // path
         const backendDirPath = __dirname;
         this.frontendDirPath = path.resolve(path.join(backendDirPath, '../frontend'));
@@ -100,10 +100,10 @@ class BackHostApp {
             this.logPool = PostgreSqlDatabase_1.default.createPool(log);
         }
         // options
-        this.server.set('handleException', handleException);
-        this.server.set('view engine', 'ejs');
-        this.server.set('views', backendDirPath);
-        this.server.enable('strict routing');
+        this.express.set('handleException', handleException);
+        this.express.set('view engine', 'ejs');
+        this.express.set('views', backendDirPath);
+        this.express.enable('strict routing');
         // runtime & temp
         Helper_1.default.createDirIfNotExistsSync(this.runtimeDirPath);
         Helper_1.default.createDirIfNotExistsSync(this.sessionDirPath);
@@ -147,13 +147,13 @@ class BackHostApp {
         // middlewares
         // server.use(morgan('dev'));
         // server.use(serverRequest);
-        this.server.use(bodyParser.json({
+        this.express.use(bodyParser.json({
             limit: '10mb',
             reviver: Helper_1.default.dateTimeReviver
         }));
-        this.server.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(bodyParser.urlencoded({ extended: false }));
         // server.use(multipartHandler);
-        this.server.use(session({
+        this.express.use(session({
             store: new FileSessionStore_1.default(this.sessionDirPath),
             secret: this.getSecretSync(),
             key: 'sid',
@@ -161,37 +161,37 @@ class BackHostApp {
             saveUninitialized: false
         }));
         // test
-        // this.server.get( '/test', this._getTest.bind(this));
-        // this.server.post('/test', this._postTest.bind(this));
+        // this.express.get( '/test', this._getTest.bind(this));
+        // this.express.post('/test', this._postTest.bind(this));
         // error logger
-        this.server.options('/error', (req, res, next) => {
+        this.express.options('/error', (req, res, next) => {
             console.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
             res.end();
         });
-        this.server.post('/error', this.postError.bind(this));
+        this.express.post('/error', this.postError.bind(this));
         // index module
         if (this.isDevelopment()) {
-            this.server.get('/index', this.indexGet.bind(this));
-            this.server.post('/index', this.indexPost.bind(this));
-            // this.server.get( '/index/*', this.indexGetFile.bind(this));
+            this.express.get('/index', this.indexGet.bind(this));
+            this.express.post('/index', this.indexPost.bind(this));
+            // this.express.get( '/index/*', this.indexGetFile.bind(this));
         }
         // monitor module
         if (this.isDevelopment()) {
-            this.server.get('/monitor', this.monitorGet.bind(this));
-            // this.server.get('/monitor/*', this.monitorGetFile.bind(this));
+            this.express.get('/monitor', this.monitorGet.bind(this));
+            // this.express.get('/monitor/*', this.monitorGetFile.bind(this));
         }
         // viewer/editor module
-        this.server.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
-        this.server.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
-        this.server.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
+        this.express.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
         // handle static for index and monitor
-        this.server.use(express.static(this.frontendDirPath));
+        this.express.use(express.static(this.frontendDirPath));
         this.initCustomRoutes();
         // 404 and 500 error handlers
-        this.server.use(this._e404.bind(this));
-        this.server.use(this._e500.bind(this));
+        this.express.use(this._e404.bind(this));
+        this.express.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(req, context) {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
@@ -879,7 +879,7 @@ class BackHostApp {
         res.json({foo: 'bar'});
     }*/
     createAndRunHttpServer(host, port) {
-        const httpServer = http.createServer(this.server);
+        const httpServer = http.createServer(this.express);
         httpServer.on('error', this.onHttpServerError.bind(this));
         httpServer.listen(port, host, () => {
             if (process.send) {
@@ -977,7 +977,7 @@ class BackHostApp {
     initCustomRoutes() {
     }
     alias(method, path, [module, appDirName, appFileName, env], cb, query) {
-        this.server[method](path, async (req, res, next) => {
+        this.express[method](path, async (req, res, next) => {
             req.params.module = module;
             req.params.appDirName = appDirName;
             req.params.appFileName = appFileName;

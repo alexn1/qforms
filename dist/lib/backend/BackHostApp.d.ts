@@ -9,7 +9,7 @@ import CommonModule from './common/CommonModule';
 declare class BackHostApp {
     params: any;
     applications: any;
-    server: any;
+    express: any;
     appsDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;

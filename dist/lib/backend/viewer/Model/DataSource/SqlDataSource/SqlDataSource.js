@@ -285,9 +285,9 @@ class SqlDataSource extends DataSource_1.default {
         if (!result[database])
             result[database] = {};
         if (!result[database][table])
-            result[database][table] = [];
+            result[database][table] = {};
         if (!result[database][table].insert)
-            result[database][table].insert = {};
+            result[database][table].insert = [];
         result[database][table].insert.push(key);
     }
     static addInsertExToResult(result, database, table, key, row) {
@@ -323,9 +323,9 @@ class SqlDataSource extends DataSource_1.default {
         if (!result[database])
             result[database] = {};
         if (!result[database][table])
-            result[database][table] = [];
+            result[database][table] = {};
         if (!result[database][table].delete)
-            result[database][table].delete = {};
+            result[database][table].delete = [];
         result[database][table].delete.push(key);
     }
 }
