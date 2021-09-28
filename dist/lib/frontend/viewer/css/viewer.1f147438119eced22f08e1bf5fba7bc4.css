@@ -311,41 +311,41 @@
 
 
 .RowFormView {
+  background-color: #eeeeee;
+  padding: 5px;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+.RowFormView__toolbar {
+  display: flex;
   grid-gap: 5px;
 }
 .RowFormView__form-grid {
   display: grid;
   grid-template-columns: 150px 300px 24px 150px 300px 24px;
-}
-.RowFormView__form-grid div {
-  align-items: start;
-}
-.standard .RowFormView {
-  background-color: #eeeeee;
-  padding: 5px;
-  font-size: small;
-}
-.standard .RowFormView__toolbar {
-  display: flex;
-  grid-gap: 5px;
-}
-.standard .RowFormView__form-grid {
   grid-row-gap: 5px;
 }
-.standard .RowFormView__form-grid > div.label {
+.RowFormView__form-grid > div {
+  align-items: start;
+}
+.RowFormView__form-grid > div.label {
   margin-left: 5px;
   border-bottom: 1px dotted gray;
 }
-.standard .RowFormView__form-grid > div.field {
+.RowFormView__form-grid > div.field {
   border-bottom: 1px dotted gray;
 }
-.standard .RowFormView__form-grid > div.tooltip {
+.RowFormView__form-grid > div.tooltip {
   margin-left: 5px;
 }
 
 .TableFormView {
   grid-gap: 5px;
   padding: 5px 0;
+  display: flex;
+  flex-direction: column;
 }
 .TableFormView__toolbar {
   display: flex;

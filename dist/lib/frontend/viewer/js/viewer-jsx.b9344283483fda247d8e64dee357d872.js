@@ -739,7 +739,7 @@ class RowFormView extends FormView {
     console.log('RowFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} flex-rows`
+      className: this.getCssClassNames()
     }, (ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar(), this.renderFields());
   }
 
@@ -858,7 +858,7 @@ class TableFormView extends FormView {
     console.log('TableFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows`
+      className: `${this.getCssClassNames()} full`
     }, this.renderToolbar(), /*#__PURE__*/React.createElement(Grid, {
       classList: ['flex-max'],
       onCreate: ctrl.onGridCreate,
@@ -987,7 +987,7 @@ class PageView extends View {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
-      className: "PageView full frame"
+      className: `${this.getCssBlockName()} full frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows"
     }, this.renderCaption(),

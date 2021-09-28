@@ -104,7 +104,7 @@ class PageView extends View {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
         return (
-            <div className="PageView full frame">
+            <div className={`${this.getCssBlockName()} full frame`}>
                 <div className="frame__container flex-rows">
                     {this.renderCaption()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}

@@ -1,5 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormView {
+  background-color: rgb(238,238,238);
+  padding         : 5px;
+  font-size       : small;
+
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormView__toolbar {
+  display: flex;
   grid-gap: 5px;
 }
 
@@ -9,37 +21,19 @@
   //grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
   //grid-template-columns: 100px 1fr 100px 1fr 100px 1fr;
   grid-template-columns: 150px 300px 24px 150px 300px 24px;
-
-  div {
+  grid-row-gap: 5px;
+  //grid-column-gap: 5px;
+  > div {
     align-items: start;
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.standard {
-  .RowFormView {
-    background-color: rgb(238,238,238);
-    padding         : 5px;
-    font-size       : small;
-  }
-  .RowFormView__toolbar {
-    display: flex;
-    grid-gap: 5px;
-  }
-  .RowFormView__form-grid {
-    grid-row-gap: 5px;
-    //grid-column-gap: 5px;
-    > div {
-      &.label {
-        margin-left  : 5px;
-        border-bottom: 1px dotted gray;
-      }
-      &.field {
-        border-bottom: 1px dotted gray;
-      }
-      &.tooltip {
-        margin-left: 5px;
-      }
+    &.label {
+      margin-left  : 5px;
+      border-bottom: 1px dotted gray;
+    }
+    &.field {
+      border-bottom: 1px dotted gray;
+    }
+    &.tooltip {
+      margin-left: 5px;
     }
   }
 }

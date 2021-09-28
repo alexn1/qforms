@@ -115,7 +115,7 @@ class RowFormView extends FormView {
         console.log('RowFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssClassNames()} flex-rows`}>
+            <div className={this.getCssClassNames()}>
                 {(ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar()}
                 {this.renderFields()}
             </div>
