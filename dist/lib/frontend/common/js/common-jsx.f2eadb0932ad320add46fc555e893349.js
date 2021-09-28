@@ -783,6 +783,7 @@ class Grid extends ReactComponent {
 
     _defineProperty(this, "onCellMouseDown", async e => {
       console.log('Grid.onCellMouseDown', this.isLink());
+      e.preventDefault();
       if (this.isLink()) return;
       const button = e.button;
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
