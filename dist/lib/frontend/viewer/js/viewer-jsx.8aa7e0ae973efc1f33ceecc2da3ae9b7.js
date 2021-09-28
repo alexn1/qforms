@@ -1024,15 +1024,15 @@ class PageView2 extends PageView {
   render() {
     console.log('PageView2.render', this.props.ctrl.model.getFullName());
     return /*#__PURE__*/React.createElement("div", {
-      className: "PageView full frame"
+      className: `${this.getCssBlockName()} full frame`
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container flex-rows"
+      className: 'frame__container flex-rows'
     }, this.renderCaption(),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container"
+      className: 'frame__container'
     }, /*#__PURE__*/React.createElement(Tab, {
       tabs: this.getAllTabs(),
       classList: ['Tab-blue', 'full']

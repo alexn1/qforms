@@ -15,12 +15,12 @@ class PageView2 extends PageView {
     render() {
         console.log('PageView2.render', this.props.ctrl.model.getFullName());
         return (
-            <div className="PageView full frame">
-                <div className="frame__container flex-rows">
+            <div className={`${this.getCssBlockName()} full frame`}>
+                <div className={'frame__container flex-rows'}>
                     {this.renderCaption()}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
-                        <div className="frame__container">
+                        <div className={'frame__container'}>
                             <Tab tabs={this.getAllTabs()} classList={['Tab-blue', 'full']}/>
                         </div>
                     </div>
@@ -29,4 +29,5 @@ class PageView2 extends PageView {
         );
     }
 }
+
 window.QForms.PageView2 = PageView2;
