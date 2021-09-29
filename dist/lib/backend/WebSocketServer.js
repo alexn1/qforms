@@ -28,7 +28,7 @@ class WebSocketServer {
         webSocket.on('message', this.onMessage.bind(this, webSocket));
         this.backHostApp.getApplicationByRoute(webSocket.route).addClient(webSocket);
         // say hello
-        webSocket.send(JSON.stringify({ hello: webSocket.uuid }));
+        webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
         // console.log('this.clients', this.clients);
     }
     onClose(webSocket, code, reason) {

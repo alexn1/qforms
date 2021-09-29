@@ -1,6 +1,7 @@
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
+        this.application = options.application;
         this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
     }
@@ -24,5 +25,9 @@ class WebSocketClient {
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
+        const packet = JSON.parse(e.data);
+        if (packet.type === 'result') {
+            this.application.emitResult(packet.data);
+        }
     }
 }

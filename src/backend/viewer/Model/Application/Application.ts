@@ -442,7 +442,7 @@ class Application extends Model {
         if (!from) throw new Error('no from');
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== from) {
-                webSocket.send(JSON.stringify(result));
+                webSocket.send(JSON.stringify({type: 'result', data: result}));
             }
         }
     }

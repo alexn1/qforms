@@ -27,7 +27,8 @@ class ViewerFrontHostApp extends FrontHostApp {
         try {
             this.webSocketClient = new WebSocketClient({
                 route: this.data.route,
-                uuid: this.data.uuid
+                uuid: this.data.uuid,
+                application: application
             });
             await this.webSocketClient.connect();
         } catch (err) {
@@ -50,6 +51,7 @@ window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
+        this.application = options.application;
         this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
     }
@@ -73,6 +75,10 @@ class WebSocketClient {
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
+        const packet = JSON.parse(e.data);
+        if (packet.type === 'result') {
+            this.application.emitResult(packet.data);
+        }
     }
 }
 
@@ -2294,7 +2300,7 @@ class Application extends Model {
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }
-    emitResult(result, source) {
+    emitResult(result, source = null) {
         for (const database in result) {
             this.getDatabase(database).emitResult(result[database], source);
         }
@@ -3118,7 +3124,7 @@ class Database extends Model {
         return table;
     }
 
-    emitResult(result, source) {
+    emitResult(result, source = null) {
         console.log('Database.emitResult', result, source);
         for (const table in result) {
             this.getTable(table).emitResult(result[table], source);
@@ -3844,7 +3850,7 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
-    emitResult(result, source) {
+    emitResult(result, source = null) {
         if (result.insert) {
             this.emitInsert(source, result.insert);
         }

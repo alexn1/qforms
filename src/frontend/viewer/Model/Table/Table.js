@@ -19,7 +19,7 @@ class Table extends Model {
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
-    emitResult(result, source) {
+    emitResult(result, source = null) {
         if (result.insert) {
             this.emitInsert(source, result.insert);
         }
