@@ -78,15 +78,13 @@ class WebSocketClient {
         console.log('WebSocketClient.onError', e);
     }*/
     async reconnect() {
-        console.log(`WebSocketClient.reconnect, waiting ${this.RECONNECT_TIMEOUT} sec`);
+        console.log('WebSocketClient.reconnect');
         try {
             await this.connect();
         } catch (err) {
             console.error(err);
             console.log(`waiting ${this.RECONNECT_TIMEOUT} sec...`);
-            setTimeout(async () => {
-                await this.reconnect();
-            }, this.RECONNECT_TIMEOUT * 1000);
+            setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
     async onClose(e) {
