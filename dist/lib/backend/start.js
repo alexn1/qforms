@@ -12,5 +12,10 @@ function getCommandLineParams() {
 main();
 async function main() {
     const backHostApp = new index_1.BackHostApp(getCommandLineParams());
-    await backHostApp.run();
+    try {
+        await backHostApp.run();
+    }
+    catch (err) {
+        await backHostApp.logError(null, err);
+    }
 }

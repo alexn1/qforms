@@ -109,11 +109,6 @@ class BackHostApp {
         this.express.set('views', backendDirPath);
         this.express.enable('strict routing');
         this.initExpressServer();
-        this.httpServer = this.createAndRunHttpServer(host, port);
-        this.wsServer = new WebSocketServer_1.default({
-            backHostApp: this,
-            httpServer: this.httpServer
-        });
         // commonModule
         this.commonModule = new CommonModule_1.default(this);
         await this.commonModule.init();
@@ -129,6 +124,13 @@ class BackHostApp {
         // editorModule
         this.editorModule = new EditorModule_1.default(this);
         await this.editorModule.init();
+        // http
+        this.httpServer = this.createAndRunHttpServer(host, port);
+        // ws
+        this.wsServer = new WebSocketServer_1.default({
+            backHostApp: this,
+            httpServer: this.httpServer
+        });
     }
     initProcess() {
         process.on('message', this.onProcessMessage.bind(this));

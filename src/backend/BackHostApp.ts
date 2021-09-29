@@ -140,11 +140,6 @@ class BackHostApp {
         this.express.enable('strict routing');
 
         this.initExpressServer();
-        this.httpServer = this.createAndRunHttpServer(host, port);
-        this.wsServer = new WebSocketServer({
-            backHostApp: this,
-            httpServer: this.httpServer
-        });
 
         // commonModule
         this.commonModule = new CommonModule(this);
@@ -165,6 +160,15 @@ class BackHostApp {
         // editorModule
         this.editorModule = new EditorModule(this);
         await this.editorModule.init();
+
+        // http
+        this.httpServer = this.createAndRunHttpServer(host, port);
+
+        // ws
+        this.wsServer = new WebSocketServer({
+            backHostApp: this,
+            httpServer: this.httpServer
+        });
     }
 
     initProcess() {
