@@ -134,8 +134,8 @@ class SqlDataSource extends DataSource {
         // console.log('row:', row);
 
         const result = new Result();
-        SqlDataSource.addInsertToResult(result, database, table, key);
-        SqlDataSource.addInsertExToResult(result, database, table, key, row);
+        Result.addInsertToResult(result, database, table, key);
+        Result.addInsertExToResult(result, database, table, key, row);
         return result;
     }
 
@@ -172,8 +172,8 @@ class SqlDataSource extends DataSource {
         // console.log('row:', row);
 
         const result = new Result();
-        SqlDataSource.addUpdateToResult(result, database, table, key, newKey);
-        SqlDataSource.addUpdateExToResult(result, database, table, key, row);
+        Result.addUpdateToResult(result, database, table, key, newKey);
+        Result.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
 
@@ -186,7 +186,7 @@ class SqlDataSource extends DataSource {
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
         const result = new Result();
-        SqlDataSource.addDeleteToResult(result, database, table, key);
+        Result.addDeleteToResult(result, database, table, key);
         return result;
     }
 
@@ -290,49 +290,6 @@ class SqlDataSource extends DataSource {
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
-    }
-    // result {
-    //   insert: {table: ["1", "2"]},
-    //   update: {table: {"1": "2"}},
-    //   delete: {table:["1", "2"]},
-    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
-    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
-    // }
-    static addInsertToResult(result: Result, database: string, table: string, key) {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].insert) result[database][table].insert = [];
-        result[database][table].insert.push(key);
-    }
-
-    static addInsertExToResult(result: Result, database: string, table: string, key, row) {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].insertEx) result[database][table].insertEx = {};
-        result[database][table].insertEx[key] = row;
-    }
-
-    static addUpdateToResult(result: Result, database: string, table: string, oldKey, newKey) {
-        // console.log('SqlDataSource.addUpdateToResult');
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].update) result[database][table].update = {};
-        result[database][table].update[oldKey] = newKey;
-    }
-
-    static addUpdateExToResult(result: Result, database: string, table: string, oldKey, row) {
-        // console.log('SqlDataSource.addUpdateExToResult');
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].updateEx) result[database][table].updateEx = {};
-        result[database][table].updateEx[oldKey] = row;
-    }
-
-    static addDeleteToResult(result: Result, database: string, table: string, key) {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].delete) result[database][table].delete = [];
-        result[database][table].delete.push(key);
     }
 }
 
