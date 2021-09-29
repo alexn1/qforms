@@ -1,8 +1,9 @@
 import Helper from './Helper';
 
 class Context {
-    req: any;
-    domain: string;
+    options: any;
+    // req: any;
+    // domain: string;
     query: any;
     params: any;
     connections: any;
@@ -10,27 +11,29 @@ class Context {
     files: any;
 
     constructor(options) {
-        const req    = options.req;
-        const domain = options.domain;
+        this.options = options;
+        if (!options.req) throw new Error('no req');
+        if (!options.domain) throw new Error('no domain');
 
-        // check
-        if (!req) throw new Error('no req');
-        if (!req.params.module) throw new Error('no module');
-        if (!req.params.appDirName) throw new Error('no appDirName');
-        if (!req.params.appFileName) throw new Error('no appFileName');
-        if (!req.params.env) throw new Error('no env');
-        if (!domain) throw new Error('no domain');
+        // const req    = options.req;
+        // const domain = options.domain;
+
+        // if (!req.params.module) throw new Error('no module');
+        if (!this.getReq().params.appDirName) throw new Error('no appDirName');
+        if (!this.getReq().params.appFileName) throw new Error('no appFileName');
+        if (!this.getReq().params.env) throw new Error('no env');
+
 
         // req, domain
-        this.req    = req;
-        this.domain = domain;
+        // this.req    = req;
+        // this.domain = domain;
 
         // params
         this.query  = {
-            ...(req.query ? req.query : {})
+            ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
         };
         this.params = {
-            ...(req.body.params ? req.body.params : {})
+            ...(this.getReq() && this.getReq().body.params ? this.getReq().body.params : {})
         };
 
         // cnn
@@ -41,21 +44,21 @@ class Context {
 
         // files
         this.files = {};
-        if (req.files) {
-            for (const name in req.files) {
-                this.files[name] = req.files[name].buffer;
+        if (this.getReq() && this.getReq().files) {
+            for (const name in this.getReq().files) {
+                this.files[name] = this.getReq().files[name].buffer;
             }
         }
     }
     getRoute(): string {
-        return `${this.domain}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
+        return `${this.getDomain()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
     destroy() {
     }
     getUser(): any {
         const route = this.getRoute();
-        if (this.req.session.user && this.req.session.user[route]) {
-            return this.req.session.user[route];
+        if (this.getReq().session.user && this.getReq().session.user[route]) {
+            return this.getReq().session.user[route];
         }
         return null;
     }
@@ -63,8 +66,8 @@ class Context {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
     getClientTimezoneOffset(): number {
-        if (this.req.session.tzOffset !== undefined && this.req.session.tzOffset !== null) {
-            return this.req.session.tzOffset;
+        if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
+            return this.getReq().session.tzOffset;
         }
         return null;
     }
@@ -87,26 +90,32 @@ class Context {
             ...(timeOffset !== null ? {timeOffset} : {})
         };
     }
+    getReq() {
+        return this.options.req;
+    }
+    getDomain() {
+        return this.options.domain;
+    }
     getBody(): any {
-        return this.req.body;
+        return this.getReq().body;
     }
     getModule(): string {
-        return this.req.params.module;
+        return this.getReq().params.module;
     }
     getAppDirName(): string {
-        return this.req.params.appDirName;
+        return this.getReq().params.appDirName;
     }
     getAppFileName(): string {
-        return this.req.params.appFileName;
+        return this.getReq().params.appFileName;
     }
     getEnv(): string {
-        return this.req.params.env;
+        return this.getReq().params.env;
     }
     getUri(): string {
-        return this.req.params['0'];
+        return this.getReq().params['0'];
     }
     getIp(): string {
-        return this.req.headers['x-forwarded-for'] || this.req.connection.remoteAddress;
+        return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
     }
 }
 

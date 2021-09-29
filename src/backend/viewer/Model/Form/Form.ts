@@ -99,7 +99,7 @@ class Form extends Model {
     }
 
     async rpc(name, context) {
-        console.log('Form.rpc', name, context.req.body);
+        console.log('Form.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,

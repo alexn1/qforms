@@ -1,6 +1,5 @@
 declare class Context {
-    req: any;
-    domain: string;
+    options: any;
     query: any;
     params: any;
     connections: any;
@@ -14,6 +13,8 @@ declare class Context {
     getClientTimezoneOffset(): number;
     getTimeOffset(): number;
     getParams(): any;
+    getReq(): any;
+    getDomain(): any;
     getBody(): any;
     getModule(): string;
     getAppDirName(): string;

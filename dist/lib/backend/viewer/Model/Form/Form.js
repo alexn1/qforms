@@ -80,7 +80,7 @@ class Form extends Model_1.default {
         });
     }
     async rpc(name, context) {
-        console.log('Form.rpc', name, context.req.body);
+        console.log('Form.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new MyError_1.default({

@@ -34,7 +34,7 @@ class Page extends Model_1.default {
         return response;
     }
     async rpc(name, context) {
-        console.log('Page.rpc', name, context.req.body);
+        console.log('Page.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new MyError_1.default({

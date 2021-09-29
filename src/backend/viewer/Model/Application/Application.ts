@@ -306,7 +306,7 @@ class Application extends Model {
     }
 
     async rpc(name: string, context: Context) {
-        console.log('Application.rpc', name, context.req.body);
+        console.log('Application.rpc', name, context.getReq().body);
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
@@ -441,9 +441,9 @@ class Application extends Model {
         // console.log('this.clients', this.clients);
     }
     broadcastResultToClients(context: Context, result: Result) {
-        console.log('Application.broadcastResultToClients', context.req.body.uuid, result);
+        console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
         if (!result) throw new Error('no result');
-        const from = context.req.body.uuid;
+        const from = context.getReq().body.uuid;
         if (!from) throw new Error('no from');
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== from) {
