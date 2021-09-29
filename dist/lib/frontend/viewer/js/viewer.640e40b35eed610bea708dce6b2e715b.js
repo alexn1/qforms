@@ -26,9 +26,10 @@ class ViewerFrontHostApp extends FrontHostApp {
         // web socket client
         try {
             this.webSocketClient = new WebSocketClient({
+                frontHostApp: this,
+                application: application,
                 route: this.data.route,
                 uuid: this.data.uuid,
-                application: application
             });
             await this.webSocketClient.connect();
         } catch (err) {
@@ -51,7 +52,8 @@ window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        this.application = options.application;
+        if (!options.frontHostApp) throw new Error('no frontHostApp');
+        if (!options.application) throw new Error('no application');
         this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
     }
@@ -64,22 +66,35 @@ class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
+                // this.webSocket.onerror   = this.onError.bind(this);
                 this.webSocket.onclose   = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 resolve(e);
             };
         });
     }
+    /*onError(e) {
+        console.log('WebSocketClient.onError', e);
+    }*/
     onClose(e) {
-        console.log('WebSocketClient.onClose', e);
+        console.error('WebSocketClient.onClose', e);
+        // this.webSocket.onerror = null;
+        this.webSocket.onclose = null;
+        this.webSocket.onmessage = null;
         this.webSocket = null;
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            this.application.emitResult(packet.data);
+            this.getApp().emitResult(packet.data);
         }
+    }
+    getApp() {
+        return this.options.application;
+    }
+    getFrontHostApp() {
+        return this.options.frontHostApp;
     }
 }
 
