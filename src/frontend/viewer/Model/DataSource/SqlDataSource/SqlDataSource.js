@@ -22,6 +22,7 @@ class SqlDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const result = await this.getApp().request({
+            uuid   : this.getApp().getAttr('uuid'),
             action: 'insert',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),
@@ -69,6 +70,7 @@ class SqlDataSource extends DataSource {
 
         // specific to SqlDataSource
         const result = await this.getApp().request({
+            uuid   : this.getApp().getAttr('uuid'),
             action : 'update',
             page   : this.getForm().getPage().getName(),
             form   : this.getForm().getName(),
@@ -104,6 +106,7 @@ class SqlDataSource extends DataSource {
             throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
         }
         const result = await this.getApp().request({
+            uuid   : this.getApp().getAttr('uuid'),
             action: '_delete',
             page  : this.getForm().getPage().getName(),
             form  : this.getForm().getName(),

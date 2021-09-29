@@ -437,6 +437,15 @@ class Application extends Model {
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
+    broadcastResultToClients(from: string, result: any) {
+        console.log('Application.broadcastResultToClients', from, result);
+        if (!from) throw new Error('no from');
+        for (const webSocket of this.clients) {
+            if (webSocket.uuid !== from) {
+                webSocket.send(JSON.stringify(result));
+            }
+        }
+    }
 }
 
 export = Application;

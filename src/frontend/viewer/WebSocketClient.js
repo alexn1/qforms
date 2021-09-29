@@ -23,6 +23,6 @@ class WebSocketClient {
         console.log('WebSocketClient.onClose', e);
     }
     onMessage(e) {
-        console.log('WebSocketClient.onMessage', e);
+        console.log('WebSocketClient.onMessage', JSON.parse(e.data));
     }
 }

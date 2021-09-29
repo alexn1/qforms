@@ -63,5 +63,6 @@ declare class Application extends Model {
     release(context: any): void;
     addClient(webSocket: any): void;
     removeClient(webSocket: any): void;
+    broadcastResultToClients(from: string, result: any): void;
 }
 export = Application;

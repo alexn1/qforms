@@ -464,6 +464,7 @@ class BackHostApp {
                 throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
+            application.broadcastResultToClients(req.body.uuid, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
@@ -489,6 +490,7 @@ class BackHostApp {
                 throw new Error('action update: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
+            application.broadcastResultToClients(req.body.uuid, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
@@ -514,6 +516,7 @@ class BackHostApp {
                 throw new Error('delete result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
+            application.broadcastResultToClients(req.body.uuid, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
