@@ -1,6 +1,7 @@
 class WebSocketClient {
     constructor(options = {}) {
-        this.url = `ws://${window.location.host}/`;
+        this.options = options;
+        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}`;
         this.webSocket = null;
     }
     connect() {

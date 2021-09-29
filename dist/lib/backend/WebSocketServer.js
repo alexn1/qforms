@@ -1,5 +1,6 @@
 "use strict";
 const ws = require('ws');
+const url = require('url');
 class WebSocketServer {
     constructor(options) {
         console.log('WebSocketServer.constructor');
@@ -9,12 +10,21 @@ class WebSocketServer {
         });
         this.server.on('error', this.onError.bind(this));
         this.server.on('connection', this.onConnection.bind(this));
+        this.clients = {};
     }
     onError(err) {
         console.log('WebSocketServer.onError', err);
     }
     onConnection(webSocket) {
-        console.log('WebSocketServer.onConnection', webSocket);
+        console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        const parts = url.parse(webSocket.upgradeReq.url, true);
+        const route = parts.query.route;
+        console.log('route:', route);
+        if (!this.clients[route]) {
+            this.clients[route] = [];
+        }
+        this.clients[route].push(webSocket);
+        webSocket.send('hello');
     }
 }
 module.exports = WebSocketServer;

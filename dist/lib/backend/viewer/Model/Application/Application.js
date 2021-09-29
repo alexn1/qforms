@@ -92,6 +92,8 @@ class Application extends Model_1.default {
         response.menu = this.menu;
         // nav
         response.nav = this.nav;
+        // route
+        response.route = context.getRoute();
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name: BaseModel_1.default.getName(data),
