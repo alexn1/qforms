@@ -25,7 +25,10 @@ class ViewerFrontHostApp extends FrontHostApp {
 
         // web socket client
         try {
-            this.webSocketClient = new WebSocketClient({route: this.data.route});
+            this.webSocketClient = new WebSocketClient({
+                route: this.data.route,
+                uuid: this.data.uuid
+            });
             await this.webSocketClient.connect();
         } catch (err) {
             console.error('connection error:', err);

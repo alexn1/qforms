@@ -25,7 +25,10 @@ class ViewerFrontHostApp extends FrontHostApp {
 
         // web socket client
         try {
-            this.webSocketClient = new WebSocketClient({route: this.data.route});
+            this.webSocketClient = new WebSocketClient({
+                route: this.data.route,
+                uuid: this.data.uuid
+            });
             await this.webSocketClient.connect();
         } catch (err) {
             console.error('connection error:', err);
@@ -47,7 +50,7 @@ window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}`;
+        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
     }
     connect() {

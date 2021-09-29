@@ -2,6 +2,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const uuid_1 = require("uuid");
 const path = require('path');
 const axios = require('axios');
 const colors = require('colors/safe');
@@ -94,6 +95,8 @@ class Application extends Model_1.default {
         response.nav = this.nav;
         // route
         response.route = context.getRoute();
+        // uuid
+        response.uuid = uuid_1.v4();
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name: BaseModel_1.default.getName(data),

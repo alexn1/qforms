@@ -1,4 +1,5 @@
 import {AppInfo} from "../../../AppInfo";
+import { v4 as uuidv4 } from 'uuid';
 
 const path  = require('path');
 const axios = require('axios');
@@ -138,12 +139,14 @@ class Application extends Model {
         // route
         response.route = context.getRoute();
 
+        // uuid
+        response.uuid = uuidv4();
+
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name : BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption')
         }));
-
 
         // pages
         response.pages = await this.fillPages(context);

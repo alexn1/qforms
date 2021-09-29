@@ -19,12 +19,17 @@ class WebSocketServer {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         const parts = url.parse(webSocket.upgradeReq.url, true);
         const route = parts.query.route;
-        console.log('route:', route);
+        if (!route)
+            throw new Error('no route');
+        const uuid = parts.query.uuid;
+        if (!uuid)
+            throw new Error('no uuid');
+        webSocket.uuid = uuid;
         if (!this.clients[route]) {
             this.clients[route] = [];
         }
         this.clients[route].push(webSocket);
-        webSocket.send('hello');
+        webSocket.send(`hello ${webSocket.uuid}`);
     }
 }
 module.exports = WebSocketServer;

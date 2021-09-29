@@ -1,7 +1,7 @@
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}`;
+        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
     }
     connect() {
