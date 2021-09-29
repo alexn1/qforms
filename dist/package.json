@@ -1,6 +1,6 @@
 {
   "name": "qforms",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "description": "A platform for building Web UI for databases.",
   "main": "lib/backend/index.js",
   "dependencies": {
@@ -52,10 +52,7 @@
     "test-jsx": "babel --out-dir apps/test/build/js apps/test/jsx --watch",
     "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
     "build-ts": "tsc -p .",
-    "build": "gulp build",
-    "release": "node release.js",
-    "publish": "node publish.js",
-    "release-publish": "node release.js; node publish.js"
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
