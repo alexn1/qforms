@@ -1486,7 +1486,7 @@ class EditorFrontHostApp extends FrontHostApp {
         this.modal = null;
     }
 
-    run() {
+    async run() {
         console.log('EditorFrontHostApp.run');
 
         // app

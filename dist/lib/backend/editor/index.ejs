@@ -20,11 +20,12 @@
     <%
     });%>
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             console.log('editor.ejs DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const runAppLink = "<%=runAppLink%>";
-            new EditorFrontHostApp(data, runAppLink).run();
+            const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
+            await editorFrontHostApp.run();
         });
     </script>
     <script type="application/json"><%-JSON.stringify(data, null, 4)%></script>

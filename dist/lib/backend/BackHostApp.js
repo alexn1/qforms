@@ -2,6 +2,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const WebSocketServer_1 = __importDefault(require("./WebSocketServer"));
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -108,6 +109,7 @@ class BackHostApp {
         this.express.enable('strict routing');
         this.initExpressServer();
         this.httpServer = this.createAndRunHttpServer(host, port);
+        this.wsServer = new WebSocketServer_1.default({ httpServer: this.httpServer });
         // commonModule
         this.commonModule = new CommonModule_1.default(this);
         this.commonModule.init();

@@ -22,9 +22,10 @@
     <%
     });%>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            new ViewerFrontHostApp(data).run();
+            const frontHostApp = new ViewerFrontHostApp(data);
+            await frontHostApp.run();
         });
     </script>
     <script type="application/json"><%- JSON.stringify(response, null, 4) %></script>

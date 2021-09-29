@@ -11,6 +11,7 @@ declare class BackHostApp {
     applications: any;
     express: any;
     httpServer: any;
+    wsServer: any;
     appsDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;

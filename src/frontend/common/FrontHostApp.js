@@ -15,7 +15,7 @@ class FrontHostApp {
         // document
         document.addEventListener('keydown', this.onDocumentKeyDown.bind(this));
     }
-    run() {
+    async run() {
         throw new Error('FrontHostApp.run not implemented');
     }
     onWindowUnhandledrejection(e) {

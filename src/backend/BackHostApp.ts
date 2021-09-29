@@ -1,3 +1,5 @@
+import WebSocketServer from "./WebSocketServer";
+
 const fs         = require('fs');
 const path       = require('path');
 const bodyParser = require('body-parser');
@@ -76,6 +78,7 @@ class BackHostApp {
     applications: any;          // application by route
     express: any;
     httpServer: any;
+    wsServer: any;
     appsDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
@@ -137,6 +140,7 @@ class BackHostApp {
 
         this.initExpressServer();
         this.httpServer = this.createAndRunHttpServer(host, port);
+        this.wsServer = new WebSocketServer({httpServer: this.httpServer});
 
         // commonModule
         this.commonModule = new CommonModule(this);

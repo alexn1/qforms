@@ -2,8 +2,9 @@ class ViewerFrontHostApp extends FrontHostApp {
     constructor(data) {
         super(data);
         this.applicationController = null;
+        this.webSocketClient = null;
     }
-    run() {
+    async run() {
         console.log('ViewerFrontHostApp.run', this.data);
 
         // application
@@ -21,6 +22,24 @@ class ViewerFrontHostApp extends FrontHostApp {
             throw new Error(`no root element: ${rootElementName}`);
         }
         applicationController.createView(rootElement);
+
+        // web socket client
+
+        this.webSocketClient = new WebSocketClient();
+        await this.webSocketClient.connect();
+
+        // socket client
+        const url = `ws://${window.location.host}/`;
+        console.log('url:', url);
+        const client = new WebSocket(url);
+        client.onclose = event => {
+            console.log('client.onclose', event);
+        };
+        client.onopen = event => {
+            console.log('client.onopen:', event);
+        };
+
+
     }
     async onDocumentKeyDown(e) {
         // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
@@ -35,6 +54,14 @@ class ViewerFrontHostApp extends FrontHostApp {
 
 window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 
+class WebSocketClient {
+    constructor(options = {}) {
+
+    }
+    async connect() {
+
+    }
+}
 class Controller extends EventEmitter {
     constructor(model, parent) {
         super();
