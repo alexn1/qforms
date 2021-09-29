@@ -4,13 +4,13 @@ const url = require('url');
 class WebSocketServer {
     constructor(options) {
         console.log('WebSocketServer.constructor');
+        this.backHostApp = options.backHostApp;
         this.server = new ws.Server({
             server: options.httpServer,
             path: '/'
         });
         this.server.on('error', this.onError.bind(this));
         this.server.on('connection', this.onConnection.bind(this));
-        this.clients = {};
     }
     onError(err) {
         console.log('WebSocketServer.onError', err);
@@ -26,22 +26,14 @@ class WebSocketServer {
         webSocket.uuid = parts.query.uuid;
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
-        // add to clients
-        if (!this.clients[webSocket.route])
-            this.clients[webSocket.route] = [];
-        this.clients[webSocket.route].push(webSocket);
+        this.backHostApp.getApplicationByRoute(webSocket.route).addClient(webSocket);
         // say hello
         webSocket.send(`hello ${webSocket.uuid}`);
         // console.log('this.clients', this.clients);
     }
     onClose(webSocket, code, reason) {
         console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
-        const i = this.clients[webSocket.route].indexOf(webSocket);
-        if (i === -1)
-            throw new Error(`cannot find socket: ${webSocket.route} webSocket.uuid`);
-        console.log('i:', i);
-        this.clients[webSocket.route].splice(i, 1);
-        console.log('this.clients', this.clients);
+        this.backHostApp.getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
     onMessage(webSocket, data, flags) {
         console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);

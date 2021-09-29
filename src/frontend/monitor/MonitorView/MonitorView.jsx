@@ -10,6 +10,12 @@ class MonitorView extends ReactComponent {
                             {app.pages.map(page => <li key={page.name}>{page.name}</li>)}
                         </ul>
                     </li>
+                    <li>
+                        <div>clients:</div>
+                        <ul>
+                            {app.clients.map(client => <li key={client.uuid}>{client.uuid}</li>)}
+                        </ul>
+                    </li>
                     <li>users:</li>
                 </ul>
             </li>

@@ -140,7 +140,10 @@ class BackHostApp {
 
         this.initExpressServer();
         this.httpServer = this.createAndRunHttpServer(host, port);
-        this.wsServer = new WebSocketServer({httpServer: this.httpServer});
+        this.wsServer = new WebSocketServer({
+            backHostApp: this,
+            httpServer: this.httpServer
+        });
 
         // commonModule
         this.commonModule = new CommonModule(this);
@@ -259,6 +262,10 @@ class BackHostApp {
         const application = this.applications[context.getRoute()];
         if (!application) throw new Error(`no application for route: ${context.getRoute()}`);
         return application;
+    }
+
+    getApplicationByRoute(route): Application {
+        return this.applications[route];
     }
 
     getAppFilePath(context: Context) {

@@ -109,7 +109,10 @@ class BackHostApp {
         this.express.enable('strict routing');
         this.initExpressServer();
         this.httpServer = this.createAndRunHttpServer(host, port);
-        this.wsServer = new WebSocketServer_1.default({ httpServer: this.httpServer });
+        this.wsServer = new WebSocketServer_1.default({
+            backHostApp: this,
+            httpServer: this.httpServer
+        });
         // commonModule
         this.commonModule = new CommonModule_1.default(this);
         this.commonModule.init();
@@ -211,6 +214,9 @@ class BackHostApp {
         if (!application)
             throw new Error(`no application for route: ${context.getRoute()}`);
         return application;
+    }
+    getApplicationByRoute(route) {
+        return this.applications[route];
     }
     getAppFilePath(context) {
         return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');

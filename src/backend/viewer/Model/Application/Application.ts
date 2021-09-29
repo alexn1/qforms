@@ -34,6 +34,7 @@ class Application extends Model {
     domain: string;
     menu: any;
     nav: any;
+    clients: any[];
 
     constructor(
         data: any,
@@ -52,6 +53,7 @@ class Application extends Model {
         this.actions     = [];
         this.dataSources = [];
         this.pages       = {};
+        this.clients     = [];
         this.domain      = hostApp.getDomain(context.req);
     }
 
@@ -422,6 +424,18 @@ class Application extends Model {
         for (const db of this.databases) {
             db.release(context);
         }
+    }
+    addClient(webSocket) {
+        // add to clients
+        this.clients.push(webSocket);
+        // console.log('this.clients', this.clients);
+    }
+    removeClient(webSocket) {
+        const i = this.clients.indexOf(webSocket);
+        if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
+        console.log('i:', i);
+        this.clients.splice(i, 1);
+        // console.log('this.clients', this.clients);
     }
 }
 

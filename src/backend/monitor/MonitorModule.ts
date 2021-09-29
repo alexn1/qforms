@@ -29,6 +29,9 @@ class MonitorModule {
                         return {
                             name: name
                         };
+                    }),
+                    clients: app.clients.map(webSocket => {
+                        return {uuid: webSocket.uuid};
                     })
                 };
             })

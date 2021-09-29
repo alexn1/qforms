@@ -31,6 +31,7 @@ declare class BackHostApp {
     initExpressServer(): void;
     createApplicationIfNotExists(req: any, context: Context): Promise<any>;
     getApplication(context: Context): Application;
+    getApplicationByRoute(route: any): Application;
     getAppFilePath(context: Context): any;
     createApplication(context: Context): Promise<Application>;
     getApplicationClass(appInfo: AppInfo): typeof Application;

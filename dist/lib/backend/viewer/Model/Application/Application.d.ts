@@ -21,6 +21,7 @@ declare class Application extends Model {
     domain: string;
     menu: any;
     nav: any;
+    clients: any[];
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
     getLinks(context: Context): Promise<string[]>;
@@ -60,5 +61,7 @@ declare class Application extends Model {
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: any): void;
+    addClient(webSocket: any): void;
+    removeClient(webSocket: any): void;
 }
 export = Application;

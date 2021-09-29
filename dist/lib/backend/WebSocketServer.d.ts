@@ -1,6 +1,7 @@
+import BackHostApp from "./BackHostApp";
 declare class WebSocketServer {
+    backHostApp: BackHostApp;
     server: any;
-    clients: any;
     constructor(options: any);
     onError(err: any): void;
     onConnection(webSocket: any): void;

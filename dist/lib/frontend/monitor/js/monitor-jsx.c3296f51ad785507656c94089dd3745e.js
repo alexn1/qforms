@@ -8,7 +8,9 @@ class MonitorView extends ReactComponent {
       }
     }, "version: ", app.version)), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("div", null, "pages:"), /*#__PURE__*/React.createElement("ul", null, app.pages.map(page => /*#__PURE__*/React.createElement("li", {
       key: page.name
-    }, page.name)))), /*#__PURE__*/React.createElement("li", null, "users:")));
+    }, page.name)))), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("div", null, "clients:"), /*#__PURE__*/React.createElement("ul", null, app.clients.map(client => /*#__PURE__*/React.createElement("li", {
+      key: client.uuid
+    }, client.uuid)))), /*#__PURE__*/React.createElement("li", null, "users:")));
   }
 
   render() {

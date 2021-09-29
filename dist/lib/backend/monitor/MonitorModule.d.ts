@@ -14,6 +14,7 @@ declare class MonitorModule {
             pages: {
                 name: string;
             }[];
+            clients: any;
         }[];
     };
     getLinks(): string[];
