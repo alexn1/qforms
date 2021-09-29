@@ -15,21 +15,22 @@ const MyError_1 = __importDefault(require("../../../MyError"));
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 class Application extends Model_1.default {
-    constructor(data, appInfo, hostApp, context) {
+    constructor(data, appInfo, hostApp, route) {
         super(data);
         if (!hostApp)
             throw new Error('no hostApp');
-        if (!context.getEnv())
-            throw new Error('no env');
+        if (!route)
+            throw new Error('no route');
         this.appInfo = appInfo;
         this.hostApp = hostApp;
-        this.env = context.getEnv();
         this.databases = [];
         this.actions = [];
         this.dataSources = [];
         this.pages = {};
         this.clients = [];
-        this.domain = hostApp.getDomain(context.req);
+        const [domain, appDirName, getAppFileName, env] = route.split('/');
+        this.domain = domain;
+        this.env = env;
     }
     async init(context) {
         await super.init(context);

@@ -23,7 +23,7 @@ declare class Application extends Model {
     menu: any;
     nav: any;
     clients: any[];
-    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
+    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, route: string);
     init(context: Context): Promise<void>;
     getLinks(context: Context): Promise<string[]>;
     getScripts(context: Context): Promise<string[]>;

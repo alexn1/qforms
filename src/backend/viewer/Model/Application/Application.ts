@@ -41,21 +41,23 @@ class Application extends Model {
         data: any,
         appInfo: AppInfo,
         hostApp: BackHostApp,
-        context: Context
+        route: string
     ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
-        if (!context.getEnv()) throw new Error('no env');
+        if (!route) throw new Error('no route');
         this.appInfo     = appInfo;
         this.hostApp     = hostApp;
-        this.env         = context.getEnv();
-
         this.databases   = [];
         this.actions     = [];
         this.dataSources = [];
         this.pages       = {};
         this.clients     = [];
-        this.domain      = hostApp.getDomain(context.req);
+
+        const [domain, appDirName, getAppFileName, env] = route.split('/')
+
+        this.domain      = domain;
+        this.env         = env;
     }
 
     async init(context: Context) {
