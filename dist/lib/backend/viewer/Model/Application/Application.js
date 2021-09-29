@@ -121,9 +121,10 @@ class Application extends Model_1.default {
         const menu = {};
         const nav = {};
         // pages
-        const user = context.getUser();
+        // const user = context.getUser();
         const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
-            return user ? this.authorizePage(user, pageLinkName) : true;
+            // return user ? this.authorizePage(user, pageLinkName) : true;
+            return true;
         });
         for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
