@@ -440,6 +440,7 @@ class Application extends Model {
     broadcastResultToClients(from: string, result: any) {
         console.log('Application.broadcastResultToClients', from, result);
         if (!from) throw new Error('no from');
+        if (!result) throw new Error('no result');
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== from) {
                 webSocket.send(JSON.stringify({type: 'result', data: result}));

@@ -75,6 +75,7 @@ class Form extends Model {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({
+            uuid  : this.getApp().getAttr('uuid'),
             action: 'rpc',
             page  : this.getPage().getName(),
             form  : this.getName(),
