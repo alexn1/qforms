@@ -1,23 +1,11 @@
 "use strict";
 class Context {
     constructor(options) {
+        console.log('Context', options);
         this.options = options;
-        if (!options.req)
-            throw new Error('no req');
+        // if (!options.req) throw new Error('no req');
         if (!options.domain)
             throw new Error('no domain');
-        // const req    = options.req;
-        // const domain = options.domain;
-        // if (!req.params.module) throw new Error('no module');
-        if (!this.getReq().params.appDirName)
-            throw new Error('no appDirName');
-        if (!this.getReq().params.appFileName)
-            throw new Error('no appFileName');
-        if (!this.getReq().params.env)
-            throw new Error('no env');
-        // req, domain
-        // this.req    = req;
-        // this.domain = domain;
         // params
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
         this.params = Object.assign({}, (this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}));
@@ -78,15 +66,27 @@ class Context {
         return this.getReq().body;
     }
     getModule() {
+        if (this.options.module) {
+            return this.options.module;
+        }
         return this.getReq().params.module;
     }
     getAppDirName() {
+        if (this.options.appDirName) {
+            return this.options.appDirName;
+        }
         return this.getReq().params.appDirName;
     }
     getAppFileName() {
+        if (this.options.appFileName) {
+            return this.options.appFileName;
+        }
         return this.getReq().params.appFileName;
     }
     getEnv() {
+        if (this.options.env) {
+            return this.options.env;
+        }
         return this.getReq().params.env;
     }
     getUri() {

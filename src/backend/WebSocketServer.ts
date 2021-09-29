@@ -1,4 +1,5 @@
 import BackHostApp from "./BackHostApp";
+import Context from "./Context";
 
 const ws = require('ws');
 const url = require('url');
@@ -19,7 +20,7 @@ class WebSocketServer {
     onError(err) {
         console.log('WebSocketServer.onError', err);
     }
-    onConnection(webSocket) {
+    async onConnection(webSocket) {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         const parts = url.parse(webSocket.upgradeReq.url, true);
         if (!parts.query.route) throw new Error('no route');
@@ -29,11 +30,16 @@ class WebSocketServer {
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
 
-        this.backHostApp.getApplicationByRoute(webSocket.route).addClient(webSocket);
+        const [domain, appDirName, appFileName, env] = parts.query.route.split('/');
+        const context = new Context({module: 'viewer', domain, appDirName, appFileName, env});
+
+        const application = await this.backHostApp.createApplicationIfNotExists(context);
+        application.addClient(webSocket);
 
         // say hello
         webSocket.send(JSON.stringify({type: 'info', data: {hello: webSocket.uuid}}));
         // console.log('this.clients', this.clients);
+        context.destroy();
     }
     onClose(webSocket, code, reason) {
         console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);

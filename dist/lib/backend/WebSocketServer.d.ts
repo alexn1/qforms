@@ -4,7 +4,7 @@ declare class WebSocketServer {
     server: any;
     constructor(options: any);
     onError(err: any): void;
-    onConnection(webSocket: any): void;
+    onConnection(webSocket: any): Promise<void>;
     onClose(webSocket: any, code: any, reason: any): void;
     onMessage(webSocket: any, data: any, flags: any): void;
 }
