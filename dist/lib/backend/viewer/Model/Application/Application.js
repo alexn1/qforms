@@ -23,7 +23,6 @@ class Application extends Model_1.default {
             throw new Error('no route');
         this.appInfo = appInfo;
         this.hostApp = hostApp;
-        this.domain = context.getDomain();
         this.env = context.getEnv();
         this.databases = [];
         this.actions = [];
@@ -78,11 +77,12 @@ class Application extends Model_1.default {
         // console.log('Application.fill');
         const start = Date.now();
         const response = await super.fill(context);
-        response.domain = this.domain;
+        response.route = context.getRoute();
+        response.domain = context.getDomain();
+        response.virtualPath = context.getVirtualPath();
         response.logErrorUrl = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion = this.getVersion();
-        response.virtualPath = context.getVirtualPath();
         await this.fillCollection(response, 'databases', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'dataSources', context);
@@ -94,8 +94,6 @@ class Application extends Model_1.default {
         response.menu = this.menu;
         // nav
         response.nav = this.nav;
-        // route
-        response.route = context.getRoute();
         // uuid
         response.uuid = uuid_1.v4();
         // actions

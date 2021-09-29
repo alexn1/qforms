@@ -12,7 +12,6 @@ import Result from "../../../Result";
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
-    domain: string;
     env: string;
     databases: Database[];
     actions: Action[];

@@ -94,7 +94,7 @@ class WebSocketClient {
         this.webSocket.onclose = null;
         this.webSocket.onmessage = null;
         this.webSocket = null;
-        this.reconnect();
+        // this.reconnect();
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
