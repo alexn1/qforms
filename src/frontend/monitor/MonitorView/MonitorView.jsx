@@ -16,7 +16,6 @@ class MonitorView extends ReactComponent {
                             {app.clients.map(client => <li key={client.uuid}>{client.uuid}</li>)}
                         </ul>
                     </li>
-                    <li>users:</li>
                 </ul>
             </li>
         );
