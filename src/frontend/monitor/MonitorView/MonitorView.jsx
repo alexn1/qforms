@@ -27,7 +27,7 @@ class MonitorView extends ReactComponent {
         return (
             <div className="MonitorView">
                 <div>nodeEnv: {data.nodeEnv}</div>
-                <div>uptime: {data.uptime}ms</div>
+                <div>uptime: {Helper.formatNumber(data.uptime)} ms</div>
                 <div>applications:</div>
                 <ul>
                     {data.applications.map(app => this.renderApplication(app))}
