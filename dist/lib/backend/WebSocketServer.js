@@ -7,8 +7,8 @@ const ws = require('ws');
 const url = require('url');
 class WebSocketServer {
     constructor(options) {
+        this.options = options;
         console.log('WebSocketServer.constructor');
-        this.backHostApp = options.backHostApp;
         this.server = new ws.Server({
             server: options.httpServer,
             path: '/'
@@ -16,7 +16,7 @@ class WebSocketServer {
         this.server.on('error', this.onError.bind(this));
         this.server.on('connection', this.onConnection.bind(this));
     }
-    onError(err) {
+    async onError(err) {
         console.log('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
@@ -32,19 +32,22 @@ class WebSocketServer {
         webSocket.on('message', this.onMessage.bind(this, webSocket));
         const [domain, appDirName, appFileName, env] = parts.query.route.split('/');
         const context = new Context_1.default({ module: 'viewer', domain, appDirName, appFileName, env });
-        const application = await this.backHostApp.createApplicationIfNotExists(context);
+        const application = await this.getBackHostApp().createApplicationIfNotExists(context);
         application.addClient(webSocket);
         // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
         // console.log('this.clients', this.clients);
         context.destroy();
     }
-    onClose(webSocket, code, reason) {
+    async onClose(webSocket, code, reason) {
         console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
-        this.backHostApp.getApplicationByRoute(webSocket.route).removeClient(webSocket);
+        this.getBackHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
-    onMessage(webSocket, data, flags) {
+    async onMessage(webSocket, data, flags) {
         console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
+    }
+    getBackHostApp() {
+        return this.options.backHostApp;
     }
 }
 module.exports = WebSocketServer;

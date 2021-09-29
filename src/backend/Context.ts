@@ -11,7 +11,7 @@ class Context {
     files: any;
 
     constructor(options) {
-        console.log('Context', options);
+        // console.log('Context', options);
         this.options = options;
         // if (!options.req) throw new Error('no req');
         if (!options.domain) throw new Error('no domain');
