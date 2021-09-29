@@ -1,3 +1,4 @@
+import Result from "../../../Result";
 import Model from '../Model';
 import Context from '../../../Context';
 import Application from '../Application/Application';
@@ -29,8 +30,8 @@ declare class DataSource extends Model {
     isDefaultOnRowForm(): boolean;
     isDefaultOnTableForm(): boolean;
     getDatabase(): Database;
-    update(context: Context): Promise<void>;
-    insert(context: Context, values?: any): Promise<any>;
-    delete(context: Context): Promise<any>;
+    update(context: Context): Promise<Result>;
+    insert(context: Context, values?: any): Promise<Result>;
+    delete(context: Context): Promise<Result>;
 }
 export = DataSource;

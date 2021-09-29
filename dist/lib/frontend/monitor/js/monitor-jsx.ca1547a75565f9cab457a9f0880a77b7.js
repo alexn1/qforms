@@ -18,7 +18,7 @@ class MonitorView extends ReactComponent {
     const data = this.props.data;
     return /*#__PURE__*/React.createElement("div", {
       className: "MonitorView"
-    }, /*#__PURE__*/React.createElement("div", null, "nodeEnv: ", data.nodeEnv), /*#__PURE__*/React.createElement("div", null, "uptime: ", data.uptime, "ms"), /*#__PURE__*/React.createElement("div", null, "applications:"), /*#__PURE__*/React.createElement("ul", null, data.applications.map(app => this.renderApplication(app))));
+    }, /*#__PURE__*/React.createElement("div", null, "nodeEnv: ", data.nodeEnv), /*#__PURE__*/React.createElement("div", null, "uptime: ", Helper.formatNumber(data.uptime), " ms"), /*#__PURE__*/React.createElement("div", null, "applications:"), /*#__PURE__*/React.createElement("ul", null, data.applications.map(app => this.renderApplication(app))));
   }
 
 }

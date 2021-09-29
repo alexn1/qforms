@@ -14,7 +14,7 @@ class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
-                this.webSocket.onclose = this.onClose.bind(this);
+                this.webSocket.onclose   = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 resolve(e);
             };
@@ -22,6 +22,7 @@ class WebSocketClient {
     }
     onClose(e) {
         console.log('WebSocketClient.onClose', e);
+        this.webSocket = null;
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));

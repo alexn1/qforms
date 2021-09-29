@@ -32,7 +32,7 @@ class ViewerFrontHostApp extends FrontHostApp {
             });
             await this.webSocketClient.connect();
         } catch (err) {
-            console.error('connection error:', err);
+            this.logError(err);
         }
     }
     async onDocumentKeyDown(e) {
@@ -64,7 +64,7 @@ class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
-                this.webSocket.onclose = this.onClose.bind(this);
+                this.webSocket.onclose   = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 resolve(e);
             };
@@ -72,6 +72,7 @@ class WebSocketClient {
     }
     onClose(e) {
         console.log('WebSocketClient.onClose', e);
+        this.webSocket = null;
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
@@ -2293,6 +2294,7 @@ class Application extends Model {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.request({
+            uuid  : this.getAttr('uuid'),
             action: 'rpc',
             name  : name,
             params: params
@@ -3537,6 +3539,7 @@ class Form extends Model {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({
+            uuid  : this.getApp().getAttr('uuid'),
             action: 'rpc',
             page  : this.getPage().getName(),
             form  : this.getName(),
@@ -3815,6 +3818,7 @@ class Page extends Model {
         // console.log('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result =  await this.getApp().request({
+            uuid  : this.getApp().getAttr('uuid'),
             action: 'rpc',
             page  : this.getName(),
             name  : name,

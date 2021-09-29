@@ -32,7 +32,7 @@ class ViewerFrontHostApp extends FrontHostApp {
             });
             await this.webSocketClient.connect();
         } catch (err) {
-            console.error('connection error:', err);
+            this.logError(err);
         }
     }
     async onDocumentKeyDown(e) {

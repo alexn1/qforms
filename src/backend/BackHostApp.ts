@@ -21,6 +21,7 @@ import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
 import CommonModule from './common/CommonModule';
 import FileSessionStore from './FileSessionStore';
+import Result from "./Result";
 
 const backend = require('./index');
 const pkg     = require('../../package.json');
@@ -98,7 +99,7 @@ class BackHostApp {
         this.applications = {};
     }
 
-    run() {
+    async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.initProcess();
@@ -147,23 +148,23 @@ class BackHostApp {
 
         // commonModule
         this.commonModule = new CommonModule(this);
-        this.commonModule.init();
+        await this.commonModule.init();
 
         // indexModule
         this.indexModule = new IndexModule(this);
-        this.indexModule.init();
+        await this.indexModule.init();
 
         // monitorModule
         this.monitorModule = new MonitorModule(this);
-        this.monitorModule.init();
+        await this.monitorModule.init();
 
         // viewerModule
         this.viewerModule = new ViewerModule(this);
-        this.viewerModule.init();
+        await this.viewerModule.init();
 
         // editorModule
         this.editorModule = new EditorModule(this);
-        this.editorModule.init();
+        await this.editorModule.init();
     }
 
     initProcess() {
@@ -511,7 +512,7 @@ class BackHostApp {
             if (result === undefined) throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         } catch (err) {
             await dataSource.getDatabase().rollback(context, err);
             throw err;
@@ -535,7 +536,7 @@ class BackHostApp {
             if (result === undefined) throw new Error('action update: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         } catch (err) {
             await dataSource.getDatabase().rollback(context, err);
             throw err;
@@ -559,7 +560,7 @@ class BackHostApp {
             if (result === undefined) throw new Error('delete result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         } catch (err) {
             await dataSource.getDatabase().rollback(context, err);
             throw err;
@@ -588,6 +589,9 @@ class BackHostApp {
             const result = await model.rpc(req.body.name, context);
             if (result === undefined) throw new Error('rpc action: result is undefined');
             await res.json(result);
+            if (result instanceof Result) {
+                application.broadcastResultToClients(context, result);
+            }
         } catch (err) {
             const errorMessage = err.message;
             err.message = `rpc error ${req.body.name}: ${err.message}`;

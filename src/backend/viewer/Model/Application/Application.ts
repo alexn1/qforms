@@ -17,6 +17,7 @@ import PageLink from '../PageLink/PageLink';
 import Context   from '../../../Context';
 import JsonFile from '../../../JsonFile';
 import MyError from '../../../MyError';
+import Result from "../../../Result";
 
 const text = require('../../text');
 const pkg  = require('../../../../../package.json');
@@ -437,8 +438,10 @@ class Application extends Model {
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
-    broadcastResultToClients(from: string, result: any) {
-        console.log('Application.broadcastResultToClients', from, result);
+    broadcastResultToClients(context: Context, result: Result) {
+        console.log('Application.broadcastResultToClients', context.req.body.uuid, result);
+        if (!result) throw new Error('no result');
+        const from = context.req.body.uuid;
         if (!from) throw new Error('no from');
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== from) {

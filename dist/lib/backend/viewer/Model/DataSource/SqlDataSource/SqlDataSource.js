@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const DataSource_1 = __importDefault(require("../DataSource"));
 const Helper_1 = __importDefault(require("../../../../Helper"));
+const Result_1 = __importDefault(require("../../../../Result"));
 class SqlDataSource extends DataSource_1.default {
     constructor(data, parent) {
         super(data, parent);
@@ -126,9 +127,9 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = {};
-        SqlDataSource.addInsertToResult(result, database, table, key);
-        SqlDataSource.addInsertExToResult(result, database, table, key, row);
+        const result = new Result_1.default();
+        Result_1.default.addInsertToResult(result, database, table, key);
+        Result_1.default.addInsertExToResult(result, database, table, key, row);
         return result;
     }
     async update(context) {
@@ -162,9 +163,9 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = {};
-        SqlDataSource.addUpdateToResult(result, database, table, key, newKey);
-        SqlDataSource.addUpdateExToResult(result, database, table, key, row);
+        const result = new Result_1.default();
+        Result_1.default.addUpdateToResult(result, database, table, key, newKey);
+        Result_1.default.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
     async delete(context) {
@@ -176,8 +177,8 @@ class SqlDataSource extends DataSource_1.default {
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = {};
-        SqlDataSource.addDeleteToResult(result, database, table, key);
+        const result = new Result_1.default();
+        Result_1.default.addDeleteToResult(result, database, table, key);
         return result;
     }
     fillAttributes(response) {
@@ -273,60 +274,6 @@ class SqlDataSource extends DataSource_1.default {
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
-    }
-    // result {
-    //   insert: {table: ["1", "2"]},
-    //   update: {table: {"1": "2"}},
-    //   delete: {table:["1", "2"]},
-    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
-    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
-    // }
-    static addInsertToResult(result, database, table, key) {
-        if (!result[database])
-            result[database] = {};
-        if (!result[database][table])
-            result[database][table] = {};
-        if (!result[database][table].insert)
-            result[database][table].insert = [];
-        result[database][table].insert.push(key);
-    }
-    static addInsertExToResult(result, database, table, key, row) {
-        if (!result[database])
-            result[database] = {};
-        if (!result[database][table])
-            result[database][table] = {};
-        if (!result[database][table].insertEx)
-            result[database][table].insertEx = {};
-        result[database][table].insertEx[key] = row;
-    }
-    static addUpdateToResult(result, database, table, oldKey, newKey) {
-        // console.log('SqlDataSource.addUpdateToResult');
-        if (!result[database])
-            result[database] = {};
-        if (!result[database][table])
-            result[database][table] = {};
-        if (!result[database][table].update)
-            result[database][table].update = {};
-        result[database][table].update[oldKey] = newKey;
-    }
-    static addUpdateExToResult(result, database, table, oldKey, row) {
-        // console.log('SqlDataSource.addUpdateExToResult');
-        if (!result[database])
-            result[database] = {};
-        if (!result[database][table])
-            result[database][table] = {};
-        if (!result[database][table].updateEx)
-            result[database][table].updateEx = {};
-        result[database][table].updateEx[oldKey] = row;
-    }
-    static addDeleteToResult(result, database, table, key) {
-        if (!result[database])
-            result[database] = {};
-        if (!result[database][table])
-            result[database][table] = {};
-        if (!result[database][table].delete)
-            result[database][table].delete = [];
-        result[database][table].delete.push(key);
     }
 }
 module.exports = SqlDataSource;

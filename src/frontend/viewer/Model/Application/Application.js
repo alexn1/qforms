@@ -68,6 +68,7 @@ class Application extends Model {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.request({
+            uuid  : this.getAttr('uuid'),
             action: 'rpc',
             name  : name,
             params: params

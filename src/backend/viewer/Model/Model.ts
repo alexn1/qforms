@@ -10,7 +10,7 @@ class Model extends BaseModel {
         this.fillCollections = [];
     }
 
-    async init(context: Context) {
+    async init(context: Context): Promise<void> {
 
     }
 
@@ -36,7 +36,7 @@ class Model extends BaseModel {
         return this.isAttr('backOnly') && this.getAttr('backOnly') === 'true';
     }
 
-    async fillCollection(response: any, colName: string, context: Context) {
+    async fillCollection(response: any, colName: string, context: Context): Promise<void> {
         if (!this[colName]) return;
         response[colName] = [];
         for (const model of this[colName]) {
@@ -48,14 +48,14 @@ class Model extends BaseModel {
         }
     }
 
-    async createColItems(colName: string, context: Context) {
+    async createColItems(colName: string, context: Context): Promise<void> {
         // console.log(`Model.createColItems ${this.getName()}.${colName}`);
         for (const data of this.getCol(colName)) {
             await this.createColItem(colName, data, context);
         }
     }
 
-    async createColItem(colName: string, data: any, context: Context) {
+    async createColItem(colName: string, data: any, context: Context): Promise<void> {
         try {
             const model = await this.createChildModel(colName, data);
             await model.init(context);
@@ -68,7 +68,7 @@ class Model extends BaseModel {
         }
     }
 
-    async getChildModelCustomClass(model: Model, colName: string, data: any) {
+    async getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any> {
         /*let CustomClass = null;
         const dirPath = this.getDirPath();
         if (dirPath) {
@@ -83,7 +83,7 @@ class Model extends BaseModel {
         return this.getParent() ? this.getParent().getChildModelCustomClass(model, colName, data) : null;
     }
 
-    async createChildModel(colName: string, data: any) {
+    async createChildModel(colName: string, data: any): Promise<any> {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
@@ -94,7 +94,7 @@ class Model extends BaseModel {
         return null;
     }
 
-    async rpc(name: string, context: Context) {
+    async rpc(name: string, context: Context): Promise<any> {
         throw new Error(`${this.constructor.name}.rpc not implemented`);
     }
 
