@@ -24,22 +24,12 @@ class ViewerFrontHostApp extends FrontHostApp {
         applicationController.createView(rootElement);
 
         // web socket client
-
-        this.webSocketClient = new WebSocketClient();
-        await this.webSocketClient.connect();
-
-        // socket client
-        const url = `ws://${window.location.host}/`;
-        console.log('url:', url);
-        const client = new WebSocket(url);
-        client.onclose = event => {
-            console.log('client.onclose', event);
-        };
-        client.onopen = event => {
-            console.log('client.onopen:', event);
-        };
-
-
+        try {
+            this.webSocketClient = new WebSocketClient();
+            await this.webSocketClient.connect();
+        } catch (err) {
+            console.error('connection error:', err);
+        }
     }
     async onDocumentKeyDown(e) {
         // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
