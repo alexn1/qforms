@@ -34,9 +34,9 @@ class Context {
         }
         return null;
     }
-    getVirtualPath() {
+    /*getVirtualPath(): string {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
-    }
+    }*/
     getClientTimezoneOffset() {
         if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
             return this.getReq().session.tzOffset;

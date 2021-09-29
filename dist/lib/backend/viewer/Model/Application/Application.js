@@ -40,12 +40,14 @@ class Application extends Model_1.default {
         await this.createMenu(context);
     }
     async getLinks(context) {
+        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
-            .map(src => `${context.getVirtualPath()}/${src}`);
+            .map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
+        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'js'))
-            .map(src => `${context.getVirtualPath()}/${src}`);
+            .map(src => `${virtualPath}/${src}`);
     }
     async deinit() {
         console.log('Application.deinit: ' + this.getName());
@@ -79,7 +81,7 @@ class Application extends Model_1.default {
         const response = await super.fill(context);
         response.route = context.getRoute();
         response.domain = context.getDomain();
-        response.virtualPath = context.getVirtualPath();
+        // response.virtualPath     = context.getVirtualPath();
         response.logErrorUrl = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion = this.getVersion();

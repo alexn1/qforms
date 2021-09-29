@@ -9,7 +9,6 @@ declare class Context {
     getRoute(): string;
     destroy(): void;
     getUser(): any;
-    getVirtualPath(): string;
     getClientTimezoneOffset(): number;
     getTimeOffset(): number;
     getParams(): any;

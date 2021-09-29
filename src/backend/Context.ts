@@ -50,9 +50,9 @@ class Context {
         }
         return null;
     }
-    getVirtualPath(): string {
+    /*getVirtualPath(): string {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
-    }
+    }*/
     getClientTimezoneOffset(): number {
         if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
             return this.getReq().session.tzOffset;

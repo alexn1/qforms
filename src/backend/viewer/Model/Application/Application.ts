@@ -66,13 +66,15 @@ class Application extends Model {
     }
 
     async getLinks(context: Context): Promise<string[]> {
+        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
-            .map(src => `${context.getVirtualPath()}/${src}`);
+            .map(src => `${virtualPath}/${src}`);
     }
 
     async getScripts(context: Context): Promise<string[]> {
+        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
-            .map(src => `${context.getVirtualPath()}/${src}`);
+            .map(src => `${virtualPath}/${src}`);
     }
 
     async deinit() {
@@ -115,7 +117,7 @@ class Application extends Model {
 
         response.route           = context.getRoute();
         response.domain          = context.getDomain();
-        response.virtualPath     = context.getVirtualPath();
+        // response.virtualPath     = context.getVirtualPath();
         response.logErrorUrl     = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion      = this.getVersion();
