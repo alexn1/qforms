@@ -1,6 +1,6 @@
 {
   "name": "qforms",
-  "version": "0.0.87-dev",
+  "version": "0.0.87",
   "description": "A platform for building Web UI for databases.",
   "main": "lib/backend/index.js",
   "dependencies": {
