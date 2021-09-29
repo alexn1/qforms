@@ -12,6 +12,7 @@ import Result from "../../../Result";
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
+    domain: string;
     env: string;
     databases: Database[];
     actions: Action[];
@@ -19,11 +20,10 @@ declare class Application extends Model {
     pages: any;
     links: any[];
     scripts: any[];
-    domain: string;
     menu: any;
     nav: any;
     clients: any[];
-    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, route: string);
+    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
     getLinks(context: Context): Promise<string[]>;
     getScripts(context: Context): Promise<string[]>;

@@ -25,6 +25,7 @@ const pkg  = require('../../../../../package.json');
 class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
+    domain: string;
     env: string;
     databases: Database[];
     actions: Action[];
@@ -32,7 +33,6 @@ class Application extends Model {
     pages: any;
     links: any[];
     scripts: any[];
-    domain: string;
     menu: any;
     nav: any;
     clients: any[];
@@ -41,23 +41,20 @@ class Application extends Model {
         data: any,
         appInfo: AppInfo,
         hostApp: BackHostApp,
-        route: string
+        context: Context
     ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
-        if (!route) throw new Error('no route');
+        if (!context) throw new Error('no route');
         this.appInfo     = appInfo;
         this.hostApp     = hostApp;
+        this.domain      = context.getDomain();
+        this.env         = context.getEnv();
         this.databases   = [];
         this.actions     = [];
         this.dataSources = [];
         this.pages       = {};
         this.clients     = [];
-
-        const [domain, appDirName, getAppFileName, env] = route.split('/')
-
-        this.domain      = domain;
-        this.env         = env;
     }
 
     async init(context: Context) {

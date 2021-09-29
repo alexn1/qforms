@@ -228,7 +228,7 @@ class BackHostApp {
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
-        const application = new ApplicationClass(appInfo.appFile.data, appInfo, this, context.getRoute());
+        const application = new ApplicationClass(appInfo.appFile.data, appInfo, this, context);
         await application.init(context);
         return application;
     }
