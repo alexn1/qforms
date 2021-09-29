@@ -2,6 +2,7 @@ import DataSource from '../DataSource';
 import Helper from '../../../../Helper';
 import Table from '../../Table/Table';
 import Context from '../../../../Context';
+import Result from "../../../../Result";
 
 class SqlDataSource extends DataSource {
     table: Table;
@@ -102,7 +103,7 @@ class SqlDataSource extends DataSource {
         return file.data;
     }
 
-    async insert(context: Context, _values: any = null): Promise<any> {
+    async insert(context: Context, _values: any = null): Promise<Result> {
         console.log('SqlDataSource.insert');
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
@@ -132,13 +133,13 @@ class SqlDataSource extends DataSource {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
 
-        const result = {};
+        const result = new Result();
         SqlDataSource.addInsertToResult(result, database, table, key);
         SqlDataSource.addInsertExToResult(result, database, table, key, row);
         return result;
     }
 
-    async update(context: Context): Promise<any> {
+    async update(context: Context): Promise<Result> {
         console.log('SqlDataSource.update');
         if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
@@ -170,13 +171,13 @@ class SqlDataSource extends DataSource {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
 
-        const result = {};
+        const result = new Result();
         SqlDataSource.addUpdateToResult(result, database, table, key, newKey);
         SqlDataSource.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
 
-    async delete(context: Context): Promise<any> {
+    async delete(context: Context): Promise<Result> {
         if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
         const {key} = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
@@ -184,7 +185,7 @@ class SqlDataSource extends DataSource {
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = {};
+        const result = new Result();
         SqlDataSource.addDeleteToResult(result, database, table, key);
         return result;
     }
@@ -297,21 +298,21 @@ class SqlDataSource extends DataSource {
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
     //   updateEx: {table: {"1": {field: 1, field2: 2}}}
     // }
-    static addInsertToResult(result, database, table, key) {
+    static addInsertToResult(result: Result, database: string, table: string, key) {
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};
         if (!result[database][table].insert) result[database][table].insert = [];
         result[database][table].insert.push(key);
     }
 
-    static addInsertExToResult(result, database, table, key, row) {
+    static addInsertExToResult(result: Result, database: string, table: string, key, row) {
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};
         if (!result[database][table].insertEx) result[database][table].insertEx = {};
         result[database][table].insertEx[key] = row;
     }
 
-    static addUpdateToResult(result, database, table, oldKey, newKey) {
+    static addUpdateToResult(result: Result, database: string, table: string, oldKey, newKey) {
         // console.log('SqlDataSource.addUpdateToResult');
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};
@@ -319,7 +320,7 @@ class SqlDataSource extends DataSource {
         result[database][table].update[oldKey] = newKey;
     }
 
-    static addUpdateExToResult(result, database, table, oldKey, row) {
+    static addUpdateExToResult(result: Result, database: string, table: string, oldKey, row) {
         // console.log('SqlDataSource.addUpdateExToResult');
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};
@@ -327,7 +328,7 @@ class SqlDataSource extends DataSource {
         result[database][table].updateEx[oldKey] = row;
     }
 
-    static addDeleteToResult(result, database, table, key) {
+    static addDeleteToResult(result: Result, database: string, table: string, key) {
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};
         if (!result[database][table].delete) result[database][table].delete = [];

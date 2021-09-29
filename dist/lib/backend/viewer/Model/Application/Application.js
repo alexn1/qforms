@@ -365,12 +365,13 @@ class Application extends Model_1.default {
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
-    broadcastResultToClients(from, result) {
-        console.log('Application.broadcastResultToClients', from, result);
-        if (!from)
-            throw new Error('no from');
+    broadcastResultToClients(context, result) {
+        console.log('Application.broadcastResultToClients', context.req.body.uuid, result);
         if (!result)
             throw new Error('no result');
+        const from = context.req.body.uuid;
+        if (!from)
+            throw new Error('no from');
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== from) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));

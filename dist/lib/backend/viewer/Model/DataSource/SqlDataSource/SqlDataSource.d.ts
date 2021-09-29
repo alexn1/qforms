@@ -1,6 +1,7 @@
 import DataSource from '../DataSource';
 import Table from '../../Table/Table';
 import Context from '../../../../Context';
+import Result from "../../../../Result";
 declare class SqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
@@ -12,9 +13,9 @@ declare class SqlDataSource extends DataSource {
     selectMultiple(context: Context): Promise<any[]>;
     select(context: Context): Promise<any[]>;
     getBuffer(context: Context, file: any): Promise<any>;
-    insert(context: Context, _values?: any): Promise<any>;
-    update(context: Context): Promise<any>;
-    delete(context: Context): Promise<any>;
+    insert(context: Context, _values?: any): Promise<Result>;
+    update(context: Context): Promise<Result>;
+    delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     getRows(): Promise<any>;
@@ -29,10 +30,10 @@ declare class SqlDataSource extends DataSource {
     };
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
-    static addInsertToResult(result: any, database: any, table: any, key: any): void;
-    static addInsertExToResult(result: any, database: any, table: any, key: any, row: any): void;
-    static addUpdateToResult(result: any, database: any, table: any, oldKey: any, newKey: any): void;
-    static addUpdateExToResult(result: any, database: any, table: any, oldKey: any, row: any): void;
-    static addDeleteToResult(result: any, database: any, table: any, key: any): void;
+    static addInsertToResult(result: Result, database: string, table: string, key: any): void;
+    static addInsertExToResult(result: Result, database: string, table: string, key: any, row: any): void;
+    static addUpdateToResult(result: Result, database: string, table: string, oldKey: any, newKey: any): void;
+    static addUpdateExToResult(result: Result, database: string, table: string, oldKey: any, row: any): void;
+    static addDeleteToResult(result: Result, database: string, table: string, key: any): void;
 }
 export = SqlDataSource;

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const DataSource_1 = __importDefault(require("../DataSource"));
 const Helper_1 = __importDefault(require("../../../../Helper"));
+const Result_1 = __importDefault(require("../../../../Result"));
 class SqlDataSource extends DataSource_1.default {
     constructor(data, parent) {
         super(data, parent);
@@ -126,7 +127,7 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = {};
+        const result = new Result_1.default();
         SqlDataSource.addInsertToResult(result, database, table, key);
         SqlDataSource.addInsertExToResult(result, database, table, key, row);
         return result;
@@ -162,7 +163,7 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = {};
+        const result = new Result_1.default();
         SqlDataSource.addUpdateToResult(result, database, table, key, newKey);
         SqlDataSource.addUpdateExToResult(result, database, table, key, row);
         return result;
@@ -176,7 +177,7 @@ class SqlDataSource extends DataSource_1.default {
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = {};
+        const result = new Result_1.default();
         SqlDataSource.addDeleteToResult(result, database, table, key);
         return result;
     }

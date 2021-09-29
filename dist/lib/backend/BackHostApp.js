@@ -21,6 +21,7 @@ const ViewerModule_1 = __importDefault(require("./viewer/ViewerModule"));
 const EditorModule_1 = __importDefault(require("./editor/EditorModule"));
 const CommonModule_1 = __importDefault(require("./common/CommonModule"));
 const FileSessionStore_1 = __importDefault(require("./FileSessionStore"));
+const Result_1 = __importDefault(require("./Result"));
 const backend = require('./index');
 const pkg = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
@@ -464,7 +465,7 @@ class BackHostApp {
                 throw new Error('insert action: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
@@ -490,7 +491,7 @@ class BackHostApp {
                 throw new Error('action update: result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
@@ -516,7 +517,7 @@ class BackHostApp {
                 throw new Error('delete result is undefined');
             await dataSource.getDatabase().commit(context);
             await res.json(result);
-            application.broadcastResultToClients(req.body.uuid, result);
+            application.broadcastResultToClients(context, result);
         }
         catch (err) {
             await dataSource.getDatabase().rollback(context, err);
@@ -549,6 +550,9 @@ class BackHostApp {
             if (result === undefined)
                 throw new Error('rpc action: result is undefined');
             await res.json(result);
+            if (result instanceof Result_1.default) {
+                application.broadcastResultToClients(context, result);
+            }
         }
         catch (err) {
             const errorMessage = err.message;

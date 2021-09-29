@@ -1,3 +1,5 @@
+import Result from "../../../Result";
+
 const path = require('path');
 
 import Model from '../Model';
@@ -248,13 +250,13 @@ class DataSource extends Model {
         if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
         return this.getApp().getDatabase(databaseName);
     }
-    async update(context: Context) {
+    async update(context: Context): Promise<Result> {
         throw new Error('DataSource.update not implemented');
     }
-    async insert(context: Context, values: any = null): Promise<any> {
+    async insert(context: Context, values: any = null): Promise<Result> {
         throw new Error('DataSource.insert not implemented');
     }
-    async delete(context: Context): Promise<any> {
+    async delete(context: Context): Promise<Result> {
         throw new Error('DataSource.delete not implemented');
     }
 

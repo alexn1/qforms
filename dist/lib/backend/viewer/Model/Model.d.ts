@@ -13,6 +13,6 @@ declare class Model extends BaseModel {
     getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any>;
     createChildModel(colName: string, data: any): Promise<any>;
     getDirPath(): string;
-    rpc(name: string, context: Context): Promise<void>;
+    rpc(name: string, context: Context): Promise<any>;
 }
 export = Model;

@@ -8,6 +8,7 @@ import Page from '../Page/Page';
 import PageLink from '../PageLink/PageLink';
 import Context from '../../../Context';
 import JsonFile from '../../../JsonFile';
+import Result from "../../../Result";
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
@@ -63,6 +64,6 @@ declare class Application extends Model {
     release(context: any): void;
     addClient(webSocket: any): void;
     removeClient(webSocket: any): void;
-    broadcastResultToClients(from: string, result: any): void;
+    broadcastResultToClients(context: Context, result: Result): void;
 }
 export = Application;
