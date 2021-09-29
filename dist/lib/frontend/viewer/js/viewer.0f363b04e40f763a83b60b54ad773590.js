@@ -24,12 +24,16 @@ class ViewerFrontHostApp extends FrontHostApp {
         applicationController.createView(rootElement);
 
         // web socket client
-        this.webSocketClient = new WebSocketClient({
-            route: this.data.route,
-            uuid: this.data.uuid,
-            application: application
-        });
-        await this.webSocketClient.connect();
+        try {
+            this.webSocketClient = new WebSocketClient({
+                route: this.data.route,
+                uuid: this.data.uuid,
+                application: application
+            });
+            await this.webSocketClient.connect();
+        } catch (err) {
+            this.logError(err);
+        }
     }
     async onDocumentKeyDown(e) {
         // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
@@ -60,7 +64,7 @@ class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
-                this.webSocket.onclose = this.onClose.bind(this);
+                this.webSocket.onclose   = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 resolve(e);
             };
@@ -68,6 +72,7 @@ class WebSocketClient {
     }
     onClose(e) {
         console.log('WebSocketClient.onClose', e);
+        this.webSocket = null;
     }
     onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
