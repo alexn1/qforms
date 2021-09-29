@@ -198,7 +198,7 @@ class BackHostApp {
         this.express.use(this._e404.bind(this));
         this.express.use(this._e500.bind(this));
     }
-    async createApplicationIfNotExists(req, context) {
+    async createApplicationIfNotExists(context) {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
@@ -238,7 +238,7 @@ class BackHostApp {
     }
     async handleViewerGet(req, res, context) {
         console.log('BackHostApp.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        await this.createApplicationIfNotExists(req, context);
+        await this.createApplicationIfNotExists(context);
         const application = this.getApplication(context);
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
@@ -270,7 +270,7 @@ class BackHostApp {
     }
     async handleViewerPost(req, res, context) {
         // console.log('BackHostApp.handleViewerPost');
-        await this.createApplicationIfNotExists(req, context);
+        await this.createApplicationIfNotExists(context);
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context);
         }

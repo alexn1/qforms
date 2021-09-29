@@ -29,7 +29,7 @@ declare class BackHostApp {
     initProcess(): void;
     getSecretSync(): any;
     initExpressServer(): void;
-    createApplicationIfNotExists(req: any, context: Context): Promise<any>;
+    createApplicationIfNotExists(context: Context): Promise<any>;
     getApplication(context: Context): Application;
     getApplicationByRoute(route: any): Application;
     getAppFilePath(context: Context): any;
