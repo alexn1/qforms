@@ -74,7 +74,7 @@ class BackHostApp {
         this.params = params;
         this.applications = {};
     }
-    run() {
+    async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.initProcess();
@@ -115,19 +115,19 @@ class BackHostApp {
         });
         // commonModule
         this.commonModule = new CommonModule_1.default(this);
-        this.commonModule.init();
+        await this.commonModule.init();
         // indexModule
         this.indexModule = new IndexModule_1.default(this);
-        this.indexModule.init();
+        await this.indexModule.init();
         // monitorModule
         this.monitorModule = new MonitorModule_1.default(this);
-        this.monitorModule.init();
+        await this.monitorModule.init();
         // viewerModule
         this.viewerModule = new ViewerModule_1.default(this);
-        this.viewerModule.init();
+        await this.viewerModule.init();
         // editorModule
         this.editorModule = new EditorModule_1.default(this);
-        this.editorModule.init();
+        await this.editorModule.init();
     }
     initProcess() {
         process.on('message', this.onProcessMessage.bind(this));

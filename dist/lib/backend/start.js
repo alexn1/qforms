@@ -10,6 +10,7 @@ function getCommandLineParams() {
     }, {});
 }
 main();
-function main() {
-    new index_1.BackHostApp(getCommandLineParams()).run();
+async function main() {
+    const backHostApp = new index_1.BackHostApp(getCommandLineParams());
+    await backHostApp.run();
 }

@@ -98,7 +98,7 @@ class BackHostApp {
         this.applications = {};
     }
 
-    run() {
+    async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.initProcess();
@@ -147,23 +147,23 @@ class BackHostApp {
 
         // commonModule
         this.commonModule = new CommonModule(this);
-        this.commonModule.init();
+        await this.commonModule.init();
 
         // indexModule
         this.indexModule = new IndexModule(this);
-        this.indexModule.init();
+        await this.indexModule.init();
 
         // monitorModule
         this.monitorModule = new MonitorModule(this);
-        this.monitorModule.init();
+        await this.monitorModule.init();
 
         // viewerModule
         this.viewerModule = new ViewerModule(this);
-        this.viewerModule.init();
+        await this.viewerModule.init();
 
         // editorModule
         this.editorModule = new EditorModule(this);
-        this.editorModule.init();
+        await this.editorModule.init();
     }
 
     initProcess() {
