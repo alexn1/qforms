@@ -77,9 +77,13 @@ class Application extends Model {
         return result;
     }
     emitResult(result, source = null) {
+        console.log('Application.emitResult', result, source);
+        const promises = [];
         for (const database in result) {
-            this.getDatabase(database).emitResult(result[database], source);
+            promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
+        // console.log('promises:', promises);
+        return Promise.allSettled(promises);
     }
 }
 window.QForms.Application = Application;

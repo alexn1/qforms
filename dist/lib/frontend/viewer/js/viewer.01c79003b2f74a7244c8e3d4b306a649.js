@@ -2061,7 +2061,7 @@ class PageController extends Controller {
         this.validate();
         if (this.isValid()) {
             await this.model.update();
-            // console.log('page model updated', this.model.getFullName());
+            console.log('page model updated', this.model.getFullName());
             this.getApp().closePage(this);
         } else {
             await this.rerender();
@@ -2384,9 +2384,13 @@ class Application extends Model {
         return result;
     }
     emitResult(result, source = null) {
+        console.log('Application.emitResult', result, source);
+        const promises = [];
         for (const database in result) {
-            this.getDatabase(database).emitResult(result[database], source);
+            promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
+        console.log('promises:', promises);
+        return Promise.allSettled(promises);
     }
 }
 window.QForms.Application = Application;
@@ -2985,8 +2989,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate(event);
         }
         this.emit('update', event);
-        this.getApp().emitResult(result, this);
-
+        await this.getApp().emitResult(result, this);
         return result;
     }
 
@@ -3208,10 +3211,12 @@ class Database extends Model {
     }
 
     emitResult(result, source = null) {
-        console.log('Database.emitResult', result, source);
+        console.log('Database.emitResult');
+        const promises = [];
         for (const table in result) {
-            this.getTable(table).emitResult(result[table], source);
+            promises.push(...this.getTable(table).emitResult(result[table], source));
         }
+        return promises;
     }
 }
 window.QForms.Database = Database;
@@ -3936,7 +3941,8 @@ class Table extends Model {
         return column;
     }
     emitResult(result, source = null) {
-        if (result.insert) {
+        console.log('Table.emitResult');
+        /*if (result.insert) {
             this.emitInsert(source, result.insert);
         }
         if (result.update) {
@@ -3944,16 +3950,21 @@ class Table extends Model {
         }
         if (result.delete) {
             this.emitDelete(source, result.delete);
-        }
+        }*/
+        return [
+            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete ? [this.emitDelete(source, result.delete)] : [])
+        ];
     }
     emitInsert(source, inserts) {
-        this.emit('insert', {source, inserts});
+        return this.emit('insert', {source, inserts});
     }
     emitUpdate(source, updates) {
-        this.emit('update', {source, updates});
+        return this.emit('update', {source, updates});
     }
     emitDelete(source, deletes) {
-        this.emit('delete', {source, deletes});
+        return this.emit('delete', {source, deletes});
     }
 }
 window.QForms.Table = Table;

@@ -24,10 +24,12 @@ class Database extends Model {
     }
 
     emitResult(result, source = null) {
-        console.log('Database.emitResult', result, source);
+        console.log('Database.emitResult');
+        const promises = [];
         for (const table in result) {
-            this.getTable(table).emitResult(result[table], source);
+            promises.push(...this.getTable(table).emitResult(result[table], source));
         }
+        return promises;
     }
 }
 window.QForms.Database = Database;

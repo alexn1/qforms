@@ -20,24 +20,21 @@ class Table extends Model {
         return column;
     }
     emitResult(result, source = null) {
-        if (result.insert) {
-            this.emitInsert(source, result.insert);
-        }
-        if (result.update) {
-            this.emitUpdate(source, result.update);
-        }
-        if (result.delete) {
-            this.emitDelete(source, result.delete);
-        }
+        console.log('Table.emitResult');
+        return [
+            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete ? [this.emitDelete(source, result.delete)] : [])
+        ];
     }
     emitInsert(source, inserts) {
-        this.emit('insert', {source, inserts});
+        return this.emit('insert', {source, inserts});
     }
     emitUpdate(source, updates) {
-        this.emit('update', {source, updates});
+        return this.emit('update', {source, updates});
     }
     emitDelete(source, deletes) {
-        this.emit('delete', {source, deletes});
+        return this.emit('delete', {source, deletes});
     }
 }
 window.QForms.Table = Table;

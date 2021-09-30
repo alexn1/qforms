@@ -34,7 +34,7 @@ class PageController extends Controller {
         this.validate();
         if (this.isValid()) {
             await this.model.update();
-            // console.log('page model updated', this.model.getFullName());
+            console.log('page model updated', this.model.getFullName());
             this.getApp().closePage(this);
         } else {
             await this.rerender();

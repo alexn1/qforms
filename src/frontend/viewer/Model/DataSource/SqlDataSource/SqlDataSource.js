@@ -92,8 +92,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate(event);
         }
         this.emit('update', event);
-        this.getApp().emitResult(result, this);
-
+        await this.getApp().emitResult(result, this);
         return result;
     }
 
