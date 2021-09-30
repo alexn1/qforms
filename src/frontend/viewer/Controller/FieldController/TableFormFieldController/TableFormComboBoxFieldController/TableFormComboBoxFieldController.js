@@ -99,7 +99,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         return option;
     }*/
 
-    /*onRowUpdate(ea) {
+    /*async onRowUpdate(ea) {
         //console.log('TableFormComboBoxFieldController.onRowUpdate');
         //console.log(ea);
         const key = ea.key;
@@ -115,7 +115,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         option.innerHTML = this.model.getDisplayValue(option.dbRow);
     }*/
 
-    /*onRemoveRow(ea) {
+    /*async onRemoveRow(ea) {
         const key = ea.key;
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
@@ -141,7 +141,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
     }*/
 
-    /*onMoveRow(ea) {
+    /*async onMoveRow(ea) {
         const newIndex = ea.newIndex;
         const oldIndex = ea.oldIndex;
         const key      = ea.key;

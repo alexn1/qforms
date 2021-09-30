@@ -48,7 +48,7 @@ class RowFormController extends FormController {
         }
     }
 
-    onModelRefresh = e => {
+    onModelRefresh = async e => {
         console.log('RowFormController.onModelRefresh', this.model.getFullName());
         if (!this.view) return;
         this.refill();
@@ -56,7 +56,7 @@ class RowFormController extends FormController {
         this.rerender();
     }
 
-    onModelInsert = e => {
+    onModelInsert = async e => {
         console.log('RowFormController.onModelInsert', this.model.getFullName());
         this.refill();
         this.invalidate();
@@ -64,7 +64,7 @@ class RowFormController extends FormController {
         this.parent.onFormInsert(e);
     }
 
-    onModelUpdate = e => {
+    onModelUpdate = async e => {
         console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
         this.refill();
         this.invalidate();

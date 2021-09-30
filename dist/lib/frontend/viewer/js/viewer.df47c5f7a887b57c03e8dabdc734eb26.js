@@ -1,3 +1,37 @@
+class EventEmitter {
+    constructor() {
+        this.list = {};
+    }
+    on(name, cb) {
+        // console.log('EventEmitter.on', name);
+        if (!this.list[name]) {
+            this.list[name] = [];
+        }
+        this.list[name].push(cb);
+    }
+    off(name, cb) {
+        // console.log('EventEmitter.off', name);
+        const i = this.list[name].indexOf(cb);
+        if (i === -1) {
+            throw new Error(`cannot find cb for ${name}`);
+        }
+        // console.log(i);
+        this.list[name].splice(i, 1);
+    }
+    async emit(name, e) {
+        console.log('EventEmitter.emit', name, e);
+        if (this.list[name] && this.list[name].length) {
+            const results = await Promise.allSettled(this.list[name].map(cb => cb(e)));
+            // console.log('results:', results);
+            for (const result of results) {
+                if (result.status === 'rejected') {
+                    throw result.reason;
+                }
+            }
+        }
+    }
+}
+
 class ViewerFrontHostApp extends FrontHostApp {
     constructor(data) {
         super(data);
@@ -225,7 +259,7 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
-    onRequest = e => {
+    onRequest = async e => {
         // console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
@@ -902,7 +936,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
 
         // form
         const form = pc.getModel().getForm(itemCreateForm);
-        const onInsert = e => {
+        const onInsert = async e => {
             form.off('insert', onInsert);
             const [key] = e.inserts;
             const [id] = Helper.decodeValue(key);
@@ -1345,7 +1379,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         return option;
     }*/
 
-    /*onRowUpdate(ea) {
+    /*async onRowUpdate(ea) {
         //console.log('TableFormComboBoxFieldController.onRowUpdate');
         //console.log(ea);
         const key = ea.key;
@@ -1361,7 +1395,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         option.innerHTML = this.model.getDisplayValue(option.dbRow);
     }*/
 
-    /*onRemoveRow(ea) {
+    /*async onRemoveRow(ea) {
         const key = ea.key;
         switch (this.model.getForm().getClassName()) {
             case 'RowForm':
@@ -1387,7 +1421,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
         }
     }*/
 
-    /*onMoveRow(ea) {
+    /*async onMoveRow(ea) {
         const newIndex = ea.newIndex;
         const oldIndex = ea.oldIndex;
         const key      = ea.key;
@@ -1593,7 +1627,7 @@ class RowFormController extends FormController {
         }
     }
 
-    onModelRefresh = e => {
+    onModelRefresh = async e => {
         console.log('RowFormController.onModelRefresh', this.model.getFullName());
         if (!this.view) return;
         this.refill();
@@ -1601,7 +1635,7 @@ class RowFormController extends FormController {
         this.rerender();
     }
 
-    onModelInsert = e => {
+    onModelInsert = async e => {
         console.log('RowFormController.onModelInsert', this.model.getFullName());
         this.refill();
         this.invalidate();
@@ -1609,7 +1643,7 @@ class RowFormController extends FormController {
         this.parent.onFormInsert(e);
     }
 
-    onModelUpdate = e => {
+    onModelUpdate = async e => {
         console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
         this.refill();
         this.invalidate();

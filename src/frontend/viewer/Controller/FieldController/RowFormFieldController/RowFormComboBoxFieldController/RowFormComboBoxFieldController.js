@@ -69,7 +69,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
 
         // form
         const form = pc.getModel().getForm(itemCreateForm);
-        const onInsert = e => {
+        const onInsert = async e => {
             form.off('insert', onInsert);
             const [key] = e.inserts;
             const [id] = Helper.decodeValue(key);

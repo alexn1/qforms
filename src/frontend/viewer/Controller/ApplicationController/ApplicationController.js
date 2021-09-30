@@ -50,7 +50,7 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
-    onRequest = e => {
+    onRequest = async e => {
         // console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
