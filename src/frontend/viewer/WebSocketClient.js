@@ -5,7 +5,9 @@ class WebSocketClient {
         if (!options.application) throw new Error('no application');
         this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
         this.webSocket = null;
-        this.RECONNECT_TIMEOUT = 10;
+        this.RECONNECT_TIMEOUT = 10;        // sec
+        this.REFRESH_TIMEOUT   = 60*60;        // sec
+        this.refreshTimeoutId = null;
     }
     connect() {
         console.log('WebSocketClient.connect', this.url);
@@ -16,16 +18,32 @@ class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
-                // this.webSocket.onerror   = this.onError.bind(this);
                 this.webSocket.onclose   = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
+                this.startRefreshTimeout();
                 resolve(e);
             };
         });
     }
-    /*async onError(e) {
-        console.log('WebSocketClient.onError', e);
-    }*/
+    async onRefreshTimeout() {
+        // console.log('WebSocketClient.onRefreshTimeout');
+        this.refreshTimeoutId = null;
+        this.send('ping');
+        this.startRefreshTimeout();
+    }
+    send(data) {
+        console.log('WebSocketClient.send', data);
+        this.webSocket.send(data);
+    }
+    startRefreshTimeout() {
+        this.refreshTimeoutId = setTimeout(this.onRefreshTimeout.bind(this), this.REFRESH_TIMEOUT * 1000);
+    }
+    resetRefreshTimeout() {
+        if (this.refreshTimeoutId) {
+            clearTimeout(this.refreshTimeoutId);
+            this.refreshTimeoutId = null;
+        }
+    }
     async reconnect() {
         console.log('WebSocketClient.reconnect');
         try {
@@ -36,9 +54,10 @@ class WebSocketClient {
             setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
+
     async onClose(e) {
         console.error('WebSocketClient.onClose', e);
-        // this.webSocket.onerror = null;
+        this.resetRefreshTimeout();
         this.webSocket.onclose = null;
         this.webSocket.onmessage = null;
         this.webSocket = null;
