@@ -31,7 +31,10 @@ class MonitorModule {
                         };
                     }),
                     clients: app.clients.map(webSocket => {
-                        return {uuid: webSocket.uuid};
+                        return {
+                            uuid  : webSocket.uuid,
+                            userId: webSocket.userId
+                        };
                     })
                 };
             })

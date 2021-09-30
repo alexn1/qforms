@@ -28,6 +28,7 @@ class WebSocketServer {
             throw new Error('no uuid');
         webSocket.route = parts.query.route;
         webSocket.uuid = parts.query.uuid;
+        webSocket.userId = parts.query.userId;
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
         const [domain, appDirName, appFileName, env] = parts.query.route.split('/');

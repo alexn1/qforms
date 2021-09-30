@@ -13,7 +13,7 @@ class MonitorView extends ReactComponent {
                     <li>
                         <div>clients:</div>
                         <ul>
-                            {app.clients.map(client => <li key={client.uuid}>{client.uuid}</li>)}
+                            {app.clients.map(client => <li key={client.uuid}>{client.uuid} {client.userId}</li>)}
                         </ul>
                     </li>
                 </ul>

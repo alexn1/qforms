@@ -30,6 +30,7 @@ class ViewerFrontHostApp extends FrontHostApp {
                 application: application,
                 route: this.data.route,
                 uuid: this.data.uuid,
+                userId: this.data.user.id
             });
             await this.webSocketClient.connect();
         } catch (err) {
@@ -54,7 +55,7 @@ class WebSocketClient {
         this.options = options;
         if (!options.frontHostApp) throw new Error('no frontHostApp');
         if (!options.application) throw new Error('no application');
-        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}`;
+        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
         this.webSocket = null;
         this.RECONNECT_TIMEOUT = 10;        // sec
         this.REFRESH_TIMEOUT   = 60*60;        // sec
