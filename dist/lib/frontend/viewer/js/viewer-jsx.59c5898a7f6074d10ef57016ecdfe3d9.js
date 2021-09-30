@@ -50,44 +50,42 @@ class ApplicationView extends ReactComponent {
 }
 
 window.QForms.ApplicationView = ApplicationView;
-class MdiApplicationView extends ApplicationView {
-  getTabs() {
-    return this.props.ctrl.pages.map(pageCtrl => {
-      return {
-        name: pageCtrl.model.getId(),
-        title: pageCtrl.getTitle(),
-        content: React.createElement(pageCtrl.getViewClass(), {
-          ctrl: pageCtrl,
-          onCreate: pageCtrl.onViewCreate
-        })
-      };
-    });
-  }
-
-  render() {
-    console.log('MdiApplicationView.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
-    const model = ctrl.model;
-    return /*#__PURE__*/React.createElement("div", {
-      className: `MdiApplicationView ${model.getAttr('theme')}`
-    }, /*#__PURE__*/React.createElement(Menu, {
-      items: ctrl.getMenuItemsProp(),
-      onClick: ctrl.onMenuItemClick
-    }), /*#__PURE__*/React.createElement(Tab, {
-      tabs: this.getTabs(),
-      canClose: true,
-      onTabClose: ctrl.onTabClose,
-      onCreate: ctrl.onTabCreate,
-      getActive: ctrl.getActivePageIndex,
-      onTabMouseDown: ctrl.onTabMouseDown
-    }), /*#__PURE__*/React.createElement(Statusbar, {
-      onCreate: ctrl.onStatusbarCreate
-    }), this.renderModalPages());
-  }
-
-}
-
-window.QForms.MdiApplicationView = MdiApplicationView;
+// class MdiApplicationView extends ApplicationView {
+//     getTabs() {
+//         return this.props.ctrl.pages.map(pageCtrl => {
+//             return {
+//                 name   : pageCtrl.model.getId(),
+//                 title  : pageCtrl.getTitle(),
+//                 content: React.createElement(pageCtrl.getViewClass(), {
+//                     ctrl    : pageCtrl,
+//                     onCreate: pageCtrl.onViewCreate
+//                 })
+//             };
+//         });
+//     }
+//     render() {
+//         console.log('MdiApplicationView.render', this.props.ctrl.model.getFullName());
+//         const ctrl = this.props.ctrl;
+//         const model = ctrl.model;
+//         return (
+//             <div className={`MdiApplicationView ${model.getAttr('theme')}`}>
+//                 <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
+//                 <Tab
+//                     tabs={this.getTabs()}
+//                     canClose={true}
+//                     onTabClose={ctrl.onTabClose}
+//                     onCreate={ctrl.onTabCreate}
+//                     getActive={ctrl.getActivePageIndex}
+//                     onTabMouseDown={ctrl.onTabMouseDown}
+//                 />
+//                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>
+//                 {this.renderModalPages()}
+//             </div>
+//         );
+//     }
+// }
+//
+// window.QForms.MdiApplicationView = MdiApplicationView;
 /*
 class SdiApplicationView extends ApplicationView {
 

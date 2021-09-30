@@ -15,12 +15,6 @@
   grid-template-rows: max-content auto max-content;
 }
 
-.MdiApplicationView {
-  height: 100%;
-  font-family: sans-serif;
-  display: grid;
-  grid-template-rows: max-content auto max-content;
-}
 
 /*
 .SdiApplicationView {
