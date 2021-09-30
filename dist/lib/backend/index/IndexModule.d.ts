@@ -7,8 +7,8 @@ declare class IndexModule {
     fill(): Promise<{
         nodeEnv: any;
         appInfos: {
-            fullName: any;
-            envs: any;
+            fullName: string;
+            envs: string[];
         }[];
     }>;
     getLinks(): any[];

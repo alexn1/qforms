@@ -55,7 +55,7 @@ class Application extends Model {
         this.clients     = [];
     }
 
-    async init(context: Context) {
+    async init(context: Context): Promise<void> {
         await super.init(context);
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
@@ -95,7 +95,8 @@ class Application extends Model {
     }
 
     getText(): any {
-        return text[this.getAttr('lang') || 'en'];
+        const lang = this.getAttr('lang') || 'en';
+        return text[lang];
     }
 
     getVersion() {
@@ -110,7 +111,7 @@ class Application extends Model {
         response.theme = this.getAttr('theme');
     }
 
-    async fill(context: Context) {
+    async fill(context: Context): Promise<any> {
         // console.log('Application.fill');
         const start = Date.now();
         const response = await super.fill(context);
@@ -173,16 +174,11 @@ class Application extends Model {
         const nav = {};
 
         // pages
-        // const user = context.getUser();
-        const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
-            // return user ? this.authorizePage(user, pageLinkName) : true;
-            return true;
-        });
+        const pageLinkNames = this.getItemNames('pageLinks');
         for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
-                // const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
                 const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile(pageFilePath);
                 await pageFile.read();
@@ -242,7 +238,7 @@ class Application extends Model {
         return page;
     }
 
-    authorizePage(user, pageName: string) {
+    authorizePage(user: any, pageName: string): boolean {
         return true;
     }
 
@@ -264,7 +260,7 @@ class Application extends Model {
             .map(data => BaseModel.getName(data));
     }
 
-    async fillPages(context: Context) {
+    async fillPages(context: Context): Promise<any[]> {
         // console.log('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
@@ -281,7 +277,7 @@ class Application extends Model {
         return pages;
     }
 
-    async authenticate(context: Context, username: string, password: string) {
+    async authenticate(context: Context, username: string, password: string): Promise<any> {
         console.log('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
@@ -292,7 +288,7 @@ class Application extends Model {
         return null;
     }
 
-    isAuthentication() {
+    isAuthentication(): boolean {
         return this.getAttr('authentication') === 'true';
     }
 
@@ -315,7 +311,7 @@ class Application extends Model {
         return await axios(options);
     }
 
-    getEnv() {
+    getEnv(): string {
         return this.env;
     }
 
@@ -340,25 +336,8 @@ class Application extends Model {
         return database;
     }
 
-    /*getTitle(context: Context, response): string {
-        // console.log('Application.getTitle', context.query.page);
-        // if (context.query.page) {
-        //     const page = this.pages[context.query.page];
-        //     if (!page) throw new Error(`no page: ${context.query.page}`);
-        //     const pageResponse = response.pages.length === 1 ? response.pages[0] : null;
-        //     return page.getTitle(context, pageResponse);
-        // }
-        const pageResponse = response.pages[0];
-        if (pageResponse) {
-            // const pageName = pageResponse.name;
-            // const page = this.pages[pageName];
-            // return page.getTitle(context, pageResponse);
-            return pageResponse.title;
-        }
-        return `${context.getAppDirName()}/${context.getAppFileName()}[${this.getEnv()}]`;
-    }*/
     // to init custom context params before each request get/post
-    async initContext(context: Context) {
+    async initContext(context: Context): Promise<void> {
 
     }
 
@@ -383,7 +362,7 @@ class Application extends Model {
         };
     }
 
-    static async loadAppInfo(appFilePath) {
+    static async loadAppInfo(appFilePath): Promise<AppInfo> {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
@@ -391,7 +370,7 @@ class Application extends Model {
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath) {
+    static async getAppInfos(appsDirPath):  Promise<AppInfo[]> {
         // console.log('Application.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
@@ -409,7 +388,7 @@ class Application extends Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 
-    getViewClassName() {
+    getViewClassName(): string {
         return 'ApplicationView';
     }
 
@@ -423,19 +402,19 @@ class Application extends Model {
             db.release(context);
         }
     }
-    addClient(webSocket) {
+    addClient(webSocket): void {
         // add to clients
         this.clients.push(webSocket);
         // console.log('this.clients', this.clients);
     }
-    removeClient(webSocket) {
+    removeClient(webSocket): void {
         const i = this.clients.indexOf(webSocket);
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
         console.log('i:', i);
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
-    broadcastResultToClients(context: Context, result: Result) {
+    broadcastResultToClients(context: Context, result: Result): void {
         console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');

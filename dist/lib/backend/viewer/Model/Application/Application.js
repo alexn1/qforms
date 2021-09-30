@@ -63,7 +63,8 @@ class Application extends Model_1.default {
         return path.join(this.getDirPath(), 'frontend');
     }
     getText() {
-        return text[this.getAttr('lang') || 'en'];
+        const lang = this.getAttr('lang') || 'en';
+        return text[lang];
     }
     getVersion() {
         return null;
@@ -123,16 +124,11 @@ class Application extends Model_1.default {
         const menu = {};
         const nav = {};
         // pages
-        // const user = context.getUser();
-        const pageLinkNames = this.getItemNames('pageLinks').filter(pageLinkName => {
-            // return user ? this.authorizePage(user, pageLinkName) : true;
-            return true;
-        });
+        const pageLinkNames = this.getItemNames('pageLinks');
         for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
-                // const pageFilePath = path.join(this.getDirPath(), pageLink.getAttr('fileName'));
                 const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile_1.default(pageFilePath);
                 await pageFile.read();
@@ -277,23 +273,6 @@ class Application extends Model_1.default {
             throw new Error(`no database with name: ${name}`);
         return database;
     }
-    /*getTitle(context: Context, response): string {
-        // console.log('Application.getTitle', context.query.page);
-        // if (context.query.page) {
-        //     const page = this.pages[context.query.page];
-        //     if (!page) throw new Error(`no page: ${context.query.page}`);
-        //     const pageResponse = response.pages.length === 1 ? response.pages[0] : null;
-        //     return page.getTitle(context, pageResponse);
-        // }
-        const pageResponse = response.pages[0];
-        if (pageResponse) {
-            // const pageName = pageResponse.name;
-            // const page = this.pages[pageName];
-            // return page.getTitle(context, pageResponse);
-            return pageResponse.title;
-        }
-        return `${context.getAppDirName()}/${context.getAppFileName()}[${this.getEnv()}]`;
-    }*/
     // to init custom context params before each request get/post
     async initContext(context) {
     }

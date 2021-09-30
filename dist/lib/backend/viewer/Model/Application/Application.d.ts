@@ -41,10 +41,7 @@ declare class Application extends Model {
     getPage(context: Context, pageLinkName: string): Promise<Page>;
     getStartupPageLinkNames(): string[];
     fillPages(context: Context): Promise<any[]>;
-    authenticate(context: Context, username: string, password: string): Promise<{
-        id: number;
-        name: string;
-    }>;
+    authenticate(context: Context, username: string, password: string): Promise<any>;
     isAuthentication(): boolean;
     getUsers(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
@@ -56,7 +53,7 @@ declare class Application extends Model {
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
     static loadAppInfo(appFilePath: any): Promise<AppInfo>;
-    static getAppInfos(appsDirPath: any): Promise<any[]>;
+    static getAppInfos(appsDirPath: any): Promise<AppInfo[]>;
     getDataSource(name: any): DataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
