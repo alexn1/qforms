@@ -37,6 +37,9 @@ nav {
 .SqlDataSourceView .edit > div {
   position: absolute;
 }
+.SqlDataSourceView .edit .cm-container > div {
+  height: 100%;
+}
 
 .DatabaseView {
   height: 100%;

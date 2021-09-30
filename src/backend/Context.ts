@@ -69,7 +69,7 @@ class Context {
             ...this.query,
             ...this.params,
             ...(this.querytime ? this.querytime.params : {}),
-            ...(user ? {username: user.name} : {}),
+            ...(user ? {userId: user.id, username: user.name} : {}),
             ...(timeOffset !== null ? {timeOffset} : {})
         };
     }
