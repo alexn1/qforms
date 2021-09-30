@@ -1,5 +1,3 @@
-import Helper from './Helper';
-
 class Context {
     options: any;
     query: any;
