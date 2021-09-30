@@ -3,17 +3,12 @@ class Context {
     constructor(options) {
         // console.log('Context', options);
         this.options = options;
-        // if (!options.req) throw new Error('no req');
         if (!options.domain)
             throw new Error('no domain');
-        // params
+        // query
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
+        // params
         this.params = Object.assign({}, (this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}));
-        // cnn
-        this.connections = {};
-        this.querytime = {
-            params: {}
-        };
         // files
         this.files = {};
         if (this.getReq() && this.getReq().files) {
@@ -21,11 +16,13 @@ class Context {
                 this.files[name] = this.getReq().files[name].buffer;
             }
         }
+        // connections
+        this.connections = {};
+        // querytime
+        this.querytime = { params: {} };
     }
     getRoute() {
         return `${this.getDomain()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
-    }
-    destroy() {
     }
     getUser() {
         const route = this.getRoute();
@@ -65,12 +62,12 @@ class Context {
     getBody() {
         return this.getReq().body;
     }
-    getModule() {
+    /*getModule(): string {
         if (this.options.module) {
             return this.options.module;
         }
         return this.getReq().params.module;
-    }
+    }*/
     getAppDirName() {
         if (this.options.appDirName) {
             return this.options.appDirName;
@@ -94,6 +91,8 @@ class Context {
     }
     getIp() {
         return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
+    }
+    destroy() {
     }
 }
 module.exports = Context;

@@ -2,32 +2,25 @@ import Helper from './Helper';
 
 class Context {
     options: any;
-    // req: any;
-    // domain: string;
     query: any;
     params: any;
+    files: any;
     connections: any;
     querytime: any;
-    files: any;
 
     constructor(options) {
         // console.log('Context', options);
         this.options = options;
-        // if (!options.req) throw new Error('no req');
         if (!options.domain) throw new Error('no domain');
 
-        // params
+        // query
         this.query  = {
             ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
         };
+
+        // params
         this.params = {
             ...(this.getReq() && this.getReq().body.params ? this.getReq().body.params : {})
-        };
-
-        // cnn
-        this.connections = {};
-        this.querytime   = {
-            params : {}
         };
 
         // files
@@ -37,11 +30,15 @@ class Context {
                 this.files[name] = this.getReq().files[name].buffer;
             }
         }
+
+        // connections
+        this.connections = {};
+
+        // querytime
+        this.querytime = {params: {}};
     }
     getRoute(): string {
         return `${this.getDomain()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
-    }
-    destroy() {
     }
     getUser(): any {
         const route = this.getRoute();
@@ -87,12 +84,12 @@ class Context {
     getBody(): any {
         return this.getReq().body;
     }
-    getModule(): string {
+    /*getModule(): string {
         if (this.options.module) {
             return this.options.module;
         }
         return this.getReq().params.module;
-    }
+    }*/
     getAppDirName(): string {
         if (this.options.appDirName) {
             return this.options.appDirName;
@@ -116,6 +113,8 @@ class Context {
     }
     getIp(): string {
         return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
+    }
+    destroy() {
     }
 }
 
