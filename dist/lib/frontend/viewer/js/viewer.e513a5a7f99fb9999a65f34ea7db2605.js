@@ -2389,7 +2389,7 @@ class Application extends Model {
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
-        console.log('promises:', promises);
+        // console.log('promises:', promises);
         return Promise.allSettled(promises);
     }
 }
@@ -3942,15 +3942,6 @@ class Table extends Model {
     }
     emitResult(result, source = null) {
         console.log('Table.emitResult');
-        /*if (result.insert) {
-            this.emitInsert(source, result.insert);
-        }
-        if (result.update) {
-            this.emitUpdate(source, result.update);
-        }
-        if (result.delete) {
-            this.emitDelete(source, result.delete);
-        }*/
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
             ...(result.update ? [this.emitUpdate(source, result.update)] : []),
