@@ -16,6 +16,6 @@ async function main() {
         await backHostApp.run();
     }
     catch (err) {
-        await backHostApp.logError(null, err);
+        await backHostApp.logError(err);
     }
 }

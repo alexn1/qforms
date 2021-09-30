@@ -560,7 +560,7 @@ class BackHostApp {
             const errorMessage = err.message;
             err.message = `rpc error ${req.body.name}: ${err.message}`;
             err.context = context;
-            await this.logError(req, err);
+            await this.logError(err, req);
             await res.json({ errorMessage });
         }
     }
@@ -640,7 +640,7 @@ class BackHostApp {
         const appInfos = await Application_1.default.getAppInfos(this.appsDirPath);
         return appInfos;
     }
-    async logError(req, err) {
+    async logError(err, req = null) {
         console.log('BackHostApp.logError:', colors.red(err));
         if (!this.logPool)
             return;
@@ -883,7 +883,7 @@ class BackHostApp {
                 stack: this.isDevelopment() && error.status !== 404 ? error.stack : null
             });
         }
-        await this.logError(req, error);
+        await this.logError(error, req);
     }
     /*_getTest(req, res, next) {
         console.log('getTest');
@@ -937,7 +937,7 @@ class BackHostApp {
     async onUnhandledRejection(err) {
         console.error(colors.red('BackHostApp.onUnhandledRejection'), err);
         err.message = `unhandledRejection: ${err.message}`;
-        await this.logError(null, err);
+        await this.logError(err);
     }
     async shutdown() {
         console.log('BackHostApp.shutdown');

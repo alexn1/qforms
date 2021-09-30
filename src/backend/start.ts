@@ -14,6 +14,6 @@ main(); async function main() {
     try {
         await backHostApp.run();
     } catch (err) {
-        await backHostApp.logError(null, err);
+        await backHostApp.logError(err);
     }
 }

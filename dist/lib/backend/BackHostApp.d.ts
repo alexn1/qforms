@@ -50,7 +50,7 @@ declare class BackHostApp {
     handleEditorGet(req: any, res: any, context: Context): Promise<void>;
     handleEditorPost(req: any, res: any, context: Context): Promise<void>;
     createApp(req: any): Promise<any[]>;
-    logError(req: any, err: any): Promise<void>;
+    logError(err: any, req?: any): Promise<void>;
     logRequest(req: any, context: Context, time: any): Promise<void>;
     static createLog(cnn: any, values: any): Promise<void>;
     appGet(req: any, res: any, next: any): Promise<void>;
