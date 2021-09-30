@@ -368,13 +368,13 @@ class Application extends Model_1.default {
     }
     broadcastResultToClients(context, result) {
         console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
+        if (!context.getReq().body.uuid)
+            throw new Error('no uuid');
         if (!result)
             throw new Error('no result');
-        const from = context.getReq().body.uuid;
-        if (!from)
-            throw new Error('no from');
+        const uuid = context.getReq().body.uuid;
         for (const webSocket of this.clients) {
-            if (webSocket.uuid !== from) {
+            if (webSocket.uuid !== uuid) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
         }
