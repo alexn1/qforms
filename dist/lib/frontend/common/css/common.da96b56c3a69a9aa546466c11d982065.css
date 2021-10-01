@@ -185,8 +185,8 @@ table.DatePicker td.selected {
 }
 
 .Grid {
-  font-family: arial, sans-serif;
-  font-size: 12px;
+  font-family: sans-serif;
+  font-size: 16px;
   min-height: 100px;
   position: relative;
   box-sizing: border-box;
@@ -222,7 +222,6 @@ a[href].Grid__tr:hover {
 .Grid__td,
 .Grid__th {
   display: table-cell;
-  padding: 0;
   cursor: default;
   vertical-align: middle;
 }
@@ -235,8 +234,6 @@ a[href].Grid__tr:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 .Grid__th {
   background: none;
@@ -246,10 +243,11 @@ a[href].Grid__tr:hover {
   position: relative;
   background-clip: padding-box;
   /* prevent hiding border when position: relative */
+  padding: 0 5px;
 }
 .Grid__td {
-  height: 20px;
   text-shadow: none;
+  padding: 3px 5px;
   /*&.edit {
     color           : inherit;
     cursor          : text;

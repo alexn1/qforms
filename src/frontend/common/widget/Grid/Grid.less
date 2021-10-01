@@ -1,5 +1,5 @@
-@gridFontFamily     : arial, sans-serif;
-@gridFontSize       : 12px;
+@gridFontFamily     : sans-serif;
+@gridFontSize       : 16px;
 @gridBorderColor    : rgb(124,124,139);
 @gridBorderWidth    : 0 1px 1px 1px;
 @headTdTextShadow   : none;
@@ -15,6 +15,8 @@
 @headTdColor          : white;
 @headTdBackgroundColor: rgb(124,124,139);
 
+@thPaddingLeftRight: 5px;
+
 // block
 @blockBackgroundColor: rgb(124,124,139);
 
@@ -22,7 +24,6 @@
 
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
-@bodyTdHeight               : 20px;
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
 @bodyTdTextShadow           : none;
 @bodyTdActiveTextShadow     : none;
@@ -30,6 +31,8 @@
 @bodyTdActiveColor          : white;
 @bodyTdActiveBackgroundColor: rgb(66,139,202);
 @bodyTdEditBackgroundColor  : lightgreen;
+@bodyTdPaddingTopBottom     : 3px;
+@bodyTdPaddingLeftRight     : 5px;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
@@ -79,7 +82,6 @@ a[href].Grid__tr:hover {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td, .Grid__th {
   display       : table-cell;
-  padding       : 0;
   cursor        : default;
   vertical-align: middle;
   &:not(:last-child) {
@@ -89,13 +91,12 @@ a[href].Grid__tr:hover {
     overflow     : hidden;
     text-overflow: ellipsis;
     white-space  : nowrap;
-    padding-left : 5px;
-    padding-right: 5px;
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__th {
+  padding         : 0 @thPaddingLeftRight;
   background      : @headTdBackground;
   text-shadow     : @headTdTextShadow;
   background-color: @headTdBackgroundColor;
@@ -106,8 +107,8 @@ a[href].Grid__tr:hover {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td {
-  height     : @bodyTdHeight;
   text-shadow: @bodyTdTextShadow;
+  padding    : @bodyTdPaddingTopBottom @bodyTdPaddingLeftRight;
   &.active {
     text-shadow     : @bodyTdActiveTextShadow;
     background-color: @bodyTdActiveBackgroundColor;
