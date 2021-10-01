@@ -27,7 +27,7 @@
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
-@bodyTrBackgroundColorHover : null !important;
+@bodyTrBackgroundColorHover : #E1F0FC !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
 @bodyTrActiveColor          : null;
 @tdColor                    : null;
@@ -51,7 +51,7 @@
   position           : relative;
   box-sizing         : border-box;
   border-style       : solid;
-  cursor             : default;
+  //cursor             : default;
   user-select        : none;
   -moz-user-select   : none;
   -webkit-user-select: none;
@@ -88,7 +88,7 @@ a.Grid__tr:hover {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td, .Grid__th {
   display       : table-cell;
-  cursor        : default;
+  //cursor        : default;
   vertical-align: middle;
   &:not(:last-child) {
     border-right: @tdBorderRight !important;

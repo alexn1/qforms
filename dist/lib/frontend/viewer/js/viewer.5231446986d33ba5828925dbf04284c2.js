@@ -2022,6 +2022,12 @@ class TableFormController extends FormController {
     getSelectedRowKey() {
         return this.grid ? this.grid.getActiveRowKey() : null;
     }
+    createLinkCallback = key => {
+        return PageController.createLink({
+            page: this.getModel().getAttr('itemEditPage'),
+            ...DataSource.keyToParams(key)
+        });
+    }
 }
 window.QForms.TableFormController = TableFormController;
 

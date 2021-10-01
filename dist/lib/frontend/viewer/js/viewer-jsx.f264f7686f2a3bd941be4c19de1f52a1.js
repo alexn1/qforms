@@ -871,7 +871,8 @@ class TableFormView extends FormView {
       renderGridCellView: this.renderGridCellView,
       updated: ctrl.getUpdated(),
       extraColumn: true,
-      selectedKey: ctrl.getParent().getModel().options.selectedKey
+      selectedKey: ctrl.getParent().getModel().options.selectedKey,
+      createLinkCallback: ctrl.createLinkCallback
     }), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 

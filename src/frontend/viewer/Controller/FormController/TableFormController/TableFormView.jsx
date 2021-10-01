@@ -117,6 +117,7 @@ class TableFormView extends FormView {
                     updated={ctrl.getUpdated()}
                     extraColumn={true}
                     selectedKey={ctrl.getParent().getModel().options.selectedKey}
+                    createLinkCallback={ctrl.createLinkCallback}
                 />
                 {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>

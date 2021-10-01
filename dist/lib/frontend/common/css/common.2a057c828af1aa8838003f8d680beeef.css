@@ -195,7 +195,6 @@ table.DatePicker td.selected {
   position: relative;
   box-sizing: border-box;
   border-style: solid;
-  cursor: default;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -218,12 +217,11 @@ a.Grid__tr {
   color: inherit;
 }
 a.Grid__tr:hover {
-  background-color: null !important;
+  background-color: #E1F0FC !important;
 }
 .Grid__td,
 .Grid__th {
   display: table-cell;
-  cursor: default;
   vertical-align: middle;
 }
 .Grid__td:not(:last-child),

@@ -784,8 +784,8 @@ class Grid extends ReactComponent {
     _defineProperty(this, "onCellMouseDown", async e => {
       console.log('Grid.onCellMouseDown', this.isLink());
       e.preventDefault(); // prevent text selection on double click
+      // if (this.isLink()) return;
 
-      if (this.isLink()) return;
       const button = e.button;
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
       const row = this.props.rows[i];
@@ -798,8 +798,8 @@ class Grid extends ReactComponent {
     });
 
     _defineProperty(this, "onRowMouseDown", async e => {
-      console.log('Grid.onRowMouseDown', this.isLink());
-      if (this.isLink()) return;
+      console.log('Grid.onRowMouseDown', this.isLink()); // if (this.isLink()) return;
+
       const key = e.currentTarget.dataset.row;
       await this.selectRow(key);
     });
@@ -904,12 +904,11 @@ class Grid extends ReactComponent {
       console.log('Grid.onLinkClick', e.ctrlKey);
       if (e.ctrlKey) return;
       e.preventDefault();
-      if (!this.isLink()) return;
+      /*if (!this.isLink()) return;
       const key = e.currentTarget.dataset.key;
-
       if (this.props.onLinkClick) {
-        await this.props.onLinkClick(key);
-      }
+          await this.props.onLinkClick(key);
+      }*/
     });
 
     this.state = {
