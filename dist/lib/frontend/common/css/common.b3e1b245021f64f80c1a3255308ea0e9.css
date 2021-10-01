@@ -186,14 +186,14 @@ table.DatePicker td.selected {
 
 .Grid {
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   min-height: 100px;
-  position: relative;
-  box-sizing: border-box;
-  border-style: solid;
   border-color: #7c7c8b;
   border-width: 0 1px 1px 1px;
   background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
   cursor: default;
   user-select: none;
   -moz-user-select: none;
@@ -236,6 +236,7 @@ a[href].Grid__tr:hover {
   white-space: nowrap;
 }
 .Grid__th {
+  padding: 0 5px;
   background: none;
   text-shadow: none;
   background-color: #7c7c8b;
@@ -243,7 +244,6 @@ a[href].Grid__tr:hover {
   position: relative;
   background-clip: padding-box;
   /* prevent hiding border when position: relative */
-  padding: 0 5px;
 }
 .Grid__td {
   text-shadow: none;
@@ -251,7 +251,7 @@ a[href].Grid__tr:hover {
   /*&.edit {
     color           : inherit;
     cursor          : text;
-    background-color: @bodyTdEditBackgroundColor;
+    background-color: @tdEditBackgroundColor;
   }*/
 }
 .Grid__td.active {

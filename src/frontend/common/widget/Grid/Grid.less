@@ -1,10 +1,11 @@
 @gridFontFamily     : sans-serif;
-@gridFontSize       : 16px;
+@gridFontSize       : 12px;
 @gridBorderColor    : rgb(124,124,139);
 @gridBorderWidth    : 0 1px 1px 1px;
-@headTdTextShadow   : none;
-@headTdBackground   : none;
+@thTextShadow   : none;
+@thBackground   : none;
 @gridBackgroundColor: white;
+@gridMinHeight: 100px;
 
 // table
 @trBorderBottom: 0 solid white;
@@ -12,8 +13,8 @@
 
 // head
 @headTrHeight         : 22px;
-@headTdColor          : white;
-@headTdBackgroundColor: rgb(124,124,139);
+@thColor          : white;
+@thBackgroundColor: rgb(124,124,139);
 
 @thPaddingLeftRight: 5px;
 
@@ -25,26 +26,26 @@
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
-@bodyTdTextShadow           : none;
-@bodyTdActiveTextShadow     : none;
+@tdTextShadow           : none;
+@tdActiveTextShadow     : none;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
-@bodyTdActiveColor          : white;
-@bodyTdActiveBackgroundColor: rgb(66,139,202);
-@bodyTdEditBackgroundColor  : lightgreen;
-@bodyTdPaddingTopBottom     : 3px;
-@bodyTdPaddingLeftRight     : 5px;
+@tdActiveColor          : white;
+@tdActiveBackgroundColor: rgb(66,139,202);
+@tdEditBackgroundColor  : lightgreen;
+@tdPaddingTopBottom     : 3px;
+@tdPaddingLeftRight     : 5px;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
   font-family        : @gridFontFamily;
   font-size          : @gridFontSize;
-  min-height         : 100px;
-  position           : relative;
-  box-sizing         : border-box;
-  border-style       : solid;
+  min-height         : @gridMinHeight;
   border-color       : @gridBorderColor;
   border-width       : @gridBorderWidth;
   background-color   : @gridBackgroundColor;
+  position           : relative;
+  box-sizing         : border-box;
+  border-style       : solid;
   cursor             : default;
   user-select        : none;
   -moz-user-select   : none;
@@ -97,24 +98,24 @@ a[href].Grid__tr:hover {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__th {
   padding         : 0 @thPaddingLeftRight;
-  background      : @headTdBackground;
-  text-shadow     : @headTdTextShadow;
-  background-color: @headTdBackgroundColor;
-  color           : @headTdColor;
+  background      : @thBackground;
+  text-shadow     : @thTextShadow;
+  background-color: @thBackgroundColor;
+  color           : @thColor;
   position        : relative;
   background-clip : padding-box; /* prevent hiding border when position: relative */
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td {
-  text-shadow: @bodyTdTextShadow;
-  padding    : @bodyTdPaddingTopBottom @bodyTdPaddingLeftRight;
+  text-shadow: @tdTextShadow;
+  padding    : @tdPaddingTopBottom @tdPaddingLeftRight;
   &.active {
-    text-shadow     : @bodyTdActiveTextShadow;
-    background-color: @bodyTdActiveBackgroundColor;
+    text-shadow     : @tdActiveTextShadow;
+    background-color: @tdActiveBackgroundColor;
     > div {
-      color           : @bodyTdActiveColor           !important;
-      background-color: @bodyTdActiveBackgroundColor !important;
+      color           : @tdActiveColor           !important;
+      background-color: @tdActiveBackgroundColor !important;
       > a {
         color: white;
       }
@@ -126,7 +127,7 @@ a[href].Grid__tr:hover {
   /*&.edit {
     color           : inherit;
     cursor          : text;
-    background-color: @bodyTdEditBackgroundColor;
+    background-color: @tdEditBackgroundColor;
   }*/
 }
 
