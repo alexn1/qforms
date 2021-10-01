@@ -28,6 +28,7 @@
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
 @bodyTrBackgroundColorHover : null !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
+@bodyTrActiveColor          : null;
 @tdPaddingTopBottom         : 3px;
 @tdPaddingLeftRight         : 5px;
 @tdTextShadow               : none;
@@ -181,6 +182,7 @@ a.Grid__tr:hover {
   .Grid__tr {
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
+      color           : @bodyTrActiveColor !important;
     }
     &:nth-child(even) {
       background-color: @bodyTrEvenBackgroundColor;

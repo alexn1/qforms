@@ -310,6 +310,7 @@ a.Grid__tr:hover {
 }
 .Grid__body .Grid__tr.active {
   background-color: #c8e2fe !important;
+  color: null !important;
 }
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
