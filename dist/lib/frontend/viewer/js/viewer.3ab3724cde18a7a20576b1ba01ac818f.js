@@ -1976,8 +1976,8 @@ class TableFormController extends FormController {
         await this.rerender();
     }
 
-    onSelectionChange = async key => {
-        // console.log('TableFormController.onSelectionChange', key);
+    onGridSelectionChange = async key => {
+        // console.log('TableFormController.onGridSelectionChange', key);
         this.invalidate();
         await this.getPage().rerender();
     }
