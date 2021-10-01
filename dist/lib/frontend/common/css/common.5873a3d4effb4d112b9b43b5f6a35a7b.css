@@ -187,6 +187,7 @@ table.DatePicker td.selected {
 .Grid {
   font-family: sans-serif;
   font-size: 12px;
+  font-weight: null;
   min-height: 100px;
   border-color: #7c7c8b;
   border-width: 0 1px 1px 1px;
