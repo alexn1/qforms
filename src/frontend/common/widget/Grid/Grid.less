@@ -29,6 +29,7 @@
 @bodyTrBackgroundColorHover : null !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
 @bodyTrActiveColor          : null;
+@tdColor                    : null;
 @tdPaddingTopBottom         : 3px;
 @tdPaddingLeftRight         : 5px;
 @tdTextShadow               : none;
@@ -111,6 +112,7 @@ a.Grid__tr:hover {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td {
+  color      : @tdColor;
   text-shadow: @tdTextShadow;
   padding    : @tdPaddingTopBottom @tdPaddingLeftRight;
   &.active {
