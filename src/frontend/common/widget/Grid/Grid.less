@@ -2,17 +2,17 @@
 @gridFontSize       : 12px;
 @gridBorderColor    : rgb(124,124,139);
 @gridBorderWidth    : 0 1px 1px 1px;
-@thTextShadow   : none;
-@thBackground   : none;
+@thTextShadow       : none;
+@thBackground       : none;
 @gridBackgroundColor: white;
-@gridMinHeight: 100px;
+@gridMinHeight      : 100px;
 
 // table
 @trBorderBottom: 0 solid white;
 @tdBorderRight : 1px solid white;
 
 // head
-@headTrHeight         : 22px;
+@headTrHeight     : 22px;
 @thColor          : white;
 @thBackgroundColor: rgb(124,124,139);
 
@@ -34,6 +34,8 @@
 @tdEditBackgroundColor  : lightgreen;
 @tdPaddingTopBottom     : 3px;
 @tdPaddingLeftRight     : 5px;
+
+@bodyTrBackgroundColorHover: null !important;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
@@ -76,8 +78,8 @@ a.Grid__tr {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-a[href].Grid__tr:hover {
-  background-color: lightgreen !important;
+a.Grid__tr:hover {
+  background-color: @bodyTrBackgroundColorHover;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -216,8 +216,8 @@ a.Grid__tr {
   text-decoration: none;
   color: inherit;
 }
-a[href].Grid__tr:hover {
-  background-color: lightgreen !important;
+a.Grid__tr:hover {
+  background-color: null !important;
 }
 .Grid__td,
 .Grid__th {
