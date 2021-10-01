@@ -24,7 +24,6 @@ class ViewerModule {
     }
     getScripts() {
         return [
-            '/lib/EventEmitter/EventEmitter.min.js',
             '/lib/react/react.development.js',
             '/lib/react/react-dom.development.js',
             ...(this.backHostApp.commonModule.js),

@@ -19,7 +19,7 @@ class EventEmitter {
         this.list[name].splice(i, 1);
     }
     async emit(name, e) {
-        console.log('EventEmitter.emit', name, e);
+        // console.log('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
             const results = await Promise.allSettled(this.list[name].map(cb => cb(e)));
             // console.log('results:', results);
