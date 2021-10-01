@@ -242,11 +242,13 @@ a.Grid__tr:hover {
   text-shadow: none;
   background-color: #7c7c8b;
   color: white;
+  text-transform: none;
   position: relative;
   background-clip: padding-box;
   /* prevent hiding border when position: relative */
 }
 .Grid__td {
+  color: null;
   text-shadow: none;
   padding: 3px 5px;
   /*&.edit {
