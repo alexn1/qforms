@@ -1,13 +1,9 @@
-@headBackgroundColor: rgb(124,124,139);
-
-
+// grid
 @gridFontFamily     : sans-serif;
 @gridFontSize       : 12px;
 @gridFontWeight     : null;
-@gridBorderColor    : @headBackgroundColor;
+@gridBorderColor    : rgb(124,124,139);
 @gridBorderWidth    : 0 1px 1px 1px;
-@thTextShadow       : none;
-@thBackground       : none;
 @gridBackgroundColor: white;
 @gridMinHeight      : 100px;
 
@@ -16,27 +12,29 @@
 @tdBorderRight : 1px solid white;
 
 // head
-@headTrHeight     : 22px;
-@thColor          : white;
-@thBackgroundColor: @headBackgroundColor;
-
+@headTrHeight      : 22px;
+@headTrBorderBottom: 0 solid red;
+@thColor           : white;
+@thBackgroundColor : rgb(124,124,139);
 @thPaddingLeftRight: 5px;
+@thTextShadow      : none;
+@thBackground      : none;
 
+// gap
 @headBodyGap: 1px;
 
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
-@tdTextShadow           : none;
-@tdActiveTextShadow     : none;
+@bodyTrBackgroundColorHover : null !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
-@tdActiveColor          : white;
-@tdActiveBackgroundColor: rgb(66,139,202);
-@tdEditBackgroundColor  : lightgreen;
-@tdPaddingTopBottom     : 3px;
-@tdPaddingLeftRight     : 5px;
-
-@bodyTrBackgroundColorHover: null !important;
+@tdPaddingTopBottom         : 3px;
+@tdPaddingLeftRight         : 5px;
+@tdTextShadow               : none;
+@tdActiveTextShadow         : none;
+@tdActiveColor              : white;
+@tdActiveBackgroundColor    : rgb(66,139,202);
+//@tdEditBackgroundColor    : lightgreen;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
@@ -156,6 +154,8 @@ a.Grid__tr:hover {
   overflow-x: hidden;
   .Grid__tr {
     height: @headTrHeight;
+    border-bottom: @headTrBorderBottom;
+
   }
 }
 

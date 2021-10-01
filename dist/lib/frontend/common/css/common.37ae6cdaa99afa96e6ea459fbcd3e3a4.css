@@ -288,6 +288,7 @@ a.Grid__tr:hover {
 }
 .Grid__head .Grid__tr {
   height: 22px;
+  border-bottom: 0 solid red;
 }
 .Grid__resize {
   position: absolute;
