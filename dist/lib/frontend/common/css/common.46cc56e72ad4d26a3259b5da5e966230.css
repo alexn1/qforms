@@ -312,6 +312,9 @@ a.Grid__tr:hover {
   background-color: #c8e2fe !important;
   color: null !important;
 }
+.Grid__body .Grid__tr.active .Grid__td > div {
+  color: null !important;
+}
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: #f3f6fa;
 }

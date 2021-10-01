@@ -183,6 +183,11 @@ a.Grid__tr:hover {
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
       color           : @bodyTrActiveColor !important;
+      .Grid__td {
+        > div {
+          color: @bodyTrActiveColor !important;
+        }
+      }
     }
     &:nth-child(even) {
       background-color: @bodyTrEvenBackgroundColor;
