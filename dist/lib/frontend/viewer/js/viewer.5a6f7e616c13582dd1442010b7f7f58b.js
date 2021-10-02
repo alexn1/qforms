@@ -153,7 +153,7 @@ class WebSocketClient {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            this.getApp().emitResult(packet.data);
+            await this.getApp().emitResult(packet.data);
         }
     }
     getApp() {
@@ -2759,10 +2759,13 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
-                [table]: {insert: inserts}
-            }}, this);
+            const result = {[database]: {
+                    [table]: {insert: inserts}
+                }};
+            await this.getApp().emitResult(result, this);
+            return result;
         }
+        return null;
     }
 
     async delete(key) {
@@ -2779,10 +2782,13 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
+            const result = {[database]: {
                     [table]: {delete: deletes}
-            }}, this);
+                }};
+            await this.getApp().emitResult(result, this);
+            return result;
         }
+        return null;
     }
 
     async update() {
@@ -2817,14 +2823,17 @@ class DataSource extends Model {
         this.emit('update', {source: this, updates});
 
         const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const table    = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
-                [table]: {
-                    update: updates
-                }
-            }}, this);
+            const reuslt = {[database]: {
+                    [table]: {
+                        update: updates
+                    }
+                }};
+            await this.getApp().emitResult(reuslt, this);
+            return reuslt;
         }
+        return null;
     }
 
     onTableInsert = async e => {
@@ -2958,7 +2967,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceInsert(event);
         }
         this.emit('insert', event);
-        this.getApp().emitResult(result, this);
+        await this.getApp().emitResult(result, this);
 
         return result;
     }
@@ -3024,7 +3033,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceDelete(event);
         }
         this.emit('delete', event);
-        this.getApp().emitResult(result, this);
+        await this.getApp().emitResult(result, this);
 
         return result;
     }

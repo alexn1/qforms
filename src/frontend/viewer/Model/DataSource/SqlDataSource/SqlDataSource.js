@@ -53,7 +53,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceInsert(event);
         }
         this.emit('insert', event);
-        this.getApp().emitResult(result, this);
+        await this.getApp().emitResult(result, this);
 
         return result;
     }
@@ -119,7 +119,7 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceDelete(event);
         }
         this.emit('delete', event);
-        this.getApp().emitResult(result, this);
+        await this.getApp().emitResult(result, this);
 
         return result;
     }

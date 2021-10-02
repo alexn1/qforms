@@ -337,10 +337,13 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
-                [table]: {insert: inserts}
-            }}, this);
+            const result = {[database]: {
+                    [table]: {insert: inserts}
+                }};
+            await this.getApp().emitResult(result, this);
+            return result;
         }
+        return null;
     }
 
     async delete(key) {
@@ -357,10 +360,13 @@ class DataSource extends Model {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
+            const result = {[database]: {
                     [table]: {delete: deletes}
-            }}, this);
+                }};
+            await this.getApp().emitResult(result, this);
+            return result;
         }
+        return null;
     }
 
     async update() {
@@ -395,14 +401,17 @@ class DataSource extends Model {
         this.emit('update', {source: this, updates});
 
         const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const table    = this.getAttr('table');
         if (database && table) {
-            this.getApp().emitResult({[database]: {
-                [table]: {
-                    update: updates
-                }
-            }}, this);
+            const reuslt = {[database]: {
+                    [table]: {
+                        update: updates
+                    }
+                }};
+            await this.getApp().emitResult(reuslt, this);
+            return reuslt;
         }
+        return null;
     }
 
     onTableInsert = async e => {

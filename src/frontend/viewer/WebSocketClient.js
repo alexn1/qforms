@@ -67,7 +67,7 @@ class WebSocketClient {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            this.getApp().emitResult(packet.data);
+            await this.getApp().emitResult(packet.data);
         }
     }
     getApp() {
