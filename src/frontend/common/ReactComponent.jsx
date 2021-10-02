@@ -20,9 +20,6 @@ class ReactComponent extends React.Component {
     getCssClassNames() {
         return this.getClassList().join(' ');
     }
-    /*getClassName() {
-        return this.getClassList().join(' ');
-    }*/
     rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`);
         return new Promise(resolve => {

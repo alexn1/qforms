@@ -1,4 +1,8 @@
 class PageView extends View {
+    constructor(props) {
+        super(props);
+        this.checkParent();
+    }
     getTabs() {
         const ctrl = this.props.ctrl;
         return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {

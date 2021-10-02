@@ -1,6 +1,6 @@
 class View extends ReactComponent {
   getActionsForDropdownButton() {
-    return this.props.ctrl.model.data.actions.map(data => ({
+    return this.props.ctrl.getModel().getCol('actions').map(data => ({
       name: Model.getName(data),
       title: Model.getAttr(data, 'caption')
     }));
@@ -20,6 +20,7 @@ class ApplicationView extends ReactComponent {
 
   static renderPage(pageCtrl, props = {}) {
     return React.createElement(pageCtrl.getViewClass(), {
+      parent: this,
       ctrl: pageCtrl,
       onCreate: pageCtrl.onViewCreate,
       ...props
@@ -882,8 +883,8 @@ window.QForms.TableFormView = TableFormView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class PageView extends View {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onActionsClick", async li => {
       // console.log('PageView.onActionsClick:', li);
@@ -895,6 +896,8 @@ class PageView extends View {
         throw new Error(`no handler for action '${name}'`);
       }
     });
+
+    this.checkParent();
   }
 
   getTabs() {
