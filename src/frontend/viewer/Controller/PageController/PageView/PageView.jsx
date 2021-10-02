@@ -15,11 +15,11 @@ class PageView extends View {
     }
     static renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
-            parent   : this,
-            key      : formCtrl.model.getName(),
-            ctrl     : formCtrl,
-            onCreate : formCtrl.onViewCreate,
-            updated  : formCtrl.getUpdated(),
+            parent  : this,
+            key     : formCtrl.model.getName(),
+            ctrl    : formCtrl,
+            onCreate: formCtrl.onViewCreate,
+            updated : formCtrl.getUpdated(),
             ...props
         });
     }
