@@ -9,13 +9,13 @@ class PageView extends View {
             return {
                 name   : form.model.getName(),
                 title  : form.getTitle(),
-                content: PageView.renderForm(this, form)
+                content: this.renderForm(form)
             };
         });
     }
-    static renderForm(parent, formCtrl, props = {}) {
+    renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
-            parent  : parent,
+            parent  : this,
             key     : formCtrl.getModel().getName(),
             ctrl    : formCtrl,
             onCreate: formCtrl.onViewCreate,
@@ -26,7 +26,7 @@ class PageView extends View {
     renderRowForms() {
         const ctrl = this.props.ctrl;
         return ctrl.forms.filter(form => form.model.getClassName() === 'RowForm').map(form => {
-            return PageView.renderForm(this, form);
+            return this.renderForm(form);
         });
     }
     renderTitle() {

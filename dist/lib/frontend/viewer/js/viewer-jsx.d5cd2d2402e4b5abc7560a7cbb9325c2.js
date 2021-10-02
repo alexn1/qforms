@@ -14,13 +14,13 @@ class ApplicationView extends ReactComponent {
     const ctrl = this.props.ctrl;
 
     if (ctrl.activePage) {
-      return ApplicationView.renderPage(this, ctrl.activePage);
+      return this.renderPage(ctrl.activePage);
     }
   }
 
-  static renderPage(parent, pageCtrl, props = {}) {
+  renderPage(pageCtrl, props = {}) {
     return React.createElement(pageCtrl.getViewClass(), {
-      parent: parent,
+      parent: this,
       ctrl: pageCtrl,
       onCreate: pageCtrl.onViewCreate,
       ...props
@@ -30,7 +30,7 @@ class ApplicationView extends ReactComponent {
   renderModalPages() {
     return this.props.ctrl.modalPages.map(pageCtrl => /*#__PURE__*/React.createElement(Modal, {
       key: pageCtrl.getModel().getId()
-    }, ApplicationView.renderPage(this, pageCtrl)));
+    }, this.renderPage(pageCtrl)));
   }
 
   render() {
@@ -908,14 +908,14 @@ class PageView extends View {
       return {
         name: form.model.getName(),
         title: form.getTitle(),
-        content: PageView.renderForm(this, form)
+        content: this.renderForm(form)
       };
     });
   }
 
-  static renderForm(parent, formCtrl, props = {}) {
+  renderForm(formCtrl, props = {}) {
     return React.createElement(formCtrl.getViewClass(), {
-      parent: parent,
+      parent: this,
       key: formCtrl.getModel().getName(),
       ctrl: formCtrl,
       onCreate: formCtrl.onViewCreate,
@@ -927,7 +927,7 @@ class PageView extends View {
   renderRowForms() {
     const ctrl = this.props.ctrl;
     return ctrl.forms.filter(form => form.model.getClassName() === 'RowForm').map(form => {
-      return PageView.renderForm(this, form);
+      return this.renderForm(form);
     });
   }
 
@@ -1021,7 +1021,7 @@ class PageView2 extends PageView {
       return {
         name: form.model.getName(),
         title: form.getTitle(),
-        content: PageView.renderForm(this, form)
+        content: this.renderForm(form)
       };
     });
   }

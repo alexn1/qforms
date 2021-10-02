@@ -8,7 +8,7 @@ class PageView2 extends PageView {
             return {
                 name   : form.model.getName(),
                 title  : form.getTitle(),
-                content: PageView.renderForm(this, form)
+                content: this.renderForm(form)
             };
         });
     }
