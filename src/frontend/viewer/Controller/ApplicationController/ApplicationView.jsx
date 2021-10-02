@@ -7,6 +7,7 @@ class ApplicationView extends ReactComponent {
     }
     static renderPage(pageCtrl, props = {}) {
         return React.createElement(pageCtrl.getViewClass(), {
+            parent   : this,
             ctrl     : pageCtrl,
             onCreate : pageCtrl.onViewCreate,
             ...props
