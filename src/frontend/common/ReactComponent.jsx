@@ -2,8 +2,10 @@ window.QForms = {};
 class ReactComponent extends React.Component {
     constructor(props) {
         super(props);
-        // if (props.cb) props.cb(this, this.props.name);
         if (props.onCreate) props.onCreate(this, this.props.name);
+    }
+    checkParent() {
+        if (!this.props.parent) throw new Error(`${this.constructor.name}: no parent`);
     }
     getClassList() {
         return [
