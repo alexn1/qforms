@@ -23,18 +23,15 @@ class ReactComponent extends React.Component {
     }
     rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`);
+        if (!this.canRerender()) return Promise.resolve();
         return new Promise(resolve => {
-            if (this.canRerender()) {
-                const start = Date.now();
-                this.forceUpdate(() => {
-                    if (logTime) {
-                        console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
-                    }
-                    resolve();
-                });
-            } else {
+            const start = Date.now();
+            this.forceUpdate(() => {
+                if (logTime) {
+                    console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                }
                 resolve();
-            }
+            });
         });
     }
     canRerender() {
