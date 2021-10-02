@@ -982,10 +982,10 @@ class PageView extends View {
       onClick: this.onActionsClick
     }));
   }
+  /*shouldComponentUpdate(nextProps, nextState) {
+      return false;
+  }*/
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
 
   render() {
     console.log('PageView.render', this.props.ctrl.model.getFullName());
