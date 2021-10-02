@@ -614,8 +614,8 @@ window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class FormView extends View {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onActionsClick", async li => {
       // console.log('FormView.onActionsClick:', li);
@@ -627,6 +627,8 @@ class FormView extends View {
         throw new Error(`no handler for action '${name}'`);
       }
     });
+
+    this.checkParent();
   }
 
 }
@@ -913,6 +915,7 @@ class PageView extends View {
 
   static renderForm(formCtrl, props = {}) {
     return React.createElement(formCtrl.getViewClass(), {
+      parent: this,
       key: formCtrl.model.getName(),
       ctrl: formCtrl,
       onCreate: formCtrl.onViewCreate,

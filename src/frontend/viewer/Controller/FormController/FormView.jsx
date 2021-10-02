@@ -1,4 +1,8 @@
 class FormView extends View {
+    constructor(props) {
+        super(props);
+        this.checkParent();
+    }
     onActionsClick = async li => {
         // console.log('FormView.onActionsClick:', li);
         const ctrl = this.props.ctrl;
