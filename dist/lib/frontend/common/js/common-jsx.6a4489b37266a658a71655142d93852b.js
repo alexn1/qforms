@@ -48,10 +48,12 @@ class ReactComponent extends React.Component {
   }
 
   disableRerender() {
+    console.log(`${this.constructor.name}.disableRerender`);
     this.allowRerender = false;
   }
 
   enableRerender() {
+    console.log(`${this.constructor.name}.enableRerender`);
     this.allowRerender = true;
   }
 

@@ -2066,8 +2066,10 @@ class PageController extends Controller {
         console.log('PageController.onSaveAndCloseClick');
         this.validate();
         if (this.isValid()) {
-            await this.model.update();
-            console.log('page model updated', this.model.getFullName());
+            // this.getView().disableRerender();
+            await this.getModel().update();
+            console.log('page model updated', this.getModel().getFullName());
+            // this.getView().enableRerender();
             this.getApp().closePage(this);
         } else {
             await this.rerender();
