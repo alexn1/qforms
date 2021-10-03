@@ -457,6 +457,10 @@ class ApplicationController extends Controller {
         }
         return this.getModel().getCaption();
     }
+    invalidate() {
+        if (this.activePage) this.activePage.invalidate();
+        this.modalPages.forEach(page => page.invalidate());
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
@@ -2231,6 +2235,9 @@ class PageController extends Controller {
         console.log('PageController.selectRow', key);
         this.close();
         await this.getModel().options.onSelect(key);
+    }
+    invalidate() {
+        this.forms.forEach(form => form.invalidate());
     }
 }
 window.QForms.PageController = PageController;

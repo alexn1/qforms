@@ -248,6 +248,10 @@ class ApplicationController extends Controller {
         }
         return this.getModel().getCaption();
     }
+    invalidate() {
+        if (this.activePage) this.activePage.invalidate();
+        this.modalPages.forEach(page => page.invalidate());
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
