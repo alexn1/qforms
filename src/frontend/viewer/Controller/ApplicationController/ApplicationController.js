@@ -212,7 +212,6 @@ class ApplicationController extends Controller {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
     }
-
     async onDocumentKeyDown(e) {
         // console.log('ApplicationController.onDocumentKeyDown', e);
         const page = this.getFocusPage();
@@ -240,7 +239,6 @@ class ApplicationController extends Controller {
             modal: false
         });
     }
-
     getTitle() {
         // console.log('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
