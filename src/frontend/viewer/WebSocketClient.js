@@ -2,12 +2,11 @@ class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
         if (!options.frontHostApp) throw new Error('no frontHostApp');
-        if (!options.application) throw new Error('no application');
         this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
-        this.webSocket = null;
+        this.webSocket         = null;
+        this.refreshTimeoutId  = null;
         this.RECONNECT_TIMEOUT = 10;        // sec
-        this.REFRESH_TIMEOUT   = 60*60;        // sec
-        this.refreshTimeoutId = null;
+        this.REFRESH_TIMEOUT   = 60*60;     // sec
     }
     connect() {
         console.log('WebSocketClient.connect', this.url);
@@ -67,11 +66,14 @@ class WebSocketClient {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            await this.getApp().emitResult(packet.data);
+            this.getApp().getView().disableRerender();
+            await this.getApp().getModel().emitResult(packet.data);
+            this.getApp().getView().enableRerender();
+            this.getApp().getView().rerender();
         }
     }
     getApp() {
-        return this.options.application;
+        return this.getFrontHostApp().applicationController;
     }
     getFrontHostApp() {
         return this.options.frontHostApp;
