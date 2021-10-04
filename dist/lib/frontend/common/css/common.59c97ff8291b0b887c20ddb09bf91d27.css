@@ -12,6 +12,12 @@ img {
   display: block;
 }
 
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .flex-max {
   flex: 1 1 auto;
 }
@@ -223,16 +229,15 @@ a.Grid__tr:hover {
 .Grid__th {
   display: table-cell;
   vertical-align: middle;
+  /*> div {
+    white-space  : nowrap;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+  }*/
 }
 .Grid__td:not(:last-child),
 .Grid__th:not(:last-child) {
   border-right: 1px solid white !important;
-}
-.Grid__td > div,
-.Grid__th > div {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .Grid__th {
   padding: 0 5px;

@@ -1086,7 +1086,9 @@ class Grid extends ReactComponent {
       style: {
         width: this.getColumnWidth(i)
       }
-    }, /*#__PURE__*/React.createElement("div", null, column.title || column.name), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: 'ellipsis'
+    }, column.title || column.name), /*#__PURE__*/React.createElement("span", {
       className: 'Grid__resize',
       "data-i": i,
       onDoubleClick: this.onResizeDoubleClick
