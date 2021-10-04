@@ -204,10 +204,11 @@ class Grid extends ReactComponent {
         await this.rerender();
     }
     getColumnWidth(i) {
-        const columnName = this.props.columns[i].name;
-        if (this.state.columnWidth[columnName] !== undefined) return `${this.state.columnWidth[columnName]}px`;
-        if (this.props.columns[i].width) return `${this.props.columns[i].width}px`;
-        return null;
+        const column = this.props.columns[i];
+        if (this.state.columnWidth[column.name] !== undefined) {
+            return this.state.columnWidth[column.name];
+        }
+        return column.width;
     }
     renderColumns() {
         return this.props.columns.map((column, i) =>
