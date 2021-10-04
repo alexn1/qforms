@@ -230,9 +230,9 @@ a.Grid__tr:hover {
 }
 .Grid__td > div,
 .Grid__th > div {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .Grid__th {
   padding: 0 5px;
