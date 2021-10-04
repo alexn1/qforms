@@ -337,9 +337,9 @@
 
 .TableFormView {
   padding: 5px 0;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
-  grid-gap: 5px;
+  grid-gap: 5px;*/
 }
 .TableFormView__toolbar {
   display: flex;

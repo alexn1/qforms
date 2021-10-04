@@ -859,7 +859,7 @@ class TableFormView extends FormView {
     console.log('TableFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full`
+      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`
     }, this.renderToolbar(), /*#__PURE__*/React.createElement(Grid, {
       classList: ['flex-max'],
       onCreate: ctrl.onGridCreate,

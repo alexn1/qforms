@@ -45,6 +45,10 @@ img {
   width: 100%;
 }
 
+.grid-gap-5 {
+  grid-gap: 5px;
+}
+
 .wait,
 .wait * {
   cursor: wait !important;
@@ -229,11 +233,6 @@ a.Grid__tr:hover {
 .Grid__th {
   display: table-cell;
   vertical-align: middle;
-  /*> div {
-    white-space  : nowrap;
-    overflow     : hidden;
-    text-overflow: ellipsis;
-  }*/
 }
 .Grid__td:not(:last-child),
 .Grid__th:not(:last-child) {
