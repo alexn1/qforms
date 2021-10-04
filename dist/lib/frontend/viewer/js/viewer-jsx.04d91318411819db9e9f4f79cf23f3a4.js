@@ -580,6 +580,21 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
 }
 
 window.QForms.TableFormDatePickerFieldView = TableFormDatePickerFieldView;
+class TableFormDateTimeFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForWidget(row)));
+  }
+
+}
+
+window.QForms.TableFormDateTimeFieldView = TableFormDateTimeFieldView;
 class TableFormLinkFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
