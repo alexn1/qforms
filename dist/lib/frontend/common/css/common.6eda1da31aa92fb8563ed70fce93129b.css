@@ -531,9 +531,6 @@ a.Grid__tr:hover {
   box-sizing: border-box;
   border-top: 3px solid #398bce;
 }
-.standard > .Tab {
-  background-color: lightgray;
-}
 
 .Tooltip {
   display: inline-block;
