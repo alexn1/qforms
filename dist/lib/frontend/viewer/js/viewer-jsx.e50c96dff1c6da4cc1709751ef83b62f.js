@@ -722,11 +722,11 @@ class RowFormView extends FormView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__form-grid`
-    }, Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
-      const fieldCtrl = ctrl.fields[name];
-      return [RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`), RowFormView.renderField(fieldCtrl, {
-        key: `field.${fieldCtrl.model.getName()}`
-      }), RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)];
+    }, Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+      const fieldCtrl = ctrl.getField(name);
+      return [RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`), RowFormView.renderField(fieldCtrl, {
+        key: `field.${fieldCtrl.getModel().getName()}`
+      }), RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)];
     }));
   }
 
@@ -755,7 +755,7 @@ class TableFormView extends FormView {
 
     _defineProperty(this, "renderGridCellView", (row, column, onCreate, onUnmount) => {
       // console.log('TableFormView.renderGridCellView');
-      const ctrl = this.props.ctrl.fields[column.name];
+      const ctrl = this.props.ctrl.getField(column.name);
       if (!ctrl) throw new Error(`no field: ${column.name}`); // console.log(column.name, ctrl.constructor.name);
 
       return React.createElement(ctrl.getViewClass(), {
@@ -840,12 +840,12 @@ class TableFormView extends FormView {
 
   getGridColumns() {
     const ctrl = this.props.ctrl;
-    return Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
-      const field = ctrl.fields[name];
+    return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+      const field = ctrl.getField(name);
       return {
-        name: field.model.getName(),
-        title: field.model.getCaption(),
-        width: field.model.getWidth()
+        name: field.getModel().getName(),
+        title: field.getModel().getCaption(),
+        width: field.getModel().getWidth()
       };
     });
   }

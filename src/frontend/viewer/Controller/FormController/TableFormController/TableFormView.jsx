@@ -71,7 +71,7 @@ class TableFormView extends FormView {
     }
     renderGridCellView = (row, column, onCreate, onUnmount) => {
         // console.log('TableFormView.renderGridCellView');
-        const ctrl = this.props.ctrl.fields[column.name];
+        const ctrl = this.props.ctrl.getField(column.name);
         if (!ctrl) throw new Error(`no field: ${column.name}`);
         // console.log(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
@@ -83,12 +83,12 @@ class TableFormView extends FormView {
     }
     getGridColumns() {
         const ctrl = this.props.ctrl;
-        return Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
-            const field = ctrl.fields[name];
+        return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+            const field = ctrl.getField(name);
             return {
-                name : field.model.getName(),
-                title: field.model.getCaption(),
-                width: field.model.getWidth()
+                name : field.getModel().getName(),
+                title: field.getModel().getCaption(),
+                width: field.getModel().getWidth()
             };
         });
     }

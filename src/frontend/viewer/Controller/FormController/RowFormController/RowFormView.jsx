@@ -95,12 +95,12 @@ class RowFormView extends FormView {
         const ctrl = this.props.ctrl;
         return (
             <div className={`${this.getCssBlockName()}__form-grid`}>
-                {Object.keys(ctrl.fields).filter(name => ctrl.fields[name].model.isVisible()).map(name => {
-                    const fieldCtrl = ctrl.fields[name];
+                {Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+                    const fieldCtrl = ctrl.getField(name);
                     return [
-                        RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.model.getName()}`),
-                        RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.model.getName()}`}),
-                        RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.model.getName()}`)
+                        RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
+                        RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.getModel().getName()}`}),
+                        RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
                     ];
                 })}
             </div>
