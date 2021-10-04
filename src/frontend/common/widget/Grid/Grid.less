@@ -26,6 +26,7 @@
 
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
+@bodyTrBorderBottom         : 0 solid #eee;
 @bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
 @bodyTrBackgroundColorHover : #E1F0FC !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
@@ -180,6 +181,7 @@ a.Grid__tr:hover {
   overflow-y: scroll;
   overflow-x: auto;
   .Grid__tr {
+    border-bottom: @bodyTrBorderBottom;
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
       color           : @bodyTrActiveColor !important;
