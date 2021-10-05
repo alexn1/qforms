@@ -31,7 +31,11 @@ class ApplicationController extends Controller {
         super.init();
         // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
-        this.activePage = this.createPage();
+        const pageData = this.model.data.pages[0];
+        this.activePage = pageData ? this.createPage(pageData, {
+            modal : false,
+            params: this.getGlobalParams()
+        }) : null;
         document.title = this.getTitle();
         this.homePageName = this.activePage.getModel().getName();
     }
@@ -56,18 +60,45 @@ class ApplicationController extends Controller {
             this.statusbar.setLastQueryTime(e.time);
         }
     }
+    getGlobalParams() {
+        return {
+            // foo: 'bar'
+        };
+    }
+    createPage(pageData, options) {
+        if (options.modal === undefined) throw new Error('no options.modal');
+
+        // model
+        /*const pageModel = new Page(pageData, this.model, {
+            id   : `p${this.getNextPageId()}`,
+            modal: options.modal
+        });*/
+
+        const pageModel = new Page(pageData, this.model, {
+            id         : `p${this.getNextPageId()}`,
+            modal      : options.modal,
+            newMode    : options.newMode,
+            selectMode : options.selectMode,
+            selectedKey: options.selectedKey,
+            onCreate   : options.onCreate,
+            onSelect   : options.onSelect,
+            params     : options.params || {}
+        });
+        pageModel.init();
+
+        // controller
+        const pc = PageController.create(pageModel, this);
+        pc.init();
+
+        return pc;
+    }
     async openPage(options) {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
         if (options.key) throw new Error('openPage: key param is deprecated');
-        const name         = options.name;
-        const params       = options.params || {};
-        // const key          = options.key    || null;
-        // const isModal      = options.modal   !== undefined ? options.modal  : true;
-        // const isNewMode    = options.newMode !== undefined ? options.newMode: false;
 
         // if this page with this key is already opened, then show it
-        const pageController = this.findPageControllerByPageNameAndKey(name, null);
+        const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
         // console.log('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
@@ -76,11 +107,17 @@ class ApplicationController extends Controller {
 
         const {page: pageData} = await this.model.request({
             action : 'page',
-            page   : name,
+            page   : options.name,
             newMode: !!options.newMode,
-            params : params
+            params : options.params || {}
         });
 
+        const pc = this.createPage(pageData, {
+            ...options,
+            modal: options.modal !== undefined ? options.modal : true
+        });
+
+        /*
         // pageModel
         const pageModel = new Page(pageData, this.model, {
             id         : `p${this.getNextPageId()}`,
@@ -90,13 +127,14 @@ class ApplicationController extends Controller {
             selectedKey: options.selectedKey,
             onCreate   : options.onCreate,
             onSelect   : options.onSelect,
-            params     : params
+            params     : options.params || {}
         });
         pageModel.init();
 
         // pageController
         const pc = PageController.create(pageModel, this);
-        pc.init();
+        pc.init();*/
+
         // console.log('pc:', pc);
 
         // show
@@ -111,22 +149,6 @@ class ApplicationController extends Controller {
     getNextPageId() {
         this.lastPageId++;
         return this.lastPageId;
-    }
-    createPage() {
-        if (!this.model.data.pages[0]) return;
-        const pageData = this.model.data.pages[0];
-
-        // model
-        const page = new Page(pageData, this.model, {
-            id   : `p${this.getNextPageId()}`,
-            modal: false
-        });
-        page.init();
-
-        // controller
-        const pc = PageController.create(page, this);
-        pc.init();
-        return pc;
     }
     addPage(pc) {
         if (this.activePage) {
