@@ -2,6 +2,14 @@
   position: relative;
   > input {
     width: 100%;
+    height      : 20px;
+    border-width: 0;
+    padding     : 0 5px 0 5px;
+    //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
+  }
+  > input[readonly] {
+    background-color: lightgoldenrodyellow;
+    color: gray;
   }
   > .close {
     display: flex;
@@ -19,21 +27,8 @@
       visibility: visible;
     }
   }
-}
-.standard .RowFormTimeFieldView {
-  > input {
-    height      : 20px;
-    border-width: 0;
-    padding     : 0 5px 0 5px;
-    //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
-  }
-
   &.error > input {
     background-color: #f2dede;
-  }
-  > input[readonly] {
-    background-color: lightgoldenrodyellow;
-    color: gray;
   }
 }
 

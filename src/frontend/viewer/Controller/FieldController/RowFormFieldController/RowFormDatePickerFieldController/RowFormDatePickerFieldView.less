@@ -1,13 +1,6 @@
 .RowFormDatePickerFieldView {
     > .DropdownDatePicker {
         width: 100%;
-        &:not(.readOnly) > input {
-            cursor: pointer;
-        }
-    }
-}
-.standard .RowFormDatePickerFieldView {
-    > .DropdownDatePicker {
         > input {
             height      : 20px;
             border-width: 0;
@@ -17,8 +10,10 @@
             background-color: lightgoldenrodyellow;
             color: gray;
         }
+        &:not(.readOnly) > input {
+            cursor: pointer;
+        }
     }
-
     &.error > div > input {
         background-color: #f2dede;
     }

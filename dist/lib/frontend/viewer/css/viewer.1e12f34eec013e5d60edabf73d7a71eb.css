@@ -82,19 +82,19 @@
 .RowFormDatePickerFieldView > .DropdownDatePicker {
   width: 100%;
 }
-.RowFormDatePickerFieldView > .DropdownDatePicker:not(.readOnly) > input {
-  cursor: pointer;
-}
-.standard .RowFormDatePickerFieldView > .DropdownDatePicker > input {
+.RowFormDatePickerFieldView > .DropdownDatePicker > input {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.standard .RowFormDatePickerFieldView > .DropdownDatePicker.readOnly > input {
+.RowFormDatePickerFieldView > .DropdownDatePicker.readOnly > input {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.standard .RowFormDatePickerFieldView.error > div > input {
+.RowFormDatePickerFieldView > .DropdownDatePicker:not(.readOnly) > input {
+  cursor: pointer;
+}
+.RowFormDatePickerFieldView.error > div > input {
   background-color: #f2dede;
 }
 .debug .RowFormDatePickerFieldView.changed > div > input {
@@ -111,11 +111,28 @@
 .RowFormDateTimeFieldView > .DropdownDatePicker:not(.readOnly) > input {
   cursor: pointer;
 }
+.RowFormDateTimeFieldView > .DropdownDatePicker > input {
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.RowFormDateTimeFieldView > .DropdownDatePicker.readOnly > input {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
 .RowFormDateTimeFieldView > .time {
   position: relative;
+  border-left: solid 1px #ddd;
 }
 .RowFormDateTimeFieldView > .time > input.TimeBox {
   width: 100%;
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.RowFormDateTimeFieldView > .time > input.TimeBox:read-only {
+  background-color: lightgoldenrodyellow;
+  color: gray;
 }
 .RowFormDateTimeFieldView > .time > .close {
   display: flex;
@@ -133,49 +150,28 @@
 .RowFormDateTimeFieldView > .time > .close.visible {
   visibility: visible;
 }
-.standard .RowFormDateTimeFieldView > .DropdownDatePicker > input {
-  height: 20px;
-  border-width: 0;
-  padding: 0 5px 0 5px;
-}
-.standard .RowFormDateTimeFieldView > .DropdownDatePicker.readOnly > input {
-  background-color: lightgoldenrodyellow;
-  color: gray;
-}
-.standard .RowFormDateTimeFieldView > .time {
-  border-left: solid 1px #ddd;
-}
-.standard .RowFormDateTimeFieldView > .time > input.TimeBox {
-  height: 20px;
-  border-width: 0;
-  padding: 0 5px 0 5px;
-}
-.standard .RowFormDateTimeFieldView > .time > input.TimeBox:read-only {
-  background-color: lightgoldenrodyellow;
-  color: gray;
-}
-.standard .RowFormDateTimeFieldView.error > div > input {
+.RowFormDateTimeFieldView.error > div > input {
   background-color: #f2dede !important;
 }
 .debug .RowFormDateTimeFieldView.changed > div > input {
   background-color: #eefdea;
 }
 
-.standard .RowFormFileFieldView img {
+.RowFormFileFieldView img {
   width: 300px;
   display: block;
 }
-.standard .RowFormFileFieldView > div {
+.RowFormFileFieldView > div {
   position: relative;
   font-size: 10px;
 }
-.standard .RowFormFileFieldView > div > .size {
+.RowFormFileFieldView > div > .size {
   position: absolute;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   color: #eee;
 }
-.standard .RowFormFileFieldView > div > .length {
+.RowFormFileFieldView > div > .length {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -187,7 +183,7 @@
   width: 100%;
 }
 
-.standard .RowFormLinkFieldView > a {
+.RowFormLinkFieldView > a {
   padding: 0 5px 0 5px;
   color: blue;
 }
@@ -195,16 +191,14 @@
 .RowFormTextAreaFieldView > textarea {
   width: 100%;
   display: block;
-}
-.standard .RowFormTextAreaFieldView > textarea {
   border-width: 0;
   padding: 0 5px 0 5px;
   font-size: inherit;
 }
-.standard .RowFormTextAreaFieldView.error > textarea {
+.RowFormTextAreaFieldView.error > textarea {
   background-color: #f2dede;
 }
-.standard .RowFormTextAreaFieldView > textarea[readonly] {
+.RowFormTextAreaFieldView > textarea[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
@@ -217,6 +211,13 @@
 }
 .RowFormTextBoxFieldView > input {
   width: 100%;
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.RowFormTextBoxFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
 }
 .RowFormTextBoxFieldView > .close {
   display: flex;
@@ -234,17 +235,8 @@
 .RowFormTextBoxFieldView > .close.visible {
   visibility: visible;
 }
-.standard .RowFormTextBoxFieldView > input {
-  height: 20px;
-  border-width: 0;
-  padding: 0 5px 0 5px;
-}
-.standard .RowFormTextBoxFieldView.error > input {
+.RowFormTextBoxFieldView.error > input {
   background-color: #f2dede;
-}
-.standard .RowFormTextBoxFieldView > input[readonly] {
-  background-color: lightgoldenrodyellow;
-  color: gray;
 }
 .debug .RowFormTextBoxFieldView.changed > input {
   background-color: #eefdea;
@@ -255,6 +247,13 @@
 }
 .RowFormTimeFieldView > input {
   width: 100%;
+  height: 20px;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+}
+.RowFormTimeFieldView > input[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
 }
 .RowFormTimeFieldView > .close {
   display: flex;
@@ -272,17 +271,8 @@
 .RowFormTimeFieldView > .close.visible {
   visibility: visible;
 }
-.standard .RowFormTimeFieldView > input {
-  height: 20px;
-  border-width: 0;
-  padding: 0 5px 0 5px;
-}
-.standard .RowFormTimeFieldView.error > input {
+.RowFormTimeFieldView.error > input {
   background-color: #f2dede;
-}
-.standard .RowFormTimeFieldView > input[readonly] {
-  background-color: lightgoldenrodyellow;
-  color: gray;
 }
 .debug .RowFormTimeFieldView.changed > input {
   background-color: #eefdea;
@@ -367,7 +357,7 @@
 .PageView__table-forms {
   min-height: 300px;
 }
-.standard .Modal .PageView__caption {
+.Modal .PageView__caption {
   background-color: #398bce;
   color: white;
   padding: 5px 10px;

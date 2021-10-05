@@ -10,11 +10,28 @@
     &:not(.readOnly) > input {
       cursor: pointer;
     }
+    > input {
+      height      : 20px;
+      border-width: 0;
+      padding     : 0 5px 0 5px;
+    }
+    &.readOnly > input {
+      background-color: lightgoldenrodyellow;
+      color: gray;
+    }
   }
   > .time {
     position: relative;
+    border-left: solid 1px #ddd;
     > input.TimeBox {
       width       : 100%;
+      height      : 20px;
+      border-width: 0;
+      padding     : 0 5px 0 5px;
+      &:read-only {
+        background-color: lightgoldenrodyellow;
+        color: gray;
+      }
     }
     > .close {
       display: flex;
@@ -33,32 +50,6 @@
       }
     }
   }
-}
-.standard .RowFormDateTimeFieldView {
-  > .DropdownDatePicker {
-    > input {
-      height      : 20px;
-      border-width: 0;
-      padding     : 0 5px 0 5px;
-    }
-    &.readOnly > input {
-      background-color: lightgoldenrodyellow;
-      color: gray;
-    }
-  }
-  > .time {
-    border-left: solid 1px #ddd;
-    > input.TimeBox {
-      height      : 20px;
-      border-width: 0;
-      padding     : 0 5px 0 5px;
-      &:read-only {
-        background-color: lightgoldenrodyellow;
-        color: gray;
-      }
-    }
-  }
-
   &.error > div > input {
     background-color: #f2dede !important;
   }
