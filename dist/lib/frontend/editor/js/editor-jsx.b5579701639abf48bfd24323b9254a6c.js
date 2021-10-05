@@ -1099,10 +1099,16 @@ class SqlDataSourceView extends DocumentView {
   constructor(props) {
     super(props);
 
+    _defineProperty(this, "onChange", async (i, o) => {
+      // console.log('SqlDataSourceView.onChange');
+      await this.rerender();
+    });
+
     _defineProperty(this, "onSaveClick", async e => {
       console.log('SqlDataSourceView.onSaveClick');
       const ctrl = this.props.ctrl;
       await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
+      await this.rerender();
     });
 
     this.singleRef = React.createRef();
@@ -1121,6 +1127,22 @@ class SqlDataSourceView extends DocumentView {
     this.singleQuery = DocumentView.createCM(this.singleRef.current, ctrl.model.getAttr('singleQuery'));
     this.multipleQuery = DocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
     this.countQuery = DocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
+    this.singleQuery.on('change', this.onChange);
+    this.multipleQuery.on('change', this.onChange);
+    this.countQuery.on('change', this.onChange);
+  }
+
+  componentWillUnmount() {
+    this.singleQuery.off('change', this.onChange);
+    this.multipleQuery.off('change', this.onChange);
+    this.countQuery.off('change', this.onChange);
+  }
+
+  isChanged() {
+    const ctrl = this.props.ctrl;
+    const cm = this[this.state.selected];
+    if (!cm) return false;
+    return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
   }
 
   getButtonClass(name) {
@@ -1131,31 +1153,45 @@ class SqlDataSourceView extends DocumentView {
     return this.state.selected === name ? 'visible' : 'hidden';
   }
 
+  isSelected(name) {
+    return this.state.selected === name;
+  }
+
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: 'SqlDataSourceView full flex-rows'
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbar"
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: this.onSaveClick
-    }, "Save"), /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement(Button, {
+      onClick: this.onSaveClick,
+      enabled: this.isChanged()
+    }, "Save"), /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateModelBack
     }, "Model.back.js"), "\xA0", /*#__PURE__*/React.createElement("div", {
       className: "btn-group",
       role: "group"
     }, /*#__PURE__*/React.createElement("button", {
       className: `${this.getButtonClass('singleQuery')}`,
+      style: {
+        fontWeight: this.isSelected('singleQuery') ? 'bold' : null
+      },
       onClick: e => this.setState({
         selected: 'singleQuery'
       })
     }, "singleQuery"), /*#__PURE__*/React.createElement("button", {
       className: `${this.getButtonClass('multipleQuery')}`,
+      style: {
+        fontWeight: this.isSelected('multipleQuery') ? 'bold' : null
+      },
       onClick: e => this.setState({
         selected: 'multipleQuery'
       })
     }, "multipleQuery"), /*#__PURE__*/React.createElement("button", {
       className: `${this.getButtonClass('countQuery')}`,
+      style: {
+        fontWeight: this.isSelected('countQuery') ? 'bold' : null
+      },
       onClick: e => this.setState({
         selected: 'countQuery'
       })
