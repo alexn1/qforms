@@ -1941,7 +1941,7 @@ class TableFormController extends FormController {
     onModelInsert = async e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         if (!this.view) return;
-        if (this.grid) {
+        if (this.grid && e.source) {
             for (const key of e.inserts) {
                 this.grid.setActiveRowKey(key);
             }
