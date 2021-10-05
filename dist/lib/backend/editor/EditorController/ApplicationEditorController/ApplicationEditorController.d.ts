@@ -8,6 +8,8 @@ declare class ApplicationEditorController extends VisualEditorController {
     createModelBackJs(params: any): Promise<{
         js: any;
     }>;
-    saveController(params: any): Promise<any>;
+    saveController(params: any): Promise<{
+        js: any;
+    }>;
 }
 export = ApplicationEditorController;

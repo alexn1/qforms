@@ -12,7 +12,9 @@ class VisualController extends DocumentController {
     }
     async onControllerSave(value) {
         console.log('ApplicationController.onControllerSave'/*, value*/);
-        await this.model.saveController(value);
+        const result = await this.model.saveController(value);
+        this.data.js = result.js;
+        this.document.view.rerender();
     }
     onCreateCustomController = async e => {
         console.log('ApplicationController.onCreateCustomController');

@@ -1310,6 +1310,11 @@ class VisualView extends DocumentView {
       await ctrl.onControllerSave(this.cm.getValue());
     });
 
+    _defineProperty(this, "onChange", async (instance, changeObj) => {
+      // console.log('VisualView.onChange', this.isChanged());
+      await this.rerender();
+    });
+
     this.textarea = React.createRef();
     this.cm = null;
   }
@@ -1325,6 +1330,7 @@ class VisualView extends DocumentView {
 
     if (ctrl.data.js) {
       this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+      this.cm.on('change', this.onChange);
     }
   }
 
@@ -1336,6 +1342,21 @@ class VisualView extends DocumentView {
     if (textarea && ctrl.data.js && !this.cm) {
       this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
     }
+  }
+
+  componentWillUnmount() {
+    // console.log('VisualView.componentWillUnmount');
+    if (this.cm) {
+      this.cm.off('change', this.onChange);
+    }
+  }
+
+  isChanged() {
+    if (!this.cm) {
+      return false;
+    }
+
+    return this.props.ctrl.data.js !== this.cm.getValue();
   }
 
   render() {
@@ -1351,7 +1372,8 @@ class VisualView extends DocumentView {
     }, "Model.back.js"), !ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateCustomController
     }, "Controller.front.js"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
-      onClick: this.onControllerSave
+      onClick: this.onControllerSave,
+      enabled: this.isChanged()
     }, "Save")), /*#__PURE__*/React.createElement("div", {
       className: "edit flex-max full"
     }, /*#__PURE__*/React.createElement("div", {

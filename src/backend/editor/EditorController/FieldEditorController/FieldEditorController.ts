@@ -69,7 +69,7 @@ class FieldEditorController extends VisualEditorController {
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const fieldEditor = formEditor.createItemEditor('fields', params.field);
         await fieldEditor.saveCustomFile('js', params.text);
-        return null;
+        return {js: params.text};
     }
 
     async moveUp(params) {

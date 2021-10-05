@@ -53,7 +53,7 @@ class PageEditorController extends VisualEditorController {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         await pageEditor.saveCustomFile('js', params.text);
-        return null;
+        return {js: params.text};
     }
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();

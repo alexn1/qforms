@@ -8,7 +8,9 @@ declare class PageEditorController extends VisualEditorController {
     createController(params: any): Promise<{
         js: any;
     }>;
-    saveController(params: any): Promise<any>;
+    saveController(params: any): Promise<{
+        js: any;
+    }>;
     createModelBackJs(params: any): Promise<{
         js: any;
     }>;

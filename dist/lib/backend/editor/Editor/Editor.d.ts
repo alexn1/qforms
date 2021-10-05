@@ -2,9 +2,9 @@ declare const BaseModel: any;
 declare class Editor extends BaseModel {
     createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
     getFile(filePath: any): Promise<any>;
-    saveFile(filePath: any, content: any): Promise<any>;
+    saveFile(filePath: any, content: any): Promise<void>;
     getCustomFile(ext: any): Promise<any>;
-    saveCustomFile(ext: any, text: any): Promise<any>;
+    saveCustomFile(ext: any, text: any): Promise<void>;
     getCustomFilePath(ext: any): Promise<any>;
     moveDataColItem(colName: any, name: any, offset: any): void;
     setData(colName: any, newData: any): any;

@@ -41,21 +41,21 @@ class Editor extends BaseModel {
             return await Helper.readTextFile(filePath);
         }
     }
-    async saveFile(filePath, content) {
+    async saveFile(filePath, content): Promise<void> {
         const exists = await Helper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        return await Helper.writeFile2(filePath, content);
+        await Helper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
         console.log('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
-    async saveCustomFile(ext, text) {
+    async saveCustomFile(ext, text):  Promise<void> {
         const customFilePath = await this.getCustomFilePath(ext);
-        return await this.saveFile(customFilePath, text);
+        await this.saveFile(customFilePath, text);
     }
     /*moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);

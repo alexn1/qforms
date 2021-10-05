@@ -45,7 +45,7 @@ class Editor extends BaseModel {
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        return await Helper.writeFile2(filePath, content);
+        await Helper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
         console.log('Editor.getCustomFile', ext);
@@ -54,7 +54,7 @@ class Editor extends BaseModel {
     }
     async saveCustomFile(ext, text) {
         const customFilePath = await this.getCustomFilePath(ext);
-        return await this.saveFile(customFilePath, text);
+        await this.saveFile(customFilePath, text);
     }
     /*moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);

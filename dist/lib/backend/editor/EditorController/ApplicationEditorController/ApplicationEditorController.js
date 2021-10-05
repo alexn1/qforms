@@ -32,7 +32,7 @@ class ApplicationEditorController extends VisualEditorController {
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         await appEditor.saveCustomFile('js', params.text);
-        return null;
+        return { js: params.text };
     }
 }
 module.exports = ApplicationEditorController;

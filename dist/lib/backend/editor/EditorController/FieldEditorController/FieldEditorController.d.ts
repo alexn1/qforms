@@ -8,7 +8,9 @@ declare class FieldEditorController extends VisualEditorController {
     createController(params: any): Promise<{
         js: any;
     }>;
-    saveController(params: any): Promise<any>;
+    saveController(params: any): Promise<{
+        js: any;
+    }>;
     moveUp(params: any): Promise<string>;
     moveDown(params: any): Promise<string>;
 }

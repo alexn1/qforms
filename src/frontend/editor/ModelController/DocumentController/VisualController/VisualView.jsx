@@ -13,6 +13,7 @@ class VisualView extends DocumentView {
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
             this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            this.cm.on('change', this.onChange);
         }
     }
     componentDidUpdate() {
@@ -23,9 +24,25 @@ class VisualView extends DocumentView {
             this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
     }
+    componentWillUnmount() {
+        // console.log('VisualView.componentWillUnmount');
+        if (this.cm) {
+            this.cm.off('change', this.onChange);
+        }
+    }
     onControllerSave = async e => {
         const ctrl = this.props.ctrl;
         await ctrl.onControllerSave(this.cm.getValue());
+    }
+    onChange = async (instance, changeObj) => {
+        // console.log('VisualView.onChange', this.isChanged());
+        await this.rerender();
+    }
+    isChanged() {
+        if (!this.cm) {
+            return false;
+        }
+        return this.props.ctrl.data.js !== this.cm.getValue();
     }
     render() {
         const ctrl = this.props.ctrl;
@@ -34,7 +51,10 @@ class VisualView extends DocumentView {
                 <div className="toolbar">
                     <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
                     {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Controller.front.js</Button>}
-                    {ctrl.data.js && <Button onClick={this.onControllerSave}>Save</Button>}
+                    {ctrl.data.js &&
+                        <Button onClick={this.onControllerSave}
+                                enabled={this.isChanged()}
+                    >Save</Button>}
                 </div>
                 <div className="edit flex-max full">
                     <div className="cm-container full">
