@@ -68,7 +68,7 @@ class DataSource extends Model {
                         console.log('rowColumns:', rowColumns);
                         console.log('formColumns:', formColumns);
                         console.log('row:', rows[0]);
-                        throw new Error(`${this.getFullName()}: unknown column "${rowColumn}" in result set`);
+                        throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
                     }
                 }
             }

@@ -68,12 +68,6 @@ class ApplicationController extends Controller {
     createPage(pageData, options) {
         if (options.modal === undefined) throw new Error('no options.modal');
 
-        // model
-        /*const pageModel = new Page(pageData, this.model, {
-            id   : `p${this.getNextPageId()}`,
-            modal: options.modal
-        });*/
-
         const pageModel = new Page(pageData, this.model, {
             id         : `p${this.getNextPageId()}`,
             modal      : options.modal,
