@@ -527,6 +527,7 @@ class TableFormFieldView extends ReactComponent {
   }
 
   getSpanOffsetWidth() {
+    // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
     return this.span.current.offsetWidth;
   }
 
@@ -541,6 +542,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
       className: this.getCssClassNames(),
       style: ctrl.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement(CheckBox, {
+      ref: this.span,
       checked: ctrl.getValueForWidget(row),
       readOnly: true // disabled={true}
 

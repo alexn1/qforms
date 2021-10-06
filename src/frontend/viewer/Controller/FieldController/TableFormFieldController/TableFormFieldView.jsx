@@ -4,6 +4,7 @@ class TableFormFieldView extends ReactComponent {
         this.span = React.createRef();
     }
     getSpanOffsetWidth() {
+        // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         return this.span.current.offsetWidth;
     }
 }

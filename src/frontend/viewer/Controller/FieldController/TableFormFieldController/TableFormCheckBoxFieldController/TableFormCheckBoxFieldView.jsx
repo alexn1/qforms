@@ -5,6 +5,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
         return (
             <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(row)}>
                 <CheckBox
+                    ref={this.span}
                     checked={ctrl.getValueForWidget(row)}
                     readOnly={true}
                     // disabled={true}
