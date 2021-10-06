@@ -72,6 +72,15 @@ class FieldEditorController extends VisualEditorController {
         return {jsx};
     }
 
+    async createStyle(params) {
+        const appEditor = this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor  = pageEditor.createItemEditor('forms', params.form);
+        const fieldEditor = formEditor.createItemEditor('fields', params.field);
+        const less = await fieldEditor.createLess(params);
+        return {less};
+    }
+
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

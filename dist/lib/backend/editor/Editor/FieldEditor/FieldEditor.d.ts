@@ -4,6 +4,7 @@ declare class FieldEditor extends Editor {
     changeClass(newClassName: any): any;
     createJs(params: any): Promise<any>;
     createJsx(params: any): Promise<any>;
+    createLess(params: any): Promise<any>;
     getCollectionDirPath(): Promise<any>;
     getColName(): string;
 }

@@ -1409,7 +1409,9 @@ class VisualView extends DocumentView {
       onClick: ctrl.onCreateCustomController
     }, "Controller.front.js"), !ctrl.data.jsx && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateCustomView
-    }, "View.jsx"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
+    }, "View.jsx"), !ctrl.data.less && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onCreateCustomStyle
+    }, "View.less"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: this.onControllerSave,
       enabled: this.isChanged()
     }, "Save")), /*#__PURE__*/React.createElement("div", {

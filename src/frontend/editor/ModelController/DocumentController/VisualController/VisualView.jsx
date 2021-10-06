@@ -52,6 +52,7 @@ class VisualView extends DocumentView {
                     <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
                     {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Controller.front.js</Button>}
                     {!ctrl.data.jsx && <Button onClick={ctrl.onCreateCustomView}>View.jsx</Button>}
+                    {!ctrl.data.less && <Button onClick={ctrl.onCreateCustomStyle}>View.less</Button>}
                     {ctrl.data.js &&
                         <Button onClick={this.onControllerSave} enabled={this.isChanged()}>Save</Button>
                     }

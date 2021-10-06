@@ -28,6 +28,12 @@ class VisualController extends DocumentController {
         this.data.jsx = data.jsx;
         this.document.view.rerender();
     }
+    onCreateCustomStyle = async e => {
+        console.log('VisualController.onCreateCustomStyle');
+        const data = await this.model.createStyle();
+        this.data.less = data.less;
+        this.document.view.rerender();
+    }
     onCreateModelBack = async e => {
         const data = await this.model.createModelBackJs();
     }

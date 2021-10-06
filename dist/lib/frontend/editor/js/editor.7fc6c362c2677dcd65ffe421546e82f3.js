@@ -850,6 +850,19 @@ class FieldEditor extends Editor {
         });
     }
 
+    async createStyle() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'createStyle',
+            params    : {
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+
     async createController() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
@@ -2449,6 +2462,12 @@ class VisualController extends DocumentController {
         console.log('VisualController.onCreateCustomView');
         const data = await this.model.createView();
         this.data.jsx = data.jsx;
+        this.document.view.rerender();
+    }
+    onCreateCustomStyle = async e => {
+        console.log('VisualController.onCreateCustomStyle');
+        const data = await this.model.createStyle();
+        this.data.less = data.less;
         this.document.view.rerender();
     }
     onCreateModelBack = async e => {

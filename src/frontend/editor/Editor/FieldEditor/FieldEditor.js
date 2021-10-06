@@ -89,6 +89,19 @@ class FieldEditor extends Editor {
         });
     }
 
+    async createStyle() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action    : 'createStyle',
+            params    : {
+                page : this.form.page.getName(),
+                form : this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+
     async createController() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
