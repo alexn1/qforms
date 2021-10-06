@@ -41,17 +41,17 @@ class FieldEditorController extends VisualEditorController {
 
     async getView(params) {
         const result = await super.getView(params);
-        switch (params.view) {
-            case 'VisualView.html':
-                const appEditor = this.createApplicationEditor();
-                const pageEditor = await appEditor.getPage(params.page);
-                const formEditor  = pageEditor.createItemEditor('forms', params.form);
-                const fieldEditor = formEditor.createItemEditor('fields', params.field);
-                result.data.js = await fieldEditor.getCustomFile('js');
-                return result;
-            default:
-                return result;
+        if (params.view === 'VisualView.html') {
+            const appEditor = this.createApplicationEditor();
+            const pageEditor = await appEditor.getPage(params.page);
+            const formEditor  = pageEditor.createItemEditor('forms', params.form);
+            const fieldEditor = formEditor.createItemEditor('fields', params.field);
+            result.data.js   = await fieldEditor.getCustomFile('js');
+            result.data.jsx  = await fieldEditor.getCustomFile('jsx');
+            result.data.less = await fieldEditor.getCustomFile('less');
+            return result;
         }
+        return result;
     }
 
     async createController(params) {

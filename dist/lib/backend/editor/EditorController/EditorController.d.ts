@@ -8,7 +8,6 @@ declare class EditorController {
     constructor(appInfo: any, hostApp: any);
     init(context: Context): Promise<void>;
     getView(params: any): Promise<{
-        view: any;
         data: {};
     }>;
     createApplicationEditor(): ApplicationEditor;

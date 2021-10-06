@@ -73,6 +73,10 @@ class Editor extends BaseModel {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
             return path.join(customDirPath, 'Controller.front.js');
+        } else if (ext === 'jsx') {
+            return path.join(customDirPath, 'View.jsx');
+        } else if (ext === 'less') {
+            return path.join(customDirPath, 'View.less');
         }
         return path.join(customDirPath, this.getName() + '.' + ext);
     }

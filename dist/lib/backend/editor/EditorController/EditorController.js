@@ -14,18 +14,7 @@ class EditorController {
     }
     async getView(params) {
         console.log('EditorController.getView');
-        let view = null;
-        /*if (!this.viewDirPath) throw new Error('viewDirPath is null');
-        const viewFilePath = path.join(this.viewDirPath, params.view);
-        const exists = await Helper.exists(viewFilePath);
-        if (exists) {
-            console.log(`view file exists: ${viewFilePath}`);
-        } else {
-            console.warn(`view file does not exist: ${viewFilePath}`);
-        }
-        if (exists) view = await Helper.readTextFile(viewFilePath);*/
         return {
-            view,
             data: {}
         };
     }
