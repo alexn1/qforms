@@ -113,6 +113,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
       onCreate: ctrl.onWidgetCreate,
       checked: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
+      disabled: !ctrl.isEditable(),
       onChange: ctrl.onChange
     }));
   }
@@ -545,8 +546,8 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
     }, /*#__PURE__*/React.createElement(CheckBox, {
       ref: this.span,
       checked: ctrl.getValueForWidget(row),
-      readOnly: true // disabled={true}
-
+      readOnly: true,
+      disabled: true
     }));
   }
 

@@ -8,7 +8,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
                     ref={this.span}
                     checked={ctrl.getValueForWidget(row)}
                     readOnly={true}
-                    // disabled={true}
+                    disabled={true}
                 />
             </div>
         );
