@@ -51,13 +51,13 @@ class VisualView extends DocumentView {
                 <div className="toolbar">
                     <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
                     {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Controller.front.js</Button>}
+                    {!ctrl.data.jsx && <Button onClick={ctrl.onCreateCustomView}>View.jsx</Button>}
                     {ctrl.data.js &&
-                        <Button onClick={this.onControllerSave}
-                                enabled={this.isChanged()}
-                    >Save</Button>}
+                        <Button onClick={this.onControllerSave} enabled={this.isChanged()}>Save</Button>
+                    }
                 </div>
-                <div className="edit flex-max full">
-                    <div className="cm-container full">
+                <div className={'edit flex-max full'}>
+                    <div className={'cm-container full'}>
                         {ctrl.data.js && <textarea ref={this.textarea}/>}
                     </div>
                 </div>

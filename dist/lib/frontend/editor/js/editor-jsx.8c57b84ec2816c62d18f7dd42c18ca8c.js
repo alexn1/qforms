@@ -1407,13 +1407,15 @@ class VisualView extends DocumentView {
       onClick: ctrl.onCreateModelBack
     }, "Model.back.js"), !ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateCustomController
-    }, "Controller.front.js"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
+    }, "Controller.front.js"), !ctrl.data.jsx && /*#__PURE__*/React.createElement(Button, {
+      onClick: ctrl.onCreateCustomView
+    }, "View.jsx"), ctrl.data.js && /*#__PURE__*/React.createElement(Button, {
       onClick: this.onControllerSave,
       enabled: this.isChanged()
     }, "Save")), /*#__PURE__*/React.createElement("div", {
-      className: "edit flex-max full"
+      className: 'edit flex-max full'
     }, /*#__PURE__*/React.createElement("div", {
-      className: "cm-container full"
+      className: 'cm-container full'
     }, ctrl.data.js && /*#__PURE__*/React.createElement("textarea", {
       ref: this.textarea
     })))));
