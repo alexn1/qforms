@@ -3410,6 +3410,7 @@ class Field extends Model {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;
+        return width;
     }
     getFullName() {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
