@@ -4,6 +4,7 @@ class GridCell extends ReactComponent {
         this.span = React.createRef();
     }
     getSpanOffsetWidth() {
+        if (!this.span) return 0;
         return this.span.current.offsetWidth;
     }
     renderCellValue(value) {

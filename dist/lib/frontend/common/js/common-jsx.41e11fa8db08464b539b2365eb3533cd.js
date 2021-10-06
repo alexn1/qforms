@@ -1183,6 +1183,7 @@ class GridCell extends ReactComponent {
   }
 
   getSpanOffsetWidth() {
+    if (!this.span) return 0;
     return this.span.current.offsetWidth;
   }
 
