@@ -34,6 +34,18 @@ class FieldEditor extends Editor {
         });
         return js;
     }
+    async createJsx(params) {
+        const templateFilePath = path.join(__dirname, 'View.jsx.ejs');
+        const customJsxFilePath = await this.getCustomFilePath('jsx');
+        const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
+            page     : this.parent.parent.getName(),
+            form     : this.parent.getName(),
+            field    : this.getName(),
+            formClass: this.parent.constructor.name.replace('Editor', ''),
+            _class   : this.constructor.name.replace('Editor', '')
+        });
+        return jsx;
+    }
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
