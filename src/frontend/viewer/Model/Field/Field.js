@@ -142,7 +142,9 @@ class Field extends Model {
         return this.data.visible === 'true';
     }
     getWidth() {
-        return this.data.width !== '0' ? parseInt(this.data.width) : 100;
+        const width = parseInt(this.data.width);
+        if (isNaN(width)) return null;
+        if (width === 0) return 100;
     }
     getFullName() {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
