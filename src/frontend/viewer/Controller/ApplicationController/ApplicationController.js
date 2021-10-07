@@ -110,25 +110,6 @@ class ApplicationController extends Controller {
             ...options,
             modal: options.modal !== undefined ? options.modal : true
         });
-
-        /*
-        // pageModel
-        const pageModel = new Page(pageData, this.model, {
-            id         : `p${this.getNextPageId()}`,
-            modal      : options.modal !== undefined ? options.modal : true,
-            newMode    : options.newMode,
-            selectMode : options.selectMode,
-            selectedKey: options.selectedKey,
-            onCreate   : options.onCreate,
-            onSelect   : options.onSelect,
-            params     : options.params || {}
-        });
-        pageModel.init();
-
-        // pageController
-        const pc = PageController.create(pageModel, this);
-        pc.init();*/
-
         // console.log('pc:', pc);
 
         // show
