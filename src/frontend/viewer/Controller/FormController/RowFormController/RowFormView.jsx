@@ -73,14 +73,14 @@ class RowFormView extends FormView {
             </div>
         );
     }
-    static renderField(fieldCtrl, props = {}) {
+    static renderField(fieldCtrl, key) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
-        return React.createElement(fieldCtrl.getViewClass(), {
-            classList: ['RowFormView__field'],
-            onCreate: fieldCtrl.onViewCreate,
-            ctrl: fieldCtrl,
-            ...props
-        });
+        return <div key={key} className={'RowFormView__field'}>
+            {React.createElement(fieldCtrl.getViewClass(), {
+                onCreate: fieldCtrl.onViewCreate,
+                ctrl: fieldCtrl,
+            })}
+        </div>;
     }
     static renderError(fieldCtrl, key) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
@@ -99,7 +99,7 @@ class RowFormView extends FormView {
                     const fieldCtrl = ctrl.getField(name);
                     return [
                         RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
-                        RowFormView.renderField(fieldCtrl, {key: `field.${fieldCtrl.getModel().getName()}`}),
+                        RowFormView.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
                         RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
                     ];
                 })}

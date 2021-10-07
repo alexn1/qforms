@@ -723,14 +723,15 @@ class RowFormView extends FormView {
     }, "*"));
   }
 
-  static renderField(fieldCtrl, props = {}) {
+  static renderField(fieldCtrl, key) {
     // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
-    return React.createElement(fieldCtrl.getViewClass(), {
-      classList: ['RowFormView__field'],
+    return /*#__PURE__*/React.createElement("div", {
+      key: key,
+      className: 'RowFormView__field'
+    }, React.createElement(fieldCtrl.getViewClass(), {
       onCreate: fieldCtrl.onViewCreate,
-      ctrl: fieldCtrl,
-      ...props
-    });
+      ctrl: fieldCtrl
+    }));
   }
 
   static renderError(fieldCtrl, key) {
@@ -753,9 +754,7 @@ class RowFormView extends FormView {
       className: `${this.getCssBlockName()}__form-grid`
     }, Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
       const fieldCtrl = ctrl.getField(name);
-      return [RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`), RowFormView.renderField(fieldCtrl, {
-        key: `field.${fieldCtrl.getModel().getName()}`
-      }), RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)];
+      return [RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`), RowFormView.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`), RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)];
     }));
   }
 
