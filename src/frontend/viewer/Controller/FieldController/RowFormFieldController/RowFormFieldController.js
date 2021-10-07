@@ -27,7 +27,7 @@ class RowFormFieldController extends FieldController {
         this.refreshChanged();
     }
     getViewClass() {
-        return RowFormTextBoxFieldView;
+        throw new Error(`${this.constructor.name}.getViewClass() not implemented`);
     }
     getRow() {
         return this.model.getForm().getRow();
