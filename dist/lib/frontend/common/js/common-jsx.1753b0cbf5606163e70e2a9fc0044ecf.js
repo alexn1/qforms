@@ -546,11 +546,12 @@ class DatePicker extends ReactComponent {
 window.QForms.DatePicker = DatePicker;
 class DropDownIcon extends ReactComponent {
   render() {
+    const size = this.props.size || 20;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
       style: {
-        width: this.props.size,
-        height: this.props.size
+        width: size,
+        height: size
       }
     }, /*#__PURE__*/React.createElement("svg", {
       viewBox: "0 0 10 10"
