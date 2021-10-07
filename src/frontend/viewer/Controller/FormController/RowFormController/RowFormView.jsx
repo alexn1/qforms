@@ -64,28 +64,28 @@ class RowFormView extends FormView {
             </div>
         );
     }
-    static renderLabel(fieldCtrl, key) {
+    renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
         return (
-            <div key={key} className={'RowFormView__label'}>
+            <div key={key} className={`${this.getCssBlockName()}__label`}>
                 {model.getCaption()}:
                 {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
             </div>
         );
     }
-    static renderField(fieldCtrl, key) {
+    renderField(fieldCtrl, key) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
-        return <div key={key} className={'RowFormView__field'}>
+        return <div key={key} className={`${this.getCssBlockName()}__field`}>
             {React.createElement(fieldCtrl.getViewClass(), {
                 onCreate: fieldCtrl.onViewCreate,
                 ctrl: fieldCtrl,
             })}
         </div>;
     }
-    static renderError(fieldCtrl, key) {
+    renderError(fieldCtrl, key) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         return (
-            <div key={key} className={'RowFormView__tooltip'}>
+            <div key={key} className={`${this.getCssBlockName()}__tooltip`}>
                 <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
             </div>
         );
@@ -98,9 +98,9 @@ class RowFormView extends FormView {
                 {Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
                     const fieldCtrl = ctrl.getField(name);
                     return [
-                        RowFormView.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
-                        RowFormView.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
-                        RowFormView.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
+                        this.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
+                        this.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
+                        this.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
                     ];
                 })}
             </div>
