@@ -1,4 +1,4 @@
-class ApplicationView extends ReactComponent {
+class ApplicationView extends View {
     renderActivePage() {
         const ctrl = this.props.ctrl;
         if (ctrl.activePage) {

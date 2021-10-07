@@ -23,6 +23,7 @@ class Field extends Model_1.default {
         response.visible = this.getAttr('isVisible');
         response.type = this.getAttr('type');
         response.width = this.getAttr('width');
+        response.cssBlock = this.getAttr('cssBlock');
     }
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'fields', this.getName());

@@ -1,9 +1,7 @@
 class FieldController extends Controller {
-
     /*constructor(model, parent) {
         super(model, parent);
     }*/
-
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const page = model.getPage();
@@ -13,7 +11,6 @@ class FieldController extends Controller {
         const Class = CustomClass ? CustomClass : GeneralClass;
         return new Class(model, parent);
     }
-
     valueToString(value) {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
         switch (typeof value) {
@@ -31,7 +28,6 @@ class FieldController extends Controller {
             default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
         }
     }
-
     stringToValue(stringValue) {
         // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
@@ -52,11 +48,9 @@ class FieldController extends Controller {
         }
         return stringValue;
     }
-
     renderViewStyle(row) {
         return null;
     }
-
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
@@ -69,6 +63,5 @@ class FieldController extends Controller {
     getApp() {
         return this.parent.parent.parent;
     }
-
 }
 window.QForms.FieldController = FieldController;

@@ -1,4 +1,4 @@
-class RowFormFieldView extends ReactComponent {
+class RowFormFieldView extends View {
     getClassList() {
         const ctrl = this.props.ctrl;
         return [

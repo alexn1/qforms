@@ -5,5 +5,12 @@ class View extends ReactComponent {
             title: Model.getAttr(data, 'caption')
         }));
     }
+    getCssBlockName() {
+        const model = this.props.ctrl.getModel();
+        if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
+            return model.getAttr('cssBlock');
+        }
+        return super.getCssBlockName();
+    }
 }
 window.QForms.View = View;

@@ -6,10 +6,20 @@ class View extends ReactComponent {
     }));
   }
 
+  getCssBlockName() {
+    const model = this.props.ctrl.getModel();
+
+    if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
+      return model.getAttr('cssBlock');
+    }
+
+    return super.getCssBlockName();
+  }
+
 }
 
 window.QForms.View = View;
-class ApplicationView extends ReactComponent {
+class ApplicationView extends View {
   renderActivePage() {
     const ctrl = this.props.ctrl;
 
@@ -94,7 +104,7 @@ class SdiApplicationView extends ApplicationView {
 
 window.QForms.SdiApplicationView = SdiApplicationView;
 */
-class RowFormFieldView extends ReactComponent {
+class RowFormFieldView extends View {
   getClassList() {
     const ctrl = this.props.ctrl;
     return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
@@ -521,7 +531,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormTimeFieldView = RowFormTimeFieldView;
-class TableFormFieldView extends ReactComponent {
+class TableFormFieldView extends View {
   constructor(props) {
     super(props);
     this.span = React.createRef();

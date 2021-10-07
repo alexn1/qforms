@@ -27,6 +27,7 @@ class Field extends Model {
         response.visible      = this.getAttr('isVisible');
         response.type         = this.getAttr('type');
         response.width        = this.getAttr('width');
+        response.cssBlock     = this.getAttr('cssBlock');
     }
 
     getDirPath(): string {
