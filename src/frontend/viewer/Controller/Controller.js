@@ -19,4 +19,10 @@ class Controller extends EventEmitter {
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
+    async onDocumentKeyDown(e) {
+        // console.log('Controller.onDocumentKeyDown', e);
+        if (e.key === 'Escape') {
+
+        }
+    }
 }

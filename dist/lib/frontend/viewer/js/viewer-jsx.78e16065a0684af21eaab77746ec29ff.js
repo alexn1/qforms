@@ -38,7 +38,7 @@ class ApplicationView extends View {
   }
 
   renderModalPages() {
-    return this.props.ctrl.modalPages.map(ctrl => /*#__PURE__*/React.createElement(Modal, {
+    return this.props.ctrl.modals.map(ctrl => /*#__PURE__*/React.createElement(Modal, {
       key: ctrl.getId()
     }, this.renderView(ctrl)));
   }

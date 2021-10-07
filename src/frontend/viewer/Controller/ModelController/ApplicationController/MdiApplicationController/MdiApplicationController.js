@@ -75,8 +75,8 @@
 //             if (this.activePage === pageController) {
 //                 this.activePage = this.pages[this.pages.length - 1];
 //             }
-//         } else if (this.modalPages.indexOf(pageController) > -1) {
-//             this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
+//         } else if (this.modals.indexOf(pageController) > -1) {
+//             this.modals.splice(this.modals.indexOf(pageController), 1);
 //         } else {
 //             throw new Error('page not found');
 //         }

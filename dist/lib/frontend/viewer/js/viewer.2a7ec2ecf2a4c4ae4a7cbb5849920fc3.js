@@ -186,6 +186,12 @@ class Controller extends EventEmitter {
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
+    async onDocumentKeyDown(e) {
+        // console.log('Controller.onDocumentKeyDown', e);
+        if (e.key === 'Escape') {
+
+        }
+    }
 }
 
 class ModelController extends Controller {
@@ -219,8 +225,8 @@ class ApplicationController extends ModelController {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
         this.lastId = 0;
-        this.modalPages = [];
         this.activePage = null;     // active non modal page
+        this.modals = [];
         this.statusbar  = null;
         this.homePageName = null;
     }
@@ -328,13 +334,13 @@ class ApplicationController extends ModelController {
         // console.log('pc:', pc);
 
         // show
-        pc.getModel().isModal() ? this.addModalPage(pc) : this.addPage(pc);
+        pc.getModel().isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
 
         return pc;
     }
-    addModalPage(pc) {
-        this.modalPages.push(pc);
+    addModal(ctrl) {
+        this.modals.push(ctrl);
     }
     getNextId() {
         this.lastId++;
@@ -358,8 +364,8 @@ class ApplicationController extends ModelController {
     }
     closePage(pageController) {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
-        if (this.modalPages.indexOf(pageController) > -1) {
-            this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
+        if (this.modals.indexOf(pageController) > -1) {
+            this.modals.splice(this.modals.indexOf(pageController), 1);
         } else if (this.activePage === pageController) {
             this.activePage = null;
             document.title = '';
@@ -426,15 +432,15 @@ class ApplicationController extends ModelController {
     }
     async onDocumentKeyDown(e) {
         // console.log('ApplicationController.onDocumentKeyDown', e);
-        const page = this.getFocusPage();
+        const page = this.getFocusCtrl();
         // console.log('page:', page.getModel().getFullName());
         if (page) {
             await page.onDocumentKeyDown(e);
         }
     }
-    getFocusPage() {
-        if (this.modalPages.length > 0) {
-            return this.modalPages[this.modalPages.length-1];
+    getFocusCtrl() {
+        if (this.modals.length > 0) {
+            return this.modals[this.modals.length - 1];
         }
         return this.activePage;
     }
@@ -460,7 +466,7 @@ class ApplicationController extends ModelController {
     }
     invalidate() {
         if (this.activePage) this.activePage.invalidate();
-        this.modalPages.forEach(page => page.invalidate());
+        this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
 }
 
@@ -543,8 +549,8 @@ window.QForms.ApplicationController = ApplicationController;
 //             if (this.activePage === pageController) {
 //                 this.activePage = this.pages[this.pages.length - 1];
 //             }
-//         } else if (this.modalPages.indexOf(pageController) > -1) {
-//             this.modalPages.splice(this.modalPages.indexOf(pageController), 1);
+//         } else if (this.modals.indexOf(pageController) > -1) {
+//             this.modals.splice(this.modals.indexOf(pageController), 1);
 //         } else {
 //             throw new Error('page not found');
 //         }

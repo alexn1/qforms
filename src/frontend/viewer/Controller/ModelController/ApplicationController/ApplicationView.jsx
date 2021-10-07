@@ -14,7 +14,7 @@ class ApplicationView extends View {
         });
     }
     renderModalPages() {
-        return this.props.ctrl.modalPages.map(ctrl =>
+        return this.props.ctrl.modals.map(ctrl =>
             <Modal key={ctrl.getId()}>
                 {this.renderView(ctrl)}
             </Modal>
