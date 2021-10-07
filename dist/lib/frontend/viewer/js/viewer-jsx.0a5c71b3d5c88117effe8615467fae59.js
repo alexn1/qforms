@@ -685,7 +685,8 @@ class RowFormView extends FormView {
   }
 
   renderField(fieldCtrl) {
-    return [this.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`), this.renderField2(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`), this.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)];
+    const name = fieldCtrl.getModel().getName();
+    return [this.renderLabel(fieldCtrl, `label.${name}`), this.renderField2(fieldCtrl, `field.${name}`), this.renderError(fieldCtrl, `tooltip.${name}`)];
   }
 
   renderFields() {

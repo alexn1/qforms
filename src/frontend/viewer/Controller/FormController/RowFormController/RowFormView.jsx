@@ -66,12 +66,10 @@ class RowFormView extends FormView {
     }
     renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
-        return (
-            <div key={key} className={`${this.getCssBlockName()}__label`}>
-                {model.getCaption()}:
-                {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
-            </div>
-        );
+        return <div key={key} className={`${this.getCssBlockName()}__label`}>
+            {model.getCaption()}:
+            {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
+        </div>;
     }
     renderField2(fieldCtrl, key) {
         // console.log('RowFormView.renderField2', fieldCtrl.model.getClassName());
@@ -89,10 +87,11 @@ class RowFormView extends FormView {
         </div>;
     }
     renderField(fieldCtrl) {
+        const name = fieldCtrl.getModel().getName();
         return [
-            this.renderLabel(fieldCtrl , `label.${fieldCtrl.getModel().getName()}`),
-            this.renderField2(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
-            this.renderError(fieldCtrl , `tooltip.${fieldCtrl.getModel().getName()}`)
+            this.renderLabel(fieldCtrl , `label.${name}`),
+            this.renderField2(fieldCtrl, `field.${name}`),
+            this.renderError(fieldCtrl , `tooltip.${name}`)
         ];
     }
     renderFields() {
@@ -120,4 +119,5 @@ class RowFormView extends FormView {
         </div>;
     }
 }
+
 window.QForms.RowFormView = RowFormView;
