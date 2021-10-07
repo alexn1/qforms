@@ -84,27 +84,23 @@ class RowFormView extends FormView {
     }
     renderError(fieldCtrl, key) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
-        return (
-            <div key={key} className={`${this.getCssBlockName()}__tooltip`}>
-                <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
-            </div>
-        );
+        return <div key={key} className={`${this.getCssBlockName()}__tooltip`}>
+            <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
+        </div>;
     }
     renderFields() {
         // console.log('RowFormView.renderFields');
         const ctrl = this.props.ctrl;
-        return (
-            <div className={`${this.getCssBlockName()}__form-grid`}>
-                {Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
-                    const fieldCtrl = ctrl.getField(name);
-                    return [
-                        this.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
-                        this.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
-                        this.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
-                    ];
-                })}
-            </div>
-        );
+        return <div className={`${this.getCssBlockName()}__form-grid`}>
+            {Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+                const fieldCtrl = ctrl.getField(name);
+                return [
+                    this.renderLabel(fieldCtrl, `label.${fieldCtrl.getModel().getName()}`),
+                    this.renderField(fieldCtrl, `field.${fieldCtrl.getModel().getName()}`),
+                    this.renderError(fieldCtrl, `tooltip.${fieldCtrl.getModel().getName()}`)
+                ];
+            })}
+        </div>;
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('RowFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
@@ -114,12 +110,10 @@ class RowFormView extends FormView {
     render() {
         console.log('RowFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        return (
-            <div className={`${this.getCssClassNames()} flex-rows grid-gap-5`}>
-                {(ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar()}
-                {this.renderFields()}
-            </div>
-        );
+        return <div className={`${this.getCssClassNames()} flex-rows grid-gap-5`}>
+            {(ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar()}
+            {this.renderFields()}
+        </div>;
     }
 }
 window.QForms.RowFormView = RowFormView;
