@@ -194,6 +194,20 @@ class Controller extends EventEmitter {
     }
 }
 
+class ModalController extends Controller {
+    constructor(id) {
+        super();
+        if (!id) throw new Error('no id');
+        this.id = id;
+    }
+    getId() {
+        return this.id;
+    }
+    getViewClass() {
+        return Modal;
+    }
+}
+
 class ModelController extends Controller {
     constructor(model, parent) {
         super();
@@ -341,6 +355,11 @@ class ApplicationController extends ModelController {
     }
     addModal(ctrl) {
         this.modals.push(ctrl);
+    }
+    removeModal(ctrl) {
+        const i = this.modals.indexOf(ctrl);
+        if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
+        this.modals.splice(i, 1);
     }
     getNextId() {
         this.lastId++;

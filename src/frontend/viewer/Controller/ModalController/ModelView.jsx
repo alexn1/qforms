@@ -1,4 +1,4 @@
-class View extends ReactComponent {
+class ModelView extends ReactComponent {
     getActionsForDropdownButton() {
         return this.props.ctrl.getModel().getCol('actions').map(data => ({
             name : Model.getName(data),
@@ -13,4 +13,4 @@ class View extends ReactComponent {
         return super.getCssBlockName();
     }
 }
-window.QForms.View = View;
+window.QForms.ModelView = ModelView;

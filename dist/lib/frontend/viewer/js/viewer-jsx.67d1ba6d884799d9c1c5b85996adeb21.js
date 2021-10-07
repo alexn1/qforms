@@ -1,4 +1,4 @@
-class View extends ReactComponent {
+class ModelView extends ReactComponent {
   getActionsForDropdownButton() {
     return this.props.ctrl.getModel().getCol('actions').map(data => ({
       name: Model.getName(data),
@@ -18,8 +18,8 @@ class View extends ReactComponent {
 
 }
 
-window.QForms.View = View;
-class ApplicationView extends View {
+window.QForms.ModelView = ModelView;
+class ApplicationView extends ModelView {
   renderActivePage() {
     const ctrl = this.props.ctrl;
 
@@ -104,7 +104,7 @@ class SdiApplicationView extends ApplicationView {
 
 window.QForms.SdiApplicationView = SdiApplicationView;
 */
-class RowFormFieldView extends View {
+class RowFormFieldView extends ModelView {
   getClassList() {
     const ctrl = this.props.ctrl;
     return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
@@ -468,7 +468,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormTimeFieldView = RowFormTimeFieldView;
-class TableFormFieldView extends View {
+class TableFormFieldView extends ModelView {
   constructor(props) {
     super(props);
     this.span = React.createRef();
@@ -579,7 +579,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
 window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class FormView extends View {
+class FormView extends ModelView {
   constructor(props) {
     super(props);
 
@@ -853,7 +853,7 @@ class TableFormView extends FormView {
 window.QForms.TableFormView = TableFormView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class PageView extends View {
+class PageView extends ModelView {
   constructor(props) {
     super(props);
 

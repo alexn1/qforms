@@ -1,4 +1,4 @@
-class FormView extends View {
+class FormView extends ModelView {
     constructor(props) {
         super(props);
         this.checkParent();

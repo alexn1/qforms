@@ -1,4 +1,4 @@
-class ApplicationView extends View {
+class ApplicationView extends ModelView {
     renderActivePage() {
         const ctrl = this.props.ctrl;
         if (ctrl.activePage) {
