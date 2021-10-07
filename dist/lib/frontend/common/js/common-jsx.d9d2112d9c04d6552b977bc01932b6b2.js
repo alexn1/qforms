@@ -241,8 +241,7 @@ window.QForms.CheckBox = CheckBox;
 class CloseIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("svg", {
-      viewBox: "0 0 10 10",
-      width: '10px'
+      viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("line", {
       x1: "2",
       y1: "2",
