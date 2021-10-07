@@ -36,10 +36,11 @@ class Form extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.class            = this.getClassName();
-        response.name             = this.getAttr('name');
-        response.caption          = this.getAttr('caption');
-        response.visible          = this.getAttr('visible');
+        response.class    = this.getClassName();
+        response.name     = this.getAttr('name');
+        response.caption  = this.getAttr('caption');
+        response.visible  = this.getAttr('visible');
+        response.cssBlock = this.getAttr('cssBlock');
     }
 
     async fill(context) {
