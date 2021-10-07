@@ -2,21 +2,21 @@ class ApplicationView extends View {
     renderActivePage() {
         const ctrl = this.props.ctrl;
         if (ctrl.activePage) {
-            return this.renderPage(ctrl.activePage);
+            return this.renderView(ctrl.activePage);
         }
     }
-    renderPage(pageCtrl, props = {}) {
-        return React.createElement(pageCtrl.getViewClass(), {
+    renderView(ctrl, props = {}) {
+        return React.createElement(ctrl.getViewClass(), {
             parent  : this,
-            ctrl    : pageCtrl,
-            onCreate: pageCtrl.onViewCreate,
+            ctrl    : ctrl,
+            onCreate: ctrl.onViewCreate,
             ...props
         });
     }
     renderModalPages() {
-        return this.props.ctrl.modalPages.map(pageCtrl =>
-            <Modal key={pageCtrl.getId()}>
-                {this.renderPage(pageCtrl)}
+        return this.props.ctrl.modalPages.map(ctrl =>
+            <Modal key={ctrl.getId()}>
+                {this.renderView(ctrl)}
             </Modal>
         );
     }
