@@ -3,13 +3,20 @@ const Editor = require('../Editor');
 
 class FormEditor extends Editor {
     static createAttributes(params): any {
-        console.log('FormEditor.createAttributes', params);
+        if (!params.name) throw new Error('no name');
+        return {
+            name    : params.name,
+            caption : params.caption  !== undefined ? params.caption : params.name,
+            visible : params.visible  !== undefined ? params.visible :      'true',
+            cssBlock: params.cssBlock !== undefined ? params.cssBlock:          '',
+        };
+    }
+    static createData(params): any {
+        console.log('FormEditor.createData', params);
         return {
             '@class'     : 'Form',
             '@attributes': {
-                name    : params.name,
-                caption : params.caption  ? params.caption : params.name,
-                visible : params.visible  ? params.visible : 'true',
+                ...FormEditor.createAttributes(params),
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])

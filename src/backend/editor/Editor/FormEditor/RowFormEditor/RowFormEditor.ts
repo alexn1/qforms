@@ -7,9 +7,7 @@ class RowFormEditor extends FormEditor {
         return {
             '@class'     : 'RowForm',
             '@attributes': {
-                name    : params.name,
-                caption : params.caption  ? params.caption : params.name,
-                visible : params.visible  ? params.visible : 'true',
+                ...FormEditor.createAttributes(params),
                 newMode : params.newMode  ? params.newMode : '',
                 backOnly: params.backOnly ? params.backOnly: 'false'
             },

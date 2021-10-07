@@ -6,13 +6,7 @@ class RowFormEditor extends FormEditor {
         // console.log('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',
-            '@attributes': {
-                name: params.name,
-                caption: params.caption ? params.caption : params.name,
-                visible: params.visible ? params.visible : 'true',
-                newMode: params.newMode ? params.newMode : '',
-                backOnly: params.backOnly ? params.backOnly : 'false'
-            },
+            '@attributes': Object.assign(Object.assign({}, FormEditor.createAttributes(params)), { newMode: params.newMode ? params.newMode : '', backOnly: params.backOnly ? params.backOnly : 'false' }),
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
             ],

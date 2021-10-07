@@ -7,10 +7,7 @@ class TableFormEditor extends FormEditor {
         return {
             '@class'     : 'TableForm',
             '@attributes': {
-                name          : params.name,
-                caption       : params.caption ? params.caption : params.name,
-                visible       : params.visible ? params.visible : 'true',
-
+                ...FormEditor.createAttributes(params),
                 editMethod    : params.editMethod     || 'disabled',
                 itemEditPage  : params.itemEditPage   || '',
                 itemCreatePage: params.itemCreatePage || '',
