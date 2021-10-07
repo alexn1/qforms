@@ -293,12 +293,9 @@
 
 
 .RowFormView {
-  background-color: #eeeeee;
+  background-color: #eee;
   padding: 5px;
   font-size: small;
-  display: flex;
-  flex-direction: column;
-  grid-gap: 5px;
 }
 .RowFormView__toolbar {
   display: flex;

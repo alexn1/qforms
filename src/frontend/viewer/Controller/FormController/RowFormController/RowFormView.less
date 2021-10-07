@@ -1,12 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormView {
-  background-color: rgb(238,238,238);
+  background-color: #eee;
   padding         : 5px;
   font-size       : small;
-
-  display: flex;
-  flex-direction: column;
-  grid-gap: 5px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,11 +14,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormView__form-grid {
   display: grid;
-  //grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
-  //grid-template-columns: 100px 1fr 100px 1fr 100px 1fr;
   grid-template-columns: 150px 300px 24px 150px 300px 24px;
   grid-row-gap: 5px;
-  //grid-column-gap: 5px;
   > div {
     align-items: start;
     &.label {
