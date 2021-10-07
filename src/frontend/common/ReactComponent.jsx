@@ -1,4 +1,5 @@
 window.QForms = {};
+
 class ReactComponent extends React.Component {
     constructor(props) {
         super(props);
