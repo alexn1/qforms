@@ -45,7 +45,7 @@
 //     createPages() {
 //         return this.model.data.pages.map(pageData => {
 //             const page = new Page(pageData, this.model, {
-//                 id   : `p${this.getNextPageId()}`,
+//                 id   : `p${this.getNextId()}`,
 //                 modal: false
 //             });
 //             page.init();

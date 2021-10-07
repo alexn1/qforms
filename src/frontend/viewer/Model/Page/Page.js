@@ -1,7 +1,7 @@
 class Page extends Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
-        if (!options.id) throw new Error('no page id');
+        // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options     = options; // {id, modal, newMode, selectMode, params}
         this.dataSources = [];
@@ -43,9 +43,9 @@ class Page extends Model {
         }
     }
 
-    getId() {
+    /*getId() {
         return this.options.id;
-    }
+    }*/
 
     getParams() {
         return {
@@ -136,9 +136,9 @@ class Page extends Model {
         return this.parent;
     }
 
-    getFullName() {
+    /*getFullName() {
         return `${this.getName()}(${this.getId()})`;
-    }
+    }*/
 
     isModal() {
         return !!this.options.modal;

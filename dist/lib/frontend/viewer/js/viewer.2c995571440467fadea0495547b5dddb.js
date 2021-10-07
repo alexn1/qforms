@@ -212,7 +212,7 @@ class ApplicationController extends Controller {
     constructor(model) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
-        this.lastPageId = 0;
+        this.lastId = 0;
         this.modalPages = [];
         this.activePage = null;     // active non modal page
         this.statusbar  = null;
@@ -279,7 +279,6 @@ class ApplicationController extends Controller {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         const pageModel = new Page(pageData, this.model, {
-            id         : `p${this.getNextPageId()}`,
             modal      : options.modal,
             newMode    : options.newMode,
             selectMode : options.selectMode,
@@ -291,7 +290,7 @@ class ApplicationController extends Controller {
         pageModel.init();
 
         // controller
-        const pc = PageController.create(pageModel, this);
+        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
 
         return pc;
@@ -331,9 +330,9 @@ class ApplicationController extends Controller {
     addModalPage(pc) {
         this.modalPages.push(pc);
     }
-    getNextPageId() {
-        this.lastPageId++;
-        return this.lastPageId;
+    getNextId() {
+        this.lastId++;
+        return this.lastId;
     }
     addPage(pc) {
         if (this.activePage) {
@@ -508,7 +507,7 @@ window.QForms.ApplicationController = ApplicationController;
 //     createPages() {
 //         return this.model.data.pages.map(pageData => {
 //             const page = new Page(pageData, this.model, {
-//                 id   : `p${this.getNextPageId()}`,
+//                 id   : `p${this.getNextId()}`,
 //                 modal: false
 //             });
 //             page.init();
@@ -2026,16 +2025,18 @@ window.QForms.TableFormController = TableFormController;
 
 class PageController extends Controller {
 
-    static create(model, parent) {
+    static create(model, parent, id) {
         // console.log('PageController.create', model.getName());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent);
+        return new Class(model, parent, id);
     }
 
-    constructor(model, parent) {
+    constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
         super(model, parent);
+        if (!id) throw new Error('no id');
+        this.id = id;
         this.forms = [];
     }
 
@@ -2201,7 +2202,7 @@ class PageController extends Controller {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isInDebugMode() ? [`(${model.getId()})`] : []),
+            ...(ApplicationController.isInDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
@@ -2227,6 +2228,9 @@ class PageController extends Controller {
     }
     invalidate() {
         this.forms.forEach(form => form.invalidate());
+    }
+    getId() {
+        return this.id;
     }
 }
 window.QForms.PageController = PageController;
@@ -3767,7 +3771,7 @@ window.QForms.TableForm = TableForm;
 class Page extends Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
-        if (!options.id) throw new Error('no page id');
+        // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options     = options; // {id, modal, newMode, selectMode, params}
         this.dataSources = [];
@@ -3809,9 +3813,9 @@ class Page extends Model {
         }
     }
 
-    getId() {
+    /*getId() {
         return this.options.id;
-    }
+    }*/
 
     getParams() {
         return {
@@ -3902,9 +3906,9 @@ class Page extends Model {
         return this.parent;
     }
 
-    getFullName() {
+    /*getFullName() {
         return `${this.getName()}(${this.getId()})`;
-    }
+    }*/
 
     isModal() {
         return !!this.options.modal;

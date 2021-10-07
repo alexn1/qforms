@@ -2,7 +2,7 @@ class ApplicationController extends Controller {
     constructor(model) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
-        this.lastPageId = 0;
+        this.lastId = 0;
         this.modalPages = [];
         this.activePage = null;     // active non modal page
         this.statusbar  = null;
@@ -69,7 +69,6 @@ class ApplicationController extends Controller {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         const pageModel = new Page(pageData, this.model, {
-            id         : `p${this.getNextPageId()}`,
             modal      : options.modal,
             newMode    : options.newMode,
             selectMode : options.selectMode,
@@ -81,7 +80,7 @@ class ApplicationController extends Controller {
         pageModel.init();
 
         // controller
-        const pc = PageController.create(pageModel, this);
+        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
 
         return pc;
@@ -121,9 +120,9 @@ class ApplicationController extends Controller {
     addModalPage(pc) {
         this.modalPages.push(pc);
     }
-    getNextPageId() {
-        this.lastPageId++;
-        return this.lastPageId;
+    getNextId() {
+        this.lastId++;
+        return this.lastId;
     }
     addPage(pc) {
         if (this.activePage) {

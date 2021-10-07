@@ -1,15 +1,17 @@
 class PageController extends Controller {
 
-    static create(model, parent) {
+    static create(model, parent, id) {
         // console.log('PageController.create', model.getName());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent);
+        return new Class(model, parent, id);
     }
 
-    constructor(model, parent) {
+    constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
         super(model, parent);
+        if (!id) throw new Error('no id');
+        this.id = id;
         this.forms = [];
     }
 
@@ -175,7 +177,7 @@ class PageController extends Controller {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isInDebugMode() ? [`(${model.getId()})`] : []),
+            ...(ApplicationController.isInDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
@@ -201,6 +203,9 @@ class PageController extends Controller {
     }
     invalidate() {
         this.forms.forEach(form => form.invalidate());
+    }
+    getId() {
+        return this.id;
     }
 }
 window.QForms.PageController = PageController;

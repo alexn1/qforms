@@ -2,7 +2,7 @@
 //     getTabs() {
 //         return this.props.ctrl.pages.map(pageCtrl => {
 //             return {
-//                 name   : pageCtrl.model.getId(),
+//                 name   : pageCtrl.getId(),
 //                 title  : pageCtrl.getTitle(),
 //                 content: React.createElement(pageCtrl.getViewClass(), {
 //                     ctrl    : pageCtrl,
