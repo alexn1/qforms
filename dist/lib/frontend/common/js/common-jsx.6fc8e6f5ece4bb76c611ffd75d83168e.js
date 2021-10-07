@@ -238,6 +238,33 @@ class CheckBox extends ReactComponent {
 }
 
 window.QForms.CheckBox = CheckBox;
+class CloseIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 10 10",
+      width: '10px'
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "2",
+      y1: "2",
+      x2: "8",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "8",
+      y1: "2",
+      x2: "2",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: "1.1",
+      strokeLinecap: "round",
+      strokeMiterlimit: "10"
+    }));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class ComboBox extends ReactComponent {
@@ -527,7 +554,6 @@ class DropDownIcon extends ReactComponent {
         height: this.props.size
       }
     }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
       viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("circle", {
       cx: "5",
@@ -758,28 +784,7 @@ class DropdownDatePicker extends ReactComponent {
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }))), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
       minDate: this.getMinDate(),
       selectedMonth: this.getSelectedMonth(),
       selectedDate: this.getSelectedDate(),

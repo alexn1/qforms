@@ -106,12 +106,7 @@ class DropdownDatePicker extends ReactComponent {
                     onKeyDown={this.onInputKeyDown}
                 />
                 <div className={`close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
-                        <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
-                              strokeMiterlimit="10"></line>
-                        <line x1="8" y1="2" x2="2" y2="8" stroke="#aaa" strokeWidth="1.1" strokeLinecap="round"
-                              strokeMiterlimit="10"></line>
-                    </svg>
+                    <CloseIcon/>
                 </div>
                 {this.state.open &&
                     <DatePicker

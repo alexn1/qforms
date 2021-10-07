@@ -244,28 +244,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    })))));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null))));
   }
 
 }
@@ -435,28 +414,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }))));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
   }
 
 }
@@ -504,28 +462,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: "1.1",
-      strokeLinecap: "round",
-      strokeMiterlimit: "10"
-    }))));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
   }
 
 }
