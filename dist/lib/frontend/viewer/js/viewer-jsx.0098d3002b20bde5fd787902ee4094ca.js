@@ -940,7 +940,6 @@ class PageView extends View {
       title: model.getApp().getText().page.reset,
       onClick: ctrl.onResetClick
     }), model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
-      key: "saveAndClose",
       width: width,
       title: model.getApp().getText().page.saveAndClose,
       onClick: ctrl.onSaveAndCloseClick,

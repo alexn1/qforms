@@ -76,7 +76,6 @@ class PageView extends View {
                 }
                 {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
                     <Button
-                        key="saveAndClose"
                         width={width}
                         title={model.getApp().getText().page.saveAndClose}
                         onClick={ctrl.onSaveAndCloseClick}
