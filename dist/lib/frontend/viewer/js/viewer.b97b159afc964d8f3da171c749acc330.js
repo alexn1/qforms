@@ -203,17 +203,30 @@ class ModalController extends Controller {
         return this.id;
     }
     getViewClass() {
-        return Modal;
+        throw new Error('not implemented');
     }
     getApp() {
         return this.app;
     }
+    close() {
+        this.getApp().removeModal(this);
+        this.getApp().rerender();
+    }
     async onDocumentKeyDown(e) {
         console.log('ModalController.onDocumentKeyDown', e);
         if (e.key === 'Escape') {
-            this.getApp().removeModal(this);
-            this.getApp().rerender();
+            this.close();
         }
+    }
+}
+
+class ImageDialogController extends ModalController {
+    getViewClass() {
+        console.log('ImageDialogController.getViewClass');
+        return ImageDialogView;
+    }
+    onCloseClick = async e => {
+        this.close();
     }
 }
 

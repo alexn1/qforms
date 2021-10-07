@@ -1,4 +1,18 @@
-class ModelView extends ReactComponent {
+class View extends ReactComponent {}
+class ImageDialogView extends View {
+  render() {
+    console.log('ImageDialogView.render');
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("button", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: ctrl.onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+  }
+
+}
+class ModelView extends View {
   getActionsForDropdownButton() {
     return this.props.ctrl.getModel().getCol('actions').map(data => ({
       name: Model.getName(data),
@@ -38,9 +52,17 @@ class ApplicationView extends ModelView {
   }
 
   renderModalPages() {
-    return this.props.ctrl.modals.map(ctrl => /*#__PURE__*/React.createElement(Modal, {
-      key: ctrl.getId()
-    }, this.renderView(ctrl)));
+    return this.props.ctrl.modals.map(ctrl => {
+      if (ctrl instanceof PageController) {
+        return /*#__PURE__*/React.createElement(Modal, {
+          key: ctrl.getId()
+        }, this.renderView(ctrl));
+      }
+
+      return this.renderView(ctrl, {
+        key: ctrl.getId()
+      });
+    });
   }
 
   render() {

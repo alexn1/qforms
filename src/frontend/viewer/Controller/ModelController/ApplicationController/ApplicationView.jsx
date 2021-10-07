@@ -14,11 +14,14 @@ class ApplicationView extends ModelView {
         });
     }
     renderModalPages() {
-        return this.props.ctrl.modals.map(ctrl =>
-            <Modal key={ctrl.getId()}>
-                {this.renderView(ctrl)}
-            </Modal>
-        );
+        return this.props.ctrl.modals.map(ctrl => {
+            if (ctrl instanceof PageController) {
+                return <Modal key={ctrl.getId()}>
+                    {this.renderView(ctrl)}
+                </Modal>;
+            }
+            return this.renderView(ctrl, {key: ctrl.getId()});
+        });
     }
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());

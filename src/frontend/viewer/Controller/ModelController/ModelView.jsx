@@ -1,4 +1,4 @@
-class ModelView extends ReactComponent {
+class ModelView extends View {
     getActionsForDropdownButton() {
         return this.props.ctrl.getModel().getCol('actions').map(data => ({
             name : Model.getName(data),

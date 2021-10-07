@@ -1,3 +1,31 @@
+.ImageDialogView {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.ImageDialogView__close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+.ImageDialogView__close:hover line {
+  stroke: white;
+}
+.ImageDialogView__close:active line {
+  stroke: #ccc;
+}
+
 .ApplicationView {
   height: 100%;
 }
