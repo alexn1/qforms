@@ -67,7 +67,7 @@ class RowFormView extends FormView {
     static renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
         return (
-            <div key={key} className="label">
+            <div key={key} className={'RowFormView__label'}>
                 {model.getCaption()}:
                 {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
             </div>
@@ -76,7 +76,7 @@ class RowFormView extends FormView {
     static renderField(fieldCtrl, props = {}) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         return React.createElement(fieldCtrl.getViewClass(), {
-            classList: ['field'],
+            classList: ['RowFormView__field'],
             onCreate: fieldCtrl.onViewCreate,
             ctrl: fieldCtrl,
             ...props
@@ -85,7 +85,7 @@ class RowFormView extends FormView {
     static renderError(fieldCtrl, key) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         return (
-            <div key={key} className="tooltip">
+            <div key={key} className={'RowFormView__tooltip'}>
                 <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
             </div>
         );

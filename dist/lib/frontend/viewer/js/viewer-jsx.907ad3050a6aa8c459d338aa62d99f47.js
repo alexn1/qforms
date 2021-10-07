@@ -705,7 +705,7 @@ class RowFormView extends FormView {
     const model = fieldCtrl.model;
     return /*#__PURE__*/React.createElement("div", {
       key: key,
-      className: "label"
+      className: 'RowFormView__label'
     }, model.getCaption(), ":", model.isNotNull() && /*#__PURE__*/React.createElement("span", {
       style: {
         color: 'red'
@@ -716,7 +716,7 @@ class RowFormView extends FormView {
   static renderField(fieldCtrl, props = {}) {
     // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
     return React.createElement(fieldCtrl.getViewClass(), {
-      classList: ['field'],
+      classList: ['RowFormView__field'],
       onCreate: fieldCtrl.onViewCreate,
       ctrl: fieldCtrl,
       ...props
@@ -727,7 +727,7 @@ class RowFormView extends FormView {
     // console.log('RowFormView.renderError:', fieldCtrl.state);
     return /*#__PURE__*/React.createElement("div", {
       key: key,
-      className: "tooltip"
+      className: 'RowFormView__tooltip'
     }, /*#__PURE__*/React.createElement(Tooltip, {
       position: "left",
       type: "alert",
