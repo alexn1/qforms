@@ -315,7 +315,7 @@
   border-bottom: 1px dotted gray;
   align-items: start;
 }
-.RowFormView__tooltip {
+.RowFormView__error {
   margin-left: 5px;
   align-items: start;
 }

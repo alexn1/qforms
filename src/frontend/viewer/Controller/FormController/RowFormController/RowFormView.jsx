@@ -82,7 +82,7 @@ class RowFormView extends FormView {
     }
     renderError(fieldCtrl, key) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
-        return <div key={key} className={`${this.getCssBlockName()}__tooltip`}>
+        return <div key={key} className={`${this.getCssBlockName()}__error`}>
             <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
         </div>;
     }

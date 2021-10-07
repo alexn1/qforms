@@ -675,7 +675,7 @@ class RowFormView extends FormView {
     // console.log('RowFormView.renderError:', fieldCtrl.state);
     return /*#__PURE__*/React.createElement("div", {
       key: key,
-      className: `${this.getCssBlockName()}__tooltip`
+      className: `${this.getCssBlockName()}__error`
     }, /*#__PURE__*/React.createElement(Tooltip, {
       position: "left",
       type: "alert",
