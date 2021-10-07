@@ -546,14 +546,7 @@ class DatePicker extends ReactComponent {
 window.QForms.DatePicker = DatePicker;
 class DropDownIcon extends ReactComponent {
   render() {
-    const size = this.props.size || 20;
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames(),
-      style: {
-        width: size,
-        height: size
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React.createElement("svg", {
       viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("circle", {
       cx: "5",
@@ -568,7 +561,7 @@ class DropDownIcon extends ReactComponent {
       stroke: "white",
       strokeLinecap: "round",
       strokeLinejoin: "round"
-    })));
+    }));
   }
 
 }
