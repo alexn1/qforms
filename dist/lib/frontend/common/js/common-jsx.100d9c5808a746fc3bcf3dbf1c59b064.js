@@ -1261,8 +1261,13 @@ class Image extends ReactComponent {
   constructor(props) {
     super(props);
 
-    _defineProperty(this, "onImgClick", e => {
+    _defineProperty(this, "onImgClick", async e => {
       console.log('Image.onImgClick');
+
+      if (this.props.onClick) {
+        return await this.props.onClick();
+      }
+
       this.setState(prevState => {
         if (prevState.classList) {
           return {

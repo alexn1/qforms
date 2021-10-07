@@ -7,8 +7,11 @@ class Image extends ReactComponent {
     getNaturalSize() {
         return [this.img.current.naturalWidth, this.img.current.naturalHeight];
     }
-    onImgClick = e => {
+    onImgClick = async e => {
         console.log('Image.onImgClick');
+        if (this.props.onClick) {
+            return await this.props.onClick();
+        }
         this.setState(prevState => {
             if (prevState.classList) {
                 return {classList: null};

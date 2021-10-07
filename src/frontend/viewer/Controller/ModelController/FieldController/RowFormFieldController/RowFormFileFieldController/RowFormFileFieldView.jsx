@@ -25,13 +25,23 @@ class RowFormFileFieldView extends RowFormFieldView {
         // console.log('widgetValue:', widgetValue);
         this.props.ctrl.onChange(widgetValue);
     }
+    onImageClick = async e => {
+        console.log('RowFormFileFieldView.onImageClick');
+        const ctrl = this.props.ctrl;
+        const app = ctrl.getApp();
+        const src = ctrl.getValueForWidget();
+        const imageDialogCtrl = new ImageDialogController(app, app.getNewId(), src);
+        app.addModal(imageDialogCtrl);
+        app.rerender();
+    }
     render() {
         const ctrl = this.props.ctrl;
+        const row = ctrl.getRow();
         const value = ctrl.getValueForWidget();
-        return <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(ctrl.getRow())}>
+        return <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(row)}>
             {!!value &&
                 <div>
-                    <Image ref={this.image} src={value}/>
+                    <Image ref={this.image} src={value} onClick={this.onImageClick}/>
                     <span className="size" ref={this.div}></span>
                     <span className="length">{value.length}</span>
                 </div>

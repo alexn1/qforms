@@ -130,6 +130,9 @@ class ApplicationController extends ModelController {
         this.lastId++;
         return this.lastId;
     }
+    getNewId() {
+        return `c${this.getNextId()}`;
+    }
     addPage(pc) {
         if (this.activePage) {
             this.closePage(this.activePage);

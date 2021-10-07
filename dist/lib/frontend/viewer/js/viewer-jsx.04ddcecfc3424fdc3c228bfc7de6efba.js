@@ -5,7 +5,10 @@ class ImageDialogView extends View {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
-    }, /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement("img", {
+      className: `${this.getCssBlockName()}__image`,
+      src: ctrl.getSrc()
+    }), /*#__PURE__*/React.createElement("button", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)));
@@ -289,6 +292,16 @@ class RowFormFileFieldView extends RowFormFieldView {
       this.props.ctrl.onChange(widgetValue);
     });
 
+    _defineProperty(this, "onImageClick", async e => {
+      console.log('RowFormFileFieldView.onImageClick');
+      const ctrl = this.props.ctrl;
+      const app = ctrl.getApp();
+      const src = ctrl.getValueForWidget();
+      const imageDialogCtrl = new ImageDialogController(app, app.getNewId(), src);
+      app.addModal(imageDialogCtrl);
+      app.rerender();
+    });
+
     this.image = React.createRef();
     this.div = React.createRef();
   }
@@ -310,13 +323,15 @@ class RowFormFileFieldView extends RowFormFieldView {
 
   render() {
     const ctrl = this.props.ctrl;
+    const row = ctrl.getRow();
     const value = ctrl.getValueForWidget();
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
+      style: ctrl.renderViewStyle(row)
     }, !!value && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Image, {
       ref: this.image,
-      src: value
+      src: value,
+      onClick: this.onImageClick
     }), /*#__PURE__*/React.createElement("span", {
       className: "size",
       ref: this.div
@@ -345,14 +360,26 @@ class RowFormFileFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormFileFieldView = RowFormFileFieldView;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormImageFieldView extends RowFormFieldView {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onImageClick", async e => {
+      const ctrl = this.props.ctrl;
+      console.log('RowFormImageFieldView.onImageClick');
+    });
+  }
+
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
       style: ctrl.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(Image, {
-      src: ctrl.getValueForWidget()
+      src: ctrl.getValueForWidget(),
+      onClick: this.onImageClick
     }));
   }
 
