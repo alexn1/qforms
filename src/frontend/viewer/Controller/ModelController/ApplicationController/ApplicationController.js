@@ -121,6 +121,7 @@ class ApplicationController extends ModelController {
         this.modals.push(ctrl);
     }
     removeModal(ctrl) {
+        // console.log('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
         this.modals.splice(i, 1);

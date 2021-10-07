@@ -21,8 +21,5 @@ class Controller extends EventEmitter {
     }
     async onDocumentKeyDown(e) {
         // console.log('Controller.onDocumentKeyDown', e);
-        if (e.key === 'Escape') {
-
-        }
     }
 }

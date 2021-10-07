@@ -188,16 +188,15 @@ class Controller extends EventEmitter {
     }
     async onDocumentKeyDown(e) {
         // console.log('Controller.onDocumentKeyDown', e);
-        if (e.key === 'Escape') {
-
-        }
     }
 }
 
 class ModalController extends Controller {
-    constructor(id) {
+    constructor(app, id) {
         super();
+        if (!app) throw new Error('no app');
         if (!id) throw new Error('no id');
+        this.app = app;
         this.id = id;
     }
     getId() {
@@ -205,6 +204,16 @@ class ModalController extends Controller {
     }
     getViewClass() {
         return Modal;
+    }
+    getApp() {
+        return this.app;
+    }
+    async onDocumentKeyDown(e) {
+        console.log('ModalController.onDocumentKeyDown', e);
+        if (e.key === 'Escape') {
+            this.getApp().removeModal(this);
+            this.getApp().rerender();
+        }
     }
 }
 
@@ -357,6 +366,7 @@ class ApplicationController extends ModelController {
         this.modals.push(ctrl);
     }
     removeModal(ctrl) {
+        // console.log('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
         this.modals.splice(i, 1);
