@@ -1,4 +1,4 @@
-class ApplicationController extends Controller {
+class ApplicationController extends ModelController {
     constructor(model) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);

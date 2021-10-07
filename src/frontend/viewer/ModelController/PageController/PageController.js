@@ -1,4 +1,4 @@
-class PageController extends Controller {
+class PageController extends ModelController {
 
     static create(model, parent, id) {
         // console.log('PageController.create', model.getName());

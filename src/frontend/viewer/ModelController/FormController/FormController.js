@@ -1,4 +1,4 @@
-class FormController extends Controller {
+class FormController extends ModelController {
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
