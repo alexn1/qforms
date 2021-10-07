@@ -660,7 +660,7 @@ class RowFormView extends FormView {
     }, "*"));
   }
 
-  renderField2(fieldCtrl, key) {
+  renderField(fieldCtrl, key) {
     // console.log('RowFormView.renderField2', fieldCtrl.model.getClassName());
     return /*#__PURE__*/React.createElement("div", {
       key: key,
@@ -684,18 +684,18 @@ class RowFormView extends FormView {
     }));
   }
 
-  renderField(fieldCtrl) {
+  renderItem(fieldCtrl) {
     const name = fieldCtrl.getModel().getName();
-    return [this.renderLabel(fieldCtrl, `label.${name}`), this.renderField2(fieldCtrl, `field.${name}`), this.renderError(fieldCtrl, `tooltip.${name}`)];
+    return [this.renderLabel(fieldCtrl, `label.${name}`), this.renderField(fieldCtrl, `field.${name}`), this.renderError(fieldCtrl, `tooltip.${name}`)];
   }
 
   renderFields() {
     // console.log('RowFormView.renderFields');
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__form-grid`
+      className: `${this.getCssBlockName()}__grid`
     }, Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
-      return this.renderField(ctrl.getField(name));
+      return this.renderItem(ctrl.getField(name));
     }));
   }
 

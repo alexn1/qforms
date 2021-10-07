@@ -71,7 +71,7 @@ class RowFormView extends FormView {
             {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
         </div>;
     }
-    renderField2(fieldCtrl, key) {
+    renderField(fieldCtrl, key) {
         // console.log('RowFormView.renderField2', fieldCtrl.model.getClassName());
         return <div key={key} className={`${this.getCssBlockName()}__field`}>
             {React.createElement(fieldCtrl.getViewClass(), {
@@ -86,22 +86,22 @@ class RowFormView extends FormView {
             <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
         </div>;
     }
-    renderField(fieldCtrl) {
+    renderItem(fieldCtrl) {
         const name = fieldCtrl.getModel().getName();
         return [
-            this.renderLabel(fieldCtrl , `label.${name}`),
-            this.renderField2(fieldCtrl, `field.${name}`),
-            this.renderError(fieldCtrl , `tooltip.${name}`)
+            this.renderLabel(fieldCtrl, `label.${name}`),
+            this.renderField(fieldCtrl, `field.${name}`),
+            this.renderError(fieldCtrl, `tooltip.${name}`)
         ];
     }
     renderFields() {
         // console.log('RowFormView.renderFields');
         const ctrl = this.props.ctrl;
-        return <div className={`${this.getCssBlockName()}__form-grid`}>
+        return <div className={`${this.getCssBlockName()}__grid`}>
             {Object.keys(ctrl.fields)
                 .filter(name => ctrl.getField(name).getModel().isVisible())
                 .map(name => {
-                return this.renderField(ctrl.getField(name));
+                return this.renderItem(ctrl.getField(name));
             })}
         </div>;
     }

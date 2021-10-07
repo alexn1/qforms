@@ -301,7 +301,7 @@
   display: flex;
   grid-gap: 5px;
 }
-.RowFormView__form-grid {
+.RowFormView__grid {
   display: grid;
   grid-template-columns: 150px 300px 24px 150px 300px 24px;
   grid-row-gap: 5px;
