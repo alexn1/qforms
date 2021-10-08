@@ -27,7 +27,7 @@
 //                     onTabMouseDown={ctrl.onTabMouseDown}
 //                 />
 //                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>
-//                 {this.renderModalPages()}
+//                 {this.renderModals()}
 //             </div>
 //         );
 //     }

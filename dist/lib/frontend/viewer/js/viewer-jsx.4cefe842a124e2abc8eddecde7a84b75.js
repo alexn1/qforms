@@ -61,7 +61,7 @@ class ApplicationView extends ModelView {
     });
   }
 
-  renderModalPages() {
+  renderModals() {
     return this.props.ctrl.modals.map(ctrl => {
       if (ctrl instanceof PageController) {
         return /*#__PURE__*/React.createElement(Modal, {
@@ -87,7 +87,7 @@ class ApplicationView extends ModelView {
       className: `${this.getCssBlockName()}__main`
     }, this.renderActivePage()), /*#__PURE__*/React.createElement("footer", null, /*#__PURE__*/React.createElement(Statusbar, {
       onCreate: ctrl.onStatusbarCreate
-    })), this.renderModalPages());
+    })), this.renderModals());
   }
 
 }
@@ -122,7 +122,7 @@ window.QForms.ApplicationView = ApplicationView;
 //                     onTabMouseDown={ctrl.onTabMouseDown}
 //                 />
 //                 <Statusbar onCreate={ctrl.onStatusbarCreate}/>
-//                 {this.renderModalPages()}
+//                 {this.renderModals()}
 //             </div>
 //         );
 //     }

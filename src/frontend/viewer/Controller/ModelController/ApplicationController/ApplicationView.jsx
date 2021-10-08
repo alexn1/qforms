@@ -13,7 +13,7 @@ class ApplicationView extends ModelView {
             ...props
         });
     }
-    renderModalPages() {
+    renderModals() {
         return this.props.ctrl.modals.map(ctrl => {
             if (ctrl instanceof PageController) {
                 return <Modal key={ctrl.getId()}>
@@ -37,7 +37,7 @@ class ApplicationView extends ModelView {
                 <footer>
                     <Statusbar onCreate={ctrl.onStatusbarCreate}/>
                 </footer>
-                {this.renderModalPages()}
+                {this.renderModals()}
             </div>
         );
     }
