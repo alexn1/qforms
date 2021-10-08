@@ -4,4 +4,7 @@ class View extends ReactComponent {
         if (!props.ctrl) throw new Error(`${this.constructor.name}: no ctrl`);
         if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
     }
+    getCtrl() {
+        return this.props.ctrl;
+    }
 }

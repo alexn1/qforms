@@ -5,6 +5,10 @@ class View extends ReactComponent {
     if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
   }
 
+  getCtrl() {
+    return this.props.ctrl;
+  }
+
 }
 class ImageDialogView extends View {
   render() {
