@@ -1,6 +1,6 @@
 class RowFormTextBoxFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormTextBoxFieldView;
+        return super.getViewClass() || RowFormTextBoxFieldView;
     }
 }
 window.QForms.RowFormTextBoxFieldController = RowFormTextBoxFieldController;

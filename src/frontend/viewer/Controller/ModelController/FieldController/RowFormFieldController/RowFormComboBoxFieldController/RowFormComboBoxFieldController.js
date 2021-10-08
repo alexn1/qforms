@@ -25,7 +25,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         return this.model.getComboBoxDataSource().getRows();
     }
     getViewClass() {
-        return RowFormComboBoxFieldView;
+        return super.getViewClass() || RowFormComboBoxFieldView;
     }
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');

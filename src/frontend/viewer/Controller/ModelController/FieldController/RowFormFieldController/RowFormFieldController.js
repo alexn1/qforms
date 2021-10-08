@@ -26,9 +26,6 @@ class RowFormFieldController extends FieldController {
         this.resetErrors();
         this.refreshChanged();
     }
-    getViewClass() {
-        throw new Error(`${this.constructor.name}.getViewClass() not implemented`);
-    }
     getRow() {
         return this.model.getForm().getRow();
     }

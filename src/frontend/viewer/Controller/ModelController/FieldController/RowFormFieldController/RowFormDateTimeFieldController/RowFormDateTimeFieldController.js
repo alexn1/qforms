@@ -7,7 +7,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.state.error2 = null;
     }
     getViewClass() {
-        return RowFormDateTimeFieldView;
+        return super.getViewClass() || RowFormDateTimeFieldView;
     }
     getValueForWidget() {
         return this.getValue();

@@ -7,7 +7,7 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
     }
 
     getViewClass() {
-        return RowFormCheckBoxFieldView;
+        return super.getViewClass() || RowFormCheckBoxFieldView;
     }
 }
 

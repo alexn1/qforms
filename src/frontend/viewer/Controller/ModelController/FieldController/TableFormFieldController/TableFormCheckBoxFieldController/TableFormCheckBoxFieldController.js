@@ -1,6 +1,6 @@
 class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormCheckBoxFieldView;
+        return super.getViewClass() || TableFormCheckBoxFieldView;
     }
     getValueForWidget(row) {
         return this.model.getValue(row);

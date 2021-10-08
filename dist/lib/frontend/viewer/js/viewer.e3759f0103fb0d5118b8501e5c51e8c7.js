@@ -202,9 +202,6 @@ class ModalController extends Controller {
     getId() {
         return this.id;
     }
-    getViewClass() {
-        throw new Error('not implemented');
-    }
     getApp() {
         return this.app;
     }
@@ -261,6 +258,13 @@ class ModelController extends Controller {
     getTitle() {
         return this.getModel().getCaption();
     }
+    getViewClass() {
+        // console.log(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
+        const model = this.getModel();
+        if (!model.isAttr('viewClass')) throw new Error(`${this.constructor.name} not supports view`);
+        const viewClassName = model.getAttr('viewClass');
+        return viewClassName ? eval(viewClassName) : null;
+    }
 }
 
 window.QForms.ModelController = ModelController;
@@ -312,7 +316,7 @@ class ApplicationController extends ModelController {
         super.deinit();
     }
     getViewClass() {
-        return ApplicationView;
+        return super.getViewClass() || ApplicationView;
     }
     createView(root) {
         // console.log('ApplicationController.createView');
@@ -545,7 +549,7 @@ window.QForms.ApplicationController = ApplicationController;
 //         super.deinit();
 //     }
 //     getViewClass() {
-//         return MdiApplicationView;
+//         return super.getViewClass() || MdiApplicationView;
 //     }
 //     /*onTabShow(e) {
 //         // console.log('ApplicationController.onTabShow', e.tab.pageController);
@@ -625,16 +629,6 @@ window.QForms.ApplicationController = ApplicationController;
 // }
 //
 // window.QForms.MdiApplicationController = MdiApplicationController;
-
-/*
-class SdiApplicationController extends ApplicationController {
-    getViewClass() {
-        return SdiApplicationView;
-    }
-}
-
-window.QForms.SdiApplicationController = SdiApplicationController;
-*/
 
 class FieldController extends ModelController {
     /*constructor(model, parent) {
@@ -731,9 +725,6 @@ class RowFormFieldController extends FieldController {
         this.setValue(value);
         this.resetErrors();
         this.refreshChanged();
-    }
-    getViewClass() {
-        throw new Error(`${this.constructor.name}.getViewClass() not implemented`);
     }
     getRow() {
         return this.model.getForm().getRow();
@@ -917,7 +908,7 @@ class RowFormCheckBoxFieldController extends RowFormFieldController {
     }
 
     getViewClass() {
-        return RowFormCheckBoxFieldView;
+        return super.getViewClass() || RowFormCheckBoxFieldView;
     }
 }
 
@@ -950,7 +941,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         return this.model.getComboBoxDataSource().getRows();
     }
     getViewClass() {
-        return RowFormComboBoxFieldView;
+        return super.getViewClass() || RowFormComboBoxFieldView;
     }
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
@@ -1046,7 +1037,7 @@ window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
 
 class RowFormDatePickerFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormDatePickerFieldView;
+        return super.getViewClass() || RowFormDatePickerFieldView;
     }
     getValueForWidget() {
         return this.getValue();
@@ -1066,7 +1057,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         this.state.error2 = null;
     }
     getViewClass() {
-        return RowFormDateTimeFieldView;
+        return super.getViewClass() || RowFormDateTimeFieldView;
     }
     getValueForWidget() {
         return this.getValue();
@@ -1241,21 +1232,21 @@ window.QForms.RowFormDateTimeFieldController = RowFormDateTimeFieldController;
 
 class RowFormFileFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormFileFieldView;
+        return super.getViewClass() || RowFormFileFieldView;
     }
 }
 window.QForms.RowFormFileFieldController = RowFormFileFieldController;
 
 class RowFormImageFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormImageFieldView;
+        return super.getViewClass() || RowFormImageFieldView;
     }
 }
 window.QForms.RowFormImageFieldController = RowFormImageFieldController;
 
 class RowFormLinkFieldController extends  RowFormFieldController {
     getViewClass() {
-        return RowFormLinkFieldView;
+        return super.getViewClass() || RowFormLinkFieldView;
     }
     onClick = e => {
         console.log('RowFormLinkFieldController.onClick', e);
@@ -1266,14 +1257,14 @@ window.QForms.RowFormLinkFieldController = RowFormLinkFieldController;
 
 class RowFormTextAreaFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormTextAreaFieldView;
+        return super.getViewClass() || RowFormTextAreaFieldView;
     }
 }
 window.QForms.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
 
 class RowFormTextBoxFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormTextBoxFieldView;
+        return super.getViewClass() || RowFormTextBoxFieldView;
     }
 }
 window.QForms.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
@@ -1284,7 +1275,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
         this.defaultValue = null;
     }
     getViewClass() {
-        return RowFormTimeFieldView;
+        return super.getViewClass() || RowFormTimeFieldView;
     }
     getValueForWidget() {
         return this.getValue();
@@ -1314,7 +1305,7 @@ window.QForms.RowFormTimeFieldController = RowFormTimeFieldController;
 
 class TableFormFieldController extends FieldController {
     getViewClass() {
-        return TableFormTextBoxFieldView;
+        return super.getViewClass() || TableFormTextBoxFieldView;
     }
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
@@ -1328,7 +1319,7 @@ window.QForms.TableFormFieldController = TableFormFieldController;
 
 class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormCheckBoxFieldView;
+        return super.getViewClass() || TableFormCheckBoxFieldView;
     }
     getValueForWidget(row) {
         return this.model.getValue(row);
@@ -1338,7 +1329,7 @@ window.QForms.TableFormCheckBoxFieldController = TableFormCheckBoxFieldControlle
 
 class TableFormComboBoxFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormComboBoxFieldView;
+        return super.getViewClass() || TableFormComboBoxFieldView;
     }
     getValueForWidget(row) {
         const rawValue = this.model.getRawValue(row);
@@ -1499,7 +1490,7 @@ window.QForms.TableFormComboBoxFieldController = TableFormComboBoxFieldControlle
 
 class TableFormDatePickerFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormDatePickerFieldView;
+        return super.getViewClass() || TableFormDatePickerFieldView;
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
@@ -1511,7 +1502,7 @@ window.QForms.TableFormDatePickerFieldController = TableFormDatePickerFieldContr
 
 class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormDateTimeFieldView;
+        return super.getViewClass() || TableFormDateTimeFieldView;
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
@@ -1523,7 +1514,7 @@ window.QForms.TableFormDateTimeFieldController = TableFormDateTimeFieldControlle
 
 class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormLinkFieldView;
+        return super.getViewClass() || TableFormLinkFieldView;
     }
     onClick = e => {
         console.log('TableFormLinkFieldController.onClick', e);
@@ -1555,14 +1546,14 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.contentEditable = false;
     }*/
     /*getViewClass() {
-        return TableFormTextBoxFieldView;
+        return super.getViewClass() || TableFormTextBoxFieldView;
     }*/
 }
 window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
 
 class TableFormTimeFieldController extends TableFormFieldController {
     /*getViewClass() {
-        return TableFormTextBoxFieldView;
+        return super.getViewClass() || TableFormTextBoxFieldView;
     }*/
     getValueForWidget(row) {
         const value = this.model.getValue(row);
@@ -1803,7 +1794,7 @@ class RowFormController extends FormController {
     }
     getViewClass() {
         // console.log('RowFormController.getViewClass', this.model.getFullName());
-        return RowFormView;
+        return super.getViewClass() || RowFormView;
     }
     getActiveRow(withChanges) {
         return this.model.getRow(withChanges);
@@ -1823,7 +1814,7 @@ class TableFormController extends FormController {
         this.grid = null;
     }
     getViewClass() {
-        return TableFormView;
+        return super.getViewClass() || TableFormView;
     }
     init() {
         super.init();
@@ -2223,7 +2214,7 @@ class PageController extends ModelController {
         return this.parent;
     }
     getViewClass() {
-        return PageView;
+        return super.getViewClass() || PageView;
     }
     static createLink(params = null) {
         // const query = window.location.search.split('?')[1];

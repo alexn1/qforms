@@ -166,7 +166,7 @@ class RowFormController extends FormController {
     }
     getViewClass() {
         // console.log('RowFormController.getViewClass', this.model.getFullName());
-        return RowFormView;
+        return super.getViewClass() || RowFormView;
     }
     getActiveRow(withChanges) {
         return this.model.getRow(withChanges);

@@ -9,9 +9,6 @@ class ModalController extends Controller {
     getId() {
         return this.id;
     }
-    getViewClass() {
-        throw new Error('not implemented');
-    }
     getApp() {
         return this.app;
     }

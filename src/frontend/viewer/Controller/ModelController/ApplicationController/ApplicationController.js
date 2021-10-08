@@ -45,7 +45,7 @@ class ApplicationController extends ModelController {
         super.deinit();
     }
     getViewClass() {
-        return ApplicationView;
+        return super.getViewClass() || ApplicationView;
     }
     createView(root) {
         // console.log('ApplicationController.createView');

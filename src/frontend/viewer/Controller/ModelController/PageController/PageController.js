@@ -132,7 +132,7 @@ class PageController extends ModelController {
         return this.parent;
     }
     getViewClass() {
-        return PageView;
+        return super.getViewClass() || PageView;
     }
     static createLink(params = null) {
         // const query = window.location.search.split('?')[1];

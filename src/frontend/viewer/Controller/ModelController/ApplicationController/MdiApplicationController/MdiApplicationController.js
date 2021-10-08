@@ -17,7 +17,7 @@
 //         super.deinit();
 //     }
 //     getViewClass() {
-//         return MdiApplicationView;
+//         return super.getViewClass() || MdiApplicationView;
 //     }
 //     /*onTabShow(e) {
 //         // console.log('ApplicationController.onTabShow', e.tab.pageController);

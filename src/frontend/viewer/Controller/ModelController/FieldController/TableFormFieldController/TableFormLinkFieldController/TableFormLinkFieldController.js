@@ -1,6 +1,6 @@
 class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormLinkFieldView;
+        return super.getViewClass() || TableFormLinkFieldView;
     }
     onClick = e => {
         console.log('TableFormLinkFieldController.onClick', e);

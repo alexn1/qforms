@@ -1,6 +1,6 @@
 class RowFormImageFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormImageFieldView;
+        return super.getViewClass() || RowFormImageFieldView;
     }
 }
 window.QForms.RowFormImageFieldController = RowFormImageFieldController;

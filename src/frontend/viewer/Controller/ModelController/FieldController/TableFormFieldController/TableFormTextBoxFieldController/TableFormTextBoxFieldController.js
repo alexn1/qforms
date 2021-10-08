@@ -15,7 +15,7 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.contentEditable = false;
     }*/
     /*getViewClass() {
-        return TableFormTextBoxFieldView;
+        return super.getViewClass() || TableFormTextBoxFieldView;
     }*/
 }
 window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;

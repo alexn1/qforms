@@ -7,7 +7,7 @@ class TableFormController extends FormController {
         this.grid = null;
     }
     getViewClass() {
-        return TableFormView;
+        return super.getViewClass() || TableFormView;
     }
     init() {
         super.init();

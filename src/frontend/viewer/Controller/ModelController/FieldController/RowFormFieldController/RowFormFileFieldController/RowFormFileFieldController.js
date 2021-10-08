@@ -1,6 +1,6 @@
 class RowFormFileFieldController extends RowFormFieldController {
     getViewClass() {
-        return RowFormFileFieldView;
+        return super.getViewClass() || RowFormFileFieldView;
     }
 }
 window.QForms.RowFormFileFieldController = RowFormFileFieldController;

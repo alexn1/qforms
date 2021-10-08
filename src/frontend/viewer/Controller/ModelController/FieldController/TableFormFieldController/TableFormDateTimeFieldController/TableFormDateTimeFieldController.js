@@ -1,6 +1,6 @@
 class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
-        return TableFormDateTimeFieldView;
+        return super.getViewClass() || TableFormDateTimeFieldView;
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
