@@ -96,6 +96,9 @@ class TableFormView extends FormView {
         const ctrl = this.props.ctrl;
         return ctrl.model.getDefaultDataSource().getRows();
     }
+    getGridExtraColumn() {
+        return true;
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -115,7 +118,7 @@ class TableFormView extends FormView {
                     onLinkClick={ctrl.onGridLinkClick}
                     renderGridCellView={this.renderGridCellView}
                     updated={ctrl.getUpdated()}
-                    extraColumn={true}
+                    extraColumn={this.getGridExtraColumn()}
                     selectedKey={ctrl.getParent().getModel().options.selectedKey}
                     createLinkCallback={ctrl.createLinkCallback}
                 />
