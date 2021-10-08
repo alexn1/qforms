@@ -1000,10 +1000,7 @@ class PageView extends ModelView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("h1", {
       className: `${this.getCssBlockName()}__caption`
-    }, this.renderTitle(), ctrl.getModel().isModal() && /*#__PURE__*/React.createElement("span", {
-      className: `${this.getCssBlockName()}__close`,
-      onClick: ctrl.onClosePageClick
-    }, "\xD7"));
+    }, this.renderTitle());
   }
 
   renderToolbar() {
@@ -1043,7 +1040,10 @@ class PageView extends ModelView {
       className: `${this.getCssBlockName()} full frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows"
-    }, this.renderCaption(),
+    }, this.renderCaption(), ctrl.getModel().isModal() && /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: ctrl.onClosePageClick
+    }, "\xD7"),
     /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
     this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`

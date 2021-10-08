@@ -42,7 +42,6 @@ class PageView extends ModelView {
         const ctrl = this.props.ctrl;
         return <h1 className={`${this.getCssBlockName()}__caption`}>
             {this.renderTitle()}
-            {ctrl.getModel().isModal() && <span className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>×</span>}
         </h1>;
     }
     onActionsClick = async li => {
@@ -108,6 +107,7 @@ class PageView extends ModelView {
             <div className={`${this.getCssBlockName()} full frame`}>
                 <div className="frame__container flex-rows">
                     {this.renderCaption()}
+                    {ctrl.getModel().isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>×</div>}
                     {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
