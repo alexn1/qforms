@@ -368,8 +368,10 @@
 }
 .PageView__caption {
   margin: 0;
-  color: #333;
+  color: #777;
   font-size: 24px;
+  font-family: Roboto;
+  font-weight: 300;
 }
 .PageView__star {
   color: red;
@@ -379,7 +381,7 @@
   cursor: pointer;
 }
 .PageView__close:hover {
-  color: #eee;
+  color: #aaa;
 }
 .PageView__toolbar {
   display: flex;
@@ -389,9 +391,7 @@
   min-height: 300px;
 }
 .Modal .PageView__caption {
-  background-color: #398bce;
-  color: white;
-  padding: 5px 10px;
+  padding: 0 0 5px 0;
 }
 
 .login {
