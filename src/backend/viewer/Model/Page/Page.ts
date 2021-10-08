@@ -31,8 +31,10 @@ class Page extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.name = this.getAttr('name');
-        response.caption = this.getAttr('caption');
+        response.name      = this.getAttr('name');
+        response.caption   = this.getAttr('caption');
+        response.cssBlock  = this.getAttr('cssBlock');
+        response.viewClass = this.getAttr('viewClass');
     }
 
     async fill(context): Promise<any> {

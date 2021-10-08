@@ -17,8 +17,10 @@ class PageEditor extends Editor {
             '@class'     :'Page',
             '@attributes': {
                 formatVersion: '0.1',
-                name     : params['name'],
-                caption  : params['caption'] ? params['caption'] : params['name']
+                name     : params.name,
+                caption  : params.caption   !== undefined ? params.caption   : params.name,
+                cssBlock : params.cssBlock  !== undefined ? params.cssBlock  :          '',
+                viewClass: params.viewClass !== undefined ? params.viewClass :          '',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])

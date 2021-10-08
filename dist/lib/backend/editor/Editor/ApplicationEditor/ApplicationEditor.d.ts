@@ -17,6 +17,8 @@ declare class ApplicationEditor extends Editor {
             password: any;
             lang: any;
             theme: any;
+            cssBlock: any;
+            viewClass: any;
         };
         env: any;
         databases: any[];
@@ -32,6 +34,8 @@ declare class ApplicationEditor extends Editor {
                 formatVersion: string;
                 name: any;
                 caption: any;
+                cssBlock: any;
+                viewClass: any;
             };
             dataSources: any[];
             actions: any[];

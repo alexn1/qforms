@@ -109,6 +109,8 @@ class Application extends Model {
         response.caption = this.getAttr('caption');
         response.lang = this.getAttr('lang');
         response.theme = this.getAttr('theme');
+        response.cssBlock = this.getAttr('cssBlock');
+        response.viewClass = this.getAttr('viewClass');
     }
 
     async fill(context: Context): Promise<any> {

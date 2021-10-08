@@ -5,10 +5,11 @@ class FormEditor extends Editor {
     static createAttributes(params): any {
         if (!params.name) throw new Error('no name');
         return {
-            name    : params.name,
-            caption : params.caption  !== undefined ? params.caption : params.name,
-            visible : params.visible  !== undefined ? params.visible :      'true',
-            cssBlock: params.cssBlock !== undefined ? params.cssBlock:          '',
+            name     : params.name,
+            caption  : params.caption   !== undefined ? params.caption   : params.name,
+            visible  : params.visible   !== undefined ? params.visible   :      'true',
+            cssBlock : params.cssBlock  !== undefined ? params.cssBlock  :          '',
+            viewClass: params.viewClass !== undefined ? params.viewClass :          '',
         };
     }
     static createData(params): any {

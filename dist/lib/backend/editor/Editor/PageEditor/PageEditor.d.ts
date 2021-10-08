@@ -11,6 +11,8 @@ declare class PageEditor extends Editor {
             formatVersion: string;
             name: any;
             caption: any;
+            cssBlock: any;
+            viewClass: any;
         };
         dataSources: any[];
         actions: any[];

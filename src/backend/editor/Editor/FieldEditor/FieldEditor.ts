@@ -16,6 +16,7 @@ class FieldEditor extends Editor {
             type        : params.type         !== undefined ? params.type         :             '',
             width       : params.width        !== undefined ? params.width        :             '',
             cssBlock    : params.cssBlock     !== undefined ? params.cssBlock     :             '',
+            viewClass   : params.viewClass    !== undefined ? params.viewClass    :             '',
         }
     }
     changeClass(newClassName) {

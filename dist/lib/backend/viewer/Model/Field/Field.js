@@ -24,6 +24,7 @@ class Field extends Model_1.default {
         response.type = this.getAttr('type');
         response.width = this.getAttr('width');
         response.cssBlock = this.getAttr('cssBlock');
+        response.viewClass = this.getAttr('viewClass');
     }
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'fields', this.getName());

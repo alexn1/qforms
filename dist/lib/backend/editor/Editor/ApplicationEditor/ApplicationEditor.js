@@ -28,7 +28,9 @@ class ApplicationEditor extends Editor {
                 user: params.user || 'admin',
                 password: params.password || 'admin',
                 lang: params.lang || 'en',
-                theme: params.theme || 'standard'
+                theme: params.theme || 'standard',
+                cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
+                viewClass: params.viewClass !== undefined ? params.viewClass : '',
             },
             env: params.env ? params.env : {},
             databases: [

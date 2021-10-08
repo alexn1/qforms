@@ -75,6 +75,8 @@ class Application extends Model_1.default {
         response.caption = this.getAttr('caption');
         response.lang = this.getAttr('lang');
         response.theme = this.getAttr('theme');
+        response.cssBlock = this.getAttr('cssBlock');
+        response.viewClass = this.getAttr('viewClass');
     }
     async fill(context) {
         // console.log('Application.fill');
