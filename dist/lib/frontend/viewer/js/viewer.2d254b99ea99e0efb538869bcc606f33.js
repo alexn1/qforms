@@ -1304,9 +1304,6 @@ class RowFormTimeFieldController extends RowFormFieldController {
 window.QForms.RowFormTimeFieldController = RowFormTimeFieldController;
 
 class TableFormFieldController extends FieldController {
-    getViewClass() {
-        return super.getViewClass() || TableFormTextBoxFieldView;
-    }
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.model.getValue(row));
@@ -1525,11 +1522,16 @@ class TableFormLinkFieldController extends TableFormFieldController {
 window.QForms.TableFormLinkFieldController = TableFormLinkFieldController;
 
 class TableFormTextAreaFieldController extends TableFormFieldController {
-
+    getViewClass() {
+        return super.getViewClass() || TableFormTextAreaFieldView;
+    }
 }
 window.QForms.TableFormTextAreaFieldController = TableFormTextAreaFieldController;
 
 class TableFormTextBoxFieldController extends TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || TableFormTextBoxFieldView;
+    }
     /*beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
         view.firstElementChild.contentEditable = true;
@@ -1545,16 +1547,13 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.style.MozUserSelect = 'none';
         view.firstElementChild.contentEditable = false;
     }*/
-    /*getViewClass() {
-        return super.getViewClass() || TableFormTextBoxFieldView;
-    }*/
 }
 window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
 
 class TableFormTimeFieldController extends TableFormFieldController {
-    /*getViewClass() {
-        return super.getViewClass() || TableFormTextBoxFieldView;
-    }*/
+    getViewClass() {
+        return super.getViewClass() || TableFormTimeFieldView;
+    }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
         return TimeBox.getStringValue(value);

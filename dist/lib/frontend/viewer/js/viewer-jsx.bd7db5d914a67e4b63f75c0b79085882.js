@@ -612,6 +612,21 @@ class TableFormLinkFieldView extends TableFormFieldView {
 }
 
 window.QForms.TableFormLinkFieldView = TableFormLinkFieldView;
+class TableFormTextAreaFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForWidget(row)));
+  }
+
+}
+
+window.QForms.TableFormTextAreaFieldView = TableFormTextAreaFieldView;
 class TableFormTextBoxFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
@@ -627,6 +642,21 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
 }
 
 window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+class TableFormTimeFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: ctrl.renderViewStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, ctrl.getValueForWidget(row)));
+  }
+
+}
+
+window.QForms.TableFormTimeFieldView = TableFormTimeFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class FormView extends ModelView {

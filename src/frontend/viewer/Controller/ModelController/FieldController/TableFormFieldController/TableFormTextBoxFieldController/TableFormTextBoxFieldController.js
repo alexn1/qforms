@@ -1,4 +1,7 @@
 class TableFormTextBoxFieldController extends TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || TableFormTextBoxFieldView;
+    }
     /*beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
         view.firstElementChild.contentEditable = true;
@@ -13,9 +16,6 @@ class TableFormTextBoxFieldController extends TableFormFieldController {
     /*endEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'none';
         view.firstElementChild.contentEditable = false;
-    }*/
-    /*getViewClass() {
-        return super.getViewClass() || TableFormTextBoxFieldView;
     }*/
 }
 window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
