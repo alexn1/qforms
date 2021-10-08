@@ -5,7 +5,7 @@ class RowFormImageFieldView extends RowFormFieldView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getCssClassNames()} style={ctrl.renderViewStyle(ctrl.getRow())}>
+        return <div className={this.getCssClassNames()} style={this.renderViewStyle(ctrl.getRow())}>
             <Image src={ctrl.getValueForWidget()}
                    onClick={this.onImageClick}
             />

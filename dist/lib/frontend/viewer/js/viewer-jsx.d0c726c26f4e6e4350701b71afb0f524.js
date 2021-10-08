@@ -129,7 +129,12 @@ window.QForms.ApplicationView = ApplicationView;
 // }
 //
 // window.QForms.MdiApplicationView = MdiApplicationView;
-class FieldView extends ModelView {}
+class FieldView extends ModelView {
+  renderViewStyle(row) {
+    return this.props.ctrl.renderViewStyle(row);
+  }
+
+}
 class RowFormFieldView extends FieldView {
   getClassList() {
     const ctrl = this.props.ctrl;
@@ -248,7 +253,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`,
-      style: ctrl.renderViewStyle(ctrl.getRow())
+      style: this.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
@@ -328,7 +333,7 @@ class RowFormFileFieldView extends RowFormFieldView {
     const value = ctrl.getValueForWidget();
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, !!value && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Image, {
       ref: this.image,
       src: value,
@@ -377,7 +382,7 @@ class RowFormImageFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
-      style: ctrl.renderViewStyle(ctrl.getRow())
+      style: this.renderViewStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(Image, {
       src: ctrl.getValueForWidget(),
       onClick: this.onImageClick
@@ -541,7 +546,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement(CheckBox, {
       ref: this.span,
       checked: ctrl.getValueForWidget(row),
@@ -559,7 +564,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
@@ -574,7 +579,7 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
@@ -589,7 +594,7 @@ class TableFormDateTimeFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
@@ -604,7 +609,7 @@ class TableFormLinkFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("a", {
       href: "#",
       onClick: ctrl.onClick
@@ -620,7 +625,7 @@ class TableFormTextAreaFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
@@ -635,7 +640,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
@@ -650,7 +655,7 @@ class TableFormTimeFieldView extends TableFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ellipsis`,
-      style: ctrl.renderViewStyle(row)
+      style: this.renderViewStyle(row)
     }, /*#__PURE__*/React.createElement("span", {
       ref: this.span
     }, ctrl.getValueForWidget(row)));
