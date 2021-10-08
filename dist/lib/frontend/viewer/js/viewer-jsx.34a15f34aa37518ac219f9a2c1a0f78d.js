@@ -461,6 +461,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextBox, {
+      cssBlockName: `${this.getCssBlockName()}__input`,
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),

@@ -20,6 +20,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
             <TextBox
+                cssBlockName={`${this.getCssBlockName()}__input`}
                 onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}

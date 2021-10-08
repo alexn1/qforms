@@ -1,18 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextBoxFieldView {
   position: relative;
-  > input {
-    width  : 100%;
-    height : 20px;
-    border : none;
-    padding: 0 5px 0 5px;
-    &[readonly] {
-      background-color: lightgoldenrodyellow;
-      color           : gray;
-    }
-  }
-  &.error > input {
+  &.error > .RowFormTextBoxFieldView__input {
     background-color: #f2dede;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormTextBoxFieldView__input {
+  width  : 100%;
+  height : 20px;
+  border : none;
+  padding: 0 5px 0 5px;
+  &[readonly] {
+    background-color: lightgoldenrodyellow;
+    color           : gray;
   }
 }
 
@@ -35,6 +37,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.debug .RowFormTextBoxFieldView.changed > input {
+.debug .RowFormTextBoxFieldView.changed > .RowFormTextBoxFieldView__input {
   background-color: rgb(238, 253, 234);
 }

@@ -16,6 +16,10 @@ class ReactComponent extends React.Component {
   }
 
   getCssBlockName() {
+    if (this.props.cssBlockName) {
+      return this.props.cssBlockName;
+    }
+
     return this.constructor.name;
   }
 

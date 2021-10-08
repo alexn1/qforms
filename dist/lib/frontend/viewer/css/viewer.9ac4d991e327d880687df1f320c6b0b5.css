@@ -243,18 +243,18 @@
 .RowFormTextBoxFieldView {
   position: relative;
 }
-.RowFormTextBoxFieldView > input {
+.RowFormTextBoxFieldView.error > .RowFormTextBoxFieldView__input {
+  background-color: #f2dede;
+}
+.RowFormTextBoxFieldView__input {
   width: 100%;
   height: 20px;
   border: none;
   padding: 0 5px 0 5px;
 }
-.RowFormTextBoxFieldView > input[readonly] {
+.RowFormTextBoxFieldView__input[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
-}
-.RowFormTextBoxFieldView.error > input {
-  background-color: #f2dede;
 }
 .RowFormTextBoxFieldView__close {
   display: flex;
@@ -272,7 +272,7 @@
 .RowFormTextBoxFieldView__close:hover svg line {
   stroke: black;
 }
-.debug .RowFormTextBoxFieldView.changed > input {
+.debug .RowFormTextBoxFieldView.changed > .RowFormTextBoxFieldView__input {
   background-color: #eefdea;
 }
 
