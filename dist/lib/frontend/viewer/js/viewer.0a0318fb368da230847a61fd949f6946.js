@@ -680,7 +680,7 @@ class FieldController extends ModelController {
         }
         return stringValue;
     }
-    renderViewStyle(row) {
+    getViewStyle(row) {
         return null;
     }
     async openPage(options) {

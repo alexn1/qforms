@@ -135,7 +135,7 @@ window.QForms.ApplicationView = ApplicationView;
 // window.QForms.MdiApplicationView = MdiApplicationView;
 class FieldView extends ModelView {
   getStyle(row) {
-    return this.getCtrl().renderViewStyle(row);
+    return this.getCtrl().getViewStyle(row);
   }
 
 }
