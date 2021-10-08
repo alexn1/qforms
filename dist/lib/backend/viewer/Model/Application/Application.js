@@ -322,6 +322,10 @@ class Application extends Model_1.default {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
     getViewClassName() {
+        const viewClass = this.getAttr('viewClass');
+        if (viewClass) {
+            return viewClass;
+        }
         return 'ApplicationView';
     }
     async connect(context) {

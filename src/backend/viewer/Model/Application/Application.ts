@@ -391,6 +391,10 @@ class Application extends Model {
     }
 
     getViewClassName(): string {
+        const viewClass = this.getAttr('viewClass');
+        if (viewClass) {
+            return viewClass;
+        }
         return 'ApplicationView';
     }
 
