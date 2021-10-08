@@ -240,6 +240,7 @@ class CheckBox extends ReactComponent {
 window.QForms.CheckBox = CheckBox;
 class CloseIcon extends ReactComponent {
   render() {
+    const strokeWidth = this.props.strokeWidth || 1.1;
     return /*#__PURE__*/React.createElement("svg", {
       viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("line", {
@@ -248,7 +249,7 @@ class CloseIcon extends ReactComponent {
       x2: "8",
       y2: "8",
       stroke: "#aaa",
-      strokeWidth: "1.1",
+      strokeWidth: strokeWidth,
       strokeLinecap: "round",
       strokeMiterlimit: "10"
     }), /*#__PURE__*/React.createElement("line", {
@@ -257,7 +258,7 @@ class CloseIcon extends ReactComponent {
       x2: "2",
       y2: "8",
       stroke: "#aaa",
-      strokeWidth: "1.1",
+      strokeWidth: strokeWidth,
       strokeLinecap: "round",
       strokeMiterlimit: "10"
     }));
