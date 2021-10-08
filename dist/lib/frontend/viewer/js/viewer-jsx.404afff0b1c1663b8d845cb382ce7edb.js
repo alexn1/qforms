@@ -462,7 +462,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null
     }), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)));
   }
