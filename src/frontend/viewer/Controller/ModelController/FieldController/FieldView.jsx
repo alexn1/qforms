@@ -1,5 +1,5 @@
 class FieldView extends ModelView {
-    renderViewStyle(row) {
-        return this.props.ctrl.renderViewStyle(row);
+    getStyle(row) {
+        return this.getCtrl().renderViewStyle(row);
     }
 }

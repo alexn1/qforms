@@ -3,7 +3,7 @@ class TableFormDateTimeFieldView extends TableFormFieldView {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssClassNames()} ellipsis`} style={this.renderViewStyle(row)}>
+            <div className={`${this.getCssClassNames()} ellipsis`} style={this.getStyle(row)}>
                 <span ref={this.span}>{ctrl.getValueForWidget(row)}</span>
             </div>
         );
