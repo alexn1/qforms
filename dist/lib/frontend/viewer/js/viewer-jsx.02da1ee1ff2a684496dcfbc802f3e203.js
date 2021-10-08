@@ -406,6 +406,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextArea, {
+      cssBlockName: `${this.getCssBlockName()}__textarea`,
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),

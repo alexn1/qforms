@@ -3,6 +3,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
             <TextArea
+                cssBlockName={`${this.getCssBlockName()}__textarea`}
                 onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}

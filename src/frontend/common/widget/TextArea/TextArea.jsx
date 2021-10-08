@@ -25,6 +25,7 @@ class TextArea extends ReactComponent {
         // console.log('TextArea.render');
         return (
             <textarea
+                className={this.getCssClassNames()}
                 value={this.state.value}
                 readOnly={this.props.readOnly}
                 onChange={this.onChange}

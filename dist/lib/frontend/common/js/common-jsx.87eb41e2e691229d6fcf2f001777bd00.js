@@ -1624,6 +1624,7 @@ class TextArea extends ReactComponent {
   render() {
     // console.log('TextArea.render');
     return /*#__PURE__*/React.createElement("textarea", {
+      className: this.getCssClassNames(),
       value: this.state.value,
       readOnly: this.props.readOnly,
       onChange: this.onChange,

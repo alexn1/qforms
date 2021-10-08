@@ -1,22 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextAreaFieldView {
-    > textarea {
-        width  : 100%;
-        display: block;
-        border-width: 0;
-        padding     : 0 5px 0 5px;
-        //text-shadow : 1px 1px 1px rgba(255, 255, 255, 0.5);
-        font-size: inherit;
-    }
-
-    &.error > textarea {
+    &.error > .RowFormTextAreaFieldView__textarea {
         background-color: #f2dede;
-    }
-    > textarea[readonly] {
-        background-color: lightgoldenrodyellow;
-        color: gray;
     }
 }
 
-.debug .RowFormTextAreaFieldView.changed > textarea {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormTextAreaFieldView__textarea {
+    width       : 100%;
+    display     : block;
+    border-width: 0;
+    padding     : 0 5px 0 5px;
+    font-size   : inherit;
+    &[readonly] {
+        background-color: lightgoldenrodyellow;
+        color           : gray;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.debug .RowFormTextAreaFieldView.changed > .RowFormTextAreaFieldView__textarea {
     background-color: rgb(238, 253, 234);
 }

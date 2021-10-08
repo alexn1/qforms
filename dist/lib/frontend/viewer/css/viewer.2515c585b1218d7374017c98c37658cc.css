@@ -196,21 +196,21 @@
   color: blue;
 }
 
-.RowFormTextAreaFieldView > textarea {
+.RowFormTextAreaFieldView.error > .RowFormTextAreaFieldView__textarea {
+  background-color: #f2dede;
+}
+.RowFormTextAreaFieldView__textarea {
   width: 100%;
   display: block;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-size: inherit;
 }
-.RowFormTextAreaFieldView.error > textarea {
-  background-color: #f2dede;
-}
-.RowFormTextAreaFieldView > textarea[readonly] {
+.RowFormTextAreaFieldView__textarea[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.debug .RowFormTextAreaFieldView.changed > textarea {
+.debug .RowFormTextAreaFieldView.changed > .RowFormTextAreaFieldView__textarea {
   background-color: #eefdea;
 }
 
