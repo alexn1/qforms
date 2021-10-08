@@ -129,7 +129,8 @@ window.QForms.ApplicationView = ApplicationView;
 // }
 //
 // window.QForms.MdiApplicationView = MdiApplicationView;
-class RowFormFieldView extends ModelView {
+class FieldView extends ModelView {}
+class RowFormFieldView extends FieldView {
   getClassList() {
     const ctrl = this.props.ctrl;
     return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
@@ -519,7 +520,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormTimeFieldView = RowFormTimeFieldView;
-class TableFormFieldView extends ModelView {
+class TableFormFieldView extends FieldView {
   constructor(props) {
     super(props);
     this.span = React.createRef();

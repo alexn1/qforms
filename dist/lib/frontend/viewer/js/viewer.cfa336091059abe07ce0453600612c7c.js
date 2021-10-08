@@ -1308,9 +1308,6 @@ class TableFormFieldController extends FieldController {
         // console.log('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.model.getValue(row));
     }
-    renderViewStyle(row) {
-        return null;
-    }
 }
 window.QForms.TableFormFieldController = TableFormFieldController;
 

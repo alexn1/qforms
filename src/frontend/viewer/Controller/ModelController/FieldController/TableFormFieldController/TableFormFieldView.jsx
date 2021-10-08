@@ -1,4 +1,4 @@
-class TableFormFieldView extends ModelView {
+class TableFormFieldView extends FieldView {
     constructor(props) {
         super(props);
         this.span = React.createRef();

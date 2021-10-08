@@ -1,4 +1,4 @@
-class RowFormFieldView extends ModelView {
+class RowFormFieldView extends FieldView {
     getClassList() {
         const ctrl = this.props.ctrl;
         return [
