@@ -468,7 +468,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null
     }), /*#__PURE__*/React.createElement("div", {
-      className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
+      className: `${this.getCssClassNames()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)));
   }
@@ -973,10 +973,9 @@ class PageView extends ModelView {
 
   renderCaption() {
     const ctrl = this.props.ctrl;
-    const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("h1", {
       className: `${this.getCssBlockName()}__caption`
-    }, this.renderTitle(), model.isModal() && /*#__PURE__*/React.createElement("span", {
+    }, this.renderTitle(), ctrl.getModel().isModal() && /*#__PURE__*/React.createElement("span", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
     }, "\xD7"));
