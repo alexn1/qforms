@@ -2,9 +2,14 @@ const path = require('path');
 const gulp = require('gulp');
 
 const backend_ts = require('./backend_ts');
+const fs = require("fs");
 
 const SRC_PATH   = './src';
 const BUILD_PATH = './dist';
+
+async function backend_clean() {
+    fs.rmdirSync(path.join('dist', 'lib/backend'), { recursive: true });
+}
 
 function backend_ejs() {
     return gulp.src(path.join(SRC_PATH, 'backend/**/*.ejs'))
@@ -23,6 +28,7 @@ function backend_js() {
 
 const backend = gulp.series(
     ...[
+        ...(process.argv.indexOf('--backend_ts') > -1 ? [backend_clean] : []),
         backend_ejs,
         backend_json,
         backend_js,

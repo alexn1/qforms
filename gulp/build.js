@@ -7,7 +7,7 @@ const frontend = require("./frontend");
 
 module.exports = gulp.series(
     ...[
-        ...(process.argv.indexOf('--backend_ts') > -1 ? [clean] : []),
+        // clean,
         root,
         backend,
         frontend
