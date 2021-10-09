@@ -1070,7 +1070,7 @@ class PageView extends ModelView {
     }, /*#__PURE__*/React.createElement(Tab, {
       tabs: this.getTabs(),
       classList: ['Tab-blue', 'full']
-    })))), ctrl.getModel().isModal() && /*#__PURE__*/React.createElement("div", {
+    })))), model.isModal() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)));

@@ -123,7 +123,7 @@ class PageView extends ModelView {
                         </div>
                     }
                 </div>
-                {ctrl.getModel().isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
+                {model.isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
                     <CloseIcon/>
                 </div>}
             </div>
