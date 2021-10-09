@@ -1034,7 +1034,7 @@ class PageView extends ModelView {
     }), model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
       title: model.getApp().getText().page.reset,
       onClick: ctrl.onResetClick
-    }), model.hasRowFormWithDefaultSqlDataSource() && model.isModal() && /*#__PURE__*/React.createElement(Button, {
+    }), model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       width: width,
       title: model.getApp().getText().page.saveAndClose,
       onClick: ctrl.onSaveAndCloseClick,
@@ -1050,6 +1050,11 @@ class PageView extends ModelView {
   }*/
 
 
+  isToolbar() {
+    const model = this.getCtrl().getModel();
+    return model.options.selectMode || model.isModal() && model.hasRowFormWithDefaultSqlDataSource() || model.hasActions();
+  }
+
   render() {
     console.log('PageView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
@@ -1061,9 +1066,7 @@ class PageView extends ModelView {
     }, this.renderCaption(), ctrl.getModel().isModal() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
-    }, "\xD7"),
-    /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
-    this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
+    }, "\xD7"), this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container"

@@ -70,7 +70,7 @@ class PageView extends ModelView {
                             onClick={ctrl.onResetClick}
                     />
                 }
-                {model.hasRowFormWithDefaultSqlDataSource() && model.isModal() &&
+                {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() &&
                     <Button
                         width={width}
                         title={model.getApp().getText().page.saveAndClose}
@@ -99,6 +99,12 @@ class PageView extends ModelView {
     /*shouldComponentUpdate(nextProps, nextState) {
         return false;
     }*/
+    isToolbar() {
+        const model = this.getCtrl().getModel();
+        return model.options.selectMode
+            || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+            || model.hasActions();
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -108,7 +114,7 @@ class PageView extends ModelView {
                 <div className="frame__container flex-rows">
                     {this.renderCaption()}
                     {ctrl.getModel().isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>×</div>}
-                    {/*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/ this.renderToolbar()}
+                    {this.isToolbar() && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
                         <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
