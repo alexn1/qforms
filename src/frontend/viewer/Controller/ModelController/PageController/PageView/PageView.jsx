@@ -111,9 +111,8 @@ class PageView extends ModelView {
         const model = ctrl.getModel();
         return (
             <div className={`${this.getCssBlockName()} full frame`}>
-                <div className="frame__container flex-rows">
+                <div className="frame__container flex-rows grid-gap-10">
                     {this.renderCaption()}
-                    {ctrl.getModel().isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>×</div>}
                     {this.isToolbar() && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&
@@ -124,6 +123,9 @@ class PageView extends ModelView {
                         </div>
                     }
                 </div>
+                {ctrl.getModel().isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
+                    <CloseIcon/>
+                </div>}
             </div>
         );
     }

@@ -333,26 +333,33 @@
   grid-gap: 5px;
 }
 
+.PageView {
+  position: relative;
+}
 .PageView > .frame__container {
   padding: 10px;
-  grid-gap: 10px;
+}
+.PageView__close {
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+}
+.PageView__close:hover line {
+  stroke: black;
 }
 .PageView__caption {
   margin: 0;
   color: #777;
   font-size: 24px;
-  font-family: Roboto;
-  font-weight: 300;
+}
+.Modal .PageView__caption {
+  padding: 0 0 5px 0;
 }
 .PageView__star {
   color: red;
-}
-.PageView__close {
-  float: right;
-  cursor: pointer;
-}
-.PageView__close:hover {
-  color: #aaa;
 }
 .PageView__toolbar {
   display: flex;
@@ -360,9 +367,6 @@
 }
 .PageView__table-forms {
   min-height: 300px;
-}
-.Modal .PageView__caption {
-  padding: 0 0 5px 0;
 }
 
 .login {
