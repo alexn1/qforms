@@ -22,10 +22,12 @@ function backend_js() {
 }
 
 const backend = gulp.series(
-    backend_ejs,
-    backend_json,
-    backend_js,
-    backend_ts
+    ...[
+        backend_ejs,
+        backend_json,
+        backend_js,
+        ...(process.argv.indexOf('--backend_ts') > -1 ? [backend_ts] : [])
+    ]
 );
 
 module.exports = backend;

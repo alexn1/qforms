@@ -51,7 +51,7 @@
     "build-jsx-watch": "babel --out-dir dist/lib/frontend/common/jsx src/frontend/common/jsx --watch",
     "test-jsx": "babel --out-dir apps/test/build/js apps/test/jsx --watch",
     "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
-    "build-ts": "tsc -p .",
+    "build-ts": "tsc --build tsconfig.json --watch",
     "build": "gulp build"
   },
   "repository": {
