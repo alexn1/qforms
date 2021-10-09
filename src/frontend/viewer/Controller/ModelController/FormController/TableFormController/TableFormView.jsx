@@ -102,29 +102,32 @@ class TableFormView extends FormView {
     getGridClass() {
         return Grid;
     }
+    renderGrid() {
+        return React.createElement(this.getGridClass(), {
+            classList         : ['flex-max'],
+            onCreate          : ctrl.onGridCreate,
+            name              : ctrl.model.getFullName(),
+            columns           : this.getGridColumns(),
+            rows              : this.getRows(),
+            getRowKey         : row => ctrl.model.getDefaultDataSource().getRowKey(row),
+            onDoubleClick     : ctrl.onGridCellDblClick,
+            onDeleteClick     : ctrl.onGridDeleteClick,
+            onSelectionChange : ctrl.onGridSelectionChange,
+            onLinkClick       : ctrl.onGridLinkClick,
+            renderGridCellView: this.renderGridCellView,
+            updated           : ctrl.getUpdated(),
+            extraColumn       : this.getGridExtraColumn(),
+            selectedKey       : ctrl.getParent().getModel().options.selectedKey,
+            createLinkCallback: ctrl.createLinkCallback,
+        });
+    }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
         return (
             <div className={`${this.getCssClassNames()} full flex-rows grid-gap-5`}>
                 {this.renderToolbar()}
-                {React.createElement(this.getGridClass(), {
-                    classList         : ['flex-max'],
-                    onCreate          : ctrl.onGridCreate,
-                    name              : ctrl.model.getFullName(),
-                    columns           : this.getGridColumns(),
-                    rows              : this.getRows(),
-                    getRowKey         : row => ctrl.model.getDefaultDataSource().getRowKey(row),
-                    onDoubleClick     : ctrl.onGridCellDblClick,
-                    onDeleteClick     : ctrl.onGridDeleteClick,
-                    onSelectionChange : ctrl.onGridSelectionChange,
-                    onLinkClick       : ctrl.onGridLinkClick,
-                    renderGridCellView: this.renderGridCellView,
-                    updated           : ctrl.getUpdated(),
-                    extraColumn       : this.getGridExtraColumn(),
-                    selectedKey       : ctrl.getParent().getModel().options.selectedKey,
-                    createLinkCallback: ctrl.createLinkCallback,
-                })}
+                {this.renderGrid()}
                 {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
             </div>
         );

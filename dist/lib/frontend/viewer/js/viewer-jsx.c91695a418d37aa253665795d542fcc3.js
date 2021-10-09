@@ -923,12 +923,8 @@ class TableFormView extends FormView {
     return Grid;
   }
 
-  render() {
-    console.log('TableFormView.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`
-    }, this.renderToolbar(), React.createElement(this.getGridClass(), {
+  renderGrid() {
+    return React.createElement(this.getGridClass(), {
       classList: ['flex-max'],
       onCreate: ctrl.onGridCreate,
       name: ctrl.model.getFullName(),
@@ -944,7 +940,15 @@ class TableFormView extends FormView {
       extraColumn: this.getGridExtraColumn(),
       selectedKey: ctrl.getParent().getModel().options.selectedKey,
       createLinkCallback: ctrl.createLinkCallback
-    }), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
+    });
+  }
+
+  render() {
+    console.log('TableFormView.render', this.props.ctrl.model.getFullName());
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`
+    }, this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 
 }
