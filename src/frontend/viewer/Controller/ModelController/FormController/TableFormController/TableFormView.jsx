@@ -103,6 +103,7 @@ class TableFormView extends FormView {
         return Grid;
     }
     renderGrid() {
+        const ctrl = this.props.ctrl;
         return React.createElement(this.getGridClass(), {
             classList         : ['flex-max'],
             onCreate          : ctrl.onGridCreate,

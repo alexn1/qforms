@@ -32,16 +32,11 @@ class PageView extends ModelView {
     renderTitle() {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
-        const title = ctrl.getTitle();
-        if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) ) {
-            return [title, ' ', <span key={'star'} className={`${this.getCssBlockName()}__star`}>*</span>];
-        }
-        return title;
-    }
-    renderCaption() {
-        const ctrl = this.props.ctrl;
-        return <h1 className={`${this.getCssBlockName()}__caption`}>
-            {this.renderTitle()}
+        return <h1 className={`${this.getCssBlockName()}__title`}>
+            {ctrl.getTitle()}
+            {model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) &&
+                [' ', <span key={'star'} className={`${this.getCssBlockName()}__star`}>*</span>]
+            }
         </h1>;
     }
     onActionsClick = async li => {
@@ -112,7 +107,7 @@ class PageView extends ModelView {
         return (
             <div className={`${this.getCssBlockName()} full frame`}>
                 <div className="frame__container flex-rows grid-gap-10">
-                    {this.renderCaption()}
+                    {this.renderTitle()}
                     {this.isToolbar() && this.renderToolbar()}
                     {model.hasRowForm() && this.renderRowForms()}
                     {model.hasTableForm() &&

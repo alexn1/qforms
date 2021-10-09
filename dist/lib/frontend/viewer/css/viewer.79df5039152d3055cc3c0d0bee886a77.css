@@ -350,7 +350,7 @@
 .PageView__close:hover line {
   stroke: black;
 }
-.PageView__caption {
+.PageView__title {
   margin: 0;
   color: #777;
   font-size: 24px;

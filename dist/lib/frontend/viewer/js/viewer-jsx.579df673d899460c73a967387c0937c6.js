@@ -924,6 +924,7 @@ class TableFormView extends FormView {
   }
 
   renderGrid() {
+    const ctrl = this.props.ctrl;
     return React.createElement(this.getGridClass(), {
       classList: ['flex-max'],
       onCreate: ctrl.onGridCreate,
@@ -1006,23 +1007,12 @@ class PageView extends ModelView {
   renderTitle() {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
-    const title = ctrl.getTitle();
-
-    if (model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew())) {
-      return [title, ' ', /*#__PURE__*/React.createElement("span", {
-        key: 'star',
-        className: `${this.getCssBlockName()}__star`
-      }, "*")];
-    }
-
-    return title;
-  }
-
-  renderCaption() {
-    const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("h1", {
-      className: `${this.getCssBlockName()}__caption`
-    }, this.renderTitle());
+      className: `${this.getCssBlockName()}__title`
+    }, ctrl.getTitle(), model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) && [' ', /*#__PURE__*/React.createElement("span", {
+      key: 'star',
+      className: `${this.getCssBlockName()}__star`
+    }, "*")]);
   }
 
   renderToolbar() {
@@ -1067,7 +1057,7 @@ class PageView extends ModelView {
       className: `${this.getCssBlockName()} full frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows grid-gap-10"
-    }, this.renderCaption(), this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
+    }, this.renderTitle(), this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container"
@@ -1083,40 +1073,3 @@ class PageView extends ModelView {
 }
 
 window.QForms.PageView = PageView;
-class PageView2 extends PageView {
-  getCssBlockName() {
-    return 'PageView';
-  }
-
-  getAllTabs() {
-    const ctrl = this.props.ctrl;
-    return ctrl.forms.map(form => {
-      return {
-        name: form.model.getName(),
-        title: form.getTitle(),
-        content: this.renderForm(form)
-      };
-    });
-  }
-
-  render() {
-    console.log('PageView2.render', this.props.ctrl.model.getFullName());
-    return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()} full frame`
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'frame__container flex-rows'
-    }, this.renderCaption(),
-    /*(model.hasRowFormWithDefaultDs() || model.hasActions()) &&*/
-    this.renderToolbar(), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__table-forms flex-max frame`
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'frame__container'
-    }, /*#__PURE__*/React.createElement(Tab, {
-      tabs: this.getAllTabs(),
-      classList: ['Tab-blue', 'full']
-    })))));
-  }
-
-}
-
-window.QForms.PageView2 = PageView2;
