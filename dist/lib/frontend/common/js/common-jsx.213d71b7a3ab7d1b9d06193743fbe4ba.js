@@ -70,6 +70,18 @@ class ReactComponent extends React.Component {
 }
 
 window.QForms.ReactComponent = ReactComponent;
+class ArrowIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      width: "10",
+      height: "6",
+      viewBox: "0 0 10 6"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z"
+    }));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Box extends ReactComponent {
@@ -1491,13 +1503,7 @@ class Select extends ReactComponent {
       value: this.state.value
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_down' : ''}`
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "10",
-      height: "6",
-      viewBox: "0 0 10 6"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z"
-    }))), /*#__PURE__*/React.createElement("ul", {
+    }, /*#__PURE__*/React.createElement(ArrowIcon, null)), /*#__PURE__*/React.createElement("ul", {
       ref: this.dropdown,
       className: `${this.getCssBlockName()}__dropdown`,
       style: {
