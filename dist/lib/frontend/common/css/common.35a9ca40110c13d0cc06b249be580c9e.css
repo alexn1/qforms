@@ -446,12 +446,18 @@ a.Grid__tr:hover {
   padding: 0;
   width: 100%;
   box-shadow: 0 0 5px gray;
+  max-height: 200px;
+  overflow-y: auto;
 }
 .Select__item {
   cursor: pointer;
 }
+.Select__item.selected {
+  background-color: blue !important;
+  color: white !important;
+}
 .Select__item:hover {
-  background: #eee;
+  background-color: #eee;
 }
 
 .Slider {

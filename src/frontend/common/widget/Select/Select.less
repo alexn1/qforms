@@ -39,12 +39,19 @@
   width: 100%;
   box-shadow: 0 0 5px gray;
   //border: 1px solid gray;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .Select__item {
   cursor: pointer;
 }
 
+.Select__item.selected {
+  background-color: blue !important;
+  color: white !important;
+}
+
 .Select__item:hover {
-  background: #eee;
+  background-color: #eee;
 }
