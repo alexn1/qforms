@@ -5,26 +5,56 @@
 .Select__input {
   cursor: pointer;
   width: 100%;
-  padding-right: 20px;
+  padding-right: 40px;
 }
 
 .Select__icon {
+  background-color: #eee;
+
+  width: 20px;
+
   pointer-events: none;
   position: absolute;
-  right: 6px;
+  right: 0;
   top: 0;
   display: flex;
   align-items: center;
   height: 100%;
   svg {
-    //transform: rotate(180deg);
+    margin: 0 auto;
+    width: 10px;
+    height: 6px;
     path {
       fill: #aaa
     }
   }
 }
 
-.Select__icon_down {
+.Select__clear {
+  width: 20px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  height: 100%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    line {
+      stroke: black;
+    }
+  }
+
+  svg {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.Select__icon_up {
   svg {
     transform: rotate(180deg);
   }
@@ -45,13 +75,11 @@
 
 .Select__item {
   cursor: pointer;
-}
-
-.Select__item.selected {
-  background-color: blue !important;
-  color: white !important;
-}
-
-.Select__item:hover {
-  background-color: #eee;
+  &:hover {
+    background-color: #eee;
+  }
+  &.selected {
+    background-color: blue !important;
+    color: white !important;
+  }
 }

@@ -59,7 +59,10 @@ class Select extends ReactComponent {
                    onBlur={this.onInputBlur}
                    value={this.state.value}
             />
-            <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_down' : ''}`}>
+            <div className={`${this.getCssBlockName()}__clear`}>
+                <CloseIcon/>
+            </div>
+            <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`}>
                 <ArrowIcon/>
             </div>
             <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}

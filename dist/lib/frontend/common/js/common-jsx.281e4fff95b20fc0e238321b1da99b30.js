@@ -73,8 +73,6 @@ window.QForms.ReactComponent = ReactComponent;
 class ArrowIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("svg", {
-      width: "10",
-      height: "6",
       viewBox: "0 0 10 6"
     }, /*#__PURE__*/React.createElement("path", {
       d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z"
@@ -258,8 +256,6 @@ class CloseIcon extends ReactComponent {
   render() {
     const strokeWidth = this.props.strokeWidth || 1;
     return /*#__PURE__*/React.createElement("svg", {
-      width: "10",
-      height: "10",
       viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("line", {
       x1: "2",
@@ -1502,7 +1498,9 @@ class Select extends ReactComponent {
       onBlur: this.onInputBlur,
       value: this.state.value
     }), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_down' : ''}`
+      className: `${this.getCssBlockName()}__clear`
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`
     }, /*#__PURE__*/React.createElement(ArrowIcon, null)), /*#__PURE__*/React.createElement("ul", {
       ref: this.dropdown,
       className: `${this.getCssBlockName()}__dropdown`,
