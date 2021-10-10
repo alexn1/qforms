@@ -14,7 +14,7 @@ main(); async function main() {
     await putJsonFileData('package.json', packageJson1);
 
     // build
-    let stderr = await exec('gulp build --backend_ts');
+    let stderr = await exec('gulp build --backend');
     if (stderr) throw new Error(stderr);
 
     // commit
@@ -38,7 +38,7 @@ main(); async function main() {
     await putJsonFileData('package.json', packageJson2);
 
     // build
-    stderr = await exec('gulp build --backend_ts');
+    stderr = await exec('gulp build --backend');
     if (stderr) throw new Error(stderr);
 
     // commit

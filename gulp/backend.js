@@ -28,11 +28,11 @@ function backend_js() {
 
 const backend = gulp.series(
     ...[
-        ...(process.argv.indexOf('--backend_ts') > -1 ? [backend_clean] : []),
+        backend_clean,
         backend_ejs,
         backend_json,
         backend_js,
-        ...(process.argv.indexOf('--backend_ts') > -1 ? [backend_ts] : [])
+        backend_ts
     ]
 );
 

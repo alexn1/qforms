@@ -9,7 +9,7 @@ module.exports = gulp.series(
     ...[
         // clean,
         root,
-        backend,
+        ...(process.argv.indexOf('--backend') > -1 ? [backend] : []),
         frontend
     ]
 );
