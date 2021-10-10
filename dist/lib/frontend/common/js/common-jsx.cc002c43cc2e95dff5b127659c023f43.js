@@ -1409,6 +1409,94 @@ class Modal extends ReactComponent {
 window.QForms.Modal = Modal;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class Select extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onInputClick", async e => {
+      console.log('Select.onInputClick');
+      this.setState(prevState => {
+        return {
+          visible: !prevState.visible
+        };
+      });
+    });
+
+    _defineProperty(this, "onInputBlur", async e => {
+      console.log('Select.onInputBlur', e.target);
+      this.setState({
+        visible: false
+      });
+    });
+
+    _defineProperty(this, "onDropdownMouseDown", async e => {
+      e.preventDefault();
+    });
+
+    _defineProperty(this, "onDropdownClick", async e => {
+      // console.log('Select.onDropdownClick', e.target);
+      const value = JSON.parse(e.target.dataset.value);
+      console.log('value:', value);
+      this.setState({
+        value: value,
+        visible: false
+      }, () => {});
+    });
+
+    this.state = {
+      value: '',
+      visible: false
+    };
+  }
+
+  getVisibility() {
+    return this.state.visible ? 'visible' : 'hidden';
+  }
+
+  getItems() {
+    return this.props.items || [];
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("input", {
+      className: `${this.getCssBlockName()}__input`,
+      readOnly: true,
+      placeholder: 'select',
+      onClick: this.onInputClick,
+      onBlur: this.onInputBlur,
+      value: this.state.value
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_down' : ''}`
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "10",
+      height: "6",
+      viewBox: "0 0 10 6"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z"
+    }))), /*#__PURE__*/React.createElement("ul", {
+      className: `${this.getCssBlockName()}__dropdown`,
+      style: {
+        visibility: this.getVisibility()
+      },
+      onMouseDown: this.onDropdownMouseDown,
+      onClick: this.onDropdownClick
+    }, /*#__PURE__*/React.createElement("li", {
+      className: `${this.getCssBlockName()}__item`,
+      "data-value": '""'
+    }, "\xA0"), this.getItems().map(item => {
+      return /*#__PURE__*/React.createElement("li", {
+        key: item.value,
+        className: `${this.getCssBlockName()}__item`,
+        "data-value": JSON.stringify(item.value)
+      }, item.title || item.value);
+    })));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class Slider extends ReactComponent {
   constructor(props) {
     super(props);

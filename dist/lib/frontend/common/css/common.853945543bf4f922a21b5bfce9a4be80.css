@@ -69,7 +69,6 @@ svg {
   display: inline-block;
 }
 
-
 table.DatePicker caption,
 table.DatePicker td,
 table.DatePicker th {
@@ -414,6 +413,45 @@ a.Grid__tr:hover {
   margin: auto;
   width: 1100px;
   height: 85%;
+}
+
+.Select {
+  position: relative;
+}
+.Select__input {
+  cursor: pointer;
+  width: 100%;
+  padding-right: 20px;
+}
+.Select__icon {
+  pointer-events: none;
+  position: absolute;
+  right: 6px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.Select__icon svg path {
+  fill: #aaa;
+}
+.Select__icon_down svg {
+  transform: rotate(180deg);
+}
+.Select__dropdown {
+  position: absolute;
+  background: white;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0 0 5px gray;
+}
+.Select__item {
+  cursor: pointer;
+}
+.Select__item:hover {
+  background: #eee;
 }
 
 .Slider {
