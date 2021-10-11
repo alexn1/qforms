@@ -421,7 +421,7 @@ a.Grid__tr:hover {
 .Select__input {
   cursor: pointer;
   width: 100%;
-  padding-right: 40px;
+  padding-right: 20px;
 }
 .Select__icon {
   width: 20px;
