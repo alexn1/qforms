@@ -291,7 +291,7 @@ class ComboBox extends ReactComponent {
       });
 
       if (this.props.onChange) {
-        this.props.onChange(e.target.value);
+        await this.props.onChange(e.target.value);
       }
     });
 
@@ -302,23 +302,28 @@ class ComboBox extends ReactComponent {
       }
     });
 
-    if (!props.items) throw new Error('no ComboBox items'); // value
+    if (!props.items) throw new Error('no ComboBox items');
+    this.state = {
+      value: this.getInitialValue()
+    };
+  }
 
+  getInitialValue() {
     let value = null;
 
-    if (props.value !== undefined && props.value !== null) {
-      value = props.value;
-      const item = props.items.find(item => item.value === props.value);
+    if (this.props.value !== undefined && this.props.value !== null) {
+      value = this.props.value;
+      const item = this.props.items.find(item => item.value === this.props.value);
 
       if (!item) {
         if (this.props.nullable && value === '') {} else {
-          console.error(`no item for value:`, props.value, typeof props.value);
-          console.log('items:', props.items);
+          console.error(`no item for value:`, this.props.value, typeof this.props.value);
+          console.log('items:', this.props.items);
         }
       }
     } else {
-      if (props.items.length) {
-        value = props.items[0].value;
+      if (this.props.items.length) {
+        value = this.props.items[0].value;
       } else {
         value = '';
       }
@@ -326,9 +331,7 @@ class ComboBox extends ReactComponent {
 
     if (value === null) throw new Error('null is wrong value for ComboBox'); // console.log('combobox value:', value);
 
-    this.state = {
-      value: value
-    };
+    return value;
   }
 
   getValue() {
@@ -1425,6 +1428,7 @@ class Select extends ReactComponent {
 
     _defineProperty(this, "onInputClick", async e => {
       console.log('Select.onInputClick');
+      if (this.props.readOnly) return;
 
       if (!this.state.visible) {
         const [selected] = this.el.current.querySelectorAll('li.selected'); // console.log('selected:', selected);
@@ -1461,7 +1465,7 @@ class Select extends ReactComponent {
       const value = JSON.parse(e.target.dataset.value); // console.log('value:', value);
 
       this.setState({
-        value: value.toString(),
+        value: value,
         visible: false
       }, async () => {
         if (this.props.onChange) {
@@ -1470,6 +1474,7 @@ class Select extends ReactComponent {
       });
     });
 
+    if (!props.items) throw new Error('no Select items');
     this.state = {
       value: this.props.value || '',
       visible: false
@@ -1515,7 +1520,7 @@ class Select extends ReactComponent {
     }, "\xA0"), this.getItems().map(item => {
       return /*#__PURE__*/React.createElement("li", {
         key: item.value,
-        className: `${this.getCssBlockName()}__item ${this.state.value === item.value.toString() ? 'selected' : ''}`,
+        className: `${this.getCssBlockName()}__item ${this.state.value === item.value ? 'selected' : ''}`,
         "data-value": JSON.stringify(item.value)
       }, item.title || item.value);
     })));

@@ -1,6 +1,7 @@
 class Select extends ReactComponent {
     constructor(props) {
         super(props);
+        if (!props.items) throw new Error('no Select items');
         this.state = {
             value: this.props.value || '',
             visible: false,
@@ -13,6 +14,7 @@ class Select extends ReactComponent {
     }
     onInputClick = async e => {
         console.log('Select.onInputClick');
+        if (this.props.readOnly) return;
         if (!this.state.visible) {
             const [selected] = this.el.current.querySelectorAll('li.selected');
             // console.log('selected:', selected);
@@ -41,7 +43,7 @@ class Select extends ReactComponent {
         console.log('Select.onDropdownClick', e.target.offsetTop);
         const value = JSON.parse(e.target.dataset.value);
         // console.log('value:', value);
-        this.setState({value: value.toString(), visible: false}, async () => {
+        this.setState({value: value, visible: false}, async () => {
             if (this.props.onChange) {
                 await this.props.onChange(value.toString());
             }
@@ -73,7 +75,7 @@ class Select extends ReactComponent {
                 <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
                 {this.getItems().map(item => {
                     return <li key={item.value}
-                               className={`${this.getCssBlockName()}__item ${this.state.value === item.value.toString() ? 'selected' : ''}`}
+                               className={`${this.getCssBlockName()}__item ${this.state.value === item.value ? 'selected' : ''}`}
                                data-value={JSON.stringify(item.value)}
                     >{item.title || item.value}</li>;
                 })}

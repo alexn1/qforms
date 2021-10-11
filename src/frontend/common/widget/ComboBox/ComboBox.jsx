@@ -3,29 +3,30 @@ class ComboBox extends ReactComponent {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         if (!props.items) throw new Error('no ComboBox items');
-
-        // value
+        this.state = {value: this.getInitialValue()};
+    }
+    getInitialValue() {
         let value = null;
-        if (props.value !== undefined && props.value !== null) {
-            value = props.value;
-            const item = props.items.find(item => item.value === props.value);
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find(item => item.value === this.props.value);
             if (!item) {
                 if (this.props.nullable && value === '') {
                 } else {
-                    console.error(`no item for value:`, props.value, typeof props.value);
-                    console.log('items:', props.items);
+                    console.error(`no item for value:`, this.props.value, typeof this.props.value);
+                    console.log('items:', this.props.items);
                 }
             }
         } else {
-            if (props.items.length) {
-                value = props.items[0].value;
+            if (this.props.items.length) {
+                value = this.props.items[0].value;
             } else {
                 value = '';
             }
         }
         if (value === null) throw new Error('null is wrong value for ComboBox');
         // console.log('combobox value:', value);
-        this.state = {value: value};
+        return value;
     }
     getValue() {
         return this.state.value;
@@ -34,7 +35,7 @@ class ComboBox extends ReactComponent {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setState({value: e.target.value});
         if (this.props.onChange) {
-            this.props.onChange(e.target.value);
+            await this.props.onChange(e.target.value);
         }
     }
     onMouseDown = async e => {
