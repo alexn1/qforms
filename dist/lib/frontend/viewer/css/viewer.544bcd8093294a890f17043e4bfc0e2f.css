@@ -57,7 +57,10 @@
 .RowFormComboBoxFieldView {
   display: flex;
 }
-.RowFormComboBoxFieldView > select {
+.RowFormComboBoxFieldView.error > .RowFormComboBoxFieldView__select {
+  background-color: #f2dede;
+}
+.RowFormComboBoxFieldView__select {
   width: 100%;
   height: 20px;
   border-width: 0;
@@ -65,25 +68,22 @@
   background-color: white;
   cursor: pointer;
 }
-.RowFormComboBoxFieldView > select[disabled] {
-  background-color: lightgoldenrodyellow;
+.RowFormComboBoxFieldView__select[disabled] {
   cursor: default;
+  background-color: lightgoldenrodyellow;
 }
-.RowFormComboBoxFieldView > button {
+.RowFormComboBoxFieldView__edit-button {
   height: 20px;
   border: none;
   background-color: #ccc;
 }
-.RowFormComboBoxFieldView > button:hover:enabled {
+.RowFormComboBoxFieldView__edit-button:hover:enabled {
   background-color: #ddd;
 }
-.RowFormComboBoxFieldView > button:active {
+.RowFormComboBoxFieldView__edit-button:active {
   background-color: #bbb;
 }
-.RowFormComboBoxFieldView.error > select {
-  background-color: #f2dede;
-}
-.debug .RowFormComboBoxFieldView.changed > select {
+.debug .RowFormComboBoxFieldView.changed > .RowFormComboBoxFieldView__select {
   background-color: #eefdea;
 }
 

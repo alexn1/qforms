@@ -9,7 +9,8 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getCssClassNames()}>
-                <Select
+                <ComboBox
+                    classList={[`${this.getCssBlockName()}__select`]}
                     onCreate={ctrl.onWidgetCreate}
                     nullable={true}
                     value={ctrl.getValueForWidget()}
@@ -21,6 +22,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                 />
                 {ctrl.getModel().getAttr('itemEditPage') &&
                     <Button
+                        classList={[`${this.getCssBlockName()}__edit-button`]}
                         onClick={ctrl.onEditButtonClick}
                         enabled={!!ctrl.getValue()}
                     >...</Button>

@@ -184,7 +184,8 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
-    }, /*#__PURE__*/React.createElement(Select, {
+    }, /*#__PURE__*/React.createElement(ComboBox, {
+      classList: [`${this.getCssBlockName()}__select`],
       onCreate: ctrl.onWidgetCreate,
       nullable: true,
       value: ctrl.getValueForWidget(),
@@ -194,6 +195,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
       placeholder: ctrl.getPlaceholder(),
       onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null
     }), ctrl.getModel().getAttr('itemEditPage') && /*#__PURE__*/React.createElement(Button, {
+      classList: [`${this.getCssBlockName()}__edit-button`],
       onClick: ctrl.onEditButtonClick,
       enabled: !!ctrl.getValue()
     }, "..."), ctrl.getModel().getAttr('newRowMode') && ctrl.getModel().getAttr('newRowMode') !== 'disabled' && ctrl.getForm().getMode() === 'edit' && /*#__PURE__*/React.createElement(Button, {
