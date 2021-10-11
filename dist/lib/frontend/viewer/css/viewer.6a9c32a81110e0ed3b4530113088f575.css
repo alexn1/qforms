@@ -78,35 +78,35 @@
 .RowFormComboBoxFieldView__select {
   width: 100%;
 }
-.RowFormComboBoxFieldView__select .Select__input {
+.RowFormComboBoxFieldView__select input.Select__input {
   background-color: white;
   border-width: 0;
   height: 20px;
 }
-.RowFormComboBoxFieldView__select .Select__input[disabled] {
+.RowFormComboBoxFieldView__select input.Select__input[disabled] {
   cursor: default;
   background-color: lightgoldenrodyellow;
 }
-.RowFormComboBoxFieldView__edit-button {
+button.RowFormComboBoxFieldView__edit-button {
   height: 20px;
   border: none;
   background-color: #ccc;
 }
-.RowFormComboBoxFieldView__edit-button:hover:enabled {
+button.RowFormComboBoxFieldView__edit-button:hover:enabled {
   background-color: #ddd;
 }
-.RowFormComboBoxFieldView__edit-button:active {
+button.RowFormComboBoxFieldView__edit-button:active {
   background-color: #bbb;
 }
-.RowFormComboBoxFieldView__create-button {
+button.RowFormComboBoxFieldView__create-button {
   height: 20px;
   border: none;
   background-color: #ccc;
 }
-.RowFormComboBoxFieldView__create-button:hover:enabled {
+button.RowFormComboBoxFieldView__create-button:hover:enabled {
   background-color: #ddd;
 }
-.RowFormComboBoxFieldView__create-button:active {
+button.RowFormComboBoxFieldView__create-button:active {
   background-color: #bbb;
 }
 .debug .RowFormComboBoxFieldView.changed > .RowFormComboBoxFieldView__select {
