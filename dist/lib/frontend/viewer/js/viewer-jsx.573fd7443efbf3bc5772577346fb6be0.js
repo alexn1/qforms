@@ -1060,17 +1060,19 @@ class PageView extends ModelView {
       className: `${this.getCssBlockName()} full frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows grid-gap-10"
-    }, this.renderTitle(), this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__header`
+    }, this.renderTitle(), model.isModal() && /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: ctrl.onClosePageClick
+    }, /*#__PURE__*/React.createElement(CloseIcon, null))), this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__table-forms flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container"
     }, /*#__PURE__*/React.createElement(Tab, {
       tabs: this.getTabs(),
       classList: ['Tab-blue', 'full']
-    })))), model.isModal() && /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__close`,
-      onClick: ctrl.onClosePageClick
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+    })))));
   }
 
 }

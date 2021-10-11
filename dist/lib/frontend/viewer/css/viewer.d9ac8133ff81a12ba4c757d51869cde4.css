@@ -359,27 +359,32 @@ button.RowFormComboBoxFieldView__create-button:active {
   grid-gap: 5px;
 }
 
-.PageView {
-  position: relative;
-}
 .PageView > .frame__container {
   padding: 10px;
 }
-.PageView__close {
-  position: absolute;
-  cursor: pointer;
-  right: 10px;
-  top: 10px;
-  width: 20px;
-  height: 20px;
+.PageView__header {
+  display: flex;
+  align-items: center;
 }
-.PageView__close:hover line {
-  stroke: black;
+.PageView__header .PageView__title {
+  flex-grow: 1;
+}
+.Modal .PageView__header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
 }
 .PageView__title {
   margin: 0;
   color: #777;
   font-size: 24px;
+}
+.PageView__close {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.PageView__close:hover line {
+  stroke: black;
 }
 .PageView__star {
   color: red;
