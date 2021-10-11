@@ -424,7 +424,6 @@ a.Grid__tr:hover {
   padding-right: 40px;
 }
 .Select__icon {
-  background-color: #eee;
   width: 20px;
   pointer-events: none;
   position: absolute;
@@ -465,7 +464,7 @@ a.Grid__tr:hover {
 }
 .Select__dropdown {
   position: absolute;
-  background: white;
+  background-color: white;
   margin: 0;
   list-style: none;
   padding: 0;
@@ -473,6 +472,7 @@ a.Grid__tr:hover {
   box-shadow: 0 0 5px gray;
   max-height: 200px;
   overflow-y: auto;
+  z-index: 1;
 }
 .Select__item {
   cursor: pointer;

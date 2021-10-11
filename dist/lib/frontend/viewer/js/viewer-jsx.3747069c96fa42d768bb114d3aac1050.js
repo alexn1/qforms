@@ -184,7 +184,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
-    }, /*#__PURE__*/React.createElement(ComboBox, {
+    }, /*#__PURE__*/React.createElement(Select, {
       onCreate: ctrl.onWidgetCreate,
       nullable: true,
       value: ctrl.getValueForWidget(),

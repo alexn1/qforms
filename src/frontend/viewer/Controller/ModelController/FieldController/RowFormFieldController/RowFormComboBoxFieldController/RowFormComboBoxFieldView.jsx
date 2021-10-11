@@ -9,7 +9,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return (
             <div className={this.getCssClassNames()}>
-                <ComboBox
+                <Select
                     onCreate={ctrl.onWidgetCreate}
                     nullable={true}
                     value={ctrl.getValueForWidget()}

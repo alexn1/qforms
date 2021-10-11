@@ -101,15 +101,16 @@ class Select extends ReactComponent {
         return <div ref={this.el} className={this.getCssClassNames()}>
             <input className={`${this.getCssBlockName()}__input`}
                    readOnly={true}
+                   disabled={this.props.readOnly}
                    placeholder={this.props.placeholder}
                    onClick={this.onInputClick}
                    onBlur={this.onInputBlur}
                    value={this.getValueTitle(this.getValue())}
                    onMouseDown={this.onInputMouseDown}
             />
-            <div className={`${this.getCssBlockName()}__clear`}>
+            {/*<div className={`${this.getCssBlockName()}__clear`}>
                 <CloseIcon/>
-            </div>
+            </div>*/}
             <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`}>
                 <ArrowIcon/>
             </div>

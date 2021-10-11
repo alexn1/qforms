@@ -1550,14 +1550,13 @@ class Select extends ReactComponent {
     }, /*#__PURE__*/React.createElement("input", {
       className: `${this.getCssBlockName()}__input`,
       readOnly: true,
+      disabled: this.props.readOnly,
       placeholder: this.props.placeholder,
       onClick: this.onInputClick,
       onBlur: this.onInputBlur,
       value: this.getValueTitle(this.getValue()),
       onMouseDown: this.onInputMouseDown
     }), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__clear`
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`
     }, /*#__PURE__*/React.createElement(ArrowIcon, null)), /*#__PURE__*/React.createElement("ul", {
       ref: this.dropdown,
