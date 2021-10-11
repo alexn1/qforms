@@ -1475,12 +1475,42 @@ class Select extends ReactComponent {
     });
 
     if (!props.items) throw new Error('no Select items');
-    this.state = {
-      value: this.props.value || '',
-      visible: false
-    };
     this.el = React.createRef();
     this.dropdown = React.createRef();
+    this.state = {
+      value: this.getInitialValue(),
+      visible: false
+    };
+  }
+
+  getInitialValue() {
+    let value = null;
+
+    if (this.props.value !== undefined && this.props.value !== null) {
+      value = this.props.value;
+      const item = this.props.items.find(item => item.value === this.props.value);
+
+      if (!item) {
+        if (this.props.nullable && value === '') {} else {
+          console.error(`no item for value:`, this.props.value, typeof this.props.value);
+          console.log('items:', this.props.items);
+        }
+      }
+    } else {
+      if (this.props.items.length) {
+        value = this.props.items[0].value;
+      } else {
+        value = '';
+      }
+    }
+
+    if (value === null) throw new Error('null is wrong value for Select'); // console.log('select value:', value);
+
+    return value;
+  }
+
+  getValue() {
+    return this.state.value;
   }
 
   getVisibility() {
@@ -1488,7 +1518,14 @@ class Select extends ReactComponent {
   }
 
   getItems() {
-    return this.props.items || [];
+    return this.props.items;
+  }
+
+  getValueTitle(value) {
+    const item = this.getItems().find(item => item.value === value);
+    if (!item) throw new Error(`cannot find item by value: ${value}`);
+    console.log('item:', item);
+    return item.title || item.value;
   }
 
   render() {
@@ -1501,7 +1538,7 @@ class Select extends ReactComponent {
       placeholder: 'select',
       onClick: this.onInputClick,
       onBlur: this.onInputBlur,
-      value: this.state.value
+      value: this.getValueTitle(this.getValue())
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__clear`
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
@@ -1520,7 +1557,7 @@ class Select extends ReactComponent {
     }, "\xA0"), this.getItems().map(item => {
       return /*#__PURE__*/React.createElement("li", {
         key: item.value,
-        className: `${this.getCssBlockName()}__item ${this.state.value === item.value ? 'selected' : ''}`,
+        className: `${this.getCssBlockName()}__item ${this.getValue() === item.value ? 'selected' : ''}`,
         "data-value": JSON.stringify(item.value)
       }, item.title || item.value);
     })));
