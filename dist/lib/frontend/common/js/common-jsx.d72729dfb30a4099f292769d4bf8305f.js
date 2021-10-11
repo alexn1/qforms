@@ -1474,7 +1474,12 @@ class Select extends ReactComponent {
       });
     });
 
-    if (!props.items) throw new Error('no Select items');
+    _defineProperty(this, "onInputMouseDown", async e => {
+      if (this.props.onMouseDown) {
+        await this.props.onMouseDown(e);
+      }
+    });
+
     this.el = React.createRef();
     this.dropdown = React.createRef();
     this.state = {
@@ -1484,23 +1489,28 @@ class Select extends ReactComponent {
   }
 
   getInitialValue() {
+    console.log('Select.getInitialValue', this.props.value);
     let value = null;
 
     if (this.props.value !== undefined && this.props.value !== null) {
       value = this.props.value;
-      const item = this.props.items.find(item => item.value === this.props.value);
+      const item = this.getItems().find(item => item.value === this.props.value);
 
       if (!item) {
-        if (this.props.nullable && value === '') {} else {
+        if (this.isNullable() && value === '') {} else {
           console.error(`no item for value:`, this.props.value, typeof this.props.value);
-          console.log('items:', this.props.items);
+          console.log('items:', this.getItems());
         }
       }
     } else {
-      if (this.props.items.length) {
-        value = this.props.items[0].value;
-      } else {
+      if (this.isNullable()) {
         value = '';
+      } else {
+        if (this.props.items.length) {
+          value = this.props.items[0].value;
+        } else {
+          value = '';
+        }
       }
     }
 
@@ -1513,15 +1523,20 @@ class Select extends ReactComponent {
     return this.state.value;
   }
 
+  isNullable() {
+    return this.props.nullable !== undefined ? this.props.nullable : true;
+  }
+
   getVisibility() {
     return this.state.visible ? 'visible' : 'hidden';
   }
 
   getItems() {
-    return this.props.items;
+    return this.props.items || [];
   }
 
   getValueTitle(value) {
+    if (value === '') return '';
     const item = this.getItems().find(item => item.value === value);
     if (!item) throw new Error(`cannot find item by value: ${value}`);
     console.log('item:', item);
@@ -1535,10 +1550,11 @@ class Select extends ReactComponent {
     }, /*#__PURE__*/React.createElement("input", {
       className: `${this.getCssBlockName()}__input`,
       readOnly: true,
-      placeholder: 'select',
+      placeholder: this.props.placeholder,
       onClick: this.onInputClick,
       onBlur: this.onInputBlur,
-      value: this.getValueTitle(this.getValue())
+      value: this.getValueTitle(this.getValue()),
+      onMouseDown: this.onInputMouseDown
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__clear`
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
@@ -1551,7 +1567,7 @@ class Select extends ReactComponent {
       },
       onMouseDown: this.onDropdownMouseDown,
       onClick: this.onDropdownClick
-    }, /*#__PURE__*/React.createElement("li", {
+    }, this.isNullable() && /*#__PURE__*/React.createElement("li", {
       className: `${this.getCssBlockName()}__item`,
       "data-value": '""'
     }, "\xA0"), this.getItems().map(item => {

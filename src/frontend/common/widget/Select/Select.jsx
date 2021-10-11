@@ -1,7 +1,6 @@
 class Select extends ReactComponent {
     constructor(props) {
         super(props);
-        if (!props.items) throw new Error('no Select items');
         this.el       = React.createRef();
         this.dropdown = React.createRef();
         this.state = {
@@ -10,22 +9,27 @@ class Select extends ReactComponent {
         };
     }
     getInitialValue() {
+        console.log('Select.getInitialValue', this.props.value);
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.getItems().find(item => item.value === this.props.value);
             if (!item) {
-                if (this.props.nullable && value === '') {
+                if (this.isNullable() && value === '') {
                 } else {
                     console.error(`no item for value:`, this.props.value, typeof this.props.value);
-                    console.log('items:', this.props.items);
+                    console.log('items:', this.getItems());
                 }
             }
         } else {
-            if (this.props.items.length) {
-                value = this.props.items[0].value;
-            } else {
+            if (this.isNullable()) {
                 value = '';
+            } else {
+                if (this.props.items.length) {
+                    value = this.props.items[0].value;
+                } else {
+                    value = '';
+                }
             }
         }
         if (value === null) throw new Error('null is wrong value for Select');
@@ -34,6 +38,9 @@ class Select extends ReactComponent {
     }
     getValue() {
         return this.state.value;
+    }
+    isNullable() {
+        return this.props.nullable !== undefined ? this.props.nullable : true;
     }
     getVisibility() {
         return this.state.visible ? 'visible' : 'hidden';
@@ -75,10 +82,16 @@ class Select extends ReactComponent {
             }
         });
     }
+    onInputMouseDown = async e => {
+        if (this.props.onMouseDown) {
+            await this.props.onMouseDown(e);
+        }
+    }
     getItems() {
-        return this.props.items;
+        return this.props.items || [];
     }
     getValueTitle(value) {
+        if (value === '') return '';
         const item = this.getItems().find(item => item.value === value);
         if (!item) throw new Error(`cannot find item by value: ${value}`);
         console.log('item:', item);
@@ -88,10 +101,11 @@ class Select extends ReactComponent {
         return <div ref={this.el} className={this.getCssClassNames()}>
             <input className={`${this.getCssBlockName()}__input`}
                    readOnly={true}
-                   placeholder={'select'}
+                   placeholder={this.props.placeholder}
                    onClick={this.onInputClick}
                    onBlur={this.onInputBlur}
                    value={this.getValueTitle(this.getValue())}
+                   onMouseDown={this.onInputMouseDown}
             />
             <div className={`${this.getCssBlockName()}__clear`}>
                 <CloseIcon/>
@@ -104,7 +118,9 @@ class Select extends ReactComponent {
                 onMouseDown={this.onDropdownMouseDown}
                 onClick={this.onDropdownClick}
             >
-                <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
+                {this.isNullable() &&
+                    <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
+                }
                 {this.getItems().map(item => {
                     return <li key={item.value}
                                className={`${this.getCssBlockName()}__item ${this.getValue() === item.value ? 'selected' : ''}`}
