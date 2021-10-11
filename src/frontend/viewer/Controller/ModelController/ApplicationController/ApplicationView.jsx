@@ -28,13 +28,13 @@ class ApplicationView extends ModelView {
         const ctrl = this.props.ctrl;
         return (
             <div className={`${this.getCssBlockName()}__container`}>
-                <header>
+                <header className={`${this.getCssBlockName()}__header`}>
                     <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
                 </header>
                 <main className={`${this.getCssBlockName()}__main`}>
                     {this.renderActivePage()}
                 </main>
-                <footer>
+                <footer className={`${this.getCssBlockName()}__footer`}>
                     <Statusbar onCreate={ctrl.onStatusbarCreate}/>
                 </footer>
                 {this.renderModals()}

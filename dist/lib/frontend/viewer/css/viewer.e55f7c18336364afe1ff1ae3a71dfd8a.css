@@ -359,24 +359,27 @@ button.RowFormComboBoxFieldView__create-button:active {
   grid-gap: 5px;
 }
 
-.PageView > .frame__container {
+.PageView__main > .frame__container {
   padding: 10px;
 }
 .PageView__header {
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 .PageView__header .PageView__title {
   flex-grow: 1;
 }
 .Modal .PageView__header {
   border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
 }
 .PageView__title {
   margin: 0;
   color: #777;
   font-size: 24px;
+}
+.PageView__star {
+  color: red;
 }
 .PageView__close {
   cursor: pointer;
@@ -385,9 +388,6 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .PageView__close:hover line {
   stroke: black;
-}
-.PageView__star {
-  color: red;
 }
 .PageView__toolbar {
   display: flex;

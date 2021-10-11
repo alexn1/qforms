@@ -105,23 +105,25 @@ class PageView extends ModelView {
         const ctrl = this.props.ctrl;
         const model = ctrl.getModel();
         return (
-            <div className={`${this.getCssBlockName()} full frame`}>
-                <div className="frame__container flex-rows grid-gap-10">
-                    <div className={`${this.getCssBlockName()}__header`}>
-                        {this.renderTitle()}
-                        {model.isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
-                            <CloseIcon/>
-                        </div>}
-                    </div>
-                    {this.isToolbar() && this.renderToolbar()}
-                    {model.hasRowForm() && this.renderRowForms()}
-                    {model.hasTableForm() &&
+            <div className={`${this.getCssBlockName()} full flex-rows`}>
+                <div className={`${this.getCssBlockName()}__header`}>
+                    {this.renderTitle()}
+                    {model.isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
+                        <CloseIcon/>
+                    </div>}
+                </div>
+                <div className={`${this.getCssBlockName()}__main flex-max frame`}>
+                    <div className="frame__container flex-rows grid-gap-10">
+                        {this.isToolbar() && this.renderToolbar()}
+                        {model.hasRowForm() && this.renderRowForms()}
+                        {model.hasTableForm() &&
                         <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
                             <div className="frame__container">
                                 <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
                             </div>
                         </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         );
