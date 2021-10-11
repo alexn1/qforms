@@ -9,7 +9,7 @@ class Select extends ReactComponent {
         };
     }
     getInitialValue() {
-        console.log('Select.getInitialValue', this.props.value);
+        // console.log('Select.getInitialValue', this.props.value);
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
@@ -94,10 +94,16 @@ class Select extends ReactComponent {
         if (value === '') return '';
         const item = this.getItems().find(item => item.value === value);
         if (!item) throw new Error(`cannot find item by value: ${value}`);
-        console.log('item:', item);
+        // console.log('item:', item);
         return item.title || item.value;
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        this.state.value = nextProps.value;
+        return true;
+    }
     render() {
+        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return <div ref={this.el} className={this.getCssClassNames()}>
             <input className={`${this.getCssBlockName()}__input`}
                    readOnly={true}
