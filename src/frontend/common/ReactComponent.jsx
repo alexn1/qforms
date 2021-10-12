@@ -17,24 +17,21 @@ class ReactComponent extends React.Component {
         ];
     }
     addCssClass(className) {
-        if (!this.state) this.state = {};
-        if (!this.state.classList) this.state.classList = [];
-        this.state.classList.push(className);
+        if (this.state.classList.indexOf(className) === -1) {
+            this.state.classList.push(className);
+        }
     }
     removeCssClass(className) {
-        this.state.classList.splice(this.state.classList.indexOf(className),1);
+        this.state.classList.splice(this.state.classList.indexOf(className), 1);
     }
     getCssBlockName() {
-        if (this.props.cssBlockName) {
-            return this.props.cssBlockName;
-        }
         return this.constructor.name;
     }
     getCssClassNames() {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.log(`${this.constructor.name}.rerender`);
+        // console.log(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender()) return Promise.resolve();
         return new Promise(resolve => {
             const start = Date.now();

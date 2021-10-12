@@ -32,6 +32,8 @@ class TextArea extends ReactComponent {
                 placeholder={this.props.placeholder}
                 rows={this.props.rows}
                 cols={this.props.cols}
+                onFocus={this.props.onFocus}
+                onBlur={this.props.onBlur}
             />
         );
     }

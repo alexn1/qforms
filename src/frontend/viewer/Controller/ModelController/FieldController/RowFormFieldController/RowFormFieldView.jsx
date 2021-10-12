@@ -3,7 +3,7 @@ class RowFormFieldView extends FieldView {
         const ctrl = this.props.ctrl;
         return [
             ...super.getClassList(),
-            ...(ctrl.isChanged()        ? ['changed'] : []),
+            ...(ctrl.isChanged()                ? ['changed'] : []),
             ...(ctrl.getErrorMessage() !== null ? ['error']   : [])
         ];
     }

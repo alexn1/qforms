@@ -418,20 +418,45 @@ class RowFormLinkFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormTextAreaFieldView extends RowFormFieldView {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onFocus", async e => {
+      // console.log('RowFormTextAreaFieldView.onFocus');
+      this.addCssClass('focus');
+      await this.rerender();
+    });
+
+    _defineProperty(this, "onBlur", async e => {
+      // console.log('RowFormTextAreaFieldView.onBlur');
+      this.removeCssClass('focus');
+      await this.rerender();
+    });
+
+    this.state = {
+      classList: []
+    };
+  }
+
   render() {
+    // console.log('RowFormTextAreaFieldView.render', this.state);
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextArea, {
-      cssBlockName: `${this.getCssBlockName()}__textarea`,
+      classList: [`${this.getCssBlockName()}__textarea`],
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
       rows: ctrl.model.getRows(),
-      cols: ctrl.model.getCols()
+      cols: ctrl.model.getCols(),
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
     }));
   }
 
@@ -489,7 +514,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextBox, {
-      cssBlockName: `${this.getCssBlockName()}__input`,
+      classList: [`${this.getCssBlockName()}__input`],
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),

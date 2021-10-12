@@ -16,9 +16,9 @@ class ReactComponent extends React.Component {
   }
 
   addCssClass(className) {
-    if (!this.state) this.state = {};
-    if (!this.state.classList) this.state.classList = [];
-    this.state.classList.push(className);
+    if (this.state.classList.indexOf(className) === -1) {
+      this.state.classList.push(className);
+    }
   }
 
   removeCssClass(className) {
@@ -26,10 +26,6 @@ class ReactComponent extends React.Component {
   }
 
   getCssBlockName() {
-    if (this.props.cssBlockName) {
-      return this.props.cssBlockName;
-    }
-
     return this.constructor.name;
   }
 
@@ -38,7 +34,7 @@ class ReactComponent extends React.Component {
   }
 
   rerender(logTime = true) {
-    // console.log(`${this.constructor.name}.rerender`);
+    // console.log(`${this.constructor.name}.rerender`, this.state);
     if (!this.canRerender()) return Promise.resolve();
     return new Promise(resolve => {
       const start = Date.now();
@@ -1819,7 +1815,9 @@ class TextArea extends ReactComponent {
       onChange: this.onChange,
       placeholder: this.props.placeholder,
       rows: this.props.rows,
-      cols: this.props.cols
+      cols: this.props.cols,
+      onFocus: this.props.onFocus,
+      onBlur: this.props.onBlur
     });
   }
 
