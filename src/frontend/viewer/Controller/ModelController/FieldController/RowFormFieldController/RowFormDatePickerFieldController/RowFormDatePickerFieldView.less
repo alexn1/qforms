@@ -1,25 +1,25 @@
 .RowFormDatePickerFieldView {
-    &.error > .DropdownDatePicker > input {
+    &.error .DropdownDatePicker__input {
         background-color: #f2dede;
     }
 }
 
 .RowFormDatePickerFieldView__date-picker {
     width: 100%;
-    > input {
+    > .DropdownDatePicker__input {
         height      : 20px;
         border-width: 0;
         padding     : 0 5px 0 5px;
     }
-    &.readOnly > input {
+    &.readOnly > .DropdownDatePicker__input {
         background-color: lightgoldenrodyellow;
         color: gray;
     }
-    &:not(.readOnly) > input {
+    &:not(.readOnly) > .DropdownDatePicker__input {
         cursor: pointer;
     }
 }
 
-.debug .RowFormDatePickerFieldView.changed > .DropdownDatePicker > input {
+.debug .RowFormDatePickerFieldView.changed .DropdownDatePicker__input {
     background-color: rgb(238, 253, 234);
 }

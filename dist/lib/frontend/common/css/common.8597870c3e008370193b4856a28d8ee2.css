@@ -170,10 +170,6 @@ table.DatePicker td.selected {
 .DropdownDatePicker {
   position: relative;
 }
-.DropdownDatePicker > .DatePicker {
-  position: absolute;
-  z-index: 2;
-}
 .DropdownDatePicker__input {
   width: 100%;
 }
@@ -187,11 +183,15 @@ table.DatePicker td.selected {
   cursor: pointer;
   visibility: hidden;
 }
+.DropdownDatePicker__close.visible {
+  visibility: visible;
+}
 .DropdownDatePicker__close:hover svg line {
   stroke: black;
 }
-.DropdownDatePicker__close.visible {
-  visibility: visible;
+.DropdownDatePicker__date-picker {
+  position: absolute;
+  z-index: 2;
 }
 
 .Grid {
