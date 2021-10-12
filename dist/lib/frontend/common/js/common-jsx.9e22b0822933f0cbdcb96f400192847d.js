@@ -649,7 +649,7 @@ class DropdownButton extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: `DropdownButton ${this.state.open && 'show'}`
-    }, /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement(Button, {
       onClick: this.onButtonClick,
       onBlur: this.onButtonBlur,
       disabled: this.isDisabled()
