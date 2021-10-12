@@ -1102,6 +1102,17 @@ class PageView extends ModelView {
     return model.options.selectMode || model.isModal() && model.hasRowFormWithDefaultSqlDataSource() || model.hasActions();
   }
 
+  renderTableForms() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__table-forms flex-max frame`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "frame__container"
+    }, /*#__PURE__*/React.createElement(Tab, {
+      tabs: this.getTabs(),
+      classList: ['Tab-blue', 'full']
+    })));
+  }
+
   render() {
     console.log('PageView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
@@ -1117,16 +1128,33 @@ class PageView extends ModelView {
       className: `${this.getCssBlockName()}__main flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows grid-gap-10"
-    }, this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__table-forms flex-max frame`
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container"
-    }, /*#__PURE__*/React.createElement(Tab, {
-      tabs: this.getTabs(),
-      classList: ['Tab-blue', 'full']
-    }))))));
+    }, this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms())));
   }
 
 }
 
 window.QForms.PageView = PageView;
+class PageView2 extends PageView {
+  getCssBlockName() {
+    return 'PageView';
+  }
+
+  renderTableForms() {
+    const ctrl = this.getCtrl();
+    const tableForms = ctrl.forms.filter(form => form.getModel().getClassName() === 'TableForm');
+
+    if (tableForms.length === 1) {
+      return this.renderForm(tableForms[0]);
+    } else {
+      return /*#__PURE__*/React.createElement("div", {
+        className: `${this.getCssBlockName()}__table-forms flex-max frame`
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "frame__container"
+      }, /*#__PURE__*/React.createElement(Tab, {
+        tabs: this.getTabs(),
+        classList: ['Tab-blue', 'full']
+      })));
+    }
+  }
+
+}

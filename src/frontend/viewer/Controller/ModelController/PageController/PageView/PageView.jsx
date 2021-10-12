@@ -73,14 +73,6 @@ class PageView extends ModelView {
                         enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
                     />
                 }
-                {/*{model.isModal() &&
-                    <Button
-                        key="close"
-                        width={width}
-                        title={model.getApp().getText().page.close}
-                        onClick={ctrl.onClosePageClick}
-                    />
-                }*/}
                 {model.hasActions() &&
                     <DropdownButton
                         title={model.getApp().getText().page.actions}
@@ -100,6 +92,13 @@ class PageView extends ModelView {
             || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
             || model.hasActions();
     }
+    renderTableForms() {
+        return <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
+            <div className="frame__container">
+                <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
+            </div>
+        </div>;
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
@@ -108,21 +107,17 @@ class PageView extends ModelView {
             <div className={`${this.getCssBlockName()} full flex-rows`}>
                 <div className={`${this.getCssBlockName()}__header`}>
                     {this.renderTitle()}
-                    {model.isModal() && <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
-                        <CloseIcon/>
-                    </div>}
+                    {model.isModal() &&
+                        <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
+                            <CloseIcon/>
+                        </div>
+                    }
                 </div>
                 <div className={`${this.getCssBlockName()}__main flex-max frame`}>
                     <div className="frame__container flex-rows grid-gap-10">
                         {this.isToolbar() && this.renderToolbar()}
                         {model.hasRowForm() && this.renderRowForms()}
-                        {model.hasTableForm() &&
-                        <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
-                            <div className="frame__container">
-                                <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
-                            </div>
-                        </div>
-                        }
+                        {model.hasTableForm() && this.renderTableForms()}
                     </div>
                 </div>
             </div>
