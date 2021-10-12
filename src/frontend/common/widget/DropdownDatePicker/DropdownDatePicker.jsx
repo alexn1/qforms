@@ -89,7 +89,7 @@ class DropdownDatePicker extends ReactComponent {
     getClassList() {
         return [
             ...super.getClassList(),
-            ...(this.props.readOnly ? ['readOnly'] : [])
+            ...(this.props.readOnly ? ['read-only'] : [])
         ];
     }
 

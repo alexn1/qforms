@@ -124,11 +124,11 @@ button.RowFormComboBoxFieldView__create-button:active {
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.RowFormDatePickerFieldView__date-picker.readOnly > .DropdownDatePicker__input {
+.RowFormDatePickerFieldView__date-picker.read-only > .DropdownDatePicker__input {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.RowFormDatePickerFieldView__date-picker:not(.readOnly) > .DropdownDatePicker__input {
+.RowFormDatePickerFieldView__date-picker:not(.read-only) > .DropdownDatePicker__input {
   cursor: pointer;
 }
 .debug .RowFormDatePickerFieldView.changed .DropdownDatePicker__input {
@@ -142,7 +142,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 .RowFormDateTimeFieldView.date > .time {
   display: none;
 }
-.RowFormDateTimeFieldView > .DropdownDatePicker:not(.readOnly) > input {
+.RowFormDateTimeFieldView > .DropdownDatePicker:not(.read-only) > input {
   cursor: pointer;
 }
 .RowFormDateTimeFieldView > .DropdownDatePicker > input {
@@ -150,7 +150,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.RowFormDateTimeFieldView > .DropdownDatePicker.readOnly > input {
+.RowFormDateTimeFieldView > .DropdownDatePicker.read-only > input {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
