@@ -1810,12 +1810,13 @@ class TextArea extends ReactComponent {
     // console.log('TextArea.render');
     return /*#__PURE__*/React.createElement("textarea", {
       className: this.getCssClassNames(),
-      value: this.state.value,
       readOnly: this.props.readOnly,
-      onChange: this.onChange,
+      disabled: this.props.disabled,
       placeholder: this.props.placeholder,
       rows: this.props.rows,
       cols: this.props.cols,
+      value: this.state.value,
+      onChange: this.onChange,
       onFocus: this.props.onFocus,
       onBlur: this.props.onBlur
     });
@@ -1869,15 +1870,15 @@ class TextBox extends ReactComponent {
       ref: this.input,
       className: this.getCssClassNames(),
       type: "text",
-      name: this.props.name,
       id: this.props.id,
+      name: this.props.name,
       readOnly: this.props.readOnly,
+      disabled: this.props.disabled,
       placeholder: this.props.placeholder,
       spellCheck: this.props.spellCheck,
-      onChange: this.onChange,
-      value: this.state.value,
-      disabled: this.props.disabled,
       autoComplete: this.props.autocomplete,
+      value: this.state.value,
+      onChange: this.onChange,
       onFocus: this.props.onFocus,
       onBlur: this.props.onBlur
     });

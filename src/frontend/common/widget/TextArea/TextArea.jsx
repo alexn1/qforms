@@ -26,12 +26,13 @@ class TextArea extends ReactComponent {
         return (
             <textarea
                 className={this.getCssClassNames()}
-                value={this.state.value}
                 readOnly={this.props.readOnly}
-                onChange={this.onChange}
+                disabled={this.props.disabled}
                 placeholder={this.props.placeholder}
                 rows={this.props.rows}
                 cols={this.props.cols}
+                value={this.state.value}
+                onChange={this.onChange}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
             />

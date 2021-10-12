@@ -40,6 +40,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
+                disabled={!ctrl.isEditable()}
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceholder() || null}
                 autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
