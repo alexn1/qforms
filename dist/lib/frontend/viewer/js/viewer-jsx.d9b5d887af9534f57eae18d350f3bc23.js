@@ -1128,18 +1128,24 @@ class PageView extends ModelView {
     }
   }
 
-  render() {
-    console.log('PageView.render', this.props.ctrl.model.getFullName());
+  renderHeader() {
     const ctrl = this.props.ctrl;
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()} full flex-rows`
-    }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__header`
     }, this.renderTitle(), model.isModal() && /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onClosePageClick
-    }, /*#__PURE__*/React.createElement(CloseIcon, null))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+  }
+
+  render() {
+    console.log('PageView.render', this.props.ctrl.model.getFullName());
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()} full flex-rows`
+    }, this.renderHeader(), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__main flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows grid-gap-10"

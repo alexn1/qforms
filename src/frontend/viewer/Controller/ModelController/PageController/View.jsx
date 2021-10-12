@@ -112,20 +112,25 @@ class PageView extends ModelView {
             </div>;
         }
     }
+    renderHeader() {
+        const ctrl = this.props.ctrl;
+        const model = ctrl.getModel();
+        return <div className={`${this.getCssBlockName()}__header`}>
+            {this.renderTitle()}
+            {model.isModal() &&
+                <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
+                    <CloseIcon/>
+                </div>
+            }
+        </div>;
+    }
     render() {
         console.log('PageView.render', this.props.ctrl.model.getFullName());
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
             <div className={`${this.getCssBlockName()} full flex-rows`}>
-                <div className={`${this.getCssBlockName()}__header`}>
-                    {this.renderTitle()}
-                    {model.isModal() &&
-                        <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
-                            <CloseIcon/>
-                        </div>
-                    }
-                </div>
+                {this.renderHeader()}
                 <div className={`${this.getCssBlockName()}__main flex-max frame`}>
                     <div className="frame__container flex-rows grid-gap-10">
                         {this.isToolbar() && this.renderToolbar()}
