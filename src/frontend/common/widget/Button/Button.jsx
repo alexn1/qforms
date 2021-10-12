@@ -8,10 +8,6 @@ class Button extends ReactComponent {
         if (this.props.enabled !== undefined) return !this.props.enabled;
         return this.state.disabled;
     }
-    onClick = e => {
-        // console.log('Button.onClick', e);
-        if (this.props.onClick) this.props.onClick(e);
-    }
     isVisible() {
         return this.props.visible === undefined ? true : this.props.visible;
     }
@@ -19,10 +15,12 @@ class Button extends ReactComponent {
         // console.log('Button.render', this.props.title, this.props);
         return (
             <button className={this.getCssClassNames()}
-                name={this.props.name}
                 id={this.props.id}
+                name={this.props.name}
                 disabled={this.isDisabled()}
-                onClick={this.onClick}
+                onClick={this.props.onClick}
+                onFocus={this.props.onFocus}
+                onBlur={this.props.onBlur}
                 style={{
                     display: !this.isVisible() ? 'none' : null,
                     width  : this.props.width

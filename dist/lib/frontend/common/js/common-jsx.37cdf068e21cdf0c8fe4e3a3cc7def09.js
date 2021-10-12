@@ -141,18 +141,10 @@ class Box extends ReactComponent {
 }
 
 window.QForms.Box = Box;
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 class Button extends ReactComponent {
   constructor(props) {
     // console.log('Button.constructor', props);
     super(props);
-
-    _defineProperty(this, "onClick", e => {
-      // console.log('Button.onClick', e);
-      if (this.props.onClick) this.props.onClick(e);
-    });
-
     this.state = {
       disabled: false
     };
@@ -171,10 +163,12 @@ class Button extends ReactComponent {
     // console.log('Button.render', this.props.title, this.props);
     return /*#__PURE__*/React.createElement("button", {
       className: this.getCssClassNames(),
-      name: this.props.name,
       id: this.props.id,
+      name: this.props.name,
       disabled: this.isDisabled(),
-      onClick: this.onClick,
+      onClick: this.props.onClick,
+      onFocus: this.props.onFocus,
+      onBlur: this.props.onBlur,
       style: {
         display: !this.isVisible() ? 'none' : null,
         width: this.props.width
