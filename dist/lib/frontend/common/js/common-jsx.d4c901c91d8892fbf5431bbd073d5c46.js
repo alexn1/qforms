@@ -1428,27 +1428,30 @@ class Select extends ReactComponent {
   constructor(props) {
     super(props);
 
-    _defineProperty(this, "onInputClick", async e => {
-      console.log('Select.onInputClick');
+    _defineProperty(this, "onInputMouseDown", async e => {
       if (this.props.readOnly) return;
 
-      if (!this.state.visible) {
-        const [selected] = this.el.current.querySelectorAll('li.selected'); // console.log('selected:', selected);
+      if (this.props.onMouseDown) {
+        await this.props.onMouseDown(e);
+      } else {
+        if (!this.state.visible) {
+          const [selected] = this.el.current.querySelectorAll('li.selected'); // console.log('selected:', selected);
 
-        if (selected) {
-          // console.log('selected.offsetTop:', selected.offsetTop);
-          const scrollTop = selected.offsetTop - this.dropdown.current.getBoundingClientRect().height / 2 + selected.getBoundingClientRect().height / 2;
-          console.log('scrollTop:', scrollTop);
-          this.dropdown.current.scrollTop = scrollTop;
-          console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+          if (selected) {
+            // console.log('selected.offsetTop:', selected.offsetTop);
+            const scrollTop = selected.offsetTop - this.dropdown.current.getBoundingClientRect().height / 2 + selected.getBoundingClientRect().height / 2;
+            console.log('scrollTop:', scrollTop);
+            this.dropdown.current.scrollTop = scrollTop;
+            console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+          }
         }
-      }
 
-      this.setState(prevState => {
-        return {
-          visible: !prevState.visible
-        };
-      });
+        this.setState(prevState => {
+          return {
+            visible: !prevState.visible
+          };
+        });
+      }
     });
 
     _defineProperty(this, "onInputBlur", async e => {
@@ -1474,12 +1477,6 @@ class Select extends ReactComponent {
           await this.props.onChange(value.toString());
         }
       });
-    });
-
-    _defineProperty(this, "onInputMouseDown", async e => {
-      if (this.props.onMouseDown) {
-        await this.props.onMouseDown(e);
-      }
     });
 
     this.el = React.createRef();
@@ -1561,7 +1558,6 @@ class Select extends ReactComponent {
       readOnly: true,
       disabled: this.props.readOnly,
       placeholder: this.props.placeholder,
-      onClick: this.onInputClick,
       onBlur: this.onInputBlur,
       value: this.getValueTitle(this.getValue()),
       onMouseDown: this.onInputMouseDown
