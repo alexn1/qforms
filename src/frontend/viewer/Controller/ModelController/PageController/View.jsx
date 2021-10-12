@@ -4,8 +4,7 @@ class PageView extends ModelView {
         this.checkParent();
     }
     getTabs() {
-        const ctrl = this.props.ctrl;
-        return ctrl.forms.filter(form => form.model.getClassName() === 'TableForm').map(form => {
+        return this.getTableForms().map(form => {
             return {
                 name   : form.model.getName(),
                 title  : form.getTitle(),
@@ -25,7 +24,7 @@ class PageView extends ModelView {
     }
     renderRowForms() {
         const ctrl = this.props.ctrl;
-        return ctrl.forms.filter(form => form.model.getClassName() === 'RowForm').map(form => {
+        return this.getRowForms().map(form => {
             return this.renderForm(form);
         });
     }
@@ -99,9 +98,14 @@ class PageView extends ModelView {
             </div>
         </div>;
     }*/
+    getRowForms() {
+        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
+    }
+    getTableForms() {
+        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
+    }
     renderTableForms() {
-        const ctrl = this.getCtrl();
-        const tableForms = ctrl.forms.filter(form => form.getModel().getClassName() === 'TableForm');
+        const tableForms = this.getTableForms();
         if (tableForms.length === 1) {
             return this.renderForm(tableForms[0]);
         } else {
