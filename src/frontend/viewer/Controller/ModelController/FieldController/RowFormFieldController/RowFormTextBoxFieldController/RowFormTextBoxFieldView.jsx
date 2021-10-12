@@ -1,4 +1,10 @@
 class RowFormTextBoxFieldView extends RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.state = {
+            classList: []
+        };
+    }
     onCloseClick = async e => {
         console.log('RowFormTextBoxFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
@@ -16,6 +22,16 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         // console.log('ctrl.widget.state.value:', ctrl.widget.state.value);
         return ctrl.widget.state.value !== '';
     }
+    onFocus = async e => {
+        // console.log('RowFormTextBoxFieldView.onFocus');
+        this.addCssClass('focus');
+        await this.rerender();
+    }
+    onBlur = async e => {
+        // console.log('RowFormTextBoxFieldView.onBlur');
+        this.removeCssClass('focus');
+        await this.rerender();
+    }
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
@@ -27,6 +43,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 onChange={ctrl.onChange}
                 placeholder={ctrl.getPlaceholder() || null}
                 autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
             />
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
                 <CloseIcon/>

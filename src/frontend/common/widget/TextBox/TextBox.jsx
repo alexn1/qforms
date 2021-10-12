@@ -42,6 +42,8 @@ class TextBox extends ReactComponent {
                 value={this.state.value}
                 disabled={this.props.disabled}
                 autoComplete={this.props.autocomplete}
+                onFocus={this.props.onFocus}
+                onBlur={this.props.onBlur}
             />
         );
     }

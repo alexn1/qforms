@@ -15,6 +15,16 @@ class ReactComponent extends React.Component {
     return [this.getCssBlockName(), ...(this.props.classList || []), ...(this.state && this.state.classList ? this.state.classList : [])];
   }
 
+  addCssClass(className) {
+    if (!this.state) this.state = {};
+    if (!this.state.classList) this.state.classList = [];
+    this.state.classList.push(className);
+  }
+
+  removeCssClass(className) {
+    this.state.classList.splice(this.state.classList.indexOf(className), 1);
+  }
+
   getCssBlockName() {
     if (this.props.cssBlockName) {
       return this.props.cssBlockName;
@@ -1869,7 +1879,9 @@ class TextBox extends ReactComponent {
       onChange: this.onChange,
       value: this.state.value,
       disabled: this.props.disabled,
-      autoComplete: this.props.autocomplete
+      autoComplete: this.props.autocomplete,
+      onFocus: this.props.onFocus,
+      onBlur: this.props.onBlur
     });
   }
 

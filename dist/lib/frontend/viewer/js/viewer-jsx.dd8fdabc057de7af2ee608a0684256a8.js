@@ -441,8 +441,8 @@ window.QForms.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormTextBoxFieldView extends RowFormFieldView {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onCloseClick", async e => {
       console.log('RowFormTextBoxFieldView.onCloseClick');
@@ -453,6 +453,22 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       });
       ctrl.onChange('');
     });
+
+    _defineProperty(this, "onFocus", async e => {
+      // console.log('RowFormTextBoxFieldView.onFocus');
+      this.addCssClass('focus');
+      await this.rerender();
+    });
+
+    _defineProperty(this, "onBlur", async e => {
+      // console.log('RowFormTextBoxFieldView.onBlur');
+      this.removeCssClass('focus');
+      await this.rerender();
+    });
+
+    this.state = {
+      classList: []
+    };
   }
 
   isCloseVisible() {
@@ -479,7 +495,9 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder() || null,
-      autocomplete: ctrl.getModel().getAttr('autocomplete') || null
+      autocomplete: ctrl.getModel().getAttr('autocomplete') || null,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick

@@ -16,6 +16,14 @@ class ReactComponent extends React.Component {
             ...(this.state && this.state.classList ? this.state.classList : [])
         ];
     }
+    addCssClass(className) {
+        if (!this.state) this.state = {};
+        if (!this.state.classList) this.state.classList = [];
+        this.state.classList.push(className);
+    }
+    removeCssClass(className) {
+        this.state.classList.splice(this.state.classList.indexOf(className),1);
+    }
     getCssBlockName() {
         if (this.props.cssBlockName) {
             return this.props.cssBlockName;
