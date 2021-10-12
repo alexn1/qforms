@@ -790,6 +790,7 @@ class DropdownDatePicker extends ReactComponent {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("input", {
+      className: `${this.getCssBlockName()}__input`,
       readOnly: true,
       onClick: this.onInputClick,
       onBlur: this.onBlur,
@@ -797,9 +798,10 @@ class DropdownDatePicker extends ReactComponent {
       placeholder: this.props.placeholder,
       onKeyDown: this.onInputKeyDown
     }), /*#__PURE__*/React.createElement("div", {
-      className: `close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
+      className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
+      classList: [`${this.getCssBlockName()}__date-picker`],
       minDate: this.getMinDate(),
       selectedMonth: this.getSelectedMonth(),
       selectedDate: this.getSelectedDate(),

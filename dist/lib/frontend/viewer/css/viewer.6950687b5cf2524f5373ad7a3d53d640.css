@@ -113,25 +113,25 @@ button.RowFormComboBoxFieldView__create-button:active {
   background-color: #eefdea;
 }
 
-.RowFormDatePickerFieldView > .DropdownDatePicker {
+.RowFormDatePickerFieldView.error > .DropdownDatePicker > input {
+  background-color: #f2dede;
+}
+.RowFormDatePickerFieldView__date-picker {
   width: 100%;
 }
-.RowFormDatePickerFieldView > .DropdownDatePicker > input {
+.RowFormDatePickerFieldView__date-picker > input {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
 }
-.RowFormDatePickerFieldView > .DropdownDatePicker.readOnly > input {
+.RowFormDatePickerFieldView__date-picker.readOnly > input {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.RowFormDatePickerFieldView > .DropdownDatePicker:not(.readOnly) > input {
+.RowFormDatePickerFieldView__date-picker:not(.readOnly) > input {
   cursor: pointer;
 }
-.RowFormDatePickerFieldView.error > div > input {
-  background-color: #f2dede;
-}
-.debug .RowFormDatePickerFieldView.changed > div > input {
+.debug .RowFormDatePickerFieldView.changed > .DropdownDatePicker > input {
   background-color: #eefdea;
 }
 

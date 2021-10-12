@@ -217,6 +217,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
+      classList: [`${this.getCssBlockName()}__date-picker`],
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),

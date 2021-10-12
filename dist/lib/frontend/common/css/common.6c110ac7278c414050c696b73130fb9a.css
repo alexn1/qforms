@@ -169,18 +169,15 @@ table.DatePicker td.selected {
 
 .DropdownDatePicker {
   position: relative;
-  /*&.readOnly > input {
-    background-color: lightgoldenrodyellow;
-    color: gray;
-  }
-  &:not(.readOnly) > input {
-    cursor: pointer;
-  }*/
 }
-.DropdownDatePicker > input {
+.DropdownDatePicker > .DatePicker {
+  position: absolute;
+  z-index: 2;
+}
+.DropdownDatePicker__input {
   width: 100%;
 }
-.DropdownDatePicker > div.close {
+.DropdownDatePicker__close {
   display: flex;
   position: absolute;
   width: 10px;
@@ -190,15 +187,11 @@ table.DatePicker td.selected {
   cursor: pointer;
   visibility: hidden;
 }
-.DropdownDatePicker > div.close:hover svg line {
+.DropdownDatePicker__close:hover svg line {
   stroke: black;
 }
-.DropdownDatePicker > div.close.visible {
+.DropdownDatePicker__close.visible {
   visibility: visible;
-}
-.DropdownDatePicker > .DatePicker {
-  position: absolute;
-  z-index: 2;
 }
 
 .Grid {
