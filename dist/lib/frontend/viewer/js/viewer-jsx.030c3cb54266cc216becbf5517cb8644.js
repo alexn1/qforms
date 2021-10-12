@@ -1101,16 +1101,31 @@ class PageView extends ModelView {
     const model = this.getCtrl().getModel();
     return model.options.selectMode || model.isModal() && model.hasRowFormWithDefaultSqlDataSource() || model.hasActions();
   }
+  /*renderTableForms() {
+      return <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
+          <div className="frame__container">
+              <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
+          </div>
+      </div>;
+  }*/
+
 
   renderTableForms() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__table-forms flex-max frame`
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container"
-    }, /*#__PURE__*/React.createElement(Tab, {
-      tabs: this.getTabs(),
-      classList: ['Tab-blue', 'full']
-    })));
+    const ctrl = this.getCtrl();
+    const tableForms = ctrl.forms.filter(form => form.getModel().getClassName() === 'TableForm');
+
+    if (tableForms.length === 1) {
+      return this.renderForm(tableForms[0]);
+    } else {
+      return /*#__PURE__*/React.createElement("div", {
+        className: `${this.getCssBlockName()}__table-forms flex-max frame`
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "frame__container"
+      }, /*#__PURE__*/React.createElement(Tab, {
+        tabs: this.getTabs(),
+        classList: ['Tab-blue', 'full']
+      })));
+    }
   }
 
   render() {
@@ -1134,27 +1149,3 @@ class PageView extends ModelView {
 }
 
 window.QForms.PageView = PageView;
-class PageView2 extends PageView {
-  getCssBlockName() {
-    return 'PageView';
-  }
-
-  renderTableForms() {
-    const ctrl = this.getCtrl();
-    const tableForms = ctrl.forms.filter(form => form.getModel().getClassName() === 'TableForm');
-
-    if (tableForms.length === 1) {
-      return this.renderForm(tableForms[0]);
-    } else {
-      return /*#__PURE__*/React.createElement("div", {
-        className: `${this.getCssBlockName()}__table-forms flex-max frame`
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "frame__container"
-      }, /*#__PURE__*/React.createElement(Tab, {
-        tabs: this.getTabs(),
-        classList: ['Tab-blue', 'full']
-      })));
-    }
-  }
-
-}
