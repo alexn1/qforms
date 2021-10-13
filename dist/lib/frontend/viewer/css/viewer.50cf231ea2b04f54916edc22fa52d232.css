@@ -84,11 +84,9 @@
   height: 20px;
   padding: 0 5px;
 }
-.RowFormComboBoxFieldView__select .Select__input[readonly] {
+.RowFormComboBoxFieldView__select .Select__input[disabled] {
   background-color: lightgoldenrodyellow;
   color: gray;
-}
-.RowFormComboBoxFieldView__select .Select__input[disabled] {
   cursor: text;
 }
 button.RowFormComboBoxFieldView__edit-button {
