@@ -83,6 +83,9 @@
   border: none;
   height: 20px;
   padding: 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 .RowFormComboBoxFieldView__select .Select__input[disabled] {
   background-color: lightgoldenrodyellow;
@@ -125,6 +128,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 .RowFormDatePickerFieldView__date-picker.read-only > .DropdownDatePicker__input {
   background-color: lightgoldenrodyellow;
@@ -151,6 +157,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-size: inherit;
 }
 .RowFormDateTimeFieldView > .DropdownDatePicker.read-only > input {
   background-color: lightgoldenrodyellow;
@@ -165,6 +172,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 .RowFormDateTimeFieldView > .time > input.TimeBox:read-only {
   background-color: lightgoldenrodyellow;
@@ -232,6 +242,8 @@ button.RowFormComboBoxFieldView__create-button:active {
   display: block;
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
   font-size: inherit;
 }
 .RowFormTextAreaFieldView__textarea[readonly] {
@@ -253,6 +265,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 20px;
   border: none;
   padding: 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 .RowFormTextBoxFieldView__input[readonly] {
   background-color: lightgoldenrodyellow;
@@ -289,6 +304,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 20px;
   border-width: 0;
   padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 .RowFormTimeFieldView > input[readonly] {
   background-color: lightgoldenrodyellow;
