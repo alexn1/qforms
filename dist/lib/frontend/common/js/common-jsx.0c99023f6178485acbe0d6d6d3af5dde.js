@@ -642,15 +642,18 @@ class DropdownButton extends ReactComponent {
 
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: `DropdownButton ${this.state.open && 'show'}`
+      className: `${this.getCssClassNames()} ${this.state.open && 'show'}`
     }, /*#__PURE__*/React.createElement(Button, {
+      classList: [`${this.getCssBlockName()}__button`],
       onClick: this.onButtonClick,
       onBlur: this.onButtonBlur,
       disabled: this.isDisabled()
     }, this.props.title), /*#__PURE__*/React.createElement("ul", {
+      className: `${this.getCssBlockName()}__dropdown`,
       onMouseDown: this.onUlMouseDown,
       onClick: this.onUlClick
     }, this.props.actions && this.props.actions.map(action => /*#__PURE__*/React.createElement("li", {
+      className: `${this.getCssBlockName()}__item`,
       key: action.name,
       "data-action": action.name
     }, action.title))));

@@ -36,15 +36,16 @@ class DropdownButton extends ReactComponent{
     }
     render() {
         return (
-            <div className={`DropdownButton ${this.state.open && 'show'}`}>
+            <div className={`${this.getCssClassNames()} ${this.state.open && 'show'}`}>
                 <Button
+                    classList={[`${this.getCssBlockName()}__button`]}
                     onClick={this.onButtonClick}
                     onBlur={this.onButtonBlur}
                     disabled={this.isDisabled()}
                 >{this.props.title}</Button>
-                <ul onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
+                <ul className={`${this.getCssBlockName()}__dropdown`} onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
                     {this.props.actions && this.props.actions.map(action =>
-                        <li key={action.name} data-action={action.name}>{action.title}</li>
+                        <li className={`${this.getCssBlockName()}__item`} key={action.name} data-action={action.name}>{action.title}</li>
                     )}
                 </ul>
             </div>

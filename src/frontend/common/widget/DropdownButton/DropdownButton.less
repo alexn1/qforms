@@ -1,35 +1,30 @@
 .DropdownButton {
   position: relative;
   display: inline-block;
-
-  > button {
-    /*border: none;*/
-    /*padding: 10px;*/
-  }
-
-  &.show > ul {
+  &.show > .DropdownButton__dropdown {
     visibility: visible;
-    padding: 0;
-    margin: 0;
   }
+}
 
-  > ul {
-    position: absolute;
-    background-color: white;
-    width: 300%;
-    visibility: hidden;
+.DropdownButton__dropdown {
+  position: absolute;
+  background-color: white;
+  width: 300%;
+  visibility: hidden;
+  z-index: 3;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  padding: 5px 0;
+  list-style: none;
+  font-size: 12px;
+  margin: 0;
+}
 
-    z-index: 3;
-
-    > li {
-      display: block;
-      padding: 10px;
-      border-bottom: solid 1px lightgrey;
-      &:hover {
-        background-color: #afd9ee;
-        cursor: pointer;
-      }
-    }
-
+.DropdownButton__item {
+  display: block;
+  padding: 10px;
+  &:hover {
+    background-color: #398bce;
+    color: white;
   }
 }

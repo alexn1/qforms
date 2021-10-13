@@ -141,30 +141,29 @@ table.DatePicker td.selected {
   position: relative;
   display: inline-block;
 }
-.DropdownButton > button {
-  /*border: none;*/
-  /*padding: 10px;*/
-}
-.DropdownButton.show > ul {
+.DropdownButton.show > .DropdownButton__dropdown {
   visibility: visible;
-  padding: 0;
-  margin: 0;
 }
-.DropdownButton > ul {
+.DropdownButton__dropdown {
   position: absolute;
   background-color: white;
   width: 300%;
   visibility: hidden;
   z-index: 3;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 5px 0;
+  list-style: none;
+  font-size: 12px;
+  margin: 0;
 }
-.DropdownButton > ul > li {
+.DropdownButton__item {
   display: block;
   padding: 10px;
-  border-bottom: solid 1px lightgrey;
 }
-.DropdownButton > ul > li:hover {
-  background-color: #afd9ee;
-  cursor: pointer;
+.DropdownButton__item:hover {
+  background-color: #398bce;
+  color: white;
 }
 
 .DropdownDatePicker {
