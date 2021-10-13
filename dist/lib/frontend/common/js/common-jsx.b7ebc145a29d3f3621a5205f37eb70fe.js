@@ -1558,6 +1558,11 @@ class Select extends ReactComponent {
     return true;
   }
 
+  isCloseVisible() {
+    if (this.props.readOnly) return false;
+    return this.state.value !== '';
+  }
+
   render() {
     // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
     return /*#__PURE__*/React.createElement("div", {
@@ -1572,7 +1577,7 @@ class Select extends ReactComponent {
       value: this.getValueTitle(this.getValue()),
       onMouseDown: this.onInputMouseDown
     }), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__close ${this.state.value !== '' ? 'visible' : ''}`,
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`
