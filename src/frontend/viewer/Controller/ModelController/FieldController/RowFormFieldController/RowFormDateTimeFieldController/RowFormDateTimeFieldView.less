@@ -1,3 +1,5 @@
+@fieldHeight: 22px;
+
 .RowFormDateTimeFieldView {
   &.datetime {
     display: grid;
@@ -11,7 +13,7 @@
       cursor: pointer;
     }
     > input {
-      height      : 20px;
+      height      : @fieldHeight;
       border-width: 0;
       padding     : 0 5px 0 5px;
       font-size   : inherit;
@@ -26,7 +28,7 @@
     border-left: solid 1px #ddd;
     > input.TimeBox {
       width       : 100%;
-      height      : 20px;
+      height      : @fieldHeight;
       border-width: 0;
       padding     : 0 5px 0 5px;
       font-family: inherit;

@@ -81,7 +81,7 @@
 .RowFormComboBoxFieldView__select .Select__input {
   background-color: white;
   border: none;
-  height: 20px;
+  height: 22px;
   padding: 0 5px;
   font-family: inherit;
   font-weight: inherit;
@@ -93,7 +93,7 @@
   cursor: text;
 }
 button.RowFormComboBoxFieldView__edit-button {
-  height: 20px;
+  height: 22px;
   border: none;
   background-color: #ccc;
 }
@@ -104,7 +104,7 @@ button.RowFormComboBoxFieldView__edit-button:active {
   background-color: #bbb;
 }
 button.RowFormComboBoxFieldView__create-button {
-  height: 20px;
+  height: 22px;
   border: none;
   background-color: #ccc;
 }
@@ -125,7 +125,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   width: 100%;
 }
 .RowFormDatePickerFieldView__date-picker > .DropdownDatePicker__input {
-  height: 20px;
+  height: 22px;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-family: inherit;
@@ -154,7 +154,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   cursor: pointer;
 }
 .RowFormDateTimeFieldView > .DropdownDatePicker > input {
-  height: 20px;
+  height: 22px;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-size: inherit;
@@ -169,7 +169,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .RowFormDateTimeFieldView > .time > input.TimeBox {
   width: 100%;
-  height: 20px;
+  height: 22px;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-family: inherit;
@@ -262,7 +262,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .RowFormTextBoxFieldView__input {
   width: 100%;
-  height: 20px;
+  height: 22px;
   border: none;
   padding: 0 5px;
   font-family: inherit;
@@ -301,7 +301,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .RowFormTimeFieldView > input {
   width: 100%;
-  height: 20px;
+  height: 22px;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-family: inherit;
@@ -351,6 +351,10 @@ button.RowFormComboBoxFieldView__create-button:active {
   background-color: #f0f6ff;
   padding: 5px;
   font-size: small;
+  width: 1000px;
+}
+.Modal .RowFormView {
+  width: unset;
 }
 .RowFormView__toolbar {
   display: flex;
@@ -358,7 +362,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .RowFormView__grid {
   display: grid;
-  grid-template-columns: 150px 300px 24px 150px 300px 24px;
+  grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
   grid-row-gap: 5px;
 }
 .RowFormView__label {

@@ -1,3 +1,5 @@
+@fieldHeight: 22px;
+
 .RowFormDatePickerFieldView {
     &.error .DropdownDatePicker__input {
         background-color: #f2dede;
@@ -7,7 +9,7 @@
 .RowFormDatePickerFieldView__date-picker {
     width: 100%;
     > .DropdownDatePicker__input {
-        height      : 20px;
+        height      : @fieldHeight;
         border-width: 0;
         padding     : 0 5px 0 5px;
         font-family: inherit;
