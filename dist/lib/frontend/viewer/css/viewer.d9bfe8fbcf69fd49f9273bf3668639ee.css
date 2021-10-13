@@ -78,14 +78,18 @@
 .RowFormComboBoxFieldView__select {
   width: 100%;
 }
-.RowFormComboBoxFieldView__select input.Select__input {
+.RowFormComboBoxFieldView__select .Select__input {
   background-color: white;
-  border-width: 0;
+  border: none;
   height: 20px;
+  padding: 0 5px;
 }
-.RowFormComboBoxFieldView__select input.Select__input[disabled] {
-  cursor: default;
+.RowFormComboBoxFieldView__select .Select__input[readonly] {
   background-color: lightgoldenrodyellow;
+  color: gray;
+}
+.RowFormComboBoxFieldView__select .Select__input[disabled] {
+  cursor: text;
 }
 button.RowFormComboBoxFieldView__edit-button {
   height: 20px;
@@ -255,6 +259,9 @@ button.RowFormComboBoxFieldView__create-button:active {
 .RowFormTextBoxFieldView__input[readonly] {
   background-color: lightgoldenrodyellow;
   color: gray;
+}
+.RowFormTextBoxFieldView__input[disabled] {
+  cursor: text;
 }
 .RowFormTextBoxFieldView__close {
   display: flex;

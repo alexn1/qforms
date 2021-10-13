@@ -25,13 +25,17 @@
 
 .RowFormComboBoxFieldView__select {
     width: 100%;
-    input.Select__input {
+    .Select__input {
         background-color: white;
-        border-width    : 0;
+        border          : none;
         height          : 20px;
-        &[disabled] {
-            cursor          : default;
+        padding         : 0 5px;
+        &[readonly] {
             background-color: lightgoldenrodyellow;
+            color           : gray;
+        }
+        &[disabled] {
+            cursor: text;
         }
     }
 }
