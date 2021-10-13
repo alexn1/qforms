@@ -433,8 +433,6 @@ input.Select__input {
   margin: 0 auto;
   width: 10px;
   height: 6px;
-}
-.Select__icon svg path {
   fill: #aaa;
 }
 .Select__close {
