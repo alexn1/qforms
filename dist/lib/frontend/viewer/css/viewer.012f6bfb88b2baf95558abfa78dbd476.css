@@ -325,6 +325,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 
 .RowFormView {
   background-color: #eee;
+  background-color: #f0f6ff;
   padding: 5px;
   font-size: small;
 }
