@@ -1562,6 +1562,8 @@ class Select extends ReactComponent {
       value: this.getValueTitle(this.getValue()),
       onMouseDown: this.onInputMouseDown
     }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__clear`
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`
     }, /*#__PURE__*/React.createElement(ArrowIcon, null)), /*#__PURE__*/React.createElement("ul", {
       ref: this.dropdown,

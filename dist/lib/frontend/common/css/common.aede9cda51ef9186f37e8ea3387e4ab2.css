@@ -452,8 +452,8 @@ input.Select__input {
 }
 .Select__clear svg {
   margin: 0 auto;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
 }
 .Select__icon_up svg {
   transform: rotate(180deg);

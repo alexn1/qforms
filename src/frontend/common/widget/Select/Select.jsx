@@ -111,9 +111,9 @@ class Select extends ReactComponent {
                    value={this.getValueTitle(this.getValue())}
                    onMouseDown={this.onInputMouseDown}
             />
-            {/*<div className={`${this.getCssBlockName()}__clear`}>
+            <div className={`${this.getCssBlockName()}__clear`}>
                 <CloseIcon/>
-            </div>*/}
+            </div>
             <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`}>
                 <ArrowIcon/>
             </div>
