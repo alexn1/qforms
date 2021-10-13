@@ -477,12 +477,13 @@ input.Select__input {
 }
 .Select__item {
   cursor: pointer;
+  padding: 1px 0;
 }
 .Select__item:hover {
   background-color: #eee;
 }
 .Select__item.selected {
-  background-color: blue !important;
+  background-color: #398bce !important;
   color: white !important;
 }
 
