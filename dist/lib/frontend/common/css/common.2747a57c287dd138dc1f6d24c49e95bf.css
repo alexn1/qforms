@@ -417,7 +417,7 @@ a.Grid__tr:hover {
 input.Select__input {
   cursor: pointer;
   width: 100%;
-  padding-right: 20px;
+  padding-right: 40px;
 }
 .Select__icon {
   width: 20px;
@@ -437,7 +437,7 @@ input.Select__input {
 .Select__icon svg path {
   fill: #aaa;
 }
-.Select__clear {
+.Select__close {
   width: 20px;
   position: absolute;
   right: 20px;
@@ -446,11 +446,15 @@ input.Select__input {
   cursor: pointer;
   display: flex;
   align-items: center;
+  visibility: hidden;
 }
-.Select__clear:hover line {
+.Select__close.visible {
+  visibility: visible;
+}
+.Select__close:hover line {
   stroke: black;
 }
-.Select__clear svg {
+.Select__close svg {
   margin: 0 auto;
   width: 10px;
   height: 10px;

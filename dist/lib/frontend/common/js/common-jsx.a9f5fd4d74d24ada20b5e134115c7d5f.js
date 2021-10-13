@@ -1479,6 +1479,16 @@ class Select extends ReactComponent {
       });
     });
 
+    _defineProperty(this, "onCloseClick", async e => {
+      this.setState({
+        value: ''
+      });
+
+      if (this.props.onChange) {
+        await this.props.onChange('');
+      }
+    });
+
     this.el = React.createRef();
     this.dropdown = React.createRef();
     this.state = {
@@ -1562,7 +1572,8 @@ class Select extends ReactComponent {
       value: this.getValueTitle(this.getValue()),
       onMouseDown: this.onInputMouseDown
     }), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__clear`
+      className: `${this.getCssBlockName()}__close ${this.state.value !== '' ? 'visible' : ''}`,
+      onClick: this.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`
     }, /*#__PURE__*/React.createElement(ArrowIcon, null)), /*#__PURE__*/React.createElement("ul", {

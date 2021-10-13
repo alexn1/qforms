@@ -85,6 +85,12 @@ class Select extends ReactComponent {
             }
         });
     }
+    onCloseClick = async e => {
+        this.setState({value: ''});
+        if (this.props.onChange) {
+            await this.props.onChange('');
+        }
+    }
     getItems() {
         return this.props.items || [];
     }
@@ -111,7 +117,7 @@ class Select extends ReactComponent {
                    value={this.getValueTitle(this.getValue())}
                    onMouseDown={this.onInputMouseDown}
             />
-            <div className={`${this.getCssBlockName()}__clear`}>
+            <div className={`${this.getCssBlockName()}__close ${this.state.value !== '' ? 'visible': ''}`} onClick={this.onCloseClick}>
                 <CloseIcon/>
             </div>
             <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`}>
