@@ -2126,11 +2126,21 @@ class PageController extends ModelController {
         }
     }
 
-    onClosePageClick = () => {
+    onClosePageClick = async e => {
         console.log('PageController.onClosePageClick', this.getModel().getFullName());
         this.close();
     }
 
+    onOpenPageClick = async e => {
+        const pageName = this.getModel().getName();
+        const pageKey = this.getModel().getKey();
+        const link = PageController.createLink({
+            page: pageName,
+            ...DataSource.keyToParams(pageKey)
+        });
+        // console.log('link', link);
+        window.open(link, '_blank');
+    }
     close() {
         // console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();

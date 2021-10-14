@@ -1142,6 +1142,7 @@ class PageView extends ModelView {
     }, this.renderTitle(), model.isModal() && [/*#__PURE__*/React.createElement("svg", {
       key: 'open',
       className: `${this.getCssBlockName()}__open`,
+      onClick: ctrl.onOpenPageClick,
       xmlns: "http://www.w3.org/2000/svg",
       height: "24px",
       viewBox: "0 0 24 24",
