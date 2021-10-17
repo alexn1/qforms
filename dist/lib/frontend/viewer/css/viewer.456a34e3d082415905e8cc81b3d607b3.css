@@ -204,7 +204,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 
 .RowFormFileFieldView img {
-  width: 300px;
+  width: 100%;
   display: block;
 }
 .RowFormFileFieldView > div {
