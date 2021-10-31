@@ -1164,7 +1164,7 @@ class PageView extends ModelView {
     const ctrl = this.getCtrl();
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()} full flex-rows`
+      className: `${this.getCssClassNames()} full flex-rows`
     }, this.renderHeader(), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__main flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {

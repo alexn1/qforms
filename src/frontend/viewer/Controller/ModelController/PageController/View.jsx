@@ -124,7 +124,7 @@ class PageView extends ModelView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
-            <div className={`${this.getCssBlockName()} full flex-rows`}>
+            <div className={`${this.getCssClassNames()} full flex-rows`}>
                 {this.renderHeader()}
                 <div className={`${this.getCssBlockName()}__main flex-max frame`}>
                     <div className="frame__container flex-rows grid-gap-10">
