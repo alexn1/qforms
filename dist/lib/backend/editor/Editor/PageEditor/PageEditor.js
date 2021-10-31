@@ -48,6 +48,15 @@ class PageEditor extends Editor {
         });
         return js;
     }
+    async createJsx(params) {
+        const templateFilePath = path.join(__dirname, 'Page.jsx.ejs');
+        const customJsxFilePath = await this.getCustomFilePath('jsx');
+        const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
+            page: this.getName(),
+            _class: this.constructor.name.replace('Editor', '')
+        });
+        return jsx;
+    }
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');

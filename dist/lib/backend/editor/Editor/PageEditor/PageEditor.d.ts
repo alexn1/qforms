@@ -21,6 +21,7 @@ declare class PageEditor extends Editor {
     setAttr(name: any, value: any): void;
     save(): Promise<void>;
     createJs(params: any): Promise<any>;
+    createJsx(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<any>;
     reformat(): void;
