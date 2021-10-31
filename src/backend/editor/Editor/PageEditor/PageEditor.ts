@@ -62,6 +62,15 @@ class PageEditor extends Editor {
         });
         return jsx;
     }
+    async createLess(params) {
+        const templateFilePath = path.join(__dirname, 'Page.less.ejs');
+        const customLessFilePath = await this.getCustomFilePath('less');
+        const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
+            page  : this.getName(),
+            _class: this.constructor.name.replace('Editor', '')
+        });
+        return less;
+    }
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');

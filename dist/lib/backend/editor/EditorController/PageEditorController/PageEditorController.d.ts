@@ -11,6 +11,9 @@ declare class PageEditorController extends VisualEditorController {
     createView(params: any): Promise<{
         jsx: any;
     }>;
+    createStyle(params: any): Promise<{
+        less: any;
+    }>;
     saveController(params: any): Promise<{
         js: any;
     }>;

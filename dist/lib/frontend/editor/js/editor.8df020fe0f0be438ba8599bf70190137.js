@@ -1290,7 +1290,15 @@ class PageEditor extends Editor {
             }
         });
     }
-
+    async createStyle() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action    : 'createStyle',
+            params    : {
+                page: this.getName()
+            }
+        });
+    }
     async createModelBackJs() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
