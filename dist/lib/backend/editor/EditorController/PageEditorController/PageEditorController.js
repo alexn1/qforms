@@ -38,6 +38,8 @@ class PageEditorController extends VisualEditorController {
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 result.data.js = await pageEditor.getCustomFile('js');
+                result.data.jsx = await pageEditor.getCustomFile('jsx');
+                result.data.less = await pageEditor.getCustomFile('less');
                 return result;
             default:
                 return result;
