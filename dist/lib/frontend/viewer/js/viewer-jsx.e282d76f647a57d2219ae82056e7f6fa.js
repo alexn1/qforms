@@ -1028,16 +1028,6 @@ class PageView extends ModelView {
     this.checkParent();
   }
 
-  getTabs() {
-    return this.getTableForms().map(form => {
-      return {
-        name: form.model.getName(),
-        title: form.getTitle(),
-        content: this.renderForm(form)
-      };
-    });
-  }
-
   renderForm(formCtrl, props = {}) {
     return React.createElement(formCtrl.getViewClass(), {
       parent: this,
@@ -1050,10 +1040,7 @@ class PageView extends ModelView {
   }
 
   renderRowForms() {
-    const ctrl = this.props.ctrl;
-    return this.getRowForms().map(form => {
-      return this.renderForm(form);
-    });
+    return this.getRowForms().map(form => this.renderForm(form));
   }
 
   renderTitle() {
@@ -1100,22 +1087,6 @@ class PageView extends ModelView {
     const model = this.getCtrl().getModel();
     return model.options.selectMode || model.isModal() && model.hasRowFormWithDefaultSqlDataSource() || model.hasActions();
   }
-  /*renderTableForms() {
-      return <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
-          <div className="frame__container">
-              <Tab tabs={this.getTabs()} classList={['Tab-blue', 'full']}/>
-          </div>
-      </div>;
-  }*/
-
-
-  getRowForms() {
-    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
-  }
-
-  getTableForms() {
-    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
-  }
 
   renderTableForms() {
     const tableForms = this.getTableForms();
@@ -1132,6 +1103,24 @@ class PageView extends ModelView {
         classList: ['Tab-blue', 'full']
       })));
     }
+  }
+
+  getTabs() {
+    return this.getTableForms().map(form => {
+      return {
+        name: form.model.getName(),
+        title: form.getTitle(),
+        content: this.renderForm(form)
+      };
+    });
+  }
+
+  getRowForms() {
+    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
+  }
+
+  getTableForms() {
+    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
   }
 
   renderHeader() {

@@ -119,7 +119,6 @@ class Page extends Model {
     }
 
     isNewMode() {
-        // return this.getAttr('newMode');
         return !!this.options.newMode;
     }
 
@@ -135,10 +134,6 @@ class Page extends Model {
     getApp() {
         return this.parent;
     }
-
-    /*getFullName() {
-        return `${this.getName()}(${this.getId()})`;
-    }*/
 
     isModal() {
         return !!this.options.modal;
