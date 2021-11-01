@@ -9,6 +9,9 @@ declare class FormEditorController extends VisualEditorController {
     createController(params: any): Promise<{
         js: any;
     }>;
+    createView(params: any): Promise<{
+        jsx: any;
+    }>;
     saveController(params: any): Promise<{
         js: any;
     }>;
