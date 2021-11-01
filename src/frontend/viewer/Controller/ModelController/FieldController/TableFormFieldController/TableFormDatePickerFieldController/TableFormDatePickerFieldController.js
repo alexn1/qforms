@@ -1,6 +1,6 @@
 class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
-        return super.getViewClass() || TableFormDatePickerFieldView;
+        return super.getViewClass() || TableFormDateFieldView;
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);

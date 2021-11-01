@@ -1,6 +1,6 @@
 "use strict";
 const FieldEditor = require('../FieldEditor');
-class DatePickerFieldEditor extends FieldEditor {
+class DateFieldEditor extends FieldEditor {
     static createData(params) {
         return {
             '@class': 'DateField',
@@ -8,4 +8,4 @@ class DatePickerFieldEditor extends FieldEditor {
         };
     }
 }
-module.exports = DatePickerFieldEditor;
+module.exports = DateFieldEditor;

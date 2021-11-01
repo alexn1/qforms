@@ -1,4 +1,4 @@
-class RowFormDatePickerFieldView extends RowFormFieldView {
+class RowFormDateFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
@@ -16,4 +16,4 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormDatePickerFieldView = RowFormDatePickerFieldView;
+window.QForms.RowFormDateFieldView = RowFormDateFieldView;

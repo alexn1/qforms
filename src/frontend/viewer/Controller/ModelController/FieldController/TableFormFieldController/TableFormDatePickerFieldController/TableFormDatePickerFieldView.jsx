@@ -1,4 +1,4 @@
-class TableFormDatePickerFieldView extends TableFormFieldView {
+class TableFormDateFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
@@ -9,4 +9,4 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
         );
     }
 }
-window.QForms.TableFormDatePickerFieldView = TableFormDatePickerFieldView;
+window.QForms.TableFormDateFieldView = TableFormDateFieldView;

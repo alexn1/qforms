@@ -1,6 +1,6 @@
 const FieldEditor = require('../FieldEditor');
 
-class DatePickerFieldEditor extends FieldEditor {
+class DateFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -20,4 +20,4 @@ class DatePickerFieldEditor extends FieldEditor {
 
 }
 
-export = DatePickerFieldEditor;
+export = DateFieldEditor;

@@ -211,7 +211,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
 }
 
 window.QForms.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
-class RowFormDatePickerFieldView extends RowFormFieldView {
+class RowFormDateFieldView extends RowFormFieldView {
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
@@ -231,7 +231,7 @@ class RowFormDatePickerFieldView extends RowFormFieldView {
 
 }
 
-window.QForms.RowFormDatePickerFieldView = RowFormDatePickerFieldView;
+window.QForms.RowFormDateFieldView = RowFormDateFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormDateTimeFieldView extends RowFormFieldView {
@@ -630,7 +630,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView {
 }
 
 window.QForms.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
-class TableFormDatePickerFieldView extends TableFormFieldView {
+class TableFormDateFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
     const ctrl = this.props.ctrl;
@@ -644,7 +644,7 @@ class TableFormDatePickerFieldView extends TableFormFieldView {
 
 }
 
-window.QForms.TableFormDatePickerFieldView = TableFormDatePickerFieldView;
+window.QForms.TableFormDateFieldView = TableFormDateFieldView;
 class TableFormDateTimeFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;
