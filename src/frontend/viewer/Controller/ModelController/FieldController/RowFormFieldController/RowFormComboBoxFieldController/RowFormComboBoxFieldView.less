@@ -3,27 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView {
     display: flex;
-    /*&.error > .RowFormComboBoxFieldView__select {
-        background-color: #f2dede;
-    }*/
     &.error > .RowFormComboBoxFieldView__select > .Select__input {
         background-color: #f2dede;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*.RowFormComboBoxFieldView__select {
-    width           : 100%;
-    height          : @fieldHeight;
-    border-width    : 0;
-    padding         : 0;
-    background-color: white;
-    cursor          : pointer;
-    &[disabled] {
-        cursor          : default;
-        background-color: lightgoldenrodyellow;
-    }
-}*/
 
 .RowFormComboBoxFieldView__select {
     width: 100%;
@@ -36,7 +19,7 @@
         font-weight: inherit;
         font-size  : inherit;
         &[disabled] {
-            background-color: lightgoldenrodyellow;
+            background-color: @fieldDisableBackgroundColor;
             color           : gray;
             cursor          : text;
         }
