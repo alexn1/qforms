@@ -1,7 +1,7 @@
 import Field from '../Field';
 const Helper = require('../../../../Helper');
 
-class DatePickerField extends Field {
+class DateField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -23,7 +23,7 @@ class DatePickerField extends Field {
         } else {
             raw = Helper.encodeValue(value);
         }
-        // console.log('DatePickerField.valueToRaw', this.getFullName(), value, raw);
+        // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -31,9 +31,9 @@ class DatePickerField extends Field {
         if (value && !this.isTimezone()) {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        // console.log('DatePickerField.rawToValue', this.getFullName(), raw, value);
+        // console.log('DateField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
 
-export = DatePickerField;
+export = DateField;

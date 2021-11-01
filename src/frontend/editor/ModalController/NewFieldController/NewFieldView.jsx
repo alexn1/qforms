@@ -32,7 +32,7 @@ class NewFieldView extends ReactComponent {
                         {value: 'LinkField', title: 'LinkField'},
                         {value: 'ImageField', title: 'ImageField'},
                         {value: 'LabelField', title: 'LabelField'},
-                        {value: 'DatePickerField', title: 'DatePickerField'},
+                        {value: 'DateField', title: 'DateField'},
                         {value: 'TimeField', title: 'TimeField'},
                         {value: 'DateTimeField', title: 'DateTimeField'},
                         {value: 'CheckBoxField', title: 'CheckBoxField'},

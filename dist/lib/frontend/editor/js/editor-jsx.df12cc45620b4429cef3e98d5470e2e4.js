@@ -162,8 +162,8 @@ class ChangeClassView extends ReactComponent {
         value: 'LabelField',
         title: 'LabelField'
       }, {
-        value: 'DatePickerField',
-        title: 'DatePickerField'
+        value: 'DateField',
+        title: 'DateField'
       }, {
         value: 'TimeField',
         title: 'TimeField'
@@ -563,8 +563,8 @@ class NewFieldView extends ReactComponent {
         value: 'LabelField',
         title: 'LabelField'
       }, {
-        value: 'DatePickerField',
-        title: 'DatePickerField'
+        value: 'DateField',
+        title: 'DateField'
       }, {
         value: 'TimeField',
         title: 'TimeField'

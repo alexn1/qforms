@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const Field_1 = __importDefault(require("../Field"));
 const Helper = require('../../../../Helper');
-class DatePickerField extends Field_1.default {
+class DateField extends Field_1.default {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -27,7 +27,7 @@ class DatePickerField extends Field_1.default {
         else {
             raw = Helper.encodeValue(value);
         }
-        // console.log('DatePickerField.valueToRaw', this.getFullName(), value, raw);
+        // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -35,8 +35,8 @@ class DatePickerField extends Field_1.default {
         if (value && !this.isTimezone()) {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        // console.log('DatePickerField.rawToValue', this.getFullName(), raw, value);
+        // console.log('DateField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
-module.exports = DatePickerField;
+module.exports = DateField;

@@ -1,4 +1,4 @@
-class TableFormDatePickerFieldController extends TableFormFieldController {
+class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormDatePickerFieldView;
     }
@@ -8,4 +8,4 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
         return '';
     }
 }
-window.QForms.TableFormDatePickerFieldController = TableFormDatePickerFieldController;
+window.QForms.TableFormDateFieldController = TableFormDateFieldController;

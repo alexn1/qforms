@@ -1693,7 +1693,7 @@ class FormWizard {
     }
 
     getFieldClass(column) {
-        if (column.type === 'date') return 'DatePickerField';
+        if (column.type === 'date') return 'DateField';
         if (column.type === 'boolean') return 'CheckBoxField';
         if (this.params.className === 'RowForm') {
             if (column.dbType === 'text') {

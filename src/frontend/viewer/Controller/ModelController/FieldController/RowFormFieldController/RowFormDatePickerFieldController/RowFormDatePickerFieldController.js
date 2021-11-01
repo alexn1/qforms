@@ -1,4 +1,4 @@
-class RowFormDatePickerFieldController extends RowFormFieldController {
+class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormDatePickerFieldView;
     }
@@ -9,4 +9,4 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.setValue(widgetValue);
     }
 }
-window.QForms.RowFormDatePickerFieldController = RowFormDatePickerFieldController;
+window.QForms.RowFormDateFieldController = RowFormDateFieldController;

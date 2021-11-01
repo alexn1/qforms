@@ -1,4 +1,4 @@
-class DatePickerField extends Field {
+class DateField extends Field {
     getFormat() {
         return this.data.format;
     }
@@ -8,7 +8,7 @@ class DatePickerField extends Field {
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        // console.log('DatePickerField.rawToValue:', raw, value);
+        // console.log('DateField.rawToValue:', raw, value);
         return value;
     }
 
@@ -21,8 +21,8 @@ class DatePickerField extends Field {
         } else {
             rawValue = Helper.encodeValue(value);
         }
-        // console.log('DatePickerField.valueToRaw', rawValue);
+        // console.log('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }
-window.QForms.DatePickerField = DatePickerField;
+window.QForms.DateField = DateField;

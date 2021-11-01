@@ -4,7 +4,7 @@ class DatePickerFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
-            '@class'     : 'DatePickerField',
+            '@class'     : 'DateField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
                 readOnly        : params.readOnly         ? params.readOnly        :                           'false',

@@ -1035,7 +1035,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
 
 window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
 
-class RowFormDatePickerFieldController extends RowFormFieldController {
+class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormDatePickerFieldView;
     }
@@ -1046,7 +1046,7 @@ class RowFormDatePickerFieldController extends RowFormFieldController {
         this.setValue(widgetValue);
     }
 }
-window.QForms.RowFormDatePickerFieldController = RowFormDatePickerFieldController;
+window.QForms.RowFormDateFieldController = RowFormDateFieldController;
 
 class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
@@ -1482,7 +1482,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController {
 }
 window.QForms.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
 
-class TableFormDatePickerFieldController extends TableFormFieldController {
+class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormDatePickerFieldView;
     }
@@ -1492,7 +1492,7 @@ class TableFormDatePickerFieldController extends TableFormFieldController {
         return '';
     }
 }
-window.QForms.TableFormDatePickerFieldController = TableFormDatePickerFieldController;
+window.QForms.TableFormDateFieldController = TableFormDateFieldController;
 
 class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
@@ -3542,7 +3542,7 @@ class ComboBoxField extends Field {
 }
 window.QForms.ComboBoxField = ComboBoxField;
 
-class DatePickerField extends Field {
+class DateField extends Field {
     getFormat() {
         return this.data.format;
     }
@@ -3552,7 +3552,7 @@ class DatePickerField extends Field {
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addMinutes(value, value.getTimezoneOffset());
         }
-        // console.log('DatePickerField.rawToValue:', raw, value);
+        // console.log('DateField.rawToValue:', raw, value);
         return value;
     }
 
@@ -3565,11 +3565,11 @@ class DatePickerField extends Field {
         } else {
             rawValue = Helper.encodeValue(value);
         }
-        // console.log('DatePickerField.valueToRaw', rawValue);
+        // console.log('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }
-window.QForms.DatePickerField = DatePickerField;
+window.QForms.DateField = DateField;
 
 class DateTimeField extends Field {
     getFormat() {
