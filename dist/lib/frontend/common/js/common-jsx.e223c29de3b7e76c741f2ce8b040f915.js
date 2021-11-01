@@ -86,6 +86,35 @@ class ArrowIcon extends ReactComponent {
   }
 
 }
+class DropDownIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames(),
+      style: {
+        width: this.props.size,
+        height: this.props.size
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("circle", {
+      cx: "5",
+      cy: "5",
+      r: "5",
+      style: {
+        fill: 'gray'
+      }
+    }), /*#__PURE__*/React.createElement("polyline", {
+      points: "2,4 5,7 8,4",
+      fill: "none",
+      stroke: "white",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    })));
+  }
+
+}
+
+window.QForms.DropDownIcon = DropDownIcon;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Box extends ReactComponent {
@@ -560,35 +589,6 @@ class DatePicker extends ReactComponent {
 }
 
 window.QForms.DatePicker = DatePicker;
-class DropDownIcon extends ReactComponent {
-  render() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames(),
-      style: {
-        width: this.props.size,
-        height: this.props.size
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("circle", {
-      cx: "5",
-      cy: "5",
-      r: "5",
-      style: {
-        fill: 'gray'
-      }
-    }), /*#__PURE__*/React.createElement("polyline", {
-      points: "2,4 5,7 8,4",
-      fill: "none",
-      stroke: "white",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })));
-  }
-
-}
-
-window.QForms.DropDownIcon = DropDownIcon;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class DropdownButton extends ReactComponent {

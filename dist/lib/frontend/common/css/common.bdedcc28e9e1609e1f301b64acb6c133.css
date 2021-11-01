@@ -59,6 +59,13 @@ svg {
   cursor: wait !important;
 }
 
+.DropDownIcon {
+  display: inline-block;
+}
+.DropDownIcon:hover circle {
+  fill: black !important;
+}
+
 .Box {
   background-color: blue;
   height: 200px;
@@ -128,13 +135,6 @@ table.DatePicker td.selectable:hover {
 }
 table.DatePicker td.selected {
   background-color: #eea236;
-}
-
-.DropDownIcon {
-  display: inline-block;
-}
-.DropDownIcon:hover circle {
-  fill: black !important;
 }
 
 .DropdownButton {
