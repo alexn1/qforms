@@ -1,5 +1,6 @@
-@fieldHeight: 22px;
+@import "../../../../../style/field";
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateTimeFieldView {
   &.datetime {
     display: grid;
@@ -19,7 +20,7 @@
       font-size   : inherit;
     }
     &.read-only > input {
-      background-color: lightgoldenrodyellow;
+      background-color: @fieldDisableBackgroundColor;
       color: gray;
     }
   }
@@ -61,6 +62,7 @@
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .debug .RowFormDateTimeFieldView.changed > div > input {
   background-color: rgb(238, 253, 234);
 }

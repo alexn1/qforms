@@ -1,3 +1,5 @@
+@import "../../../../../style/field";
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextAreaFieldView {
     &.error > .RowFormTextAreaFieldView__textarea {
@@ -15,7 +17,7 @@
     font-weight: inherit;
     font-size  : inherit;
     &[readonly] {
-        background-color: lightgoldenrodyellow;
+        background-color: @fieldDisableBackgroundColor;
         color           : gray;
     }
 }
