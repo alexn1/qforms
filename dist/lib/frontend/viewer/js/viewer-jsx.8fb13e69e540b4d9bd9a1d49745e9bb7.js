@@ -1126,10 +1126,10 @@ class PageView extends ModelView {
   renderOpenPageHeaderButton() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
+      key: 'open',
       className: `${this.getCssBlockName()}__open`,
       onClick: ctrl.onOpenPageClick
     }, /*#__PURE__*/React.createElement("svg", {
-      key: 'open',
       xmlns: "http://www.w3.org/2000/svg",
       height: "24px",
       viewBox: "0 0 24 24",
@@ -1143,15 +1143,13 @@ class PageView extends ModelView {
     })));
   }
 
-  renderHeader() {
+  renderClosePageHeaderButton() {
     const ctrl = this.props.ctrl;
-    const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__header`
-    }, this.renderTitle(), model.isModal() && [this.renderOpenPageHeaderButton(), /*#__PURE__*/React.createElement("svg", {
       key: 'close',
       className: `${this.getCssBlockName()}__close`,
-      onClick: ctrl.onClosePageClick,
+      onClick: ctrl.onClosePageClick
+    }, /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       height: "24px",
       viewBox: "0 0 24 24",
@@ -1162,7 +1160,15 @@ class PageView extends ModelView {
       fill: "none"
     }), /*#__PURE__*/React.createElement("path", {
       d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-    }))]);
+    })));
+  }
+
+  renderHeader() {
+    const ctrl = this.props.ctrl;
+    const model = ctrl.getModel();
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__header`
+    }, this.renderTitle(), model.isModal() && [this.renderOpenPageHeaderButton(), this.renderClosePageHeaderButton()]);
   }
 
   render() {
