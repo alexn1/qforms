@@ -86,6 +86,48 @@ class ArrowIcon extends ReactComponent {
   }
 
 }
+class CloseIcon extends ReactComponent {
+  render() {
+    const strokeWidth = this.props.strokeWidth || 1;
+    return /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 10 10"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "2",
+      y1: "2",
+      x2: "8",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: strokeWidth,
+      strokeMiterlimit: "10"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "8",
+      y1: "2",
+      x2: "2",
+      y2: "8",
+      stroke: "#aaa",
+      strokeWidth: strokeWidth,
+      strokeMiterlimit: "10"
+    }));
+  }
+
+}
+class CloseIcon2 extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+    }));
+  }
+
+}
 class DropDownIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("div", {
@@ -281,31 +323,6 @@ class CheckBox extends ReactComponent {
 }
 
 window.QForms.CheckBox = CheckBox;
-class CloseIcon extends ReactComponent {
-  render() {
-    const strokeWidth = this.props.strokeWidth || 1;
-    return /*#__PURE__*/React.createElement("svg", {
-      viewBox: "0 0 10 10"
-    }, /*#__PURE__*/React.createElement("line", {
-      x1: "2",
-      y1: "2",
-      x2: "8",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: strokeWidth,
-      strokeMiterlimit: "10"
-    }), /*#__PURE__*/React.createElement("line", {
-      x1: "8",
-      y1: "2",
-      x2: "2",
-      y2: "8",
-      stroke: "#aaa",
-      strokeWidth: strokeWidth,
-      strokeMiterlimit: "10"
-    }));
-  }
-
-}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class ComboBox extends ReactComponent {
