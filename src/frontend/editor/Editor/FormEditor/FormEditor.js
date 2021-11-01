@@ -195,4 +195,16 @@ class FormEditor extends Editor {
         });
     }
 
+    async createStyle() {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action    : 'createStyle',
+            params    : {
+                page : this.page.getName(),
+                form : this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+
 }

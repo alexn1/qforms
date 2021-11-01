@@ -48,7 +48,9 @@ class FormEditorController extends VisualEditorController {
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                result.data.js  = await formEditor.getCustomFile('js');
+                result.data.js   = await formEditor.getCustomFile('js');
+                result.data.jsx  = await formEditor.getCustomFile('jsx');
+                result.data.less = await formEditor.getCustomFile('less');
                 return result;
             default:
                 return result;
@@ -67,6 +69,13 @@ class FormEditorController extends VisualEditorController {
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const jsx = await formEditor.createJsx(params);
         return {jsx};
+    }
+    async createStyle(params) {
+        const appEditor = this.createApplicationEditor();
+        const pageEditor = await appEditor.getPage(params.page);
+        const formEditor = pageEditor.createItemEditor('forms', params.form);
+        const less = await formEditor.createLess(params);
+        return {less};
     }
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
