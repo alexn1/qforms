@@ -1168,7 +1168,7 @@ class PageView extends ModelView {
     const model = ctrl.getModel();
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__header`
-    }, this.renderTitle(), model.isModal() && [this.renderOpenPageHeaderButton(), this.renderClosePageHeaderButton()]);
+    }, this.renderTitle(), model.isModal() && [...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []), this.renderClosePageHeaderButton()]);
   }
 
   render() {

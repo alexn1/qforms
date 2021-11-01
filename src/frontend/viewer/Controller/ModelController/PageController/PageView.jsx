@@ -133,7 +133,7 @@ class PageView extends ModelView {
             {this.renderTitle()}
             {model.isModal() &&
                 [
-                    this.renderOpenPageHeaderButton(),
+                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
                     this.renderClosePageHeaderButton()
                 ]
             }
