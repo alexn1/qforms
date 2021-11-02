@@ -108,6 +108,9 @@ class DropdownDatePicker extends ReactComponent {
                 <div className={`${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
                     <CloseIcon/>
                 </div>
+                <div className={`${this.getCssBlockName()}__icon`}>
+                    <DateIcon/>
+                </div>
                 {this.state.open &&
                     <DatePicker
                         classList={[`${this.getCssBlockName()}__date-picker`]}

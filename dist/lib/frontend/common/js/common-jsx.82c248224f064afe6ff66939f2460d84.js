@@ -854,7 +854,9 @@ class DropdownDatePicker extends ReactComponent {
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon`
+    }, /*#__PURE__*/React.createElement(DateIcon, null)), this.state.open && /*#__PURE__*/React.createElement(DatePicker, {
       classList: [`${this.getCssBlockName()}__date-picker`],
       minDate: this.getMinDate(),
       selectedMonth: this.getSelectedMonth(),

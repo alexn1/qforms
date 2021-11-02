@@ -170,7 +170,21 @@ table.DatePicker td.selected {
   position: relative;
 }
 .DropdownDatePicker__input {
+  padding-right: 40px !important;
   width: 100%;
+}
+.DropdownDatePicker__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.DropdownDatePicker__icon svg {
+  fill: #aaa;
 }
 .DropdownDatePicker__close {
   display: flex;
@@ -178,7 +192,7 @@ table.DatePicker td.selected {
   width: 10px;
   height: 100%;
   top: 0;
-  right: 4px;
+  right: 24px;
   cursor: pointer;
   visibility: hidden;
 }
@@ -420,14 +434,14 @@ a.Grid__tr:hover {
   padding-right: 40px !important;
 }
 .Select__icon {
-  width: 20px;
-  pointer-events: none;
   position: absolute;
   right: 0;
   top: 0;
   display: flex;
   align-items: center;
   height: 100%;
+  width: 20px;
+  pointer-events: none;
 }
 .Select__icon svg {
   margin: 0 auto;
