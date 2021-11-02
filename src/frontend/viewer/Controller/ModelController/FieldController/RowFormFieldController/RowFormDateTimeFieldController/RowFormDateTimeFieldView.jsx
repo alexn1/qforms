@@ -42,6 +42,9 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                     <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
                         <CloseIcon/>
                     </div>
+                    <div className={`${this.getCssBlockName()}__icon`}>
+                        <TimeIcon/>
+                    </div>
                 </div>
             </div>
         );

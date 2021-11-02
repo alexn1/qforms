@@ -287,7 +287,9 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
-    }, /*#__PURE__*/React.createElement(CloseIcon, null))));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon`
+    }, /*#__PURE__*/React.createElement(TimeIcon, null))));
   }
 
 }
