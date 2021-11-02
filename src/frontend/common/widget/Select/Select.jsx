@@ -137,7 +137,7 @@ class Select extends ReactComponent {
                 }
                 {this.getItems().map(item => {
                     return <li key={item.value}
-                               className={`${this.getCssBlockName()}__item ${this.getValue() === item.value ? 'selected' : ''}`}
+                               className={`${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`}
                                data-value={JSON.stringify(item.value)}
                     >{item.title || item.value}</li>;
                 })}

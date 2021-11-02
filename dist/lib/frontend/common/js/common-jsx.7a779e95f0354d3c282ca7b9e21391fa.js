@@ -1632,7 +1632,7 @@ class Select extends ReactComponent {
     }, "\xA0"), this.getItems().map(item => {
       return /*#__PURE__*/React.createElement("li", {
         key: item.value,
-        className: `${this.getCssBlockName()}__item ${this.getValue() === item.value ? 'selected' : ''}`,
+        className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`,
         "data-value": JSON.stringify(item.value)
       }, item.title || item.value);
     })));

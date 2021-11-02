@@ -414,10 +414,10 @@ a.Grid__tr:hover {
 .Select {
   position: relative;
 }
-input.Select__input {
+.Select__input {
   cursor: pointer;
   width: 100%;
-  padding-right: 40px;
+  padding-right: 40px !important;
 }
 .Select__icon {
   width: 20px;
