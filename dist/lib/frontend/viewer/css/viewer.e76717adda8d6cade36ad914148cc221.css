@@ -148,11 +148,14 @@ button.RowFormComboBoxFieldView__create-button:active {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.RowFormDateTimeFieldView > .time {
+.RowFormDateTimeFieldView.error > div > input {
+  background-color: #f2dede !important;
+}
+.RowFormDateTimeFieldView__time {
   position: relative;
   border-left: solid 1px #ddd;
 }
-.RowFormDateTimeFieldView > .time > input.TimeBox {
+.RowFormDateTimeFieldView__time > .TimeBox {
   width: 100%;
   height: 22px;
   border-width: 0;
@@ -161,11 +164,11 @@ button.RowFormComboBoxFieldView__create-button:active {
   font-weight: inherit;
   font-size: inherit;
 }
-.RowFormDateTimeFieldView > .time > input.TimeBox:read-only {
+.RowFormDateTimeFieldView__time > .TimeBox:read-only {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.RowFormDateTimeFieldView > .time > .close {
+.RowFormDateTimeFieldView__time > .close {
   display: flex;
   position: absolute;
   width: 10px;
@@ -175,14 +178,11 @@ button.RowFormComboBoxFieldView__create-button:active {
   cursor: pointer;
   visibility: hidden;
 }
-.RowFormDateTimeFieldView > .time > .close:hover svg line {
+.RowFormDateTimeFieldView__time > .close:hover svg line {
   stroke: black;
 }
-.RowFormDateTimeFieldView > .time > .close.visible {
+.RowFormDateTimeFieldView__time > .close.visible {
   visibility: visible;
-}
-.RowFormDateTimeFieldView.error > div > input {
-  background-color: #f2dede !important;
 }
 .RowFormDateTimeFieldView__icon {
   position: absolute;

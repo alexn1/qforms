@@ -30,7 +30,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                     oldDates={this.props.oldDates}
                     getMinDate={this.props.getMinDate}
                 />
-                <div className={'time'}>
+                <div className={`${this.getCssBlockName()}__time`}>
                     <TimeBox
                         onCreate={ctrl.onView2Create}
                         readOnly={!ctrl.isEditable()}

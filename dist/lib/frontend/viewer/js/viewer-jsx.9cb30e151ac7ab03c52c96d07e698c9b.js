@@ -276,7 +276,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       oldDates: this.props.oldDates,
       getMinDate: this.props.getMinDate
     }), /*#__PURE__*/React.createElement("div", {
-      className: 'time'
+      className: `${this.getCssBlockName()}__time`
     }, /*#__PURE__*/React.createElement(TimeBox, {
       onCreate: ctrl.onView2Create,
       readOnly: !ctrl.isEditable(),
