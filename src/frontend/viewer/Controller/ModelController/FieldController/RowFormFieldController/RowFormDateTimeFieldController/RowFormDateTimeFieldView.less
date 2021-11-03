@@ -3,30 +3,31 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateTimeFieldView {
   &.datetime {
-    display: grid;
+    display              : grid;
     grid-template-columns: 1fr 1fr;
   }
   &.date > .time {
     display: none;
   }
-  > .DropdownDatePicker {
-    &:not(.read-only) > input {
-      cursor: pointer;
-    }
-    > input {
-      height      : @fieldHeight;
-      border-width: 0;
-      padding     : 0 5px 0 5px;
-      font-size   : inherit;
-    }
-    &.read-only > input {
-      background-color: @fieldDisableBackgroundColor;
-      color: gray;
-    }
-  }
-
   &.error > div > input {
     background-color: #f2dede !important;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormDateTimeFieldView__dropdown-date-picker {
+  &:not(.read-only) > input {
+    cursor: pointer;
+  }
+  > .DropdownDatePicker__input {
+    height      : @fieldHeight;
+    border-width: 0;
+    padding     : 0 5px 0 5px;
+    font-size   : inherit;
+  }
+  &.read-only > .DropdownDatePicker__input {
+    background-color: @fieldDisableBackgroundColor;
+    color: gray;
   }
 }
 

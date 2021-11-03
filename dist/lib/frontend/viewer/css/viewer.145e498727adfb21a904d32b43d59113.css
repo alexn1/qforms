@@ -135,21 +135,21 @@ button.RowFormComboBoxFieldView__create-button:active {
 .RowFormDateTimeFieldView.date > .time {
   display: none;
 }
-.RowFormDateTimeFieldView > .DropdownDatePicker:not(.read-only) > input {
+.RowFormDateTimeFieldView.error > div > input {
+  background-color: #f2dede !important;
+}
+.RowFormDateTimeFieldView__dropdown-date-picker:not(.read-only) > input {
   cursor: pointer;
 }
-.RowFormDateTimeFieldView > .DropdownDatePicker > input {
+.RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
   height: 22px;
   border-width: 0;
   padding: 0 5px 0 5px;
   font-size: inherit;
 }
-.RowFormDateTimeFieldView > .DropdownDatePicker.read-only > input {
+.RowFormDateTimeFieldView__dropdown-date-picker.read-only > .DropdownDatePicker__input {
   background-color: lightgoldenrodyellow;
   color: gray;
-}
-.RowFormDateTimeFieldView.error > div > input {
-  background-color: #f2dede !important;
 }
 .RowFormDateTimeFieldView__time {
   position: relative;

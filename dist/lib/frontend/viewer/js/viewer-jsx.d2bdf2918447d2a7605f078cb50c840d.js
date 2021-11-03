@@ -267,6 +267,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       className: `${this.getCssClassNames()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`,
       style: this.getStyle(ctrl.getRow())
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
+      classList: [`${this.getCssBlockName()}__dropdown-date-picker`],
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
