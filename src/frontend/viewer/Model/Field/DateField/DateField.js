@@ -4,6 +4,7 @@ class DateField extends Field {
     }
 
     rawToValue(raw) {
+        // console.log('DateField.rawToValue', this.getFullName(), raw);
         const value = Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addMinutes(value, value.getTimezoneOffset());
