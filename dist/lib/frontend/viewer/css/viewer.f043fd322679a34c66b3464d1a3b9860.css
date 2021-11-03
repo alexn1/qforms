@@ -155,7 +155,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   position: relative;
   border-left: solid 1px #ddd;
 }
-.RowFormDateTimeFieldView__time > .TimeBox {
+.RowFormDateTimeFieldView__time-box {
   width: 100%;
   height: 22px;
   border-width: 0;
@@ -164,27 +164,27 @@ button.RowFormComboBoxFieldView__create-button:active {
   font-weight: inherit;
   font-size: inherit;
 }
-.RowFormDateTimeFieldView__time > .TimeBox:read-only {
+.RowFormDateTimeFieldView__time-box:read-only {
   background-color: lightgoldenrodyellow;
   color: gray;
 }
-.RowFormDateTimeFieldView__time > .close {
+.RowFormDateTimeFieldView__time-close {
   display: flex;
   position: absolute;
   width: 10px;
   height: 100%;
   top: 0;
-  right: 4px;
+  right: 24px;
   cursor: pointer;
   visibility: hidden;
 }
-.RowFormDateTimeFieldView__time > .close:hover svg line {
+.RowFormDateTimeFieldView__time-close:hover svg line {
   stroke: black;
 }
-.RowFormDateTimeFieldView__time > .close.visible {
+.RowFormDateTimeFieldView__time-close.visible {
   visibility: visible;
 }
-.RowFormDateTimeFieldView__icon {
+.RowFormDateTimeFieldView__time-icon {
   position: absolute;
   right: 0;
   top: 0;
@@ -194,7 +194,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   width: 20px;
   pointer-events: none;
 }
-.RowFormDateTimeFieldView__icon svg {
+.RowFormDateTimeFieldView__time-icon svg {
   fill: #aaa;
 }
 .debug .RowFormDateTimeFieldView.changed > div > input {

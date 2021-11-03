@@ -32,6 +32,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                 />
                 <div className={`${this.getCssBlockName()}__time`}>
                     <TimeBox
+                        classList={[`${this.getCssBlockName()}__time-box`]}
                         onCreate={ctrl.onView2Create}
                         readOnly={!ctrl.isEditable()}
                         value={ctrl.getValueForTime()}
@@ -39,10 +40,10 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
                         onBlur={ctrl.onBlur2}
                         placeholder={ctrl.getPlaceholder2()}
                     />
-                    <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
+                    <div className={`${this.getCssBlockName()}__time-close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
                         <CloseIcon/>
                     </div>
-                    <div className={`${this.getCssBlockName()}__icon`}>
+                    <div className={`${this.getCssBlockName()}__time-icon`}>
                         <TimeIcon/>
                     </div>
                 </div>

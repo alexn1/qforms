@@ -32,41 +32,45 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateTimeFieldView__time {
-  position: relative;
+  position   : relative;
   border-left: solid 1px #ddd;
-  > .TimeBox {
-    width       : 100%;
-    height      : @fieldHeight;
-    border-width: 0;
-    padding     : 0 5px 0 5px;
-    font-family: inherit;
-    font-weight: inherit;
-    font-size  : inherit;
-    &:read-only {
-      background-color: @fieldDisableBackgroundColor;
-      color: gray;
-    }
-  }
-  > .close {
-    display: flex;
-    position: absolute;
-    width: 10px;
-    height: 100%;
-    top: 0;
-    right: 4px;
-    cursor: pointer;
-    visibility: hidden;
-    &:hover svg line {
-      stroke: black;
-    }
-    &.visible {
-      visibility: visible;
-    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormDateTimeFieldView__time-box {
+  width       : 100%;
+  height      : @fieldHeight;
+  border-width: 0;
+  padding     : 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size  : inherit;
+  &:read-only {
+    background-color: @fieldDisableBackgroundColor;
+    color: gray;
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.RowFormDateTimeFieldView__icon {
+.RowFormDateTimeFieldView__time-close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 24px;
+  cursor: pointer;
+  visibility: hidden;
+  &:hover svg line {
+    stroke: black;
+  }
+  &.visible {
+    visibility: visible;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormDateTimeFieldView__time-icon {
   position: absolute;
   right: 0;
   top: 0;

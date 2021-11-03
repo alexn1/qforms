@@ -278,6 +278,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__time`
     }, /*#__PURE__*/React.createElement(TimeBox, {
+      classList: [`${this.getCssBlockName()}__time-box`],
       onCreate: ctrl.onView2Create,
       readOnly: !ctrl.isEditable(),
       value: ctrl.getValueForTime(),
@@ -285,10 +286,10 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       onBlur: ctrl.onBlur2,
       placeholder: ctrl.getPlaceholder2()
     }), /*#__PURE__*/React.createElement("div", {
-      className: `close ${this.isCloseVisible() ? 'visible' : ''}`,
+      className: `${this.getCssBlockName()}__time-close ${this.isCloseVisible() ? 'visible' : ''}`,
       onMouseDown: this.onCloseDown
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__icon`
+      className: `${this.getCssBlockName()}__time-icon`
     }, /*#__PURE__*/React.createElement(TimeIcon, null))));
   }
 
