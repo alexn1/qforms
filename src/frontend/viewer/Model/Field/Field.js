@@ -58,28 +58,29 @@ class Field extends Model {
         if (!row) {
             console.log(`${this.getFullName()}: need row`);
         }
+        let rawValue;
         if (this.getAttr('column')) {
-            let rawValue = this.getRawValue(row);
-            if (rawValue === undefined) return undefined;
-            if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
-            try {
-                return this.rawToValue(rawValue);
-            } catch (err) {
-                console.log('raw value decode error:', this.getFullName(), rawValue);
-                throw err;
-            }
-        }
-        if (this.getAttr('value')) {
+            rawValue = this.getRawValue(row);
+        } else if (this.getAttr('value')) {
             const js = this.getAttr('value');
             try {
-                const value = eval(js);
-                console.log(this.getFullName(), value, typeof value);
-                return value;
+                rawValue = eval(js);
             } catch (err) {
                 throw new Error(`${this.getFullName()}: value eval error: ${err.message}`);
             }
+        } else {
+            throw new Error(`${this.getFullName()}: no column and no value in field`);
         }
-        throw new Error(`${this.getFullName()}: no column and no value in field`);
+
+        // use rawValue
+        if (rawValue === undefined) return undefined;
+        if (rawValue === null) throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
+        try {
+            return this.rawToValue(rawValue);
+        } catch (err) {
+            console.log('raw value decode error:', this.getFullName(), rawValue);
+            throw err;
+        }
     }
 
     setValue(row, value) {
