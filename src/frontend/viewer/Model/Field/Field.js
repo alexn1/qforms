@@ -115,7 +115,7 @@ class Field extends Model {
         if (this.getAttr('column')) {
             return this.getDefaultDataSource().getType(this.getAttr('column'));
         }
-        throw new Error(`fields type and column empty`);
+        throw new Error('fields type and column empty');
     }
 
     getForm() {
