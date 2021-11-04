@@ -132,7 +132,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.RowFormDateTimeFieldView.date > .time {
+.RowFormDateTimeFieldView.date > .RowFormDateTimeFieldView__time {
   display: none;
 }
 .RowFormDateTimeFieldView.error > div > input {

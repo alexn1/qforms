@@ -6,7 +6,7 @@
     display              : grid;
     grid-template-columns: 1fr 1fr;
   }
-  &.date > .time {
+  &.date > .RowFormDateTimeFieldView__time {
     display: none;
   }
   &.error > div > input {
@@ -87,5 +87,5 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .debug .RowFormDateTimeFieldView.changed > div > input {
-  background-color: rgb(238, 253, 234);
+  background-color: @fieldDebugChangeBackgroundColor;
 }
