@@ -777,12 +777,12 @@ class RowFormView extends FormView {
       minWidth: width
     }, /*#__PURE__*/React.createElement(CancelIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.cancel)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "discard",
-      title: text.form.discard,
+      classList: [`${this.getCssBlockName()}__discard-button`],
       enabled: ctrl.state.changed || !ctrl.isValid(),
       onClick: ctrl.onDiscardClick,
       visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid),
       minWidth: width
-    }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null), /*#__PURE__*/React.createElement("div", null, text.form.discard)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
       classList: [`${this.getCssBlockName()}__refresh-button`],
       enabled: !ctrl.state.changed && !ctrl.state.hasNew,

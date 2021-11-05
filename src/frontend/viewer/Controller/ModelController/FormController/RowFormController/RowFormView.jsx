@@ -46,12 +46,15 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="discard"
-                        title={text.form.discard}
+                        classList={[`${this.getCssBlockName()}__discard-button`]}
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
                         minWidth={width}
-                    />
+                    >
+                        <CloseIcon2/>
+                        <div>{text.form.discard}</div>
+                    </Button>
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
