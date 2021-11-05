@@ -406,6 +406,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 .TableFormView__refresh-button {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .PageView__main > .frame__container {
