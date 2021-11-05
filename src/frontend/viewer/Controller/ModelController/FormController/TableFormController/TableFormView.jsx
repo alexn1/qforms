@@ -3,14 +3,12 @@ class TableFormView extends FormView {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
         const dataSource = model.getDefaultDataSource();
-        const width = '120px';
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
                     <Button
                         key="refresh"
-                        classList={[`${this.getCssBlockName()}__refresh-button`]}
-                        width={width}
+                        classList={['toolbar-button']}
                         onClick={ctrl.onRefreshClick}
                         enabled={!ctrl.parent.model.hasNew()}
                     >
@@ -21,20 +19,24 @@ class TableFormView extends FormView {
                 {model.data.newRowMode !== 'disabled' &&
                     <Button
                         key="new"
-                        width={width}
-                        title={model.getApp().getText().form.new}
+                        classList={['toolbar-button']}
                         onClick={ctrl.onNewClick}
                         enabled={!ctrl.parent.model.hasNew()}
-                    />
+                    >
+                        <AddIcon/>
+                        <div>{model.getApp().getText().form.new}</div>
+                    </Button>
                 }
                 {model.data.deleteRowMode !== 'disabled' &&
                     <Button
                         key="delete"
-                        width={width}
-                        title={model.getApp().getText().form.delete}
+                        classList={['toolbar-button']}
                         onClick={ctrl.onDeleteClick}
                         enabled={ctrl.isRowSelected()}
-                    />
+                    >
+                        <DeleteIcon/>
+                        <div>{model.getApp().getText().form.delete}</div>
+                    </Button>
                 }
                 {ctrl.model.hasActions() &&
                     <DropdownButton

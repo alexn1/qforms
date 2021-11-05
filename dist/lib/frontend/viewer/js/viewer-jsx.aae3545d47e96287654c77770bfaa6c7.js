@@ -888,28 +888,24 @@ class TableFormView extends FormView {
     const ctrl = this.props.ctrl;
     const model = ctrl.model;
     const dataSource = model.getDefaultDataSource();
-    const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__toolbar`
     }, model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
-      classList: [`${this.getCssBlockName()}__refresh-button`],
-      width: width,
+      classList: ['toolbar-button'],
       onClick: ctrl.onRefreshClick,
       enabled: !ctrl.parent.model.hasNew()
     }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.refresh)), model.data.newRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
       key: "new",
-      width: width,
-      title: model.getApp().getText().form.new,
+      classList: ['toolbar-button'],
       onClick: ctrl.onNewClick,
       enabled: !ctrl.parent.model.hasNew()
-    }), model.data.deleteRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(AddIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.new)), model.data.deleteRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
       key: "delete",
-      width: width,
-      title: model.getApp().getText().form.delete,
+      classList: ['toolbar-button'],
       onClick: ctrl.onDeleteClick,
       enabled: ctrl.isRowSelected()
-    }), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
+    }, /*#__PURE__*/React.createElement(DeleteIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.delete)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       title: model.getApp().getText().form.actions,
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick,

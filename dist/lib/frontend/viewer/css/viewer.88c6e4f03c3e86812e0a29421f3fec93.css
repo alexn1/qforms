@@ -403,11 +403,6 @@ button.RowFormComboBoxFieldView__create-button:active {
   display: flex;
   grid-gap: 5px;
 }
-.TableFormView__refresh-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .PageView__main > .frame__container {
   padding: 10px;
@@ -478,6 +473,13 @@ button.RowFormComboBoxFieldView__create-button:active {
   height: 26px;
   margin: 0 5px;
   border: none;
+}
+
+.toolbar-button {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
