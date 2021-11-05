@@ -9,11 +9,14 @@ class TableFormView extends FormView {
                 {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
                     <Button
                         key="refresh"
+                        classList={[`${this.getCssBlockName()}__refresh-button`]}
                         width={width}
-                        title={model.getApp().getText().form.refresh}
                         onClick={ctrl.onRefreshClick}
                         enabled={!ctrl.parent.model.hasNew()}
-                    />
+                    >
+                        <RefreshIcon/>
+                        <div>{model.getApp().getText().form.refresh}</div>
+                    </Button>
                 }
                 {model.data.newRowMode !== 'disabled' &&
                     <Button
