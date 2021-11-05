@@ -791,9 +791,8 @@ class RowFormView extends FormView {
       width: width
     }), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       actions: this.getActionsForDropdownButton(),
-      title: text.form.actions,
       onClick: this.onActionsClick
-    }));
+    }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
   }
 
   renderLabel(fieldCtrl, key) {

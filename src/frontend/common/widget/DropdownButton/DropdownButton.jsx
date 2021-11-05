@@ -42,7 +42,7 @@ class DropdownButton extends ReactComponent{
                     onClick={this.onButtonClick}
                     onBlur={this.onButtonBlur}
                     disabled={this.isDisabled()}
-                >{this.props.title}</Button>
+                >{this.props.title || this.props.children}</Button>
                 <ul className={`${this.getCssBlockName()}__dropdown`} onMouseDown={this.onUlMouseDown} onClick={this.onUlClick}>
                     {this.props.actions && this.props.actions.map(action =>
                         <li className={`${this.getCssBlockName()}__item`} key={action.name} data-action={action.name}>{action.title}</li>

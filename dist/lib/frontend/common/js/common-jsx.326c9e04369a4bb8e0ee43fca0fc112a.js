@@ -736,7 +736,7 @@ class DropdownButton extends ReactComponent {
       onClick: this.onButtonClick,
       onBlur: this.onButtonBlur,
       disabled: this.isDisabled()
-    }, this.props.title), /*#__PURE__*/React.createElement("ul", {
+    }, this.props.title || this.props.children), /*#__PURE__*/React.createElement("ul", {
       className: `${this.getCssBlockName()}__dropdown`,
       onMouseDown: this.onUlMouseDown,
       onClick: this.onUlClick
