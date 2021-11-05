@@ -457,6 +457,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   align-items: center;
   justify-content: center;
 }
+.toolbar-button:disabled svg {
+  fill: #aaa;
+}
 
 .toolbar-dropdown-button .DropdownButton__button {
   display: block;
