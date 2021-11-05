@@ -398,14 +398,16 @@ button.RowFormComboBoxFieldView__create-button:active {
 .PageView__star {
   color: red;
 }
-.PageView__close {
+/*.PageView__close {
   cursor: pointer;
   width: 20px;
   height: 20px;
-}
-.PageView__close:hover line {
-  stroke: black;
-}
+  &:hover {
+    line {
+      stroke: black;
+    }
+  }
+}*/
 .PageView__toolbar {
   display: flex;
   grid-gap: 5px;
