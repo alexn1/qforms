@@ -49,6 +49,12 @@ svg {
 .y-hidden {
   overflow-y: hidden;
 }
+.x-scroll {
+  overflow-x: scroll;
+}
+.y-scroll {
+  overflow-y: scroll;
+}
 
 .full {
   height: 100%;
