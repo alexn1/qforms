@@ -5,17 +5,6 @@ class TableFormView extends FormView {
         const dataSource = model.getDefaultDataSource();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
-                {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
-                    <Button
-                        key="refresh"
-                        classList={['toolbar-button']}
-                        onClick={ctrl.onRefreshClick}
-                        enabled={!ctrl.parent.model.hasNew()}
-                    >
-                        <RefreshIcon/>
-                        <div>{model.getApp().getText().form.refresh}</div>
-                    </Button>
-                }
                 {model.data.newRowMode !== 'disabled' &&
                     <Button
                         key="new"
@@ -36,6 +25,17 @@ class TableFormView extends FormView {
                     >
                         <DeleteIcon/>
                         <div>{model.getApp().getText().form.delete}</div>
+                    </Button>
+                }
+                {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
+                    <Button
+                        key="refresh"
+                        classList={['toolbar-button']}
+                        onClick={ctrl.onRefreshClick}
+                        enabled={!ctrl.parent.model.hasNew()}
+                    >
+                        <RefreshIcon/>
+                        <div>{model.getApp().getText().form.refresh}</div>
                     </Button>
                 }
                 {ctrl.model.hasActions() &&

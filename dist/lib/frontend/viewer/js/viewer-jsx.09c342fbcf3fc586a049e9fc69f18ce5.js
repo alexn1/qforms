@@ -891,12 +891,7 @@ class TableFormView extends FormView {
     const dataSource = model.getDefaultDataSource();
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__toolbar flex grid-gap-5`
-    }, model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
-      key: "refresh",
-      classList: ['toolbar-button'],
-      onClick: ctrl.onRefreshClick,
-      enabled: !ctrl.parent.model.hasNew()
-    }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.refresh)), model.data.newRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
+    }, model.data.newRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
       key: "new",
       classList: ['toolbar-button'],
       onClick: ctrl.onNewClick,
@@ -906,7 +901,12 @@ class TableFormView extends FormView {
       classList: ['toolbar-button'],
       onClick: ctrl.onDeleteClick,
       enabled: ctrl.isRowSelected()
-    }, /*#__PURE__*/React.createElement(DeleteIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.delete)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
+    }, /*#__PURE__*/React.createElement(DeleteIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.delete)), model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
+      key: "refresh",
+      classList: ['toolbar-button'],
+      onClick: ctrl.onRefreshClick,
+      enabled: !ctrl.parent.model.hasNew()
+    }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.refresh)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick,
