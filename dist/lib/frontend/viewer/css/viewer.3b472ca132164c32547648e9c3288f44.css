@@ -353,10 +353,6 @@ button.RowFormComboBoxFieldView__create-button:active {
 .Modal .RowFormView {
   width: unset;
 }
-.RowFormView__toolbar {
-  display: flex;
-  grid-gap: 5px;
-}
 .RowFormView__grid {
   display: grid;
   grid-template-columns: 150px 1fr 24px 150px 1fr 24px;
@@ -375,33 +371,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   margin-left: 5px;
   align-items: start;
 }
-.RowFormView__refresh-button {
-  display: flex;
-  align-items: center;
-}
-.RowFormView__edit-button {
-  display: flex;
-  align-items: center;
-}
-.RowFormView__cancel-button {
-  display: flex;
-  align-items: center;
-}
-.RowFormView__save-button {
-  display: flex;
-  align-items: center;
-}
-.RowFormView__discard-button {
-  display: flex;
-  align-items: center;
-}
 
 .TableFormView {
   padding: 5px 0;
-}
-.TableFormView__toolbar {
-  display: flex;
-  grid-gap: 5px;
 }
 
 .PageView__main > .frame__container {

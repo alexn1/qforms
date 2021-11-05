@@ -5,11 +5,11 @@ class RowFormView extends FormView {
         const text = ctrl.getModel().getApp().getText();
         const width = '120px';
         return (
-            <div className={`${this.getCssBlockName()}__toolbar`}>
+            <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="edit"
-                        classList={[`${this.getCssBlockName()}__edit-button`]}
+                        classList={['toolbar-button']}
                         onClick={ctrl.onEditClick}
                         visible={ctrl.getMode() === 'view'}
                         minWidth={width}
@@ -21,7 +21,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="save"
-                        classList={[`${this.getCssBlockName()}__save-button`]}
+                        classList={['toolbar-button']}
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
                         visible={ctrl.getMode() === 'edit'}
@@ -34,7 +34,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="cancel"
-                        classList={[`${this.getCssBlockName()}__cancel-button`]}
+                        classList={['toolbar-button']}
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
                         minWidth={width}
@@ -46,7 +46,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="discard"
-                        classList={[`${this.getCssBlockName()}__discard-button`]}
+                        classList={['toolbar-button']}
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
@@ -59,7 +59,7 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="refresh"
-                        classList={[`${this.getCssBlockName()}__refresh-button`]}
+                        classList={['toolbar-button']}
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                         onClick={ctrl.onRefreshClick}
                         visible={ctrl.getMode() === 'view'}

@@ -28,6 +28,10 @@ svg {
   flex-direction: column;
 }
 
+.flex {
+  display: flex;
+}
+
 .frame {
   position: relative;
   overflow: hidden;

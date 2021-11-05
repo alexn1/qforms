@@ -4,7 +4,7 @@ class TableFormView extends FormView {
         const model = ctrl.model;
         const dataSource = model.getDefaultDataSource();
         return (
-            <div className={`${this.getCssBlockName()}__toolbar`}>
+            <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
                 {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
                     <Button
                         key="refresh"

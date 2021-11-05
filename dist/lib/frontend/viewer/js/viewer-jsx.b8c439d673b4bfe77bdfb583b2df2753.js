@@ -755,36 +755,36 @@ class RowFormView extends FormView {
     const text = ctrl.getModel().getApp().getText();
     const width = '120px';
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__toolbar`
+      className: `${this.getCssBlockName()}__toolbar flex grid-gap-5`
     }, ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "edit",
-      classList: [`${this.getCssBlockName()}__edit-button`],
+      classList: ['toolbar-button'],
       onClick: ctrl.onEditClick,
       visible: ctrl.getMode() === 'view',
       minWidth: width
     }, /*#__PURE__*/React.createElement(EditIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.edit)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "save",
-      classList: [`${this.getCssBlockName()}__save-button`],
+      classList: ['toolbar-button'],
       enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid,
       onClick: ctrl.onSaveClick,
       visible: ctrl.getMode() === 'edit',
       minWidth: width
     }, /*#__PURE__*/React.createElement(SaveIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.save)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "cancel",
-      classList: [`${this.getCssBlockName()}__cancel-button`],
+      classList: ['toolbar-button'],
       visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid,
       onClick: ctrl.onCancelClick,
       minWidth: width
     }, /*#__PURE__*/React.createElement(CancelIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.cancel)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "discard",
-      classList: [`${this.getCssBlockName()}__discard-button`],
+      classList: ['toolbar-button'],
       enabled: ctrl.state.changed || !ctrl.isValid(),
       onClick: ctrl.onDiscardClick,
       visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid),
       minWidth: width
     }, /*#__PURE__*/React.createElement(CloseIcon2, null), /*#__PURE__*/React.createElement("div", null, text.form.discard)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
-      classList: [`${this.getCssBlockName()}__refresh-button`],
+      classList: ['toolbar-button'],
       enabled: !ctrl.state.changed && !ctrl.state.hasNew,
       onClick: ctrl.onRefreshClick,
       visible: ctrl.getMode() === 'view',
@@ -889,7 +889,7 @@ class TableFormView extends FormView {
     const model = ctrl.model;
     const dataSource = model.getDefaultDataSource();
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__toolbar`
+      className: `${this.getCssBlockName()}__toolbar flex grid-gap-5`
     }, model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
       classList: ['toolbar-button'],
