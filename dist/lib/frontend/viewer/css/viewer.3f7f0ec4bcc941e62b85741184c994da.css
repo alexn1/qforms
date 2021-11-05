@@ -398,22 +398,24 @@ button.RowFormComboBoxFieldView__create-button:active {
 .PageView__star {
   color: red;
 }
-/*.PageView__close {
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  &:hover {
-    line {
-      stroke: black;
-    }
-  }
-}*/
 .PageView__toolbar {
   display: flex;
   grid-gap: 5px;
 }
 .PageView__table-forms {
   min-height: 300px;
+}
+.PageView__open,
+.PageView__close {
+  cursor: pointer;
+}
+.PageView__open:hover,
+.PageView__close:hover {
+  background-color: #eee;
+}
+.PageView__open:active,
+.PageView__close:active {
+  background-color: #ddd;
 }
 
 .login {
