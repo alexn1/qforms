@@ -790,6 +790,7 @@ class RowFormView extends FormView {
       visible: ctrl.getMode() === 'view',
       minWidth: width
     }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.refresh)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
+      classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
     }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
@@ -906,11 +907,11 @@ class TableFormView extends FormView {
       onClick: ctrl.onDeleteClick,
       enabled: ctrl.isRowSelected()
     }, /*#__PURE__*/React.createElement(DeleteIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.delete)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
-      title: model.getApp().getText().form.actions,
+      classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick,
       enabled: ctrl.isRowSelected()
-    }));
+    }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
   }
 
   renderPaging() {

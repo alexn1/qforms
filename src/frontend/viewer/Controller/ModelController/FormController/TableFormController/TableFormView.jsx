@@ -40,11 +40,13 @@ class TableFormView extends FormView {
                 }
                 {ctrl.model.hasActions() &&
                     <DropdownButton
-                        title={model.getApp().getText().form.actions}
+                        classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
                         enabled={ctrl.isRowSelected()}
-                    />
+                    >
+                        <MoreVertIcon/>
+                    </DropdownButton>
                 }
             </div>
         );

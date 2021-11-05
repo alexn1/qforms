@@ -458,6 +458,10 @@ button.RowFormComboBoxFieldView__create-button:active {
   justify-content: center;
 }
 
+.toolbar-dropdown-button .DropdownButton__button {
+  display: block;
+}
+
 
 
 
