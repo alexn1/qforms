@@ -758,38 +758,38 @@ class RowFormView extends FormView {
       className: `${this.getCssBlockName()}__toolbar`
     }, ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "edit",
-      title: text.form.edit,
+      classList: [`${this.getCssBlockName()}__edit-button`],
       onClick: ctrl.onEditClick,
       visible: ctrl.getMode() === 'view',
-      width: width
-    }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+      minWidth: width
+    }, /*#__PURE__*/React.createElement(EditIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.edit)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "save",
-      title: text.form.save,
+      classList: [`${this.getCssBlockName()}__save-button`],
       enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid,
       onClick: ctrl.onSaveClick,
       visible: ctrl.getMode() === 'edit',
-      width: width
-    }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+      minWidth: width
+    }, /*#__PURE__*/React.createElement(SaveIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.save)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "cancel",
-      title: text.form.cancel,
+      classList: [`${this.getCssBlockName()}__cancel-button`],
       visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid,
       onClick: ctrl.onCancelClick,
-      width: width
-    }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+      minWidth: width
+    }, /*#__PURE__*/React.createElement(CancelIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.cancel)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "discard",
       title: text.form.discard,
       enabled: ctrl.state.changed || !ctrl.isValid(),
       onClick: ctrl.onDiscardClick,
       visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid),
-      width: width
+      minWidth: width
     }), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
-      title: text.form.refresh,
+      classList: [`${this.getCssBlockName()}__refresh-button`],
       enabled: !ctrl.state.changed && !ctrl.state.hasNew,
       onClick: ctrl.onRefreshClick,
       visible: ctrl.getMode() === 'view',
-      width: width
-    }), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
+      minWidth: width
+    }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.refresh)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
     }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));

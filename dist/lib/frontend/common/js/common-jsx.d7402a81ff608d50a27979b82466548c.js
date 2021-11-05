@@ -86,6 +86,24 @@ class ArrowIcon extends ReactComponent {
   }
 
 }
+class CancelIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none",
+      opacity: ".87"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z"
+    }));
+  }
+
+}
 class CloseIcon extends ReactComponent {
   render() {
     const strokeWidth = this.props.strokeWidth || 1;
@@ -145,6 +163,23 @@ class DateIcon extends ReactComponent {
   }
 
 }
+class EditIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+    }));
+  }
+
+}
 class MoreVertIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("svg", {
@@ -175,6 +210,40 @@ class OpenInNewIcon extends ReactComponent {
       fill: "none"
     }), /*#__PURE__*/React.createElement("path", {
       d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+    }));
+  }
+
+}
+class RefreshIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+    }));
+  }
+
+}
+class SaveIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"
     }));
   }
 

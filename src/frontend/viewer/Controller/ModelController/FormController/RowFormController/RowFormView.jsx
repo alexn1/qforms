@@ -9,30 +9,39 @@ class RowFormView extends FormView {
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="edit"
-                        title={text.form.edit}
+                        classList={[`${this.getCssBlockName()}__edit-button`]}
                         onClick={ctrl.onEditClick}
                         visible={ctrl.getMode() === 'view'}
-                        width={width}
-                    />
+                        minWidth={width}
+                    >
+                        <EditIcon/>
+                        <div>{text.form.edit}</div>
+                    </Button>
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="save"
-                        title={text.form.save}
+                        classList={[`${this.getCssBlockName()}__save-button`]}
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
                         visible={ctrl.getMode() === 'edit'}
-                        width={width}
-                    />
+                        minWidth={width}
+                    >
+                        <SaveIcon/>
+                        <div>{text.form.save}</div>
+                    </Button>
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="cancel"
-                        title={text.form.cancel}
+                        classList={[`${this.getCssBlockName()}__cancel-button`]}
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
-                        width={width}
-                    />
+                        minWidth={width}
+                    >
+                        <CancelIcon/>
+                        <div>{text.form.cancel}</div>
+                    </Button>
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
@@ -41,18 +50,21 @@ class RowFormView extends FormView {
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
-                        width={width}
+                        minWidth={width}
                     />
                 }
                 {ctrl.model.hasDefaultSqlDataSource() &&
                     <Button
                         key="refresh"
-                        title={text.form.refresh}
+                        classList={[`${this.getCssBlockName()}__refresh-button`]}
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                         onClick={ctrl.onRefreshClick}
                         visible={ctrl.getMode() === 'view'}
-                        width={width}
-                    />
+                        minWidth={width}
+                    >
+                        <RefreshIcon/>
+                        <div>{text.form.refresh}</div>
+                    </Button>
                 }
                 {ctrl.model.hasActions() &&
                     <DropdownButton
