@@ -20,7 +20,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                     placeholder={ctrl.getPlaceholder()}
                     onMouseDown={ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null}
                 />
-                {ctrl.getModel().getAttr('itemEditPage') &&
+                {ctrl.getModel().getAttr('itemEditPage') && !!ctrl.getValue() &&
                     <Button
                         classList={[`${this.getCssBlockName()}__edit-button`]}
                         onClick={ctrl.onEditButtonClick}
