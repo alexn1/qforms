@@ -52,6 +52,7 @@
 
 .RowFormCheckBoxFieldView > input {
   margin: 0;
+  height: 22px;
 }
 
 .RowFormComboBoxFieldView {
