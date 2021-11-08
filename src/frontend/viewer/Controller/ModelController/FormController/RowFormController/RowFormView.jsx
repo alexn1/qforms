@@ -69,7 +69,7 @@ class RowFormView extends FormView {
                         <div>{text.form.refresh}</div>
                     </Button>
                 }
-                {ctrl.model.hasActions() &&
+                {ctrl.model.hasActions() && ctrl.model.getKey() &&
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
