@@ -31,7 +31,7 @@ class RowFormView extends FormView {
                         <div>{text.form.save}</div>
                     </Button>
                 }
-                {ctrl.model.hasDefaultSqlDataSource() &&
+                {ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
                     <Button
                         key="cancel"
                         classList={['toolbar-button']}
@@ -43,7 +43,7 @@ class RowFormView extends FormView {
                         <div>{text.form.cancel}</div>
                     </Button>
                 }
-                {ctrl.model.hasDefaultSqlDataSource() &&
+                {ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
                     <Button
                         key="discard"
                         classList={['toolbar-button']}

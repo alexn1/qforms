@@ -769,13 +769,13 @@ class RowFormView extends FormView {
       onClick: ctrl.onSaveClick,
       visible: ctrl.getMode() === 'edit',
       minWidth: width
-    }, /*#__PURE__*/React.createElement(SaveIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.save)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(SaveIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.save)), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && /*#__PURE__*/React.createElement(Button, {
       key: "cancel",
       classList: ['toolbar-button'],
       visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid,
       onClick: ctrl.onCancelClick,
       minWidth: width
-    }, /*#__PURE__*/React.createElement(CancelIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.cancel)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(CancelIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.cancel)), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && /*#__PURE__*/React.createElement(Button, {
       key: "discard",
       classList: ['toolbar-button'],
       enabled: ctrl.state.changed || !ctrl.isValid(),
