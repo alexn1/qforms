@@ -789,11 +789,19 @@ class RowFormView extends FormView {
       onClick: ctrl.onRefreshClick,
       visible: ctrl.getMode() === 'view',
       minWidth: width
-    }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.refresh)), ctrl.model.hasActions() && ctrl.model.getKey() && /*#__PURE__*/React.createElement(DropdownButton, {
+    }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.refresh)), this.isActionsVisible() && ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
     }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
+  }
+
+  isActionsVisible() {
+    if (this.getCtrl().getModel().hasDefaultSqlDataSource()) {
+      return !!this.getCtrl().getModel().getKey();
+    }
+
+    return true;
   }
 
   renderLabel(fieldCtrl, key) {

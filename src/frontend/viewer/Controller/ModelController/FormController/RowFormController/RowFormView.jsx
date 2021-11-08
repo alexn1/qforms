@@ -69,7 +69,7 @@ class RowFormView extends FormView {
                         <div>{text.form.refresh}</div>
                     </Button>
                 }
-                {ctrl.model.hasActions() && ctrl.model.getKey() &&
+                {this.isActionsVisible() && ctrl.model.hasActions() &&
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
@@ -80,6 +80,12 @@ class RowFormView extends FormView {
                 }
             </div>
         );
+    }
+    isActionsVisible() {
+        if (this.getCtrl().getModel().hasDefaultSqlDataSource()) {
+            return !!this.getCtrl().getModel().getKey();
+        }
+        return true;
     }
     renderLabel(fieldCtrl, key) {
         const model = fieldCtrl.model;
