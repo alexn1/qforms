@@ -1157,17 +1157,22 @@ class PageView extends ModelView {
     }, this.renderTitle(), model.isModal() && [...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []), this.renderClosePageHeaderButton()]);
   }
 
-  render() {
-    console.log('PageView.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.getCtrl();
-    const model = ctrl.getModel();
+  renderMain() {
+    const model = this.getCtrl().getModel();
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows`
-    }, this.renderHeader(), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__main flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
       className: "frame__container flex-rows grid-gap-10"
-    }, this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms())));
+    }, this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms()));
+  }
+
+  renderFooter() {}
+
+  render() {
+    console.log('PageView.render', this.getCtrl().getModel().getFullName());
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} full flex-rows`
+    }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }
 
 }

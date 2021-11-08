@@ -131,20 +131,25 @@ class PageView extends ModelView {
             }
         </div>;
     }
+    renderMain() {
+        const model = this.getCtrl().getModel();
+        return <div className={`${this.getCssBlockName()}__main flex-max frame`}>
+            <div className="frame__container flex-rows grid-gap-10">
+                {this.isToolbar() && this.renderToolbar()}
+                {model.hasRowForm() && this.renderRowForms()}
+                {model.hasTableForm() && this.renderTableForms()}
+            </div>
+        </div>;
+    }
+    renderFooter() {
+    }
     render() {
-        console.log('PageView.render', this.props.ctrl.model.getFullName());
-        const ctrl = this.getCtrl();
-        const model = ctrl.getModel();
+        console.log('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div className={`${this.getCssClassNames()} full flex-rows`}>
                 {this.renderHeader()}
-                <div className={`${this.getCssBlockName()}__main flex-max frame`}>
-                    <div className="frame__container flex-rows grid-gap-10">
-                        {this.isToolbar() && this.renderToolbar()}
-                        {model.hasRowForm() && this.renderRowForms()}
-                        {model.hasTableForm() && this.renderTableForms()}
-                    </div>
-                </div>
+                {this.renderMain()}
+                {this.renderFooter()}
             </div>
         );
     }
