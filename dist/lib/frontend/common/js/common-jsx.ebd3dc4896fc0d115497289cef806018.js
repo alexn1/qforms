@@ -807,14 +807,14 @@ class DropdownButton extends ReactComponent {
       e.preventDefault();
     });
 
-    _defineProperty(this, "onUlClick", e => {
-      // console.log('DropdownButton.onUlClick', e);
-      e.persist();
+    _defineProperty(this, "onLiClick", async e => {
+      // console.log('DropdownButton.onLiClick', e.currentTarget);
+      const li = e.currentTarget;
       this.setState({
         open: false
       }, () => {
         if (this.props.onClick) {
-          this.props.onClick(e.target);
+          this.props.onClick(li);
         }
       });
     });
@@ -841,12 +841,12 @@ class DropdownButton extends ReactComponent {
       disabled: this.isDisabled()
     }, this.props.title || this.props.children), /*#__PURE__*/React.createElement("ul", {
       className: `${this.getCssBlockName()}__dropdown`,
-      onMouseDown: this.onUlMouseDown,
-      onClick: this.onUlClick
+      onMouseDown: this.onUlMouseDown
     }, this.props.actions && this.props.actions.map(action => /*#__PURE__*/React.createElement("li", {
       className: `${this.getCssBlockName()}__item`,
       key: action.name,
-      "data-action": action.name
+      "data-action": action.name,
+      onClick: this.onLiClick
     }, action.title))));
   }
 
