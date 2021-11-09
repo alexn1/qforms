@@ -813,7 +813,8 @@ class RowFormView extends FormView {
     }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, text.form.refresh)), this.isActionsVisible() && ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
-      onClick: this.onActionsClick
+      onClick: this.onActionsClick,
+      enabled: this.getCtrl().state.mode === 'view'
     }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
   }
 

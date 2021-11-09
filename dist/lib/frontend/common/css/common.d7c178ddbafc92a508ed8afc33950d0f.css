@@ -97,6 +97,9 @@ svg {
 .Button:not(:disabled) {
   cursor: pointer;
 }
+.Button:disabled svg {
+  fill: #aaa;
+}
 
 table.DatePicker caption,
 table.DatePicker td,

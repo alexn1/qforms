@@ -68,6 +68,7 @@ class RowFormView extends FormView {
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
+                        enabled={this.getCtrl().state.mode === 'view'}
                     >
                         <MoreVertIcon/>
                     </DropdownButton>

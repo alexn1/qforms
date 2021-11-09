@@ -825,10 +825,10 @@ class DropdownButton extends ReactComponent {
     };
   }
 
-  isDisabled() {
-    if (this.props.enabled !== undefined) return !this.props.enabled; // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+  isEnabled() {
+    if (this.props.enabled !== undefined) return this.props.enabled; // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
 
-    return this.state.disabled;
+    return !this.state.disabled;
   }
 
   render() {
@@ -838,7 +838,7 @@ class DropdownButton extends ReactComponent {
       classList: [`${this.getCssBlockName()}__button`],
       onClick: this.onButtonClick,
       onBlur: this.onButtonBlur,
-      disabled: this.isDisabled()
+      enabled: this.isEnabled()
     }, this.props.title || this.props.children), /*#__PURE__*/React.createElement("ul", {
       className: `${this.getCssBlockName()}__dropdown`,
       onMouseDown: this.onUlMouseDown
