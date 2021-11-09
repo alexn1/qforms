@@ -177,12 +177,17 @@ table.DatePicker td.selected {
   white-space: nowrap;
 }
 .DropdownButton__item {
-  display: block;
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
   padding: 10px;
 }
 .DropdownButton__item:hover {
   background-color: #398bce;
   color: white;
+}
+.DropdownButton__item:hover svg {
+  fill: white;
 }
 
 .DropdownDatePicker {

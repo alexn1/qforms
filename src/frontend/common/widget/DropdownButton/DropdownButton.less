@@ -21,10 +21,15 @@
 }
 
 .DropdownButton__item {
-  display: block;
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
   padding: 10px;
   &:hover {
     background-color: #398bce;
     color: white;
+    svg {
+      fill: white;
+    }
   }
 }

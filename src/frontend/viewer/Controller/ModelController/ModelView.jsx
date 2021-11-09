@@ -1,9 +1,20 @@
 class ModelView extends View {
     getActionsForDropdownButton() {
-        return this.props.ctrl.getModel().getCol('actions').map(data => ({
-            name : Model.getName(data),
-            title: Model.getAttr(data, 'caption')
-        }));
+        return this.props.ctrl.getModel().getCol('actions').map(data => {
+            if (this.getActionIcon) {
+                return {
+                    name : Model.getName(data),
+                    title: [
+                        <div key={'icon'}>{this.getActionIcon(Model.getName(data))}</div>,
+                        <div key={'title'}>{Model.getAttr(data, 'caption')}</div>
+                    ]
+                };
+            }
+            return {
+                name : Model.getName(data),
+                title: Model.getAttr(data, 'caption')
+            };
+        });
     }
     getCssBlockName() {
         const model = this.props.ctrl.getModel();

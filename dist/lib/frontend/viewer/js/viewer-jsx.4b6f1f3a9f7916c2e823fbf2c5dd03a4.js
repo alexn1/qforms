@@ -28,10 +28,23 @@ class ImageDialogView extends View {
 }
 class ModelView extends View {
   getActionsForDropdownButton() {
-    return this.props.ctrl.getModel().getCol('actions').map(data => ({
-      name: Model.getName(data),
-      title: Model.getAttr(data, 'caption')
-    }));
+    return this.props.ctrl.getModel().getCol('actions').map(data => {
+      if (this.getActionIcon) {
+        return {
+          name: Model.getName(data),
+          title: [/*#__PURE__*/React.createElement("div", {
+            key: 'icon'
+          }, this.getActionIcon(Model.getName(data))), /*#__PURE__*/React.createElement("div", {
+            key: 'title'
+          }, Model.getAttr(data, 'caption'))]
+        };
+      }
+
+      return {
+        name: Model.getName(data),
+        title: Model.getAttr(data, 'caption')
+      };
+    });
   }
 
   getCssBlockName() {
@@ -868,6 +881,10 @@ class RowFormView extends FormView {
       className: `${this.getCssClassNames()} flex-rows grid-gap-5`
     }, (ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar(), this.renderFields());
   }
+  /*getActionIcon() {
+      return <CancelIcon/>;
+  }*/
+
 
 }
 

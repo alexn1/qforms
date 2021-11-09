@@ -141,6 +141,9 @@ class RowFormView extends FormView {
             {this.renderFields()}
         </div>;
     }
+    /*getActionIcon() {
+        return <CancelIcon/>;
+    }*/
 }
 
 window.QForms.RowFormView = RowFormView;
