@@ -377,10 +377,6 @@ button.RowFormComboBoxFieldView__create-button:active {
   padding: 5px 0;
 }
 
-.Modal .PageView {
-  width: 1000px;
-  height: 750px;
-}
 .PageView__main > .frame__container {
   padding: 10px;
 }
