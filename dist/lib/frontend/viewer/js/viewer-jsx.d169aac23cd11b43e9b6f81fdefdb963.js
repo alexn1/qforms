@@ -892,7 +892,8 @@ class RowFormView extends FormView {
     console.log('RowFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} flex-rows grid-gap-5`
+      className: `${this.getCssClassNames()} flex-rows grid-gap-5`,
+      style: this.getStyle()
     }, (ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar(), this.renderFields());
   }
   /*renderActionIcon() {
@@ -1040,7 +1041,8 @@ class TableFormView extends FormView {
     console.log('TableFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`
+      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`,
+      style: this.getStyle()
     }, this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
 
