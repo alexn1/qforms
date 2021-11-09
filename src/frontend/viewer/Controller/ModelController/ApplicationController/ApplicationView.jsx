@@ -23,20 +23,28 @@ class ApplicationView extends ModelView {
             return this.renderView(ctrl, {key: ctrl.getId()});
         });
     }
+    renderHeader() {
+        return <header className={`${this.getCssBlockName()}__header`}>
+            <Menu items={this.getCtrl().getMenuItemsProp()} onClick={this.getCtrl().onMenuItemClick}/>
+        </header>;
+    }
+    renderMain() {
+        return <main className={`${this.getCssBlockName()}__main`}>
+            {this.renderActivePage()}
+        </main>;
+    }
+    renderFooter() {
+        return <footer className={`${this.getCssBlockName()}__footer`}>
+            <Statusbar onCreate={this.getCtrl().onStatusbarCreate}/>
+        </footer>;
+    }
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
-        const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssBlockName()}__container`}>
-                <header className={`${this.getCssBlockName()}__header`}>
-                    <Menu items={ctrl.getMenuItemsProp()} onClick={ctrl.onMenuItemClick}/>
-                </header>
-                <main className={`${this.getCssBlockName()}__main`}>
-                    {this.renderActivePage()}
-                </main>
-                <footer className={`${this.getCssBlockName()}__footer`}>
-                    <Statusbar onCreate={ctrl.onStatusbarCreate}/>
-                </footer>
+            <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
+                {this.renderHeader()}
+                {this.renderMain()}
+                {this.renderFooter()}
                 {this.renderModals()}
             </div>
         );

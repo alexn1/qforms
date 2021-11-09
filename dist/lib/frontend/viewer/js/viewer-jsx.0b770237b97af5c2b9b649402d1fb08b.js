@@ -57,6 +57,8 @@ class ModelView extends View {
     return super.getCssBlockName();
   }
 
+  getStyle() {}
+
 }
 
 window.QForms.ModelView = ModelView;
@@ -92,23 +94,35 @@ class ApplicationView extends ModelView {
     });
   }
 
-  render() {
-    console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__container`
-    }, /*#__PURE__*/React.createElement("header", {
+  renderHeader() {
+    return /*#__PURE__*/React.createElement("header", {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement(Menu, {
-      items: ctrl.getMenuItemsProp(),
-      onClick: ctrl.onMenuItemClick
-    })), /*#__PURE__*/React.createElement("main", {
+      items: this.getCtrl().getMenuItemsProp(),
+      onClick: this.getCtrl().onMenuItemClick
+    }));
+  }
+
+  renderMain() {
+    return /*#__PURE__*/React.createElement("main", {
       className: `${this.getCssBlockName()}__main`
-    }, this.renderActivePage()), /*#__PURE__*/React.createElement("footer", {
+    }, this.renderActivePage());
+  }
+
+  renderFooter() {
+    return /*#__PURE__*/React.createElement("footer", {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Statusbar, {
-      onCreate: ctrl.onStatusbarCreate
-    })), this.renderModals());
+      onCreate: this.getCtrl().onStatusbarCreate
+    }));
+  }
+
+  render() {
+    console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__container`,
+      style: this.getStyle()
+    }, this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals());
   }
 
 }

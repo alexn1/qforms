@@ -23,6 +23,9 @@ class ModelView extends View {
         }
         return super.getCssBlockName();
     }
+    getStyle() {
+
+    }
 }
 
 window.QForms.ModelView = ModelView;
