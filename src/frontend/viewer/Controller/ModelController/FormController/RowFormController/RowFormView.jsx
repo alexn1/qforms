@@ -141,7 +141,7 @@ class RowFormView extends FormView {
             {this.renderFields()}
         </div>;
     }
-    /*getActionIcon() {
+    /*renderActionIcon() {
         return <CancelIcon/>;
     }*/
 }

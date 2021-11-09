@@ -1,11 +1,11 @@
 class ModelView extends View {
     getActionsForDropdownButton() {
         return this.props.ctrl.getModel().getCol('actions').map(data => {
-            if (this.getActionIcon) {
+            if (this.renderActionIcon) {
                 return {
                     name : Model.getName(data),
                     title: [
-                        <div key={'icon'}>{this.getActionIcon(Model.getName(data))}</div>,
+                        <div key={'icon'}>{this.renderActionIcon(Model.getName(data))}</div>,
                         <div key={'title'}>{Model.getAttr(data, 'caption')}</div>
                     ]
                 };
