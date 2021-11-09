@@ -3,7 +3,6 @@ class RowFormView extends FormView {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
         const text = ctrl.getModel().getApp().getText();
-        const width = '120px';
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
                 {ctrl.model.hasDefaultSqlDataSource() &&
@@ -12,7 +11,6 @@ class RowFormView extends FormView {
                         classList={['toolbar-button']}
                         onClick={ctrl.onEditClick}
                         visible={ctrl.getMode() === 'view'}
-                        minWidth={width}
                     >
                         <EditIcon/>
                         <div>{text.form.edit}</div>
@@ -25,7 +23,6 @@ class RowFormView extends FormView {
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
                         visible={ctrl.getMode() === 'edit'}
-                        minWidth={width}
                     >
                         <SaveIcon/>
                         <div>{text.form.save}</div>
@@ -37,7 +34,6 @@ class RowFormView extends FormView {
                         classList={['toolbar-button']}
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
-                        minWidth={width}
                     >
                         <CancelIcon/>
                         <div>{text.form.cancel}</div>
@@ -50,7 +46,6 @@ class RowFormView extends FormView {
                         enabled={ctrl.state.changed || !ctrl.isValid()}
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
-                        minWidth={width}
                     >
                         <CloseIcon2/>
                         <div>{text.form.discard}</div>
@@ -63,7 +58,6 @@ class RowFormView extends FormView {
                         enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                         onClick={ctrl.onRefreshClick}
                         visible={ctrl.getMode() === 'view'}
-                        minWidth={width}
                     >
                         <RefreshIcon/>
                         <div>{text.form.refresh}</div>
