@@ -383,7 +383,7 @@ class ApplicationController extends ModelController {
         // console.log('pc:', pc);
 
         // show
-        pc.getModel().isModal() ? this.addModal(pc) : this.addPage(pc);
+        pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
 
         return pc;
@@ -2247,7 +2247,7 @@ class PageController extends ModelController {
     async onDocumentKeyDown(e) {
         // console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
-            if (this.getModel().isModal()) {
+            if (this.isModal()) {
                 this.close();
             }
         }
@@ -2295,6 +2295,9 @@ class PageController extends ModelController {
     }
     getId() {
         return this.id;
+    }
+    isModal() {
+        return this.getModel().isModal();
     }
 }
 window.QForms.PageController = PageController;

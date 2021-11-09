@@ -1188,7 +1188,7 @@ class PageView extends ModelView {
   render() {
     console.log('PageView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows`
+      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-rows`
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }
 

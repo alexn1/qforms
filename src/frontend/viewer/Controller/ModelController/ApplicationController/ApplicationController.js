@@ -112,7 +112,7 @@ class ApplicationController extends ModelController {
         // console.log('pc:', pc);
 
         // show
-        pc.getModel().isModal() ? this.addModal(pc) : this.addPage(pc);
+        pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
 
         return pc;

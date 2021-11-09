@@ -168,7 +168,7 @@ class PageController extends ModelController {
     async onDocumentKeyDown(e) {
         // console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
-            if (this.getModel().isModal()) {
+            if (this.isModal()) {
                 this.close();
             }
         }
@@ -216,6 +216,9 @@ class PageController extends ModelController {
     }
     getId() {
         return this.id;
+    }
+    isModal() {
+        return this.getModel().isModal();
     }
 }
 window.QForms.PageController = PageController;
