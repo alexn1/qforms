@@ -25,6 +25,7 @@ class RowForm extends Form_1.default {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.newMode = this.getAttr('newMode');
+        response.refreshButton = this.getAttr('refreshButton');
     }
 }
 module.exports = RowForm;

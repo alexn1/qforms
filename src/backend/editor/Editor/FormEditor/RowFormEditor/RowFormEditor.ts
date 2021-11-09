@@ -8,8 +8,9 @@ class RowFormEditor extends FormEditor {
             '@class'     : 'RowForm',
             '@attributes': {
                 ...FormEditor.createAttributes(params),
-                newMode : params.newMode  ? params.newMode : '',
-                backOnly: params.backOnly ? params.backOnly: 'false'
+                newMode      : params.newMode  ? params.newMode : '',
+                backOnly     : params.backOnly ? params.backOnly: 'false',
+                refreshButton: params.refreshButton  || 'true',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
