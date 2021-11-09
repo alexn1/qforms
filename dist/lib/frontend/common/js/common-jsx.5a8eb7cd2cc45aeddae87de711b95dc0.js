@@ -214,6 +214,23 @@ class EditIcon extends ReactComponent {
   }
 
 }
+class LeftIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "18px",
+      viewBox: "0 0 24 24",
+      width: "18px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"
+    }));
+  }
+
+}
 class MoreVertIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("svg", {
@@ -261,6 +278,23 @@ class RefreshIcon extends ReactComponent {
       fill: "none"
     }), /*#__PURE__*/React.createElement("path", {
       d: "M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+    }));
+  }
+
+}
+class RightIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "18px",
+      viewBox: "0 0 24 24",
+      width: "18px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
     }));
   }
 

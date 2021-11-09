@@ -63,14 +63,18 @@ class TableFormView extends FormView {
                 </div>
                 {dataSource.getLimit() &&
                     <div className="paging__gotoBlock">
-                        <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick} width="100px">{text.form.previous}</Button>
+                        <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick}>
+                            <LeftIcon/>
+                        </Button>
                         <ComboBox
                             value={ctrl.model.getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                             items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
                             ({value: (i+1).toString(), title: (i+1).toString()})
                         )}/>
-                        <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick} width="100px">{text.form.next}</Button>
+                        <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick}>
+                            <RightIcon/>
+                        </Button>
                     </div>
                 }
             </div>
