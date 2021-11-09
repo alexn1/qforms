@@ -40,14 +40,12 @@ class ApplicationView extends ModelView {
     }
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
-        return (
-            <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
-                {this.renderHeader()}
-                {this.renderMain()}
-                {this.renderFooter()}
-                {this.renderModals()}
-            </div>
-        );
+        return <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
+            {this.renderHeader()}
+            {this.renderMain()}
+            {this.renderFooter()}
+            {this.renderModals()}
+        </div>;
     }
 }
 
