@@ -17,9 +17,21 @@ class DialogView extends View {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__content flex-rows`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__header`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__title`
+    }, "title"), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: this.getCtrl().onCloseClick
-    }, /*#__PURE__*/React.createElement(CloseIcon2, null))));
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null))), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__main flex-max`
+    }, "main"), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__footer`
+    }, /*#__PURE__*/React.createElement(Button, {
+      title: 'OK'
+    })))));
   }
 
 }

@@ -237,9 +237,6 @@ class ImageDialogController extends DialogController {
         console.log('ImageDialogController.getViewClass');
         return ImageDialogView;
     }
-    /*onCloseClick = async e => {
-        this.close();
-    }*/
     getSrc() {
         return this.src;
     }
