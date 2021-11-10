@@ -18,19 +18,19 @@ class FrontHostApp {
     async run() {
         throw new Error('FrontHostApp.run not implemented');
     }
-    onWindowUnhandledrejection(e) {
+    async onWindowUnhandledrejection(e) {
         console.log('FrontHostApp.onWindowUnhandledrejection', e);
+        e.preventDefault();
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
-        alert(err.message);
-        e.preventDefault();
+        await this.alert(err.message);
     }
-    onWindowError(e) {
+    async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
+        e.preventDefault();
         const err = e.error;
         this.logError(err);
-        alert(err.message);
-        e.preventDefault();
+        await this.alert(err.message);
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
@@ -92,6 +92,26 @@ class FrontHostApp {
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
+    }
+    alert(message) {
+        console.log('FrontHostApp.alert', message);
+        return new Promise(resolve => {
+            const root = document.querySelector('.alert');
+            // console.log('root:', root);
+            // console.log('root.childElementCount', root.childElementCount);
+            if (root.childElementCount === 0) {
+                const alertCtrl = new AlertController('alert', message, () => {
+                    ReactDOM.unmountComponentAtNode(root);
+                    resolve();
+                });
+                // console.log('alertCtrl:', alertCtrl);
+                const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
+                // console.log('alertView', alertView);
+            } else {
+                console.error('alert already exists');
+                resolve();
+            }
+        });
     }
 }
 
