@@ -23,14 +23,14 @@ class FrontHostApp {
         e.preventDefault();
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
-        await this.alert(err.message);
+        await this.alert('Unhandled Rejection', err.message);
     }
     async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
         e.preventDefault();
         const err = e.error;
         this.logError(err);
-        await this.alert(err.message);
+        await this.alert('Error', err.message);
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
@@ -93,14 +93,14 @@ class FrontHostApp {
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
-    alert(message) {
-        console.log('FrontHostApp.alert', message);
+    alert(title, message) {
+        console.log('FrontHostApp.alert', title, message);
         return new Promise(resolve => {
             const root = document.querySelector('.alert');
             // console.log('root:', root);
             // console.log('root.childElementCount', root.childElementCount);
             if (root.childElementCount === 0) {
-                const alertCtrl = new AlertController('alert', message, () => {
+                const alertCtrl = new AlertController(title, message, () => {
                     ReactDOM.unmountComponentAtNode(root);
                     resolve();
                 });
