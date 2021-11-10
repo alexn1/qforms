@@ -45,6 +45,10 @@
   display: flex;
   align-items: center;
   padding: 10px;
+  flex-direction: row-reverse;
+}
+.DialogView__ok-button {
+  min-width: 100px;
 }
 
 .ImageDialogView {

@@ -5,4 +5,7 @@ class DialogController extends ModalController {
     onCloseClick = async e => {
         this.close();
     }
+    onOkButtonClick = async e => {
+        this.close();
+    }
 }

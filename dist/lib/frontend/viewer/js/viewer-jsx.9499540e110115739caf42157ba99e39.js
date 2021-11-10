@@ -30,7 +30,9 @@ class DialogView extends View {
     }, "main"), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Button, {
-      title: 'OK'
+      classList: [`${this.getCssBlockName()}__ok-button`],
+      title: 'OK',
+      onClick: this.getCtrl().onOkButtonClick
     })))));
   }
 

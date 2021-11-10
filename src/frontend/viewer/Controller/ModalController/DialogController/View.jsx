@@ -12,7 +12,7 @@ class DialogView extends View {
                         </div>
                         <div className={`${this.getCssBlockName()}__main flex-max`}>main</div>
                         <div className={`${this.getCssBlockName()}__footer`}>
-                            <Button title={'OK'}/>
+                            <Button classList={[`${this.getCssBlockName()}__ok-button`]} title={'OK'} onClick={this.getCtrl().onOkButtonClick}/>
                         </div>
                     </div>
                 </div>
