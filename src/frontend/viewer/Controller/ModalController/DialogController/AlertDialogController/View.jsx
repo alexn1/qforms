@@ -1,4 +1,4 @@
-class DialogView extends View {
+class AlertDialogView extends View {
     render() {
         return (
             <div className={this.getCssClassNames()}>

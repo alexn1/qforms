@@ -10,7 +10,7 @@ class View extends ReactComponent {
   }
 
 }
-class DialogView extends View {
+class AlertDialogView extends View {
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()

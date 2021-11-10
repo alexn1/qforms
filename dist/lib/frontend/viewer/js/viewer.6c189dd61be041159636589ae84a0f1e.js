@@ -218,11 +218,14 @@ class ModalController extends Controller {
 }
 
 class DialogController extends ModalController {
-    getViewClass() {
-        return DialogView;
-    }
     onCloseClick = async e => {
         this.close();
+    }
+}
+
+class AlertDialogController extends DialogController {
+    getViewClass() {
+        return AlertDialogView;
     }
     onOkButtonClick = async e => {
         this.close();
