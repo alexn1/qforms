@@ -10,6 +10,19 @@ class View extends ReactComponent {
   }
 
 }
+class DialogView extends View {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__container`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: this.getCtrl().onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null))));
+  }
+
+}
 class ImageDialogView extends View {
   render() {
     console.log('ImageDialogView.render');

@@ -217,6 +217,15 @@ class ModalController extends Controller {
     }
 }
 
+class DialogController extends ModalController {
+    getViewClass() {
+        return DialogView;
+    }
+    onCloseClick = async e => {
+        this.close();
+    }
+}
+
 class ImageDialogController extends ModalController {
     constructor(app, id, src) {
         // console.log('ImageDialogController.constructor', src);
