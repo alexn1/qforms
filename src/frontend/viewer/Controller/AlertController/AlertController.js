@@ -3,6 +3,7 @@ class AlertController extends Controller {
         super();
         if (!title) throw new Error('no title');
         if (!message) throw new Error('no message');
+        if (!closeCallback) throw new Error('no closeCallback');
         this.title   = title;
         this.message = message;
         this.closeCallback = closeCallback;
@@ -11,10 +12,7 @@ class AlertController extends Controller {
         return AlertView;
     }
     close() {
-        super.close();
-        if (this.closeCallback) {
-            this.closeCallback();
-        }
+        this.closeCallback();
     }
     onOkButtonClick = async e => {
         this.close();
