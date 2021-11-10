@@ -224,15 +224,22 @@ class DialogController extends ModalController {
 }
 
 class AlertDialogController extends DialogController {
-    constructor(app, id, title, message) {
+    constructor(app, id, title, message, closeCallback) {
         super(app, id);
         if (!title) throw new Error('no title');
         if (!message) throw new Error('no message');
         this.title   = title;
         this.message = message;
+        this.closeCallback = closeCallback;
     }
     getViewClass() {
         return AlertDialogView;
+    }
+    close() {
+        super.close();
+        if (this.closeCallback) {
+            this.closeCallback();
+        }
     }
     onOkButtonClick = async e => {
         this.close();
@@ -545,10 +552,12 @@ class ApplicationController extends ModelController {
         if (this.activePage) this.activePage.invalidate();
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
-    async alert(message) {
-        const dialogCtrl = new AlertDialogController(this, this.getNewId(), 'alert', message);
-        this.addModal(dialogCtrl);
-        this.rerender();
+    alert(message) {
+        return new Promise(resolve => {
+            const dialogCtrl = new AlertDialogController(this, this.getNewId(), 'alert', message, resolve);
+            this.addModal(dialogCtrl);
+            this.rerender();
+        });
     }
 }
 
