@@ -1,4 +1,4 @@
-class ImageDialogController extends ModalController {
+class ImageDialogController extends DialogController {
     constructor(app, id, src) {
         // console.log('ImageDialogController.constructor', src);
         super(app, id);
@@ -8,9 +8,6 @@ class ImageDialogController extends ModalController {
     getViewClass() {
         console.log('ImageDialogController.getViewClass');
         return ImageDialogView;
-    }
-    onCloseClick = async e => {
-        this.close();
     }
     getSrc() {
         return this.src;
