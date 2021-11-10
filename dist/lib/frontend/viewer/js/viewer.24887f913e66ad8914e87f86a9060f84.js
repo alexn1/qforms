@@ -191,6 +191,32 @@ class Controller extends EventEmitter {
     }
 }
 
+class AlertController extends Controller {
+    constructor(title, message, closeCallback) {
+        super();
+        if (!title) throw new Error('no title');
+        if (!message) throw new Error('no message');
+        this.title   = title;
+        this.message = message;
+        this.closeCallback = closeCallback;
+    }
+    getViewClass() {
+        return AlertView;
+    }
+    close() {
+        super.close();
+        if (this.closeCallback) {
+            this.closeCallback();
+        }
+    }
+    onOkButtonClick = async e => {
+        this.close();
+    }
+    onCloseClick = async e => {
+        this.close();
+    }
+}
+
 class ModalController extends Controller {
     constructor(app, id) {
         super();
@@ -217,36 +243,7 @@ class ModalController extends Controller {
     }
 }
 
-class DialogController extends ModalController {
-    onCloseClick = async e => {
-        this.close();
-    }
-}
-
-class AlertDialogController extends DialogController {
-    constructor(app, id, title, message, closeCallback) {
-        super(app, id);
-        if (!title) throw new Error('no title');
-        if (!message) throw new Error('no message');
-        this.title   = title;
-        this.message = message;
-        this.closeCallback = closeCallback;
-    }
-    getViewClass() {
-        return AlertDialogView;
-    }
-    close() {
-        super.close();
-        if (this.closeCallback) {
-            this.closeCallback();
-        }
-    }
-    onOkButtonClick = async e => {
-        this.close();
-    }
-}
-
-class ImageDialogController extends DialogController {
+class ImageDialogController extends ModalController {
     constructor(app, id, src) {
         // console.log('ImageDialogController.constructor', src);
         super(app, id);
@@ -259,6 +256,9 @@ class ImageDialogController extends DialogController {
     }
     getSrc() {
         return this.src;
+    }
+    onCloseClick = async e => {
+        this.close();
     }
 }
 
@@ -552,13 +552,13 @@ class ApplicationController extends ModelController {
         if (this.activePage) this.activePage.invalidate();
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
-    alert(message) {
+    /*alert(message) {
         return new Promise(resolve => {
             const dialogCtrl = new AlertDialogController(this, this.getNewId(), 'alert', message, resolve);
             this.addModal(dialogCtrl);
             this.rerender();
         });
-    }
+    }*/
 }
 
 window.QForms.ApplicationController = ApplicationController;

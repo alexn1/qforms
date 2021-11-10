@@ -1,6 +1,6 @@
-class AlertDialogController extends DialogController {
-    constructor(app, id, title, message, closeCallback) {
-        super(app, id);
+class AlertController extends Controller {
+    constructor(title, message, closeCallback) {
+        super();
         if (!title) throw new Error('no title');
         if (!message) throw new Error('no message');
         this.title   = title;
@@ -8,7 +8,7 @@ class AlertDialogController extends DialogController {
         this.closeCallback = closeCallback;
     }
     getViewClass() {
-        return AlertDialogView;
+        return AlertView;
     }
     close() {
         super.close();
@@ -17,6 +17,9 @@ class AlertDialogController extends DialogController {
         }
     }
     onOkButtonClick = async e => {
+        this.close();
+    }
+    onCloseClick = async e => {
         this.close();
     }
 }

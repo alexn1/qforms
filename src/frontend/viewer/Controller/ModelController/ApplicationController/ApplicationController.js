@@ -255,13 +255,13 @@ class ApplicationController extends ModelController {
         if (this.activePage) this.activePage.invalidate();
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
-    alert(message) {
+    /*alert(message) {
         return new Promise(resolve => {
             const dialogCtrl = new AlertDialogController(this, this.getNewId(), 'alert', message, resolve);
             this.addModal(dialogCtrl);
             this.rerender();
         });
-    }
+    }*/
 }
 
 window.QForms.ApplicationController = ApplicationController;
