@@ -51,7 +51,7 @@ class RowFormView extends FormView {
                         <div>{text.form.discard}</div>
                     </Button>
                 }
-                {ctrl.model.hasDefaultSqlDataSource() &&
+                {ctrl.model.hasDefaultSqlDataSource() && ctrl.getModel().getAttr('refreshButton') === 'true' &&
                     <Button
                         key="refresh"
                         classList={['toolbar-button']}

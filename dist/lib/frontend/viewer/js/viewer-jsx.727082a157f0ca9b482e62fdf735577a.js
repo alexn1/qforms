@@ -804,7 +804,7 @@ class RowFormView extends FormView {
       enabled: ctrl.state.changed || !ctrl.isValid(),
       onClick: ctrl.onDiscardClick,
       visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)
-    }, /*#__PURE__*/React.createElement(CloseIcon2, null), /*#__PURE__*/React.createElement("div", null, text.form.discard)), ctrl.model.hasDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null), /*#__PURE__*/React.createElement("div", null, text.form.discard)), ctrl.model.hasDefaultSqlDataSource() && ctrl.getModel().getAttr('refreshButton') === 'true' && /*#__PURE__*/React.createElement(Button, {
       key: "refresh",
       classList: ['toolbar-button'],
       enabled: !ctrl.state.changed && !ctrl.state.hasNew,
