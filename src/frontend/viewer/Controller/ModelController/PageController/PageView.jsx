@@ -45,16 +45,21 @@ class PageView extends ModelView {
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.options.selectMode &&
-                    <Button title={model.getApp().getText().page.select}
+                    <Button
+                        classList={['toolbar-button']}
                         onClick={ctrl.onSelectClick}
                         enabled={!!ctrl.getSelectedRowKey()}
-                    />
+                    >
+                        <DoneIcon/>
+                        <div>{model.getApp().getText().page.select}</div>
+                    </Button>
                 }
-                {model.options.selectMode &&
-                    <Button title={model.getApp().getText().page.reset}
+                {/*{model.options.selectMode &&
+                    <Button classList={['toolbar-button']}
+                        title={model.getApp().getText().page.reset}
                             onClick={ctrl.onResetClick}
                     />
-                }
+                }*/}
                 {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() &&
                     <Button
                         classList={['toolbar-button']}
