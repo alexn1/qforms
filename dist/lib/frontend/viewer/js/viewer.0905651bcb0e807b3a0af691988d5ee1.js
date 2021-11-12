@@ -554,6 +554,9 @@ class ApplicationController extends ModelController {
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
     async alert(options) {
+        if (!options.title) {
+            options.title = this.getModel().getText().application.error;
+        }
         await this.frontHostApp.alert(options);
     }
 }

@@ -7,7 +7,8 @@
         "WrongUsernameOrPassword": "Wrong username or password"
     },
     "application": {
-        "logout": "Logout"
+        "logout": "Logout",
+        "error": "Error"
     },
     "page": {
         "create": "Create",

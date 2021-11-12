@@ -30,7 +30,7 @@ class FrontHostApp {
         e.preventDefault();
         const err = e.error;
         this.logError(err);
-        // await this.alert({title: 'Error', message: err.message});
+        // await this.alert({message: err.message});
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
