@@ -2,7 +2,6 @@ class AlertController extends Controller {
     constructor(options) {
         super();
         this.options = options;
-        if (!options.title) throw new Error('no title');
         if (!options.message) throw new Error('no message');
         if (!options.closeCallback) throw new Error('no closeCallback');
     }

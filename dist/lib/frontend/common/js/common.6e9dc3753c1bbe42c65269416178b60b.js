@@ -23,14 +23,14 @@ class FrontHostApp {
         e.preventDefault();
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
-        await this.alert('Unhandled Rejection', err.message);
+        await this.alert({title: 'Unhandled Rejection', message: err.message});
     }
     async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
         e.preventDefault();
         const err = e.error;
         this.logError(err);
-        // await this.alert('Error', err.message);
+        // await this.alert({title: 'Error', message: err.message});
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
@@ -93,24 +93,29 @@ class FrontHostApp {
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
-    alert(title, message) {
-        console.log('FrontHostApp.alert', title, message);
+    alert(options) {
+        console.log('FrontHostApp.alert', options);
         return new Promise(resolve => {
-            const root = document.querySelector('.alert-root');
-            if (root.childElementCount === 0) {
-                const alertCtrl = new AlertController({
-                    title,
-                    titleStyle: {color: 'red'},
-                    message,
-                    closeCallback: () => {
-                        ReactDOM.unmountComponentAtNode(root);
-                        resolve();
-                    }});
-                // console.log('alertCtrl:', alertCtrl);
-                const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
-                // console.log('alertView', alertView);
-            } else {
-                console.error('alert already exists', root);
+            try {
+                const root = document.querySelector('.alert-root');
+                if (root.childElementCount === 0) {
+                    const alertCtrl = new AlertController({
+                        title        : options.title,
+                        titleStyle   : {color: 'red'},
+                        message      : options.message,
+                        closeCallback: () => {
+                            ReactDOM.unmountComponentAtNode(root);
+                            resolve();
+                        }});
+                    // console.log('alertCtrl:', alertCtrl);
+                    const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
+                    // console.log('alertView', alertView);
+                } else {
+                    console.error('alert already exists', root);
+                    resolve();
+                }
+            } catch (err) {
+                console.error(err.message);
                 resolve();
             }
         });

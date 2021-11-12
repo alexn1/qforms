@@ -1,18 +1,20 @@
 class ApplicationController extends ModelController {
-    constructor(model) {
+    constructor(model, frontHostApp) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
+        this.frontHostApp = frontHostApp;
         this.lastId = 0;
         this.activePage = null;     // active non modal page
         this.modals = [];
         this.statusbar  = null;
         this.homePageName = null;
+
     }
-    static create(model) {
+    static create(model, frontHostApp) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
         const Class = CustomClass ? CustomClass : ApplicationController;
-        return new Class(model);
+        return new Class(model, frontHostApp);
     }
     static getSearchObj() {
         // console.log('ApplicationController.getSearchObj:', window.location);
@@ -254,6 +256,9 @@ class ApplicationController extends ModelController {
     invalidate() {
         if (this.activePage) this.activePage.invalidate();
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
+    }
+    async alert(options) {
+        await this.frontHostApp.alert(options);
     }
 }
 

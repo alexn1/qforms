@@ -12,7 +12,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         application.init();
 
         // applicationController
-        const applicationController = this.applicationController = ApplicationController.create(application);
+        const applicationController = this.applicationController = ApplicationController.create(application, this);
         applicationController.init();
 
         // view
