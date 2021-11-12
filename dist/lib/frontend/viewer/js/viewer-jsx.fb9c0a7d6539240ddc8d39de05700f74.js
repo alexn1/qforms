@@ -21,7 +21,8 @@ class AlertView extends View {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__title`
+      className: `${this.getCssBlockName()}__title`,
+      style: this.getCtrl().options.titleStyle
     }, this.getCtrl().options.title), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: this.getCtrl().onCloseClick
