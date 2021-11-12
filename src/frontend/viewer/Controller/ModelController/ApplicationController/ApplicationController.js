@@ -209,9 +209,13 @@ class ApplicationController extends ModelController {
             await this.openPage({name: name, modal: false});
             history.pushState({pageName: name}, '', PageController.createLink({page: name}));
         } else if (type === 'action') {
-            const result = await this.onActionClick(name);
-            if (!result) {
-                throw new Error(`no handler for action '${name}'`);
+            try {
+                const result = await this.onActionClick(name);
+                if (!result) {
+                    throw new Error(`no handler for action '${name}'`);
+                }
+            } catch (err) {
+                await this.alert({message: err.message});
             }
         } else if (type === 'custom' && name === 'logout') {
             await this.onLogout();

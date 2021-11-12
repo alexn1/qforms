@@ -7,9 +7,13 @@ class FormView extends ModelView {
         // console.log('FormView.onActionsClick:', li);
         const ctrl = this.props.ctrl;
         const name = li.dataset.action;
-        const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
-        if (!result) {
-            throw new Error(`no handler for action '${name}'`);
+        try {
+            const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
+            if (!result) {
+                throw new Error(`no handler for action '${name}'`);
+            }
+        } catch (err) {
+            await this.getCtrl().getApp().alert({message: err.message});
         }
     }
 }
