@@ -956,7 +956,7 @@ class TableFormView extends FormView {
 
     _defineProperty(this, "createLinkCallback", key => {
       return PageController.createLink({
-        page: this.getModel().getAttr('itemEditPage'),
+        page: this.getCtrl().getModel().getAttr('itemEditPage'),
         ...DataSource.keyToParams(key)
       });
     });
