@@ -192,20 +192,18 @@ class Controller extends EventEmitter {
 }
 
 class AlertController extends Controller {
-    constructor(title, message, closeCallback) {
+    constructor(options) {
         super();
-        if (!title) throw new Error('no title');
-        if (!message) throw new Error('no message');
-        if (!closeCallback) throw new Error('no closeCallback');
-        this.title   = title;
-        this.message = message;
-        this.closeCallback = closeCallback;
+        this.options = options;
+        if (!options.title) throw new Error('no title');
+        if (!options.message) throw new Error('no message');
+        if (!options.closeCallback) throw new Error('no closeCallback');
     }
     getViewClass() {
         return AlertView;
     }
     close() {
-        this.closeCallback();
+        this.options.closeCallback();
     }
     onOkButtonClick = async e => {
         this.close();

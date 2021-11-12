@@ -98,10 +98,10 @@ class FrontHostApp {
         return new Promise(resolve => {
             const root = document.querySelector('.alert-root');
             if (root.childElementCount === 0) {
-                const alertCtrl = new AlertController(title, message, () => {
-                    ReactDOM.unmountComponentAtNode(root);
-                    resolve();
-                });
+                const alertCtrl = new AlertController({title, message, closeCallback: () => {
+                        ReactDOM.unmountComponentAtNode(root);
+                        resolve();
+                    }});
                 // console.log('alertCtrl:', alertCtrl);
                 const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
                 // console.log('alertView', alertView);

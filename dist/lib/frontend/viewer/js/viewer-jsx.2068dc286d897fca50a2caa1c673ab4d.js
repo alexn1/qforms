@@ -22,12 +22,12 @@ class AlertView extends View {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`
-    }, this.getCtrl().title), /*#__PURE__*/React.createElement("div", {
+    }, this.getCtrl().options.title), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: this.getCtrl().onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon2, null))), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__main flex-max`
-    }, this.getCtrl().message), /*#__PURE__*/React.createElement("div", {
+    }, this.getCtrl().options.message), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Button, {
       classList: [`${this.getCssBlockName()}__ok-button`],
