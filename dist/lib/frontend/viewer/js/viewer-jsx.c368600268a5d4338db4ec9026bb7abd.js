@@ -953,6 +953,13 @@ class TableFormView extends FormView {
         ctrl
       });
     });
+
+    _defineProperty(this, "createLinkCallback", key => {
+      return PageController.createLink({
+        page: this.getModel().getAttr('itemEditPage'),
+        ...DataSource.keyToParams(key)
+      });
+    });
   }
 
   renderToolbar() {
@@ -1061,7 +1068,7 @@ class TableFormView extends FormView {
       updated: ctrl.getUpdated(),
       extraColumn: this.getGridExtraColumn(),
       selectedKey: ctrl.getParent().getModel().options.selectedKey,
-      createLinkCallback: ctrl.createLinkCallback
+      createLinkCallback: this.createLinkCallback
     });
   }
 

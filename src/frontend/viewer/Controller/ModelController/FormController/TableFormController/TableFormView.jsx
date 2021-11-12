@@ -130,7 +130,7 @@ class TableFormView extends FormView {
             updated           : ctrl.getUpdated(),
             extraColumn       : this.getGridExtraColumn(),
             selectedKey       : ctrl.getParent().getModel().options.selectedKey,
-            createLinkCallback: ctrl.createLinkCallback,
+            createLinkCallback: this.createLinkCallback,
         });
     }
     render() {
@@ -141,6 +141,12 @@ class TableFormView extends FormView {
             {this.renderGrid()}
             {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
         </div>;
+    }
+    createLinkCallback = key => {
+        return PageController.createLink({
+            page: this.getModel().getAttr('itemEditPage'),
+            ...DataSource.keyToParams(key)
+        });
     }
 }
 window.QForms.TableFormView = TableFormView;
