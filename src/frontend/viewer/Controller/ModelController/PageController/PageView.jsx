@@ -38,7 +38,6 @@ class PageView extends ModelView {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;
-        const width = 150;
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.options.selectMode &&
@@ -54,11 +53,13 @@ class PageView extends ModelView {
                 }
                 {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() &&
                     <Button
-                        width={width}
-                        title={model.getApp().getText().page.saveAndClose}
+                        classList={['toolbar-button']}
                         onClick={ctrl.onSaveAndCloseClick}
                         enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
-                    />
+                    >
+                        <DoneIcon/>
+                        <div>{model.getApp().getText().page.saveAndClose}</div>
+                    </Button>
                 }
                 {model.hasActions() &&
                     <DropdownButton

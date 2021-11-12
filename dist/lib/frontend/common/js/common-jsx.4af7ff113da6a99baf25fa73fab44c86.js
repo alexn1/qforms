@@ -197,6 +197,23 @@ class DeleteIcon extends ReactComponent {
   }
 
 }
+class DoneIcon extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M0 0h24v24H0V0z",
+      fill: "none"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+    }));
+  }
+
+}
 class EditIcon extends ReactComponent {
   render() {
     return /*#__PURE__*/React.createElement("svg", {

@@ -1118,7 +1118,6 @@ class PageView extends ModelView {
   renderToolbar() {
     const ctrl = this.props.ctrl;
     const model = ctrl.model;
-    const width = 150;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__toolbar`
     }, model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
@@ -1129,11 +1128,10 @@ class PageView extends ModelView {
       title: model.getApp().getText().page.reset,
       onClick: ctrl.onResetClick
     }), model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
-      width: width,
-      title: model.getApp().getText().page.saveAndClose,
+      classList: ['toolbar-button'],
       onClick: ctrl.onSaveAndCloseClick,
       enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged())
-    }), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
+    }, /*#__PURE__*/React.createElement(DoneIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().page.saveAndClose)), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       title: model.getApp().getText().page.actions,
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
