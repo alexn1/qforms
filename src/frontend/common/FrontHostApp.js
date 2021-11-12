@@ -96,9 +96,7 @@ class FrontHostApp {
     alert(title, message) {
         console.log('FrontHostApp.alert', title, message);
         return new Promise(resolve => {
-            const root = document.querySelector('.alert');
-            // console.log('root:', root);
-            // console.log('root.childElementCount', root.childElementCount);
+            const root = document.querySelector('.alert-root');
             if (root.childElementCount === 0) {
                 const alertCtrl = new AlertController(title, message, () => {
                     ReactDOM.unmountComponentAtNode(root);
@@ -108,7 +106,7 @@ class FrontHostApp {
                 const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
                 // console.log('alertView', alertView);
             } else {
-                console.error('alert already exists');
+                console.error('alert already exists', root);
                 resolve();
             }
         });
