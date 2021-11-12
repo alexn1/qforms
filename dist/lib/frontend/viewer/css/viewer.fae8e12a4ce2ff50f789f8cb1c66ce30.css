@@ -415,6 +415,7 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .RowFormView__label {
   margin-left: 5px;
+  padding-top: 3px;
   border-bottom: 1px dotted gray;
   align-items: start;
 }
