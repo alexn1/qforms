@@ -54,14 +54,17 @@ class PageController extends ModelController {
     }
 
     onOpenPageClick = async e => {
-        const pageName = this.getModel().getName();
-        const pageKey = this.getModel().getKey();
-        const link = PageController.createLink({
-            page: pageName,
-            ...DataSource.keyToParams(pageKey)
-        });
+        const name = this.getModel().getName();
+        const key = this.getModel().getKey();
+        const link = this.createOpenInNewLink(name, key);
         // console.log('link', link);
         window.open(link, '_blank');
+    }
+    createOpenInNewLink(name, key) {
+        return PageController.createLink({
+            page: name,
+            ...DataSource.keyToParams(key)
+        });
     }
     close() {
         // console.log('PageController.close', this.model.getFullName());
