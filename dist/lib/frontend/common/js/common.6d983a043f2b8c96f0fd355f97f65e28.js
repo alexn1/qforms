@@ -19,7 +19,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        console.log('FrontHostApp.onWindowUnhandledrejection', e);
+        console.log('FrontHostApp.onWindowUnhandledrejection'/*, e*/);
         e.preventDefault();
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
