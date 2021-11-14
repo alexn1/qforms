@@ -20,6 +20,6 @@ class Controller extends EventEmitter {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
     async onDocumentKeyDown(e) {
-        // console.log('Controller.onDocumentKeyDown', e);
+        console.log('Controller.onDocumentKeyDown', this.constructor.name, e);
     }
 }

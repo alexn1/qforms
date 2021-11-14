@@ -72,7 +72,10 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
     async onDocumentKeyDown(e) {
         // console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
-        await this.applicationController.onDocumentKeyDown(e);
+        const result = await super.onDocumentKeyDown(e)
+        if (!result) {
+            await this.applicationController.onDocumentKeyDown(e);
+        }
     }
 
     async onWindowPopState(e) {
@@ -187,7 +190,7 @@ class Controller extends EventEmitter {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
     async onDocumentKeyDown(e) {
-        // console.log('Controller.onDocumentKeyDown', e);
+        console.log('Controller.onDocumentKeyDown', this.constructor.name, e);
     }
 }
 
@@ -230,6 +233,11 @@ class ConfirmController extends Controller {
     }
     onCloseClick = async e => {
         this.close(false);
+    }
+    async onDocumentKeyDown(e) {
+        if (e.key === 'Escape') {
+            this.close(false);
+        }
     }
 }
 

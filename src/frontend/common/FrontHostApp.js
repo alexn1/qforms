@@ -3,6 +3,7 @@ class FrontHostApp {
         // console.log('FrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
         this.data = data;
+        this.alertCtrl = null;
 
         // window
         window.addEventListener('error'             , this.onWindowError.bind(this));
@@ -93,6 +94,11 @@ class FrontHostApp {
     }
     async onDocumentKeyDown(e) {
         console.log('FrontHostApp.onDocumentKeyDown', e);
+        if (this.alertCtrl) {
+            await this.alertCtrl.onDocumentKeyDown(e);
+            return true;
+        }
+        return false;
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
@@ -103,9 +109,10 @@ class FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = new AlertController({
+                    const ctrl = this.alertCtrl = new AlertController({
                         ...options,
                         closeCallback: result => {
+                            this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
                         }});
@@ -126,9 +133,10 @@ class FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = new ConfirmController({
+                    const ctrl = this.alertCtrl =  new ConfirmController({
                         ...options,
                         closeCallback: result => {
+                            this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
                         }});
