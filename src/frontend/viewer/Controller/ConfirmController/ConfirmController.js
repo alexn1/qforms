@@ -8,13 +8,13 @@ class ConfirmController extends Controller {
     getViewClass() {
         return ConfirmView;
     }
-    close() {
-        this.options.closeCallback();
+    close(result) {
+        this.options.closeCallback(result);
     }
     onOkButtonClick = async e => {
-        this.close();
+        this.close(true);
     }
     onCloseClick = async e => {
-        this.close();
+        this.close(false);
     }
 }

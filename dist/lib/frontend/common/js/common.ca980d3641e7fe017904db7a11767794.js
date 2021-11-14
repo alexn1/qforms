@@ -105,11 +105,36 @@ class FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = new AlertController({
                         title        : options.title,
-                        titleStyle   : {color: 'red'},
+                        titleStyle   : options.titleStyle || {color: 'red'},
                         message      : options.message,
-                        closeCallback: () => {
+                        closeCallback: result => {
                             ReactDOM.unmountComponentAtNode(root);
-                            resolve();
+                            resolve(result);
+                        }});
+                    // console.log('ctrl:', ctrl);
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    // console.log('view', view);
+                } else {
+                    reject(new Error('alert already exists'));
+                }
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+    confirm(options) {
+        console.log('FrontHostApp.confirm', options);
+        return new Promise((resolve, reject) => {
+            try {
+                const root = document.querySelector('.alert-root');
+                if (root.childElementCount === 0) {
+                    const ctrl = new ConfirmController({
+                        title        : options.title,
+                        titleStyle   : options.titleStyle,
+                        message      : options.message,
+                        closeCallback: result => {
+                            ReactDOM.unmountComponentAtNode(root);
+                            resolve(result);
                         }});
                     // console.log('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});

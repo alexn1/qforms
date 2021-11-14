@@ -265,7 +265,10 @@ class ApplicationController extends ModelController {
         if (!options.title) {
             options.title = this.getModel().getText().application.error;
         }
-        await this.frontHostApp.alert(options);
+        return await this.frontHostApp.alert(options);
+    }
+    async confirm(options) {
+        return await this.frontHostApp.confirm(options);
     }
 }
 

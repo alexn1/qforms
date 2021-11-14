@@ -201,14 +201,14 @@ class AlertController extends Controller {
     getViewClass() {
         return AlertView;
     }
-    close() {
-        this.options.closeCallback();
+    close(result) {
+        this.options.closeCallback(result);
     }
     onOkButtonClick = async e => {
-        this.close();
+        this.close(true);
     }
     onCloseClick = async e => {
-        this.close();
+        this.close(false);
     }
 }
 
@@ -222,14 +222,14 @@ class ConfirmController extends Controller {
     getViewClass() {
         return ConfirmView;
     }
-    close() {
-        this.options.closeCallback();
+    close(result) {
+        this.options.closeCallback(result);
     }
     onOkButtonClick = async e => {
-        this.close();
+        this.close(true);
     }
     onCloseClick = async e => {
-        this.close();
+        this.close(false);
     }
 }
 
@@ -578,7 +578,10 @@ class ApplicationController extends ModelController {
         if (!options.title) {
             options.title = this.getModel().getText().application.error;
         }
-        await this.frontHostApp.alert(options);
+        return await this.frontHostApp.alert(options);
+    }
+    async confirm(options) {
+        return await this.frontHostApp.confirm(options);
     }
 }
 

@@ -8,13 +8,13 @@ class AlertController extends Controller {
     getViewClass() {
         return AlertView;
     }
-    close() {
-        this.options.closeCallback();
+    close(result) {
+        this.options.closeCallback(result);
     }
     onOkButtonClick = async e => {
-        this.close();
+        this.close(true);
     }
     onCloseClick = async e => {
-        this.close();
+        this.close(false);
     }
 }
