@@ -50,7 +50,7 @@ class PageController extends ModelController {
 
     onClosePageClick = async e => {
         console.log('PageController.onClosePageClick', this.getModel().getFullName());
-        this.close();
+        await this.close();
     }
 
     onOpenPageClick = async e => {
@@ -66,14 +66,15 @@ class PageController extends ModelController {
             ...DataSource.keyToParams(key)
         });
     }
-    close() {
+    async close() {
         // console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
         // const valid = this.isValid();
         // console.log('valid:', valid);
         if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
-            const result = confirm(this.model.getApp().getText().form.areYouSure);
+            // const result = confirm(this.model.getApp().getText().form.areYouSure);
+            const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure})
             if (!result) return;
         }
         this.getApp().closePage(this);
@@ -172,7 +173,7 @@ class PageController extends ModelController {
         // console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
             if (this.isModal()) {
-                this.close();
+                await this.close();
             }
         }
     }
@@ -211,7 +212,7 @@ class PageController extends ModelController {
     }
     async selectRow(key) {
         console.log('PageController.selectRow', key);
-        this.close();
+        await this.close();
         await this.getModel().options.onSelect(key);
     }
     invalidate() {
