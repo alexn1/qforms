@@ -537,9 +537,9 @@ class ApplicationController extends ModelController {
         }
     }
     async onDocumentKeyDown(e) {
-        // console.log('ApplicationController.onDocumentKeyDown', e);
+        console.log('ApplicationController.onDocumentKeyDown', e);
         const page = this.getFocusCtrl();
-        // console.log('page:', page.getModel().getFullName());
+        console.log('page:', page.getModel().getFullName());
         if (page) {
             await page.onDocumentKeyDown(e);
         }

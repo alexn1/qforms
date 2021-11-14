@@ -1070,7 +1070,8 @@ class Grid extends ReactComponent {
     _defineProperty(this, "onCellMouseDown", async e => {
       console.log('Grid.onCellMouseDown', this.isLink());
       e.preventDefault(); // prevent text selection on double click
-      // if (this.isLink()) return;
+
+      this.el.current.focus(); // if (this.isLink()) return;
 
       const button = e.button;
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
@@ -1205,6 +1206,7 @@ class Grid extends ReactComponent {
     };
     this.columns = {}; // each column is the array of each cell view
 
+    this.el = React.createRef();
     this.head = React.createRef();
   }
 
@@ -1304,8 +1306,8 @@ class Grid extends ReactComponent {
     const key = this.getActiveRowKey();
     const row = this.findRow(key); // console.log(row, key);
 
-    if (this.props.onDeleteClick) {
-      await this.props.onDeleteClick(row, key);
+    if (this.props.onDeleteKeyDown) {
+      await this.props.onDeleteKeyDown(row, key);
     }
   }
 
@@ -1419,6 +1421,7 @@ class Grid extends ReactComponent {
     // console.log('Grid.render', this.props.name);
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
+      ref: this.el,
       tabIndex: 0,
       onKeyDown: this.onKeyDown
     }, /*#__PURE__*/React.createElement("div", {

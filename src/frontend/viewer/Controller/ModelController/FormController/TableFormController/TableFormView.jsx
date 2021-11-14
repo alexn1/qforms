@@ -123,7 +123,7 @@ class TableFormView extends FormView {
             rows              : this.getRows(),
             getRowKey         : row => ctrl.model.getDefaultDataSource().getRowKey(row),
             onDoubleClick     : ctrl.onGridCellDblClick,
-            onDeleteClick     : ctrl.onGridDeleteKeyDown,
+            onDeleteKeyDown     : ctrl.onGridDeleteKeyDown,
             onSelectionChange : ctrl.onGridSelectionChange,
             onLinkClick       : ctrl.onGridLinkClick,
             renderGridCellView: this.renderGridCellView,
