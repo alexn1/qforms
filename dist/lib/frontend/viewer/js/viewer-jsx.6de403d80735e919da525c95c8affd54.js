@@ -38,6 +38,34 @@ class AlertView extends View {
   }
 
 }
+class ConfirmView extends View {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__container`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__content flex-rows`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__header`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__title`,
+      style: this.getCtrl().options.titleStyle
+    }, this.getCtrl().options.title || 'Confirm'), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: this.getCtrl().onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null))), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__main flex-max`
+    }, this.getCtrl().options.message), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__footer`
+    }, /*#__PURE__*/React.createElement(Button, {
+      classList: [`${this.getCssBlockName()}__ok-button`],
+      title: 'OK',
+      onClick: this.getCtrl().onOkButtonClick
+    })))));
+  }
+
+}
 class ImageDialogView extends View {
   render() {
     console.log('ImageDialogView.render');

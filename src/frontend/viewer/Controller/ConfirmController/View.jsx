@@ -1,4 +1,4 @@
-class AlertView extends View {
+class ConfirmView extends View {
     render() {
         return (
             <div className={this.getCssClassNames()}>
@@ -6,7 +6,7 @@ class AlertView extends View {
                     <div className={`${this.getCssBlockName()}__content flex-rows`}>
                         <div className={`${this.getCssBlockName()}__header`}>
                             <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle}>
-                                {this.getCtrl().options.title || 'Alert'}
+                                {this.getCtrl().options.title || 'Confirm'}
                             </div>
                             <div className={`${this.getCssBlockName()}__close`} onClick={this.getCtrl().onCloseClick}>
                                 <CloseIcon2/>
