@@ -42,7 +42,8 @@ class TableFormController extends FormController {
     }
     onDeleteClick = async e => {
         console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
-        if (confirm(this.model.getApp().getText().form.areYouSure)) {
+        const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
+        if (result) {
             await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
     }
@@ -73,7 +74,8 @@ class TableFormController extends FormController {
     onGridDeleteClick = async (row, key) => {
         console.log('TableFormController.onGridDeleteClick', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
-            if (confirm(this.model.getApp().getText().form.areYouSure)) {
+            const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
+            if (result) {
                 await this.model.getDefaultDataSource().delete(key);
             }
         }
