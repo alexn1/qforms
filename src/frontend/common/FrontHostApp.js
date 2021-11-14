@@ -23,7 +23,11 @@ class FrontHostApp {
         e.preventDefault();
         const err = e instanceof Error ? e : e.reason || e.detail.reason;
         this.logError(err);
-        await this.alert({title: 'Unhandled Rejection', message: err.message});
+        try {
+            await this.alert({title: 'Unhandled Rejection', message: err.message});
+        } catch (err) {
+            console.error(err.message);
+        }
     }
     async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
@@ -95,11 +99,11 @@ class FrontHostApp {
     }
     alert(options) {
         console.log('FrontHostApp.alert', options);
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const alertCtrl = new AlertController({
+                    const ctrl = new AlertController({
                         title        : options.title,
                         titleStyle   : {color: 'red'},
                         message      : options.message,
@@ -107,19 +111,18 @@ class FrontHostApp {
                             ReactDOM.unmountComponentAtNode(root);
                             resolve();
                         }});
-                    // console.log('alertCtrl:', alertCtrl);
-                    const alertView = Helper.createReactComponent(root, alertCtrl.getViewClass(), {ctrl: alertCtrl});
-                    // console.log('alertView', alertView);
+                    // console.log('ctrl:', ctrl);
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    // console.log('view', view);
                 } else {
-                    console.error('alert already exists', root);
-                    resolve();
+                    reject(new Error('alert already exists'));
                 }
             } catch (err) {
-                console.error(err.message);
-                resolve();
+                reject(err);
             }
         });
     }
+
 }
 
 window.QForms.FrontHostApp = FrontHostApp;
