@@ -104,9 +104,7 @@ class FrontHostApp {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = new AlertController({
-                        title        : options.title,
-                        titleStyle   : options.titleStyle || {color: 'red'},
-                        message      : options.message,
+                        ...options,
                         closeCallback: result => {
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
@@ -129,9 +127,7 @@ class FrontHostApp {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = new ConfirmController({
-                        title        : options.title,
-                        titleStyle   : options.titleStyle,
-                        message      : options.message,
+                        ...options,
                         closeCallback: result => {
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);

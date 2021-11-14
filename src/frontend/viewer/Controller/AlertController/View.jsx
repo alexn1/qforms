@@ -5,7 +5,7 @@ class AlertView extends View {
                 <div className={`${this.getCssBlockName()}__container`}>
                     <div className={`${this.getCssBlockName()}__content flex-rows`}>
                         <div className={`${this.getCssBlockName()}__header`}>
-                            <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle}>
+                            <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle || {color: 'red'}}>
                                 {this.getCtrl().options.title || 'Alert'}
                             </div>
                             <div className={`${this.getCssBlockName()}__close`} onClick={this.getCtrl().onCloseClick}>

@@ -1,5 +1,6 @@
 class ConfirmView extends View {
     render() {
+        // console.log('ConfirmView.render', this.getCtrl().options);
         return (
             <div className={this.getCssClassNames()}>
                 <div className={`${this.getCssBlockName()}__container`}>
@@ -16,6 +17,10 @@ class ConfirmView extends View {
                             {this.getCtrl().options.message}
                         </div>
                         <div className={`${this.getCssBlockName()}__footer`}>
+                            <Button classList={[`${this.getCssBlockName()}__cancel-button`]}
+                                    title={this.getCtrl().options.cancelButton || 'Cancel'}
+                                    onClick={this.getCtrl().onCloseClick}
+                            />
                             <Button classList={[`${this.getCssBlockName()}__ok-button`]} title={'OK'} onClick={this.getCtrl().onOkButtonClick}/>
                         </div>
                     </div>

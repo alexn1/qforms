@@ -22,7 +22,9 @@ class AlertView extends View {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`,
-      style: this.getCtrl().options.titleStyle
+      style: this.getCtrl().options.titleStyle || {
+        color: 'red'
+      }
     }, this.getCtrl().options.title || 'Alert'), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: this.getCtrl().onCloseClick
@@ -40,6 +42,7 @@ class AlertView extends View {
 }
 class ConfirmView extends View {
   render() {
+    // console.log('ConfirmView.render', this.getCtrl().options);
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("div", {
@@ -59,6 +62,10 @@ class ConfirmView extends View {
     }, this.getCtrl().options.message), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Button, {
+      classList: [`${this.getCssBlockName()}__cancel-button`],
+      title: this.getCtrl().options.cancelButton || 'Cancel',
+      onClick: this.getCtrl().onCloseClick
+    }), /*#__PURE__*/React.createElement(Button, {
       classList: [`${this.getCssBlockName()}__ok-button`],
       title: 'OK',
       onClick: this.getCtrl().onOkButtonClick

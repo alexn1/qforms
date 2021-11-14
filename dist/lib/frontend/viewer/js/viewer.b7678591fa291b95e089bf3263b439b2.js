@@ -581,6 +581,12 @@ class ApplicationController extends ModelController {
         return await this.frontHostApp.alert(options);
     }
     async confirm(options) {
+        if (!options.title) {
+            options.title = this.getModel().getText().application.confirm;
+        }
+        if (!options.cancelButton) {
+            options.cancelButton = this.getModel().getText().page.cancel;
+        }
         return await this.frontHostApp.confirm(options);
     }
 }

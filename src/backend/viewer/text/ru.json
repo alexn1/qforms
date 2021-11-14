@@ -8,7 +8,8 @@
     },
     "application": {
         "logout": "Выйти",
-        "error": "Ошибка"
+        "error": "Ошибка",
+        "confirm": "Подтверждение"
     },
     "page": {
         "create": "Создать",
