@@ -954,12 +954,11 @@ class RowFormView extends FormView {
   }
 
   render() {
-    console.log('RowFormView.render', this.props.ctrl.model.getFullName());
-    const ctrl = this.props.ctrl;
+    console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} flex-column grid-gap-5`,
       style: this.getStyle()
-    }, (ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar(), this.renderFields());
+    }, (this.getCtrl().getModel().hasDefaultSqlDataSource() || this.getCtrl().getModel().hasActions()) && this.renderToolbar(), this.renderFields());
   }
   /*renderActionIcon() {
       return <CancelIcon/>;
