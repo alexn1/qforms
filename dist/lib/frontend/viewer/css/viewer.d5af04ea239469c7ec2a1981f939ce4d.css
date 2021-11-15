@@ -567,6 +567,7 @@ button.RowFormComboBoxFieldView__create-button:active {
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-gap: 3px;
 }
 
 .toolbar-dropdown-button .DropdownButton__button {
