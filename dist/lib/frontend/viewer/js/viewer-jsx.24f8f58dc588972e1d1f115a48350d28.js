@@ -937,8 +937,8 @@ class RowFormView extends FormView {
     return [this.renderLabel(fieldCtrl, `label.${name}`), this.renderField(fieldCtrl, `field.${name}`), this.renderError(fieldCtrl, `tooltip.${name}`)];
   }
 
-  renderFields() {
-    // console.log('RowFormView.renderFields');
+  renderGrid() {
+    // console.log('RowFormView.renderGrid');
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__grid`
@@ -958,7 +958,7 @@ class RowFormView extends FormView {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} flex-column grid-gap-5`,
       style: this.getStyle()
-    }, (this.getCtrl().getModel().hasDefaultSqlDataSource() || this.getCtrl().getModel().hasActions()) && this.renderToolbar(), this.renderFields());
+    }, (this.getCtrl().getModel().hasDefaultSqlDataSource() || this.getCtrl().getModel().hasActions()) && this.renderToolbar(), this.renderGrid());
   }
   /*renderActionIcon() {
       return <CancelIcon/>;

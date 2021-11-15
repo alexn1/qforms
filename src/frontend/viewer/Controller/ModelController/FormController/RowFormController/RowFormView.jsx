@@ -112,8 +112,8 @@ class RowFormView extends FormView {
             this.renderError(fieldCtrl, `tooltip.${name}`)
         ];
     }
-    renderFields() {
-        // console.log('RowFormView.renderFields');
+    renderGrid() {
+        // console.log('RowFormView.renderGrid');
         const ctrl = this.props.ctrl;
         return <div className={`${this.getCssBlockName()}__grid`}>
             {Object.keys(ctrl.fields)
@@ -132,7 +132,7 @@ class RowFormView extends FormView {
         console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
         return <div className={`${this.getCssClassNames()} flex-column grid-gap-5`} style={this.getStyle()}>
             {(this.getCtrl().getModel().hasDefaultSqlDataSource() || this.getCtrl().getModel().hasActions()) && this.renderToolbar()}
-            {this.renderFields()}
+            {this.renderGrid()}
         </div>;
     }
     /*renderActionIcon() {
