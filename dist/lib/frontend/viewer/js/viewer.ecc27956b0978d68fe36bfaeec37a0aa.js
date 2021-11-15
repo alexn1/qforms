@@ -63,7 +63,7 @@ class ViewerFrontHostApp extends FrontHostApp {
                 frontHostApp: this,
                 route: this.data.route,
                 uuid: this.data.uuid,
-                userId: this.data.user.id
+                userId: this.data.user ? this.data.user.id : null,
             });
             await this.webSocketClient.connect();
         } catch (err) {
