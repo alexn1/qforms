@@ -4,7 +4,7 @@ class ConfirmView extends View {
         return (
             <div className={this.getCssClassNames()}>
                 <div className={`${this.getCssBlockName()}__container`}>
-                    <div className={`${this.getCssBlockName()}__content flex-rows`}>
+                    <div className={`${this.getCssBlockName()}__content flex-column`}>
                         <div className={`${this.getCssBlockName()}__header`}>
                             <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle}>
                                 {this.getCtrl().options.title || 'Confirm'}

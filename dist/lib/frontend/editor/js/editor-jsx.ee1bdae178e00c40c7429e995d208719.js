@@ -1160,7 +1160,7 @@ class SqlDataSourceView extends DocumentView {
   render() {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: 'SqlDataSourceView full flex-rows'
+      className: 'SqlDataSourceView full flex-column'
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbar"
     }, /*#__PURE__*/React.createElement(Button, {
@@ -1273,7 +1273,7 @@ class DatabaseView extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: 'frame__container'
     }, /*#__PURE__*/React.createElement("div", {
-      className: 'divTableInfo full flex-rows'
+      className: 'divTableInfo full flex-column'
     }, ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && /*#__PURE__*/React.createElement(Button, {
       onClick: ctrl.onCreateTableClick
     }, "Create Table")))), /*#__PURE__*/React.createElement(TreeWidget, {
@@ -1299,7 +1299,7 @@ class TableView extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: "client frame"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container flex-rows"
+      className: "frame__container flex-column"
     }, /*#__PURE__*/React.createElement(Grid, {
       classList: ['flex-max'],
       columns: [{
@@ -1400,7 +1400,7 @@ class VisualView extends DocumentView {
     return /*#__PURE__*/React.createElement("div", {
       className: 'VisualView full'
     }, /*#__PURE__*/React.createElement("div", {
-      className: "full flex-rows"
+      className: "full flex-column"
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbar"
     }, /*#__PURE__*/React.createElement(Button, {

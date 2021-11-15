@@ -136,7 +136,7 @@ class TableFormView extends FormView {
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.props.ctrl;
-        return <div className={`${this.getCssClassNames()} full flex-rows grid-gap-5`} style={this.getStyle()}>
+        return <div className={`${this.getCssClassNames()} full flex-column grid-gap-5`} style={this.getStyle()}>
             {this.renderToolbar()}
             {this.renderGrid()}
             {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}

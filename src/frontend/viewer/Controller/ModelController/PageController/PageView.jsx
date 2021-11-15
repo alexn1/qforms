@@ -144,7 +144,7 @@ class PageView extends ModelView {
     renderMain() {
         const model = this.getCtrl().getModel();
         return <div className={`${this.getCssBlockName()}__main flex-max frame`}>
-            <div className="frame__container flex-rows grid-gap-10">
+            <div className="frame__container flex-column grid-gap-10">
                 {this.isToolbar() && this.renderToolbar()}
                 {model.hasRowForm() && this.renderRowForms()}
                 {model.hasTableForm() && this.renderTableForms()}
@@ -155,7 +155,7 @@ class PageView extends ModelView {
     }
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
-        return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-rows`} style={this.getStyle()}>
+        return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`} style={this.getStyle()}>
             {this.renderHeader()}
             {this.renderMain()}
             {this.renderFooter()}

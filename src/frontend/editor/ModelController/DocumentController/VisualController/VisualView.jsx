@@ -47,7 +47,7 @@ class VisualView extends DocumentView {
     render() {
         const ctrl = this.props.ctrl;
         return <div className={'VisualView full'}>
-            <div className="full flex-rows">
+            <div className="full flex-column">
                 <div className="toolbar">
                     <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
                     {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Controller.front.js</Button>}

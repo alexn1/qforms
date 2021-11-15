@@ -14,7 +14,7 @@ class TableView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
             <div className="client frame">
-                <div className="frame__container flex-rows">
+                <div className="frame__container flex-column">
                     <Grid
                         classList={['flex-max']}
                         columns={[

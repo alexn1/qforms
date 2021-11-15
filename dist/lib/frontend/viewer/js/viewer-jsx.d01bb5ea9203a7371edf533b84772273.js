@@ -17,7 +17,7 @@ class AlertView extends View {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__content flex-rows`
+      className: `${this.getCssBlockName()}__content flex-column`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
@@ -48,7 +48,7 @@ class ConfirmView extends View {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__content flex-rows`
+      className: `${this.getCssBlockName()}__content flex-column`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
@@ -957,7 +957,7 @@ class RowFormView extends FormView {
     console.log('RowFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} flex-rows grid-gap-5`,
+      className: `${this.getCssClassNames()} flex-column grid-gap-5`,
       style: this.getStyle()
     }, (ctrl.model.hasDefaultSqlDataSource() || ctrl.model.hasActions()) && this.renderToolbar(), this.renderFields());
   }
@@ -1111,7 +1111,7 @@ class TableFormView extends FormView {
     console.log('TableFormView.render', this.props.ctrl.model.getFullName());
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} full flex-rows grid-gap-5`,
+      className: `${this.getCssClassNames()} full flex-column grid-gap-5`,
       style: this.getStyle()
     }, this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging());
   }
@@ -1267,7 +1267,7 @@ class PageView extends ModelView {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__main flex-max frame`
     }, /*#__PURE__*/React.createElement("div", {
-      className: "frame__container flex-rows grid-gap-10"
+      className: "frame__container flex-column grid-gap-10"
     }, this.isToolbar() && this.renderToolbar(), model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms()));
   }
 
@@ -1276,7 +1276,7 @@ class PageView extends ModelView {
   render() {
     console.log('PageView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-rows`,
+      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
       style: this.getStyle()
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }
