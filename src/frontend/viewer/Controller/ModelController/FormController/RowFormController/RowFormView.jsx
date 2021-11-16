@@ -68,13 +68,17 @@ class RowFormView extends FormView {
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
-                        enabled={this.getCtrl().state.mode === 'view'}
+                        enabled={this.isActionsEnabled()}
                     >
                         <MoreVertIcon/>
                     </DropdownButton>
                 }
             </div>
         );
+    }
+    isActionsEnabled() {
+        // return this.getCtrl().state.mode === 'view';
+        return true;
     }
     isActionsVisible() {
         if (this.getCtrl().getModel().hasDefaultSqlDataSource()) {
