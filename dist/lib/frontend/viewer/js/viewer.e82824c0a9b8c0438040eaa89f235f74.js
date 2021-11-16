@@ -1793,10 +1793,17 @@ class RowFormController extends FormController {
         this.calcState();
         if (this.isValid()) {
             this.state.mode = 'view';
-            await this.model.update();
+            try {
+                this.getApp().getView().disableRerender();
+                await this.model.update();
+                console.log('form model updated', this.getModel().getFullName());
+            } finally {
+                this.getApp().getView().enableRerender();
+                await this.getApp().getView().rerender();
+            }
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
-            this.rerender();
+            await this.rerender();
         }
     }
 
