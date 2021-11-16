@@ -185,6 +185,9 @@ table.DatePicker td.selected {
   grid-gap: 5px;
   padding: 10px;
 }
+.DropdownButton__item svg {
+  fill: black;
+}
 .DropdownButton__item:hover {
   background-color: #398bce;
   color: white;
