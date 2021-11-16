@@ -21,21 +21,25 @@ class FrontHostApp {
     }
     async onWindowUnhandledrejection(e) {
         console.log('FrontHostApp.onWindowUnhandledrejection'/*, e*/);
-        e.preventDefault();
-        const err = e instanceof Error ? e : e.reason || e.detail.reason;
-        this.logError(err);
         try {
+            e.preventDefault();
+            const err = e instanceof Error ? e : e.reason || e.detail.reason;
+            this.logError(err);
             await this.alert({title: 'Unhandled Rejection', message: err.message});
         } catch (err) {
-            console.error(err.message);
+            console.error(`onWindowUnhandledrejection error: ${err.message}`);
         }
     }
     async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
-        e.preventDefault();
-        const err = e.error;
-        this.logError(err);
-        // await this.alert({message: err.message});
+        try {
+            e.preventDefault();
+            const err = e.error;
+            this.logError(err);
+            // await this.alert({message: err.message});
+        } catch (err) {
+            console.error(`onWindowError error: ${err.message}`);
+        }
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
