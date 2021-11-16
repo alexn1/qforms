@@ -4,6 +4,22 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
         this.rerender();
         await this.props.ctrl.onChange(widgetValue);
     }
+    isCreateButtonVisible() {
+        if (this.getCtrl().getForm().getMode() !== 'edit') {
+            return false;
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {
+            return false;
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'editPage') {
+            return !!this.getCtrl().getModel().getAttr('itemEditPage')
+                && !!this.getCtrl().getModel().getAttr('itemCreateForm');
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'createPage') {
+            return !!this.getCtrl().getModel().getAttr('itemCreatePage')
+                && !!this.getCtrl().getModel().getAttr('itemCreateForm');
+        }
+    }
     render() {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
         const ctrl = this.props.ctrl;
@@ -27,10 +43,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                         enabled={!!ctrl.getValue()}
                     >...</Button>
                 }
-                {ctrl.getModel().getAttr('newRowMode') !== 'disabled'
-                    && ctrl.getForm().getModel().getAttr('itemCreatePage')
-                    && ctrl.getForm().getModel().getAttr('itemCreateForm')
-                    && ctrl.getForm().getMode() === 'edit'
+                {this.isCreateButtonVisible()
                     && <Button
                         classList={[`${this.getCssBlockName()}__create-button`]}
                         onClick={ctrl.onCreateButtonClick}
