@@ -31,9 +31,7 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
 // post actions
 const ACTIONS = [
     'page',
-    'select',        // select
-    // 'selectSingle',
-    // 'selectMultiple',
+    'select',       // select
     'insert',       // insert
     'update',       // update
     '_delete',      // delete
