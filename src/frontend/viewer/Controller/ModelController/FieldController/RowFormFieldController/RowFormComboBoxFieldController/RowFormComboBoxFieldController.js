@@ -16,10 +16,15 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
 
     getItems() {
-        return this.getRows().map(row => ({
-            value: this.model.getValueValue(row).toString(),
-            title: this.model.getDisplayValue(row).toString()
-        }));
+        try {
+            return this.getRows().map(row => ({
+                value: this.model.getValueValue(row).toString(),
+                title: this.model.getDisplayValue(row).toString()
+            }));
+        } catch (err) {
+            err.message = `${this.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
     }
     getRows() {
         return this.model.getComboBoxDataSource().getRows();

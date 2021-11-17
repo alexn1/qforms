@@ -139,7 +139,7 @@ class Select extends ReactComponent {
                     return <li key={item.value}
                                className={`${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`}
                                data-value={JSON.stringify(item.value)}
-                    >{item.title || item.value}</li>;
+                    >{item.title || `#${item.value}`}</li>;
                 })}
             </ul>
         </div>;
