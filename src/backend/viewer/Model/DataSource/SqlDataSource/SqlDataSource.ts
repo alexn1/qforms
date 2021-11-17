@@ -151,26 +151,30 @@ class SqlDataSource extends DataSource {
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
-        const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
+
+        // update row
+        const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
         const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = {..._values, ..._where};
-        await this.getDatabase().queryResult(context, query, params);
+        await this.getDatabase().queryResult(context, updateQuery, params);
 
-        // get updated row
+        // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = DataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);
 
-        const singleQuery = this.getSingleQuery(context);
-        // console.log('singleQuery:', singleQuery);
-        const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
+        // select updated row
+        const selectQuery = this.getSingleQuery(context);
+        // console.log('selectQuery:', selectQuery);
+        const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
 
+        // result
         const result = new Result();
         Result.addUpdateToResult(result, database, table, key, newKey);
         Result.addUpdateExToResult(result, database, table, key, row);

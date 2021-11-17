@@ -143,24 +143,27 @@ class SqlDataSource extends DataSource_1.default {
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
-        const query = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
+        // update row
+        const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
         const _values = Helper_1.default.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = Helper_1.default.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
-        await this.getDatabase().queryResult(context, query, params);
-        // get updated row
+        await this.getDatabase().queryResult(context, updateQuery, params);
+        // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = DataSource_1.default.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);
-        const singleQuery = this.getSingleQuery(context);
-        // console.log('singleQuery:', singleQuery);
-        const [row] = await this.getDatabase().queryRows(context, singleQuery, newKeyParams);
+        // select updated row
+        const selectQuery = this.getSingleQuery(context);
+        // console.log('selectQuery:', selectQuery);
+        const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
+        // result
         const result = new Result_1.default();
         Result_1.default.addUpdateToResult(result, database, table, key, newKey);
         Result_1.default.addUpdateExToResult(result, database, table, key, row);

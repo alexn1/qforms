@@ -30,8 +30,6 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
 const ACTIONS = [
     'page',
     'select',
-    // 'selectSingle',
-    // 'selectMultiple',
     'insert',
     'update',
     '_delete',
