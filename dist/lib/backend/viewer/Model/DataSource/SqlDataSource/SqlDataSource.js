@@ -32,43 +32,41 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error(`no multipleQuery: ${this.getFullName()}`);
         return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
     }
-    async selectSingle(context) {
+    /*async selectSingle(context: Context) {
         // console.log('SqlDataSource.selectSingle');
-        if (this.getAccess(context).select !== true)
-            throw new Error(`[${this.getFullName()}]: access denied`);
+        if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), context.getParams());
         // if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(context, rows);
         return rows[0] || null;
-    }
-    async selectMultiple(context) {
+    }*/
+    /*async selectMultiple(context: Context) {
         // console.log('SqlDataSource.selectMultiple');
-        if (this.getAccess(context).select !== true)
-            throw new Error(`[${this.getFullName()}]: access denied`);
+        if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
+
         // rows
         if (this.getAttr('limit') !== '') {
-            if (!context.params.frame)
-                throw new Error('no frame param');
+            if (!context.params.frame) throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'));
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
         const rows = await this.getDatabase().queryRows(context, this.getMultipleQuery(context), context.getParams());
         this.prepareRows(context, rows);
+
         // count
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('countQuery')) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), context.getParams());
                 count = parseInt(count);
-            }
-            catch (err) {
+            } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
                 throw err;
             }
         }
         return [rows, count];
-    }
+    }*/
     async select(context) {
         if (this.getAccess(context).select !== true)
             throw new Error(`[${this.getFullName()}]: access denied`);
@@ -202,23 +200,21 @@ class SqlDataSource extends DataSource_1.default {
         if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
         }
-        if (this.isDefaultOnRowForm()) {
-            const row = await this.selectSingle(context);
-            if (!row)
-                throw new Error(`${this.getFullName()}: RowForm single query must return row`);
-            response.rows = [row];
+        // if (this.isDefaultOnRowForm()) {
+        //     const row = await this.selectSingle(context);
+        //     if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
+        //     response.rows = [row];
+        // } else {
+        try {
+            const [rows, count] = await this.select(context);
+            response.rows = rows;
+            response.count = count;
         }
-        else {
-            try {
-                const [rows, count] = await this.selectMultiple(context);
-                response.rows = rows;
-                response.count = count;
-            }
-            catch (err) {
-                err.message = `selectMultiple error of ${this.getFullName()}: ${err.message}`;
-                throw err;
-            }
+        catch (err) {
+            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            throw err;
         }
+        // }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
             this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
         }

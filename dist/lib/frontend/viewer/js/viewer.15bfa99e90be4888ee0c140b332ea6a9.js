@@ -3203,17 +3203,6 @@ class SqlDataSource extends DataSource {
 
         // update rows
         await this.refill();
-        /*
-        for (const key in e.updates) {
-            // check if updated row exists in this ds
-            if (this.getRow(key)) {
-                const newKey = e.updates[key];
-                // console.log(`key: ${key} to ${newKey}`);
-                const keyParams = DataSource.keyToParams(newKey);
-                const result = await this.selectSingle(keyParams);
-                this.updateRow(key, result.row);
-            }
-        }*/
 
         // events
         if (this.parent.onDataSourceUpdate) {

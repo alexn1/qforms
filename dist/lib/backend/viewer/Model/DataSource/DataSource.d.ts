@@ -31,7 +31,7 @@ declare class DataSource extends Model {
     isDefaultOnTableForm(): boolean;
     getDatabase(): Database;
     update(context: Context): Promise<Result>;
-    insert(context: Context, values?: any): Promise<Result>;
+    insert(context: Context, _values?: any): Promise<Result>;
     delete(context: Context): Promise<Result>;
 }
 export = DataSource;

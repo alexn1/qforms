@@ -34,16 +34,16 @@ class SqlDataSource extends DataSource {
         return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
     }
 
-    async selectSingle(context: Context) {
+    /*async selectSingle(context: Context) {
         // console.log('SqlDataSource.selectSingle');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
         const rows = await this.getDatabase().queryRows(context, this.getSingleQuery(context), context.getParams());
         // if (rows.length !== 1) throw new Error(`${this.getFullName()}: single query must return single row`);
         this.prepareRows(context, rows);
         return rows[0] || null;
-    }
+    }*/
 
-    async selectMultiple(context: Context) {
+    /*async selectMultiple(context: Context) {
         // console.log('SqlDataSource.selectMultiple');
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
@@ -69,7 +69,7 @@ class SqlDataSource extends DataSource {
             }
         }
         return [rows, count];
-    }
+    }*/
 
     async select(context: Context) {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
@@ -213,20 +213,20 @@ class SqlDataSource extends DataSource {
         if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
         }
-        if (this.isDefaultOnRowForm()) {
-            const row = await this.selectSingle(context);
-            if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
-            response.rows = [row];
-        } else {
+        // if (this.isDefaultOnRowForm()) {
+        //     const row = await this.selectSingle(context);
+        //     if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
+        //     response.rows = [row];
+        // } else {
             try {
-                const [rows, count] = await this.selectMultiple(context);
+                const [rows, count] = await this.select(context);
                 response.rows = rows;
                 response.count = count;
             } catch (err) {
-                err.message = `selectMultiple error of ${this.getFullName()}: ${err.message}`;
+                err.message = `select error of ${this.getFullName()}: ${err.message}`;
                 throw err;
             }
-        }
+        // }
 
         if (this.isDefaultOnRowForm() && response.rows[0]) {
             this.parent.dumpRowToParams(response.rows[0], context.querytime.params);

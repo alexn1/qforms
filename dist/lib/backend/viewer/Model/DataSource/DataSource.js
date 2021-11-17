@@ -231,7 +231,7 @@ class DataSource extends Model_1.default {
     async update(context) {
         throw new Error('DataSource.update not implemented');
     }
-    async insert(context, values = null) {
+    async insert(context, _values = null) {
         throw new Error('DataSource.insert not implemented');
     }
     async delete(context) {
