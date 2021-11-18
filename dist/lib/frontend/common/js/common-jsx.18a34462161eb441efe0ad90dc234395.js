@@ -1436,7 +1436,7 @@ class Grid extends ReactComponent {
   render() {
     // console.log('Grid.render', this.props.name);
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames(),
+      className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`,
       ref: this.el,
       tabIndex: 0,
       onKeyDown: this.onKeyDown

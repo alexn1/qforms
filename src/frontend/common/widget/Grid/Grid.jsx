@@ -285,7 +285,7 @@ class Grid extends ReactComponent {
     render() {
         // console.log('Grid.render', this.props.name);
         return (
-            <div className={this.getCssClassNames()}
+            <div className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`}
                  ref={this.el}
                  tabIndex={0}
                  onKeyDown={this.onKeyDown}
