@@ -73,6 +73,22 @@ class ReactComponent extends React.Component {
   }*/
 
 
+  isEnabled() {
+    if (this.props.enabled !== undefined) {
+      return this.props.enabled;
+    }
+
+    if (this.props.disabled !== undefined) {
+      return !this.props.disabled;
+    }
+
+    return false;
+  }
+
+  isDisabled() {
+    return !this.isEnabled();
+  }
+
 }
 
 window.QForms.ReactComponent = ReactComponent;

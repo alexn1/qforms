@@ -63,6 +63,18 @@ class ReactComponent extends React.Component {
     /*componentDidMount() {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
     }*/
+    isEnabled() {
+        if (this.props.enabled !== undefined) {
+            return this.props.enabled;
+        }
+        if (this.props.disabled !== undefined) {
+            return !this.props.disabled;
+        }
+        return false;
+    }
+    isDisabled() {
+        return !this.isEnabled();
+    }
 }
 
 window.QForms.ReactComponent = ReactComponent;
