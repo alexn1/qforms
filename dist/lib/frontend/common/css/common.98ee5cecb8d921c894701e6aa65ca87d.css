@@ -370,6 +370,10 @@ a.Grid__tr:hover {
   background-color: #f3f6fa;
 }
 
+.GridCell {
+  cursor: pointer;
+}
+
 .Image {
   cursor: pointer;
 }
