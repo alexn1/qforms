@@ -82,7 +82,7 @@ class ReactComponent extends React.Component {
       return !this.props.disabled;
     }
 
-    return false;
+    return true;
   }
 
   isDisabled() {

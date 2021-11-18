@@ -70,7 +70,7 @@ class ReactComponent extends React.Component {
         if (this.props.disabled !== undefined) {
             return !this.props.disabled;
         }
-        return false;
+        return true;
     }
     isDisabled() {
         return !this.isEnabled();
