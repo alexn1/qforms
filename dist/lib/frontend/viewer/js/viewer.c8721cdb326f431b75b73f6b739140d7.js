@@ -742,11 +742,11 @@ class FieldController extends ModelController {
             return JSON.parse(stringValue);
         } else if (fieldType === 'date') {
             const date = new Date(stringValue);
-            if (date.toString() === 'Invalid Date') throw new Error(`invalid date: ${stringValue}`);
+            if (date.toString() === 'Invalid Date') throw new Error(`${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`);
             return date;
         } else if (fieldType === 'number') {
             const num = Number(stringValue);
-            if (isNaN(num)) throw new Error('not a number');
+            if (isNaN(num)) throw new Error(this.getApp().getModel().getText().error.notNumber);
             return num;
         }
         return stringValue;

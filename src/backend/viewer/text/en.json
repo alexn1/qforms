@@ -41,5 +41,9 @@
     "field": {
         "selectValue": "select value",
         "fillValue": "fill in this field"
+    },
+    "error": {
+        "notNumber": "not a number",
+        "invalidDate": "invalid date"
     }
 }
