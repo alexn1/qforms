@@ -72,10 +72,12 @@ class PageView extends ModelView {
                 }
                 {model.hasActions() &&
                     <DropdownButton
-                        title={model.getApp().getText().page.actions}
+                        classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
-                    />
+                    >
+                        <MoreVertIcon/>
+                    </DropdownButton>
                 }
             </div>
         );

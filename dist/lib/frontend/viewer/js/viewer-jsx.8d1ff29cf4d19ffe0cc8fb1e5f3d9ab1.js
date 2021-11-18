@@ -1208,10 +1208,10 @@ class PageView extends ModelView {
       onClick: ctrl.onSaveAndCloseClick,
       enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged())
     }, /*#__PURE__*/React.createElement(DoneIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().page.saveAndClose)), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
-      title: model.getApp().getText().page.actions,
+      classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
       onClick: this.onActionsClick
-    }));
+    }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
   }
   /*shouldComponentUpdate(nextProps, nextState) {
       return false;
