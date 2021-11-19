@@ -4,7 +4,7 @@
     <!-- <%=version%> -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=application.getAttr('caption')%> - <%=application.getText().login.login%> - QForms</title>
+    <title><%=application.getTitle(context)%> - <%=application.getText().login.login%></title>
     <!-- links -->
     <%links.forEach(link => {
     if (typeof link === 'string') {
@@ -45,7 +45,7 @@
                 <% }); %>
             </select>
         <% } else { %>
-        <div class="login__title">Manager Console</div>
+        <div class="login__title"><%=application.getTitle(context)%></div>
         <input class="login__field" name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
         <% } %>
         <input class="login__field" name="password" type="password" placeholder="<%=application.getText().login.password%>">

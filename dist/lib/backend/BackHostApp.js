@@ -291,6 +291,7 @@ class BackHostApp {
         const users = await application.getUsers(context);
         res.render('viewer/login', {
             version: pkg.version,
+            context: context,
             application: application,
             REQUEST_URI: req.url,
             errMsg: null,
@@ -329,6 +330,7 @@ class BackHostApp {
                 const users = await application.getUsers(context);
                 res.render('viewer/login', {
                     version: pkg.version,
+                    context: context,
                     application: application,
                     caption: application.getAttr('caption'),
                     REQUEST_URI: req.url,

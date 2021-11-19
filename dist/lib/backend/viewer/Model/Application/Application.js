@@ -364,5 +364,8 @@ class Application extends Model_1.default {
             }
         }
     }
+    getTitle(context) {
+        return this.getAttr('caption');
+    }
 }
 module.exports = Application;

@@ -431,6 +431,9 @@ class Application extends Model {
             }
         }
     }
+    getTitle(context) {
+        return this.getAttr('caption');
+    }
 }
 
 export = Application;
