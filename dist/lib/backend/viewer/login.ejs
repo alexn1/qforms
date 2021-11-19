@@ -45,13 +45,14 @@
                 <% }); %>
             </select>
         <% } else { %>
-        <input name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
+        <div class="login__title">Manager Console</div>
+        <input class="login__field" name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
         <% } %>
-        <input name="password" type="password" placeholder="<%=application.getText().login.password%>">
+        <input class="login__field" name="password" type="password" placeholder="<%=application.getText().login.password%>">
         <% if (errMsg !== null) { %>
             <p class="login-form__err-msg"><%=errMsg%></p>
         <% } %>
-        <button type="submit"><%=application.getText().login.signIn%></button>
+        <button class="login__button" type="submit"><%=application.getText().login.signIn%></button>
     </form>
 </body>
 </html>
