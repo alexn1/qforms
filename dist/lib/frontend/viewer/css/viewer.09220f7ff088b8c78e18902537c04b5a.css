@@ -555,10 +555,9 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .login__field {
   border: none;
-  height: 33px;
   font-size: 14px;
   border-bottom: 1px solid #ededed;
-  padding: 5px 0;
+  height: 44px;
 }
 .login__button {
   font-size: 14px;
