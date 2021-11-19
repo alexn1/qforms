@@ -4,7 +4,7 @@
         "signIn": "Войти",
         "username": "Логин",
         "password": "Пароль",
-        "WrongUsernameOrPassword": "Неверное имя пользователя или пароль"
+        "WrongUsernameOrPassword": "Неверный логин или пароль"
     },
     "application": {
         "logout": "Выйти",

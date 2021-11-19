@@ -50,7 +50,7 @@
         <% } %>
         <input class="login__field" name="password" type="password" placeholder="<%=application.getText().login.password%>">
         <% if (errMsg !== null) { %>
-            <p class="login-form__err-msg"><%=errMsg%></p>
+            <p class="login__err-msg"><%=errMsg%></p>
         <% } %>
         <button class="login__button" type="submit"><%=application.getText().login.signIn%></button>
     </form>

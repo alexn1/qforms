@@ -574,6 +574,10 @@ button.RowFormComboBoxFieldView__create-button:active {
 .login__button:active {
   background-color: #205581;
 }
+.login__err-msg {
+  color: red;
+  font-size: 14px;
+}
 
 .paging {
   display: flex;
