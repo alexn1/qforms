@@ -269,7 +269,7 @@ a.Grid__tr {
   text-decoration: none;
   color: inherit;
 }
-a.Grid__tr:hover {
+.Grid:not(.disabled) a.Grid__tr:hover {
   background-color: #E1F0FC !important;
 }
 .Grid__td,
@@ -367,12 +367,17 @@ a.Grid__tr:hover {
   color: null !important;
 }
 .Grid__body .Grid__tr:nth-child(even) {
-  background-color: #f3f6fa;
+  background-color: rgba(66, 139, 202, 0.06);
 }
 
+/*
 .GridCell {
-  cursor: pointer;
+  cursor: inherit;
+  span {
+    cursor: inherit;
+  }
 }
+*/
 
 .Image {
   cursor: pointer;

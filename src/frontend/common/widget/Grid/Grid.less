@@ -27,7 +27,7 @@
 // body
 @bodyTop                    : @headTrHeight + @headBodyGap;
 @bodyTrBorderBottom         : 0 solid #eee;
-@bodyTrEvenBackgroundColor  : rgba(243,246,250, 1.0);
+@bodyTrEvenBackgroundColor  : rgba(66,139,202, 0.06);
 @bodyTrBackgroundColorHover : #E1F0FC !important;
 @bodyTrActiveBackgroundColor: rgb(200,226,254);
 @bodyTrActiveColor          : null;
@@ -82,7 +82,7 @@ a.Grid__tr {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-a.Grid__tr:hover {
+.Grid&:not(.disabled) a.Grid__tr:hover {
   background-color: @bodyTrBackgroundColorHover;
 }
 

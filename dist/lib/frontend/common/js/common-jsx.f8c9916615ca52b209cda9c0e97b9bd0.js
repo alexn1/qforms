@@ -1087,6 +1087,7 @@ class Grid extends ReactComponent {
       console.log('Grid.onCellMouseDown', this.isLink());
       e.preventDefault(); // prevent text selection on double click
 
+      if (this.isDisabled()) return;
       this.el.current.focus(); // if (this.isLink()) return;
 
       const button = e.button;
