@@ -522,7 +522,7 @@ class ApplicationController extends ModelController {
     onLogout = async () => {
         console.log('ApplicationController.onLogout');
         const result = await this.model.request({action: 'logout'});
-        location.reload();
+        location.href = this.getRootPath();
     }
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
@@ -597,6 +597,10 @@ class ApplicationController extends ModelController {
         }
         return await this.frontHostApp.confirm(options);
     }
+    getRootPath() {
+        return '/';
+    }
+
 }
 
 window.QForms.ApplicationController = ApplicationController;
