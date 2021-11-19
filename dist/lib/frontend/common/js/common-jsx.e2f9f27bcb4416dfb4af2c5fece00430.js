@@ -1133,6 +1133,8 @@ class Grid extends ReactComponent {
 
     _defineProperty(this, "onKeyDown", async e => {
       // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+      if (this.isDisabled()) return;
+
       switch (e.keyCode) {
         case 37:
           e.preventDefault();

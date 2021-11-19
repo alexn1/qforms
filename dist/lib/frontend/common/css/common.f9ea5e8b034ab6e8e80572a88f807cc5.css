@@ -264,13 +264,12 @@ table.DatePicker td.selected {
 .Grid__tr {
   display: table-row;
   border-bottom: 0 solid white;
-}
-a.Grid__tr {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
-.Grid:not(.disabled) a.Grid__tr:hover {
-  background-color: #E1F0FC !important;
+.Grid.disabled .Grid__tr {
+  cursor: default;
 }
 .Grid__td,
 .Grid__th {
@@ -296,6 +295,7 @@ a.Grid__tr {
   color: null;
   text-shadow: none;
   padding: 3px 5px;
+  cursor: inherit;
   /*&.edit {
     color           : inherit;
     cursor          : text;
@@ -368,6 +368,9 @@ a.Grid__tr {
 }
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: rgba(66, 139, 202, 0.06);
+}
+.Grid:not(.disabled) .Grid__tr:hover {
+  background-color: #E1F0FC !important;
 }
 
 /*

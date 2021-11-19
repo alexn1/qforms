@@ -71,25 +71,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__tr {
-  display      : table-row;
-  border-bottom: @trBorderBottom;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-a.Grid__tr {
+  display        : table-row;
+  border-bottom  : @trBorderBottom;
   text-decoration: none;
   color          : inherit;
+  cursor         : pointer;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Grid&:not(.disabled) a.Grid__tr:hover {
-  background-color: @bodyTrBackgroundColorHover;
+.Grid.disabled .Grid__tr {
+  cursor: default;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td, .Grid__th {
   display       : table-cell;
-  //cursor        : default;
   vertical-align: middle;
   &:not(:last-child) {
     border-right: @tdBorderRight !important;
@@ -113,6 +109,7 @@ a.Grid__tr {
   color      : @tdColor;
   text-shadow: @tdTextShadow;
   padding    : @tdPaddingTopBottom @tdPaddingLeftRight;
+  cursor     : inherit;
   &.active {
     text-shadow     : @tdActiveTextShadow;
     background-color: @tdActiveBackgroundColor;
@@ -194,5 +191,12 @@ a.Grid__tr {
     &:nth-child(even) {
       background-color: @bodyTrEvenBackgroundColor;
     }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Grid:not(.disabled) {
+  .Grid__tr:hover {
+    background-color: @bodyTrBackgroundColorHover;
   }
 }
