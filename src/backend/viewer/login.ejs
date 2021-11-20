@@ -18,13 +18,13 @@
     <!-- scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('form').addEventListener('submit', e => {
+            document.querySelector('.login__form').addEventListener('submit', e => {
+                document.querySelector('.login__button').disabled = true;
                 document.querySelector('input[name=tzOffset]').setAttribute(
                     'value',
-                    JSON.stringify(
-                        new Date().getTimezoneOffset())
-                    )
-                ;
+                    JSON.stringify(new Date().getTimezoneOffset())
+                );
+                // e.preventDefault();
             });
         });
     </script>
