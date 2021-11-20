@@ -547,7 +547,8 @@ button.RowFormComboBoxFieldView__create-button:active {
   justify-content: space-around;
 }
 .login__form {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   padding: 40px;
   grid-gap: 15px;
@@ -563,6 +564,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   font-size: 14px;
   border-bottom: 1px solid #ededed;
   height: 44px;
+}
+.login__field:focus {
+  border-bottom: 1px solid #398bce;
 }
 .login__button {
   font-size: 14px;
