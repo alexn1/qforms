@@ -1,6 +1,8 @@
 class ViewerFrontHostApp extends FrontHostApp {
     constructor(data) {
-        super(data);
+        if (!data) throw new Error('no data');
+        super();
+        this.data = data;
         this.applicationController = null;
         this.webSocketClient = null;
     }

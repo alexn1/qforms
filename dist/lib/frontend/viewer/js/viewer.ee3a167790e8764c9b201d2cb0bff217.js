@@ -32,9 +32,17 @@ class EventEmitter {
     }
 }
 
+class LoginFrontHostApp extends FrontHostApp {
+    async run() {
+        console.log('LoginFrontHostApp.run');
+    }
+}
+
 class ViewerFrontHostApp extends FrontHostApp {
     constructor(data) {
-        super(data);
+        if (!data) throw new Error('no data');
+        super();
+        this.data = data;
         this.applicationController = null;
         this.webSocketClient = null;
     }

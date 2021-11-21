@@ -1506,7 +1506,9 @@ class TableEditor extends Editor {
 class EditorFrontHostApp extends FrontHostApp {
     constructor(data, runAppLink) {
         console.log('EditorFrontHostApp.constructor', data);
-        super(data);
+        if (!data) throw new Error('no data');
+        super();
+        this.data = data;
         EditorFrontHostApp.editorApp = this;
         this.runAppLink = runAppLink;
         this.view = null;

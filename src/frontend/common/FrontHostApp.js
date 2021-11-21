@@ -1,8 +1,6 @@
 class FrontHostApp {
-    constructor(data) {
-        // console.log('FrontHostApp.constructor', data);
-        if (!data) throw new Error('no data');
-        this.data = data;
+    constructor() {
+        // console.log('FrontHostApp.constructor');
         this.alertCtrl = null;
 
         // window
