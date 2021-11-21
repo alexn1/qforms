@@ -346,15 +346,15 @@ class BackHostApp {
         const application = this.getApplication(context);
         const users = await application.getUsers(context);
         res.render('viewer/login', {
-            version       : pkg.version,
-            context       : context,
-            application   : application,
-            REQUEST_URI   : req.url,
-            errMsg        : null,
-            username      : null,
-            users         : users,
-            links         : this.viewerModule.getLinks(),
-            scripts       : this.viewerModule.getScripts()
+            version    : pkg.version,
+            context    : context,
+            application: application,
+            REQUEST_URI: req.url,
+            errMsg     : null,
+            username   : null,
+            users      : users,
+            links      : this.viewerModule.getLinks(),
+            scripts    : this.viewerModule.getScripts()
         });
     }
 
