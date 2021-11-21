@@ -32,27 +32,5 @@
 </head>
 <body class="LoginView__body">
     <div class="LoginView__root"></div>
-    <!--
-    <form class="LoginView__form" action="<%=REQUEST_URI%>" method="post">
-        <input name="tzOffset" type="hidden">
-        <input name="action" type="hidden" value="login">
-        <% if (users) { %>
-            <select name="username" required autofocus>
-                <option value=""></option>
-                <% users.forEach((user) => { %>
-                <option value="<%=user.username%>" <%=user.username === username ? 'selected' : ''%>><%=user.title%></option>
-                <% }); %>
-            </select>
-        <% } else { %>
-        <div class="LoginView__title"><%=application.getTitle(context)%></div>
-        <input class="LoginView__field" name="username" placeholder="<%=application.getText().login.username%>" required autofocus value="<%=username%>" spellcheck="false">
-        <% } %>
-        <input class="LoginView__field" name="password" type="password" placeholder="<%=application.getText().login.password%>">
-        <% if (errMsg !== null) { %>
-            <p class="LoginView__err-msg"><%=errMsg%></p>
-        <% } %>
-        <button class="LoginView__button" type="submit"><%=application.getText().login.signIn%></button>
-    </form>
-    -->
 </body>
 </html>

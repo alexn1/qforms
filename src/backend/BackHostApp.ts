@@ -7,7 +7,6 @@ const session    = require('express-session');
 const express    = require('express');
 const http       = require('http');
 const colors     = require('colors/safe');
-const text       = require('./viewer/text');
 
 import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -345,19 +344,15 @@ class BackHostApp {
     async loginGet(req, res, context: Context) {
         console.log('BackHostApp.loginGet');
         const application = this.getApplication(context);
-        const users = await application.getUsers(context);
+        // const users = await application.getUsers(context);
         res.render('viewer/login', {
             version    : pkg.version,
             context    : context,
             application: application,
-            REQUEST_URI: req.url,
-            errMsg     : null,
-            username   : null,
-            users      : users,
             links      : this.viewerModule.getLinks(),
             scripts    : this.viewerModule.getScripts(),
             data: {
-                text  : text[application.getAttr('lang')],
+                text  : application.getText(),
                 title : application.getTitle(context),
                 errMsg: null,
             }
@@ -384,20 +379,15 @@ class BackHostApp {
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
             } else {
-                const users = await application.getUsers(context);
+                // const users = await application.getUsers(context);
                 res.render('viewer/login', {
                     version    : pkg.version,
                     context    : context,
                     application: application,
-                    caption    : application.getAttr('caption'),
-                    REQUEST_URI: req.url,
-                    errMsg     : application.getText().login.WrongUsernameOrPassword,
-                    username   : req.body.username,
-                    users      : users,
                     links      : this.viewerModule.getLinks(),
                     scripts    : this.viewerModule.getScripts(),
                     data: {
-                        text  : text[application.getAttr('lang')],
+                        text  : application.getText(),
                         title : application.getTitle(context),
                         errMsg: application.getText().login.WrongUsernameOrPassword,
                     }
