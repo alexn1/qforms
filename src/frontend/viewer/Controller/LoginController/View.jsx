@@ -4,7 +4,13 @@ class LoginView extends View {
             <form className={'login__form'} method={'post'}>
                 <input type={'hidden'} name={'tzOffset'}/>
                 <input type={'hidden'} name={'action'} value={'login'}/>
-                <input type={'text'} name={'username'} placeholder={this.getCtrl().getText().login.username}/>
+                <div className={'login__title'}>{this.getCtrl().getFrontHostApp().getData().domain}</div>
+
+                <input className={'login__field'} name={'username'} placeholder={this.getCtrl().getText().login.username}
+                       required={true}
+                       autoFocus={true}
+                       spellCheck={false}/>
+
             </form>
         </div>;
     }

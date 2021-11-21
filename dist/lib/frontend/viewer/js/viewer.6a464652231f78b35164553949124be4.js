@@ -47,6 +47,9 @@ class LoginFrontHostApp extends FrontHostApp {
     getText() {
         return this.data.text;
     }
+    getData() {
+        return this.data;
+    }
 }
 
 class ViewerFrontHostApp extends FrontHostApp {
@@ -270,6 +273,9 @@ class LoginController extends Controller {
     }
     getText() {
         return this.frontHostApp.getText();
+    }
+    getFrontHostApp() {
+        return this.frontHostApp;
     }
 }
 

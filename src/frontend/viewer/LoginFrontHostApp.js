@@ -13,4 +13,7 @@ class LoginFrontHostApp extends FrontHostApp {
     getText() {
         return this.data.text;
     }
+    getData() {
+        return this.data;
+    }
 }

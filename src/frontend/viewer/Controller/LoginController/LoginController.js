@@ -9,4 +9,7 @@ class LoginController extends Controller {
     getText() {
         return this.frontHostApp.getText();
     }
+    getFrontHostApp() {
+        return this.frontHostApp;
+    }
 }

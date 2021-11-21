@@ -87,10 +87,15 @@ class LoginView extends View {
       type: 'hidden',
       name: 'action',
       value: 'login'
-    }), /*#__PURE__*/React.createElement("input", {
-      type: 'text',
+    }), /*#__PURE__*/React.createElement("div", {
+      className: 'login__title'
+    }, this.getCtrl().getFrontHostApp().getData().domain), /*#__PURE__*/React.createElement("input", {
+      className: 'login__field',
       name: 'username',
-      placeholder: this.getCtrl().getText().login.username
+      placeholder: this.getCtrl().getText().login.username,
+      required: true,
+      autoFocus: true,
+      spellCheck: false
     })));
   }
 
