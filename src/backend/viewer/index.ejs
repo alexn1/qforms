@@ -8,13 +8,13 @@
     <title></title>
     <!-- links -->
     <%links.forEach(link => {
-    if (typeof link === 'string') {
-    %><link rel="stylesheet" href="<%=link%>"/>
-    <%
-    } else if (typeof link === 'object') {
-    %><link rel="<%=link.rel%>" href="<%=link.href%>" <%=link.crossorigin === true ? 'crossorigin' : ''%>/>
-    <%
-    }
+        if (typeof link === 'string') {
+            %><link rel="stylesheet" href="<%=link%>"/>
+        <%
+        } else if (typeof link === 'object') {
+            %><link rel="<%=link.rel%>" href="<%=link.href%>" <%=link.crossorigin === true ? 'crossorigin' : ''%>/>
+        <%
+        }
     });%>
     <!-- scripts -->
     <%scripts.forEach(src => {
