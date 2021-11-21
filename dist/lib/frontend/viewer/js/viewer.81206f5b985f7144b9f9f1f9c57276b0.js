@@ -33,14 +33,19 @@ class EventEmitter {
 }
 
 class LoginFrontHostApp extends FrontHostApp {
+    constructor(data) {
+        console.log('LoginFrontHostApp.constructor', data);
+        super();
+        this.data = data;
+    }
     async run() {
         console.log('LoginFrontHostApp.run');
         const rootElement = document.querySelector('.login__root');
-
-        const loginController = new LoginController();
-
-        const view = Helper.createReactComponent(rootElement, loginController.getViewClass(), {ctrl: loginController});
-
+        const loginController = new LoginController(this);
+        const loginView = Helper.createReactComponent(rootElement, loginController.getViewClass(), {ctrl: loginController});
+    }
+    getText() {
+        return this.data.text;
     }
 }
 
@@ -256,10 +261,18 @@ class ConfirmController extends Controller {
 }
 
 class LoginController extends Controller {
+    constructor(frontHostApp) {
+        super();
+        this.frontHostApp = frontHostApp;
+    }
     getViewClass() {
         return LoginView;
     }
+    getText() {
+        return this.frontHostApp.getText();
+    }
 }
+
 class ModalController extends Controller {
     constructor(app, id) {
         super();

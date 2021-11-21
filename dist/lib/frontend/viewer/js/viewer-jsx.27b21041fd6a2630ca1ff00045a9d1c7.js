@@ -77,7 +77,21 @@ class LoginView extends View {
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
-    }, "LoginView");
+    }, /*#__PURE__*/React.createElement("form", {
+      className: 'login__form',
+      method: 'post'
+    }, /*#__PURE__*/React.createElement("input", {
+      type: 'hidden',
+      name: 'tzOffset'
+    }), /*#__PURE__*/React.createElement("input", {
+      type: 'hidden',
+      name: 'action',
+      value: 'login'
+    }), /*#__PURE__*/React.createElement("input", {
+      type: 'text',
+      name: 'username',
+      placeholder: this.getCtrl().getText().login.username
+    })));
   }
 
 }

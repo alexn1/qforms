@@ -23,7 +23,8 @@
     });%>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const frontHostApp = new LoginFrontHostApp();
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const frontHostApp = new LoginFrontHostApp(data);
             await frontHostApp.run();
 
 
@@ -37,6 +38,7 @@
             });
         });
     </script>
+    <script type="application/json"><%- JSON.stringify(data, null, 4) %></script>
 </head>
 <body class="login__body">
     <div class="login__root"></div>

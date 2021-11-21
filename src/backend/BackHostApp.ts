@@ -7,6 +7,7 @@ const session    = require('express-session');
 const express    = require('express');
 const http       = require('http');
 const colors     = require('colors/safe');
+const text       = require('./viewer/text');
 
 import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -354,7 +355,10 @@ class BackHostApp {
             username   : null,
             users      : users,
             links      : this.viewerModule.getLinks(),
-            scripts    : this.viewerModule.getScripts()
+            scripts    : this.viewerModule.getScripts(),
+            data: {
+                text: text[application.getAttr('lang')]
+            }
         });
     }
 
@@ -389,7 +393,10 @@ class BackHostApp {
                     username   : req.body.username,
                     users      : users,
                     links      : this.viewerModule.getLinks(),
-                    scripts    : this.viewerModule.getScripts()
+                    scripts    : this.viewerModule.getScripts(),
+                    data: {
+                        text: text[application.getAttr('lang')]
+                    }
                 });
             }
         } finally {
