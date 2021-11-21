@@ -9,7 +9,7 @@ class LoginView extends View {
                        required={true}
                        spellCheck={false}/>
                 <input className={`${this.getCssBlockName()}__field`} type={'password'} name={'password'} placeholder={this.getCtrl().getText().login.password}/>
-                <p className={`${this.getCssBlockName()}__err-msg`}>err msg</p>
+                <p className={`${this.getCssBlockName()}__err-msg`}>{this.getCtrl().getFrontHostApp().getData().errMsg}</p>
                 <button className={`${this.getCssBlockName()}__button`} type={'submit'}>{this.getCtrl().getText().login.signIn}</button>
             </form>
         </div>;

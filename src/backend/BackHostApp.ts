@@ -357,8 +357,9 @@ class BackHostApp {
             links      : this.viewerModule.getLinks(),
             scripts    : this.viewerModule.getScripts(),
             data: {
-                text : text[application.getAttr('lang')],
-                title: application.getTitle(context)
+                text  : text[application.getAttr('lang')],
+                title : application.getTitle(context),
+                errMsg: null,
             }
         });
     }
@@ -396,8 +397,9 @@ class BackHostApp {
                     links      : this.viewerModule.getLinks(),
                     scripts    : this.viewerModule.getScripts(),
                     data: {
-                        text : text[application.getAttr('lang')],
-                        title: application.getTitle(context)
+                        text  : text[application.getAttr('lang')],
+                        title : application.getTitle(context),
+                        errMsg: application.getText().login.WrongUsernameOrPassword,
                     }
                 });
             }

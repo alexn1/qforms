@@ -103,7 +103,7 @@ class LoginView extends View {
       placeholder: this.getCtrl().getText().login.password
     }), /*#__PURE__*/React.createElement("p", {
       className: `${this.getCssBlockName()}__err-msg`
-    }, "err msg"), /*#__PURE__*/React.createElement("button", {
+    }, this.getCtrl().getFrontHostApp().getData().errMsg), /*#__PURE__*/React.createElement("button", {
       className: `${this.getCssBlockName()}__button`,
       type: 'submit'
     }, this.getCtrl().getText().login.signIn)));
