@@ -76,9 +76,9 @@ class ConfirmView extends View {
 class LoginView extends View {
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames()
+      className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("form", {
-      className: 'login__form',
+      className: `${this.getCssBlockName()}__form`,
       method: 'post'
     }, /*#__PURE__*/React.createElement("input", {
       type: 'hidden',
@@ -88,24 +88,23 @@ class LoginView extends View {
       name: 'action',
       value: 'login'
     }), /*#__PURE__*/React.createElement("div", {
-      className: 'login__title'
+      className: `${this.getCssBlockName()}__title`
     }, this.getCtrl().getFrontHostApp().getData().title), /*#__PURE__*/React.createElement("input", {
-      className: 'login__field',
+      className: `${this.getCssBlockName()}__field`,
       type: 'text',
       name: 'username',
       placeholder: this.getCtrl().getText().login.username,
       required: true,
-      autoFocus: true,
       spellCheck: false
     }), /*#__PURE__*/React.createElement("input", {
-      className: 'login__field',
+      className: `${this.getCssBlockName()}__field`,
       type: 'password',
       name: 'password',
       placeholder: this.getCtrl().getText().login.password
     }), /*#__PURE__*/React.createElement("p", {
-      className: 'login__err-msg'
+      className: `${this.getCssBlockName()}__err-msg`
     }, "err msg"), /*#__PURE__*/React.createElement("button", {
-      className: 'login__button',
+      className: `${this.getCssBlockName()}__button`,
       type: 'submit'
     }, this.getCtrl().getText().login.signIn)));
   }

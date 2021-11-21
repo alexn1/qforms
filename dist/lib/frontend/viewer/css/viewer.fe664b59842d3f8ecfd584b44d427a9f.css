@@ -109,6 +109,64 @@
   min-width: 100px;
 }
 
+.LoginView {
+  height: 100%;
+}
+.LoginView__body {
+  font-family: sans-serif;
+  margin: 0;
+  height: 100%;
+  background-color: #283858;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.LoginView__form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 40px;
+  grid-gap: 15px;
+  width: 360px;
+  border-radius: 12px;
+}
+.LoginView__title {
+  text-align: center;
+  padding: 20px 0;
+}
+.LoginView__field {
+  border: none;
+  font-size: 14px;
+  border-bottom: 1px solid #ededed;
+  height: 44px;
+}
+.LoginView__field:focus {
+  border-bottom: 1px solid #398bce;
+}
+.LoginView__button {
+  font-size: 14px;
+  border: none;
+  height: 44px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #398bce;
+  color: white;
+}
+.LoginView__button:hover {
+  background-color: #2a70aa;
+}
+.LoginView__button:active {
+  background-color: #205581;
+}
+.LoginView__button:disabled {
+  background-color: #b4d3ec;
+  cursor: default;
+}
+.LoginView__err-msg {
+  color: red;
+  font-size: 14px;
+}
+
 .ImageDialogView {
   position: fixed;
   z-index: 3;
@@ -532,64 +590,6 @@ button.RowFormComboBoxFieldView__create-button:active {
   display: flex;
   flex-direction: row-reverse;
   grid-gap: 5px;
-}
-
-.login {
-  height: 100%;
-}
-.login__body {
-  font-family: sans-serif;
-  margin: 0;
-  height: 100%;
-  background-color: #283858;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.login__form {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  padding: 40px;
-  grid-gap: 15px;
-  width: 360px;
-  border-radius: 12px;
-}
-.login__title {
-  text-align: center;
-  padding: 20px 0;
-}
-.login__field {
-  border: none;
-  font-size: 14px;
-  border-bottom: 1px solid #ededed;
-  height: 44px;
-}
-.login__field:focus {
-  border-bottom: 1px solid #398bce;
-}
-.login__button {
-  font-size: 14px;
-  border: none;
-  height: 44px;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #398bce;
-  color: white;
-}
-.login__button:hover {
-  background-color: #2a70aa;
-}
-.login__button:active {
-  background-color: #205581;
-}
-.login__button:disabled {
-  background-color: #b4d3ec;
-  cursor: default;
-}
-.login__err-msg {
-  color: red;
-  font-size: 14px;
 }
 
 .paging {
