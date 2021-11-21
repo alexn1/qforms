@@ -73,16 +73,29 @@ class ConfirmView extends View {
   }
 
 }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class LoginView extends View {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onLoginFormSubmit", async e => {
+      console.log('LoginView.onLoginFormSubmit');
+      document.querySelector('.LoginView__button').disabled = true; // e.preventDefault();
+    });
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("form", {
       className: `${this.getCssBlockName()}__form`,
-      method: 'post'
+      method: 'post',
+      onSubmit: this.onLoginFormSubmit
     }, /*#__PURE__*/React.createElement("input", {
       type: 'hidden',
-      name: 'tzOffset'
+      name: 'tzOffset',
+      value: JSON.stringify(new Date().getTimezoneOffset())
     }), /*#__PURE__*/React.createElement("input", {
       type: 'hidden',
       name: 'action',
@@ -95,6 +108,7 @@ class LoginView extends View {
       name: 'username',
       placeholder: this.getCtrl().getText().login.username,
       required: true,
+      autoFocus: true,
       spellCheck: false
     }), /*#__PURE__*/React.createElement("input", {
       className: `${this.getCssBlockName()}__field`,

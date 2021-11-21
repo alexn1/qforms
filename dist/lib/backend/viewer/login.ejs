@@ -26,16 +26,6 @@
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new LoginFrontHostApp(data);
             await frontHostApp.run();
-
-
-            document.querySelector('.LoginView__form').addEventListener('submit', async e => {
-                document.querySelector('.LoginView__button').disabled = true;
-                document.querySelector('input[name=tzOffset]').setAttribute(
-                    'value',
-                    JSON.stringify(new Date().getTimezoneOffset())
-                );
-                // e.preventDefault();
-            });
         });
     </script>
     <script type="application/json"><%- JSON.stringify(data, null, 4) %></script>
