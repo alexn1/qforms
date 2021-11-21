@@ -133,6 +133,7 @@
 .LoginView__title {
   text-align: center;
   padding: 20px 0;
+  text-transform: uppercase;
 }
 .LoginView__field {
   border: none;
