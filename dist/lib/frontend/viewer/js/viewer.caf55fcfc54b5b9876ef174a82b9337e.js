@@ -35,6 +35,12 @@ class EventEmitter {
 class LoginFrontHostApp extends FrontHostApp {
     async run() {
         console.log('LoginFrontHostApp.run');
+        const rootElement = document.querySelector('.login__root');
+
+        const loginController = new LoginController();
+
+        const view = Helper.createReactComponent(rootElement, loginController.getViewClass(), {ctrl: loginController});
+
     }
 }
 
@@ -249,6 +255,11 @@ class ConfirmController extends Controller {
     }
 }
 
+class LoginController extends Controller {
+    getViewClass() {
+        return LoginView;
+    }
+}
 class ModalController extends Controller {
     constructor(app, id) {
         super();
@@ -378,9 +389,9 @@ class ApplicationController extends ModelController {
     getViewClass() {
         return super.getViewClass() || ApplicationView;
     }
-    createView(root) {
+    createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = Helper.createReactComponent(root, this.getViewClass(), {ctrl: this});
+        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {ctrl: this});
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }

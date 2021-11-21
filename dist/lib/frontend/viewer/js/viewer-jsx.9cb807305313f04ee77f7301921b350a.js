@@ -73,6 +73,14 @@ class ConfirmView extends View {
   }
 
 }
+class LoginView extends View {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, "LoginView");
+  }
+
+}
 class ImageDialogView extends View {
   render() {
     console.log('ImageDialogView.render');

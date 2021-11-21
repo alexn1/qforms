@@ -248,12 +248,12 @@ class Helper {
         }
         return value;
     }
-    static createReactComponent(root, type, props = {}, children) {
-        // console.log('Helper.createReactComponent', root, type);
+    static createReactComponent(rootElement, type, props = {}, children) {
+        // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         props.onCreate = c => component = c;
         const reactElement = React.createElement(type, props, children);
-        ReactDOM.render(reactElement, root);
+        ReactDOM.render(reactElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
