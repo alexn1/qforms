@@ -302,7 +302,7 @@ class BackHostApp {
             scripts: this.viewerModule.getScripts(),
             data: {
                 text: text[application.getAttr('lang')],
-                domain: context.getDomain()
+                title: application.getTitle(context)
             }
         });
     }
@@ -346,7 +346,7 @@ class BackHostApp {
                     scripts: this.viewerModule.getScripts(),
                     data: {
                         text: text[application.getAttr('lang')],
-                        domain: context.getDomain()
+                        title: application.getTitle(context)
                     }
                 });
             }

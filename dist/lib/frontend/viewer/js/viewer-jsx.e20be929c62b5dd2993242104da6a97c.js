@@ -89,14 +89,25 @@ class LoginView extends View {
       value: 'login'
     }), /*#__PURE__*/React.createElement("div", {
       className: 'login__title'
-    }, this.getCtrl().getFrontHostApp().getData().domain), /*#__PURE__*/React.createElement("input", {
+    }, this.getCtrl().getFrontHostApp().getData().title), /*#__PURE__*/React.createElement("input", {
       className: 'login__field',
+      type: 'text',
       name: 'username',
       placeholder: this.getCtrl().getText().login.username,
       required: true,
       autoFocus: true,
       spellCheck: false
-    })));
+    }), /*#__PURE__*/React.createElement("input", {
+      className: 'login__field',
+      type: 'password',
+      name: 'password',
+      placeholder: this.getCtrl().getText().login.password
+    }), /*#__PURE__*/React.createElement("p", {
+      className: 'login__err-msg'
+    }, "err msg"), /*#__PURE__*/React.createElement("button", {
+      className: 'login__button',
+      type: 'submit'
+    }, this.getCtrl().getText().login.signIn)));
   }
 
 }

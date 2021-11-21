@@ -357,8 +357,8 @@ class BackHostApp {
             links      : this.viewerModule.getLinks(),
             scripts    : this.viewerModule.getScripts(),
             data: {
-                text  : text[application.getAttr('lang')],
-                domain: context.getDomain()
+                text : text[application.getAttr('lang')],
+                title: application.getTitle(context)
             }
         });
     }
@@ -396,8 +396,8 @@ class BackHostApp {
                     links      : this.viewerModule.getLinks(),
                     scripts    : this.viewerModule.getScripts(),
                     data: {
-                        text  : text[application.getAttr('lang')],
-                        domain: context.getDomain()
+                        text : text[application.getAttr('lang')],
+                        title: application.getTitle(context)
                     }
                 });
             }
