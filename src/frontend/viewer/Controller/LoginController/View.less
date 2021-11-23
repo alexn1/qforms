@@ -1,3 +1,5 @@
+@backgroundColor: #398bce;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .LoginView {
   height: 100%;
@@ -53,13 +55,13 @@
   background-color: #398bce;
   color: white;
   &:hover {
-    background-color: darken(#398bce, 10%);
+    background-color: darken(@backgroundColor, 10%);
   }
   &:active {
-    background-color: darken(#398bce, 20%);
+    background-color: darken(@backgroundColor, 20%);
   }
   &:disabled {
-    background-color: lighten(#398bce, 30%);
+    background-color: lighten(@backgroundColor, 30%);
     cursor: default;
   }
 }

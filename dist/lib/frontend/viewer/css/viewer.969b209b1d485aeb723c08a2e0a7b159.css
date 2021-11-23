@@ -624,6 +624,26 @@ button.RowFormComboBoxFieldView__create-button:active {
 .toolbar-button:disabled svg {
   fill: #aaa;
 }
+.toolbar-button.default {
+  color: white;
+  background-color: #398bce;
+  border: 1px solid #398bce;
+}
+.toolbar-button.default svg {
+  fill: white;
+}
+.toolbar-button.default:hover {
+  background-color: #2a70aa;
+  border: 1px solid #2a70aa;
+}
+.toolbar-button.default:active {
+  background-color: #205581;
+  border: 1px solid #205581;
+}
+.toolbar-button.default:disabled {
+  background-color: #b4d3ec;
+  border: 1px solid #b4d3ec;
+}
 
 .toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
   cursor: pointer;

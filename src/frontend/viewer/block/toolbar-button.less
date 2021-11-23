@@ -1,3 +1,5 @@
+@defaultBackgroundColor: #398bce;
+
 .toolbar-button {
   min-width: 140px;
   display: flex;
@@ -11,6 +13,27 @@
   &:disabled {
     svg {
       fill: #aaa;
+    }
+  }
+
+  &.default {
+    color: white;
+    background-color: @defaultBackgroundColor;
+    border: 1px solid @defaultBackgroundColor;
+    svg {
+      fill: white;
+    }
+    &:hover {
+      background-color: darken(@defaultBackgroundColor, 10%);
+      border: 1px solid darken(@defaultBackgroundColor, 10%);
+    }
+    &:active {
+      background-color: darken(@defaultBackgroundColor, 20%);
+      border: 1px solid darken(@defaultBackgroundColor, 20%);
+    }
+    &:disabled {
+      background-color: lighten(@defaultBackgroundColor, 30%);
+      border: 1px solid lighten(@defaultBackgroundColor, 30%);
     }
   }
 
