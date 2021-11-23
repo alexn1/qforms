@@ -1,5 +1,12 @@
 .toolbar-dropdown-button {
   .DropdownButton__button {
-    display: block;
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+    &:disabled {
+      svg {
+        fill: #aaa;
+      }
+    }
   }
 }

@@ -91,16 +91,6 @@ svg {
   width: 200px;
 }
 
-.Button {
-  display: inline-block;
-}
-.Button:not(:disabled) {
-  cursor: pointer;
-}
-.Button:disabled svg {
-  fill: #aaa;
-}
-
 table.DatePicker caption,
 table.DatePicker td,
 table.DatePicker th {

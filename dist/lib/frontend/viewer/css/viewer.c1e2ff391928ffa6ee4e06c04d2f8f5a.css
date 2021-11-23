@@ -618,9 +618,18 @@ button.RowFormComboBoxFieldView__create-button:active {
   justify-content: center;
   grid-gap: 3px;
 }
+.toolbar-button:not(:disabled) {
+  cursor: pointer;
+}
+.toolbar-button:disabled svg {
+  fill: #aaa;
+}
 
-.toolbar-dropdown-button .DropdownButton__button {
-  display: block;
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
+  cursor: pointer;
+}
+.toolbar-dropdown-button .DropdownButton__button:disabled svg {
+  fill: #aaa;
 }
 
 
