@@ -142,6 +142,9 @@ class Field extends Model {
     isVisible() {
         return this.data.visible === 'true';
     }
+    isAutoFocus() {
+        return this.getAttr('autoFocus') === 'true';
+    }
     getWidth() {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;

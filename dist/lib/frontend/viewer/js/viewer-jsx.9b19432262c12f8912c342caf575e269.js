@@ -687,7 +687,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null,
       onFocus: this.onFocus,
-      onBlur: this.onBlur
+      onBlur: this.onBlur,
+      autoFocus: ctrl.getModel().isAutoFocus()
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick

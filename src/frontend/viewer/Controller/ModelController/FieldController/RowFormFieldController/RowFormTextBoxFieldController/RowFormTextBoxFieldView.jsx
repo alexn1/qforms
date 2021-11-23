@@ -46,6 +46,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+                autoFocus={ctrl.getModel().isAutoFocus()}
             />
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
                 <CloseIcon/>

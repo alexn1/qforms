@@ -2157,6 +2157,7 @@ class TextBox extends ReactComponent {
       readOnly: this.props.readOnly,
       disabled: this.props.disabled,
       placeholder: this.props.placeholder,
+      autoFocus: this.props.autoFocus,
       spellCheck: this.props.spellCheck,
       autoComplete: this.props.autocomplete,
       value: this.state.value,

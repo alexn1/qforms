@@ -2747,6 +2747,7 @@ class FieldController extends VisualController {
         options['param']            = ['true', 'false'];
         options['validateOnChange'] = ['true', 'false'];
         options['validateOnBlur']   = ['true', 'false'];
+        options['autoFocus']        = ['true', 'false'];
         options['timezone']         = ['true', 'false'];
         options['newRowMode']       = ['disabled', 'editPage', 'createPage'];
         options['type']             = ['', 'string', 'number', 'boolean', 'object', 'date'];
