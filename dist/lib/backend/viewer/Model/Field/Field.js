@@ -25,6 +25,7 @@ class Field extends Model_1.default {
         response.width = this.getAttr('width');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.autoFocus = this.getAttr('autoFocus');
     }
     getDirPath() {
         return path.join(this.parent.getDirPath(), 'fields', this.getName());

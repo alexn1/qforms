@@ -29,6 +29,7 @@ class Field extends Model {
         response.width        = this.getAttr('width');
         response.cssBlock     = this.getAttr('cssBlock');
         response.viewClass    = this.getAttr('viewClass');
+        response.autoFocus    = this.getAttr('autoFocus');
     }
 
     getDirPath(): string {
