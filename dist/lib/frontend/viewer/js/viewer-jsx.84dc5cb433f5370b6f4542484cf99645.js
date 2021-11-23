@@ -1079,7 +1079,7 @@ class TableFormView extends FormView {
       className: `${this.getCssBlockName()}__toolbar flex grid-gap-5`
     }, model.data.newRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
       key: "new",
-      classList: ['toolbar-button'],
+      classList: ['toolbar-button', 'default'],
       onClick: ctrl.onNewClick,
       enabled: !ctrl.parent.model.hasNew()
     }, /*#__PURE__*/React.createElement(AddIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.new)), model.data.deleteRowMode !== 'disabled' && /*#__PURE__*/React.createElement(Button, {
@@ -1256,7 +1256,7 @@ class PageView extends ModelView {
       onClick: ctrl.onSelectClick,
       enabled: !!ctrl.getSelectedRowKey()
     }, /*#__PURE__*/React.createElement(DoneIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().page.select)), model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
-      classList: ['toolbar-button'],
+      classList: ['toolbar-button', 'default'],
       onClick: ctrl.onSaveAndCloseClick,
       enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged())
     }, /*#__PURE__*/React.createElement(DoneIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().page.saveAndClose)), model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {

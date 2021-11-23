@@ -8,7 +8,7 @@ class TableFormView extends FormView {
                 {model.data.newRowMode !== 'disabled' &&
                     <Button
                         key="new"
-                        classList={['toolbar-button']}
+                        classList={['toolbar-button', 'default']}
                         onClick={ctrl.onNewClick}
                         enabled={!ctrl.parent.model.hasNew()}
                     >
@@ -123,7 +123,7 @@ class TableFormView extends FormView {
             rows              : this.getRows(),
             getRowKey         : row => ctrl.model.getDefaultDataSource().getRowKey(row),
             onDoubleClick     : ctrl.onGridCellDblClick,
-            onDeleteKeyDown     : ctrl.onGridDeleteKeyDown,
+            onDeleteKeyDown   : ctrl.onGridDeleteKeyDown,
             onSelectionChange : ctrl.onGridSelectionChange,
             onLinkClick       : ctrl.onGridLinkClick,
             renderGridCellView: this.renderGridCellView,

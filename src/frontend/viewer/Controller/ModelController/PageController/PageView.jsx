@@ -62,7 +62,7 @@ class PageView extends ModelView {
                 }*/}
                 {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() &&
                     <Button
-                        classList={['toolbar-button']}
+                        classList={['toolbar-button', 'default']}
                         onClick={ctrl.onSaveAndCloseClick}
                         enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
                     >
