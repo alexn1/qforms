@@ -21,7 +21,7 @@ class NewDataSourceView extends ReactComponent {
             <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <TextBox id={'name'} classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'}/>
+                    <TextBox id={'name'} classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="class">Class</label>

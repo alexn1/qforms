@@ -353,7 +353,8 @@ class NewDataSourceView extends ReactComponent {
       id: 'name',
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -879,7 +880,8 @@ class NewKeyColumnView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement("button", {
