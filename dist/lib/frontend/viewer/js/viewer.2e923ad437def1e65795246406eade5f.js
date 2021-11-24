@@ -1924,6 +1924,9 @@ class RowFormController extends FormController {
     getMode() {
         return this.state.mode;
     }
+    isActionEnabled(name) {
+        return this.getMode() === 'view';
+    }
 }
 window.QForms.RowFormController = RowFormController;
 
