@@ -52,18 +52,17 @@ class Tab extends ReactComponent {
     }
     renderContents() {
         return this.props.tabs.map((tab, i) =>
-        <div key={tab.name} className={i === this.getActive() ? 'active' : null}>
+        <div key={tab.name} className={`${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`}>
             {tab.content}
         </div>);
     }
     render() {
-
         return (
             <div className={this.getCssClassNames()}>
-                <ul>
+                <ul className={`${this.getCssBlockName()}__buttons`}>
                     {this.props.tabs && this.renderTitles()}
                 </ul>
-                <div>
+                <div className={`${this.getCssBlockName()}__pages`}>
                     {this.props.tabs && this.renderContents()}
                 </div>
             </div>
