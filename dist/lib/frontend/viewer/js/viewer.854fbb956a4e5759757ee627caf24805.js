@@ -2196,7 +2196,7 @@ class TableFormController extends FormController {
         return this.grid ? this.grid.getActiveRowKey() : null;
     }
     isActionEnabled(name) {
-        return true;
+        return this.isRowSelected();
     }
 }
 window.QForms.TableFormController = TableFormController;
