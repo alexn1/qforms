@@ -27,32 +27,32 @@ class NewDatabaseView extends ReactComponent {
                 <h4 className="modal-title">New Database</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="class">Class</label>
-                    <ComboBox id={'class'} classList={['form-control']} items={[
+                    <ComboBox id={'class'} items={[
                         {value: 'MySqlDatabase'     , title: 'MySqlDatabase'},
                         {value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase'}
                     ]} onCreate={c => this.class = c} value={'PostgreSqlDatabase'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="name">Name</label>
-                    <TextBox id={'name'} classList={['form-control']} value={'default'} onCreate={c => this.name = c} autocomplete={'off'}/>
+                    <TextBox id={'name'} value={'default'} onCreate={c => this.name = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="host">Host</label>
-                    <TextBox id={'host'} classList={['form-control']} value={'localhost'} onCreate={c => this.host = c} autocomplete={'off'}/>
+                    <TextBox id={'host'} value={'localhost'} onCreate={c => this.host = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="database">Database</label>
-                    <TextBox id={'database'} classList={['form-control']} value={'test'} onCreate={c => this.database = c} autocomplete={'off'}/>
+                    <TextBox id={'database'} value={'test'} onCreate={c => this.database = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="user">User</label>
-                    <TextBox id={'user'} classList={['form-control']} value={'test'} onCreate={c => this.user = c} autocomplete={'off'}/>
+                    <TextBox id={'user'} value={'test'} onCreate={c => this.user = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="user">Password</label>
-                    <TextBox id={'password'} classList={['form-control']} value={'123qwe'} onCreate={c => this.password = c} autocomplete={'off'}/>
+                    <TextBox id={'password'} value={'123qwe'} onCreate={c => this.password = c} autocomplete={'off'}/>
                 </div>
             </div>
             <div className="modal-footer">

@@ -21,17 +21,17 @@ class NewFormView extends ReactComponent {
                 <h4 className="modal-title">New Form</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="name">Name</label>
-                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="caption">Caption</label>
-                    <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                    <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="formClass">Class</label>
-                    <ComboBox id="formClass" classList={['form-control']} value={'TableForm'} items={[
+                    <ComboBox id="formClass" value={'TableForm'} items={[
                         {value: 'RowForm'  , title: 'RowForm'},
                         {value: 'TableForm', title: 'TableForm'},
                         {value: 'Form'     , title: 'Form'},

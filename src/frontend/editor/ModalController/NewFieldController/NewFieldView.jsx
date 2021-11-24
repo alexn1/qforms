@@ -23,9 +23,9 @@ class NewFieldView extends ReactComponent {
                 <h4 className="modal-title">New Field</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="class">Class</label>
-                    <ComboBox id="class" classList={['form-control']} items={[
+                    <ComboBox id="class" items={[
                         {value: 'TextBoxField', title: 'TextBoxField'},
                         {value: 'ComboBoxField', title: 'ComboBoxField'},
                         {value: 'TextAreaField', title: 'TextAreaField'},
@@ -39,17 +39,17 @@ class NewFieldView extends ReactComponent {
                         {value: 'FileField', title: 'FileField'},
                     ]} onCreate={c => this.class = c}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="name">Name</label>
-                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="caption">Caption</label>
-                    <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                    <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="type">Type</label>
-                    <ComboBox id="type" classList={['form-control']} value={''} items={[
+                    <ComboBox id="type" value={''} items={[
                         {value: '', title: ''},
                         {value: 'string', title: 'string'},
                         {value: 'number', title: 'number'},

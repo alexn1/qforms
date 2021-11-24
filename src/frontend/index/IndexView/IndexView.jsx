@@ -13,13 +13,13 @@ class IndexView extends ReactComponent {
                                 <h4 className="modal-title">New Application</h4>
                             </div>
                             <div className="modal-body">
-                                <div className="form-group">
+                                <div>
                                     <label htmlFor="folderName">Folder Name</label>
-                                    <TextBox id="folderName" classList={['form-control']} onCreate={ctrl.onFolderNameCreate} onChange={ctrl.onFolderNameChange}/>
+                                    <TextBox id="folderName" onCreate={ctrl.onFolderNameCreate} onChange={ctrl.onFolderNameChange}/>
                                 </div>
-                                <div className="form-group">
+                                <div>
                                     <label htmlFor="appName">Application Name</label>
-                                    <TextBox id="appName" classList={['form-control']} onChange={ctrl.onAppNameChange}/>
+                                    <TextBox id="appName" onChange={ctrl.onAppNameChange}/>
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -51,10 +51,9 @@ class IndexView extends ReactComponent {
                             />
                         </div>
                         <div>
-                            <div className="form-group">
+                            <div>
                                 <ComboBox
                                     value={ctrl.currentAppEnv}
-                                    classList={['form-control']}
                                     items={ctrl.getEnvItems()}
                                     onChange={ctrl.onEnvChange}
                                 />

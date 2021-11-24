@@ -21,17 +21,17 @@ class NewPageView extends ReactComponent {
                 <h4 className="modal-title">New Page</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="name">Name</label>
-                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="caption">Caption</label>
-                    <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                    <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="startup">Startup</label>
-                    <ComboBox id="startup" classList={['form-control']} items={[
+                    <ComboBox id="startup" items={[
                         {value: 'false', title: 'false'},
                         {value: 'true', title: 'true'}
                     ]} onCreate={c => this.startup = c}/>

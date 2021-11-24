@@ -17,9 +17,9 @@ class NewTableView extends ReactComponent {
                 <h4 className="modal-title">New Table</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="tableName">Name</label>
-                    <TextBox id="tableName" classList={['form-control']} onCreate={c => this.name = c}/>
+                    <TextBox id="tableName" onCreate={c => this.name = c}/>
                 </div>
             </div>
             <div className="modal-footer">

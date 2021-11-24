@@ -17,9 +17,9 @@ class ChangeClassView extends ReactComponent {
                 <h4 className="modal-title">Change Field Class</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="class">Class</label>
-                    <ComboBox id="class" classList={['form-control']} items={[
+                    <ComboBox id="class" items={[
                         {value: 'TextBoxField', title: 'TextBoxField'},
                         {value: 'ComboBoxField', title: 'ComboBoxField'},
                         {value: 'TextAreaField', title: 'TextAreaField'},

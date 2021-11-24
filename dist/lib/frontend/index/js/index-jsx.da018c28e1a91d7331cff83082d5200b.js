@@ -16,22 +16,16 @@ class IndexView extends ReactComponent {
       className: "modal-title"
     }, "New Application")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "folderName"
     }, "Folder Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "folderName",
-      classList: ['form-control'],
       onCreate: ctrl.onFolderNameCreate,
       onChange: ctrl.onFolderNameChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "appName"
     }, "Application Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "appName",
-      classList: ['form-control'],
       onChange: ctrl.onAppNameChange
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
@@ -69,11 +63,8 @@ class IndexView extends ReactComponent {
       },
       onDoubleClick: ctrl.run,
       onChange: ctrl.onAppChange
-    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement(ComboBox, {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ComboBox, {
       value: ctrl.currentAppEnv,
-      classList: ['form-control'],
       items: ctrl.getEnvItems(),
       onChange: ctrl.onEnvChange
     })), /*#__PURE__*/React.createElement(Button, {

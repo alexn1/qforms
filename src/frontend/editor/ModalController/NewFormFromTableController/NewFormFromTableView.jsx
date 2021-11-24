@@ -26,28 +26,28 @@ class NewFormFromTableView extends ReactComponent {
                 <h4 className="modal-title">New Form</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="table">Table</label>
-                    <TextBox id="table" classList={['form-control']} disabled={true} value={tableController.model.getName()}/>
+                    <TextBox id="table" disabled={true} value={tableController.model.getName()}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="page">Page</label>
-                    <ComboBox id="page" classList={['form-control']} items={pages} value={pages[pages.length-1].value} onCreate={c => this.page = c}/>
+                    <ComboBox id="page" items={pages} value={pages[pages.length-1].value} onCreate={c => this.page = c}/>
             </div>
-            <div className="form-group">
+            <div>
                 <label htmlFor="class">Form Class</label>
-                <ComboBox id="class" classList={['form-control']} value={'TableForm'} items={[
+                <ComboBox id="class" value={'TableForm'} items={[
                     {value: 'RowForm', title: 'RowForm'},
                     {value: 'TableForm', title: 'TableForm'},
                 ]} onCreate={c => this.class = c}/>
             </div>
-            <div className="form-group">
+            <div>
                 <label htmlFor="name">Name</label>
-                <TextBox id="name" classList={['form-control']} value={ctrl.options.tableController.model.getName()} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                <TextBox id="name" value={ctrl.options.tableController.model.getName()} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
             </div>
-            <div className="form-group">
+            <div>
                 <label htmlFor="caption">Caption</label>
-                <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
             </div>
         </div>
         <div className="modal-footer">

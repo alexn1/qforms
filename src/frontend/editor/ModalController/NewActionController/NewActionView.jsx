@@ -19,13 +19,13 @@ class NewActionView extends ReactComponent {
                 <h4 className="modal-title">New Action</h4>
             </div>
             <div className="modal-body">
-                <div className="form-group">
+                <div>
                     <label htmlFor="name">Name</label>
-                    <TextBox id="name" classList={['form-control']} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="caption">Caption</label>
-                    <TextBox id="caption" classList={['form-control']} onCreate={c => this.caption = c} autocomplete={'off'}/>
+                    <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
                 </div>
             </div>
             <div className="modal-footer">

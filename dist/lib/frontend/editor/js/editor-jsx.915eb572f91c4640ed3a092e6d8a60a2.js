@@ -136,13 +136,10 @@ class ChangeClassView extends ReactComponent {
       className: "modal-title"
     }, "Change Field Class")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "class"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "class",
-      classList: ['form-control'],
       items: [{
         value: 'TextBoxField',
         title: 'TextBoxField'
@@ -226,23 +223,17 @@ class NewActionView extends ReactComponent {
       className: "modal-title"
     }, "New Action")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "caption"
     }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
       id: "caption",
-      classList: ['form-control'],
       onCreate: c => this.caption = c,
       autocomplete: 'off'
     }))), /*#__PURE__*/React.createElement("div", {
@@ -290,13 +281,10 @@ class NewColumnView extends ReactComponent {
       className: "modal-title"
     }, "New Column")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "columnName"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "columnName",
-      classList: ['form-control'],
       onCreate: c => this.name = c
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
@@ -345,23 +333,17 @@ class NewDataSourceView extends ReactComponent {
       className: "modal-title"
     }, "New Data Source")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'name',
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "class"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "class",
-      classList: ['form-control'],
       items: [{
         value: 'DataSource',
         title: 'DataSource'
@@ -424,13 +406,10 @@ class NewDatabaseView extends ReactComponent {
       className: "modal-title"
     }, "New Database")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "class"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: 'class',
-      classList: ['form-control'],
       items: [{
         value: 'MySqlDatabase',
         title: 'MySqlDatabase'
@@ -440,53 +419,38 @@ class NewDatabaseView extends ReactComponent {
       }],
       onCreate: c => this.class = c,
       value: 'PostgreSqlDatabase'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'name',
-      classList: ['form-control'],
       value: 'default',
       onCreate: c => this.name = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "host"
     }, "Host"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'host',
-      classList: ['form-control'],
       value: 'localhost',
       onCreate: c => this.host = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "database"
     }, "Database"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'database',
-      classList: ['form-control'],
       value: 'test',
       onCreate: c => this.database = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "user"
     }, "User"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'user',
-      classList: ['form-control'],
       value: 'test',
       onCreate: c => this.user = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "user"
     }, "Password"), /*#__PURE__*/React.createElement(TextBox, {
       id: 'password',
-      classList: ['form-control'],
       value: '123qwe',
       onCreate: c => this.password = c,
       autocomplete: 'off'
@@ -539,13 +503,10 @@ class NewFieldView extends ReactComponent {
       className: "modal-title"
     }, "New Field")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "class"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "class",
-      classList: ['form-control'],
       items: [{
         value: 'TextBoxField',
         title: 'TextBoxField'
@@ -581,32 +542,23 @@ class NewFieldView extends ReactComponent {
         title: 'FileField'
       }],
       onCreate: c => this.class = c
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "caption"
     }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
       id: "caption",
-      classList: ['form-control'],
       onCreate: c => this.caption = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "type"
     }, "Type"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "type",
-      classList: ['form-control'],
       value: '',
       items: [{
         value: '',
@@ -677,32 +629,23 @@ class NewFormView extends ReactComponent {
       className: "modal-title"
     }, "New Form")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "caption"
     }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
       id: "caption",
-      classList: ['form-control'],
       onCreate: c => this.caption = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "formClass"
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "formClass",
-      classList: ['form-control'],
       value: 'TableForm',
       items: [{
         value: 'RowForm',
@@ -772,32 +715,23 @@ class NewFormFromTableView extends ReactComponent {
       className: "modal-title"
     }, "New Form")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "table"
     }, "Table"), /*#__PURE__*/React.createElement(TextBox, {
       id: "table",
-      classList: ['form-control'],
       disabled: true,
       value: tableController.model.getName()
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "page"
     }, "Page"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "page",
-      classList: ['form-control'],
       items: pages,
       value: pages[pages.length - 1].value,
       onCreate: c => this.page = c
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "class"
     }, "Form Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "class",
-      classList: ['form-control'],
       value: 'TableForm',
       items: [{
         value: 'RowForm',
@@ -807,24 +741,18 @@ class NewFormFromTableView extends ReactComponent {
         title: 'TableForm'
       }],
       onCreate: c => this.class = c
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       value: ctrl.options.tableController.model.getName(),
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "caption"
     }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
       id: "caption",
-      classList: ['form-control'],
       onCreate: c => this.caption = c,
       autocomplete: 'off'
     }))), /*#__PURE__*/React.createElement("div", {
@@ -872,13 +800,10 @@ class NewKeyColumnView extends ReactComponent {
       className: "modal-title"
     }, "New Key Column")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
@@ -931,32 +856,23 @@ class NewPageView extends ReactComponent {
       className: "modal-title"
     }, "New Page")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "caption"
     }, "Caption"), /*#__PURE__*/React.createElement(TextBox, {
       id: "caption",
-      classList: ['form-control'],
       onCreate: c => this.caption = c,
       autocomplete: 'off'
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "startup"
     }, "Startup"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "startup",
-      classList: ['form-control'],
       items: [{
         value: 'false',
         title: 'false'
@@ -1010,13 +926,10 @@ class NewParamView extends ReactComponent {
       className: "modal-title"
     }, "New Param")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "name"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "name",
-      classList: ['form-control'],
       onCreate: c => this.name = c,
       autocomplete: 'off',
       autoFocus: true
@@ -1065,13 +978,10 @@ class NewTableView extends ReactComponent {
       className: "modal-title"
     }, "New Table")), /*#__PURE__*/React.createElement("div", {
       className: "modal-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/React.createElement("label", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "tableName"
     }, "Name"), /*#__PURE__*/React.createElement(TextBox, {
       id: "tableName",
-      classList: ['form-control'],
       onCreate: c => this.name = c
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
