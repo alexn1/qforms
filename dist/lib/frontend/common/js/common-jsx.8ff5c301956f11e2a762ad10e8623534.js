@@ -2061,6 +2061,85 @@ class Tab extends ReactComponent {
 window.QForms.Tab = Tab;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class Tab2 extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onLiMouseDown", e => {
+      // console.log('Tab.onLiMouseDown', e.target);
+      if (e.target.classList.contains('close')) return;
+      const i = parseInt(e.currentTarget.dataset.i);
+
+      if (this.props.getActive) {
+        if (this.props.onTabMouseDown) this.props.onTabMouseDown(i);
+      } else {
+        if (i !== this.getActive()) {
+          this.selectTab(i);
+        }
+      }
+    });
+
+    _defineProperty(this, "onLiClick", e => {
+      // console.log('Tab.onLiClick', e.target);
+      if (e.target.classList.contains('close')) {
+        const i = parseInt(e.currentTarget.dataset.i); // console.log('close tab:', i);
+
+        if (this.props.onTabClose) this.props.onTabClose(i);
+      }
+    });
+
+    this.state = {
+      active: 0
+    };
+  }
+
+  getActive() {
+    if (this.props.getActive) return this.props.getActive();
+    return this.state.active;
+  }
+
+  selectTab(i) {
+    if (i === this.getActive()) return;
+    const start = Date.now();
+    this.setState({
+      active: i
+    }, () => console.log('selectTab time:', Date.now() - start));
+  }
+
+  renderTitles() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("li", {
+      key: tab.name,
+      className: i === this.getActive() ? 'active' : null,
+      onMouseDown: this.onLiMouseDown,
+      onClick: this.onLiClick,
+      "data-i": i
+    }, /*#__PURE__*/React.createElement("span", null, tab.title), this.props.canClose && /*#__PURE__*/React.createElement("span", {
+      className: "close"
+    }, "\xD7")));
+  }
+
+  renderContents() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("div", {
+      key: tab.name,
+      className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`
+    }, tab.content));
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("ul", {
+      className: `${this.getCssBlockName()}__buttons`
+    }, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__pages`
+    }, this.props.tabs && this.renderContents()));
+  }
+
+}
+
+window.QForms.Tab = Tab;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class TextArea extends ReactComponent {
   constructor(props) {
     // console.log('TextArea.constructor', props);

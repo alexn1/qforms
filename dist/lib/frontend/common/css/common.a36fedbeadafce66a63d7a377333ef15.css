@@ -643,6 +643,60 @@ table.DatePicker td.selected {
   border-top: 3px solid #398bce;
 }
 
+.Tab2 {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab2__buttons {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab2__buttons > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab2__buttons > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab2__buttons > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab2__buttons > li.active {
+  background-color: white;
+}
+.Tab2__page {
+  display: none;
+}
+.Tab2__page.active {
+  display: block;
+}
+.Tab2.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab2.Tab-blue > ul > li.active {
+  background-color: #398bce;
+}
+.Tab2.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab2.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid #398bce;
+}
+
 .Tooltip {
   display: inline-block;
   position: relative;
