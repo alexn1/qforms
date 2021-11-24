@@ -185,6 +185,12 @@ table.DatePicker td.selected {
 .DropdownButton__item:hover svg {
   fill: white;
 }
+.DropdownButton__item.disabled {
+  color: #aaa;
+}
+.DropdownButton__item.disabled svg {
+  fill: #aaa;
+}
 
 .DropdownDatePicker {
   position: relative;
