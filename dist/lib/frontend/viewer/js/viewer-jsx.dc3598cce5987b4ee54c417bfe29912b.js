@@ -143,20 +143,15 @@ class ImageDialogView extends View {
 class ModelView extends View {
   getActionsForDropdownButton() {
     return this.props.ctrl.getModel().getCol('actions').map(data => {
-      if (this.renderActionIcon) {
-        return {
-          name: Model.getName(data),
-          title: [/*#__PURE__*/React.createElement("div", {
-            key: 'icon'
-          }, this.renderActionIcon(Model.getName(data))), /*#__PURE__*/React.createElement("div", {
-            key: 'title'
-          }, Model.getAttr(data, 'caption'))]
-        };
-      }
-
+      const actionName = Model.getName(data);
       return {
-        name: Model.getName(data),
-        title: Model.getAttr(data, 'caption')
+        name: actionName,
+        title: this.renderActionIcon ? [/*#__PURE__*/React.createElement("div", {
+          key: 'icon'
+        }, this.renderActionIcon(actionName)), /*#__PURE__*/React.createElement("div", {
+          key: 'title'
+        }, Model.getAttr(data, 'caption'))] : Model.getAttr(data, 'caption'),
+        enabled: this.getCtrl().isActionEnabled(actionName)
       };
     });
   }
@@ -1095,8 +1090,7 @@ class TableFormView extends FormView {
     }, /*#__PURE__*/React.createElement(RefreshIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().form.refresh)), ctrl.model.hasActions() && /*#__PURE__*/React.createElement(DropdownButton, {
       classList: ['toolbar-dropdown-button'],
       actions: this.getActionsForDropdownButton(),
-      onClick: this.onActionsClick,
-      enabled: ctrl.isRowSelected()
+      onClick: this.onActionsClick
     }, /*#__PURE__*/React.createElement(MoreVertIcon, null)));
   }
 

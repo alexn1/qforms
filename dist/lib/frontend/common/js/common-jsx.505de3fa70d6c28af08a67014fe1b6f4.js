@@ -915,7 +915,7 @@ class DropdownButton extends ReactComponent {
       className: `${this.getCssBlockName()}__dropdown`,
       onMouseDown: this.onUlMouseDown
     }, this.props.actions && this.props.actions.map(action => /*#__PURE__*/React.createElement("li", {
-      className: `${this.getCssBlockName()}__item`,
+      className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`,
       key: action.name,
       "data-action": action.name,
       onClick: this.onLiClick

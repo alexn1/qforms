@@ -43,7 +43,6 @@ class TableFormView extends FormView {
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
-                        enabled={ctrl.isRowSelected()}
                     >
                         <MoreVertIcon/>
                     </DropdownButton>
