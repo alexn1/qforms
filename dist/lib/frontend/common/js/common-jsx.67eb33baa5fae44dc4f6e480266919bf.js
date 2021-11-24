@@ -2105,7 +2105,7 @@ class Tab2 extends ReactComponent {
   renderTitles() {
     return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("li", {
       key: tab.name,
-      className: i === this.getActive() ? 'active' : null,
+      className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`,
       onMouseDown: this.onLiMouseDown,
       onClick: this.onLiClick,
       "data-i": i
@@ -2117,7 +2117,7 @@ class Tab2 extends ReactComponent {
   renderContents() {
     return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("div", {
       key: tab.name,
-      className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`
+      className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}`
     }, tab.content));
   }
 

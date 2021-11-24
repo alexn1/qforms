@@ -723,17 +723,18 @@ table.DatePicker td.selected {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 100%;
-  flex-shrink: 0;
+  display: flex;
 }
-.Tab2__buttons > li {
-  float: left;
+.Tab2__button {
   background-color: #eee;
   margin-right: 1px;
   /*border-radius: 3px 3px 0 0;*/
   cursor: pointer;
 }
-.Tab2__buttons > li > span {
+.Tab2__button.active {
+  background-color: white;
+}
+.Tab2__button > span {
   margin: 5px 10px 0 10px;
   display: inline-block;
   max-width: 300px;
@@ -742,11 +743,8 @@ table.DatePicker td.selected {
   text-overflow: ellipsis;
   -moz-user-select: none;
 }
-.Tab2__buttons > li > span.close {
+.Tab2__button > span.close {
   margin: 3px 10px 3px 0;
-}
-.Tab2__buttons > li.active {
-  background-color: white;
 }
 .Tab2__page {
   display: none;

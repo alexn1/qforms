@@ -11,29 +11,29 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 100%;
-  flex-shrink: 0;
-  > li {
-    float:left;
-    background-color: #eee;
-    margin-right: 1px;
-    /*border-radius: 3px 3px 0 0;*/
-    cursor: pointer;
-    > span {
-      margin          : 5px 10px 0 10px;
-      display         : inline-block;
-      max-width       : 300px;
-      overflow        : hidden;
-      white-space     : nowrap;
-      text-overflow   : ellipsis;
-      -moz-user-select: none;
-    }
-    > span.close {
-      margin: 3px 10px 3px 0;
-    }
-  }
-  > li.active {
+  display: flex;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Tab2__button {
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+  &.active {
     background-color: white;
+  }
+  > span {
+    margin          : 5px 10px 0 10px;
+    display         : inline-block;
+    max-width       : 300px;
+    overflow        : hidden;
+    white-space     : nowrap;
+    text-overflow   : ellipsis;
+    -moz-user-select: none;
+  }
+  > span.close {
+    margin: 3px 10px 3px 0;
   }
 }
 
@@ -53,7 +53,7 @@
   > li.active {
     background-color: @activeColor;
     > span {
-      color:white;
+      color: white;
     }
   }
 }

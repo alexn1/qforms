@@ -39,22 +39,23 @@ class Tab2 extends ReactComponent {
         return this.props.tabs.map((tab, i) =>
             <li
                 key={tab.name}
-                className={i === this.getActive() ? 'active' : null}
+                className={`${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`}
                 onMouseDown={this.onLiMouseDown}
                 onClick={this.onLiClick}
                 data-i={i}
             >
                 <span>{tab.title}</span>
                 {this.props.canClose &&
-                <span className="close">&times;</span>
+                    <span className="close">&times;</span>
                 }
             </li>);
     }
     renderContents() {
         return this.props.tabs.map((tab, i) =>
-            <div key={tab.name} className={`${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`}>
+            <div key={tab.name} className={`${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}`}>
                 {tab.content}
-            </div>);
+            </div>
+        );
     }
     render() {
         return (
