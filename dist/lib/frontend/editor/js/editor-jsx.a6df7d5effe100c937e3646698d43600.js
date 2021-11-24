@@ -234,7 +234,8 @@ class NewActionView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -587,7 +588,8 @@ class NewFieldView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -682,7 +684,8 @@ class NewFormView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -812,7 +815,8 @@ class NewFormFromTableView extends ReactComponent {
       classList: ['form-control'],
       value: ctrl.options.tableController.model.getName(),
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -933,7 +937,8 @@ class NewPageView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     })), /*#__PURE__*/React.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/React.createElement("label", {
@@ -1011,7 +1016,8 @@ class NewParamView extends ReactComponent {
       id: "name",
       classList: ['form-control'],
       onCreate: c => this.name = c,
-      autocomplete: 'off'
+      autocomplete: 'off',
+      autoFocus: true
     }))), /*#__PURE__*/React.createElement("div", {
       className: "modal-footer"
     }, /*#__PURE__*/React.createElement("button", {

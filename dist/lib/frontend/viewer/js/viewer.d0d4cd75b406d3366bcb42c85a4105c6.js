@@ -3649,12 +3649,14 @@ class ComboBoxField extends Field {
         if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
         if (this.getForm().getDataSource(name)) {
             return this.getForm().getDataSource(name);
-        } else if (this.getPage().getDataSource(name)) {
+        }
+        if (this.getPage().getDataSource(name)) {
             return this.getPage().getDataSource(name);
-        } else if (this.getApp().getDataSource(name)) {
+        }
+        if (this.getApp().getDataSource(name)) {
             return this.getApp().getDataSource(name);
         }
-        return null;
+        throw new Error(`${this.getFullName()}: no data source: ${name}`);
     }
 
     findRowByRawValue(rawValue) {
