@@ -37,32 +37,33 @@ class Tab extends ReactComponent {
 
     renderTitles() {
         return this.props.tabs.map((tab, i) =>
-        <li
-            key={tab.name}
-            className={i === this.getActive() ? 'active' : null}
-            onMouseDown={this.onLiMouseDown}
-            onClick={this.onLiClick}
-            data-i={i}
-        >
-            <span>{tab.title}</span>
-            {this.props.canClose &&
+            <li
+                key={tab.name}
+                className={i === this.getActive() ? 'active' : null}
+                onMouseDown={this.onLiMouseDown}
+                onClick={this.onLiClick}
+                data-i={i}
+            >
+                <span>{tab.title}</span>
+                {this.props.canClose &&
                 <span className="close">&times;</span>
-            }
-        </li>);
+                }
+            </li>);
     }
     renderContents() {
         return this.props.tabs.map((tab, i) =>
-        <div key={tab.name} className={`${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`}>
-            {tab.content}
-        </div>);
+            <div key={tab.name} className={i === this.getActive() ? 'active' : null}>
+                {tab.content}
+            </div>);
     }
     render() {
+
         return (
             <div className={this.getCssClassNames()}>
-                <ul className={`${this.getCssBlockName()}__buttons`}>
+                <ul>
                     {this.props.tabs && this.renderTitles()}
                 </ul>
-                <div className={`${this.getCssBlockName()}__pages`}>
+                <div>
                     {this.props.tabs && this.renderContents()}
                 </div>
             </div>
@@ -71,3 +72,6 @@ class Tab extends ReactComponent {
 }
 
 window.QForms.Tab = Tab;
+
+
+

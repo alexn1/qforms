@@ -594,21 +594,21 @@ table.DatePicker td.selected {
   flex-direction: column;
   /*background-color: lightcoral;*/
 }
-.Tab__buttons {
+.Tab > ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   width: 100%;
   flex-shrink: 0;
 }
-.Tab__buttons > li {
+.Tab > ul > li {
   float: left;
   background-color: #eee;
   margin-right: 1px;
   /*border-radius: 3px 3px 0 0;*/
   cursor: pointer;
 }
-.Tab__buttons > li > span {
+.Tab > ul > li > span {
   margin: 5px 10px 0 10px;
   display: inline-block;
   max-width: 300px;
@@ -617,16 +617,87 @@ table.DatePicker td.selected {
   text-overflow: ellipsis;
   -moz-user-select: none;
 }
-.Tab__buttons > li > span.close {
+.Tab > ul > li > span.close {
   margin: 3px 10px 3px 0;
 }
-.Tab__buttons > li.active {
+.Tab > ul > li.active {
   background-color: white;
 }
-.Tab__page {
-  display: none;
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
 }
-.Tab__page.active {
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
+  display: block;
+}
+.Tab.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab.Tab-blue > ul > li.active {
+  background-color: #398bce;
+}
+.Tab.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid #398bce;
+}
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab > ul > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab > ul > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab > ul > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab > ul > li.active {
+  background-color: white;
+}
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
+}
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
   display: block;
 }
 .Tab.Tab-blue > ul > li {

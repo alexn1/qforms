@@ -5,43 +5,124 @@
   display: flex;
   flex-direction: column;
   /*background-color: lightcoral;*/
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Tab__buttons {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  flex-shrink: 0;
-  > li {
-    float:left;
-    background-color: #eee;
-    margin-right: 1px;
-    /*border-radius: 3px 3px 0 0;*/
-    cursor: pointer;
-    > span {
-      margin          : 5px 10px 0 10px;
-      display         : inline-block;
-      max-width       : 300px;
-      overflow        : hidden;
-      white-space     : nowrap;
-      text-overflow   : ellipsis;
-      -moz-user-select: none;
+  > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    //float:left;
+    width: 100%;
+    flex-shrink: 0;
+    > li {
+      float:left;
+      background-color: #eee;
+      margin-right: 1px;
+      /*border-radius: 3px 3px 0 0;*/
+      cursor: pointer;
+      > span {
+        margin          : 5px 10px 0 10px;
+        display         : inline-block;
+        max-width       : 300px;
+        overflow        : hidden;
+        white-space     : nowrap;
+        text-overflow   : ellipsis;
+        -moz-user-select: none;
+      }
+      > span.close {
+        margin: 3px 10px 3px 0;
+      }
     }
-    > span.close {
-      margin: 3px 10px 3px 0;
+    > li.active {
+      background-color: white;
     }
   }
-  > li.active {
-    background-color: white;
+  > div {
+    clear: left;                 // for those who not supports flexbox
+    flex: auto; // 1 1 auto
+    position: relative;         // for chrome
+    > div {
+      display: none;
+      height: 100%;
+      width: 100%;            // for chrome
+      position: absolute;     // for chrome
+      /*background: lightblue;*/
+    }
+    > div.active {
+      display: block;
+    }
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Tab__page {
-  display: none;
-  &.active {
-    display: block;
+.Tab.Tab-blue > ul {
+  > li {
+    border-radius: 3px 3px 0 0;
+  }
+  > li.active {
+    background-color: @activeColor;
+    > span {
+      color:white;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Tab.Tab-blue > div {
+  > div {
+    box-sizing: border-box;
+    border-top: 3px solid @activeColor;
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+  > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    //float:left;
+    width: 100%;
+    flex-shrink: 0;
+    > li {
+      float:left;
+      background-color: #eee;
+      margin-right: 1px;
+      /*border-radius: 3px 3px 0 0;*/
+      cursor: pointer;
+      > span {
+        margin          : 5px 10px 0 10px;
+        display         : inline-block;
+        max-width       : 300px;
+        overflow        : hidden;
+        white-space     : nowrap;
+        text-overflow   : ellipsis;
+        -moz-user-select: none;
+      }
+      > span.close {
+        margin: 3px 10px 3px 0;
+      }
+    }
+    > li.active {
+      background-color: white;
+    }
+  }
+  > div {
+    clear: left;                 // for those who not supports flexbox
+    flex: auto; // 1 1 auto
+    position: relative;         // for chrome
+    > div {
+      display: none;
+      height: 100%;
+      width: 100%;            // for chrome
+      position: absolute;     // for chrome
+      /*background: lightblue;*/
+    }
+    > div.active {
+      display: block;
+    }
   }
 }
 

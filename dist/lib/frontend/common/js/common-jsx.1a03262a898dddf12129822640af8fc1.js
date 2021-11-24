@@ -2042,18 +2042,14 @@ class Tab extends ReactComponent {
   renderContents() {
     return this.props.tabs.map((tab, i) => /*#__PURE__*/React.createElement("div", {
       key: tab.name,
-      className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : null}`
+      className: i === this.getActive() ? 'active' : null
     }, tab.content));
   }
 
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
-    }, /*#__PURE__*/React.createElement("ul", {
-      className: `${this.getCssBlockName()}__buttons`
-    }, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssBlockName()}__pages`
-    }, this.props.tabs && this.renderContents()));
+    }, /*#__PURE__*/React.createElement("ul", null, this.props.tabs && this.renderTitles()), /*#__PURE__*/React.createElement("div", null, this.props.tabs && this.renderContents()));
   }
 
 }
