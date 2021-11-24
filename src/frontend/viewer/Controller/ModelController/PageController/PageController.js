@@ -1,18 +1,17 @@
 class PageController extends ModelController {
-
-    static create(model, parent, id) {
-        // console.log('PageController.create', model.getName());
-        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
-        const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id);
-    }
-
     constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
         super(model, parent);
         if (!id) throw new Error('no id');
         this.id = id;
         this.forms = [];
+    }
+
+    static create(model, parent, id) {
+        // console.log('PageController.create', model.getName());
+        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
+        const Class = CustomClass ? CustomClass : PageController;
+        return new Class(model, parent, id);
     }
 
     init() {
