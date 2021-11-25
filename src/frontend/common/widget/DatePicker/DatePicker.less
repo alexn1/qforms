@@ -1,36 +1,14 @@
-table.DatePicker {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker {
   border-spacing: 0;
   display: none;
   &.visible {
     display: block;
   }
 
-  caption, td, th  {
+  th, td {
     border-bottom: solid 1px white;
     border-right: solid 1px white;
-  }
-
-  > caption {
-    background-color: #b9def0;
-    padding: 6px;
-    cursor: default;
-    > div {
-      display: flex;
-      justify-content: space-between;
-      > a {
-        visibility: hidden;
-      }
-      > a.enabled {
-        visibility: visible;
-      }
-      > a:hover {
-        background-color: #eee;
-        cursor: pointer;
-      }
-    }
-  }
-
-  th, td {
     padding: 6px;
     text-align: center;
     cursor: default;
@@ -45,7 +23,6 @@ table.DatePicker {
   }
 
   td {
-    //background-color: #eee;
     background-color: white;
     &.out {
       color: #bbb;
@@ -55,7 +32,6 @@ table.DatePicker {
     }
     &.selectable {
       cursor: pointer;
-      //background-color: #f7e1b5;
       background-color: #eee;
       &:hover {
         background-color: #ff9e59;
@@ -63,6 +39,31 @@ table.DatePicker {
     }
     &.selected {
       background-color: #eea236;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__caption {
+  background-color: #b9def0;
+  padding: 6px;
+  cursor: default;
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__caption-content {
+  display: flex;
+  justify-content: space-between;
+  > a {
+    visibility: hidden;
+    &.enabled {
+      visibility: visible;
+    }
+    &:hover {
+      background-color: #eee;
+      cursor: pointer;
     }
   }
 }

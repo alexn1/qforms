@@ -155,27 +155,27 @@ class DatePicker extends ReactComponent {
                 onClick={this.onClick}
                 onMouseDown={this.onMouseDown}
             >
-                <caption>
-                    <div>
+                <caption className={`${this.getCssBlockName()}__caption`}>
+                    <div className={`${this.getCssBlockName()}__caption-content`}>
                         <a className={`prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
                         <span>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
                         <a className={'next enabled'}> &gt; </a>
                     </div>
                 </caption>
                 <thead>
-                <tr>
-                    <th>Пн</th>
-                    <th>Вт</th>
-                    <th>Ср</th>
-                    <th>Чт</th>
-                    <th>Пт</th>
-                    <th className="weekend">Сб</th>
-                    <th className="weekend">Вс</th>
-                </tr>
+                    <tr>
+                        <th>Пн</th>
+                        <th>Вт</th>
+                        <th>Ср</th>
+                        <th>Чт</th>
+                        <th>Пт</th>
+                        <th className="weekend">Сб</th>
+                        <th className="weekend">Вс</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    {[0, 1, 2, 3, 4, 5].map(i => (<tr key={i}>
-                        {[0, 1, 2, 3, 4, 5, 6].map(j => {
+                    {Array.from(Array(6).keys()).map(i => (<tr key={i}>
+                        {Array.from(Array(7).keys()).map(j => {
                             const classList = [];
                             if (j === 5 || j === 6) classList.push('weekend');
                             if (date.getTime() === today.getTime()) classList.push('today');

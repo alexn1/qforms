@@ -91,69 +91,67 @@ svg {
   width: 200px;
 }
 
-table.DatePicker {
+.DatePicker {
   border-spacing: 0;
   display: none;
 }
-table.DatePicker.visible {
+.DatePicker.visible {
   display: block;
 }
-table.DatePicker caption,
-table.DatePicker td,
-table.DatePicker th {
+.DatePicker th,
+.DatePicker td {
   border-bottom: solid 1px white;
   border-right: solid 1px white;
-}
-table.DatePicker > caption {
-  background-color: #b9def0;
-  padding: 6px;
-  cursor: default;
-}
-table.DatePicker > caption > div {
-  display: flex;
-  justify-content: space-between;
-}
-table.DatePicker > caption > div > a {
-  visibility: hidden;
-}
-table.DatePicker > caption > div > a.enabled {
-  visibility: visible;
-}
-table.DatePicker > caption > div > a:hover {
-  background-color: #eee;
-  cursor: pointer;
-}
-table.DatePicker th,
-table.DatePicker td {
   padding: 6px;
   text-align: center;
   cursor: default;
 }
-table.DatePicker th {
+.DatePicker th {
   background-color: #b9def0;
   font-weight: normal;
 }
-table.DatePicker th.weekend {
+.DatePicker th.weekend {
   color: red;
 }
-table.DatePicker td {
+.DatePicker td {
   background-color: white;
 }
-table.DatePicker td.out {
+.DatePicker td.out {
   color: #bbb;
 }
-table.DatePicker td.today {
+.DatePicker td.today {
   border: solid 1px #2aabd2;
 }
-table.DatePicker td.selectable {
+.DatePicker td.selectable {
   cursor: pointer;
   background-color: #eee;
 }
-table.DatePicker td.selectable:hover {
+.DatePicker td.selectable:hover {
   background-color: #ff9e59;
 }
-table.DatePicker td.selected {
+.DatePicker td.selected {
   background-color: #eea236;
+}
+.DatePicker__caption {
+  background-color: #b9def0;
+  padding: 6px;
+  cursor: default;
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+}
+.DatePicker__caption-content {
+  display: flex;
+  justify-content: space-between;
+}
+.DatePicker__caption-content > a {
+  visibility: hidden;
+}
+.DatePicker__caption-content > a.enabled {
+  visibility: visible;
+}
+.DatePicker__caption-content > a:hover {
+  background-color: #eee;
+  cursor: pointer;
 }
 
 .DropdownButton {

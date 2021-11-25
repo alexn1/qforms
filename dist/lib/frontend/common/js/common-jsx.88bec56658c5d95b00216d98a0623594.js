@@ -817,7 +817,11 @@ class DatePicker extends ReactComponent {
       className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`,
       onClick: this.onClick,
       onMouseDown: this.onMouseDown
-    }, /*#__PURE__*/React.createElement("caption", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
+    }, /*#__PURE__*/React.createElement("caption", {
+      className: `${this.getCssBlockName()}__caption`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__caption-content`
+    }, /*#__PURE__*/React.createElement("a", {
       className: `prev ${this.isPrevAllowed() ? 'enabled' : ''}`
     }, " < "), /*#__PURE__*/React.createElement("span", null, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("a", {
       className: 'next enabled'
@@ -825,9 +829,9 @@ class DatePicker extends ReactComponent {
       className: "weekend"
     }, "\u0421\u0431"), /*#__PURE__*/React.createElement("th", {
       className: "weekend"
-    }, "\u0412\u0441"))), /*#__PURE__*/React.createElement("tbody", null, [0, 1, 2, 3, 4, 5].map(i => /*#__PURE__*/React.createElement("tr", {
+    }, "\u0412\u0441"))), /*#__PURE__*/React.createElement("tbody", null, Array.from(Array(6).keys()).map(i => /*#__PURE__*/React.createElement("tr", {
       key: i
-    }, [0, 1, 2, 3, 4, 5, 6].map(j => {
+    }, Array.from(Array(7).keys()).map(j => {
       const classList = [];
       if (j === 5 || j === 6) classList.push('weekend');
       if (date.getTime() === today.getTime()) classList.push('today');
