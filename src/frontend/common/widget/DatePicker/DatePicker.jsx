@@ -19,8 +19,14 @@ class DatePicker extends ReactComponent {
             'Декабрь'
         ];
     }
+
     static createDateFromArr(arr) {
         return new Date(arr[0], arr[1], arr[2]);
+    }
+
+    isVisible() {
+        if (this.props.visible === false) return false;
+        return true;
     }
 
     calcSelectedMonth() {
@@ -101,6 +107,7 @@ class DatePicker extends ReactComponent {
             return this.onDateClick(e.target);
         }
     }
+
     onMouseDown = e => {
         // console.log('DatePicker.onMouseDown');
         if (this.props.onMouseDown) {
@@ -144,12 +151,12 @@ class DatePicker extends ReactComponent {
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         return (
-            <table className={this.getCssClassNames()}
-                style={this.props.visible === false ? {display: 'none'} : {display: 'block'}}
-                   cellSpacing="0"
-                   cellPadding="0"
-                   onClick={this.onClick}
-                   onMouseDown={this.onMouseDown}
+            <table className={`${this.getCssClassNames()}`}
+                style={this.isVisible() === false ? {display: 'none'} : {display: 'block'}}
+                cellSpacing="0"
+                cellPadding="0"
+                onClick={this.onClick}
+                onMouseDown={this.onMouseDown}
             >
                 <caption>
                     <div>

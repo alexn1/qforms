@@ -702,6 +702,11 @@ class DatePicker extends ReactComponent {
     return new Date(arr[0], arr[1], arr[2]);
   }
 
+  isVisible() {
+    if (this.props.visible === false) return false;
+    return true;
+  }
+
   calcSelectedMonth() {
     // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
     if (this.props.selectedDate) {
@@ -809,8 +814,8 @@ class DatePicker extends ReactComponent {
     const minDate = this.isMinDate() ? this.createMinDate() : null;
     const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
     return /*#__PURE__*/React.createElement("table", {
-      className: this.getCssClassNames(),
-      style: this.props.visible === false ? {
+      className: `${this.getCssClassNames()}`,
+      style: this.isVisible() === false ? {
         display: 'none'
       } : {
         display: 'block'
