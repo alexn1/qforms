@@ -157,20 +157,20 @@ class DatePicker extends ReactComponent {
             >
                 <caption className={`${this.getCssBlockName()}__caption`}>
                     <div className={`${this.getCssBlockName()}__caption-content`}>
-                        <a className={`prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
+                        <a className={`${this.getCssBlockName()}__caption-link prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
                         <span>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
-                        <a className={'next enabled'}> &gt; </a>
+                        <a className={`${this.getCssBlockName()}__caption-link next enabled`}> &gt; </a>
                     </div>
                 </caption>
                 <thead>
                     <tr>
-                        <th>Пн</th>
-                        <th>Вт</th>
-                        <th>Ср</th>
-                        <th>Чт</th>
-                        <th>Пт</th>
-                        <th className="weekend">Сб</th>
-                        <th className="weekend">Вс</th>
+                        <th className={`${this.getCssBlockName()}__th`}>Пн</th>
+                        <th className={`${this.getCssBlockName()}__th`}>Вт</th>
+                        <th className={`${this.getCssBlockName()}__th`}>Ср</th>
+                        <th className={`${this.getCssBlockName()}__th`}>Чт</th>
+                        <th className={`${this.getCssBlockName()}__th`}>Пт</th>
+                        <th className={`${this.getCssBlockName()}__th weekend`}>Сб</th>
+                        <th className={`${this.getCssBlockName()}__th weekend`}>Вс</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -186,12 +186,12 @@ class DatePicker extends ReactComponent {
                             const dataDate = JSON.stringify(DatePicker.dateToArray(date));
                             const style = this.props.getDateStyle ? this.props.getDateStyle(date) : undefined;
                             date.setDate(date.getDate() + 1);
-                            return (<td
+                            return <td
                                 key={text}
-                                className={classList.join(' ')}
+                                className={`${this.getCssBlockName()}__td  ${classList.join(' ')}`}
                                 style={style}
                                 data-date={dataDate}
-                            >{text}</td>);
+                            >{text}</td>;
                         })}
                     </tr>))}
                 </tbody>

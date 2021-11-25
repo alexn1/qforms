@@ -5,42 +5,6 @@
   &.visible {
     display: block;
   }
-
-  th, td {
-    border-bottom: solid 1px white;
-    border-right: solid 1px white;
-    padding: 6px;
-    text-align: center;
-    cursor: default;
-  }
-
-  th {
-    background-color: #b9def0;
-    font-weight: normal;
-    &.weekend {
-      color: red;
-    }
-  }
-
-  td {
-    background-color: white;
-    &.out {
-      color: #bbb;
-    }
-    &.today {
-      border: solid 1px #2aabd2;
-    }
-    &.selectable {
-      cursor: pointer;
-      background-color: #eee;
-      &:hover {
-        background-color: #ff9e59;
-      }
-    }
-    &.selected {
-      background-color: #eea236;
-    }
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,14 +20,56 @@
 .DatePicker__caption-content {
   display: flex;
   justify-content: space-between;
-  > a {
-    visibility: hidden;
-    &.enabled {
-      visibility: visible;
-    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__caption-link {
+  visibility: hidden;
+  &.enabled {
+    visibility: visible;
+  }
+  &:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__th {
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+  padding: 6px;
+  text-align: center;
+  cursor: default;
+  background-color: #b9def0;
+  font-weight: normal;
+  &.weekend {
+    color: red;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__td {
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+  padding: 6px;
+  text-align: center;
+  cursor: default;
+  background-color: white;
+  &.out {
+    color: #bbb;
+  }
+  &.today {
+    border: solid 1px #2aabd2;
+  }
+  &.selectable {
+    cursor: pointer;
+    background-color: #eee;
     &:hover {
-      background-color: #eee;
-      cursor: pointer;
+      background-color: #ff9e59;
     }
+  }
+  &.selected {
+    background-color: #eea236;
   }
 }

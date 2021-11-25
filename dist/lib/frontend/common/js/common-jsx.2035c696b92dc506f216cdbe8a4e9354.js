@@ -822,13 +822,23 @@ class DatePicker extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-content`
     }, /*#__PURE__*/React.createElement("a", {
-      className: `prev ${this.isPrevAllowed() ? 'enabled' : ''}`
+      className: `${this.getCssBlockName()}__caption-link prev ${this.isPrevAllowed() ? 'enabled' : ''}`
     }, " < "), /*#__PURE__*/React.createElement("span", null, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("a", {
-      className: 'next enabled'
-    }, " > "))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u041F\u043D"), /*#__PURE__*/React.createElement("th", null, "\u0412\u0442"), /*#__PURE__*/React.createElement("th", null, "\u0421\u0440"), /*#__PURE__*/React.createElement("th", null, "\u0427\u0442"), /*#__PURE__*/React.createElement("th", null, "\u041F\u0442"), /*#__PURE__*/React.createElement("th", {
-      className: "weekend"
+      className: `${this.getCssBlockName()}__caption-link next enabled`
+    }, " > "))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th`
+    }, "\u041F\u043D"), /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th`
+    }, "\u0412\u0442"), /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th`
+    }, "\u0421\u0440"), /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th`
+    }, "\u0427\u0442"), /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th`
+    }, "\u041F\u0442"), /*#__PURE__*/React.createElement("th", {
+      className: `${this.getCssBlockName()}__th weekend`
     }, "\u0421\u0431"), /*#__PURE__*/React.createElement("th", {
-      className: "weekend"
+      className: `${this.getCssBlockName()}__th weekend`
     }, "\u0412\u0441"))), /*#__PURE__*/React.createElement("tbody", null, Array.from(Array(6).keys()).map(i => /*#__PURE__*/React.createElement("tr", {
       key: i
     }, Array.from(Array(7).keys()).map(j => {
@@ -844,7 +854,7 @@ class DatePicker extends ReactComponent {
       date.setDate(date.getDate() + 1);
       return /*#__PURE__*/React.createElement("td", {
         key: text,
-        className: classList.join(' '),
+        className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`,
         style: style,
         "data-date": dataDate
       }, text);
