@@ -662,12 +662,13 @@ window.QForms.ComboBox = ComboBox;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // props
-//  visible boolean
-//  selectedDate array
-//  minDate array
+//  visible boolean true
+//  selectedDate array [2021, 0, 1]
+//  minDate array [2021, 0, 1]
 //  onMouseDown function
 //  onDateSelected function
 //  getDateStyle function
+//  selectToday boolean false
 class DatePicker extends ReactComponent {
   constructor(props) {
     // console.log('DatePicker.constructor', props);
@@ -844,7 +845,7 @@ class DatePicker extends ReactComponent {
     }, Array.from(Array(7).keys()).map(j => {
       const classList = [];
       if (j === 5 || j === 6) classList.push('weekend');
-      if (date.getTime() === today.getTime()) classList.push('today');
+      if (this.isSelectToday() && date.getTime() === today.getTime()) classList.push('today');
       if (date.getMonth() !== this.state.selectedMonth[1]) classList.push('out');
       if (!minDate) classList.push('selectable');else if (date.getTime() >= minDate.getTime()) classList.push('selectable');
       if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
@@ -859,6 +860,11 @@ class DatePicker extends ReactComponent {
         "data-date": dataDate
       }, text);
     })))));
+  }
+
+  isSelectToday() {
+    if (this.props.selectToday === false) return false;
+    return true;
   }
 
 }
