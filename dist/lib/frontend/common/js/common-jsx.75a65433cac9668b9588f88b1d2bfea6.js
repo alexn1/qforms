@@ -850,7 +850,7 @@ class DatePicker extends ReactComponent {
       if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
       const text = date.getDate().toString();
       const dataDate = JSON.stringify(DatePicker.dateToArray(date));
-      const style = this.props.getDateStyle ? this.props.getDateStyle(date) : undefined;
+      const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
       date.setDate(date.getDate() + 1);
       return /*#__PURE__*/React.createElement("td", {
         key: text,
