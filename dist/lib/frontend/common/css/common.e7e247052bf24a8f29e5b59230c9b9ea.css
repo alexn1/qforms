@@ -155,6 +155,10 @@ svg {
 .DatePicker__td.selected {
   background-color: #eea236;
 }
+.DatePicker__td.highlight {
+  background-color: blue;
+  color: white;
+}
 
 .DropdownButton {
   position: relative;

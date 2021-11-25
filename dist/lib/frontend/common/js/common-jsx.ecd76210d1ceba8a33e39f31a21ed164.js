@@ -669,6 +669,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //  onDateSelected function
 //  getDateStyle function
 //  selectToday boolean false
+//  highlightedDate array [2021, 0, 1]
 class DatePicker extends ReactComponent {
   constructor(props) {
     // console.log('DatePicker.constructor', props);
@@ -740,7 +741,7 @@ class DatePicker extends ReactComponent {
 
   createSelectedDate() {
     if (!this.isDateSelected()) throw new Error('date not selected');
-    return new Date(this.props.selectedDate[0], this.props.selectedDate[1], this.props.selectedDate[2]);
+    return new Date(...this.props.selectedDate);
   }
 
   isDateSelected() {
@@ -814,6 +815,7 @@ class DatePicker extends ReactComponent {
     const today = Helper.today();
     const minDate = this.isMinDate() ? this.createMinDate() : null;
     const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+    const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
     return /*#__PURE__*/React.createElement("table", {
       className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`,
       onClick: this.onClick,
@@ -849,6 +851,7 @@ class DatePicker extends ReactComponent {
       if (date.getMonth() !== this.state.selectedMonth[1]) classList.push('out');
       if (!minDate) classList.push('selectable');else if (date.getTime() >= minDate.getTime()) classList.push('selectable');
       if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
+      if (highlightedDate && highlightedDate.getTime() === date.getTime()) classList.push('highlight');
       const text = date.getDate().toString();
       const dataDate = JSON.stringify(DatePicker.dateToArray(date));
       const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
