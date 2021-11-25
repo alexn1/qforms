@@ -918,7 +918,7 @@ class DropdownButton extends ReactComponent {
       className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`,
       key: action.name,
       "data-action": action.name,
-      onClick: action.enabled ? this.onLiClick : null
+      onClick: action.enabled !== false ? this.onLiClick : null
     }, action.title))));
   }
 
