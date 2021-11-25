@@ -14,42 +14,48 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         }
         return ctrl.widget2.state.value !== '';
     }
+    renderDatePart() {
+        const ctrl = this.props.ctrl;
+        return <DropdownDatePicker
+            classList={[`${this.getCssBlockName()}__dropdown-date-picker`]}
+            onCreate={ctrl.onWidgetCreate}
+            value={ctrl.getValueForWidget()}
+            readOnly={!ctrl.isEditable()}
+            onChange={ctrl.onChange}
+            placeholder={ctrl.getPlaceholder()}
+            format={ctrl.model.getFormat()}
+            oldDates={this.props.oldDates}
+            getMinDate={this.props.getMinDate}
+        />;
+    }
+    renderTimePart() {
+        const ctrl = this.props.ctrl;
+        return <div className={`${this.getCssBlockName()}__time`}>
+            <TimeBox
+                classList={[`${this.getCssBlockName()}__time-box`]}
+                onCreate={ctrl.onView2Create}
+                readOnly={!ctrl.isEditable()}
+                value={ctrl.getValueForTime()}
+                onChange={ctrl.onChange2}
+                onBlur={ctrl.onBlur2}
+                placeholder={ctrl.getPlaceholder2()}
+            />
+            <div className={`${this.getCssBlockName()}__time-close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
+                <CloseIcon/>
+            </div>
+            <div className={`${this.getCssBlockName()}__time-icon`}>
+                <TimeIcon/>
+            </div>
+        </div>;
+    }
     render() {
         // console.log('RowFormDateTimeFieldView.render');
-        const ctrl = this.props.ctrl;
-        return (
-            <div className={`${this.getCssClassNames()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`}
-                 style={this.getStyle(ctrl.getRow())}>
-                <DropdownDatePicker
-                    classList={[`${this.getCssBlockName()}__dropdown-date-picker`]}
-                    onCreate={ctrl.onWidgetCreate}
-                    value={ctrl.getValueForWidget()}
-                    readOnly={!ctrl.isEditable()}
-                    onChange={ctrl.onChange}
-                    placeholder={ctrl.getPlaceholder()}
-                    format={ctrl.model.getFormat()}
-                    oldDates={this.props.oldDates}
-                    getMinDate={this.props.getMinDate}
-                />
-                <div className={`${this.getCssBlockName()}__time`}>
-                    <TimeBox
-                        classList={[`${this.getCssBlockName()}__time-box`]}
-                        onCreate={ctrl.onView2Create}
-                        readOnly={!ctrl.isEditable()}
-                        value={ctrl.getValueForTime()}
-                        onChange={ctrl.onChange2}
-                        onBlur={ctrl.onBlur2}
-                        placeholder={ctrl.getPlaceholder2()}
-                    />
-                    <div className={`${this.getCssBlockName()}__time-close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
-                        <CloseIcon/>
-                    </div>
-                    <div className={`${this.getCssBlockName()}__time-icon`}>
-                        <TimeIcon/>
-                    </div>
-                </div>
-            </div>
-        );
+        const ctrl = this.getCtrl();
+        const row = ctrl.getRow()
+        return <div className={`${this.getCssClassNames()} ${ctrl.state.value ? 'datetime' : 'date'}`} style={this.getStyle(row)}>
+            {this.renderDatePart()}
+            {this.renderTimePart()}
+        </div>;
     }
 }
 window.QForms.RowFormDateTimeFieldView = RowFormDateTimeFieldView;

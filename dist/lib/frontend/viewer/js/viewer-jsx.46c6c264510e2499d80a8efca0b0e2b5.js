@@ -414,13 +414,9 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     return ctrl.widget2.state.value !== '';
   }
 
-  render() {
-    // console.log('RowFormDateTimeFieldView.render');
+  renderDatePart() {
     const ctrl = this.props.ctrl;
-    return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} ${this.props.ctrl.state.value ? 'datetime' : 'date'}`,
-      style: this.getStyle(ctrl.getRow())
-    }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
+    return /*#__PURE__*/React.createElement(DropdownDatePicker, {
       classList: [`${this.getCssBlockName()}__dropdown-date-picker`],
       onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
@@ -430,7 +426,12 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       format: ctrl.model.getFormat(),
       oldDates: this.props.oldDates,
       getMinDate: this.props.getMinDate
-    }), /*#__PURE__*/React.createElement("div", {
+    });
+  }
+
+  renderTimePart() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__time`
     }, /*#__PURE__*/React.createElement(TimeBox, {
       classList: [`${this.getCssBlockName()}__time-box`],
@@ -445,7 +446,17 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       onMouseDown: this.onCloseDown
     }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__time-icon`
-    }, /*#__PURE__*/React.createElement(TimeIcon, null))));
+    }, /*#__PURE__*/React.createElement(TimeIcon, null)));
+  }
+
+  render() {
+    // console.log('RowFormDateTimeFieldView.render');
+    const ctrl = this.getCtrl();
+    const row = ctrl.getRow();
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} ${ctrl.state.value ? 'datetime' : 'date'}`,
+      style: this.getStyle(row)
+    }, this.renderDatePart(), this.renderTimePart());
   }
 
 }
