@@ -91,6 +91,13 @@ svg {
   width: 200px;
 }
 
+table.DatePicker {
+  border-spacing: 0;
+  display: none;
+}
+table.DatePicker.visible {
+  display: block;
+}
 table.DatePicker caption,
 table.DatePicker td,
 table.DatePicker th {

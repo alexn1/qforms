@@ -814,14 +814,7 @@ class DatePicker extends ReactComponent {
     const minDate = this.isMinDate() ? this.createMinDate() : null;
     const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
     return /*#__PURE__*/React.createElement("table", {
-      className: `${this.getCssClassNames()}`,
-      style: this.isVisible() === false ? {
-        display: 'none'
-      } : {
-        display: 'block'
-      },
-      cellSpacing: "0",
-      cellPadding: "0",
+      className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`,
       onClick: this.onClick,
       onMouseDown: this.onMouseDown
     }, /*#__PURE__*/React.createElement("caption", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
