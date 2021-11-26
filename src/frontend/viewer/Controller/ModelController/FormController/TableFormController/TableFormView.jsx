@@ -86,11 +86,6 @@ class TableFormView extends FormView {
         // console.log(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), {row, column, onCreate, onUnmount, ctrl});
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TableFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
-        if (nextProps.updated - this.props.updated) return true;
-        return false;
-    }
     getGridColumns() {
         const ctrl = this.props.ctrl;
         return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {

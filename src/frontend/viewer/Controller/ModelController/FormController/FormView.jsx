@@ -16,5 +16,10 @@ class FormView extends ModelView {
             await this.getCtrl().getApp().alert({message: err.message});
         }
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('FormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
+        if (nextProps.updated - this.props.updated) return true;
+        return false;
+    }
 }
 window.QForms.FormView = FormView;

@@ -918,6 +918,12 @@ class FormView extends ModelView {
     this.checkParent();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('FormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
+    if (nextProps.updated - this.props.updated) return true;
+    return false;
+  }
+
 }
 
 window.QForms.FormView = FormView;
@@ -1028,12 +1034,6 @@ class RowFormView extends FormView {
     }));
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log('RowFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
-    if (nextProps.updated - this.props.updated) return true;
-    return false;
-  }
-
   render() {
     console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
@@ -1132,12 +1132,6 @@ class TableFormView extends FormView {
       enabled: ctrl.canNext(),
       onClick: ctrl.onNextClick
     }, /*#__PURE__*/React.createElement(RightIcon, null))));
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // console.log('TableFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
-    if (nextProps.updated - this.props.updated) return true;
-    return false;
   }
 
   getGridColumns() {

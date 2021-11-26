@@ -127,11 +127,6 @@ class RowFormView extends FormView {
             })}
         </div>;
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        // console.log('RowFormView.shouldComponentUpdate', nextProps.updated - this.props.updated);
-        if (nextProps.updated - this.props.updated) return true;
-        return false;
-    }
     render() {
         console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
         return <div className={`${this.getCssClassNames()} flex-column grid-gap-5`} style={this.getStyle()}>
