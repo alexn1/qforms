@@ -1,7 +1,18 @@
+@backgroundColor: #ddd;
+
 .toolbar-dropdown-button {
   .DropdownButton__button {
+    height: 30px;
+    border: none;
+    background-color: @backgroundColor;
     &:not(:disabled) {
       cursor: pointer;
+      &:hover {
+        background-color: darken(@backgroundColor, 5%);
+      }
+      &:active {
+        background-color: darken(@backgroundColor, 10%);
+      }
     }
     &:disabled {
       svg {

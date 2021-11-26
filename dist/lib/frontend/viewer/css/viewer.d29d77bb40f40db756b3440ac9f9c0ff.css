@@ -619,9 +619,18 @@ button.RowFormComboBoxFieldView__create-button:active {
   align-items: center;
   justify-content: center;
   grid-gap: 3px;
+  border: none;
+  background-color: #ddd;
+  height: 30px;
 }
 .toolbar-button:not(:disabled) {
   cursor: pointer;
+}
+.toolbar-button:not(:disabled):hover {
+  background-color: #d0d0d0;
+}
+.toolbar-button:not(:disabled):active {
+  background-color: #c4c4c4;
 }
 .toolbar-button:disabled svg {
   fill: #aaa;
@@ -629,26 +638,33 @@ button.RowFormComboBoxFieldView__create-button:active {
 .toolbar-button.default {
   color: white;
   background-color: #398bce;
-  border: 2px solid #398bce;
 }
 .toolbar-button.default svg {
   fill: white;
 }
 .toolbar-button.default:hover {
   background-color: #2a70aa;
-  border: 2px solid #2a70aa;
 }
 .toolbar-button.default:active {
   background-color: #205581;
-  border: 2px solid #205581;
 }
 .toolbar-button.default:disabled {
   background-color: #b4d3ec;
-  border: 2px solid #b4d3ec;
 }
 
+.toolbar-dropdown-button .DropdownButton__button {
+  height: 30px;
+  border: none;
+  background-color: #ddd;
+}
 .toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
   cursor: pointer;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):hover {
+  background-color: #d0d0d0;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):active {
+  background-color: #c4c4c4;
 }
 .toolbar-dropdown-button .DropdownButton__button:disabled svg {
   fill: #aaa;
