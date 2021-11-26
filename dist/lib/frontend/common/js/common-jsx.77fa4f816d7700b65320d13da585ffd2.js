@@ -1097,7 +1097,8 @@ class DropdownDatePicker extends ReactComponent {
       selectedDate: this.getSelectedDate(),
       onMouseDown: this.onDatePickerMouseDown,
       onDateSelected: this.onDatePickerDateSelected,
-      selectToday: this.props.selectToday
+      selectToday: this.props.selectToday,
+      highlightedDate: this.props.highlightedDate
     }));
   }
 
