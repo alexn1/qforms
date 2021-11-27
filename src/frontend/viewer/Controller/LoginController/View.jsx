@@ -9,7 +9,9 @@ class LoginView extends View {
             <form className={`${this.getCssBlockName()}__form`} method={'post'} onSubmit={this.onLoginFormSubmit}>
                 <input type={'hidden'} name={'tzOffset'} value={JSON.stringify(new Date().getTimezoneOffset())}/>
                 <input type={'hidden'} name={'action'} value={'login'}/>
-                <div className={`${this.getCssBlockName()}__title`}>{this.getCtrl().getFrontHostApp().getData().title}</div>
+                <div className={`${this.getCssBlockName()}__title`}>
+                    {this.getCtrl().getFrontHostApp().getData().title}
+                </div>
                 <input className={`${this.getCssBlockName()}__field`} type={'text'} name={'username'} placeholder={this.getCtrl().getText().login.username}
                        required={true}
                        autoFocus={true}
