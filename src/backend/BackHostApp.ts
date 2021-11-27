@@ -349,8 +349,14 @@ class BackHostApp {
             version    : pkg.version,
             context    : context,
             application: application,
-            links      : this.viewerModule.getLinks(),
-            scripts    : this.viewerModule.getScripts(),
+            links         : [
+                ...this.viewerModule.getLinks(),
+                ...application.links
+            ],
+            scripts       : [
+                ...this.viewerModule.getScripts(),
+                ...application.scripts
+            ],
             data: {
                 text  : application.getText(),
                 title : application.getTitle(context),
@@ -384,8 +390,14 @@ class BackHostApp {
                     version    : pkg.version,
                     context    : context,
                     application: application,
-                    links      : this.viewerModule.getLinks(),
-                    scripts    : this.viewerModule.getScripts(),
+                    links         : [
+                        ...this.viewerModule.getLinks(),
+                        ...application.links
+                    ],
+                    scripts       : [
+                        ...this.viewerModule.getScripts(),
+                        ...application.scripts
+                    ],
                     data: {
                         text  : application.getText(),
                         title : application.getTitle(context),
@@ -878,9 +890,9 @@ class BackHostApp {
                 return;
             }
             const application = this.getApplication(context);
-            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+            /*if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
                 throw new MyError({message: 'not authenticated', context});
-            }
+            }*/
             const filePath = path.join(application.getFrontendDirPath(), context.getUri());
             if (!await Helper.exists(filePath)) {
                 next();
