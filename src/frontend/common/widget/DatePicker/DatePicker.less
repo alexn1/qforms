@@ -1,9 +1,12 @@
-@borderBottomRight: solid 1px white;
+@selectionColor: #398bce;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker {
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  background-color: white;
   border-spacing: 0;
   display: none;
+  padding: 10px;
   &.visible {
     display: block;
   }
@@ -11,11 +14,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker__caption {
-  background-color: #b9def0;
+  //background-color: #b9def0;
   padding: 6px;
   cursor: default;
-  border-bottom: @borderBottomRight;
-  border-right: @borderBottomRight;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,20 +32,22 @@
     visibility: visible;
   }
   &:hover {
-    background-color: #eee;
     cursor: pointer;
+    background-color: @selectionColor;
+    svg {
+      fill: white;
+    }
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker__th {
-  border-bottom: @borderBottomRight;
-  border-right: @borderBottomRight;
   padding: 6px;
   text-align: center;
   cursor: default;
-  background-color: #b9def0;
+  //background-color: #b9def0;
   font-weight: normal;
+  color: #bbb;
   &.weekend {
     color: red;
   }
@@ -52,23 +55,23 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker__td {
-  border-bottom: @borderBottomRight;
-  border-right: @borderBottomRight;
   padding: 6px;
   text-align: center;
   cursor: default;
   background-color: white;
+  border: 1px solid white;
   &.out {
     color: #bbb;
   }
   &.today {
-    border: solid 1px #2aabd2;
+    border: solid 1px @selectionColor;
   }
   &.selectable {
     cursor: pointer;
-    background-color: #eee;
+    //background-color: #eee;
     &:hover {
-      background-color: #ff9e59;
+      color: white;
+      background-color: @selectionColor;
     }
   }
   &.selected {

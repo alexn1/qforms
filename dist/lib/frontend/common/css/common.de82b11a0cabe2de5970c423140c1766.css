@@ -92,18 +92,18 @@ svg {
 }
 
 .DatePicker {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: white;
   border-spacing: 0;
   display: none;
+  padding: 10px;
 }
 .DatePicker.visible {
   display: block;
 }
 .DatePicker__caption {
-  background-color: #b9def0;
   padding: 6px;
   cursor: default;
-  border-bottom: solid 1px white;
-  border-right: solid 1px white;
 }
 .DatePicker__caption-content {
   display: flex;
@@ -116,41 +116,41 @@ svg {
   visibility: visible;
 }
 .DatePicker__caption-link:hover {
-  background-color: #eee;
   cursor: pointer;
+  background-color: #398bce;
+}
+.DatePicker__caption-link:hover svg {
+  fill: white;
 }
 .DatePicker__th {
-  border-bottom: solid 1px white;
-  border-right: solid 1px white;
   padding: 6px;
   text-align: center;
   cursor: default;
-  background-color: #b9def0;
   font-weight: normal;
+  color: #bbb;
 }
 .DatePicker__th.weekend {
   color: red;
 }
 .DatePicker__td {
-  border-bottom: solid 1px white;
-  border-right: solid 1px white;
   padding: 6px;
   text-align: center;
   cursor: default;
   background-color: white;
+  border: 1px solid white;
 }
 .DatePicker__td.out {
   color: #bbb;
 }
 .DatePicker__td.today {
-  border: solid 1px #2aabd2;
+  border: solid 1px #398bce;
 }
 .DatePicker__td.selectable {
   cursor: pointer;
-  background-color: #eee;
 }
 .DatePicker__td.selectable:hover {
-  background-color: #ff9e59;
+  color: white;
+  background-color: #398bce;
 }
 .DatePicker__td.selected {
   background-color: #eea236;
