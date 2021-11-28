@@ -161,7 +161,7 @@ class DatePicker extends ReactComponent {
                         >
                             <LeftIcon/>
                         </div>
-                        <span>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
+                        <span className={`${this.getCssBlockName()}__caption-title`}>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
                         <div className={`${this.getCssBlockName()}__caption-link enabled`}
                              onClick={this.onNextClick}
                         >

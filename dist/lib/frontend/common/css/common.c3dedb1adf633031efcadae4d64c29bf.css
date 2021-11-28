@@ -92,6 +92,7 @@ svg {
 }
 
 .DatePicker {
+  color: #333;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   font-size: 12px;
   background-color: white;
@@ -102,13 +103,11 @@ svg {
 .DatePicker.visible {
   display: block;
 }
-.DatePicker__caption {
-  padding: 6px;
-  cursor: default;
-  color: #333;
-}
 .DatePicker__caption svg {
   fill: #333;
+}
+.DatePicker__caption-title {
+  padding: 10px;
 }
 .DatePicker__caption-content {
   display: flex;
@@ -131,7 +130,7 @@ svg {
 .DatePicker__th {
   padding: 6px;
   text-align: center;
-  cursor: default;
+  font-weight: bold;
   color: #999;
   border-bottom: 1px solid #eee;
 }
@@ -141,7 +140,6 @@ svg {
 .DatePicker__td {
   padding: 6px;
   text-align: center;
-  cursor: default;
   background-color: white;
   border: 1px solid white;
 }
@@ -163,8 +161,9 @@ svg {
   background-color: #ddd;
 }
 .DatePicker__td.highlight {
-  background-color: blue;
   color: white;
+  background-color: blue;
+  border: 1px solid blue;
 }
 
 .DropdownButton {

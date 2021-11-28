@@ -824,7 +824,9 @@ class DatePicker extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`,
       onClick: this.onPrevClick
-    }, /*#__PURE__*/React.createElement(LeftIcon, null)), /*#__PURE__*/React.createElement("span", null, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(LeftIcon, null)), /*#__PURE__*/React.createElement("span", {
+      className: `${this.getCssBlockName()}__caption-title`
+    }, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-link enabled`,
       onClick: this.onNextClick
     }, /*#__PURE__*/React.createElement(RightIcon, null)))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {

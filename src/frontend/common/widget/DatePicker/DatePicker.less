@@ -1,7 +1,9 @@
 @selectionColor: #398bce;
+@highlightColor: blue;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker {
+  color: #333;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
   font-size: 12px;
   background-color: white;
@@ -15,12 +17,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker__caption {
-  padding: 6px;
-  cursor: default;
-  color: #333;
   svg {
     fill: #333;
   }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.DatePicker__caption-title {
+  padding: 10px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,20 +53,18 @@
 .DatePicker__th {
   padding: 6px;
   text-align: center;
-  cursor: default;
-  //font-weight: normal;
+  font-weight: bold;
   color: #999;
+  border-bottom: 1px solid #eee;
   &.weekend {
     color: rgba(255, 0, 0, 0.5);
   }
-  border-bottom: 1px solid #eee;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DatePicker__td {
   padding: 6px;
   text-align: center;
-  cursor: default;
   background-color: white;
   border: 1px solid white;
   &.out {
@@ -73,7 +75,6 @@
   }
   &.selectable {
     cursor: pointer;
-    //background-color: #eee;
     &:hover {
       color: white;
       background-color: @selectionColor;
@@ -84,7 +85,8 @@
     background-color: #ddd;
   }
   &.highlight {
-    background-color: blue;
     color: white;
+    background-color: @highlightColor;
+    border: 1px solid @highlightColor;
   }
 }
