@@ -100,12 +100,8 @@ class DatePicker extends ReactComponent {
     }
 
     onClick = e => {
-        // console.log('DatePicker.onClick', e.target);
-        if (e.target.classList.contains('next')) {
-            this.next();
-        } else if (e.target.classList.contains('prev')) {
-            this.prev();
-        } else if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+        console.log('DatePicker.onClick', e.target);
+        if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
             return this.onDateClick(e.target);
         }
     }
@@ -124,7 +120,7 @@ class DatePicker extends ReactComponent {
         }
     }
 
-    next() {
+    onNextClick = e => {
         // console.log('DatePicker.next');
         this.setState(prevState => {
             const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
@@ -135,7 +131,7 @@ class DatePicker extends ReactComponent {
         });
     }
 
-    prev() {
+    onPrevClick = e => {
         // console.log('DatePicker.prev');
         this.setState(prevState => {
             const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
@@ -160,9 +156,17 @@ class DatePicker extends ReactComponent {
             >
                 <caption className={`${this.getCssBlockName()}__caption`}>
                     <div className={`${this.getCssBlockName()}__caption-content`}>
-                        <a className={`${this.getCssBlockName()}__caption-link prev ${this.isPrevAllowed() ? 'enabled' : ''}`}> &lt; </a>
+                        <div className={`${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`}
+                             onClick={this.onPrevClick}
+                        >
+                            <LeftIcon/>
+                        </div>
                         <span>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
-                        <a className={`${this.getCssBlockName()}__caption-link next enabled`}> &gt; </a>
+                        <div className={`${this.getCssBlockName()}__caption-link enabled`}
+                             onClick={this.onNextClick}
+                        >
+                            <RightIcon/>
+                        </div>
                     </div>
                 </caption>
                 <thead>

@@ -676,12 +676,9 @@ class DatePicker extends ReactComponent {
     super(props);
 
     _defineProperty(this, "onClick", e => {
-      // console.log('DatePicker.onClick', e.target);
-      if (e.target.classList.contains('next')) {
-        this.next();
-      } else if (e.target.classList.contains('prev')) {
-        this.prev();
-      } else if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+      console.log('DatePicker.onClick', e.target);
+
+      if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
         return this.onDateClick(e.target);
       }
     });
@@ -691,6 +688,28 @@ class DatePicker extends ReactComponent {
       if (this.props.onMouseDown) {
         return this.props.onMouseDown(e);
       }
+    });
+
+    _defineProperty(this, "onNextClick", e => {
+      // console.log('DatePicker.next');
+      this.setState(prevState => {
+        const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+        next.setMonth(next.getMonth() + 1);
+        return {
+          selectedMonth: [next.getFullYear(), next.getMonth()]
+        };
+      });
+    });
+
+    _defineProperty(this, "onPrevClick", e => {
+      // console.log('DatePicker.prev');
+      this.setState(prevState => {
+        const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return {
+          selectedMonth: [prev.getFullYear(), prev.getMonth()]
+        };
+      });
     });
 
     if (this.props.minDate && !(this.props.minDate instanceof Array)) throw new Error('minDate must be array');
@@ -787,28 +806,6 @@ class DatePicker extends ReactComponent {
     }
   }
 
-  next() {
-    // console.log('DatePicker.next');
-    this.setState(prevState => {
-      const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
-      next.setMonth(next.getMonth() + 1);
-      return {
-        selectedMonth: [next.getFullYear(), next.getMonth()]
-      };
-    });
-  }
-
-  prev() {
-    // console.log('DatePicker.prev');
-    this.setState(prevState => {
-      const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
-      prev.setMonth(prev.getMonth() - 1);
-      return {
-        selectedMonth: [prev.getFullYear(), prev.getMonth()]
-      };
-    });
-  }
-
   render() {
     // console.log('DatePicker.render', this.props, this.state);
     const date = this.getFirstDateOfTable();
@@ -824,11 +821,13 @@ class DatePicker extends ReactComponent {
       className: `${this.getCssBlockName()}__caption`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-content`
-    }, /*#__PURE__*/React.createElement("a", {
-      className: `${this.getCssBlockName()}__caption-link prev ${this.isPrevAllowed() ? 'enabled' : ''}`
-    }, " < "), /*#__PURE__*/React.createElement("span", null, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("a", {
-      className: `${this.getCssBlockName()}__caption-link next enabled`
-    }, " > "))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`,
+      onClick: this.onPrevClick
+    }, /*#__PURE__*/React.createElement(LeftIcon, null)), /*#__PURE__*/React.createElement("span", null, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__caption-link enabled`,
+      onClick: this.onNextClick
+    }, /*#__PURE__*/React.createElement(RightIcon, null)))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
       className: `${this.getCssBlockName()}__th`
     }, "\u041F\u043D"), /*#__PURE__*/React.createElement("th", {
       className: `${this.getCssBlockName()}__th`
