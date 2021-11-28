@@ -158,6 +158,7 @@ svg {
 }
 .DatePicker__td.selected {
   background-color: #ddd;
+  border: 1px solid #ddd;
 }
 .DatePicker__td.highlight {
   color: white;
