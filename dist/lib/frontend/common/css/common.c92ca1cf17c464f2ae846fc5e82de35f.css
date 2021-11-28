@@ -93,6 +93,7 @@ svg {
 
 .DatePicker {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
   background-color: white;
   border-spacing: 0;
   display: none;
@@ -104,10 +105,15 @@ svg {
 .DatePicker__caption {
   padding: 6px;
   cursor: default;
+  color: #333;
+}
+.DatePicker__caption svg {
+  fill: #333;
 }
 .DatePicker__caption-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .DatePicker__caption-link {
   visibility: hidden;
@@ -126,11 +132,11 @@ svg {
   padding: 6px;
   text-align: center;
   cursor: default;
-  font-weight: normal;
-  color: #bbb;
+  color: #999;
+  border-bottom: 1px solid #eee;
 }
 .DatePicker__th.weekend {
-  color: red;
+  color: rgba(255, 0, 0, 0.5);
 }
 .DatePicker__td {
   padding: 6px;
@@ -143,7 +149,7 @@ svg {
   color: #bbb;
 }
 .DatePicker__td.today {
-  border: solid 1px #398bce;
+  border: 1px solid #398bce;
 }
 .DatePicker__td.selectable {
   cursor: pointer;
@@ -151,9 +157,10 @@ svg {
 .DatePicker__td.selectable:hover {
   color: white;
   background-color: #398bce;
+  border: 1px solid #398bce;
 }
 .DatePicker__td.selected {
-  background-color: #eea236;
+  background-color: #ddd;
 }
 .DatePicker__td.highlight {
   background-color: blue;
