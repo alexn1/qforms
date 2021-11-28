@@ -46,7 +46,7 @@ class PageView extends ModelView {
             <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.options.selectMode &&
                     <Button
-                        classList={['toolbar-button']}
+                        classList={['toolbar-button', 'default']}
                         onClick={ctrl.onSelectClick}
                         enabled={!!ctrl.getSelectedRowKey()}
                     >

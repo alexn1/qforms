@@ -1251,7 +1251,7 @@ class PageView extends ModelView {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__toolbar`
     }, model.options.selectMode && /*#__PURE__*/React.createElement(Button, {
-      classList: ['toolbar-button'],
+      classList: ['toolbar-button', 'default'],
       onClick: ctrl.onSelectClick,
       enabled: !!ctrl.getSelectedRowKey()
     }, /*#__PURE__*/React.createElement(DoneIcon, null), /*#__PURE__*/React.createElement("div", null, model.getApp().getText().page.select)), model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && /*#__PURE__*/React.createElement(Button, {
