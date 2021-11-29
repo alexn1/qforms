@@ -107,7 +107,7 @@ svg {
   fill: #333;
 }
 .DatePicker__caption-title {
-  padding: 6px;
+  padding: 10px;
 }
 .DatePicker__caption-content {
   display: flex;
