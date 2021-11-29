@@ -531,7 +531,7 @@ class BackHostApp {
     async rpc(req, res, context: Context) {
         console.log('BackHostApp.rpc', req.body);
         const application = this.getApplication(context);
-        await application.initContext(context);
+        // await application.initContext(context);
         let model: Model;
         if (req.body.page) {
             if (req.body.form) {
