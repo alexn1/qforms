@@ -507,11 +507,8 @@ button.RowFormComboBoxFieldView__create-button:active {
   background-color: #eefdea;
 }
 
-.TableFormCheckBoxFieldView {
-  text-align: center;
-}
-.TableFormCheckBoxFieldView > span {
-  margin: 3px 3px 3px 4px;
+.TableFormCheckBoxFieldView input {
+  pointer-events: none;
 }
 
 .TableFormLinkFieldView > a {
