@@ -301,9 +301,9 @@ class BackHostApp {
         if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
         } else {
-            await application.initContext(context);
             await application.connect(context);
             try {
+                await application.initContext(context);
                 const response =  await application.fill(context);
                 res.render('viewer/index', {
                     version       : pkg.version,
@@ -414,10 +414,10 @@ class BackHostApp {
     async page(req, res, context: Context) {
         console.log('BackHostApp.page', req.body.page);
         const application = this.getApplication(context);
-        await application.initContext(context);
-        const page = await application.getPage(context, req.body.page);
         await application.connect(context);
         try {
+            await application.initContext(context);
+            const page = await application.getPage(context, req.body.page);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
             await res.json({page: response});
@@ -431,7 +431,6 @@ class BackHostApp {
         console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
         const application = this.getApplication(context);
-        await application.initContext(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -445,6 +444,7 @@ class BackHostApp {
         }
         await dataSource.getDatabase().connect(context);
         try {
+            await application.initContext(context);
             const [rows, count] = await dataSource.select(context);
             const time = Date.now() - start;
             console.log('select time:', time);
@@ -459,12 +459,12 @@ class BackHostApp {
     async insert(req, res, context: Context) {
         console.log('BackHostApp.insert', req.body.page);
         const application = this.getApplication(context);
-        await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
+            await application.initContext(context);
             await dataSource.getDatabase().begin(context);
             const result = await dataSource.insert(context);
             if (result === undefined) throw new Error('insert action: result is undefined');
@@ -483,12 +483,12 @@ class BackHostApp {
     async update(req, res, context: Context) {
         console.log('BackHostApp.update', req.body.page);
         const application = this.getApplication(context);
-        await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
+            await application.initContext(context);
             await dataSource.getDatabase().begin(context);
             const result = await dataSource.update(context);
             if (result === undefined) throw new Error('action update: result is undefined');
@@ -507,12 +507,12 @@ class BackHostApp {
     async _delete(req, res, context: Context) {
         console.log('BackHostApp._delete', req.body.page);
         const application = this.getApplication(context);
-        await application.initContext(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().connect(context);
         try {
+            await application.initContext(context);
             await dataSource.getDatabase().begin(context);
             const result = await dataSource.delete(context);
             if (result === undefined) throw new Error('delete result is undefined');
