@@ -416,7 +416,7 @@ class Application extends Model {
     removeClient(webSocket): void {
         const i = this.clients.indexOf(webSocket);
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        console.log('i:', i);
+        // console.log('i:', i);
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
