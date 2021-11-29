@@ -456,66 +456,6 @@ class BackHostApp {
     }
 
     // action
-    /*async selectSingle(req, res, context: Context) {
-        console.log('BackHostApp.selectSingle', req.body.page);
-        const start = Date.now();
-        const application = this.getApplication(context);
-        await application.initContext(context);
-        let dataSource;
-        if (req.body.page) {
-            const page = await application.getPage(context, req.body.page);
-            if (req.body.form) {
-                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
-            } else {
-                dataSource = page.getDataSource(req.body.ds);
-            }
-        } else {
-            dataSource = application.getDataSource(req.body.ds);
-        }
-        await dataSource.getDatabase().connect(context);
-        try {
-            const row = await dataSource.selectSingle(context);
-            const time = Date.now() - start;
-            console.log('select time:', time);
-            if (row === undefined) throw new Error('selectSingle action: row is undefined');
-            await res.json({row, time});
-            return time;
-        } finally {
-            await dataSource.getDatabase().release(context);
-        }
-    }*/
-
-    // action
-    /*async selectMultiple(req, res, context: Context) {
-        console.log('BackHostApp.selectMultiple', req.body.page);
-        const start = Date.now();
-        const application = this.getApplication(context);
-        await application.initContext(context);
-        let dataSource;
-        if (req.body.page) {
-            const page = await application.getPage(context, req.body.page);
-            if (req.body.form) {
-                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
-            } else {
-                dataSource = page.getDataSource(req.body.ds);
-            }
-        } else {
-            dataSource = application.getDataSource(req.body.ds);
-        }
-        await dataSource.getDatabase().connect(context);
-        try {
-            const [rows, count] = await dataSource.selectMultiple(context);
-            const time = Date.now() - start;
-            console.log('select time:', time);
-            if (rows === undefined) throw new Error('selectMultiple action: rows are undegined');
-            await res.json({rows, count, time});
-            return time;
-        } finally {
-            await dataSource.getDatabase().release(context);
-        }
-    }*/
-
-    // action
     async insert(req, res, context: Context) {
         console.log('BackHostApp.insert', req.body.page);
         const application = this.getApplication(context);
