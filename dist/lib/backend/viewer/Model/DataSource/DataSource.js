@@ -228,11 +228,11 @@ class DataSource extends Model_1.default {
             throw new Error(`${this.getFullName()}: no database name`);
         return this.getApp().getDatabase(databaseName);
     }
-    async update(context) {
-        throw new Error('DataSource.update not implemented');
-    }
     async insert(context, _values = null) {
         throw new Error('DataSource.insert not implemented');
+    }
+    async update(context) {
+        throw new Error('DataSource.update not implemented');
     }
     async delete(context) {
         throw new Error('DataSource.delete not implemented');
