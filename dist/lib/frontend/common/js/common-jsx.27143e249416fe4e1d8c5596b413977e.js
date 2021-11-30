@@ -1118,7 +1118,7 @@ class Grid extends ReactComponent {
       e.preventDefault(); // prevent text selection on double click
 
       if (this.isDisabled()) return;
-      this.el.current.focus(); // if (this.isLink()) return;
+      this.getElement().focus(); // if (this.isLink()) return;
 
       const button = e.button;
       const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
@@ -1257,6 +1257,10 @@ class Grid extends ReactComponent {
 
     this.el = React.createRef();
     this.head = React.createRef();
+  }
+
+  getElement() {
+    return this.el.current;
   }
 
   getActiveColumn() {

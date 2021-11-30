@@ -12,6 +12,9 @@ class Grid extends ReactComponent {
         this.el = React.createRef();
         this.head = React.createRef();
     }
+    getElement() {
+        return this.el.current;
+    }
     getActiveColumn() {
         return this.state.column;
     }
@@ -32,7 +35,7 @@ class Grid extends ReactComponent {
         console.log('Grid.onCellMouseDown', this.isLink());
         e.preventDefault();     // prevent text selection on double click
         if (this.isDisabled()) return;
-        this.el.current.focus();
+        this.getElement().focus();
         // if (this.isLink()) return;
         const button = e.button;
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);

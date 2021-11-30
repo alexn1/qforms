@@ -1217,6 +1217,11 @@ class PageView extends ModelView {
     });
 
     this.checkParent();
+    this.el = React.createRef();
+  }
+
+  getElement() {
+    return this.el.current;
   }
 
   renderForm(formCtrl, props = {}) {
@@ -1350,6 +1355,8 @@ class PageView extends ModelView {
     console.log('PageView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
+      ref: this.el,
+      tabIndex: 0,
       style: this.getStyle()
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }

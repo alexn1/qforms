@@ -2,6 +2,10 @@ class PageView extends ModelView {
     constructor(props) {
         super(props);
         this.checkParent();
+        this.el = React.createRef();
+    }
+    getElement() {
+        return this.el.current;
     }
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
@@ -157,7 +161,10 @@ class PageView extends ModelView {
     }
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
-        return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`} style={this.getStyle()}>
+        return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`}
+                    ref={this.el}
+                    tabIndex={0}
+                    style={this.getStyle()}>
             {this.renderHeader()}
             {this.renderMain()}
             {this.renderFooter()}

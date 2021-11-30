@@ -8,7 +8,6 @@ class ApplicationController extends ModelController {
         this.modals = [];
         this.statusbar  = null;
         this.homePageName = null;
-
     }
     static create(model, frontHostApp) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
@@ -116,6 +115,7 @@ class ApplicationController extends ModelController {
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
+        pc.getView().getElement().focus();
 
         return pc;
     }

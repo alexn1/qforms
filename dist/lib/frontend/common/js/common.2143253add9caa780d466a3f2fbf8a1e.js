@@ -12,7 +12,7 @@ class FrontHostApp {
         // window.onbeforeunload       = this.exit.bind(this);
 
         // document
-        document.addEventListener('keydown', this.onDocumentKeyDown.bind(this));
+        // document.addEventListener('keydown', this.onDocumentKeyDown.bind(this));
     }
     async run() {
         throw new Error('FrontHostApp.run not implemented');
@@ -146,7 +146,7 @@ class FrontHostApp {
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
                 } else {
-                    reject(new Error('alert already exists'));
+                    reject(new Error('confirm already exists'));
                 }
             } catch (err) {
                 reject(err);
