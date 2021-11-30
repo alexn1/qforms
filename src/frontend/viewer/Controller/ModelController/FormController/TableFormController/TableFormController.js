@@ -160,7 +160,6 @@ class TableFormController extends FormController {
         try {
             await this.openPage({
                 name : this.model.getAttr('itemEditPage'),
-                // key  : key,
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key)
