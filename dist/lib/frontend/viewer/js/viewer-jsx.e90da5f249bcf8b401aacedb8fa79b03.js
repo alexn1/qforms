@@ -502,6 +502,7 @@ class RowFormFileFieldView extends RowFormFieldView {
         src,
         onCloseHook: () => {
           console.log('onCloseHook');
+          this.getCtrl().getPage().getView().getElement().focus();
         }
       });
       await app.openModal(imageDialogCtrl);
