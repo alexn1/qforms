@@ -255,7 +255,8 @@
   height: 22px;
   border: none;
   background-color: #ccc;
-  width: 25px;
+  width: 22px;
+  font-size: 10px;
 }
 .RowFormComboBoxFieldView__edit-button:hover:enabled {
   background-color: #ddd;
@@ -267,7 +268,8 @@
   height: 22px;
   border: none;
   background-color: #ccc;
-  width: 25px;
+  width: 22px;
+  font-size: 10px;
 }
 .RowFormComboBoxFieldView__create-button:hover:enabled {
   background-color: #ddd;
