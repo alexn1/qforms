@@ -10,9 +10,6 @@ class FrontHostApp {
         // window.onunhandledrejection = this.onunhandledrejection.bind(this);
         // window.onerror              = this.errorHandler.bind(this);
         // window.onbeforeunload       = this.exit.bind(this);
-
-        // document
-        // document.addEventListener('keydown', this.onDocumentKeyDown.bind(this));
     }
     async run() {
         throw new Error('FrontHostApp.run not implemented');
@@ -94,14 +91,6 @@ class FrontHostApp {
         }
         return null;
     }
-    /*async onDocumentKeyDown(e) {
-        console.log('FrontHostApp.onDocumentKeyDown', e);
-        if (this.alertCtrl) {
-            await this.alertCtrl.onDocumentKeyDown(e);
-            return true;
-        }
-        return false;
-    }*/
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
