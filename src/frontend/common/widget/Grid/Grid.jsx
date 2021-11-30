@@ -12,9 +12,6 @@ class Grid extends ReactComponent {
         this.el = React.createRef();
         this.head = React.createRef();
     }
-    getElement() {
-        return this.el.current;
-    }
     getActiveColumn() {
         return this.state.column;
     }

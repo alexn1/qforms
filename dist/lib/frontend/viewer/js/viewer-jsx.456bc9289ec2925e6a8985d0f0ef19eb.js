@@ -11,9 +11,17 @@ class View extends ReactComponent {
 
 }
 class AlertView extends View {
+  constructor(props) {
+    super(props);
+    this.el = React.createRef();
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames()
+      className: this.getCssClassNames(),
+      ref: this.el,
+      tabIndex: 0,
+      onKeyDown: this.getCtrl().onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("div", {
@@ -41,10 +49,18 @@ class AlertView extends View {
 
 }
 class ConfirmView extends View {
+  constructor(props) {
+    super(props);
+    this.el = React.createRef();
+  }
+
   render() {
     // console.log('ConfirmView.render', this.getCtrl().options);
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames()
+      className: this.getCssClassNames(),
+      ref: this.el,
+      tabIndex: 0,
+      onKeyDown: this.getCtrl().onKeyDown
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("div", {
@@ -125,13 +141,9 @@ class LoginView extends View {
 
 }
 class ImageDialogView extends View {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.el = React.createRef();
-  }
-
-  getElement() {
-    return this.el.current;
   }
 
   render() {
@@ -1201,10 +1213,6 @@ class PageView extends ModelView {
 
     this.checkParent();
     this.el = React.createRef();
-  }
-
-  getElement() {
-    return this.el.current;
   }
 
   renderForm(formCtrl, props = {}) {

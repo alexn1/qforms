@@ -4,9 +4,6 @@ class PageView extends ModelView {
         this.checkParent();
         this.el = React.createRef();
     }
-    getElement() {
-        return this.el.current;
-    }
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
             parent  : this,

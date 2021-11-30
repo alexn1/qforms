@@ -113,7 +113,7 @@ class FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = this.alertCtrl = new AlertController({
                         ...options,
-                        closeCallback: result => {
+                        onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
@@ -121,6 +121,7 @@ class FrontHostApp {
                     // console.log('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
+                    view.getElement().focus();
                 } else {
                     reject(new Error('alert already exists'));
                 }
@@ -135,9 +136,9 @@ class FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl =  new ConfirmController({
+                    const ctrl = this.alertCtrl = new ConfirmController({
                         ...options,
-                        closeCallback: result => {
+                        onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
@@ -145,6 +146,7 @@ class FrontHostApp {
                     // console.log('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
+                    view.getElement().focus();
                 } else {
                     reject(new Error('confirm already exists'));
                 }

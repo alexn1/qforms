@@ -1,7 +1,15 @@
 class AlertView extends View {
+    constructor(props) {
+        super(props);
+        this.el = React.createRef();
+    }
     render() {
         return (
-            <div className={this.getCssClassNames()}>
+            <div className={this.getCssClassNames()}
+                 ref={this.el}
+                 tabIndex={0}
+                 onKeyDown={this.getCtrl().onKeyDown}
+            >
                 <div className={`${this.getCssBlockName()}__container`}>
                     <div className={`${this.getCssBlockName()}__content flex-column`}>
                         <div className={`${this.getCssBlockName()}__header`}>

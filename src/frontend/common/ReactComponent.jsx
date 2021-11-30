@@ -6,6 +6,9 @@ class ReactComponent extends React.Component {
         if (props.onCreate) props.onCreate(this, this.props.name);
         this.allowRerender = true;
     }
+    getElement() {
+        return this.el.current;
+    }
     checkParent() {
         if (!this.props.parent) throw new Error(`${this.constructor.name}: no parent`);
     }

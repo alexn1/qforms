@@ -1,10 +1,7 @@
 class ImageDialogView extends View {
-    constructor(...args) {
-        super(...args);
+    constructor(props) {
+        super(props);
         this.el = React.createRef();
-    }
-    getElement() {
-        return this.el.current;
     }
     render() {
         console.log('ImageDialogView.render');

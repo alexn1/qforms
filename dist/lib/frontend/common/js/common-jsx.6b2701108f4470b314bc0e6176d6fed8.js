@@ -7,6 +7,10 @@ class ReactComponent extends React.Component {
     this.allowRerender = true;
   }
 
+  getElement() {
+    return this.el.current;
+  }
+
   checkParent() {
     if (!this.props.parent) throw new Error(`${this.constructor.name}: no parent`);
   }
@@ -1257,10 +1261,6 @@ class Grid extends ReactComponent {
 
     this.el = React.createRef();
     this.head = React.createRef();
-  }
-
-  getElement() {
-    return this.el.current;
   }
 
   getActiveColumn() {

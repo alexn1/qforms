@@ -3,18 +3,23 @@ class AlertController extends Controller {
         super();
         this.options = options;
         if (!options.message) throw new Error('no message');
-        if (!options.closeCallback) throw new Error('no closeCallback');
+        if (!options.onClose) throw new Error('no onClose');
     }
     getViewClass() {
         return AlertView;
     }
     close(result) {
-        this.options.closeCallback(result);
+        this.options.onClose(result);
     }
     onOkButtonClick = async e => {
         this.close(true);
     }
     onCloseClick = async e => {
         this.close(false);
+    }
+    onKeyDown = async e => {
+        if (e.key === 'Escape') {
+            this.close(false);
+        }
     }
 }
