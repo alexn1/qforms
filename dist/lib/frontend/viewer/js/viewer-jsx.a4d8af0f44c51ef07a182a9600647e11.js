@@ -140,7 +140,8 @@ class ImageDialogView extends View {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
       ref: this.el,
-      tabIndex: 0
+      tabIndex: 0,
+      onKeyDown: this.getCtrl().onKeyDown
     }, /*#__PURE__*/React.createElement("img", {
       className: `${this.getCssBlockName()}__image`,
       src: ctrl.getSrc()
