@@ -173,6 +173,9 @@ svg {
 .DropdownButton.show > .DropdownButton__dropdown {
   visibility: visible;
 }
+.DropdownButton__button:disabled svg {
+  fill: #aaa;
+}
 .DropdownButton__dropdown {
   position: absolute;
   background-color: white;
@@ -191,9 +194,10 @@ svg {
   align-items: center;
   grid-gap: 5px;
   padding: 10px;
+  color: #333;
 }
 .DropdownButton__item svg {
-  fill: black;
+  fill: #333;
 }
 .DropdownButton__item:hover {
   background-color: #398bce;

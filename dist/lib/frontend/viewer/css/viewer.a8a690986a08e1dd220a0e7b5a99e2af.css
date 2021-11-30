@@ -251,26 +251,28 @@
   color: gray;
   cursor: text;
 }
-button.RowFormComboBoxFieldView__edit-button {
+.RowFormComboBoxFieldView__edit-button {
   height: 22px;
   border: none;
   background-color: #ccc;
+  width: 25px;
 }
-button.RowFormComboBoxFieldView__edit-button:hover:enabled {
+.RowFormComboBoxFieldView__edit-button:hover:enabled {
   background-color: #ddd;
 }
-button.RowFormComboBoxFieldView__edit-button:active {
+.RowFormComboBoxFieldView__edit-button:active {
   background-color: #bbb;
 }
-button.RowFormComboBoxFieldView__create-button {
+.RowFormComboBoxFieldView__create-button {
   height: 22px;
   border: none;
   background-color: #ccc;
+  width: 25px;
 }
-button.RowFormComboBoxFieldView__create-button:hover:enabled {
+.RowFormComboBoxFieldView__create-button:hover:enabled {
   background-color: #ddd;
 }
-button.RowFormComboBoxFieldView__create-button:active {
+.RowFormComboBoxFieldView__create-button:active {
   background-color: #bbb;
 }
 .debug .RowFormComboBoxFieldView.changed > .RowFormComboBoxFieldView__select {
@@ -620,6 +622,9 @@ button.RowFormComboBoxFieldView__create-button:active {
   background-color: #ddd;
   height: 30px;
 }
+.toolbar-button svg {
+  fill: #333;
+}
 .toolbar-button:not(:disabled) {
   cursor: pointer;
 }
@@ -662,9 +667,6 @@ button.RowFormComboBoxFieldView__create-button:active {
 }
 .toolbar-dropdown-button .DropdownButton__button:not(:disabled):active {
   background-color: #c4c4c4;
-}
-.toolbar-dropdown-button .DropdownButton__button:disabled svg {
-  fill: #aaa;
 }
 
 

@@ -1,4 +1,5 @@
 @import "../../../../../style/field";
+@buttonWidth: 25px;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView {
@@ -8,6 +9,7 @@
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__select {
     width: 100%;
     .Select__input {
@@ -27,10 +29,11 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-button.RowFormComboBoxFieldView__edit-button {
+.RowFormComboBoxFieldView__edit-button {
     height          : @fieldHeight;
     border          : none;
     background-color: #ccc;
+    width           : @buttonWidth;
     &:hover:enabled {
         background-color: #ddd;
     }
@@ -40,10 +43,11 @@ button.RowFormComboBoxFieldView__edit-button {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-button.RowFormComboBoxFieldView__create-button {
+.RowFormComboBoxFieldView__create-button {
     height          : @fieldHeight;
     border          : none;
     background-color: #ccc;
+    width           : @buttonWidth;
     &:hover:enabled {
         background-color: #ddd;
     }
