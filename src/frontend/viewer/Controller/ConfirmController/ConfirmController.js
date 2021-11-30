@@ -17,9 +17,9 @@ class ConfirmController extends Controller {
     onCloseClick = async e => {
         this.close(false);
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         if (e.key === 'Escape') {
             this.close(false);
         }
-    }
+    }*/
 }

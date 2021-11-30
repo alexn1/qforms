@@ -94,14 +94,14 @@ class FrontHostApp {
         }
         return null;
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('FrontHostApp.onDocumentKeyDown', e);
         if (this.alertCtrl) {
             await this.alertCtrl.onDocumentKeyDown(e);
             return true;
         }
         return false;
-    }
+    }*/
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }

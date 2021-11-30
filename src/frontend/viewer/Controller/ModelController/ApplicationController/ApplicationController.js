@@ -225,14 +225,14 @@ class ApplicationController extends ModelController {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('ApplicationController.onDocumentKeyDown', e);
         const page = this.getFocusCtrl();
         console.log('page:', page.getModel().getFullName());
         if (page) {
             await page.onDocumentKeyDown(e);
         }
-    }
+    }*/
     getFocusCtrl() {
         if (this.modals.length > 0) {
             return this.modals[this.modals.length - 1];

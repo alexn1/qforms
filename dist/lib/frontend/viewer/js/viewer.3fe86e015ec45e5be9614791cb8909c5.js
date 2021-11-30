@@ -92,14 +92,13 @@ class ViewerFrontHostApp extends FrontHostApp {
             this.logError(err);
         }
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
         const result = await super.onDocumentKeyDown(e)
         if (!result) {
             await this.applicationController.onDocumentKeyDown(e);
         }
-    }
-
+    }*/
     async onWindowPopState(e) {
         // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
@@ -211,9 +210,9 @@ class Controller extends EventEmitter {
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('Controller.onDocumentKeyDown', this.constructor.name, e);
-    }
+    }*/
 }
 
 class AlertController extends Controller {
@@ -256,11 +255,11 @@ class ConfirmController extends Controller {
     onCloseClick = async e => {
         this.close(false);
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         if (e.key === 'Escape') {
             this.close(false);
         }
-    }
+    }*/
 }
 
 class LoginController extends Controller {
@@ -583,14 +582,14 @@ class ApplicationController extends ModelController {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('ApplicationController.onDocumentKeyDown', e);
         const page = this.getFocusCtrl();
         console.log('page:', page.getModel().getFullName());
         if (page) {
             await page.onDocumentKeyDown(e);
         }
-    }
+    }*/
     getFocusCtrl() {
         if (this.modals.length > 0) {
             return this.modals[this.modals.length - 1];

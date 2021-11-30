@@ -38,14 +38,13 @@ class ViewerFrontHostApp extends FrontHostApp {
             this.logError(err);
         }
     }
-    async onDocumentKeyDown(e) {
+    /*async onDocumentKeyDown(e) {
         console.log('ViewerFrontHostApp.onDocumentKeyDown', e);
         const result = await super.onDocumentKeyDown(e)
         if (!result) {
             await this.applicationController.onDocumentKeyDown(e);
         }
-    }
-
+    }*/
     async onWindowPopState(e) {
         // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
