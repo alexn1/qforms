@@ -1,16 +1,15 @@
 class ImageDialogController extends ModalController {
-    constructor(app, id, src) {
-        // console.log('ImageDialogController.constructor', src);
-        super(app, id);
-        if (!src) throw new Error('no src');
-        this.src = src;
+    constructor(options) {
+        // console.log('ImageDialogController.constructor', options);
+        super(options);
+        if (!options.src) throw new Error('no src');
     }
     getViewClass() {
         console.log('ImageDialogController.getViewClass');
         return ImageDialogView;
     }
     getSrc() {
-        return this.src;
+        return this.options.src;
     }
     onCloseClick = async e => {
         this.close();

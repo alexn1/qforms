@@ -1,16 +1,15 @@
 class ModalController extends Controller {
-    constructor(app, id) {
+    constructor(options = {}) {
         super();
-        if (!app) throw new Error('no app');
-        if (!id) throw new Error('no id');
-        this.app = app;
-        this.id = id;
+        if (!options.app) throw new Error('no app');
+        if (!options.id) throw new Error('no id');
+        this.options = options;
     }
     getId() {
-        return this.id;
+        return this.options.id;
     }
     getApp() {
-        return this.app;
+        return this.options.app;
     }
     close() {
         this.getApp().removeModal(this);

@@ -280,18 +280,17 @@ class LoginController extends Controller {
 }
 
 class ModalController extends Controller {
-    constructor(app, id) {
+    constructor(options = {}) {
         super();
-        if (!app) throw new Error('no app');
-        if (!id) throw new Error('no id');
-        this.app = app;
-        this.id = id;
+        if (!options.app) throw new Error('no app');
+        if (!options.id) throw new Error('no id');
+        this.options = options;
     }
     getId() {
-        return this.id;
+        return this.options.id;
     }
     getApp() {
-        return this.app;
+        return this.options.app;
     }
     close() {
         this.getApp().removeModal(this);
@@ -306,18 +305,17 @@ class ModalController extends Controller {
 }
 
 class ImageDialogController extends ModalController {
-    constructor(app, id, src) {
-        // console.log('ImageDialogController.constructor', src);
-        super(app, id);
-        if (!src) throw new Error('no src');
-        this.src = src;
+    constructor(options) {
+        // console.log('ImageDialogController.constructor', options);
+        super(options);
+        if (!options.src) throw new Error('no src');
     }
     getViewClass() {
         console.log('ImageDialogController.getViewClass');
         return ImageDialogView;
     }
     getSrc() {
-        return this.src;
+        return this.options.src;
     }
     onCloseClick = async e => {
         this.close();

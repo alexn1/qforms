@@ -496,7 +496,11 @@ class RowFormFileFieldView extends RowFormFieldView {
       const ctrl = this.props.ctrl;
       const app = ctrl.getApp();
       const src = ctrl.getValueForWidget();
-      const imageDialogCtrl = new ImageDialogController(app, app.getNewId(), src);
+      const imageDialogCtrl = new ImageDialogController({
+        app,
+        id: app.getNewId(),
+        src
+      });
       await app.openModal(imageDialogCtrl);
     });
 
