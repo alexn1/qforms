@@ -75,6 +75,7 @@ class TableFormController extends FormController {
         console.log('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
             const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
+            this.grid.getElement().focus();
             if (result) {
                 await this.model.getDefaultDataSource().delete(key);
             }
