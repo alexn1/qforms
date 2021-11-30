@@ -125,11 +125,22 @@ class LoginView extends View {
 
 }
 class ImageDialogView extends View {
+  constructor(...args) {
+    super(...args);
+    this.el = React.createRef();
+  }
+
+  getElement() {
+    return this.el.current;
+  }
+
   render() {
     console.log('ImageDialogView.render');
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
-      className: this.getCssClassNames()
+      className: this.getCssClassNames(),
+      ref: this.el,
+      tabIndex: 0
     }, /*#__PURE__*/React.createElement("img", {
       className: `${this.getCssBlockName()}__image`,
       src: ctrl.getSrc()
@@ -485,8 +496,7 @@ class RowFormFileFieldView extends RowFormFieldView {
       const app = ctrl.getApp();
       const src = ctrl.getValueForWidget();
       const imageDialogCtrl = new ImageDialogController(app, app.getNewId(), src);
-      app.addModal(imageDialogCtrl);
-      app.rerender();
+      await app.openModal(imageDialogCtrl);
     });
 
     this.image = React.createRef();
@@ -1356,8 +1366,9 @@ class PageView extends ModelView {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
       ref: this.el,
-      tabIndex: 0,
-      style: this.getStyle()
+      tabIndex: 1,
+      style: this.getStyle(),
+      onKeyDown: this.getCtrl().onKeyDown
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }
 

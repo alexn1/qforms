@@ -279,7 +279,11 @@ class ApplicationController extends ModelController {
     getRootPath() {
         return '/';
     }
-
+    async openModal(ctrl) {
+        this.addModal(ctrl);
+        await this.rerender();
+        ctrl.getView().getElement().focus();
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;

@@ -638,7 +638,11 @@ class ApplicationController extends ModelController {
     getRootPath() {
         return '/';
     }
-
+    async openModal(ctrl) {
+        this.addModal(ctrl);
+        await this.rerender();
+        ctrl.getView().getElement().focus();
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
@@ -2374,8 +2378,8 @@ class PageController extends ModelController {
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
     }
-    async onDocumentKeyDown(e) {
-        // console.log('PageController.onDocumentKeyDown', this.getModel().getFullName(), e);
+    onKeyDown = async e => {
+        console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
             if (this.isModal()) {
                 await this.close();

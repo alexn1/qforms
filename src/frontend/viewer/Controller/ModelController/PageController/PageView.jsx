@@ -163,8 +163,10 @@ class PageView extends ModelView {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
         return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`}
                     ref={this.el}
-                    tabIndex={0}
-                    style={this.getStyle()}>
+                    tabIndex={1}
+                    style={this.getStyle()}
+                    onKeyDown={this.getCtrl().onKeyDown}
+        >
             {this.renderHeader()}
             {this.renderMain()}
             {this.renderFooter()}
