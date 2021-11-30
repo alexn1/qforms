@@ -294,8 +294,8 @@ class ModalController extends Controller {
     }
     async close() {
         await this.getApp().closeModal(this);
-        if (this.options.onCloseHook) {
-            this.options.onCloseHook();
+        if (this.options.onClose) {
+            this.options.onClose();
         }
     }
 }
@@ -439,7 +439,9 @@ class ApplicationController extends ModelController {
         pageModel.init();
 
         // controller
-        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
+        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`, {
+            onClose: options.onClose
+        });
         pc.init();
 
         return pc;
@@ -2002,6 +2004,9 @@ class TableFormController extends FormController {
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key)
+                },
+                onClose: () => {
+                    this.grid.getElement().focus();
                 }
             });
         } catch (err) {
@@ -2111,19 +2116,20 @@ class TableFormController extends FormController {
 window.QForms.TableFormController = TableFormController;
 
 class PageController extends ModelController {
-    constructor(model, parent, id) {
+    constructor(model, parent, id, options = {}) {
         //console.log('PageController.constructor', model);
         super(model, parent);
         if (!id) throw new Error('no id');
         this.id = id;
+        this.options = options;
         this.forms = [];
     }
 
-    static create(model, parent, id) {
+    static create(model, parent, id, options) {
         // console.log('PageController.create', model.getName());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id);
+        return new Class(model, parent, id, options);
     }
 
     init() {
@@ -2153,7 +2159,10 @@ class PageController extends ModelController {
             } finally {
                 this.getApp().getView().enableRerender();
             }
-            this.getApp().closePage(this);
+            await this.getApp().closePage(this);
+            if (this.options.onClose) {
+                this.options.onClose();
+            }
         } else {
             await this.rerender();
         }
@@ -2188,6 +2197,9 @@ class PageController extends ModelController {
             if (!result) return;
         }
         await this.getApp().closePage(this);
+        if (this.options.onClose) {
+            this.options.onClose();
+        }
     }
     validate() {
         for (const form of this.forms) {

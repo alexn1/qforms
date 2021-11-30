@@ -34,8 +34,8 @@ class RowFormFileFieldView extends RowFormFieldView {
             app,
             id: app.getNewId(),
             src,
-            onCloseHook: () => {
-                console.log('onCloseHook');
+            onClose: () => {
+                console.log('onClose');
                 this.getCtrl().getPage().getView().getElement().focus();
             }
         });

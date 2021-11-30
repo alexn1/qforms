@@ -1,17 +1,18 @@
 class PageController extends ModelController {
-    constructor(model, parent, id) {
+    constructor(model, parent, id, options = {}) {
         //console.log('PageController.constructor', model);
         super(model, parent);
         if (!id) throw new Error('no id');
         this.id = id;
+        this.options = options;
         this.forms = [];
     }
 
-    static create(model, parent, id) {
+    static create(model, parent, id, options) {
         // console.log('PageController.create', model.getName());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id);
+        return new Class(model, parent, id, options);
     }
 
     init() {
@@ -41,7 +42,10 @@ class PageController extends ModelController {
             } finally {
                 this.getApp().getView().enableRerender();
             }
-            this.getApp().closePage(this);
+            await this.getApp().closePage(this);
+            if (this.options.onClose) {
+                this.options.onClose();
+            }
         } else {
             await this.rerender();
         }
@@ -76,6 +80,9 @@ class PageController extends ModelController {
             if (!result) return;
         }
         await this.getApp().closePage(this);
+        if (this.options.onClose) {
+            this.options.onClose();
+        }
     }
     validate() {
         for (const form of this.forms) {

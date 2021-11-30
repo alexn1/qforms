@@ -13,8 +13,8 @@ class ModalController extends Controller {
     }
     async close() {
         await this.getApp().closeModal(this);
-        if (this.options.onCloseHook) {
-            this.options.onCloseHook();
+        if (this.options.onClose) {
+            this.options.onClose();
         }
     }
 }

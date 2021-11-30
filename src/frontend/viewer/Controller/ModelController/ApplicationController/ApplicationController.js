@@ -81,7 +81,9 @@ class ApplicationController extends ModelController {
         pageModel.init();
 
         // controller
-        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
+        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`, {
+            onClose: options.onClose
+        });
         pc.init();
 
         return pc;
