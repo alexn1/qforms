@@ -151,7 +151,7 @@ class ApplicationController extends ModelController {
     onPageSelect(pc) {
         console.log('ApplicationController.onPageSelect', pc.model.getName());
     }
-    closePage(pageController) {
+    async closePage(pageController) {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
@@ -161,7 +161,7 @@ class ApplicationController extends ModelController {
         } else  {
             throw new Error('page not found');
         }
-        this.rerender();
+        await this.rerender();
         pageController.deinit();
         pageController.model.deinit();
     }

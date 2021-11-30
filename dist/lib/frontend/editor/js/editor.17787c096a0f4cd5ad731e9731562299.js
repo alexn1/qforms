@@ -2925,8 +2925,9 @@ class FormController extends VisualController {
 
 class PageController extends VisualController {
 
-    constructor(model, pageLinkController = null) {
+    constructor(model, pageLinkController = null, options = {}) {
         super(model);
+        this.options = options;
         this.pageLinkController = pageLinkController;
         this.dataSources = [];
         this.actions     = [];

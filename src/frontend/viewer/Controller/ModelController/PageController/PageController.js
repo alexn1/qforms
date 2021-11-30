@@ -72,11 +72,10 @@ class PageController extends ModelController {
         // const valid = this.isValid();
         // console.log('valid:', valid);
         if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
-            // const result = confirm(this.model.getApp().getText().form.areYouSure);
             const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure})
             if (!result) return;
         }
-        this.getApp().closePage(this);
+        await this.getApp().closePage(this);
     }
     validate() {
         for (const form of this.forms) {
