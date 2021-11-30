@@ -45,6 +45,13 @@ class Select extends ReactComponent {
     getVisibility() {
         return this.state.visible ? 'visible' : 'hidden';
     }
+    onKeyDown = async e => {
+        // console.log('Select.onKeyDown');
+        if (this.state.visible) {
+            this.setState({visible: false});
+            e.stopPropagation();
+        }
+    }
     onInputMouseDown = async e => {
         if (this.props.readOnly) return;
         if (this.props.onMouseDown) {
@@ -120,6 +127,7 @@ class Select extends ReactComponent {
                    onBlur={this.onInputBlur}
                    value={this.getValueTitle(this.getValue())}
                    onMouseDown={this.onInputMouseDown}
+                   onKeyDown={this.onKeyDown}
             />
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible': ''}`} onClick={this.onCloseClick}>
                 <CloseIcon/>

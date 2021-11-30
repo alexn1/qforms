@@ -1731,6 +1731,16 @@ class Select extends ReactComponent {
   constructor(props) {
     super(props);
 
+    _defineProperty(this, "onKeyDown", async e => {
+      // console.log('Select.onKeyDown');
+      if (this.state.visible) {
+        this.setState({
+          visible: false
+        });
+        e.stopPropagation();
+      }
+    });
+
     _defineProperty(this, "onInputMouseDown", async e => {
       if (this.props.readOnly) return;
 
@@ -1878,7 +1888,8 @@ class Select extends ReactComponent {
       placeholder: this.props.placeholder,
       onBlur: this.onInputBlur,
       value: this.getValueTitle(this.getValue()),
-      onMouseDown: this.onInputMouseDown
+      onMouseDown: this.onInputMouseDown,
+      onKeyDown: this.onKeyDown
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
