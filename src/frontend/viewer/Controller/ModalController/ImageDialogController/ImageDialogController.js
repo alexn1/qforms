@@ -12,11 +12,11 @@ class ImageDialogController extends ModalController {
         return this.options.src;
     }
     onCloseClick = async e => {
-        this.close();
+        await this.close();
     }
     onKeyDown = async e => {
         if (e.key === 'Escape') {
-            this.close();
+            await this.close();
         }
     }
 }

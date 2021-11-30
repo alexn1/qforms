@@ -11,14 +11,10 @@ class ModalController extends Controller {
     getApp() {
         return this.options.app;
     }
-    close() {
-        this.getApp().removeModal(this);
-        this.getApp().rerender();
-    }
-    async onDocumentKeyDown(e) {
-        console.log('ModalController.onDocumentKeyDown', e);
-        if (e.key === 'Escape') {
-            this.close();
+    async close() {
+        await this.getApp().closeModal(this);
+        if (this.options.onCloseHook) {
+            this.options.onCloseHook();
         }
     }
 }

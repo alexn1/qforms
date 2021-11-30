@@ -284,6 +284,10 @@ class ApplicationController extends ModelController {
         await this.rerender();
         ctrl.getView().getElement().focus();
     }
+    async closeModal(ctrl) {
+        this.removeModal(ctrl);
+        await this.rerender();
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
