@@ -28,6 +28,7 @@ class Button extends ReactComponent {
                 onClick={this.props.onClick}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
+                onKeyDown={this.props.onKeyDown}
                 style={this.getStyle()}
             >{this.props.title || this.props.children}</button>
         );

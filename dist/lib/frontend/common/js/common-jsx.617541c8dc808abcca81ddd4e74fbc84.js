@@ -493,6 +493,7 @@ class Button extends ReactComponent {
       onClick: this.props.onClick,
       onFocus: this.props.onFocus,
       onBlur: this.props.onBlur,
+      onKeyDown: this.props.onKeyDown,
       style: this.getStyle()
     }, this.props.title || this.props.children);
   }
@@ -900,6 +901,16 @@ class DropdownButton extends ReactComponent {
       }
     });
 
+    _defineProperty(this, "onKeyDown", e => {
+      // console.log('DropdownButton.onKeyDown', e.key);
+      if (e.key === 'Escape' && this.state.open) {
+        this.setState({
+          open: false
+        });
+        e.stopPropagation();
+      }
+    });
+
     _defineProperty(this, "onUlMouseDown", e => {
       // console.log('DropdownButton.onUlMouseDown');
       e.preventDefault();
@@ -936,7 +947,8 @@ class DropdownButton extends ReactComponent {
       classList: [`${this.getCssBlockName()}__button`],
       onClick: this.onButtonClick,
       onBlur: this.onButtonBlur,
-      enabled: this.isEnabled()
+      enabled: this.isEnabled(),
+      onKeyDown: this.onKeyDown
     }, this.props.title || this.props.children), /*#__PURE__*/React.createElement("ul", {
       className: `${this.getCssBlockName()}__dropdown`,
       onMouseDown: this.onUlMouseDown

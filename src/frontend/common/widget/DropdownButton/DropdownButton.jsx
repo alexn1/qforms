@@ -16,6 +16,13 @@ class DropdownButton extends ReactComponent{
             this.setState({open: false});
         }
     }
+    onKeyDown = e => {
+        // console.log('DropdownButton.onKeyDown', e.key);
+        if (e.key === 'Escape' && this.state.open) {
+            this.setState({open: false});
+            e.stopPropagation();
+        }
+    }
     onUlMouseDown = e => {
         // console.log('DropdownButton.onUlMouseDown');
         e.preventDefault();
@@ -42,6 +49,7 @@ class DropdownButton extends ReactComponent{
                     onClick={this.onButtonClick}
                     onBlur={this.onButtonBlur}
                     enabled={this.isEnabled()}
+                    onKeyDown={this.onKeyDown}
                 >{this.props.title || this.props.children}</Button>
                 <ul className={`${this.getCssBlockName()}__dropdown`} onMouseDown={this.onUlMouseDown}>
                     {this.props.actions && this.props.actions.map(action =>
