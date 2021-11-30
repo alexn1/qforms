@@ -146,7 +146,7 @@ class FrontHostApp {
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
                 } else {
-                    reject(new Error('alert already exists'));
+                    reject(new Error('confirm already exists'));
                 }
             } catch (err) {
                 reject(err);
