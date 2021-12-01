@@ -36,4 +36,7 @@ class ConfirmView extends View {
             </div>
         );
     }
+    componentDidMount() {
+        this.getElement().focus();
+    }
 }

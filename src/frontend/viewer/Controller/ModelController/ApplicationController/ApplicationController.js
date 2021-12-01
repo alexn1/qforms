@@ -117,7 +117,6 @@ class ApplicationController extends ModelController {
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
-        pc.getView().getElement().focus();
 
         return pc;
     }
@@ -276,7 +275,6 @@ class ApplicationController extends ModelController {
     async openModal(ctrl) {
         this.addModal(ctrl);
         await this.rerender();
-        ctrl.getView().getElement().focus();
     }
     async closeModal(ctrl) {
         this.removeModal(ctrl);

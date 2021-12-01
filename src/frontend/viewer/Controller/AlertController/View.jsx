@@ -31,4 +31,7 @@ class AlertView extends View {
             </div>
         );
     }
+    componentDidMount() {
+        this.getElement().focus();
+    }
 }

@@ -158,11 +158,11 @@ class PageView extends ModelView {
     }
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
-        return <div className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`}
-                    ref={this.el}
-                    tabIndex={1}
-                    style={this.getStyle()}
+        return <div ref={this.el}
+                    tabIndex={0}
                     onKeyDown={this.getCtrl().onKeyDown}
+                    className={`${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`}
+                    style={this.getStyle()}
         >
             {this.renderHeader()}
             {this.renderMain()}
@@ -176,6 +176,15 @@ class PageView extends ModelView {
                 height: 750
             };
         }
+    }
+    componentDidMount() {
+        // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        if (this.getElement()) {
+            this.getElement().focus();
+        } else {
+            console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);
+        }
+
     }
 }
 window.QForms.PageView = PageView;

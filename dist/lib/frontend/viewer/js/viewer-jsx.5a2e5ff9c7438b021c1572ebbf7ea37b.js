@@ -47,6 +47,10 @@ class AlertView extends View {
     })))));
   }
 
+  componentDidMount() {
+    this.getElement().focus();
+  }
+
 }
 class ConfirmView extends View {
   constructor(props) {
@@ -86,6 +90,10 @@ class ConfirmView extends View {
       title: 'OK',
       onClick: this.getCtrl().onOkButtonClick
     })))));
+  }
+
+  componentDidMount() {
+    this.getElement().focus();
   }
 
 }
@@ -161,6 +169,10 @@ class ImageDialogView extends View {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+  }
+
+  componentDidMount() {
+    this.getElement().focus();
   }
 
 }
@@ -1347,7 +1359,7 @@ class PageView extends ModelView {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
       ref: this.el,
-      tabIndex: 1,
+      tabIndex: 0,
       style: this.getStyle(),
       onKeyDown: this.getCtrl().onKeyDown
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
@@ -1359,6 +1371,15 @@ class PageView extends ModelView {
         width: 1000,
         height: 750
       };
+    }
+  }
+
+  componentDidMount() {
+    // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+    if (this.getElement()) {
+      this.getElement().focus();
+    } else {
+      console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);
     }
   }
 

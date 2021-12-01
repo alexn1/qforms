@@ -17,4 +17,7 @@ class ImageDialogView extends View {
             </button>
         </div>;
     }
+    componentDidMount() {
+        this.getElement().focus();
+    }
 }
