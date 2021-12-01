@@ -182,6 +182,12 @@ class RowFormController extends FormController {
         return this.state.mode;
     }
     isActionEnabled(name) {
+        return this.isViewMode();
+    }
+    isEditMode() {
+        return this.getMode() === 'edit';
+    }
+    isViewMode() {
         return this.getMode() === 'view';
     }
 }

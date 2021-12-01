@@ -185,7 +185,6 @@ class PageView extends ModelView {
         } else {
             console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);
         }
-
     }
 }
 window.QForms.PageView = PageView;
