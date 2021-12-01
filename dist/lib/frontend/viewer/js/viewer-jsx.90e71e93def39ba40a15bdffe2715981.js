@@ -692,16 +692,16 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextBox, {
       classList: [`${this.getCssBlockName()}__input`],
-      onCreate: ctrl.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       disabled: !ctrl.isEditable(),
-      onChange: ctrl.onChange,
+      autoFocus: ctrl.getModel().isAutoFocus(),
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null,
+      onCreate: ctrl.onWidgetCreate,
+      onChange: ctrl.onChange,
       onFocus: this.onFocus,
-      onBlur: this.onBlur,
-      autoFocus: ctrl.getModel().isAutoFocus()
+      onBlur: this.onBlur
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick

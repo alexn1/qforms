@@ -37,18 +37,20 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         return <div className={this.getCssClassNames()}>
             <TextBox
                 classList={[`${this.getCssBlockName()}__input`]}
-                onCreate={ctrl.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 disabled={!ctrl.isEditable()}
-                onChange={ctrl.onChange}
+                autoFocus={ctrl.getModel().isAutoFocus()}
                 placeholder={ctrl.getPlaceholder() || null}
                 autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
+                onCreate={ctrl.onWidgetCreate}
+                onChange={ctrl.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                autoFocus={ctrl.getModel().isAutoFocus()}
             />
-            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
+            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
+                 onClick={this.onCloseClick}
+            >
                 <CloseIcon/>
             </div>
         </div>;
