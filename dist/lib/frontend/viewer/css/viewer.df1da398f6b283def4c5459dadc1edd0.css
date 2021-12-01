@@ -522,10 +522,11 @@
   background-color: #f0f6ff;
   padding: 5px;
   font-size: small;
+  max-width: 1024px;
 }
-/*.Modal .RowFormView {
+.Modal .RowFormView {
   width: unset;
-}*/
+}
 .RowFormView__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr) minmax(240px, 2fr) 24px);
