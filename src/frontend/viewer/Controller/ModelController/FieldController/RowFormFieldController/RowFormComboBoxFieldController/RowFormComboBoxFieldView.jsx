@@ -27,7 +27,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
             <div className={this.getCssClassNames()}>
                 <Select
                     classList={[`${this.getCssBlockName()}__select`]}
-                    onCreate={ctrl.onWidgetCreate}
+                    onCreate={this.onWidgetCreate}
                     nullable={true}
                     value={ctrl.getValueForWidget()}
                     readOnly={!ctrl.isEditable()}

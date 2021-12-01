@@ -1,4 +1,8 @@
 class RowFormFieldView extends FieldView {
+    constructor(props) {
+        super(props);
+        this.widget = null;
+    }
     getClassList() {
         const ctrl = this.props.ctrl;
         return [
@@ -8,7 +12,10 @@ class RowFormFieldView extends FieldView {
         ];
     }
     getWidget() {
-        return this.getCtrl().widget;
+        return this.widget;
+    }
+    onWidgetCreate = widget => {
+        this.widget = widget;
     }
 }
 window.QForms.RowFormFieldView = RowFormFieldView;

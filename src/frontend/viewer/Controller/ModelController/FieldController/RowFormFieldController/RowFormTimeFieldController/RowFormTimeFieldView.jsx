@@ -19,7 +19,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
             <TimeBox
-                onCreate={ctrl.onWidgetCreate}
+                onCreate={this.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 onChange={ctrl.onChange}

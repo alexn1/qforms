@@ -707,16 +707,12 @@ window.QForms.FieldController = FieldController;
 class RowFormFieldController extends FieldController {
     constructor(model, parent) {
         super(model, parent);
-        this.widget = null;
         this.state = {
             value     : null,
             parseError: null,
             error     : null,
             changed   : false,
         };
-    }
-    onWidgetCreate = widget => {
-        this.widget = widget;
     }
     init() {
         const row = this.getRow();

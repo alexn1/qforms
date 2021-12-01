@@ -21,7 +21,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
         return <div className={this.getCssClassNames()}>
             <TextArea
                 classList={[`${this.getCssBlockName()}__textarea`]}
-                onCreate={ctrl.onWidgetCreate}
+                onCreate={this.onWidgetCreate}
                 value={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 disabled={!ctrl.isEditable()}

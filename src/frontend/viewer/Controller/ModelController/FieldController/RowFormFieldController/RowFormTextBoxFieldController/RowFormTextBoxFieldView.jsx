@@ -43,7 +43,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
                 autoFocus={ctrl.getModel().isAutoFocus()}
                 placeholder={ctrl.getPlaceholder() || null}
                 autocomplete={ctrl.getModel().getAttr('autocomplete') || null}
-                onCreate={ctrl.onWidgetCreate}
+                onCreate={this.onWidgetCreate}
                 onChange={ctrl.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}

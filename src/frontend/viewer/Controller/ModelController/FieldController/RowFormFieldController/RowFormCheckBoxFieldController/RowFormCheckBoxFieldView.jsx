@@ -4,7 +4,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
         const ctrl = this.props.ctrl;
         return <div className={this.getCssClassNames()}>
             <CheckBox
-                onCreate={ctrl.onWidgetCreate}
+                onCreate={this.onWidgetCreate}
                 checked={ctrl.getValueForWidget()}
                 readOnly={!ctrl.isEditable()}
                 disabled={!ctrl.isEditable()}

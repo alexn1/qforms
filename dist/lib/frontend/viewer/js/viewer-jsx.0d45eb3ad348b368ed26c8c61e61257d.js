@@ -279,14 +279,26 @@ class FieldView extends ModelView {
   }
 
 }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormFieldView extends FieldView {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onWidgetCreate", widget => {
+      this.widget = widget;
+    });
+
+    this.widget = null;
+  }
+
   getClassList() {
     const ctrl = this.props.ctrl;
     return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
   }
 
   getWidget() {
-    return this.getCtrl().widget;
+    return this.widget;
   }
 
 }
@@ -299,7 +311,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(CheckBox, {
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       checked: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       disabled: !ctrl.isEditable(),
@@ -348,7 +360,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(Select, {
       classList: [`${this.getCssBlockName()}__select`],
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       nullable: true,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
@@ -376,7 +388,7 @@ class RowFormDateFieldView extends RowFormFieldView {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(DropdownDatePicker, {
       classList: [`${this.getCssBlockName()}__date-picker`],
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -422,7 +434,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement(DropdownDatePicker, {
       classList: [`${this.getCssBlockName()}__dropdown-date-picker`],
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
@@ -628,7 +640,7 @@ class RowFormTextAreaFieldView extends RowFormFieldView {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TextArea, {
       classList: [`${this.getCssBlockName()}__textarea`],
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       disabled: !ctrl.isEditable(),
@@ -702,7 +714,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
       autoFocus: ctrl.getModel().isAutoFocus(),
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getModel().getAttr('autocomplete') || null,
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       onChange: ctrl.onChange,
       onFocus: this.onFocus,
       onBlur: this.onBlur
@@ -747,7 +759,7 @@ class RowFormTimeFieldView extends RowFormFieldView {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement(TimeBox, {
-      onCreate: ctrl.onWidgetCreate,
+      onCreate: this.onWidgetCreate,
       value: ctrl.getValueForWidget(),
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
