@@ -44,7 +44,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (widgetValue !== null) {
             setTimeout(() => {
-                const input = this.widget2.getInput();
+                const input = this.widget2.getElement();
                 input.focus();
                 input.setSelectionRange(0, input.value.length);
             }, 0);

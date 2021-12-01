@@ -79,7 +79,7 @@ class IndexFrontHostApp {
     btnCreate_Click = async e => {
         this.modals.push({id: 1});
         await this.view.rerender();
-        this.folderNameTextBox.getInput().focus();
+        this.folderNameTextBox.getElement().focus();
     }
 
     async createApp(folderName, appName) {

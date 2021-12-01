@@ -8,10 +8,7 @@ class TimeBox extends ReactComponent {
         this.state = {
             value: TimeBox.getStringValue(props.value)
         };
-        this.input = React.createRef();
-    }
-    getInput() {
-        return this.input.current;
+        this.el = React.createRef();
     }
     onKeyPress = event => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
@@ -180,7 +177,7 @@ class TimeBox extends ReactComponent {
                 // onKeyUp={this.onKeyUp}
                 onKeyPress={this.onKeyPress}
                 onBlur={this.onBlur}
-                ref={this.input}
+                ref={this.el}
             />
         );
     }

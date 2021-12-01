@@ -2276,7 +2276,7 @@ class TextBox extends ReactComponent {
       }
     });
 
-    this.input = React.createRef();
+    this.el = React.createRef();
     this.state = {
       value: this.props.value || ''
     };
@@ -2284,10 +2284,6 @@ class TextBox extends ReactComponent {
 
   getValue() {
     return this.state.value;
-  }
-
-  getInput() {
-    return this.input.current;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -2299,9 +2295,9 @@ class TextBox extends ReactComponent {
   render() {
     // console.log('TextBox.render');
     return /*#__PURE__*/React.createElement("input", {
-      ref: this.input,
+      ref: this.el,
       className: this.getCssClassNames(),
-      type: "text",
+      type: this.props.type || 'text',
       id: this.props.id,
       name: this.props.name,
       readOnly: this.props.readOnly,
@@ -2310,10 +2306,10 @@ class TextBox extends ReactComponent {
       autoFocus: this.props.autoFocus,
       spellCheck: this.props.spellCheck,
       autoComplete: this.props.autocomplete,
-      value: this.state.value,
-      onChange: this.onChange,
       onFocus: this.props.onFocus,
-      onBlur: this.props.onBlur
+      onBlur: this.props.onBlur,
+      value: this.state.value,
+      onChange: this.onChange
     });
   }
 
@@ -2398,11 +2394,7 @@ class TimeBox extends ReactComponent {
     this.state = {
       value: TimeBox.getStringValue(props.value)
     };
-    this.input = React.createRef();
-  }
-
-  getInput() {
-    return this.input.current;
+    this.el = React.createRef();
   }
 
   formatValue(value) {
@@ -2533,7 +2525,7 @@ class TimeBox extends ReactComponent {
       ,
       onKeyPress: this.onKeyPress,
       onBlur: this.onBlur,
-      ref: this.input
+      ref: this.el
     });
   }
 
