@@ -95,7 +95,7 @@ class FrontHostApp {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
     alert(options) {
-        console.log('FrontHostApp.alert', options);
+        console.log('FrontHostApp.alert', options/*, document.activeElement*/);
         return new Promise((resolve, reject) => {
             let activeElement;
             try {
