@@ -285,6 +285,10 @@ class RowFormFieldView extends FieldView {
     return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
   }
 
+  getWidget() {
+    return this.getCtrl().widget;
+  }
+
 }
 
 window.QForms.RowFormFieldView = RowFormFieldView;
@@ -649,8 +653,8 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     _defineProperty(this, "onCloseClick", async e => {
       console.log('RowFormTextBoxFieldView.onCloseClick');
       const ctrl = this.props.ctrl;
-      ctrl.widget.state.value = '';
-      ctrl.widget.setState({
+      this.getWidget().state.value = '';
+      this.getWidget().setState({
         value: ''
       });
       ctrl.onChange('');
@@ -678,12 +682,12 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     const ctrl = this.props.ctrl;
     if (!ctrl.isEditable()) return false;
 
-    if (!ctrl.widget) {
+    if (!this.getWidget()) {
       return this.props.value !== undefined;
-    } // console.log('ctrl.widget.state.value:', ctrl.widget.state.value);
+    } // console.log('this.getWidget().state.value:', this.getWidget().state.value);
 
 
-    return ctrl.widget.state.value !== '';
+    return this.getWidget().state.value !== '';
   }
 
   render() {
@@ -720,8 +724,8 @@ class RowFormTimeFieldView extends RowFormFieldView {
     _defineProperty(this, "onCloseClick", async e => {
       console.log('RowFormTimeFieldView.onCloseClick');
       /*const ctrl = this.props.ctrl;
-      ctrl.widget.state.value = '';
-      ctrl.widget.setState({value: ''});
+      this.getWidget().state.value = '';
+      this.getWidget().setState({value: ''});
       ctrl.onChange(null);*/
     });
   }
@@ -729,14 +733,13 @@ class RowFormTimeFieldView extends RowFormFieldView {
   isCloseVisible() {
     // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
     if (this.props.readOnly) return false;
-    const ctrl = this.props.ctrl;
 
-    if (!ctrl.widget) {
+    if (!this.getWidget()) {
       return this.props.value !== undefined;
-    } // console.log('ctrl.widget.state.value:', ctrl.view.state.value);
+    } // console.log('this.getWidget().state.value:', ctrl.view.state.value);
 
 
-    return ctrl.widget.state.value !== '';
+    return this.getWidget().state.value !== '';
   }
 
   render() {

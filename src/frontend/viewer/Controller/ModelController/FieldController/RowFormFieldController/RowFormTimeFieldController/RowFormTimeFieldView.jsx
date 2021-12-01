@@ -2,19 +2,18 @@ class RowFormTimeFieldView extends RowFormFieldView {
     onCloseClick = async e => {
         console.log('RowFormTimeFieldView.onCloseClick');
         /*const ctrl = this.props.ctrl;
-        ctrl.widget.state.value = '';
-        ctrl.widget.setState({value: ''});
+        this.getWidget().state.value = '';
+        this.getWidget().setState({value: ''});
         ctrl.onChange(null);*/
     }
     isCloseVisible() {
         // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly) return false;
-        const ctrl = this.props.ctrl;
-        if (!ctrl.widget) {
+        if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('ctrl.widget.state.value:', ctrl.view.state.value);
-        return ctrl.widget.state.value !== '';
+        // console.log('this.getWidget().state.value:', ctrl.view.state.value);
+        return this.getWidget().state.value !== '';
     }
     render() {
         const ctrl = this.props.ctrl;

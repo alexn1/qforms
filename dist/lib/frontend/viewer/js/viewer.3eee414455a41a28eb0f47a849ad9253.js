@@ -839,9 +839,9 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
         // parse validator
-        if (this.view && this.widget) {
+        if (this.view && this.view.getWidget()) {
             try {
-                const widgetValue = this.widget.getValue();
+                const widgetValue = this.view.getWidget().getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }

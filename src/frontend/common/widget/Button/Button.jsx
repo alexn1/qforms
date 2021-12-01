@@ -17,6 +17,12 @@ class Button extends ReactComponent {
             width  : this.props.width
         };
     }
+    disable() {
+        this.setState({disabled: true});
+    }
+    enable() {
+        this.setState({disabled: false});
+    }
     render() {
         // console.log('Button.render', this.props.title, this.props);
         return (

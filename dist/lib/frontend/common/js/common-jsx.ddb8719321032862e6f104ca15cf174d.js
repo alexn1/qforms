@@ -500,6 +500,18 @@ class Button extends ReactComponent {
     };
   }
 
+  disable() {
+    this.setState({
+      disabled: true
+    });
+  }
+
+  enable() {
+    this.setState({
+      disabled: false
+    });
+  }
+
   render() {
     // console.log('Button.render', this.props.title, this.props);
     return /*#__PURE__*/React.createElement("button", {

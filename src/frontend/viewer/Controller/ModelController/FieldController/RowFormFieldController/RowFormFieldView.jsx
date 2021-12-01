@@ -7,5 +7,8 @@ class RowFormFieldView extends FieldView {
             ...(ctrl.getErrorMessage() !== null ? ['error']   : [])
         ];
     }
+    getWidget() {
+        return this.getCtrl().widget;
+    }
 }
 window.QForms.RowFormFieldView = RowFormFieldView;
