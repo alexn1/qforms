@@ -180,6 +180,7 @@ class PageView extends ModelView {
     componentDidMount() {
         // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
+            // console.log('focus', this.getElement());
             this.getElement().focus();
         } else {
             console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);

@@ -1357,11 +1357,11 @@ class PageView extends ModelView {
   render() {
     console.log('PageView.render', this.getCtrl().getModel().getFullName());
     return /*#__PURE__*/React.createElement("div", {
-      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
       ref: this.el,
       tabIndex: 0,
-      style: this.getStyle(),
-      onKeyDown: this.getCtrl().onKeyDown
+      onKeyDown: this.getCtrl().onKeyDown,
+      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
+      style: this.getStyle()
     }, this.renderHeader(), this.renderMain(), this.renderFooter());
   }
 
@@ -1377,6 +1377,7 @@ class PageView extends ModelView {
   componentDidMount() {
     // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
     if (this.getElement()) {
+      // console.log('focus', this.getElement());
       this.getElement().focus();
     } else {
       console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);
