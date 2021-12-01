@@ -75,23 +75,22 @@ class TableFormController extends FormController {
         console.log('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
             const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
-            this.grid.getElement().focus();
             if (result) {
                 await this.model.getDefaultDataSource().delete(key);
             }
         }
     }
-    onHidePage = async () => {
-        // this.grid.saveScroll();
-    }
-    onShowPage = async () => {
+    /*onHidePage = async () => {
+        this.grid.saveScroll();
+    }*/
+    /*onShowPage = async () => {
         console.log('TableFormController.onShowPage', this.model.getFullName());
-        /*if (!this.grid.isHidden()) {
+        if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
             // console.log('document.activeElement:', document.activeElement);
-        }*/
-    }
+        }
+    }*/
     async new() {
         if (this.model.getAttr('newRowMode') === 'oneclick') {
             const row = {};

@@ -97,7 +97,9 @@ class FrontHostApp {
     alert(options) {
         console.log('FrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
+            let activeElement;
             try {
+                activeElement = document.activeElement;
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = this.alertCtrl = new AlertController({
@@ -105,15 +107,18 @@ class FrontHostApp {
                         onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
+                            if (activeElement) activeElement.focus();
                             resolve(result);
                         }});
                     // console.log('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
                 } else {
+                    if (activeElement) activeElement.focus();
                     reject(new Error('alert already exists'));
                 }
             } catch (err) {
+                if (activeElement) activeElement.focus();
                 reject(err);
             }
         });
@@ -121,7 +126,9 @@ class FrontHostApp {
     confirm(options) {
         console.log('FrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {
+            let activeElement;
             try {
+                activeElement = document.activeElement;
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = this.alertCtrl = new ConfirmController({
@@ -129,15 +136,18 @@ class FrontHostApp {
                         onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
+                            if (activeElement) activeElement.focus();
                             resolve(result);
                         }});
                     // console.log('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
                     // console.log('view', view);
                 } else {
+                    if (activeElement) activeElement.focus();
                     reject(new Error('confirm already exists'));
                 }
             } catch (err) {
+                if (activeElement) activeElement.focus();
                 reject(err);
             }
         });
