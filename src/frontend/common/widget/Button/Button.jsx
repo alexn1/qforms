@@ -3,6 +3,7 @@ class Button extends ReactComponent {
         // console.log('Button.constructor', props);
         super(props);
         this.state = {disabled: false};
+        this.el = React.createRef();
     }
     isDisabled() {
         if (this.props.enabled !== undefined) return !this.props.enabled;
@@ -27,6 +28,7 @@ class Button extends ReactComponent {
         // console.log('Button.render', this.props.title, this.props);
         return (
             <button className={this.getCssClassNames()}
+                ref={this.el}
                 id={this.props.id}
                 type={this.props.type}
                 name={this.props.name}

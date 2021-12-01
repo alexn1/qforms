@@ -482,6 +482,7 @@ class Button extends ReactComponent {
     this.state = {
       disabled: false
     };
+    this.el = React.createRef();
   }
 
   isDisabled() {
@@ -516,6 +517,7 @@ class Button extends ReactComponent {
     // console.log('Button.render', this.props.title, this.props);
     return /*#__PURE__*/React.createElement("button", {
       className: this.getCssClassNames(),
+      ref: this.el,
       id: this.props.id,
       type: this.props.type,
       name: this.props.name,
