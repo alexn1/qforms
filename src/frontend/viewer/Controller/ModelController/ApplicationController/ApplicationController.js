@@ -66,24 +66,24 @@ class ApplicationController extends ModelController {
             // foo: 'bar'
         };
     }
+    // options
+    // - modal      : boolean,
+    // - newMode    : boolean,
+    // - selectMode : boolean,
+    // - selectedKey: string,
+    // - onCreate   : function,
+    // - onSelect   : function,
+    // - onClose    : function,
+    // - params     : object,
     createPage(pageData, options) {
         if (options.modal === undefined) throw new Error('no options.modal');
 
-        const pageModel = new Page(pageData, this.model, {
-            modal      : options.modal,
-            newMode    : options.newMode,
-            selectMode : options.selectMode,
-            selectedKey: options.selectedKey,
-            onCreate   : options.onCreate,
-            onSelect   : options.onSelect,
-            params     : options.params || {}
-        });
+        // model
+        const pageModel = new Page(pageData, this.model, options);
         pageModel.init();
 
         // controller
-        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`, {
-            onClose: options.onClose
-        });
+        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
 
         return pc;
@@ -108,10 +108,11 @@ class ApplicationController extends ModelController {
             params : options.params || {}
         });
 
-        const pc = this.createPage(pageData, {
-            ...options,
-            modal: options.modal !== undefined ? options.modal : true
-        });
+        // modal by default
+        if (options.modal === undefined) {
+            options.modal = true;
+        }
+        const pc = this.createPage(pageData, options);
         // console.log('pc:', pc);
 
         // show

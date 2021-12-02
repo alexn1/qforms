@@ -1,10 +1,9 @@
 class PageController extends ModelController {
-    constructor(model, parent, id, options = {}) {
+    constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
         super(model, parent);
         if (!id) throw new Error('no id');
         this.id = id;
-        this.options = options;
         this.forms = [];
     }
 
@@ -43,8 +42,8 @@ class PageController extends ModelController {
                 this.getApp().getView().enableRerender();
             }
             await this.getApp().closePage(this);
-            if (this.options.onClose) {
-                this.options.onClose();
+            if (this.getModel().options.onClose) {
+                this.getModel().options.onClose();
             }
         } else {
             await this.rerender();
@@ -80,8 +79,8 @@ class PageController extends ModelController {
             if (!result) return;
         }
         await this.getApp().closePage(this);
-        if (this.options.onClose) {
-            this.options.onClose();
+        if (this.getModel().options.onClose) {
+            this.getModel().options.onClose();
         }
     }
     validate() {
