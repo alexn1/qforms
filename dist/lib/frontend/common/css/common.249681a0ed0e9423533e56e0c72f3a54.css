@@ -526,7 +526,7 @@ svg {
   visibility: visible;
 }
 .Select__close:hover line {
-  stroke: black;
+  stroke: #333;
 }
 .Select__icon_up svg {
   transform: rotate(180deg);
