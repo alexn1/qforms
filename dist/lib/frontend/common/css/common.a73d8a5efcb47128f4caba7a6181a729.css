@@ -517,16 +517,16 @@ svg {
   align-items: center;
   visibility: hidden;
 }
+.Select__close svg {
+  margin: 0 auto;
+  width: 10px;
+  height: 10px;
+}
 .Select__close.visible {
   visibility: visible;
 }
 .Select__close:hover line {
   stroke: black;
-}
-.Select__close svg {
-  margin: 0 auto;
-  width: 10px;
-  height: 10px;
 }
 .Select__icon_up svg {
   transform: rotate(180deg);
