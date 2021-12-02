@@ -1,4 +1,4 @@
-class CloseIcon extends ReactComponent {
+class CloseIcon extends React.Component {
     render() {
         const strokeWidth = this.props.strokeWidth || 1;
         return <svg viewBox="0 0 10 10">
