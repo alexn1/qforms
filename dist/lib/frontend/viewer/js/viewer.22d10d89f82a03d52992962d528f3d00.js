@@ -3925,7 +3925,7 @@ class Page extends Model {
 
     getParams() {
         return {
-            ...(this.options.params !== undefined ? this.options.params : {}),
+            ...(this.options.params || {}),
             ...this.params,
         };
     }
