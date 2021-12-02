@@ -827,7 +827,9 @@ class RowFormFieldController extends FieldController {
     }
     validate() {
         // console.log('RowFormFieldController.validate', this.model.getFullName());
-        this.state.error = this.getError();
+        if (this.getModel().isVisible()) {
+            this.state.error = this.getError();
+        }
     }
     refreshChanged() {
         this.state.changed = this.calcChangedState(this.getRow());
