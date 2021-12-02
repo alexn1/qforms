@@ -258,7 +258,12 @@ class ApplicationController extends ModelController {
         if (!options.title) {
             options.title = this.getModel().getText().application.error;
         }
-        return await this.frontHostApp.alert(options);
+        const activeElement = document.activeElement;
+        try {
+            return await this.frontHostApp.alert(options);
+        } finally {
+            if (activeElement) activeElement.focus();
+        }
     }
     async confirm(options) {
         if (!options.title) {
@@ -267,7 +272,12 @@ class ApplicationController extends ModelController {
         if (!options.cancelButton) {
             options.cancelButton = this.getModel().getText().page.cancel;
         }
-        return await this.frontHostApp.confirm(options);
+        const activeElement = document.activeElement;
+        try {
+            return await this.frontHostApp.confirm(options);
+        } finally {
+            if (activeElement) activeElement.focus();
+        }
     }
     getRootPath() {
         return '/';
