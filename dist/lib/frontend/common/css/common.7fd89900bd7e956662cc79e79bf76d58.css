@@ -762,7 +762,7 @@ svg {
   background-color: white;
 }
 .Tab2__button > span {
-  margin: 5px 10px 0 10px;
+  margin: 7px 10px 2px 10px;
   display: inline-block;
   max-width: 300px;
   overflow: hidden;
@@ -778,9 +778,6 @@ svg {
 }
 .Tab2__page.active {
   display: block;
-}
-.Tab2.Tab-blue > ul > li {
-  border-radius: 3px 3px 0 0;
 }
 .Tab2.Tab-blue > ul > li.active {
   background-color: #398bce;
