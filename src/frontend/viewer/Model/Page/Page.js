@@ -27,6 +27,10 @@ class Page extends Model {
         super.deinit();
     }
 
+    getOptions() {
+        return this.options;
+    }
+
     createForms() {
         // forms
         for (const data of this.data.forms) {

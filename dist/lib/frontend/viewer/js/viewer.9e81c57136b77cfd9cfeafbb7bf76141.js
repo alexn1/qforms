@@ -1902,7 +1902,7 @@ class TableFormController extends FormController {
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
             case 'form':
-                if (this.getPage().getModel().options.selectMode) {
+                if (this.getPage().getModel().getOptions().selectMode) {
                     await this.getPage().selectRow(key);
                 } else {
                     await this.edit(key);
@@ -2161,8 +2161,8 @@ class PageController extends ModelController {
                 this.getApp().getView().enableRerender();
             }
             await this.getApp().closePage(this);
-            if (this.getModel().options.onClose) {
-                this.getModel().options.onClose();
+            if (this.getModel().getOptions().onClose) {
+                this.getModel().getOptions().onClose();
             }
         } else {
             await this.rerender();
@@ -2198,8 +2198,8 @@ class PageController extends ModelController {
             if (!result) return;
         }
         await this.getApp().closePage(this);
-        if (this.getModel().options.onClose) {
-            this.getModel().options.onClose();
+        if (this.getModel().getOptions().onClose) {
+            this.getModel().getOptions().onClose();
         }
     }
     validate() {
@@ -2336,7 +2336,7 @@ class PageController extends ModelController {
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel().options.onSelect(key);
+        await this.getModel().getOptions().onSelect(key);
     }
     invalidate() {
         this.forms.forEach(form => form.invalidate());
@@ -3903,6 +3903,10 @@ class Page extends Model {
         this.deinitDataSources();
         this.deinitForms();
         super.deinit();
+    }
+
+    getOptions() {
+        return this.options;
     }
 
     createForms() {

@@ -42,8 +42,8 @@ class PageController extends ModelController {
                 this.getApp().getView().enableRerender();
             }
             await this.getApp().closePage(this);
-            if (this.getModel().options.onClose) {
-                this.getModel().options.onClose();
+            if (this.getModel().getOptions().onClose) {
+                this.getModel().getOptions().onClose();
             }
         } else {
             await this.rerender();
@@ -79,8 +79,8 @@ class PageController extends ModelController {
             if (!result) return;
         }
         await this.getApp().closePage(this);
-        if (this.getModel().options.onClose) {
-            this.getModel().options.onClose();
+        if (this.getModel().getOptions().onClose) {
+            this.getModel().getOptions().onClose();
         }
     }
     validate() {
@@ -217,7 +217,7 @@ class PageController extends ModelController {
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel().options.onSelect(key);
+        await this.getModel().getOptions().onSelect(key);
     }
     invalidate() {
         this.forms.forEach(form => form.invalidate());
