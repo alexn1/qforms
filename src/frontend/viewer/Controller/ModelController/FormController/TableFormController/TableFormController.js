@@ -163,9 +163,6 @@ class TableFormController extends FormController {
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key)
-                },
-                onClose: () => {
-                    this.grid.getElement().focus();
                 }
             });
         } catch (err) {

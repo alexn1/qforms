@@ -112,6 +112,12 @@ class ApplicationController extends ModelController {
         if (options.modal === undefined) {
             options.modal = true;
         }
+        if (!options.onClose) {
+            const activeElement = document.activeElement;
+            options.onClose = () => {
+                if (activeElement) activeElement.focus();
+            };
+        }
         const pc = this.createPage(pageData, options);
         // console.log('pc:', pc);
 
