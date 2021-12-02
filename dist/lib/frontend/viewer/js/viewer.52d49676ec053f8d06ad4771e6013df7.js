@@ -712,6 +712,9 @@ class FieldController extends ModelController {
     getApp() {
         return this.parent.parent.parent;
     }
+    isVisible() {
+        return this.getModel().getAttr('visible') === 'true';
+    }
 }
 window.QForms.FieldController = FieldController;
 
@@ -827,7 +830,7 @@ class RowFormFieldController extends FieldController {
     }
     validate() {
         // console.log('RowFormFieldController.validate', this.model.getFullName());
-        if (this.getModel().isVisible()) {
+        if (this.isVisible()) {
             this.state.error = this.getError();
         }
     }
@@ -3482,9 +3485,6 @@ class Field extends Model {
     }
     isNullable() {
         return this.data.notNull === 'false';
-    }
-    isVisible() {
-        return this.data.visible === 'true';
     }
     isAutoFocus() {
         return this.getAttr('autoFocus') === 'true';

@@ -139,9 +139,6 @@ class Field extends Model {
     isNullable() {
         return this.data.notNull === 'false';
     }
-    isVisible() {
-        return this.data.visible === 'true';
-    }
     isAutoFocus() {
         return this.getAttr('autoFocus') === 'true';
     }

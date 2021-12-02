@@ -1051,7 +1051,7 @@ class RowFormView extends FormView {
     const ctrl = this.props.ctrl;
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__grid`
-    }, Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+    }, Object.keys(ctrl.fields).filter(name => ctrl.getField(name).isVisible()).map(name => {
       return this.renderItem(ctrl.getField(name));
     }));
   }
@@ -1158,7 +1158,7 @@ class TableFormView extends FormView {
 
   getGridColumns() {
     const ctrl = this.props.ctrl;
-    return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+    return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).isVisible()).map(name => {
       const field = ctrl.getField(name);
       return {
         name: field.getModel().getName(),

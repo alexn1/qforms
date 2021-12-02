@@ -88,7 +88,7 @@ class TableFormView extends FormView {
     }
     getGridColumns() {
         const ctrl = this.props.ctrl;
-        return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).getModel().isVisible()).map(name => {
+        return Object.keys(ctrl.fields).filter(name => ctrl.getField(name).isVisible()).map(name => {
             const field = ctrl.getField(name);
             return {
                 name : field.getModel().getName(),

@@ -63,5 +63,8 @@ class FieldController extends ModelController {
     getApp() {
         return this.parent.parent.parent;
     }
+    isVisible() {
+        return this.getModel().getAttr('visible') === 'true';
+    }
 }
 window.QForms.FieldController = FieldController;

@@ -121,7 +121,7 @@ class RowFormView extends FormView {
         const ctrl = this.props.ctrl;
         return <div className={`${this.getCssBlockName()}__grid`}>
             {Object.keys(ctrl.fields)
-                .filter(name => ctrl.getField(name).getModel().isVisible())
+                .filter(name => ctrl.getField(name).isVisible())
                 .map(name => {
                 return this.renderItem(ctrl.getField(name));
             })}
