@@ -66,5 +66,11 @@ class FieldController extends ModelController {
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';
     }
+    isAutoFocus() {
+        return this.getModel().getAttr('autoFocus') === 'true';
+    }
+    getAutocomplete() {
+        return this.getModel().getAttr('autocomplete') || null;
+    }
 }
 window.QForms.FieldController = FieldController;

@@ -721,6 +721,12 @@ class FieldController extends ModelController {
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';
     }
+    isAutoFocus() {
+        return this.getModel().getAttr('autoFocus') === 'true';
+    }
+    getAutocomplete() {
+        return this.getModel().getAttr('autocomplete') || null;
+    }
 }
 window.QForms.FieldController = FieldController;
 
@@ -3488,9 +3494,6 @@ class Field extends Model {
     }
     isNullable() {
         return this.data.notNull === 'false';
-    }
-    isAutoFocus() {
-        return this.getAttr('autoFocus') === 'true';
     }
     getWidth() {
         const width = parseInt(this.data.width);

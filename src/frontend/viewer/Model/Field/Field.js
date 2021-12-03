@@ -139,9 +139,6 @@ class Field extends Model {
     isNullable() {
         return this.data.notNull === 'false';
     }
-    isAutoFocus() {
-        return this.getAttr('autoFocus') === 'true';
-    }
     getWidth() {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
