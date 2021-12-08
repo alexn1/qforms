@@ -294,12 +294,6 @@ class DataSource extends Model {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    /*getTableName() {
-        if (!this.getAttr('database')) throw new Error('no database');
-        if (!this.getAttr('table')) throw new Error('no table');
-        return `${this.getAttr('database')}.${this.getAttr('table')}`;
-    }*/
-
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();

@@ -2391,6 +2391,10 @@ class PhoneBox extends TextBox {
       this.setState({
         value
       });
+
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
     });
 
     _defineProperty(this, "onKeyPress", e => {

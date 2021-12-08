@@ -11,7 +11,6 @@ class SqlDataSource extends DataSource {
     }*/
 
     /*deinit() {
-        // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         super.deinit();
     }*/
 

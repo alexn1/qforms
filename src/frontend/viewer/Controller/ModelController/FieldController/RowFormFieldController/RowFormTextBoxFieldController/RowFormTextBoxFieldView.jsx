@@ -6,7 +6,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         };
     }
     onCloseClick = async e => {
-        console.log('RowFormTextBoxFieldView.onCloseClick');
+        // console.log('RowFormTextBoxFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});

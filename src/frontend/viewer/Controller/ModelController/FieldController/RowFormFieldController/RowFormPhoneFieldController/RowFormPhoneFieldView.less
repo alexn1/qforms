@@ -1,0 +1,50 @@
+@import "../../../../../style/field";
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormPhoneFieldView {
+  position: relative;
+  &.error > .RowFormPhoneFieldView__input {
+    background-color: #f2dede;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormPhoneFieldView__input {
+  width  : 100%;
+  height : @fieldHeight;
+  border : none;
+  padding: 0 16px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size  : inherit;
+  &[readonly] {
+    background-color: @fieldDisableBackgroundColor;
+    color           : gray;
+  }
+  &[disabled] {
+    cursor: text;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.RowFormPhoneFieldView__close {
+  display   : flex;
+  position  : absolute;
+  width     : 10px;
+  height    : 100%;
+  top       : 0;
+  right     : 4px;
+  cursor    : pointer;
+  visibility: hidden;
+  &.visible {
+    visibility: visible;
+  }
+  &:hover svg line {
+    stroke: black;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.debug .RowFormPhoneFieldView.changed > .RowFormPhoneFieldView__input {
+  background-color: @fieldDebugChangeBackgroundColor;
+}

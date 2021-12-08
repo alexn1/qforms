@@ -1290,6 +1290,13 @@ class RowFormLinkFieldController extends  RowFormFieldController {
 }
 window.QForms.RowFormLinkFieldController = RowFormLinkFieldController;
 
+class RowFormPhoneFieldController extends RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || RowFormPhoneFieldView;
+    }
+}
+window.QForms.RowFormPhoneFieldController = RowFormPhoneFieldController;
+
 class RowFormTextAreaFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormTextAreaFieldView;
@@ -3403,9 +3410,6 @@ class Field extends Model {
     isParam() {
         return this.data.param === 'true';
     }
-    /*getPlaceholder() {
-        return this.getAttr('placeholder');
-    }*/
     validateOnChange() {
         if (this.data.validateOnChange !== undefined) {
             return this.data.validateOnChange === 'true';
@@ -3560,6 +3564,10 @@ window.QForms.LabelField = LabelField;
 class LinkField extends Field {
 }
 window.QForms.LinkField = LinkField;
+
+class PhoneField extends Field {
+}
+window.QForms.PhoneField = PhoneField;
 
 class TextAreaField extends Field {
     getRows() {

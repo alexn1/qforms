@@ -612,6 +612,56 @@ class RowFormLinkFieldView extends RowFormFieldView {
 window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class RowFormPhoneFieldView extends RowFormFieldView {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "onCloseClick", async e => {
+      const ctrl = this.getCtrl();
+      this.getWidget().state.value = '';
+      this.getWidget().setState({
+        value: ''
+      });
+      ctrl.onChange('');
+    });
+  }
+
+  isCloseVisible() {
+    const ctrl = this.getCtrl();
+    if (!ctrl.isEditable()) return false;
+
+    if (!this.getWidget()) {
+      return this.props.value !== undefined;
+    } // console.log('this.getWidget().state.value:', this.getWidget().state.value);
+
+
+    return this.getWidget().state.value !== '';
+  }
+
+  render() {
+    console.log('RowFormPhoneFieldView.render');
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement(PhoneBox, {
+      classList: [`${this.getCssBlockName()}__input`],
+      value: ctrl.getValueForWidget(),
+      readOnly: !ctrl.isEditable(),
+      disabled: !ctrl.isEditable(),
+      autoFocus: ctrl.isAutoFocus(),
+      placeholder: ctrl.getPlaceholder() || null,
+      autocomplete: ctrl.getAutocomplete(),
+      onCreate: this.onWidgetCreate,
+      onChange: ctrl.onChange
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
+      onClick: this.onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+  }
+
+}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormTextAreaFieldView extends RowFormFieldView {
   constructor(props) {
     super(props);
@@ -663,7 +713,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     super(props);
 
     _defineProperty(this, "onCloseClick", async e => {
-      console.log('RowFormTextBoxFieldView.onCloseClick');
+      // console.log('RowFormTextBoxFieldView.onCloseClick');
       const ctrl = this.props.ctrl;
       this.getWidget().state.value = '';
       this.getWidget().setState({

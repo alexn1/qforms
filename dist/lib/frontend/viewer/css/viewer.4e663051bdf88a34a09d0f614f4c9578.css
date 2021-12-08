@@ -409,6 +409,48 @@
   color: blue;
 }
 
+.RowFormPhoneFieldView {
+  position: relative;
+}
+.RowFormPhoneFieldView.error > .RowFormPhoneFieldView__input {
+  background-color: #f2dede;
+}
+.RowFormPhoneFieldView__input {
+  width: 100%;
+  height: 22px;
+  border: none;
+  padding: 0 16px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormPhoneFieldView__input[readonly] {
+  background-color: lightgoldenrodyellow;
+  color: gray;
+}
+.RowFormPhoneFieldView__input[disabled] {
+  cursor: text;
+}
+.RowFormPhoneFieldView__close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 4px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormPhoneFieldView__close.visible {
+  visibility: visible;
+}
+.RowFormPhoneFieldView__close:hover svg line {
+  stroke: black;
+}
+.debug .RowFormPhoneFieldView.changed > .RowFormPhoneFieldView__input {
+  background-color: #eefdea;
+}
+
 .RowFormTextAreaFieldView.error > .RowFormTextAreaFieldView__textarea {
   background-color: #f2dede;
 }
