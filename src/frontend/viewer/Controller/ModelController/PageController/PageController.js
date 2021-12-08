@@ -228,5 +228,13 @@ class PageController extends ModelController {
     isModal() {
         return this.getModel().isModal();
     }
+    isAutoFocus() {
+        for (const form of this.forms) {
+            if (form.isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 window.QForms.PageController = PageController;

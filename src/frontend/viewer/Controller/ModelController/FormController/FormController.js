@@ -59,5 +59,13 @@ class FormController extends ModelController {
     getSelectedRowKey() {
         return null;
     }
+    isAutoFocus() {
+        for (const name in this.fields) {
+            if (this.fields[name].isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 window.QForms.FormController = FormController;

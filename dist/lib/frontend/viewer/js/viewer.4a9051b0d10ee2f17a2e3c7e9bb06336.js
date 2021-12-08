@@ -1535,6 +1535,14 @@ class FormController extends ModelController {
     getSelectedRowKey() {
         return null;
     }
+    isAutoFocus() {
+        for (const name in this.fields) {
+            if (this.fields[name].isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 window.QForms.FormController = FormController;
 
@@ -2235,6 +2243,14 @@ class PageController extends ModelController {
     }
     isModal() {
         return this.getModel().isModal();
+    }
+    isAutoFocus() {
+        for (const form of this.forms) {
+            if (form.isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 window.QForms.PageController = PageController;
