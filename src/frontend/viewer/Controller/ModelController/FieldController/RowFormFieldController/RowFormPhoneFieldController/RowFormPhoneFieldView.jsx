@@ -1,4 +1,10 @@
 class RowFormPhoneFieldView extends RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.state = {
+            classList: []
+        };
+    }
     onCloseClick = async e => {
         const ctrl = this.getCtrl();
         this.getWidget().state.value = '';
@@ -14,6 +20,14 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         // console.log('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
+    onFocus = async e => {
+        this.addCssClass('focus');
+        await this.rerender();
+    }
+    onBlur = async e => {
+        this.removeCssClass('focus');
+        await this.rerender();
+    }
     render() {
         console.log('RowFormPhoneFieldView.render');
         const ctrl = this.getCtrl();
@@ -27,6 +41,8 @@ class RowFormPhoneFieldView extends RowFormFieldView {
                       autocomplete={ctrl.getAutocomplete()}
                       onCreate={this.onWidgetCreate}
                       onChange={ctrl.onChange}
+                      onFocus={this.onFocus}
+                      onBlur={this.onBlur}
             />
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
                  onClick={this.onCloseClick}
@@ -36,3 +52,4 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         </div>;
     }
 }
+window.QForms.RowFormPhoneFieldView = RowFormPhoneFieldView;

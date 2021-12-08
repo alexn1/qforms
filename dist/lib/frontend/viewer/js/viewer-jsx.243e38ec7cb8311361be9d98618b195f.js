@@ -613,8 +613,8 @@ window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormPhoneFieldView extends RowFormFieldView {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onCloseClick", async e => {
       const ctrl = this.getCtrl();
@@ -624,6 +624,20 @@ class RowFormPhoneFieldView extends RowFormFieldView {
       });
       ctrl.onChange('');
     });
+
+    _defineProperty(this, "onFocus", async e => {
+      this.addCssClass('focus');
+      await this.rerender();
+    });
+
+    _defineProperty(this, "onBlur", async e => {
+      this.removeCssClass('focus');
+      await this.rerender();
+    });
+
+    this.state = {
+      classList: []
+    };
   }
 
   isCloseVisible() {
@@ -652,7 +666,9 @@ class RowFormPhoneFieldView extends RowFormFieldView {
       placeholder: ctrl.getPlaceholder() || null,
       autocomplete: ctrl.getAutocomplete(),
       onCreate: this.onWidgetCreate,
-      onChange: ctrl.onChange
+      onChange: ctrl.onChange,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
@@ -660,6 +676,8 @@ class RowFormPhoneFieldView extends RowFormFieldView {
   }
 
 }
+
+window.QForms.RowFormPhoneFieldView = RowFormPhoneFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class RowFormTextAreaFieldView extends RowFormFieldView {
