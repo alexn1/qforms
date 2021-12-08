@@ -1,6 +1,6 @@
 import Field from '../Field';
 
-class TimeField extends Field {
+class PhoneField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly         = this.getAttr('readOnly');
@@ -8,7 +8,8 @@ class TimeField extends Field {
         response.placeholder      = this.getAttr('placeholder');
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur   = this.getAttr('validateOnBlur');
+        response.autocomplete     = this.getAttr('autocomplete');
     }
 }
 
-export = TimeField;
+export = PhoneField;
