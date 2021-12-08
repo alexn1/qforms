@@ -12,10 +12,11 @@ class TextBox extends ReactComponent {
     }
     onChange = e => {
         // console.log('TextBox.onChange', e.target.value);
-        this.state.value = e.target.value;
-        this.setState({value: e.target.value});
+        const value = e.target.value;
+        this.state.value = value;
+        this.setState({value});
         if (this.props.onChange) {
-            this.props.onChange(e.target.value);
+            this.props.onChange(value);
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
@@ -38,9 +39,9 @@ class TextBox extends ReactComponent {
                 autoFocus={this.props.autoFocus}
                 spellCheck={this.props.spellCheck}
                 autoComplete={this.props.autocomplete}
+                value={this.state.value}
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
-                value={this.state.value}
                 onChange={this.onChange}
             />
         );

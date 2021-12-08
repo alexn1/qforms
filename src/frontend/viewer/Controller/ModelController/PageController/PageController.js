@@ -174,7 +174,7 @@ class PageController extends ModelController {
         console.log('PageController.onActionClick', name);
     }
     onKeyDown = async e => {
-        console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
+        // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
             if (this.isModal()) {
                 await this.close();
