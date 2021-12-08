@@ -2364,6 +2364,7 @@ class TextBox extends ReactComponent {
 }
 
 window.QForms.TextBox = TextBox;
+class PhoneBox extends TextBox {}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class TimeBox extends ReactComponent {
@@ -2562,8 +2563,9 @@ class TimeBox extends ReactComponent {
   render() {
     // console.log('TimeBox.render', this.state.value);
     return /*#__PURE__*/React.createElement("input", {
-      type: "text",
+      ref: this.el,
       className: this.getCssClassNames(),
+      type: 'text',
       id: this.props.id,
       readOnly: this.props.readOnly,
       placeholder: this.props.placeholder,
@@ -2572,8 +2574,7 @@ class TimeBox extends ReactComponent {
       // onKeyUp={this.onKeyUp}
       ,
       onKeyPress: this.onKeyPress,
-      onBlur: this.onBlur,
-      ref: this.el
+      onBlur: this.onBlur
     });
   }
 

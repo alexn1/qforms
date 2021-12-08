@@ -390,15 +390,6 @@ svg {
   background-color: #E1F0FC !important;
 }
 
-/*
-.GridCell {
-  cursor: inherit;
-  span {
-    cursor: inherit;
-  }
-}
-*/
-
 .Image {
   cursor: pointer;
 }
