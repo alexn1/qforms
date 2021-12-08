@@ -2368,42 +2368,25 @@ window.QForms.TextBox = TextBox;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class PhoneBox extends TextBox {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onChange", e => {
       console.log('PhoneBox.onChange', e.target.value, e.target.value.length);
       const target = e.target;
       const start = target.selectionStart;
       const end = target.selectionEnd;
-      let value = target.value; // clear
+      const len = target.value.length;
+      console.log('start/end/len:', start, end, len);
 
-      value = value.replace(/[^\+0-9]/g, ''); // check for russia
-
-      if (value === '') {} else if (value.match(/^8/)) {
-        value = value.replace(/^8/, '+7');
-      } else if (value[0] !== '+') {
-        value = `+7${value}`;
-      } // russian format
-
-
-      const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-      console.log('arr:', arr);
-
-      if (arr) {
-        if (arr[5]) {
-          value = `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
-        } else if (arr[4]) {
-          value = `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
-        } else if (arr[3]) {
-          value = `${arr[1]} ${arr[2]} ${arr[3]}`;
-        } else if (arr[2]) {
-          value = `${arr[1]} ${arr[2]}`;
-        } else if (arr[1]) {
-          value = `${arr[1]}`;
-        }
+      if (start !== end || start !== len) {
+        return;
       }
 
+      let value = target.value;
+      value = PhoneBox.clearValue(value);
+      value = PhoneBox.ifNoCodeAddRussianCode(value);
+      value = this.formatRussianNumber(value);
       this.state.value = value;
       this.setState({
         value
@@ -2413,13 +2396,17 @@ class PhoneBox extends TextBox {
     _defineProperty(this, "onKeyPress", e => {
       console.log('PhoneBox.onKeyPress', e.key, this.state.value);
 
-      if (e.key === '+' && this.state.value.length) {
-        e.preventDefault();
-      } else if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+      if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
         console.log('cancel', e.key);
         e.preventDefault();
       }
+
+      if (this.state.value.length && e.key === '+') {
+        e.preventDefault();
+      }
     });
+
+    this.RUSSIAN_COUNTRY_CODE_PATTERN = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
   }
 
   render() {
@@ -2442,6 +2429,48 @@ class PhoneBox extends TextBox {
       onChange: this.onChange,
       onKeyPress: this.onKeyPress
     });
+  }
+
+  static clearValue(value) {
+    return value.replace(/[^\+0-9]/g, '');
+  }
+
+  static ifNoCodeAddRussianCode(value) {
+    if (value === '') {} else if (value.match(/^8/)) {
+      return value.replace(/^8/, '+7');
+    } else if (value[0] !== '+') {
+      return `+7${value}`;
+    }
+
+    return value;
+  }
+
+  formatRussianNumber(value) {
+    const arr = this.RUSSIAN_COUNTRY_CODE_PATTERN.exec(value); // console.log('arr:', arr);
+
+    if (arr) {
+      if (arr[5]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+      }
+
+      if (arr[4]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+      }
+
+      if (arr[3]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}`;
+      }
+
+      if (arr[2]) {
+        return `${arr[1]} ${arr[2]}`;
+      }
+
+      if (arr[1]) {
+        return `${arr[1]}`;
+      }
+    }
+
+    return value;
   }
 
 }
