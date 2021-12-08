@@ -2376,19 +2376,21 @@ class PhoneBox extends TextBox {
       const target = e.target;
       const start = target.selectionStart;
       const end = target.selectionEnd;
-      let value = target.value;
-      value = value.replace(/[\s\-\(\)]/g, '');
+      let value = target.value; // clear
+
+      value = value.replace(/[\s\-\(\)]/g, ''); // check for russia
 
       if (value === '') {} else if (value.match(/^8/)) {
         value = value.replace(/^8/, '+7');
       } else if (value[0] !== '+') {
         value = `+7${value}`;
-      }
+      } // russian format
 
-      if (value.match(/^\+7/)) {
-        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        console.log('arr:', arr);
 
+      const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+      console.log('arr:', arr);
+
+      if (arr) {
         if (arr[5]) {
           value = `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
         } else if (arr[4]) {
