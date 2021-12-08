@@ -28,6 +28,7 @@ module.exports.LinkField                         = require('./viewer/Model/Field
 module.exports.TextAreaField                     = require('./viewer/Model/Field/TextAreaField/TextAreaField');
 module.exports.TextBoxField                      = require('./viewer/Model/Field/TextBoxField/TextBoxField');
 module.exports.PhoneField                        = require('./viewer/Model/Field/PhoneField/PhoneField');
+module.exports.PasswordField                     = require('./viewer/Model/Field/PasswordField/PasswordField');
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
@@ -56,6 +57,7 @@ module.exports.LinkFieldEditor                   = require('./editor/Editor/Fiel
 module.exports.TextAreaFieldEditor               = require('./editor/Editor/FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
 module.exports.TextBoxFieldEditor                = require('./editor/Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
 module.exports.PhoneFieldEditor                  = require('./editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor');
+module.exports.PasswordFieldEditor               = require('./editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor');
 
 module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');

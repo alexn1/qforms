@@ -1290,6 +1290,13 @@ class RowFormLinkFieldController extends  RowFormFieldController {
 }
 window.QForms.RowFormLinkFieldController = RowFormLinkFieldController;
 
+class RowFormPasswordFieldController extends RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || RowFormPasswordFieldView;
+    }
+}
+window.QForms.RowFormPasswordFieldController = RowFormPasswordFieldController;
+
 class RowFormPhoneFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormPhoneFieldView;
@@ -3565,6 +3572,11 @@ window.QForms.LabelField = LabelField;
 class LinkField extends Field {
 }
 window.QForms.LinkField = LinkField;
+
+class PasswordField extends Field {
+
+}
+window.QForms.PasswordField = PasswordField;
 
 class PhoneField extends Field {
 }

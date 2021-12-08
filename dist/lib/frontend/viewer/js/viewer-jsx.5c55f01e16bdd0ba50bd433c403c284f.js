@@ -612,6 +612,90 @@ class RowFormLinkFieldView extends RowFormFieldView {
 window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+class RowFormPasswordFieldView extends RowFormFieldView {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onCloseClick", async e => {
+      // console.log('RowFormPasswordFieldView.onCloseClick');
+      const ctrl = this.props.ctrl;
+      this.getWidget().state.value = '';
+      this.getWidget().setState({
+        value: ''
+      });
+      ctrl.onChange('');
+    });
+
+    _defineProperty(this, "onFocus", async e => {
+      // console.log('RowFormPasswordFieldView.onFocus');
+      this.addCssClass('focus');
+      await this.rerender();
+    });
+
+    _defineProperty(this, "onBlur", async e => {
+      // console.log('RowFormPasswordFieldView.onBlur');
+      this.removeCssClass('focus');
+      await this.rerender();
+    });
+
+    _defineProperty(this, "onIconClick", e => {
+      this.setState(prevState => {
+        return {
+          type: prevState.type === 'password' ? 'text' : 'password'
+        };
+      });
+    });
+
+    this.state = {
+      classList: [],
+      type: 'password'
+    };
+  }
+
+  isCloseVisible() {
+    // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
+    const ctrl = this.props.ctrl;
+    if (!ctrl.isEditable()) return false;
+
+    if (!this.getWidget()) {
+      return this.props.value !== undefined;
+    } // console.log('this.getWidget().state.value:', this.getWidget().state.value);
+
+
+    return this.getWidget().state.value !== '';
+  }
+
+  render() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement(TextBox, {
+      classList: [`${this.getCssBlockName()}__input`],
+      type: this.state.type,
+      value: ctrl.getValueForWidget(),
+      readOnly: !ctrl.isEditable(),
+      disabled: !ctrl.isEditable(),
+      autoFocus: ctrl.isAutoFocus(),
+      placeholder: ctrl.getPlaceholder() || null,
+      autocomplete: ctrl.getAutocomplete(),
+      onCreate: this.onWidgetCreate,
+      onChange: ctrl.onChange,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
+      onClick: this.onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon`,
+      onClick: this.onIconClick
+    }, this.state.type === 'password' ? /*#__PURE__*/React.createElement(VisibilityIcon, null) : /*#__PURE__*/React.createElement(VisibilityOffIcon, null)));
+  }
+
+}
+
+window.QForms.RowFormPasswordFieldView = RowFormPasswordFieldView;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class RowFormPhoneFieldView extends RowFormFieldView {
   constructor(props) {
     super(props);
