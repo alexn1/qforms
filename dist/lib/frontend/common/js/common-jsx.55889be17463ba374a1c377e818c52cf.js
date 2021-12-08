@@ -2372,16 +2372,16 @@ class PhoneBox extends TextBox {
     super(props);
 
     _defineProperty(this, "onChange", e => {
-      console.log('PhoneBox.onChange', e.target.value, e.target.value.length);
+      // console.log('PhoneBox.onChange', e.target.value);
       const target = e.target;
       const start = target.selectionStart;
       const end = target.selectionEnd;
-      const len = target.value.length;
-      console.log('start/end/len:', start, end, len);
+      const len = target.value.length; // console.log('start/end/len:', start, end, len);
 
       if (start !== end || start !== len) {
         return;
-      }
+      } // value pipeline
+
 
       let value = target.value;
       value = PhoneBox.clearValue(value);
@@ -2394,10 +2394,8 @@ class PhoneBox extends TextBox {
     });
 
     _defineProperty(this, "onKeyPress", e => {
-      console.log('PhoneBox.onKeyPress', e.key, this.state.value);
-
+      // console.log('PhoneBox.onKeyPress', e.key, this.state.value);
       if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
-        console.log('cancel', e.key);
         e.preventDefault();
       }
 

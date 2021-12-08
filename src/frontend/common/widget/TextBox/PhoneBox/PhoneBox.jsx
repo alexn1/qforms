@@ -4,7 +4,7 @@ class PhoneBox extends TextBox {
         this.RUSSIAN_COUNTRY_CODE_PATTERN = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
     }
     onChange = e => {
-        console.log('PhoneBox.onChange', e.target.value, e.target.value.length);
+        // console.log('PhoneBox.onChange', e.target.value);
         const target = e.target;
         const start  = target.selectionStart;
         const end    = target.selectionEnd;
@@ -24,9 +24,8 @@ class PhoneBox extends TextBox {
         this.setState({value});
     }
     onKeyPress = e => {
-        console.log('PhoneBox.onKeyPress', e.key, this.state.value);
+        // console.log('PhoneBox.onKeyPress', e.key, this.state.value);
         if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
-            console.log('cancel', e.key);
             e.preventDefault();
         }
         if (this.state.value.length && e.key === '+') {
