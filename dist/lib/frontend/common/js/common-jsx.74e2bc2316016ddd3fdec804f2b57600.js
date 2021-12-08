@@ -2411,7 +2411,11 @@ class PhoneBox extends TextBox {
     });
 
     _defineProperty(this, "onKeyPress", e => {
-      if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+      console.log('PhoneBox.onKeyPress', e.key, this.state.value);
+
+      if (e.key === '+' && this.state.value.length) {
+        e.preventDefault();
+      } else if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
         console.log('cancel', e.key);
         e.preventDefault();
       }
