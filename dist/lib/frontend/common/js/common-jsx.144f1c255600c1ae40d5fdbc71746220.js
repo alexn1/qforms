@@ -2378,7 +2378,7 @@ class PhoneBox extends TextBox {
       const end = target.selectionEnd;
       let value = target.value; // clear
 
-      value = value.replace(/[\s\-\(\)]/g, ''); // check for russia
+      value = value.replace(/[^\+0-9]/g, ''); // check for russia
 
       if (value === '') {} else if (value.match(/^8/)) {
         value = value.replace(/^8/, '+7');
