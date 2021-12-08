@@ -114,9 +114,7 @@ class Field extends Model {
         }
         if (this.getAttr('column')) {
             const dataSource = this.getDefaultDataSource();
-
-            // check for surrogate data source
-            if (dataSource.isAttr('database')) {
+            if (dataSource.isSurrogate()) {
                 return dataSource.getType(this.getAttr('column'));
             }
             throw new Error('field type empty');

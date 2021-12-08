@@ -481,5 +481,9 @@ class DataSource extends Model {
         this.emit('delete', e);
     }
 
+    isSurrogate() {
+        return this.isAttr('database');
+    }
+
 }
 window.QForms.DataSource = DataSource;

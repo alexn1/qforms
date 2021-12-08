@@ -531,6 +531,8 @@ class NewFieldView extends ReactComponent {
         value: 'FileField'
       }, {
         value: 'PhoneField'
+      }, {
+        value: 'PasswordField'
       }],
       onCreate: c => this.class = c
     })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
