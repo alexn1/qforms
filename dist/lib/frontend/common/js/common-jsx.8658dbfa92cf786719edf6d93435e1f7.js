@@ -2390,9 +2390,9 @@ class PhoneBox extends TextBox {
         console.log('arr:', arr);
 
         if (arr[5]) {
-          value = `${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]}`;
+          value = `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
         } else if (arr[4]) {
-          value = `${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]}`;
+          value = `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
         } else if (arr[3]) {
           value = `${arr[1]} ${arr[2]} ${arr[3]}`;
         } else if (arr[2]) {
