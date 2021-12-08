@@ -2746,12 +2746,6 @@ class DataSource extends Model {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    /*getTableName() {
-        if (!this.getAttr('database')) throw new Error('no database');
-        if (!this.getAttr('table')) throw new Error('no table');
-        return `${this.getAttr('database')}.${this.getAttr('table')}`;
-    }*/
-
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
@@ -2955,7 +2949,6 @@ class SqlDataSource extends DataSource {
     }*/
 
     /*deinit() {
-        // console.log('SqlDataSource.deinit', this.getFullName(), this.getTableName());
         super.deinit();
     }*/
 
@@ -3372,9 +3365,15 @@ class Field extends Model {
             return this.getAttr('type');
         }
         if (this.getAttr('column')) {
-            return this.getDefaultDataSource().getType(this.getAttr('column'));
+            const dataSource = this.getDefaultDataSource();
+
+            // check for surrogate data source
+            if (dataSource.isAttr('database')) {
+                return dataSource.getType(this.getAttr('column'));
+            }
+            throw new Error('field type empty');
         }
-        throw new Error('fields type and column empty');
+        throw new Error('field type and column empty');
     }
 
     getForm() {

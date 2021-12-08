@@ -113,9 +113,15 @@ class Field extends Model {
             return this.getAttr('type');
         }
         if (this.getAttr('column')) {
-            return this.getDefaultDataSource().getType(this.getAttr('column'));
+            const dataSource = this.getDefaultDataSource();
+
+            // check for surrogate data source
+            if (dataSource.isAttr('database')) {
+                return dataSource.getType(this.getAttr('column'));
+            }
+            throw new Error('field type empty');
         }
-        throw new Error('fields type and column empty');
+        throw new Error('field type and column empty');
     }
 
     getForm() {
