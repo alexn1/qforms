@@ -67,7 +67,7 @@ class ComboBox extends ReactComponent {
                     <option value={''}>{this.props.placeholder}</option>
                 }
                 {this.props.items && this.props.items.map(item =>
-                    <option key={item.value} value={item.value}>{item.title}</option>
+                    <option key={item.value} value={item.value}>{item.title || item.value}</option>
                 )}
             </select>
         );

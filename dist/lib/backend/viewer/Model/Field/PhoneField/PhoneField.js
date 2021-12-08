@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const Field_1 = __importDefault(require("../Field"));
-class TimeField extends Field_1.default {
+class PhoneField extends Field_1.default {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -11,6 +11,7 @@ class TimeField extends Field_1.default {
         response.placeholder = this.getAttr('placeholder');
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur = this.getAttr('validateOnBlur');
+        response.autocomplete = this.getAttr('autocomplete');
     }
 }
-module.exports = TimeField;
+module.exports = PhoneField;

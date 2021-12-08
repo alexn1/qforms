@@ -724,7 +724,7 @@ class ComboBox extends ReactComponent {
     }, this.props.placeholder), this.props.items && this.props.items.map(item => /*#__PURE__*/React.createElement("option", {
       key: item.value,
       value: item.value
-    }, item.title)));
+    }, item.title || item.value)));
   }
 
 }
