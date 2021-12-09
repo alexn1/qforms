@@ -1,27 +1,36 @@
-class PhoneBox extends TextBox {
+class PhoneBox extends ReactComponent {
     constructor(props) {
         super(props);
+        this.el = React.createRef();
         this.RUSSIAN_COUNTRY_CODE_PATTERN = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
+        this.state = {
+            value: this.formatNumber(this.props.value || '')
+        }
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
     }
     onChange = e => {
         // console.log('PhoneBox.onChange', e.target.value);
-        const target = e.target;
-        const start  = target.selectionStart;
-        const end    = target.selectionEnd;
-        const len    = target.value.length;
+        const start = e.target.selectionStart;
+        const end   = e.target.selectionEnd;
+        const len   = e.target.value.length;
         // console.log('start/end/len:', start, end, len);
+
+        // disable edition in middle
         if (start !== end || start !== len) {
             return;
         }
 
         // value pipeline
-        let value = target.value;
-        value = PhoneBox.clearValue(value);
+        let value = PhoneBox.clearValue(e.target.value);
         value = PhoneBox.ifNoCodeAddRussianCode(value);
-        value = this.formatRussianNumber(value);
 
-        this.state.value = value;
-        this.setState({value});
+        // state
+        this.state.value = this.formatNumber(value);
+        this.setState({value: this.state.value});       // for render only
+
+        // event
         if (this.props.onChange) {
             this.props.onChange(value);
         }
@@ -34,6 +43,11 @@ class PhoneBox extends TextBox {
         if (this.state.value.length && e.key === '+') {
             e.preventDefault();
         }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        this.state.value = this.formatNumber(nextProps.value);
+        return true;
     }
     render() {
         // console.log('TextBox.render');
@@ -70,7 +84,7 @@ class PhoneBox extends TextBox {
         }
         return value;
     }
-    formatRussianNumber(value) {
+    formatNumber(value) {
         const arr = this.RUSSIAN_COUNTRY_CODE_PATTERN.exec(value);
         // console.log('arr:', arr);
         if (arr) {
