@@ -1448,6 +1448,12 @@ class TableFormLinkFieldController extends TableFormFieldController {
 }
 window.QForms.TableFormLinkFieldController = TableFormLinkFieldController;
 
+class TableFormPhoneFieldController extends TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || TableFormPhoneFieldView;
+    }
+}
+
 class TableFormTextAreaFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormTextAreaFieldView;

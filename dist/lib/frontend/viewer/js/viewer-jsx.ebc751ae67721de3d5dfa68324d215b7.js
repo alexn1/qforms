@@ -1020,6 +1020,18 @@ class TableFormLinkFieldView extends TableFormFieldView {
 }
 
 window.QForms.TableFormLinkFieldView = TableFormLinkFieldView;
+class TableFormPhoneFieldView extends TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: this.getStyle(row)
+    }, /*#__PURE__*/React.createElement("span", {
+      ref: this.span
+    }, PhoneBox.formatPhoneNumber(this.getCtrl().getValueForWidget(row))));
+  }
+
+}
 class TableFormTextAreaFieldView extends TableFormFieldView {
   render() {
     const row = this.props.row;

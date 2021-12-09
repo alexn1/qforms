@@ -2,9 +2,8 @@ class PhoneBox extends ReactComponent {
     constructor(props) {
         super(props);
         this.el = React.createRef();
-        this.RUSSIAN_COUNTRY_CODE_PATTERN = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
         this.state = {
-            value: this.formatNumber(this.props.value || '')
+            value: PhoneBox.formatPhoneNumber(this.props.value || '')
         }
     }
     getValue() {
@@ -27,7 +26,7 @@ class PhoneBox extends ReactComponent {
         value = PhoneBox.ifNoCodeAddRussianCode(value);
 
         // state
-        this.state.value = this.formatNumber(value);
+        this.state.value = PhoneBox.formatPhoneNumber(value);
         this.setState({value: this.state.value});       // for render only
 
         // event
@@ -46,7 +45,7 @@ class PhoneBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        this.state.value = this.formatNumber(nextProps.value);
+        this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
         return true;
     }
     render() {
@@ -84,8 +83,9 @@ class PhoneBox extends ReactComponent {
         }
         return value;
     }
-    formatNumber(value) {
-        const arr = this.RUSSIAN_COUNTRY_CODE_PATTERN.exec(value);
+    static formatPhoneNumber(value) {
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
         // console.log('arr:', arr);
         if (arr) {
             if (arr[5]) {
