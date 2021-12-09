@@ -10,6 +10,7 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
         ctrl.onChange('');
+        this.getWidget().getElement().focus();
     }
     isCloseVisible() {
         const ctrl = this.getCtrl();

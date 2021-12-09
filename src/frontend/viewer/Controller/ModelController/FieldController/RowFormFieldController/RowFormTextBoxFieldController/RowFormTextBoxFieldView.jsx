@@ -11,6 +11,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
         ctrl.onChange('');
+        this.getWidget().getElement().focus();
     }
     isCloseVisible() {
         // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);

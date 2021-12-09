@@ -624,6 +624,7 @@ class RowFormPasswordFieldView extends RowFormFieldView {
         value: ''
       });
       ctrl.onChange('');
+      this.getWidget().getElement().focus();
     });
 
     _defineProperty(this, "onFocus", async e => {
@@ -707,6 +708,7 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         value: ''
       });
       ctrl.onChange('');
+      this.getWidget().getElement().focus();
     });
 
     _defineProperty(this, "onFocus", async e => {
@@ -824,6 +826,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         value: ''
       });
       ctrl.onChange('');
+      this.getWidget().getElement().focus();
     });
 
     _defineProperty(this, "onFocus", async e => {

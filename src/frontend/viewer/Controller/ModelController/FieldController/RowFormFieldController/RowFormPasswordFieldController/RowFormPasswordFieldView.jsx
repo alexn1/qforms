@@ -12,6 +12,7 @@ class RowFormPasswordFieldView extends RowFormFieldView {
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
         ctrl.onChange('');
+        this.getWidget().getElement().focus();
     }
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
