@@ -1835,7 +1835,7 @@ class Password extends ReactComponent {
     _defineProperty(this, "onCloseClick", e => {
       this._setValue('');
 
-      this.getElement().focus();
+      this.getInputElement().focus();
     });
 
     _defineProperty(this, "onIconClick", e => {
@@ -1844,13 +1844,19 @@ class Password extends ReactComponent {
           type: prevState.type === 'password' ? 'text' : 'password'
         };
       });
+      this.getInputElement().focus();
     });
 
     this.el = React.createRef();
+    this.inputEl = React.createRef();
     this.state = {
       value: this.props.value || '',
       type: 'password'
     };
+  }
+
+  getInputElement() {
+    return this.inputEl.current;
   }
 
   getValue() {
@@ -1877,9 +1883,10 @@ class Password extends ReactComponent {
 
   render() {
     return /*#__PURE__*/React.createElement("div", {
+      ref: this.el,
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("input", {
-      ref: this.el,
+      ref: this.inputEl,
       className: `${this.getCssBlockName()}__input`,
       type: this.state.type,
       id: this.props.id,
