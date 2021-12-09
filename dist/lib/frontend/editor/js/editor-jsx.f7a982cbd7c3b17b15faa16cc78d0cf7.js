@@ -141,38 +141,31 @@ class ChangeClassView extends ReactComponent {
     }, "Class"), /*#__PURE__*/React.createElement(ComboBox, {
       id: "class",
       items: [{
-        value: 'TextBoxField',
-        title: 'TextBoxField'
+        value: 'TextBoxField'
       }, {
-        value: 'ComboBoxField',
-        title: 'ComboBoxField'
+        value: 'ComboBoxField'
       }, {
-        value: 'TextAreaField',
-        title: 'TextAreaField'
+        value: 'TextAreaField'
       }, {
-        value: 'LinkField',
-        title: 'LinkField'
+        value: 'LinkField'
       }, {
-        value: 'ImageField',
-        title: 'ImageField'
+        value: 'ImageField'
       }, {
-        value: 'LabelField',
-        title: 'LabelField'
+        value: 'LabelField'
       }, {
-        value: 'DateField',
-        title: 'DateField'
+        value: 'DateField'
       }, {
-        value: 'TimeField',
-        title: 'TimeField'
+        value: 'TimeField'
       }, {
-        value: 'DateTimeField',
-        title: 'DateTimeField'
+        value: 'DateTimeField'
       }, {
-        value: 'CheckBoxField',
-        title: 'CheckBoxField'
+        value: 'CheckBoxField'
       }, {
-        value: 'FileField',
-        title: 'FileField'
+        value: 'FileField'
+      }, {
+        value: 'PhoneField'
+      }, {
+        value: 'PasswordField'
       }],
       value: ctrl.options.fieldCtrl.model.getClassName(),
       onCreate: c => this.class = c

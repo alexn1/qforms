@@ -20,17 +20,19 @@ class ChangeClassView extends ReactComponent {
                 <div>
                     <label htmlFor="class">Class</label>
                     <ComboBox id="class" items={[
-                        {value: 'TextBoxField', title: 'TextBoxField'},
-                        {value: 'ComboBoxField', title: 'ComboBoxField'},
-                        {value: 'TextAreaField', title: 'TextAreaField'},
-                        {value: 'LinkField', title: 'LinkField'},
-                        {value: 'ImageField', title: 'ImageField'},
-                        {value: 'LabelField', title: 'LabelField'},
-                        {value: 'DateField', title: 'DateField'},
-                        {value: 'TimeField', title: 'TimeField'},
-                        {value: 'DateTimeField', title: 'DateTimeField'},
-                        {value: 'CheckBoxField', title: 'CheckBoxField'},
-                        {value: 'FileField', title: 'FileField'},
+                        {value: 'TextBoxField'},
+                        {value: 'ComboBoxField'},
+                        {value: 'TextAreaField'},
+                        {value: 'LinkField'},
+                        {value: 'ImageField'},
+                        {value: 'LabelField'},
+                        {value: 'DateField'},
+                        {value: 'TimeField'},
+                        {value: 'DateTimeField'},
+                        {value: 'CheckBoxField'},
+                        {value: 'FileField'},
+                        {value: 'PhoneField'},
+                        {value: 'PasswordField'},
                     ]} value={ctrl.options.fieldCtrl.model.getClassName()} onCreate={c => this.class = c}/>
                 </div>
             </div>
