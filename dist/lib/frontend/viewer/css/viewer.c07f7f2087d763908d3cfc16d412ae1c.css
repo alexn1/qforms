@@ -146,6 +146,15 @@
 .LoginView__field:focus {
   border-bottom: 1px solid #398bce;
 }
+.LoginView__field2 input {
+  border: none;
+  font-size: 14px;
+  border-bottom: 1px solid #ededed;
+  height: 44px;
+}
+.LoginView__field2 input:focus {
+  border-bottom: 1px solid #398bce;
+}
 .LoginView__button {
   font-size: 14px;
   border: none;

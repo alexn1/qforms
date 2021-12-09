@@ -103,8 +103,8 @@ class LoginView extends View {
   constructor(...args) {
     super(...args);
 
-    _defineProperty(this, "onLoginFormSubmit", async e => {
-      console.log('LoginView.onLoginFormSubmit');
+    _defineProperty(this, "onLoginFormSubmit", e => {
+      // console.log('LoginView.onLoginFormSubmit');
       document.querySelector('.LoginView__button').disabled = true; // e.preventDefault();
     });
   }
@@ -134,9 +134,8 @@ class LoginView extends View {
       required: true,
       autoFocus: true,
       spellCheck: false
-    }), /*#__PURE__*/React.createElement("input", {
-      className: `${this.getCssBlockName()}__field`,
-      type: 'password',
+    }), /*#__PURE__*/React.createElement(Password, {
+      classList: [`${this.getCssBlockName()}__field2`],
       name: 'password',
       placeholder: this.getCtrl().getText().login.password
     }), /*#__PURE__*/React.createElement("p", {
