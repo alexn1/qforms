@@ -31,6 +31,13 @@ class Password extends ReactComponent {
     isCloseVisible() {
         return this.state.value !== '';
     }
+    onIconClick = e => {
+        this.setState(prevState => {
+            return {
+                type: prevState.type === 'password' ? 'text' : 'password'
+            };
+        });
+    }
     render() {
         return <div className={this.getCssClassNames()}>
             <input ref={this.el}
@@ -52,6 +59,9 @@ class Password extends ReactComponent {
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
                  onClick={this.onCloseClick}>
                 <CloseIcon/>
+            </div>
+            <div className={`${this.getCssBlockName()}__icon`} onClick={this.onIconClick}>
+                {this.state.type === 'password' ? <VisibilityIcon/> : <VisibilityOffIcon/>}
             </div>
         </div>;
     }

@@ -489,7 +489,7 @@ svg {
   width: 20px;
   height: 100%;
   top: 0;
-  right: 40px;
+  right: 20px;
   cursor: pointer;
   visibility: hidden;
 }
@@ -498,6 +498,25 @@ svg {
 }
 .Password__close:hover svg line {
   stroke: black;
+}
+.Password__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  cursor: pointer;
+}
+.Password__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.Password__icon:hover svg {
+  fill: #333;
 }
 
 .Select {

@@ -1838,6 +1838,14 @@ class Password extends ReactComponent {
       this.getElement().focus();
     });
 
+    _defineProperty(this, "onIconClick", e => {
+      this.setState(prevState => {
+        return {
+          type: prevState.type === 'password' ? 'text' : 'password'
+        };
+      });
+    });
+
     this.el = React.createRef();
     this.state = {
       value: this.props.value || '',
@@ -1889,7 +1897,10 @@ class Password extends ReactComponent {
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon`,
+      onClick: this.onIconClick
+    }, this.state.type === 'password' ? /*#__PURE__*/React.createElement(VisibilityIcon, null) : /*#__PURE__*/React.createElement(VisibilityOffIcon, null)));
   }
 
 }
