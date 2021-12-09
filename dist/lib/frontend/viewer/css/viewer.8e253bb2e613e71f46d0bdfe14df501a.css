@@ -198,20 +198,22 @@
 }
 .ImageDialogView__close {
   background: rgba(0, 0, 0, 0.6);
-  border: none;
   padding: 10px;
-  width: 60px;
-  height: 60px;
   position: absolute;
   right: 0;
   top: 0;
   cursor: pointer;
 }
-.ImageDialogView__close:hover line {
-  stroke: white;
+.ImageDialogView__close svg {
+  width: 40px;
+  height: 40px;
+  fill: #aaa;
 }
-.ImageDialogView__close:active line {
-  stroke: #ccc;
+.ImageDialogView__close:hover svg {
+  fill: #fff;
+}
+.ImageDialogView__close:active svg {
+  fill: #eee;
 }
 
 .ApplicationView {

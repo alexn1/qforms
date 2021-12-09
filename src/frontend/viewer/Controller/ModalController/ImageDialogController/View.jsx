@@ -12,9 +12,9 @@ class ImageDialogView extends View {
                     onKeyDown={this.getCtrl().onKeyDown}
         >
             <img className={`${this.getCssBlockName()}__image`} src={ctrl.getSrc()}/>
-            <button className={`${this.getCssBlockName()}__close`} onClick={ctrl.onCloseClick}>
-                <CloseIcon/>
-            </button>
+            <div className={`${this.getCssBlockName()}__close`} onClick={ctrl.onCloseClick}>
+                <CloseIcon2/>
+            </div>
         </div>;
     }
     componentDidMount() {

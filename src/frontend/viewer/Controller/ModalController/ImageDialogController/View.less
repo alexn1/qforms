@@ -21,22 +21,24 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .ImageDialogView__close {
   background: rgba(0,0,0,0.6);
-  border: none;
   padding: 10px;
-  width: 60px;
-  height: 60px;
   position: absolute;
   right: 0;
   top: 0;
   cursor: pointer;
+  svg {
+    width: 40px;
+    height: 40px;
+    fill: #aaa;
+  }
   &:hover {
-    line {
-      stroke: white;
+    svg {
+      fill: #fff;
     }
   }
   &:active {
-    line {
-      stroke: #ccc;
+    svg {
+      fill: #eee;
     }
   }
 }

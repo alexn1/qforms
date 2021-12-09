@@ -164,10 +164,10 @@ class ImageDialogView extends View {
     }, /*#__PURE__*/React.createElement("img", {
       className: `${this.getCssBlockName()}__image`,
       src: ctrl.getSrc()
-    }), /*#__PURE__*/React.createElement("button", {
+    }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: ctrl.onCloseClick
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null)));
   }
 
   componentDidMount() {
