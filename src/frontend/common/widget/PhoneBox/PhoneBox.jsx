@@ -9,6 +9,19 @@ class PhoneBox extends ReactComponent {
     getValue() {
         return PhoneBox.clearValue(this.state.value);
     }
+    onKeyPress = e => {
+        // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+        // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+        if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+            e.preventDefault();
+        }
+        if (e.key === '+' && e.target.value.length) {
+            if (Math.abs(e.target.selectionEnd - e.target.selectionStart) === e.target.value.length) {
+            } else {
+                e.preventDefault();
+            }
+        }
+    }
     onChange = e => {
         // console.log('PhoneBox.onChange', e.target.value);
         const start = e.target.selectionStart;
@@ -32,15 +45,6 @@ class PhoneBox extends ReactComponent {
         // event
         if (this.props.onChange) {
             this.props.onChange(value);
-        }
-    }
-    onKeyPress = e => {
-        // console.log('PhoneBox.onKeyPress', e.key, this.state.value);
-        if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
-            e.preventDefault();
-        }
-        if (this.state.value.length && e.key === '+') {
-            e.preventDefault();
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
