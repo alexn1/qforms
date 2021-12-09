@@ -756,7 +756,9 @@ class RowFormPhoneFieldView extends RowFormFieldView {
     }), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
       onClick: this.onCloseClick
-    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__icon`
+    }, /*#__PURE__*/React.createElement(PhoneIcon, null)));
   }
 
 }

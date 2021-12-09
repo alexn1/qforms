@@ -499,19 +499,43 @@
 }
 .RowFormPhoneFieldView__close {
   display: flex;
+  align-items: center;
   position: absolute;
-  width: 10px;
+  width: 20px;
   height: 100%;
   top: 0;
-  right: 4px;
+  right: 20px;
   cursor: pointer;
   visibility: hidden;
+}
+.RowFormPhoneFieldView__close svg {
+  margin: 0 auto;
+  width: 10px;
+  height: 10px;
 }
 .RowFormPhoneFieldView__close.visible {
   visibility: visible;
 }
 .RowFormPhoneFieldView__close:hover svg line {
   stroke: black;
+}
+.RowFormPhoneFieldView__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  cursor: pointer;
+}
+.RowFormPhoneFieldView__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.RowFormPhoneFieldView__icon:hover svg {
+  fill: #333;
 }
 .debug .RowFormPhoneFieldView.changed > .RowFormPhoneFieldView__input {
   background-color: #eefdea;

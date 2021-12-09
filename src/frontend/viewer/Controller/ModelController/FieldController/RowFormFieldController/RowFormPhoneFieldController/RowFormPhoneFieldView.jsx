@@ -49,6 +49,9 @@ class RowFormPhoneFieldView extends RowFormFieldView {
             >
                 <CloseIcon/>
             </div>
+            <div className={`${this.getCssBlockName()}__icon`} >
+                <PhoneIcon/>
+            </div>
         </div>;
     }
 }
