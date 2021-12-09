@@ -15,11 +15,12 @@ class PhoneBox extends ReactComponent {
         if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
             e.preventDefault();
         }
-        if (e.key === '+' && e.target.value.length) {
-            if (Math.abs(e.target.selectionEnd - e.target.selectionStart) === e.target.value.length) {
-            } else {
-                e.preventDefault();
-            }
+        if (
+            e.key === '+'
+            && e.target.value.length
+            && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length
+        ) {
+            e.preventDefault();
         }
     }
     onChange = e => {

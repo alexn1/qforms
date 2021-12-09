@@ -1834,10 +1834,8 @@ class PhoneBox extends ReactComponent {
         e.preventDefault();
       }
 
-      if (e.key === '+' && e.target.value.length) {
-        if (Math.abs(e.target.selectionEnd - e.target.selectionStart) === e.target.value.length) {} else {
-          e.preventDefault();
-        }
+      if (e.key === '+' && e.target.value.length && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+        e.preventDefault();
       }
     });
 
