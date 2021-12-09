@@ -1821,6 +1821,17 @@ class Modal extends ReactComponent {
 }
 
 window.QForms.Modal = Modal;
+class Password extends ReactComponent {
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: this.getCssClassNames()
+    }, /*#__PURE__*/React.createElement("input", {
+      className: `${this.getCssBlockName()}__input`,
+      type: 'password'
+    }));
+  }
+
+}
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class PhoneBox extends ReactComponent {
@@ -2460,8 +2471,8 @@ class TextBox extends ReactComponent {
       const value = e.target.value;
       this.state.value = value;
       this.setState({
-        value
-      });
+        value: this.state.value
+      }); // rerender
 
       if (this.props.onChange) {
         this.props.onChange(value);

@@ -14,7 +14,7 @@ class TextBox extends ReactComponent {
         // console.log('TextBox.onChange', e.target.value);
         const value = e.target.value;
         this.state.value = value;
-        this.setState({value});
+        this.setState({value: this.state.value});   // rerender
         if (this.props.onChange) {
             this.props.onChange(value);
         }
