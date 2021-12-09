@@ -435,10 +435,11 @@
   position: absolute;
   display: flex;
   align-items: center;
-  width: 10px;
+  justify-content: center;
+  width: 20px;
   height: 100%;
   top: 0;
-  right: 30px;
+  right: 20px;
   cursor: pointer;
   visibility: hidden;
 }
@@ -495,6 +496,7 @@
 .RowFormPhoneFieldView__close {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
   width: 20px;
   height: 100%;
@@ -502,11 +504,6 @@
   right: 20px;
   cursor: pointer;
   visibility: hidden;
-}
-.RowFormPhoneFieldView__close svg {
-  margin: 0 auto;
-  width: 10px;
-  height: 10px;
 }
 .RowFormPhoneFieldView__close.visible {
   visibility: visible;
@@ -579,12 +576,14 @@
   cursor: text;
 }
 .RowFormTextBoxFieldView__close {
-  display: flex;
   position: absolute;
-  width: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
   height: 100%;
   top: 0;
-  right: 4px;
+  right: 0;
   cursor: pointer;
   visibility: hidden;
 }

@@ -2094,6 +2094,8 @@ class Select extends ReactComponent {
       if (this.props.onChange) {
         await this.props.onChange('');
       }
+
+      this.getElement();
     });
 
     this.el = React.createRef();

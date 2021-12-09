@@ -237,7 +237,8 @@ svg {
   position: absolute;
   display: flex;
   align-items: center;
-  width: 10px;
+  justify-content: center;
+  width: 20px;
   height: 100%;
   top: 0;
   right: 24px;
@@ -484,10 +485,11 @@ svg {
   position: absolute;
   display: flex;
   align-items: center;
-  width: 10px;
+  justify-content: center;
+  width: 20px;
   height: 100%;
   top: 0;
-  right: 30px;
+  right: 40px;
   cursor: pointer;
   visibility: hidden;
 }
@@ -523,20 +525,16 @@ svg {
   fill: #aaa;
 }
 .Select__close {
-  width: 20px;
   position: absolute;
-  right: 20px;
-  top: 0;
-  height: 100%;
-  cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  right: 40px;
+  top: 0;
+  cursor: pointer;
   visibility: hidden;
-}
-.Select__close svg {
-  margin: 0 auto;
-  width: 10px;
-  height: 10px;
 }
 .Select__close.visible {
   visibility: visible;

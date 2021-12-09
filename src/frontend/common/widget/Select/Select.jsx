@@ -97,6 +97,7 @@ class Select extends ReactComponent {
         if (this.props.onChange) {
             await this.props.onChange('');
         }
+        this.getElement()
     }
     getItems() {
         return this.props.items || [];
