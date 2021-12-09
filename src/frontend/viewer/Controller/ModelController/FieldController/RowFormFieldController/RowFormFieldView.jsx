@@ -3,16 +3,16 @@ class RowFormFieldView extends FieldView {
         super(props);
         this.widget = null;
     }
+    getWidget() {
+        return this.widget;
+    }
     getClassList() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return [
             ...super.getClassList(),
             ...(ctrl.isChanged()                ? ['changed'] : []),
             ...(ctrl.getErrorMessage() !== null ? ['error']   : [])
         ];
-    }
-    getWidget() {
-        return this.widget;
     }
     onWidgetCreate = widget => {
         this.widget = widget;

@@ -292,13 +292,13 @@ class RowFormFieldView extends FieldView {
     this.widget = null;
   }
 
-  getClassList() {
-    const ctrl = this.props.ctrl;
-    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
-  }
-
   getWidget() {
     return this.widget;
+  }
+
+  getClassList() {
+    const ctrl = this.getCtrl();
+    return [...super.getClassList(), ...(ctrl.isChanged() ? ['changed'] : []), ...(ctrl.getErrorMessage() !== null ? ['error'] : [])];
   }
 
 }
