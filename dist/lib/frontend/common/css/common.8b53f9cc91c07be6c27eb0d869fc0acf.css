@@ -234,8 +234,9 @@ svg {
   fill: #aaa;
 }
 .DropdownDatePicker__close {
-  display: flex;
   position: absolute;
+  display: flex;
+  align-items: center;
   width: 10px;
   height: 100%;
   top: 0;
@@ -478,6 +479,23 @@ svg {
 }
 .Password__input {
   width: 100%;
+}
+.Password__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 30px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.Password__close.visible {
+  visibility: visible;
+}
+.Password__close:hover svg line {
+  stroke: black;
 }
 
 .Select {

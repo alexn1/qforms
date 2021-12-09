@@ -10,14 +10,17 @@ class TextBox extends ReactComponent {
     getValue() {
         return this.state.value;
     }
-    onChange = e => {
-        // console.log('TextBox.onChange', e.target.value);
-        const value = e.target.value;
+    _setValue(value) {
         this.state.value = value;
-        this.setState({value: this.state.value});   // rerender
+        // this.setState({value: this.state.value});   // rerender
+        this.forceUpdate();
         if (this.props.onChange) {
             this.props.onChange(value);
         }
+    }
+    onChange = e => {
+        // console.log('TextBox.onChange', e.target.value);
+        this._setValue(e.target.value);
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);

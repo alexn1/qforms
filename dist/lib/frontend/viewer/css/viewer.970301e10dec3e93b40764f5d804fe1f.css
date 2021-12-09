@@ -432,20 +432,15 @@
   cursor: text;
 }
 .RowFormPasswordFieldView__close {
+  position: absolute;
   display: flex;
   align-items: center;
-  position: absolute;
-  width: 20px;
+  width: 10px;
   height: 100%;
   top: 0;
-  right: 20px;
+  right: 30px;
   cursor: pointer;
   visibility: hidden;
-}
-.RowFormPasswordFieldView__close svg {
-  margin: 0 auto;
-  width: 10px;
-  height: 10px;
 }
 .RowFormPasswordFieldView__close.visible {
   visibility: visible;
@@ -548,7 +543,7 @@
   width: 100%;
   display: block;
   border-width: 0;
-  padding: 0 5px 0 5px;
+  padding: 3px 5px;
   font-family: inherit;
   font-weight: inherit;
   font-size: inherit;

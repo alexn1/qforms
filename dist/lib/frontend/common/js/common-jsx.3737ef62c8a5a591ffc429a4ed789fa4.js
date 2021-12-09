@@ -143,8 +143,9 @@ class CancelIcon extends React.Component {
 }
 class CloseIcon extends React.Component {
   render() {
-    const strokeWidth = this.props.strokeWidth || 1;
     return /*#__PURE__*/React.createElement("svg", {
+      width: "10px",
+      height: "10px",
       viewBox: "0 0 10 10"
     }, /*#__PURE__*/React.createElement("line", {
       x1: "2",
@@ -152,7 +153,7 @@ class CloseIcon extends React.Component {
       x2: "8",
       y2: "8",
       stroke: "#aaa",
-      strokeWidth: strokeWidth,
+      strokeWidth: 1,
       strokeMiterlimit: "10"
     }), /*#__PURE__*/React.createElement("line", {
       x1: "8",
@@ -160,7 +161,7 @@ class CloseIcon extends React.Component {
       x2: "2",
       y2: "8",
       stroke: "#aaa",
-      strokeWidth: strokeWidth,
+      strokeWidth: 1,
       strokeMiterlimit: "10"
     }));
   }
@@ -170,9 +171,9 @@ class CloseIcon2 extends React.Component {
   render() {
     return /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
+      width: "24px",
       height: "24px",
       viewBox: "0 0 24 24",
-      width: "24px",
       fill: "#000000"
     }, /*#__PURE__*/React.createElement("path", {
       d: "M0 0h24v24H0V0z",
@@ -1821,14 +1822,74 @@ class Modal extends ReactComponent {
 }
 
 window.QForms.Modal = Modal;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class Password extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onChange", e => {
+      this._setValue(e.target.value);
+    });
+
+    _defineProperty(this, "onCloseClick", e => {
+      this._setValue('');
+
+      this.getElement().focus();
+    });
+
+    this.el = React.createRef();
+    this.state = {
+      value: this.props.value || '',
+      type: 'password'
+    };
+  }
+
+  getValue() {
+    return this.state.value;
+  }
+
+  _setValue(value) {
+    this.state.value = value;
+    this.forceUpdate();
+
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+
+  isCloseVisible() {
+    return this.state.value !== '';
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames()
     }, /*#__PURE__*/React.createElement("input", {
+      ref: this.el,
       className: `${this.getCssBlockName()}__input`,
-      type: 'password'
-    }));
+      type: this.state.type,
+      id: this.props.id,
+      name: this.props.name,
+      readOnly: this.props.readOnly,
+      disabled: this.props.disabled,
+      placeholder: this.props.placeholder,
+      autoFocus: this.props.autoFocus,
+      spellCheck: this.props.spellCheck,
+      autoComplete: this.props.autocomplete,
+      value: this.state.value,
+      onFocus: this.props.onFocus,
+      onBlur: this.props.onBlur,
+      onChange: this.onChange
+    }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
+      onClick: this.onCloseClick
+    }, /*#__PURE__*/React.createElement(CloseIcon, null)));
   }
 
 }
@@ -2468,15 +2529,7 @@ class TextBox extends ReactComponent {
 
     _defineProperty(this, "onChange", e => {
       // console.log('TextBox.onChange', e.target.value);
-      const value = e.target.value;
-      this.state.value = value;
-      this.setState({
-        value: this.state.value
-      }); // rerender
-
-      if (this.props.onChange) {
-        this.props.onChange(value);
-      }
+      this._setValue(e.target.value);
     });
 
     this.el = React.createRef();
@@ -2487,6 +2540,16 @@ class TextBox extends ReactComponent {
 
   getValue() {
     return this.state.value;
+  }
+
+  _setValue(value) {
+    this.state.value = value; // this.setState({value: this.state.value});   // rerender
+
+    this.forceUpdate();
+
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
