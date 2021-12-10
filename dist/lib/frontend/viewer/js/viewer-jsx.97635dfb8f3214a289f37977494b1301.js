@@ -109,9 +109,7 @@ class LoginView extends View {
     });
   }
 
-  renderLogo() {
-    return /*#__PURE__*/React.createElement(PhoneIcon, null);
-  }
+  renderLogo() {}
 
   render() {
     return /*#__PURE__*/React.createElement("div", {
