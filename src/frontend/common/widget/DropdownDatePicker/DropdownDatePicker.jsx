@@ -56,8 +56,17 @@ class DropdownDatePicker extends ReactComponent {
         return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
     }
     getStringValue() {
-        if (this.getValue()) {
-            return Helper.formatDate(this.getValue(), this.getFormat());
+        const value = this.getValue();
+        if (value) {
+            let format = this.getFormat();
+
+            // for debug purpose
+            const time = Helper.formatDate(value, '{hh}:{mm}:{ss}');
+            if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
+                format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+            }
+
+            return Helper.formatDate(value, format);
         }
         return '';
     }
