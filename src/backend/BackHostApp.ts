@@ -400,6 +400,7 @@ class BackHostApp {
                         ...application.scripts
                     ],
                     data: {
+                        name  : application.getName(),
                         text  : application.getText(),
                         title : application.getTitle(context),
                         errMsg: application.getText().login.WrongUsernameOrPassword,

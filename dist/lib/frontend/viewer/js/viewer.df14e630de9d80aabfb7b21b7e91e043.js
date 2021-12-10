@@ -265,6 +265,7 @@ class LoginController extends Controller {
     }
     static create(frontHostApp) {
         const data = frontHostApp.getData();
+        if (!data.name) throw new Error('no app name');
         const CustomClass = FrontHostApp.getClassByName(`${data.name}LoginController`);
         const Class = CustomClass ? CustomClass : LoginController;
         return new Class(frontHostApp);
