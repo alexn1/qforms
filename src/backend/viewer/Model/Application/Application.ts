@@ -391,11 +391,7 @@ class Application extends Model {
     }
 
     getViewClassName(): string {
-        const viewClass = this.getAttr('viewClass');
-        if (viewClass) {
-            return viewClass;
-        }
-        return 'ApplicationView';
+        return this.getAttr('viewClass') || 'ApplicationView';
     }
 
     async connect(context: Context): Promise<void> {
@@ -420,6 +416,7 @@ class Application extends Model {
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
+
     broadcastResultToClients(context: Context, result: Result): void {
         console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid) throw new Error('no uuid');
@@ -433,6 +430,10 @@ class Application extends Model {
     }
     getTitle(context) {
         return this.getAttr('caption');
+    }
+
+    getLoginViewClassName(): string {
+        return 'LoginView';
     }
 }
 

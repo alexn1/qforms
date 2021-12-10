@@ -322,11 +322,7 @@ class Application extends Model_1.default {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
     getViewClassName() {
-        const viewClass = this.getAttr('viewClass');
-        if (viewClass) {
-            return viewClass;
-        }
-        return 'ApplicationView';
+        return this.getAttr('viewClass') || 'ApplicationView';
     }
     async connect(context) {
         for (const db of this.databases) {
@@ -366,6 +362,9 @@ class Application extends Model_1.default {
     }
     getTitle(context) {
         return this.getAttr('caption');
+    }
+    getLoginViewClassName() {
+        return 'LoginView';
     }
 }
 module.exports = Application;

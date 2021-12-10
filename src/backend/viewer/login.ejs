@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="LoginView" lang="<%=application.getAttr('lang')%>">
+<html class="<%=application.getLoginViewClassName()%>" lang="<%=application.getAttr('lang')%>">
 <head>
     <!-- qforms v<%=version%> -->
     <!-- app v<%=application.getVersion()%>  -->
@@ -30,7 +30,7 @@
     </script>
     <script type="application/json"><%- JSON.stringify(data, null, 4) %></script>
 </head>
-<body class="LoginView__body">
-    <div class="LoginView__root"></div>
+<body class="<%=application.getLoginViewClassName()%>__body">
+    <div class="<%=application.getLoginViewClassName()%>__root"></div>
 </body>
 </html>
