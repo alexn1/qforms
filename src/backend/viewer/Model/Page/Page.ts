@@ -34,7 +34,7 @@ class Page extends Model {
         response.name      = this.getAttr('name');
         response.caption   = this.getAttr('caption');
         response.cssBlock  = this.getAttr('cssBlock');
-        response.viewClass = this.getAttr('viewClass');
+        // response.viewClass = this.getAttr('viewClass');
     }
 
     async fill(context): Promise<any> {
@@ -61,9 +61,6 @@ class Page extends Model {
         return this.parent;
     }
 
-    /*getTitle(context: Context, response): string {
-        return this.getAttr('caption');
-    }*/
     getForm(name): Form {
         return this.forms.find(form => form.getName() === name);
     }
