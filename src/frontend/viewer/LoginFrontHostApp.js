@@ -6,7 +6,7 @@ class LoginFrontHostApp extends FrontHostApp {
     }
     async run() {
         console.log('LoginFrontHostApp.run');
-        const loginController = new LoginController(this);
+        const loginController = LoginController.create(this);
         const ViewClass = loginController.getViewClass();
         const rootElement = document.querySelector(`.${ViewClass.name}__root`);
         const loginView = Helper.createReactComponent(rootElement, ViewClass, {ctrl: loginController});

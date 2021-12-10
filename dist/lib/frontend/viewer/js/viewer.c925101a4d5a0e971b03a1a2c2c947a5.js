@@ -40,7 +40,7 @@ class LoginFrontHostApp extends FrontHostApp {
     }
     async run() {
         console.log('LoginFrontHostApp.run');
-        const loginController = new LoginController(this);
+        const loginController = LoginController.create(this);
         const ViewClass = loginController.getViewClass();
         const rootElement = document.querySelector(`.${ViewClass.name}__root`);
         const loginView = Helper.createReactComponent(rootElement, ViewClass, {ctrl: loginController});
@@ -261,7 +261,14 @@ class ConfirmController extends Controller {
 class LoginController extends Controller {
     constructor(frontHostApp) {
         super();
+        console.log(`${this.constructor.name}.constructor`);
         this.frontHostApp = frontHostApp;
+    }
+    static create(frontHostApp) {
+        const data = frontHostApp.getData();
+        const CustomClass = FrontHostApp.getClassByName(`${data.name}LoginController`);
+        const Class = CustomClass ? CustomClass : LoginController;
+        return new Class(frontHostApp);
     }
     getViewClass() {
         return LoginView;

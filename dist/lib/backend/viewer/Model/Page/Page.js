@@ -24,7 +24,7 @@ class Page extends Model_1.default {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
         response.cssBlock = this.getAttr('cssBlock');
-        response.viewClass = this.getAttr('viewClass');
+        // response.viewClass = this.getAttr('viewClass');
     }
     async fill(context) {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
@@ -48,9 +48,6 @@ class Page extends Model_1.default {
     getApp() {
         return this.parent;
     }
-    /*getTitle(context: Context, response): string {
-        return this.getAttr('caption');
-    }*/
     getForm(name) {
         return this.forms.find(form => form.getName() === name);
     }
