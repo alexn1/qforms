@@ -6,6 +6,9 @@ class LoginView extends View {
     }
     renderLogo() {
     }
+    renderTitle() {
+        return this.getCtrl().getFrontHostApp().getData().title;
+    }
     render() {
         return <div className={`${this.getCssBlockName()}__container`}>
             <form className={`${this.getCssBlockName()}__form`}
@@ -14,11 +17,13 @@ class LoginView extends View {
             >
                 <input type={'hidden'} name={'tzOffset'} value={JSON.stringify(new Date().getTimezoneOffset())}/>
                 <input type={'hidden'} name={'action'} value={'login'}/>
-                <div className={`${this.getCssBlockName()}__logo`}>
-                    {this.renderLogo()}
-                </div>
-                <div className={`${this.getCssBlockName()}__title`}>
-                    {this.getCtrl().getFrontHostApp().getData().title}
+                <div className={`${this.getCssBlockName()}__logo-title`}>
+                    <div className={`${this.getCssBlockName()}__logo`}>
+                        {this.renderLogo()}
+                    </div>
+                    <div className={`${this.getCssBlockName()}__title`}>
+                        {this.renderTitle()}
+                    </div>
                 </div>
                 <input className={`${this.getCssBlockName()}__field`}
                        type={'text'}

@@ -111,6 +111,10 @@ class LoginView extends View {
 
   renderLogo() {}
 
+  renderTitle() {
+    return this.getCtrl().getFrontHostApp().getData().title;
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
@@ -127,10 +131,12 @@ class LoginView extends View {
       name: 'action',
       value: 'login'
     }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__logo-title`
+    }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__logo`
     }, this.renderLogo()), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`
-    }, this.getCtrl().getFrontHostApp().getData().title), /*#__PURE__*/React.createElement("input", {
+    }, this.renderTitle())), /*#__PURE__*/React.createElement("input", {
       className: `${this.getCssBlockName()}__field`,
       type: 'text',
       name: 'username',

@@ -132,12 +132,18 @@
   width: 360px;
   border-radius: 12px;
 }
+.LoginView__logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 5px;
+  padding: 20px 0;
+}
 .LoginView__logo svg {
-  fill: #000;
+  fill: #333;
 }
 .LoginView__title {
-  text-align: center;
-  padding: 20px 0;
+  color: #333;
   text-transform: uppercase;
 }
 .LoginView__field {
