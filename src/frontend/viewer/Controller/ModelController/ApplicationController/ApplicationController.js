@@ -10,7 +10,7 @@ class ApplicationController extends ModelController {
         this.homePageName = null;
     }
     static create(model, frontHostApp) {
-        // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
+        // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
         const Class = CustomClass ? CustomClass : ApplicationController;
         return new Class(model, frontHostApp);
@@ -24,7 +24,7 @@ class ApplicationController extends ModelController {
             return acc;
         }, {});
     }
-    static isInDebugMode() {
+    static isDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
     }
     init() {

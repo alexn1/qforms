@@ -120,7 +120,7 @@ class RowFormFieldController extends FieldController {
     getPlaceholder() {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        if (ApplicationController.isInDebugMode()) {
+        if (ApplicationController.isDebugMode()) {
             const value = this.getValue();
             if (value === undefined) return 'undefined';
             if (value === null) return 'null';

@@ -34,7 +34,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        return ApplicationController.isInDebugMode() ? '[null]' : null;
+        return ApplicationController.isDebugMode() ? '[null]' : null;
     }
     onEditButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onEditButtonClick');

@@ -373,7 +373,7 @@ class ApplicationController extends ModelController {
         this.homePageName = null;
     }
     static create(model, frontHostApp) {
-        // console.log('ApplicationController.create', 'debug:', ApplicationController.isInDebugMode());
+        // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
         const Class = CustomClass ? CustomClass : ApplicationController;
         return new Class(model, frontHostApp);
@@ -387,7 +387,7 @@ class ApplicationController extends ModelController {
             return acc;
         }, {});
     }
-    static isInDebugMode() {
+    static isDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
     }
     init() {
@@ -866,7 +866,7 @@ class RowFormFieldController extends FieldController {
     getPlaceholder() {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        if (ApplicationController.isInDebugMode()) {
+        if (ApplicationController.isDebugMode()) {
             const value = this.getValue();
             if (value === undefined) return 'undefined';
             if (value === null) return 'null';
@@ -994,7 +994,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        return ApplicationController.isInDebugMode() ? '[null]' : null;
+        return ApplicationController.isDebugMode() ? '[null]' : null;
     }
     onEditButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onEditButtonClick');
@@ -2210,7 +2210,7 @@ class PageController extends ModelController {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
+                    ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
                 ].join('&')
             ].join('?');
@@ -2245,7 +2245,7 @@ class PageController extends ModelController {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isInDebugMode() ? [`(${this.getId()})`] : []),
+            ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }

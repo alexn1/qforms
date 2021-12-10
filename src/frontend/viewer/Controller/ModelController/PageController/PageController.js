@@ -160,7 +160,7 @@ class PageController extends ModelController {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(ApplicationController.isInDebugMode() ? ['debug=1'] : []),
+                    ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
                 ].join('&')
             ].join('?');
@@ -195,7 +195,7 @@ class PageController extends ModelController {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isInDebugMode() ? [`(${this.getId()})`] : []),
+            ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
