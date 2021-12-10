@@ -413,7 +413,7 @@ class RowFormDateFieldView extends RowFormFieldView {
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
-      format: ctrl.model.getFormat(),
+      format: ctrl.getFormat(),
       oldDates: this.props.oldDates,
       getMinDate: this.props.getMinDate
     }));
@@ -459,7 +459,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
       readOnly: !ctrl.isEditable(),
       onChange: ctrl.onChange,
       placeholder: ctrl.getPlaceholder(),
-      format: ctrl.model.getFormat(),
+      format: ctrl.getFormat(),
       oldDates: this.props.oldDates,
       getMinDate: this.props.getMinDate
     });

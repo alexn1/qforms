@@ -72,5 +72,8 @@ class FieldController extends ModelController {
     getAutocomplete() {
         return this.getModel().getAttr('autocomplete') || null;
     }
+    getFormat() {
+        return this.getModel().getAttr('format');
+    }
 }
 window.QForms.FieldController = FieldController;

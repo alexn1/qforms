@@ -738,6 +738,9 @@ class FieldController extends ModelController {
     getAutocomplete() {
         return this.getModel().getAttr('autocomplete') || null;
     }
+    getFormat() {
+        return this.getModel().getAttr('format');
+    }
 }
 window.QForms.FieldController = FieldController;
 
@@ -1429,7 +1432,7 @@ class TableFormDateFieldController extends TableFormFieldController {
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
-        if (value) return Helper.formatDate(value, this.model.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        if (value) return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -1441,7 +1444,7 @@ class TableFormDateTimeFieldController extends TableFormFieldController {
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
-        if (value) return Helper.formatDate(value, this.model.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        if (value) return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -3519,7 +3522,7 @@ window.QForms.ComboBoxField = ComboBoxField;
 
 class DateField extends Field {
     getFormat() {
-        return this.data.format;
+        return this.getAttr('format');
     }
 
     rawToValue(raw) {
@@ -3549,7 +3552,7 @@ window.QForms.DateField = DateField;
 
 class DateTimeField extends Field {
     getFormat() {
-        return this.data.format;
+        return this.getAttr('format');
     }
     rawToValue(rawValue) {
         const value = Helper.decodeValue(rawValue);

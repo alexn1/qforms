@@ -1,6 +1,6 @@
 class DateField extends Field {
     getFormat() {
-        return this.data.format;
+        return this.getAttr('format');
     }
 
     rawToValue(raw) {
