@@ -100,13 +100,19 @@ class ConfirmView extends View {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class LoginView extends View {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "onLoginFormSubmit", e => {
       // console.log('LoginView.onLoginFormSubmit');
       document.querySelector('.LoginView__button').disabled = true; // e.preventDefault();
     });
+
+    _defineProperty(this, "onChange", e => {
+      this.errMsgRef.current.innerHTML = '';
+    });
+
+    this.errMsgRef = React.createRef();
   }
 
   renderLogo() {}
@@ -116,6 +122,7 @@ class LoginView extends View {
   }
 
   render() {
+    // console.log('LoginView.render');
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
     }, /*#__PURE__*/React.createElement("form", {
@@ -143,14 +150,17 @@ class LoginView extends View {
       required: true,
       autoFocus: true,
       spellCheck: false,
-      value: this.getCtrl().getFrontHostApp().getData().username
+      value: this.getCtrl().getFrontHostApp().getData().username || '',
+      onChange: this.onChange
     }), /*#__PURE__*/React.createElement(Password, {
       classList: [`${this.getCssBlockName()}__field2`],
       name: 'password',
       placeholder: this.getCtrl().getText().login.password,
-      value: this.getCtrl().getFrontHostApp().getData().password
+      value: this.getCtrl().getFrontHostApp().getData().password || '',
+      onChange: this.onChange
     }), /*#__PURE__*/React.createElement("p", {
-      className: `${this.getCssBlockName()}__err-msg`
+      className: `${this.getCssBlockName()}__err-msg`,
+      ref: this.errMsgRef
     }, this.getCtrl().getFrontHostApp().getData().errMsg), /*#__PURE__*/React.createElement("button", {
       className: `${this.getCssBlockName()}__button`,
       type: 'submit'
