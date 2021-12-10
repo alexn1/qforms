@@ -403,6 +403,8 @@ class BackHostApp {
                         text  : application.getText(),
                         title : application.getTitle(context),
                         errMsg: application.getText().login.WrongUsernameOrPassword,
+                        username: req.body.username,
+                        password: req.body.password,
                     }
                 });
             }

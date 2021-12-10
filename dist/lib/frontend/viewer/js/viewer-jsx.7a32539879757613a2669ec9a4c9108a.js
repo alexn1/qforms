@@ -136,18 +136,19 @@ class LoginView extends View {
       className: `${this.getCssBlockName()}__logo`
     }, this.renderLogo()), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`
-    }, this.renderTitle())), /*#__PURE__*/React.createElement("input", {
-      className: `${this.getCssBlockName()}__field`,
-      type: 'text',
+    }, this.renderTitle())), /*#__PURE__*/React.createElement(TextBox, {
+      classList: [`${this.getCssBlockName()}__field`],
       name: 'username',
       placeholder: this.getCtrl().getText().login.username,
       required: true,
       autoFocus: true,
-      spellCheck: false
+      spellCheck: false,
+      value: this.getCtrl().getFrontHostApp().getData().username
     }), /*#__PURE__*/React.createElement(Password, {
       classList: [`${this.getCssBlockName()}__field2`],
       name: 'password',
-      placeholder: this.getCtrl().getText().login.password
+      placeholder: this.getCtrl().getText().login.password,
+      value: this.getCtrl().getFrontHostApp().getData().password
     }), /*#__PURE__*/React.createElement("p", {
       className: `${this.getCssBlockName()}__err-msg`
     }, this.getCtrl().getFrontHostApp().getData().errMsg), /*#__PURE__*/React.createElement("button", {

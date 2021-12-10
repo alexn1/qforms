@@ -25,17 +25,18 @@ class LoginView extends View {
                         {this.renderTitle()}
                     </div>
                 </div>
-                <input className={`${this.getCssBlockName()}__field`}
-                       type={'text'}
+                <TextBox classList={[`${this.getCssBlockName()}__field`]}
                        name={'username'}
                        placeholder={this.getCtrl().getText().login.username}
                        required={true}
                        autoFocus={true}
                        spellCheck={false}
+                       value={this.getCtrl().getFrontHostApp().getData().username}
                 />
                 <Password classList={[`${this.getCssBlockName()}__field2`]}
                           name={'password'}
                           placeholder={this.getCtrl().getText().login.password}
+                          value={this.getCtrl().getFrontHostApp().getData().password}
                 />
                 <p className={`${this.getCssBlockName()}__err-msg`}>
                     {this.getCtrl().getFrontHostApp().getData().errMsg}
