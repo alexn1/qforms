@@ -132,6 +132,9 @@
   width: 360px;
   border-radius: 12px;
 }
+.LoginView__icon svg {
+  fill: #000;
+}
 .LoginView__title {
   text-align: center;
   padding: 20px 0;

@@ -109,6 +109,10 @@ class LoginView extends View {
     });
   }
 
+  renderLogo() {
+    return /*#__PURE__*/React.createElement(PhoneIcon, null);
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`
@@ -125,6 +129,8 @@ class LoginView extends View {
       name: 'action',
       value: 'login'
     }), /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__logo`
+    }, this.renderLogo()), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`
     }, this.getCtrl().getFrontHostApp().getData().title), /*#__PURE__*/React.createElement("input", {
       className: `${this.getCssBlockName()}__field`,

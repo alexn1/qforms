@@ -4,6 +4,8 @@ class LoginView extends View {
         document.querySelector('.LoginView__button').disabled = true;
         // e.preventDefault();
     }
+    renderLogo() {
+    }
     render() {
         return <div className={`${this.getCssBlockName()}__container`}>
             <form className={`${this.getCssBlockName()}__form`}
@@ -12,6 +14,9 @@ class LoginView extends View {
             >
                 <input type={'hidden'} name={'tzOffset'} value={JSON.stringify(new Date().getTimezoneOffset())}/>
                 <input type={'hidden'} name={'action'} value={'login'}/>
+                <div className={`${this.getCssBlockName()}__logo`}>
+                    {this.renderLogo()}
+                </div>
                 <div className={`${this.getCssBlockName()}__title`}>
                     {this.getCtrl().getFrontHostApp().getData().title}
                 </div>
