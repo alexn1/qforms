@@ -20,7 +20,7 @@ class Field extends Model_1.default {
         response.defaultValue = this.getAttr('defaultValue');
         response.value = this.getAttr('value');
         response.param = this.getAttr('param');
-        response.visible = this.getAttr('isVisible');
+        response.visible = this.getAttr('visible');
         response.type = this.getAttr('type');
         response.width = this.getAttr('width');
         response.cssBlock = this.getAttr('cssBlock');

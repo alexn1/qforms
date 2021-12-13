@@ -13,7 +13,7 @@ class FieldEditor extends Editor {
             defaultValue: params.defaultValue !== undefined ? params.defaultValue : '',
             value: params.value !== undefined ? params.value : '',
             param: params.param !== undefined ? params.param : 'false',
-            isVisible: params.isVisible !== undefined ? params.isVisible : 'true',
+            visible: params.visible !== undefined ? params.visible : 'true',
             type: params.type !== undefined ? params.type : '',
             width: params.width !== undefined ? params.width : '',
             cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
