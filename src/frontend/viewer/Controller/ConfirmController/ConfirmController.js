@@ -11,10 +11,10 @@ class ConfirmController extends Controller {
     close(result) {
         this.options.onClose(result);
     }
-    onOkButtonClick = async e => {
+    onYesClick = e => {
         this.close(true);
     }
-    onCloseClick = async e => {
+    onCloseClick = e => {
         this.close(false);
     }
     onKeyDown = async e => {

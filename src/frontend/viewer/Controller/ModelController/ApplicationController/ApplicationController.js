@@ -276,8 +276,11 @@ class ApplicationController extends ModelController {
         if (!options.title) {
             options.title = this.getModel().getText().application.confirm;
         }
-        if (!options.cancelButton) {
-            options.cancelButton = this.getModel().getText().page.cancel;
+        if (!options.yesButton) {
+            options.yesButton = this.getModel().getText().confirm.yes;
+        }
+        if (!options.noButton) {
+            options.noButton = this.getModel().getText().confirm.no;
         }
         const activeElement = document.activeElement;
         try {

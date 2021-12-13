@@ -60,6 +60,8 @@ class ConfirmView extends View {
 
   render() {
     // console.log('ConfirmView.render', this.getCtrl().options);
+    if (!this.getCtrl().options.yesButton) throw new Error('no yesButton option');
+    if (!this.getCtrl().options.noButton) throw new Error('no noButton option');
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
       ref: this.el,
@@ -83,12 +85,12 @@ class ConfirmView extends View {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Button, {
       classList: [`${this.getCssBlockName()}__cancel-button`],
-      title: this.getCtrl().options.cancelButton || 'Cancel',
+      title: this.getCtrl().options.noButton,
       onClick: this.getCtrl().onCloseClick
     }), /*#__PURE__*/React.createElement(Button, {
       classList: [`${this.getCssBlockName()}__ok-button`],
-      title: 'OK',
-      onClick: this.getCtrl().onOkButtonClick
+      title: this.getCtrl().options.yesButton,
+      onClick: this.getCtrl().onYesClick
     })))));
   }
 
