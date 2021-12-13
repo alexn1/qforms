@@ -84,11 +84,11 @@ class ConfirmView extends View {
     }, this.getCtrl().options.message), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__footer`
     }, /*#__PURE__*/React.createElement(Button, {
-      classList: [`${this.getCssBlockName()}__cancel-button`],
+      classList: [`${this.getCssBlockName()}__no-button`],
       title: this.getCtrl().options.noButton,
       onClick: this.getCtrl().onCloseClick
     }), /*#__PURE__*/React.createElement(Button, {
-      classList: [`${this.getCssBlockName()}__ok-button`],
+      classList: [`${this.getCssBlockName()}__yes-button`],
       title: this.getCtrl().options.yesButton,
       onClick: this.getCtrl().onYesClick
     })))));

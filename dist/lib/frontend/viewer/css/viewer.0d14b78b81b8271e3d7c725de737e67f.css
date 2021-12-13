@@ -104,10 +104,10 @@
   flex-direction: row-reverse;
   grid-gap: 5px;
 }
-.ConfirmView__ok-button {
+.ConfirmView__yes-button {
   min-width: 100px;
 }
-.ConfirmView__cancel-button {
+.ConfirmView__no-button {
   min-width: 100px;
 }
 

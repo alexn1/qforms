@@ -27,11 +27,11 @@ class ConfirmView extends View {
                             {this.getCtrl().options.message}
                         </div>
                         <div className={`${this.getCssBlockName()}__footer`}>
-                            <Button classList={[`${this.getCssBlockName()}__cancel-button`]}
+                            <Button classList={[`${this.getCssBlockName()}__no-button`]}
                                     title={this.getCtrl().options.noButton}
                                     onClick={this.getCtrl().onCloseClick}
                             />
-                            <Button classList={[`${this.getCssBlockName()}__ok-button`]}
+                            <Button classList={[`${this.getCssBlockName()}__yes-button`]}
                                     title={this.getCtrl().options.yesButton}
                                     onClick={this.getCtrl().onYesClick}
                             />
