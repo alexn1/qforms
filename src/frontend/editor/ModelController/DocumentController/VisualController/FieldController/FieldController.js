@@ -56,7 +56,7 @@ class FieldController extends VisualController {
     getPropList() {
         const list = this.model.data['@attributes'];
         const options = {};
-        options['isVisible']        = ['true', 'false'];
+        options['visible']          = ['true', 'false'];
         options['readOnly']         = ['true', 'false'];
         options['notNull']          = ['true', 'false'];
         options['param']            = ['true', 'false'];
