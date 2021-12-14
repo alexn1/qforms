@@ -65,6 +65,10 @@ class Application extends Model {
         await this.createMenu(context);
     }
 
+    getHostApp() {
+        return this.hostApp;
+    }
+
     async getLinks(context: Context): Promise<string[]> {
         const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
@@ -434,6 +438,10 @@ class Application extends Model {
 
     getLoginViewClassName(): string {
         return 'LoginView';
+    }
+
+    isAvailable() {
+        return true;
     }
 }
 

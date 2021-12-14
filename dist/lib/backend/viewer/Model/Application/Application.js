@@ -39,6 +39,9 @@ class Application extends Model_1.default {
         this.scripts = await this.getScripts(context);
         await this.createMenu(context);
     }
+    getHostApp() {
+        return this.hostApp;
+    }
     async getLinks(context) {
         const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
@@ -365,6 +368,9 @@ class Application extends Model_1.default {
     }
     getLoginViewClassName() {
         return 'LoginView';
+    }
+    isAvailable() {
+        return true;
     }
 }
 module.exports = Application;

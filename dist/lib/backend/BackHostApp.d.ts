@@ -77,5 +77,6 @@ declare class BackHostApp {
     getPostAlias(path: any, arr: any, query: any): void;
     getNodeEnv(): string;
     isDevelopment(): boolean;
+    isProduction(): boolean;
 }
 export = BackHostApp;

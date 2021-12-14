@@ -24,6 +24,7 @@ declare class Application extends Model {
     clients: any[];
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
+    getHostApp(): any;
     getLinks(context: Context): Promise<string[]>;
     getScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
@@ -63,5 +64,6 @@ declare class Application extends Model {
     broadcastResultToClients(context: Context, result: Result): void;
     getTitle(context: any): any;
     getLoginViewClassName(): string;
+    isAvailable(): boolean;
 }
 export = Application;

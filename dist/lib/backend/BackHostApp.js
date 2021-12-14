@@ -239,9 +239,8 @@ class BackHostApp {
     }
     async handleViewerGet(req, res, context) {
         console.log('BackHostApp.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        await this.createApplicationIfNotExists(context);
         const application = this.getApplication(context);
-        if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+        if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
         }
         else {
@@ -687,7 +686,13 @@ class BackHostApp {
         try {
             if (req.params.module === 'viewer') {
                 context = new Context_1.default({ req, domain: this.getDomain(req) });
-                await this.handleViewerGet(req, res, context);
+                const application = await this.createApplicationIfNotExists(context);
+                if (application.isAvailable()) {
+                    await this.handleViewerGet(req, res, context);
+                }
+                else {
+                    next();
+                }
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
@@ -976,6 +981,9 @@ class BackHostApp {
     }
     isDevelopment() {
         return this.getNodeEnv() === 'development';
+    }
+    isProduction() {
+        return !this.isDevelopment();
     }
 }
 module.exports = BackHostApp;
