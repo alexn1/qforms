@@ -1028,15 +1028,15 @@ class BackHostApp {
         this.alias('post', path , arr, 'appPost', query);
     }
 
-    getNodeEnv() {
+    getNodeEnv(): string {
         return process.env.NODE_ENV || null;
     }
 
-    isDevelopment() {
+    isDevelopment(): boolean {
         return this.getNodeEnv() === 'development';
     }
 
-    isProduction() {
+    isProduction(): boolean {
         return !this.isDevelopment();
     }
 
