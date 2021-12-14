@@ -28,6 +28,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         // web socket client
         try {
             this.webSocketClient = new WebSocketClient({
+                protocol: this.data.nodeEnv === 'development' ? 'ws' : 'wss',
                 frontHostApp: this,
                 route: this.data.route,
                 uuid: this.data.uuid,

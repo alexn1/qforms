@@ -82,6 +82,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         // web socket client
         try {
             this.webSocketClient = new WebSocketClient({
+                protocol: this.data.nodeEnv === 'development' ? 'ws' : 'wss',
                 frontHostApp: this,
                 route: this.data.route,
                 uuid: this.data.uuid,
@@ -103,8 +104,9 @@ window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        if (!options.frontHostApp) throw new Error('no frontHostApp');
-        this.url = `ws://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
+        if (!options.frontHostApp) throw new Error('no options.frontHostApp');
+        if (!options.protocol) throw new Error('no options.protocol');
+        this.url = `${options.protocol}://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
         this.webSocket         = null;
         this.refreshTimeoutId  = null;
         this.RECONNECT_TIMEOUT = 10;        // sec
