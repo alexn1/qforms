@@ -52,5 +52,23 @@ class MonitorModule {
             ...(this.js)
         ];
     }
+    checkCredentials(req) {
+        const base64string = req.headers.authorization.substr(6);
+        const usernamePassword = new Buffer(base64string, 'base64').toString();
+        const [username, password] = usernamePassword.split(':');
+        return username === this.backHostApp.params.monitor.username &&
+            password === this.backHostApp.params.monitor.password;
+    }
+    authorize(req) {
+        if (this.backHostApp.isDevelopment()) {
+            return true;
+        }
+        if (!this.backHostApp.params.monitor) {
+            throw new Error('no monitor params');
+        }
+        return req.headers.authorization &&
+            req.headers.authorization.substr(0, 5) === 'Basic' &&
+            this.checkCredentials(req);
+    }
 }
 module.exports = MonitorModule;

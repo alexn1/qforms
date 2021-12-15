@@ -19,5 +19,7 @@ declare class MonitorModule {
     };
     getLinks(): string[];
     getScripts(): string[];
+    checkCredentials(req: any): boolean;
+    authorize(req: any): boolean;
 }
 export = MonitorModule;

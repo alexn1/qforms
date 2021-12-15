@@ -184,10 +184,8 @@ class BackHostApp {
             // this.express.get( '/index/*', this.indexGetFile.bind(this));
         }
         // monitor module
-        if (this.isDevelopment()) {
-            this.express.get('/monitor', this.monitorGet.bind(this));
-            // this.express.get('/monitor/*', this.monitorGetFile.bind(this));
-        }
+        this.express.get('/monitor', this.monitorGet.bind(this));
+        // this.express.get('/monitor/*', this.monitorGetFile.bind(this));
         // viewer/editor module
         this.express.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
@@ -746,15 +744,26 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        console.log(colors.magenta('monitorGet'));
+        console.log(colors.magenta('monitorGet'), req.headers);
         try {
-            const response = this.monitorModule.fill();
-            res.render('monitor/index', {
-                version: pkg.version,
-                response: response,
-                links: this.monitorModule.getLinks(),
-                scripts: this.monitorModule.getScripts(),
-            });
+            if (!this.params.monitor) {
+                res.end('Please set monitor username/password in app params');
+                return;
+            }
+            if (this.monitorModule.authorize(req)) {
+                const response = this.monitorModule.fill();
+                res.render('monitor/index', {
+                    version: pkg.version,
+                    response: response,
+                    links: this.monitorModule.getLinks(),
+                    scripts: this.monitorModule.getScripts(),
+                });
+            }
+            else {
+                res.statusCode = 401;
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"');
+                res.end('Unauthorized');
+            }
         }
         catch (err) {
             next(err);
