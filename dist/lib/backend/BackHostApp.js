@@ -419,16 +419,18 @@ class BackHostApp {
         try {
             await application.initContext(context);
             await dataSource.getDatabase().begin(context);
-            const result = await dataSource.insert(context);
-            if (result === undefined)
-                throw new Error('insert action: result is undefined');
-            await dataSource.getDatabase().commit(context);
-            await res.json(result);
-            application.broadcastResultToClients(context, result);
-        }
-        catch (err) {
-            await dataSource.getDatabase().rollback(context, err);
-            throw err;
+            try {
+                const result = await dataSource.insert(context);
+                if (result === undefined)
+                    throw new Error('insert action: result is undefined');
+                await dataSource.getDatabase().commit(context);
+                await res.json(result);
+                application.broadcastResultToClients(context, result);
+            }
+            catch (err) {
+                await dataSource.getDatabase().rollback(context, err);
+                throw err;
+            }
         }
         finally {
             dataSource.getDatabase().release(context);
@@ -445,16 +447,18 @@ class BackHostApp {
         try {
             await application.initContext(context);
             await dataSource.getDatabase().begin(context);
-            const result = await dataSource.update(context);
-            if (result === undefined)
-                throw new Error('action update: result is undefined');
-            await dataSource.getDatabase().commit(context);
-            await res.json(result);
-            application.broadcastResultToClients(context, result);
-        }
-        catch (err) {
-            await dataSource.getDatabase().rollback(context, err);
-            throw err;
+            try {
+                const result = await dataSource.update(context);
+                if (result === undefined)
+                    throw new Error('action update: result is undefined');
+                await dataSource.getDatabase().commit(context);
+                await res.json(result);
+                application.broadcastResultToClients(context, result);
+            }
+            catch (err) {
+                await dataSource.getDatabase().rollback(context, err);
+                throw err;
+            }
         }
         finally {
             dataSource.getDatabase().release(context);
@@ -471,16 +475,18 @@ class BackHostApp {
         try {
             await application.initContext(context);
             await dataSource.getDatabase().begin(context);
-            const result = await dataSource.delete(context);
-            if (result === undefined)
-                throw new Error('delete result is undefined');
-            await dataSource.getDatabase().commit(context);
-            await res.json(result);
-            application.broadcastResultToClients(context, result);
-        }
-        catch (err) {
-            await dataSource.getDatabase().rollback(context, err);
-            throw err;
+            try {
+                const result = await dataSource.delete(context);
+                if (result === undefined)
+                    throw new Error('delete result is undefined');
+                await dataSource.getDatabase().commit(context);
+                await res.json(result);
+                application.broadcastResultToClients(context, result);
+            }
+            catch (err) {
+                await dataSource.getDatabase().rollback(context, err);
+                throw err;
+            }
         }
         finally {
             dataSource.getDatabase().release(context);
