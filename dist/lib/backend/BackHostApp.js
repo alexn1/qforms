@@ -1000,5 +1000,8 @@ class BackHostApp {
     isProduction() {
         return !this.isDevelopment();
     }
+    getParams() {
+        return this.params;
+    }
 }
 module.exports = BackHostApp;

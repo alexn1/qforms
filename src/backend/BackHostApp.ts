@@ -1054,6 +1054,10 @@ class BackHostApp {
         return !this.isDevelopment();
     }
 
+    getParams() {
+        return this.params;
+    }
+
 }
 
 export = BackHostApp;

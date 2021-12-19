@@ -78,5 +78,6 @@ declare class BackHostApp {
     getNodeEnv(): string;
     isDevelopment(): boolean;
     isProduction(): boolean;
+    getParams(): any;
 }
 export = BackHostApp;
