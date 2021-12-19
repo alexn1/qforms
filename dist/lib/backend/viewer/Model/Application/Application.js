@@ -4,8 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const uuid_1 = require("uuid");
 const path = require('path');
-const axios = require('axios');
-const colors = require('colors/safe');
 const BaseModel_1 = __importDefault(require("../../../BaseModel"));
 const Model_1 = __importDefault(require("../Model"));
 const Helper_1 = __importDefault(require("../../../Helper"));
@@ -248,10 +246,10 @@ class Application extends Model_1.default {
             context,
         });
     }
-    async request(options) {
+    /*async request(options) {
         console.log(colors.magenta('Application.request'), options);
         return await axios(options);
-    }
+    }*/
     getEnv() {
         return this.env;
     }

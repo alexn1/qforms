@@ -2,8 +2,8 @@ import {AppInfo} from "../../../AppInfo";
 import { v4 as uuidv4 } from 'uuid';
 
 const path  = require('path');
-const axios = require('axios');
-const colors = require('colors/safe');
+// const axios = require('axios');
+// const colors = require('colors/safe');
 
 import BackHostApp from '../../../BackHostApp';
 import BaseModel from '../../../BaseModel';
@@ -312,10 +312,10 @@ class Application extends Model {
         });
     }
 
-    async request(options) {
+    /*async request(options) {
         console.log(colors.magenta('Application.request'), options);
         return await axios(options);
-    }
+    }*/
 
     getEnv(): string {
         return this.env;

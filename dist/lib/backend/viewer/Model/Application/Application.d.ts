@@ -46,7 +46,6 @@ declare class Application extends Model {
     isAuthentication(): boolean;
     getUsers(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
-    request(options: any): Promise<any>;
     getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): Application;
