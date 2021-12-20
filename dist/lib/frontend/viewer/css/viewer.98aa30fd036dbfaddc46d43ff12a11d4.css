@@ -773,9 +773,6 @@
 .toolbar-button svg {
   fill: #333;
 }
-.toolbar-button:not(:disabled) {
-  cursor: pointer;
-}
 .toolbar-button:not(:disabled):hover {
   background-color: #d0d0d0;
 }
@@ -806,9 +803,6 @@
   height: 30px;
   border: none;
   background-color: #ddd;
-}
-.toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
-  cursor: pointer;
 }
 .toolbar-dropdown-button .DropdownButton__button:not(:disabled):hover {
   background-color: #d0d0d0;
