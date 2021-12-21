@@ -9,6 +9,7 @@ declare class SqlDataSource extends DataSource {
     getCountQuery(context: Context): any;
     getSingleQuery(context: Context): any;
     getMultipleQuery(context: Context): any;
+    getSelectParams(context: any): any;
     select(context: Context): Promise<any[]>;
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;

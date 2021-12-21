@@ -71,6 +71,10 @@ class SqlDataSource extends DataSource {
         return [rows, count];
     }*/
 
+    getSelectParams(context) {
+        return context.getParams();
+    }
+
     async select(context: Context) {
         if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
 
@@ -82,7 +86,7 @@ class SqlDataSource extends DataSource {
             context.params.limit = limit;
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
-        const params = context.getParams();
+        const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
 
