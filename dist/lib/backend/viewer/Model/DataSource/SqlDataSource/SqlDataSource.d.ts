@@ -10,7 +10,6 @@ declare class SqlDataSource extends DataSource {
     getSingleQuery(context: Context): any;
     getMultipleQuery(context: Context): any;
     select(context: Context): Promise<any[]>;
-    getBuffer(context: Context, file: any): Promise<any>;
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
@@ -28,5 +27,6 @@ declare class SqlDataSource extends DataSource {
     };
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
+    getBuffer(context: Context, file: any): Promise<any>;
 }
 export = SqlDataSource;

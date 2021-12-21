@@ -99,10 +99,6 @@ class SqlDataSource extends DataSource {
         return [rows, count];
     }
 
-    async getBuffer(context: Context, file) {
-        return file.data;
-    }
-
     async insert(context: Context, _values: any = null): Promise<Result> {
         console.log('SqlDataSource.insert');
         if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
@@ -294,6 +290,10 @@ class SqlDataSource extends DataSource {
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
+    }
+
+    async getBuffer(context: Context, file) {
+        return file.data;
     }
 }
 

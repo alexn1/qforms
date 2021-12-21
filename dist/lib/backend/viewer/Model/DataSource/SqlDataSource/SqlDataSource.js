@@ -95,9 +95,6 @@ class SqlDataSource extends DataSource_1.default {
         }
         return [rows, count];
     }
-    async getBuffer(context, file) {
-        return file.data;
-    }
     async insert(context, _values = null) {
         console.log('SqlDataSource.insert');
         if (this.getAccess(context).insert !== true)
@@ -273,6 +270,9 @@ class SqlDataSource extends DataSource_1.default {
             dChanges[key] = this.getValuesFromRow(changes[key]);
         }
         return dChanges;
+    }
+    async getBuffer(context, file) {
+        return file.data;
     }
 }
 module.exports = SqlDataSource;
